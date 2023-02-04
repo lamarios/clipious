@@ -87,12 +87,24 @@ class Video {
   Map<String, dynamic> toJson() => _$VideoToJson(this);
 
   VideoThumbnail? getBestThumbnail() {
-    if (videoThumbnails != null && videoThumbnails.length > 0) {
+    if (videoThumbnails.isNotEmpty) {
       videoThumbnails.sort((a, b) {
         return (b.width * b.height).compareTo(a.width * a.height);
       });
 
       return videoThumbnails[0];
+    } else {
+      return null;
+    }
+  }
+
+  AuthorThumbnail? getBestAuthorThumbnail() {
+    if (authorThumbnails.isNotEmpty) {
+      authorThumbnails.sort((a, b) {
+        return (b.width * b.height).compareTo(a.width * a.height);
+      });
+
+      return authorThumbnails[0];
     } else {
       return null;
     }

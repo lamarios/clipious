@@ -1,4 +1,6 @@
 import 'package:invidious/utils.dart';
+import 'package:invidious/views/video/info.dart';
+import 'package:invidious/views/video/recommendedVideos.dart';
 import 'package:video_player/video_player.dart';
 import 'dart:async';
 import 'package:easy_debounce/easy_debounce.dart';
@@ -27,6 +29,7 @@ class VideoViewState extends State<VideoView> with AfterLayoutMixin<VideoView> {
   String progressText = '';
   VideoPlayerController? controller;
   ChewieController? chewieController;
+  int selectedIndex = 0;
 
   @override
   dispose() async {
@@ -43,18 +46,16 @@ class VideoViewState extends State<VideoView> with AfterLayoutMixin<VideoView> {
       ..initialize().then((v) {
         setState(() {
           chewieController = ChewieController(
-            videoPlayerController: controller!,
-            autoPlay: true,
-            materialProgressColors: ChewieProgressColors(playedColor: colorScheme.primary.withOpacity(0.5), backgroundColor: Colors.grey.withOpacity(0.5), bufferedColor: Colors.grey, handleColor: colorScheme.primary)
-
-          );
+              videoPlayerController: controller!,
+              autoPlay: true,
+              materialProgressColors:
+                  ChewieProgressColors(playedColor: colorScheme.primary.withOpacity(0.5), backgroundColor: Colors.grey.withOpacity(0.5), bufferedColor: Colors.grey, handleColor: colorScheme.primary));
 
           playingVideo = true;
           controller!.setVolume(100).then((value) {});
           controller!.play();
         });
       });
-
   }
 
   togglePlayPause() {
@@ -79,6 +80,20 @@ class VideoViewState extends State<VideoView> with AfterLayoutMixin<VideoView> {
 
     return Scaffold(
       backgroundColor: colorScheme.background,
+      bottomNavigationBar: NavigationBar(
+        onDestinationSelected: (int index) {
+          print(index);
+          setState(() {
+            selectedIndex = index;
+          });
+        },
+        selectedIndex: selectedIndex,
+        destinations: const <Widget>[
+          NavigationDestination(icon: Icon(Icons.info), label: 'Info'),
+          NavigationDestination(icon: Icon(Icons.chat_bubble), label: 'Comments'),
+          NavigationDestination(icon: Icon(Icons.schema), label: 'Related')
+        ],
+      ),
       body: SafeArea(
         bottom: false,
         child: Container(
@@ -89,47 +104,64 @@ class VideoViewState extends State<VideoView> with AfterLayoutMixin<VideoView> {
               duration: animationDuration,
               child: loadingVideo
                   ? const CircularProgressIndicator()
-                  : Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        AspectRatio(
-                          aspectRatio: controller?.value.aspectRatio ?? 1.77777778,
-                          child: AnimatedContainer(
-                            decoration: BoxDecoration(
-                                color: colorScheme.onSurface,
-                                image: DecorationImage(
-                                  image: NetworkImage(video?.getBestThumbnail()?.url ?? ''),
-                                  fit: BoxFit.cover,
-                                )),
-                            width: double.infinity,
-                            alignment: Alignment.center,
-                            duration: animationDuration,
-                            child: AnimatedSwitcher(
+                  : Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          AspectRatio(
+                            aspectRatio: controller?.value.aspectRatio ?? 16 / 9,
+                            child: AnimatedContainer(
+                              decoration: BoxDecoration(
+                                  color: colorScheme.onSurface,
+                                  borderRadius: BorderRadius.circular(10),
+                                  image: DecorationImage(
+                                    image: NetworkImage(video?.getBestThumbnail()?.url ?? ''),
+                                    fit: BoxFit.cover,
+                                  )),
+                              width: double.infinity,
+                              alignment: Alignment.center,
                               duration: animationDuration,
-                              child: !playingVideo
-                                  ? GestureDetector(
-                                      key: const ValueKey('nt-playing'),
-                                      onTap: () => playVideo(context),
-                                      child: Icon(
-                                        Icons.play_arrow,
-                                        color: colorScheme.primary,
-                                        size: 100,
-                                      ),
-                                    )
-                                  :  Chewie(controller: chewieController!)
+                              child: AnimatedSwitcher(
+                                  duration: animationDuration,
+                                  child: !playingVideo
+                                      ? GestureDetector(
+                                          key: const ValueKey('nt-playing'),
+                                          onTap: () => playVideo(context),
+                                          child: Icon(
+                                            Icons.play_arrow,
+                                            color: colorScheme.primary,
+                                            size: 100,
+                                          ),
+                                        )
+                                      : Chewie(controller: chewieController!)),
                             ),
                           ),
-                        ),
-                        Text(
-                          video?.title ?? '',
-                          style: TextStyle(color: colorScheme.primary, fontWeight: FontWeight.bold, fontSize: 25),
-                          textAlign: TextAlign.start,
-                        ),
-                        Row(
-                          children: [],
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                        )
-                      ],
+                          Text(
+                            video?.title ?? '',
+                            style: TextStyle(color: colorScheme.primary, fontWeight: FontWeight.bold, fontSize: 20),
+                            textAlign: TextAlign.start,
+                          ),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(4.0),
+                                child: Container(
+                                  width: 40,
+                                  height: 40,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20),
+                                      color: colorScheme.onSurface,
+                                      image: DecorationImage(image: NetworkImage(video?.getBestAuthorThumbnail()?.url ?? ''), fit: BoxFit.cover)),
+                                ),
+                              ),
+                              Text(video!.author)
+                            ],
+                          ),
+                          Expanded(child: Padding(padding: EdgeInsets.only(top: 10), child: <Widget>[VideoInfo(video: video!), Text('comments'), RecommendedVideos(video: video!)][selectedIndex]))
+                        ],
+                      ),
                     )),
         ),
       ),

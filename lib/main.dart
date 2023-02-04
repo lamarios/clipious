@@ -69,9 +69,8 @@ class HomeState extends State<Home> {
       var brightness = SchedulerBinding.instance.platformDispatcher.platformBrightness;
       SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(statusBarColor: brightness == Brightness.dark ? darkColorScheme.background : lightColorScheme.background));
 
-
       return MaterialApp(
-        title: 'Invidious client',
+        title: 'Impuc',
         theme: ThemeData(
           useMaterial3: true,
           colorScheme: lightColorScheme,

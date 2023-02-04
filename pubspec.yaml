@@ -50,6 +50,7 @@ dev_dependencies:
   flutter_fadein: 2.0.0
   dynamic_color: 1.6.2
   chewie: 1.4.0
+  intl: 0.18.0
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
