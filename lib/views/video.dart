@@ -32,8 +32,8 @@ class VideoViewState extends State<VideoView> with AfterLayoutMixin<VideoView> {
   dispose() async {
     super.dispose();
     if (controller != null) {
-      controller!.removeListener(onVideoEvent);
       await controller!.dispose();
+      chewieController!.dispose();
     }
   }
 
@@ -45,7 +45,7 @@ class VideoViewState extends State<VideoView> with AfterLayoutMixin<VideoView> {
           chewieController = ChewieController(
             videoPlayerController: controller!,
             autoPlay: true,
-            materialProgressColors: ChewieProgressColors(playedColor: colorScheme.primary, backgroundColor: Colors.grey.withOpacity(0.5), bufferedColor: Colors.grey, handleColor: colorScheme.primary)
+            materialProgressColors: ChewieProgressColors(playedColor: colorScheme.primary.withOpacity(0.5), backgroundColor: Colors.grey.withOpacity(0.5), bufferedColor: Colors.grey, handleColor: colorScheme.primary)
 
           );
 
@@ -55,7 +55,6 @@ class VideoViewState extends State<VideoView> with AfterLayoutMixin<VideoView> {
         });
       });
 
-    controller!.addListener(onVideoEvent);
   }
 
   togglePlayPause() {
@@ -72,62 +71,6 @@ class VideoViewState extends State<VideoView> with AfterLayoutMixin<VideoView> {
         EasyDebounce.cancel('video-controls');
       }
     });
-  }
-
-  onVideoEvent() {
-    double progress = getProgress();
-    String progressText = getFormattedTextProgress();
-    setState(() {
-      this.progress = progress;
-      this.progressText = progressText;
-    });
-  }
-
-  double getProgress() {
-    if (controller != null) {
-      return controller!.value.position.inMilliseconds / controller!.value.duration.inMilliseconds;
-    } else {
-      return 0;
-    }
-  }
-
-  String getFormattedTextProgress() {
-    if (controller != null) {
-      return '${prettyDuration(controller!.value.position)} / ${prettyDuration(controller!.value.duration)}';
-    } else {
-      return '';
-    }
-  }
-
-  Widget getProgressStack(BuildContext context) {
-    ColorScheme colorScheme = Theme.of(context).colorScheme;
-    List<Widget> progressBars = [];
-
-    controller!.value.buffered.forEach((buffer) {
-      double offset = buffer.start.inMilliseconds / controller!.value.duration.inMilliseconds;
-      double width = (buffer.end.inMilliseconds - buffer.start.inMilliseconds) / controller!.value.duration.inMilliseconds;
-
-      progressBars.add(AnimatedFractionallySizedBox(
-        widthFactor: width,
-        heightFactor: 1,
-        duration: animationDuration ~/ 2,
-        child: Container(
-          alignment: Alignment(offset, 0),
-          decoration: BoxDecoration(color: Colors.grey.shade300, borderRadius: BorderRadius.circular(10)),
-        ),
-      ));
-    });
-
-    progressBars.add(AnimatedFractionallySizedBox(
-      widthFactor: getProgress(),
-      heightFactor: 1,
-      duration: animationDuration ~/ 2,
-      child: Container(
-        decoration: BoxDecoration(color: colorScheme.primary, borderRadius: BorderRadius.circular(10)),
-      ),
-    ));
-
-    return Stack(children: progressBars);
   }
 
   @override
@@ -174,58 +117,6 @@ class VideoViewState extends State<VideoView> with AfterLayoutMixin<VideoView> {
                                       ),
                                     )
                                   :  Chewie(controller: chewieController!)
-/*
-                              GestureDetector(
-                                      key: const ValueKey('playing'),
-                                      onTap: togglePlayPause,
-                                      child: Stack(
-                                        fit: StackFit.expand,
-                                        alignment: Alignment.center,
-                                        children: [
-                                          VideoPlayer(controller!),
-                                          AnimatedOpacity(
-                                              opacity: showControls ? 1.0 : 0,
-                                              duration: animationDuration ~/ 2,
-                                              child: Stack(
-                                                alignment: Alignment.center,
-                                                children: [
-                                                  Positioned(
-                                                      bottom: 0,
-                                                      left: 0,
-                                                      right: 0,
-                                                      child: Container(
-                                                        height: 70,
-                                                        decoration: BoxDecoration(
-                                                            gradient: LinearGradient(colors: [Colors.transparent, Colors.black], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
-                                                      )),
-                                                  Icon(
-                                                    controller!.value.isPlaying ? Icons.pause : Icons.play_arrow,
-                                                    color: colorScheme.primary,
-                                                    size: 100,
-                                                  ),
-                                                  Positioned(
-                                                    bottom: 30,
-                                                    left: 10,
-                                                    right: 10,
-                                                    child: Container(
-                                                        width: double.infinity,
-                                                        height: 5,
-                                                        alignment: Alignment.centerLeft,
-                                                        decoration: BoxDecoration(color: Colors.grey.shade500, borderRadius: BorderRadius.circular(10)),
-                                                        child: getProgressStack(context)),
-                                                  ),
-                                                  Positioned(
-                                                      left: 10,
-                                                      bottom: 10,
-                                                      child: Text(
-                                                        progressText,
-                                                        style: TextStyle(color: Colors.white),
-                                                      ))
-                                                ],
-                                              ))
-                                        ],
-                                      )),
-*/
                             ),
                           ),
                         ),
