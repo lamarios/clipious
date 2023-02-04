@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:flutter/services.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/views/popular.dart';
 import 'package:invidious/views/trending.dart';
@@ -34,9 +36,7 @@ class HomeState extends State<Home> {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-
-    return DynamicColorBuilder(
-        builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) {
+    return DynamicColorBuilder(builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) {
       ColorScheme lightColorScheme;
       ColorScheme darkColorScheme;
 
@@ -66,38 +66,45 @@ class HomeState extends State<Home> {
           brightness: Brightness.dark,
         );
       }
+      var brightness = SchedulerBinding.instance.platformDispatcher.platformBrightness;
+      SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(statusBarColor: brightness == Brightness.dark ? darkColorScheme.background : lightColorScheme.background));
 
-    return MaterialApp(
-      title: 'Invidious client',
-      theme: ThemeData(
-        useMaterial3: true,
-        colorScheme: lightColorScheme,
-      ),
-      darkTheme: ThemeData(
-        useMaterial3: true,
-        colorScheme: darkColorScheme
-      ),
-      home: Scaffold(
-          backgroundColor: Theme.of(context).colorScheme.background,
-          bottomNavigationBar: NavigationBar(
-            onDestinationSelected: (int index) {
-              print(index);
-              setState(() {
-                selectedIndex = index;
-              });
-            },
 
-            selectedIndex: selectedIndex,
-            destinations: const <Widget>[NavigationDestination(icon: Icon(Icons.trending_up), label: 'Trending'), NavigationDestination(icon: Icon(Icons.local_fire_department), label: 'Popular')],
-          ),
-          body: SafeArea(
-              child: AnimatedSwitcher(
-            duration: animationDuration,
-            child: <Widget>[Trending(key: ValueKey(0),), Popular(key: ValueKey(1),)][selectedIndex],
-            transitionBuilder: (Widget child, Animation<double> animation) {
-              return FadeTransition(opacity: animation, child: child);
-            },
-          ))),
-    );});
+      return MaterialApp(
+        title: 'Invidious client',
+        theme: ThemeData(
+          useMaterial3: true,
+          colorScheme: lightColorScheme,
+        ),
+        darkTheme: ThemeData(useMaterial3: true, colorScheme: darkColorScheme),
+        home: Scaffold(
+            backgroundColor: brightness == Brightness.dark ? darkColorScheme.background : lightColorScheme.background,
+            bottomNavigationBar: NavigationBar(
+              onDestinationSelected: (int index) {
+                print(index);
+                setState(() {
+                  selectedIndex = index;
+                });
+              },
+              selectedIndex: selectedIndex,
+              destinations: const <Widget>[NavigationDestination(icon: Icon(Icons.trending_up), label: 'Trending'), NavigationDestination(icon: Icon(Icons.local_fire_department), label: 'Popular')],
+            ),
+            body: SafeArea(
+                child: AnimatedSwitcher(
+              duration: animationDuration,
+              child: <Widget>[
+                Trending(
+                  key: ValueKey(0),
+                ),
+                Popular(
+                  key: ValueKey(1),
+                )
+              ][selectedIndex],
+              transitionBuilder: (Widget child, Animation<double> animation) {
+                return FadeTransition(opacity: animation, child: child);
+              },
+            ))),
+      );
+    });
   }
 }
