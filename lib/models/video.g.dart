@@ -28,6 +28,7 @@ Video _$VideoFromJson(Map<String, dynamic> json) => Video(
           .toList(),
       json['genre'] as String,
       json['genreUrl'] as String,
+      json['dashUrl'] as String,
       json['author'] as String,
       json['authorUrl'] as String,
       (json['authorThumbnails'] as List<dynamic>)
@@ -60,6 +61,7 @@ Map<String, dynamic> _$VideoToJson(Video instance) => <String, dynamic>{
       'title': instance.title,
       'videoId': instance.videoId,
       'videoThumbnails': instance.videoThumbnails,
+      'dashUrl': instance.dashUrl,
       'description': instance.description,
       'descriptionHtml': instance.descriptionHtml,
       'published': instance.published,

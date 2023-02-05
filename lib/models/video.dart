@@ -14,6 +14,7 @@ class Video {
   String title;
   String videoId;
   List<VideoThumbnail> videoThumbnails;
+  String dashUrl;
 
   String description;
   String descriptionHtml;
@@ -65,6 +66,7 @@ class Video {
       this.allowedRegions,
       this.genre,
       this.genreUrl,
+      this.dashUrl,
       this.author,
       this.authorUrl,
       this.authorThumbnails,

@@ -44,8 +44,11 @@ class SettingsState extends State<Settings> {
       onChange: (String selected) {
         db.saveSetting(SettingsValue(SELECTED_SERVER, selected));
         FBroadcast.instance().broadcast(BROADCAST_SERVER_CHANGED);
+        Server newServer = db.getCurrentlySelectedServer();
+
+        print('Selected server $selected - ${newServer.url}');
         setState(() {
-          currentServer = db.getCurrentlySelectedServer();
+          currentServer = newServer;
         });
       },
     );

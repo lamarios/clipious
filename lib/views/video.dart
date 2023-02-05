@@ -1,17 +1,18 @@
 import 'dart:collection';
 
+import 'package:better_player/better_player.dart';
 import 'package:invidious/database.dart';
 import 'package:invidious/utils.dart';
 import 'package:invidious/views/video/info.dart';
 import 'package:invidious/views/video/recommendedVideos.dart';
-import 'package:video_player/video_player.dart';
+
+// import 'package:video_player/video_player.dart';
 import 'dart:async';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:after_layout/after_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:invidious/globals.dart';
-import 'package:chewie/chewie.dart';
 import '../models/sponsorSegment.dart';
 import '../models/video.dart';
 import 'package:wakelock/wakelock.dart';
@@ -32,8 +33,11 @@ class VideoViewState extends State<VideoView> with AfterLayoutMixin<VideoView> {
   bool showControls = false;
   double progress = 0;
   String progressText = '';
-  VideoPlayerController? controller;
-  ChewieController? chewieController;
+
+  // VideoPlayerController? controller;
+
+  // ChewieController? chewieController;
+  BetterPlayerController? betterPlayerController;
   int selectedIndex = 0;
   bool loadingStream = false;
   bool useSponsorBlock = db.getSettings(USE_SPONSORBLOCK)?.value == 'true';
@@ -43,13 +47,18 @@ class VideoViewState extends State<VideoView> with AfterLayoutMixin<VideoView> {
   dispose() async {
     super.dispose();
     Wakelock.disable();
+    if (betterPlayerController != null) {
+      betterPlayerController!.dispose();
+    }
+/*
     if (controller != null) {
       if (sponsorSegments.isNotEmpty) {
         controller!.removeListener(onVideoListener);
       }
       await controller!.dispose();
-      chewieController!.dispose();
+      // chewieController!.dispose();
     }
+*/
   }
 
   playVideo(BuildContext context) {
@@ -57,6 +66,18 @@ class VideoViewState extends State<VideoView> with AfterLayoutMixin<VideoView> {
       loadingStream = true;
     });
     ColorScheme colorScheme = Theme.of(context).colorScheme;
+    BetterPlayerDataSource betterPlayerDataSource = BetterPlayerDataSource(BetterPlayerDataSourceType.network, video!.dashUrl, videoFormat: BetterPlayerVideoFormat.dash);
+    betterPlayerController = BetterPlayerController(
+        const BetterPlayerConfiguration(
+          autoPlay: true,allowedScreenSleep: false,
+
+        ),
+        betterPlayerDataSource: betterPlayerDataSource);
+    setState(() {
+      playingVideo = true;
+      loadingStream = false;
+    });
+/*
     controller = VideoPlayerController.network(video!.formatStreams[2].url)
       ..initialize().then((v) {
         setState(() {
@@ -76,8 +97,10 @@ class VideoViewState extends State<VideoView> with AfterLayoutMixin<VideoView> {
           }
         });
       });
+*/
   }
 
+/*
   onVideoListener() {
     if (sponsorSegments.isNotEmpty) {
       // print('we have segments');
@@ -98,9 +121,11 @@ class VideoViewState extends State<VideoView> with AfterLayoutMixin<VideoView> {
       }
     }
   }
+*/
 
+/*
   togglePlayPause() {
-    controller!.value.isPlaying ? controller!.pause() : controller!.play();
+    betterPlayerController!. ? controller!.pause() : controller!.play();
     setState(() {
       showControls = true;
       if (controller!.value.isPlaying) {
@@ -114,6 +139,7 @@ class VideoViewState extends State<VideoView> with AfterLayoutMixin<VideoView> {
       }
     });
   }
+*/
 
   @override
   Widget build(BuildContext context) {
@@ -151,7 +177,7 @@ class VideoViewState extends State<VideoView> with AfterLayoutMixin<VideoView> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           AspectRatio(
-                            aspectRatio: controller?.value.aspectRatio ?? 16 / 9,
+                            aspectRatio: 16 / 9,
                             child: AnimatedContainer(
                               decoration: BoxDecoration(
                                   color: colorScheme.onSurface,
@@ -177,7 +203,9 @@ class VideoViewState extends State<VideoView> with AfterLayoutMixin<VideoView> {
                                                 size: 100,
                                               ),
                                             )
-                                      : Chewie(controller: chewieController!)),
+                                      : BetterPlayer(
+                                          controller: betterPlayerController!,
+                                        )),
                             ),
                           ),
                           Text(
@@ -217,6 +245,7 @@ class VideoViewState extends State<VideoView> with AfterLayoutMixin<VideoView> {
 
     setState(() {
       this.video = video;
+      print(video.dashUrl);
       loadingVideo = false;
     });
 

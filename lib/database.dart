@@ -48,9 +48,10 @@ class DbClient {
 
   Server getCurrentlySelectedServer() {
     SettingsValue? value = getSettings(SELECTED_SERVER);
+    print('${value?.value ?? 'nope'}');
     if (value != null) {
       Server? server = getServer(value.value);
-      return server ?? Server(PUBLIC_SERVERS[0]);
+      return server ?? Server(value.value);
     } else {
       return Server(PUBLIC_SERVERS[0]);
     }
