@@ -91,7 +91,7 @@ class VideoViewState extends State<VideoView> with AfterLayoutMixin<VideoView> {
         destinations: const <Widget>[
           NavigationDestination(icon: Icon(Icons.info), label: 'Info'),
           NavigationDestination(icon: Icon(Icons.chat_bubble), label: 'Comments'),
-          NavigationDestination(icon: Icon(Icons.schema), label: 'Related')
+          NavigationDestination(icon: Icon(Icons.schema), label: 'Recommended')
         ],
       ),
       body: SafeArea(
@@ -170,7 +170,7 @@ class VideoViewState extends State<VideoView> with AfterLayoutMixin<VideoView> {
 
   @override
   Future<FutureOr<void>> afterFirstLayout(BuildContext context) async {
-    Video video = await service.getVideo(PAULFLIX, widget.videoId);
+    Video video = await service.getVideo(widget.videoId);
     setState(() {
       this.video = video;
       loadingVideo = false;

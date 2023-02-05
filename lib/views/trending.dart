@@ -17,7 +17,7 @@ class Trending extends StatefulWidget {
 
 class TrendingState extends State<Trending> {
   Future<List<VideoInList>> getVideos() async {
-    return service.getTrending(PAULFLIX);
+    return service.getTrending();
   }
 
   @override

@@ -18,7 +18,7 @@ class Popular extends StatefulWidget {
 
 class PopularState extends State<Popular>{
   Future<List<VideoInList>> getVideos() async {
-    return service.getPopular(PAULFLIX);
+    return service.getPopular();
   }
 
   @override

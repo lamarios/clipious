@@ -3,13 +3,18 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/views/popular.dart';
+import 'package:invidious/views/settings.dart';
 import 'package:invidious/views/trending.dart';
 import 'package:invidious/views/video.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 
+import 'database.dart';
+
 const brandColor = Color(0xFF1E88E5);
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  db = await DbClient.create();
   runApp(const MyApp());
 }
 
@@ -19,23 +24,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return const Home();
-  }
-}
-
-class Home extends StatefulWidget {
-  const Home({super.key});
-
-  @override
-  HomeState createState() => HomeState();
-}
-
-class HomeState extends State<Home> {
-  int selectedIndex = 0;
-
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
     return DynamicColorBuilder(builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) {
       ColorScheme lightColorScheme;
       ColorScheme darkColorScheme;
@@ -67,43 +55,77 @@ class HomeState extends State<Home> {
         );
       }
       var brightness = SchedulerBinding.instance.platformDispatcher.platformBrightness;
-      SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(statusBarColor: brightness == Brightness.dark ? darkColorScheme.background : lightColorScheme.background));
-
+      ColorScheme colorScheme = brightness == Brightness.dark ? darkColorScheme : lightColorScheme;
+      SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(statusBarColor: colorScheme.background));
       return MaterialApp(
-        title: 'Impuc',
-        theme: ThemeData(
-          useMaterial3: true,
-          colorScheme: lightColorScheme,
+          title: 'Impuc',
+          theme: ThemeData(
+            useMaterial3: true,
+            colorScheme: lightColorScheme,
+          ),
+          darkTheme: ThemeData(useMaterial3: true, colorScheme: darkColorScheme),
+          home: const Home());
+    });
+  }
+}
+
+class Home extends StatefulWidget {
+  const Home({super.key});
+
+  @override
+  HomeState createState() => HomeState();
+}
+
+class HomeState extends State<Home> {
+  int selectedIndex = 0;
+
+  openSettings(BuildContext context) {
+    Navigator.push(context, MaterialPageRoute(builder: (context) => Settings()));
+  }
+
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    ColorScheme colorScheme = Theme.of(context).colorScheme;
+    return Scaffold(
+        backgroundColor: colorScheme.background,
+        bottomNavigationBar: NavigationBar(
+          onDestinationSelected: (int index) {
+            print(index);
+            setState(() {
+              selectedIndex = index;
+            });
+          },
+          selectedIndex: selectedIndex,
+          destinations: const <Widget>[NavigationDestination(icon: Icon(Icons.local_fire_department), label: 'Popular'), NavigationDestination(icon: Icon(Icons.trending_up), label: 'Trending')],
         ),
-        darkTheme: ThemeData(useMaterial3: true, colorScheme: darkColorScheme),
-        home: Scaffold(
-            backgroundColor: brightness == Brightness.dark ? darkColorScheme.background : lightColorScheme.background,
-            bottomNavigationBar: NavigationBar(
-              onDestinationSelected: (int index) {
-                print(index);
-                setState(() {
-                  selectedIndex = index;
-                });
-              },
-              selectedIndex: selectedIndex,
-              destinations: const <Widget>[NavigationDestination(icon: Icon(Icons.trending_up), label: 'Trending'), NavigationDestination(icon: Icon(Icons.local_fire_department), label: 'Popular')],
-            ),
-            body: SafeArea(
-                child: AnimatedSwitcher(
+        body: SafeArea(
+          child: Stack(children: [
+            AnimatedSwitcher(
               duration: animationDuration,
               child: <Widget>[
-                Trending(
-                  key: ValueKey(0),
-                ),
-                Popular(
+                const Popular(
                   key: ValueKey(1),
+                ),
+                const Trending(
+                  key: ValueKey(0),
                 )
               ][selectedIndex],
               transitionBuilder: (Widget child, Animation<double> animation) {
                 return FadeTransition(opacity: animation, child: child);
               },
-            ))),
-      );
-    });
+            ),
+            Positioned(
+                top: 10,
+                right: 10,
+                child: GestureDetector(
+                  onTap: () => openSettings(context),
+                  child: Icon(
+                    Icons.settings,
+                    color: colorScheme.primary,
+                  ),
+                ))
+          ]),
+        ));
   }
 }
