@@ -1,3 +1,4 @@
+import 'package:fbroadcast/fbroadcast.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:invidious/database.dart';
@@ -18,6 +19,14 @@ class Settings extends StatefulWidget {
 class SettingsState extends State<Settings> {
   List<Server> dbServers = db.getServers();
   Server currentServer = db.getCurrentlySelectedServer();
+  bool sponsorBlock = db.getSettings(USE_SPONSORBLOCK)?.value == 'true';
+
+  toggleSponsorBlock(bool value) {
+    db.saveSetting(SettingsValue(USE_SPONSORBLOCK, value.toString()));
+    setState(() {
+      sponsorBlock = db.getSettings(USE_SPONSORBLOCK)?.value == 'true';
+    });
+  }
 
   manageServers(BuildContext context) {
     Navigator.push(context, MaterialPageRoute(builder: (context) => ManageServers()));
@@ -34,6 +43,7 @@ class SettingsState extends State<Settings> {
       items: servers,
       onChange: (String selected) {
         db.saveSetting(SettingsValue(SELECTED_SERVER, selected));
+        FBroadcast.instance().broadcast(BROADCAST_SERVER_CHANGED);
         setState(() {
           currentServer = db.getCurrentlySelectedServer();
         });
@@ -64,7 +74,8 @@ class SettingsState extends State<Settings> {
                     value: Text(currentServer.url),
                     onPressed: (context) => selectServer(context),
                   )
-                ])
+                ]),
+                SettingsSection(title: Text('SponsorBlock'), tiles: [SettingsTile.switchTile(initialValue: sponsorBlock, onToggle: toggleSponsorBlock, title: Text('Use SponsorBlock'))])
               ],
             )));
   }

@@ -4,7 +4,7 @@ import 'package:objectbox/objectbox.dart';
 class Server {
   @Id()
   int id = 0;
-  @Unique()
+  @Unique(onConflict: ConflictStrategy.replace)
   String url;
   String? authToken;
 

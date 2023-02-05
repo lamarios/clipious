@@ -1,9 +1,12 @@
+import 'package:fbroadcast/fbroadcast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/views/popular.dart';
+import 'package:invidious/views/search.dart';
 import 'package:invidious/views/settings.dart';
+import 'package:invidious/views/subscriptions.dart';
 import 'package:invidious/views/trending.dart';
 import 'package:invidious/views/video.dart';
 import 'package:dynamic_color/dynamic_color.dart';
@@ -78,6 +81,18 @@ class Home extends StatefulWidget {
 
 class HomeState extends State<Home> {
   int selectedIndex = 0;
+  bool isLoggedIn = db.isLoggedInToCurrentServer();
+
+  @override
+  initState() {
+    super.initState();
+    FBroadcast.instance().register(BROADCAST_SERVER_CHANGED, (value, callback) {
+      setState(() {
+        selectedIndex = 0;
+        isLoggedIn = db.isLoggedInToCurrentServer();
+      });
+    });
+  }
 
   openSettings(BuildContext context) {
     Navigator.push(context, MaterialPageRoute(builder: (context) => Settings()));
@@ -87,6 +102,16 @@ class HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     ColorScheme colorScheme = Theme.of(context).colorScheme;
+
+    var navigationWidgets = <Widget>[
+      NavigationDestination(icon: Icon(Icons.local_fire_department), label: 'Popular'),
+      NavigationDestination(icon: Icon(Icons.trending_up), label: 'Trending'),
+      NavigationDestination(icon: Icon(Icons.search), label: 'Search')
+    ];
+    if (isLoggedIn) {
+      navigationWidgets.add(const NavigationDestination(icon: Icon(Icons.subscriptions), label: 'Subscriptions'));
+    }
+
     return Scaffold(
         backgroundColor: colorScheme.background,
         bottomNavigationBar: NavigationBar(
@@ -97,7 +122,7 @@ class HomeState extends State<Home> {
             });
           },
           selectedIndex: selectedIndex,
-          destinations: const <Widget>[NavigationDestination(icon: Icon(Icons.local_fire_department), label: 'Popular'), NavigationDestination(icon: Icon(Icons.trending_up), label: 'Trending')],
+          destinations: navigationWidgets,
         ),
         body: SafeArea(
           child: Stack(children: [
@@ -105,10 +130,14 @@ class HomeState extends State<Home> {
               duration: animationDuration,
               child: <Widget>[
                 const Popular(
-                  key: ValueKey(1),
+                  key: ValueKey(0),
                 ),
                 const Trending(
-                  key: ValueKey(0),
+                  key: ValueKey(1),
+                ),
+                const Search(key: ValueKey(2)),
+                const Subscriptions(
+                  key: ValueKey(3),
                 )
               ][selectedIndex],
               transitionBuilder: (Widget child, Animation<double> animation) {

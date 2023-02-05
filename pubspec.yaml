@@ -39,13 +39,16 @@ dependencies:
   dynamic_color: 1.6.2
   chewie: 1.4.0
   intl: 0.18.0
-  settings_ui: ^2.0.2
+  settings_ui: 2.0.2
   objectbox: 1.7.2
   objectbox_flutter_libs: 1.7.2
   path_provider: 2.0.12
   path: 1.8.2
-  flutter_web_auth: ^0.5.0
-  select_dialog: ^2.0.0
+  flutter_web_auth: 0.5.0
+  select_dialog: 2.0.0
+  wakelock: 0.6.2
+  fbroadcast: 2.0.0
+  flutter_typeahead: 4.3.3
 
 
 

@@ -17,9 +17,10 @@ NumberFormat compactCurrency = NumberFormat.compactCurrency(
 
 class VideoList extends StatefulWidget {
   String title;
-  Function getVideos;
+  Function? getVideos;
+  List<VideoInList>? videos;
 
-  VideoList({super.key, required this.title, required this.getVideos});
+  VideoList({super.key, required this.title, this.getVideos, this.videos});
 
   @override
   VideoListState createState() => VideoListState();
@@ -28,6 +29,7 @@ class VideoList extends StatefulWidget {
 class VideoListState extends State<VideoList> with AfterLayoutMixin<VideoList> {
   List<VideoInList> videos = [];
   bool loading = true;
+  bool hasMethod = false;
 
   openVideo(BuildContext context, VideoInList video) {
     Navigator.push(context, MaterialPageRoute(builder: (context) => VideoView(videoId: video.videoId)));
@@ -53,56 +55,59 @@ class VideoListState extends State<VideoList> with AfterLayoutMixin<VideoList> {
               : FadeIn(
                   duration: animationDuration,
                   curve: Curves.easeInOutQuad,
-                  child: GridView.count(
-                      crossAxisCount: 1,
-                      padding: EdgeInsets.all(4),
-                      crossAxisSpacing: 5,
-                      mainAxisSpacing: 5,
-                      childAspectRatio: 16 / 13,
-                      children: videos
-                          .map((v) => GestureDetector(
-                                onTap: () {
-                                  openVideo(context, v);
-                                },
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    AspectRatio(
-                                      aspectRatio: 16 / 9,
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                            color: colorScheme.onSurface,
-                                            borderRadius: BorderRadius.circular(10),
-                                            image: DecorationImage(image: NetworkImage(v.getBestThumbnail()?.url ?? ''), fit: BoxFit.cover)),
-                                      ),
-                                    ),
-                                    Text(
-                                      v.title,
-                                      textAlign: TextAlign.left,
-                                      style: TextStyle(color: colorScheme.primary, fontWeight: FontWeight.bold),
-                                    ),
-                                    Row(
-                                      children: [
-                                        Expanded(
-                                          child: Text(
-                                            v.author,
-                                            style: TextStyle(color: colorScheme.onSurface),
-                                          ),
+                  child: Visibility(
+                    visible: widget.videos?.isNotEmpty ?? videos.isNotEmpty,
+                    child: GridView.count(
+                        crossAxisCount: 1,
+                        padding: EdgeInsets.all(4),
+                        crossAxisSpacing: 5,
+                        mainAxisSpacing: 5,
+                        childAspectRatio: 16 / 13,
+                        children: (widget.videos ?? videos)
+                            .map((v) => GestureDetector(
+                                  onTap: () {
+                                    openVideo(context, v);
+                                  },
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      AspectRatio(
+                                        aspectRatio: 16 / 9,
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                              color: colorScheme.onSurface,
+                                              borderRadius: BorderRadius.circular(10),
+                                              image: DecorationImage(image: NetworkImage(v.getBestThumbnail()?.url ?? ''), fit: BoxFit.cover)),
                                         ),
-                                        Visibility(visible: v.viewCount > 0, child: Icon(Icons.visibility)),
-                                        Visibility(
-                                            visible: v.viewCount > 0,
-                                            child: Padding(
-                                              padding: const EdgeInsets.only(left: 5.0),
-                                              child: Text(compactCurrency.format(v.viewCount)),
-                                            ))
-                                      ],
-                                    )
-                                  ],
-                                ),
-                              ))
-                          .toList()),
+                                      ),
+                                      Text(
+                                        v.title,
+                                        textAlign: TextAlign.left,
+                                        style: TextStyle(color: colorScheme.primary, fontWeight: FontWeight.bold),
+                                      ),
+                                      Row(
+                                        children: [
+                                          Expanded(
+                                            child: Text(
+                                              v.author,
+                                              style: TextStyle(color: colorScheme.onSurface),
+                                            ),
+                                          ),
+                                          Visibility(visible: v.viewCount > 0, child: Icon(Icons.visibility)),
+                                          Visibility(
+                                              visible: v.viewCount > 0,
+                                              child: Padding(
+                                                padding: const EdgeInsets.only(left: 5.0),
+                                                child: Text(compactCurrency.format(v.viewCount)),
+                                              ))
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                ))
+                            .toList()),
+                  ),
                 ),
         ),
       ],
@@ -111,11 +116,18 @@ class VideoListState extends State<VideoList> with AfterLayoutMixin<VideoList> {
 
   @override
   FutureOr<void> afterFirstLayout(BuildContext context) {
-    widget.getVideos().then((List<VideoInList> videos) {
+    if (widget.getVideos != null) {
+      widget.getVideos!().then((List<VideoInList> videos) {
+        setState(() {
+          hasMethod = true;
+          this.videos = videos;
+          loading = false;
+        });
+      });
+    } else if (widget.videos != null) {
       setState(() {
-        this.videos = videos;
         loading = false;
       });
-    });
+    }
   }
 }

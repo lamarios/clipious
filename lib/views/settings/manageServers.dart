@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:after_layout/after_layout.dart';
 import 'package:flutter/cupertino.dart';
@@ -26,19 +27,16 @@ class ManageServerState extends State<ManageServers> with AfterLayoutMixin<Manag
   }
 
   logIn(String serverUrl) async {
-    String url = serverUrl + '/authorize_token?scopes=*:*&callback_url=impuc-auth://';
+    String url = serverUrl + '/authorize_token?scopes=:feed&callback_url=impuc-auth://';
     final result = await FlutterWebAuth.authenticate(url: url, callbackUrlScheme: 'impuc-auth');
 
     final token = Uri.parse(result).queryParameters['token'];
-    print(token);
 
-    Server? server = db.getServer(serverUrl);
-    if (server == null) {
-      server = Server(serverUrl);
-      db.addServer(server);
-    }
+    var decoded = jsonDecode(Uri.decodeComponent(token ?? ''));
 
-    server.authToken = token;
+    Server server  = Server(serverUrl);
+
+    server.authToken = Uri.decodeComponent(token ?? '');
 
     db.updateServer(server);
 

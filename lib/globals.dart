@@ -12,6 +12,7 @@ const PUBLIC_SERVERS = [
   "https://yt.artemislena.eu/",
   "https://youtube.paulflix.tv"
 ];
+const BROADCAST_SERVER_CHANGED = 'server-changed';
 
 const animationDuration = Duration(milliseconds: 250);
 

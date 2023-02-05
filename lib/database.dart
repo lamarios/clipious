@@ -6,6 +6,7 @@ import 'models/db/server.dart';
 import 'objectbox.g.dart'; // created by `flutter pub run build_runner build`
 
 const SELECTED_SERVER = 'selected-server';
+const USE_SPONSORBLOCK =  'use-sponsor-block';
 
 class DbClient {
   /// The Store of this app.
@@ -30,7 +31,7 @@ class DbClient {
   }
 
   updateServer(Server server) {
-    store.box<Server>().put(server, mode: PutMode.update);
+    store.box<Server>().put(server, mode: PutMode.put);
   }
 
   List<Server> getServers() {
@@ -53,5 +54,9 @@ class DbClient {
     } else {
       return Server(PUBLIC_SERVERS[0]);
     }
+  }
+
+  bool isLoggedInToCurrentServer() {
+    return getCurrentlySelectedServer().authToken?.isNotEmpty ?? false;
   }
 }
