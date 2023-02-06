@@ -13,6 +13,7 @@ import 'package:invidious/views/subscriptions.dart';
 
 import 'models/searchSuggestion.dart';
 import 'models/subscription.dart';
+import 'models/videoComments.dart';
 
 const GET_VIDEO = '/api/v1/videos/:id';
 const GET_TRENDING = '/api/v1/trending';
@@ -23,6 +24,7 @@ const SEARCH = '/api/v1/search?q=:query';
 const STATS = '/api/v1/stats';
 const GET_SUBSCIPTIONS = '/api/v1/auth/subscriptions';
 const ADD_DELETE_SUBSCRIPTION = '/api/v1/auth/subscriptions/:ucid';
+const GET_COMMENTS = '/api/v1/comments/:id';
 const GET_SPONSOR_SEGMENTS = 'https://sponsor.ajay.app/api/skipSegments?videoID=:id';
 
 class Service {
@@ -110,12 +112,12 @@ class Service {
     return false;
   }
 
-  bool isLoggedIn(){
-     return db.getCurrentlySelectedServer().authToken != null;
+  bool isLoggedIn() {
+    return db.getCurrentlySelectedServer().authToken != null;
   }
 
-  Future<void> subscribe(String channelId) async{
-    if(!isLoggedIn()) return;
+  Future<void> subscribe(String channelId) async {
+    if (!isLoggedIn()) return;
 
     var currentlySelectedServer = db.getCurrentlySelectedServer();
     String url = currentlySelectedServer.url + ADD_DELETE_SUBSCRIPTION.replaceAll(":ucid", channelId);
@@ -125,8 +127,9 @@ class Service {
 
     final response = await http.post(Uri.parse(url), headers: headers);
   }
-  Future<void> unSubscribe(String channelId) async{
-    if(!isLoggedIn()) return;
+
+  Future<void> unSubscribe(String channelId) async {
+    if (!isLoggedIn()) return;
 
     var currentlySelectedServer = db.getCurrentlySelectedServer();
     String url = currentlySelectedServer.url + ADD_DELETE_SUBSCRIPTION.replaceAll(":ucid", channelId);
@@ -139,7 +142,7 @@ class Service {
   }
 
   Future<bool> isSubscribedToChannel(String channelId) async {
-    if(!isLoggedIn()) return false;
+    if (!isLoggedIn()) return false;
 
     var currentlySelectedServer = db.getCurrentlySelectedServer();
     String url = currentlySelectedServer.url + GET_SUBSCIPTIONS;
@@ -151,5 +154,19 @@ class Service {
     Iterable i = handleResponse(response);
 
     return List<Subscription>.from(i.map((e) => Subscription.fromJson(e))).indexWhere((element) => element.authorId == channelId) > -1;
+  }
+
+  Future<VideoComments> getComments(String videoId, String? continuation) async {
+    var currentlySelectedServer = db.getCurrentlySelectedServer();
+    String url = currentlySelectedServer.url + GET_COMMENTS.replaceAll(":id", videoId);
+    if (continuation != null) {
+      url += '?continuation=${continuation}';
+    }
+
+    print('Calling $url');
+    var headers = {'Authorization': 'Bearer ${currentlySelectedServer.authToken}'};
+
+    final response = await http.get(Uri.parse(url), headers: headers);
+    return VideoComments.fromJson(handleResponse(response));
   }
 }

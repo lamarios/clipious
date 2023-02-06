@@ -4,6 +4,7 @@ import 'package:better_player/better_player.dart';
 import 'package:invidious/database.dart';
 import 'package:invidious/main.dart';
 import 'package:invidious/utils.dart';
+import 'package:invidious/views/video/comments.dart';
 import 'package:invidious/views/video/info.dart';
 import 'package:invidious/views/video/recommendedVideos.dart';
 
@@ -268,7 +269,7 @@ class VideoViewState extends State<VideoView> with AfterLayoutMixin<VideoView> {
                                 )
                               ],
                             ),
-                            Expanded(child: Padding(padding: EdgeInsets.only(top: 10), child: <Widget>[VideoInfo(video: video!), Text('comments'), RecommendedVideos(video: video!)][selectedIndex]))
+                            Expanded(child: Padding(padding: EdgeInsets.only(top: 10), child: <Widget>[VideoInfo(video: video!), SingleChildScrollView(child: CommentsView(videoId: video!.videoId,)), RecommendedVideos(video: video!)][selectedIndex]))
                           ],
                         ),
                       )),

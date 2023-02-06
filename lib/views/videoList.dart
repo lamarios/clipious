@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:fbroadcast/fbroadcast.dart';
+import 'package:flutter/foundation.dart';
 import 'package:intl/intl.dart';
 
 import 'package:flutter/cupertino.dart';
@@ -32,6 +33,8 @@ class VideoListState extends State<VideoList> with AfterLayoutMixin<VideoList> {
   List<VideoInList> videos = [];
   bool loading = true;
   bool hasMethod = false;
+  Map<String, Image> imageCache = {};
+  ScrollController scrollController = ScrollController();
 
   openVideo(BuildContext context, VideoInList video) {
     Navigator.push(context, MaterialPageRoute(builder: (context) => VideoView(videoId: video.videoId)));
@@ -40,10 +43,25 @@ class VideoListState extends State<VideoList> with AfterLayoutMixin<VideoList> {
   @override
   void initState() {
     super.initState();
+    scrollController.addListener(onScrollEvent);
 
     FBroadcast.instance().register(BROADCAST_SERVER_CHANGED, (value, callback) {
-      getVideos();
+      getVideos(null);
     });
+  }
+
+  @override
+  dispose() {
+    super.dispose();
+    scrollController.dispose();
+  }
+
+  onScrollEvent() {
+    if (scrollController.hasClients) {
+      if (scrollController.position.maxScrollExtent == scrollController.offset) {
+        print('reached end');
+      }
+    }
   }
 
   @override
@@ -72,6 +90,7 @@ class VideoListState extends State<VideoList> with AfterLayoutMixin<VideoList> {
                       visible: widget.videos?.isNotEmpty ?? videos.isNotEmpty,
                       child: GridView.count(
                           crossAxisCount: 1,
+                          controller: scrollController,
                           padding: EdgeInsets.all(4),
                           crossAxisSpacing: 5,
                           mainAxisSpacing: 5,
@@ -108,16 +127,19 @@ class VideoListState extends State<VideoList> with AfterLayoutMixin<VideoList> {
                                               ),
                                             ),
                                           ],
-                                        ), Row(children: [
-                                          Expanded(child: Text(v.publishedText)),
-                                          Visibility(visible: v.viewCount > 0, child: Icon(Icons.visibility)),
-                                          Visibility(
-                                              visible: v.viewCount > 0,
-                                              child: Padding(
-                                                padding: const EdgeInsets.only(left: 5.0),
-                                                child: Text(compactCurrency.format(v.viewCount)),
-                                              ))
-                                        ],)
+                                        ),
+                                        Row(
+                                          children: [
+                                            Expanded(child: Text(v.publishedText)),
+                                            Visibility(visible: v.viewCount > 0, child: Icon(Icons.visibility)),
+                                            Visibility(
+                                                visible: v.viewCount > 0,
+                                                child: Padding(
+                                                  padding: const EdgeInsets.only(left: 5.0),
+                                                  child: Text(compactCurrency.format(v.viewCount)),
+                                                ))
+                                          ],
+                                        )
                                       ],
                                     ),
                                   ))
@@ -130,9 +152,15 @@ class VideoListState extends State<VideoList> with AfterLayoutMixin<VideoList> {
     );
   }
 
-  getVideos() {
+  getVideos(BuildContext? context) {
     if (widget.getVideos != null) {
       widget.getVideos!().then((List<VideoInList> videos) {
+        if (context != null) {
+          for (var v in videos) {
+            precacheImage(NetworkImage(v.getBestThumbnail()?.url ?? ''), context);
+          }
+        }
+
         setState(() {
           hasMethod = true;
           this.videos = videos;
@@ -145,7 +173,7 @@ class VideoListState extends State<VideoList> with AfterLayoutMixin<VideoList> {
   @override
   FutureOr<void> afterFirstLayout(BuildContext context) {
     if (widget.getVideos != null) {
-      getVideos();
+      getVideos(context);
     } else if (widget.videos != null) {
       setState(() {
         loading = false;
