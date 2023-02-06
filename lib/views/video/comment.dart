@@ -50,14 +50,52 @@ class SingleCommentViewState extends State<SingleCommentView> {
                   comment.author,
                   style: TextStyle(color: colors.secondary),
                 ),
+                Row(
+                  children: [
+                    Visibility(
+                      visible: comment.creatorHeart != null,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8.0),
+                        child: Container(
+                          decoration: BoxDecoration(color: colors.primaryContainer, borderRadius: BorderRadius.circular(20)),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8),
+                            child: Row(
+                              children: [
+                                const Icon(
+                                  Icons.favorite,
+                                  color: Colors.red,
+                                  size: 15,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                                  child: Image(
+                                    image: NetworkImage(
+                                      comment.creatorHeart?.creatorThumbnail ?? '',
+                                    ),
+                                    width: 15,
+                                    height: 15,
+                                  ),
+                                ),
+                                Text(comment.creatorHeart?.creatorName ?? '')
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
                 Text(comment.content),
                 Row(
                   children: [
                     Expanded(child: Text(comment.publishedText)),
-                    Visibility(visible: comment.likeCount > 0, child: Padding(
-                      padding: const EdgeInsets.only(right: 4.0),
-                      child: Icon(Icons.thumb_up,size: 15, color: colors.secondary),
-                    )),
+                    Visibility(
+                        visible: comment.likeCount > 0,
+                        child: Padding(
+                          padding: const EdgeInsets.only(right: 4.0),
+                          child: Icon(Icons.thumb_up, size: 15, color: colors.secondary),
+                        )),
                     Visibility(visible: comment.likeCount > 0, child: Text(comment.likeCount.toString()))
                   ],
                 ),
