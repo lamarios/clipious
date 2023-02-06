@@ -6,7 +6,7 @@ import 'models/db/server.dart';
 import 'objectbox.g.dart'; // created by `flutter pub run build_runner build`
 
 const SELECTED_SERVER = 'selected-server';
-const USE_SPONSORBLOCK =  'use-sponsor-block';
+const USE_SPONSORBLOCK = 'use-sponsor-block';
 
 class DbClient {
   /// The Store of this app.
@@ -38,8 +38,19 @@ class DbClient {
     return store.box<Server>().getAll();
   }
 
+  deleteServer(Server server) {
+    store.box<Server>().remove(server.id);
+  }
+
   saveSetting(SettingsValue setting) {
     store.box<SettingsValue>().put(setting, mode: PutMode.put);
+  }
+
+  deleteSetting(String name) {
+    SettingsValue? settings = getSettings(name);
+    if (settings != null) {
+      store.box<SettingsValue>().remove(settings.id);
+    }
   }
 
   SettingsValue? getSettings(String name) {
@@ -48,7 +59,6 @@ class DbClient {
 
   Server getCurrentlySelectedServer() {
     SettingsValue? value = getSettings(SELECTED_SERVER);
-    print('${value?.value ?? 'nope'}');
     if (value != null) {
       Server? server = getServer(value.value);
       return server ?? Server(value.value);

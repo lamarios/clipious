@@ -9,6 +9,15 @@ import '../globals.dart';
 import '../models/db/server.dart';
 import 'settings/manageServers.dart';
 
+settingsTheme(ColorScheme colorScheme) => SettingsThemeData(
+    settingsSectionBackground: colorScheme.background,
+    settingsListBackground: colorScheme.background,
+    titleTextColor: colorScheme.primary,
+    dividerColor: colorScheme.onBackground,
+    tileDescriptionTextColor: colorScheme.secondary,
+    leadingIconsColor: colorScheme.secondary,
+tileHighlightColor: colorScheme.secondaryContainer);
+
 class Settings extends StatefulWidget {
   const Settings({super.key});
 
@@ -21,6 +30,16 @@ class SettingsState extends State<Settings> {
   Server currentServer = db.getCurrentlySelectedServer();
   bool sponsorBlock = db.getSettings(USE_SPONSORBLOCK)?.value == 'true';
 
+  @override
+  initState(){
+    super.initState();
+    FBroadcast.instance().register(BROADCAST_SERVER_CHANGED, (value, callback) {
+      setState(() {
+        currentServer = db.getCurrentlySelectedServer();
+      });
+    });
+
+  }
   toggleSponsorBlock(bool value) {
     db.saveSetting(SettingsValue(USE_SPONSORBLOCK, value.toString()));
     setState(() {
@@ -34,7 +53,7 @@ class SettingsState extends State<Settings> {
 
   selectServer(BuildContext context) {
     List<String> servers = List.of(PUBLIC_SERVERS, growable: true);
-    servers.addAll(db.getServers().where((s) => PUBLIC_SERVERS.lastIndexWhere((s2) => s2 == s.url) == 0).map((e) => e.url).toList());
+    servers.addAll(db.getServers().where((s) => PUBLIC_SERVERS.lastIndexWhere((s2) => s2 == s.url) == -1).map((e) => e.url).toList());
 
     SelectDialog.showModal<String>(
       context,
@@ -46,7 +65,6 @@ class SettingsState extends State<Settings> {
         FBroadcast.instance().broadcast(BROADCAST_SERVER_CHANGED);
         Server newServer = db.getCurrentlySelectedServer();
 
-        print('Selected server $selected - ${newServer.url}');
         setState(() {
           currentServer = newServer;
         });
@@ -57,6 +75,8 @@ class SettingsState extends State<Settings> {
   @override
   Widget build(BuildContext context) {
     ColorScheme colorScheme = Theme.of(context).colorScheme;
+    SettingsThemeData theme = settingsTheme(colorScheme);
+
     return Scaffold(
         appBar: AppBar(
           title: const Text('Settings'),
@@ -65,6 +85,8 @@ class SettingsState extends State<Settings> {
         body: SafeArea(
             bottom: false,
             child: SettingsList(
+              lightTheme: theme,
+              darkTheme: theme,
               sections: [
                 SettingsSection(title: Text('Servers'), tiles: [
                   SettingsTile.navigation(
@@ -78,7 +100,7 @@ class SettingsState extends State<Settings> {
                     onPressed: (context) => selectServer(context),
                   )
                 ]),
-                SettingsSection(title: Text('SponsorBlock'), tiles: [SettingsTile.switchTile(initialValue: sponsorBlock, onToggle: toggleSponsorBlock, title: Text('Use SponsorBlock'))])
+                SettingsSection(title: Text('SponsorBlock'), tiles: [SettingsTile.switchTile(initialValue: sponsorBlock, onToggle: toggleSponsorBlock, title: Text('Use SponsorBlock'), description: Text('Skip sponsor segments submitted by the community'),)])
               ],
             )));
   }

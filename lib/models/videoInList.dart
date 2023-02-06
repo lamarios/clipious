@@ -15,9 +15,10 @@ class VideoInList {
   String authorUrl;
 
   int published;
+  String publishedText;
   List<VideoThumbnail> videoThumbnails;
 
-  VideoInList(this.title, this.videoId, this.lengthSeconds, this.viewCount, this.author, this.authorId, this.authorUrl, this.published, this.videoThumbnails);
+  VideoInList(this.title,  this.videoId, this.lengthSeconds, this.viewCount, this.author, this.authorId, this.authorUrl, this.published, this.publishedText, this.videoThumbnails);
 
   VideoThumbnail? getBestThumbnail() {
     if (videoThumbnails != null && videoThumbnails.length > 0) {
@@ -30,8 +31,6 @@ class VideoInList {
       return null;
     }
   }
-
-
 
   factory VideoInList.fromJson(Map<String, dynamic> json) => _$VideoInListFromJson(json);
 

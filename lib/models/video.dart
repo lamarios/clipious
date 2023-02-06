@@ -32,6 +32,7 @@ class Video {
   String genreUrl;
   String author;
   String authorUrl;
+  String authorId;
 
   List<AuthorThumbnail> authorThumbnails;
   String subCountText;
@@ -81,6 +82,7 @@ class Video {
       this.hlsUrl,
       this.adaptiveFormats,
       this.formatStreams,
+      this.authorId,
       this.captions,
       this.recommendedVideos);
 
@@ -90,11 +92,7 @@ class Video {
 
   VideoThumbnail? getBestThumbnail() {
     if (videoThumbnails.isNotEmpty) {
-      videoThumbnails.sort((a, b) {
-        return (b.width * b.height).compareTo(a.width * a.height);
-      });
-
-      return videoThumbnails[0];
+      return videoThumbnails.firstWhere((element) => element.quality=='maxres');
     } else {
       return null;
     }

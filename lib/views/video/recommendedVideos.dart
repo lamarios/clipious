@@ -14,7 +14,7 @@ class RecommendedVideos extends StatelessWidget {
   Widget build(BuildContext context) {
     return VideoList(title: 'Recommended', getVideos: ()async{
 
-      return video.recommendedVideos.map((e) => VideoInList(e.title, e.videoId, e.lengthSeconds, 0, e.author, '', 'authorUrl', 0, e.videoThumbnails)).toList();
+      return video.recommendedVideos.map((e) => VideoInList(e.title, e.videoId, e.lengthSeconds, 0, e.author, '', 'authorUrl', 0, '', e.videoThumbnails)).toList();
     });
   }
 

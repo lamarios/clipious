@@ -2,6 +2,7 @@ import 'dart:collection';
 
 import 'package:better_player/better_player.dart';
 import 'package:invidious/database.dart';
+import 'package:invidious/main.dart';
 import 'package:invidious/utils.dart';
 import 'package:invidious/views/video/info.dart';
 import 'package:invidious/views/video/recommendedVideos.dart';
@@ -33,22 +34,24 @@ class VideoViewState extends State<VideoView> with AfterLayoutMixin<VideoView> {
   bool showControls = false;
   double progress = 0;
   String progressText = '';
+  bool isSubscribed = false;
 
   // VideoPlayerController? controller;
 
   // ChewieController? chewieController;
-  BetterPlayerController? betterPlayerController;
+  BetterPlayerController? videoController;
   int selectedIndex = 0;
   bool loadingStream = false;
   bool useSponsorBlock = db.getSettings(USE_SPONSORBLOCK)?.value == 'true';
-  Queue<List<Duration>> sponsorSegments = Queue.of([]);
+  Queue<List<int>> sponsorSegments = Queue.of([]);
 
   @override
   dispose() async {
     super.dispose();
     Wakelock.disable();
-    if (betterPlayerController != null) {
-      betterPlayerController!.dispose();
+    if (videoController != null) {
+      videoController!.removeEventsListener(onVideoListener);
+      videoController!.dispose();
     }
 /*
     if (controller != null) {
@@ -66,13 +69,14 @@ class VideoViewState extends State<VideoView> with AfterLayoutMixin<VideoView> {
       loadingStream = true;
     });
     ColorScheme colorScheme = Theme.of(context).colorScheme;
-    BetterPlayerDataSource betterPlayerDataSource = BetterPlayerDataSource(BetterPlayerDataSourceType.network, video!.dashUrl, videoFormat: BetterPlayerVideoFormat.dash);
-    betterPlayerController = BetterPlayerController(
-        const BetterPlayerConfiguration(
-          autoPlay: true,allowedScreenSleep: false,
+    BetterPlayerDataSource betterPlayerDataSource = BetterPlayerDataSource(
+      BetterPlayerDataSourceType.network,
+      video!.dashUrl,
+      videoFormat: BetterPlayerVideoFormat.dash,
+    );
+    videoController = BetterPlayerController(const BetterPlayerConfiguration(autoPlay: true, allowedScreenSleep: false, fit: BoxFit.contain), betterPlayerDataSource: betterPlayerDataSource);
 
-        ),
-        betterPlayerDataSource: betterPlayerDataSource);
+    videoController!.addEventsListener(onVideoListener);
     setState(() {
       playingVideo = true;
       loadingStream = false;
@@ -100,28 +104,37 @@ class VideoViewState extends State<VideoView> with AfterLayoutMixin<VideoView> {
 */
   }
 
-/*
-  onVideoListener() {
-    if (sponsorSegments.isNotEmpty) {
-      // print('we have segments');
-      Duration currentPosition = controller!.value.position;
+  onVideoListener(BetterPlayerEvent event) {
+    if (event.betterPlayerEventType == BetterPlayerEventType.progress && sponsorSegments.isNotEmpty) {
+      int currentPosition = (event.parameters?['progress'] as Duration).inMilliseconds;
 
-      if (currentPosition.inMilliseconds % 1000 == 0) {
-        EasyDebounce.debounce('sponsor-block', const Duration(milliseconds: 100), () {
-          print('CHECKING');
-          List<Duration> nextSegment = sponsorSegments.elementAt(0);
-          bool matched = nextSegment[0].compareTo(currentPosition) <= -1 && nextSegment[1].compareTo(currentPosition) >= 1;
-          if (matched) {
-            controller!.seekTo(Duration(seconds: nextSegment[1].inSeconds + 1));
-            setState(() {
-              sponsorSegments.removeFirst();
-            });
-          }
+      List<int> nextSegment = sponsorSegments.elementAt(0);
+      bool matched = nextSegment[0].compareTo(currentPosition) <= -1 && nextSegment[1].compareTo(currentPosition) >= 1;
+      if (matched) {
+        final ScaffoldMessengerState? scaffold = scaffoldKey.currentState;
+        scaffold?.showSnackBar(const SnackBar(
+          content: Text('Sponsor skipped'),
+          duration: Duration(seconds: 1),
+        ));
+        videoController!.seekTo(Duration(milliseconds: nextSegment[1] + 1000));
+        setState(() {
+          sponsorSegments.removeFirst();
         });
       }
     }
   }
-*/
+
+  toggleSubscription() async {
+    if (this.isSubscribed) {
+      await service.unSubscribe(video!.authorId);
+    } else {
+      await service.subscribe(video!.authorId);
+    }
+    bool isSubscribed = await service.isSubscribedToChannel(video!.authorId);
+    setState(() {
+      this.isSubscribed = isSubscribed;
+    });
+  }
 
 /*
   togglePlayPause() {
@@ -148,6 +161,8 @@ class VideoViewState extends State<VideoView> with AfterLayoutMixin<VideoView> {
     return Scaffold(
       backgroundColor: colorScheme.background,
       bottomNavigationBar: NavigationBar(
+        labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
+        elevation: 0,
         onDestinationSelected: (int index) {
           print(index);
           setState(() {
@@ -163,24 +178,24 @@ class VideoViewState extends State<VideoView> with AfterLayoutMixin<VideoView> {
       ),
       body: SafeArea(
         bottom: false,
-        child: Container(
-          color: colorScheme.background,
-          width: double.infinity,
-          height: double.infinity,
-          child: AnimatedSwitcher(
-              duration: animationDuration,
-              child: loadingVideo
-                  ? const CircularProgressIndicator()
-                  : Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          AspectRatio(
-                            aspectRatio: 16 / 9,
-                            child: AnimatedContainer(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Container(
+            color: colorScheme.background,
+            width: double.infinity,
+            height: double.infinity,
+            child: AnimatedSwitcher(
+                duration: animationDuration,
+                child: loadingVideo
+                    ? const CircularProgressIndicator()
+                    : Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            AnimatedContainer(
                               decoration: BoxDecoration(
-                                  color: colorScheme.onSurface,
+                                  color: colorScheme.secondaryContainer,
                                   borderRadius: BorderRadius.circular(10),
                                   image: DecorationImage(
                                     image: NetworkImage(video?.getBestThumbnail()?.url ?? ''),
@@ -189,51 +204,75 @@ class VideoViewState extends State<VideoView> with AfterLayoutMixin<VideoView> {
                               width: double.infinity,
                               alignment: Alignment.center,
                               duration: animationDuration,
-                              child: AnimatedSwitcher(
-                                  duration: animationDuration,
-                                  child: !playingVideo
-                                      ? loadingStream
-                                          ? const CircularProgressIndicator()
-                                          : GestureDetector(
-                                              key: const ValueKey('nt-playing'),
-                                              onTap: () => playVideo(context),
-                                              child: Icon(
-                                                Icons.play_arrow,
-                                                color: colorScheme.primary,
-                                                size: 100,
-                                              ),
-                                            )
-                                      : BetterPlayer(
-                                          controller: betterPlayerController!,
-                                        )),
-                            ),
-                          ),
-                          Text(
-                            video?.title ?? '',
-                            style: TextStyle(color: colorScheme.primary, fontWeight: FontWeight.bold, fontSize: 20),
-                            textAlign: TextAlign.start,
-                          ),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(4.0),
-                                child: Container(
-                                  width: 40,
-                                  height: 40,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20),
-                                      color: colorScheme.onSurface,
-                                      image: DecorationImage(image: NetworkImage(video?.getBestAuthorThumbnail()?.url ?? ''), fit: BoxFit.cover)),
-                                ),
+                              child: AspectRatio(
+                                aspectRatio: 16 / 9,
+                                child: AnimatedSwitcher(
+                                    duration: animationDuration,
+                                    child: !playingVideo
+                                        ? loadingStream
+                                            ? const CircularProgressIndicator()
+                                            : GestureDetector(
+                                                key: const ValueKey('nt-playing'),
+                                                onTap: () => playVideo(context),
+                                                child: Icon(
+                                                  Icons.play_arrow,
+                                                  color: colorScheme.primary,
+                                                  size: 100,
+                                                ),
+                                              )
+                                        : BetterPlayer(
+                                            controller: videoController!,
+                                          )),
                               ),
-                              Text(video!.author)
-                            ],
-                          ),
-                          Expanded(child: Padding(padding: EdgeInsets.only(top: 10), child: <Widget>[VideoInfo(video: video!), Text('comments'), RecommendedVideos(video: video!)][selectedIndex]))
-                        ],
-                      ),
-                    )),
+                            ),
+                            Text(
+                              video?.title ?? '',
+                              style: TextStyle(color: colorScheme.primary, fontWeight: FontWeight.bold, fontSize: 20),
+                              textAlign: TextAlign.start,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 8.0),
+                              child: Text(video!.publishedText),
+                            ),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(4.0),
+                                  child: Container(
+                                    width: 40,
+                                    height: 40,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(20),
+                                        color: colorScheme.onSurface,
+                                        image: DecorationImage(image: NetworkImage(video?.getBestAuthorThumbnail()?.url ?? ''), fit: BoxFit.cover)),
+                                  ),
+                                ),
+                                Expanded(child: Text(video!.author)),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: SizedBox(
+                                      height: 25,
+                                      child: FilledButton.tonal(
+                                        onPressed: toggleSubscription,
+                                        child: Row(
+                                          children: [
+                                            Icon(isSubscribed ? Icons.done : Icons.add),
+                                            Padding(
+                                              padding: const EdgeInsets.only(left: 8.0),
+                                              child: Text(isSubscribed ? 'Subscribed' : 'Subscribe'),
+                                            ),
+                                          ],
+                                        ),
+                                      )),
+                                )
+                              ],
+                            ),
+                            Expanded(child: Padding(padding: EdgeInsets.only(top: 10), child: <Widget>[VideoInfo(video: video!), Text('comments'), RecommendedVideos(video: video!)][selectedIndex]))
+                          ],
+                        ),
+                      )),
+          ),
         ),
       ),
     );
@@ -242,21 +281,21 @@ class VideoViewState extends State<VideoView> with AfterLayoutMixin<VideoView> {
   @override
   Future<FutureOr<void>> afterFirstLayout(BuildContext context) async {
     Video video = await service.getVideo(widget.videoId);
-
+    bool isSubscribed = await service.isSubscribedToChannel(video.authorId);
     setState(() {
       this.video = video;
-      print(video.dashUrl);
       loadingVideo = false;
+      this.isSubscribed = isSubscribed;
     });
 
     if (useSponsorBlock) {
       List<SponsorSegment> sponsorSegments = await service.getSponsorSegments(widget.videoId);
-      Queue<List<Duration>> segments = Queue.from(sponsorSegments.map((e) {
+      Queue<List<int>> segments = Queue.from(sponsorSegments.map((e) {
         Duration start = Duration(seconds: e.segment[0].floor());
         Duration end = Duration(seconds: e.segment[1].floor());
-        List<Duration> segment = [];
-        segment.add(start);
-        segment.add(end);
+        List<int> segment = [];
+        segment.add(start.inMilliseconds);
+        segment.add(end.inMilliseconds);
         return segment;
       }).toList());
 

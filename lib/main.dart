@@ -15,6 +15,8 @@ import 'database.dart';
 
 const brandColor = Color(0xFF1E88E5);
 
+final scaffoldKey = GlobalKey<ScaffoldMessengerState>();
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   db = await DbClient.create();
@@ -37,13 +39,13 @@ class MyApp extends StatelessWidget {
         lightColorScheme = lightDynamic.harmonized();
         // (Optional) Customize the scheme as desired. For example, one might
         // want to use a brand color to override the dynamic [ColorScheme.secondary].
-        lightColorScheme = lightColorScheme.copyWith(secondary: brandColor);
+        // lightColorScheme = lightColorScheme.copyWith(secondary: brandColor);
         // (Optional) If applicable, harmonize custom colors.
         // lightCustomColors = lightCustomColors.harmonized(lightColorScheme);
 
         // Repeat for the dark color scheme.
         darkColorScheme = darkDynamic.harmonized();
-        darkColorScheme = darkColorScheme.copyWith(secondary: brandColor);
+        // darkColorScheme = darkColorScheme.copyWith(secondary: brandColor);
         // darkCustomColors = darkCustomColors.harmonized(darkColorScheme);
 
         // _isDemoUsingDynamicColors = true; // ignore, only for demo purposes
@@ -60,8 +62,10 @@ class MyApp extends StatelessWidget {
       var brightness = SchedulerBinding.instance.platformDispatcher.platformBrightness;
       ColorScheme colorScheme = brightness == Brightness.dark ? darkColorScheme : lightColorScheme;
       SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(statusBarColor: colorScheme.background));
+
       return MaterialApp(
-          title: 'Impuc',
+          scaffoldMessengerKey: scaffoldKey,
+          title: 'Ticnoaf',
           theme: ThemeData(
             useMaterial3: true,
             colorScheme: lightColorScheme,
@@ -115,6 +119,8 @@ class HomeState extends State<Home> {
     return Scaffold(
         backgroundColor: colorScheme.background,
         bottomNavigationBar: NavigationBar(
+          labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
+          elevation: 0,
           onDestinationSelected: (int index) {
             print(index);
             setState(() {

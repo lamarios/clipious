@@ -49,6 +49,7 @@ Video _$VideoFromJson(Map<String, dynamic> json) => Video(
       (json['formatStreams'] as List<dynamic>)
           .map((e) => FormatStream.fromJson(e as Map<String, dynamic>))
           .toList(),
+      json['authorId'] as String,
       (json['captions'] as List<dynamic>)
           .map((e) => Caption.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -78,6 +79,7 @@ Map<String, dynamic> _$VideoToJson(Video instance) => <String, dynamic>{
       'genreUrl': instance.genreUrl,
       'author': instance.author,
       'authorUrl': instance.authorUrl,
+      'authorId': instance.authorId,
       'authorThumbnails': instance.authorThumbnails,
       'subCountText': instance.subCountText,
       'lengthSeconds': instance.lengthSeconds,

@@ -9,8 +9,7 @@ const PAULFLIX = 'https://youtube.paulflix.tv';
 
 const PUBLIC_SERVERS = [
   "https://vid.puffyan.us/",
-  "https://yt.artemislena.eu/",
-  "https://youtube.paulflix.tv"
+  "https://yt.artemislena.eu/"
 ];
 const BROADCAST_SERVER_CHANGED = 'server-changed';
 
