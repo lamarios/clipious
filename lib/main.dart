@@ -61,7 +61,7 @@ class MyApp extends StatelessWidget {
       }
       var brightness = SchedulerBinding.instance.platformDispatcher.platformBrightness;
       ColorScheme colorScheme = brightness == Brightness.dark ? darkColorScheme : lightColorScheme;
-      SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(statusBarColor: colorScheme.background));
+      SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(statusBarColor: colorScheme.background, systemNavigationBarColor: colorScheme.background));
 
       return MaterialApp(
           scaffoldMessengerKey: scaffoldKey,
