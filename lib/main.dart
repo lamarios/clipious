@@ -1,18 +1,14 @@
-import 'package:easy_debounce/easy_debounce.dart';
-import 'package:easy_search_bar/easy_search_bar.dart';
+import 'package:dynamic_color/dynamic_color.dart';
 import 'package:fbroadcast/fbroadcast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/views/popular.dart';
 import 'package:invidious/views/search.dart';
 import 'package:invidious/views/settings.dart';
 import 'package:invidious/views/subscriptions.dart';
 import 'package:invidious/views/trending.dart';
-import 'package:invidious/views/video.dart';
-import 'package:dynamic_color/dynamic_color.dart';
 
 import 'database.dart';
 
@@ -66,7 +62,7 @@ class MyApp extends StatelessWidget {
       }
       var brightness = SchedulerBinding.instance.platformDispatcher.platformBrightness;
       ColorScheme colorScheme = brightness == Brightness.dark ? darkColorScheme : lightColorScheme;
-      SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(systemNavigationBarColor: colorScheme.background));
+      SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(systemNavigationBarColor: colorScheme.background, statusBarColor: colorScheme.background));
 
       return MaterialApp(
           scaffoldMessengerKey: scaffoldKey,
@@ -91,9 +87,6 @@ class Home extends StatefulWidget {
 class HomeState extends State<Home> {
   int selectedIndex = 0;
   bool isLoggedIn = db.isLoggedInToCurrentServer();
-  bool showSearchResults = false;
-  String searchQuery = '';
-  TextEditingController searchController = TextEditingController();
 
   @override
   initState() {
@@ -102,19 +95,6 @@ class HomeState extends State<Home> {
       setState(() {
         selectedIndex = 0;
         isLoggedIn = db.isLoggedInToCurrentServer();
-      });
-    });
-  }
-
-  Future<List<String>> searchSuggestions(String query) async {
-    return (await service.getSearchSuggestion(query)).suggestions;
-  }
-
-  search(String query) {
-    EasyDebounce.debounce('search', const Duration(milliseconds: 500), () {
-      setState(() {
-        searchQuery = query;
-        showSearchResults = true;
       });
     });
   }
@@ -135,113 +115,51 @@ class HomeState extends State<Home> {
     if (isLoggedIn) {
       navigationWidgets.add(NavigationDestination(icon: const Icon(Icons.subscriptions), label: navigationLabels[2]));
     }
-    if (showSearchResults) {
-      navigationWidgets.add(NavigationDestination(icon: const Icon(Icons.search), label: navigationLabels[3]));
-    }
-
     double statusHeight = MediaQuery.of(context).viewPadding.top;
 
     return Scaffold(
         backgroundColor: colorScheme.background,
-        bottomNavigationBar: showSearchResults
-            ? null
-            : NavigationBar(
-                labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
-                elevation: 0,
-                onDestinationSelected: (int index) {
-                  setState(() {
-                    showSearchResults = false;
-                    selectedIndex = index;
-                  });
-                },
-                selectedIndex: selectedIndex,
-                destinations: navigationWidgets,
-              ),
-        appBar: showSearchResults
-            ? PreferredSize(
-                preferredSize: Size(double.infinity, statusHeight + (AppBarTheme.of(context).toolbarHeight ?? 100)),
-                child: Container(
-                  color: colorScheme.background,
-                  // color: Colors.pink,
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 12, right: 20, top: 25.0, bottom: 7),
-                    child: Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(right: 15.0),
-                          child: GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  showSearchResults = false;
-                                });
-                              },
-                              child: Icon(
-                                Icons.arrow_back,
-                                color: colorScheme.secondary,
-                              )),
-                        ),
-                        Expanded(
-                          child: TypeAheadField(
-                            textFieldConfiguration: TextFieldConfiguration(
-                                controller: searchController,
-                                decoration: InputDecoration(
-                                    icon: Icon(
-                                  Icons.search,
-                                  color: colorScheme.secondary,
-                                )),
-                                onSubmitted: search,
-                                onChanged: search),
-                            suggestionsCallback: searchSuggestions,
-                            itemBuilder: (BuildContext context, String itemData) => ListTile(
-                              title: Text(itemData),
-                            ),
-                            onSuggestionSelected: (String? suggestion) {
-                              searchController.text = suggestion ?? '';
-                              if (suggestion != null) {
-                                search(suggestion);
-                              }
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ))
-            : AppBar(
-                title: Text(showSearchResults ? 'Search' : navigationLabels[selectedIndex]),
-                scrolledUnderElevation: 0,
-                // backgroundColor: Colors.pink,
+        bottomNavigationBar: NavigationBar(
+          labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
+          elevation: 0,
+          onDestinationSelected: (int index) {
+            setState(() {
+              selectedIndex = index;
+            });
+          },
+          selectedIndex: selectedIndex,
+          destinations: navigationWidgets,
+        ),
+        appBar: AppBar(
+          title: Text(navigationLabels[selectedIndex]),
+          scrolledUnderElevation: 0,
+          // backgroundColor: Colors.pink,
           backgroundColor: colorScheme.background,
-                actions: [
-                  GestureDetector(
-                    onTap: () {
-                      if (searchQuery.isNotEmpty) {
-                        search(searchQuery);
-                      }
-                      setState(() {
-                        showSearchResults = true;
-                      });
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Icon(
-                        Icons.search,
-                        color: colorScheme.secondary,
-                      ),
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () => openSettings(context),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Icon(
-                        Icons.settings,
-                        color: colorScheme.secondary,
-                      ),
-                    ),
-                  ),
-                ],
+          actions: [
+            GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const Search()));
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Icon(
+                  Icons.search,
+                  color: colorScheme.secondary,
+                ),
               ),
+            ),
+            GestureDetector(
+              onTap: () => openSettings(context),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Icon(
+                  Icons.settings,
+                  color: colorScheme.secondary,
+                ),
+              ),
+            ),
+          ],
+        ),
 /*
         appBar: EasySearchBar(
           searchBackgroundColor: colorScheme.background,
@@ -273,22 +191,21 @@ class HomeState extends State<Home> {
         ),
 */
         body: SafeArea(
+          bottom: true,maintainBottomViewPadding: false,
             child: Stack(children: [
           AnimatedSwitcher(
             duration: animationDuration,
-            child: showSearchResults
-                ? Search(query: searchQuery)
-                : <Widget>[
-                    const Popular(
-                      key: ValueKey(0),
-                    ),
-                    const Trending(
-                      key: ValueKey(1),
-                    ),
-                    const Subscriptions(
-                      key: ValueKey(2),
-                    )
-                  ][selectedIndex],
+            child: <Widget>[
+              const Popular(
+                key: ValueKey(0),
+              ),
+              const Trending(
+                key: ValueKey(1),
+              ),
+              const Subscriptions(
+                key: ValueKey(2),
+              )
+            ][selectedIndex],
             transitionBuilder: (Widget child, Animation<double> animation) {
               return FadeTransition(opacity: animation, child: child);
             },

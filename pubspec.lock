@@ -225,15 +225,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.3"
-  easy_search_bar:
-    dependency: "direct main"
-    description:
-      path: "."
-      ref: HEAD
-      resolved-ref: "477a8a0a588ea41bc0bd91be3bd7b391e89ea38c"
-      url: "https://github.com/lamarios/flutter_easy_search_bar"
-    source: git
-    version: "2.4.2"
   fake_async:
     dependency: transitive
     description:

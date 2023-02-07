@@ -206,23 +206,24 @@ class ManageServerState extends State<ManageServers> with AfterLayoutMixin<Manag
               darkTheme: theme,
               sections: [
                 SettingsSection(
-                    title: Text('Public servers'),
-                    tiles: PUBLIC_SERVERS
-                        .map((s) => SettingsTile(
-                              title: Text(s),
-                              value: isLoggedInToServer(s) ? Text('Logged in') : Text('Not logged in, tap to log in'),
-                              onPressed: (context) => showServerActions(context, Server(s)),
-                            ))
-                        .toList()),
-                SettingsSection(
+
                     title: Text('Custom servers'),
-                    tiles: dbServers
+                    tiles: dbServers.length > 0 ? dbServers
                         .map((s) => SettingsTile(
                               title: Text(s.url),
                               value: s.authToken?.isNotEmpty ?? false ? Text('Logged in') : Text('Not logged in, tap to log in'),
                               onPressed: (context) => showServerActions(context, s),
                             ))
-                        .toList())
+                        .toList() : [SettingsTile(title: const Text('Use the + button to add your own servers', style: TextStyle(fontSize: 12),), enabled: false,)]),
+                SettingsSection(
+                    title: Text('Public servers'),
+                    tiles: PUBLIC_SERVERS
+                        .map((s) => SettingsTile(
+                      title: Text(s),
+                      value: isLoggedInToServer(s) ? Text('Logged in') : Text('Not logged in, tap to log in'),
+                      onPressed: (context) => showServerActions(context, Server(s)),
+                    ))
+                        .toList()),
               ],
             )));
   }
