@@ -1,23 +1,20 @@
+// import 'package:video_player/video_player.dart';
+import 'dart:async';
 import 'dart:collection';
 
+import 'package:after_layout/after_layout.dart';
 import 'package:better_player/better_player.dart';
+import 'package:flutter/material.dart';
 import 'package:invidious/database.dart';
+import 'package:invidious/globals.dart';
 import 'package:invidious/main.dart';
-import 'package:invidious/utils.dart';
 import 'package:invidious/views/video/comments.dart';
 import 'package:invidious/views/video/info.dart';
 import 'package:invidious/views/video/recommendedVideos.dart';
 
-// import 'package:video_player/video_player.dart';
-import 'dart:async';
-import 'package:easy_debounce/easy_debounce.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:after_layout/after_layout.dart';
-import 'package:flutter/material.dart';
-import 'package:invidious/globals.dart';
 import '../models/sponsorSegment.dart';
 import '../models/video.dart';
-import 'package:wakelock/wakelock.dart';
+import '../utils.dart';
 
 class VideoView extends StatefulWidget {
   final String videoId;
@@ -33,9 +30,11 @@ class VideoViewState extends State<VideoView> with AfterLayoutMixin<VideoView> {
   bool loadingVideo = true;
   bool playingVideo = false;
   bool showControls = false;
+  bool elevateThumbnail = false;
   double progress = 0;
   String progressText = '';
   bool isSubscribed = false;
+  ScrollController scrollController = ScrollController();
 
   // VideoPlayerController? controller;
 
@@ -47,22 +46,30 @@ class VideoViewState extends State<VideoView> with AfterLayoutMixin<VideoView> {
   Queue<List<int>> sponsorSegments = Queue.of([]);
 
   @override
+  void initState() {
+    super.initState();
+    scrollController.addListener(onScroll);
+  }
+
+  @override
   dispose() async {
     super.dispose();
-    Wakelock.disable();
     if (videoController != null) {
       videoController!.removeEventsListener(onVideoListener);
       videoController!.dispose();
     }
-/*
-    if (controller != null) {
-      if (sponsorSegments.isNotEmpty) {
-        controller!.removeListener(onVideoListener);
-      }
-      await controller!.dispose();
-      // chewieController!.dispose();
+  }
+
+  onScroll() {
+    if (scrollController.offset > 0 && !elevateThumbnail) {
+      setState(() {
+        elevateThumbnail = true;
+      });
+    } else if (scrollController.offset == 0 && elevateThumbnail) {
+      setState(() {
+        elevateThumbnail = false;
+      });
     }
-*/
   }
 
   playVideo(BuildContext context) {
@@ -165,8 +172,8 @@ class VideoViewState extends State<VideoView> with AfterLayoutMixin<VideoView> {
         labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
         elevation: 0,
         onDestinationSelected: (int index) {
-          print(index);
           setState(() {
+            scrollController.animateTo(0, duration: animationDuration, curve: Curves.easeInOutQuad);
             selectedIndex = index;
           });
         },
@@ -194,82 +201,77 @@ class VideoViewState extends State<VideoView> with AfterLayoutMixin<VideoView> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            AnimatedContainer(
-                              decoration: BoxDecoration(
-                                  color: colorScheme.secondaryContainer,
-                                  borderRadius: BorderRadius.circular(10),
-                                  image: DecorationImage(
-                                    image: NetworkImage(video?.getBestThumbnail()?.url ?? ''),
-                                    fit: BoxFit.cover,
-                                  )),
-                              width: double.infinity,
-                              alignment: Alignment.center,
+                            AnimatedScale(
+                              scale: elevateThumbnail ? 1.01 : 1.0,
                               duration: animationDuration,
-                              child: AspectRatio(
-                                aspectRatio: 16 / 9,
-                                child: AnimatedSwitcher(
-                                    duration: animationDuration,
-                                    child: !playingVideo
-                                        ? loadingStream
-                                            ? const CircularProgressIndicator()
-                                            : GestureDetector(
-                                                key: const ValueKey('nt-playing'),
-                                                onTap: () => playVideo(context),
-                                                child: Icon(
-                                                  Icons.play_arrow,
-                                                  color: colorScheme.primary,
-                                                  size: 100,
-                                                ),
-                                              )
-                                        : BetterPlayer(
-                                            controller: videoController!,
-                                          )),
+                              curve: Curves.easeInOutQuad,
+                              child: AnimatedContainer(
+                                decoration: BoxDecoration(
+                                    color: colorScheme.secondaryContainer,
+                                    borderRadius: BorderRadius.circular(10),
+                                    boxShadow: elevateThumbnail ? const <BoxShadow>[BoxShadow(color: Colors.black54, blurRadius: 15.0, offset: Offset(0.0, 0.75))] : null,
+                                    image: DecorationImage(
+                                      image: NetworkImage(video?.getBestThumbnail()?.url ?? ''),
+                                      fit: BoxFit.cover,
+                                    )),
+                                width: double.infinity,
+                                alignment: Alignment.center,
+                                duration: animationDuration,
+                                child: AspectRatio(
+                                  aspectRatio: 16 / 9,
+                                  child: AnimatedSwitcher(
+                                      duration: animationDuration,
+                                      child: !playingVideo
+                                          ? loadingStream
+                                              ? const CircularProgressIndicator()
+                                              : GestureDetector(
+                                                  key: const ValueKey('nt-playing'),
+                                                  onTap: () => playVideo(context),
+                                                  child: Icon(
+                                                    Icons.play_arrow,
+                                                    color: colorScheme.primary,
+                                                    size: 100,
+                                                  ),
+                                                )
+                                          : BetterPlayer(
+                                              controller: videoController!,
+                                            )),
+                                ),
                               ),
                             ),
-                            Text(
-                              video?.title ?? '',
-                              style: TextStyle(color: colorScheme.primary, fontWeight: FontWeight.bold, fontSize: 20),
-                              textAlign: TextAlign.start,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(bottom: 8.0),
-                              child: Text(video!.publishedText),
-                            ),
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(4.0),
-                                  child: Container(
-                                    width: 40,
-                                    height: 40,
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(20),
-                                        color: colorScheme.onSurface,
-                                        image: DecorationImage(image: NetworkImage(video?.getBestAuthorThumbnail()?.url ?? ''), fit: BoxFit.cover)),
-                                  ),
-                                ),
-                                Expanded(child: Text(video!.author)),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: SizedBox(
-                                      height: 25,
-                                      child: FilledButton.tonal(
-                                        onPressed: toggleSubscription,
-                                        child: Row(
-                                          children: [
-                                            Icon(isSubscribed ? Icons.done : Icons.add),
-                                            Padding(
-                                              padding: const EdgeInsets.only(left: 8.0),
-                                              child: Text(isSubscribed ? 'Subscribed' : 'Subscribe'),
+                            Expanded(
+                                child: Padding(
+                              padding: const EdgeInsets.only(top: 4),
+                              child: ListView(
+                                controller: scrollController,
+                                children: [
+                                  Padding(
+                                      padding: EdgeInsets.only(top: 10),
+                                      child: AnimatedSwitcher(
+                                          duration: animationDuration,
+                                          child: <Widget>[
+                                            VideoInfo(
+                                              video: video!,
+                                              isSubscribed: isSubscribed,
+                                              toggleSubscription: toggleSubscription,
                                             ),
-                                          ],
-                                        ),
-                                      )),
-                                )
-                              ],
-                            ),
-                            Expanded(child: Padding(padding: EdgeInsets.only(top: 10), child: <Widget>[VideoInfo(video: video!), SingleChildScrollView(child: CommentsView(videoId: video!.videoId,)), RecommendedVideos(video: video!)][selectedIndex]))
+                                            Column(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  'Comments',
+                                                  style: TextStyle(color: colorScheme.secondary, fontSize: 20),
+                                                ),
+                                                CommentsView(
+                                                  videoId: video!.videoId,
+                                                ),
+                                              ],
+                                            ),
+                                            RecommendedVideos(video: video!)
+                                          ][selectedIndex]))
+                                ],
+                              ),
+                            )),
                           ],
                         ),
                       )),

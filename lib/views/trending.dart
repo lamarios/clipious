@@ -25,7 +25,7 @@ class TrendingState extends State<Trending> {
     var colorScheme = Theme.of(context).colorScheme;
     return Container(
       color: colorScheme.background,
-      child: VideoList(getVideos: getVideos, title: 'Trending',),
+      child: VideoList(getVideos: getVideos, ),
     );
   }
 

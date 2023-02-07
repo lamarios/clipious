@@ -27,7 +27,6 @@ class PopularState extends State<Popular>{
       color: Theme.of(context).colorScheme.background,
       child: VideoList(
         getVideos: getVideos,
-        title: 'Popular',
       ),
     );
   }

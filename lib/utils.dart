@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 String prettyDuration(Duration duration) {
   var components = <String>[];
@@ -15,6 +16,11 @@ String prettyDuration(Duration duration) {
   components.add('${seconds.toString().padLeft(2, '0')}');
   return components.join();
 }
+
+NumberFormat compactCurrency = NumberFormat.compactCurrency(
+  decimalDigits: 2,
+  symbol: '', // if you want to add currency symbol then pass that in this else leave it empty.
+);
 
 Future<void> showAlertDialog(BuildContext context, List<Widget> body) async {
   return showDialog<void>(

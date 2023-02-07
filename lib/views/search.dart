@@ -1,47 +1,47 @@
 import 'dart:async';
 
-import 'package:easy_debounce/easy_debounce.dart';
-import 'package:flutter/cupertino.dart';
-
+import 'package:after_layout/after_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/models/videoInList.dart';
-import 'package:invidious/views/settings.dart';
-import 'package:flutter_typeahead/flutter_typeahead.dart';
+
 import 'videoList.dart';
 
 class Search extends StatefulWidget {
-  const Search({super.key});
+  final String query;
+
+  const Search({super.key, required this.query});
 
   @override
   SearchState createState() => SearchState();
 }
 
-class SearchState extends State<Search> {
-  TextEditingController controller = TextEditingController();
+class SearchState extends State<Search> with AfterLayoutMixin<Search> {
   List<VideoInList> results = [];
-  List<String> autofillHints = [];
   bool searching = false;
 
-  search(String query) {
-    if (query.isNotEmpty) {
-      EasyDebounce.debounce('search', const Duration(milliseconds: 500), () {
-        setState(() {
-          searching = true;
-        });
+  @override
+  didUpdateWidget(Search old) {
+    super.didUpdateWidget(old);
 
-        service.search(query).then((value) {
-          setState(() {
-            results = value;
-            searching = false;
-          });
-        });
-      });
+    if (old.query != widget.query) {
+      search(widget.query);
     }
   }
 
-  Future<List<String>> autoComplete(String query) async {
-    return (await service.getSearchSuggestion(query)).suggestions;
+  search(String query) {
+    if (query.isNotEmpty) {
+      setState(() {
+        searching = true;
+      });
+
+      service.search(query).then((value) {
+        setState(() {
+          results = value;
+          searching = false;
+        });
+      });
+    }
   }
 
   @override
@@ -52,30 +52,18 @@ class SearchState extends State<Search> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(8, 8, 50, 8),
-            child: TypeAheadField(
-              textFieldConfiguration: TextFieldConfiguration(controller: controller, decoration: const InputDecoration(icon: Icon(Icons.search)), onSubmitted: search, onChanged: search),
-              suggestionsCallback: autoComplete,
-              itemBuilder: (BuildContext context, String itemData) => ListTile(
-                title: Text(itemData),
-              ),
-              onSuggestionSelected: (String? suggestion) {
-                controller.text = suggestion ?? '';
-                if (suggestion != null) {
-                  search(suggestion);
-                }
-              },
-            ),
-          ),
           Visibility(visible: searching, child: LinearProgressIndicator()),
           Expanded(
               child: VideoList(
             videos: results,
-            title: '',
           )),
         ],
       ),
     );
+  }
+
+  @override
+  FutureOr<void> afterFirstLayout(BuildContext context) {
+    search(widget.query);
   }
 }

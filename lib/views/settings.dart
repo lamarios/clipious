@@ -16,7 +16,7 @@ settingsTheme(ColorScheme colorScheme) => SettingsThemeData(
     dividerColor: colorScheme.onBackground,
     tileDescriptionTextColor: colorScheme.secondary,
     leadingIconsColor: colorScheme.secondary,
-tileHighlightColor: colorScheme.secondaryContainer);
+    tileHighlightColor: colorScheme.secondaryContainer);
 
 class Settings extends StatefulWidget {
   const Settings({super.key});
@@ -31,15 +31,15 @@ class SettingsState extends State<Settings> {
   bool sponsorBlock = db.getSettings(USE_SPONSORBLOCK)?.value == 'true';
 
   @override
-  initState(){
+  initState() {
     super.initState();
     FBroadcast.instance().register(BROADCAST_SERVER_CHANGED, (value, callback) {
       setState(() {
         currentServer = db.getCurrentlySelectedServer();
       });
     });
-
   }
+
   toggleSponsorBlock(bool value) {
     db.saveSetting(SettingsValue(USE_SPONSORBLOCK, value.toString()));
     setState(() {
@@ -100,7 +100,14 @@ class SettingsState extends State<Settings> {
                     onPressed: (context) => selectServer(context),
                   )
                 ]),
-                SettingsSection(title: Text('SponsorBlock'), tiles: [SettingsTile.switchTile(initialValue: sponsorBlock, onToggle: toggleSponsorBlock, title: Text('Use SponsorBlock'), description: Text('Skip sponsor segments submitted by the community'),)])
+                SettingsSection(title: Text('SponsorBlock'), tiles: [
+                  SettingsTile.switchTile(
+                    initialValue: sponsorBlock,
+                    onToggle: toggleSponsorBlock,
+                    title: Text('Use SponsorBlock'),
+                    description: Text('Skip sponsor segments submitted by the community'),
+                  )
+                ])
               ],
             )));
   }

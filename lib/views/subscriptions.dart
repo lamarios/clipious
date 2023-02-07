@@ -30,7 +30,7 @@ class SubscriptionsState extends State<Subscriptions> {
     var colorScheme = Theme.of(context).colorScheme;
     return Container(
       color: colorScheme.background,
-      child: VideoList(getVideos: getVideos, title: 'Subscriptions',),
+      child: VideoList(getVideos: getVideos, ),
     );
   }
 

@@ -47,9 +47,10 @@ dependencies:
   path: 1.8.2
   flutter_web_auth: 0.5.0
   select_dialog: 2.0.0
-  wakelock: 0.6.2
   fbroadcast: 2.0.0
-  flutter_typeahead: 4.3.3
+  easy_search_bar:
+    git:
+      url: https://github.com/lamarios/flutter_easy_search_bar
 
 
 

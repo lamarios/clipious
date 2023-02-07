@@ -1,3 +1,5 @@
+import 'package:easy_debounce/easy_debounce.dart';
+import 'package:easy_search_bar/easy_search_bar.dart';
 import 'package:fbroadcast/fbroadcast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -22,6 +24,8 @@ Future<void> main() async {
   db = await DbClient.create();
   runApp(const MyApp());
 }
+
+const List<String> navigationLabels = ['Popular', 'Trending', 'Subscriptions', 'Search'];
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -61,7 +65,7 @@ class MyApp extends StatelessWidget {
       }
       var brightness = SchedulerBinding.instance.platformDispatcher.platformBrightness;
       ColorScheme colorScheme = brightness == Brightness.dark ? darkColorScheme : lightColorScheme;
-      SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(statusBarColor: colorScheme.background, systemNavigationBarColor: colorScheme.background));
+      SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(systemNavigationBarColor: colorScheme.background));
 
       return MaterialApp(
           scaffoldMessengerKey: scaffoldKey,
@@ -86,6 +90,8 @@ class Home extends StatefulWidget {
 class HomeState extends State<Home> {
   int selectedIndex = 0;
   bool isLoggedIn = db.isLoggedInToCurrentServer();
+  bool showSearchResults = false;
+  String searchQuery = '';
 
   @override
   initState() {
@@ -94,6 +100,19 @@ class HomeState extends State<Home> {
       setState(() {
         selectedIndex = 0;
         isLoggedIn = db.isLoggedInToCurrentServer();
+      });
+    });
+  }
+
+  Future<List<String>> searchSuggestions(String query) async {
+    return (await service.getSearchSuggestion(query)).suggestions;
+  }
+
+  search(String query) {
+    EasyDebounce.debounce('search', const Duration(milliseconds: 500), () {
+      setState(() {
+        searchQuery = query;
+        showSearchResults = true;
       });
     });
   }
@@ -108,59 +127,80 @@ class HomeState extends State<Home> {
     ColorScheme colorScheme = Theme.of(context).colorScheme;
 
     var navigationWidgets = <Widget>[
-      NavigationDestination(icon: Icon(Icons.local_fire_department), label: 'Popular'),
-      NavigationDestination(icon: Icon(Icons.trending_up), label: 'Trending'),
-      NavigationDestination(icon: Icon(Icons.search), label: 'Search')
+      NavigationDestination(icon: const Icon(Icons.local_fire_department), label: navigationLabels[0]),
+      NavigationDestination(icon: const Icon(Icons.trending_up), label: navigationLabels[1]),
     ];
     if (isLoggedIn) {
-      navigationWidgets.add(const NavigationDestination(icon: Icon(Icons.subscriptions), label: 'Subscriptions'));
+      navigationWidgets.add(NavigationDestination(icon: const Icon(Icons.subscriptions), label: navigationLabels[2]));
+    }
+    if (showSearchResults) {
+      navigationWidgets.add(NavigationDestination(icon: const Icon(Icons.search), label: navigationLabels[3]));
     }
 
     return Scaffold(
         backgroundColor: colorScheme.background,
-        bottomNavigationBar: NavigationBar(
-          labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
+        bottomNavigationBar: showSearchResults
+            ? null
+            : NavigationBar(
+                labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
+                elevation: 0,
+                onDestinationSelected: (int index) {
+                  setState(() {
+                    showSearchResults = false;
+                    selectedIndex = index;
+                  });
+                },
+                selectedIndex: selectedIndex,
+                destinations: navigationWidgets,
+              ),
+        appBar: EasySearchBar(
+          searchBackgroundColor: colorScheme.background,
           elevation: 0,
-          onDestinationSelected: (int index) {
-            print(index);
+          asyncSuggestions: searchSuggestions,
+          title: Text(showSearchResults ? 'Search' : navigationLabels[selectedIndex]),
+          backgroundColor: colorScheme.background,
+          animationDuration: animationDuration,
+          onSearchClosed: (){
             setState(() {
-              selectedIndex = index;
+              showSearchResults = false;
             });
           },
-          selectedIndex: selectedIndex,
-          destinations: navigationWidgets,
+          actions: [
+            GestureDetector(
+              onTap: () => openSettings(context),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Icon(
+                  Icons.settings,
+                  color: colorScheme.secondary,
+                ),
+              ),
+            ),
+          ],
+          onSearch: search,
+
         ),
         body: SafeArea(
-          child: Stack(children: [
-            AnimatedSwitcher(
-              duration: animationDuration,
-              child: <Widget>[
-                const Popular(
-                  key: ValueKey(0),
-                ),
-                const Trending(
-                  key: ValueKey(1),
-                ),
-                const Search(key: ValueKey(2)),
-                const Subscriptions(
-                  key: ValueKey(3),
-                )
-              ][selectedIndex],
-              transitionBuilder: (Widget child, Animation<double> animation) {
-                return FadeTransition(opacity: animation, child: child);
-              },
-            ),
-            Positioned(
-                top: 10,
-                right: 10,
-                child: GestureDetector(
-                  onTap: () => openSettings(context),
-                  child: Icon(
-                    Icons.settings,
-                    color: colorScheme.primary,
-                  ),
-                ))
-          ]),
-        ));
+            child: Stack(children: [
+          AnimatedSwitcher(
+            duration: animationDuration,
+            child: showSearchResults
+                ? Search(query: searchQuery)
+                : <Widget>[
+                    const Popular(
+                      key: ValueKey(0),
+                    ),
+                    const Trending(
+                      key: ValueKey(1),
+                    ),
+                    const Subscriptions(
+                      key: ValueKey(2),
+                    )
+                  ][selectedIndex],
+            transitionBuilder: (Widget child, Animation<double> animation) {
+              return FadeTransition(opacity: animation, child: child);
+            },
+          )
+        ])));
   }
 }

@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:invidious/models/video.dart';
 import 'package:invidious/views/videoList.dart';
+import 'package:invidious/views/videoList/singleVideo.dart';
 
 import '../../models/video.dart';
 import '../../models/videoInList.dart';
@@ -12,10 +14,19 @@ class RecommendedVideos extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return VideoList(title: 'Recommended', getVideos: ()async{
+    ColorScheme colorScheme = Theme.of(context).colorScheme;
+    List<Widget> widgets = [
+      Text(
+        'Recommended',
+        style: TextStyle(color: colorScheme.secondary, fontSize: 20),
+      ),
+    ];
 
-      return video.recommendedVideos.map((e) => VideoInList(e.title, e.videoId, e.lengthSeconds, 0, e.author, '', 'authorUrl', 0, '', e.videoThumbnails)).toList();
-    });
+    widgets.addAll(video.recommendedVideos.map((e) => VideoListItem(video: VideoInList(e.title, e.videoId, e.lengthSeconds, 0, e.author, '', 'authorUrl', 0, '', e.videoThumbnails))).toList());
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: widgets,
+    );
   }
-
 }
