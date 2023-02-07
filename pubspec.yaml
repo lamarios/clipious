@@ -48,9 +48,7 @@ dependencies:
   flutter_web_auth: 0.5.0
   select_dialog: 2.0.0
   fbroadcast: 2.0.0
-  easy_search_bar:
-    git:
-      url: https://github.com/lamarios/flutter_easy_search_bar
+  flutter_typeahead: 4.3.3
 
 
 

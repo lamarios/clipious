@@ -4,6 +4,7 @@ import 'package:fbroadcast/fbroadcast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/views/popular.dart';
 import 'package:invidious/views/search.dart';
@@ -92,6 +93,7 @@ class HomeState extends State<Home> {
   bool isLoggedIn = db.isLoggedInToCurrentServer();
   bool showSearchResults = false;
   String searchQuery = '';
+  TextEditingController searchController = TextEditingController();
 
   @override
   initState() {
@@ -137,6 +139,8 @@ class HomeState extends State<Home> {
       navigationWidgets.add(NavigationDestination(icon: const Icon(Icons.search), label: navigationLabels[3]));
     }
 
+    double statusHeight = MediaQuery.of(context).viewPadding.top;
+
     return Scaffold(
         backgroundColor: colorScheme.background,
         bottomNavigationBar: showSearchResults
@@ -153,6 +157,92 @@ class HomeState extends State<Home> {
                 selectedIndex: selectedIndex,
                 destinations: navigationWidgets,
               ),
+        appBar: showSearchResults
+            ? PreferredSize(
+                preferredSize: Size(double.infinity, statusHeight + (AppBarTheme.of(context).toolbarHeight ?? 100)),
+                child: Container(
+                  color: colorScheme.background,
+                  // color: Colors.pink,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 12, right: 20, top: 25.0, bottom: 7),
+                    child: Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(right: 15.0),
+                          child: GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  showSearchResults = false;
+                                });
+                              },
+                              child: Icon(
+                                Icons.arrow_back,
+                                color: colorScheme.secondary,
+                              )),
+                        ),
+                        Expanded(
+                          child: TypeAheadField(
+                            textFieldConfiguration: TextFieldConfiguration(
+                                controller: searchController,
+                                decoration: InputDecoration(
+                                    icon: Icon(
+                                  Icons.search,
+                                  color: colorScheme.secondary,
+                                )),
+                                onSubmitted: search,
+                                onChanged: search),
+                            suggestionsCallback: searchSuggestions,
+                            itemBuilder: (BuildContext context, String itemData) => ListTile(
+                              title: Text(itemData),
+                            ),
+                            onSuggestionSelected: (String? suggestion) {
+                              searchController.text = suggestion ?? '';
+                              if (suggestion != null) {
+                                search(suggestion);
+                              }
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ))
+            : AppBar(
+                title: Text(showSearchResults ? 'Search' : navigationLabels[selectedIndex]),
+                scrolledUnderElevation: 0,
+                // backgroundColor: Colors.pink,
+          backgroundColor: colorScheme.background,
+                actions: [
+                  GestureDetector(
+                    onTap: () {
+                      if (searchQuery.isNotEmpty) {
+                        search(searchQuery);
+                      }
+                      setState(() {
+                        showSearchResults = true;
+                      });
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Icon(
+                        Icons.search,
+                        color: colorScheme.secondary,
+                      ),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () => openSettings(context),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Icon(
+                        Icons.settings,
+                        color: colorScheme.secondary,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+/*
         appBar: EasySearchBar(
           searchBackgroundColor: colorScheme.background,
           elevation: 0,
@@ -165,6 +255,7 @@ class HomeState extends State<Home> {
               showSearchResults = false;
             });
           },
+
           actions: [
             GestureDetector(
               onTap: () => openSettings(context),
@@ -180,6 +271,7 @@ class HomeState extends State<Home> {
           onSearch: search,
 
         ),
+*/
         body: SafeArea(
             child: Stack(children: [
           AnimatedSwitcher(
