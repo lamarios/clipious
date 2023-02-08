@@ -5,6 +5,7 @@ import 'package:invidious/views/video/comments.dart';
 import 'package:path/path.dart';
 
 import '../../models/comment.dart';
+import '../../models/imageObject.dart';
 import '../../models/videoComments.dart';
 
 class SingleCommentView extends StatefulWidget {
@@ -39,7 +40,7 @@ class SingleCommentViewState extends State<SingleCommentView> {
               decoration: BoxDecoration(
                   color: colors.secondaryContainer,
                   borderRadius: BorderRadius.circular(20),
-                  image: comment.authorThumbnails.isNotEmpty ? DecorationImage(image: NetworkImage(comment.getBestAuthorThumbnail()?.url ?? '')) : null),
+                  image: comment.authorThumbnails.isNotEmpty ? DecorationImage(image: NetworkImage(ImageObject.getBestThumbnail(comment.authorThumbnails)?.url ?? '')) : null),
             ),
           ),
           Expanded(
@@ -89,14 +90,19 @@ class SingleCommentViewState extends State<SingleCommentView> {
                 Text(comment.content),
                 Row(
                   children: [
-                    Expanded(child: Text(comment.publishedText)),
                     Visibility(
                         visible: comment.likeCount > 0,
                         child: Padding(
                           padding: const EdgeInsets.only(right: 4.0),
                           child: Icon(Icons.thumb_up, size: 15, color: colors.secondary),
                         )),
-                    Visibility(visible: comment.likeCount > 0, child: Text(comment.likeCount.toString()))
+                    Visibility(visible: comment.likeCount > 0, child: Text(comment.likeCount.toString())),
+                    Expanded(
+                        child: Text(
+                      comment.publishedText,
+                      textAlign: TextAlign.end,
+                      style: TextStyle(color: colors.secondary),
+                    )),
                   ],
                 ),
                 Visibility(

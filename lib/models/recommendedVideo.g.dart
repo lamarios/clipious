@@ -11,7 +11,7 @@ RecommendedVideo _$RecommendedVideoFromJson(Map<String, dynamic> json) =>
       json['videoId'] as String,
       json['title'] as String,
       (json['videoThumbnails'] as List<dynamic>)
-          .map((e) => VideoThumbnail.fromJson(e as Map<String, dynamic>))
+          .map((e) => ImageObject.fromJson(e as Map<String, dynamic>))
           .toList(),
       json['author'] as String,
       json['lengthSeconds'] as int,

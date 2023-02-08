@@ -1,12 +1,13 @@
-import 'package:invidious/models/videoThumbnail.dart';
 
 import 'package:json_annotation/json_annotation.dart';
+
+import 'imageObject.dart';
 part 'recommendedVideo.g.dart';
 @JsonSerializable()
 class RecommendedVideo {
   String videoId;
   String title;
-  List<VideoThumbnail> videoThumbnails;
+  List<ImageObject> videoThumbnails;
   String author;
   int lengthSeconds;
   String viewCountText;

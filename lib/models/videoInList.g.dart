@@ -17,7 +17,7 @@ VideoInList _$VideoInListFromJson(Map<String, dynamic> json) => VideoInList(
       json['published'] as int,
       json['publishedText'] as String,
       (json['videoThumbnails'] as List<dynamic>)
-          .map((e) => VideoThumbnail.fromJson(e as Map<String, dynamic>))
+          .map((e) => ImageObject.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 

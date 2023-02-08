@@ -9,7 +9,7 @@ part of 'comment.dart';
 Comment _$CommentFromJson(Map<String, dynamic> json) => Comment(
       json['author'] as String,
       (json['authorThumbnails'] as List<dynamic>)
-          .map((e) => AuthorThumbnail.fromJson(e as Map<String, dynamic>))
+          .map((e) => ImageObject.fromJson(e as Map<String, dynamic>))
           .toList(),
       json['authorId'] as String,
       json['authorUrl'] as String,

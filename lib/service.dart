@@ -11,6 +11,8 @@ import 'package:http/http.dart' as http;
 import 'package:invidious/models/videoInList.dart';
 import 'package:invidious/views/subscriptions.dart';
 
+import 'models/channel.dart';
+import 'models/channelVideos.dart';
 import 'models/searchSuggestion.dart';
 import 'models/subscription.dart';
 import 'models/videoComments.dart';
@@ -25,6 +27,8 @@ const STATS = '/api/v1/stats';
 const GET_SUBSCIPTIONS = '/api/v1/auth/subscriptions';
 const ADD_DELETE_SUBSCRIPTION = '/api/v1/auth/subscriptions/:ucid';
 const GET_COMMENTS = '/api/v1/comments/:id';
+const GET_CHANNEL = '/api/v1/channels/:id';
+const GET_CHANNEL_VIDEOS = '/api/v1/channels/:id/videos';
 const GET_SPONSOR_SEGMENTS = 'https://sponsor.ajay.app/api/skipSegments?videoID=:id';
 
 class Service {
@@ -168,5 +172,21 @@ class Service {
 
     final response = await http.get(Uri.parse(url), headers: headers);
     return VideoComments.fromJson(handleResponse(response));
+  }
+
+  Future<Channel> getChannel(String channelId) async {
+    String url = db.getCurrentlySelectedServer().url + (GET_CHANNEL.replaceAll(":id", channelId));
+    print('Calling $url');
+    final response = await http.get(Uri.parse(url), headers: {'Content-Type': 'application/json; charset=utf-16'});
+
+    return Channel.fromJson(handleResponse(response));
+  }
+
+  Future<ChannelVideos> getChannelVideos(String channelId, String? continuation) async {
+    String url = db.getCurrentlySelectedServer().url + (GET_CHANNEL_VIDEOS.replaceAll(":id", channelId)) + (continuation != null ? '?continuation=$continuation' : '');
+    print('Calling $url');
+    final response = await http.get(Uri.parse(url), headers: {'Content-Type': 'application/json; charset=utf-16'});
+
+    return ChannelVideos.fromJson(handleResponse(response));
   }
 }

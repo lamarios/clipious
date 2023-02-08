@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:invidious/database.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/main.dart';
+import 'package:invidious/views/components/videoThumbnail.dart';
 import 'package:invidious/views/video/comments.dart';
 import 'package:invidious/views/video/info.dart';
 import 'package:invidious/views/video/recommendedVideos.dart';
@@ -26,6 +27,8 @@ class VideoView extends StatefulWidget {
 }
 
 class VideoViewState extends State<VideoView> with AfterLayoutMixin<VideoView> {
+  GlobalKey _betterPlayerKey = GlobalKey();
+
   Video? video;
   bool loadingVideo = true;
   bool playingVideo = false;
@@ -33,7 +36,6 @@ class VideoViewState extends State<VideoView> with AfterLayoutMixin<VideoView> {
   bool elevateThumbnail = false;
   double progress = 0;
   String progressText = '';
-  bool isSubscribed = false;
   ScrollController scrollController = ScrollController();
 
   // VideoPlayerController? controller;
@@ -76,15 +78,24 @@ class VideoViewState extends State<VideoView> with AfterLayoutMixin<VideoView> {
     setState(() {
       loadingStream = true;
     });
-    ColorScheme colorScheme = Theme.of(context).colorScheme;
-    BetterPlayerDataSource betterPlayerDataSource = BetterPlayerDataSource(
-      BetterPlayerDataSourceType.network,
-      video!.dashUrl,
-      videoFormat: BetterPlayerVideoFormat.dash,
-    );
-    videoController = BetterPlayerController(const BetterPlayerConfiguration(autoPlay: true, allowedScreenSleep: false, fit: BoxFit.contain), betterPlayerDataSource: betterPlayerDataSource);
+
+    String baseUrl = db.getCurrentlySelectedServer().url;
+
+    BetterPlayerDataSource betterPlayerDataSource = BetterPlayerDataSource(BetterPlayerDataSourceType.network, video!.dashUrl,
+        videoFormat: BetterPlayerVideoFormat.dash,
+        subtitles: video?.captions.map((s) => BetterPlayerSubtitlesSource(type: BetterPlayerSubtitlesSourceType.network, urls: ['${baseUrl}${s.url}'], name: s.label)).toList(),
+        notificationConfiguration:
+            BetterPlayerNotificationConfiguration(showNotification: true, activityName: 'MainActivity', title: video!.title, author: video!.author, imageUrl: video?.getBestThumbnail()?.url ?? ''));
+    videoController =
+        BetterPlayerController(const BetterPlayerConfiguration(handleLifecycle: false, autoPlay: true, allowedScreenSleep: false, fit: BoxFit.contain), betterPlayerDataSource: betterPlayerDataSource);
 
     videoController!.addEventsListener(onVideoListener);
+    videoController!.isPictureInPictureSupported().then((supported) {
+      if (supported) {
+        videoController!.enablePictureInPicture(_betterPlayerKey);
+      }
+    });
+
     setState(() {
       playingVideo = true;
       loadingStream = false;
@@ -132,35 +143,7 @@ class VideoViewState extends State<VideoView> with AfterLayoutMixin<VideoView> {
     }
   }
 
-  toggleSubscription() async {
-    if (this.isSubscribed) {
-      await service.unSubscribe(video!.authorId);
-    } else {
-      await service.subscribe(video!.authorId);
-    }
-    bool isSubscribed = await service.isSubscribedToChannel(video!.authorId);
-    setState(() {
-      this.isSubscribed = isSubscribed;
-    });
-  }
 
-/*
-  togglePlayPause() {
-    betterPlayerController!. ? controller!.pause() : controller!.play();
-    setState(() {
-      showControls = true;
-      if (controller!.value.isPlaying) {
-        EasyDebounce.debounce('video-controls', Duration(seconds: 2), () {
-          setState(() {
-            showControls = false;
-          });
-        });
-      } else {
-        EasyDebounce.cancel('video-controls');
-      }
-    });
-  }
-*/
 
   @override
   Widget build(BuildContext context) {
@@ -202,21 +185,12 @@ class VideoViewState extends State<VideoView> with AfterLayoutMixin<VideoView> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             AnimatedScale(
-                              scale: elevateThumbnail ? 1.01 : 1.0,
+                              scale: elevateThumbnail ? 1.03 : 1.0,
                               duration: animationDuration,
                               curve: Curves.easeInOutQuad,
-                              child: AnimatedContainer(
-                                decoration: BoxDecoration(
-                                    color: colorScheme.secondaryContainer,
-                                    borderRadius: BorderRadius.circular(10),
-                                    boxShadow: elevateThumbnail ? const <BoxShadow>[BoxShadow(color: Colors.black54, blurRadius: 15.0, offset: Offset(0.0, 0.75))] : null,
-                                    image: DecorationImage(
-                                      image: NetworkImage(video?.getBestThumbnail()?.url ?? ''),
-                                      fit: BoxFit.cover,
-                                    )),
-                                width: double.infinity,
-                                alignment: Alignment.center,
-                                duration: animationDuration,
+                              child: VideoThumbnailView(
+                                videoId: video!.videoId,
+                                thumbnailUrl: video!.getBestThumbnail()?.url ?? '',
                                 child: AspectRatio(
                                   aspectRatio: 16 / 9,
                                   child: AnimatedSwitcher(
@@ -234,6 +208,7 @@ class VideoViewState extends State<VideoView> with AfterLayoutMixin<VideoView> {
                                                   ),
                                                 )
                                           : BetterPlayer(
+                                              key: _betterPlayerKey,
                                               controller: videoController!,
                                             )),
                                 ),
@@ -252,8 +227,6 @@ class VideoViewState extends State<VideoView> with AfterLayoutMixin<VideoView> {
                                           child: <Widget>[
                                             VideoInfo(
                                               video: video!,
-                                              isSubscribed: isSubscribed,
-                                              toggleSubscription: toggleSubscription,
                                             ),
                                             Column(
                                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -284,11 +257,9 @@ class VideoViewState extends State<VideoView> with AfterLayoutMixin<VideoView> {
   @override
   Future<FutureOr<void>> afterFirstLayout(BuildContext context) async {
     Video video = await service.getVideo(widget.videoId);
-    bool isSubscribed = await service.isSubscribedToChannel(video.authorId);
     setState(() {
       this.video = video;
       loadingVideo = false;
-      this.isSubscribed = isSubscribed;
     });
 
     if (useSponsorBlock) {

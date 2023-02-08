@@ -49,6 +49,7 @@ dependencies:
   select_dialog: 2.0.0
   fbroadcast: 2.0.0
   flutter_typeahead: 4.3.3
+  cached_network_image: 3.2.3
 
 
 

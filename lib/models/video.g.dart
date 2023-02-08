@@ -10,7 +10,7 @@ Video _$VideoFromJson(Map<String, dynamic> json) => Video(
       json['title'] as String,
       json['videoId'] as String,
       (json['videoThumbnails'] as List<dynamic>)
-          .map((e) => VideoThumbnail.fromJson(e as Map<String, dynamic>))
+          .map((e) => ImageObject.fromJson(e as Map<String, dynamic>))
           .toList(),
       json['description'] as String,
       json['descriptionHtml'] as String,
@@ -32,7 +32,7 @@ Video _$VideoFromJson(Map<String, dynamic> json) => Video(
       json['author'] as String,
       json['authorUrl'] as String,
       (json['authorThumbnails'] as List<dynamic>)
-          .map((e) => AuthorThumbnail.fromJson(e as Map<String, dynamic>))
+          .map((e) => ImageObject.fromJson(e as Map<String, dynamic>))
           .toList(),
       json['subCountText'] as String,
       json['lengthSeconds'] as int,

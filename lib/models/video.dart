@@ -1,9 +1,8 @@
 import 'adaptiveFormat.dart';
-import 'authorThumbnail.dart';
 import 'caption.dart';
 import 'formatStream.dart';
+import 'imageObject.dart';
 import 'recommendedVideo.dart';
-import 'videoThumbnail.dart';
 
 import 'package:json_annotation/json_annotation.dart';
 
@@ -13,7 +12,7 @@ part 'video.g.dart';
 class Video {
   String title;
   String videoId;
-  List<VideoThumbnail> videoThumbnails;
+  List<ImageObject> videoThumbnails;
   String dashUrl;
 
   String description;
@@ -34,7 +33,7 @@ class Video {
   String authorUrl;
   String authorId;
 
-  List<AuthorThumbnail> authorThumbnails;
+  List<ImageObject> authorThumbnails;
   String subCountText;
   int lengthSeconds;
   bool allowRatings;
@@ -90,7 +89,7 @@ class Video {
 
   Map<String, dynamic> toJson() => _$VideoToJson(this);
 
-  VideoThumbnail? getBestThumbnail() {
+  ImageObject? getBestThumbnail() {
     if (videoThumbnails.isNotEmpty) {
       return videoThumbnails.firstWhere((element) => element.quality=='maxres');
     } else {
@@ -98,15 +97,4 @@ class Video {
     }
   }
 
-  AuthorThumbnail? getBestAuthorThumbnail() {
-    if (authorThumbnails.isNotEmpty) {
-      authorThumbnails.sort((a, b) {
-        return (b.width * b.height).compareTo(a.width * a.height);
-      });
-
-      return authorThumbnails[0];
-    } else {
-      return null;
-    }
-  }
 }

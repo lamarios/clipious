@@ -2,14 +2,15 @@ import 'package:invidious/models/commentReplies.dart';
 import 'package:invidious/models/creatorHeart.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-import 'authorThumbnail.dart';
+import 'imageObject.dart';
+
 
 part 'comment.g.dart';
 
 @JsonSerializable()
 class Comment {
   String author;
-  List<AuthorThumbnail> authorThumbnails = [];
+  List<ImageObject> authorThumbnails = [];
   String authorId;
   String authorUrl;
   bool isEdited;
@@ -28,15 +29,4 @@ class Comment {
 
   Map<String, dynamic> toJson() => _$CommentToJson(this);
 
-  AuthorThumbnail? getBestAuthorThumbnail() {
-    if (authorThumbnails.isNotEmpty) {
-      authorThumbnails.sort((a, b) {
-        return (b.width * b.height).compareTo(a.width * a.height);
-      });
-
-      return authorThumbnails[0];
-    } else {
-      return null;
-    }
-  }
 }

@@ -51,7 +51,7 @@ class CommentsViewState extends State<CommentsView> with AfterLayoutMixin<Commen
             ))
         .toList(growable: true));
 
-    if (continuation != null) {
+    if (continuation != null && !loadingComments) {
       widgets.add(
         Padding(
           padding: const EdgeInsets.only(top: 4.0),
@@ -59,7 +59,7 @@ class CommentsViewState extends State<CommentsView> with AfterLayoutMixin<Commen
               height: 15,
               child: FilledButton.tonal(
                   onPressed: loadMore,
-                  child: Text(
+                  child: const Text(
                     'Load more',
                     style: TextStyle(fontSize: 10),
                   ))),
@@ -68,10 +68,9 @@ class CommentsViewState extends State<CommentsView> with AfterLayoutMixin<Commen
     }
 
     if (loadingComments) {
-      print('loading ? ${loadingComments}');
       widgets.add(Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Container(alignment: Alignment.center, child: const SizedBox(height: 20, width: 20, child: CircularProgressIndicator())),
+        child: Container(alignment: Alignment.center, child: const SizedBox(height: 20, width: 20, child: CircularProgressIndicator(strokeWidth: 2,))),
       ));
     }
     return Column(
