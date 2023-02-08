@@ -21,6 +21,7 @@ import '../models/channel.dart';
 import '../models/sponsorSegment.dart';
 import '../models/video.dart';
 import '../utils.dart';
+import 'components/subscribeButton.dart';
 
 class ChannelView extends StatefulWidget {
   final String channelId;
@@ -90,10 +91,7 @@ class ChannelViewState extends State<ChannelView> with AfterLayoutMixin<ChannelV
           });
         },
         selectedIndex: selectedIndex,
-        destinations: const <Widget>[
-          NavigationDestination(icon: Icon(Icons.info), label: 'Info'),
-          NavigationDestination(icon: Icon(Icons.play_arrow), label: 'Videos')
-        ],
+        destinations: const <Widget>[NavigationDestination(icon: Icon(Icons.info), label: 'Info'), NavigationDestination(icon: Icon(Icons.play_arrow), label: 'Videos')],
       ),
       body: SafeArea(
           bottom: false,
@@ -101,16 +99,33 @@ class ChannelViewState extends State<ChannelView> with AfterLayoutMixin<ChannelV
             duration: animationDuration,
             child: loading
                 ? Container(alignment: Alignment.center, child: const CircularProgressIndicator())
-                : Column(
+                : Column(crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Thumbnail(
-                          width: double.infinity,
-                          height: smallBanner ? 50 : 200,
-                          thumbnailUrl: ImageObject.getBestThumbnail(channel!.authorThumbnails)?.url ?? '',
-                          id: 'channel-banner/${widget.channelId}',
-                          decoration: BoxDecoration(
-                            color: colorScheme.secondaryContainer,
-                          )),
+                      AnimatedOpacity(
+                        opacity: smallBanner ? 0 : 1.0,
+                        duration: animationDuration,
+                        child: Thumbnail(
+                            width: double.infinity,
+                            height: smallBanner ? 0 : 200,
+                            thumbnailUrl: ImageObject.getBestThumbnail(channel!.authorThumbnails)?.url ?? '',
+                            id: 'channel-banner/${widget.channelId}',
+                            decoration: BoxDecoration(
+                              color: colorScheme.secondaryContainer,
+                            )),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top:8.0, left:8, right: 8),
+                        child: Text(
+                          channel!.author,
+                          style: TextStyle(color: colorScheme.primary, fontWeight: FontWeight.normal, fontSize: 20),
+                          textAlign: TextAlign.start,
+                        ),
+                      ),
+                      Row(
+                        children: [
+                          SubscribeButton(channelId: channel!.authorId, subCount: compactCurrency.format(channel!.subCount)),
+                        ],
+                      ),
                       Expanded(
                         child: SingleChildScrollView(
                           controller: scrollController,

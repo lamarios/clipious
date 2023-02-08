@@ -40,7 +40,6 @@ class Thumbnail extends StatelessWidget {
     return CachedNetworkImage(
       cacheKey: id,
       imageBuilder: (context, imageProvider) => AnimatedContainer(
-        curve: Curves.easeInOutQuad,
         height: height,
         width: width,
         decoration: decoration.copyWith(image: DecorationImage(image: imageProvider, fit: BoxFit.cover)),
@@ -52,7 +51,6 @@ class Thumbnail extends StatelessWidget {
       fadeInDuration: animationDuration,
       fadeOutDuration: animationDuration,
       progressIndicatorBuilder: (context, url, progress) => AnimatedContainer(
-        curve: Curves.easeInOutQuad,
         height: height,
         width: width,
         alignment: Alignment.center,

@@ -22,18 +22,6 @@ class ChannelInfoState extends State<ChannelInfo> {
     ColorScheme colors = Theme.of(context).colorScheme;
 
     List<Widget> widgets = [
-      Row(
-        children: [
-          Expanded(
-              child: Text(
-                widget.channel.author,
-                style: TextStyle(color: colors.primary, fontWeight: FontWeight.normal, fontSize: 20),
-                textAlign: TextAlign.start,
-              )),
-          SubscribeButton(channelId: widget.channel.authorId, subCount: compactCurrency.format(widget.channel.subCount))
-        ],
-
-      ),
       Padding(
         padding: const EdgeInsets.all(8.0),
         child: Text(widget.channel.description),
