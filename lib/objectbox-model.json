@@ -54,10 +54,36 @@
         }
       ],
       "relations": []
+    },
+    {
+      "id": "3:8787382286414233697",
+      "lastPropertyId": "3:8602536477328513343",
+      "name": "Progress",
+      "properties": [
+        {
+          "id": "1:5651818511313053101",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:4301486387527660152",
+          "name": "progress",
+          "type": 8
+        },
+        {
+          "id": "3:8602536477328513343",
+          "name": "videoId",
+          "type": 9,
+          "flags": 34848,
+          "indexId": "3:4343529106190079511"
+        }
+      ],
+      "relations": []
     }
   ],
-  "lastEntityId": "2:2463187106197509769",
-  "lastIndexId": "2:1004000799244198133",
+  "lastEntityId": "3:8787382286414233697",
+  "lastIndexId": "3:4343529106190079511",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",
   "modelVersion": 5,

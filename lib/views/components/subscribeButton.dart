@@ -18,6 +18,7 @@ class SubscribeButton extends StatefulWidget {
 
 class SubscribeButtonState extends State<SubscribeButton> with AfterLayoutMixin<SubscribeButton> {
   bool isSubscribed = false;
+  bool loading = true;
   final bool isLoggedIn = db.isLoggedInToCurrentServer();
 
   toggleSubscription() async {
@@ -40,9 +41,10 @@ class SubscribeButtonState extends State<SubscribeButton> with AfterLayoutMixin<
       child: SizedBox(
           height: 25,
           child: FilledButton.tonal(
+
             onPressed: isLoggedIn ? toggleSubscription : null,
             child: Row(
-              children: isLoggedIn
+              children: !loading && isLoggedIn
                   ? [
                       Icon(isSubscribed ? Icons.done : Icons.add),
                       Padding(
@@ -64,9 +66,11 @@ class SubscribeButtonState extends State<SubscribeButton> with AfterLayoutMixin<
 
   @override
   Future<FutureOr<void>> afterFirstLayout(BuildContext context) async {
+
     bool isSubscribed = await service.isSubscribedToChannel(widget.channelId);
     setState(() {
       this.isSubscribed = isSubscribed;
+      loading = false;
     });
   }
 }

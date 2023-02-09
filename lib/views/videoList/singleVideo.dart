@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:invidious/globals.dart';
 import 'package:invidious/models/videoInList.dart';
 import 'package:invidious/views/components/videoThumbnail.dart';
 
@@ -20,13 +21,51 @@ class VideoListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ColorScheme colorScheme = Theme.of(context).colorScheme;
+    double progress = db.getVideoProgress(video.videoId);
+
     return GestureDetector(
       onTap: () => openVideo(context),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          VideoThumbnailView(videoId: video.videoId, thumbnailUrl: ImageObject.getBestThumbnail(video!.videoThumbnails)?.url ?? ''),
+          VideoThumbnailView(
+            videoId: video.videoId,
+            thumbnailUrl: ImageObject.getBestThumbnail(video!.videoThumbnails)?.url ?? '',
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Visibility(
+                  visible: progress > 0.1 && progress < 0.90,
+                  child: FractionallySizedBox(
+                    widthFactor: progress,
+                    child: Padding(
+                      padding: const EdgeInsets.all(4.0),
+                      child: Container(
+                        height: 10,
+                        decoration: BoxDecoration(color: colorScheme.primaryContainer, borderRadius: BorderRadius.circular(10)),
+                      ),
+                    ),
+                  ),
+                ),
+                Visibility(
+                  visible: progress >= 0.90,
+                  child: Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: Container(
+                        width: 30,
+                        height: 30,
+                        decoration: BoxDecoration(color: colorScheme.primaryContainer, borderRadius: BorderRadius.circular(30)),
+                        child: Icon(
+                          Icons.check,
+                          color: colorScheme.primary,
+                        )),
+                  ),
+                )
+              ],
+            ),
+          ),
           Text(
             video.title,
             textAlign: TextAlign.left,

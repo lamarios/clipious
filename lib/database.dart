@@ -1,4 +1,5 @@
 import 'package:invidious/globals.dart';
+import 'package:invidious/models/db/progress.dart';
 import 'package:invidious/models/db/settings.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
@@ -69,5 +70,13 @@ class DbClient {
 
   bool isLoggedInToCurrentServer() {
     return getCurrentlySelectedServer().authToken?.isNotEmpty ?? false;
+  }
+
+  double getVideoProgress(String videoId) {
+    return store.box<Progress>().query(Progress_.videoId.equals(videoId)).build().findFirst()?.progress ?? 0;
+  }
+
+  saveProgress(Progress progress){
+    store.box<Progress>().put(progress);
   }
 }

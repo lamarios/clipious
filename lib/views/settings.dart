@@ -57,7 +57,7 @@ class SettingsState extends State<Settings> {
 
     SelectDialog.showModal<String>(
       context,
-      label: "Select server to user",
+      label: "Select server to use",
       selectedValue: currentServer.url,
       items: servers,
       onChange: (String selected) {

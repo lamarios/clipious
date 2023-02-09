@@ -1,13 +1,16 @@
 // import 'package:video_player/video_player.dart';
 import 'dart:async';
 import 'dart:collection';
+import 'dart:math';
 
 import 'package:after_layout/after_layout.dart';
 import 'package:better_player/better_player.dart';
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:invidious/database.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/main.dart';
+import 'package:invidious/models/db/progress.dart';
 import 'package:invidious/views/components/videoThumbnail.dart';
 import 'package:invidious/views/video/comments.dart';
 import 'package:invidious/views/video/info.dart';
@@ -26,7 +29,7 @@ class VideoView extends StatefulWidget {
   State<VideoView> createState() => VideoViewState();
 }
 
-class VideoViewState extends State<VideoView> with AfterLayoutMixin<VideoView> {
+class VideoViewState extends State<VideoView> with AfterLayoutMixin<VideoView>, RouteAware {
   GlobalKey _betterPlayerKey = GlobalKey();
 
   Video? video;
@@ -35,6 +38,7 @@ class VideoViewState extends State<VideoView> with AfterLayoutMixin<VideoView> {
   bool showControls = false;
   bool elevateThumbnail = false;
   double progress = 0;
+  double scale = 1.0;
   String progressText = '';
   ScrollController scrollController = ScrollController();
 
@@ -49,6 +53,9 @@ class VideoViewState extends State<VideoView> with AfterLayoutMixin<VideoView> {
 
   @override
   void initState() {
+    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
+      routeObserver.subscribe(this, ModalRoute.of(context)!);
+    });
     super.initState();
     scrollController.addListener(onScroll);
   }
@@ -62,16 +69,39 @@ class VideoViewState extends State<VideoView> with AfterLayoutMixin<VideoView> {
     }
   }
 
-  onScroll() {
-    if (scrollController.offset > 0 && !elevateThumbnail) {
+  @override
+  void didPush() {
+    print('HomePage: Called didPush');
+    super.didPush();
+  }
+
+  @override
+  void didPop() {
+    print('HomePage: Called didPop');
+    super.didPop();
+  }
+
+  @override
+  void didPopNext() {
+    print('HomePage: Called didPopNext');
+    super.didPopNext();
+  }
+
+  @override
+  void didPushNext() {
+    if (videoController != null) {
+      videoController?.dispose();
       setState(() {
-        elevateThumbnail = true;
-      });
-    } else if (scrollController.offset == 0 && elevateThumbnail) {
-      setState(() {
-        elevateThumbnail = false;
+        playingVideo = false;
       });
     }
+    super.didPushNext();
+  }
+
+  onScroll() {
+    setState(() {
+      scale = 1 + min(0.03, ((scrollController.offset) / 20000));
+    });
   }
 
   playVideo(BuildContext context) {
@@ -100,30 +130,24 @@ class VideoViewState extends State<VideoView> with AfterLayoutMixin<VideoView> {
       playingVideo = true;
       loadingStream = false;
     });
-/*
-    controller = VideoPlayerController.network(video!.formatStreams[2].url)
-      ..initialize().then((v) {
-        setState(() {
-          chewieController = ChewieController(
-              videoPlayerController: controller!,
-              autoPlay: true,
-              materialProgressColors:
-                  ChewieProgressColors(playedColor: colorScheme.primary.withOpacity(0.5), backgroundColor: Colors.grey.withOpacity(0.5), bufferedColor: Colors.grey, handleColor: colorScheme.primary));
-
-          playingVideo = true;
-          controller!.setVolume(100).then((value) {});
-          controller!.play();
-          Wakelock.enable();
-          loadingStream = false;
-          if (sponsorSegments.isNotEmpty) {
-            controller!.addListener(onVideoListener);
-          }
-        });
-      });
-*/
   }
 
   onVideoListener(BetterPlayerEvent event) {
+    if (event.betterPlayerEventType == BetterPlayerEventType.initialized) {
+      double progress = db.getVideoProgress(video!.videoId);
+      if (progress > 0 && progress < 0.90) {
+        videoController!.seekTo(Duration(seconds: (video!.lengthSeconds * progress).floor()));
+        EasyDebounce.debounce('after-seek', Duration(seconds: 1), () {
+          videoController!.play();
+        });
+      }
+    }
+
+    if (event.betterPlayerEventType == BetterPlayerEventType.progress) {
+      int currentPosition = (event.parameters?['progress'] as Duration).inSeconds;
+      int max = video?.lengthSeconds ?? 0;
+      db.saveProgress(Progress.named(progress: currentPosition / max, videoId: video!.videoId));
+    }
     if (event.betterPlayerEventType == BetterPlayerEventType.progress && sponsorSegments.isNotEmpty) {
       int currentPosition = (event.parameters?['progress'] as Duration).inMilliseconds;
 
@@ -142,8 +166,6 @@ class VideoViewState extends State<VideoView> with AfterLayoutMixin<VideoView> {
       }
     }
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -185,9 +207,9 @@ class VideoViewState extends State<VideoView> with AfterLayoutMixin<VideoView> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             AnimatedScale(
-                              scale: elevateThumbnail ? 1.03 : 1.0,
-                              duration: animationDuration,
-                              curve: Curves.easeInOutQuad,
+                              scale: scale,
+                              duration: Duration.zero,
+                              // curve: Curves.easeInOutQuad,
                               child: VideoThumbnailView(
                                 videoId: video!.videoId,
                                 thumbnailUrl: video!.getBestThumbnail()?.url ?? '',

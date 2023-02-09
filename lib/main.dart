@@ -22,6 +22,8 @@ Future<void> main() async {
   runApp(const MyApp());
 }
 
+final RouteObserver<ModalRoute> routeObserver = RouteObserver<ModalRoute>();
+
 const List<String> navigationLabels = ['Popular', 'Trending', 'Subscriptions', 'Search'];
 
 class MyApp extends StatelessWidget {
@@ -66,7 +68,8 @@ class MyApp extends StatelessWidget {
 
       return MaterialApp(
           scaffoldMessengerKey: scaffoldKey,
-          title: 'Ticnoaf',
+          title: 'Clipious',
+          navigatorObservers: [routeObserver],
           theme: ThemeData(
             useMaterial3: true,
             colorScheme: lightColorScheme,

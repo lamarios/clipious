@@ -19,7 +19,9 @@ class VideoInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ColorScheme colorScheme = Theme.of(context).colorScheme;
+    ColorScheme colorScheme = Theme
+        .of(context)
+        .colorScheme;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -58,9 +60,9 @@ class VideoInfo extends StatelessWidget {
                   )),
               Expanded(
                   child: Text(
-                video.publishedText,
-                textAlign: TextAlign.end,
-              )),
+                    video.publishedText,
+                    textAlign: TextAlign.end,
+                  )),
             ],
           ),
         ),
@@ -77,14 +79,18 @@ class VideoInfo extends StatelessWidget {
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
                       color: colorScheme.onSurface,
-                      image: DecorationImage(image: NetworkImage(ImageObject.getBestThumbnail(video?.authorThumbnails)?.url ?? ''), fit: BoxFit.cover)),
+                      image: DecorationImage(image: NetworkImage(ImageObject
+                          .getBestThumbnail(video?.authorThumbnails)
+                          ?.url ?? ''), fit: BoxFit.cover)),
                 ),
               ),
             ),
             Expanded(child: GestureDetector(onTap: () => openChannel(context), child: Text(video.author))),
-           SubscribeButton(channelId: video.authorId, subCount: video.subCountText,)
           ],
         ),
+        Row(children: [
+          SubscribeButton(channelId: video.authorId, subCount: video.subCountText,)
+        ],),
         Text(video.description),
       ],
     );

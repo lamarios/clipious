@@ -14,6 +14,7 @@ import 'package:objectbox/internal.dart'; // generated code can access "internal
 import 'package:objectbox/objectbox.dart';
 import 'package:objectbox_flutter_libs/objectbox_flutter_libs.dart';
 
+import 'models/db/progress.dart';
 import 'models/db/server.dart';
 import 'models/db/settings.dart';
 
@@ -69,6 +70,31 @@ final _entities = <ModelEntity>[
             flags: 0)
       ],
       relations: <ModelRelation>[],
+      backlinks: <ModelBacklink>[]),
+  ModelEntity(
+      id: const IdUid(3, 8787382286414233697),
+      name: 'Progress',
+      lastPropertyId: const IdUid(3, 8602536477328513343),
+      flags: 0,
+      properties: <ModelProperty>[
+        ModelProperty(
+            id: const IdUid(1, 5651818511313053101),
+            name: 'id',
+            type: 6,
+            flags: 1),
+        ModelProperty(
+            id: const IdUid(2, 4301486387527660152),
+            name: 'progress',
+            type: 8,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(3, 8602536477328513343),
+            name: 'videoId',
+            type: 9,
+            flags: 34848,
+            indexId: const IdUid(3, 4343529106190079511))
+      ],
+      relations: <ModelRelation>[],
       backlinks: <ModelBacklink>[])
 ];
 
@@ -92,8 +118,8 @@ Future<Store> openStore(
 ModelDefinition getObjectBoxModel() {
   final model = ModelInfo(
       entities: _entities,
-      lastEntityId: const IdUid(2, 2463187106197509769),
-      lastIndexId: const IdUid(2, 1004000799244198133),
+      lastEntityId: const IdUid(3, 8787382286414233697),
+      lastIndexId: const IdUid(3, 4343529106190079511),
       lastRelationId: const IdUid(0, 0),
       lastSequenceId: const IdUid(0, 0),
       retiredEntityUids: const [],
@@ -167,6 +193,35 @@ ModelDefinition getObjectBoxModel() {
             ..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
 
           return object;
+        }),
+    Progress: EntityDefinition<Progress>(
+        model: _entities[2],
+        toOneRelations: (Progress object) => [],
+        toManyRelations: (Progress object) => {},
+        getId: (Progress object) => object.id,
+        setId: (Progress object, int id) {
+          object.id = id;
+        },
+        objectToFB: (Progress object, fb.Builder fbb) {
+          final videoIdOffset = fbb.writeString(object.videoId);
+          fbb.startTable(4);
+          fbb.addInt64(0, object.id);
+          fbb.addFloat64(1, object.progress);
+          fbb.addOffset(2, videoIdOffset);
+          fbb.finish(fbb.endTable());
+          return object.id;
+        },
+        objectFromFB: (Store store, ByteData fbData) {
+          final buffer = fb.BufferContext(fbData);
+          final rootOffset = buffer.derefObject(0);
+
+          final object = Progress(
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0),
+              const fb.Float64Reader().vTableGet(buffer, rootOffset, 6, 0),
+              const fb.StringReader(asciiOptimization: true)
+                  .vTableGet(buffer, rootOffset, 8, ''));
+
+          return object;
         })
   };
 
@@ -199,4 +254,18 @@ class SettingsValue_ {
   /// see [SettingsValue.value]
   static final value =
       QueryStringProperty<SettingsValue>(_entities[1].properties[2]);
+}
+
+/// [Progress] entity fields to define ObjectBox queries.
+class Progress_ {
+  /// see [Progress.id]
+  static final id = QueryIntegerProperty<Progress>(_entities[2].properties[0]);
+
+  /// see [Progress.progress]
+  static final progress =
+      QueryDoubleProperty<Progress>(_entities[2].properties[1]);
+
+  /// see [Progress.videoId]
+  static final videoId =
+      QueryStringProperty<Progress>(_entities[2].properties[2]);
 }

@@ -39,25 +39,24 @@ class Thumbnail extends StatelessWidget {
 
     return CachedNetworkImage(
       cacheKey: id,
-      imageBuilder: (context, imageProvider) => AnimatedContainer(
+      imageBuilder: (context, imageProvider) => Container(
         height: height,
         width: width,
         decoration: decoration.copyWith(image: DecorationImage(image: imageProvider, fit: BoxFit.cover)),
-        duration: animationDuration,
+        // duration: animationDuration,
         child: child,
       ),
       imageUrl: thumbnailUrl,
       placeholderFadeInDuration: animationDuration,
       fadeInDuration: animationDuration,
       fadeOutDuration: animationDuration,
-      progressIndicatorBuilder: (context, url, progress) => AnimatedContainer(
+      progressIndicatorBuilder: (context, url, progress) => Container(
         height: height,
         width: width,
         alignment: Alignment.center,
         decoration: BoxDecoration(color: colors.secondaryContainer, borderRadius: BorderRadius.circular(10)),
-        duration: animationDuration,
-        child: child ??
-            const SizedBox(
+        // duration: animationDuration,
+        child: const SizedBox(
                 height: 20,
                 width: 20,
                 child: CircularProgressIndicator(

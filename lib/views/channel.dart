@@ -1,6 +1,7 @@
 // import 'package:video_player/video_player.dart';
 import 'dart:async';
 import 'dart:collection';
+import 'dart:math';
 
 import 'package:after_layout/after_layout.dart';
 import 'package:better_player/better_player.dart';
@@ -38,7 +39,8 @@ class ChannelViewState extends State<ChannelView> with AfterLayoutMixin<ChannelV
   int selectedIndex = 0;
   Channel? channel;
   bool loading = true;
-  bool smallBanner = false;
+  double bannerHeight = 200;
+  double opacity = 1;
 
   @override
   void initState() {
@@ -52,15 +54,10 @@ class ChannelViewState extends State<ChannelView> with AfterLayoutMixin<ChannelV
   }
 
   onScroll() {
-    if (scrollController.offset > 0 && !smallBanner) {
-      setState(() {
-        smallBanner = true;
-      });
-    } else if (scrollController.offset == 0 && smallBanner) {
-      setState(() {
-        smallBanner = false;
-      });
-    }
+    setState(() {
+      bannerHeight = max(0, 200 - scrollController.offset);
+      opacity = 1 - min(1, ((scrollController.offset) / 200));
+    });
   }
 
   toggleSubscription() async {
@@ -99,22 +96,24 @@ class ChannelViewState extends State<ChannelView> with AfterLayoutMixin<ChannelV
             duration: animationDuration,
             child: loading
                 ? Container(alignment: Alignment.center, child: const CircularProgressIndicator())
-                : Column(crossAxisAlignment: CrossAxisAlignment.start,
+                : Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      AnimatedOpacity(
-                        opacity: smallBanner ? 0 : 1.0,
-                        duration: animationDuration,
-                        child: Thumbnail(
-                            width: double.infinity,
-                            height: smallBanner ? 0 : 200,
-                            thumbnailUrl: ImageObject.getBestThumbnail(channel!.authorThumbnails)?.url ?? '',
-                            id: 'channel-banner/${widget.channelId}',
-                            decoration: BoxDecoration(
-                              color: colorScheme.secondaryContainer,
-                            )),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 8.0, top: 8, right: 8),
+                        child: AnimatedOpacity(
+                          opacity: opacity,
+                          duration: Duration.zero,
+                          child: Thumbnail(
+                              width: double.infinity,
+                              height: bannerHeight,
+                              thumbnailUrl: ImageObject.getBestThumbnail(channel!.authorThumbnails)?.url ?? '',
+                              id: 'channel-banner/${widget.channelId}',
+                              decoration: BoxDecoration(color: colorScheme.secondaryContainer, borderRadius: BorderRadius.circular(10))),
+                        ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(top:8.0, left:8, right: 8),
+                        padding: const EdgeInsets.only(top: 8.0, left: 8, right: 8),
                         child: Text(
                           channel!.author,
                           style: TextStyle(color: colorScheme.primary, fontWeight: FontWeight.normal, fontSize: 20),
