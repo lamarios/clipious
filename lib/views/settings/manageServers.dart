@@ -38,7 +38,7 @@ class ManageServerState extends State<ManageServers> with AfterLayoutMixin<Manag
   }
 
   logIn(String serverUrl) async {
-    String url = serverUrl + '/authorize_token?scopes=:feed,:subscriptions*&callback_url=impuc-auth://';
+    String url = serverUrl + '/authorize_token?scopes=:feed,:subscriptions*,:playlists*&callback_url=impuc-auth://';
     final result = await FlutterWebAuth.authenticate(url: url, callbackUrlScheme: 'impuc-auth');
 
     final token = Uri.parse(result).queryParameters['token'];
@@ -162,6 +162,9 @@ class ManageServerState extends State<ManageServers> with AfterLayoutMixin<Manag
                     TextField(
                       controller: addServerController,
                       autocorrect: false,
+                      enableSuggestions: false,
+                      enableIMEPersonalizedLearning: false,
+
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
@@ -197,8 +200,8 @@ class ManageServerState extends State<ManageServers> with AfterLayoutMixin<Manag
         backgroundColor: colorScheme.background,
         floatingActionButton: FloatingActionButton(
           onPressed: () => addServerDialog(context),
-          child: Icon(Icons.add),
           backgroundColor: colorScheme.primaryContainer,
+          child: const Icon(Icons.add),
         ),
         body: SafeArea(
             bottom: false,
@@ -207,12 +210,12 @@ class ManageServerState extends State<ManageServers> with AfterLayoutMixin<Manag
               darkTheme: theme,
               sections: [
                 SettingsSection(
-                    title: Text('Custom servers'),
-                    tiles: dbServers.length > 0
+                    title: const Text('Custom servers'),
+                    tiles: dbServers.isNotEmpty
                         ? dbServers
                             .map((s) => SettingsTile(
                                   title: Text(s.url),
-                                  value: s.authToken?.isNotEmpty ?? false ? Text('Logged in') : Text('Not logged in, tap to log in'),
+                                  value: s.authToken?.isNotEmpty ?? false ? const Text('Logged in') : const Text('Not logged in, tap to log in'),
                                   onPressed: (context) => showServerActions(context, s),
                                 ))
                             .toList()

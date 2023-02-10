@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:invidious/globals.dart';
+import 'package:invidious/views/playlists.dart';
 import 'package:invidious/views/popular.dart';
 import 'package:invidious/views/search.dart';
 import 'package:invidious/views/settings.dart';
@@ -12,7 +13,7 @@ import 'package:invidious/views/trending.dart';
 
 import 'database.dart';
 
-const brandColor = Color(0xFF1E88E5);
+const brandColor = Color(0xFFFF7D00);
 
 final scaffoldKey = GlobalKey<ScaffoldMessengerState>();
 
@@ -24,7 +25,7 @@ Future<void> main() async {
 
 final RouteObserver<ModalRoute> routeObserver = RouteObserver<ModalRoute>();
 
-const List<String> navigationLabels = ['Popular', 'Trending', 'Subscriptions', 'Search'];
+const List<String> navigationLabels = ['Popular', 'Trending', 'Subscriptions', 'Playlists'];
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -64,7 +65,7 @@ class MyApp extends StatelessWidget {
       }
       var brightness = SchedulerBinding.instance.platformDispatcher.platformBrightness;
       ColorScheme colorScheme = brightness == Brightness.dark ? darkColorScheme : lightColorScheme;
-      SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(systemNavigationBarColor: colorScheme.background, statusBarColor: colorScheme.background));
+      // SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(systemNavigationBarColor: colorScheme.background, statusBarColor: colorScheme.background));
 
       return MaterialApp(
           scaffoldMessengerKey: scaffoldKey,
@@ -117,6 +118,7 @@ class HomeState extends State<Home> {
     ];
     if (isLoggedIn) {
       navigationWidgets.add(NavigationDestination(icon: const Icon(Icons.subscriptions), label: navigationLabels[2]));
+      navigationWidgets.add(NavigationDestination(icon: const Icon(Icons.playlist_play), label: navigationLabels[3]));
     }
     double statusHeight = MediaQuery.of(context).viewPadding.top;
 
@@ -133,6 +135,7 @@ class HomeState extends State<Home> {
           selectedIndex: selectedIndex,
           destinations: navigationWidgets,
         ),
+        floatingActionButton: selectedIndex == 3 ? AddPlayListButton() : null,
         appBar: AppBar(
           title: Text(navigationLabels[selectedIndex]),
           scrolledUnderElevation: 0,
@@ -194,25 +197,29 @@ class HomeState extends State<Home> {
         ),
 */
         body: SafeArea(
-          bottom: true,maintainBottomViewPadding: false,
+            bottom: true,
+            maintainBottomViewPadding: false,
             child: Stack(children: [
-          AnimatedSwitcher(
-            duration: animationDuration,
-            child: <Widget>[
-              const Popular(
-                key: ValueKey(0),
-              ),
-              const Trending(
-                key: ValueKey(1),
-              ),
-              const Subscriptions(
-                key: ValueKey(2),
+              AnimatedSwitcher(
+                duration: animationDuration,
+                child: <Widget>[
+                  const Popular(
+                    key: ValueKey(0),
+                  ),
+                  const Trending(
+                    key: ValueKey(1),
+                  ),
+                  const Subscriptions(
+                    key: ValueKey(2),
+                  ),
+                  const Playlists(
+                    key: ValueKey(3),
+                  )
+                ][selectedIndex],
+                transitionBuilder: (Widget child, Animation<double> animation) {
+                  return FadeTransition(opacity: animation, child: child);
+                },
               )
-            ][selectedIndex],
-            transitionBuilder: (Widget child, Animation<double> animation) {
-              return FadeTransition(opacity: animation, child: child);
-            },
-          )
-        ])));
+            ])));
   }
 }

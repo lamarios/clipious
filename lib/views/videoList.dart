@@ -10,6 +10,7 @@ import 'package:invidious/views/video.dart';
 
 import 'package:after_layout/after_layout.dart';
 import 'package:invidious/views/videoList/singleVideo.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 import '../globals.dart';
 import '../models/videoInList.dart';
 import 'package:flutter_fadein/flutter_fadein.dart';
@@ -25,6 +26,7 @@ class VideoList extends StatefulWidget {
 }
 
 class VideoListState extends State<VideoList> with AfterLayoutMixin<VideoList> {
+  RefreshController refreshController = RefreshController(initialRefresh: false);
   List<VideoInList> videos = [];
   bool loading = true;
   bool hasMethod = false;
@@ -55,6 +57,7 @@ class VideoListState extends State<VideoList> with AfterLayoutMixin<VideoList> {
     }
   }
 
+
   @override
   Widget build(BuildContext context) {
     ColorScheme colorScheme = Theme.of(context).colorScheme;
@@ -72,14 +75,20 @@ class VideoListState extends State<VideoList> with AfterLayoutMixin<VideoList> {
                     curve: Curves.easeInOutQuad,
                     child: Visibility(
                       visible: widget.videos?.isNotEmpty ?? videos.isNotEmpty,
-                      child: GridView.count(
-                          crossAxisCount: 1,
-                          controller: scrollController,
-                          padding: EdgeInsets.all(4),
-                          crossAxisSpacing: 5,
-                          mainAxisSpacing: 5,
-                          childAspectRatio: 16 / 13,
-                          children: (widget.videos ?? videos).map((v) => VideoListItem(video: v)).toList()),
+                      child: SmartRefresher(
+                        controller: refreshController,
+                        enablePullDown: true,
+                        enablePullUp: false,
+                        onRefresh: () => getVideos(context),
+                        child: GridView.count(
+                            crossAxisCount: 1,
+                            controller: scrollController,
+                            padding: EdgeInsets.all(4),
+                            crossAxisSpacing: 5,
+                            mainAxisSpacing: 5,
+                            childAspectRatio: 16 / 13,
+                            children: (widget.videos ?? videos).map((v) => VideoListItem(video: v)).toList()),
+                      ),
                     ),
                   ),
                 ),
@@ -104,6 +113,7 @@ class VideoListState extends State<VideoList> with AfterLayoutMixin<VideoList> {
           this.videos = videos;
           loading = false;
         });
+        refreshController.refreshCompleted();
       });
     }
   }

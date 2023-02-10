@@ -70,25 +70,8 @@ class VideoViewState extends State<VideoView> with AfterLayoutMixin<VideoView>, 
   }
 
   @override
-  void didPush() {
-    print('HomePage: Called didPush');
-    super.didPush();
-  }
-
-  @override
-  void didPop() {
-    print('HomePage: Called didPop');
-    super.didPop();
-  }
-
-  @override
-  void didPopNext() {
-    print('HomePage: Called didPopNext');
-    super.didPopNext();
-  }
-
-  @override
   void didPushNext() {
+/*
     if (videoController != null) {
       videoController?.dispose();
       setState(() {
@@ -96,6 +79,7 @@ class VideoViewState extends State<VideoView> with AfterLayoutMixin<VideoView>, 
       });
     }
     super.didPushNext();
+*/
   }
 
   onScroll() {

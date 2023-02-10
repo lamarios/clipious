@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart';
 import 'package:invidious/globals.dart';
+import 'package:invidious/models/playlist.dart';
 import 'package:invidious/models/sponsorSegment.dart';
 import 'package:invidious/models/userFeed.dart';
 import 'package:invidious/models/video.dart';
@@ -30,11 +31,28 @@ const GET_COMMENTS = '/api/v1/comments/:id';
 const GET_CHANNEL = '/api/v1/channels/:id';
 const GET_CHANNEL_VIDEOS = '/api/v1/channels/:id/videos';
 const GET_SPONSOR_SEGMENTS = 'https://sponsor.ajay.app/api/skipSegments?videoID=:id';
+const GET_USER_PLAYLISTS = '/api/v1/auth/playlists';
+const POST_USER_PLAYLIST = '/api/v1/auth/playlists';
 
 class Service {
   handleResponse(Response response) {
-    return jsonDecode(utf8.decode(response.bodyBytes));
+    var decoded = jsonDecode(utf8.decode(response.bodyBytes));
+    String? error;
+    try {
+      Map<String, dynamic> errorFinder = decoded as Map<String, dynamic>;
+      error = errorFinder.containsKey('error') ? decoded['error'] : null;
+    } catch (err) {
+      // no error we keep going
+    }
+
+    if (error != null) {
+      throw Exception(error);
+    }
+
+    return decoded;
   }
+
+  handleErrors(Response response) {}
 
   Future<Video> getVideo(String videoId) async {
     String url = db.getCurrentlySelectedServer().url + (GET_VIDEO.replaceAll(":id", videoId));
@@ -188,5 +206,35 @@ class Service {
     final response = await http.get(Uri.parse(url), headers: {'Content-Type': 'application/json; charset=utf-16'});
 
     return ChannelVideos.fromJson(handleResponse(response));
+  }
+
+  Future<List<Playlist>> getUserPlaylists() async {
+    var currentlySelectedServer = db.getCurrentlySelectedServer();
+    String url = '${currentlySelectedServer.url}${GET_USER_PLAYLISTS}';
+
+    print('Calling $url');
+    var headers = {'Authorization': 'Bearer ${currentlySelectedServer.authToken}'};
+
+    final response = await http.get(Uri.parse(url), headers: headers);
+    Iterable i = handleResponse(response);
+    return List<Playlist>.from(i.map((e) => Playlist.fromJson(e)));
+  }
+
+  Future<void> createPlayList(String name, String type) async {
+    var currentlySelectedServer = db.getCurrentlySelectedServer();
+    String url = '${currentlySelectedServer.url}${POST_USER_PLAYLIST}';
+
+    print('Calling $url');
+    var headers = {'Authorization': 'Bearer ${currentlySelectedServer.authToken}','Content-Type': 'application/json'};
+
+    Map<String, String> body = {
+      'title': name,
+      'privacy': type,
+    };
+
+    print(jsonEncode(body));
+
+    final response = await http.post(Uri.parse(url), headers: headers, body: jsonEncode(body));
+    Map<String, dynamic> map = handleResponse(response);
   }
 }

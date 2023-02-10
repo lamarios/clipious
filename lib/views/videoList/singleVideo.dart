@@ -32,38 +32,68 @@ class VideoListItem extends StatelessWidget {
           VideoThumbnailView(
             videoId: video.videoId,
             thumbnailUrl: ImageObject.getBestThumbnail(video!.videoThumbnails)?.url ?? '',
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Visibility(
-                  visible: progress > 0.1 && progress < 0.90,
-                  child: FractionallySizedBox(
-                    widthFactor: progress,
-                    child: Padding(
-                      padding: const EdgeInsets.all(4.0),
-                      child: Container(
-                        height: 10,
-                        decoration: BoxDecoration(color: colorScheme.primaryContainer, borderRadius: BorderRadius.circular(10)),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Visibility(
+                        visible: progress > 0.1 && progress < 0.90,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 8),
+                          child: Container(
+                            width: 20,
+                            height: 20,
+                            child: CircularProgressIndicator(
+                              value: progress,
+                              strokeWidth: 3,
+                              color: colorScheme.primaryContainer,
+                            ),
+                          ),
+                        ),
                       ),
-                    ),
+                      Visibility(
+                        visible: progress >= 0.90,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 8),
+                          child: Container(
+                              alignment: Alignment.center,
+                              width: 20,
+                              height: 20,
+                              decoration: BoxDecoration(color: colorScheme.primaryContainer, borderRadius: BorderRadius.circular(30)),
+                              child: Icon(
+                                Icons.check,
+                                color: colorScheme.primary,
+                                size: 15,
+                              )),
+                        ),
+                      ),
+                      Visibility(
+                        visible: video.lengthSeconds > 0,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Container(
+                            alignment: Alignment.center,
+                            height: 25,
+                            decoration: BoxDecoration(color: Colors.black.withOpacity(0.75), borderRadius: BorderRadius.circular(5)),
+                            child: Padding(
+                              padding: const EdgeInsets.all(4.0),
+                              child: Text(
+                                prettyDuration(Duration(seconds: video.lengthSeconds)),
+                                style: const TextStyle(color: Colors.white, fontSize: 12),
+                              ),
+                            ),
+                          ),
+                        ),
+                      )
+                    ],
                   ),
-                ),
-                Visibility(
-                  visible: progress >= 0.90,
-                  child: Padding(
-                    padding: const EdgeInsets.all(4.0),
-                    child: Container(
-                        width: 30,
-                        height: 30,
-                        decoration: BoxDecoration(color: colorScheme.primaryContainer, borderRadius: BorderRadius.circular(30)),
-                        child: Icon(
-                          Icons.check,
-                          color: colorScheme.primary,
-                        )),
-                  ),
-                )
-              ],
+                ],
+              ),
             ),
           ),
           Text(
@@ -83,16 +113,16 @@ class VideoListItem extends StatelessWidget {
           ),
           Row(
             children: [
-              Visibility(visible: video.viewCount > 0, child: Icon(Icons.visibility)),
+              Visibility(visible: (video.viewCount ?? 0) > 0, child: Icon(Icons.visibility)),
               Visibility(
-                  visible: video.viewCount > 0,
+                  visible: (video.viewCount ?? 0) > 0,
                   child: Padding(
                     padding: const EdgeInsets.only(left: 5.0),
                     child: Text(compactCurrency.format(video.viewCount)),
                   )),
               Expanded(
                   child: Text(
-                video.publishedText,
+                video.publishedText ?? '',
                 textAlign: TextAlign.end,
               )),
             ],
