@@ -3,16 +3,17 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart';
+import 'package:http/http.dart' as http;
 import 'package:invidious/globals.dart';
 import 'package:invidious/models/playlist.dart';
 import 'package:invidious/models/sponsorSegment.dart';
 import 'package:invidious/models/userFeed.dart';
 import 'package:invidious/models/video.dart';
-import 'package:http/http.dart' as http;
 import 'package:invidious/models/videoInList.dart';
 import 'package:invidious/views/subscriptions.dart';
 
 import 'models/channel.dart';
+import 'models/channelPlaylists.dart';
 import 'models/channelVideos.dart';
 import 'models/searchSuggestion.dart';
 import 'models/subscription.dart';
@@ -33,6 +34,7 @@ const GET_CHANNEL_VIDEOS = '/api/v1/channels/:id/videos';
 const GET_SPONSOR_SEGMENTS = 'https://sponsor.ajay.app/api/skipSegments?videoID=:id';
 const GET_USER_PLAYLISTS = '/api/v1/auth/playlists';
 const POST_USER_PLAYLIST = '/api/v1/auth/playlists';
+const GET_CHANNEL_PLAYLISTS = '/api/v1/channels/:id/playlists';
 
 class Service {
   handleResponse(Response response) {
@@ -220,12 +222,22 @@ class Service {
     return List<Playlist>.from(i.map((e) => Playlist.fromJson(e)));
   }
 
+  Future<ChannelPlaylists> getChannelPlaylists(String channelId, String? continuation) async {
+    var currentlySelectedServer = db.getCurrentlySelectedServer();
+    String url = '${currentlySelectedServer.url}${GET_CHANNEL_PLAYLISTS.replaceAll(':id', channelId)}${continuation != null ? '?continuation=$continuation' : ''}';
+
+    print('Calling $url');
+
+    final response = await http.get(Uri.parse(url));
+    return ChannelPlaylists.fromJson(handleResponse(response));
+  }
+
   Future<void> createPlayList(String name, String type) async {
     var currentlySelectedServer = db.getCurrentlySelectedServer();
     String url = '${currentlySelectedServer.url}${POST_USER_PLAYLIST}';
 
     print('Calling $url');
-    var headers = {'Authorization': 'Bearer ${currentlySelectedServer.authToken}','Content-Type': 'application/json'};
+    var headers = {'Authorization': 'Bearer ${currentlySelectedServer.authToken}', 'Content-Type': 'application/json'};
 
     Map<String, String> body = {
       'title': name,

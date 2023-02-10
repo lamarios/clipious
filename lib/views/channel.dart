@@ -12,6 +12,7 @@ import 'package:invidious/main.dart';
 import 'package:invidious/models/imageObject.dart';
 import 'package:invidious/objectbox.g.dart';
 import 'package:invidious/views/channel/info.dart';
+import 'package:invidious/views/channel/playlists.dart';
 import 'package:invidious/views/channel/videos.dart';
 import 'package:invidious/views/components/videoThumbnail.dart';
 import 'package:invidious/views/video/comments.dart';
@@ -77,6 +78,12 @@ class ChannelViewState extends State<ChannelView> with AfterLayoutMixin<ChannelV
     ColorScheme colorScheme = Theme.of(context).colorScheme;
 
     return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          channel?.author ?? '',
+        ),
+        scrolledUnderElevation: 0,
+      ),
       backgroundColor: colorScheme.background,
       bottomNavigationBar: NavigationBar(
         labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
@@ -88,7 +95,11 @@ class ChannelViewState extends State<ChannelView> with AfterLayoutMixin<ChannelV
           });
         },
         selectedIndex: selectedIndex,
-        destinations: const <Widget>[NavigationDestination(icon: Icon(Icons.info), label: 'Info'), NavigationDestination(icon: Icon(Icons.play_arrow), label: 'Videos')],
+        destinations: const <Widget>[
+          NavigationDestination(icon: Icon(Icons.info), label: 'Info'),
+          NavigationDestination(icon: Icon(Icons.play_arrow), label: 'Videos'),
+          // NavigationDestination(icon: Icon(Icons.playlist_play), label: 'Playlists')
+        ],
       ),
       body: SafeArea(
           bottom: false,
@@ -112,14 +123,14 @@ class ChannelViewState extends State<ChannelView> with AfterLayoutMixin<ChannelV
                               decoration: BoxDecoration(color: colorScheme.secondaryContainer, borderRadius: BorderRadius.circular(10))),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 8.0, left: 8, right: 8),
-                        child: Text(
-                          channel!.author,
-                          style: TextStyle(color: colorScheme.primary, fontWeight: FontWeight.normal, fontSize: 20),
-                          textAlign: TextAlign.start,
-                        ),
-                      ),
+                      // Padding(
+                      //   padding: const EdgeInsets.only(top: 8.0, left: 8, right: 8),
+                      //   child: Text(
+                      //     channel!.author,
+                      //     style: TextStyle(color: colorScheme.primary, fontWeight: FontWeight.normal, fontSize: 20),
+                      //     textAlign: TextAlign.start,
+                      //   ),
+                      // ),
                       Row(
                         children: [
                           SubscribeButton(channelId: channel!.authorId, subCount: compactCurrency.format(channel!.subCount)),
@@ -133,6 +144,7 @@ class ChannelViewState extends State<ChannelView> with AfterLayoutMixin<ChannelV
                             child: <Widget>[
                               ChannelInfo(channel: channel!),
                               ChannelVideosView(channel: channel!),
+                              // ChannelPlayListsView(channelId: channel!.authorId)
                             ][selectedIndex],
                           ),
                         ),

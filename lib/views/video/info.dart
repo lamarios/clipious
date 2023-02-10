@@ -25,11 +25,11 @@ class VideoInfo extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          video.title ?? '',
-          style: TextStyle(color: colorScheme.primary, fontWeight: FontWeight.normal, fontSize: 20),
-          textAlign: TextAlign.start,
-        ),
+        // Text(
+        //   video.title ?? '',
+        //   style: TextStyle(color: colorScheme.primary, fontWeight: FontWeight.normal, fontSize: 20),
+        //   textAlign: TextAlign.start,
+        // ),
         Padding(
           padding: const EdgeInsets.only(bottom: 8.0),
           child: Row(

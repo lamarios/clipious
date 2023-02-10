@@ -4,14 +4,15 @@ import 'package:invidious/models/imageObject.dart';
 import 'package:invidious/models/playlist.dart';
 import 'package:invidious/models/videoInList.dart';
 import 'package:invidious/views/components/videoThumbnail.dart';
+import 'package:invidious/views/playlistView.dart';
 
 class PlaylistItem extends StatelessWidget {
   final Playlist playlist;
 
   const PlaylistItem({super.key, required this.playlist});
 
-  openPlayList(){
-    print('opening !');
+  openPlayList(BuildContext context){
+    Navigator.push(context, MaterialPageRoute(builder: (context) => PlaylistView(playlist: playlist,)));
   }
 
 
@@ -22,15 +23,18 @@ class PlaylistItem extends StatelessWidget {
     int i = 0;
     for (VideoInList video in playlist.videos) {
       thumbs.add(Positioned(
-        top: (20 * i).toDouble(),
-        left: (20 * i).toDouble(),
+        top: (10 * i).toDouble(),
+        left: (15 * i).toDouble(),
         child: SizedBox(
           width: 100,
           child: AspectRatio(
             aspectRatio: 16 / 9,
-            child: VideoThumbnailView(
-              videoId: video.videoId,
-              thumbnailUrl: ImageObject.getBestThumbnail(video.videoThumbnails)?.url ?? '',
+            child: Opacity(
+              opacity: 1-(0.3*i),
+              child: VideoThumbnailView(
+                videoId: video.videoId,
+                thumbnailUrl: ImageObject.getBestThumbnail(video.videoThumbnails)?.url ?? '',
+              ),
             ),
           ),
         ),
@@ -41,10 +45,12 @@ class PlaylistItem extends StatelessWidget {
       }
     }
 
+    thumbs = thumbs.reversed.toList();
+
     ColorScheme colors = Theme.of(context).colorScheme;
 
     return GestureDetector(
-      onTap: openPlayList,
+      onTap: () => openPlayList(context),
       behavior: HitTestBehavior.translucent,
       child: Column(
         children: [
@@ -55,7 +61,7 @@ class PlaylistItem extends StatelessWidget {
               children: [
                 SizedBox(
                     width: 200,
-                    height: 120,
+                    height: 90,
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Stack(

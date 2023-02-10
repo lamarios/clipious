@@ -156,6 +156,33 @@ class VideoViewState extends State<VideoView> with AfterLayoutMixin<VideoView>, 
     ColorScheme colorScheme = Theme.of(context).colorScheme;
 
     return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          video?.title ?? '',
+          // style: TextStyle(fontSize: 15),
+        ),
+        actions: [
+          GestureDetector(
+            child:  Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Icon(
+                Icons.share,
+                color: colorScheme.secondary,
+              ),
+            ),
+          ),
+          GestureDetector(
+            child:  Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Icon(
+                Icons.add,
+                color: colorScheme.secondary,
+              ),
+            ),
+          ),
+        ],
+        scrolledUnderElevation: 0,
+      ),
       backgroundColor: colorScheme.background,
       bottomNavigationBar: NavigationBar(
         labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
@@ -186,7 +213,7 @@ class VideoViewState extends State<VideoView> with AfterLayoutMixin<VideoView>, 
                 child: loadingVideo
                     ? const CircularProgressIndicator()
                     : Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [

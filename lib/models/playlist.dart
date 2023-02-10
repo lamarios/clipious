@@ -96,11 +96,11 @@ class Playlist {
   String author;
   String? authordId;
   String? authorUrl;
-  List<ImageObject> authorThumbnails = [];
-  String description;
+  List<ImageObject>? authorThumbnails;
+  String? description;
   int videoCount;
   int? viewCount;
-  bool isListed = false;
+  bool? isListed ;
   List<VideoInList> videos = [];
 
   Playlist(this.type, this.title, this.playlistId, this.author, this.authordId, this.authorUrl, this.description, this.videoCount);
