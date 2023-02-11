@@ -8,8 +8,8 @@ import 'package:invidious/service.dart';
 const PAULFLIX = 'https://youtube.paulflix.tv';
 
 const PUBLIC_SERVERS = [
-  "https://vid.puffyan.us/",
-  "https://yt.artemislena.eu/"
+  "https://vid.puffyan.us",
+  "https://yt.artemislena.eu"
 ];
 const BROADCAST_SERVER_CHANGED = 'server-changed';
 

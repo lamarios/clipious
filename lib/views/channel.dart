@@ -83,6 +83,21 @@ class ChannelViewState extends State<ChannelView> with AfterLayoutMixin<ChannelV
           channel?.author ?? '',
         ),
         scrolledUnderElevation: 0,
+        actions: [
+          Visibility(
+            visible: channel != null,
+            child: GestureDetector(
+              onTap: () => showSharingSheet(context, channel!),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Icon(
+                  Icons.share,
+                  color: colorScheme.secondary,
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
       backgroundColor: colorScheme.background,
       bottomNavigationBar: NavigationBar(

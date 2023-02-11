@@ -1,5 +1,7 @@
 import 'dart:ui';
 
+import 'package:invidious/models/db/server.dart';
+import 'package:invidious/models/interfaces/sharelink.dart';
 import 'package:invidious/models/videoInList.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -9,7 +11,7 @@ import 'imageObject.dart';
 part 'channel.g.dart';
 
 @JsonSerializable()
-class Channel {
+class Channel implements ShareLinks {
   String author;
   String authorId;
   String authorUrl;
@@ -32,4 +34,15 @@ class Channel {
   factory Channel.fromJson(Map<String, dynamic> json) => _$ChannelFromJson(json);
 
   Map<String, dynamic> toJson() => _$ChannelToJson(this);
+
+  @override
+  String getInvidiousLink(Server server) {
+    return '${server.url}/channel/$authorId';
+
+  }
+
+  @override
+  String getYoutubeLink() {
+    return 'https://www.youtube.com/channel/$authorId';
+  }
 }

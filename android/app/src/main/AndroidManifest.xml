@@ -1,8 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.example.invidious">
+          package="com.github.lamarios.clipious">
     <uses-permission android:name="android.permission.INTERNET"/>
     <application
-            android:label="invidious"
+            android:label="Clipious"
             android:name="${applicationName}"
             android:icon="@mipmap/ic_launcher">
         <activity android:name="com.linusu.flutter_web_auth.CallbackActivity" android:exported="true">

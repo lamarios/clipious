@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:invidious/globals.dart';
+import 'package:invidious/models/interfaces/sharelink.dart';
+import 'package:share_plus/share_plus.dart';
 
 String prettyDuration(Duration duration) {
   var components = <String>[];
@@ -45,4 +48,38 @@ Future<void> showAlertDialog(BuildContext context, List<Widget> body) async {
       );
     },
   );
+}
+
+void showSharingSheet(BuildContext context, ShareLinks links) {
+  ColorScheme colorScheme = Theme.of(context).colorScheme;
+
+  showModalBottomSheet<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          height: 100,
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                ElevatedButton(
+                  child: const Text('Share invidious link'),
+                  onPressed: () {
+                    Share.share(links.getInvidiousLink(db.getCurrentlySelectedServer()));
+                    Navigator.of(context).pop();
+                  },
+                ),
+                ElevatedButton(
+                  child: const Text('Share youtube link'),
+                  onPressed: () {
+                    Share.share(links.getYoutubeLink());
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            ),
+          ),
+        );
+      });
 }

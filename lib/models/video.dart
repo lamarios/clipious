@@ -1,3 +1,6 @@
+import 'package:invidious/models/db/server.dart';
+import 'package:invidious/models/interfaces/sharelink.dart';
+
 import 'adaptiveFormat.dart';
 import 'caption.dart';
 import 'formatStream.dart';
@@ -9,7 +12,7 @@ import 'package:json_annotation/json_annotation.dart';
 part 'video.g.dart';
 
 @JsonSerializable()
-class Video {
+class Video implements ShareLinks {
   String title;
   String videoId;
   List<ImageObject> videoThumbnails;
@@ -91,10 +94,19 @@ class Video {
 
   ImageObject? getBestThumbnail() {
     if (videoThumbnails.isNotEmpty) {
-      return videoThumbnails.firstWhere((element) => element.quality=='maxres');
+      return videoThumbnails.firstWhere((element) => element.quality == 'maxres');
     } else {
       return null;
     }
   }
 
+  @override
+  String getInvidiousLink(Server server) {
+    return '${server.url}/watch?v=$videoId';
+  }
+
+  @override
+  String getYoutubeLink() {
+    return 'https://www.youtube.com/watch?v=$videoId';
+  }
 }

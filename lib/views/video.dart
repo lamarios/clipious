@@ -162,17 +162,21 @@ class VideoViewState extends State<VideoView> with AfterLayoutMixin<VideoView>, 
           // style: TextStyle(fontSize: 15),
         ),
         actions: [
-          GestureDetector(
-            child:  Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Icon(
-                Icons.share,
-                color: colorScheme.secondary,
+          Visibility(
+            visible: video != null,
+            child: GestureDetector(
+              onTap: () => showSharingSheet(context, video!),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Icon(
+                  Icons.share,
+                  color: colorScheme.secondary,
+                ),
               ),
             ),
           ),
           GestureDetector(
-            child:  Padding(
+            child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Icon(
                 Icons.add,

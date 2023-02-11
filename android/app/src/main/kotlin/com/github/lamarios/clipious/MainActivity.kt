@@ -1,4 +1,4 @@
-package com.example.invidious
+package com.github.lamarios.clipious
 
 import io.flutter.embedding.android.FlutterActivity
 

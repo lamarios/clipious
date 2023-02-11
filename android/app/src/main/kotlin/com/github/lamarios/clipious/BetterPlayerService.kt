@@ -1,11 +1,10 @@
-package com.example.invidious;
+package com.github.lamarios.clipious;
 
 import android.app.NotificationManager
 import android.app.Service
 import android.content.Context
 import android.content.Intent
 import android.os.IBinder
-import android.util.Log
 
 class BetterPlayerService : Service() {
     override fun onBind(intent: Intent?): IBinder? {
