@@ -24,7 +24,7 @@ final _entities = <ModelEntity>[
   ModelEntity(
       id: const IdUid(1, 8038281984607819042),
       name: 'Server',
-      lastPropertyId: const IdUid(3, 2983333445278944481),
+      lastPropertyId: const IdUid(4, 3422621380867834787),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
@@ -124,7 +124,7 @@ ModelDefinition getObjectBoxModel() {
       lastSequenceId: const IdUid(0, 0),
       retiredEntityUids: const [],
       retiredIndexUids: const [],
-      retiredPropertyUids: const [],
+      retiredPropertyUids: const [3422621380867834787],
       retiredRelationUids: const [],
       modelVersion: 5,
       modelVersionParserMinimum: 5,
@@ -144,7 +144,7 @@ ModelDefinition getObjectBoxModel() {
           final authTokenOffset = object.authToken == null
               ? null
               : fbb.writeString(object.authToken!);
-          fbb.startTable(4);
+          fbb.startTable(5);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, urlOffset);
           fbb.addOffset(2, authTokenOffset);

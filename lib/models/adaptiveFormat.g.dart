@@ -8,9 +8,9 @@ part of 'adaptiveFormat.dart';
 
 AdaptiveFormat _$AdaptiveFormatFromJson(Map<String, dynamic> json) =>
     AdaptiveFormat(
-      json['index'] as String,
-      json['bitrate'] as String,
-      json['init'] as String,
+      json['index'] as String?,
+      json['bitrate'] as String?,
+      json['init'] as String?,
       json['url'] as String,
       json['itag'] as String,
       json['type'] as String,

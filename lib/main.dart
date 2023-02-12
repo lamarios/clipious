@@ -1,8 +1,9 @@
+import 'dart:async';
+
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:fbroadcast/fbroadcast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/views/playlists.dart';
 import 'package:invidious/views/popular.dart';
@@ -10,14 +11,24 @@ import 'package:invidious/views/search.dart';
 import 'package:invidious/views/settings.dart';
 import 'package:invidious/views/subscriptions.dart';
 import 'package:invidious/views/trending.dart';
+import 'package:invidious/views/video.dart';
+import 'package:logging/logging.dart';
+import 'package:receive_sharing_intent/receive_sharing_intent.dart';
 
 import 'database.dart';
 
 const brandColor = Color(0xFFFF7D00);
 
 final scaffoldKey = GlobalKey<ScaffoldMessengerState>();
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 Future<void> main() async {
+  Logger.root.level = Level.ALL; // defaults to Level.INFO
+  Logger.root.onRecord.listen((record) {
+    debugPrint('[${record.level.name}] [${record.loggerName}] ${record.message}');
+  });
+
+
   WidgetsFlutterBinding.ensureInitialized();
   db = await DbClient.create();
   runApp(const MyApp());
@@ -71,6 +82,7 @@ class MyApp extends StatelessWidget {
           scaffoldMessengerKey: scaffoldKey,
           title: 'Clipious',
           navigatorObservers: [routeObserver],
+          navigatorKey: navigatorKey,
           theme: ThemeData(
             useMaterial3: true,
             colorScheme: lightColorScheme,
@@ -89,8 +101,10 @@ class Home extends StatefulWidget {
 }
 
 class HomeState extends State<Home> {
+  final log = Logger('Hone');
   int selectedIndex = 0;
   bool isLoggedIn = db.isLoggedInToCurrentServer();
+  late StreamSubscription _intentDataStreamSubscription;
 
   @override
   initState() {
@@ -101,6 +115,50 @@ class HomeState extends State<Home> {
         isLoggedIn = db.isLoggedInToCurrentServer();
       });
     });
+
+    // For sharing or opening urls/text coming from outside the app while the app is in the memory
+    _intentDataStreamSubscription = ReceiveSharingIntent.getTextStream().listen((String value) {
+      openAppLink(value);
+    }, onError: (err) {
+      log.warning("getLinkStream error: $err");
+    });
+
+    // For sharing or opening urls/text coming from outside the app while the app is closed
+    ReceiveSharingIntent.getInitialText().then((value) {
+      setState(() {
+        openAppLink((value ?? ''));
+      });
+    });
+  }
+
+  @override
+  dispose() {
+    _intentDataStreamSubscription.cancel();
+    super.dispose();
+  }
+
+  void openAppLink(String url) {
+    try {
+      Uri uri = Uri.parse(url);
+      if (YOUTUBE_HOSTS.contains(uri.host)) {
+        if (uri.pathSegments.length == 1 && uri.pathSegments.contains("watch") && uri.queryParameters.containsKey('v')) {
+          String videoId = uri.queryParameters['v']!;
+          navigatorKey.currentState?.push(MaterialPageRoute(
+              builder: (context) => VideoView(
+                    videoId: videoId,
+                  )));
+        }
+        if (uri.host == 'youtu.be' && uri.pathSegments.length == 1) {
+          String videoId = uri.pathSegments[0];
+          navigatorKey.currentState?.push(MaterialPageRoute(
+              builder: (context) => VideoView(
+                    videoId: videoId,
+                  )));
+        }
+      }
+    } catch (err) {
+      // not a url;
+    }
   }
 
   openSettings(BuildContext context) {

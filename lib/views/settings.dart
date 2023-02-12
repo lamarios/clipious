@@ -57,8 +57,10 @@ class SettingsState extends State<Settings> with AfterLayoutMixin {
   }
 
   selectServer(BuildContext context) {
-    List<String> servers = List.of(PUBLIC_SERVERS, growable: true);
+    List<String> servers = [];
     servers.addAll(db.getServers().where((s) => PUBLIC_SERVERS.lastIndexWhere((s2) => s2 == s.url) == -1).map((e) => e.url).toList());
+
+    servers.addAll(PUBLIC_SERVERS);
 
     SelectDialog.showModal<String>(
       context,

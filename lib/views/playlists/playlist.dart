@@ -11,17 +11,21 @@ class PlaylistItem extends StatelessWidget {
 
   const PlaylistItem({super.key, required this.playlist});
 
-  openPlayList(BuildContext context){
+  openPlayList(BuildContext context) {
     Navigator.push(context, MaterialPageRoute(builder: (context) => PlaylistView(playlist: playlist,)));
   }
 
 
   @override
   Widget build(BuildContext context) {
+    ColorScheme colors = Theme
+        .of(context)
+        .colorScheme;
+
     List<Widget> thumbs = [];
 
-    int i = 0;
-    for (VideoInList video in playlist.videos) {
+    for (int i = 0; i < 3; i++) {
+      // for (VideoInList video in playlist.videos) {
       thumbs.add(Positioned(
         top: (10 * i).toDouble(),
         left: (15 * i).toDouble(),
@@ -30,24 +34,21 @@ class PlaylistItem extends StatelessWidget {
           child: AspectRatio(
             aspectRatio: 16 / 9,
             child: Opacity(
-              opacity: 1-(0.3*i),
-              child: VideoThumbnailView(
-                videoId: video.videoId,
-                thumbnailUrl: ImageObject.getBestThumbnail(video.videoThumbnails)?.url ?? '',
-              ),
+              opacity: 1 - (0.3 * i),
+              child: playlist.videos.length > i ? VideoThumbnailView(
+                videoId: playlist.videos[i].videoId,
+                thumbnailUrl: ImageObject
+                    .getBestThumbnail(playlist.videos[i].videoThumbnails)
+                    ?.url ?? '',
+              ): Container(decoration: BoxDecoration(color: colors.secondaryContainer, borderRadius: BorderRadius.circular(10)),),
             ),
           ),
         ),
       ));
-      i++;
-      if(i == 3){
-        break;
-      }
     }
 
     thumbs = thumbs.reversed.toList();
 
-    ColorScheme colors = Theme.of(context).colorScheme;
 
     return GestureDetector(
       onTap: () => openPlayList(context),

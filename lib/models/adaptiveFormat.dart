@@ -4,9 +4,9 @@ part 'adaptiveFormat.g.dart';
 
 @JsonSerializable()
 class AdaptiveFormat {
-  String index;
-  String bitrate;
-  String init;
+  String? index;
+  String? bitrate;
+  String? init;
   String url;
   String itag;
   String type;

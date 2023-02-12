@@ -22,6 +22,12 @@ class SearchState extends State<Search> {
   String searchQuery = '';
   TextEditingController searchController = TextEditingController();
 
+  @override
+  dispose() {
+    searchController.dispose();
+    super.dispose();
+  }
+
   Future<List<String>> searchSuggestions(String query) async {
     return (await service.getSearchSuggestion(query)).suggestions;
   }
@@ -54,7 +60,7 @@ class SearchState extends State<Search> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(top:6, left:16, right:16,bottom:5),
+                  padding: const EdgeInsets.only(top: 6, left: 16, right: 16, bottom: 5),
                   child: Row(
                     children: [
                       Padding(
@@ -73,7 +79,7 @@ class SearchState extends State<Search> {
                       Expanded(
                         child: TypeAheadField(
                           textFieldConfiguration: TextFieldConfiguration(
-                            autofocus: true,
+                              autofocus: true,
                               controller: searchController,
                               decoration: InputDecoration(
                                   icon: Icon(

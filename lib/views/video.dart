@@ -19,6 +19,7 @@ import 'package:invidious/views/video/recommendedVideos.dart';
 import '../models/sponsorSegment.dart';
 import '../models/video.dart';
 import '../utils.dart';
+import 'video/addToPlayList.dart';
 
 class VideoView extends StatefulWidget {
   final String videoId;
@@ -50,6 +51,9 @@ class VideoViewState extends State<VideoView> with AfterLayoutMixin<VideoView>, 
   bool loadingStream = false;
   bool useSponsorBlock = db.getSettings(USE_SPONSORBLOCK)?.value == 'true';
   Queue<List<int>> sponsorSegments = Queue.of([]);
+  bool isLoggedIn = service.isLoggedIn();
+
+  String error = '';
 
   @override
   void initState() {
@@ -63,6 +67,7 @@ class VideoViewState extends State<VideoView> with AfterLayoutMixin<VideoView>, 
   @override
   dispose() async {
     super.dispose();
+    scrollController.dispose();
     if (videoController != null) {
       videoController!.removeEventsListener(onVideoListener);
       videoController!.dispose();
@@ -175,12 +180,16 @@ class VideoViewState extends State<VideoView> with AfterLayoutMixin<VideoView>, 
               ),
             ),
           ),
-          GestureDetector(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Icon(
-                Icons.add,
-                color: colorScheme.secondary,
+          Visibility(
+            visible: isLoggedIn,
+            child: GestureDetector(
+              onTap: () => AddToPlaylist.showDialog(context, video!.videoId),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Icon(
+                  Icons.add,
+                  color: colorScheme.secondary,
+                ),
               ),
             ),
           ),
@@ -214,77 +223,82 @@ class VideoViewState extends State<VideoView> with AfterLayoutMixin<VideoView>, 
             height: double.infinity,
             child: AnimatedSwitcher(
                 duration: animationDuration,
-                child: loadingVideo
-                    ? const CircularProgressIndicator()
-                    : Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            AnimatedScale(
-                              scale: scale,
-                              duration: Duration.zero,
-                              // curve: Curves.easeInOutQuad,
-                              child: VideoThumbnailView(
-                                videoId: video!.videoId,
-                                thumbnailUrl: video!.getBestThumbnail()?.url ?? '',
-                                child: AspectRatio(
-                                  aspectRatio: 16 / 9,
-                                  child: AnimatedSwitcher(
-                                      duration: animationDuration,
-                                      child: !playingVideo
-                                          ? loadingStream
-                                              ? const CircularProgressIndicator()
-                                              : GestureDetector(
-                                                  key: const ValueKey('nt-playing'),
-                                                  onTap: () => playVideo(context),
-                                                  child: Icon(
-                                                    Icons.play_arrow,
-                                                    color: colorScheme.primary,
-                                                    size: 100,
-                                                  ),
-                                                )
-                                          : BetterPlayer(
-                                              key: _betterPlayerKey,
-                                              controller: videoController!,
-                                            )),
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                                child: Padding(
-                              padding: const EdgeInsets.only(top: 4),
-                              child: ListView(
-                                controller: scrollController,
-                                children: [
-                                  Padding(
-                                      padding: EdgeInsets.only(top: 10),
+                child: error.isNotEmpty
+                    ? Container(
+                        alignment: Alignment.center,
+                        child: Text(error),
+                      )
+                    : loadingVideo
+                        ? const CircularProgressIndicator()
+                        : Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                AnimatedScale(
+                                  scale: scale,
+                                  duration: Duration.zero,
+                                  // curve: Curves.easeInOutQuad,
+                                  child: VideoThumbnailView(
+                                    videoId: video!.videoId,
+                                    thumbnailUrl: video!.getBestThumbnail()?.url ?? '',
+                                    child: AspectRatio(
+                                      aspectRatio: 16 / 9,
                                       child: AnimatedSwitcher(
                                           duration: animationDuration,
-                                          child: <Widget>[
-                                            VideoInfo(
-                                              video: video!,
-                                            ),
-                                            Column(
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  'Comments',
-                                                  style: TextStyle(color: colorScheme.secondary, fontSize: 20),
+                                          child: !playingVideo
+                                              ? loadingStream
+                                                  ? const CircularProgressIndicator()
+                                                  : GestureDetector(
+                                                      key: const ValueKey('nt-playing'),
+                                                      onTap: () => playVideo(context),
+                                                      child: Icon(
+                                                        Icons.play_arrow,
+                                                        color: colorScheme.primary,
+                                                        size: 100,
+                                                      ),
+                                                    )
+                                              : BetterPlayer(
+                                                  key: _betterPlayerKey,
+                                                  controller: videoController!,
+                                                )),
+                                    ),
+                                  ),
+                                ),
+                                Expanded(
+                                    child: Padding(
+                                  padding: const EdgeInsets.only(top: 4),
+                                  child: ListView(
+                                    controller: scrollController,
+                                    children: [
+                                      Padding(
+                                          padding: EdgeInsets.only(top: 10),
+                                          child: AnimatedSwitcher(
+                                              duration: animationDuration,
+                                              child: <Widget>[
+                                                VideoInfo(
+                                                  video: video!,
                                                 ),
-                                                CommentsView(
-                                                  videoId: video!.videoId,
+                                                Column(
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      'Comments',
+                                                      style: TextStyle(color: colorScheme.secondary, fontSize: 20),
+                                                    ),
+                                                    CommentsView(
+                                                      videoId: video!.videoId,
+                                                    ),
+                                                  ],
                                                 ),
-                                              ],
-                                            ),
-                                            RecommendedVideos(video: video!)
-                                          ][selectedIndex]))
-                                ],
-                              ),
-                            )),
-                          ],
-                        ),
-                      )),
+                                                RecommendedVideos(video: video!)
+                                              ][selectedIndex]))
+                                    ],
+                                  ),
+                                )),
+                              ],
+                            ),
+                          )),
           ),
         ),
       ),
@@ -293,11 +307,20 @@ class VideoViewState extends State<VideoView> with AfterLayoutMixin<VideoView>, 
 
   @override
   Future<FutureOr<void>> afterFirstLayout(BuildContext context) async {
-    Video video = await service.getVideo(widget.videoId);
-    setState(() {
-      this.video = video;
-      loadingVideo = false;
-    });
+    try {
+      Video video = await service.getVideo(widget.videoId);
+      setState(() {
+        this.video = video;
+        loadingVideo = false;
+      });
+    } catch (err) {
+
+      setState(() {
+        error = 'Couldn\'t load the video';
+        loadingVideo = false;
+      });
+      rethrow;
+    }
 
     if (useSponsorBlock) {
       List<SponsorSegment> sponsorSegments = await service.getSponsorSegments(widget.videoId);

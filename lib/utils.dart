@@ -51,7 +51,6 @@ Future<void> showAlertDialog(BuildContext context, List<Widget> body) async {
 }
 
 void showSharingSheet(BuildContext context, ShareLinks links) {
-  ColorScheme colorScheme = Theme.of(context).colorScheme;
 
   showModalBottomSheet<void>(
       context: context,

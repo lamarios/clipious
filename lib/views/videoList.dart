@@ -29,9 +29,9 @@ class VideoListState extends State<VideoList> with AfterLayoutMixin<VideoList> {
   RefreshController refreshController = RefreshController(initialRefresh: false);
   List<VideoInList> videos = [];
   bool loading = true;
-  bool hasMethod = false;
   Map<String, Image> imageCache = {};
   ScrollController scrollController = ScrollController();
+  String error = '';
 
   @override
   void initState() {
@@ -47,16 +47,15 @@ class VideoListState extends State<VideoList> with AfterLayoutMixin<VideoList> {
   dispose() {
     super.dispose();
     scrollController.dispose();
+    refreshController.dispose();
   }
 
   onScrollEvent() {
     if (scrollController.hasClients) {
       if (scrollController.position.maxScrollExtent == scrollController.offset) {
-        print('reached end');
       }
     }
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -66,8 +65,12 @@ class VideoListState extends State<VideoList> with AfterLayoutMixin<VideoList> {
       children: [
         Visibility(visible: loading, child: const LinearProgressIndicator()),
         Expanded(
-          child: loading
-              ? Container(color: colorScheme.background)
+          child: loading || error.isNotEmpty
+              ? Container(
+                  alignment: Alignment.center,
+                  color: colorScheme.background,
+                  child: Visibility(visible: error.isNotEmpty, child: GestureDetector(onTap: () => getVideos(context), child: Text(error))),
+                )
               : Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: FadeIn(
@@ -97,25 +100,28 @@ class VideoListState extends State<VideoList> with AfterLayoutMixin<VideoList> {
     );
   }
 
-  getVideos(BuildContext? context) {
+  getVideos(BuildContext? context) async {
+    setState(() {
+      error = '';
+      loading = true;
+    });
     if (widget.getVideos != null) {
-      widget.getVideos!().then((List<VideoInList> videos) {
-/*
-        if (context != null) {
-          for (var v in videos) {
-            precacheImage(NetworkImage(v.getBestThumbnail()?.url ?? ''), context);
-          }
-        }
-*/
-
+      try {
+        List<VideoInList> videos = await widget.getVideos!();
         setState(() {
-          hasMethod = true;
           this.videos = videos;
           loading = false;
         });
-        refreshController.refreshCompleted();
-      });
+      } catch (err) {
+        setState(() {
+          this.videos = [];
+          loading = false;
+          error = 'Couldn\'t fetch videos, tap to try again';
+        });
+      }
     }
+
+    refreshController.refreshCompleted();
   }
 
   @override

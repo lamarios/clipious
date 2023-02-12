@@ -51,6 +51,7 @@ class ChannelViewState extends State<ChannelView> with AfterLayoutMixin<ChannelV
 
   @override
   dispose() async {
+    scrollController.dispose();
     super.dispose();
   }
 

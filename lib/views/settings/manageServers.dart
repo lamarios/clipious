@@ -1,18 +1,19 @@
 import 'dart:async';
-import 'dart:convert';
 
 import 'package:after_layout/after_layout.dart';
 import 'package:fbroadcast/fbroadcast.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_web_auth/flutter_web_auth.dart';
 import 'package:invidious/database.dart';
 import 'package:invidious/globals.dart';
+import 'package:invidious/service.dart';
 import 'package:invidious/utils.dart';
 import 'package:settings_ui/settings_ui.dart';
 
 import '../../models/db/server.dart';
 import '../settings.dart';
+
+const pingTimeout = 5000;
 
 class ManageServers extends StatefulWidget {
   const ManageServers({super.key});
@@ -24,6 +25,9 @@ class ManageServers extends StatefulWidget {
 class ManageServerState extends State<ManageServers> with AfterLayoutMixin<ManageServers> {
   late List<Server> dbServers;
   TextEditingController addServerController = TextEditingController(text: 'https://');
+  List<Server> publicServers = PUBLIC_SERVERS.map((e) => Server(e)).toList();
+
+  bool pinging = true;
 
   bool isLoggedInToServer(String url) {
     Server server = dbServers.firstWhere((s) => s.url == url, orElse: () => Server('notFound'));
@@ -37,9 +41,15 @@ class ManageServerState extends State<ManageServers> with AfterLayoutMixin<Manag
     refreshServers();
   }
 
+  @override
+  dispose() {
+    addServerController.dispose();
+    super.dispose();
+  }
+
   logIn(String serverUrl) async {
     String url = serverUrl + '/authorize_token?scopes=:feed,:subscriptions*,:playlists*&callback_url=impuc-auth://';
-    final result = await FlutterWebAuth.authenticate(url: url, callbackUrlScheme: 'impuc-auth');
+    final result = await FlutterWebAuth.authenticate(url: url, callbackUrlScheme: 'clipious-auth');
 
     final token = Uri.parse(result).queryParameters['token'];
 
@@ -128,16 +138,21 @@ class ManageServerState extends State<ManageServers> with AfterLayoutMixin<Manag
   }
 
   saveServer(BuildContext context) async {
+    var serverUrl = addServerController.text;
+    if (serverUrl.endsWith("/")) {
+      serverUrl = serverUrl.substring(0, serverUrl.length - 1);
+    }
+
     bool isValidServer = false;
     try {
-      isValidServer = await service.isValidServer(addServerController.text);
+      isValidServer = await service.isValidServer(serverUrl);
     } catch (err) {
       isValidServer = false;
     }
 
     if (!context.mounted) return;
     if (isValidServer) {
-      Server server = Server(addServerController.text);
+      Server server = Server(serverUrl);
       db.addServer(server);
       refreshServers();
       Navigator.pop(context);
@@ -164,7 +179,6 @@ class ManageServerState extends State<ManageServers> with AfterLayoutMixin<Manag
                       autocorrect: false,
                       enableSuggestions: false,
                       enableIMEPersonalizedLearning: false,
-
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
@@ -230,11 +244,34 @@ class ManageServerState extends State<ManageServers> with AfterLayoutMixin<Manag
                           ]),
                 SettingsSection(
                     title: Text('Public servers'),
-                    tiles: PUBLIC_SERVERS
+                    tiles: publicServers
                         .map((s) => SettingsTile(
-                              title: Text(s),
-                              value: isLoggedInToServer(s) ? Text('Logged in') : Text('Not logged in, tap to log in'),
-                              onPressed: (context) => showServerActions(context, Server(s)),
+                              key: Key(s.url),
+                              title: Row(
+                                children: [
+                                  Expanded(child: Text('${s.url} ')),
+                                  pinging
+                                      ? const SizedBox(
+                                          width: 15,
+                                          height: 15,
+                                          child: CircularProgressIndicator(
+                                            strokeWidth: 2,
+                                          ))
+                                      : Text(
+                                          s.ping != null && s.ping != MAX_PING
+                                              ? (s.ping ?? pingTimeout) >= pingTimeout
+                                                  ? '> 5s'
+                                                  : '${s.ping}ms'
+                                              : '',
+                                          style: TextStyle(fontSize: 15, color: colorScheme.secondary))
+                                ],
+                              ),
+                              value: isLoggedInToServer(s.url)
+                                  ? const Text('Logged in')
+                                  : const Text(
+                                      'Not logged in, tap to log in',
+                                    ),
+                              onPressed: (context) => showServerActions(context, s),
                             ))
                         .toList()),
               ],
@@ -242,5 +279,18 @@ class ManageServerState extends State<ManageServers> with AfterLayoutMixin<Manag
   }
 
   @override
-  FutureOr<void> afterFirstLayout(BuildContext context) {}
+  FutureOr<void> afterFirstLayout(BuildContext context) async {
+    var servers = publicServers;
+    List<Server> pingedServers = await Future.wait(servers.map((e) async {
+      e.ping = await service.pingServer(e.url).timeout(const Duration(seconds: pingTimeout), onTimeout: () => pingTimeout);
+      return e;
+    }));
+
+    pingedServers.sort((a, b) => (a.ping ?? MAX_PING).compareTo(b.ping ?? MAX_PING));
+
+    setState(() {
+      pinging = false;
+      publicServers = pingedServers;
+    });
+  }
 }

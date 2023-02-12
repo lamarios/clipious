@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/views/playlists/playlist.dart';
+import 'package:logging/logging.dart';
 
 import '../models/playlist.dart';
 import '../utils.dart';
@@ -20,6 +21,7 @@ class Playlists extends StatefulWidget {
 }
 
 class _PlaylistsState extends State<Playlists> with AfterLayoutMixin<Playlists> {
+  final log= Logger('Playlists');
   List<Playlist> playlists = [];
   bool loading = true;
 
@@ -50,7 +52,6 @@ class _PlaylistsState extends State<Playlists> with AfterLayoutMixin<Playlists> 
       loading = true;
     });
     List<Playlist> lists = await service.getUserPlaylists();
-    print(lists.length);
     setState(() {
       playlists = lists;
       loading = false;
@@ -74,7 +75,7 @@ class _AddPlayListButtonState extends State<AddPlayListButton> {
   addPlaylistDialog(BuildContext context) {
     showDialog<String>(
         context: context,
-        builder: (BuildContext context) => const Dialog(
+        builder: (BuildContext context) =>  Dialog(
               child: AddPlayListForm(),
             ));
   }
@@ -91,7 +92,9 @@ class _AddPlayListButtonState extends State<AddPlayListButton> {
 }
 
 class AddPlayListForm extends StatefulWidget {
-  const AddPlayListForm({super.key});
+  Function(BuildContext context, String playlistId)? afterAdd;
+
+  AddPlayListForm({super.key, this.afterAdd});
 
   @override
   State<AddPlayListForm> createState() => _AddPlayListFormState();
@@ -103,9 +106,17 @@ class _AddPlayListFormState extends State<AddPlayListForm> {
 
   addPlaylist(BuildContext context) async {
     try {
-      await service.createPlayList(nameController.value.text, privacyValue);
+      String? playlistId = await service.createPlayList(nameController.value.text, privacyValue);
       FBroadcast.instance().broadcast(PLAYLIST_ADDED);
+
+      if(widget.afterAdd != null){
+        widget.afterAdd!(context, playlistId!);
+      }
+
+
       Navigator.of(context).pop();
+
+
     } catch (err) {
       showAlertDialog(context, [Text(err.toString())]);
     }
@@ -121,24 +132,35 @@ class _AddPlayListFormState extends State<AddPlayListForm> {
         children: <Widget>[
           const Text('Add Playlist'),
           TextField(
+            decoration: InputDecoration(hintText: 'Playlist name'),
             controller: nameController,
             autocorrect: false,
             enableSuggestions: false,
             enableIMEPersonalizedLearning: false,
           ),
-          DropdownButton(
-            value: privacyValue,
-            items: const [
-              DropdownMenuItem(value: 'public', child: Text('Public')),
-              DropdownMenuItem(value: 'unlisted', child: Text('Unlisted')),
-              DropdownMenuItem(value: 'private', child: Text('Private'))
-            ],
-            onChanged: (value) {
-              print(value);
-              setState(() {
-                privacyValue = value ?? '';
-              });
-            },
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: const Text('Visibility:'),
+                ),
+                DropdownButton(
+                  value: privacyValue,
+                  items: const [
+                    DropdownMenuItem(value: 'public', child: Text('Public')),
+                    DropdownMenuItem(value: 'unlisted', child: Text('Unlisted')),
+                    DropdownMenuItem(value: 'private', child: Text('Private'))
+                  ],
+                  onChanged: (value) {
+                    setState(() {
+                      privacyValue = value ?? '';
+                    });
+                  },
+                ),
+              ],
+            ),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.end,

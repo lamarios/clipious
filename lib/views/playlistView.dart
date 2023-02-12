@@ -56,6 +56,12 @@ class _PlaylistViewState extends State<PlaylistView> {
   }
 
   @override
+  void dispose() {
+    videoController?.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     ColorScheme colorScheme = Theme.of(context).colorScheme;
 
@@ -160,7 +166,7 @@ class _PlaylistViewState extends State<PlaylistView> {
                       ))
                     ],
                   )
-                : Container(alignment: Alignment.center,child: Text('No videos in this playlist.'))));
+                : Container(alignment: Alignment.center, child: Text('No videos in this playlist.'))));
   }
 
   openVideo(BuildContext context, String videoId) {

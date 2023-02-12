@@ -5,7 +5,7 @@
   "entities": [
     {
       "id": "1:8038281984607819042",
-      "lastPropertyId": "3:2983333445278944481",
+      "lastPropertyId": "4:3422621380867834787",
       "name": "Server",
       "properties": [
         {
@@ -90,7 +90,9 @@
   "modelVersionParserMinimum": 5,
   "retiredEntityUids": [],
   "retiredIndexUids": [],
-  "retiredPropertyUids": [],
+  "retiredPropertyUids": [
+    3422621380867834787
+  ],
   "retiredRelationUids": [],
   "version": 1
 }
