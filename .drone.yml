@@ -1,20 +1,26 @@
-kind: pipeline
-type: docker
-name: Android app
+server:
+  host: 100.107.56.112
+  user: gz
+  password:
+    from_secret: osx-ssh-password
 
 steps:
   - name: build app
-    image: cirrusci/flutter:stable
-    pull: always
+    environment:
+      KEYCHAIN_PASS:
+        from_secret: keychain_pass
+      PATH: "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/Users/gz/dev/flutter/bin"
     commands:
+      - source /Users/gz/.zshrc
+      - security unlock-keychain -p $${KEYCHAIN_PASS} /Users/gz/Library/Keychains/login.keychain-db
       - flutter doctor
       - flutter build apk --split-per-abi --build-number $(date  "+%y%j%H%M") --build-name "${DRONE_TAG:=0.0.0}"
   - name: git hub release
-    image: plugins/github-release
     settings:
       api_key:
         from_secret: github_token
-      files: build/app/outputs/flutter-apk/*
+    commands:
+      - gh release upload ${DRONE_TAG} build/app/outputs/flutter-apk/* -R lamarios/clipious
     when:
       event: tag
 #  - name: Release Android
