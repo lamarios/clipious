@@ -1,0 +1,39 @@
+kind: pipeline
+type: docker
+name: Android app
+
+steps:
+  - name: build app
+    image: cirrusci/flutter:stable
+    pull: always
+    commands:
+      - source /Users/gz/.zshrc
+      - flutter doctor
+      - security unlock-keychain -p $${KEYCHAIN_PASS} /Users/gz/Library/Keychains/login.keychain-db
+      - cd src/main/app
+      - flutter build apk --split-bi-abi --build-number $(date  "+%y%m%d%H%M%S") --build-name ${DRONE_TAG}
+  - name: git hub release
+    image: plugins/github-release
+    settings:
+      api_key:
+        from_secret: github_token
+      files: build/app/outputs/flutter-apk/*
+    when:
+      event: tag
+#  - name: Release Android
+#    environment:
+#      KEYCHAIN_PASS:
+#        from_secret: keychain_pass
+#      PATH: "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/Users/gz/dev/flutter/bin"
+#    commands:
+#      - source /Users/gz/.zshrc
+#      - flutter doctor
+#      - security unlock-keychain -p $${KEYCHAIN_PASS} /Users/gz/Library/Keychains/login.keychain-db
+#      - cd src/main/app/android
+#      - fastlane deploy
+#    when:
+#      event: tag
+trigger:
+  event:
+    - push
+    - tag

@@ -1,8 +1,12 @@
+import 'dart:async';
+
+import 'package:after_layout/after_layout.dart';
 import 'package:fbroadcast/fbroadcast.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:invidious/database.dart';
 import 'package:invidious/models/db/settings.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:settings_ui/settings_ui.dart';
 import 'package:select_dialog/select_dialog.dart';
 import '../globals.dart';
@@ -25,10 +29,11 @@ class Settings extends StatefulWidget {
   SettingsState createState() => SettingsState();
 }
 
-class SettingsState extends State<Settings> {
+class SettingsState extends State<Settings> with AfterLayoutMixin {
   List<Server> dbServers = db.getServers();
   Server currentServer = db.getCurrentlySelectedServer();
   bool sponsorBlock = db.getSettings(USE_SPONSORBLOCK)?.value == 'true';
+  PackageInfo packageInfo = PackageInfo(appName: '', packageName: '', version: '', buildNumber: '');
 
   @override
   initState() {
@@ -88,10 +93,10 @@ class SettingsState extends State<Settings> {
               lightTheme: theme,
               darkTheme: theme,
               sections: [
-                SettingsSection(title: Text('Servers'), tiles: [
+                SettingsSection(title: const Text('Servers'), tiles: [
                   SettingsTile.navigation(
-                    title: Text('Manage servers'),
-                    description: Text('Manage the invidious servers you want to interract with'),
+                    title: const Text('Manage servers'),
+                    description: const Text('Manage the invidious servers you want to interract with'),
                     onPressed: manageServers,
                   ),
                   SettingsTile(
@@ -100,15 +105,33 @@ class SettingsState extends State<Settings> {
                     onPressed: (context) => selectServer(context),
                   )
                 ]),
-                SettingsSection(title: Text('SponsorBlock'), tiles: [
+                SettingsSection(title: const Text('SponsorBlock'), tiles: [
                   SettingsTile.switchTile(
                     initialValue: sponsorBlock,
                     onToggle: toggleSponsorBlock,
-                    title: Text('Use SponsorBlock'),
-                    description: Text('Skip sponsor segments submitted by the community'),
+                    title: const Text('Use SponsorBlock'),
+                    description: const Text('Skip sponsor segments submitted by the community'),
+                  )
+                ]),
+                SettingsSection(title: (const Text('About')), tiles: [
+                  SettingsTile(
+                    title: Text('Name: ${packageInfo.appName}'),
+                    description: Text('Package: ${packageInfo.packageName}'),
+                  ),
+                  SettingsTile(
+                    title: Text('Version: ${packageInfo.version}'),
+                    description: Text('Build: ${packageInfo.buildNumber}'),
                   )
                 ])
               ],
             )));
+  }
+
+  @override
+  Future<FutureOr<void>> afterFirstLayout(BuildContext context) async {
+    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    setState(() {
+      this.packageInfo = packageInfo;
+    });
   }
 }
