@@ -1,3 +1,7 @@
+kind: pipeline
+type: ssh
+name: Android app
+
 server:
   host: 100.107.56.112
   user: gz
