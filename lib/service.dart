@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:http/http.dart';
 import 'package:http/http.dart' as http;
 import 'package:invidious/globals.dart';
+import 'package:invidious/models/errors/invidiousServiceError.dart';
 import 'package:invidious/models/playlist.dart';
 import 'package:invidious/models/sponsorSegment.dart';
 import 'package:invidious/models/userFeed.dart';
@@ -20,6 +21,8 @@ import 'models/searchSuggestion.dart';
 import 'models/subscription.dart';
 import 'models/videoComments.dart';
 
+
+const GET_INVIDIOUS_PUBLIC_SERVERS = 'https://api.invidious.io/instances.json';
 const GET_VIDEO = '/api/v1/videos/:id';
 const GET_TRENDING = '/api/v1/trending';
 const GET_POPULAR = '/api/v1/popular';
@@ -53,7 +56,7 @@ class Service {
     }
 
     if (error != null) {
-      throw Exception(error);
+      throw InvidiousServiceError(error!);
     }
 
     return decoded;

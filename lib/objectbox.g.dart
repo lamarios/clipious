@@ -24,7 +24,7 @@ final _entities = <ModelEntity>[
   ModelEntity(
       id: const IdUid(1, 8038281984607819042),
       name: 'Server',
-      lastPropertyId: const IdUid(4, 3422621380867834787),
+      lastPropertyId: const IdUid(5, 971220157301355316),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
@@ -42,6 +42,11 @@ final _entities = <ModelEntity>[
             id: const IdUid(3, 2983333445278944481),
             name: 'authToken',
             type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(5, 971220157301355316),
+            name: 'ping',
+            type: 6,
             flags: 0)
       ],
       relations: <ModelRelation>[],
@@ -144,10 +149,11 @@ ModelDefinition getObjectBoxModel() {
           final authTokenOffset = object.authToken == null
               ? null
               : fbb.writeString(object.authToken!);
-          fbb.startTable(5);
+          fbb.startTable(6);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, urlOffset);
           fbb.addOffset(2, authTokenOffset);
+          fbb.addInt64(4, object.ping);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -159,7 +165,9 @@ ModelDefinition getObjectBoxModel() {
               .vTableGet(buffer, rootOffset, 6, ''))
             ..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0)
             ..authToken = const fb.StringReader(asciiOptimization: true)
-                .vTableGetNullable(buffer, rootOffset, 8);
+                .vTableGetNullable(buffer, rootOffset, 8)
+            ..ping = const fb.Int64Reader()
+                .vTableGetNullable(buffer, rootOffset, 12);
 
           return object;
         }),
@@ -239,6 +247,9 @@ class Server_ {
   /// see [Server.authToken]
   static final authToken =
       QueryStringProperty<Server>(_entities[0].properties[2]);
+
+  /// see [Server.ping]
+  static final ping = QueryIntegerProperty<Server>(_entities[0].properties[3]);
 }
 
 /// [SettingsValue] entity fields to define ObjectBox queries.

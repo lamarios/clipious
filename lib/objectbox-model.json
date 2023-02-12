@@ -5,7 +5,7 @@
   "entities": [
     {
       "id": "1:8038281984607819042",
-      "lastPropertyId": "4:3422621380867834787",
+      "lastPropertyId": "5:971220157301355316",
       "name": "Server",
       "properties": [
         {
@@ -25,6 +25,11 @@
           "id": "3:2983333445278944481",
           "name": "authToken",
           "type": 9
+        },
+        {
+          "id": "5:971220157301355316",
+          "name": "ping",
+          "type": 6
         }
       ],
       "relations": []

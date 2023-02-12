@@ -11,6 +11,7 @@ import 'package:invidious/database.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/main.dart';
 import 'package:invidious/models/db/progress.dart';
+import 'package:invidious/models/errors/invidiousServiceError.dart';
 import 'package:invidious/views/components/videoThumbnail.dart';
 import 'package:invidious/views/video/comments.dart';
 import 'package:invidious/views/video/info.dart';
@@ -314,9 +315,12 @@ class VideoViewState extends State<VideoView> with AfterLayoutMixin<VideoView>, 
         loadingVideo = false;
       });
     } catch (err) {
-
       setState(() {
-        error = 'Couldn\'t load the video';
+        if (err is InvidiousServiceError) {
+          error = (err).message;
+        } else {
+          error = 'Couldn\'t load the video';
+        }
         loadingVideo = false;
       });
       rethrow;
