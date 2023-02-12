@@ -62,14 +62,14 @@ void showSharingSheet(BuildContext context, ShareLinks links) {
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                ElevatedButton(
+                FilledButton.tonal(
                   child: const Text('Share invidious link'),
                   onPressed: () {
                     Share.share(links.getInvidiousLink(db.getCurrentlySelectedServer()));
                     Navigator.of(context).pop();
                   },
                 ),
-                ElevatedButton(
+                FilledButton.tonal(
                   child: const Text('Share youtube link'),
                   onPressed: () {
                     Share.share(links.getYoutubeLink());
