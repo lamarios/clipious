@@ -8,7 +8,7 @@ steps:
     pull: always
     commands:
       - flutter doctor
-      - flutter build apk --split-bi-abi --build-number $(date  "+%y%m%d%H%M%S") --build-name ${DRONE_TAG}
+      - flutter build apk --split-per-abi --build-number $(date  "+%y%m%d%H%M%S") --build-name ${DRONE_TAG}
   - name: git hub release
     image: plugins/github-release
     settings:
