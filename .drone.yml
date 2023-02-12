@@ -4,7 +4,7 @@ name: Android app
 
 steps:
   - name: build app
-    image: bitsydarel/flutter-ci:latest-no-emulator
+    image: cirrusci/flutter:stable
     pull: always
     commands:
       - flutter doctor
