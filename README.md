@@ -9,6 +9,7 @@ Android client application for invidious, the privacy focused youtube front end
 - SponsorBlock
 - Video view/progress tracking
 - user playlists
+- background playback
 
 ## Screenshots
 
