@@ -277,7 +277,7 @@ class Service {
 
   Future<Duration?> pingServer(String url) async {
     int start = DateTime.now().millisecondsSinceEpoch;
-    String fullUri = '$url${GET_VIDEO.replaceAll(":id", 'dQw4w9WgXcQ')}';
+    String fullUri = '$url${STATS}';
     log.info('calling ${fullUri}');
     final response = await http.get(Uri.parse(fullUri), headers: {'Content-Type': 'application/json; charset=utf-16'});
 

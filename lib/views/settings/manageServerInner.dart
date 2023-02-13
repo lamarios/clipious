@@ -272,6 +272,9 @@ class _ManagerServersViewState extends State<ManagerServersView> with AfterLayou
   Widget build(BuildContext context) {
     ColorScheme colorScheme = Theme.of(context).colorScheme;
     SettingsThemeData theme = settingsTheme(colorScheme);
+
+    var filteredPublicServers= publicServers.where((s) => dbServers.indexWhere((element) => element.url == s.url) == -1).toList();
+
     return Stack(
       children: [
         SettingsList(
@@ -314,9 +317,15 @@ class _ManagerServersViewState extends State<ManagerServersView> with AfterLayou
                         ? [
                             SettingsTile(
                               title: const Text('Loading public servers...'),
+                              leading: const SizedBox(
+                                  height: 15,
+                                  width: 15,
+                                  child: CircularProgressIndicator(
+                                    strokeWidth: 2,
+                                  )),
                             )
                           ]
-                        : publicServers
+                        : filteredPublicServers
                             .map((s) => SettingsTile(
                                   key: Key(s.url),
                                   title: Row(
@@ -326,11 +335,12 @@ class _ManagerServersViewState extends State<ManagerServersView> with AfterLayou
                                           style: TextStyle(fontSize: 15, color: colorScheme.secondary))
                                     ],
                                   ),
-                                  value: isLoggedInToServer(s.url)
-                                      ? const Text('Logged in')
-                                      : const Text(
-                                          'Not logged in, tap to log in',
-                                        ),
+                                  value: Row(
+                                    children: [
+                                      Visibility(visible: s.flag != null && s.region != null, child: Text('${s.flag} - ${s.region} - ')),
+                                      const Text('Tap to add server to your list')
+                                    ],
+                                  ),
                                   onPressed: (context) => showPublicServerActions(context, s),
                                 ))
                             .toList()),
@@ -357,7 +367,13 @@ class _ManagerServersViewState extends State<ManagerServersView> with AfterLayou
     try {
       var public = await service.getPublicServers();
 
-      var servers = public.where((s) => dbServers.indexWhere((element) => element.url == s.uri) == -1).map((e) => Server(e.uri)).toList();
+      var servers = public.map((e) {
+        var s = Server(e.uri);
+        s.flag = e.flag;
+        s.region = e.region;
+
+        return s;
+      }).toList();
 
       List<Server> pingedServers = await Future.wait(servers.map((e) async {
         e.ping = await service.pingServer(e.url).timeout(const Duration(seconds: pingTimeout), onTimeout: () => const Duration(seconds: pingTimeout));

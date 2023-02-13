@@ -15,6 +15,8 @@ InvidiousPublicServer _$InvidiousPublicServerFromJson(
               json['stats'] as Map<String, dynamic>),
       json['api'] as bool?,
       json['uri'] as String,
+      json['flag'] as String,
+      json['region'] as String,
     );
 
 Map<String, dynamic> _$InvidiousPublicServerToJson(
@@ -23,4 +25,6 @@ Map<String, dynamic> _$InvidiousPublicServerToJson(
       'stats': instance.stats,
       'api': instance.api,
       'uri': instance.uri,
+      'flag': instance.flag,
+      'region': instance.region,
     };

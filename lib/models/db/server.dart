@@ -11,6 +11,11 @@ class Server {
   @Transient()
   Duration? ping;
 
+  @Transient()
+  String? flag;
+  @Transient()
+  String? region;
+
   bool inUse = false;
 
   Server(this.url);
