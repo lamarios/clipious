@@ -5,9 +5,11 @@ part 'invidiousPublicServer.g.dart';
 
 @JsonSerializable()
 class InvidiousPublicServer {
-  InvidiousServerStats stats;
+  InvidiousServerStats? stats;
+  bool? api;
+  String uri;
 
-  InvidiousPublicServer(this.stats);
+  InvidiousPublicServer(this.stats, this.api, this.uri);
 
 
   factory InvidiousPublicServer.fromJson(Map<String, dynamic> json) => _$InvidiousPublicServerFromJson(json);

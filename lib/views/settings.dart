@@ -56,29 +56,6 @@ class SettingsState extends State<Settings> with AfterLayoutMixin {
     Navigator.push(context, MaterialPageRoute(builder: (context) => ManageServers()));
   }
 
-  selectServer(BuildContext context) {
-    List<String> servers = [];
-    servers.addAll(db.getServers().where((s) => PUBLIC_SERVERS.lastIndexWhere((s2) => s2 == s.url) == -1).map((e) => e.url).toList());
-
-    servers.addAll(PUBLIC_SERVERS);
-
-    SelectDialog.showModal<String>(
-      context,
-      label: "Select server to use",
-      selectedValue: currentServer.url,
-      items: servers,
-      onChange: (String selected) {
-        db.saveSetting(SettingsValue(SELECTED_SERVER, selected));
-        FBroadcast.instance().broadcast(BROADCAST_SERVER_CHANGED);
-        Server newServer = db.getCurrentlySelectedServer();
-
-        setState(() {
-          currentServer = newServer;
-        });
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     ColorScheme colorScheme = Theme.of(context).colorScheme;
@@ -98,14 +75,9 @@ class SettingsState extends State<Settings> with AfterLayoutMixin {
                 SettingsSection(title: const Text('Servers'), tiles: [
                   SettingsTile.navigation(
                     title: const Text('Manage servers'),
-                    description: const Text('Manage the invidious servers you want to interract with'),
+                    description: Text('Currently using: ${db.getCurrentlySelectedServer().url}'),
                     onPressed: manageServers,
                   ),
-                  SettingsTile(
-                    title: Text('Selected server'),
-                    value: Text(currentServer.url),
-                    onPressed: (context) => selectServer(context),
-                  )
                 ]),
                 SettingsSection(title: const Text('SponsorBlock'), tiles: [
                   SettingsTile.switchTile(

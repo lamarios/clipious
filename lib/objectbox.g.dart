@@ -24,7 +24,7 @@ final _entities = <ModelEntity>[
   ModelEntity(
       id: const IdUid(1, 8038281984607819042),
       name: 'Server',
-      lastPropertyId: const IdUid(5, 971220157301355316),
+      lastPropertyId: const IdUid(6, 2632576147281157993),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
@@ -44,9 +44,9 @@ final _entities = <ModelEntity>[
             type: 9,
             flags: 0),
         ModelProperty(
-            id: const IdUid(5, 971220157301355316),
-            name: 'ping',
-            type: 6,
+            id: const IdUid(6, 2632576147281157993),
+            name: 'inUse',
+            type: 1,
             flags: 0)
       ],
       relations: <ModelRelation>[],
@@ -124,12 +124,12 @@ ModelDefinition getObjectBoxModel() {
   final model = ModelInfo(
       entities: _entities,
       lastEntityId: const IdUid(3, 8787382286414233697),
-      lastIndexId: const IdUid(3, 4343529106190079511),
+      lastIndexId: const IdUid(4, 9110274326691932798),
       lastRelationId: const IdUid(0, 0),
       lastSequenceId: const IdUid(0, 0),
       retiredEntityUids: const [],
-      retiredIndexUids: const [],
-      retiredPropertyUids: const [3422621380867834787],
+      retiredIndexUids: const [9110274326691932798],
+      retiredPropertyUids: const [3422621380867834787, 971220157301355316],
       retiredRelationUids: const [],
       modelVersion: 5,
       modelVersionParserMinimum: 5,
@@ -149,11 +149,11 @@ ModelDefinition getObjectBoxModel() {
           final authTokenOffset = object.authToken == null
               ? null
               : fbb.writeString(object.authToken!);
-          fbb.startTable(6);
+          fbb.startTable(7);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, urlOffset);
           fbb.addOffset(2, authTokenOffset);
-          fbb.addInt64(4, object.ping);
+          fbb.addBool(5, object.inUse);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -166,8 +166,8 @@ ModelDefinition getObjectBoxModel() {
             ..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0)
             ..authToken = const fb.StringReader(asciiOptimization: true)
                 .vTableGetNullable(buffer, rootOffset, 8)
-            ..ping = const fb.Int64Reader()
-                .vTableGetNullable(buffer, rootOffset, 12);
+            ..inUse =
+                const fb.BoolReader().vTableGet(buffer, rootOffset, 14, false);
 
           return object;
         }),
@@ -248,8 +248,8 @@ class Server_ {
   static final authToken =
       QueryStringProperty<Server>(_entities[0].properties[2]);
 
-  /// see [Server.ping]
-  static final ping = QueryIntegerProperty<Server>(_entities[0].properties[3]);
+  /// see [Server.inUse]
+  static final inUse = QueryBooleanProperty<Server>(_entities[0].properties[3]);
 }
 
 /// [SettingsValue] entity fields to define ObjectBox queries.

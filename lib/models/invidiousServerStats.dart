@@ -6,8 +6,9 @@ part 'invidiousServerStats.g.dart';
 @JsonSerializable()
 class InvidiousServerStats {
   InvidiousServerSoftware software;
+  bool openRegistrations;
 
-  InvidiousServerStats(this.software);
+  InvidiousServerStats(this.software, this.openRegistrations);
 
   factory InvidiousServerStats.fromJson(Map<String, dynamic> json) => _$InvidiousServerStatsFromJson(json);
 

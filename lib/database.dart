@@ -1,6 +1,12 @@
+import 'package:fbroadcast/fbroadcast.dart';
+import 'package:flutter/material.dart';
 import 'package:invidious/globals.dart';
+import 'package:invidious/main.dart';
 import 'package:invidious/models/db/progress.dart';
 import 'package:invidious/models/db/settings.dart';
+import 'package:invidious/models/errors/noServerSelected.dart';
+import 'package:invidious/views/welcomeWizard.dart';
+import 'package:logging/logging.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 import 'models/db/server.dart';
@@ -12,6 +18,7 @@ const USE_SPONSORBLOCK = 'use-sponsor-block';
 class DbClient {
   /// The Store of this app.
   late final Store store;
+  final log = Logger('DbClient');
 
   DbClient._create(this.store) {}
 
@@ -23,16 +30,17 @@ class DbClient {
     return DbClient._create(store);
   }
 
-  addServer(Server server) {
-    store.box<Server>().put(server);
-  }
-
   Server? getServer(String url) {
     return store.box<Server>().query(Server_.url.equals(url)).build().findFirst();
   }
 
-  updateServer(Server server) {
-    store.box<Server>().put(server, mode: PutMode.put);
+  upsertServer(Server server) {
+    store.box<Server>().put(server);
+    // if we only have one server, we select it
+    var servers = getServers();
+    if(servers.length == 1){
+      useServer(server);
+    }
   }
 
   List<Server> getServers() {
@@ -40,7 +48,12 @@ class DbClient {
   }
 
   deleteServer(Server server) {
-    store.box<Server>().remove(server.id);
+    if (getServers().length >= 2) {
+      store.box<Server>().remove(server.id);
+      if (server.inUse) {
+        getCurrentlySelectedServer();
+      }
+    }
   }
 
   saveSetting(SettingsValue setting) {
@@ -59,12 +72,20 @@ class DbClient {
   }
 
   Server getCurrentlySelectedServer() {
-    SettingsValue? value = getSettings(SELECTED_SERVER);
-    if (value != null) {
-      Server? server = getServer(value.value);
-      return server ?? Server(value.value);
+    Server? server = store.box<Server>().query(Server_.inUse.equals(true)).build().findFirst();
+
+    if (server == null) {
+      log.info('No servers selected, we try to find one');
+      List<Server> servers = getServers();
+      if (servers.isEmpty) {
+        log.info('We don\'t have servers, we need to show the welcome screen');
+        throw NoServerSelected();
+      }
+      // we just select the first of the list
+      useServer(servers.first);
+      return servers.first;
     } else {
-      return Server(PUBLIC_SERVERS[0]);
+      return server;
     }
   }
 
@@ -76,7 +97,22 @@ class DbClient {
     return store.box<Progress>().query(Progress_.videoId.equals(videoId)).build().findFirst()?.progress ?? 0;
   }
 
-  saveProgress(Progress progress){
+  saveProgress(Progress progress) {
     store.box<Progress>().put(progress);
+  }
+
+  void useServer(Server server) {
+    List<Server> servers = getServers();
+    for (Server s in servers) {
+      s.inUse = false;
+    }
+
+    store.box<Server>().putMany(servers);
+
+    server.inUse = true;
+
+    store.box<Server>().put(server);
+
+    FBroadcast.instance().broadcast(BROADCAST_SERVER_CHANGED);
   }
 }

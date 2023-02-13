@@ -12,12 +12,13 @@ import 'package:invidious/views/settings.dart';
 import 'package:invidious/views/subscriptions.dart';
 import 'package:invidious/views/trending.dart';
 import 'package:invidious/views/video.dart';
+import 'package:invidious/views/welcomeWizard.dart';
 import 'package:logging/logging.dart';
 import 'package:receive_sharing_intent/receive_sharing_intent.dart';
 
 import 'database.dart';
 
-const brandColor = Color(0xFFFF7D00);
+const brandColor = Color(0xFF8A4498);
 
 final scaffoldKey = GlobalKey<ScaffoldMessengerState>();
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
@@ -27,7 +28,6 @@ Future<void> main() async {
   Logger.root.onRecord.listen((record) {
     debugPrint('[${record.level.name}] [${record.loggerName}] ${record.message}');
   });
-
 
   WidgetsFlutterBinding.ensureInitialized();
   db = await DbClient.create();
@@ -43,6 +43,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool showWizard = false;
+    try {
+      db.getCurrentlySelectedServer();
+    } catch (err) {
+      showWizard = true;
+    }
+
     // TODO: implement build
     return DynamicColorBuilder(builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) {
       ColorScheme lightColorScheme;
@@ -88,7 +95,7 @@ class MyApp extends StatelessWidget {
             colorScheme: lightColorScheme,
           ),
           darkTheme: ThemeData(useMaterial3: true, colorScheme: darkColorScheme),
-          home: const Home());
+          home: showWizard? const WelcomeWizard() : const Home());
     });
   }
 }
@@ -162,7 +169,7 @@ class HomeState extends State<Home> {
   }
 
   openSettings(BuildContext context) {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => Settings()));
+    Navigator.push(context, MaterialPageRoute(builder: (context) => const Settings()));
   }
 
   // This widget is the root of your application.

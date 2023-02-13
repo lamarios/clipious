@@ -25,6 +25,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.4.0"
+  application_icon:
+    dependency: "direct main"
+    description:
+      name: application_icon
+      sha256: "0a05e1336050d0115dc2e5700d10e4f8956cbf7a75941005582541fb2ff52fa7"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.0"
   args:
     dependency: transitive
     description:

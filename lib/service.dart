@@ -17,10 +17,10 @@ import 'package:logging/logging.dart';
 import 'models/channel.dart';
 import 'models/channelPlaylists.dart';
 import 'models/channelVideos.dart';
+import 'models/invidiousPublicServer.dart';
 import 'models/searchSuggestion.dart';
 import 'models/subscription.dart';
 import 'models/videoComments.dart';
-
 
 const GET_INVIDIOUS_PUBLIC_SERVERS = 'https://api.invidious.io/instances.json';
 const GET_VIDEO = '/api/v1/videos/:id';
@@ -45,6 +45,7 @@ const MAX_PING = 9007199254740991;
 
 class Service {
   final log = Logger('Service');
+
   handleResponse(Response response) {
     var decoded = jsonDecode(utf8.decode(response.bodyBytes));
     String? error;
@@ -274,7 +275,7 @@ class Service {
     handleResponse(response);
   }
 
-  Future<int> pingServer(String url) async {
+  Future<Duration?> pingServer(String url) async {
     int start = DateTime.now().millisecondsSinceEpoch;
     String fullUri = '$url${GET_VIDEO.replaceAll(":id", 'dQw4w9WgXcQ')}';
     log.info('calling ${fullUri}');
@@ -282,10 +283,26 @@ class Service {
 
     try {
       handleResponse(response);
-      return DateTime.now().millisecondsSinceEpoch - start;
+      var diff = DateTime.now().millisecondsSinceEpoch - start;
+      return Duration(milliseconds: diff);
     } catch (err) {
       log.info(err);
-      return MAX_PING;
+      return null;
     }
+  }
+
+  Future<List<InvidiousPublicServer>> getPublicServers() async {
+    final response = await http.get(Uri.parse(GET_INVIDIOUS_PUBLIC_SERVERS));
+    List<InvidiousPublicServer> servers = [];
+    Iterable i = handleResponse(response);
+
+    for (var element in i) {
+      Iterable s = element as Iterable;
+      if (s.length == 2) {
+        servers.add(InvidiousPublicServer.fromJson(s.toList()[1] as Map<String, dynamic>));
+      }
+    }
+
+    return servers.where((s) => (s.api ?? false) && (s.stats?.openRegistrations ?? false)).toList();
   }
 }

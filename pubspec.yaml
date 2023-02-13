@@ -55,6 +55,7 @@ dependencies:
   package_info_plus: 3.0.3
   receive_sharing_intent: 1.4.5
   logging: 1.1.1
+  application_icon: 2.0.0
 
 
 

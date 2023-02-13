@@ -1,0 +1,1 @@
+class NoServerSelected extends Error {}

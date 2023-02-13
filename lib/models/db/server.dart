@@ -7,7 +7,11 @@ class Server {
   @Unique(onConflict: ConflictStrategy.replace)
   String url;
   String? authToken;
-  int? ping;
+
+  @Transient()
+  Duration? ping;
+
+  bool inUse = false;
 
   Server(this.url);
 }

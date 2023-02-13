@@ -5,7 +5,7 @@
   "entities": [
     {
       "id": "1:8038281984607819042",
-      "lastPropertyId": "5:971220157301355316",
+      "lastPropertyId": "6:2632576147281157993",
       "name": "Server",
       "properties": [
         {
@@ -27,9 +27,9 @@
           "type": 9
         },
         {
-          "id": "5:971220157301355316",
-          "name": "ping",
-          "type": 6
+          "id": "6:2632576147281157993",
+          "name": "inUse",
+          "type": 1
         }
       ],
       "relations": []
@@ -88,15 +88,18 @@
     }
   ],
   "lastEntityId": "3:8787382286414233697",
-  "lastIndexId": "3:4343529106190079511",
+  "lastIndexId": "4:9110274326691932798",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",
   "modelVersion": 5,
   "modelVersionParserMinimum": 5,
   "retiredEntityUids": [],
-  "retiredIndexUids": [],
+  "retiredIndexUids": [
+    9110274326691932798
+  ],
   "retiredPropertyUids": [
-    3422621380867834787
+    3422621380867834787,
+    971220157301355316
   ],
   "retiredRelationUids": [],
   "version": 1
