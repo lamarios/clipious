@@ -1,16 +1,27 @@
-# invidious
+# Clipious
 
-A new Flutter project.
+Android client application for invidious, the privacy focused youtube front end
 
-## Getting Started
+## Features
 
-This project is a starting point for a Flutter application.
+- Use own or public  server
+- Subscription management
+- SponsorBlock
+- Video view/progress tracking
+- user playlists
 
-A few resources to get you started if this is your first Flutter project:
+## Screenshots
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+![Video list](./screenshots/video-list.png)
+![Video details](./screenshots/video-details.png)
+![Channel](./screenshots/channel.png)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Roadmap
+
+- Server management revamp
+- Better user playlist handling
+- Better video player for playlists
+- Handling of youtube playlists
+- Tablet UI
+- Android TV support
+
