@@ -12,9 +12,9 @@ Android client application for invidious, the privacy focused youtube front end
 
 ## Screenshots
 
-![Video list](./screenshots/video-list.png){ width=25-px }
-![Video details](./screenshots/video-details.png){ width=25-px }
-![Channel](./screenshots/channel.png){ width=25-px }
+[![Video list](./screenshots/video-list_small.png)](./screenshots/video-list.png)
+[![Video details](./screenshots/video-details_small.png)](./screenshots/video-details.png)
+[![Channel](./screenshots/channel_small.png)](./screenshots/channel.png)
 
 ## Roadmap
 
