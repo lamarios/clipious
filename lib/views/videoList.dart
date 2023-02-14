@@ -52,8 +52,7 @@ class VideoListState extends State<VideoList> with AfterLayoutMixin<VideoList> {
 
   onScrollEvent() {
     if (scrollController.hasClients) {
-      if (scrollController.position.maxScrollExtent == scrollController.offset) {
-      }
+      if (scrollController.position.maxScrollExtent == scrollController.offset) {}
     }
   }
 
@@ -84,12 +83,12 @@ class VideoListState extends State<VideoList> with AfterLayoutMixin<VideoList> {
                         enablePullUp: false,
                         onRefresh: () => getVideos(context),
                         child: GridView.count(
-                            crossAxisCount: 1,
+                            crossAxisCount: getGridCount(context),
                             controller: scrollController,
-                            padding: EdgeInsets.all(4),
+                            padding: const EdgeInsets.all(4),
                             crossAxisSpacing: 5,
                             mainAxisSpacing: 5,
-                            childAspectRatio: 16 / 13,
+                            childAspectRatio: getGridAspectRatio(context),
                             children: (widget.videos ?? videos).map((v) => VideoListItem(video: v)).toList()),
                       ),
                     ),

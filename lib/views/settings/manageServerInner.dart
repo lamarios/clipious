@@ -232,37 +232,40 @@ class _ManagerServersViewState extends State<ManagerServersView> with AfterLayou
     showDialog<String>(
         context: context,
         builder: (BuildContext context) => Dialog(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    const Text('Add server'),
-                    TextField(
-                      controller: addServerController,
-                      autocorrect: false,
-                      enableSuggestions: false,
-                      enableIMEPersonalizedLearning: false,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        TextButton(
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                          child: const Text('Cancel'),
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            saveServer(context);
-                          },
-                          child: const Text('Add'),
-                        ),
-                      ],
-                    ),
-                  ],
+              child: SizedBox(
+                width: 400,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      const Text('Add server'),
+                      TextField(
+                        controller: addServerController,
+                        autocorrect: false,
+                        enableSuggestions: false,
+                        enableIMEPersonalizedLearning: false,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          TextButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: const Text('Cancel'),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              saveServer(context);
+                            },
+                            child: const Text('Add'),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ));

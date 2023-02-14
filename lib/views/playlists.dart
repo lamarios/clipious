@@ -124,62 +124,65 @@ class _AddPlayListFormState extends State<AddPlayListForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          const Text('Add Playlist'),
-          TextField(
-            decoration: InputDecoration(hintText: 'Playlist name'),
-            controller: nameController,
-            autocorrect: false,
-            enableSuggestions: false,
-            enableIMEPersonalizedLearning: false,
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
+    return SizedBox(
+      width: 400,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            const Text('Add Playlist'),
+            TextField(
+              decoration: InputDecoration(hintText: 'Playlist name'),
+              controller: nameController,
+              autocorrect: false,
+              enableSuggestions: false,
+              enableIMEPersonalizedLearning: false,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: const Text('Visibility:'),
+                  ),
+                  DropdownButton(
+                    value: privacyValue,
+                    items: const [
+                      DropdownMenuItem(value: 'public', child: Text('Public')),
+                      DropdownMenuItem(value: 'unlisted', child: Text('Unlisted')),
+                      DropdownMenuItem(value: 'private', child: Text('Private'))
+                    ],
+                    onChanged: (value) {
+                      setState(() {
+                        privacyValue = value ?? '';
+                      });
+                    },
+                  ),
+                ],
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: const Text('Visibility:'),
-                ),
-                DropdownButton(
-                  value: privacyValue,
-                  items: const [
-                    DropdownMenuItem(value: 'public', child: Text('Public')),
-                    DropdownMenuItem(value: 'unlisted', child: Text('Unlisted')),
-                    DropdownMenuItem(value: 'private', child: Text('Private'))
-                  ],
-                  onChanged: (value) {
-                    setState(() {
-                      privacyValue = value ?? '';
-                    });
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
                   },
+                  child: const Text('Cancel'),
+                ),
+                TextButton(
+                  onPressed: () {
+                    addPlaylist(context);
+                  },
+                  child: const Text('Add'),
                 ),
               ],
             ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              TextButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: const Text('Cancel'),
-              ),
-              TextButton(
-                onPressed: () {
-                  addPlaylist(context);
-                },
-                child: const Text('Add'),
-              ),
-            ],
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

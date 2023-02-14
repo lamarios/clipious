@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:after_layout/after_layout.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/models/channelVideos.dart';
 import 'package:invidious/models/video.dart';
@@ -12,6 +13,7 @@ import 'package:invidious/views/videoList/singleVideo.dart';
 import '../../models/channel.dart';
 import '../../models/video.dart';
 import '../../models/videoInList.dart';
+import '../../utils.dart';
 
 class ChannelVideosView extends StatefulWidget {
   final Channel channel;
@@ -38,8 +40,17 @@ class _ChannelVideosViewState extends State<ChannelVideosView> with AfterLayoutM
       ),
     ];
 
-    widgets.addAll(videos.map((e) => VideoListItem(video: VideoInList(e.title, e.videoId, e.lengthSeconds, 0, e.author, '', 'authorUrl', 0, '', e.videoThumbnails))).toList());
-
+    if (videos.isNotEmpty) {
+      widgets.add(GridView.count(
+          crossAxisCount: getGridCount(context),
+          padding: const EdgeInsets.all(4),
+          physics: const NeverScrollableScrollPhysics(),
+          crossAxisSpacing: 5,
+          shrinkWrap: true,
+          mainAxisSpacing: 5,
+          childAspectRatio: getGridAspectRatio(context),
+          children: videos.map((e) => VideoListItem(video: VideoInList(e.title, e.videoId, e.lengthSeconds, 0, e.author, '', 'authorUrl', 0, '', e.videoThumbnails))).toList()));
+    }
     if (!loading && continuation != null && continuation!.isNotEmpty) {
       widgets.add(
         Padding(

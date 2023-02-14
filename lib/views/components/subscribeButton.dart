@@ -36,32 +36,29 @@ class SubscribeButtonState extends State<SubscribeButton> with AfterLayoutMixin<
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: SizedBox(
-          height: 25,
-          child: FilledButton.tonal(
+    return SizedBox(
+        height: 25,
+        child: FilledButton.tonal(
 
-            onPressed: isLoggedIn ? toggleSubscription : null,
-            child: Row(
-              children: !loading && isLoggedIn
-                  ? [
-                      Icon(isSubscribed ? Icons.done : Icons.add),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 8.0),
-                        child: Text('${(isSubscribed ? 'Subscribed' : 'Subscribe')} | ${widget.subCount}'),
-                      ),
-                    ]
-                  : [
-                      const Icon(Icons.people),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 8.0),
-                        child: Text('${widget.subCount} subscribers'),
-                      ),
-                    ],
-            ),
-          )),
-    );
+          onPressed: isLoggedIn ? toggleSubscription : null,
+          child: Row(
+            children: !loading && isLoggedIn
+                ? [
+                    Icon(isSubscribed ? Icons.done : Icons.add),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 8.0),
+                      child: Text('${(isSubscribed ? 'Subscribed' : 'Subscribe')} | ${widget.subCount}'),
+                    ),
+                  ]
+                : [
+                    const Icon(Icons.people),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 8.0),
+                      child: Text('${widget.subCount} subscribers'),
+                    ),
+                  ],
+          ),
+        ));
   }
 
   @override

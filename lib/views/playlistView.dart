@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:invidious/models/imageObject.dart';
 import 'package:invidious/models/videoInList.dart';
+import 'package:invidious/utils.dart';
 import 'package:invidious/views/components/videoThumbnail.dart';
 import 'package:invidious/views/video.dart';
 
@@ -67,6 +68,8 @@ class _PlaylistViewState extends State<PlaylistView> {
 
     VideoInList? firstVideo = widget.playlist.videos.isNotEmpty ? widget.playlist.videos[0] : null;
 
+    bool onBigScreen = getDeviceType() > PHONE_MAX;
+
     return Scaffold(
         appBar: AppBar(
           title: Text(
@@ -78,94 +81,99 @@ class _PlaylistViewState extends State<PlaylistView> {
         body: SafeArea(
             bottom: false,
             child: widget.playlist.videos.isNotEmpty
-                ? Column(
-                    children: [
-                      AnimatedSwitcher(
-                          duration: animationDuration,
-                          child: Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                              child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                                VideoThumbnailView(
-                                  videoId: firstVideo!.videoId,
-                                  thumbnailUrl: ImageObject.getBestThumbnail(firstVideo.videoThumbnails)?.url ?? '',
-                                  child: AspectRatio(
-                                    aspectRatio: 16 / 9,
-                                    child: AnimatedSwitcher(
-                                        duration: animationDuration,
-                                        child: !playingVideo
-                                            ? loadingStream
-                                                ? const CircularProgressIndicator()
-                                                : GestureDetector(
-                                                    key: const ValueKey('nt-playing'),
-                                                    onTap: () => playVideo(context),
-                                                    child: Icon(
-                                                      Icons.play_arrow,
-                                                      color: colorScheme.primary,
-                                                      size: 100,
-                                                    ),
-                                                  )
-                                            : BetterPlayerPlaylist(
-                                                betterPlayerDataSourceList: videoSources,
-                                                betterPlayerConfiguration: const BetterPlayerConfiguration(aspectRatio: 16 / 9, fit: BoxFit.contain, autoPlay: true),
-                                                betterPlayerPlaylistConfiguration: const BetterPlayerPlaylistConfiguration(loopVideos: true, nextVideoDelay: Duration(seconds: 1)),
-                                              )),
-                                  ),
-                                )
-                              ]))),
-                      Expanded(
-                          child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: ListView(
-                          children: widget.playlist.videos
-                              .map((v) => Column(
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Padding(
-                                            padding: const EdgeInsets.all(4.0),
-                                            child: SizedBox(
-                                              width: 100,
-                                              child: VideoThumbnailView(
-                                                videoId: v.videoId,
-                                                thumbnailUrl: ImageObject.getBestThumbnail(v.videoThumbnails)?.url ?? '',
-                                              ),
-                                            ),
-                                          ),
-                                          Expanded(
-                                            child: Column(
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  v.title,
-                                                  style: TextStyle(color: colorScheme.primary),
-                                                ),
-                                                Text(
-                                                  v.author,
-                                                )
-                                              ],
-                                            ),
-                                          ),
-                                          GestureDetector(
-                                            behavior: HitTestBehavior.translucent,
-                                            onTap: () => openVideo(context, v.videoId),
-                                            child: Padding(
-                                              padding: const EdgeInsets.all(8.0),
-                                              child: Icon(
-                                                Icons.exit_to_app,
-                                                color: colorScheme.primary,
-                                              ),
-                                            ),
-                                          )
-                                        ],
+                ? Center(
+                  child: Container(
+                      constraints: onBigScreen ? const BoxConstraints(maxWidth: 600) : null,
+                      child: Column(
+                        children: [
+                          AnimatedSwitcher(
+                              duration: animationDuration,
+                              child: Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                                  child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                                    VideoThumbnailView(
+                                      videoId: firstVideo!.videoId,
+                                      thumbnailUrl: ImageObject.getBestThumbnail(firstVideo.videoThumbnails)?.url ?? '',
+                                      child: AspectRatio(
+                                        aspectRatio: 16 / 9,
+                                        child: AnimatedSwitcher(
+                                            duration: animationDuration,
+                                            child: !playingVideo
+                                                ? loadingStream
+                                                    ? const CircularProgressIndicator()
+                                                    : GestureDetector(
+                                                        key: const ValueKey('nt-playing'),
+                                                        onTap: () => playVideo(context),
+                                                        child: Icon(
+                                                          Icons.play_arrow,
+                                                          color: colorScheme.primary,
+                                                          size: 100,
+                                                        ),
+                                                      )
+                                                : BetterPlayerPlaylist(
+                                                    betterPlayerDataSourceList: videoSources,
+                                                    betterPlayerConfiguration: const BetterPlayerConfiguration(aspectRatio: 16 / 9, fit: BoxFit.contain, autoPlay: true),
+                                                    betterPlayerPlaylistConfiguration: const BetterPlayerPlaylistConfiguration(loopVideos: true, nextVideoDelay: Duration(seconds: 1)),
+                                                  )),
                                       ),
-                                      const Divider()
-                                    ],
-                                  ))
-                              .toList(),
-                        ),
-                      ))
-                    ],
-                  )
+                                    )
+                                  ]))),
+                          Expanded(
+                              child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: ListView(
+                              children: widget.playlist.videos
+                                  .map((v) => Column(
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Padding(
+                                                padding: const EdgeInsets.all(4.0),
+                                                child: SizedBox(
+                                                  width: 100,
+                                                  child: VideoThumbnailView(
+                                                    videoId: v.videoId,
+                                                    thumbnailUrl: ImageObject.getBestThumbnail(v.videoThumbnails)?.url ?? '',
+                                                  ),
+                                                ),
+                                              ),
+                                              Expanded(
+                                                child: Column(
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      v.title,
+                                                      style: TextStyle(color: colorScheme.primary),
+                                                    ),
+                                                    Text(
+                                                      v.author,
+                                                    )
+                                                  ],
+                                                ),
+                                              ),
+                                              GestureDetector(
+                                                behavior: HitTestBehavior.translucent,
+                                                onTap: () => openVideo(context, v.videoId),
+                                                child: Padding(
+                                                  padding: const EdgeInsets.all(8.0),
+                                                  child: Icon(
+                                                    Icons.exit_to_app,
+                                                    color: colorScheme.primary,
+                                                  ),
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                          const Divider()
+                                        ],
+                                      ))
+                                  .toList(),
+                            ),
+                          ))
+                        ],
+                      ),
+                    ),
+                )
                 : Container(alignment: Alignment.center, child: Text('No videos in this playlist.'))));
   }
 

@@ -1,0 +1,157 @@
+import 'dart:async';
+import 'dart:collection';
+
+import 'package:after_layout/after_layout.dart';
+import 'package:better_player/better_player.dart';
+import 'package:easy_debounce/easy_debounce.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+
+import '../../database.dart';
+import '../../globals.dart';
+import '../../main.dart';
+import '../../models/db/progress.dart';
+import '../../models/sponsorSegment.dart';
+import '../../models/video.dart';
+import '../components/videoThumbnail.dart';
+
+class VideoPlayer extends StatefulWidget {
+  final Video video;
+
+  const VideoPlayer({super.key, required this.video});
+
+  @override
+  State<VideoPlayer> createState() => _VideoPlayerState();
+}
+
+class _VideoPlayerState extends State<VideoPlayer> with AfterLayoutMixin<VideoPlayer> {
+  final GlobalKey _betterPlayerKey = GlobalKey();
+  bool loadingStream = false;
+  bool playingVideo = false;
+  bool useSponsorBlock = db.getSettings(USE_SPONSORBLOCK)?.value == 'true';
+  Queue<List<int>> sponsorSegments = Queue.of([]);
+  BetterPlayerController? videoController;
+
+  @override
+  void dispose() {
+    if (videoController != null) {
+      videoController!.removeEventsListener(onVideoListener);
+      videoController!.dispose();
+    }
+    super.dispose();
+  }
+
+  onVideoListener(BetterPlayerEvent event) {
+    if (event.betterPlayerEventType == BetterPlayerEventType.progress) {
+      int currentPosition = (event.parameters?['progress'] as Duration).inSeconds;
+      int max = widget.video.lengthSeconds ?? 0;
+      db.saveProgress(Progress.named(progress: currentPosition / max, videoId: widget.video.videoId));
+    }
+    if (event.betterPlayerEventType == BetterPlayerEventType.progress && sponsorSegments.isNotEmpty) {
+      int currentPosition = (event.parameters?['progress'] as Duration).inMilliseconds;
+
+      List<int> nextSegment = sponsorSegments.elementAt(0);
+      bool matched = nextSegment[0].compareTo(currentPosition) <= -1 && nextSegment[1].compareTo(currentPosition) >= 1;
+      if (matched) {
+        final ScaffoldMessengerState? scaffold = scaffoldKey.currentState;
+        scaffold?.showSnackBar(const SnackBar(
+          content: Text('Sponsor skipped'),
+          duration: Duration(seconds: 1),
+        ));
+        videoController!.seekTo(Duration(milliseconds: nextSegment[1] + 1000));
+        setState(() {
+          sponsorSegments.removeFirst();
+        });
+      }
+    }
+  }
+
+  playVideo(BuildContext context) {
+    setState(() {
+      loadingStream = true;
+    });
+
+    double progress = db.getVideoProgress(widget.video.videoId);
+    Duration? startAt;
+    if (progress > 0 && progress < 0.90) {
+      startAt = Duration(seconds: (widget.video.lengthSeconds * progress).floor());
+    }
+
+    String baseUrl = db.getCurrentlySelectedServer().url;
+
+    BetterPlayerDataSource betterPlayerDataSource = BetterPlayerDataSource(BetterPlayerDataSourceType.network, widget.video.hlsUrl ?? widget.video.dashUrl,
+        videoFormat: widget.video.hlsUrl != null ? BetterPlayerVideoFormat.hls : BetterPlayerVideoFormat.dash,
+        liveStream: widget.video.liveNow,
+        subtitles: widget.video.captions.map((s) => BetterPlayerSubtitlesSource(type: BetterPlayerSubtitlesSourceType.network, urls: ['${baseUrl}${s.url}'], name: s.label)).toList(),
+        notificationConfiguration: BetterPlayerNotificationConfiguration(
+          showNotification: true,
+          activityName: 'MainActivity',
+          title: widget.video.title,
+          author: widget.video.author,
+          imageUrl: widget.video.getBestThumbnail()?.url ?? '',
+        ));
+    videoController = BetterPlayerController(BetterPlayerConfiguration(handleLifecycle: false, startAt: startAt, autoPlay: true, allowedScreenSleep: false, fit: BoxFit.contain),
+        betterPlayerDataSource: betterPlayerDataSource);
+
+    videoController!.addEventsListener(onVideoListener);
+    videoController!.isPictureInPictureSupported().then((supported) {
+      if (supported) {
+        videoController!.enablePictureInPicture(_betterPlayerKey);
+      }
+    });
+
+    setState(() {
+      playingVideo = true;
+      loadingStream = false;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    ColorScheme colorScheme = Theme.of(context).colorScheme;
+    return VideoThumbnailView(
+      videoId: widget.video.videoId,
+      thumbnailUrl: widget.video.getBestThumbnail()?.url ?? '',
+      child: AspectRatio(
+        aspectRatio: 16 / 9,
+        child: AnimatedSwitcher(
+            duration: animationDuration,
+            child: !playingVideo
+                ? loadingStream
+                    ? const CircularProgressIndicator()
+                    : GestureDetector(
+                        key: const ValueKey('nt-playing'),
+                        onTap: () => playVideo(context),
+                        child: Icon(
+                          Icons.play_arrow,
+                          color: colorScheme.primary,
+                          size: 100,
+                        ),
+                      )
+                : BetterPlayer(
+                    key: _betterPlayerKey,
+                    controller: videoController!,
+                  )),
+      ),
+    );
+  }
+
+  @override
+  Future<FutureOr<void>> afterFirstLayout(BuildContext context) async {
+    if (useSponsorBlock) {
+      List<SponsorSegment> sponsorSegments = await service.getSponsorSegments(widget.video.videoId);
+      Queue<List<int>> segments = Queue.from(sponsorSegments.map((e) {
+        Duration start = Duration(seconds: e.segment[0].floor());
+        Duration end = Duration(seconds: e.segment[1].floor());
+        List<int> segment = [];
+        segment.add(start.inMilliseconds);
+        segment.add(end.inMilliseconds);
+        return segment;
+      }).toList());
+
+      setState(() {
+        this.sponsorSegments = segments;
+      });
+    }
+  }
+}

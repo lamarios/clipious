@@ -101,15 +101,15 @@ class VideoListItem extends StatelessWidget {
             textAlign: TextAlign.left,
             style: TextStyle(color: colorScheme.primary, fontWeight: FontWeight.normal),
           ),
-          Row(
-            children: [
-              Expanded(
-                child: Text(
+          Visibility(
+            child: Row(
+              children: [
+                Text(
                   video.author,
                   style: TextStyle(color: colorScheme.secondary),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
           Row(
             children: [

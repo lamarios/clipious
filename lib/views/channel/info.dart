@@ -23,7 +23,7 @@ class ChannelInfoState extends State<ChannelInfo> {
 
     List<Widget> widgets = [
       Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.symmetric(vertical: 8.0),
         child: Text(widget.channel.description),
       ),
       Text(
@@ -32,7 +32,15 @@ class ChannelInfoState extends State<ChannelInfo> {
       ),
     ];
 
-    widgets.addAll(widget.channel.latestVideos.map((e) => VideoListItem(video: VideoInList(e.title, e.videoId, e.lengthSeconds, 0, e.author, '', 'authorUrl', 0, '', e.videoThumbnails))).toList());
+    widgets.add(GridView.count(
+        crossAxisCount: getGridCount(context),
+        padding: const EdgeInsets.all(4),
+        crossAxisSpacing: 5,
+        physics: const NeverScrollableScrollPhysics(),
+        shrinkWrap: true,
+        mainAxisSpacing: 5,
+        childAspectRatio: getGridAspectRatio(context),
+        children: widget.channel.latestVideos.map((e) => VideoListItem(video: VideoInList(e.title, e.videoId, e.lengthSeconds, 0, e.author, '', 'authorUrl', 0, '', e.videoThumbnails))).toList()));
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

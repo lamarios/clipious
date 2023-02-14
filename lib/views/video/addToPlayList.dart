@@ -62,7 +62,7 @@ class _AddToPlaylistState extends State<AddToPlaylist> with AfterLayoutMixin<Add
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
-        constraints: BoxConstraints(minHeight: 400),
+        constraints: const BoxConstraints(minHeight: 400),
         child: Column(mainAxisSize: MainAxisSize.min, children: [
           const Text('Select playlist'),
           loading ? CircularProgressIndicator() : SizedBox.shrink(),

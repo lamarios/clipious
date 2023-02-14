@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:invidious/globals.dart';
@@ -19,9 +21,7 @@ class VideoInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ColorScheme colorScheme = Theme
-        .of(context)
-        .colorScheme;
+    ColorScheme colorScheme = Theme.of(context).colorScheme;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -58,11 +58,44 @@ class VideoInfo extends StatelessWidget {
                     padding: const EdgeInsets.only(left: 5.0),
                     child: Text(compactCurrency.format(video.viewCount)),
                   )),
-              Expanded(
-                  child: Text(
-                    video.publishedText,
-                    textAlign: TextAlign.end,
-                  )),
+              Expanded(child: Container()),
+              Visibility(
+                visible: !video.liveNow,
+                child: Expanded(
+                    child: Text(
+                  video.publishedText,
+                  textAlign: TextAlign.end,
+                )),
+              ),
+              Visibility(
+                visible: video.liveNow,
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.red,
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 2),
+                    child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: const [
+                    Icon(
+                      Icons.podcasts,
+                      size: 15,
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(left: 8.0),
+                      child: Text(
+                        'Live',
+                        style: TextStyle(fontSize: 10),
+                      ),
+                    ),
+                    ],
+                ),
+                  ),
+                ),
+              ),
             ],
           ),
         ),
@@ -72,25 +105,34 @@ class VideoInfo extends StatelessWidget {
             GestureDetector(
               onTap: () => openChannel(context),
               child: Padding(
-                padding: const EdgeInsets.all(4.0),
+                padding: const EdgeInsets.symmetric(vertical: 4.0),
                 child: Container(
                   width: 40,
                   height: 40,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
                       color: colorScheme.onSurface,
-                      image: DecorationImage(image: NetworkImage(ImageObject
-                          .getBestThumbnail(video?.authorThumbnails)
-                          ?.url ?? ''), fit: BoxFit.cover)),
+                      image: DecorationImage(image: NetworkImage(ImageObject.getBestThumbnail(video?.authorThumbnails)?.url ?? ''), fit: BoxFit.cover)),
                 ),
               ),
             ),
-            Expanded(child: GestureDetector(onTap: () => openChannel(context), child: Text(video.author))),
+            Expanded(child: GestureDetector(onTap: () => openChannel(context), child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: Text(video.author),
+            ))),
           ],
         ),
-        Row(children: [
-          SubscribeButton(channelId: video.authorId, subCount: video.subCountText,)
-        ],),
+        Row(
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: SubscribeButton(
+                channelId: video.authorId,
+                subCount: video.subCountText,
+              ),
+            )
+          ],
+        ),
         Text(video.description),
       ],
     );

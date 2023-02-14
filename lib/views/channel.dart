@@ -139,18 +139,13 @@ class ChannelViewState extends State<ChannelView> with AfterLayoutMixin<ChannelV
                               decoration: BoxDecoration(color: colorScheme.secondaryContainer, borderRadius: BorderRadius.circular(10))),
                         ),
                       ),
-                      // Padding(
-                      //   padding: const EdgeInsets.only(top: 8.0, left: 8, right: 8),
-                      //   child: Text(
-                      //     channel!.author,
-                      //     style: TextStyle(color: colorScheme.primary, fontWeight: FontWeight.normal, fontSize: 20),
-                      //     textAlign: TextAlign.start,
-                      //   ),
-                      // ),
-                      Row(
-                        children: [
-                          SubscribeButton(channelId: channel!.authorId, subCount: compactCurrency.format(channel!.subCount)),
-                        ],
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          children: [
+                            SubscribeButton(channelId: channel!.authorId, subCount: compactCurrency.format(channel!.subCount)),
+                          ],
+                        ),
                       ),
                       Expanded(
                         child: SingleChildScrollView(

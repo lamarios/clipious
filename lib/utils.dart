@@ -5,6 +5,9 @@ import 'package:invidious/globals.dart';
 import 'package:invidious/models/interfaces/sharelink.dart';
 import 'package:share_plus/share_plus.dart';
 
+const PHONE_MAX = 600;
+const TABLET_PORTRAIT_MAX = 900;
+
 String prettyDuration(Duration duration) {
   var components = <String>[];
 
@@ -51,7 +54,6 @@ Future<void> showAlertDialog(BuildContext context, List<Widget> body) async {
 }
 
 void showSharingSheet(BuildContext context, ShareLinks links) {
-
   showModalBottomSheet<void>(
       context: context,
       builder: (BuildContext context) {
@@ -81,4 +83,22 @@ void showSharingSheet(BuildContext context, ShareLinks links) {
           ),
         );
       });
+}
+
+double getDeviceType() {
+  final data = MediaQueryData.fromWindow(WidgetsBinding.instance.window);
+  return data.size.width;
+}
+
+int getGridCount(BuildContext context) {
+  double width = MediaQuery.of(context).size.width;
+  if (width < PHONE_MAX) {
+    return 1;
+  }
+
+  return (width / 300).floor();
+}
+
+double getGridAspectRatio(BuildContext context){
+  return getGridCount(context) > 1 ? 16/15 : 16/13;
 }
