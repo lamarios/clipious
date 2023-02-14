@@ -19,10 +19,10 @@ Android client application for invidious, the privacy focused youtube front end
 
 ## Roadmap
 
-- Server management revamp
 - Better user playlist handling
 - Better video player for playlists
 - Handling of youtube playlists
+- vidoe quality selection
 - Tablet UI
 - Android TV support
 
