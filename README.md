@@ -19,6 +19,7 @@ Android client application for [invidious](https://invidious.io), the privacy fo
 
 ## Roadmap
 
+- channels in search results
 - Better user playlist handling
 - Better video player for playlists
 - Handling of youtube playlists
