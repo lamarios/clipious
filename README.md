@@ -1,6 +1,6 @@
 # Clipious
 
-Android client application for invidious, the privacy focused youtube front end
+Android client application for [invidious](https://invidious.io), the privacy focused youtube front end
 
 ## Features
 
