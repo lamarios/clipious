@@ -55,7 +55,7 @@ class VideoViewState extends State<VideoView> with AfterLayoutMixin<VideoView>, 
   Widget build(BuildContext context) {
     ColorScheme colorScheme = Theme.of(context).colorScheme;
 
-    bool show3Navigation = MediaQuery.of(context).size.width < PHONE_MAX;
+    bool show3Navigation = getDeviceType() == DeviceType.phone;
 
     var destinations = List.of(<Widget>[
       const NavigationDestination(icon: Icon(Icons.info), label: 'Info'),

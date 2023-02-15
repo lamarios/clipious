@@ -5,8 +5,15 @@ import 'package:invidious/globals.dart';
 import 'package:invidious/models/interfaces/sharelink.dart';
 import 'package:share_plus/share_plus.dart';
 
+
+
 const PHONE_MAX = 600;
 const TABLET_PORTRAIT_MAX = 900;
+
+enum DeviceType{
+  phone,
+  tablet
+}
 
 String prettyDuration(Duration duration) {
   var components = <String>[];
@@ -85,9 +92,14 @@ void showSharingSheet(BuildContext context, ShareLinks links) {
       });
 }
 
-double getDeviceType() {
+double getScreenWidth() {
   final data = MediaQueryData.fromWindow(WidgetsBinding.instance.window);
   return data.size.width;
+}
+
+DeviceType getDeviceType() {
+  final data = MediaQueryData.fromWindow(WidgetsBinding.instance.window);
+  return data.size.shortestSide < 600 ? DeviceType.phone : DeviceType.tablet;
 }
 
 int getGridCount(BuildContext context) {

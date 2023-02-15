@@ -68,7 +68,7 @@ class _PlaylistViewState extends State<PlaylistView> {
 
     VideoInList? firstVideo = widget.playlist.videos.isNotEmpty ? widget.playlist.videos[0] : null;
 
-    bool onBigScreen = getDeviceType() > PHONE_MAX;
+    bool onBigScreen = getScreenWidth() > PHONE_MAX;
 
     return Scaffold(
         appBar: AppBar(
