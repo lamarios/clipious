@@ -40,6 +40,8 @@ const GET_USER_PLAYLISTS = '/api/v1/auth/playlists';
 const POST_USER_PLAYLIST = '/api/v1/auth/playlists';
 const GET_CHANNEL_PLAYLISTS = '/api/v1/channels/:id/playlists';
 const POST_USER_PLAYLIST_VIDEO = '/api/v1/auth/playlists/:id/videos';
+const DELETE_USER_PLAYLIST = '/api/v1/auth/playlists/:id';
+const DELETE_USER_PLAYLIST_VIDEO = '/api/v1/auth/playlists/:id/videos/:index';
 
 const MAX_PING = 9007199254740991;
 
@@ -47,20 +49,25 @@ class Service {
   final log = Logger('Service');
 
   handleResponse(Response response) {
-    var decoded = jsonDecode(utf8.decode(response.bodyBytes));
-    String? error;
-    try {
-      Map<String, dynamic> errorFinder = decoded as Map<String, dynamic>;
-      error = errorFinder.containsKey('error') ? decoded['error'] : null;
-    } catch (err) {
-      // no error we keep going
-    }
+    var body = utf8.decode(response.bodyBytes);
+    if (body.isNotEmpty) {
+      var decoded = jsonDecode(body);
+      String? error;
+      try {
+        Map<String, dynamic> errorFinder = decoded as Map<String, dynamic>;
+        error = errorFinder.containsKey('error') ? decoded['error'] : null;
+      } catch (err) {
+        // no error we keep going
+      }
 
-    if (error != null) {
-      throw InvidiousServiceError(error!);
-    }
+      if (error != null) {
+        throw InvidiousServiceError(error!);
+      }
 
-    return decoded;
+      return decoded;
+    } else if (response.statusCode < 200 || response.statusCode >= 400) {
+      throw InvidiousServiceError('Couldn\'t make request, response code: ${response.statusCode}');
+    }
   }
 
   handleErrors(Response response) {}
@@ -104,7 +111,7 @@ class Service {
 
     log.info('Calling $url');
     var headers = {'Authorization': 'Bearer ${currentlySelectedServer.authToken}'};
-
+    log.info(headers);
     final response = await http.get(Uri.parse(url), headers: headers);
     return UserFeed.fromJson(handleResponse(response));
   }
@@ -272,6 +279,28 @@ class Service {
     };
 
     final response = await http.post(Uri.parse(url), headers: headers, body: jsonEncode(body));
+    handleResponse(response);
+  }
+
+  Future<void> deleteUserPlaylist(String playListId) async {
+    var currentlySelectedServer = db.getCurrentlySelectedServer();
+    String url = '${currentlySelectedServer.url}${DELETE_USER_PLAYLIST.replaceAll(":id", playListId)}';
+
+    log.info('Calling $url');
+    var headers = {'Authorization': 'Bearer ${currentlySelectedServer.authToken}', 'Content-Type': 'application/json'};
+
+    final response = await http.delete(Uri.parse(url), headers: headers);
+    handleResponse(response);
+  }
+
+  Future<void> deleteUserPlaylistVideo(String playListId, int index) async {
+    var currentlySelectedServer = db.getCurrentlySelectedServer();
+    String url = '${currentlySelectedServer.url}${DELETE_USER_PLAYLIST_VIDEO.replaceAll(":id", playListId).replaceAll(":index", index.toString())}';
+
+    log.info('Calling $url');
+    var headers = {'Authorization': 'Bearer ${currentlySelectedServer.authToken}', 'Content-Type': 'application/json'};
+
+    final response = await http.delete(Uri.parse(url), headers: headers);
     handleResponse(response);
   }
 

@@ -224,7 +224,7 @@ class _ManagerServersViewState extends State<ManagerServersView> with AfterLayou
 
       addServerController.text = 'https://';
     } else {
-      await showAlertDialog(context, [const Text('Invalid invidious server')]);
+      await showAlertDialog(context, 'Error', [const Text('Invalid invidious server')]);
     }
   }
 
@@ -276,7 +276,7 @@ class _ManagerServersViewState extends State<ManagerServersView> with AfterLayou
     ColorScheme colorScheme = Theme.of(context).colorScheme;
     SettingsThemeData theme = settingsTheme(colorScheme);
 
-    var filteredPublicServers= publicServers.where((s) => dbServers.indexWhere((element) => element.url == s.url) == -1).toList();
+    var filteredPublicServers = publicServers.where((s) => dbServers.indexWhere((element) => element.url == s.url) == -1).toList();
 
     return Stack(
       children: [
@@ -339,10 +339,7 @@ class _ManagerServersViewState extends State<ManagerServersView> with AfterLayou
                                     ],
                                   ),
                                   value: Row(
-                                    children: [
-                                      Visibility(visible: s.flag != null && s.region != null, child: Text('${s.flag} - ${s.region} - ')),
-                                      const Text('Tap to add server to your list')
-                                    ],
+                                    children: [Visibility(visible: s.flag != null && s.region != null, child: Text('${s.flag} - ${s.region} - ')), const Text('Tap to add server to your list')],
                                   ),
                                   onPressed: (context) => showPublicServerActions(context, s),
                                 ))

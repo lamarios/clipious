@@ -17,14 +17,15 @@ import '../components/videoThumbnail.dart';
 
 class VideoPlayer extends StatefulWidget {
   final Video video;
+  Function(BetterPlayerEvent event)? listener;
 
-  const VideoPlayer({super.key, required this.video});
+  VideoPlayer({super.key, required this.video, this.listener});
 
   @override
   State<VideoPlayer> createState() => _VideoPlayerState();
 }
 
-class _VideoPlayerState extends State<VideoPlayer> with AfterLayoutMixin<VideoPlayer> {
+class _VideoPlayerState extends State<VideoPlayer> with AfterLayoutMixin<VideoPlayer>, RouteAware {
   final GlobalKey _betterPlayerKey = GlobalKey();
   bool loadingStream = false;
   bool playingVideo = false;
@@ -33,12 +34,45 @@ class _VideoPlayerState extends State<VideoPlayer> with AfterLayoutMixin<VideoPl
   BetterPlayerController? videoController;
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    routeObserver.subscribe(this, ModalRoute.of(context) as PageRoute<dynamic>);
+  }
+
+  @override
+  void didPushNext() {
+    // if we navigate up to a new screen, we stop playing
+    super.didPushNext();
+    if (videoController != null) {
+      videoController!.removeEventsListener(onVideoListener);
+      videoController!.dispose();
+    }
+    setState(() {
+     playingVideo = false;
+    });
+  }
+
+  @override
   void dispose() {
     if (videoController != null) {
       videoController!.removeEventsListener(onVideoListener);
       videoController!.dispose();
     }
     super.dispose();
+  }
+
+  @override
+  didUpdateWidget(VideoPlayer old) {
+    super.didUpdateWidget(old);
+    if (old.video.videoId != widget.video.videoId) {
+      if (videoController != null) {
+        videoController!.removeEventsListener(onVideoListener);
+        videoController!.dispose();
+      }
+
+      playVideo();
+
+    }
   }
 
   onVideoListener(BetterPlayerEvent event) {
@@ -64,9 +98,13 @@ class _VideoPlayerState extends State<VideoPlayer> with AfterLayoutMixin<VideoPl
         });
       }
     }
+
+    if (widget.listener != null) {
+      widget.listener!(event);
+    }
   }
 
-  playVideo(BuildContext context) {
+  playVideo() {
     setState(() {
       loadingStream = true;
     });
@@ -121,7 +159,7 @@ class _VideoPlayerState extends State<VideoPlayer> with AfterLayoutMixin<VideoPl
                     ? const CircularProgressIndicator()
                     : GestureDetector(
                         key: const ValueKey('nt-playing'),
-                        onTap: () => playVideo(context),
+                        onTap: () => playVideo(),
                         child: Icon(
                           Icons.play_arrow,
                           color: colorScheme.primary,
@@ -136,8 +174,7 @@ class _VideoPlayerState extends State<VideoPlayer> with AfterLayoutMixin<VideoPl
     );
   }
 
-  @override
-  Future<FutureOr<void>> afterFirstLayout(BuildContext context) async {
+  setSponsorBlock() async {
     if (useSponsorBlock) {
       List<SponsorSegment> sponsorSegments = await service.getSponsorSegments(widget.video.videoId);
       Queue<List<int>> segments = Queue.from(sponsorSegments.map((e) {
@@ -153,5 +190,10 @@ class _VideoPlayerState extends State<VideoPlayer> with AfterLayoutMixin<VideoPl
         this.sponsorSegments = segments;
       });
     }
+  }
+
+  @override
+  Future<FutureOr<void>> afterFirstLayout(BuildContext context) async {
+    setSponsorBlock();
   }
 }

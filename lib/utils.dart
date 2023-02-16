@@ -35,13 +35,13 @@ NumberFormat compactCurrency = NumberFormat.compactCurrency(
   symbol: '', // if you want to add currency symbol then pass that in this else leave it empty.
 );
 
-Future<void> showAlertDialog(BuildContext context, List<Widget> body) async {
+Future<void> showAlertDialog(BuildContext context, String title, List<Widget> body) async {
   return showDialog<void>(
     context: context,
     barrierDismissible: false, // user must tap button!
     builder: (BuildContext context) {
       return AlertDialog(
-        title: const Text('AlertDialog Title'),
+        title: Text(title),
         content: SingleChildScrollView(
           child: ListBody(
             children: body,
@@ -113,4 +113,32 @@ int getGridCount(BuildContext context) {
 
 double getGridAspectRatio(BuildContext context){
   return getGridCount(context) > 1 ? 16/15 : 16/13;
+}
+
+okCancelDialog(BuildContext context, String title, String message, Function() onOk){
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text(title),
+        content: Text(message),
+        actions: <Widget>[
+          TextButton(
+            child: Text("Ok"),
+            onPressed: () {
+              onOk();
+              Navigator.of(context).pop();
+            },
+          ),
+          TextButton(
+            child: const Text("Cancel"),
+            onPressed: () {
+              //Put your code here which you want to execute on Cancel button click.
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      );
+    },
+  );
 }

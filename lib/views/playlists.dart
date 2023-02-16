@@ -8,6 +8,7 @@ import 'package:invidious/globals.dart';
 import 'package:invidious/views/playlists/playlist.dart';
 import 'package:logging/logging.dart';
 
+import '../main.dart';
 import '../models/playlist.dart';
 import '../utils.dart';
 
@@ -20,8 +21,8 @@ class Playlists extends StatefulWidget {
   State<Playlists> createState() => _PlaylistsState();
 }
 
-class _PlaylistsState extends State<Playlists> with AfterLayoutMixin<Playlists> {
-  final log= Logger('Playlists');
+class _PlaylistsState extends State<Playlists> with AfterLayoutMixin<Playlists>, RouteAware {
+  final log = Logger('Playlists');
   List<Playlist> playlists = [];
   bool loading = true;
 
@@ -31,6 +32,19 @@ class _PlaylistsState extends State<Playlists> with AfterLayoutMixin<Playlists> 
     FBroadcast.instance().register(PLAYLIST_ADDED, (value, callback) {
       getPlayLists();
     });
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    routeObserver.subscribe(this, ModalRoute.of(context) as PageRoute<dynamic>);
+  }
+
+
+  @override
+  void didPopNext() {
+    super.didPopNext();
+    getPlayLists();
   }
 
   @override
@@ -75,7 +89,7 @@ class _AddPlayListButtonState extends State<AddPlayListButton> {
   addPlaylistDialog(BuildContext context) {
     showDialog<String>(
         context: context,
-        builder: (BuildContext context) =>  Dialog(
+        builder: (BuildContext context) => Dialog(
               child: AddPlayListForm(),
             ));
   }
@@ -109,16 +123,13 @@ class _AddPlayListFormState extends State<AddPlayListForm> {
       String? playlistId = await service.createPlayList(nameController.value.text, privacyValue);
       FBroadcast.instance().broadcast(PLAYLIST_ADDED);
 
-      if(widget.afterAdd != null){
+      if (widget.afterAdd != null) {
         widget.afterAdd!(context, playlistId!);
       }
 
-
       Navigator.of(context).pop();
-
-
     } catch (err) {
-      showAlertDialog(context, [Text(err.toString())]);
+      showAlertDialog(context, 'Error', [Text(err.toString())]);
     }
   }
 

@@ -19,7 +19,7 @@ VideoInList _$VideoInListFromJson(Map<String, dynamic> json) => VideoInList(
       (json['videoThumbnails'] as List<dynamic>)
           .map((e) => ImageObject.fromJson(e as Map<String, dynamic>))
           .toList(),
-    );
+    )..index = json['index'] as int?;
 
 Map<String, dynamic> _$VideoInListToJson(VideoInList instance) =>
     <String, dynamic>{
@@ -31,6 +31,7 @@ Map<String, dynamic> _$VideoInListToJson(VideoInList instance) =>
       'authorId': instance.authorId,
       'authorUrl': instance.authorUrl,
       'published': instance.published,
+      'index': instance.index,
       'publishedText': instance.publishedText,
       'videoThumbnails': instance.videoThumbnails,
     };
