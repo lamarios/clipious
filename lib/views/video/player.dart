@@ -43,13 +43,13 @@ class _VideoPlayerState extends State<VideoPlayer> with AfterLayoutMixin<VideoPl
   void didPushNext() {
     // if we navigate up to a new screen, we stop playing
     super.didPushNext();
-    if (videoController != null) {
-      videoController!.removeEventsListener(onVideoListener);
-      videoController!.dispose();
-    }
-    setState(() {
-     playingVideo = false;
-    });
+//    if (videoController != null) {
+//      videoController!.removeEventsListener(onVideoListener);
+//      videoController!.dispose();
+//    }
+//    setState(() {
+//     playingVideo = false;
+//    });
   }
 
   @override
