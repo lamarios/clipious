@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart';
 import 'package:http/http.dart' as http;
+import 'package:invidious/database.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/models/errors/invidiousServiceError.dart';
 import 'package:invidious/models/playlist.dart';
@@ -70,20 +71,51 @@ class Service {
     }
   }
 
+  Uri buildUrl(String baseUrl, {Map<String, String>? pathParams, Map<String, String?>? query}) {
+    try {
+      String url = '${db.getCurrentlySelectedServer().url}$baseUrl';
+
+      pathParams?.forEach((key, value) {
+        url = url.replaceAll(key, value);
+      });
+
+      List<String> queryStr = [];
+      query?.forEach((key, value) {
+        if (value != null) {
+          queryStr.add('$key=$value');
+        }
+      });
+
+      if (queryStr.isNotEmpty) {
+        url += '?${queryStr.join('&')}';
+      }
+
+      log.info('calling $url');
+      return Uri.parse(url);
+    } catch (err) {
+      log.info(err);
+      rethrow;
+    }
+  }
+
   handleErrors(Response response) {}
 
   Future<Video> getVideo(String videoId) async {
-    String url = db.getCurrentlySelectedServer().url + (GET_VIDEO.replaceAll(":id", videoId));
-    log.info('Calling $url');
-    final response = await http.get(Uri.parse(url), headers: {'Content-Type': 'application/json; charset=utf-16'});
+    final response = await http.get(buildUrl(GET_VIDEO, pathParams: {':id': videoId}), headers: {'Content-Type': 'application/json; charset=utf-16'});
 
     return Video.fromJson(handleResponse(response));
   }
 
-  Future<List<VideoInList>> getTrending() async {
-    String url = db.getCurrentlySelectedServer().url + (GET_TRENDING);
-    log.info('Calling $url');
-    final response = await http.get(Uri.parse(url));
+  Future<List<VideoInList>> getTrending({String? type}) async {
+    String countryCode = db.getSettings(BROWSING_COUNTRY)?.value ?? 'US';
+    // parse.queryParameters['region'] = countryCode;
+    Map<String, String>? query = {'region': countryCode};
+
+    if (type != null) {
+      query.putIfAbsent('type', () => type);
+    }
+
+    final response = await http.get(buildUrl(GET_TRENDING, query: query));
     Iterable i = handleResponse(response);
     return List<VideoInList>.from(i.map((e) => VideoInList.fromJson(e)));
   }
@@ -105,14 +137,13 @@ class Service {
     return List<VideoInList>.from(i.where((e) => e['type'] == 'video').map((e) => VideoInList.fromJson(e)));
   }
 
-  Future<UserFeed> getUserFeed() async {
+  Future<UserFeed> getUserFeed({int? maxResults, int? page}) async {
     var currentlySelectedServer = db.getCurrentlySelectedServer();
-    String url = currentlySelectedServer.url + GET_USER_FEED;
 
-    log.info('Calling $url');
+    Uri uri = buildUrl(GET_USER_FEED, query: {'max_results': maxResults?.toString(), 'page': page?.toString()});
+
     var headers = {'Authorization': 'Bearer ${currentlySelectedServer.authToken}'};
-    log.info(headers);
-    final response = await http.get(Uri.parse(url), headers: headers);
+    final response = await http.get(uri, headers: headers);
     return UserFeed.fromJson(handleResponse(response));
   }
 
@@ -196,17 +227,17 @@ class Service {
     return List<Subscription>.from(i.map((e) => Subscription.fromJson(e))).indexWhere((element) => element.authorId == channelId) > -1;
   }
 
-  Future<VideoComments> getComments(String videoId, String? continuation) async {
+  Future<VideoComments> getComments(String videoId, {String? continuation, String? sortBy, String? source}) async {
     var currentlySelectedServer = db.getCurrentlySelectedServer();
-    String url = currentlySelectedServer.url + GET_COMMENTS.replaceAll(":id", videoId);
-    if (continuation != null) {
-      url += '?continuation=${continuation}';
-    }
 
-    log.info('Calling $url');
+    Map<String, String> queryStr = {};
+    if (continuation != null) queryStr.putIfAbsent('continuation', () => continuation);
+    if (sortBy != null) queryStr.putIfAbsent('sort_by', () => sortBy);
+    if (source != null) queryStr.putIfAbsent('source', () => source);
+
     var headers = {'Authorization': 'Bearer ${currentlySelectedServer.authToken}'};
 
-    final response = await http.get(Uri.parse(url), headers: headers);
+    final response = await http.get(buildUrl(GET_COMMENTS, pathParams: {':id': videoId}, query: queryStr), headers: headers);
     return VideoComments.fromJson(handleResponse(response));
   }
 
@@ -293,9 +324,9 @@ class Service {
     handleResponse(response);
   }
 
-  Future<void> deleteUserPlaylistVideo(String playListId, int index) async {
+  Future<void> deleteUserPlaylistVideo(String playListId, String indexId) async {
     var currentlySelectedServer = db.getCurrentlySelectedServer();
-    String url = '${currentlySelectedServer.url}${DELETE_USER_PLAYLIST_VIDEO.replaceAll(":id", playListId).replaceAll(":index", index.toString())}';
+    String url = '${currentlySelectedServer.url}${DELETE_USER_PLAYLIST_VIDEO.replaceAll(":id", playListId).replaceAll(":index", indexId)}';
 
     log.info('Calling $url');
     var headers = {'Authorization': 'Bearer ${currentlySelectedServer.authToken}', 'Content-Type': 'application/json'};

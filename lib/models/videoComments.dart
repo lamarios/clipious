@@ -7,7 +7,7 @@ part 'videoComments.g.dart';
 @JsonSerializable()
 class VideoComments {
   int? commentCount;
-  String videoId;
+  String? videoId;
   String? continuation;
   List<Comment> comments = [];
 

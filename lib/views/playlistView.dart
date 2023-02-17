@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:after_layout/after_layout.dart';
 import 'package:better_player/better_player.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +26,7 @@ class PlaylistView extends StatefulWidget {
   State<PlaylistView> createState() => _PlaylistViewState();
 }
 
-class _PlaylistViewState extends State<PlaylistView> {
+class _PlaylistViewState extends State<PlaylistView> with AfterLayoutMixin<PlaylistView> {
   final log = Logger('PlaylistView');
   bool playingVideo = false;
   List<BetterPlayerDataSource> videoSources = [];
@@ -123,7 +126,7 @@ class _PlaylistViewState extends State<PlaylistView> {
     int videoCount = playlist.videos.length;
     int index = playlist.videos.indexWhere((element) => element.videoId == v.videoId);
     try {
-      await service.deleteUserPlaylistVideo(playlist.playlistId, v.index ?? -1);
+      await service.deleteUserPlaylistVideo(playlist.playlistId, v.indexId ?? '');
 
       if (playing && videoCount >= 2) {
         // we have a fallback video
@@ -243,28 +246,13 @@ class _PlaylistViewState extends State<PlaylistView> {
                               child: Padding(
                                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
                                   child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                                    VideoThumbnailView(
-                                        videoId: firstVideo!.videoId,
-                                        thumbnailUrl: ImageObject.getBestThumbnail(firstVideo.videoThumbnails)?.url ?? '',
-                                        child: AspectRatio(
-                                          aspectRatio: 16 / 9,
-                                          child: AnimatedSwitcher(
-                                              duration: animationDuration,
-                                              child: !playingVideo || currentlyPlaying == null
-                                                  ? GestureDetector(
-                                                      key: const ValueKey('nt-playing'),
-                                                      onTap: () => startVideo(),
-                                                      child: Icon(
-                                                        Icons.play_arrow,
-                                                        color: colorScheme.primary,
-                                                        size: 100,
-                                                      ),
-                                                    )
-                                                  : VideoPlayer(
-                                                      video: currentlyPlaying!,
-                                                      listener: videoListener,
-                                                    )),
-                                        ))
+                                    AspectRatio(
+                                      aspectRatio: 16 / 9,
+                                      child: currentlyPlaying!= null ? VideoPlayer(
+                                        video: currentlyPlaying!,
+                                        listener: videoListener,
+                                      ): SizedBox.shrink(),
+                                    )
                                   ]))),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -375,5 +363,10 @@ class _PlaylistViewState extends State<PlaylistView> {
                     ),
                   )
                 : Container(alignment: Alignment.center, child: Text('No videos in this playlist.'))));
+  }
+
+  @override
+  FutureOr<void> afterFirstLayout(BuildContext context) {
+    startVideo();
   }
 }

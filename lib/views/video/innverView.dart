@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:invidious/models/video.dart';
+import 'package:invidious/views/video/commentsContainer.dart';
 import 'package:invidious/views/video/player.dart';
 import 'package:invidious/views/video/recommendedVideos.dart';
 
@@ -78,18 +79,7 @@ class _VideoInnerViewState extends State<VideoInnerView> {
                     VideoInfo(
                       video: widget.video,
                     ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Comments',
-                          style: TextStyle(color: colorScheme.secondary, fontSize: 20),
-                        ),
-                        CommentsView(
-                          videoId: widget.video.videoId,
-                        ),
-                      ],
-                    ),
+                    CommentsContainer(video: widget.video,),
                     RecommendedVideos(video: widget.video)
                   ][widget.selectedIndex])
             ],

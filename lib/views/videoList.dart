@@ -17,9 +17,10 @@ import 'package:flutter_fadein/flutter_fadein.dart';
 
 class VideoList extends StatefulWidget {
   Function? getVideos;
+  Function? getMoreVideos;
   List<VideoInList>? videos;
 
-  VideoList({super.key, this.getVideos, this.videos});
+  VideoList({super.key, this.getVideos, this.videos, this.getMoreVideos});
 
   @override
   VideoListState createState() => VideoListState();
@@ -51,8 +52,41 @@ class VideoListState extends State<VideoList> with AfterLayoutMixin<VideoList> {
   }
 
   onScrollEvent() {
-    if (scrollController.hasClients) {
-      if (scrollController.position.maxScrollExtent == scrollController.offset) {}
+    if (widget.getMoreVideos != null) {
+      if (scrollController.hasClients) {
+        if (scrollController.position.maxScrollExtent == scrollController.offset) {
+          getMoreVideos();
+        }
+      }
+    }
+  }
+
+  getMoreVideos() async {
+    if (!loading) {
+      setState(() {
+        loading = true;
+      });
+
+      if (widget.getMoreVideos != null) {
+        try {
+          List<VideoInList> videos = await widget.getMoreVideos!();
+          List<VideoInList> currentVideos = this.videos;
+          currentVideos.addAll(videos);
+
+          setState(() {
+            this.videos = currentVideos;
+            loading = false;
+          });
+        } catch (err) {
+          setState(() {
+            this.videos = [];
+            loading = false;
+            error = 'Couldn\'t fetch videos, tap to try again';
+          });
+        }
+      }
+
+      refreshController.refreshCompleted();
     }
   }
 
@@ -64,7 +98,7 @@ class VideoListState extends State<VideoList> with AfterLayoutMixin<VideoList> {
       children: [
         Visibility(visible: loading, child: const LinearProgressIndicator()),
         Expanded(
-          child: loading || error.isNotEmpty
+          child: error.isNotEmpty
               ? Container(
                   alignment: Alignment.center,
                   color: colorScheme.background,
@@ -89,7 +123,7 @@ class VideoListState extends State<VideoList> with AfterLayoutMixin<VideoList> {
                             crossAxisSpacing: 5,
                             mainAxisSpacing: 5,
                             childAspectRatio: getGridAspectRatio(context),
-                            children: (widget.videos ?? videos).map((v) => VideoListItem(video: v)).toList()),
+                            children: (widget.videos ?? videos).map((v) => VideoListItem(key: ValueKey(v.videoId), video: v)).toList()),
                       ),
                     ),
                   ),

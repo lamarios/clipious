@@ -16,6 +16,7 @@ class VideoInList {
 
   int? published;
   int? index;
+  String? indexId;
   String? publishedText;
   List<ImageObject> videoThumbnails;
 

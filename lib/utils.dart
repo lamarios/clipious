@@ -5,6 +5,8 @@ import 'package:invidious/globals.dart';
 import 'package:invidious/models/interfaces/sharelink.dart';
 import 'package:share_plus/share_plus.dart';
 
+import 'models/country.dart';
+
 
 
 const PHONE_MAX = 600;
@@ -141,4 +143,8 @@ okCancelDialog(BuildContext context, String title, String message, Function() on
       );
     },
   );
+}
+
+Country getCountryFromCode(String code){
+  return countryCodes.firstWhere((element) => element.code == code, orElse: () => Country('US', 'United States of America'));
 }

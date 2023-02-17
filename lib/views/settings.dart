@@ -6,10 +6,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:invidious/database.dart';
 import 'package:invidious/models/db/settings.dart';
+import 'package:invidious/utils.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:settings_ui/settings_ui.dart';
 import 'package:select_dialog/select_dialog.dart';
 import '../globals.dart';
+import '../models/country.dart';
 import '../models/db/server.dart';
 import 'settings/manageServers.dart';
 
@@ -33,6 +35,7 @@ class SettingsState extends State<Settings> with AfterLayoutMixin {
   List<Server> dbServers = db.getServers();
   Server currentServer = db.getCurrentlySelectedServer();
   bool sponsorBlock = db.getSettings(USE_SPONSORBLOCK)?.value == 'true';
+  Country country = getCountryFromCode(db.getSettings(BROWSING_COUNTRY)?.value ?? 'US');
   PackageInfo packageInfo = PackageInfo(appName: '', packageName: '', version: '', buildNumber: '');
 
   @override
@@ -56,6 +59,22 @@ class SettingsState extends State<Settings> with AfterLayoutMixin {
     Navigator.push(context, MaterialPageRoute(builder: (context) => ManageServers()));
   }
 
+  searchCountry(BuildContext context){
+    SelectDialog.showModal<String>(
+      context,
+      label: "Select browsing country",
+      selectedValue: country.name,
+      items: countryCodes.map((e) => e.name).toList(),
+      onChange: (String selected) {
+        String code = countryCodes.firstWhere((element) => element.name == selected, orElse: () => country).code;
+        db.saveSetting(SettingsValue(BROWSING_COUNTRY, code));
+        setState(() {
+           country = getCountryFromCode(code);
+        });
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     ColorScheme colorScheme = Theme.of(context).colorScheme;
@@ -72,6 +91,10 @@ class SettingsState extends State<Settings> with AfterLayoutMixin {
               lightTheme: theme,
               darkTheme: theme,
               sections: [
+                SettingsSection(
+                  title: const Text('Browsing'),
+                  tiles: [SettingsTile(title: const Text('Country'), value: Text(country.name), onPressed: (context) => searchCountry(context),)],
+                ),
                 SettingsSection(title: const Text('Servers'), tiles: [
                   SettingsTile.navigation(
                     title: const Text('Manage servers'),

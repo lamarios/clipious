@@ -14,6 +14,7 @@ import 'objectbox.g.dart'; // created by `flutter pub run build_runner build`
 
 const SELECTED_SERVER = 'selected-server';
 const USE_SPONSORBLOCK = 'use-sponsor-block';
+const BROWSING_COUNTRY = 'browsing-country';
 
 class DbClient {
   /// The Store of this app.
