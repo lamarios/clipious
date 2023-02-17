@@ -16,11 +16,12 @@ import '../models/videoInList.dart';
 import 'package:flutter_fadein/flutter_fadein.dart';
 
 class VideoList extends StatefulWidget {
-  Function? getVideos;
-  Function? getMoreVideos;
+  Future<List<VideoInList>> Function()? getVideos;
+  Future<List<VideoInList>> Function()? getMoreVideos;
+  Future<List<VideoInList>> Function()? refresh;
   List<VideoInList>? videos;
 
-  VideoList({super.key, this.getVideos, this.videos, this.getMoreVideos});
+  VideoList({super.key, this.getVideos, this.videos, this.getMoreVideos, this.refresh});
 
   @override
   VideoListState createState() => VideoListState();
@@ -40,7 +41,7 @@ class VideoListState extends State<VideoList> with AfterLayoutMixin<VideoList> {
     scrollController.addListener(onScrollEvent);
 
     FBroadcast.instance().register(BROADCAST_SERVER_CHANGED, (value, callback) {
-      getVideos(null);
+      getVideos();
     });
   }
 
@@ -62,31 +63,13 @@ class VideoListState extends State<VideoList> with AfterLayoutMixin<VideoList> {
   }
 
   getMoreVideos() async {
-    if (!loading) {
-      setState(() {
-        loading = true;
+    if (widget.getMoreVideos != null) {
+      loadVideo(() async {
+        List<VideoInList> videos = await widget.getMoreVideos!();
+        List<VideoInList> currentVideos = this.videos;
+        currentVideos.addAll(videos);
+        return currentVideos;
       });
-
-      if (widget.getMoreVideos != null) {
-        try {
-          List<VideoInList> videos = await widget.getMoreVideos!();
-          List<VideoInList> currentVideos = this.videos;
-          currentVideos.addAll(videos);
-
-          setState(() {
-            this.videos = currentVideos;
-            loading = false;
-          });
-        } catch (err) {
-          setState(() {
-            this.videos = [];
-            loading = false;
-            error = 'Couldn\'t fetch videos, tap to try again';
-          });
-        }
-      }
-
-      refreshController.refreshCompleted();
     }
   }
 
@@ -102,7 +85,7 @@ class VideoListState extends State<VideoList> with AfterLayoutMixin<VideoList> {
               ? Container(
                   alignment: Alignment.center,
                   color: colorScheme.background,
-                  child: Visibility(visible: error.isNotEmpty, child: GestureDetector(onTap: () => getVideos(context), child: Text(error))),
+                  child: Visibility(visible: error.isNotEmpty, child: GestureDetector(onTap: () => getVideos(), child: Text(error))),
                 )
               : Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -115,7 +98,7 @@ class VideoListState extends State<VideoList> with AfterLayoutMixin<VideoList> {
                         controller: refreshController,
                         enablePullDown: true,
                         enablePullUp: false,
-                        onRefresh: () => getVideos(context),
+                        onRefresh: () => widget.refresh != null ? refreshVideos() : getVideos(),
                         child: GridView.count(
                             crossAxisCount: getGridCount(context),
                             controller: scrollController,
@@ -133,14 +116,26 @@ class VideoListState extends State<VideoList> with AfterLayoutMixin<VideoList> {
     );
   }
 
-  getVideos(BuildContext? context) async {
+  refreshVideos() async {
+    if (widget.refresh != null) {
+      loadVideo(() => widget.refresh!());
+    } else {
+      loadVideo(() => widget.getVideos!());
+    }
+  }
+
+  getVideos() async {
+    loadVideo(() => widget.getVideos!());
+  }
+
+  loadVideo(Future<List<VideoInList>> Function() refreshFunction) async {
     setState(() {
       error = '';
       loading = true;
     });
     if (widget.getVideos != null) {
       try {
-        List<VideoInList> videos = await widget.getVideos!();
+        var videos = await refreshFunction();
         setState(() {
           this.videos = videos;
           loading = false;
@@ -160,7 +155,7 @@ class VideoListState extends State<VideoList> with AfterLayoutMixin<VideoList> {
   @override
   FutureOr<void> afterFirstLayout(BuildContext context) {
     if (widget.getVideos != null) {
-      getVideos(context);
+      getVideos();
     } else if (widget.videos != null) {
       setState(() {
         loading = false;

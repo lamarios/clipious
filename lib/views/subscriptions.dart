@@ -9,7 +9,7 @@ import 'package:invidious/models/videoInList.dart';
 import '../models/userFeed.dart';
 import 'videoList.dart';
 
-const MAX_RESULTS = 20;
+const MAX_RESULTS = 50;
 
 class Subscriptions extends StatefulWidget {
   const Subscriptions({super.key});
@@ -20,18 +20,31 @@ class Subscriptions extends StatefulWidget {
 
 class SubscriptionsState extends State<Subscriptions> {
   int page = 1;
+  bool hasMore = true;
 
   Future<List<VideoInList>> getVideos() async {
     UserFeed feed = await service.getUserFeed(page: page, maxResults: MAX_RESULTS);
     List<VideoInList> subs = [];
     subs.addAll(feed.notifications ?? []);
     subs.addAll(feed.videos ?? []);
+    if (subs.length < MAX_RESULTS) {
+      setState(() {
+        hasMore = false;
+      });
+    }
     return subs;
   }
 
   Future<List<VideoInList>> getMoreVideos() async {
     setState(() {
       page = page + 1;
+    });
+    return getVideos();
+  }
+
+  Future<List<VideoInList>> refreshVideos() async {
+    setState(() {
+      page = 1;
     });
     return getVideos();
   }
@@ -43,7 +56,8 @@ class SubscriptionsState extends State<Subscriptions> {
       color: colorScheme.background,
       child: VideoList(
         getVideos: getVideos,
-        getMoreVideos: getMoreVideos,
+        refresh: refreshVideos,
+        getMoreVideos: hasMore ? getMoreVideos : null,
       ),
     );
   }
