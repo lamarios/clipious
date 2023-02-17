@@ -1,19 +1,15 @@
 import 'dart:async';
-import 'package:fbroadcast/fbroadcast.dart';
-import 'package:flutter/foundation.dart';
-import 'package:intl/intl.dart';
-
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:invidious/utils.dart';
-import 'package:invidious/views/video.dart';
 
 import 'package:after_layout/after_layout.dart';
+import 'package:fbroadcast/fbroadcast.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_fadein/flutter_fadein.dart';
+import 'package:invidious/utils.dart';
 import 'package:invidious/views/videoList/singleVideo.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+
 import '../globals.dart';
 import '../models/videoInList.dart';
-import 'package:flutter_fadein/flutter_fadein.dart';
 
 class VideoList extends StatefulWidget {
   Future<List<VideoInList>> Function()? getVideos;
@@ -129,11 +125,11 @@ class VideoListState extends State<VideoList> with AfterLayoutMixin<VideoList> {
   }
 
   loadVideo(Future<List<VideoInList>> Function() refreshFunction) async {
-    setState(() {
-      error = '';
-      loading = true;
-    });
     if (widget.getVideos != null) {
+      setState(() {
+        error = '';
+        loading = true;
+      });
       try {
         var videos = await refreshFunction();
         setState(() {
@@ -147,9 +143,8 @@ class VideoListState extends State<VideoList> with AfterLayoutMixin<VideoList> {
           error = 'Couldn\'t fetch videos, tap to try again';
         });
       }
+      refreshController.refreshCompleted();
     }
-
-    refreshController.refreshCompleted();
   }
 
   @override
