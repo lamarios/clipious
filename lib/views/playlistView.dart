@@ -208,7 +208,7 @@ class _PlaylistViewState extends State<PlaylistView> with AfterLayoutMixin<Playl
   }
 
   getAllVideos(BuildContext context) async {
-    if (widget.playlist.videos.isEmpty && widget.playlist.videoCount > 0) {
+    if (widget.playlist.videoCount > 0 && widget.playlist.videos.length < widget.playlist.videoCount) {
       setState(() {
         loading = true;
       });
@@ -266,7 +266,7 @@ class _PlaylistViewState extends State<PlaylistView> with AfterLayoutMixin<Playl
         backgroundColor: colorScheme.background,
         body: SafeArea(
             bottom: false,
-            child: playlist.videos.isNotEmpty
+            child: !loading && playlist.videos.isNotEmpty
                 ? Center(
                     child: Container(
                       constraints: onBigScreen ? const BoxConstraints(maxWidth: 600) : null,
@@ -365,7 +365,7 @@ class _PlaylistViewState extends State<PlaylistView> with AfterLayoutMixin<Playl
                                                             style: TextStyle(color: colorScheme.primary),
                                                           ),
                                                           Text(
-                                                            v.author,
+                                                            v.author??'',
                                                           )
                                                         ],
                                                       ),

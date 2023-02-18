@@ -37,6 +37,7 @@ class SettingsState extends State<Settings> with AfterLayoutMixin {
   bool sponsorBlock = db.getSettings(USE_SPONSORBLOCK)?.value == 'true';
   Country country = getCountryFromCode(db.getSettings(BROWSING_COUNTRY)?.value ?? 'US');
   PackageInfo packageInfo = PackageInfo(appName: '', packageName: '', version: '', buildNumber: '');
+  int onOpen = int.parse(db.getSettings(ON_OPEN)?.value ?? '0');
 
   @override
   initState() {
@@ -59,7 +60,7 @@ class SettingsState extends State<Settings> with AfterLayoutMixin {
     Navigator.push(context, MaterialPageRoute(builder: (context) => ManageServers()));
   }
 
-  searchCountry(BuildContext context){
+  searchCountry(BuildContext context) {
     SelectDialog.showModal<String>(
       context,
       label: "Select browsing country",
@@ -69,7 +70,24 @@ class SettingsState extends State<Settings> with AfterLayoutMixin {
         String code = countryCodes.firstWhere((element) => element.name == selected, orElse: () => country).code;
         db.saveSetting(SettingsValue(BROWSING_COUNTRY, code));
         setState(() {
-           country = getCountryFromCode(code);
+          country = getCountryFromCode(code);
+        });
+      },
+    );
+  }
+
+  selectOnOpen(BuildContext context) {
+    SelectDialog.showModal<String>(
+      context,
+      label: "Select what to show when the app starts",
+      selectedValue: onOpen.toString(),
+      showSearchBox: false,
+      items: CATEGORIES,
+      onChange: (String selected) {
+        int selectedIndex = CATEGORIES.indexOf(selected);
+        db.saveSetting(SettingsValue(ON_OPEN, selectedIndex.toString()));
+        setState(() {
+          onOpen = selectedIndex;
         });
       },
     );
@@ -93,7 +111,18 @@ class SettingsState extends State<Settings> with AfterLayoutMixin {
               sections: [
                 SettingsSection(
                   title: const Text('Browsing'),
-                  tiles: [SettingsTile(title: const Text('Country'), value: Text(country.name), onPressed: (context) => searchCountry(context),)],
+                  tiles: [
+                    SettingsTile(
+                      title: const Text('Country'),
+                      value: Text(country.name),
+                      onPressed: (context) => searchCountry(context),
+                    ),
+                    SettingsTile(
+                      title: const Text('When app starts, show...'),
+                      value: Text(CATEGORIES[onOpen]),
+                      onPressed: (context) => selectOnOpen(context),
+                    )
+                  ],
                 ),
                 SettingsSection(title: const Text('Servers'), tiles: [
                   SettingsTile.navigation(

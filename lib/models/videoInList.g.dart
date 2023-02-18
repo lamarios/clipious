@@ -11,9 +11,9 @@ VideoInList _$VideoInListFromJson(Map<String, dynamic> json) => VideoInList(
       json['videoId'] as String,
       json['lengthSeconds'] as int,
       json['viewCount'] as int?,
-      json['author'] as String,
-      json['authorId'] as String,
-      json['authorUrl'] as String,
+      json['author'] as String?,
+      json['authorId'] as String?,
+      json['authorUrl'] as String?,
       json['published'] as int?,
       json['publishedText'] as String?,
       (json['videoThumbnails'] as List<dynamic>)

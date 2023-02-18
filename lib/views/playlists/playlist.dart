@@ -102,7 +102,7 @@ class _PlaylistItemState extends State<PlaylistItem> with AfterLayoutMixin<Playl
   }
 
   getThumbnailsFromYoutube(BuildContext context) async {
-    if (widget.playlist.videos.isEmpty && widget.playlist.videoCount > 0) {
+    if (widget.playlist.videoCount > 0 && widget.playlist.videos.length < widget.playlist.videoCount) {
       // something is not right, let's get the full playlist
       Playlist playlist = await service.getPublicPlaylists(widget.playlist.playlistId);
       if (context.mounted) {

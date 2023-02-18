@@ -105,7 +105,7 @@ class VideoListItem extends StatelessWidget {
             child: Row(
               children: [
                 Text(
-                  video.author,
+                  video.author ?? '',
                   style: TextStyle(color: colorScheme.secondary),
                 ),
               ],

@@ -111,13 +111,17 @@ class Home extends StatefulWidget {
 
 class HomeState extends State<Home> {
   final log = Logger('Hone');
-  int selectedIndex = 0;
+  late int selectedIndex;
   bool isLoggedIn = db.isLoggedInToCurrentServer();
   late StreamSubscription _intentDataStreamSubscription;
 
   @override
   initState() {
     super.initState();
+    selectedIndex = int.parse(db.getSettings(ON_OPEN)?.value ?? '1');
+    if(!isLoggedIn && selectedIndex >2){
+      selectedIndex = 0;
+    }
     FBroadcast.instance().register(BROADCAST_SERVER_CHANGED, (value, callback) {
       setState(() {
         selectedIndex = 0;

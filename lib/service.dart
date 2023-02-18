@@ -30,7 +30,7 @@ const GET_TRENDING = '/api/v1/trending';
 const GET_POPULAR = '/api/v1/popular';
 const GET_USER_FEED = '/api/v1/auth/feed';
 const SEARCH_SUGGESTIONS = '/api/v1/search/suggestions?q=:query';
-const SEARCH = '/api/v1/search?q=:query';
+const SEARCH = '/api/v1/search?q=:q';
 const STATS = '/api/v1/stats';
 const GET_SUBSCIPTIONS = '/api/v1/auth/subscriptions';
 const ADD_DELETE_SUBSCRIPTION = '/api/v1/auth/subscriptions/:ucid';
@@ -76,7 +76,9 @@ class Service {
 
   Uri buildUrl(String baseUrl, {Map<String, String>? pathParams, Map<String, String?>? query}) {
     try {
-      String url = '${db.getCurrentlySelectedServer().url}$baseUrl';
+      String url = '${db
+          .getCurrentlySelectedServer()
+          .url}$baseUrl';
 
       pathParams?.forEach((key, value) {
         url = url.replaceAll(key, value);
@@ -110,7 +112,9 @@ class Service {
   }
 
   Future<List<VideoInList>> getTrending({String? type}) async {
-    String countryCode = db.getSettings(BROWSING_COUNTRY)?.value ?? 'US';
+    String countryCode = db
+        .getSettings(BROWSING_COUNTRY)
+        ?.value ?? 'US';
     // parse.queryParameters['region'] = countryCode;
     Map<String, String>? query = {'region': countryCode};
 
@@ -124,7 +128,9 @@ class Service {
   }
 
   Future<List<VideoInList>> getPopular() async {
-    String url = db.getCurrentlySelectedServer().url + (GET_POPULAR);
+    String url = db
+        .getCurrentlySelectedServer()
+        .url + (GET_POPULAR);
     log.info('Calling $url');
     final response = await http.get(Uri.parse(url));
     Iterable i = handleResponse(response);
@@ -132,25 +138,32 @@ class Service {
   }
 
   Future<SearchResults> search(String query) async {
-    String url = db.getCurrentlySelectedServer().url + SEARCH.replaceAll(":q", query);
-    log.info('Calling $url');
-    final response = await http.get(Uri.parse(url));
+    log.info('search query"$query"');
+    Uri uri = buildUrl(SEARCH, pathParams: {':q': query});
+    final response = await http.get(uri);
     Iterable i = handleResponse(response);
     // only getting videos for now
     SearchResults results = SearchResults();
-    i.forEach((e) {
-      switch(e['type']){
-        case 'video':
-          results.videos.add(VideoInList.fromJson(e));
-          break;
-        case 'playlist':
-          results.playlists.add(Playlist.fromJson(e));
-          break;
-        case 'Channel':
-          results.channels.add(Channel.fromJson(e));
-      }
+    try {
+      i.forEach((e) {
+        log.info(e['type']);
 
-    });
+        switch (e['type']) {
+          case 'video':
+            results.videos.add(VideoInList.fromJson(e));
+            break;
+          case 'playlist':
+            results.playlists.add(Playlist.fromJson(e));
+            break;
+          case 'channel':
+            results.channels.add(Channel.fromJson(e));
+        }
+      });
+    } catch (err) {
+      log.info((err as Error).stackTrace?.toString());
+      rethrow;
+    }
+    log.info(results);
 
     return results;
   }
@@ -202,7 +215,9 @@ class Service {
   }
 
   bool isLoggedIn() {
-    return db.getCurrentlySelectedServer().authToken != null;
+    return db
+        .getCurrentlySelectedServer()
+        .authToken != null;
   }
 
   Future<void> subscribe(String channelId) async {
@@ -260,7 +275,9 @@ class Service {
   }
 
   Future<Channel> getChannel(String channelId) async {
-    String url = db.getCurrentlySelectedServer().url + (GET_CHANNEL.replaceAll(":id", channelId));
+    String url = db
+        .getCurrentlySelectedServer()
+        .url + (GET_CHANNEL.replaceAll(":id", channelId));
     log.info('Calling $url');
     final response = await http.get(Uri.parse(url), headers: {'Content-Type': 'application/json; charset=utf-16'});
 
@@ -360,14 +377,18 @@ class Service {
   }
 
   Future<Duration?> pingServer(String url) async {
-    int start = DateTime.now().millisecondsSinceEpoch;
+    int start = DateTime
+        .now()
+        .millisecondsSinceEpoch;
     String fullUri = '$url${STATS}';
     log.info('calling ${fullUri}');
     final response = await http.get(Uri.parse(fullUri), headers: {'Content-Type': 'application/json; charset=utf-16'});
 
     try {
       handleResponse(response);
-      var diff = DateTime.now().millisecondsSinceEpoch - start;
+      var diff = DateTime
+          .now()
+          .millisecondsSinceEpoch - start;
       return Duration(milliseconds: diff);
     } catch (err) {
       log.info(err);

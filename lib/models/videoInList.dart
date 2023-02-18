@@ -10,9 +10,9 @@ class VideoInList {
   String videoId;
   int lengthSeconds;
   int? viewCount;
-  String author;
-  String authorId;
-  String authorUrl;
+  String? author;
+  String? authorId;
+  String? authorUrl;
 
   int? published;
   int? index;

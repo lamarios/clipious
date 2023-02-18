@@ -68,11 +68,14 @@ class ChannelViewState extends State<ChannelView> with AfterLayoutMixin<ChannelV
     ColorScheme colorScheme = Theme.of(context).colorScheme;
 
     return Scaffold(
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
+        backgroundColor: colorScheme.background.withOpacity(0.4),
+        elevation: 0,
+        scrolledUnderElevation: 0,
         title: Text(
           channel?.author ?? '',
         ),
-        scrolledUnderElevation: 0,
         actions: [
           Visibility(
             visible: channel != null,
@@ -107,6 +110,7 @@ class ChannelViewState extends State<ChannelView> with AfterLayoutMixin<ChannelV
         ],
       ),
       body: SafeArea(
+        top: false,
           bottom: false,
           child: AnimatedSwitcher(
             duration: animationDuration,
@@ -115,15 +119,12 @@ class ChannelViewState extends State<ChannelView> with AfterLayoutMixin<ChannelV
                 : Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 8.0, top: 8, right: 8),
-                        child: Thumbnail(
-                            width: double.infinity,
-                            height: 150,
-                            thumbnailUrl: ImageObject.getBestThumbnail(channel!.authorThumbnails)?.url ?? '',
-                            id: 'channel-banner/${widget.channelId}',
-                            decoration: BoxDecoration(color: colorScheme.secondaryContainer, borderRadius: BorderRadius.circular(10))),
-                      ),
+                      Thumbnail(
+                          width: double.infinity,
+                          height: 250,
+                          thumbnailUrl: ImageObject.getBestThumbnail(channel!.authorThumbnails)?.url ?? '',
+                          id: 'channel-banner/${widget.channelId}',
+                          decoration: BoxDecoration(color: colorScheme.secondaryContainer,)),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Row(

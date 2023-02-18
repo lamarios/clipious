@@ -9,6 +9,8 @@ import 'models/country.dart';
 
 const BROADCAST_SERVER_CHANGED = 'server-changed';
 
+const CATEGORIES = ['Popular', 'Trending', 'Subscriptions', 'Playlists'];
+
 const YOUTUBE_HOSTS = ['youtube.com', 'www.youtube.com', 'm.youtube.com', 'youtu.be'];
 
 const animationDuration = Duration(milliseconds: 250);

@@ -40,7 +40,8 @@ class ChannelInfoState extends State<ChannelInfo> {
         shrinkWrap: true,
         mainAxisSpacing: 5,
         childAspectRatio: getGridAspectRatio(context),
-        children: widget.channel.latestVideos.map((e) => VideoListItem(video: VideoInList(e.title, e.videoId, e.lengthSeconds, 0, e.author, '', 'authorUrl', 0, '', e.videoThumbnails))).toList()));
+        children:
+            widget.channel.latestVideos?.map((e) => VideoListItem(video: VideoInList(e.title, e.videoId, e.lengthSeconds, 0, e.author, '', 'authorUrl', 0, '', e.videoThumbnails))).toList() ?? []));
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
