@@ -11,7 +11,7 @@ ChannelVideos _$ChannelVideosFromJson(Map<String, dynamic> json) =>
       (json['videos'] as List<dynamic>)
           .map((e) => VideoInList.fromJson(e as Map<String, dynamic>))
           .toList(),
-      json['continuation'] as String,
+      json['continuation'] as String?,
     );
 
 Map<String, dynamic> _$ChannelVideosToJson(ChannelVideos instance) =>

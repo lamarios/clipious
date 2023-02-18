@@ -42,9 +42,14 @@ class ChannelInfoState extends State<ChannelInfo> {
         childAspectRatio: getGridAspectRatio(context),
         children: widget.channel.latestVideos.map((e) => VideoListItem(video: VideoInList(e.title, e.videoId, e.lengthSeconds, 0, e.author, '', 'authorUrl', 0, '', e.videoThumbnails))).toList()));
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: widgets,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: widgets,
+        ),
+      ),
     );
   }
 }

@@ -36,31 +36,20 @@ class ChannelView extends StatefulWidget {
 
 class ChannelViewState extends State<ChannelView> with AfterLayoutMixin<ChannelView> {
   bool isSubscribed = false;
-  ScrollController scrollController = ScrollController();
   int selectedIndex = 0;
   Channel? channel;
   bool loading = true;
-  double bannerHeight = 200;
-  double opacity = 1;
 
   @override
   void initState() {
     super.initState();
-    scrollController.addListener(onScroll);
   }
 
   @override
   dispose() async {
-    scrollController.dispose();
     super.dispose();
   }
 
-  onScroll() {
-    setState(() {
-      bannerHeight = max(0, 200 - scrollController.offset);
-      opacity = 1 - min(1, ((scrollController.offset) / 200));
-    });
-  }
 
   toggleSubscription() async {
     if (this.isSubscribed) {
@@ -106,7 +95,6 @@ class ChannelViewState extends State<ChannelView> with AfterLayoutMixin<ChannelV
         elevation: 0,
         onDestinationSelected: (int index) {
           setState(() {
-            scrollController.animateTo(0, duration: animationDuration, curve: Curves.easeInOutQuad);
             selectedIndex = index;
           });
         },
@@ -114,7 +102,8 @@ class ChannelViewState extends State<ChannelView> with AfterLayoutMixin<ChannelV
         destinations: const <Widget>[
           NavigationDestination(icon: Icon(Icons.info), label: 'Info'),
           NavigationDestination(icon: Icon(Icons.play_arrow), label: 'Videos'),
-          // NavigationDestination(icon: Icon(Icons.playlist_play), label: 'Playlists')
+          NavigationDestination(icon: Icon(Icons.stream), label: 'Streams'),
+          NavigationDestination(icon: Icon(Icons.playlist_play), label: 'Playlists')
         ],
       ),
       body: SafeArea(
@@ -128,16 +117,12 @@ class ChannelViewState extends State<ChannelView> with AfterLayoutMixin<ChannelV
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(left: 8.0, top: 8, right: 8),
-                        child: AnimatedOpacity(
-                          opacity: opacity,
-                          duration: Duration.zero,
-                          child: Thumbnail(
-                              width: double.infinity,
-                              height: bannerHeight,
-                              thumbnailUrl: ImageObject.getBestThumbnail(channel!.authorThumbnails)?.url ?? '',
-                              id: 'channel-banner/${widget.channelId}',
-                              decoration: BoxDecoration(color: colorScheme.secondaryContainer, borderRadius: BorderRadius.circular(10))),
-                        ),
+                        child: Thumbnail(
+                            width: double.infinity,
+                            height: 150,
+                            thumbnailUrl: ImageObject.getBestThumbnail(channel!.authorThumbnails)?.url ?? '',
+                            id: 'channel-banner/${widget.channelId}',
+                            decoration: BoxDecoration(color: colorScheme.secondaryContainer, borderRadius: BorderRadius.circular(10))),
                       ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
@@ -148,17 +133,12 @@ class ChannelViewState extends State<ChannelView> with AfterLayoutMixin<ChannelV
                         ),
                       ),
                       Expanded(
-                        child: SingleChildScrollView(
-                          controller: scrollController,
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 8.0, top: 8.0, right: 8.0),
-                            child: <Widget>[
-                              ChannelInfo(channel: channel!),
-                              ChannelVideosView(channel: channel!),
-                              // ChannelPlayListsView(channelId: channel!.authorId)
-                            ][selectedIndex],
-                          ),
-                        ),
+                        child: <Widget>[
+                          ChannelInfo(key: const ValueKey('info'),channel: channel!),
+                          ChannelVideosView(key: const ValueKey('videos'), channel: channel!, getVideos: service.getChannelVideos,),
+                          ChannelVideosView(key: const ValueKey('streams'),channel: channel!, getVideos: service.getChannelStreams,),
+                          ChannelPlayListsView(key: const ValueKey('playlists'),channelId: channel!.authorId, canDeleteVideos: false)
+                        ][selectedIndex],
                       )
                     ],
                   ),

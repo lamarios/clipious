@@ -142,6 +142,7 @@ class VideoListState extends State<VideoList> with AfterLayoutMixin<VideoList> {
           loading = false;
           error = 'Couldn\'t fetch videos, tap to try again';
         });
+        rethrow;
       }
       refreshController.refreshCompleted();
     }

@@ -7,7 +7,7 @@ part 'channelVideos.g.dart';
 @JsonSerializable()
 class ChannelVideos{
   List<VideoInList> videos;
-  String continuation;
+  String? continuation;
 
   ChannelVideos(this.videos, this.continuation);
 

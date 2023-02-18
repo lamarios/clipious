@@ -19,8 +19,9 @@ import '../models/video.dart';
 
 class PlaylistView extends StatefulWidget {
   final Playlist playlist;
+  final bool canDeleteVideos;
 
-  const PlaylistView({super.key, required this.playlist});
+  const PlaylistView({super.key, required this.playlist, required this.canDeleteVideos});
 
   @override
   State<PlaylistView> createState() => _PlaylistViewState();
@@ -29,11 +30,12 @@ class PlaylistView extends StatefulWidget {
 class _PlaylistViewState extends State<PlaylistView> with AfterLayoutMixin<PlaylistView> {
   final log = Logger('PlaylistView');
   bool playingVideo = false;
-  List<BetterPlayerDataSource> videoSources = [];
   Video? currentlyPlaying;
   int selectedIndex = 0;
   double progress = 0;
+  double loadingProgress = 0;
   late Playlist playlist;
+  bool loading = false;
 
   @override
   void initState() {
@@ -205,11 +207,40 @@ class _PlaylistViewState extends State<PlaylistView> with AfterLayoutMixin<Playl
                 )));
   }
 
+  getAllVideos(BuildContext context) async {
+    if (widget.playlist.videos.isEmpty && widget.playlist.videoCount > 0) {
+      setState(() {
+        loading = true;
+      });
+      int page = 1;
+      List<VideoInList> videos = [];
+      // something is not right, let's get the full playlist
+      while (videos.length < widget.playlist.videoCount) {
+        Playlist playlist = await service.getPublicPlaylists(widget.playlist.playlistId, page: page);
+        videos.addAll(playlist.videos);
+        page++;
+        if (context.mounted) {
+          setState(() {
+            loadingProgress = videos.length / widget.playlist.videoCount;
+          });
+        }
+      }
+
+      if (context.mounted) {
+        var pl = playlist;
+        pl.videos = videos;
+        setState(() {
+          playlist = pl;
+          loading = false;
+          startVideo();
+        });
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     ColorScheme colorScheme = Theme.of(context).colorScheme;
-
-    VideoInList? firstVideo = playlist.videos.isNotEmpty ? playlist.videos[0] : null;
 
     bool onBigScreen = getScreenWidth() > PHONE_MAX;
 
@@ -220,7 +251,7 @@ class _PlaylistViewState extends State<PlaylistView> with AfterLayoutMixin<Playl
           ),
           scrolledUnderElevation: 0,
           actions: [
-            GestureDetector(
+            widget.canDeleteVideos ? GestureDetector(
               onTap: () => deletePlayList(context),
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -229,7 +260,7 @@ class _PlaylistViewState extends State<PlaylistView> with AfterLayoutMixin<Playl
                   color: colorScheme.secondary,
                 ),
               ),
-            )
+            ): const SizedBox.shrink()
           ],
         ),
         backgroundColor: colorScheme.background,
@@ -248,10 +279,12 @@ class _PlaylistViewState extends State<PlaylistView> with AfterLayoutMixin<Playl
                                   child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                                     AspectRatio(
                                       aspectRatio: 16 / 9,
-                                      child: currentlyPlaying!= null ? VideoPlayer(
-                                        video: currentlyPlaying!,
-                                        listener: videoListener,
-                                      ): SizedBox.shrink(),
+                                      child: currentlyPlaying != null
+                                          ? VideoPlayer(
+                                              video: currentlyPlaying!,
+                                              listener: videoListener,
+                                            )
+                                          : SizedBox.shrink(),
                                     )
                                   ]))),
                           Row(
@@ -310,7 +343,7 @@ class _PlaylistViewState extends State<PlaylistView> with AfterLayoutMixin<Playl
                                               child: GestureDetector(
                                                 behavior: HitTestBehavior.translucent,
                                                 onTap: () => playVideo(context, v),
-                                                onLongPress: () => showPlayListVideoDialog(context, v),
+                                                onLongPress: widget.canDeleteVideos ? () => showPlayListVideoDialog(context, v) : null,
                                                 child: Row(
                                                   children: [
                                                     Padding(
@@ -362,11 +395,22 @@ class _PlaylistViewState extends State<PlaylistView> with AfterLayoutMixin<Playl
                       ),
                     ),
                   )
-                : Container(alignment: Alignment.center, child: Text('No videos in this playlist.'))));
+                : loading
+                    ? Center(
+                        child: TweenAnimationBuilder(
+                        tween: Tween<double>(begin: 0, end: loadingProgress),
+                        duration: animationDuration,
+                        curve: Curves.easeInOutQuad,
+                        builder: (context, value, child) => CircularProgressIndicator(
+                          value: value > 0 ? value : null,
+                        ),
+                      ))
+                    : Container(alignment: Alignment.center, child: Text('No videos in this playlist.'))));
   }
 
   @override
   FutureOr<void> afterFirstLayout(BuildContext context) {
     startVideo();
+    getAllVideos(context);
   }
 }

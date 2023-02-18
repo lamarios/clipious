@@ -17,85 +17,44 @@ import '../../utils.dart';
 
 class ChannelVideosView extends StatefulWidget {
   final Channel channel;
+  final Future<ChannelVideos> Function(String channelId, String? continuation) getVideos;
 
-  const ChannelVideosView({super.key, required this.channel});
+  const ChannelVideosView({super.key, required this.channel, required this.getVideos});
 
   @override
   State<ChannelVideosView> createState() => _ChannelVideosViewState();
 }
 
-class _ChannelVideosViewState extends State<ChannelVideosView> with AfterLayoutMixin<ChannelVideosView> {
-  List<VideoInList> videos = [];
+class _ChannelVideosViewState extends State<ChannelVideosView> {
   String? continuation;
 
-  bool loading = false;
+  Future<List<VideoInList>> getVideos() async {
+    // ChannelVideos videos = await service.getChannelVideos(widget.channel.authorId, continuation);
+    ChannelVideos videos = await widget.getVideos(widget.channel.authorId, continuation);
+
+    setState(() {
+      continuation = videos.continuation;
+    });
+    return videos.videos;
+  }
+
+  Future<List<VideoInList>> refreshVideos() async {
+    setState(() {
+      continuation = null;
+    });
+    return getVideos();
+  }
 
   @override
   Widget build(BuildContext context) {
-    ColorScheme colorScheme = Theme.of(context).colorScheme;
-    List<Widget> widgets = [
-      Text(
-        'Videos',
-        style: TextStyle(color: colorScheme.secondary, fontSize: 20),
+    var colorScheme = Theme.of(context).colorScheme;
+    return Container(
+      color: colorScheme.background,
+      child: VideoList(
+        getVideos: getVideos,
+        refresh: refreshVideos,
+        getMoreVideos: getVideos,
       ),
-    ];
-
-    if (videos.isNotEmpty) {
-      widgets.add(GridView.count(
-          crossAxisCount: getGridCount(context),
-          padding: const EdgeInsets.all(4),
-          physics: const NeverScrollableScrollPhysics(),
-          crossAxisSpacing: 5,
-          shrinkWrap: true,
-          mainAxisSpacing: 5,
-          childAspectRatio: getGridAspectRatio(context),
-          children: videos.map((e) => VideoListItem(video: VideoInList(e.title, e.videoId, e.lengthSeconds, 0, e.author, '', 'authorUrl', 0, '', e.videoThumbnails))).toList()));
-    }
-    if (!loading && continuation != null && continuation!.isNotEmpty) {
-      widgets.add(
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: SizedBox(
-              height: 20,
-              child: Container(
-                alignment: Alignment.center,
-                child: FilledButton.tonal(
-                    onPressed: loadVideos,
-                    child: const Text(
-                      'Load more',
-                    )),
-              )),
-        ),
-      );
-    }
-
-    if (loading) {
-      widgets.add(Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Container(alignment: Alignment.center, child: const CircularProgressIndicator()),
-      ));
-    }
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: widgets,
     );
-  }
-
-  loadVideos() async {
-    setState(() {
-      loading = true;
-    });
-    ChannelVideos videos = await service.getChannelVideos(widget.channel.authorId, continuation);
-    setState(() {
-      this.videos.addAll(videos.videos);
-      continuation = videos.continuation;
-      loading = false;
-    });
-  }
-
-  @override
-  Future<FutureOr<void>> afterFirstLayout(BuildContext context) async {
-    await loadVideos();
   }
 }

@@ -15,7 +15,8 @@ import '../utils.dart';
 const PLAYLIST_ADDED = 'playlist-added';
 
 class Playlists extends StatefulWidget {
-  const Playlists({super.key});
+  final bool canDeleteVideos ;
+  const Playlists({super.key, required this.canDeleteVideos});
 
   @override
   State<Playlists> createState() => _PlaylistsState();
@@ -54,7 +55,7 @@ class _PlaylistsState extends State<Playlists> with AfterLayoutMixin<Playlists>,
         Visibility(visible: loading, child: LinearProgressIndicator()),
         Expanded(
           child: ListView(
-            children: playlists.map((p) => PlaylistItem(key: ValueKey(p.playlistId), playlist: p)).toList(),
+            children: playlists.map((p) => PlaylistItem(key: ValueKey(p.playlistId), playlist: p, canDeleteVideos: widget.canDeleteVideos,)).toList(),
           ),
         )
       ],

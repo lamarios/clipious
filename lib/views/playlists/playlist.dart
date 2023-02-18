@@ -1,28 +1,44 @@
+import 'dart:async';
+
+import 'package:after_layout/after_layout.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:invidious/globals.dart';
 import 'package:invidious/models/imageObject.dart';
 import 'package:invidious/models/playlist.dart';
 import 'package:invidious/models/videoInList.dart';
 import 'package:invidious/views/components/videoThumbnail.dart';
 import 'package:invidious/views/playlistView.dart';
 
-class PlaylistItem extends StatelessWidget {
+class PlaylistItem extends StatefulWidget {
   final Playlist playlist;
+  final bool canDeleteVideos;
 
-  const PlaylistItem({super.key, required this.playlist});
+  const PlaylistItem({super.key, required this.playlist, required this.canDeleteVideos});
+
+  @override
+  State<PlaylistItem> createState() => _PlaylistItemState();
+}
+
+class _PlaylistItemState extends State<PlaylistItem> with AfterLayoutMixin<PlaylistItem> {
+  List<VideoInList> videos = [];
 
   openPlayList(BuildContext context) {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => PlaylistView(playlist: playlist,)));
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => PlaylistView(
+                  playlist: widget.playlist,
+                  canDeleteVideos: widget.canDeleteVideos,
+                )));
   }
-
 
   @override
   Widget build(BuildContext context) {
-    ColorScheme colors = Theme
-        .of(context)
-        .colorScheme;
+    ColorScheme colors = Theme.of(context).colorScheme;
 
     List<Widget> thumbs = [];
+    List<VideoInList> videosToUse = videos.isNotEmpty ? videos : widget.playlist.videos;
 
     for (int i = 0; i < 3; i++) {
       // for (VideoInList video in playlist.videos) {
@@ -35,12 +51,14 @@ class PlaylistItem extends StatelessWidget {
             aspectRatio: 16 / 9,
             child: Opacity(
               opacity: 1 - (0.3 * i),
-              child: playlist.videos.length > i ? VideoThumbnailView(
-                videoId: playlist.videos[i].videoId,
-                thumbnailUrl: ImageObject
-                    .getBestThumbnail(playlist.videos[i].videoThumbnails)
-                    ?.url ?? '',
-              ): Container(decoration: BoxDecoration(color: colors.secondaryContainer, borderRadius: BorderRadius.circular(10)),),
+              child: videosToUse.length > i
+                  ? VideoThumbnailView(
+                      videoId: videosToUse[i].videoId,
+                      thumbnailUrl: ImageObject.getBestThumbnail(videosToUse[i].videoThumbnails)?.url ?? '',
+                    )
+                  : Container(
+                      decoration: BoxDecoration(color: colors.secondaryContainer, borderRadius: BorderRadius.circular(10)),
+                    ),
             ),
           ),
         ),
@@ -48,7 +66,6 @@ class PlaylistItem extends StatelessWidget {
     }
 
     thumbs = thumbs.reversed.toList();
-
 
     return GestureDetector(
       onTap: () => openPlayList(context),
@@ -69,8 +86,12 @@ class PlaylistItem extends StatelessWidget {
                         children: thumbs,
                       ),
                     )),
-                Expanded(child: Text(playlist.title, style: TextStyle(color: colors.primary),)),
-                Text('${playlist.videoCount} videos'),
+                Expanded(
+                    child: Text(
+                  widget.playlist.title,
+                  style: TextStyle(color: colors.primary),
+                )),
+                Text('${widget.playlist.videoCount} videos'),
               ],
             ),
           ),
@@ -78,5 +99,22 @@ class PlaylistItem extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  getThumbnailsFromYoutube(BuildContext context) async {
+    if (widget.playlist.videos.isEmpty && widget.playlist.videoCount > 0) {
+      // something is not right, let's get the full playlist
+      Playlist playlist = await service.getPublicPlaylists(widget.playlist.playlistId);
+      if (context.mounted) {
+        setState(() {
+          videos = playlist.videos;
+        });
+      }
+    }
+  }
+
+  @override
+  FutureOr<void> afterFirstLayout(BuildContext context) {
+    getThumbnailsFromYoutube(context);
   }
 }

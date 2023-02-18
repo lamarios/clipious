@@ -1,10 +1,12 @@
 import 'dart:async';
 
 import 'package:dynamic_color/dynamic_color.dart';
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:fbroadcast/fbroadcast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:invidious/globals.dart';
+import 'package:invidious/models/searchResult.dart';
 import 'package:invidious/views/playlists.dart';
 import 'package:invidious/views/popular.dart';
 import 'package:invidious/views/search.dart';
@@ -95,7 +97,7 @@ class MyApp extends StatelessWidget {
             colorScheme: lightColorScheme,
           ),
           darkTheme: ThemeData(useMaterial3: true, colorScheme: darkColorScheme),
-          home: showWizard? const WelcomeWizard() : const Home());
+          home: showWizard ? const WelcomeWizard() : const Home());
     });
   }
 }
@@ -209,7 +211,8 @@ class HomeState extends State<Home> {
           actions: [
             GestureDetector(
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => const Search()));
+                // Navigator.push(context, MaterialPageRoute(builder: (context) => const Search()));
+                showSearch(context: context, delegate: MySearchDelegate());
               },
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -279,6 +282,7 @@ class HomeState extends State<Home> {
                   ),
                   const Playlists(
                     key: ValueKey(3),
+                    canDeleteVideos: true,
                   )
                 ][selectedIndex],
                 transitionBuilder: (Widget child, Animation<double> animation) {
@@ -286,5 +290,68 @@ class HomeState extends State<Home> {
                 },
               )
             ])));
+  }
+}
+
+class MySearchDelegate extends SearchDelegate {
+  @override
+  List<Widget>? buildActions(BuildContext context) => [
+        IconButton(
+            onPressed: () {
+              if (query.isEmpty) {
+                close(context, null);
+              } else {
+                query = '';
+              }
+            },
+            icon: const Icon(Icons.clear))
+      ];
+
+  @override
+  Widget? buildLeading(BuildContext context) => IconButton(onPressed: () => close(context, null), icon: Icon(Icons.arrow_back));
+
+  @override
+  Widget buildResults(BuildContext context) {
+    return FutureBuilder<SearchResults>(
+      future: service.search(query),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.done && snapshot.data != null) {
+          return Search(results: snapshot.data!);
+        } else if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        } else {
+          return const SizedBox.shrink();
+        }
+      },
+    );
+  }
+
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    // service.getSearchSuggestion(query);
+    return FutureBuilder(
+      future: service.getSearchSuggestion(query),
+      builder: (context, snapshot) {
+        List<String> suggestions = [];
+        if (snapshot.connectionState == ConnectionState.done) {
+          suggestions = snapshot.data?.suggestions ?? [];
+        }
+
+        return ListView.builder(
+            itemCount: suggestions.length,
+            itemBuilder: (context, index) {
+              String sugg = suggestions[index];
+              return ListTile(
+                title: Text(suggestions[index]),
+                onTap: () {
+                  query = sugg;
+                  showResults(context);
+                },
+              );
+            });
+      },
+    );
   }
 }

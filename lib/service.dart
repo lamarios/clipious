@@ -8,6 +8,7 @@ import 'package:invidious/database.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/models/errors/invidiousServiceError.dart';
 import 'package:invidious/models/playlist.dart';
+import 'package:invidious/models/searchResult.dart';
 import 'package:invidious/models/sponsorSegment.dart';
 import 'package:invidious/models/userFeed.dart';
 import 'package:invidious/models/video.dart';
@@ -36,6 +37,7 @@ const ADD_DELETE_SUBSCRIPTION = '/api/v1/auth/subscriptions/:ucid';
 const GET_COMMENTS = '/api/v1/comments/:id';
 const GET_CHANNEL = '/api/v1/channels/:id';
 const GET_CHANNEL_VIDEOS = '/api/v1/channels/:id/videos';
+const GET_CHANNEL_STREAMS = '/api/v1/channels/:id/streams';
 const GET_SPONSOR_SEGMENTS = 'https://sponsor.ajay.app/api/skipSegments?videoID=:id';
 const GET_USER_PLAYLISTS = '/api/v1/auth/playlists';
 const POST_USER_PLAYLIST = '/api/v1/auth/playlists';
@@ -43,6 +45,7 @@ const GET_CHANNEL_PLAYLISTS = '/api/v1/channels/:id/playlists';
 const POST_USER_PLAYLIST_VIDEO = '/api/v1/auth/playlists/:id/videos';
 const DELETE_USER_PLAYLIST = '/api/v1/auth/playlists/:id';
 const DELETE_USER_PLAYLIST_VIDEO = '/api/v1/auth/playlists/:id/videos/:index';
+const GET_PUBLIC_PLAYLIST = '/api/v1/playlists/:id';
 
 const MAX_PING = 9007199254740991;
 
@@ -128,13 +131,28 @@ class Service {
     return List<VideoInList>.from(i.map((e) => VideoInList.fromJson(e)));
   }
 
-  Future<List<VideoInList>> search(String query) async {
+  Future<SearchResults> search(String query) async {
     String url = db.getCurrentlySelectedServer().url + SEARCH.replaceAll(":q", query);
     log.info('Calling $url');
     final response = await http.get(Uri.parse(url));
     Iterable i = handleResponse(response);
     // only getting videos for now
-    return List<VideoInList>.from(i.where((e) => e['type'] == 'video').map((e) => VideoInList.fromJson(e)));
+    SearchResults results = SearchResults();
+    i.forEach((e) {
+      switch(e['type']){
+        case 'video':
+          results.videos.add(VideoInList.fromJson(e));
+          break;
+        case 'playlist':
+          results.playlists.add(Playlist.fromJson(e));
+          break;
+        case 'Channel':
+          results.channels.add(Channel.fromJson(e));
+      }
+
+    });
+
+    return results;
   }
 
   Future<UserFeed> getUserFeed({int? maxResults, int? page}) async {
@@ -250,9 +268,15 @@ class Service {
   }
 
   Future<ChannelVideos> getChannelVideos(String channelId, String? continuation) async {
-    String url = db.getCurrentlySelectedServer().url + (GET_CHANNEL_VIDEOS.replaceAll(":id", channelId)) + (continuation != null ? '?continuation=$continuation' : '');
-    log.info('Calling $url');
-    final response = await http.get(Uri.parse(url), headers: {'Content-Type': 'application/json; charset=utf-16'});
+    Uri uri = buildUrl(GET_CHANNEL_VIDEOS, pathParams: {':id': channelId}, query: {'continuation': continuation});
+    final response = await http.get(uri, headers: {'Content-Type': 'application/json; charset=utf-16'});
+
+    return ChannelVideos.fromJson(handleResponse(response));
+  }
+
+  Future<ChannelVideos> getChannelStreams(String channelId, String? continuation) async {
+    Uri uri = buildUrl(GET_CHANNEL_STREAMS, pathParams: {':id': channelId}, query: {'continuation': continuation});
+    final response = await http.get(uri, headers: {'Content-Type': 'application/json; charset=utf-16'});
 
     return ChannelVideos.fromJson(handleResponse(response));
   }
@@ -364,5 +388,12 @@ class Service {
     }
 
     return servers.where((s) => (s.api ?? false) && (s.stats?.openRegistrations ?? false)).toList();
+  }
+
+  Future<Playlist> getPublicPlaylists(String playlistId, {int? page}) async {
+    Uri uri = buildUrl(GET_PUBLIC_PLAYLIST, pathParams: {':id': playlistId}, query: {'page': page?.toString()});
+
+    final response = await http.get(uri);
+    return Playlist.fromJson(handleResponse(response));
   }
 }
