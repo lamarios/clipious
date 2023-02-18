@@ -119,7 +119,7 @@ class HomeState extends State<Home> {
   initState() {
     super.initState();
     selectedIndex = int.parse(db.getSettings(ON_OPEN)?.value ?? '1');
-    if(!isLoggedIn && selectedIndex >2){
+    if (!isLoggedIn && selectedIndex > 1) {
       selectedIndex = 0;
     }
     FBroadcast.instance().register(BROADCAST_SERVER_CHANGED, (value, callback) {
