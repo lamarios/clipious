@@ -39,20 +39,24 @@ class SearchState extends State<Search> with SingleTickerProviderStateMixin {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        TabBar(controller: controller, tabs: const [
-          Tab(
-            text: 'Videos',
-            icon: Icon(Icons.play_arrow),
-          ),
-          Tab(
-            text: 'Channels',
-            icon: Icon(Icons.people),
-          ),
-          Tab(
-            text: 'Playlists',
-            icon: Icon(Icons.playlist_play),
-          )
-        ]),
+        Material(
+          color: colorScheme.brightness == Brightness.dark ? Colors.grey[900] : Colors.white,
+          child: TabBar(controller: controller,
+              tabs: const [
+            Tab(
+              text: 'Videos',
+              icon: Icon(Icons.play_arrow),
+            ),
+            Tab(
+              text: 'Channels',
+              icon: Icon(Icons.people),
+            ),
+            Tab(
+              text: 'Playlists',
+              icon: Icon(Icons.playlist_play),
+            )
+          ]),
+        ),
         Expanded(
           child: FractionallySizedBox(
             widthFactor: 1,
@@ -62,7 +66,7 @@ class SearchState extends State<Search> with SingleTickerProviderStateMixin {
               children: [
                 widget.results.videos.isNotEmpty ? VideoList(
                   videos: widget.results.videos,
-                ): const Text('No videos'),
+                ): Center(child: const Text('No videos')),
                 widget.results.channels.isNotEmpty
                     ? ListView(
                         children: widget.results.channels

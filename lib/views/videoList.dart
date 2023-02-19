@@ -92,7 +92,7 @@ class VideoListState extends State<VideoList> with AfterLayoutMixin<VideoList> {
                       visible: widget.videos?.isNotEmpty ?? videos.isNotEmpty,
                       child: SmartRefresher(
                         controller: refreshController,
-                        enablePullDown: true,
+                        enablePullDown: widget.refresh != null,
                         enablePullUp: false,
                         onRefresh: () => widget.refresh != null ? refreshVideos() : getVideos(),
                         child: GridView.count(

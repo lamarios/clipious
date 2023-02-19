@@ -100,6 +100,7 @@ class SettingsState extends State<Settings> with AfterLayoutMixin {
 
     return Scaffold(
         appBar: AppBar(
+          scrolledUnderElevation: 0,
           title: const Text('Settings'),
         ),
         backgroundColor: colorScheme.background,

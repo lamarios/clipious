@@ -15,7 +15,8 @@ import '../utils.dart';
 const PLAYLIST_ADDED = 'playlist-added';
 
 class Playlists extends StatefulWidget {
-  final bool canDeleteVideos ;
+  final bool canDeleteVideos;
+
   const Playlists({super.key, required this.canDeleteVideos});
 
   @override
@@ -41,7 +42,6 @@ class _PlaylistsState extends State<Playlists> with AfterLayoutMixin<Playlists>,
     routeObserver.subscribe(this, ModalRoute.of(context) as PageRoute<dynamic>);
   }
 
-
   @override
   void didPopNext() {
     super.didPopNext();
@@ -55,7 +55,13 @@ class _PlaylistsState extends State<Playlists> with AfterLayoutMixin<Playlists>,
         Visibility(visible: loading, child: LinearProgressIndicator()),
         Expanded(
           child: ListView(
-            children: playlists.map((p) => PlaylistItem(key: ValueKey(p.playlistId), playlist: p, canDeleteVideos: widget.canDeleteVideos,)).toList(),
+            children: playlists
+                .map((p) => PlaylistItem(
+                      key: ValueKey(p.playlistId),
+                      playlist: p,
+                      canDeleteVideos: widget.canDeleteVideos,
+                    ))
+                .toList(),
           ),
         )
       ],
@@ -67,10 +73,12 @@ class _PlaylistsState extends State<Playlists> with AfterLayoutMixin<Playlists>,
       loading = true;
     });
     List<Playlist> lists = await service.getUserPlaylists();
-    setState(() {
-      playlists = lists;
-      loading = false;
-    });
+    if (mounted) {
+      setState(() {
+        playlists = lists;
+        loading = false;
+      });
+    }
   }
 
   @override
@@ -124,10 +132,10 @@ class _AddPlayListFormState extends State<AddPlayListForm> {
       String? playlistId = await service.createPlayList(nameController.value.text, privacyValue);
       FBroadcast.instance().broadcast(PLAYLIST_ADDED);
 
-      if (widget.afterAdd != null) {
+
+      if (context.mounted && widget.afterAdd != null) {
         widget.afterAdd!(context, playlistId!);
       }
-
       Navigator.of(context).pop();
     } catch (err) {
       showAlertDialog(context, 'Error', [Text(err.toString())]);
@@ -156,9 +164,9 @@ class _AddPlayListFormState extends State<AddPlayListForm> {
               padding: const EdgeInsets.all(8.0),
               child: Row(
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: const Text('Visibility:'),
+                  const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Text('Visibility:'),
                   ),
                   DropdownButton(
                     value: privacyValue,

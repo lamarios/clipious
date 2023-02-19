@@ -81,6 +81,7 @@ doesn't seem to be working for now
             child: VideoList(
               key: videos,
               getVideos: getVideos,
+              refresh: getVideos,
             ),
           ),
         ],

@@ -118,7 +118,7 @@ class HomeState extends State<Home> {
   @override
   initState() {
     super.initState();
-    selectedIndex = int.parse(db.getSettings(ON_OPEN)?.value ?? '1');
+    selectedIndex = int.parse(db.getSettings(ON_OPEN)?.value ?? '0');
     if (!isLoggedIn && selectedIndex > 1) {
       selectedIndex = 0;
     }

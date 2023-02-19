@@ -48,34 +48,42 @@ class _WelcomeWizardState extends State<WelcomeWizard> {
     ColorScheme colors = Theme.of(context).colorScheme;
 
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: colors.background,
+        toolbarHeight: 0,
+        scrolledUnderElevation: 0,
+      ),
+      extendBodyBehindAppBar: true,
+      backgroundColor: colors.background,
       body: SafeArea(
+          top: true,
           child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-        const Padding(
-          padding: EdgeInsets.all(8.0),
-          child: SizedBox(width: 70, height: 70, child: AppIconImage()),
-        ),
-        Text(
-          'Clipious',
-          style: TextStyle(color: colors.primary, fontSize: 30),
-        ),
-        const Padding(
-          padding: EdgeInsets.all(8.0),
-          child: Text('To start using Clipious, please select a public server or add your own. You can change servers later in the settings'),
-        ),
-        const Expanded(child: ManagerServersView()),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: FilledButton.tonal(
-              onPressed: selected != null
-                  ? () {
-                      Navigator.of(context).pushReplacement(MaterialPageRoute(
-                        builder: (context) => const Home(),
-                      ));
-                    }
-                  : null,
-              child: const Text('Start using Clipious')),
-        )
-      ])),
+            const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: SizedBox(width: 70, height: 70, child: AppIconImage()),
+            ),
+            Text(
+              'Clipious',
+              style: TextStyle(color: colors.primary, fontSize: 30),
+            ),
+            const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Text('To start using Clipious, please select a public server or add your own. You can change servers later in the settings'),
+            ),
+            const Expanded(child: ManagerServersView()),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: FilledButton.tonal(
+                  onPressed: selected != null
+                      ? () {
+                          Navigator.of(context).pushReplacement(MaterialPageRoute(
+                            builder: (context) => const Home(),
+                          ));
+                        }
+                      : null,
+                  child: const Text('Start using Clipious')),
+            )
+          ])),
     );
   }
 }
