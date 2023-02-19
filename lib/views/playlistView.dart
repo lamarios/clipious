@@ -66,8 +66,8 @@ class _PlaylistViewState extends State<PlaylistView> with AfterLayoutMixin<Playl
   startVideo() async {
     if (playlist.videos.isNotEmpty) {
       if (selectedIndex < playlist.videos.length) {
-        var vid = await service.getVideo(playlist.videos[selectedIndex].videoId);
         scrollController.animateTo(selectedIndex * playlistItemHeight, duration: animationDuration, curve: Curves.easeInOutQuad);
+        var vid = await service.getVideo(playlist.videos[selectedIndex].videoId);
         setState(() {
           playingVideo = true;
           progress = 0;
