@@ -72,48 +72,52 @@ class VideoViewState extends State<VideoView> with AfterLayoutMixin<VideoView>, 
           video?.title ?? '',
           // style: TextStyle(fontSize: 15),
         ),
-        actions: [
-          Visibility(
-            visible: video != null,
-            child: GestureDetector(
-              onTap: () => showSharingSheet(context, video!),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Icon(
-                  Icons.share,
-                  color: colorScheme.secondary,
+        actions: loadingVideo
+            ? []
+            : [
+                Visibility(
+                  visible: video != null,
+                  child: GestureDetector(
+                    onTap: () => showSharingSheet(context, video!),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Icon(
+                        Icons.share,
+                        color: colorScheme.secondary,
+                      ),
+                    ),
+                  ),
                 ),
-              ),
-            ),
-          ),
-          Visibility(
-            visible: isLoggedIn,
-            child: GestureDetector(
-              onTap: () => AddToPlaylist.showDialog(context, video!.videoId),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Icon(
-                  Icons.add,
-                  color: colorScheme.secondary,
+                Visibility(
+                  visible: isLoggedIn,
+                  child: GestureDetector(
+                    onTap: () => AddToPlaylist.showDialog(context, video!.videoId),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Icon(
+                        Icons.add,
+                        color: colorScheme.secondary,
+                      ),
+                    ),
+                  ),
                 ),
-              ),
-            ),
-          ),
-        ],
+              ],
         scrolledUnderElevation: 0,
       ),
       backgroundColor: colorScheme.background,
-      bottomNavigationBar: NavigationBar(
-        labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
-        elevation: 0,
-        onDestinationSelected: (int index) {
-          setState(() {
-            selectedIndex = index;
-          });
-        },
-        selectedIndex: selectedIndex,
-        destinations: destinations,
-      ),
+      bottomNavigationBar: loadingVideo
+          ? null
+          : NavigationBar(
+              labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
+              elevation: 0,
+              onDestinationSelected: (int index) {
+                setState(() {
+                  selectedIndex = index;
+                });
+              },
+              selectedIndex: selectedIndex,
+              destinations: destinations,
+            ),
       body: SafeArea(
         bottom: false,
         child: Padding(

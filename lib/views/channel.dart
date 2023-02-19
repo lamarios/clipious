@@ -3,6 +3,7 @@ import 'dart:async';
 import 'dart:collection';
 import 'dart:math';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:after_layout/after_layout.dart';
 import 'package:better_player/better_player.dart';
 import 'package:flutter/material.dart';
@@ -50,7 +51,6 @@ class ChannelViewState extends State<ChannelView> with AfterLayoutMixin<ChannelV
     super.dispose();
   }
 
-
   toggleSubscription() async {
     if (this.isSubscribed) {
       await service.unSubscribe(widget.channelId);
@@ -66,6 +66,7 @@ class ChannelViewState extends State<ChannelView> with AfterLayoutMixin<ChannelV
   @override
   Widget build(BuildContext context) {
     ColorScheme colorScheme = Theme.of(context).colorScheme;
+    var locals = AppLocalizations.of(context)!;
 
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -76,41 +77,45 @@ class ChannelViewState extends State<ChannelView> with AfterLayoutMixin<ChannelV
         title: Text(
           channel?.author ?? '',
         ),
-        actions: [
-          Visibility(
-            visible: channel != null,
-            child: GestureDetector(
-              onTap: () => showSharingSheet(context, channel!),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Icon(
-                  Icons.share,
-                  color: colorScheme.secondary,
+        actions: loading
+            ? []
+            : [
+                Visibility(
+                  visible: channel != null,
+                  child: GestureDetector(
+                    onTap: () => showSharingSheet(context, channel!),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Icon(
+                        Icons.share,
+                        color: colorScheme.secondary,
+                      ),
+                    ),
+                  ),
                 ),
-              ),
-            ),
-          ),
-        ],
+              ],
       ),
       backgroundColor: colorScheme.background,
-      bottomNavigationBar: NavigationBar(
-        labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
-        elevation: 0,
-        onDestinationSelected: (int index) {
-          setState(() {
-            selectedIndex = index;
-          });
-        },
-        selectedIndex: selectedIndex,
-        destinations: const <Widget>[
-          NavigationDestination(icon: Icon(Icons.info), label: 'Info'),
-          NavigationDestination(icon: Icon(Icons.play_arrow), label: 'Videos'),
-          NavigationDestination(icon: Icon(Icons.stream), label: 'Streams'),
-          NavigationDestination(icon: Icon(Icons.playlist_play), label: 'Playlists')
-        ],
-      ),
+      bottomNavigationBar: loading
+          ? null
+          : NavigationBar(
+              labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
+              elevation: 0,
+              onDestinationSelected: (int index) {
+                setState(() {
+                  selectedIndex = index;
+                });
+              },
+              selectedIndex: selectedIndex,
+              destinations: <Widget>[
+                NavigationDestination(icon: Icon(Icons.info), label: locals.info),
+                NavigationDestination(icon: Icon(Icons.play_arrow), label: locals.videos),
+                NavigationDestination(icon: Icon(Icons.stream), label: locals.streams),
+                NavigationDestination(icon: Icon(Icons.playlist_play), label: locals.playlists)
+              ],
+            ),
       body: SafeArea(
-        top: false,
+          top: false,
           bottom: false,
           child: AnimatedSwitcher(
             duration: animationDuration,
@@ -124,7 +129,9 @@ class ChannelViewState extends State<ChannelView> with AfterLayoutMixin<ChannelV
                           height: 250,
                           thumbnailUrl: ImageObject.getBestThumbnail(channel!.authorThumbnails)?.url ?? '',
                           id: 'channel-banner/${widget.channelId}',
-                          decoration: BoxDecoration(color: colorScheme.secondaryContainer,)),
+                          decoration: BoxDecoration(
+                            color: colorScheme.secondaryContainer,
+                          )),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Row(
@@ -135,10 +142,18 @@ class ChannelViewState extends State<ChannelView> with AfterLayoutMixin<ChannelV
                       ),
                       Expanded(
                         child: <Widget>[
-                          ChannelInfo(key: const ValueKey('info'),channel: channel!),
-                          ChannelVideosView(key: const ValueKey('videos'), channel: channel!, getVideos: service.getChannelVideos,),
-                          ChannelVideosView(key: const ValueKey('streams'),channel: channel!, getVideos: service.getChannelStreams,),
-                          ChannelPlayListsView(key: const ValueKey('playlists'),channelId: channel!.authorId, canDeleteVideos: false)
+                          ChannelInfo(key: const ValueKey('info'), channel: channel!),
+                          ChannelVideosView(
+                            key: const ValueKey('videos'),
+                            channel: channel!,
+                            getVideos: service.getChannelVideos,
+                          ),
+                          ChannelVideosView(
+                            key: const ValueKey('streams'),
+                            channel: channel!,
+                            getVideos: service.getChannelStreams,
+                          ),
+                          ChannelPlayListsView(key: const ValueKey('playlists'), channelId: channel!.authorId, canDeleteVideos: false)
                         ][selectedIndex],
                       )
                     ],

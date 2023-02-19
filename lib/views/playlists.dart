@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:after_layout/after_layout.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:fbroadcast/fbroadcast.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -52,7 +53,7 @@ class _PlaylistsState extends State<Playlists> with AfterLayoutMixin<Playlists>,
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Visibility(visible: loading, child: LinearProgressIndicator()),
+        Visibility(visible: loading, child: const LinearProgressIndicator()),
         Expanded(
           child: ListView(
             children: playlists
@@ -69,15 +70,18 @@ class _PlaylistsState extends State<Playlists> with AfterLayoutMixin<Playlists>,
   }
 
   getPlayLists() async {
-    setState(() {
-      loading = true;
-    });
-    List<Playlist> lists = await service.getUserPlaylists();
     if (mounted) {
       setState(() {
-        playlists = lists;
-        loading = false;
+        loading = true;
       });
+
+      List<Playlist> lists = await service.getUserPlaylists();
+      if (mounted) {
+        setState(() {
+          playlists = lists;
+          loading = false;
+        });
+      }
     }
   }
 
@@ -128,22 +132,23 @@ class _AddPlayListFormState extends State<AddPlayListForm> {
   String privacyValue = 'public';
 
   addPlaylist(BuildContext context) async {
+    var locals = AppLocalizations.of(context)!;
     try {
       String? playlistId = await service.createPlayList(nameController.value.text, privacyValue);
       FBroadcast.instance().broadcast(PLAYLIST_ADDED);
-
 
       if (context.mounted && widget.afterAdd != null) {
         widget.afterAdd!(context, playlistId!);
       }
       Navigator.of(context).pop();
     } catch (err) {
-      showAlertDialog(context, 'Error', [Text(err.toString())]);
+      showAlertDialog(context, locals.error, [Text(err.toString())]);
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    var locals = AppLocalizations.of(context)!;
     return SizedBox(
       width: 400,
       child: Padding(
@@ -152,9 +157,9 @@ class _AddPlayListFormState extends State<AddPlayListForm> {
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text('Add Playlist'),
+             Text(locals.addPlayList),
             TextField(
-              decoration: InputDecoration(hintText: 'Playlist name'),
+              decoration: InputDecoration(hintText: locals.playListName),
               controller: nameController,
               autocorrect: false,
               enableSuggestions: false,
@@ -164,16 +169,16 @@ class _AddPlayListFormState extends State<AddPlayListForm> {
               padding: const EdgeInsets.all(8.0),
               child: Row(
                 children: [
-                  const Padding(
+                   Padding(
                     padding: EdgeInsets.all(8.0),
-                    child: Text('Visibility:'),
+                    child: Text('${locals.playlistVisibility}:'),
                   ),
                   DropdownButton(
                     value: privacyValue,
-                    items: const [
-                      DropdownMenuItem(value: 'public', child: Text('Public')),
-                      DropdownMenuItem(value: 'unlisted', child: Text('Unlisted')),
-                      DropdownMenuItem(value: 'private', child: Text('Private'))
+                    items:  [
+                      DropdownMenuItem(value: 'public', child: Text(locals.publicPlaylist)),
+                      DropdownMenuItem(value: 'unlisted', child: Text(locals.unlistedPlaylist)),
+                      DropdownMenuItem(value: 'private', child: Text(locals.privatePlaylist))
                     ],
                     onChanged: (value) {
                       setState(() {
@@ -191,13 +196,13 @@ class _AddPlayListFormState extends State<AddPlayListForm> {
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  child: const Text('Cancel'),
+                  child:  Text(locals.cancel),
                 ),
                 TextButton(
                   onPressed: () {
                     addPlaylist(context);
                   },
-                  child: const Text('Add'),
+                  child:  Text(locals.add),
                 ),
               ],
             ),

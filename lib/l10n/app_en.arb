@@ -1,0 +1,123 @@
+{
+  "subscriptions": "Subscriptions",
+  "@subscriptions": {
+    "description": "User subscriptions"
+  },
+  "playlists": "Playlists",
+  "@playlists": {
+    "description": "User playlists"
+  },
+  "popular": "Popular",
+  "@popular": {
+    "description": "Popular videos title"
+  },
+  "trending": "Trending",
+  "@trending": {
+    "description": "Trending videos title"
+  },
+  "noVideoInPlayList": "No video in playlist",
+  "@noVideoInPlayList": {
+    "description": "When no videos in the playlist"
+  },
+  "removeFromPlayList": "Remove from playlist",
+  "@removeFromPlayList": {
+    "description": "Menu item description to show remove a video from a playlist"
+  },
+  "deletePlayListQ": "Delete Playlist ?",
+  "@deletePlayListQ": {
+    "description": "Ask user to delete a playlist"
+  },
+  "irreversibleAction": "This action is irreversible",
+  "@irreversibleAction": {
+    "description": "Tell the user that the action cannot be undone"
+  },
+  "addPlayList": "Add Playlist",
+  "@addPlayList": {
+    "description": "Title for add playlist dialog"
+  },
+  "playListName": "Playlist name",
+  "@playListName": {
+    "description": "Place holder for new playlist name text field"
+  },
+  "playlistVisibility": "Visibility",
+  "@playlistVisibility": {
+    "description": "Dropdown label for playlist visibility"
+  },
+  "publicPlaylist": "Public",
+  "@publicPlaylist": {
+    "description": "Public playlist"
+  },
+  "privatePlaylist": "Private",
+  "@privatePlaylist": {
+    "description": "Private playlist"
+  },
+  "cancel": "Cancel",
+  "@cancel": {
+    "description": "Cancel button label"
+  },
+  "add": "Add",
+  "@add": {
+    "description": "Add button abel"
+  },
+  "unlistedPlaylist": "Unlisted",
+  "@unlistedPlaylist": {
+    "description": "Unlisted playlist"
+  },
+  "info": "Info",
+  "@info": {
+    "description": "Info label"
+  },
+  "videos": "Videos",
+  "@videos": {
+    "description": "Videos label"
+  },
+  "streams": "Streams",
+  "@streams": {
+    "description": "Streams label"
+  },
+  "latestVideos": "Latest Videos",
+  "@latestVideos": {
+    "description": "Latest channel videos"
+  },
+  "subscribed": "Subscribed",
+  "@subscribed": {
+    "description": "When the user is subscribed to a channel"
+  },
+  "subscribe": "Subscribe",
+  "@subscribe": {
+    "description": "Label for user to subscribe to a channel"
+  },
+  "nSubscribers": "{count, select, no{No subscribers} other{{count} subscribers}}",
+  "@nSubscribers": {
+    "description": "number of subscribers",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "shareYoutubeLink": "Share Youtube link",
+  "@shareYoutubeLink": {
+    "description": "asking user to share youtube link"
+  },
+  "shareInvidiousLink": "Share Invidious link",
+  "@shareInvidiousLink": {
+    "description": "asking user to share invidious link"
+  },
+  "ok": "Ok",
+    "@ok": {
+      "description": "Ok"
+    },
+  "error": "Error",
+  "@error": {},
+  "nVideos": "{count, plural, =0{No videos} =1{1 video} other{{count} videos}}",
+  "@nVideos": {
+    "description": "One or more videos",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  }
+}

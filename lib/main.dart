@@ -1,10 +1,12 @@
 import 'dart:async';
 
 import 'package:dynamic_color/dynamic_color.dart';
-import 'package:easy_debounce/easy_debounce.dart';
 import 'package:fbroadcast/fbroadcast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/models/searchResult.dart';
 import 'package:invidious/views/playlists.dart';
@@ -37,8 +39,6 @@ Future<void> main() async {
 }
 
 final RouteObserver<ModalRoute> routeObserver = RouteObserver<ModalRoute>();
-
-const List<String> navigationLabels = ['Popular', 'Trending', 'Subscriptions', 'Playlists'];
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -85,9 +85,9 @@ class MyApp extends StatelessWidget {
       }
       var brightness = SchedulerBinding.instance.platformDispatcher.platformBrightness;
       ColorScheme colorScheme = brightness == Brightness.dark ? darkColorScheme : lightColorScheme;
-      // SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(systemNavigationBarColor: colorScheme.background, statusBarColor: colorScheme.background));
-
       return MaterialApp(
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
           scaffoldMessengerKey: scaffoldKey,
           title: 'Clipious',
           navigatorObservers: [routeObserver],
@@ -110,7 +110,7 @@ class Home extends StatefulWidget {
 }
 
 class HomeState extends State<Home> {
-  final log = Logger('Hone');
+  final log = Logger('Home');
   late int selectedIndex;
   bool isLoggedIn = db.isLoggedInToCurrentServer();
   late StreamSubscription _intentDataStreamSubscription;
@@ -178,10 +178,13 @@ class HomeState extends State<Home> {
     Navigator.push(context, MaterialPageRoute(builder: (context) => const Settings()));
   }
 
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     ColorScheme colorScheme = Theme.of(context).colorScheme;
+    var locals = AppLocalizations.of(context)!;
+    List<String> navigationLabels = [locals.popular, locals.trending, locals.subscriptions, locals.playlists];
 
     var navigationWidgets = <Widget>[
       NavigationDestination(icon: const Icon(Icons.local_fire_department), label: navigationLabels[0]),
@@ -191,7 +194,6 @@ class HomeState extends State<Home> {
       navigationWidgets.add(NavigationDestination(icon: const Icon(Icons.subscriptions), label: navigationLabels[2]));
       navigationWidgets.add(NavigationDestination(icon: const Icon(Icons.playlist_play), label: navigationLabels[3]));
     }
-    double statusHeight = MediaQuery.of(context).viewPadding.top;
 
     return Scaffold(
         backgroundColor: colorScheme.background,
@@ -208,6 +210,11 @@ class HomeState extends State<Home> {
         ),
         floatingActionButton: selectedIndex == 3 ? AddPlayListButton() : null,
         appBar: AppBar(
+          systemOverlayStyle: SystemUiOverlayStyle(
+              systemNavigationBarColor: colorScheme.background,
+              systemNavigationBarIconBrightness: colorScheme.brightness == Brightness.dark ? Brightness.light : Brightness.dark,
+              statusBarColor: colorScheme.background,
+              statusBarIconBrightness: colorScheme.brightness == Brightness.dark ? Brightness.light : Brightness.dark),
           title: Text(navigationLabels[selectedIndex]),
           scrolledUnderElevation: 0,
           // backgroundColor: Colors.pink,
@@ -269,10 +276,14 @@ class HomeState extends State<Home> {
         ),
 */
         body: SafeArea(
-            bottom: true,
-            maintainBottomViewPadding: false,
+            bottom: false,
             child: Stack(children: [
               AnimatedSwitcher(
+                switchInCurve: Curves.easeInOutQuad,
+                switchOutCurve: Curves.easeInOutQuad,
+                transitionBuilder: (Widget child, Animation<double> animation) {
+                  return FadeTransition(opacity: animation, child: child);
+                },
                 duration: animationDuration,
                 child: <Widget>[
                   const Popular(
@@ -289,9 +300,6 @@ class HomeState extends State<Home> {
                     canDeleteVideos: true,
                   )
                 ][selectedIndex],
-                transitionBuilder: (Widget child, Animation<double> animation) {
-                  return FadeTransition(opacity: animation, child: child);
-                },
               )
             ])));
   }

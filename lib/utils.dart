@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/models/interfaces/sharelink.dart';
@@ -7,15 +8,10 @@ import 'package:share_plus/share_plus.dart';
 
 import 'models/country.dart';
 
-
-
 const PHONE_MAX = 600;
 const TABLET_PORTRAIT_MAX = 900;
 
-enum DeviceType{
-  phone,
-  tablet
-}
+enum DeviceType { phone, tablet }
 
 String prettyDuration(Duration duration) {
   var components = <String>[];
@@ -38,6 +34,7 @@ NumberFormat compactCurrency = NumberFormat.compactCurrency(
 );
 
 Future<void> showAlertDialog(BuildContext context, String title, List<Widget> body) async {
+  var locals = AppLocalizations.of(context)!;
   return showDialog<void>(
     context: context,
     barrierDismissible: false, // user must tap button!
@@ -51,7 +48,7 @@ Future<void> showAlertDialog(BuildContext context, String title, List<Widget> bo
         ),
         actions: <Widget>[
           TextButton(
-            child: const Text('Ok'),
+            child: Text(locals.ok),
             onPressed: () {
               Navigator.of(context).pop();
             },
@@ -63,6 +60,7 @@ Future<void> showAlertDialog(BuildContext context, String title, List<Widget> bo
 }
 
 void showSharingSheet(BuildContext context, ShareLinks links) {
+  var locals = AppLocalizations.of(context)!;
   showModalBottomSheet<void>(
       context: context,
       builder: (BuildContext context) {
@@ -74,14 +72,14 @@ void showSharingSheet(BuildContext context, ShareLinks links) {
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 FilledButton.tonal(
-                  child: const Text('Share invidious link'),
+                  child: Text(locals.shareInvidiousLink),
                   onPressed: () {
                     Share.share(links.getInvidiousLink(db.getCurrentlySelectedServer()));
                     Navigator.of(context).pop();
                   },
                 ),
                 FilledButton.tonal(
-                  child: const Text('Share youtube link'),
+                  child: Text(locals.shareYoutubeLink),
                   onPressed: () {
                     Share.share(links.getYoutubeLink());
                     Navigator.of(context).pop();
@@ -113,11 +111,12 @@ int getGridCount(BuildContext context) {
   return (width / 300).floor();
 }
 
-double getGridAspectRatio(BuildContext context){
-  return getGridCount(context) > 1 ? 16/15 : 16/13;
+double getGridAspectRatio(BuildContext context) {
+  return getGridCount(context) > 1 ? 16 / 15 : 16 / 13;
 }
 
-okCancelDialog(BuildContext context, String title, String message, Function() onOk){
+okCancelDialog(BuildContext context, String title, String message, Function() onOk) {
+  var locals = AppLocalizations.of(context)!;
   showDialog(
     context: context,
     builder: (BuildContext context) {
@@ -126,14 +125,14 @@ okCancelDialog(BuildContext context, String title, String message, Function() on
         content: Text(message),
         actions: <Widget>[
           TextButton(
-            child: Text("Ok"),
+            child: Text(locals.ok),
             onPressed: () {
               onOk();
               Navigator.of(context).pop();
             },
           ),
           TextButton(
-            child: const Text("Cancel"),
+            child:  Text(locals.cancel),
             onPressed: () {
               //Put your code here which you want to execute on Cancel button click.
               Navigator.of(context).pop();
@@ -145,6 +144,6 @@ okCancelDialog(BuildContext context, String title, String message, Function() on
   );
 }
 
-Country getCountryFromCode(String code){
+Country getCountryFromCode(String code) {
   return countryCodes.firstWhere((element) => element.code == code, orElse: () => Country('US', 'United States of America'));
 }

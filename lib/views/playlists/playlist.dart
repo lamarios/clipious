@@ -9,6 +9,7 @@ import 'package:invidious/models/playlist.dart';
 import 'package:invidious/models/videoInList.dart';
 import 'package:invidious/views/components/videoThumbnail.dart';
 import 'package:invidious/views/playlistView.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PlaylistItem extends StatefulWidget {
   final Playlist playlist;
@@ -36,6 +37,7 @@ class _PlaylistItemState extends State<PlaylistItem> with AfterLayoutMixin<Playl
   @override
   Widget build(BuildContext context) {
     ColorScheme colors = Theme.of(context).colorScheme;
+    var locals = AppLocalizations.of(context)!;
 
     List<Widget> thumbs = [];
     List<VideoInList> videosToUse = videos.isNotEmpty ? videos : widget.playlist.videos;
@@ -91,11 +93,11 @@ class _PlaylistItemState extends State<PlaylistItem> with AfterLayoutMixin<Playl
                   widget.playlist.title,
                   style: TextStyle(color: colors.primary),
                 )),
-                Text('${widget.playlist.videoCount} videos'),
+                Text(locals.nVideos(widget.playlist.videoCount)),
               ],
             ),
           ),
-          Divider(),
+          const Divider(),
         ],
       ),
     );

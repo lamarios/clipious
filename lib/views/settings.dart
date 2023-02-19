@@ -99,13 +99,14 @@ class SettingsState extends State<Settings> with AfterLayoutMixin {
     SettingsThemeData theme = settingsTheme(colorScheme);
 
     return Scaffold(
+      extendBody: true,
+        bottomNavigationBar: SizedBox.shrink(),
         appBar: AppBar(
           scrolledUnderElevation: 0,
           title: const Text('Settings'),
         ),
         backgroundColor: colorScheme.background,
         body: SafeArea(
-            bottom: false,
             child: SettingsList(
               lightTheme: theme,
               darkTheme: theme,

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:after_layout/after_layout.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../globals.dart';
 
@@ -35,6 +36,7 @@ class SubscribeButtonState extends State<SubscribeButton> with AfterLayoutMixin<
 
   @override
   Widget build(BuildContext context) {
+    var locals = AppLocalizations.of(context)!;
     // TODO: implement build
     return SizedBox(
         height: 25,
@@ -47,14 +49,16 @@ class SubscribeButtonState extends State<SubscribeButton> with AfterLayoutMixin<
                     Icon(isSubscribed ? Icons.done : Icons.add),
                     Padding(
                       padding: const EdgeInsets.only(left: 8.0),
-                      child: Text('${(isSubscribed ? 'Subscribed' : 'Subscribe')} | ${widget.subCount}'),
+                      child: Text('${(isSubscribed ? locals.subscribed : locals.subscribe)} | ${widget.subCount}'),
                     ),
                   ]
                 : [
                     const Icon(Icons.people),
                     Padding(
                       padding: const EdgeInsets.only(left: 8.0),
-                      child: Text('${widget.subCount} subscribers'),
+                      // child: Text('${widget.subCount.replaceAll("^0.00\$","no")} subscribers'),
+                      child: Text(locals.nSubscribers(widget.subCount.replaceAll(RegExp(r'^0.00$'), "no"))),
+
                     ),
                   ],
           ),

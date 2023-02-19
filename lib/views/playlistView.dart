@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:after_layout/after_layout.dart';
 import 'package:better_player/better_player.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:invidious/models/errors/invidiousServiceError.dart';
@@ -114,7 +115,8 @@ class _PlaylistViewState extends State<PlaylistView> with AfterLayoutMixin<Playl
   }
 
   deletePlayList(BuildContext context) {
-    okCancelDialog(context, 'Delete Playlist ?', 'This action is irriversible', () {
+    var locals = AppLocalizations.of(context)!;
+    okCancelDialog(context, locals.deletePlayListQ, locals.irreversibleAction, () {
       service.deleteUserPlaylist(playlist.playlistId).then((value) {
         if (context.mounted) {
           Navigator.of(context).pop();
@@ -124,6 +126,7 @@ class _PlaylistViewState extends State<PlaylistView> with AfterLayoutMixin<Playl
   }
 
   removeVideoFromPlayList(BuildContext context, VideoInList v) async {
+    var locals = AppLocalizations.of(context)!;
     bool playing = currentlyPlaying?.videoId == v.videoId;
     int videoCount = playlist.videos.length;
     int index = playlist.videos.indexWhere((element) => element.videoId == v.videoId);
@@ -156,7 +159,7 @@ class _PlaylistViewState extends State<PlaylistView> with AfterLayoutMixin<Playl
       }
     } catch (err) {
       if (err is InvidiousServiceError) {
-        showAlertDialog(context, 'Error', [Text(err.message)]);
+        showAlertDialog(context, locals.error, [Text(err.message)]);
       }
     }
   }
@@ -165,6 +168,7 @@ class _PlaylistViewState extends State<PlaylistView> with AfterLayoutMixin<Playl
     showModalBottomSheet<void>(
         context: context,
         builder: (BuildContext context) {
+          var locals = AppLocalizations.of(context)!;
           return SizedBox(
             height: 100,
             child: Center(
@@ -184,9 +188,9 @@ class _PlaylistViewState extends State<PlaylistView> with AfterLayoutMixin<Playl
                           },
                           icon: const Icon(Icons.delete),
                         ),
-                        const Text(
-                          'Remove from playlist',
-                          style: TextStyle(fontSize: 10),
+                         Text(
+                          locals.removeFromPlayList,
+                          style: const TextStyle(fontSize: 10),
                         )
                       ],
                     ),
@@ -241,6 +245,7 @@ class _PlaylistViewState extends State<PlaylistView> with AfterLayoutMixin<Playl
   @override
   Widget build(BuildContext context) {
     ColorScheme colorScheme = Theme.of(context).colorScheme;
+    var locals = AppLocalizations.of(context)!;
 
     bool onBigScreen = getScreenWidth() > PHONE_MAX;
 
@@ -284,7 +289,7 @@ class _PlaylistViewState extends State<PlaylistView> with AfterLayoutMixin<Playl
                                               video: currentlyPlaying!,
                                               listener: videoListener,
                                             )
-                                          : SizedBox.shrink(),
+                                          : const SizedBox.shrink(),
                                     )
                                   ]))),
                           Row(
@@ -405,7 +410,7 @@ class _PlaylistViewState extends State<PlaylistView> with AfterLayoutMixin<Playl
                           value: value > 0 ? value : null,
                         ),
                       ))
-                    : Container(alignment: Alignment.center, child: Text('No videos in this playlist.'))));
+                    : Container(alignment: Alignment.center, child: Text(locals.noVideoInPlayList))));
   }
 
   @override

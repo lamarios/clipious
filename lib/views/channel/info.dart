@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:invidious/models/channel.dart';
 import 'package:invidious/utils.dart';
@@ -19,6 +20,7 @@ class ChannelInfo extends StatefulWidget {
 class ChannelInfoState extends State<ChannelInfo> {
   @override
   Widget build(BuildContext context) {
+    var locals = AppLocalizations.of(context)!;
     ColorScheme colors = Theme.of(context).colorScheme;
 
     List<Widget> widgets = [
@@ -27,7 +29,7 @@ class ChannelInfoState extends State<ChannelInfo> {
         child: Text(widget.channel.description),
       ),
       Text(
-        'Latest Videos',
+        locals.latestVideos,
         style: TextStyle(color: colors.secondary, fontSize: 20),
       ),
     ];
