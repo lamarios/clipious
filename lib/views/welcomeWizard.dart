@@ -1,7 +1,7 @@
 import 'package:application_icon/application_icon.dart';
 import 'package:fbroadcast/fbroadcast.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/main.dart';
 import 'package:invidious/views/settings/manageServerInner.dart';
@@ -45,6 +45,7 @@ class _WelcomeWizardState extends State<WelcomeWizard> {
 
   @override
   Widget build(BuildContext context) {
+    var locals = AppLocalizations.of(context)!;
     ColorScheme colors = Theme.of(context).colorScheme;
 
     return Scaffold(
@@ -66,9 +67,9 @@ class _WelcomeWizardState extends State<WelcomeWizard> {
               'Clipious',
               style: TextStyle(color: colors.primary, fontSize: 30),
             ),
-            const Padding(
+            Padding(
               padding: EdgeInsets.all(8.0),
-              child: Text('To start using Clipious, please select a public server or add your own. You can change servers later in the settings'),
+              child: Text(locals.wizardIntro),
             ),
             const Expanded(child: ManagerServersView()),
             Padding(
@@ -81,7 +82,7 @@ class _WelcomeWizardState extends State<WelcomeWizard> {
                           ));
                         }
                       : null,
-                  child: const Text('Start using Clipious')),
+                  child:  Text(locals.startUsingClipious)),
             )
           ])),
     );

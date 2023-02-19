@@ -1,14 +1,6 @@
-import 'dart:async';
-
-import 'package:after_layout/after_layout.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_typeahead/flutter_typeahead.dart';
-import 'package:invidious/globals.dart';
-import 'package:invidious/models/imageObject.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/models/searchResult.dart';
-import 'package:invidious/models/videoInList.dart';
 import 'package:invidious/utils.dart';
 import 'package:invidious/views/channel.dart';
 import 'package:invidious/views/playlists/playlist.dart';
@@ -36,23 +28,24 @@ class SearchState extends State<Search> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     var colorScheme = Theme.of(context).colorScheme;
+    var locals = AppLocalizations.of(context)!;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Material(
           color: colorScheme.brightness == Brightness.dark ? Colors.grey[900] : Colors.white,
           child: TabBar(controller: controller,
-              tabs: const [
+              tabs:  [
             Tab(
-              text: 'Videos',
+              text: locals.videos,
               icon: Icon(Icons.play_arrow),
             ),
             Tab(
-              text: 'Channels',
+              text: locals.channels,
               icon: Icon(Icons.people),
             ),
             Tab(
-              text: 'Playlists',
+              text: locals.playlists,
               icon: Icon(Icons.playlist_play),
             )
           ]),
@@ -66,11 +59,11 @@ class SearchState extends State<Search> with SingleTickerProviderStateMixin {
               children: [
                 widget.results.videos.isNotEmpty ? VideoList(
                   videos: widget.results.videos,
-                ): Center(child: const Text('No videos')),
+                ): Center(child: Text(locals.nVideos(0))),
                 widget.results.channels.isNotEmpty
                     ? ListView(
                         children: widget.results.channels
-                            .map((e) => GestureDetector(
+                            .map((e) => InkWell(
                                   onTap: () {
                                     Navigator.of(context).push(MaterialPageRoute(
                                       builder: (context) => ChannelView(channelId: e.authorId),
@@ -99,8 +92,8 @@ class SearchState extends State<Search> with SingleTickerProviderStateMixin {
                                 ))
                             .toList(),
                       )
-                    : const Center(
-                        child: Text('No channels'),
+                    : Center(
+                        child: Text(locals.noChannels),
                       ),
                 widget.results.playlists.isNotEmpty
                     ? FractionallySizedBox(
@@ -108,7 +101,7 @@ class SearchState extends State<Search> with SingleTickerProviderStateMixin {
                           children: widget.results.playlists.map((e) => PlaylistItem(playlist: e, canDeleteVideos: false)).toList(),
                         ),
                     )
-                    : const Center(child: Text('No playlists'))
+                    :  Center(child: Text(locals.noPlaylists))
               ],
             ),
           ),

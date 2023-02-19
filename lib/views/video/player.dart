@@ -3,9 +3,8 @@ import 'dart:collection';
 
 import 'package:after_layout/after_layout.dart';
 import 'package:better_player/better_player.dart';
-import 'package:easy_debounce/easy_debounce.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../database.dart';
 import '../../globals.dart';
@@ -87,10 +86,11 @@ class _VideoPlayerState extends State<VideoPlayer> with AfterLayoutMixin<VideoPl
       List<int> nextSegment = sponsorSegments.elementAt(0);
       bool matched = nextSegment[0].compareTo(currentPosition) <= -1 && nextSegment[1].compareTo(currentPosition) >= 1;
       if (matched) {
+        var locals = AppLocalizations.of(context)!;
         final ScaffoldMessengerState? scaffold = scaffoldKey.currentState;
-        scaffold?.showSnackBar(const SnackBar(
-          content: Text('Sponsor skipped'),
-          duration: Duration(seconds: 1),
+        scaffold?.showSnackBar(SnackBar(
+          content: Text(locals.sponsorSkipped),
+          duration: const Duration(seconds: 1),
         ));
         videoController!.seekTo(Duration(milliseconds: nextSegment[1] + 1000));
         setState(() {
@@ -157,18 +157,15 @@ class _VideoPlayerState extends State<VideoPlayer> with AfterLayoutMixin<VideoPl
             child: !playingVideo
                 ? loadingStream
                     ? const CircularProgressIndicator()
-                    : GestureDetector(
-                        key: const ValueKey('nt-playing'),
-                        onTap: () => playVideo(),
-                        child: Icon(
-                          Icons.play_arrow,
-                          color: colorScheme.primary,
-                          size: 100,
-                        ),
-                      )
+                    : IconButton(
+                      key: const ValueKey('nt-playing'),
+                      onPressed: () => playVideo(),
+                      icon: const Icon(Icons.play_arrow, size: 100,),
+                      color: colorScheme.primary,
+                    )
                 : BetterPlayer(
                     key: _betterPlayerKey,
-                    controller: videoController!,
+                    controller: videoController!
                   )),
       ),
     );

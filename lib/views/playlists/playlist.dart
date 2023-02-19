@@ -1,15 +1,14 @@
 import 'dart:async';
 
 import 'package:after_layout/after_layout.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/models/imageObject.dart';
 import 'package:invidious/models/playlist.dart';
 import 'package:invidious/models/videoInList.dart';
 import 'package:invidious/views/components/videoThumbnail.dart';
 import 'package:invidious/views/playlistView.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PlaylistItem extends StatefulWidget {
   final Playlist playlist;
@@ -69,9 +68,8 @@ class _PlaylistItemState extends State<PlaylistItem> with AfterLayoutMixin<Playl
 
     thumbs = thumbs.reversed.toList();
 
-    return GestureDetector(
+    return InkWell(
       onTap: () => openPlayList(context),
-      behavior: HitTestBehavior.translucent,
       child: Column(
         children: [
           Padding(

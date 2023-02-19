@@ -1,8 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:invidious/globals.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/views/video/comments.dart';
-import 'package:path/path.dart';
 
 import '../../models/comment.dart';
 import '../../models/imageObject.dart';
@@ -25,6 +23,7 @@ class SingleCommentViewState extends State<SingleCommentView> {
 
   @override
   Widget build(BuildContext context) {
+    var locals = AppLocalizations.of(context)!;
     ColorScheme colors = Theme.of(context).colorScheme;
     var comment = widget.comment;
     return Padding(
@@ -118,8 +117,9 @@ class SingleCommentViewState extends State<SingleCommentView> {
                                 });
                               },
                               child: Text(
-                                '${(comment.replies?.replyCount ?? 0).toString()} replies',
-                                style: TextStyle(fontSize: 10),
+                                // locals.nReplies(comment.replies?.replyCount ?? 0).toString()),
+                                locals.nReplies(comment.replies?.replyCount ?? 0),
+                                style: const TextStyle(fontSize: 10),
                               ))),
                     )),
                 Visibility(

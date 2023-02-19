@@ -105,9 +105,216 @@
     "description": "asking user to share invidious link"
   },
   "ok": "Ok",
-    "@ok": {
-      "description": "Ok"
-    },
+  "@ok": {
+    "description": "Ok"
+  },
+  "noChannels": "No channels",
+  "@noChannels": {
+    "description": "when there are no channels to display"
+  },
+  "noPlaylists": "No playlists",
+  "@noPlaylists": {
+    "description": "when there are no playlists to display"
+  },
+  "channels": "Channels",
+  "@channels": {
+    "description": "Channels label"
+  },
+  "couldntLoadVideo": "Couldn''t load the video",
+  "@couldntLoadVideo": {
+    "description": "Message to display when a video can't be loaded"
+  },
+  "info": "Info",
+  "@info": {
+    "description": "Info label"
+  },
+  "comments": "Comments",
+  "@comments": {
+    "description": "Comments label"
+  },
+  "recommended": "Recommended",
+  "@recommended": {
+    "description": "Recommended label"
+  },
+  "couldntFetchVideos": "Couldn''t fetch videos, tap to try again",
+  "@couldntFetchVideos": {
+    "description": "Can't load bunch of videos, asking  user to try again"
+  },
+  "wizardIntro": "To start using Clipious, please select a public server or add your own. You can change servers later in the settings",
+  "@wizardIntro": {
+    "description": "Welcome message on frst time use"
+  },
+  "startUsingClipious": "Start using Clipious",
+  "@startUsingClipious": {
+    "description": "button label to start using the app"
+  },
+  "videoAddedToPlaylist": "Video added to playlist",
+  "@videoAddedToPlaylist": {
+    "description": "Pop up message when a video was added to a playlist"
+  },
+  "errorAddingVideoToPlaylist": "Error while adding video to playlist",
+  "@errorAddingVideoToPlaylist": {
+    "description": "Error while adding video to playlist"
+  },
+  "selectPlaylist": "Select playlist",
+  "@selectPlaylist": {
+    "description": "Title when users wants to add a video to a playlist"
+  },
+  "createNewPlaylist": "Create new playlist",
+  "@createNewPlaylist": {
+    "description": "Button label to create a new playlist when the user wants to add a video to a playlist"
+  },
+  "nReplies": "{count, plural, =0{No replies} =1{1 reply} other{{count} replies}}",
+  "@nReplies": {
+    "description": "number of replies to a comment",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "loadMore": "Load more",
+  "@loadMore": {
+    "description": "CTA to load more"
+  },
+  "topSorting": "Top",
+  "@topSorting": {
+    "description": "Content sorting: top"
+  },
+  "newSorting": "New",
+  "@newSorting": {
+    "description": "Content sorting: new"
+  },
+  "streamIsLive": "Live",
+  "@streamIsLive": {
+    "description": "Label when a video is a live stream"
+  },
+  "sponsorSkipped": "Sponsor skipped",
+  "@sponsorSkipped": {
+    "description": "When a sponsor segment is skipped thanks to sponsor block"
+  },
+  "selectBrowsingCountry": "Select browsing country",
+  "@selectBrowsingCountry": {
+    "description": "Select country for trending content"
+  },
+  "showOnStart": "Select what to show when the app starts",
+  "@showOnStart": {
+    "description": "Title of dialog asking which screen the users prefers to see"
+  },
+  "settings": "Settings",
+  "@settings": {
+    "description": "Settings title"
+  },
+  "browsing": "Browsing",
+  "@browsing": {
+    "description": "video browsing preferences"
+  },
+  "country": "Country",
+  "@country": {
+    "description": "Country label"
+  },
+  "whenAppStartsShow": "When app starts show...",
+  "@whenAppStartsShow": {
+    "description": "Setting title for selecting the screen to show on start"
+  },
+  "servers": "Servers",
+  "@servers": {
+    "description": "Server management settings category"
+  },
+  "manageServers": "Manage servers",
+  "@manageServers": {
+    "description": "Settings to manage servers"
+  },
+  "currentServer": "Currently using {current}",
+  "@currentServer": {
+    "description": "Which server the user is currently using",
+    "placeholders": {
+      "current": {
+        "type": "String"
+      }
+    }
+  },
+  "useSponsorBlock": "Use SponsorBlock",
+  "@useSponsorBlock": {
+    "description": "label for sponsorblock checkbox"
+  },
+  "sponsorBlockDescription": "Skip sponsor segments submitted by the community",
+  "@sponsorBlockDescription": {
+    "description": "Sponsorblock setting description"
+  },
+  "about": "About",
+  "@about": {
+    "description": "About"
+  },
+  "name": "Name",
+  "@name": {
+    "description": "NAme label"
+  },
+  "package": "Package",
+  "@package": {
+    "description": "package label"
+  },
+  "version": "Version",
+  "@version": {
+    "description": "version label"
+  },
+  "build": "Build",
+  "@build": {
+    "description": "build label"
+  },
+  "addServer": "Add server",
+  "@addServer": {
+    "description": "Add server label"
+  },
+  "useThisServer": "Use this server",
+  "@useThisServer": {
+    "description": "Use this server label"
+  },
+  "logIn": "Log in",
+  "@logIn": {
+    "description": "CTA to log in to server"
+  },
+  "delete": "Delete",
+  "@delete": {
+    "description": "Delete label"
+  },
+  "invalidInvidiousServer": "Invalid Invidious server",
+  "@invalidInvidiousServer": {
+    "description": "Error when the user tries to add a server that is not a proper or reachable invidious server"
+  },
+  "yourServers": "Your servers",
+  "@yourServers": {
+    "description": "Your servers label"
+  },
+  "loggedIn": "Logged in",
+  "@loggedIn": {
+    "description": "Label to tell the user that he is logged in to the server"
+  },
+  "notLoggedIn": "Not logged in, tap to log in",
+  "@notLoggedIn": {
+    "description": "Label when the user is not logged in to the server"
+  },
+  "addServerHelpText": "Use the + button to add your own servers or tap on a public server and add it.",
+  "@addServerHelpText": {
+    "description": "label for when the user hasn't chosen a server yet"
+  },
+  "publicServers": "Public servers",
+  "@publicServers": {
+    "description": "Public servers label"
+  },
+  "loadingPublicServer": "Loading public servers",
+  "@loadingPublicServer": {
+    "description": "Message telling users the app is loading the list of public servers"
+  },
+  "tapToAddServer": "Tap to add server to your list",
+  "@tapToAddServer": {
+    "description": "public server description"
+  },
+  "publicServersError": "Couldn''t get public servers, tap to retry",
+  "@publicServersError": {
+    "description": "Error message when trying to get public servers but it failed"
+  },
   "error": "Error",
   "@error": {},
   "nVideos": "{count, plural, =0{No videos} =1{1 video} other{{count} videos}}",

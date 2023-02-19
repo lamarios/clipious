@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:after_layout/after_layout.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/models/errors/invidiousServiceError.dart';
 import 'package:invidious/models/videoComments.dart';
@@ -55,7 +55,9 @@ class CommentsViewState extends State<CommentsView> with AfterLayoutMixin<Commen
 
   @override
   Widget build(BuildContext context) {
+    var locals = AppLocalizations.of(context)!;
     List<Widget> widgets = [];
+
     widgets.addAll(comments.comments
         .map((c) => SingleCommentView(
               videoId: widget.videoId,
@@ -71,8 +73,8 @@ class CommentsViewState extends State<CommentsView> with AfterLayoutMixin<Commen
               height: 15,
               child: FilledButton.tonal(
                   onPressed: loadMore,
-                  child: const Text(
-                    'Load more',
+                  child:  Text(
+                    locals.loadMore,
                     style: TextStyle(fontSize: 10),
                   ))),
         ),

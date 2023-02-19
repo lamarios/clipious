@@ -178,7 +178,6 @@ class HomeState extends State<Home> {
     Navigator.push(context, MaterialPageRoute(builder: (context) => const Settings()));
   }
 
-
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -220,28 +219,16 @@ class HomeState extends State<Home> {
           // backgroundColor: Colors.pink,
           backgroundColor: colorScheme.background,
           actions: [
-            GestureDetector(
-              onTap: () {
-                // Navigator.push(context, MaterialPageRoute(builder: (context) => const Search()));
+            IconButton(
+              onPressed: () {
                 showSearch(context: context, delegate: MySearchDelegate());
               },
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Icon(
-                  Icons.search,
-                  color: colorScheme.secondary,
-                ),
-              ),
+              icon: const Icon(Icons.search),
             ),
-            GestureDetector(
-              onTap: () => openSettings(context),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Icon(
-                  Icons.settings,
-                  color: colorScheme.secondary,
-                ),
-              ),
+            IconButton(
+              onPressed: () => openSettings(context),
+              icon: const Icon(Icons.settings),
+              color: colorScheme.secondary,
             ),
           ],
         ),

@@ -1,9 +1,6 @@
-import 'package:better_player/better_player.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:invidious/globals.dart';
-import 'package:invidious/models/videoInList.dart';
 
 class VideoThumbnailView extends StatelessWidget {
   final String videoId;
@@ -39,11 +36,13 @@ class Thumbnail extends StatelessWidget {
 
     return CachedNetworkImage(
       cacheKey: id,
-      imageBuilder: (context, imageProvider) => Container(
+      imageBuilder: (context, imageProvider) => AnimatedContainer(
         height: height,
         width: width,
         decoration: decoration.copyWith(image: DecorationImage(image: imageProvider, fit: BoxFit.cover)),
         // duration: animationDuration,
+        duration: animationDuration ~/2,
+        curve: Curves.easeInOutQuad,
         child: child,
       ),
       imageUrl: thumbnailUrl,

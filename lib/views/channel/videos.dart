@@ -1,19 +1,11 @@
 import 'dart:async';
 
-import 'package:after_layout/after_layout.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:invidious/globals.dart';
 import 'package:invidious/models/channelVideos.dart';
-import 'package:invidious/models/video.dart';
 import 'package:invidious/views/videoList.dart';
-import 'package:invidious/views/videoList/singleVideo.dart';
 
 import '../../models/channel.dart';
-import '../../models/video.dart';
 import '../../models/videoInList.dart';
-import '../../utils.dart';
 
 class ChannelVideosView extends StatefulWidget {
   final Channel channel;

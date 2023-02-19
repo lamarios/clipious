@@ -1,9 +1,7 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/models/channel.dart';
 import 'package:invidious/utils.dart';
-import 'package:invidious/views/components/subscribeButton.dart';
 
 import '../../models/videoInList.dart';
 import '../videoList/singleVideo.dart';

@@ -2,9 +2,8 @@ import 'dart:async';
 
 import 'package:after_layout/after_layout.dart';
 import 'package:better_player/better_player.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/models/errors/invidiousServiceError.dart';
 import 'package:invidious/models/imageObject.dart';
 import 'package:invidious/models/videoInList.dart';
@@ -37,6 +36,7 @@ class _PlaylistViewState extends State<PlaylistView> with AfterLayoutMixin<Playl
   double loadingProgress = 0;
   late Playlist playlist;
   bool loading = false;
+  ScrollController scrollController = ScrollController();
 
   @override
   void initState() {
@@ -65,6 +65,7 @@ class _PlaylistViewState extends State<PlaylistView> with AfterLayoutMixin<Playl
   startVideo() async {
     if (playlist.videos.isNotEmpty) {
       if (selectedIndex < playlist.videos.length) {
+
         var vid = await service.getVideo(playlist.videos[selectedIndex].videoId);
         setState(() {
           playingVideo = true;
@@ -188,7 +189,7 @@ class _PlaylistViewState extends State<PlaylistView> with AfterLayoutMixin<Playl
                           },
                           icon: const Icon(Icons.delete),
                         ),
-                         Text(
+                        Text(
                           locals.removeFromPlayList,
                           style: const TextStyle(fontSize: 10),
                         )
@@ -256,16 +257,18 @@ class _PlaylistViewState extends State<PlaylistView> with AfterLayoutMixin<Playl
           ),
           scrolledUnderElevation: 0,
           actions: [
-            widget.canDeleteVideos ? GestureDetector(
-              onTap: () => deletePlayList(context),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Icon(
-                  Icons.delete,
-                  color: colorScheme.secondary,
-                ),
-              ),
-            ): const SizedBox.shrink()
+            widget.canDeleteVideos
+                ? InkWell(
+                    onTap: () => deletePlayList(context),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Icon(
+                        Icons.delete,
+                        color: colorScheme.secondary,
+                      ),
+                    ),
+                  )
+                : const SizedBox.shrink()
           ],
         ),
         backgroundColor: colorScheme.background,
@@ -295,9 +298,8 @@ class _PlaylistViewState extends State<PlaylistView> with AfterLayoutMixin<Playl
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              GestureDetector(
+                              InkWell(
                                 onTap: playPreviousVideo,
-                                behavior: HitTestBehavior.translucent,
                                 child: Padding(
                                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
                                   child: Icon(
@@ -307,9 +309,8 @@ class _PlaylistViewState extends State<PlaylistView> with AfterLayoutMixin<Playl
                                   ),
                                 ),
                               ),
-                              GestureDetector(
+                              InkWell(
                                 onTap: playNextVideo,
-                                behavior: HitTestBehavior.translucent,
                                 child: Padding(
                                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
                                   child: Icon(Icons.skip_next, color: colorScheme.secondary, size: 50),
@@ -320,80 +321,74 @@ class _PlaylistViewState extends State<PlaylistView> with AfterLayoutMixin<Playl
                           Expanded(
                               child: ListView(
                             children: playlist.videos
-                                .map((v) => Column(
-                                      children: [
-                                        Stack(
-                                          children: [
-                                            Visibility(
-                                              visible: v.videoId == currentlyPlaying?.videoId,
-                                              child: Positioned(
-                                                  top: 0,
-                                                  left: 0,
-                                                  right: 0,
-                                                  bottom: 0,
-                                                  child: Container(
-                                                    alignment: Alignment.centerLeft,
-                                                    color: colorScheme.secondaryContainer.withOpacity(0.5),
-                                                    child: FractionallySizedBox(
-                                                      heightFactor: 1,
-                                                      widthFactor: progress,
-                                                      child: Container(
-                                                        color: colorScheme.primary.withOpacity(0.1),
-                                                      ),
-                                                    ),
-                                                  )),
+                                .map((v) => Stack(
+                                  children: [
+                                    Visibility(
+                                      visible: v.videoId == currentlyPlaying?.videoId,
+                                      child: Positioned(
+                                          top: 0,
+                                          left: 0,
+                                          right: 0,
+                                          bottom: 0,
+                                          child: Container(
+                                            alignment: Alignment.centerLeft,
+                                            color: colorScheme.secondaryContainer.withOpacity(0.5),
+                                            child: FractionallySizedBox(
+                                              heightFactor: 1,
+                                              widthFactor: progress,
+                                              child: Container(
+                                                color: colorScheme.primary.withOpacity(0.1),
+                                              ),
                                             ),
+                                          )),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: InkWell(
+                                        onTap: () => playVideo(context, v),
+                                        onLongPress: widget.canDeleteVideos ? () => showPlayListVideoDialog(context, v) : null,
+                                        child: Row(
+                                          children: [
                                             Padding(
-                                              padding: const EdgeInsets.all(8.0),
-                                              child: GestureDetector(
-                                                behavior: HitTestBehavior.translucent,
-                                                onTap: () => playVideo(context, v),
-                                                onLongPress: widget.canDeleteVideos ? () => showPlayListVideoDialog(context, v) : null,
-                                                child: Row(
-                                                  children: [
-                                                    Padding(
-                                                      padding: const EdgeInsets.all(4.0),
-                                                      child: SizedBox(
-                                                        width: 100,
-                                                        child: VideoThumbnailView(
-                                                          videoId: v.videoId,
-                                                          thumbnailUrl: ImageObject.getBestThumbnail(v.videoThumbnails)?.url ?? '',
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    Expanded(
-                                                      child: Column(
-                                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                                        children: [
-                                                          Text(
-                                                            v.title,
-                                                            style: TextStyle(color: colorScheme.primary),
-                                                          ),
-                                                          Text(
-                                                            v.author??'',
-                                                          )
-                                                        ],
-                                                      ),
-                                                    ),
-                                                    GestureDetector(
-                                                      behavior: HitTestBehavior.translucent,
-                                                      onTap: () => openVideo(context, v.videoId),
-                                                      child: Padding(
-                                                        padding: const EdgeInsets.all(8.0),
-                                                        child: Icon(
-                                                          Icons.exit_to_app,
-                                                          color: colorScheme.primary,
-                                                        ),
-                                                      ),
-                                                    )
-                                                  ],
+                                              padding: const EdgeInsets.all(4.0),
+                                              child: SizedBox(
+                                                width: 100,
+                                                child: VideoThumbnailView(
+                                                  videoId: v.videoId,
+                                                  thumbnailUrl: ImageObject.getBestThumbnail(v.videoThumbnails)?.url ?? '',
+                                                ),
+                                              ),
+                                            ),
+                                            Expanded(
+                                              child: Column(
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    v.title,
+                                                    style: TextStyle(color: colorScheme.primary),
+                                                  ),
+                                                  Text(
+                                                    v.author ?? '',
+                                                  )
+                                                ],
+                                              ),
+                                            ),
+                                            InkWell(
+                                              onTap: () => openVideo(context, v.videoId),
+                                              child: Padding(
+                                                padding: const EdgeInsets.all(8.0),
+                                                child: Icon(
+                                                  Icons.exit_to_app,
+                                                  color: colorScheme.primary,
                                                 ),
                                               ),
                                             )
                                           ],
                                         ),
-                                      ],
-                                    ))
+                                      ),
+                                    )
+                                  ],
+                                ))
                                 .toList(),
                           ))
                         ],

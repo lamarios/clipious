@@ -1,5 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/models/video.dart';
 
 import 'comments.dart';
@@ -20,6 +20,7 @@ class _CommentsContainerState extends State<CommentsContainer> {
 
   @override
   Widget build(BuildContext context) {
+    var locals = AppLocalizations.of(context)!;
     ColorScheme colorScheme = Theme.of(context).colorScheme;
 
     return Column(
@@ -29,7 +30,7 @@ class _CommentsContainerState extends State<CommentsContainer> {
           children: [
             Expanded(
               child: Text(
-                'Comments',
+                locals.comments,
                 style: TextStyle(color: colorScheme.secondary, fontSize: 20),
               ),
             ),
@@ -42,14 +43,14 @@ class _CommentsContainerState extends State<CommentsContainer> {
                   });
                 }
               },
-              items: const [
+              items:  [
                 DropdownMenuItem(
                   value: 'top',
-                  child: Text('Top'),
+                  child: Text(locals.topSorting),
                 ),
                 DropdownMenuItem(
                   value: 'new',
-                  child: Text('New'),
+                  child: Text(locals.newSorting),
                 ),
               ],
             )

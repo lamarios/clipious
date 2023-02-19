@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:after_layout/after_layout.dart';
 import 'package:fbroadcast/fbroadcast.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_web_auth/flutter_web_auth.dart';
 import 'package:logging/logging.dart';
 import 'package:settings_ui/settings_ui.dart';
@@ -11,7 +11,6 @@ import 'package:settings_ui/settings_ui.dart';
 import '../../database.dart';
 import '../../globals.dart';
 import '../../models/db/server.dart';
-import '../../service.dart';
 import '../../utils.dart';
 import '../settings.dart';
 
@@ -89,6 +88,7 @@ class _ManagerServersViewState extends State<ManagerServersView> with AfterLayou
   }
 
   showPublicServerActions(BuildContext context, Server server) {
+    var locals = AppLocalizations.of(context)!;
     showModalBottomSheet<void>(
         context: context,
         builder: (BuildContext context) {
@@ -112,8 +112,8 @@ class _ManagerServersViewState extends State<ManagerServersView> with AfterLayou
                           },
                           icon: const Icon(Icons.add),
                         ),
-                        const Text(
-                          'Add server',
+                        Text(
+                          locals.addServer,
                           style: TextStyle(fontSize: 10),
                         )
                       ],
@@ -127,6 +127,7 @@ class _ManagerServersViewState extends State<ManagerServersView> with AfterLayou
   }
 
   showServerActions(BuildContext context, Server server) {
+    var locals = AppLocalizations.of(context)!;
     showModalBottomSheet<void>(
         context: context,
         builder: (BuildContext context) {
@@ -150,9 +151,9 @@ class _ManagerServersViewState extends State<ManagerServersView> with AfterLayou
                           },
                           icon: const Icon(Icons.done),
                         ),
-                        const Text(
-                          'Use this server',
-                          style: TextStyle(fontSize: 10),
+                        Text(
+                          locals.useThisServer,
+                          style: const TextStyle(fontSize: 10),
                         )
                       ],
                     ),
@@ -169,8 +170,8 @@ class _ManagerServersViewState extends State<ManagerServersView> with AfterLayou
                           },
                           icon: const Icon(Icons.person),
                         ),
-                        const Text(
-                          'Log in',
+                        Text(
+                          locals.logIn,
                           style: TextStyle(fontSize: 10),
                         )
                       ],
@@ -187,8 +188,8 @@ class _ManagerServersViewState extends State<ManagerServersView> with AfterLayou
                             onPressed: () => deleteServer(context, server),
                             icon: const Icon(Icons.delete),
                           ),
-                          const Text(
-                            'Delete',
+                          Text(
+                            locals.delete,
                             style: TextStyle(fontSize: 10),
                           )
                         ],
@@ -203,6 +204,7 @@ class _ManagerServersViewState extends State<ManagerServersView> with AfterLayou
   }
 
   saveServer(BuildContext context) async {
+    var locals = AppLocalizations.of(context)!;
     var serverUrl = addServerController.text;
     if (serverUrl.endsWith("/")) {
       serverUrl = serverUrl.substring(0, serverUrl.length - 1);
@@ -224,11 +226,12 @@ class _ManagerServersViewState extends State<ManagerServersView> with AfterLayou
 
       addServerController.text = 'https://';
     } else {
-      await showAlertDialog(context, 'Error', [const Text('Invalid invidious server')]);
+      await showAlertDialog(context, 'Error', [Text(locals.invalidInvidiousServer)]);
     }
   }
 
   addServerDialog(BuildContext context) {
+    var locals = AppLocalizations.of(context)!;
     showDialog<String>(
         context: context,
         builder: (BuildContext context) => Dialog(
@@ -240,7 +243,7 @@ class _ManagerServersViewState extends State<ManagerServersView> with AfterLayou
                     mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      const Text('Add server'),
+                      Text(locals.addServer),
                       TextField(
                         controller: addServerController,
                         autocorrect: false,
@@ -254,13 +257,13 @@ class _ManagerServersViewState extends State<ManagerServersView> with AfterLayou
                             onPressed: () {
                               Navigator.pop(context);
                             },
-                            child: const Text('Cancel'),
+                            child: Text(locals.cancel),
                           ),
                           TextButton(
                             onPressed: () {
                               saveServer(context);
                             },
-                            child: const Text('Add'),
+                            child: Text(locals.add),
                           ),
                         ],
                       ),
@@ -275,6 +278,7 @@ class _ManagerServersViewState extends State<ManagerServersView> with AfterLayou
   Widget build(BuildContext context) {
     ColorScheme colorScheme = Theme.of(context).colorScheme;
     SettingsThemeData theme = settingsTheme(colorScheme);
+    var locals = AppLocalizations.of(context)!;
 
     var filteredPublicServers = publicServers.where((s) => dbServers.indexWhere((element) => element.url == s.url) == -1).toList();
 
@@ -285,7 +289,7 @@ class _ManagerServersViewState extends State<ManagerServersView> with AfterLayou
           darkTheme: theme,
           sections: [
             SettingsSection(
-                title: const Text('Your servers'),
+                title: Text(locals.yourServers),
                 tiles: dbServers.isNotEmpty
                     ? dbServers
                         .map((s) => SettingsTile(
@@ -294,21 +298,21 @@ class _ManagerServersViewState extends State<ManagerServersView> with AfterLayou
                                 color: s.inUse ? colorScheme.primary : colorScheme.secondaryContainer,
                               ),
                               title: Text(s.url),
-                              value: s.authToken?.isNotEmpty ?? false ? const Text('Logged in') : const Text('Not logged in, tap to log in'),
+                              value: s.authToken?.isNotEmpty ?? false ? Text(locals.loggedIn) : Text(locals.notLoggedIn),
                               onPressed: (context) => showServerActions(context, s),
                             ))
                         .toList()
                     : [
                         SettingsTile(
-                          title: const Text(
-                            'Use the + button to add your own servers or tap on a public server and add it.',
-                            style: TextStyle(fontSize: 12),
+                          title: Text(
+                            locals.addServerHelpText,
+                            style: const TextStyle(fontSize: 12),
                           ),
                           enabled: false,
                         )
                       ]),
             SettingsSection(
-                title: const Text('Public servers'),
+                title: Text(locals.publicServers),
                 tiles: publicServersError.isNotEmpty
                     ? [
                         SettingsTile(
@@ -319,7 +323,7 @@ class _ManagerServersViewState extends State<ManagerServersView> with AfterLayou
                     : pinging
                         ? [
                             SettingsTile(
-                              title: const Text('Loading public servers...'),
+                              title: Text(locals.loadingPublicServer),
                               leading: const SizedBox(
                                   height: 15,
                                   width: 15,
@@ -339,7 +343,7 @@ class _ManagerServersViewState extends State<ManagerServersView> with AfterLayou
                                     ],
                                   ),
                                   value: Row(
-                                    children: [Visibility(visible: s.flag != null && s.region != null, child: Text('${s.flag} - ${s.region} - ')), const Text('Tap to add server to your list')],
+                                    children: [Visibility(visible: s.flag != null && s.region != null, child: Text('${s.flag} - ${s.region} - ')), Text(locals.tapToAddServer)],
                                   ),
                                   onPressed: (context) => showPublicServerActions(context, s),
                                 ))
@@ -360,6 +364,7 @@ class _ManagerServersViewState extends State<ManagerServersView> with AfterLayou
   }
 
   getPublicServers(BuildContext context) async {
+    var locals = AppLocalizations.of(context)!;
     setState(() {
       pinging = true;
       publicServersError = '';
@@ -392,7 +397,7 @@ class _ManagerServersViewState extends State<ManagerServersView> with AfterLayou
     } catch (err) {
       if (context.mounted) {
         setState(() {
-          publicServersError = 'Couldn\'t get public servers, tap to retry';
+          publicServersError = locals.publicServersError;
         });
       }
     }

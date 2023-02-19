@@ -1,26 +1,15 @@
 // import 'package:video_player/video_player.dart';
 import 'dart:async';
-import 'dart:collection';
-import 'dart:math';
 
 import 'package:after_layout/after_layout.dart';
-import 'package:better_player/better_player.dart';
-import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
-import 'package:invidious/database.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/main.dart';
-import 'package:invidious/models/db/progress.dart';
 import 'package:invidious/models/errors/invidiousServiceError.dart';
-import 'package:invidious/views/components/videoThumbnail.dart';
-import 'package:invidious/views/video/comments.dart';
-import 'package:invidious/views/video/info.dart';
 import 'package:invidious/views/video/innverView.dart';
 import 'package:invidious/views/video/innverViewTablet.dart';
-import 'package:invidious/views/video/player.dart';
-import 'package:invidious/views/video/recommendedVideos.dart';
 
-import '../models/sponsorSegment.dart';
 import '../models/video.dart';
 import '../utils.dart';
 import 'video/addToPlayList.dart';
@@ -53,17 +42,18 @@ class VideoViewState extends State<VideoView> with AfterLayoutMixin<VideoView>, 
 
   @override
   Widget build(BuildContext context) {
+    var locals = AppLocalizations.of(context)!;
     ColorScheme colorScheme = Theme.of(context).colorScheme;
 
     bool show3Navigation = getDeviceType() == DeviceType.phone;
 
     var destinations = List.of(<Widget>[
-      const NavigationDestination(icon: Icon(Icons.info), label: 'Info'),
-      const NavigationDestination(icon: Icon(Icons.chat_bubble), label: 'Comments'),
+      NavigationDestination(icon: Icon(Icons.info), label: locals.info),
+      NavigationDestination(icon: Icon(Icons.chat_bubble), label: locals.comments),
     ], growable: true);
 
     if (show3Navigation) {
-      destinations.add(const NavigationDestination(icon: Icon(Icons.schema), label: 'Recommended'));
+      destinations.add(NavigationDestination(icon: Icon(Icons.schema), label: locals.recommended));
     }
 
     return Scaffold(
@@ -77,28 +67,18 @@ class VideoViewState extends State<VideoView> with AfterLayoutMixin<VideoView>, 
             : [
                 Visibility(
                   visible: video != null,
-                  child: GestureDetector(
-                    onTap: () => showSharingSheet(context, video!),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Icon(
-                        Icons.share,
-                        color: colorScheme.secondary,
-                      ),
-                    ),
+                  child: IconButton(
+                    onPressed: () => showSharingSheet(context, video!),
+                    icon: Icon(Icons.share),
+                    color: colorScheme.secondary,
                   ),
                 ),
                 Visibility(
                   visible: isLoggedIn,
-                  child: GestureDetector(
-                    onTap: () => AddToPlaylist.showDialog(context, video!.videoId),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Icon(
-                        Icons.add,
-                        color: colorScheme.secondary,
-                      ),
-                    ),
+                  child: IconButton(
+                    onPressed: () => AddToPlaylist.showDialog(context, video!.videoId),
+                    icon: Icon(Icons.add),
+                    color: colorScheme.secondary,
                   ),
                 ),
               ],
@@ -152,6 +132,7 @@ class VideoViewState extends State<VideoView> with AfterLayoutMixin<VideoView>, 
 
   @override
   Future<FutureOr<void>> afterFirstLayout(BuildContext context) async {
+    var locals = AppLocalizations.of(context)!;
     try {
       Video video = await service.getVideo(widget.videoId);
       setState(() {
@@ -163,7 +144,7 @@ class VideoViewState extends State<VideoView> with AfterLayoutMixin<VideoView>, 
         if (err is InvidiousServiceError) {
           error = (err).message;
         } else {
-          error = 'Couldn\'t load the video';
+          error = locals.couldntLoadVideo;
         }
         loadingVideo = false;
       });

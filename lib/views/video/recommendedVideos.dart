@@ -5,6 +5,7 @@ import 'package:invidious/views/videoList.dart';
 import 'package:invidious/views/videoList/singleVideo.dart';
 
 import '../../models/video.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../models/videoInList.dart';
 
 class RecommendedVideos extends StatelessWidget {
@@ -14,10 +15,12 @@ class RecommendedVideos extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var locals = AppLocalizations.of(context)!;
+
     ColorScheme colorScheme = Theme.of(context).colorScheme;
     List<Widget> widgets = [
       Text(
-        'Recommended',
+        locals.recommended,
         style: TextStyle(color: colorScheme.secondary, fontSize: 20),
       ),
     ];

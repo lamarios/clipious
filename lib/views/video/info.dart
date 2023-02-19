@@ -1,8 +1,5 @@
-import 'dart:ui';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:invidious/globals.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/models/video.dart';
 import 'package:invidious/views/channel.dart';
 import 'package:invidious/views/components/subscribeButton.dart';
@@ -21,6 +18,7 @@ class VideoInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var locals = AppLocalizations.of(context)!;
     ColorScheme colorScheme = Theme.of(context).colorScheme;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -77,22 +75,22 @@ class VideoInfo extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 2),
                     child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: const [
-                    Icon(
-                      Icons.podcasts,
-                      size: 15,
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children:  [
+                        const Icon(
+                          Icons.podcasts,
+                          size: 15,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 8.0),
+                          child: Text(
+                            locals.streamIsLive,
+                            style: const TextStyle(fontSize: 10),
+                          ),
+                        ),
+                      ],
                     ),
-                    Padding(
-                      padding: EdgeInsets.only(left: 8.0),
-                      child: Text(
-                        'Live',
-                        style: TextStyle(fontSize: 10),
-                      ),
-                    ),
-                    ],
-                ),
                   ),
                 ),
               ),
@@ -102,7 +100,7 @@ class VideoInfo extends StatelessWidget {
         Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            GestureDetector(
+            InkWell(
               onTap: () => openChannel(context),
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 4.0),
@@ -116,10 +114,13 @@ class VideoInfo extends StatelessWidget {
                 ),
               ),
             ),
-            Expanded(child: GestureDetector(onTap: () => openChannel(context), child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: Text(video.author),
-            ))),
+            Expanded(
+                child: InkWell(
+                    onTap: () => openChannel(context),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: Text(video.author),
+                    ))),
           ],
         ),
         Row(

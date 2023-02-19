@@ -23,7 +23,7 @@ class VideoListItem extends StatelessWidget {
     ColorScheme colorScheme = Theme.of(context).colorScheme;
     double progress = db.getVideoProgress(video.videoId);
 
-    return GestureDetector(
+    return InkWell(
       onTap: () => openVideo(context),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -45,7 +45,7 @@ class VideoListItem extends StatelessWidget {
                         visible: progress > 0.1 && progress < 0.90,
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 8),
-                          child: Container(
+                          child: SizedBox(
                             width: 20,
                             height: 20,
                             child: CircularProgressIndicator(

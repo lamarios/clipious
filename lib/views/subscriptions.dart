@@ -1,7 +1,5 @@
 import 'dart:async';
 
-import 'package:flutter/cupertino.dart';
-
 import 'package:flutter/material.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/models/videoInList.dart';

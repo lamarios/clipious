@@ -4,6 +4,7 @@ import 'package:after_layout/after_layout.dart';
 import 'package:fbroadcast/fbroadcast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_fadein/flutter_fadein.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/utils.dart';
 import 'package:invidious/views/videoList/singleVideo.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -81,7 +82,7 @@ class VideoListState extends State<VideoList> with AfterLayoutMixin<VideoList> {
               ? Container(
                   alignment: Alignment.center,
                   color: colorScheme.background,
-                  child: Visibility(visible: error.isNotEmpty, child: GestureDetector(onTap: () => getVideos(), child: Text(error))),
+                  child: Visibility(visible: error.isNotEmpty, child: InkWell(onTap: () => getVideos(), child: Text(error))),
                 )
               : Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -125,6 +126,7 @@ class VideoListState extends State<VideoList> with AfterLayoutMixin<VideoList> {
   }
 
   loadVideo(Future<List<VideoInList>> Function() refreshFunction) async {
+    var locals = AppLocalizations.of(context)!;
     if (widget.getVideos != null) {
       setState(() {
         error = '';
@@ -140,7 +142,7 @@ class VideoListState extends State<VideoList> with AfterLayoutMixin<VideoList> {
         setState(() {
           this.videos = [];
           loading = false;
-          error = 'Couldn\'t fetch videos, tap to try again';
+          error = locals.couldntFetchVideos;
         });
         rethrow;
       }

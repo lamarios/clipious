@@ -2,14 +2,15 @@ import 'dart:async';
 
 import 'package:after_layout/after_layout.dart';
 import 'package:fbroadcast/fbroadcast.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/database.dart';
 import 'package:invidious/models/db/settings.dart';
 import 'package:invidious/utils.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:settings_ui/settings_ui.dart';
 import 'package:select_dialog/select_dialog.dart';
+import 'package:settings_ui/settings_ui.dart';
+
 import '../globals.dart';
 import '../models/country.dart';
 import '../models/db/server.dart';
@@ -57,13 +58,14 @@ class SettingsState extends State<Settings> with AfterLayoutMixin {
   }
 
   manageServers(BuildContext context) {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => ManageServers()));
+    Navigator.push(context, MaterialPageRoute(builder: (context) => const ManageServers()));
   }
 
   searchCountry(BuildContext context) {
+    var locals = AppLocalizations.of(context)!;
     SelectDialog.showModal<String>(
       context,
-      label: "Select browsing country",
+      label: locals.selectBrowsingCountry,
       selectedValue: country.name,
       items: countryCodes.map((e) => e.name).toList(),
       onChange: (String selected) {
@@ -77,14 +79,16 @@ class SettingsState extends State<Settings> with AfterLayoutMixin {
   }
 
   selectOnOpen(BuildContext context) {
+    var categories = getCategories(context);
+    var locals = AppLocalizations.of(context)!;
     SelectDialog.showModal<String>(
       context,
-      label: "Select what to show when the app starts",
+      label: locals.showOnStart,
       selectedValue: onOpen.toString(),
       showSearchBox: false,
-      items: CATEGORIES,
+      items: categories,
       onChange: (String selected) {
-        int selectedIndex = CATEGORIES.indexOf(selected);
+        int selectedIndex = categories.indexOf(selected);
         db.saveSetting(SettingsValue(ON_OPEN, selectedIndex.toString()));
         setState(() {
           onOpen = selectedIndex;
@@ -93,66 +97,72 @@ class SettingsState extends State<Settings> with AfterLayoutMixin {
     );
   }
 
+  List<String> getCategories(BuildContext context) {
+    var locals = AppLocalizations.of(context)!;
+    return [locals.popular, locals.trending, locals.subscriptions, locals.playlists];
+  }
+
   @override
   Widget build(BuildContext context) {
     ColorScheme colorScheme = Theme.of(context).colorScheme;
+    var locals = AppLocalizations.of(context)!;
     SettingsThemeData theme = settingsTheme(colorScheme);
 
     return Scaffold(
-      extendBody: true,
-        bottomNavigationBar: SizedBox.shrink(),
+        extendBody: true,
+        bottomNavigationBar: const SizedBox.shrink(),
         appBar: AppBar(
           scrolledUnderElevation: 0,
-          title: const Text('Settings'),
+          title: Text(locals.settings),
         ),
         backgroundColor: colorScheme.background,
         body: SafeArea(
             child: SettingsList(
-              lightTheme: theme,
-              darkTheme: theme,
-              sections: [
-                SettingsSection(
-                  title: const Text('Browsing'),
-                  tiles: [
-                    SettingsTile(
-                      title: const Text('Country'),
-                      value: Text(country.name),
-                      onPressed: (context) => searchCountry(context),
-                    ),
-                    SettingsTile(
-                      title: const Text('When app starts, show...'),
-                      value: Text(CATEGORIES[onOpen]),
-                      onPressed: (context) => selectOnOpen(context),
-                    )
-                  ],
+          lightTheme: theme,
+          darkTheme: theme,
+          sections: [
+            SettingsSection(
+              title: Text(locals.browsing),
+              tiles: [
+                SettingsTile(
+                  title: Text(locals.country),
+                  value: Text(country.name),
+                  onPressed: (context) => searchCountry(context),
                 ),
-                SettingsSection(title: const Text('Servers'), tiles: [
-                  SettingsTile.navigation(
-                    title: const Text('Manage servers'),
-                    description: Text('Currently using: ${db.getCurrentlySelectedServer().url}'),
-                    onPressed: manageServers,
-                  ),
-                ]),
-                SettingsSection(title: const Text('SponsorBlock'), tiles: [
-                  SettingsTile.switchTile(
-                    initialValue: sponsorBlock,
-                    onToggle: toggleSponsorBlock,
-                    title: const Text('Use SponsorBlock'),
-                    description: const Text('Skip sponsor segments submitted by the community'),
-                  )
-                ]),
-                SettingsSection(title: (const Text('About')), tiles: [
-                  SettingsTile(
-                    title: Text('Name: ${packageInfo.appName}'),
-                    description: Text('Package: ${packageInfo.packageName}'),
-                  ),
-                  SettingsTile(
-                    title: Text('Version: ${packageInfo.version}'),
-                    description: Text('Build: ${packageInfo.buildNumber}'),
-                  )
-                ])
+                SettingsTile(
+                  title: Text(locals.whenAppStartsShow),
+                  value: Text(getCategories(context)[onOpen]),
+                  onPressed: (context) => selectOnOpen(context),
+                )
               ],
-            )));
+            ),
+            SettingsSection(title: Text(locals.servers), tiles: [
+              SettingsTile.navigation(
+                title: Text(locals.manageServers),
+                description: Text(locals.currentServer(db.getCurrentlySelectedServer().url)),
+                onPressed: manageServers,
+              ),
+            ]),
+            SettingsSection(title: const Text('SponsorBlock'), tiles: [
+              SettingsTile.switchTile(
+                initialValue: sponsorBlock,
+                onToggle: toggleSponsorBlock,
+                title: Text(locals.useSponsorBlock),
+                description: Text(locals.sponsorBlockDescription),
+              )
+            ]),
+            SettingsSection(title: (Text(locals.about)), tiles: [
+              SettingsTile(
+                title: Text('${locals.name}: ${packageInfo.appName}'),
+                description: Text('${locals.package}: ${packageInfo.packageName}'),
+              ),
+              SettingsTile(
+                title: Text('${locals.version}: ${packageInfo.version}'),
+                description: Text('${locals.build}: ${packageInfo.buildNumber}'),
+              )
+            ])
+          ],
+        )));
   }
 
   @override
