@@ -28,6 +28,7 @@ class PlaylistView extends StatefulWidget {
 }
 
 class _PlaylistViewState extends State<PlaylistView> with AfterLayoutMixin<PlaylistView> {
+  final double playlistItemHeight = 100;
   final log = Logger('PlaylistView');
   bool playingVideo = false;
   Video? currentlyPlaying;
@@ -65,8 +66,8 @@ class _PlaylistViewState extends State<PlaylistView> with AfterLayoutMixin<Playl
   startVideo() async {
     if (playlist.videos.isNotEmpty) {
       if (selectedIndex < playlist.videos.length) {
-
         var vid = await service.getVideo(playlist.videos[selectedIndex].videoId);
+        scrollController.animateTo(selectedIndex * playlistItemHeight, duration: animationDuration, curve: Curves.easeInOutQuad);
         setState(() {
           playingVideo = true;
           progress = 0;
@@ -320,75 +321,82 @@ class _PlaylistViewState extends State<PlaylistView> with AfterLayoutMixin<Playl
                           ),
                           Expanded(
                               child: ListView(
+                            controller: scrollController,
                             children: playlist.videos
-                                .map((v) => Stack(
-                                  children: [
-                                    Visibility(
-                                      visible: v.videoId == currentlyPlaying?.videoId,
-                                      child: Positioned(
-                                          top: 0,
-                                          left: 0,
-                                          right: 0,
-                                          bottom: 0,
-                                          child: Container(
-                                            alignment: Alignment.centerLeft,
-                                            color: colorScheme.secondaryContainer.withOpacity(0.5),
-                                            child: FractionallySizedBox(
-                                              heightFactor: 1,
-                                              widthFactor: progress,
-                                              child: Container(
-                                                color: colorScheme.primary.withOpacity(0.1),
-                                              ),
-                                            ),
-                                          )),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: InkWell(
-                                        onTap: () => playVideo(context, v),
-                                        onLongPress: widget.canDeleteVideos ? () => showPlayListVideoDialog(context, v) : null,
-                                        child: Row(
-                                          children: [
-                                            Padding(
-                                              padding: const EdgeInsets.all(4.0),
-                                              child: SizedBox(
-                                                width: 100,
-                                                child: VideoThumbnailView(
-                                                  videoId: v.videoId,
-                                                  thumbnailUrl: ImageObject.getBestThumbnail(v.videoThumbnails)?.url ?? '',
-                                                ),
-                                              ),
-                                            ),
-                                            Expanded(
-                                              child: Column(
-                                                crossAxisAlignment: CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    v.title,
-                                                    style: TextStyle(color: colorScheme.primary),
+                                .map((v) => Container(
+                                      width: double.infinity,
+                                      height: playlistItemHeight,
+                                      alignment: Alignment.center,
+                                      child: Stack(
+                                        children: [
+                                          Visibility(
+                                            visible: v.videoId == currentlyPlaying?.videoId,
+                                            child: Positioned(
+                                                top: 0,
+                                                left: 0,
+                                                right: 0,
+                                                bottom: 0,
+                                                child: Container(
+                                                  alignment: Alignment.centerLeft,
+                                                  color: colorScheme.secondaryContainer.withOpacity(0.5),
+                                                  child: FractionallySizedBox(
+                                                    heightFactor: 1,
+                                                    widthFactor: progress,
+                                                    child: Container(
+                                                      color: colorScheme.primary.withOpacity(0.1),
+                                                    ),
                                                   ),
-                                                  Text(
-                                                    v.author ?? '',
+                                                )),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: InkWell(
+                                              onTap: () => playVideo(context, v),
+                                              onLongPress: widget.canDeleteVideos ? () => showPlayListVideoDialog(context, v) : null,
+                                              child: Row(
+                                                children: [
+                                                  Padding(
+                                                    padding: const EdgeInsets.all(4.0),
+                                                    child: SizedBox(
+                                                      width: 100,
+                                                      child: VideoThumbnailView(
+                                                        videoId: v.videoId,
+                                                        thumbnailUrl: ImageObject.getBestThumbnail(v.videoThumbnails)?.url ?? '',
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Expanded(
+                                                    child: Column(
+                                                      mainAxisAlignment: MainAxisAlignment.center,
+                                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                                      children: [
+                                                        Text(
+                                                          v.title,
+                                                          style: TextStyle(color: colorScheme.primary),
+                                                        ),
+                                                        Text(
+                                                          v.author ?? '',
+                                                        )
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  InkWell(
+                                                    onTap: () => openVideo(context, v.videoId),
+                                                    child: Padding(
+                                                      padding: const EdgeInsets.all(8.0),
+                                                      child: Icon(
+                                                        Icons.exit_to_app,
+                                                        color: colorScheme.primary,
+                                                      ),
+                                                    ),
                                                   )
                                                 ],
                                               ),
                                             ),
-                                            InkWell(
-                                              onTap: () => openVideo(context, v.videoId),
-                                              child: Padding(
-                                                padding: const EdgeInsets.all(8.0),
-                                                child: Icon(
-                                                  Icons.exit_to_app,
-                                                  color: colorScheme.primary,
-                                                ),
-                                              ),
-                                            )
-                                          ],
-                                        ),
+                                          )
+                                        ],
                                       ),
-                                    )
-                                  ],
-                                ))
+                                    ))
                                 .toList(),
                           ))
                         ],
