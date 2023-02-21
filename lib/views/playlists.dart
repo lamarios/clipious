@@ -46,7 +46,7 @@ class _PlaylistsState extends State<Playlists> with RouteAware {
   @override
   void didPopNext() {
     super.didPopNext();
-    getPlayLists();
+    playlistKey.currentState?.refreshPlaylists();
   }
 
   @override
