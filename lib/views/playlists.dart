@@ -5,6 +5,7 @@ import 'package:fbroadcast/fbroadcast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/globals.dart';
+import 'package:invidious/views/playlistList.dart';
 import 'package:invidious/views/playlists/playlist.dart';
 import 'package:logging/logging.dart';
 
@@ -23,16 +24,16 @@ class Playlists extends StatefulWidget {
   State<Playlists> createState() => _PlaylistsState();
 }
 
-class _PlaylistsState extends State<Playlists> with AfterLayoutMixin<Playlists>, RouteAware {
+class _PlaylistsState extends State<Playlists> with RouteAware {
+  GlobalKey<PlaylistListState> playlistKey = GlobalKey();
   final log = Logger('Playlists');
   List<Playlist> playlists = [];
-  bool loading = true;
 
   @override
   void initState() {
     super.initState();
     FBroadcast.instance().register(PLAYLIST_ADDED, (value, callback) {
-      getPlayLists();
+      playlistKey.currentState?.refreshPlaylists();
     });
   }
 
@@ -52,41 +53,20 @@ class _PlaylistsState extends State<Playlists> with AfterLayoutMixin<Playlists>,
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Visibility(visible: loading, child: const LinearProgressIndicator()),
         Expanded(
-          child: ListView(
-            children: playlists
-                .map((p) => PlaylistItem(
-                      key: ValueKey(p.playlistId),
-                      playlist: p,
-                      canDeleteVideos: widget.canDeleteVideos,
-                    ))
-                .toList(),
+          child: PlaylistList(
+            key: playlistKey,
+            canDeleteVideos: widget.canDeleteVideos,
+            getPlaylists: getPlayLists,
+            refresh: getPlayLists,
           ),
         )
       ],
     );
   }
 
-  getPlayLists() async {
-    if (mounted) {
-      setState(() {
-        loading = true;
-      });
-
-      List<Playlist> lists = await service.getUserPlaylists();
-      if (mounted) {
-        setState(() {
-          playlists = lists;
-          loading = false;
-        });
-      }
-    }
-  }
-
-  @override
-  FutureOr<void> afterFirstLayout(BuildContext context) {
-    getPlayLists();
+  Future<List<Playlist>> getPlayLists() async {
+    return await service.getUserPlaylists();
   }
 }
 
@@ -101,14 +81,17 @@ class _AddPlayListButtonState extends State<AddPlayListButton> {
   addPlaylistDialog(BuildContext context) {
     showDialog<String>(
         context: context,
-        builder: (BuildContext context) => Dialog(
+        builder: (BuildContext context) =>
+            Dialog(
               child: AddPlayListForm(),
             ));
   }
 
   @override
   Widget build(BuildContext context) {
-    ColorScheme colors = Theme.of(context).colorScheme;
+    ColorScheme colors = Theme
+        .of(context)
+        .colorScheme;
     return FloatingActionButton(
       onPressed: () => addPlaylistDialog(context),
       backgroundColor: colors.primaryContainer,
@@ -156,7 +139,7 @@ class _AddPlayListFormState extends State<AddPlayListForm> {
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-             Text(locals.addPlayList),
+            Text(locals.addPlayList),
             TextField(
               decoration: InputDecoration(hintText: locals.playListName),
               controller: nameController,
@@ -168,13 +151,13 @@ class _AddPlayListFormState extends State<AddPlayListForm> {
               padding: const EdgeInsets.all(8.0),
               child: Row(
                 children: [
-                   Padding(
+                  Padding(
                     padding: EdgeInsets.all(8.0),
                     child: Text('${locals.playlistVisibility}:'),
                   ),
                   DropdownButton(
                     value: privacyValue,
-                    items:  [
+                    items: [
                       DropdownMenuItem(value: 'public', child: Text(locals.publicPlaylist)),
                       DropdownMenuItem(value: 'unlisted', child: Text(locals.unlistedPlaylist)),
                       DropdownMenuItem(value: 'private', child: Text(locals.privatePlaylist))
@@ -195,13 +178,13 @@ class _AddPlayListFormState extends State<AddPlayListForm> {
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  child:  Text(locals.cancel),
+                  child: Text(locals.cancel),
                 ),
                 TextButton(
                   onPressed: () {
                     addPlaylist(context);
                   },
-                  child:  Text(locals.add),
+                  child: Text(locals.add),
                 ),
               ],
             ),

@@ -315,6 +315,18 @@
   "@publicServersError": {
     "description": "Error message when trying to get public servers but it failed"
   },
+  "appearance": "Appearance",
+    "@appearance": {
+      "description": "Settings category title"
+    },
+  "useDynamicTheme": "Dynamic colors",
+    "@useDynamicTheme": {
+      "description": ""
+    },
+  "useDynamicThemeDescription": "Use Material You colors (only available on Android 12+). Requires app restart",
+    "@useDynamicThemeDescription": {
+      "description": ""
+    },
   "error": "Error",
   "@error": {},
   "nVideos": "{count, plural, =0{No videos} =1{1 video} other{{count} videos}}",

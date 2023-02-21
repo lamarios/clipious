@@ -54,8 +54,9 @@ class _PlaylistItemState extends State<PlaylistItem> with AfterLayoutMixin<Playl
               opacity: 1 - (0.3 * i),
               child: videosToUse.length > i
                   ? VideoThumbnailView(
+                      cacheKey: 'v-worst/${videosToUse[i].videoId}',
                       videoId: videosToUse[i].videoId,
-                      thumbnailUrl: ImageObject.getBestThumbnail(videosToUse[i].videoThumbnails)?.url ?? '',
+                      thumbnailUrl: ImageObject.getWorstThumbnail(videosToUse[i].videoThumbnails)?.url ?? '',
                     )
                   : Container(
                       decoration: BoxDecoration(color: colors.secondaryContainer, borderRadius: BorderRadius.circular(10)),
@@ -95,7 +96,6 @@ class _PlaylistItemState extends State<PlaylistItem> with AfterLayoutMixin<Playl
               ],
             ),
           ),
-          const Divider(),
         ],
       ),
     );

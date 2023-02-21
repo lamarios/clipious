@@ -1,8 +1,10 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/models/video.dart';
 import 'package:invidious/views/channel.dart';
 import 'package:invidious/views/components/subscribeButton.dart';
+import 'package:invidious/views/components/videoThumbnail.dart';
 
 import '../../models/imageObject.dart';
 import '../../utils.dart';
@@ -77,7 +79,7 @@ class VideoInfo extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       crossAxisAlignment: CrossAxisAlignment.center,
-                      children:  [
+                      children: [
                         const Icon(
                           Icons.podcasts,
                           size: 15,
@@ -104,14 +106,21 @@ class VideoInfo extends StatelessWidget {
               onTap: () => openChannel(context),
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 4.0),
-                child: Container(
+                child: Thumbnail(
+                  thumbnailUrl: ImageObject.getBestThumbnail(video.authorThumbnails)?.url ?? '',
+                  width: 40,
+                  height: 40,
+                  id: 'author-small-${video.authorId}',
+                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
+                ) /*Container(
                   width: 40,
                   height: 40,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
                       color: colorScheme.onSurface,
                       image: DecorationImage(image: NetworkImage(ImageObject.getBestThumbnail(video?.authorThumbnails)?.url ?? ''), fit: BoxFit.cover)),
-                ),
+                )*/
+                ,
               ),
             ),
             Expanded(

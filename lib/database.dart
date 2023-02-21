@@ -15,6 +15,7 @@ import 'objectbox.g.dart'; // created by `flutter pub run build_runner build`
 const SELECTED_SERVER = 'selected-server';
 const USE_SPONSORBLOCK = 'use-sponsor-block';
 const BROWSING_COUNTRY = 'browsing-country';
+const DYNAMIC_THEME = 'dynamic-theme';
 
 const ON_OPEN="on-open";
 

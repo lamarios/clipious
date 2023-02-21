@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:invidious/views/components/videoThumbnail.dart';
 import 'package:invidious/views/video/comments.dart';
 
 import '../../models/comment.dart';
@@ -33,14 +34,21 @@ class SingleCommentViewState extends State<SingleCommentView> {
         children: [
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Container(
+            child: Thumbnail(
+              width: 20,
+              height: 20,
+              id: 'comment-author-${comment.authorId}',
+              thumbnailUrl: ImageObject.getBestThumbnail(comment.authorThumbnails)?.url ?? '',
+              decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
+            ) /*Container(
               height: 20,
               width: 20,
               decoration: BoxDecoration(
                   color: colors.secondaryContainer,
                   borderRadius: BorderRadius.circular(20),
                   image: comment.authorThumbnails.isNotEmpty ? DecorationImage(image: NetworkImage(ImageObject.getBestThumbnail(comment.authorThumbnails)?.url ?? '')) : null),
-            ),
+            )*/
+            ,
           ),
           Expanded(
             child: Column(

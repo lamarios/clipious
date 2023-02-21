@@ -360,8 +360,9 @@ class _PlaylistViewState extends State<PlaylistView> with AfterLayoutMixin<Playl
                                                     child: SizedBox(
                                                       width: 100,
                                                       child: VideoThumbnailView(
+                                                        cacheKey: 'v-worst/${v.videoId}',
                                                         videoId: v.videoId,
-                                                        thumbnailUrl: ImageObject.getBestThumbnail(v.videoThumbnails)?.url ?? '',
+                                                        thumbnailUrl: ImageObject.getWorstThumbnail(v.videoThumbnails)?.url ?? '',
                                                       ),
                                                     ),
                                                   ),

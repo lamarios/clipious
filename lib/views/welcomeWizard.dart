@@ -59,10 +59,7 @@ class _WelcomeWizardState extends State<WelcomeWizard> {
       body: SafeArea(
           top: true,
           child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-            const Padding(
-              padding: EdgeInsets.all(8.0),
-              child: SizedBox(width: 70, height: 70, child: AppIconImage()),
-            ),
+            const SizedBox(width: 150, height: 150, child: AppIconImage()),
             Text(
               'Clipious',
               style: TextStyle(color: colors.primary, fontSize: 30),

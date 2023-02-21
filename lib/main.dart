@@ -7,6 +7,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/models/searchResult.dart';
 import 'package:invidious/views/playlists.dart';
@@ -22,7 +23,7 @@ import 'package:receive_sharing_intent/receive_sharing_intent.dart';
 
 import 'database.dart';
 
-const brandColor = Color(0xFF8A4498);
+const brandColor = Color(0xFF4f0096);
 
 final scaffoldKey = GlobalKey<ScaffoldMessengerState>();
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
@@ -33,7 +34,8 @@ Future<void> main() async {
     debugPrint('[${record.level.name}] [${record.loggerName}] ${record.message}');
   });
 
-  WidgetsFlutterBinding.ensureInitialized();
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   db = await DbClient.create();
   runApp(const MyApp());
 }
@@ -46,6 +48,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     bool showWizard = false;
+    bool useDynamicTheme = db.getSettings(DYNAMIC_THEME)?.value == 'true';
     try {
       db.getCurrentlySelectedServer();
     } catch (err) {
@@ -57,7 +60,7 @@ class MyApp extends StatelessWidget {
       ColorScheme lightColorScheme;
       ColorScheme darkColorScheme;
 
-      if (lightDynamic != null && darkDynamic != null) {
+      if (useDynamicTheme && lightDynamic != null && darkDynamic != null) {
         // On Android S+ devices, use the provided dynamic color scheme.
         // (Recommended) Harmonize the dynamic color scheme' built-in semantic colors.
         lightColorScheme = lightDynamic.harmonized();
@@ -83,8 +86,6 @@ class MyApp extends StatelessWidget {
           brightness: Brightness.dark,
         );
       }
-      var brightness = SchedulerBinding.instance.platformDispatcher.platformBrightness;
-      ColorScheme colorScheme = brightness == Brightness.dark ? darkColorScheme : lightColorScheme;
       return MaterialApp(
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
@@ -142,6 +143,7 @@ class HomeState extends State<Home> {
         openAppLink((value ?? ''));
       });
     });
+    FlutterNativeSplash.remove();
   }
 
   @override

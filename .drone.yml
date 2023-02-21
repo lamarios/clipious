@@ -18,6 +18,7 @@ steps:
       - source /Users/gz/.zshrc
       - security unlock-keychain -p $${KEYCHAIN_PASS} /Users/gz/Library/Keychains/login.keychain-db
       - flutter doctor
+      - flutter pub run flutter_native_splash:create
       - flutter build apk --split-per-abi --build-number $(date  "+%y%j%H%M") --build-name "${DRONE_TAG:=0.0.0}"
   - name: git hub release
     environment:

@@ -297,13 +297,11 @@ class Service {
     return List<Playlist>.from(i.map((e) => Playlist.fromJson(e)));
   }
 
-  Future<ChannelPlaylists> getChannelPlaylists(String channelId, String? continuation) async {
+  Future<ChannelPlaylists> getChannelPlaylists(String channelId, {String? continuation}) async {
     var currentlySelectedServer = db.getCurrentlySelectedServer();
-    String url = '${currentlySelectedServer.url}${GET_CHANNEL_PLAYLISTS.replaceAll(':id', channelId)}${continuation != null ? '?continuation=$continuation' : ''}';
+    Uri uri = buildUrl(GET_CHANNEL_PLAYLISTS, pathParams: {':id': channelId}, query: {'continuation': continuation});
 
-    log.info('Calling $url');
-
-    final response = await http.get(Uri.parse(url));
+    final response = await http.get(uri);
     return ChannelPlaylists.fromJson(handleResponse(response));
   }
 

@@ -29,14 +29,14 @@
      inkscape:document-units="px"
      showgrid="false"
      inkscape:zoom="1.4142136"
-     inkscape:cx="228.39548"
+     inkscape:cx="103.59114"
      inkscape:cy="224.15284"
-     inkscape:window-width="1499"
+     inkscape:window-width="1812"
      inkscape:window-height="1209"
      inkscape:window-x="26"
      inkscape:window-y="23"
      inkscape:window-maximized="0"
-     inkscape:current-layer="layer2">
+     inkscape:current-layer="layer1">
     <inkscape:grid
        type="xygrid"
        id="grid171" />
@@ -47,11 +47,11 @@
        inkscape:collect="always"
        id="icon_gradient">
       <stop
-         style="stop-color:#4f0096;stop-opacity:1;"
+         style="stop-color:#5a00a8;stop-opacity:1;"
          offset="0"
          id="stop8756" />
       <stop
-         style="stop-color:#880ae1;stop-opacity:1;"
+         style="stop-color:#9c1ef5;stop-opacity:1;"
          offset="1"
          id="stop8758" />
     </linearGradient>

@@ -27,4 +27,15 @@ class ImageObject {
       return null;
     }
   }
+  static ImageObject? getWorstThumbnail(List<ImageObject>? images) {
+    if (images != null && images.isNotEmpty) {
+      images.sort((a, b) {
+        return (a.width * a.height).compareTo(b.width * b.height);
+      });
+
+      return images[0];
+    } else {
+      return null;
+    }
+  }
 }

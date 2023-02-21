@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:after_layout/after_layout.dart';
+import 'package:application_icon/application_icon.dart';
 import 'package:fbroadcast/fbroadcast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -39,6 +40,7 @@ class SettingsState extends State<Settings> with AfterLayoutMixin {
   Country country = getCountryFromCode(db.getSettings(BROWSING_COUNTRY)?.value ?? 'US');
   PackageInfo packageInfo = PackageInfo(appName: '', packageName: '', version: '', buildNumber: '');
   int onOpen = int.parse(db.getSettings(ON_OPEN)?.value ?? '0');
+  bool useDynamicTheme = db.getSettings(DYNAMIC_THEME)?.value == 'true';
 
   @override
   initState() {
@@ -84,7 +86,7 @@ class SettingsState extends State<Settings> with AfterLayoutMixin {
     SelectDialog.showModal<String>(
       context,
       label: locals.showOnStart,
-      selectedValue: onOpen.toString(),
+      selectedValue: categories[onOpen],
       showSearchBox: false,
       items: categories,
       onChange: (String selected) {
@@ -100,6 +102,13 @@ class SettingsState extends State<Settings> with AfterLayoutMixin {
   List<String> getCategories(BuildContext context) {
     var locals = AppLocalizations.of(context)!;
     return [locals.popular, locals.trending, locals.subscriptions, locals.playlists];
+  }
+
+  toggleDynamicTheme(bool value) {
+    db.saveSetting(SettingsValue(DYNAMIC_THEME, value.toString()));
+    setState(() {
+      useDynamicTheme = value;
+    });
   }
 
   @override
@@ -151,7 +160,19 @@ class SettingsState extends State<Settings> with AfterLayoutMixin {
                 description: Text(locals.sponsorBlockDescription),
               )
             ]),
+            SettingsSection(
+              title: Text(locals.appearance),
+              tiles: [
+                SettingsTile.switchTile(
+                  initialValue: useDynamicTheme,
+                  onToggle: toggleDynamicTheme,
+                  title: Text(locals.useDynamicTheme),
+                  description: Text(locals.useDynamicThemeDescription),
+                ),
+              ],
+            ),
             SettingsSection(title: (Text(locals.about)), tiles: [
+              SettingsTile(title: const Center(child: SizedBox(height: 150, width: 150, child: AppIconImage()))),
               SettingsTile(
                 title: Text('${locals.name}: ${packageInfo.appName}'),
                 description: Text('${locals.package}: ${packageInfo.packageName}'),

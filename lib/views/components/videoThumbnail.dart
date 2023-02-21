@@ -6,15 +6,16 @@ class VideoThumbnailView extends StatelessWidget {
   final String videoId;
   final String thumbnailUrl;
   Widget? child;
+  String? cacheKey;
 
-  VideoThumbnailView({super.key, required this.videoId, required this.thumbnailUrl, this.child});
+  VideoThumbnailView({super.key, required this.videoId, required this.thumbnailUrl, this.child, this.cacheKey});
 
   @override
   Widget build(BuildContext context) {
     ColorScheme colors = Theme.of(context).colorScheme;
     return AspectRatio(
       aspectRatio: 16 / 9,
-      child: Thumbnail(id: 'v/${videoId}', thumbnailUrl: thumbnailUrl, decoration: BoxDecoration(color: colors.secondaryContainer, borderRadius: BorderRadius.circular(10)), child: child),
+      child: Thumbnail(id: cacheKey ?? 'v/$videoId', thumbnailUrl: thumbnailUrl, decoration: BoxDecoration(color: colors.secondaryContainer, borderRadius: BorderRadius.circular(10)), child: child),
     );
   }
 }
@@ -41,7 +42,7 @@ class Thumbnail extends StatelessWidget {
         width: width,
         decoration: decoration.copyWith(image: DecorationImage(image: imageProvider, fit: BoxFit.cover)),
         // duration: animationDuration,
-        duration: animationDuration ~/2,
+        duration: animationDuration ~/ 2,
         curve: Curves.easeInOutQuad,
         child: child,
       ),
@@ -49,18 +50,32 @@ class Thumbnail extends StatelessWidget {
       placeholderFadeInDuration: animationDuration,
       fadeInDuration: animationDuration,
       fadeOutDuration: animationDuration,
+      errorWidget: (context, url, error) => Container(
+        height: height,
+        width: width,
+        alignment: Alignment.center,
+        decoration: decoration.copyWith(color: colors.secondaryContainer),
+        // duration: animationDuration,
+        child: SizedBox(
+            height: 20,
+            width: 20,
+            child: Icon(
+              Icons.error_outline,
+              color: colors.onSecondaryContainer.withOpacity(0.5),
+            )),
+      ),
       progressIndicatorBuilder: (context, url, progress) => Container(
         height: height,
         width: width,
         alignment: Alignment.center,
-        decoration: BoxDecoration(color: colors.secondaryContainer, borderRadius: BorderRadius.circular(10)),
+        decoration: decoration.copyWith(color: colors.secondaryContainer),
         // duration: animationDuration,
         child: const SizedBox(
-                height: 20,
-                width: 20,
-                child: CircularProgressIndicator(
-                  strokeWidth: 1,
-                )),
+            height: 20,
+            width: 20,
+            child: CircularProgressIndicator(
+              strokeWidth: 1,
+            )),
       ),
     );
   }

@@ -43,9 +43,10 @@ class _ChannelVideosViewState extends State<ChannelVideosView> {
     return Container(
       color: colorScheme.background,
       child: VideoList(
+        key: const ValueKey('channel-videos'),
         getVideos: getVideos,
         refresh: refreshVideos,
-        getMoreVideos: getVideos,
+        getMoreVideos: continuation != null ? getVideos : null,
       ),
     );
   }

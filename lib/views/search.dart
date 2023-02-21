@@ -3,6 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/models/searchResult.dart';
 import 'package:invidious/utils.dart';
 import 'package:invidious/views/channel.dart';
+import 'package:invidious/views/playlistList.dart';
 import 'package:invidious/views/playlists/playlist.dart';
 
 import 'videoList.dart';
@@ -97,9 +98,7 @@ class SearchState extends State<Search> with SingleTickerProviderStateMixin {
                       ),
                 widget.results.playlists.isNotEmpty
                     ? FractionallySizedBox(
-                      child: ListView(
-                          children: widget.results.playlists.map((e) => PlaylistItem(playlist: e, canDeleteVideos: false)).toList(),
-                        ),
+                      child: PlaylistList(playlists: widget.results.playlists, canDeleteVideos: false),
                     )
                     :  Center(child: Text(locals.noPlaylists))
               ],

@@ -6,30 +6,32 @@ import 'package:fbroadcast/fbroadcast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_fadein/flutter_fadein.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:invidious/models/playlist.dart';
 import 'package:invidious/utils.dart';
+import 'package:invidious/views/playlists/playlist.dart';
 import 'package:invidious/views/videoList/singleVideo.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../globals.dart';
 import '../models/videoInList.dart';
 
-class VideoList extends StatefulWidget {
-  Future<List<VideoInList>> Function()? getVideos;
-  Future<List<VideoInList>> Function()? getMoreVideos;
-  Future<List<VideoInList>> Function()? refresh;
-  List<VideoInList>? videos;
+class PlaylistList extends StatefulWidget {
+  Future<List<Playlist>> Function()? getPlaylists;
+  Future<List<Playlist>> Function()? getMorePlaylists;
+  Future<List<Playlist>> Function()? refresh;
+  List<Playlist>? playlists;
+  bool canDeleteVideos;
 
-  VideoList({super.key, this.getVideos, this.videos, this.getMoreVideos, this.refresh});
+  PlaylistList({super.key, this.getPlaylists, this.playlists, this.getMorePlaylists, this.refresh, required this.canDeleteVideos});
 
   @override
-  VideoListState createState() => VideoListState();
+  PlaylistListState createState() => PlaylistListState();
 }
 
-class VideoListState extends State<VideoList> with AfterLayoutMixin<VideoList> {
+class PlaylistListState extends State<PlaylistList> with AfterLayoutMixin<PlaylistList> {
   RefreshController refreshController = RefreshController(initialRefresh: false);
-  List<VideoInList> videos = [];
+  List<Playlist> playlists = [];
   bool loading = true;
-  Map<String, Image> imageCache = {};
   ScrollController scrollController = ScrollController();
   String error = '';
 
@@ -39,7 +41,7 @@ class VideoListState extends State<VideoList> with AfterLayoutMixin<VideoList> {
     scrollController.addListener(onScrollEvent);
 
     FBroadcast.instance().register(BROADCAST_SERVER_CHANGED, (value, callback) {
-      getVideos();
+      getPlaylists();
     });
   }
 
@@ -51,22 +53,22 @@ class VideoListState extends State<VideoList> with AfterLayoutMixin<VideoList> {
   }
 
   onScrollEvent() {
-    if (widget.getMoreVideos != null) {
+    if (widget.getMorePlaylists != null) {
       if (scrollController.hasClients) {
         if (scrollController.position.maxScrollExtent == scrollController.offset) {
-          EasyDebounce.debounce('loading-more-videos', const Duration(milliseconds: 250), getMoreVideos);
+          EasyDebounce.debounce('get-more-playlists', const Duration(milliseconds: 250), getMorePlaylists);
         }
       }
     }
   }
 
-  getMoreVideos() async {
-    if (!loading && widget.getMoreVideos != null) {
-      loadVideo(() async {
-        List<VideoInList> videos = await widget.getMoreVideos!();
-        List<VideoInList> currentVideos = this.videos;
-        currentVideos.addAll(videos);
-        return currentVideos;
+  getMorePlaylists() async {
+    if (!loading && widget.getMorePlaylists != null) {
+      loadPlaylist(() async {
+        List<Playlist> playlists = await widget.getMorePlaylists!();
+        List<Playlist> currentPlaylists = this.playlists;
+        currentPlaylists.addAll(playlists);
+        return currentPlaylists;
       });
     }
   }
@@ -77,13 +79,13 @@ class VideoListState extends State<VideoList> with AfterLayoutMixin<VideoList> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Visibility(visible: loading, child: const SizedBox(height: 1, child: LinearProgressIndicator())),
+        Visibility(visible: loading, child: SizedBox(height: 1, child: const LinearProgressIndicator())),
         Expanded(
           child: error.isNotEmpty
               ? Container(
                   alignment: Alignment.center,
                   color: colorScheme.background,
-                  child: Visibility(visible: error.isNotEmpty, child: InkWell(onTap: () => getVideos(), child: Text(error))),
+                  child: Visibility(visible: error.isNotEmpty, child: InkWell(onTap: () => getPlaylists(), child: Text(error))),
                 )
               : Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -91,20 +93,17 @@ class VideoListState extends State<VideoList> with AfterLayoutMixin<VideoList> {
                     duration: animationDuration,
                     curve: Curves.easeInOutQuad,
                     child: Visibility(
-                      visible: widget.videos?.isNotEmpty ?? videos.isNotEmpty,
+                      visible: widget.playlists?.isNotEmpty ?? playlists.isNotEmpty,
                       child: SmartRefresher(
                         controller: refreshController,
                         enablePullDown: widget.refresh != null,
                         enablePullUp: false,
-                        onRefresh: () => widget.refresh != null ? refreshVideos() : getVideos(),
-                        child: GridView.count(
-                            crossAxisCount: getGridCount(context),
+                        onRefresh: () => widget.refresh != null ? refreshPlaylists() : getPlaylists(),
+                        child: ListView.separated(
                             controller: scrollController,
-                            padding: const EdgeInsets.all(4),
-                            crossAxisSpacing: 5,
-                            mainAxisSpacing: 5,
-                            childAspectRatio: getGridAspectRatio(context),
-                            children: (widget.videos ?? videos).map((v) => VideoListItem(key: ValueKey(v.videoId), video: v)).toList()),
+                            itemBuilder: (context, index) => PlaylistItem(playlist: playlists[index], canDeleteVideos: widget.canDeleteVideos),
+                            separatorBuilder: (context, index) => const Divider(),
+                            itemCount: playlists.length),
                       ),
                     ),
                   ),
@@ -114,34 +113,34 @@ class VideoListState extends State<VideoList> with AfterLayoutMixin<VideoList> {
     );
   }
 
-  refreshVideos() async {
+  refreshPlaylists() async {
     if (widget.refresh != null) {
-      loadVideo(() => widget.refresh!());
+      loadPlaylist(() => widget.refresh!());
     } else {
-      loadVideo(() => widget.getVideos!());
+      loadPlaylist(() => widget.getPlaylists!());
     }
   }
 
-  getVideos() async {
-    loadVideo(() => widget.getVideos!());
+  getPlaylists() async {
+    loadPlaylist(() => widget.getPlaylists!());
   }
 
-  loadVideo(Future<List<VideoInList>> Function() refreshFunction) async {
+  loadPlaylist(Future<List<Playlist>> Function() refreshFunction) async {
     var locals = AppLocalizations.of(context)!;
-    if (widget.getVideos != null) {
+    if (widget.getPlaylists != null) {
       setState(() {
         error = '';
         loading = true;
       });
       try {
-        var videos = await refreshFunction();
+        var playlists = await refreshFunction();
         setState(() {
-          this.videos = videos;
+          this.playlists = playlists;
           loading = false;
         });
       } catch (err) {
         setState(() {
-          this.videos = [];
+          this.playlists = [];
           loading = false;
           error = locals.couldntFetchVideos;
         });
@@ -153,11 +152,12 @@ class VideoListState extends State<VideoList> with AfterLayoutMixin<VideoList> {
 
   @override
   FutureOr<void> afterFirstLayout(BuildContext context) {
-    if (widget.getVideos != null) {
-      getVideos();
-    } else if (widget.videos != null) {
+    if (widget.getPlaylists != null) {
+      getPlaylists();
+    } else if (widget.playlists != null) {
       setState(() {
         loading = false;
+        playlists = widget.playlists!;
       });
     }
   }

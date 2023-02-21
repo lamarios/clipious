@@ -5,6 +5,7 @@ import 'package:fbroadcast/fbroadcast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_web_auth/flutter_web_auth.dart';
+import 'package:invidious/models/errors/invidiousServiceError.dart';
 import 'package:logging/logging.dart';
 import 'package:settings_ui/settings_ui.dart';
 
@@ -52,19 +53,23 @@ class _ManagerServersViewState extends State<ManagerServersView> with AfterLayou
   }
 
   logIn(String serverUrl) async {
-    String url = serverUrl + '/authorize_token?scopes=:feed,:subscriptions*,:playlists*&callback_url=clipious-auth://';
+    String url = '$serverUrl/authorize_token?scopes=:feed,:subscriptions*,:playlists*&callback_url=clipious-auth://';
     final result = await FlutterWebAuth.authenticate(url: url, callbackUrlScheme: 'clipious-auth');
 
     final token = Uri.parse(result).queryParameters['token'];
 
-    Server server = Server(serverUrl);
+    Server? server = db.getServer(serverUrl);
 
-    server.authToken = Uri.decodeComponent(token ?? '');
+    if(server != null) {
+      server.authToken = Uri.decodeComponent(token ?? '');
 
-    db.upsertServer(server);
+      db.upsertServer(server);
 
-    refreshServers();
-    FBroadcast.instance().broadcast(BROADCAST_SERVER_CHANGED);
+      refreshServers();
+      FBroadcast.instance().broadcast(BROADCAST_SERVER_CHANGED);
+    }else{
+      throw InvidiousServiceError('logging in to deleted server');
+    }
   }
 
   refreshServers() {
