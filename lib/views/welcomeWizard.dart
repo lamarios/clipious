@@ -30,7 +30,6 @@ class _WelcomeWizardState extends State<WelcomeWizard> {
       getSelectedServer();
     });
 
-    FlutterNativeSplash.remove();
   }
 
   getSelectedServer() {

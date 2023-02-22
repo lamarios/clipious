@@ -35,7 +35,6 @@ Future<void> main() async {
   });
 
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   db = await DbClient.create();
   runApp(const MyApp());
 }
@@ -143,7 +142,6 @@ class HomeState extends State<Home> {
         openAppLink((value ?? ''));
       });
     });
-    FlutterNativeSplash.remove();
   }
 
   @override
