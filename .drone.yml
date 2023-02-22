@@ -33,19 +33,19 @@ steps:
       - gh release upload ${DRONE_TAG} build/app/outputs/bundle/release/* -R lamarios/clipious
     when:
       event: tag
-#  - name: Release Android
-#    environment:
-#      KEYCHAIN_PASS:
-#        from_secret: keychain_pass
-#      PATH: "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/Users/gz/dev/flutter/bin"
-#    commands:
-#      - source /Users/gz/.zshrc
-#      - flutter doctor
-#      - security unlock-keychain -p $${KEYCHAIN_PASS} /Users/gz/Library/Keychains/login.keychain-db
-#      - cd src/main/app/android
-#      - fastlane deploy
-#    when:
-#      event: tag
+  - name: Release Android
+    environment:
+      KEYCHAIN_PASS:
+        from_secret: keychain_pass
+      PATH: "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/Users/gz/dev/flutter/bin"
+    commands:
+      - source /Users/gz/.zshrc
+      - flutter doctor
+      - security unlock-keychain -p $${KEYCHAIN_PASS} /Users/gz/Library/Keychains/login.keychain-db
+      - cd android
+      - fastlane deploy
+    when:
+      event: tag
 trigger:
   event:
     - push
