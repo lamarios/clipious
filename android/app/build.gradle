@@ -38,7 +38,14 @@ if (ENV['DRONE_BUILD_NUMBER'] != null) {
     buildNumber = ENV['DRONE_BUILD_NUMBER'].toInteger()
 }
 
-print tag
+if(tag != null) {
+    flutterVersionName = tag
+}
+
+
+
+print flutterVersionName
+print ":"
 println buildNumber
 
 def keystoreProperties = new Properties()
@@ -63,7 +70,7 @@ android {
         minSdkVersion 16
         targetSdkVersion 31
         versionCode buildNumber
-        versionName tag
+        versionName flutterVersionName
     }
 
     signingConfigs {
