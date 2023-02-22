@@ -29,7 +29,6 @@ steps:
     commands:
       - source /Users/gz/.zshrc
       - gh release upload ${DRONE_TAG} build/app/outputs/flutter-apk/* -R lamarios/clipious
-      - gh release upload ${DRONE_TAG} build/app/outputs/bundle/release/* -R lamarios/clipious
     when:
       event: tag
   - name: Release Android
