@@ -21,6 +21,7 @@ steps:
       - flutter pub get
       - flutter pub run flutter_native_splash:create
       - flutter build apk --split-per-abi --build-number $(date  "+%y%j%H%M") --build-name "${DRONE_TAG:=0.0.0}"
+      - flutter build appbundle --build-number $(date  "+%y%j%H%M") --build-name "${DRONE_TAG:=0.0.0}"
   - name: git hub release
     environment:
       KEYCHAIN_PASS:
@@ -29,6 +30,7 @@ steps:
     commands:
       - source /Users/gz/.zshrc
       - gh release upload ${DRONE_TAG} build/app/outputs/flutter-apk/* -R lamarios/clipious
+      - gh release upload ${DRONE_TAG} build/app/outputs/bundle/release/* -R lamarios/clipious
     when:
       event: tag
 #  - name: Release Android
