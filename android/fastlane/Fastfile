@@ -35,7 +35,7 @@ platform :android do
     # build will be done in an earlier step of the build process
     #gradle(task: "clean assembleRelease")
     upload_to_play_store(
-        version_code: ENV['DRONE_TAG'],
+        version_code: ENV['DRONE_BUILD_NUMBER'],
         aab: "../build/app/outputs/bundle/release/app-release.aab",
         skip_upload_changelogs: false
     )
