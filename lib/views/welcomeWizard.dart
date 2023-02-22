@@ -2,6 +2,7 @@ import 'package:application_icon/application_icon.dart';
 import 'package:fbroadcast/fbroadcast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/main.dart';
 import 'package:invidious/views/settings/manageServerInner.dart';
@@ -28,6 +29,8 @@ class _WelcomeWizardState extends State<WelcomeWizard> {
     FBroadcast.instance().register(BROADCAST_SERVER_CHANGED, (value, callback) {
       getSelectedServer();
     });
+
+    FlutterNativeSplash.remove();
   }
 
   getSelectedServer() {
