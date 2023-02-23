@@ -31,3 +31,11 @@ Android client application for [invidious](https://invidious.io), the privacy fo
 - Handling of Youtube playlists
 - Android TV support
 
+
+## Contribute
+
+### Translations
+
+![Translation status](https://hosted.weblate.org/widgets/clipious/-/app-translation/multi-auto.svg)
+
+The translations are done via [weblate](https://hosted.weblate.org/projects/clipious/app-translation/).
