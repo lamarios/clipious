@@ -136,7 +136,7 @@
   "@couldntFetchVideos": {
     "description": "Can't load bunch of videos, asking  user to try again"
   },
-  "wizardIntro": "To start using Clipious, please select a public server or add your own. You can change servers later in the settings",
+  "wizardIntro": "Select a public server or add your own. (Can be changed later in the settings.)",
   "@wizardIntro": {
     "description": "Welcome message on frst time use"
   },
