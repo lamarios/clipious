@@ -3,6 +3,7 @@ import 'dart:collection';
 
 import 'package:after_layout/after_layout.dart';
 import 'package:better_player/better_player.dart';
+import 'package:fbroadcast/fbroadcast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -10,6 +11,7 @@ import '../../database.dart';
 import '../../globals.dart';
 import '../../main.dart';
 import '../../models/db/progress.dart';
+import '../../models/pair.dart';
 import '../../models/sponsorSegment.dart';
 import '../../models/video.dart';
 import '../components/videoThumbnail.dart';
@@ -29,26 +31,31 @@ class _VideoPlayerState extends State<VideoPlayer> with AfterLayoutMixin<VideoPl
   bool loadingStream = false;
   bool playingVideo = false;
   bool useSponsorBlock = db.getSettings(USE_SPONSORBLOCK)?.value == 'true';
-  Queue<List<int>> sponsorSegments = Queue.of([]);
+  List<Pair<int>> sponsorSegments = List.of([]);
+  Pair<int> nextSegment = Pair(0, 0);
   BetterPlayerController? videoController;
+  int previousSponsorCheck = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    FBroadcast.instance().register(BROAD_CAST_STOP_PLAYING, (value, callback) {
+      if (videoController != null) {
+        videoController!.removeEventsListener(onVideoListener);
+        videoController!.dispose();
+      }
+      if (context.mounted) {
+        setState(() {
+          playingVideo = false;
+        });
+      }
+    });
+  }
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     routeObserver.subscribe(this, ModalRoute.of(context) as PageRoute<dynamic>);
-  }
-
-  @override
-  void didPushNext() {
-    // if we navigate up to a new screen, we stop playing
-    super.didPushNext();
-//    if (videoController != null) {
-//      videoController!.removeEventsListener(onVideoListener);
-//      videoController!.dispose();
-//    }
-//    setState(() {
-//     playingVideo = false;
-//    });
   }
 
   @override
@@ -70,7 +77,6 @@ class _VideoPlayerState extends State<VideoPlayer> with AfterLayoutMixin<VideoPl
       }
 
       playVideo();
-
     }
   }
 
@@ -80,22 +86,22 @@ class _VideoPlayerState extends State<VideoPlayer> with AfterLayoutMixin<VideoPl
       int max = widget.video.lengthSeconds ?? 0;
       db.saveProgress(Progress.named(progress: currentPosition / max, videoId: widget.video.videoId));
     }
-    if (event.betterPlayerEventType == BetterPlayerEventType.progress && sponsorSegments.isNotEmpty) {
+    if (useSponsorBlock && event.betterPlayerEventType == BetterPlayerEventType.progress && sponsorSegments.isNotEmpty) {
       int currentPosition = (event.parameters?['progress'] as Duration).inMilliseconds;
+      if (currentPosition - previousSponsorCheck >= 1000) {
+        print('checking');
+        Pair<int> nextSegment = sponsorSegments.firstWhere((e) => e.first <= currentPosition && currentPosition <= e.last, orElse: () => Pair<int>(-1, -1));
 
-      List<int> nextSegment = sponsorSegments.elementAt(0);
-      bool matched = nextSegment[0].compareTo(currentPosition) <= -1 && nextSegment[1].compareTo(currentPosition) >= 1;
-      if (matched) {
-        var locals = AppLocalizations.of(context)!;
-        final ScaffoldMessengerState? scaffold = scaffoldKey.currentState;
-        scaffold?.showSnackBar(SnackBar(
-          content: Text(locals.sponsorSkipped),
-          duration: const Duration(seconds: 1),
-        ));
-        videoController!.seekTo(Duration(milliseconds: nextSegment[1] + 1000));
-        setState(() {
-          sponsorSegments.removeFirst();
-        });
+        if (nextSegment.first != -1) {
+          var locals = AppLocalizations.of(context)!;
+          final ScaffoldMessengerState? scaffold = scaffoldKey.currentState;
+          scaffold?.showSnackBar(SnackBar(
+            content: Text(locals.sponsorSkipped),
+            duration: const Duration(seconds: 1),
+          ));
+          videoController!.seekTo(Duration(milliseconds: nextSegment.last + 1000));
+        }
+        previousSponsorCheck = currentPosition;
       }
     }
 
@@ -158,15 +164,15 @@ class _VideoPlayerState extends State<VideoPlayer> with AfterLayoutMixin<VideoPl
                 ? loadingStream
                     ? const CircularProgressIndicator()
                     : IconButton(
-                      key: const ValueKey('nt-playing'),
-                      onPressed: () => playVideo(),
-                      icon: const Icon(Icons.play_arrow, size: 100,),
-                      color: colorScheme.primary,
-                    )
-                : BetterPlayer(
-                    key: _betterPlayerKey,
-                    controller: videoController!
-                  )),
+                        key: const ValueKey('nt-playing'),
+                        onPressed: () => playVideo(),
+                        icon: const Icon(
+                          Icons.play_arrow,
+                          size: 100,
+                        ),
+                        color: colorScheme.primary,
+                      )
+                : BetterPlayer(key: _betterPlayerKey, controller: videoController!)),
       ),
     );
   }
@@ -174,12 +180,10 @@ class _VideoPlayerState extends State<VideoPlayer> with AfterLayoutMixin<VideoPl
   setSponsorBlock() async {
     if (useSponsorBlock) {
       List<SponsorSegment> sponsorSegments = await service.getSponsorSegments(widget.video.videoId);
-      Queue<List<int>> segments = Queue.from(sponsorSegments.map((e) {
+      List<Pair<int>> segments = List.from(sponsorSegments.map((e) {
         Duration start = Duration(seconds: e.segment[0].floor());
         Duration end = Duration(seconds: e.segment[1].floor());
-        List<int> segment = [];
-        segment.add(start.inMilliseconds);
-        segment.add(end.inMilliseconds);
+        Pair<int> segment = Pair(start.inMilliseconds, end.inMilliseconds);
         return segment;
       }).toList());
 

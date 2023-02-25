@@ -20,7 +20,7 @@ steps:
       - flutter doctor
       - flutter pub get
       - flutter pub run flutter_native_splash:create
-      - flutter build apk --split-per-abi --build-number ${DRONE_BUILD_NUMBER} --build-name "${DRONE_TAG:=0.0.0}"
+      - flutter build apk --split-per-abi
   - name: git hub release
     environment:
       KEYCHAIN_PASS:
@@ -40,7 +40,7 @@ steps:
       - source /Users/gz/.zshrc
       - flutter doctor
       - security unlock-keychain -p $${KEYCHAIN_PASS} /Users/gz/Library/Keychains/login.keychain-db
-      - flutter build appbundle --build-number ${DRONE_BUILD_NUMBER} --build-name "${DRONE_TAG:=0.0.0}"
+      - flutter build appbundle
       - cd android
       - fastlane deploy
     when:

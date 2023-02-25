@@ -1,3 +1,4 @@
+import 'package:fbroadcast/fbroadcast.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -15,6 +16,7 @@ class VideoListItem extends StatelessWidget {
   const VideoListItem({super.key, required this.video});
 
   openVideo(BuildContext context) {
+    FBroadcast.instance().broadcast(BROAD_CAST_STOP_PLAYING);
     Navigator.push(context, MaterialPageRoute(builder: (context) => VideoView(videoId: video.videoId)));
   }
 

@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:fbroadcast/fbroadcast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:invidious/globals.dart';
 import 'package:invidious/models/video.dart';
 import 'package:invidious/views/channel.dart';
 import 'package:invidious/views/components/subscribeButton.dart';
@@ -15,6 +17,7 @@ class VideoInfo extends StatelessWidget {
   VideoInfo({super.key, required this.video});
 
   openChannel(BuildContext context) {
+    FBroadcast.instance().broadcast(BROAD_CAST_STOP_PLAYING);
     Navigator.push(context, MaterialPageRoute(builder: (context) => ChannelView(channelId: video.authorId)));
   }
 

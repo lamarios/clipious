@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:after_layout/after_layout.dart';
 import 'package:better_player/better_player.dart';
+import 'package:fbroadcast/fbroadcast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/models/errors/invidiousServiceError.dart';
@@ -205,6 +206,7 @@ class _PlaylistViewState extends State<PlaylistView> with AfterLayoutMixin<Playl
   }
 
   openVideo(BuildContext context, String videoId) {
+    FBroadcast.instance().broadcast(BROAD_CAST_STOP_PLAYING);
     Navigator.push(
         context,
         MaterialPageRoute(

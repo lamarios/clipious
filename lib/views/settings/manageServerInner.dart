@@ -28,6 +28,7 @@ class _ManagerServersViewState extends State<ManagerServersView> with AfterLayou
   late List<Server> dbServers;
   TextEditingController addServerController = TextEditingController(text: 'https://');
   List<Server> publicServers = [];
+  double publicServerProgress = 0;
   final log = Logger('ManagerServerView');
 
   bool pinging = true;
@@ -60,14 +61,14 @@ class _ManagerServersViewState extends State<ManagerServersView> with AfterLayou
 
     Server? server = db.getServer(serverUrl);
 
-    if(server != null) {
+    if (server != null) {
       server.authToken = Uri.decodeComponent(token ?? '');
 
       db.upsertServer(server);
 
       refreshServers();
       FBroadcast.instance().broadcast(BROADCAST_SERVER_CHANGED);
-    }else{
+    } else {
       throw InvidiousServiceError('logging in to deleted server');
     }
   }
@@ -329,11 +330,12 @@ class _ManagerServersViewState extends State<ManagerServersView> with AfterLayou
                         ? [
                             SettingsTile(
                               title: Text(locals.loadingPublicServer),
-                              leading: const SizedBox(
+                              leading: SizedBox(
                                   height: 15,
                                   width: 15,
                                   child: CircularProgressIndicator(
                                     strokeWidth: 2,
+                                    value: publicServerProgress > 0 ? publicServerProgress : null,
                                   )),
                             )
                           ]
@@ -384,9 +386,15 @@ class _ManagerServersViewState extends State<ManagerServersView> with AfterLayou
 
         return s;
       }).toList();
-
+      int progress = 0;
       List<Server> pingedServers = await Future.wait(servers.map((e) async {
         e.ping = await service.pingServer(e.url).timeout(const Duration(seconds: pingTimeout), onTimeout: () => const Duration(seconds: pingTimeout));
+        progress++;
+        if (context.mounted) {
+          setState(() {
+            publicServerProgress = progress / servers.length;
+          });
+        }
         return e;
       }));
 

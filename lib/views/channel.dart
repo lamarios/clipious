@@ -1,5 +1,6 @@
 // import 'package:video_player/video_player.dart';
 import 'dart:async';
+import 'dart:math';
 
 import 'package:after_layout/after_layout.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +16,8 @@ import 'package:logging/logging.dart';
 import '../models/channel.dart';
 import '../utils.dart';
 import 'components/subscribeButton.dart';
+
+double minBarHeight = AppBar().preferredSize.height;
 
 class ChannelView extends StatefulWidget {
   final String channelId;
@@ -32,6 +35,8 @@ class ChannelViewState extends State<ChannelView> with AfterLayoutMixin<ChannelV
   Channel? channel;
   bool loading = true;
   bool smallHeader = false;
+  double barHeight = 200;
+  double barOpacity = 1;
 
   Animation<Color?>? animation;
   late AnimationController controller;
@@ -61,17 +66,13 @@ class ChannelViewState extends State<ChannelView> with AfterLayoutMixin<ChannelV
   }
 
   bool onBodyScroll(ScrollNotification notification) {
-    if (notification.metrics.pixels > 0 && !smallHeader) {
-      setState(() {
-        smallHeader = true;
-        controller.forward();
-      });
-    } else if (notification.metrics.pixels == 0 && smallHeader) {
-      setState(() {
-        smallHeader = false;
-        controller.reverse();
-      });
-    }
+    double height = 200 - min(notification.metrics.pixels, 200);
+    double opacity = min(1, height / 200);
+    height = max(minBarHeight, height);
+    setState(() {
+      barOpacity = opacity;
+      barHeight = height;
+    });
     return true;
   }
 
@@ -79,13 +80,32 @@ class ChannelViewState extends State<ChannelView> with AfterLayoutMixin<ChannelV
   Widget build(BuildContext context) {
     ColorScheme colorScheme = Theme.of(context).colorScheme;
     var locals = AppLocalizations.of(context)!;
+    // double? headerHeight = smallHeader ? null : 250;
+    var barItemOpacity = 1 - barOpacity;
+    Color barItemColors = (Theme.of(context).brightness == Brightness.dark ? Colors.white : Colors.black).withOpacity(barItemOpacity);
 
     var appbar = AppBar(
       backgroundColor: animation?.value ?? colorScheme.background.withOpacity(0.4),
       elevation: 0,
+      flexibleSpace: Opacity(
+        opacity: barOpacity,
+        child: channel != null
+            ? Thumbnail(
+                width: double.infinity,
+                height: 250,
+                thumbnailUrl: ImageObject.getBestThumbnail(channel!.authorThumbnails)?.url ?? '',
+                id: 'channel-banner/${widget.channelId}',
+                decoration: BoxDecoration(
+                  color: colorScheme.secondaryContainer,
+                ))
+            : null,
+      ),
       scrolledUnderElevation: 0,
+      toolbarHeight: barHeight,
+      iconTheme: IconThemeData(color: barItemColors),
       title: Text(
         channel?.author ?? '',
+        style: TextStyle(color: barItemColors),
       ),
       actions: loading
           ? []
@@ -95,16 +115,15 @@ class ChannelViewState extends State<ChannelView> with AfterLayoutMixin<ChannelV
                 child: IconButton(
                   onPressed: () => showSharingSheet(context, channel!),
                   icon: const Icon(Icons.share),
-                  color: colorScheme.secondary,
+                  color: colorScheme.secondary.withOpacity(barItemOpacity),
                 ),
               ),
             ],
     );
 
-    double headerHeight = smallHeader ? appbar.preferredSize.height + MediaQuery.of(context).viewPadding.top : 250;
 
     return Scaffold(
-      extendBodyBehindAppBar: true,
+      extendBodyBehindAppBar: false,
       appBar: appbar,
       backgroundColor: colorScheme.background,
       bottomNavigationBar: loading
@@ -137,14 +156,6 @@ class ChannelViewState extends State<ChannelView> with AfterLayoutMixin<ChannelV
                   : Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Thumbnail(
-                            width: double.infinity,
-                            height: headerHeight,
-                            thumbnailUrl: ImageObject.getBestThumbnail(channel!.authorThumbnails)?.url ?? '',
-                            id: 'channel-banner/${widget.channelId}',
-                            decoration: BoxDecoration(
-                              color: colorScheme.secondaryContainer,
-                            )),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Row(
