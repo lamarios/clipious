@@ -12,6 +12,13 @@ Android client application for [invidious](https://invidious.io), the privacy fo
 - background playback
 - Live stream support
 
+## Installation
+The best way to install is to get it directly from the release page. Using [Obtainium](https://github.com/ImranR98/Obtainium) can help keeping the app up to date.
+
+It is also available on the Google Play Store:
+
+[![Clipious on the Google Play Store](./assets/google_play_small.png)](https://play.google.com/store/apps/details?id=com.github.lamarios.clipious)
+
 ## Screenshots
 ### Phone
 [![Video list](./screenshots/video-list_small.png)](./screenshots/video-list.png)
