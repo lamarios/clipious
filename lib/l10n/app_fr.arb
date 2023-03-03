@@ -1,1 +1,46 @@
-{}
+{
+  "subscriptions": "Abonnements",
+  "@subscriptions": {
+    "description": "User subscriptions"
+  },
+  "playlists": "Listes de lecture",
+  "@playlists": {
+    "description": "User playlists"
+  },
+  "popular": "Populaires",
+  "@popular": {
+    "description": "Popular videos title"
+  },
+  "trending": "Tendances",
+  "@trending": {
+    "description": "Trending videos title"
+  },
+  "noVideoInPlayList": "Aucune vidéo dans la liste de lecture",
+  "@noVideoInPlayList": {
+    "description": "When no videos in the playlist"
+  },
+  "removeFromPlayList": "Retirer de la liste de lecture",
+  "@removeFromPlayList": {
+    "description": "Menu item description to show remove a video from a playlist"
+  },
+  "deletePlayListQ": "Supprimer la liste de lecture ?",
+  "@deletePlayListQ": {
+    "description": "Ask user to delete a playlist"
+  },
+  "irreversibleAction": "Cette action est irréversible",
+  "@irreversibleAction": {
+    "description": "Tell the user that the action cannot be undone"
+  },
+  "addPlayList": "Ajouter une liste de lecture",
+  "@addPlayList": {
+    "description": "Title for add playlist dialog"
+  },
+  "logIn": "Se connecter",
+  "@logIn": {
+    "description": "CTA to log in to server"
+  },
+  "about": "À propos",
+  "@about": {
+    "description": "About"
+  }
+}
