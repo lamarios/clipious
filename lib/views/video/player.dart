@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:collection';
 
 import 'package:after_layout/after_layout.dart';
 import 'package:better_player/better_player.dart';
@@ -136,7 +135,6 @@ class _VideoPlayerState extends State<VideoPlayer> with AfterLayoutMixin<VideoPl
         ));
     videoController = BetterPlayerController(BetterPlayerConfiguration(handleLifecycle: false, startAt: startAt, autoPlay: true, allowedScreenSleep: false, fit: BoxFit.contain),
         betterPlayerDataSource: betterPlayerDataSource);
-
     videoController!.addEventsListener(onVideoListener);
     videoController!.isPictureInPictureSupported().then((supported) {
       if (supported) {
