@@ -17,6 +17,10 @@ class AdaptiveFormat {
   String? encoding;
   String? qualityLabel;
   String? resolution;
+  String? audioQuality;
+  int? audioSampleRate;
+  int? audioChannels;
+
 
   AdaptiveFormat(this.index, this.bitrate, this.init, this.url, this.itag, this.type, this.clen, this.lmt, this.projectionType, this.container, this.encoding, this.qualityLabel, this.resolution);
 

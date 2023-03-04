@@ -21,7 +21,10 @@ AdaptiveFormat _$AdaptiveFormatFromJson(Map<String, dynamic> json) =>
       json['encoding'] as String?,
       json['qualityLabel'] as String?,
       json['resolution'] as String?,
-    );
+    )
+      ..audioQuality = json['audioQuality'] as String?
+      ..audioSampleRate = json['audioSampleRate'] as int?
+      ..audioChannels = json['audioChannels'] as int?;
 
 Map<String, dynamic> _$AdaptiveFormatToJson(AdaptiveFormat instance) =>
     <String, dynamic>{
@@ -38,4 +41,7 @@ Map<String, dynamic> _$AdaptiveFormatToJson(AdaptiveFormat instance) =>
       'encoding': instance.encoding,
       'qualityLabel': instance.qualityLabel,
       'resolution': instance.resolution,
+      'audioQuality': instance.audioQuality,
+      'audioSampleRate': instance.audioSampleRate,
+      'audioChannels': instance.audioChannels,
     };

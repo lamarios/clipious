@@ -377,6 +377,22 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_vlc_player:
+    dependency: "direct main"
+    description:
+      name: flutter_vlc_player
+      sha256: "0fbe714db09646617e46610195f5d81086d41d065a6301f2bb728a07f09f96b9"
+      url: "https://pub.dev"
+    source: hosted
+    version: "7.2.0"
+  flutter_vlc_player_platform_interface:
+    dependency: transitive
+    description:
+      name: flutter_vlc_player_platform_interface
+      sha256: "8562d5c31213a44cc5e009cb6776a030e0a0c8cbfb825da4fdf27b730170563c"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.2"
   flutter_web_auth:
     dependency: "direct main"
     description:
@@ -406,6 +422,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.2.0"
+  fullscreen:
+    dependency: "direct main"
+    description:
+      name: fullscreen
+      sha256: "9df25847616f16e5b84a95dbe1dbb36b8fad789934bedfa2be521fbdb48c4a1e"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.3"
   fwfh_text_style:
     dependency: transitive
     description:

@@ -67,7 +67,7 @@ android {
 
     defaultConfig {
         applicationId "com.github.lamarios.clipious"
-        minSdkVersion 16
+        minSdkVersion 20
         targetSdkVersion 31
         versionCode buildNumber
         versionName flutterVersionName
@@ -81,9 +81,19 @@ android {
             storePassword keystoreProperties['storePassword']
         }
     }
+    packagingOptions {
+        // Fixes duplicate libraries build issue,
+        // when your project uses more than one plugin that depend on C++ libs.
+        pickFirst 'lib/**/libc++_shared.so'
+    }
     buildTypes {
         release {
             signingConfig signingConfigs.release
+            minifyEnabled true
+//            useProguard true
+            proguardFiles getDefaultProguardFile(
+                    'proguard-android-optimize.txt'),
+                    'proguard-rules.pro'
         }
     }
 }

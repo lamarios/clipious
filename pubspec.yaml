@@ -44,7 +44,8 @@ dependencies:
     git:
       url: https://github.com/lamarios/betterplayer.git
       ref: master
-
+  flutter_vlc_player: ^7.2.0
+  fullscreen: ^1.0.3
   intl: any
   settings_ui: 2.0.2
   objectbox: 1.7.2
