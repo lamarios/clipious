@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:after_layout/after_layout.dart';
-import 'package:better_player/better_player.dart';
 import 'package:fbroadcast/fbroadcast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -15,6 +14,7 @@ import 'package:invidious/views/video/player.dart';
 import 'package:logging/logging.dart';
 
 import '../globals.dart';
+import '../models/playerEvent.dart';
 import '../models/playlist.dart';
 import '../models/video.dart';
 
@@ -51,15 +51,15 @@ class _PlaylistViewState extends State<PlaylistView> with AfterLayoutMixin<Playl
     super.dispose();
   }
 
-  videoListener(BetterPlayerEvent event) {
-    if (event.betterPlayerEventType == BetterPlayerEventType.progress) {
-      var progress = (event.parameters?['progress'] as Duration).inSeconds / (currentlyPlaying?.lengthSeconds ?? 1);
+  videoListener(PlayerEvent event) {
+    if (event.type == PlayerEventType.progress) {
+      var progress = event.progress.inSeconds / (currentlyPlaying?.lengthSeconds ?? 1);
       setState(() {
         this.progress = progress;
       });
     }
 
-    if (event.betterPlayerEventType == BetterPlayerEventType.finished) {
+    if (event.finished) {
       playNextVideo();
     }
   }

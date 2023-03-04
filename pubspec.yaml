@@ -35,12 +35,13 @@ dependencies:
   json_annotation: 4.8.0
   http: 0.13.5
   after_layout: 1.2.0
-  #  video_player: 2.5.1
   easy_debounce: 2.0.3
   flutter_fadein: 2.0.0
   dynamic_color: 1.6.2
-  #  chewie: 1.4.0
-  better_player: 0.0.83
+  video_player: 2.5.3
+  flick_video_player: ^0.5.0
+  chewie: 1.4.0
+#  better_player: 0.0.83
   intl: any
   settings_ui: 2.0.2
   objectbox: 1.7.2

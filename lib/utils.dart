@@ -7,6 +7,7 @@ import 'package:invidious/models/interfaces/sharelink.dart';
 import 'package:share_plus/share_plus.dart';
 
 import 'models/country.dart';
+import 'views/components/modalOptions.dart';
 
 const PHONE_MAX = 600;
 const TABLET_PORTRAIT_MAX = 900;
@@ -146,4 +147,15 @@ okCancelDialog(BuildContext context, String title, String message, Function() on
 
 Country getCountryFromCode(String code) {
   return countryCodes.firstWhere((element) => element.code == code, orElse: () => Country('US', 'United States of America'));
+}
+
+showModalSheet(BuildContext context, List<ModalOption> options){
+  showModalBottomSheet<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          children: options,
+        );
+      });
 }

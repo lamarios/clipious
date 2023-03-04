@@ -334,5 +334,13 @@
         "format": "compact"
       }
     }
+  },
+  "qualityAuto": "Auto",
+    "@qualityAuto": {
+      "description": "Label for Auto stream quality"
+    },
+  "quality": "Quality",
+  "@quality": {
+    "description": "Title for button to change video quality"
   }
 }
