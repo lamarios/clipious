@@ -1,1 +1,338 @@
-{}
+{
+  "useThisServer": "使用此伺服器",
+  "@useThisServer": {
+    "description": "Use this server label"
+  },
+  "playlists": "播放列表",
+  "@playlists": {
+    "description": "User playlists"
+  },
+  "popular": "热门",
+  "@popular": {
+    "description": "Popular videos title"
+  },
+  "noVideoInPlayList": "无视频在播放列表中",
+  "@noVideoInPlayList": {
+    "description": "When no videos in the playlist"
+  },
+  "deletePlayListQ": "确定删除播放列表?",
+  "@deletePlayListQ": {
+    "description": "Ask user to delete a playlist"
+  },
+  "irreversibleAction": "该操作是无法倒置的，请慎重选择",
+  "@irreversibleAction": {
+    "description": "Tell the user that the action cannot be undone"
+  },
+  "addPlayList": "添加播放列表",
+  "@addPlayList": {
+    "description": "Title for add playlist dialog"
+  },
+  "playListName": "播放列表名称",
+  "@playListName": {
+    "description": "Place holder for new playlist name text field"
+  },
+  "playlistVisibility": "播放列表隐私设置",
+  "@playlistVisibility": {
+    "description": "Dropdown label for playlist visibility"
+  },
+  "publicPlaylist": "公开",
+  "@publicPlaylist": {
+    "description": "Public playlist"
+  },
+  "privatePlaylist": "私享",
+  "@privatePlaylist": {
+    "description": "Private playlist"
+  },
+  "cancel": "取消",
+  "@cancel": {
+    "description": "Cancel button label"
+  },
+  "add": "添加",
+  "@add": {
+    "description": "Add button abel"
+  },
+  "unlistedPlaylist": "不公开的播放列表",
+  "@unlistedPlaylist": {
+    "description": "Unlisted playlist"
+  },
+  "streams": "直播",
+  "@streams": {
+    "description": "Streams label"
+  },
+  "latestVideos": "频道最新视频",
+  "@latestVideos": {
+    "description": "Latest channel videos"
+  },
+  "subscribed": "已订阅",
+  "@subscribed": {
+    "description": "When the user is subscribed to a channel"
+  },
+  "subscribe": "订阅",
+  "@subscribe": {
+    "description": "Label for user to subscribe to a channel"
+  },
+  "nSubscribers": "{count, select, no{没有订阅者} other{{count}位订阅者}}",
+  "@nSubscribers": {
+    "description": "number of subscribers",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "shareYoutubeLink": "分享YouTube链接",
+  "@shareYoutubeLink": {
+    "description": "asking user to share youtube link"
+  },
+  "shareInvidiousLink": "分享Invidious链接",
+  "@shareInvidiousLink": {
+    "description": "asking user to share invidious link"
+  },
+  "ok": "好的",
+  "@ok": {
+    "description": "Ok"
+  },
+  "noChannels": "无频道",
+  "@noChannels": {
+    "description": "when there are no channels to display"
+  },
+  "channels": "频道",
+  "@channels": {
+    "description": "Channels label"
+  },
+  "couldntLoadVideo": "无法加载视频",
+  "@couldntLoadVideo": {
+    "description": "Message to display when a video can't be loaded"
+  },
+  "comments": "留言",
+  "@comments": {
+    "description": "Comments label"
+  },
+  "recommended": "推荐",
+  "@recommended": {
+    "description": "Recommended label"
+  },
+  "couldntFetchVideos": "无法获取视频。点击重试.",
+  "@couldntFetchVideos": {
+    "description": "Can't load bunch of videos, asking  user to try again"
+  },
+  "wizardIntro": "选择公共服务器或添加您自己的服务器。 （稍后可以在设置中更改。）",
+  "@wizardIntro": {
+    "description": "Welcome message on frst time use"
+  },
+  "startUsingClipious": "开始使用Clipious",
+  "@startUsingClipious": {
+    "description": "button label to start using the app"
+  },
+  "selectPlaylist": "选择播放列表",
+  "@selectPlaylist": {
+    "description": "Title when users wants to add a video to a playlist"
+  },
+  "createNewPlaylist": "新建播放列表",
+  "@createNewPlaylist": {
+    "description": "Button label to create a new playlist when the user wants to add a video to a playlist"
+  },
+  "nReplies": "{count, plural, =0{无回复} =1{1条回复} other{{count}条回复}}",
+  "@nReplies": {
+    "description": "number of replies to a comment",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "loadMore": "加载更多",
+  "@loadMore": {
+    "description": "CTA to load more"
+  },
+  "topSorting": "置顶",
+  "@topSorting": {
+    "description": "Content sorting: top"
+  },
+  "newSorting": "最新",
+  "@newSorting": {
+    "description": "Content sorting: new"
+  },
+  "streamIsLive": "Live直播",
+  "@streamIsLive": {
+    "description": "Label when a video is a live stream"
+  },
+  "subscriptions": "订阅内容",
+  "@subscriptions": {
+    "description": "User subscriptions"
+  },
+  "removeFromPlayList": "从播放列表中移除",
+  "@removeFromPlayList": {
+    "description": "Menu item description to show remove a video from a playlist"
+  },
+  "sponsorSkipped": "跳过赞助商",
+  "@sponsorSkipped": {
+    "description": "When a sponsor segment is skipped thanks to sponsor block"
+  },
+  "selectBrowsingCountry": "选择浏览国家",
+  "@selectBrowsingCountry": {
+    "description": "Select country for trending content"
+  },
+  "showOnStart": "选择应用程序启动时显示的内容",
+  "@showOnStart": {
+    "description": "Title of dialog asking which screen the users prefers to see"
+  },
+  "settings": "设置",
+  "@settings": {
+    "description": "Settings title"
+  },
+  "browsing": "浏览",
+  "@browsing": {
+    "description": "video browsing preferences"
+  },
+  "country": "国家",
+  "@country": {
+    "description": "Country label"
+  },
+  "whenAppStartsShow": "应用程序启动时，显示…",
+  "@whenAppStartsShow": {
+    "description": "Setting title for selecting the screen to show on start"
+  },
+  "servers": "伺服器",
+  "@servers": {
+    "description": "Server management settings category"
+  },
+  "manageServers": "管理伺服器",
+  "@manageServers": {
+    "description": "Settings to manage servers"
+  },
+  "currentServer": "正在使用 {current}",
+  "@currentServer": {
+    "description": "Which server the user is currently using",
+    "placeholders": {
+      "current": {
+        "type": "String"
+      }
+    }
+  },
+  "useSponsorBlock": "使用 SponsorBlock",
+  "@useSponsorBlock": {
+    "description": "label for sponsorblock checkbox"
+  },
+  "sponsorBlockDescription": "跳过公众提交的赞助商部分",
+  "@sponsorBlockDescription": {
+    "description": "Sponsorblock setting description"
+  },
+  "about": "关于",
+  "@about": {
+    "description": "About"
+  },
+  "name": "名称",
+  "@name": {
+    "description": "NAme label"
+  },
+  "package": "应用程序包",
+  "@package": {
+    "description": "package label"
+  },
+  "version": "版本",
+  "@version": {
+    "description": "version label"
+  },
+  "build": "Build",
+  "@build": {
+    "description": "build label"
+  },
+  "addServer": "添加伺服器",
+  "@addServer": {
+    "description": "Add server label"
+  },
+  "logIn": "登入",
+  "@logIn": {
+    "description": "CTA to log in to server"
+  },
+  "delete": "删除",
+  "@delete": {
+    "description": "Delete label"
+  },
+  "invalidInvidiousServer": "无效的Invidious伺服器",
+  "@invalidInvidiousServer": {
+    "description": "Error when the user tries to add a server that is not a proper or reachable invidious server"
+  },
+  "yourServers": "您的伺服器",
+  "@yourServers": {
+    "description": "Your servers label"
+  },
+  "loggedIn": "已登入",
+  "@loggedIn": {
+    "description": "Label to tell the user that he is logged in to the server"
+  },
+  "addServerHelpText": "使用 + 按钮添加您自己的服务器或点击公共服务器并添加它。",
+  "@addServerHelpText": {
+    "description": "label for when the user hasn't chosen a server yet"
+  },
+  "loadingPublicServer": "正在加载公共服务器",
+  "@loadingPublicServer": {
+    "description": "Message telling users the app is loading the list of public servers"
+  },
+  "tapToAddServer": "点击以将服务器添加到您的列表",
+  "@tapToAddServer": {
+    "description": "public server description"
+  },
+  "useDynamicTheme": "动态色彩",
+  "@useDynamicTheme": {
+    "description": ""
+  },
+  "useDynamicThemeDescription": "使用 Material You 颜色（仅适用于 Android 12+）。需要重启应用",
+  "@useDynamicThemeDescription": {
+    "description": ""
+  },
+  "error": "错误",
+  "@error": {},
+  "nVideos": "{count, plural, =0{无视频} =1{1部视频} other{{count}部视频}}",
+  "@nVideos": {
+    "description": "One or more videos",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "trending": "时下流行",
+  "@trending": {
+    "description": "Trending videos title"
+  },
+  "info": "信息",
+  "@info": {
+    "description": "Info label"
+  },
+  "videos": "视频",
+  "@videos": {
+    "description": "Videos label"
+  },
+  "noPlaylists": "无播放列表",
+  "@noPlaylists": {
+    "description": "when there are no playlists to display"
+  },
+  "videoAddedToPlaylist": "视频成功添加到播放列表",
+  "@videoAddedToPlaylist": {
+    "description": "Pop up message when a video was added to a playlist"
+  },
+  "errorAddingVideoToPlaylist": "将视频添加到播放列表时出错",
+  "@errorAddingVideoToPlaylist": {
+    "description": "Error while adding video to playlist"
+  },
+  "appearance": "外观",
+  "@appearance": {
+    "description": "Settings category title"
+  },
+  "notLoggedIn": "未登录。点击以登录。",
+  "@notLoggedIn": {
+    "description": "Label when the user is not logged in to the server"
+  },
+  "publicServersError": "无法获取公共服务器列表。点击重试。",
+  "@publicServersError": {
+    "description": "Error message when trying to get public servers but it failed"
+  },
+  "publicServers": "公共服务器",
+  "@publicServers": {
+    "description": "Public servers label"
+  }
+}
