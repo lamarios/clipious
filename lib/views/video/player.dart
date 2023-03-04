@@ -122,10 +122,17 @@ class _VideoPlayerState extends State<VideoPlayer> with AfterLayoutMixin<VideoPl
 
     String baseUrl = db.getCurrentlySelectedServer().url;
 
-    BetterPlayerDataSource betterPlayerDataSource = BetterPlayerDataSource(BetterPlayerDataSourceType.network, widget.video.hlsUrl ?? widget.video.dashUrl,
-        videoFormat: widget.video.hlsUrl != null ? BetterPlayerVideoFormat.hls : BetterPlayerVideoFormat.dash,
+    Map<String, String> resolutions = {};
+
+    for (var value in widget.video.formatStreams) {
+      resolutions[value.qualityLabel] = value.url;
+    }
+
+    BetterPlayerDataSource betterPlayerDataSource = BetterPlayerDataSource(BetterPlayerDataSourceType.network, widget.video.hlsUrl ?? widget.video.formatStreams[widget.video.formatStreams.length-1].url,
+        videoFormat: widget.video.hlsUrl != null ? BetterPlayerVideoFormat.hls : BetterPlayerVideoFormat.other,
         liveStream: widget.video.liveNow,
         subtitles: widget.video.captions.map((s) => BetterPlayerSubtitlesSource(type: BetterPlayerSubtitlesSourceType.network, urls: ['${baseUrl}${s.url}'], name: s.label)).toList(),
+        resolutions: resolutions,
         notificationConfiguration: BetterPlayerNotificationConfiguration(
           showNotification: true,
           activityName: 'MainActivity',
