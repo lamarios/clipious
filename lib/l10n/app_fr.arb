@@ -1,1 +1,338 @@
-{}
+{
+  "subscriptions": "Abonnements",
+  "@subscriptions": {
+    "description": "User subscriptions"
+  },
+  "playlists": "Listes de lecture",
+  "@playlists": {
+    "description": "User playlists"
+  },
+  "popular": "Populaires",
+  "@popular": {
+    "description": "Popular videos title"
+  },
+  "trending": "Tendances",
+  "@trending": {
+    "description": "Trending videos title"
+  },
+  "noVideoInPlayList": "Aucune vidéo dans la liste de lecture",
+  "@noVideoInPlayList": {
+    "description": "When no videos in the playlist"
+  },
+  "removeFromPlayList": "Retirer de la liste de lecture",
+  "@removeFromPlayList": {
+    "description": "Menu item description to show remove a video from a playlist"
+  },
+  "deletePlayListQ": "Supprimer la liste de lecture ?",
+  "@deletePlayListQ": {
+    "description": "Ask user to delete a playlist"
+  },
+  "irreversibleAction": "Cette action est irréversible",
+  "@irreversibleAction": {
+    "description": "Tell the user that the action cannot be undone"
+  },
+  "addPlayList": "Ajouter une liste de lecture",
+  "@addPlayList": {
+    "description": "Title for add playlist dialog"
+  },
+  "logIn": "Se connecter",
+  "@logIn": {
+    "description": "CTA to log in to server"
+  },
+  "about": "À propos",
+  "@about": {
+    "description": "About"
+  },
+  "playListName": "Nom de la liste de lecture",
+  "@playListName": {
+    "description": "Place holder for new playlist name text field"
+  },
+  "publicPlaylist": "Publique",
+  "@publicPlaylist": {
+    "description": "Public playlist"
+  },
+  "privatePlaylist": "Privée",
+  "@privatePlaylist": {
+    "description": "Private playlist"
+  },
+  "cancel": "Annuler",
+  "@cancel": {
+    "description": "Cancel button label"
+  },
+  "unlistedPlaylist": "Non listée",
+  "@unlistedPlaylist": {
+    "description": "Unlisted playlist"
+  },
+  "info": "Infos",
+  "@info": {
+    "description": "Info label"
+  },
+  "streams": "Diffusions en flux",
+  "@streams": {
+    "description": "Streams label"
+  },
+  "latestVideos": "Dernières vidéos",
+  "@latestVideos": {
+    "description": "Latest channel videos"
+  },
+  "subscribed": "Abonné·e",
+  "@subscribed": {
+    "description": "When the user is subscribed to a channel"
+  },
+  "subscribe": "S’abonner",
+  "@subscribe": {
+    "description": "Label for user to subscribe to a channel"
+  },
+  "nSubscribers": "{count, select, no{Aucun abonné} other{{count} abonnés}}",
+  "@nSubscribers": {
+    "description": "number of subscribers",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "shareYoutubeLink": "Partager le lien YouTube",
+  "@shareYoutubeLink": {
+    "description": "asking user to share youtube link"
+  },
+  "shareInvidiousLink": "Partager le lien Invidious",
+  "@shareInvidiousLink": {
+    "description": "asking user to share invidious link"
+  },
+  "ok": "D’accord",
+  "@ok": {
+    "description": "Ok"
+  },
+  "noChannels": "Aucune chaîne",
+  "@noChannels": {
+    "description": "when there are no channels to display"
+  },
+  "noPlaylists": "Aucune liste de lecture",
+  "@noPlaylists": {
+    "description": "when there are no playlists to display"
+  },
+  "couldntLoadVideo": "Impossible de charger la vidéo",
+  "@couldntLoadVideo": {
+    "description": "Message to display when a video can't be loaded"
+  },
+  "comments": "Commentaires",
+  "@comments": {
+    "description": "Comments label"
+  },
+  "recommended": "Recommandé",
+  "@recommended": {
+    "description": "Recommended label"
+  },
+  "couldntFetchVideos": "Impossible de récupérer les vidéos. Appuyez pour réessayer.",
+  "@couldntFetchVideos": {
+    "description": "Can't load bunch of videos, asking  user to try again"
+  },
+  "startUsingClipious": "Commencez à utiliser Clipious",
+  "@startUsingClipious": {
+    "description": "button label to start using the app"
+  },
+  "videoAddedToPlaylist": "Vidéo ajoutée à la liste de lecture",
+  "@videoAddedToPlaylist": {
+    "description": "Pop up message when a video was added to a playlist"
+  },
+  "errorAddingVideoToPlaylist": "Erreur lors de l’ajout de la vidéo à la liste de lecture",
+  "@errorAddingVideoToPlaylist": {
+    "description": "Error while adding video to playlist"
+  },
+  "selectPlaylist": "Sélectionner la liste de lecture",
+  "@selectPlaylist": {
+    "description": "Title when users wants to add a video to a playlist"
+  },
+  "createNewPlaylist": "Créer une nouvelle liste de lecture",
+  "@createNewPlaylist": {
+    "description": "Button label to create a new playlist when the user wants to add a video to a playlist"
+  },
+  "loadMore": "Charger plus",
+  "@loadMore": {
+    "description": "CTA to load more"
+  },
+  "newSorting": "Nouveau",
+  "@newSorting": {
+    "description": "Content sorting: new"
+  },
+  "streamIsLive": "En direct",
+  "@streamIsLive": {
+    "description": "Label when a video is a live stream"
+  },
+  "sponsorSkipped": "Sponsor ignoré",
+  "@sponsorSkipped": {
+    "description": "When a sponsor segment is skipped thanks to sponsor block"
+  },
+  "selectBrowsingCountry": "Sélectionner le pays de navigation",
+  "@selectBrowsingCountry": {
+    "description": "Select country for trending content"
+  },
+  "settings": "Paramètres",
+  "@settings": {
+    "description": "Settings title"
+  },
+  "browsing": "Navigation",
+  "@browsing": {
+    "description": "video browsing preferences"
+  },
+  "country": "Pays",
+  "@country": {
+    "description": "Country label"
+  },
+  "whenAppStartsShow": "Quand l’application démarre, afficher…",
+  "@whenAppStartsShow": {
+    "description": "Setting title for selecting the screen to show on start"
+  },
+  "servers": "Serveurs",
+  "@servers": {
+    "description": "Server management settings category"
+  },
+  "manageServers": "Gérer les serveurs",
+  "@manageServers": {
+    "description": "Settings to manage servers"
+  },
+  "currentServer": "Utilisation actuelle de {current}",
+  "@currentServer": {
+    "description": "Which server the user is currently using",
+    "placeholders": {
+      "current": {
+        "type": "String"
+      }
+    }
+  },
+  "useSponsorBlock": "Utiliser SponsorBlock",
+  "@useSponsorBlock": {
+    "description": "label for sponsorblock checkbox"
+  },
+  "sponsorBlockDescription": "Sauter les segments des sponsors soumis par la communauté",
+  "@sponsorBlockDescription": {
+    "description": "Sponsorblock setting description"
+  },
+  "name": "Nom",
+  "@name": {
+    "description": "NAme label"
+  },
+  "package": "Package",
+  "@package": {
+    "description": "package label"
+  },
+  "version": "Version",
+  "@version": {
+    "description": "version label"
+  },
+  "build": "Mouture",
+  "@build": {
+    "description": "build label"
+  },
+  "addServer": "Ajouter un serveur",
+  "@addServer": {
+    "description": "Add server label"
+  },
+  "useThisServer": "Utiliser ce serveur",
+  "@useThisServer": {
+    "description": "Use this server label"
+  },
+  "delete": "Supprimer",
+  "@delete": {
+    "description": "Delete label"
+  },
+  "invalidInvidiousServer": "Serveur Invidious invalide",
+  "@invalidInvidiousServer": {
+    "description": "Error when the user tries to add a server that is not a proper or reachable invidious server"
+  },
+  "yourServers": "Vos serveurs",
+  "@yourServers": {
+    "description": "Your servers label"
+  },
+  "loggedIn": "Connecté·e",
+  "@loggedIn": {
+    "description": "Label to tell the user that he is logged in to the server"
+  },
+  "notLoggedIn": "Non connecté·e. Appuyez pour vous connecter.",
+  "@notLoggedIn": {
+    "description": "Label when the user is not logged in to the server"
+  },
+  "addServerHelpText": "Utilisez le bouton + pour ajouter vos propres serveurs ou appuyez sur un serveur public pour l’ajouter.",
+  "@addServerHelpText": {
+    "description": "label for when the user hasn't chosen a server yet"
+  },
+  "publicServers": "Serveurs publics",
+  "@publicServers": {
+    "description": "Public servers label"
+  },
+  "loadingPublicServer": "Chargement des serveurs publics",
+  "@loadingPublicServer": {
+    "description": "Message telling users the app is loading the list of public servers"
+  },
+  "tapToAddServer": "Appuyez pour ajouter un serveur à votre liste",
+  "@tapToAddServer": {
+    "description": "public server description"
+  },
+  "publicServersError": "Impossible de récupérer la liste des serveurs publics. Appuyez pour réessayer.",
+  "@publicServersError": {
+    "description": "Error message when trying to get public servers but it failed"
+  },
+  "appearance": "Apparence",
+  "@appearance": {
+    "description": "Settings category title"
+  },
+  "useDynamicTheme": "Couleurs dynamiques",
+  "@useDynamicTheme": {
+    "description": ""
+  },
+  "useDynamicThemeDescription": "Utilisez les couleurs de Material You (disponible uniquement sur Android 12+). Nécessite un redémarrage de l’application",
+  "@useDynamicThemeDescription": {
+    "description": ""
+  },
+  "error": "Erreur",
+  "@error": {},
+  "nVideos": "{count, plural, =0{Aucune vidéo} =1{1 vidéo} other{{count} vidéos}}",
+  "@nVideos": {
+    "description": "One or more videos",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "add": "Ajouter",
+  "@add": {
+    "description": "Add button abel"
+  },
+  "playlistVisibility": "Visibilité",
+  "@playlistVisibility": {
+    "description": "Dropdown label for playlist visibility"
+  },
+  "videos": "Vidéos",
+  "@videos": {
+    "description": "Videos label"
+  },
+  "showOnStart": "Sélectionnez ce qui doit être affiché au démarrage de l’application",
+  "@showOnStart": {
+    "description": "Title of dialog asking which screen the users prefers to see"
+  },
+  "channels": "Chaînes",
+  "@channels": {
+    "description": "Channels label"
+  },
+  "wizardIntro": "Sélectionnez un serveur public ou ajoutez le vôtre. (Peut être modifié plus tard dans les paramètres.)",
+  "@wizardIntro": {
+    "description": "Welcome message on frst time use"
+  },
+  "nReplies": "{count, plural, =0{Aucune réponse} =1{1 réponse} other{{count} réponses}}",
+  "@nReplies": {
+    "description": "number of replies to a comment",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "topSorting": "Palmarès",
+  "@topSorting": {
+    "description": "Content sorting: top"
+  }
+}

@@ -1,0 +1,201 @@
+{
+  "popular": "Beliebt",
+  "@popular": {
+    "description": "Popular videos title"
+  },
+  "trending": "Trends",
+  "@trending": {
+    "description": "Trending videos title"
+  },
+  "noVideoInPlayList": "Kein Video in der Wiedergabeliste",
+  "@noVideoInPlayList": {
+    "description": "When no videos in the playlist"
+  },
+  "removeFromPlayList": "Aus der Wiedergabeliste entfernen",
+  "@removeFromPlayList": {
+    "description": "Menu item description to show remove a video from a playlist"
+  },
+  "irreversibleAction": "Diese Aktion ist irreversibel",
+  "@irreversibleAction": {
+    "description": "Tell the user that the action cannot be undone"
+  },
+  "addPlayList": "Wiedergabeliste hinzufügen",
+  "@addPlayList": {
+    "description": "Title for add playlist dialog"
+  },
+  "playListName": "Name der Wiedergabeliste",
+  "@playListName": {
+    "description": "Place holder for new playlist name text field"
+  },
+  "playlistVisibility": "Sichtbarkeit",
+  "@playlistVisibility": {
+    "description": "Dropdown label for playlist visibility"
+  },
+  "publicPlaylist": "Öffentlich",
+  "@publicPlaylist": {
+    "description": "Public playlist"
+  },
+  "privatePlaylist": "Privat",
+  "@privatePlaylist": {
+    "description": "Private playlist"
+  },
+  "add": "Ajouter",
+  "@add": {
+    "description": "Add button abel"
+  },
+  "unlistedPlaylist": "Ungelistet",
+  "@unlistedPlaylist": {
+    "description": "Unlisted playlist"
+  },
+  "info": "Infos",
+  "@info": {
+    "description": "Info label"
+  },
+  "videos": "Videos",
+  "@videos": {
+    "description": "Videos label"
+  },
+  "streams": "Streams",
+  "@streams": {
+    "description": "Streams label"
+  },
+  "subscribed": "Abonniert",
+  "@subscribed": {
+    "description": "When the user is subscribed to a channel"
+  },
+  "nSubscribers": "{count, select, no{Keine Abonnenten} other{{count} Abonnenten}}",
+  "@nSubscribers": {
+    "description": "number of subscribers",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "shareYoutubeLink": "YouTube-Link teilen",
+  "@shareYoutubeLink": {
+    "description": "asking user to share youtube link"
+  },
+  "shareInvidiousLink": "Invidious-Link teilen",
+  "@shareInvidiousLink": {
+    "description": "asking user to share invidious link"
+  },
+  "ok": "OK",
+  "@ok": {
+    "description": "Ok"
+  },
+  "noChannels": "Keine Kanäle",
+  "@noChannels": {
+    "description": "when there are no channels to display"
+  },
+  "noPlaylists": "Keine Wiedergabelisten",
+  "@noPlaylists": {
+    "description": "when there are no playlists to display"
+  },
+  "comments": "Kommentare",
+  "@comments": {
+    "description": "Comments label"
+  },
+  "recommended": "Empfohlen",
+  "@recommended": {
+    "description": "Recommended label"
+  },
+  "couldntFetchVideos": "Videos konnten nicht abgerufen werden. Tippen Sie, um es erneut zu versuchen.",
+  "@couldntFetchVideos": {
+    "description": "Can't load bunch of videos, asking  user to try again"
+  },
+  "wizardIntro": "Wählen Sie einen öffentlichen Server oder fügen Sie Ihren eigenen hinzu. (Kann später in den Einstellungen geändert werden.)",
+  "@wizardIntro": {
+    "description": "Welcome message on frst time use"
+  },
+  "startUsingClipious": "Beginnen Sie mit der Verwendung von Clipious",
+  "@startUsingClipious": {
+    "description": "button label to start using the app"
+  },
+  "videoAddedToPlaylist": "Video zur Wiedergabeliste hinzugefügt",
+  "@videoAddedToPlaylist": {
+    "description": "Pop up message when a video was added to a playlist"
+  },
+  "deletePlayListQ": "Wiedergabeliste löschen?",
+  "@deletePlayListQ": {
+    "description": "Ask user to delete a playlist"
+  },
+  "nReplies": "{count, plural, =0{Keine Antworten} =1{1 Antwort} other{{count} Antworten}}",
+  "@nReplies": {
+    "description": "number of replies to a comment",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "playlists": "Wiedergabelisten",
+  "@playlists": {
+    "description": "User playlists"
+  },
+  "subscriptions": "Abonnements",
+  "@subscriptions": {
+    "description": "User subscriptions"
+  },
+  "latestVideos": "Neueste Videos",
+  "@latestVideos": {
+    "description": "Latest channel videos"
+  },
+  "couldntLoadVideo": "Das Video konnte nicht geladen werden",
+  "@couldntLoadVideo": {
+    "description": "Message to display when a video can't be loaded"
+  },
+  "cancel": "Annuler",
+  "@cancel": {
+    "description": "Cancel button label"
+  },
+  "subscribe": "Abonnieren",
+  "@subscribe": {
+    "description": "Label for user to subscribe to a channel"
+  },
+  "channels": "Kanäle",
+  "@channels": {
+    "description": "Channels label"
+  },
+  "errorAddingVideoToPlaylist": "Fehler beim Hinzufügen eines Videos zur Wiedergabeliste",
+  "@errorAddingVideoToPlaylist": {
+    "description": "Error while adding video to playlist"
+  },
+  "selectPlaylist": "Wiedergabeliste auswählen",
+  "@selectPlaylist": {
+    "description": "Title when users wants to add a video to a playlist"
+  },
+  "createNewPlaylist": "Neue Wiedergabeliste erstellen",
+  "@createNewPlaylist": {
+    "description": "Button label to create a new playlist when the user wants to add a video to a playlist"
+  },
+  "streamIsLive": "Live",
+  "@streamIsLive": {
+    "description": "Label when a video is a live stream"
+  },
+  "settings": "Einstellungen",
+  "@settings": {
+    "description": "Settings title"
+  },
+  "newSorting": "Neu",
+  "@newSorting": {
+    "description": "Content sorting: new"
+  },
+  "showOnStart": "Wählen Sie aus, was beim Starten der Anwendung angezeigt werden soll",
+  "@showOnStart": {
+    "description": "Title of dialog asking which screen the users prefers to see"
+  },
+  "loadMore": "Mehr laden",
+  "@loadMore": {
+    "description": "CTA to load more"
+  },
+  "sponsorSkipped": "Sponsor übersprungen",
+  "@sponsorSkipped": {
+    "description": "When a sponsor segment is skipped thanks to sponsor block"
+  },
+  "selectBrowsingCountry": "Wählen Sie das Land, in dem Sie surfen",
+  "@selectBrowsingCountry": {
+    "description": "Select country for trending content"
+  }
+}
