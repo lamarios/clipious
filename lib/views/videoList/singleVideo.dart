@@ -5,25 +5,76 @@ import 'package:intl/intl.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/models/videoInList.dart';
 import 'package:invidious/views/components/videoThumbnail.dart';
+import 'package:logging/logging.dart';
 
+import '../../main.dart';
 import '../../models/imageObject.dart';
 import '../../utils.dart';
 import '../video.dart';
 
-class VideoListItem extends StatelessWidget {
+class VideoListItem extends StatefulWidget {
   final VideoInList video;
 
   const VideoListItem({super.key, required this.video});
 
+  @override
+  State<VideoListItem> createState() => _VideoListItemState();
+}
+
+class _VideoListItemState extends State<VideoListItem> with RouteAware {
+  final log = Logger('VideoInList');
+  late double progress;
+
   openVideo(BuildContext context) {
     FBroadcast.instance().broadcast(BROAD_CAST_STOP_PLAYING);
-    Navigator.push(context, MaterialPageRoute(builder: (context) => VideoView(videoId: video.videoId)));
+    Navigator.push(context, MaterialPageRoute(builder: (context) => VideoView(videoId: widget.video.videoId)));
+  }
+
+  @override
+  void initState() {
+    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
+      routeObserver.subscribe(this, ModalRoute.of(context)!);
+    });
+    super.initState();
+    progress = db.getVideoProgress(widget.video.videoId);
+  }
+
+  @override
+  void didPopNext() {
+    super.didPopNext();
+    log.info('popnext');
+    try {
+      if (context.mounted) {
+        setState(() {
+          progress = db.getVideoProgress(widget.video.videoId);
+        });
+      }
+    } catch (err) {
+      log.info('oops');
+    }
+  }
+
+  @override
+  void didPop() {
+    super.didPop();
+    log.info('pop');
+  }
+
+  @override
+  void didPush() {
+    super.didPush();
+    log.info('push');
+  }
+
+  @override
+  void didPushNext() {
+    super.didPushNext();
+    log.info('push next');
   }
 
   @override
   Widget build(BuildContext context) {
     ColorScheme colorScheme = Theme.of(context).colorScheme;
-    double progress = db.getVideoProgress(video.videoId);
 
     return InkWell(
       onTap: () => openVideo(context),
@@ -32,8 +83,8 @@ class VideoListItem extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           VideoThumbnailView(
-            videoId: video.videoId,
-            thumbnailUrl: ImageObject.getBestThumbnail(video!.videoThumbnails)?.url ?? '',
+            videoId: widget.video.videoId,
+            thumbnailUrl: ImageObject.getBestThumbnail(widget.video!.videoThumbnails)?.url ?? '',
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
@@ -43,39 +94,37 @@ class VideoListItem extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.end,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Visibility(
-                        visible: progress > 0.1 && progress < 0.90,
+                      Expanded(
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 8),
-                          child: SizedBox(
-                            width: 20,
-                            height: 20,
-                            child: CircularProgressIndicator(
-                              value: progress,
-                              strokeWidth: 3,
-                              color: colorScheme.primaryContainer,
+                          child: AnimatedOpacity(
+                            duration: animationDuration,
+                            opacity: progress > 0.1 ? 1 : 0,
+                            child: Container(
+                              alignment: Alignment.centerLeft,
+                              width: double.infinity,
+                              height: 5,
+                              decoration: BoxDecoration(
+                                color: colorScheme.secondaryContainer,
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: AnimatedFractionallySizedBox(
+                                  widthFactor: progress,
+                                  heightFactor: 1,
+                                  duration: const Duration(milliseconds: 750),
+                                  curve: Curves.easeInOutQuad,
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      color: colorScheme.primary,
+                                      borderRadius: BorderRadius.circular(20),
+                                    ),
+                                  )),
                             ),
                           ),
                         ),
                       ),
                       Visibility(
-                        visible: progress >= 0.90,
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 8),
-                          child: Container(
-                              alignment: Alignment.center,
-                              width: 20,
-                              height: 20,
-                              decoration: BoxDecoration(color: colorScheme.primaryContainer, borderRadius: BorderRadius.circular(30)),
-                              child: Icon(
-                                Icons.check,
-                                color: colorScheme.primary,
-                                size: 15,
-                              )),
-                        ),
-                      ),
-                      Visibility(
-                        visible: video.lengthSeconds > 0,
+                        visible: widget.video.lengthSeconds > 0,
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Container(
@@ -85,7 +134,7 @@ class VideoListItem extends StatelessWidget {
                             child: Padding(
                               padding: const EdgeInsets.all(4.0),
                               child: Text(
-                                prettyDuration(Duration(seconds: video.lengthSeconds)),
+                                prettyDuration(Duration(seconds: widget.video.lengthSeconds)),
                                 style: const TextStyle(color: Colors.white, fontSize: 12),
                               ),
                             ),
@@ -99,7 +148,7 @@ class VideoListItem extends StatelessWidget {
             ),
           ),
           Text(
-            video.title,
+            widget.video.title,
             textAlign: TextAlign.left,
             style: TextStyle(color: colorScheme.primary, fontWeight: FontWeight.normal),
           ),
@@ -107,7 +156,7 @@ class VideoListItem extends StatelessWidget {
             child: Row(
               children: [
                 Text(
-                  video.author ?? '',
+                  widget.video.author ?? '',
                   style: TextStyle(color: colorScheme.secondary),
                 ),
               ],
@@ -115,16 +164,16 @@ class VideoListItem extends StatelessWidget {
           ),
           Row(
             children: [
-              Visibility(visible: (video.viewCount ?? 0) > 0, child: Icon(Icons.visibility)),
+              Visibility(visible: (widget.video.viewCount ?? 0) > 0, child: Icon(Icons.visibility)),
               Visibility(
-                  visible: (video.viewCount ?? 0) > 0,
+                  visible: (widget.video.viewCount ?? 0) > 0,
                   child: Padding(
                     padding: const EdgeInsets.only(left: 5.0),
-                    child: Text(compactCurrency.format(video.viewCount)),
+                    child: Text(compactCurrency.format(widget.video.viewCount)),
                   )),
               Expanded(
                   child: Text(
-                video.publishedText ?? '',
+                widget.video.publishedText ?? '',
                 textAlign: TextAlign.end,
               )),
             ],

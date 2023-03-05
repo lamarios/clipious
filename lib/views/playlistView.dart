@@ -341,9 +341,11 @@ class _PlaylistViewState extends State<PlaylistView> with AfterLayoutMixin<Playl
                                                 child: Container(
                                                   alignment: Alignment.centerLeft,
                                                   color: colorScheme.secondaryContainer.withOpacity(0.5),
-                                                  child: FractionallySizedBox(
+                                                  child: AnimatedFractionallySizedBox(
+                                                    curve: Curves.linear,
                                                     heightFactor: 1,
                                                     widthFactor: progress,
+                                                    duration: const Duration(seconds: 1),
                                                     child: Container(
                                                       color: colorScheme.primary.withOpacity(0.1),
                                                     ),
