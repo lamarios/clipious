@@ -334,5 +334,17 @@
   "trending": "Di tendenza",
   "@trending": {
     "description": "Trending videos title"
+  },
+  "videoPlayer": "Lettore video",
+  "@videoPlayer": {
+    "description": "Title for video player related options"
+  },
+  "useDash": "Usa DASH",
+  "@useDash": {
+    "description": "Label on video options if a user wants to switch to dash urls instead of the regular quality selection"
+  },
+  "useDashDescription": "Lo streaming adattivo DASH a volte può essere problematico, YouTube ne può limitare la velocità.",
+  "@useDashDescription": {
+    "description": "Description for dash in the settings screen"
   }
 }
