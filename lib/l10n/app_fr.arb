@@ -334,5 +334,17 @@
   "topSorting": "Palmarès",
   "@topSorting": {
     "description": "Content sorting: top"
+  },
+  "useDashDescription": "La diffusion en flux adaptative DASH peut parfois être problématique, YouTube peut en limiter la vitesse.",
+  "@useDashDescription": {
+    "description": "Description for dash in the settings screen"
+  },
+  "videoPlayer": "Lecteur vidéo",
+  "@videoPlayer": {
+    "description": "Title for video player related options"
+  },
+  "useDash": "Utiliser DASH",
+  "@useDash": {
+    "description": "Label on video options if a user wants to switch to dash urls instead of the regular quality selection"
   }
 }
