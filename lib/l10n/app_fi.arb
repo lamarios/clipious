@@ -326,5 +326,17 @@
   "manageServers": "Hallitse palvelimia",
   "@manageServers": {
     "description": "Settings to manage servers"
+  },
+  "useDash": "Käytä DASH",
+  "@useDash": {
+    "description": "Label on video options if a user wants to switch to dash urls instead of the regular quality selection"
+  },
+  "useDashDescription": "DASH-adaptiivinen suoratoisto voi joskus olla ongelmallista, YouTube voi rajoittaa sitä.",
+  "@useDashDescription": {
+    "description": "Description for dash in the settings screen"
+  },
+  "videoPlayer": "Videosoitin",
+  "@videoPlayer": {
+    "description": "Title for video player related options"
   }
 }
