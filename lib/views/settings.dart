@@ -41,6 +41,7 @@ class SettingsState extends State<Settings> with AfterLayoutMixin {
   PackageInfo packageInfo = PackageInfo(appName: '', packageName: '', version: '', buildNumber: '');
   int onOpen = int.parse(db.getSettings(ON_OPEN)?.value ?? '0');
   bool useDynamicTheme = db.getSettings(DYNAMIC_THEME)?.value == 'true';
+  bool useDash = db.getSettings(USE_DASH)?.value == 'true';
 
   @override
   initState() {
@@ -111,6 +112,13 @@ class SettingsState extends State<Settings> with AfterLayoutMixin {
     });
   }
 
+  toggleDash(bool value) {
+    db.saveSetting(SettingsValue(USE_DASH, value.toString()));
+    setState(() {
+      useDash = value;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     ColorScheme colorScheme = Theme.of(context).colorScheme;
@@ -151,6 +159,14 @@ class SettingsState extends State<Settings> with AfterLayoutMixin {
                 description: Text(locals.currentServer(db.getCurrentlySelectedServer().url)),
                 onPressed: manageServers,
               ),
+            ]),
+            SettingsSection(title: Text(locals.videoPlayer), tiles: [
+              SettingsTile.switchTile(
+                initialValue: useDash,
+                onToggle: toggleDash,
+                title: Text(locals.useDash),
+                description: Text(locals.useDashDescription),
+              )
             ]),
             SettingsSection(title: const Text('SponsorBlock'), tiles: [
               SettingsTile.switchTile(

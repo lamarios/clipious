@@ -323,6 +323,18 @@
   "@useDynamicThemeDescription": {
     "description": ""
   },
+  "useDash": "Use DASH",
+  "@useDash": {
+    "description": "Label on video options if a user wants to switch to dash urls instead of the regular quality selection"
+  },
+  "useDashDescription": "DASH adaptive streaming can sometimes be problematic, Youtube can throttle it.",
+  "@useDashDescription": {
+    "description": "Description for dash in the settings screen"
+  },
+  "videoPlayer": "Video player",
+  "@videoPlayer": {
+    "description": "Title for video player related options"
+  },
   "error": "Error",
   "@error": {},
   "nVideos": "{count, plural, =0{No videos} =1{1 video} other{{count} videos}}",

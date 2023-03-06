@@ -5,6 +5,7 @@ import 'package:better_player/better_player.dart';
 import 'package:fbroadcast/fbroadcast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:invidious/models/db/settings.dart';
 import 'package:logging/logging.dart';
 
 import '../../database.dart';
@@ -34,6 +35,7 @@ class _VideoPlayerState extends State<VideoPlayer> with AfterLayoutMixin<VideoPl
   Pair<int> nextSegment = Pair(0, 0);
   BetterPlayerController? videoController;
   int previousSponsorCheck = 0;
+  bool useDash = db.getSettings(USE_DASH)?.value == 'true';
 
   @override
   void initState() {
@@ -117,6 +119,9 @@ class _VideoPlayerState extends State<VideoPlayer> with AfterLayoutMixin<VideoPl
   }
 
   onVideoListener(BetterPlayerEvent event) {
+    if (event.betterPlayerEventType == BetterPlayerEventType.changedResolution) {
+      print('changing resolution');
+    }
     if (event.betterPlayerEventType == BetterPlayerEventType.progress) {
       int currentPosition = (event.parameters?['progress'] as Duration).inSeconds;
       if (currentPosition > previousSponsorCheck + 1) {
@@ -159,7 +164,24 @@ class _VideoPlayerState extends State<VideoPlayer> with AfterLayoutMixin<VideoPl
     }
   }
 
+  toggleDash() {
+    log.info('toggle dash');
+    // saving progress before we reload new video format
+    saveProgress(videoController?.videoPlayerController?.value.position.inSeconds ?? 0);
+
+    disposeControllers();
+
+    db.saveSetting(SettingsValue(USE_DASH, (!useDash).toString()));
+    setState(() {
+      useDash = !useDash;
+      playVideo();
+    });
+  }
+
   playVideo() {
+    var locals = AppLocalizations.of(context)!;
+
+
     double progress = db.getVideoProgress(widget.video.videoId);
     Duration? startAt;
     if (progress > 0 && progress < 0.90) {
@@ -170,27 +192,48 @@ class _VideoPlayerState extends State<VideoPlayer> with AfterLayoutMixin<VideoPl
 
     Map<String, String> resolutions = {};
 
-    for (var value in widget.video.formatStreams) {
-      resolutions[value.qualityLabel] = value.url;
+    bool isHls = widget.video.hlsUrl != null;
+    String videoUrl = isHls
+        ? widget.video.hlsUrl!
+        : useDash
+            ? widget.video.dashUrl
+            : widget.video.formatStreams[widget.video.formatStreams.length - 1].url;
+    BetterPlayerVideoFormat format = isHls
+        ? BetterPlayerVideoFormat.hls
+        : useDash
+            ? BetterPlayerVideoFormat.dash
+            : BetterPlayerVideoFormat.other;
+
+    if (format == BetterPlayerVideoFormat.other) {
+      for (var value in widget.video.formatStreams) {
+        resolutions[value.qualityLabel] = value.url;
+      }
     }
 
-    BetterPlayerDataSource betterPlayerDataSource =
-        BetterPlayerDataSource(BetterPlayerDataSourceType.network, widget.video.hlsUrl ?? widget.video.formatStreams[widget.video.formatStreams.length - 1].url,
-            videoFormat: widget.video.hlsUrl != null ? BetterPlayerVideoFormat.hls : BetterPlayerVideoFormat.other,
-            liveStream: widget.video.liveNow,
-            subtitles: widget.video.captions.map((s) => BetterPlayerSubtitlesSource(type: BetterPlayerSubtitlesSourceType.network, urls: ['${baseUrl}${s.url}'], name: s.label)).toList(),
-            resolutions: resolutions,
-            // placeholder: VideoThumbnailView(videoId: widget.video.videoId, thumbnailUrl: widget.video.getBestThumbnail()?.url ?? ''),
-            notificationConfiguration: BetterPlayerNotificationConfiguration(
-              showNotification: true,
-              activityName: 'MainActivity',
-              title: widget.video.title,
-              author: widget.video.author,
-              imageUrl: widget.video.getBestThumbnail()?.url ?? '',
-            ));
+    BetterPlayerDataSource betterPlayerDataSource = BetterPlayerDataSource(BetterPlayerDataSourceType.network, videoUrl,
+        videoFormat: format,
+        liveStream: widget.video.liveNow,
+        subtitles: widget.video.captions.map((s) => BetterPlayerSubtitlesSource(type: BetterPlayerSubtitlesSourceType.network, urls: ['${baseUrl}${s.url}'], name: s.label)).toList(),
+        resolutions: resolutions.isNotEmpty ? resolutions : null,
+        // placeholder: VideoThumbnailView(videoId: widget.video.videoId, thumbnailUrl: widget.video.getBestThumbnail()?.url ?? ''),
+        notificationConfiguration: BetterPlayerNotificationConfiguration(
+          showNotification: true,
+          activityName: 'MainActivity',
+          title: widget.video.title,
+          author: widget.video.author,
+          imageUrl: widget.video.getBestThumbnail()?.url ?? '',
+        ));
 
     setState(() {
-      videoController = BetterPlayerController(BetterPlayerConfiguration(handleLifecycle: false, startAt: startAt, autoPlay: true, allowedScreenSleep: false, fit: BoxFit.contain),
+      videoController = BetterPlayerController(
+          BetterPlayerConfiguration(
+              handleLifecycle: false,
+              startAt: startAt,
+              autoPlay: true,
+              allowedScreenSleep: false,
+              fit: BoxFit.contain,
+              controlsConfiguration: BetterPlayerControlsConfiguration(
+                  overflowMenuCustomItems: [BetterPlayerOverflowMenuItem(useDash ? Icons.check_box_outlined : Icons.check_box_outline_blank, locals.useDash, toggleDash)])),
           betterPlayerDataSource: betterPlayerDataSource);
       videoController!.addEventsListener(onVideoListener);
       videoController!.isPictureInPictureSupported().then((supported) {

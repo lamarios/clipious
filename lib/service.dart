@@ -65,7 +65,8 @@ class Service {
       }
 
       if (error != null) {
-        throw InvidiousServiceError(error!);
+        log.info('Error while calling service: $error');
+        throw InvidiousServiceError(error);
       }
 
       return decoded;

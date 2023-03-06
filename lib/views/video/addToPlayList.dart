@@ -38,13 +38,14 @@ class _AddToPlaylistState extends State<AddToPlaylist> with AfterLayoutMixin<Add
       await service.addVideoToPlaylist(playlistId, widget.videoId);
       scaffoldMessenger.showSnackBar(SnackBar(
         content: Text(locals.videoAddedToPlaylist),
-        duration: Duration(seconds: 3),
+        duration: const Duration(seconds: 3),
       ));
     } catch (err) {
       scaffoldMessenger.showSnackBar(SnackBar(
         content: Text(locals.errorAddingVideoToPlaylist),
-        duration: Duration(seconds: 3),
+        duration: const Duration(seconds: 3),
       ));
+      rethrow;
     }
   }
 
