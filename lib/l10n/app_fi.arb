@@ -1,1 +1,330 @@
-{}
+{
+  "noChannels": "Ei kanavia",
+  "@noChannels": {
+    "description": "when there are no channels to display"
+  },
+  "noPlaylists": "Ei soittolistoja",
+  "@noPlaylists": {
+    "description": "when there are no playlists to display"
+  },
+  "addServer": "Lisää palvelin",
+  "@addServer": {
+    "description": "Add server label"
+  },
+  "invalidInvidiousServer": "Virheellinen Invidious-palvelin",
+  "@invalidInvidiousServer": {
+    "description": "Error when the user tries to add a server that is not a proper or reachable invidious server"
+  },
+  "yourServers": "Omat palvelimet",
+  "@yourServers": {
+    "description": "Your servers label"
+  },
+  "recommended": "Suositeltu",
+  "@recommended": {
+    "description": "Recommended label"
+  },
+  "error": "Vihre",
+  "@error": {},
+  "subscriptions": "Tilaukset",
+  "@subscriptions": {
+    "description": "User subscriptions"
+  },
+  "playlists": "Soittolistat",
+  "@playlists": {
+    "description": "User playlists"
+  },
+  "popular": "Suosittu",
+  "@popular": {
+    "description": "Popular videos title"
+  },
+  "trending": "Nousussa",
+  "@trending": {
+    "description": "Trending videos title"
+  },
+  "noVideoInPlayList": "Soittolistalla ei ole videota",
+  "@noVideoInPlayList": {
+    "description": "When no videos in the playlist"
+  },
+  "removeFromPlayList": "Poista soittolistasta",
+  "@removeFromPlayList": {
+    "description": "Menu item description to show remove a video from a playlist"
+  },
+  "deletePlayListQ": "Poistetaanko soittolista?",
+  "@deletePlayListQ": {
+    "description": "Ask user to delete a playlist"
+  },
+  "irreversibleAction": "Tämä toiminta on peruuttamatonta",
+  "@irreversibleAction": {
+    "description": "Tell the user that the action cannot be undone"
+  },
+  "addPlayList": "Lisää soittolista",
+  "@addPlayList": {
+    "description": "Title for add playlist dialog"
+  },
+  "playListName": "Soittolistan nimi",
+  "@playListName": {
+    "description": "Place holder for new playlist name text field"
+  },
+  "playlistVisibility": "Näkyvyys",
+  "@playlistVisibility": {
+    "description": "Dropdown label for playlist visibility"
+  },
+  "publicPlaylist": "Julkinen",
+  "@publicPlaylist": {
+    "description": "Public playlist"
+  },
+  "privatePlaylist": "Yksityinen",
+  "@privatePlaylist": {
+    "description": "Private playlist"
+  },
+  "cancel": "Peruuta",
+  "@cancel": {
+    "description": "Cancel button label"
+  },
+  "add": "Lisää",
+  "@add": {
+    "description": "Add button abel"
+  },
+  "ok": "OK",
+  "@ok": {
+    "description": "Ok"
+  },
+  "wizardIntro": "Valitse julkinen palvelin tai lisää oma. (Voidaan muuttaa myöhemmin asetuksissa.)",
+  "@wizardIntro": {
+    "description": "Welcome message on frst time use"
+  },
+  "videoAddedToPlaylist": "Video lisätty soittolistaan",
+  "@videoAddedToPlaylist": {
+    "description": "Pop up message when a video was added to a playlist"
+  },
+  "errorAddingVideoToPlaylist": "Virhe videon lisäämisessä soittolistaan",
+  "@errorAddingVideoToPlaylist": {
+    "description": "Error while adding video to playlist"
+  },
+  "unlistedPlaylist": "Luetteloimaton",
+  "@unlistedPlaylist": {
+    "description": "Unlisted playlist"
+  },
+  "shareYoutubeLink": "Jaa YouTube-linkki",
+  "@shareYoutubeLink": {
+    "description": "asking user to share youtube link"
+  },
+  "selectPlaylist": "Valitse soittolista",
+  "@selectPlaylist": {
+    "description": "Title when users wants to add a video to a playlist"
+  },
+  "createNewPlaylist": "Luo uusi soittolista",
+  "@createNewPlaylist": {
+    "description": "Button label to create a new playlist when the user wants to add a video to a playlist"
+  },
+  "info": "Tiedot",
+  "@info": {
+    "description": "Info label"
+  },
+  "videos": "Videot",
+  "@videos": {
+    "description": "Videos label"
+  },
+  "loadMore": "Lataa lisää",
+  "@loadMore": {
+    "description": "CTA to load more"
+  },
+  "streams": "Striimaukset",
+  "@streams": {
+    "description": "Streams label"
+  },
+  "latestVideos": "Uusimmat videot",
+  "@latestVideos": {
+    "description": "Latest channel videos"
+  },
+  "newSorting": "Uusi",
+  "@newSorting": {
+    "description": "Content sorting: new"
+  },
+  "streamIsLive": "Livenä",
+  "@streamIsLive": {
+    "description": "Label when a video is a live stream"
+  },
+  "selectBrowsingCountry": "Valitse selainmaa",
+  "@selectBrowsingCountry": {
+    "description": "Select country for trending content"
+  },
+  "settings": "Asetukset",
+  "@settings": {
+    "description": "Settings title"
+  },
+  "browsing": "Selaus",
+  "@browsing": {
+    "description": "video browsing preferences"
+  },
+  "country": "Maa",
+  "@country": {
+    "description": "Country label"
+  },
+  "whenAppStartsShow": "Kun sovellus käynnistyy, näytä…",
+  "@whenAppStartsShow": {
+    "description": "Setting title for selecting the screen to show on start"
+  },
+  "servers": "Palvelimet",
+  "@servers": {
+    "description": "Server management settings category"
+  },
+  "loadingPublicServer": "Ladataan julkisia palvelimia",
+  "@loadingPublicServer": {
+    "description": "Message telling users the app is loading the list of public servers"
+  },
+  "currentServer": "Tällä hetkellä käytössä {current}",
+  "@currentServer": {
+    "description": "Which server the user is currently using",
+    "placeholders": {
+      "current": {
+        "type": "String"
+      }
+    }
+  },
+  "useSponsorBlock": "Käytä SponsorBlock",
+  "@useSponsorBlock": {
+    "description": "label for sponsorblock checkbox"
+  },
+  "sponsorBlockDescription": "Ohita yhteisön lähettämät sponsoripätkät",
+  "@sponsorBlockDescription": {
+    "description": "Sponsorblock setting description"
+  },
+  "package": "Paketti",
+  "@package": {
+    "description": "package label"
+  },
+  "logIn": "Kirjaudu sisään",
+  "@logIn": {
+    "description": "CTA to log in to server"
+  },
+  "delete": "Poista",
+  "@delete": {
+    "description": "Delete label"
+  },
+  "about": "Tietoja",
+  "@about": {
+    "description": "About"
+  },
+  "name": "Nimi",
+  "@name": {
+    "description": "NAme label"
+  },
+  "version": "Versio",
+  "@version": {
+    "description": "version label"
+  },
+  "nSubscribers": "{count, select, no{Ei tilaajia} other{{count} tilajaa}}",
+  "@nSubscribers": {
+    "description": "number of subscribers",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "shareInvidiousLink": "Jaa Invidious-linkki",
+  "@shareInvidiousLink": {
+    "description": "asking user to share invidious link"
+  },
+  "useThisServer": "Käytä tätä palvelinta",
+  "@useThisServer": {
+    "description": "Use this server label"
+  },
+  "loggedIn": "Kirjautunut sisään",
+  "@loggedIn": {
+    "description": "Label to tell the user that he is logged in to the server"
+  },
+  "notLoggedIn": "Ei kirjautunut sisään. Kirjaudu sisään napauttamalla.",
+  "@notLoggedIn": {
+    "description": "Label when the user is not logged in to the server"
+  },
+  "addServerHelpText": "Lisää omia palvelimia +-painikkeella tai napauta julkista palvelinta ja lisää se.",
+  "@addServerHelpText": {
+    "description": "label for when the user hasn't chosen a server yet"
+  },
+  "publicServers": "Julkiset palvelimet",
+  "@publicServers": {
+    "description": "Public servers label"
+  },
+  "tapToAddServer": "Lisää palvelin luetteloon napauttamalla",
+  "@tapToAddServer": {
+    "description": "public server description"
+  },
+  "publicServersError": "Julkisten palvelimien luetteloa ei voitu hakea. Yritä uudelleen napauttamalla.",
+  "@publicServersError": {
+    "description": "Error message when trying to get public servers but it failed"
+  },
+  "appearance": "Ulkonäkö",
+  "@appearance": {
+    "description": "Settings category title"
+  },
+  "useDynamicTheme": "Dynaamiset värit",
+  "@useDynamicTheme": {
+    "description": ""
+  },
+  "useDynamicThemeDescription": "Käytä materiaalin värejä (käytettävissä vain Android 12+). Vaatii sovelluksen uudelleenkäynnistyksen",
+  "@useDynamicThemeDescription": {
+    "description": ""
+  },
+  "nVideos": "{count, plural, =0{Ei videoita} =1{1 video} other{{count} videota}}",
+  "@nVideos": {
+    "description": "One or more videos",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "subscribed": "Tilattu",
+  "@subscribed": {
+    "description": "When the user is subscribed to a channel"
+  },
+  "subscribe": "Tilaa",
+  "@subscribe": {
+    "description": "Label for user to subscribe to a channel"
+  },
+  "channels": "Kanavat",
+  "@channels": {
+    "description": "Channels label"
+  },
+  "couldntLoadVideo": "Videota ei voitu ladata",
+  "@couldntLoadVideo": {
+    "description": "Message to display when a video can't be loaded"
+  },
+  "comments": "Kommentit",
+  "@comments": {
+    "description": "Comments label"
+  },
+  "couldntFetchVideos": "Videoita ei voitu hakea. Yritä uudelleen napauttamalla.",
+  "@couldntFetchVideos": {
+    "description": "Can't load bunch of videos, asking  user to try again"
+  },
+  "startUsingClipious": "Aloita Clipiousin käyttö",
+  "@startUsingClipious": {
+    "description": "button label to start using the app"
+  },
+  "nReplies": "{count, plural, =0{Ei vastauksia} =1{1 vastaus} other{{count} vastausta}}",
+  "@nReplies": {
+    "description": "number of replies to a comment",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "sponsorSkipped": "Sponsori jätti väliin",
+  "@sponsorSkipped": {
+    "description": "When a sponsor segment is skipped thanks to sponsor block"
+  },
+  "showOnStart": "Valitse, mitä näytetään sovelluksen käynnistyessä",
+  "@showOnStart": {
+    "description": "Title of dialog asking which screen the users prefers to see"
+  },
+  "manageServers": "Hallitse palvelimia",
+  "@manageServers": {
+    "description": "Settings to manage servers"
+  }
+}
