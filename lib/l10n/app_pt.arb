@@ -7,7 +7,7 @@
   "@playlists": {
     "description": "User playlists"
   },
-  "popular": "Popular",
+  "popular": "Mais popular",
   "@popular": {
     "description": "Popular videos title"
   },
@@ -254,7 +254,7 @@
   "@unlistedPlaylist": {
     "description": "Unlisted playlist"
   },
-  "streams": "Streams",
+  "streams": "Transmissão",
   "@streams": {
     "description": "Streams label"
   },
@@ -346,5 +346,17 @@
   "version": "Versão",
   "@version": {
     "description": "version label"
+  },
+  "videoListed": "Público",
+  "@videoListed": {
+    "description": "Status of a publicly available video"
+  },
+  "videoUnlisted": "Não listado",
+  "@videoUnlisted": {
+    "description": "Status of a video that is only accessible by link"
+  },
+  "videoIsFamilyFriendly": "Familiar",
+  "@videoIsFamilyFriendly": {
+    "description": "Displayed only when a video is family friendly"
   }
 }
