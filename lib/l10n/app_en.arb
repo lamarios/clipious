@@ -335,6 +335,18 @@
   "@videoPlayer": {
     "description": "Title for video player related options"
   },
+  "videoListed": "Public",
+  "@videoListed": {
+    "description": "Status of a publicly available video"
+  },
+  "videoUnlisted": "Unlisted",
+  "@videoUnlisted": {
+    "description": "Status of a video that is only accessible by link"
+  },
+  "videoIsFamilyFriendly": "Family friendly",
+  "@videoIsFamilyFriendly": {
+    "description": "Displayed only when a video is family friendly"
+  },
   "error": "Error",
   "@error": {},
   "nVideos": "{count, plural, =0{No videos} =1{1 video} other{{count} videos}}",

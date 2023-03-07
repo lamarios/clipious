@@ -289,13 +289,14 @@ class HomeState extends State<Home> {
   }
 }
 
-class MySearchDelegate extends SearchDelegate {
+class MySearchDelegate extends SearchDelegate<String> {
+
   @override
   List<Widget>? buildActions(BuildContext context) => [
         IconButton(
             onPressed: () {
               if (query.isEmpty) {
-                close(context, null);
+                close(context, '');
               } else {
                 query = '';
               }
@@ -304,7 +305,7 @@ class MySearchDelegate extends SearchDelegate {
       ];
 
   @override
-  Widget? buildLeading(BuildContext context) => IconButton(onPressed: () => close(context, null), icon: Icon(Icons.arrow_back));
+  Widget? buildLeading(BuildContext context) => IconButton(onPressed: () => close(context, ''), icon: const Icon(Icons.arrow_back));
 
   @override
   Widget buildResults(BuildContext context) {
