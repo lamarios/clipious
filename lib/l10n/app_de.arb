@@ -334,5 +334,17 @@
   "useSponsorBlock": "SponsorBlock verwenden",
   "@useSponsorBlock": {
     "description": "label for sponsorblock checkbox"
+  },
+  "useDash": "DASH verwenden",
+  "@useDash": {
+    "description": "Label on video options if a user wants to switch to dash urls instead of the regular quality selection"
+  },
+  "useDashDescription": "Das adaptive DASH-Streaming kann manchmal problematisch sein, YouTube kann seine Geschwindigkeit begrenzen.",
+  "@useDashDescription": {
+    "description": "Description for dash in the settings screen"
+  },
+  "videoPlayer": "Video-Player",
+  "@videoPlayer": {
+    "description": "Title for video player related options"
   }
 }

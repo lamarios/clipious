@@ -1,0 +1,350 @@
+{
+  "trending": "Тенденции",
+  "@trending": {
+    "description": "Trending videos title"
+  },
+  "subscriptions": "Подписки",
+  "@subscriptions": {
+    "description": "User subscriptions"
+  },
+  "playlists": "Плейлисты",
+  "@playlists": {
+    "description": "User playlists"
+  },
+  "popular": "Популярное",
+  "@popular": {
+    "description": "Popular videos title"
+  },
+  "noVideoInPlayList": "Нет видео в плейлисте",
+  "@noVideoInPlayList": {
+    "description": "When no videos in the playlist"
+  },
+  "removeFromPlayList": "Удалить из плейлиста",
+  "@removeFromPlayList": {
+    "description": "Menu item description to show remove a video from a playlist"
+  },
+  "deletePlayListQ": "Удалить плейлист?",
+  "@deletePlayListQ": {
+    "description": "Ask user to delete a playlist"
+  },
+  "irreversibleAction": "Данное действие необратимо",
+  "@irreversibleAction": {
+    "description": "Tell the user that the action cannot be undone"
+  },
+  "addPlayList": "Добавить плейлист",
+  "@addPlayList": {
+    "description": "Title for add playlist dialog"
+  },
+  "playListName": "Название плейлиста",
+  "@playListName": {
+    "description": "Place holder for new playlist name text field"
+  },
+  "playlistVisibility": "Видимость",
+  "@playlistVisibility": {
+    "description": "Dropdown label for playlist visibility"
+  },
+  "publicPlaylist": "Публичный",
+  "@publicPlaylist": {
+    "description": "Public playlist"
+  },
+  "privatePlaylist": "Личный",
+  "@privatePlaylist": {
+    "description": "Private playlist"
+  },
+  "cancel": "Отмена",
+  "@cancel": {
+    "description": "Cancel button label"
+  },
+  "add": "Добавить",
+  "@add": {
+    "description": "Add button abel"
+  },
+  "unlistedPlaylist": "По ссылке",
+  "@unlistedPlaylist": {
+    "description": "Unlisted playlist"
+  },
+  "info": "Информация",
+  "@info": {
+    "description": "Info label"
+  },
+  "videos": "Видео",
+  "@videos": {
+    "description": "Videos label"
+  },
+  "streams": "Стримы",
+  "@streams": {
+    "description": "Streams label"
+  },
+  "latestVideos": "Последние видео",
+  "@latestVideos": {
+    "description": "Latest channel videos"
+  },
+  "subscribed": "Подписан",
+  "@subscribed": {
+    "description": "When the user is subscribed to a channel"
+  },
+  "subscribe": "Подписаться",
+  "@subscribe": {
+    "description": "Label for user to subscribe to a channel"
+  },
+  "nSubscribers": "{count, select, no{Нет подписчиков} other{{count} подписчики}}",
+  "@nSubscribers": {
+    "description": "number of subscribers",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "shareYoutubeLink": "Поделиться ссылкой YouTube",
+  "@shareYoutubeLink": {
+    "description": "asking user to share youtube link"
+  },
+  "shareInvidiousLink": "Поделиться ссылкой Invidious",
+  "@shareInvidiousLink": {
+    "description": "asking user to share invidious link"
+  },
+  "ok": "ОК",
+  "@ok": {
+    "description": "Ok"
+  },
+  "noChannels": "Нет каналов",
+  "@noChannels": {
+    "description": "when there are no channels to display"
+  },
+  "noPlaylists": "Нет плейлистов",
+  "@noPlaylists": {
+    "description": "when there are no playlists to display"
+  },
+  "channels": "Каналы",
+  "@channels": {
+    "description": "Channels label"
+  },
+  "couldntLoadVideo": "Не удалось загрузить видео",
+  "@couldntLoadVideo": {
+    "description": "Message to display when a video can't be loaded"
+  },
+  "comments": "Комментарии",
+  "@comments": {
+    "description": "Comments label"
+  },
+  "recommended": "Рекомендовано",
+  "@recommended": {
+    "description": "Recommended label"
+  },
+  "couldntFetchVideos": "Не удалось получить видео. Нажмите, чтобы повторить попытку.",
+  "@couldntFetchVideos": {
+    "description": "Can't load bunch of videos, asking  user to try again"
+  },
+  "wizardIntro": "Выберите общедоступный сервер или добавьте свой собственный (можно изменить позже в настройках).",
+  "@wizardIntro": {
+    "description": "Welcome message on frst time use"
+  },
+  "startUsingClipious": "Начните использовать Clipious",
+  "@startUsingClipious": {
+    "description": "button label to start using the app"
+  },
+  "errorAddingVideoToPlaylist": "Ошибка при добавлении видео в плейлист",
+  "@errorAddingVideoToPlaylist": {
+    "description": "Error while adding video to playlist"
+  },
+  "selectPlaylist": "Выбрать плейлист",
+  "@selectPlaylist": {
+    "description": "Title when users wants to add a video to a playlist"
+  },
+  "createNewPlaylist": "Создать новый плейлист",
+  "@createNewPlaylist": {
+    "description": "Button label to create a new playlist when the user wants to add a video to a playlist"
+  },
+  "nReplies": "{count, plural, =0{Нет ответов} =1{1 reply} other{{count} ответы}}",
+  "@nReplies": {
+    "description": "number of replies to a comment",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "loadMore": "Загрузить больше",
+  "@loadMore": {
+    "description": "CTA to load more"
+  },
+  "topSorting": "Сверху",
+  "@topSorting": {
+    "description": "Content sorting: top"
+  },
+  "newSorting": "Новое",
+  "@newSorting": {
+    "description": "Content sorting: new"
+  },
+  "streamIsLive": "Livе",
+  "@streamIsLive": {
+    "description": "Label when a video is a live stream"
+  },
+  "sponsorSkipped": "Спонсор пропущен",
+  "@sponsorSkipped": {
+    "description": "When a sponsor segment is skipped thanks to sponsor block"
+  },
+  "settings": "Настройки",
+  "@settings": {
+    "description": "Settings title"
+  },
+  "browsing": "Просмотр",
+  "@browsing": {
+    "description": "video browsing preferences"
+  },
+  "country": "Страна",
+  "@country": {
+    "description": "Country label"
+  },
+  "whenAppStartsShow": "Когда приложение запускается, показывать…",
+  "@whenAppStartsShow": {
+    "description": "Setting title for selecting the screen to show on start"
+  },
+  "servers": "Сервера",
+  "@servers": {
+    "description": "Server management settings category"
+  },
+  "manageServers": "Управление серверами",
+  "@manageServers": {
+    "description": "Settings to manage servers"
+  },
+  "about": "О приложении",
+  "@about": {
+    "description": "About"
+  },
+  "name": "Имя",
+  "@name": {
+    "description": "NAme label"
+  },
+  "package": "Packagе",
+  "@package": {
+    "description": "package label"
+  },
+  "version": "Версия",
+  "@version": {
+    "description": "version label"
+  },
+  "build": "Вuild",
+  "@build": {
+    "description": "build label"
+  },
+  "addServer": "Добавить сервер",
+  "@addServer": {
+    "description": "Add server label"
+  },
+  "useThisServer": "Использовать этот сервер",
+  "@useThisServer": {
+    "description": "Use this server label"
+  },
+  "logIn": "Войти",
+  "@logIn": {
+    "description": "CTA to log in to server"
+  },
+  "delete": "Удалить",
+  "@delete": {
+    "description": "Delete label"
+  },
+  "invalidInvidiousServer": "Неверный сервер Invidious",
+  "@invalidInvidiousServer": {
+    "description": "Error when the user tries to add a server that is not a proper or reachable invidious server"
+  },
+  "yourServers": "Твои сервера",
+  "@yourServers": {
+    "description": "Your servers label"
+  },
+  "notLoggedIn": "Вы не авторизованы. Нажмите, чтобы войти в систему.",
+  "@notLoggedIn": {
+    "description": "Label when the user is not logged in to the server"
+  },
+  "addServerHelpText": "Используйте кнопку + для добавления своих собственных серверов или нажмите на общедоступный сервер и добавьте его.",
+  "@addServerHelpText": {
+    "description": "label for when the user hasn't chosen a server yet"
+  },
+  "publicServers": "Публичные сервера",
+  "@publicServers": {
+    "description": "Public servers label"
+  },
+  "loadingPublicServer": "Загрузка публичных серверов",
+  "@loadingPublicServer": {
+    "description": "Message telling users the app is loading the list of public servers"
+  },
+  "tapToAddServer": "Нажмите, чтобы добавить сервер в список",
+  "@tapToAddServer": {
+    "description": "public server description"
+  },
+  "appearance": "Внешний вид",
+  "@appearance": {
+    "description": "Settings category title"
+  },
+  "useDynamicTheme": "Динамические цвета",
+  "@useDynamicTheme": {
+    "description": ""
+  },
+  "useDynamicThemeDescription": "Используйте цвета Material You (доступно только на Android 12+). Требуется перезапуск приложения",
+  "@useDynamicThemeDescription": {
+    "description": ""
+  },
+  "useDash": "Использовать DASH",
+  "@useDash": {
+    "description": "Label on video options if a user wants to switch to dash urls instead of the regular quality selection"
+  },
+  "useDashDescription": "Адаптивная потоковая передача DASH иногда может быть проблематичной, Youtube может ухудшать качество.",
+  "@useDashDescription": {
+    "description": "Description for dash in the settings screen"
+  },
+  "videoPlayer": "Видеопроигрыватель",
+  "@videoPlayer": {
+    "description": "Title for video player related options"
+  },
+  "error": "Ошибка",
+  "@error": {},
+  "videoAddedToPlaylist": "Видео добавлено в плейлист",
+  "@videoAddedToPlaylist": {
+    "description": "Pop up message when a video was added to a playlist"
+  },
+  "selectBrowsingCountry": "Выберите страну просмотра",
+  "@selectBrowsingCountry": {
+    "description": "Select country for trending content"
+  },
+  "showOnStart": "Выберите, что показывать при запуске приложения",
+  "@showOnStart": {
+    "description": "Title of dialog asking which screen the users prefers to see"
+  },
+  "currentServer": "Сейчас используется {current}",
+  "@currentServer": {
+    "description": "Which server the user is currently using",
+    "placeholders": {
+      "current": {
+        "type": "String"
+      }
+    }
+  },
+  "useSponsorBlock": "Использовать SponsorBlock",
+  "@useSponsorBlock": {
+    "description": "label for sponsorblock checkbox"
+  },
+  "sponsorBlockDescription": "Пропускать спонсорские сегменты, представленные сообществом",
+  "@sponsorBlockDescription": {
+    "description": "Sponsorblock setting description"
+  },
+  "publicServersError": "Не удалось получить список публичных серверов. Нажмите, чтобы повторить попытку.",
+  "@publicServersError": {
+    "description": "Error message when trying to get public servers but it failed"
+  },
+  "loggedIn": "Вы вошли на сервер",
+  "@loggedIn": {
+    "description": "Label to tell the user that he is logged in to the server"
+  },
+  "nVideos": "{count, plural, =0{Нет видео} =1{1 video} other{{count} видео}}",
+  "@nVideos": {
+    "description": "One or more videos",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  }
+}
