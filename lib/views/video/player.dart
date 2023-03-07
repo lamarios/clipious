@@ -18,6 +18,8 @@ import '../../models/sponsorSegment.dart';
 import '../../models/video.dart';
 import '../components/videoThumbnail.dart';
 
+final GlobalKey _betterPlayerKey = GlobalKey();
+
 class VideoPlayer extends StatefulWidget {
   final Video video;
   Function(BetterPlayerEvent event)? listener;
@@ -30,7 +32,6 @@ class VideoPlayer extends StatefulWidget {
 
 class _VideoPlayerState extends State<VideoPlayer> with AfterLayoutMixin<VideoPlayer>, RouteAware {
   final log = Logger('VideoPlayer');
-  final GlobalKey _betterPlayerKey = GlobalKey();
   bool useSponsorBlock = db.getSettings(USE_SPONSORBLOCK)?.value == 'true';
   List<Pair<int>> sponsorSegments = List.of([]);
   Pair<int> nextSegment = Pair(0, 0);
@@ -120,9 +121,6 @@ class _VideoPlayerState extends State<VideoPlayer> with AfterLayoutMixin<VideoPl
   }
 
   onVideoListener(BetterPlayerEvent event) {
-    if (event.betterPlayerEventType == BetterPlayerEventType.changedResolution) {
-      print('changing resolution');
-    }
     if (event.betterPlayerEventType == BetterPlayerEventType.progress) {
       int currentPosition = (event.parameters?['progress'] as Duration).inSeconds;
       if (currentPosition > previousSponsorCheck + 1) {
@@ -231,7 +229,7 @@ class _VideoPlayerState extends State<VideoPlayer> with AfterLayoutMixin<VideoPl
               deviceOrientationsAfterFullScreen: [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight, DeviceOrientation.portraitDown, DeviceOrientation.portraitUp],
               handleLifecycle: false,
               autoDetectFullscreenDeviceOrientation: false,
-              autoDetectFullscreenAspectRatio: false,
+              autoDetectFullscreenAspectRatio: true,
               startAt: startAt,
               autoPlay: true,
               allowedScreenSleep: false,
@@ -240,11 +238,6 @@ class _VideoPlayerState extends State<VideoPlayer> with AfterLayoutMixin<VideoPl
                   overflowMenuCustomItems: [BetterPlayerOverflowMenuItem(useDash ? Icons.check_box_outlined : Icons.check_box_outline_blank, locals.useDash, toggleDash)])),
           betterPlayerDataSource: betterPlayerDataSource);
       videoController!.addEventsListener(onVideoListener);
-      videoController!.isPictureInPictureSupported().then((supported) {
-        if (supported) {
-          videoController!.enablePictureInPicture(_betterPlayerKey);
-        }
-      });
     });
   }
 
