@@ -4,6 +4,7 @@ import 'package:after_layout/after_layout.dart';
 import 'package:better_player/better_player.dart';
 import 'package:fbroadcast/fbroadcast.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/models/db/settings.dart';
 import 'package:logging/logging.dart';
@@ -181,7 +182,6 @@ class _VideoPlayerState extends State<VideoPlayer> with AfterLayoutMixin<VideoPl
   playVideo() {
     var locals = AppLocalizations.of(context)!;
 
-
     double progress = db.getVideoProgress(widget.video.videoId);
     Duration? startAt;
     if (progress > 0 && progress < 0.90) {
@@ -227,7 +227,11 @@ class _VideoPlayerState extends State<VideoPlayer> with AfterLayoutMixin<VideoPl
     setState(() {
       videoController = BetterPlayerController(
           BetterPlayerConfiguration(
+              deviceOrientationsOnFullScreen: [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight, DeviceOrientation.portraitDown, DeviceOrientation.portraitUp],
+              deviceOrientationsAfterFullScreen: [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight, DeviceOrientation.portraitDown, DeviceOrientation.portraitUp],
               handleLifecycle: false,
+              autoDetectFullscreenDeviceOrientation: false,
+              autoDetectFullscreenAspectRatio: false,
               startAt: startAt,
               autoPlay: true,
               allowedScreenSleep: false,
