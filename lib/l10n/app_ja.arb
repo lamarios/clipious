@@ -1,1 +1,314 @@
-{}
+{
+  "playListName": "再生リスト名",
+  "@playListName": {
+    "description": "Place holder for new playlist name text field"
+  },
+  "popular": "人気",
+  "@popular": {
+    "description": "Popular videos title"
+  },
+  "playlistVisibility": "公開範囲",
+  "@playlistVisibility": {
+    "description": "Dropdown label for playlist visibility"
+  },
+  "ok": "OK",
+  "@ok": {
+    "description": "Ok"
+  },
+  "comments": "コメント",
+  "@comments": {
+    "description": "Comments label"
+  },
+  "couldntLoadVideo": "動画を読み込めませんでした",
+  "@couldntLoadVideo": {
+    "description": "Message to display when a video can't be loaded"
+  },
+  "recommended": "おすすめ",
+  "@recommended": {
+    "description": "Recommended label"
+  },
+  "couldntFetchVideos": "動画を読み込めませんでした。タップして",
+  "@couldntFetchVideos": {
+    "description": "Can't load bunch of videos, asking  user to try again"
+  },
+  "startUsingClipious": "Clipious を使い始める",
+  "@startUsingClipious": {
+    "description": "button label to start using the app"
+  },
+  "loadMore": "さらに読み込む",
+  "@loadMore": {
+    "description": "CTA to load more"
+  },
+  "streamIsLive": "ライブ",
+  "@streamIsLive": {
+    "description": "Label when a video is a live stream"
+  },
+  "showOnStart": "アプリの起動時に表示する内容を選択",
+  "@showOnStart": {
+    "description": "Title of dialog asking which screen the users prefers to see"
+  },
+  "settings": "設定",
+  "@settings": {
+    "description": "Settings title"
+  },
+  "country": "国",
+  "@country": {
+    "description": "Country label"
+  },
+  "currentServer": "{current} を使用中",
+  "@currentServer": {
+    "description": "Which server the user is currently using",
+    "placeholders": {
+      "current": {
+        "type": "String"
+      }
+    }
+  },
+  "whenAppStartsShow": "アプリの起動時に表示…",
+  "@whenAppStartsShow": {
+    "description": "Setting title for selecting the screen to show on start"
+  },
+  "servers": "サーバー",
+  "@servers": {
+    "description": "Server management settings category"
+  },
+  "manageServers": "サーバーを管理",
+  "@manageServers": {
+    "description": "Settings to manage servers"
+  },
+  "about": "概要",
+  "@about": {
+    "description": "About"
+  },
+  "build": "ビルド",
+  "@build": {
+    "description": "build label"
+  },
+  "name": "名前",
+  "@name": {
+    "description": "NAme label"
+  },
+  "delete": "削除",
+  "@delete": {
+    "description": "Delete label"
+  },
+  "notLoggedIn": "ログインしていません。タップしてログイン。",
+  "@notLoggedIn": {
+    "description": "Label when the user is not logged in to the server"
+  },
+  "noVideoInPlayList": "再生リストに動画がありません",
+  "@noVideoInPlayList": {
+    "description": "When no videos in the playlist"
+  },
+  "deletePlayListQ": "再生リストを削除しますか？",
+  "@deletePlayListQ": {
+    "description": "Ask user to delete a playlist"
+  },
+  "playlists": "再生リスト",
+  "@playlists": {
+    "description": "User playlists"
+  },
+  "subscriptions": "登録チャンネル",
+  "@subscriptions": {
+    "description": "User subscriptions"
+  },
+  "trending": "急上昇",
+  "@trending": {
+    "description": "Trending videos title"
+  },
+  "addPlayList": "再生リストを追加",
+  "@addPlayList": {
+    "description": "Title for add playlist dialog"
+  },
+  "error": "エラー",
+  "@error": {},
+  "logIn": "ログイン",
+  "@logIn": {
+    "description": "CTA to log in to server"
+  },
+  "publicServers": "公開サーバー",
+  "@publicServers": {
+    "description": "Public servers label"
+  },
+  "loadingPublicServer": "公開サーバーを読み込み中",
+  "@loadingPublicServer": {
+    "description": "Message telling users the app is loading the list of public servers"
+  },
+  "addServerHelpText": "+ ボタンを押して所有しているサーバーを追加するか、公開サーバーをタップして追加できます。",
+  "@addServerHelpText": {
+    "description": "label for when the user hasn't chosen a server yet"
+  },
+  "tapToAddServer": "タップしてサーバーをリストに追加",
+  "@tapToAddServer": {
+    "description": "public server description"
+  },
+  "publicServersError": "公開サーバーのリストを読み込めませんでした。タップで再読み込みします。",
+  "@publicServersError": {
+    "description": "Error message when trying to get public servers but it failed"
+  },
+  "appearance": "外観",
+  "@appearance": {
+    "description": "Settings category title"
+  },
+  "useDynamicTheme": "ダイナミックカラー",
+  "@useDynamicTheme": {
+    "description": ""
+  },
+  "nSubscribers": "{count, select, no{登録者なし} other{登録者 {count} 人}}",
+  "@nSubscribers": {
+    "description": "number of subscribers",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "shareYoutubeLink": "YouTube のリンクを共有",
+  "@shareYoutubeLink": {
+    "description": "asking user to share youtube link"
+  },
+  "shareInvidiousLink": "Invidious のリンクを共有",
+  "@shareInvidiousLink": {
+    "description": "asking user to share invidious link"
+  },
+  "useDynamicThemeDescription": "Material You の配色を使用 *アプリの再起動が必要",
+  "@useDynamicThemeDescription": {
+    "description": ""
+  },
+  "nVideos": "{count, plural, =0{動画なし} =1{1 件の動画} other{{count} 件の動画}}",
+  "@nVideos": {
+    "description": "One or more videos",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "publicPlaylist": "公開",
+  "@publicPlaylist": {
+    "description": "Public playlist"
+  },
+  "unlistedPlaylist": "限定公開",
+  "@unlistedPlaylist": {
+    "description": "Unlisted playlist"
+  },
+  "videos": "動画",
+  "@videos": {
+    "description": "Videos label"
+  },
+  "streams": "配信",
+  "@streams": {
+    "description": "Streams label"
+  },
+  "videoAddedToPlaylist": "動画を再生リストに追加しました",
+  "@videoAddedToPlaylist": {
+    "description": "Pop up message when a video was added to a playlist"
+  },
+  "selectPlaylist": "再生リストを選択",
+  "@selectPlaylist": {
+    "description": "Title when users wants to add a video to a playlist"
+  },
+  "useSponsorBlock": "SponsorBlock を使用",
+  "@useSponsorBlock": {
+    "description": "label for sponsorblock checkbox"
+  },
+  "yourServers": "あなたのサーバー",
+  "@yourServers": {
+    "description": "Your servers label"
+  },
+  "addServer": "サーバーを追加",
+  "@addServer": {
+    "description": "Add server label"
+  },
+  "useThisServer": "このサーバーを使用",
+  "@useThisServer": {
+    "description": "Use this server label"
+  },
+  "noPlaylists": "再生リストなし",
+  "@noPlaylists": {
+    "description": "when there are no playlists to display"
+  },
+  "latestVideos": "最新の動画",
+  "@latestVideos": {
+    "description": "Latest channel videos"
+  },
+  "subscribed": "チャンネル登録済",
+  "@subscribed": {
+    "description": "When the user is subscribed to a channel"
+  },
+  "nReplies": "{count, plural, =0{返信なし} =1{1 件の返信} other{{count} 件の返信}}",
+  "@nReplies": {
+    "description": "number of replies to a comment",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "invalidInvidiousServer": "無効な Invidious サーバー",
+  "@invalidInvidiousServer": {
+    "description": "Error when the user tries to add a server that is not a proper or reachable invidious server"
+  },
+  "version": "バージョン",
+  "@version": {
+    "description": "version label"
+  },
+  "package": "パッケージ",
+  "@package": {
+    "description": "package label"
+  },
+  "privatePlaylist": "非公開",
+  "@privatePlaylist": {
+    "description": "Private playlist"
+  },
+  "cancel": "キャンセル",
+  "@cancel": {
+    "description": "Cancel button label"
+  },
+  "add": "追加",
+  "@add": {
+    "description": "Add button abel"
+  },
+  "info": "情報",
+  "@info": {
+    "description": "Info label"
+  },
+  "loggedIn": "ログインしました",
+  "@loggedIn": {
+    "description": "Label to tell the user that he is logged in to the server"
+  },
+  "newSorting": "新しい順",
+  "@newSorting": {
+    "description": "Content sorting: new"
+  },
+  "removeFromPlayList": "再生リストから削除",
+  "@removeFromPlayList": {
+    "description": "Menu item description to show remove a video from a playlist"
+  },
+  "irreversibleAction": "この操作は取り消せません",
+  "@irreversibleAction": {
+    "description": "Tell the user that the action cannot be undone"
+  },
+  "channels": "チャンネル",
+  "@channels": {
+    "description": "Channels label"
+  },
+  "errorAddingVideoToPlaylist": "再生リストに動画を追加する際エラーが発生しました",
+  "@errorAddingVideoToPlaylist": {
+    "description": "Error while adding video to playlist"
+  },
+  "subscribe": "チャンネル登録",
+  "@subscribe": {
+    "description": "Label for user to subscribe to a channel"
+  },
+  "noChannels": "チャンネルなし",
+  "@noChannels": {
+    "description": "when there are no channels to display"
+  },
+  "createNewPlaylist": "新しい再生リスト",
+  "@createNewPlaylist": {
+    "description": "Button label to create a new playlist when the user wants to add a video to a playlist"
+  }
+}
