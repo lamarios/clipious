@@ -22,14 +22,11 @@ class VideoTabletInnerView extends StatefulWidget {
 }
 
 class _VideoTabletInnerViewState extends State<VideoTabletInnerView> {
-  double scale = 1.0;
-  bool elevateThumbnail = false;
   ScrollController scrollController = ScrollController();
 
   @override
   void initState() {
     super.initState();
-    scrollController.addListener(onScroll);
   }
 
   @override
@@ -46,11 +43,6 @@ class _VideoTabletInnerViewState extends State<VideoTabletInnerView> {
     }
   }
 
-  onScroll() {
-    setState(() {
-      scale = 1 + min(0.03, ((scrollController.offset) / 20000));
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,17 +56,12 @@ class _VideoTabletInnerViewState extends State<VideoTabletInnerView> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                AnimatedScale(
-                  scale: scale,
-                  duration: Duration.zero,
-                  // curve: Curves.easeInOutQuad,
-                  child: Container(
-                    alignment: Alignment.center,
-                    width: double.infinity,
-                    constraints: const BoxConstraints(maxWidth: 500),
-                    child: VideoPlayer(
-                      video: widget.video,
-                    ),
+                Container(
+                  alignment: Alignment.center,
+                  width: double.infinity,
+                  constraints: const BoxConstraints(maxWidth: 500),
+                  child: VideoPlayer(
+                    video: widget.video,
                   ),
                 ),
                 Expanded(

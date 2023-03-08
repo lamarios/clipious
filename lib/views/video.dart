@@ -58,10 +58,6 @@ class VideoViewState extends State<VideoView> with AfterLayoutMixin<VideoView>, 
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          video?.title ?? '',
-          // style: TextStyle(fontSize: 15),
-        ),
         actions: loadingVideo
             ? []
             : [
