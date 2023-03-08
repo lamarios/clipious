@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:invidious/views/channel.dart';
 import 'package:invidious/views/components/videoThumbnail.dart';
 import 'package:invidious/views/video/comments.dart';
 
@@ -22,6 +23,11 @@ class SingleCommentViewState extends State<SingleCommentView> {
 
   VideoComments? children;
 
+
+  openChannel(BuildContext context, String authorId){
+    Navigator.push(context, MaterialPageRoute(builder: (context) => ChannelView(channelId: authorId)));
+  }
+
   @override
   Widget build(BuildContext context) {
     var locals = AppLocalizations.of(context)!;
@@ -32,31 +38,29 @@ class SingleCommentViewState extends State<SingleCommentView> {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Thumbnail(
-              width: 20,
-              height: 20,
-              id: 'comment-author-${comment.authorId}',
-              thumbnailUrl: ImageObject.getBestThumbnail(comment.authorThumbnails)?.url ?? '',
-              decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
-            ) /*Container(
-              height: 20,
-              width: 20,
-              decoration: BoxDecoration(
-                  color: colors.secondaryContainer,
-                  borderRadius: BorderRadius.circular(20),
-                  image: comment.authorThumbnails.isNotEmpty ? DecorationImage(image: NetworkImage(ImageObject.getBestThumbnail(comment.authorThumbnails)?.url ?? '')) : null),
-            )*/
-            ,
+          InkWell(
+            onTap: () => openChannel(context, comment.authorId),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Thumbnail(
+                width: 20,
+                height: 20,
+                id: 'comment-author-${comment.authorId}',
+                thumbnailUrl: ImageObject.getBestThumbnail(comment.authorThumbnails)?.url ?? '',
+                decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
+              ) ,
+            ),
           ),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  comment.author,
-                  style: TextStyle(color: colors.secondary),
+                InkWell(
+                  onTap: () => openChannel(context, comment.authorId),
+                  child: Text(
+                    comment.author,
+                    style: TextStyle(color: colors.secondary),
+                  ),
                 ),
                 Row(
                   children: [
