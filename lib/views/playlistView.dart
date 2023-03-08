@@ -206,7 +206,7 @@ class _PlaylistViewState extends State<PlaylistView> with AfterLayoutMixin<Playl
   }
 
   openVideo(BuildContext context, String videoId) {
-    FBroadcast.instance().broadcast(BROAD_CAST_STOP_PLAYING);
+    FBroadcast.instance().broadcast(BROADCAST_STOP_PLAYING);
     Navigator.push(
         context,
         MaterialPageRoute(
@@ -292,6 +292,7 @@ class _PlaylistViewState extends State<PlaylistView> with AfterLayoutMixin<Playl
                                       aspectRatio: 16 / 9,
                                       child: currentlyPlaying != null
                                           ? VideoPlayer(
+                                              miniPlayer: false,
                                               video: currentlyPlaying!,
                                               listener: videoListener,
                                             )

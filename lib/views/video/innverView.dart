@@ -14,8 +14,10 @@ import 'info.dart';
 class VideoInnerView extends StatefulWidget {
   final Video video;
   final int selectedIndex;
+  final Function(DragUpdateDetails) onVideoDrag;
+  final Function(DragEndDetails) onDragEnd;
 
-  const VideoInnerView({super.key, required this.video, required this.selectedIndex});
+  const VideoInnerView({super.key, required this.video, required this.selectedIndex, required this.onVideoDrag, required this.onDragEnd});
 
   @override
   State<VideoInnerView> createState() => _VideoInnerViewState();
@@ -51,9 +53,14 @@ class _VideoInnerViewState extends State<VideoInnerView> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        VideoPlayer(
-          video: widget.video,
-        ),
+         GestureDetector(
+            onVerticalDragUpdate: widget.onVideoDrag,
+            onVerticalDragEnd: widget.onDragEnd,
+            child: VideoPlayer(
+              miniPlayer: false,
+              video: widget.video,
+            ),
+          ),
         Expanded(
             child: Padding(
           padding: const EdgeInsets.only(top: 4),

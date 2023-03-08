@@ -1,5 +1,6 @@
 // import 'package:video_player/video_player.dart';
 import 'dart:async';
+import 'dart:math';
 
 import 'package:after_layout/after_layout.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +10,7 @@ import 'package:invidious/main.dart';
 import 'package:invidious/models/errors/invidiousServiceError.dart';
 import 'package:invidious/views/video/innverView.dart';
 import 'package:invidious/views/video/innverViewTablet.dart';
+import 'package:logging/logging.dart';
 
 import '../models/video.dart';
 import '../utils.dart';
@@ -24,11 +26,16 @@ class VideoView extends StatefulWidget {
 }
 
 class VideoViewState extends State<VideoView> with AfterLayoutMixin<VideoView>, RouteAware {
+  final log = Logger('Video');
   Video? video;
   bool loadingVideo = true;
 
   int selectedIndex = 0;
   bool isLoggedIn = service.isLoggedIn();
+
+  double miniPlayerThreshold = 300;
+  Offset offset = Offset.zero;
+  double opacity = 1;
 
   String error = '';
 
@@ -41,9 +48,36 @@ class VideoViewState extends State<VideoView> with AfterLayoutMixin<VideoView>, 
   }
 
   @override
+  void didUpdateWidget(covariant VideoView oldWidget) {
+    super.didUpdateWidget(oldWidget);
+  }
+
+  void videoDragged(DragUpdateDetails details) {
+    double opacity = 1 - min(1, (details.localPosition.dy / miniPlayerThreshold));
+    setState(() {
+      offset = Offset(0, max(0, details.localPosition.dy));
+      this.opacity = max(0,opacity);
+    });
+  }
+
+  void videoDraggedEnd(DragEndDetails details) {
+    if (offset.dy > miniPlayerThreshold) {
+      showMiniPlayer(context, [video!]);
+      Navigator.of(context).pop();
+    } else {
+      setState(() {
+        offset = Offset.zero;
+        opacity = 1;
+      });
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     var locals = AppLocalizations.of(context)!;
-    ColorScheme colorScheme = Theme.of(context).colorScheme;
+    ColorScheme colorScheme = Theme
+        .of(context)
+        .colorScheme;
 
     bool show3Navigation = getDeviceType() == DeviceType.phone;
 
@@ -56,70 +90,80 @@ class VideoViewState extends State<VideoView> with AfterLayoutMixin<VideoView>, 
       destinations.add(NavigationDestination(icon: Icon(Icons.schema), label: locals.recommended));
     }
 
-    return Scaffold(
-      appBar: AppBar(
-        actions: loadingVideo
-            ? []
-            : [
-                Visibility(
-                  visible: video != null,
-                  child: IconButton(
-                    onPressed: () => showSharingSheet(context, video!),
-                    icon: Icon(Icons.share),
-                    color: colorScheme.secondary,
-                  ),
+    return AnimatedOpacity(
+      duration: animationDuration,
+      opacity: opacity,
+      child: Transform.translate(
+        offset: offset,
+        child: Scaffold(
+          appBar: AppBar(
+
+            actions: loadingVideo
+                ? []
+                : [
+              Visibility(
+                visible: video != null,
+                child: IconButton(
+                  onPressed: () => showSharingSheet(context, video!),
+                  icon: Icon(Icons.share),
+                  color: colorScheme.secondary,
                 ),
-                Visibility(
-                  visible: isLoggedIn,
-                  child: IconButton(
-                    onPressed: () => AddToPlaylist.showDialog(context, video!.videoId),
-                    icon: Icon(Icons.add),
-                    color: colorScheme.secondary,
-                  ),
+              ),
+              Visibility(
+                visible: isLoggedIn,
+                child: IconButton(
+                  onPressed: () => AddToPlaylist.showDialog(context, video!.videoId),
+                  icon: Icon(Icons.add),
+                  color: colorScheme.secondary,
                 ),
-              ],
-        scrolledUnderElevation: 0,
-      ),
-      backgroundColor: colorScheme.background,
-      bottomNavigationBar: loadingVideo
-          ? null
-          : NavigationBar(
-              labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
-              elevation: 0,
-              onDestinationSelected: (int index) {
-                setState(() {
-                  selectedIndex = index;
-                });
-              },
-              selectedIndex: selectedIndex,
-              destinations: destinations,
-            ),
-      body: SafeArea(
-        bottom: false,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-          child: Container(
-            color: colorScheme.background,
-            width: double.infinity,
-            height: double.infinity,
-            child: AnimatedSwitcher(
-                duration: animationDuration,
-                child: error.isNotEmpty
-                    ? Container(
-                        alignment: Alignment.center,
-                        child: Text(error),
-                      )
-                    : loadingVideo
+              ),
+            ],
+            scrolledUnderElevation: 0,
+          ),
+          backgroundColor: colorScheme.background,
+          bottomNavigationBar: loadingVideo
+              ? null
+              : NavigationBar(
+            labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
+            elevation: 0,
+            onDestinationSelected: (int index) {
+              setState(() {
+                selectedIndex = index;
+              });
+            },
+            selectedIndex: selectedIndex,
+            destinations: destinations,
+          ),
+          body: SafeArea(
+            bottom: false,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: Container(
+                color: colorScheme.background,
+                width: double.infinity,
+                height: double.infinity,
+                child: AnimatedSwitcher(
+                    duration: animationDuration,
+                    child: error.isNotEmpty
+                        ? Container(
+                      alignment: Alignment.center,
+                      child: Text(error),
+                    )
+                        : loadingVideo
                         ? const CircularProgressIndicator()
                         : Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                            child: show3Navigation
-                                ? VideoInnerView(
-                                    video: video!,
-                                    selectedIndex: selectedIndex,
-                                  )
-                                : VideoTabletInnerView(video: video!, selectedIndex: selectedIndex),
-                          )),
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: show3Navigation
+                          ? VideoInnerView(
+                        video: video!,
+                        selectedIndex: selectedIndex,
+                        onVideoDrag: videoDragged,
+                        onDragEnd: videoDraggedEnd,
+                      )
+                          : VideoTabletInnerView(video: video!, selectedIndex: selectedIndex),
+                    )),
+              ),
+            ),
           ),
         ),
       ),

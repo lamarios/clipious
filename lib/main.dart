@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/models/searchResult.dart';
+import 'package:invidious/views/miniPlayer.dart';
 import 'package:invidious/views/playlists.dart';
 import 'package:invidious/views/popular.dart';
 import 'package:invidious/views/search.dart';
@@ -40,6 +41,7 @@ final RouteObserver<ModalRoute> routeObserver = RouteObserver<ModalRoute>();
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+
 
   @override
   Widget build(BuildContext context) {
@@ -290,7 +292,6 @@ class HomeState extends State<Home> {
 }
 
 class MySearchDelegate extends SearchDelegate<String> {
-
   @override
   List<Widget>? buildActions(BuildContext context) => [
         IconButton(

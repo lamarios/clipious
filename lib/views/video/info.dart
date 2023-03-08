@@ -19,7 +19,7 @@ class VideoInfo extends StatelessWidget {
   VideoInfo({super.key, required this.video});
 
   openChannel(BuildContext context) {
-    FBroadcast.instance().broadcast(BROAD_CAST_STOP_PLAYING);
+    FBroadcast.instance().broadcast(BROADCAST_STOP_PLAYING);
     Navigator.push(context, MaterialPageRoute(builder: (context) => ChannelView(channelId: video.authorId)));
   }
 

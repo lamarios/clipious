@@ -27,7 +27,7 @@ class _VideoListItemState extends State<VideoListItem> with RouteAware {
   late double progress;
 
   openVideo(BuildContext context) {
-    FBroadcast.instance().broadcast(BROAD_CAST_STOP_PLAYING);
+    FBroadcast.instance().broadcast(BROADCAST_STOP_PLAYING);
     Navigator.push(context, MaterialPageRoute(builder: (context) => VideoView(videoId: widget.video.videoId)));
   }
 

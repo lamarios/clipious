@@ -61,7 +61,9 @@ class _VideoTabletInnerViewState extends State<VideoTabletInnerView> {
                   width: double.infinity,
                   constraints: const BoxConstraints(maxWidth: 500),
                   child: VideoPlayer(
-                    video: widget.video,
+                    miniPlayer: false,
+                      video: widget.video,
+
                   ),
                 ),
                 Expanded(

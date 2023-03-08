@@ -1,9 +1,12 @@
+import 'package:fbroadcast/fbroadcast.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/models/interfaces/sharelink.dart';
+import 'package:invidious/models/video.dart';
+import 'package:invidious/views/miniPlayer.dart';
 import 'package:share_plus/share_plus.dart';
 
 import 'models/country.dart';
@@ -132,7 +135,7 @@ okCancelDialog(BuildContext context, String title, String message, Function() on
             },
           ),
           TextButton(
-            child:  Text(locals.cancel),
+            child: Text(locals.cancel),
             onPressed: () {
               //Put your code here which you want to execute on Cancel button click.
               Navigator.of(context).pop();
@@ -146,4 +149,28 @@ okCancelDialog(BuildContext context, String title, String message, Function() on
 
 Country getCountryFromCode(String code) {
   return countryCodes.firstWhere((element) => element.code == code, orElse: () => Country('US', 'United States of America'));
+}
+
+void showMiniPlayer(BuildContext context, List<Video> videos) {
+  if (!(miniPlayerKey.currentState?.mounted ?? false)) {
+    print('Showing overlay');
+    Overlay.of(context).insert(OverlayEntry(
+      builder: (context) => MiniPlayer(
+        key: miniPlayerKey,
+        videos: videos
+      ),
+    ));
+  } else {
+    miniPlayerKey.currentState?.show();
+    miniPlayerKey.currentState?.setVideos(videos);
+  }
+}
+
+void moveMiniPlayer(bool aboveNavigation){
+  miniPlayerKey.currentState?.move(aboveNavigation);
+}
+
+void hideMiniPlayer(BuildContext context){
+  FBroadcast.instance().broadcast(BROADCAST_STOP_MINI_PLAYER);
+  miniPlayerKey.currentState?.hide();
 }
