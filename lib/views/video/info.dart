@@ -1,12 +1,13 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fbroadcast/fbroadcast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/models/video.dart';
 import 'package:invidious/views/channel.dart';
 import 'package:invidious/views/components/subscribeButton.dart';
 import 'package:invidious/views/components/videoThumbnail.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../main.dart';
 import '../../models/imageObject.dart';
@@ -149,7 +150,11 @@ class VideoInfo extends StatelessWidget {
               )
             ],
           ),
-          Text(video.description),
+          SelectableLinkify(
+              text: video.description,
+              linkStyle: TextStyle(color: colorScheme.primary, decoration: TextDecoration.none),
+              onOpen: (link) => launchUrl(Uri.parse(link.url), mode: LaunchMode.externalApplication),
+              options: const LinkifyOptions(humanize: true, removeWww: true)),
           const Divider(),
           Row(
             children: [
@@ -171,9 +176,7 @@ class VideoInfo extends StatelessWidget {
                   ),
                 ),
               ),
-              Visibility(
-                   visible: video.isFamilyFriendly,
-                  child: Text(locals.videoIsFamilyFriendly))
+              Visibility(visible: video.isFamilyFriendly, child: Text(locals.videoIsFamilyFriendly))
             ],
           ),
           Padding(

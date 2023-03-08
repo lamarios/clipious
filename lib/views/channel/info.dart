@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:invidious/models/channel.dart';
 import 'package:invidious/utils.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../models/videoInList.dart';
 import '../videoList/singleVideo.dart';
@@ -24,7 +26,11 @@ class ChannelInfoState extends State<ChannelInfo> {
     List<Widget> widgets = [
       Padding(
         padding: const EdgeInsets.symmetric(vertical: 8.0),
-        child: Text(widget.channel.description),
+        child: SelectableLinkify(
+            text: widget.channel.description,
+            linkStyle: TextStyle(color: colors.primary, decoration: TextDecoration.none),
+            onOpen: (link) => launchUrl(Uri.parse(link.url), mode: LaunchMode.externalApplication),
+            options: const LinkifyOptions(humanize: true, removeWww: true)),
       ),
       Text(
         locals.latestVideos,

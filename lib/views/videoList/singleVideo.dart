@@ -43,7 +43,7 @@ class _VideoListItemState extends State<VideoListItem> with RouteAware {
   @override
   void didPopNext() {
     super.didPopNext();
-    log.info('popnext');
+    // log.info('popnext');
     try {
       if (context.mounted) {
         setState(() {
@@ -51,26 +51,26 @@ class _VideoListItemState extends State<VideoListItem> with RouteAware {
         });
       }
     } catch (err) {
-      log.info('oops');
+      // log.info('oops');
     }
   }
 
   @override
   void didPop() {
     super.didPop();
-    log.info('pop');
+    // log.info('pop');
   }
 
   @override
   void didPush() {
     super.didPush();
-    log.info('push');
+    // log.info('push');
   }
 
   @override
   void didPushNext() {
     super.didPushNext();
-    log.info('push next');
+    // log.info('push next');
   }
 
   @override
