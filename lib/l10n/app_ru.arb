@@ -156,7 +156,7 @@
   "@createNewPlaylist": {
     "description": "Button label to create a new playlist when the user wants to add a video to a playlist"
   },
-  "nReplies": "{count, plural, =0{Нет ответов} =1{1 reply} other{{count} ответы}}",
+  "nReplies": "{count, plural, =0{Нет ответов} =1{1 reply} other{{count} ответов}}",
   "@nReplies": {
     "description": "number of replies to a comment",
     "placeholders": {
@@ -346,5 +346,17 @@
         "format": "compact"
       }
     }
+  },
+  "videoIsFamilyFriendly": "Для семейного просмотра",
+  "@videoIsFamilyFriendly": {
+    "description": "Displayed only when a video is family friendly"
+  },
+  "videoListed": "Публично",
+  "@videoListed": {
+    "description": "Status of a publicly available video"
+  },
+  "videoUnlisted": "По ссылке",
+  "@videoUnlisted": {
+    "description": "Status of a video that is only accessible by link"
   }
 }
