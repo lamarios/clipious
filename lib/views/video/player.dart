@@ -208,6 +208,7 @@ class _VideoPlayerState extends State<VideoPlayer> with AfterLayoutMixin<VideoPl
       }
     }
 
+
     BetterPlayerDataSource betterPlayerDataSource = BetterPlayerDataSource(BetterPlayerDataSourceType.network, videoUrl,
         videoFormat: format,
         liveStream: widget.video.liveNow,

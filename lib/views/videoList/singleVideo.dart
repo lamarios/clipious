@@ -10,6 +10,7 @@ import 'package:logging/logging.dart';
 import '../../main.dart';
 import '../../models/imageObject.dart';
 import '../../utils.dart';
+import '../channel.dart';
 import '../video.dart';
 
 class VideoListItem extends StatefulWidget {
@@ -153,13 +154,18 @@ class _VideoListItemState extends State<VideoListItem> with RouteAware {
             style: TextStyle(color: colorScheme.primary, fontWeight: FontWeight.normal),
           ),
           Visibility(
-            child: Row(
-              children: [
-                Text(
-                  widget.video.author ?? '',
-                  style: TextStyle(color: colorScheme.secondary),
-                ),
-              ],
+            child: InkWell(
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context) => ChannelView(channelId: widget.video.authorId!)));
+              },
+              child: Row(
+                children: [
+                  Text(
+                    widget.video.author ?? '',
+                    style: TextStyle(color: colorScheme.secondary),
+                  ),
+                ],
+              ),
             ),
           ),
           Row(
