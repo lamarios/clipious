@@ -14,8 +14,9 @@ import 'info.dart';
 class VideoTabletInnerView extends StatefulWidget {
   final Video video;
   final int selectedIndex;
+  bool? playNow;
 
-  const VideoTabletInnerView({super.key, required this.video, required this.selectedIndex});
+  VideoTabletInnerView({super.key, required this.video, required this.selectedIndex, this.playNow});
 
   @override
   State<VideoTabletInnerView> createState() => _VideoTabletInnerViewState();
@@ -61,6 +62,7 @@ class _VideoTabletInnerViewState extends State<VideoTabletInnerView> {
                   width: double.infinity,
                   constraints: const BoxConstraints(maxWidth: 500),
                   child: VideoPlayer(
+                    playNow: widget.playNow,
                     miniPlayer: false,
                       video: widget.video,
 

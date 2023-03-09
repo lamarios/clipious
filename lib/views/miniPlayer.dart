@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:fbroadcast/fbroadcast.dart';
 import 'package:flutter/material.dart';
 import 'package:invidious/globals.dart';
@@ -16,7 +18,7 @@ class MiniPlayer extends StatefulWidget {
   State<MiniPlayer> createState() => MiniPlayerState();
 }
 
-const double height = 75;
+const double targetHeight = 75;
 const double navigationBarHeight = 75;
 
 class MiniPlayerState extends State<MiniPlayer> {
@@ -24,6 +26,8 @@ class MiniPlayerState extends State<MiniPlayer> {
   double bottom = 0;
   int currentIndex = 0;
   List<Video> videos = [];
+  double height = targetHeight;
+  bool showTitle = true;
 
   @override
   initState() {
@@ -51,8 +55,10 @@ class MiniPlayerState extends State<MiniPlayer> {
     FBroadcast.instance().broadcast(BROADCAST_STOP_MINI_PLAYER);
     setState(() {
       opacity = 0;
-      bottom = -height;
+      height = targetHeight;
+      bottom = -targetHeight;
       videos = [];
+      showTitle = true;
     });
   }
 
@@ -63,6 +69,34 @@ class MiniPlayerState extends State<MiniPlayer> {
         bottom = aboveNavigation ? navigationBarHeight : 0;
       });
     }
+  }
+
+  onDragUpdate(DragUpdateDetails details) {
+    double opacity = 1 - min(1, ((-details.localPosition.dy) / miniPlayerThreshold));
+    double height = max(targetHeight, targetHeight + (-details.localPosition.dy));
+    setState(() {
+      showTitle = false;
+      this.height = height;
+      this.opacity = min(1, opacity);
+    });
+  }
+
+  onDragEnd(DragEndDetails details) {
+    if (height > miniPlayerThreshold) {
+      showVideo();
+    } else {
+      setState(() {
+        showTitle = true;
+        height = targetHeight;
+        opacity = 1;
+      });
+    }
+  }
+
+  showVideo() {
+    Video video = videos[currentIndex];
+    Navigator.push(context, MaterialPageRoute(builder: (context) => VideoView(videoId: video.videoId, playNow: true)));
+    hide();
   }
 
   @override
@@ -77,47 +111,61 @@ class MiniPlayerState extends State<MiniPlayer> {
         child: AnimatedOpacity(
           opacity: opacity,
           duration: animationDuration,
-          child: Container(
-            height: height,
-            color: colors.secondaryContainer,
-            child: Row(
-              // children: [Text(videos.length.toString())],
-              children: videos.isNotEmpty
-                  ? [
-                      VideoPlayer(
-                        video: videos[currentIndex],
-                        miniPlayer: true,
-                      ),
-                      Expanded(
-                          child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Builder(builder: (context) {
-                          Video vid = videos[currentIndex];
+          child: GestureDetector(
+            onVerticalDragUpdate: onDragUpdate,
+            onVerticalDragEnd: onDragEnd,
+            child: Container(
+              height: height,
+              color: colors.secondaryContainer,
+              child: Row(
+                // children: [Text(videos.length.toString())],
+                children: videos.isNotEmpty
+                    ? [
+                        VideoPlayer(
+                          video: videos[currentIndex],
+                          miniPlayer: true,
+                        ),
+                        Visibility(
+                          visible: showTitle,
+                          child: Expanded(
+                              child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Builder(builder: (context) {
+                              Video vid = videos[currentIndex];
 
-                          return GestureDetector(
-                            onTap: () {
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => VideoView(videoId: vid.videoId)));
-                              hide();
-                            },
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  vid.title,
-                                  style: themeData.textTheme.bodyMedium?.copyWith(color: colors.primary),
+                              return GestureDetector(
+                                onTap: showVideo,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      vid.title,
+                                      style: themeData.textTheme.bodyMedium?.copyWith(color: colors.primary),
+                                    ),
+                                    Text(
+                                      vid.author,
+                                      style: themeData.textTheme.bodySmall?.copyWith(color: colors.secondary),
+                                    ),
+                                  ],
                                 ),
-                                Text(
-                                  vid.author,
-                                  style: themeData.textTheme.bodySmall?.copyWith(color: colors.secondary),
-                                ),
-                              ],
+                              );
+                            }),
+                          )),
+                        ),
+                        Visibility(
+                          visible: showTitle,
+                          child: GestureDetector(
+                            onTap: hide,
+                            child: const Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: Icon(Icons.clear),
                             ),
-                          );
-                        }),
-                      ))
-                    ]
-                  : [],
+                          ),
+                        )
+                      ]
+                    : [],
+              ),
             ),
           ),
         ));

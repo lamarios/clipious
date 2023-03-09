@@ -25,9 +25,10 @@ final GlobalKey _betterPlayerKey = GlobalKey();
 class VideoPlayer extends StatefulWidget {
   final Video video;
   final bool miniPlayer;
+  bool? playNow;
   Function(BetterPlayerEvent event)? listener;
 
-  VideoPlayer({super.key, required this.video, this.listener, required this.miniPlayer});
+  VideoPlayer({super.key, required this.video, this.listener, required this.miniPlayer, this.playNow});
 
   @override
   State<VideoPlayer> createState() => _VideoPlayerState();
@@ -226,7 +227,6 @@ class _VideoPlayerState extends State<VideoPlayer> with AfterLayoutMixin<VideoPl
       }
     }
 
-
     BetterPlayerDataSource betterPlayerDataSource = BetterPlayerDataSource(BetterPlayerDataSourceType.network, videoUrl,
         videoFormat: format,
         liveStream: widget.video.liveNow,
@@ -240,7 +240,6 @@ class _VideoPlayerState extends State<VideoPlayer> with AfterLayoutMixin<VideoPl
           author: widget.video.author,
           imageUrl: widget.video.getBestThumbnail()?.url ?? '',
         ));
-
 
     bool showControls = !widget.miniPlayer;
 
@@ -319,6 +318,10 @@ class _VideoPlayerState extends State<VideoPlayer> with AfterLayoutMixin<VideoPl
 
   @override
   Future<FutureOr<void>> afterFirstLayout(BuildContext context) async {
-    setSponsorBlock(context);
+    await setSponsorBlock(context);
+
+    if (widget.playNow ?? false) {
+      playVideo();
+    }
   }
 }

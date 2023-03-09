@@ -16,8 +16,9 @@ class VideoInnerView extends StatefulWidget {
   final int selectedIndex;
   final Function(DragUpdateDetails) onVideoDrag;
   final Function(DragEndDetails) onDragEnd;
+  bool? playNow;
 
-  const VideoInnerView({super.key, required this.video, required this.selectedIndex, required this.onVideoDrag, required this.onDragEnd});
+  VideoInnerView({super.key, required this.video, required this.selectedIndex, required this.onVideoDrag, required this.onDragEnd, this.playNow});
 
   @override
   State<VideoInnerView> createState() => _VideoInnerViewState();
@@ -57,6 +58,7 @@ class _VideoInnerViewState extends State<VideoInnerView> {
             onVerticalDragUpdate: widget.onVideoDrag,
             onVerticalDragEnd: widget.onDragEnd,
             child: VideoPlayer(
+              playNow: widget.playNow,
               miniPlayer: false,
               video: widget.video,
             ),

@@ -16,10 +16,13 @@ import '../models/video.dart';
 import '../utils.dart';
 import 'video/addToPlayList.dart';
 
+const double miniPlayerThreshold = 300;
+
 class VideoView extends StatefulWidget {
   final String videoId;
+  bool? playNow;
 
-  const VideoView({super.key, required this.videoId});
+  VideoView({super.key, required this.videoId, this.playNow});
 
   @override
   State<VideoView> createState() => VideoViewState();
@@ -33,7 +36,6 @@ class VideoViewState extends State<VideoView> with AfterLayoutMixin<VideoView>, 
   int selectedIndex = 0;
   bool isLoggedIn = service.isLoggedIn();
 
-  double miniPlayerThreshold = 300;
   Offset offset = Offset.zero;
   double opacity = 1;
 
@@ -56,7 +58,7 @@ class VideoViewState extends State<VideoView> with AfterLayoutMixin<VideoView>, 
     double opacity = 1 - min(1, (details.localPosition.dy / miniPlayerThreshold));
     setState(() {
       offset = Offset(0, max(0, details.localPosition.dy));
-      this.opacity = max(0,opacity);
+      this.opacity = max(0, opacity);
     });
   }
 
@@ -157,10 +159,11 @@ class VideoViewState extends State<VideoView> with AfterLayoutMixin<VideoView>, 
                           ? VideoInnerView(
                         video: video!,
                         selectedIndex: selectedIndex,
+                        playNow: widget.playNow,
                         onVideoDrag: videoDragged,
                         onDragEnd: videoDraggedEnd,
                       )
-                          : VideoTabletInnerView(video: video!, selectedIndex: selectedIndex),
+                          : VideoTabletInnerView(video: video!, playNow: widget.playNow, selectedIndex: selectedIndex),
                     )),
               ),
             ),
