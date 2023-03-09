@@ -1,1 +1,10 @@
-{}
+{
+  "privatePlaylist": "গোপন",
+  "@privatePlaylist": {
+    "description": "Private playlist"
+  },
+  "cancel": "বাতিল",
+  "@cancel": {
+    "description": "Cancel button label"
+  }
+}
