@@ -4,8 +4,10 @@ import 'package:fbroadcast/fbroadcast.dart';
 import 'package:flutter/material.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/models/video.dart';
+import 'package:invidious/myRouteObserver.dart';
 import 'package:invidious/views/video.dart';
 import 'package:invidious/views/video/player.dart';
+import 'package:logging/logging.dart';
 
 final GlobalKey<MiniPlayerState> miniPlayerKey = GlobalKey<MiniPlayerState>();
 
@@ -22,6 +24,7 @@ const double targetHeight = 75;
 const double navigationBarHeight = 75;
 
 class MiniPlayerState extends State<MiniPlayer> {
+  var log = Logger('MiniPlayer');
   double opacity = 0;
   double bottom = 0;
   int currentIndex = 0;
@@ -34,6 +37,10 @@ class MiniPlayerState extends State<MiniPlayer> {
     super.initState();
     setState(() {
       videos = widget.videos ?? [];
+    });
+    FBroadcast.instance().register(BROADCAST_MOVE_MINI_PLAYER, (value, callback) {
+      print('$value');
+      move(value);
     });
     show();
   }
@@ -64,11 +71,12 @@ class MiniPlayerState extends State<MiniPlayer> {
 
   void move(bool aboveNavigation) {
     // if we're not hidden only we do something
-    if (bottom > 0) {
-      setState(() {
+    setState(() {
+      if (bottom >= 0) {
+        log.info('Moving mini player above ? ${aboveNavigation} : ${navigationBarHeight} ');
         bottom = aboveNavigation ? navigationBarHeight : 0;
-      });
-    }
+      }
+    });
   }
 
   onDragUpdate(DragUpdateDetails details) {
@@ -95,7 +103,7 @@ class MiniPlayerState extends State<MiniPlayer> {
 
   showVideo() {
     Video video = videos[currentIndex];
-    Navigator.push(context, MaterialPageRoute(builder: (context) => VideoView(videoId: video.videoId, playNow: true)));
+    Navigator.push(context, MaterialPageRoute(settings: ROUTE_VIDEO,builder: (context) => VideoView(videoId: video.videoId, playNow: true)));
     hide();
   }
 
@@ -141,11 +149,11 @@ class MiniPlayerState extends State<MiniPlayer> {
                                   children: [
                                     Text(
                                       vid.title,
-                                      style: themeData.textTheme.bodyMedium?.copyWith(color: colors.primary),
+                                      style: themeData.textTheme.bodyMedium?.copyWith(color: colors.primary, fontSize: 12),
                                     ),
                                     Text(
                                       vid.author,
-                                      style: themeData.textTheme.bodySmall?.copyWith(color: colors.secondary),
+                                      style: themeData.textTheme.bodySmall?.copyWith(color: colors.secondary, fontSize: 11),
                                     ),
                                   ],
                                 ),

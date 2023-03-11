@@ -7,6 +7,7 @@ import 'package:invidious/globals.dart';
 import 'package:invidious/models/imageObject.dart';
 import 'package:invidious/models/playlist.dart';
 import 'package:invidious/models/videoInList.dart';
+import 'package:invidious/myRouteObserver.dart';
 import 'package:invidious/views/components/videoThumbnail.dart';
 import 'package:invidious/views/playlistView.dart';
 
@@ -27,6 +28,7 @@ class _PlaylistItemState extends State<PlaylistItem> with AfterLayoutMixin<Playl
     Navigator.push(
         context,
         MaterialPageRoute(
+            settings: ROUTE_PLAYLIST,
             builder: (context) => PlaylistView(
                   playlist: widget.playlist,
                   canDeleteVideos: widget.canDeleteVideos,

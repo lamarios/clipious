@@ -61,7 +61,7 @@ dependencies:
   receive_sharing_intent: 1.4.5
   logging: 1.1.1
   application_icon: 2.0.0
-  flutter_native_splash: 2.2.18
+  flutter_native_splash: 2.2.19
   flutter_linkify: 5.0.2
   url_launcher: 6.1.10
 

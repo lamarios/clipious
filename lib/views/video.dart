@@ -163,7 +163,7 @@ class VideoViewState extends State<VideoView> with AfterLayoutMixin<VideoView>, 
                         onVideoDrag: videoDragged,
                         onDragEnd: videoDraggedEnd,
                       )
-                          : VideoTabletInnerView(video: video!, playNow: widget.playNow, selectedIndex: selectedIndex),
+                          : VideoTabletInnerView(video: video!, playNow: widget.playNow, selectedIndex: selectedIndex, onDragEnd: videoDraggedEnd, onVideoDrag: videoDragged,),
                     )),
               ),
             ),

@@ -138,10 +138,10 @@ class ChannelViewState extends State<ChannelView> with AfterLayoutMixin<ChannelV
               },
               selectedIndex: selectedIndex,
               destinations: <Widget>[
-                NavigationDestination(icon: Icon(Icons.info), label: locals.info),
-                NavigationDestination(icon: Icon(Icons.play_arrow), label: locals.videos),
-                NavigationDestination(icon: Icon(Icons.stream), label: locals.streams),
-                NavigationDestination(icon: Icon(Icons.playlist_play), label: locals.playlists)
+                NavigationDestination(icon: const Icon(Icons.info), label: locals.info),
+                NavigationDestination(icon: const Icon(Icons.play_arrow), label: locals.videos),
+                NavigationDestination(icon: const Icon(Icons.stream), label: locals.streams),
+                NavigationDestination(icon: const Icon(Icons.playlist_play), label: locals.playlists)
               ],
             ),
       body: SafeArea(
