@@ -8,8 +8,9 @@ import 'package:invidious/service.dart';
 import 'models/country.dart';
 
 const BROADCAST_SERVER_CHANGED = 'server-changed';
-const BROAD_CAST_STOP_PLAYING = 'stop-playing';
-
+const BROADCAST_STOP_PLAYING = 'stop-playing';
+const BROADCAST_STOP_MINI_PLAYER = 'stop-mini-player';
+const BROADCAST_MOVE_MINI_PLAYER = 'move-mini-player';
 
 const YOUTUBE_HOSTS = ['youtube.com', 'www.youtube.com', 'm.youtube.com', 'youtu.be'];
 

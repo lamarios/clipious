@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/models/searchResult.dart';
+import 'package:invidious/views/miniPlayer.dart';
 import 'package:invidious/views/playlists.dart';
 import 'package:invidious/views/popular.dart';
 import 'package:invidious/views/search.dart';
@@ -19,11 +20,14 @@ import 'package:logging/logging.dart';
 import 'package:receive_sharing_intent/receive_sharing_intent.dart';
 
 import 'database.dart';
+import 'myRouteObserver.dart';
 
 const brandColor = Color(0xFF4f0096);
 
 final scaffoldKey = GlobalKey<ScaffoldMessengerState>();
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+final RouteObserver<ModalRoute> routeObserver = MyRouteObserver();
+
 
 Future<void> main() async {
   Logger.root.level = Level.ALL; // defaults to Level.INFO
@@ -36,10 +40,10 @@ Future<void> main() async {
   runApp(const MyApp());
 }
 
-final RouteObserver<ModalRoute> routeObserver = RouteObserver<ModalRoute>();
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+
 
   @override
   Widget build(BuildContext context) {
@@ -172,7 +176,7 @@ class HomeState extends State<Home> {
   }
 
   openSettings(BuildContext context) {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => const Settings()));
+    Navigator.push(context, MaterialPageRoute(settings: ROUTE_SETTINGS ,builder: (context) => const Settings()));
   }
 
   // This widget is the root of your application.
@@ -290,7 +294,6 @@ class HomeState extends State<Home> {
 }
 
 class MySearchDelegate extends SearchDelegate<String> {
-
   @override
   List<Widget>? buildActions(BuildContext context) => [
         IconButton(

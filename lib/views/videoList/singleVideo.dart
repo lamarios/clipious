@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/models/videoInList.dart';
+import 'package:invidious/myRouteObserver.dart';
 import 'package:invidious/views/components/videoThumbnail.dart';
 import 'package:logging/logging.dart';
 
@@ -27,8 +28,8 @@ class _VideoListItemState extends State<VideoListItem> with RouteAware {
   late double progress;
 
   openVideo(BuildContext context) {
-    FBroadcast.instance().broadcast(BROAD_CAST_STOP_PLAYING);
-    Navigator.push(context, MaterialPageRoute(builder: (context) => VideoView(videoId: widget.video.videoId)));
+    FBroadcast.instance().broadcast(BROADCAST_STOP_PLAYING);
+    Navigator.push(context, MaterialPageRoute(settings: ROUTE_VIDEO, builder: (context) => VideoView(videoId: widget.video.videoId)));
   }
 
   @override
@@ -156,7 +157,7 @@ class _VideoListItemState extends State<VideoListItem> with RouteAware {
           Visibility(
             child: InkWell(
               onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context) => ChannelView(channelId: widget.video.authorId!)));
+                Navigator.push(context, MaterialPageRoute(settings: ROUTE_CHANNEL, builder: (context) => ChannelView(channelId: widget.video.authorId!)));
               },
               child: Row(
                 children: [

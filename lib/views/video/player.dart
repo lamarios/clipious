@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/models/db/settings.dart';
+import 'package:invidious/utils.dart';
 import 'package:logging/logging.dart';
 
 import '../../database.dart';
@@ -17,14 +18,17 @@ import '../../models/pair.dart';
 import '../../models/sponsorSegment.dart';
 import '../../models/video.dart';
 import '../components/videoThumbnail.dart';
+import '../miniPlayer.dart';
 
 final GlobalKey _betterPlayerKey = GlobalKey();
 
 class VideoPlayer extends StatefulWidget {
   final Video video;
+  final bool miniPlayer;
+  bool? playNow;
   Function(BetterPlayerEvent event)? listener;
 
-  VideoPlayer({super.key, required this.video, this.listener});
+  VideoPlayer({super.key, required this.video, this.listener, required this.miniPlayer, this.playNow});
 
   @override
   State<VideoPlayer> createState() => _VideoPlayerState();
@@ -42,19 +46,28 @@ class _VideoPlayerState extends State<VideoPlayer> with AfterLayoutMixin<VideoPl
   @override
   void initState() {
     super.initState();
-    FBroadcast.instance().register(BROAD_CAST_STOP_PLAYING, (value, callback) {
-      disposeControllers();
-    });
+    if (widget.miniPlayer) {
+      FBroadcast.instance().register(BROADCAST_STOP_MINI_PLAYER, (value, callback) {
+        log.info("HHHHHHHHHHHHHHHHHHHHHHHHHHHHEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEELLLLLOOOO???");
+        disposeControllers();
+      });
+    } else {
+      FBroadcast.instance().register(BROADCAST_STOP_PLAYING, (value, callback) {
+        disposeControllers();
+      });
+    }
   }
 
   @override
   void didPopNext() {
-    super.didPopNext();
-    if (videoController != null) {
-      log.info('popnext ${videoController?.isPlaying()}');
-      if (!(videoController?.isPlaying() ?? false)) {
-        // we restart the video
-        disposeControllers();
+    if (!widget.miniPlayer) {
+      super.didPopNext();
+      if (videoController != null) {
+        log.info('popnext ${videoController?.isPlaying()}');
+        if (!(videoController?.isPlaying() ?? false)) {
+          // we restart the video
+          disposeControllers();
+        }
       }
     }
   }
@@ -79,8 +92,13 @@ class _VideoPlayerState extends State<VideoPlayer> with AfterLayoutMixin<VideoPl
 
   @override
   void didChangeDependencies() {
+    disposeControllers();
+    if (!widget.miniPlayer) {
+      routeObserver.subscribe(this, ModalRoute.of(context) as PageRoute<dynamic>);
+    } else {
+      playVideo();
+    }
     super.didChangeDependencies();
-    routeObserver.subscribe(this, ModalRoute.of(context) as PageRoute<dynamic>);
   }
 
   @override
@@ -100,6 +118,7 @@ class _VideoPlayerState extends State<VideoPlayer> with AfterLayoutMixin<VideoPl
 
   disposeControllers() {
     if (videoController != null) {
+      saveProgress(videoController?.videoPlayerController?.value.position.inSeconds ?? 0);
       videoController!.removeEventsListener(onVideoListener);
       videoController!.dispose();
       if (context.mounted) {
@@ -208,7 +227,6 @@ class _VideoPlayerState extends State<VideoPlayer> with AfterLayoutMixin<VideoPl
       }
     }
 
-
     BetterPlayerDataSource betterPlayerDataSource = BetterPlayerDataSource(BetterPlayerDataSourceType.network, videoUrl,
         videoFormat: format,
         liveStream: widget.video.liveNow,
@@ -223,6 +241,8 @@ class _VideoPlayerState extends State<VideoPlayer> with AfterLayoutMixin<VideoPl
           imageUrl: widget.video.getBestThumbnail()?.url ?? '',
         ));
 
+    bool showControls = !widget.miniPlayer;
+
     setState(() {
       videoController = BetterPlayerController(
           BetterPlayerConfiguration(
@@ -236,6 +256,14 @@ class _VideoPlayerState extends State<VideoPlayer> with AfterLayoutMixin<VideoPl
               allowedScreenSleep: false,
               fit: BoxFit.contain,
               controlsConfiguration: BetterPlayerControlsConfiguration(
+                  enableFullscreen: showControls,
+                  enablePip: showControls,
+                  enableOverflowMenu: showControls,
+                  enableMute: showControls,
+                  enableProgressBar: showControls,
+                  enableProgressText: showControls,
+                  enableSkips: showControls,
+                  enablePlayPause: showControls,
                   overflowMenuCustomItems: [BetterPlayerOverflowMenuItem(useDash ? Icons.check_box_outlined : Icons.check_box_outline_blank, locals.useDash, toggleDash)])),
           betterPlayerDataSource: betterPlayerDataSource);
       videoController!.addEventsListener(onVideoListener);
@@ -250,13 +278,17 @@ class _VideoPlayerState extends State<VideoPlayer> with AfterLayoutMixin<VideoPl
         child: AnimatedSwitcher(
             duration: animationDuration,
             child: videoController != null
-                ? BetterPlayer(key: _betterPlayerKey, controller: videoController!)
+                ? BetterPlayer(controller: videoController!)
                 : VideoThumbnailView(
                     videoId: widget.video.videoId,
                     thumbnailUrl: widget.video.getBestThumbnail()?.url ?? '',
                     child: IconButton(
                       key: const ValueKey('nt-playing'),
-                      onPressed: () => playVideo(),
+                      onPressed: () {
+                        // we hide the mini player only when that particular button is pressed
+                        hideMiniPlayer(context);
+                        playVideo();
+                      },
                       icon: const Icon(
                         Icons.play_arrow,
                         size: 100,
@@ -274,7 +306,7 @@ class _VideoPlayerState extends State<VideoPlayer> with AfterLayoutMixin<VideoPl
         Duration end = Duration(seconds: e.segment[1].floor());
         Pair<int> segment = Pair(start.inMilliseconds, end.inMilliseconds);
         return segment;
-      }).toList());
+      }));
 
       if (context.mounted) {
         setState(() {
@@ -286,6 +318,10 @@ class _VideoPlayerState extends State<VideoPlayer> with AfterLayoutMixin<VideoPl
 
   @override
   Future<FutureOr<void>> afterFirstLayout(BuildContext context) async {
-    setSponsorBlock(context);
+    await setSponsorBlock(context);
+
+    if (widget.playNow ?? false) {
+      playVideo();
+    }
   }
 }
