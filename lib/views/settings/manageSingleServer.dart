@@ -20,6 +20,7 @@ class ManageSingleServer extends StatefulWidget {
 
 class _ManageSingleServerState extends State<ManageSingleServer> {
   late Server server;
+  bool canDelete = db.getServers().length > 1;
 
   @override
   void initState() {
@@ -136,10 +137,7 @@ class _ManageSingleServerState extends State<ManageSingleServer> {
         backgroundColor: colorScheme.background,
         body: SafeArea(
           bottom: false,
-          child: SettingsList(
-              lightTheme: theme,
-              darkTheme: theme,
-              sections: [
+          child: SettingsList(lightTheme: theme, darkTheme: theme, sections: [
             SettingsSection(tiles: [
               SettingsTile.switchTile(
                 initialValue: server.inUse,
@@ -150,17 +148,17 @@ class _ManageSingleServerState extends State<ManageSingleServer> {
             ]),
             SettingsSection(title: Text(locals.authentication), tiles: [
               SettingsTile(
-                leading: server.authToken != null ? const Icon(Icons.check) : const Icon(Icons.token),
+                leading: server.authToken?.isNotEmpty ?? false ? const Icon(Icons.check) : const Icon(Icons.token),
                 enabled: !isLoggedIn,
                 title: Text(locals.tokenLogin),
-                value: Text(locals.tokenLoginDescription),
+                value: Text(server.authToken?.isNotEmpty ?? false ? locals.loggedIn : locals.tokenLoginDescription),
                 onPressed: logInWithToken,
               ),
               SettingsTile(
-                leading: server.sidCookie != null ? const Icon(Icons.check) : const Icon(Icons.cookie_outlined),
+                leading: server.sidCookie?.isNotEmpty ?? false ? const Icon(Icons.check) : const Icon(Icons.cookie_outlined),
                 enabled: !isLoggedIn,
                 title: Text(locals.cookieLogin),
-                value: Text(locals.cookieLoginDescription),
+                value: Text(server.sidCookie?.isNotEmpty ?? false ? locals.loggedIn : locals.cookieLoginDescription),
                 onPressed: showLogInWithCookiesDialog,
               ),
               SettingsTile(
@@ -172,14 +170,15 @@ class _ManageSingleServerState extends State<ManageSingleServer> {
             ]),
             SettingsSection(title: const Text(''), tiles: [
               SettingsTile(
+                enabled: canDelete,
                 onPressed: deleteServer,
-                leading: const Icon(
+                leading: Icon(
                   Icons.delete,
-                  color: Colors.red,
+                  color: canDelete ? Colors.red : Colors.red.withOpacity(0.5),
                 ),
                 title: Text(
                   locals.delete,
-                  style: const TextStyle(color: Colors.red),
+                  style: TextStyle(color: canDelete ? Colors.red : Colors.red.withOpacity(0.5)),
                 ),
               )
             ])
