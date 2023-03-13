@@ -5,7 +5,7 @@
   "entities": [
     {
       "id": "1:8038281984607819042",
-      "lastPropertyId": "6:2632576147281157993",
+      "lastPropertyId": "7:7993511472188126727",
       "name": "Server",
       "properties": [
         {
@@ -30,6 +30,11 @@
           "id": "6:2632576147281157993",
           "name": "inUse",
           "type": 1
+        },
+        {
+          "id": "7:7993511472188126727",
+          "name": "sidCookie",
+          "type": 9
         }
       ],
       "relations": []

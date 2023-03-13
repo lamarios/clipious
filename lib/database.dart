@@ -95,7 +95,8 @@ class DbClient {
   }
 
   bool isLoggedInToCurrentServer() {
-    return getCurrentlySelectedServer().authToken?.isNotEmpty ?? false;
+    var currentlySelectedServer = getCurrentlySelectedServer();
+    return (currentlySelectedServer.authToken?.isNotEmpty ?? false) || (currentlySelectedServer.sidCookie?.isNotEmpty ?? false);
   }
 
   double getVideoProgress(String videoId) {

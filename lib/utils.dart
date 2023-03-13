@@ -153,7 +153,6 @@ Country getCountryFromCode(String code) {
 
 void showMiniPlayer(BuildContext context, List<Video> videos) {
   if (!(miniPlayerKey.currentState?.mounted ?? false)) {
-    print('Showing overlay');
     Overlay.of(context).insert(OverlayEntry(
       builder: (context) => MiniPlayer(
         key: miniPlayerKey,

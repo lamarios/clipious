@@ -7,6 +7,7 @@ class Server {
   @Unique(onConflict: ConflictStrategy.replace)
   String url;
   String? authToken;
+  String? sidCookie;
 
   @Transient()
   Duration? ping;
