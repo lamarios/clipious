@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_web_auth/flutter_web_auth.dart';
 import 'package:invidious/models/errors/invidiousServiceError.dart';
+import 'package:invidious/views/settings/manageSingleServer.dart';
 import 'package:logging/logging.dart';
 import 'package:settings_ui/settings_ui.dart';
 
@@ -38,7 +39,7 @@ class _ManagerServersViewState extends State<ManagerServersView> with AfterLayou
   bool isLoggedInToServer(String url) {
     Server server = dbServers.firstWhere((s) => s.url == url, orElse: () => Server('notFound'));
 
-    return (server.authToken?.length ?? 0) > 0;
+    return (server.authToken?.isNotEmpty ?? false) || (server.sidCookie?.isNotEmpty ?? false);
   }
 
   @override
@@ -53,25 +54,6 @@ class _ManagerServersViewState extends State<ManagerServersView> with AfterLayou
     super.dispose();
   }
 
-  logIn(String serverUrl) async {
-    String url = '$serverUrl/authorize_token?scopes=:feed,:subscriptions*,:playlists*&callback_url=clipious-auth://';
-    final result = await FlutterWebAuth.authenticate(url: url, callbackUrlScheme: 'clipious-auth');
-
-    final token = Uri.parse(result).queryParameters['token'];
-
-    Server? server = db.getServer(serverUrl);
-
-    if (server != null) {
-      server.authToken = Uri.decodeComponent(token ?? '');
-
-      db.upsertServer(server);
-
-      refreshServers();
-      FBroadcast.instance().broadcast(BROADCAST_SERVER_CHANGED);
-    } else {
-      throw InvidiousServiceError('logging in to deleted server');
-    }
-  }
 
   refreshServers() {
     var servers = publicServers.where((s) => dbServers.indexWhere((element) => element.url == s.url) == -1).toList();
@@ -80,17 +62,6 @@ class _ManagerServersViewState extends State<ManagerServersView> with AfterLayou
       dbServers = db.getServers();
       publicServers = servers;
     });
-  }
-
-  deleteServer(BuildContext context, Server server) {
-    db.deleteServer(server);
-    refreshServers();
-
-    Server currentServer = db.getCurrentlySelectedServer();
-    if (currentServer.url == server.url) {
-      db.deleteSetting(SELECTED_SERVER);
-    }
-    Navigator.pop(context);
   }
 
   showPublicServerActions(BuildContext context, Server server) {
@@ -125,83 +96,6 @@ class _ManagerServersViewState extends State<ManagerServersView> with AfterLayou
                       ],
                     ),
                   ),
-                ],
-              ),
-            ),
-          );
-        });
-  }
-
-  showServerActions(BuildContext context, Server server) {
-    var locals = AppLocalizations.of(context)!;
-    showModalBottomSheet<void>(
-        context: context,
-        builder: (BuildContext context) {
-          return SizedBox(
-            height: 100,
-            child: Center(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        IconButton(
-                          onPressed: () {
-                            db.useServer(server);
-                            refreshServers();
-                            Navigator.pop(context);
-                          },
-                          icon: const Icon(Icons.done),
-                        ),
-                        Text(
-                          locals.useThisServer,
-                          style: const TextStyle(fontSize: 10),
-                        )
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        IconButton(
-                          onPressed: () {
-                            logIn(server.url);
-                            Navigator.pop(context);
-                          },
-                          icon: const Icon(Icons.person),
-                        ),
-                        Text(
-                          locals.logIn,
-                          style: TextStyle(fontSize: 10),
-                        )
-                      ],
-                    ),
-                  ),
-                  Visibility(
-                    visible: dbServers.length > 1,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          IconButton(
-                            onPressed: () => deleteServer(context, server),
-                            icon: const Icon(Icons.delete),
-                          ),
-                          Text(
-                            locals.delete,
-                            style: TextStyle(fontSize: 10),
-                          )
-                        ],
-                      ),
-                    ),
-                  )
                 ],
               ),
             ),
@@ -280,6 +174,15 @@ class _ManagerServersViewState extends State<ManagerServersView> with AfterLayou
             ));
   }
 
+  openServer(BuildContext context, Server s){
+    Navigator.push(context, MaterialPageRoute(builder: (context) => ManageSingleServer(server: s, refreshServers: refreshServers,),));
+  }
+
+  switchServer(Server s){
+    db.useServer(s);
+    refreshServers();
+  }
+
   @override
   Widget build(BuildContext context) {
     ColorScheme colorScheme = Theme.of(context).colorScheme;
@@ -299,13 +202,19 @@ class _ManagerServersViewState extends State<ManagerServersView> with AfterLayou
                 tiles: dbServers.isNotEmpty
                     ? dbServers
                         .map((s) => SettingsTile(
-                              leading: Icon(
-                                Icons.done,
-                                color: s.inUse ? colorScheme.primary : colorScheme.secondaryContainer,
+                              leading: InkWell(
+                                onTap: () => switchServer(s),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Icon(
+                                    Icons.done,
+                                    color: s.inUse ? colorScheme.primary : colorScheme.secondaryContainer,
+                                  ),
+                                ),
                               ),
                               title: Text(s.url),
-                              value: s.authToken?.isNotEmpty ?? false ? Text(locals.loggedIn) : Text(locals.notLoggedIn),
-                              onPressed: (context) => showServerActions(context, s),
+                              value: Text('${isLoggedInToServer(s.url)? '${locals.loggedIn}, ': ''} ${locals.tapToManage}'),
+                              onPressed: (context) => openServer(context, s),
                             ))
                         .toList()
                     : [

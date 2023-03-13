@@ -1,7 +1,9 @@
 import 'dart:convert';
 
+import 'package:fbroadcast/fbroadcast.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_web_auth/flutter_web_auth.dart';
 import 'package:http/http.dart';
 import 'package:http/http.dart' as http;
 import 'package:invidious/database.dart';
@@ -19,6 +21,7 @@ import 'package:logging/logging.dart';
 import 'models/channel.dart';
 import 'models/channelPlaylists.dart';
 import 'models/channelVideos.dart';
+import 'models/db/server.dart';
 import 'models/invidiousPublicServer.dart';
 import 'models/searchSuggestion.dart';
 import 'models/subscription.dart';
@@ -54,6 +57,7 @@ class Service {
 
   handleResponse(Response response) {
     var body = utf8.decode(response.bodyBytes);
+
     if (body.isNotEmpty) {
       var decoded = jsonDecode(body);
       String? error;
@@ -110,6 +114,60 @@ class Service {
     return Video.fromJson(handleResponse(response));
   }
 
+  Future<String> loginWithCookies(String serverUrl, String username, String password) async {
+    try {
+      String url = '$serverUrl/login?type=invidious';
+      var map = {'email': username, 'password': password};
+
+      final response = await http.post(Uri.parse(url), body: map);
+      log.info(response.headers);
+      if (response.statusCode == 302 && response.headers.containsKey('set-cookie')) {
+        // we have a cookie to parse
+        return response.headers['set-cookie']!.split(';').firstWhere((element) => element.startsWith('SID='));
+      } else {
+        throw InvidiousServiceError('wrong error code (${response.statusCode} or no cookie headers ${response.headers['set-cookie']}');
+      }
+    } catch (err) {
+      if (err is InvidiousServiceError) {
+        log.info(err.message);
+      }
+
+      log.info(err);
+      throw InvidiousServiceError('Wrong username or password');
+    }
+  }
+
+  logIn(String serverUrl) async {
+    String url = '$serverUrl/authorize_token?scopes=:feed,:subscriptions*,:playlists*&callback_url=clipious-auth://';
+    final result = await FlutterWebAuth.authenticate(url: url, callbackUrlScheme: 'clipious-auth');
+
+    final token = Uri.parse(result).queryParameters['token'];
+
+    Server? server = db.getServer(serverUrl);
+
+    if (server != null) {
+      server.authToken = Uri.decodeComponent(token ?? '');
+
+      db.upsertServer(server);
+
+      FBroadcast.instance().broadcast(BROADCAST_SERVER_CHANGED);
+    } else {
+      throw InvidiousServiceError('logging in to deleted server');
+    }
+  }
+
+  Map<String, String> getAuthenticationHeaders(Server s) {
+    if (s.authToken != null && s.authToken!.isNotEmpty) {
+      log.info('logged in with token');
+      return {'Authorization': 'Bearer ${s.authToken}'};
+    } else if (s.sidCookie != null && s.sidCookie!.isNotEmpty) {
+      log.info('logged in with cookie');
+      return {'Cookie': s.sidCookie!};
+    } else {
+      throw InvidiousServiceError('No authentication method provided to access authenticated endpoint');
+    }
+  }
+
   Future<List<VideoInList>> getTrending({String? type}) async {
     String countryCode = db.getSettings(BROWSING_COUNTRY)?.value ?? 'US';
     // parse.queryParameters['region'] = countryCode;
@@ -120,6 +178,7 @@ class Service {
     }
 
     final response = await http.get(buildUrl(GET_TRENDING, query: query));
+
     Iterable i = handleResponse(response);
     return List<VideoInList>.from(i.map((e) => VideoInList.fromJson(e)));
   }
@@ -165,7 +224,7 @@ class Service {
 
     Uri uri = buildUrl(GET_USER_FEED, query: {'max_results': maxResults?.toString(), 'page': page?.toString()});
 
-    var headers = {'Authorization': 'Bearer ${currentlySelectedServer.authToken}'};
+    var headers = getAuthenticationHeaders(currentlySelectedServer);
     final response = await http.get(uri, headers: headers);
     return UserFeed.fromJson(handleResponse(response));
   }
@@ -187,7 +246,7 @@ class Service {
     String url = currentlySelectedServer.url + SEARCH_SUGGESTIONS.replaceAll(":query", query);
 
     log.info('Calling $url');
-    var headers = {'Authorization': 'Bearer ${currentlySelectedServer.authToken}'};
+    var headers = getAuthenticationHeaders(currentlySelectedServer);
 
     final response = await http.get(Uri.parse(url), headers: headers);
     return SearchSuggestion.fromJson(handleResponse(response));
@@ -207,7 +266,7 @@ class Service {
   }
 
   bool isLoggedIn() {
-    return db.getCurrentlySelectedServer().authToken != null;
+    return db.isLoggedInToCurrentServer();
   }
 
   Future<void> subscribe(String channelId) async {
@@ -217,7 +276,7 @@ class Service {
     String url = currentlySelectedServer.url + ADD_DELETE_SUBSCRIPTION.replaceAll(":ucid", channelId);
 
     log.info('Calling $url');
-    var headers = {'Authorization': 'Bearer ${currentlySelectedServer.authToken}'};
+    var headers = getAuthenticationHeaders(currentlySelectedServer);
 
     final response = await http.post(Uri.parse(url), headers: headers);
   }
@@ -229,7 +288,7 @@ class Service {
     String url = currentlySelectedServer.url + ADD_DELETE_SUBSCRIPTION.replaceAll(":ucid", channelId);
 
     log.info('Calling $url');
-    var headers = {'Authorization': 'Bearer ${currentlySelectedServer.authToken}'};
+    var headers = getAuthenticationHeaders(currentlySelectedServer);
 
     final response = await http.delete(Uri.parse(url), headers: headers);
     log.info('${response.statusCode} - ${response.body}');
@@ -242,7 +301,7 @@ class Service {
     String url = currentlySelectedServer.url + GET_SUBSCIPTIONS;
 
     log.info('Calling $url');
-    var headers = {'Authorization': 'Bearer ${currentlySelectedServer.authToken}'};
+    var headers = getAuthenticationHeaders(currentlySelectedServer);
 
     final response = await http.get(Uri.parse(url), headers: headers);
     Iterable i = handleResponse(response);
@@ -251,7 +310,6 @@ class Service {
   }
 
   Future<VideoComments> getComments(String videoId, {String? continuation, String? sortBy, String? source}) async {
-
     Map<String, String> queryStr = {};
     if (continuation != null) queryStr.putIfAbsent('continuation', () => continuation);
     if (sortBy != null) queryStr.putIfAbsent('sort_by', () => sortBy);
@@ -288,7 +346,7 @@ class Service {
     String url = '${currentlySelectedServer.url}${GET_USER_PLAYLISTS}';
 
     log.info('Calling $url');
-    var headers = {'Authorization': 'Bearer ${currentlySelectedServer.authToken}'};
+    var headers = getAuthenticationHeaders(currentlySelectedServer);
 
     final response = await http.get(Uri.parse(url), headers: headers);
     Iterable i = handleResponse(response);
@@ -308,7 +366,8 @@ class Service {
     String url = '${currentlySelectedServer.url}${POST_USER_PLAYLIST}';
 
     log.info('Calling $url');
-    var headers = {'Authorization': 'Bearer ${currentlySelectedServer.authToken}', 'Content-Type': 'application/json'};
+    var headers = getAuthenticationHeaders(currentlySelectedServer);
+    headers['Content-Type'] = 'application/json';
 
     Map<String, String> body = {
       'title': name,
@@ -327,7 +386,8 @@ class Service {
     String url = '${currentlySelectedServer.url}${POST_USER_PLAYLIST_VIDEO.replaceAll(":id", playListId)}';
 
     log.info('Calling $url');
-    var headers = {'Authorization': 'Bearer ${currentlySelectedServer.authToken}', 'Content-Type': 'application/json'};
+    var headers = getAuthenticationHeaders(currentlySelectedServer);
+    headers['Content-Type'] = 'application/json';
 
     Map<String, String> body = {
       'videoId': videoId,
@@ -342,7 +402,8 @@ class Service {
     String url = '${currentlySelectedServer.url}${DELETE_USER_PLAYLIST.replaceAll(":id", playListId)}';
 
     log.info('Calling $url');
-    var headers = {'Authorization': 'Bearer ${currentlySelectedServer.authToken}', 'Content-Type': 'application/json'};
+    var headers = getAuthenticationHeaders(currentlySelectedServer);
+    headers['Content-Type'] = 'application/json';
 
     final response = await http.delete(Uri.parse(url), headers: headers);
     handleResponse(response);
@@ -353,7 +414,8 @@ class Service {
     String url = '${currentlySelectedServer.url}${DELETE_USER_PLAYLIST_VIDEO.replaceAll(":id", playListId).replaceAll(":index", indexId)}';
 
     log.info('Calling $url');
-    var headers = {'Authorization': 'Bearer ${currentlySelectedServer.authToken}', 'Content-Type': 'application/json'};
+    var headers = getAuthenticationHeaders(currentlySelectedServer);
+    headers['Content-Type'] = 'application/json';
 
     final response = await http.delete(Uri.parse(url), headers: headers);
     handleResponse(response);

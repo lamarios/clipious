@@ -24,7 +24,7 @@ final _entities = <ModelEntity>[
   ModelEntity(
       id: const IdUid(1, 8038281984607819042),
       name: 'Server',
-      lastPropertyId: const IdUid(6, 2632576147281157993),
+      lastPropertyId: const IdUid(7, 7993511472188126727),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
@@ -47,6 +47,11 @@ final _entities = <ModelEntity>[
             id: const IdUid(6, 2632576147281157993),
             name: 'inUse',
             type: 1,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(7, 7993511472188126727),
+            name: 'sidCookie',
+            type: 9,
             flags: 0)
       ],
       relations: <ModelRelation>[],
@@ -149,11 +154,15 @@ ModelDefinition getObjectBoxModel() {
           final authTokenOffset = object.authToken == null
               ? null
               : fbb.writeString(object.authToken!);
-          fbb.startTable(7);
+          final sidCookieOffset = object.sidCookie == null
+              ? null
+              : fbb.writeString(object.sidCookie!);
+          fbb.startTable(8);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, urlOffset);
           fbb.addOffset(2, authTokenOffset);
           fbb.addBool(5, object.inUse);
+          fbb.addOffset(6, sidCookieOffset);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -167,7 +176,9 @@ ModelDefinition getObjectBoxModel() {
             ..authToken = const fb.StringReader(asciiOptimization: true)
                 .vTableGetNullable(buffer, rootOffset, 8)
             ..inUse =
-                const fb.BoolReader().vTableGet(buffer, rootOffset, 14, false);
+                const fb.BoolReader().vTableGet(buffer, rootOffset, 14, false)
+            ..sidCookie = const fb.StringReader(asciiOptimization: true)
+                .vTableGetNullable(buffer, rootOffset, 16);
 
           return object;
         }),
@@ -250,6 +261,10 @@ class Server_ {
 
   /// see [Server.inUse]
   static final inUse = QueryBooleanProperty<Server>(_entities[0].properties[3]);
+
+  /// see [Server.sidCookie]
+  static final sidCookie =
+      QueryStringProperty<Server>(_entities[0].properties[4]);
 }
 
 /// [SettingsValue] entity fields to define ObjectBox queries.
