@@ -251,16 +251,13 @@ class Service {
   }
 
   Future<VideoComments> getComments(String videoId, {String? continuation, String? sortBy, String? source}) async {
-    var currentlySelectedServer = db.getCurrentlySelectedServer();
 
     Map<String, String> queryStr = {};
     if (continuation != null) queryStr.putIfAbsent('continuation', () => continuation);
     if (sortBy != null) queryStr.putIfAbsent('sort_by', () => sortBy);
     if (source != null) queryStr.putIfAbsent('source', () => source);
 
-    var headers = {'Authorization': 'Bearer ${currentlySelectedServer.authToken}'};
-
-    final response = await http.get(buildUrl(GET_COMMENTS, pathParams: {':id': videoId}, query: queryStr), headers: headers);
+    final response = await http.get(buildUrl(GET_COMMENTS, pathParams: {':id': videoId}, query: queryStr));
     return VideoComments.fromJson(handleResponse(response));
   }
 
