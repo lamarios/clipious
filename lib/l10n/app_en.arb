@@ -359,7 +359,7 @@
   "@tokenLogin": {
     "description": "Textto login to a server using the recommended way"
   },
-  "tokenLoginDescription": "Recommended",
+  "tokenLoginDescription": "Recommended way to log in",
   "@tokenLoginDescription": {
     "description": "Recommended way to log in"
   },
@@ -371,22 +371,22 @@
   "@cookieLoginDescription": {
     "description": "Cookie log in description"
   },
-    "logout": "Log out",
-      "@logout": {
-        "description": "CTA to logout of a server"
-      },
+  "logout": "Log out",
+  "@logout": {
+    "description": "CTA to logout of a server"
+  },
   "username": "Username",
-    "@username": {
-      "description": "Username label for login to a server"
-    },
-    "password": "Password",
-      "@password": {
-        "description": "Password label for login to a server"
-      },
-   "wrongUsernamePassword": "Wrong username or password",
-     "@wrongUsernamePassword": {
-       "description": "Error message when authentication fails"
-     },
+  "@username": {
+    "description": "Username label for login to a server"
+  },
+  "password": "Password",
+  "@password": {
+    "description": "Password label for login to a server"
+  },
+  "wrongUsernamePassword": "Wrong username or password",
+  "@wrongUsernamePassword": {
+    "description": "Error message when authentication fails"
+  },
   "error": "Error",
   "@error": {},
   "nVideos": "{count, plural, =0{No videos} =1{1 video} other{{count} videos}}",
