@@ -355,7 +355,7 @@
   "@authentication": {
     "description": "Label for server settings related to authentications"
   },
-  "tokenLogin": "Login with token",
+  "tokenLogin": "Log in with token",
   "@tokenLogin": {
     "description": "Textto login to a server using the recommended way"
   },
@@ -363,7 +363,7 @@
   "@tokenLoginDescription": {
     "description": "Recommended way to log in"
   },
-  "cookieLogin": "Login with cookie",
+  "cookieLogin": "Log in with cookie",
   "@cookieLogin": {
     "description": "Text to login to a server using the cookie jar method"
   },
