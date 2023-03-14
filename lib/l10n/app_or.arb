@@ -1,1 +1,382 @@
-{}
+{
+  "subscriptions": "ସଦସ୍ୟତା",
+  "@subscriptions": {
+    "description": "User subscriptions"
+  },
+  "playlists": "ପ୍ଲେଲିଷ୍ଟଗୁଡିକ",
+  "@playlists": {
+    "description": "User playlists"
+  },
+  "popular": "ଲୋକପ୍ରିୟ",
+  "@popular": {
+    "description": "Popular videos title"
+  },
+  "trending": "ଟ୍ରେଣ୍ଡିଂ",
+  "@trending": {
+    "description": "Trending videos title"
+  },
+  "removeFromPlayList": "ପ୍ଲେ ଲିଷ୍ଟରୁ ହଟାନ୍ତୁ",
+  "@removeFromPlayList": {
+    "description": "Menu item description to show remove a video from a playlist"
+  },
+  "deletePlayListQ": "ପ୍ଲେଲିଷ୍ଟ ବିଲୋପ କରିବେ କି?",
+  "@deletePlayListQ": {
+    "description": "Ask user to delete a playlist"
+  },
+  "irreversibleAction": "ଏହି କ୍ରିୟା ପ୍ରତ୍ୟାବର୍ତ୍ତନ ଅଯୋଗ୍ୟ ଅଟେ",
+  "@irreversibleAction": {
+    "description": "Tell the user that the action cannot be undone"
+  },
+  "addPlayList": "ପ୍ଲେଲିଷ୍ଟ ଯୋଡନ୍ତୁ",
+  "@addPlayList": {
+    "description": "Title for add playlist dialog"
+  },
+  "playListName": "ପ୍ଲେଲିଷ୍ଟ ନାମ",
+  "@playListName": {
+    "description": "Place holder for new playlist name text field"
+  },
+  "playlistVisibility": "ଦୃଶ୍ୟମାନତା",
+  "@playlistVisibility": {
+    "description": "Dropdown label for playlist visibility"
+  },
+  "publicPlaylist": "ଜନସାଧାରଣ",
+  "@publicPlaylist": {
+    "description": "Public playlist"
+  },
+  "privatePlaylist": "ବ୍ୟକ୍ତିଗତ",
+  "@privatePlaylist": {
+    "description": "Private playlist"
+  },
+  "cancel": "ବାତିଲ୍ କରନ୍ତୁ",
+  "@cancel": {
+    "description": "Cancel button label"
+  },
+  "add": "ଯୋଡନ୍ତୁ",
+  "@add": {
+    "description": "Add button abel"
+  },
+  "unlistedPlaylist": "ତାଲିକାଭୁକ୍ତ ନୁହେଁ",
+  "@unlistedPlaylist": {
+    "description": "Unlisted playlist"
+  },
+  "info": "ସୂଚନା",
+  "@info": {
+    "description": "Info label"
+  },
+  "videos": "ଭିଡିଓ ଗୁଡିକ",
+  "@videos": {
+    "description": "Videos label"
+  },
+  "streams": "ସ୍ରୋତ",
+  "@streams": {
+    "description": "Streams label"
+  },
+  "latestVideos": "ସର୍ବଶେଷ ଭିଡିଓଗୁଡିକ",
+  "@latestVideos": {
+    "description": "Latest channel videos"
+  },
+  "subscribed": "ସଦସ୍ୟତା ଅଛି",
+  "@subscribed": {
+    "description": "When the user is subscribed to a channel"
+  },
+  "subscribe": "ସବସ୍କ୍ରାଇବ କରନ୍ତୁ",
+  "@subscribe": {
+    "description": "Label for user to subscribe to a channel"
+  },
+  "nSubscribers": "{ଗଣନା, ଚୟନ, ନା{କୌଣସି ଗ୍ରାହକ} ଅନ୍ୟ {{ଗଣନା} ଗ୍ରାହକ}}",
+  "@nSubscribers": {
+    "description": "number of subscribers",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "shareYoutubeLink": "ୟୁଟ୍ୟୁବ୍ ଲିଙ୍କ୍ ଅଂଶୀଦାର କରନ୍ତୁ",
+  "@shareYoutubeLink": {
+    "description": "asking user to share youtube link"
+  },
+  "shareInvidiousLink": "ଅଜ୍ଞାତ ଲିଙ୍କ୍ ଅଂଶୀଦାର କରନ୍ତୁ",
+  "@shareInvidiousLink": {
+    "description": "asking user to share invidious link"
+  },
+  "ok": "ଠିକ୍ ଅଛି",
+  "@ok": {
+    "description": "Ok"
+  },
+  "noChannels": "କୌଣସି ଚ୍ୟାନେଲ ନାହିଁ",
+  "@noChannels": {
+    "description": "when there are no channels to display"
+  },
+  "noPlaylists": "କୌଣସି ପ୍ଲେଲିଷ୍ଟ ନାହିଁ",
+  "@noPlaylists": {
+    "description": "when there are no playlists to display"
+  },
+  "channels": "ଚ୍ୟାନେଲ ଗୁଡିକ",
+  "@channels": {
+    "description": "Channels label"
+  },
+  "couldntLoadVideo": "ଭିଡିଓ ଲୋଡ୍ ହୋଇପାରିଲା ନାହିଁ",
+  "@couldntLoadVideo": {
+    "description": "Message to display when a video can't be loaded"
+  },
+  "comments": "ମନ୍ତବ୍ୟ ଗୁଡିକ",
+  "@comments": {
+    "description": "Comments label"
+  },
+  "recommended": "ପରାମର୍ଶିତ",
+  "@recommended": {
+    "description": "Recommended label"
+  },
+  "noVideoInPlayList": "ପ୍ଲେ ଲିଷ୍ଟରେ କୌଣସି ଭିଡିଓ ନାହିଁ",
+  "@noVideoInPlayList": {
+    "description": "When no videos in the playlist"
+  },
+  "startUsingClipious": "କ୍ଲିପିଆସ୍ ବ୍ୟବହାର କରିବା ଆରମ୍ଭ କରନ୍ତୁ",
+  "@startUsingClipious": {
+    "description": "button label to start using the app"
+  },
+  "videoAddedToPlaylist": "ଭିଡିଓ ପ୍ଲେଲିଷ୍ଟରେ ଯୋଡା ଯାଇଛି",
+  "@videoAddedToPlaylist": {
+    "description": "Pop up message when a video was added to a playlist"
+  },
+  "errorAddingVideoToPlaylist": "ପ୍ଲେ ଲିଷ୍ଟରେ ଭିଡିଓ ଯୋଡିବାବେଳେ ତ୍ରୁଟି",
+  "@errorAddingVideoToPlaylist": {
+    "description": "Error while adding video to playlist"
+  },
+  "createNewPlaylist": "ନୂତନ ପ୍ଲେଲିଷ୍ଟ ସୃଷ୍ଟି କରନ୍ତୁ",
+  "@createNewPlaylist": {
+    "description": "Button label to create a new playlist when the user wants to add a video to a playlist"
+  },
+  "loadMore": "ଅଧିକ ଲୋଡ୍ କରନ୍ତୁ",
+  "@loadMore": {
+    "description": "CTA to load more"
+  },
+  "topSorting": "ଶୀର୍ଷ",
+  "@topSorting": {
+    "description": "Content sorting: top"
+  },
+  "newSorting": "ନୂତନ",
+  "@newSorting": {
+    "description": "Content sorting: new"
+  },
+  "streamIsLive": "ଲାଇଭ୍",
+  "@streamIsLive": {
+    "description": "Label when a video is a live stream"
+  },
+  "selectBrowsingCountry": "ବ୍ରାଉଜିଂ ଦେଶ ଚୟନ କରନ୍ତୁ",
+  "@selectBrowsingCountry": {
+    "description": "Select country for trending content"
+  },
+  "showOnStart": "ଆପ୍ ଆରମ୍ଭ ହେବାବେଳେ କ’ଣ ଦେଖାଇବାକୁ ବାଛନ୍ତୁ",
+  "@showOnStart": {
+    "description": "Title of dialog asking which screen the users prefers to see"
+  },
+  "settings": "ସେଟିଂ ସମୂହ",
+  "@settings": {
+    "description": "Settings title"
+  },
+  "browsing": "ବ୍ରାଉଜିଂ",
+  "@browsing": {
+    "description": "video browsing preferences"
+  },
+  "country": "ଦେଶ",
+  "@country": {
+    "description": "Country label"
+  },
+  "servers": "ସର୍ଭର ଗୁଡ଼ିକ",
+  "@servers": {
+    "description": "Server management settings category"
+  },
+  "manageServers": "ସର୍ଭରଗୁଡିକ ପରିଚାଳନା କରନ୍ତୁ",
+  "@manageServers": {
+    "description": "Settings to manage servers"
+  },
+  "useSponsorBlock": "ପ୍ରଯୋଜକ ବ୍ଲକ୍ ବ୍ୟବହାର କରନ୍ତୁ",
+  "@useSponsorBlock": {
+    "description": "label for sponsorblock checkbox"
+  },
+  "sponsorBlockDescription": "ସମ୍ପ୍ରଦାୟ ଦ୍ୱାରା ଦାଖଲ ହୋଇଥିବା ପ୍ରାୟୋଜକ ବିଭାଗଗୁଡିକ ଛାଡିଦିଅ",
+  "@sponsorBlockDescription": {
+    "description": "Sponsorblock setting description"
+  },
+  "about": "ବିଷୟରେ",
+  "@about": {
+    "description": "About"
+  },
+  "name": "ନାମ",
+  "@name": {
+    "description": "NAme label"
+  },
+  "package": "ପ୍ୟାକେଜ୍",
+  "@package": {
+    "description": "package label"
+  },
+  "version": "ସଂସ୍କରଣ",
+  "@version": {
+    "description": "version label"
+  },
+  "addServer": "ସର୍ଭର ଯୋଡନ୍ତୁ",
+  "@addServer": {
+    "description": "Add server label"
+  },
+  "useThisServer": "ଏହି ସର୍ଭର ବ୍ୟବହାର କରନ୍ତୁ",
+  "@useThisServer": {
+    "description": "Use this server label"
+  },
+  "logIn": "ଭିତରକୁ ଯାଆନ୍ତୁ",
+  "@logIn": {
+    "description": "CTA to log in to server"
+  },
+  "invalidInvidiousServer": "ଅବୈଧ ସର୍ଭର୍",
+  "@invalidInvidiousServer": {
+    "description": "Error when the user tries to add a server that is not a proper or reachable invidious server"
+  },
+  "yourServers": "ଆପଣଙ୍କର ସର୍ଭର ଗୁଡ଼ିକ",
+  "@yourServers": {
+    "description": "Your servers label"
+  },
+  "notLoggedIn": "ଲଗ୍ ଇନ୍ ହୋଇନାହିଁ । ଲଗ୍ ଇନ୍ କରିବାକୁ ଟ୍ୟାପ୍ କରନ୍ତୁ ।",
+  "@notLoggedIn": {
+    "description": "Label when the user is not logged in to the server"
+  },
+  "publicServers": "ଜନସାଧାରଣ ସର୍ଭରଗୁଡ଼ିକ",
+  "@publicServers": {
+    "description": "Public servers label"
+  },
+  "loadingPublicServer": "ସର୍ବସାଧାରଣ ସର୍ଭରଗୁଡ଼ିକୁ ଧାରଣ କରୁଛି",
+  "@loadingPublicServer": {
+    "description": "Message telling users the app is loading the list of public servers"
+  },
+  "tapToAddServer": "ଆପଣଙ୍କ ତାଲିକାରେ ସର୍ଭର ଯୋଡିବାକୁ ଟ୍ୟାପ୍ କରନ୍ତୁ",
+  "@tapToAddServer": {
+    "description": "public server description"
+  },
+  "appearance": "ଦୃଶ୍ୟ",
+  "@appearance": {
+    "description": "Settings category title"
+  },
+  "useDynamicTheme": "ଗତିଶୀଳ ରଙ୍ଗ",
+  "@useDynamicTheme": {
+    "description": ""
+  },
+  "useDynamicThemeDescription": "ତୁମେ ରଙ୍ଗ ବ୍ୟବହାର କର (କେବଳ ଆଣ୍ଡ୍ରଏଡ୍ 12 ରେ ଉପଲବ୍ଧ) । ଆପ୍ ପୁନଃଆରମ୍ଭ ଆବଶ୍ୟକ କରେ",
+  "@useDynamicThemeDescription": {
+    "description": ""
+  },
+  "useDash": "DASH ବ୍ୟବହାର କରନ୍ତୁ",
+  "@useDash": {
+    "description": "Label on video options if a user wants to switch to dash urls instead of the regular quality selection"
+  },
+  "useDashDescription": "DASH ଆଡାପ୍ଟିଭ୍ ଷ୍ଟ୍ରିମିଂ ବେଳେବେଳେ ସମସ୍ୟା ସୃଷ୍ଟି କରିପାରେ, ୟୁଟ୍ୟୁବ୍ ଏହାକୁ ଥ୍ରଟ କରିପାରେ ।",
+  "@useDashDescription": {
+    "description": "Description for dash in the settings screen"
+  },
+  "videoPlayer": "ଭିଡିଓ ପ୍ଲେୟାର",
+  "@videoPlayer": {
+    "description": "Title for video player related options"
+  },
+  "videoListed": "ଜନସାଧାରଣ",
+  "@videoListed": {
+    "description": "Status of a publicly available video"
+  },
+  "videoUnlisted": "ତାଲିକାଭୁକ୍ତ ନୁହେଁ",
+  "@videoUnlisted": {
+    "description": "Status of a video that is only accessible by link"
+  },
+  "videoIsFamilyFriendly": "ପରିବାର ବନ୍ଧୁତ୍ୱପୂର୍ଣ୍ଣ",
+  "@videoIsFamilyFriendly": {
+    "description": "Displayed only when a video is family friendly"
+  },
+  "tapToManage": "ପରିଚାଳନା କରିବାକୁ ଟ୍ୟାପ୍ କରନ୍ତୁ",
+  "@tapToManage": {
+    "description": "Text shown below a server in the 'Your servers' list"
+  },
+  "authentication": "ପ୍ରାମାଣିକିକରଣ",
+  "@authentication": {
+    "description": "Label for server settings related to authentications"
+  },
+  "tokenLogin": "ଟୋକନ୍ ସହିତ ଲଗ୍ ଇନ୍ କରନ୍ତୁ",
+  "@tokenLogin": {
+    "description": "Textto login to a server using the recommended way"
+  },
+  "tokenLoginDescription": "ଲଗ୍ ଇନ୍ କରିବାକୁ ପରାମର୍ଶିତ ଉପାୟ",
+  "@tokenLoginDescription": {
+    "description": "Recommended way to log in"
+  },
+  "cookieLogin": "କୁକି ସହିତ ଲଗ୍ ଇନ୍ କରନ୍ତୁ",
+  "@cookieLogin": {
+    "description": "Text to login to a server using the cookie jar method"
+  },
+  "cookieLoginDescription": "ଯଦି ଆପଣ ଟୋକେନ୍ ପ୍ରାମାଣିକିକରଣ ସହିତ ସମସ୍ୟାର ସମ୍ମୁଖୀନ ହୁଅନ୍ତି ତେବେ ଏହି ପଦ୍ଧତିକୁ ବ୍ୟବହାର କରନ୍ତୁ",
+  "@cookieLoginDescription": {
+    "description": "Cookie log in description"
+  },
+  "logout": "ପ୍ରସ୍ଥାନ କର",
+  "@logout": {
+    "description": "CTA to logout of a server"
+  },
+  "username": "ଉପଯୋଗକର୍ତ୍ତା ନାମ",
+  "@username": {
+    "description": "Username label for login to a server"
+  },
+  "password": "ପାସୱାର୍ଡ",
+  "@password": {
+    "description": "Password label for login to a server"
+  },
+  "wrongUsernamePassword": "ଭୁଲ ଚାଳକନାମ କିମ୍ବା ପାସୱାର୍ଡ",
+  "@wrongUsernamePassword": {
+    "description": "Error message when authentication fails"
+  },
+  "error": "ତ୍ରୁଟି",
+  "@error": {},
+  "couldntFetchVideos": "ଭିଡିଓ ଆଣିପାରିଲା ନାହିଁ । ପୁନର୍ବାର ଚେଷ୍ଟା କରିବାକୁ ଟ୍ୟାପ୍ କରନ୍ତୁ ।",
+  "@couldntFetchVideos": {
+    "description": "Can't load bunch of videos, asking  user to try again"
+  },
+  "wizardIntro": "ଏକ ସାର୍ବଜନୀନ ସର୍ଭର ବାଛନ୍ତୁ କିମ୍ବା ଆପଣଙ୍କର ନିଜର ଯୋଗ କରନ୍ତୁ । (ପରେ ସେଟିଂସମୂହରେ ପରିବର୍ତ୍ତନ କରାଯାଇପାରିବ ।)",
+  "@wizardIntro": {
+    "description": "Welcome message on frst time use"
+  },
+  "selectPlaylist": "ପ୍ଲେଲିଷ୍ଟ ଚୟନ କରନ୍ତୁ",
+  "@selectPlaylist": {
+    "description": "Title when users wants to add a video to a playlist"
+  },
+  "sponsorSkipped": "ପ୍ରଯୋଜକ ଛାଡିଦେଲେ",
+  "@sponsorSkipped": {
+    "description": "When a sponsor segment is skipped thanks to sponsor block"
+  },
+  "whenAppStartsShow": "ଯେତେବେଳେ ଆପ୍ ଆରମ୍ଭ ହୁଏ, ଦେଖାନ୍ତୁ…",
+  "@whenAppStartsShow": {
+    "description": "Setting title for selecting the screen to show on start"
+  },
+  "build": "ନିର୍ମାଣ କରନ୍ତୁ",
+  "@build": {
+    "description": "build label"
+  },
+  "currentServer": "ସମ୍ପ୍ରତି ବ୍ୟବହୃତ {current}",
+  "@currentServer": {
+    "description": "Which server the user is currently using",
+    "placeholders": {
+      "current": {
+        "type": "String"
+      }
+    }
+  },
+  "addServerHelpText": "ନିଜର ସର୍ଭର ଯୋଡିବା ପାଇଁ କିମ୍ବା ଏକ ସାର୍ବଜନୀନ ସର୍ଭରରେ ଟ୍ୟାପ୍ କରି ଏହାକୁ ଯୋଡିବା ପାଇଁ + ବଟନ୍ ବ୍ୟବହାର କରନ୍ତୁ ।",
+  "@addServerHelpText": {
+    "description": "label for when the user hasn't chosen a server yet"
+  },
+  "delete": "ବିଲୋପ କରନ୍ତୁ",
+  "@delete": {
+    "description": "Delete label"
+  },
+  "loggedIn": "ଲଗ୍ ଇନ୍ ହୋଇଛି",
+  "@loggedIn": {
+    "description": "Label to tell the user that he is logged in to the server"
+  },
+  "publicServersError": "ସର୍ବସାଧାରଣ ସର୍ଭରଗୁଡ଼ିକର ତାଲିକା ଆଣିପାରିଲା ନାହିଁ । ପୁନଃଚେଷ୍ଟା କରିବାକୁ ଟ୍ୟାପ୍ କରନ୍ତୁ ।",
+  "@publicServersError": {
+    "description": "Error message when trying to get public servers but it failed"
+  }
+}
