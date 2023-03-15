@@ -358,5 +358,45 @@
   "videoIsFamilyFriendly": "Familiar",
   "@videoIsFamilyFriendly": {
     "description": "Displayed only when a video is family friendly"
+  },
+  "tapToManage": "Toque para gerir",
+  "@tapToManage": {
+    "description": "Text shown below a server in the 'Your servers' list"
+  },
+  "authentication": "Autenticação",
+  "@authentication": {
+    "description": "Label for server settings related to authentications"
+  },
+  "tokenLoginDescription": "Forma recomendada de iniciar sessão",
+  "@tokenLoginDescription": {
+    "description": "Recommended way to log in"
+  },
+  "cookieLoginDescription": "Utilize este método se enfrentar problemas com a autenticação simbólica",
+  "@cookieLoginDescription": {
+    "description": "Cookie log in description"
+  },
+  "logout": "Terminar sessão",
+  "@logout": {
+    "description": "CTA to logout of a server"
+  },
+  "username": "Nome de utilizador",
+  "@username": {
+    "description": "Username label for login to a server"
+  },
+  "password": "Palavra-passe",
+  "@password": {
+    "description": "Password label for login to a server"
+  },
+  "wrongUsernamePassword": "Nome de utilizador ou palavra-passe incorretos",
+  "@wrongUsernamePassword": {
+    "description": "Error message when authentication fails"
+  },
+  "tokenLogin": "Iniciar sessão com token",
+  "@tokenLogin": {
+    "description": "Textto login to a server using the recommended way"
+  },
+  "cookieLogin": "Iniciar sessão com cookie",
+  "@cookieLogin": {
+    "description": "Text to login to a server using the cookie jar method"
   }
 }
