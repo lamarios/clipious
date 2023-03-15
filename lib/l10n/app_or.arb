@@ -83,7 +83,7 @@
   "@subscribe": {
     "description": "Label for user to subscribe to a channel"
   },
-  "nSubscribers": "{ଗଣନା, ଚୟନ, ନା{କୌଣସି ଗ୍ରାହକ} ଅନ୍ୟ {{ଗଣନା} ଗ୍ରାହକ}}",
+  "nSubscribers": "{count, select, no{କୌଣସି ଗ୍ରାହକ} other{{count} ଗ୍ରାହକ}}",
   "@nSubscribers": {
     "description": "number of subscribers",
     "placeholders": {
