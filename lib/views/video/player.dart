@@ -20,7 +20,6 @@ import '../../models/video.dart';
 import '../components/videoThumbnail.dart';
 import '../miniPlayer.dart';
 
-final GlobalKey _betterPlayerKey = GlobalKey();
 
 class VideoPlayer extends StatefulWidget {
   final Video video;
@@ -42,13 +41,13 @@ class _VideoPlayerState extends State<VideoPlayer> with AfterLayoutMixin<VideoPl
   BetterPlayerController? videoController;
   int previousSponsorCheck = 0;
   bool useDash = db.getSettings(USE_DASH)?.value == 'true';
+  final GlobalKey _betterPlayerKey = GlobalKey();
 
   @override
   void initState() {
     super.initState();
     if (widget.miniPlayer) {
       FBroadcast.instance().register(BROADCAST_STOP_MINI_PLAYER, (value, callback) {
-        log.info("HHHHHHHHHHHHHHHHHHHHHHHHHHHHEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEELLLLLOOOO???");
         disposeControllers();
       });
     } else {
@@ -267,6 +266,7 @@ class _VideoPlayerState extends State<VideoPlayer> with AfterLayoutMixin<VideoPl
                   overflowMenuCustomItems: [BetterPlayerOverflowMenuItem(useDash ? Icons.check_box_outlined : Icons.check_box_outline_blank, locals.useDash, toggleDash)])),
           betterPlayerDataSource: betterPlayerDataSource);
       videoController!.addEventsListener(onVideoListener);
+      videoController!.setBetterPlayerGlobalKey(_betterPlayerKey);
     });
   }
 
@@ -278,7 +278,7 @@ class _VideoPlayerState extends State<VideoPlayer> with AfterLayoutMixin<VideoPl
         child: AnimatedSwitcher(
             duration: animationDuration,
             child: videoController != null
-                ? BetterPlayer(controller: videoController!)
+                ? BetterPlayer(controller: videoController!, key: _betterPlayerKey,)
                 : VideoThumbnailView(
                     videoId: widget.video.videoId,
                     thumbnailUrl: widget.video.getBestThumbnail()?.url ?? '',
