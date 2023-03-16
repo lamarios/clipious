@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/database.dart';
 import 'package:invidious/models/db/settings.dart';
+import 'package:invidious/myRouteObserver.dart';
 import 'package:invidious/utils.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:select_dialog/select_dialog.dart';
@@ -61,7 +62,7 @@ class SettingsState extends State<Settings> with AfterLayoutMixin {
   }
 
   manageServers(BuildContext context) {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => const ManageServers()));
+    Navigator.push(context, MaterialPageRoute(settings: ROUTE_SETTINGS_MANAGE_SERVERS, builder: (context) => const ManageServers()));
   }
 
   searchCountry(BuildContext context) {
