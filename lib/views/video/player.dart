@@ -20,7 +20,6 @@ import '../../models/video.dart';
 import '../components/videoThumbnail.dart';
 import '../miniPlayer.dart';
 
-
 class VideoPlayer extends StatefulWidget {
   final Video video;
   final bool miniPlayer;
@@ -197,6 +196,8 @@ class _VideoPlayerState extends State<VideoPlayer> with AfterLayoutMixin<VideoPl
 
   playVideo() {
     var locals = AppLocalizations.of(context)!;
+    ColorScheme colors = Theme.of(context).colorScheme;
+    Color overFlowTextColor = Theme.of(context).textTheme.bodyMedium?.color ?? Colors.black;
 
     double progress = db.getVideoProgress(widget.video.videoId);
     Duration? startAt;
@@ -263,6 +264,9 @@ class _VideoPlayerState extends State<VideoPlayer> with AfterLayoutMixin<VideoPl
                   enableProgressText: showControls,
                   enableSkips: showControls,
                   enablePlayPause: showControls,
+                  overflowModalColor: colors.background,
+                  overflowModalTextColor: overFlowTextColor,
+                  overflowMenuIconsColor: overFlowTextColor,
                   overflowMenuCustomItems: [BetterPlayerOverflowMenuItem(useDash ? Icons.check_box_outlined : Icons.check_box_outline_blank, locals.useDash, toggleDash)])),
           betterPlayerDataSource: betterPlayerDataSource);
       videoController!.addEventsListener(onVideoListener);
@@ -278,7 +282,10 @@ class _VideoPlayerState extends State<VideoPlayer> with AfterLayoutMixin<VideoPl
         child: AnimatedSwitcher(
             duration: animationDuration,
             child: videoController != null
-                ? BetterPlayer(controller: videoController!, key: _betterPlayerKey,)
+                ? BetterPlayer(
+                    controller: videoController!,
+                    key: _betterPlayerKey,
+                  )
                 : VideoThumbnailView(
                     videoId: widget.video.videoId,
                     thumbnailUrl: widget.video.getBestThumbnail()?.url ?? '',

@@ -4,6 +4,7 @@ import 'package:logging/logging.dart';
 
 const RouteSettings ROUTE_SETTINGS = RouteSettings(name: 'settings');
 const RouteSettings ROUTE_SETTINGS_MANAGE_SERVERS = RouteSettings(name: 'settings-manage-servers');
+const RouteSettings ROUTE_SETTINGS_MANAGE_ONE_SERVER = RouteSettings(name: 'settings-manage-one-server');
 const RouteSettings ROUTE_VIDEO = RouteSettings(name: 'video');
 const RouteSettings ROUTE_CHANNEL = RouteSettings(name: 'channel');
 const RouteSettings ROUTE_PLAYLIST = RouteSettings(name: 'playlist');
@@ -16,6 +17,8 @@ class MyRouteObserver extends RouteObserver<PageRoute<dynamic>> {
       switch (route.settings) {
         case ROUTE_SETTINGS:
         case ROUTE_PLAYLIST:
+        case ROUTE_SETTINGS_MANAGE_SERVERS:
+        case ROUTE_SETTINGS_MANAGE_ONE_SERVER:
           log.info('Show mini player at the bottom');
           moveMiniPlayer(false);
           break;

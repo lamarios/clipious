@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_web_auth/flutter_web_auth.dart';
 import 'package:invidious/models/errors/invidiousServiceError.dart';
+import 'package:invidious/myRouteObserver.dart';
 import 'package:invidious/views/settings/manageSingleServer.dart';
 import 'package:logging/logging.dart';
 import 'package:settings_ui/settings_ui.dart';
@@ -54,7 +55,6 @@ class _ManagerServersViewState extends State<ManagerServersView> with AfterLayou
     super.dispose();
   }
 
-
   refreshServers() {
     var servers = publicServers.where((s) => dbServers.indexWhere((element) => element.url == s.url) == -1).toList();
 
@@ -91,7 +91,7 @@ class _ManagerServersViewState extends State<ManagerServersView> with AfterLayou
                         ),
                         Text(
                           locals.addServer,
-                          style: TextStyle(fontSize: 10),
+                          style: const TextStyle(fontSize: 10),
                         )
                       ],
                     ),
@@ -174,11 +174,19 @@ class _ManagerServersViewState extends State<ManagerServersView> with AfterLayou
             ));
   }
 
-  openServer(BuildContext context, Server s){
-    Navigator.push(context, MaterialPageRoute(builder: (context) => ManageSingleServer(server: s, refreshServers: refreshServers,),));
+  openServer(BuildContext context, Server s) {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+          settings: ROUTE_SETTINGS_MANAGE_ONE_SERVER,
+          builder: (context) => ManageSingleServer(
+            server: s,
+            refreshServers: refreshServers,
+          ),
+        ));
   }
 
-  switchServer(Server s){
+  switchServer(Server s) {
     db.useServer(s);
     refreshServers();
   }
@@ -213,7 +221,7 @@ class _ManagerServersViewState extends State<ManagerServersView> with AfterLayou
                                 ),
                               ),
                               title: Text(s.url),
-                              value: Text('${isLoggedInToServer(s.url)? '${locals.loggedIn}, ': ''} ${locals.tapToManage}'),
+                              value: Text('${isLoggedInToServer(s.url) ? '${locals.loggedIn}, ' : ''} ${locals.tapToManage}'),
                               onPressed: (context) => openServer(context, s),
                             ))
                         .toList()
