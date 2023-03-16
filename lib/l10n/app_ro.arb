@@ -358,5 +358,45 @@
   "videoListed": "Public",
   "@videoListed": {
     "description": "Status of a publicly available video"
+  },
+  "tapToManage": "Atingeți pentru a gestiona",
+  "@tapToManage": {
+    "description": "Text shown below a server in the 'Your servers' list"
+  },
+  "authentication": "Autentificare",
+  "@authentication": {
+    "description": "Label for server settings related to authentications"
+  },
+  "tokenLoginDescription": "Mod recomandat de autentificare",
+  "@tokenLoginDescription": {
+    "description": "Recommended way to log in"
+  },
+  "cookieLoginDescription": "Utilizați această metodă dacă întâmpinați probleme cu autentificarea cu simbol",
+  "@cookieLoginDescription": {
+    "description": "Cookie log in description"
+  },
+  "logout": "Deconectează-te",
+  "@logout": {
+    "description": "CTA to logout of a server"
+  },
+  "username": "Nume de utilizator",
+  "@username": {
+    "description": "Username label for login to a server"
+  },
+  "wrongUsernamePassword": "Nume de utilizator sau parolă greșită",
+  "@wrongUsernamePassword": {
+    "description": "Error message when authentication fails"
+  },
+  "tokenLogin": "Autentificare cu token",
+  "@tokenLogin": {
+    "description": "Textto login to a server using the recommended way"
+  },
+  "cookieLogin": "Autentificare cu cookie",
+  "@cookieLogin": {
+    "description": "Text to login to a server using the cookie jar method"
+  },
+  "password": "Parolă",
+  "@password": {
+    "description": "Password label for login to a server"
   }
 }
