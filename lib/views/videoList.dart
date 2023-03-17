@@ -1,8 +1,3 @@
-import 'dart:async';
-
-import 'package:after_layout/after_layout.dart';
-import 'package:easy_debounce/easy_debounce.dart';
-import 'package:fbroadcast/fbroadcast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_fadein/flutter_fadein.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -13,10 +8,9 @@ import 'package:invidious/views/videoList/singleVideo.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../globals.dart';
-import '../models/videoInList.dart';
 import '../models/videoListAbstractClass.dart';
 
-class VideoList extends StatefulWidget {
+class VideoList extends StatelessWidget {
   final PaginatedVideoList paginatedVideoList;
   final String? tags;
 
@@ -26,11 +20,7 @@ class VideoList extends StatefulWidget {
     this.tags,
   });
 
-  @override
-  VideoListState createState() => VideoListState();
-}
-
-class VideoListState extends State<VideoList> {
+/*
   @override
   void initState() {
     super.initState();
@@ -39,14 +29,15 @@ class VideoListState extends State<VideoList> {
       // getVideos();
     });
   }
+*/
 
   @override
   Widget build(BuildContext context) {
     ColorScheme colorScheme = Theme.of(context).colorScheme;
     var locals = AppLocalizations.of(context)!;
     return GetBuilder<VideoListController>(
-      init: VideoListController(widget.paginatedVideoList),
-      tag: widget.tags,
+      init: VideoListController(paginatedVideoList),
+      tag: tags,
       builder: (controller) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

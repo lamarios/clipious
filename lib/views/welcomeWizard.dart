@@ -66,7 +66,7 @@ class _WelcomeWizardState extends State<WelcomeWizard> {
               style: TextStyle(color: colors.primary, fontSize: 30),
             ),
             Padding(
-              padding: EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
               child: Text(locals.wizardIntro),
             ),
             const Expanded(child: ManagerServersView()),

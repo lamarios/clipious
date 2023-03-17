@@ -18,7 +18,6 @@ class Trending extends StatefulWidget {
 
 class TrendingState extends State<Trending> {
   String type = ALL;
-  GlobalKey<VideoListState> videos = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +73,6 @@ doesn't seem to be working for now
 */
           Expanded(
             child: VideoList(
-              key: videos,
               paginatedVideoList: SingleEndpointVideoList(service.getTrending),
               tags: 'trending-video-list',
             ),
