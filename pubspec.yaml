@@ -64,6 +64,7 @@ dependencies:
   flutter_native_splash: 2.2.19
   flutter_linkify: 5.0.2
   url_launcher: 6.1.10
+  get: 4.6.5
 
 
 

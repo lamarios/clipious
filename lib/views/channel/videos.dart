@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:invidious/models/channelVideos.dart';
+import 'package:invidious/models/videoListAbstractClass.dart';
 import 'package:invidious/views/videoList.dart';
 
 import '../../models/channel.dart';
@@ -9,7 +10,7 @@ import '../../models/videoInList.dart';
 
 class ChannelVideosView extends StatefulWidget {
   final Channel channel;
-  final Future<ChannelVideos> Function(String channelId, String? continuation) getVideos;
+  final Future<VideosWithContinuation> Function(String channelId, String? continuation) getVideos;
 
   const ChannelVideosView({super.key, required this.channel, required this.getVideos});
 
@@ -22,7 +23,7 @@ class _ChannelVideosViewState extends State<ChannelVideosView> {
 
   Future<List<VideoInList>> getVideos() async {
     // ChannelVideos videos = await service.getChannelVideos(widget.channel.authorId, continuation);
-    ChannelVideos videos = await widget.getVideos(widget.channel.authorId, continuation);
+    VideosWithContinuation videos = await widget.getVideos(widget.channel.authorId, continuation);
 
     setState(() {
       continuation = videos.continuation;
@@ -44,9 +45,8 @@ class _ChannelVideosViewState extends State<ChannelVideosView> {
       color: colorScheme.background,
       child: VideoList(
         key: const ValueKey('channel-videos'),
-        getVideos: getVideos,
-        refresh: refreshVideos,
-        getMoreVideos: continuation != null ? getVideos : null,
+        paginatedVideoList: ContinuationVideoList((continuation) => widget.getVideos(widget.channel.authorId, continuation)),
+        tags: 'channel-video-list-${(widget.key as ValueKey<String>).value}'
       ),
     );
   }

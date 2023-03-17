@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/models/searchResult.dart';
+import 'package:invidious/models/videoListAbstractClass.dart';
 import 'package:invidious/utils.dart';
 import 'package:invidious/views/channel.dart';
 import 'package:invidious/views/playlistList.dart';
@@ -59,7 +60,7 @@ class SearchState extends State<Search> with SingleTickerProviderStateMixin {
               controller: controller,
               children: [
                 widget.results.videos.isNotEmpty ? VideoList(
-                  videos: widget.results.videos,
+                  paginatedVideoList: FixedVideoList(widget.results.videos),
                 ): Center(child: Text(locals.nVideos(0))),
                 widget.results.channels.isNotEmpty
                     ? ListView(

@@ -6,14 +6,16 @@ import 'package:fbroadcast/fbroadcast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:get/get.dart';
 import 'package:invidious/models/db/settings.dart';
 import 'package:invidious/utils.dart';
 import 'package:logging/logging.dart';
 
+import '../../controllers/videoInListController.dart';
 import '../../database.dart';
 import '../../globals.dart';
 import '../../main.dart';
-import '../../models/db/progress.dart';
+import '../../models/db/progress.dart' as dbProgress;
 import '../../models/pair.dart';
 import '../../models/sponsorSegment.dart';
 import '../../models/video.dart';
@@ -132,8 +134,17 @@ class _VideoPlayerState extends State<VideoPlayer> with AfterLayoutMixin<VideoPl
       int currentPosition = timeInSeconds;
       // saving progress
       int max = widget.video.lengthSeconds ?? 0;
-      var progress = Progress.named(progress: currentPosition / max, videoId: widget.video.videoId);
+      var progress = dbProgress.Progress.named(progress: currentPosition / max, videoId: widget.video.videoId);
       db.saveProgress(progress);
+
+      try {
+        var controller = VideoInListController.to(progress.videoId);
+        if (controller.initialized && !controller.isClosed) {
+          controller.updateProgress();
+        }
+      }catch(err){
+        // controller not found
+      }
     }
   }
 
@@ -204,6 +215,8 @@ class _VideoPlayerState extends State<VideoPlayer> with AfterLayoutMixin<VideoPl
     if (progress > 0 && progress < 0.90) {
       startAt = Duration(seconds: (widget.video.lengthSeconds * progress).floor());
     }
+
+    print('start at $startAt');
 
     String baseUrl = db.getCurrentlySelectedServer().url;
 

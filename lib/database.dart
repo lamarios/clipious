@@ -1,5 +1,6 @@
 import 'package:fbroadcast/fbroadcast.dart';
 import 'package:flutter/material.dart';
+import 'package:invidious/controllers/videoInListController.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/main.dart';
 import 'package:invidious/models/db/progress.dart';
@@ -118,7 +119,5 @@ class DbClient {
     server.inUse = true;
 
     store.box<Server>().put(server);
-
-    FBroadcast.instance().broadcast(BROADCAST_SERVER_CHANGED);
   }
 }

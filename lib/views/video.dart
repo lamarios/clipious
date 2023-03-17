@@ -84,8 +84,8 @@ class VideoViewState extends State<VideoView> with AfterLayoutMixin<VideoView>, 
     bool show3Navigation = getDeviceType() == DeviceType.phone;
 
     var destinations = List.of(<Widget>[
-      NavigationDestination(icon: Icon(Icons.info), label: locals.info),
-      NavigationDestination(icon: Icon(Icons.chat_bubble), label: locals.comments),
+      NavigationDestination(icon: const Icon(Icons.info), label: locals.info),
+      NavigationDestination(icon: const Icon(Icons.chat_bubble), label: locals.comments),
     ], growable: true);
 
     if (show3Navigation) {

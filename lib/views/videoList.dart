@@ -6,159 +6,85 @@ import 'package:fbroadcast/fbroadcast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_fadein/flutter_fadein.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:get/get.dart';
+import 'package:invidious/controllers/videoListController.dart';
 import 'package:invidious/utils.dart';
 import 'package:invidious/views/videoList/singleVideo.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../globals.dart';
 import '../models/videoInList.dart';
+import '../models/videoListAbstractClass.dart';
 
 class VideoList extends StatefulWidget {
-  Future<List<VideoInList>> Function()? getVideos;
-  Future<List<VideoInList>> Function()? getMoreVideos;
-  Future<List<VideoInList>> Function()? refresh;
-  List<VideoInList>? videos;
+  final PaginatedVideoList paginatedVideoList;
+  final String? tags;
 
-  VideoList({super.key, this.getVideos, this.videos, this.getMoreVideos, this.refresh});
+  const VideoList({
+    super.key,
+    required this.paginatedVideoList,
+    this.tags,
+  });
 
   @override
   VideoListState createState() => VideoListState();
 }
 
-class VideoListState extends State<VideoList> with AfterLayoutMixin<VideoList> {
-  RefreshController refreshController = RefreshController(initialRefresh: false);
-  List<VideoInList> videos = [];
-  bool loading = true;
-  Map<String, Image> imageCache = {};
-  ScrollController scrollController = ScrollController();
-  String error = '';
-
+class VideoListState extends State<VideoList> {
   @override
   void initState() {
     super.initState();
-    scrollController.addListener(onScrollEvent);
 
     FBroadcast.instance().register(BROADCAST_SERVER_CHANGED, (value, callback) {
-      getVideos();
+      // getVideos();
     });
-  }
-
-  @override
-  dispose() {
-    super.dispose();
-    scrollController.dispose();
-    refreshController.dispose();
-  }
-
-  onScrollEvent() {
-    if (widget.getMoreVideos != null) {
-      if (scrollController.hasClients) {
-        if (scrollController.position.maxScrollExtent == scrollController.offset) {
-          EasyDebounce.debounce('loading-more-videos', const Duration(milliseconds: 250), getMoreVideos);
-        }
-      }
-    }
-  }
-
-  getMoreVideos() async {
-    if (!loading && widget.getMoreVideos != null) {
-      loadVideo(() async {
-        List<VideoInList> videos = await widget.getMoreVideos!();
-        List<VideoInList> currentVideos = this.videos;
-        currentVideos.addAll(videos);
-        return currentVideos;
-      });
-    }
   }
 
   @override
   Widget build(BuildContext context) {
     ColorScheme colorScheme = Theme.of(context).colorScheme;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Visibility(visible: loading, child: const SizedBox(height: 1, child: LinearProgressIndicator())),
-        Expanded(
-          child: error.isNotEmpty
-              ? Container(
-                  alignment: Alignment.center,
-                  color: colorScheme.background,
-                  child: Visibility(visible: error.isNotEmpty, child: InkWell(onTap: () => getVideos(), child: Text(error))),
-                )
-              : Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: FadeIn(
-                    duration: animationDuration,
-                    curve: Curves.easeInOutQuad,
-                    child: Visibility(
-                      visible: widget.videos?.isNotEmpty ?? videos.isNotEmpty,
-                      child: SmartRefresher(
-                        controller: refreshController,
-                        enablePullDown: widget.refresh != null,
-                        enablePullUp: false,
-                        onRefresh: () => widget.refresh != null ? refreshVideos() : getVideos(),
-                        child: GridView.count(
-                            crossAxisCount: getGridCount(context),
-                            controller: scrollController,
-                            padding: const EdgeInsets.all(4),
-                            crossAxisSpacing: 5,
-                            mainAxisSpacing: 5,
-                            childAspectRatio: getGridAspectRatio(context),
-                            children: (widget.videos ?? videos).map((v) => VideoListItem(key: ValueKey(v.videoId), video: v)).toList()),
+    var locals = AppLocalizations.of(context)!;
+    return GetBuilder<VideoListController>(
+      init: VideoListController(widget.paginatedVideoList),
+      tag: widget.tags,
+      builder: (controller) => Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Visibility(visible: controller.loading, child: const SizedBox(height: 1, child: LinearProgressIndicator())),
+          Expanded(
+            child: controller.error != VideoListErrors.none
+                ? Container(
+                    alignment: Alignment.center,
+                    color: colorScheme.background,
+                    child: InkWell(onTap: () => controller.getVideos(), child: Text(locals.couldntFetchVideos)),
+                  )
+                : Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: FadeIn(
+                      duration: animationDuration,
+                      curve: Curves.easeInOutQuad,
+                      child: Visibility(
+                        visible: controller.videos.isNotEmpty,
+                        child: SmartRefresher(
+                          controller: controller.refreshController,
+                          enablePullDown: controller.videoList.hasRefresh(),
+                          enablePullUp: false,
+                          onRefresh: controller.refreshVideos,
+                          child: GridView.count(
+                              crossAxisCount: getGridCount(context),
+                              controller: controller.scrollController,
+                              padding: const EdgeInsets.all(4),
+                              crossAxisSpacing: 5,
+                              mainAxisSpacing: 5,
+                              childAspectRatio: getGridAspectRatio(context),
+                              children: (controller.videos).map((v) => VideoListItem(key: ValueKey(v.videoId), video: v)).toList()),
+                        ),
                       ),
                     ),
                   ),
-                ),
-        ),
-      ],
+          ),
+        ],
+      ),
     );
-  }
-
-  refreshVideos() async {
-    if (widget.refresh != null) {
-      loadVideo(() => widget.refresh!());
-    } else {
-      loadVideo(() => widget.getVideos!());
-    }
-  }
-
-  getVideos() async {
-    loadVideo(() => widget.getVideos!());
-  }
-
-  loadVideo(Future<List<VideoInList>> Function() refreshFunction) async {
-    var locals = AppLocalizations.of(context)!;
-    if (widget.getVideos != null) {
-      setState(() {
-        error = '';
-        loading = true;
-      });
-      try {
-        var videos = await refreshFunction();
-        setState(() {
-          this.videos = videos;
-          loading = false;
-        });
-      } catch (err) {
-        setState(() {
-          this.videos = [];
-          loading = false;
-          error = locals.couldntFetchVideos;
-        });
-        rethrow;
-      }
-      refreshController.refreshCompleted();
-    }
-  }
-
-  @override
-  FutureOr<void> afterFirstLayout(BuildContext context) {
-    if (widget.getVideos != null) {
-      getVideos();
-    } else if (widget.videos != null) {
-      setState(() {
-        loading = false;
-      });
-    }
   }
 }

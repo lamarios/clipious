@@ -137,7 +137,7 @@ class Service {
     }
   }
 
-  logIn(String serverUrl) async {
+  Future<String?> logIn(String serverUrl) async {
     String url = '$serverUrl/authorize_token?scopes=:feed,:subscriptions*,:playlists*&callback_url=clipious-auth://';
     final result = await FlutterWebAuth.authenticate(url: url, callbackUrlScheme: 'clipious-auth');
 
@@ -151,6 +151,7 @@ class Service {
       db.upsertServer(server);
 
       FBroadcast.instance().broadcast(BROADCAST_SERVER_CHANGED);
+      return server.authToken;
     } else {
       throw InvidiousServiceError('logging in to deleted server');
     }
@@ -327,18 +328,18 @@ class Service {
     return Channel.fromJson(handleResponse(response));
   }
 
-  Future<ChannelVideos> getChannelVideos(String channelId, String? continuation) async {
+  Future<VideosWithContinuation> getChannelVideos(String channelId, String? continuation) async {
     Uri uri = buildUrl(GET_CHANNEL_VIDEOS, pathParams: {':id': channelId}, query: {'continuation': continuation});
     final response = await http.get(uri, headers: {'Content-Type': 'application/json; charset=utf-16'});
 
-    return ChannelVideos.fromJson(handleResponse(response));
+    return VideosWithContinuation.fromJson(handleResponse(response));
   }
 
-  Future<ChannelVideos> getChannelStreams(String channelId, String? continuation) async {
+  Future<VideosWithContinuation> getChannelStreams(String channelId, String? continuation) async {
     Uri uri = buildUrl(GET_CHANNEL_STREAMS, pathParams: {':id': channelId}, query: {'continuation': continuation});
     final response = await http.get(uri, headers: {'Content-Type': 'application/json; charset=utf-16'});
 
-    return ChannelVideos.fromJson(handleResponse(response));
+    return VideosWithContinuation.fromJson(handleResponse(response));
   }
 
   Future<List<Playlist>> getUserPlaylists() async {

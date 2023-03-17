@@ -1,21 +1,13 @@
-import 'dart:async';
-
-import 'package:after_layout/after_layout.dart';
 import 'package:application_icon/application_icon.dart';
-import 'package:fbroadcast/fbroadcast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:invidious/database.dart';
-import 'package:invidious/models/db/settings.dart';
+import 'package:get/get.dart';
 import 'package:invidious/myRouteObserver.dart';
-import 'package:invidious/utils.dart';
-import 'package:package_info_plus/package_info_plus.dart';
 import 'package:select_dialog/select_dialog.dart';
 import 'package:settings_ui/settings_ui.dart';
 
+import '../controllers/settingsController.dart';
 import '../globals.dart';
-import '../models/country.dart';
-import '../models/db/server.dart';
 import 'settings/manageServers.dart';
 
 settingsTheme(ColorScheme colorScheme) => SettingsThemeData(
@@ -27,57 +19,23 @@ settingsTheme(ColorScheme colorScheme) => SettingsThemeData(
     leadingIconsColor: colorScheme.secondary,
     tileHighlightColor: colorScheme.secondaryContainer);
 
-class Settings extends StatefulWidget {
+class Settings extends StatelessWidget {
   const Settings({super.key});
-
-  @override
-  SettingsState createState() => SettingsState();
-}
-
-class SettingsState extends State<Settings> with AfterLayoutMixin {
-  List<Server> dbServers = db.getServers();
-  Server currentServer = db.getCurrentlySelectedServer();
-  bool sponsorBlock = db.getSettings(USE_SPONSORBLOCK)?.value == 'true';
-  Country country = getCountryFromCode(db.getSettings(BROWSING_COUNTRY)?.value ?? 'US');
-  PackageInfo packageInfo = PackageInfo(appName: '', packageName: '', version: '', buildNumber: '');
-  int onOpen = int.parse(db.getSettings(ON_OPEN)?.value ?? '0');
-  bool useDynamicTheme = db.getSettings(DYNAMIC_THEME)?.value == 'true';
-  bool useDash = db.getSettings(USE_DASH)?.value == 'true';
-
-  @override
-  initState() {
-    super.initState();
-    FBroadcast.instance().register(BROADCAST_SERVER_CHANGED, (value, callback) {
-      setState(() {
-        currentServer = db.getCurrentlySelectedServer();
-      });
-    });
-  }
-
-  toggleSponsorBlock(bool value) {
-    db.saveSetting(SettingsValue(USE_SPONSORBLOCK, value.toString()));
-    setState(() {
-      sponsorBlock = db.getSettings(USE_SPONSORBLOCK)?.value == 'true';
-    });
-  }
 
   manageServers(BuildContext context) {
     Navigator.push(context, MaterialPageRoute(settings: ROUTE_SETTINGS_MANAGE_SERVERS, builder: (context) => const ManageServers()));
   }
 
   searchCountry(BuildContext context) {
-    var locals = AppLocalizations.of(context)!;
+    var locals = AppLocalizations.of(context);
+    var controller = Get.find<SettingsController>();
     SelectDialog.showModal<String>(
       context,
-      label: locals.selectBrowsingCountry,
-      selectedValue: country.name,
+      label: locals?.selectBrowsingCountry,
+      selectedValue: controller.country.name,
       items: countryCodes.map((e) => e.name).toList(),
       onChange: (String selected) {
-        String code = countryCodes.firstWhere((element) => element.name == selected, orElse: () => country).code;
-        db.saveSetting(SettingsValue(BROWSING_COUNTRY, code));
-        setState(() {
-          country = getCountryFromCode(code);
-        });
+        controller.selectCountry(selected);
       },
     );
   }
@@ -85,18 +43,15 @@ class SettingsState extends State<Settings> with AfterLayoutMixin {
   selectOnOpen(BuildContext context) {
     var categories = getCategories(context);
     var locals = AppLocalizations.of(context)!;
+    var controller = Get.find<SettingsController>();
     SelectDialog.showModal<String>(
       context,
       label: locals.showOnStart,
-      selectedValue: categories[onOpen],
+      selectedValue: categories[controller.onOpen],
       showSearchBox: false,
       items: categories,
       onChange: (String selected) {
-        int selectedIndex = categories.indexOf(selected);
-        db.saveSetting(SettingsValue(ON_OPEN, selectedIndex.toString()));
-        setState(() {
-          onOpen = selectedIndex;
-        });
+        controller.selectOnOpen(selected, categories);
       },
     );
   }
@@ -106,108 +61,90 @@ class SettingsState extends State<Settings> with AfterLayoutMixin {
     return [locals.popular, locals.trending, locals.subscriptions, locals.playlists];
   }
 
-  toggleDynamicTheme(bool value) {
-    db.saveSetting(SettingsValue(DYNAMIC_THEME, value.toString()));
-    setState(() {
-      useDynamicTheme = value;
-    });
-  }
-
-  toggleDash(bool value) {
-    db.saveSetting(SettingsValue(USE_DASH, value.toString()));
-    setState(() {
-      useDash = value;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     ColorScheme colorScheme = Theme.of(context).colorScheme;
     var locals = AppLocalizations.of(context)!;
     SettingsThemeData theme = settingsTheme(colorScheme);
 
-    return Scaffold(
-        extendBody: true,
-        bottomNavigationBar: const SizedBox.shrink(),
-        appBar: AppBar(
-          scrolledUnderElevation: 0,
-          title: Text(locals.settings),
-        ),
-        backgroundColor: colorScheme.background,
-        body: SafeArea(
-            child: SettingsList(
-          lightTheme: theme,
-          darkTheme: theme,
-          sections: [
-            SettingsSection(
-              title: Text(locals.browsing),
-              tiles: [
-                SettingsTile(
-                  title: Text(locals.country),
-                  value: Text(country.name),
-                  onPressed: (context) => searchCountry(context),
-                ),
-                SettingsTile(
-                  title: Text(locals.whenAppStartsShow),
-                  value: Text(getCategories(context)[onOpen]),
-                  onPressed: (context) => selectOnOpen(context),
-                )
-              ],
-            ),
-            SettingsSection(title: Text(locals.servers), tiles: [
-              SettingsTile.navigation(
-                title: Text(locals.manageServers),
-                description: Text(locals.currentServer(db.getCurrentlySelectedServer().url)),
-                onPressed: manageServers,
+    return GetBuilder<SettingsController>(
+      init: SettingsController(),
+      builder: (_) => Scaffold(
+          extendBody: true,
+          bottomNavigationBar: const SizedBox.shrink(),
+          appBar: AppBar(
+            scrolledUnderElevation: 0,
+            title: Text(locals.settings),
+          ),
+          backgroundColor: colorScheme.background,
+          body: SafeArea(
+              child: SettingsList(
+            lightTheme: theme,
+            darkTheme: theme,
+            sections: [
+              SettingsSection(
+                title: Text(locals.browsing),
+                tiles: [
+                  SettingsTile(
+                    title: Text(locals.country),
+                    value: Text(_.country.name),
+                    onPressed: (context) => searchCountry(context),
+                  ),
+                  SettingsTile(
+                    title: Text(locals.whenAppStartsShow),
+                    value: Text(getCategories(context)[_.onOpen]),
+                    onPressed: (context) => selectOnOpen(context),
+                  )
+                ],
               ),
-            ]),
-            SettingsSection(title: Text(locals.videoPlayer), tiles: [
-              SettingsTile.switchTile(
-                initialValue: useDash,
-                onToggle: toggleDash,
-                title: Text(locals.useDash),
-                description: Text(locals.useDashDescription),
-              )
-            ]),
-            SettingsSection(title: const Text('SponsorBlock'), tiles: [
-              SettingsTile.switchTile(
-                initialValue: sponsorBlock,
-                onToggle: toggleSponsorBlock,
-                title: Text(locals.useSponsorBlock),
-                description: Text(locals.sponsorBlockDescription),
-              )
-            ]),
-            SettingsSection(
-              title: Text(locals.appearance),
-              tiles: [
+              SettingsSection(title: Text(locals.servers), tiles: [
+                SettingsTile.navigation(
+                  title: Text(locals.manageServers),
+                  description: Text(locals.currentServer(db.getCurrentlySelectedServer().url)),
+                  onPressed: manageServers,
+                ),
+              ]),
+              SettingsSection(title: Text(locals.videoPlayer), tiles: [
                 SettingsTile.switchTile(
-                  initialValue: useDynamicTheme,
-                  onToggle: toggleDynamicTheme,
-                  title: Text(locals.useDynamicTheme),
-                  description: Text(locals.useDynamicThemeDescription),
-                ),
-              ],
-            ),
-            SettingsSection(title: (Text(locals.about)), tiles: [
-              SettingsTile(title: const Center(child: SizedBox(height: 150, width: 150, child: AppIconImage()))),
-              SettingsTile(
-                title: Text('${locals.name}: ${packageInfo.appName}'),
-                description: Text('${locals.package}: ${packageInfo.packageName}'),
+                  initialValue: _.useDash,
+                  onToggle: _.toggleDash,
+                  title: Text(locals.useDash),
+                  description: Text(locals.useDashDescription),
+                )
+              ]),
+              SettingsSection(title: const Text('SponsorBlock'), tiles: [
+                SettingsTile.switchTile(
+                  initialValue: _.sponsorBlock,
+                  onToggle: _.toggleSponsorBlock,
+                  title: Text(locals.useSponsorBlock),
+                  description: Text(locals.sponsorBlockDescription),
+                )
+              ]),
+              SettingsSection(
+                title: Text(locals.appearance),
+                tiles: [
+                  SettingsTile.switchTile(
+                    initialValue: _.useDynamicTheme,
+                    onToggle: _.toggleDynamicTheme,
+                    title: Text(locals.useDynamicTheme),
+                    description: Text(locals.useDynamicThemeDescription),
+                  ),
+                ],
               ),
-              SettingsTile(
-                title: Text('${locals.version}: ${packageInfo.version}'),
-                description: Text('${locals.build}: ${packageInfo.buildNumber}'),
-              )
-            ])
-          ],
-        )));
+              SettingsSection(title: (Text(locals.about)), tiles: [
+                SettingsTile(title: const Center(child: SizedBox(height: 150, width: 150, child: AppIconImage()))),
+                SettingsTile(
+                  title: Text('${locals.name}: ${_.packageInfo.appName}'),
+                  description: Text('${locals.package}: ${_.packageInfo.packageName}'),
+                ),
+                SettingsTile(
+                  title: Text('${locals.version}: ${_.packageInfo.version}'),
+                  description: Text('${locals.build}: ${_.packageInfo.buildNumber}'),
+                )
+              ])
+            ],
+          ))),
+    );
   }
 
-  @override
-  Future<FutureOr<void>> afterFirstLayout(BuildContext context) async {
-    PackageInfo packageInfo = await PackageInfo.fromPlatform();
-    setState(() {
-      this.packageInfo = packageInfo;
-    });
-  }
 }

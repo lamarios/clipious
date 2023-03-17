@@ -5,14 +5,14 @@ part 'channelVideos.g.dart';
 
 
 @JsonSerializable()
-class ChannelVideos{
+class VideosWithContinuation{
   List<VideoInList> videos;
   String? continuation;
 
-  ChannelVideos(this.videos, this.continuation);
+  VideosWithContinuation(this.videos, this.continuation);
 
 
-  factory ChannelVideos.fromJson(Map<String, dynamic> json) => _$ChannelVideosFromJson(json);
+  factory VideosWithContinuation.fromJson(Map<String, dynamic> json) => _$ChannelVideosFromJson(json);
 
   Map<String, dynamic> toJson() => _$ChannelVideosToJson(this);
 }
