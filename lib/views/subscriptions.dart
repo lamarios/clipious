@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:invidious/models/videoListAbstractClass.dart';
 
+import '../models/paginatedList.dart';
 import 'videoList.dart';
 
 const MAX_RESULTS = 50;

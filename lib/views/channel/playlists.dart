@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:after_layout/after_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:invidious/globals.dart';
+import 'package:invidious/models/paginatedList.dart';
 import 'package:invidious/service.dart';
 import 'package:invidious/views/playlistList.dart';
 import 'package:invidious/views/playlists/playlist.dart';
@@ -32,9 +33,7 @@ class _ChannelPlayListsViewState extends State<ChannelPlayListsView> {
     return PlaylistList(
       key: const ValueKey('playlysts'),
       canDeleteVideos: widget.canDeleteVideos,
-      getPlaylists: getPlaylists,
-      getMorePlaylists: continuation != null ? getPlaylists: null,
-      refresh: refresh,
+      paginatedList: ContinuationList<Playlist>((continuation) => service.getChannelPlaylists(widget.channelId, continuation: continuation)),
     );
   }
 

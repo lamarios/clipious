@@ -3,8 +3,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/models/videoInList.dart';
-import 'package:invidious/models/videoListAbstractClass.dart';
 
+import '../models/paginatedList.dart';
 import 'videoList.dart';
 
 class Popular extends StatefulWidget {
@@ -21,7 +21,7 @@ class PopularState extends State<Popular>{
     return Container(
       color: Theme.of(context).colorScheme.background,
       child: VideoList(
-        paginatedVideoList: SingleEndpointVideoList(service.getPopular),
+        paginatedVideoList: SingleEndpointList(service.getPopular),
         tags: 'popular-video-list',
       ),
     );

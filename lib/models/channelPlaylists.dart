@@ -1,16 +1,21 @@
+import 'package:invidious/models/itemWithContinuation.dart';
 import 'package:invidious/models/playlist.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'channelPlaylists.g.dart';
 
 @JsonSerializable()
-class ChannelPlaylists{
+class ChannelPlaylists extends ItemtWithContinuation<Playlist> {
   List<Playlist> playlists;
-  String? continuation;
 
-  ChannelPlaylists(this.playlists);
+  ChannelPlaylists(this.playlists, String? continuation) : super(continuation);
 
   factory ChannelPlaylists.fromJson(Map<String, dynamic> json) => _$ChannelPlaylistsFromJson(json);
 
   Map<String, dynamic> toJson() => _$ChannelPlaylistsToJson(this);
+
+  @override
+  List<Playlist> getItems() {
+    return playlists;
+  }
 }

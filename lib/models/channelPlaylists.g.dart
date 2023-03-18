@@ -11,10 +11,11 @@ ChannelPlaylists _$ChannelPlaylistsFromJson(Map<String, dynamic> json) =>
       (json['playlists'] as List<dynamic>)
           .map((e) => Playlist.fromJson(e as Map<String, dynamic>))
           .toList(),
-    )..continuation = json['continuation'] as String?;
+      json['continuation'] as String?,
+    );
 
 Map<String, dynamic> _$ChannelPlaylistsToJson(ChannelPlaylists instance) =>
     <String, dynamic>{
-      'playlists': instance.playlists,
       'continuation': instance.continuation,
+      'playlists': instance.playlists,
     };

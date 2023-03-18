@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/models/searchResult.dart';
-import 'package:invidious/models/videoListAbstractClass.dart';
 import 'package:invidious/utils.dart';
 import 'package:invidious/views/channel.dart';
 import 'package:invidious/views/playlistList.dart';
 import 'package:invidious/views/playlists/playlist.dart';
 
+import '../models/paginatedList.dart';
 import 'videoList.dart';
 
 class Search extends StatefulWidget {
@@ -36,8 +36,7 @@ class SearchState extends State<Search> with SingleTickerProviderStateMixin {
       children: [
         Material(
           color: colorScheme.brightness == Brightness.dark ? Colors.grey[900] : Colors.white,
-          child: TabBar(controller: controller,
-              tabs:  [
+          child: TabBar(controller: controller, tabs: [
             Tab(
               text: locals.videos,
               icon: Icon(Icons.play_arrow),
@@ -59,9 +58,11 @@ class SearchState extends State<Search> with SingleTickerProviderStateMixin {
               viewportFraction: 1,
               controller: controller,
               children: [
-                widget.results.videos.isNotEmpty ? VideoList(
-                  paginatedVideoList: FixedVideoList(widget.results.videos),
-                ): Center(child: Text(locals.nVideos(0))),
+                widget.results.videos.isNotEmpty
+                    ? VideoList(
+                        paginatedVideoList: FixedItemList(widget.results.videos),
+                      )
+                    : Center(child: Text(locals.nVideos(0))),
                 widget.results.channels.isNotEmpty
                     ? ListView(
                         children: widget.results.channels
@@ -99,9 +100,9 @@ class SearchState extends State<Search> with SingleTickerProviderStateMixin {
                       ),
                 widget.results.playlists.isNotEmpty
                     ? FractionallySizedBox(
-                      child: PlaylistList(playlists: widget.results.playlists, canDeleteVideos: false),
-                    )
-                    :  Center(child: Text(locals.noPlaylists))
+                        child: PlaylistList(paginatedList: FixedItemList(widget.results.playlists), canDeleteVideos: false),
+                      )
+                    : Center(child: Text(locals.noPlaylists))
               ],
             ),
           ),

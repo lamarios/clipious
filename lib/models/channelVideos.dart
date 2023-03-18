@@ -1,18 +1,22 @@
 import 'package:invidious/models/videoInList.dart';
 import 'package:json_annotation/json_annotation.dart';
 
+import 'itemWithContinuation.dart';
+
 part 'channelVideos.g.dart';
 
-
 @JsonSerializable()
-class VideosWithContinuation{
+class VideosWithContinuation extends ItemtWithContinuation<VideoInList> {
   List<VideoInList> videos;
-  String? continuation;
 
-  VideosWithContinuation(this.videos, this.continuation);
+  VideosWithContinuation(this.videos, String? continuation) : super(continuation);
 
+  factory VideosWithContinuation.fromJson(Map<String, dynamic> json) => _$VideosWithContinuationFromJson(json);
 
-  factory VideosWithContinuation.fromJson(Map<String, dynamic> json) => _$ChannelVideosFromJson(json);
+  Map<String, dynamic> toJson() => _$VideosWithContinuationToJson(this);
 
-  Map<String, dynamic> toJson() => _$ChannelVideosToJson(this);
+  @override
+  List<VideoInList> getItems() {
+    return videos;
+  }
 }

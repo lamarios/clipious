@@ -1,15 +1,15 @@
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:invidious/models/videoListAbstractClass.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
+import '../models/paginatedList.dart';
 import '../models/videoInList.dart';
 
 enum VideoListErrors { none, couldNotFetchVideos }
 
 class VideoListController extends GetxController {
-  PaginatedVideoList videoList;
+  PaginatedList<VideoInList> videoList;
   RefreshController refreshController = RefreshController(initialRefresh: false);
   List<VideoInList> videos = [];
   bool loading = true;
@@ -44,7 +44,7 @@ class VideoListController extends GetxController {
   getMoreVideos() async {
     if (!loading) {
       loadVideo(() async {
-        List<VideoInList> videos = await videoList.getMoreVideos();
+        List<VideoInList> videos = await videoList.getMoreItems();
         List<VideoInList> currentVideos = this.videos;
         currentVideos.addAll(videos);
         return currentVideos;
@@ -53,11 +53,11 @@ class VideoListController extends GetxController {
   }
 
   refreshVideos() async {
-    loadVideo(videoList.refreshVideos);
+    loadVideo(videoList.refresh);
   }
 
   getVideos() async {
-    loadVideo(videoList.getVideos);
+    loadVideo(videoList.getItems);
   }
 
   loadVideo(Future<List<VideoInList>> Function() refreshFunction) async {

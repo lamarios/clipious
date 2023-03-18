@@ -1,3 +1,4 @@
+import 'package:invidious/models/itemWithContinuation.dart';
 import 'package:invidious/models/userFeed.dart';
 import 'package:invidious/models/videoInList.dart';
 
@@ -5,24 +6,27 @@ import '../globals.dart';
 import '../views/subscriptions.dart';
 import 'channelVideos.dart';
 
-abstract class PaginatedVideoList {
-  Future<List<VideoInList>> getVideos();
+abstract class PaginatedList<T>{
+  Future<List<T>> getItems();
 
-  Future<List<VideoInList>> getMoreVideos();
+  Future<List<T>> getMoreItems();
 
-  Future<List<VideoInList>> refreshVideos();
+  Future<List<T>> refresh();
 
   bool hasRefresh();
 
   bool getHasMore();
 }
 
-/// Paginated video list that uses the continuation concept
-class ContinuationVideoList extends PaginatedVideoList {
-  String? continuation;
-  Future<VideosWithContinuation> Function(String? continuation) serviceCall;
+abstract class PaginatedVideoList extends PaginatedList<VideoInList> {
+}
 
-  ContinuationVideoList(this.serviceCall);
+/// Paginated video list that uses the continuation concept
+class ContinuationList<T> extends PaginatedList<T> {
+  String? continuation;
+  Future<ItemtWithContinuation<T>> Function(String? continuation) serviceCall;
+
+  ContinuationList(this.serviceCall);
 
   @override
   bool getHasMore() {
@@ -30,16 +34,16 @@ class ContinuationVideoList extends PaginatedVideoList {
   }
 
   @override
-  Future<List<VideoInList>> getMoreVideos() async {
-    return getVideos();
+  Future<List<T>> getMoreItems() async {
+    return getItems();
   }
 
   @override
-  Future<List<VideoInList>> getVideos() async {
-    VideosWithContinuation videos = await serviceCall(continuation);
+  Future<List<T>> getItems() async {
+    ItemtWithContinuation<T> videos = await serviceCall(continuation);
 
     continuation = videos.continuation;
-    return videos.videos;
+    return videos.getItems();
   }
 
   @override
@@ -48,17 +52,17 @@ class ContinuationVideoList extends PaginatedVideoList {
   }
 
   @override
-  Future<List<VideoInList>> refreshVideos() {
+  Future<List<T>> refresh() {
     continuation = null;
-    return getVideos();
+    return getItems();
   }
 }
 
 /// Video list with one endpoint call, no pagination or continuation
-class SingleEndpointVideoList extends PaginatedVideoList {
-  Future<List<VideoInList>> Function() serviceCall;
+class SingleEndpointList<T> extends PaginatedList<T> {
+  Future<List<T>> Function() serviceCall;
 
-  SingleEndpointVideoList(this.serviceCall);
+  SingleEndpointList(this.serviceCall);
 
   @override
   bool getHasMore() {
@@ -66,18 +70,18 @@ class SingleEndpointVideoList extends PaginatedVideoList {
   }
 
   @override
-  Future<List<VideoInList>> getMoreVideos() async {
+  Future<List<T>> getMoreItems() async {
     return [];
   }
 
   @override
-  Future<List<VideoInList>> getVideos() async {
+  Future<List<T>> getItems() async {
     return serviceCall();
   }
 
   @override
-  Future<List<VideoInList>> refreshVideos() async {
-    return getVideos();
+  Future<List<T>> refresh() async {
+    return getItems();
   }
 
   @override
@@ -87,10 +91,11 @@ class SingleEndpointVideoList extends PaginatedVideoList {
 }
 
 /// List of videos with no service calls, just a plain list
-class FixedVideoList extends PaginatedVideoList {
-  List<VideoInList> videos;
+/// sounds too simple to use this but it is to have a standard component to handle item lists
+class FixedItemList<T> extends PaginatedList<T> {
+  List<T> items;
 
-  FixedVideoList(this.videos);
+  FixedItemList(this.items);
 
   @override
   bool getHasMore() {
@@ -98,18 +103,18 @@ class FixedVideoList extends PaginatedVideoList {
   }
 
   @override
-  Future<List<VideoInList>> getMoreVideos() async {
+  Future<List<T>> getMoreItems() async {
     return [];
   }
 
   @override
-  Future<List<VideoInList>> getVideos() async {
-    return videos;
+  Future<List<T>> getItems() async {
+    return items;
   }
 
   @override
-  Future<List<VideoInList>> refreshVideos() async {
-    return videos;
+  Future<List<T>> refresh() async {
+    return items;
   }
 
   @override
@@ -124,7 +129,7 @@ class SubscriptionVideoList extends PaginatedVideoList {
   bool hasMore = true;
 
   @override
-  Future<List<VideoInList>> getVideos() async {
+  Future<List<VideoInList>> getItems() async {
     UserFeed feed = await service.getUserFeed(page: page, maxResults: MAX_RESULTS);
     List<VideoInList> subs = [];
     subs.addAll(feed.notifications ?? []);
@@ -136,15 +141,15 @@ class SubscriptionVideoList extends PaginatedVideoList {
   }
 
   @override
-  Future<List<VideoInList>> getMoreVideos() async {
+  Future<List<VideoInList>> getMoreItems() async {
     page = page + 1;
-    return getVideos();
+    return getItems();
   }
 
   @override
-  Future<List<VideoInList>> refreshVideos() async {
+  Future<List<VideoInList>> refresh() async {
     page = 1;
-    return getVideos();
+    return getItems();
   }
 
   @override

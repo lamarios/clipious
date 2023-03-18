@@ -4,7 +4,10 @@ import 'package:after_layout/after_layout.dart';
 import 'package:fbroadcast/fbroadcast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:get/get.dart';
+import 'package:invidious/controllers/playlistController.dart';
 import 'package:invidious/globals.dart';
+import 'package:invidious/models/paginatedList.dart';
 import 'package:invidious/views/playlistList.dart';
 import 'package:invidious/views/playlists/playlist.dart';
 import 'package:logging/logging.dart';
@@ -25,15 +28,13 @@ class Playlists extends StatefulWidget {
 }
 
 class _PlaylistsState extends State<Playlists> with RouteAware {
-  GlobalKey<PlaylistListState> playlistKey = GlobalKey();
   final log = Logger('Playlists');
-  List<Playlist> playlists = [];
 
   @override
   void initState() {
     super.initState();
     FBroadcast.instance().register(PLAYLIST_ADDED, (value, callback) {
-      playlistKey.currentState?.refreshPlaylists();
+      // playlistKey.currentState?.refreshPlaylists();
     });
   }
 
@@ -46,7 +47,7 @@ class _PlaylistsState extends State<Playlists> with RouteAware {
   @override
   void didPopNext() {
     super.didPopNext();
-    playlistKey.currentState?.refreshPlaylists();
+    // playlistKey.currentState?.refreshPlaylists();
   }
 
   @override
@@ -54,19 +55,12 @@ class _PlaylistsState extends State<Playlists> with RouteAware {
     return Column(
       children: [
         Expanded(
-          child: PlaylistList(
-            key: playlistKey,
-            canDeleteVideos: widget.canDeleteVideos,
-            getPlaylists: getPlayLists,
-            refresh: getPlayLists,
-          ),
-        )
+            child: PlaylistList(
+          canDeleteVideos: widget.canDeleteVideos,
+          paginatedList: SingleEndpointList(service.getUserPlaylists),
+        ))
       ],
     );
-  }
-
-  Future<List<Playlist>> getPlayLists() async {
-    return await service.getUserPlaylists();
   }
 }
 
@@ -81,17 +75,14 @@ class _AddPlayListButtonState extends State<AddPlayListButton> {
   addPlaylistDialog(BuildContext context) {
     showDialog<String>(
         context: context,
-        builder: (BuildContext context) =>
-            Dialog(
+        builder: (BuildContext context) => Dialog(
               child: AddPlayListForm(),
             ));
   }
 
   @override
   Widget build(BuildContext context) {
-    ColorScheme colors = Theme
-        .of(context)
-        .colorScheme;
+    ColorScheme colors = Theme.of(context).colorScheme;
     return FloatingActionButton(
       onPressed: () => addPlaylistDialog(context),
       backgroundColor: colors.primaryContainer,
@@ -117,7 +108,8 @@ class _AddPlayListFormState extends State<AddPlayListForm> {
     var locals = AppLocalizations.of(context)!;
     try {
       String? playlistId = await service.createPlayList(nameController.value.text, privacyValue);
-      FBroadcast.instance().broadcast(PLAYLIST_ADDED);
+
+      Get.find<PlaylistController>().refreshPlaylists();
 
       if (context.mounted && widget.afterAdd != null) {
         widget.afterAdd!(context, playlistId!);

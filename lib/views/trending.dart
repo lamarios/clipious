@@ -1,10 +1,7 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:invidious/globals.dart';
-import 'package:invidious/models/videoInList.dart';
-import 'package:invidious/models/videoListAbstractClass.dart';
 
+import '../models/paginatedList.dart';
 import 'videoList.dart';
 
 const ALL = 'all';
@@ -73,7 +70,7 @@ doesn't seem to be working for now
 */
           Expanded(
             child: VideoList(
-              paginatedVideoList: SingleEndpointVideoList(service.getTrending),
+              paginatedVideoList: SingleEndpointList(service.getTrending),
               tags: 'trending-video-list',
             ),
           ),

@@ -5,6 +5,8 @@ import 'package:better_player/better_player.dart';
 import 'package:fbroadcast/fbroadcast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:get/get.dart';
+import 'package:invidious/controllers/playlistController.dart';
 import 'package:invidious/models/errors/invidiousServiceError.dart';
 import 'package:invidious/models/imageObject.dart';
 import 'package:invidious/models/videoInList.dart';
@@ -45,12 +47,10 @@ class _PlaylistViewState extends State<PlaylistView> with AfterLayoutMixin<Playl
   void initState() {
     super.initState();
     playlist = widget.playlist;
-    FBroadcast.instance().broadcast(BROADCAST_MOVE_MINI_PLAYER, value: false);
   }
 
   @override
   void dispose() {
-    FBroadcast.instance().broadcast(BROADCAST_MOVE_MINI_PLAYER, value: true);
     super.dispose();
   }
 
@@ -126,6 +126,7 @@ class _PlaylistViewState extends State<PlaylistView> with AfterLayoutMixin<Playl
       service.deleteUserPlaylist(playlist.playlistId).then((value) {
         if (context.mounted) {
           Navigator.of(context).pop();
+          Get.find<PlaylistController>().refreshPlaylists();
         }
       });
     });
@@ -213,7 +214,7 @@ class _PlaylistViewState extends State<PlaylistView> with AfterLayoutMixin<Playl
     Navigator.push(
         context,
         MaterialPageRoute(
-          settings: ROUTE_VIDEO,
+            settings: ROUTE_VIDEO,
             builder: (context) => VideoView(
                   videoId: videoId,
                 )));

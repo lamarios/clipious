@@ -3,15 +3,16 @@ import 'package:flutter_fadein/flutter_fadein.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:invidious/controllers/videoListController.dart';
+import 'package:invidious/models/videoInList.dart';
 import 'package:invidious/utils.dart';
 import 'package:invidious/views/videoList/singleVideo.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../globals.dart';
-import '../models/videoListAbstractClass.dart';
+import '../models/paginatedList.dart';
 
 class VideoList extends StatelessWidget {
-  final PaginatedVideoList paginatedVideoList;
+  final PaginatedList<VideoInList> paginatedVideoList;
   final String? tags;
 
   const VideoList({
@@ -38,16 +39,16 @@ class VideoList extends StatelessWidget {
     return GetBuilder<VideoListController>(
       init: VideoListController(paginatedVideoList),
       tag: tags,
-      builder: (controller) => Column(
+      builder: (_) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Visibility(visible: controller.loading, child: const SizedBox(height: 1, child: LinearProgressIndicator())),
+          Visibility(visible: _.loading, child: const SizedBox(height: 1, child: LinearProgressIndicator())),
           Expanded(
-            child: controller.error != VideoListErrors.none
+            child: _.error != VideoListErrors.none
                 ? Container(
                     alignment: Alignment.center,
                     color: colorScheme.background,
-                    child: InkWell(onTap: () => controller.getVideos(), child: Text(locals.couldntFetchVideos)),
+                    child: InkWell(onTap: () => _.getVideos(), child: Text(locals.couldntFetchVideos)),
                   )
                 : Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -55,20 +56,20 @@ class VideoList extends StatelessWidget {
                       duration: animationDuration,
                       curve: Curves.easeInOutQuad,
                       child: Visibility(
-                        visible: controller.videos.isNotEmpty,
+                        visible: _.videos.isNotEmpty,
                         child: SmartRefresher(
-                          controller: controller.refreshController,
-                          enablePullDown: controller.videoList.hasRefresh(),
+                          controller: _.refreshController,
+                          enablePullDown: _.videoList.hasRefresh(),
                           enablePullUp: false,
-                          onRefresh: controller.refreshVideos,
+                          onRefresh: _.refreshVideos,
                           child: GridView.count(
                               crossAxisCount: getGridCount(context),
-                              controller: controller.scrollController,
+                              controller: _.scrollController,
                               padding: const EdgeInsets.all(4),
                               crossAxisSpacing: 5,
                               mainAxisSpacing: 5,
                               childAspectRatio: getGridAspectRatio(context),
-                              children: (controller.videos).map((v) => VideoListItem(key: ValueKey(v.videoId), video: v)).toList()),
+                              children: (_.videos).map((v) => VideoListItem(key: ValueKey(v.videoId), video: v)).toList()),
                         ),
                       ),
                     ),
