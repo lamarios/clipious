@@ -1,11 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/models/video.dart';
-import 'package:invidious/views/videoList.dart';
 import 'package:invidious/views/videoList/singleVideo.dart';
 
-import '../../models/video.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../models/videoInList.dart';
 
 class RecommendedVideos extends StatelessWidget {

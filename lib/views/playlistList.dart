@@ -1,49 +1,30 @@
-import 'dart:async';
-
-import 'package:after_layout/after_layout.dart';
-import 'package:easy_debounce/easy_debounce.dart';
-import 'package:fbroadcast/fbroadcast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_fadein/flutter_fadein.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
-import 'package:invidious/controllers/playlistController.dart';
+import 'package:invidious/controllers/playlistListController.dart';
 import 'package:invidious/models/paginatedList.dart';
 import 'package:invidious/models/playlist.dart';
-import 'package:invidious/utils.dart';
 import 'package:invidious/views/playlists/playlist.dart';
-import 'package:invidious/views/videoList/singleVideo.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../globals.dart';
-import '../models/videoInList.dart';
 
-class PlaylistList extends StatefulWidget {
-  PaginatedList<Playlist> paginatedList;
-  bool canDeleteVideos;
+class PlaylistList extends StatelessWidget {
+  final PaginatedList<Playlist> paginatedList;
+  final bool canDeleteVideos;
+  final String tag;
 
-  PlaylistList({super.key, required this.paginatedList, required this.canDeleteVideos});
+  const PlaylistList({super.key, required this.tag, required this.paginatedList, required this.canDeleteVideos});
 
-  @override
-  PlaylistListState createState() => PlaylistListState();
-}
-
-class PlaylistListState extends State<PlaylistList> {
-  @override
-  void initState() {
-    super.initState();
-
-    FBroadcast.instance().register(BROADCAST_SERVER_CHANGED, (value, callback) {
-      // getPlaylists();
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
     ColorScheme colorScheme = Theme.of(context).colorScheme;
     AppLocalizations locals = AppLocalizations.of(context)!;
-    return GetBuilder<PlaylistController>(
-      init: PlaylistController(widget.paginatedList),
+    return GetBuilder<PlaylistListController>(
+      tag: PlaylistListController.getTag(tag),
+      init: PlaylistListController(paginatedList),
       builder: (_) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -69,7 +50,7 @@ class PlaylistListState extends State<PlaylistList> {
                           onRefresh: _.refreshPlaylists,
                           child: ListView.separated(
                               controller: _.scrollController,
-                              itemBuilder: (context, index) => PlaylistItem(playlist: _.playlists[index], canDeleteVideos: widget.canDeleteVideos),
+                              itemBuilder: (context, index) => PlaylistItem(playlist: _.playlists[index], canDeleteVideos: canDeleteVideos),
                               separatorBuilder: (context, index) => const Divider(),
                               itemCount: _.playlists.length),
                         ),

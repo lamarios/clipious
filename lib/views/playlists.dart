@@ -1,54 +1,20 @@
-import 'dart:async';
-
-import 'package:after_layout/after_layout.dart';
-import 'package:fbroadcast/fbroadcast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
-import 'package:invidious/controllers/playlistController.dart';
+import 'package:invidious/controllers/playlistListController.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/models/paginatedList.dart';
 import 'package:invidious/views/playlistList.dart';
-import 'package:invidious/views/playlists/playlist.dart';
 import 'package:logging/logging.dart';
 
-import '../main.dart';
-import '../models/playlist.dart';
 import '../utils.dart';
 
 const PLAYLIST_ADDED = 'playlist-added';
 
-class Playlists extends StatefulWidget {
+class Playlists extends StatelessWidget {
   final bool canDeleteVideos;
 
   const Playlists({super.key, required this.canDeleteVideos});
-
-  @override
-  State<Playlists> createState() => _PlaylistsState();
-}
-
-class _PlaylistsState extends State<Playlists> with RouteAware {
-  final log = Logger('Playlists');
-
-  @override
-  void initState() {
-    super.initState();
-    FBroadcast.instance().register(PLAYLIST_ADDED, (value, callback) {
-      // playlistKey.currentState?.refreshPlaylists();
-    });
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    routeObserver.subscribe(this, ModalRoute.of(context) as PageRoute<dynamic>);
-  }
-
-  @override
-  void didPopNext() {
-    super.didPopNext();
-    // playlistKey.currentState?.refreshPlaylists();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +22,8 @@ class _PlaylistsState extends State<Playlists> with RouteAware {
       children: [
         Expanded(
             child: PlaylistList(
-          canDeleteVideos: widget.canDeleteVideos,
+          tag: userPlayListTag,
+          canDeleteVideos: canDeleteVideos,
           paginatedList: SingleEndpointList(service.getUserPlaylists),
         ))
       ],
@@ -109,7 +76,7 @@ class _AddPlayListFormState extends State<AddPlayListForm> {
     try {
       String? playlistId = await service.createPlayList(nameController.value.text, privacyValue);
 
-      Get.find<PlaylistController>().refreshPlaylists();
+      Get.find<PlaylistListController>(tag: PlaylistListController.getTag(userPlayListTag)).refreshPlaylists();
 
       if (context.mounted && widget.afterAdd != null) {
         widget.afterAdd!(context, playlistId!);

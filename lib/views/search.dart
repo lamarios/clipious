@@ -6,6 +6,7 @@ import 'package:invidious/views/channel.dart';
 import 'package:invidious/views/playlistList.dart';
 import 'package:invidious/views/playlists/playlist.dart';
 
+import '../controllers/playlistListController.dart';
 import '../models/paginatedList.dart';
 import 'videoList.dart';
 
@@ -100,7 +101,7 @@ class SearchState extends State<Search> with SingleTickerProviderStateMixin {
                       ),
                 widget.results.playlists.isNotEmpty
                     ? FractionallySizedBox(
-                        child: PlaylistList(paginatedList: FixedItemList(widget.results.playlists), canDeleteVideos: false),
+                        child: PlaylistList(tag: searchPlayListTag, paginatedList: FixedItemList(widget.results.playlists), canDeleteVideos: false),
                       )
                     : Center(child: Text(locals.noPlaylists))
               ],

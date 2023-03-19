@@ -1,87 +1,164 @@
-import 'package:easy_debounce/easy_debounce.dart';
+import 'package:better_player/better_player.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:invidious/models/paginatedList.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:invidious/controllers/playlistListController.dart';
+import 'package:logging/logging.dart';
 
+import '../globals.dart';
 import '../models/playlist.dart';
-
-const couldNotGetPlaylits = 'could-not-get-playlists';
+import '../models/video.dart';
+import '../models/videoInList.dart';
 
 class PlaylistController extends GetxController {
-  PaginatedList<Playlist> paginatedList;
-  RefreshController refreshController = RefreshController(initialRefresh: false);
-  List<Playlist> playlists = [];
-  bool loading = true;
+  final log = Logger('PlaylistView');
+  bool playingVideo = false;
+  Video? currentlyPlaying;
+  int selectedIndex = 0;
+  double progress = 0;
+  double loadingProgress = 0;
+  late Playlist playlist;
+  bool loading = false;
   ScrollController scrollController = ScrollController();
-  String error = '';
+  late double playlistItemHeight;
 
-  PlaylistController(this.paginatedList);
+  PlaylistController({required this.playlist, required this.playlistItemHeight});
 
-  @override
-  void onInit() {
-    super.onInit();
-    scrollController.addListener(onScrollEvent);
+  static String getTags(String playlistId){
+    return 'playlist-$playlistId';
   }
 
-  onScrollEvent() {
-    if (paginatedList.getHasMore()) {
-      if (scrollController.hasClients) {
-        if (scrollController.position.maxScrollExtent == scrollController.offset) {
-          EasyDebounce.debounce('get-more-playlists', const Duration(milliseconds: 250), getMorePlaylists);
-        }
+  videoListener(BetterPlayerEvent event) {
+    if (event.betterPlayerEventType == BetterPlayerEventType.progress) {
+      var progress = (event.parameters?['progress'] as Duration).inSeconds / (currentlyPlaying?.lengthSeconds ?? 1);
+      this.progress = progress;
+      update();
+    }
+
+    if (event.betterPlayerEventType == BetterPlayerEventType.finished) {
+      playNextVideo();
+    }
+  }
+
+  startVideo() async {
+    if (playlist.videos.isNotEmpty) {
+      if (selectedIndex < playlist.videos.length) {
+        scrollController.animateTo(selectedIndex * playlistItemHeight, duration: animationDuration, curve: Curves.easeInOutQuad);
+        var vid = await service.getVideo(playlist.videos[selectedIndex].videoId);
+        playingVideo = true;
+        progress = 0;
+        currentlyPlaying = vid;
+        update();
+      } else {
+        selectedIndex = 0;
+        update();
+        startVideo();
       }
     }
   }
 
-  getMorePlaylists() async {
-    if (!loading && paginatedList.getHasMore()) {
-      loadPlaylist(() async {
-        List<Playlist> playlists = await paginatedList.getMoreItems();
-        List<Playlist> currentPlaylists = this.playlists;
-        currentPlaylists.addAll(playlists);
-        return currentPlaylists;
-      });
+  playVideo(BuildContext context, VideoInList v) {
+    int index = playlist.videos.indexWhere((element) => element.videoId == v.videoId);
+    if (index >= 0) {
+      selectedIndex = index;
+      startVideo();
+      update();
     }
   }
 
-  refreshPlaylists() async {
-    loadPlaylist(paginatedList.refresh);
-  }
+  playPreviousVideo() {
+    int index = selectedIndex - 1;
+    if (index < 0) {
+      index = playlist.videos.length - 1;
+    }
 
-  getPlaylists() async {
-    loadPlaylist(paginatedList.getItems);
-  }
-
-  loadPlaylist(Future<List<Playlist>> Function() refreshFunction) async {
-    error = '';
-    loading = true;
+    selectedIndex = index;
+    startVideo();
     update();
-    try {
-      var playlists = await refreshFunction();
-      this.playlists = playlists;
-      loading = false;
-      update();
-    } catch (err) {
-      playlists = [];
-      loading = false;
-      error = couldNotGetPlaylits;
-      update();
-      rethrow;
+  }
+
+  playNextVideo() {
+    int index = selectedIndex + 1;
+    if (index >= playlist.videos.length) {
+      index = 0;
     }
-    refreshController.refreshCompleted();
+
+    selectedIndex = index;
+    startVideo();
+    update();
+  }
+
+  deletePlaylist() async {
+    await service.deleteUserPlaylist(playlist.playlistId);
+    Get.find<PlaylistListController>(tag: PlaylistListController.getTag(userPlayListTag)).refreshPlaylists();
+  }
+
+  Future<bool> removeVideoFromPlayList(VideoInList v) async {
+    bool playing = currentlyPlaying?.videoId == v.videoId;
+    int videoCount = playlist.videos.length;
+    int index = playlist.videos.indexWhere((element) => element.videoId == v.videoId);
+
+    await service.deleteUserPlaylistVideo(playlist.playlistId, v.indexId ?? '');
+
+    if (playing && videoCount >= 2) {
+      // we have a fallback video
+      playNextVideo();
+      var playlist = this.playlist;
+      playlist.videos.removeAt(index);
+      playlist.videoCount--;
+
+      this.playlist = playlist;
+      update();
+    } else if (videoCount >= 2) {
+      var playlist = this.playlist;
+      playlist.videos.removeAt(index);
+      playlist.videoCount--;
+
+      this.playlist = playlist;
+      update();
+    } else if (videoCount < 2) {
+      // no more video next;
+      Get.find<PlaylistListController>(tag: userPlayListTag).refreshPlaylists();
+      return true;
+    }
+
+    return false;
+  }
+
+  getAllVideos() async {
+    if (playlist.videoCount > 0 && playlist.videos.length < playlist.videoCount) {
+      loading = true;
+      update();
+      int page = 1;
+      List<VideoInList> videos = [];
+      // something is not right, let's get the full playlist
+      while (videos.length < playlist.videoCount) {
+        Playlist playlist = await service.getPublicPlaylists(this.playlist.playlistId, page: page);
+        videos.addAll(playlist.videos);
+        page++;
+
+        loadingProgress = videos.length / this.playlist.videoCount;
+        update();
+      }
+
+      var pl = playlist;
+      pl.videos = videos;
+      playlist = pl;
+      loading = false;
+      startVideo();
+      update();
+    }
   }
 
   @override
   void onReady() {
     super.onReady();
-    getPlaylists();
+    startVideo();
+    getAllVideos();
   }
 
   @override
   void onClose() {
     scrollController.dispose();
-    refreshController.dispose();
     super.onClose();
   }
 }

@@ -71,7 +71,7 @@ class VideoView extends StatelessWidget {
                       Visibility(
                         visible: _.isLoggedIn,
                         child: IconButton(
-                          onPressed: () => AddToPlaylist.showDialog(context, _.video!.videoId),
+                          onPressed: () => AddToPlaylist.showAddToPlaylistDialog(context, _.video!.videoId),
                           icon: const Icon(Icons.add),
                           color: colorScheme.secondary,
                         ),

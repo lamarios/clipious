@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:invidious/controllers/videoInnerViewController.dart';
 import 'package:logging/logging.dart';
 
 import '../globals.dart';
@@ -58,9 +59,14 @@ class VideoController extends GetxController {
     }
   }
 
-  selectIndex(int index){
+  selectIndex(int index) {
     selectedIndex = index;
     update();
+    try {
+      Get.find<VideoInnerViewController>(tag: VideoInnerViewController.getControllerTags(video?.videoId ?? '')).scrollUp();
+    } catch (err) {
+      // in case controller doesn't exist
+    }
   }
 
   void videoDragged(DragUpdateDetails details) {
