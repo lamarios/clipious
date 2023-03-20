@@ -136,7 +136,7 @@
   "@couldntFetchVideos": {
     "description": "Can't load bunch of videos, asking  user to try again"
   },
-  "wizardIntro": "Выберите общедоступный сервер или добавьте свой собственный (можно изменить позже в настройках).",
+  "wizardIntro": "Выберите общедоступный сервер или добавьте свой собственный. (можно изменить позже в настройках.)",
   "@wizardIntro": {
     "description": "Welcome message on frst time use"
   },
@@ -358,5 +358,45 @@
   "videoUnlisted": "По ссылке",
   "@videoUnlisted": {
     "description": "Status of a video that is only accessible by link"
+  },
+  "tapToManage": "Нажмите для управления",
+  "@tapToManage": {
+    "description": "Text shown below a server in the 'Your servers' list"
+  },
+  "authentication": "Аутентификация",
+  "@authentication": {
+    "description": "Label for server settings related to authentications"
+  },
+  "tokenLoginDescription": "Рекомендуемый способ входа в аккаунт",
+  "@tokenLoginDescription": {
+    "description": "Recommended way to log in"
+  },
+  "cookieLoginDescription": "Используйте этот метод, если у вас возникли проблемы с аутентификацией с помощью токена",
+  "@cookieLoginDescription": {
+    "description": "Cookie log in description"
+  },
+  "logout": "Выйти",
+  "@logout": {
+    "description": "CTA to logout of a server"
+  },
+  "username": "Имя пользователя",
+  "@username": {
+    "description": "Username label for login to a server"
+  },
+  "password": "Пароль",
+  "@password": {
+    "description": "Password label for login to a server"
+  },
+  "wrongUsernamePassword": "Неправильное имя пользователя или пароль",
+  "@wrongUsernamePassword": {
+    "description": "Error message when authentication fails"
+  },
+  "tokenLogin": "Вход в аккаунт через токен",
+  "@tokenLogin": {
+    "description": "Textto login to a server using the recommended way"
+  },
+  "cookieLogin": "Войти с помощью cookie",
+  "@cookieLogin": {
+    "description": "Text to login to a server using the cookie jar method"
   }
 }
