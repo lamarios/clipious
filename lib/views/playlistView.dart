@@ -1,12 +1,7 @@
-import 'dart:async';
-
-import 'package:after_layout/after_layout.dart';
-import 'package:better_player/better_player.dart';
 import 'package:fbroadcast/fbroadcast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
-import 'package:invidious/controllers/playlistListController.dart';
 import 'package:invidious/models/errors/invidiousServiceError.dart';
 import 'package:invidious/models/imageObject.dart';
 import 'package:invidious/models/videoInList.dart';
@@ -15,12 +10,10 @@ import 'package:invidious/utils.dart';
 import 'package:invidious/views/components/videoThumbnail.dart';
 import 'package:invidious/views/video.dart';
 import 'package:invidious/views/video/player.dart';
-import 'package:logging/logging.dart';
 
 import '../controllers/playlistController.dart';
 import '../globals.dart';
 import '../models/playlist.dart';
-import '../models/video.dart';
 
 class PlaylistView extends StatelessWidget {
   final Playlist playlist;
@@ -28,10 +21,10 @@ class PlaylistView extends StatelessWidget {
 
   const PlaylistView({super.key, required this.playlist, required this.canDeleteVideos});
 
-  deletePlayList(BuildContext context) {
+  deletePlayList(BuildContext context, PlaylistController controller) {
     var locals = AppLocalizations.of(context)!;
     okCancelDialog(context, locals.deletePlayListQ, locals.irreversibleAction, () async {
-      await Get.find<PlaylistController>(tag: PlaylistController.getTags(playlist.playlistId)).deletePlaylist();
+      await controller.deletePlaylist();
 
       if (context.mounted) {
         Navigator.of(context).pop();
@@ -39,7 +32,7 @@ class PlaylistView extends StatelessWidget {
     });
   }
 
-  showPlayListVideoDialog(BuildContext context, VideoInList v) {
+  showPlayListVideoDialog(BuildContext context, PlaylistController controller, VideoInList v) {
     showModalBottomSheet<void>(
         context: context,
         builder: (BuildContext context) {
@@ -58,7 +51,7 @@ class PlaylistView extends StatelessWidget {
                       children: [
                         IconButton(
                           onPressed: () async {
-                            removeVideoFromPlayList(context, v);
+                            removeVideoFromPlayList(context, controller, v);
                             Navigator.pop(context);
                           },
                           icon: const Icon(Icons.delete),
@@ -88,10 +81,10 @@ class PlaylistView extends StatelessWidget {
                 )));
   }
 
-  removeVideoFromPlayList(BuildContext context, VideoInList v) async {
+  removeVideoFromPlayList(BuildContext context, PlaylistController controller, VideoInList v) async {
     var locals = AppLocalizations.of(context)!;
     try {
-      bool goBack = await Get.find<PlaylistController>(tag: PlaylistController.getTags(playlist.playlistId)).removeVideoFromPlayList(v);
+      bool goBack = await controller.removeVideoFromPlayList(v);
 
       if (context.mounted && goBack) {
         Navigator.of(context).pop();
@@ -111,8 +104,8 @@ class PlaylistView extends StatelessWidget {
     bool onBigScreen = getScreenWidth() > PHONE_MAX;
 
     return GetBuilder<PlaylistController>(
+      global: false,
       init: PlaylistController(playlist: playlist, playlistItemHeight: 100),
-      tag: PlaylistController.getTags(playlist.playlistId),
       builder: (_) => Scaffold(
           appBar: AppBar(
             title: Text(
@@ -122,7 +115,7 @@ class PlaylistView extends StatelessWidget {
             actions: [
               canDeleteVideos
                   ? InkWell(
-                      onTap: () => deletePlayList(context),
+                      onTap: () => deletePlayList(context, _),
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Icon(
@@ -217,7 +210,7 @@ class PlaylistView extends StatelessWidget {
                                               padding: const EdgeInsets.all(8.0),
                                               child: InkWell(
                                                 onTap: () => _.playVideo(context, v),
-                                                onLongPress: canDeleteVideos ? () => showPlayListVideoDialog(context, v) : null,
+                                                onLongPress: canDeleteVideos ? () => showPlayListVideoDialog(context, _, v) : null,
                                                 child: Row(
                                                   children: [
                                                     Padding(

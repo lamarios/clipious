@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:invidious/controllers/videoListController.dart';
 import 'package:invidious/globals.dart';
 
 import '../models/paginatedList.dart';
@@ -71,7 +72,7 @@ doesn't seem to be working for now
           Expanded(
             child: VideoList(
               paginatedVideoList: SingleEndpointList(service.getTrending),
-              tags: 'trending-video-list',
+              tags: VideoListController.trendingTag,
             ),
           ),
         ],

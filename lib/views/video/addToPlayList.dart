@@ -18,12 +18,12 @@ class AddToPlaylist extends StatelessWidget {
         });
   }
 
-  addToPlaylist(BuildContext context, String playlistId) async {
+  addToPlaylist(BuildContext context, AddToPlaylistController controller, String playlistId) async {
     var locals = AppLocalizations.of(context)!;
     Navigator.of(context).pop();
     final scaffoldMessenger = ScaffoldMessenger.of(context);
     try {
-      await Get.find<AddToPlaylistController>().addToPlaylist(playlistId, videoId);
+      await controller.addToPlaylist(playlistId, videoId);
       scaffoldMessenger.showSnackBar(SnackBar(
         content: Text(locals.videoAddedToPlaylist),
         duration: const Duration(seconds: 3),
@@ -37,11 +37,11 @@ class AddToPlaylist extends StatelessWidget {
     }
   }
 
-  newPlaylistAndAdd(BuildContext context) {
+  newPlaylistAndAdd(BuildContext context, AddToPlaylistController controller) {
     showDialog<String>(
         context: context,
         builder: (BuildContext context) => Dialog(
-              child: AddPlayListForm(afterAdd: addToPlaylist),
+              child: AddPlayListForm(afterAdd: (context, playlistId) => addToPlaylist(context, controller, playlistId)),
             ));
   }
 
@@ -51,6 +51,7 @@ class AddToPlaylist extends StatelessWidget {
 
     return GetBuilder<AddToPlaylistController>(
       init: AddToPlaylistController(),
+      global: false,
       builder: (_) => Padding(
         padding: const EdgeInsets.all(8.0),
         child: Container(
@@ -60,11 +61,11 @@ class AddToPlaylist extends StatelessWidget {
             _.loading ? const CircularProgressIndicator() : const SizedBox.shrink(),
             Expanded(
               child: ListView(
-                children: _.playlists.map((p) => FilledButton.tonal(onPressed: () => addToPlaylist(context, p.playlistId), child: Text(p.title))).toList(),
+                children: _.playlists.map((p) => FilledButton.tonal(onPressed: () => addToPlaylist(context, _, p.playlistId), child: Text(p.title))).toList(),
               ),
             ),
             FilledButton.tonal(
-              onPressed: () => newPlaylistAndAdd(context),
+              onPressed: () => newPlaylistAndAdd(context, _),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [const Icon(Icons.add), Text(locals.createNewPlaylist)],

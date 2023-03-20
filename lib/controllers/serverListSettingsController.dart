@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:invidious/controllers/settingsController.dart';
+import 'package:invidious/controllers/welcomeWizardController.dart';
 import 'package:logging/logging.dart';
 
 import '../globals.dart';
@@ -49,6 +50,21 @@ class ServerListSettingsController extends GetxController {
     update();
   }
 
+  upsertServer(Server server) {
+    db.upsertServer(server);
+
+    refreshServers();
+    refreshWizard();
+  }
+
+  refreshWizard() {
+    try {
+      WelcomeWizardController.to().getSelectedServer();
+    } catch (err) {
+      log.info('welcome wird does not exist');
+    }
+  }
+
   saveServer() async {
     var serverUrl = addServerController.value.text;
     if (serverUrl.endsWith("/")) {
@@ -67,6 +83,7 @@ class ServerListSettingsController extends GetxController {
       db.upsertServer(server);
       addServerController.text = 'https://';
       refreshServers();
+      refreshWizard();
     } else {
       throw Error();
     }
@@ -111,6 +128,17 @@ class ServerListSettingsController extends GetxController {
   switchServer(Server s) {
     db.useServer(s);
     refreshServers();
-    Get.find<SettingsController>().serverChanged();
+    try {
+      Get.find<SettingsController>().serverChanged();
+    } catch (err) {
+      log.info('Cannot find settings controller');
+    }
+
+    // we might be on the welcome wizard
+    try {
+      WelcomeWizardController.to().getSelectedServer();
+    } catch (err) {
+      log.info('Welcome wizard controller does not exist');
+    }
   }
 }

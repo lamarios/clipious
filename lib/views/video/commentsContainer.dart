@@ -17,7 +17,7 @@ class CommentsContainer extends StatelessWidget {
     ColorScheme colorScheme = Theme.of(context).colorScheme;
 
     return GetBuilder<CommentsContainerController>(
-      tag: 'comments-container-${video.videoId}',
+      global: false,
       init: CommentsContainerController(),
       builder: (_) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,

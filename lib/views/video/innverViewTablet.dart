@@ -24,7 +24,7 @@ class VideoTabletInnerView extends StatelessWidget {
 
     return GetBuilder(
       init: VideoInnerViewController(),
-      tag: VideoInnerViewController.getControllerTags(video.videoId),
+      global: false,
       builder: (_) => Row(
         children: [
           Expanded(

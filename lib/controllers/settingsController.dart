@@ -1,4 +1,9 @@
 import 'package:get/get.dart';
+import 'package:invidious/controllers/homeController.dart';
+import 'package:invidious/controllers/videoListController.dart';
+import 'package:invidious/controllers/welcomeWizardController.dart';
+import 'package:invidious/views/videoList.dart';
+import 'package:logging/logging.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 import '../database.dart';
@@ -9,6 +14,7 @@ import '../models/db/settings.dart';
 import '../utils.dart';
 
 class SettingsController extends GetxController {
+  var log = Logger('SettingsController');
   List<Server> dbServers = db.getServers();
   Server currentServer = db.getCurrentlySelectedServer();
   bool sponsorBlock = db.getSettings(USE_SPONSORBLOCK)?.value == 'true';
@@ -59,6 +65,12 @@ class SettingsController extends GetxController {
   serverChanged() {
     currentServer = db.getCurrentlySelectedServer();
     update();
+    try {
+      HomeController.to().serverChanged();
+    } catch (err) {
+      log.info('Home controller does not exist');
+    }
+
   }
 
   getPackageInfo() async {

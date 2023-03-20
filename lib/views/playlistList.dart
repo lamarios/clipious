@@ -13,17 +13,17 @@ import '../globals.dart';
 class PlaylistList extends StatelessWidget {
   final PaginatedList<Playlist> paginatedList;
   final bool canDeleteVideos;
-  final String tag;
+  final String? tag;
 
   const PlaylistList({super.key, required this.tag, required this.paginatedList, required this.canDeleteVideos});
-
 
   @override
   Widget build(BuildContext context) {
     ColorScheme colorScheme = Theme.of(context).colorScheme;
     AppLocalizations locals = AppLocalizations.of(context)!;
     return GetBuilder<PlaylistListController>(
-      tag: PlaylistListController.getTag(tag),
+      tag: PlaylistListController.getTag(tag!),
+      global: tag != null,
       init: PlaylistListController(paginatedList),
       builder: (_) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,

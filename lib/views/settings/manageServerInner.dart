@@ -14,41 +14,38 @@ import '../settings.dart';
 class ManagerServersView extends StatelessWidget {
   const ManagerServersView({super.key});
 
-  showPublicServerActions(BuildContext context, Server server) {
+  showPublicServerActions(BuildContext context, ServerListSettingsController controller, Server server) {
     var locals = AppLocalizations.of(context)!;
     showModalBottomSheet<void>(
         context: context,
         builder: (BuildContext context) {
-          return GetBuilder<ServerListSettingsController>(
-            builder: (controller) => SizedBox(
-              height: 100,
-              child: Center(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          IconButton(
-                            onPressed: () {
-                              db.upsertServer(server);
-                              controller.refreshServers();
-                              Navigator.pop(context);
-                            },
-                            icon: const Icon(Icons.add),
-                          ),
-                          Text(
-                            locals.addServer,
-                            style: const TextStyle(fontSize: 10),
-                          )
-                        ],
-                      ),
+          return SizedBox(
+            height: 100,
+            child: Center(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            controller.upsertServer(server);
+                            Navigator.pop(context);
+                          },
+                          icon: const Icon(Icons.add),
+                        ),
+                        Text(
+                          locals.addServer,
+                          style: const TextStyle(fontSize: 10),
+                        )
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           );
@@ -61,7 +58,6 @@ class ManagerServersView extends StatelessWidget {
     try {
       await controller.saveServer();
       Navigator.pop(context);
-
     } catch (err) {
       await showAlertDialog(context, 'Error', [Text(locals.invalidInvidiousServer)]);
     }
@@ -209,7 +205,7 @@ class ManagerServersView extends StatelessWidget {
                                       value: Row(
                                         children: [Visibility(visible: s.flag != null && s.region != null, child: Text('${s.flag} - ${s.region} - ')), Text(locals.tapToAddServer)],
                                       ),
-                                      onPressed: (context) => showPublicServerActions(context, s),
+                                      onPressed: (context) => showPublicServerActions(context, _, s),
                                     ))
                                 .toList()),
               ],

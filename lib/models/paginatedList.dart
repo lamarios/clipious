@@ -125,16 +125,17 @@ class FixedItemList<T> extends PaginatedList<T> {
 
 /// User subscriptions
 class SubscriptionVideoList extends PaginatedVideoList {
+  final maxResults = 50;
   int page = 1;
   bool hasMore = true;
 
   @override
   Future<List<VideoInList>> getItems() async {
-    UserFeed feed = await service.getUserFeed(page: page, maxResults: MAX_RESULTS);
+    UserFeed feed = await service.getUserFeed(page: page, maxResults: maxResults);
     List<VideoInList> subs = [];
     subs.addAll(feed.notifications ?? []);
     subs.addAll(feed.videos ?? []);
-    if (subs.length < MAX_RESULTS) {
+    if (subs.length < maxResults) {
       hasMore = false;
     }
     return subs;

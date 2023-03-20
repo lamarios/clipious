@@ -37,7 +37,7 @@ class PlaylistItem extends StatelessWidget {
 
     return GetBuilder<PlaylistItemController>(
       init: PlaylistItemController(playlist: playlist),
-      tag: PlaylistItemController.getTag(playlist.playlistId),
+      global: false,
       builder: (_) {
         List<Widget> thumbs = [];
         List<VideoInList> videosToUse = _.videos.isNotEmpty ? _.videos : playlist.videos;

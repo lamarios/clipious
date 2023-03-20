@@ -26,7 +26,7 @@ class SingleCommentView extends StatelessWidget {
     ColorScheme colors = Theme.of(context).colorScheme;
     return GetBuilder<SingleCommentController>(
       init: SingleCommentController(comment: comment),
-      tag: comment.commentId,
+      global: false,
       builder: (_) => Padding(
         padding: const EdgeInsets.all(8.0),
         child: Row(

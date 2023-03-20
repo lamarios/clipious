@@ -15,7 +15,7 @@ class SubscribeButton extends StatelessWidget {
 
     return GetBuilder<SubscribeButtonController>(
       init: SubscribeButtonController(channelId: channelId),
-      tag: SubscribeButtonController.generateTags(channelId),
+      global: false,
       builder: (_) => SizedBox(
           height: 25,
           child: FilledButton.tonal(

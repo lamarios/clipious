@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../controllers/videoListController.dart';
 import '../models/paginatedList.dart';
 import 'videoList.dart';
-
-const MAX_RESULTS = 50;
 
 class Subscriptions extends StatefulWidget {
   const Subscriptions({super.key});
@@ -20,7 +19,7 @@ class SubscriptionsState extends State<Subscriptions> {
       color: colorScheme.background,
       child: VideoList(
         paginatedVideoList: SubscriptionVideoList(),
-        tags: 'subscriptions-video-list',
+        tags: VideoListController.subscriptionTag,
       ),
     );
   }

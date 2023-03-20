@@ -41,7 +41,7 @@ class ChannelInfo extends StatelessWidget {
         shrinkWrap: true,
         mainAxisSpacing: 5,
         childAspectRatio: getGridAspectRatio(context),
-        children: channel.latestVideos?.map((e) => VideoListItem(video: VideoInList(e.title, e.videoId, e.lengthSeconds, 0, e.author, '', 'authorUrl', 0, '', e.videoThumbnails))).toList() ?? []));
+        children: channel.latestVideos?.map((e) => VideoListItem(video: VideoInList(e.title, e.videoId, e.lengthSeconds, 0, e.author, channel.authorId, 'authorUrl', 0, '', e.videoThumbnails))).toList() ?? []));
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0),

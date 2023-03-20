@@ -16,7 +16,7 @@ class CommentsView extends StatelessWidget {
   Widget build(BuildContext context) {
     var locals = AppLocalizations.of(context)!;
     return GetBuilder<CommentsViewController>(
-        tag: 'comments-container-${videoId}-${continuation}-${source}-${sortBy}',
+        global: false,
         init: CommentsViewController(videoId: videoId, sortBy: sortBy, source: source, continuation: continuation),
         builder: (_) {
           List<Widget> widgets = [];

@@ -38,6 +38,7 @@ class VideoList extends StatelessWidget {
     var locals = AppLocalizations.of(context)!;
     return GetBuilder<VideoListController>(
       init: VideoListController(paginatedVideoList),
+      global: tags != null,
       tag: tags,
       builder: (_) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,

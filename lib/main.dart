@@ -1,23 +1,20 @@
 import 'dart:async';
 
 import 'package:dynamic_color/dynamic_color.dart';
-import 'package:fbroadcast/fbroadcast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:get/get.dart';
+import 'package:invidious/controllers/homeController.dart';
 import 'package:invidious/globals.dart';
-import 'package:invidious/models/searchResult.dart';
-import 'package:invidious/views/miniPlayer.dart';
 import 'package:invidious/views/playlists.dart';
 import 'package:invidious/views/popular.dart';
-import 'package:invidious/views/search.dart';
+import 'package:invidious/views/searchDelegate.dart';
 import 'package:invidious/views/settings.dart';
 import 'package:invidious/views/subscriptions.dart';
 import 'package:invidious/views/trending.dart';
-import 'package:invidious/views/video.dart';
 import 'package:invidious/views/welcomeWizard.dart';
 import 'package:logging/logging.dart';
-import 'package:receive_sharing_intent/receive_sharing_intent.dart';
 
 import 'database.dart';
 import 'myRouteObserver.dart';
@@ -27,7 +24,6 @@ const brandColor = Color(0xFF4f0096);
 final scaffoldKey = GlobalKey<ScaffoldMessengerState>();
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 final RouteObserver<ModalRoute> routeObserver = MyRouteObserver();
-
 
 Future<void> main() async {
   Logger.root.level = Level.ALL; // defaults to Level.INFO
@@ -40,10 +36,8 @@ Future<void> main() async {
   runApp(const MyApp());
 }
 
-
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
 
   @override
   Widget build(BuildContext context) {
@@ -103,80 +97,11 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class Home extends StatefulWidget {
+class Home extends StatelessWidget {
   const Home({super.key});
 
-  @override
-  HomeState createState() => HomeState();
-}
-
-class HomeState extends State<Home> {
-  final log = Logger('Home');
-  late int selectedIndex;
-  bool isLoggedIn = db.isLoggedInToCurrentServer();
-  late StreamSubscription _intentDataStreamSubscription;
-
-  @override
-  initState() {
-    super.initState();
-    selectedIndex = int.parse(db.getSettings(ON_OPEN)?.value ?? '0');
-    if (!isLoggedIn && selectedIndex > 1) {
-      selectedIndex = 0;
-    }
-    FBroadcast.instance().register(BROADCAST_SERVER_CHANGED, (value, callback) {
-      setState(() {
-        selectedIndex = 0;
-        isLoggedIn = db.isLoggedInToCurrentServer();
-      });
-    });
-
-    // For sharing or opening urls/text coming from outside the app while the app is in the memory
-    _intentDataStreamSubscription = ReceiveSharingIntent.getTextStream().listen((String value) {
-      openAppLink(value);
-    }, onError: (err) {
-      log.warning("getLinkStream error: $err");
-    });
-
-    // For sharing or opening urls/text coming from outside the app while the app is closed
-    ReceiveSharingIntent.getInitialText().then((value) {
-      setState(() {
-        openAppLink((value ?? ''));
-      });
-    });
-  }
-
-  @override
-  dispose() {
-    _intentDataStreamSubscription.cancel();
-    super.dispose();
-  }
-
-  void openAppLink(String url) {
-    try {
-      Uri uri = Uri.parse(url);
-      if (YOUTUBE_HOSTS.contains(uri.host)) {
-        if (uri.pathSegments.length == 1 && uri.pathSegments.contains("watch") && uri.queryParameters.containsKey('v')) {
-          String videoId = uri.queryParameters['v']!;
-          navigatorKey.currentState?.push(MaterialPageRoute(
-              builder: (context) => VideoView(
-                    videoId: videoId,
-                  )));
-        }
-        if (uri.host == 'youtu.be' && uri.pathSegments.length == 1) {
-          String videoId = uri.pathSegments[0];
-          navigatorKey.currentState?.push(MaterialPageRoute(
-              builder: (context) => VideoView(
-                    videoId: videoId,
-                  )));
-        }
-      }
-    } catch (err) {
-      // not a url;
-    }
-  }
-
   openSettings(BuildContext context) {
-    Navigator.push(context, MaterialPageRoute(settings: ROUTE_SETTINGS ,builder: (context) => const Settings()));
+    Navigator.push(context, MaterialPageRoute(settings: ROUTE_SETTINGS, builder: (context) => const Settings()));
   }
 
   // This widget is the root of your application.
@@ -186,171 +111,79 @@ class HomeState extends State<Home> {
     var locals = AppLocalizations.of(context)!;
     List<String> navigationLabels = [locals.popular, locals.trending, locals.subscriptions, locals.playlists];
 
-    var navigationWidgets = <Widget>[
-      NavigationDestination(icon: const Icon(Icons.local_fire_department), label: navigationLabels[0]),
-      NavigationDestination(icon: const Icon(Icons.trending_up), label: navigationLabels[1]),
-    ];
-    if (isLoggedIn) {
-      navigationWidgets.add(NavigationDestination(icon: const Icon(Icons.subscriptions), label: navigationLabels[2]));
-      navigationWidgets.add(NavigationDestination(icon: const Icon(Icons.playlist_play), label: navigationLabels[3]));
-    }
+    return GetBuilder<HomeController>(
+      init: HomeController(),
+      builder: (_) {
+        var navigationWidgets = <Widget>[
+          NavigationDestination(icon: const Icon(Icons.local_fire_department), label: navigationLabels[0]),
+          NavigationDestination(icon: const Icon(Icons.trending_up), label: navigationLabels[1]),
+        ];
+        if (_.isLoggedIn) {
+          navigationWidgets.add(NavigationDestination(icon: const Icon(Icons.subscriptions), label: navigationLabels[2]));
+          navigationWidgets.add(NavigationDestination(icon: const Icon(Icons.playlist_play), label: navigationLabels[3]));
+        }
 
-    return Scaffold(
-        backgroundColor: colorScheme.background,
-        bottomNavigationBar: NavigationBar(
-          labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
-          elevation: 0,
-          onDestinationSelected: (int index) {
-            setState(() {
-              selectedIndex = index;
-            });
-          },
-          selectedIndex: selectedIndex,
-          destinations: navigationWidgets,
-        ),
-        floatingActionButton: selectedIndex == 3 ? AddPlayListButton() : null,
-        appBar: AppBar(
-          systemOverlayStyle: SystemUiOverlayStyle(
-              systemNavigationBarColor: colorScheme.background,
-              systemNavigationBarIconBrightness: colorScheme.brightness == Brightness.dark ? Brightness.light : Brightness.dark,
-              statusBarColor: colorScheme.background,
-              statusBarIconBrightness: colorScheme.brightness == Brightness.dark ? Brightness.light : Brightness.dark),
-          title: Text(navigationLabels[selectedIndex]),
-          scrolledUnderElevation: 0,
-          // backgroundColor: Colors.pink,
-          backgroundColor: colorScheme.background,
-          actions: [
-            IconButton(
-              onPressed: () {
-                showSearch(context: context, delegate: MySearchDelegate());
-              },
-              icon: const Icon(Icons.search),
+        return Scaffold(
+            backgroundColor: colorScheme.background,
+            bottomNavigationBar: NavigationBar(
+              labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
+              elevation: 0,
+              onDestinationSelected: _.selectIndex,
+              selectedIndex: _.selectedIndex,
+              destinations: navigationWidgets,
             ),
-            IconButton(
-              onPressed: () => openSettings(context),
-              icon: const Icon(Icons.settings),
-              color: colorScheme.secondary,
-            ),
-          ],
-        ),
-/*
-        appBar: EasySearchBar(
-          searchBackgroundColor: colorScheme.background,
-          elevation: 0,
-          asyncSuggestions: searchSuggestions,
-          title: Text(showSearchResults ? 'Search' : navigationLabels[selectedIndex]),
-          backgroundColor: colorScheme.background,
-          animationDuration: animationDuration,
-          onSearchClosed: (){
-            setState(() {
-              showSearchResults = false;
-            });
-          },
-
-          actions: [
-            GestureDetector(
-              onTap: () => openSettings(context),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Icon(
-                  Icons.settings,
+            floatingActionButton: _.selectedIndex == 3 ? AddPlayListButton() : null,
+            appBar: AppBar(
+              systemOverlayStyle: SystemUiOverlayStyle(
+                  systemNavigationBarColor: colorScheme.background,
+                  systemNavigationBarIconBrightness: colorScheme.brightness == Brightness.dark ? Brightness.light : Brightness.dark,
+                  statusBarColor: colorScheme.background,
+                  statusBarIconBrightness: colorScheme.brightness == Brightness.dark ? Brightness.light : Brightness.dark),
+              title: Text(navigationLabels[_.selectedIndex]),
+              scrolledUnderElevation: 0,
+              // backgroundColor: Colors.pink,
+              backgroundColor: colorScheme.background,
+              actions: [
+                IconButton(
+                  onPressed: () {
+                    showSearch(context: context, delegate: MySearchDelegate());
+                  },
+                  icon: const Icon(Icons.search),
+                ),
+                IconButton(
+                  onPressed: () => openSettings(context),
+                  icon: const Icon(Icons.settings),
                   color: colorScheme.secondary,
                 ),
-              ),
+              ],
             ),
-          ],
-          onSearch: search,
-
-        ),
-*/
-        body: SafeArea(
-            bottom: false,
-            child: Stack(children: [
-              AnimatedSwitcher(
-                switchInCurve: Curves.easeInOutQuad,
-                switchOutCurve: Curves.easeInOutQuad,
-                transitionBuilder: (Widget child, Animation<double> animation) {
-                  return FadeTransition(opacity: animation, child: child);
-                },
-                duration: animationDuration,
-                child: <Widget>[
-                  const Popular(
-                    key: ValueKey(0),
-                  ),
-                  const Trending(
-                    key: ValueKey(1),
-                  ),
-                  const Subscriptions(
-                    key: ValueKey(2),
-                  ),
-                  const Playlists(
-                    key: ValueKey(3),
-                    canDeleteVideos: true,
+            body: SafeArea(
+                bottom: false,
+                child: Stack(children: [
+                  AnimatedSwitcher(
+                    switchInCurve: Curves.easeInOutQuad,
+                    switchOutCurve: Curves.easeInOutQuad,
+                    transitionBuilder: (Widget child, Animation<double> animation) {
+                      return FadeTransition(opacity: animation, child: child);
+                    },
+                    duration: animationDuration,
+                    child: <Widget>[
+                      const Popular(
+                        key: ValueKey(0),
+                      ),
+                      const Trending(
+                        key: ValueKey(1),
+                      ),
+                      const Subscriptions(
+                        key: ValueKey(2),
+                      ),
+                      const Playlists(
+                        key: ValueKey(3),
+                        canDeleteVideos: true,
+                      )
+                    ][_.selectedIndex],
                   )
-                ][selectedIndex],
-              )
-            ])));
-  }
-}
-
-class MySearchDelegate extends SearchDelegate<String> {
-  @override
-  List<Widget>? buildActions(BuildContext context) => [
-        IconButton(
-            onPressed: () {
-              if (query.isEmpty) {
-                close(context, '');
-              } else {
-                query = '';
-              }
-            },
-            icon: const Icon(Icons.clear))
-      ];
-
-  @override
-  Widget? buildLeading(BuildContext context) => IconButton(onPressed: () => close(context, ''), icon: const Icon(Icons.arrow_back));
-
-  @override
-  Widget buildResults(BuildContext context) {
-    return FutureBuilder<SearchResults>(
-      future: service.search(query),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.done && snapshot.data != null) {
-          return Search(results: snapshot.data!);
-        } else if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        } else {
-          return const SizedBox.shrink();
-        }
-      },
-    );
-  }
-
-  @override
-  Widget buildSuggestions(BuildContext context) {
-    // service.getSearchSuggestion(query);
-    return FutureBuilder(
-      future: service.getSearchSuggestion(query),
-      builder: (context, snapshot) {
-        List<String> suggestions = [];
-        if (snapshot.connectionState == ConnectionState.done) {
-          suggestions = snapshot.data?.suggestions ?? [];
-        }
-
-        return ListView.builder(
-            itemCount: suggestions.length,
-            itemBuilder: (context, index) {
-              String sugg = suggestions[index];
-              return ListTile(
-                title: Text(suggestions[index]),
-                onTap: () {
-                  query = sugg;
-                  showResults(context);
-                },
-              );
-            });
+                ])));
       },
     );
   }

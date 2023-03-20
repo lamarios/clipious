@@ -24,7 +24,7 @@ class VideoInnerView extends StatelessWidget {
 
     return GetBuilder<VideoInnerViewController>(
       init: VideoInnerViewController(),
-      tag: VideoInnerViewController.getControllerTags(video.videoId),
+      global: false,
       builder: (_)=> Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

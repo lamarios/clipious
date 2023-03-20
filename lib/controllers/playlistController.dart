@@ -10,7 +10,7 @@ import '../models/video.dart';
 import '../models/videoInList.dart';
 
 class PlaylistController extends GetxController {
-  final log = Logger('PlaylistView');
+  final log = Logger('PlaylistController');
   bool playingVideo = false;
   Video? currentlyPlaying;
   int selectedIndex = 0;
@@ -98,7 +98,11 @@ class PlaylistController extends GetxController {
     int index = playlist.videos.indexWhere((element) => element.videoId == v.videoId);
 
     await service.deleteUserPlaylistVideo(playlist.playlistId, v.indexId ?? '');
-
+    try {
+      Get.find<PlaylistListController>(tag: PlaylistListController.getTag(userPlayListTag)).refreshPlaylists();
+    }catch(err){
+      log.info('tried to refresh playlist view but it was not found');
+    }
     if (playing && videoCount >= 2) {
       // we have a fallback video
       playNextVideo();
@@ -117,7 +121,6 @@ class PlaylistController extends GetxController {
       update();
     } else if (videoCount < 2) {
       // no more video next;
-      Get.find<PlaylistListController>(tag: userPlayListTag).refreshPlaylists();
       return true;
     }
 
