@@ -14,6 +14,7 @@ import '../models/db/settings.dart';
 import '../utils.dart';
 
 class SettingsController extends GetxController {
+  static SettingsController? to() => safeGet();
   var log = Logger('SettingsController');
   List<Server> dbServers = db.getServers();
   Server currentServer = db.getCurrentlySelectedServer();
@@ -65,12 +66,7 @@ class SettingsController extends GetxController {
   serverChanged() {
     currentServer = db.getCurrentlySelectedServer();
     update();
-    try {
-      HomeController.to().serverChanged();
-    } catch (err) {
-      log.info('Home controller does not exist');
-    }
-
+    HomeController.to()?.serverChanged();
   }
 
   getPackageInfo() async {

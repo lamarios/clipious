@@ -1,9 +1,10 @@
 import 'package:get/get.dart';
+import 'package:invidious/utils.dart';
 
 import '../globals.dart';
 
 class VideoInListController extends GetxController {
-  static VideoInListController to(String? tags) => Get.find(tag: tags);
+  static VideoInListController? to(String? tags) => safeGet(tag: tags);
   late double progress;
   late String videoId;
 

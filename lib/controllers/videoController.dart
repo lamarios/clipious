@@ -62,11 +62,7 @@ class VideoController extends GetxController {
   selectIndex(int index) {
     selectedIndex = index;
     update();
-    try {
-      Get.find<VideoInnerViewController>(tag: VideoInnerViewController.getControllerTags(video?.videoId ?? '')).scrollUp();
-    } catch (err) {
-      // in case controller doesn't exist
-    }
+    VideoInnerViewController.to(tag: VideoInnerViewController.getControllerTags(video?.videoId ?? ''))?.scrollUp();
   }
 
   void videoDragged(DragUpdateDetails details) {

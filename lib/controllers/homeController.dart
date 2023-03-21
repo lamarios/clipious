@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:invidious/controllers/videoListController.dart';
+import 'package:invidious/utils.dart';
 import 'package:logging/logging.dart';
 import 'package:receive_sharing_intent/receive_sharing_intent.dart';
 
@@ -12,7 +13,7 @@ import '../main.dart';
 import '../views/video.dart';
 
 class HomeController extends GetxController {
-  static HomeController to() => Get.find();
+  static HomeController? to() => safeGet();
 
   final log = Logger('Home controller');
   late int selectedIndex;
@@ -49,11 +50,7 @@ class HomeController extends GetxController {
     isLoggedIn = db.isLoggedInToCurrentServer();
     log.info('logged in ? ${isLoggedIn}');
     update();
-    try {
-      VideoListController.to(VideoListController.popularTag).refreshVideos();
-    }catch(err){
-      log.info('popular video list not ready ?');
-    }
+    VideoListController.to(VideoListController.popularTag)?.refreshVideos();
   }
 
   void openAppLink(String url) {

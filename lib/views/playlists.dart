@@ -76,7 +76,7 @@ class _AddPlayListFormState extends State<AddPlayListForm> {
     try {
       String? playlistId = await service.createPlayList(nameController.value.text, privacyValue);
 
-      Get.find<PlaylistListController>(tag: PlaylistListController.getTag(userPlayListTag)).refreshPlaylists();
+      PlaylistListController.to(tag: PlaylistListController.getTag(userPlayListTag))?.refreshPlaylists();
 
       if (context.mounted && widget.afterAdd != null) {
         widget.afterAdd!(context, playlistId!);

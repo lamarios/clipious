@@ -89,7 +89,7 @@ class PlaylistController extends GetxController {
 
   deletePlaylist() async {
     await service.deleteUserPlaylist(playlist.playlistId);
-    Get.find<PlaylistListController>(tag: PlaylistListController.getTag(userPlayListTag)).refreshPlaylists();
+    PlaylistListController.to(tag: PlaylistListController.getTag(userPlayListTag))?.refreshPlaylists();
   }
 
   Future<bool> removeVideoFromPlayList(VideoInList v) async {
@@ -98,11 +98,8 @@ class PlaylistController extends GetxController {
     int index = playlist.videos.indexWhere((element) => element.videoId == v.videoId);
 
     await service.deleteUserPlaylistVideo(playlist.playlistId, v.indexId ?? '');
-    try {
-      Get.find<PlaylistListController>(tag: PlaylistListController.getTag(userPlayListTag)).refreshPlaylists();
-    }catch(err){
-      log.info('tried to refresh playlist view but it was not found');
-    }
+    PlaylistListController.to(tag: PlaylistListController.getTag(userPlayListTag))?.refreshPlaylists();
+
     if (playing && videoCount >= 2) {
       // we have a fallback video
       playNextVideo();

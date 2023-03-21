@@ -1,18 +1,21 @@
 import 'package:fbroadcast/fbroadcast.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:invidious/controllers/miniPayerController.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/models/interfaces/sharelink.dart';
 import 'package:invidious/models/video.dart';
-import 'package:invidious/views/miniPlayer.dart';
+import 'package:logging/logging.dart';
 import 'package:share_plus/share_plus.dart';
 
 import 'models/country.dart';
 
 const PHONE_MAX = 600;
 const TABLET_PORTRAIT_MAX = 900;
+
+var log = Logger('Utils');
 
 enum DeviceType { phone, tablet }
 
@@ -152,24 +155,27 @@ Country getCountryFromCode(String code) {
 }
 
 void showMiniPlayer(BuildContext context, List<Video> videos) {
-  if (!(miniPlayerKey.currentState?.mounted ?? false)) {
-    Overlay.of(context).insert(OverlayEntry(
-      builder: (context) => MiniPlayer(
-        key: miniPlayerKey,
-        videos: videos
-      ),
-    ));
-  } else {
-    miniPlayerKey.currentState?.show();
-    miniPlayerKey.currentState?.setVideos(videos);
+  MiniPlayerController? controller = MiniPlayerController.to();
+  if (controller != null) {
+    controller.show();
+    controller.setVideos(videos);
   }
 }
 
-void moveMiniPlayer(bool aboveNavigation){
-  miniPlayerKey.currentState?.move(aboveNavigation);
+void moveMiniPlayer(bool aboveNavigation) {
+  MiniPlayerController.to()?.move(aboveNavigation);
 }
 
-void hideMiniPlayer(BuildContext context){
+void hideMiniPlayer(BuildContext context) {
+  MiniPlayerController.to()?.hide();
   FBroadcast.instance().broadcast(BROADCAST_STOP_MINI_PLAYER);
-  miniPlayerKey.currentState?.hide();
+}
+
+T? safeGet<T>({String? tag}) {
+  try {
+    return Get.find<T>(tag: tag);
+  } catch (err) {
+    log.info('could not find controller of class ${T.toString()}');
+    return null;
+  }
 }

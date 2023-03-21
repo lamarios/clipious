@@ -1,6 +1,9 @@
+import 'package:fbroadcast/fbroadcast.dart';
 import 'package:flutter/material.dart';
 import 'package:invidious/utils.dart';
 import 'package:logging/logging.dart';
+
+import 'globals.dart';
 
 const RouteSettings ROUTE_SETTINGS = RouteSettings(name: 'settings');
 const RouteSettings ROUTE_SETTINGS_MANAGE_SERVERS = RouteSettings(name: 'settings-manage-servers');
@@ -14,6 +17,8 @@ class MyRouteObserver extends RouteObserver<PageRoute<dynamic>> {
 
   miniPlayerPlacement(PageRoute<dynamic>? route) {
     if (route != null) {
+      // whenever we change route, we should be stopping the player
+      FBroadcast.instance().broadcast(BROADCAST_STOP_PLAYING);
       switch (route.settings) {
         case ROUTE_SETTINGS:
         case ROUTE_PLAYLIST:

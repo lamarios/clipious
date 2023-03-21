@@ -3,9 +3,10 @@ import 'package:logging/logging.dart';
 
 import '../globals.dart';
 import '../models/db/server.dart';
+import '../utils.dart';
 
 class WelcomeWizardController extends GetxController {
-  static WelcomeWizardController to() => Get.find();
+  static WelcomeWizardController? to() => safeGet();
   Server? selected;
   final log = Logger('WelcomeWizard');
 

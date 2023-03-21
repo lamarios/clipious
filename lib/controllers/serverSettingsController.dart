@@ -19,7 +19,7 @@ class ServerSettingsController extends GetxController {
     server.inUse = true;
     update();
     refreshServerList();
-    Get.find<SettingsController>().serverChanged();
+    SettingsController.to()?.serverChanged();
   }
 
   void logOut() {
@@ -51,7 +51,7 @@ class ServerSettingsController extends GetxController {
   }
 
   refreshServerList() {
-    Get.find<ServerListSettingsController>().refreshServers();
+    ServerListSettingsController.to()?.refreshServers();
   }
 
   deleteServer() {

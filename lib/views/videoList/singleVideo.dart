@@ -21,7 +21,6 @@ class VideoListItem extends StatelessWidget {
   final log = Logger('VideoInList');
 
   openVideo(BuildContext context) {
-    FBroadcast.instance().broadcast(BROADCAST_STOP_PLAYING);
     Navigator.push(context, MaterialPageRoute(settings: ROUTE_VIDEO, builder: (context) => VideoView(videoId: video.videoId)));
   }
 

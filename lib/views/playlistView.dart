@@ -71,7 +71,6 @@ class PlaylistView extends StatelessWidget {
   }
 
   openVideo(BuildContext context, String videoId) {
-    FBroadcast.instance().broadcast(BROADCAST_STOP_PLAYING);
     Navigator.push(
         context,
         MaterialPageRoute(

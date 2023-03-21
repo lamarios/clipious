@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:after_layout/after_layout.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -7,6 +8,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:invidious/controllers/homeController.dart';
 import 'package:invidious/globals.dart';
+import 'package:invidious/views/miniPlayer.dart';
 import 'package:invidious/views/playlists.dart';
 import 'package:invidious/views/popular.dart';
 import 'package:invidious/views/searchDelegate.dart';
@@ -32,6 +34,7 @@ Future<void> main() async {
   });
 
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+
   db = await DbClient.create();
   runApp(const MyApp());
 }
@@ -97,9 +100,14 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
   const Home({super.key});
 
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> with AfterLayoutMixin {
   openSettings(BuildContext context) {
     Navigator.push(context, MaterialPageRoute(settings: ROUTE_SETTINGS, builder: (context) => const Settings()));
   }
@@ -186,5 +194,12 @@ class Home extends StatelessWidget {
                 ])));
       },
     );
+  }
+
+  @override
+  FutureOr<void> afterFirstLayout(BuildContext context) {
+    Overlay.of(context).insert(OverlayEntry(
+      builder: (context) => MiniPlayer(videos: const []),
+    ));
   }
 }

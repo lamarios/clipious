@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:invidious/controllers/settingsController.dart';
 import 'package:invidious/controllers/welcomeWizardController.dart';
+import 'package:invidious/utils.dart';
 import 'package:logging/logging.dart';
 
 import '../globals.dart';
@@ -12,6 +13,7 @@ const pingTimeout = 3;
 enum PublicServerErrors { none, couldNotGetList }
 
 class ServerListSettingsController extends GetxController {
+  static ServerListSettingsController? to() => safeGet();
   late List<Server> dbServers;
   List<Server> publicServers = [];
   double publicServerProgress = 0;
@@ -58,11 +60,7 @@ class ServerListSettingsController extends GetxController {
   }
 
   refreshWizard() {
-    try {
-      WelcomeWizardController.to().getSelectedServer();
-    } catch (err) {
-      log.info('welcome wird does not exist');
-    }
+    WelcomeWizardController.to()?.getSelectedServer();
   }
 
   saveServer() async {
@@ -128,17 +126,10 @@ class ServerListSettingsController extends GetxController {
   switchServer(Server s) {
     db.useServer(s);
     refreshServers();
-    try {
-      Get.find<SettingsController>().serverChanged();
-    } catch (err) {
-      log.info('Cannot find settings controller');
-    }
+
+    SettingsController.to()?.serverChanged();
 
     // we might be on the welcome wizard
-    try {
-      WelcomeWizardController.to().getSelectedServer();
-    } catch (err) {
-      log.info('Welcome wizard controller does not exist');
-    }
+    WelcomeWizardController.to()?.getSelectedServer();
   }
 }

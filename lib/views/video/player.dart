@@ -137,14 +137,7 @@ class _VideoPlayerState extends State<VideoPlayer> with AfterLayoutMixin<VideoPl
       var progress = dbProgress.Progress.named(progress: currentPosition / max, videoId: widget.video.videoId);
       db.saveProgress(progress);
 
-      try {
-        var controller = VideoInListController.to(progress.videoId);
-        if (controller.initialized && !controller.isClosed) {
-          controller.updateProgress();
-        }
-      }catch(err){
-        // controller not found
-      }
+      VideoInListController.to(progress.videoId)?.updateProgress();
     }
   }
 

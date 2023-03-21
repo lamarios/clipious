@@ -26,9 +26,8 @@ class Settings extends StatelessWidget {
     Navigator.push(context, MaterialPageRoute(settings: ROUTE_SETTINGS_MANAGE_SERVERS, builder: (context) => const ManageServers()));
   }
 
-  searchCountry(BuildContext context) {
+  searchCountry(BuildContext context, SettingsController controller) {
     var locals = AppLocalizations.of(context);
-    var controller = Get.find<SettingsController>();
     SelectDialog.showModal<String>(
       context,
       label: locals?.selectBrowsingCountry,
@@ -40,10 +39,9 @@ class Settings extends StatelessWidget {
     );
   }
 
-  selectOnOpen(BuildContext context) {
+  selectOnOpen(BuildContext context, SettingsController controller) {
     var categories = getCategories(context);
     var locals = AppLocalizations.of(context)!;
-    var controller = Get.find<SettingsController>();
     SelectDialog.showModal<String>(
       context,
       label: locals.showOnStart,
@@ -88,12 +86,12 @@ class Settings extends StatelessWidget {
                   SettingsTile(
                     title: Text(locals.country),
                     value: Text(_.country.name),
-                    onPressed: (context) => searchCountry(context),
+                    onPressed: (context) => searchCountry(context, _),
                   ),
                   SettingsTile(
                     title: Text(locals.whenAppStartsShow),
                     value: Text(getCategories(context)[_.onOpen]),
-                    onPressed: (context) => selectOnOpen(context),
+                    onPressed: (context) => selectOnOpen(context, _),
                   )
                 ],
               ),
@@ -146,5 +144,4 @@ class Settings extends StatelessWidget {
           ))),
     );
   }
-
 }

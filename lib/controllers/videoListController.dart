@@ -1,6 +1,7 @@
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:invidious/utils.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../models/paginatedList.dart';
@@ -13,26 +14,14 @@ class VideoListController extends GetxController {
   static const String popularTag = 'video-list-popular';
   static const String trendingTag = 'video-list-trending';
 
-  static VideoListController to(String? tags) => Get.find(tag: tags);
+  static VideoListController? to(String? tags) => safeGet(tag: tags);
 
-  static List<VideoListController> getAllGlobal() {
-    List<VideoListController> list = [];
-    try {
-      list.add(to(subscriptionTag));
-    } catch (err) {
-      print('could not find subscription controller');
-    }
+  static List<VideoListController?> getAllGlobal() {
+    List<VideoListController?> list = [];
+    list.add(to(subscriptionTag));
 
-    try {
-      list.add(to(popularTag));
-    } catch (err) {
-      print('could not find popular controller');
-    }
-    try {
-      list.add(to(trendingTag));
-    } catch (err) {
-      print('could not find trending controller');
-    }
+    list.add(to(popularTag));
+    list.add(to(trendingTag));
 
     return list;
   }

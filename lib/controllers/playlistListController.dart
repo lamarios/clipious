@@ -2,6 +2,7 @@ import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:invidious/models/paginatedList.dart';
+import 'package:invidious/utils.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../models/playlist.dart';
@@ -12,6 +13,7 @@ const String userPlayListTag = 'user-playlists';
 const String searchPlayListTag = 'search-playlists';
 
 class PlaylistListController extends GetxController {
+  static PlaylistListController? to({String? tag}) => safeGet(tag: tag);
   PaginatedList<Playlist> paginatedList;
   RefreshController refreshController = RefreshController(initialRefresh: false);
   List<Playlist> playlists = [];
