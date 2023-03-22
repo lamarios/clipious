@@ -13,31 +13,33 @@ class VideoAddToPlaylistButton extends StatelessWidget {
   Widget build(BuildContext context) {
     ColorScheme colors = Theme.of(context).colorScheme;
     return GetBuilder<AddToPlaylistButtonController>(
-        tag: AddToPlaylistButtonController.tags(videoId ?? ''),
-        init: AddToPlaylistButtonController(videoId: videoId),
-        builder: (_) => Visibility(
-              visible: _.isLoggedIn,
-              child: TextButton(
-                onPressed: () => AddToPlaylist.showAddToPlaylistDialog(context, _.videoId!),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(
-                      Icons.add,
-                      color: colors.secondary,
-                    ),
-                    _.playListCount > 0
-                        ? Transform.translate(
-                            offset: const Offset(-2, -5),
-                            child: Text(
-                              _.playListCount.toString(),
-                              style: TextStyle(color: colors.secondary, fontSize: 8),
-                            ),
-                          )
-                        : SizedBox.shrink()
-                  ],
-                ),
+      tag: AddToPlaylistButtonController.tags(videoId ?? ''),
+      init: AddToPlaylistButtonController(videoId: videoId),
+      builder: (_) => Visibility(
+        visible: _.isLoggedIn,
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            IconButton(
+              style: ButtonStyle(padding: MaterialStateProperty.all<EdgeInsets>(EdgeInsets.zero)),
+              onPressed: () => AddToPlaylist.showAddToPlaylistDialog(context, _.videoId!),
+              icon: Icon(
+                Icons.add,
+                color: colors.secondary,
               ),
-            ));
+            ),
+            _.playListCount > 0
+                ? Transform.translate(
+                    offset: const Offset(-15, -5),
+                    child: Text(
+                      _.playListCount.toString(),
+                      style: TextStyle(color: colors.secondary, fontSize: 8),
+                    ),
+                  )
+                : SizedBox.shrink()
+          ],
+        ),
+      ),
+    );
   }
 }

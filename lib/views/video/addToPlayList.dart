@@ -54,40 +54,37 @@ class AddToPlaylist extends StatelessWidget {
       global: false,
       builder: (_) => Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Container(
-          constraints: const BoxConstraints(minHeight: 400),
-          child: Column(mainAxisSize: MainAxisSize.min, children: [
-            Text(locals.selectPlaylist),
-            _.loading ? const CircularProgressIndicator() : const SizedBox.shrink(),
-            Expanded(
-              child: ListView(
-                children: _.playlists
-                    .map((p) {
-                      bool inPlaylist  = _.videoInPlaylist(p.playlistId);
-                      return FilledButton.tonal(
-                        onPressed: inPlaylist ? null : () => addToPlaylist(context, _, p.playlistId),
-                        child: Row(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: SizedBox(width: 20, child: inPlaylist ? const Icon(Icons.check, size: 15,) : const SizedBox.shrink()),
-                            ),
-                            Expanded(child: Text(p.title)),
-                          ],
-                        ));
-                    })
-                    .toList(),
-              ),
+        child: Column(mainAxisSize: MainAxisSize.min, children: [
+          Text(locals.selectPlaylist),
+          _.loading ? const CircularProgressIndicator() : const SizedBox.shrink(),
+          Expanded(
+            child: ListView(
+              children: _.playlists
+                  .map((p) {
+                    bool inPlaylist  = _.videoInPlaylist(p.playlistId);
+                    return FilledButton.tonal(
+                      onPressed: inPlaylist ? null : () => addToPlaylist(context, _, p.playlistId),
+                      child: Row(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: SizedBox(width: 20, child: inPlaylist ? const Icon(Icons.check, size: 15,) : const SizedBox.shrink()),
+                          ),
+                          Expanded(child: Text(p.title)),
+                        ],
+                      ));
+                  })
+                  .toList(),
             ),
-            FilledButton.tonal(
-              onPressed: () => newPlaylistAndAdd(context, _),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [const Icon(Icons.add), Text(locals.createNewPlaylist)],
-              ),
-            )
-          ]),
-        ),
+          ),
+          FilledButton.tonal(
+            onPressed: () => newPlaylistAndAdd(context, _),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [const Icon(Icons.add), Text(locals.createNewPlaylist)],
+            ),
+          )
+        ]),
       ),
     );
   }
