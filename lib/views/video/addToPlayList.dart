@@ -23,7 +23,7 @@ class AddToPlaylist extends StatelessWidget {
     Navigator.of(context).pop();
     final scaffoldMessenger = ScaffoldMessenger.of(context);
     try {
-      await controller.addToPlaylist(playlistId, videoId);
+      await controller.addToPlaylist(playlistId);
       scaffoldMessenger.showSnackBar(SnackBar(
         content: Text(locals.videoAddedToPlaylist),
         duration: const Duration(seconds: 3),
@@ -50,7 +50,7 @@ class AddToPlaylist extends StatelessWidget {
     var locals = AppLocalizations.of(context)!;
 
     return GetBuilder<AddToPlaylistController>(
-      init: AddToPlaylistController(),
+      init: AddToPlaylistController(videoId),
       global: false,
       builder: (_) => Padding(
         padding: const EdgeInsets.all(8.0),
@@ -61,7 +61,22 @@ class AddToPlaylist extends StatelessWidget {
             _.loading ? const CircularProgressIndicator() : const SizedBox.shrink(),
             Expanded(
               child: ListView(
-                children: _.playlists.map((p) => FilledButton.tonal(onPressed: () => addToPlaylist(context, _, p.playlistId), child: Text(p.title))).toList(),
+                children: _.playlists
+                    .map((p) {
+                      bool inPlaylist  = _.videoInPlaylist(p.playlistId);
+                      return FilledButton.tonal(
+                        onPressed: inPlaylist ? null : () => addToPlaylist(context, _, p.playlistId),
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: SizedBox(width: 20, child: inPlaylist ? const Icon(Icons.check, size: 15,) : const SizedBox.shrink()),
+                            ),
+                            Expanded(child: Text(p.title)),
+                          ],
+                        ));
+                    })
+                    .toList(),
               ),
             ),
             FilledButton.tonal(

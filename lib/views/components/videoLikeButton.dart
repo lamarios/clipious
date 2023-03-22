@@ -12,7 +12,7 @@ class VideoLikeButton extends StatelessWidget {
     ColorScheme colors = Theme.of(context).colorScheme;
     return GetBuilder<VideoLikeButtonController>(
       init: VideoLikeButtonController(videoId: videoId),
-      global: false,
+      tag: VideoLikeButtonController.tags(videoId ?? ''),
       builder: (_) => Visibility(
         visible: _.videoId != null && _.isLoggedIn,
         child: IconButton(

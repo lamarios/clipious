@@ -10,6 +10,7 @@ import 'package:invidious/controllers/videoController.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/main.dart';
 import 'package:invidious/models/errors/invidiousServiceError.dart';
+import 'package:invidious/views/components/videoAddToPlaylistButton.dart';
 import 'package:invidious/views/components/videoLikeButton.dart';
 import 'package:invidious/views/video/innverView.dart';
 import 'package:invidious/views/video/innverViewTablet.dart';
@@ -50,7 +51,8 @@ class VideoView extends StatelessWidget {
 
     return GetBuilder<VideoController>(
       init: VideoController(miniPlayerThreshold: miniPlayerThreshold, videoId: videoId, showMiniPlayer: (videos) => popMiniPayer(context, videos)),
-      global: false,
+      global: true,
+      tag: 'video-controller-$videoId',
       builder: (_) => AnimatedOpacity(
         duration: animationDuration,
         opacity: _.opacity,
@@ -70,14 +72,7 @@ class VideoView extends StatelessWidget {
                         ),
                       ),
                       VideoLikeButton(videoId: _.video?.videoId),
-                      Visibility(
-                        visible: _.isLoggedIn,
-                        child: IconButton(
-                          onPressed: () => AddToPlaylist.showAddToPlaylistDialog(context, _.video!.videoId),
-                          icon: const Icon(Icons.add),
-                          color: colorScheme.secondary,
-                        ),
-                      ),
+                      VideoAddToPlaylistButton(videoId: _.video?.videoId),
                     ],
               scrolledUnderElevation: 0,
             ),

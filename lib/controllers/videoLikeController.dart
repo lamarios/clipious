@@ -1,14 +1,20 @@
 import 'package:get/get.dart';
 import 'package:invidious/models/playlist.dart';
+import 'package:invidious/utils.dart';
 import 'package:logging/logging.dart';
 
 import '../globals.dart';
 import '../models/videoInList.dart';
+import 'addToPlaylistButtonController.dart';
 import 'playlistListController.dart';
 
 const String likePlaylistName = '❤️';
 
 class VideoLikeButtonController extends GetxController {
+  static VideoLikeButtonController? to({String? tag}) => safeGet(tag: tag);
+
+  static String tags(String videoId) => 'video-live-button-controller-$videoId';
+
   var log = Logger('VideoLikeButtonController');
   bool isLoggedIn = service.isLoggedIn();
   final String? videoId;
@@ -54,7 +60,7 @@ class VideoLikeButtonController extends GetxController {
       if (isVideoLiked) {
         VideoInList? v = p!.videos.firstWhereOrNull((element) => element.videoId == videoId!);
         if (v?.indexId != null) {
-          service.deleteUserPlaylistVideo(p.playlistId, v!.indexId!);
+          await service.deleteUserPlaylistVideo(p.playlistId, v!.indexId!);
           isVideoLiked = !isVideoLiked;
         }
       } else {
@@ -65,5 +71,6 @@ class VideoLikeButtonController extends GetxController {
     loading = false;
     update();
     PlaylistListController.to(tag: PlaylistListController.getTag(userPlayListTag))?.refreshPlaylists();
+    AddToPlaylistButtonController.to(tag: AddToPlaylistButtonController.tags(videoId ?? ''))?.countPlaylistsForVideo();
   }
 }

@@ -18,7 +18,6 @@ class MyRouteObserver extends RouteObserver<PageRoute<dynamic>> {
   miniPlayerPlacement(PageRoute<dynamic>? route) {
     if (route != null) {
       // whenever we change route, we should be stopping the player
-      FBroadcast.instance().broadcast(BROADCAST_STOP_PLAYING);
       switch (route.settings) {
         case ROUTE_SETTINGS:
         case ROUTE_PLAYLIST:
@@ -26,10 +25,13 @@ class MyRouteObserver extends RouteObserver<PageRoute<dynamic>> {
         case ROUTE_SETTINGS_MANAGE_ONE_SERVER:
           log.info('Show mini player at the bottom');
           moveMiniPlayer(false);
+          FBroadcast.instance().broadcast(BROADCAST_STOP_PLAYING);
           break;
-        default:
+        case ROUTE_CHANNEL:
           log.info('we should show the mini player on top');
           moveMiniPlayer(true);
+          FBroadcast.instance().broadcast(BROADCAST_STOP_PLAYING);
+          break;
       }
     }
   }
