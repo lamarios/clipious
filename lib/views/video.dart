@@ -10,6 +10,7 @@ import 'package:invidious/controllers/videoController.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/main.dart';
 import 'package:invidious/models/errors/invidiousServiceError.dart';
+import 'package:invidious/views/components/videoLikeButton.dart';
 import 'package:invidious/views/video/innverView.dart';
 import 'package:invidious/views/video/innverViewTablet.dart';
 import 'package:logging/logging.dart';
@@ -68,6 +69,7 @@ class VideoView extends StatelessWidget {
                           color: colorScheme.secondary,
                         ),
                       ),
+                      VideoLikeButton(videoId: _.video?.videoId),
                       Visibility(
                         visible: _.isLoggedIn,
                         child: IconButton(

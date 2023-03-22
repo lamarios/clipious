@@ -1,15 +1,10 @@
-import 'package:fbroadcast/fbroadcast.dart';
-import 'package:flutter/material.dart';
-import 'package:invidious/controllers/videoInListController.dart';
-import 'package:invidious/globals.dart';
-import 'package:invidious/main.dart';
 import 'package:invidious/models/db/progress.dart';
 import 'package:invidious/models/db/settings.dart';
 import 'package:invidious/models/errors/noServerSelected.dart';
-import 'package:invidious/views/welcomeWizard.dart';
 import 'package:logging/logging.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
+
 import 'models/db/server.dart';
 import 'objectbox.g.dart'; // created by `flutter pub run build_runner build`
 

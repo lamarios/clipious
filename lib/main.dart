@@ -83,7 +83,7 @@ class MyApp extends StatelessWidget {
           brightness: Brightness.dark,
         );
       }
-      return MaterialApp(
+      return GetMaterialApp(
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
           scaffoldMessengerKey: scaffoldKey,
