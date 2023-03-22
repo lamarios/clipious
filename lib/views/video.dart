@@ -51,8 +51,8 @@ class VideoView extends StatelessWidget {
 
     return GetBuilder<VideoController>(
       init: VideoController(miniPlayerThreshold: miniPlayerThreshold, videoId: videoId, showMiniPlayer: (videos) => popMiniPayer(context, videos)),
-      global: true,
-      tag: 'video-controller-$videoId',
+      global: false,
+      // tag: 'video-controller-$videoId',
       builder: (_) => AnimatedOpacity(
         duration: animationDuration,
         opacity: _.opacity,
