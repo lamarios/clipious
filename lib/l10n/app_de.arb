@@ -346,5 +346,57 @@
   "videoPlayer": "Video-Player",
   "@videoPlayer": {
     "description": "Title for video player related options"
+  },
+  "videoListed": "Öffentlich",
+  "@videoListed": {
+    "description": "Status of a publicly available video"
+  },
+  "videoUnlisted": "Ungelistet",
+  "@videoUnlisted": {
+    "description": "Status of a video that is only accessible by link"
+  },
+  "videoIsFamilyFriendly": "Familienfreundlich",
+  "@videoIsFamilyFriendly": {
+    "description": "Displayed only when a video is family friendly"
+  },
+  "tokenLoginDescription": "Empfohlene Anmeldemethode",
+  "@tokenLoginDescription": {
+    "description": "Recommended way to log in"
+  },
+  "tokenLogin": "Sich mit Token anmelden",
+  "@tokenLogin": {
+    "description": "Textto login to a server using the recommended way"
+  },
+  "password": "Passwort",
+  "@password": {
+    "description": "Password label for login to a server"
+  },
+  "cookieLogin": "Mit Cookie anmelden",
+  "@cookieLogin": {
+    "description": "Text to login to a server using the cookie jar method"
+  },
+  "wrongUsernamePassword": "Falscher Benutzername oder falsches Passwort",
+  "@wrongUsernamePassword": {
+    "description": "Error message when authentication fails"
+  },
+  "cookieLoginDescription": "Verwenden Sie diese Methode, wenn Sie Probleme mit der Token-Authentifizierung haben",
+  "@cookieLoginDescription": {
+    "description": "Cookie log in description"
+  },
+  "logout": "Abmelden",
+  "@logout": {
+    "description": "CTA to logout of a server"
+  },
+  "username": "Benutzername",
+  "@username": {
+    "description": "Username label for login to a server"
+  },
+  "tapToManage": "Zum Verwalten tippen",
+  "@tapToManage": {
+    "description": "Text shown below a server in the 'Your servers' list"
+  },
+  "authentication": "Authentifizierung",
+  "@authentication": {
+    "description": "Label for server settings related to authentications"
   }
 }
