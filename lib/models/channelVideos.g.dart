@@ -6,16 +6,18 @@ part of 'channelVideos.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-ChannelVideos _$ChannelVideosFromJson(Map<String, dynamic> json) =>
-    ChannelVideos(
+VideosWithContinuation _$VideosWithContinuationFromJson(
+        Map<String, dynamic> json) =>
+    VideosWithContinuation(
       (json['videos'] as List<dynamic>)
           .map((e) => VideoInList.fromJson(e as Map<String, dynamic>))
           .toList(),
       json['continuation'] as String?,
     );
 
-Map<String, dynamic> _$ChannelVideosToJson(ChannelVideos instance) =>
+Map<String, dynamic> _$VideosWithContinuationToJson(
+        VideosWithContinuation instance) =>
     <String, dynamic>{
-      'videos': instance.videos,
       'continuation': instance.continuation,
+      'videos': instance.videos,
     };

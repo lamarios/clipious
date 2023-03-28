@@ -47,8 +47,8 @@ dependencies:
 
   intl: any
   settings_ui: 2.0.2
-  objectbox: 1.7.2
-  objectbox_flutter_libs: 1.7.2
+  objectbox: 2.0.0
+  objectbox_flutter_libs: 2.0.0
   path_provider: 2.0.13
   path: 1.8.2
   flutter_web_auth: 0.5.0
@@ -64,6 +64,7 @@ dependencies:
   flutter_native_splash: 2.2.19
   flutter_linkify: 5.0.2
   url_launcher: 6.1.10
+  get: 4.6.5
 
 
 

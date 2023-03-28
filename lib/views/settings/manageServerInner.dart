@@ -1,70 +1,20 @@
-import 'dart:async';
-
-import 'package:after_layout/after_layout.dart';
-import 'package:fbroadcast/fbroadcast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_web_auth/flutter_web_auth.dart';
-import 'package:invidious/models/errors/invidiousServiceError.dart';
+import 'package:get/get.dart';
+import 'package:invidious/controllers/serverListSettingsController.dart';
 import 'package:invidious/myRouteObserver.dart';
 import 'package:invidious/views/settings/manageSingleServer.dart';
-import 'package:logging/logging.dart';
 import 'package:settings_ui/settings_ui.dart';
 
-import '../../database.dart';
 import '../../globals.dart';
 import '../../models/db/server.dart';
 import '../../utils.dart';
 import '../settings.dart';
 
-const pingTimeout = 3;
-
-class ManagerServersView extends StatefulWidget {
+class ManagerServersView extends StatelessWidget {
   const ManagerServersView({super.key});
 
-  @override
-  State<ManagerServersView> createState() => _ManagerServersViewState();
-}
-
-class _ManagerServersViewState extends State<ManagerServersView> with AfterLayoutMixin<ManagerServersView> {
-  late List<Server> dbServers;
-  TextEditingController addServerController = TextEditingController(text: 'https://');
-  List<Server> publicServers = [];
-  double publicServerProgress = 0;
-  final log = Logger('ManagerServerView');
-
-  bool pinging = true;
-
-  String publicServersError = '';
-
-  bool isLoggedInToServer(String url) {
-    Server server = dbServers.firstWhere((s) => s.url == url, orElse: () => Server('notFound'));
-
-    return (server.authToken?.isNotEmpty ?? false) || (server.sidCookie?.isNotEmpty ?? false);
-  }
-
-  @override
-  initState() {
-    super.initState();
-    refreshServers();
-  }
-
-  @override
-  dispose() {
-    addServerController.dispose();
-    super.dispose();
-  }
-
-  refreshServers() {
-    var servers = publicServers.where((s) => dbServers.indexWhere((element) => element.url == s.url) == -1).toList();
-
-    setState(() {
-      dbServers = db.getServers();
-      publicServers = servers;
-    });
-  }
-
-  showPublicServerActions(BuildContext context, Server server) {
+  showPublicServerActions(BuildContext context, ServerListSettingsController controller, Server server) {
     var locals = AppLocalizations.of(context)!;
     showModalBottomSheet<void>(
         context: context,
@@ -83,8 +33,7 @@ class _ManagerServersViewState extends State<ManagerServersView> with AfterLayou
                       children: [
                         IconButton(
                           onPressed: () {
-                            db.upsertServer(server);
-                            refreshServers();
+                            controller.upsertServer(server);
                             Navigator.pop(context);
                           },
                           icon: const Icon(Icons.add),
@@ -103,29 +52,13 @@ class _ManagerServersViewState extends State<ManagerServersView> with AfterLayou
         });
   }
 
-  saveServer(BuildContext context) async {
+  saveServer(BuildContext context, ServerListSettingsController controller) async {
     var locals = AppLocalizations.of(context)!;
-    var serverUrl = addServerController.text;
-    if (serverUrl.endsWith("/")) {
-      serverUrl = serverUrl.substring(0, serverUrl.length - 1);
-    }
 
-    bool isValidServer = false;
     try {
-      isValidServer = await service.isValidServer(serverUrl);
-    } catch (err) {
-      isValidServer = false;
-    }
-
-    if (!context.mounted) return;
-    if (isValidServer) {
-      Server server = Server(serverUrl);
-      db.upsertServer(server);
-      refreshServers();
+      await controller.saveServer();
       Navigator.pop(context);
-
-      addServerController.text = 'https://';
-    } else {
+    } catch (err) {
       await showAlertDialog(context, 'Error', [Text(locals.invalidInvidiousServer)]);
     }
   }
@@ -134,40 +67,47 @@ class _ManagerServersViewState extends State<ManagerServersView> with AfterLayou
     var locals = AppLocalizations.of(context)!;
     showDialog<String>(
         context: context,
-        builder: (BuildContext context) => Dialog(
-              child: SizedBox(
-                width: 400,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Text(locals.addServer),
-                      TextField(
-                        controller: addServerController,
-                        autocorrect: false,
-                        enableSuggestions: false,
-                        enableIMEPersonalizedLearning: false,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          TextButton(
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            child: Text(locals.cancel),
-                          ),
-                          TextButton(
-                            onPressed: () {
-                              saveServer(context);
-                            },
-                            child: Text(locals.add),
-                          ),
-                        ],
-                      ),
-                    ],
+        builder: (BuildContext context) => GetBuilder<ServerListSettingsController>(
+              builder: (controller) => Dialog(
+                child: SizedBox(
+                  width: 400,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(locals.addServer),
+                        TextField(
+                          controller: controller.addServerController,
+                          autocorrect: false,
+                          enableSuggestions: false,
+                          enableIMEPersonalizedLearning: false,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: Text(locals.cancel),
+                            ),
+                            TextButton(
+                              onPressed: () async {
+                                try {
+                                  await controller.saveServer();
+                                  Navigator.pop(context);
+                                } catch (err) {
+                                  await showAlertDialog(context, 'Error', [Text(locals.invalidInvidiousServer)]);
+                                }
+                              },
+                              child: Text(locals.add),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -181,14 +121,8 @@ class _ManagerServersViewState extends State<ManagerServersView> with AfterLayou
           settings: ROUTE_SETTINGS_MANAGE_ONE_SERVER,
           builder: (context) => ManageSingleServer(
             server: s,
-            refreshServers: refreshServers,
           ),
         ));
-  }
-
-  switchServer(Server s) {
-    db.useServer(s);
-    refreshServers();
   }
 
   @override
@@ -197,144 +131,97 @@ class _ManagerServersViewState extends State<ManagerServersView> with AfterLayou
     SettingsThemeData theme = settingsTheme(colorScheme);
     var locals = AppLocalizations.of(context)!;
 
-    var filteredPublicServers = publicServers.where((s) => dbServers.indexWhere((element) => element.url == s.url) == -1).toList();
-
-    return Stack(
-      children: [
-        SettingsList(
-          lightTheme: theme,
-          darkTheme: theme,
-          sections: [
-            SettingsSection(
-                title: Text(locals.yourServers),
-                tiles: dbServers.isNotEmpty
-                    ? dbServers
-                        .map((s) => SettingsTile(
-                              leading: InkWell(
-                                onTap: () => switchServer(s),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Icon(
-                                    Icons.done,
-                                    color: s.inUse ? colorScheme.primary : colorScheme.secondaryContainer,
+    return GetBuilder<ServerListSettingsController>(
+      init: ServerListSettingsController(),
+      builder: (_) {
+        var filteredPublicServers = _.publicServers.where((s) => _.dbServers.indexWhere((element) => element.url == s.url) == -1).toList();
+        return Stack(
+          children: [
+            SettingsList(
+              lightTheme: theme,
+              darkTheme: theme,
+              sections: [
+                SettingsSection(
+                    title: Text(locals.yourServers),
+                    tiles: _.dbServers.isNotEmpty
+                        ? _.dbServers
+                            .map((s) => SettingsTile(
+                                  leading: InkWell(
+                                    onTap: () => _.switchServer(s),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Icon(
+                                        Icons.done,
+                                        color: s.inUse ? colorScheme.primary : colorScheme.secondaryContainer,
+                                      ),
+                                    ),
                                   ),
-                                ),
+                                  title: Text(s.url),
+                                  value: Text('${_.isLoggedInToServer(s.url) ? '${locals.loggedIn}, ' : ''} ${locals.tapToManage}'),
+                                  onPressed: (context) => openServer(context, s),
+                                ))
+                            .toList()
+                        : [
+                            SettingsTile(
+                              title: Text(
+                                locals.addServerHelpText,
+                                style: const TextStyle(fontSize: 12),
                               ),
-                              title: Text(s.url),
-                              value: Text('${isLoggedInToServer(s.url) ? '${locals.loggedIn}, ' : ''} ${locals.tapToManage}'),
-                              onPressed: (context) => openServer(context, s),
-                            ))
-                        .toList()
-                    : [
-                        SettingsTile(
-                          title: Text(
-                            locals.addServerHelpText,
-                            style: const TextStyle(fontSize: 12),
-                          ),
-                          enabled: false,
-                        )
-                      ]),
-            SettingsSection(
-                title: Text(locals.publicServers),
-                tiles: publicServersError.isNotEmpty
-                    ? [
-                        SettingsTile(
-                          onPressed: (context) => getPublicServers(context),
-                          title: Text(publicServersError),
-                        )
-                      ]
-                    : pinging
+                              enabled: false,
+                            )
+                          ]),
+                SettingsSection(
+                    title: Text(locals.publicServers),
+                    tiles: _.publicServersError != PublicServerErrors.none
                         ? [
                             SettingsTile(
-                              title: Text(locals.loadingPublicServer),
-                              leading: SizedBox(
-                                  height: 15,
-                                  width: 15,
-                                  child: CircularProgressIndicator(
-                                    strokeWidth: 2,
-                                    value: publicServerProgress > 0 ? publicServerProgress : null,
-                                  )),
+                              onPressed: (context) => _.getPublicServers(),
+                              title: Text(locals.publicServersError),
                             )
                           ]
-                        : filteredPublicServers
-                            .map((s) => SettingsTile(
-                                  key: Key(s.url),
-                                  title: Row(
-                                    children: [
-                                      Expanded(child: Text('${s.url} ')),
-                                      Text((s.ping != null && s.ping!.compareTo(const Duration(seconds: pingTimeout)) == -1) ? '${s.ping?.inMilliseconds}ms' : '>${pingTimeout}s',
-                                          style: TextStyle(fontSize: 15, color: colorScheme.secondary))
-                                    ],
-                                  ),
-                                  value: Row(
-                                    children: [Visibility(visible: s.flag != null && s.region != null, child: Text('${s.flag} - ${s.region} - ')), Text(locals.tapToAddServer)],
-                                  ),
-                                  onPressed: (context) => showPublicServerActions(context, s),
-                                ))
-                            .toList()),
+                        : _.pinging
+                            ? [
+                                SettingsTile(
+                                  title: Text(locals.loadingPublicServer),
+                                  leading: SizedBox(
+                                      height: 15,
+                                      width: 15,
+                                      child: CircularProgressIndicator(
+                                        strokeWidth: 2,
+                                        value: _.publicServerProgress > 0 ? _.publicServerProgress : null,
+                                      )),
+                                )
+                              ]
+                            : filteredPublicServers
+                                .map((s) => SettingsTile(
+                                      key: Key(s.url),
+                                      title: Row(
+                                        children: [
+                                          Expanded(child: Text('${s.url} ')),
+                                          Text((s.ping != null && s.ping!.compareTo(const Duration(seconds: pingTimeout)) == -1) ? '${s.ping?.inMilliseconds}ms' : '>${pingTimeout}s',
+                                              style: TextStyle(fontSize: 15, color: colorScheme.secondary))
+                                        ],
+                                      ),
+                                      value: Row(
+                                        children: [Visibility(visible: s.flag != null && s.region != null, child: Text('${s.flag} - ${s.region} - ')), Text(locals.tapToAddServer)],
+                                      ),
+                                      onPressed: (context) => showPublicServerActions(context, _, s),
+                                    ))
+                                .toList()),
+              ],
+            ),
+            Positioned(
+              right: 20,
+              bottom: 20,
+              child: FloatingActionButton(
+                onPressed: () => addServerDialog(context),
+                backgroundColor: colorScheme.primaryContainer,
+                child: const Icon(Icons.add),
+              ),
+            )
           ],
-        ),
-        Positioned(
-          right: 20,
-          bottom: 20,
-          child: FloatingActionButton(
-            onPressed: () => addServerDialog(context),
-            backgroundColor: colorScheme.primaryContainer,
-            child: const Icon(Icons.add),
-          ),
-        )
-      ],
+        );
+      },
     );
-  }
-
-  getPublicServers(BuildContext context) async {
-    var locals = AppLocalizations.of(context)!;
-    setState(() {
-      pinging = true;
-      publicServersError = '';
-    });
-    try {
-      var public = await service.getPublicServers();
-
-      var servers = public.map((e) {
-        var s = Server(e.uri);
-        s.flag = e.flag;
-        s.region = e.region;
-
-        return s;
-      }).toList();
-      int progress = 0;
-      List<Server> pingedServers = await Future.wait(servers.map((e) async {
-        e.ping = await service.pingServer(e.url).timeout(const Duration(seconds: pingTimeout), onTimeout: () => const Duration(seconds: pingTimeout));
-        progress++;
-        if (context.mounted) {
-          setState(() {
-            publicServerProgress = progress / servers.length;
-          });
-        }
-        return e;
-      }));
-
-      pingedServers.sort((a, b) => (a.ping ?? const Duration(seconds: pingTimeout)).compareTo(b.ping ?? const Duration(seconds: pingTimeout)));
-
-      if (context.mounted) {
-        setState(() {
-          pinging = false;
-          publicServers = pingedServers;
-          publicServersError = '';
-        });
-      }
-    } catch (err) {
-      if (context.mounted) {
-        setState(() {
-          publicServersError = locals.publicServersError;
-        });
-      }
-    }
-  }
-
-  @override
-  FutureOr<void> afterFirstLayout(BuildContext context) async {
-    await getPublicServers(context);
   }
 }

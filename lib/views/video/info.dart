@@ -10,9 +10,9 @@ import 'package:invidious/views/components/subscribeButton.dart';
 import 'package:invidious/views/components/videoThumbnail.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../main.dart';
 import '../../models/imageObject.dart';
 import '../../utils.dart';
+import '../searchDelegate.dart';
 
 class VideoInfo extends StatelessWidget {
   Video video;
@@ -20,7 +20,6 @@ class VideoInfo extends StatelessWidget {
   VideoInfo({super.key, required this.video});
 
   openChannel(BuildContext context) {
-    FBroadcast.instance().broadcast(BROADCAST_STOP_PLAYING);
     Navigator.push(context, MaterialPageRoute(settings: ROUTE_CHANNEL, builder: (context) => ChannelView(channelId: video.authorId)));
   }
 

@@ -1,9 +1,8 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
+import 'package:invidious/controllers/videoListController.dart';
 import 'package:invidious/globals.dart';
-import 'package:invidious/models/videoInList.dart';
 
+import '../models/paginatedList.dart';
 import 'videoList.dart';
 
 const ALL = 'all';
@@ -17,11 +16,6 @@ class Trending extends StatefulWidget {
 
 class TrendingState extends State<Trending> {
   String type = ALL;
-  GlobalKey<VideoListState> videos = GlobalKey();
-
-  Future<List<VideoInList>> getVideos() async {
-    return service.getTrending(type: type == ALL ? null : type);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -77,9 +71,8 @@ doesn't seem to be working for now
 */
           Expanded(
             child: VideoList(
-              key: videos,
-              getVideos: getVideos,
-              refresh: getVideos,
+              paginatedVideoList: SingleEndpointList(service.getTrending),
+              tags: VideoListController.trendingTag,
             ),
           ),
         ],

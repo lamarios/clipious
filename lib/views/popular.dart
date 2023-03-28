@@ -1,30 +1,20 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
+import 'package:invidious/controllers/videoListController.dart';
 import 'package:invidious/globals.dart';
-import 'package:invidious/models/videoInList.dart';
 
+import '../models/paginatedList.dart';
 import 'videoList.dart';
 
-class Popular extends StatefulWidget {
+class Popular extends StatelessWidget {
   const Popular({super.key});
-
-  @override
-  PopularState createState() => PopularState();
-}
-
-class PopularState extends State<Popular>{
-  Future<List<VideoInList>> getVideos() async {
-    return service.getPopular();
-  }
 
   @override
   Widget build(BuildContext context) {
     return Container(
       color: Theme.of(context).colorScheme.background,
       child: VideoList(
-        getVideos: getVideos,
-        refresh: getVideos,
+        paginatedVideoList: SingleEndpointList(service.getPopular),
+        tags: VideoListController.popularTag,
       ),
     );
   }
