@@ -346,5 +346,57 @@
   "useDashDescription": "Lo streaming adattivo DASH a volte può essere problematico, YouTube ne può limitare la velocità.",
   "@useDashDescription": {
     "description": "Description for dash in the settings screen"
+  },
+  "videoListed": "Pubblico",
+  "@videoListed": {
+    "description": "Status of a publicly available video"
+  },
+  "videoUnlisted": "Non elencato",
+  "@videoUnlisted": {
+    "description": "Status of a video that is only accessible by link"
+  },
+  "videoIsFamilyFriendly": "Adatto alle famiglie",
+  "@videoIsFamilyFriendly": {
+    "description": "Displayed only when a video is family friendly"
+  },
+  "tapToManage": "Tocca per gestire",
+  "@tapToManage": {
+    "description": "Text shown below a server in the 'Your servers' list"
+  },
+  "tokenLogin": "Accedi con un token",
+  "@tokenLogin": {
+    "description": "Textto login to a server using the recommended way"
+  },
+  "authentication": "Autenticazione",
+  "@authentication": {
+    "description": "Label for server settings related to authentications"
+  },
+  "tokenLoginDescription": "Modo consigliato per accedere",
+  "@tokenLoginDescription": {
+    "description": "Recommended way to log in"
+  },
+  "cookieLoginDescription": "Usa questo metodo se si riscontrano problemi con l'autenticazione tramite token",
+  "@cookieLoginDescription": {
+    "description": "Cookie log in description"
+  },
+  "password": "Password",
+  "@password": {
+    "description": "Password label for login to a server"
+  },
+  "username": "Nome utente",
+  "@username": {
+    "description": "Username label for login to a server"
+  },
+  "wrongUsernamePassword": "Nome utente o password errato",
+  "@wrongUsernamePassword": {
+    "description": "Error message when authentication fails"
+  },
+  "logout": "Esci",
+  "@logout": {
+    "description": "CTA to logout of a server"
+  },
+  "cookieLogin": "Accedi con un cookie",
+  "@cookieLogin": {
+    "description": "Text to login to a server using the cookie jar method"
   }
 }
