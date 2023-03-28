@@ -17,8 +17,7 @@ class VideoAddToPlaylistButton extends StatelessWidget {
       init: AddToPlaylistButtonController(videoId: videoId),
       builder: (_) => Visibility(
         visible: _.isLoggedIn,
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
+        child: Stack(
           children: [
             IconButton(
               style: ButtonStyle(padding: MaterialStateProperty.all<EdgeInsets>(EdgeInsets.zero)),
@@ -29,14 +28,15 @@ class VideoAddToPlaylistButton extends StatelessWidget {
               ),
             ),
             _.playListCount > 0
-                ? Transform.translate(
-                    offset: const Offset(-15, -5),
-                    child: Text(
-                      _.playListCount.toString(),
-                      style: TextStyle(color: colors.secondary, fontSize: 8),
-                    ),
-                  )
-                : SizedBox.shrink()
+                ? Positioned(
+                  top:10,
+                  right: 10,
+                  child: Text(
+                    _.playListCount.toString(),
+                    style: TextStyle(color: colors.secondary, fontSize: 8),
+                  ),
+                )
+                : const SizedBox.shrink()
           ],
         ),
       ),
