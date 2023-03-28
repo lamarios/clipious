@@ -359,7 +359,7 @@
   "@videoIsFamilyFriendly": {
     "description": "Displayed only when a video is family friendly"
   },
-  "wrongUsernamePassword": "Nom d'utilisateur ou mot de passe incorrect",
+  "wrongUsernamePassword": "Nom d''utilisateur ou mot de passe incorrect",
   "@wrongUsernamePassword": {
     "description": "Error message when authentication fails"
   },
@@ -375,7 +375,7 @@
   "@tokenLoginDescription": {
     "description": "Recommended way to log in"
   },
-  "cookieLoginDescription": "Utilisez cette méthode si vous rencontrez des problèmes avec l'authentification par jeton",
+  "cookieLoginDescription": "Utilisez cette méthode si vous rencontrez des problèmes avec l''authentification par jeton",
   "@cookieLoginDescription": {
     "description": "Cookie log in description"
   },
@@ -383,7 +383,7 @@
   "@logout": {
     "description": "CTA to logout of a server"
   },
-  "username": "Nom d'utilisateur",
+  "username": "Nom d''utilisateur",
   "@username": {
     "description": "Username label for login to a server"
   },
