@@ -5,18 +5,19 @@ import 'package:invidious/views/video/commentsContainer.dart';
 import 'package:invidious/views/video/player.dart';
 import 'package:invidious/views/video/recommendedVideos.dart';
 
+import '../../controllers/videoController.dart';
 import '../../controllers/videoInnerViewController.dart';
 import '../../globals.dart';
+import '../components/videoThumbnail.dart';
 import 'info.dart';
 
 class VideoTabletInnerView extends StatelessWidget {
   final Video video;
   final int selectedIndex;
   bool? playNow;
-  final Function(DragUpdateDetails) onVideoDrag;
-  final Function(DragEndDetails) onDragEnd;
+  final VideoController videoController;
 
-  VideoTabletInnerView({super.key, required this.video, required this.selectedIndex, this.playNow, required this.onVideoDrag, required this.onDragEnd});
+  VideoTabletInnerView({super.key, required this.video, required this.selectedIndex, this.playNow, required this.videoController});
 
   @override
   Widget build(BuildContext context) {
@@ -37,13 +38,17 @@ class VideoTabletInnerView extends StatelessWidget {
                     alignment: Alignment.center,
                     width: double.infinity,
                     constraints: const BoxConstraints(maxWidth: 500),
-                    child: GestureDetector(
-                      onVerticalDragUpdate: onVideoDrag,
-                      onVerticalDragEnd: onDragEnd,
-                      child: VideoPlayer(
-                        playNow: playNow,
-                        miniPlayer: false,
-                        video: video,
+                    child: VideoThumbnailView(
+                      videoId: video.videoId,
+                      thumbnailUrl: video.getBestThumbnail()?.url ?? '',
+                      child: IconButton(
+                        key: const ValueKey('nt-playing'),
+                        onPressed: videoController.playVideo,
+                        icon: const Icon(
+                          Icons.play_arrow,
+                          size: 100,
+                        ),
+                        color: colorScheme.primary,
                       ),
                     ),
                   ),

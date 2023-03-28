@@ -21,7 +21,9 @@ class MiniPlayerController extends GetxController {
   int currentIndex = 0;
   List<Video> videos = [];
   double height = targetHeight;
-  bool showTitle = true;
+  bool isMini = true;
+
+  Offset offset = Offset.zero;
 
   MiniPlayerController({required this.videos});
 
@@ -49,7 +51,6 @@ class MiniPlayerController extends GetxController {
     height = targetHeight;
     bottom = -targetHeight;
     videos = [];
-    showTitle = true;
     update();
   }
 
@@ -62,30 +63,55 @@ class MiniPlayerController extends GetxController {
     }
   }
 
-  onDragUpdate(DragUpdateDetails details) {
-    double opacity = 1 - min(1, ((-details.localPosition.dy) / miniPlayerThreshold));
-    double height = max(targetHeight, targetHeight + (-details.localPosition.dy));
-    showTitle = false;
-    this.height = height;
-    this.opacity = min(1, opacity);
-    update();
-  }
-
-  Video? onDragEnd(DragEndDetails details) {
-    if (height > miniPlayerThreshold) {
-      return showVideo();
-    } else {
-      showTitle = true;
-      height = targetHeight;
-      opacity = 1;
-      update();
-      return null;
-    }
-  }
-
   Video showVideo() {
     var video = videos[currentIndex];
     hide();
     return video;
+  }
+
+  showBigPlayer() {
+    isMini = false;
+    opacity = 1;
+    bottom = 0;
+    update();
+  }
+
+  showMiniPlayer() {
+    isMini = true;
+    bottom = 0;
+    opacity = 1;
+    update();
+  }
+
+  playVideo(Video video) {
+    videos = [video];
+    currentIndex = 0;
+    showBigPlayer();
+  }
+
+  void videoDraggedDownEnd(DragEndDetails details) {
+    if (isMini) {
+      if (height > miniPlayerThreshold) {
+        showBigPlayer();
+      } else {
+        height = targetHeight;
+      }
+    } else {
+      if (offset.dy > miniPlayerThreshold) {
+        showMiniPlayer();
+      }
+      offset = Offset.zero;
+    }
+    update();
+  }
+
+  void videoDraggedDown(DragUpdateDetails details) {
+    if (isMini) {
+      double height = max(targetHeight, targetHeight + (-details.localPosition.dy));
+      this.height = height;
+    } else {
+      offset = Offset(0, max(0, details.localPosition.dy));
+    }
+    update();
   }
 }
