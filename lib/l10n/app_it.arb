@@ -375,7 +375,7 @@
   "@tokenLoginDescription": {
     "description": "Recommended way to log in"
   },
-  "cookieLoginDescription": "Usa questo metodo se si riscontrano problemi con l'autenticazione tramite token",
+  "cookieLoginDescription": "Usa questo metodo se si riscontrano problemi con l''autenticazione tramite token",
   "@cookieLoginDescription": {
     "description": "Cookie log in description"
   },
