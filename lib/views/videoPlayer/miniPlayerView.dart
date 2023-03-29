@@ -11,33 +11,39 @@ class MiniPlayerView {
     return controller.videos.isNotEmpty
         ? [
             Expanded(
-                child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Builder(builder: (context) {
-                Video vid = controller.videos[controller.currentIndex];
+                child: Visibility(
+              visible: controller.isMini,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Builder(builder: (context) {
+                  Video vid = controller.videos[controller.currentIndex];
 
-                return GestureDetector(
-                  onTap: controller.showVideo,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        vid.title,
-                      ),
-                      Text(
-                        vid.author,
-                      ),
-                    ],
-                  ),
-                );
-              }),
+                  return GestureDetector(
+                    onTap: controller.showVideo,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          vid.title,
+                        ),
+                        Text(
+                          vid.author,
+                        ),
+                      ],
+                    ),
+                  );
+                }),
+              ),
             )),
-            GestureDetector(
-              onTap: controller.hide,
-              child: const Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Icon(Icons.clear),
+            Visibility(
+              visible: controller.isMini,
+              child: GestureDetector(
+                onTap: controller.hide,
+                child: const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Icon(Icons.clear),
+                ),
               ),
             )
           ]

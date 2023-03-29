@@ -82,10 +82,12 @@ class VideoPlayerState extends State<VideoPlayer> {
           listener: widget.listener, locals: locals, overFlowTextColor: overFlowTextColor, colors: colorScheme, key: _betterPlayerKey, miniPlayer: widget.miniPlayer, video: widget.video),
       builder: (_) => AspectRatio(
           aspectRatio: 16 / 9,
-          child: BetterPlayer(
-            controller: _.videoController!,
-            key: _betterPlayerKey,
-          )),
+          child: _.videoController == null
+              ? SizedBox.shrink()
+              : BetterPlayer(
+                  controller: _.videoController!,
+                  key: _betterPlayerKey,
+                )),
     );
   }
 }

@@ -4,6 +4,6 @@ import 'package:invidious/views/video/player.dart';
 
 class VideoPlayerFullScreenView {
   static List<Widget> build(BuildContext context, MiniPlayerController controller) {
-    return [Text(controller.videos[controller.currentIndex].title)];
+    return [Visibility(visible: !controller.isMini, child: Text(controller.videos[controller.currentIndex].title))];
   }
 }

@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:fbroadcast/fbroadcast.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:invidious/controllers/playerController.dart';
 import 'package:invidious/utils.dart';
 import 'package:logging/logging.dart';
 
@@ -22,6 +23,8 @@ class MiniPlayerController extends GetxController {
   List<Video> videos = [];
   double height = targetHeight;
   bool isMini = true;
+  double? top;
+  bool isDragging = false;
 
   Offset offset = Offset.zero;
 
@@ -73,6 +76,7 @@ class MiniPlayerController extends GetxController {
     isMini = false;
     opacity = 1;
     bottom = 0;
+    top = 0;
     update();
   }
 
@@ -80,6 +84,7 @@ class MiniPlayerController extends GetxController {
     isMini = true;
     bottom = 0;
     opacity = 1;
+    top = null;
     update();
   }
 
@@ -87,31 +92,20 @@ class MiniPlayerController extends GetxController {
     videos = [video];
     currentIndex = 0;
     showBigPlayer();
+    PlayerController.to()?.switchVideo(video);
   }
 
   void videoDraggedDownEnd(DragEndDetails details) {
-    if (isMini) {
-      if (height > miniPlayerThreshold) {
-        showBigPlayer();
-      } else {
-        height = targetHeight;
-      }
-    } else {
-      if (offset.dy > miniPlayerThreshold) {
-        showMiniPlayer();
-      }
-      offset = Offset.zero;
-    }
+    isMini = (top ?? 0) > miniPlayerThreshold;
+    top = isMini ? null : 0;
+    isDragging = false;
     update();
   }
 
   void videoDraggedDown(DragUpdateDetails details) {
-    if (isMini) {
-      double height = max(targetHeight, targetHeight + (-details.localPosition.dy));
-      this.height = height;
-    } else {
-      offset = Offset(0, max(0, details.localPosition.dy));
-    }
+    isDragging = true;
+    top = details.globalPosition.dy;
+    isMini = (top ?? miniPlayerThreshold) > miniPlayerThreshold;
     update();
   }
 }

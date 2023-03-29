@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:invidious/controllers/videoInListController.dart';
+import 'package:invidious/utils.dart';
 import 'package:logging/logging.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../database.dart';
@@ -16,6 +17,8 @@ import '../models/sponsorSegment.dart';
 import '../models/video.dart';
 
 class PlayerController extends GetxController {
+  static PlayerController? to() => safeGet();
+
   final log = Logger('VideoPlayer');
   bool useSponsorBlock = db.getSettings(USE_SPONSORBLOCK)?.value == 'true';
   List<Pair<int>> sponsorSegments = List.of([]);
@@ -24,7 +27,7 @@ class PlayerController extends GetxController {
   int previousSponsorCheck = 0;
   bool useDash = db.getSettings(USE_DASH)?.value == 'true';
   AppLocalizations locals;
-  final Video video;
+  Video video;
   final bool miniPlayer;
   bool? playNow;
   Function(BetterPlayerEvent event)? listener;
@@ -51,10 +54,7 @@ class PlayerController extends GetxController {
   @override
   onReady() async {
     await setSponsorBlock();
-
-    if (playNow ?? false) {
-      playVideo();
-    }
+    playVideo();
   }
 
   disposeControllers() {
@@ -132,6 +132,12 @@ class PlayerController extends GetxController {
     useDash = !useDash;
     playVideo();
     update();
+  }
+
+  switchVideo(Video video) {
+    disposeControllers();
+    this.video = video;
+    playVideo();
   }
 
   playVideo() {

@@ -23,58 +23,63 @@ class MiniPlayer extends StatelessWidget {
     return GetBuilder<MiniPlayerController>(
       init: MiniPlayerController(videos: videos ?? []),
       builder: (_) {
-        Widget? videoPlayer = _.videos.length > _.currentIndex
+        bool showPlayer = _.videos.length > _.currentIndex;
+
+        Widget videoPlayer = showPlayer
             ? GestureDetector(
+                key: const ValueKey('player'),
                 onVerticalDragEnd: _.videoDraggedDownEnd,
                 onVerticalDragUpdate: _.videoDraggedDown,
                 child: VideoPlayer(
                   video: _.videos[_.currentIndex],
-                  miniPlayer: true,
+                  miniPlayer: false,
                 ),
               )
-            : null;
+            : const SizedBox.shrink();
 
         List<Widget> miniPlayerWidgets = [];
-        if (_.isMini && videoPlayer != null) {
-          miniPlayerWidgets.addAll(MiniPlayerView.build(context, _));
-        }
 
         List<Widget> bigPlayerWidgets = [];
-        if (!_.isMini && videoPlayer != null) {
+
+        if (showPlayer) {
+          miniPlayerWidgets.addAll(MiniPlayerView.build(context, _));
           bigPlayerWidgets.addAll(VideoPlayerFullScreenView.build(context, _));
+          print('mini player widgets ${miniPlayerWidgets.length}, bigplayer widgets : ${bigPlayerWidgets.length}');
         }
 
-        print('mini player widgets ${miniPlayerWidgets.length}, bigplayer widgets : ${bigPlayerWidgets.length}');
-
-        return Positioned(
+        return AnimatedPositioned(
           left: 0,
-          top: _.isMini ? null : 0,
+          top: _.top,
           bottom: _.bottom,
           right: 0,
+          duration: _.isDragging ? Duration.zero : animationDuration ~/ 4,
           child: Material(
             child: SafeArea(
               bottom: false,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  _.isMini
-                      ? const SizedBox.shrink()
-                      : AppBar(
-                          title: Text('test'),
+              top: !_.isMini,
+              child: showPlayer
+                  ? Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        _.isMini
+                            ? const SizedBox.shrink()
+                            : AppBar(
+                                title: Text('test'),
+                              ),
+                        AnimatedContainer(
+                          width: double.infinity,
+                          color: _.isMini ? colors.secondaryContainer : colors.background,
+                          height: _.isMini ? targetHeight : 200,
+                          duration: animationDuration,
+                          child: Row(
+                            mainAxisAlignment: _.isMini ? MainAxisAlignment.start : MainAxisAlignment.center,
+                            children: [videoPlayer ?? const SizedBox.shrink(), ...miniPlayerWidgets],
+                          ),
                         ),
-                  AnimatedContainer(
-                    width: double.infinity,
-                    color: _.isMini ? colors.secondaryContainer : colors.background,
-                    height: _.isMini ? targetHeight : 200,
-                    duration: animationDuration,
-                    child: Row(
-                      mainAxisAlignment: _.isMini ? MainAxisAlignment.start : MainAxisAlignment.center,
-                      children: [videoPlayer ?? const SizedBox.shrink(), ...miniPlayerWidgets],
-                    ),
-                  ),
-                  ...bigPlayerWidgets,
-                ],
-              ),
+                        ...bigPlayerWidgets,
+                      ],
+                    )
+                  : const SizedBox.shrink(),
             ),
           ),
         );
