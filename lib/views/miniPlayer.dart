@@ -53,7 +53,7 @@ class MiniPlayer extends StatelessWidget {
           right: 0,
           duration: _.isDragging ? Duration.zero : animationDuration ~/ 2,
           child: Material(
-            elevation: 10,
+            elevation: 5,
             child: showPlayer
                 ? Column(
                     mainAxisAlignment: MainAxisAlignment.start,

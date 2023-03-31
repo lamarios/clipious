@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:invidious/controllers/miniPayerController.dart';
 import 'package:invidious/views/videoPlayer/miniPlayerControls.dart';
-import 'package:text_scroll/text_scroll.dart';
 
 import '../../models/video.dart';
 

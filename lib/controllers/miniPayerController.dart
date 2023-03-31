@@ -148,6 +148,7 @@ class MiniPlayerController extends GetxController {
   }
 
   playVideo(Video video) {
+    Get.back();
     videos = [video];
     currentIndex = 0;
     selectedFullScreenIndex = 0;
