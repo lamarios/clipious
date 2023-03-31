@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:invidious/controllers/videoInnerViewController.dart';
 import 'package:invidious/models/video.dart';
+import 'package:invidious/views/components/addToQueueButton.dart';
 import 'package:invidious/views/video/commentsContainer.dart';
-import 'package:invidious/views/video/player.dart';
 import 'package:invidious/views/video/recommendedVideos.dart';
 
 import '../../controllers/videoController.dart';
@@ -17,7 +17,7 @@ class VideoInnerView extends StatelessWidget {
   bool? playNow;
   final VideoController videoController;
 
-  VideoInnerView({super.key, required this.video, required this.selectedIndex,  this.playNow, required this.videoController});
+  VideoInnerView({super.key, required this.video, required this.selectedIndex, this.playNow, required this.videoController});
 
   @override
   Widget build(BuildContext context) {
@@ -32,14 +32,25 @@ class VideoInnerView extends StatelessWidget {
           VideoThumbnailView(
             videoId: video.videoId,
             thumbnailUrl: video.getBestThumbnail()?.url ?? '',
-            child: IconButton(
-              key: const ValueKey('nt-playing'),
-              onPressed: videoController.playVideo,
-              icon: const Icon(
-                Icons.play_arrow,
-                size: 100,
-              ),
-              color: colorScheme.primary,
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                IconButton(
+                  key: const ValueKey('nt-playing'),
+                  onPressed: videoController.playVideo,
+                  icon: const Icon(
+                    Icons.play_arrow,
+                    size: 100,
+                  ),
+                  color: colorScheme.primary,
+                ),
+                Positioned(
+                    right: 0,
+                    bottom: 0,
+                    child: AddToQueueButton(
+                      videos: [video],
+                    ))
+              ],
             ),
           ),
           Expanded(

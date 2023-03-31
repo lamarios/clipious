@@ -1,41 +1,55 @@
 import 'package:flutter/material.dart';
 import 'package:invidious/controllers/miniPayerController.dart';
+import 'package:invidious/views/videoPlayer/miniPlayerControls.dart';
+import 'package:text_scroll/text_scroll.dart';
 
 import '../../models/video.dart';
-import '../video/player.dart';
 
 class MiniPlayerView {
   @override
   static List<Widget> build(BuildContext context, MiniPlayerController controller) {
     ColorScheme colors = Theme.of(context).colorScheme;
-    return controller.videos.isNotEmpty
+    return controller.videos.isNotEmpty && controller.isMini
         ? [
             Expanded(
+                flex: 2,
                 child: Visibility(
-              visible: controller.isMini,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Builder(builder: (context) {
-                  Video vid = controller.videos[controller.currentIndex];
+                  visible: controller.isMini,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Builder(builder: (context) {
+                      Video vid = controller.videos[controller.currentIndex];
 
-                  return GestureDetector(
-                    onTap: controller.showVideo,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          vid.title,
-                        ),
-                        Text(
-                          vid.author,
-                        ),
-                      ],
-                    ),
-                  );
-                }),
-              ),
-            )),
+                      return Column(
+                        children: [
+                          Text('${vid.title} - ${vid.author}', overflow: TextOverflow.ellipsis, style: const TextStyle(fontSize: 11),),
+                          MiniPlayerControls(
+                            controller: controller,
+                          ),
+                          Container(
+                              alignment: Alignment.centerLeft,
+                              width: double.infinity,
+                              height: 2,
+                              decoration: BoxDecoration(
+                                color: colors.secondaryContainer,
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: AnimatedFractionallySizedBox(
+                                  widthFactor: controller.progress,
+                                  heightFactor: 1,
+                                  duration: const Duration(milliseconds: 750),
+                                  curve: Curves.easeInOutQuad,
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      color: colors.primary,
+                                      borderRadius: BorderRadius.circular(20),
+                                    ),
+                                  ))),
+                        ],
+                      );
+                    }),
+                  ),
+                )),
             Visibility(
               visible: controller.isMini,
               child: GestureDetector(

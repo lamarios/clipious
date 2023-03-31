@@ -1,6 +1,8 @@
 import 'package:fbroadcast/fbroadcast.dart';
 import 'package:flutter/material.dart';
+import 'package:invidious/controllers/miniPayerController.dart';
 import 'package:invidious/utils.dart';
+import 'package:invidious/views/miniPlayer.dart';
 import 'package:logging/logging.dart';
 
 import 'globals.dart';
@@ -25,15 +27,16 @@ class MyRouteObserver extends RouteObserver<PageRoute<dynamic>> {
         case ROUTE_SETTINGS_MANAGE_SERVERS:
         case ROUTE_SETTINGS_MANAGE_ONE_SERVER:
           log.info('Show mini player at the bottom');
-          moveMiniPlayer(false);
+          MiniPlayerController.to()?.move(false);
           break;
         default:
           log.info('we should show the mini player on top');
-          moveMiniPlayer(true);
+          MiniPlayerController.to()?.move(true);
           break;
       }
     }
   }
+
 
   stopPlayingOnPop(PageRoute<dynamic>? newRoute, PageRoute<dynamic>? poppedRoute) {
     if (newRoute != null && poppedRoute != null && (poppedRoute.settings == ROUTE_VIDEO || poppedRoute.settings == ROUTE_PLAYLIST)) {
@@ -46,11 +49,12 @@ class MyRouteObserver extends RouteObserver<PageRoute<dynamic>> {
         case ROUTE_PLAYLIST_LIST:
         case ROUTE_CHANNEL:
           log.info('We should stop playing video');
-          FBroadcast.instance().broadcast(BROADCAST_STOP_PLAYING);
+          // FBroadcast.instance().broadcast(BROADCAST_STOP_PLAYING);
+          MiniPlayerController.to()?.showMiniPlayer();
           break;
         default:
           log.info('keep playing video');
-          moveMiniPlayer(true);
+          MiniPlayerController.to()?.move(false);
           break;
       }
     }

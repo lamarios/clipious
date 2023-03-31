@@ -1,24 +1,16 @@
 // import 'package:video_player/video_player.dart';
-import 'dart:async';
-import 'dart:math';
-
-import 'package:after_layout/after_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:invidious/controllers/videoController.dart';
 import 'package:invidious/globals.dart';
-import 'package:invidious/main.dart';
-import 'package:invidious/models/errors/invidiousServiceError.dart';
 import 'package:invidious/views/components/videoAddToPlaylistButton.dart';
 import 'package:invidious/views/components/videoLikeButton.dart';
 import 'package:invidious/views/video/innverView.dart';
 import 'package:invidious/views/video/innverViewTablet.dart';
-import 'package:logging/logging.dart';
 
 import '../models/video.dart';
 import '../utils.dart';
-import 'video/addToPlayList.dart';
 
 const double miniPlayerThreshold = 300;
 

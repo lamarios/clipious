@@ -4,8 +4,11 @@ import 'package:invidious/controllers/videoLikeController.dart';
 
 class VideoLikeButton extends StatelessWidget {
   final String? videoId;
+  double? size;
+  ButtonStyle? style;
 
-  const VideoLikeButton({Key? key, this.videoId}) : super(key: key);
+
+  VideoLikeButton({Key? key, this.videoId, this.size, this.style}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,6 +19,8 @@ class VideoLikeButton extends StatelessWidget {
       builder: (_) => Visibility(
         visible: _.videoId != null && _.isLoggedIn,
         child: IconButton(
+          style: style,
+          iconSize: size,
           onPressed: _.toggleLike,
           icon: _.isVideoLiked ? const Icon(Icons.favorite) : const Icon(Icons.favorite_border),
           color: colors.secondary,

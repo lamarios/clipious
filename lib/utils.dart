@@ -162,10 +162,6 @@ void showMiniPlayer(BuildContext context, List<Video> videos) {
   }
 }
 
-void moveMiniPlayer(bool aboveNavigation) {
-  MiniPlayerController.to()?.move(aboveNavigation);
-}
-
 void hideMiniPlayer(BuildContext context) {
   MiniPlayerController.to()?.hide();
   FBroadcast.instance().broadcast(BROADCAST_STOP_MINI_PLAYER);

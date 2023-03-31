@@ -24,9 +24,8 @@ class VideoPlayer extends StatefulWidget {
   final Video video;
   final bool miniPlayer;
   bool? playNow;
-  Function(BetterPlayerEvent event)? listener;
 
-  VideoPlayer({super.key, required this.video, this.listener, required this.miniPlayer, this.playNow});
+  VideoPlayer({super.key, required this.video, required this.miniPlayer, this.playNow});
 
   @override
   State<VideoPlayer> createState() => VideoPlayerState();
@@ -78,8 +77,7 @@ class VideoPlayerState extends State<VideoPlayer> {
     AppLocalizations locals = AppLocalizations.of(context)!;
     Color overFlowTextColor = Theme.of(context).textTheme.bodyMedium?.color ?? Colors.black;
     return GetBuilder<PlayerController>(
-      init: PlayerController(
-          listener: widget.listener, locals: locals, overFlowTextColor: overFlowTextColor, colors: colorScheme, key: _betterPlayerKey, miniPlayer: widget.miniPlayer, video: widget.video),
+      init: PlayerController(locals: locals, overFlowTextColor: overFlowTextColor, colors: colorScheme, key: _betterPlayerKey, miniPlayer: widget.miniPlayer, video: widget.video),
       builder: (_) => AspectRatio(
           aspectRatio: 16 / 9,
           child: _.videoController == null

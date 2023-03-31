@@ -199,7 +199,7 @@ class _HomeState extends State<Home> with AfterLayoutMixin {
   @override
   FutureOr<void> afterFirstLayout(BuildContext context) {
     Overlay.of(context).insert(OverlayEntry(
-      builder: (context) => MiniPlayer(videos: const []),
+      builder: (context) => MiniPlayer(),
     ));
   }
 }

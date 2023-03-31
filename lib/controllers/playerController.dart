@@ -15,6 +15,7 @@ import '../models/pair.dart';
 import '../../models/db/progress.dart' as dbProgress;
 import '../models/sponsorSegment.dart';
 import '../models/video.dart';
+import 'miniPayerController.dart';
 
 class PlayerController extends GetxController {
   static PlayerController? to() => safeGet();
@@ -30,12 +31,11 @@ class PlayerController extends GetxController {
   Video video;
   final bool miniPlayer;
   bool? playNow;
-  Function(BetterPlayerEvent event)? listener;
   final ColorScheme colors;
   final Color overFlowTextColor;
   final GlobalKey key;
 
-  PlayerController({required this.colors, required this.overFlowTextColor, required this.key, required this.video, required this.miniPlayer, this.listener, required this.locals});
+  PlayerController({required this.colors, required this.overFlowTextColor, required this.key, required this.video, required this.miniPlayer, required this.locals});
 
   @override
   void onInit() {
@@ -80,44 +80,45 @@ class PlayerController extends GetxController {
   }
 
   onVideoListener(BetterPlayerEvent event) {
-    if (event.betterPlayerEventType == BetterPlayerEventType.progress) {
-      int currentPosition = (event.parameters?['progress'] as Duration).inSeconds;
-      if (currentPosition > previousSponsorCheck + 1) {
-        // saving progress
-        saveProgress(currentPosition);
-        log.info("video event");
+    switch (event.betterPlayerEventType) {
+      case BetterPlayerEventType.progress:
+        int currentPosition = (event.parameters?['progress'] as Duration).inSeconds;
+        if (currentPosition > previousSponsorCheck + 1) {
+          // saving progress
+          saveProgress(currentPosition);
+          log.info("video event");
 
-        if (useSponsorBlock && sponsorSegments.isNotEmpty) {
-          double positionInMs = currentPosition * 1000;
-          Pair<int> nextSegment = sponsorSegments.firstWhere((e) => e.first <= positionInMs && positionInMs <= e.last, orElse: () => Pair<int>(-1, -1));
-          if (nextSegment.first != -1) {
-            videoController!.seekTo(Duration(milliseconds: nextSegment.last + 1000));
-            final ScaffoldMessengerState? scaffold = scaffoldKey.currentState;
-            scaffold?.showSnackBar(SnackBar(
-              content: Text(locals.sponsorSkipped),
-              duration: const Duration(seconds: 1),
-            ));
+          if (useSponsorBlock && sponsorSegments.isNotEmpty) {
+            double positionInMs = currentPosition * 1000;
+            Pair<int> nextSegment = sponsorSegments.firstWhere((e) => e.first <= positionInMs && positionInMs <= e.last, orElse: () => Pair<int>(-1, -1));
+            if (nextSegment.first != -1) {
+              videoController!.seekTo(Duration(milliseconds: nextSegment.last + 1000));
+              final ScaffoldMessengerState? scaffold = scaffoldKey.currentState;
+              scaffold?.showSnackBar(SnackBar(
+                content: Text(locals.sponsorSkipped),
+                duration: const Duration(seconds: 1),
+              ));
+            }
           }
-        }
 
-        if (listener != null) {
-          listener!(event);
+          previousSponsorCheck = currentPosition;
+          MiniPlayerController.to()?.handleVideoEvent(event);
+        } else if (currentPosition + 2 < previousSponsorCheck) {
+          // if we're more than 2 seconds behind, means we probably seek backward manually far away
+          // so we reset the position
+          previousSponsorCheck = currentPosition;
         }
-
-        previousSponsorCheck = currentPosition;
-
-        if (listener != null) {
-          listener!(event);
-        }
-      } else if (currentPosition + 2 < previousSponsorCheck) {
-        // if we're more than 2 seconds behind, means we probably seek backward manually far away
-        // so we reset the position
-        previousSponsorCheck = currentPosition;
-      }
-    } else if (event.betterPlayerEventType == BetterPlayerEventType.finished) {
-      if (listener != null) {
-        listener!(event);
-      }
+        break;
+      case BetterPlayerEventType.finished:
+        saveProgress(video.lengthSeconds);
+        MiniPlayerController.to()?.handleVideoEvent(event);
+        break;
+      case BetterPlayerEventType.pipStart:
+      case BetterPlayerEventType.pipStop:
+        MiniPlayerController.to()?.handleVideoEvent(event);
+        break;
+      default:
+        break;
     }
   }
 
@@ -135,9 +136,22 @@ class PlayerController extends GetxController {
   }
 
   switchVideo(Video video) {
-    disposeControllers();
-    this.video = video;
-    playVideo();
+    if (this.video.videoId != video.videoId) {
+      disposeControllers();
+      this.video = video;
+      playVideo();
+    }
+  }
+
+  togglePlaying() {
+    if (videoController != null) {
+      (videoController?.isPlaying() ?? false) ? videoController?.pause() : videoController?.play();
+      update();
+    }
+  }
+
+  toggleControls(bool visible) {
+    videoController?.setControlsEnabled(visible);
   }
 
   playVideo() {

@@ -2,26 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:invidious/controllers/miniPayerController.dart';
 import 'package:invidious/globals.dart';
-import 'package:invidious/main.dart';
-import 'package:invidious/models/video.dart';
-import 'package:invidious/myRouteObserver.dart';
-import 'package:invidious/views/video.dart';
 import 'package:invidious/views/video/player.dart';
 import 'package:invidious/views/videoPlayer/fullScreenView.dart';
 import 'package:invidious/views/videoPlayer/miniPlayerView.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MiniPlayer extends StatelessWidget {
-  List<Video>? videos;
   GlobalKey playerKey = GlobalKey();
 
-  MiniPlayer({Key? key, this.videos}) : super(key: key);
+  MiniPlayer({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     var themeData = Theme.of(context);
     ColorScheme colors = themeData.colorScheme;
+    AppLocalizations locals = AppLocalizations.of(context)!;
     return GetBuilder<MiniPlayerController>(
-      init: MiniPlayerController(videos: videos ?? []),
+      init: MiniPlayerController(),
       builder: (_) {
         bool showPlayer = _.videos.length > _.currentIndex;
 
@@ -30,9 +27,12 @@ class MiniPlayer extends StatelessWidget {
                 key: const ValueKey('player'),
                 onVerticalDragEnd: _.videoDraggedDownEnd,
                 onVerticalDragUpdate: _.videoDraggedDown,
-                child: VideoPlayer(
-                  video: _.videos[_.currentIndex],
-                  miniPlayer: false,
+                child: Padding(
+                  padding: _.isMini || _.isPip ? EdgeInsets.zero : const EdgeInsets.only(left: 8.0, right: 8, bottom: 8),
+                  child: VideoPlayer(
+                    video: _.videos[_.currentIndex],
+                    miniPlayer: false,
+                  ),
                 ),
               )
             : const SizedBox.shrink();
@@ -44,43 +44,44 @@ class MiniPlayer extends StatelessWidget {
         if (showPlayer) {
           miniPlayerWidgets.addAll(MiniPlayerView.build(context, _));
           bigPlayerWidgets.addAll(VideoPlayerFullScreenView.build(context, _));
-          print('mini player widgets ${miniPlayerWidgets.length}, bigplayer widgets : ${bigPlayerWidgets.length}');
         }
 
         return AnimatedPositioned(
           left: 0,
           top: _.top,
-          bottom: _.bottom,
+          bottom: _.getBottom,
           right: 0,
-          duration: _.isDragging ? Duration.zero : animationDuration ~/ 4,
+          duration: _.isDragging ? Duration.zero : animationDuration ~/ 2,
           child: Material(
-            child: SafeArea(
-              bottom: false,
-              top: !_.isMini,
-              child: showPlayer
-                  ? Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        _.isMini
-                            ? const SizedBox.shrink()
-                            : AppBar(
-                                title: Text('test'),
+            elevation: 10,
+            child: showPlayer
+                ? Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      _.isMini || _.isPip
+                          ? const SizedBox.shrink()
+                          : AppBar(
+                              title: Text(locals.videoPlayer),
+                              elevation: 1,
+                              leading: IconButton(
+                                icon: const Icon(Icons.arrow_downward),
+                                onPressed: _.showMiniPlayer,
                               ),
-                        AnimatedContainer(
-                          width: double.infinity,
-                          color: _.isMini ? colors.secondaryContainer : colors.background,
-                          height: _.isMini ? targetHeight : 200,
-                          duration: animationDuration,
-                          child: Row(
-                            mainAxisAlignment: _.isMini ? MainAxisAlignment.start : MainAxisAlignment.center,
-                            children: [videoPlayer ?? const SizedBox.shrink(), ...miniPlayerWidgets],
-                          ),
+                            ),
+                      AnimatedContainer(
+                        width: double.infinity,
+                        color: _.isMini ? colors.secondaryContainer : colors.background,
+                        constraints: BoxConstraints(maxHeight: _.isMini ? targetHeight : 500),
+                        duration: animationDuration ~/ 2,
+                        child: Row(
+                          mainAxisAlignment: _.isMini ? MainAxisAlignment.start : MainAxisAlignment.center,
+                          children: [Expanded(flex: 1, child: videoPlayer ?? const SizedBox.shrink()), ...miniPlayerWidgets],
                         ),
-                        ...bigPlayerWidgets,
-                      ],
-                    )
-                  : const SizedBox.shrink(),
-            ),
+                      ),
+                      ...bigPlayerWidgets,
+                    ],
+                  )
+                : const SizedBox.shrink(),
           ),
         );
       },

@@ -146,7 +146,6 @@ class PlaylistView extends StatelessWidget {
                                             ? VideoPlayer(
                                                 miniPlayer: false,
                                                 video: _.currentlyPlaying!,
-                                                listener: _.videoListener,
                                               )
                                             : const SizedBox.shrink(),
                                       )
