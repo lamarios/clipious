@@ -3,11 +3,11 @@ import 'package:invidious/globals.dart';
 import 'package:invidious/models/imageObject.dart';
 import 'package:invidious/views/components/videoThumbnail.dart';
 
-import '../../models/video.dart';
+import '../../models/baseVideo.dart';
 
 class CompactVideo extends StatelessWidget {
   Function()? onTap;
-  final Video video;
+  final BaseVideo video;
   bool? highlighted;
   List<Widget>? trailing;
 
@@ -19,17 +19,14 @@ class CompactVideo extends StatelessWidget {
     return InkWell(
         onTap: onTap,
         child: AnimatedContainer(
-          decoration: BoxDecoration(
-            color: (highlighted ?? false) ? colors.secondaryContainer : colors.background,
-            borderRadius: BorderRadius.circular(10)
-          ),
+          decoration: BoxDecoration(color: (highlighted ?? false) ? colors.secondaryContainer : colors.background, borderRadius: BorderRadius.circular(10)),
           height: 70,
           duration: animationDuration,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(
               children: [
-                VideoThumbnailView(videoId: video.videoId, thumbnailUrl: ImageObject.getWorstThumbnail(video.videoThumbnails)?.url ?? ''),
+                VideoThumbnailView(cacheKey: 'v-worst/${video.videoId}', videoId: video.videoId, thumbnailUrl: ImageObject.getWorstThumbnail(video.videoThumbnails)?.url ?? ''),
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -42,7 +39,7 @@ class CompactVideo extends StatelessWidget {
                           style: TextStyle(color: colors.primary, overflow: TextOverflow.ellipsis),
                         ),
                         Text(
-                          video.author,
+                          video.author ?? '',
                           style: TextStyle(color: colors.secondary, fontSize: 10),
                         )
                       ],

@@ -154,19 +154,6 @@ Country getCountryFromCode(String code) {
   return countryCodes.firstWhere((element) => element.code == code, orElse: () => Country('US', 'United States of America'));
 }
 
-void showMiniPlayer(BuildContext context, List<Video> videos) {
-  MiniPlayerController? controller = MiniPlayerController.to();
-  if (controller != null) {
-    controller.show();
-    controller.setVideos(videos);
-  }
-}
-
-void hideMiniPlayer(BuildContext context) {
-  MiniPlayerController.to()?.hide();
-  FBroadcast.instance().broadcast(BROADCAST_STOP_MINI_PLAYER);
-}
-
 T? safeGet<T>({String? tag}) {
   try {
     return Get.find<T>(tag: tag);

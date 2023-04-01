@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:invidious/myRouteObserver.dart';
+import 'package:invidious/views/components/miniPlayerAware.dart';
 import 'package:select_dialog/select_dialog.dart';
 import 'package:settings_ui/settings_ui.dart';
 
@@ -67,81 +68,83 @@ class Settings extends StatelessWidget {
 
     return GetBuilder<SettingsController>(
       init: SettingsController(),
-      builder: (_) => Scaffold(
-          extendBody: true,
-          bottomNavigationBar: const SizedBox.shrink(),
-          appBar: AppBar(
-            scrolledUnderElevation: 0,
-            title: Text(locals.settings),
-          ),
-          backgroundColor: colorScheme.background,
-          body: SafeArea(
-              child: SettingsList(
-            lightTheme: theme,
-            darkTheme: theme,
-            sections: [
-              SettingsSection(
-                title: Text(locals.browsing),
-                tiles: [
-                  SettingsTile(
-                    title: Text(locals.country),
-                    value: Text(_.country.name),
-                    onPressed: (context) => searchCountry(context, _),
-                  ),
-                  SettingsTile(
-                    title: Text(locals.whenAppStartsShow),
-                    value: Text(getCategories(context)[_.onOpen]),
-                    onPressed: (context) => selectOnOpen(context, _),
-                  )
-                ],
-              ),
-              SettingsSection(title: Text(locals.servers), tiles: [
-                SettingsTile.navigation(
-                  title: Text(locals.manageServers),
-                  description: Text(locals.currentServer(db.getCurrentlySelectedServer().url)),
-                  onPressed: manageServers,
+      builder: (_) => MiniPlayerAware(
+        child: Scaffold(
+            extendBody: true,
+            bottomNavigationBar: const SizedBox.shrink(),
+            appBar: AppBar(
+              scrolledUnderElevation: 0,
+              title: Text(locals.settings),
+            ),
+            backgroundColor: colorScheme.background,
+            body: SafeArea(
+                child: SettingsList(
+              lightTheme: theme,
+              darkTheme: theme,
+              sections: [
+                SettingsSection(
+                  title: Text(locals.browsing),
+                  tiles: [
+                    SettingsTile(
+                      title: Text(locals.country),
+                      value: Text(_.country.name),
+                      onPressed: (context) => searchCountry(context, _),
+                    ),
+                    SettingsTile(
+                      title: Text(locals.whenAppStartsShow),
+                      value: Text(getCategories(context)[_.onOpen]),
+                      onPressed: (context) => selectOnOpen(context, _),
+                    )
+                  ],
                 ),
-              ]),
-              SettingsSection(title: Text(locals.videoPlayer), tiles: [
-                SettingsTile.switchTile(
-                  initialValue: _.useDash,
-                  onToggle: _.toggleDash,
-                  title: Text(locals.useDash),
-                  description: Text(locals.useDashDescription),
-                )
-              ]),
-              SettingsSection(title: const Text('SponsorBlock'), tiles: [
-                SettingsTile.switchTile(
-                  initialValue: _.sponsorBlock,
-                  onToggle: _.toggleSponsorBlock,
-                  title: Text(locals.useSponsorBlock),
-                  description: Text(locals.sponsorBlockDescription),
-                )
-              ]),
-              SettingsSection(
-                title: Text(locals.appearance),
-                tiles: [
+                SettingsSection(title: Text(locals.servers), tiles: [
+                  SettingsTile.navigation(
+                    title: Text(locals.manageServers),
+                    description: Text(locals.currentServer(db.getCurrentlySelectedServer().url)),
+                    onPressed: manageServers,
+                  ),
+                ]),
+                SettingsSection(title: Text(locals.videoPlayer), tiles: [
                   SettingsTile.switchTile(
-                    initialValue: _.useDynamicTheme,
-                    onToggle: _.toggleDynamicTheme,
-                    title: Text(locals.useDynamicTheme),
-                    description: Text(locals.useDynamicThemeDescription),
-                  ),
-                ],
-              ),
-              SettingsSection(title: (Text(locals.about)), tiles: [
-                SettingsTile(title: const Center(child: SizedBox(height: 150, width: 150, child: AppIconImage()))),
-                SettingsTile(
-                  title: Text('${locals.name}: ${_.packageInfo.appName}'),
-                  description: Text('${locals.package}: ${_.packageInfo.packageName}'),
+                    initialValue: _.useDash,
+                    onToggle: _.toggleDash,
+                    title: Text(locals.useDash),
+                    description: Text(locals.useDashDescription),
+                  )
+                ]),
+                SettingsSection(title: const Text('SponsorBlock'), tiles: [
+                  SettingsTile.switchTile(
+                    initialValue: _.sponsorBlock,
+                    onToggle: _.toggleSponsorBlock,
+                    title: Text(locals.useSponsorBlock),
+                    description: Text(locals.sponsorBlockDescription),
+                  )
+                ]),
+                SettingsSection(
+                  title: Text(locals.appearance),
+                  tiles: [
+                    SettingsTile.switchTile(
+                      initialValue: _.useDynamicTheme,
+                      onToggle: _.toggleDynamicTheme,
+                      title: Text(locals.useDynamicTheme),
+                      description: Text(locals.useDynamicThemeDescription),
+                    ),
+                  ],
                 ),
-                SettingsTile(
-                  title: Text('${locals.version}: ${_.packageInfo.version}'),
-                  description: Text('${locals.build}: ${_.packageInfo.buildNumber}'),
-                )
-              ])
-            ],
-          ))),
+                SettingsSection(title: (Text(locals.about)), tiles: [
+                  SettingsTile(title: const Center(child: SizedBox(height: 150, width: 150, child: AppIconImage()))),
+                  SettingsTile(
+                    title: Text('${locals.name}: ${_.packageInfo.appName}'),
+                    description: Text('${locals.package}: ${_.packageInfo.packageName}'),
+                  ),
+                  SettingsTile(
+                    title: Text('${locals.version}: ${_.packageInfo.version}'),
+                    description: Text('${locals.build}: ${_.packageInfo.buildNumber}'),
+                  )
+                ])
+              ],
+            ))),
+      ),
     );
   }
 }

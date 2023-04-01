@@ -1,3 +1,4 @@
+import 'package:invidious/models/baseVideo.dart';
 import 'package:invidious/models/db/server.dart';
 import 'package:invidious/models/interfaces/sharelink.dart';
 
@@ -12,10 +13,7 @@ import 'package:json_annotation/json_annotation.dart';
 part 'video.g.dart';
 
 @JsonSerializable()
-class Video implements ShareLinks {
-  String title;
-  String videoId;
-  List<ImageObject> videoThumbnails;
+class Video extends BaseVideo implements ShareLinks {
   String dashUrl;
 
   String description;
@@ -32,13 +30,9 @@ class Video implements ShareLinks {
   List<String> allowedRegions;
   String genre;
   String genreUrl;
-  String author;
-  String authorUrl;
-  String authorId;
 
   List<ImageObject> authorThumbnails;
   String subCountText;
-  int lengthSeconds;
   bool allowRatings;
   double rating;
   bool isListed;
@@ -52,9 +46,9 @@ class Video implements ShareLinks {
   List<RecommendedVideo> recommendedVideos;
 
   Video(
-      this.title,
-      this.videoId,
-      this.videoThumbnails,
+      String title,
+      String videoId,
+      List<ImageObject> videoThumbnails,
       this.description,
       this.descriptionHtml,
       this.published,
@@ -70,11 +64,11 @@ class Video implements ShareLinks {
       this.genre,
       this.genreUrl,
       this.dashUrl,
-      this.author,
-      this.authorUrl,
+      String? author,
+      String? authorUrl,
       this.authorThumbnails,
       this.subCountText,
-      this.lengthSeconds,
+      int lengthSeconds,
       this.allowRatings,
       this.rating,
       this.isListed,
@@ -84,9 +78,10 @@ class Video implements ShareLinks {
       this.hlsUrl,
       this.adaptiveFormats,
       this.formatStreams,
-      this.authorId,
+      String? authorId,
       this.captions,
-      this.recommendedVideos);
+      this.recommendedVideos)
+      : super(title, videoId, lengthSeconds, author, authorId, authorUrl, videoThumbnails);
 
   factory Video.fromJson(Map<String, dynamic> json) => _$VideoFromJson(json);
 

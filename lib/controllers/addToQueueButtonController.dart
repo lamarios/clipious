@@ -1,10 +1,11 @@
 import 'package:get/get.dart';
 import 'package:invidious/controllers/miniPayerController.dart';
 
+import '../models/baseVideo.dart';
 import '../models/video.dart';
 
 class AddToQueueButtonController extends GetxController {
-  List<Video> videos;
+  List<BaseVideo> videos;
 
   AddToQueueButtonController({required this.videos});
 

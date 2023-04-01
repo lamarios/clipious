@@ -20,21 +20,17 @@ class MiniPlayer extends StatelessWidget {
     return GetBuilder<MiniPlayerController>(
       init: MiniPlayerController(),
       builder: (_) {
-        bool showPlayer = _.videos.length > _.currentIndex;
+        bool showPlayer = _.currentlyPlaying != null;
 
         Widget videoPlayer = showPlayer
-            ? GestureDetector(
+            ? Padding(
+              padding: _.isMini || _.isPip ? EdgeInsets.zero : const EdgeInsets.only(top: 8, left: 8.0, right: 8),
+              child: VideoPlayer(
                 key: const ValueKey('player'),
-                onVerticalDragEnd: _.videoDraggedDownEnd,
-                onVerticalDragUpdate: _.videoDraggedDown,
-                child: Padding(
-                  padding: _.isMini || _.isPip ? EdgeInsets.zero : const EdgeInsets.only(left: 8.0, right: 8, bottom: 8),
-                  child: VideoPlayer(
-                    video: _.videos[_.currentIndex],
-                    miniPlayer: false,
-                  ),
-                ),
-              )
+                video: _.currentlyPlaying!,
+                miniPlayer: false,
+              ),
+            )
             : const SizedBox.shrink();
 
         List<Widget> miniPlayerWidgets = [];
@@ -51,37 +47,45 @@ class MiniPlayer extends StatelessWidget {
           top: _.top,
           bottom: _.getBottom,
           right: 0,
-          duration: _.isDragging ? Duration.zero : animationDuration ~/ 2,
-          child: Material(
-            elevation: 5,
-            child: showPlayer
-                ? Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      _.isMini || _.isPip
-                          ? const SizedBox.shrink()
-                          : AppBar(
-                              title: Text(locals.videoPlayer),
-                              elevation: 1,
-                              leading: IconButton(
-                                icon: const Icon(Icons.arrow_downward),
-                                onPressed: _.showMiniPlayer,
+          duration: _.isDragging ? Duration.zero : animationDuration,
+          child: AnimatedOpacity(
+            opacity: _.opacity,
+            duration: animationDuration,
+            child: Material(
+              elevation: 5,
+              child: showPlayer
+                  ? Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        _.isMini || _.isPip
+                            ? const SizedBox.shrink()
+                            : AppBar(
+                                title: Text(locals.videoPlayer),
+                                elevation: 1,
+                                leading: IconButton(
+                                  icon: const Icon(Icons.expand_more),
+                                  onPressed: _.showMiniPlayer,
+                                ),
                               ),
+                        AnimatedContainer(
+                          width: double.infinity,
+                          color: _.isMini ? colors.secondaryContainer : colors.background,
+                          constraints: BoxConstraints(maxHeight: _.isMini ? targetHeight : 500),
+                          duration: animationDuration,
+                          child: GestureDetector(
+                            onVerticalDragEnd: _.videoDraggedDownEnd,
+                            onVerticalDragUpdate: _.videoDraggedDown,
+                            child: Row(
+                              mainAxisAlignment: _.isMini ? MainAxisAlignment.start : MainAxisAlignment.center,
+                              children: [Expanded(flex: 1, child: videoPlayer ?? const SizedBox.shrink()), ...miniPlayerWidgets],
                             ),
-                      AnimatedContainer(
-                        width: double.infinity,
-                        color: _.isMini ? colors.secondaryContainer : colors.background,
-                        constraints: BoxConstraints(maxHeight: _.isMini ? targetHeight : 500),
-                        duration: animationDuration ~/ 2,
-                        child: Row(
-                          mainAxisAlignment: _.isMini ? MainAxisAlignment.start : MainAxisAlignment.center,
-                          children: [Expanded(flex: 1, child: videoPlayer ?? const SizedBox.shrink()), ...miniPlayerWidgets],
+                          ),
                         ),
-                      ),
-                      ...bigPlayerWidgets,
-                    ],
-                  )
-                : const SizedBox.shrink(),
+                        ...bigPlayerWidgets,
+                      ],
+                    )
+                  : const SizedBox.shrink(),
+            ),
           ),
         );
       },

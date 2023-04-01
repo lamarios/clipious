@@ -8,7 +8,8 @@ class MiniPlayerView {
   @override
   static List<Widget> build(BuildContext context, MiniPlayerController controller) {
     ColorScheme colors = Theme.of(context).colorScheme;
-    return controller.videos.isNotEmpty && controller.isMini
+    Video? vid = controller.currentlyPlaying;
+    return vid != null && controller.videos.isNotEmpty && controller.isMini
         ? [
             Expanded(
                 flex: 2,
@@ -17,7 +18,6 @@ class MiniPlayerView {
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Builder(builder: (context) {
-                      Video vid = controller.videos[controller.currentIndex];
 
                       return Column(
                         children: [

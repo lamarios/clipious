@@ -7,6 +7,7 @@ import '../../controllers/miniPayerController.dart';
 
 const double buttonSize = 25;
 const ButtonStyle buttonStyle = ButtonStyle(visualDensity: VisualDensity.compact);
+
 class MiniPlayerControls extends StatelessWidget {
   final MiniPlayerController controller;
 
@@ -17,31 +18,36 @@ class MiniPlayerControls extends StatelessWidget {
     return GetBuilder<MiniPlayerControlsController>(
       global: false,
       init: MiniPlayerControlsController(),
-      builder: (_) => Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+      builder: (_) => Stack(
+        alignment: Alignment.center,
         children: [
-          VideoLikeButton(videoId: controller.currentVideo.videoId,size: 15, style: buttonStyle),
-          IconButton(
-              iconSize: buttonSize,
-              style: buttonStyle,
-              onPressed: controller.videos.length > 1 ? _.playPrevious : null,
-              icon: const Icon(
-                Icons.skip_previous,
-              )),
-          IconButton(
-              iconSize: buttonSize,
-              onPressed: _.togglePlay,
-              style: buttonStyle,
-              icon: Icon(
-                _.isPlaying() ? Icons.pause : Icons.play_arrow,
-              )),
-          IconButton(
-              iconSize: buttonSize,
-              onPressed: controller.videos.length > 1 ? _.playNext : null,
-              style: buttonStyle,
-              icon: const Icon(
-                Icons.skip_next,
-              ))
+          Positioned(left: 0, child: VideoLikeButton(videoId: controller.currentVideo.videoId, size: 15, style: buttonStyle)),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              IconButton(
+                  iconSize: buttonSize,
+                  style: buttonStyle,
+                  onPressed: controller.videos.length > 1 ? _.playPrevious : null,
+                  icon: const Icon(
+                    Icons.skip_previous,
+                  )),
+              IconButton(
+                  iconSize: buttonSize,
+                  onPressed: _.togglePlay,
+                  style: buttonStyle,
+                  icon: Icon(
+                    _.isPlaying() ? Icons.pause : Icons.play_arrow,
+                  )),
+              IconButton(
+                  iconSize: buttonSize,
+                  onPressed: controller.videos.length > 1 ? _.playNext : null,
+                  style: buttonStyle,
+                  icon: const Icon(
+                    Icons.skip_next,
+                  ))
+            ],
+          )
         ],
       ),
     );

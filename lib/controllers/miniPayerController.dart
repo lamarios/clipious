@@ -1,23 +1,26 @@
 import 'package:better_player/better_player.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:invidious/controllers/miniPlayerAwareController.dart';
 import 'package:invidious/controllers/playerController.dart';
+import 'package:invidious/globals.dart';
 import 'package:invidious/utils.dart';
 import 'package:logging/logging.dart';
 
 import 'package:back_button_interceptor/back_button_interceptor.dart';
+import '../models/baseVideo.dart';
 import '../models/video.dart';
 import '../views/video.dart';
 
 const double targetHeight = 75;
-const double navigationBarHeight = 75;
+const double miniPlayerThreshold = 300;
+const double bigPlayerThreshold = 700;
 
 class MiniPlayerController extends GetxController {
   static MiniPlayerController? to() => safeGet();
   var log = Logger('MiniPlayerController');
-  double bottom = 0;
   int currentIndex = 0;
-  List<Video> videos = List.empty(growable: true);
+  List<BaseVideo> videos = List.empty(growable: true);
   double height = targetHeight;
   bool isMini = true;
   double? top;
@@ -26,6 +29,8 @@ class MiniPlayerController extends GetxController {
   bool isPip = false;
   bool isHidden = true;
   double progress = 0;
+  Video? currentlyPlaying;
+  double opacity = 0;
 
   Offset offset = Offset.zero;
 
@@ -54,7 +59,7 @@ class MiniPlayerController extends GetxController {
     }
   }
 
-  setVideos(List<Video> videos) {
+  setVideos(List<BaseVideo> videos) {
     this.videos = videos;
     update();
   }
@@ -64,44 +69,30 @@ class MiniPlayerController extends GetxController {
     update();
   }
 
-  show() {
-    bottom = navigationBarHeight;
-    update();
-  }
-
   hide() {
     isMini = true;
     top = null;
     height = targetHeight;
     isHidden = true;
     videos = [];
+    currentlyPlaying = null;
+    opacity = 0;
+    MiniPlayerAwareController.to()?.setPadding(false);
     update();
   }
 
-  void move(bool aboveNavigation) {
-    // if we're not hidden only we do something
-    if (bottom >= 0) {
-      log.info('Moving mini player above ? ${aboveNavigation} : ${navigationBarHeight} ');
-      bottom = aboveNavigation ? navigationBarHeight : 0;
-      update();
-    }
-  }
+  double get getBottom => isHidden ? -targetHeight : 0;
 
-  double get getBottom => isHidden
-      ? -targetHeight
-      : isMini
-          ? bottom
-          : 0;
-
-  Video showVideo() {
+  BaseVideo showVideo() {
     var video = videos[currentIndex];
     hide();
     return video;
   }
 
-  queueVideos(List<Video> videos) {
+  queueVideos(List<BaseVideo> videos) {
     if (videos.isNotEmpty) {
-      this.videos.addAll(videos);
+      //removing videos that are already in the queue
+      this.videos.addAll(videos.where((v) => this.videos.indexWhere((v2) => v2.videoId == v.videoId) == -1));
     }
     log.info('Videos in queue ${videos.length}');
     update();
@@ -110,17 +101,23 @@ class MiniPlayerController extends GetxController {
   showBigPlayer() {
     isMini = false;
     top = 0;
+    opacity = 1;
     isHidden = false;
     PlayerController.to()?.toggleControls(true);
+    MiniPlayerAwareController.to()?.setPadding(false);
     update();
   }
 
   showMiniPlayer() {
-    isMini = true;
-    top = null;
-    isHidden = false;
-    PlayerController.to()?.toggleControls(false);
-    update();
+    if (currentlyPlaying != null) {
+      isMini = true;
+      top = null;
+      isHidden = false;
+      opacity = 1;
+      PlayerController.to()?.toggleControls(false);
+      MiniPlayerAwareController.to()?.setPadding(true);
+      update();
+    }
   }
 
   playNext() {
@@ -129,7 +126,7 @@ class MiniPlayerController extends GetxController {
       if (currentIndex >= videos.length) {
         currentIndex = 0;
       }
-      PlayerController.to()?.switchVideo(videos[currentIndex]);
+      switchToVideo(videos[currentIndex]);
       PlayerController.to()?.toggleControls(!isMini);
       update();
     }
@@ -141,45 +138,51 @@ class MiniPlayerController extends GetxController {
       if (currentIndex < 0) {
         currentIndex = videos.length - 1;
       }
-      PlayerController.to()?.switchVideo(videos[currentIndex]);
+      switchToVideo(videos[currentIndex]);
       PlayerController.to()?.toggleControls(!isMini);
       update();
     }
   }
 
-  playVideo(Video video) {
-    Get.back();
-    videos = [video];
-    currentIndex = 0;
-    selectedFullScreenIndex = 0;
-    showBigPlayer();
-    PlayerController.to()?.switchVideo(video);
+  playVideo(List<BaseVideo> videos, {bool? goBack}) {
+    if (goBack ?? false) Get.back();
+
+    if (videos.isNotEmpty) {
+      this.videos = videos;
+      currentIndex = 0;
+      selectedFullScreenIndex = 0;
+      if (videos.length > 1) {
+        selectedFullScreenIndex = 3;
+      }
+      opacity = 0;
+      top = 500;
+      update();
+
+      showBigPlayer();
+      switchToVideo(videos[0]);
+    }
   }
 
-  switchToVideo(Video video) {
+  switchToVideo(BaseVideo video) async {
     int index = videos.indexWhere((element) => element.videoId == video.videoId);
     if (index >= 0 && index < videos.length) {
       currentIndex = index;
     } else {
       currentIndex = 0;
     }
-    PlayerController.to()?.switchVideo(videos[currentIndex]);
+
+    Video v = await service.getVideo(video.videoId);
+    currentlyPlaying = v;
+
+    progress = 0;
+    PlayerController.to()?.switchVideo(v);
     PlayerController.to()?.toggleControls(!isMini);
     update();
   }
 
-  void videoDraggedDownEnd(DragEndDetails details) {
-    isMini = (top ?? 0) > miniPlayerThreshold;
-    if (isMini) {
-      showMiniPlayer();
-    } else {
-      showBigPlayer();
-    }
-  }
+  BaseVideo get currentVideo => videos[currentIndex];
 
-  Video get currentVideo => videos[currentIndex];
-
-  removeVideoFromQueue(Video video) {
+  removeVideoFromQueue(BaseVideo video) {
     if (videos.length == 1) {
       hide();
     } else {
@@ -195,10 +198,20 @@ class MiniPlayerController extends GetxController {
   }
 
   void videoDraggedDown(DragUpdateDetails details) {
+    // log.info('delta: ${details.delta.dy}, local: ${details.localPosition.dy}, global: ${details.globalPosition.dy}');
     isDragging = true;
     top = details.globalPosition.dy;
-    isMini = (top ?? miniPlayerThreshold) > miniPlayerThreshold;
+    isMini = details.delta.dy > 0;
+    // we're going down, puttin threshold high easier to switch to mini player
     update();
+  }
+
+  void videoDraggedDownEnd(DragEndDetails details) {
+    if (isMini) {
+      showMiniPlayer();
+    } else {
+      showBigPlayer();
+    }
   }
 
   bool isVideoInQueue(Video video) {

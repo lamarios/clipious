@@ -8,6 +8,7 @@ import 'package:invidious/models/imageObject.dart';
 import 'package:invidious/views/channel/info.dart';
 import 'package:invidious/views/channel/playlists.dart';
 import 'package:invidious/views/channel/videos.dart';
+import 'package:invidious/views/components/miniPlayerAware.dart';
 import 'package:invidious/views/components/videoThumbnail.dart';
 
 import '../utils.dart';
@@ -77,64 +78,66 @@ class ChannelViewState extends State<ChannelView> with TickerProviderStateMixin 
     return GetBuilder<ChannelController>(
       global: false,
       init: ChannelController(widget.channelId, colorScheme.background, this),
-      builder: (_) => Scaffold(
-        extendBodyBehindAppBar: false,
-        appBar: buildAppBar(context, _),
-        backgroundColor: colorScheme.background,
-        bottomNavigationBar: _.loading
-            ? null
-            : NavigationBar(
-                labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
-                elevation: 0,
-                onDestinationSelected: _.selectIndex,
-                selectedIndex: _.selectedIndex,
-                destinations: <Widget>[
-                  NavigationDestination(icon: const Icon(Icons.info), label: locals.info),
-                  NavigationDestination(icon: const Icon(Icons.play_arrow), label: locals.videos),
-                  NavigationDestination(icon: const Icon(Icons.stream), label: locals.streams),
-                  NavigationDestination(icon: const Icon(Icons.playlist_play), label: locals.playlists)
-                ],
-              ),
-        body: SafeArea(
-            top: false,
-            bottom: false,
-            child: NotificationListener<ScrollNotification>(
-              onNotification: _.onBodyScroll,
-              child: AnimatedSwitcher(
-                duration: animationDuration,
-                child: _.loading
-                    ? Container(alignment: Alignment.center, child: const CircularProgressIndicator())
-                    : Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Row(
-                              children: [
-                                SubscribeButton(channelId: _.channel!.authorId, subCount: compactCurrency.format(_.channel!.subCount)),
-                              ],
+      builder: (_) => MiniPlayerAware(
+        child: Scaffold(
+          extendBodyBehindAppBar: false,
+          appBar: buildAppBar(context, _),
+          backgroundColor: colorScheme.background,
+          bottomNavigationBar: _.loading
+              ? null
+              : NavigationBar(
+                  labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
+                  elevation: 0,
+                  onDestinationSelected: _.selectIndex,
+                  selectedIndex: _.selectedIndex,
+                  destinations: <Widget>[
+                    NavigationDestination(icon: const Icon(Icons.info), label: locals.info),
+                    NavigationDestination(icon: const Icon(Icons.play_arrow), label: locals.videos),
+                    NavigationDestination(icon: const Icon(Icons.stream), label: locals.streams),
+                    NavigationDestination(icon: const Icon(Icons.playlist_play), label: locals.playlists)
+                  ],
+                ),
+          body: SafeArea(
+              top: false,
+              bottom: false,
+              child: NotificationListener<ScrollNotification>(
+                onNotification: _.onBodyScroll,
+                child: AnimatedSwitcher(
+                  duration: animationDuration,
+                  child: _.loading
+                      ? Container(alignment: Alignment.center, child: const CircularProgressIndicator())
+                      : Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Row(
+                                children: [
+                                  SubscribeButton(channelId: _.channel!.authorId, subCount: compactCurrency.format(_.channel!.subCount)),
+                                ],
+                              ),
                             ),
-                          ),
-                          Expanded(
-                            child: <Widget>[
-                              ChannelInfo(key: const ValueKey('info'), channel: _.channel!),
-                              ChannelVideosView(
-                                key: const ValueKey('videos'),
-                                channel: _.channel!,
-                                getVideos: service.getChannelVideos,
-                              ),
-                              ChannelVideosView(
-                                key: const ValueKey('streams'),
-                                channel: _.channel!,
-                                getVideos: service.getChannelStreams,
-                              ),
-                              ChannelPlayListsView(key: const ValueKey('playlists'), channelId: _.channel!.authorId, canDeleteVideos: false)
-                            ][_.selectedIndex],
-                          )
-                        ],
-                      ),
-              ),
-            )),
+                            Expanded(
+                              child: <Widget>[
+                                ChannelInfo(key: const ValueKey('info'), channel: _.channel!),
+                                ChannelVideosView(
+                                  key: const ValueKey('videos'),
+                                  channel: _.channel!,
+                                  getVideos: service.getChannelVideos,
+                                ),
+                                ChannelVideosView(
+                                  key: const ValueKey('streams'),
+                                  channel: _.channel!,
+                                  getVideos: service.getChannelStreams,
+                                ),
+                                ChannelPlayListsView(key: const ValueKey('playlists'), channelId: _.channel!.authorId, canDeleteVideos: false)
+                              ][_.selectedIndex],
+                            )
+                          ],
+                        ),
+                ),
+              )),
+        ),
       ),
     );
   }

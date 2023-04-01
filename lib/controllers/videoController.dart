@@ -14,7 +14,6 @@ class VideoController extends GetxController {
   final log = Logger('Video');
   Video? video;
   bool loadingVideo = true;
-  double miniPlayerThreshold;
 
   int selectedIndex = 0;
   String videoId;
@@ -23,10 +22,8 @@ class VideoController extends GetxController {
   double opacity = 1;
 
   String error = '';
-  Function(List<Video> videos) showMiniPlayer;
 
-  VideoController({required this.miniPlayerThreshold, required this.videoId, required this.showMiniPlayer});
-
+  VideoController({required this.videoId});
 
   @override
   Future<void> onReady() async {
@@ -54,10 +51,9 @@ class VideoController extends GetxController {
     VideoInnerViewController.to(tag: VideoInnerViewController.getControllerTags(video?.videoId ?? ''))?.scrollUp();
   }
 
-
   void playVideo() {
     if (video != null) {
-      MiniPlayerController.to()?.playVideo(video!);
+      MiniPlayerController.to()?.playVideo([video!], goBack: true);
     }
   }
 }

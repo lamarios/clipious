@@ -10,42 +10,46 @@ import '../../models/video.dart';
 import '../video/commentsContainer.dart';
 import '../video/info.dart';
 import '../video/recommendedVideos.dart';
+import 'miniPlayerControls.dart';
 
 class VideoPlayerFullScreenView {
   static List<Widget> build(BuildContext context, MiniPlayerController controller) {
     AppLocalizations locals = AppLocalizations.of(context)!;
 
-    Video video = controller.videos[controller.currentIndex];
+    Video? video = controller.currentlyPlaying;
 
-    return [
-      Visibility(
-          visible: !controller.isMini,
-          child: Expanded(
-            child: SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: <Widget>[
-                  VideoInfo(
-                    video: video,
+    return video != null
+        ? [
+            Visibility(visible: !controller.isMini, child: MiniPlayerControls(controller: controller)),
+            Visibility(
+                visible: !controller.isMini,
+                child: Expanded(
+                  child: SingleChildScrollView(
+                    child: Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: <Widget>[
+                        VideoInfo(
+                          video: video,
+                        ),
+                        CommentsContainer(
+                          video: video,
+                        ),
+                        RecommendedVideos(video: video),
+                        VideoQueue(controller: controller),
+                      ][controller.selectedFullScreenIndex],
+                    ),
                   ),
-                  CommentsContainer(
-                    video: video,
-                  ),
-                  RecommendedVideos(video: video),
-                  VideoQueue(controller: controller),
-                ][controller.selectedFullScreenIndex],
-              ),
-            ),
-          )),
-      Visibility(
-        visible: !controller.isMini,
-        child: NavigationBar(elevation: 0, selectedIndex: controller.selectedFullScreenIndex, onDestinationSelected: controller.selectTab, destinations: [
-          NavigationDestination(icon: const Icon(Icons.info), label: locals.info),
-          NavigationDestination(icon: const Icon(Icons.chat_bubble), label: locals.comments),
-          NavigationDestination(icon: const Icon(Icons.schema), label: locals.recommended),
-          NavigationDestination(icon: const Icon(Icons.queue_music), label: locals.videoQueue)
-        ]),
-      )
-    ];
+                )),
+            Visibility(
+              visible: !controller.isMini,
+              child: NavigationBar(elevation: 0, selectedIndex: controller.selectedFullScreenIndex, onDestinationSelected: controller.selectTab, destinations: [
+                NavigationDestination(icon: const Icon(Icons.info), label: locals.info),
+                NavigationDestination(icon: const Icon(Icons.chat_bubble), label: locals.comments),
+                NavigationDestination(icon: const Icon(Icons.schema), label: locals.recommended),
+                NavigationDestination(icon: const Icon(Icons.queue_music), label: locals.videoQueue)
+              ]),
+            )
+          ]
+        : [];
   }
 }

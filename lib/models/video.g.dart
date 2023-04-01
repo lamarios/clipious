@@ -29,8 +29,8 @@ Video _$VideoFromJson(Map<String, dynamic> json) => Video(
       json['genre'] as String,
       json['genreUrl'] as String,
       json['dashUrl'] as String,
-      json['author'] as String,
-      json['authorUrl'] as String,
+      json['author'] as String?,
+      json['authorUrl'] as String?,
       (json['authorThumbnails'] as List<dynamic>)
           .map((e) => ImageObject.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -49,7 +49,7 @@ Video _$VideoFromJson(Map<String, dynamic> json) => Video(
       (json['formatStreams'] as List<dynamic>)
           .map((e) => FormatStream.fromJson(e as Map<String, dynamic>))
           .toList(),
-      json['authorId'] as String,
+      json['authorId'] as String?,
       (json['captions'] as List<dynamic>)
           .map((e) => Caption.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -61,6 +61,10 @@ Video _$VideoFromJson(Map<String, dynamic> json) => Video(
 Map<String, dynamic> _$VideoToJson(Video instance) => <String, dynamic>{
       'title': instance.title,
       'videoId': instance.videoId,
+      'lengthSeconds': instance.lengthSeconds,
+      'author': instance.author,
+      'authorId': instance.authorId,
+      'authorUrl': instance.authorUrl,
       'videoThumbnails': instance.videoThumbnails,
       'dashUrl': instance.dashUrl,
       'description': instance.description,
@@ -77,12 +81,8 @@ Map<String, dynamic> _$VideoToJson(Video instance) => <String, dynamic>{
       'allowedRegions': instance.allowedRegions,
       'genre': instance.genre,
       'genreUrl': instance.genreUrl,
-      'author': instance.author,
-      'authorUrl': instance.authorUrl,
-      'authorId': instance.authorId,
       'authorThumbnails': instance.authorThumbnails,
       'subCountText': instance.subCountText,
-      'lengthSeconds': instance.lengthSeconds,
       'allowRatings': instance.allowRatings,
       'rating': instance.rating,
       'isListed': instance.isListed,

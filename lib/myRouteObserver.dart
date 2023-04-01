@@ -18,28 +18,8 @@ const RouteSettings ROUTE_PLAYLIST = RouteSettings(name: 'playlist');
 class MyRouteObserver extends RouteObserver<PageRoute<dynamic>> {
   var log = Logger('MyRouteObserver');
 
-  miniPlayerPlacement(PageRoute<dynamic>? route) {
-    if (route != null) {
-      // whenever we change route, we should be stopping the player
-      switch (route.settings) {
-        case ROUTE_SETTINGS:
-        case ROUTE_PLAYLIST:
-        case ROUTE_SETTINGS_MANAGE_SERVERS:
-        case ROUTE_SETTINGS_MANAGE_ONE_SERVER:
-          log.info('Show mini player at the bottom');
-          MiniPlayerController.to()?.move(false);
-          break;
-        default:
-          log.info('we should show the mini player on top');
-          MiniPlayerController.to()?.move(true);
-          break;
-      }
-    }
-  }
-
-
   stopPlayingOnPop(PageRoute<dynamic>? newRoute, PageRoute<dynamic>? poppedRoute) {
-    if (newRoute != null && poppedRoute != null && (poppedRoute.settings == ROUTE_VIDEO || poppedRoute.settings == ROUTE_PLAYLIST)) {
+    if (newRoute != null) {
       switch (newRoute.settings) {
         case ROUTE_SETTINGS:
         case ROUTE_PLAYLIST:
@@ -49,12 +29,10 @@ class MyRouteObserver extends RouteObserver<PageRoute<dynamic>> {
         case ROUTE_PLAYLIST_LIST:
         case ROUTE_CHANNEL:
           log.info('We should stop playing video');
-          // FBroadcast.instance().broadcast(BROADCAST_STOP_PLAYING);
           MiniPlayerController.to()?.showMiniPlayer();
           break;
         default:
           log.info('keep playing video');
-          MiniPlayerController.to()?.move(false);
           break;
       }
     }
@@ -64,7 +42,6 @@ class MyRouteObserver extends RouteObserver<PageRoute<dynamic>> {
   void didPush(Route<dynamic> route, Route<dynamic>? previousRoute) {
     super.didPush(route, previousRoute);
     if (route is PageRoute) {
-      miniPlayerPlacement(route);
       if(previousRoute is PageRoute){
         stopPlayingOnPop(route, previousRoute);
       }
@@ -83,7 +60,6 @@ class MyRouteObserver extends RouteObserver<PageRoute<dynamic>> {
   void didPop(Route<dynamic> route, Route<dynamic>? previousRoute) {
     super.didPop(route, previousRoute);
     if (previousRoute is PageRoute && route is PageRoute) {
-      miniPlayerPlacement(previousRoute);
       stopPlayingOnPop(route, previousRoute);
     }
   }

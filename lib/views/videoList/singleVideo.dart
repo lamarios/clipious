@@ -64,7 +64,7 @@ class VideoListItem extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(20),
                                 ),
                                 child: AnimatedFractionallySizedBox(
-                                    widthFactor: controller.progress,
+                                    widthFactor: controller.progress > 0 ? controller.progress : 0,
                                     heightFactor: 1,
                                     duration: const Duration(milliseconds: 750),
                                     curve: Curves.easeInOutQuad,
@@ -110,6 +110,7 @@ class VideoListItem extends StatelessWidget {
             Visibility(
               child: InkWell(
                 onTap: () {
+                  log.info('Opening channel ${video.authorId}');
                   Navigator.push(context, MaterialPageRoute(settings: ROUTE_CHANNEL, builder: (context) => ChannelView(channelId: video.authorId!)));
                 },
                 child: Row(
