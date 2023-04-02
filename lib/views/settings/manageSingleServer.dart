@@ -3,6 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:invidious/controllers/serverSettingsController.dart';
 import 'package:invidious/utils.dart';
+import 'package:invidious/views/components/miniPlayerAware.dart';
 import 'package:settings_ui/settings_ui.dart';
 
 import '../../models/db/server.dart';
@@ -74,66 +75,68 @@ class ManageSingleServer extends StatelessWidget {
       builder: (controller) {
         Server server = controller.server;
         bool isLoggedIn = (server.authToken != null && server.authToken!.isNotEmpty) || (server.sidCookie != null && server.sidCookie!.isNotEmpty);
-        return Scaffold(
-            appBar: AppBar(
-              scrolledUnderElevation: 0,
-              title: Text(server.url),
-            ),
-            backgroundColor: colorScheme.background,
-            body: SafeArea(
-              bottom: false,
-              child: SettingsList(lightTheme: theme, darkTheme: theme, sections: [
-                SettingsSection(tiles: [
-                  SettingsTile.switchTile(
-                    initialValue: server.inUse,
-                    onToggle: controller.useServer,
-                    title: Text(locals.useThisServer),
-                    enabled: !server.inUse,
-                  )
-                ]),
-                SettingsSection(title: Text(locals.authentication), tiles: [
-                  SettingsTile(
-                    leading: server.authToken?.isNotEmpty ?? false ? const Icon(Icons.check) : const Icon(Icons.token),
-                    enabled: !isLoggedIn,
-                    title: Text(locals.tokenLogin),
-                    value: Text(server.authToken?.isNotEmpty ?? false ? locals.loggedIn : locals.tokenLoginDescription),
-                    onPressed: (context) async {
-                      await controller.logInWithToken();
-                    },
-                  ),
-                  SettingsTile(
-                    leading: server.sidCookie?.isNotEmpty ?? false ? const Icon(Icons.check) : const Icon(Icons.cookie_outlined),
-                    enabled: !isLoggedIn,
-                    title: Text(locals.cookieLogin),
-                    value: Text(server.sidCookie?.isNotEmpty ?? false ? locals.loggedIn : locals.cookieLoginDescription),
-                    onPressed: showLogInWithCookiesDialog,
-                  ),
-                  SettingsTile(
-                    leading: const Icon(Icons.exit_to_app),
-                    enabled: isLoggedIn,
-                    title: Text(locals.logout),
-                    onPressed: (context) => controller.logOut(),
-                  )
-                ]),
-                SettingsSection(title: const Text(''), tiles: [
-                  SettingsTile(
-                    enabled: controller.canDelete,
-                    onPressed: (context) {
-                      controller.deleteServer();
-                      Navigator.of(context).pop();
-                    },
-                    leading: Icon(
-                      Icons.delete,
-                      color: controller.canDelete ? Colors.red : Colors.red.withOpacity(0.5),
+        return MiniPlayerAware(
+          child: Scaffold(
+              appBar: AppBar(
+                scrolledUnderElevation: 0,
+                title: Text(server.url),
+              ),
+              backgroundColor: colorScheme.background,
+              body: SafeArea(
+                bottom: false,
+                child: SettingsList(lightTheme: theme, darkTheme: theme, sections: [
+                  SettingsSection(tiles: [
+                    SettingsTile.switchTile(
+                      initialValue: server.inUse,
+                      onToggle: controller.useServer,
+                      title: Text(locals.useThisServer),
+                      enabled: !server.inUse,
+                    )
+                  ]),
+                  SettingsSection(title: Text(locals.authentication), tiles: [
+                    SettingsTile(
+                      leading: server.authToken?.isNotEmpty ?? false ? const Icon(Icons.check) : const Icon(Icons.token),
+                      enabled: !isLoggedIn,
+                      title: Text(locals.tokenLogin),
+                      value: Text(server.authToken?.isNotEmpty ?? false ? locals.loggedIn : locals.tokenLoginDescription),
+                      onPressed: (context) async {
+                        await controller.logInWithToken();
+                      },
                     ),
-                    title: Text(
-                      locals.delete,
-                      style: TextStyle(color: controller.canDelete ? Colors.red : Colors.red.withOpacity(0.5)),
+                    SettingsTile(
+                      leading: server.sidCookie?.isNotEmpty ?? false ? const Icon(Icons.check) : const Icon(Icons.cookie_outlined),
+                      enabled: !isLoggedIn,
+                      title: Text(locals.cookieLogin),
+                      value: Text(server.sidCookie?.isNotEmpty ?? false ? locals.loggedIn : locals.cookieLoginDescription),
+                      onPressed: showLogInWithCookiesDialog,
                     ),
-                  )
-                ])
-              ]),
-            ));
+                    SettingsTile(
+                      leading: const Icon(Icons.exit_to_app),
+                      enabled: isLoggedIn,
+                      title: Text(locals.logout),
+                      onPressed: (context) => controller.logOut(),
+                    )
+                  ]),
+                  SettingsSection(title: const Text(''), tiles: [
+                    SettingsTile(
+                      enabled: controller.canDelete,
+                      onPressed: (context) {
+                        controller.deleteServer();
+                        Navigator.of(context).pop();
+                      },
+                      leading: Icon(
+                        Icons.delete,
+                        color: controller.canDelete ? Colors.red : Colors.red.withOpacity(0.5),
+                      ),
+                      title: Text(
+                        locals.delete,
+                        style: TextStyle(color: controller.canDelete ? Colors.red : Colors.red.withOpacity(0.5)),
+                      ),
+                    )
+                  ])
+                ]),
+              )),
+        );
       },
     );
   }

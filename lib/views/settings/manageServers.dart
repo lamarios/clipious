@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:invidious/views/components/miniPlayerAware.dart';
 import 'package:invidious/views/settings/manageServerInner.dart';
 
 class ManageServers extends StatefulWidget {
@@ -14,12 +15,14 @@ class ManageServerState extends State<ManageServers> {
   Widget build(BuildContext context) {
     var locals = AppLocalizations.of(context)!;
     ColorScheme colorScheme = Theme.of(context).colorScheme;
-    return Scaffold(
-        appBar: AppBar(
-          scrolledUnderElevation: 0,
-          title:  Text(locals.manageServers),
-        ),
-        backgroundColor: colorScheme.background,
-        body: const SafeArea(bottom: false, child: ManagerServersView()));
+    return MiniPlayerAware(
+      child: Scaffold(
+          appBar: AppBar(
+            scrolledUnderElevation: 0,
+            title:  Text(locals.manageServers),
+          ),
+          backgroundColor: colorScheme.background,
+          body: const SafeArea(bottom: false, child: ManagerServersView())),
+    );
   }
 }

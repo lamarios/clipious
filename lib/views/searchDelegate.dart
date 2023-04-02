@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:invidious/controllers/miniPayerController.dart';
 import 'package:invidious/views/search.dart';
 
 import '../globals.dart';
 import '../models/searchResult.dart';
 
 class MySearchDelegate extends SearchDelegate<String> {
+  MySearchDelegate(){
+    MiniPlayerController.to()?.showMiniPlayer();
+  }
+
   @override
   List<Widget>? buildActions(BuildContext context) => [
     IconButton(

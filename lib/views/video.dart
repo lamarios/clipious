@@ -1,26 +1,18 @@
 // import 'package:video_player/video_player.dart';
-import 'dart:async';
-import 'dart:math';
-
-import 'package:after_layout/after_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:invidious/controllers/videoController.dart';
 import 'package:invidious/globals.dart';
-import 'package:invidious/main.dart';
-import 'package:invidious/models/errors/invidiousServiceError.dart';
+import 'package:invidious/views/components/miniPlayerAware.dart';
 import 'package:invidious/views/components/videoAddToPlaylistButton.dart';
 import 'package:invidious/views/components/videoLikeButton.dart';
 import 'package:invidious/views/video/innverView.dart';
 import 'package:invidious/views/video/innverViewTablet.dart';
-import 'package:logging/logging.dart';
 
 import '../models/video.dart';
 import '../utils.dart';
-import 'video/addToPlayList.dart';
 
-const double miniPlayerThreshold = 300;
 
 class VideoView extends StatelessWidget {
   final String videoId;
@@ -28,10 +20,6 @@ class VideoView extends StatelessWidget {
 
   VideoView({super.key, required this.videoId, this.playNow});
 
-  popMiniPayer(BuildContext context, List<Video> videos) {
-    showMiniPlayer(context, videos);
-    Navigator.of(context).pop();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,14 +38,13 @@ class VideoView extends StatelessWidget {
     }
 
     return GetBuilder<VideoController>(
-      init: VideoController(miniPlayerThreshold: miniPlayerThreshold, videoId: videoId, showMiniPlayer: (videos) => popMiniPayer(context, videos)),
+      init: VideoController(videoId: videoId),
       global: false,
       // tag: 'video-controller-$videoId',
       builder: (_) => AnimatedOpacity(
         duration: animationDuration,
         opacity: _.opacity,
-        child: Transform.translate(
-          offset: _.offset,
+        child: MiniPlayerAware(
           child: Scaffold(
             appBar: AppBar(
               actions: _.loadingVideo
@@ -110,15 +97,13 @@ class VideoView extends StatelessWidget {
                                           video: _.video!,
                                           selectedIndex: _.selectedIndex,
                                           playNow: playNow,
-                                          onVideoDrag: _.videoDragged,
-                                          onDragEnd: _.videoDraggedEnd,
+                                          videoController: _,
                                         )
                                       : VideoTabletInnerView(
                                           video: _.video!,
                                           playNow: playNow,
                                           selectedIndex: _.selectedIndex,
-                                          onDragEnd: _.videoDraggedEnd,
-                                          onVideoDrag: _.videoDragged,
+                                          videoController: _,
                                         ),
                                 )),
                 ),

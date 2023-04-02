@@ -2,111 +2,100 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:invidious/controllers/miniPayerController.dart';
 import 'package:invidious/globals.dart';
-import 'package:invidious/main.dart';
-import 'package:invidious/models/video.dart';
-import 'package:invidious/myRouteObserver.dart';
-import 'package:invidious/views/video.dart';
 import 'package:invidious/views/video/player.dart';
+import 'package:invidious/views/videoPlayer/fullScreenView.dart';
+import 'package:invidious/views/videoPlayer/miniPlayerView.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../utils.dart';
 
 class MiniPlayer extends StatelessWidget {
-  List<Video>? videos;
+  GlobalKey playerKey = GlobalKey();
 
-  MiniPlayer({Key? key, this.videos}) : super(key: key);
-
-  showVideo(MiniPlayerController controller) {
-    Video video = controller.showVideo();
-/*
-    navigatorKey.currentState?.push(PageRouteBuilder(
-      settings: ROUTE_VIDEO,
-      pageBuilder: (context, animation, secondaryAnimation) => VideoView(videoId: video.videoId, playNow: true),
-      transitionsBuilder: (context, animation, secondaryAnimation, child) => FadeTransition(
-        opacity: animation,
-        child: child,
-      ),
-    ));
-*/
-    navigatorKey.currentState?.push(MaterialPageRoute(settings: ROUTE_VIDEO, builder: (context) => VideoView(videoId: video.videoId, playNow: true)));
-  }
-
-  onDragEnd(DragEndDetails details, MiniPlayerController controller) {
-    Video? video = controller.onDragEnd(details);
-    if (video != null) {
-      navigatorKey.currentState?.push(MaterialPageRoute(settings: ROUTE_VIDEO, builder: (context) => VideoView(videoId: video.videoId, playNow: true)));
-    }
-  }
+  MiniPlayer({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     var themeData = Theme.of(context);
     ColorScheme colors = themeData.colorScheme;
+    AppLocalizations locals = AppLocalizations.of(context)!;
     return GetBuilder<MiniPlayerController>(
-      init: MiniPlayerController(videos: videos ?? []),
-      builder: (_) => AnimatedPositioned(
-          bottom: _.bottom,
+      init: MiniPlayerController(),
+      builder: (_) {
+        bool showPlayer = _.currentlyPlaying != null;
+        bool onPhone = getDeviceType() == DeviceType.phone;
+
+        Widget videoPlayer = showPlayer
+            ? Padding(
+                padding: _.isMini || _.isPip ? EdgeInsets.zero : const EdgeInsets.only(top: 8, left: 8.0, right: 8),
+                child: VideoPlayer(
+                  key: const ValueKey('player'),
+                  video: _.currentlyPlaying!,
+                  miniPlayer: false,
+                ),
+              )
+            : const SizedBox.shrink();
+
+        List<Widget> miniPlayerWidgets = [];
+
+        List<Widget> bigPlayerWidgets = [];
+
+        if (showPlayer) {
+          miniPlayerWidgets.addAll(MiniPlayerView.build(context, _));
+          bigPlayerWidgets.addAll(VideoPlayerFullScreenView.build(context, _));
+        }
+
+        return AnimatedPositioned(
           left: 0,
+          top: _.top,
+          bottom: _.getBottom,
           right: 0,
-          duration: animationDuration ~/ 2,
+          duration: _.isDragging ? Duration.zero : animationDuration,
           child: AnimatedOpacity(
             opacity: _.opacity,
             duration: animationDuration,
-            child: GestureDetector(
-              onVerticalDragUpdate: _.onDragUpdate,
-              onVerticalDragEnd: (d) => onDragEnd(d, _),
-              child: Container(
-                height: _.height,
-                color: colors.secondaryContainer,
-                child: Row(
-                  // children: [Text(videos.length.toString())],
-                  children: _.videos.isNotEmpty
-                      ? [
-                          VideoPlayer(
-                            video: _.videos[_.currentIndex],
-                            miniPlayer: true,
-                          ),
-                          Visibility(
-                            visible: _.showTitle,
-                            child: Expanded(
-                                child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Builder(builder: (context) {
-                                Video vid = _.videos[_.currentIndex];
-
-                                return GestureDetector(
-                                  onTap: () => showVideo(_),
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        vid.title,
-                                        style: themeData.textTheme.bodyMedium?.copyWith(color: colors.primary, fontSize: 12),
-                                      ),
-                                      Text(
-                                        vid.author,
-                                        style: themeData.textTheme.bodySmall?.copyWith(color: colors.secondary, fontSize: 11),
-                                      ),
-                                    ],
+            child: Material(
+              elevation: 1,
+              child: showPlayer
+                  ? GestureDetector(
+                      onVerticalDragEnd: _.videoDraggedEnd,
+                      onVerticalDragUpdate: _.videoDragged,
+                      onVerticalDragStart: _.videoDragStarted,
+                      child: AnimatedContainer(
+                        duration: animationDuration,
+                        color: _.isMini ? colors.secondaryContainer : colors.background,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            _.isMini || _.isPip
+                                ? const SizedBox.shrink()
+                                : AppBar(
+                                    title: Text(locals.videoPlayer),
+                                    elevation: 1,
+                                    leading: IconButton(
+                                      icon: const Icon(Icons.expand_more),
+                                      onPressed: _.showMiniPlayer,
+                                    ),
                                   ),
-                                );
-                              }),
-                            )),
-                          ),
-                          Visibility(
-                            visible: _.showTitle,
-                            child: GestureDetector(
-                              onTap: _.hide,
-                              child: const Padding(
-                                padding: EdgeInsets.all(8.0),
-                                child: Icon(Icons.clear),
+                            AnimatedContainer(
+                              width: double.infinity,
+                              constraints: BoxConstraints(maxHeight: _.isMini ? targetHeight : 500, maxWidth: tabletMaxVideoWidth),
+                              duration: animationDuration,
+                              child: Row(
+                                mainAxisAlignment: _.isMini ? MainAxisAlignment.start : MainAxisAlignment.center,
+                                children: [Expanded(flex: 1, child: videoPlayer), ...miniPlayerWidgets],
                               ),
                             ),
-                          )
-                        ]
-                      : [],
-                ),
-              ),
+                            ...bigPlayerWidgets,
+                          ],
+                        ),
+                      ),
+                    )
+                  : const SizedBox.shrink(),
             ),
-          )),
+          ),
+        );
+      },
     );
   }
 }

@@ -1,8 +1,6 @@
-import 'package:fbroadcast/fbroadcast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
-import 'package:invidious/globals.dart';
 import 'package:invidious/models/video.dart';
 import 'package:invidious/myRouteObserver.dart';
 import 'package:invidious/views/channel.dart';
@@ -20,7 +18,11 @@ class VideoInfo extends StatelessWidget {
   VideoInfo({super.key, required this.video});
 
   openChannel(BuildContext context) {
-    Navigator.push(context, MaterialPageRoute(settings: ROUTE_CHANNEL, builder: (context) => ChannelView(channelId: video.authorId)));
+    Navigator.push(context, MaterialPageRoute(settings: ROUTE_CHANNEL, builder: (context) => ChannelView(channelId: video.authorId ?? '')));
+  }
+
+  showSearchWindow(BuildContext context, String query) {
+    showSearch(context: context, delegate: MySearchDelegate(), query: query);
   }
 
   @override
@@ -135,7 +137,7 @@ class VideoInfo extends StatelessWidget {
                       onTap: () => openChannel(context),
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                        child: Text(video.author),
+                        child: Text(video.author ?? ''),
                       ))),
             ],
           ),
@@ -144,7 +146,7 @@ class VideoInfo extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8.0),
                 child: SubscribeButton(
-                  channelId: video.authorId,
+                  channelId: video.authorId ?? '',
                   subCount: video.subCountText,
                 ),
               )
@@ -186,7 +188,7 @@ class VideoInfo extends StatelessWidget {
                 runSpacing: 5,
                 children: video.keywords
                     .map((e) => InkWell(
-                          onTap: () => showSearch(context: context, delegate: MySearchDelegate(), query: e),
+                          onTap: () => showSearchWindow(context, e),
                           child: Container(
                             decoration: BoxDecoration(color: colorScheme.secondaryContainer, borderRadius: BorderRadius.circular(20)),
                             child: Padding(
@@ -199,7 +201,7 @@ class VideoInfo extends StatelessWidget {
                   ..insert(
                       0,
                       InkWell(
-                        onTap: () => showSearch(context: context, delegate: MySearchDelegate(), query: video.genre),
+                        onTap: () => showSearchWindow(context, video.genre),
                         child: Container(
                           decoration: BoxDecoration(color: colorScheme.secondaryContainer, borderRadius: BorderRadius.circular(20)),
                           child: Padding(

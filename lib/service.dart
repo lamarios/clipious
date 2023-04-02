@@ -321,7 +321,10 @@ class Service {
   }
 
   Future<Channel> getChannel(String channelId) async {
+    // sometimes the api gives the channel with /channel/<channelid> format
+    channelId = channelId.replaceAll("/channel/", '');
     String url = db.getCurrentlySelectedServer().url + (GET_CHANNEL.replaceAll(":id", channelId));
+    buildUrl(GET_CHANNEL, pathParams: {':id': channelId});
     log.info('Calling $url');
     final response = await http.get(Uri.parse(url), headers: {'Content-Type': 'application/json; charset=utf-16'});
 

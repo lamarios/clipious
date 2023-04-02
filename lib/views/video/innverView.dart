@@ -2,21 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:invidious/controllers/videoInnerViewController.dart';
 import 'package:invidious/models/video.dart';
+import 'package:invidious/views/components/addToQueueButton.dart';
+import 'package:invidious/views/components/playButton.dart';
 import 'package:invidious/views/video/commentsContainer.dart';
-import 'package:invidious/views/video/player.dart';
 import 'package:invidious/views/video/recommendedVideos.dart';
 
+import '../../controllers/videoController.dart';
 import '../../globals.dart';
+import '../components/videoThumbnail.dart';
 import 'info.dart';
 
 class VideoInnerView extends StatelessWidget {
   final Video video;
   final int selectedIndex;
-  final Function(DragUpdateDetails) onVideoDrag;
-  final Function(DragEndDetails) onDragEnd;
   bool? playNow;
+  final VideoController videoController;
 
-  VideoInnerView({super.key, required this.video, required this.selectedIndex, required this.onVideoDrag, required this.onDragEnd, this.playNow});
+  VideoInnerView({super.key, required this.video, required this.selectedIndex, this.playNow, required this.videoController});
 
   @override
   Widget build(BuildContext context) {
@@ -25,18 +27,27 @@ class VideoInnerView extends StatelessWidget {
     return GetBuilder<VideoInnerViewController>(
       init: VideoInnerViewController(),
       global: false,
-      builder: (_)=> Column(
+      builder: (_) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-           GestureDetector(
-              onVerticalDragUpdate: onVideoDrag,
-              onVerticalDragEnd: onDragEnd,
-              child: VideoPlayer(
-                playNow: playNow,
-                miniPlayer: false,
-                video: video,
-              ),
+          VideoThumbnailView(
+            videoId: video.videoId,
+            thumbnailUrl: video.getBestThumbnail()?.url ?? '',
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                PlayButton(
+                  onPressed: videoController.playVideo,
+                ),
+                Positioned(
+                    right: 5,
+                    bottom: 3,
+                    child: AddToQueueButton(
+                      videos: [video],
+                    ))
+              ],
             ),
+          ),
           Expanded(
               child: Padding(
             padding: const EdgeInsets.only(top: 4),
@@ -49,7 +60,9 @@ class VideoInnerView extends StatelessWidget {
                       VideoInfo(
                         video: video,
                       ),
-                      CommentsContainer(video: video,),
+                      CommentsContainer(
+                        video: video,
+                      ),
                       RecommendedVideos(video: video)
                     ][selectedIndex])
               ],

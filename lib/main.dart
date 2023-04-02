@@ -7,7 +7,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:invidious/controllers/homeController.dart';
+import 'package:invidious/controllers/miniPayerController.dart';
 import 'package:invidious/globals.dart';
+import 'package:invidious/views/components/miniPlayerAware.dart';
 import 'package:invidious/views/miniPlayer.dart';
 import 'package:invidious/views/playlists.dart';
 import 'package:invidious/views/popular.dart';
@@ -131,67 +133,69 @@ class _HomeState extends State<Home> with AfterLayoutMixin {
           navigationWidgets.add(NavigationDestination(icon: const Icon(Icons.playlist_play), label: navigationLabels[3]));
         }
 
-        return Scaffold(
-            backgroundColor: colorScheme.background,
-            bottomNavigationBar: NavigationBar(
-              labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
-              elevation: 0,
-              onDestinationSelected: _.selectIndex,
-              selectedIndex: _.selectedIndex,
-              destinations: navigationWidgets,
-            ),
-            floatingActionButton: _.selectedIndex == 3 ? AddPlayListButton() : null,
-            appBar: AppBar(
-              systemOverlayStyle: SystemUiOverlayStyle(
-                  systemNavigationBarColor: colorScheme.background,
-                  systemNavigationBarIconBrightness: colorScheme.brightness == Brightness.dark ? Brightness.light : Brightness.dark,
-                  statusBarColor: colorScheme.background,
-                  statusBarIconBrightness: colorScheme.brightness == Brightness.dark ? Brightness.light : Brightness.dark),
-              title: Text(navigationLabels[_.selectedIndex]),
-              scrolledUnderElevation: 0,
-              // backgroundColor: Colors.pink,
+        return MiniPlayerAware(
+          child: Scaffold(
               backgroundColor: colorScheme.background,
-              actions: [
-                IconButton(
-                  onPressed: () {
-                    showSearch(context: context, delegate: MySearchDelegate());
-                  },
-                  icon: const Icon(Icons.search),
-                ),
-                IconButton(
-                  onPressed: () => openSettings(context),
-                  icon: const Icon(Icons.settings),
-                  color: colorScheme.secondary,
-                ),
-              ],
-            ),
-            body: SafeArea(
-                bottom: false,
-                child: Stack(children: [
-                  AnimatedSwitcher(
-                    switchInCurve: Curves.easeInOutQuad,
-                    switchOutCurve: Curves.easeInOutQuad,
-                    transitionBuilder: (Widget child, Animation<double> animation) {
-                      return FadeTransition(opacity: animation, child: child);
+              bottomNavigationBar: NavigationBar(
+                labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
+                elevation: 0,
+                onDestinationSelected: _.selectIndex,
+                selectedIndex: _.selectedIndex,
+                destinations: navigationWidgets,
+              ),
+              floatingActionButton: _.selectedIndex == 3 ? AddPlayListButton() : null,
+              appBar: AppBar(
+                systemOverlayStyle: SystemUiOverlayStyle(
+                    systemNavigationBarColor: colorScheme.background,
+                    systemNavigationBarIconBrightness: colorScheme.brightness == Brightness.dark ? Brightness.light : Brightness.dark,
+                    statusBarColor: colorScheme.background,
+                    statusBarIconBrightness: colorScheme.brightness == Brightness.dark ? Brightness.light : Brightness.dark),
+                title: Text(navigationLabels[_.selectedIndex]),
+                scrolledUnderElevation: 0,
+                // backgroundColor: Colors.pink,
+                backgroundColor: colorScheme.background,
+                actions: [
+                  IconButton(
+                    onPressed: () {
+                      showSearch(context: context, delegate: MySearchDelegate());
                     },
-                    duration: animationDuration,
-                    child: <Widget>[
-                      const Popular(
-                        key: ValueKey(0),
-                      ),
-                      const Trending(
-                        key: ValueKey(1),
-                      ),
-                      const Subscriptions(
-                        key: ValueKey(2),
-                      ),
-                      const Playlists(
-                        key: ValueKey(3),
-                        canDeleteVideos: true,
-                      )
-                    ][_.selectedIndex],
-                  )
-                ])));
+                    icon: const Icon(Icons.search),
+                  ),
+                  IconButton(
+                    onPressed: () => openSettings(context),
+                    icon: const Icon(Icons.settings),
+                    color: colorScheme.secondary,
+                  ),
+                ],
+              ),
+              body: SafeArea(
+                  bottom: false,
+                  child: Stack(children: [
+                    AnimatedSwitcher(
+                      switchInCurve: Curves.easeInOutQuad,
+                      switchOutCurve: Curves.easeInOutQuad,
+                      transitionBuilder: (Widget child, Animation<double> animation) {
+                        return FadeTransition(opacity: animation, child: child);
+                      },
+                      duration: animationDuration,
+                      child: <Widget>[
+                        const Popular(
+                          key: ValueKey(0),
+                        ),
+                        const Trending(
+                          key: ValueKey(1),
+                        ),
+                        const Subscriptions(
+                          key: ValueKey(2),
+                        ),
+                        const Playlists(
+                          key: ValueKey(3),
+                          canDeleteVideos: true,
+                        )
+                      ][_.selectedIndex],
+                    )
+                  ]))),
+        );
       },
     );
   }
@@ -199,7 +203,7 @@ class _HomeState extends State<Home> with AfterLayoutMixin {
   @override
   FutureOr<void> afterFirstLayout(BuildContext context) {
     Overlay.of(context).insert(OverlayEntry(
-      builder: (context) => MiniPlayer(videos: const []),
+      builder: (context) => MiniPlayer(),
     ));
   }
 }

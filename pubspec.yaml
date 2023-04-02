@@ -65,6 +65,7 @@ dependencies:
   flutter_linkify: 5.0.2
   url_launcher: 6.1.10
   get: 4.6.5
+  back_button_interceptor: 6.0.2
 
 
 
