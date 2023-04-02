@@ -398,5 +398,13 @@
   "cookieLogin": "Iniciar sessão com cookie",
   "@cookieLogin": {
     "description": "Text to login to a server using the cookie jar method"
+  },
+  "videoQueue": "Fila de vídeo",
+  "@videoQueue": {
+    "description": "Label for button to display the video queue"
+  },
+  "addToQueueList": "Adicionar à fila",
+  "@addToQueueList": {
+    "description": "Label on button to add a video to the queue list"
   }
 }
