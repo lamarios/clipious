@@ -40,33 +40,35 @@ class PlaylistView extends StatelessWidget {
         context: context,
         builder: (BuildContext context) {
           var locals = AppLocalizations.of(context)!;
-          return SizedBox(
-            height: 100,
-            child: Center(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        IconButton(
-                          onPressed: () async {
-                            removeVideoFromPlayList(context, controller, v);
-                            Navigator.pop(context);
-                          },
-                          icon: const Icon(Icons.delete),
-                        ),
-                        Text(
-                          locals.removeFromPlayList,
-                          style: const TextStyle(fontSize: 10),
-                        )
-                      ],
+          return MiniPlayerAware(
+            child: SizedBox(
+              height: 100,
+              child: Center(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          IconButton(
+                            onPressed: () async {
+                              removeVideoFromPlayList(context, controller, v);
+                              Navigator.pop(context);
+                            },
+                            icon: const Icon(Icons.delete),
+                          ),
+                          Text(
+                            locals.removeFromPlayList,
+                            style: const TextStyle(fontSize: 10),
+                          )
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           );
@@ -106,7 +108,7 @@ class PlaylistView extends StatelessWidget {
     for (int i = 2; i >= 0; i--) {
       // for (VideoInList video in playlist.videos) {
       thumbs.add(Align(
-        alignment: Alignment(i*0.5, i*0.5),
+        alignment: Alignment(i * 0.5, i * 0.5),
         child: FractionallySizedBox(
           widthFactor: 0.8,
           child: AspectRatio(
@@ -127,8 +129,6 @@ class PlaylistView extends StatelessWidget {
       ));
     }
 
-
-
     return thumbs;
   }
 
@@ -136,8 +136,6 @@ class PlaylistView extends StatelessWidget {
   Widget build(BuildContext context) {
     ColorScheme colorScheme = Theme.of(context).colorScheme;
     var locals = AppLocalizations.of(context)!;
-
-    bool onBigScreen = getScreenWidth() > PHONE_MAX;
 
     return GetBuilder<PlaylistController>(
       global: false,
@@ -171,7 +169,7 @@ class PlaylistView extends StatelessWidget {
                   child: !_.loading && _.playlist.videos.isNotEmpty
                       ? Center(
                           child: Container(
-                            constraints: onBigScreen ? const BoxConstraints(maxWidth: 600) : null,
+                            constraints: BoxConstraints(maxWidth: tabletMaxVideoWidth),
                             child: Column(
                               children: [
                                 AnimatedSwitcher(
@@ -183,7 +181,8 @@ class PlaylistView extends StatelessWidget {
                                               aspectRatio: 16 / 9,
                                               child: Stack(
                                                 alignment: Alignment.center,
-                                                children: [...buildThumbnails(context, _),
+                                                children: [
+                                                  ...buildThumbnails(context, _),
                                                   IconButton(
                                                     key: const ValueKey('nt-playing'),
                                                     onPressed: _.play,

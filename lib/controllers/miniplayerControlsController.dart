@@ -19,4 +19,14 @@ class MiniPlayerControlsController extends GetxController {
   playPrevious() {
     MiniPlayerController.to()?.playPrevious();
   }
+
+  toggleShuffle() {
+    MiniPlayerController.to()?.toggleShuffle();
+    update();
+  }
+
+  switchToNextRepeat() {
+    MiniPlayerController.to()?.setNextRepeatMode();
+    update();
+  }
 }

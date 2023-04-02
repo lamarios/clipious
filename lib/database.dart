@@ -13,8 +13,10 @@ const USE_SPONSORBLOCK = 'use-sponsor-block';
 const BROWSING_COUNTRY = 'browsing-country';
 const DYNAMIC_THEME = 'dynamic-theme';
 const USE_DASH = 'use-dash';
+const PLAYER_REPEAT = 'player-repeat';
+const PLAYER_SHUFFLE = 'player-shuffle';
 
-const ON_OPEN="on-open";
+const ON_OPEN = "on-open";
 
 class DbClient {
   /// The Store of this app.
@@ -39,7 +41,7 @@ class DbClient {
     store.box<Server>().put(server);
     // if we only have one server, we select it
     var servers = getServers();
-    if(servers.length == 1){
+    if (servers.length == 1) {
       useServer(server);
     }
   }

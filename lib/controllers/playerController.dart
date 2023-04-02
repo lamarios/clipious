@@ -136,11 +136,9 @@ class PlayerController extends GetxController {
   }
 
   switchVideo(Video video) {
-    if (this.video.videoId != video.videoId) {
-      disposeControllers();
-      this.video = video;
-      playVideo();
-    }
+    disposeControllers();
+    this.video = video;
+    playVideo();
   }
 
   togglePlaying() {
@@ -199,7 +197,6 @@ class PlayerController extends GetxController {
           imageUrl: video.getBestThumbnail()?.url ?? '',
         ));
 
-    bool showControls = !miniPlayer;
 
     videoController = BetterPlayerController(
         BetterPlayerConfiguration(
@@ -213,14 +210,7 @@ class PlayerController extends GetxController {
             allowedScreenSleep: false,
             fit: BoxFit.contain,
             controlsConfiguration: BetterPlayerControlsConfiguration(
-                enableFullscreen: showControls,
-                enablePip: showControls,
-                enableOverflowMenu: showControls,
-                enableMute: showControls,
-                enableProgressBar: showControls,
-                enableProgressText: showControls,
-                enableSkips: showControls,
-                enablePlayPause: showControls,
+              enablePlayPause: false,
                 overflowModalColor: colors.background,
                 overflowModalTextColor: overFlowTextColor,
                 overflowMenuIconsColor: overFlowTextColor,

@@ -1,12 +1,10 @@
-import 'package:fbroadcast/fbroadcast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:invidious/controllers/miniPayerController.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/models/interfaces/sharelink.dart';
-import 'package:invidious/models/video.dart';
+import 'package:invidious/views/components/miniPlayerAware.dart';
 import 'package:logging/logging.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -18,6 +16,8 @@ const TABLET_PORTRAIT_MAX = 900;
 var log = Logger('Utils');
 
 enum DeviceType { phone, tablet }
+
+double tabletMaxVideoWidth = getDeviceType() == DeviceType.phone ? double.infinity : 500;
 
 String prettyDuration(Duration duration) {
   var components = <String>[];
@@ -70,28 +70,30 @@ void showSharingSheet(BuildContext context, ShareLinks links) {
   showModalBottomSheet<void>(
       context: context,
       builder: (BuildContext context) {
-        return Container(
-          height: 100,
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                FilledButton.tonal(
-                  child: Text(locals.shareInvidiousLink),
-                  onPressed: () {
-                    Share.share(links.getInvidiousLink(db.getCurrentlySelectedServer()));
-                    Navigator.of(context).pop();
-                  },
-                ),
-                FilledButton.tonal(
-                  child: Text(locals.shareYoutubeLink),
-                  onPressed: () {
-                    Share.share(links.getYoutubeLink());
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ],
+        return MiniPlayerAware(
+          child: Container(
+            height: 100,
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  FilledButton.tonal(
+                    child: Text(locals.shareInvidiousLink),
+                    onPressed: () {
+                      Share.share(links.getInvidiousLink(db.getCurrentlySelectedServer()));
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                  FilledButton.tonal(
+                    child: Text(locals.shareYoutubeLink),
+                    onPressed: () {
+                      Share.share(links.getYoutubeLink());
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              ),
             ),
           ),
         );

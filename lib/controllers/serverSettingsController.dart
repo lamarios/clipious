@@ -52,6 +52,7 @@ class ServerSettingsController extends GetxController {
 
   refreshServerList() {
     ServerListSettingsController.to()?.refreshServers();
+    SettingsController.to()?.serverChanged();
   }
 
   deleteServer() {

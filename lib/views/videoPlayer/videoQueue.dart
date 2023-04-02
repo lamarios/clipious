@@ -13,14 +13,15 @@ class VideoQueue extends StatelessWidget {
     return controller.videos.length > 0
         ? Column(
             children: [
-              ...controller.videos
-                  .map((e) => CompactVideo(
-                        onTap: () => controller.switchToVideo(e),
-                        video: e,
-                        highlighted: controller.videos[controller.currentIndex].videoId == e.videoId,
-                        trailing: [IconButton(onPressed: () => controller.removeVideoFromQueue(e), icon: const Icon(Icons.clear))],
-                      ))
-                  .toList()
+              ...controller.videos.map((e) {
+                bool isPlaying = controller.videos[controller.currentIndex].videoId == e.videoId;
+                return CompactVideo(
+                  onTap: () => controller.switchToVideo(e),
+                  video: e,
+                  highlighted: isPlaying,
+                  trailing: isPlaying ? [] : [IconButton(onPressed: () => controller.removeVideoFromQueue(e), icon: const Icon(Icons.clear))],
+                );
+              }).toList()
             ],
           )
         : const Text('empty queue, should never be displayed');

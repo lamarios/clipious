@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:invidious/controllers/miniPayerController.dart';
 import 'package:invidious/globals.dart';
+import 'package:invidious/objectbox.g.dart';
+import 'package:invidious/utils.dart';
 import 'package:invidious/views/video/player.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -27,16 +29,19 @@ class VideoPlayerFullScreenView {
                   child: SingleChildScrollView(
                     child: Padding(
                       padding: const EdgeInsets.all(16),
-                      child: <Widget>[
-                        VideoInfo(
-                          video: video,
-                        ),
-                        CommentsContainer(
-                          video: video,
-                        ),
-                        RecommendedVideos(video: video),
-                        VideoQueue(controller: controller),
-                      ][controller.selectedFullScreenIndex],
+                      child: Container(
+                        constraints: BoxConstraints(maxWidth: tabletMaxVideoWidth),
+                        child: <Widget>[
+                          VideoInfo(
+                            video: video,
+                          ),
+                          CommentsContainer(
+                            video: video,
+                          ),
+                          RecommendedVideos(video: video),
+                          VideoQueue(controller: controller),
+                        ][controller.selectedFullScreenIndex],
+                      ),
                     ),
                   ),
                 )),

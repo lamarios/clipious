@@ -1,9 +1,13 @@
+import 'dart:math';
+
 import 'package:better_player/better_player.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:invidious/controllers/miniPlayerAwareController.dart';
 import 'package:invidious/controllers/playerController.dart';
+import 'package:invidious/database.dart';
 import 'package:invidious/globals.dart';
+import 'package:invidious/models/db/settings.dart';
 import 'package:invidious/utils.dart';
 import 'package:logging/logging.dart';
 
@@ -15,6 +19,8 @@ import '../views/video.dart';
 const double targetHeight = 75;
 const double miniPlayerThreshold = 300;
 const double bigPlayerThreshold = 700;
+
+enum PlayerRepeat { noRepeat, repeatAll, repeatOne }
 
 class MiniPlayerController extends GetxController {
   static MiniPlayerController? to() => safeGet();
@@ -31,7 +37,11 @@ class MiniPlayerController extends GetxController {
   double progress = 0;
   Video? currentlyPlaying;
   double opacity = 0;
-
+  double dragDistance = 0;
+  bool dragStartMini = true;
+  PlayerRepeat repeat = PlayerRepeat.values[int.parse(db.getSettings(PLAYER_REPEAT)?.value ?? '0')];
+  bool shuffle = db.getSettings(PLAYER_SHUFFLE)?.value == 'true';
+  List<String> playedVideos = [];
   Offset offset = Offset.zero;
 
   MiniPlayerController();
@@ -59,6 +69,28 @@ class MiniPlayerController extends GetxController {
     }
   }
 
+  toggleShuffle() {
+    shuffle = !shuffle;
+    db.saveSetting(SettingsValue(PLAYER_SHUFFLE, this.shuffle.toString()));
+    update();
+  }
+
+  setNextRepeatMode() {
+    switch (repeat) {
+      case PlayerRepeat.noRepeat:
+        repeat = PlayerRepeat.repeatAll;
+        break;
+      case PlayerRepeat.repeatAll:
+        repeat = PlayerRepeat.repeatOne;
+        break;
+      case PlayerRepeat.repeatOne:
+        repeat = PlayerRepeat.noRepeat;
+        break;
+    }
+
+    db.saveSetting(SettingsValue(PLAYER_REPEAT, PlayerRepeat.values.indexOf(repeat).toString()));
+  }
+
   setVideos(List<BaseVideo> videos) {
     this.videos = videos;
     update();
@@ -75,6 +107,7 @@ class MiniPlayerController extends GetxController {
     height = targetHeight;
     isHidden = true;
     videos = [];
+    playedVideos = [];
     currentlyPlaying = null;
     opacity = 0;
     MiniPlayerAwareController.to()?.setPadding(false);
@@ -121,14 +154,40 @@ class MiniPlayerController extends GetxController {
   }
 
   playNext() {
-    if (videos.length > 1) {
-      currentIndex++;
-      if (currentIndex >= videos.length) {
-        currentIndex = 0;
+    if (videos.isNotEmpty) {
+      log.info('Play next: played length: ${playedVideos.length} videos: ${videos.length} Repeat mode: $repeat');
+      if (repeat == PlayerRepeat.repeatOne) {
+        switchToVideo(currentlyPlaying!);
+      } else {
+        if (playedVideos.length >= videos.length) {
+          if (repeat == PlayerRepeat.repeatAll) {
+            playedVideos = [];
+            currentIndex = 0;
+          } else {
+            return;
+          }
+        } else {
+          if (!shuffle) {
+            // making sure we play something that can be played
+            if (currentIndex + 1 < videos.length) {
+              currentIndex++;
+            } else if (repeat == PlayerRepeat.repeatAll) {
+              // we might reach here if user changes repeat mode and play with previous/next buttons
+              currentIndex = 0;
+              playedVideos = [];
+            } else {
+              return;
+            }
+          } else {
+            List<BaseVideo> availableVideos = videos.where((e) => !playedVideos.contains(e.videoId)).toList();
+            String nextVideoId = availableVideos[Random().nextInt(availableVideos.length)].videoId;
+            currentIndex = videos.indexWhere((e) => e.videoId == nextVideoId);
+          }
+        }
+        switchToVideo(videos[currentIndex]);
+        PlayerController.to()?.toggleControls(!isMini);
+        update();
       }
-      switchToVideo(videos[currentIndex]);
-      PlayerController.to()?.toggleControls(!isMini);
-      update();
     }
   }
 
@@ -146,9 +205,10 @@ class MiniPlayerController extends GetxController {
 
   playVideo(List<BaseVideo> videos, {bool? goBack}) {
     if (goBack ?? false) Get.back();
-
+    log.info('Playing ${videos.length} videos');
     if (videos.isNotEmpty) {
-      this.videos = videos;
+      this.videos = List.from(videos, growable: true);
+      playedVideos = [];
       currentIndex = 0;
       selectedFullScreenIndex = 0;
       if (videos.length > 1) {
@@ -174,6 +234,9 @@ class MiniPlayerController extends GetxController {
     Video v = await service.getVideo(video.videoId);
     currentlyPlaying = v;
 
+    if (!playedVideos.contains(v.videoId)) {
+      playedVideos.add(v.videoId);
+    }
     progress = 0;
     PlayerController.to()?.switchVideo(v);
     PlayerController.to()?.toggleControls(!isMini);
@@ -187,31 +250,42 @@ class MiniPlayerController extends GetxController {
       hide();
     } else {
       int index = videos.indexWhere((element) => element.videoId == video.videoId);
+      playedVideos.remove(video.videoId);
       if (index >= 0) {
-        videos.removeAt(index);
-        if (index == currentIndex) {
-          switchToVideo(videos[currentIndex]);
+        if (index < currentIndex) {
+          currentIndex--;
         }
+        videos.removeAt(index);
       }
     }
     update();
   }
 
-  void videoDraggedDown(DragUpdateDetails details) {
+  void videoDragged(DragUpdateDetails details) {
     // log.info('delta: ${details.delta.dy}, local: ${details.localPosition.dy}, global: ${details.globalPosition.dy}');
     isDragging = true;
     top = details.globalPosition.dy;
-    isMini = details.delta.dy > 0;
-    // we're going down, puttin threshold high easier to switch to mini player
+    // we  change the display mode if there's a big enough drag movement to avoid jittery behavior when dragging slow
+    if (details.delta.dy.abs() > 3) {
+      isMini = details.delta.dy > 0;
+    }
+    dragDistance += details.delta.dy;
+    // we're going down, putting threshold high easier to switch to mini player
     update();
   }
 
-  void videoDraggedDownEnd(DragEndDetails details) {
-    if (isMini) {
+  void videoDraggedEnd(DragEndDetails details) {
+    bool showMini = dragDistance.abs() > 200 ? isMini : dragStartMini;
+    if (showMini) {
       showMiniPlayer();
     } else {
       showBigPlayer();
     }
+  }
+
+  void videoDragStarted(DragStartDetails details) {
+    dragDistance = 0;
+    dragStartMini = isMini;
   }
 
   bool isVideoInQueue(Video video) {

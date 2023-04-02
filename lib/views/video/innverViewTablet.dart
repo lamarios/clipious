@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:invidious/models/video.dart';
 import 'package:invidious/views/video/commentsContainer.dart';
-import 'package:invidious/views/video/player.dart';
 import 'package:invidious/views/video/recommendedVideos.dart';
 
 import '../../controllers/videoController.dart';
 import '../../controllers/videoInnerViewController.dart';
 import '../../globals.dart';
+import '../../utils.dart';
 import '../components/videoThumbnail.dart';
 import 'info.dart';
 
@@ -37,7 +37,7 @@ class VideoTabletInnerView extends StatelessWidget {
                   Container(
                     alignment: Alignment.center,
                     width: double.infinity,
-                    constraints: const BoxConstraints(maxWidth: 500),
+                    constraints: BoxConstraints(maxWidth: tabletMaxVideoWidth),
                     child: VideoThumbnailView(
                       videoId: video.videoId,
                       thumbnailUrl: video.getBestThumbnail()?.url ?? '',
