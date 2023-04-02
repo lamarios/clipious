@@ -10,7 +10,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../utils.dart';
 
 class MiniPlayer extends StatelessWidget {
-
   const MiniPlayer({Key? key}) : super(key: key);
 
   @override
@@ -46,7 +45,7 @@ class MiniPlayer extends StatelessWidget {
 
         return AnimatedPositioned(
           left: 0,
-          top: _.isFullScreen ? 10000 : _.top,
+          top: _.isFullScreen || _.isShowingOverflow ? 3000 : _.top,
           bottom: _.getBottom,
           right: 0,
           duration: _.isDragging ? Duration.zero : animationDuration,

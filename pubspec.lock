@@ -70,7 +70,7 @@ packages:
     description:
       path: "."
       ref: master
-      resolved-ref: "7fa406a7689cd744baca81fd67d9c70efb55563a"
+      resolved-ref: "6c146929c95a4fc7193f6288b32dc68c1f2ae5d7"
       url: "https://github.com/lamarios/betterplayer.git"
     source: git
     version: "0.0.83"

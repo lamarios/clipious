@@ -41,6 +41,7 @@ class MiniPlayerController extends GetxController {
   double opacity = 0;
   double dragDistance = 0;
   bool dragStartMini = true;
+  bool isShowingOverflow = false;
   PlayerRepeat repeat = PlayerRepeat.values[int.parse(db.getSettings(PLAYER_REPEAT)?.value ?? '0')];
   bool shuffle = db.getSettings(PLAYER_SHUFFLE)?.value == 'true';
   List<String> playedVideos = [];
@@ -299,6 +300,15 @@ class MiniPlayerController extends GetxController {
     return videos.indexWhere((element) => element.videoId == video.videoId) >= 0;
   }
 
+  void handleOverflowOpening(bool opened) {
+    log.info('overflow opened $opened');
+    if (!isFullScreen) {
+      isShowingOverflow = opened;
+    }
+
+    update();
+  }
+
   void handleVideoEvent(BetterPlayerEvent event) {
     switch (event.betterPlayerEventType) {
       case BetterPlayerEventType.progress:
@@ -320,7 +330,12 @@ class MiniPlayerController extends GetxController {
       case BetterPlayerEventType.hideFullscreen:
         isFullScreen = false;
         break;
+      case BetterPlayerEventType.overflowOpened:
+      case BetterPlayerEventType.overflowClosed:
+        handleOverflowOpening(event.betterPlayerEventType == BetterPlayerEventType.overflowOpened);
+        break;
       default:
+        handleOverflowOpening(false);
         break;
     }
     update();
