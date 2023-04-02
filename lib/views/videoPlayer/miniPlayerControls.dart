@@ -10,8 +10,9 @@ const ButtonStyle buttonStyle = ButtonStyle(visualDensity: VisualDensity.compact
 
 class MiniPlayerControls extends StatelessWidget {
   final MiniPlayerController controller;
+  final String videoId;
 
-  const MiniPlayerControls({Key? key, required this.controller}) : super(key: key);
+  const MiniPlayerControls({Key? key, required this.controller, required this.videoId}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +28,7 @@ class MiniPlayerControls extends StatelessWidget {
           builder: (_) => Stack(
             alignment: Alignment.center,
             children: [
-              Positioned(left: 0, child: VideoLikeButton(videoId: controller.currentVideo.videoId, style: buttonStyle)),
+              Positioned(left: 0, child: VideoLikeButton(videoId: videoId, style: buttonStyle)),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

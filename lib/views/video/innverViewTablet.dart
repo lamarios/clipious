@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:invidious/models/video.dart';
+import 'package:invidious/views/components/playButton.dart';
 import 'package:invidious/views/video/commentsContainer.dart';
 import 'package:invidious/views/video/recommendedVideos.dart';
 
@@ -8,6 +9,7 @@ import '../../controllers/videoController.dart';
 import '../../controllers/videoInnerViewController.dart';
 import '../../globals.dart';
 import '../../utils.dart';
+import '../components/addToQueueButton.dart';
 import '../components/videoThumbnail.dart';
 import 'info.dart';
 
@@ -41,14 +43,19 @@ class VideoTabletInnerView extends StatelessWidget {
                     child: VideoThumbnailView(
                       videoId: video.videoId,
                       thumbnailUrl: video.getBestThumbnail()?.url ?? '',
-                      child: IconButton(
-                        key: const ValueKey('nt-playing'),
-                        onPressed: videoController.playVideo,
-                        icon: const Icon(
-                          Icons.play_arrow,
-                          size: 100,
-                        ),
-                        color: colorScheme.primary,
+                      child: Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          PlayButton(
+                            onPressed: videoController.playVideo,
+                          ),
+                          Positioned(
+                              right: 5,
+                              bottom: 3,
+                              child: AddToQueueButton(
+                                videos: [video],
+                              ))
+                        ],
                       ),
                     ),
                   ),

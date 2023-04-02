@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:invidious/controllers/miniPlayerAwareController.dart';
 import 'package:invidious/controllers/playerController.dart';
+import 'package:invidious/controllers/videoLikeController.dart';
 import 'package:invidious/database.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/models/db/settings.dart';
@@ -241,6 +242,7 @@ class MiniPlayerController extends GetxController {
     PlayerController.to()?.switchVideo(v);
     PlayerController.to()?.toggleControls(!isMini);
     update();
+    VideoLikeButtonController.to(tag: VideoLikeButtonController.tags(v.videoId))?.checkVideoLikeStatus();
   }
 
   BaseVideo get currentVideo => videos[currentIndex];

@@ -22,7 +22,7 @@ class VideoPlayerFullScreenView {
 
     return video != null
         ? [
-            Visibility(visible: !controller.isMini, child: MiniPlayerControls(controller: controller)),
+            Visibility(visible: !controller.isMini, child: MiniPlayerControls(controller: controller, videoId: controller.currentVideo.videoId,)),
             Visibility(
                 visible: !controller.isMini,
                 child: Expanded(

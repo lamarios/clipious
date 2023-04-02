@@ -55,7 +55,7 @@ class MiniPlayer extends StatelessWidget {
             opacity: _.opacity,
             duration: animationDuration,
             child: Material(
-              elevation: 5,
+              elevation: 1,
               child: showPlayer
                   ? GestureDetector(
                       onVerticalDragEnd: _.videoDraggedEnd,

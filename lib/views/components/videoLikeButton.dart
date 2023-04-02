@@ -7,7 +7,6 @@ class VideoLikeButton extends StatelessWidget {
   double? size;
   ButtonStyle? style;
 
-
   VideoLikeButton({Key? key, this.videoId, this.size, this.style}) : super(key: key);
 
   @override

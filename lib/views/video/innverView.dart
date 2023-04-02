@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:invidious/controllers/videoInnerViewController.dart';
 import 'package:invidious/models/video.dart';
 import 'package:invidious/views/components/addToQueueButton.dart';
+import 'package:invidious/views/components/playButton.dart';
 import 'package:invidious/views/video/commentsContainer.dart';
 import 'package:invidious/views/video/recommendedVideos.dart';
 
@@ -35,18 +36,12 @@ class VideoInnerView extends StatelessWidget {
             child: Stack(
               alignment: Alignment.center,
               children: [
-                IconButton(
-                  key: const ValueKey('nt-playing'),
+                PlayButton(
                   onPressed: videoController.playVideo,
-                  icon: const Icon(
-                    Icons.play_arrow,
-                    size: 100,
-                  ),
-                  color: colorScheme.primary,
                 ),
                 Positioned(
-                    right: 0,
-                    bottom: 0,
+                    right: 5,
+                    bottom: 3,
                     child: AddToQueueButton(
                       videos: [video],
                     ))

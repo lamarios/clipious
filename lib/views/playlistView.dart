@@ -17,6 +17,7 @@ import '../controllers/playlistController.dart';
 import '../globals.dart';
 import '../models/playlist.dart';
 import 'components/addToQueueButton.dart';
+import 'components/playButton.dart';
 
 class PlaylistView extends StatelessWidget {
   final Playlist playlist;
@@ -183,18 +184,12 @@ class PlaylistView extends StatelessWidget {
                                                 alignment: Alignment.center,
                                                 children: [
                                                   ...buildThumbnails(context, _),
-                                                  IconButton(
-                                                    key: const ValueKey('nt-playing'),
+                                                  PlayButton(
                                                     onPressed: _.play,
-                                                    icon: const Icon(
-                                                      Icons.play_arrow,
-                                                      size: 100,
-                                                    ),
-                                                    color: colorScheme.primary,
                                                   ),
                                                   Positioned(
-                                                      right: 0,
-                                                      bottom: 0,
+                                                      right: 5,
+                                                      bottom: 3,
                                                       child: AddToQueueButton(
                                                         videos: _.playlist.videos,
                                                       ))
@@ -214,7 +209,7 @@ class PlaylistView extends StatelessWidget {
                                                 Padding(
                                                   padding: const EdgeInsets.all(8.0),
                                                   child: InkWell(
-                                                    onLongPress: canDeleteVideos ? () => showPlayListVideoDialog(context, _, v) : null,
+                                                    onTap: canDeleteVideos ? () => showPlayListVideoDialog(context, _, v) : null,
                                                     child: Row(
                                                       children: [
                                                         Padding(

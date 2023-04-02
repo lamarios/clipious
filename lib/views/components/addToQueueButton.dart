@@ -22,9 +22,12 @@ class AddToQueueButton extends StatelessWidget {
             onPressed: _.canAddToQueue() ? _.addToQueue : null,
             child: Row(
               children: [
-                const Icon(
-                  Icons.add,
-                  size: 13,
+                const Padding(
+                  padding: EdgeInsets.only(right: 8.0),
+                  child: Icon(
+                    Icons.playlist_add,
+                    size: 13,
+                  ),
                 ),
                 Text(
                   locals.addToQueueList,
