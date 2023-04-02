@@ -117,6 +117,9 @@ class PlayerController extends GetxController {
       case BetterPlayerEventType.pipStop:
       case BetterPlayerEventType.openFullscreen:
       case BetterPlayerEventType.hideFullscreen:
+      case BetterPlayerEventType.overflowClosed:
+      case BetterPlayerEventType.overflowOpened:
+      case BetterPlayerEventType.initialized:
         MiniPlayerController.to()?.handleVideoEvent(event);
         break;
       default:
