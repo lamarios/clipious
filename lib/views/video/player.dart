@@ -23,9 +23,9 @@ import '../../models/video.dart';
 class VideoPlayer extends StatefulWidget {
   final Video video;
   final bool miniPlayer;
-  bool? playNow;
+  final bool? playNow;
 
-  VideoPlayer({super.key, required this.video, required this.miniPlayer, this.playNow});
+  const VideoPlayer({super.key, required this.video, required this.miniPlayer, this.playNow});
 
   @override
   State<VideoPlayer> createState() => VideoPlayerState();

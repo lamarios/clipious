@@ -115,6 +115,8 @@ class PlayerController extends GetxController {
         break;
       case BetterPlayerEventType.pipStart:
       case BetterPlayerEventType.pipStop:
+      case BetterPlayerEventType.openFullscreen:
+      case BetterPlayerEventType.hideFullscreen:
         MiniPlayerController.to()?.handleVideoEvent(event);
         break;
       default:
@@ -136,6 +138,8 @@ class PlayerController extends GetxController {
   }
 
   switchVideo(Video video) {
+    videoController?.exitFullScreen();
+    MiniPlayerController.to()?.handleVideoEvent(BetterPlayerEvent(BetterPlayerEventType.hideFullscreen));
     disposeControllers();
     this.video = video;
     playVideo();
@@ -197,7 +201,6 @@ class PlayerController extends GetxController {
           imageUrl: video.getBestThumbnail()?.url ?? '',
         ));
 
-
     videoController = BetterPlayerController(
         BetterPlayerConfiguration(
             deviceOrientationsOnFullScreen: [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight, DeviceOrientation.portraitDown, DeviceOrientation.portraitUp],
@@ -209,8 +212,9 @@ class PlayerController extends GetxController {
             autoPlay: true,
             allowedScreenSleep: false,
             fit: BoxFit.contain,
+
             controlsConfiguration: BetterPlayerControlsConfiguration(
-              enablePlayPause: false,
+                enablePlayPause: false,
                 overflowModalColor: colors.background,
                 overflowModalTextColor: overFlowTextColor,
                 overflowMenuIconsColor: overFlowTextColor,

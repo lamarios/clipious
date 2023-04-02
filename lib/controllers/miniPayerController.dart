@@ -35,6 +35,7 @@ class MiniPlayerController extends GetxController {
   int selectedFullScreenIndex = 0;
   bool isPip = false;
   bool isHidden = true;
+  bool isFullScreen = false;
   double progress = 0;
   Video? currentlyPlaying;
   double opacity = 0;
@@ -61,7 +62,11 @@ class MiniPlayerController extends GetxController {
   }
 
   bool handleBackButton(bool stopDefaultButtonEvent, RouteInfo info) {
-    if (!isMini) {
+    if (isFullScreen) {
+      isFullScreen = false;
+      update();
+      return false;
+    } else if (!isMini) {
       // we block the backbutton behavior and we make the player small
       showMiniPlayer();
       return true;
@@ -308,6 +313,12 @@ class MiniPlayerController extends GetxController {
         break;
       case BetterPlayerEventType.pipStop:
         isPip = false;
+        break;
+      case BetterPlayerEventType.openFullscreen:
+        isFullScreen = true;
+        break;
+      case BetterPlayerEventType.hideFullscreen:
+        isFullScreen = false;
         break;
       default:
         break;
