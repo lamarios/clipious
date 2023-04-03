@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_swipe_action_cell/core/cell.dart';
 import 'package:invidious/controllers/miniPayerController.dart';
 import 'package:invidious/views/components/compactVideo.dart';
-import 'package:reorderables/reorderables.dart';
 
 class VideoQueue extends StatelessWidget {
   final MiniPlayerController controller;
@@ -13,8 +12,7 @@ class VideoQueue extends StatelessWidget {
   Widget build(BuildContext context) {
     ColorScheme colors = Theme.of(context).colorScheme;
     return controller.videos.isNotEmpty
-        ? ReorderableColumn(
-            needsLongPressDraggable: true,
+        ? ReorderableListView(
             onReorder: controller.onQueueReorder,
             children: controller.videos.map((e) {
               bool isPlaying = controller.videos[controller.currentIndex].videoId == e.videoId;
