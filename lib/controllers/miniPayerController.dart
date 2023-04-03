@@ -355,8 +355,9 @@ class MiniPlayerController extends GetxController {
     var movedItem = videos.removeAt(oldItemIndex);
     videos.insert(newItemIndex, movedItem);
     log.info('Reordered list: $oldItemIndex new index: ${videos.indexOf(movedItem)}');
-
-    if (oldItemIndex > currentIndex && newItemIndex <= currentIndex) {
+    if (oldItemIndex == currentIndex) {
+      currentIndex = newItemIndex;
+    } else if (oldItemIndex > currentIndex && newItemIndex <= currentIndex) {
       currentIndex++;
     } else if (oldItemIndex < currentIndex && newItemIndex >= currentIndex) {
       currentIndex--;
