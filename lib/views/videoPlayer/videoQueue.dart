@@ -18,31 +18,27 @@ class VideoQueue extends StatelessWidget {
             onReorder: controller.onQueueReorder,
             children: controller.videos.map((e) {
               bool isPlaying = controller.videos[controller.currentIndex].videoId == e.videoId;
-              return ReorderableWidget(
-                reorderable: !isPlaying,
-                key: ValueKey('video-queue-${e.videoId}'),
-                child: SwipeActionCell(
-                  key: ObjectKey(e),
-                  trailingActions: isPlaying
-                      ? []
-                      : [
-                          SwipeAction(
-                              performsFirstActionWithFullSwipe: true,
-                              onTap: (handler) async {
-                                await handler(true);
-                                return controller.removeVideoFromQueue(e);
-                              },
-                              color: Colors.red.shade400,
-                              icon: const Icon(
-                                Icons.clear,
-                                color: Colors.white,
-                              ))
-                        ],
-                  child: CompactVideo(
-                    onTap: () => controller.switchToVideo(e),
-                    video: e,
-                    highlighted: isPlaying,
-                  ),
+              return SwipeActionCell(
+                key: ObjectKey(e),
+                trailingActions: isPlaying
+                    ? []
+                    : [
+                        SwipeAction(
+                            performsFirstActionWithFullSwipe: true,
+                            onTap: (handler) async {
+                              await handler(true);
+                              return controller.removeVideoFromQueue(e);
+                            },
+                            color: Colors.red.shade400,
+                            icon: const Icon(
+                              Icons.clear,
+                              color: Colors.white,
+                            ))
+                      ],
+                child: CompactVideo(
+                  onTap: isPlaying ? () {} : () => controller.switchToVideo(e),
+                  video: e,
+                  highlighted: isPlaying,
                 ),
               );
             }).toList())
