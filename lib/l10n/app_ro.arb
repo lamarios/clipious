@@ -398,5 +398,17 @@
   "password": "Parolă",
   "@password": {
     "description": "Password label for login to a server"
+  },
+  "videoQueue": "Coadă video",
+  "@videoQueue": {
+    "description": "Label for button to display the video queue"
+  },
+  "addToQueueList": "Adaugă la coadă",
+  "@addToQueueList": {
+    "description": "Label on button to add a video to the queue list"
+  },
+  "addRecommendedToQueue": "Redare automată recomandată în continuare",
+  "@addRecommendedToQueue": {
+    "description": "Switch when playing a video to automatically add the recommended videos to the video queue"
   }
 }
