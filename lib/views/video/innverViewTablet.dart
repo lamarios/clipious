@@ -5,6 +5,7 @@ import 'package:invidious/views/components/playButton.dart';
 import 'package:invidious/views/video/commentsContainer.dart';
 import 'package:invidious/views/video/recommendedVideos.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../controllers/videoController.dart';
 import '../../controllers/videoInnerViewController.dart';
 import '../../globals.dart';
@@ -24,6 +25,7 @@ class VideoTabletInnerView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ColorScheme colorScheme = Theme.of(context).colorScheme;
+    AppLocalizations locals = AppLocalizations.of(context)!;
 
     return GetBuilder(
       init: VideoInnerViewController(),
@@ -58,6 +60,13 @@ class VideoTabletInnerView extends StatelessWidget {
                         ],
                       ),
                     ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Checkbox(value: videoController.playRecommendedNext, onChanged: videoController.togglePlayRecommendedNext, visualDensity: VisualDensity.compact),
+                      InkWell(onTap: () => videoController.togglePlayRecommendedNext(!videoController.playRecommendedNext), child: Text(locals.addRecommendedToQueue, style: const TextStyle(fontSize: 12),))
+                    ],
                   ),
                   Expanded(
                       child: Padding(

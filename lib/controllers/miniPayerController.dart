@@ -133,6 +133,8 @@ class MiniPlayerController extends GetxController {
     if (videos.isNotEmpty) {
       //removing videos that are already in the queue
       this.videos.addAll(videos.where((v) => this.videos.indexWhere((v2) => v2.videoId == v.videoId) == -1));
+    }else{
+      playVideo(videos);
     }
     log.info('Videos in queue ${videos.length}');
     update();

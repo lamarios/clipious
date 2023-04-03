@@ -16,6 +16,7 @@ class VideoQueue extends StatelessWidget {
               ...controller.videos.map((e) {
                 bool isPlaying = controller.videos[controller.currentIndex].videoId == e.videoId;
                 return CompactVideo(
+                  key: ValueKey('video-queue-${e.videoId}'),
                   onTap: () => controller.switchToVideo(e),
                   video: e,
                   highlighted: isPlaying,

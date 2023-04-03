@@ -15,6 +15,7 @@ const DYNAMIC_THEME = 'dynamic-theme';
 const USE_DASH = 'use-dash';
 const PLAYER_REPEAT = 'player-repeat';
 const PLAYER_SHUFFLE = 'player-shuffle';
+const PLAY_RECOMMENDED_NEXT = 'play-recommended-next';
 
 const ON_OPEN = "on-open";
 
