@@ -4,6 +4,7 @@ import 'package:better_player/better_player.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:invidious/controllers/miniPlayerAwareController.dart';
+import 'package:invidious/controllers/miniPlayerProgressController.dart';
 import 'package:invidious/controllers/playerController.dart';
 import 'package:invidious/controllers/videoLikeController.dart';
 import 'package:invidious/database.dart';
@@ -133,6 +134,8 @@ class MiniPlayerController extends GetxController {
     if (videos.isNotEmpty) {
       //removing videos that are already in the queue
       this.videos.addAll(videos.where((v) => this.videos.indexWhere((v2) => v2.videoId == v.videoId) == -1));
+    } else {
+      playVideo(videos);
     }
     log.info('Videos in queue ${videos.length}');
     update();
@@ -312,23 +315,30 @@ class MiniPlayerController extends GetxController {
   void handleVideoEvent(BetterPlayerEvent event) {
     switch (event.betterPlayerEventType) {
       case BetterPlayerEventType.progress:
-        int currentPosition = (event.parameters?['progress'] as Duration).inSeconds;
-        progress = currentPosition / currentVideo.lengthSeconds;
+        if (isMini) {
+          int currentPosition = (event.parameters?['progress'] as Duration).inSeconds;
+          progress = currentPosition / currentVideo.lengthSeconds;
+          MiniPlayerProgressController.to()?.setProgress(progress);
+        }
         break;
       case BetterPlayerEventType.finished:
         playNext();
         break;
       case BetterPlayerEventType.pipStart:
         isPip = true;
+        update();
         break;
       case BetterPlayerEventType.pipStop:
         isPip = false;
+        update();
         break;
       case BetterPlayerEventType.openFullscreen:
         isFullScreen = true;
+        update();
         break;
       case BetterPlayerEventType.hideFullscreen:
         isFullScreen = false;
+        update();
         break;
       case BetterPlayerEventType.overflowOpened:
       case BetterPlayerEventType.overflowClosed:
@@ -338,6 +348,20 @@ class MiniPlayerController extends GetxController {
         handleOverflowOpening(false);
         break;
     }
+  }
+
+  onQueueReorder(int oldItemIndex, int newItemIndex) {
+    log.info('Dragged video');
+    var movedItem = videos.removeAt(oldItemIndex);
+    videos.insert(newItemIndex, movedItem);
+    log.info('Reordered list: $oldItemIndex new index: ${videos.indexOf(movedItem)}');
+
+    if (oldItemIndex > currentIndex && newItemIndex <= currentIndex) {
+      currentIndex++;
+    } else if (oldItemIndex < currentIndex && newItemIndex >= currentIndex) {
+      currentIndex--;
+    }
+
     update();
   }
 }

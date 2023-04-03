@@ -10,7 +10,6 @@ import 'package:invidious/views/components/videoLikeButton.dart';
 import 'package:invidious/views/video/innverView.dart';
 import 'package:invidious/views/video/innverViewTablet.dart';
 
-import '../models/video.dart';
 import '../utils.dart';
 
 

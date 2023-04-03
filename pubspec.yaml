@@ -66,6 +66,8 @@ dependencies:
   url_launcher: 6.1.10
   get: 4.6.5
   back_button_interceptor: 6.0.2
+  flutter_swipe_action_cell: 3.1.0
+  reorderables: 0.6.0
 
 
 

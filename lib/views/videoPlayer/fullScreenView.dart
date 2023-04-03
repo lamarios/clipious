@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:invidious/controllers/miniPayerController.dart';
-import 'package:invidious/globals.dart';
-import 'package:invidious/objectbox.g.dart';
-import 'package:invidious/utils.dart';
-import 'package:invidious/views/video/player.dart';
-
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:invidious/controllers/miniPayerController.dart';
+import 'package:invidious/utils.dart';
 import 'package:invidious/views/videoPlayer/videoQueue.dart';
 
 import '../../models/video.dart';
@@ -22,26 +18,33 @@ class VideoPlayerFullScreenView {
 
     return video != null
         ? [
-            Visibility(visible: !controller.isMini, child: MiniPlayerControls(controller: controller, videoId: controller.currentVideo.videoId,)),
+            Visibility(
+                visible: !controller.isMini,
+                child: MiniPlayerControls(
+                  controller: controller,
+                  videoId: controller.currentVideo.videoId,
+                )),
             Visibility(
                 visible: !controller.isMini,
                 child: Expanded(
-                  child: SingleChildScrollView(
-                    child: Padding(
-                      padding: const EdgeInsets.all(16),
-                      child: Container(
-                        constraints: BoxConstraints(maxWidth: tabletMaxVideoWidth),
-                        child: <Widget>[
-                          VideoInfo(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Container(
+                      constraints: BoxConstraints(maxWidth: tabletMaxVideoWidth),
+                      child: <Widget>[
+                        SingleChildScrollView(
+                          child: VideoInfo(
                             video: video,
                           ),
-                          CommentsContainer(
+                        ),
+                        SingleChildScrollView(
+                          child: CommentsContainer(
                             video: video,
                           ),
-                          RecommendedVideos(video: video),
-                          VideoQueue(controller: controller),
-                        ][controller.selectedFullScreenIndex],
-                      ),
+                        ),
+                        SingleChildScrollView(child: RecommendedVideos(video: video)),
+                        VideoQueue(controller: controller),
+                      ][controller.selectedFullScreenIndex],
                     ),
                   ),
                 )),
@@ -51,7 +54,7 @@ class VideoPlayerFullScreenView {
                 NavigationDestination(icon: const Icon(Icons.info), label: locals.info),
                 NavigationDestination(icon: const Icon(Icons.chat_bubble), label: locals.comments),
                 NavigationDestination(icon: const Icon(Icons.schema), label: locals.recommended),
-                NavigationDestination(icon: const Icon(Icons.queue_music), label: locals.videoQueue)
+                NavigationDestination(icon: const Icon(Icons.playlist_play), label: locals.videoQueue)
               ]),
             )
           ]

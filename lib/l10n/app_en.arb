@@ -397,6 +397,10 @@
     "@addToQueueList": {
         "description": "Label on button to add a video to the queue list"
     },
+    "addRecommendedToQueue": "Auto-play recommended next",
+    "@addRecommendedToQueue": {
+        "description": "Switch when playing a video to automatically add the recommended videos to the video queue"
+    },
     "nVideos": "{count, plural, =0{No videos} =1{1 video} other{{count} videos}}",
     "@nVideos": {
         "description": "One or more videos",

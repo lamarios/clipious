@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:invidious/controllers/miniPayerController.dart';
 import 'package:invidious/views/videoPlayer/miniPlayerControls.dart';
+import 'package:invidious/views/videoPlayer/miniPlayerProgress.dart';
 
 import '../../models/video.dart';
 
@@ -26,25 +27,7 @@ class MiniPlayerView {
                             videoId: controller.currentVideo.videoId,
                             controller: controller,
                           ),
-                          Container(
-                              alignment: Alignment.centerLeft,
-                              width: double.infinity,
-                              height: 2,
-                              decoration: BoxDecoration(
-                                color: colors.secondaryContainer,
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                              child: AnimatedFractionallySizedBox(
-                                  widthFactor: controller.progress,
-                                  heightFactor: 1,
-                                  duration: const Duration(milliseconds: 750),
-                                  curve: Curves.easeInOutQuad,
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      color: colors.primary,
-                                      borderRadius: BorderRadius.circular(20),
-                                    ),
-                                  ))),
+                          const MiniPlayerProgress(),
                         ],
                       );
                     }),

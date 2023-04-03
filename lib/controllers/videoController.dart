@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:invidious/controllers/videoInnerViewController.dart';
+import 'package:invidious/database.dart';
+import 'package:invidious/models/baseVideo.dart';
+import 'package:invidious/models/db/settings.dart';
 import 'package:logging/logging.dart';
 
 import '../globals.dart';
@@ -14,6 +17,7 @@ class VideoController extends GetxController {
   final log = Logger('Video');
   Video? video;
   bool loadingVideo = true;
+  bool playRecommendedNext = db.getSettings(PLAY_RECOMMENDED_NEXT)?.value == 'true';
 
   int selectedIndex = 0;
   String videoId;
@@ -45,6 +49,12 @@ class VideoController extends GetxController {
     }
   }
 
+  togglePlayRecommendedNext(bool? value) {
+    db.saveSetting(SettingsValue(PLAY_RECOMMENDED_NEXT, value.toString()));
+    playRecommendedNext = value ?? false;
+    update();
+  }
+
   selectIndex(int index) {
     selectedIndex = index;
     update();
@@ -53,7 +63,11 @@ class VideoController extends GetxController {
 
   void playVideo() {
     if (video != null) {
-      MiniPlayerController.to()?.playVideo([video!], goBack: true);
+      List<BaseVideo> videos = [video!];
+      if (playRecommendedNext) {
+        videos.addAll(video?.recommendedVideos ?? []);
+      }
+      MiniPlayerController.to()?.playVideo(videos, goBack: true);
     }
   }
 }

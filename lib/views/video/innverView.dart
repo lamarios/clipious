@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:invidious/controllers/videoInnerViewController.dart';
 import 'package:invidious/models/video.dart';
@@ -23,6 +24,7 @@ class VideoInnerView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ColorScheme colorScheme = Theme.of(context).colorScheme;
+    AppLocalizations locals = AppLocalizations.of(context)!;
 
     return GetBuilder<VideoInnerViewController>(
       init: VideoInnerViewController(),
@@ -48,9 +50,21 @@ class VideoInnerView extends StatelessWidget {
               ],
             ),
           ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              SizedBox(height:25,child: Checkbox(value: videoController.playRecommendedNext, onChanged: videoController.togglePlayRecommendedNext, visualDensity: VisualDensity.compact)),
+              InkWell(
+                  onTap: () => videoController.togglePlayRecommendedNext(!videoController.playRecommendedNext),
+                  child: Text(
+                    locals.addRecommendedToQueue,
+                    style: const TextStyle(fontSize: 11),
+                  ))
+            ],
+          ),
           Expanded(
               child: Padding(
-            padding: const EdgeInsets.only(top: 4),
+            padding: const EdgeInsets.only(top: 0),
             child: ListView(
               controller: _.scrollController,
               children: [
