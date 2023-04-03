@@ -27,22 +27,24 @@ class VideoPlayerFullScreenView {
             Visibility(
                 visible: !controller.isMini,
                 child: Expanded(
-                  child: SingleChildScrollView(
-                    child: Padding(
-                      padding: const EdgeInsets.all(16),
-                      child: Container(
-                        constraints: BoxConstraints(maxWidth: tabletMaxVideoWidth),
-                        child: <Widget>[
-                          VideoInfo(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Container(
+                      constraints: BoxConstraints(maxWidth: tabletMaxVideoWidth),
+                      child: <Widget>[
+                        SingleChildScrollView(
+                          child: VideoInfo(
                             video: video,
                           ),
-                          CommentsContainer(
+                        ),
+                        SingleChildScrollView(
+                          child: CommentsContainer(
                             video: video,
                           ),
-                          RecommendedVideos(video: video),
-                          VideoQueue(controller: controller),
-                        ][controller.selectedFullScreenIndex],
-                      ),
+                        ),
+                        SingleChildScrollView(child: RecommendedVideos(video: video)),
+                        VideoQueue(controller: controller),
+                      ][controller.selectedFullScreenIndex],
                     ),
                   ),
                 )),
