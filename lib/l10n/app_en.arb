@@ -401,6 +401,16 @@
     "@addRecommendedToQueue": {
         "description": "Switch when playing a video to automatically add the recommended videos to the video queue"
     },
+      "useProxy": "Use proxy",
+        "@useProxy": {
+          "description": "label for settings switch to proxy videos from server"
+        },
+      "useProxyDescription": "By proxying the video streaming from the server, you can bypass regional blocks or ISP blocking youtube. Requires app restart",
+        "@useProxyDescription": {
+          "description": "Description for the use proxy settings"
+        },
+
+
     "nVideos": "{count, plural, =0{No videos} =1{1 video} other{{count} videos}}",
     "@nVideos": {
         "description": "One or more videos",
