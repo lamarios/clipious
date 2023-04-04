@@ -174,10 +174,13 @@ class PlayerController extends GetxController {
 
     bool isHls = video.hlsUrl != null;
     String videoUrl = isHls
-        ? video.hlsUrl!
+        ? '${video.hlsUrl!}${service.useProxy ? '?local=true' : ''}'
         : useDash
-            ? video.dashUrl
+            ? '${video.dashUrl}${service.useProxy ? '?local=true' : ''}'
             : video.formatStreams[video.formatStreams.length - 1].url;
+
+    log.info('Playing url ${videoUrl}');
+
     BetterPlayerVideoFormat format = isHls
         ? BetterPlayerVideoFormat.hls
         : useDash
@@ -215,7 +218,6 @@ class PlayerController extends GetxController {
             autoPlay: true,
             allowedScreenSleep: false,
             fit: BoxFit.contain,
-
             controlsConfiguration: BetterPlayerControlsConfiguration(
                 enablePlayPause: false,
                 overflowModalColor: colors.background,

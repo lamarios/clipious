@@ -110,7 +110,13 @@ class Settings extends StatelessWidget {
                     onToggle: _.toggleDash,
                     title: Text(locals.useDash),
                     description: Text(locals.useDashDescription),
-                  )
+                  ),
+                  SettingsTile.switchTile(
+                    initialValue: _.useProxy,
+                    onToggle: _.toggleProxy,
+                    title: Text(locals.useProxy),
+                    description: Text(locals.useProxyDescription),
+                  ),
                 ]),
                 SettingsSection(title: const Text('SponsorBlock'), tiles: [
                   SettingsTile.switchTile(

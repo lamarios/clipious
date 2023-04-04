@@ -24,6 +24,7 @@ class SettingsController extends GetxController {
   int onOpen = int.parse(db.getSettings(ON_OPEN)?.value ?? '0');
   bool useDynamicTheme = db.getSettings(DYNAMIC_THEME)?.value == 'true';
   bool useDash = db.getSettings(USE_DASH)?.value == 'true';
+  bool useProxy = db.getSettings(USE_PROXY)?.value == 'true';
 
   @override
   onReady() {
@@ -46,6 +47,12 @@ class SettingsController extends GetxController {
   toggleDash(bool value) {
     db.saveSetting(SettingsValue(USE_DASH, value.toString()));
     useDash = value;
+    update();
+  }
+
+  toggleProxy(bool value) {
+    db.saveSetting(SettingsValue(USE_PROXY, value.toString()));
+    useProxy = value;
     update();
   }
 
