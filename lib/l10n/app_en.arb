@@ -401,11 +401,11 @@
     "@addRecommendedToQueue": {
         "description": "Switch when playing a video to automatically add the recommended videos to the video queue"
     },
-      "useProxy": "Use proxy",
+      "useProxy": "Proxy videos",
         "@useProxy": {
           "description": "label for settings switch to proxy videos from server"
         },
-      "useProxyDescription": "By proxying the video streaming from the server, you can bypass regional blocks or ISP blocking youtube. Requires app restart",
+      "useProxyDescription": "By proxying video streams from the server, you can bypass regional blocks or ISP blocking YouTube. Requires app restart",
         "@useProxyDescription": {
           "description": "Description for the use proxy settings"
         },
