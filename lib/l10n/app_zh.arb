@@ -410,5 +410,13 @@
   "addRecommendedToQueue": "自动播放推荐内容",
   "@addRecommendedToQueue": {
     "description": "Switch when playing a video to automatically add the recommended videos to the video queue"
+  },
+  "useProxy": "使用代理",
+  "@useProxy": {
+    "description": "label for settings switch to proxy videos from server"
+  },
+  "useProxyDescription": "通过服务实例代理视频流，可以解除区域和网络服务商的YouTube限制。需要重新启动应用",
+  "@useProxyDescription": {
+    "description": "Description for the use proxy settings"
   }
 }
