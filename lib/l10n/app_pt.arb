@@ -406,5 +406,9 @@
   "addToQueueList": "Adicionar à fila",
   "@addToQueueList": {
     "description": "Label on button to add a video to the queue list"
+  },
+  "addRecommendedToQueue": "Reprodução automática recomendada a seguir",
+  "@addRecommendedToQueue": {
+    "description": "Switch when playing a video to automatically add the recommended videos to the video queue"
   }
 }
