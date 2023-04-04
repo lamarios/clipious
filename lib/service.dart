@@ -24,6 +24,7 @@ import 'models/channelVideos.dart';
 import 'models/db/server.dart';
 import 'models/invidiousPublicServer.dart';
 import 'models/searchSuggestion.dart';
+import 'models/sponsorSegmentTypes.dart';
 import 'models/subscription.dart';
 import 'models/videoComments.dart';
 
@@ -82,7 +83,9 @@ class Service {
 
   Uri buildUrl(String baseUrl, {Map<String, String>? pathParams, Map<String, String?>? query}) {
     try {
-      String url = '${db.getCurrentlySelectedServer().url}$baseUrl';
+      String url = '${db
+          .getCurrentlySelectedServer()
+          .url}$baseUrl';
 
       pathParams?.forEach((key, value) {
         url = url.replaceAll(key, value);
@@ -147,7 +150,9 @@ class Service {
     String url = '$serverUrl/authorize_token?scopes=:feed,:subscriptions*,:playlists*&callback_url=clipious-auth://';
     final result = await FlutterWebAuth.authenticate(url: url, callbackUrlScheme: 'clipious-auth');
 
-    final token = Uri.parse(result).queryParameters['token'];
+    final token = Uri
+        .parse(result)
+        .queryParameters['token'];
 
     Server? server = db.getServer(serverUrl);
 
@@ -176,7 +181,9 @@ class Service {
   }
 
   Future<List<VideoInList>> getTrending({String? type}) async {
-    String countryCode = db.getSettings(BROWSING_COUNTRY)?.value ?? 'US';
+    String countryCode = db
+        .getSettings(BROWSING_COUNTRY)
+        ?.value ?? 'US';
     // parse.queryParameters['region'] = countryCode;
     Map<String, String>? query = {'region': countryCode};
 
@@ -234,9 +241,15 @@ class Service {
     return UserFeed.fromJson(handleResponse(response));
   }
 
-  Future<List<SponsorSegment>> getSponsorSegments(String videoId) async {
+  Future<List<SponsorSegment>> getSponsorSegments(String videoId, List<SponsorSegmentType> categories) async {
     try {
       String url = GET_SPONSOR_SEGMENTS.replaceAll(":id", videoId);
+
+      if (categories.isNotEmpty) {
+        url += '&categories=[${categories.map((e) => '"${e.name}"').join(",")}]';
+      }
+
+
       log.info('Calling $url');
       final response = await http.get(Uri.parse(url));
       Iterable i = handleResponse(response);
@@ -408,14 +421,18 @@ class Service {
   }
 
   Future<Duration?> pingServer(String url) async {
-    int start = DateTime.now().millisecondsSinceEpoch;
+    int start = DateTime
+        .now()
+        .millisecondsSinceEpoch;
     String fullUri = '$url${STATS}';
     log.info('calling ${fullUri}');
     final response = await http.get(Uri.parse(fullUri), headers: {'Content-Type': 'application/json; charset=utf-16'});
 
     try {
       handleResponse(response);
-      var diff = DateTime.now().millisecondsSinceEpoch - start;
+      var diff = DateTime
+          .now()
+          .millisecondsSinceEpoch - start;
       return Duration(milliseconds: diff);
     } catch (err) {
       log.info(err);

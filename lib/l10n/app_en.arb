@@ -401,6 +401,74 @@
     "@addRecommendedToQueue": {
         "description": "Switch when playing a video to automatically add the recommended videos to the video queue"
     },
+    "sponsorBlockSettingsQuickDescription": "Select which type of segments to skip",
+    "@sponsorBlockSettingsQuickDescription": {
+        "description": "Small description of what the sponsor block settings do"
+    },
+    "sponsorBlockCategorySponsor": "Sponsor",
+    "@sponsorBlockCategorySponsor": {
+        "description": "Sponsor block 'Sponsor' Category"
+    },
+    "sponsorBlockCategorySponsorDescription": "Paid promotion, paid referrals and direct advertisements. Not for self-promotion or free shoutouts to causes/creators/websites/products they like.",
+    "@sponsorBlockCategorySponsorDescription": {
+        "description": "Sponsor block 'Sponsor' Category description"
+    },
+    "sponsorBlockCategoryUnpaidSelfPromo": "Unpaid/Self Promotion",
+    "@sponsorBlockCategoryUnpaidSelfPromo": {
+        "description": "Sponsor block 'Unpaid/Self promotion' Category"
+    },
+    "sponsorBlockCategoryUnpaidSelfPromoDescription": "Similar to \"sponsor\" except for unpaid or self promotion. This includes sections about merchandise, donations, or information about who they collaborated ",
+    "@sponsorBlockCategoryUnpaidSelfPromoDescription": {
+        "description": "Sponsor block 'Unpaid/Self promotion' Category description"
+    },
+    "sponsorBlockCategoryInteraction": "Interaction Reminder (Subscribe)",
+    "@sponsorBlockCategoryInteraction": {
+        "description": "Sponsor block 'Interaction' Category"
+    },
+    "sponsorBlockCategoryInteractionDescription": "When there is a short reminder to like, subscribe or follow them in the middle of content. If it is long or about something specific, it should be under self promotion instead.",
+    "@sponsorBlockCategoryInteractionDescription": {
+        "description": "Sponsor block 'Interaction' Category description"
+    },
+    "sponsorBlockCategoryIntro": "Intermission/Intro Animation",
+    "@sponsorBlockCategoryIntro": {
+        "description": "Sponsorblock 'Intro' Category"
+    },
+    "sponsorBlockCategoryIntroDescription": "An interval without actual content. Could be a pause, static frame, repeating animation. This should not be used for transitions containing information.",
+    "@sponsorBlockCategoryIntroDescription": {
+        "description": "Sponsorblock 'Intro' Category description"
+    },
+    "sponsorBlockCategoryOutro": "Endcards/Credits",
+    "@sponsorBlockCategoryOutro": {
+        "description": "Outro block 'Outro' Category"
+    },
+    "sponsorBlockCategoryOutroDescription": "Credits or when the YouTube endcards appear. Not for conclusions with information.",
+    "@sponsorBlockCategoryOutroDescription": {
+        "description": "Outro block 'Outro' Category description"
+    },
+    "sponsorBlockCategoryPreview": "Preview/Recap",
+    "@sponsorBlockCategoryPreview": {
+        "description": "Sponsorblock 'Preview' Category"
+    },
+    "sponsorBlockCategoryPreviewDescription": "Collection of clips that show what is coming up in in this video or other videos in a series where all information is repeated later in the video",
+    "@sponsorBlockCategoryPreviewDescription": {
+        "description": "Sponsorblock 'Preview' Category description"
+    },
+    "sponsorBlockCategoryFiller": "Filler Tangent/Jokes",
+    "@sponsorBlockCategoryFiller": {
+        "description": "Sponsorblock 'Filler' Category"
+    },
+    "sponsorBlockCategoryFillerDescription": "Tangential scenes added only for filler or humor that are not required to understand the main content of the video. This should not include segments providing context or background details. This is a very aggressive category meant for when you aren''t in the mood for \"fun\".",
+    "@sponsorBlockCategoryFillerDescription": {
+        "description": "Sponsorblock 'Filler' Category description"
+    },
+    "sponsorBlockCategoryMusicOffTopic": "Music: Non-Music Section",
+    "@sponsorBlockCategoryMusicOffTopic": {
+        "description": "Sponsorblock 'MusicOffTopic' Category"
+    },
+    "sponsorBlockCategoryMusicOffTopicDescription": "An interval without actual content. Could be a pause, static frame, repeating animation. This should not be used for transitions containing information.",
+    "@sponsorBlockCategoryMusicOffTopicDescription": {
+        "description": "Only for use in music videos. This only should be used for sections of music videos that aren't already covered by another category."
+    },
       "useProxy": "Proxy videos",
         "@useProxy": {
           "description": "label for settings switch to proxy videos from server"

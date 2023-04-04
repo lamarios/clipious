@@ -14,6 +14,7 @@ import '../models/db/settings.dart';
 import '../models/pair.dart';
 import '../../models/db/progress.dart' as dbProgress;
 import '../models/sponsorSegment.dart';
+import '../models/sponsorSegmentTypes.dart';
 import '../models/video.dart';
 import 'miniPayerController.dart';
 
@@ -21,7 +22,6 @@ class PlayerController extends GetxController {
   static PlayerController? to() => safeGet();
 
   final log = Logger('VideoPlayer');
-  bool useSponsorBlock = db.getSettings(USE_SPONSORBLOCK)?.value == 'true';
   List<Pair<int>> sponsorSegments = List.of([]);
   Pair<int> nextSegment = Pair(0, 0);
   BetterPlayerController? videoController;
@@ -53,7 +53,6 @@ class PlayerController extends GetxController {
 
   @override
   onReady() async {
-    await setSponsorBlock();
     playVideo();
   }
 
@@ -88,7 +87,7 @@ class PlayerController extends GetxController {
           saveProgress(currentPosition);
           log.info("video event");
 
-          if (useSponsorBlock && sponsorSegments.isNotEmpty) {
+          if (sponsorSegments.isNotEmpty) {
             double positionInMs = currentPosition * 1000;
             Pair<int> nextSegment = sponsorSegments.firstWhere((e) => e.first <= positionInMs && positionInMs <= e.last, orElse: () => Pair<int>(-1, -1));
             if (nextSegment.first != -1) {
@@ -160,6 +159,8 @@ class PlayerController extends GetxController {
   }
 
   playVideo() {
+    // we get segments if there are any, no need to wait.
+    setSponsorBlock();
     double progress = db.getVideoProgress(video.videoId);
     Duration? startAt;
     if (progress > 0 && progress < 0.90) {
@@ -231,8 +232,10 @@ class PlayerController extends GetxController {
   }
 
   setSponsorBlock() async {
-    if (useSponsorBlock) {
-      List<SponsorSegment> sponsorSegments = await service.getSponsorSegments(video.videoId);
+    List<SponsorSegmentType> types = SponsorSegmentType.values.where((e) => db.getSettings(e.settingsName())?.value == 'true').toList();
+
+    if (types.isNotEmpty) {
+      List<SponsorSegment> sponsorSegments = await service.getSponsorSegments(video.videoId, types);
       List<Pair<int>> segments = List.from(sponsorSegments.map((e) {
         Duration start = Duration(seconds: e.segment[0].floor());
         Duration end = Duration(seconds: e.segment[1].floor());
@@ -241,7 +244,9 @@ class PlayerController extends GetxController {
       }));
 
       this.sponsorSegments = segments;
-      update();
+      log.info('we found ${segments.length} segments to skip');
+    } else {
+      sponsorSegments = [];
     }
   }
 }

@@ -4,6 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:invidious/myRouteObserver.dart';
 import 'package:invidious/views/components/miniPlayerAware.dart';
+import 'package:invidious/views/settings/sponsorBlockSettings.dart';
 import 'package:select_dialog/select_dialog.dart';
 import 'package:settings_ui/settings_ui.dart';
 
@@ -25,6 +26,10 @@ class Settings extends StatelessWidget {
 
   manageServers(BuildContext context) {
     Navigator.push(context, MaterialPageRoute(settings: ROUTE_SETTINGS_MANAGE_SERVERS, builder: (context) => const ManageServers()));
+  }
+
+  openSponsorBlockSettings(BuildContext context) {
+    Navigator.push(context, MaterialPageRoute(settings: ROUTE_SETTINGS_SPONSOR_BLOCK, builder: (context) => const SponsorBlockSettings()));
   }
 
   searchCountry(BuildContext context, SettingsController controller) {
@@ -124,6 +129,7 @@ class Settings extends StatelessWidget {
                     onToggle: _.toggleSponsorBlock,
                     title: Text(locals.useSponsorBlock),
                     description: Text(locals.sponsorBlockDescription),
+                    onPressed: openSponsorBlockSettings,
                   )
                 ]),
                 SettingsSection(
