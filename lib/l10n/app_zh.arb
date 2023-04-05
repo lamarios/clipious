@@ -418,5 +418,21 @@
   "useProxyDescription": "通过服务实例代理视频流，可以解除区域和网络服务商的YouTube限制。需要重新启动应用",
   "@useProxyDescription": {
     "description": "Description for the use proxy settings"
+  },
+  "sponsorBlockCategorySponsor": "赞助商",
+  "@sponsorBlockCategorySponsor": {
+    "description": "Sponsor block 'Sponsor' Category"
+  },
+  "sponsorBlockCategorySponsorDescription": "付费促销、付费推荐和直接广告。不是自我推销或免费推荐事业/创作者/网站/产品。",
+  "@sponsorBlockCategorySponsorDescription": {
+    "description": "Sponsor block 'Sponsor' Category description"
+  },
+  "sponsorBlockSettingsQuickDescription": "选择要跳过的赞助商片段类型",
+  "@sponsorBlockSettingsQuickDescription": {
+    "description": "Small description of what the sponsor block settings do"
+  },
+  "sponsorBlockCategoryUnpaidSelfPromo": "未付费/自我推销",
+  "@sponsorBlockCategoryUnpaidSelfPromo": {
+    "description": "Sponsor block 'Unpaid/Self promotion' Category"
   }
 }
