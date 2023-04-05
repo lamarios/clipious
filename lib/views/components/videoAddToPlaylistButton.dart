@@ -11,7 +11,6 @@ class VideoAddToPlaylistButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ColorScheme colors = Theme.of(context).colorScheme;
     return GetBuilder<AddToPlaylistButtonController>(
       tag: AddToPlaylistButtonController.tags(videoId ?? ''),
       init: AddToPlaylistButtonController(videoId: videoId),

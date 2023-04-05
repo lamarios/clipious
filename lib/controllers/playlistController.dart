@@ -1,14 +1,11 @@
-import 'package:better_player/better_player.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:invidious/controllers/miniPayerController.dart';
 import 'package:invidious/controllers/playlistListController.dart';
-import 'package:invidious/views/miniPlayer.dart';
 import 'package:logging/logging.dart';
 
 import '../globals.dart';
 import '../models/playlist.dart';
-import '../models/video.dart';
 import '../models/videoInList.dart';
 
 class PlaylistController extends GetxController {

@@ -11,7 +11,6 @@ class VideoLikeButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ColorScheme colors = Theme.of(context).colorScheme;
     return GetBuilder<VideoLikeButtonController>(
       init: VideoLikeButtonController(videoId: videoId),
       tag: VideoLikeButtonController.tags(videoId ?? ''),

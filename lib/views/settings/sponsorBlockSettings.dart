@@ -5,7 +5,6 @@ import 'package:invidious/controllers/sponsorBlockSettingsController.dart';
 import 'package:invidious/models/sponsorSegmentTypes.dart';
 import 'package:settings_ui/settings_ui.dart';
 
-import '../components/miniPlayerAware.dart';
 import '../settings.dart';
 
 class SponsorBlockSettings extends StatelessWidget {
