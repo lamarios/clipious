@@ -1,3 +1,4 @@
+import 'package:invidious/models/sponsorSegmentTypes.dart';
 import 'package:json_annotation/json_annotation.dart';
 /*
 
@@ -21,8 +22,9 @@ part 'sponsorSegment.g.dart';
 class SponsorSegment{
   String actionType;
   List<double> segment;
+  SponsorSegmentType category;
 
-  SponsorSegment(this.actionType, this.segment);
+  SponsorSegment(this.actionType, this.segment, this.category);
 
   factory SponsorSegment.fromJson(Map<String, dynamic> json) => _$SponsorSegmentFromJson(json);
 

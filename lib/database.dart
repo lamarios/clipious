@@ -10,6 +10,7 @@ import 'objectbox.g.dart'; // created by `flutter pub run build_runner build`
 
 const SELECTED_SERVER = 'selected-server';
 const USE_SPONSORBLOCK = 'use-sponsor-block';
+const SPONSOR_BLOCK_PREFIX='sponsor-block-';
 const BROWSING_COUNTRY = 'browsing-country';
 const DYNAMIC_THEME = 'dynamic-theme';
 const USE_DASH = 'use-dash';

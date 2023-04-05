@@ -10,6 +10,7 @@ import 'globals.dart';
 const RouteSettings ROUTE_SETTINGS = RouteSettings(name: 'settings');
 const RouteSettings ROUTE_SETTINGS_MANAGE_SERVERS = RouteSettings(name: 'settings-manage-servers');
 const RouteSettings ROUTE_SETTINGS_MANAGE_ONE_SERVER = RouteSettings(name: 'settings-manage-one-server');
+const RouteSettings ROUTE_SETTINGS_SPONSOR_BLOCK = RouteSettings(name: 'settings-sponsor-block');
 const RouteSettings ROUTE_VIDEO = RouteSettings(name: 'video');
 const RouteSettings ROUTE_CHANNEL = RouteSettings(name: 'channel');
 const RouteSettings ROUTE_PLAYLIST_LIST = RouteSettings(name: 'playlist-list');
@@ -25,6 +26,7 @@ class MyRouteObserver extends RouteObserver<PageRoute<dynamic>> {
         case ROUTE_PLAYLIST:
         case ROUTE_SETTINGS_MANAGE_SERVERS:
         case ROUTE_SETTINGS_MANAGE_ONE_SERVER:
+        case ROUTE_SETTINGS_SPONSOR_BLOCK:
         case ROUTE_VIDEO:
         case ROUTE_PLAYLIST_LIST:
         case ROUTE_CHANNEL:
@@ -42,7 +44,7 @@ class MyRouteObserver extends RouteObserver<PageRoute<dynamic>> {
   void didPush(Route<dynamic> route, Route<dynamic>? previousRoute) {
     super.didPush(route, previousRoute);
     if (route is PageRoute) {
-      if(previousRoute is PageRoute){
+      if (previousRoute is PageRoute) {
         stopPlayingOnPop(route, previousRoute);
       }
     }
