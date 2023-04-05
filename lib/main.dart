@@ -198,7 +198,6 @@ class _HomeState extends State<Home> with AfterLayoutMixin {
                 IconButton(
                   onPressed: () => openSettings(context),
                   icon: const Icon(Icons.settings),
-                  color: colorScheme.secondary,
                 ),
               ],
             ),

@@ -33,14 +33,14 @@ class PlaylistController extends GetxController {
   Future<bool> removeVideoFromPlayList(VideoInList v) async {
     await service.deleteUserPlaylistVideo(playlist.playlistId, v.indexId ?? '');
     PlaylistListController.to(tag: PlaylistListController.getTag(userPlayListTag))?.refreshPlaylists();
-
+    playlist.videos.remove(v);
     update();
 
     return false;
   }
 
-  play(){
-    MiniPlayerController.to()?.playVideo(playlist.videos,  goBack: false);
+  play() {
+    MiniPlayerController.to()?.playVideo(playlist.videos, goBack: false);
   }
 
   getAllVideos() async {

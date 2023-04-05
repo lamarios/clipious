@@ -53,7 +53,6 @@ class VideoView extends StatelessWidget {
                       child: IconButton(
                         onPressed: () => showSharingSheet(context, _.video!),
                         icon: const Icon(Icons.share),
-                        color: colorScheme.secondary,
                       ),
                     ),
                     VideoLikeButton(videoId: _.video?.videoId),

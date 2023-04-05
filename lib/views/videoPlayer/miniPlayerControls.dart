@@ -28,7 +28,7 @@ class MiniPlayerControls extends StatelessWidget {
           builder: (_) => Stack(
             alignment: Alignment.center,
             children: [
-              Positioned(left: 0, child: VideoLikeButton(videoId: videoId, style: buttonStyle)),
+              // Positioned(left: 0, child: VideoLikeButton(videoId: videoId, style: buttonStyle)),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

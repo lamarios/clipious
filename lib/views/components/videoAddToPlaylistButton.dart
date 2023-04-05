@@ -24,7 +24,6 @@ class VideoAddToPlaylistButton extends StatelessWidget {
               onPressed: () => AddToPlaylist.showAddToPlaylistDialog(context, _.videoId!),
               icon: Icon(
                 Icons.add,
-                color: colors.secondary,
               ),
             ),
             _.playListCount > 0
@@ -33,7 +32,7 @@ class VideoAddToPlaylistButton extends StatelessWidget {
                   right: 10,
                   child: Text(
                     _.playListCount.toString(),
-                    style: TextStyle(color: colors.secondary, fontSize: 8),
+                    style: const TextStyle(fontSize: 8),
                   ),
                 )
                 : const SizedBox.shrink()

@@ -22,7 +22,6 @@ class VideoLikeButton extends StatelessWidget {
           iconSize: size,
           onPressed: _.toggleLike,
           icon: _.isVideoLiked ? const Icon(Icons.favorite) : const Icon(Icons.favorite_border),
-          color: colors.secondary,
         ),
       ),
     );

@@ -26,11 +26,11 @@ class Settings extends StatelessWidget {
   const Settings({super.key});
 
   manageServers(BuildContext context) {
-    navigatorKey.currentState?.push( MaterialPageRoute(settings: ROUTE_SETTINGS_MANAGE_SERVERS, builder: (context) => const ManageServers()));
+    navigatorKey.currentState?.push(MaterialPageRoute(settings: ROUTE_SETTINGS_MANAGE_SERVERS, builder: (context) => const ManageServers()));
   }
 
   openSponsorBlockSettings(BuildContext context) {
-    Navigator.push(context, MaterialPageRoute(settings: ROUTE_SETTINGS_SPONSOR_BLOCK, builder: (context) => const SponsorBlockSettings()));
+    navigatorKey.currentState?.push(MaterialPageRoute(settings: ROUTE_SETTINGS_SPONSOR_BLOCK, builder: (context) => const SponsorBlockSettings()));
   }
 
   searchCountry(BuildContext context, SettingsController controller) {
@@ -116,16 +116,16 @@ class Settings extends StatelessWidget {
                   title: Text(locals.useDash),
                   description: Text(locals.useDashDescription),
                 ),
-
                 SettingsTile.switchTile(
                   initialValue: _.useProxy,
                   onToggle: _.toggleProxy,
                   title: Text(locals.useProxy),
-                    description: Text(locals.useProxyDescription),
-                  ),
-                  SettingsTile.navigation(
-                    title: Text('SponsorBlock'),
-                  description: Text(locals.sponsorBlockDescription),onPressed: openSponsorBlockSettings,
+                  description: Text(locals.useProxyDescription),
+                ),
+                SettingsTile.navigation(
+                  title: Text('SponsorBlock'),
+                  description: Text(locals.sponsorBlockDescription),
+                  onPressed: openSponsorBlockSettings,
                 )
               ]),
               SettingsSection(

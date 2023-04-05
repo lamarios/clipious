@@ -21,29 +21,27 @@ class SponsorBlockSettings extends StatelessWidget {
       init: SponsorBlockSettingsController(),
       global: false,
       builder: (_) {
-        return MiniPlayerAware(
-          child: Scaffold(
-              appBar: AppBar(
-                scrolledUnderElevation: 0,
-                title: const Text('SponsorBlock'),
-              ),
-              backgroundColor: colorScheme.background,
-              body: SafeArea(
-                bottom: false,
-                child: SettingsList(lightTheme: theme, darkTheme: theme, sections: [
-                  SettingsSection(
-                      title: Text(locals.sponsorBlockSettingsQuickDescription),
-                      tiles: SponsorSegmentType.values
-                          .map((t) => SettingsTile.switchTile(
-                                initialValue: _.value(t),
-                                onToggle: (bool value) => _.setValue(t, value),
-                                title: Text(SponsorSegmentType.getLabel(t, locals)),
-                                description: Text(SponsorSegmentType.getDescription(t, locals)),
-                              ))
-                          .toList()),
-                ]),
-              )),
-        );
+        return Scaffold(
+            appBar: AppBar(
+              scrolledUnderElevation: 0,
+              title: const Text('SponsorBlock'),
+            ),
+            backgroundColor: colorScheme.background,
+            body: SafeArea(
+              bottom: false,
+              child: SettingsList(lightTheme: theme, darkTheme: theme, sections: [
+                SettingsSection(
+                    title: Text(locals.sponsorBlockSettingsQuickDescription),
+                    tiles: SponsorSegmentType.values
+                        .map((t) => SettingsTile.switchTile(
+                              initialValue: _.value(t),
+                              onToggle: (bool value) => _.setValue(t, value),
+                              title: Text(SponsorSegmentType.getLabel(t, locals)),
+                              description: Text(SponsorSegmentType.getDescription(t, locals)),
+                            ))
+                        .toList()),
+              ]),
+            ));
       },
     );
   }
