@@ -122,12 +122,8 @@ class Settings extends StatelessWidget {
                     title: Text(locals.useProxy),
                     description: Text(locals.useProxyDescription),
                   ),
-                ]),
-                SettingsSection(title: const Text('SponsorBlock'), tiles: [
-                  SettingsTile.switchTile(
-                    initialValue: _.sponsorBlock,
-                    onToggle: _.toggleSponsorBlock,
-                    title: Text(locals.useSponsorBlock),
+                  SettingsTile.navigation(
+                    title: Text('SponsorBlock'),
                     description: Text(locals.sponsorBlockDescription),
                     onPressed: openSponsorBlockSettings,
                   )
