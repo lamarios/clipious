@@ -14,6 +14,7 @@ import 'package:invidious/utils.dart';
 import 'package:logging/logging.dart';
 
 import 'package:back_button_interceptor/back_button_interceptor.dart';
+import '../main.dart';
 import '../models/baseVideo.dart';
 import '../models/video.dart';
 import '../views/video.dart';
@@ -53,7 +54,7 @@ class MiniPlayerController extends GetxController {
   @override
   onReady() {
     super.onReady();
-    BackButtonInterceptor.add(handleBackButton, name: 'miniPlayer');
+    BackButtonInterceptor.add(handleBackButton, name: 'miniPlayer', zIndex: 2);
     // show();
   }
 
@@ -67,7 +68,8 @@ class MiniPlayerController extends GetxController {
     if (isFullScreen) {
       isFullScreen = false;
       update();
-      return false;
+      globalNavigator.currentState?.pop();
+      return true;
     } else if (!isMini) {
       // we block the backbutton behavior and we make the player small
       showMiniPlayer();
@@ -214,7 +216,7 @@ class MiniPlayerController extends GetxController {
   }
 
   playVideo(List<BaseVideo> videos, {bool? goBack}) {
-    if (goBack ?? false) Get.back();
+    if (goBack ?? false) navigatorKey.currentState?.pop();
     log.info('Playing ${videos.length} videos');
     if (videos.isNotEmpty) {
       this.videos = List.from(videos, growable: true);
@@ -303,15 +305,6 @@ class MiniPlayerController extends GetxController {
     return videos.indexWhere((element) => element.videoId == video.videoId) >= 0;
   }
 
-  void handleOverflowOpening(bool opened) {
-    log.info('overflow opened $opened');
-    if (!isFullScreen) {
-      isShowingOverflow = opened;
-    }
-
-    update();
-  }
-
   void handleVideoEvent(BetterPlayerEvent event) {
     switch (event.betterPlayerEventType) {
       case BetterPlayerEventType.progress:
@@ -340,12 +333,7 @@ class MiniPlayerController extends GetxController {
         isFullScreen = false;
         update();
         break;
-      case BetterPlayerEventType.overflowOpened:
-      case BetterPlayerEventType.overflowClosed:
-        handleOverflowOpening(event.betterPlayerEventType == BetterPlayerEventType.overflowOpened);
-        break;
       default:
-        handleOverflowOpening(false);
         break;
     }
   }

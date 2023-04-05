@@ -118,8 +118,10 @@ class ServerListSettingsController extends GetxController {
       publicServersError = PublicServerErrors.none;
       update();
     } catch (err) {
+      err.printError();
       publicServersError = PublicServerErrors.couldNotGetList;
       update();
+      rethrow;
     }
   }
 

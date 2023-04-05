@@ -6,7 +6,7 @@ part 'invidiousServerStats.g.dart';
 @JsonSerializable()
 class InvidiousServerStats {
   InvidiousServerSoftware software;
-  bool openRegistrations;
+  bool? openRegistrations;
 
   InvidiousServerStats(this.software, this.openRegistrations);
 

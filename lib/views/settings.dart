@@ -10,6 +10,7 @@ import 'package:settings_ui/settings_ui.dart';
 
 import '../controllers/settingsController.dart';
 import '../globals.dart';
+import '../main.dart';
 import 'settings/manageServers.dart';
 
 settingsTheme(ColorScheme colorScheme) => SettingsThemeData(
@@ -25,7 +26,7 @@ class Settings extends StatelessWidget {
   const Settings({super.key});
 
   manageServers(BuildContext context) {
-    Navigator.push(context, MaterialPageRoute(settings: ROUTE_SETTINGS_MANAGE_SERVERS, builder: (context) => const ManageServers()));
+    navigatorKey.currentState?.push( MaterialPageRoute(settings: ROUTE_SETTINGS_MANAGE_SERVERS, builder: (context) => const ManageServers()));
   }
 
   openSponsorBlockSettings(BuildContext context) {
@@ -73,86 +74,84 @@ class Settings extends StatelessWidget {
 
     return GetBuilder<SettingsController>(
       init: SettingsController(),
-      builder: (_) => MiniPlayerAware(
-        child: Scaffold(
-            extendBody: true,
-            bottomNavigationBar: const SizedBox.shrink(),
-            appBar: AppBar(
-              scrolledUnderElevation: 0,
-              title: Text(locals.settings),
-            ),
-            backgroundColor: colorScheme.background,
-            body: SafeArea(
-                child: SettingsList(
-              lightTheme: theme,
-              darkTheme: theme,
-              sections: [
-                SettingsSection(
-                  title: Text(locals.browsing),
-                  tiles: [
-                    SettingsTile(
-                      title: Text(locals.country),
-                      value: Text(_.country.name),
-                      onPressed: (context) => searchCountry(context, _),
-                    ),
-                    SettingsTile(
-                      title: Text(locals.whenAppStartsShow),
-                      value: Text(getCategories(context)[_.onOpen]),
-                      onPressed: (context) => selectOnOpen(context, _),
-                    )
-                  ],
+      builder: (_) => Scaffold(
+          extendBody: true,
+          bottomNavigationBar: const SizedBox.shrink(),
+          appBar: AppBar(
+            scrolledUnderElevation: 0,
+            title: Text(locals.settings),
+          ),
+          backgroundColor: colorScheme.background,
+          body: SafeArea(
+              child: SettingsList(
+            lightTheme: theme,
+            darkTheme: theme,
+            sections: [
+              SettingsSection(
+                title: Text(locals.browsing),
+                tiles: [
+                  SettingsTile(
+                    title: Text(locals.country),
+                    value: Text(_.country.name),
+                    onPressed: (context) => searchCountry(context, _),
+                  ),
+                  SettingsTile(
+                    title: Text(locals.whenAppStartsShow),
+                    value: Text(getCategories(context)[_.onOpen]),
+                    onPressed: (context) => selectOnOpen(context, _),
+                  )
+                ],
+              ),
+              SettingsSection(title: Text(locals.servers), tiles: [
+                SettingsTile.navigation(
+                  title: Text(locals.manageServers),
+                  description: Text(locals.currentServer(db.getCurrentlySelectedServer().url)),
+                  onPressed: manageServers,
                 ),
-                SettingsSection(title: Text(locals.servers), tiles: [
-                  SettingsTile.navigation(
-                    title: Text(locals.manageServers),
-                    description: Text(locals.currentServer(db.getCurrentlySelectedServer().url)),
-                    onPressed: manageServers,
-                  ),
-                ]),
-                SettingsSection(title: Text(locals.videoPlayer), tiles: [
-                  SettingsTile.switchTile(
-                    initialValue: _.useDash,
-                    onToggle: _.toggleDash,
-                    title: Text(locals.useDash),
-                    description: Text(locals.useDashDescription),
-                  ),
-                  SettingsTile.switchTile(
-                    initialValue: _.useProxy,
-                    onToggle: _.toggleProxy,
-                    title: Text(locals.useProxy),
+              ]),
+              SettingsSection(title: Text(locals.videoPlayer), tiles: [
+                SettingsTile.switchTile(
+                  initialValue: _.useDash,
+                  onToggle: _.toggleDash,
+                  title: Text(locals.useDash),
+                  description: Text(locals.useDashDescription),
+                ),
+
+                SettingsTile.switchTile(
+                  initialValue: _.useProxy,
+                  onToggle: _.toggleProxy,
+                  title: Text(locals.useProxy),
                     description: Text(locals.useProxyDescription),
                   ),
                   SettingsTile.navigation(
                     title: Text('SponsorBlock'),
-                    description: Text(locals.sponsorBlockDescription),
-                    onPressed: openSponsorBlockSettings,
-                  )
-                ]),
-                SettingsSection(
-                  title: Text(locals.appearance),
-                  tiles: [
-                    SettingsTile.switchTile(
-                      initialValue: _.useDynamicTheme,
-                      onToggle: _.toggleDynamicTheme,
-                      title: Text(locals.useDynamicTheme),
-                      description: Text(locals.useDynamicThemeDescription),
-                    ),
-                  ],
-                ),
-                SettingsSection(title: (Text(locals.about)), tiles: [
-                  SettingsTile(title: const Center(child: SizedBox(height: 150, width: 150, child: AppIconImage()))),
-                  SettingsTile(
-                    title: Text('${locals.name}: ${_.packageInfo.appName}'),
-                    description: Text('${locals.package}: ${_.packageInfo.packageName}'),
+                  description: Text(locals.sponsorBlockDescription),onPressed: openSponsorBlockSettings,
+                )
+              ]),
+              SettingsSection(
+                title: Text(locals.appearance),
+                tiles: [
+                  SettingsTile.switchTile(
+                    initialValue: _.useDynamicTheme,
+                    onToggle: _.toggleDynamicTheme,
+                    title: Text(locals.useDynamicTheme),
+                    description: Text(locals.useDynamicThemeDescription),
                   ),
-                  SettingsTile(
-                    title: Text('${locals.version}: ${_.packageInfo.version}'),
-                    description: Text('${locals.build}: ${_.packageInfo.buildNumber}'),
-                  )
-                ])
-              ],
-            ))),
-      ),
+                ],
+              ),
+              SettingsSection(title: (Text(locals.about)), tiles: [
+                SettingsTile(title: const Center(child: SizedBox(height: 150, width: 150, child: AppIconImage()))),
+                SettingsTile(
+                  title: Text('${locals.name}: ${_.packageInfo.appName}'),
+                  description: Text('${locals.package}: ${_.packageInfo.packageName}'),
+                ),
+                SettingsTile(
+                  title: Text('${locals.version}: ${_.packageInfo.version}'),
+                  description: Text('${locals.build}: ${_.packageInfo.buildNumber}'),
+                )
+              ])
+            ],
+          ))),
     );
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:invidious/controllers/serverListSettingsController.dart';
+import 'package:invidious/main.dart';
 import 'package:invidious/myRouteObserver.dart';
 import 'package:invidious/views/components/miniPlayerAware.dart';
 import 'package:invidious/views/settings/manageSingleServer.dart';
@@ -20,35 +21,33 @@ class ManagerServersView extends StatelessWidget {
     showModalBottomSheet<void>(
         context: context,
         builder: (BuildContext context) {
-          return MiniPlayerAware(
-            child: SizedBox(
-              height: 100,
-              child: Center(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          IconButton(
-                            onPressed: () {
-                              controller.upsertServer(server);
-                              Navigator.pop(context);
-                            },
-                            icon: const Icon(Icons.add),
-                          ),
-                          Text(
-                            locals.addServer,
-                            style: const TextStyle(fontSize: 10),
-                          )
-                        ],
-                      ),
+          return SizedBox(
+            height: 100,
+            child: Center(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            controller.upsertServer(server);
+                            Navigator.pop(context);
+                          },
+                          icon: const Icon(Icons.add),
+                        ),
+                        Text(
+                          locals.addServer,
+                          style: const TextStyle(fontSize: 10),
+                        )
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           );
@@ -118,8 +117,7 @@ class ManagerServersView extends StatelessWidget {
   }
 
   openServer(BuildContext context, Server s) {
-    Navigator.push(
-        context,
+    navigatorKey.currentState?.push(
         MaterialPageRoute(
           settings: ROUTE_SETTINGS_MANAGE_ONE_SERVER,
           builder: (context) => ManageSingleServer(

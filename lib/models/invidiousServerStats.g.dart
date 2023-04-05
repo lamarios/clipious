@@ -11,7 +11,7 @@ InvidiousServerStats _$InvidiousServerStatsFromJson(
     InvidiousServerStats(
       InvidiousServerSoftware.fromJson(
           json['software'] as Map<String, dynamic>),
-      json['openRegistrations'] as bool,
+      json['openRegistrations'] as bool?,
     );
 
 Map<String, dynamic> _$InvidiousServerStatsToJson(

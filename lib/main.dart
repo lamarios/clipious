@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:after_layout/after_layout.dart';
+import 'package:back_button_interceptor/back_button_interceptor.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -27,6 +28,7 @@ const brandColor = Color(0xFF4f0096);
 
 final scaffoldKey = GlobalKey<ScaffoldMessengerState>();
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+final GlobalKey<NavigatorState> globalNavigator = GlobalKey<NavigatorState>();
 final RouteObserver<ModalRoute> routeObserver = MyRouteObserver();
 
 Future<void> main() async {
@@ -89,15 +91,31 @@ class MyApp extends StatelessWidget {
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
           scaffoldMessengerKey: scaffoldKey,
+          navigatorKey: globalNavigator,
           title: 'Clipious',
-          navigatorObservers: [routeObserver],
-          navigatorKey: navigatorKey,
           theme: ThemeData(
             useMaterial3: true,
             colorScheme: lightColorScheme,
           ),
           darkTheme: ThemeData(useMaterial3: true, colorScheme: darkColorScheme),
-          home: showWizard ? const WelcomeWizard() : const Home());
+          home: showWizard
+              ? const WelcomeWizard()
+              : Stack(
+                  children: [
+                    MiniPlayerAware(
+                      child: Navigator(
+                          observers: [MyRouteObserver()],
+                          key: navigatorKey,
+                          initialRoute: '/',
+                          onGenerateRoute: (settings) {
+                            if (settings.name == '/') {
+                              return GetPageRoute(page: () => const Home());
+                            }
+                          }),
+                    ),
+                    const MiniPlayer()
+                  ],
+                ));
     });
   }
 }
@@ -111,7 +129,26 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> with AfterLayoutMixin {
   openSettings(BuildContext context) {
-    Navigator.push(context, MaterialPageRoute(settings: ROUTE_SETTINGS, builder: (context) => const Settings()));
+    navigatorKey.currentState?.push(MaterialPageRoute(settings: ROUTE_SETTINGS, builder: (context) => const Settings()));
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    BackButtonInterceptor.add((stopDefaultButtonEvent, RouteInfo routeInfo) {
+      if (routeInfo.currentRoute(context)?.settings.name != null) {
+        navigatorKey.currentState?.pop();
+        return true;
+      } else {
+        return false;
+      }
+    }, name: 'mainNavigator', zIndex: 0, ifNotYetIntercepted: true);
+  }
+
+  @override
+  void dispose() {
+    BackButtonInterceptor.removeByName('mainNavigator');
+    super.dispose();
   }
 
   // This widget is the root of your application.
@@ -133,77 +170,71 @@ class _HomeState extends State<Home> with AfterLayoutMixin {
           navigationWidgets.add(NavigationDestination(icon: const Icon(Icons.playlist_play), label: navigationLabels[3]));
         }
 
-        return MiniPlayerAware(
-          child: Scaffold(
+        return Scaffold(
+            backgroundColor: colorScheme.background,
+            bottomNavigationBar: NavigationBar(
+              labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
+              elevation: 0,
+              onDestinationSelected: _.selectIndex,
+              selectedIndex: _.selectedIndex,
+              destinations: navigationWidgets,
+            ),
+            floatingActionButton: _.selectedIndex == 3 ? AddPlayListButton() : null,
+            appBar: AppBar(
+              systemOverlayStyle: SystemUiOverlayStyle(
+                  systemNavigationBarColor: colorScheme.background,
+                  systemNavigationBarIconBrightness: colorScheme.brightness == Brightness.dark ? Brightness.light : Brightness.dark,
+                  statusBarColor: colorScheme.background,
+                  statusBarIconBrightness: colorScheme.brightness == Brightness.dark ? Brightness.light : Brightness.dark),
+              title: Text(navigationLabels[_.selectedIndex]),
+              scrolledUnderElevation: 0,
+              // backgroundColor: Colors.pink,
               backgroundColor: colorScheme.background,
-              bottomNavigationBar: NavigationBar(
-                labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
-                elevation: 0,
-                onDestinationSelected: _.selectIndex,
-                selectedIndex: _.selectedIndex,
-                destinations: navigationWidgets,
-              ),
-              floatingActionButton: _.selectedIndex == 3 ? AddPlayListButton() : null,
-              appBar: AppBar(
-                systemOverlayStyle: SystemUiOverlayStyle(
-                    systemNavigationBarColor: colorScheme.background,
-                    systemNavigationBarIconBrightness: colorScheme.brightness == Brightness.dark ? Brightness.light : Brightness.dark,
-                    statusBarColor: colorScheme.background,
-                    statusBarIconBrightness: colorScheme.brightness == Brightness.dark ? Brightness.light : Brightness.dark),
-                title: Text(navigationLabels[_.selectedIndex]),
-                scrolledUnderElevation: 0,
-                // backgroundColor: Colors.pink,
-                backgroundColor: colorScheme.background,
-                actions: [
-                  IconButton(
-                    onPressed: () {
-                      showSearch(context: context, delegate: MySearchDelegate());
+              actions: [
+                IconButton(
+                  onPressed: () {
+                    showSearch(context: context, delegate: MySearchDelegate());
+                  },
+                  icon: const Icon(Icons.search),
+                ),
+                IconButton(
+                  onPressed: () => openSettings(context),
+                  icon: const Icon(Icons.settings),
+                  color: colorScheme.secondary,
+                ),
+              ],
+            ),
+            body: SafeArea(
+                bottom: false,
+                child: Stack(children: [
+                  AnimatedSwitcher(
+                    switchInCurve: Curves.easeInOutQuad,
+                    switchOutCurve: Curves.easeInOutQuad,
+                    transitionBuilder: (Widget child, Animation<double> animation) {
+                      return FadeTransition(opacity: animation, child: child);
                     },
-                    icon: const Icon(Icons.search),
-                  ),
-                  IconButton(
-                    onPressed: () => openSettings(context),
-                    icon: const Icon(Icons.settings),
-                    color: colorScheme.secondary,
-                  ),
-                ],
-              ),
-              body: SafeArea(
-                  bottom: false,
-                  child: Stack(children: [
-                    AnimatedSwitcher(
-                      switchInCurve: Curves.easeInOutQuad,
-                      switchOutCurve: Curves.easeInOutQuad,
-                      transitionBuilder: (Widget child, Animation<double> animation) {
-                        return FadeTransition(opacity: animation, child: child);
-                      },
-                      duration: animationDuration,
-                      child: <Widget>[
-                        const Popular(
-                          key: ValueKey(0),
-                        ),
-                        const Trending(
-                          key: ValueKey(1),
-                        ),
-                        const Subscriptions(
-                          key: ValueKey(2),
-                        ),
-                        const Playlists(
-                          key: ValueKey(3),
-                          canDeleteVideos: true,
-                        )
-                      ][_.selectedIndex],
-                    )
-                  ]))),
-        );
+                    duration: animationDuration,
+                    child: <Widget>[
+                      const Popular(
+                        key: ValueKey(0),
+                      ),
+                      const Trending(
+                        key: ValueKey(1),
+                      ),
+                      const Subscriptions(
+                        key: ValueKey(2),
+                      ),
+                      const Playlists(
+                        key: ValueKey(3),
+                        canDeleteVideos: true,
+                      )
+                    ][_.selectedIndex],
+                  )
+                ])));
       },
     );
   }
 
   @override
-  FutureOr<void> afterFirstLayout(BuildContext context) {
-    Overlay.of(context).insert(OverlayEntry(
-      builder: (context) => MiniPlayer(),
-    ));
-  }
+  FutureOr<void> afterFirstLayout(BuildContext context) {}
 }

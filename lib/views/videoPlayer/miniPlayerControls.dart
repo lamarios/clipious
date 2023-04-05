@@ -23,7 +23,7 @@ class MiniPlayerControls extends StatelessWidget {
         decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), color: colors.secondaryContainer),
         constraints: BoxConstraints(maxWidth: tabletMaxVideoWidth, ),
         child: GetBuilder<MiniPlayerControlsController>(
-          global: false,
+          // global: false,
           init: MiniPlayerControlsController(),
           builder: (_) => Stack(
             alignment: Alignment.center,
