@@ -70,30 +70,28 @@ void showSharingSheet(BuildContext context, ShareLinks links) {
   showModalBottomSheet<void>(
       context: context,
       builder: (BuildContext context) {
-        return MiniPlayerAware(
-          child: Container(
-            height: 100,
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  FilledButton.tonal(
-                    child: Text(locals.shareInvidiousLink),
-                    onPressed: () {
-                      Share.share(links.getInvidiousLink(db.getCurrentlySelectedServer()));
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                  FilledButton.tonal(
-                    child: Text(locals.shareYoutubeLink),
-                    onPressed: () {
-                      Share.share(links.getYoutubeLink());
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                ],
-              ),
+        return Container(
+          height: 100,
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                FilledButton.tonal(
+                  child: Text(locals.shareInvidiousLink),
+                  onPressed: () {
+                    Share.share(links.getInvidiousLink(db.getCurrentlySelectedServer()));
+                    Navigator.of(context).pop();
+                  },
+                ),
+                FilledButton.tonal(
+                  child: Text(locals.shareYoutubeLink),
+                  onPressed: () {
+                    Share.share(links.getYoutubeLink());
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
             ),
           ),
         );
@@ -160,6 +158,7 @@ T? safeGet<T>({String? tag}) {
   try {
     return Get.find<T>(tag: tag);
   } catch (err) {
+    err.printError();
     log.info('could not find controller of class ${T.toString()}');
     return null;
   }

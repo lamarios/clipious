@@ -11,7 +11,6 @@ class VideoLikeButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ColorScheme colors = Theme.of(context).colorScheme;
     return GetBuilder<VideoLikeButtonController>(
       init: VideoLikeButtonController(videoId: videoId),
       tag: VideoLikeButtonController.tags(videoId ?? ''),
@@ -22,7 +21,6 @@ class VideoLikeButton extends StatelessWidget {
           iconSize: size,
           onPressed: _.toggleLike,
           icon: _.isVideoLiked ? const Icon(Icons.favorite) : const Icon(Icons.favorite_border),
-          color: colors.secondary,
         ),
       ),
     );

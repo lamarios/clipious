@@ -4,7 +4,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:invidious/controllers/videoController.dart';
 import 'package:invidious/globals.dart';
-import 'package:invidious/views/components/miniPlayerAware.dart';
 import 'package:invidious/views/components/videoAddToPlaylistButton.dart';
 import 'package:invidious/views/components/videoLikeButton.dart';
 import 'package:invidious/views/video/innverView.dart';
@@ -43,69 +42,66 @@ class VideoView extends StatelessWidget {
       builder: (_) => AnimatedOpacity(
         duration: animationDuration,
         opacity: _.opacity,
-        child: MiniPlayerAware(
-          child: Scaffold(
-            appBar: AppBar(
-              actions: _.loadingVideo
-                  ? []
-                  : [
-                      Visibility(
-                        visible: _.video != null,
-                        child: IconButton(
-                          onPressed: () => showSharingSheet(context, _.video!),
-                          icon: const Icon(Icons.share),
-                          color: colorScheme.secondary,
-                        ),
+        child: Scaffold(
+          appBar: AppBar(
+            actions: _.loadingVideo
+                ? []
+                : [
+                    Visibility(
+                      visible: _.video != null,
+                      child: IconButton(
+                        onPressed: () => showSharingSheet(context, _.video!),
+                        icon: const Icon(Icons.share),
                       ),
-                      VideoLikeButton(videoId: _.video?.videoId),
-                      VideoAddToPlaylistButton(videoId: _.video?.videoId),
-                    ],
-              scrolledUnderElevation: 0,
-            ),
-            backgroundColor: colorScheme.background,
-            bottomNavigationBar: _.loadingVideo
-                ? null
-                : NavigationBar(
-                    labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
-                    elevation: 0,
-                    onDestinationSelected: _.selectIndex,
-                    selectedIndex: _.selectedIndex,
-                    destinations: destinations,
-                  ),
-            body: SafeArea(
-              bottom: false,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: Container(
-                  color: colorScheme.background,
-                  width: double.infinity,
-                  height: double.infinity,
-                  child: AnimatedSwitcher(
-                      duration: animationDuration,
-                      child: _.error.isNotEmpty
-                          ? Container(
-                              alignment: Alignment.center,
-                              child: Text(_.error == coulnotLoadVideos ? locals.couldntLoadVideo : _.error),
-                            )
-                          : _.loadingVideo
-                              ? const CircularProgressIndicator()
-                              : Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                                  child: show3Navigation
-                                      ? VideoInnerView(
-                                          video: _.video!,
-                                          selectedIndex: _.selectedIndex,
-                                          playNow: playNow,
-                                          videoController: _,
-                                        )
-                                      : VideoTabletInnerView(
-                                          video: _.video!,
-                                          playNow: playNow,
-                                          selectedIndex: _.selectedIndex,
-                                          videoController: _,
-                                        ),
-                                )),
+                    ),
+                    VideoLikeButton(videoId: _.video?.videoId),
+                    VideoAddToPlaylistButton(videoId: _.video?.videoId),
+                  ],
+            scrolledUnderElevation: 0,
+          ),
+          backgroundColor: colorScheme.background,
+          bottomNavigationBar: _.loadingVideo
+              ? null
+              : NavigationBar(
+                  labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
+                  elevation: 0,
+                  onDestinationSelected: _.selectIndex,
+                  selectedIndex: _.selectedIndex,
+                  destinations: destinations,
                 ),
+          body: SafeArea(
+            bottom: false,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: Container(
+                color: colorScheme.background,
+                width: double.infinity,
+                height: double.infinity,
+                child: AnimatedSwitcher(
+                    duration: animationDuration,
+                    child: _.error.isNotEmpty
+                        ? Container(
+                            alignment: Alignment.center,
+                            child: Text(_.error == coulnotLoadVideos ? locals.couldntLoadVideo : _.error),
+                          )
+                        : _.loadingVideo
+                            ? const CircularProgressIndicator()
+                            : Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                                child: show3Navigation
+                                    ? VideoInnerView(
+                                        video: _.video!,
+                                        selectedIndex: _.selectedIndex,
+                                        playNow: playNow,
+                                        videoController: _,
+                                      )
+                                    : VideoTabletInnerView(
+                                        video: _.video!,
+                                        playNow: playNow,
+                                        selectedIndex: _.selectedIndex,
+                                        videoController: _,
+                                      ),
+                              )),
               ),
             ),
           ),

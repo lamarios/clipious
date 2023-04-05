@@ -1,14 +1,11 @@
-import 'package:better_player/better_player.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:invidious/controllers/miniPayerController.dart';
 import 'package:invidious/controllers/playlistListController.dart';
-import 'package:invidious/views/miniPlayer.dart';
 import 'package:logging/logging.dart';
 
 import '../globals.dart';
 import '../models/playlist.dart';
-import '../models/video.dart';
 import '../models/videoInList.dart';
 
 class PlaylistController extends GetxController {
@@ -33,14 +30,14 @@ class PlaylistController extends GetxController {
   Future<bool> removeVideoFromPlayList(VideoInList v) async {
     await service.deleteUserPlaylistVideo(playlist.playlistId, v.indexId ?? '');
     PlaylistListController.to(tag: PlaylistListController.getTag(userPlayListTag))?.refreshPlaylists();
-
+    playlist.videos.remove(v);
     update();
 
     return false;
   }
 
-  play(){
-    MiniPlayerController.to()?.playVideo(playlist.videos,  goBack: false);
+  play() {
+    MiniPlayerController.to()?.playVideo(playlist.videos, goBack: false);
   }
 
   getAllVideos() async {

@@ -2,6 +2,7 @@ import 'package:fbroadcast/fbroadcast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
+import 'package:invidious/main.dart';
 import 'package:invidious/models/errors/invidiousServiceError.dart';
 import 'package:invidious/models/imageObject.dart';
 import 'package:invidious/models/video.dart';
@@ -41,35 +42,33 @@ class PlaylistView extends StatelessWidget {
         context: context,
         builder: (BuildContext context) {
           var locals = AppLocalizations.of(context)!;
-          return MiniPlayerAware(
-            child: SizedBox(
-              height: 100,
-              child: Center(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          IconButton(
-                            onPressed: () async {
-                              removeVideoFromPlayList(context, controller, v);
-                              Navigator.pop(context);
-                            },
-                            icon: const Icon(Icons.delete),
-                          ),
-                          Text(
-                            locals.removeFromPlayList,
-                            style: const TextStyle(fontSize: 10),
-                          )
-                        ],
-                      ),
+          return SizedBox(
+            height: 100,
+            child: Center(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        IconButton(
+                          onPressed: () async {
+                            removeVideoFromPlayList(context, controller, v);
+                            Navigator.pop(context);
+                          },
+                          icon: const Icon(Icons.delete),
+                        ),
+                        Text(
+                          locals.removeFromPlayList,
+                          style: const TextStyle(fontSize: 10),
+                        )
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           );
@@ -77,8 +76,7 @@ class PlaylistView extends StatelessWidget {
   }
 
   openVideo(BuildContext context, String videoId) {
-    Navigator.push(
-        context,
+    navigatorKey.currentState?.push(
         MaterialPageRoute(
             settings: ROUTE_VIDEO,
             builder: (context) => VideoView(
@@ -142,137 +140,135 @@ class PlaylistView extends StatelessWidget {
       global: false,
       init: PlaylistController(playlist: playlist, playlistItemHeight: 100),
       builder: (_) {
-        return MiniPlayerAware(
-          child: Scaffold(
-              appBar: AppBar(
-                title: Text(
-                  _.playlist.title,
-                ),
-                scrolledUnderElevation: 0,
-                actions: [
-                  canDeleteVideos
-                      ? InkWell(
-                          onTap: () => deletePlayList(context, _),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Icon(
-                              Icons.delete,
-                              color: colorScheme.secondary,
-                            ),
-                          ),
-                        )
-                      : const SizedBox.shrink()
-                ],
+        return Scaffold(
+            appBar: AppBar(
+              title: Text(
+                _.playlist.title,
               ),
-              backgroundColor: colorScheme.background,
-              body: SafeArea(
-                  bottom: false,
-                  child: !_.loading && _.playlist.videos.isNotEmpty
-                      ? Center(
-                          child: Container(
-                            constraints: BoxConstraints(maxWidth: tabletMaxVideoWidth),
-                            child: Column(
-                              children: [
-                                AnimatedSwitcher(
-                                    duration: animationDuration,
-                                    child: Padding(
-                                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                                        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                                          AspectRatio(
-                                              aspectRatio: 16 / 9,
-                                              child: Stack(
-                                                alignment: Alignment.center,
-                                                children: [
-                                                  ...buildThumbnails(context, _),
-                                                  PlayButton(
-                                                    onPressed: _.play,
-                                                  ),
-                                                  Positioned(
-                                                      right: 5,
-                                                      bottom: 3,
-                                                      child: AddToQueueButton(
-                                                        videos: _.playlist.videos,
-                                                      ))
-                                                ],
-                                              ))
-                                        ]))),
-                                Expanded(
-                                    child: ListView(
-                                  controller: _.scrollController,
-                                  children: _.playlist.videos
-                                      .map((v) => Container(
-                                            width: double.infinity,
-                                            height: _.playlistItemHeight,
-                                            alignment: Alignment.center,
-                                            child: Stack(
-                                              children: [
-                                                Padding(
-                                                  padding: const EdgeInsets.all(8.0),
-                                                  child: InkWell(
-                                                    onTap: canDeleteVideos ? () => showPlayListVideoDialog(context, _, v) : null,
-                                                    child: Row(
-                                                      children: [
-                                                        Padding(
-                                                          padding: const EdgeInsets.all(4.0),
-                                                          child: SizedBox(
-                                                            width: 100,
-                                                            child: VideoThumbnailView(
-                                                              cacheKey: 'v-worst/${v.videoId}',
-                                                              videoId: v.videoId,
-                                                              thumbnailUrl: ImageObject.getWorstThumbnail(v.videoThumbnails)?.url ?? '',
-                                                            ),
-                                                          ),
-                                                        ),
-                                                        Expanded(
-                                                          child: Column(
-                                                            mainAxisAlignment: MainAxisAlignment.center,
-                                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                                            children: [
-                                                              Text(
-                                                                v.title,
-                                                                style: TextStyle(color: colorScheme.primary),
-                                                              ),
-                                                              Text(
-                                                                v.author ?? '',
-                                                              )
-                                                            ],
-                                                          ),
-                                                        ),
-                                                        InkWell(
-                                                          onTap: () => openVideo(context, v.videoId),
-                                                          child: Padding(
-                                                            padding: const EdgeInsets.all(8.0),
-                                                            child: Icon(
-                                                              Icons.exit_to_app,
-                                                              color: colorScheme.primary,
-                                                            ),
-                                                          ),
-                                                        )
-                                                      ],
-                                                    ),
-                                                  ),
-                                                )
-                                              ],
-                                            ),
-                                          ))
-                                      .toList(),
-                                ))
-                              ],
-                            ),
+              scrolledUnderElevation: 0,
+              actions: [
+                canDeleteVideos
+                    ? InkWell(
+                        onTap: () => deletePlayList(context, _),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Icon(
+                            Icons.delete,
+                            color: colorScheme.secondary,
                           ),
-                        )
-                      : _.loading
-                          ? Center(
-                              child: TweenAnimationBuilder(
-                              tween: Tween<double>(begin: 0, end: _.loadingProgress),
-                              duration: animationDuration,
-                              curve: Curves.easeInOutQuad,
-                              builder: (context, value, child) => CircularProgressIndicator(
-                                value: value > 0 ? value : null,
-                              ),
-                            ))
-                          : Container(alignment: Alignment.center, child: Text(locals.noVideoInPlayList)))),
-        );
+                        ),
+                      )
+                    : const SizedBox.shrink()
+              ],
+            ),
+            backgroundColor: colorScheme.background,
+            body: SafeArea(
+                bottom: false,
+                child: !_.loading && _.playlist.videos.isNotEmpty
+                    ? Center(
+                        child: Container(
+                          constraints: BoxConstraints(maxWidth: tabletMaxVideoWidth),
+                          child: Column(
+                            children: [
+                              AnimatedSwitcher(
+                                  duration: animationDuration,
+                                  child: Padding(
+                                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                                      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                                        AspectRatio(
+                                            aspectRatio: 16 / 9,
+                                            child: Stack(
+                                              alignment: Alignment.center,
+                                              children: [
+                                                ...buildThumbnails(context, _),
+                                                PlayButton(
+                                                  onPressed: _.play,
+                                                ),
+                                                Positioned(
+                                                    right: 5,
+                                                    bottom: 3,
+                                                    child: AddToQueueButton(
+                                                      videos: _.playlist.videos,
+                                                    ))
+                                              ],
+                                            ))
+                                      ]))),
+                              Expanded(
+                                  child: ListView(
+                                controller: _.scrollController,
+                                children: _.playlist.videos
+                                    .map((v) => Container(
+                                          width: double.infinity,
+                                          height: _.playlistItemHeight,
+                                          alignment: Alignment.center,
+                                          child: Stack(
+                                            children: [
+                                              Padding(
+                                                padding: const EdgeInsets.all(8.0),
+                                                child: InkWell(
+                                                  onTap: canDeleteVideos ? () => showPlayListVideoDialog(context, _, v) : null,
+                                                  child: Row(
+                                                    children: [
+                                                      Padding(
+                                                        padding: const EdgeInsets.all(4.0),
+                                                        child: SizedBox(
+                                                          width: 100,
+                                                          child: VideoThumbnailView(
+                                                            cacheKey: 'v-worst/${v.videoId}',
+                                                            videoId: v.videoId,
+                                                            thumbnailUrl: ImageObject.getWorstThumbnail(v.videoThumbnails)?.url ?? '',
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      Expanded(
+                                                        child: Column(
+                                                          mainAxisAlignment: MainAxisAlignment.center,
+                                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                                          children: [
+                                                            Text(
+                                                              v.title,
+                                                              style: TextStyle(color: colorScheme.primary),
+                                                            ),
+                                                            Text(
+                                                              v.author ?? '',
+                                                            )
+                                                          ],
+                                                        ),
+                                                      ),
+                                                      InkWell(
+                                                        onTap: () => openVideo(context, v.videoId),
+                                                        child: Padding(
+                                                          padding: const EdgeInsets.all(8.0),
+                                                          child: Icon(
+                                                            Icons.exit_to_app,
+                                                            color: colorScheme.primary,
+                                                          ),
+                                                        ),
+                                                      )
+                                                    ],
+                                                  ),
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                        ))
+                                    .toList(),
+                              ))
+                            ],
+                          ),
+                        ),
+                      )
+                    : _.loading
+                        ? Center(
+                            child: TweenAnimationBuilder(
+                            tween: Tween<double>(begin: 0, end: _.loadingProgress),
+                            duration: animationDuration,
+                            curve: Curves.easeInOutQuad,
+                            builder: (context, value, child) => CircularProgressIndicator(
+                              value: value > 0 ? value : null,
+                            ),
+                          ))
+                        : Container(alignment: Alignment.center, child: Text(locals.noVideoInPlayList))));
       },
     );
   }

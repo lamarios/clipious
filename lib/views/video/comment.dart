@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:invidious/controllers/singleCommentController.dart';
+import 'package:invidious/globals.dart';
 import 'package:invidious/myRouteObserver.dart';
 import 'package:invidious/views/channel.dart';
 import 'package:invidious/views/components/videoThumbnail.dart';
 import 'package:invidious/views/video/comments.dart';
 
+import '../../main.dart';
 import '../../models/comment.dart';
 import '../../models/imageObject.dart';
 
@@ -17,7 +19,7 @@ class SingleCommentView extends StatelessWidget {
   const SingleCommentView({super.key, required this.comment, required this.videoId});
 
   openChannel(BuildContext context, String authorId) {
-    Navigator.push(context, MaterialPageRoute(settings: ROUTE_CHANNEL, builder: (context) => ChannelView(channelId: authorId)));
+    navigatorKey.currentState?.push(MaterialPageRoute(settings: ROUTE_CHANNEL, builder: (context) => ChannelView(channelId: authorId)));
   }
 
   @override

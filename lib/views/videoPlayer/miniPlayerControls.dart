@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:invidious/controllers/miniplayerControlsController.dart';
 import 'package:invidious/utils.dart';
-import 'package:invidious/views/components/videoLikeButton.dart';
 
 import '../../controllers/miniPayerController.dart';
 
@@ -23,12 +22,12 @@ class MiniPlayerControls extends StatelessWidget {
         decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), color: colors.secondaryContainer),
         constraints: BoxConstraints(maxWidth: tabletMaxVideoWidth, ),
         child: GetBuilder<MiniPlayerControlsController>(
-          global: false,
+          // global: false,
           init: MiniPlayerControlsController(),
           builder: (_) => Stack(
             alignment: Alignment.center,
             children: [
-              Positioned(left: 0, child: VideoLikeButton(videoId: videoId, style: buttonStyle)),
+              // Positioned(left: 0, child: VideoLikeButton(videoId: videoId, style: buttonStyle)),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

@@ -11,7 +11,6 @@ class VideoAddToPlaylistButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ColorScheme colors = Theme.of(context).colorScheme;
     return GetBuilder<AddToPlaylistButtonController>(
       tag: AddToPlaylistButtonController.tags(videoId ?? ''),
       init: AddToPlaylistButtonController(videoId: videoId),
@@ -24,7 +23,6 @@ class VideoAddToPlaylistButton extends StatelessWidget {
               onPressed: () => AddToPlaylist.showAddToPlaylistDialog(context, _.videoId!),
               icon: Icon(
                 Icons.add,
-                color: colors.secondary,
               ),
             ),
             _.playListCount > 0
@@ -33,7 +31,7 @@ class VideoAddToPlaylistButton extends StatelessWidget {
                   right: 10,
                   child: Text(
                     _.playListCount.toString(),
-                    style: TextStyle(color: colors.secondary, fontSize: 8),
+                    style: const TextStyle(fontSize: 8),
                   ),
                 )
                 : const SizedBox.shrink()

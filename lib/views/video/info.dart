@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
+import 'package:invidious/main.dart';
 import 'package:invidious/models/video.dart';
 import 'package:invidious/myRouteObserver.dart';
 import 'package:invidious/views/channel.dart';
@@ -18,7 +19,7 @@ class VideoInfo extends StatelessWidget {
   VideoInfo({super.key, required this.video});
 
   openChannel(BuildContext context) {
-    Navigator.push(context, MaterialPageRoute(settings: ROUTE_CHANNEL, builder: (context) => ChannelView(channelId: video.authorId ?? '')));
+    navigatorKey.currentState?.push(MaterialPageRoute(settings: ROUTE_CHANNEL, builder: (context) => ChannelView(channelId: video.authorId ?? '')));
   }
 
   showSearchWindow(BuildContext context, String query) {

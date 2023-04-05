@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:invidious/controllers/videoInListController.dart';
 import 'package:invidious/globals.dart';
+import 'package:invidious/main.dart';
 import 'package:invidious/models/videoInList.dart';
 import 'package:invidious/myRouteObserver.dart';
 import 'package:invidious/views/components/videoThumbnail.dart';
@@ -21,7 +22,7 @@ class VideoListItem extends StatelessWidget {
   final log = Logger('VideoInList');
 
   openVideo(BuildContext context) {
-    Navigator.push(context, MaterialPageRoute(settings: ROUTE_VIDEO, builder: (context) => VideoView(videoId: video.videoId)));
+    navigatorKey.currentState?.push(MaterialPageRoute(settings: ROUTE_VIDEO, builder: (context) => VideoView(videoId: video.videoId)));
   }
 
   @override
@@ -111,7 +112,7 @@ class VideoListItem extends StatelessWidget {
               child: InkWell(
                 onTap: () {
                   log.info('Opening channel ${video.authorId}');
-                  Navigator.push(context, MaterialPageRoute(settings: ROUTE_CHANNEL, builder: (context) => ChannelView(channelId: video.authorId!)));
+                  navigatorKey.currentState?.push(MaterialPageRoute(settings: ROUTE_CHANNEL, builder: (context) => ChannelView(channelId: video.authorId!)));
                 },
                 child: Row(
                   children: [
