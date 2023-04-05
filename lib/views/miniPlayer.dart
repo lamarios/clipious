@@ -45,7 +45,7 @@ class MiniPlayer extends StatelessWidget {
 
         return AnimatedPositioned(
           left: 0,
-          top: _.isFullScreen || _.isShowingOverflow ? 3000 : _.top,
+          top: _.top,
           bottom: _.getBottom,
           right: 0,
           duration: _.isDragging ? Duration.zero : animationDuration,

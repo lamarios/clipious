@@ -42,7 +42,7 @@ class WelcomeWizard extends StatelessWidget {
                 child: FilledButton.tonal(
                     onPressed: _.selected != null
                         ? () {
-                            Navigator.of(context).pushReplacement(MaterialPageRoute(
+                            navigatorKey.currentState?.pushReplacement(MaterialPageRoute(
                               builder: (context) => const Home(),
                             ));
                           }

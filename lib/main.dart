@@ -98,24 +98,22 @@ class MyApp extends StatelessWidget {
             colorScheme: lightColorScheme,
           ),
           darkTheme: ThemeData(useMaterial3: true, colorScheme: darkColorScheme),
-          home: showWizard
-              ? const WelcomeWizard()
-              : Stack(
-                  children: [
-                    MiniPlayerAware(
-                      child: Navigator(
-                          observers: [MyRouteObserver()],
-                          key: navigatorKey,
-                          initialRoute: '/',
-                          onGenerateRoute: (settings) {
-                            if (settings.name == '/') {
-                              return GetPageRoute(page: () => const Home());
-                            }
-                          }),
-                    ),
-                    const MiniPlayer()
-                  ],
-                ));
+          home: Stack(
+            children: [
+              MiniPlayerAware(
+                child: Navigator(
+                    observers: [MyRouteObserver()],
+                    key: navigatorKey,
+                    initialRoute: '/',
+                    onGenerateRoute: (settings) {
+                      if (settings.name == '/') {
+                        return GetPageRoute(page: () => showWizard ? const WelcomeWizard() : const Home());
+                      }
+                    }),
+              ),
+              const MiniPlayer()
+            ],
+          ));
     });
   }
 }

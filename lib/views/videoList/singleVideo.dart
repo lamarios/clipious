@@ -112,7 +112,7 @@ class VideoListItem extends StatelessWidget {
               child: InkWell(
                 onTap: () {
                   log.info('Opening channel ${video.authorId}');
-                  Navigator.push(context, MaterialPageRoute(settings: ROUTE_CHANNEL, builder: (context) => ChannelView(channelId: video.authorId!)));
+                  navigatorKey.currentState?.push(MaterialPageRoute(settings: ROUTE_CHANNEL, builder: (context) => ChannelView(channelId: video.authorId!)));
                 },
                 child: Row(
                   children: [

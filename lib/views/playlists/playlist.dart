@@ -6,6 +6,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:invidious/controllers/playlistItemController.dart';
 import 'package:invidious/globals.dart';
+import 'package:invidious/main.dart';
 import 'package:invidious/models/imageObject.dart';
 import 'package:invidious/models/playlist.dart';
 import 'package:invidious/models/videoInList.dart';
@@ -20,8 +21,7 @@ class PlaylistItem extends StatelessWidget {
   const PlaylistItem({super.key, required this.playlist, required this.canDeleteVideos});
 
   openPlayList(BuildContext context) {
-    Navigator.push(
-        context,
+    navigatorKey.currentState?.push(
         MaterialPageRoute(
             settings: ROUTE_PLAYLIST,
             builder: (context) => PlaylistView(
