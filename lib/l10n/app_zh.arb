@@ -1,5 +1,5 @@
 {
-  "useThisServer": "使用此伺服器",
+  "useThisServer": "使用此实例",
   "@useThisServer": {
     "description": "Use this server label"
   },
@@ -11,7 +11,7 @@
   "@popular": {
     "description": "Popular videos title"
   },
-  "noVideoInPlayList": "无视频在播放列表中",
+  "noVideoInPlayList": "播放列表已无视频",
   "@noVideoInPlayList": {
     "description": "When no videos in the playlist"
   },
@@ -116,7 +116,7 @@
   "@couldntFetchVideos": {
     "description": "Can't load bunch of videos, asking  user to try again"
   },
-  "wizardIntro": "选择公共服务器或添加您自己的服务器。 （稍后可以在设置中更改。）",
+  "wizardIntro": "选择公共服务实例或添加您自己的实例。 （稍后可以在设置中更改。）",
   "@wizardIntro": {
     "description": "Welcome message on frst time use"
   },
@@ -194,15 +194,15 @@
   "@whenAppStartsShow": {
     "description": "Setting title for selecting the screen to show on start"
   },
-  "servers": "伺服器",
+  "servers": "服务实例",
   "@servers": {
     "description": "Server management settings category"
   },
-  "manageServers": "管理伺服器",
+  "manageServers": "管理服务实例",
   "@manageServers": {
     "description": "Settings to manage servers"
   },
-  "currentServer": "正在使用 {current}",
+  "currentServer": "正使用 {current} 实例",
   "@currentServer": {
     "description": "Which server the user is currently using",
     "placeholders": {
@@ -239,7 +239,7 @@
   "@build": {
     "description": "build label"
   },
-  "addServer": "添加伺服器",
+  "addServer": "添加服务实例",
   "@addServer": {
     "description": "Add server label"
   },
@@ -251,11 +251,11 @@
   "@delete": {
     "description": "Delete label"
   },
-  "invalidInvidiousServer": "无效的Invidious伺服器",
+  "invalidInvidiousServer": "无效的Invidious实例",
   "@invalidInvidiousServer": {
     "description": "Error when the user tries to add a server that is not a proper or reachable invidious server"
   },
-  "yourServers": "您的伺服器",
+  "yourServers": "您的服务实例",
   "@yourServers": {
     "description": "Your servers label"
   },
@@ -263,15 +263,15 @@
   "@loggedIn": {
     "description": "Label to tell the user that he is logged in to the server"
   },
-  "addServerHelpText": "使用 + 按钮添加您自己的服务器或点击公共服务器并添加它。",
+  "addServerHelpText": "使用 + 按钮添加您自己的服务实例或点击公共实例并添加它。",
   "@addServerHelpText": {
     "description": "label for when the user hasn't chosen a server yet"
   },
-  "loadingPublicServer": "正在加载公共服务器",
+  "loadingPublicServer": "正在加载公共服务实例",
   "@loadingPublicServer": {
     "description": "Message telling users the app is loading the list of public servers"
   },
-  "tapToAddServer": "点击以将服务器添加到您的列表",
+  "tapToAddServer": "点击以将服务实例添加到您的列表",
   "@tapToAddServer": {
     "description": "public server description"
   },
@@ -327,12 +327,112 @@
   "@notLoggedIn": {
     "description": "Label when the user is not logged in to the server"
   },
-  "publicServersError": "无法获取公共服务器列表。点击重试。",
+  "publicServersError": "无法获取公共服务实例列表。点击重试。",
   "@publicServersError": {
     "description": "Error message when trying to get public servers but it failed"
   },
-  "publicServers": "公共服务器",
+  "publicServers": "公共服务实例",
   "@publicServers": {
     "description": "Public servers label"
+  },
+  "addToQueueList": "添加到队列",
+  "@addToQueueList": {
+    "description": "Label on button to add a video to the queue list"
+  },
+  "wrongUsernamePassword": "用户名或密码有误",
+  "@wrongUsernamePassword": {
+    "description": "Error message when authentication fails"
+  },
+  "cookieLoginDescription": "如果密钥认证出现问题请采用此方式",
+  "@cookieLoginDescription": {
+    "description": "Cookie log in description"
+  },
+  "useDash": "采用 DASH 视频流",
+  "@useDash": {
+    "description": "Label on video options if a user wants to switch to dash urls instead of the regular quality selection"
+  },
+  "useDashDescription": "DASH 自适应视频流有时会出现问题，YouTube 可能会阻止它。",
+  "@useDashDescription": {
+    "description": "Description for dash in the settings screen"
+  },
+  "videoPlayer": "正在播放",
+  "@videoPlayer": {
+    "description": "Title for video player related options"
+  },
+  "videoListed": "公开",
+  "@videoListed": {
+    "description": "Status of a publicly available video"
+  },
+  "videoIsFamilyFriendly": "适合家庭观看",
+  "@videoIsFamilyFriendly": {
+    "description": "Displayed only when a video is family friendly"
+  },
+  "videoUnlisted": "未列出",
+  "@videoUnlisted": {
+    "description": "Status of a video that is only accessible by link"
+  },
+  "logout": "退出",
+  "@logout": {
+    "description": "CTA to logout of a server"
+  },
+  "tokenLogin": "用密钥登录",
+  "@tokenLogin": {
+    "description": "Textto login to a server using the recommended way"
+  },
+  "tapToManage": "点击管理",
+  "@tapToManage": {
+    "description": "Text shown below a server in the 'Your servers' list"
+  },
+  "authentication": "认证",
+  "@authentication": {
+    "description": "Label for server settings related to authentications"
+  },
+  "tokenLoginDescription": "推荐登录方式",
+  "@tokenLoginDescription": {
+    "description": "Recommended way to log in"
+  },
+  "cookieLogin": "Cookie登录",
+  "@cookieLogin": {
+    "description": "Text to login to a server using the cookie jar method"
+  },
+  "username": "用户名",
+  "@username": {
+    "description": "Username label for login to a server"
+  },
+  "password": "密码",
+  "@password": {
+    "description": "Password label for login to a server"
+  },
+  "videoQueue": "已在队列中",
+  "@videoQueue": {
+    "description": "Label for button to display the video queue"
+  },
+  "addRecommendedToQueue": "自动播放推荐内容",
+  "@addRecommendedToQueue": {
+    "description": "Switch when playing a video to automatically add the recommended videos to the video queue"
+  },
+  "useProxy": "使用代理",
+  "@useProxy": {
+    "description": "label for settings switch to proxy videos from server"
+  },
+  "useProxyDescription": "通过服务实例代理视频流，可以解除区域和网络服务商的YouTube限制。需要重新启动应用",
+  "@useProxyDescription": {
+    "description": "Description for the use proxy settings"
+  },
+  "sponsorBlockCategorySponsor": "赞助商",
+  "@sponsorBlockCategorySponsor": {
+    "description": "Sponsor block 'Sponsor' Category"
+  },
+  "sponsorBlockCategorySponsorDescription": "付费促销、付费推荐和直接广告。不是自我推销或免费推荐事业/创作者/网站/产品。",
+  "@sponsorBlockCategorySponsorDescription": {
+    "description": "Sponsor block 'Sponsor' Category description"
+  },
+  "sponsorBlockSettingsQuickDescription": "选择要跳过的赞助商片段类型",
+  "@sponsorBlockSettingsQuickDescription": {
+    "description": "Small description of what the sponsor block settings do"
+  },
+  "sponsorBlockCategoryUnpaidSelfPromo": "未付费/自我推销",
+  "@sponsorBlockCategoryUnpaidSelfPromo": {
+    "description": "Sponsor block 'Unpaid/Self promotion' Category"
   }
 }
