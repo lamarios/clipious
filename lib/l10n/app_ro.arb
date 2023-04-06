@@ -347,7 +347,7 @@
   "@useDynamicThemeDescription": {
     "description": ""
   },
-  "useDashDescription": "Streamingul adaptiv DASH poate fi uneori problematic, iar YouTube îl poate limita.",
+  "useDashDescription": "Streamingul adaptiv DASH poate fi problematic atunci când YouTube o reduce.",
   "@useDashDescription": {
     "description": "Description for dash in the settings screen"
   },
@@ -410,5 +410,81 @@
   "addRecommendedToQueue": "Redare automată recomandată în continuare",
   "@addRecommendedToQueue": {
     "description": "Switch when playing a video to automatically add the recommended videos to the video queue"
+  },
+  "sponsorBlockCategorySponsor": "Sponsor",
+  "@sponsorBlockCategorySponsor": {
+    "description": "Sponsor block 'Sponsor' Category"
+  },
+  "sponsorBlockCategoryInteraction": "Memento de interacțiune (Abonare)",
+  "@sponsorBlockCategoryInteraction": {
+    "description": "Sponsor block 'Interaction' Category"
+  },
+  "sponsorBlockCategoryOutro": "Carduri finale/Credite",
+  "@sponsorBlockCategoryOutro": {
+    "description": "Outro block 'Outro' Category"
+  },
+  "sponsorBlockCategoryOutroDescription": "Credite sau când apar cardurile de final YouTube. Nu pentru concluzii cu informații.",
+  "@sponsorBlockCategoryOutroDescription": {
+    "description": "Outro block 'Outro' Category description"
+  },
+  "sponsorBlockCategoryPreview": "Previzualizare/Recapitulare",
+  "@sponsorBlockCategoryPreview": {
+    "description": "Sponsorblock 'Preview' Category"
+  },
+  "sponsorBlockCategoryFiller": "Tangenta de umplere/Glume",
+  "@sponsorBlockCategoryFiller": {
+    "description": "Sponsorblock 'Filler' Category"
+  },
+  "useProxy": "Videoclipuri Proxy",
+  "@useProxy": {
+    "description": "label for settings switch to proxy videos from server"
+  },
+  "sponsorBlockCategoryIntroDescription": "Un interval fără conținut real. Ar putea fi o pauză, un cadru static, o animație care se repetă. Aceasta nu ar trebui folosită pentru tranzițiile care conțin informații.",
+  "@sponsorBlockCategoryIntroDescription": {
+    "description": "Sponsorblock 'Intro' Category description"
+  },
+  "sponsorBlockCategoryMusicOffTopic": "Muzică: Secțiunea non-muzică",
+  "@sponsorBlockCategoryMusicOffTopic": {
+    "description": "Sponsorblock 'MusicOffTopic' Category"
+  },
+  "sponsorBlockSettingsQuickDescription": "Selectați ce tip de segmente să omiteți",
+  "@sponsorBlockSettingsQuickDescription": {
+    "description": "Small description of what the sponsor block settings do"
+  },
+  "sponsorBlockCategorySponsorDescription": "Promoție plătită, recomandări plătite și reclame directe. Nu pentru auto-promovare sau strigături gratuite către cauze/creatori/site-uri web/produse care le plac.",
+  "@sponsorBlockCategorySponsorDescription": {
+    "description": "Sponsor block 'Sponsor' Category description"
+  },
+  "sponsorBlockCategoryIntro": "Animație de pauză/Intro",
+  "@sponsorBlockCategoryIntro": {
+    "description": "Sponsorblock 'Intro' Category"
+  },
+  "sponsorBlockCategoryUnpaidSelfPromo": "Neplătită/Autopromovare",
+  "@sponsorBlockCategoryUnpaidSelfPromo": {
+    "description": "Sponsor block 'Unpaid/Self promotion' Category"
+  },
+  "sponsorBlockCategoryUnpaidSelfPromoDescription": "Similar cu „sponsor”, cu excepția promovării neplătite sau autopromovate. Aceasta include secțiuni despre mărfuri, donații sau informații despre cine a colaborat ",
+  "@sponsorBlockCategoryUnpaidSelfPromoDescription": {
+    "description": "Sponsor block 'Unpaid/Self promotion' Category description"
+  },
+  "sponsorBlockCategoryInteractionDescription": "Când există un scurt memento pentru a vă place, abonați-vă sau urmați-le în mijlocul conținutului. Dacă este lung sau despre ceva specific, ar trebui să fie sub promovare de sine în loc.",
+  "@sponsorBlockCategoryInteractionDescription": {
+    "description": "Sponsor block 'Interaction' Category description"
+  },
+  "sponsorBlockCategoryPreviewDescription": "Colecție de clipuri care arată ce se întâmplă în acest videoclip sau în alte videoclipuri dintr-o serie în care toate informațiile sunt repetate mai târziu în videoclip",
+  "@sponsorBlockCategoryPreviewDescription": {
+    "description": "Sponsorblock 'Preview' Category description"
+  },
+  "sponsorBlockCategoryFillerDescription": "Scene tangențiale adăugate numai pentru umplutură sau umor care nu sunt necesare pentru a înțelege conținutul principal al videoclipului. Aceasta nu ar trebui să includă segmente care furnizează detalii contextuale sau de fond. Aceasta este o categorie foarte agresivă destinată atunci când nu sunteți în starea de spirit pentru \"distracție\".",
+  "@sponsorBlockCategoryFillerDescription": {
+    "description": "Sponsorblock 'Filler' Category description"
+  },
+  "sponsorBlockCategoryMusicOffTopicDescription": "Un interval fără conținut real. Ar putea fi o pauză, un cadru static, o animație care se repetă. Aceasta nu ar trebui folosită pentru tranzițiile care conțin informații.",
+  "@sponsorBlockCategoryMusicOffTopicDescription": {
+    "description": "Only for use in music videos. This only should be used for sections of music videos that aren't already covered by another category."
+  },
+  "useProxyDescription": "Prin proxy fluxurile video de pe server, puteți ocoli blocările regionale sau blocarea ISP-ului YouTube. Necesită repornirea aplicației",
+  "@useProxyDescription": {
+    "description": "Description for the use proxy settings"
   }
 }
