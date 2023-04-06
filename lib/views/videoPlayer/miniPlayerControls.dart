@@ -23,7 +23,7 @@ class MiniPlayerControls extends StatelessWidget {
         constraints: BoxConstraints(maxWidth: tabletMaxVideoWidth, ),
         child: GetBuilder<MiniPlayerControlsController>(
           // global: false,
-          init: MiniPlayerControlsController(),
+          init: MiniPlayerControlsController(videoId),
           builder: (_) => Stack(
             alignment: Alignment.center,
             children: [

@@ -24,7 +24,7 @@ class MiniPlayerView {
                         children: [
                           Text('${vid.title} - ${vid.author}', overflow: TextOverflow.ellipsis, style: const TextStyle(fontSize: 11),),
                           MiniPlayerControls(
-                            videoId: controller.currentVideo.videoId,
+                            videoId: vid.videoId,
                             controller: controller,
                           ),
                           const MiniPlayerProgress(),
