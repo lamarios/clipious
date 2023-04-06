@@ -52,44 +52,46 @@ class MiniPlayer extends StatelessWidget {
           child: AnimatedOpacity(
             opacity: _.opacity,
             duration: animationDuration,
-            child: Material(
-              elevation: 1,
-              child: showPlayer
-                  ? GestureDetector(
-                      onVerticalDragEnd: _.videoDraggedEnd,
-                      onVerticalDragUpdate: _.videoDragged,
-                      onVerticalDragStart: _.videoDragStarted,
-                      child: AnimatedContainer(
-                        duration: animationDuration,
-                        color: _.isMini ? colors.secondaryContainer : colors.background,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            _.isMini || _.isPip
-                                ? const SizedBox.shrink()
-                                : AppBar(
-                                    title: Text(locals.videoPlayer),
-                                    elevation: 1,
-                                    leading: IconButton(
-                                      icon: const Icon(Icons.expand_more),
-                                      onPressed: _.showMiniPlayer,
+            child: SafeArea(
+              child: Material(
+                elevation: 0,
+                child: showPlayer
+                    ? GestureDetector(
+                        onVerticalDragEnd: _.videoDraggedEnd,
+                        onVerticalDragUpdate: _.videoDragged,
+                        onVerticalDragStart: _.videoDragStarted,
+                        child: AnimatedContainer(
+                          duration: animationDuration,
+                          color: _.isMini ? colors.secondaryContainer : colors.background,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              _.isMini || _.isPip
+                                  ? const SizedBox.shrink()
+                                  : AppBar(
+                                      title: Text(locals.videoPlayer),
+                                      elevation: 0,
+                                      leading: IconButton(
+                                        icon: const Icon(Icons.expand_more),
+                                        onPressed: _.showMiniPlayer,
+                                      ),
                                     ),
-                                  ),
-                            AnimatedContainer(
-                              width: double.infinity,
-                              constraints: BoxConstraints(maxHeight: _.isMini ? targetHeight : 500, maxWidth: tabletMaxVideoWidth),
-                              duration: animationDuration,
-                              child: Row(
-                                mainAxisAlignment: _.isMini ? MainAxisAlignment.start : MainAxisAlignment.center,
-                                children: [Expanded(flex: 1, child: videoPlayer), ...miniPlayerWidgets],
+                              AnimatedContainer(
+                                width: double.infinity,
+                                constraints: BoxConstraints(maxHeight: _.isMini ? targetHeight : 500, maxWidth: tabletMaxVideoWidth),
+                                duration: animationDuration,
+                                child: Row(
+                                  mainAxisAlignment: _.isMini ? MainAxisAlignment.start : MainAxisAlignment.center,
+                                  children: [Expanded(flex: 1, child: videoPlayer), ...miniPlayerWidgets],
+                                ),
                               ),
-                            ),
-                            ...bigPlayerWidgets,
-                          ],
+                              ...bigPlayerWidgets,
+                            ],
+                          ),
                         ),
-                      ),
-                    )
-                  : const SizedBox.shrink(),
+                      )
+                    : const SizedBox.shrink(),
+              ),
             ),
           ),
         );

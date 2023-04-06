@@ -1,8 +1,18 @@
 import 'package:get/get.dart';
 import 'package:invidious/controllers/miniPayerController.dart';
 import 'package:invidious/controllers/playerController.dart';
+import 'package:invidious/controllers/videoLikeController.dart';
+
+import '../utils.dart';
 
 class MiniPlayerControlsController extends GetxController {
+  MiniPlayerControlsController(this.videoId);
+
+  static MiniPlayerControlsController? to() => safeGet();
+
+  String videoId;
+
+
   togglePlay() {
     PlayerController.to()?.togglePlaying();
     update();
@@ -10,6 +20,12 @@ class MiniPlayerControlsController extends GetxController {
 
   bool isPlaying() {
     return (PlayerController.to()?.videoController?.isPlaying() ?? false);
+  }
+
+  setVideo(String videoId) {
+    this.videoId = videoId;
+    update();
+    VideoLikeButtonController.to(tag: VideoLikeButtonController.tags(videoId))?.checkVideoLikeStatus();
   }
 
   playNext() {

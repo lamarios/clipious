@@ -28,7 +28,7 @@ class VideoPlayerFullScreenView {
                 visible: !controller.isMini,
                 child: Expanded(
                   child: Padding(
-                    padding: const EdgeInsets.all(16),
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
                     child: Container(
                       constraints: BoxConstraints(maxWidth: tabletMaxVideoWidth),
                       child: <Widget>[
@@ -40,6 +40,7 @@ class VideoPlayerFullScreenView {
                         SingleChildScrollView(
                           child: CommentsContainer(
                             video: video,
+                            key: ValueKey('comms-${video.videoId}'),
                           ),
                         ),
                         SingleChildScrollView(child: RecommendedVideos(video: video)),
@@ -50,12 +51,15 @@ class VideoPlayerFullScreenView {
                 )),
             Visibility(
               visible: !controller.isMini,
-              child: NavigationBar(elevation: 0, selectedIndex: controller.selectedFullScreenIndex, onDestinationSelected: controller.selectTab, destinations: [
-                NavigationDestination(icon: const Icon(Icons.info), label: locals.info),
-                NavigationDestination(icon: const Icon(Icons.chat_bubble), label: locals.comments),
-                NavigationDestination(icon: const Icon(Icons.schema), label: locals.recommended),
-                NavigationDestination(icon: const Icon(Icons.playlist_play), label: locals.videoQueue)
-              ]),
+              child: SizedBox(
+                // height: 80,
+                child: NavigationBar(elevation: 0, selectedIndex: controller.selectedFullScreenIndex, onDestinationSelected: controller.selectTab, destinations: [
+                  NavigationDestination(icon: const Icon(Icons.info), label: locals.info),
+                  NavigationDestination(icon: const Icon(Icons.chat_bubble), label: locals.comments),
+                  NavigationDestination(icon: const Icon(Icons.schema), label: locals.recommended),
+                  NavigationDestination(icon: const Icon(Icons.playlist_play), label: locals.videoQueue)
+                ]),
+              ),
             )
           ]
         : [];

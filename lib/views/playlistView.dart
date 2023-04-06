@@ -1,6 +1,7 @@
 import 'package:fbroadcast/fbroadcast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_swipe_action_cell/core/cell.dart';
 import 'package:get/get.dart';
 import 'package:invidious/main.dart';
 import 'package:invidious/models/errors/invidiousServiceError.dart';
@@ -9,6 +10,7 @@ import 'package:invidious/models/video.dart';
 import 'package:invidious/models/videoInList.dart';
 import 'package:invidious/myRouteObserver.dart';
 import 'package:invidious/utils.dart';
+import 'package:invidious/views/components/compactVideo.dart';
 import 'package:invidious/views/components/miniPlayerAware.dart';
 import 'package:invidious/views/components/videoThumbnail.dart';
 import 'package:invidious/views/video.dart';
@@ -75,13 +77,12 @@ class PlaylistView extends StatelessWidget {
         });
   }
 
-  openVideo(BuildContext context, String videoId) {
-    navigatorKey.currentState?.push(
-        MaterialPageRoute(
-            settings: ROUTE_VIDEO,
-            builder: (context) => VideoView(
-                  videoId: videoId,
-                )));
+  openVideo(String videoId) {
+    navigatorKey.currentState?.push(MaterialPageRoute(
+        settings: ROUTE_VIDEO,
+        builder: (context) => VideoView(
+              videoId: videoId,
+            )));
   }
 
   removeVideoFromPlayList(BuildContext context, PlaylistController controller, VideoInList v) async {
@@ -197,61 +198,25 @@ class PlaylistView extends StatelessWidget {
                                   child: ListView(
                                 controller: _.scrollController,
                                 children: _.playlist.videos
-                                    .map((v) => Container(
-                                          width: double.infinity,
-                                          height: _.playlistItemHeight,
-                                          alignment: Alignment.center,
-                                          child: Stack(
-                                            children: [
-                                              Padding(
-                                                padding: const EdgeInsets.all(8.0),
-                                                child: InkWell(
-                                                  onTap: canDeleteVideos ? () => showPlayListVideoDialog(context, _, v) : null,
-                                                  child: Row(
-                                                    children: [
-                                                      Padding(
-                                                        padding: const EdgeInsets.all(4.0),
-                                                        child: SizedBox(
-                                                          width: 100,
-                                                          child: VideoThumbnailView(
-                                                            cacheKey: 'v-worst/${v.videoId}',
-                                                            videoId: v.videoId,
-                                                            thumbnailUrl: ImageObject.getWorstThumbnail(v.videoThumbnails)?.url ?? '',
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      Expanded(
-                                                        child: Column(
-                                                          mainAxisAlignment: MainAxisAlignment.center,
-                                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                                          children: [
-                                                            Text(
-                                                              v.title,
-                                                              style: TextStyle(color: colorScheme.primary),
-                                                            ),
-                                                            Text(
-                                                              v.author ?? '',
-                                                            )
-                                                          ],
-                                                        ),
-                                                      ),
-                                                      InkWell(
-                                                        onTap: () => openVideo(context, v.videoId),
-                                                        child: Padding(
-                                                          padding: const EdgeInsets.all(8.0),
-                                                          child: Icon(
-                                                            Icons.exit_to_app,
-                                                            color: colorScheme.primary,
-                                                          ),
-                                                        ),
-                                                      )
-                                                    ],
-                                                  ),
-                                                ),
-                                              )
-                                            ],
-                                          ),
-                                        ))
+                                    .map((v) => SwipeActionCell(
+                                        key: ValueKey('swipe-${v.videoId}'),
+                                        trailingActions: canDeleteVideos
+                                            ? [
+                                                SwipeAction(
+                                                  icon: const Icon(Icons.delete, color: Colors.white),
+                                                  performsFirstActionWithFullSwipe: true,
+                                                  onTap: (handler) async {
+                                                    await handler(true);
+                                                    removeVideoFromPlayList(context, _, v);
+                                                  },
+                                                )
+                                              ]
+                                            : null,
+                                        child: CompactVideo(
+                                          video: v,
+                                          onTap: () => openVideo(v.videoId),
+                                          key: ValueKey(v.videoId),
+                                        )))
                                     .toList(),
                               ))
                             ],

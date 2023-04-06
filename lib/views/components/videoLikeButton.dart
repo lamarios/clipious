@@ -6,14 +6,16 @@ class VideoLikeButton extends StatelessWidget {
   final String? videoId;
   double? size;
   ButtonStyle? style;
+  bool? global;
 
-  VideoLikeButton({Key? key, this.videoId, this.size, this.style}) : super(key: key);
+  VideoLikeButton({Key? key, this.videoId, this.size, this.style, this.global}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GetBuilder<VideoLikeButtonController>(
       init: VideoLikeButtonController(videoId: videoId),
       tag: VideoLikeButtonController.tags(videoId ?? ''),
+      global: global ?? true,
       builder: (_) => Visibility(
         visible: _.videoId != null && _.isLoggedIn,
         child: IconButton(

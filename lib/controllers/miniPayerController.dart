@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:invidious/controllers/miniPlayerAwareController.dart';
 import 'package:invidious/controllers/miniPlayerProgressController.dart';
+import 'package:invidious/controllers/miniplayerControlsController.dart';
 import 'package:invidious/controllers/playerController.dart';
 import 'package:invidious/controllers/videoLikeController.dart';
 import 'package:invidious/database.dart';
@@ -243,7 +244,13 @@ class MiniPlayerController extends GetxController {
       currentIndex = 0;
     }
 
-    Video v = await service.getVideo(video.videoId);
+    late Video v;
+    if (video is Video) {
+      v = video;
+    } else {
+      v = await service.getVideo(video.videoId);
+    }
+    // if we already have a full Video, no need to call the backend again
     currentlyPlaying = v;
 
     if (!playedVideos.contains(v.videoId)) {
@@ -254,6 +261,7 @@ class MiniPlayerController extends GetxController {
     PlayerController.to()?.toggleControls(!isMini);
     update();
     VideoLikeButtonController.to(tag: VideoLikeButtonController.tags(v.videoId))?.checkVideoLikeStatus();
+    MiniPlayerControlsController.to()?.setVideo(v.videoId);
   }
 
   BaseVideo get currentVideo => videos[currentIndex];
