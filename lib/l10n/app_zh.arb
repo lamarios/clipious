@@ -351,7 +351,7 @@
   "@useDash": {
     "description": "Label on video options if a user wants to switch to dash urls instead of the regular quality selection"
   },
-  "useDashDescription": "DASH 自适应视频流有时会出现问题，YouTube 可能会阻止它。",
+  "useDashDescription": "DASH 自适应视频流可能有问题， YouTube 会阻止它。",
   "@useDashDescription": {
     "description": "Description for dash in the settings screen"
   },
@@ -434,5 +434,21 @@
   "sponsorBlockCategoryUnpaidSelfPromo": "未付费/自我推销",
   "@sponsorBlockCategoryUnpaidSelfPromo": {
     "description": "Sponsor block 'Unpaid/Self promotion' Category"
+  },
+  "sponsorBlockCategoryIntro": "间隙/介绍动画",
+  "@sponsorBlockCategoryIntro": {
+    "description": "Sponsorblock 'Intro' Category"
+  },
+  "sponsorBlockCategoryInteraction": "互动提醒 （订阅）",
+  "@sponsorBlockCategoryInteraction": {
+    "description": "Sponsor block 'Interaction' Category"
+  },
+  "sponsorBlockCategoryUnpaidSelfPromoDescription": "类似于“赞助商”，除了无偿推广或自我推销。这包括有关商品、捐赠或有关他们合作商的部分 ",
+  "@sponsorBlockCategoryUnpaidSelfPromoDescription": {
+    "description": "Sponsor block 'Unpaid/Self promotion' Category description"
+  },
+  "sponsorBlockCategoryInteractionDescription": "当有简短提醒时，请在内容中点赞、订阅或关注它们。如果是冗长或关于特定事物，它应该在自我推销。",
+  "@sponsorBlockCategoryInteractionDescription": {
+    "description": "Sponsor block 'Interaction' Category description"
   }
 }
