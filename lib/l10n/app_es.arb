@@ -1,1 +1,330 @@
-{}
+{
+  "subscriptions": "Suscripciones",
+  "@subscriptions": {
+    "description": "User subscriptions"
+  },
+  "playlists": "Playlists",
+  "@playlists": {
+    "description": "User playlists"
+  },
+  "popular": "Popular",
+  "@popular": {
+    "description": "Popular videos title"
+  },
+  "trending": "Tendencias",
+  "@trending": {
+    "description": "Trending videos title"
+  },
+  "noVideoInPlayList": "No hay video en la lista de reproducción",
+  "@noVideoInPlayList": {
+    "description": "When no videos in the playlist"
+  },
+  "removeFromPlayList": "Eliminar de la lista de reproducción",
+  "@removeFromPlayList": {
+    "description": "Menu item description to show remove a video from a playlist"
+  },
+  "deletePlayListQ": "¿Eliminar lista de reproducción?",
+  "@deletePlayListQ": {
+    "description": "Ask user to delete a playlist"
+  },
+  "irreversibleAction": "Esta acción es irreversible",
+  "@irreversibleAction": {
+    "description": "Tell the user that the action cannot be undone"
+  },
+  "addPlayList": "Agregar lista de reproducción",
+  "@addPlayList": {
+    "description": "Title for add playlist dialog"
+  },
+  "playListName": "Nombre de la lista de reproducción",
+  "@playListName": {
+    "description": "Place holder for new playlist name text field"
+  },
+  "playlistVisibility": "Visibilidad",
+  "@playlistVisibility": {
+    "description": "Dropdown label for playlist visibility"
+  },
+  "publicPlaylist": "Público",
+  "@publicPlaylist": {
+    "description": "Public playlist"
+  },
+  "privatePlaylist": "Privado",
+  "@privatePlaylist": {
+    "description": "Private playlist"
+  },
+  "cancel": "Cancelar",
+  "@cancel": {
+    "description": "Cancel button label"
+  },
+  "add": "Añadir",
+  "@add": {
+    "description": "Add button abel"
+  },
+  "unlistedPlaylist": "No incluido en listado",
+  "@unlistedPlaylist": {
+    "description": "Unlisted playlist"
+  },
+  "info": "Información",
+  "@info": {
+    "description": "Info label"
+  },
+  "videos": "Vídeos",
+  "@videos": {
+    "description": "Videos label"
+  },
+  "streams": "Transmisiones",
+  "@streams": {
+    "description": "Streams label"
+  },
+  "subscribed": "Suscrito",
+  "@subscribed": {
+    "description": "When the user is subscribed to a channel"
+  },
+  "shareYoutubeLink": "Compartir enlace de YouTube",
+  "@shareYoutubeLink": {
+    "description": "asking user to share youtube link"
+  },
+  "shareInvidiousLink": "Compartir enlace de Invidious",
+  "@shareInvidiousLink": {
+    "description": "asking user to share invidious link"
+  },
+  "ok": "Ok",
+  "@ok": {
+    "description": "Ok"
+  },
+  "noChannels": "Sin canales",
+  "@noChannels": {
+    "description": "when there are no channels to display"
+  },
+  "noPlaylists": "Sin canales",
+  "@noPlaylists": {
+    "description": "when there are no playlists to display"
+  },
+  "channels": "Canales",
+  "@channels": {
+    "description": "Channels label"
+  },
+  "comments": "Comentarios",
+  "@comments": {
+    "description": "Comments label"
+  },
+  "recommended": "Recomendado",
+  "@recommended": {
+    "description": "Recommended label"
+  },
+  "couldntFetchVideos": "No se pudieron recuperar los videos. Toca para volver a intentarlo.",
+  "@couldntFetchVideos": {
+    "description": "Can't load bunch of videos, asking  user to try again"
+  },
+  "startUsingClipious": "Empieza a usar Clipious",
+  "@startUsingClipious": {
+    "description": "button label to start using the app"
+  },
+  "videoAddedToPlaylist": "Vídeo añadido a la lista de reproducción",
+  "@videoAddedToPlaylist": {
+    "description": "Pop up message when a video was added to a playlist"
+  },
+  "errorAddingVideoToPlaylist": "Error al agregar video a la lista de reproducción",
+  "@errorAddingVideoToPlaylist": {
+    "description": "Error while adding video to playlist"
+  },
+  "selectPlaylist": "Seleccionar lista de reproducción",
+  "@selectPlaylist": {
+    "description": "Title when users wants to add a video to a playlist"
+  },
+  "createNewPlaylist": "Crear nueva lista de reproducción",
+  "@createNewPlaylist": {
+    "description": "Button label to create a new playlist when the user wants to add a video to a playlist"
+  },
+  "loadMore": "Carga más",
+  "@loadMore": {
+    "description": "CTA to load more"
+  },
+  "topSorting": "Top",
+  "@topSorting": {
+    "description": "Content sorting: top"
+  },
+  "streamIsLive": "En vivo",
+  "@streamIsLive": {
+    "description": "Label when a video is a live stream"
+  },
+  "sponsorSkipped": "Patrocinador omitido",
+  "@sponsorSkipped": {
+    "description": "When a sponsor segment is skipped thanks to sponsor block"
+  },
+  "selectBrowsingCountry": "Seleccionar país de navegación",
+  "@selectBrowsingCountry": {
+    "description": "Select country for trending content"
+  },
+  "settings": "Ajustes",
+  "@settings": {
+    "description": "Settings title"
+  },
+  "browsing": "Navegando",
+  "@browsing": {
+    "description": "video browsing preferences"
+  },
+  "country": "País",
+  "@country": {
+    "description": "Country label"
+  },
+  "whenAppStartsShow": "Cuando se inicie la aplicación, muestra…",
+  "@whenAppStartsShow": {
+    "description": "Setting title for selecting the screen to show on start"
+  },
+  "servers": "Servidores",
+  "@servers": {
+    "description": "Server management settings category"
+  },
+  "manageServers": "Administrar servidores",
+  "@manageServers": {
+    "description": "Settings to manage servers"
+  },
+  "useSponsorBlock": "Utilice SponsorBlock",
+  "@useSponsorBlock": {
+    "description": "label for sponsorblock checkbox"
+  },
+  "about": "Acerca de",
+  "@about": {
+    "description": "About"
+  },
+  "name": "Nombre",
+  "@name": {
+    "description": "NAme label"
+  },
+  "package": "Paquete",
+  "@package": {
+    "description": "package label"
+  },
+  "version": "Versión",
+  "@version": {
+    "description": "version label"
+  },
+  "build": "Construir",
+  "@build": {
+    "description": "build label"
+  },
+  "addServer": "Agregar servidor",
+  "@addServer": {
+    "description": "Add server label"
+  },
+  "useThisServer": "Usa este servidor",
+  "@useThisServer": {
+    "description": "Use this server label"
+  },
+  "logIn": "Iniciar sesión",
+  "@logIn": {
+    "description": "CTA to log in to server"
+  },
+  "delete": "Borrar",
+  "@delete": {
+    "description": "Delete label"
+  },
+  "notLoggedIn": "Sin iniciar sesión. Toque para iniciar sesión.",
+  "@notLoggedIn": {
+    "description": "Label when the user is not logged in to the server"
+  },
+  "publicServers": "Servidores públicos",
+  "@publicServers": {
+    "description": "Public servers label"
+  },
+  "loadingPublicServer": "Cargando servidores públicos",
+  "@loadingPublicServer": {
+    "description": "Message telling users the app is loading the list of public servers"
+  },
+  "tapToAddServer": "Toque para agregar un servidor a su lista",
+  "@tapToAddServer": {
+    "description": "public server description"
+  },
+  "publicServersError": "No se pudo obtener la lista de servidores públicos. Toca para volver a intentarlo.",
+  "@publicServersError": {
+    "description": "Error message when trying to get public servers but it failed"
+  },
+  "appearance": "Apariencia",
+  "@appearance": {
+    "description": "Settings category title"
+  },
+  "useDynamicTheme": "Colores dinámicos",
+  "@useDynamicTheme": {
+    "description": ""
+  },
+  "useDynamicThemeDescription": "Use los colores de Material You (solo disponible en Android 12+). Requiere reiniciar la aplicación",
+  "@useDynamicThemeDescription": {
+    "description": ""
+  },
+  "useDash": "Usar DASH",
+  "@useDash": {
+    "description": "Label on video options if a user wants to switch to dash urls instead of the regular quality selection"
+  },
+  "videoPlayer": "Reproductor de video",
+  "@videoPlayer": {
+    "description": "Title for video player related options"
+  },
+  "videoListed": "Público",
+  "@videoListed": {
+    "description": "Status of a publicly available video"
+  },
+  "videoUnlisted": "No incluido en listado",
+  "@videoUnlisted": {
+    "description": "Status of a video that is only accessible by link"
+  },
+  "videoIsFamilyFriendly": "Familiar",
+  "@videoIsFamilyFriendly": {
+    "description": "Displayed only when a video is family friendly"
+  },
+  "tapToManage": "Toca para administrar",
+  "@tapToManage": {
+    "description": "Text shown below a server in the 'Your servers' list"
+  },
+  "authentication": "Autenticación",
+  "@authentication": {
+    "description": "Label for server settings related to authentications"
+  },
+  "latestVideos": "Últimos vídeos",
+  "@latestVideos": {
+    "description": "Latest channel videos"
+  },
+  "subscribe": "Suscribir",
+  "@subscribe": {
+    "description": "Label for user to subscribe to a channel"
+  },
+  "couldntLoadVideo": "No se pudo cargar el video",
+  "@couldntLoadVideo": {
+    "description": "Message to display when a video can't be loaded"
+  },
+  "wizardIntro": "Seleccione un servidor público o agregue uno propio. (Se puede cambiar más adelante en la configuración.)",
+  "@wizardIntro": {
+    "description": "Welcome message on frst time use"
+  },
+  "newSorting": "Nuevo",
+  "@newSorting": {
+    "description": "Content sorting: new"
+  },
+  "showOnStart": "Seleccione qué mostrar cuando se inicia la aplicación",
+  "@showOnStart": {
+    "description": "Title of dialog asking which screen the users prefers to see"
+  },
+  "sponsorBlockDescription": "Omitir segmentos de patrocinadores enviados por la comunidad",
+  "@sponsorBlockDescription": {
+    "description": "Sponsorblock setting description"
+  },
+  "invalidInvidiousServer": "Servidor de Invidious no válido",
+  "@invalidInvidiousServer": {
+    "description": "Error when the user tries to add a server that is not a proper or reachable invidious server"
+  },
+  "loggedIn": "Conectado",
+  "@loggedIn": {
+    "description": "Label to tell the user that he is logged in to the server"
+  },
+  "yourServers": "Tus servidores",
+  "@yourServers": {
+    "description": "Your servers label"
+  },
+  "addServerHelpText": "Use el botón + para agregar sus propios servidores o toque un servidor público y agréguelo.",
+  "@addServerHelpText": {
+    "description": "label for when the user hasn't chosen a server yet"
+  },
+  "useDashDescription": "La transmisión adaptable DASH puede ser problemática cuando YouTube la acelera.",
+  "@useDashDescription": {
+    "description": "Description for dash in the settings screen"
+  }
+}
