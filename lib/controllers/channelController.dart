@@ -17,11 +17,13 @@ class ChannelController extends GetxController {
   double barHeight = 200;
   double barOpacity = 1;
   late Animation<Color?>? animation;
-  late AnimationController controller;
+  late AnimationController? controller;
 
-  ChannelController(this.channelId, Color backgroundColor, TickerProvider vsync) {
-    controller = AnimationController(duration: animationDuration, vsync: vsync);
-    animation = ColorTween(begin: backgroundColor.withOpacity(0.4), end: backgroundColor).animate(controller)..addListener(() {});
+  ChannelController(this.channelId, {Color? backgroundColor, TickerProvider? vsync}) {
+    if (backgroundColor != null && vsync != null) {
+      controller = AnimationController(duration: animationDuration, vsync: vsync);
+      animation = ColorTween(begin: backgroundColor.withOpacity(0.4), end: backgroundColor).animate(controller!)..addListener(() {});
+    }
   }
 
   @override
@@ -38,11 +40,11 @@ class ChannelController extends GetxController {
 
   @override
   void onClose() {
-    controller.dispose();
+    controller?.dispose();
     super.onClose();
   }
 
-  selectIndex(int index){
+  selectIndex(int index) {
     selectedIndex = index;
     update();
   }

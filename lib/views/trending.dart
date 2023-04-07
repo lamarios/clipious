@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:invidious/controllers/videoListController.dart';
 import 'package:invidious/globals.dart';
+import 'package:invidious/views/tv/tvHorizontalVideoList.dart';
 
+import '../main.dart';
 import '../models/paginatedList.dart';
 import 'videoList.dart';
 
@@ -22,8 +24,13 @@ class TrendingState extends State<Trending> {
     var colorScheme = Theme.of(context).colorScheme;
     return Container(
       color: colorScheme.background,
-      child: Column(
-        children: [
+      child: isTv
+          ? TvHorizontalVideoList(
+              paginatedVideoList: SingleEndpointList(service.getTrending),
+              tags: VideoListController.trendingTag,
+            )
+          : Column(
+              children: [
 /*
 doesn't seem to be working for now
           Padding(
@@ -69,14 +76,14 @@ doesn't seem to be working for now
             ),
           ),
 */
-          Expanded(
-            child: VideoList(
-              paginatedVideoList: SingleEndpointList(service.getTrending),
-              tags: VideoListController.trendingTag,
+                Expanded(
+                  child: VideoList(
+                    paginatedVideoList: SingleEndpointList(service.getTrending),
+                    tags: VideoListController.trendingTag,
+                  ),
+                ),
+              ],
             ),
-          ),
-        ],
-      ),
     );
   }
 }

@@ -3,6 +3,7 @@ import 'package:fbroadcast/fbroadcast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:invidious/controllers/tvPlayerController.dart';
 import 'package:invidious/controllers/videoInListController.dart';
 import 'package:invidious/utils.dart';
 import 'package:logging/logging.dart';
@@ -31,11 +32,13 @@ class PlayerController extends GetxController {
   Video video;
   final bool miniPlayer;
   bool? playNow;
+  bool? disableControls;
   final ColorScheme colors;
   final Color overFlowTextColor;
   final GlobalKey key;
 
-  PlayerController({required this.colors, required this.overFlowTextColor, required this.key, required this.video, required this.miniPlayer, required this.locals});
+  PlayerController({required this.colors, required this.overFlowTextColor, required this.key, required this.video, required this.miniPlayer, required this.locals, this.disableControls});
+
 
   @override
   void onInit() {
@@ -101,7 +104,7 @@ class PlayerController extends GetxController {
           }
 
           previousSponsorCheck = currentPosition;
-          MiniPlayerController.to()?.handleVideoEvent(event);
+          broadcastEvent(event);
         } else if (currentPosition + 2 < previousSponsorCheck) {
           // if we're more than 2 seconds behind, means we probably seek backward manually far away
           // so we reset the position
@@ -110,7 +113,7 @@ class PlayerController extends GetxController {
         break;
       case BetterPlayerEventType.finished:
         saveProgress(video.lengthSeconds);
-        MiniPlayerController.to()?.handleVideoEvent(event);
+        broadcastEvent(event);
         break;
       case BetterPlayerEventType.pipStart:
       case BetterPlayerEventType.pipStop:
@@ -119,11 +122,18 @@ class PlayerController extends GetxController {
       case BetterPlayerEventType.overflowClosed:
       case BetterPlayerEventType.overflowOpened:
       case BetterPlayerEventType.initialized:
-        MiniPlayerController.to()?.handleVideoEvent(event);
+      case BetterPlayerEventType.seekTo:
+      case BetterPlayerEventType.bufferingEnd:
+      case BetterPlayerEventType.bufferingStart:
+        broadcastEvent(event);
         break;
       default:
         break;
     }
+  }
+
+  broadcastEvent(BetterPlayerEvent event){
+    isTv ? TvPlayerController.to()?.handleVideoEvent(event) :MiniPlayerController.to()?.handleVideoEvent(event);
   }
 
   toggleDash() {
@@ -180,7 +190,7 @@ class PlayerController extends GetxController {
             ? '${video.dashUrl}${service.useProxy ? '?local=true' : ''}'
             : video.formatStreams[video.formatStreams.length - 1].url;
 
-    log.info('Playing url ${videoUrl}');
+    log.info('Playing url (dash ${useDash},  hasHls ? ${video.hlsUrl != null})  ${videoUrl}');
 
     BetterPlayerVideoFormat format = isHls
         ? BetterPlayerVideoFormat.hls
@@ -220,6 +230,7 @@ class PlayerController extends GetxController {
             allowedScreenSleep: false,
             fit: BoxFit.contain,
             controlsConfiguration: BetterPlayerControlsConfiguration(
+                showControls: !(disableControls ?? false),
                 enablePlayPause: false,
                 overflowModalColor: colors.background,
                 overflowModalTextColor: overFlowTextColor,

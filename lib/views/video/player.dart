@@ -1,31 +1,18 @@
-import 'dart:async';
-
-import 'package:after_layout/after_layout.dart';
 import 'package:better_player/better_player.dart';
-import 'package:fbroadcast/fbroadcast.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:invidious/controllers/playerController.dart';
-import 'package:invidious/models/db/settings.dart';
-import 'package:logging/logging.dart';
 
-import '../../controllers/videoInListController.dart';
-import '../../database.dart';
-import '../../globals.dart';
-import '../../main.dart';
-import '../../models/db/progress.dart' as dbProgress;
-import '../../models/pair.dart';
-import '../../models/sponsorSegment.dart';
 import '../../models/video.dart';
 
 class VideoPlayer extends StatefulWidget {
   final Video video;
   final bool miniPlayer;
   final bool? playNow;
+  final bool? disableControls;
 
-  const VideoPlayer({super.key, required this.video, required this.miniPlayer, this.playNow});
+  const VideoPlayer({super.key, required this.video, required this.miniPlayer, this.playNow, this.disableControls});
 
   @override
   State<VideoPlayer> createState() => VideoPlayerState();
@@ -77,7 +64,7 @@ class VideoPlayerState extends State<VideoPlayer> {
     AppLocalizations locals = AppLocalizations.of(context)!;
     Color overFlowTextColor = Theme.of(context).textTheme.bodyMedium?.color ?? Colors.black;
     return GetBuilder<PlayerController>(
-      init: PlayerController(locals: locals, overFlowTextColor: overFlowTextColor, colors: colorScheme, key: _betterPlayerKey, miniPlayer: widget.miniPlayer, video: widget.video),
+      init: PlayerController(locals: locals, overFlowTextColor: overFlowTextColor, colors: colorScheme, key: _betterPlayerKey, miniPlayer: widget.miniPlayer, video: widget.video, disableControls: widget.disableControls),
       builder: (_) => AspectRatio(
           aspectRatio: 16 / 9,
           child: _.videoController == null

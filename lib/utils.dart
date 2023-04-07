@@ -1,11 +1,14 @@
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:invidious/globals.dart';
+import 'package:invidious/main.dart';
 import 'package:invidious/models/interfaces/sharelink.dart';
 import 'package:invidious/views/components/miniPlayerAware.dart';
+import 'package:invidious/views/tv/tvButton.dart';
 import 'package:logging/logging.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -16,7 +19,7 @@ const TABLET_PORTRAIT_MAX = 900;
 
 var log = Logger('Utils');
 
-enum DeviceType { phone, tablet }
+enum DeviceType { phone, tablet, tv }
 
 double tabletMaxVideoWidth = getDeviceType() == DeviceType.phone ? double.infinity : 500;
 
@@ -109,6 +112,12 @@ DeviceType getDeviceType() {
   return data.size.shortestSide < 600 ? DeviceType.phone : DeviceType.tablet;
 }
 
+Future<bool> isDeviceTv() async {
+  DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+  AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
+  return androidInfo.systemFeatures.contains('android.software.leanback');
+}
+
 int getGridCount(BuildContext context) {
   double width = MediaQuery.of(context).size.width;
   if (width < PHONE_MAX) {
@@ -151,6 +160,52 @@ okCancelDialog(BuildContext context, String title, String message, Function() on
   );
 }
 
+showTvAlertdialog(BuildContext context, String title, List<Widget> body) {
+  var locals = AppLocalizations.of(context)!;
+  showTvDialog(context: context, builder: (context) => body, actions: [
+    TvButton(
+      autofocus: true,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
+        child: Text(locals.ok),
+      ),
+      onPressed: (context) {
+        Navigator.of(context).pop();
+      },
+    )
+  ]);
+}
+
+showTvDialog({required BuildContext context, String? title, required List<Widget> Function(BuildContext context) builder, required List<Widget> actions}) {
+  Navigator.of(context).push(MaterialPageRoute(
+    builder: (context) {
+      ColorScheme colors = Theme.of(context).colorScheme;
+      return Scaffold(
+        body: Padding(
+          padding: const EdgeInsets.all(40),
+          child: Column(children: [
+            if (title != null) Text(title, style: TextStyle(color: colors.primary, fontSize: 25)) else SizedBox.shrink(),
+            Expanded(
+              child: ListView(
+                children: builder(context),
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: actions
+                  .map((e) => Padding(
+                        padding: EdgeInsets.all(16),
+                        child: e,
+                      ))
+                  .toList(),
+            )
+          ]),
+        ),
+      );
+    },
+  ));
+}
+
 Country getCountryFromCode(String code) {
   return countryCodes.firstWhere((element) => element.code == code, orElse: () => Country('US', 'United States of America'));
 }
@@ -163,6 +218,18 @@ T? safeGet<T>({String? tag}) {
     log.info('could not find controller of class ${T.toString()}');
     return null;
   }
+}
+
+KeyEventResult onTvSelect(KeyEvent event, BuildContext context, Function(BuildContext context) func) {
+  if (event is KeyUpEvent) {
+    log.info('onTvSelect, ${event.logicalKey}, ${event}');
+    if (event.logicalKey == LogicalKeyboardKey.select || event.logicalKey == LogicalKeyboardKey.enter) {
+      func(context);
+      return KeyEventResult.handled;
+    }
+  }
+
+  return KeyEventResult.ignored;
 }
 
 SystemUiOverlayStyle getUiOverlayStyle(BuildContext context) {
