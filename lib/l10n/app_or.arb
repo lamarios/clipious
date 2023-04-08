@@ -450,5 +450,41 @@
   "addRecommendedToQueue": "ପରବର୍ତ୍ତୀ ସମୟରେ ଅଟୋ-ପ୍ଲେ ସୁପାରିଶ କରାଯାଇଛି",
   "@addRecommendedToQueue": {
     "description": "Switch when playing a video to automatically add the recommended videos to the video queue"
+  },
+  "sponsorBlockCategoryUnpaidSelfPromo": "ଅନାଦେୟ/ଆତ୍ମ ପଦୋନ୍ନତି",
+  "@sponsorBlockCategoryUnpaidSelfPromo": {
+    "description": "Sponsor block 'Unpaid/Self promotion' Category"
+  },
+  "nVideos": "{count, plural, =0{କୌଣସି ଭିଡିଓ ନାହିଁ} =1{ଗୋଟିଏ ଭିଡିଓ} other{{count} ମୋଟ ଭିଡିଓ ସଂଖ୍ୟା}}",
+  "@nVideos": {
+    "description": "One or more videos",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "nReplies": "{count, plural, =0{କୌଣସି ଉତ୍ତର ନାହିଁ } =1{ଗୋଟିଏ ଉତ୍ତର} other{{count} ସମୁଦାୟ ଉତ୍ତର ସଂଖ୍ୟା }}",
+  "@nReplies": {
+    "description": "number of replies to a comment",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "sponsorBlockCategorySponsorDescription": "ଦେୟଯୁକ୍ତ ପଦୋନ୍ନତି, ଦେୟଯୁକ୍ତ ରେଫରାଲ୍ ଏବଂ ପ୍ରତ୍ୟକ୍ଷ ବିଜ୍ଞାପନ । ଆତ୍ମ-ପଦୋନ୍ନତି କିମ୍ବା କାରଣ/ସୃଷ୍ଟିକର୍ତ୍ତା/ଉତ୍ପାଦ/ ୱେବସାଇଟ୍ ଗୁଡିକ ର ମାଗଣା ସର୍ଟକଟ୍ ପାଇଁ ନୁହେଁ , ଯାହା ସେମାନେ ପସନ୍ଦ କରନ୍ତି ।",
+  "@sponsorBlockCategorySponsorDescription": {
+    "description": "Sponsor block 'Sponsor' Category description"
+  },
+  "sponsorBlockCategoryUnpaidSelfPromoDescription": "ଅନାଦେୟ କିମ୍ବା ଆତ୍ମ ପଦୋନ୍ନତି ବ୍ୟତୀତ \"ପ୍ରାୟୋଜକ\" ସହିତ ସମାନ । ବାଣିଜ୍ୟ, ଦାନ, କିମ୍ବା ସେମାନେ କିଏ ସହଯୋଗ କରିଥିଲେ ସେ ସମ୍ବନ୍ଧରେ ସୂଚନା ଏଥିରେ ଅନ୍ତର୍ଭୂକ୍ତ କରେ । ",
+  "@sponsorBlockCategoryUnpaidSelfPromoDescription": {
+    "description": "Sponsor block 'Unpaid/Self promotion' Category description"
+  },
+  "sponsorBlockCategoryFillerDescription": "ଟାଙ୍ଗେସିଆଲ୍ ଦୃଶ୍ୟ କେବଳ ଫିଲର୍ କିମ୍ବା ହାସ୍ୟରସ ପାଇଁ ଯୋଡି ହୋଇଛି ଯାହା ଭିଡିଓର ମୁଖ୍ୟ ବିଷୟବସ୍ତୁ ବୁଝିବା ପାଇଁ ଆବଶ୍ୟକ ନୁହେଁ । ପ୍ରସଙ୍ଗ କିମ୍ବା ପୃଷ୍ଠଭୂମି ବିବରଣୀ ପ୍ରଦାନ କରୁଥିବା ବିଭାଗଗୁଡିକ ଏଥିରେ ଅନ୍ତର୍ଭୂକ୍ତ କରିବା ଉଚିତ୍ ନୁହେଁ । ଯେତେବେଳେ ଆପଣ “ମଜା” ପାଇଁ ମନୋବୃତ୍ତିରେ ନାହାଁନ୍ତି ସେତେବେଳେ ଏହା ଅତ୍ୟନ୍ତ ଆକ୍ରମଣାତ୍ମକ ବର୍ଗ ଅଟେ ।",
+  "@sponsorBlockCategoryFillerDescription": {
+    "description": "Sponsorblock 'Filler' Category description"
   }
 }
