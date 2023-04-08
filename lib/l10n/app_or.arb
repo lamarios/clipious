@@ -268,7 +268,7 @@
   "@useDash": {
     "description": "Label on video options if a user wants to switch to dash urls instead of the regular quality selection"
   },
-  "useDashDescription": "DASH ଆଡାପ୍ଟିଭ୍ ଷ୍ଟ୍ରିମିଂ ବେଳେବେଳେ ସମସ୍ୟା ସୃଷ୍ଟି କରିପାରେ, ୟୁଟ୍ୟୁବ୍ ଏହାକୁ ଥ୍ରଟ କରିପାରେ ।",
+  "useDashDescription": "ୟୁଟ୍ୟୁବ୍ ଏହାକୁ ଥ୍ରଟ କଲାବେଳେ DASH ଆଡାପ୍ଟିଭ୍ ଷ୍ଟ୍ରିମିଂ ସମସ୍ୟା ସୃଷ୍ଟି କରିପାରେ ।",
   "@useDashDescription": {
     "description": "Description for dash in the settings screen"
   },
@@ -378,5 +378,77 @@
   "publicServersError": "ସର୍ବସାଧାରଣ ସର୍ଭରଗୁଡ଼ିକର ତାଲିକା ଆଣିପାରିଲା ନାହିଁ । ପୁନଃଚେଷ୍ଟା କରିବାକୁ ଟ୍ୟାପ୍ କରନ୍ତୁ ।",
   "@publicServersError": {
     "description": "Error message when trying to get public servers but it failed"
+  },
+  "sponsorBlockSettingsQuickDescription": "କେଉଁ ପ୍ରକାର ବିଭାଗକୁ ଏଡ଼ାଇବାକୁ ବାଛନ୍ତୁ",
+  "@sponsorBlockSettingsQuickDescription": {
+    "description": "Small description of what the sponsor block settings do"
+  },
+  "sponsorBlockCategorySponsor": "ପ୍ରଯୋଜକ",
+  "@sponsorBlockCategorySponsor": {
+    "description": "Sponsor block 'Sponsor' Category"
+  },
+  "sponsorBlockCategoryIntro": "ଇଣ୍ଟରମିସନ୍ /ଇଣ୍ଟ୍ରୋ ଆନିମେସନ୍",
+  "@sponsorBlockCategoryIntro": {
+    "description": "Sponsorblock 'Intro' Category"
+  },
+  "sponsorBlockCategoryOutro": "ଏଣ୍ଡକାର୍ଡ/କ୍ରେଡିଟ୍",
+  "@sponsorBlockCategoryOutro": {
+    "description": "Outro block 'Outro' Category"
+  },
+  "sponsorBlockCategoryOutroDescription": "କ୍ରେଡିଟ୍ କିମ୍ବା ଯେତେବେଳେ ୟୁଟ୍ୟୁବ୍ ଏଣ୍ଡକାର୍ଡ ଦେଖାଯାଏ । ସୂଚନା ସହିତ ସିଦ୍ଧାନ୍ତ ପାଇଁ ନୁହେଁ ।",
+  "@sponsorBlockCategoryOutroDescription": {
+    "description": "Outro block 'Outro' Category description"
+  },
+  "sponsorBlockCategoryPreview": "ପୂର୍ବାବଲୋକନ",
+  "@sponsorBlockCategoryPreview": {
+    "description": "Sponsorblock 'Preview' Category"
+  },
+  "sponsorBlockCategoryFiller": "ଥଟ୍ଟା",
+  "@sponsorBlockCategoryFiller": {
+    "description": "Sponsorblock 'Filler' Category"
+  },
+  "sponsorBlockCategoryMusicOffTopic": "ସଙ୍ଗୀତ: ଅଣ-ସଙ୍ଗୀତ ବିଭାଗ",
+  "@sponsorBlockCategoryMusicOffTopic": {
+    "description": "Sponsorblock 'MusicOffTopic' Category"
+  },
+  "useProxy": "ଭିଡିଓଗୁଡିକୁ ପ୍ରକ୍ସି କରନ୍ତୁ",
+  "@useProxy": {
+    "description": "label for settings switch to proxy videos from server"
+  },
+  "sponsorBlockCategoryIntroDescription": "ପ୍ରକୃତ ବିଷୟବସ୍ତୁ ବିନା ଏକ ବ୍ୟବଧାନ । ଏକ ବିରାମ, ଷ୍ଟାଟିକ୍ ଫ୍ରେମ୍, ପୁନରାବୃତ୍ତି ଆନିମେସନ୍ ହୋଇପାରେ । ସୂଚନା ଧାରଣ କରିଥିବା ସ୍ଥାନାନ୍ତରଣ ପାଇଁ ଏହା ବ୍ୟବହୃତ ହେବା ଉଚିତ୍ ନୁହେଁ ।",
+  "@sponsorBlockCategoryIntroDescription": {
+    "description": "Sponsorblock 'Intro' Category description"
+  },
+  "sponsorBlockCategoryInteraction": "ପାରସ୍ପରିକ ସ୍ମାରକ (ସଦସ୍ୟତା)",
+  "@sponsorBlockCategoryInteraction": {
+    "description": "Sponsor block 'Interaction' Category"
+  },
+  "sponsorBlockCategoryInteractionDescription": "ଯେତେବେଳେ ବିଷୟବସ୍ତୁ ମଧ୍ୟରେ ସେମାନଙ୍କୁ ପସନ୍ଦ, ସବସ୍କ୍ରାଇବ୍ କିମ୍ବା ଅନୁସରଣ କରିବାକୁ ଏକ ସଂକ୍ଷିପ୍ତ ସ୍ମାରକ ଅଛି । ଯଦି ଏହା ଲମ୍ବା କିମ୍ବା କିଛି ନିର୍ଦ୍ଦିଷ୍ଟ ବିଷୟରେ, ଏହା ବଦଳରେ ଆତ୍ମ ପ୍ରୋତ୍ସାହନ ଅଧୀନରେ ରହିବା ଉଚିତ ।",
+  "@sponsorBlockCategoryInteractionDescription": {
+    "description": "Sponsor block 'Interaction' Category description"
+  },
+  "sponsorBlockCategoryPreviewDescription": "କ୍ଲିପଗୁଡିକର ସଂଗ୍ରହ ଯାହାକି ଏହି ଭିଡିଓରେ କିମ୍ବା ଅନ୍ୟ ଏକ ଭିଡିଓରେ କ’ଣ ଆସୁଛି ତାହା ଦର୍ଶାଏ, ଯେଉଁଠାରେ ସମସ୍ତ ସୂଚନା ପରେ ଭିଡିଓରେ ପୁନରାବୃତ୍ତି ଆଉଥରେ ହୁଏ",
+  "@sponsorBlockCategoryPreviewDescription": {
+    "description": "Sponsorblock 'Preview' Category description"
+  },
+  "sponsorBlockCategoryMusicOffTopicDescription": "ପ୍ରକୃତ ବିଷୟବସ୍ତୁ ବିନା ଏକ ବ୍ୟବଧାନ । ଏକ ବିରାମ, ଷ୍ଟାଟିକ୍ ଫ୍ରେମ୍, ପୁନରାବୃତ୍ତି ଆନିମେସନ୍ ହୋଇପାରେ । ସୂଚନା ଧାରଣ କରିଥିବା ସ୍ଥାନାନ୍ତରଣ ପାଇଁ ଏହା ବ୍ୟବହୃତ ହେବା ଉଚିତ୍ ନୁହେଁ ।",
+  "@sponsorBlockCategoryMusicOffTopicDescription": {
+    "description": "Only for use in music videos. This only should be used for sections of music videos that aren't already covered by another category."
+  },
+  "useProxyDescription": "ସର୍ଭରରୁ ଭିଡିଓ ଷ୍ଟ୍ରିମ୍ ପ୍ରକ୍ସିଂ କରି, ଆପଣ ଆଞ୍ଚଳିକ ବ୍ଲକଗୁଡିକ କିମ୍ବା ୟୁଟ୍ୟୁବ୍ ଅବରୋଧ କରୁଥିବା ISP ବାଇପାସ୍ କରିପାରିବେ । ଆପ୍ ପୁନଃଆରମ୍ଭ ଆବଶ୍ୟକ କରେ",
+  "@useProxyDescription": {
+    "description": "Description for the use proxy settings"
+  },
+  "videoQueue": "ଭିଡିଓ ଧାଡି",
+  "@videoQueue": {
+    "description": "Label for button to display the video queue"
+  },
+  "addToQueueList": "ଧାଡିରେ ଯୋଡନ୍ତୁ",
+  "@addToQueueList": {
+    "description": "Label on button to add a video to the queue list"
+  },
+  "addRecommendedToQueue": "ପରବର୍ତ୍ତୀ ସମୟରେ ଅଟୋ-ପ୍ଲେ ସୁପାରିଶ କରାଯାଇଛି",
+  "@addRecommendedToQueue": {
+    "description": "Switch when playing a video to automatically add the recommended videos to the video queue"
   }
 }
