@@ -95,7 +95,7 @@
   "@useDash": {
     "description": "Label on video options if a user wants to switch to dash urls instead of the regular quality selection"
   },
-  "useDashDescription": "O fluxo adaptativo DASH pode por vezes ser problemático, o Youtube pode estrangulá-lo.",
+  "useDashDescription": "O streaming adaptativo DASH pode ser problemático quando o YouTube o limita.",
   "@useDashDescription": {
     "description": "Description for dash in the settings screen"
   },
@@ -410,5 +410,81 @@
   "addRecommendedToQueue": "Reprodução automática recomendada a seguir",
   "@addRecommendedToQueue": {
     "description": "Switch when playing a video to automatically add the recommended videos to the video queue"
+  },
+  "sponsorBlockCategorySponsor": "Patrocinador",
+  "@sponsorBlockCategorySponsor": {
+    "description": "Sponsor block 'Sponsor' Category"
+  },
+  "sponsorBlockCategoryUnpaidSelfPromo": "Promoção não remunerada/auto-própria",
+  "@sponsorBlockCategoryUnpaidSelfPromo": {
+    "description": "Sponsor block 'Unpaid/Self promotion' Category"
+  },
+  "sponsorBlockCategoryUnpaidSelfPromoDescription": "Semelhante a \"patrocinador\" exceto para promoção não remunerada ou auto-promoção. Isto inclui secções sobre mercadorias, doações, ou informação sobre quem colaboraram ",
+  "@sponsorBlockCategoryUnpaidSelfPromoDescription": {
+    "description": "Sponsor block 'Unpaid/Self promotion' Category description"
+  },
+  "sponsorBlockCategoryInteraction": "Lembrete de Interação (Subscrição)",
+  "@sponsorBlockCategoryInteraction": {
+    "description": "Sponsor block 'Interaction' Category"
+  },
+  "sponsorBlockCategoryIntroDescription": "Um intervalo sem conteúdo real. Pode ser uma pausa, frame estático, repetição de animação. Isto não deve ser utilizado para transições que contenham informação.",
+  "@sponsorBlockCategoryIntroDescription": {
+    "description": "Sponsorblock 'Intro' Category description"
+  },
+  "sponsorBlockCategoryOutro": "Endcards / Créditos",
+  "@sponsorBlockCategoryOutro": {
+    "description": "Outro block 'Outro' Category"
+  },
+  "sponsorBlockCategoryOutroDescription": "Créditos ou quando os endcards do YouTube aparecem. Não para conclusões com informações.",
+  "@sponsorBlockCategoryOutroDescription": {
+    "description": "Outro block 'Outro' Category description"
+  },
+  "sponsorBlockCategoryPreview": "Pré-visualização/Recapitulação",
+  "@sponsorBlockCategoryPreview": {
+    "description": "Sponsorblock 'Preview' Category"
+  },
+  "sponsorBlockCategoryFiller": "Filler Tangente / Piadas",
+  "@sponsorBlockCategoryFiller": {
+    "description": "Sponsorblock 'Filler' Category"
+  },
+  "sponsorBlockCategoryMusicOffTopic": "Música: Secção de Não-Música",
+  "@sponsorBlockCategoryMusicOffTopic": {
+    "description": "Sponsorblock 'MusicOffTopic' Category"
+  },
+  "sponsorBlockCategoryMusicOffTopicDescription": "Um intervalo sem conteúdo real. Pode ser uma pausa, frame estático, repetição de animação. Isto não deve ser utilizado para transições que contenham informação.",
+  "@sponsorBlockCategoryMusicOffTopicDescription": {
+    "description": "Only for use in music videos. This only should be used for sections of music videos that aren't already covered by another category."
+  },
+  "useProxy": "Proxy videos",
+  "@useProxy": {
+    "description": "label for settings switch to proxy videos from server"
+  },
+  "useProxyDescription": "Ao fazer proxy de fluxos de vídeo do servidor, você pode ignorar bloqueios regionais ou ISP bloqueando o YouTube. Requer o reinício da aplicação",
+  "@useProxyDescription": {
+    "description": "Description for the use proxy settings"
+  },
+  "sponsorBlockSettingsQuickDescription": "Selecione o tipo de segmentos a saltar",
+  "@sponsorBlockSettingsQuickDescription": {
+    "description": "Small description of what the sponsor block settings do"
+  },
+  "sponsorBlockCategorySponsorDescription": "Promoção paga, referências pagas e publicidade direta. Não para auto-promoção ou gritos gratuitos a causas/criadores/websites/produtos de que eles gostam.",
+  "@sponsorBlockCategorySponsorDescription": {
+    "description": "Sponsor block 'Sponsor' Category description"
+  },
+  "sponsorBlockCategoryInteractionDescription": "Quando houver um breve lembrete para gostar, subscrever ou segui-los no meio do conteúdo. Se for longo ou sobre algo específico, deve, em vez disso, estar sob auto-promoção.",
+  "@sponsorBlockCategoryInteractionDescription": {
+    "description": "Sponsor block 'Interaction' Category description"
+  },
+  "sponsorBlockCategoryIntro": "Interrupção/Animação Internacional",
+  "@sponsorBlockCategoryIntro": {
+    "description": "Sponsorblock 'Intro' Category"
+  },
+  "sponsorBlockCategoryPreviewDescription": "Coleção de clips que mostram o que está a aparecer neste vídeo ou noutros vídeos de uma série onde toda a informação é repetida mais tarde no vídeo",
+  "@sponsorBlockCategoryPreviewDescription": {
+    "description": "Sponsorblock 'Preview' Category description"
+  },
+  "sponsorBlockCategoryFillerDescription": "Cenas tangenciais adicionadas apenas para preenchimento ou humor que não são necessárias para compreender o conteúdo principal do vídeo. Isto não deve incluir segmentos que forneçam o contexto ou detalhes de fundo. Esta é uma categoria muito agressiva destinada a quando não se está com disposição para \"diversão\".",
+  "@sponsorBlockCategoryFillerDescription": {
+    "description": "Sponsorblock 'Filler' Category description"
   }
 }
