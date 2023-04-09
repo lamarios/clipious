@@ -14,6 +14,8 @@ class VideoPlayerFullScreenView {
   static List<Widget> build(BuildContext context, MiniPlayerController controller) {
     AppLocalizations locals = AppLocalizations.of(context)!;
 
+    ColorScheme colors = Theme.of(context).colorScheme;
+
     Video? video = controller.currentlyPlaying;
 
     return video != null
@@ -53,7 +55,7 @@ class VideoPlayerFullScreenView {
               visible: !controller.isMini,
               child: SizedBox(
                 // height: 80,
-                child: NavigationBar(elevation: 0, selectedIndex: controller.selectedFullScreenIndex, onDestinationSelected: controller.selectTab, destinations: [
+                child: NavigationBar(backgroundColor: colors.background, elevation: 0, selectedIndex: controller.selectedFullScreenIndex, onDestinationSelected: controller.selectTab, destinations: [
                   NavigationDestination(icon: const Icon(Icons.info), label: locals.info),
                   NavigationDestination(icon: const Icon(Icons.chat_bubble), label: locals.comments),
                   NavigationDestination(icon: const Icon(Icons.schema), label: locals.recommended),

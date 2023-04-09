@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -162,4 +163,13 @@ T? safeGet<T>({String? tag}) {
     log.info('could not find controller of class ${T.toString()}');
     return null;
   }
+}
+
+SystemUiOverlayStyle getUiOverlayStyle(BuildContext context) {
+  ColorScheme colorScheme = Theme.of(context).colorScheme;
+  return SystemUiOverlayStyle(
+      systemNavigationBarColor: colorScheme.background,
+      systemNavigationBarIconBrightness: colorScheme.brightness == Brightness.dark ? Brightness.light : Brightness.dark,
+      statusBarColor: colorScheme.background,
+      statusBarIconBrightness: colorScheme.brightness == Brightness.dark ? Brightness.light : Brightness.dark);
 }

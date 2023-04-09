@@ -69,6 +69,7 @@ class MiniPlayer extends StatelessWidget {
                               _.isMini || _.isPip
                                   ? const SizedBox.shrink()
                                   : AppBar(
+                                backgroundColor: colors.background,
                                       title: Text(locals.videoPlayer),
                                       elevation: 0,
                                       leading: IconButton(
