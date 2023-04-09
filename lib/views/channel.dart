@@ -85,7 +85,6 @@ class ChannelViewState extends State<ChannelView> with TickerProviderStateMixin 
         bottomNavigationBar: _.loading
             ? null
             : NavigationBar(
-                backgroundColor: colorScheme.background,
                 labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
                 elevation: 0,
                 onDestinationSelected: _.selectIndex,

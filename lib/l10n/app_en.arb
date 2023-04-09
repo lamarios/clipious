@@ -469,22 +469,16 @@
     "@sponsorBlockCategoryMusicOffTopicDescription": {
         "description": "Only for use in music videos. This only should be used for sections of music videos that aren't already covered by another category."
     },
-    "useProxy": "Proxy videos",
-    "@useProxy": {
-        "description": "label for settings switch to proxy videos from server"
-    },
-    "useProxyDescription": "By proxying video streams from the server, you can bypass regional blocks or ISP blocking YouTube. Requires app restart",
-    "@useProxyDescription": {
-        "description": "Description for the use proxy settings"
-    },
-    "blackBackground": "Black background",
-    "@blackBackground": {
-        "description": "Settings name for black background"
-    },
-    "blackBackgroundDescription": "For dark theme on OLED screen. Requires app restart.",
-    "@blackBackgroundDescription": {
-        "description": "Description for dark background setting"
-    },
+      "useProxy": "Proxy videos",
+        "@useProxy": {
+          "description": "label for settings switch to proxy videos from server"
+        },
+      "useProxyDescription": "By proxying video streams from the server, you can bypass regional blocks or ISP blocking YouTube. Requires app restart",
+        "@useProxyDescription": {
+          "description": "Description for the use proxy settings"
+        },
+
+
     "nVideos": "{count, plural, =0{No videos} =1{1 video} other{{count} videos}}",
     "@nVideos": {
         "description": "One or more videos",

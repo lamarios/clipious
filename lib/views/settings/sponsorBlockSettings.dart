@@ -22,7 +22,6 @@ class SponsorBlockSettings extends StatelessWidget {
       builder: (_) {
         return Scaffold(
             appBar: AppBar(
-              backgroundColor: colorScheme.background,
               scrolledUnderElevation: 0,
               title: const Text('SponsorBlock'),
             ),

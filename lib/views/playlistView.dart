@@ -143,7 +143,6 @@ class PlaylistView extends StatelessWidget {
       builder: (_) {
         return Scaffold(
             appBar: AppBar(
-              backgroundColor: colorScheme.background,
               title: Text(
                 _.playlist.title,
               ),
