@@ -16,6 +16,7 @@ class ManageServerState extends State<ManageServers> {
     ColorScheme colorScheme = Theme.of(context).colorScheme;
     return Scaffold(
         appBar: AppBar(
+          backgroundColor: colorScheme.background,
           scrolledUnderElevation: 0,
           title:  Text(locals.manageServers),
         ),

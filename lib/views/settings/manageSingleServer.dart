@@ -76,6 +76,7 @@ class ManageSingleServer extends StatelessWidget {
         bool isLoggedIn = (server.authToken != null && server.authToken!.isNotEmpty) || (server.sidCookie != null && server.sidCookie!.isNotEmpty);
         return Scaffold(
             appBar: AppBar(
+              backgroundColor: colorScheme.background,
               scrolledUnderElevation: 0,
               title: Text(server.url),
             ),
