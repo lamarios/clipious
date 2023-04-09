@@ -9,6 +9,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:invidious/controllers/homeController.dart';
 import 'package:invidious/globals.dart';
+import 'package:invidious/utils.dart';
 import 'package:invidious/views/components/miniPlayerAware.dart';
 import 'package:invidious/views/miniPlayer.dart';
 import 'package:invidious/views/playlists.dart';
@@ -86,6 +87,11 @@ class MyApp extends StatelessWidget {
           brightness: Brightness.dark,
         );
       }
+
+      if (db.getSettings(BLACK_BACKGROUND)?.value == 'true') {
+        darkColorScheme = darkColorScheme.copyWith(background: Colors.black);
+      }
+
       return GetMaterialApp(
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
@@ -170,6 +176,7 @@ class _HomeState extends State<Home> with AfterLayoutMixin {
         return Scaffold(
             backgroundColor: colorScheme.background,
             bottomNavigationBar: NavigationBar(
+              backgroundColor: colorScheme.background,
               labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
               elevation: 0,
               onDestinationSelected: _.selectIndex,
@@ -178,11 +185,7 @@ class _HomeState extends State<Home> with AfterLayoutMixin {
             ),
             floatingActionButton: _.selectedIndex == 3 ? AddPlayListButton() : null,
             appBar: AppBar(
-              systemOverlayStyle: SystemUiOverlayStyle(
-                  systemNavigationBarColor: colorScheme.background,
-                  systemNavigationBarIconBrightness: colorScheme.brightness == Brightness.dark ? Brightness.light : Brightness.dark,
-                  statusBarColor: colorScheme.background,
-                  statusBarIconBrightness: colorScheme.brightness == Brightness.dark ? Brightness.light : Brightness.dark),
+              systemOverlayStyle: getUiOverlayStyle(context),
               title: Text(navigationLabels[_.selectedIndex]),
               scrolledUnderElevation: 0,
               // backgroundColor: Colors.pink,
