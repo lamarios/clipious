@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:invidious/myRouteObserver.dart';
-import 'package:invidious/utils.dart';
 import 'package:invidious/views/settings/sponsorBlockSettings.dart';
 import 'package:select_dialog/select_dialog.dart';
 import 'package:settings_ui/settings_ui.dart';
@@ -78,7 +77,6 @@ class Settings extends StatelessWidget {
           extendBody: true,
           bottomNavigationBar: const SizedBox.shrink(),
           appBar: AppBar(
-            backgroundColor: colorScheme.background,
             scrolledUnderElevation: 0,
             title: Text(locals.settings),
           ),
@@ -137,12 +135,6 @@ class Settings extends StatelessWidget {
                     onToggle: _.toggleDynamicTheme,
                     title: Text(locals.useDynamicTheme),
                     description: Text(locals.useDynamicThemeDescription),
-                  ),
-                  SettingsTile.switchTile(
-                    initialValue: _.blackBackground,
-                    onToggle: _.toggleBlackBackground,
-                    title: Text(locals.blackBackground),
-                    description: Text(locals.blackBackgroundDescription),
                   ),
                 ],
               ),

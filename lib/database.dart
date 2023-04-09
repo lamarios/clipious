@@ -18,7 +18,6 @@ const PLAYER_REPEAT = 'player-repeat';
 const PLAYER_SHUFFLE = 'player-shuffle';
 const PLAY_RECOMMENDED_NEXT = 'play-recommended-next';
 const USE_PROXY = 'use-proxy';
-const BLACK_BACKGROUND = 'black-background';
 
 const ON_OPEN = "on-open";
 
