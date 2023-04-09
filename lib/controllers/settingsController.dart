@@ -25,6 +25,7 @@ class SettingsController extends GetxController {
   bool useDynamicTheme = db.getSettings(DYNAMIC_THEME)?.value == 'true';
   bool useDash = db.getSettings(USE_DASH)?.value == 'true';
   bool useProxy = db.getSettings(USE_PROXY)?.value == 'true';
+  bool blackBackground = db.getSettings(BLACK_BACKGROUND)?.value =='true';
 
   @override
   onReady() {
@@ -79,6 +80,12 @@ class SettingsController extends GetxController {
   getPackageInfo() async {
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
     this.packageInfo = packageInfo;
+    update();
+  }
+
+  toggleBlackBackground(bool value) {
+    db.saveSetting(SettingsValue(BLACK_BACKGROUND, value.toString()));
+    blackBackground = value;
     update();
   }
 }

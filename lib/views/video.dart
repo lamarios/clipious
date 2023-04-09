@@ -44,6 +44,7 @@ class VideoView extends StatelessWidget {
         opacity: _.opacity,
         child: Scaffold(
           appBar: AppBar(
+            backgroundColor: colorScheme.background,
             actions: _.loadingVideo
                 ? []
                 : [
@@ -63,6 +64,7 @@ class VideoView extends StatelessWidget {
           bottomNavigationBar: _.loadingVideo
               ? null
               : NavigationBar(
+            backgroundColor: colorScheme.background,
                   labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
                   elevation: 0,
                   onDestinationSelected: _.selectIndex,
@@ -72,7 +74,7 @@ class VideoView extends StatelessWidget {
           body: SafeArea(
             bottom: false,
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              padding: const EdgeInsets.only(left: 8.0, right: 8, top: 8),
               child: Container(
                 color: colorScheme.background,
                 width: double.infinity,
