@@ -18,7 +18,7 @@ class TvPlayerSettingsController extends GetxController {
   bool useDash = db.getSettings(USE_DASH)?.value == 'true';
 
   List<String> get videoTrackNames => useDash
-      ? PlayerController.to()?.videoController?.betterPlayerAsmsTracks.map((e) => '${e.height}p').toList() ?? []
+      ? PlayerController.to()?.videoController?.betterPlayerAsmsTracks.map((e) => '${e.height}p').toSet().toList() ?? []
       : PlayerController.to()?.videoController?.betterPlayerDataSource?.resolutions?.keys.toList() ?? [];
 
   List<String> get audioTrackNames => useDash ? PlayerController.to()?.videoController?.betterPlayerAsmsAudioTracks?.map((e) => '${e.label}').toList() ?? [] : [];

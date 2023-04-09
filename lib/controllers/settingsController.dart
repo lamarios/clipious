@@ -1,8 +1,5 @@
 import 'package:get/get.dart';
 import 'package:invidious/controllers/homeController.dart';
-import 'package:invidious/controllers/videoListController.dart';
-import 'package:invidious/controllers/welcomeWizardController.dart';
-import 'package:invidious/views/videoList.dart';
 import 'package:logging/logging.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:invidious/controllers/tvPlayerSettingsController.dart';
 import 'package:invidious/views/tv/tvButton.dart';
@@ -112,10 +113,13 @@ class TvPlayerSettings extends StatelessWidget {
                     ),
                   ],
                 ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.min,
-                  children: getContent(_),
+                SizedBox(
+                  height: 90,
+                  child: ListView(
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    children: getContent(_).map((e) => Center(child: e,)).toList(),
+                  ),
                 )
               ],
             ),

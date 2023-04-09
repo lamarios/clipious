@@ -18,12 +18,16 @@ class TVSettings extends StatelessWidget {
     AppLocalizations locals = AppLocalizations.of(context)!;
 
     Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) => TvSelectFromList(
+      builder: (context) {
+        var countryNames = countryCodes.map((e) => e.name).toList();
+        countryNames.sort();
+        return TvSelectFromList(
         title: locals.selectBrowsingCountry,
-        options: countryCodes.map((e) => e.name).toList(),
+        options: countryNames,
         selected: controller.country.name,
         onSelect: controller.selectCountry,
-      ),
+      );
+      },
     ));
   }
 
@@ -102,6 +106,13 @@ class TVSettings extends StatelessWidget {
                     description: locals.sponsorBlockDescription,
                     onSelected: openSponsorBlockSettings,
                   ),
+                  SettingsTitle(title: locals.appearance),
+                  SettingsTile(
+                    title: locals.blackBackground,
+                    description: locals.blackBackgroundDescription,
+                    onSelected: (context) => _.toggleBlackBackground(!_.blackBackground),
+                    trailing: Switch(onChanged: (value) {}, value: _.blackBackground),
+                  ),
                   SettingsTitle(title: locals.about),
                   SettingsTile(
                     title: '${locals.name}: ${_.packageInfo.appName}',
@@ -131,7 +142,7 @@ class SettingsTitle extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(
         left: 16.0,
-        top: 16,
+        top: 32,
       ),
       child: Text(
         title,

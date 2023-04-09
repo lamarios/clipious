@@ -63,34 +63,51 @@ class TvHome extends StatelessWidget {
             init: TvHomeController(),
             builder: (_) {
               return Row(
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   AnimatedContainer(
-                    width: _.expandMenu ? 200 : 64,
+                    width: _.expandMenu ? 200: 70,
                     duration: animationDuration ~/ 2,
+                    curve: Curves.easeInOutQuad,
                     decoration: BoxDecoration(color: _.expandMenu ? colors.secondaryContainer.withOpacity(0.5) : Colors.transparent),
                     child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Column(mainAxisAlignment: MainAxisAlignment.start, crossAxisAlignment: CrossAxisAlignment.start, children: [
-                          const Padding(
-                            padding: EdgeInsets.only(bottom: 30.0),
-                            child: SizedBox(width: 50, child: AppIconImage()),
-                          ),
                           Padding(
-                            padding: const EdgeInsets.only(bottom: 8.0),
-                            child: TvButton(
-                              onFocusChanged: _.menuItemFocusChanged,
-                              onPressed: openSubscriptions,
-                              unfocusedColor: Colors.transparent,
-                              child: Padding(
-                                padding: const EdgeInsets.all(8),
+                            padding: const EdgeInsets.only(bottom: 30.0),
+                            child: SizedBox(
+                                height: 50,
                                 child: Row(
                                   children: [
-                                    const Padding(
-                                      padding: EdgeInsets.only(right: 8.0),
-                                      child: Icon(Icons.subscriptions),
-                                    ),
-                                    _.expandMenu ? Text(locals.subscriptions) : const SizedBox.shrink()
+                                    const AppIconImage(),
+                                    Visibility(
+                                        visible: _.expandMenu,
+                                        child: Text(
+                                          'Clipious',
+                                          style: TextStyle(color: colors.primary),
+                                        ))
                                   ],
+                                )),
+                          ),
+                          Visibility(
+                            visible: isLoggedIn,
+                            child: Padding(
+                              padding: const EdgeInsets.only(bottom: 8.0),
+                              child: TvButton(
+                                onFocusChanged: _.menuItemFocusChanged,
+                                onPressed: openSubscriptions,
+                                unfocusedColor: Colors.transparent,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8),
+                                  child: Row(
+                                    children: [
+                                      const Padding(
+                                        padding: EdgeInsets.only(right: 8.0),
+                                        child: Icon(Icons.subscriptions),
+                                      ),
+                                      _.expandMenu ? Text(locals.subscriptions) : const SizedBox.shrink()
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
