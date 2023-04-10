@@ -65,66 +65,70 @@ class TVSettings extends StatelessWidget {
   Widget build(BuildContext context) {
     AppLocalizations locals = AppLocalizations.of(context)!;
 
+    TextTheme textTheme = Theme.of(context).textTheme;
     return Scaffold(
       body: GetBuilder<SettingsController>(
           init: SettingsController(),
           builder: (_) {
-            return Padding(
-              padding: EdgeInsets.all(40),
-              child: ListView(
-                children: [
-                  SettingsTitle(title: locals.browsing),
-                  SettingsTile(
-                    title: locals.country,
-                    description: _.country.name,
-                    onSelected: (context) => openSelectCountry(context, _),
-                  ),
+            return DefaultTextStyle(
+              style: textTheme.bodyLarge!,
+              child: Padding(
+                padding: const EdgeInsets.all(40),
+                child: ListView(
+                  children: [
+                    SettingsTitle(title: locals.browsing),
+                    SettingsTile(
+                      title: locals.country,
+                      description: _.country.name,
+                      onSelected: (context) => openSelectCountry(context, _),
+                    ),
 /*
-                  SettingsTile(
-                    title: locals.whenAppStartsShow,
-                    description: getCategories(context)[_.onOpen],
-                    onSelected: (context) => openSelectOnStart(context, _),
-                  ),
+                    SettingsTile(
+                      title: locals.whenAppStartsShow,
+                      description: getCategories(context)[_.onOpen],
+                      onSelected: (context) => openSelectOnStart(context, _),
+                    ),
 */
-                  SettingsTitle(title: locals.servers),
-                  SettingsTile(title: locals.manageServers, description: locals.currentServer(db.getCurrentlySelectedServer().url), onSelected: openManageServers),
-                  SettingsTitle(title: locals.videoPlayer),
-                  SettingsTile(
-                    title: locals.useDash,
-                    description: locals.useDashDescription,
-                    onSelected: (context) => _.toggleDash(!_.useDash),
-                    trailing: Switch(onChanged: (value) {}, value: _.useDash),
-                  ),
-                  SettingsTile(
-                    title: locals.useProxy,
-                    description: locals.useProxyDescription,
-                    onSelected: (context) => _.toggleProxy(!_.useProxy),
-                    trailing: Switch(onChanged: (value) {}, value: _.useProxy),
-                  ),
-                  SettingsTile(
-                    title: 'SponsorBlock',
-                    description: locals.sponsorBlockDescription,
-                    onSelected: openSponsorBlockSettings,
-                  ),
-                  SettingsTitle(title: locals.appearance),
-                  SettingsTile(
-                    title: locals.blackBackground,
-                    description: locals.blackBackgroundDescription,
-                    onSelected: (context) => _.toggleBlackBackground(!_.blackBackground),
-                    trailing: Switch(onChanged: (value) {}, value: _.blackBackground),
-                  ),
-                  SettingsTitle(title: locals.about),
-                  SettingsTile(
-                    title: '${locals.name}: ${_.packageInfo.appName}',
-                    description: '${locals.package}: ${_.packageInfo.packageName}',
-                    onSelected: (context) {},
-                  ),
-                  SettingsTile(
-                    title: '${locals.version}: ${_.packageInfo.version}',
-                    description: '${locals.build}: ${_.packageInfo.buildNumber}',
-                    onSelected: (context) {},
-                  )
-                ],
+                    SettingsTitle(title: locals.servers),
+                    SettingsTile(title: locals.manageServers, description: locals.currentServer(db.getCurrentlySelectedServer().url), onSelected: openManageServers),
+                    SettingsTitle(title: locals.videoPlayer),
+                    SettingsTile(
+                      title: locals.useDash,
+                      description: locals.useDashDescription,
+                      onSelected: (context) => _.toggleDash(!_.useDash),
+                      trailing: Switch(onChanged: (value) {}, value: _.useDash),
+                    ),
+                    SettingsTile(
+                      title: locals.useProxy,
+                      description: locals.useProxyDescription,
+                      onSelected: (context) => _.toggleProxy(!_.useProxy),
+                      trailing: Switch(onChanged: (value) {}, value: _.useProxy),
+                    ),
+                    SettingsTile(
+                      title: 'SponsorBlock',
+                      description: locals.sponsorBlockDescription,
+                      onSelected: openSponsorBlockSettings,
+                    ),
+                    SettingsTitle(title: locals.appearance),
+                    SettingsTile(
+                      title: locals.blackBackground,
+                      description: locals.blackBackgroundDescription,
+                      onSelected: (context) => _.toggleBlackBackground(!_.blackBackground),
+                      trailing: Switch(onChanged: (value) {}, value: _.blackBackground),
+                    ),
+                    SettingsTitle(title: locals.about),
+                    SettingsTile(
+                      title: '${locals.name}: ${_.packageInfo.appName}',
+                      description: '${locals.package}: ${_.packageInfo.packageName}',
+                      onSelected: (context) {},
+                    ),
+                    SettingsTile(
+                      title: '${locals.version}: ${_.packageInfo.version}',
+                      description: '${locals.build}: ${_.packageInfo.buildNumber}',
+                      onSelected: (context) {},
+                    )
+                  ],
+                ),
               ),
             );
           }),
@@ -166,6 +170,7 @@ class SettingsTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ColorScheme colors = Theme.of(context).colorScheme;
+    TextTheme textTheme = Theme.of(context).textTheme;
     return Focus(
         canRequestFocus: enabled,
         autofocus: autofocus ?? false,
@@ -184,12 +189,12 @@ class SettingsTile extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: TextStyle(color: enabled ?? true ? colors.primary : colors.primary.withOpacity(0.5), fontSize: 25),
+                  style: textTheme.headlineSmall!.copyWith(color: enabled ?? true ? colors.primary : colors.primary.withOpacity(0.5)),
                 ),
                 description != null
                     ? Text(
                         description ?? '',
-                        style: TextStyle(color: colors.secondary),
+                        style: textTheme.bodyLarge!.copyWith(color: colors.secondary),
                       )
                     : const SizedBox.shrink()
               ],

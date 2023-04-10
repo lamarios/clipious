@@ -8,11 +8,13 @@ import 'package:invidious/models/paginatedList.dart';
 import 'package:invidious/views/subscriptions.dart';
 import 'package:invidious/views/trending.dart';
 import 'package:invidious/views/tv/tvButton.dart';
+import 'package:invidious/views/tv/tvSearch.dart';
 import 'package:invidious/views/tv/tvSettings.dart';
 import 'package:invidious/views/tv/tvVideoGridView.dart';
 
 import '../../controllers/videoListController.dart';
 import '../popular.dart';
+import '../searchDelegate.dart';
 
 class TvHome extends StatelessWidget {
   const TvHome({Key? key}) : super(key: key);
@@ -48,6 +50,10 @@ class TvHome extends StatelessWidget {
     ));
   }
 
+  openSearch(BuildContext context){
+    Navigator.of(context).push(MaterialPageRoute(builder: (builder) => const TvSearch()));
+  }
+
   @override
   Widget build(BuildContext context) {
     ColorScheme colors = Theme.of(context).colorScheme;
@@ -56,13 +62,13 @@ class TvHome extends StatelessWidget {
     const TextStyle titleStyle = TextStyle(fontSize: 20);
     bool isLoggedIn = service.isLoggedIn();
 
-    return DefaultTextStyle(
-      style: textTheme.bodyMedium!,
-      child: Scaffold(
-        body: GetBuilder<TvHomeController>(
-            init: TvHomeController(),
-            builder: (_) {
-              return Row(
+    return Scaffold(
+      body: GetBuilder<TvHomeController>(
+          init: TvHomeController(),
+          builder: (_) {
+            return DefaultTextStyle(
+              style: textTheme.bodyLarge!,
+              child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   AnimatedContainer(
@@ -84,10 +90,30 @@ class TvHome extends StatelessWidget {
                                         visible: _.expandMenu,
                                         child: Text(
                                           'Clipious',
-                                          style: TextStyle(color: colors.primary),
+                                          style: textTheme.titleLarge!.copyWith(color: colors.primary),
                                         ))
                                   ],
                                 )),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 8.0),
+                            child: TvButton(
+                              onFocusChanged: _.menuItemFocusChanged,
+                              onPressed: openSearch,
+                              unfocusedColor: colors.secondaryContainer.withOpacity(0.0),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8),
+                                child: Row(
+                                  children: [
+                                    const Padding(
+                                      padding: EdgeInsets.only(right: 8.0),
+                                      child: Icon(Icons.search),
+                                    ),
+                                    _.expandMenu ? Text('search') : const SizedBox.shrink()
+                                  ],
+                                ),
+                              ),
+                            ),
                           ),
                           Visibility(
                             visible: isLoggedIn,
@@ -96,7 +122,7 @@ class TvHome extends StatelessWidget {
                               child: TvButton(
                                 onFocusChanged: _.menuItemFocusChanged,
                                 onPressed: openSubscriptions,
-                                unfocusedColor: Colors.transparent,
+                                unfocusedColor: colors.secondaryContainer.withOpacity(0.0),
                                 child: Padding(
                                   padding: const EdgeInsets.all(8),
                                   child: Row(
@@ -117,7 +143,7 @@ class TvHome extends StatelessWidget {
                             child: TvButton(
                               onFocusChanged: _.menuItemFocusChanged,
                               onPressed: openPopular,
-                              unfocusedColor: Colors.transparent,
+                              unfocusedColor: colors.secondaryContainer.withOpacity(0.0),
                               child: Padding(
                                 padding: const EdgeInsets.all(8),
                                 child: Row(
@@ -137,7 +163,7 @@ class TvHome extends StatelessWidget {
                             child: TvButton(
                               onFocusChanged: _.menuItemFocusChanged,
                               onPressed: openTrending,
-                              unfocusedColor: Colors.transparent,
+                              unfocusedColor: colors.secondaryContainer.withOpacity(0.0),
                               child: Padding(
                                 padding: const EdgeInsets.all(8),
                                 child: Row(
@@ -155,7 +181,7 @@ class TvHome extends StatelessWidget {
                           TvButton(
                             onFocusChanged: _.menuItemFocusChanged,
                             onPressed: (context) => openSettings(context),
-                            unfocusedColor: Colors.transparent,
+                            unfocusedColor: colors.secondaryContainer.withOpacity(0.0),
                             child: Padding(
                               padding: const EdgeInsets.all(8),
                               child: Row(
@@ -181,7 +207,7 @@ class TvHome extends StatelessWidget {
                             visible: isLoggedIn,
                             child: Text(
                               locals.subscriptions,
-                              style: titleStyle,
+                              style: textTheme.titleLarge,
                             ),
                           ),
                           Visibility(
@@ -191,14 +217,14 @@ class TvHome extends StatelessWidget {
                               child: Subscriptions(),
                             ),
                           ),
-                          Text(locals.popular, style: titleStyle),
+                          Text(locals.popular, style: textTheme.titleLarge),
                           const Padding(
                             padding: EdgeInsets.only(bottom: 16.0),
                             child: Popular(),
                           ),
                           Text(
                             locals.trending,
-                            style: titleStyle,
+                            style: textTheme.titleLarge,
                           ),
                           const Trending()
                         ],
@@ -206,9 +232,9 @@ class TvHome extends StatelessWidget {
                     ),
                   ),
                 ],
-              );
-            }),
-      ),
+              ),
+            );
+          }),
     );
   }
 }

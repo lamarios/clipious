@@ -26,16 +26,20 @@ class _TvPlainTextState extends State<TvPlainText> {
 
   @override
   Widget build(BuildContext context) {
+    TextTheme textTheme = Theme.of(context).textTheme;
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(40.0),
-        child: Focus(
-          onKeyEvent: scroll,
-          child: SingleChildScrollView(
-            controller: _scrollController,
-            child: Text(
-              widget.text,
-              style: const TextStyle(fontSize: 20),
+      body: DefaultTextStyle(
+        style: textTheme.displaySmall!,
+        child: Padding(
+          padding: const EdgeInsets.all(40.0),
+          child: Focus(
+            onKeyEvent: scroll,
+            child: SingleChildScrollView(
+              controller: _scrollController,
+              child: Text(
+                widget.text,
+                // style: const TextStyle(fontSize: 20),
+              ),
             ),
           ),
         ),

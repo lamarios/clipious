@@ -35,15 +35,15 @@ class TvGridView extends StatelessWidget {
                       _.loading
                           ? const Padding(
                               padding: EdgeInsets.all(8.0),
-                              child: SizedBox(width: 15, height: 15, child: CircularProgressIndicator()),
+                              child: SizedBox(width: 15, height: 15, child: CircularProgressIndicator(strokeWidth: 2,)),
                             )
-                          : SizedBox.shrink()
+                          : const SizedBox.shrink()
                     ],
                   ),
                   Expanded(
                       child: GridView.count(
                     controller: _.scrollController,
-                    childAspectRatio: 16 / 11,
+                    childAspectRatio: 16 / 13,
                     crossAxisCount: 3,
                     children: _.videos.map((e) => TvVideoItem(video: e, autoFocus: false)).toList(),
                   ))

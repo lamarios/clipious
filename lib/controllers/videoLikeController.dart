@@ -63,7 +63,7 @@ class VideoLikeButtonController extends GetxController {
     if (p != null && videoId != null) {
       if (isVideoLiked) {
         log.info('Video is liked, unliking it');
-        VideoInList? v = p!.videos.firstWhereOrNull((element) => element.videoId == videoId!);
+        VideoInList? v = p.videos.firstWhereOrNull((element) => element.videoId == videoId!);
         if (v?.indexId != null) {
           await service.deleteUserPlaylistVideo(p.playlistId, v!.indexId!);
           isVideoLiked = !isVideoLiked;

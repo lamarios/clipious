@@ -38,7 +38,6 @@ class TvSubscribeButton extends StatelessWidget {
                             padding: const EdgeInsets.only(left: 8.0),
                             child: Text(
                               '${(_.isSubscribed ? locals.subscribed : locals.subscribe)} | $subCount',
-                              style: TextStyle(fontSize: 15),
                             ),
                           ),
                         ]
@@ -46,7 +45,6 @@ class TvSubscribeButton extends StatelessWidget {
                           const Icon(Icons.people),
                           Padding(
                             padding: const EdgeInsets.only(left: 8.0),
-                            // child: Text('${subCount.replaceAll("^0.00\$","no")} subscribers'),
                             child: Text(locals.nSubscribers(subCount.replaceAll(RegExp(r'^0.00$'), "no"))),
                           ),
                         ],

@@ -505,6 +505,10 @@
     "@blackBackgroundDescription": {
         "description": "Description for dark background setting"
     },
+    "search": "Search",
+    "@search": {
+        "description": "search title"
+    },
     "nVideos": "{count, plural, =0{No videos} =1{1 video} other{{count} videos}}",
     "@nVideos": {
         "description": "One or more videos",

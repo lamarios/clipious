@@ -20,28 +20,31 @@ class TvExpandableText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ColorScheme colors = Theme.of(context).colorScheme;
-    return Focus(
-        onKeyEvent: (node, event) => onTvSelect(event, context, (context) => showText(context)),
-        child: Builder(builder: (ctx) {
-          final FocusNode focusNode = Focus.of(ctx);
-          final bool hasFocus = focusNode.hasFocus;
+    TextTheme textTheme = Theme.of(context).textTheme;
+    return DefaultTextStyle(
+      style: textTheme.bodyLarge!,
+      child: Focus(
+          onKeyEvent: (node, event) => onTvSelect(event, context, (context) => showText(context)),
+          child: Builder(builder: (ctx) {
+            final FocusNode focusNode = Focus.of(ctx);
+            final bool hasFocus = focusNode.hasFocus;
 
-          return AnimatedContainer(
-            duration: animationDuration,
-            decoration: BoxDecoration(
-              color: hasFocus ? colors.secondaryContainer : colors.background.withOpacity(0.5),
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(10),
-              child: Text(
-                text,
-                maxLines: maxLines,
-                overflow: TextOverflow.ellipsis,
-                style: TextStyle(fontSize: fontSize ?? 20),
+            return AnimatedContainer(
+              duration: animationDuration,
+              decoration: BoxDecoration(
+                color: hasFocus ? colors.secondaryContainer : colors.background.withOpacity(0.5),
+                borderRadius: BorderRadius.circular(10),
               ),
-            ),
-          );
-        }));
+              child: Padding(
+                padding: const EdgeInsets.all(10),
+                child: Text(
+                  text,
+                  maxLines: maxLines,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+            );
+          })),
+    );
   }
 }

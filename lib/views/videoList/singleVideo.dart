@@ -40,7 +40,7 @@ class VideoListItem extends StatelessWidget {
           children: [
             VideoThumbnailView(
               videoId: video.videoId,
-              thumbnailUrl: ImageObject.getBestThumbnail(video!.videoThumbnails)?.url ?? '',
+              thumbnailUrl: ImageObject.getBestThumbnail(video.videoThumbnails)?.url ?? '',
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Column(

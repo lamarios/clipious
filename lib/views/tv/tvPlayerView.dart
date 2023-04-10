@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:invidious/controllers/tvPlayerController.dart';
 import 'package:invidious/utils.dart';
 import 'package:invidious/views/tv/tvPlayerSettings.dart';
 import 'package:invidious/views/video/player.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../globals.dart';
 import '../../models/video.dart';
@@ -17,12 +17,13 @@ class TvPlayerView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ColorScheme colors = Theme.of(context).colorScheme;
+    TextTheme textTheme = Theme.of(context).textTheme;
     var locals = AppLocalizations.of(context)!;
     return Scaffold(
       body: GetBuilder<TvPlayerController>(
         init: TvPlayerController(),
         builder: (_) => Focus(
-          autofocus: false,
+          autofocus: true,
           onKeyEvent: (node, event) => _.handleRemoteEvents(node, event),
           child: Stack(
             children: [
@@ -58,7 +59,7 @@ class TvPlayerView extends StatelessWidget {
                       end: Alignment.topCenter,
                       colors: [
                         Colors.black.withOpacity(0),
-                       Colors.black.withOpacity(0.6),
+                        Colors.black.withOpacity(0.6),
                         Colors.black.withOpacity(0.7),
                       ],
                     )),
@@ -106,15 +107,17 @@ class TvPlayerView extends StatelessWidget {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Text(
-                                '${prettyDuration(_.currentPosition)} / ${prettyDuration(_.videoLength)}',
-                                style: const TextStyle(color: Colors.white, fontSize: 24),
-                              )
-                            ],
-                          ),
+                          video.liveNow
+                              ? const SizedBox.shrink()
+                              : Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    Text(
+                                      '${prettyDuration(_.currentPosition)} / ${prettyDuration(_.videoLength)}',
+                                      style: const TextStyle(color: Colors.white, fontSize: 24),
+                                    )
+                                  ],
+                                ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
@@ -122,18 +125,45 @@ class TvPlayerView extends StatelessWidget {
                                 _.isPlaying ? Icons.pause : Icons.play_arrow,
                                 size: 50,
                               ),
-                              Expanded(
-                                  child: Container(
-                                      color: Colors.black.withOpacity(0.5),
-                                      child: AnimatedFractionallySizedBox(
-                                        alignment: Alignment.centerLeft,
-                                        duration: animationDuration,
-                                        widthFactor: _.progress,
-                                        child: Container(
-                                          height: 4,
-                                          color: Colors.white,
+                              video.liveNow
+                                  ? Container(
+                                      decoration: BoxDecoration(
+                                        color: Colors.red,
+                                        borderRadius: BorderRadius.circular(30),
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 2),
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.end,
+                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                          children: [
+                                            const Icon(
+                                              Icons.podcasts,
+                                              size: 15,
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.only(left: 8.0),
+                                              child: Text(
+                                                locals.streamIsLive,
+                                                style: textTheme.bodyLarge,
+                                              ),
+                                            ),
+                                          ],
                                         ),
-                                      )))
+                                      ),
+                                    )
+                                  : Expanded(
+                                      child: Container(
+                                          color: Colors.black.withOpacity(0.5),
+                                          child: AnimatedFractionallySizedBox(
+                                            alignment: Alignment.centerLeft,
+                                            duration: animationDuration,
+                                            widthFactor: _.progress,
+                                            child: Container(
+                                              height: 4,
+                                              color: Colors.white,
+                                            ),
+                                          )))
                             ],
                           )
                         ],

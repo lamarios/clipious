@@ -32,14 +32,14 @@ class TvHorizontalVideoList extends StatelessWidget {
                 )
               : const SizedBox.shrink(),
           SizedBox(
-            height: 190,
+            height: 250,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               controller: _.scrollController,
               itemCount: _.videos.length,
               itemBuilder: (context, index) {
                 VideoInList e = _.videos[index];
-                return TvVideoItem(video: e, autoFocus: index == 0);
+                return TvVideoItem(key: ValueKey('video-item-${e.videoId}'),video: e, autoFocus: index == 0);
               },
             ),
           ),

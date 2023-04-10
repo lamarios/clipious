@@ -15,37 +15,41 @@ class TvWelcomeWizard extends StatelessWidget {
   Widget build(BuildContext context) {
     var locals = AppLocalizations.of(context)!;
     ColorScheme colors = Theme.of(context).colorScheme;
+    TextTheme textTheme = Theme.of(context).textTheme;
     return Scaffold(
       body: GetBuilder<WelcomeWizardController>(
           init: WelcomeWizardController(),
           builder: (_) {
-            return Padding(
-              padding: const EdgeInsets.all(40),
-              child: Column(
-                children: [
-                  Text(
-                    locals.wizardIntro,
-                    style: TextStyle(fontSize: 20),
-                  ),
-                  const Expanded(child: TvManageServersInner()),
-                  TvButton(
-                    unfocusedColor: _.selected == null ? colors.background : null,
-                    onPressed: _.selected != null
-                        ? (context) {
-                            Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => const TvHome(),
-                            ));
-                          }
-                        : null,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        locals.startUsingClipious,
-                        style: TextStyle(fontSize: 20, color: _.selected == null ? Colors.white.withOpacity(0.5) : Colors.white),
-                      ),
+            return DefaultTextStyle(
+              style: textTheme.bodyLarge!,
+              child: Padding(
+                padding: const EdgeInsets.all(40),
+                child: Column(
+                  children: [
+                    Text(
+                      locals.wizardIntro,
+                      style: textTheme.titleLarge,
                     ),
-                  )
-                ],
+                    const Expanded(child: TvManageServersInner()),
+                    TvButton(
+                      unfocusedColor: _.selected == null ? colors.background : null,
+                      onPressed: _.selected != null
+                          ? (context) {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => const TvHome(),
+                              ));
+                            }
+                          : null,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          locals.startUsingClipious,
+                          style: textTheme.titleLarge!.copyWith(color: _.selected == null ? Colors.white.withOpacity(0.5) : Colors.white),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
               ),
             );
           }),

@@ -73,7 +73,7 @@ class PlayerController extends GetxController {
     if (videoController != null) {
       int currentPosition = timeInSeconds;
       // saving progress
-      int max = video.lengthSeconds ?? 0;
+      int max = video.lengthSeconds;
       var progress = dbProgress.Progress.named(progress: currentPosition / max, videoId: video.videoId);
       db.saveProgress(progress);
 
