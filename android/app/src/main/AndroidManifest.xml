@@ -8,7 +8,9 @@
     <application
             android:label="Clipious"
             android:name="${applicationName}"
-            android:icon="@mipmap/ic_launcher">
+            android:icon="@mipmap/ic_launcher"
+            android:banner="@drawable/banner"
+    >
         <activity android:name="com.linusu.flutter_web_auth.CallbackActivity" android:exported="true">
             <intent-filter android:label="flutter_web_auth">
                 <action android:name="android.intent.action.VIEW" />
