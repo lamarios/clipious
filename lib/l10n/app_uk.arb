@@ -253,7 +253,7 @@
   "@password": {
     "description": "Password label for login to a server"
   },
-  "wrongUsernamePassword": "Неправильне ім'я користувача або пароль",
+  "wrongUsernamePassword": "Неправильне ім''я користувача або пароль",
   "@wrongUsernamePassword": {
     "description": "Error message when authentication fails"
   },
@@ -279,7 +279,7 @@
   "@sponsorBlockCategoryOutro": {
     "description": "Outro block 'Outro' Category"
   },
-  "sponsorBlockCategoryOutroDescription": "Титри або коли з'являються кінцівки YouTube. Не для висновків з інформацією.",
+  "sponsorBlockCategoryOutroDescription": "Титри або коли з''являються кінцівки YouTube. Не для висновків з інформацією.",
   "@sponsorBlockCategoryOutroDescription": {
     "description": "Outro block 'Outro' Category description"
   },
