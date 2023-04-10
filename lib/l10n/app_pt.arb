@@ -486,5 +486,13 @@
   "sponsorBlockCategoryFillerDescription": "Cenas tangenciais adicionadas apenas para preenchimento ou humor que não são necessárias para compreender o conteúdo principal do vídeo. Isto não deve incluir segmentos que forneçam o contexto ou detalhes de fundo. Esta é uma categoria muito agressiva destinada a quando não se está com disposição para \"diversão\".",
   "@sponsorBlockCategoryFillerDescription": {
     "description": "Sponsorblock 'Filler' Category description"
+  },
+  "blackBackground": "Fundo preto",
+  "@blackBackground": {
+    "description": "Black backgroun option label for dark theme with oled"
+  },
+  "blackBackgroundDescription": "Para tema escuro nos ecrãs OLED. Requer reinício do aplicativo.",
+  "@blackBackgroundDescription": {
+    "description": ""
   }
 }
