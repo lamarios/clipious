@@ -52,7 +52,9 @@ class VideoListController extends GetxController {
 
   onScrollEvent() {
     if (scrollController.hasClients) {
-      if (scrollController.position.maxScrollExtent == scrollController.offset) {
+
+      log.info('scroll event ${scrollController.position.maxScrollExtent}, ${scrollController.offset}');
+      if (scrollController.position.maxScrollExtent * 0.9 < scrollController.offset) {
         EasyDebounce.debounce('loading-more-videos', const Duration(milliseconds: 250), getMoreVideos);
       }
     }
@@ -96,4 +98,7 @@ class VideoListController extends GetxController {
     }
     refreshController.refreshCompleted();
   }
+
+  // similar
+  focusChanged(bool value, int index) {}
 }

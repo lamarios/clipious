@@ -18,6 +18,8 @@ import 'package:invidious/views/searchDelegate.dart';
 import 'package:invidious/views/settings.dart';
 import 'package:invidious/views/subscriptions.dart';
 import 'package:invidious/views/trending.dart';
+import 'package:invidious/views/tv/tvHome.dart';
+import 'package:invidious/views/tv/tvWelcomeWizard.dart';
 import 'package:invidious/views/welcomeWizard.dart';
 import 'package:logging/logging.dart';
 
@@ -30,15 +32,16 @@ final scaffoldKey = GlobalKey<ScaffoldMessengerState>();
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 final GlobalKey<NavigatorState> globalNavigator = GlobalKey<NavigatorState>();
 final RouteObserver<ModalRoute> routeObserver = MyRouteObserver();
+bool isTv = false;
 
 Future<void> main() async {
-  Logger.root.level = Level.ALL; // defaults to Level.INFO
+  Logger.root.level = Level.INFO; // defaults to Level.INFO
   Logger.root.onRecord.listen((record) {
     debugPrint('[${record.level.name}] [${record.loggerName}] ${record.message}');
   });
 
   WidgetsFlutterBinding.ensureInitialized();
-
+  isTv = await isDeviceTv();
   db = await DbClient.create();
   runApp(const MyApp());
 }
@@ -100,24 +103,33 @@ class MyApp extends StatelessWidget {
           title: 'Clipious',
           theme: ThemeData(
             useMaterial3: true,
-            colorScheme: lightColorScheme,
+            colorScheme: darkColorScheme,
           ),
           darkTheme: ThemeData(useMaterial3: true, colorScheme: darkColorScheme),
-          home: Stack(
-            children: [
-              MiniPlayerAware(
-                child: Navigator(
-                    observers: [MyRouteObserver()],
-                    key: navigatorKey,
-                    initialRoute: '/',
-                    onGenerateRoute: (settings) {
-                      if (settings.name == '/') {
-                        return GetPageRoute(page: () => showWizard ? const WelcomeWizard() : const Home());
-                      }
-                    }),
-              ),
-              const MiniPlayer()
-            ],
+          home: Shortcuts(
+            shortcuts: <LogicalKeySet, Intent>{
+              LogicalKeySet(LogicalKeyboardKey.select): const ActivateIntent(),
+            },
+            child: isTv
+                ? showWizard
+                    ? const TvWelcomeWizard()
+                    : const TvHome()
+                : Stack(
+                    children: [
+                      MiniPlayerAware(
+                        child: Navigator(
+                            observers: [MyRouteObserver()],
+                            key: navigatorKey,
+                            initialRoute: '/',
+                            onGenerateRoute: (settings) {
+                              if (settings.name == '/') {
+                                return GetPageRoute(page: () => showWizard ? const WelcomeWizard() : const Home());
+                              }
+                            }),
+                      ),
+                      const MiniPlayer()
+                    ],
+                  ),
           ));
     });
   }

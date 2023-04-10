@@ -3,8 +3,6 @@ import 'package:invidious/models/userFeed.dart';
 import 'package:invidious/models/videoInList.dart';
 
 import '../globals.dart';
-import '../views/subscriptions.dart';
-import 'channelVideos.dart';
 
 abstract class PaginatedList<T>{
   Future<List<T>> getItems();

@@ -327,7 +327,7 @@
     "@useDash": {
         "description": "Label on video options if a user wants to switch to dash urls instead of the regular quality selection"
     },
-    "useDashDescription": "DASH adaptive streaming can be problematic when YouTube throttles it.",
+    "useDashDescription": "DASH adaptive streaming can sometimes be problematic, Youtube can throttle it.",
     "@useDashDescription": {
         "description": "Description for dash in the settings screen"
     },
@@ -477,13 +477,37 @@
     "@useProxyDescription": {
         "description": "Description for the use proxy settings"
     },
+    "pressDownToShowSettings": "Press down to show settings",
+    "@pressDownToShowSettings": {
+        "description": "Instruction on how to show video settings when playing a video on TV"
+    },
+    "quality": "Quality",
+    "@quality": {
+        "description": "Name of TV ui video settings"
+    },
+    "audio": "Audio",
+    "@audio": {
+        "description": "Name TV ui audio settings"
+    },
+    "subtitles": "Subtitles",
+    "@subtitles": {
+        "description": "Name of TV ui subtitles settings"
+    },
+    "playbackSpeed": "Playback speed",
+    "@playbackSpeed": {
+        "description": "Name of TV ui Playback speed"
+    },
     "blackBackground": "Black background",
     "@blackBackground": {
-        "description": "Black backgroun option label for dark theme with oled"
+        "description": "Settings name for black background"
     },
-    "blackBackgroundDescription": "For dark theme on OLED screens. Requires app restart.",
+    "blackBackgroundDescription": "For dark theme on OLED screen. Requires app restart.",
     "@blackBackgroundDescription": {
-        "description": ""
+        "description": "Description for dark background setting"
+    },
+    "search": "Search",
+    "@search": {
+        "description": "search title"
     },
     "nVideos": "{count, plural, =0{No videos} =1{1 video} other{{count} videos}}",
     "@nVideos": {

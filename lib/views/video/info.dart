@@ -36,7 +36,7 @@ class VideoInfo extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            video.title ?? '',
+            video.title,
             style: TextStyle(color: colorScheme.primary, fontWeight: FontWeight.normal, fontSize: 20),
             textAlign: TextAlign.start,
           ),

@@ -77,7 +77,7 @@ class ChannelViewState extends State<ChannelView> with TickerProviderStateMixin 
 
     return GetBuilder<ChannelController>(
       global: false,
-      init: ChannelController(widget.channelId, colorScheme.background, this),
+      init: ChannelController(widget.channelId, backgroundColor: colorScheme.background, vsync: this),
       builder: (_) => Scaffold(
         extendBodyBehindAppBar: false,
         appBar: buildAppBar(context, _),

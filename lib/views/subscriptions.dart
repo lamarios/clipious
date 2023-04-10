@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:invidious/main.dart';
+import 'package:invidious/views/tv/tvHorizontalVideoList.dart';
 
 import '../controllers/videoListController.dart';
 import '../models/paginatedList.dart';
@@ -17,10 +19,15 @@ class SubscriptionsState extends State<Subscriptions> {
     var colorScheme = Theme.of(context).colorScheme;
     return Container(
       color: colorScheme.background,
-      child: VideoList(
-        paginatedVideoList: SubscriptionVideoList(),
-        tags: VideoListController.subscriptionTag,
-      ),
+      child: isTv
+          ? TvHorizontalVideoList(
+              paginatedVideoList: SubscriptionVideoList(),
+              tags: VideoListController.subscriptionTag,
+            )
+          : VideoList(
+              paginatedVideoList: SubscriptionVideoList(),
+              tags: VideoListController.subscriptionTag,
+            ),
     );
   }
 }
