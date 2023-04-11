@@ -398,5 +398,29 @@
   "cookieLogin": "Accedi con un cookie",
   "@cookieLogin": {
     "description": "Text to login to a server using the cookie jar method"
+  },
+  "sponsorBlockSettingsQuickDescription": "Seleziona quale tipo di segmento da saltare",
+  "@sponsorBlockSettingsQuickDescription": {
+    "description": "Small description of what the sponsor block settings do"
+  },
+  "sponsorBlockCategorySponsor": "Sponsor",
+  "@sponsorBlockCategorySponsor": {
+    "description": "Sponsor block 'Sponsor' Category"
+  },
+  "sponsorBlockCategorySponsorDescription": "Promozione pagata, referral pagati e pubblicità dirette. Non per autopromozioni o ringraziamenti gratuiti a cause/creatori/siti web/prodotti che piacciono.",
+  "@sponsorBlockCategorySponsorDescription": {
+    "description": "Sponsor block 'Sponsor' Category description"
+  },
+  "videoQueue": "Video in coda",
+  "@videoQueue": {
+    "description": "Label for button to display the video queue"
+  },
+  "addToQueueList": "Aggiungi alla coda",
+  "@addToQueueList": {
+    "description": "Label on button to add a video to the queue list"
+  },
+  "addRecommendedToQueue": "Riproduzione automatica del prossimo raccomandato",
+  "@addRecommendedToQueue": {
+    "description": "Switch when playing a video to automatically add the recommended videos to the video queue"
   }
 }

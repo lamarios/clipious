@@ -323,7 +323,7 @@
   "@addServerHelpText": {
     "description": "label for when the user hasn't chosen a server yet"
   },
-  "useDashDescription": "La transmisión adaptable DASH puede ser problemática cuando YouTube la acelera.",
+  "useDashDescription": "La transmisión adaptativa DASH a veces puede ser problemática, YouTube puede limitar su velocidad.",
   "@useDashDescription": {
     "description": "Description for dash in the settings screen"
   },
@@ -483,8 +483,40 @@
   "@sponsorBlockCategoryPreviewDescription": {
     "description": "Sponsorblock 'Preview' Category description"
   },
-  "sponsorBlockCategoryFillerDescription": "Escenas con chistes de relleno añadidas sólo para relleno o humor que no son necesarias para entender el contenido principal del vídeo. Esto no debería incluir segmentos que proporcionen contexto o detalles de fondo. Se trata de una categoría muy agresiva pensada para cuando no se está de humor para \"divertirse\".",
+  "sponsorBlockCategoryFillerDescription": "Escenas tangenciales agregadas solo para relleno o humor que no son necesarias para comprender el contenido principal del video. Esto no debe incluir segmentos que proporcionen contexto o detalles de fondo. Esta es una categoría muy agresiva pensada para cuando no estás de humor para \"divertirte\".",
   "@sponsorBlockCategoryFillerDescription": {
     "description": "Sponsorblock 'Filler' Category description"
+  },
+  "pressDownToShowSettings": "Pulsa hacia abajo para mostrar los ajustes",
+  "@pressDownToShowSettings": {
+    "description": "Instruction on how to show video settings when playing a video on TV"
+  },
+  "quality": "Calidad",
+  "@quality": {
+    "description": "Name of TV ui video settings"
+  },
+  "audio": "Audio",
+  "@audio": {
+    "description": "Name TV ui audio settings"
+  },
+  "subtitles": "Subtítulos",
+  "@subtitles": {
+    "description": "Name of TV ui subtitles settings"
+  },
+  "blackBackgroundDescription": "Para el tema oscuro en una pantalla OLED. Requiere reiniciar la aplicación.",
+  "@blackBackgroundDescription": {
+    "description": "Description for dark background setting"
+  },
+  "search": "Buscar",
+  "@search": {
+    "description": "search title"
+  },
+  "playbackSpeed": "Velocidad de reproducción",
+  "@playbackSpeed": {
+    "description": "Name of TV ui Playback speed"
+  },
+  "blackBackground": "Fondo negro",
+  "@blackBackground": {
+    "description": "Settings name for black background"
   }
 }
