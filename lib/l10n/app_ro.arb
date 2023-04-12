@@ -347,7 +347,7 @@
   "@useDynamicThemeDescription": {
     "description": ""
   },
-  "useDashDescription": "Streamingul adaptiv DASH poate fi problematic atunci când YouTube o reduce.",
+  "useDashDescription": "Streamingul adaptiv DASH poate fi uneori problematic, iar YouTube îl poate limita.",
   "@useDashDescription": {
     "description": "Description for dash in the settings screen"
   },
@@ -486,5 +486,37 @@
   "useProxyDescription": "Prin proxy fluxurile video de pe server, puteți ocoli blocările regionale sau blocarea ISP-ului YouTube. Necesită repornirea aplicației",
   "@useProxyDescription": {
     "description": "Description for the use proxy settings"
+  },
+  "blackBackgroundDescription": "Pentru tema întunecată pe ecranul OLED. Necesită repornirea aplicației.",
+  "@blackBackgroundDescription": {
+    "description": "Description for dark background setting"
+  },
+  "audio": "Audio",
+  "@audio": {
+    "description": "Name TV ui audio settings"
+  },
+  "blackBackground": "Fundal negru",
+  "@blackBackground": {
+    "description": "Settings name for black background"
+  },
+  "pressDownToShowSettings": "Apasă în jos pentru a afișa setările",
+  "@pressDownToShowSettings": {
+    "description": "Instruction on how to show video settings when playing a video on TV"
+  },
+  "subtitles": "Subtitrări",
+  "@subtitles": {
+    "description": "Name of TV ui subtitles settings"
+  },
+  "playbackSpeed": "Viteza de redare",
+  "@playbackSpeed": {
+    "description": "Name of TV ui Playback speed"
+  },
+  "quality": "Calitate",
+  "@quality": {
+    "description": "Name of TV ui video settings"
+  },
+  "search": "Căutare",
+  "@search": {
+    "description": "search title"
   }
 }
