@@ -13,9 +13,7 @@ import 'package:invidious/views/tv/tvSearch.dart';
 import 'package:invidious/views/tv/tvSettings.dart';
 import 'package:invidious/views/tv/tvVideoGridView.dart';
 
-import '../../controllers/videoListController.dart';
 import '../popular.dart';
-import '../searchDelegate.dart';
 
 class TvHome extends StatelessWidget {
   const TvHome({Key? key}) : super(key: key);
