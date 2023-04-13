@@ -5,6 +5,7 @@ import 'package:invidious/utils.dart';
 import 'package:invidious/views/tv/settings/tvManageServers.dart';
 import 'package:invidious/views/tv/settings/tvSelectFromList.dart';
 import 'package:invidious/views/tv/settings/tvSponsorBlockSettings.dart';
+import 'package:invidious/views/tv/tvOverScan.dart';
 
 import '../../controllers/settingsController.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -67,13 +68,12 @@ class TVSettings extends StatelessWidget {
 
     TextTheme textTheme = Theme.of(context).textTheme;
     return Scaffold(
-      body: GetBuilder<SettingsController>(
-          init: SettingsController(),
-          builder: (_) {
-            return DefaultTextStyle(
-              style: textTheme.bodyLarge!,
-              child: Padding(
-                padding: const EdgeInsets.all(40),
+      body: TvOverscan(
+        child: GetBuilder<SettingsController>(
+            init: SettingsController(),
+            builder: (_) {
+              return DefaultTextStyle(
+                style: textTheme.bodyLarge!,
                 child: ListView(
                   children: [
                     SettingsTitle(title: locals.browsing),
@@ -129,9 +129,9 @@ class TVSettings extends StatelessWidget {
                     )
                   ],
                 ),
-              ),
-            );
-          }),
+              );
+            }),
+      ),
     );
   }
 }

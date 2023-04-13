@@ -5,6 +5,7 @@ import 'package:invidious/models/paginatedList.dart';
 import 'package:invidious/views/tv/tvButton.dart';
 import 'package:invidious/views/tv/tvChannelView.dart';
 import 'package:invidious/views/tv/tvHorizontalVideoList.dart';
+import 'package:invidious/views/tv/tvOverScan.dart';
 
 import '../../controllers/tvSearchController.dart';
 import '../../models/channel.dart';
@@ -20,14 +21,13 @@ class TvSearch extends StatelessWidget {
     var locals = AppLocalizations.of(context)!;
     ColorScheme colors = Theme.of(context).colorScheme;
     return Scaffold(
-      body: DefaultTextStyle(
-        style: textTheme.bodyLarge!,
-        child: GetBuilder<TvSearchController>(
-          global: false,
-          init: TvSearchController(),
-          builder: (_) => Padding(
-            padding: const EdgeInsets.all(20),
-            child: Column(
+      body: TvOverscan(
+        child: DefaultTextStyle(
+          style: textTheme.bodyLarge!,
+          child: GetBuilder<TvSearchController>(
+            global: false,
+            init: TvSearchController(),
+            builder: (_) => Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(

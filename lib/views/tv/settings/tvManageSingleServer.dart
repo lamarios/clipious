@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:invidious/views/tv/tvButton.dart';
+import 'package:invidious/views/tv/tvOverScan.dart';
 import 'package:invidious/views/tv/tvSettings.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -147,47 +148,47 @@ class TvManageSingleServer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: GetBuilder<ServerSettingsController>(
-          init: ServerSettingsController(server),
-          builder: (_) {
-            AppLocalizations locals = AppLocalizations.of(context)!;
-            Server server = _.server;
-            bool isLoggedIn = (server.authToken != null && server.authToken!.isNotEmpty) || (server.sidCookie != null && server.sidCookie!.isNotEmpty);
+      body: TvOverscan(
+        child: GetBuilder<ServerSettingsController>(
+            init: ServerSettingsController(server),
+            builder: (_) {
+              AppLocalizations locals = AppLocalizations.of(context)!;
+              Server server = _.server;
+              bool isLoggedIn = (server.authToken != null && server.authToken!.isNotEmpty) || (server.sidCookie != null && server.sidCookie!.isNotEmpty);
 
-            return Padding(
-                padding: EdgeInsets.all(40),
-                child: ListView(
-                  children: [
-                    SettingsTitle(title: server.url),
-                    SettingsTile(
-                      enabled: !server.inUse,
-                      title: locals.useThisServer,
-                      onSelected: (context) => _.useServer(true),
-                      autofocus: true,
-                      trailing: Switch(onChanged: server.inUse ? null : (value) {}, value: server.inUse),
-                    ),
-                    SettingsTitle(title: locals.authentication),
-                    SettingsTile(
-                      title: locals.cookieLogin,
-                      enabled: !isLoggedIn,
-                      onSelected: (context) => showLogInWithCookiesDialog(context, _),
-                    ),
-                    SettingsTile(
-                      title: locals.logout,
-                      enabled: isLoggedIn,
-                      onSelected: (context) => _.logOut(),
-                    ),
-                    SettingsTile(
-                      title: locals.delete,
-                      enabled: _.canDelete,
-                      onSelected: (context) {
-                        _.deleteServer();
-                        Navigator.of(context).pop();
-                      },
-                    )
-                  ],
-                ));
-          }),
+              return ListView(
+                children: [
+                  SettingsTitle(title: server.url),
+                  SettingsTile(
+                    enabled: !server.inUse,
+                    title: locals.useThisServer,
+                    onSelected: (context) => _.useServer(true),
+                    autofocus: true,
+                    trailing: Switch(onChanged: server.inUse ? null : (value) {}, value: server.inUse),
+                  ),
+                  SettingsTitle(title: locals.authentication),
+                  SettingsTile(
+                    title: locals.cookieLogin,
+                    enabled: !isLoggedIn,
+                    onSelected: (context) => showLogInWithCookiesDialog(context, _),
+                  ),
+                  SettingsTile(
+                    title: locals.logout,
+                    enabled: isLoggedIn,
+                    onSelected: (context) => _.logOut(),
+                  ),
+                  SettingsTile(
+                    title: locals.delete,
+                    enabled: _.canDelete,
+                    onSelected: (context) {
+                      _.deleteServer();
+                      Navigator.of(context).pop();
+                    },
+                  )
+                ],
+              );
+            }),
+      ),
     );
   }
 }

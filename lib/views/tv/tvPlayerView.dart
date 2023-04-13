@@ -3,6 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:invidious/controllers/tvPlayerController.dart';
 import 'package:invidious/utils.dart';
+import 'package:invidious/views/tv/tvOverScan.dart';
 import 'package:invidious/views/tv/tvPlayerSettings.dart';
 import 'package:invidious/views/video/player.dart';
 
@@ -34,8 +35,8 @@ class TvPlayerView extends StatelessWidget {
                 disableControls: true,
               ),
               Positioned(
-                top: 20,
-                right: 20,
+                top: TvOverscan.vertical,
+                right: TvOverscan.horizontal,
                 child: AnimatedOpacity(
                   opacity: _.buffering ? 1 : 0,
                   duration: animationDuration,
@@ -52,7 +53,7 @@ class TvPlayerView extends StatelessWidget {
                 duration: animationDuration,
                 child: Container(
                     alignment: Alignment.topCenter,
-                    height: 200,
+                    height: 250,
                     decoration: BoxDecoration(
                         gradient: LinearGradient(
                       begin: Alignment.bottomCenter,
@@ -63,8 +64,7 @@ class TvPlayerView extends StatelessWidget {
                         Colors.black.withOpacity(0.7),
                       ],
                     )),
-                    child: Padding(
-                      padding: const EdgeInsets.all(20.0),
+                    child: TvOverscan(
                       child: _.showSettings
                           ? const TvPlayerSettings()
                           : Column(
@@ -102,8 +102,7 @@ class TvPlayerView extends StatelessWidget {
                         Colors.black.withOpacity(0),
                       ],
                     )),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 40),
+                    child: TvOverscan(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [

@@ -5,6 +5,7 @@ import 'package:invidious/controllers/welcomeWizardController.dart';
 import 'package:invidious/views/tv/settings/tvManageServers.dart';
 import 'package:invidious/views/tv/settings/tvManageServersInner.dart';
 import 'package:invidious/views/tv/tvButton.dart';
+import 'package:invidious/views/tv/tvOverScan.dart';
 
 import 'tvHome.dart';
 
@@ -17,13 +18,12 @@ class TvWelcomeWizard extends StatelessWidget {
     ColorScheme colors = Theme.of(context).colorScheme;
     TextTheme textTheme = Theme.of(context).textTheme;
     return Scaffold(
-      body: GetBuilder<WelcomeWizardController>(
-          init: WelcomeWizardController(),
-          builder: (_) {
-            return DefaultTextStyle(
-              style: textTheme.bodyLarge!,
-              child: Padding(
-                padding: const EdgeInsets.all(40),
+      body: TvOverscan(
+        child: GetBuilder<WelcomeWizardController>(
+            init: WelcomeWizardController(),
+            builder: (_) {
+              return DefaultTextStyle(
+                style: textTheme.bodyLarge!,
                 child: Column(
                   children: [
                     Text(
@@ -50,9 +50,9 @@ class TvWelcomeWizard extends StatelessWidget {
                     )
                   ],
                 ),
-              ),
-            );
-          }),
+              );
+            }),
+      ),
     );
   }
 }
