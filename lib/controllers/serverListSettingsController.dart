@@ -115,7 +115,6 @@ class ServerListSettingsController extends GetxController {
             err.printError();
           }
           log.info('couldn\'t reach server ${e.url}');
-          e.url = 'fail';
           return null;
         }
       }));
