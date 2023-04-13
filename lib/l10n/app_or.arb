@@ -268,7 +268,7 @@
   "@useDash": {
     "description": "Label on video options if a user wants to switch to dash urls instead of the regular quality selection"
   },
-  "useDashDescription": "ୟୁଟ୍ୟୁବ୍ ଏହାକୁ ଥ୍ରଟ କଲାବେଳେ DASH ଆଡାପ୍ଟିଭ୍ ଷ୍ଟ୍ରିମିଂ ସମସ୍ୟା ସୃଷ୍ଟି କରିପାରେ ।",
+  "useDashDescription": "ୟୁଟ୍ୟୁବ୍ ଏହାକୁ ଥ୍ରଟ କଲାବେଳେ, DASH ଆଡାପ୍ଟିଭ୍ ଷ୍ଟ୍ରିମିଂ ସମସ୍ୟା ସୃଷ୍ଟି କରିପାରେ ।",
   "@useDashDescription": {
     "description": "Description for dash in the settings screen"
   },
@@ -483,8 +483,40 @@
   "@sponsorBlockCategoryUnpaidSelfPromoDescription": {
     "description": "Sponsor block 'Unpaid/Self promotion' Category description"
   },
-  "sponsorBlockCategoryFillerDescription": "ଟାଙ୍ଗେସିଆଲ୍ ଦୃଶ୍ୟ କେବଳ ଫିଲର୍ କିମ୍ବା ହାସ୍ୟରସ ପାଇଁ ଯୋଡି ହୋଇଛି ଯାହା ଭିଡିଓର ମୁଖ୍ୟ ବିଷୟବସ୍ତୁ ବୁଝିବା ପାଇଁ ଆବଶ୍ୟକ ନୁହେଁ । ପ୍ରସଙ୍ଗ କିମ୍ବା ପୃଷ୍ଠଭୂମି ବିବରଣୀ ପ୍ରଦାନ କରୁଥିବା ବିଭାଗଗୁଡିକ ଏଥିରେ ଅନ୍ତର୍ଭୂକ୍ତ କରିବା ଉଚିତ୍ ନୁହେଁ । ଯେତେବେଳେ ଆପଣ “ମଜା” ପାଇଁ ମନୋବୃତ୍ତିରେ ନାହାଁନ୍ତି ସେତେବେଳେ ଏହା ଅତ୍ୟନ୍ତ ଆକ୍ରମଣାତ୍ମକ ବର୍ଗ ଅଟେ ।",
+  "sponsorBlockCategoryFillerDescription": "ଟାଙ୍ଗେସିଆଲ୍ ଦୃଶ୍ୟ କେବଳ ଫିଲର୍ କିମ୍ବା ହାସ୍ୟରସ ପାଇଁ ଯୋଡି ହୋଇଛି ଯାହା ଭିଡିଓର ମୁଖ୍ୟ ବିଷୟବସ୍ତୁ ବୁଝିବା ପାଇଁ ଆବଶ୍ୟକ ନୁହେଁ । ପ୍ରସଙ୍ଗ କିମ୍ବା ପୃଷ୍ଠଭୂମି ବିବରଣୀ ପ୍ରଦାନ କରୁଥିବା ବିଭାଗଗୁଡିକ ଏଥିରେ ଅନ୍ତର୍ଭୂକ୍ତ କରିବା ଉଚିତ୍ ନୁହେଁ । ଯେତେବେଳେ ଆପଣ “ମଜା” ପାଇଁ ମନୋବୃତ୍ତିରେ ନାହାଁନ୍ତି, ସେତେବେଳେ ଏହା ଅତ୍ୟନ୍ତ ଆକ୍ରମଣାତ୍ମକ ବର୍ଗ ଅଟେ ।",
   "@sponsorBlockCategoryFillerDescription": {
     "description": "Sponsorblock 'Filler' Category description"
+  },
+  "blackBackground": "କଳା ପୃଷ୍ଠଭୂମି",
+  "@blackBackground": {
+    "description": "Settings name for black background"
+  },
+  "pressDownToShowSettings": "ସେଟିଙ୍ଗ୍ ଦେଖାଇବାକୁ ତଳକୁ ଦବାନ୍ତୁ",
+  "@pressDownToShowSettings": {
+    "description": "Instruction on how to show video settings when playing a video on TV"
+  },
+  "quality": "ଗୁଣବତ୍ତା",
+  "@quality": {
+    "description": "Name of TV ui video settings"
+  },
+  "audio": "ଅଡିଓ",
+  "@audio": {
+    "description": "Name TV ui audio settings"
+  },
+  "subtitles": "ଉପପଟ୍ଟ",
+  "@subtitles": {
+    "description": "Name of TV ui subtitles settings"
+  },
+  "playbackSpeed": "ପ୍ଲେବେକ୍ ବେଗ",
+  "@playbackSpeed": {
+    "description": "Name of TV ui Playback speed"
+  },
+  "blackBackgroundDescription": "OLED ସ୍କ୍ରିନରେ ଗାଢ ଥିମ୍ ପାଇଁ । ଆପ୍ ପୁନଃଆରମ୍ଭ ଆବଶ୍ୟକ କରେ ।",
+  "@blackBackgroundDescription": {
+    "description": "Description for dark background setting"
+  },
+  "search": "ସନ୍ଧାନ କର",
+  "@search": {
+    "description": "search title"
   }
 }

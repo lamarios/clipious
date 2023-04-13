@@ -299,7 +299,7 @@
   "@blackBackground": {
     "description": "Black backgroun option label for dark theme with oled"
   },
-  "blackBackgroundDescription": "Для темної теми на OLED-екранах. Потребує перезапуску застосунку.",
+  "blackBackgroundDescription": "Для темної теми на OLED-екрані. Потрібен перезапуск застосунку.",
   "@blackBackgroundDescription": {
     "description": ""
   },
@@ -423,7 +423,7 @@
   "@publicServersError": {
     "description": "Error message when trying to get public servers but it failed"
   },
-  "useDashDescription": "Адаптивне потокове передавання DASH може бути проблематичним, коли YouTube гальмує його.",
+  "useDashDescription": "Адаптивне потокове мовлення DASH іноді може бути проблематичним, Youtube може його гальмувати.",
   "@useDashDescription": {
     "description": "Description for dash in the settings screen"
   },
@@ -494,5 +494,29 @@
   "useProxyDescription": "Проксі-сервер дозволяє обходити регіональні блоки або блокування YouTube провайдером. Потрібен перезапуск застосунку",
   "@useProxyDescription": {
     "description": "Description for the use proxy settings"
+  },
+  "subtitles": "Субтитри",
+  "@subtitles": {
+    "description": "Name of TV ui subtitles settings"
+  },
+  "playbackSpeed": "Швидкість відтворення",
+  "@playbackSpeed": {
+    "description": "Name of TV ui Playback speed"
+  },
+  "search": "Пошук",
+  "@search": {
+    "description": "search title"
+  },
+  "pressDownToShowSettings": "Натисніть вниз, щоб показати налаштування",
+  "@pressDownToShowSettings": {
+    "description": "Instruction on how to show video settings when playing a video on TV"
+  },
+  "audio": "Аудіо",
+  "@audio": {
+    "description": "Name TV ui audio settings"
+  },
+  "quality": "Якість",
+  "@quality": {
+    "description": "Name of TV ui video settings"
   }
 }

@@ -95,7 +95,7 @@
   "@useDash": {
     "description": "Label on video options if a user wants to switch to dash urls instead of the regular quality selection"
   },
-  "useDashDescription": "O streaming adaptativo DASH pode ser problemático quando o YouTube o limita.",
+  "useDashDescription": "Às vezes, o streaming adaptativo do DASH pode ser problemático, o Youtube pode limitá-lo.",
   "@useDashDescription": {
     "description": "Description for dash in the settings screen"
   },
@@ -491,8 +491,32 @@
   "@blackBackground": {
     "description": "Black backgroun option label for dark theme with oled"
   },
-  "blackBackgroundDescription": "Para tema escuro nos ecrãs OLED. Requer reinício do aplicativo.",
+  "blackBackgroundDescription": "Para tema escuro no ecrã OLED. Requer reinício do aplicativo.",
   "@blackBackgroundDescription": {
     "description": ""
+  },
+  "pressDownToShowSettings": "Pressione para baixo para mostrar as definições",
+  "@pressDownToShowSettings": {
+    "description": "Instruction on how to show video settings when playing a video on TV"
+  },
+  "quality": "Qualidade",
+  "@quality": {
+    "description": "Name of TV ui video settings"
+  },
+  "subtitles": "Subtítulos",
+  "@subtitles": {
+    "description": "Name of TV ui subtitles settings"
+  },
+  "playbackSpeed": "Velocidade de reprodução",
+  "@playbackSpeed": {
+    "description": "Name of TV ui Playback speed"
+  },
+  "search": "Pesquisa",
+  "@search": {
+    "description": "search title"
+  },
+  "audio": "Áudio",
+  "@audio": {
+    "description": "Name TV ui audio settings"
   }
 }
