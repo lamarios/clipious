@@ -8,13 +8,12 @@ import 'package:invidious/models/paginatedList.dart';
 import 'package:invidious/views/subscriptions.dart';
 import 'package:invidious/views/trending.dart';
 import 'package:invidious/views/tv/tvButton.dart';
+import 'package:invidious/views/tv/tvOverScan.dart';
 import 'package:invidious/views/tv/tvSearch.dart';
 import 'package:invidious/views/tv/tvSettings.dart';
 import 'package:invidious/views/tv/tvVideoGridView.dart';
 
-import '../../controllers/videoListController.dart';
 import '../popular.dart';
-import '../searchDelegate.dart';
 
 class TvHome extends StatelessWidget {
   const TvHome({Key? key}) : super(key: key);
@@ -50,7 +49,7 @@ class TvHome extends StatelessWidget {
     ));
   }
 
-  openSearch(BuildContext context){
+  openSearch(BuildContext context) {
     Navigator.of(context).push(MaterialPageRoute(builder: (builder) => const TvSearch()));
   }
 
@@ -72,12 +71,12 @@ class TvHome extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   AnimatedContainer(
-                    width: _.expandMenu ? 200: 70,
+                    width: _.expandMenu ? 250 : 118,
                     duration: animationDuration ~/ 2,
                     curve: Curves.easeInOutQuad,
                     decoration: BoxDecoration(color: _.expandMenu ? colors.secondaryContainer.withOpacity(0.5) : Colors.transparent),
                     child: Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: EdgeInsets.only(top: TvOverscan.vertical, left: TvOverscan.horizontal, bottom: TvOverscan.vertical, right: _.expandMenu ? TvOverscan.horizontal : 8),
                         child: Column(mainAxisAlignment: MainAxisAlignment.start, crossAxisAlignment: CrossAxisAlignment.start, children: [
                           Padding(
                             padding: const EdgeInsets.only(bottom: 30.0),
@@ -199,7 +198,7 @@ class TvHome extends StatelessWidget {
                   ),
                   Expanded(
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 27),
+                      padding: const EdgeInsets.only(top: TvOverscan.vertical, bottom: TvOverscan.vertical, right: TvOverscan.horizontal, left: 8),
                       child: ListView(
                         // crossAxisAlignment: CrossAxisAlignment.start,
                         children: [

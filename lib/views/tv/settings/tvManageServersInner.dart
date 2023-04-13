@@ -92,67 +92,64 @@ class TvManageServersInner extends StatelessWidget {
         init: ServerListSettingsController(),
         builder: (_) {
           var filteredPublicServers = _.publicServers.where((s) => _.dbServers.indexWhere((element) => element.url == s.url) == -1).toList();
-          return Padding(
-            padding: const EdgeInsets.all(40.0),
-            child: ListView(children: [
-              SettingsTitle(title: locals.yourServers),
-              ..._.dbServers.map((s) => SettingsTile(
-                    leading: InkWell(
-                      onTap: () => _.switchServer(s),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Icon(
-                          Icons.done,
-                          color: s.inUse ? colorScheme.primary : colorScheme.secondaryContainer,
-                        ),
+          return ListView(children: [
+            SettingsTitle(title: locals.yourServers),
+            ..._.dbServers.map((s) => SettingsTile(
+                  leading: InkWell(
+                    onTap: () => _.switchServer(s),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Icon(
+                        Icons.done,
+                        color: s.inUse ? colorScheme.primary : colorScheme.secondaryContainer,
                       ),
                     ),
-                    title: s.url,
-                    description: '${_.isLoggedInToServer(s.url) ? '${locals.loggedIn}, ' : ''} ${locals.tapToManage}',
-                    onSelected: (context) => openServer(context, s),
-                  )),
-              SettingsTile(
-                title: locals.addServer,
-                leading: Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Icon(
-                    Icons.add,
-                    color: colorScheme.secondary,
                   ),
+                  title: s.url,
+                  description: '${_.isLoggedInToServer(s.url) ? '${locals.loggedIn}, ' : ''} ${locals.tapToManage}',
+                  onSelected: (context) => openServer(context, s),
+                )),
+            SettingsTile(
+              title: locals.addServer,
+              leading: Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Icon(
+                  Icons.add,
+                  color: colorScheme.secondary,
                 ),
-                onSelected: (context) => addServerDialog(context, _),
               ),
-              SettingsTitle(title: locals.publicServers),
-              ..._.publicServersError != PublicServerErrors.none
-                  ? [
-                      SettingsTile(
-                        onSelected: (context) => _.getPublicServers(),
-                        title: locals.publicServersError,
-                      )
-                    ]
-                  : _.pinging
-                      ? [
-                          SettingsTile(
-                            title: locals.loadingPublicServer,
-                            leading: SizedBox(
-                                height: 15,
-                                width: 15,
-                                child: CircularProgressIndicator(
-                                  strokeWidth: 2,
-                                  value: _.publicServerProgress > 0 ? _.publicServerProgress : null,
-                                )),
-                          )
-                        ]
-                      : filteredPublicServers
-                          .map((s) => SettingsTile(
-                                key: Key(s.url),
-                                title: '${s.url} - ${(s.ping != null && s.ping!.compareTo(const Duration(seconds: pingTimeout)) == -1) ? '${s.ping?.inMilliseconds}ms' : '>${pingTimeout}s'}',
-                                description: '${(s.flag != null && s.region != null) ? '${s.flag} - ${s.region} - ' : ''} ${locals.tapToAddServer}',
-                                onSelected: (context) => _.upsertServer(s),
-                              ))
-                          .toList()
-            ]),
-          );
+              onSelected: (context) => addServerDialog(context, _),
+            ),
+            SettingsTitle(title: locals.publicServers),
+            ..._.publicServersError != PublicServerErrors.none
+                ? [
+                    SettingsTile(
+                      onSelected: (context) => _.getPublicServers(),
+                      title: locals.publicServersError,
+                    )
+                  ]
+                : _.pinging
+                    ? [
+                        SettingsTile(
+                          title: locals.loadingPublicServer,
+                          leading: SizedBox(
+                              height: 15,
+                              width: 15,
+                              child: CircularProgressIndicator(
+                                strokeWidth: 2,
+                                value: _.publicServerProgress > 0 ? _.publicServerProgress : null,
+                              )),
+                        )
+                      ]
+                    : filteredPublicServers
+                        .map((s) => SettingsTile(
+                              key: Key(s.url),
+                              title: '${s.url} - ${(s.ping != null && s.ping!.compareTo(const Duration(seconds: pingTimeout)) == -1) ? '${s.ping?.inMilliseconds}ms' : '>${pingTimeout}s'}',
+                              description: '${(s.flag != null && s.region != null) ? '${s.flag} - ${s.region} - ' : ''} ${locals.tapToAddServer}',
+                              onSelected: (context) => _.upsertServer(s),
+                            ))
+                        .toList()
+          ]);
         });
   }
 }

@@ -8,9 +8,10 @@ Android client application for [invidious](https://invidious.io), the privacy fo
 - Subscription management
 - SponsorBlock
 - Video view/progress tracking
-- user playlists
+- Playlists
 - background playback
 - Live stream support
+- Android TV ui
 
 ## Installation
 The best way to install is to get it directly from the release page. Using [Obtainium](https://github.com/ImranR98/Obtainium) can help keeping the app up to date.
@@ -31,13 +32,11 @@ It is also available on the Google Play Store:
 [![Video details](./screenshots/video-detail-tablet_small.png)](./screenshots/video-detail-tablet.png)
 [![Channel](./screenshots/channel-tablet_small.png)](./screenshots/channel-tablet.png)
 
-## Roadmap
+### TV
 
-- Better user playlist handling
-- Better video player for playlists
-- Handling of Youtube playlists
-- Android TV support
-
+[![Home](./screenshots/tv-home_small.png)](./screenshots/tv-home.png)
+[![Video](./screenshots/tv-video_small.png)](./screenshots/tv-video.png)
+[![Channel](./screenshots/tv-channel_small.png)](./screenshots/tv-channel_small.png)
 
 ## Contribute
 

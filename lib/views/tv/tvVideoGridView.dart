@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:invidious/models/paginatedList.dart';
+import 'package:invidious/views/tv/tvOverScan.dart';
 import 'package:invidious/views/tv/tvVideoItem.dart';
 
 import '../../controllers/videoInListController.dart';
@@ -17,14 +18,13 @@ class TvGridView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: GetBuilder<VideoListController>(
-          global: tags != null,
-          tag: tags,
-          init: VideoListController(paginatedVideoList),
-          builder: (_) {
-            return Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Column(
+      body: TvOverscan(
+        child: GetBuilder<VideoListController>(
+            global: tags != null,
+            tag: tags,
+            init: VideoListController(paginatedVideoList),
+            builder: (_) {
+              return Column(
                 children: [
                   Row(
                     children: [
@@ -48,9 +48,9 @@ class TvGridView extends StatelessWidget {
                     children: _.videos.map((e) => TvVideoItem(video: e, autoFocus: false)).toList(),
                   ))
                 ],
-              ),
-            );
-          }),
+              );
+            }),
+      ),
     );
   }
 }

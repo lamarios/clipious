@@ -8,6 +8,7 @@ import 'package:invidious/controllers/videoInListController.dart';
 import 'package:invidious/utils.dart';
 import 'package:logging/logging.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:wakelock/wakelock.dart';
 import '../database.dart';
 import '../globals.dart';
 import '../main.dart';
@@ -39,7 +40,6 @@ class PlayerController extends GetxController {
 
   PlayerController({required this.colors, required this.overFlowTextColor, required this.key, required this.video, required this.miniPlayer, required this.locals, this.disableControls});
 
-
   @override
   void onInit() {
     super.onInit();
@@ -59,14 +59,18 @@ class PlayerController extends GetxController {
     playVideo();
   }
 
+  @override
+  onClose() {
+    disposeControllers();
+  }
+
   disposeControllers() {
-    if (videoController != null) {
-      saveProgress(videoController?.videoPlayerController?.value.position.inSeconds ?? 0);
-      videoController!.removeEventsListener(onVideoListener);
-      videoController!.dispose();
-      videoController = null;
-      update();
-    }
+    Wakelock.disable();
+    saveProgress(videoController?.videoPlayerController?.value.position.inSeconds ?? 0);
+    videoController?.removeEventsListener(onVideoListener);
+    videoController?.dispose();
+    videoController = null;
+    update();
   }
 
   saveProgress(int timeInSeconds) {
@@ -132,8 +136,8 @@ class PlayerController extends GetxController {
     }
   }
 
-  broadcastEvent(BetterPlayerEvent event){
-    isTv ? TvPlayerController.to()?.handleVideoEvent(event) :MiniPlayerController.to()?.handleVideoEvent(event);
+  broadcastEvent(BetterPlayerEvent event) {
+    isTv ? TvPlayerController.to()?.handleVideoEvent(event) : MiniPlayerController.to()?.handleVideoEvent(event);
   }
 
   toggleDash() {
@@ -217,6 +221,8 @@ class PlayerController extends GetxController {
           author: video.author,
           imageUrl: video.getBestThumbnail()?.url ?? '',
         ));
+
+    Wakelock.enable();
 
     videoController = BetterPlayerController(
         BetterPlayerConfiguration(

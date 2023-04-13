@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:invidious/views/tv/tvOverScan.dart';
 
 class TvPlainText extends StatefulWidget {
   final String text;
@@ -30,8 +31,7 @@ class _TvPlainTextState extends State<TvPlainText> {
     return Scaffold(
       body: DefaultTextStyle(
         style: textTheme.displaySmall!,
-        child: Padding(
-          padding: const EdgeInsets.all(40.0),
+        child: TvOverscan(
           child: Focus(
             onKeyEvent: scroll,
             child: SingleChildScrollView(
