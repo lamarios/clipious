@@ -103,18 +103,28 @@ class ServerListSettingsController extends GetxController {
         return s;
       }).toList();
       int progress = 0;
-      List<Server> pingedServers = await Future.wait(servers.map((e) async {
-        e.ping = await service.pingServer(e.url).timeout(const Duration(seconds: pingTimeout), onTimeout: () => const Duration(seconds: pingTimeout));
-        progress++;
-        publicServerProgress = progress / servers.length;
-        update();
-        return e;
+      List<Server?> pingedServers = await Future.wait(servers.map((e) async {
+        try {
+          e.ping = await service.pingServer(e.url).timeout(const Duration(seconds: pingTimeout), onTimeout: () => const Duration(seconds: pingTimeout));
+          progress++;
+          publicServerProgress = progress / servers.length;
+          update();
+          return e;
+        } catch (err) {
+          if(err is Error) {
+            err.printError();
+          }
+          log.info('couldn\'t reach server ${e.url}');
+          return null;
+        }
       }));
 
-      pingedServers.sort((a, b) => (a.ping ?? const Duration(seconds: pingTimeout)).compareTo(b.ping ?? const Duration(seconds: pingTimeout)));
+      List<Server> successfullyPingedServers = pingedServers.where((element) => element != null).map((e) => e!).toList();
+
+      successfullyPingedServers.sort((a, b) => (a.ping ?? const Duration(seconds: pingTimeout)).compareTo(b.ping ?? const Duration(seconds: pingTimeout)));
 
       pinging = false;
-      publicServers = pingedServers;
+      publicServers = successfullyPingedServers;
       publicServersError = PublicServerErrors.none;
       update();
     } catch (err) {
