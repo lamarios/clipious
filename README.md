@@ -32,6 +32,11 @@ It is also available on the Google Play Store:
 [![Video details](./screenshots/video-detail-tablet_small.png)](./screenshots/video-detail-tablet.png)
 [![Channel](./screenshots/channel-tablet_small.png)](./screenshots/channel-tablet.png)
 
+### TV
+
+[![Home](./screenshots/tv-home_small.png)](./screenshots/tv-home.png)
+[![Video](./screenshots/tv-video_small.png)](./screenshots/tv-video.png)
+[![Channel](./screenshots/tv-channel_small.png)](./screenshots/tv-channel_small.png)
 
 ## Contribute
 
