@@ -103,7 +103,7 @@ class MyApp extends StatelessWidget {
           title: 'Clipious',
           theme: ThemeData(
             useMaterial3: true,
-            colorScheme: darkColorScheme,
+            colorScheme: isTv ? darkColorScheme : lightColorScheme,
           ),
           darkTheme: ThemeData(useMaterial3: true, colorScheme: darkColorScheme),
           home: Shortcuts(
