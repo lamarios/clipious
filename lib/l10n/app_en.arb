@@ -509,7 +509,7 @@
     "@search": {
         "description": "search title"
     },
-    "subtitleFontSize": "Subtitle font size",
+    "subtitleFontSize": "Subtitles font size",
     "@subtitleFontSize": {
         "description": "Settings label for the size of the subtitles"
     },
