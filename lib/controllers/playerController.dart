@@ -3,6 +3,7 @@ import 'package:fbroadcast/fbroadcast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:invidious/controllers/settingsController.dart';
 import 'package:invidious/controllers/tvPlayerController.dart';
 import 'package:invidious/controllers/videoInListController.dart';
 import 'package:invidious/utils.dart';
@@ -70,7 +71,6 @@ class PlayerController extends GetxController {
     videoController?.removeEventsListener(onVideoListener);
     videoController?.dispose();
     videoController = null;
-    update();
   }
 
   saveProgress(int timeInSeconds) {
@@ -235,6 +235,9 @@ class PlayerController extends GetxController {
             autoPlay: true,
             allowedScreenSleep: false,
             fit: BoxFit.contain,
+            subtitlesConfiguration: BetterPlayerSubtitlesConfiguration(
+              fontSize: double.parse(db.getSettings(SUBTITLE_SIZE)?.value ?? subtitleDefaultSize),
+            ),
             controlsConfiguration: BetterPlayerControlsConfiguration(
                 showControls: !(disableControls ?? false),
                 enablePlayPause: false,

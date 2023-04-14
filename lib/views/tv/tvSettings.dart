@@ -5,6 +5,7 @@ import 'package:invidious/utils.dart';
 import 'package:invidious/views/tv/settings/tvManageServers.dart';
 import 'package:invidious/views/tv/settings/tvSelectFromList.dart';
 import 'package:invidious/views/tv/settings/tvSponsorBlockSettings.dart';
+import 'package:invidious/views/tv/tvButton.dart';
 import 'package:invidious/views/tv/tvOverScan.dart';
 
 import '../../controllers/settingsController.dart';
@@ -103,6 +104,27 @@ class TVSettings extends StatelessWidget {
                       description: locals.useProxyDescription,
                       onSelected: (context) => _.toggleProxy(!_.useProxy),
                       trailing: Switch(onChanged: (value) {}, value: _.useProxy),
+                    ),
+                    SettingsTile(
+                      title: locals.subtitleFontSize,
+                      description: locals.subtitleFontSizeDescription,
+                      trailing: Row(mainAxisSize: MainAxisSize.min, children: [
+                        Padding(
+                          padding: const EdgeInsets.only(right: 8.0),
+                          child: TvButton(onPressed: (ctx) => _.changeSubtitleSize(increase: false), child: const Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Icon(Icons.remove),
+                          )),
+                        ),
+                        Text(_.subtitleSize.floor().toString(), style: textTheme.bodyLarge,),
+                        Padding(
+                          padding: const EdgeInsets.only(left:8.0),
+                          child: TvButton(onPressed: (ctx) => _.changeSubtitleSize(increase: true), child: const Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Icon(Icons.add),
+                          )),
+                        ),
+                      ],),
                     ),
                     SettingsTile(
                       title: 'SponsorBlock',
