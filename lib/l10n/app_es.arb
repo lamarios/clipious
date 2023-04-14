@@ -518,5 +518,13 @@
   "blackBackground": "Fondo negro",
   "@blackBackground": {
     "description": "Settings name for black background"
+  },
+  "subtitleFontSizeDescription": "Cambia el tamaño de los subtítulos si es demasiado pequeño o demasiado grande en tu dispositivo",
+  "@subtitleFontSizeDescription": {
+    "description": "Settings description for subtitle size"
+  },
+  "subtitleFontSize": "Tamaño de letra de los subtítulos",
+  "@subtitleFontSize": {
+    "description": "Settings label for the size of the subtitles"
   }
 }
