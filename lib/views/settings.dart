@@ -22,6 +22,8 @@ settingsTheme(ColorScheme colorScheme) => SettingsThemeData(
     leadingIconsColor: colorScheme.secondary,
     tileHighlightColor: colorScheme.secondaryContainer);
 
+
+
 class Settings extends StatelessWidget {
   const Settings({super.key});
 
@@ -123,6 +125,12 @@ class Settings extends StatelessWidget {
                   title: Text(locals.useProxy),
                   description: Text(locals.useProxyDescription),
                 ),
+                SettingsTile(title: Text(locals.subtitleFontSize), description: Text(locals.subtitleFontSizeDescription),
+                trailing: Row(mainAxisSize: MainAxisSize.min, children: [
+                  IconButton(onPressed: () => _.changeSubtitleSize(increase: false), icon: const Icon(Icons.remove)),
+                  Text(_.subtitleSize.floor().toString()),
+                  IconButton(onPressed: () => _.changeSubtitleSize(increase: true), icon: const Icon(Icons.add)),
+                ],),),
                 SettingsTile.navigation(
                   title: Text('SponsorBlock'),
                   description: Text(locals.sponsorBlockDescription),

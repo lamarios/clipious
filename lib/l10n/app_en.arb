@@ -509,6 +509,14 @@
     "@search": {
         "description": "search title"
     },
+    "subtitleFontSize": "Subtitles font size",
+    "@subtitleFontSize": {
+        "description": "Settings label for the size of the subtitles"
+    },
+    "subtitleFontSizeDescription": "Change the size of the subtitles if it is too small or too big on your device",
+    "@subtitleFontSizeDescription": {
+        "description": "Settings description for subtitle size"
+    },
     "nVideos": "{count, plural, =0{No videos} =1{1 video} other{{count} videos}}",
     "@nVideos": {
         "description": "One or more videos",

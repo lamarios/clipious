@@ -10,6 +10,8 @@ import '../models/db/server.dart';
 import '../models/db/settings.dart';
 import '../utils.dart';
 
+const String subtitleDefaultSize = '14';
+
 class SettingsController extends GetxController {
   static SettingsController? to() => safeGet();
   var log = Logger('SettingsController');
@@ -22,7 +24,8 @@ class SettingsController extends GetxController {
   bool useDynamicTheme = db.getSettings(DYNAMIC_THEME)?.value == 'true';
   bool useDash = db.getSettings(USE_DASH)?.value == 'true';
   bool useProxy = db.getSettings(USE_PROXY)?.value == 'true';
-  bool blackBackground = db.getSettings(BLACK_BACKGROUND)?.value =='true';
+  bool blackBackground = db.getSettings(BLACK_BACKGROUND)?.value == 'true';
+  double subtitleSize = double.parse(db.getSettings(SUBTITLE_SIZE)?.value ?? subtitleDefaultSize);
 
   @override
   onReady() {
@@ -84,5 +87,17 @@ class SettingsController extends GetxController {
     db.saveSetting(SettingsValue(BLACK_BACKGROUND, value.toString()));
     blackBackground = value;
     update();
+  }
+
+  changeSubtitleSize({required bool increase}) {
+    if(increase){
+        subtitleSize++;
+    }else {
+      if (subtitleSize > 1) {
+        subtitleSize--;
+      }
+    }
+    update();
+    db.saveSetting(SettingsValue(SUBTITLE_SIZE, subtitleSize.toString()));
   }
 }

@@ -19,6 +19,7 @@ const PLAYER_SHUFFLE = 'player-shuffle';
 const PLAY_RECOMMENDED_NEXT = 'play-recommended-next';
 const USE_PROXY = 'use-proxy';
 const BLACK_BACKGROUND = 'black-background';
+const SUBTITLE_SIZE = 'subtitles-size';
 
 const ON_OPEN = "on-open";
 
