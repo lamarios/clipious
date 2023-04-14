@@ -9,6 +9,7 @@ import 'package:invidious/main.dart';
 import 'package:invidious/models/interfaces/sharelink.dart';
 import 'package:invidious/views/components/miniPlayerAware.dart';
 import 'package:invidious/views/tv/tvButton.dart';
+import 'package:invidious/views/tv/tvOverScan.dart';
 import 'package:logging/logging.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -181,8 +182,7 @@ showTvDialog({required BuildContext context, String? title, required List<Widget
     builder: (context) {
       ColorScheme colors = Theme.of(context).colorScheme;
       return Scaffold(
-        body: Padding(
-          padding: const EdgeInsets.all(40),
+        body: TvOverscan(
           child: Column(children: [
             if (title != null) Text(title, style: TextStyle(color: colors.primary, fontSize: 25)) else SizedBox.shrink(),
             Expanded(
