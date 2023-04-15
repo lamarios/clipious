@@ -6,9 +6,9 @@ Future<void> main() async {
   // Create the config instance
   final emu = await Emulators(
       toolchain: const Toolchain(
-          adbPath: '/Users/gz/dev/android/sdk/platform-tools/adb',
-          avdmanagerPath: '/Users/gz/dev/android/sdk/cmdline-tools/latest/bin/avdmanager',
-          emulatorPath: '/Users/gz/dev/android/sdk/emulator/emulator',
+          adbPath: '/Users/gz/Library/Android/sdk/platform-tools/adb',
+          avdmanagerPath: '/Users/gz/Library/Android/sdk/cmdline-tools/latest/bin/avdmanager',
+          emulatorPath: '/Users/gz/Library/Android/sdk/emulator/emulator',
           flutterPath: '/Users/gz/dev/flutter/bin/flutter',
           xcrunPath: '/usr/bin/xcrun'));
 
