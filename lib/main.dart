@@ -104,6 +104,7 @@ class MyApp extends StatelessWidget {
           supportedLocales: AppLocalizations.supportedLocales,
           scaffoldMessengerKey: scaffoldKey,
           navigatorKey: globalNavigator,
+          debugShowCheckedModeBanner: false,
           title: 'Clipious',
           theme: ThemeData(
             useMaterial3: true,
