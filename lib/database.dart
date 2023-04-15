@@ -20,6 +20,7 @@ const PLAY_RECOMMENDED_NEXT = 'play-recommended-next';
 const USE_PROXY = 'use-proxy';
 const BLACK_BACKGROUND = 'black-background';
 const SUBTITLE_SIZE = 'subtitles-size';
+const SKIP_SSL_VERIFICATION = 'skip-ssl-verification';
 
 const ON_OPEN = "on-open";
 
