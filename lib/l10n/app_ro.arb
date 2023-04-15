@@ -518,5 +518,13 @@
   "search": "Căutare",
   "@search": {
     "description": "search title"
+  },
+  "subtitleFontSize": "Dimensiunea fontului subtitrărilor",
+  "@subtitleFontSize": {
+    "description": "Settings label for the size of the subtitles"
+  },
+  "subtitleFontSizeDescription": "Schimbați dimensiunea subtitrărilor dacă este prea mică sau prea mare pe dispozitivul dvs.",
+  "@subtitleFontSizeDescription": {
+    "description": "Settings description for subtitle size"
   }
 }

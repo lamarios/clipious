@@ -398,5 +398,61 @@
   "cookieLogin": "Войти с помощью cookie",
   "@cookieLogin": {
     "description": "Text to login to a server using the cookie jar method"
+  },
+  "sponsorBlockSettingsQuickDescription": "Выберите тип сегментов для пропуска",
+  "@sponsorBlockSettingsQuickDescription": {
+    "description": "Small description of what the sponsor block settings do"
+  },
+  "sponsorBlockCategoryUnpaidSelfPromo": "Неоплачиваемый/самостоятельное продвижение",
+  "@sponsorBlockCategoryUnpaidSelfPromo": {
+    "description": "Sponsor block 'Unpaid/Self promotion' Category"
+  },
+  "sponsorBlockCategoryInteraction": "Напоминание о взаимодействии (Подписаться)",
+  "@sponsorBlockCategoryInteraction": {
+    "description": "Sponsor block 'Interaction' Category"
+  },
+  "sponsorBlockCategoryIntro": "Антракт/Вступительная анимация",
+  "@sponsorBlockCategoryIntro": {
+    "description": "Sponsorblock 'Intro' Category"
+  },
+  "sponsorBlockCategoryOutro": "Конечные карты/кредиты",
+  "@sponsorBlockCategoryOutro": {
+    "description": "Outro block 'Outro' Category"
+  },
+  "blackBackgroundDescription": "Для темной темы на OLED-экране. Требуется перезапуск приложения.",
+  "@blackBackgroundDescription": {
+    "description": "Description for dark background setting"
+  },
+  "sponsorBlockCategoryUnpaidSelfPromoDescription": "Аналогично \"спонсору\", за исключением неоплачиваемой или саморекламы. Сюда входят разделы о товарах, пожертвованиях или информация о том, с кем они сотрудничали. ",
+  "@sponsorBlockCategoryUnpaidSelfPromoDescription": {
+    "description": "Sponsor block 'Unpaid/Self promotion' Category description"
+  },
+  "sponsorBlockCategorySponsor": "Спонсор",
+  "@sponsorBlockCategorySponsor": {
+    "description": "Sponsor block 'Sponsor' Category"
+  },
+  "sponsorBlockCategoryInteractionDescription": "Если в середине контента есть короткое напоминание о необходимости поставить лайк, подписаться или следовать за ними. Если контент длинный или посвящен чему-то конкретному, его следует поместить в раздел саморекламы.",
+  "@sponsorBlockCategoryInteractionDescription": {
+    "description": "Sponsor block 'Interaction' Category description"
+  },
+  "sponsorBlockCategorySponsorDescription": "Платное продвижение, платные рефералы и прямая реклама. Не для саморекламы или бесплатных криков о причинах/создателях/сайтах/продуктах, которые им нравятся.",
+  "@sponsorBlockCategorySponsorDescription": {
+    "description": "Sponsor block 'Sponsor' Category description"
+  },
+  "sponsorBlockCategoryIntroDescription": "Интервал без фактического содержания. Это может быть пауза, статичный кадр, повторяющаяся анимация. Не следует использовать для переходов, содержащих информацию.",
+  "@sponsorBlockCategoryIntroDescription": {
+    "description": "Sponsorblock 'Intro' Category description"
+  },
+  "videoQueue": "Очередь видео",
+  "@videoQueue": {
+    "description": "Label for button to display the video queue"
+  },
+  "addToQueueList": "Добавить в очередь",
+  "@addToQueueList": {
+    "description": "Label on button to add a video to the queue list"
+  },
+  "addRecommendedToQueue": "Автовоспроизведение рекомендует следующее",
+  "@addRecommendedToQueue": {
+    "description": "Switch when playing a video to automatically add the recommended videos to the video queue"
   }
 }
