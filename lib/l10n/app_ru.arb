@@ -454,5 +454,85 @@
   "addRecommendedToQueue": "Автовоспроизведение рекомендует следующее",
   "@addRecommendedToQueue": {
     "description": "Switch when playing a video to automatically add the recommended videos to the video queue"
+  },
+  "sponsorBlockCategoryPreview": "Превью/Рекап",
+  "@sponsorBlockCategoryPreview": {
+    "description": "Sponsorblock 'Preview' Category"
+  },
+  "sponsorBlockCategoryPreviewDescription": "Коллекция клипов, которые показывают, что будет дальше в этом видео или в других видео из серии, где вся информация повторяется позже в видео.",
+  "@sponsorBlockCategoryPreviewDescription": {
+    "description": "Sponsorblock 'Preview' Category description"
+  },
+  "sponsorBlockCategoryFiller": "Заполнять Наполнения/Шутки",
+  "@sponsorBlockCategoryFiller": {
+    "description": "Sponsorblock 'Filler' Category"
+  },
+  "sponsorBlockCategoryMusicOffTopic": "Музыка: Немузыкальная секция",
+  "@sponsorBlockCategoryMusicOffTopic": {
+    "description": "Sponsorblock 'MusicOffTopic' Category"
+  },
+  "useProxy": "Проксировать видео",
+  "@useProxy": {
+    "description": "label for settings switch to proxy videos from server"
+  },
+  "sponsorBlockCategoryFillerDescription": "Касательные сцены, добавленные только для наполнения или юмора, которые не требуются для понимания основного содержания видео. Сюда не должны входить сегменты, обеспечивающие контекст или фоновые детали. Это очень агрессивная категория, предназначенная для тех случаев, когда у вас нет настроения для \"веселья\".",
+  "@sponsorBlockCategoryFillerDescription": {
+    "description": "Sponsorblock 'Filler' Category description"
+  },
+  "pressDownToShowSettings": "Нажмите вниз для отображения настроек",
+  "@pressDownToShowSettings": {
+    "description": "Instruction on how to show video settings when playing a video on TV"
+  },
+  "quality": "Качество",
+  "@quality": {
+    "description": "Name of TV ui video settings"
+  },
+  "audio": "Аудио",
+  "@audio": {
+    "description": "Name TV ui audio settings"
+  },
+  "subtitles": "Субтитры",
+  "@subtitles": {
+    "description": "Name of TV ui subtitles settings"
+  },
+  "playbackSpeed": "Скорость воспроизведения",
+  "@playbackSpeed": {
+    "description": "Name of TV ui Playback speed"
+  },
+  "blackBackground": "Черный фон",
+  "@blackBackground": {
+    "description": "Settings name for black background"
+  },
+  "search": "Искать",
+  "@search": {
+    "description": "search title"
+  },
+  "subtitleFontSize": "Размер субтитров",
+  "@subtitleFontSize": {
+    "description": "Settings label for the size of the subtitles"
+  },
+  "skipSslVerification": "Пропустить проверку SSL-сертификата",
+  "@skipSslVerification": {
+    "description": "Setting label to skip ssl certification verification"
+  },
+  "useProxyDescription": "Проксируя видеопотоки с сервера, вы можете обойти региональные блокировки или блокировки провайдера YouTube. Требуется перезапуск приложения",
+  "@useProxyDescription": {
+    "description": "Description for the use proxy settings"
+  },
+  "sponsorBlockCategoryMusicOffTopicDescription": "Интервал без фактического содержания. Это может быть пауза, статичный кадр, повторяющаяся анимация. Не следует использовать для переходов, содержащих информацию.",
+  "@sponsorBlockCategoryMusicOffTopicDescription": {
+    "description": "Only for use in music videos. This only should be used for sections of music videos that aren't already covered by another category."
+  },
+  "skipSslVerificationDescription": "Для использования самоподписанного SSL-сертификата или при возникновении проблем с SSL на вашем сервере.",
+  "@skipSslVerificationDescription": {
+    "description": "Setting description for the skip ssl certification verification"
+  },
+  "subtitleFontSizeDescription": "Измените размер субтитров, если они слишком маленькие или слишком большие на вашем устройстве",
+  "@subtitleFontSizeDescription": {
+    "description": "Settings description for subtitle size"
+  },
+  "sponsorBlockCategoryOutroDescription": "Для упоминаний или концовок видео. Не для важной информации.",
+  "@sponsorBlockCategoryOutroDescription": {
+    "description": "Outro block 'Outro' Category description"
   }
 }
