@@ -22,8 +22,6 @@ settingsTheme(ColorScheme colorScheme) => SettingsThemeData(
     leadingIconsColor: colorScheme.secondary,
     tileHighlightColor: colorScheme.secondaryContainer);
 
-
-
 class Settings extends StatelessWidget {
   const Settings({super.key});
 
@@ -111,6 +109,12 @@ class Settings extends StatelessWidget {
                   description: Text(locals.currentServer(db.getCurrentlySelectedServer().url)),
                   onPressed: manageServers,
                 ),
+                SettingsTile.switchTile(
+                  title: Text(locals.skipSslVerification),
+                  description: Text(locals.skipSslVerificationDescription),
+                  initialValue: _.skipSslVerification,
+                  onToggle: _.toggleSslVerification,
+                )
               ]),
               SettingsSection(title: Text(locals.videoPlayer), tiles: [
                 SettingsTile.switchTile(
@@ -125,12 +129,18 @@ class Settings extends StatelessWidget {
                   title: Text(locals.useProxy),
                   description: Text(locals.useProxyDescription),
                 ),
-                SettingsTile(title: Text(locals.subtitleFontSize), description: Text(locals.subtitleFontSizeDescription),
-                trailing: Row(mainAxisSize: MainAxisSize.min, children: [
-                  IconButton(onPressed: () => _.changeSubtitleSize(increase: false), icon: const Icon(Icons.remove)),
-                  Text(_.subtitleSize.floor().toString()),
-                  IconButton(onPressed: () => _.changeSubtitleSize(increase: true), icon: const Icon(Icons.add)),
-                ],),),
+                SettingsTile(
+                  title: Text(locals.subtitleFontSize),
+                  description: Text(locals.subtitleFontSizeDescription),
+                  trailing: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      IconButton(onPressed: () => _.changeSubtitleSize(increase: false), icon: const Icon(Icons.remove)),
+                      Text(_.subtitleSize.floor().toString()),
+                      IconButton(onPressed: () => _.changeSubtitleSize(increase: true), icon: const Icon(Icons.add)),
+                    ],
+                  ),
+                ),
                 SettingsTile.navigation(
                   title: Text('SponsorBlock'),
                   description: Text(locals.sponsorBlockDescription),

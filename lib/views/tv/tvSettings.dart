@@ -92,6 +92,12 @@ class TVSettings extends StatelessWidget {
 */
                     SettingsTitle(title: locals.servers),
                     SettingsTile(title: locals.manageServers, description: locals.currentServer(db.getCurrentlySelectedServer().url), onSelected: openManageServers),
+                    SettingsTile(
+                      title: locals.skipSslVerification,
+                      description: locals.skipSslVerification,
+                      onSelected: (context) => _.toggleSslVerification(!_.skipSslVerification),
+                      trailing: Switch(onChanged: (value) {}, value: _.skipSslVerification),
+                    ),
                     SettingsTitle(title: locals.videoPlayer),
                     SettingsTile(
                       title: locals.useDash,

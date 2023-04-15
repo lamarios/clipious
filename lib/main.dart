@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:after_layout/after_layout.dart';
 import 'package:back_button_interceptor/back_button_interceptor.dart';
@@ -9,6 +10,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:invidious/controllers/homeController.dart';
 import 'package:invidious/globals.dart';
+import 'package:invidious/httpOverrides.dart';
 import 'package:invidious/utils.dart';
 import 'package:invidious/views/components/miniPlayerAware.dart';
 import 'package:invidious/views/miniPlayer.dart';
@@ -39,6 +41,8 @@ Future<void> main() async {
   Logger.root.onRecord.listen((record) {
     debugPrint('[${record.level.name}] [${record.loggerName}] ${record.message}');
   });
+
+  HttpOverrides.global = MyHttpOverrides();
 
   WidgetsFlutterBinding.ensureInitialized();
   isTv = await isDeviceTv();

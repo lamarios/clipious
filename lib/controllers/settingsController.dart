@@ -26,6 +26,7 @@ class SettingsController extends GetxController {
   bool useProxy = db.getSettings(USE_PROXY)?.value == 'true';
   bool blackBackground = db.getSettings(BLACK_BACKGROUND)?.value == 'true';
   double subtitleSize = double.parse(db.getSettings(SUBTITLE_SIZE)?.value ?? subtitleDefaultSize);
+  bool skipSslVerification = db.getSettings(SKIP_SSL_VERIFICATION)?.value == 'true';
 
   @override
   onReady() {
@@ -77,6 +78,12 @@ class SettingsController extends GetxController {
     HomeController.to()?.serverChanged();
   }
 
+  toggleSslVerification(bool value) {
+    db.saveSetting(SettingsValue(SKIP_SSL_VERIFICATION, value.toString()));
+    skipSslVerification = value;
+    update();
+  }
+
   getPackageInfo() async {
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
     this.packageInfo = packageInfo;
@@ -90,9 +97,9 @@ class SettingsController extends GetxController {
   }
 
   changeSubtitleSize({required bool increase}) {
-    if(increase){
-        subtitleSize++;
-    }else {
+    if (increase) {
+      subtitleSize++;
+    } else {
       if (subtitleSize > 1) {
         subtitleSize--;
       }

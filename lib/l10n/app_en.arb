@@ -517,6 +517,14 @@
     "@subtitleFontSizeDescription": {
         "description": "Settings description for subtitle size"
     },
+    "skipSslVerification": "Skip SSL certificate verification",
+    "@skipSslVerification": {
+        "description": "Setting label to skip ssl certification verification"
+    },
+    "skipSslVerificationDescription": "Enable this if you''re using self-signed SSL certificate or have SSL related issues with your server",
+    "@skipSslVerificationDescription": {
+        "description": "Setting description for the skip ssl certification verification"
+    },
     "nVideos": "{count, plural, =0{No videos} =1{1 video} other{{count} videos}}",
     "@nVideos": {
         "description": "One or more videos",
