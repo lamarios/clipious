@@ -306,14 +306,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.3"
-  emulators:
-    dependency: "direct dev"
-    description:
-      name: emulators
-      sha256: "7616a2b9b782a76bdf30d343b2639fd776f64a2746b723bde1184b11f1e6b01c"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.4.13"
   fake_async:
     dependency: transitive
     description:
@@ -322,14 +314,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.3.1"
-  fast_immutable_collections:
-    dependency: transitive
-    description:
-      name: fast_immutable_collections
-      sha256: "60d68b272a33f919da05cd5f6dddcc69f62ace6a81b29f87a23b54a9126c971e"
-      url: "https://pub.dev"
-    source: hosted
-    version: "9.0.0"
   fbroadcast:
     dependency: "direct main"
     description:
@@ -467,22 +451,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.8.5+3"
-  fpdt:
-    dependency: transitive
-    description:
-      name: fpdt
-      sha256: aeb537463497ea141eb231e69ec44e5a9002a79ee746afb7c487c91629309513
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.1.4"
-  freezed_annotation:
-    dependency: transitive
-    description:
-      name: freezed_annotation
-      sha256: aeac15850ef1b38ee368d4c53ba9a847e900bb2c53a4db3f6881cbb3cb684338
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.2.0"
   frontend_server_client:
     dependency: transitive
     description:
