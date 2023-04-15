@@ -526,5 +526,13 @@
   "subtitleFontSize": "Tamaño de letra de los subtítulos",
   "@subtitleFontSize": {
     "description": "Settings label for the size of the subtitles"
+  },
+  "skipSslVerification": "Omitir la verificación del certificado SSL",
+  "@skipSslVerification": {
+    "description": "Setting label to skip ssl certification verification"
+  },
+  "skipSslVerificationDescription": "Para utilizar un certificado SSL autofirmado, o cuando tienes problemas relacionados con un SSL tu servidor.",
+  "@skipSslVerificationDescription": {
+    "description": "Setting description for the skip ssl certification verification"
   }
 }
