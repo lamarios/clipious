@@ -33,6 +33,7 @@ if (keyFile == null) {
 }
 
 def buildNumber = flutterVersionCode.toInteger()
+/*
 if (ENV['DRONE_BUILD_NUMBER'] != null) {
     buildNumber = ENV['DRONE_BUILD_NUMBER'].toInteger()
 }
@@ -41,6 +42,7 @@ def tag = ENV['DRONE_TAG']
 if(tag != null) {
     flutterVersionName = tag
 }
+*/
 
 
 
