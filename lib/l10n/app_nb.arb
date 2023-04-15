@@ -486,5 +486,53 @@
   "addRecommendedToQueue": "Auto-spill anbefalte etterpå",
   "@addRecommendedToQueue": {
     "description": "Switch when playing a video to automatically add the recommended videos to the video queue"
+  },
+  "blackBackground": "Svart bakgrunn",
+  "@blackBackground": {
+    "description": "Settings name for black background"
+  },
+  "search": "Søk",
+  "@search": {
+    "description": "search title"
+  },
+  "blackBackgroundDescription": "For helsvart drakt. Krever programomstart.",
+  "@blackBackgroundDescription": {
+    "description": "Description for dark background setting"
+  },
+  "subtitleFontSize": "Skriftstørrelse for undertekster",
+  "@subtitleFontSize": {
+    "description": "Settings label for the size of the subtitles"
+  },
+  "subtitles": "Undertekster",
+  "@subtitles": {
+    "description": "Name of TV ui subtitles settings"
+  },
+  "quality": "Kvalitet",
+  "@quality": {
+    "description": "Name of TV ui video settings"
+  },
+  "pressDownToShowSettings": "Trykk ↓ for å vise innstillinger",
+  "@pressDownToShowSettings": {
+    "description": "Instruction on how to show video settings when playing a video on TV"
+  },
+  "audio": "Lyd",
+  "@audio": {
+    "description": "Name TV ui audio settings"
+  },
+  "playbackSpeed": "Avspillingshastighet",
+  "@playbackSpeed": {
+    "description": "Name of TV ui Playback speed"
+  },
+  "skipSslVerification": "Hopp over SSL-sertifikatsbekreftelse",
+  "@skipSslVerification": {
+    "description": "Setting label to skip ssl certification verification"
+  },
+  "skipSslVerificationDescription": "Bruk dette hvis du bruker selvsignert SSL-sertifikat, eller har SSL-relaterte problemer med tjeneren din.",
+  "@skipSslVerificationDescription": {
+    "description": "Setting description for the skip ssl certification verification"
+  },
+  "subtitleFontSizeDescription": "Endre størrelsen på undertekstene hvis de er for store eller små på enheten din.",
+  "@subtitleFontSizeDescription": {
+    "description": "Settings description for subtitle size"
   }
 }
