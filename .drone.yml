@@ -6,13 +6,13 @@ steps:
   - name: build app
     image: ghcr.io/cirruslabs/flutter:stable
     environment:
-      ANDROID_KEY_FILE: ./key.properties
+      ANDROID_KEY_FILE: /tmp/key.properties
       SERVER_URL:
         from_secret: server_url
     commands:
-      - wget http://$SERVER_URL/service-account.json -O ./service-account.json
-      - wget http://$SERVER_URL/key.properties -O ./key.properties
-      - wget http://$SERVER_URL/keystore.jks -O ./keystore.jks
+      - wget http://$SERVER_URL/service-account.json -O /tmp/service-account.json
+      - wget http://$SERVER_URL/key.properties -O /tmp/key.properties
+      - wget http://$SERVER_URL/keystore.jks -O /tmp/keystore.jks
       - flutter doctor
       - flutter pub get
       - flutter pub run flutter_native_splash:create
@@ -30,8 +30,11 @@ steps:
   - name: Release Android
     image: ruby
     environment:
-      JSON_KEY_FILE: ./service-account.json
+      JSON_KEY_FILE: /tmp/service-account.json
     commands:
+      - wget http://$SERVER_URL/service-account.json -O /tmp/service-account.json
+      - wget http://$SERVER_URL/key.properties -O /tmp/key.properties
+      - wget http://$SERVER_URL/keystore.jks -O /tmp/keystore.jks
       - gem install fastlane
       - fastlane deploy
     when:
