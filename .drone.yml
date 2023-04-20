@@ -8,7 +8,7 @@ steps:
     environment:
       ANDROID_KEY_FILE: /tmp/key.properties
       SERVER_URL:
-        from_secrets: server_url
+        from_secret: server_url
     commands:
       - wget http://${SERVER_URL}/service-account.json -O ./service-account.json
       - wget http://${SERVER_URL}/key.properties -O ./key.properties
