@@ -24,7 +24,7 @@ steps:
     settings:
       api_key:
         from_secret: github_token
-      files: "*.apk"
+      files: "build/app/outputs/flutter-apk/*.apk"
     when:
       event: tag
   - name: Release Android
