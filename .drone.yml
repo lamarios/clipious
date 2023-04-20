@@ -6,7 +6,7 @@ steps:
   - name: build app
     image: ghcr.io/cirruslabs/flutter:stable
     environment:
-      ANDROID_KEY_FILE: ./key.properties
+      ANDROID_KEY_FILE: /tmp/key.properties
       SERVER_URL:
         from_secret: server_url
     commands:
