@@ -5,7 +5,12 @@ name: Android app
 steps:
   - name: build app
     image: ghcr.io/cirruslabs/flutter:stable
+    environment:
+      ANDROID_KEY_FILE: /tmp/key.properties
     commands:
+      - wget http://100.122.131.70:5000/fsdownload/EzGoaL9oR/service-account.json -O /tmp/service-account.json
+      - wget http://100.122.131.70:5000/fsdownload/geNamyUzD/key.properties -O /tmp/key.properties
+      - wget http://100.122.131.70:5000/fsdownload/UkWzFqNmc/keystore.jks -O /tmp/keystore.jks
       - flutter doctor
       - flutter pub get
       - flutter pub run flutter_native_splash:create
