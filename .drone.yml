@@ -31,6 +31,8 @@ steps:
     image: ruby
     environment:
       JSON_KEY_FILE: /tmp/service-account.json
+      SERVER_URL:
+        from_secret: server_url
     commands:
       - wget http://$SERVER_URL/service-account.json -O /tmp/service-account.json
       - wget http://$SERVER_URL/key.properties -O /tmp/key.properties
