@@ -21,6 +21,7 @@ steps:
       - flutter pub get
       - flutter pub run flutter_native_splash:create
       - flutter build apk --split-per-abi
+      - flutter build apk
   - name: git hub release
     environment:
       KEYCHAIN_PASS:
