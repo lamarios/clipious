@@ -30,7 +30,7 @@ steps:
   - name: Release Android
     image: ruby
     environment:
-      JSON_KEY_FILE: /tmp/service-account.json
+      JSON_KEY_FILE: ./service-account.json
     commands:
       - gem install fastlane
       - fastlane deploy
