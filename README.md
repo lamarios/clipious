@@ -16,9 +16,10 @@ Android client application for [invidious](https://invidious.io), the privacy fo
 ## Installation
 The best way to install is to get it directly from the release page. Using [Obtainium](https://github.com/ImranR98/Obtainium) can help keeping the app up to date.
 
-It is also available on the Google Play Store:
+It is also available on the Google Play Store and IzzyOnDroid:
 
 [![Clipious on the Google Play Store](./assets/google_play_small.png)](https://play.google.com/store/apps/details?id=com.github.lamarios.clipious)
+[![Clipious on IzzyOnDroid](./assets/IzzyOnDroid_small.png)](https://apt.izzysoft.de/fdroid/index/apk/com.github.lamarios.clipious/)
 
 ## Screenshots
 ### Phone
