@@ -10,9 +10,9 @@ steps:
       SERVER_URL:
         from_secret: server_url
     commands:
-      - wget http://${SERVER_URL}/service-account.json -O ./service-account.json
-      - wget http://${SERVER_URL}/key.properties -O ./key.properties
-      - wget http://${SERVER_URL}/keystore.jks -O ./keystore.jks
+      - wget http://$SERVER_URL/service-account.json -O ./service-account.json
+      - wget http://$SERVER_URL/key.properties -O ./key.properties
+      - wget http://$SERVER_URL/keystore.jks -O ./keystore.jks
       - flutter doctor
       - flutter pub get
       - flutter pub run flutter_native_splash:create
