@@ -518,5 +518,21 @@
   "quality": "Якість",
   "@quality": {
     "description": "Name of TV ui video settings"
+  },
+  "subtitleFontSize": "Розмір шрифту субтитрів",
+  "@subtitleFontSize": {
+    "description": "Settings label for the size of the subtitles"
+  },
+  "skipSslVerificationDescription": "Для використання самопідписаного SSL-сертифіката або у разі виникнення проблем з SSL на вашому сервері.",
+  "@skipSslVerificationDescription": {
+    "description": "Setting description for the skip ssl certification verification"
+  },
+  "subtitleFontSizeDescription": "Змініть розмір субтитрів, якщо вони замалі або завеликі на вашому пристрої",
+  "@subtitleFontSizeDescription": {
+    "description": "Settings description for subtitle size"
+  },
+  "skipSslVerification": "Пропустити перевірку SSL-сертифіката",
+  "@skipSslVerification": {
+    "description": "Setting label to skip ssl certification verification"
   }
 }

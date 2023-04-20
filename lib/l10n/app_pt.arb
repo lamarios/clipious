@@ -518,5 +518,21 @@
   "audio": "Áudio",
   "@audio": {
     "description": "Name TV ui audio settings"
+  },
+  "subtitleFontSize": "Tamanho de letra das legendas",
+  "@subtitleFontSize": {
+    "description": "Settings label for the size of the subtitles"
+  },
+  "subtitleFontSizeDescription": "Mude o tamanho das legendas se forem demasiado pequenas ou demasiado grandes no seu dispositivo",
+  "@subtitleFontSizeDescription": {
+    "description": "Settings description for subtitle size"
+  },
+  "skipSslVerification": "Ignorar verificação do certificado SSL",
+  "@skipSslVerification": {
+    "description": "Setting label to skip ssl certification verification"
+  },
+  "skipSslVerificationDescription": "Para usar um certificado SSL auto-assinado, ou quando tiver problemas relacionados com SSL com o seu servidor.",
+  "@skipSslVerificationDescription": {
+    "description": "Setting description for the skip ssl certification verification"
   }
 }

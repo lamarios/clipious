@@ -518,5 +518,21 @@
   "search": "ସନ୍ଧାନ କର",
   "@search": {
     "description": "search title"
+  },
+  "skipSslVerification": "SSL ସାର୍ଟିଫିକେଟ୍ ଯାଞ୍ଚକୁ ଏଡ଼ାଇଦିଅ",
+  "@skipSslVerification": {
+    "description": "Setting label to skip ssl certification verification"
+  },
+  "subtitleFontSizeDescription": "ଯଦି ଆପଣଙ୍କର ଡିଭାଇସରେ ଏହା ବହୁତ ଛୋଟ କିମ୍ବା ବହୁତ ବଡ ତେବେ ସବ୍ଟାଇଟଲଗୁଡିକର ଆକାର ପରିବର୍ତ୍ତନ କରନ୍ତୁ",
+  "@subtitleFontSizeDescription": {
+    "description": "Settings description for subtitle size"
+  },
+  "subtitleFontSize": "ଉପପଟ୍ଟ ଅକ୍ଷରର ଆକାର",
+  "@subtitleFontSize": {
+    "description": "Settings label for the size of the subtitles"
+  },
+  "skipSslVerificationDescription": "ଏକ ସ୍ବାକ୍ଷରିତ SSL ସାର୍ଟିଫିକେଟ୍ ବ୍ୟବହାର କରିବା ପାଇଁ, କିମ୍ବା ଯେତେବେଳେ ଆପଣଙ୍କର ସର୍ଭର ସହିତ SSL ସମ୍ବନ୍ଧୀୟ ସମସ୍ୟାଗୁଡିକ ଥାଏ ।",
+  "@skipSslVerificationDescription": {
+    "description": "Setting description for the skip ssl certification verification"
   }
 }

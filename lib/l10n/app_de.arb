@@ -398,5 +398,13 @@
   "authentication": "Authentifizierung",
   "@authentication": {
     "description": "Label for server settings related to authentications"
+  },
+  "sponsorBlockCategoryUnpaidSelfPromo": "Unbezahlte/Eigenwerbung",
+  "@sponsorBlockCategoryUnpaidSelfPromo": {
+    "description": "Sponsor block 'Unpaid/Self promotion' Category"
+  },
+  "addRecommendedToQueue": "Auto-play empfiehlt nächstes",
+  "@addRecommendedToQueue": {
+    "description": "Switch when playing a video to automatically add the recommended videos to the video queue"
   }
 }
