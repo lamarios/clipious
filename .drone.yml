@@ -8,9 +8,10 @@ steps:
     environment:
       ANDROID_KEY_FILE: /tmp/key.properties
     commands:
-      - wget http://100.122.131.70:5000/fsdownload/EzGoaL9oR/service-account.json -O /tmp/service-account.json
-      - wget http://100.122.131.70:5000/fsdownload/geNamyUzD/key.properties -O /tmp/key.properties
-      - wget http://100.122.131.70:5000/fsdownload/UkWzFqNmc/keystore.jks -O /tmp/keystore.jks
+      - wget http://100.77.188.44:9010/service-account.json -O /tmp/service-account.json
+      - wget http://100.77.188.44:9010/key.properties -O /tmp/key.properties
+      - wget http://100.77.188.44:9010/keystore.jks -O /tmp/keystore.jks
+      - ls /tmp
       - flutter doctor
       - flutter pub get
       - flutter pub run flutter_native_splash:create
