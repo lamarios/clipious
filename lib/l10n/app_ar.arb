@@ -1,1 +1,103 @@
-{}
+{
+  "removeFromPlayList": "إزالة من القائمة",
+  "@removeFromPlayList": {
+    "description": "Menu item description to show remove a video from a playlist"
+  },
+  "subscriptions": "اشتراكات",
+  "@subscriptions": {
+    "description": "User subscriptions"
+  },
+  "playlists": "قوائم",
+  "@playlists": {
+    "description": "User playlists"
+  },
+  "noVideoInPlayList": "لا يوجد فيديو في القائمة",
+  "@noVideoInPlayList": {
+    "description": "When no videos in the playlist"
+  },
+  "popular": "الاكثر شهرة",
+  "@popular": {
+    "description": "Popular videos title"
+  },
+  "trending": "الرائج",
+  "@trending": {
+    "description": "Trending videos title"
+  },
+  "irreversibleAction": "تأكيد",
+  "@irreversibleAction": {
+    "description": "Tell the user that the action cannot be undone"
+  },
+  "addPlayList": "إضافة إلى القائمة",
+  "@addPlayList": {
+    "description": "Title for add playlist dialog"
+  },
+  "playListName": "إسم القائمة",
+  "@playListName": {
+    "description": "Place holder for new playlist name text field"
+  },
+  "publicPlaylist": "عام",
+  "@publicPlaylist": {
+    "description": "Public playlist"
+  },
+  "cancel": "إلغاء",
+  "@cancel": {
+    "description": "Cancel button label"
+  },
+  "deletePlayListQ": "حذف القائمة؟",
+  "@deletePlayListQ": {
+    "description": "Ask user to delete a playlist"
+  },
+  "playlistVisibility": "ظهور",
+  "@playlistVisibility": {
+    "description": "Dropdown label for playlist visibility"
+  },
+  "privatePlaylist": "خاص",
+  "@privatePlaylist": {
+    "description": "Private playlist"
+  },
+  "add": "إضافة",
+  "@add": {
+    "description": "Add button abel"
+  },
+  "latestVideos": "آخر الفيديوات",
+  "@latestVideos": {
+    "description": "Latest channel videos"
+  },
+  "subscribe": "اشتراك",
+  "@subscribe": {
+    "description": "Label for user to subscribe to a channel"
+  },
+  "unlistedPlaylist": "إزالة من القائمة",
+  "@unlistedPlaylist": {
+    "description": "Unlisted playlist"
+  },
+  "info": "معلومات",
+  "@info": {
+    "description": "Info label"
+  },
+  "videos": "فيديوهات",
+  "@videos": {
+    "description": "Videos label"
+  },
+  "streams": "مشاهدات",
+  "@streams": {
+    "description": "Streams label"
+  },
+  "subscribed": "مشترك",
+  "@subscribed": {
+    "description": "When the user is subscribed to a channel"
+  },
+  "nSubscribers": "عدد المشتركين",
+  "@nSubscribers": {
+    "description": "number of subscribers",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "shareYoutubeLink": "مشاركة الرابط اليوتيوب",
+  "@shareYoutubeLink": {
+    "description": "asking user to share youtube link"
+  }
+}
