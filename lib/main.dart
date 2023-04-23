@@ -99,16 +99,21 @@ class MyApp extends StatelessWidget {
         darkColorScheme = darkColorScheme.copyWith(background: Colors.black);
       }
 
+      List<String>? localeString = db.getSettings(LOCALE)?.value.split('_');
+      Locale? locale = localeString != null ? Locale.fromSubtags(languageCode: localeString[0], scriptCode: localeString.length >= 2 ? localeString[1] : null) : null;
+
       return GetMaterialApp(
+        locale: locale,
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
           scaffoldMessengerKey: scaffoldKey,
           navigatorKey: globalNavigator,
           debugShowCheckedModeBanner: false,
+          themeMode: ThemeMode.values.firstWhere((element) => element.name == db.getSettings(THEME_MODE)?.value, orElse: () => ThemeMode.system),
           title: 'Clipious',
           theme: ThemeData(
             useMaterial3: true,
-            colorScheme: isTv ? darkColorScheme : lightColorScheme,
+            colorScheme: lightColorScheme,
           ),
           darkTheme: ThemeData(useMaterial3: true, colorScheme: darkColorScheme),
           home: Shortcuts(
