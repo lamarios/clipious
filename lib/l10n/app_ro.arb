@@ -526,5 +526,13 @@
   "subtitleFontSizeDescription": "Schimbați dimensiunea subtitrărilor dacă este prea mică sau prea mare pe dispozitivul dvs.",
   "@subtitleFontSizeDescription": {
     "description": "Settings description for subtitle size"
+  },
+  "skipSslVerification": "Omiteți verificarea certificatului SSL",
+  "@skipSslVerification": {
+    "description": "Setting label to skip ssl certification verification"
+  },
+  "skipSslVerificationDescription": "Pentru utilizarea unui certificat SSL autosemnat sau când aveți probleme legate de SSL cu serverul dvs.",
+  "@skipSslVerificationDescription": {
+    "description": "Setting description for the skip ssl certification verification"
   }
 }
