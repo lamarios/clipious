@@ -534,5 +534,29 @@
   "skipSslVerificationDescription": "Para utilizar un certificado SSL autofirmado, o cuando tienes problemas relacionados con un SSL tu servidor.",
   "@skipSslVerificationDescription": {
     "description": "Setting description for the skip ssl certification verification"
+  },
+  "themeDark": "Oscuro",
+  "@themeDark": {
+    "description": "Dark theme"
+  },
+  "followSystem": "Sistema",
+  "@followSystem": {
+    "description": "Follow system label"
+  },
+  "requiresRestart": "Requiere reiniciar la aplicación",
+  "@requiresRestart": {
+    "description": "Requires app restart label"
+  },
+  "appLanguage": "Idioma de la aplicación",
+  "@appLanguage": {
+    "description": "Select app language"
+  },
+  "themeLight": "Claro",
+  "@themeLight": {
+    "description": "Light theme"
+  },
+  "themeBrightness": "Tema",
+  "@themeBrightness": {
+    "description": "Ask the user to user dark / light / system theme"
   }
 }
