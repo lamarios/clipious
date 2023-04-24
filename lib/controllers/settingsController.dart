@@ -128,8 +128,8 @@ class SettingsController extends GetxController {
     if (theme != null) {
       themeMode = theme;
       db.saveSetting(SettingsValue(THEME_MODE, theme.name));
-      update();
     }
+    update();
   }
 
   setLocale(List<Locale> locals, List<String> localStrings, String? locale) {

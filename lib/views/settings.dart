@@ -66,10 +66,14 @@ class Settings extends StatelessWidget {
     var localsList = AppLocalizations.supportedLocales;
     var localsStrings = localsList.map((e) => e.nativeDisplayLanguageScript ?? '').toList();
     var locals = AppLocalizations.of(context)!;
+
+    List<String>? localeString = controller.locale?.split('_');
+    Locale? selected = localeString != null ? Locale.fromSubtags(languageCode: localeString[0], scriptCode: localeString.length >= 2 ? localeString[1] : null) : null;
+
     SelectDialog.showModal<String>(
       context,
       label: locals.appLanguage,
-      selectedValue: controller.locale,
+      selectedValue: selected?.nativeDisplayLanguageScript ?? locals.followSystem,
       showSearchBox: false,
       items: [locals.followSystem, ...localsStrings],
       onChange: (String selected) {
