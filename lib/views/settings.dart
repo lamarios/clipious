@@ -4,6 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:invidious/myRouteObserver.dart';
 import 'package:invidious/utils.dart';
+import 'package:locale_names/locale_names.dart';
 import 'package:invidious/views/settings/sponsorBlockSettings.dart';
 import 'package:select_dialog/select_dialog.dart';
 import 'package:settings_ui/settings_ui.dart';
@@ -61,9 +62,57 @@ class Settings extends StatelessWidget {
     );
   }
 
+  showSelectLanguage(BuildContext context, SettingsController controller) {
+    var localsList = AppLocalizations.supportedLocales;
+    var localsStrings = localsList.map((e) => e.nativeDisplayLanguageScript ?? '').toList();
+    var locals = AppLocalizations.of(context)!;
+
+    List<String>? localeString = controller.locale?.split('_');
+    Locale? selected = localeString != null ? Locale.fromSubtags(languageCode: localeString[0], scriptCode: localeString.length >= 2 ? localeString[1] : null) : null;
+
+    SelectDialog.showModal<String>(
+      context,
+      label: locals.appLanguage,
+      selectedValue: selected?.nativeDisplayLanguageScript ?? locals.followSystem,
+      showSearchBox: false,
+      items: [locals.followSystem, ...localsStrings],
+      onChange: (String selected) {
+        if (selected == locals.followSystem) {
+          controller.setLocale(localsList, localsStrings, null);
+        } else {
+          controller.setLocale(localsList, localsStrings, selected);
+        }
+      },
+    );
+  }
+
   List<String> getCategories(BuildContext context) {
     var locals = AppLocalizations.of(context)!;
     return [locals.popular, locals.trending, locals.subscriptions, locals.playlists];
+  }
+
+  selectTheme(BuildContext context, SettingsController _) {
+    var locals = AppLocalizations.of(context)!;
+    ColorScheme colors = Theme.of(context).colorScheme;
+    showDialog(
+        context: context,
+        useRootNavigator: true,
+        useSafeArea: true,
+        builder: (ctx) => SizedBox(
+              height: 200,
+              child: SimpleDialog(
+                  title: Text(locals.themeBrightness),
+                  children: ThemeMode.values
+                      .map((e) => RadioListTile(
+                          title: Text(_.getThemeLabel(locals, e)),
+                          value: e,
+                          groupValue: _.themeMode,
+                          onChanged: (value) {
+                            Navigator.of(ctx).pop();
+                            _.setThemeMode(value);
+                          }))
+                      .toList()),
+            ));
   }
 
   @override
@@ -100,6 +149,11 @@ class Settings extends StatelessWidget {
                     title: Text(locals.whenAppStartsShow),
                     value: Text(getCategories(context)[_.onOpen]),
                     onPressed: (context) => selectOnOpen(context, _),
+                  ),
+                  SettingsTile(
+                    title: Text(locals.appLanguage),
+                    value: Text('${_.getLocaleDisplayName() ?? locals.followSystem}. ${locals.requiresRestart}'),
+                    onPressed: (context) => showSelectLanguage(context, _),
                   )
                 ],
               ),
@@ -155,6 +209,11 @@ class Settings extends StatelessWidget {
                     onToggle: _.toggleDynamicTheme,
                     title: Text(locals.useDynamicTheme),
                     description: Text(locals.useDynamicThemeDescription),
+                  ),
+                  SettingsTile(
+                    title: Text(locals.themeBrightness),
+                    value: Text('${_.getThemeLabel(locals, _.themeMode)}. ${locals.requiresRestart}'),
+                    onPressed: (context) => selectTheme(context, _),
                   ),
                   SettingsTile.switchTile(
                     initialValue: _.blackBackground,

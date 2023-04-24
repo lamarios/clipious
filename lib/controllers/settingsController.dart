@@ -1,5 +1,8 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:invidious/controllers/homeController.dart';
+import 'package:locale_names/locale_names.dart';
 import 'package:logging/logging.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
@@ -27,6 +30,8 @@ class SettingsController extends GetxController {
   bool blackBackground = db.getSettings(BLACK_BACKGROUND)?.value == 'true';
   double subtitleSize = double.parse(db.getSettings(SUBTITLE_SIZE)?.value ?? subtitleDefaultSize);
   bool skipSslVerification = db.getSettings(SKIP_SSL_VERIFICATION)?.value == 'true';
+  ThemeMode themeMode = ThemeMode.values.firstWhere((element) => element.name == db.getSettings(THEME_MODE)?.value, orElse: () => ThemeMode.system);
+  String? locale = db.getSettings(LOCALE)?.value;
 
   @override
   onReady() {
@@ -106,5 +111,51 @@ class SettingsController extends GetxController {
     }
     update();
     db.saveSetting(SettingsValue(SUBTITLE_SIZE, subtitleSize.toString()));
+  }
+
+  String getThemeLabel(AppLocalizations locals, ThemeMode theme) {
+    switch (theme) {
+      case ThemeMode.dark:
+        return locals.themeDark;
+      case ThemeMode.light:
+        return locals.themeLight;
+      case ThemeMode.system:
+        return locals.followSystem;
+    }
+  }
+
+  setThemeMode(ThemeMode? theme) {
+    if (theme != null) {
+      themeMode = theme;
+      db.saveSetting(SettingsValue(THEME_MODE, theme.name));
+    }
+    update();
+  }
+
+  setLocale(List<Locale> locals, List<String> localStrings, String? locale) {
+    if (locale == null) {
+      db.deleteSetting(LOCALE);
+      this.locale = null;
+    } else {
+      var selectedIndex = localStrings.indexOf(locale);
+
+      Locale selectedLocale = locals[selectedIndex];
+
+      String toSave = selectedLocale.languageCode;
+      if (selectedLocale.scriptCode != null) {
+        toSave += '_${selectedLocale.scriptCode}';
+      }
+
+      this.locale = toSave;
+      db.saveSetting(SettingsValue(LOCALE, toSave));
+    }
+    update();
+  }
+
+  String? getLocaleDisplayName() {
+    List<String>? localeString = locale?.split('_');
+    Locale? l = localeString != null ? Locale.fromSubtags(languageCode: localeString[0], scriptCode: localeString.length >= 2 ? localeString[1] : null) : null;
+
+    return l?.nativeDisplayLanguageScript;
   }
 }

@@ -21,6 +21,8 @@ const USE_PROXY = 'use-proxy';
 const BLACK_BACKGROUND = 'black-background';
 const SUBTITLE_SIZE = 'subtitles-size';
 const SKIP_SSL_VERIFICATION = 'skip-ssl-verification';
+const THEME_MODE = 'theme-mode';
+const LOCALE = 'locale';
 
 const ON_OPEN = "on-open";
 

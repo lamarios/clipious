@@ -7,6 +7,7 @@ import 'package:invidious/views/tv/settings/tvSelectFromList.dart';
 import 'package:invidious/views/tv/settings/tvSponsorBlockSettings.dart';
 import 'package:invidious/views/tv/tvButton.dart';
 import 'package:invidious/views/tv/tvOverScan.dart';
+import 'package:locale_names/locale_names.dart';
 
 import '../../controllers/settingsController.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -24,11 +25,11 @@ class TVSettings extends StatelessWidget {
         var countryNames = countryCodes.map((e) => e.name).toList();
         countryNames.sort();
         return TvSelectFromList(
-        title: locals.selectBrowsingCountry,
-        options: countryNames,
-        selected: controller.country.name,
-        onSelect: controller.selectCountry,
-      );
+          title: locals.selectBrowsingCountry,
+          options: countryNames,
+          selected: controller.country.name,
+          onSelect: controller.selectCountry,
+        );
       },
     ));
   }
@@ -63,6 +64,48 @@ class TVSettings extends StatelessWidget {
     ));
   }
 
+  showSelectLanguage(BuildContext context, SettingsController controller) {
+    var localsList = AppLocalizations.supportedLocales;
+    var localsStrings = localsList.map((e) => e.nativeDisplayLanguageScript ?? '').toList();
+    var locals = AppLocalizations.of(context)!;
+
+    List<String>? localeString = controller.locale?.split('_');
+    Locale? selected = localeString != null ? Locale.fromSubtags(languageCode: localeString[0], scriptCode: localeString.length >= 2 ? localeString[1] : null) : null;
+
+    Navigator.of(context).push(MaterialPageRoute(
+      builder: (context) => TvSelectFromList(
+        title: locals.appLanguage,
+        options: [locals.followSystem, ...localsStrings],
+        selected: selected?.nativeDisplayLanguageScript ?? locals.followSystem,
+        onSelect: (String selected) {
+          if (selected == locals.followSystem) {
+            controller.setLocale(localsList, localsStrings, null);
+          } else {
+            controller.setLocale(localsList, localsStrings, selected);
+          }
+        },
+      ),
+    ));
+  }
+
+  selectTheme(BuildContext context, SettingsController _) {
+    var locals = AppLocalizations.of(context)!;
+    ColorScheme colors = Theme.of(context).colorScheme;
+
+    Navigator.of(context).push(MaterialPageRoute(
+      builder: (context) => TvSelectFromList(
+        title: locals.themeBrightness,
+        options: ThemeMode.values.map((e) => _.getThemeLabel(locals, e)).toList(),
+        selected: _.getThemeLabel(locals, _.themeMode),
+        onSelect: (String selected) {
+
+          ThemeMode? theme = ThemeMode.values.firstWhereOrNull((element) => _.getThemeLabel(locals, element) == selected);
+          _.setThemeMode(theme);
+        },
+      ),
+    ));
+  }
+
   @override
   Widget build(BuildContext context) {
     AppLocalizations locals = AppLocalizations.of(context)!;
@@ -82,6 +125,11 @@ class TVSettings extends StatelessWidget {
                       title: locals.country,
                       description: _.country.name,
                       onSelected: (context) => openSelectCountry(context, _),
+                    ),
+                    SettingsTile(
+                      title: locals.appLanguage,
+                      description: '${_.getLocaleDisplayName() ?? locals.followSystem}. ${locals.requiresRestart}',
+                      onSelected: (context) => showSelectLanguage(context, _),
                     ),
 /*
                     SettingsTile(
@@ -114,23 +162,33 @@ class TVSettings extends StatelessWidget {
                     SettingsTile(
                       title: locals.subtitleFontSize,
                       description: locals.subtitleFontSizeDescription,
-                      trailing: Row(mainAxisSize: MainAxisSize.min, children: [
-                        Padding(
-                          padding: const EdgeInsets.only(right: 8.0),
-                          child: TvButton(onPressed: (ctx) => _.changeSubtitleSize(increase: false), child: const Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: Icon(Icons.remove),
-                          )),
-                        ),
-                        Text(_.subtitleSize.floor().toString(), style: textTheme.bodyLarge,),
-                        Padding(
-                          padding: const EdgeInsets.only(left:8.0),
-                          child: TvButton(onPressed: (ctx) => _.changeSubtitleSize(increase: true), child: const Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: Icon(Icons.add),
-                          )),
-                        ),
-                      ],),
+                      trailing: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(right: 8.0),
+                            child: TvButton(
+                                onPressed: (ctx) => _.changeSubtitleSize(increase: false),
+                                child: const Padding(
+                                  padding: EdgeInsets.all(8.0),
+                                  child: Icon(Icons.remove),
+                                )),
+                          ),
+                          Text(
+                            _.subtitleSize.floor().toString(),
+                            style: textTheme.bodyLarge,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 8.0),
+                            child: TvButton(
+                                onPressed: (ctx) => _.changeSubtitleSize(increase: true),
+                                child: const Padding(
+                                  padding: EdgeInsets.all(8.0),
+                                  child: Icon(Icons.add),
+                                )),
+                          ),
+                        ],
+                      ),
                     ),
                     SettingsTile(
                       title: 'SponsorBlock',
@@ -138,6 +196,11 @@ class TVSettings extends StatelessWidget {
                       onSelected: openSponsorBlockSettings,
                     ),
                     SettingsTitle(title: locals.appearance),
+                    SettingsTile(
+                      title: locals.themeBrightness,
+                      description: '${_.getThemeLabel(locals, _.themeMode)}. ${locals.requiresRestart}',
+                      onSelected: (context) => selectTheme(context, _),
+                    ),
                     SettingsTile(
                       title: locals.blackBackground,
                       description: locals.blackBackgroundDescription,
