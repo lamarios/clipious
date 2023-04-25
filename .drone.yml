@@ -13,12 +13,14 @@ steps:
       - wget http://$SERVER_URL/service-account.json -O /tmp/service-account.json
       - wget http://$SERVER_URL/key.properties -O /tmp/key.properties
       - wget http://$SERVER_URL/keystore.jks -O /tmp/keystore.jks
-      - flutter doctor
-      - flutter pub get
-      - flutter pub run flutter_native_splash:create
-      - flutter build apk --split-per-abi
-      - flutter build apk
-      - flutter build appbundle
+      - git submodule init
+      - git submodule update
+      - ./submodule/flutter/bin/flutter doctor
+      - ./submodule/flutter/bin/flutter pub get
+      - ./submodule/flutter/bin/flutter pub run flutter_native_splash:create
+      - ./submodule/flutter/bin/flutter build apk --split-per-abi
+      - ./submodule/flutter/bin/flutter build apk
+      - ./submodule/flutter/bin/flutter build appbundle
   - name: publish
     image: plugins/github-release
     settings:
