@@ -16,6 +16,8 @@ steps:
       - git submodule init
       - git submodule update
       - cd ..
+      - pwd
+      - ls
       - mv src /tmp/build
       - pushd /tmp/build
       - export PUB_CACHE=$(pwd)/.pub-cache
