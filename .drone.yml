@@ -15,11 +15,9 @@ steps:
       - wget http://$SERVER_URL/keystore.jks -O /tmp/keystore.jks
       - git submodule init
       - git submodule update
-      - cd /
-      - pwd
-      - ls
-      - cp -Rv /drone/src /tmp/build
-      - pushd /tmp/build
+      - cd ..
+      - cp -R src /tmp/build
+      - cd /tmp/build
       - ls
       - export PUB_CACHE=$(pwd)/.pub-cache
       - ./submodules/flutter/bin/flutter doctor
@@ -29,8 +27,8 @@ steps:
       - ./submodules/flutter/bin/flutter build apk --split-per-abi
       - ./submodules/flutter/bin/flutter build apk
       - ./submodules/flutter/bin/flutter build appbundle
-      - popd
-      - mv /tmp/build /drone/src
+      - cd /
+      - cp -R /tmp/build /drone/src
   - name: publish
     image: plugins/github-release
     settings:
