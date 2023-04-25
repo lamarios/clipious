@@ -31,6 +31,8 @@ steps:
       - mkdir -p build/app/outputs/bundle/release
       - cp /tmp/build/build/app/outputs/flutter-apk/* build/app/outputs/flutter-apk/
       - cp /tmp/build/app/outputs/bundle/release/* build/app/outputs/bundle/release/
+      - ls build/app/outputs/flutter-apk/
+      - ls build/app/outputs/bundle/release/
   - name: publish
     image: plugins/github-release
     settings:
