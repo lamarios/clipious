@@ -15,12 +15,12 @@ steps:
       - wget http://$SERVER_URL/keystore.jks -O /tmp/keystore.jks
       - git submodule init
       - git submodule update
-      - ./submodule/flutter/bin/flutter doctor
-      - ./submodule/flutter/bin/flutter pub get
-      - ./submodule/flutter/bin/flutter pub run flutter_native_splash:create
-      - ./submodule/flutter/bin/flutter build apk --split-per-abi
-      - ./submodule/flutter/bin/flutter build apk
-      - ./submodule/flutter/bin/flutter build appbundle
+      - ./submodules/flutter/bin/flutter doctor
+      - ./submodules/flutter/bin/flutter pub get
+      - ./submodules/flutter/bin/flutter pub run flutter_native_splash:create
+      - ./submodules/flutter/bin/flutter build apk --split-per-abi
+      - ./submodules/flutter/bin/flutter build apk
+      - ./submodules/flutter/bin/flutter build appbundle
   - name: publish
     image: plugins/github-release
     settings:
