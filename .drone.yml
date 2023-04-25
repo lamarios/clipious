@@ -26,10 +26,11 @@ steps:
       - ./submodules/flutter/bin/flutter build apk --split-per-abi
       - ./submodules/flutter/bin/flutter build apk
       - ./submodules/flutter/bin/flutter build appbundle
-      - cp -Rf /tmp/build /drone/src
-      - cd /drone/src
-      - ls -l
-      - ls -l build/app/outputs/flutter-apk/
+      - cd /drone/src/
+      - mkdir -p build/app/outputs/flutter-apk
+      - mkdir -p build/app/outputs/bundle/release
+      - cp /tmp/build/build/app/outputs/flutter-apk/* build/app/outputs/flutter-apk/
+      - cp /tmp/build/app/outputs/bundle/release/* build/app/outputs/bundle/release/
   - name: publish
     image: plugins/github-release
     settings:
