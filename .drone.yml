@@ -13,12 +13,11 @@ steps:
       - wget http://$SERVER_URL/service-account.json -O /tmp/service-account.json
       - wget http://$SERVER_URL/key.properties -O /tmp/key.properties
       - wget http://$SERVER_URL/keystore.jks -O /tmp/keystore.jks
-      - git submodule init
-      - git submodule update
       - cd ..
       - cp -R src /tmp/build
       - cd /tmp/build
-      - ls
+      - git submodule init
+      - git submodule update
       - export PUB_CACHE=$(pwd)/.pub-cache
       - ./submodules/flutter/bin/flutter doctor
       - ./submodules/flutter/bin/flutter config --no-analytics
@@ -27,14 +26,16 @@ steps:
       - ./submodules/flutter/bin/flutter build apk --split-per-abi
       - ./submodules/flutter/bin/flutter build apk
       - ./submodules/flutter/bin/flutter build appbundle
-      - cd /
-      - cp -R /tmp/build /drone/src
+      - cp -Rf /tmp/build /drone/src
+      - cd /drone/src
+      - ls -l
+      - ls -l build/app/outputs/flutter-apk/
   - name: publish
     image: plugins/github-release
     settings:
       api_key:
         from_secret: github_token
-      files: "build/app/outputs/flutter-apk/*.apk"
+      files: "build/app/outputs/flutter-apk/*"
     when:
       event: tag
   - name: Release Android
