@@ -18,8 +18,9 @@ steps:
       - cd /
       - pwd
       - ls
-      - mv /drone/src /tmp/build
+      - cp -Rv /drone/src /tmp/build
       - pushd /tmp/build
+      - ls
       - export PUB_CACHE=$(pwd)/.pub-cache
       - ./submodules/flutter/bin/flutter doctor
       - ./submodules/flutter/bin/flutter config --no-analytics
