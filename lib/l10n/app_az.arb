@@ -1,1 +1,131 @@
-{}
+{
+  "removeFromPlayList": "Oynatma siyahısından sil",
+  "@removeFromPlayList": {
+    "description": "Menu item description to show remove a video from a playlist"
+  },
+  "deletePlayListQ": "Oynatma siyahısı silinsin?",
+  "@deletePlayListQ": {
+    "description": "Ask user to delete a playlist"
+  },
+  "irreversibleAction": "Bu hərəkət geri qayıtmazdır",
+  "@irreversibleAction": {
+    "description": "Tell the user that the action cannot be undone"
+  },
+  "addPlayList": "Oynatma siyahısına əlavə et",
+  "@addPlayList": {
+    "description": "Title for add playlist dialog"
+  },
+  "playListName": "Oynatma siyahısı adı",
+  "@playListName": {
+    "description": "Place holder for new playlist name text field"
+  },
+  "playlistVisibility": "Görünmə",
+  "@playlistVisibility": {
+    "description": "Dropdown label for playlist visibility"
+  },
+  "publicPlaylist": "Ümumi",
+  "@publicPlaylist": {
+    "description": "Public playlist"
+  },
+  "cancel": "Ləğv et",
+  "@cancel": {
+    "description": "Cancel button label"
+  },
+  "add": "Əlavə et",
+  "@add": {
+    "description": "Add button abel"
+  },
+  "info": "Məlumat",
+  "@info": {
+    "description": "Info label"
+  },
+  "videos": "Videolar",
+  "@videos": {
+    "description": "Videos label"
+  },
+  "streams": "Yayımlar",
+  "@streams": {
+    "description": "Streams label"
+  },
+  "subscribed": "Abunə Olundu",
+  "@subscribed": {
+    "description": "When the user is subscribed to a channel"
+  },
+  "nSubscribers": "{count}, seç, xeyr{Abunəçi yoxdur}digər{count} abunəçi}}",
+  "@nSubscribers": {
+    "description": "number of subscribers",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "ok": "Oldu",
+  "@ok": {
+    "description": "Ok"
+  },
+  "noChannels": "Kanallar yoxdur",
+  "@noChannels": {
+    "description": "when there are no channels to display"
+  },
+  "noPlaylists": "Oynatma siyahıları yoxdur",
+  "@noPlaylists": {
+    "description": "when there are no playlists to display"
+  },
+  "channels": "Kanallar",
+  "@channels": {
+    "description": "Channels label"
+  },
+  "comments": "Şərhlər",
+  "@comments": {
+    "description": "Comments label"
+  },
+  "subscriptions": "Abunəliklər",
+  "@subscriptions": {
+    "description": "User subscriptions"
+  },
+  "trending": "Trenddə olan",
+  "@trending": {
+    "description": "Trending videos title"
+  },
+  "noVideoInPlayList": "Oynatma siyahısında video yoxdur",
+  "@noVideoInPlayList": {
+    "description": "When no videos in the playlist"
+  },
+  "privatePlaylist": "Şəxsi",
+  "@privatePlaylist": {
+    "description": "Private playlist"
+  },
+  "latestVideos": "Son Videolar",
+  "@latestVideos": {
+    "description": "Latest channel videos"
+  },
+  "unlistedPlaylist": "Siyahısız",
+  "@unlistedPlaylist": {
+    "description": "Unlisted playlist"
+  },
+  "subscribe": "Abunə Ol",
+  "@subscribe": {
+    "description": "Label for user to subscribe to a channel"
+  },
+  "shareYoutubeLink": "YouTube linkin paylaş",
+  "@shareYoutubeLink": {
+    "description": "asking user to share youtube link"
+  },
+  "shareInvidiousLink": "Invidious linkin paylaş",
+  "@shareInvidiousLink": {
+    "description": "asking user to share invidious link"
+  },
+  "couldntLoadVideo": "Videonu yükləmək alınmadı",
+  "@couldntLoadVideo": {
+    "description": "Message to display when a video can't be loaded"
+  },
+  "playlists": "Oynatma siyahıları",
+  "@playlists": {
+    "description": "User playlists"
+  },
+  "popular": "Məşhur",
+  "@popular": {
+    "description": "Popular videos title"
+  }
+}
