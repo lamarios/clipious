@@ -559,7 +559,7 @@
             }
         }
     },
-    "returnYoutubeDislikeDescription": "Show estimated video dislikes",
+    "returnYoutubeDislikeDescription": "Show estimated video dislikes using API provided by returnyoutubedislike.com",
     "@returnYoutubeDislikeDescription": {
         "description": "ReturnYoutubeDislike setting description"
     }
