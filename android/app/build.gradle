@@ -69,7 +69,7 @@ android {
 
     defaultConfig {
         applicationId "com.github.lamarios.clipious"
-        minSdkVersion 16
+        minSdkVersion 21
         targetSdkVersion 31
         versionCode buildNumber
         versionName flutterVersionName
