@@ -108,7 +108,7 @@ class TvHome extends StatelessWidget {
                                       padding: EdgeInsets.only(right: 8.0),
                                       child: Icon(Icons.search),
                                     ),
-                                    _.expandMenu ? Text('search') : const SizedBox.shrink()
+                                    _.expandMenu ? Text(locals.search) : const SizedBox.shrink()
                                   ],
                                 ),
                               ),
