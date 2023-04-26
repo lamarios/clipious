@@ -196,10 +196,16 @@ class Settings extends StatelessWidget {
                   ),
                 ),
                 SettingsTile.navigation(
-                  title: Text('SponsorBlock'),
+                  title: const Text('SponsorBlock'),
                   description: Text(locals.sponsorBlockDescription),
                   onPressed: openSponsorBlockSettings,
-                )
+                ),
+                SettingsTile.switchTile(
+                  title: const Text('Return YouTube Dislike'),
+                  description: Text(locals.returnYoutubeDislikeDescription),
+                  initialValue: _.useReturnYoutubeDislike,
+                  onToggle: _.toggleReturnYoutubeDislike,
+                ),
               ]),
               SettingsSection(
                 title: Text(locals.appearance),

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
+import 'package:invidious/controllers/settingsController.dart';
 import 'package:invidious/models/paginatedList.dart';
 import 'package:invidious/models/videoInList.dart';
+import 'package:invidious/utils.dart';
 import 'package:invidious/views/tv/tvButton.dart';
 import 'package:invidious/views/tv/tvChannelView.dart';
 import 'package:invidious/views/tv/tvExpandableText.dart';
@@ -85,7 +88,7 @@ class TvVideoView extends StatelessWidget {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(top: 8),
+                          padding: const EdgeInsets.symmetric(vertical: 4),
                           child: Text(
                             _.video!.title,
                             maxLines: 2,
@@ -93,6 +96,39 @@ class TvVideoView extends StatelessWidget {
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),
+                        Row(
+                          children: [
+                            const Icon(Icons.visibility, size: 20),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 4),
+                              child: Text(compactCurrency.format(_.video?.viewCount)),
+                            ),
+                            const Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 8.0),
+                                child: Text('•')
+                            ),
+                            const Icon(Icons.thumb_up, size: 20),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 4),
+                              child: Text(compactCurrency.format(_.video?.likeCount)),
+                            ),
+                            if (_.getDislikes) ...[
+                              const Padding(
+                                  padding: EdgeInsets.symmetric(horizontal: 8.0),
+                                  child: Text('•')
+                              ),
+                              const Icon(Icons.thumb_down, size: 20),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 4),
+                                child: Text(compactCurrency.format(_.dislikes)),
+                              ),
+                            ],
+                            const Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 8.0),
+                                child: Text('•')
+                            ),
+                            Text(_.video?.publishedText ?? ''),
+                        ]),
                         Expanded(
                           child: Padding(
                             padding: const EdgeInsets.only(bottom: 10.0),

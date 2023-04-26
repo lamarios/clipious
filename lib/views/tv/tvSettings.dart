@@ -195,6 +195,12 @@ class TVSettings extends StatelessWidget {
                       description: locals.sponsorBlockDescription,
                       onSelected: openSponsorBlockSettings,
                     ),
+                    SettingsTile(
+                      title: 'Return YouTube Dislike',
+                      description: locals.returnYoutubeDislikeDescription,
+                      onSelected: (context) => _.toggleReturnYoutubeDislike(!_.useReturnYoutubeDislike),
+                      trailing: Switch(onChanged: (value) {}, value: _.useReturnYoutubeDislike),
+                    ),
                     SettingsTitle(title: locals.appearance),
                     SettingsTile(
                       title: locals.themeBrightness,

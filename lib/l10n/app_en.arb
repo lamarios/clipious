@@ -558,5 +558,9 @@
                 "format": "compact"
             }
         }
+    },
+    "returnYoutubeDislikeDescription": "Show estimated video dislikes",
+    "@returnYoutubeDislikeDescription": {
+        "description": "ReturnYoutubeDislike setting description"
     }
 }
