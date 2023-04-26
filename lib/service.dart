@@ -266,8 +266,19 @@ class Service {
 
     var headers = getAuthenticationHeaders(currentlySelectedServer);
 
-    final response = await http.get(buildUrl(SEARCH_SUGGESTIONS, pathParams: {":query": query}), headers: headers);
-    return SearchSuggestion.fromJson(handleResponse(response));
+    final response = await http.get(buildUrl(SEARCH_SUGGESTIONS, pathParams: {":query": Uri.encodeQueryComponent(query)}), headers: headers);
+    SearchSuggestion search = SearchSuggestion.fromJson(handleResponse(response));
+    if (search.suggestions.any((element) => element.contains(";"))) {
+      search.suggestions = search
+          .suggestions
+          .map((s) =>
+            s.split(";")
+              .where((e) => e.isNotEmpty && e.startsWith("&#"))
+              .map((e) => String.fromCharCode(int.parse(e.replaceAll("&#", "")))).toList().join("")
+          ).toList();
+    }
+
+    return search;
   }
 
   Future<bool> isValidServer(String serverUrl) async {
