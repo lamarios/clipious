@@ -338,5 +338,165 @@
   "videoPlayer": "Videosoitin",
   "@videoPlayer": {
     "description": "Title for video player related options"
+  },
+  "sponsorBlockCategorySponsor": "Sponsori",
+  "@sponsorBlockCategorySponsor": {
+    "description": "Sponsor block 'Sponsor' Category"
+  },
+  "sponsorBlockSettingsQuickDescription": "Valitse, minkä tyyppiset segmentit ohitetaan",
+  "@sponsorBlockSettingsQuickDescription": {
+    "description": "Small description of what the sponsor block settings do"
+  },
+  "sponsorBlockCategoryIntro": "Intro/välianimaatio",
+  "@sponsorBlockCategoryIntro": {
+    "description": "Sponsorblock 'Intro' Category"
+  },
+  "wrongUsernamePassword": "Virheellinen käyttäjänimi tai salasana",
+  "@wrongUsernamePassword": {
+    "description": "Error message when authentication fails"
+  },
+  "password": "Salasana",
+  "@password": {
+    "description": "Password label for login to a server"
+  },
+  "sponsorBlockCategoryUnpaidSelfPromo": "Oma promootio / ei maksettu",
+  "@sponsorBlockCategoryUnpaidSelfPromo": {
+    "description": "Sponsor block 'Unpaid/Self promotion' Category"
+  },
+  "sponsorBlockCategoryInteraction": "Interaktiomuistutus (Tilaus)",
+  "@sponsorBlockCategoryInteraction": {
+    "description": "Sponsor block 'Interaction' Category"
+  },
+  "sponsorBlockCategoryIntroDescription": "Ajanjakso vailla varsinaista sisältöä. Voi olla tauko, staattinen kuva tai toistuva animaatio. Tätä ei tulisi käyttää siirtymiin, jotka sisältävät tietoa.",
+  "@sponsorBlockCategoryIntroDescription": {
+    "description": "Sponsorblock 'Intro' Category description"
+  },
+  "sponsorBlockCategoryOutro": "Lopputekstit / Outro",
+  "@sponsorBlockCategoryOutro": {
+    "description": "Outro block 'Outro' Category"
+  },
+  "subtitleFontSizeDescription": "Aseta sopiva tekstityksen koko näytöllesi",
+  "@subtitleFontSizeDescription": {
+    "description": "Settings description for subtitle size"
+  },
+  "useProxy": "Käytä välityspalvelinta",
+  "@useProxy": {
+    "description": "label for settings switch to proxy videos from server"
+  },
+  "quality": "Laatu",
+  "@quality": {
+    "description": "Name of TV ui video settings"
+  },
+  "audio": "Ääni",
+  "@audio": {
+    "description": "Name TV ui audio settings"
+  },
+  "subtitles": "Tekstitykset",
+  "@subtitles": {
+    "description": "Name of TV ui subtitles settings"
+  },
+  "playbackSpeed": "Toistonopeus",
+  "@playbackSpeed": {
+    "description": "Name of TV ui Playback speed"
+  },
+  "blackBackground": "Musta tausta",
+  "@blackBackground": {
+    "description": "Settings name for black background"
+  },
+  "blackBackgroundDescription": "OLED-näytön tumma teema. Vaatii sovelluksen käynnistämisen uudelleen.",
+  "@blackBackgroundDescription": {
+    "description": "Description for dark background setting"
+  },
+  "search": "Etsi",
+  "@search": {
+    "description": "search title"
+  },
+  "videoListed": "Julkinen",
+  "@videoListed": {
+    "description": "Status of a publicly available video"
+  },
+  "videoIsFamilyFriendly": "Lapsiystävällinen",
+  "@videoIsFamilyFriendly": {
+    "description": "Displayed only when a video is family friendly"
+  },
+  "subtitleFontSize": "Tekstityksen koko",
+  "@subtitleFontSize": {
+    "description": "Settings label for the size of the subtitles"
+  },
+  "skipSslVerification": "Ohita SSL-varmenteen varmistus",
+  "@skipSslVerification": {
+    "description": "Setting label to skip ssl certification verification"
+  },
+  "skipSslVerificationDescription": "Kun käytössä on itse allekirjoitettu SSL-varmenne tai palvelimella on SSL-varmenteeseen liittyviä ongelmia.",
+  "@skipSslVerificationDescription": {
+    "description": "Setting description for the skip ssl certification verification"
+  },
+  "tapToManage": "Muokkaa napauttamalla",
+  "@tapToManage": {
+    "description": "Text shown below a server in the 'Your servers' list"
+  },
+  "authentication": "Tunnistautuminen",
+  "@authentication": {
+    "description": "Label for server settings related to authentications"
+  },
+  "tokenLoginDescription": "Suositeltu kirjautumistapa",
+  "@tokenLoginDescription": {
+    "description": "Recommended way to log in"
+  },
+  "cookieLoginDescription": "Käytä tätä tapaa, jos tunnistautuminen tokenilla ei onnistu",
+  "@cookieLoginDescription": {
+    "description": "Cookie log in description"
+  },
+  "logout": "Kirjaudu ulos",
+  "@logout": {
+    "description": "CTA to logout of a server"
+  },
+  "username": "Käyttäjänimi",
+  "@username": {
+    "description": "Username label for login to a server"
+  },
+  "tokenLogin": "Kirjaudu tokenilla",
+  "@tokenLogin": {
+    "description": "Textto login to a server using the recommended way"
+  },
+  "cookieLogin": "Kirjaudu evästeellä",
+  "@cookieLogin": {
+    "description": "Text to login to a server using the cookie jar method"
+  },
+  "videoQueue": "Jono",
+  "@videoQueue": {
+    "description": "Label for button to display the video queue"
+  },
+  "addToQueueList": "Lisää jonoon",
+  "@addToQueueList": {
+    "description": "Label on button to add a video to the queue list"
+  },
+  "addRecommendedToQueue": "Jatka automaattisesti suositeltuun videoon",
+  "@addRecommendedToQueue": {
+    "description": "Switch when playing a video to automatically add the recommended videos to the video queue"
+  },
+  "themeBrightness": "Teema",
+  "@themeBrightness": {
+    "description": "Ask the user to user dark / light / system theme"
+  },
+  "themeLight": "Vaalea",
+  "@themeLight": {
+    "description": "Light theme"
+  },
+  "themeDark": "Tumma",
+  "@themeDark": {
+    "description": "Dark theme"
+  },
+  "followSystem": "Järjestelmä",
+  "@followSystem": {
+    "description": "Follow system label"
+  },
+  "requiresRestart": "Vaatii sovelluksen uudelleen käynnistämisen",
+  "@requiresRestart": {
+    "description": "Requires app restart label"
+  },
+  "appLanguage": "Sovelluksen kieli",
+  "@appLanguage": {
+    "description": "Select app language"
   }
 }
