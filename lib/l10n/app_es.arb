@@ -135,11 +135,11 @@
   "@createNewPlaylist": {
     "description": "Button label to create a new playlist when the user wants to add a video to a playlist"
   },
-  "loadMore": "Carga más",
+  "loadMore": "Cargar más",
   "@loadMore": {
     "description": "CTA to load more"
   },
-  "topSorting": "Arriba",
+  "topSorting": "Popularidad",
   "@topSorting": {
     "description": "Content sorting: top"
   },
@@ -159,7 +159,7 @@
   "@settings": {
     "description": "Settings title"
   },
-  "browsing": "Navegando",
+  "browsing": "Navegación",
   "@browsing": {
     "description": "video browsing preferences"
   },
@@ -179,7 +179,7 @@
   "@manageServers": {
     "description": "Settings to manage servers"
   },
-  "useSponsorBlock": "Utilice SponsorBlock",
+  "useSponsorBlock": "Usar SponsorBlock",
   "@useSponsorBlock": {
     "description": "label for sponsorblock checkbox"
   },
