@@ -291,7 +291,7 @@
   "@couldntLoadVideo": {
     "description": "Message to display when a video can't be loaded"
   },
-  "wizardIntro": "Seleccione un servidor público o agregue uno propio. (Se puede cambiar más adelante en la configuración.)",
+  "wizardIntro": "Selecciona un servidor público o agrega uno propio. (Se puede cambiar más tarde en la configuración)",
   "@wizardIntro": {
     "description": "Welcome message on frst time use"
   },
@@ -479,7 +479,7 @@
   "@sponsorBlockCategoryOutroDescription": {
     "description": "Outro block 'Outro' Category description"
   },
-  "sponsorBlockCategoryPreviewDescription": "Colección de clips que muestran lo que aparece en este video u otros videos en una serie donde toda la información se repite más adelante en el video",
+  "sponsorBlockCategoryPreviewDescription": "Colección de clips que muestran lo que sucede en este video u otros videos, en una serie donde toda la información se repite más adelante en el video.",
   "@sponsorBlockCategoryPreviewDescription": {
     "description": "Sponsorblock 'Preview' Category description"
   },
