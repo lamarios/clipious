@@ -3,7 +3,7 @@
   "@playlists": {
     "description": "User playlists"
   },
-  "popular": "Popular",
+  "popular": "Populare",
   "@popular": {
     "description": "Popular videos title"
   },
@@ -263,7 +263,7 @@
   },
   "error": "Eroare",
   "@error": {},
-  "nVideos": "{count, plural, =0{Niciun videoclip} =1{1 videoclip} other{{count} videoclipuri}}}",
+  "nVideos": "{count, plural, =0{Niciun videoclip} =1{1 videoclip} other{{count} videoclipuri}}",
   "@nVideos": {
     "description": "One or more videos",
     "placeholders": {
@@ -523,7 +523,7 @@
   "@subtitleFontSize": {
     "description": "Settings label for the size of the subtitles"
   },
-  "subtitleFontSizeDescription": "Schimbați dimensiunea subtitrărilor dacă este prea mică sau prea mare pe dispozitivul dvs.",
+  "subtitleFontSizeDescription": "Schimbați dimensiunea subtitrarilor dacă este prea mică sau prea mare pe dispozitiv",
   "@subtitleFontSizeDescription": {
     "description": "Settings description for subtitle size"
   },
@@ -534,5 +534,29 @@
   "skipSslVerificationDescription": "Pentru utilizarea unui certificat SSL autosemnat sau când aveți probleme legate de SSL cu serverul dvs.",
   "@skipSslVerificationDescription": {
     "description": "Setting description for the skip ssl certification verification"
+  },
+  "themeBrightness": "Temă",
+  "@themeBrightness": {
+    "description": "Ask the user to user dark / light / system theme"
+  },
+  "themeLight": "Luminos",
+  "@themeLight": {
+    "description": "Light theme"
+  },
+  "themeDark": "Întunecat",
+  "@themeDark": {
+    "description": "Dark theme"
+  },
+  "followSystem": "Urmărește sistemul",
+  "@followSystem": {
+    "description": "Follow system label"
+  },
+  "requiresRestart": "Necesită repornirea aplicației",
+  "@requiresRestart": {
+    "description": "Requires app restart label"
+  },
+  "appLanguage": "Limba aplicației",
+  "@appLanguage": {
+    "description": "Select app language"
   }
 }
