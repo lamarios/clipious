@@ -334,7 +334,7 @@
   "@couldntFetchVideos": {
     "description": "Can't load bunch of videos, asking  user to try again"
   },
-  "wizardIntro": "ଏକ ସାର୍ବଜନୀନ ସର୍ଭର ବାଛନ୍ତୁ କିମ୍ବା ଆପଣଙ୍କର ନିଜର ଯୋଗ କରନ୍ତୁ । (ପରେ ସେଟିଂସମୂହରେ ପରିବର୍ତ୍ତନ କରାଯାଇପାରିବ ।)",
+  "wizardIntro": "ଏକ ସାର୍ବଜନୀନ ସର୍ଭର ବାଛନ୍ତୁ କିମ୍ବା ଆପଣଙ୍କର ନିଜର ଯୋଗ କରନ୍ତୁ । (ପରେ ସେଟିଂସମୂହରେ ପରିବର୍ତ୍ତନ କରାଯାଇପାରିବ)",
   "@wizardIntro": {
     "description": "Welcome message on frst time use"
   },
@@ -427,7 +427,7 @@
   "@sponsorBlockCategoryInteractionDescription": {
     "description": "Sponsor block 'Interaction' Category description"
   },
-  "sponsorBlockCategoryPreviewDescription": "କ୍ଲିପଗୁଡିକର ସଂଗ୍ରହ ଯାହାକି ଏହି ଭିଡିଓରେ କିମ୍ବା ଅନ୍ୟ ଏକ ଭିଡିଓରେ କ’ଣ ଆସୁଛି ତାହା ଦର୍ଶାଏ, ଯେଉଁଠାରେ ସମସ୍ତ ସୂଚନା ପରେ ଭିଡିଓରେ ପୁନରାବୃତ୍ତି ଆଉଥରେ ହୁଏ",
+  "sponsorBlockCategoryPreviewDescription": "କ୍ଲିପଗୁଡିକର ସଂଗ୍ରହ ଯାହାକି ଏହି ଭିଡିଓରେ କିମ୍ବା ଅନ୍ୟ ଏକ ଭିଡିଓରେ କ’ଣ ଆସୁଛି ତାହା ଦର୍ଶାଏ, ଯେଉଁଠାରେ ସମସ୍ତ ସୂଚନା ପରେ ଭିଡିଓରେ ପୁନରାବୃତ୍ତି ଆଉଥରେ ହୁଏ ।",
   "@sponsorBlockCategoryPreviewDescription": {
     "description": "Sponsorblock 'Preview' Category description"
   },
@@ -558,5 +558,9 @@
   "themeBrightness": "ଥିମ୍",
   "@themeBrightness": {
     "description": "Ask the user to user dark / light / system theme"
+  },
+  "returnYoutubeDislikeDescription": "returnyoutubedislike.com ଦ୍ୱାରା ପ୍ରଦତ୍ତ API ବ୍ୟବହାର କରି ଆନୁମାନିକ ଭିଡିଓ ନାପସନ୍ଦ ଦେଖାନ୍ତୁ",
+  "@returnYoutubeDislikeDescription": {
+    "description": "ReturnYoutubeDislike setting description"
   }
 }
