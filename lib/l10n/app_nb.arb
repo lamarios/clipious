@@ -363,7 +363,7 @@
   "@useProxy": {
     "description": "label for settings switch to proxy videos from server"
   },
-  "useProxyDescription": "Ved å mellomtjene videostrømmer fra tjeneren kan du omgå lokal blokkering eller ISP-er som blokkerer YouTube. Krever programomstart.",
+  "useProxyDescription": "Ved å mellomtjene videostrømmer fra tjeneren kan du omgå lokal blokkering eller ISP-er som blokkerer YouTube. Krever programomstart",
   "@useProxyDescription": {
     "description": "Description for the use proxy settings"
   },
@@ -531,7 +531,7 @@
   "@skipSslVerificationDescription": {
     "description": "Setting description for the skip ssl certification verification"
   },
-  "subtitleFontSizeDescription": "Endre størrelsen på undertekstene hvis de er for store eller små på enheten din.",
+  "subtitleFontSizeDescription": "Endre størrelsen på undertekstene hvis de er for store eller små på enheten din",
   "@subtitleFontSizeDescription": {
     "description": "Settings description for subtitle size"
   }

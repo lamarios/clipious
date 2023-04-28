@@ -131,6 +131,12 @@ class TVSettings extends StatelessWidget {
                       description: '${_.getLocaleDisplayName() ?? locals.followSystem}. ${locals.requiresRestart}',
                       onSelected: (context) => showSelectLanguage(context, _),
                     ),
+                    SettingsTile(
+                      title: 'Return YouTube Dislike',
+                      description: locals.returnYoutubeDislikeDescription,
+                      onSelected: (context) => _.toggleReturnYoutubeDislike(!_.useReturnYoutubeDislike),
+                      trailing: Switch(onChanged: (value) {}, value: _.useReturnYoutubeDislike),
+                    ),
 /*
                     SettingsTile(
                       title: locals.whenAppStartsShow,

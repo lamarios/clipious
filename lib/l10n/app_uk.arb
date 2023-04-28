@@ -534,5 +534,29 @@
   "skipSslVerification": "Пропустити перевірку SSL-сертифіката",
   "@skipSslVerification": {
     "description": "Setting label to skip ssl certification verification"
+  },
+  "themeLight": "Світла",
+  "@themeLight": {
+    "description": "Light theme"
+  },
+  "themeDark": "Темна",
+  "@themeDark": {
+    "description": "Dark theme"
+  },
+  "followSystem": "Стежити за системою",
+  "@followSystem": {
+    "description": "Follow system label"
+  },
+  "requiresRestart": "Потребує перезапуску застосунку",
+  "@requiresRestart": {
+    "description": "Requires app restart label"
+  },
+  "appLanguage": "Мова застосунку",
+  "@appLanguage": {
+    "description": "Select app language"
+  },
+  "themeBrightness": "Тема",
+  "@themeBrightness": {
+    "description": "Ask the user to user dark / light / system theme"
   }
 }
