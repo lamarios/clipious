@@ -136,7 +136,7 @@
   "@couldntFetchVideos": {
     "description": "Can't load bunch of videos, asking  user to try again"
   },
-  "wizardIntro": "Выберите общедоступный сервер или добавьте свой собственный. (можно изменить позже в настройках.)",
+  "wizardIntro": "Выберите общедоступный сервер или добавьте свой собственный. (можно изменить позже в настройках)",
   "@wizardIntro": {
     "description": "Welcome message on frst time use"
   },
@@ -538,5 +538,25 @@
   "themeBrightness": "Тема",
   "@themeBrightness": {
     "description": "Ask the user to user dark / light / system theme"
+  },
+  "themeLight": "Светлая",
+  "@themeLight": {
+    "description": "Light theme"
+  },
+  "themeDark": "Тёмная",
+  "@themeDark": {
+    "description": "Dark theme"
+  },
+  "followSystem": "Система следования",
+  "@followSystem": {
+    "description": "Follow system label"
+  },
+  "requiresRestart": "Требуется перезапуск приложения",
+  "@requiresRestart": {
+    "description": "Requires app restart label"
+  },
+  "appLanguage": "Язык приложения",
+  "@appLanguage": {
+    "description": "Select app language"
   }
 }
