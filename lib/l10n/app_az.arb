@@ -51,7 +51,7 @@
   "@subscribed": {
     "description": "When the user is subscribed to a channel"
   },
-  "nSubscribers": "{count}, seç, xeyr{Abunəçi yoxdur}digər{count} abunəçi}}",
+  "nSubscribers": "{count, select, no{Abunəçi yoxdur} other{{count} abunəçi}}",
   "@nSubscribers": {
     "description": "number of subscribers",
     "placeholders": {
