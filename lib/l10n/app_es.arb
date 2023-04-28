@@ -558,5 +558,9 @@
   "themeBrightness": "Tema",
   "@themeBrightness": {
     "description": "Ask the user to user dark / light / system theme"
+  },
+  "returnYoutubeDislikeDescription": "Muestra aproximaciones de los videos que no me gustan usando la API proporcionada por returnyoutubedislike.com",
+  "@returnYoutubeDislikeDescription": {
+    "description": "ReturnYoutubeDislike setting description"
   }
 }
