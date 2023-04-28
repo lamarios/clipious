@@ -206,7 +206,7 @@ class Service {
   }
 
   Future<SearchResults> search(String query) async {
-    Uri uri = buildUrl(SEARCH, pathParams: {':q': query});
+    Uri uri = buildUrl(SEARCH, pathParams: {':q': Uri.encodeQueryComponent(query)});
     final response = await http.get(uri);
     Iterable i = handleResponse(response);
     // only getting videos for now
@@ -262,11 +262,7 @@ class Service {
   }
 
   Future<SearchSuggestion> getSearchSuggestion(String query) async {
-    var currentlySelectedServer = db.getCurrentlySelectedServer();
-
-    var headers = getAuthenticationHeaders(currentlySelectedServer);
-
-    final response = await http.get(buildUrl(SEARCH_SUGGESTIONS, pathParams: {":query": Uri.encodeQueryComponent(query)}), headers: headers);
+    final response = await http.get(buildUrl(SEARCH_SUGGESTIONS, pathParams: {":query": Uri.encodeQueryComponent(query)}));
     SearchSuggestion search = SearchSuggestion.fromJson(handleResponse(response));
     if (search.suggestions.any((element) => element.contains(";"))) {
       search.suggestions = search
