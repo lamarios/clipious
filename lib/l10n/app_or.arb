@@ -534,5 +534,29 @@
   "skipSslVerificationDescription": "ଏକ ସ୍ବାକ୍ଷରିତ SSL ସାର୍ଟିଫିକେଟ୍ ବ୍ୟବହାର କରିବା ପାଇଁ, କିମ୍ବା ଯେତେବେଳେ ଆପଣଙ୍କର ସର୍ଭର ସହିତ SSL ସମ୍ବନ୍ଧୀୟ ସମସ୍ୟାଗୁଡିକ ଥାଏ ।",
   "@skipSslVerificationDescription": {
     "description": "Setting description for the skip ssl certification verification"
+  },
+  "themeLight": "ଉଜ୍ଜଳ",
+  "@themeLight": {
+    "description": "Light theme"
+  },
+  "themeDark": "ଅନ୍ଧାର",
+  "@themeDark": {
+    "description": "Dark theme"
+  },
+  "followSystem": "ସିଷ୍ଟମ୍ କୁ ଅନୁସରଣ କରନ୍ତୁ",
+  "@followSystem": {
+    "description": "Follow system label"
+  },
+  "requiresRestart": "ଆପ୍ ପୁନଃଆରମ୍ଭ ଆବଶ୍ୟକ କରେ",
+  "@requiresRestart": {
+    "description": "Requires app restart label"
+  },
+  "appLanguage": "ଆପ୍ ଭାଷା",
+  "@appLanguage": {
+    "description": "Select app language"
+  },
+  "themeBrightness": "ଥିମ୍",
+  "@themeBrightness": {
+    "description": "Ask the user to user dark / light / system theme"
   }
 }

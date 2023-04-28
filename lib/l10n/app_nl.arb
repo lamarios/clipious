@@ -1,0 +1,58 @@
+{
+  "password": "Wachtwoord",
+  "@password": {
+    "description": "Password label for login to a server"
+  },
+  "username": "Gebruikersnaam",
+  "@username": {
+    "description": "Username label for login to a server"
+  },
+  "audio": "Audio",
+  "@audio": {
+    "description": "Name TV ui audio settings"
+  },
+  "themeLight": "Licht",
+  "@themeLight": {
+    "description": "Light theme"
+  },
+  "themeDark": "Donker",
+  "@themeDark": {
+    "description": "Dark theme"
+  },
+  "about": "Over",
+  "@about": {
+    "description": "About"
+  },
+  "build": "",
+  "@build": {
+    "description": "build label"
+  },
+  "cancel": "Annuleren",
+  "@cancel": {
+    "description": "Cancel button label"
+  },
+  "newSorting": "Nieuw",
+  "@newSorting": {
+    "description": "Content sorting: new"
+  },
+  "authentication": "Authenticatie",
+  "@authentication": {
+    "description": "Label for server settings related to authentications"
+  },
+  "name": "Naam",
+  "@name": {
+    "description": "NAme label"
+  },
+  "version": "Versie",
+  "@version": {
+    "description": "version label"
+  },
+  "search": "Zoeken",
+  "@search": {
+    "description": "search title"
+  },
+  "themeBrightness": "Thema",
+  "@themeBrightness": {
+    "description": "Ask the user to user dark / light / system theme"
+  }
+}
