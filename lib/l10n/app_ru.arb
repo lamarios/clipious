@@ -534,5 +534,9 @@
   "sponsorBlockCategoryOutroDescription": "Для упоминаний или концовок видео. Не для важной информации.",
   "@sponsorBlockCategoryOutroDescription": {
     "description": "Outro block 'Outro' Category description"
+  },
+  "themeBrightness": "Тема",
+  "@themeBrightness": {
+    "description": "Ask the user to user dark / light / system theme"
   }
 }

@@ -154,7 +154,13 @@ class Settings extends StatelessWidget {
                     title: Text(locals.appLanguage),
                     value: Text('${_.getLocaleDisplayName() ?? locals.followSystem}. ${locals.requiresRestart}'),
                     onPressed: (context) => showSelectLanguage(context, _),
-                  )
+                  ),
+                  SettingsTile.switchTile(
+                    title: const Text('Return YouTube Dislike'),
+                    description: Text(locals.returnYoutubeDislikeDescription),
+                    initialValue: _.useReturnYoutubeDislike,
+                    onToggle: _.toggleReturnYoutubeDislike,
+                  ),
                 ],
               ),
               SettingsSection(title: Text(locals.servers), tiles: [
@@ -199,12 +205,6 @@ class Settings extends StatelessWidget {
                   title: const Text('SponsorBlock'),
                   description: Text(locals.sponsorBlockDescription),
                   onPressed: openSponsorBlockSettings,
-                ),
-                SettingsTile.switchTile(
-                  title: const Text('Return YouTube Dislike'),
-                  description: Text(locals.returnYoutubeDislikeDescription),
-                  initialValue: _.useReturnYoutubeDislike,
-                  onToggle: _.toggleReturnYoutubeDislike,
                 ),
               ]),
               SettingsSection(
