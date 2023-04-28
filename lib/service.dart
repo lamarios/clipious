@@ -8,6 +8,7 @@ import 'package:http/http.dart';
 import 'package:http/http.dart' as http;
 import 'package:invidious/database.dart';
 import 'package:invidious/globals.dart';
+import 'package:invidious/models/dislike.dart';
 import 'package:invidious/models/errors/invidiousServiceError.dart';
 import 'package:invidious/models/playlist.dart';
 import 'package:invidious/models/searchResult.dart';
@@ -50,6 +51,7 @@ const POST_USER_PLAYLIST_VIDEO = '/api/v1/auth/playlists/:id/videos';
 const DELETE_USER_PLAYLIST = '/api/v1/auth/playlists/:id';
 const DELETE_USER_PLAYLIST_VIDEO = '/api/v1/auth/playlists/:id/videos/:index';
 const GET_PUBLIC_PLAYLIST = '/api/v1/playlists/:id';
+const GET_DISLIKES = 'https://returnyoutubedislikeapi.com/votes?videoId=';
 
 const MAX_PING = 9007199254740991;
 
@@ -460,5 +462,12 @@ class Service {
 
     final response = await http.get(uri);
     return Playlist.fromJson(handleResponse(response));
+  }
+
+  Future<Dislike> getDislikes(String videoId) async {
+    Uri uri = Uri.parse(GET_DISLIKES + videoId);
+
+    final response = await http.get(uri);
+    return Dislike.fromJson(handleResponse(response));
   }
 }

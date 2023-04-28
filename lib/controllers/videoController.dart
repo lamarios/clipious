@@ -4,6 +4,7 @@ import 'package:invidious/controllers/videoInnerViewController.dart';
 import 'package:invidious/database.dart';
 import 'package:invidious/models/baseVideo.dart';
 import 'package:invidious/models/db/settings.dart';
+import 'package:invidious/models/dislike.dart';
 import 'package:logging/logging.dart';
 
 import '../globals.dart';
@@ -16,8 +17,10 @@ const String coulnotLoadVideos = 'cannot-load-videos';
 class VideoController extends GetxController {
   final log = Logger('Video');
   Video? video;
+  int dislikes = 0;
   bool loadingVideo = true;
   bool playRecommendedNext = db.getSettings(PLAY_RECOMMENDED_NEXT)?.value == 'true';
+  bool getDislikes = db.getSettings(USE_RETURN_YOUTUBE_DISLIKE)?.value == 'true';
 
   int selectedIndex = 0;
   String videoId;
@@ -36,6 +39,12 @@ class VideoController extends GetxController {
       Video video = await service.getVideo(videoId);
       this.video = video;
       loadingVideo = false;
+
+      if (getDislikes) {
+        Dislike dislike = await service.getDislikes(videoId);
+        dislikes = dislike.dislikes;
+      }
+
       update();
     } catch (err) {
       if (err is InvidiousServiceError) {

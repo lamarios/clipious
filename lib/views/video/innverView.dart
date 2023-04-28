@@ -73,6 +73,7 @@ class VideoInnerView extends StatelessWidget {
                     child: <Widget>[
                       VideoInfo(
                         video: video,
+                        dislikes: videoController.dislikes,
                       ),
                       CommentsContainer(
                         video: video,

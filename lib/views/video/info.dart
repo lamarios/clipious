@@ -15,8 +15,9 @@ import '../searchDelegate.dart';
 
 class VideoInfo extends StatelessWidget {
   Video video;
+  int? dislikes;
 
-  VideoInfo({super.key, required this.video});
+  VideoInfo({super.key, required this.video, this.dislikes});
 
   openChannel(BuildContext context) {
     navigatorKey.currentState?.push(MaterialPageRoute(settings: ROUTE_CHANNEL, builder: (context) => ChannelView(channelId: video.authorId ?? '')));
@@ -45,18 +46,6 @@ class VideoInfo extends StatelessWidget {
             child: Row(
               children: [
                 Visibility(
-                    visible: video.likeCount > 0,
-                    child: const Icon(
-                      Icons.thumb_up,
-                      size: 15,
-                    )),
-                Visibility(
-                    visible: video.likeCount > 0,
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 5.0),
-                      child: Text(compactCurrency.format(video.likeCount)),
-                    )),
-                Visibility(
                     visible: video.viewCount > 0,
                     child: const Icon(
                       Icons.visibility,
@@ -65,8 +54,38 @@ class VideoInfo extends StatelessWidget {
                 Visibility(
                     visible: video.viewCount > 0,
                     child: Padding(
-                      padding: const EdgeInsets.only(left: 5.0),
+                      padding: const EdgeInsets.only(left: 3.0),
                       child: Text(compactCurrency.format(video.viewCount)),
+                    )),
+                Visibility(
+                    visible: video.likeCount > 0,
+                    child: const Padding(
+                      padding: EdgeInsets.only(left: 5.0),
+                      child: Icon(
+                          Icons.thumb_up,
+                          size: 15,
+                        ),
+                    )),
+                Visibility(
+                    visible: video.likeCount > 0,
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 3.0),
+                      child: Text(compactCurrency.format(video.likeCount)),
+                    )),
+                Visibility(
+                    visible: (dislikes ?? 0) > 0,
+                    child: const Padding(
+                      padding: EdgeInsets.only(left: 5.0),
+                      child: Icon(
+                        Icons.thumb_down,
+                        size: 15,
+                      ),
+                    )),
+                Visibility(
+                    visible: (dislikes ?? 0) > 0,
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 3.0),
+                      child: Text(compactCurrency.format(dislikes)),
                     )),
                 Expanded(child: Container()),
                 Visibility(
