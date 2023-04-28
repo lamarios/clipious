@@ -135,11 +135,11 @@
   "@createNewPlaylist": {
     "description": "Button label to create a new playlist when the user wants to add a video to a playlist"
   },
-  "loadMore": "Carga más",
+  "loadMore": "Cargar más",
   "@loadMore": {
     "description": "CTA to load more"
   },
-  "topSorting": "Arriba",
+  "topSorting": "Popularidad",
   "@topSorting": {
     "description": "Content sorting: top"
   },
@@ -159,7 +159,7 @@
   "@settings": {
     "description": "Settings title"
   },
-  "browsing": "Navegando",
+  "browsing": "Navegación",
   "@browsing": {
     "description": "video browsing preferences"
   },
@@ -179,7 +179,7 @@
   "@manageServers": {
     "description": "Settings to manage servers"
   },
-  "useSponsorBlock": "Utilice SponsorBlock",
+  "useSponsorBlock": "Usar SponsorBlock",
   "@useSponsorBlock": {
     "description": "label for sponsorblock checkbox"
   },
@@ -291,7 +291,7 @@
   "@couldntLoadVideo": {
     "description": "Message to display when a video can't be loaded"
   },
-  "wizardIntro": "Seleccione un servidor público o agregue uno propio. (Se puede cambiar más adelante en la configuración.)",
+  "wizardIntro": "Selecciona un servidor público o agrega uno propio. (Se puede cambiar más tarde en la configuración)",
   "@wizardIntro": {
     "description": "Welcome message on frst time use"
   },
@@ -479,7 +479,7 @@
   "@sponsorBlockCategoryOutroDescription": {
     "description": "Outro block 'Outro' Category description"
   },
-  "sponsorBlockCategoryPreviewDescription": "Colección de clips que muestran lo que aparece en este video u otros videos en una serie donde toda la información se repite más adelante en el video",
+  "sponsorBlockCategoryPreviewDescription": "Colección de clips que muestran lo que sucede en este video u otros videos, en una serie donde toda la información se repite más adelante en el video.",
   "@sponsorBlockCategoryPreviewDescription": {
     "description": "Sponsorblock 'Preview' Category description"
   },
