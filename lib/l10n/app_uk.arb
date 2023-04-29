@@ -355,7 +355,7 @@
       }
     }
   },
-  "wizardIntro": "Виберіть публічний сервер або додайте власний. (Можна змінити пізніше в налаштуваннях.)",
+  "wizardIntro": "Виберіть публічний сервер або додайте власний. (Можна змінити пізніше в налаштуваннях)",
   "@wizardIntro": {
     "description": "Welcome message on frst time use"
   },
@@ -475,7 +475,7 @@
   "@sponsorBlockCategoryIntroDescription": {
     "description": "Sponsorblock 'Intro' Category description"
   },
-  "sponsorBlockCategoryPreviewDescription": "Колекція кліпів, які показують, що відбувається в цьому відео або інших відео в серії, де вся інформація повторюється пізніше у відео",
+  "sponsorBlockCategoryPreviewDescription": "Колекція кліпів, які показують, що відбувається в цьому відео або інших відео в серії, де вся інформація повторюється пізніше у відео.",
   "@sponsorBlockCategoryPreviewDescription": {
     "description": "Sponsorblock 'Preview' Category description"
   },
@@ -558,5 +558,9 @@
   "themeBrightness": "Тема",
   "@themeBrightness": {
     "description": "Ask the user to user dark / light / system theme"
+  },
+  "returnYoutubeDislikeDescription": "Показувати оціночну кількість дизлайків відео за допомогою API, наданого returnyoutubedislike.com",
+  "@returnYoutubeDislikeDescription": {
+    "description": "ReturnYoutubeDislike setting description"
   }
 }
