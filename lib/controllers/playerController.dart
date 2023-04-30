@@ -189,9 +189,9 @@ class PlayerController extends GetxController {
 
     bool isHls = video.hlsUrl != null;
     String videoUrl = isHls
-        ? '${video.hlsUrl!}${service.useProxy ? '?local=true' : ''}'
+        ? '${video.hlsUrl!}${service.useProxy() ? '?local=true' : ''}'
         : useDash
-            ? '${video.dashUrl}${service.useProxy ? '?local=true' : ''}'
+            ? '${video.dashUrl}${service.useProxy() ? '?local=true' : ''}'
             : video.formatStreams[video.formatStreams.length - 1].url;
 
     log.info('Playing url (dash ${useDash},  hasHls ? ${video.hlsUrl != null})  ${videoUrl}');
