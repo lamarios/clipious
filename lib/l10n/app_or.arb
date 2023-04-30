@@ -260,7 +260,7 @@
   "@useDynamicTheme": {
     "description": ""
   },
-  "useDynamicThemeDescription": "ତୁମେ ରଙ୍ଗ ବ୍ୟବହାର କର (କେବଳ ଆଣ୍ଡ୍ରଏଡ୍ 12 ରେ ଉପଲବ୍ଧ) । ଆପ୍ ପୁନଃଆରମ୍ଭ ଆବଶ୍ୟକ କରେ",
+  "useDynamicThemeDescription": "ତୁମେ ରଙ୍ଗ ବ୍ୟବହାର କର (କେବଳ ଆଣ୍ଡ୍ରଏଡ୍ 12 ରେ ଉପଲବ୍ଧ)",
   "@useDynamicThemeDescription": {
     "description": ""
   },
@@ -435,7 +435,7 @@
   "@sponsorBlockCategoryMusicOffTopicDescription": {
     "description": "Only for use in music videos. This only should be used for sections of music videos that aren't already covered by another category."
   },
-  "useProxyDescription": "ସର୍ଭରରୁ ଭିଡିଓ ଷ୍ଟ୍ରିମ୍ ପ୍ରକ୍ସିଂ କରି, ଆପଣ ଆଞ୍ଚଳିକ ବ୍ଲକଗୁଡିକ କିମ୍ବା ୟୁଟ୍ୟୁବ୍ ଅବରୋଧ କରୁଥିବା ISP ବାଇପାସ୍ କରିପାରିବେ । ଆପ୍ ପୁନଃଆରମ୍ଭ ଆବଶ୍ୟକ କରେ",
+  "useProxyDescription": "ସର୍ଭରରୁ ଭିଡିଓ ଷ୍ଟ୍ରିମ୍ ପ୍ରକ୍ସିଂ କରି, ଆପଣ ଆଞ୍ଚଳିକ ବ୍ଲକଗୁଡିକ କିମ୍ବା ୟୁଟ୍ୟୁବ୍ ଅବରୋଧ କରୁଥିବା ISP ବାଇପାସ୍ କରିପାରିବେ",
   "@useProxyDescription": {
     "description": "Description for the use proxy settings"
   },
@@ -511,7 +511,7 @@
   "@playbackSpeed": {
     "description": "Name of TV ui Playback speed"
   },
-  "blackBackgroundDescription": "OLED ସ୍କ୍ରିନରେ ଗାଢ ଥିମ୍ ପାଇଁ । ଆପ୍ ପୁନଃଆରମ୍ଭ ଆବଶ୍ୟକ କରେ ।",
+  "blackBackgroundDescription": "OLED ସ୍କ୍ରିନରେ ଗାଢ ଥିମ୍ ପାଇଁ",
   "@blackBackgroundDescription": {
     "description": "Description for dark background setting"
   },
