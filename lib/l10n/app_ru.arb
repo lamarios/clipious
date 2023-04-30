@@ -282,7 +282,7 @@
   "@useDynamicTheme": {
     "description": ""
   },
-  "useDynamicThemeDescription": "Используйте цвета Material You (доступно только на Android 12+). Требуется перезапуск приложения",
+  "useDynamicThemeDescription": "Используйте цвета Material You (доступно только на Android 12+)",
   "@useDynamicThemeDescription": {
     "description": ""
   },
@@ -419,7 +419,7 @@
   "@sponsorBlockCategoryOutro": {
     "description": "Outro block 'Outro' Category"
   },
-  "blackBackgroundDescription": "Для темной темы на OLED-экране. Требуется перезапуск приложения.",
+  "blackBackgroundDescription": "Для темной темы на OLED-экране",
   "@blackBackgroundDescription": {
     "description": "Description for dark background setting"
   },
@@ -515,7 +515,7 @@
   "@skipSslVerification": {
     "description": "Setting label to skip ssl certification verification"
   },
-  "useProxyDescription": "Проксируя видеопотоки с сервера, вы можете обойти региональные блокировки или блокировки провайдера YouTube. Требуется перезапуск приложения",
+  "useProxyDescription": "Проксируя видеопотоки с сервера, вы можете обойти региональные блокировки или блокировки провайдера YouTube",
   "@useProxyDescription": {
     "description": "Description for the use proxy settings"
   },
