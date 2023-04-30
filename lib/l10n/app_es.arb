@@ -247,7 +247,7 @@
   "@useDynamicTheme": {
     "description": ""
   },
-  "useDynamicThemeDescription": "Use los colores de Material You (solo disponible en Android 12+). Requiere reiniciar la aplicación",
+  "useDynamicThemeDescription": "Usa los colores de Material You (solo disponible en Android 12+)",
   "@useDynamicThemeDescription": {
     "description": ""
   },
@@ -441,7 +441,7 @@
   "@useProxy": {
     "description": "label for settings switch to proxy videos from server"
   },
-  "useProxyDescription": "Mediante la transmisión proxy de secuencias de vídeo desde el servidor, puedes evitar los bloqueos regionales o el bloqueo de YouTube por parte de los ISP. Requiere reiniciar la aplicación",
+  "useProxyDescription": "Mediante la transmisión proxy de secuencias de vídeo desde el servidor, puedes evitar los bloqueos regionales o el bloqueo de YouTube por parte de los ISP",
   "@useProxyDescription": {
     "description": "Description for the use proxy settings"
   },
@@ -503,7 +503,7 @@
   "@subtitles": {
     "description": "Name of TV ui subtitles settings"
   },
-  "blackBackgroundDescription": "Para el tema oscuro en una pantalla OLED. Requiere reiniciar la aplicación.",
+  "blackBackgroundDescription": "Para el tema oscuro en una pantalla OLED",
   "@blackBackgroundDescription": {
     "description": "Description for dark background setting"
   },
