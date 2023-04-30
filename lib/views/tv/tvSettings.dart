@@ -128,7 +128,7 @@ class TVSettings extends StatelessWidget {
                     ),
                     SettingsTile(
                       title: locals.appLanguage,
-                      description: '${_.getLocaleDisplayName() ?? locals.followSystem}. ${locals.requiresRestart}',
+                      description: _.getLocaleDisplayName() ?? locals.followSystem,
                       onSelected: (context) => showSelectLanguage(context, _),
                     ),
                     SettingsTile(
@@ -204,7 +204,7 @@ class TVSettings extends StatelessWidget {
                     SettingsTitle(title: locals.appearance),
                     SettingsTile(
                       title: locals.themeBrightness,
-                      description: '${_.getThemeLabel(locals, _.themeMode)}. ${locals.requiresRestart}',
+                      description: _.getThemeLabel(locals, _.themeMode),
                       onSelected: (context) => selectTheme(context, _),
                     ),
                     SettingsTile(

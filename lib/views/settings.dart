@@ -152,7 +152,7 @@ class Settings extends StatelessWidget {
                   ),
                   SettingsTile(
                     title: Text(locals.appLanguage),
-                    value: Text('${_.getLocaleDisplayName() ?? locals.followSystem}. ${locals.requiresRestart}'),
+                    value: Text(_.getLocaleDisplayName() ?? locals.followSystem),
                     onPressed: (context) => showSelectLanguage(context, _),
                   ),
                   SettingsTile.switchTile(
@@ -218,7 +218,7 @@ class Settings extends StatelessWidget {
                   ),
                   SettingsTile(
                     title: Text(locals.themeBrightness),
-                    value: Text('${_.getThemeLabel(locals, _.themeMode)}. ${locals.requiresRestart}'),
+                    value: Text(_.getThemeLabel(locals, _.themeMode)),
                     onPressed: (context) => selectTheme(context, _),
                   ),
                   SettingsTile.switchTile(
