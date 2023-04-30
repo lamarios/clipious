@@ -120,7 +120,7 @@ class TvVideoView extends StatelessWidget {
                               const Icon(Icons.thumb_down, size: 20),
                               Padding(
                                 padding: const EdgeInsets.only(left: 4),
-                                child: Text(compactCurrency.format(_.dislikes)),
+                                child: Text(compactCurrency.format(_.dislikes).replaceAll(".00", "")),
                               ),
                             ],
                             const Padding(

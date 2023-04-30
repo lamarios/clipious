@@ -85,7 +85,7 @@ class VideoInfo extends StatelessWidget {
                     visible: (dislikes ?? 0) > 0,
                     child: Padding(
                       padding: const EdgeInsets.only(left: 3.0),
-                      child: Text(compactCurrency.format(dislikes)),
+                      child: Text(compactCurrency.format(dislikes ?? 0).replaceAll(".00", "")),
                     )),
                 Expanded(child: Container()),
                 Visibility(
