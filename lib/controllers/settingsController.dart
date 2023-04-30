@@ -12,6 +12,7 @@ import '../models/country.dart';
 import '../models/db/server.dart';
 import '../models/db/settings.dart';
 import '../utils.dart';
+import 'appController.dart';
 
 const String subtitleDefaultSize = '14';
 
@@ -50,6 +51,7 @@ class SettingsController extends GetxController {
     db.saveSetting(SettingsValue(DYNAMIC_THEME, value.toString()));
     useDynamicTheme = value;
     update();
+    updateApp();
   }
 
   toggleDash(bool value) {
@@ -106,6 +108,7 @@ class SettingsController extends GetxController {
     db.saveSetting(SettingsValue(BLACK_BACKGROUND, value.toString()));
     blackBackground = value;
     update();
+    AppController.to()?.update();
   }
 
   changeSubtitleSize({required bool increase}) {
@@ -137,6 +140,7 @@ class SettingsController extends GetxController {
       db.saveSetting(SettingsValue(THEME_MODE, theme.name));
     }
     update();
+    updateApp();
   }
 
   setLocale(List<Locale> locals, List<String> localStrings, String? locale) {
@@ -157,6 +161,11 @@ class SettingsController extends GetxController {
       db.saveSetting(SettingsValue(LOCALE, toSave));
     }
     update();
+    updateApp();
+  }
+
+  updateApp(){
+    AppController.to()?.update();
   }
 
   String? getLocaleDisplayName() {

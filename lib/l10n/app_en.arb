@@ -319,7 +319,7 @@
   "@useDynamicTheme": {
     "description": ""
   },
-  "useDynamicThemeDescription": "Use Material You colors (only available on Android 12+). Requires app restart",
+  "useDynamicThemeDescription": "Use Material You colors (only available on Android 12+)",
   "@useDynamicThemeDescription": {
     "description": ""
   },
@@ -473,7 +473,7 @@
   "@useProxy": {
     "description": "label for settings switch to proxy videos from server"
   },
-  "useProxyDescription": "By proxying video streams from the server, you can bypass regional blocks or ISP blocking YouTube. Requires app restart",
+  "useProxyDescription": "By proxying video streams from the server, you can bypass regional blocks or ISP blocking YouTube",
   "@useProxyDescription": {
     "description": "Description for the use proxy settings"
   },
@@ -501,7 +501,7 @@
   "@blackBackground": {
     "description": "Settings name for black background"
   },
-  "blackBackgroundDescription": "For dark theme on OLED screen. Requires app restart.",
+  "blackBackgroundDescription": "For dark theme on OLED screen",
   "@blackBackgroundDescription": {
     "description": "Description for dark background setting"
   },

@@ -25,6 +25,7 @@ import 'package:invidious/views/tv/tvWelcomeWizard.dart';
 import 'package:invidious/views/welcomeWizard.dart';
 import 'package:logging/logging.dart';
 
+import 'controllers/appController.dart';
 import 'database.dart';
 import 'myRouteObserver.dart';
 
@@ -56,7 +57,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     bool showWizard = false;
-    bool useDynamicTheme = db.getSettings(DYNAMIC_THEME)?.value == 'true';
     try {
       db.getCurrentlySelectedServer();
     } catch (err) {
@@ -64,84 +64,91 @@ class MyApp extends StatelessWidget {
     }
 
     // TODO: implement build
-    return DynamicColorBuilder(builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) {
-      ColorScheme lightColorScheme;
-      ColorScheme darkColorScheme;
+    return GetBuilder<AppController>(
+        init: AppController(),
+        builder: (_) {
 
-      if (useDynamicTheme && lightDynamic != null && darkDynamic != null) {
-        // On Android S+ devices, use the provided dynamic color scheme.
-        // (Recommended) Harmonize the dynamic color scheme' built-in semantic colors.
-        lightColorScheme = lightDynamic.harmonized();
-        // (Optional) Customize the scheme as desired. For example, one might
-        // want to use a brand color to override the dynamic [ColorScheme.secondary].
-        // lightColorScheme = lightColorScheme.copyWith(secondary: brandColor);
-        // (Optional) If applicable, harmonize custom colors.
-        // lightCustomColors = lightCustomColors.harmonized(lightColorScheme);
+          bool useDynamicTheme = db.getSettings(DYNAMIC_THEME)?.value == 'true';
 
-        // Repeat for the dark color scheme.
-        darkColorScheme = darkDynamic.harmonized();
-        // darkColorScheme = darkColorScheme.copyWith(secondary: brandColor);
-        // darkCustomColors = darkCustomColors.harmonized(darkColorScheme);
+          return DynamicColorBuilder(builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) {
+            ColorScheme lightColorScheme;
+            ColorScheme darkColorScheme;
 
-        // _isDemoUsingDynamicColors = true; // ignore, only for demo purposes
-      } else {
-        // Otherwise, use fallback schemes.
-        lightColorScheme = ColorScheme.fromSeed(
-          seedColor: brandColor,
-        );
-        darkColorScheme = ColorScheme.fromSeed(
-          seedColor: brandColor,
-          brightness: Brightness.dark,
-        );
-      }
+            if (useDynamicTheme && lightDynamic != null && darkDynamic != null) {
+              // On Android S+ devices, use the provided dynamic color scheme.
+              // (Recommended) Harmonize the dynamic color scheme' built-in semantic colors.
+              lightColorScheme = lightDynamic.harmonized();
+              // (Optional) Customize the scheme as desired. For example, one might
+              // want to use a brand color to override the dynamic [ColorScheme.secondary].
+              // lightColorScheme = lightColorScheme.copyWith(secondary: brandColor);
+              // (Optional) If applicable, harmonize custom colors.
+              // lightCustomColors = lightCustomColors.harmonized(lightColorScheme);
 
-      if (db.getSettings(BLACK_BACKGROUND)?.value == 'true') {
-        darkColorScheme = darkColorScheme.copyWith(background: Colors.black);
-      }
+              // Repeat for the dark color scheme.
+              darkColorScheme = darkDynamic.harmonized();
+              // darkColorScheme = darkColorScheme.copyWith(secondary: brandColor);
+              // darkCustomColors = darkCustomColors.harmonized(darkColorScheme);
 
-      List<String>? localeString = db.getSettings(LOCALE)?.value.split('_');
-      Locale? locale = localeString != null ? Locale.fromSubtags(languageCode: localeString[0], scriptCode: localeString.length >= 2 ? localeString[1] : null) : null;
+              // _isDemoUsingDynamicColors = true; // ignore, only for demo purposes
+            } else {
+              // Otherwise, use fallback schemes.
+              lightColorScheme = ColorScheme.fromSeed(
+                seedColor: brandColor,
+              );
+              darkColorScheme = ColorScheme.fromSeed(
+                seedColor: brandColor,
+                brightness: Brightness.dark,
+              );
+            }
 
-      return GetMaterialApp(
-          locale: locale,
-          localizationsDelegates: AppLocalizations.localizationsDelegates,
-          supportedLocales: AppLocalizations.supportedLocales,
-          scaffoldMessengerKey: scaffoldKey,
-          navigatorKey: globalNavigator,
-          debugShowCheckedModeBanner: false,
-          themeMode: ThemeMode.values.firstWhere((element) => element.name == db.getSettings(THEME_MODE)?.value, orElse: () => ThemeMode.system),
-          title: 'Clipious',
-          theme: ThemeData(
-            useMaterial3: true,
-            colorScheme: lightColorScheme,
-          ),
-          darkTheme: ThemeData(useMaterial3: true, colorScheme: darkColorScheme),
-          home: Shortcuts(
-            shortcuts: <LogicalKeySet, Intent>{
-              LogicalKeySet(LogicalKeyboardKey.select): const ActivateIntent(),
-            },
-            child: isTv
-                ? showWizard
-                    ? const TvWelcomeWizard()
-                    : const TvHome()
-                : Stack(
-                    children: [
-                      MiniPlayerAware(
-                        child: Navigator(
-                            observers: [MyRouteObserver()],
-                            key: navigatorKey,
-                            initialRoute: '/',
-                            onGenerateRoute: (settings) {
-                              if (settings.name == '/') {
-                                return GetPageRoute(page: () => showWizard ? const WelcomeWizard() : const Home());
-                              }
-                            }),
-                      ),
-                      const MiniPlayer()
-                    ],
-                  ),
-          ));
-    });
+            if (db.getSettings(BLACK_BACKGROUND)?.value == 'true') {
+              darkColorScheme = darkColorScheme.copyWith(background: Colors.black);
+            }
+
+            List<String>? localeString = db.getSettings(LOCALE)?.value.split('_');
+            Locale? locale = localeString != null ? Locale.fromSubtags(languageCode: localeString[0], scriptCode: localeString.length >= 2 ? localeString[1] : null) : null;
+
+            return GetMaterialApp(
+                locale: locale,
+                localizationsDelegates: AppLocalizations.localizationsDelegates,
+                supportedLocales: AppLocalizations.supportedLocales,
+                scaffoldMessengerKey: scaffoldKey,
+                navigatorKey: globalNavigator,
+                debugShowCheckedModeBanner: false,
+                themeMode: ThemeMode.values.firstWhere((element) => element.name == db.getSettings(THEME_MODE)?.value, orElse: () => ThemeMode.system),
+                title: 'Clipious',
+                theme: ThemeData(
+                  useMaterial3: true,
+                  colorScheme: lightColorScheme,
+                ),
+                darkTheme: ThemeData(useMaterial3: true, colorScheme: darkColorScheme),
+                home: Shortcuts(
+                  shortcuts: <LogicalKeySet, Intent>{
+                    LogicalKeySet(LogicalKeyboardKey.select): const ActivateIntent(),
+                  },
+                  child: isTv
+                      ? showWizard
+                          ? const TvWelcomeWizard()
+                          : const TvHome()
+                      : Stack(
+                          children: [
+                            MiniPlayerAware(
+                              child: Navigator(
+                                  observers: [MyRouteObserver()],
+                                  key: navigatorKey,
+                                  initialRoute: '/',
+                                  onGenerateRoute: (settings) {
+                                    if (settings.name == '/') {
+                                      return GetPageRoute(page: () => showWizard ? const WelcomeWizard() : const Home());
+                                    }
+                                  }),
+                            ),
+                            const MiniPlayer()
+                          ],
+                        ),
+                ));
+          });
+        });
   }
 }
 

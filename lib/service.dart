@@ -1,8 +1,6 @@
 import 'dart:convert';
 
 import 'package:fbroadcast/fbroadcast.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_web_auth/flutter_web_auth.dart';
 import 'package:http/http.dart';
 import 'package:http/http.dart' as http;
@@ -16,7 +14,6 @@ import 'package:invidious/models/sponsorSegment.dart';
 import 'package:invidious/models/userFeed.dart';
 import 'package:invidious/models/video.dart';
 import 'package:invidious/models/videoInList.dart';
-import 'package:invidious/views/subscriptions.dart';
 import 'package:logging/logging.dart';
 
 import 'models/channel.dart';
@@ -57,7 +54,6 @@ const MAX_PING = 9007199254740991;
 
 class Service {
   final log = Logger('Service');
-  final bool useProxy = db.getSettings(USE_PROXY)?.value == 'true';
 
   handleResponse(Response response) {
     var body = utf8.decode(response.bodyBytes);
@@ -83,17 +79,19 @@ class Service {
     }
   }
 
+  bool useProxy() {
+    return db.getSettings(USE_PROXY)?.value == 'true';
+  }
+
   Uri buildUrl(String baseUrl, {Map<String, String>? pathParams, Map<String, String?>? query}) {
     try {
-      String url = '${db
-          .getCurrentlySelectedServer()
-          .url}$baseUrl';
+      String url = '${db.getCurrentlySelectedServer().url}$baseUrl';
 
       pathParams?.forEach((key, value) {
         url = url.replaceAll(key, value);
       });
 
-      if (useProxy) {
+      if (useProxy()) {
         query ??= {};
         query['local'] = 'true';
       }
@@ -152,9 +150,7 @@ class Service {
     String url = '$serverUrl/authorize_token?scopes=:feed,:subscriptions*,:playlists*&callback_url=clipious-auth://';
     final result = await FlutterWebAuth.authenticate(url: url, callbackUrlScheme: 'clipious-auth');
 
-    final token = Uri
-        .parse(result)
-        .queryParameters['token'];
+    final token = Uri.parse(result).queryParameters['token'];
 
     Server? server = db.getServer(serverUrl);
 
@@ -183,9 +179,7 @@ class Service {
   }
 
   Future<List<VideoInList>> getTrending({String? type}) async {
-    String countryCode = db
-        .getSettings(BROWSING_COUNTRY)
-        ?.value ?? 'US';
+    String countryCode = db.getSettings(BROWSING_COUNTRY)?.value ?? 'US';
     // parse.queryParameters['region'] = countryCode;
     Map<String, String>? query = {'region': countryCode};
 
@@ -250,7 +244,6 @@ class Service {
       if (categories.isNotEmpty) {
         url += '&categories=[${categories.map((e) => '"${e.name}"').join(",")}]';
       }
-
 
       log.info('Calling $url');
       final response = await http.get(Uri.parse(url));
@@ -430,18 +423,14 @@ class Service {
   }
 
   Future<Duration?> pingServer(String url) async {
-    int start = DateTime
-        .now()
-        .millisecondsSinceEpoch;
+    int start = DateTime.now().millisecondsSinceEpoch;
     String fullUri = '$url${STATS}';
     log.info('calling ${fullUri}');
     final response = await http.get(Uri.parse(fullUri), headers: {'Content-Type': 'application/json; charset=utf-16'});
 
     try {
       handleResponse(response);
-      var diff = DateTime
-          .now()
-          .millisecondsSinceEpoch - start;
+      var diff = DateTime.now().millisecondsSinceEpoch - start;
       return Duration(milliseconds: diff);
     } catch (err) {
       log.info(err);
