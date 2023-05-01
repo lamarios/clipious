@@ -87,7 +87,7 @@
   "@yourServers": {
     "description": "Your servers label"
   },
-  "useDynamicThemeDescription": "Usar cores Material You (apenas disponível no Android 12+). Requer reinício do aplicativo",
+  "useDynamicThemeDescription": "Usar cores Material You (apenas disponível no Android 12+)",
   "@useDynamicThemeDescription": {
     "description": ""
   },
@@ -294,7 +294,7 @@
   "@couldntFetchVideos": {
     "description": "Can't load bunch of videos, asking  user to try again"
   },
-  "wizardIntro": "Selecione um servidor público ou adicione o seu próprio. (Pode ser alterado mais tarde nas definições.)",
+  "wizardIntro": "Selecione um servidor público ou adicione o seu próprio. (Pode ser alterado mais tarde nas definições)",
   "@wizardIntro": {
     "description": "Welcome message on frst time use"
   },
@@ -459,7 +459,7 @@
   "@useProxy": {
     "description": "label for settings switch to proxy videos from server"
   },
-  "useProxyDescription": "Ao fazer proxy de fluxos de vídeo do servidor, você pode ignorar bloqueios regionais ou ISP bloqueando o YouTube. Requer o reinício da aplicação",
+  "useProxyDescription": "Ao fazer proxy de fluxos de vídeo do servidor, você pode ignorar bloqueios regionais ou ISP bloqueando o YouTube",
   "@useProxyDescription": {
     "description": "Description for the use proxy settings"
   },
@@ -479,7 +479,7 @@
   "@sponsorBlockCategoryIntro": {
     "description": "Sponsorblock 'Intro' Category"
   },
-  "sponsorBlockCategoryPreviewDescription": "Coleção de clips que mostram o que está a aparecer neste vídeo ou noutros vídeos de uma série onde toda a informação é repetida mais tarde no vídeo",
+  "sponsorBlockCategoryPreviewDescription": "Coleção de clips que mostram o que está a aparecer neste vídeo ou noutros vídeos de uma série onde toda a informação é repetida mais tarde no vídeo.",
   "@sponsorBlockCategoryPreviewDescription": {
     "description": "Sponsorblock 'Preview' Category description"
   },
@@ -491,7 +491,7 @@
   "@blackBackground": {
     "description": "Black backgroun option label for dark theme with oled"
   },
-  "blackBackgroundDescription": "Para tema escuro no ecrã OLED. Requer reinício do aplicativo.",
+  "blackBackgroundDescription": "Para tema escuro no ecrã OLED",
   "@blackBackgroundDescription": {
     "description": ""
   },
@@ -534,5 +534,33 @@
   "skipSslVerificationDescription": "Para usar um certificado SSL auto-assinado, ou quando tiver problemas relacionados com SSL com o seu servidor.",
   "@skipSslVerificationDescription": {
     "description": "Setting description for the skip ssl certification verification"
+  },
+  "returnYoutubeDislikeDescription": "Mostrar a estimativa de aversões a vídeos utilizando a API fornecida por returnyoutubedislike.com",
+  "@returnYoutubeDislikeDescription": {
+    "description": "ReturnYoutubeDislike setting description"
+  },
+  "themeBrightness": "Tema",
+  "@themeBrightness": {
+    "description": "Ask the user to user dark / light / system theme"
+  },
+  "themeLight": "Claro",
+  "@themeLight": {
+    "description": "Light theme"
+  },
+  "themeDark": "Escuro",
+  "@themeDark": {
+    "description": "Dark theme"
+  },
+  "followSystem": "Seguir sistema",
+  "@followSystem": {
+    "description": "Follow system label"
+  },
+  "requiresRestart": "Requer reinício da aplicação",
+  "@requiresRestart": {
+    "description": "Requires app restart label"
+  },
+  "appLanguage": "Idioma da aplicação",
+  "@appLanguage": {
+    "description": "Select app language"
   }
 }
