@@ -16,6 +16,7 @@ const DYNAMIC_THEME = 'dynamic-theme';
 const USE_DASH = 'use-dash';
 const PLAYER_REPEAT = 'player-repeat';
 const PLAYER_SHUFFLE = 'player-shuffle';
+const PLAYER_AUTOPLAY_ON_LOAD = 'player-autoplay-on-load';
 const PLAY_RECOMMENDED_NEXT = 'play-recommended-next';
 const USE_PROXY = 'use-proxy';
 const USE_RETURN_YOUTUBE_DISLIKE = 'use-return-youtube-dislike';

@@ -28,6 +28,7 @@ class SettingsController extends GetxController {
   bool useDynamicTheme = db.getSettings(DYNAMIC_THEME)?.value == 'true';
   bool useDash = db.getSettings(USE_DASH)?.value == 'true';
   bool useProxy = db.getSettings(USE_PROXY)?.value == 'true';
+  bool autoplayVideoOnLoad = db.getSettings(PLAYER_AUTOPLAY_ON_LOAD)?.value == 'true';
   bool useReturnYoutubeDislike = db.getSettings(USE_RETURN_YOUTUBE_DISLIKE)?.value == 'true';
   bool blackBackground = db.getSettings(BLACK_BACKGROUND)?.value == 'true';
   double subtitleSize = double.parse(db.getSettings(SUBTITLE_SIZE)?.value ?? subtitleDefaultSize);
@@ -63,6 +64,12 @@ class SettingsController extends GetxController {
   toggleProxy(bool value) {
     db.saveSetting(SettingsValue(USE_PROXY, value.toString()));
     useProxy = value;
+    update();
+  }
+
+  toggleAutoplayOnLoad(bool value) {
+    db.saveSetting(SettingsValue(PLAYER_AUTOPLAY_ON_LOAD, value.toString()));
+    autoplayVideoOnLoad = value;
     update();
   }
 

@@ -189,6 +189,12 @@ class Settings extends StatelessWidget {
                   title: Text(locals.useProxy),
                   description: Text(locals.useProxyDescription),
                 ),
+                SettingsTile.switchTile(
+                  initialValue: _.autoplayVideoOnLoad,
+                  onToggle: _.toggleAutoplayOnLoad,
+                  title: Text(locals.autoplayVideoOnLoad),
+                  description: Text(locals.autoplayVideoOnLoadDescription),
+                ),
                 SettingsTile(
                   title: Text(locals.subtitleFontSize),
                   description: Text(locals.subtitleFontSizeDescription),

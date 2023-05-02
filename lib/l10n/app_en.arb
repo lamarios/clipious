@@ -559,8 +559,16 @@
       }
     }
   },
-    "returnYoutubeDislikeDescription": "Show estimated video dislikes using API provided by returnyoutubedislike.com",
-    "@returnYoutubeDislikeDescription": {
-        "description": "ReturnYoutubeDislike setting description"
-    }
+  "returnYoutubeDislikeDescription": "Show estimated video dislikes using API provided by returnyoutubedislike.com",
+  "@returnYoutubeDislikeDescription": {
+    "description": "ReturnYoutubeDislike setting description"
+  },
+  "autoplayVideoOnLoad": "Automatically play video on load",
+  "@autoplayVideoOnLoad": {
+    "description": "Label for settings to enable autoplay when a video loads"
+  },
+  "autoplayVideoOnLoadDescription": "Automatically start playing the video after it has loaded",
+  "@autoplayVideoOnLoadDescription": {
+    "description": "Description for the autoplay video on load setting"
+  }
 }

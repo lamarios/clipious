@@ -19,6 +19,7 @@ class VideoController extends GetxController {
   Video? video;
   int dislikes = 0;
   bool loadingVideo = true;
+  bool autoplayOnLoad = db.getSettings(PLAYER_AUTOPLAY_ON_LOAD)?.value == 'true';
   bool playRecommendedNext = db.getSettings(PLAY_RECOMMENDED_NEXT)?.value == 'true';
   bool getDislikes = db.getSettings(USE_RETURN_YOUTUBE_DISLIKE)?.value == 'true';
 
@@ -46,6 +47,10 @@ class VideoController extends GetxController {
       }
 
       update();
+
+      if (autoplayOnLoad) {
+        playVideo();
+      }
     } catch (err) {
       if (err is InvidiousServiceError) {
         error = (err).message;
