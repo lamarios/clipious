@@ -287,7 +287,7 @@
   "@loggedIn": {
     "description": "Label to tell the user that he is logged in to the server"
   },
-  "notLoggedIn": "Not logged in. Tap to log in.",
+  "notLoggedIn": "Not logged in",
   "@notLoggedIn": {
     "description": "Label when the user is not logged in to the server"
   },

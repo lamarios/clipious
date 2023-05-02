@@ -356,11 +356,15 @@ class Service {
   Future<List<Playlist>> getUserPlaylists() async {
     var currentlySelectedServer = db.getCurrentlySelectedServer();
 
-    var headers = getAuthenticationHeaders(currentlySelectedServer);
+    try {
+      var headers = getAuthenticationHeaders(currentlySelectedServer);
 
-    final response = await http.get(buildUrl(GET_USER_PLAYLISTS), headers: headers);
-    Iterable i = handleResponse(response);
-    return List<Playlist>.from(i.map((e) => Playlist.fromJson(e)));
+      final response = await http.get(buildUrl(GET_USER_PLAYLISTS), headers: headers);
+      Iterable i = handleResponse(response);
+      return List<Playlist>.from(i.map((e) => Playlist.fromJson(e)));
+    } catch (e) {
+      return [];
+    }
   }
 
   Future<ChannelPlaylists> getChannelPlaylists(String channelId, {String? continuation}) async {

@@ -11,6 +11,7 @@ class AddToPlaylistController extends GetxController {
   String videoId;
 
   bool loading = true;
+  bool isLoggedIn = service.isLoggedIn();
 
   AddToPlaylistController(this.videoId);
 
@@ -30,9 +31,10 @@ class AddToPlaylistController extends GetxController {
   @override
   Future<void> onReady() async {
     super.onReady();
-    List<Playlist> pl = await service.getUserPlaylists();
+    if (isLoggedIn) {
+      playlists = await service.getUserPlaylists();
+    }
     loading = false;
-    playlists = pl;
     update();
   }
 }
