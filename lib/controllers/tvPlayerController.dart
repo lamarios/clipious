@@ -1,5 +1,6 @@
 import 'package:better_player/better_player.dart';
 import 'package:easy_debounce/easy_debounce.dart';
+import 'package:easy_debounce/easy_throttle.dart';
 import 'package:flutter/src/services/hardware_keyboard.dart';
 import 'package:flutter/src/widgets/focus_manager.dart';
 import 'package:get/get.dart';
@@ -9,6 +10,7 @@ import 'package:logging/logging.dart';
 import '../utils.dart';
 
 const Duration controlFadeOut = Duration(seconds: 4);
+const Duration throttleDuration = Duration(milliseconds: 250);
 
 class TvPlayerController extends GetxController {
   Logger logger = Logger('TvPlayerController');
@@ -96,6 +98,24 @@ class TvPlayerController extends GetxController {
           log.info('showing video settings');
           showSettings = true;
           update();
+        }
+      }
+    }
+    if (event is KeyRepeatEvent) {
+      if (!showSettings) {
+        if (event.logicalKey == LogicalKeyboardKey.arrowRight) {
+          EasyThrottle.throttle(
+              'hold-seek-forward',
+              throttleDuration,
+              () => PlayerController.to()?.videoController?.seekTo(currentPosition + const Duration(seconds: 10))
+          );
+        }
+        if (event.logicalKey == LogicalKeyboardKey.arrowLeft) {
+          EasyThrottle.throttle(
+              'hold-seek-backward',
+              throttleDuration,
+              () => PlayerController.to()?.videoController?.seekTo(currentPosition - const Duration(seconds: 10))
+          );
         }
       }
     }
