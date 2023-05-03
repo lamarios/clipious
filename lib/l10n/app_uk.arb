@@ -299,7 +299,7 @@
   "@blackBackground": {
     "description": "Black backgroun option label for dark theme with oled"
   },
-  "blackBackgroundDescription": "Для темної теми на OLED-екрані. Потрібен перезапуск застосунку.",
+  "blackBackgroundDescription": "Для темної теми на OLED-екрані",
   "@blackBackgroundDescription": {
     "description": ""
   },
@@ -415,7 +415,7 @@
   "@addServerHelpText": {
     "description": "label for when the user hasn't chosen a server yet"
   },
-  "useDynamicThemeDescription": "Використовувати кольори Material You (доступно лише на Android 12+). Потрібен перезапуск застосунку",
+  "useDynamicThemeDescription": "Використовувати кольори Material You (доступно лише на Android 12+)",
   "@useDynamicThemeDescription": {
     "description": ""
   },
@@ -491,7 +491,7 @@
   "@useProxy": {
     "description": "label for settings switch to proxy videos from server"
   },
-  "useProxyDescription": "Проксі-сервер дозволяє обходити регіональні блоки або блокування YouTube провайдером. Потрібен перезапуск застосунку",
+  "useProxyDescription": "Проксі-сервер дозволяє обходити регіональні блоки або блокування YouTube провайдером",
   "@useProxyDescription": {
     "description": "Description for the use proxy settings"
   },
