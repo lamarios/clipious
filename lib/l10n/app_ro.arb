@@ -343,7 +343,7 @@
   "@appearance": {
     "description": "Settings category title"
   },
-  "useDynamicThemeDescription": "Folosiți culorile Material You (disponibil numai pe Android 12+). Necesită repornirea aplicației",
+  "useDynamicThemeDescription": "Folosiți culorile Material You (disponibil numai pe Android 12+)",
   "@useDynamicThemeDescription": {
     "description": ""
   },
@@ -483,11 +483,11 @@
   "@sponsorBlockCategoryMusicOffTopicDescription": {
     "description": "Only for use in music videos. This only should be used for sections of music videos that aren't already covered by another category."
   },
-  "useProxyDescription": "Prin proxy fluxurile video de pe server, puteți ocoli blocările regionale sau blocarea ISP-ului YouTube. Necesită repornirea aplicației",
+  "useProxyDescription": "Prin proxy fluxurile video de pe server, puteți ocoli blocările regionale sau blocarea ISP-ului YouTube",
   "@useProxyDescription": {
     "description": "Description for the use proxy settings"
   },
-  "blackBackgroundDescription": "Pentru tema întunecată pe ecranul OLED. Necesită repornirea aplicației.",
+  "blackBackgroundDescription": "Pentru tema întunecată pe ecranul OLED",
   "@blackBackgroundDescription": {
     "description": "Description for dark background setting"
   },
