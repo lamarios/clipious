@@ -570,5 +570,29 @@
   "autoplayVideoOnLoadDescription": "Automatically start playing the video after it has loaded",
   "@autoplayVideoOnLoadDescription": {
     "description": "Description for the autoplay video on load setting"
+  },
+  "searchHistory": "Search history",
+  "@searchHistory": {
+    "description": "Settings label for search history"
+  },
+  "searchHistoryDescription": "Search history settings",
+  "@searchHistoryDescription": {
+    "description": "Description for search history settings"
+  },
+  "enableSearchHistory": "Enable search history",
+  "@enableSearchHistory": {
+    "description": "Settings label for enabling search history"
+  },
+  "searchHistoryLimit": "Search history limit",
+  "@searchHistoryLimit": {
+    "description": "Settings label for search history limit"
+  },
+  "searchHistoryLimitDescription": "Set how many previous searches will show up in suggestions",
+  "@searchHistoryLimitDescription": {
+    "description": "Settings label for search history limit description"
+  },
+  "clearSearchHistory": "Clear search history",
+  "@clearSearchHistory": {
+    "description": "Settings label for clearing search history"
   }
 }

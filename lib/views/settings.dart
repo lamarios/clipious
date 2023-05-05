@@ -4,6 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:invidious/myRouteObserver.dart';
 import 'package:invidious/utils.dart';
+import 'package:invidious/views/settings/searchHistorySettings.dart';
 import 'package:locale_names/locale_names.dart';
 import 'package:invidious/views/settings/sponsorBlockSettings.dart';
 import 'package:select_dialog/select_dialog.dart';
@@ -32,6 +33,10 @@ class Settings extends StatelessWidget {
 
   openSponsorBlockSettings(BuildContext context) {
     navigatorKey.currentState?.push(MaterialPageRoute(settings: ROUTE_SETTINGS_SPONSOR_BLOCK, builder: (context) => const SponsorBlockSettings()));
+  }
+
+  openSearchHistorySettings(BuildContext context) {
+    navigatorKey.currentState?.push(MaterialPageRoute(settings: ROUTE_SETTINGS_SEARCH_HISTORY, builder: (context) => const SearchHistorySettings()));
   }
 
   searchCountry(BuildContext context, SettingsController controller) {
@@ -160,6 +165,12 @@ class Settings extends StatelessWidget {
                     description: Text(locals.returnYoutubeDislikeDescription),
                     initialValue: _.useReturnYoutubeDislike,
                     onToggle: _.toggleReturnYoutubeDislike,
+                  ),
+                  SettingsTile.navigation(
+                    title: Text(locals.searchHistory),
+                    description: Text(locals.searchHistoryDescription),
+                    onPressed: openSearchHistorySettings,
+                    trailing: const Icon(Icons.manage_search),
                   ),
                 ],
               ),

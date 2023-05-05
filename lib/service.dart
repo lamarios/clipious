@@ -6,6 +6,7 @@ import 'package:http/http.dart';
 import 'package:http/http.dart' as http;
 import 'package:invidious/database.dart';
 import 'package:invidious/globals.dart';
+import 'package:invidious/models/db/searchHistoryItem.dart';
 import 'package:invidious/models/dislike.dart';
 import 'package:invidious/models/errors/invidiousServiceError.dart';
 import 'package:invidious/models/playlist.dart';
@@ -224,6 +225,15 @@ class Service {
     }
     log.info(results);
 
+    if (query.isNotEmpty && db.getSettings(USE_SEARCH_HISTORY)?.value == 'true') {
+      db.addToSearchHistory(
+          SearchHistoryItem(
+              query,
+              (DateTime.now().millisecondsSinceEpoch / 1000).round()
+          )
+      );
+    }
+    
     return results;
   }
 
@@ -255,6 +265,7 @@ class Service {
   }
 
   Future<SearchSuggestion> getSearchSuggestion(String query) async {
+    if (query.isEmpty) return SearchSuggestion(query, []);
     final response = await http.get(buildUrl(SEARCH_SUGGESTIONS, pathParams: {":query": Uri.encodeQueryComponent(query)}));
     SearchSuggestion search = SearchSuggestion.fromJson(handleResponse(response));
     if (search.suggestions.any((element) => element.contains(";"))) {

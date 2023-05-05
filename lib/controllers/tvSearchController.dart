@@ -8,12 +8,13 @@ import 'package:invidious/models/searchResult.dart';
 import '../models/searchSuggestion.dart';
 
 class TvSearchController extends GetxController {
-  List<String> suggestions = [];
+  List<String> suggestions = db.getSearchHistory();
   FocusNode resultFocus = FocusNode();
   FocusNode searchFocus = FocusNode();
   SearchResults? results;
   bool loading = false;
   TextEditingController queryController = TextEditingController();
+  bool usingHistory = true;
 
   @override
   onReady() {
@@ -37,9 +38,12 @@ class TvSearchController extends GetxController {
   }
 
   getSuggestions() {
-    EasyDebounce.debounce('search-suggnestion', const Duration(milliseconds: 500), () async {
+    EasyDebounce.debounce('search-suggestion', const Duration(milliseconds: 500), () async {
       SearchSuggestion s = await service.getSearchSuggestion(queryController.value.text);
-      suggestions = s.suggestions;
+      if (s.suggestions.isNotEmpty) {
+        suggestions = s.suggestions;
+        usingHistory = false;
+      }
       update();
     });
   }

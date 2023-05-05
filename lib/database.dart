@@ -1,4 +1,6 @@
+import 'package:invidious/controllers/settingsController.dart';
 import 'package:invidious/models/db/progress.dart';
+import 'package:invidious/models/db/searchHistoryItem.dart';
 import 'package:invidious/models/db/settings.dart';
 import 'package:invidious/models/errors/noServerSelected.dart';
 import 'package:logging/logging.dart';
@@ -25,6 +27,8 @@ const SUBTITLE_SIZE = 'subtitles-size';
 const SKIP_SSL_VERIFICATION = 'skip-ssl-verification';
 const THEME_MODE = 'theme-mode';
 const LOCALE = 'locale';
+const USE_SEARCH_HISTORY = 'use-search-history';
+const SEARCH_HISTORY_LIMIT = 'search-history-limit';
 
 const ON_OPEN = "on-open";
 
@@ -126,5 +130,34 @@ class DbClient {
     server.inUse = true;
 
     store.box<Server>().put(server);
+  }
+
+  List<String> getSearchHistory() {
+    return _getSearchHistory().map((e) => e.search).toList();
+  }
+
+  List<SearchHistoryItem> _getSearchHistory() {
+    return (store
+      .box<SearchHistoryItem>()
+      .query()
+      ..order(SearchHistoryItem_.time, flags: Order.descending))
+      .build()
+      .find();
+  }
+
+  void addToSearchHistory(SearchHistoryItem searchHistoryItem) {
+    store.box<SearchHistoryItem>().put(searchHistoryItem);
+    clearExcessSearchHistory();
+  }
+
+  void clearExcessSearchHistory() {
+    final limit = int.parse(getSettings(SEARCH_HISTORY_LIMIT)?.value ?? searchHistoryDefaultLength);
+    if (store.box<SearchHistoryItem>().count() > limit) {
+      store.box<SearchHistoryItem>().removeMany(_getSearchHistory().skip(limit).map((e) => e.id).toList());
+    }
+  }
+
+  void clearSearchHistory() {
+    store.box<SearchHistoryItem>().removeAll();
   }
 }

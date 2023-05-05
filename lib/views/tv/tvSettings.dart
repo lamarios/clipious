@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:invidious/utils.dart';
 import 'package:invidious/views/tv/settings/tvManageServers.dart';
+import 'package:invidious/views/tv/settings/tvSearchHistorySettings.dart';
 import 'package:invidious/views/tv/settings/tvSelectFromList.dart';
 import 'package:invidious/views/tv/settings/tvSponsorBlockSettings.dart';
 import 'package:invidious/views/tv/tvButton.dart';
@@ -61,6 +62,12 @@ class TVSettings extends StatelessWidget {
   openSponsorBlockSettings(BuildContext context) {
     Navigator.of(context).push(MaterialPageRoute(
       builder: (context) => const TvSponsorBlockSettings(),
+    ));
+  }
+
+  openSearchHistorySettings(BuildContext context) {
+    Navigator.of(context).push(MaterialPageRoute(
+      builder: (context) => const TvSearchHistorySettings(),
     ));
   }
 
@@ -136,6 +143,12 @@ class TVSettings extends StatelessWidget {
                       description: locals.returnYoutubeDislikeDescription,
                       onSelected: (context) => _.toggleReturnYoutubeDislike(!_.useReturnYoutubeDislike),
                       trailing: Switch(onChanged: (value) {}, value: _.useReturnYoutubeDislike),
+                    ),
+                    SettingsTile(
+                      title: locals.searchHistory,
+                      description: locals.searchHistoryDescription,
+                      onSelected: openSearchHistorySettings,
+                      trailing: const Icon(Icons.manage_search),
                     ),
 /*
                     SettingsTile(
