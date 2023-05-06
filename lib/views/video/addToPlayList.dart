@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:invidious/controllers/addToPlaylistController.dart';
-import 'package:invidious/views/components/miniPlayerAware.dart';
-import 'package:invidious/views/miniPlayer.dart';
+import 'package:invidious/globals.dart';
+import 'package:invidious/main.dart';
+import 'package:invidious/myRouteObserver.dart';
 
 import '../playlists.dart';
+import '../settings/manageSingleServer.dart';
 
 class AddToPlaylist extends StatelessWidget {
   final String videoId;
@@ -47,6 +49,15 @@ class AddToPlaylist extends StatelessWidget {
             ));
   }
 
+  openServerSettings(BuildContext context) {
+    navigatorKey.currentState?.push(
+        MaterialPageRoute(
+            settings: ROUTE_SETTINGS_MANAGE_ONE_SERVER,
+            builder: (context) => ManageSingleServer(server: db.getCurrentlySelectedServer())
+        )
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     var locals = AppLocalizations.of(context)!;
@@ -58,7 +69,25 @@ class AddToPlaylist extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: Column(mainAxisSize: MainAxisSize.min, children: [
           Text(locals.selectPlaylist),
-          _.loading ? const CircularProgressIndicator() : const SizedBox.shrink(),
+          !_.isLoggedIn ? Expanded(
+              child: Align(
+                  alignment: Alignment.center,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(locals.notLoggedIn),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 4.0),
+                        child: FilledButton(
+                            onPressed: () => openServerSettings(context),
+                            child: Text(locals.logIn)
+                        ),
+                      )
+                    ],
+                  )
+              )
+          ) : const SizedBox.shrink(),
+          _.loading ? const Expanded(child: Align(alignment: Alignment.center, child: CircularProgressIndicator())) : const SizedBox.shrink(),
           Expanded(
             child: ListView(
               children: _.playlists
@@ -80,7 +109,7 @@ class AddToPlaylist extends StatelessWidget {
             ),
           ),
           FilledButton.tonal(
-            onPressed: () => newPlaylistAndAdd(context, _),
+            onPressed: _.isLoggedIn ? () => newPlaylistAndAdd(context, _) : null,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [const Icon(Icons.add), Text(locals.createNewPlaylist)],

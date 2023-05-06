@@ -1,16 +1,12 @@
-import 'package:fbroadcast/fbroadcast.dart';
 import 'package:flutter/material.dart';
 import 'package:invidious/controllers/miniPayerController.dart';
-import 'package:invidious/utils.dart';
-import 'package:invidious/views/miniPlayer.dart';
 import 'package:logging/logging.dart';
-
-import 'globals.dart';
 
 const RouteSettings ROUTE_SETTINGS = RouteSettings(name: 'settings');
 const RouteSettings ROUTE_SETTINGS_MANAGE_SERVERS = RouteSettings(name: 'settings-manage-servers');
 const RouteSettings ROUTE_SETTINGS_MANAGE_ONE_SERVER = RouteSettings(name: 'settings-manage-one-server');
 const RouteSettings ROUTE_SETTINGS_SPONSOR_BLOCK = RouteSettings(name: 'settings-sponsor-block');
+const RouteSettings ROUTE_SETTINGS_SEARCH_HISTORY = RouteSettings(name: 'settings-search-history');
 const RouteSettings ROUTE_VIDEO = RouteSettings(name: 'video');
 const RouteSettings ROUTE_CHANNEL = RouteSettings(name: 'channel');
 const RouteSettings ROUTE_PLAYLIST_LIST = RouteSettings(name: 'playlist-list');

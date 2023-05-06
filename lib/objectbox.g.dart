@@ -15,6 +15,7 @@ import 'package:objectbox/objectbox.dart';
 import 'package:objectbox_flutter_libs/objectbox_flutter_libs.dart';
 
 import 'models/db/progress.dart';
+import 'models/db/searchHistoryItem.dart';
 import 'models/db/server.dart';
 import 'models/db/settings.dart';
 
@@ -105,6 +106,31 @@ final _entities = <ModelEntity>[
             indexId: const IdUid(3, 4343529106190079511))
       ],
       relations: <ModelRelation>[],
+      backlinks: <ModelBacklink>[]),
+  ModelEntity(
+      id: const IdUid(4, 6956330633348216454),
+      name: 'SearchHistoryItem',
+      lastPropertyId: const IdUid(3, 4799661758354837094),
+      flags: 0,
+      properties: <ModelProperty>[
+        ModelProperty(
+            id: const IdUid(1, 5055652677379509965),
+            name: 'id',
+            type: 6,
+            flags: 1),
+        ModelProperty(
+            id: const IdUid(2, 1184322842379216559),
+            name: 'search',
+            type: 9,
+            flags: 34848,
+            indexId: const IdUid(5, 7262786699272501249)),
+        ModelProperty(
+            id: const IdUid(3, 4799661758354837094),
+            name: 'time',
+            type: 6,
+            flags: 0)
+      ],
+      relations: <ModelRelation>[],
       backlinks: <ModelBacklink>[])
 ];
 
@@ -128,8 +154,8 @@ Future<Store> openStore(
 ModelDefinition getObjectBoxModel() {
   final model = ModelInfo(
       entities: _entities,
-      lastEntityId: const IdUid(3, 8787382286414233697),
-      lastIndexId: const IdUid(4, 9110274326691932798),
+      lastEntityId: const IdUid(4, 6956330633348216454),
+      lastIndexId: const IdUid(5, 7262786699272501249),
       lastRelationId: const IdUid(0, 0),
       lastSequenceId: const IdUid(0, 0),
       retiredEntityUids: const [],
@@ -241,6 +267,35 @@ ModelDefinition getObjectBoxModel() {
                   .vTableGet(buffer, rootOffset, 8, ''));
 
           return object;
+        }),
+    SearchHistoryItem: EntityDefinition<SearchHistoryItem>(
+        model: _entities[3],
+        toOneRelations: (SearchHistoryItem object) => [],
+        toManyRelations: (SearchHistoryItem object) => {},
+        getId: (SearchHistoryItem object) => object.id,
+        setId: (SearchHistoryItem object, int id) {
+          object.id = id;
+        },
+        objectToFB: (SearchHistoryItem object, fb.Builder fbb) {
+          final searchOffset = fbb.writeString(object.search);
+          fbb.startTable(4);
+          fbb.addInt64(0, object.id);
+          fbb.addOffset(1, searchOffset);
+          fbb.addInt64(2, object.time);
+          fbb.finish(fbb.endTable());
+          return object.id;
+        },
+        objectFromFB: (Store store, ByteData fbData) {
+          final buffer = fb.BufferContext(fbData);
+          final rootOffset = buffer.derefObject(0);
+
+          final object = SearchHistoryItem(
+              const fb.StringReader(asciiOptimization: true)
+                  .vTableGet(buffer, rootOffset, 6, ''),
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 8, 0))
+            ..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
+
+          return object;
         })
   };
 
@@ -294,4 +349,19 @@ class Progress_ {
   /// see [Progress.videoId]
   static final videoId =
       QueryStringProperty<Progress>(_entities[2].properties[2]);
+}
+
+/// [SearchHistoryItem] entity fields to define ObjectBox queries.
+class SearchHistoryItem_ {
+  /// see [SearchHistoryItem.id]
+  static final id =
+      QueryIntegerProperty<SearchHistoryItem>(_entities[3].properties[0]);
+
+  /// see [SearchHistoryItem.search]
+  static final search =
+      QueryStringProperty<SearchHistoryItem>(_entities[3].properties[1]);
+
+  /// see [SearchHistoryItem.time]
+  static final time =
+      QueryIntegerProperty<SearchHistoryItem>(_entities[3].properties[2]);
 }

@@ -46,13 +46,16 @@ class MySearchDelegate extends SearchDelegate<String> {
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    // service.getSearchSuggestion(query);
+    bool isHistoryResults = true;
     return FutureBuilder(
       future: service.getSearchSuggestion(query),
       builder: (context, snapshot) {
-        List<String> suggestions = [];
-        if (snapshot.connectionState == ConnectionState.done) {
+        List<String> suggestions = db.getSearchHistory();
+        if (snapshot.connectionState == ConnectionState.done && (snapshot.data?.suggestions ?? []).isNotEmpty) {
           suggestions = snapshot.data?.suggestions ?? [];
+          isHistoryResults = false;
+        } else {
+          isHistoryResults = true;
         }
 
         return ListView.builder(
@@ -60,7 +63,15 @@ class MySearchDelegate extends SearchDelegate<String> {
             itemBuilder: (context, index) {
               String sugg = suggestions[index];
               return ListTile(
-                title: Text(suggestions[index]),
+                title: isHistoryResults ? Row(
+                    children: [
+                      const Icon(Icons.history),
+                      Padding(
+                          padding: const EdgeInsets.only(left: 8),
+                          child: Text(suggestions[index])
+                      )
+                    ]
+                ) : Text(suggestions[index]),
                 onTap: () {
                   query = sugg;
                   showResults(context);

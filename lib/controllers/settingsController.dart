@@ -15,6 +15,7 @@ import '../utils.dart';
 import 'appController.dart';
 
 const String subtitleDefaultSize = '14';
+const String searchHistoryDefaultLength = '12';
 
 class SettingsController extends GetxController {
   static SettingsController? to() => safeGet();
@@ -28,12 +29,15 @@ class SettingsController extends GetxController {
   bool useDynamicTheme = db.getSettings(DYNAMIC_THEME)?.value == 'true';
   bool useDash = db.getSettings(USE_DASH)?.value == 'true';
   bool useProxy = db.getSettings(USE_PROXY)?.value == 'true';
+  bool autoplayVideoOnLoad = db.getSettings(PLAYER_AUTOPLAY_ON_LOAD)?.value == 'true';
   bool useReturnYoutubeDislike = db.getSettings(USE_RETURN_YOUTUBE_DISLIKE)?.value == 'true';
   bool blackBackground = db.getSettings(BLACK_BACKGROUND)?.value == 'true';
   double subtitleSize = double.parse(db.getSettings(SUBTITLE_SIZE)?.value ?? subtitleDefaultSize);
   bool skipSslVerification = db.getSettings(SKIP_SSL_VERIFICATION)?.value == 'true';
   ThemeMode themeMode = ThemeMode.values.firstWhere((element) => element.name == db.getSettings(THEME_MODE)?.value, orElse: () => ThemeMode.system);
   String? locale = db.getSettings(LOCALE)?.value;
+  bool useSearchHistory = db.getSettings(USE_SEARCH_HISTORY)?.value == 'true';
+  int searchHistoryLimit = int.parse(db.getSettings(SEARCH_HISTORY_LIMIT)?.value ?? searchHistoryDefaultLength);
 
   @override
   onReady() {
@@ -66,10 +70,25 @@ class SettingsController extends GetxController {
     update();
   }
 
+  toggleAutoplayOnLoad(bool value) {
+    db.saveSetting(SettingsValue(PLAYER_AUTOPLAY_ON_LOAD, value.toString()));
+    autoplayVideoOnLoad = value;
+    update();
+  }
+
   toggleReturnYoutubeDislike(bool value) {
     db.saveSetting(SettingsValue(USE_RETURN_YOUTUBE_DISLIKE, value.toString()));
     useReturnYoutubeDislike = value;
     update();
+  }
+
+  toggleSearchHistory(bool value) {
+    db.saveSetting(SettingsValue(USE_SEARCH_HISTORY, value.toString()));
+    useSearchHistory = value;
+    update();
+    if (!value) {
+      db.clearSearchHistory();
+    }
   }
 
   selectOnOpen(String selected, List<String> categories) {
@@ -121,6 +140,23 @@ class SettingsController extends GetxController {
     }
     update();
     db.saveSetting(SettingsValue(SUBTITLE_SIZE, subtitleSize.toString()));
+  }
+
+  changeSearchHistoryLimit({required bool increase}) {
+    if (increase) {
+      if (searchHistoryLimit < 30) {
+        searchHistoryLimit++;
+      }
+    } else {
+      if (searchHistoryLimit > 1) {
+        searchHistoryLimit--;
+      }
+    }
+    update();
+    db.saveSetting(SettingsValue(SEARCH_HISTORY_LIMIT, searchHistoryLimit.toString()));
+    if (!increase) {
+      db.clearExcessSearchHistory();
+    }
   }
 
   String getThemeLabel(AppLocalizations locals, ThemeMode theme) {

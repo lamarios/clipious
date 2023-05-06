@@ -90,10 +90,36 @@
         }
       ],
       "relations": []
+    },
+    {
+      "id": "4:6956330633348216454",
+      "lastPropertyId": "3:4799661758354837094",
+      "name": "SearchHistoryItem",
+      "properties": [
+        {
+          "id": "1:5055652677379509965",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:1184322842379216559",
+          "name": "search",
+          "type": 9,
+          "flags": 34848,
+          "indexId": "5:7262786699272501249"
+        },
+        {
+          "id": "3:4799661758354837094",
+          "name": "time",
+          "type": 6
+        }
+      ],
+      "relations": []
     }
   ],
-  "lastEntityId": "3:8787382286414233697",
-  "lastIndexId": "4:9110274326691932798",
+  "lastEntityId": "4:6956330633348216454",
+  "lastIndexId": "5:7262786699272501249",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",
   "modelVersion": 5,

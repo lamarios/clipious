@@ -287,7 +287,7 @@
   "@loggedIn": {
     "description": "Label to tell the user that he is logged in to the server"
   },
-  "notLoggedIn": "Not logged in. Tap to log in.",
+  "notLoggedIn": "Not logged in",
   "@notLoggedIn": {
     "description": "Label when the user is not logged in to the server"
   },
@@ -559,8 +559,40 @@
       }
     }
   },
-    "returnYoutubeDislikeDescription": "Show estimated video dislikes using API provided by returnyoutubedislike.com",
-    "@returnYoutubeDislikeDescription": {
-        "description": "ReturnYoutubeDislike setting description"
-    }
+  "returnYoutubeDislikeDescription": "Show estimated video dislikes using API provided by returnyoutubedislike.com",
+  "@returnYoutubeDislikeDescription": {
+    "description": "ReturnYoutubeDislike setting description"
+  },
+  "autoplayVideoOnLoad": "Automatically play video on load",
+  "@autoplayVideoOnLoad": {
+    "description": "Label for settings to enable autoplay when a video loads"
+  },
+  "autoplayVideoOnLoadDescription": "Automatically start playing the video after it has loaded",
+  "@autoplayVideoOnLoadDescription": {
+    "description": "Description for the autoplay video on load setting"
+  },
+  "searchHistory": "Search history",
+  "@searchHistory": {
+    "description": "Settings label for search history"
+  },
+  "searchHistoryDescription": "Search history settings",
+  "@searchHistoryDescription": {
+    "description": "Description for search history settings"
+  },
+  "enableSearchHistory": "Enable search history",
+  "@enableSearchHistory": {
+    "description": "Settings label for enabling search history"
+  },
+  "searchHistoryLimit": "Search history limit",
+  "@searchHistoryLimit": {
+    "description": "Settings label for search history limit"
+  },
+  "searchHistoryLimitDescription": "Set how many previous searches will show up in suggestions",
+  "@searchHistoryLimitDescription": {
+    "description": "Settings label for search history limit description"
+  },
+  "clearSearchHistory": "Clear search history",
+  "@clearSearchHistory": {
+    "description": "Settings label for clearing search history"
+  }
 }

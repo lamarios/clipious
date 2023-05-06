@@ -60,10 +60,21 @@ class TvSearch extends StatelessWidget {
                                         onPressed: (context) => _.pressedSuggestion(e),
                                         focusedColor: colors.secondaryContainer,
                                         unfocusedColor: Colors.transparent,
-                                        child: Padding(
+                                        child: _.usingHistory ? Padding(
+                                          padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
+                                          child: Row(
+                                              children: [
+                                                const Icon(Icons.history),
+                                                Padding(
+                                                    padding: const EdgeInsets.only(left: 8),
+                                                    child: Text(e)
+                                                )
+                                              ]
+                                          ),
+                                        ) : Padding(
                                           padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
                                           child: Text(e),
-                                        ),
+                                        )
                                       ))
                                   .toList(),
                             ),
