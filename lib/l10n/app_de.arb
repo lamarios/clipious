@@ -282,7 +282,7 @@
   "@useDynamicTheme": {
     "description": ""
   },
-  "useDynamicThemeDescription": "Verwenden Sie Material You-Farben (nur auf Android 12+ verfügbar). Erfordert einen Neustart der App",
+  "useDynamicThemeDescription": "Material-You-Farben verwenden (nur auf Android 12+ verfügbar)",
   "@useDynamicThemeDescription": {
     "description": ""
   },
@@ -406,5 +406,21 @@
   "addRecommendedToQueue": "Auto-play empfiehlt nächstes",
   "@addRecommendedToQueue": {
     "description": "Switch when playing a video to automatically add the recommended videos to the video queue"
+  },
+  "sponsorBlockSettingsQuickDescription": "Auswählen, welche Art von Segmenten übersprungen werden soll",
+  "@sponsorBlockSettingsQuickDescription": {
+    "description": "Small description of what the sponsor block settings do"
+  },
+  "sponsorBlockCategorySponsor": "Sponsor",
+  "@sponsorBlockCategorySponsor": {
+    "description": "Sponsor block 'Sponsor' Category"
+  },
+  "videoQueue": "Videowarteschlange",
+  "@videoQueue": {
+    "description": "Label for button to display the video queue"
+  },
+  "addToQueueList": "Zur Warteschlange hinzufügen",
+  "@addToQueueList": {
+    "description": "Label on button to add a video to the queue list"
   }
 }

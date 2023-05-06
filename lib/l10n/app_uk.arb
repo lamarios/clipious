@@ -299,7 +299,7 @@
   "@blackBackground": {
     "description": "Black backgroun option label for dark theme with oled"
   },
-  "blackBackgroundDescription": "Для темної теми на OLED-екрані. Потрібен перезапуск застосунку.",
+  "blackBackgroundDescription": "Для темної теми на OLED-екрані",
   "@blackBackgroundDescription": {
     "description": ""
   },
@@ -355,7 +355,7 @@
       }
     }
   },
-  "wizardIntro": "Виберіть публічний сервер або додайте власний. (Можна змінити пізніше в налаштуваннях.)",
+  "wizardIntro": "Виберіть публічний сервер або додайте власний. (Можна змінити пізніше в налаштуваннях)",
   "@wizardIntro": {
     "description": "Welcome message on frst time use"
   },
@@ -415,7 +415,7 @@
   "@addServerHelpText": {
     "description": "label for when the user hasn't chosen a server yet"
   },
-  "useDynamicThemeDescription": "Використовувати кольори Material You (доступно лише на Android 12+). Потрібен перезапуск застосунку",
+  "useDynamicThemeDescription": "Використовувати кольори Material You (доступно лише на Android 12+)",
   "@useDynamicThemeDescription": {
     "description": ""
   },
@@ -475,7 +475,7 @@
   "@sponsorBlockCategoryIntroDescription": {
     "description": "Sponsorblock 'Intro' Category description"
   },
-  "sponsorBlockCategoryPreviewDescription": "Колекція кліпів, які показують, що відбувається в цьому відео або інших відео в серії, де вся інформація повторюється пізніше у відео",
+  "sponsorBlockCategoryPreviewDescription": "Колекція кліпів, які показують, що відбувається в цьому відео або інших відео в серії, де вся інформація повторюється пізніше у відео.",
   "@sponsorBlockCategoryPreviewDescription": {
     "description": "Sponsorblock 'Preview' Category description"
   },
@@ -491,7 +491,7 @@
   "@useProxy": {
     "description": "label for settings switch to proxy videos from server"
   },
-  "useProxyDescription": "Проксі-сервер дозволяє обходити регіональні блоки або блокування YouTube провайдером. Потрібен перезапуск застосунку",
+  "useProxyDescription": "Проксі-сервер дозволяє обходити регіональні блоки або блокування YouTube провайдером",
   "@useProxyDescription": {
     "description": "Description for the use proxy settings"
   },
@@ -558,5 +558,9 @@
   "themeBrightness": "Тема",
   "@themeBrightness": {
     "description": "Ask the user to user dark / light / system theme"
+  },
+  "returnYoutubeDislikeDescription": "Показувати оціночну кількість дизлайків відео за допомогою API, наданого returnyoutubedislike.com",
+  "@returnYoutubeDislikeDescription": {
+    "description": "ReturnYoutubeDislike setting description"
   }
 }

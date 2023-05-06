@@ -108,7 +108,7 @@
   "@couldntFetchVideos": {
     "description": "Can't load bunch of videos, asking  user to try again"
   },
-  "wizardIntro": "Selectați un server public sau adăugați unul propriu. (Poate fi modificat ulterior în setări.)",
+  "wizardIntro": "Selectați un server public sau adăugați unul propriu. (Poate fi modificat ulterior în setări)",
   "@wizardIntro": {
     "description": "Welcome message on frst time use"
   },
@@ -471,7 +471,7 @@
   "@sponsorBlockCategoryInteractionDescription": {
     "description": "Sponsor block 'Interaction' Category description"
   },
-  "sponsorBlockCategoryPreviewDescription": "Colecție de clipuri care arată ce se întâmplă în acest videoclip sau în alte videoclipuri dintr-o serie în care toate informațiile sunt repetate mai târziu în videoclip",
+  "sponsorBlockCategoryPreviewDescription": "Colecție de clipuri care arată ce se întâmplă în acest videoclip sau în alte videoclipuri dintr-o serie în care toate informațiile sunt repetate mai târziu în videoclip.",
   "@sponsorBlockCategoryPreviewDescription": {
     "description": "Sponsorblock 'Preview' Category description"
   },
@@ -558,5 +558,9 @@
   "appLanguage": "Limba aplicației",
   "@appLanguage": {
     "description": "Select app language"
+  },
+  "returnYoutubeDislikeDescription": "Afișează displacerile estimate ale videoclipurilor utilizând API furnizat de returnyoutubedislike.com",
+  "@returnYoutubeDislikeDescription": {
+    "description": "ReturnYoutubeDislike setting description"
   }
 }
