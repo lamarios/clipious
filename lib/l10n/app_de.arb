@@ -254,7 +254,7 @@
   "@loggedIn": {
     "description": "Label to tell the user that he is logged in to the server"
   },
-  "notLoggedIn": "Nicht angemeldet. Tippen Sie, um sich anzumelden.",
+  "notLoggedIn": "Nicht angemeldet",
   "@notLoggedIn": {
     "description": "Label when the user is not logged in to the server"
   },
