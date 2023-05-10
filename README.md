@@ -34,10 +34,17 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ## Installation
 The best way to install is to get it directly from the release page. Using [Obtainium](https://github.com/ImranR98/Obtainium) can help keeping the app up to date.
 
-It is also available on the Google Play Store and IzzyOnDroid:
+It is also available on the Google Play Store, IzzyOnDroid, and Accrescent:
 
-[![Clipious on the Google Play Store](./assets/google_play_small.png)](https://play.google.com/store/apps/details?id=com.github.lamarios.clipious)
-[![Clipious on IzzyOnDroid](./assets/IzzyOnDroid_small.png)](https://apt.izzysoft.de/fdroid/index/apk/com.github.lamarios.clipious/)
+[<img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"
+      alt='Get it on Google Play'
+      height="80">](https://play.google.com/store/apps/details?id=com.github.lamarios.clipious)
+[<img src="https://gitlab.com/IzzyOnDroid/repo/-/raw/master/assets/IzzyOnDroid.png"
+      alt='Get it on IzzyOnDroid'
+      height="80">](https://apt.izzysoft.de/fdroid/index/apk/com.github.lamarios.clipious/)
+[<img src="https://accrescent.app/badges/get-it-on.png"
+      alt='Get it on Accrescent'
+      height="80">](https://accrescent.app/app/com.github.lamarios.clipious)
 
 ## Screenshots
 ### Phone
