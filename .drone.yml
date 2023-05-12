@@ -41,22 +41,23 @@ steps:
       files: "build/app/outputs/flutter-apk/*"
     when:
       event: tag
-  - name: Release Android
-    image: ruby
-    environment:
-      JSON_KEY_FILE: /tmp/service-account.json
-      SERVER_URL:
-        from_secret: server_url
-    commands:
-      - wget http://$SERVER_URL/service-account.json -O /tmp/service-account.json
-      - wget http://$SERVER_URL/key.properties -O /tmp/key.properties
-      - wget http://$SERVER_URL/keystore.jks -O /tmp/keystore.jks
-      - cd android
-      - gem install fastlane
-      - fastlane deploy
-    when:
-      event: tag
-trigger:
-  event:
-    - push
-    - tag
+
+#- name: Release Android
+#    image: ruby
+#    environment:
+#      JSON_KEY_FILE: /tmp/service-account.json
+#      SERVER_URL:
+#       from_secret: server_url
+#     commands:
+#       - wget http://$SERVER_URL/service-account.json -O /tmp/service-account.json
+#       - wget http://$SERVER_URL/key.properties -O /tmp/key.properties
+#       - wget http://$SERVER_URL/keystore.jks -O /tmp/keystore.jks
+#       - cd android
+#       - gem install fastlane
+#       - fastlane deploy
+#     when:
+#       event: tag
+# trigger:
+#   event:
+#     - push
+#     - tag
