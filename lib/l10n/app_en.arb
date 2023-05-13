@@ -593,7 +593,8 @@
     },
     "shorts": "Shorts",
     "@shorts": {
-        "description": "Youtube Shorts"
+        "description": "Youtube shorts"
+    },
     "searchSortRelevance": "Relevance",
     "@searchSortRelevance": {
         "description": "Sort search by relevance"
