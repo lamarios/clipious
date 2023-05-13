@@ -1,0 +1,2 @@
+Fix search
+Add short to channel view
