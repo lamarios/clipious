@@ -45,7 +45,7 @@ steps:
       - wget http://$SERVER_URL/key.properties -O /tmp/key.properties
       - wget http://$SERVER_URL/keystore.jks -O /tmp/keystore.jks
       - source /tmp/key.properties
-      - bundletool build-apks --bundle=app-release.aab --output=app-release.apks --ks-pass=pass:${storePassword} --ks=/tmp/keystore.jks --ks-key-alias=upload --key-pass=pass:${keyPassword}
+      #- bundletool build-apks --bundle=app-release.aab --output=app-release.apks --ks-pass=pass:${storePassword} --ks=/tmp/keystore.jks --ks-key-alias=upload --key-pass=pass:${keyPassword}
   - name: publish
     image: plugins/github-release
     settings:
