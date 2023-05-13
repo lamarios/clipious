@@ -34,19 +34,18 @@ steps:
       - ls build/app/outputs/flutter-apk/
       - ls build/app/outputs/bundle/release/
   - name: Accrescent APKs
-    image: nixos/nix
+    image: mingc/android-build-box/
     environment:
       ANDROID_KEY_FILE: /tmp/key.properties
       SERVER_URL:
         from_secret: server_url
     commands:
-      - nix-env --install glibc android-tools bundletool
       - wget http://$SERVER_URL/service-account.json -O /tmp/service-account.json
       - wget http://$SERVER_URL/key.properties -O /tmp/key.properties
       - wget http://$SERVER_URL/keystore.jks -O /tmp/keystore.jks
       - source /tmp/key.properties
       - cd build/app/outputs/bundle/release/
-      - bundletool build-apks --bundle=app-release.aab --output=app-release.apks --ks-pass=pass:$${storePassword} --ks=/tmp/keystore.jks --ks-key-alias=upload --key-pass=pass:$${keyPassword}
+      - java -jar /opt/android-sdk/cmdline-tools/latest/bundletool.jar build-apks --bundle=app-release.aab --output=app-release.apks --ks-pass=pass:$${storePassword} --ks=/tmp/keystore.jks --ks-key-alias=upload --key-pass=pass:$${keyPassword}
   - name: publish
     image: plugins/github-release
     settings:
