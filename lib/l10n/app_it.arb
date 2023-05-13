@@ -11,7 +11,7 @@
   "@selectBrowsingCountry": {
     "description": "Select country for trending content"
   },
-  "wizardIntro": "Selezionare un server pubblico o aggiungere il proprio. (Può essere modificato in seguito nelle impostazioni.)",
+  "wizardIntro": "Selezionare un server pubblico o aggiungere il proprio. (Può essere modificato in seguito nelle impostazioni)",
   "@wizardIntro": {
     "description": "Welcome message on frst time use"
   },

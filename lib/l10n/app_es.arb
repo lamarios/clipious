@@ -219,7 +219,7 @@
   "@delete": {
     "description": "Delete label"
   },
-  "notLoggedIn": "Sin iniciar sesión. Toque para iniciar sesión.",
+  "notLoggedIn": "Sin iniciar sesión",
   "@notLoggedIn": {
     "description": "Label when the user is not logged in to the server"
   },
@@ -562,5 +562,37 @@
   "returnYoutubeDislikeDescription": "Muestra aproximaciones de los videos que no me gustan usando la API proporcionada por returnyoutubedislike.com",
   "@returnYoutubeDislikeDescription": {
     "description": "ReturnYoutubeDislike setting description"
+  },
+  "searchHistoryDescription": "Ajustes del historial de la búsqueda",
+  "@searchHistoryDescription": {
+    "description": "Description for search history settings"
+  },
+  "enableSearchHistory": "Activar el historial de las búsquedas",
+  "@enableSearchHistory": {
+    "description": "Settings label for enabling search history"
+  },
+  "clearSearchHistory": "Borrar el historial de las búsquedas",
+  "@clearSearchHistory": {
+    "description": "Settings label for clearing search history"
+  },
+  "searchHistory": "Buscar en el historial",
+  "@searchHistory": {
+    "description": "Settings label for search history"
+  },
+  "autoplayVideoOnLoad": "Reproducir el video automáticamente al iniciar",
+  "@autoplayVideoOnLoad": {
+    "description": "Label for settings to enable autoplay when a video loads"
+  },
+  "autoplayVideoOnLoadDescription": "Comenzar a reproducir automáticamente el video después de que se haya iniciado",
+  "@autoplayVideoOnLoadDescription": {
+    "description": "Description for the autoplay video on load setting"
+  },
+  "searchHistoryLimit": "Límite del historial de las búsquedas",
+  "@searchHistoryLimit": {
+    "description": "Settings label for search history limit"
+  },
+  "searchHistoryLimitDescription": "Establece el número de las búsquedas antiguas sugeridas",
+  "@searchHistoryLimitDescription": {
+    "description": "Settings label for search history limit description"
   }
 }

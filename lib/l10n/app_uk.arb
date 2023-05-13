@@ -181,7 +181,7 @@
   "@useThisServer": {
     "description": "Use this server label"
   },
-  "logIn": "Увійти",
+  "logIn": "Ввійти",
   "@logIn": {
     "description": "CTA to log in to server"
   },
@@ -241,7 +241,7 @@
   "@tokenLogin": {
     "description": "Textto login to a server using the recommended way"
   },
-  "cookieLogin": "Увійти за допомогою cookie",
+  "cookieLogin": "Ввійти за допомогою cookie",
   "@cookieLogin": {
     "description": "Text to login to a server using the cookie jar method"
   },
@@ -407,7 +407,7 @@
   "@useDash": {
     "description": "Label on video options if a user wants to switch to dash urls instead of the regular quality selection"
   },
-  "notLoggedIn": "Ви не увійшли в систему. Натисніть, щоб увійти.",
+  "notLoggedIn": "Ви не ввійшли в систему",
   "@notLoggedIn": {
     "description": "Label when the user is not logged in to the server"
   },
@@ -562,5 +562,37 @@
   "returnYoutubeDislikeDescription": "Показувати оціночну кількість дизлайків відео за допомогою API, наданого returnyoutubedislike.com",
   "@returnYoutubeDislikeDescription": {
     "description": "ReturnYoutubeDislike setting description"
+  },
+  "autoplayVideoOnLoad": "Автоматично відтворювати відео під час завантаження",
+  "@autoplayVideoOnLoad": {
+    "description": "Label for settings to enable autoplay when a video loads"
+  },
+  "autoplayVideoOnLoadDescription": "Автоматично починати відтворення відео після його завантаження",
+  "@autoplayVideoOnLoadDescription": {
+    "description": "Description for the autoplay video on load setting"
+  },
+  "enableSearchHistory": "Ввімкнути історію пошуку",
+  "@enableSearchHistory": {
+    "description": "Settings label for enabling search history"
+  },
+  "searchHistoryLimit": "Обмеження історії пошуку",
+  "@searchHistoryLimit": {
+    "description": "Settings label for search history limit"
+  },
+  "searchHistoryLimitDescription": "Налаштуйте, скільки попередніх пошукових запитів буде показано у пропозиціях",
+  "@searchHistoryLimitDescription": {
+    "description": "Settings label for search history limit description"
+  },
+  "clearSearchHistory": "Очистити історію пошуку",
+  "@clearSearchHistory": {
+    "description": "Settings label for clearing search history"
+  },
+  "searchHistory": "Історія пошуку",
+  "@searchHistory": {
+    "description": "Settings label for search history"
+  },
+  "searchHistoryDescription": "Налаштування історії пошуку",
+  "@searchHistoryDescription": {
+    "description": "Description for search history settings"
   }
 }

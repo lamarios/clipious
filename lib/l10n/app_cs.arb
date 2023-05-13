@@ -1,0 +1,594 @@
+{
+  "errorAddingVideoToPlaylist": "Chyba při přidání videa do seznamu videí",
+  "@errorAddingVideoToPlaylist": {
+    "description": "Error while adding video to playlist"
+  },
+  "selectPlaylist": "Vybrat Seznam Skladeb",
+  "@selectPlaylist": {
+    "description": "Title when users wants to add a video to a playlist"
+  },
+  "topSorting": "Od zhora",
+  "@topSorting": {
+    "description": "Content sorting: top"
+  },
+  "newSorting": "Nové",
+  "@newSorting": {
+    "description": "Content sorting: new"
+  },
+  "selectBrowsingCountry": "Vyberte zemi původu videí",
+  "@selectBrowsingCountry": {
+    "description": "Select country for trending content"
+  },
+  "showOnStart": "Vyberte co bude ukázáno při zapnutí aplikace",
+  "@showOnStart": {
+    "description": "Title of dialog asking which screen the users prefers to see"
+  },
+  "about": "O",
+  "@about": {
+    "description": "About"
+  },
+  "notLoggedIn": "Nepřihlášen",
+  "@notLoggedIn": {
+    "description": "Label when the user is not logged in to the server"
+  },
+  "useDash": "Použít DASH",
+  "@useDash": {
+    "description": "Label on video options if a user wants to switch to dash urls instead of the regular quality selection"
+  },
+  "whenAppStartsShow": "Když se aplikace zapne, ukaž…",
+  "@whenAppStartsShow": {
+    "description": "Setting title for selecting the screen to show on start"
+  },
+  "sponsorBlockDescription": "Přeskočit sponzorské segmenty vybrané komunitou",
+  "@sponsorBlockDescription": {
+    "description": "Sponsorblock setting description"
+  },
+  "cookieLoginDescription": "Použijte tuto metodu pokud narazíte na problém při přihlášení tokenem",
+  "@cookieLoginDescription": {
+    "description": "Cookie log in description"
+  },
+  "sponsorBlockSettingsQuickDescription": "Vyberte který typ segmentu přeskočit",
+  "@sponsorBlockSettingsQuickDescription": {
+    "description": "Small description of what the sponsor block settings do"
+  },
+  "authentication": "Autentifikace",
+  "@authentication": {
+    "description": "Label for server settings related to authentications"
+  },
+  "cookieLogin": "Přihlásit se pomocí sušenky",
+  "@cookieLogin": {
+    "description": "Text to login to a server using the cookie jar method"
+  },
+  "username": "Přezdívka",
+  "@username": {
+    "description": "Username label for login to a server"
+  },
+  "useThisServer": "Použít tento server",
+  "@useThisServer": {
+    "description": "Use this server label"
+  },
+  "appearance": "Vzhled",
+  "@appearance": {
+    "description": "Settings category title"
+  },
+  "useDynamicThemeDescription": "Použít Material You barvy (dostpuné pouze na Androidu 12+)",
+  "@useDynamicThemeDescription": {
+    "description": ""
+  },
+  "addRecommendedToQueue": "Jako další automaticky přehrát doporučené",
+  "@addRecommendedToQueue": {
+    "description": "Switch when playing a video to automatically add the recommended videos to the video queue"
+  },
+  "addServerHelpText": "Použijte tlačítko + pro přidání serveru nebo klikněte na veřejný server pro přidání.",
+  "@addServerHelpText": {
+    "description": "label for when the user hasn't chosen a server yet"
+  },
+  "publicServersError": "Nepodařilo se načíst seznam veřejných servrů. Klikněte pro zopakování.",
+  "@publicServersError": {
+    "description": "Error message when trying to get public servers but it failed"
+  },
+  "password": "Heslo",
+  "@password": {
+    "description": "Password label for login to a server"
+  },
+  "videoUnlisted": "Neuvedeno",
+  "@videoUnlisted": {
+    "description": "Status of a video that is only accessible by link"
+  },
+  "trending": "Trendy",
+  "@trending": {
+    "description": "Trending videos title"
+  },
+  "subscriptions": "Odběry",
+  "@subscriptions": {
+    "description": "User subscriptions"
+  },
+  "playlists": "Seznamy Videí",
+  "@playlists": {
+    "description": "User playlists"
+  },
+  "noVideoInPlayList": "Žádná videa v seznamu videí",
+  "@noVideoInPlayList": {
+    "description": "When no videos in the playlist"
+  },
+  "removeFromPlayList": "Odstranit ze seznamu videí",
+  "@removeFromPlayList": {
+    "description": "Menu item description to show remove a video from a playlist"
+  },
+  "deletePlayListQ": "Smazat seznam videí?",
+  "@deletePlayListQ": {
+    "description": "Ask user to delete a playlist"
+  },
+  "irreversibleAction": "Tato akce je nevratná",
+  "@irreversibleAction": {
+    "description": "Tell the user that the action cannot be undone"
+  },
+  "publicPlaylist": "Veřejné",
+  "@publicPlaylist": {
+    "description": "Public playlist"
+  },
+  "cancel": "Zrušit",
+  "@cancel": {
+    "description": "Cancel button label"
+  },
+  "add": "Přidat",
+  "@add": {
+    "description": "Add button abel"
+  },
+  "unlistedPlaylist": "Neuvedeno",
+  "@unlistedPlaylist": {
+    "description": "Unlisted playlist"
+  },
+  "info": "Informace",
+  "@info": {
+    "description": "Info label"
+  },
+  "videos": "Videa",
+  "@videos": {
+    "description": "Videos label"
+  },
+  "streams": "Vysílání",
+  "@streams": {
+    "description": "Streams label"
+  },
+  "latestVideos": "Poslední Videa",
+  "@latestVideos": {
+    "description": "Latest channel videos"
+  },
+  "subscribed": "Odebíráno",
+  "@subscribed": {
+    "description": "When the user is subscribed to a channel"
+  },
+  "subscribe": "Odebrat",
+  "@subscribe": {
+    "description": "Label for user to subscribe to a channel"
+  },
+  "ok": "OK",
+  "@ok": {
+    "description": "Ok"
+  },
+  "nSubscribers": "{počet, vybrat, žádné{Žádné odběry]jiný{{počet}} odběrů}}",
+  "@nSubscribers": {
+    "description": "number of subscribers",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "noPlaylists": "Žádné seznamy videí",
+  "@noPlaylists": {
+    "description": "when there are no playlists to display"
+  },
+  "channels": "Kanály",
+  "@channels": {
+    "description": "Channels label"
+  },
+  "couldntLoadVideo": "Nepodařilo se načíst video",
+  "@couldntLoadVideo": {
+    "description": "Message to display when a video can't be loaded"
+  },
+  "comments": "Komentáře",
+  "@comments": {
+    "description": "Comments label"
+  },
+  "recommended": "Doporučené",
+  "@recommended": {
+    "description": "Recommended label"
+  },
+  "couldntFetchVideos": "Nepodařilo se nepodařilo načíst. Klikněte pro zkusení znovu.",
+  "@couldntFetchVideos": {
+    "description": "Can't load bunch of videos, asking  user to try again"
+  },
+  "startUsingClipious": "Začít používat Clipious",
+  "@startUsingClipious": {
+    "description": "button label to start using the app"
+  },
+  "videoAddedToPlaylist": "Video bylo přidáno do seznamu videí",
+  "@videoAddedToPlaylist": {
+    "description": "Pop up message when a video was added to a playlist"
+  },
+  "wizardIntro": "Vyberte veřejný server nebo přidejte svůj vlastní.(Může být změněno později v nastavení)",
+  "@wizardIntro": {
+    "description": "Welcome message on frst time use"
+  },
+  "createNewPlaylist": "Vytvořit nový seznam skladeb",
+  "@createNewPlaylist": {
+    "description": "Button label to create a new playlist when the user wants to add a video to a playlist"
+  },
+  "streamIsLive": "Živě",
+  "@streamIsLive": {
+    "description": "Label when a video is a live stream"
+  },
+  "sponsorSkipped": "Sponzor přeskočen",
+  "@sponsorSkipped": {
+    "description": "When a sponsor segment is skipped thanks to sponsor block"
+  },
+  "nReplies": "{počet, množný, =0{Žádné odpovědi} =1{1 odpověď} jiný{{počet} odpovědí}}",
+  "@nReplies": {
+    "description": "number of replies to a comment",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "settings": "Nastavení",
+  "@settings": {
+    "description": "Settings title"
+  },
+  "browsing": "Prohlížení",
+  "@browsing": {
+    "description": "video browsing preferences"
+  },
+  "country": "Země",
+  "@country": {
+    "description": "Country label"
+  },
+  "servers": "Servery",
+  "@servers": {
+    "description": "Server management settings category"
+  },
+  "manageServers": "Spravovat servery",
+  "@manageServers": {
+    "description": "Settings to manage servers"
+  },
+  "useSponsorBlock": "Použít SponsorBlock",
+  "@useSponsorBlock": {
+    "description": "label for sponsorblock checkbox"
+  },
+  "currentServer": "Momentálně využívan {momentálně}",
+  "@currentServer": {
+    "description": "Which server the user is currently using",
+    "placeholders": {
+      "current": {
+        "type": "String"
+      }
+    }
+  },
+  "name": "Jméno",
+  "@name": {
+    "description": "NAme label"
+  },
+  "package": "Balík",
+  "@package": {
+    "description": "package label"
+  },
+  "version": "Verze",
+  "@version": {
+    "description": "version label"
+  },
+  "build": "Sestavit",
+  "@build": {
+    "description": "build label"
+  },
+  "addServer": "Přidat server",
+  "@addServer": {
+    "description": "Add server label"
+  },
+  "logIn": "Přihlásit se",
+  "@logIn": {
+    "description": "CTA to log in to server"
+  },
+  "delete": "Smazat",
+  "@delete": {
+    "description": "Delete label"
+  },
+  "invalidInvidiousServer": "Neplatný Invidious server",
+  "@invalidInvidiousServer": {
+    "description": "Error when the user tries to add a server that is not a proper or reachable invidious server"
+  },
+  "yourServers": "Vaše servery",
+  "@yourServers": {
+    "description": "Your servers label"
+  },
+  "loggedIn": "Přihlášen",
+  "@loggedIn": {
+    "description": "Label to tell the user that he is logged in to the server"
+  },
+  "publicServers": "Veřejné Servery",
+  "@publicServers": {
+    "description": "Public servers label"
+  },
+  "loadingPublicServer": "Načítám veřejné servery",
+  "@loadingPublicServer": {
+    "description": "Message telling users the app is loading the list of public servers"
+  },
+  "tapToAddServer": "Klikněte pro přidání serveru do vašeho seznamu",
+  "@tapToAddServer": {
+    "description": "public server description"
+  },
+  "useDynamicTheme": "Dynamické barvy",
+  "@useDynamicTheme": {
+    "description": ""
+  },
+  "useDashDescription": "Adaptivní vysílání DASH může být problematické, YouTube jej může omezit.",
+  "@useDashDescription": {
+    "description": "Description for dash in the settings screen"
+  },
+  "videoPlayer": "Video přehrávač",
+  "@videoPlayer": {
+    "description": "Title for video player related options"
+  },
+  "videoListed": "Veřejné",
+  "@videoListed": {
+    "description": "Status of a publicly available video"
+  },
+  "videoIsFamilyFriendly": "Vhodné pro rodinu",
+  "@videoIsFamilyFriendly": {
+    "description": "Displayed only when a video is family friendly"
+  },
+  "tapToManage": "Klikněte pro spravování",
+  "@tapToManage": {
+    "description": "Text shown below a server in the 'Your servers' list"
+  },
+  "tokenLogin": "Přihlásit se pomocí tokenu",
+  "@tokenLogin": {
+    "description": "Textto login to a server using the recommended way"
+  },
+  "tokenLoginDescription": "Doporučený způsob přihlášení",
+  "@tokenLoginDescription": {
+    "description": "Recommended way to log in"
+  },
+  "logout": "Odhlásit se",
+  "@logout": {
+    "description": "CTA to logout of a server"
+  },
+  "wrongUsernamePassword": "Špatné přihlašovací jméno nebo heslo",
+  "@wrongUsernamePassword": {
+    "description": "Error message when authentication fails"
+  },
+  "error": "Chyba",
+  "@error": {},
+  "videoQueue": "Fronta videí",
+  "@videoQueue": {
+    "description": "Label for button to display the video queue"
+  },
+  "addToQueueList": "Přidat do fronty",
+  "@addToQueueList": {
+    "description": "Label on button to add a video to the queue list"
+  },
+  "sponsorBlockCategorySponsor": "Sponzor",
+  "@sponsorBlockCategorySponsor": {
+    "description": "Sponsor block 'Sponsor' Category"
+  },
+  "sponsorBlockCategorySponsorDescription": "Placená propagace, placené doporučení a přímou reklamu. Ne osobní propagaci nebo neplacené propagace přího/tvůrců/stránek/produktů které má tvůrce rád.",
+  "@sponsorBlockCategorySponsorDescription": {
+    "description": "Sponsor block 'Sponsor' Category description"
+  },
+  "sponsorBlockCategoryUnpaidSelfPromo": "Neplacená/Osobní Propagace",
+  "@sponsorBlockCategoryUnpaidSelfPromo": {
+    "description": "Sponsor block 'Unpaid/Self promotion' Category"
+  },
+  "sponsorBlockCategoryInteraction": "Připomenutí Interakce (Odběr)",
+  "@sponsorBlockCategoryInteraction": {
+    "description": "Sponsor block 'Interaction' Category"
+  },
+  "sponsorBlockCategoryIntro": "Přestávka/Vstupní Animace",
+  "@sponsorBlockCategoryIntro": {
+    "description": "Sponsorblock 'Intro' Category"
+  },
+  "sponsorBlockCategoryOutro": "Konečné karty/Poděkování",
+  "@sponsorBlockCategoryOutro": {
+    "description": "Outro block 'Outro' Category"
+  },
+  "sponsorBlockCategoryOutroDescription": "Poděkování nebo když se objeví konečné YouTube karty. Ne závěry s informacemi.",
+  "@sponsorBlockCategoryOutroDescription": {
+    "description": "Outro block 'Outro' Category description"
+  },
+  "sponsorBlockCategoryPreviewDescription": "Kolekce klipů které ukazují co bude nadcházet v tomto videu nebo jiných videích v sérii ve kterých jsou informace opakováný později ve videu.",
+  "@sponsorBlockCategoryPreviewDescription": {
+    "description": "Sponsorblock 'Preview' Category description"
+  },
+  "sponsorBlockCategoryFiller": "Výplň/Vtipy",
+  "@sponsorBlockCategoryFiller": {
+    "description": "Sponsorblock 'Filler' Category"
+  },
+  "sponsorBlockCategoryMusicOffTopic": "Hudba: Sekce bez hudby",
+  "@sponsorBlockCategoryMusicOffTopic": {
+    "description": "Sponsorblock 'MusicOffTopic' Category"
+  },
+  "useProxy": "Proxy videí",
+  "@useProxy": {
+    "description": "label for settings switch to proxy videos from server"
+  },
+  "useProxyDescription": "Využivánín proxy pro vysílání videí ze serveru, může obejít regionální omezení nebo blokaci YouTube správcem sítě",
+  "@useProxyDescription": {
+    "description": "Description for the use proxy settings"
+  },
+  "audio": "Zvuk",
+  "@audio": {
+    "description": "Name TV ui audio settings"
+  },
+  "playbackSpeed": "Rychlost přehrávání",
+  "@playbackSpeed": {
+    "description": "Name of TV ui Playback speed"
+  },
+  "blackBackground": "Černé pozadí",
+  "@blackBackground": {
+    "description": "Settings name for black background"
+  },
+  "blackBackgroundDescription": "Pro tmavé téma na OLED obrazovkách",
+  "@blackBackgroundDescription": {
+    "description": "Description for dark background setting"
+  },
+  "subtitleFontSizeDescription": "Změňte velikost titulků pokud jsou moc malé nebo moc velké na vašem zařízení",
+  "@subtitleFontSizeDescription": {
+    "description": "Settings description for subtitle size"
+  },
+  "skipSslVerification": "Přeskočit ověření SSL certifikátu",
+  "@skipSslVerification": {
+    "description": "Setting label to skip ssl certification verification"
+  },
+  "skipSslVerificationDescription": "Pro použití vlastnoručně podepsaného SSL certifikátu, nebo chyb se serverem při používání SSL.",
+  "@skipSslVerificationDescription": {
+    "description": "Setting description for the skip ssl certification verification"
+  },
+  "themeLight": "Světlé",
+  "@themeLight": {
+    "description": "Light theme"
+  },
+  "themeDark": "Tmavé",
+  "@themeDark": {
+    "description": "Dark theme"
+  },
+  "requiresRestart": "Vyžaduje restartování aplikace",
+  "@requiresRestart": {
+    "description": "Requires app restart label"
+  },
+  "autoplayVideoOnLoad": "Automaticky přehrát video při načtení",
+  "@autoplayVideoOnLoad": {
+    "description": "Label for settings to enable autoplay when a video loads"
+  },
+  "autoplayVideoOnLoadDescription": "Automaticky začít přehrávat video po načtení",
+  "@autoplayVideoOnLoadDescription": {
+    "description": "Description for the autoplay video on load setting"
+  },
+  "searchHistory": "Historie vyhledávání",
+  "@searchHistory": {
+    "description": "Settings label for search history"
+  },
+  "nVideos": "{počet, množný, =0{Žádná videa} =1{1 video} jiný{{počet} videí}}",
+  "@nVideos": {
+    "description": "One or more videos",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "searchHistoryLimit": "Limit historie vyhledávání",
+  "@searchHistoryLimit": {
+    "description": "Settings label for search history limit"
+  },
+  "clearSearchHistory": "Vyčistit historii vyhledávání",
+  "@clearSearchHistory": {
+    "description": "Settings label for clearing search history"
+  },
+  "popular": "Populární",
+  "@popular": {
+    "description": "Popular videos title"
+  },
+  "addPlayList": "Přidat Seznam Videí",
+  "@addPlayList": {
+    "description": "Title for add playlist dialog"
+  },
+  "playListName": "Název Seznamu Videí",
+  "@playListName": {
+    "description": "Place holder for new playlist name text field"
+  },
+  "privatePlaylist": "Soukromé",
+  "@privatePlaylist": {
+    "description": "Private playlist"
+  },
+  "playlistVisibility": "Viditelnost",
+  "@playlistVisibility": {
+    "description": "Dropdown label for playlist visibility"
+  },
+  "loadMore": "Načíst více",
+  "@loadMore": {
+    "description": "CTA to load more"
+  },
+  "shareYoutubeLink": "Sdílet YouTube odkaz",
+  "@shareYoutubeLink": {
+    "description": "asking user to share youtube link"
+  },
+  "noChannels": "Žádné kanály",
+  "@noChannels": {
+    "description": "when there are no channels to display"
+  },
+  "shareInvidiousLink": "Sdílet Invidious odkaz",
+  "@shareInvidiousLink": {
+    "description": "asking user to share invidious link"
+  },
+  "quality": "Kvalita",
+  "@quality": {
+    "description": "Name of TV ui video settings"
+  },
+  "search": "Hledat",
+  "@search": {
+    "description": "search title"
+  },
+  "sponsorBlockCategoryInteractionDescription": "Pokud je zobrazen krátké připomenutí lajku, odběru nebo sledování uprostřed kontentu. Pokud je moc dlouhé nebo něco specifické, mělo by být uvedeno pod osobní propagací.",
+  "@sponsorBlockCategoryInteractionDescription": {
+    "description": "Sponsor block 'Interaction' Category description"
+  },
+  "sponsorBlockCategoryIntroDescription": "Interval bez skutečného kontentu. Může být pauza, statický snímek, opakující se animace. Toto by nemělo být využíváno pro přechod obsahující informace.",
+  "@sponsorBlockCategoryIntroDescription": {
+    "description": "Sponsorblock 'Intro' Category description"
+  },
+  "sponsorBlockCategoryUnpaidSelfPromoDescription": "Podobné \"sponzoru\" kromě neplacených nebo osobních propagací. Toto obsahuje sekci o zboží, darech, nebo informacích o kolaboracích. ",
+  "@sponsorBlockCategoryUnpaidSelfPromoDescription": {
+    "description": "Sponsor block 'Unpaid/Self promotion' Category description"
+  },
+  "sponsorBlockCategoryPreview": "Ukázka/Rekapitulace",
+  "@sponsorBlockCategoryPreview": {
+    "description": "Sponsorblock 'Preview' Category"
+  },
+  "sponsorBlockCategoryMusicOffTopicDescription": "Interval bez skutečného kontentu. Může být pauza, statický snímek, opakující se animace. Toto by nemělo být využíváno pro přechod obsahující informace.",
+  "@sponsorBlockCategoryMusicOffTopicDescription": {
+    "description": "Only for use in music videos. This only should be used for sections of music videos that aren't already covered by another category."
+  },
+  "subtitles": "Titulky",
+  "@subtitles": {
+    "description": "Name of TV ui subtitles settings"
+  },
+  "subtitleFontSize": "Velikost fontu titulků",
+  "@subtitleFontSize": {
+    "description": "Settings label for the size of the subtitles"
+  },
+  "pressDownToShowSettings": "Stiskněte dolu pro zobrazení nastavení",
+  "@pressDownToShowSettings": {
+    "description": "Instruction on how to show video settings when playing a video on TV"
+  },
+  "themeBrightness": "Téma",
+  "@themeBrightness": {
+    "description": "Ask the user to user dark / light / system theme"
+  },
+  "followSystem": "Podle systému",
+  "@followSystem": {
+    "description": "Follow system label"
+  },
+  "appLanguage": "Jazyk aplikace",
+  "@appLanguage": {
+    "description": "Select app language"
+  },
+  "returnYoutubeDislikeDescription": "Zobrazit odhadovaný počet dislajků použitím API poskytované returnyoutubedislike.com",
+  "@returnYoutubeDislikeDescription": {
+    "description": "ReturnYoutubeDislike setting description"
+  },
+  "searchHistoryDescription": "Nastavení historie vyhledávání",
+  "@searchHistoryDescription": {
+    "description": "Description for search history settings"
+  },
+  "enableSearchHistory": "Povolit historii vyhledávání",
+  "@enableSearchHistory": {
+    "description": "Settings label for enabling search history"
+  },
+  "searchHistoryLimitDescription": "Nastavte počet posledních vyhledávání v návrzích",
+  "@searchHistoryLimitDescription": {
+    "description": "Settings label for search history limit description"
+  }
+}

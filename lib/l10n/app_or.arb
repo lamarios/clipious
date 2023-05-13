@@ -236,7 +236,7 @@
   "@yourServers": {
     "description": "Your servers label"
   },
-  "notLoggedIn": "ଲଗ୍ ଇନ୍ ହୋଇନାହିଁ । ଲଗ୍ ଇନ୍ କରିବାକୁ ଟ୍ୟାପ୍ କରନ୍ତୁ ।",
+  "notLoggedIn": "ଲଗ୍ ଇନ୍ ହୋଇନାହିଁ",
   "@notLoggedIn": {
     "description": "Label when the user is not logged in to the server"
   },
@@ -562,5 +562,37 @@
   "returnYoutubeDislikeDescription": "returnyoutubedislike.com ଦ୍ୱାରା ପ୍ରଦତ୍ତ API ବ୍ୟବହାର କରି ଆନୁମାନିକ ଭିଡିଓ ନାପସନ୍ଦ ଦେଖାନ୍ତୁ",
   "@returnYoutubeDislikeDescription": {
     "description": "ReturnYoutubeDislike setting description"
+  },
+  "autoplayVideoOnLoad": "ଲୋଡ୍ ପରେ ସ୍ୱୟଂଚାଳିତ ଭାବରେ ଭିଡିଓ ଚଲାନ୍ତୁ",
+  "@autoplayVideoOnLoad": {
+    "description": "Label for settings to enable autoplay when a video loads"
+  },
+  "searchHistory": "ସନ୍ଧାନ ଇତିହାସ",
+  "@searchHistory": {
+    "description": "Settings label for search history"
+  },
+  "searchHistoryDescription": "ସନ୍ଧାନ ଇତିହାସ ସେଟିଂସମୂହ",
+  "@searchHistoryDescription": {
+    "description": "Description for search history settings"
+  },
+  "enableSearchHistory": "ସନ୍ଧାନ ଇତିହାସ ସକ୍ଷମ କରନ୍ତୁ",
+  "@enableSearchHistory": {
+    "description": "Settings label for enabling search history"
+  },
+  "searchHistoryLimit": "ସନ୍ଧାନ ଇତିହାସ ସୀମା",
+  "@searchHistoryLimit": {
+    "description": "Settings label for search history limit"
+  },
+  "clearSearchHistory": "ସନ୍ଧାନ ଇତିହାସ ସଫା କରନ୍ତୁ",
+  "@clearSearchHistory": {
+    "description": "Settings label for clearing search history"
+  },
+  "autoplayVideoOnLoadDescription": "ଭିଡିଓ ଲୋଡ୍ ହେବା ପରେ ସ୍ୱୟଂଚାଳିତ ଭାବରେ ଖେଳିବା ଆରମ୍ଭ କରନ୍ତୁ",
+  "@autoplayVideoOnLoadDescription": {
+    "description": "Description for the autoplay video on load setting"
+  },
+  "searchHistoryLimitDescription": "ପରାମର୍ଶରେ କେତେ ପୂର୍ବ ସନ୍ଧାନ ଦେଖାଯିବ ସେଟ୍ କରନ୍ତୁ",
+  "@searchHistoryLimitDescription": {
+    "description": "Settings label for search history limit description"
   }
 }

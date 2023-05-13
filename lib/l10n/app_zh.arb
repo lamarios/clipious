@@ -279,7 +279,7 @@
   "@useDynamicTheme": {
     "description": ""
   },
-  "useDynamicThemeDescription": "使用 Material You 颜色（仅适用于 Android 12+）。需要重启应用",
+  "useDynamicThemeDescription": "使用 Material You 颜色（仅适用于 Android 12+）",
   "@useDynamicThemeDescription": {
     "description": ""
   },
@@ -351,7 +351,7 @@
   "@useDash": {
     "description": "Label on video options if a user wants to switch to dash urls instead of the regular quality selection"
   },
-  "useDashDescription": "DASH 自适应视频流可能有问题， YouTube 会阻止它。",
+  "useDashDescription": "DASH 自适应视频流有时可能出现问题， YouTube 会阻止它。",
   "@useDashDescription": {
     "description": "Description for dash in the settings screen"
   },
@@ -415,7 +415,7 @@
   "@useProxy": {
     "description": "label for settings switch to proxy videos from server"
   },
-  "useProxyDescription": "通过服务实例代理视频流，可以解除区域和网络服务商的YouTube限制。需要重新启动应用",
+  "useProxyDescription": "通过服务实例代理视频流，可以解除区域和网络服务商的YouTube限制",
   "@useProxyDescription": {
     "description": "Description for the use proxy settings"
   },
@@ -467,7 +467,7 @@
   "@sponsorBlockCategoryIntroDescription": {
     "description": "Sponsorblock 'Intro' Category description"
   },
-  "sponsorBlockCategoryPreviewDescription": "显示此视频或其他视频中的内容的剪辑合集，其中所有信息都会在视频的后面重复",
+  "sponsorBlockCategoryPreviewDescription": "显示此视频或其他视频中的内容的剪辑合集，其中所有信息都会在视频的后面重复。",
   "@sponsorBlockCategoryPreviewDescription": {
     "description": "Sponsorblock 'Preview' Category description"
   },
@@ -486,5 +486,81 @@
   "sponsorBlockCategoryFillerDescription": "题外场景只为添加补白或幽默不影响理解视频主要内容。这不应包含内容和背景细节。这是一个非常激进的分类用于没心情享受“乐趣”时。",
   "@sponsorBlockCategoryFillerDescription": {
     "description": "Sponsorblock 'Filler' Category description"
+  },
+  "returnYoutubeDislikeDescription": "使用 returnyoutubedislike.com 提供的API显示可能不喜欢的视频",
+  "@returnYoutubeDislikeDescription": {
+    "description": "ReturnYoutubeDislike setting description"
+  },
+  "blackBackground": "黑色背景",
+  "@blackBackground": {
+    "description": "Settings name for black background"
+  },
+  "pressDownToShowSettings": "按下显示设置项",
+  "@pressDownToShowSettings": {
+    "description": "Instruction on how to show video settings when playing a video on TV"
+  },
+  "quality": "画质",
+  "@quality": {
+    "description": "Name of TV ui video settings"
+  },
+  "audio": "声音",
+  "@audio": {
+    "description": "Name TV ui audio settings"
+  },
+  "subtitles": "字幕",
+  "@subtitles": {
+    "description": "Name of TV ui subtitles settings"
+  },
+  "playbackSpeed": "播放速度",
+  "@playbackSpeed": {
+    "description": "Name of TV ui Playback speed"
+  },
+  "search": "搜索",
+  "@search": {
+    "description": "search title"
+  },
+  "blackBackgroundDescription": "用于AMOLED 黑色主题背景",
+  "@blackBackgroundDescription": {
+    "description": "Description for dark background setting"
+  },
+  "subtitleFontSize": "字幕字体大小",
+  "@subtitleFontSize": {
+    "description": "Settings label for the size of the subtitles"
+  },
+  "subtitleFontSizeDescription": "如果字幕在屏幕上显示太小或太大可以改变字幕大小",
+  "@subtitleFontSizeDescription": {
+    "description": "Settings description for subtitle size"
+  },
+  "skipSslVerification": "跳过 SSL 证书验证",
+  "@skipSslVerification": {
+    "description": "Setting label to skip ssl certification verification"
+  },
+  "skipSslVerificationDescription": "用于使用自签名的SSL证书，或者当您的服务器出现SSL相关问题时。",
+  "@skipSslVerificationDescription": {
+    "description": "Setting description for the skip ssl certification verification"
+  },
+  "themeBrightness": "主题",
+  "@themeBrightness": {
+    "description": "Ask the user to user dark / light / system theme"
+  },
+  "themeLight": "浅色主题",
+  "@themeLight": {
+    "description": "Light theme"
+  },
+  "themeDark": "深色主题",
+  "@themeDark": {
+    "description": "Dark theme"
+  },
+  "followSystem": "跟随系统",
+  "@followSystem": {
+    "description": "Follow system label"
+  },
+  "requiresRestart": "需要重启应用",
+  "@requiresRestart": {
+    "description": "Requires app restart label"
+  },
+  "appLanguage": "应用语言",
+  "@appLanguage": {
+    "description": "Select app language"
   }
 }
