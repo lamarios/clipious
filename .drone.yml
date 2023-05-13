@@ -40,7 +40,7 @@ steps:
       SERVER_URL:
         from_secret: server_url
     commands:
-      - nix-env --install glibc bundletool
+      - nix-env --install glibc android-tools bundletool
       - wget http://$SERVER_URL/service-account.json -O /tmp/service-account.json
       - wget http://$SERVER_URL/key.properties -O /tmp/key.properties
       - wget http://$SERVER_URL/keystore.jks -O /tmp/keystore.jks
