@@ -233,7 +233,7 @@
   "@loggedIn": {
     "description": "Label to tell the user that he is logged in to the server"
   },
-  "notLoggedIn": "Nu ești conectat. Atinge ușor pentru a te conecta.",
+  "notLoggedIn": "Nu ești conectat",
   "@notLoggedIn": {
     "description": "Label when the user is not logged in to the server"
   },
@@ -343,7 +343,7 @@
   "@appearance": {
     "description": "Settings category title"
   },
-  "useDynamicThemeDescription": "Folosiți culorile Material You (disponibil numai pe Android 12+). Necesită repornirea aplicației",
+  "useDynamicThemeDescription": "Folosiți culorile Material You (disponibil numai pe Android 12+)",
   "@useDynamicThemeDescription": {
     "description": ""
   },
@@ -483,11 +483,11 @@
   "@sponsorBlockCategoryMusicOffTopicDescription": {
     "description": "Only for use in music videos. This only should be used for sections of music videos that aren't already covered by another category."
   },
-  "useProxyDescription": "Prin proxy fluxurile video de pe server, puteți ocoli blocările regionale sau blocarea ISP-ului YouTube. Necesită repornirea aplicației",
+  "useProxyDescription": "Prin proxy fluxurile video de pe server, puteți ocoli blocările regionale sau blocarea ISP-ului YouTube",
   "@useProxyDescription": {
     "description": "Description for the use proxy settings"
   },
-  "blackBackgroundDescription": "Pentru tema întunecată pe ecranul OLED. Necesită repornirea aplicației.",
+  "blackBackgroundDescription": "Pentru tema întunecată pe ecranul OLED",
   "@blackBackgroundDescription": {
     "description": "Description for dark background setting"
   },
@@ -562,5 +562,37 @@
   "returnYoutubeDislikeDescription": "Afișează displacerile estimate ale videoclipurilor utilizând API furnizat de returnyoutubedislike.com",
   "@returnYoutubeDislikeDescription": {
     "description": "ReturnYoutubeDislike setting description"
+  },
+  "autoplayVideoOnLoad": "Redarea automată a videoclipului la încărcare",
+  "@autoplayVideoOnLoad": {
+    "description": "Label for settings to enable autoplay when a video loads"
+  },
+  "autoplayVideoOnLoadDescription": "Începe redarea automată a videoclipului după ce s-a încărcat",
+  "@autoplayVideoOnLoadDescription": {
+    "description": "Description for the autoplay video on load setting"
+  },
+  "searchHistory": "Istoric de căutare",
+  "@searchHistory": {
+    "description": "Settings label for search history"
+  },
+  "searchHistoryDescription": "Setări pentru istoricul căutărilor",
+  "@searchHistoryDescription": {
+    "description": "Description for search history settings"
+  },
+  "enableSearchHistory": "Activați istoricul căutărilor",
+  "@enableSearchHistory": {
+    "description": "Settings label for enabling search history"
+  },
+  "searchHistoryLimit": "Limita istoricului căutărilor",
+  "@searchHistoryLimit": {
+    "description": "Settings label for search history limit"
+  },
+  "searchHistoryLimitDescription": "Setați câte căutări anterioare vor apărea în sugestii",
+  "@searchHistoryLimitDescription": {
+    "description": "Settings label for search history limit description"
+  },
+  "clearSearchHistory": "Ștergeți istoricul căutărilor",
+  "@clearSearchHistory": {
+    "description": "Settings label for clearing search history"
   }
 }
