@@ -16,6 +16,7 @@ import 'package:invidious/views/components/miniPlayerAware.dart';
 import 'package:invidious/views/miniPlayer.dart';
 import 'package:invidious/views/playlists.dart';
 import 'package:invidious/views/popular.dart';
+import 'package:invidious/views/search.dart';
 import 'package:invidious/views/searchDelegate.dart';
 import 'package:invidious/views/settings.dart';
 import 'package:invidious/views/subscriptions.dart';
@@ -222,7 +223,8 @@ class _HomeState extends State<Home> with AfterLayoutMixin {
               actions: [
                 IconButton(
                   onPressed: () {
-                    showSearch(context: context, delegate: MySearchDelegate());
+                    // showSearch(context: context, delegate: MySearchDelegate());
+                    navigatorKey.currentState?.push(MaterialPageRoute(settings: ROUTE_SETTINGS, builder: (context) => const Search()));
                   },
                   icon: const Icon(Icons.search),
                 ),

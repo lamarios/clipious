@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:invidious/controllers/videoListController.dart';
-import 'package:invidious/globals.dart';
-import 'package:invidious/models/imageObject.dart';
-import 'package:invidious/views/components/videoThumbnail.dart';
 import 'package:invidious/views/tv/tvVideoItem.dart';
-import 'package:invidious/views/tv/tvVideoView.dart';
 
 import '../../models/paginatedList.dart';
 import '../../models/videoInList.dart';
