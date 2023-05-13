@@ -16,6 +16,7 @@ class TvButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Brightness brightness = Theme.of(context).brightness;
     ColorScheme colors = Theme.of(context).colorScheme;
     return Focus(
       autofocus: autofocus ?? false,
@@ -30,7 +31,7 @@ class TvButton extends StatelessWidget {
             child: AnimatedContainer(
               duration: animationDuration,
               decoration: BoxDecoration(
-                color: hasFocus ? focusedColor ?? colors.primaryContainer : unfocusedColor ?? colors.secondaryContainer,
+                color: hasFocus ? focusedColor ?? (brightness == Brightness.dark ? colors.primaryContainer: colors.primary.withOpacity(0.5)) : unfocusedColor ?? colors.secondaryContainer,
                 borderRadius: BorderRadius.circular(borderRadius ?? 2000),
               ),
               child: builder != null ? builder!(ctx, hasFocus) : child,

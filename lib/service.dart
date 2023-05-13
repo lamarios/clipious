@@ -11,6 +11,8 @@ import 'package:invidious/models/dislike.dart';
 import 'package:invidious/models/errors/invidiousServiceError.dart';
 import 'package:invidious/models/playlist.dart';
 import 'package:invidious/models/searchResult.dart';
+import 'package:invidious/models/searchSortBy.dart';
+import 'package:invidious/models/searchType.dart';
 import 'package:invidious/models/sponsorSegment.dart';
 import 'package:invidious/models/userFeed.dart';
 import 'package:invidious/models/video.dart';
@@ -33,7 +35,7 @@ const GET_TRENDING = '/api/v1/trending';
 const GET_POPULAR = '/api/v1/popular';
 const GET_USER_FEED = '/api/v1/auth/feed';
 const SEARCH_SUGGESTIONS = '/api/v1/search/suggestions?q=:query';
-const SEARCH = '/api/v1/search?q=:q';
+const SEARCH = '/api/v1/search';
 const STATS = '/api/v1/stats';
 const GET_SUBSCIPTIONS = '/api/v1/auth/subscriptions';
 const ADD_DELETE_SUBSCRIPTION = '/api/v1/auth/subscriptions/:ucid';
@@ -201,8 +203,9 @@ class Service {
     return List<VideoInList>.from(i.map((e) => VideoInList.fromJson(e)));
   }
 
-  Future<SearchResults> search(String query) async {
-    Uri uri = buildUrl(SEARCH, pathParams: {':q': Uri.encodeQueryComponent(query)});
+  Future<SearchResults> search(String query, {SearchType? type, int? page, SearchSortBy? sortBy}) async {
+    String countryCode = db.getSettings(BROWSING_COUNTRY)?.value ?? 'US';
+    Uri uri = buildUrl(SEARCH, query: {'q': Uri.encodeQueryComponent(query), 'type': type?.name, 'page': page?.toString() ?? '1', 'sort_by': sortBy?.name, 'region': countryCode});
     final response = await http.get(uri);
     Iterable i = handleResponse(response);
     // only getting videos for now

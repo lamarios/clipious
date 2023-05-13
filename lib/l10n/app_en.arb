@@ -594,6 +594,21 @@
     "shorts": "Shorts",
     "@shorts": {
         "description": "Youtube Shorts"
+    "searchSortRelevance": "Relevance",
+    "@searchSortRelevance": {
+        "description": "Sort search by relevance"
+    },
+    "searchSortRating": "Rating",
+    "@searchSortRating": {
+        "description": "Sort search by rating"
+    },
+    "searchSortUploadDate": "Upload Date",
+    "@searchSortUploadDate": {
+        "description": "Sort search by upload date"
+    },
+    "searchSortViewCount": "View Count",
+    "@searchSortViewCount": {
+        "description": "Sort search by view count"
     },
     "clearSearchHistory": "Clear search history",
     "@clearSearchHistory": {

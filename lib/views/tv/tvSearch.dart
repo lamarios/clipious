@@ -2,18 +2,47 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:invidious/models/paginatedList.dart';
+import 'package:invidious/models/searchType.dart';
 import 'package:invidious/views/tv/tvButton.dart';
 import 'package:invidious/views/tv/tvChannelView.dart';
+import 'package:invidious/views/tv/tvHorizontalPaginatedListView.dart';
 import 'package:invidious/views/tv/tvHorizontalVideoList.dart';
 import 'package:invidious/views/tv/tvOverScan.dart';
 
+import '../../controllers/searchController.dart';
 import '../../controllers/tvSearchController.dart';
 import '../../models/channel.dart';
 import '../../models/imageObject.dart';
+import '../../models/videoInList.dart';
 import '../components/videoThumbnail.dart';
 
 class TvSearch extends StatelessWidget {
   const TvSearch({Key? key}) : super(key: key);
+
+  Widget buildSuggestion(BuildContext context, SearchController _, bool isHistory, String suggestion) {
+    ColorScheme colors = Theme.of(context).colorScheme;
+
+    return TvButton(
+        onPressed: (context) => _.setSearchQuery(suggestion),
+        focusedColor: colors.secondaryContainer,
+        unfocusedColor: Colors.transparent,
+        child: isHistory
+            ? Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
+                child: Row(children: [
+                  const Icon(Icons.history),
+                  Padding(
+                      padding: const EdgeInsets.only(left: 8),
+                      child: Text(
+                        suggestion,
+                      ))
+                ]),
+              )
+            : Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
+                child: Text(suggestion),
+              ));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,28 +84,9 @@ class TvSearch extends StatelessWidget {
                             width: 200,
                             child: ListView(
                               shrinkWrap: true,
-                              children: _.suggestions
-                                  .map((e) => TvButton(
-                                        onPressed: (context) => _.pressedSuggestion(e),
-                                        focusedColor: colors.secondaryContainer,
-                                        unfocusedColor: Colors.transparent,
-                                        child: _.usingHistory ? Padding(
-                                          padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
-                                          child: Row(
-                                              children: [
-                                                const Icon(Icons.history),
-                                                Padding(
-                                                    padding: const EdgeInsets.only(left: 8),
-                                                    child: Text(e)
-                                                )
-                                              ]
-                                          ),
-                                        ) : Padding(
-                                          padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
-                                          child: Text(e),
-                                        )
-                                      ))
-                                  .toList(),
+                              children: _.queryController.value.text.isEmpty
+                                  ? _.getHistory().map((e) => buildSuggestion(context, _, true, e)).toList()
+                                  : _.suggestions.map((e) => buildSuggestion(context, _, false, e)).toList(),
                             ),
                           ),
                           Expanded(
@@ -91,47 +101,49 @@ class TvSearch extends StatelessWidget {
                                     ]
                                   : [
                                       Visibility(
-                                          visible: _.results?.videos.isNotEmpty ?? false,
+                                          visible: _.videos.isNotEmpty ?? false,
                                           child: Text(
                                             locals.videos,
                                             style: textTheme.titleLarge,
                                           )),
                                       Visibility(
-                                        visible: _.results?.videos.isNotEmpty ?? false,
-                                        child: Focus(focusNode: _.resultFocus, child: TvHorizontalVideoList(paginatedVideoList: FixedItemList(_.results?.videos ?? []))),
+                                        visible: _.videos.isNotEmpty ?? false,
+                                        child: Focus(
+                                            focusNode: _.resultFocus,
+                                            child: TvHorizontalVideoList(
+                                                paginatedVideoList: SearchPaginatedList<VideoInList>(
+                                                    getFromResults: (res) => res.videos, sortBy: _.sortBy, query: _.queryController.value.text, type: SearchType.video, items: _.videos))),
                                       ),
                                       Visibility(
-                                          visible: _.results?.channels.isNotEmpty ?? false,
+                                          visible: _.channels.isNotEmpty ?? false,
                                           child: Text(
                                             locals.channels,
                                             style: textTheme.titleLarge,
                                           )),
                                       Visibility(
-                                        visible: _.results?.channels.isNotEmpty ?? false,
+                                        visible: _.channels.isNotEmpty ?? false,
                                         child: SizedBox(
                                           height: 60,
-                                          child: ListView(
-                                            scrollDirection: Axis.horizontal,
-                                            children: _.results?.channels
-                                                    .map((e) => Padding(
-                                                          padding: const EdgeInsets.all(8.0),
-                                                          child: TvButton(
-                                                            onPressed: (context) => openChannel(context, e),
-                                                            unfocusedColor: colors.secondaryContainer,
-                                                            borderRadius: 20,
-                                                            child: Padding(
-                                                              padding: const EdgeInsets.all(8.0),
-                                                              child: Column(
-                                                                mainAxisSize: MainAxisSize.min,
-                                                                children: [
-                                                                  Text(e.author),
-                                                                ],
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ))
-                                                    .toList() ??
-                                                [],
+                                          child: TvHorizontalPaginatedListView<Channel>(
+                                            paginatedList: SearchPaginatedList<Channel>(
+                                                getFromResults: (res) => res.channels, sortBy: _.sortBy, query: _.queryController.value.text, items: _.channels, type: SearchType.channel),
+                                            startItems: _.channels,
+                                            itemBuilder: (e) => Padding(
+                                              padding: const EdgeInsets.all(8.0),
+                                              child: TvButton(
+                                                onPressed: (context) => openChannel(context, e),
+                                                borderRadius: 20,
+                                                child: Padding(
+                                                  padding: const EdgeInsets.all(8.0),
+                                                  child: Column(
+                                                    mainAxisSize: MainAxisSize.min,
+                                                    children: [
+                                                      Text(e.author),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
                                           ),
                                         ),
                                       )
