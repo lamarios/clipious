@@ -167,7 +167,7 @@
   "@ok": {
     "description": "Ok"
   },
-  "nSubscribers": "{počet, vybrat, žádné{Žádné odběry]jiný{{počet}} odběrů}}",
+  "nSubscribers": "{count, select, no{Žádné odběry} other{{count} odběrů}}",
   "@nSubscribers": {
     "description": "number of subscribers",
     "placeholders": {
@@ -224,7 +224,7 @@
   "@sponsorSkipped": {
     "description": "When a sponsor segment is skipped thanks to sponsor block"
   },
-  "nReplies": "{počet, množný, =0{Žádné odpovědi} =1{1 odpověď} jiný{{počet} odpovědí}}",
+  "nReplies": "{count, plural, =0{Žádné odpovědi} =1{1 odpověď} other{{count} odpovědí}}",
   "@nReplies": {
     "description": "number of replies to a comment",
     "placeholders": {
@@ -258,7 +258,7 @@
   "@useSponsorBlock": {
     "description": "label for sponsorblock checkbox"
   },
-  "currentServer": "Momentálně využívan {momentálně}",
+  "currentServer": "Momentálně využívan {current}",
   "@currentServer": {
     "description": "Which server the user is currently using",
     "placeholders": {
@@ -469,7 +469,7 @@
   "@searchHistory": {
     "description": "Settings label for search history"
   },
-  "nVideos": "{počet, množný, =0{Žádná videa} =1{1 video} jiný{{počet} videí}}",
+  "nVideos": "{count, plural, =0{Žádná videa} =1{1 video} other{{count} videí}}",
   "@nVideos": {
     "description": "One or more videos",
     "placeholders": {
