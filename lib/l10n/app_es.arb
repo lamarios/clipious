@@ -594,5 +594,21 @@
   "searchHistoryLimitDescription": "Establece el número de las búsquedas antiguas sugeridas",
   "@searchHistoryLimitDescription": {
     "description": "Settings label for search history limit description"
+  },
+  "searchSortRating": "Clasificación",
+  "@searchSortRating": {
+    "description": "Sort search by rating"
+  },
+  "searchSortViewCount": "Contador de visitas",
+  "@searchSortViewCount": {
+    "description": "Sort search by view count"
+  },
+  "searchSortRelevance": "Relevancia",
+  "@searchSortRelevance": {
+    "description": "Sort search by relevance"
+  },
+  "searchSortUploadDate": "Fecha subida",
+  "@searchSortUploadDate": {
+    "description": "Sort search by upload date"
   }
 }
