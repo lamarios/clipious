@@ -34,7 +34,7 @@ steps:
       - ls build/app/outputs/flutter-apk/
       - ls build/app/outputs/bundle/release/
   - name: Accrescent APKs
-    image: mingc/android-build-box/
+    image: mingc/android-build-box
     environment:
       ANDROID_KEY_FILE: /tmp/key.properties
       SERVER_URL:
