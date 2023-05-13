@@ -1,10 +1,13 @@
 import 'package:invidious/models/itemWithContinuation.dart';
+import 'package:invidious/models/searchResult.dart';
+import 'package:invidious/models/searchSortBy.dart';
+import 'package:invidious/models/searchType.dart';
 import 'package:invidious/models/userFeed.dart';
 import 'package:invidious/models/videoInList.dart';
 
 import '../globals.dart';
 
-abstract class PaginatedList<T>{
+abstract class PaginatedList<T> {
   Future<List<T>> getItems();
 
   Future<List<T>> getMoreItems();
@@ -16,8 +19,7 @@ abstract class PaginatedList<T>{
   bool getHasMore();
 }
 
-abstract class PaginatedVideoList extends PaginatedList<VideoInList> {
-}
+abstract class PaginatedVideoList extends PaginatedList<VideoInList> {}
 
 /// Paginated video list that uses the continuation concept
 class ContinuationList<T> extends PaginatedList<T> {
@@ -159,5 +161,44 @@ class SubscriptionVideoList extends PaginatedVideoList {
   @override
   bool hasRefresh() {
     return true;
+  }
+}
+
+class SearchPaginatedList<T> extends PaginatedList<T> {
+  final SearchType type;
+  final String query;
+  final SearchSortBy sortBy;
+  List<T> items;
+  int page = 1;
+
+  List<T> Function(SearchResults res) getFromResults;
+
+  SearchPaginatedList({required this.query, required this.items, required this.type, required this.getFromResults, required this.sortBy});
+
+  @override
+  bool getHasMore() {
+    return true;
+  }
+
+  @override
+  Future<List<T>> getItems() async {
+    SearchResults results = await service.search(query, type: type, page: page, sortBy: sortBy);
+    return getFromResults(results);
+  }
+
+  @override
+  Future<List<T>> getMoreItems() async {
+    page++;
+    return getItems();
+  }
+
+  @override
+  bool hasRefresh() {
+    return false;
+  }
+
+  @override
+  Future<List<T>> refresh() async {
+    return [];
   }
 }
