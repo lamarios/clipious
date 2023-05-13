@@ -71,14 +71,6 @@ class TvChannelView extends StatelessWidget {
                               Padding(
                                 padding: const EdgeInsets.only(top: 20.0),
                                 child: Text(
-                                  locals.latestVideos,
-                                  style: textTheme.titleLarge,
-                                ),
-                              ),
-                              TvHorizontalVideoList(paginatedVideoList: FixedItemList(_.channel?.latestVideos ?? [])),
-                              Padding(
-                                padding: const EdgeInsets.only(top: 20.0),
-                                child: Text(
                                   locals.videos,
                                   style: textTheme.titleLarge,
                                 ),
