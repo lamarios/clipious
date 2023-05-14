@@ -39,8 +39,10 @@
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="https" android:host="youtube.com" android:pathPrefix="/watch" />
                 <data android:scheme="https" android:host="www.youtube.com" android:pathPrefix="/watch" />
                 <data android:scheme="https" android:host="m.youtube.com" android:pathPrefix="/watch" />
+                <data android:scheme="https" android:host="youtu.be" android:pathPrefix="/watch" />
             </intent-filter>
             <!--TODO: Add this filter, if you want to support sharing text into your app-->
             <intent-filter>
