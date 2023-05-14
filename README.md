@@ -34,7 +34,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ## Installation
 The best way to install is to get it directly from the release page. Using [Obtainium](https://github.com/ImranR98/Obtainium) can help keeping the app up to date.
 
-It is also available on the Google Play Store, IzzyOnDroid, and Accrescent:
+It is also available on IzzyOnDroid, and Accrescent:
 
 [<img src="https://gitlab.com/IzzyOnDroid/repo/-/raw/master/assets/IzzyOnDroid.png"
       alt='Get it on IzzyOnDroid'
