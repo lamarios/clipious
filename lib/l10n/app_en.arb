@@ -591,6 +591,10 @@
     "@searchHistoryLimitDescription": {
         "description": "Settings label for search history limit description"
     },
+    "shorts": "Shorts",
+    "@shorts": {
+        "description": "Youtube shorts"
+    },
     "searchSortRelevance": "Relevance",
     "@searchSortRelevance": {
         "description": "Sort search by relevance"

@@ -43,6 +43,7 @@ const GET_COMMENTS = '/api/v1/comments/:id';
 const GET_CHANNEL = '/api/v1/channels/:id';
 const GET_CHANNEL_VIDEOS = '/api/v1/channels/:id/videos';
 const GET_CHANNEL_STREAMS = '/api/v1/channels/:id/streams';
+const GET_CHANNEL_SHORTS = '/api/v1/channels/:id/shorts';
 const GET_SPONSOR_SEGMENTS = 'https://sponsor.ajay.app/api/skipSegments?videoID=:id';
 const GET_USER_PLAYLISTS = '/api/v1/auth/playlists';
 const POST_USER_PLAYLIST = '/api/v1/auth/playlists';
@@ -362,6 +363,13 @@ class Service {
 
   Future<VideosWithContinuation> getChannelStreams(String channelId, String? continuation) async {
     Uri uri = buildUrl(GET_CHANNEL_STREAMS, pathParams: {':id': channelId}, query: {'continuation': continuation});
+    final response = await http.get(uri, headers: {'Content-Type': 'application/json; charset=utf-16'});
+
+    return VideosWithContinuation.fromJson(handleResponse(response));
+  }
+
+  Future<VideosWithContinuation> getChannelShorts(String channelId, String? continuation) async {
+    Uri uri = buildUrl(GET_CHANNEL_SHORTS, pathParams: {':id': channelId}, query: {'continuation': continuation});
     final response = await http.get(uri, headers: {'Content-Type': 'application/json; charset=utf-16'});
 
     return VideosWithContinuation.fromJson(handleResponse(response));

@@ -93,6 +93,7 @@ class ChannelViewState extends State<ChannelView> with TickerProviderStateMixin 
                 destinations: <Widget>[
                   NavigationDestination(icon: const Icon(Icons.info), label: locals.info),
                   NavigationDestination(icon: const Icon(Icons.play_arrow), label: locals.videos),
+                  NavigationDestination(icon: const Icon(Icons.videocam), label: locals.shorts),
                   NavigationDestination(icon: const Icon(Icons.stream), label: locals.streams),
                   NavigationDestination(icon: const Icon(Icons.playlist_play), label: locals.playlists)
                 ],
@@ -124,6 +125,11 @@ class ChannelViewState extends State<ChannelView> with TickerProviderStateMixin 
                                 key: const ValueKey('videos'),
                                 channel: _.channel!,
                                 getVideos: service.getChannelVideos,
+                              ),
+                              ChannelVideosView(
+                                key: const ValueKey('shorts'),
+                                channel: _.channel!,
+                                getVideos: service.getChannelShorts,
                               ),
                               ChannelVideosView(
                                 key: const ValueKey('streams'),
