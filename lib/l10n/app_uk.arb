@@ -610,5 +610,9 @@
   "searchSortRating": "Рейтинг",
   "@searchSortRating": {
     "description": "Sort search by rating"
+  },
+  "shorts": "Shorts",
+  "@shorts": {
+    "description": "Youtube shorts"
   }
 }
