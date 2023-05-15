@@ -20,20 +20,17 @@ import '../models/playlist.dart';
 import 'components/paginatedListView.dart';
 import 'videoList.dart';
 
-class Search extends StatefulWidget {
-  const Search();
+class Search extends StatelessWidget {
+  final String? query;
+  final bool? searchNow;
+  const Search({super.key, this.query, this.searchNow});
 
-  @override
-  SearchState createState() => SearchState();
-}
-
-class SearchState extends State<Search> {
   @override
   Widget build(BuildContext context) {
     var colorScheme = Theme.of(context).colorScheme;
     var locals = AppLocalizations.of(context)!;
     return GetBuilder<SearchController>(
-      init: SearchController(),
+      init: SearchController(query: query, searchNow: searchNow),
       global: false,
       builder: (_) => Scaffold(
         bottomNavigationBar: _.showResults

@@ -7,6 +7,7 @@ import 'package:invidious/myRouteObserver.dart';
 import 'package:invidious/views/channel.dart';
 import 'package:invidious/views/components/subscribeButton.dart';
 import 'package:invidious/views/components/videoThumbnail.dart';
+import 'package:invidious/views/search.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../models/imageObject.dart';
@@ -24,7 +25,7 @@ class VideoInfo extends StatelessWidget {
   }
 
   showSearchWindow(BuildContext context, String query) {
-    showSearch(context: context, delegate: MySearchDelegate(), query: query);
+    navigatorKey.currentState?.push(MaterialPageRoute(settings: ROUTE_CHANNEL, builder: (context) => Search(query: query, searchNow: true,)));
   }
 
   @override
