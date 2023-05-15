@@ -1,0 +1,2 @@
+Fix issue with search when tapping tag on video info screen
+Fix issue where not all youtube domains were covered by the app links

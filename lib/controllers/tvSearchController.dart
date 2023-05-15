@@ -12,6 +12,8 @@ class TvSearchController extends SearchController {
   FocusNode resultFocus = FocusNode();
   FocusNode searchFocus = FocusNode();
 
+  TvSearchController({super.query, super.searchNow});
+
 
   @override
   onClose() async {
