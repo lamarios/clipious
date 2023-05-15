@@ -594,5 +594,21 @@
   "searchHistoryDescription": "Налаштування історії пошуку",
   "@searchHistoryDescription": {
     "description": "Description for search history settings"
+  },
+  "searchSortViewCount": "Кількість переглядів",
+  "@searchSortViewCount": {
+    "description": "Sort search by view count"
+  },
+  "searchSortUploadDate": "Датою завантаження",
+  "@searchSortUploadDate": {
+    "description": "Sort search by upload date"
+  },
+  "searchSortRelevance": "Актуальність",
+  "@searchSortRelevance": {
+    "description": "Sort search by relevance"
+  },
+  "searchSortRating": "Рейтинг",
+  "@searchSortRating": {
+    "description": "Sort search by rating"
   }
 }
