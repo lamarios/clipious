@@ -210,6 +210,12 @@ class TVSettings extends StatelessWidget {
                       ),
                     ),
                     SettingsTile(
+                      title: locals.rememberSubtitleLanguage,
+                      description: locals.rememberSubtitleLanguageDescription,
+                      onSelected: (context) => _.toggleRememberSubtitles(!_.rememberSubtitles),
+                      trailing: Switch(onChanged: (value) {}, value: _.rememberSubtitles),
+                    ),
+                    SettingsTile(
                       title: 'SponsorBlock',
                       description: locals.sponsorBlockDescription,
                       onSelected: openSponsorBlockSettings,

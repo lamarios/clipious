@@ -218,6 +218,12 @@ class Settings extends StatelessWidget {
                     ],
                   ),
                 ),
+                SettingsTile.switchTile(
+                  initialValue: _.rememberSubtitles,
+                  onToggle: _.toggleRememberSubtitles,
+                  title: Text(locals.rememberSubtitleLanguage),
+                  description: Text(locals.rememberSubtitleLanguageDescription),
+                ),
                 SettingsTile.navigation(
                   title: const Text('SponsorBlock'),
                   description: Text(locals.sponsorBlockDescription),

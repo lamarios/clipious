@@ -614,5 +614,13 @@
     "clearSearchHistory": "Clear search history",
     "@clearSearchHistory": {
         "description": "Settings label for clearing search history"
+    },
+    "rememberSubtitleLanguage": "Remember subtitle language",
+    "@rememberSubtitleLanguage": {
+        "description": "Settings label for remembering subtitle language"
+    },
+    "rememberSubtitleLanguageDescription": "Automatically set subtitles to last language selected, if available",
+    "@rememberSubtitleLanguageDescription": {
+        "description": "Settings description for remembering subtitle language"
     }
 }
