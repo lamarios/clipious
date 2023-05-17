@@ -1,5 +1,5 @@
 {
-  "removeFromPlayList": "إزالة من القائمة",
+  "removeFromPlayList": "إزالة من القائمة التشغيل",
   "@removeFromPlayList": {
     "description": "Menu item description to show remove a video from a playlist"
   },
@@ -7,11 +7,11 @@
   "@subscriptions": {
     "description": "User subscriptions"
   },
-  "playlists": "قوائم",
+  "playlists": "قوائم التشغيل",
   "@playlists": {
     "description": "User playlists"
   },
-  "noVideoInPlayList": "لا يوجد فيديو في القائمة",
+  "noVideoInPlayList": "لا يوجد فيديو في القائمة التشغيل",
   "@noVideoInPlayList": {
     "description": "When no videos in the playlist"
   },
@@ -23,15 +23,15 @@
   "@trending": {
     "description": "Trending videos title"
   },
-  "irreversibleAction": "تأكيد",
+  "irreversibleAction": "هذا العمل لا رجوع فيه",
   "@irreversibleAction": {
     "description": "Tell the user that the action cannot be undone"
   },
-  "addPlayList": "إضافة إلى القائمة",
+  "addPlayList": "إضافة إلى القائمة التشغيل",
   "@addPlayList": {
     "description": "Title for add playlist dialog"
   },
-  "playListName": "إسم القائمة",
+  "playListName": "إسم قائمة التشغيل",
   "@playListName": {
     "description": "Place holder for new playlist name text field"
   },
@@ -43,7 +43,7 @@
   "@cancel": {
     "description": "Cancel button label"
   },
-  "deletePlayListQ": "حذف القائمة؟",
+  "deletePlayListQ": "حذف القائمة التشغيل؟",
   "@deletePlayListQ": {
     "description": "Ask user to delete a playlist"
   },
@@ -79,7 +79,7 @@
   "@videos": {
     "description": "Videos label"
   },
-  "streams": "مشاهدات",
+  "streams": "بث",
   "@streams": {
     "description": "Streams label"
   },
@@ -87,7 +87,7 @@
   "@subscribed": {
     "description": "When the user is subscribed to a channel"
   },
-  "nSubscribers": "عدد المشتركين",
+  "nSubscribers": "{count, select, no{لا يوجد مشتركين} other{{count} مشتركين}}",
   "@nSubscribers": {
     "description": "number of subscribers",
     "placeholders": {
@@ -99,5 +99,37 @@
   "shareYoutubeLink": "مشاركة الرابط اليوتيوب",
   "@shareYoutubeLink": {
     "description": "asking user to share youtube link"
+  },
+  "channels": "قنوات",
+  "@channels": {
+    "description": "Channels label"
+  },
+  "ok": "موافق",
+  "@ok": {
+    "description": "Ok"
+  },
+  "noChannels": "لا توجد قنوات",
+  "@noChannels": {
+    "description": "when there are no channels to display"
+  },
+  "noPlaylists": "لا توجد قوائم تشغيل",
+  "@noPlaylists": {
+    "description": "when there are no playlists to display"
+  },
+  "couldntLoadVideo": "تعذر تحميل الفيديو",
+  "@couldntLoadVideo": {
+    "description": "Message to display when a video can't be loaded"
+  },
+  "comments": "التعليقات",
+  "@comments": {
+    "description": "Comments label"
+  },
+  "recommended": "موصى به",
+  "@recommended": {
+    "description": "Recommended label"
+  },
+  "couldntFetchVideos": "تعذر جلب مقاطع الفيديو. انقر للمحاولة مرة أخرى.",
+  "@couldntFetchVideos": {
+    "description": "Can't load bunch of videos, asking  user to try again"
   }
 }

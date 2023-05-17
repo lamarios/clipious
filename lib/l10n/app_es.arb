@@ -610,5 +610,9 @@
   "searchSortUploadDate": "Fecha subida",
   "@searchSortUploadDate": {
     "description": "Sort search by upload date"
+  },
+  "shorts": "Videos Cortos",
+  "@shorts": {
+    "description": "Youtube shorts"
   }
 }

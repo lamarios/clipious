@@ -594,5 +594,25 @@
   "searchHistoryLimitDescription": "ପରାମର୍ଶରେ କେତେ ପୂର୍ବ ସନ୍ଧାନ ଦେଖାଯିବ ସେଟ୍ କରନ୍ତୁ",
   "@searchHistoryLimitDescription": {
     "description": "Settings label for search history limit description"
+  },
+  "searchSortRelevance": "ପ୍ରାସଙ୍ଗିକତା",
+  "@searchSortRelevance": {
+    "description": "Sort search by relevance"
+  },
+  "searchSortRating": "ମୂଲ୍ୟାୟନ",
+  "@searchSortRating": {
+    "description": "Sort search by rating"
+  },
+  "searchSortViewCount": "ଦର୍ଶନ ଗଣନା",
+  "@searchSortViewCount": {
+    "description": "Sort search by view count"
+  },
+  "shorts": "ସର୍ଟସ୍",
+  "@shorts": {
+    "description": "Youtube shorts"
+  },
+  "searchSortUploadDate": "ଅପଲୋଡ୍ ତାରିଖ",
+  "@searchSortUploadDate": {
+    "description": "Sort search by upload date"
   }
 }

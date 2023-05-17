@@ -422,5 +422,81 @@
   "addToQueueList": "Zur Warteschlange hinzufügen",
   "@addToQueueList": {
     "description": "Label on button to add a video to the queue list"
+  },
+  "sponsorBlockCategorySponsorDescription": "Bezahlte Werbung, bezahlte Empfehlungen und Direktwerbung. Nicht für Eigenwerbung oder kostenlose Ausrufen zu Anliegen/Erstellern/Webseiten/Produkten die sie mögen.",
+  "@sponsorBlockCategorySponsorDescription": {
+    "description": "Sponsor block 'Sponsor' Category description"
+  },
+  "sponsorBlockCategoryInteraction": "Interaktionserinnerung (Abonnieren)",
+  "@sponsorBlockCategoryInteraction": {
+    "description": "Sponsor block 'Interaction' Category"
+  },
+  "sponsorBlockCategoryIntro": "Unterbrechung/Intro Animation",
+  "@sponsorBlockCategoryIntro": {
+    "description": "Sponsorblock 'Intro' Category"
+  },
+  "sponsorBlockCategoryOutro": "Endcards/Abspann",
+  "@sponsorBlockCategoryOutro": {
+    "description": "Outro block 'Outro' Category"
+  },
+  "sponsorBlockCategoryOutroDescription": "Abspann oder wenn die YouTube-Endcards erscheinen. Nicht für Fazits mit Informationen.",
+  "@sponsorBlockCategoryOutroDescription": {
+    "description": "Outro block 'Outro' Category description"
+  },
+  "sponsorBlockCategoryPreview": "Vorschau/Wiederholung",
+  "@sponsorBlockCategoryPreview": {
+    "description": "Sponsorblock 'Preview' Category"
+  },
+  "sponsorBlockCategoryFiller": "Füller Abschweife/Witze",
+  "@sponsorBlockCategoryFiller": {
+    "description": "Sponsorblock 'Filler' Category"
+  },
+  "sponsorBlockCategoryMusicOffTopic": "Musik: Nicht-Musik Abschnitt",
+  "@sponsorBlockCategoryMusicOffTopic": {
+    "description": "Sponsorblock 'MusicOffTopic' Category"
+  },
+  "sponsorBlockCategoryUnpaidSelfPromoDescription": "Ähnlich zu \"sponsor\" außer für unbezahlte oder Eigenwerbung. Das beinhaltet Abschnitte über Merchandise, Spenden oder Informationen darüber, mit wem sie kollabiert haben. ",
+  "@sponsorBlockCategoryUnpaidSelfPromoDescription": {
+    "description": "Sponsor block 'Unpaid/Self promotion' Category description"
+  },
+  "sponsorBlockCategoryInteractionDescription": "Bei einer kurzen Erinnerung zu liken, abonnieren oder ihnen zu folgen mitten im Video. Falls sie lang oder spezifisch ist, sollte sie stattdessen unter Promotion einsortiert werden.",
+  "@sponsorBlockCategoryInteractionDescription": {
+    "description": "Sponsor block 'Interaction' Category description"
+  },
+  "sponsorBlockCategoryIntroDescription": "Ein Intervall ohne echten Inhalt. Kann eine Pause, Standbild oder wiederholende Animation sein. Sollte nicht für Transitionen, die Informationen enthalten, verwendet werden.",
+  "@sponsorBlockCategoryIntroDescription": {
+    "description": "Sponsorblock 'Intro' Category description"
+  },
+  "sponsorBlockCategoryPreviewDescription": "Sammlung von Clips, die zeigen was in diesem Video kommen wird oder andere Videos einer Serie, bei welchen die gesamte Information später im Video wiederholt wird.",
+  "@sponsorBlockCategoryPreviewDescription": {
+    "description": "Sponsorblock 'Preview' Category description"
+  },
+  "sponsorBlockCategoryFillerDescription": "Abschweifende Szenen, die nur als Füllmaterial oder Humor hinzugefügt werden und nicht benötigt werden, um den Inhalt des Videos zu verstehen. Das sollte keine Segmente beinhalteten, die Kontext oder Hintergrunddetails liefern. Das ist eine sehr aggressive Kategorie, gedacht dafür wenn du nicht in der Stimmung für \"Spaß\" bist.",
+  "@sponsorBlockCategoryFillerDescription": {
+    "description": "Sponsorblock 'Filler' Category description"
+  },
+  "search": "Suche",
+  "@search": {
+    "description": "search title"
+  },
+  "subtitles": "Untertitel",
+  "@subtitles": {
+    "description": "Name of TV ui subtitles settings"
+  },
+  "playbackSpeed": "Abspielgeschwindigkeit",
+  "@playbackSpeed": {
+    "description": "Name of TV ui Playback speed"
+  },
+  "blackBackground": "Schwarzer Hintergrund",
+  "@blackBackground": {
+    "description": "Settings name for black background"
+  },
+  "blackBackgroundDescription": "Für dunkles Design auf OLED-Bildschirm",
+  "@blackBackgroundDescription": {
+    "description": "Description for dark background setting"
+  },
+  "subtitleFontSize": "Untertitel Schriftgröße",
+  "@subtitleFontSize": {
+    "description": "Settings label for the size of the subtitles"
   }
 }
