@@ -131,5 +131,108 @@
   "couldntFetchVideos": "تعذر جلب مقاطع الفيديو. انقر للمحاولة مرة أخرى.",
   "@couldntFetchVideos": {
     "description": "Can't load bunch of videos, asking  user to try again"
+  },
+  "shareInvidiousLink": "مشاركة رابط إنفيديوس",
+  "@shareInvidiousLink": {
+    "description": "asking user to share invidious link"
+  },
+  "videoAddedToPlaylist": "تمت إضافة الفيديو إلى قائمة التشغيل",
+  "@videoAddedToPlaylist": {
+    "description": "Pop up message when a video was added to a playlist"
+  },
+  "errorAddingVideoToPlaylist": "حدث خطأ أثناء إضافة الفيديو إلى قائمة التشغيل",
+  "@errorAddingVideoToPlaylist": {
+    "description": "Error while adding video to playlist"
+  },
+  "wizardIntro": "حدد خادماً عاماً أو أضف خادمك الخاص. (يمكن تغييرها لاحقا في الإعدادات)",
+  "@wizardIntro": {
+    "description": "Welcome message on frst time use"
+  },
+  "startUsingClipious": "ابدأ باستخدام كِلبّيوس",
+  "@startUsingClipious": {
+    "description": "button label to start using the app"
+  },
+  "selectPlaylist": "اختر قائمة التشغيل",
+  "@selectPlaylist": {
+    "description": "Title when users wants to add a video to a playlist"
+  },
+  "createNewPlaylist": "إنشاء قائمة تشغيل جديدة",
+  "@createNewPlaylist": {
+    "description": "Button label to create a new playlist when the user wants to add a video to a playlist"
+  },
+  "nReplies": "{count, plural, =0{لا يوجد ردود} =1{رد واحد} other{{count} ردود}}",
+  "@nReplies": {
+    "description": "number of replies to a comment",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "loadMore": "تحميل المزيد",
+  "@loadMore": {
+    "description": "CTA to load more"
+  },
+  "topSorting": "أعلى",
+  "@topSorting": {
+    "description": "Content sorting: top"
+  },
+  "newSorting": "حديث",
+  "@newSorting": {
+    "description": "Content sorting: new"
+  },
+  "streamIsLive": "مباشر",
+  "@streamIsLive": {
+    "description": "Label when a video is a live stream"
+  },
+  "sponsorSkipped": "تم تخطي فقرة الراعي",
+  "@sponsorSkipped": {
+    "description": "When a sponsor segment is skipped thanks to sponsor block"
+  },
+  "selectBrowsingCountry": "حدد بلد التصفح",
+  "@selectBrowsingCountry": {
+    "description": "Select country for trending content"
+  },
+  "showOnStart": "اختر ما تريد إظهاره عند بدء تشغيل التطبيق",
+  "@showOnStart": {
+    "description": "Title of dialog asking which screen the users prefers to see"
+  },
+  "settings": "الإعدادات",
+  "@settings": {
+    "description": "Settings title"
+  },
+  "browsing": "التصفح",
+  "@browsing": {
+    "description": "video browsing preferences"
+  },
+  "country": "البلد",
+  "@country": {
+    "description": "Country label"
+  },
+  "whenAppStartsShow": "عند بدء تشغيل التطبيق ، أظهر …",
+  "@whenAppStartsShow": {
+    "description": "Setting title for selecting the screen to show on start"
+  },
+  "servers": "الخوادم",
+  "@servers": {
+    "description": "Server management settings category"
+  },
+  "manageServers": "إدارة الخوادم",
+  "@manageServers": {
+    "description": "Settings to manage servers"
+  },
+  "currentServer": "يتم استخدام {current} حالياً",
+  "@currentServer": {
+    "description": "Which server the user is currently using",
+    "placeholders": {
+      "current": {
+        "type": "String"
+      }
+    }
+  },
+  "useSponsorBlock": "استخدم حجب فقرة الراعي",
+  "@useSponsorBlock": {
+    "description": "label for sponsorblock checkbox"
   }
 }
