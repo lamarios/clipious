@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:invidious/controllers/playerController.dart';
 import 'package:invidious/database.dart';
 import 'package:invidious/globals.dart';
+import 'package:invidious/models/db/settings.dart';
 import 'package:logging/logging.dart';
 
 enum Tabs {
@@ -90,6 +91,8 @@ class TvPlayerSettingsController extends GetxController {
   changeSubtitles(String selected) {
     log.info('Subtitles selected $selected');
     BetterPlayerSubtitlesSource? track = videoController?.betterPlayerSubtitlesSourceList.firstWhere((e) => '${e.name}' == selected);
+
+    db.saveSetting(SettingsValue(LAST_SUBTITLE, selected));
 
     if (track != null) {
       log.info('Changing subtitles to $selected');

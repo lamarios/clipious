@@ -131,6 +131,9 @@ class PlayerController extends GetxController {
       case BetterPlayerEventType.bufferingStart:
         broadcastEvent(event);
         break;
+      case BetterPlayerEventType.changedSubtitles:
+        db.saveSetting(SettingsValue(LAST_SUBTITLE, videoController?.betterPlayerSubtitlesSource?.name ?? ''));
+        break;
       default:
         break;
     }
@@ -208,10 +211,22 @@ class PlayerController extends GetxController {
       }
     }
 
+    String lastSubtitle = '';
+    if (db.getSettings(REMEMBER_LAST_SUBTITLE)?.value == 'true') {
+      lastSubtitle = db.getSettings(LAST_SUBTITLE)?.value ?? '';
+    }
+
     BetterPlayerDataSource betterPlayerDataSource = BetterPlayerDataSource(BetterPlayerDataSourceType.network, videoUrl,
         videoFormat: format,
         liveStream: video.liveNow,
-        subtitles: video.captions.map((s) => BetterPlayerSubtitlesSource(type: BetterPlayerSubtitlesSourceType.network, urls: ['${baseUrl}${s.url}'], name: s.label)).toList(),
+        subtitles: video.captions.map((s) =>
+            BetterPlayerSubtitlesSource(
+                type: BetterPlayerSubtitlesSourceType.network,
+                urls: ['${baseUrl}${s.url}'],
+                name: s.label,
+                selectedByDefault: s.label == lastSubtitle
+            )
+        ).toList(),
         resolutions: resolutions.isNotEmpty ? resolutions : null,
         // placeholder: VideoThumbnailView(videoId: video.videoId, thumbnailUrl: video.getBestThumbnail()?.url ?? ''),
         notificationConfiguration: BetterPlayerNotificationConfiguration(

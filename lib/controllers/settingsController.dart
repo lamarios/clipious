@@ -33,6 +33,7 @@ class SettingsController extends GetxController {
   bool useReturnYoutubeDislike = db.getSettings(USE_RETURN_YOUTUBE_DISLIKE)?.value == 'true';
   bool blackBackground = db.getSettings(BLACK_BACKGROUND)?.value == 'true';
   double subtitleSize = double.parse(db.getSettings(SUBTITLE_SIZE)?.value ?? subtitleDefaultSize);
+  bool rememberSubtitles = db.getSettings(REMEMBER_LAST_SUBTITLE)?.value == 'true';
   bool skipSslVerification = db.getSettings(SKIP_SSL_VERIFICATION)?.value == 'true';
   ThemeMode themeMode = ThemeMode.values.firstWhere((element) => element.name == db.getSettings(THEME_MODE)?.value, orElse: () => ThemeMode.system);
   String? locale = db.getSettings(LOCALE)?.value;
@@ -140,6 +141,12 @@ class SettingsController extends GetxController {
     }
     update();
     db.saveSetting(SettingsValue(SUBTITLE_SIZE, subtitleSize.toString()));
+  }
+
+  toggleRememberSubtitles(bool value) {
+    db.saveSetting(SettingsValue(REMEMBER_LAST_SUBTITLE, value.toString()));
+    rememberSubtitles = value;
+    update();
   }
 
   changeSearchHistoryLimit({required bool increase}) {
