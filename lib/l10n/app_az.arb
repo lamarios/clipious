@@ -127,5 +127,45 @@
   "popular": "Məşhur",
   "@popular": {
     "description": "Popular videos title"
+  },
+  "wizardIntro": "Ümumi server seç və ya özünkün əlavə et.(Daha sonra tənzimləmələrdə dəyişdirilə bilər)",
+  "@wizardIntro": {
+    "description": "Welcome message on frst time use"
+  },
+  "errorAddingVideoToPlaylist": "Oynatma siyahısına video əlavə edilərkən xəta",
+  "@errorAddingVideoToPlaylist": {
+    "description": "Error while adding video to playlist"
+  },
+  "recommended": "Tövsiyə edilən",
+  "@recommended": {
+    "description": "Recommended label"
+  },
+  "couldntFetchVideos": "Videoları əldə etmək olmadı. Təkrar cəhd etmək üçün toxun.",
+  "@couldntFetchVideos": {
+    "description": "Can't load bunch of videos, asking  user to try again"
+  },
+  "videoAddedToPlaylist": "Video oynatma siyahısına əlavə edildi",
+  "@videoAddedToPlaylist": {
+    "description": "Pop up message when a video was added to a playlist"
+  },
+  "startUsingClipious": "Clipious işlətməyə başla",
+  "@startUsingClipious": {
+    "description": "button label to start using the app"
+  },
+  "settings": "Tənzimləmələr",
+  "@settings": {
+    "description": "Settings title"
+  },
+  "sponsorBlockSettingsQuickDescription": "Bölümlərin hansı növün ötürəcəyinizi seçin",
+  "@sponsorBlockSettingsQuickDescription": {
+    "description": "Small description of what the sponsor block settings do"
+  },
+  "pressDownToShowSettings": "Tənzimləmələri göstərmək üçün aşağı bas",
+  "@pressDownToShowSettings": {
+    "description": "Instruction on how to show video settings when playing a video on TV"
+  },
+  "searchHistoryDescription": "Axtarış tarixçəsi tənzimləmələri",
+  "@searchHistoryDescription": {
+    "description": "Description for search history settings"
   }
 }
