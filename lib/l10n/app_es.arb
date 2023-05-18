@@ -614,5 +614,13 @@
   "shorts": "Videos Cortos",
   "@shorts": {
     "description": "Youtube shorts"
+  },
+  "rememberSubtitleLanguageDescription": "Establecer automáticamente los subtítulos en el último idioma seleccionado, si está disponible",
+  "@rememberSubtitleLanguageDescription": {
+    "description": "Settings description for remembering subtitle language"
+  },
+  "rememberSubtitleLanguage": "Recordar el idioma de los subtítulos",
+  "@rememberSubtitleLanguage": {
+    "description": "Settings label for remembering subtitle language"
   }
 }
