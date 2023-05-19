@@ -181,7 +181,7 @@
   "@useDynamicTheme": {
     "description": ""
   },
-  "notLoggedIn": "Não ligado. Toque para iniciar sessão.",
+  "notLoggedIn": "Não está conectado",
   "@notLoggedIn": {
     "description": "Label when the user is not logged in to the server"
   },
@@ -562,5 +562,65 @@
   "appLanguage": "Idioma da aplicação",
   "@appLanguage": {
     "description": "Select app language"
+  },
+  "shorts": "Curtos",
+  "@shorts": {
+    "description": "Youtube shorts"
+  },
+  "searchSortRelevance": "Relevância",
+  "@searchSortRelevance": {
+    "description": "Sort search by relevance"
+  },
+  "searchSortRating": "Classificação",
+  "@searchSortRating": {
+    "description": "Sort search by rating"
+  },
+  "searchSortUploadDate": "Data de carregamento",
+  "@searchSortUploadDate": {
+    "description": "Sort search by upload date"
+  },
+  "searchSortViewCount": "Ver contagem",
+  "@searchSortViewCount": {
+    "description": "Sort search by view count"
+  },
+  "rememberSubtitleLanguage": "Recordar o idioma das legendas",
+  "@rememberSubtitleLanguage": {
+    "description": "Settings label for remembering subtitle language"
+  },
+  "rememberSubtitleLanguageDescription": "Definir automaticamente as legendas para o último idioma selecionado, se disponível",
+  "@rememberSubtitleLanguageDescription": {
+    "description": "Settings description for remembering subtitle language"
+  },
+  "searchHistoryLimit": "Limite do histórico de pesquisa",
+  "@searchHistoryLimit": {
+    "description": "Settings label for search history limit"
+  },
+  "searchHistoryLimitDescription": "Definir o número de pesquisas anteriores que aparecerão nas sugestões",
+  "@searchHistoryLimitDescription": {
+    "description": "Settings label for search history limit description"
+  },
+  "clearSearchHistory": "Limpar o histórico de pesquisa",
+  "@clearSearchHistory": {
+    "description": "Settings label for clearing search history"
+  },
+  "autoplayVideoOnLoad": "Reprodução automática de vídeo ao carregar",
+  "@autoplayVideoOnLoad": {
+    "description": "Label for settings to enable autoplay when a video loads"
+  },
+  "autoplayVideoOnLoadDescription": "Iniciar automaticamente a reprodução do vídeo depois de este ter sido carregado",
+  "@autoplayVideoOnLoadDescription": {
+    "description": "Description for the autoplay video on load setting"
+  },
+  "searchHistory": "Histórico de pesquisa",
+  "@searchHistory": {
+    "description": "Settings label for search history"
+  },
+  "searchHistoryDescription": "Definições do histórico de pesquisa",
+  "@searchHistoryDescription": {
+    "description": "Description for search history settings"
+  },
+  "enableSearchHistory": "Ativar o histórico de pesquisa",
+  "@enableSearchHistory": {
+    "description": "Settings label for enabling search history"
   }
 }
