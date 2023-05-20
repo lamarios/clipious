@@ -614,5 +614,13 @@
   "shorts": "Shorts",
   "@shorts": {
     "description": "Youtube shorts"
+  },
+  "rememberSubtitleLanguageDescription": "Автоматично встановлювати субтитри до останньої обраної мови, якщо вони доступні",
+  "@rememberSubtitleLanguageDescription": {
+    "description": "Settings description for remembering subtitle language"
+  },
+  "rememberSubtitleLanguage": "Запам'ятати мову субтитрів",
+  "@rememberSubtitleLanguage": {
+    "description": "Settings label for remembering subtitle language"
   }
 }
