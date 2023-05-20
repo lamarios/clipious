@@ -594,5 +594,33 @@
   "clearSearchHistory": "Ștergeți istoricul căutărilor",
   "@clearSearchHistory": {
     "description": "Settings label for clearing search history"
+  },
+  "shorts": "Shorts",
+  "@shorts": {
+    "description": "Youtube shorts"
+  },
+  "searchSortRating": "Evaluare",
+  "@searchSortRating": {
+    "description": "Sort search by rating"
+  },
+  "searchSortViewCount": "De vizionări",
+  "@searchSortViewCount": {
+    "description": "Sort search by view count"
+  },
+  "rememberSubtitleLanguage": "Reține limba subtitrării",
+  "@rememberSubtitleLanguage": {
+    "description": "Settings label for remembering subtitle language"
+  },
+  "searchSortRelevance": "Relevanţă",
+  "@searchSortRelevance": {
+    "description": "Sort search by relevance"
+  },
+  "searchSortUploadDate": "Data încărcării",
+  "@searchSortUploadDate": {
+    "description": "Sort search by upload date"
+  },
+  "rememberSubtitleLanguageDescription": "Setați automat subtitrările în ultima limbă selectată, dacă este disponibilă",
+  "@rememberSubtitleLanguageDescription": {
+    "description": "Settings description for remembering subtitle language"
   }
 }
