@@ -8,7 +8,7 @@ import 'package:invidious/models/searchResult.dart';
 
 import '../models/searchSuggestion.dart';
 
-class TvSearchController extends SearchController {
+class TvSearchController extends ClipiousSearchController {
   FocusNode resultFocus = FocusNode();
   FocusNode searchFocus = FocusNode();
 

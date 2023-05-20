@@ -12,7 +12,7 @@ import '../models/playlist.dart';
 import '../models/searchType.dart';
 import '../models/videoInList.dart';
 
-class SearchController extends GetxController {
+class ClipiousSearchController extends GetxController {
   TextEditingController queryController = TextEditingController();
 
   int selectedIndex = 0;
@@ -32,7 +32,7 @@ class SearchController extends GetxController {
 
   int videoPage = 1, channelPage = 1, playlistPage = 1;
 
-  SearchController({String? query, bool? searchNow}) {
+  ClipiousSearchController({String? query, bool? searchNow}) {
     queryController.text = query ?? '';
     queryController.addListener(getSuggestions);
 

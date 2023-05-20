@@ -19,7 +19,7 @@ import '../components/videoThumbnail.dart';
 class TvSearch extends StatelessWidget {
   const TvSearch({Key? key}) : super(key: key);
 
-  Widget buildSuggestion(BuildContext context, SearchController _, bool isHistory, String suggestion) {
+  Widget buildSuggestion(BuildContext context, ClipiousSearchController _, bool isHistory, String suggestion) {
     ColorScheme colors = Theme.of(context).colorScheme;
 
     return TvButton(

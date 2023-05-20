@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
-import 'package:invidious/controllers/searchController.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/models/searchResult.dart';
 import 'package:invidious/models/searchSortBy.dart';
@@ -13,6 +12,7 @@ import 'package:invidious/views/components/miniPlayerAware.dart';
 import 'package:invidious/views/playlistList.dart';
 
 import '../controllers/playlistListController.dart';
+import '../controllers/searchController.dart';
 import '../main.dart';
 import '../models/channel.dart';
 import '../models/paginatedList.dart';
@@ -29,8 +29,8 @@ class Search extends StatelessWidget {
   Widget build(BuildContext context) {
     var colorScheme = Theme.of(context).colorScheme;
     var locals = AppLocalizations.of(context)!;
-    return GetBuilder<SearchController>(
-      init: SearchController(query: query, searchNow: searchNow),
+    return GetBuilder<ClipiousSearchController>(
+      init: ClipiousSearchController(query: query, searchNow: searchNow),
       global: false,
       builder: (_) => Scaffold(
         bottomNavigationBar: _.showResults
