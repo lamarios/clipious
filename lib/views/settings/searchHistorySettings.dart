@@ -82,7 +82,6 @@ class SearchHistorySettings extends StatelessWidget {
                       ),
                       SettingsTile(
                           title: Text(locals.clearSearchHistory),
-                          trailing: const Icon(Icons.delete_forever),
                           onPressed: (context) => confirmClear(context),
                       )
                     ]
