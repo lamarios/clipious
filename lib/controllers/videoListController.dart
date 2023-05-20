@@ -2,6 +2,7 @@ import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:invidious/utils.dart';
+import 'package:logging/logging.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../models/paginatedList.dart';
@@ -10,6 +11,7 @@ import '../models/videoInList.dart';
 enum VideoListErrors { none, couldNotFetchVideos }
 
 class VideoListController extends GetxController {
+  var log = Logger('VideoListController');
   static const String subscriptionTag = 'video-list-subscription';
   static const String popularTag = 'video-list-popular';
   static const String trendingTag = 'video-list-trending';
@@ -53,7 +55,6 @@ class VideoListController extends GetxController {
   onScrollEvent() {
     if (scrollController.hasClients) {
 
-      log.info('scroll event ${scrollController.position.maxScrollExtent}, ${scrollController.offset}');
       if (scrollController.position.maxScrollExtent * 0.9 < scrollController.offset) {
         EasyDebounce.debounce('loading-more-videos', const Duration(milliseconds: 250), getMoreVideos);
       }
