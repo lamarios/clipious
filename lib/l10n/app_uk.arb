@@ -619,7 +619,7 @@
   "@rememberSubtitleLanguageDescription": {
     "description": "Settings description for remembering subtitle language"
   },
-  "rememberSubtitleLanguage": "Запам'ятати мову субтитрів",
+  "rememberSubtitleLanguage": "Запам''ятати мову субтитрів",
   "@rememberSubtitleLanguage": {
     "description": "Settings label for remembering subtitle language"
   }
