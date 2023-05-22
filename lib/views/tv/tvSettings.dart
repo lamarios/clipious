@@ -148,7 +148,6 @@ class TVSettings extends StatelessWidget {
                       title: locals.searchHistory,
                       description: locals.searchHistoryDescription,
                       onSelected: openSearchHistorySettings,
-                      trailing: const Icon(Icons.manage_search),
                     ),
 /*
                     SettingsTile(

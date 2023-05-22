@@ -63,15 +63,4 @@ class ChannelController extends GetxController {
     }
   }
 
-  bool onBodyScroll(ScrollNotification notification) {
-    double height = 200 - min(notification.metrics.pixels, 200);
-    double opacity = min(1, height / 200);
-    height = max(channelMinBarHeight, height);
-
-    barOpacity = opacity;
-    barHeight = height;
-
-    update();
-    return true;
-  }
 }

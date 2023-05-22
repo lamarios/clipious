@@ -103,7 +103,6 @@ class TvSearchHistorySettings extends StatelessWidget {
               ),
               SettingsTile(
                 title: locals.clearSearchHistory,
-                trailing: const Icon(Icons.delete_forever),
                 onSelected: (context) => showClearHistoryDialog(context),
               )
             ],

@@ -170,7 +170,6 @@ class Settings extends StatelessWidget {
                     title: Text(locals.searchHistory),
                     description: Text(locals.searchHistoryDescription),
                     onPressed: openSearchHistorySettings,
-                    trailing: const Icon(Icons.manage_search),
                   ),
                 ],
               ),
