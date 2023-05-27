@@ -80,48 +80,6 @@ class ChannelViewState extends State<ChannelView> with TickerProviderStateMixin 
                   : Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        SizedBox(
-                          height: 170,
-                          child: Stack(children: [
-                            Thumbnail(
-                                width: double.infinity,
-                                thumbnailUrl: ImageObject.getBestThumbnail(_.channel!.authorThumbnails)?.url ?? '',
-                                id: 'channel-banner/${widget.channelId}',
-                                decoration: BoxDecoration(
-                                  color: colorScheme.secondaryContainer,
-                                )),
-                            Positioned(
-                                bottom: 0,
-                                left: 0,
-                                right: 0,
-                                child: Container(
-                                  alignment: Alignment.bottomLeft,
-                              decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                    begin: Alignment.topCenter,
-                                    end: Alignment.bottomCenter,
-                                    colors: [
-                                  Colors.transparent,
-                                      Colors.transparent,
-                                      Colors.transparent,
-                                  colorScheme.background
-                                ])
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.only(left: 8.0, top: 128),
-                                child: Text(_.channel?.author ?? '', style: TextStyle(fontSize: 30, color:  colorScheme.primary),),
-                              ),
-                            ))
-                          ]),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Row(
-                            children: [
-                              SubscribeButton(channelId: _.channel!.authorId, subCount: compactCurrency.format(_.channel!.subCount)),
-                            ],
-                          ),
-                        ),
                         Expanded(
                           child: <Widget>[
                             ChannelInfo(key: const ValueKey('info'), channel: _.channel!),
