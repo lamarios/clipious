@@ -61,6 +61,11 @@ It is also available on IzzyOnDroid, and Accrescent:
 [![Video](./screenshots/tv-video_small.png)](./screenshots/tv-video.png)
 [![Channel](./screenshots/tv-channel_small.png)](./screenshots/tv-channel_small.png)
 
+## Facing an issue ? 
+
+- Check the [Common issue wiki page](https://github.com/lamarios/clipious/wiki/Common-Issues)
+- Open an issue
+
 ## Contribute
 
 ### Translations
