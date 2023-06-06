@@ -483,7 +483,7 @@
   "@sponsorBlockCategoryFillerDescription": {
     "description": "Sponsorblock 'Filler' Category description"
   },
-  "sponsorBlockCategoryMusicOffTopicDescription": "Інтервал без фактичного контенту. Це може бути пауза, статичний кадр, повторювана анімація. Не слід використовувати для переходів, що містять інформацію.",
+  "sponsorBlockCategoryMusicOffTopicDescription": "Тільки для використання в музичних відео. Використовується лише для частин музичних відео, які не підпадають під іншу категорію.",
   "@sponsorBlockCategoryMusicOffTopicDescription": {
     "description": "Only for use in music videos. This only should be used for sections of music videos that aren't already covered by another category."
   },
