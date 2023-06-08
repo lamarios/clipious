@@ -60,7 +60,7 @@ class Service {
   final log = Logger('Service');
 
   String urlFormatForLog(Uri? uri) {
-    return '${uri?.replace(host: 'your-host.host')}';
+    return '${uri?.replace(host: 'xxxxxxxxxx')}';
   }
 
   handleResponse(Response response) {
