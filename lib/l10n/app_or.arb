@@ -614,5 +614,13 @@
   "searchSortUploadDate": "ଅପଲୋଡ୍ ତାରିଖ",
   "@searchSortUploadDate": {
     "description": "Sort search by upload date"
+  },
+  "rememberSubtitleLanguage": "ସବ୍ଟାଇଟ୍ଲ ଭାଷା ମନେରଖ",
+  "@rememberSubtitleLanguage": {
+    "description": "Settings label for remembering subtitle language"
+  },
+  "rememberSubtitleLanguageDescription": "ଯଦି ଉପଲବ୍ଧ ହୁଏ, ସ୍ୱୟଂଚାଳିତ ଭାବରେ ଶେଷ ଭାଷାକୁ ସବ୍ଟାଇଟ୍ଲ ଭାବେ ସେଟ୍ କରନ୍ତୁ",
+  "@rememberSubtitleLanguageDescription": {
+    "description": "Settings description for remembering subtitle language"
   }
 }

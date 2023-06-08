@@ -433,7 +433,7 @@
   "@sponsorBlockCategoryMusicOffTopic": {
     "description": "Sponsorblock 'MusicOffTopic' Category"
   },
-  "sponsorBlockCategoryMusicOffTopicDescription": "Intervalo sin contenido real. Puede ser una pausa, un fotograma estático, una animación que se repite. No debe utilizarse para transiciones que contengan información.",
+  "sponsorBlockCategoryMusicOffTopicDescription": "Sólo para usarlo en videoclip. Sólo se debe utilizar para partes de los videoclip que no estén ya cubiertas por otra categoría.",
   "@sponsorBlockCategoryMusicOffTopicDescription": {
     "description": "Only for use in music videos. This only should be used for sections of music videos that aren't already covered by another category."
   },
