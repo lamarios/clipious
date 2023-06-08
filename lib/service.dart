@@ -59,8 +59,13 @@ const MAX_PING = 9007199254740991;
 class Service {
   final log = Logger('Service');
 
+  String urlFormatForLog(Uri? uri) {
+    return '${uri?.replace(host: 'your-host.host')}';
+  }
+
   handleResponse(Response response) {
     var body = utf8.decode(response.bodyBytes);
+    log.info("Response from ${response.request?.method} ${urlFormatForLog(response.request?.url)}, status: ${response.statusCode}");
 
     if (body.isNotEmpty) {
       var decoded = jsonDecode(body);
@@ -73,12 +78,13 @@ class Service {
       }
 
       if (error != null) {
-        log.info('Error while calling service: $error');
+        log.severe('Error while calling service: $error');
         throw InvidiousServiceError(error);
       }
 
       return decoded;
     } else if (response.statusCode < 200 || response.statusCode >= 400) {
+      log.severe('Error making request to ${response.request?.url}, \n status: ${response.statusCode}, \n Body: ${response.body}');
       throw InvidiousServiceError('Couldn\'t make request, response code: ${response.statusCode}');
     }
   }
@@ -111,10 +117,11 @@ class Service {
         url += '?${queryStr.join('&')}';
       }
 
-      log.info('calling $url');
-      return Uri.parse(url);
+      var uri = Uri.parse(url);
+      log.info('calling ${urlFormatForLog(uri)}');
+      return uri;
     } catch (err) {
-      log.info(err);
+      log.severe('Couldn\'t build url', err);
       rethrow;
     }
   }
@@ -133,19 +140,16 @@ class Service {
       var map = {'email': username, 'password': password};
 
       final response = await http.post(Uri.parse(url), body: map);
-      log.info(response.headers);
       if (response.statusCode == 302 && response.headers.containsKey('set-cookie')) {
         // we have a cookie to parse
         return response.headers['set-cookie']!.split(';').firstWhere((element) => element.startsWith('SID='));
       } else {
-        throw InvidiousServiceError('wrong error code (${response.statusCode} or no cookie headers ${response.headers['set-cookie']}');
+        throw InvidiousServiceError('wrong error code (${response.statusCode}) or no cookie headers: ${response.headers['set-cookie']}');
       }
-    } catch (err) {
+    } catch (err, stacktrace) {
       if (err is InvidiousServiceError) {
-        log.info(err.message);
+        log.severe('Failed to log in with cookies: \n ${err.message}', err, stacktrace);
       }
-
-      log.info(err);
       throw InvidiousServiceError('Wrong username or password');
     }
   }
@@ -172,10 +176,10 @@ class Service {
 
   Map<String, String> getAuthenticationHeaders(Server s) {
     if (s.authToken != null && s.authToken!.isNotEmpty) {
-      log.info('logged in with token');
+      log.fine('logged in with token');
       return {'Authorization': 'Bearer ${s.authToken}'};
     } else if (s.sidCookie != null && s.sidCookie!.isNotEmpty) {
-      log.info('logged in with cookie');
+      log.fine('logged in with cookie');
       return {'Cookie': s.sidCookie!};
     } else {
       throw InvidiousServiceError('No authentication method provided to access authenticated endpoint');
@@ -230,12 +234,7 @@ class Service {
     log.info(results);
 
     if (query.isNotEmpty && db.getSettings(USE_SEARCH_HISTORY)?.value == 'true') {
-      db.addToSearchHistory(
-          SearchHistoryItem(
-              query,
-              (DateTime.now().millisecondsSinceEpoch / 1000).round()
-          )
-      );
+      db.addToSearchHistory(SearchHistoryItem(query, (DateTime.now().millisecondsSinceEpoch / 1000).round()));
     }
 
     return results;
@@ -273,13 +272,8 @@ class Service {
     final response = await http.get(buildUrl(SEARCH_SUGGESTIONS, pathParams: {":query": Uri.encodeQueryComponent(query)}));
     SearchSuggestion search = SearchSuggestion.fromJson(handleResponse(response));
     if (search.suggestions.any((element) => element.contains(";"))) {
-      search.suggestions = search
-          .suggestions
-          .map((s) =>
-            s.split(";")
-              .where((e) => e.isNotEmpty && e.startsWith("&#"))
-              .map((e) => String.fromCharCode(int.parse(e.replaceAll("&#", "")))).toList().join("")
-          ).toList();
+      search.suggestions =
+          search.suggestions.map((s) => s.split(";").where((e) => e.isNotEmpty && e.startsWith("&#")).map((e) => String.fromCharCode(int.parse(e.replaceAll("&#", "")))).toList().join("")).toList();
     }
 
     return search;
@@ -307,9 +301,10 @@ class Service {
 
     var currentlySelectedServer = db.getCurrentlySelectedServer();
 
+    var url = buildUrl(ADD_DELETE_SUBSCRIPTION, pathParams: {":ucid": channelId});
     var headers = getAuthenticationHeaders(currentlySelectedServer);
 
-    final response = await http.post(buildUrl(ADD_DELETE_SUBSCRIPTION, pathParams: {":ucid": channelId}), headers: headers);
+    final response = await http.post(url, headers: headers);
   }
 
   Future<void> unSubscribe(String channelId) async {
@@ -317,9 +312,10 @@ class Service {
 
     var currentlySelectedServer = db.getCurrentlySelectedServer();
 
+    var url = buildUrl(ADD_DELETE_SUBSCRIPTION, pathParams: {":ucid": channelId});
     var headers = getAuthenticationHeaders(currentlySelectedServer);
 
-    final response = await http.delete(buildUrl(ADD_DELETE_SUBSCRIPTION, pathParams: {":ucid": channelId}), headers: headers);
+    final response = await http.delete(url, headers: headers);
     log.info('${response.statusCode} - ${response.body}');
   }
 
@@ -328,9 +324,10 @@ class Service {
 
     var currentlySelectedServer = db.getCurrentlySelectedServer();
 
+    var url = buildUrl(GET_SUBSCIPTIONS);
     var headers = getAuthenticationHeaders(currentlySelectedServer);
 
-    final response = await http.get(buildUrl(GET_SUBSCIPTIONS), headers: headers);
+    final response = await http.get(url, headers: headers);
     Iterable i = handleResponse(response);
 
     return List<Subscription>.from(i.map((e) => Subscription.fromJson(e))).indexWhere((element) => element.authorId == channelId) > -1;
@@ -379,9 +376,10 @@ class Service {
     var currentlySelectedServer = db.getCurrentlySelectedServer();
 
     try {
+      var url = buildUrl(GET_USER_PLAYLISTS);
       var headers = getAuthenticationHeaders(currentlySelectedServer);
 
-      final response = await http.get(buildUrl(GET_USER_PLAYLISTS), headers: headers);
+      final response = await http.get(url, headers: headers);
       Iterable i = handleResponse(response);
       return List<Playlist>.from(i.map((e) => Playlist.fromJson(e)));
     } catch (e) {
@@ -399,6 +397,7 @@ class Service {
   Future<String?> createPlayList(String name, String type) async {
     var currentlySelectedServer = db.getCurrentlySelectedServer();
 
+    var url = buildUrl(POST_USER_PLAYLIST);
     var headers = getAuthenticationHeaders(currentlySelectedServer);
     headers['Content-Type'] = 'application/json';
 
@@ -409,7 +408,7 @@ class Service {
 
     log.info(jsonEncode(body));
 
-    final response = await http.post(buildUrl(POST_USER_PLAYLIST), headers: headers, body: jsonEncode(body));
+    final response = await http.post(url, headers: headers, body: jsonEncode(body));
     Map<String, dynamic> playlist = handleResponse(response);
     return playlist['playlistId'] as String;
   }
@@ -417,6 +416,7 @@ class Service {
   Future<void> addVideoToPlaylist(String playListId, String videoId) async {
     var currentlySelectedServer = db.getCurrentlySelectedServer();
 
+    var url = buildUrl(POST_USER_PLAYLIST_VIDEO, pathParams: {":id": playListId});
     var headers = getAuthenticationHeaders(currentlySelectedServer);
     headers['Content-Type'] = 'application/json';
 
@@ -424,42 +424,45 @@ class Service {
       'videoId': videoId,
     };
 
-    final response = await http.post(buildUrl(POST_USER_PLAYLIST_VIDEO, pathParams: {":id": playListId}), headers: headers, body: jsonEncode(body));
+    final response = await http.post(url, headers: headers, body: jsonEncode(body));
     handleResponse(response);
   }
 
   Future<void> deleteUserPlaylist(String playListId) async {
     var currentlySelectedServer = db.getCurrentlySelectedServer();
 
+    var url = buildUrl(DELETE_USER_PLAYLIST, pathParams: {":id": playListId});
+
     var headers = getAuthenticationHeaders(currentlySelectedServer);
     headers['Content-Type'] = 'application/json';
 
-    final response = await http.delete(buildUrl(DELETE_USER_PLAYLIST, pathParams: {":id": playListId}), headers: headers);
+    final response = await http.delete(url, headers: headers);
     handleResponse(response);
   }
 
   Future<void> deleteUserPlaylistVideo(String playListId, String indexId) async {
     var currentlySelectedServer = db.getCurrentlySelectedServer();
 
+    var url = buildUrl(DELETE_USER_PLAYLIST_VIDEO, pathParams: {':id': playListId, ':index': indexId});
     var headers = getAuthenticationHeaders(currentlySelectedServer);
     headers['Content-Type'] = 'application/json';
 
-    final response = await http.delete(buildUrl(DELETE_USER_PLAYLIST_VIDEO, pathParams: {':id': playListId, ':index': indexId}), headers: headers);
+    final response = await http.delete(url, headers: headers);
     handleResponse(response);
   }
 
   Future<Duration?> pingServer(String url) async {
     int start = DateTime.now().millisecondsSinceEpoch;
     String fullUri = '$url${STATS}';
-    log.info('calling ${fullUri}');
+    log.fine('ping ${fullUri}');
     final response = await http.get(Uri.parse(fullUri), headers: {'Content-Type': 'application/json; charset=utf-16'});
 
     try {
       handleResponse(response);
       var diff = DateTime.now().millisecondsSinceEpoch - start;
       return Duration(milliseconds: diff);
-    } catch (err) {
-      log.info(err);
+    } catch (err, stacktrace) {
+      log.severe('couldn\;t ping ${url}', err, stacktrace);
       return null;
     }
   }

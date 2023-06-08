@@ -140,7 +140,7 @@ class MiniPlayerController extends GetxController {
     } else {
       playVideo(videos);
     }
-    log.info('Videos in queue ${videos.length}');
+    log.fine('Videos in queue ${videos.length}');
     update();
   }
 
@@ -168,7 +168,7 @@ class MiniPlayerController extends GetxController {
 
   playNext() {
     if (videos.isNotEmpty) {
-      log.info('Play next: played length: ${playedVideos.length} videos: ${videos.length} Repeat mode: $repeat');
+      log.fine('Play next: played length: ${playedVideos.length} videos: ${videos.length} Repeat mode: $repeat');
       if (repeat == PlayerRepeat.repeatOne) {
         switchToVideo(currentlyPlaying!);
       } else {
@@ -218,7 +218,7 @@ class MiniPlayerController extends GetxController {
 
   playVideo(List<BaseVideo> videos, {bool? goBack}) {
     if (goBack ?? false) navigatorKey.currentState?.pop();
-    log.info('Playing ${videos.length} videos');
+    log.fine('Playing ${videos.length} videos');
     if (videos.isNotEmpty) {
       this.videos = List.from(videos, growable: true);
       playedVideos = [];
@@ -347,10 +347,10 @@ class MiniPlayerController extends GetxController {
   }
 
   onQueueReorder(int oldItemIndex, int newItemIndex) {
-    log.info('Dragged video');
+    log.fine('Dragged video');
     var movedItem = videos.removeAt(oldItemIndex);
     videos.insert(newItemIndex, movedItem);
-    log.info('Reordered list: $oldItemIndex new index: ${videos.indexOf(movedItem)}');
+    log.fine('Reordered list: $oldItemIndex new index: ${videos.indexOf(movedItem)}');
     if (oldItemIndex == currentIndex) {
       currentIndex = newItemIndex;
     } else if (oldItemIndex > currentIndex && newItemIndex <= currentIndex) {

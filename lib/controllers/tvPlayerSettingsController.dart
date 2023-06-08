@@ -59,13 +59,13 @@ class TvPlayerSettingsController extends GetxController {
   }
 
   changeVideoTrack(String selected) {
-    log.info('Video quality selected $selected');
+    log.fine('Video quality selected $selected');
 
     if (useDash) {
       BetterPlayerAsmsTrack? track = videoController?.betterPlayerAsmsTracks.firstWhere((element) => '${element.height}p' == selected);
 
       if (track != null) {
-        log.info('Changing video track to $selected');
+        log.fine('Changing video track to $selected');
         videoController?.setTrack(track);
       }
     } else {
@@ -78,24 +78,24 @@ class TvPlayerSettingsController extends GetxController {
   }
 
   changeChangeAudioTrack(String selected) {
-    log.info('Audio quality selected $selected');
+    log.fine('Audio quality selected $selected');
     BetterPlayerAsmsAudioTrack? track = videoController?.betterPlayerAsmsAudioTracks?.firstWhere((e) => '${e.label}' == selected);
 
     if (track != null) {
-      log.info('Changing audio track to $selected');
+      log.fine('Changing audio track to $selected');
       videoController?.setAudioTrack(track);
     }
     update();
   }
 
   changeSubtitles(String selected) {
-    log.info('Subtitles selected $selected');
+    log.fine('Subtitles selected $selected');
     BetterPlayerSubtitlesSource? track = videoController?.betterPlayerSubtitlesSourceList.firstWhere((e) => '${e.name}' == selected);
 
     db.saveSetting(SettingsValue(LAST_SUBTITLE, selected));
 
     if (track != null) {
-      log.info('Changing subtitles to $selected');
+      log.fine('Changing subtitles to $selected');
       videoController?.setupSubtitleSource(track);
     }
     update();

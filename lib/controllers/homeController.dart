@@ -48,7 +48,7 @@ class HomeController extends GetxController {
   serverChanged() {
     selectedIndex = 0;
     isLoggedIn = db.isLoggedInToCurrentServer();
-    log.info('logged in ? ${isLoggedIn}');
+    log.fine('logged in ? ${isLoggedIn}');
     update();
     VideoListController.to(VideoListController.popularTag)?.refreshVideos();
   }
@@ -73,8 +73,9 @@ class HomeController extends GetxController {
         }
       }
       update();
-    } catch (err) {
+    } catch (err, stacktrace) {
       // not a url;
+      log.severe('Couldn\'t open external url: ${url}', err, stacktrace);
     }
   }
 

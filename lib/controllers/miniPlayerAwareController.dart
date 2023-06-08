@@ -9,7 +9,7 @@ class MiniPlayerAwareController extends GetxController {
   bool applyPadding = false;
 
   setPadding(bool apply) {
-    log.info('setting mini player padding $applyPadding');
+    log.fine('setting mini player padding $applyPadding');
     applyPadding = apply;
     update();
   }

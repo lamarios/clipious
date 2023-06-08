@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:invidious/myRouteObserver.dart';
-import 'package:invidious/utils.dart';
+import 'package:invidious/views/settings/applogs.dart';
 import 'package:invidious/views/settings/searchHistorySettings.dart';
 import 'package:locale_names/locale_names.dart';
 import 'package:invidious/views/settings/sponsorBlockSettings.dart';
@@ -37,6 +37,10 @@ class Settings extends StatelessWidget {
 
   openSearchHistorySettings(BuildContext context) {
     navigatorKey.currentState?.push(MaterialPageRoute(settings: ROUTE_SETTINGS_SEARCH_HISTORY, builder: (context) => const SearchHistorySettings()));
+  }
+
+  openAppLogs(BuildContext context) {
+    navigatorKey.currentState?.push(MaterialPageRoute(settings: ROUTE_SETTINGS_SEARCH_HISTORY, builder: (context) => const AppLogs()));
   }
 
   searchCountry(BuildContext context, SettingsController controller) {
@@ -260,6 +264,11 @@ class Settings extends StatelessWidget {
                 SettingsTile(
                   title: Text('${locals.version}: ${_.packageInfo.version}'),
                   description: Text('${locals.build}: ${_.packageInfo.buildNumber}'),
+                ),
+                SettingsTile(
+                  title: Text(locals.appLogs),
+                  description: Text(locals.appLogsDescription),
+                  onPressed: openAppLogs,
                 )
               ])
             ],

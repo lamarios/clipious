@@ -14,6 +14,7 @@ import 'package:objectbox/internal.dart'; // generated code can access "internal
 import 'package:objectbox/objectbox.dart';
 import 'package:objectbox_flutter_libs/objectbox_flutter_libs.dart';
 
+import 'models/db/appLog.dart';
 import 'models/db/progress.dart';
 import 'models/db/searchHistoryItem.dart';
 import 'models/db/server.dart';
@@ -131,6 +132,45 @@ final _entities = <ModelEntity>[
             flags: 0)
       ],
       relations: <ModelRelation>[],
+      backlinks: <ModelBacklink>[]),
+  ModelEntity(
+      id: const IdUid(5, 8446250266008376981),
+      name: 'AppLog',
+      lastPropertyId: const IdUid(6, 5023716219165786985),
+      flags: 0,
+      properties: <ModelProperty>[
+        ModelProperty(
+            id: const IdUid(1, 3160197863614923332),
+            name: 'id',
+            type: 6,
+            flags: 1),
+        ModelProperty(
+            id: const IdUid(2, 3008237629246315185),
+            name: 'level',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(3, 2647517759142178088),
+            name: 'time',
+            type: 10,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(4, 7759611646931835814),
+            name: 'message',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(5, 1230803493579490035),
+            name: 'stacktrace',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(6, 5023716219165786985),
+            name: 'logger',
+            type: 9,
+            flags: 0)
+      ],
+      relations: <ModelRelation>[],
       backlinks: <ModelBacklink>[])
 ];
 
@@ -154,7 +194,7 @@ Future<Store> openStore(
 ModelDefinition getObjectBoxModel() {
   final model = ModelInfo(
       entities: _entities,
-      lastEntityId: const IdUid(4, 6956330633348216454),
+      lastEntityId: const IdUid(5, 8446250266008376981),
       lastIndexId: const IdUid(5, 7262786699272501249),
       lastRelationId: const IdUid(0, 0),
       lastSequenceId: const IdUid(0, 0),
@@ -296,6 +336,51 @@ ModelDefinition getObjectBoxModel() {
             ..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
 
           return object;
+        }),
+    AppLog: EntityDefinition<AppLog>(
+        model: _entities[4],
+        toOneRelations: (AppLog object) => [],
+        toManyRelations: (AppLog object) => {},
+        getId: (AppLog object) => object.id,
+        setId: (AppLog object, int id) {
+          object.id = id;
+        },
+        objectToFB: (AppLog object, fb.Builder fbb) {
+          final levelOffset = fbb.writeString(object.level);
+          final messageOffset =
+              object.message == null ? null : fbb.writeString(object.message!);
+          final stacktraceOffset = object.stacktrace == null
+              ? null
+              : fbb.writeString(object.stacktrace!);
+          final loggerOffset = fbb.writeString(object.logger);
+          fbb.startTable(7);
+          fbb.addInt64(0, object.id);
+          fbb.addOffset(1, levelOffset);
+          fbb.addInt64(2, object.time.millisecondsSinceEpoch);
+          fbb.addOffset(3, messageOffset);
+          fbb.addOffset(4, stacktraceOffset);
+          fbb.addOffset(5, loggerOffset);
+          fbb.finish(fbb.endTable());
+          return object.id;
+        },
+        objectFromFB: (Store store, ByteData fbData) {
+          final buffer = fb.BufferContext(fbData);
+          final rootOffset = buffer.derefObject(0);
+
+          final object = AppLog(
+              level: const fb.StringReader(asciiOptimization: true)
+                  .vTableGet(buffer, rootOffset, 6, ''),
+              logger: const fb.StringReader(asciiOptimization: true)
+                  .vTableGet(buffer, rootOffset, 14, ''),
+              time: DateTime.fromMillisecondsSinceEpoch(
+                  const fb.Int64Reader().vTableGet(buffer, rootOffset, 8, 0)),
+              message: const fb.StringReader(asciiOptimization: true)
+                  .vTableGetNullable(buffer, rootOffset, 10),
+              stacktrace: const fb.StringReader(asciiOptimization: true)
+                  .vTableGetNullable(buffer, rootOffset, 12))
+            ..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
+
+          return object;
         })
   };
 
@@ -364,4 +449,27 @@ class SearchHistoryItem_ {
   /// see [SearchHistoryItem.time]
   static final time =
       QueryIntegerProperty<SearchHistoryItem>(_entities[3].properties[2]);
+}
+
+/// [AppLog] entity fields to define ObjectBox queries.
+class AppLog_ {
+  /// see [AppLog.id]
+  static final id = QueryIntegerProperty<AppLog>(_entities[4].properties[0]);
+
+  /// see [AppLog.level]
+  static final level = QueryStringProperty<AppLog>(_entities[4].properties[1]);
+
+  /// see [AppLog.time]
+  static final time = QueryIntegerProperty<AppLog>(_entities[4].properties[2]);
+
+  /// see [AppLog.message]
+  static final message =
+      QueryStringProperty<AppLog>(_entities[4].properties[3]);
+
+  /// see [AppLog.stacktrace]
+  static final stacktrace =
+      QueryStringProperty<AppLog>(_entities[4].properties[4]);
+
+  /// see [AppLog.logger]
+  static final logger = QueryStringProperty<AppLog>(_entities[4].properties[5]);
 }

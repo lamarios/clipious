@@ -26,11 +26,11 @@ class MyRouteObserver extends RouteObserver<PageRoute<dynamic>> {
         case ROUTE_VIDEO:
         case ROUTE_PLAYLIST_LIST:
         case ROUTE_CHANNEL:
-          log.info('We should stop playing video');
+          log.fine('We should stop playing video');
           MiniPlayerController.to()?.showMiniPlayer();
           break;
         default:
-          log.info('keep playing video');
+          log.fine('keep playing video');
           break;
       }
     }

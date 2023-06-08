@@ -110,11 +110,8 @@ class ServerListSettingsController extends GetxController {
           publicServerProgress = progress / servers.length;
           update();
           return e;
-        } catch (err) {
-          if(err is Error) {
-            err.printError();
-          }
-          log.info('couldn\'t reach server ${e.url}');
+        } catch (err, stacktrace) {
+          log.severe('couldn\'t reach server ${e.url}', err, stacktrace);
           return null;
         }
       }));
