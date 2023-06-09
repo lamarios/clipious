@@ -6,5 +6,188 @@
   "cancel": "বাতিল",
   "@cancel": {
     "description": "Cancel button label"
+  },
+  "subscriptions": "সাবস্ক্রিপশনস",
+  "@subscriptions": {
+    "description": "User subscriptions"
+  },
+  "playlists": "প্লেলিস্টস",
+  "@playlists": {
+    "description": "User playlists"
+  },
+  "popular": "পপুলার",
+  "@popular": {
+    "description": "Popular videos title"
+  },
+  "trending": "ট্রেন্ডিং",
+  "@trending": {
+    "description": "Trending videos title"
+  },
+  "addPlayList": "প্লেলিস্ট যোগ করুন",
+  "@addPlayList": {
+    "description": "Title for add playlist dialog"
+  },
+  "playListName": "প্লেলিস্টের নাম",
+  "@playListName": {
+    "description": "Place holder for new playlist name text field"
+  },
+  "playlistVisibility": "ভিজিবিলিটি",
+  "@playlistVisibility": {
+    "description": "Dropdown label for playlist visibility"
+  },
+  "publicPlaylist": "পাবলিক",
+  "@publicPlaylist": {
+    "description": "Public playlist"
+  },
+  "add": "যোগ করুন",
+  "@add": {
+    "description": "Add button abel"
+  },
+  "unlistedPlaylist": "লিস্টে নেই",
+  "@unlistedPlaylist": {
+    "description": "Unlisted playlist"
+  },
+  "info": "ইনফো",
+  "@info": {
+    "description": "Info label"
+  },
+  "videos": "ভিডিওস",
+  "@videos": {
+    "description": "Videos label"
+  },
+  "streams": "স্ট্রীমস",
+  "@streams": {
+    "description": "Streams label"
+  },
+  "subscribed": "সাবস্ক্রাইব করা আছেন",
+  "@subscribed": {
+    "description": "When the user is subscribed to a channel"
+  },
+  "subscribe": "সাবস্ক্রাইব",
+  "@subscribe": {
+    "description": "Label for user to subscribe to a channel"
+  },
+  "nSubscribers": "সাবস্ক্রাইবার সংখ্যা",
+  "@nSubscribers": {
+    "description": "number of subscribers",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "shareYoutubeLink": "ইউটিউব লিংক শেয়ার করুন",
+  "@shareYoutubeLink": {
+    "description": "asking user to share youtube link"
+  },
+  "shareInvidiousLink": "invidious লিংক শেয়ার করুন",
+  "@shareInvidiousLink": {
+    "description": "asking user to share invidious link"
+  },
+  "ok": "ওকে",
+  "@ok": {
+    "description": "Ok"
+  },
+  "channels": "চ্যানেলস",
+  "@channels": {
+    "description": "Channels label"
+  },
+  "recommended": "সুপারিশকৃত",
+  "@recommended": {
+    "description": "Recommended label"
+  },
+  "wizardIntro": "পাবলিক সার্ভার সিলেক্ট করুন অথবা নিজের সার্ভার অ্যাড করুন।(পরবর্তিতে সেটিং থেকে পরিবর্তন করা যাবে)",
+  "@wizardIntro": {
+    "description": "Welcome message on frst time use"
+  },
+  "startUsingClipious": "Clipious ব্যাবহার শুরু করুন",
+  "@startUsingClipious": {
+    "description": "button label to start using the app"
+  },
+  "errorAddingVideoToPlaylist": "ভিডিওটি প্লেলিস্টে অ্যাড করতে ভুল হচ্ছে",
+  "@errorAddingVideoToPlaylist": {
+    "description": "Error while adding video to playlist"
+  },
+  "country": "দেশ",
+  "@country": {
+    "description": "Country label"
+  },
+  "removeFromPlayList": "প্লেলিস্ট থেকে রিমুভ করুন",
+  "@removeFromPlayList": {
+    "description": "Menu item description to show remove a video from a playlist"
+  },
+  "deletePlayListQ": "প্লেলিস্ট ডিলিট করবেন?",
+  "@deletePlayListQ": {
+    "description": "Ask user to delete a playlist"
+  },
+  "noChannels": "কোনো চ্যানেল নেই",
+  "@noChannels": {
+    "description": "when there are no channels to display"
+  },
+  "noVideoInPlayList": "প্লেলিস্টে কোনো ভিডিও নেই",
+  "@noVideoInPlayList": {
+    "description": "When no videos in the playlist"
+  },
+  "irreversibleAction": "এটি ফিরিয়ে আনা যাবেনা",
+  "@irreversibleAction": {
+    "description": "Tell the user that the action cannot be undone"
+  },
+  "comments": "মন্তব্য",
+  "@comments": {
+    "description": "Comments label"
+  },
+  "noPlaylists": "কোনো প্লেলিস্ট নেই",
+  "@noPlaylists": {
+    "description": "when there are no playlists to display"
+  },
+  "sponsorSkipped": "স্পনসর এড়িয়ে যাওয়া হয়েছে",
+  "@sponsorSkipped": {
+    "description": "When a sponsor segment is skipped thanks to sponsor block"
+  },
+  "couldntLoadVideo": "ভিডিওটি লোড করা যায়নি",
+  "@couldntLoadVideo": {
+    "description": "Message to display when a video can't be loaded"
+  },
+  "videoAddedToPlaylist": "ভিডিওটি প্লেলিস্টে অ্যাড করা হয়েছে",
+  "@videoAddedToPlaylist": {
+    "description": "Pop up message when a video was added to a playlist"
+  },
+  "couldntFetchVideos": "ভিডিও লোড করা যায়নি, পুনরায় চেষ্টা করতে ক্লিক করুন।",
+  "@couldntFetchVideos": {
+    "description": "Can't load bunch of videos, asking  user to try again"
+  },
+  "loadMore": "আরো লোড করুন",
+  "@loadMore": {
+    "description": "CTA to load more"
+  },
+  "selectPlaylist": "প্লেলিস্ট সিলেক্ট করুন",
+  "@selectPlaylist": {
+    "description": "Title when users wants to add a video to a playlist"
+  },
+  "createNewPlaylist": "নতুন প্লেলিস্ট তৈরি করুন",
+  "@createNewPlaylist": {
+    "description": "Button label to create a new playlist when the user wants to add a video to a playlist"
+  },
+  "nReplies": "কমেন্টের সংখ্যা",
+  "@nReplies": {
+    "description": "number of replies to a comment",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "topSorting": "টপ ভিডিও",
+  "@topSorting": {
+    "description": "Content sorting: top"
+  },
+  "newSorting": "নতুন ভিডিও",
+  "@newSorting": {
+    "description": "Content sorting: new"
+  },
+  "streamIsLive": "লাইভ",
+  "@streamIsLive": {
+    "description": "Label when a video is a live stream"
   }
 }
