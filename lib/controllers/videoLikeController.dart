@@ -43,7 +43,7 @@ class VideoLikeButtonController extends GetxController {
 
     update();
 
-    log.info('video is currently liked ? $isVideoLiked');
+    log.fine('video is currently liked ? $isVideoLiked');
   }
 
   addVideoToPlaylist() {}
@@ -62,14 +62,14 @@ class VideoLikeButtonController extends GetxController {
 
     if (p != null && videoId != null) {
       if (isVideoLiked) {
-        log.info('Video is liked, unliking it');
+        log.fine('Video is liked, unliking it');
         VideoInList? v = p.videos.firstWhereOrNull((element) => element.videoId == videoId!);
         if (v?.indexId != null) {
           await service.deleteUserPlaylistVideo(p.playlistId, v!.indexId!);
           isVideoLiked = !isVideoLiked;
         }
       } else {
-        log.info('Video is not liked yet, we add it to the like playlist');
+        log.fine('Video is not liked yet, we add it to the like playlist');
         await service.addVideoToPlaylist(p.playlistId, videoId!);
         isVideoLiked = !isVideoLiked;
       }

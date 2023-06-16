@@ -13,7 +13,7 @@ const Duration controlFadeOut = Duration(seconds: 4);
 const Duration throttleDuration = Duration(milliseconds: 250);
 
 class TvPlayerController extends GetxController {
-  Logger logger = Logger('TvPlayerController');
+  Logger log = Logger('TvPlayerController');
 
   static TvPlayerController? to() => safeGet();
   double progress = 0;
@@ -27,10 +27,10 @@ class TvPlayerController extends GetxController {
   togglePlayPause() {
     showControls();
     if (isPlaying) {
-      logger.info('Pausing video');
+      log.info('Pausing video');
       PlayerController.to()?.videoController?.pause();
     } else {
-      logger.info('Playing video');
+      log.info('Playing video');
       PlayerController.to()?.videoController?.play();
     }
     update();
@@ -84,7 +84,7 @@ class TvPlayerController extends GetxController {
   }
 
   KeyEventResult handleRemoteEvents(FocusNode node, KeyEvent event) {
-    log.info('Other key event: ${event.logicalKey}');
+    log.fine('Other key event: ${event.logicalKey}');
     showControls();
     if (event is KeyUpEvent) {
       if (!showSettings) {
@@ -95,7 +95,7 @@ class TvPlayerController extends GetxController {
         } else if (event.logicalKey == LogicalKeyboardKey.select) {
           togglePlayPause();
         } else if (event.logicalKey == LogicalKeyboardKey.arrowDown) {
-          log.info('showing video settings');
+          log.fine('showing video settings');
           showSettings = true;
           update();
         }

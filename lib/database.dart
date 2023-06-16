@@ -1,3 +1,4 @@
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:invidious/controllers/settingsController.dart';
 import 'package:invidious/models/db/progress.dart';
 import 'package:invidious/models/db/searchHistoryItem.dart';
@@ -7,12 +8,13 @@ import 'package:logging/logging.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 
+import 'models/db/appLog.dart';
 import 'models/db/server.dart';
 import 'objectbox.g.dart'; // created by `flutter pub run build_runner build`
 
 const SELECTED_SERVER = 'selected-server';
 const USE_SPONSORBLOCK = 'use-sponsor-block';
-const SPONSOR_BLOCK_PREFIX='sponsor-block-';
+const SPONSOR_BLOCK_PREFIX = 'sponsor-block-';
 const BROWSING_COUNTRY = 'browsing-country';
 const DYNAMIC_THEME = 'dynamic-theme';
 const USE_DASH = 'use-dash';
@@ -33,6 +35,7 @@ const USE_SEARCH_HISTORY = 'use-search-history';
 const SEARCH_HISTORY_LIMIT = 'search-history-limit';
 
 const ON_OPEN = "on-open";
+const MAX_LOGS = 1000;
 
 class DbClient {
   /// The Store of this app.
@@ -94,10 +97,10 @@ class DbClient {
     Server? server = store.box<Server>().query(Server_.inUse.equals(true)).build().findFirst();
 
     if (server == null) {
-      log.info('No servers selected, we try to find one');
+      log.fine('No servers selected, we try to find one');
       List<Server> servers = getServers();
       if (servers.isEmpty) {
-        log.info('We don\'t have servers, we need to show the welcome screen');
+        log.fine('We don\'t have servers, we need to show the welcome screen');
         throw NoServerSelected();
       }
       // we just select the first of the list
@@ -139,12 +142,7 @@ class DbClient {
   }
 
   List<SearchHistoryItem> _getSearchHistory() {
-    return (store
-      .box<SearchHistoryItem>()
-      .query()
-      ..order(SearchHistoryItem_.time, flags: Order.descending))
-      .build()
-      .find();
+    return (store.box<SearchHistoryItem>().query()..order(SearchHistoryItem_.time, flags: Order.descending)).build().find();
   }
 
   void addToSearchHistory(SearchHistoryItem searchHistoryItem) {
@@ -161,5 +159,24 @@ class DbClient {
 
   void clearSearchHistory() {
     store.box<SearchHistoryItem>().removeAll();
+  }
+
+  void insertLogs(AppLog log) {
+    store.box<AppLog>().put(log);
+    EasyDebounce.debounce('log-cleaning', const Duration(seconds: 5), () {
+      cleanOldLogs();
+    });
+  }
+
+  void cleanOldLogs() {
+    var all = store.box<AppLog>().getAll();
+
+    List<int> ids = all.reversed.skip(MAX_LOGS).map((e) => e.id).toList();
+    store.box<AppLog>().removeMany(ids);
+    log.fine("clearing ${ids.length} logs out of ${all.length}");
+  }
+
+  List<AppLog> getAppLogs() {
+    return store.box<AppLog>().getAll();
   }
 }

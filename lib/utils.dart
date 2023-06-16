@@ -213,14 +213,14 @@ T? safeGet<T>({String? tag}) {
     return Get.find<T>(tag: tag);
   } catch (err) {
     err.printError();
-    log.info('could not find controller of class ${T.toString()}');
+    log.fine('could not find controller of class ${T.toString()}');
     return null;
   }
 }
 
 KeyEventResult onTvSelect(KeyEvent event, BuildContext context, Function(BuildContext context) func) {
   if (event is KeyUpEvent) {
-    log.info('onTvSelect, ${event.logicalKey}, ${event}');
+    log.fine('onTvSelect, ${event.logicalKey}, ${event}');
     if (event.logicalKey == LogicalKeyboardKey.select || event.logicalKey == LogicalKeyboardKey.enter) {
       func(context);
       return KeyEventResult.handled;

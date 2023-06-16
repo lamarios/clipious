@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:after_layout/after_layout.dart';
 import 'package:back_button_interceptor/back_button_interceptor.dart';
 import 'package:dynamic_color/dynamic_color.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -28,6 +29,7 @@ import 'package:logging/logging.dart';
 
 import 'controllers/appController.dart';
 import 'database.dart';
+import 'models/db/appLog.dart';
 import 'myRouteObserver.dart';
 
 const brandColor = Color(0xFF4f0096);
@@ -39,9 +41,13 @@ final RouteObserver<ModalRoute> routeObserver = MyRouteObserver();
 bool isTv = false;
 
 Future<void> main() async {
-  Logger.root.level = Level.INFO; // defaults to Level.INFO
+  Logger.root.level = kDebugMode ? Level.FINEST : Level.INFO; // defaults to Level.INFO
   Logger.root.onRecord.listen((record) {
     debugPrint('[${record.level.name}] [${record.loggerName}] ${record.message}');
+    // we don't want debug
+    if (record.level == Level.INFO || record.level == Level.SEVERE) {
+      db.insertLogs(AppLog(logger: record.loggerName, level: record.level.name, time: record.time, message: record.message, stacktrace: record.stackTrace?.toString()));
+    }
   });
 
   HttpOverrides.global = MyHttpOverrides();
@@ -68,7 +74,6 @@ class MyApp extends StatelessWidget {
     return GetBuilder<AppController>(
         init: AppController(),
         builder: (_) {
-
           bool useDynamicTheme = db.getSettings(DYNAMIC_THEME)?.value == 'true';
 
           return DynamicColorBuilder(builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) {

@@ -116,9 +116,48 @@
         }
       ],
       "relations": []
+    },
+    {
+      "id": "5:8446250266008376981",
+      "lastPropertyId": "6:5023716219165786985",
+      "name": "AppLog",
+      "properties": [
+        {
+          "id": "1:3160197863614923332",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:3008237629246315185",
+          "name": "level",
+          "type": 9
+        },
+        {
+          "id": "3:2647517759142178088",
+          "name": "time",
+          "type": 10
+        },
+        {
+          "id": "4:7759611646931835814",
+          "name": "message",
+          "type": 9
+        },
+        {
+          "id": "5:1230803493579490035",
+          "name": "stacktrace",
+          "type": 9
+        },
+        {
+          "id": "6:5023716219165786985",
+          "name": "logger",
+          "type": 9
+        }
+      ],
+      "relations": []
     }
   ],
-  "lastEntityId": "4:6956330633348216454",
+  "lastEntityId": "5:8446250266008376981",
   "lastIndexId": "5:7262786699272501249",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",

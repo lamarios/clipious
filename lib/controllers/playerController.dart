@@ -92,7 +92,7 @@ class PlayerController extends GetxController {
         if (currentPosition > previousSponsorCheck + 1) {
           // saving progress
           saveProgress(currentPosition);
-          log.info("video event");
+          log.fine("video event");
 
           if (sponsorSegments.isNotEmpty) {
             double positionInMs = currentPosition * 1000;
@@ -144,7 +144,7 @@ class PlayerController extends GetxController {
   }
 
   toggleDash() {
-    log.info('toggle dash');
+    log.fine('toggle dash');
     // saving progress before we reload new video format
     saveProgress(videoController?.videoPlayerController?.value.position.inSeconds ?? 0);
 
@@ -279,7 +279,7 @@ class PlayerController extends GetxController {
       }));
 
       this.sponsorSegments = segments;
-      log.info('we found ${segments.length} segments to skip');
+      log.fine('we found ${segments.length} segments to skip');
     } else {
       sponsorSegments = [];
     }
