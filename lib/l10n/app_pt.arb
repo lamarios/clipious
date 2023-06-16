@@ -451,7 +451,7 @@
   "@sponsorBlockCategoryMusicOffTopic": {
     "description": "Sponsorblock 'MusicOffTopic' Category"
   },
-  "sponsorBlockCategoryMusicOffTopicDescription": "Um intervalo sem conteúdo real. Pode ser uma pausa, frame estático, repetição de animação. Isto não deve ser utilizado para transições que contenham informação.",
+  "sponsorBlockCategoryMusicOffTopicDescription": "Apenas para utilização em vídeos musicais. Esta categoria só deve ser utilizada para secções de vídeos musicais que ainda não estejam abrangidas por outra categoria.",
   "@sponsorBlockCategoryMusicOffTopicDescription": {
     "description": "Only for use in music videos. This only should be used for sections of music videos that aren't already covered by another category."
   },
@@ -622,5 +622,21 @@
   "enableSearchHistory": "Ativar o histórico de pesquisa",
   "@enableSearchHistory": {
     "description": "Settings label for enabling search history"
+  },
+  "logsCopied": "Registos copiados para a área de transferência",
+  "@logsCopied": {
+    "description": "Message to tell user that logs have been copied to the clipboard"
+  },
+  "copyToClipBoard": "Copiar para a área de transferência",
+  "@copyToClipBoard": {
+    "description": "Text to copy something to clipboard"
+  },
+  "appLogs": "Registos de aplicações",
+  "@appLogs": {
+    "description": "Title for settings that leads to application logs"
+  },
+  "appLogsDescription": "Obter registos do que está a acontecer na aplicação, o que pode ser útil para comunicar problemas",
+  "@appLogsDescription": {
+    "description": "Description of the app log settings"
   }
 }
