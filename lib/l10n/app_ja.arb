@@ -618,5 +618,9 @@
   "requiresRestart": "アプリの再起動が必要",
   "@requiresRestart": {
     "description": "Requires app restart label"
+  },
+  "sponsorBlockCategoryMusicOffTopicDescription": "ミュージックビデオが対象です。他のカテゴリーに分類できないミュージックビデオのシーンにのみ使用されます。",
+  "@sponsorBlockCategoryMusicOffTopicDescription": {
+    "description": "Only for use in music videos. This only should be used for sections of music videos that aren't already covered by another category."
   }
 }

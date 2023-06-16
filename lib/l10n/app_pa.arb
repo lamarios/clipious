@@ -1,0 +1,217 @@
+{
+  "subscriptions": "ਸਬਸਕ੍ਰਿਪਸ਼ਨਜ਼",
+  "@subscriptions": {
+    "description": "User subscriptions"
+  },
+  "playlists": "ਪਲੇਅ-ਲਿਸਟ",
+  "@playlists": {
+    "description": "User playlists"
+  },
+  "popular": "ਹਰਮਨਪਿਆਰੇ",
+  "@popular": {
+    "description": "Popular videos title"
+  },
+  "trending": "ਰੁਝਾਨ ਵਿੱਚ",
+  "@trending": {
+    "description": "Trending videos title"
+  },
+  "noVideoInPlayList": "ਪਲੇਲਿਸਟ ਵਿੱਚ ਕੋਈ ਵੀਡੀਓ ਨਹੀਂ ਹੈ",
+  "@noVideoInPlayList": {
+    "description": "When no videos in the playlist"
+  },
+  "removeFromPlayList": "ਪਲੇਅ- ਲਿਸਟ ਤੋਂ ਹਟਾਓ",
+  "@removeFromPlayList": {
+    "description": "Menu item description to show remove a video from a playlist"
+  },
+  "deletePlayListQ": "ਪਲੇਅ-ਲਿਸਟ ਮਿਟਾਓ?",
+  "@deletePlayListQ": {
+    "description": "Ask user to delete a playlist"
+  },
+  "irreversibleAction": "ਇਹ ਕਾਰਵਾਈ ਨਾ-ਬਦਲਣਯੋਗ ਹੈ",
+  "@irreversibleAction": {
+    "description": "Tell the user that the action cannot be undone"
+  },
+  "playListName": "ਪਲੇਅ-ਲਿਸਟ ਦਾ ਨਾਮ",
+  "@playListName": {
+    "description": "Place holder for new playlist name text field"
+  },
+  "addPlayList": "ਪਲੇਅ-ਲਿਸਟ ਸ਼ਾਮਿਲ ਕਰੋ",
+  "@addPlayList": {
+    "description": "Title for add playlist dialog"
+  },
+  "playlistVisibility": "ਦਿਖਣਯੋਗਤਾ",
+  "@playlistVisibility": {
+    "description": "Dropdown label for playlist visibility"
+  },
+  "publicPlaylist": "ਜਨਤਕ",
+  "@publicPlaylist": {
+    "description": "Public playlist"
+  },
+  "privatePlaylist": "ਪ੍ਰਾਈਵੇਟ",
+  "@privatePlaylist": {
+    "description": "Private playlist"
+  },
+  "cancel": "ਰੱਦ ਕਰੋ",
+  "@cancel": {
+    "description": "Cancel button label"
+  },
+  "add": "ਸ਼ਾਮਿਲ ਕਰੋ",
+  "@add": {
+    "description": "Add button abel"
+  },
+  "unlistedPlaylist": "ਨਾ- ਲਿਸਟਡ",
+  "@unlistedPlaylist": {
+    "description": "Unlisted playlist"
+  },
+  "info": "ਜਾਣਕਾਰੀ",
+  "@info": {
+    "description": "Info label"
+  },
+  "videos": "ਵੀਡੀਓਜ਼",
+  "@videos": {
+    "description": "Videos label"
+  },
+  "streams": "ਸਟ੍ਰੀਮਾਂ",
+  "@streams": {
+    "description": "Streams label"
+  },
+  "latestVideos": "ਨਵੀਨਤਮ ਵੀਡੀਓ",
+  "@latestVideos": {
+    "description": "Latest channel videos"
+  },
+  "subscribe": "ਸਬਸਕ੍ਰਾਈਬ",
+  "@subscribe": {
+    "description": "Label for user to subscribe to a channel"
+  },
+  "nSubscribers": "{count, select, no{No subscribers} other{{count} subscribers}}",
+  "@nSubscribers": {
+    "description": "number of subscribers",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "shareYoutubeLink": "ਯੂਟਿਊਬ ਲਿੰਕ ਸਾਂਝਾ ਕਰੋ",
+  "@shareYoutubeLink": {
+    "description": "asking user to share youtube link"
+  },
+  "ok": "ਠੀਕ ਹੈ",
+  "@ok": {
+    "description": "Ok"
+  },
+  "noChannels": "ਕੋਈ ਚੈਨਲ ਨਹੀਂ",
+  "@noChannels": {
+    "description": "when there are no channels to display"
+  },
+  "noPlaylists": "ਕੋਈ ਪਲੇਅ-ਲਿਸਟ ਨਹੀਂ",
+  "@noPlaylists": {
+    "description": "when there are no playlists to display"
+  },
+  "channels": "ਚੈਨਲ",
+  "@channels": {
+    "description": "Channels label"
+  },
+  "comments": "ਟਿੱਪਣੀਆਂ",
+  "@comments": {
+    "description": "Comments label"
+  },
+  "recommended": "ਸਿਫਾਰਿਸ਼ ਕੀਤੇ",
+  "@recommended": {
+    "description": "Recommended label"
+  },
+  "couldntFetchVideos": "ਵੀਡੀਓ ਪ੍ਰਾਪਤ ਨਹੀਂ ਕੀਤੀਆਂ ਜਾ ਸਕੀਆਂ। ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰਨ ਲਈ ਟੈਪ ਕਰੋ।",
+  "@couldntFetchVideos": {
+    "description": "Can't load bunch of videos, asking  user to try again"
+  },
+  "wizardIntro": "ਇੱਕ ਜਨਤਕ ਸਰਵਰ ਚੁਣੋ ਜਾਂ ਆਪਣਾ ਖੁਦ ਦਾ ਸਰਵਰ ਸ਼ਾਮਲ ਕਰੋ। (ਸੈਟਿੰਗਾਂ ਵਿੱਚ ਬਾਅਦ ਵਿੱਚ ਜਾ ਕੇ ਬਦਲਿਆ ਜਾ ਸਕਦਾ ਹੈ)",
+  "@wizardIntro": {
+    "description": "Welcome message on frst time use"
+  },
+  "startUsingClipious": "ਕਲਿੱਪੀਅਸ ਵਰਤਣਾ ਸ਼ੁਰੂ ਕਰੋ",
+  "@startUsingClipious": {
+    "description": "button label to start using the app"
+  },
+  "videoAddedToPlaylist": "ਵੀਡੀਓ ਪਲੇਅ-ਲਿਸਟ ਵਿੱਚ ਸ਼ਾਮਲ ਕੀਤਾ",
+  "@videoAddedToPlaylist": {
+    "description": "Pop up message when a video was added to a playlist"
+  },
+  "errorAddingVideoToPlaylist": "ਵੀਡੀਓ ਨੂੰ ਪਲੇਅਲਿਸਟ ਵਿੱਚ ਜੋੜਨ ਦੌਰਾਨ ਤਰੁੱਟੀ",
+  "@errorAddingVideoToPlaylist": {
+    "description": "Error while adding video to playlist"
+  },
+  "selectPlaylist": "ਪਲੇਅ-ਲਿਸਟ ਚੁਣੋ",
+  "@selectPlaylist": {
+    "description": "Title when users wants to add a video to a playlist"
+  },
+  "createNewPlaylist": "ਨਵੀਂ ਪਲੇਅ-ਲਿਸਟ ਬਣਾਓ",
+  "@createNewPlaylist": {
+    "description": "Button label to create a new playlist when the user wants to add a video to a playlist"
+  },
+  "loadMore": "ਹੋਰ ਲੋਡ ਕਰੋ",
+  "@loadMore": {
+    "description": "CTA to load more"
+  },
+  "topSorting": "ਚੋਟੀ ਦੇ",
+  "@topSorting": {
+    "description": "Content sorting: top"
+  },
+  "newSorting": "ਨਵੇਂ-ਨਕੋਰ",
+  "@newSorting": {
+    "description": "Content sorting: new"
+  },
+  "streamIsLive": "ਲਾਈਵ",
+  "@streamIsLive": {
+    "description": "Label when a video is a live stream"
+  },
+  "sponsorSkipped": "ਸਪਾਂਸਰ ਨੂੰ ਸਕਿੱਪ ਕੀਤਾ",
+  "@sponsorSkipped": {
+    "description": "When a sponsor segment is skipped thanks to sponsor block"
+  },
+  "settings": "ਸੈਟਿੰਗਾਂ",
+  "@settings": {
+    "description": "Settings title"
+  },
+  "browsing": "ਬ੍ਰਾਊਜ਼ਿੰਗ",
+  "@browsing": {
+    "description": "video browsing preferences"
+  },
+  "country": "ਦੇਸ਼",
+  "@country": {
+    "description": "Country label"
+  },
+  "subscribed": "ਸਬਸਕ੍ਰਾਈਬ ਹੈ",
+  "@subscribed": {
+    "description": "When the user is subscribed to a channel"
+  },
+  "shareInvidiousLink": "ਇਨਵਿਡੀਅਸ ਲਿੰਕ ਸਾਂਝਾ ਕਰੋ",
+  "@shareInvidiousLink": {
+    "description": "asking user to share invidious link"
+  },
+  "couldntLoadVideo": "ਵੀਡੀਓ ਲੋਡ ਨਹੀਂ ਕੀਤੀ ਜਾ ਸਕੀ",
+  "@couldntLoadVideo": {
+    "description": "Message to display when a video can't be loaded"
+  },
+  "nReplies": "{count, plural, =0{No replies} =1{1 reply} other{{count} replies}}",
+  "@nReplies": {
+    "description": "number of replies to a comment",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "showOnStart": "ਚੁਣੋ ਕਿ ਜਦੋਂ ਐਪ ਸ਼ੁਰੂ ਹੁੰਦੀ ਹੈ ਤਾਂ ਕੀ ਵਿਖਾਉਣਾ ਹੈ",
+  "@showOnStart": {
+    "description": "Title of dialog asking which screen the users prefers to see"
+  },
+  "selectBrowsingCountry": "ਦੇਸ਼ ਚੁਣੋ",
+  "@selectBrowsingCountry": {
+    "description": "Select country for trending content"
+  },
+  "whenAppStartsShow": "ਜਦੋਂ ਐਪ ਸ਼ੁਰੂ ਹੁੰਦੀ ਹੈ, ਤਾਂ ਵਿਖਾਓ…",
+  "@whenAppStartsShow": {
+    "description": "Setting title for selecting the screen to show on start"
+  }
+}
