@@ -91,11 +91,11 @@
   "@ok": {
     "description": "Ok"
   },
-  "noChannels": "Sin canales",
+  "noChannels": "No hay canales",
   "@noChannels": {
     "description": "when there are no channels to display"
   },
-  "noPlaylists": "Sin canales",
+  "noPlaylists": "No hay listas de reproducción",
   "@noPlaylists": {
     "description": "when there are no playlists to display"
   },
@@ -433,7 +433,7 @@
   "@sponsorBlockCategoryMusicOffTopic": {
     "description": "Sponsorblock 'MusicOffTopic' Category"
   },
-  "sponsorBlockCategoryMusicOffTopicDescription": "Sólo para usarlo en videoclip. Sólo se debe utilizar para partes de los videoclip que no estén ya cubiertas por otra categoría.",
+  "sponsorBlockCategoryMusicOffTopicDescription": "Sólo para vídeos musicales. Sólo debe utilizarse para secciones de vídeos musicales que no estén ya cubiertas por otra categoría.",
   "@sponsorBlockCategoryMusicOffTopicDescription": {
     "description": "Only for use in music videos. This only should be used for sections of music videos that aren't already covered by another category."
   },
@@ -622,5 +622,21 @@
   "rememberSubtitleLanguage": "Recordar el idioma de los subtítulos",
   "@rememberSubtitleLanguage": {
     "description": "Settings label for remembering subtitle language"
+  },
+  "copyToClipBoard": "Copiar al portapapeles",
+  "@copyToClipBoard": {
+    "description": "Text to copy something to clipboard"
+  },
+  "logsCopied": "Registros copiados en el portapapeles",
+  "@logsCopied": {
+    "description": "Message to tell user that logs have been copied to the clipboard"
+  },
+  "appLogs": "Registros de aplicaciones",
+  "@appLogs": {
+    "description": "Title for settings that leads to application logs"
+  },
+  "appLogsDescription": "Obtener registros de lo que ocurre en la aplicación, puede ser útil para informar de problemas",
+  "@appLogsDescription": {
+    "description": "Description of the app log settings"
   }
 }
