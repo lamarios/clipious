@@ -622,5 +622,21 @@
   "rememberSubtitleLanguage": "Запам''ятати мову субтитрів",
   "@rememberSubtitleLanguage": {
     "description": "Settings label for remembering subtitle language"
+  },
+  "copyToClipBoard": "Копіювати в буфер обміну",
+  "@copyToClipBoard": {
+    "description": "Text to copy something to clipboard"
+  },
+  "logsCopied": "Журнали скопійовано до буфера обміну",
+  "@logsCopied": {
+    "description": "Message to tell user that logs have been copied to the clipboard"
+  },
+  "appLogs": "Журнали застосунку",
+  "@appLogs": {
+    "description": "Title for settings that leads to application logs"
+  },
+  "appLogsDescription": "Отримуйте журнали того, що відбувається в застосунку, це може бути корисно для повідомлення про проблеми",
+  "@appLogsDescription": {
+    "description": "Description of the app log settings"
   }
 }
