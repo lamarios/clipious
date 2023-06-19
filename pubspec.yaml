@@ -76,11 +76,16 @@ dependencies:
 
 
 dependency_overrides:
+  #  wakelock_windows:
+  #    git: # see https://github.com/creativecreatorormaybenot/wakelock/pull/203 for updates
+  #      url: https://github.com/timsneath/wakelock
+  #      ref: win32-v5
   wakelock_windows:
-    git: # see https://github.com/creativecreatorormaybenot/wakelock/pull/203 for updates
-      url: https://github.com/timsneath/wakelock
-      ref: win32-v5
-      path: wakelock_windows
+    git:
+      url: https://github.com/chandrabezzo/wakelock.git # repository
+      ref: main # branch
+      path: wakelock_windows/ # folder
+
 
 
   # The following adds the Cupertino Icons font to your application.
