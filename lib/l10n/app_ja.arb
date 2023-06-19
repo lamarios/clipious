@@ -622,5 +622,21 @@
   "sponsorBlockCategoryMusicOffTopicDescription": "ミュージックビデオが対象です。他のカテゴリーに分類できないミュージックビデオのシーンにのみ使用されます。",
   "@sponsorBlockCategoryMusicOffTopicDescription": {
     "description": "Only for use in music videos. This only should be used for sections of music videos that aren't already covered by another category."
+  },
+  "logsCopied": "ログをクリップボードにコピー",
+  "@logsCopied": {
+    "description": "Message to tell user that logs have been copied to the clipboard"
+  },
+  "appLogs": "アプリのログ",
+  "@appLogs": {
+    "description": "Title for settings that leads to application logs"
+  },
+  "copyToClipBoard": "クリップボードにコピー",
+  "@copyToClipBoard": {
+    "description": "Text to copy something to clipboard"
+  },
+  "appLogsDescription": "アプリで何が起きたかのログを取得。問題の報告に役立ちます",
+  "@appLogsDescription": {
+    "description": "Description of the app log settings"
   }
 }
