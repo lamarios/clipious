@@ -13,7 +13,7 @@ import 'package:json_annotation/json_annotation.dart';
 part 'video.g.dart';
 
 @JsonSerializable()
-class Video extends BaseVideo implements ShareLinks {
+class Video extends BaseVideo {
   String dashUrl;
 
   String description;
@@ -95,13 +95,4 @@ class Video extends BaseVideo implements ShareLinks {
     }
   }
 
-  @override
-  String getInvidiousLink(Server server) {
-    return '${server.url}/watch?v=$videoId';
-  }
-
-  @override
-  String getYoutubeLink() {
-    return 'https://www.youtube.com/watch?v=$videoId';
-  }
 }

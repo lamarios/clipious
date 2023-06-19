@@ -6,6 +6,7 @@ import 'package:invidious/controllers/videoController.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/views/components/videoAddToPlaylistButton.dart';
 import 'package:invidious/views/components/videoLikeButton.dart';
+import 'package:invidious/views/components/videoShareButton.dart';
 import 'package:invidious/views/video/innverView.dart';
 import 'package:invidious/views/video/innverViewTablet.dart';
 
@@ -50,10 +51,7 @@ class VideoView extends StatelessWidget {
                 : [
                     Visibility(
                       visible: _.video != null,
-                      child: IconButton(
-                        onPressed: () => showSharingSheet(context, _.video!),
-                        icon: const Icon(Icons.share),
-                      ),
+                      child: VideoShareButton(video: _.video!),
                     ),
                     VideoLikeButton(videoId: _.video?.videoId),
                     VideoAddToPlaylistButton(videoId: _.video?.videoId),

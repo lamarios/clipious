@@ -8,6 +8,9 @@ import 'package:invidious/views/videoPlayer/miniPlayerView.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../utils.dart';
+import 'components/videoAddToPlaylistButton.dart';
+import 'components/videoLikeButton.dart';
+import 'components/videoShareButton.dart';
 
 class MiniPlayer extends StatelessWidget {
   const MiniPlayer({Key? key}) : super(key: key);
@@ -69,13 +72,21 @@ class MiniPlayer extends StatelessWidget {
                               _.isMini || _.isPip
                                   ? const SizedBox.shrink()
                                   : AppBar(
-                                backgroundColor: colors.background,
+                                      backgroundColor: colors.background,
                                       title: Text(locals.videoPlayer),
                                       elevation: 0,
                                       leading: IconButton(
                                         icon: const Icon(Icons.expand_more),
                                         onPressed: _.showMiniPlayer,
                                       ),
+                                      actions: _.isHidden
+                                          ? []
+                                          : [
+                                              Visibility(
+                                                visible: _.currentlyPlaying != null,
+                                                child: VideoShareButton(video: _.currentlyPlaying!),
+                                              ),
+                                            ],
                                     ),
                               AnimatedContainer(
                                 width: double.infinity,
