@@ -1,0 +1,1 @@
+Fix issue where default language would be Arabic if phone language was not supported by the app.

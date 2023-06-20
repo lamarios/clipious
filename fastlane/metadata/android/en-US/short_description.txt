@@ -1,1 +1,1 @@
-Invidious client
+Client for Invidious, the privacy focused YouTube front end.
