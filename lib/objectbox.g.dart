@@ -430,7 +430,8 @@ ModelDefinition getObjectBoxModel() {
               ? null
               : fbb.writeString(object.channelId!);
           final valueOffset = fbb.writeString(object.value);
-          final dbTypeOffset = fbb.writeString(object.dbType);
+          final dbTypeOffset =
+              object.dbType == null ? null : fbb.writeString(object.dbType!);
           final dbOperationOffset = fbb.writeString(object.dbOperation);
           fbb.startTable(6);
           fbb.addInt64(0, object.id);
@@ -452,7 +453,7 @@ ModelDefinition getObjectBoxModel() {
                   .vTableGetNullable(buffer, rootOffset, 6))
             ..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0)
             ..dbType = const fb.StringReader(asciiOptimization: true)
-                .vTableGet(buffer, rootOffset, 10, '')
+                .vTableGetNullable(buffer, rootOffset, 10)
             ..dbOperation = const fb.StringReader(asciiOptimization: true)
                 .vTableGet(buffer, rootOffset, 12, '');
 

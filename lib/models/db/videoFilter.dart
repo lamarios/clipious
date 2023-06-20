@@ -18,28 +18,28 @@ class VideoFilter {
   String? channelId;
 
   @Transient()
-  FilterOperation operation = FilterOperation.equal;
+  FilterOperation? operation = FilterOperation.equal;
   @Transient()
-  FilterType type = FilterType.title;
+  FilterType? type = FilterType.title;
 
   String value;
 
   VideoFilter({required this.value, this.channelId});
 
-  String get dbType {
-    return type.name ?? '';
+  String? get dbType {
+    return type?.name ?? '';
   }
 
-  set dbType(String value) {
-    type = FilterType.values.where((element) => element.name == value).first;
+  set dbType(String? value) {
+    type = FilterType.values.where((element) => element.name == value).firstOrNull;
   }
 
   String get dbOperation {
-    return operation.name ?? '';
+    return operation?.name ?? '';
   }
 
   set dbOperation(String value) {
-    operation = FilterOperation.values.where((element) => element.name == value).first;
+    operation = FilterOperation.values.where((element) => element.name == value).firstOrNull;
   }
 
   bool showVideo(BaseVideo video) {
@@ -52,7 +52,8 @@ class VideoFilter {
       // int base operation
       case FilterType.length:
         return compareNumber(video.lengthSeconds);
-        break;
+      default:
+        return true;
     }
   }
 
