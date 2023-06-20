@@ -117,6 +117,22 @@ class MyApp extends StatelessWidget {
             return GetMaterialApp(
                 locale: locale,
                 localizationsDelegates: AppLocalizations.localizationsDelegates,
+                localeListResolutionCallback: (locales, supportedLocales) {
+                  log.info('device locales=$locales supported locales=$supportedLocales');
+                  if (locales != null) {
+                    for (Locale locale in locales) {
+                      // if device language is supported by the app,
+                      // just return it to set it as current app language
+                      if (supportedLocales.contains(locale)) {
+                        return locale;
+                      }
+                    }
+                  }
+                  // if device language is not supported by the app,
+                  // the app will set it to english but return this to set to Bahasa instead
+                  log.info("locale not supported, returning english");
+                  return Locale('en', 'US');
+                },
                 supportedLocales: AppLocalizations.supportedLocales,
                 scaffoldMessengerKey: scaffoldKey,
                 navigatorKey: globalNavigator,
