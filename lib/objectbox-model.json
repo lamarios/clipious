@@ -155,9 +155,43 @@
         }
       ],
       "relations": []
+    },
+    {
+      "id": "6:8304874620604193998",
+      "lastPropertyId": "5:2812361632619055204",
+      "name": "VideoFilter",
+      "properties": [
+        {
+          "id": "1:4718003498405944371",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:906689741192359458",
+          "name": "channelId",
+          "type": 9
+        },
+        {
+          "id": "3:19321448094437321",
+          "name": "value",
+          "type": 9
+        },
+        {
+          "id": "4:7050038042672519102",
+          "name": "dbType",
+          "type": 9
+        },
+        {
+          "id": "5:2812361632619055204",
+          "name": "dbOperation",
+          "type": 9
+        }
+      ],
+      "relations": []
     }
   ],
-  "lastEntityId": "5:8446250266008376981",
+  "lastEntityId": "6:8304874620604193998",
   "lastIndexId": "5:7262786699272501249",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",
