@@ -112,19 +112,30 @@ class MyApp extends StatelessWidget {
             }
 
             List<String>? localeString = db.getSettings(LOCALE)?.value.split('_');
-            Locale? locale = localeString != null ? Locale.fromSubtags(languageCode: localeString[0], scriptCode: localeString.length >= 2 ? localeString[1] : null) : null;
+            Locale? savedLocale = localeString != null ? Locale.fromSubtags(languageCode: localeString[0], scriptCode: localeString.length >= 2 ? localeString[1] : null) : null;
 
             return GetMaterialApp(
-                locale: locale,
+                locale: savedLocale,
                 localizationsDelegates: AppLocalizations.localizationsDelegates,
                 localeListResolutionCallback: (locales, supportedLocales) {
                   log.info('device locales=$locales supported locales=$supportedLocales');
+                  if(savedLocale != null){
+                    log.info("using saved locale, ${savedLocale}");
+                    return savedLocale;
+                  }
                   if (locales != null) {
                     for (Locale locale in locales) {
                       // if device language is supported by the app,
                       // just return it to set it as current app language
                       if (supportedLocales.contains(locale)) {
+                        log.info("Locale match found, $locale");
                         return locale;
+                      }else {
+                        Locale? match = supportedLocales.where((element) => element.languageCode == locale.languageCode).firstOrNull;
+                        if(match != null){
+                          log.info("found partial match $locale with $match");
+                          return match;
+                        }
                       }
                     }
                   }
