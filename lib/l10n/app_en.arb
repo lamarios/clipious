@@ -675,7 +675,11 @@
         "@videoFilterValue": {
           "description": "Label for filter value"
         },
-      
+  "save": "Save",
+    "@save": {
+      "description": "Text for save action"
+    },
+
     "rememberSubtitleLanguageDescription": "Automatically set subtitles to last language selected, if available",
     "@rememberSubtitleLanguageDescription": {
         "description": "Settings description for remembering subtitle language"

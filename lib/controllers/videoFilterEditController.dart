@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:invidious/globals.dart';
 
 import '../models/channel.dart';
 import '../models/db/videoFilter.dart';
@@ -29,6 +30,7 @@ class VideoFilterEditController extends GetxController {
     if (value != null) {
       filter?.type = value;
       filter?.operation = null;
+      filter?.value = '';
     }
 
     update();
@@ -53,5 +55,32 @@ class VideoFilterEditController extends GetxController {
     }
 
     update();
+  }
+
+  void valueChanged(String value) {
+    ensureFilter();
+    filter?.value = value;
+    print(value);
+    update();
+  }
+
+  bool isFilterValid() {
+    return filter != null && filter?.type != null && filter?.operation != null && (filter?.value ?? '').isNotEmpty;
+  }
+
+  void onSave() {
+    if (filter != null) {
+      db.saveFilter(filter!);
+    }
+  }
+
+  bool isNumberValue() {
+    switch (filter?.operation) {
+      case FilterOperation.higherThan:
+      case FilterOperation.lowerThan:
+        return true;
+      default:
+        return false;
+    }
   }
 }

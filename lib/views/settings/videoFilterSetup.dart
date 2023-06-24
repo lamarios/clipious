@@ -30,9 +30,23 @@ class VideoFilterSetup extends StatelessWidget {
                     Visibility(
                         visible: _.filter?.type != null,
                         child: DropdownButton<FilterOperation>(
-                            value: _.filter?.operation, items: _.getAvailableOperations().map((e) => DropdownMenuItem<FilterOperation>(value: e, child: Text(e.name))).toList(), onChanged: _.setOperation)),
-                    Visibility(visible: _.filter?.operation != null, child: Text(locals.videoFilterValue),),
-                    TextField(controller: _.valueController,)
+                            value: _.filter?.operation,
+                            items: _.getAvailableOperations().map((e) => DropdownMenuItem<FilterOperation>(value: e, child: Text(e.name))).toList(),
+                            onChanged: _.setOperation)),
+                    Visibility(
+                      visible: _.filter?.operation != null,
+                      child: Text(locals.videoFilterValue),
+                    ),
+                    Visibility(
+                        visible: _.filter?.operation != null,
+                        child: TextField(
+                          autocorrect: false,
+                          maxLines: 1,
+                          keyboardType: _.isNumberValue() ? TextInputType.number: null,
+                          controller: _.valueController,
+                          onChanged: _.valueChanged,
+                        )),
+                    FilledButton(onPressed: _.isFilterValid() ? _.onSave : null, child: Text(locals.save))
                   ],
                 ),
               ),
