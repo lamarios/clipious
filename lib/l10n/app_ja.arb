@@ -64,7 +64,7 @@
       }
     }
   },
-  "whenAppStartsShow": "アプリの起動時に表示…",
+  "whenAppStartsShow": "アプリ起動時の表示…",
   "@whenAppStartsShow": {
     "description": "Setting title for selecting the screen to show on start"
   },
@@ -339,7 +339,7 @@
   "@sponsorBlockCategoryPreview": {
     "description": "Sponsorblock 'Preview' Category"
   },
-  "sponsorBlockSettingsQuickDescription": "飛ばしたいシーンの種類を選択します",
+  "sponsorBlockSettingsQuickDescription": "飛ばしたいシーンの種類を選択",
   "@sponsorBlockSettingsQuickDescription": {
     "description": "Small description of what the sponsor block settings do"
   },
@@ -443,7 +443,7 @@
   "@wizardIntro": {
     "description": "Welcome message on frst time use"
   },
-  "topSorting": "上位評価",
+  "topSorting": "高評価",
   "@topSorting": {
     "description": "Content sorting: top"
   },
@@ -459,7 +459,7 @@
   "@sponsorSkipped": {
     "description": "When a sponsor segment is skipped thanks to sponsor block"
   },
-  "sponsorBlockDescription": "広告シーンをみんなで登録し飛ばします",
+  "sponsorBlockDescription": "みんなが登録した広告シーンを飛ばします",
   "@sponsorBlockDescription": {
     "description": "Sponsorblock setting description"
   },
@@ -467,7 +467,7 @@
   "@useDash": {
     "description": "Label on video options if a user wants to switch to dash urls instead of the regular quality selection"
   },
-  "useDashDescription": "DASHの適応的なストリーミングは時に問題を起こすので、Youtubeは帯域制限をすることがあります。",
+  "useDashDescription": "DASHの適応的なストリーミングはたまに問題を起こすので、Youtubeが帯域制限を行っていることがあります。",
   "@useDashDescription": {
     "description": "Description for dash in the settings screen"
   },
@@ -507,7 +507,7 @@
   "@rememberSubtitleLanguage": {
     "description": "Settings label for remembering subtitle language"
   },
-  "rememberSubtitleLanguageDescription": "利用可能なら、最後に選択した言語を自動で設定します",
+  "rememberSubtitleLanguageDescription": "字幕が利用可能なら、最後に選択した言語を自動で設定します",
   "@rememberSubtitleLanguageDescription": {
     "description": "Settings description for remembering subtitle language"
   },
@@ -551,7 +551,7 @@
   "@clearSearchHistory": {
     "description": "Settings label for clearing search history"
   },
-  "autoplayVideoOnLoad": "読み込んだ動画を自動で再生",
+  "autoplayVideoOnLoad": "読み込んだ動画を自動再生",
   "@autoplayVideoOnLoad": {
     "description": "Label for settings to enable autoplay when a video loads"
   },
@@ -603,7 +603,7 @@
   "@addToQueueList": {
     "description": "Label on button to add a video to the queue list"
   },
-  "addRecommendedToQueue": "次のおすすめを自動で再生",
+  "addRecommendedToQueue": "次のおすすめを自動再生",
   "@addRecommendedToQueue": {
     "description": "Switch when playing a video to automatically add the recommended videos to the video queue"
   },
