@@ -104,6 +104,10 @@
     "@shareInvidiousLink": {
         "description": "asking user to share invidious link"
     },
+    "redirectInvidiousLink": "Share Invidious Redirect link",
+    "@redirectInvidiousLink": {
+        "description": "asking user to share redirecting invidious link"
+    },
     "ok": "OK",
     "@ok": {
         "description": "Ok"
