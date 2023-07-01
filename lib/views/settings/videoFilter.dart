@@ -1,10 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
+import 'package:invidious/controllers/VideoFilterChannelController.dart';
+import 'package:invidious/extensions.dart';
+import 'package:invidious/views/settings/videoFilterChannel.dart';
 import 'package:invidious/views/settings/videoFilterSetup.dart';
 
+import '../../controllers/VideoFilterChannelController.dart';
+import '../../controllers/VideoFilterChannelController.dart';
+import '../../controllers/VideoFilterChannelController.dart';
+import '../../controllers/VideoFilterChannelController.dart';
+import '../../controllers/VideoFilterChannelController.dart';
+import '../../controllers/VideoFilterChannelController.dart';
+import '../../controllers/VideoFilterChannelController.dart';
 import '../../controllers/videoFilterController.dart';
 import '../../main.dart';
+import '../../models/db/videoFilter.dart';
 import '../../myRouteObserver.dart';
 
 class VideoFilterSettings extends StatelessWidget {
@@ -24,8 +35,12 @@ class VideoFilterSettings extends StatelessWidget {
     ColorScheme colors = Theme.of(context).colorScheme;
     return GetBuilder<VideoFilterController>(
         init: VideoFilterController(),
-        global: false,
         builder: (_) {
+          Map<String, List<VideoFilter>> mappedFilters = _.filters.groupBy(
+            (p0) => p0.channelId ?? allChannels,
+          );
+          List<String> keys = mappedFilters.keys.toList();
+          print(mappedFilters[allChannels]?.length);
           return Scaffold(
               appBar: AppBar(
                 title: Text(locals.videoFilters),
@@ -34,9 +49,9 @@ class VideoFilterSettings extends StatelessWidget {
               body: SafeArea(
                 bottom: false,
                 child: ListView.builder(
-                  itemCount: _.filters.length,
+                  itemCount: mappedFilters.keys.length,
                   itemBuilder: (context, index) {
-                    return Text('yo');
+                    return VideoFilterChannel(key:ValueKey('${keys[index]}-${(mappedFilters[keys[index]] ?? []).length}'), filters: mappedFilters[keys[index]] ?? []);
                   },
                 ),
               ));

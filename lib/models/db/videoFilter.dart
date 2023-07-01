@@ -4,8 +4,8 @@ import 'package:objectbox/objectbox.dart';
 enum FilterType { title, channelName, length }
 
 enum FilterOperation {
-  equal,
-  notEqual,
+  contain,
+  notContain,
   lowerThan,
   higherThan,
 }
@@ -18,7 +18,7 @@ class VideoFilter {
   String? channelId;
 
   @Transient()
-  FilterOperation? operation = FilterOperation.equal;
+  FilterOperation? operation = FilterOperation.contain;
   @Transient()
   FilterType? type = FilterType.title;
 
@@ -71,9 +71,9 @@ class VideoFilter {
 
   bool compareString(String stringToCompare) {
     switch (operation) {
-      case FilterOperation.equal:
+      case FilterOperation.contain:
         return value == stringToCompare;
-      case FilterOperation.notEqual:
+      case FilterOperation.notContain:
         return value != stringToCompare;
       default:
         return true;

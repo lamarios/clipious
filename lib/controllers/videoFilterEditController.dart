@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:invidious/controllers/videoFilterController.dart';
 import 'package:invidious/globals.dart';
+import 'package:invidious/main.dart';
 
 import '../models/channel.dart';
 import '../models/db/videoFilter.dart';
@@ -40,7 +42,7 @@ class VideoFilterEditController extends GetxController {
     switch (filter?.type) {
       case FilterType.title:
       case FilterType.channelName:
-        return [FilterOperation.equal, FilterOperation.notEqual];
+        return [FilterOperation.contain, FilterOperation.notContain];
       case FilterType.length:
         return [FilterOperation.lowerThan, FilterOperation.higherThan];
       default:
@@ -71,6 +73,8 @@ class VideoFilterEditController extends GetxController {
   void onSave() {
     if (filter != null) {
       db.saveFilter(filter!);
+      VideoFilterController.to()?.refreshFilters();
+      navigatorKey.currentState?.pop();
     }
   }
 

@@ -1,10 +1,23 @@
 import 'package:get/get.dart';
 import 'package:invidious/globals.dart';
+import 'package:invidious/utils.dart';
 
 import '../models/db/videoFilter.dart';
 
 class VideoFilterController extends GetxController {
-  List<VideoFilter> filters = db.getAllFilters();
+  static VideoFilterController? to() => safeGet();
+  late List<VideoFilter> filters = [];
+
+  @override
+  onReady(){
+      refreshFilters();
+  }
+
+  refreshFilters() {
+    filters = db.getAllFilters();
+    print(filters.length);
+    update();
+  }
 
   @override
   void onInit() {
