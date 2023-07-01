@@ -73,7 +73,7 @@ dependencies:
     git:
       url: https://github.com/lamarios/locale_names.git
       ref: master
-
+  search_choices: 2.2.5
 
 dependency_overrides:
   #  wakelock_windows:

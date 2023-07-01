@@ -22,7 +22,10 @@ class VideoFilterChannelController extends GetxController {
 
   Future<void> getChannel() async {
     if (filters.isNotEmpty && filters[0].channelId != null && filters[0].channelId != allChannels) {
+      loading = true;
+      update();
       channel = await service.getChannel(filters[0].channelId!);
+      loading = false;
     }
     update();
   }

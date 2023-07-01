@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:invidious/controllers/videoFilterEditController.dart';
+import 'package:search_choices/search_choices.dart';
 
+import '../../models/channel.dart';
 import '../../models/db/videoFilter.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -22,32 +24,59 @@ class VideoFilterSetup extends StatelessWidget {
               ),
               body: SafeArea(
                 bottom: false,
-                child: Column(
-                  children: [
-                    Text(locals.videoFilterType),
-                    DropdownButton<FilterType>(value: _.filter?.type, items: FilterType.values.map((e) => DropdownMenuItem<FilterType>(value: e, child: Text(e.name))).toList(), onChanged: _.setType),
-                    Visibility(visible: _.filter?.type != null, child: Text(locals.videoFilterOperation)),
-                    Visibility(
-                        visible: _.filter?.type != null,
-                        child: DropdownButton<FilterOperation>(
-                            value: _.filter?.operation,
-                            items: _.getAvailableOperations().map((e) => DropdownMenuItem<FilterOperation>(value: e, child: Text(e.name))).toList(),
-                            onChanged: _.setOperation)),
-                    Visibility(
-                      visible: _.filter?.operation != null,
-                      child: Text(locals.videoFilterValue),
-                    ),
-                    Visibility(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    children: [
+                      Text(locals.videoFilterEditDescription),
+                      SearchChoices.single(
+                        isExpanded: true,
+                        value: _.channel,
+                        selectedValueWidgetFn: (value) => Text(value.author),
+                        hint: '${locals.channel} (${locals.optional})',
+                        dialogBox: true,
+                        onChanged: (value){
+                          _.channel = value;
+                          _.update();
+                        },
+                        futureSearchFn: (keyword, orderBy, orderAsc, filters, pageNb) async {
+                          List<Channel> channels = await _.searchChannel(keyword ?? '');
+
+                          return Tuple2(
+                              channels
+                                  .map((e) => DropdownMenuItem(
+                                        value: e,
+                                        child: Text(e.author),
+                                      ))
+                                  .toList(),
+                              channels.length);
+                        },
+                      ),
+                      Text(locals.videoFilterType),
+                      DropdownButton<FilterType>(value: _.filter?.type, items: FilterType.values.map((e) => DropdownMenuItem<FilterType>(value: e, child: Text(e.name))).toList(), onChanged: _.setType),
+                      Visibility(visible: _.filter?.type != null, child: Text(locals.videoFilterOperation)),
+                      Visibility(
+                          visible: _.filter?.type != null,
+                          child: DropdownButton<FilterOperation>(
+                              value: _.filter?.operation,
+                              items: _.getAvailableOperations().map((e) => DropdownMenuItem<FilterOperation>(value: e, child: Text(e.name))).toList(),
+                              onChanged: _.setOperation)),
+                      Visibility(
                         visible: _.filter?.operation != null,
-                        child: TextField(
-                          autocorrect: false,
-                          maxLines: 1,
-                          keyboardType: _.isNumberValue() ? TextInputType.number: null,
-                          controller: _.valueController,
-                          onChanged: _.valueChanged,
-                        )),
-                    FilledButton(onPressed: _.isFilterValid() ? _.onSave : null, child: Text(locals.save))
-                  ],
+                        child: Text(locals.videoFilterValue),
+                      ),
+                      Visibility(
+                          visible: _.filter?.operation != null,
+                          child: TextField(
+                            autocorrect: false,
+                            maxLines: 1,
+                            keyboardType: _.isNumberValue() ? TextInputType.number : null,
+                            controller: _.valueController,
+                            onChanged: _.valueChanged,
+                          )),
+                      FilledButton(onPressed: _.isFilterValid() ? _.onSave : null, child: Text(locals.save))
+                    ],
+                  ),
                 ),
               ),
             ));

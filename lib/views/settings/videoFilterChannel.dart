@@ -16,14 +16,29 @@ class VideoFilterChannel extends StatelessWidget {
       init: VideoFilterChannelController(filters: filters),
       global: false,
       builder: (_) {
-        return _.loading
-            ? const SizedBox(height: 50, width: 50, child: CircularProgressIndicator())
-            : Column(
-                children: [
-                  Visibility(visible: _.channel != null, child: Text(_.channel?.author ?? '')),
-                  ..._.filters.map((e) => VideoFilterItem(filter: e)).toList()
-                ],
-              );
+        return Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: _.loading
+              ? const SizedBox(height: 50, width: 50, child: CircularProgressIndicator())
+              : Column(
+                  children: [
+                    Row(
+                      children: [
+                        Visibility(
+                          visible: _.loading,
+                          child: const SizedBox(
+                            height: 10,
+                            width: 10,
+                            child: CircularProgressIndicator(),
+                          ),
+                        ),
+                        Expanded(child: Visibility(visible: _.channel != null, child: Text(_.channel?.author ?? ''))),
+                      ],
+                    ),
+                    ..._.filters.map((e) => VideoFilterItem(filter: e)).toList()
+                  ],
+                ),
+        );
       },
     );
   }

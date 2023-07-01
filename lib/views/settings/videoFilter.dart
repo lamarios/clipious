@@ -51,7 +51,7 @@ class VideoFilterSettings extends StatelessWidget {
                 child: ListView.builder(
                   itemCount: mappedFilters.keys.length,
                   itemBuilder: (context, index) {
-                    return VideoFilterChannel(key:ValueKey('${keys[index]}-${(mappedFilters[keys[index]] ?? []).length}'), filters: mappedFilters[keys[index]] ?? []);
+                    return VideoFilterChannel(key:ValueKey('$index-${(mappedFilters[keys[index]] ?? []).length}'), filters: mappedFilters[keys[index]] ?? []);
                   },
                 ),
               ));

@@ -671,15 +671,26 @@
     "@videoFilterOperation": {
         "description": "Label for filter operation"
     },
-      "videoFilterValue": "Value",
-        "@videoFilterValue": {
-          "description": "Label for filter value"
-        },
-  "save": "Save",
-    "@save": {
-      "description": "Text for save action"
+    "videoFilterValue": "Value",
+    "@videoFilterValue": {
+        "description": "Label for filter value"
     },
-
+    "save": "Save",
+    "@save": {
+        "description": "Text for save action"
+    },
+    "videoFilterEditDescription": "Select an optional channel, a filter type, operation and a value to filter OUT videos from lists. Example, type: video name, operation: contains, value: test will EXCLUDE all the videos with the word 'test' in their name.",
+    "@videoFilterEditDescription": {
+        "description": "Descriptive test for video filter set up"
+    },
+    "optional": "optional",
+    "@optional": {
+        "description": "Optional label"
+    },
+    "channel": "Channel",
+    "@channel": {
+        "description": "A single channel"
+    },
     "rememberSubtitleLanguageDescription": "Automatically set subtitles to last language selected, if available",
     "@rememberSubtitleLanguageDescription": {
         "description": "Settings description for remembering subtitle language"
