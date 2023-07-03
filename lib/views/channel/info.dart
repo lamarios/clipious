@@ -89,7 +89,12 @@ class ChannelInfo extends StatelessWidget {
           shrinkWrap: true,
           mainAxisSpacing: 5,
           childAspectRatio: getGridAspectRatio(context),
-          children: channel.latestVideos?.map((e) => VideoListItem(video: VideoInList(e.title, e.videoId, e.lengthSeconds, 0, e.author, channel.authorId, 'authorUrl', 0, '', e.videoThumbnails))).toList() ?? []),
+          children: channel.latestVideos?.map((e) {
+            VideoInList videoInList = VideoInList(e.title, e.videoId, e.lengthSeconds, 0, e.author, channel.authorId, 'authorUrl', 0, '', e.videoThumbnails);
+            videoInList.filtered = e.filtered;
+            e.matchedFilters = e.matchedFilters;
+            return VideoListItem(video: videoInList);
+          }).toList() ?? []),
     ));
 
     return SingleChildScrollView(

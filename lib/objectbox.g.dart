@@ -176,7 +176,7 @@ final _entities = <ModelEntity>[
   ModelEntity(
       id: const IdUid(6, 8304874620604193998),
       name: 'VideoFilter',
-      lastPropertyId: const IdUid(5, 2812361632619055204),
+      lastPropertyId: const IdUid(8, 6020474727686624632),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
@@ -203,6 +203,16 @@ final _entities = <ModelEntity>[
             id: const IdUid(5, 2812361632619055204),
             name: 'dbOperation',
             type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(7, 4560530621575797576),
+            name: 'filterAll',
+            type: 1,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(8, 6020474727686624632),
+            name: 'hideFromFeed',
+            type: 1,
             flags: 0)
       ],
       relations: <ModelRelation>[],
@@ -235,7 +245,11 @@ ModelDefinition getObjectBoxModel() {
       lastSequenceId: const IdUid(0, 0),
       retiredEntityUids: const [],
       retiredIndexUids: const [9110274326691932798],
-      retiredPropertyUids: const [3422621380867834787, 971220157301355316],
+      retiredPropertyUids: const [
+        3422621380867834787,
+        971220157301355316,
+        7030952573865954657
+      ],
       retiredRelationUids: const [],
       modelVersion: 5,
       modelVersionParserMinimum: 5,
@@ -429,16 +443,21 @@ ModelDefinition getObjectBoxModel() {
           final channelIdOffset = object.channelId == null
               ? null
               : fbb.writeString(object.channelId!);
-          final valueOffset = fbb.writeString(object.value);
+          final valueOffset =
+              object.value == null ? null : fbb.writeString(object.value!);
           final dbTypeOffset =
               object.dbType == null ? null : fbb.writeString(object.dbType!);
-          final dbOperationOffset = fbb.writeString(object.dbOperation);
-          fbb.startTable(6);
+          final dbOperationOffset = object.dbOperation == null
+              ? null
+              : fbb.writeString(object.dbOperation!);
+          fbb.startTable(9);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, channelIdOffset);
           fbb.addOffset(2, valueOffset);
           fbb.addOffset(3, dbTypeOffset);
           fbb.addOffset(4, dbOperationOffset);
+          fbb.addBool(6, object.filterAll);
+          fbb.addBool(7, object.hideFromFeed);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -448,14 +467,18 @@ ModelDefinition getObjectBoxModel() {
 
           final object = VideoFilter(
               value: const fb.StringReader(asciiOptimization: true)
-                  .vTableGet(buffer, rootOffset, 8, ''),
+                  .vTableGetNullable(buffer, rootOffset, 8),
               channelId: const fb.StringReader(asciiOptimization: true)
                   .vTableGetNullable(buffer, rootOffset, 6))
             ..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0)
             ..dbType = const fb.StringReader(asciiOptimization: true)
                 .vTableGetNullable(buffer, rootOffset, 10)
             ..dbOperation = const fb.StringReader(asciiOptimization: true)
-                .vTableGet(buffer, rootOffset, 12, '');
+                .vTableGetNullable(buffer, rootOffset, 12)
+            ..filterAll =
+                const fb.BoolReader().vTableGet(buffer, rootOffset, 16, false)
+            ..hideFromFeed =
+                const fb.BoolReader().vTableGet(buffer, rootOffset, 18, false);
 
           return object;
         })
@@ -572,4 +595,12 @@ class VideoFilter_ {
   /// see [VideoFilter.dbOperation]
   static final dbOperation =
       QueryStringProperty<VideoFilter>(_entities[5].properties[4]);
+
+  /// see [VideoFilter.filterAll]
+  static final filterAll =
+      QueryBooleanProperty<VideoFilter>(_entities[5].properties[5]);
+
+  /// see [VideoFilter.hideFromFeed]
+  static final hideFromFeed =
+      QueryBooleanProperty<VideoFilter>(_entities[5].properties[6]);
 }

@@ -5,14 +5,8 @@ import 'package:invidious/controllers/VideoFilterChannelController.dart';
 import 'package:invidious/extensions.dart';
 import 'package:invidious/views/settings/videoFilterChannel.dart';
 import 'package:invidious/views/settings/videoFilterSetup.dart';
+import 'package:uuid/uuid.dart';
 
-import '../../controllers/VideoFilterChannelController.dart';
-import '../../controllers/VideoFilterChannelController.dart';
-import '../../controllers/VideoFilterChannelController.dart';
-import '../../controllers/VideoFilterChannelController.dart';
-import '../../controllers/VideoFilterChannelController.dart';
-import '../../controllers/VideoFilterChannelController.dart';
-import '../../controllers/VideoFilterChannelController.dart';
 import '../../controllers/videoFilterController.dart';
 import '../../main.dart';
 import '../../models/db/videoFilter.dart';
@@ -40,7 +34,7 @@ class VideoFilterSettings extends StatelessWidget {
             (p0) => p0.channelId ?? allChannels,
           );
           List<String> keys = mappedFilters.keys.toList();
-          print(mappedFilters[allChannels]?.length);
+          keys.sort(_.sortChannels);
           return Scaffold(
               appBar: AppBar(
                 title: Text(locals.videoFilters),
@@ -48,11 +42,24 @@ class VideoFilterSettings extends StatelessWidget {
               floatingActionButton: FloatingActionButton(onPressed: () => createFilter(context), backgroundColor: colors.primaryContainer, child: const Icon(Icons.add)),
               body: SafeArea(
                 bottom: false,
-                child: ListView.builder(
-                  itemCount: mappedFilters.keys.length,
-                  itemBuilder: (context, index) {
-                    return VideoFilterChannel(key:ValueKey('$index-${(mappedFilters[keys[index]] ?? []).length}'), filters: mappedFilters[keys[index]] ?? []);
-                  },
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(locals.videoFiltersExplanation),
+                    ),
+                    keys.isNotEmpty ? Expanded(
+                      child: ListView.builder(
+                        itemCount: keys.length,
+                        itemBuilder: (context, index) {
+                          return VideoFilterChannel(key: ValueKey(const Uuid().v4()), filters: mappedFilters[keys[index]] ?? []);
+                        },
+                      ),
+                    ): Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Text(locals.videoFilterNoFilters),
+                    ),
+                  ],
                 ),
               ));
         });

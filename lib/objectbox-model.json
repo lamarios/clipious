@@ -158,7 +158,7 @@
     },
     {
       "id": "6:8304874620604193998",
-      "lastPropertyId": "5:2812361632619055204",
+      "lastPropertyId": "8:6020474727686624632",
       "name": "VideoFilter",
       "properties": [
         {
@@ -186,6 +186,16 @@
           "id": "5:2812361632619055204",
           "name": "dbOperation",
           "type": 9
+        },
+        {
+          "id": "7:4560530621575797576",
+          "name": "filterAll",
+          "type": 1
+        },
+        {
+          "id": "8:6020474727686624632",
+          "name": "hideFromFeed",
+          "type": 1
         }
       ],
       "relations": []
@@ -203,7 +213,8 @@
   ],
   "retiredPropertyUids": [
     3422621380867834787,
-    971220157301355316
+    971220157301355316,
+    7030952573865954657
   ],
   "retiredRelationUids": [],
   "version": 1
