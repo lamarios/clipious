@@ -15,7 +15,7 @@
   "@removeFromPlayList": {
     "description": "Menu item description to show remove a video from a playlist"
   },
-  "irreversibleAction": "Diese Aktion ist irreversibel",
+  "irreversibleAction": "Diese Aktion ist nicht rückgängig zu machen",
   "@irreversibleAction": {
     "description": "Tell the user that the action cannot be undone"
   },
@@ -39,7 +39,7 @@
   "@privatePlaylist": {
     "description": "Private playlist"
   },
-  "add": "Ajouter",
+  "add": "Hinzufügen",
   "@add": {
     "description": "Add button abel"
   },
@@ -80,7 +80,7 @@
   "@shareInvidiousLink": {
     "description": "asking user to share invidious link"
   },
-  "ok": "OK",
+  "ok": "Ok",
   "@ok": {
     "description": "Ok"
   },
@@ -100,15 +100,15 @@
   "@recommended": {
     "description": "Recommended label"
   },
-  "couldntFetchVideos": "Videos konnten nicht abgerufen werden. Tippen Sie, um es erneut zu versuchen.",
+  "couldntFetchVideos": "Videos konnten nicht abgerufen werden. Tippe um es erneut zu versuchen.",
   "@couldntFetchVideos": {
     "description": "Can't load bunch of videos, asking  user to try again"
   },
-  "wizardIntro": "Wählen Sie einen öffentlichen Server oder fügen Sie Ihren eigenen hinzu. (Kann später in den Einstellungen geändert werden.)",
+  "wizardIntro": "Wählen einen öffentlichen Server oder füge einen eigenen hinzu. (Kann später in den Einstellungen geändert werden.)",
   "@wizardIntro": {
     "description": "Welcome message on frst time use"
   },
-  "startUsingClipious": "Beginnen Sie mit der Verwendung von Clipious",
+  "startUsingClipious": "Benutze Clipious",
   "@startUsingClipious": {
     "description": "button label to start using the app"
   },
@@ -146,7 +146,7 @@
   "@couldntLoadVideo": {
     "description": "Message to display when a video can't be loaded"
   },
-  "cancel": "Annuler",
+  "cancel": "Abbrechen",
   "@cancel": {
     "description": "Cancel button label"
   },
@@ -158,7 +158,7 @@
   "@channels": {
     "description": "Channels label"
   },
-  "errorAddingVideoToPlaylist": "Fehler beim Hinzufügen eines Videos zur Wiedergabeliste",
+  "errorAddingVideoToPlaylist": "Fehler beim Hinzufügen des Videos zur Wiedergabeliste",
   "@errorAddingVideoToPlaylist": {
     "description": "Error while adding video to playlist"
   },
@@ -182,7 +182,7 @@
   "@newSorting": {
     "description": "Content sorting: new"
   },
-  "showOnStart": "Wählen Sie aus, was beim Starten der Anwendung angezeigt werden soll",
+  "showOnStart": "Wähle aus, was beim Starten der App angezeigt werden soll",
   "@showOnStart": {
     "description": "Title of dialog asking which screen the users prefers to see"
   },
@@ -194,11 +194,11 @@
   "@sponsorSkipped": {
     "description": "When a sponsor segment is skipped thanks to sponsor block"
   },
-  "selectBrowsingCountry": "Wählen Sie das Land, in dem Sie surfen",
+  "selectBrowsingCountry": "Wähle das Land indem du browsen möchtest",
   "@selectBrowsingCountry": {
     "description": "Select country for trending content"
   },
-  "sponsorBlockDescription": "Von der Gemeinschaft eingereichte Sponsorensegmente überspringen",
+  "sponsorBlockDescription": "Überspringe von der Community eingereichte Werbungsabschnitte",
   "@sponsorBlockDescription": {
     "description": "Sponsorblock setting description"
   },
@@ -210,7 +210,7 @@
   "@invalidInvidiousServer": {
     "description": "Error when the user tries to add a server that is not a proper or reachable invidious server"
   },
-  "addServerHelpText": "Verwenden Sie die Schaltfläche +, um Ihre eigenen Server hinzuzufügen, oder tippen Sie auf einen öffentlichen Server und fügen Sie ihn hinzu.",
+  "addServerHelpText": "Verwende die + Taste, um eigene Server hinzuzufügen, oder tippe auf einen öffentlichen Server und füge ihn hinzu.",
   "@addServerHelpText": {
     "description": "label for when the user hasn't chosen a server yet"
   },
@@ -262,15 +262,15 @@
   "@publicServers": {
     "description": "Public servers label"
   },
-  "loadingPublicServer": "Öffentlicher Server werden geladen",
+  "loadingPublicServer": "Öffentliche Server werden geladen",
   "@loadingPublicServer": {
     "description": "Message telling users the app is loading the list of public servers"
   },
-  "tapToAddServer": "Tippen Sie auf , um einen Server zu Ihrer Liste hinzuzufügen",
+  "tapToAddServer": "Tippe um einen Server zu deiner Liste hinzuzufügen",
   "@tapToAddServer": {
     "description": "public server description"
   },
-  "publicServersError": "Die Liste der öffentlichen Server konnte nicht abgerufen werden. Tippen Sie auf, um es erneut zu versuchen.",
+  "publicServersError": "Die Liste der öffentlichen Server konnte nicht abgerufen werden. Tippe um es erneut zu versuchen.",
   "@publicServersError": {
     "description": "Error message when trying to get public servers but it failed"
   },
@@ -310,7 +310,7 @@
   "@country": {
     "description": "Country label"
   },
-  "whenAppStartsShow": "Wenn die Anwendung startet, zeige …",
+  "whenAppStartsShow": "Wenn die Anwendung startet, zeige…",
   "@whenAppStartsShow": {
     "description": "Setting title for selecting the screen to show on start"
   },
@@ -343,7 +343,7 @@
   "@useDashDescription": {
     "description": "Description for dash in the settings screen"
   },
-  "videoPlayer": "Video-Player",
+  "videoPlayer": "Videospieler",
   "@videoPlayer": {
     "description": "Title for video player related options"
   },
@@ -363,7 +363,7 @@
   "@tokenLoginDescription": {
     "description": "Recommended way to log in"
   },
-  "tokenLogin": "Sich mit Token anmelden",
+  "tokenLogin": "Mit Token anmelden",
   "@tokenLogin": {
     "description": "Textto login to a server using the recommended way"
   },
@@ -379,7 +379,7 @@
   "@wrongUsernamePassword": {
     "description": "Error message when authentication fails"
   },
-  "cookieLoginDescription": "Verwenden Sie diese Methode, wenn Sie Probleme mit der Token-Authentifizierung haben",
+  "cookieLoginDescription": "Verwende diese Methode, wenn du Probleme mit der Token-Authentifizierung haben",
   "@cookieLoginDescription": {
     "description": "Cookie log in description"
   },
@@ -423,7 +423,7 @@
   "@addToQueueList": {
     "description": "Label on button to add a video to the queue list"
   },
-  "sponsorBlockCategorySponsorDescription": "Bezahlte Werbung, bezahlte Empfehlungen und Direktwerbung. Nicht für Eigenwerbung oder kostenlose Ausrufen zu Anliegen/Erstellern/Webseiten/Produkten die sie mögen.",
+  "sponsorBlockCategorySponsorDescription": "Bezahlte Werbung, bezahlte Empfehlungen und direkte Anzeigen. Keine Selbstwerbung oder kostenlose Unterstützung von Ursachen/Kreatoren/Webseiten/Produkten, die ihnen gefallen.",
   "@sponsorBlockCategorySponsorDescription": {
     "description": "Sponsor block 'Sponsor' Category description"
   },
@@ -435,11 +435,11 @@
   "@sponsorBlockCategoryIntro": {
     "description": "Sponsorblock 'Intro' Category"
   },
-  "sponsorBlockCategoryOutro": "Endcards/Abspann",
+  "sponsorBlockCategoryOutro": "Abspann/Credits",
   "@sponsorBlockCategoryOutro": {
     "description": "Outro block 'Outro' Category"
   },
-  "sponsorBlockCategoryOutroDescription": "Abspann oder wenn die YouTube-Endcards erscheinen. Nicht für Fazits mit Informationen.",
+  "sponsorBlockCategoryOutroDescription": "Credits oder wenn die YouTube-Endkarten erscheinen. Nicht für Schlussfolgerungen mit Informationen.",
   "@sponsorBlockCategoryOutroDescription": {
     "description": "Outro block 'Outro' Category description"
   },
@@ -447,7 +447,7 @@
   "@sponsorBlockCategoryPreview": {
     "description": "Sponsorblock 'Preview' Category"
   },
-  "sponsorBlockCategoryFiller": "Füller Abschweife/Witze",
+  "sponsorBlockCategoryFiller": "Ablenkende Nebenthemen/Witze",
   "@sponsorBlockCategoryFiller": {
     "description": "Sponsorblock 'Filler' Category"
   },
@@ -455,15 +455,15 @@
   "@sponsorBlockCategoryMusicOffTopic": {
     "description": "Sponsorblock 'MusicOffTopic' Category"
   },
-  "sponsorBlockCategoryUnpaidSelfPromoDescription": "Ähnlich zu \"sponsor\" außer für unbezahlte oder Eigenwerbung. Das beinhaltet Abschnitte über Merchandise, Spenden oder Informationen darüber, mit wem sie kollabiert haben. ",
+  "sponsorBlockCategoryUnpaidSelfPromoDescription": "Ähnlich zu \"Sponsoren\" außer für unbezahlte oder Eigenwerbung. Das beinhaltet Abschnitte über Merchandise, Spenden oder Informationen darüber, mit wem sie zusammengearbeitet haben. ",
   "@sponsorBlockCategoryUnpaidSelfPromoDescription": {
     "description": "Sponsor block 'Unpaid/Self promotion' Category description"
   },
-  "sponsorBlockCategoryInteractionDescription": "Bei einer kurzen Erinnerung zu liken, abonnieren oder ihnen zu folgen mitten im Video. Falls sie lang oder spezifisch ist, sollte sie stattdessen unter Promotion einsortiert werden.",
+  "sponsorBlockCategoryInteractionDescription": "Wenn es mitten im Inhalt einen kurzen Hinweis gibt, um zu liken, abonnieren oder zu folgen. Wenn es lang ist oder sich auf etwas Bestimmtes bezieht, sollte es stattdessen unter Selbstwerbung stehen.",
   "@sponsorBlockCategoryInteractionDescription": {
     "description": "Sponsor block 'Interaction' Category description"
   },
-  "sponsorBlockCategoryIntroDescription": "Ein Intervall ohne echten Inhalt. Kann eine Pause, Standbild oder wiederholende Animation sein. Sollte nicht für Transitionen, die Informationen enthalten, verwendet werden.",
+  "sponsorBlockCategoryIntroDescription": "Ein Intervall ohne tatsächlichen Inhalt. Es könnte eine Pause, ein statisches Bild oder eine sich wiederholende Animation sein. Dies sollte nicht für Übergänge mit Informationen verwendet werden.",
   "@sponsorBlockCategoryIntroDescription": {
     "description": "Sponsorblock 'Intro' Category description"
   },
@@ -471,11 +471,11 @@
   "@sponsorBlockCategoryPreviewDescription": {
     "description": "Sponsorblock 'Preview' Category description"
   },
-  "sponsorBlockCategoryFillerDescription": "Abschweifende Szenen, die nur als Füllmaterial oder Humor hinzugefügt werden und nicht benötigt werden, um den Inhalt des Videos zu verstehen. Das sollte keine Segmente beinhalteten, die Kontext oder Hintergrunddetails liefern. Das ist eine sehr aggressive Kategorie, gedacht dafür wenn du nicht in der Stimmung für \"Spaß\" bist.",
+  "sponsorBlockCategoryFillerDescription": "Tangentielle Szenen werden nur als Lückenfüller oder humorvolle Elemente hinzugefügt, die nicht erforderlich sind, um den Hauptinhalt des Videos zu verstehen. Dabei handelt es sich nicht um Abschnitte, die Kontext oder Hintergrundinformationen liefern. Diese Kategorie ist sehr aggressiv und für die Zeiten gedacht, in denen man nicht in Stimmung für \"Spaß\" ist.",
   "@sponsorBlockCategoryFillerDescription": {
     "description": "Sponsorblock 'Filler' Category description"
   },
-  "search": "Suche",
+  "search": "Suchen",
   "@search": {
     "description": "search title"
   },
@@ -491,12 +491,152 @@
   "@blackBackground": {
     "description": "Settings name for black background"
   },
-  "blackBackgroundDescription": "Für dunkles Design auf OLED-Bildschirm",
+  "blackBackgroundDescription": "Für den Dunkelmodus auf einem OLED-Bildschirm",
   "@blackBackgroundDescription": {
     "description": "Description for dark background setting"
   },
   "subtitleFontSize": "Untertitel Schriftgröße",
   "@subtitleFontSize": {
     "description": "Settings label for the size of the subtitles"
+  },
+  "skipSslVerification": "SSL Zertifikatsprüfung überspringen",
+  "@skipSslVerification": {
+    "description": "Setting label to skip ssl certification verification"
+  },
+  "skipSslVerificationDescription": "Für die Verwendung eines selbstsignierten SSL-Zertifikats oder bei SSL-bezogenen Problemen mit Ihrem Server.",
+  "@skipSslVerificationDescription": {
+    "description": "Setting description for the skip ssl certification verification"
+  },
+  "searchHistoryDescription": "Suchverlaufseinstellungen",
+  "@searchHistoryDescription": {
+    "description": "Description for search history settings"
+  },
+  "rememberSubtitleLanguageDescription": "Automatisch Untertitel auf die zuletzt ausgewählte Sprache einstellen, falls verfügbar",
+  "@rememberSubtitleLanguageDescription": {
+    "description": "Settings description for remembering subtitle language"
+  },
+  "useProxy": "Proxy-Videos",
+  "@useProxy": {
+    "description": "label for settings switch to proxy videos from server"
+  },
+  "appLogs": "Anwendungslogs",
+  "@appLogs": {
+    "description": "Title for settings that leads to application logs"
+  },
+  "appLogsDescription": "Erhalte Protokolle über das, was in der Anwendung geschieht. Das kann hilfreich sein, um Probleme zu melden",
+  "@appLogsDescription": {
+    "description": "Description of the app log settings"
+  },
+  "copyToClipBoard": "In Zwischenablage kopieren",
+  "@copyToClipBoard": {
+    "description": "Text to copy something to clipboard"
+  },
+  "logsCopied": "Logs wurden in die Zwischenablage kopiert",
+  "@logsCopied": {
+    "description": "Message to tell user that logs have been copied to the clipboard"
+  },
+  "searchSortRelevance": "Relevanz",
+  "@searchSortRelevance": {
+    "description": "Sort search by relevance"
+  },
+  "searchSortRating": "Bewertung",
+  "@searchSortRating": {
+    "description": "Sort search by rating"
+  },
+  "searchSortUploadDate": "Upload-Datum",
+  "@searchSortUploadDate": {
+    "description": "Sort search by upload date"
+  },
+  "shorts": "Shorts",
+  "@shorts": {
+    "description": "Youtube shorts"
+  },
+  "searchSortViewCount": "Aufrufe",
+  "@searchSortViewCount": {
+    "description": "Sort search by view count"
+  },
+  "returnYoutubeDislikeDescription": "Zeigen Sie die geschätzte Anzahl der Video-Dislikes mithilfe der von returnyoutubedislike.com bereitgestellten API an",
+  "@returnYoutubeDislikeDescription": {
+    "description": "ReturnYoutubeDislike setting description"
+  },
+  "rememberSubtitleLanguage": "Untertitelsprache merken",
+  "@rememberSubtitleLanguage": {
+    "description": "Settings label for remembering subtitle language"
+  },
+  "subtitleFontSizeDescription": "Ändern Sie die Größe der Untertitel, falls sie auf Ihrem Gerät zu klein oder zu groß sind",
+  "@subtitleFontSizeDescription": {
+    "description": "Settings description for subtitle size"
+  },
+  "audio": "Audio",
+  "@audio": {
+    "description": "Name TV ui audio settings"
+  },
+  "autoplayVideoOnLoad": "Video automatisch bei Laden abspielen",
+  "@autoplayVideoOnLoad": {
+    "description": "Label for settings to enable autoplay when a video loads"
+  },
+  "autoplayVideoOnLoadDescription": "Das Video automatisch abspielen, nachdem es geladen wurde",
+  "@autoplayVideoOnLoadDescription": {
+    "description": "Description for the autoplay video on load setting"
+  },
+  "searchHistory": "Suchverlauf",
+  "@searchHistory": {
+    "description": "Settings label for search history"
+  },
+  "enableSearchHistory": "Suchverlauf anschalten",
+  "@enableSearchHistory": {
+    "description": "Settings label for enabling search history"
+  },
+  "searchHistoryLimit": "Suchverlaufslimit",
+  "@searchHistoryLimit": {
+    "description": "Settings label for search history limit"
+  },
+  "searchHistoryLimitDescription": "Einstellen wie viele vorherige Suchanfragen in den Vorschlägen angezeigt werden",
+  "@searchHistoryLimitDescription": {
+    "description": "Settings label for search history limit description"
+  },
+  "clearSearchHistory": "Suchverlauf leeren",
+  "@clearSearchHistory": {
+    "description": "Settings label for clearing search history"
+  },
+  "themeBrightness": "Design",
+  "@themeBrightness": {
+    "description": "Ask the user to user dark / light / system theme"
+  },
+  "themeLight": "Hell",
+  "@themeLight": {
+    "description": "Light theme"
+  },
+  "themeDark": "Dunkel",
+  "@themeDark": {
+    "description": "Dark theme"
+  },
+  "followSystem": "System folgen",
+  "@followSystem": {
+    "description": "Follow system label"
+  },
+  "requiresRestart": "Benötigt einen App-Neustart",
+  "@requiresRestart": {
+    "description": "Requires app restart label"
+  },
+  "appLanguage": "Anwendungssprache",
+  "@appLanguage": {
+    "description": "Select app language"
+  },
+  "quality": "Qualität",
+  "@quality": {
+    "description": "Name of TV ui video settings"
+  },
+  "useProxyDescription": "Indem du die Video-Streams vom Server proxyierst, kannst du regionale Sperren umgehen oder die Sperrung von YouTube durch deinen Internetdienstanbieter umgehen",
+  "@useProxyDescription": {
+    "description": "Description for the use proxy settings"
+  },
+  "sponsorBlockCategoryMusicOffTopicDescription": "Nur zur Verwendung in Musikvideos. Dies sollte nur für Abschnitte von Musikvideos verwendet werden, die nicht bereits von einer anderen Kategorie abgedeckt sind.",
+  "@sponsorBlockCategoryMusicOffTopicDescription": {
+    "description": "Only for use in music videos. This only should be used for sections of music videos that aren't already covered by another category."
+  },
+  "pressDownToShowSettings": "Drücken Sie nach unten, um die Einstellungen anzuzeigen",
+  "@pressDownToShowSettings": {
+    "description": "Instruction on how to show video settings when playing a video on TV"
   }
 }
