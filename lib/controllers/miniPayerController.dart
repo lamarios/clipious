@@ -103,7 +103,7 @@ class MiniPlayerController extends GetxController {
   }
 
   setVideos(List<BaseVideo> videos) {
-    this.videos = videos;
+    this.videos = videos.where((element) => !element.filtered).toList();
     update();
   }
 
@@ -136,7 +136,7 @@ class MiniPlayerController extends GetxController {
   queueVideos(List<BaseVideo> videos) {
     if (videos.isNotEmpty) {
       //removing videos that are already in the queue
-      this.videos.addAll(videos.where((v) => this.videos.indexWhere((v2) => v2.videoId == v.videoId) == -1));
+      this.videos.addAll(videos.where((v) => this.videos.indexWhere((v2) => v2.videoId == v.videoId) == -1).where((element) => !element.filtered));
     } else {
       playVideo(videos);
     }
@@ -216,7 +216,8 @@ class MiniPlayerController extends GetxController {
     }
   }
 
-  playVideo(List<BaseVideo> videos, {bool? goBack}) {
+  playVideo(List<BaseVideo> v, {bool? goBack}) {
+    List<BaseVideo> videos = v.where((element) => !element.filtered).toList();
     if (goBack ?? false) navigatorKey.currentState?.pop();
     log.fine('Playing ${videos.length} videos');
     if (videos.isNotEmpty) {

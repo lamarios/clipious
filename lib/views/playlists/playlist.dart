@@ -21,13 +21,12 @@ class PlaylistItem extends StatelessWidget {
   const PlaylistItem({super.key, required this.playlist, required this.canDeleteVideos});
 
   openPlayList(BuildContext context) {
-    navigatorKey.currentState?.push(
-        MaterialPageRoute(
-            settings: ROUTE_PLAYLIST,
-            builder: (context) => PlaylistView(
-                  playlist: playlist,
-                  canDeleteVideos: canDeleteVideos,
-                )));
+    navigatorKey.currentState?.push(MaterialPageRoute(
+        settings: ROUTE_PLAYLIST,
+        builder: (context) => PlaylistView(
+              playlist: playlist,
+              canDeleteVideos: canDeleteVideos,
+            )));
   }
 
   @override
@@ -41,6 +40,7 @@ class PlaylistItem extends StatelessWidget {
       builder: (_) {
         List<Widget> thumbs = [];
         List<VideoInList> videosToUse = _.videos.isNotEmpty ? _.videos : playlist.videos;
+        videosToUse = videosToUse.where((element) => !element.filtered).toList();
 
         for (int i = 0; i < 3; i++) {
           // for (VideoInList video in playlist.videos) {

@@ -80,7 +80,9 @@ class VideoFilter {
     operation = FilterOperation.values.where((element) => element.name == value).firstOrNull;
   }
 
-  static filterVideos(List<BaseVideo>? videos) {
+  /// Returns the number of videos removed
+  static int filterVideos(List<BaseVideo>? videos) {
+    int startCount = videos?.length ?? 0;
     bool hideFilteredVideos = db.getSettings(HIDE_FILTERED_VIDEOS)?.value == 'true';
     List<VideoFilter> filters = db.getAllFilters();
 
@@ -94,6 +96,7 @@ class VideoFilter {
     });
 
     videos?.removeWhere((v) => v.matchedFilters.any((f) => f.hideFromFeed));
+    return startCount - (videos?.length ?? 0);
   }
 
   bool filterVideo(BaseVideo video) {

@@ -397,7 +397,11 @@ class Service {
 
       final response = await http.get(url, headers: headers);
       Iterable i = handleResponse(response);
-      return List<Playlist>.from(i.map((e) => Playlist.fromJson(e)));
+      var list = List<Playlist>.from(i.map((e) => Playlist.fromJson(e)));
+      for (var pl in list) {
+        VideoFilter.filterVideos(pl.videos);
+      }
+      return list;
     } catch (e) {
       return [];
     }
@@ -407,7 +411,11 @@ class Service {
     Uri uri = buildUrl(GET_CHANNEL_PLAYLISTS, pathParams: {':id': channelId}, query: {'continuation': continuation});
 
     final response = await http.get(uri);
-    return ChannelPlaylists.fromJson(handleResponse(response));
+    var channelPlaylists = ChannelPlaylists.fromJson(handleResponse(response));
+    for (var pl in channelPlaylists.playlists) {
+      VideoFilter.filterVideos(pl.videos);
+    }
+    return channelPlaylists;
   }
 
   Future<String?> createPlayList(String name, String type) async {
@@ -502,7 +510,10 @@ class Service {
     Uri uri = buildUrl(GET_PUBLIC_PLAYLIST, pathParams: {':id': playlistId}, query: {'page': page?.toString()});
 
     final response = await http.get(uri);
-    return Playlist.fromJson(handleResponse(response));
+    var playlist = Playlist.fromJson(handleResponse(response));
+    playlist.removedByFilter = VideoFilter.filterVideos(playlist.videos);
+
+    return playlist;
   }
 
   Future<Dislike> getDislikes(String videoId) async {
