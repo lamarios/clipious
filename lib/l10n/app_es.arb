@@ -638,5 +638,9 @@
   "appLogsDescription": "Obtener registros de lo que ocurre en la aplicación, puede ser útil para informar de problemas",
   "@appLogsDescription": {
     "description": "Description of the app log settings"
+  },
+  "redirectInvidiousLink": "Compartir el enlace de directo de Invidious",
+  "@redirectInvidiousLink": {
+    "description": "asking user to share redirecting invidious link"
   }
 }
