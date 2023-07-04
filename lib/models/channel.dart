@@ -38,7 +38,10 @@ class Channel implements ShareLinks {
   @override
   String getInvidiousLink(Server server) {
     return '${server.url}/channel/$authorId';
+  }
 
+  @override getRedirectLink() {
+    return 'https://redirect.invidious.io/channel/$authorId';
   }
 
   @override

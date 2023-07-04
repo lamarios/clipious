@@ -74,7 +74,7 @@ void showSharingSheet(BuildContext context, ShareLinks links) {
       context: context,
       builder: (BuildContext context) {
         return Container(
-          height: 100,
+          height: 150,
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -84,6 +84,13 @@ void showSharingSheet(BuildContext context, ShareLinks links) {
                   child: Text(locals.shareInvidiousLink),
                   onPressed: () {
                     Share.share(links.getInvidiousLink(db.getCurrentlySelectedServer()));
+                    Navigator.of(context).pop();
+                  },
+                ),
+                FilledButton.tonal(
+                  child: Text(locals.redirectInvidiousLink),
+                  onPressed: () {
+                    Share.share(links.getRedirectLink());
                     Navigator.of(context).pop();
                   },
                 ),
