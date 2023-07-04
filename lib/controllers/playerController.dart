@@ -119,20 +119,36 @@ class PlayerController extends GetxController {
         saveProgress(video.lengthSeconds);
         broadcastEvent(event);
         break;
+
       case BetterPlayerEventType.pipStart:
       case BetterPlayerEventType.pipStop:
       case BetterPlayerEventType.openFullscreen:
       case BetterPlayerEventType.hideFullscreen:
       case BetterPlayerEventType.overflowClosed:
       case BetterPlayerEventType.overflowOpened:
-      case BetterPlayerEventType.initialized:
       case BetterPlayerEventType.seekTo:
+      case BetterPlayerEventType.initialized:
       case BetterPlayerEventType.bufferingEnd:
       case BetterPlayerEventType.bufferingStart:
         broadcastEvent(event);
         break;
+      case BetterPlayerEventType.play:
+        double speed = 1.0;
+        if (db.getSettings(REMEMBER_PLAYBACK_SPEED)?.value == 'true') {
+          speed = double.parse(db.getSettings(LAST_SPEED)?.value ?? '1.0');
+
+          log.fine("Setting playback speed to $speed");
+          videoController?.setSpeed(speed);
+        }
+        broadcastEvent(event);
+        break;
       case BetterPlayerEventType.changedSubtitles:
         db.saveSetting(SettingsValue(LAST_SUBTITLE, videoController?.betterPlayerSubtitlesSource?.name ?? ''));
+        break;
+      case BetterPlayerEventType.setSpeed:
+        if (event.parameters?.containsKey("speed") ?? false) {
+          db.saveSetting(SettingsValue(LAST_SPEED, event.parameters?["speed"].toString() ?? '1.0'));
+        }
         break;
       default:
         break;
@@ -219,14 +235,9 @@ class PlayerController extends GetxController {
     BetterPlayerDataSource betterPlayerDataSource = BetterPlayerDataSource(BetterPlayerDataSourceType.network, videoUrl,
         videoFormat: format,
         liveStream: video.liveNow,
-        subtitles: video.captions.map((s) =>
-            BetterPlayerSubtitlesSource(
-                type: BetterPlayerSubtitlesSourceType.network,
-                urls: ['${baseUrl}${s.url}'],
-                name: s.label,
-                selectedByDefault: s.label == lastSubtitle
-            )
-        ).toList(),
+        subtitles: video.captions
+            .map((s) => BetterPlayerSubtitlesSource(type: BetterPlayerSubtitlesSourceType.network, urls: ['${baseUrl}${s.url}'], name: s.label, selectedByDefault: s.label == lastSubtitle))
+            .toList(),
         resolutions: resolutions.isNotEmpty ? resolutions : null,
         // placeholder: VideoThumbnailView(videoId: video.videoId, thumbnailUrl: video.getBestThumbnail()?.url ?? ''),
         notificationConfiguration: BetterPlayerNotificationConfiguration(

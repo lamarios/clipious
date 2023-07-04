@@ -642,5 +642,13 @@
     "rememberSubtitleLanguageDescription": "Automatically set subtitles to last language selected, if available",
     "@rememberSubtitleLanguageDescription": {
         "description": "Settings description for remembering subtitle language"
+    },
+    "rememberPlaybackSpeed": "Remember playback speed",
+    "@rememberPlaybackSpeed": {
+        "description": "Setting label for remembering playback speed"
+    },
+    "rememberPlaybackSpeedDescription": "Automatically set playback speed to last speed selected",
+    "@rememberPlaybackSpeedDescription": {
+        "description": "Settings descrtiption for remembering playback speed"
     }
 }

@@ -33,6 +33,8 @@ const THEME_MODE = 'theme-mode';
 const LOCALE = 'locale';
 const USE_SEARCH_HISTORY = 'use-search-history';
 const SEARCH_HISTORY_LIMIT = 'search-history-limit';
+const REMEMBER_PLAYBACK_SPEED = 'remember-playback-speed';
+const LAST_SPEED = 'last-speed';
 
 const ON_OPEN = "on-open";
 const MAX_LOGS = 1000;
