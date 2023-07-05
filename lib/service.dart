@@ -7,6 +7,7 @@ import 'package:http/http.dart' as http;
 import 'package:invidious/database.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/models/db/searchHistoryItem.dart';
+import 'package:invidious/models/db/videoFilter.dart';
 import 'package:invidious/models/dislike.dart';
 import 'package:invidious/models/errors/invidiousServiceError.dart';
 import 'package:invidious/models/playlist.dart';
@@ -198,13 +199,17 @@ class Service {
     final response = await http.get(buildUrl(GET_TRENDING, query: query));
 
     Iterable i = handleResponse(response);
-    return List<VideoInList>.from(i.map((e) => VideoInList.fromJson(e)));
+    var list = List<VideoInList>.from(i.map((e) => VideoInList.fromJson(e)));
+    VideoFilter.filterVideos(list);
+    return list;
   }
 
   Future<List<VideoInList>> getPopular() async {
     final response = await http.get(buildUrl(GET_POPULAR));
     Iterable i = handleResponse(response);
-    return List<VideoInList>.from(i.map((e) => VideoInList.fromJson(e)));
+    var list = List<VideoInList>.from(i.map((e) => VideoInList.fromJson(e)));
+    VideoFilter.filterVideos(list);
+    return list;
   }
 
   Future<SearchResults> search(String query, {SearchType? type, int? page, SearchSortBy? sortBy}) async {
@@ -237,6 +242,7 @@ class Service {
       db.addToSearchHistory(SearchHistoryItem(query, (DateTime.now().millisecondsSinceEpoch / 1000).round()));
     }
 
+    VideoFilter.filterVideos(results.videos);
     return results;
   }
 
@@ -247,7 +253,9 @@ class Service {
 
     var headers = getAuthenticationHeaders(currentlySelectedServer);
     final response = await http.get(uri, headers: headers);
-    return UserFeed.fromJson(handleResponse(response));
+    var feed = UserFeed.fromJson(handleResponse(response));
+    VideoFilter.filterVideos(feed.videos);
+    return feed;
   }
 
   Future<List<SponsorSegment>> getSponsorSegments(String videoId, List<SponsorSegmentType> categories) async {
@@ -348,28 +356,36 @@ class Service {
     channelId = channelId.replaceAll("/channel/", '');
     final response = await http.get(buildUrl(GET_CHANNEL, pathParams: {':id': channelId}), headers: {'Content-Type': 'application/json; charset=utf-16'});
 
-    return Channel.fromJson(handleResponse(response));
+    var channel = Channel.fromJson(handleResponse(response));
+    VideoFilter.filterVideos(channel.latestVideos);
+    return channel;
   }
 
   Future<VideosWithContinuation> getChannelVideos(String channelId, String? continuation) async {
     Uri uri = buildUrl(GET_CHANNEL_VIDEOS, pathParams: {':id': channelId}, query: {'continuation': continuation});
     final response = await http.get(uri, headers: {'Content-Type': 'application/json; charset=utf-16'});
 
-    return VideosWithContinuation.fromJson(handleResponse(response));
+    var videosWithContinuation = VideosWithContinuation.fromJson(handleResponse(response));
+    VideoFilter.filterVideos(videosWithContinuation.videos);
+    return videosWithContinuation;
   }
 
   Future<VideosWithContinuation> getChannelStreams(String channelId, String? continuation) async {
     Uri uri = buildUrl(GET_CHANNEL_STREAMS, pathParams: {':id': channelId}, query: {'continuation': continuation});
     final response = await http.get(uri, headers: {'Content-Type': 'application/json; charset=utf-16'});
 
-    return VideosWithContinuation.fromJson(handleResponse(response));
+    var videosWithContinuation = VideosWithContinuation.fromJson(handleResponse(response));
+    VideoFilter.filterVideos(videosWithContinuation.videos);
+    return videosWithContinuation;
   }
 
   Future<VideosWithContinuation> getChannelShorts(String channelId, String? continuation) async {
     Uri uri = buildUrl(GET_CHANNEL_SHORTS, pathParams: {':id': channelId}, query: {'continuation': continuation});
     final response = await http.get(uri, headers: {'Content-Type': 'application/json; charset=utf-16'});
 
-    return VideosWithContinuation.fromJson(handleResponse(response));
+    var videosWithContinuation = VideosWithContinuation.fromJson(handleResponse(response));
+    VideoFilter.filterVideos(videosWithContinuation.videos);
+    return videosWithContinuation;
   }
 
   Future<List<Playlist>> getUserPlaylists() async {
@@ -381,7 +397,11 @@ class Service {
 
       final response = await http.get(url, headers: headers);
       Iterable i = handleResponse(response);
-      return List<Playlist>.from(i.map((e) => Playlist.fromJson(e)));
+      var list = List<Playlist>.from(i.map((e) => Playlist.fromJson(e)));
+      for (var pl in list) {
+        VideoFilter.filterVideos(pl.videos);
+      }
+      return list;
     } catch (e) {
       return [];
     }
@@ -391,7 +411,11 @@ class Service {
     Uri uri = buildUrl(GET_CHANNEL_PLAYLISTS, pathParams: {':id': channelId}, query: {'continuation': continuation});
 
     final response = await http.get(uri);
-    return ChannelPlaylists.fromJson(handleResponse(response));
+    var channelPlaylists = ChannelPlaylists.fromJson(handleResponse(response));
+    for (var pl in channelPlaylists.playlists) {
+      VideoFilter.filterVideos(pl.videos);
+    }
+    return channelPlaylists;
   }
 
   Future<String?> createPlayList(String name, String type) async {
@@ -486,7 +510,10 @@ class Service {
     Uri uri = buildUrl(GET_PUBLIC_PLAYLIST, pathParams: {':id': playlistId}, query: {'page': page?.toString()});
 
     final response = await http.get(uri);
-    return Playlist.fromJson(handleResponse(response));
+    var playlist = Playlist.fromJson(handleResponse(response));
+    playlist.removedByFilter = VideoFilter.filterVideos(playlist.videos);
+
+    return playlist;
   }
 
   Future<Dislike> getDislikes(String videoId) async {

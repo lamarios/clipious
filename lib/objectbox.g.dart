@@ -19,6 +19,7 @@ import 'models/db/progress.dart';
 import 'models/db/searchHistoryItem.dart';
 import 'models/db/server.dart';
 import 'models/db/settings.dart';
+import 'models/db/videoFilter.dart';
 
 export 'package:objectbox/objectbox.dart'; // so that callers only have to import this file
 
@@ -171,6 +172,50 @@ final _entities = <ModelEntity>[
             flags: 0)
       ],
       relations: <ModelRelation>[],
+      backlinks: <ModelBacklink>[]),
+  ModelEntity(
+      id: const IdUid(6, 8304874620604193998),
+      name: 'VideoFilter',
+      lastPropertyId: const IdUid(8, 6020474727686624632),
+      flags: 0,
+      properties: <ModelProperty>[
+        ModelProperty(
+            id: const IdUid(1, 4718003498405944371),
+            name: 'id',
+            type: 6,
+            flags: 1),
+        ModelProperty(
+            id: const IdUid(2, 906689741192359458),
+            name: 'channelId',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(3, 19321448094437321),
+            name: 'value',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(4, 7050038042672519102),
+            name: 'dbType',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(5, 2812361632619055204),
+            name: 'dbOperation',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(7, 4560530621575797576),
+            name: 'filterAll',
+            type: 1,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(8, 6020474727686624632),
+            name: 'hideFromFeed',
+            type: 1,
+            flags: 0)
+      ],
+      relations: <ModelRelation>[],
       backlinks: <ModelBacklink>[])
 ];
 
@@ -194,13 +239,17 @@ Future<Store> openStore(
 ModelDefinition getObjectBoxModel() {
   final model = ModelInfo(
       entities: _entities,
-      lastEntityId: const IdUid(5, 8446250266008376981),
+      lastEntityId: const IdUid(6, 8304874620604193998),
       lastIndexId: const IdUid(5, 7262786699272501249),
       lastRelationId: const IdUid(0, 0),
       lastSequenceId: const IdUid(0, 0),
       retiredEntityUids: const [],
       retiredIndexUids: const [9110274326691932798],
-      retiredPropertyUids: const [3422621380867834787, 971220157301355316],
+      retiredPropertyUids: const [
+        3422621380867834787,
+        971220157301355316,
+        7030952573865954657
+      ],
       retiredRelationUids: const [],
       modelVersion: 5,
       modelVersionParserMinimum: 5,
@@ -381,6 +430,57 @@ ModelDefinition getObjectBoxModel() {
             ..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
 
           return object;
+        }),
+    VideoFilter: EntityDefinition<VideoFilter>(
+        model: _entities[5],
+        toOneRelations: (VideoFilter object) => [],
+        toManyRelations: (VideoFilter object) => {},
+        getId: (VideoFilter object) => object.id,
+        setId: (VideoFilter object, int id) {
+          object.id = id;
+        },
+        objectToFB: (VideoFilter object, fb.Builder fbb) {
+          final channelIdOffset = object.channelId == null
+              ? null
+              : fbb.writeString(object.channelId!);
+          final valueOffset =
+              object.value == null ? null : fbb.writeString(object.value!);
+          final dbTypeOffset =
+              object.dbType == null ? null : fbb.writeString(object.dbType!);
+          final dbOperationOffset = object.dbOperation == null
+              ? null
+              : fbb.writeString(object.dbOperation!);
+          fbb.startTable(9);
+          fbb.addInt64(0, object.id);
+          fbb.addOffset(1, channelIdOffset);
+          fbb.addOffset(2, valueOffset);
+          fbb.addOffset(3, dbTypeOffset);
+          fbb.addOffset(4, dbOperationOffset);
+          fbb.addBool(6, object.filterAll);
+          fbb.addBool(7, object.hideFromFeed);
+          fbb.finish(fbb.endTable());
+          return object.id;
+        },
+        objectFromFB: (Store store, ByteData fbData) {
+          final buffer = fb.BufferContext(fbData);
+          final rootOffset = buffer.derefObject(0);
+
+          final object = VideoFilter(
+              value: const fb.StringReader(asciiOptimization: true)
+                  .vTableGetNullable(buffer, rootOffset, 8),
+              channelId: const fb.StringReader(asciiOptimization: true)
+                  .vTableGetNullable(buffer, rootOffset, 6))
+            ..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0)
+            ..dbType = const fb.StringReader(asciiOptimization: true)
+                .vTableGetNullable(buffer, rootOffset, 10)
+            ..dbOperation = const fb.StringReader(asciiOptimization: true)
+                .vTableGetNullable(buffer, rootOffset, 12)
+            ..filterAll =
+                const fb.BoolReader().vTableGet(buffer, rootOffset, 16, false)
+            ..hideFromFeed =
+                const fb.BoolReader().vTableGet(buffer, rootOffset, 18, false);
+
+          return object;
         })
   };
 
@@ -472,4 +572,35 @@ class AppLog_ {
 
   /// see [AppLog.logger]
   static final logger = QueryStringProperty<AppLog>(_entities[4].properties[5]);
+}
+
+/// [VideoFilter] entity fields to define ObjectBox queries.
+class VideoFilter_ {
+  /// see [VideoFilter.id]
+  static final id =
+      QueryIntegerProperty<VideoFilter>(_entities[5].properties[0]);
+
+  /// see [VideoFilter.channelId]
+  static final channelId =
+      QueryStringProperty<VideoFilter>(_entities[5].properties[1]);
+
+  /// see [VideoFilter.value]
+  static final value =
+      QueryStringProperty<VideoFilter>(_entities[5].properties[2]);
+
+  /// see [VideoFilter.dbType]
+  static final dbType =
+      QueryStringProperty<VideoFilter>(_entities[5].properties[3]);
+
+  /// see [VideoFilter.dbOperation]
+  static final dbOperation =
+      QueryStringProperty<VideoFilter>(_entities[5].properties[4]);
+
+  /// see [VideoFilter.filterAll]
+  static final filterAll =
+      QueryBooleanProperty<VideoFilter>(_entities[5].properties[5]);
+
+  /// see [VideoFilter.hideFromFeed]
+  static final hideFromFeed =
+      QueryBooleanProperty<VideoFilter>(_entities[5].properties[6]);
 }

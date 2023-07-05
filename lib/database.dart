@@ -4,12 +4,14 @@ import 'package:invidious/models/db/progress.dart';
 import 'package:invidious/models/db/searchHistoryItem.dart';
 import 'package:invidious/models/db/settings.dart';
 import 'package:invidious/models/errors/noServerSelected.dart';
+import 'package:invidious/views/video.dart';
 import 'package:logging/logging.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 
 import 'models/db/appLog.dart';
 import 'models/db/server.dart';
+import 'models/db/videoFilter.dart';
 import 'objectbox.g.dart'; // created by `flutter pub run build_runner build`
 
 const SELECTED_SERVER = 'selected-server';
@@ -33,6 +35,7 @@ const THEME_MODE = 'theme-mode';
 const LOCALE = 'locale';
 const USE_SEARCH_HISTORY = 'use-search-history';
 const SEARCH_HISTORY_LIMIT = 'search-history-limit';
+const HIDE_FILTERED_VIDEOS = 'hide-filtered-videos';
 const REMEMBER_PLAYBACK_SPEED = 'remember-playback-speed';
 const LAST_SPEED = 'last-speed';
 
@@ -180,5 +183,17 @@ class DbClient {
 
   List<AppLog> getAppLogs() {
     return store.box<AppLog>().getAll();
+  }
+
+  List<VideoFilter> getAllFilters() {
+    return store.box<VideoFilter>().getAll();
+  }
+
+  void saveFilter(VideoFilter filter) {
+    store.box<VideoFilter>().put(filter);
+  }
+
+  void deleteFilter(VideoFilter filter) {
+    store.box<VideoFilter>().remove(filter.id);
   }
 }

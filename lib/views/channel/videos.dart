@@ -22,7 +22,7 @@ class ChannelVideosView extends StatelessWidget {
       child: VideoList(
         key: const ValueKey('channel-videos'),
         paginatedVideoList: ContinuationList<VideoInList>((continuation) => getVideos(channel.authorId, continuation)),
-        tags: 'channel-video-list-${(key as ValueKey<String>).value}'
+        // tags: 'channel-video-list-${(key as ValueKey<String>).value}'
       ),
     );
   }

@@ -6,6 +6,7 @@ const RouteSettings ROUTE_SETTINGS = RouteSettings(name: 'settings');
 const RouteSettings ROUTE_SETTINGS_MANAGE_SERVERS = RouteSettings(name: 'settings-manage-servers');
 const RouteSettings ROUTE_SETTINGS_MANAGE_ONE_SERVER = RouteSettings(name: 'settings-manage-one-server');
 const RouteSettings ROUTE_SETTINGS_SPONSOR_BLOCK = RouteSettings(name: 'settings-sponsor-block');
+const RouteSettings ROUTE_SETTINGS_VIDEO_FILTERS = RouteSettings(name: 'settings-video-filters');
 const RouteSettings ROUTE_SETTINGS_SEARCH_HISTORY = RouteSettings(name: 'settings-search-history');
 const RouteSettings ROUTE_VIDEO = RouteSettings(name: 'video');
 const RouteSettings ROUTE_CHANNEL = RouteSettings(name: 'channel');
@@ -23,6 +24,7 @@ class MyRouteObserver extends RouteObserver<PageRoute<dynamic>> {
         case ROUTE_SETTINGS_MANAGE_SERVERS:
         case ROUTE_SETTINGS_MANAGE_ONE_SERVER:
         case ROUTE_SETTINGS_SPONSOR_BLOCK:
+        case ROUTE_SETTINGS_VIDEO_FILTERS:
         case ROUTE_VIDEO:
         case ROUTE_PLAYLIST_LIST:
         case ROUTE_CHANNEL:

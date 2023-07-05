@@ -26,7 +26,15 @@ class CompactVideo extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: Row(
               children: [
-                VideoThumbnailView(cacheKey: 'v-worst/${video.videoId}', videoId: video.videoId, thumbnailUrl: ImageObject.getWorstThumbnail(video.videoThumbnails)?.url ?? ''),
+                video.filtered
+                    ? AspectRatio(
+                        aspectRatio: 16 / 9,
+                        child: Container(
+                          decoration: BoxDecoration(color: colors.secondaryContainer, borderRadius: BorderRadius.circular(10)),
+                          child: Icon(Icons.visibility_off_outlined, color: colors.secondary.withOpacity(0.7), size: 15),
+                        ),
+                      )
+                    : VideoThumbnailView(cacheKey: 'v-worst/${video.videoId}', videoId: video.videoId, thumbnailUrl: ImageObject.getWorstThumbnail(video.videoThumbnails)?.url ?? ''),
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -35,7 +43,7 @@ class CompactVideo extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          video.title,
+                          video.filtered ? '**********' : video.title,
                           style: TextStyle(color: colors.primary, overflow: TextOverflow.ellipsis),
                         ),
                         Text(

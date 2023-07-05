@@ -104,7 +104,7 @@ class PlaylistView extends StatelessWidget {
     List<Widget> thumbs = [];
 
     ColorScheme colors = Theme.of(context).colorScheme;
-    List<VideoInList> videosToUse = _.playlist.videos;
+    List<VideoInList> videosToUse = _.playlist.videos.where((element) => !element.filtered).toList();
     for (int i = 2; i >= 0; i--) {
       // for (VideoInList video in playlist.videos) {
       thumbs.add(Align(

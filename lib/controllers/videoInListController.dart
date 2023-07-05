@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:invidious/models/baseVideo.dart';
 import 'package:invidious/utils.dart';
 
 import '../globals.dart';
@@ -6,14 +7,15 @@ import '../globals.dart';
 class VideoInListController extends GetxController {
   static VideoInListController? to(String? tags) => safeGet(tag: tags);
   late double progress;
-  late String videoId;
+  BaseVideo video;
 
-  VideoInListController(this.videoId) {
+
+  VideoInListController(this.video) {
     progress = _getProgress();
   }
 
   double _getProgress() {
-    return db.getVideoProgress(videoId);
+    return db.getVideoProgress(video.videoId);
   }
 
   @override
@@ -23,7 +25,12 @@ class VideoInListController extends GetxController {
   }
 
   updateProgress() {
-    progress = db.getVideoProgress(videoId);
+    progress = db.getVideoProgress(video.videoId);
+    update();
+  }
+
+  void showVideoDetails() {
+    video.filtered = false;
     update();
   }
 }

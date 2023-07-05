@@ -639,6 +639,141 @@
     "@rememberSubtitleLanguage": {
         "description": "Settings label for remembering subtitle language"
     },
+    "videoFilters": "Video filters",
+    "@videoFilters": {
+        "description": "Title for video filter settings"
+    },
+    "videoFiltersExplanation": "Hide or Obfuscate videos from all the video feeds in the application based on the filters defined below. This allow you for example to hide sports spoilers or hide shorts from a certain channel.",
+    "@videoFiltersExplanation": {
+        "description": "Description on how filter work"
+    },
+    "videoFiltersSettingTileDescriptions": "Define rules to filter out videos",
+    "@videoFiltersSettingTileDescriptions": {
+        "description": "Description for the main settings page"
+    },
+    "videoFilterAllChannels": "All channels",
+    "@videoFilterAllChannels": {
+        "description": "Title for the sections that applies to all channels"
+    },
+    "addVideoFilter": "Create filter",
+    "@addVideoFilter": {
+        "description": "Title when creating a new filter"
+    },
+    "editVideoFilter": "Edit filter",
+    "@editVideoFilter": {
+        "description": "Title when editting a filter"
+    },
+    "videoFilterType": "Type",
+    "@videoFilterType": {
+        "description": "Label for filter type"
+    },
+    "videoFilterOperation": "Operation",
+    "@videoFilterOperation": {
+        "description": "Label for filter operation"
+    },
+    "videoFilterValue": "Value",
+    "@videoFilterValue": {
+        "description": "Label for filter value"
+    },
+    "save": "Save",
+    "@save": {
+        "description": "Text for save action"
+    },
+
+    "videoFilterEditDescription": "Select an optional channel, a filter type, operation and a value to filter OUT videos from lists. Example, type: video name, operation: contains, value: test will EXCLUDE all the videos with the word 'test' in their name.",
+    "@videoFilterEditDescription": {
+        "description": "Descriptive test for video filter set up"
+    },
+    "optional": "optional",
+    "@optional": {
+        "description": "Optional label"
+    },
+    "videoFilterHideLabel": "Hide",
+    "@videoFilterHideLabel": {
+        "description": "Label to hide videos"
+    },
+    "videoFilterFilterLabel": "Obfuscate",
+    "@videoFilterFilterLabel": {
+        "description": "Label to filter videos"
+    },
+    "videoFilterDescriptionString": "{hideOrFilter} videos where {type} {operation} ''{value}''.",
+    "@videoFilterDescriptionString": {
+        "description": "Human readable description of a video filter, in this case is it for string comparison, example: Hide videos where the name of the video does not contain the following string 'test' (Do not translate text between { })",
+        "placeholders": {
+            "hideOrFilter": {
+                "type": "String",
+                "example": "Hide"
+            },
+            "type": {
+                "type": "String",
+                "example": "video title"
+            },
+            "operation": {
+                "type": "String",
+                "example": "does not contain"
+            },
+            "value": {
+                "type": "String",
+                "example": "some filter text"
+            }
+        }
+    },
+    "videoFiltered": "Video filtered for the following reason(s):",
+    "@videoFiltered": {
+        "description": "Label shown on video list when it is filtered out"
+    },
+    "videoFilterTapToReveal": "Tap to reveal",
+    "@videoFilterTapToReveal": {
+        "description": "Label to tell user to tap to show a filtered video"
+    },
+    "videoFilterHide": "Hide filtered videos",
+    "@videoFilterHide": {
+        "description": "Label for settings to hide filtered videos"
+    },
+    "videoFilterHideDescription": "By default filtered videos are not hidden but shown as obfuscated with the reason(s) why it has been filtered. This setting remove the filtered videos from lists.",
+    "@videoFilterHideDescription": {
+        "description": ""
+    },
+    "videoFilterNoFilters": "No video filters, tap the '+' button below to start adding filters.",
+    "@videoFilterNoFilters": {
+        "description": "Label when there are no video filters"
+    },
+    "videoFilterTypeVideoTitle": "Video title",
+    "@videoFilterTypeVideoTitle": {
+        "description": "Label for video filter video title"
+    },
+    "videoFilterTypeChannelName": "Channel name",
+    "@videoFilterTypeChannelName": {
+        "description": "Label for video filter channel name"
+    },
+    "videoFilterTypeVideoLength": "Video length (seconds)",
+    "@videoFilterTypeVideoLength": {
+        "description": "Label for video filter video length"
+    },
+    "videoFilterOperationContains": "Contains",
+    "@videoFilterOperationContains": {
+        "description": "Label for video filter operation Contains"
+    },
+    "videoFilterOperationNotContain": "Does not contain",
+    "@videoFilterOperationNotContain": {
+        "description": "Label for video filter operation Does not contain"
+    },
+    "videoFilterOperationLowerThan": "Lower than",
+    "@videoFilterOperationLowerThan": {
+        "description": "Label for video filter operation Lower than"
+    },
+    "videoFilterOperationHigherThan": "Higher than",
+    "@videoFilterOperationHigherThan": {
+        "description": "Label for video filter operation Higher than"
+    },
+    "channel": "Channel",
+    "@channel": {
+        "description": "A single channel"
+    },
+    "videoFilterHideAllFromChannel": "Filter all videos from channel",
+    "@videoFilterHideAllFromChannel": {
+        "description": "Label for video filter switch to allow to hide all videos from a channel"
+    },
     "rememberSubtitleLanguageDescription": "Automatically set subtitles to last language selected, if available",
     "@rememberSubtitleLanguageDescription": {
         "description": "Settings description for remembering subtitle language"

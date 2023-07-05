@@ -155,9 +155,53 @@
         }
       ],
       "relations": []
+    },
+    {
+      "id": "6:8304874620604193998",
+      "lastPropertyId": "8:6020474727686624632",
+      "name": "VideoFilter",
+      "properties": [
+        {
+          "id": "1:4718003498405944371",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:906689741192359458",
+          "name": "channelId",
+          "type": 9
+        },
+        {
+          "id": "3:19321448094437321",
+          "name": "value",
+          "type": 9
+        },
+        {
+          "id": "4:7050038042672519102",
+          "name": "dbType",
+          "type": 9
+        },
+        {
+          "id": "5:2812361632619055204",
+          "name": "dbOperation",
+          "type": 9
+        },
+        {
+          "id": "7:4560530621575797576",
+          "name": "filterAll",
+          "type": 1
+        },
+        {
+          "id": "8:6020474727686624632",
+          "name": "hideFromFeed",
+          "type": 1
+        }
+      ],
+      "relations": []
     }
   ],
-  "lastEntityId": "5:8446250266008376981",
+  "lastEntityId": "6:8304874620604193998",
   "lastIndexId": "5:7262786699272501249",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",
@@ -169,7 +213,8 @@
   ],
   "retiredPropertyUids": [
     3422621380867834787,
-    971220157301355316
+    971220157301355316,
+    7030952573865954657
   ],
   "retiredRelationUids": [],
   "version": 1
