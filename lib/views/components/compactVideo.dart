@@ -43,7 +43,7 @@ class CompactVideo extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          video.filtered ? '-' : video.title,
+                          video.filtered ? '**********' : video.title,
                           style: TextStyle(color: colors.primary, overflow: TextOverflow.ellipsis),
                         ),
                         Text(

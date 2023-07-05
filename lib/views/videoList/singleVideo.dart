@@ -146,7 +146,7 @@ class VideoListItem extends StatelessWidget {
                     ),
                   ),
             Text(
-              _.video.filtered ? '-' : video.title,
+              _.video.filtered ? '**********' : video.title,
               textAlign: TextAlign.left,
               style: TextStyle(color: colorScheme.primary, fontWeight: FontWeight.normal),
             ),
