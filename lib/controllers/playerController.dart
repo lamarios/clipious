@@ -232,7 +232,7 @@ class PlayerController extends GetxController {
       lastSubtitle = db.getSettings(LAST_SUBTITLE)?.value ?? '';
     }
 
-    bool lockOrientation = db.getSettings(FORCE_LANDSCAPE_FULL_SCREEN)?.value == 'true';
+    bool lockOrientation = db.getSettings(LOCK_ORIENTATION_FULLSCREEN)?.value == 'true';
 
     BetterPlayerDataSource betterPlayerDataSource = BetterPlayerDataSource(BetterPlayerDataSourceType.network, videoUrl,
         videoFormat: format,

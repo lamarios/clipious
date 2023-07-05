@@ -789,7 +789,7 @@
     "@rememberSubtitleLanguageDescription": {
         "description": "Settings description for remembering subtitle language"
     },
-    "lockFullScreenToLandscape": "Lock full screen to video aspect ratio",
+    "lockFullScreenToLandscape": "Lock full screen orientation to video aspect ratio",
     "@lockFullScreenToLandscape": {
         "description": "Title to force full screen to landscape"
     },
