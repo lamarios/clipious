@@ -35,6 +35,7 @@ class SettingsController extends GetxController {
   double subtitleSize = double.parse(db.getSettings(SUBTITLE_SIZE)?.value ?? subtitleDefaultSize);
   bool rememberSubtitles = db.getSettings(REMEMBER_LAST_SUBTITLE)?.value == 'true';
   bool skipSslVerification = db.getSettings(SKIP_SSL_VERIFICATION)?.value == 'true';
+  bool rememberPlayBackSpeed = db.getSettings(REMEMBER_PLAYBACK_SPEED)?.value == 'true';
   ThemeMode themeMode = ThemeMode.values.firstWhere((element) => element.name == db.getSettings(THEME_MODE)?.value, orElse: () => ThemeMode.system);
   String? locale = db.getSettings(LOCALE)?.value;
   bool useSearchHistory = db.getSettings(USE_SEARCH_HISTORY)?.value == 'true';
@@ -90,6 +91,12 @@ class SettingsController extends GetxController {
     if (!value) {
       db.clearSearchHistory();
     }
+  }
+
+  toggleRememberPlaybackSpeed(bool value) {
+    db.saveSetting(SettingsValue(REMEMBER_PLAYBACK_SPEED, value.toString()));
+    rememberPlayBackSpeed = value;
+    update();
   }
 
   selectOnOpen(String selected, List<String> categories) {
@@ -207,7 +214,7 @@ class SettingsController extends GetxController {
     updateApp();
   }
 
-  updateApp(){
+  updateApp() {
     AppController.to()?.update();
   }
 

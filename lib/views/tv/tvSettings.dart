@@ -215,6 +215,12 @@ class TVSettings extends StatelessWidget {
                       trailing: Switch(onChanged: (value) {}, value: _.rememberSubtitles),
                     ),
                     SettingsTile(
+                      title: locals.rememberPlaybackSpeed,
+                      description: locals.rememberPlaybackSpeedDescription,
+                      onSelected: (context) => _.toggleRememberPlaybackSpeed(!_.rememberPlayBackSpeed),
+                      trailing: Switch(onChanged: (value) {}, value: _.rememberPlayBackSpeed),
+                    ),
+                    SettingsTile(
                       title: 'SponsorBlock',
                       description: locals.sponsorBlockDescription,
                       onSelected: openSponsorBlockSettings,
