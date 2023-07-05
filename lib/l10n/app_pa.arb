@@ -213,5 +213,158 @@
   "whenAppStartsShow": "ਜਦੋਂ ਐਪ ਸ਼ੁਰੂ ਹੁੰਦੀ ਹੈ, ਤਾਂ ਵਿਖਾਓ…",
   "@whenAppStartsShow": {
     "description": "Setting title for selecting the screen to show on start"
+  },
+  "redirectInvidiousLink": "Invidious ਰੀਡਾਇਰੈਕਟ ਲਿੰਕ ਸਾਂਝਾ ਕਰੋ",
+  "@redirectInvidiousLink": {
+    "description": "asking user to share redirecting invidious link"
+  },
+  "useSponsorBlock": "ਸਪਾਂਸਰਬਲਾਕ ਦੀ ਵਰਤੋਂ ਕਰੋ",
+  "@useSponsorBlock": {
+    "description": "label for sponsorblock checkbox"
+  },
+  "authentication": "ਪ੍ਰਮਾਣਿਕਤਾ",
+  "@authentication": {
+    "description": "Label for server settings related to authentications"
+  },
+  "tokenLogin": "ਟੋਕਨ ਨਾਲ ਲੌਗ ਇਨ ਕਰੋ",
+  "@tokenLogin": {
+    "description": "Textto login to a server using the recommended way"
+  },
+  "tokenLoginDescription": "ਲਾਗ-ਇਨ ਕਰਨ ਦਾ ਸਿਫ਼ਾਰਿਸ਼ ਕੀਤਾ ਤਰੀਕਾ",
+  "@tokenLoginDescription": {
+    "description": "Recommended way to log in"
+  },
+  "servers": "ਸਰਵਰ",
+  "@servers": {
+    "description": "Server management settings category"
+  },
+  "manageServers": "ਸਰਵਰ ਪ੍ਰਬੰਧਨ",
+  "@manageServers": {
+    "description": "Settings to manage servers"
+  },
+  "currentServer": "ਵਰਤਮਾਨ ਵਿੱਚ {current} ਦੀ ਵਰਤੋਂ ਕਰ ਰਿਹਾ ਹੈ",
+  "@currentServer": {
+    "description": "Which server the user is currently using",
+    "placeholders": {
+      "current": {
+        "type": "String"
+      }
+    }
+  },
+  "name": "ਨਾਂ",
+  "@name": {
+    "description": "NAme label"
+  },
+  "build": "ਬਿਲਡ",
+  "@build": {
+    "description": "build label"
+  },
+  "addServer": "ਸਰਵਰ ਸ਼ਾਮਿਲ ਕਰੋ",
+  "@addServer": {
+    "description": "Add server label"
+  },
+  "package": "ਪੈਕੇਜ",
+  "@package": {
+    "description": "package label"
+  },
+  "version": "ਸੰਸਕਰਣ",
+  "@version": {
+    "description": "version label"
+  },
+  "sponsorBlockDescription": "ਕਮਿਊਨਿਟੀ ਦੁਆਰਾ ਸਬਮਿੱਟ ਕੀਤੇ ਸਪਾਂਸਰ ਹਿੱਸੇ ਛੱਡੋ",
+  "@sponsorBlockDescription": {
+    "description": "Sponsorblock setting description"
+  },
+  "about": "ਦੇ ਬਾਰੇ ਵਿੱਚ",
+  "@about": {
+    "description": "About"
+  },
+  "delete": "ਮਿਟਾਓ",
+  "@delete": {
+    "description": "Delete label"
+  },
+  "invalidInvidiousServer": "ਅਵੈਧ Invidious ਸਰਵਰ",
+  "@invalidInvidiousServer": {
+    "description": "Error when the user tries to add a server that is not a proper or reachable invidious server"
+  },
+  "yourServers": "ਤੁਹਾਡੇ ਸਰਵਰ",
+  "@yourServers": {
+    "description": "Your servers label"
+  },
+  "loggedIn": "ਲਾਗ-ਇਨ ਕੀਤਾ ਹੈ",
+  "@loggedIn": {
+    "description": "Label to tell the user that he is logged in to the server"
+  },
+  "useThisServer": "ਇਸ ਸਰਵਰ ਦੀ ਵਰਤੋਂ ਕਰੋ",
+  "@useThisServer": {
+    "description": "Use this server label"
+  },
+  "logIn": "ਲਾਗ-ਇਨ",
+  "@logIn": {
+    "description": "CTA to log in to server"
+  },
+  "publicServers": "ਪਬਲਿਕ ਸਰਵਰ",
+  "@publicServers": {
+    "description": "Public servers label"
+  },
+  "loadingPublicServer": "ਜਨਤਕ ਸਰਵਰਾਂ ਨੂੰ ਲੋਡ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ",
+  "@loadingPublicServer": {
+    "description": "Message telling users the app is loading the list of public servers"
+  },
+  "tapToAddServer": "ਆਪਣੀ ਸੂਚੀ ਵਿੱਚ ਸਰਵਰ ਸ਼ਾਮਿਲ ਕਰਨ ਲਈ ਟੈਪ ਕਰੋ",
+  "@tapToAddServer": {
+    "description": "public server description"
+  },
+  "publicServersError": "ਜਨਤਕ ਸਰਵਰਾਂ ਦੀ ਸੂਚੀ ਪ੍ਰਾਪਤ ਨਹੀਂ ਕੀਤੀ ਜਾ ਸਕੀ। ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰਨ ਲਈ ਟੈਪ ਕਰੋ।",
+  "@publicServersError": {
+    "description": "Error message when trying to get public servers but it failed"
+  },
+  "appearance": "ਦਿੱਖ",
+  "@appearance": {
+    "description": "Settings category title"
+  },
+  "notLoggedIn": "ਲੌਗ ਇਨ ਨਹੀਂ ਹੈ",
+  "@notLoggedIn": {
+    "description": "Label when the user is not logged in to the server"
+  },
+  "addServerHelpText": "ਆਪਣੇ ਸਰਵਰ ਨੂੰ ਜੋੜਨ ਲਈ + ਬਟਨ ਦੀ ਵਰਤੋਂ ਕਰੋ ਜਾਂ ਕਿਸੇ ਜਨਤਕ ਸਰਵਰ 'ਤੇ ਟੈਪ ਕਰੋ ਅਤੇ ਇਸਨੂੰ ਜੋੜੋ।",
+  "@addServerHelpText": {
+    "description": "label for when the user hasn't chosen a server yet"
+  },
+  "useDashDescription": "DASH ਅਨੁਕੂਲ ਸਟ੍ਰੀਮਿੰਗ ਕਈ ਵਾਰ ਸਮੱਸਿਆ ਪੈਦਾ ਕਰ ਸਕਦੀ ਹੈ, Youtube ਇਸ ਨੂੰ ਥ੍ਰੋਟਲ ਕਰ ਸਕਦਾ ਹੈ।",
+  "@useDashDescription": {
+    "description": "Description for dash in the settings screen"
+  },
+  "useDash": "DASH ਦੀ ਵਰਤੋਂ ਕਰੋ",
+  "@useDash": {
+    "description": "Label on video options if a user wants to switch to dash urls instead of the regular quality selection"
+  },
+  "useDynamicTheme": "ਗਤੀਸ਼ੀਲ ਰੰਗ",
+  "@useDynamicTheme": {
+    "description": ""
+  },
+  "videoPlayer": "ਵੀਡੀਓ ਪਲੇਅਰ",
+  "@videoPlayer": {
+    "description": "Title for video player related options"
+  },
+  "useDynamicThemeDescription": "ਮੈਟੀਰੀਅਲ ਯੂ ਰੰਗਾਂ ਦੀ ਵਰਤੋਂ ਕਰੋ (ਸਿਰਫ਼ Android 12+ 'ਤੇ ਉਪਲਬਧ)",
+  "@useDynamicThemeDescription": {
+    "description": ""
+  },
+  "videoListed": "ਜਨਤਕ",
+  "@videoListed": {
+    "description": "Status of a publicly available video"
+  },
+  "videoUnlisted": "ਗੈਰ-ਸੂਚੀਬੱਧ",
+  "@videoUnlisted": {
+    "description": "Status of a video that is only accessible by link"
+  },
+  "videoIsFamilyFriendly": "ਪਰਿਵਾਰਕ ਦੋਸਤਾਨਾ",
+  "@videoIsFamilyFriendly": {
+    "description": "Displayed only when a video is family friendly"
+  },
+  "tapToManage": "ਪ੍ਰਬੰਧਿਤ ਕਰਨ ਲਈ ਟੈਪ ਕਰੋ",
+  "@tapToManage": {
+    "description": "Text shown below a server in the 'Your servers' list"
   }
 }
