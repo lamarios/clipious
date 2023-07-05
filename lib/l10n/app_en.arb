@@ -401,6 +401,18 @@
     "@addToQueueList": {
         "description": "Label on button to add a video to the queue list"
     },
+    "addToPlaylist": "Add to playlist",
+    "@addToPlaylist": {
+        "description": "Label to add a video to a playlist"
+    },
+    "playNext": "Play next",
+    "@playNext": {
+        "description": "Label to play the video after the current one."
+    },
+    "playNextAddedToQueue": "Video will play next",
+    "@playNextAddedToQueue": {
+        "description": "Pop up message to confirm that the video has been properly set to play next"
+    },
     "addRecommendedToQueue": "Auto-play recommended next",
     "@addRecommendedToQueue": {
         "description": "Switch when playing a video to automatically add the recommended videos to the video queue"
@@ -679,7 +691,6 @@
     "@save": {
         "description": "Text for save action"
     },
-
     "videoFilterEditDescription": "Select an optional channel, a filter type, operation and a value to filter OUT videos from lists. Example, type: video name, operation: contains, value: test will EXCLUDE all the videos with the word 'test' in their name.",
     "@videoFilterEditDescription": {
         "description": "Descriptive test for video filter set up"
@@ -778,12 +789,20 @@
     "@rememberSubtitleLanguageDescription": {
         "description": "Settings description for remembering subtitle language"
     },
+    "lockFullScreenToLandscape": "Lock full screen orientation to video aspect ratio",
+    "@lockFullScreenToLandscape": {
+        "description": "Title to force full screen to landscape"
+    },
+    "lockFullScreenToLandscapeDescription": "Locks the full screen orientation based on video format, landscape for wide video and portrait for portrait videos",
+    "@lockFullScreenToLandscapeDescription": {
+        "description": "Setting description for forcing video to landscape when in full screen"
+    },
     "rememberPlaybackSpeed": "Remember playback speed",
     "@rememberPlaybackSpeed": {
         "description": "Setting label for remembering playback speed"
     },
-    "rememberPlaybackSpeedDescription": "Automatically set playback speed to last speed selected",
+    "rememberPlaybackSpeedDescription": "Automatically set playback speed to the last speed selected",
     "@rememberPlaybackSpeedDescription": {
-        "description": "Settings descrtiption for remembering playback speed"
+        "description": "Settings description for remembering playback speed"
     }
 }

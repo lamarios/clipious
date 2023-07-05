@@ -1,0 +1,4 @@
+- new feature: create video filter to remove/obfuscate videos from your feeds, available in the settings
+- add settings to lock the screen orientation on full screen video based on the aspect ration of the video
+- add settings to remember the playback speed to keep it across videos
+- add option to "play next" when long pressing a video in a list.
