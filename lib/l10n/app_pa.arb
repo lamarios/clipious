@@ -327,7 +327,7 @@
   "@notLoggedIn": {
     "description": "Label when the user is not logged in to the server"
   },
-  "addServerHelpText": "ਆਪਣੇ ਸਰਵਰ ਨੂੰ ਜੋੜਨ ਲਈ + ਬਟਨ ਦੀ ਵਰਤੋਂ ਕਰੋ ਜਾਂ ਕਿਸੇ ਜਨਤਕ ਸਰਵਰ 'ਤੇ ਟੈਪ ਕਰੋ ਅਤੇ ਇਸਨੂੰ ਜੋੜੋ।",
+  "addServerHelpText": "ਆਪਣੇ ਸਰਵਰ ਨੂੰ ਜੋੜਨ ਲਈ + ਬਟਨ ਦੀ ਵਰਤੋਂ ਕਰੋ ਜਾਂ ਕਿਸੇ ਜਨਤਕ ਸਰਵਰ ''ਤੇ ਟੈਪ ਕਰੋ ਅਤੇ ਇਸਨੂੰ ਜੋੜੋ।",
   "@addServerHelpText": {
     "description": "label for when the user hasn't chosen a server yet"
   },
@@ -347,7 +347,7 @@
   "@videoPlayer": {
     "description": "Title for video player related options"
   },
-  "useDynamicThemeDescription": "ਮੈਟੀਰੀਅਲ ਯੂ ਰੰਗਾਂ ਦੀ ਵਰਤੋਂ ਕਰੋ (ਸਿਰਫ਼ Android 12+ 'ਤੇ ਉਪਲਬਧ)",
+  "useDynamicThemeDescription": "ਮੈਟੀਰੀਅਲ ਯੂ ਰੰਗਾਂ ਦੀ ਵਰਤੋਂ ਕਰੋ (ਸਿਰਫ਼ Android 12+ ''ਤੇ ਉਪਲਬਧ)",
   "@useDynamicThemeDescription": {
     "description": ""
   },
