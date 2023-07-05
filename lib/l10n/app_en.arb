@@ -792,14 +792,14 @@
     },
     "lockFullScreenToLandscapeDescription": "Locks the full screen orientation based on video format, landscape for wide video and portrait for portrait videos",
     "@lockFullScreenToLandscapeDescription": {
-        "description": "Setting descrtipion for forcing video to landscape when in full screen"
+        "description": "Setting description for forcing video to landscape when in full screen"
     },
     "rememberPlaybackSpeed": "Remember playback speed",
     "@rememberPlaybackSpeed": {
         "description": "Setting label for remembering playback speed"
     },
-    "rememberPlaybackSpeedDescription": "Automatically set playback speed to last speed selected",
+    "rememberPlaybackSpeedDescription": "Automatically set playback speed to the last speed selected",
     "@rememberPlaybackSpeedDescription": {
-        "description": "Settings descrtiption for remembering playback speed"
+        "description": "Settings description for remembering playback speed"
     }
 }
