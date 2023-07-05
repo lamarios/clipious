@@ -3,6 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/controllers/miniPayerController.dart';
 import 'package:invidious/models/baseVideo.dart';
 
+import '../../main.dart';
 import 'addToPlayList.dart';
 
 class VideoModalSheet extends StatelessWidget {
@@ -24,8 +25,15 @@ class VideoModalSheet extends StatelessWidget {
   }
 
   void playNext(BuildContext context){
+    var locals = AppLocalizations.of(context)!;
     Navigator.of(context).pop();
     MiniPlayerController.to()?.playVideoNext(video);
+
+    final ScaffoldMessengerState? scaffold = scaffoldKey.currentState;
+    scaffold?.showSnackBar(SnackBar(
+      content: Text(locals.playNextAddedToQueue),
+      duration: const Duration(seconds: 1),
+    ));
   }
 
   @override

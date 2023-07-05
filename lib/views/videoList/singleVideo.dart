@@ -44,7 +44,7 @@ class VideoListItem extends StatelessWidget {
       tag: video.videoId,
       builder: (_) => InkWell(
         onTap: () => openVideo(context, _),
-        onLongPress: () => VideoModalSheet.showVideoModalSheet(context, video),
+        onLongPress: _.video.filtered ? null : () => VideoModalSheet.showVideoModalSheet(context, video),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
