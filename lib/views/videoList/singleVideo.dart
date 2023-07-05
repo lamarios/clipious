@@ -9,6 +9,7 @@ import 'package:invidious/models/videoInList.dart';
 import 'package:invidious/myRouteObserver.dart';
 import 'package:invidious/views/components/videoThumbnail.dart';
 import 'package:invidious/views/video/addToPlayList.dart';
+import 'package:invidious/views/video/videoModalSheet.dart';
 import 'package:logging/logging.dart';
 
 import '../../models/imageObject.dart';
@@ -43,7 +44,7 @@ class VideoListItem extends StatelessWidget {
       tag: video.videoId,
       builder: (_) => InkWell(
         onTap: () => openVideo(context, _),
-        onLongPress: () => AddToPlaylist.showAddToPlaylistDialog(context, video.videoId),
+        onLongPress: () => VideoModalSheet.showVideoModalSheet(context, video),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,

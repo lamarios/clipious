@@ -232,6 +232,8 @@ class PlayerController extends GetxController {
       lastSubtitle = db.getSettings(LAST_SUBTITLE)?.value ?? '';
     }
 
+    bool lockOrientation = db.getSettings(FORCE_LANDSCAPE_FULL_SCREEN)?.value == 'true';
+
     BetterPlayerDataSource betterPlayerDataSource = BetterPlayerDataSource(BetterPlayerDataSourceType.network, videoUrl,
         videoFormat: format,
         liveStream: video.liveNow,
@@ -250,12 +252,14 @@ class PlayerController extends GetxController {
 
     Wakelock.enable();
 
+
+
     videoController = BetterPlayerController(
         BetterPlayerConfiguration(
             deviceOrientationsOnFullScreen: [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight, DeviceOrientation.portraitDown, DeviceOrientation.portraitUp],
             deviceOrientationsAfterFullScreen: [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight, DeviceOrientation.portraitDown, DeviceOrientation.portraitUp],
             handleLifecycle: false,
-            autoDetectFullscreenDeviceOrientation: false,
+            autoDetectFullscreenDeviceOrientation: lockOrientation,
             autoDetectFullscreenAspectRatio: true,
             startAt: startAt,
             autoPlay: true,

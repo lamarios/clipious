@@ -247,6 +247,12 @@ class Settings extends StatelessWidget {
                   description: Text(locals.sponsorBlockDescription),
                   onPressed: openSponsorBlockSettings,
                 ),
+                SettingsTile.switchTile(
+                  initialValue: _.forceLandscapeFullScreen,
+                  onToggle: _.toggleForceLandscapeFullScreen,
+                  title: Text(locals.lockFullScreenToLandscape),
+                  description: Text(locals.lockFullScreenToLandscapeDescription),
+                ),
               ]),
               SettingsSection(
                 title: Text(locals.appearance),

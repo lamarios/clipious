@@ -18,7 +18,6 @@ import 'package:back_button_interceptor/back_button_interceptor.dart';
 import '../main.dart';
 import '../models/baseVideo.dart';
 import '../models/video.dart';
-import '../views/video.dart';
 
 const double targetHeight = 75;
 const double miniPlayerThreshold = 300;
@@ -361,5 +360,21 @@ class MiniPlayerController extends GetxController {
     }
 
     update();
+  }
+
+  void playVideoNext(BaseVideo video) {
+    if (videos.isEmpty) {
+      playVideo([video]);
+    } else {
+      int newIndex = currentIndex + 1;
+      int oldIndex = videos.indexWhere((element) => element.videoId == video.videoId);
+      if (oldIndex == -1) {
+        videos.insert(newIndex, video);
+      } else {
+        onQueueReorder(oldIndex, newIndex);
+      }
+
+      update();
+    }
   }
 }

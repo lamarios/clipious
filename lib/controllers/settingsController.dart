@@ -36,6 +36,7 @@ class SettingsController extends GetxController {
   bool rememberSubtitles = db.getSettings(REMEMBER_LAST_SUBTITLE)?.value == 'true';
   bool skipSslVerification = db.getSettings(SKIP_SSL_VERIFICATION)?.value == 'true';
   bool rememberPlayBackSpeed = db.getSettings(REMEMBER_PLAYBACK_SPEED)?.value == 'true';
+  bool forceLandscapeFullScreen = db.getSettings(FORCE_LANDSCAPE_FULL_SCREEN)?.value == 'true';
   ThemeMode themeMode = ThemeMode.values.firstWhere((element) => element.name == db.getSettings(THEME_MODE)?.value, orElse: () => ThemeMode.system);
   String? locale = db.getSettings(LOCALE)?.value;
   bool useSearchHistory = db.getSettings(USE_SEARCH_HISTORY)?.value == 'true';
@@ -50,6 +51,12 @@ class SettingsController extends GetxController {
   toggleSponsorBlock(bool value) {
     db.saveSetting(SettingsValue(USE_SPONSORBLOCK, value.toString()));
     sponsorBlock = db.getSettings(USE_SPONSORBLOCK)?.value == 'true';
+    update();
+  }
+
+  toggleForceLandscapeFullScreen(bool value) {
+    db.saveSetting(SettingsValue(FORCE_LANDSCAPE_FULL_SCREEN, value.toString()));
+    forceLandscapeFullScreen = db.getSettings(FORCE_LANDSCAPE_FULL_SCREEN)?.value == 'true';
     update();
   }
 

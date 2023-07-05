@@ -401,6 +401,14 @@
     "@addToQueueList": {
         "description": "Label on button to add a video to the queue list"
     },
+    "addToPlaylist": "Add to playlist",
+    "@addToPlaylist": {
+        "description": "Label to add a video to a playlist"
+    },
+    "playNext": "Play next",
+    "@playNext": {
+        "description": "Label to play the video after the current one."
+    },
     "addRecommendedToQueue": "Auto-play recommended next",
     "@addRecommendedToQueue": {
         "description": "Switch when playing a video to automatically add the recommended videos to the video queue"
@@ -777,6 +785,14 @@
     "rememberSubtitleLanguageDescription": "Automatically set subtitles to last language selected, if available",
     "@rememberSubtitleLanguageDescription": {
         "description": "Settings description for remembering subtitle language"
+    },
+    "lockFullScreenToLandscape": "Lock full screen to video aspect ratio",
+    "@lockFullScreenToLandscape": {
+        "description": "Title to force full screen to landscape"
+    },
+    "lockFullScreenToLandscapeDescription": "Locks the full screen orientation based on video format, landscape for wide video and portrait for portrait videos",
+    "@lockFullScreenToLandscapeDescription": {
+        "description": "Setting descrtipion for forcing video to landscape when in full screen"
     },
     "rememberPlaybackSpeed": "Remember playback speed",
     "@rememberPlaybackSpeed": {

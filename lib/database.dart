@@ -38,6 +38,7 @@ const SEARCH_HISTORY_LIMIT = 'search-history-limit';
 const HIDE_FILTERED_VIDEOS = 'hide-filtered-videos';
 const REMEMBER_PLAYBACK_SPEED = 'remember-playback-speed';
 const LAST_SPEED = 'last-speed';
+const FORCE_LANDSCAPE_FULL_SCREEN = 'force-landscape-fullscreen';
 
 const ON_OPEN = "on-open";
 const MAX_LOGS = 1000;
