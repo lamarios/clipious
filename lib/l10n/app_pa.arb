@@ -230,7 +230,7 @@
   "@tokenLogin": {
     "description": "Textto login to a server using the recommended way"
   },
-  "tokenLoginDescription": "ਲਾਗ-ਇਨ ਕਰਨ ਦਾ ਸਿਫ਼ਾਰਿਸ਼ ਕੀਤਾ ਤਰੀਕਾ",
+  "tokenLoginDescription": "ਲਾੱਗ-ਇਨ ਕਰਨ ਦਾ ਸਿਫ਼ਾਰਿਸ਼ ਕੀਤਾ ਤਰੀਕਾ",
   "@tokenLoginDescription": {
     "description": "Recommended way to log in"
   },
@@ -291,7 +291,7 @@
   "@yourServers": {
     "description": "Your servers label"
   },
-  "loggedIn": "ਲਾਗ-ਇਨ ਕੀਤਾ ਹੈ",
+  "loggedIn": "ਲਾੱਗ-ਇਨ ਕੀਤਾ ਹੈ",
   "@loggedIn": {
     "description": "Label to tell the user that he is logged in to the server"
   },
@@ -299,7 +299,7 @@
   "@useThisServer": {
     "description": "Use this server label"
   },
-  "logIn": "ਲਾਗ-ਇਨ",
+  "logIn": "ਲਾੱਗ-ਇਨ",
   "@logIn": {
     "description": "CTA to log in to server"
   },
@@ -366,5 +366,21 @@
   "tapToManage": "ਪ੍ਰਬੰਧਿਤ ਕਰਨ ਲਈ ਟੈਪ ਕਰੋ",
   "@tapToManage": {
     "description": "Text shown below a server in the 'Your servers' list"
+  },
+  "cookieLoginDescription": "ਇਸ ਵਿਧੀ ਦੀ ਵਰਤੋਂ ਕਰੋ ਜੇਕਰ ਤੁਹਾਨੂੰ ਟੋਕਨ ਪ੍ਰਮਾਣਿਕਤਾ ਨਾਲ ਸਮੱਸਿਆਵਾਂ ਦਾ ਸਾਹਮਣਾ ਕਰਨਾ ਪੈਂਦਾ ਹੈ",
+  "@cookieLoginDescription": {
+    "description": "Cookie log in description"
+  },
+  "logout": "ਲਾੱਗ ਆਊਟ",
+  "@logout": {
+    "description": "CTA to logout of a server"
+  },
+  "username": "ਯੂਜ਼ਰਨੇਮ",
+  "@username": {
+    "description": "Username label for login to a server"
+  },
+  "cookieLogin": "ਕੂਕੀ ਨਾਲ ਲਾੱਗ-ਇਨ ਕਰੋ",
+  "@cookieLogin": {
+    "description": "Text to login to a server using the cookie jar method"
   }
 }
