@@ -642,5 +642,167 @@
   "redirectInvidiousLink": "Compartir el enlace de directo de Invidious",
   "@redirectInvidiousLink": {
     "description": "asking user to share redirecting invidious link"
+  },
+  "rememberPlaybackSpeed": "Recordar la velocidad de reproducción",
+  "@rememberPlaybackSpeed": {
+    "description": "Setting label for remembering playback speed"
+  },
+  "rememberPlaybackSpeedDescription": "Ajuste automático de la velocidad de reproducción a la última velocidad seleccionada",
+  "@rememberPlaybackSpeedDescription": {
+    "description": "Settings description for remembering playback speed"
+  },
+  "videoFilterAllChannels": "Todos los canales",
+  "@videoFilterAllChannels": {
+    "description": "Title for the sections that applies to all channels"
+  },
+  "videoFilterValue": "Valor",
+  "@videoFilterValue": {
+    "description": "Label for filter value"
+  },
+  "videoFiltered": "Vídeo filtrado por el/los siguiente(s) motivo(s):",
+  "@videoFiltered": {
+    "description": "Label shown on video list when it is filtered out"
+  },
+  "playNextAddedToQueue": "El vídeo se reproducirá a continuación",
+  "@playNextAddedToQueue": {
+    "description": "Pop up message to confirm that the video has been properly set to play next"
+  },
+  "videoFiltersSettingTileDescriptions": "Definir las reglas para filtrar los vídeos",
+  "@videoFiltersSettingTileDescriptions": {
+    "description": "Description for the main settings page"
+  },
+  "addVideoFilter": "Crear un filtro",
+  "@addVideoFilter": {
+    "description": "Title when creating a new filter"
+  },
+  "videoFilterType": "Tipo",
+  "@videoFilterType": {
+    "description": "Label for filter type"
+  },
+  "videoFilterOperation": "Operación",
+  "@videoFilterOperation": {
+    "description": "Label for filter operation"
+  },
+  "save": "Guardar",
+  "@save": {
+    "description": "Text for save action"
+  },
+  "videoFilterEditDescription": "Selecciona un canal opcional, un tipo de filtro, una operación y un valor para filtrar los vídeos de las listas. Ejemplo, tipo: nombre de vídeo, operación: contiene, valor: prueba EXCLUIRÁ todos los vídeos cuyo nombre contenga la palabra \"prueba\".",
+  "@videoFilterEditDescription": {
+    "description": "Descriptive test for video filter set up"
+  },
+  "optional": "opcional",
+  "@optional": {
+    "description": "Optional label"
+  },
+  "videoFilterHideLabel": "Ocultar",
+  "@videoFilterHideLabel": {
+    "description": "Label to hide videos"
+  },
+  "videoFilterFilterLabel": "Ofuscar",
+  "@videoFilterFilterLabel": {
+    "description": "Label to filter videos"
+  },
+  "videoFilterDescriptionString": "{hideOrFilter} videos donde {type} {operation} ''{value}''.",
+  "@videoFilterDescriptionString": {
+    "description": "Human readable description of a video filter, in this case is it for string comparison, example: Hide videos where the name of the video does not contain the following string 'test' (Do not translate text between { })",
+    "placeholders": {
+      "hideOrFilter": {
+        "type": "String",
+        "example": "Hide"
+      },
+      "type": {
+        "type": "String",
+        "example": "video title"
+      },
+      "operation": {
+        "type": "String",
+        "example": "does not contain"
+      },
+      "value": {
+        "type": "String",
+        "example": "some filter text"
+      }
+    }
+  },
+  "videoFilterTapToReveal": "Toca para mostrar",
+  "@videoFilterTapToReveal": {
+    "description": "Label to tell user to tap to show a filtered video"
+  },
+  "videoFilterHide": "Ocultar los vídeos filtrados",
+  "@videoFilterHide": {
+    "description": "Label for settings to hide filtered videos"
+  },
+  "videoFilterHideDescription": "Por defecto, los vídeos filtrados no se ocultan, sino que se muestran ofuscados con la(s) razón(es) por la(s) que se han filtrado. Esta opción elimina los vídeos filtrados de las listas.",
+  "@videoFilterHideDescription": {
+    "description": ""
+  },
+  "videoFilterTypeVideoTitle": "Título del vídeo",
+  "@videoFilterTypeVideoTitle": {
+    "description": "Label for video filter video title"
+  },
+  "videoFilterTypeChannelName": "Nombre del canal",
+  "@videoFilterTypeChannelName": {
+    "description": "Label for video filter channel name"
+  },
+  "videoFilterOperationContains": "Contiene",
+  "@videoFilterOperationContains": {
+    "description": "Label for video filter operation Contains"
+  },
+  "videoFilterOperationNotContain": "No contiene",
+  "@videoFilterOperationNotContain": {
+    "description": "Label for video filter operation Does not contain"
+  },
+  "videoFilterOperationLowerThan": "Inferior a",
+  "@videoFilterOperationLowerThan": {
+    "description": "Label for video filter operation Lower than"
+  },
+  "channel": "Canal",
+  "@channel": {
+    "description": "A single channel"
+  },
+  "videoFilterHideAllFromChannel": "Filtrar todos los vídeos del canal",
+  "@videoFilterHideAllFromChannel": {
+    "description": "Label for video filter switch to allow to hide all videos from a channel"
+  },
+  "addToPlaylist": "Añadir a la lista de reproducción",
+  "@addToPlaylist": {
+    "description": "Label to add a video to a playlist"
+  },
+  "playNext": "Reproducir la siguiente",
+  "@playNext": {
+    "description": "Label to play the video after the current one."
+  },
+  "videoFilters": "Filtros de vídeo",
+  "@videoFilters": {
+    "description": "Title for video filter settings"
+  },
+  "editVideoFilter": "Editar el filtro",
+  "@editVideoFilter": {
+    "description": "Title when editting a filter"
+  },
+  "videoFilterOperationHigherThan": "Superior a",
+  "@videoFilterOperationHigherThan": {
+    "description": "Label for video filter operation Higher than"
+  },
+  "videoFilterNoFilters": "Sin filtros de vídeo, pulsa el botón \"+\" de abajo para empezar a añadir filtros.",
+  "@videoFilterNoFilters": {
+    "description": "Label when there are no video filters"
+  },
+  "lockFullScreenToLandscape": "Bloquea la orientación de la pantalla completa en la relación al aspecto del vídeo",
+  "@lockFullScreenToLandscape": {
+    "description": "Title to force full screen to landscape"
+  },
+  "videoFilterTypeVideoLength": "Duración del vídeo (segundos)",
+  "@videoFilterTypeVideoLength": {
+    "description": "Label for video filter video length"
+  },
+  "lockFullScreenToLandscapeDescription": "Bloquea la orientación de la pantalla completa en función del formato de vídeo: horizontal para vídeos anchos y vertical para vídeos verticales",
+  "@lockFullScreenToLandscapeDescription": {
+    "description": "Setting description for forcing video to landscape when in full screen"
+  },
+  "videoFiltersExplanation": "Oculta u ofusca los videos de todas las fuentes de video en la aplicación según los filtros definidos a continuación. Esto te permite, por ejemplo, ocultar spoilers deportivos u ocultar cortos de un determinado canal.",
+  "@videoFiltersExplanation": {
+    "description": "Description on how filter work"
   }
 }
