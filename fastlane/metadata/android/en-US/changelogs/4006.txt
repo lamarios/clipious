@@ -1,0 +1,1 @@
+- fix video filter issue where it would not be applied in the "notifications" videos of invidious
