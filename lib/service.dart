@@ -255,6 +255,7 @@ class Service {
     final response = await http.get(uri, headers: headers);
     var feed = UserFeed.fromJson(handleResponse(response));
     VideoFilter.filterVideos(feed.videos);
+    VideoFilter.filterVideos(feed.notifications);
     return feed;
   }
 
