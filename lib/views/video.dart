@@ -46,7 +46,7 @@ class VideoView extends StatelessWidget {
         child: Scaffold(
           appBar: AppBar(
             backgroundColor: colorScheme.background,
-            actions: _.loadingVideo
+            actions: _.loadingVideo || _.video == null
                 ? []
                 : [
                     Visibility(
