@@ -1,0 +1,1 @@
+- fix issue where video that couldn't be loaded showed a grey screen instead of the error message
