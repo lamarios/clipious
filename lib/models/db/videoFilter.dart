@@ -62,7 +62,7 @@ class VideoFilter {
   bool filterAll = false;
   bool hideFromFeed = false;
 
-  VideoFilter({required this.value, this.channelId});
+  VideoFilter({required this.value, this.channelId, this.operation, this.type});
 
   String? get dbType {
     return type?.name ?? '';

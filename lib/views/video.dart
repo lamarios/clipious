@@ -15,9 +15,9 @@ import '../utils.dart';
 
 class VideoView extends StatelessWidget {
   final String videoId;
-  bool? playNow;
+  final bool? playNow;
 
-  VideoView({super.key, required this.videoId, this.playNow});
+  const VideoView({super.key, required this.videoId, this.playNow});
 
 
   @override

@@ -3,6 +3,14 @@ type: docker
 name: Android app
 
 steps:
+  - name: test
+    image: ghcr.io/cirruslabs/flutter:stable
+    environment:
+      ANDROID_KEY_FILE: /tmp/key.properties
+      SERVER_URL:
+        from_secret: server_url
+    commands:
+      - ./submodules/flutter/bin/flutter run test
   - name: build app
     image: ghcr.io/cirruslabs/flutter:stable
     environment:

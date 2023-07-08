@@ -43,25 +43,75 @@ const LOCK_ORIENTATION_FULLSCREEN = 'lock-orientation-fullscreen';
 const ON_OPEN = "on-open";
 const MAX_LOGS = 1000;
 
-class DbClient {
+abstract class IDBClient {
+  Server? getServer(String url);
+
+  upsertServer(Server server);
+
+  List<Server> getServers();
+
+  deleteServer(Server server);
+
+  saveSetting(SettingsValue setting);
+
+  deleteSetting(String name);
+
+  SettingsValue? getSettings(String name);
+
+  Server getCurrentlySelectedServer();
+
+  bool isLoggedInToCurrentServer();
+
+  double getVideoProgress(String videoId);
+
+  saveProgress(Progress progress);
+
+  void useServer(Server server);
+
+  List<String> getSearchHistory();
+
+  List<SearchHistoryItem> _getSearchHistory();
+
+  void addToSearchHistory(SearchHistoryItem searchHistoryItem);
+
+  void clearExcessSearchHistory();
+
+  void clearSearchHistory();
+
+  void insertLogs(AppLog log);
+
+  void cleanOldLogs();
+
+  List<AppLog> getAppLogs();
+
+  List<VideoFilter> getAllFilters();
+
+  void saveFilter(VideoFilter filter);
+
+  void deleteFilter(VideoFilter filter);
+}
+
+class DbClient implements IDBClient{
   /// The Store of this app.
   late final Store store;
   final log = Logger('DbClient');
 
-  DbClient._create(this.store) {}
+  DbClient.createClient(this.store) {}
 
   /// Create an instance of ObjectBox to use throughout the app.
   static Future<DbClient> create() async {
     final docsDir = await getApplicationDocumentsDirectory();
     // Future<Store> openStore() {...} is defined in the generated objectbox.g.dart
     final store = await openStore(directory: p.join(docsDir.path, "impuc-data"));
-    return DbClient._create(store);
+    return DbClient.createClient(store);
   }
 
+  @override
   Server? getServer(String url) {
     return store.box<Server>().query(Server_.url.equals(url)).build().findFirst();
   }
 
+  @override
   upsertServer(Server server) {
     store.box<Server>().put(server);
     // if we only have one server, we select it
@@ -71,10 +121,12 @@ class DbClient {
     }
   }
 
+  @override
   List<Server> getServers() {
     return store.box<Server>().getAll();
   }
 
+  @override
   deleteServer(Server server) {
     if (getServers().length >= 2) {
       store.box<Server>().remove(server.id);
@@ -84,10 +136,12 @@ class DbClient {
     }
   }
 
+  @override
   saveSetting(SettingsValue setting) {
     store.box<SettingsValue>().put(setting, mode: PutMode.put);
   }
 
+  @override
   deleteSetting(String name) {
     SettingsValue? settings = getSettings(name);
     if (settings != null) {
@@ -95,10 +149,12 @@ class DbClient {
     }
   }
 
+  @override
   SettingsValue? getSettings(String name) {
     return store.box<SettingsValue>().query(SettingsValue_.name.equals(name)).build().findFirst();
   }
 
+  @override
   Server getCurrentlySelectedServer() {
     Server? server = store.box<Server>().query(Server_.inUse.equals(true)).build().findFirst();
 
@@ -117,19 +173,23 @@ class DbClient {
     }
   }
 
+  @override
   bool isLoggedInToCurrentServer() {
     var currentlySelectedServer = getCurrentlySelectedServer();
     return (currentlySelectedServer.authToken?.isNotEmpty ?? false) || (currentlySelectedServer.sidCookie?.isNotEmpty ?? false);
   }
 
+  @override
   double getVideoProgress(String videoId) {
     return store.box<Progress>().query(Progress_.videoId.equals(videoId)).build().findFirst()?.progress ?? 0;
   }
 
+  @override
   saveProgress(Progress progress) {
     store.box<Progress>().put(progress);
   }
 
+  @override
   void useServer(Server server) {
     List<Server> servers = getServers();
     for (Server s in servers) {
@@ -143,19 +203,23 @@ class DbClient {
     store.box<Server>().put(server);
   }
 
+  @override
   List<String> getSearchHistory() {
     return _getSearchHistory().map((e) => e.search).toList();
   }
 
+  @override
   List<SearchHistoryItem> _getSearchHistory() {
     return (store.box<SearchHistoryItem>().query()..order(SearchHistoryItem_.time, flags: Order.descending)).build().find();
   }
 
+  @override
   void addToSearchHistory(SearchHistoryItem searchHistoryItem) {
     store.box<SearchHistoryItem>().put(searchHistoryItem);
     clearExcessSearchHistory();
   }
 
+  @override
   void clearExcessSearchHistory() {
     final limit = int.parse(getSettings(SEARCH_HISTORY_LIMIT)?.value ?? searchHistoryDefaultLength);
     if (store.box<SearchHistoryItem>().count() > limit) {
@@ -163,10 +227,12 @@ class DbClient {
     }
   }
 
+  @override
   void clearSearchHistory() {
     store.box<SearchHistoryItem>().removeAll();
   }
 
+  @override
   void insertLogs(AppLog log) {
     store.box<AppLog>().put(log);
     EasyDebounce.debounce('log-cleaning', const Duration(seconds: 5), () {
@@ -174,6 +240,7 @@ class DbClient {
     });
   }
 
+  @override
   void cleanOldLogs() {
     var all = store.box<AppLog>().getAll();
 
@@ -182,18 +249,22 @@ class DbClient {
     log.fine("clearing ${ids.length} logs out of ${all.length}");
   }
 
+  @override
   List<AppLog> getAppLogs() {
     return store.box<AppLog>().getAll();
   }
 
+  @override
   List<VideoFilter> getAllFilters() {
     return store.box<VideoFilter>().getAll();
   }
 
+  @override
   void saveFilter(VideoFilter filter) {
     store.box<VideoFilter>().put(filter);
   }
 
+  @override
   void deleteFilter(VideoFilter filter) {
     store.box<VideoFilter>().remove(filter.id);
   }

@@ -18,7 +18,7 @@ const animationDuration = Duration(milliseconds: 250);
 
 Service service = Service();
 
-late DbClient db;
+late IDBClient db;
 
 
 List<Country> countryCodes = [
