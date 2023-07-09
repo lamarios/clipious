@@ -6,8 +6,8 @@ import 'package:http/testing.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/httpOverrides.dart';
 
-import '../pair.dart';
 import '../controllers/videoController_test.dart';
+import '../test_utils.dart';
 import 'db.dart';
 
 const apiv1 = '/api/v1';
