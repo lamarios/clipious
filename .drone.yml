@@ -10,6 +10,8 @@ steps:
       SERVER_URL:
         from_secret: server_url
     commands:
+      - git submodule init
+      - git submodule update
       - ./submodules/flutter/bin/flutter run test
   - name: build app
     image: ghcr.io/cirruslabs/flutter:stable
