@@ -12,7 +12,7 @@ steps:
     commands:
       - git submodule init
       - git submodule update
-      - ./submodules/flutter/bin/flutter run test
+      - ./submodules/flutter/bin/flutter test
   - name: build app
     image: ghcr.io/cirruslabs/flutter:stable
     environment:
