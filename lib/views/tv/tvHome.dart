@@ -9,6 +9,7 @@ import 'package:invidious/views/subscriptions.dart';
 import 'package:invidious/views/trending.dart';
 import 'package:invidious/views/tv/tvButton.dart';
 import 'package:invidious/views/tv/tvOverScan.dart';
+import 'package:invidious/views/tv/tvPlaylistGridView.dart';
 import 'package:invidious/views/tv/tvSearch.dart';
 import 'package:invidious/views/tv/tvSettings.dart';
 import 'package:invidious/views/tv/tvVideoGridView.dart';
@@ -51,6 +52,14 @@ class TvHome extends StatelessWidget {
 
   openSearch(BuildContext context) {
     Navigator.of(context).push(MaterialPageRoute(builder: (builder) => const TvSearch()));
+  }
+
+  openPlaylists(BuildContext context) {
+    Navigator.of(context).push(MaterialPageRoute(
+      builder: (context) => TvPlaylistGridView(
+        playlistList: SingleEndpointList(service.getUserPlaylists),
+      ),
+    ));
   }
 
   @override
@@ -131,6 +140,29 @@ class TvHome extends StatelessWidget {
                                         child: Icon(Icons.subscriptions),
                                       ),
                                       _.expandMenu ? Text(locals.subscriptions) : const SizedBox.shrink()
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Visibility(
+                            visible: isLoggedIn,
+                            child: Padding(
+                              padding: const EdgeInsets.only(bottom: 8.0),
+                              child: TvButton(
+                                onFocusChanged: _.menuItemFocusChanged,
+                                onPressed: openPlaylists,
+                                unfocusedColor: colors.secondaryContainer.withOpacity(0.0),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8),
+                                  child: Row(
+                                    children: [
+                                      const Padding(
+                                        padding: EdgeInsets.only(right: 8.0),
+                                        child: Icon(Icons.playlist_play),
+                                      ),
+                                      _.expandMenu ? Text(locals.playlists) : const SizedBox.shrink()
                                     ],
                                   ),
                                 ),

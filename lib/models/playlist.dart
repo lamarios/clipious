@@ -100,13 +100,14 @@ class Playlist {
   String? description;
   int videoCount;
   int? viewCount;
-  bool? isListed ;
+  bool? isListed;
+  int updated;
   List<VideoInList> videos = [];
 
   @JsonKey(includeToJson: false, includeFromJson: false)
   int removedByFilter = 0;
 
-  Playlist(this.type, this.title, this.playlistId, this.author, this.authordId, this.authorUrl, this.description, this.videoCount);
+  Playlist(this.type, this.title, this.playlistId, this.author, this.authordId, this.authorUrl, this.description, this.videoCount, this.updated);
 
   factory Playlist.fromJson(Map<String, dynamic> json) => _$PlaylistFromJson(json);
 
