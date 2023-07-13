@@ -10,6 +10,7 @@ import 'package:invidious/views/tv/tvChannelView.dart';
 import 'package:invidious/views/tv/tvHorizontalPaginatedListView.dart';
 import 'package:invidious/views/tv/tvHorizontalVideoList.dart';
 import 'package:invidious/views/tv/tvOverScan.dart';
+import 'package:invidious/views/tv/tvTextField.dart';
 
 import '../../controllers/searchController.dart';
 import '../../controllers/tvSearchController.dart';
@@ -63,7 +64,8 @@ class TvSearch extends StatelessWidget {
                   locals.search,
                   style: textTheme.titleLarge,
                 ),
-                TextField(
+                TvTextField(
+                  leading: Icon(Icons.search,color: colors.secondary,),
                   controller: _.queryController,
                   autofocus: true,
                   autocorrect: true,
@@ -74,7 +76,7 @@ class TvSearch extends StatelessWidget {
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.only(top: 20),
-                    child: FocusScope(
+                    child: _.showResults ? FocusScope(
                       onKeyEvent: _.handleResultScopeKeyEvent,
                       canRequestFocus: true,
                       child: Row(
@@ -180,7 +182,7 @@ class TvSearch extends StatelessWidget {
                           ))
                         ],
                       ),
-                    ),
+                    ): const SizedBox.shrink(),
                   ),
                 )
               ],

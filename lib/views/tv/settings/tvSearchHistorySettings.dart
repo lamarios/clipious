@@ -18,16 +18,16 @@ class TvSearchHistorySettings extends StatelessWidget {
     showTvDialog(
         context: context,
         builder: (BuildContext context) => [
-          Column(
-            children: [
-              Text(locals.clearSearchHistory, textScaleFactor: 3),
-              Padding(
-                padding: const EdgeInsets.only(top: 36),
-                child: Text(locals.irreversibleAction, textScaleFactor: 1.5),
-              )
+              Column(
+                children: [
+                  Text(locals.clearSearchHistory, textScaleFactor: 3),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 36),
+                    child: Text(locals.irreversibleAction, textScaleFactor: 1.5),
+                  )
+                ],
+              ),
             ],
-          ),
-        ],
         actions: [
           TvButton(
             onPressed: (context) {
@@ -70,36 +70,10 @@ class TvSearchHistorySettings extends StatelessWidget {
                 trailing: Switch(onChanged: (value) {}, value: _.useSearchHistory),
                 onSelected: (ctx) => _.toggleSearchHistory(!_.useSearchHistory),
               ),
-              SettingsTile(
+              AdjustmentSettingTile(
                 title: locals.searchHistoryLimit,
                 description: locals.searchHistoryLimitDescription,
-                trailing: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(right: 8.0),
-                      child: TvButton(
-                          onPressed: (ctx) => _.useSearchHistory ? _.changeSearchHistoryLimit(increase: false) : null,
-                          child: const Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: Icon(Icons.remove),
-                          )),
-                    ),
-                    Text(
-                      _.searchHistoryLimit.toString(),
-                      style: textTheme.bodyLarge,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 8.0),
-                      child: TvButton(
-                          onPressed: (ctx) => _.useSearchHistory ? _.changeSearchHistoryLimit(increase: true) : null,
-                          child: const Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: Icon(Icons.add),
-                          )),
-                    ),
-                  ],
-                ),
+                value: _.searchHistoryLimit, onNewValue: _.setHistoryLimit,
               ),
               SettingsTile(
                 title: locals.clearSearchHistory,
