@@ -15,13 +15,13 @@ Playlist _$PlaylistFromJson(Map<String, dynamic> json) => Playlist(
       json['authorUrl'] as String?,
       json['description'] as String?,
       json['videoCount'] as int,
-      json['updated'] as int,
     )
       ..authorThumbnails = (json['authorThumbnails'] as List<dynamic>?)
           ?.map((e) => ImageObject.fromJson(e as Map<String, dynamic>))
           .toList()
       ..viewCount = json['viewCount'] as int?
       ..isListed = json['isListed'] as bool?
+      ..updated = json['updated'] as int?
       ..videos = (json['videos'] as List<dynamic>)
           .map((e) => VideoInList.fromJson(e as Map<String, dynamic>))
           .toList();

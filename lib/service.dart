@@ -404,7 +404,7 @@ class Service {
       for (var pl in list) {
         VideoFilter.filterVideos(pl.videos);
       }
-      return list.sortByReversed((e) => e.updated).toList();
+      return list.sortByReversed((e) => e.updated ?? 0).toList();
     } catch (e) {
       return [];
     }
