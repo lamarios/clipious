@@ -62,20 +62,25 @@ class TvTextField extends StatelessWidget {
 
         bool showLabel = controller.text.isEmpty && decoration?.label != null;
 
-        return Container(
-          decoration:
-              BoxDecoration(color: hasFocus ? colors.secondaryContainer : colors.background, border: Border.all(color: colors.secondaryContainer, width: 2), borderRadius: BorderRadius.circular(10)),
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              children: [
-                leading ?? const SizedBox.shrink(),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: Expanded(child: showLabel ? decoration!.label! : Text((obscureText ?? false) ? "************" : controller.text)),
-                ),
-                trailing ?? const SizedBox.shrink()
-              ],
+        return Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Container(
+            decoration:
+                BoxDecoration(color: hasFocus ? colors.secondaryContainer : colors.background, border: Border.all(color: colors.secondaryContainer, width: 2), borderRadius: BorderRadius.circular(10)),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+                  leading ?? const SizedBox.shrink(),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: showLabel ? decoration!.label! : Text((obscureText ?? false) ? "************" : controller.text),
+                    ),
+                  ),
+                  trailing ?? const SizedBox.shrink()
+                ],
+              ),
             ),
           ),
         );
