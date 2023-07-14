@@ -35,8 +35,13 @@ class VideoListController extends GetxController {
   Map<String, Image> imageCache = {};
   ScrollController scrollController = ScrollController();
   VideoListErrors error = VideoListErrors.none;
+  final bool shouldRefetch;
 
-  VideoListController(this.videoList);
+  VideoListController({required this.videoList, this.shouldRefetch = false}) {
+    if (shouldRefetch && videoList.hasRefresh()) {
+      refreshVideos();
+    }
+  }
 
   @override
   void onClose() {
@@ -54,7 +59,6 @@ class VideoListController extends GetxController {
 
   onScrollEvent() {
     if (scrollController.hasClients) {
-
       if (scrollController.position.maxScrollExtent * 0.9 < scrollController.offset) {
         EasyDebounce.debounce('loading-more-videos', const Duration(milliseconds: 250), getMoreVideos);
       }
@@ -62,7 +66,7 @@ class VideoListController extends GetxController {
   }
 
   getMoreVideos() async {
-    if (!loading) {
+    if (!loading && videoList.getHasMore()) {
       loadVideo(() async {
         List<VideoInList> videos = await videoList.getMoreItems();
         List<VideoInList> currentVideos = this.videos;

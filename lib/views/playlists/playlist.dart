@@ -14,12 +14,16 @@ import 'package:invidious/views/components/videoThumbnail.dart';
 import 'package:invidious/views/playlistView.dart';
 import 'package:invidious/views/tv/tvVideoGridView.dart';
 
+import '../../models/searchSortBy.dart';
+import '../../models/searchType.dart';
+
 class PlaylistItem extends StatelessWidget {
   final Playlist playlist;
   final bool canDeleteVideos;
   final bool isTv;
+  final bool cameFromSearch;
 
-  const PlaylistItem({super.key, required this.playlist, required this.canDeleteVideos, this.isTv = false});
+  const PlaylistItem({super.key, required this.playlist, required this.canDeleteVideos, this.isTv = false, this.cameFromSearch = false});
 
   openPlayList(BuildContext context) {
     navigatorKey.currentState?.push(MaterialPageRoute(
@@ -31,12 +35,28 @@ class PlaylistItem extends StatelessWidget {
   }
 
   openTvPlaylist(BuildContext context) {
-    Navigator.of(context).push(MaterialPageRoute(
-      builder: (builder) => TvGridView(
-        paginatedVideoList: FixedItemList<VideoInList>(playlist.videos),
-        title: playlist.title,
-      ),
-    ));
+    if (cameFromSearch) {
+      Navigator.of(context).push(MaterialPageRoute(
+        builder: (builder) => TvGridView(
+          paginatedVideoList: PlaylistSearchPaginatedList<VideoInList>(
+              query: playlist.playlistId,
+              items: [],
+              type: SearchType.playlist,
+              getFromResults: (_) => [],
+              sortBy: SearchSortBy.relevance
+          ),
+          title: playlist.title,
+          shouldRefetch: true,
+        ),
+      ));
+    } else {
+      Navigator.of(context).push(MaterialPageRoute(
+        builder: (builder) => TvGridView(
+          paginatedVideoList: FixedItemList<VideoInList>(playlist.videos),
+          title: playlist.title,
+        ),
+      ));
+    }
   }
 
   @override
@@ -58,7 +78,7 @@ class PlaylistItem extends StatelessWidget {
             top: (10 * i).toDouble(),
             left: (15 * i).toDouble(),
             child: SizedBox(
-              width: isTv ? 200 : 100,
+              width: isTv ? (cameFromSearch ? 120 : 200) : 100,
               child: AspectRatio(
                 aspectRatio: 16 / 9,
                 child: Opacity(
@@ -94,7 +114,7 @@ class PlaylistItem extends StatelessWidget {
                     child: AnimatedScale(
                       curve: Curves.easeInOutQuad,
                       duration: animationDuration ~/2,
-                      scale: hasFocus ? 1: 0.9,
+                      scale: hasFocus ? 1 : 0.9,
                       child: AnimatedContainer(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(15),
@@ -102,12 +122,11 @@ class PlaylistItem extends StatelessWidget {
                           ),
                           duration: animationDuration,
                           child: Column(
-                              mainAxisAlignment: MainAxisAlignment.end,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 SizedBox(
-                                    width: 400,
-                                    height: 160,
+                                    width: cameFromSearch ? 200 : 400,
+                                    height: cameFromSearch ? 120 : 160,
                                     child: Padding(
                                       padding: const EdgeInsets.only(left: 20.0, right: 8.0, top: 8.0, bottom: 8.0),
                                       child: Stack(
@@ -123,7 +142,7 @@ class PlaylistItem extends StatelessWidget {
                                       ),
                                     )),
                                 Padding(
-                                    padding: const EdgeInsets.only(bottom: 8.0),
+                                    padding: cameFromSearch ? EdgeInsets.zero : const EdgeInsets.only(bottom: 8.0),
                                     child: Text(locals.nVideos(playlist.videoCount))
                                 ),
                               ],

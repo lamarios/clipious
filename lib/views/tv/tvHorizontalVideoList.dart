@@ -14,11 +14,11 @@ class TvHorizontalVideoList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ColorScheme colors = Theme.of(context).colorScheme;
+
     return GetBuilder<VideoListController>(
       global: tags != null,
       tag: tags,
-      init: VideoListController(paginatedVideoList),
+      init: VideoListController(videoList: paginatedVideoList),
       builder: (_) => Stack(
         children: [
           _.loading

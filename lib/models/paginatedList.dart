@@ -202,3 +202,24 @@ class SearchPaginatedList<T> extends PaginatedList<T> {
     return [];
   }
 }
+
+// Force refresh to fetch all videos as search endpoint only returns 2 videos for each playlist
+class PlaylistSearchPaginatedList<T> extends SearchPaginatedList<T> {
+  PlaylistSearchPaginatedList({required super.query, required super.items, required super.type, required super.getFromResults, required super.sortBy});
+
+  @override
+  bool getHasMore() {
+    return false;
+  }
+
+  @override
+  bool hasRefresh() {
+    return true;
+  }
+
+  @override
+  Future<List<T>> refresh() async {
+    return (await service.getPublicPlaylists(super.query)).videos as List<T>;
+  }
+
+}
