@@ -11,10 +11,15 @@ import '../components/videoThumbnail.dart';
 class TvVideoItem extends StatelessWidget {
   final VideoInList video;
   final bool autoFocus;
-  const TvVideoItem({Key? key, required this.video, required this.autoFocus}) : super(key: key);
+  final Function(BuildContext context, VideoInList video)? onSelect;
+
+  const TvVideoItem({Key? key, required this.video, required this.autoFocus, this.onSelect}) : super(key: key);
 
   openVideo(BuildContext context, VideoInList e, FocusNode node, KeyEvent event) {
-    if (event is KeyUpEvent && (event.logicalKey == LogicalKeyboardKey.enter || event.logicalKey == LogicalKeyboardKey.select)) {
+    if (onSelect != null) {
+      onSelect!(context, e);
+      return KeyEventResult.handled;
+    } else if (event is KeyUpEvent && (event.logicalKey == LogicalKeyboardKey.enter || event.logicalKey == LogicalKeyboardKey.select)) {
       Navigator.of(context).push(MaterialPageRoute(builder: (ctx) => TvVideoView(videoId: e.videoId)));
       return KeyEventResult.handled;
     }
@@ -30,7 +35,7 @@ class TvVideoItem extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.only(right: 8.0),
         child: Focus(
-          // onFocusChange: (value) => _.focusChanged(value, index),
+            // onFocusChange: (value) => _.focusChanged(value, index),
             onKeyEvent: (node, event) => openVideo(context, video, node, event),
             autofocus: autoFocus,
             child: Builder(builder: (ctx) {
@@ -39,8 +44,8 @@ class TvVideoItem extends StatelessWidget {
               return GestureDetector(
                 child: AnimatedScale(
                   curve: Curves.easeInOutQuad,
-                  duration: animationDuration ~/2,
-                  scale: hasFocus ? 1: 0.9,
+                  duration: animationDuration ~/ 2,
+                  scale: hasFocus ? 1 : 0.9,
                   child: AnimatedContainer(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15),

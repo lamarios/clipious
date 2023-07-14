@@ -6,6 +6,8 @@ import 'package:flutter/src/widgets/focus_manager.dart';
 import 'package:get/get.dart';
 import 'package:invidious/controllers/playerController.dart';
 import 'package:invidious/main.dart';
+import 'package:invidious/models/baseVideo.dart';
+import 'package:invidious/models/videoInList.dart';
 import 'package:logging/logging.dart';
 
 import '../utils.dart';
@@ -15,6 +17,9 @@ const Duration throttleDuration = Duration(milliseconds: 250);
 
 class TvPlayerController extends GetxController {
   Logger log = Logger('TvPlayerController');
+  final List<BaseVideo> videos;
+
+  TvPlayerController({required this.videos});
 
   static TvPlayerController? to() => safeGet();
   double progress = 0;
@@ -22,6 +27,7 @@ class TvPlayerController extends GetxController {
   Duration currentPosition = Duration.zero;
   bool buffering = true;
   bool showSettings = false;
+  bool showQueue = false;
 
   Duration get videoLength => Duration(seconds: PlayerController.to()?.video.lengthSeconds ?? 0);
 
@@ -38,8 +44,7 @@ class TvPlayerController extends GetxController {
   }
 
   @override
-  void onReady() {
-  }
+  void onReady() {}
 
   @override
   void onClose() {
@@ -86,6 +91,7 @@ class TvPlayerController extends GetxController {
     EasyDebounce.debounce('tv-controls', controlFadeOut, () {
       controlsOpacity = 0;
       showSettings = false;
+      showQueue = false;
       update();
     });
   }
@@ -94,8 +100,7 @@ class TvPlayerController extends GetxController {
     // log.fine('Other key event: ${event.logicalKey}, control focused: ${controlFocusNode.hasFocus}, settings focused: ${settingsFocusNode.hasFocus}, queue focused: ${queueFocusNode.hasFocus}');
     showControls();
     if (event is KeyUpEvent) {
-
-      if (!showSettings) {
+      if (!showSettings && !showQueue) {
         if (event.logicalKey == LogicalKeyboardKey.arrowRight) {
           PlayerController.to()?.videoController?.seekTo(currentPosition + const Duration(seconds: 10));
         } else if (event.logicalKey == LogicalKeyboardKey.arrowLeft) {
@@ -106,27 +111,25 @@ class TvPlayerController extends GetxController {
           log.fine('showing video settings');
           showSettings = true;
           update();
+        } else if (event.logicalKey == LogicalKeyboardKey.arrowUp) {
+          log.fine('showing video queue');
+          showQueue = true;
+          update();
         }
       }
     }
     if (event is KeyRepeatEvent) {
-      if (!showSettings) {
+      if (!showSettings && !showQueue) {
         if (event.logicalKey == LogicalKeyboardKey.arrowRight) {
-          EasyThrottle.throttle(
-              'hold-seek-forward',
-              throttleDuration,
-              () => PlayerController.to()?.videoController?.seekTo(currentPosition + const Duration(seconds: 10))
-          );
+          EasyThrottle.throttle('hold-seek-forward', throttleDuration, () => PlayerController.to()?.videoController?.seekTo(currentPosition + const Duration(seconds: 10)));
         }
         if (event.logicalKey == LogicalKeyboardKey.arrowLeft) {
-          EasyThrottle.throttle(
-              'hold-seek-backward',
-              throttleDuration,
-              () => PlayerController.to()?.videoController?.seekTo(currentPosition - const Duration(seconds: 10))
-          );
+          EasyThrottle.throttle('hold-seek-backward', throttleDuration, () => PlayerController.to()?.videoController?.seekTo(currentPosition - const Duration(seconds: 10)));
         }
       }
     }
     return KeyEventResult.ignored;
   }
+
+  void playFromQueue(VideoInList video) {}
 }

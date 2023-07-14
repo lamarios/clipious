@@ -8,9 +8,10 @@ import '../../models/videoInList.dart';
 
 class TvHorizontalVideoList extends StatelessWidget {
   final PaginatedList<VideoInList> paginatedVideoList;
+  final Function(BuildContext context, VideoInList video)? onSelect;
   final String? tags;
 
-  const TvHorizontalVideoList({Key? key, this.tags, required this.paginatedVideoList}) : super(key: key);
+  const TvHorizontalVideoList({Key? key, this.tags, required this.paginatedVideoList, this.onSelect}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +35,7 @@ class TvHorizontalVideoList extends StatelessWidget {
               itemCount: _.videos.length,
               itemBuilder: (context, index) {
                 VideoInList e = _.videos[index];
-                return TvVideoItem(key: ValueKey('video-item-${e.videoId}'),video: e, autoFocus: index == 0);
+                return TvVideoItem(key: ValueKey('video-item-${e.videoId}'),video: e, autoFocus: index == 0, onSelect: onSelect,);
               },
             ),
           ),

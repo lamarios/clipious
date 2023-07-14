@@ -20,6 +20,10 @@ class TvPlayerView extends StatelessWidget {
 
   const TvPlayerView({Key? key, required this.video}) : super(key: key);
 
+  onVideoQueueSelected(BuildContext context, TvPlayerController _, VideoInList video) {
+    _.playFromQueue(video);
+  }
+
   @override
   Widget build(BuildContext context) {
     ColorScheme colors = Theme.of(context).colorScheme;
@@ -29,7 +33,7 @@ class TvPlayerView extends StatelessWidget {
       data: ThemeData(useMaterial3: true, colorScheme: darkColorScheme),
       child: Scaffold(
         body: GetBuilder<TvPlayerController>(
-          init: TvPlayerController(),
+          init: TvPlayerController(videos: [video, ...video.recommendedVideos.map((e) => RecommendedVideo.toVideoInList(e)).toList()]),
           builder: (_) => Focus(
             autofocus: true,
             onKeyEvent: (node, event) => _.handleRemoteEvents(node, event),
@@ -176,13 +180,25 @@ class TvPlayerView extends StatelessWidget {
                               Icons.expand_less,
                               size: 30,
                             ),
-                            TvHorizontalVideoList(paginatedVideoList: FixedItemList(video.recommendedVideos.map((e) => RecommendedVideo.toVideoInList(e)).toList()))
+                            Text('Up to show queue'),
                           ],
                         ),
                       ),
                     ),
                   ),
-                )
+                ),
+                Positioned(
+                    left: 0,
+                    bottom: 0,
+                    right: 0,
+                    child: AnimatedSwitcher(
+                        duration: animationDuration,
+                        child: _.showQueue
+                            ? TvOverscan(
+                                child: TvHorizontalVideoList(
+                                    onSelect: (ctx, video) => onVideoQueueSelected(ctx, _, video),
+                                    paginatedVideoList: FixedItemList(video.recommendedVideos.map((e) => RecommendedVideo.toVideoInList(e)).toList())))
+                            : const SizedBox.shrink()))
               ],
             ),
           ),
