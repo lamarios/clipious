@@ -5,6 +5,7 @@ import 'package:flutter/src/services/hardware_keyboard.dart';
 import 'package:flutter/src/widgets/focus_manager.dart';
 import 'package:get/get.dart';
 import 'package:invidious/controllers/playerController.dart';
+import 'package:invidious/main.dart';
 import 'package:logging/logging.dart';
 
 import '../utils.dart';
@@ -37,7 +38,13 @@ class TvPlayerController extends GetxController {
   }
 
   @override
-  void onReady() {}
+  void onReady() {
+  }
+
+  @override
+  void onClose() {
+    super.onClose();
+  }
 
   bool get isPlaying => PlayerController.to()?.videoController?.isPlaying() ?? false;
 
@@ -84,9 +91,10 @@ class TvPlayerController extends GetxController {
   }
 
   KeyEventResult handleRemoteEvents(FocusNode node, KeyEvent event) {
-    log.fine('Other key event: ${event.logicalKey}');
+    // log.fine('Other key event: ${event.logicalKey}, control focused: ${controlFocusNode.hasFocus}, settings focused: ${settingsFocusNode.hasFocus}, queue focused: ${queueFocusNode.hasFocus}');
     showControls();
     if (event is KeyUpEvent) {
+
       if (!showSettings) {
         if (event.logicalKey == LogicalKeyboardKey.arrowRight) {
           PlayerController.to()?.videoController?.seekTo(currentPosition + const Duration(seconds: 10));

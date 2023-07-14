@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:invidious/globals.dart';
 import 'package:invidious/main.dart';
 import 'package:invidious/utils.dart';
 import 'package:invidious/views/tv/tvOverScan.dart';
@@ -64,19 +65,21 @@ class TvTextField extends StatelessWidget {
 
         return Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Container(
-            decoration:
-                BoxDecoration(color: hasFocus ? colors.secondaryContainer : colors.background, border: Border.all(color: colors.secondaryContainer, width: 2), borderRadius: BorderRadius.circular(10)),
+          child: AnimatedContainer(
+            duration: animationDuration ~/ 2,
+            decoration: BoxDecoration(color: hasFocus ? colors.secondaryContainer : colors.background, borderRadius: hasFocus ? BorderRadius.circular(10) : null),
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
                 children: [
                   leading ?? const SizedBox.shrink(),
                   Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                      child: showLabel ? decoration!.label! : Text((obscureText ?? false) ? "************" : controller.text),
-                    ),
+                    child: Container(
+                        decoration: BoxDecoration(border: Border(bottom: BorderSide(width: 2, color: colors.secondaryContainer))),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: showLabel ? decoration!.label! : Text((obscureText ?? false) ? "************" : controller.text),
+                        )),
                   ),
                   trailing ?? const SizedBox.shrink()
                 ],
