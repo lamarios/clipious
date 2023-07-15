@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:invidious/models/paginatedList.dart';
+import 'package:invidious/models/playlist.dart';
 import 'package:invidious/models/searchType.dart';
+import 'package:invidious/views/playlists/playlist.dart';
 import 'package:invidious/views/tv/tvButton.dart';
 import 'package:invidious/views/tv/tvChannelView.dart';
 import 'package:invidious/views/tv/tvHorizontalPaginatedListView.dart';
@@ -12,9 +14,7 @@ import 'package:invidious/views/tv/tvOverScan.dart';
 import '../../controllers/searchController.dart';
 import '../../controllers/tvSearchController.dart';
 import '../../models/channel.dart';
-import '../../models/imageObject.dart';
 import '../../models/videoInList.dart';
-import '../components/videoThumbnail.dart';
 
 class TvSearch extends StatelessWidget {
   const TvSearch({Key? key}) : super(key: key);
@@ -48,7 +48,7 @@ class TvSearch extends StatelessWidget {
   Widget build(BuildContext context) {
     TextTheme textTheme = Theme.of(context).textTheme;
     var locals = AppLocalizations.of(context)!;
-    ColorScheme colors = Theme.of(context).colorScheme;
+
     return Scaffold(
       body: TvOverscan(
         child: DefaultTextStyle(
@@ -146,7 +146,35 @@ class TvSearch extends StatelessWidget {
                                             ),
                                           ),
                                         ),
-                                      )
+                                      ),
+                                      Visibility(
+                                          visible: _.playlists.isNotEmpty ?? false,
+                                          child: Text(
+                                            locals.playlists,
+                                            style: textTheme.titleLarge,
+                                          )
+                                      ),
+                                      Visibility(
+                                        visible: _.playlists.isNotEmpty ?? false,
+                                        child: SizedBox(
+                                          height: 200,
+                                          child: TvHorizontalPaginatedListView<Playlist>(
+                                            paginatedList: PlaylistSearchPaginatedList<Playlist>(
+                                                getFromResults: (res) => res.playlists, sortBy: _.sortBy, query: _.queryController.value.text, items: _.playlists, type: SearchType.playlist
+                                            ),
+                                            startItems: _.playlists,
+                                            itemBuilder: (e) => Padding(
+                                              padding: const EdgeInsets.all(8.0),
+                                              child: PlaylistItem(
+                                                  playlist: e,
+                                                  canDeleteVideos: false,
+                                                  isTv: true,
+                                                  cameFromSearch: true,
+                                              )
+                                            ),
+                                          ),
+                                        ),
+                                      ),
                                     ],
                             ),
                           ))

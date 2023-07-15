@@ -100,7 +100,8 @@ class Playlist {
   String? description;
   int videoCount;
   int? viewCount;
-  bool? isListed ;
+  bool? isListed;
+  int? updated;
   List<VideoInList> videos = [];
 
   @JsonKey(includeToJson: false, includeFromJson: false)

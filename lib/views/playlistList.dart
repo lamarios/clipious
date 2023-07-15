@@ -49,7 +49,6 @@ class PlaylistList extends StatelessWidget {
                           enablePullUp: false,
                           onRefresh: _.refreshPlaylists,
                           child: ListView.separated(
-
                               controller: _.scrollController,
                               itemBuilder: (context, index) => PlaylistItem(playlist: _.playlists[index], canDeleteVideos: canDeleteVideos),
                               separatorBuilder: (context, index) => const Divider(),

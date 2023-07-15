@@ -37,7 +37,7 @@ class VideoList extends StatelessWidget {
     ColorScheme colorScheme = Theme.of(context).colorScheme;
     var locals = AppLocalizations.of(context)!;
     return GetBuilder<VideoListController>(
-      init: VideoListController(paginatedVideoList),
+      init: VideoListController(videoList: paginatedVideoList),
       global: tags != null,
       tag: tags,
       builder: (_) => Column(

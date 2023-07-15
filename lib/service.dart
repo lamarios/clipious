@@ -1,10 +1,12 @@
 import 'dart:convert';
 
 import 'package:fbroadcast/fbroadcast.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_web_auth/flutter_web_auth.dart';
 import 'package:http/http.dart';
 import 'package:http/http.dart' as http;
 import 'package:invidious/database.dart';
+import 'package:invidious/extensions.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/models/db/searchHistoryItem.dart';
 import 'package:invidious/models/db/videoFilter.dart';
@@ -61,7 +63,7 @@ class Service {
   final log = Logger('Service');
 
   String urlFormatForLog(Uri? uri) {
-    return '${uri?.replace(host: 'xxxxxxxxxx')}';
+    return kDebugMode ? uri.toString() : '${uri?.replace(host: 'xxxxxxxxxx')}';
   }
 
   handleResponse(Response response) {
@@ -402,7 +404,7 @@ class Service {
       for (var pl in list) {
         VideoFilter.filterVideos(pl.videos);
       }
-      return list;
+      return list.sortByReversed((e) => e.updated ?? 0).toList();
     } catch (e) {
       return [];
     }

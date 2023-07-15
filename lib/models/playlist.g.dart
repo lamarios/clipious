@@ -21,6 +21,7 @@ Playlist _$PlaylistFromJson(Map<String, dynamic> json) => Playlist(
           .toList()
       ..viewCount = json['viewCount'] as int?
       ..isListed = json['isListed'] as bool?
+      ..updated = json['updated'] as int?
       ..videos = (json['videos'] as List<dynamic>)
           .map((e) => VideoInList.fromJson(e as Map<String, dynamic>))
           .toList();
@@ -37,5 +38,6 @@ Map<String, dynamic> _$PlaylistToJson(Playlist instance) => <String, dynamic>{
       'videoCount': instance.videoCount,
       'viewCount': instance.viewCount,
       'isListed': instance.isListed,
+      'updated': instance.updated,
       'videos': instance.videos,
     };
