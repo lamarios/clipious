@@ -37,11 +37,7 @@ class VideoListController extends GetxController {
   VideoListErrors error = VideoListErrors.none;
   final bool shouldRefetch;
 
-  VideoListController({required this.videoList, this.shouldRefetch = false}) {
-    if (shouldRefetch && videoList.hasRefresh()) {
-      refreshVideos();
-    }
-  }
+  VideoListController({required this.videoList, this.shouldRefetch = false});
 
   @override
   void onClose() {
@@ -53,7 +49,11 @@ class VideoListController extends GetxController {
   @override
   onReady() {
     super.onReady();
-    getVideos();
+    if (shouldRefetch && videoList.hasRefresh()) {
+      refreshVideos();
+    } else {
+      getVideos();
+    }
     scrollController.addListener(onScrollEvent);
   }
 
