@@ -157,6 +157,17 @@ class SettingsController extends GetxController {
     db.saveSetting(SettingsValue(SUBTITLE_SIZE, subtitleSize.toString()));
   }
 
+  setSubtitleSize(int value) {
+    if (value < 1) {
+      subtitleSize = 1;
+    } else {
+      subtitleSize = value.toDouble();
+    }
+
+    update();
+    db.saveSetting(SettingsValue(SUBTITLE_SIZE, subtitleSize.toString()));
+  }
+
   toggleRememberSubtitles(bool value) {
     db.saveSetting(SettingsValue(REMEMBER_LAST_SUBTITLE, value.toString()));
     rememberSubtitles = value;
@@ -176,6 +187,20 @@ class SettingsController extends GetxController {
     update();
     db.saveSetting(SettingsValue(SEARCH_HISTORY_LIMIT, searchHistoryLimit.toString()));
     if (!increase) {
+      db.clearExcessSearchHistory();
+    }
+  }
+
+  setHistoryLimit(int value) {
+    if (value < 1) {
+      searchHistoryLimit = 1;
+    } else if (value <= 30) {
+      searchHistoryLimit = value;
+    }
+
+    update();
+    db.saveSetting(SettingsValue(SEARCH_HISTORY_LIMIT, searchHistoryLimit.toString()));
+    if (value < searchHistoryLimit) {
       db.clearExcessSearchHistory();
     }
   }

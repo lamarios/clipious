@@ -8,8 +8,9 @@ class TvSubscribeButton extends StatelessWidget {
   final String channelId;
   final String subCount;
   final bool? autoFocus;
+  final Function(bool focus)? onFocusChanged;
 
-  const TvSubscribeButton({Key? key, required this.channelId, required this.subCount, this.autoFocus}) : super(key: key);
+  const TvSubscribeButton({Key? key, required this.channelId, required this.subCount, this.autoFocus, this.onFocusChanged}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +25,7 @@ class TvSubscribeButton extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 16.0),
             child: TvButton(
               autofocus: autoFocus,
+              onFocusChanged: onFocusChanged,
               focusedColor: colors.secondaryContainer,
               unfocusedColor: colors.background.withOpacity(0.5),
               onPressed: (context) => _.isLoggedIn ? _.toggleSubscription() : null,

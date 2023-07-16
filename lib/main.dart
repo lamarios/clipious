@@ -57,6 +57,8 @@ Future<void> main() async {
   runApp(const MyApp());
 }
 
+late ColorScheme darkColorScheme;
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -77,7 +79,6 @@ class MyApp extends StatelessWidget {
 
           return DynamicColorBuilder(builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) {
             ColorScheme lightColorScheme;
-            ColorScheme darkColorScheme;
 
             if (useDynamicTheme && lightDynamic != null && darkDynamic != null) {
               // On Android S+ devices, use the provided dynamic color scheme.

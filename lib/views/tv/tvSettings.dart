@@ -1,5 +1,6 @@
 import 'package:application_icon/application_icon.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:invidious/utils.dart';
 import 'package:invidious/views/tv/settings/tvManageServers.dart';
@@ -105,7 +106,6 @@ class TVSettings extends StatelessWidget {
         options: ThemeMode.values.map((e) => _.getThemeLabel(locals, e)).toList(),
         selected: _.getThemeLabel(locals, _.themeMode),
         onSelect: (String selected) {
-
           ThemeMode? theme = ThemeMode.values.firstWhereOrNull((element) => _.getThemeLabel(locals, element) == selected);
           _.setThemeMode(theme);
         },
@@ -177,36 +177,11 @@ class TVSettings extends StatelessWidget {
                       onSelected: (context) => _.toggleProxy(!_.useProxy),
                       trailing: Switch(onChanged: (value) {}, value: _.useProxy),
                     ),
-                    SettingsTile(
+                    AdjustmentSettingTile(
                       title: locals.subtitleFontSize,
+                      value: _.subtitleSize.floor(),
                       description: locals.subtitleFontSizeDescription,
-                      trailing: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(right: 8.0),
-                            child: TvButton(
-                                onPressed: (ctx) => _.changeSubtitleSize(increase: false),
-                                child: const Padding(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: Icon(Icons.remove),
-                                )),
-                          ),
-                          Text(
-                            _.subtitleSize.floor().toString(),
-                            style: textTheme.bodyLarge,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 8.0),
-                            child: TvButton(
-                                onPressed: (ctx) => _.changeSubtitleSize(increase: true),
-                                child: const Padding(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: Icon(Icons.add),
-                                )),
-                          ),
-                        ],
-                      ),
+                      onNewValue: _.setSubtitleSize,
                     ),
                     SettingsTile(
                       title: locals.rememberSubtitleLanguage,
@@ -277,6 +252,66 @@ class SettingsTitle extends StatelessWidget {
   }
 }
 
+class AdjustmentSettingTile extends StatelessWidget {
+  final String title;
+  final int value;
+  final int step;
+  final String? description;
+  final Function(int) onNewValue;
+
+  const AdjustmentSettingTile({Key? key, required this.onNewValue, required this.title, this.description, required this.value, this.step = 1}) : super(key: key);
+
+  onKeyEvent(FocusNode node, KeyEvent event, BuildContext ctx) {
+    if (event is KeyUpEvent) {
+      log.fine('onTvSelect, ${event.logicalKey}, ${event}');
+      if (event.logicalKey == LogicalKeyboardKey.arrowLeft) {
+        onNewValue(value - step);
+        return KeyEventResult.handled;
+      }
+      if (event.logicalKey == LogicalKeyboardKey.arrowRight) {
+        onNewValue(value + step);
+        return KeyEventResult.handled;
+      }
+    }
+
+    return KeyEventResult.ignored;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    ColorScheme colors = Theme.of(context).colorScheme;
+    TextTheme textTheme = Theme.of(context).textTheme;
+    return SettingsTile(
+      title: title,
+      description: description,
+      onKeyEvent: onKeyEvent,
+      trailing: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const Padding(
+            padding: EdgeInsets.only(right: 8.0),
+            child: Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Icon(Icons.chevron_left),
+            ),
+          ),
+          Text(
+            value.floor().toString(),
+            style: textTheme.bodyLarge,
+          ),
+          const Padding(
+            padding: EdgeInsets.only(left: 8.0),
+            child: Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Icon(Icons.chevron_right),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 class SettingsTile extends StatelessWidget {
   final bool? autofocus;
   final String title;
@@ -285,8 +320,9 @@ class SettingsTile extends StatelessWidget {
   final Function(BuildContext context)? onSelected;
   final Widget? trailing;
   final Widget? leading;
+  final Function(FocusNode, KeyEvent, BuildContext)? onKeyEvent;
 
-  const SettingsTile({Key? key, required this.title, this.description, this.onSelected, this.trailing, this.autofocus, this.leading, this.enabled}) : super(key: key);
+  const SettingsTile({Key? key, required this.title, this.description, this.onSelected, this.trailing, this.autofocus, this.leading, this.enabled, this.onKeyEvent}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -295,7 +331,7 @@ class SettingsTile extends StatelessWidget {
     return Focus(
         canRequestFocus: enabled,
         autofocus: autofocus ?? false,
-        onKeyEvent: (node, event) => onTvSelect(event, context, onSelected != null ? onSelected! : (context) {}),
+        onKeyEvent: (node, event) => onKeyEvent != null ? onKeyEvent!(node, event, context) : onTvSelect(event, context, onSelected != null ? onSelected! : (context) {}),
         child: Builder(builder: (ctx) {
           final FocusNode focusNode = Focus.of(ctx);
           final bool hasFocus = focusNode.hasFocus;

@@ -10,11 +10,12 @@ import '../models/videoInList.dart';
 
 enum VideoListErrors { none, couldNotFetchVideos }
 
-class VideoListController extends GetxController {
-  var log = Logger('VideoListController');
+class VideoListController extends ItemListController<VideoInList> {
   static const String subscriptionTag = 'video-list-subscription';
   static const String popularTag = 'video-list-popular';
   static const String trendingTag = 'video-list-trending';
+
+  VideoListController({required PaginatedList<VideoInList> videoList}) : super(itemList: videoList) {}
 
   static VideoListController? to(String? tags) => safeGet(tag: tags);
 
@@ -27,21 +28,22 @@ class VideoListController extends GetxController {
 
     return list;
   }
+}
 
-  PaginatedList<VideoInList> videoList;
+class ItemListController<T> extends GetxController {
+  var log = Logger('VideoListController');
+
+  static ItemListController? to(String? tags) => safeGet(tag: tags);
+
+  PaginatedList<T> itemList;
   RefreshController refreshController = RefreshController(initialRefresh: false);
-  List<VideoInList> videos = [];
+  List<T> items = [];
   bool loading = true;
   Map<String, Image> imageCache = {};
   ScrollController scrollController = ScrollController();
   VideoListErrors error = VideoListErrors.none;
-  final bool shouldRefetch;
 
-  VideoListController({required this.videoList, this.shouldRefetch = false}) {
-    if (shouldRefetch && videoList.hasRefresh()) {
-      refreshVideos();
-    }
-  }
+  ItemListController({required this.itemList}) {}
 
   @override
   void onClose() {
@@ -66,10 +68,10 @@ class VideoListController extends GetxController {
   }
 
   getMoreVideos() async {
-    if (!loading && videoList.getHasMore()) {
+    if (!loading && itemList.getHasMore()) {
       loadVideo(() async {
-        List<VideoInList> videos = await videoList.getMoreItems();
-        List<VideoInList> currentVideos = this.videos;
+        List<T> videos = await itemList.getMoreItems();
+        List<T> currentVideos = this.items;
         currentVideos.addAll(videos);
         return currentVideos;
       });
@@ -77,25 +79,25 @@ class VideoListController extends GetxController {
   }
 
   refreshVideos() async {
-    loadVideo(videoList.refresh);
+    loadVideo(itemList.refresh);
   }
 
   getVideos() async {
-    loadVideo(videoList.getItems);
+    loadVideo(itemList.getItems);
   }
 
-  loadVideo(Future<List<VideoInList>> Function() refreshFunction) async {
+  loadVideo(Future<List<T>> Function() refreshFunction) async {
     // var locals = AppLocalizations.of(context)!;
     error = VideoListErrors.none;
     loading = true;
     update();
     try {
       var videos = await refreshFunction();
-      this.videos = videos;
+      this.items = videos;
       loading = false;
       update();
     } catch (err) {
-      videos = [];
+      items = [];
       loading = false;
       error = VideoListErrors.couldNotFetchVideos;
       update();

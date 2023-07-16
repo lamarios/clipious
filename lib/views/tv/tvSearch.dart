@@ -10,6 +10,7 @@ import 'package:invidious/views/tv/tvChannelView.dart';
 import 'package:invidious/views/tv/tvHorizontalPaginatedListView.dart';
 import 'package:invidious/views/tv/tvHorizontalVideoList.dart';
 import 'package:invidious/views/tv/tvOverScan.dart';
+import 'package:invidious/views/tv/tvTextField.dart';
 
 import '../../controllers/searchController.dart';
 import '../../controllers/tvSearchController.dart';
@@ -49,6 +50,8 @@ class TvSearch extends StatelessWidget {
     TextTheme textTheme = Theme.of(context).textTheme;
     var locals = AppLocalizations.of(context)!;
 
+    var colors = Theme.of(context).colorScheme;
+
     return Scaffold(
       body: TvOverscan(
         child: DefaultTextStyle(
@@ -63,7 +66,8 @@ class TvSearch extends StatelessWidget {
                   locals.search,
                   style: textTheme.titleLarge,
                 ),
-                TextField(
+                TvTextField(
+                  leading: Icon(Icons.search,color: colors.secondary,),
                   controller: _.queryController,
                   autofocus: true,
                   autocorrect: true,
@@ -74,7 +78,7 @@ class TvSearch extends StatelessWidget {
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.only(top: 20),
-                    child: FocusScope(
+                    child: _.showResults ? FocusScope(
                       onKeyEvent: _.handleResultScopeKeyEvent,
                       canRequestFocus: true,
                       child: Row(
@@ -156,23 +160,17 @@ class TvSearch extends StatelessWidget {
                                       ),
                                       Visibility(
                                         visible: _.playlists.isNotEmpty ?? false,
-                                        child: SizedBox(
-                                          height: 200,
-                                          child: TvHorizontalPaginatedListView<Playlist>(
-                                            paginatedList: PlaylistSearchPaginatedList<Playlist>(
-                                                getFromResults: (res) => res.playlists, sortBy: _.sortBy, query: _.queryController.value.text, items: _.playlists, type: SearchType.playlist
-                                            ),
-                                            startItems: _.playlists,
-                                            itemBuilder: (e) => Padding(
+                                        child: TvHorizontalItemList<Playlist>(
+                                          paginatedList: SearchPaginatedList<Playlist>(
+                                                getFromResults: (res) => res.playlists, sortBy: _.sortBy, query: _.queryController.value.text, items: _.playlists, type: SearchType.playlist),
+                                          buildItem: (context, index, item) => Padding(
                                               padding: const EdgeInsets.all(8.0),
                                               child: PlaylistItem(
-                                                  playlist: e,
-                                                  canDeleteVideos: false,
-                                                  isTv: true,
-                                                  cameFromSearch: true,
-                                              )
-                                            ),
-                                          ),
+                                                playlist: item,
+                                                canDeleteVideos: false,
+                                                isTv: true,
+                                                // cameFromSearch: true,
+                                              )),
                                         ),
                                       ),
                                     ],
@@ -180,7 +178,7 @@ class TvSearch extends StatelessWidget {
                           ))
                         ],
                       ),
-                    ),
+                    ): const SizedBox.shrink(),
                   ),
                 )
               ],
