@@ -1,0 +1,7 @@
+- TV: replace text fields to make navigation easier, user will have to click on the fields to actually input text.
+- TV: Replace + / - button on settings and use remote left and right button to adjust subtitle size and search history limits fix #231
+- TV: Updated player to handle video queue (for playlist  and recommended videos)
+- TV: Improvement on playlist original implementation from @Outlet7493  by adding a play button for the whole playlist
+- TV: Scroll to top when selecting the highest  item in the screen on channel, video and playlist views.
+- Translation updates
+- Flutter update
