@@ -108,6 +108,10 @@
     "@redirectInvidiousLink": {
         "description": "asking user to share redirecting invidious link"
     },
+    "shareLinkWithTimestamp": "Add timestamp",
+    "@shareLinkWithTimestamp": {
+        "description": "asking user to share link along with timestamp"
+    },
     "ok": "OK",
     "@ok": {
         "description": "Ok"

@@ -70,12 +70,15 @@ Future<void> showAlertDialog(BuildContext context, String title, List<Widget> bo
 
 void showSharingSheet(BuildContext context, ShareLinks links) {
   var locals = AppLocalizations.of(context)!;
+  bool isAddTimestamp = false;
+
   showModalBottomSheet<void>(
       context: context,
       builder: (BuildContext context) {
+      return StatefulBuilder(
+        builder: (BuildContext context, StateSetter setState) {
         return Container(
-          height: 150,
-          child: Center(
+            height: 200,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,
@@ -83,29 +86,46 @@ void showSharingSheet(BuildContext context, ShareLinks links) {
                 FilledButton.tonal(
                   child: Text(locals.shareInvidiousLink),
                   onPressed: () {
-                    Share.share(links.getInvidiousLink(db.getCurrentlySelectedServer()));
+                    Share.share(links.getInvidiousLink(
+                        db.getCurrentlySelectedServer(), isAddTimestamp));
                     Navigator.of(context).pop();
                   },
                 ),
                 FilledButton.tonal(
                   child: Text(locals.redirectInvidiousLink),
                   onPressed: () {
-                    Share.share(links.getRedirectLink());
+                    Share.share(links.getRedirectLink(isAddTimestamp));
                     Navigator.of(context).pop();
                   },
                 ),
                 FilledButton.tonal(
                   child: Text(locals.shareYoutubeLink),
                   onPressed: () {
-                    Share.share(links.getYoutubeLink());
+                    Share.share(links.getYoutubeLink(isAddTimestamp));
                     Navigator.of(context).pop();
                   },
                 ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Checkbox(
+                      value: isAddTimestamp,
+                      onChanged: (bool? newValue) {
+                        setState(() {
+                          isAddTimestamp = newValue ?? false;
+                        });
+                      },
+                    ),
+                    Text(locals.shareLinkWithTimestamp),
+                  ],
+                ),
               ],
             ),
-          ),
+          );
+        },
+      );
+    },
         );
-      });
 }
 
 double getScreenWidth() {
