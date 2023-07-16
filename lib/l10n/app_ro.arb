@@ -622,5 +622,9 @@
   "rememberSubtitleLanguageDescription": "Setați automat subtitrările în ultima limbă selectată, dacă este disponibilă",
   "@rememberSubtitleLanguageDescription": {
     "description": "Settings description for remembering subtitle language"
+  },
+  "redirectInvidiousLink": "Partajați linkul de redirecționare Invidious",
+  "@redirectInvidiousLink": {
+    "description": "asking user to share redirecting invidious link"
   }
 }
