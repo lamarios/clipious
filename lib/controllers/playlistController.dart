@@ -40,6 +40,10 @@ class PlaylistController extends GetxController {
     MiniPlayerController.to()?.playVideo(playlist.videos, goBack: false);
   }
 
+  scrollToTop() {
+    scrollController.animateTo(0, duration: animationDuration ~/ 2, curve: Curves.easeInOutQuad);
+  }
+
   getAllVideos() async {
     if (playlist.videoCount > 0 && playlist.videos.length < playlist.videoCount) {
       loading = true;

@@ -16,11 +16,12 @@ class TvVideoItem extends StatelessWidget {
   const TvVideoItem({Key? key, required this.video, required this.autoFocus, this.onSelect}) : super(key: key);
 
   openVideo(BuildContext context, VideoInList e, FocusNode node, KeyEvent event) {
-    if (onSelect != null) {
-      onSelect!(context, e);
-      return KeyEventResult.handled;
-    } else if (event is KeyUpEvent && (event.logicalKey == LogicalKeyboardKey.enter || event.logicalKey == LogicalKeyboardKey.select)) {
-      Navigator.of(context).push(MaterialPageRoute(builder: (ctx) => TvVideoView(videoId: e.videoId)));
+    if (event is KeyUpEvent && (event.logicalKey == LogicalKeyboardKey.enter || event.logicalKey == LogicalKeyboardKey.select)) {
+      if (onSelect != null) {
+        onSelect!(context, e);
+      } else {
+        Navigator.of(context).push(MaterialPageRoute(builder: (ctx) => TvVideoView(videoId: e.videoId)));
+      }
       return KeyEventResult.handled;
     }
     return KeyEventResult.ignored;

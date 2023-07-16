@@ -12,9 +12,8 @@ class TvGridView extends StatelessWidget {
   final PaginatedList<VideoInList> paginatedVideoList;
   final String? tags;
   final String title;
-  final bool shouldRefetch;
 
-  const TvGridView({Key? key, required this.paginatedVideoList, this.tags, required this.title, this.shouldRefetch = false}) : super(key: key);
+  const TvGridView({Key? key, required this.paginatedVideoList, this.tags, required this.title }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +22,7 @@ class TvGridView extends StatelessWidget {
         child: GetBuilder<VideoListController>(
             global: tags != null,
             tag: tags,
-            init: VideoListController(videoList: paginatedVideoList, shouldRefetch: shouldRefetch),
+            init: VideoListController(videoList: paginatedVideoList),
             builder: (_) {
               return Column(
                 children: [
@@ -46,7 +45,7 @@ class TvGridView extends StatelessWidget {
                     controller: _.scrollController,
                     childAspectRatio: 16 / 13,
                     crossAxisCount: 3,
-                    children: _.videos.map((e) => TvVideoItem(video: e, autoFocus: false)).toList(),
+                    children: _.items.map((e) => TvVideoItem(video: e, autoFocus: false)).toList(),
                   ))
                 ],
               );

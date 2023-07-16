@@ -1,4 +1,3 @@
-import 'package:fbroadcast/fbroadcast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_swipe_action_cell/core/cell.dart';
@@ -6,15 +5,12 @@ import 'package:get/get.dart';
 import 'package:invidious/main.dart';
 import 'package:invidious/models/errors/invidiousServiceError.dart';
 import 'package:invidious/models/imageObject.dart';
-import 'package:invidious/models/video.dart';
 import 'package:invidious/models/videoInList.dart';
 import 'package:invidious/myRouteObserver.dart';
 import 'package:invidious/utils.dart';
 import 'package:invidious/views/components/compactVideo.dart';
-import 'package:invidious/views/components/miniPlayerAware.dart';
 import 'package:invidious/views/components/videoThumbnail.dart';
 import 'package:invidious/views/video.dart';
-import 'package:invidious/views/video/player.dart';
 
 import '../controllers/playlistController.dart';
 import '../globals.dart';

@@ -12,6 +12,7 @@ import 'package:invidious/myRouteObserver.dart';
 import 'package:invidious/utils.dart';
 import 'package:invidious/views/components/videoThumbnail.dart';
 import 'package:invidious/views/playlistView.dart';
+import 'package:invidious/views/tv/tvPlaylistView.dart';
 import 'package:invidious/views/tv/tvVideoGridView.dart';
 
 import '../../models/searchSortBy.dart';
@@ -21,9 +22,8 @@ class PlaylistItem extends StatelessWidget {
   final Playlist playlist;
   final bool canDeleteVideos;
   final bool isTv;
-  final bool cameFromSearch;
 
-  const PlaylistItem({super.key, required this.playlist, required this.canDeleteVideos, this.isTv = false, this.cameFromSearch = false});
+  const PlaylistItem({super.key, required this.playlist, required this.canDeleteVideos, this.isTv = false});
 
   openPlayList(BuildContext context) {
     navigatorKey.currentState?.push(MaterialPageRoute(
@@ -35,28 +35,9 @@ class PlaylistItem extends StatelessWidget {
   }
 
   openTvPlaylist(BuildContext context) {
-    if (cameFromSearch) {
-      Navigator.of(context).push(MaterialPageRoute(
-        builder: (builder) => TvGridView(
-          paginatedVideoList: PlaylistSearchPaginatedList<VideoInList>(
-              query: playlist.playlistId,
-              items: [],
-              type: SearchType.playlist,
-              getFromResults: (_) => [],
-              sortBy: SearchSortBy.relevance
-          ),
-          title: playlist.title,
-          shouldRefetch: true,
-        ),
-      ));
-    } else {
-      Navigator.of(context).push(MaterialPageRoute(
-        builder: (builder) => TvGridView(
-          paginatedVideoList: FixedItemList<VideoInList>(playlist.videos),
-          title: playlist.title,
-        ),
-      ));
-    }
+    Navigator.of(context).push(MaterialPageRoute(
+      builder: (context) => TvPlaylistView(playlist: playlist, canDeleteVideos: false),
+    ));
   }
 
   @override
@@ -78,7 +59,7 @@ class PlaylistItem extends StatelessWidget {
             top: (10 * i).toDouble(),
             left: (15 * i).toDouble(),
             child: SizedBox(
-              width: isTv ? (cameFromSearch ? 120 : 200) : 100,
+              width: isTv ? 210 : 100,
               child: AspectRatio(
                 aspectRatio: 16 / 9,
                 child: Opacity(
@@ -104,53 +85,50 @@ class PlaylistItem extends StatelessWidget {
           return Focus(
             onKeyEvent: (node, event) => onTvSelect(event, context, (_) => openTvPlaylist(context)),
             autofocus: false,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Builder(
-                builder: (ctx) {
-                  final bool hasFocus = Focus.of(ctx).hasFocus;
+            child: AspectRatio(
+              aspectRatio: 16/13,
+              child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Builder(builder: (ctx) {
+                    final bool hasFocus = Focus.of(ctx).hasFocus;
 
-                  return GestureDetector(
-                    child: AnimatedScale(
-                      curve: Curves.easeInOutQuad,
-                      duration: animationDuration ~/2,
-                      scale: hasFocus ? 1 : 0.9,
-                      child: AnimatedContainer(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15),
-                            color: hasFocus ? colors.primaryContainer : colors.background,
-                          ),
-                          duration: animationDuration,
-                          child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                SizedBox(
-                                    width: cameFromSearch ? 200 : 400,
-                                    height: cameFromSearch ? 120 : 160,
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(left: 20.0, right: 8.0, top: 8.0, bottom: 8.0),
-                                      child: Stack(
-                                        children: thumbs,
-                                      ),
-                                    )),
-                                Expanded(
-                                    child: Text(
-                                      playlist.title,
-                                      style: TextStyle(
-                                          color: colors.primary,
-                                          fontSize: 20.0
-                                      ),
-                                    )),
-                                Padding(
-                                    padding: cameFromSearch ? EdgeInsets.zero : const EdgeInsets.only(bottom: 8.0),
-                                    child: Text(locals.nVideos(playlist.videoCount))
-                                ),
-                              ],
+                    return GestureDetector(
+                      child: AnimatedScale(
+                          curve: Curves.easeInOutQuad,
+                          duration: animationDuration ~/ 2,
+                          scale: hasFocus ? 1 : 0.9,
+                          child: AnimatedContainer(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                              color: hasFocus ? colors.primaryContainer : colors.background,
+                            ),
+                            duration: animationDuration,
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  SizedBox(
+                                      height: 140,
+                                      child: AspectRatio(
+                                        aspectRatio: 16 / 9,
+                                        child: Stack(
+                                          children: thumbs,
+                                        ),
+                                      )),
+                                  Expanded(
+                                      child: Text(
+                                    playlist.title,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(color: colors.primary, fontSize: 20.0),
+                                  )),
+                                  Padding(padding: const EdgeInsets.only(bottom: 8.0), child: Text(locals.nVideos(playlist.videoCount))),
+                                ],
+                              ),
                             ),
                           )),
-                  );
-                }
-              )
+                    );
+                  })),
             ),
           );
         } else {
@@ -174,9 +152,9 @@ class PlaylistItem extends StatelessWidget {
                           )),
                       Expanded(
                           child: Text(
-                            playlist.title,
-                            style: TextStyle(color: colors.primary),
-                          )),
+                        playlist.title,
+                        style: TextStyle(color: colors.primary),
+                      )),
                       Text(locals.nVideos(playlist.videoCount)),
                     ],
                   ),

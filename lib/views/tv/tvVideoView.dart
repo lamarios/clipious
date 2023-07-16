@@ -14,6 +14,7 @@ import 'package:invidious/views/tv/tvOverScan.dart';
 import 'package:invidious/views/tv/tvPlayerView.dart';
 import 'package:invidious/views/tv/tvSubscribeButton.dart';
 
+import '../../controllers/tvVideoController.dart';
 import '../../controllers/videoController.dart';
 import '../../models/imageObject.dart';
 import '../../models/video.dart';
@@ -25,7 +26,7 @@ class TvVideoView extends StatelessWidget {
   const TvVideoView({Key? key, required this.videoId}) : super(key: key);
 
   playVideo(BuildContext context, Video video) {
-    Navigator.of(context).push(MaterialPageRoute(builder: (ctx) => TvPlayerView(video: video)));
+    Navigator.of(context).push(MaterialPageRoute(builder: (ctx) => TvPlayerView(videos: [video, ...video.recommendedVideos])));
   }
 
   showChannel(BuildContext context, String channelId) {
@@ -40,99 +41,98 @@ class TvVideoView extends StatelessWidget {
     ColorScheme colors = Theme.of(context).colorScheme;
     AppLocalizations locals = AppLocalizations.of(context)!;
     return Scaffold(
-        body: GetBuilder<VideoController>(
+        body: GetBuilder<TvVideoController>(
       global: false,
-      init: VideoController(videoId: videoId),
+      init: TvVideoController(videoId: videoId),
       builder: (_) => TvOverscan(
         child: DefaultTextStyle(
           style: textTheme.bodyLarge!,
           child: _.error.isNotEmpty
               ? Center(
-                child: Container(
+                  child: Container(
                     alignment: Alignment.center,
-                    child: Text(_.error == coulnotLoadVideos ? locals.couldntLoadVideo : _.error, style: textTheme.bodyLarge,),
+                    child: Text(
+                      _.error == coulnotLoadVideos ? locals.couldntLoadVideo : _.error,
+                      style: textTheme.bodyLarge,
+                    ),
                   ),
-              )
+                )
               : _.loadingVideo
                   ? const Center(
                       child: CircularProgressIndicator(),
                     )
-                  : Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          height: 190,
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              VideoThumbnailView(videoId: _.video!.videoId, thumbnailUrl: ImageObject.getBestThumbnail(_.video?.videoThumbnails)?.url ?? ''),
-                              Expanded(
-                                child: Column(crossAxisAlignment: CrossAxisAlignment.start, mainAxisAlignment: MainAxisAlignment.end, children: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(16.0),
-                                    child: TvButton(
-                                      autofocus: true,
-                                      onPressed: (context) => playVideo(context, _.video!),
-                                      child: const Padding(
-                                        padding: EdgeInsets.all(15.0),
-                                        child: Icon(
-                                          Icons.play_arrow,
-                                          size: 50,
+                  : SingleChildScrollView(
+            controller: _.scrollController,
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            height: 190,
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                VideoThumbnailView(videoId: _.video!.videoId, thumbnailUrl: ImageObject.getBestThumbnail(_.video?.videoThumbnails)?.url ?? ''),
+                                Expanded(
+                                  child: Column(crossAxisAlignment: CrossAxisAlignment.start, mainAxisAlignment: MainAxisAlignment.end, children: [
+                                    Padding(
+                                      padding: const EdgeInsets.all(16.0),
+                                      child: TvButton(
+                                        autofocus: true,
+                                        onFocusChanged: (focus) {
+                                          if(focus){
+                                            _.scrollUp();
+                                          }
+                                        },
+                                        onPressed: (context) => playVideo(context, _.video!),
+                                        child: const Padding(
+                                          padding: EdgeInsets.all(15.0),
+                                          child: Icon(
+                                            Icons.play_arrow,
+                                            size: 50,
+                                          ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                ]),
-                              ),
-                            ],
+                                  ]),
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 4),
-                          child: Text(
-                            _.video!.title,
-                            maxLines: 2,
-                            style: textTheme.headlineMedium!.copyWith(color: colors.primary),
-                            overflow: TextOverflow.ellipsis,
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 4),
+                            child: Text(
+                              _.video!.title,
+                              maxLines: 2,
+                              style: textTheme.headlineMedium!.copyWith(color: colors.primary),
+                              overflow: TextOverflow.ellipsis,
+                            ),
                           ),
-                        ),
-                        Row(
-                          children: [
+                          Row(children: [
                             const Icon(Icons.visibility, size: 20),
                             Padding(
                               padding: const EdgeInsets.only(left: 4),
                               child: Text(compactCurrency.format(_.video?.viewCount)),
                             ),
-                            const Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 8.0),
-                                child: Text('•')
-                            ),
+                            const Padding(padding: EdgeInsets.symmetric(horizontal: 8.0), child: Text('•')),
                             const Icon(Icons.thumb_up, size: 20),
                             Padding(
                               padding: const EdgeInsets.only(left: 4),
                               child: Text(compactCurrency.format(_.video?.likeCount)),
                             ),
                             if (_.getDislikes) ...[
-                              const Padding(
-                                  padding: EdgeInsets.symmetric(horizontal: 8.0),
-                                  child: Text('•')
-                              ),
+                              const Padding(padding: EdgeInsets.symmetric(horizontal: 8.0), child: Text('•')),
                               const Icon(Icons.thumb_down, size: 20),
                               Padding(
                                 padding: const EdgeInsets.only(left: 4),
                                 child: Text(compactCurrency.format(_.dislikes).replaceAll(".00", "")),
                               ),
                             ],
-                            const Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 8.0),
-                                child: Text('•')
-                            ),
+                            const Padding(padding: EdgeInsets.symmetric(horizontal: 8.0), child: Text('•')),
                             Text(_.video?.publishedText ?? ''),
-                        ]),
-                        Expanded(
-                          child: Padding(
+                          ]),
+                          Padding(
                             padding: const EdgeInsets.only(bottom: 10.0),
-                            child: ListView(children: [
+                            child: ListView(physics: const NeverScrollableScrollPhysics(), shrinkWrap: true, children: [
                               Row(
                                 children: [
                                   TvButton(
@@ -180,10 +180,10 @@ class TvVideoView extends StatelessWidget {
                                   paginatedVideoList: FixedItemList<VideoInList>(
                                       _.video?.recommendedVideos.map((e) => VideoInList(e.title, e.videoId, e.lengthSeconds, 0, e.author, '', 'authorUrl', 0, '', e.videoThumbnails)).toList() ?? []))
                             ]),
-                          ),
-                        )
-                      ],
-                    ),
+                          )
+                        ],
+                      ),
+                  ),
         ),
       ),
     ));

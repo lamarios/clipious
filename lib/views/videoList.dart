@@ -57,10 +57,10 @@ class VideoList extends StatelessWidget {
                       duration: animationDuration,
                       curve: Curves.easeInOutQuad,
                       child: Visibility(
-                        visible: _.videos.isNotEmpty,
+                        visible: _.items.isNotEmpty,
                         child: SmartRefresher(
                           controller: _.refreshController,
-                          enablePullDown: _.videoList.hasRefresh(),
+                          enablePullDown: _.itemList.hasRefresh(),
                           enablePullUp: false,
                           onRefresh: _.refreshVideos,
                           child: GridView.count(
@@ -70,7 +70,7 @@ class VideoList extends StatelessWidget {
                               crossAxisSpacing: 5,
                               mainAxisSpacing: 5,
                               childAspectRatio: getGridAspectRatio(context),
-                              children: (_.videos).map((v) => VideoListItem(key: ValueKey(v.videoId), video: v)).toList()),
+                              children: (_.items).map((v) => VideoListItem(key: ValueKey(v.videoId), video: v)).toList()),
                         ),
                       ),
                     ),
