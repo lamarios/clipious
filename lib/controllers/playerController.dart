@@ -233,6 +233,7 @@ class PlayerController extends GetxController {
     }
 
     bool lockOrientation = db.getSettings(LOCK_ORIENTATION_FULLSCREEN)?.value == 'true';
+    bool fillVideo = db.getSettings(FILL_FULLSCREEN)?.value == 'true';
 
     BetterPlayerDataSource betterPlayerDataSource = BetterPlayerDataSource(BetterPlayerDataSourceType.network, videoUrl,
         videoFormat: format,
@@ -264,7 +265,7 @@ class PlayerController extends GetxController {
             startAt: startAt,
             autoPlay: true,
             allowedScreenSleep: false,
-            fit: BoxFit.contain,
+            fit: fillVideo ? BoxFit.cover : BoxFit.contain,
             subtitlesConfiguration: BetterPlayerSubtitlesConfiguration(
               fontSize: double.parse(db.getSettings(SUBTITLE_SIZE)?.value ?? subtitleDefaultSize),
             ),

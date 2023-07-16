@@ -253,6 +253,12 @@ class Settings extends StatelessWidget {
                   title: Text(locals.lockFullScreenToLandscape),
                   description: Text(locals.lockFullScreenToLandscapeDescription),
                 ),
+                SettingsTile.switchTile(
+                  initialValue: _.fillFullscreen,
+                  onToggle: _.toggleFillFullscreen,
+                  title: Text(locals.fillFullscreen),
+                  description: Text(locals.fillFullscreenDescription),
+                ),
               ]),
               SettingsSection(
                 title: Text(locals.appearance),
