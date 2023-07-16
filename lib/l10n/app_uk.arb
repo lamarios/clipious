@@ -651,7 +651,7 @@
   "@save": {
     "description": "Text for save action"
   },
-  "optional": "необов'язково",
+  "optional": "необов''язково",
   "@optional": {
     "description": "Optional label"
   },
@@ -721,7 +721,7 @@
   "@videoFilterHideAllFromChannel": {
     "description": "Label for video filter switch to allow to hide all videos from a channel"
   },
-  "lockFullScreenToLandscape": "Прив'язка повноекранної орієнтації до співвідношення сторін відео",
+  "lockFullScreenToLandscape": "Прив''язка повноекранної орієнтації до співвідношення сторін відео",
   "@lockFullScreenToLandscape": {
     "description": "Title to force full screen to landscape"
   },
@@ -757,7 +757,7 @@
   "@videoFilterTapToReveal": {
     "description": "Label to tell user to tap to show a filtered video"
   },
-  "videoFilterEditDescription": "Виберіть необов'язковий канал, тип фільтра, операцію та значення, щоб відфільтрувати відео зі списків. Наприклад, тип: назва відео, операція: містить, значення: тест - ВИКЛЮЧИТИ усі відео зі словом \"тест\" у назві.",
+  "videoFilterEditDescription": "Виберіть необов''язковий канал, тип фільтра, операцію та значення, щоб відфільтрувати відео зі списків. Наприклад, тип: назва відео, операція: містить, значення: тест - ВИКЛЮЧИТИ усі відео зі словом \"тест\" у назві.",
   "@videoFilterEditDescription": {
     "description": "Descriptive test for video filter set up"
   },
@@ -793,7 +793,7 @@
   "@videoFilterOperationNotContain": {
     "description": "Label for video filter operation Does not contain"
   },
-  "rememberPlaybackSpeed": "Запам'ятати швидкість відтворення",
+  "rememberPlaybackSpeed": "Запам''ятати швидкість відтворення",
   "@rememberPlaybackSpeed": {
     "description": "Setting label for remembering playback speed"
   },
