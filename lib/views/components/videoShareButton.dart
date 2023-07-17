@@ -11,7 +11,8 @@ class VideoShareButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      onPressed: () => showSharingSheet(context, video),
+      onPressed: () =>
+          showSharingSheet(context, video, showShareWithTimestamp: true),
       icon: const Icon(Icons.share),
     );
   }

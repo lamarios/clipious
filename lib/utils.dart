@@ -69,7 +69,8 @@ Future<void> showAlertDialog(BuildContext context, String title, List<Widget> bo
   );
 }
 
-void showSharingSheet(BuildContext context, ShareLinks links) {
+void showSharingSheet(BuildContext context, ShareLinks links,
+    {bool showShareWithTimestamp = false}) {
   var locals = AppLocalizations.of(context)!;
 
   bool shareWithTimestamp = false;
@@ -123,20 +124,21 @@ void showSharingSheet(BuildContext context, ShareLinks links) {
                     Navigator.of(context).pop();
                   },
                 ),
+                if (showShareWithTimestamp)
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Checkbox(
-                      value: isAddTimestamp,
+                        value: shareWithTimestamp,
                       onChanged: (bool? newValue) {
                         setState(() {
-                          isAddTimestamp = newValue ?? false;
+                            shareWithTimestamp = newValue ?? false;
                         });
                       },
                     ),
                     Text(locals.shareLinkWithTimestamp),
                   ],
-                ),
+                  )
               ],
             ),
           );
