@@ -20,7 +20,8 @@ class TvManageServersInner extends StatelessWidget {
     ));
   }
 
-  addServerDialog(BuildContext context, ServerListSettingsController controller) {
+  addServerDialog(
+      BuildContext context, ServerListSettingsController controller) {
     var locals = AppLocalizations.of(context)!;
     FocusNode focusNode = FocusNode();
     showTvDialog(
@@ -91,7 +92,11 @@ class TvManageServersInner extends StatelessWidget {
     return GetBuilder<ServerListSettingsController>(
         init: ServerListSettingsController(),
         builder: (_) {
-          var filteredPublicServers = _.publicServers.where((s) => _.dbServers.indexWhere((element) => element.url == s.url) == -1).toList();
+          var filteredPublicServers = _.publicServers
+              .where((s) =>
+                  _.dbServers.indexWhere((element) => element.url == s.url) ==
+                  -1)
+              .toList();
           return ListView(children: [
             SettingsTitle(title: locals.yourServers),
             ..._.dbServers.map((s) => SettingsTile(
@@ -101,12 +106,15 @@ class TvManageServersInner extends StatelessWidget {
                       padding: const EdgeInsets.all(8.0),
                       child: Icon(
                         Icons.done,
-                        color: s.inUse ? colorScheme.primary : colorScheme.secondaryContainer,
+                        color: s.inUse
+                            ? colorScheme.primary
+                            : colorScheme.secondaryContainer,
                       ),
                     ),
                   ),
                   title: s.url,
-                  description: '${_.isLoggedInToServer(s.url) ? '${locals.loggedIn}, ' : ''} ${locals.tapToManage}',
+                  description:
+                      '${_.isLoggedInToServer(s.url) ? '${locals.loggedIn}, ' : ''} ${locals.tapToManage}',
                   onSelected: (context) => openServer(context, s),
                 )),
             SettingsTile(
@@ -137,15 +145,19 @@ class TvManageServersInner extends StatelessWidget {
                               width: 15,
                               child: CircularProgressIndicator(
                                 strokeWidth: 2,
-                                value: _.publicServerProgress > 0 ? _.publicServerProgress : null,
+                                value: _.publicServerProgress > 0
+                                    ? _.publicServerProgress
+                                    : null,
                               )),
                         )
                       ]
                     : filteredPublicServers
                         .map((s) => SettingsTile(
                               key: Key(s.url),
-                              title: '${s.url} - ${(s.ping != null && s.ping!.compareTo(const Duration(seconds: pingTimeout)) == -1) ? '${s.ping?.inMilliseconds}ms' : '>${pingTimeout}s'}',
-                              description: '${(s.flag != null && s.region != null) ? '${s.flag} - ${s.region} - ' : ''} ${locals.tapToAddServer}',
+                              title:
+                                  '${s.url} - ${(s.ping != null && s.ping!.compareTo(const Duration(seconds: pingTimeout)) == -1) ? '${s.ping?.inMilliseconds}ms' : '>${pingTimeout}s'}',
+                              description:
+                                  '${(s.flag != null && s.region != null) ? '${s.flag} - ${s.region} - ' : ''} ${locals.tapToAddServer}',
                               onSelected: (context) => _.upsertServer(s),
                             ))
                         .toList()

@@ -20,7 +20,12 @@ class VideoTabletInnerView extends StatelessWidget {
   bool? playNow;
   final VideoController videoController;
 
-  VideoTabletInnerView({super.key, required this.video, required this.selectedIndex, this.playNow, required this.videoController});
+  VideoTabletInnerView(
+      {super.key,
+      required this.video,
+      required this.selectedIndex,
+      this.playNow,
+      required this.videoController});
 
   @override
   Widget build(BuildContext context) {
@@ -64,9 +69,17 @@ class VideoTabletInnerView extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      SizedBox(height:25,child: Checkbox(value: videoController.playRecommendedNext, onChanged: videoController.togglePlayRecommendedNext, visualDensity: VisualDensity.compact)),
+                      SizedBox(
+                          height: 25,
+                          child: Checkbox(
+                              value: videoController.playRecommendedNext,
+                              onChanged:
+                                  videoController.togglePlayRecommendedNext,
+                              visualDensity: VisualDensity.compact)),
                       InkWell(
-                          onTap: () => videoController.togglePlayRecommendedNext(!videoController.playRecommendedNext),
+                          onTap: () =>
+                              videoController.togglePlayRecommendedNext(
+                                  !videoController.playRecommendedNext),
                           child: Text(
                             locals.addRecommendedToQueue,
                             style: const TextStyle(fontSize: 11),
@@ -101,7 +114,10 @@ class VideoTabletInnerView extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(width: 350, child: SingleChildScrollView(child: RecommendedVideos(video: video)))
+          SizedBox(
+              width: 350,
+              child:
+                  SingleChildScrollView(child: RecommendedVideos(video: video)))
         ],
       ),
     );

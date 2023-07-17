@@ -20,8 +20,7 @@ class VideoFilterChannel extends StatelessWidget {
   editFilter(BuildContext context, {required VideoFilter filter}) {
     navigatorKey.currentState?.push(MaterialPageRoute(
         settings: ROUTE_SETTINGS_VIDEO_FILTERS,
-        builder: (context) =>
-            VideoFilterSetup(
+        builder: (context) => VideoFilterSetup(
               channelId: filter.channelId,
               filter: filter,
             )));
@@ -30,9 +29,7 @@ class VideoFilterChannel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var locals = AppLocalizations.of(context)!;
-    ColorScheme colors = Theme
-        .of(context)
-        .colorScheme;
+    ColorScheme colors = Theme.of(context).colorScheme;
 
     return GetBuilder<VideoFilterChannelController>(
       init: VideoFilterChannelController(filters: filters),
@@ -68,13 +65,15 @@ class VideoFilterChannel extends StatelessWidget {
                         child: Padding(
                           padding: const EdgeInsets.only(right: 8.0),
                           child: Thumbnail(
-                            thumbnailUrl: ImageObject
-                                .getBestThumbnail(_.channel?.authorThumbnails)
-                                ?.url ?? '',
+                            thumbnailUrl: ImageObject.getBestThumbnail(
+                                        _.channel?.authorThumbnails)
+                                    ?.url ??
+                                '',
                             width: 20,
                             height: 20,
                             id: 'author-small-${_.channel?.authorId ?? ''}',
-                            decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20)),
                           ),
                         )),
                     Expanded(
@@ -88,8 +87,7 @@ class VideoFilterChannel extends StatelessWidget {
                 ),
               ),
               ..._.filters
-                  .map((e) =>
-                  SwipeActionCell(
+                  .map((e) => SwipeActionCell(
                       key: ValueKey('filter-swipe-${e.id}'),
                       trailingActions: [
                         SwipeAction(
@@ -110,7 +108,9 @@ class VideoFilterChannel extends StatelessWidget {
                           },
                         )
                       ],
-                      child: InkWell(onTap: () => editFilter(context, filter: e), child: VideoFilterItem(filter: e))))
+                      child: InkWell(
+                          onTap: () => editFilter(context, filter: e),
+                          child: VideoFilterItem(filter: e))))
                   .toList()
             ],
           ),

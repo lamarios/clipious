@@ -19,21 +19,24 @@ class VideoAddToPlaylistButton extends StatelessWidget {
         child: Stack(
           children: [
             IconButton(
-              style: ButtonStyle(padding: MaterialStateProperty.all<EdgeInsets>(EdgeInsets.zero)),
-              onPressed: () => AddToPlaylist.showAddToPlaylistDialog(context, _.videoId!),
+              style: ButtonStyle(
+                  padding:
+                      MaterialStateProperty.all<EdgeInsets>(EdgeInsets.zero)),
+              onPressed: () =>
+                  AddToPlaylist.showAddToPlaylistDialog(context, _.videoId!),
               icon: Icon(
                 Icons.add,
               ),
             ),
             _.playListCount > 0
                 ? Positioned(
-                  top:10,
-                  right: 10,
-                  child: Text(
-                    _.playListCount.toString(),
-                    style: const TextStyle(fontSize: 8),
-                  ),
-                )
+                    top: 10,
+                    right: 10,
+                    child: Text(
+                      _.playListCount.toString(),
+                      style: const TextStyle(fontSize: 8),
+                    ),
+                  )
                 : const SizedBox.shrink()
           ],
         ),

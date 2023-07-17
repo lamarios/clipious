@@ -7,10 +7,10 @@ class CommentReplies {
   int replyCount;
   String continuation;
 
-
   CommentReplies(this.replyCount, this.continuation);
 
-  factory CommentReplies.fromJson(Map<String, dynamic> json) => _$CommentRepliesFromJson(json);
+  factory CommentReplies.fromJson(Map<String, dynamic> json) =>
+      _$CommentRepliesFromJson(json);
 
   Map<String, dynamic> toJson() => _$CommentRepliesToJson(this);
 }

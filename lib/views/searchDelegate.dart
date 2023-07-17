@@ -35,7 +35,9 @@ class MySearchDelegate extends SearchDelegate<String> {
       DropdownButton<SearchSortBy>(
         value: sortBy,
         items: [
-          DropdownMenuItem(value: SearchSortBy.relevance, child: Text(locals.searchSortRelevance)),
+          DropdownMenuItem(
+              value: SearchSortBy.relevance,
+              child: Text(locals.searchSortRelevance)),
           DropdownMenuItem(
             value: SearchSortBy.rating,
             child: Text(locals.searchSortRating),
@@ -59,18 +61,24 @@ class MySearchDelegate extends SearchDelegate<String> {
   }
 
   @override
-  Widget? buildLeading(BuildContext context) => IconButton(onPressed: () => close(context, ''), icon: const Icon(Icons.arrow_back));
+  Widget? buildLeading(BuildContext context) => IconButton(
+      onPressed: () => close(context, ''), icon: const Icon(Icons.arrow_back));
 
   @override
   Widget buildResults(BuildContext context) {
     return FutureBuilder<List<SearchResults>>(
-      future: Future.wait([service.search(query, type: SearchType.video, sortBy: sortBy), service.search(query, type: SearchType.channel, sortBy: sortBy), service.search(query, type: SearchType.playlist, sortBy: sortBy)]),
+      future: Future.wait([
+        service.search(query, type: SearchType.video, sortBy: sortBy),
+        service.search(query, type: SearchType.channel, sortBy: sortBy),
+        service.search(query, type: SearchType.playlist, sortBy: sortBy)
+      ]),
       builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.done && snapshot.data != null) {
+        if (snapshot.connectionState == ConnectionState.done &&
+            snapshot.data != null) {
           return Search(
-            // results: snapshot.data!,
-            // query: query,
-          );
+              // results: snapshot.data!,
+              // query: query,
+              );
         } else if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(
             child: CircularProgressIndicator(),
@@ -89,7 +97,8 @@ class MySearchDelegate extends SearchDelegate<String> {
       future: service.getSearchSuggestion(query),
       builder: (context, snapshot) {
         List<String> suggestions = db.getSearchHistory();
-        if (snapshot.connectionState == ConnectionState.done && (snapshot.data?.suggestions ?? []).isNotEmpty) {
+        if (snapshot.connectionState == ConnectionState.done &&
+            (snapshot.data?.suggestions ?? []).isNotEmpty) {
           suggestions = snapshot.data?.suggestions ?? [];
           isHistoryResults = false;
         } else {
@@ -101,7 +110,14 @@ class MySearchDelegate extends SearchDelegate<String> {
             itemBuilder: (context, index) {
               String sugg = suggestions[index];
               return ListTile(
-                title: isHistoryResults ? Row(children: [const Icon(Icons.history), Padding(padding: const EdgeInsets.only(left: 8), child: Text(suggestions[index]))]) : Text(suggestions[index]),
+                title: isHistoryResults
+                    ? Row(children: [
+                        const Icon(Icons.history),
+                        Padding(
+                            padding: const EdgeInsets.only(left: 8),
+                            child: Text(suggestions[index]))
+                      ])
+                    : Text(suggestions[index]),
                 onTap: () {
                   query = sugg;
                   showResults(context);

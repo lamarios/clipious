@@ -17,27 +17,26 @@ class SearchHistorySettings extends StatelessWidget {
         useRootNavigator: false,
         useSafeArea: true,
         builder: (ctx) => SizedBox(
-          height: 200,
-          child: AlertDialog(
-              title: Text(locals.clearSearchHistory),
-              content: Text(locals.irreversibleAction),
-              actions: [
-                TextButton(
-                  child: Text(locals.cancel),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                ),
-                TextButton(
-                  child: Text(locals.ok, style: const TextStyle(color: Colors.red)),
-                  onPressed: () {
-                    db.clearSearchHistory();
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ]
-          )
-        ));
+            height: 200,
+            child: AlertDialog(
+                title: Text(locals.clearSearchHistory),
+                content: Text(locals.irreversibleAction),
+                actions: [
+                  TextButton(
+                    child: Text(locals.cancel),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                  TextButton(
+                    child: Text(locals.ok,
+                        style: const TextStyle(color: Colors.red)),
+                    onPressed: () {
+                      db.clearSearchHistory();
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ])));
   }
 
   @override
@@ -59,7 +58,8 @@ class SearchHistorySettings extends StatelessWidget {
             backgroundColor: colorScheme.background,
             body: SafeArea(
               bottom: false,
-              child: SettingsList(lightTheme: theme, darkTheme: theme, sections: [
+              child:
+                  SettingsList(lightTheme: theme, darkTheme: theme, sections: [
                 SettingsSection(
                     title: Text(locals.searchHistoryDescription),
                     tiles: [
@@ -74,18 +74,26 @@ class SearchHistorySettings extends StatelessWidget {
                         trailing: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            IconButton(onPressed: () => _.useSearchHistory ? _.changeSearchHistoryLimit(increase: false) : null, icon: const Icon(Icons.remove)),
+                            IconButton(
+                                onPressed: () => _.useSearchHistory
+                                    ? _.changeSearchHistoryLimit(
+                                        increase: false)
+                                    : null,
+                                icon: const Icon(Icons.remove)),
                             Text(_.searchHistoryLimit.toString()),
-                            IconButton(onPressed: () => _.useSearchHistory ? _.changeSearchHistoryLimit(increase: true) : null, icon: const Icon(Icons.add)),
+                            IconButton(
+                                onPressed: () => _.useSearchHistory
+                                    ? _.changeSearchHistoryLimit(increase: true)
+                                    : null,
+                                icon: const Icon(Icons.add)),
                           ],
                         ),
                       ),
                       SettingsTile(
-                          title: Text(locals.clearSearchHistory),
-                          onPressed: (context) => confirmClear(context),
+                        title: Text(locals.clearSearchHistory),
+                        onPressed: (context) => confirmClear(context),
                       )
-                    ]
-                )
+                    ])
               ]),
             ));
       },

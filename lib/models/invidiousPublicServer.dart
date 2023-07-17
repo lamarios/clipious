@@ -13,8 +13,8 @@ class InvidiousPublicServer {
 
   InvidiousPublicServer(this.stats, this.api, this.uri, this.flag, this.region);
 
-
-  factory InvidiousPublicServer.fromJson(Map<String, dynamic> json) => _$InvidiousPublicServerFromJson(json);
+  factory InvidiousPublicServer.fromJson(Map<String, dynamic> json) =>
+      _$InvidiousPublicServerFromJson(json);
 
   Map<String, dynamic> toJson() => _$InvidiousPublicServerToJson(this);
 }

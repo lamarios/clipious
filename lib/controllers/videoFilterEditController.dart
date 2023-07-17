@@ -81,7 +81,13 @@ class VideoFilterEditController extends GetxController {
   }
 
   bool isFilterValid() {
-    return (filter != null && filter?.channelId != null && (filter?.filterAll ?? false)) || (filter != null && filter?.type != null && filter?.operation != null && (filter?.value ?? '').isNotEmpty);
+    return (filter != null &&
+            filter?.channelId != null &&
+            (filter?.filterAll ?? false)) ||
+        (filter != null &&
+            filter?.type != null &&
+            filter?.operation != null &&
+            (filter?.value ?? '').isNotEmpty);
   }
 
   void onSave() {
@@ -96,7 +102,8 @@ class VideoFilterEditController extends GetxController {
 
   Future<List<Channel>> searchChannel(String query) async {
     if (query.trim() == '') return [];
-    var searchResults = await service.search(query, type: SearchType.channel, page: searchPage);
+    var searchResults =
+        await service.search(query, type: SearchType.channel, page: searchPage);
     return searchResults.channels;
   }
 

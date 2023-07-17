@@ -28,7 +28,9 @@ class MiniPlayer extends StatelessWidget {
 
         Widget videoPlayer = showPlayer
             ? Padding(
-                padding: _.isMini || _.isPip ? EdgeInsets.zero : const EdgeInsets.only(top: 8, left: 8.0, right: 8),
+                padding: _.isMini || _.isPip
+                    ? EdgeInsets.zero
+                    : const EdgeInsets.only(top: 8, left: 8.0, right: 8),
                 child: VideoPlayer(
                   key: const ValueKey('player'),
                   video: _.currentlyPlaying!,
@@ -65,7 +67,9 @@ class MiniPlayer extends StatelessWidget {
                         onVerticalDragStart: _.videoDragStarted,
                         child: AnimatedContainer(
                           duration: animationDuration,
-                          color: _.isMini ? colors.secondaryContainer : colors.background,
+                          color: _.isMini
+                              ? colors.secondaryContainer
+                              : colors.background,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
@@ -83,18 +87,27 @@ class MiniPlayer extends StatelessWidget {
                                           ? []
                                           : [
                                               Visibility(
-                                                visible: _.currentlyPlaying != null,
-                                                child: VideoShareButton(video: _.currentlyPlaying!),
+                                                visible:
+                                                    _.currentlyPlaying != null,
+                                                child: VideoShareButton(
+                                                    video: _.currentlyPlaying!),
                                               ),
                                             ],
                                     ),
                               AnimatedContainer(
                                 width: double.infinity,
-                                constraints: BoxConstraints(maxHeight: _.isMini ? targetHeight : 500, maxWidth: tabletMaxVideoWidth),
+                                constraints: BoxConstraints(
+                                    maxHeight: _.isMini ? targetHeight : 500,
+                                    maxWidth: tabletMaxVideoWidth),
                                 duration: animationDuration,
                                 child: Row(
-                                  mainAxisAlignment: _.isMini ? MainAxisAlignment.start : MainAxisAlignment.center,
-                                  children: [Expanded(flex: 1, child: videoPlayer), ...miniPlayerWidgets],
+                                  mainAxisAlignment: _.isMini
+                                      ? MainAxisAlignment.start
+                                      : MainAxisAlignment.center,
+                                  children: [
+                                    Expanded(flex: 1, child: videoPlayer),
+                                    ...miniPlayerWidgets
+                                  ],
                                 ),
                               ),
                               ...bigPlayerWidgets,

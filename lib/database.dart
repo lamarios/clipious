@@ -54,12 +54,17 @@ class DbClient {
   static Future<DbClient> create() async {
     final docsDir = await getApplicationDocumentsDirectory();
     // Future<Store> openStore() {...} is defined in the generated objectbox.g.dart
-    final store = await openStore(directory: p.join(docsDir.path, "impuc-data"));
+    final store =
+        await openStore(directory: p.join(docsDir.path, "impuc-data"));
     return DbClient._create(store);
   }
 
   Server? getServer(String url) {
-    return store.box<Server>().query(Server_.url.equals(url)).build().findFirst();
+    return store
+        .box<Server>()
+        .query(Server_.url.equals(url))
+        .build()
+        .findFirst();
   }
 
   upsertServer(Server server) {
@@ -96,11 +101,19 @@ class DbClient {
   }
 
   SettingsValue? getSettings(String name) {
-    return store.box<SettingsValue>().query(SettingsValue_.name.equals(name)).build().findFirst();
+    return store
+        .box<SettingsValue>()
+        .query(SettingsValue_.name.equals(name))
+        .build()
+        .findFirst();
   }
 
   Server getCurrentlySelectedServer() {
-    Server? server = store.box<Server>().query(Server_.inUse.equals(true)).build().findFirst();
+    Server? server = store
+        .box<Server>()
+        .query(Server_.inUse.equals(true))
+        .build()
+        .findFirst();
 
     if (server == null) {
       log.fine('No servers selected, we try to find one');
@@ -119,11 +132,18 @@ class DbClient {
 
   bool isLoggedInToCurrentServer() {
     var currentlySelectedServer = getCurrentlySelectedServer();
-    return (currentlySelectedServer.authToken?.isNotEmpty ?? false) || (currentlySelectedServer.sidCookie?.isNotEmpty ?? false);
+    return (currentlySelectedServer.authToken?.isNotEmpty ?? false) ||
+        (currentlySelectedServer.sidCookie?.isNotEmpty ?? false);
   }
 
   double getVideoProgress(String videoId) {
-    return store.box<Progress>().query(Progress_.videoId.equals(videoId)).build().findFirst()?.progress ?? 0;
+    return store
+            .box<Progress>()
+            .query(Progress_.videoId.equals(videoId))
+            .build()
+            .findFirst()
+            ?.progress ??
+        0;
   }
 
   saveProgress(Progress progress) {
@@ -148,7 +168,10 @@ class DbClient {
   }
 
   List<SearchHistoryItem> _getSearchHistory() {
-    return (store.box<SearchHistoryItem>().query()..order(SearchHistoryItem_.time, flags: Order.descending)).build().find();
+    return (store.box<SearchHistoryItem>().query()
+          ..order(SearchHistoryItem_.time, flags: Order.descending))
+        .build()
+        .find();
   }
 
   void addToSearchHistory(SearchHistoryItem searchHistoryItem) {
@@ -157,9 +180,11 @@ class DbClient {
   }
 
   void clearExcessSearchHistory() {
-    final limit = int.parse(getSettings(SEARCH_HISTORY_LIMIT)?.value ?? searchHistoryDefaultLength);
+    final limit = int.parse(
+        getSettings(SEARCH_HISTORY_LIMIT)?.value ?? searchHistoryDefaultLength);
     if (store.box<SearchHistoryItem>().count() > limit) {
-      store.box<SearchHistoryItem>().removeMany(_getSearchHistory().skip(limit).map((e) => e.id).toList());
+      store.box<SearchHistoryItem>().removeMany(
+          _getSearchHistory().skip(limit).map((e) => e.id).toList());
     }
   }
 

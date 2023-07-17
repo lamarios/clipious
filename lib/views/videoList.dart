@@ -43,13 +43,18 @@ class VideoList extends StatelessWidget {
       builder: (_) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Visibility(visible: _.loading, child: const SizedBox(height: 1, child: LinearProgressIndicator())),
+          Visibility(
+              visible: _.loading,
+              child:
+                  const SizedBox(height: 1, child: LinearProgressIndicator())),
           Expanded(
             child: _.error != VideoListErrors.none
                 ? Container(
                     alignment: Alignment.center,
                     color: colorScheme.background,
-                    child: InkWell(onTap: () => _.getVideos(), child: Text(locals.couldntFetchVideos)),
+                    child: InkWell(
+                        onTap: () => _.getVideos(),
+                        child: Text(locals.couldntFetchVideos)),
                   )
                 : Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -70,7 +75,10 @@ class VideoList extends StatelessWidget {
                               crossAxisSpacing: 5,
                               mainAxisSpacing: 5,
                               childAspectRatio: getGridAspectRatio(context),
-                              children: (_.items).map((v) => VideoListItem(key: ValueKey(v.videoId), video: v)).toList()),
+                              children: (_.items)
+                                  .map((v) => VideoListItem(
+                                      key: ValueKey(v.videoId), video: v))
+                                  .toList()),
                         ),
                       ),
                     ),

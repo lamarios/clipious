@@ -11,15 +11,19 @@ const BROADCAST_SERVER_CHANGED = 'server-changed';
 const BROADCAST_STOP_PLAYING = 'stop-playing';
 const BROADCAST_STOP_MINI_PLAYER = 'stop-mini-player';
 const BROADCAST_MOVE_MINI_PLAYER = 'move-mini-player';
-const NAVIGATOR_KEY =1;
-const YOUTUBE_HOSTS = ['youtube.com', 'www.youtube.com', 'm.youtube.com', 'youtu.be'];
+const NAVIGATOR_KEY = 1;
+const YOUTUBE_HOSTS = [
+  'youtube.com',
+  'www.youtube.com',
+  'm.youtube.com',
+  'youtu.be'
+];
 
 const animationDuration = Duration(milliseconds: 250);
 
 Service service = Service();
 
 late DbClient db;
-
 
 List<Country> countryCodes = [
   Country('AD', 'Andorra'),

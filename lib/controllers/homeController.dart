@@ -27,7 +27,8 @@ class HomeController extends GetxController {
     }
 
     // For sharing or opening urls/text coming from outside the app while the app is in the memory
-    _intentDataStreamSubscription = ReceiveSharingIntent.getTextStream().listen((String value) {
+    _intentDataStreamSubscription =
+        ReceiveSharingIntent.getTextStream().listen((String value) {
       openAppLink(value);
     }, onError: (err) {
       log.warning("getLinkStream error: $err");
@@ -57,7 +58,9 @@ class HomeController extends GetxController {
     try {
       Uri uri = Uri.parse(url);
       if (YOUTUBE_HOSTS.contains(uri.host)) {
-        if (uri.pathSegments.length == 1 && uri.pathSegments.contains("watch") && uri.queryParameters.containsKey('v')) {
+        if (uri.pathSegments.length == 1 &&
+            uri.pathSegments.contains("watch") &&
+            uri.queryParameters.containsKey('v')) {
           String videoId = uri.queryParameters['v']!;
           navigatorKey.currentState?.push(MaterialPageRoute(
               builder: (context) => VideoView(

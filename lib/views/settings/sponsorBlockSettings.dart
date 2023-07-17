@@ -29,15 +29,18 @@ class SponsorBlockSettings extends StatelessWidget {
             backgroundColor: colorScheme.background,
             body: SafeArea(
               bottom: false,
-              child: SettingsList(lightTheme: theme, darkTheme: theme, sections: [
+              child:
+                  SettingsList(lightTheme: theme, darkTheme: theme, sections: [
                 SettingsSection(
                     title: Text(locals.sponsorBlockSettingsQuickDescription),
                     tiles: SponsorSegmentType.values
                         .map((t) => SettingsTile.switchTile(
                               initialValue: _.value(t),
                               onToggle: (bool value) => _.setValue(t, value),
-                              title: Text(SponsorSegmentType.getLabel(t, locals)),
-                              description: Text(SponsorSegmentType.getDescription(t, locals)),
+                              title:
+                                  Text(SponsorSegmentType.getLabel(t, locals)),
+                              description: Text(
+                                  SponsorSegmentType.getDescription(t, locals)),
                             ))
                         .toList()),
               ]),

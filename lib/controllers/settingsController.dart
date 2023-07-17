@@ -23,24 +23,37 @@ class SettingsController extends GetxController {
   List<Server> dbServers = db.getServers();
   Server currentServer = db.getCurrentlySelectedServer();
   bool sponsorBlock = db.getSettings(USE_SPONSORBLOCK)?.value == 'true';
-  Country country = getCountryFromCode(db.getSettings(BROWSING_COUNTRY)?.value ?? 'US');
-  PackageInfo packageInfo = PackageInfo(appName: '', packageName: '', version: '', buildNumber: '');
+  Country country =
+      getCountryFromCode(db.getSettings(BROWSING_COUNTRY)?.value ?? 'US');
+  PackageInfo packageInfo =
+      PackageInfo(appName: '', packageName: '', version: '', buildNumber: '');
   int onOpen = int.parse(db.getSettings(ON_OPEN)?.value ?? '0');
   bool useDynamicTheme = db.getSettings(DYNAMIC_THEME)?.value == 'true';
   bool useDash = db.getSettings(USE_DASH)?.value == 'true';
   bool useProxy = db.getSettings(USE_PROXY)?.value == 'true';
-  bool autoplayVideoOnLoad = db.getSettings(PLAYER_AUTOPLAY_ON_LOAD)?.value == 'true';
-  bool useReturnYoutubeDislike = db.getSettings(USE_RETURN_YOUTUBE_DISLIKE)?.value == 'true';
+  bool autoplayVideoOnLoad =
+      db.getSettings(PLAYER_AUTOPLAY_ON_LOAD)?.value == 'true';
+  bool useReturnYoutubeDislike =
+      db.getSettings(USE_RETURN_YOUTUBE_DISLIKE)?.value == 'true';
   bool blackBackground = db.getSettings(BLACK_BACKGROUND)?.value == 'true';
-  double subtitleSize = double.parse(db.getSettings(SUBTITLE_SIZE)?.value ?? subtitleDefaultSize);
-  bool rememberSubtitles = db.getSettings(REMEMBER_LAST_SUBTITLE)?.value == 'true';
-  bool skipSslVerification = db.getSettings(SKIP_SSL_VERIFICATION)?.value == 'true';
-  bool rememberPlayBackSpeed = db.getSettings(REMEMBER_PLAYBACK_SPEED)?.value == 'true';
-  bool forceLandscapeFullScreen = db.getSettings(LOCK_ORIENTATION_FULLSCREEN)?.value == 'true';
-  ThemeMode themeMode = ThemeMode.values.firstWhere((element) => element.name == db.getSettings(THEME_MODE)?.value, orElse: () => ThemeMode.system);
+  double subtitleSize =
+      double.parse(db.getSettings(SUBTITLE_SIZE)?.value ?? subtitleDefaultSize);
+  bool rememberSubtitles =
+      db.getSettings(REMEMBER_LAST_SUBTITLE)?.value == 'true';
+  bool skipSslVerification =
+      db.getSettings(SKIP_SSL_VERIFICATION)?.value == 'true';
+  bool rememberPlayBackSpeed =
+      db.getSettings(REMEMBER_PLAYBACK_SPEED)?.value == 'true';
+  bool forceLandscapeFullScreen =
+      db.getSettings(LOCK_ORIENTATION_FULLSCREEN)?.value == 'true';
+  ThemeMode themeMode = ThemeMode.values.firstWhere(
+      (element) => element.name == db.getSettings(THEME_MODE)?.value,
+      orElse: () => ThemeMode.system);
   String? locale = db.getSettings(LOCALE)?.value;
   bool useSearchHistory = db.getSettings(USE_SEARCH_HISTORY)?.value == 'true';
-  int searchHistoryLimit = int.parse(db.getSettings(SEARCH_HISTORY_LIMIT)?.value ?? searchHistoryDefaultLength);
+  int searchHistoryLimit = int.parse(
+      db.getSettings(SEARCH_HISTORY_LIMIT)?.value ??
+          searchHistoryDefaultLength);
 
   @override
   onReady() {
@@ -55,8 +68,10 @@ class SettingsController extends GetxController {
   }
 
   toggleForceLandscapeFullScreen(bool value) {
-    db.saveSetting(SettingsValue(LOCK_ORIENTATION_FULLSCREEN, value.toString()));
-    forceLandscapeFullScreen = db.getSettings(LOCK_ORIENTATION_FULLSCREEN)?.value == 'true';
+    db.saveSetting(
+        SettingsValue(LOCK_ORIENTATION_FULLSCREEN, value.toString()));
+    forceLandscapeFullScreen =
+        db.getSettings(LOCK_ORIENTATION_FULLSCREEN)?.value == 'true';
     update();
   }
 
@@ -114,7 +129,10 @@ class SettingsController extends GetxController {
   }
 
   void selectCountry(String selected) {
-    String code = countryCodes.firstWhere((element) => element.name == selected, orElse: () => country).code;
+    String code = countryCodes
+        .firstWhere((element) => element.name == selected,
+            orElse: () => country)
+        .code;
     db.saveSetting(SettingsValue(BROWSING_COUNTRY, code));
     country = getCountryFromCode(code);
     update();
@@ -185,7 +203,8 @@ class SettingsController extends GetxController {
       }
     }
     update();
-    db.saveSetting(SettingsValue(SEARCH_HISTORY_LIMIT, searchHistoryLimit.toString()));
+    db.saveSetting(
+        SettingsValue(SEARCH_HISTORY_LIMIT, searchHistoryLimit.toString()));
     if (!increase) {
       db.clearExcessSearchHistory();
     }
@@ -199,7 +218,8 @@ class SettingsController extends GetxController {
     }
 
     update();
-    db.saveSetting(SettingsValue(SEARCH_HISTORY_LIMIT, searchHistoryLimit.toString()));
+    db.saveSetting(
+        SettingsValue(SEARCH_HISTORY_LIMIT, searchHistoryLimit.toString()));
     if (value < searchHistoryLimit) {
       db.clearExcessSearchHistory();
     }
@@ -252,7 +272,11 @@ class SettingsController extends GetxController {
 
   String? getLocaleDisplayName() {
     List<String>? localeString = locale?.split('_');
-    Locale? l = localeString != null ? Locale.fromSubtags(languageCode: localeString[0], scriptCode: localeString.length >= 2 ? localeString[1] : null) : null;
+    Locale? l = localeString != null
+        ? Locale.fromSubtags(
+            languageCode: localeString[0],
+            scriptCode: localeString.length >= 2 ? localeString[1] : null)
+        : null;
 
     return l?.nativeDisplayLanguageScript;
   }

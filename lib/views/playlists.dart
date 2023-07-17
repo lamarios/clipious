@@ -74,9 +74,12 @@ class _AddPlayListFormState extends State<AddPlayListForm> {
   addPlaylist(BuildContext context) async {
     var locals = AppLocalizations.of(context)!;
     try {
-      String? playlistId = await service.createPlayList(nameController.value.text, privacyValue);
+      String? playlistId =
+          await service.createPlayList(nameController.value.text, privacyValue);
 
-      PlaylistListController.to(tag: PlaylistListController.getTag(userPlayListTag))?.refreshPlaylists();
+      PlaylistListController.to(
+              tag: PlaylistListController.getTag(userPlayListTag))
+          ?.refreshPlaylists();
 
       if (context.mounted && widget.afterAdd != null) {
         widget.afterAdd!(context, playlistId!);
@@ -117,9 +120,13 @@ class _AddPlayListFormState extends State<AddPlayListForm> {
                   DropdownButton(
                     value: privacyValue,
                     items: [
-                      DropdownMenuItem(value: 'public', child: Text(locals.publicPlaylist)),
-                      DropdownMenuItem(value: 'unlisted', child: Text(locals.unlistedPlaylist)),
-                      DropdownMenuItem(value: 'private', child: Text(locals.privatePlaylist))
+                      DropdownMenuItem(
+                          value: 'public', child: Text(locals.publicPlaylist)),
+                      DropdownMenuItem(
+                          value: 'unlisted',
+                          child: Text(locals.unlistedPlaylist)),
+                      DropdownMenuItem(
+                          value: 'private', child: Text(locals.privatePlaylist))
                     ],
                     onChanged: (value) {
                       setState(() {

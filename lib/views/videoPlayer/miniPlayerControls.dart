@@ -5,13 +5,16 @@ import 'package:invidious/utils.dart';
 
 import '../../controllers/miniPayerController.dart';
 
-const ButtonStyle buttonStyle = ButtonStyle(visualDensity: VisualDensity.compact);
+const ButtonStyle buttonStyle =
+    ButtonStyle(visualDensity: VisualDensity.compact);
 
 class MiniPlayerControls extends StatelessWidget {
   final MiniPlayerController controller;
   final String videoId;
 
-  const MiniPlayerControls({Key? key, required this.controller, required this.videoId}) : super(key: key);
+  const MiniPlayerControls(
+      {Key? key, required this.controller, required this.videoId})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,8 +22,12 @@ class MiniPlayerControls extends StatelessWidget {
     return Padding(
       padding: controller.isMini ? EdgeInsets.zero : const EdgeInsets.all(8.0),
       child: Container(
-        decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), color: colors.secondaryContainer),
-        constraints: BoxConstraints(maxWidth: tabletMaxVideoWidth, ),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            color: colors.secondaryContainer),
+        constraints: BoxConstraints(
+          maxWidth: tabletMaxVideoWidth,
+        ),
         child: GetBuilder<MiniPlayerControlsController>(
           // global: false,
           init: MiniPlayerControlsController(videoId),
@@ -33,7 +40,8 @@ class MiniPlayerControls extends StatelessWidget {
                 children: [
                   IconButton(
                       style: buttonStyle,
-                      onPressed: controller.videos.length > 1 ? _.playPrevious : null,
+                      onPressed:
+                          controller.videos.length > 1 ? _.playPrevious : null,
                       icon: const Icon(
                         Icons.skip_previous,
                       )),
@@ -44,7 +52,8 @@ class MiniPlayerControls extends StatelessWidget {
                         _.isPlaying() ? Icons.pause : Icons.play_arrow,
                       )),
                   IconButton(
-                      onPressed: controller.videos.length > 1 ? _.playNext : null,
+                      onPressed:
+                          controller.videos.length > 1 ? _.playNext : null,
                       style: buttonStyle,
                       icon: const Icon(
                         Icons.skip_next,
@@ -60,9 +69,13 @@ class MiniPlayerControls extends StatelessWidget {
                           IconButton(
                               style: buttonStyle,
                               onPressed: _.switchToNextRepeat,
-                              color: controller.repeat == PlayerRepeat.noRepeat ? null : colors.primary,
+                              color: controller.repeat == PlayerRepeat.noRepeat
+                                  ? null
+                                  : colors.primary,
                               icon: Icon(
-                                controller.repeat == PlayerRepeat.repeatOne ? Icons.repeat_one : Icons.repeat,
+                                controller.repeat == PlayerRepeat.repeatOne
+                                    ? Icons.repeat_one
+                                    : Icons.repeat,
                               )),
                           IconButton(
                             onPressed: _.toggleShuffle,

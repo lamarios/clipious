@@ -15,7 +15,8 @@ const String searchPlayListTag = 'search-playlists';
 class PlaylistListController extends GetxController {
   static PlaylistListController? to({String? tag}) => safeGet(tag: tag);
   PaginatedList<Playlist> paginatedList;
-  RefreshController refreshController = RefreshController(initialRefresh: false);
+  RefreshController refreshController =
+      RefreshController(initialRefresh: false);
   List<Playlist> playlists = [];
   bool loading = true;
   ScrollController scrollController = ScrollController();
@@ -23,8 +24,8 @@ class PlaylistListController extends GetxController {
 
   PlaylistListController(this.paginatedList);
 
-  static String? getTag(String? source){
-    return source != null ? 'play-list-controller-${source}': null;
+  static String? getTag(String? source) {
+    return source != null ? 'play-list-controller-${source}' : null;
   }
 
   @override
@@ -36,8 +37,10 @@ class PlaylistListController extends GetxController {
   onScrollEvent() {
     if (paginatedList.getHasMore()) {
       if (scrollController.hasClients) {
-        if (scrollController.position.maxScrollExtent == scrollController.offset) {
-          EasyDebounce.debounce('get-more-playlists', const Duration(milliseconds: 250), getMorePlaylists);
+        if (scrollController.position.maxScrollExtent ==
+            scrollController.offset) {
+          EasyDebounce.debounce('get-more-playlists',
+              const Duration(milliseconds: 250), getMorePlaylists);
         }
       }
     }

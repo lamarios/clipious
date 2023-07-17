@@ -11,7 +11,8 @@ import '../video/recommendedVideos.dart';
 import 'miniPlayerControls.dart';
 
 class VideoPlayerFullScreenView {
-  static List<Widget> build(BuildContext context, MiniPlayerController controller) {
+  static List<Widget> build(
+      BuildContext context, MiniPlayerController controller) {
     AppLocalizations locals = AppLocalizations.of(context)!;
 
     ColorScheme colors = Theme.of(context).colorScheme;
@@ -32,7 +33,8 @@ class VideoPlayerFullScreenView {
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16),
                     child: Container(
-                      constraints: BoxConstraints(maxWidth: tabletMaxVideoWidth),
+                      constraints:
+                          BoxConstraints(maxWidth: tabletMaxVideoWidth),
                       child: <Widget>[
                         SingleChildScrollView(
                           child: VideoInfo(
@@ -45,7 +47,8 @@ class VideoPlayerFullScreenView {
                             key: ValueKey('comms-${video.videoId}'),
                           ),
                         ),
-                        SingleChildScrollView(child: RecommendedVideos(video: video)),
+                        SingleChildScrollView(
+                            child: RecommendedVideos(video: video)),
                         VideoQueue(controller: controller),
                       ][controller.selectedFullScreenIndex],
                     ),
@@ -55,12 +58,24 @@ class VideoPlayerFullScreenView {
               visible: !controller.isMini,
               child: SizedBox(
                 // height: 80,
-                child: NavigationBar(backgroundColor: colors.background, elevation: 0, selectedIndex: controller.selectedFullScreenIndex, onDestinationSelected: controller.selectTab, destinations: [
-                  NavigationDestination(icon: const Icon(Icons.info), label: locals.info),
-                  NavigationDestination(icon: const Icon(Icons.chat_bubble), label: locals.comments),
-                  NavigationDestination(icon: const Icon(Icons.schema), label: locals.recommended),
-                  NavigationDestination(icon: const Icon(Icons.playlist_play), label: locals.videoQueue)
-                ]),
+                child: NavigationBar(
+                    backgroundColor: colors.background,
+                    elevation: 0,
+                    selectedIndex: controller.selectedFullScreenIndex,
+                    onDestinationSelected: controller.selectTab,
+                    destinations: [
+                      NavigationDestination(
+                          icon: const Icon(Icons.info), label: locals.info),
+                      NavigationDestination(
+                          icon: const Icon(Icons.chat_bubble),
+                          label: locals.comments),
+                      NavigationDestination(
+                          icon: const Icon(Icons.schema),
+                          label: locals.recommended),
+                      NavigationDestination(
+                          icon: const Icon(Icons.playlist_play),
+                          label: locals.videoQueue)
+                    ]),
               ),
             )
           ]

@@ -14,7 +14,6 @@ class TvSearchController extends ClipiousSearchController {
 
   TvSearchController({super.query, super.searchNow});
 
-
   @override
   onClose() async {
     resultFocus.dispose();
@@ -30,5 +29,4 @@ class TvSearchController extends ClipiousSearchController {
 
     return KeyEventResult.ignored;
   }
-
 }

@@ -33,7 +33,8 @@ class TvPlayerController extends GetxController {
   bool showControls = false;
   late Video currentlyPlaying;
 
-  Duration get videoLength => Duration(seconds: PlayerController.to()?.video.lengthSeconds ?? 0);
+  Duration get videoLength =>
+      Duration(seconds: PlayerController.to()?.video.lengthSeconds ?? 0);
 
   TvPlayerController({required this.videos});
 
@@ -63,9 +64,11 @@ class TvPlayerController extends GetxController {
     super.onClose();
   }
 
-  bool get isPlaying => PlayerController.to()?.videoController?.isPlaying() ?? false;
+  bool get isPlaying =>
+      PlayerController.to()?.videoController?.isPlaying() ?? false;
 
-  int get currentlyPlayingIndex => videos.indexWhere((element) => element.videoId == currentlyPlaying.videoId);
+  int get currentlyPlayingIndex => videos
+      .indexWhere((element) => element.videoId == currentlyPlaying.videoId);
 
   handleVideoEvent(BetterPlayerEvent event) {
     switch (event.betterPlayerEventType) {
@@ -115,11 +118,15 @@ class TvPlayerController extends GetxController {
   }
 
   fastForward() {
-    PlayerController.to()?.videoController?.seekTo(currentPosition + const Duration(seconds: 10));
+    PlayerController.to()
+        ?.videoController
+        ?.seekTo(currentPosition + const Duration(seconds: 10));
   }
 
   fastRewind() {
-    PlayerController.to()?.videoController?.seekTo(currentPosition - const Duration(seconds: 10));
+    PlayerController.to()
+        ?.videoController
+        ?.seekTo(currentPosition - const Duration(seconds: 10));
   }
 
   playNext() async {
@@ -155,7 +162,6 @@ class TvPlayerController extends GetxController {
     update();
   }
 
-
   displaySettings() {
     showSettings = true;
     showControls = false;
@@ -170,11 +176,14 @@ class TvPlayerController extends GetxController {
 
   KeyEventResult handleRemoteEvents(FocusNode node, KeyEvent event) {
     bool timeLineControl = !showQueue && !showSettings && !showControls;
-    log.fine('Key: ${event.logicalKey}, Timeline control: $timeLineControl, showQueue: $showQueue, showSettings: $showSettings, showControls: $showControls}');
+    log.fine(
+        'Key: ${event.logicalKey}, Timeline control: $timeLineControl, showQueue: $showQueue, showSettings: $showSettings, showControls: $showControls}');
     showUi();
 
     // looks like back is activate on pressdown and not press up
-    if (event is KeyUpEvent && !timeLineControl && event.logicalKey == LogicalKeyboardKey.goBack) {
+    if (event is KeyUpEvent &&
+        !timeLineControl &&
+        event.logicalKey == LogicalKeyboardKey.goBack) {
       if (showQueue || showSettings) {
         showQueue = false;
         showSettings = false;
@@ -201,10 +210,12 @@ class TvPlayerController extends GetxController {
     if (event is KeyRepeatEvent) {
       if (timeLineControl) {
         if (event.logicalKey == LogicalKeyboardKey.arrowRight) {
-          EasyThrottle.throttle('hold-seek-forward', throttleDuration, fastForward);
+          EasyThrottle.throttle(
+              'hold-seek-forward', throttleDuration, fastForward);
         }
         if (event.logicalKey == LogicalKeyboardKey.arrowLeft) {
-          EasyThrottle.throttle('hold-seek-backward', throttleDuration, fastRewind);
+          EasyThrottle.throttle(
+              'hold-seek-backward', throttleDuration, fastRewind);
         }
       }
     }

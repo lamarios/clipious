@@ -19,7 +19,8 @@ abstract class BaseVideo implements ShareLinks {
   @JsonKey(includeFromJson: false, includeToJson: false)
   List<VideoFilter> matchedFilters = [];
 
-  BaseVideo(this.title, this.videoId, this.lengthSeconds, this.author, this.authorId, this.authorUrl, this.videoThumbnails);
+  BaseVideo(this.title, this.videoId, this.lengthSeconds, this.author,
+      this.authorId, this.authorUrl, this.videoThumbnails);
 
   @override
   String getInvidiousLink(Server server) {

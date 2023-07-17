@@ -19,7 +19,8 @@ class ChannelPlayListsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return PlaylistList(
       canDeleteVideos: canDeleteVideos,
-      paginatedList: ContinuationList<Playlist>((continuation) => service.getChannelPlaylists(channelId, continuation: continuation)),
+      paginatedList: ContinuationList<Playlist>((continuation) =>
+          service.getChannelPlaylists(channelId, continuation: continuation)),
       tag: 'channel-$channelId',
     );
   }

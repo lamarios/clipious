@@ -15,7 +15,9 @@ class VideoQueue extends StatelessWidget {
         ? ReorderableListView(
             onReorder: controller.onQueueReorder,
             children: controller.videos.map((e) {
-              bool isPlaying = controller.videos[controller.currentIndex].videoId == e.videoId;
+              bool isPlaying =
+                  controller.videos[controller.currentIndex].videoId ==
+                      e.videoId;
               return SwipeActionCell(
                 key: ObjectKey(e),
                 trailingActions: isPlaying

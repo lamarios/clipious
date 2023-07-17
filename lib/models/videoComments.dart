@@ -11,9 +11,11 @@ class VideoComments {
   String? continuation;
   List<Comment> comments = [];
 
-  VideoComments(this.commentCount, this.videoId, this.continuation, this.comments);
+  VideoComments(
+      this.commentCount, this.videoId, this.continuation, this.comments);
 
-  factory VideoComments.fromJson(Map<String, dynamic> json) => _$VideoCommentsFromJson(json);
+  factory VideoComments.fromJson(Map<String, dynamic> json) =>
+      _$VideoCommentsFromJson(json);
 
   Map<String, dynamic> toJson() => _$VideoCommentsToJson(this);
 }

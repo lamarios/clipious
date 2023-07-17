@@ -28,7 +28,8 @@ class AppLogsController extends GetxController {
     selected.sort();
     String toClipboard = logs
         .where((element) => selected.contains(element.id))
-        .map((e) => '[${e.level}] [${e.logger}] - ${e.time} - ${e.message} ${e.stacktrace != null ? '\n${e.stacktrace}' : ''}')
+        .map((e) =>
+            '[${e.level}] [${e.logger}] - ${e.time} - ${e.message} ${e.stacktrace != null ? '\n${e.stacktrace}' : ''}')
         .toList()
         .reversed
         .join("\n");
@@ -40,9 +41,9 @@ class AppLogsController extends GetxController {
   }
 
   void selectAll() {
-    if(selected.isEmpty) {
+    if (selected.isEmpty) {
       selected = logs.map((e) => e.id).toList(growable: true);
-    }else{
+    } else {
       selected = [];
     }
     update();

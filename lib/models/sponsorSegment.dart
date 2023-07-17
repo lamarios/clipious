@@ -19,14 +19,15 @@ import 'package:json_annotation/json_annotation.dart';
 part 'sponsorSegment.g.dart';
 
 @JsonSerializable()
-class SponsorSegment{
+class SponsorSegment {
   String actionType;
   List<double> segment;
   SponsorSegmentType category;
 
   SponsorSegment(this.actionType, this.segment, this.category);
 
-  factory SponsorSegment.fromJson(Map<String, dynamic> json) => _$SponsorSegmentFromJson(json);
+  factory SponsorSegment.fromJson(Map<String, dynamic> json) =>
+      _$SponsorSegmentFromJson(json);
 
   Map<String, dynamic> toJson() => _$SponsorSegmentToJson(this);
 }

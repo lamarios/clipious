@@ -15,7 +15,11 @@ class PlaylistList extends StatelessWidget {
   final bool canDeleteVideos;
   final String? tag;
 
-  const PlaylistList({super.key, required this.tag, required this.paginatedList, required this.canDeleteVideos});
+  const PlaylistList(
+      {super.key,
+      required this.tag,
+      required this.paginatedList,
+      required this.canDeleteVideos});
 
   @override
   Widget build(BuildContext context) {
@@ -28,13 +32,22 @@ class PlaylistList extends StatelessWidget {
       builder: (_) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Visibility(visible: _.loading, child: const SizedBox(height: 1, child: LinearProgressIndicator())),
+          Visibility(
+              visible: _.loading,
+              child:
+                  const SizedBox(height: 1, child: LinearProgressIndicator())),
           Expanded(
             child: _.error.isNotEmpty
                 ? Container(
                     alignment: Alignment.center,
                     color: colorScheme.background,
-                    child: Visibility(visible: _.error.isNotEmpty, child: InkWell(onTap: () => _.getPlaylists(), child: Text(_.error == couldNotGetPlaylits ? locals.couldntFetchVideos : _.error))),
+                    child: Visibility(
+                        visible: _.error.isNotEmpty,
+                        child: InkWell(
+                            onTap: () => _.getPlaylists(),
+                            child: Text(_.error == couldNotGetPlaylits
+                                ? locals.couldntFetchVideos
+                                : _.error))),
                   )
                 : Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -50,8 +63,11 @@ class PlaylistList extends StatelessWidget {
                           onRefresh: _.refreshPlaylists,
                           child: ListView.separated(
                               controller: _.scrollController,
-                              itemBuilder: (context, index) => PlaylistItem(playlist: _.playlists[index], canDeleteVideos: canDeleteVideos),
-                              separatorBuilder: (context, index) => const Divider(),
+                              itemBuilder: (context, index) => PlaylistItem(
+                                  playlist: _.playlists[index],
+                                  canDeleteVideos: canDeleteVideos),
+                              separatorBuilder: (context, index) =>
+                                  const Divider(),
                               itemCount: _.playlists.length),
                         ),
                       ),

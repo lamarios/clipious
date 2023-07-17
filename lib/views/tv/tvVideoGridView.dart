@@ -13,7 +13,12 @@ class TvGridView extends StatelessWidget {
   final String? tags;
   final String title;
 
-  const TvGridView({Key? key, required this.paginatedVideoList, this.tags, required this.title }) : super(key: key);
+  const TvGridView(
+      {Key? key,
+      required this.paginatedVideoList,
+      this.tags,
+      required this.title})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +40,12 @@ class TvGridView extends StatelessWidget {
                       _.loading
                           ? const Padding(
                               padding: EdgeInsets.all(8.0),
-                              child: SizedBox(width: 15, height: 15, child: CircularProgressIndicator(strokeWidth: 2,)),
+                              child: SizedBox(
+                                  width: 15,
+                                  height: 15,
+                                  child: CircularProgressIndicator(
+                                    strokeWidth: 2,
+                                  )),
                             )
                           : const SizedBox.shrink()
                     ],
@@ -45,7 +55,9 @@ class TvGridView extends StatelessWidget {
                     controller: _.scrollController,
                     childAspectRatio: 16 / 13,
                     crossAxisCount: 3,
-                    children: _.items.map((e) => TvVideoItem(video: e, autoFocus: false)).toList(),
+                    children: _.items
+                        .map((e) => TvVideoItem(video: e, autoFocus: false))
+                        .toList(),
                   ))
                 ],
               );

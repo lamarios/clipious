@@ -22,11 +22,13 @@ class PlaylistView extends StatelessWidget {
   final Playlist playlist;
   final bool canDeleteVideos;
 
-  const PlaylistView({super.key, required this.playlist, required this.canDeleteVideos});
+  const PlaylistView(
+      {super.key, required this.playlist, required this.canDeleteVideos});
 
   deletePlayList(BuildContext context, PlaylistController controller) {
     var locals = AppLocalizations.of(context)!;
-    okCancelDialog(context, locals.deletePlayListQ, locals.irreversibleAction, () async {
+    okCancelDialog(context, locals.deletePlayListQ, locals.irreversibleAction,
+        () async {
       await controller.deletePlaylist();
 
       if (context.mounted) {
@@ -35,7 +37,8 @@ class PlaylistView extends StatelessWidget {
     });
   }
 
-  showPlayListVideoDialog(BuildContext context, PlaylistController controller, VideoInList v) {
+  showPlayListVideoDialog(
+      BuildContext context, PlaylistController controller, VideoInList v) {
     showModalBottomSheet<void>(
         context: context,
         builder: (BuildContext context) {
@@ -81,7 +84,8 @@ class PlaylistView extends StatelessWidget {
             )));
   }
 
-  removeVideoFromPlayList(BuildContext context, PlaylistController controller, VideoInList v) async {
+  removeVideoFromPlayList(BuildContext context, PlaylistController controller,
+      VideoInList v) async {
     var locals = AppLocalizations.of(context)!;
     try {
       bool goBack = await controller.removeVideoFromPlayList(v);
@@ -100,7 +104,8 @@ class PlaylistView extends StatelessWidget {
     List<Widget> thumbs = [];
 
     ColorScheme colors = Theme.of(context).colorScheme;
-    List<VideoInList> videosToUse = _.playlist.videos.where((element) => !element.filtered).toList();
+    List<VideoInList> videosToUse =
+        _.playlist.videos.where((element) => !element.filtered).toList();
     for (int i = 2; i >= 0; i--) {
       // for (VideoInList video in playlist.videos) {
       thumbs.add(Align(
@@ -114,10 +119,15 @@ class PlaylistView extends StatelessWidget {
               child: videosToUse.length > i
                   ? VideoThumbnailView(
                       videoId: videosToUse[i].videoId,
-                      thumbnailUrl: ImageObject.getBestThumbnail(videosToUse[i].videoThumbnails)?.url ?? '',
+                      thumbnailUrl: ImageObject.getBestThumbnail(
+                                  videosToUse[i].videoThumbnails)
+                              ?.url ??
+                          '',
                     )
                   : Container(
-                      decoration: BoxDecoration(color: colors.secondaryContainer, borderRadius: BorderRadius.circular(10)),
+                      decoration: BoxDecoration(
+                          color: colors.secondaryContainer,
+                          borderRadius: BorderRadius.circular(10)),
                     ),
             ),
           ),
@@ -165,32 +175,39 @@ class PlaylistView extends StatelessWidget {
                 child: !_.loading && _.playlist.videos.isNotEmpty
                     ? Center(
                         child: Container(
-                          constraints: BoxConstraints(maxWidth: tabletMaxVideoWidth),
+                          constraints:
+                              BoxConstraints(maxWidth: tabletMaxVideoWidth),
                           child: Column(
                             children: [
                               AnimatedSwitcher(
                                   duration: animationDuration,
                                   child: Padding(
-                                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                                      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                                        AspectRatio(
-                                            aspectRatio: 16 / 9,
-                                            child: Stack(
-                                              alignment: Alignment.center,
-                                              children: [
-                                                ...buildThumbnails(context, _),
-                                                PlayButton(
-                                                  onPressed: _.play,
-                                                ),
-                                                Positioned(
-                                                    right: 5,
-                                                    bottom: 3,
-                                                    child: AddToQueueButton(
-                                                      videos: _.playlist.videos,
-                                                    ))
-                                              ],
-                                            ))
-                                      ]))),
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 8.0),
+                                      child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            AspectRatio(
+                                                aspectRatio: 16 / 9,
+                                                child: Stack(
+                                                  alignment: Alignment.center,
+                                                  children: [
+                                                    ...buildThumbnails(
+                                                        context, _),
+                                                    PlayButton(
+                                                      onPressed: _.play,
+                                                    ),
+                                                    Positioned(
+                                                        right: 5,
+                                                        bottom: 3,
+                                                        child: AddToQueueButton(
+                                                          videos:
+                                                              _.playlist.videos,
+                                                        ))
+                                                  ],
+                                                ))
+                                          ]))),
                               Expanded(
                                   child: ListView(
                                 controller: _.scrollController,
@@ -200,11 +217,14 @@ class PlaylistView extends StatelessWidget {
                                         trailingActions: canDeleteVideos
                                             ? [
                                                 SwipeAction(
-                                                  icon: const Icon(Icons.delete, color: Colors.white),
-                                                  performsFirstActionWithFullSwipe: true,
+                                                  icon: const Icon(Icons.delete,
+                                                      color: Colors.white),
+                                                  performsFirstActionWithFullSwipe:
+                                                      true,
                                                   onTap: (handler) async {
                                                     await handler(true);
-                                                    removeVideoFromPlayList(context, _, v);
+                                                    removeVideoFromPlayList(
+                                                        context, _, v);
                                                   },
                                                 )
                                               ]
@@ -223,14 +243,18 @@ class PlaylistView extends StatelessWidget {
                     : _.loading
                         ? Center(
                             child: TweenAnimationBuilder(
-                            tween: Tween<double>(begin: 0, end: _.loadingProgress),
+                            tween:
+                                Tween<double>(begin: 0, end: _.loadingProgress),
                             duration: animationDuration,
                             curve: Curves.easeInOutQuad,
-                            builder: (context, value, child) => CircularProgressIndicator(
+                            builder: (context, value, child) =>
+                                CircularProgressIndicator(
                               value: value > 0 ? value : null,
                             ),
                           ))
-                        : Container(alignment: Alignment.center, child: Text(locals.noVideoInPlayList))));
+                        : Container(
+                            alignment: Alignment.center,
+                            child: Text(locals.noVideoInPlayList))));
       },
     );
   }

@@ -19,6 +19,7 @@ class VideoInnerViewController extends GetxController {
   }
 
   scrollUp() {
-    scrollController.animateTo(0, duration: animationDuration, curve: Curves.easeInOutQuad);
+    scrollController.animateTo(0,
+        duration: animationDuration, curve: Curves.easeInOutQuad);
   }
 }

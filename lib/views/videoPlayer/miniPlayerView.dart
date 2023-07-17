@@ -7,7 +7,8 @@ import '../../models/video.dart';
 
 class MiniPlayerView {
   @override
-  static List<Widget> build(BuildContext context, MiniPlayerController controller) {
+  static List<Widget> build(
+      BuildContext context, MiniPlayerController controller) {
     ColorScheme colors = Theme.of(context).colorScheme;
     Video? vid = controller.currentlyPlaying;
     return vid != null && controller.videos.isNotEmpty && controller.isMini
@@ -19,10 +20,13 @@ class MiniPlayerView {
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Builder(builder: (context) {
-
                       return Column(
                         children: [
-                          Text('${vid.title} - ${vid.author}', overflow: TextOverflow.ellipsis, style: const TextStyle(fontSize: 11),),
+                          Text(
+                            '${vid.title} - ${vid.author}',
+                            overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(fontSize: 11),
+                          ),
                           MiniPlayerControls(
                             videoId: vid.videoId,
                             controller: controller,

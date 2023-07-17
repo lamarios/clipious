@@ -69,7 +69,8 @@ class VideoFilter {
   }
 
   set dbType(String? value) {
-    type = FilterType.values.where((element) => element.name == value).firstOrNull;
+    type =
+        FilterType.values.where((element) => element.name == value).firstOrNull;
   }
 
   String? get dbOperation {
@@ -77,13 +78,16 @@ class VideoFilter {
   }
 
   set dbOperation(String? value) {
-    operation = FilterOperation.values.where((element) => element.name == value).firstOrNull;
+    operation = FilterOperation.values
+        .where((element) => element.name == value)
+        .firstOrNull;
   }
 
   /// Returns the number of videos removed
   static int filterVideos(List<BaseVideo>? videos) {
     int startCount = videos?.length ?? 0;
-    bool hideFilteredVideos = db.getSettings(HIDE_FILTERED_VIDEOS)?.value == 'true';
+    bool hideFilteredVideos =
+        db.getSettings(HIDE_FILTERED_VIDEOS)?.value == 'true';
     List<VideoFilter> filters = db.getAllFilters();
 
     log.fine('filtering videos, we have ${filters.length} filters');
@@ -103,12 +107,14 @@ class VideoFilter {
     String videoChannel = video.authorId?.replaceAll("/channel/", '') ?? '';
 
     if (channelId != null && channelId != videoChannel) {
-      log.fine('Showing videos, no same channel $channelId (filter) -  ${videoChannel} / ${video.author} (video)');
+      log.fine(
+          'Showing videos, no same channel $channelId (filter) -  ${videoChannel} / ${video.author} (video)');
       return false;
     }
     // Channel hide all
     if (channelId != null && filterAll == true && videoChannel == channelId) {
-      log.fine('Video filtered because hide all == $filterAll, video channel id: ${videoChannel}, channel id ${channelId}');
+      log.fine(
+          'Video filtered because hide all == $filterAll, video channel id: ${videoChannel}, channel id ${channelId}');
       return true;
     }
 
@@ -117,7 +123,9 @@ class VideoFilter {
       case FilterType.title:
         return filterVideoStringOperation(video.title);
       case FilterType.channelName:
-        return video.author != null ? filterVideoStringOperation(video.author!) : true;
+        return video.author != null
+            ? filterVideoStringOperation(video.author!)
+            : true;
       // int base operation
       case FilterType.length:
         return filterVideoNumberOperation(video.lengthSeconds);
@@ -142,8 +150,10 @@ class VideoFilter {
   }
 
   bool filterVideoStringOperation(String stringToCompare) {
-    var contains = stringToCompare.contains(RegExp(value ?? '', caseSensitive: false));
-    log.fine('String compare: "$stringToCompare" ${operation?.name} "$value", contains ? $contains');
+    var contains =
+        stringToCompare.contains(RegExp(value ?? '', caseSensitive: false));
+    log.fine(
+        'String compare: "$stringToCompare" ${operation?.name} "$value", contains ? $contains');
     switch (operation) {
       case FilterOperation.contain:
         return contains;
@@ -158,8 +168,13 @@ class VideoFilter {
     if (filterAll) {
       return locals.videoFilterHideAllFromChannel;
     } else if (type != null && operation != null) {
-      return locals.videoFilterDescriptionString(hideFromFeed ? locals.videoFilterHideLabel : locals.videoFilterFilterLabel, FilterType.localizedType(type!, locals).toLowerCase(),
-          FilterOperation.localizedLabel(operation!, locals).toLowerCase(), value ?? '');
+      return locals.videoFilterDescriptionString(
+          hideFromFeed
+              ? locals.videoFilterHideLabel
+              : locals.videoFilterFilterLabel,
+          FilterType.localizedType(type!, locals).toLowerCase(),
+          FilterOperation.localizedLabel(operation!, locals).toLowerCase(),
+          value ?? '');
     } else {
       return "";
     }

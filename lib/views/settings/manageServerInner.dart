@@ -16,7 +16,8 @@ import '../settings.dart';
 class ManagerServersView extends StatelessWidget {
   const ManagerServersView({super.key});
 
-  showPublicServerActions(BuildContext context, ServerListSettingsController controller, Server server) {
+  showPublicServerActions(BuildContext context,
+      ServerListSettingsController controller, Server server) {
     var locals = AppLocalizations.of(context)!;
     showModalBottomSheet<void>(
         context: context,
@@ -54,14 +55,16 @@ class ManagerServersView extends StatelessWidget {
         });
   }
 
-  saveServer(BuildContext context, ServerListSettingsController controller) async {
+  saveServer(
+      BuildContext context, ServerListSettingsController controller) async {
     var locals = AppLocalizations.of(context)!;
 
     try {
       await controller.saveServer();
       Navigator.pop(context);
     } catch (err) {
-      await showAlertDialog(context, 'Error', [Text(locals.invalidInvidiousServer)]);
+      await showAlertDialog(
+          context, 'Error', [Text(locals.invalidInvidiousServer)]);
     }
   }
 
@@ -69,7 +72,8 @@ class ManagerServersView extends StatelessWidget {
     var locals = AppLocalizations.of(context)!;
     showDialog<String>(
         context: context,
-        builder: (BuildContext context) => GetBuilder<ServerListSettingsController>(
+        builder: (BuildContext context) =>
+            GetBuilder<ServerListSettingsController>(
               builder: (controller) => Dialog(
                 child: SizedBox(
                   width: 400,
@@ -101,7 +105,8 @@ class ManagerServersView extends StatelessWidget {
                                   await controller.saveServer();
                                   Navigator.pop(context);
                                 } catch (err) {
-                                  await showAlertDialog(context, 'Error', [Text(locals.invalidInvidiousServer)]);
+                                  await showAlertDialog(context, 'Error',
+                                      [Text(locals.invalidInvidiousServer)]);
                                 }
                               },
                               child: Text(locals.add),
@@ -117,13 +122,12 @@ class ManagerServersView extends StatelessWidget {
   }
 
   openServer(BuildContext context, Server s) {
-    navigatorKey.currentState?.push(
-        MaterialPageRoute(
-          settings: ROUTE_SETTINGS_MANAGE_ONE_SERVER,
-          builder: (context) => ManageSingleServer(
-            server: s,
-          ),
-        ));
+    navigatorKey.currentState?.push(MaterialPageRoute(
+      settings: ROUTE_SETTINGS_MANAGE_ONE_SERVER,
+      builder: (context) => ManageSingleServer(
+        server: s,
+      ),
+    ));
   }
 
   @override
@@ -135,7 +139,10 @@ class ManagerServersView extends StatelessWidget {
     return GetBuilder<ServerListSettingsController>(
       init: ServerListSettingsController(),
       builder: (_) {
-        var filteredPublicServers = _.publicServers.where((s) => _.dbServers.indexWhere((element) => element.url == s.url) == -1).toList();
+        var filteredPublicServers = _.publicServers
+            .where((s) =>
+                _.dbServers.indexWhere((element) => element.url == s.url) == -1)
+            .toList();
         return Stack(
           children: [
             SettingsList(
@@ -153,13 +160,17 @@ class ManagerServersView extends StatelessWidget {
                                       padding: const EdgeInsets.all(8.0),
                                       child: Icon(
                                         Icons.done,
-                                        color: s.inUse ? colorScheme.primary : colorScheme.secondaryContainer,
+                                        color: s.inUse
+                                            ? colorScheme.primary
+                                            : colorScheme.secondaryContainer,
                                       ),
                                     ),
                                   ),
                                   title: Text(s.url),
-                                  value: Text('${_.isLoggedInToServer(s.url) ? '${locals.loggedIn}, ' : ''} ${locals.tapToManage}'),
-                                  onPressed: (context) => openServer(context, s),
+                                  value: Text(
+                                      '${_.isLoggedInToServer(s.url) ? '${locals.loggedIn}, ' : ''} ${locals.tapToManage}'),
+                                  onPressed: (context) =>
+                                      openServer(context, s),
                                 ))
                             .toList()
                         : [
@@ -189,7 +200,9 @@ class ManagerServersView extends StatelessWidget {
                                       width: 15,
                                       child: CircularProgressIndicator(
                                         strokeWidth: 2,
-                                        value: _.publicServerProgress > 0 ? _.publicServerProgress : null,
+                                        value: _.publicServerProgress > 0
+                                            ? _.publicServerProgress
+                                            : null,
                                       )),
                                 )
                               ]
@@ -199,14 +212,33 @@ class ManagerServersView extends StatelessWidget {
                                       title: Row(
                                         children: [
                                           Expanded(child: Text('${s.url} ')),
-                                          Text((s.ping != null && s.ping!.compareTo(const Duration(seconds: pingTimeout)) == -1) ? '${s.ping?.inMilliseconds}ms' : '>${pingTimeout}s',
-                                              style: TextStyle(fontSize: 15, color: colorScheme.secondary))
+                                          Text(
+                                              (s.ping != null &&
+                                                      s.ping!.compareTo(
+                                                              const Duration(
+                                                                  seconds:
+                                                                      pingTimeout)) ==
+                                                          -1)
+                                                  ? '${s.ping?.inMilliseconds}ms'
+                                                  : '>${pingTimeout}s',
+                                              style: TextStyle(
+                                                  fontSize: 15,
+                                                  color: colorScheme.secondary))
                                         ],
                                       ),
                                       value: Row(
-                                        children: [Visibility(visible: s.flag != null && s.region != null, child: Text('${s.flag} - ${s.region} - ')), Text(locals.tapToAddServer)],
+                                        children: [
+                                          Visibility(
+                                              visible: s.flag != null &&
+                                                  s.region != null,
+                                              child: Text(
+                                                  '${s.flag} - ${s.region} - ')),
+                                          Text(locals.tapToAddServer)
+                                        ],
                                       ),
-                                      onPressed: (context) => showPublicServerActions(context, _, s),
+                                      onPressed: (context) =>
+                                          showPublicServerActions(
+                                              context, _, s),
                                     ))
                                 .toList()),
               ],

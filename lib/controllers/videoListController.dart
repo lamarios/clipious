@@ -15,7 +15,8 @@ class VideoListController extends ItemListController<VideoInList> {
   static const String popularTag = 'video-list-popular';
   static const String trendingTag = 'video-list-trending';
 
-  VideoListController({required PaginatedList<VideoInList> videoList}) : super(itemList: videoList) {}
+  VideoListController({required PaginatedList<VideoInList> videoList})
+      : super(itemList: videoList) {}
 
   static VideoListController? to(String? tags) => safeGet(tag: tags);
 
@@ -36,7 +37,8 @@ class ItemListController<T> extends GetxController {
   static ItemListController? to(String? tags) => safeGet(tag: tags);
 
   PaginatedList<T> itemList;
-  RefreshController refreshController = RefreshController(initialRefresh: false);
+  RefreshController refreshController =
+      RefreshController(initialRefresh: false);
   List<T> items = [];
   bool loading = true;
   Map<String, Image> imageCache = {};
@@ -61,8 +63,10 @@ class ItemListController<T> extends GetxController {
 
   onScrollEvent() {
     if (scrollController.hasClients) {
-      if (scrollController.position.maxScrollExtent * 0.9 < scrollController.offset) {
-        EasyDebounce.debounce('loading-more-videos', const Duration(milliseconds: 250), getMoreVideos);
+      if (scrollController.position.maxScrollExtent * 0.9 <
+          scrollController.offset) {
+        EasyDebounce.debounce('loading-more-videos',
+            const Duration(milliseconds: 250), getMoreVideos);
       }
     }
   }

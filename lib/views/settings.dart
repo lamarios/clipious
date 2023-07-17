@@ -29,22 +29,33 @@ class Settings extends StatelessWidget {
   const Settings({super.key});
 
   manageServers(BuildContext context) {
-    navigatorKey.currentState?.push(MaterialPageRoute(settings: ROUTE_SETTINGS_MANAGE_SERVERS, builder: (context) => const ManageServers()));
+    navigatorKey.currentState?.push(MaterialPageRoute(
+        settings: ROUTE_SETTINGS_MANAGE_SERVERS,
+        builder: (context) => const ManageServers()));
   }
 
   openSponsorBlockSettings(BuildContext context) {
-    navigatorKey.currentState?.push(MaterialPageRoute(settings: ROUTE_SETTINGS_SPONSOR_BLOCK, builder: (context) => const SponsorBlockSettings()));
+    navigatorKey.currentState?.push(MaterialPageRoute(
+        settings: ROUTE_SETTINGS_SPONSOR_BLOCK,
+        builder: (context) => const SponsorBlockSettings()));
   }
 
   openVideoFilterSettings(BuildContext context) {
-    navigatorKey.currentState?.push(MaterialPageRoute(settings: ROUTE_SETTINGS_VIDEO_FILTERS, builder: (context) => const VideoFilterSettings()));
+    navigatorKey.currentState?.push(MaterialPageRoute(
+        settings: ROUTE_SETTINGS_VIDEO_FILTERS,
+        builder: (context) => const VideoFilterSettings()));
   }
+
   openSearchHistorySettings(BuildContext context) {
-    navigatorKey.currentState?.push(MaterialPageRoute(settings: ROUTE_SETTINGS_SEARCH_HISTORY, builder: (context) => const SearchHistorySettings()));
+    navigatorKey.currentState?.push(MaterialPageRoute(
+        settings: ROUTE_SETTINGS_SEARCH_HISTORY,
+        builder: (context) => const SearchHistorySettings()));
   }
 
   openAppLogs(BuildContext context) {
-    navigatorKey.currentState?.push(MaterialPageRoute(settings: ROUTE_SETTINGS_SEARCH_HISTORY, builder: (context) => const AppLogs()));
+    navigatorKey.currentState?.push(MaterialPageRoute(
+        settings: ROUTE_SETTINGS_SEARCH_HISTORY,
+        builder: (context) => const AppLogs()));
   }
 
   searchCountry(BuildContext context, SettingsController controller) {
@@ -77,16 +88,22 @@ class Settings extends StatelessWidget {
 
   showSelectLanguage(BuildContext context, SettingsController controller) {
     var localsList = AppLocalizations.supportedLocales;
-    var localsStrings = localsList.map((e) => e.nativeDisplayLanguageScript ?? '').toList();
+    var localsStrings =
+        localsList.map((e) => e.nativeDisplayLanguageScript ?? '').toList();
     var locals = AppLocalizations.of(context)!;
 
     List<String>? localeString = controller.locale?.split('_');
-    Locale? selected = localeString != null ? Locale.fromSubtags(languageCode: localeString[0], scriptCode: localeString.length >= 2 ? localeString[1] : null) : null;
+    Locale? selected = localeString != null
+        ? Locale.fromSubtags(
+            languageCode: localeString[0],
+            scriptCode: localeString.length >= 2 ? localeString[1] : null)
+        : null;
 
     SelectDialog.showModal<String>(
       context,
       label: locals.appLanguage,
-      selectedValue: selected?.nativeDisplayLanguageScript ?? locals.followSystem,
+      selectedValue:
+          selected?.nativeDisplayLanguageScript ?? locals.followSystem,
       showSearchBox: false,
       items: [locals.followSystem, ...localsStrings],
       onChange: (String selected) {
@@ -101,7 +118,12 @@ class Settings extends StatelessWidget {
 
   List<String> getCategories(BuildContext context) {
     var locals = AppLocalizations.of(context)!;
-    return [locals.popular, locals.trending, locals.subscriptions, locals.playlists];
+    return [
+      locals.popular,
+      locals.trending,
+      locals.subscriptions,
+      locals.playlists
+    ];
   }
 
   selectTheme(BuildContext context, SettingsController _) {
@@ -165,7 +187,8 @@ class Settings extends StatelessWidget {
                   ),
                   SettingsTile(
                     title: Text(locals.appLanguage),
-                    value: Text(_.getLocaleDisplayName() ?? locals.followSystem),
+                    value:
+                        Text(_.getLocaleDisplayName() ?? locals.followSystem),
                     onPressed: (context) => showSelectLanguage(context, _),
                   ),
                   SettingsTile.switchTile(
@@ -181,7 +204,8 @@ class Settings extends StatelessWidget {
                   ),
                   SettingsTile.navigation(
                     title: Text(locals.videoFilters),
-                    description: Text(locals.videoFiltersSettingTileDescriptions),
+                    description:
+                        Text(locals.videoFiltersSettingTileDescriptions),
                     onPressed: openVideoFilterSettings,
                   ),
                 ],
@@ -189,7 +213,8 @@ class Settings extends StatelessWidget {
               SettingsSection(title: Text(locals.servers), tiles: [
                 SettingsTile.navigation(
                   title: Text(locals.manageServers),
-                  description: Text(locals.currentServer(db.getCurrentlySelectedServer().url)),
+                  description: Text(locals
+                      .currentServer(db.getCurrentlySelectedServer().url)),
                   onPressed: manageServers,
                 ),
                 SettingsTile.switchTile(
@@ -224,9 +249,14 @@ class Settings extends StatelessWidget {
                   trailing: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      IconButton(onPressed: () => _.changeSubtitleSize(increase: false), icon: const Icon(Icons.remove)),
+                      IconButton(
+                          onPressed: () =>
+                              _.changeSubtitleSize(increase: false),
+                          icon: const Icon(Icons.remove)),
                       Text(_.subtitleSize.floor().toString()),
-                      IconButton(onPressed: () => _.changeSubtitleSize(increase: true), icon: const Icon(Icons.add)),
+                      IconButton(
+                          onPressed: () => _.changeSubtitleSize(increase: true),
+                          icon: const Icon(Icons.add)),
                     ],
                   ),
                 ),
@@ -251,7 +281,8 @@ class Settings extends StatelessWidget {
                   initialValue: _.forceLandscapeFullScreen,
                   onToggle: _.toggleForceLandscapeFullScreen,
                   title: Text(locals.lockFullScreenToLandscape),
-                  description: Text(locals.lockFullScreenToLandscapeDescription),
+                  description:
+                      Text(locals.lockFullScreenToLandscapeDescription),
                 ),
               ]),
               SettingsSection(
@@ -277,14 +308,19 @@ class Settings extends StatelessWidget {
                 ],
               ),
               SettingsSection(title: (Text(locals.about)), tiles: [
-                SettingsTile(title: const Center(child: SizedBox(height: 150, width: 150, child: AppIconImage()))),
+                SettingsTile(
+                    title: const Center(
+                        child: SizedBox(
+                            height: 150, width: 150, child: AppIconImage()))),
                 SettingsTile(
                   title: Text('${locals.name}: ${_.packageInfo.appName}'),
-                  description: Text('${locals.package}: ${_.packageInfo.packageName}'),
+                  description:
+                      Text('${locals.package}: ${_.packageInfo.packageName}'),
                 ),
                 SettingsTile(
                   title: Text('${locals.version}: ${_.packageInfo.version}'),
-                  description: Text('${locals.build}: ${_.packageInfo.buildNumber}'),
+                  description:
+                      Text('${locals.build}: ${_.packageInfo.buildNumber}'),
                 ),
                 SettingsTile(
                   title: Text(locals.appLogs),

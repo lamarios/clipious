@@ -23,7 +23,11 @@ class PlaylistItem extends StatelessWidget {
   final bool canDeleteVideos;
   final bool isTv;
 
-  const PlaylistItem({super.key, required this.playlist, required this.canDeleteVideos, this.isTv = false});
+  const PlaylistItem(
+      {super.key,
+      required this.playlist,
+      required this.canDeleteVideos,
+      this.isTv = false});
 
   openPlayList(BuildContext context) {
     navigatorKey.currentState?.push(MaterialPageRoute(
@@ -36,7 +40,8 @@ class PlaylistItem extends StatelessWidget {
 
   openTvPlaylist(BuildContext context) {
     Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) => TvPlaylistView(playlist: playlist, canDeleteVideos: false),
+      builder: (context) =>
+          TvPlaylistView(playlist: playlist, canDeleteVideos: false),
     ));
   }
 
@@ -50,8 +55,10 @@ class PlaylistItem extends StatelessWidget {
       global: false,
       builder: (_) {
         List<Widget> thumbs = [];
-        List<VideoInList> videosToUse = _.videos.isNotEmpty ? _.videos : playlist.videos;
-        videosToUse = videosToUse.where((element) => !element.filtered).toList();
+        List<VideoInList> videosToUse =
+            _.videos.isNotEmpty ? _.videos : playlist.videos;
+        videosToUse =
+            videosToUse.where((element) => !element.filtered).toList();
 
         for (int i = 0; i < 3; i++) {
           // for (VideoInList video in playlist.videos) {
@@ -66,12 +73,22 @@ class PlaylistItem extends StatelessWidget {
                   opacity: 1 - (0.3 * i),
                   child: videosToUse.length > i
                       ? VideoThumbnailView(
-                          cacheKey: 'v-${isTv ? 'best' : 'worst'}/${videosToUse[i].videoId}',
+                          cacheKey:
+                              'v-${isTv ? 'best' : 'worst'}/${videosToUse[i].videoId}',
                           videoId: videosToUse[i].videoId,
-                          thumbnailUrl: (isTv ? ImageObject.getBestThumbnail(videosToUse[i].videoThumbnails)?.url : ImageObject.getWorstThumbnail(videosToUse[i].videoThumbnails)?.url) ?? '',
+                          thumbnailUrl: (isTv
+                                  ? ImageObject.getBestThumbnail(
+                                          videosToUse[i].videoThumbnails)
+                                      ?.url
+                                  : ImageObject.getWorstThumbnail(
+                                          videosToUse[i].videoThumbnails)
+                                      ?.url) ??
+                              '',
                         )
                       : Container(
-                          decoration: BoxDecoration(color: colors.secondaryContainer, borderRadius: BorderRadius.circular(10)),
+                          decoration: BoxDecoration(
+                              color: colors.secondaryContainer,
+                              borderRadius: BorderRadius.circular(10)),
                         ),
                 ),
               ),
@@ -83,10 +100,11 @@ class PlaylistItem extends StatelessWidget {
 
         if (isTv) {
           return Focus(
-            onKeyEvent: (node, event) => onTvSelect(event, context, (_) => openTvPlaylist(context)),
+            onKeyEvent: (node, event) =>
+                onTvSelect(event, context, (_) => openTvPlaylist(context)),
             autofocus: false,
             child: AspectRatio(
-              aspectRatio: 16/13,
+              aspectRatio: 16 / 13,
               child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Builder(builder: (ctx) {
@@ -100,7 +118,9 @@ class PlaylistItem extends StatelessWidget {
                           child: AnimatedContainer(
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(15),
-                              color: hasFocus ? colors.primaryContainer : colors.background,
+                              color: hasFocus
+                                  ? colors.primaryContainer
+                                  : colors.background,
                             ),
                             duration: animationDuration,
                             child: Padding(
@@ -120,9 +140,14 @@ class PlaylistItem extends StatelessWidget {
                                       child: Text(
                                     playlist.title,
                                     overflow: TextOverflow.ellipsis,
-                                    style: TextStyle(color: colors.primary, fontSize: 20.0),
+                                    style: TextStyle(
+                                        color: colors.primary, fontSize: 20.0),
                                   )),
-                                  Padding(padding: const EdgeInsets.only(bottom: 8.0), child: Text(locals.nVideos(playlist.videoCount))),
+                                  Padding(
+                                      padding:
+                                          const EdgeInsets.only(bottom: 8.0),
+                                      child: Text(
+                                          locals.nVideos(playlist.videoCount))),
                                 ],
                               ),
                             ),

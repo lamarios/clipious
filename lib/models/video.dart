@@ -81,7 +81,8 @@ class Video extends BaseVideo {
       String? authorId,
       this.captions,
       this.recommendedVideos)
-      : super(title, videoId, lengthSeconds, author, authorId, authorUrl, videoThumbnails);
+      : super(title, videoId, lengthSeconds, author, authorId, authorUrl,
+            videoThumbnails);
 
   factory Video.fromJson(Map<String, dynamic> json) => _$VideoFromJson(json);
 
@@ -89,10 +90,10 @@ class Video extends BaseVideo {
 
   ImageObject? getBestThumbnail() {
     if (videoThumbnails.isNotEmpty) {
-      return videoThumbnails.firstWhere((element) => element.quality == 'maxres');
+      return videoThumbnails
+          .firstWhere((element) => element.quality == 'maxres');
     } else {
       return null;
     }
   }
-
 }

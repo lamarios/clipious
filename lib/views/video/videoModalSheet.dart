@@ -24,7 +24,7 @@ class VideoModalSheet extends StatelessWidget {
     AddToPlaylist.showAddToPlaylistDialog(context, video.videoId);
   }
 
-  void playNext(BuildContext context){
+  void playNext(BuildContext context) {
     var locals = AppLocalizations.of(context)!;
     Navigator.of(context).pop();
     MiniPlayerController.to()?.playVideoNext(video);
@@ -48,12 +48,22 @@ class VideoModalSheet extends StatelessWidget {
             padding: const EdgeInsets.only(right: 16.0),
             child: Column(
               mainAxisSize: MainAxisSize.min,
-              children: [IconButton.filledTonal(onPressed: () => addToPlaylist(context), icon: const Icon(Icons.playlist_add)), Text(locals.addToPlaylist)],
+              children: [
+                IconButton.filledTonal(
+                    onPressed: () => addToPlaylist(context),
+                    icon: const Icon(Icons.playlist_add)),
+                Text(locals.addToPlaylist)
+              ],
             ),
           ),
           Column(
             mainAxisSize: MainAxisSize.min,
-            children: [IconButton.filledTonal(onPressed: () => playNext(context), icon: const Icon(Icons.play_arrow)), Text(locals.playNext)],
+            children: [
+              IconButton.filledTonal(
+                  onPressed: () => playNext(context),
+                  icon: const Icon(Icons.play_arrow)),
+              Text(locals.playNext)
+            ],
           )
         ],
       ),

@@ -16,16 +16,22 @@ class AddToPlaylistController extends GetxController {
   AddToPlaylistController(this.videoId);
 
   bool videoInPlaylist(String playlistId) {
-    Playlist? pl = playlists.firstWhereOrNull((pl) => pl.playlistId == playlistId);
+    Playlist? pl =
+        playlists.firstWhereOrNull((pl) => pl.playlistId == playlistId);
 
-    return (pl?.videos.indexWhere((element) => element.videoId == videoId) ?? -1) >= 0;
+    return (pl?.videos.indexWhere((element) => element.videoId == videoId) ??
+            -1) >=
+        0;
   }
 
   addToPlaylist(String playlistId) async {
     await service.addVideoToPlaylist(playlistId, videoId);
 
-    AddToPlaylistButtonController.to(tag: AddToPlaylistButtonController.tags(videoId))?.countPlaylistsForVideo();
-    VideoLikeButtonController.to(tag: VideoLikeButtonController.tags(videoId))?.checkVideoLikeStatus();
+    AddToPlaylistButtonController.to(
+            tag: AddToPlaylistButtonController.tags(videoId))
+        ?.countPlaylistsForVideo();
+    VideoLikeButtonController.to(tag: VideoLikeButtonController.tags(videoId))
+        ?.checkVideoLikeStatus();
   }
 
   @override

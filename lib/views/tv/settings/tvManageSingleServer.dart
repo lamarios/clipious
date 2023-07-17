@@ -13,9 +13,11 @@ import '../tvTextField.dart';
 class TvManageSingleServer extends StatelessWidget {
   final Server server;
 
-  const TvManageSingleServer({Key? key, required this.server}) : super(key: key);
+  const TvManageSingleServer({Key? key, required this.server})
+      : super(key: key);
 
-  void showLogInWithCookiesDialog(BuildContext context, ServerSettingsController controller) async {
+  void showLogInWithCookiesDialog(
+      BuildContext context, ServerSettingsController controller) async {
     var locals = AppLocalizations.of(context)!;
     TextEditingController userController = TextEditingController();
     TextEditingController passwordController = TextEditingController();
@@ -31,25 +33,42 @@ class TvManageSingleServer extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: TvTextField(
-                        leading: Icon(Icons.person, color: colors.secondary,),
+                        leading: Icon(
+                          Icons.person,
+                          color: colors.secondary,
+                        ),
                         autofocus: true,
                         focusNode: focusNode,
                         textInputAction: TextInputAction.next,
                         controller: userController,
                         autocorrect: false,
-                        autofillHints: const [AutofillHints.username, AutofillHints.email],
-                        decoration: InputDecoration(label: Text(locals.username, style: TextStyle(color: colors.secondary),))),
+                        autofillHints: const [
+                          AutofillHints.username,
+                          AutofillHints.email
+                        ],
+                        decoration: InputDecoration(
+                            label: Text(
+                          locals.username,
+                          style: TextStyle(color: colors.secondary),
+                        ))),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: TvTextField(
-                      leading: Icon(Icons.password, color: colors.secondary,),
+                      leading: Icon(
+                        Icons.password,
+                        color: colors.secondary,
+                      ),
                       obscureText: true,
                       textInputAction: TextInputAction.next,
                       autocorrect: false,
                       controller: passwordController,
                       autofillHints: const [AutofillHints.password],
-                      decoration: InputDecoration(label: Text(locals.password, style: TextStyle(color: colors.secondary),)),
+                      decoration: InputDecoration(
+                          label: Text(
+                        locals.password,
+                        style: TextStyle(color: colors.secondary),
+                      )),
                     ),
                   ),
                 ],
@@ -61,14 +80,16 @@ class TvManageSingleServer extends StatelessWidget {
               Navigator.of(context).pop();
             },
             child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
+              padding:
+                  const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
               child: Text(locals.cancel),
             ),
           ),
           TvButton(
             onPressed: (context) async {
               try {
-                await controller.logInWithCookie(userController.text, passwordController.text);
+                await controller.logInWithCookie(
+                    userController.text, passwordController.text);
                 Navigator.of(context).pop();
               } catch (err) {
                 showTvAlertdialog(context, locals.error, [
@@ -81,7 +102,8 @@ class TvManageSingleServer extends StatelessWidget {
               }
             },
             child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
+              padding:
+                  const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
               child: Text(locals.ok),
             ),
           ),
@@ -164,7 +186,9 @@ class TvManageSingleServer extends StatelessWidget {
             builder: (_) {
               AppLocalizations locals = AppLocalizations.of(context)!;
               Server server = _.server;
-              bool isLoggedIn = (server.authToken != null && server.authToken!.isNotEmpty) || (server.sidCookie != null && server.sidCookie!.isNotEmpty);
+              bool isLoggedIn = (server.authToken != null &&
+                      server.authToken!.isNotEmpty) ||
+                  (server.sidCookie != null && server.sidCookie!.isNotEmpty);
 
               return ListView(
                 children: [
@@ -174,13 +198,16 @@ class TvManageSingleServer extends StatelessWidget {
                     title: locals.useThisServer,
                     onSelected: (context) => _.useServer(true),
                     autofocus: true,
-                    trailing: Switch(onChanged: server.inUse ? null : (value) {}, value: server.inUse),
+                    trailing: Switch(
+                        onChanged: server.inUse ? null : (value) {},
+                        value: server.inUse),
                   ),
                   SettingsTitle(title: locals.authentication),
                   SettingsTile(
                     title: locals.cookieLogin,
                     enabled: !isLoggedIn,
-                    onSelected: (context) => showLogInWithCookiesDialog(context, _),
+                    onSelected: (context) =>
+                        showLogInWithCookiesDialog(context, _),
                   ),
                   SettingsTile(
                     title: locals.logout,

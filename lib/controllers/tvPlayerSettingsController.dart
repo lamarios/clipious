@@ -18,16 +18,55 @@ class TvPlayerSettingsController extends GetxController {
   Tabs selected = Tabs.video;
   bool useDash = db.getSettings(USE_DASH)?.value == 'true';
 
-  List<String> get videoTrackNames => useDash || (PlayerController.to()?.video.liveNow ?? false)
-      ? PlayerController.to()?.videoController?.betterPlayerAsmsTracks.map((e) => '${e.height}p').toSet().toList() ?? []
-      : PlayerController.to()?.videoController?.betterPlayerDataSource?.resolutions?.keys.toList() ?? [];
+  List<String> get videoTrackNames =>
+      useDash || (PlayerController.to()?.video.liveNow ?? false)
+          ? PlayerController.to()
+                  ?.videoController
+                  ?.betterPlayerAsmsTracks
+                  .map((e) => '${e.height}p')
+                  .toSet()
+                  .toList() ??
+              []
+          : PlayerController.to()
+                  ?.videoController
+                  ?.betterPlayerDataSource
+                  ?.resolutions
+                  ?.keys
+                  .toList() ??
+              [];
 
-  List<String> get audioTrackNames => useDash ? PlayerController.to()?.videoController?.betterPlayerAsmsAudioTracks?.map((e) => '${e.label}').toList() ?? [] : [];
+  List<String> get audioTrackNames => useDash
+      ? PlayerController.to()
+              ?.videoController
+              ?.betterPlayerAsmsAudioTracks
+              ?.map((e) => '${e.label}')
+              .toList() ??
+          []
+      : [];
 
-  List<String> get availableCaptions => PlayerController.to()?.videoController?.betterPlayerSubtitlesSourceList.map((e) => '${e.name}').toList() ?? [];
-  final List<String> playbackSpeeds = ['0.5x', '0.75x', '1x', '1.25x', '1.5x', '1.75x', '2x', '2.25x', '2.5x', '2.75x', '3x'];
+  List<String> get availableCaptions =>
+      PlayerController.to()
+          ?.videoController
+          ?.betterPlayerSubtitlesSourceList
+          .map((e) => '${e.name}')
+          .toList() ??
+      [];
+  final List<String> playbackSpeeds = [
+    '0.5x',
+    '0.75x',
+    '1x',
+    '1.25x',
+    '1.5x',
+    '1.75x',
+    '2x',
+    '2.25x',
+    '2.5x',
+    '2.75x',
+    '3x'
+  ];
 
-  BetterPlayerController? get videoController => PlayerController.to()?.videoController;
+  BetterPlayerController? get videoController =>
+      PlayerController.to()?.videoController;
 
   videoButtonFocusChange(bool focus) {
     print('Focus changed $focus');
@@ -62,14 +101,16 @@ class TvPlayerSettingsController extends GetxController {
     log.fine('Video quality selected $selected');
 
     if (useDash) {
-      BetterPlayerAsmsTrack? track = videoController?.betterPlayerAsmsTracks.firstWhere((element) => '${element.height}p' == selected);
+      BetterPlayerAsmsTrack? track = videoController?.betterPlayerAsmsTracks
+          .firstWhere((element) => '${element.height}p' == selected);
 
       if (track != null) {
         log.fine('Changing video track to $selected');
         videoController?.setTrack(track);
       }
     } else {
-      String? url = videoController?.betterPlayerDataSource?.resolutions?[selected];
+      String? url =
+          videoController?.betterPlayerDataSource?.resolutions?[selected];
       if (url != null) {
         videoController?.setResolution(url);
       }
@@ -79,7 +120,9 @@ class TvPlayerSettingsController extends GetxController {
 
   changeChangeAudioTrack(String selected) {
     log.fine('Audio quality selected $selected');
-    BetterPlayerAsmsAudioTrack? track = videoController?.betterPlayerAsmsAudioTracks?.firstWhere((e) => '${e.label}' == selected);
+    BetterPlayerAsmsAudioTrack? track = videoController
+        ?.betterPlayerAsmsAudioTracks
+        ?.firstWhere((e) => '${e.label}' == selected);
 
     if (track != null) {
       log.fine('Changing audio track to $selected');
@@ -90,7 +133,9 @@ class TvPlayerSettingsController extends GetxController {
 
   changeSubtitles(String selected) {
     log.fine('Subtitles selected $selected');
-    BetterPlayerSubtitlesSource? track = videoController?.betterPlayerSubtitlesSourceList.firstWhere((e) => '${e.name}' == selected);
+    BetterPlayerSubtitlesSource? track = videoController
+        ?.betterPlayerSubtitlesSourceList
+        .firstWhere((e) => '${e.name}' == selected);
 
     db.saveSetting(SettingsValue(LAST_SUBTITLE, selected));
 

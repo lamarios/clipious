@@ -42,7 +42,7 @@ class ClipiousSearchController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    if(searchNow){
+    if (searchNow) {
       search(queryController.value.text);
     }
   }
@@ -72,8 +72,11 @@ class ClipiousSearchController extends GetxController {
   void getSuggestions() {
     showResults = false;
     update();
-    EasyDebounce.debounce('search-suggestions', const Duration(milliseconds: 500), () async {
-      suggestions = (await service.getSearchSuggestion(queryController.value.text)).suggestions;
+    EasyDebounce.debounce(
+        'search-suggestions', const Duration(milliseconds: 500), () async {
+      suggestions =
+          (await service.getSearchSuggestion(queryController.value.text))
+              .suggestions;
       update();
     });
   }
@@ -91,9 +94,12 @@ class ClipiousSearchController extends GetxController {
     update();
 
     List<SearchResults> results = await Future.wait([
-      service.search(queryController.value.text, type: SearchType.video, sortBy: sortBy),
-      service.search(queryController.value.text, type: SearchType.channel, sortBy: sortBy),
-      service.search(queryController.value.text, type: SearchType.playlist, sortBy: sortBy)
+      service.search(queryController.value.text,
+          type: SearchType.video, sortBy: sortBy),
+      service.search(queryController.value.text,
+          type: SearchType.channel, sortBy: sortBy),
+      service.search(queryController.value.text,
+          type: SearchType.playlist, sortBy: sortBy)
     ]);
 
     videos = results[0].videos;

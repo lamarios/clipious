@@ -36,14 +36,19 @@ class Search extends StatelessWidget {
         bottomNavigationBar: _.showResults
             ? NavigationBar(
                 backgroundColor: colorScheme.background,
-                labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
+                labelBehavior:
+                    NavigationDestinationLabelBehavior.onlyShowSelected,
                 elevation: 0,
                 selectedIndex: _.selectedIndex,
                 onDestinationSelected: _.selectIndex,
                 destinations: [
-                  NavigationDestination(icon: const Icon(Icons.play_arrow), label: locals.videos),
-                  NavigationDestination(icon: const Icon(Icons.people), label: locals.channels),
-                  NavigationDestination(icon: const Icon(Icons.playlist_play), label: locals.playlists),
+                  NavigationDestination(
+                      icon: const Icon(Icons.play_arrow), label: locals.videos),
+                  NavigationDestination(
+                      icon: const Icon(Icons.people), label: locals.channels),
+                  NavigationDestination(
+                      icon: const Icon(Icons.playlist_play),
+                      label: locals.playlists),
                 ],
               )
             : null,
@@ -55,7 +60,8 @@ class Search extends StatelessWidget {
             onSubmitted: _.search,
           ),
           actions: [
-            IconButton(onPressed: _.searchCleared, icon: const Icon(Icons.clear)),
+            IconButton(
+                onPressed: _.searchCleared, icon: const Icon(Icons.clear)),
           ],
         ),
         body: SafeArea(
@@ -68,7 +74,12 @@ class Search extends StatelessWidget {
                                 onTap: () => _.setSearchQuery(e),
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
-                                  child: Row(children: [const Icon(Icons.history), Padding(padding: const EdgeInsets.only(left: 8), child: Text(e))]),
+                                  child: Row(children: [
+                                    const Icon(Icons.history),
+                                    Padding(
+                                        padding: const EdgeInsets.only(left: 8),
+                                        child: Text(e))
+                                  ]),
                                 ),
                               ))
                           .toList()
@@ -124,38 +135,53 @@ class Search extends StatelessWidget {
                         child: [
                           _.videos.isNotEmpty
                               ? VideoList(
-                                  paginatedVideoList: SearchPaginatedList<VideoInList>(
-                                      type: SearchType.video, query: _.queryController.value.text, items: _.videos, getFromResults: (res) => res.videos, sortBy: _.sortBy),
+                                  paginatedVideoList:
+                                      SearchPaginatedList<VideoInList>(
+                                          type: SearchType.video,
+                                          query: _.queryController.value.text,
+                                          items: _.videos,
+                                          getFromResults: (res) => res.videos,
+                                          sortBy: _.sortBy),
                                 )
                               : Center(child: Text(locals.nVideos(0))),
                           _.channels.isNotEmpty
                               ? PaginatedListView<Channel>(
                                   paginatedList: SearchPaginatedList<Channel>(
-                                      type: SearchType.channel, query: _.queryController.value.text, items: _.channels, getFromResults: (res) => res.channels, sortBy: _.sortBy),
+                                      type: SearchType.channel,
+                                      query: _.queryController.value.text,
+                                      items: _.channels,
+                                      getFromResults: (res) => res.channels,
+                                      sortBy: _.sortBy),
                                   startItems: _.channels,
                                   itemBuilder: (e) => InkWell(
                                         onTap: () {
-                                          navigatorKey.currentState?.push(MaterialPageRoute(
-                                            builder: (context) => ChannelView(channelId: e.authorId),
+                                          navigatorKey.currentState
+                                              ?.push(MaterialPageRoute(
+                                            builder: (context) => ChannelView(
+                                                channelId: e.authorId),
                                           ));
                                         },
                                         child: Padding(
-                                          padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 20),
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 8.0, vertical: 20),
                                           child: Row(
                                             children: [
                                               Expanded(
                                                   child: Text(
                                                 e.author,
-                                                style: TextStyle(color: colorScheme.primary),
+                                                style: TextStyle(
+                                                    color: colorScheme.primary),
                                               )),
                                               const Padding(
-                                                padding: EdgeInsets.only(right: 8.0),
+                                                padding:
+                                                    EdgeInsets.only(right: 8.0),
                                                 child: Icon(
                                                   Icons.people,
                                                   size: 15,
                                                 ),
                                               ),
-                                              Text(compactCurrency.format(e.subCount)),
+                                              Text(compactCurrency
+                                                  .format(e.subCount)),
                                             ],
                                           ),
                                         ),
@@ -167,8 +193,15 @@ class Search extends StatelessWidget {
                               ? FractionallySizedBox(
                                   child: PlaylistList(
                                       tag: searchPlayListTag,
-                                      paginatedList: SearchPaginatedList<Playlist>(
-                                          type: SearchType.playlist, query: _.queryController.value.text, items: _.playlists, getFromResults: (res) => res.playlists, sortBy: _.sortBy),
+                                      paginatedList:
+                                          SearchPaginatedList<Playlist>(
+                                              type: SearchType.playlist,
+                                              query:
+                                                  _.queryController.value.text,
+                                              items: _.playlists,
+                                              getFromResults: (res) =>
+                                                  res.playlists,
+                                              sortBy: _.sortBy),
                                       canDeleteVideos: false),
                                 )
                               : Center(child: Text(locals.noPlaylists))

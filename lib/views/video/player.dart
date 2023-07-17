@@ -12,7 +12,12 @@ class VideoPlayer extends StatefulWidget {
   final bool? playNow;
   final bool? disableControls;
 
-  const VideoPlayer({super.key, required this.video, required this.miniPlayer, this.playNow, this.disableControls});
+  const VideoPlayer(
+      {super.key,
+      required this.video,
+      required this.miniPlayer,
+      this.playNow,
+      this.disableControls});
 
   @override
   State<VideoPlayer> createState() => VideoPlayerState();
@@ -62,9 +67,17 @@ class VideoPlayerState extends State<VideoPlayer> {
   Widget build(BuildContext context) {
     ColorScheme colorScheme = Theme.of(context).colorScheme;
     AppLocalizations locals = AppLocalizations.of(context)!;
-    Color overFlowTextColor = Theme.of(context).textTheme.bodyMedium?.color ?? Colors.black;
+    Color overFlowTextColor =
+        Theme.of(context).textTheme.bodyMedium?.color ?? Colors.black;
     return GetBuilder<PlayerController>(
-      init: PlayerController(locals: locals, overFlowTextColor: overFlowTextColor, colors: colorScheme, key: _betterPlayerKey, miniPlayer: widget.miniPlayer, video: widget.video, disableControls: widget.disableControls),
+      init: PlayerController(
+          locals: locals,
+          overFlowTextColor: overFlowTextColor,
+          colors: colorScheme,
+          key: _betterPlayerKey,
+          miniPlayer: widget.miniPlayer,
+          video: widget.video,
+          disableControls: widget.disableControls),
       builder: (_) => AspectRatio(
           aspectRatio: 16 / 9,
           child: _.videoController == null

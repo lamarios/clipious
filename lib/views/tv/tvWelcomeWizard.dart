@@ -32,7 +32,8 @@ class TvWelcomeWizard extends StatelessWidget {
                     ),
                     const Expanded(child: TvManageServersInner()),
                     TvButton(
-                      unfocusedColor: _.selected == null ? colors.background : null,
+                      unfocusedColor:
+                          _.selected == null ? colors.background : null,
                       onPressed: _.selected != null
                           ? (context) {
                               Navigator.of(context).push(MaterialPageRoute(
@@ -44,7 +45,10 @@ class TvWelcomeWizard extends StatelessWidget {
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
                           locals.startUsingClipious,
-                          style: textTheme.titleLarge!.copyWith(color: _.selected == null ? Colors.white.withOpacity(0.5) : Colors.white),
+                          style: textTheme.titleLarge!.copyWith(
+                              color: _.selected == null
+                                  ? Colors.white.withOpacity(0.5)
+                                  : Colors.white),
                         ),
                       ),
                     )
