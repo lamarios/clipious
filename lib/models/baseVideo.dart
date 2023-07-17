@@ -22,28 +22,28 @@ abstract class BaseVideo implements ShareLinks {
   BaseVideo(this.title, this.videoId, this.lengthSeconds, this.author, this.authorId, this.authorUrl, this.videoThumbnails);
 
   @override
-  String getInvidiousLink(Server server, bool isAddTimestamp) {
+  String getInvidiousLink(Server server, int? timestamp) {
     String link = '${server.url}/watch?v=$videoId';
 
-    if (isAddTimestamp) link += '&t=$lengthSeconds';
+    if (timestamp != null) link += '&t=$timestamp';
 
     return link;
   }
 
   @override
-  String getRedirectLink(bool isAddTimestamp) {
+  String getRedirectLink(int? timestamp) {
     String link = 'https://redirect.invidious.io/watch?v=$videoId';
 
-    if (isAddTimestamp) link += '&t=$lengthSeconds';
+    if (timestamp != null) link += '&t=$timestamp';
 
     return link;
   }
 
   @override
-  String getYoutubeLink(bool isAddTimestamp) {
+  String getYoutubeLink(int? timestamp) {
     String link = 'https://youtu.be/$videoId';
 
-    if (isAddTimestamp) link += '?t=$lengthSeconds';
+    if (timestamp != null) link += '?t=$timestamp';
 
     return link;
   }
