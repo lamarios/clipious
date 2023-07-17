@@ -18,12 +18,9 @@ class VideoController extends GetxController {
   Video? video;
   int dislikes = 0;
   bool loadingVideo = true;
-  bool autoplayOnLoad =
-      db.getSettings(PLAYER_AUTOPLAY_ON_LOAD)?.value == 'true';
-  bool playRecommendedNext =
-      db.getSettings(PLAY_RECOMMENDED_NEXT)?.value == 'true';
-  bool getDislikes =
-      db.getSettings(USE_RETURN_YOUTUBE_DISLIKE)?.value == 'true';
+  bool autoplayOnLoad = db.getSettings(PLAYER_AUTOPLAY_ON_LOAD)?.value == 'true';
+  bool playRecommendedNext = db.getSettings(PLAY_RECOMMENDED_NEXT)?.value == 'true';
+  bool getDislikes = db.getSettings(USE_RETURN_YOUTUBE_DISLIKE)?.value == 'true';
 
   int selectedIndex = 0;
   String videoId;
@@ -74,10 +71,7 @@ class VideoController extends GetxController {
   selectIndex(int index) {
     selectedIndex = index;
     update();
-    VideoInnerViewController.to(
-            tag: VideoInnerViewController.getControllerTags(
-                video?.videoId ?? ''))
-        ?.scrollUp();
+    VideoInnerViewController.to(tag: VideoInnerViewController.getControllerTags(video?.videoId ?? ''))?.scrollUp();
   }
 
   void playVideo() {

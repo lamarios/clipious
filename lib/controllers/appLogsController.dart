@@ -1,8 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
+
 import '../globals.dart';
-import '../main.dart';
 import '../models/db/appLog.dart';
 
 class AppLogsController extends GetxController {
@@ -28,8 +27,7 @@ class AppLogsController extends GetxController {
     selected.sort();
     String toClipboard = logs
         .where((element) => selected.contains(element.id))
-        .map((e) =>
-            '[${e.level}] [${e.logger}] - ${e.time} - ${e.message} ${e.stacktrace != null ? '\n${e.stacktrace}' : ''}')
+        .map((e) => '[${e.level}] [${e.logger}] - ${e.time} - ${e.message} ${e.stacktrace != null ? '\n${e.stacktrace}' : ''}')
         .toList()
         .reversed
         .join("\n");

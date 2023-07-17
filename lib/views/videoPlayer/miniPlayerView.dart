@@ -7,8 +7,7 @@ import '../../models/video.dart';
 
 class MiniPlayerView {
   @override
-  static List<Widget> build(
-      BuildContext context, MiniPlayerController controller) {
+  static List<Widget> build(BuildContext context, MiniPlayerController controller) {
     ColorScheme colors = Theme.of(context).colorScheme;
     Video? vid = controller.currentlyPlaying;
     return vid != null && controller.videos.isNotEmpty && controller.isMini

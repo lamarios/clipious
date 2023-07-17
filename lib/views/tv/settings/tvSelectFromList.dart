@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:invidious/views/tv/tvOverScan.dart';
 import 'package:invidious/views/tv/tvSettings.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TvSelectFromList extends StatelessWidget {
   final List<String> options;
@@ -9,13 +8,7 @@ class TvSelectFromList extends StatelessWidget {
   final String selected;
   final Function(String selected) onSelect;
 
-  const TvSelectFromList(
-      {Key? key,
-      required this.options,
-      required this.selected,
-      required this.onSelect,
-      required this.title})
-      : super(key: key);
+  const TvSelectFromList({Key? key, required this.options, required this.selected, required this.onSelect, required this.title}) : super(key: key);
 
   selectOption(BuildContext context, String s) {
     onSelect(s);

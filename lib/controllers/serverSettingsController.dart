@@ -41,8 +41,7 @@ class ServerSettingsController extends GetxController {
 
   Future<void> logInWithCookie(String username, String password) async {
     print('login with $username, $password');
-    String cookie =
-        await service.loginWithCookies(server.url, username, password);
+    String cookie = await service.loginWithCookies(server.url, username, password);
 
     server.sidCookie = cookie;
     db.upsertServer(server);

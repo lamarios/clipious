@@ -27,13 +27,11 @@ class VideoView extends StatelessWidget {
 
     var destinations = List.of(<Widget>[
       NavigationDestination(icon: const Icon(Icons.info), label: locals.info),
-      NavigationDestination(
-          icon: const Icon(Icons.chat_bubble), label: locals.comments),
+      NavigationDestination(icon: const Icon(Icons.chat_bubble), label: locals.comments),
     ], growable: true);
 
     if (show3Navigation) {
-      destinations.add(NavigationDestination(
-          icon: const Icon(Icons.schema), label: locals.recommended));
+      destinations.add(NavigationDestination(icon: const Icon(Icons.schema), label: locals.recommended));
     }
 
     return GetBuilder<VideoController>(
@@ -63,8 +61,7 @@ class VideoView extends StatelessWidget {
               ? null
               : NavigationBar(
                   backgroundColor: colorScheme.background,
-                  labelBehavior:
-                      NavigationDestinationLabelBehavior.onlyShowSelected,
+                  labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
                   elevation: 0,
                   onDestinationSelected: _.selectIndex,
                   selectedIndex: _.selectedIndex,
@@ -83,15 +80,12 @@ class VideoView extends StatelessWidget {
                     child: _.error.isNotEmpty
                         ? Container(
                             alignment: Alignment.center,
-                            child: Text(_.error == coulnotLoadVideos
-                                ? locals.couldntLoadVideo
-                                : _.error),
+                            child: Text(_.error == coulnotLoadVideos ? locals.couldntLoadVideo : _.error),
                           )
                         : _.loadingVideo
                             ? const CircularProgressIndicator()
                             : Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 8.0),
+                                padding: const EdgeInsets.symmetric(horizontal: 8.0),
                                 child: show3Navigation
                                     ? VideoInnerView(
                                         video: _.video!,

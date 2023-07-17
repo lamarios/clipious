@@ -2,20 +2,21 @@ import 'package:better_player/better_player.dart';
 import 'package:fbroadcast/fbroadcast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:invidious/controllers/settingsController.dart';
 import 'package:invidious/controllers/tvPlayerController.dart';
 import 'package:invidious/controllers/videoInListController.dart';
 import 'package:invidious/utils.dart';
 import 'package:logging/logging.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:wakelock/wakelock.dart';
+
+import '../../models/db/progress.dart' as dbProgress;
 import '../database.dart';
 import '../globals.dart';
 import '../main.dart';
 import '../models/db/settings.dart';
 import '../models/pair.dart';
-import '../../models/db/progress.dart' as dbProgress;
 import '../models/sponsorSegment.dart';
 import '../models/sponsorSegmentTypes.dart';
 import '../models/video.dart';
@@ -39,21 +40,13 @@ class PlayerController extends GetxController {
   final Color overFlowTextColor;
   final GlobalKey key;
 
-  PlayerController(
-      {required this.colors,
-      required this.overFlowTextColor,
-      required this.key,
-      required this.video,
-      required this.miniPlayer,
-      required this.locals,
-      this.disableControls});
+  PlayerController({required this.colors, required this.overFlowTextColor, required this.key, required this.video, required this.miniPlayer, required this.locals, this.disableControls});
 
   @override
   void onInit() {
     super.onInit();
     if (miniPlayer) {
-      FBroadcast.instance().register(BROADCAST_STOP_MINI_PLAYER,
-          (value, callback) {
+      FBroadcast.instance().register(BROADCAST_STOP_MINI_PLAYER, (value, callback) {
         disposeControllers();
       });
     } else {
@@ -75,8 +68,7 @@ class PlayerController extends GetxController {
 
   disposeControllers() {
     Wakelock.disable();
-    saveProgress(
-        videoController?.videoPlayerController?.value.position.inSeconds ?? 0);
+    saveProgress(videoController?.videoPlayerController?.value.position.inSeconds ?? 0);
     videoController?.removeEventsListener(onVideoListener);
     videoController?.dispose();
     videoController = null;
@@ -87,8 +79,7 @@ class PlayerController extends GetxController {
       int currentPosition = timeInSeconds;
       // saving progress
       int max = video.lengthSeconds;
-      var progress = dbProgress.Progress.named(
-          progress: currentPosition / max, videoId: video.videoId);
+      var progress = dbProgress.Progress.named(progress: currentPosition / max, videoId: video.videoId);
       db.saveProgress(progress);
 
       VideoInListController.to(progress.videoId)?.updateProgress();
@@ -98,8 +89,7 @@ class PlayerController extends GetxController {
   onVideoListener(BetterPlayerEvent event) {
     switch (event.betterPlayerEventType) {
       case BetterPlayerEventType.progress:
-        int currentPosition =
-            (event.parameters?['progress'] as Duration).inSeconds;
+        int currentPosition = (event.parameters?['progress'] as Duration).inSeconds;
         if (currentPosition > previousSponsorCheck + 1) {
           // saving progress
           saveProgress(currentPosition);
@@ -107,12 +97,9 @@ class PlayerController extends GetxController {
 
           if (sponsorSegments.isNotEmpty) {
             double positionInMs = currentPosition * 1000;
-            Pair<int> nextSegment = sponsorSegments.firstWhere(
-                (e) => e.first <= positionInMs && positionInMs <= e.last,
-                orElse: () => Pair<int>(-1, -1));
+            Pair<int> nextSegment = sponsorSegments.firstWhere((e) => e.first <= positionInMs && positionInMs <= e.last, orElse: () => Pair<int>(-1, -1));
             if (nextSegment.first != -1) {
-              videoController!
-                  .seekTo(Duration(milliseconds: nextSegment.last + 1000));
+              videoController!.seekTo(Duration(milliseconds: nextSegment.last + 1000));
               final ScaffoldMessengerState? scaffold = scaffoldKey.currentState;
               scaffold?.showSnackBar(SnackBar(
                 content: Text(locals.sponsorSkipped),
@@ -157,13 +144,11 @@ class PlayerController extends GetxController {
         broadcastEvent(event);
         break;
       case BetterPlayerEventType.changedSubtitles:
-        db.saveSetting(SettingsValue(LAST_SUBTITLE,
-            videoController?.betterPlayerSubtitlesSource?.name ?? ''));
+        db.saveSetting(SettingsValue(LAST_SUBTITLE, videoController?.betterPlayerSubtitlesSource?.name ?? ''));
         break;
       case BetterPlayerEventType.setSpeed:
         if (event.parameters?.containsKey("speed") ?? false) {
-          db.saveSetting(SettingsValue(
-              LAST_SPEED, event.parameters?["speed"].toString() ?? '1.0'));
+          db.saveSetting(SettingsValue(LAST_SPEED, event.parameters?["speed"].toString() ?? '1.0'));
         }
         break;
       default:
@@ -172,16 +157,13 @@ class PlayerController extends GetxController {
   }
 
   broadcastEvent(BetterPlayerEvent event) {
-    isTv
-        ? TvPlayerController.to()?.handleVideoEvent(event)
-        : MiniPlayerController.to()?.handleVideoEvent(event);
+    isTv ? TvPlayerController.to()?.handleVideoEvent(event) : MiniPlayerController.to()?.handleVideoEvent(event);
   }
 
   toggleDash() {
     log.fine('toggle dash');
     // saving progress before we reload new video format
-    saveProgress(
-        videoController?.videoPlayerController?.value.position.inSeconds ?? 0);
+    saveProgress(videoController?.videoPlayerController?.value.position.inSeconds ?? 0);
 
     disposeControllers();
 
@@ -193,8 +175,7 @@ class PlayerController extends GetxController {
 
   switchVideo(Video video) {
     videoController?.exitFullScreen();
-    MiniPlayerController.to()?.handleVideoEvent(
-        BetterPlayerEvent(BetterPlayerEventType.hideFullscreen));
+    MiniPlayerController.to()?.handleVideoEvent(BetterPlayerEvent(BetterPlayerEventType.hideFullscreen));
     disposeControllers();
     this.video = video;
     playVideo();
@@ -202,9 +183,7 @@ class PlayerController extends GetxController {
 
   togglePlaying() {
     if (videoController != null) {
-      (videoController?.isPlaying() ?? false)
-          ? videoController?.pause()
-          : videoController?.play();
+      (videoController?.isPlaying() ?? false) ? videoController?.pause() : videoController?.play();
       update();
     }
   }
@@ -235,8 +214,7 @@ class PlayerController extends GetxController {
             ? '${video.dashUrl}${service.useProxy() ? '?local=true' : ''}'
             : video.formatStreams[video.formatStreams.length - 1].url;
 
-    log.info(
-        'Playing url (dash ${useDash},  hasHls ? ${video.hlsUrl != null})  ${videoUrl}');
+    log.info('Playing url (dash ${useDash},  hasHls ? ${video.hlsUrl != null})  ${videoUrl}');
 
     BetterPlayerVideoFormat format = isHls
         ? BetterPlayerVideoFormat.hls
@@ -255,19 +233,13 @@ class PlayerController extends GetxController {
       lastSubtitle = db.getSettings(LAST_SUBTITLE)?.value ?? '';
     }
 
-    bool lockOrientation =
-        db.getSettings(LOCK_ORIENTATION_FULLSCREEN)?.value == 'true';
+    bool lockOrientation = db.getSettings(LOCK_ORIENTATION_FULLSCREEN)?.value == 'true';
 
-    BetterPlayerDataSource betterPlayerDataSource = BetterPlayerDataSource(
-        BetterPlayerDataSourceType.network, videoUrl,
+    BetterPlayerDataSource betterPlayerDataSource = BetterPlayerDataSource(BetterPlayerDataSourceType.network, videoUrl,
         videoFormat: format,
         liveStream: video.liveNow,
         subtitles: video.captions
-            .map((s) => BetterPlayerSubtitlesSource(
-                type: BetterPlayerSubtitlesSourceType.network,
-                urls: ['${baseUrl}${s.url}'],
-                name: s.label,
-                selectedByDefault: s.label == lastSubtitle))
+            .map((s) => BetterPlayerSubtitlesSource(type: BetterPlayerSubtitlesSourceType.network, urls: ['${baseUrl}${s.url}'], name: s.label, selectedByDefault: s.label == lastSubtitle))
             .toList(),
         resolutions: resolutions.isNotEmpty ? resolutions : null,
         // placeholder: VideoThumbnailView(videoId: video.videoId, thumbnailUrl: video.getBestThumbnail()?.url ?? ''),
@@ -283,18 +255,8 @@ class PlayerController extends GetxController {
 
     videoController = BetterPlayerController(
         BetterPlayerConfiguration(
-            deviceOrientationsOnFullScreen: [
-              DeviceOrientation.landscapeLeft,
-              DeviceOrientation.landscapeRight,
-              DeviceOrientation.portraitDown,
-              DeviceOrientation.portraitUp
-            ],
-            deviceOrientationsAfterFullScreen: [
-              DeviceOrientation.landscapeLeft,
-              DeviceOrientation.landscapeRight,
-              DeviceOrientation.portraitDown,
-              DeviceOrientation.portraitUp
-            ],
+            deviceOrientationsOnFullScreen: [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight, DeviceOrientation.portraitDown, DeviceOrientation.portraitUp],
+            deviceOrientationsAfterFullScreen: [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight, DeviceOrientation.portraitDown, DeviceOrientation.portraitUp],
             handleLifecycle: false,
             autoDetectFullscreenDeviceOrientation: lockOrientation,
             autoDetectFullscreenAspectRatio: true,
@@ -303,8 +265,7 @@ class PlayerController extends GetxController {
             allowedScreenSleep: false,
             fit: BoxFit.contain,
             subtitlesConfiguration: BetterPlayerSubtitlesConfiguration(
-              fontSize: double.parse(
-                  db.getSettings(SUBTITLE_SIZE)?.value ?? subtitleDefaultSize),
+              fontSize: double.parse(db.getSettings(SUBTITLE_SIZE)?.value ?? subtitleDefaultSize),
             ),
             controlsConfiguration: BetterPlayerControlsConfiguration(
                 showControls: !(disableControls ?? false),
@@ -312,14 +273,7 @@ class PlayerController extends GetxController {
                 overflowModalColor: colors.background,
                 overflowModalTextColor: overFlowTextColor,
                 overflowMenuIconsColor: overFlowTextColor,
-                overflowMenuCustomItems: [
-                  BetterPlayerOverflowMenuItem(
-                      useDash
-                          ? Icons.check_box_outlined
-                          : Icons.check_box_outline_blank,
-                      locals.useDash,
-                      toggleDash)
-                ])),
+                overflowMenuCustomItems: [BetterPlayerOverflowMenuItem(useDash ? Icons.check_box_outlined : Icons.check_box_outline_blank, locals.useDash, toggleDash)])),
         betterPlayerDataSource: betterPlayerDataSource);
     videoController!.addEventsListener(onVideoListener);
     videoController!.setBetterPlayerGlobalKey(key);
@@ -327,13 +281,10 @@ class PlayerController extends GetxController {
   }
 
   setSponsorBlock() async {
-    List<SponsorSegmentType> types = SponsorSegmentType.values
-        .where((e) => db.getSettings(e.settingsName())?.value == 'true')
-        .toList();
+    List<SponsorSegmentType> types = SponsorSegmentType.values.where((e) => db.getSettings(e.settingsName())?.value == 'true').toList();
 
     if (types.isNotEmpty) {
-      List<SponsorSegment> sponsorSegments =
-          await service.getSponsorSegments(video.videoId, types);
+      List<SponsorSegment> sponsorSegments = await service.getSponsorSegments(video.videoId, types);
       List<Pair<int>> segments = List.from(sponsorSegments.map((e) {
         Duration start = Duration(seconds: e.segment[0].floor());
         Duration end = Duration(seconds: e.segment[1].floor());

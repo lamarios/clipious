@@ -11,13 +11,7 @@ class CompactVideo extends StatelessWidget {
   bool? highlighted;
   List<Widget>? trailing;
 
-  CompactVideo(
-      {Key? key,
-      this.onTap,
-      required this.video,
-      this.trailing,
-      this.highlighted})
-      : super(key: key);
+  CompactVideo({Key? key, this.onTap, required this.video, this.trailing, this.highlighted}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,11 +19,7 @@ class CompactVideo extends StatelessWidget {
     return InkWell(
         onTap: onTap,
         child: AnimatedContainer(
-          decoration: BoxDecoration(
-              color: (highlighted ?? false)
-                  ? colors.secondaryContainer
-                  : colors.background,
-              borderRadius: BorderRadius.circular(10)),
+          decoration: BoxDecoration(color: (highlighted ?? false) ? colors.secondaryContainer : colors.background, borderRadius: BorderRadius.circular(10)),
           height: 70,
           duration: animationDuration,
           child: Padding(
@@ -40,21 +30,11 @@ class CompactVideo extends StatelessWidget {
                     ? AspectRatio(
                         aspectRatio: 16 / 9,
                         child: Container(
-                          decoration: BoxDecoration(
-                              color: colors.secondaryContainer,
-                              borderRadius: BorderRadius.circular(10)),
-                          child: Icon(Icons.visibility_off_outlined,
-                              color: colors.secondary.withOpacity(0.7),
-                              size: 15),
+                          decoration: BoxDecoration(color: colors.secondaryContainer, borderRadius: BorderRadius.circular(10)),
+                          child: Icon(Icons.visibility_off_outlined, color: colors.secondary.withOpacity(0.7), size: 15),
                         ),
                       )
-                    : VideoThumbnailView(
-                        cacheKey: 'v-worst/${video.videoId}',
-                        videoId: video.videoId,
-                        thumbnailUrl:
-                            ImageObject.getWorstThumbnail(video.videoThumbnails)
-                                    ?.url ??
-                                ''),
+                    : VideoThumbnailView(cacheKey: 'v-worst/${video.videoId}', videoId: video.videoId, thumbnailUrl: ImageObject.getWorstThumbnail(video.videoThumbnails)?.url ?? ''),
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -64,14 +44,11 @@ class CompactVideo extends StatelessWidget {
                       children: [
                         Text(
                           video.filtered ? '**********' : video.title,
-                          style: TextStyle(
-                              color: colors.primary,
-                              overflow: TextOverflow.ellipsis),
+                          style: TextStyle(color: colors.primary, overflow: TextOverflow.ellipsis),
                         ),
                         Text(
                           video.author ?? '',
-                          style:
-                              TextStyle(color: colors.secondary, fontSize: 10),
+                          style: TextStyle(color: colors.secondary, fontSize: 10),
                         )
                       ],
                     ),

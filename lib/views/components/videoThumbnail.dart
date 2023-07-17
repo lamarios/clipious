@@ -8,25 +8,14 @@ class VideoThumbnailView extends StatelessWidget {
   Widget? child;
   String? cacheKey;
 
-  VideoThumbnailView(
-      {super.key,
-      required this.videoId,
-      required this.thumbnailUrl,
-      this.child,
-      this.cacheKey});
+  VideoThumbnailView({super.key, required this.videoId, required this.thumbnailUrl, this.child, this.cacheKey});
 
   @override
   Widget build(BuildContext context) {
     ColorScheme colors = Theme.of(context).colorScheme;
     return AspectRatio(
       aspectRatio: 16 / 9,
-      child: Thumbnail(
-          id: cacheKey ?? 'v/$videoId',
-          thumbnailUrl: thumbnailUrl,
-          decoration: BoxDecoration(
-              color: colors.secondaryContainer,
-              borderRadius: BorderRadius.circular(10)),
-          child: child),
+      child: Thumbnail(id: cacheKey ?? 'v/$videoId', thumbnailUrl: thumbnailUrl, decoration: BoxDecoration(color: colors.secondaryContainer, borderRadius: BorderRadius.circular(10)), child: child),
     );
   }
 }
@@ -40,14 +29,7 @@ class Thumbnail extends StatelessWidget {
   final String thumbnailUrl;
   final BoxDecoration decoration;
 
-  Thumbnail(
-      {super.key,
-      required this.id,
-      this.child,
-      required this.thumbnailUrl,
-      required this.decoration,
-      this.width,
-      this.height});
+  Thumbnail({super.key, required this.id, this.child, required this.thumbnailUrl, required this.decoration, this.width, this.height});
 
   @override
   Widget build(BuildContext context) {
@@ -58,8 +40,7 @@ class Thumbnail extends StatelessWidget {
       imageBuilder: (context, imageProvider) => AnimatedContainer(
         height: height,
         width: width,
-        decoration: decoration.copyWith(
-            image: DecorationImage(image: imageProvider, fit: BoxFit.cover)),
+        decoration: decoration.copyWith(image: DecorationImage(image: imageProvider, fit: BoxFit.cover)),
         // duration: animationDuration,
         duration: animationDuration ~/ 2,
         curve: Curves.easeInOutQuad,

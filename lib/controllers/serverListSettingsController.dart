@@ -17,8 +17,7 @@ class ServerListSettingsController extends GetxController {
   late List<Server> dbServers;
   List<Server> publicServers = [];
   double publicServerProgress = 0;
-  TextEditingController addServerController =
-      TextEditingController(text: 'https://');
+  TextEditingController addServerController = TextEditingController(text: 'https://');
   final log = Logger('ManagerServerView');
 
   bool pinging = true;
@@ -39,18 +38,13 @@ class ServerListSettingsController extends GetxController {
   }
 
   bool isLoggedInToServer(String url) {
-    Server server = dbServers.firstWhere((s) => s.url == url,
-        orElse: () => Server('notFound'));
+    Server server = dbServers.firstWhere((s) => s.url == url, orElse: () => Server('notFound'));
 
-    return (server.authToken?.isNotEmpty ?? false) ||
-        (server.sidCookie?.isNotEmpty ?? false);
+    return (server.authToken?.isNotEmpty ?? false) || (server.sidCookie?.isNotEmpty ?? false);
   }
 
   refreshServers() {
-    var servers = publicServers
-        .where((s) =>
-            dbServers.indexWhere((element) => element.url == s.url) == -1)
-        .toList();
+    var servers = publicServers.where((s) => dbServers.indexWhere((element) => element.url == s.url) == -1).toList();
 
     dbServers = db.getServers();
     publicServers = servers;
@@ -111,9 +105,7 @@ class ServerListSettingsController extends GetxController {
       int progress = 0;
       List<Server?> pingedServers = await Future.wait(servers.map((e) async {
         try {
-          e.ping = await service.pingServer(e.url).timeout(
-              const Duration(seconds: pingTimeout),
-              onTimeout: () => const Duration(seconds: pingTimeout));
+          e.ping = await service.pingServer(e.url).timeout(const Duration(seconds: pingTimeout), onTimeout: () => const Duration(seconds: pingTimeout));
           progress++;
           publicServerProgress = progress / servers.length;
           update();
@@ -124,14 +116,9 @@ class ServerListSettingsController extends GetxController {
         }
       }));
 
-      List<Server> successfullyPingedServers = pingedServers
-          .where((element) => element != null)
-          .map((e) => e!)
-          .toList();
+      List<Server> successfullyPingedServers = pingedServers.where((element) => element != null).map((e) => e!).toList();
 
-      successfullyPingedServers.sort((a, b) =>
-          (a.ping ?? const Duration(seconds: pingTimeout))
-              .compareTo(b.ping ?? const Duration(seconds: pingTimeout)));
+      successfullyPingedServers.sort((a, b) => (a.ping ?? const Duration(seconds: pingTimeout)).compareTo(b.ping ?? const Duration(seconds: pingTimeout)));
 
       pinging = false;
       publicServers = successfullyPingedServers;

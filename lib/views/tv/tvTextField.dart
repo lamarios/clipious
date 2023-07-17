@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:invidious/globals.dart';
-import 'package:invidious/main.dart';
 import 'package:invidious/utils.dart';
 import 'package:invidious/views/tv/tvOverScan.dart';
 
@@ -56,8 +55,7 @@ class TvTextField extends StatelessWidget {
       autofocus: autofocus ?? false,
       onFocusChange: onFocusChanged,
       focusNode: focusNode,
-      onKeyEvent: (node, event) =>
-          onTvSelect(event, context, (context) => openTextField(context)),
+      onKeyEvent: (node, event) => onTvSelect(event, context, (context) => openTextField(context)),
       child: Builder(builder: (ctx) {
         bool hasFocus = Focus.of(ctx).hasFocus;
         print(hasFocus);
@@ -68,9 +66,7 @@ class TvTextField extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: AnimatedContainer(
             duration: animationDuration ~/ 2,
-            decoration: BoxDecoration(
-                color: hasFocus ? colors.secondaryContainer : colors.background,
-                borderRadius: hasFocus ? BorderRadius.circular(10) : null),
+            decoration: BoxDecoration(color: hasFocus ? colors.secondaryContainer : colors.background, borderRadius: hasFocus ? BorderRadius.circular(10) : null),
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
@@ -78,18 +74,10 @@ class TvTextField extends StatelessWidget {
                   leading ?? const SizedBox.shrink(),
                   Expanded(
                     child: Container(
-                        decoration: BoxDecoration(
-                            border: Border(
-                                bottom: BorderSide(
-                                    width: 2,
-                                    color: colors.secondaryContainer))),
+                        decoration: BoxDecoration(border: Border(bottom: BorderSide(width: 2, color: colors.secondaryContainer))),
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: showLabel
-                              ? decoration!.label!
-                              : Text((obscureText ?? false)
-                                  ? "************"
-                                  : controller.text),
+                          child: showLabel ? decoration!.label! : Text((obscureText ?? false) ? "************" : controller.text),
                         )),
                   ),
                   trailing ?? const SizedBox.shrink()
@@ -115,16 +103,7 @@ class TvTextFieldFiller extends StatelessWidget {
   final InputDecoration? decoration;
 
   const TvTextFieldFiller(
-      {Key? key,
-      required this.controller,
-      this.autofocus,
-      this.autocorrect,
-      this.focusNode,
-      this.onSubmitted,
-      this.textInputAction,
-      this.obscureText,
-      this.autofillHints,
-      this.decoration})
+      {Key? key, required this.controller, this.autofocus, this.autocorrect, this.focusNode, this.onSubmitted, this.textInputAction, this.obscureText, this.autofillHints, this.decoration})
       : super(key: key);
 
   @override

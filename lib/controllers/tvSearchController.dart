@@ -1,12 +1,6 @@
-import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
-import 'package:get/get.dart';
 import 'package:invidious/controllers/searchController.dart';
-import 'package:invidious/globals.dart';
-import 'package:invidious/models/searchResult.dart';
-
-import '../models/searchSuggestion.dart';
 
 class TvSearchController extends ClipiousSearchController {
   FocusNode resultFocus = FocusNode();

@@ -8,8 +8,7 @@ class VideoLikeButton extends StatelessWidget {
   ButtonStyle? style;
   bool? global;
 
-  VideoLikeButton({Key? key, this.videoId, this.size, this.style, this.global})
-      : super(key: key);
+  VideoLikeButton({Key? key, this.videoId, this.size, this.style, this.global}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,9 +22,7 @@ class VideoLikeButton extends StatelessWidget {
           style: style,
           iconSize: size,
           onPressed: _.toggleLike,
-          icon: _.isVideoLiked
-              ? const Icon(Icons.favorite)
-              : const Icon(Icons.favorite_border),
+          icon: _.isVideoLiked ? const Icon(Icons.favorite) : const Icon(Icons.favorite_border),
         ),
       ),
     );

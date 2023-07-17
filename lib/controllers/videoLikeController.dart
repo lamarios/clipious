@@ -30,16 +30,14 @@ class VideoLikeButtonController extends GetxController {
 
   Future<Playlist?> getPlaylist() async {
     List<Playlist> playlists = await service.getUserPlaylists();
-    Playlist? pl =
-        playlists.firstWhereOrNull((pl) => pl.title == likePlaylistName);
+    Playlist? pl = playlists.firstWhereOrNull((pl) => pl.title == likePlaylistName);
 
     return pl;
   }
 
   checkVideoLikeStatus() async {
     Playlist? p = await getPlaylist();
-    VideoInList? video =
-        p?.videos.firstWhereOrNull((element) => element.videoId == videoId);
+    VideoInList? video = p?.videos.firstWhereOrNull((element) => element.videoId == videoId);
 
     isVideoLiked = video != null;
 
@@ -65,8 +63,7 @@ class VideoLikeButtonController extends GetxController {
     if (p != null && videoId != null) {
       if (isVideoLiked) {
         log.fine('Video is liked, unliking it');
-        VideoInList? v =
-            p.videos.firstWhereOrNull((element) => element.videoId == videoId!);
+        VideoInList? v = p.videos.firstWhereOrNull((element) => element.videoId == videoId!);
         if (v?.indexId != null) {
           await service.deleteUserPlaylistVideo(p.playlistId, v!.indexId!);
           isVideoLiked = !isVideoLiked;
@@ -79,11 +76,7 @@ class VideoLikeButtonController extends GetxController {
     }
     loading = false;
     update();
-    PlaylistListController.to(
-            tag: PlaylistListController.getTag(userPlayListTag))
-        ?.refreshPlaylists();
-    AddToPlaylistButtonController.to(
-            tag: AddToPlaylistButtonController.tags(videoId ?? ''))
-        ?.countPlaylistsForVideo();
+    PlaylistListController.to(tag: PlaylistListController.getTag(userPlayListTag))?.refreshPlaylists();
+    AddToPlaylistButtonController.to(tag: AddToPlaylistButtonController.tags(videoId ?? ''))?.countPlaylistsForVideo();
   }
 }

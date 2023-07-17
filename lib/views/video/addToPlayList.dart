@@ -22,8 +22,7 @@ class AddToPlaylist extends StatelessWidget {
         });
   }
 
-  addToPlaylist(BuildContext context, AddToPlaylistController controller,
-      String playlistId) async {
+  addToPlaylist(BuildContext context, AddToPlaylistController controller, String playlistId) async {
     var locals = AppLocalizations.of(context)!;
     Navigator.of(context).pop();
     final scaffoldMessenger = ScaffoldMessenger.of(context);
@@ -46,17 +45,12 @@ class AddToPlaylist extends StatelessWidget {
     showDialog<String>(
         context: context,
         builder: (BuildContext context) => Dialog(
-              child: AddPlayListForm(
-                  afterAdd: (context, playlistId) =>
-                      addToPlaylist(context, controller, playlistId)),
+              child: AddPlayListForm(afterAdd: (context, playlistId) => addToPlaylist(context, controller, playlistId)),
             ));
   }
 
   openServerSettings(BuildContext context) {
-    navigatorKey.currentState?.push(MaterialPageRoute(
-        settings: ROUTE_SETTINGS_MANAGE_ONE_SERVER,
-        builder: (context) =>
-            ManageSingleServer(server: db.getCurrentlySelectedServer())));
+    navigatorKey.currentState?.push(MaterialPageRoute(settings: ROUTE_SETTINGS_MANAGE_ONE_SERVER, builder: (context) => ManageSingleServer(server: db.getCurrentlySelectedServer())));
   }
 
   @override
@@ -80,27 +74,18 @@ class AddToPlaylist extends StatelessWidget {
                           Text(locals.notLoggedIn),
                           Padding(
                             padding: const EdgeInsets.only(top: 4.0),
-                            child: FilledButton(
-                                onPressed: () => openServerSettings(context),
-                                child: Text(locals.logIn)),
+                            child: FilledButton(onPressed: () => openServerSettings(context), child: Text(locals.logIn)),
                           )
                         ],
                       )))
               : const SizedBox.shrink(),
-          _.loading
-              ? const Expanded(
-                  child: Align(
-                      alignment: Alignment.center,
-                      child: CircularProgressIndicator()))
-              : const SizedBox.shrink(),
+          _.loading ? const Expanded(child: Align(alignment: Alignment.center, child: CircularProgressIndicator())) : const SizedBox.shrink(),
           Expanded(
             child: ListView(
               children: _.playlists.map((p) {
                 bool inPlaylist = _.videoInPlaylist(p.playlistId);
                 return FilledButton.tonal(
-                    onPressed: inPlaylist
-                        ? null
-                        : () => addToPlaylist(context, _, p.playlistId),
+                    onPressed: inPlaylist ? null : () => addToPlaylist(context, _, p.playlistId),
                     child: Row(
                       children: [
                         Padding(
@@ -121,8 +106,7 @@ class AddToPlaylist extends StatelessWidget {
             ),
           ),
           FilledButton.tonal(
-            onPressed:
-                _.isLoggedIn ? () => newPlaylistAndAdd(context, _) : null,
+            onPressed: _.isLoggedIn ? () => newPlaylistAndAdd(context, _) : null,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [const Icon(Icons.add), Text(locals.createNewPlaylist)],

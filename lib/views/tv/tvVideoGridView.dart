@@ -4,7 +4,6 @@ import 'package:invidious/models/paginatedList.dart';
 import 'package:invidious/views/tv/tvOverScan.dart';
 import 'package:invidious/views/tv/tvVideoItem.dart';
 
-import '../../controllers/videoInListController.dart';
 import '../../controllers/videoListController.dart';
 import '../../models/videoInList.dart';
 
@@ -13,12 +12,7 @@ class TvGridView extends StatelessWidget {
   final String? tags;
   final String title;
 
-  const TvGridView(
-      {Key? key,
-      required this.paginatedVideoList,
-      this.tags,
-      required this.title})
-      : super(key: key);
+  const TvGridView({Key? key, required this.paginatedVideoList, this.tags, required this.title}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -55,9 +49,7 @@ class TvGridView extends StatelessWidget {
                     controller: _.scrollController,
                     childAspectRatio: 16 / 13,
                     crossAxisCount: 3,
-                    children: _.items
-                        .map((e) => TvVideoItem(video: e, autoFocus: false))
-                        .toList(),
+                    children: _.items.map((e) => TvVideoItem(video: e, autoFocus: false)).toList(),
                   ))
                 ],
               );

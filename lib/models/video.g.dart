@@ -9,9 +9,7 @@ part of 'video.dart';
 Video _$VideoFromJson(Map<String, dynamic> json) => Video(
       json['title'] as String,
       json['videoId'] as String,
-      (json['videoThumbnails'] as List<dynamic>)
-          .map((e) => ImageObject.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      (json['videoThumbnails'] as List<dynamic>).map((e) => ImageObject.fromJson(e as Map<String, dynamic>)).toList(),
       json['description'] as String,
       json['descriptionHtml'] as String,
       json['published'] as int,
@@ -23,17 +21,13 @@ Video _$VideoFromJson(Map<String, dynamic> json) => Video(
       json['paid'] as bool,
       json['premium'] as bool,
       json['isFamilyFriendly'] as bool,
-      (json['allowedRegions'] as List<dynamic>)
-          .map((e) => e as String)
-          .toList(),
+      (json['allowedRegions'] as List<dynamic>).map((e) => e as String).toList(),
       json['genre'] as String,
       json['genreUrl'] as String,
       json['dashUrl'] as String,
       json['author'] as String?,
       json['authorUrl'] as String?,
-      (json['authorThumbnails'] as List<dynamic>)
-          .map((e) => ImageObject.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      (json['authorThumbnails'] as List<dynamic>).map((e) => ImageObject.fromJson(e as Map<String, dynamic>)).toList(),
       json['subCountText'] as String,
       json['lengthSeconds'] as int,
       json['allowRatings'] as bool,
@@ -43,19 +37,11 @@ Video _$VideoFromJson(Map<String, dynamic> json) => Video(
       json['isUpcoming'] as bool,
       json['premiereTimestamp'] as int?,
       json['hlsUrl'] as String?,
-      (json['adaptiveFormats'] as List<dynamic>)
-          .map((e) => AdaptiveFormat.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      (json['formatStreams'] as List<dynamic>)
-          .map((e) => FormatStream.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      (json['adaptiveFormats'] as List<dynamic>).map((e) => AdaptiveFormat.fromJson(e as Map<String, dynamic>)).toList(),
+      (json['formatStreams'] as List<dynamic>).map((e) => FormatStream.fromJson(e as Map<String, dynamic>)).toList(),
       json['authorId'] as String?,
-      (json['captions'] as List<dynamic>)
-          .map((e) => Caption.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      (json['recommendedVideos'] as List<dynamic>)
-          .map((e) => RecommendedVideo.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      (json['captions'] as List<dynamic>).map((e) => Caption.fromJson(e as Map<String, dynamic>)).toList(),
+      (json['recommendedVideos'] as List<dynamic>).map((e) => RecommendedVideo.fromJson(e as Map<String, dynamic>)).toList(),
     );
 
 Map<String, dynamic> _$VideoToJson(Video instance) => <String, dynamic>{

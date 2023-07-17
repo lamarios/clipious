@@ -25,14 +25,7 @@ class ManageSingleServer extends StatelessWidget {
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              TextField(
-                  controller: userController,
-                  autocorrect: false,
-                  autofillHints: const [
-                    AutofillHints.username,
-                    AutofillHints.email
-                  ],
-                  decoration: InputDecoration(label: Text(locals.username))),
+              TextField(controller: userController, autocorrect: false, autofillHints: const [AutofillHints.username, AutofillHints.email], decoration: InputDecoration(label: Text(locals.username))),
               TextField(
                 obscureText: true,
                 autocorrect: false,
@@ -48,12 +41,10 @@ class ManageSingleServer extends StatelessWidget {
                 child: Text(locals.ok),
                 onPressed: () async {
                   try {
-                    await controller.logInWithCookie(
-                        userController.text, passwordController.text);
+                    await controller.logInWithCookie(userController.text, passwordController.text);
                     Navigator.of(context).pop();
                   } catch (err) {
-                    showAlertDialog(context, locals.error,
-                        [Text(locals.wrongUsernamePassword)]);
+                    showAlertDialog(context, locals.error, [Text(locals.wrongUsernamePassword)]);
                     rethrow;
                   }
                 },
@@ -82,9 +73,7 @@ class ManageSingleServer extends StatelessWidget {
       init: ServerSettingsController(server),
       builder: (controller) {
         Server server = controller.server;
-        bool isLoggedIn =
-            (server.authToken != null && server.authToken!.isNotEmpty) ||
-                (server.sidCookie != null && server.sidCookie!.isNotEmpty);
+        bool isLoggedIn = (server.authToken != null && server.authToken!.isNotEmpty) || (server.sidCookie != null && server.sidCookie!.isNotEmpty);
         return Scaffold(
             appBar: AppBar(
               backgroundColor: colorScheme.background,
@@ -94,8 +83,7 @@ class ManageSingleServer extends StatelessWidget {
             backgroundColor: colorScheme.background,
             body: SafeArea(
               bottom: false,
-              child:
-                  SettingsList(lightTheme: theme, darkTheme: theme, sections: [
+              child: SettingsList(lightTheme: theme, darkTheme: theme, sections: [
                 SettingsSection(tiles: [
                   SettingsTile.switchTile(
                     initialValue: server.inUse,
@@ -106,27 +94,19 @@ class ManageSingleServer extends StatelessWidget {
                 ]),
                 SettingsSection(title: Text(locals.authentication), tiles: [
                   SettingsTile(
-                    leading: server.authToken?.isNotEmpty ?? false
-                        ? const Icon(Icons.check)
-                        : const Icon(Icons.token),
+                    leading: server.authToken?.isNotEmpty ?? false ? const Icon(Icons.check) : const Icon(Icons.token),
                     enabled: !isLoggedIn,
                     title: Text(locals.tokenLogin),
-                    value: Text(server.authToken?.isNotEmpty ?? false
-                        ? locals.loggedIn
-                        : locals.tokenLoginDescription),
+                    value: Text(server.authToken?.isNotEmpty ?? false ? locals.loggedIn : locals.tokenLoginDescription),
                     onPressed: (context) async {
                       await controller.logInWithToken();
                     },
                   ),
                   SettingsTile(
-                    leading: server.sidCookie?.isNotEmpty ?? false
-                        ? const Icon(Icons.check)
-                        : const Icon(Icons.cookie_outlined),
+                    leading: server.sidCookie?.isNotEmpty ?? false ? const Icon(Icons.check) : const Icon(Icons.cookie_outlined),
                     enabled: !isLoggedIn,
                     title: Text(locals.cookieLogin),
-                    value: Text(server.sidCookie?.isNotEmpty ?? false
-                        ? locals.loggedIn
-                        : locals.cookieLoginDescription),
+                    value: Text(server.sidCookie?.isNotEmpty ?? false ? locals.loggedIn : locals.cookieLoginDescription),
                     onPressed: showLogInWithCookiesDialog,
                   ),
                   SettingsTile(
@@ -145,16 +125,11 @@ class ManageSingleServer extends StatelessWidget {
                     },
                     leading: Icon(
                       Icons.delete,
-                      color: controller.canDelete
-                          ? Colors.red
-                          : Colors.red.withOpacity(0.5),
+                      color: controller.canDelete ? Colors.red : Colors.red.withOpacity(0.5),
                     ),
                     title: Text(
                       locals.delete,
-                      style: TextStyle(
-                          color: controller.canDelete
-                              ? Colors.red
-                              : Colors.red.withOpacity(0.5)),
+                      style: TextStyle(color: controller.canDelete ? Colors.red : Colors.red.withOpacity(0.5)),
                     ),
                   )
                 ])

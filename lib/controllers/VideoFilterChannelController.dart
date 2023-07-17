@@ -1,9 +1,7 @@
-import 'package:flutter_swipe_action_cell/core/cell.dart';
 import 'package:get/get.dart';
 import 'package:invidious/controllers/videoFilterController.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/models/channel.dart';
-import 'package:logging/logging.dart';
 
 import '../models/db/videoFilter.dart';
 
@@ -23,15 +21,11 @@ class VideoFilterChannelController extends GetxController {
   }
 
   bool hasChannel() {
-    return filters.isNotEmpty &&
-        filters[0].channelId != null &&
-        filters[0].channelId != allChannels;
+    return filters.isNotEmpty && filters[0].channelId != null && filters[0].channelId != allChannels;
   }
 
   Future<void> getChannel() async {
-    if (filters.isNotEmpty &&
-        filters[0].channelId != null &&
-        filters[0].channelId != allChannels) {
+    if (filters.isNotEmpty && filters[0].channelId != null && filters[0].channelId != allChannels) {
       loading = true;
       update();
       channel = await service.getChannel(filters[0].channelId!);

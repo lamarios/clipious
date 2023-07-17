@@ -107,11 +107,9 @@ class Playlist {
   @JsonKey(includeToJson: false, includeFromJson: false)
   int removedByFilter = 0;
 
-  Playlist(this.type, this.title, this.playlistId, this.author, this.authordId,
-      this.authorUrl, this.description, this.videoCount);
+  Playlist(this.type, this.title, this.playlistId, this.author, this.authordId, this.authorUrl, this.description, this.videoCount);
 
-  factory Playlist.fromJson(Map<String, dynamic> json) =>
-      _$PlaylistFromJson(json);
+  factory Playlist.fromJson(Map<String, dynamic> json) => _$PlaylistFromJson(json);
 
   Map<String, dynamic> toJson() => _$PlaylistToJson(this);
 }

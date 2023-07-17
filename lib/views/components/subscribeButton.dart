@@ -7,8 +7,7 @@ class SubscribeButton extends StatelessWidget {
   final String channelId;
   final String subCount;
 
-  const SubscribeButton(
-      {super.key, required this.channelId, required this.subCount});
+  const SubscribeButton({super.key, required this.channelId, required this.subCount});
 
   @override
   Widget build(BuildContext context) {
@@ -27,8 +26,7 @@ class SubscribeButton extends StatelessWidget {
                       Icon(_.isSubscribed ? Icons.done : Icons.add),
                       Padding(
                         padding: const EdgeInsets.only(left: 8.0),
-                        child: Text(
-                            '${(_.isSubscribed ? locals.subscribed : locals.subscribe)} | $subCount'),
+                        child: Text('${(_.isSubscribed ? locals.subscribed : locals.subscribe)} | $subCount'),
                       ),
                     ]
                   : [
@@ -36,8 +34,7 @@ class SubscribeButton extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(left: 8.0),
                         // child: Text('${subCount.replaceAll("^0.00\$","no")} subscribers'),
-                        child: Text(locals.nSubscribers(
-                            subCount.replaceAll(RegExp(r'^0.00$'), "no"))),
+                        child: Text(locals.nSubscribers(subCount.replaceAll(RegExp(r'^0.00$'), "no"))),
                       ),
                     ],
             ),

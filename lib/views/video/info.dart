@@ -12,7 +12,6 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../models/imageObject.dart';
 import '../../utils.dart';
-import '../searchDelegate.dart';
 
 class VideoInfo extends StatelessWidget {
   Video video;
@@ -21,9 +20,7 @@ class VideoInfo extends StatelessWidget {
   VideoInfo({super.key, required this.video, this.dislikes});
 
   openChannel(BuildContext context) {
-    navigatorKey.currentState?.push(MaterialPageRoute(
-        settings: ROUTE_CHANNEL,
-        builder: (context) => ChannelView(channelId: video.authorId ?? '')));
+    navigatorKey.currentState?.push(MaterialPageRoute(settings: ROUTE_CHANNEL, builder: (context) => ChannelView(channelId: video.authorId ?? '')));
   }
 
   showSearchWindow(BuildContext context, String query) {
@@ -46,10 +43,7 @@ class VideoInfo extends StatelessWidget {
         children: [
           Text(
             video.title,
-            style: TextStyle(
-                color: colorScheme.primary,
-                fontWeight: FontWeight.normal,
-                fontSize: 20),
+            style: TextStyle(color: colorScheme.primary, fontWeight: FontWeight.normal, fontSize: 20),
             textAlign: TextAlign.start,
           ),
           Padding(
@@ -96,9 +90,7 @@ class VideoInfo extends StatelessWidget {
                     visible: (dislikes ?? 0) > 0,
                     child: Padding(
                       padding: const EdgeInsets.only(left: 3.0),
-                      child: Text(compactCurrency
-                          .format(dislikes ?? 0)
-                          .replaceAll(".00", "")),
+                      child: Text(compactCurrency.format(dislikes ?? 0).replaceAll(".00", "")),
                     )),
                 Expanded(child: Container()),
                 Visibility(
@@ -117,8 +109,7 @@ class VideoInfo extends StatelessWidget {
                       borderRadius: BorderRadius.circular(30),
                     ),
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 8.0, vertical: 2),
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 2),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -150,15 +141,11 @@ class VideoInfo extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 4.0),
                   child: Thumbnail(
-                    thumbnailUrl:
-                        ImageObject.getBestThumbnail(video.authorThumbnails)
-                                ?.url ??
-                            '',
+                    thumbnailUrl: ImageObject.getBestThumbnail(video.authorThumbnails)?.url ?? '',
                     width: 40,
                     height: 40,
                     id: 'author-small-${video.authorId}',
-                    decoration:
-                        BoxDecoration(borderRadius: BorderRadius.circular(20)),
+                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
                   ) /*Container(
                     width: 40,
                     height: 40,
@@ -192,10 +179,8 @@ class VideoInfo extends StatelessWidget {
           ),
           SelectableLinkify(
               text: video.description,
-              linkStyle: TextStyle(
-                  color: colorScheme.primary, decoration: TextDecoration.none),
-              onOpen: (link) => launchUrl(Uri.parse(link.url),
-                  mode: LaunchMode.externalApplication),
+              linkStyle: TextStyle(color: colorScheme.primary, decoration: TextDecoration.none),
+              onOpen: (link) => launchUrl(Uri.parse(link.url), mode: LaunchMode.externalApplication),
               options: const LinkifyOptions(humanize: true, removeWww: true)),
           const Divider(),
           Row(
@@ -218,9 +203,7 @@ class VideoInfo extends StatelessWidget {
                   ),
                 ),
               ),
-              Visibility(
-                  visible: video.isFamilyFriendly,
-                  child: Text(locals.videoIsFamilyFriendly))
+              Visibility(visible: video.isFamilyFriendly, child: Text(locals.videoIsFamilyFriendly))
             ],
           ),
           Padding(
@@ -232,12 +215,9 @@ class VideoInfo extends StatelessWidget {
                     .map((e) => InkWell(
                           onTap: () => showSearchWindow(context, e),
                           child: Container(
-                            decoration: BoxDecoration(
-                                color: colorScheme.secondaryContainer,
-                                borderRadius: BorderRadius.circular(20)),
+                            decoration: BoxDecoration(color: colorScheme.secondaryContainer, borderRadius: BorderRadius.circular(20)),
                             child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 8.0, vertical: 4),
+                              padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4),
                               child: Text(e),
                             ),
                           ),
@@ -248,12 +228,9 @@ class VideoInfo extends StatelessWidget {
                       InkWell(
                         onTap: () => showSearchWindow(context, video.genre),
                         child: Container(
-                          decoration: BoxDecoration(
-                              color: colorScheme.secondaryContainer,
-                              borderRadius: BorderRadius.circular(20)),
+                          decoration: BoxDecoration(color: colorScheme.secondaryContainer, borderRadius: BorderRadius.circular(20)),
                           child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 8.0, vertical: 4),
+                            padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4),
                             child: Text(video.genre),
                           ),
                         ),

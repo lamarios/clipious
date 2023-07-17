@@ -40,19 +40,12 @@ final RouteObserver<ModalRoute> routeObserver = MyRouteObserver();
 bool isTv = false;
 
 Future<void> main() async {
-  Logger.root.level =
-      kDebugMode ? Level.FINEST : Level.INFO; // defaults to Level.INFO
+  Logger.root.level = kDebugMode ? Level.FINEST : Level.INFO; // defaults to Level.INFO
   Logger.root.onRecord.listen((record) {
-    debugPrint(
-        '[${record.level.name}] [${record.loggerName}] ${record.message}');
+    debugPrint('[${record.level.name}] [${record.loggerName}] ${record.message}');
     // we don't want debug
     if (record.level == Level.INFO || record.level == Level.SEVERE) {
-      db.insertLogs(AppLog(
-          logger: record.loggerName,
-          level: record.level.name,
-          time: record.time,
-          message: record.message,
-          stacktrace: record.stackTrace?.toString()));
+      db.insertLogs(AppLog(logger: record.loggerName, level: record.level.name, time: record.time, message: record.message, stacktrace: record.stackTrace?.toString()));
     }
   });
 
@@ -84,13 +77,10 @@ class MyApp extends StatelessWidget {
         builder: (_) {
           bool useDynamicTheme = db.getSettings(DYNAMIC_THEME)?.value == 'true';
 
-          return DynamicColorBuilder(
-              builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) {
+          return DynamicColorBuilder(builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) {
             ColorScheme lightColorScheme;
 
-            if (useDynamicTheme &&
-                lightDynamic != null &&
-                darkDynamic != null) {
+            if (useDynamicTheme && lightDynamic != null && darkDynamic != null) {
               // On Android S+ devices, use the provided dynamic color scheme.
               // (Recommended) Harmonize the dynamic color scheme' built-in semantic colors.
               lightColorScheme = lightDynamic.harmonized();
@@ -118,25 +108,17 @@ class MyApp extends StatelessWidget {
             }
 
             if (db.getSettings(BLACK_BACKGROUND)?.value == 'true') {
-              darkColorScheme =
-                  darkColorScheme.copyWith(background: Colors.black);
+              darkColorScheme = darkColorScheme.copyWith(background: Colors.black);
             }
 
-            List<String>? localeString =
-                db.getSettings(LOCALE)?.value.split('_');
-            Locale? savedLocale = localeString != null
-                ? Locale.fromSubtags(
-                    languageCode: localeString[0],
-                    scriptCode:
-                        localeString.length >= 2 ? localeString[1] : null)
-                : null;
+            List<String>? localeString = db.getSettings(LOCALE)?.value.split('_');
+            Locale? savedLocale = localeString != null ? Locale.fromSubtags(languageCode: localeString[0], scriptCode: localeString.length >= 2 ? localeString[1] : null) : null;
 
             return GetMaterialApp(
                 locale: savedLocale,
                 localizationsDelegates: AppLocalizations.localizationsDelegates,
                 localeListResolutionCallback: (locales, supportedLocales) {
-                  log.info(
-                      'device locales=$locales supported locales=$supportedLocales');
+                  log.info('device locales=$locales supported locales=$supportedLocales');
                   if (savedLocale != null) {
                     log.info("using saved locale, ${savedLocale}");
                     return savedLocale;
@@ -149,10 +131,7 @@ class MyApp extends StatelessWidget {
                         log.info("Locale match found, $locale");
                         return locale;
                       } else {
-                        Locale? match = supportedLocales
-                            .where((element) =>
-                                element.languageCode == locale.languageCode)
-                            .firstOrNull;
+                        Locale? match = supportedLocales.where((element) => element.languageCode == locale.languageCode).firstOrNull;
                         if (match != null) {
                           log.info("found partial match $locale with $match");
                           return match;
@@ -169,21 +148,16 @@ class MyApp extends StatelessWidget {
                 scaffoldMessengerKey: scaffoldKey,
                 navigatorKey: globalNavigator,
                 debugShowCheckedModeBanner: false,
-                themeMode: ThemeMode.values.firstWhere(
-                    (element) =>
-                        element.name == db.getSettings(THEME_MODE)?.value,
-                    orElse: () => ThemeMode.system),
+                themeMode: ThemeMode.values.firstWhere((element) => element.name == db.getSettings(THEME_MODE)?.value, orElse: () => ThemeMode.system),
                 title: 'Clipious',
                 theme: ThemeData(
                   useMaterial3: true,
                   colorScheme: lightColorScheme,
                 ),
-                darkTheme:
-                    ThemeData(useMaterial3: true, colorScheme: darkColorScheme),
+                darkTheme: ThemeData(useMaterial3: true, colorScheme: darkColorScheme),
                 home: Shortcuts(
                   shortcuts: <LogicalKeySet, Intent>{
-                    LogicalKeySet(LogicalKeyboardKey.select):
-                        const ActivateIntent(),
+                    LogicalKeySet(LogicalKeyboardKey.select): const ActivateIntent(),
                   },
                   child: isTv
                       ? showWizard
@@ -198,10 +172,7 @@ class MyApp extends StatelessWidget {
                                   initialRoute: '/',
                                   onGenerateRoute: (settings) {
                                     if (settings.name == '/') {
-                                      return GetPageRoute(
-                                          page: () => showWizard
-                                              ? const WelcomeWizard()
-                                              : const Home());
+                                      return GetPageRoute(page: () => showWizard ? const WelcomeWizard() : const Home());
                                     }
                                   }),
                             ),
@@ -223,8 +194,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> with AfterLayoutMixin {
   openSettings(BuildContext context) {
-    navigatorKey.currentState?.push(MaterialPageRoute(
-        settings: ROUTE_SETTINGS, builder: (context) => const Settings()));
+    navigatorKey.currentState?.push(MaterialPageRoute(settings: ROUTE_SETTINGS, builder: (context) => const Settings()));
   }
 
   @override
@@ -251,45 +221,31 @@ class _HomeState extends State<Home> with AfterLayoutMixin {
   Widget build(BuildContext context) {
     ColorScheme colorScheme = Theme.of(context).colorScheme;
     var locals = AppLocalizations.of(context)!;
-    List<String> navigationLabels = [
-      locals.popular,
-      locals.trending,
-      locals.subscriptions,
-      locals.playlists
-    ];
+    List<String> navigationLabels = [locals.popular, locals.trending, locals.subscriptions, locals.playlists];
 
     return GetBuilder<HomeController>(
       init: HomeController(),
       builder: (_) {
         var navigationWidgets = <Widget>[
-          NavigationDestination(
-              icon: const Icon(Icons.local_fire_department),
-              label: navigationLabels[0]),
-          NavigationDestination(
-              icon: const Icon(Icons.trending_up), label: navigationLabels[1]),
+          NavigationDestination(icon: const Icon(Icons.local_fire_department), label: navigationLabels[0]),
+          NavigationDestination(icon: const Icon(Icons.trending_up), label: navigationLabels[1]),
         ];
         if (_.isLoggedIn) {
-          navigationWidgets.add(NavigationDestination(
-              icon: const Icon(Icons.subscriptions),
-              label: navigationLabels[2]));
-          navigationWidgets.add(NavigationDestination(
-              icon: const Icon(Icons.playlist_play),
-              label: navigationLabels[3]));
+          navigationWidgets.add(NavigationDestination(icon: const Icon(Icons.subscriptions), label: navigationLabels[2]));
+          navigationWidgets.add(NavigationDestination(icon: const Icon(Icons.playlist_play), label: navigationLabels[3]));
         }
 
         return Scaffold(
             backgroundColor: colorScheme.background,
             bottomNavigationBar: NavigationBar(
               backgroundColor: colorScheme.background,
-              labelBehavior:
-                  NavigationDestinationLabelBehavior.onlyShowSelected,
+              labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
               elevation: 0,
               onDestinationSelected: _.selectIndex,
               selectedIndex: _.selectedIndex,
               destinations: navigationWidgets,
             ),
-            floatingActionButton:
-                _.selectedIndex == 3 ? AddPlayListButton() : null,
+            floatingActionButton: _.selectedIndex == 3 ? AddPlayListButton() : null,
             appBar: AppBar(
               systemOverlayStyle: getUiOverlayStyle(context),
               title: Text(navigationLabels[_.selectedIndex]),
@@ -300,9 +256,7 @@ class _HomeState extends State<Home> with AfterLayoutMixin {
                 IconButton(
                   onPressed: () {
                     // showSearch(context: context, delegate: MySearchDelegate());
-                    navigatorKey.currentState?.push(MaterialPageRoute(
-                        settings: ROUTE_SETTINGS,
-                        builder: (context) => const Search()));
+                    navigatorKey.currentState?.push(MaterialPageRoute(settings: ROUTE_SETTINGS, builder: (context) => const Search()));
                   },
                   icon: const Icon(Icons.search),
                 ),
@@ -318,8 +272,7 @@ class _HomeState extends State<Home> with AfterLayoutMixin {
                   AnimatedSwitcher(
                     switchInCurve: Curves.easeInOutQuad,
                     switchOutCurve: Curves.easeInOutQuad,
-                    transitionBuilder:
-                        (Widget child, Animation<double> animation) {
+                    transitionBuilder: (Widget child, Animation<double> animation) {
                       return FadeTransition(opacity: animation, child: child);
                     },
                     duration: animationDuration,

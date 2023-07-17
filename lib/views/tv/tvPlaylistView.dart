@@ -12,8 +12,7 @@ class TvPlaylistView extends PlaylistView {
   TvPlaylistView({required super.playlist, required super.canDeleteVideos});
 
   playPlaylist(BuildContext context, PlaylistController _) {
-    Navigator.of(context).push(MaterialPageRoute(
-        builder: (ctx) => TvPlayerView(videos: _.playlist.videos)));
+    Navigator.of(context).push(MaterialPageRoute(builder: (ctx) => TvPlayerView(videos: _.playlist.videos)));
   }
 
   @override
@@ -67,8 +66,7 @@ class TvPlaylistView extends PlaylistView {
                                     _.scrollToTop();
                                   }
                                 },
-                                onPressed: (context) =>
-                                    playPlaylist(context, _),
+                                onPressed: (context) => playPlaylist(context, _),
                                 child: const Padding(
                                   padding: EdgeInsets.all(15.0),
                                   child: Icon(
@@ -93,10 +91,7 @@ class TvPlaylistView extends PlaylistView {
                           controller: _.scrollController,
                           childAspectRatio: 16 / 13,
                           crossAxisCount: 3,
-                          children: _.playlist.videos
-                              .map((e) =>
-                                  TvVideoItem(video: e, autoFocus: false))
-                              .toList(),
+                          children: _.playlist.videos.map((e) => TvVideoItem(video: e, autoFocus: false)).toList(),
                         )
                       ],
                     ),

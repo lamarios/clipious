@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_swipe_action_cell/core/cell.dart';
 import 'package:get/get.dart';
 import 'package:invidious/controllers/VideoFilterChannelController.dart';
@@ -10,7 +11,6 @@ import '../../models/db/videoFilter.dart';
 import '../../models/imageObject.dart';
 import '../../myRouteObserver.dart';
 import '../components/videoThumbnail.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class VideoFilterChannel extends StatelessWidget {
   final List<VideoFilter> filters;
@@ -65,15 +65,11 @@ class VideoFilterChannel extends StatelessWidget {
                         child: Padding(
                           padding: const EdgeInsets.only(right: 8.0),
                           child: Thumbnail(
-                            thumbnailUrl: ImageObject.getBestThumbnail(
-                                        _.channel?.authorThumbnails)
-                                    ?.url ??
-                                '',
+                            thumbnailUrl: ImageObject.getBestThumbnail(_.channel?.authorThumbnails)?.url ?? '',
                             width: 20,
                             height: 20,
                             id: 'author-small-${_.channel?.authorId ?? ''}',
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20)),
+                            decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
                           ),
                         )),
                     Expanded(
@@ -108,9 +104,7 @@ class VideoFilterChannel extends StatelessWidget {
                           },
                         )
                       ],
-                      child: InkWell(
-                          onTap: () => editFilter(context, filter: e),
-                          child: VideoFilterItem(filter: e))))
+                      child: InkWell(onTap: () => editFilter(context, filter: e), child: VideoFilterItem(filter: e))))
                   .toList()
             ],
           ),

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:invidious/controllers/welcomeWizardController.dart';
-import 'package:invidious/views/tv/settings/tvManageServers.dart';
 import 'package:invidious/views/tv/settings/tvManageServersInner.dart';
 import 'package:invidious/views/tv/tvButton.dart';
 import 'package:invidious/views/tv/tvOverScan.dart';
@@ -32,8 +31,7 @@ class TvWelcomeWizard extends StatelessWidget {
                     ),
                     const Expanded(child: TvManageServersInner()),
                     TvButton(
-                      unfocusedColor:
-                          _.selected == null ? colors.background : null,
+                      unfocusedColor: _.selected == null ? colors.background : null,
                       onPressed: _.selected != null
                           ? (context) {
                               Navigator.of(context).push(MaterialPageRoute(
@@ -45,10 +43,7 @@ class TvWelcomeWizard extends StatelessWidget {
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
                           locals.startUsingClipious,
-                          style: textTheme.titleLarge!.copyWith(
-                              color: _.selected == null
-                                  ? Colors.white.withOpacity(0.5)
-                                  : Colors.white),
+                          style: textTheme.titleLarge!.copyWith(color: _.selected == null ? Colors.white.withOpacity(0.5) : Colors.white),
                         ),
                       ),
                     )

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:invidious/controllers/singleCommentController.dart';
-import 'package:invidious/globals.dart';
 import 'package:invidious/myRouteObserver.dart';
 import 'package:invidious/views/channel.dart';
 import 'package:invidious/views/components/videoThumbnail.dart';
@@ -16,13 +15,10 @@ class SingleCommentView extends StatelessWidget {
   final Comment comment;
   final String videoId;
 
-  const SingleCommentView(
-      {super.key, required this.comment, required this.videoId});
+  const SingleCommentView({super.key, required this.comment, required this.videoId});
 
   openChannel(BuildContext context, String authorId) {
-    navigatorKey.currentState?.push(MaterialPageRoute(
-        settings: ROUTE_CHANNEL,
-        builder: (context) => ChannelView(channelId: authorId)));
+    navigatorKey.currentState?.push(MaterialPageRoute(settings: ROUTE_CHANNEL, builder: (context) => ChannelView(channelId: authorId)));
   }
 
   @override
@@ -45,12 +41,8 @@ class SingleCommentView extends StatelessWidget {
                   width: 20,
                   height: 20,
                   id: 'comment-author-${_.comment.authorId}',
-                  thumbnailUrl:
-                      ImageObject.getBestThumbnail(_.comment.authorThumbnails)
-                              ?.url ??
-                          '',
-                  decoration:
-                      BoxDecoration(borderRadius: BorderRadius.circular(20)),
+                  thumbnailUrl: ImageObject.getBestThumbnail(_.comment.authorThumbnails)?.url ?? '',
+                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
                 ),
               ),
             ),
@@ -72,12 +64,9 @@ class SingleCommentView extends StatelessWidget {
                         child: Padding(
                           padding: const EdgeInsets.symmetric(vertical: 8.0),
                           child: Container(
-                            decoration: BoxDecoration(
-                                color: colors.primaryContainer,
-                                borderRadius: BorderRadius.circular(20)),
+                            decoration: BoxDecoration(color: colors.primaryContainer, borderRadius: BorderRadius.circular(20)),
                             child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 4.0, horizontal: 8),
+                              padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8),
                               child: Row(
                                 children: [
                                   const Icon(
@@ -86,20 +75,16 @@ class SingleCommentView extends StatelessWidget {
                                     size: 15,
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 8.0),
+                                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
                                     child: Image(
                                       image: NetworkImage(
-                                        _.comment.creatorHeart
-                                                ?.creatorThumbnail ??
-                                            '',
+                                        _.comment.creatorHeart?.creatorThumbnail ?? '',
                                       ),
                                       width: 15,
                                       height: 15,
                                     ),
                                   ),
-                                  Text(
-                                      _.comment.creatorHeart?.creatorName ?? '')
+                                  Text(_.comment.creatorHeart?.creatorName ?? '')
                                 ],
                               ),
                             ),
@@ -115,12 +100,9 @@ class SingleCommentView extends StatelessWidget {
                           visible: _.comment.likeCount > 0,
                           child: Padding(
                             padding: const EdgeInsets.only(right: 4.0),
-                            child: Icon(Icons.thumb_up,
-                                size: 15, color: colors.secondary),
+                            child: Icon(Icons.thumb_up, size: 15, color: colors.secondary),
                           )),
-                      Visibility(
-                          visible: _.comment.likeCount > 0,
-                          child: Text(_.comment.likeCount.toString())),
+                      Visibility(visible: _.comment.likeCount > 0, child: Text(_.comment.likeCount.toString())),
                       Expanded(
                           child: Text(
                         _.comment.publishedText,
@@ -139,8 +121,7 @@ class SingleCommentView extends StatelessWidget {
                                 onPressed: _.toggleShowChildren,
                                 child: Text(
                                   // locals.nReplies(comment.replies?.replyCount ?? 0).toString()),
-                                  locals.nReplies(
-                                      _.comment.replies?.replyCount ?? 0),
+                                  locals.nReplies(_.comment.replies?.replyCount ?? 0),
                                   style: const TextStyle(fontSize: 10),
                                 ))),
                       )),

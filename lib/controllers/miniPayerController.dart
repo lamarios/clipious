@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:back_button_interceptor/back_button_interceptor.dart';
 import 'package:better_player/better_player.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -14,7 +15,6 @@ import 'package:invidious/models/db/settings.dart';
 import 'package:invidious/utils.dart';
 import 'package:logging/logging.dart';
 
-import 'package:back_button_interceptor/back_button_interceptor.dart';
 import '../main.dart';
 import '../models/baseVideo.dart';
 import '../models/video.dart';
@@ -44,8 +44,7 @@ class MiniPlayerController extends GetxController {
   double dragDistance = 0;
   bool dragStartMini = true;
   bool isShowingOverflow = false;
-  PlayerRepeat repeat = PlayerRepeat
-      .values[int.parse(db.getSettings(PLAYER_REPEAT)?.value ?? '0')];
+  PlayerRepeat repeat = PlayerRepeat.values[int.parse(db.getSettings(PLAYER_REPEAT)?.value ?? '0')];
   bool shuffle = db.getSettings(PLAYER_SHUFFLE)?.value == 'true';
   List<String> playedVideos = [];
   Offset offset = Offset.zero;
@@ -99,8 +98,7 @@ class MiniPlayerController extends GetxController {
         break;
     }
 
-    db.saveSetting(SettingsValue(
-        PLAYER_REPEAT, PlayerRepeat.values.indexOf(repeat).toString()));
+    db.saveSetting(SettingsValue(PLAYER_REPEAT, PlayerRepeat.values.indexOf(repeat).toString()));
   }
 
   setVideos(List<BaseVideo> videos) {
@@ -137,10 +135,7 @@ class MiniPlayerController extends GetxController {
   queueVideos(List<BaseVideo> videos) {
     if (videos.isNotEmpty) {
       //removing videos that are already in the queue
-      this.videos.addAll(videos
-          .where((v) =>
-              this.videos.indexWhere((v2) => v2.videoId == v.videoId) == -1)
-          .where((element) => !element.filtered));
+      this.videos.addAll(videos.where((v) => this.videos.indexWhere((v2) => v2.videoId == v.videoId) == -1).where((element) => !element.filtered));
     } else {
       playVideo(videos);
     }
@@ -172,8 +167,7 @@ class MiniPlayerController extends GetxController {
 
   playNext() {
     if (videos.isNotEmpty) {
-      log.fine(
-          'Play next: played length: ${playedVideos.length} videos: ${videos.length} Repeat mode: $repeat');
+      log.fine('Play next: played length: ${playedVideos.length} videos: ${videos.length} Repeat mode: $repeat');
       if (repeat == PlayerRepeat.repeatOne) {
         switchToVideo(currentlyPlaying!);
       } else {
@@ -197,11 +191,8 @@ class MiniPlayerController extends GetxController {
               return;
             }
           } else {
-            List<BaseVideo> availableVideos =
-                videos.where((e) => !playedVideos.contains(e.videoId)).toList();
-            String nextVideoId =
-                availableVideos[Random().nextInt(availableVideos.length)]
-                    .videoId;
+            List<BaseVideo> availableVideos = videos.where((e) => !playedVideos.contains(e.videoId)).toList();
+            String nextVideoId = availableVideos[Random().nextInt(availableVideos.length)].videoId;
             currentIndex = videos.indexWhere((e) => e.videoId == nextVideoId);
           }
         }
@@ -246,8 +237,7 @@ class MiniPlayerController extends GetxController {
   }
 
   switchToVideo(BaseVideo video) async {
-    int index =
-        videos.indexWhere((element) => element.videoId == video.videoId);
+    int index = videos.indexWhere((element) => element.videoId == video.videoId);
     if (index >= 0 && index < videos.length) {
       currentIndex = index;
     } else {
@@ -270,8 +260,7 @@ class MiniPlayerController extends GetxController {
     PlayerController.to()?.switchVideo(v);
     PlayerController.to()?.toggleControls(!isMini);
     update();
-    VideoLikeButtonController.to(tag: VideoLikeButtonController.tags(v.videoId))
-        ?.checkVideoLikeStatus();
+    VideoLikeButtonController.to(tag: VideoLikeButtonController.tags(v.videoId))?.checkVideoLikeStatus();
     MiniPlayerControlsController.to()?.setVideo(v.videoId);
   }
 
@@ -281,8 +270,7 @@ class MiniPlayerController extends GetxController {
     if (videos.length == 1) {
       hide();
     } else {
-      int index =
-          videos.indexWhere((element) => element.videoId == video.videoId);
+      int index = videos.indexWhere((element) => element.videoId == video.videoId);
       playedVideos.remove(video.videoId);
       if (index >= 0) {
         if (index < currentIndex) {
@@ -322,16 +310,14 @@ class MiniPlayerController extends GetxController {
   }
 
   bool isVideoInQueue(Video video) {
-    return videos.indexWhere((element) => element.videoId == video.videoId) >=
-        0;
+    return videos.indexWhere((element) => element.videoId == video.videoId) >= 0;
   }
 
   void handleVideoEvent(BetterPlayerEvent event) {
     switch (event.betterPlayerEventType) {
       case BetterPlayerEventType.progress:
         if (isMini) {
-          int currentPosition =
-              (event.parameters?['progress'] as Duration).inSeconds;
+          int currentPosition = (event.parameters?['progress'] as Duration).inSeconds;
           progress = currentPosition / currentVideo.lengthSeconds;
           MiniPlayerProgressController.to()?.setProgress(progress);
         }
@@ -364,8 +350,7 @@ class MiniPlayerController extends GetxController {
     log.fine('Dragged video');
     var movedItem = videos.removeAt(oldItemIndex);
     videos.insert(newItemIndex, movedItem);
-    log.fine(
-        'Reordered list: $oldItemIndex new index: ${videos.indexOf(movedItem)}');
+    log.fine('Reordered list: $oldItemIndex new index: ${videos.indexOf(movedItem)}');
     if (oldItemIndex == currentIndex) {
       currentIndex = newItemIndex;
     } else if (oldItemIndex > currentIndex && newItemIndex <= currentIndex) {
@@ -382,8 +367,7 @@ class MiniPlayerController extends GetxController {
       playVideo([video]);
     } else {
       int newIndex = currentIndex + 1;
-      int oldIndex =
-          videos.indexWhere((element) => element.videoId == video.videoId);
+      int oldIndex = videos.indexWhere((element) => element.videoId == video.videoId);
       if (oldIndex == -1) {
         videos.insert(newIndex, video);
       } else {

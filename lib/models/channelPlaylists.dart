@@ -10,8 +10,7 @@ class ChannelPlaylists extends ItemtWithContinuation<Playlist> {
 
   ChannelPlaylists(this.playlists, String? continuation) : super(continuation);
 
-  factory ChannelPlaylists.fromJson(Map<String, dynamic> json) =>
-      _$ChannelPlaylistsFromJson(json);
+  factory ChannelPlaylists.fromJson(Map<String, dynamic> json) => _$ChannelPlaylistsFromJson(json);
 
   Map<String, dynamic> toJson() => _$ChannelPlaylistsToJson(this);
 

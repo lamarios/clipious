@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:invidious/utils.dart';
 import 'package:invidious/views/tv/tvVideoView.dart';
 
 import '../../globals.dart';
@@ -13,20 +12,14 @@ class TvVideoItem extends StatelessWidget {
   final bool autoFocus;
   final Function(BuildContext context, VideoInList video)? onSelect;
 
-  const TvVideoItem(
-      {Key? key, required this.video, required this.autoFocus, this.onSelect})
-      : super(key: key);
+  const TvVideoItem({Key? key, required this.video, required this.autoFocus, this.onSelect}) : super(key: key);
 
-  openVideo(
-      BuildContext context, VideoInList e, FocusNode node, KeyEvent event) {
-    if (event is KeyUpEvent &&
-        (event.logicalKey == LogicalKeyboardKey.enter ||
-            event.logicalKey == LogicalKeyboardKey.select)) {
+  openVideo(BuildContext context, VideoInList e, FocusNode node, KeyEvent event) {
+    if (event is KeyUpEvent && (event.logicalKey == LogicalKeyboardKey.enter || event.logicalKey == LogicalKeyboardKey.select)) {
       if (onSelect != null) {
         onSelect!(context, e);
       } else {
-        Navigator.of(context).push(MaterialPageRoute(
-            builder: (ctx) => TvVideoView(videoId: e.videoId)));
+        Navigator.of(context).push(MaterialPageRoute(builder: (ctx) => TvVideoView(videoId: e.videoId)));
       }
       return KeyEventResult.handled;
     }
@@ -56,9 +49,7 @@ class TvVideoItem extends StatelessWidget {
                   child: AnimatedContainer(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15),
-                        color: hasFocus
-                            ? colors.primaryContainer
-                            : colors.background,
+                        color: hasFocus ? colors.primaryContainer : colors.background,
                       ),
                       duration: animationDuration,
                       child: AspectRatio(
@@ -68,12 +59,7 @@ class TvVideoItem extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            VideoThumbnailView(
-                                videoId: video.videoId,
-                                thumbnailUrl: ImageObject.getBestThumbnail(
-                                            video.videoThumbnails)
-                                        ?.url ??
-                                    ''),
+                            VideoThumbnailView(videoId: video.videoId, thumbnailUrl: ImageObject.getBestThumbnail(video.videoThumbnails)?.url ?? ''),
                             Padding(
                               padding: const EdgeInsets.only(left: 8.0),
                               child: Text(

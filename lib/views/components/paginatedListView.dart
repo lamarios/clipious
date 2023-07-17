@@ -9,18 +9,12 @@ class PaginatedListView<T> extends StatelessWidget {
   final List<T>? startItems;
   final Widget Function(T item) itemBuilder;
 
-  const PaginatedListView(
-      {Key? key,
-      required this.paginatedList,
-      required this.itemBuilder,
-      this.startItems})
-      : super(key: key);
+  const PaginatedListView({Key? key, required this.paginatedList, required this.itemBuilder, this.startItems}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GetBuilder<PaginatedListViewController<T>>(
-        init: PaginatedListViewController<T>(
-            paginatedList: this.paginatedList, startItems: this.startItems),
+        init: PaginatedListViewController<T>(paginatedList: this.paginatedList, startItems: this.startItems),
         global: false,
         builder: (_) => ListView.builder(
               controller: _.scrollController,

@@ -24,8 +24,7 @@ class MiniPlayerControlsController extends GetxController {
   setVideo(String videoId) {
     this.videoId = videoId;
     update();
-    VideoLikeButtonController.to(tag: VideoLikeButtonController.tags(videoId))
-        ?.checkVideoLikeStatus();
+    VideoLikeButtonController.to(tag: VideoLikeButtonController.tags(videoId))?.checkVideoLikeStatus();
   }
 
   playNext() {

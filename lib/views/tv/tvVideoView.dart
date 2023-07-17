@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
-import 'package:invidious/controllers/settingsController.dart';
 import 'package:invidious/models/paginatedList.dart';
 import 'package:invidious/models/videoInList.dart';
 import 'package:invidious/utils.dart';
@@ -26,9 +24,7 @@ class TvVideoView extends StatelessWidget {
   const TvVideoView({Key? key, required this.videoId}) : super(key: key);
 
   playVideo(BuildContext context, Video video) {
-    Navigator.of(context).push(MaterialPageRoute(
-        builder: (ctx) =>
-            TvPlayerView(videos: [video, ...video.recommendedVideos])));
+    Navigator.of(context).push(MaterialPageRoute(builder: (ctx) => TvPlayerView(videos: [video, ...video.recommendedVideos])));
   }
 
   showChannel(BuildContext context, String channelId) {
@@ -54,9 +50,7 @@ class TvVideoView extends StatelessWidget {
                   child: Container(
                     alignment: Alignment.center,
                     child: Text(
-                      _.error == coulnotLoadVideos
-                          ? locals.couldntLoadVideo
-                          : _.error,
+                      _.error == coulnotLoadVideos ? locals.couldntLoadVideo : _.error,
                       style: textTheme.bodyLarge,
                     ),
                   ),
@@ -75,39 +69,29 @@ class TvVideoView extends StatelessWidget {
                             child: Row(
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
-                                VideoThumbnailView(
-                                    videoId: _.video!.videoId,
-                                    thumbnailUrl: ImageObject.getBestThumbnail(
-                                                _.video?.videoThumbnails)
-                                            ?.url ??
-                                        ''),
+                                VideoThumbnailView(videoId: _.video!.videoId, thumbnailUrl: ImageObject.getBestThumbnail(_.video?.videoThumbnails)?.url ?? ''),
                                 Expanded(
-                                  child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.all(16.0),
-                                          child: TvButton(
-                                            autofocus: true,
-                                            onFocusChanged: (focus) {
-                                              if (focus) {
-                                                _.scrollUp();
-                                              }
-                                            },
-                                            onPressed: (context) =>
-                                                playVideo(context, _.video!),
-                                            child: const Padding(
-                                              padding: EdgeInsets.all(15.0),
-                                              child: Icon(
-                                                Icons.play_arrow,
-                                                size: 50,
-                                              ),
-                                            ),
+                                  child: Column(crossAxisAlignment: CrossAxisAlignment.start, mainAxisAlignment: MainAxisAlignment.end, children: [
+                                    Padding(
+                                      padding: const EdgeInsets.all(16.0),
+                                      child: TvButton(
+                                        autofocus: true,
+                                        onFocusChanged: (focus) {
+                                          if (focus) {
+                                            _.scrollUp();
+                                          }
+                                        },
+                                        onPressed: (context) => playVideo(context, _.video!),
+                                        child: const Padding(
+                                          padding: EdgeInsets.all(15.0),
+                                          child: Icon(
+                                            Icons.play_arrow,
+                                            size: 50,
                                           ),
                                         ),
-                                      ]),
+                                      ),
+                                    ),
+                                  ]),
                                 ),
                               ],
                             ),
@@ -117,8 +101,7 @@ class TvVideoView extends StatelessWidget {
                             child: Text(
                               _.video!.title,
                               maxLines: 2,
-                              style: textTheme.headlineMedium!
-                                  .copyWith(color: colors.primary),
+                              style: textTheme.headlineMedium!.copyWith(color: colors.primary),
                               overflow: TextOverflow.ellipsis,
                             ),
                           ),
@@ -126,118 +109,75 @@ class TvVideoView extends StatelessWidget {
                             const Icon(Icons.visibility, size: 20),
                             Padding(
                               padding: const EdgeInsets.only(left: 4),
-                              child: Text(
-                                  compactCurrency.format(_.video?.viewCount)),
+                              child: Text(compactCurrency.format(_.video?.viewCount)),
                             ),
-                            const Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 8.0),
-                                child: Text('•')),
+                            const Padding(padding: EdgeInsets.symmetric(horizontal: 8.0), child: Text('•')),
                             const Icon(Icons.thumb_up, size: 20),
                             Padding(
                               padding: const EdgeInsets.only(left: 4),
-                              child: Text(
-                                  compactCurrency.format(_.video?.likeCount)),
+                              child: Text(compactCurrency.format(_.video?.likeCount)),
                             ),
                             if (_.getDislikes) ...[
-                              const Padding(
-                                  padding:
-                                      EdgeInsets.symmetric(horizontal: 8.0),
-                                  child: Text('•')),
+                              const Padding(padding: EdgeInsets.symmetric(horizontal: 8.0), child: Text('•')),
                               const Icon(Icons.thumb_down, size: 20),
                               Padding(
                                 padding: const EdgeInsets.only(left: 4),
-                                child: Text(compactCurrency
-                                    .format(_.dislikes)
-                                    .replaceAll(".00", "")),
+                                child: Text(compactCurrency.format(_.dislikes).replaceAll(".00", "")),
                               ),
                             ],
-                            const Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 8.0),
-                                child: Text('•')),
+                            const Padding(padding: EdgeInsets.symmetric(horizontal: 8.0), child: Text('•')),
                             Text(_.video?.publishedText ?? ''),
                           ]),
                           Padding(
                             padding: const EdgeInsets.only(bottom: 10.0),
-                            child: ListView(
-                                physics: const NeverScrollableScrollPhysics(),
-                                shrinkWrap: true,
+                            child: ListView(physics: const NeverScrollableScrollPhysics(), shrinkWrap: true, children: [
+                              Row(
                                 children: [
-                                  Row(
-                                    children: [
-                                      TvButton(
-                                        onPressed: (context) => showChannel(
-                                            context, _.video?.authorId ?? ''),
-                                        unfocusedColor: colors.background,
-                                        focusedColor: colors.secondaryContainer,
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: [
-                                            Thumbnail(
-                                              thumbnailUrl:
-                                                  ImageObject.getBestThumbnail(_
-                                                              .video
-                                                              ?.authorThumbnails)
-                                                          ?.url ??
-                                                      '',
-                                              width: 40,
-                                              height: 40,
-                                              id: 'author-small-${_.video?.authorId}',
-                                              decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          20)),
-                                            ),
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  left: 8.0, right: 20),
-                                              child:
-                                                  Text(_.video?.author ?? ''),
-                                            )
-                                          ],
+                                  TvButton(
+                                    onPressed: (context) => showChannel(context, _.video?.authorId ?? ''),
+                                    unfocusedColor: colors.background,
+                                    focusedColor: colors.secondaryContainer,
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Thumbnail(
+                                          thumbnailUrl: ImageObject.getBestThumbnail(_.video?.authorThumbnails)?.url ?? '',
+                                          width: 40,
+                                          height: 40,
+                                          id: 'author-small-${_.video?.authorId}',
+                                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
                                         ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 16.0),
-                                        child: TvSubscribeButton(
-                                            channelId: _.video?.authorId ?? '',
-                                            subCount:
-                                                _.video?.subCountText ?? ''),
-                                      )
-                                    ],
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(right: 40.0),
-                                    child: TvExpandableText(
-                                      text: _.video?.description ?? '',
-                                      maxLines: 3,
+                                        Padding(
+                                          padding: const EdgeInsets.only(left: 8.0, right: 20),
+                                          child: Text(_.video?.author ?? ''),
+                                        )
+                                      ],
                                     ),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.only(top: 10.0),
-                                    child: Text(
-                                      locals.recommended,
-                                      style: textTheme.titleLarge!,
-                                    ),
-                                  ),
-                                  TvHorizontalVideoList(
-                                      paginatedVideoList:
-                                          FixedItemList<VideoInList>(_
-                                                  .video?.recommendedVideos
-                                                  .map((e) => VideoInList(
-                                                      e.title,
-                                                      e.videoId,
-                                                      e.lengthSeconds,
-                                                      0,
-                                                      e.author,
-                                                      '',
-                                                      'authorUrl',
-                                                      0,
-                                                      '',
-                                                      e.videoThumbnails))
-                                                  .toList() ??
-                                              []))
-                                ]),
+                                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                                    child: TvSubscribeButton(channelId: _.video?.authorId ?? '', subCount: _.video?.subCountText ?? ''),
+                                  )
+                                ],
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(right: 40.0),
+                                child: TvExpandableText(
+                                  text: _.video?.description ?? '',
+                                  maxLines: 3,
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 10.0),
+                                child: Text(
+                                  locals.recommended,
+                                  style: textTheme.titleLarge!,
+                                ),
+                              ),
+                              TvHorizontalVideoList(
+                                  paginatedVideoList: FixedItemList<VideoInList>(
+                                      _.video?.recommendedVideos.map((e) => VideoInList(e.title, e.videoId, e.lengthSeconds, 0, e.author, '', 'authorUrl', 0, '', e.videoThumbnails)).toList() ?? []))
+                            ]),
                           )
                         ],
                       ),

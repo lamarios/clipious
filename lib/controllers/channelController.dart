@@ -1,8 +1,5 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:invidious/views/channel.dart';
 
 import '../globals.dart';
 import '../models/channel.dart';
@@ -19,15 +16,10 @@ class ChannelController extends GetxController {
   late Animation<Color?>? animation;
   late AnimationController? controller;
 
-  ChannelController(this.channelId,
-      {Color? backgroundColor, TickerProvider? vsync}) {
+  ChannelController(this.channelId, {Color? backgroundColor, TickerProvider? vsync}) {
     if (backgroundColor != null && vsync != null) {
-      controller =
-          AnimationController(duration: animationDuration, vsync: vsync);
-      animation = ColorTween(
-              begin: backgroundColor.withOpacity(0.4), end: backgroundColor)
-          .animate(controller!)
-        ..addListener(() {});
+      controller = AnimationController(duration: animationDuration, vsync: vsync);
+      animation = ColorTween(begin: backgroundColor.withOpacity(0.4), end: backgroundColor).animate(controller!)..addListener(() {});
     }
   }
 
@@ -61,8 +53,7 @@ class ChannelController extends GetxController {
       } else {
         await service.subscribe(channel!.authorId);
       }
-      bool isSubscribed =
-          await service.isSubscribedToChannel(channel!.authorId);
+      bool isSubscribed = await service.isSubscribedToChannel(channel!.authorId);
 
       this.isSubscribed = isSubscribed;
       update();

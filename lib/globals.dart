@@ -1,7 +1,5 @@
 library app.globals;
 
-import 'dart:collection';
-
 import 'package:invidious/database.dart';
 import 'package:invidious/service.dart';
 
@@ -12,12 +10,7 @@ const BROADCAST_STOP_PLAYING = 'stop-playing';
 const BROADCAST_STOP_MINI_PLAYER = 'stop-mini-player';
 const BROADCAST_MOVE_MINI_PLAYER = 'move-mini-player';
 const NAVIGATOR_KEY = 1;
-const YOUTUBE_HOSTS = [
-  'youtube.com',
-  'www.youtube.com',
-  'm.youtube.com',
-  'youtu.be'
-];
+const YOUTUBE_HOSTS = ['youtube.com', 'www.youtube.com', 'm.youtube.com', 'youtu.be'];
 
 const animationDuration = Duration(milliseconds: 250);
 

@@ -22,11 +22,7 @@ class RecommendedVideos extends StatelessWidget {
       ),
     ];
 
-    widgets.addAll(video.recommendedVideos
-        .map((e) => VideoListItem(
-            video: VideoInList(e.title, e.videoId, e.lengthSeconds, 0, e.author,
-                '', 'authorUrl', 0, '', e.videoThumbnails)))
-        .toList());
+    widgets.addAll(video.recommendedVideos.map((e) => VideoListItem(video: VideoInList(e.title, e.videoId, e.lengthSeconds, 0, e.author, '', 'authorUrl', 0, '', e.videoThumbnails))).toList());
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

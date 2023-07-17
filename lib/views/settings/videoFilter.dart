@@ -39,10 +39,7 @@ class VideoFilterSettings extends StatelessWidget {
               appBar: AppBar(
                 title: Text(locals.videoFilters),
               ),
-              floatingActionButton: FloatingActionButton(
-                  onPressed: () => createFilter(context),
-                  backgroundColor: colors.primaryContainer,
-                  child: const Icon(Icons.add)),
+              floatingActionButton: FloatingActionButton(onPressed: () => createFilter(context), backgroundColor: colors.primaryContainer, child: const Icon(Icons.add)),
               body: SafeArea(
                 bottom: false,
                 child: Column(
@@ -56,9 +53,7 @@ class VideoFilterSettings extends StatelessWidget {
                             child: ListView.builder(
                               itemCount: keys.length,
                               itemBuilder: (context, index) {
-                                return VideoFilterChannel(
-                                    key: ValueKey(const Uuid().v4()),
-                                    filters: mappedFilters[keys[index]] ?? []);
+                                return VideoFilterChannel(key: ValueKey(const Uuid().v4()), filters: mappedFilters[keys[index]] ?? []);
                               },
                             ),
                           )

@@ -21,10 +21,7 @@ class AppLogs extends StatelessWidget {
       builder: (_) => Scaffold(
         appBar: AppBar(
           title: Text(locals.appLogs),
-          actions: [
-            IconButton(
-                onPressed: _.selectAll, icon: const Icon(Icons.checklist))
-          ],
+          actions: [IconButton(onPressed: _.selectAll, icon: const Icon(Icons.checklist))],
         ),
         body: SafeArea(
           bottom: false,
@@ -45,8 +42,7 @@ class AppLogs extends StatelessWidget {
                         '${log.level ?? ''} - ${log.logger} - ${log.time}',
                         style: TextStyle(fontSize: 10, color: colors.secondary),
                       ),
-                      subtitle: Text(
-                          '${log.message}${log.stacktrace != null ? '\n\n${log.stacktrace}' : ''}'),
+                      subtitle: Text('${log.message}${log.stacktrace != null ? '\n\n${log.stacktrace}' : ''}'),
                       dense: true,
                       visualDensity: VisualDensity.compact,
                       value: _.selected.contains(log.id),
@@ -66,8 +62,7 @@ class AppLogs extends StatelessWidget {
                   child: InkWell(
                     onTap: () {
                       _.copySelectedLogsToClipboard();
-                      final ScaffoldMessengerState? scaffold =
-                          scaffoldKey.currentState;
+                      final ScaffoldMessengerState? scaffold = scaffoldKey.currentState;
                       scaffold?.showSnackBar(SnackBar(
                         content: Text(locals.logsCopied),
                         duration: const Duration(seconds: 1),

@@ -20,8 +20,7 @@ import '../../models/videoInList.dart';
 class TvSearch extends StatelessWidget {
   const TvSearch({Key? key}) : super(key: key);
 
-  Widget buildSuggestion(BuildContext context, ClipiousSearchController _,
-      bool isHistory, String suggestion) {
+  Widget buildSuggestion(BuildContext context, ClipiousSearchController _, bool isHistory, String suggestion) {
     ColorScheme colors = Theme.of(context).colorScheme;
 
     return TvButton(
@@ -30,8 +29,7 @@ class TvSearch extends StatelessWidget {
         unfocusedColor: Colors.transparent,
         child: isHistory
             ? Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
+                padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
                 child: Row(children: [
                   const Icon(Icons.history),
                   Padding(
@@ -42,8 +40,7 @@ class TvSearch extends StatelessWidget {
                 ]),
               )
             : Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
+                padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
                 child: Text(suggestion),
               ));
   }
@@ -95,109 +92,59 @@ class TvSearch extends StatelessWidget {
                                   width: 200,
                                   child: ListView(
                                     shrinkWrap: true,
-                                    children:
-                                        _.queryController.value.text.isEmpty
-                                            ? _
-                                                .getHistory()
-                                                .map((e) => buildSuggestion(
-                                                    context, _, true, e))
-                                                .toList()
-                                            : _.suggestions
-                                                .map((e) => buildSuggestion(
-                                                    context, _, false, e))
-                                                .toList(),
+                                    children: _.queryController.value.text.isEmpty
+                                        ? _.getHistory().map((e) => buildSuggestion(context, _, true, e)).toList()
+                                        : _.suggestions.map((e) => buildSuggestion(context, _, false, e)).toList(),
                                   ),
                                 ),
                                 Expanded(
                                     child: SingleChildScrollView(
                                   child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: _.loading
                                         ? [
                                             const Center(
-                                              child:
-                                                  CircularProgressIndicator(),
+                                              child: CircularProgressIndicator(),
                                             )
                                           ]
                                         : [
                                             Visibility(
-                                                visible: _.videos.isNotEmpty ??
-                                                    false,
+                                                visible: _.videos.isNotEmpty ?? false,
                                                 child: Text(
                                                   locals.videos,
                                                   style: textTheme.titleLarge,
                                                 )),
                                             Visibility(
-                                              visible:
-                                                  _.videos.isNotEmpty ?? false,
+                                              visible: _.videos.isNotEmpty ?? false,
                                               child: Focus(
                                                   focusNode: _.resultFocus,
                                                   child: TvHorizontalVideoList(
-                                                      paginatedVideoList:
-                                                          SearchPaginatedList<
-                                                                  VideoInList>(
-                                                              getFromResults:
-                                                                  (res) =>
-                                                                      res
-                                                                          .videos,
-                                                              sortBy: _.sortBy,
-                                                              query: _
-                                                                  .queryController
-                                                                  .value
-                                                                  .text,
-                                                              type: SearchType
-                                                                  .video,
-                                                              items:
-                                                                  _.videos))),
+                                                      paginatedVideoList: SearchPaginatedList<VideoInList>(
+                                                          getFromResults: (res) => res.videos, sortBy: _.sortBy, query: _.queryController.value.text, type: SearchType.video, items: _.videos))),
                                             ),
                                             Visibility(
-                                                visible:
-                                                    _.channels.isNotEmpty ??
-                                                        false,
+                                                visible: _.channels.isNotEmpty ?? false,
                                                 child: Text(
                                                   locals.channels,
                                                   style: textTheme.titleLarge,
                                                 )),
                                             Visibility(
-                                              visible: _.channels.isNotEmpty ??
-                                                  false,
+                                              visible: _.channels.isNotEmpty ?? false,
                                               child: SizedBox(
                                                 height: 60,
-                                                child:
-                                                    TvHorizontalPaginatedListView<
-                                                        Channel>(
-                                                  paginatedList:
-                                                      SearchPaginatedList<
-                                                              Channel>(
-                                                          getFromResults:
-                                                              (res) =>
-                                                                  res.channels,
-                                                          sortBy: _.sortBy,
-                                                          query: _
-                                                              .queryController
-                                                              .value
-                                                              .text,
-                                                          items: _.channels,
-                                                          type: SearchType
-                                                              .channel),
+                                                child: TvHorizontalPaginatedListView<Channel>(
+                                                  paginatedList: SearchPaginatedList<Channel>(
+                                                      getFromResults: (res) => res.channels, sortBy: _.sortBy, query: _.queryController.value.text, items: _.channels, type: SearchType.channel),
                                                   startItems: _.channels,
                                                   itemBuilder: (e) => Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            8.0),
+                                                    padding: const EdgeInsets.all(8.0),
                                                     child: TvButton(
-                                                      onPressed: (context) =>
-                                                          openChannel(
-                                                              context, e),
+                                                      onPressed: (context) => openChannel(context, e),
                                                       borderRadius: 20,
                                                       child: Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .all(8.0),
+                                                        padding: const EdgeInsets.all(8.0),
                                                         child: Column(
-                                                          mainAxisSize:
-                                                              MainAxisSize.min,
+                                                          mainAxisSize: MainAxisSize.min,
                                                           children: [
                                                             Text(e.author),
                                                           ],
@@ -209,43 +156,24 @@ class TvSearch extends StatelessWidget {
                                               ),
                                             ),
                                             Visibility(
-                                                visible:
-                                                    _.playlists.isNotEmpty ??
-                                                        false,
+                                                visible: _.playlists.isNotEmpty ?? false,
                                                 child: Text(
                                                   locals.playlists,
                                                   style: textTheme.titleLarge,
                                                 )),
                                             Visibility(
-                                              visible: _.playlists.isNotEmpty ??
-                                                  false,
-                                              child: TvHorizontalItemList<
-                                                  Playlist>(
-                                                paginatedList:
-                                                    SearchPaginatedList<
-                                                            Playlist>(
-                                                        getFromResults:
-                                                            (res) => res
-                                                                .playlists,
-                                                        sortBy: _.sortBy,
-                                                        query: _.queryController
-                                                            .value.text,
-                                                        items: _.playlists,
-                                                        type: SearchType
-                                                            .playlist),
-                                                buildItem: (context, index,
-                                                        item) =>
-                                                    Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .all(8.0),
-                                                        child: PlaylistItem(
-                                                          playlist: item,
-                                                          canDeleteVideos:
-                                                              false,
-                                                          isTv: true,
-                                                          // cameFromSearch: true,
-                                                        )),
+                                              visible: _.playlists.isNotEmpty ?? false,
+                                              child: TvHorizontalItemList<Playlist>(
+                                                paginatedList: SearchPaginatedList<Playlist>(
+                                                    getFromResults: (res) => res.playlists, sortBy: _.sortBy, query: _.queryController.value.text, items: _.playlists, type: SearchType.playlist),
+                                                buildItem: (context, index, item) => Padding(
+                                                    padding: const EdgeInsets.all(8.0),
+                                                    child: PlaylistItem(
+                                                      playlist: item,
+                                                      canDeleteVideos: false,
+                                                      isTv: true,
+                                                      // cameFromSearch: true,
+                                                    )),
                                               ),
                                             ),
                                           ],

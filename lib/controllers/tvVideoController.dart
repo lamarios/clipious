@@ -14,7 +14,6 @@ class TvVideoController extends VideoController {
   }
 
   scrollUp() {
-    scrollController.animateTo(0,
-        duration: animationDuration ~/ 2, curve: Curves.easeInOutQuad);
+    scrollController.animateTo(0, duration: animationDuration ~/ 2, curve: Curves.easeInOutQuad);
   }
 }

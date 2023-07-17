@@ -10,23 +10,14 @@ class CommentsView extends StatelessWidget {
   final String? source;
   final String? sortBy;
 
-  CommentsView(
-      {super.key,
-      required this.videoId,
-      this.continuation,
-      this.source,
-      this.sortBy});
+  CommentsView({super.key, required this.videoId, this.continuation, this.source, this.sortBy});
 
   @override
   Widget build(BuildContext context) {
     var locals = AppLocalizations.of(context)!;
     return GetBuilder<CommentsViewController>(
         global: false,
-        init: CommentsViewController(
-            videoId: videoId,
-            sortBy: sortBy,
-            source: source,
-            continuation: continuation),
+        init: CommentsViewController(videoId: videoId, sortBy: sortBy, source: source, continuation: continuation),
         builder: (_) {
           List<Widget> widgets = [];
 

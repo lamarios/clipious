@@ -16,8 +16,7 @@ class PlaylistController extends GetxController {
   ScrollController scrollController = ScrollController();
   late double playlistItemHeight;
 
-  PlaylistController(
-      {required this.playlist, required this.playlistItemHeight});
+  PlaylistController({required this.playlist, required this.playlistItemHeight});
 
   static String getTags(String playlistId) {
     return 'playlist-$playlistId';
@@ -25,16 +24,12 @@ class PlaylistController extends GetxController {
 
   deletePlaylist() async {
     await service.deleteUserPlaylist(playlist.playlistId);
-    PlaylistListController.to(
-            tag: PlaylistListController.getTag(userPlayListTag))
-        ?.refreshPlaylists();
+    PlaylistListController.to(tag: PlaylistListController.getTag(userPlayListTag))?.refreshPlaylists();
   }
 
   Future<bool> removeVideoFromPlayList(VideoInList v) async {
     await service.deleteUserPlaylistVideo(playlist.playlistId, v.indexId ?? '');
-    PlaylistListController.to(
-            tag: PlaylistListController.getTag(userPlayListTag))
-        ?.refreshPlaylists();
+    PlaylistListController.to(tag: PlaylistListController.getTag(userPlayListTag))?.refreshPlaylists();
     playlist.videos.remove(v);
     update();
 
@@ -46,13 +41,11 @@ class PlaylistController extends GetxController {
   }
 
   scrollToTop() {
-    scrollController.animateTo(0,
-        duration: animationDuration ~/ 2, curve: Curves.easeInOutQuad);
+    scrollController.animateTo(0, duration: animationDuration ~/ 2, curve: Curves.easeInOutQuad);
   }
 
   getAllVideos() async {
-    if (playlist.videoCount > 0 &&
-        playlist.videos.length < playlist.videoCount) {
+    if (playlist.videoCount > 0 && playlist.videos.length < playlist.videoCount) {
       loading = true;
       update();
       int page = 1;

@@ -20,8 +20,7 @@ var log = Logger('Utils');
 
 enum DeviceType { phone, tablet, tv }
 
-double tabletMaxVideoWidth =
-    getDeviceType() == DeviceType.phone ? double.infinity : 500;
+double tabletMaxVideoWidth = getDeviceType() == DeviceType.phone ? double.infinity : 500;
 
 String prettyDuration(Duration duration) {
   var components = <String>[];
@@ -40,12 +39,10 @@ String prettyDuration(Duration duration) {
 
 NumberFormat compactCurrency = NumberFormat.compactCurrency(
   decimalDigits: 2,
-  symbol:
-      '', // if you want to add currency symbol then pass that in this else leave it empty.
+  symbol: '', // if you want to add currency symbol then pass that in this else leave it empty.
 );
 
-Future<void> showAlertDialog(
-    BuildContext context, String title, List<Widget> body) async {
+Future<void> showAlertDialog(BuildContext context, String title, List<Widget> body) async {
   var locals = AppLocalizations.of(context)!;
   return showDialog<void>(
     context: context,
@@ -86,8 +83,7 @@ void showSharingSheet(BuildContext context, ShareLinks links) {
                 FilledButton.tonal(
                   child: Text(locals.shareInvidiousLink),
                   onPressed: () {
-                    Share.share(links
-                        .getInvidiousLink(db.getCurrentlySelectedServer()));
+                    Share.share(links.getInvidiousLink(db.getCurrentlySelectedServer()));
                     Navigator.of(context).pop();
                   },
                 ),
@@ -141,8 +137,7 @@ double getGridAspectRatio(BuildContext context) {
   return getGridCount(context) > 1 ? 16 / 15 : 16 / 13;
 }
 
-okCancelDialog(
-    BuildContext context, String title, String message, Function() onOk) {
+okCancelDialog(BuildContext context, String title, String message, Function() onOk) {
   var locals = AppLocalizations.of(context)!;
   showDialog(
     context: context,
@@ -187,21 +182,14 @@ showTvAlertdialog(BuildContext context, String title, List<Widget> body) {
   ]);
 }
 
-showTvDialog(
-    {required BuildContext context,
-    String? title,
-    required List<Widget> Function(BuildContext context) builder,
-    required List<Widget> actions}) {
+showTvDialog({required BuildContext context, String? title, required List<Widget> Function(BuildContext context) builder, required List<Widget> actions}) {
   Navigator.of(context).push(MaterialPageRoute(
     builder: (context) {
       ColorScheme colors = Theme.of(context).colorScheme;
       return Scaffold(
         body: TvOverscan(
           child: Column(children: [
-            if (title != null)
-              Text(title, style: TextStyle(color: colors.primary, fontSize: 25))
-            else
-              SizedBox.shrink(),
+            if (title != null) Text(title, style: TextStyle(color: colors.primary, fontSize: 25)) else SizedBox.shrink(),
             Expanded(
               child: ListView(
                 children: builder(context),
@@ -224,8 +212,7 @@ showTvDialog(
 }
 
 Country getCountryFromCode(String code) {
-  return countryCodes.firstWhere((element) => element.code == code,
-      orElse: () => Country('US', 'United States of America'));
+  return countryCodes.firstWhere((element) => element.code == code, orElse: () => Country('US', 'United States of America'));
 }
 
 T? safeGet<T>({String? tag}) {
@@ -238,12 +225,10 @@ T? safeGet<T>({String? tag}) {
   }
 }
 
-KeyEventResult onTvSelect(
-    KeyEvent event, BuildContext context, Function(BuildContext context) func) {
+KeyEventResult onTvSelect(KeyEvent event, BuildContext context, Function(BuildContext context) func) {
   if (event is KeyUpEvent) {
     log.fine('onTvSelect, ${event.logicalKey}, ${event}');
-    if (event.logicalKey == LogicalKeyboardKey.select ||
-        event.logicalKey == LogicalKeyboardKey.enter) {
+    if (event.logicalKey == LogicalKeyboardKey.select || event.logicalKey == LogicalKeyboardKey.enter) {
       func(context);
       return KeyEventResult.handled;
     }
@@ -256,12 +241,7 @@ SystemUiOverlayStyle getUiOverlayStyle(BuildContext context) {
   ColorScheme colorScheme = Theme.of(context).colorScheme;
   return SystemUiOverlayStyle(
       systemNavigationBarColor: colorScheme.background,
-      systemNavigationBarIconBrightness:
-          colorScheme.brightness == Brightness.dark
-              ? Brightness.light
-              : Brightness.dark,
+      systemNavigationBarIconBrightness: colorScheme.brightness == Brightness.dark ? Brightness.light : Brightness.dark,
       statusBarColor: colorScheme.background,
-      statusBarIconBrightness: colorScheme.brightness == Brightness.dark
-          ? Brightness.light
-          : Brightness.dark);
+      statusBarIconBrightness: colorScheme.brightness == Brightness.dark ? Brightness.light : Brightness.dark);
 }

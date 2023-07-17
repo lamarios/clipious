@@ -27,9 +27,7 @@ class ChannelInfo extends StatelessWidget {
         child: Stack(children: [
           Thumbnail(
               width: double.infinity,
-              thumbnailUrl:
-                  ImageObject.getBestThumbnail(channel.authorThumbnails)?.url ??
-                      '',
+              thumbnailUrl: ImageObject.getBestThumbnail(channel.authorThumbnails)?.url ?? '',
               id: 'channel-banner/${channel.authorId}',
               decoration: BoxDecoration(
                 color: colors.secondaryContainer,
@@ -40,11 +38,7 @@ class ChannelInfo extends StatelessWidget {
               right: 0,
               child: Container(
                 alignment: Alignment.bottomLeft,
-                decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        colors: [Colors.transparent, colors.background])),
+                decoration: BoxDecoration(gradient: LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: [Colors.transparent, colors.background])),
                 child: Padding(
                   padding: const EdgeInsets.only(left: 8.0, top: 128),
                   child: Text(
@@ -59,9 +53,7 @@ class ChannelInfo extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: Row(
           children: [
-            SubscribeButton(
-                channelId: channel.authorId,
-                subCount: compactCurrency.format(channel.subCount)),
+            SubscribeButton(channelId: channel.authorId, subCount: compactCurrency.format(channel.subCount)),
           ],
         ),
       ),
@@ -69,10 +61,8 @@ class ChannelInfo extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: SelectableLinkify(
             text: channel.description,
-            linkStyle: TextStyle(
-                color: colors.primary, decoration: TextDecoration.none),
-            onOpen: (link) => launchUrl(Uri.parse(link.url),
-                mode: LaunchMode.externalApplication),
+            linkStyle: TextStyle(color: colors.primary, decoration: TextDecoration.none),
+            onOpen: (link) => launchUrl(Uri.parse(link.url), mode: LaunchMode.externalApplication),
             options: const LinkifyOptions(humanize: true, removeWww: true)),
       ),
       Padding(
@@ -95,17 +85,7 @@ class ChannelInfo extends StatelessWidget {
           mainAxisSpacing: 5,
           childAspectRatio: getGridAspectRatio(context),
           children: channel.latestVideos?.map((e) {
-                VideoInList videoInList = VideoInList(
-                    e.title,
-                    e.videoId,
-                    e.lengthSeconds,
-                    0,
-                    e.author,
-                    channel.authorId,
-                    'authorUrl',
-                    0,
-                    '',
-                    e.videoThumbnails);
+                VideoInList videoInList = VideoInList(e.title, e.videoId, e.lengthSeconds, 0, e.author, channel.authorId, 'authorUrl', 0, '', e.videoThumbnails);
                 videoInList.filtered = e.filtered;
                 videoInList.matchedFilters = e.matchedFilters;
                 return VideoListItem(video: videoInList);

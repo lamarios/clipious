@@ -1,14 +1,12 @@
-import 'package:fbroadcast/fbroadcast.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:invidious/controllers/videoInListController.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/main.dart';
 import 'package:invidious/models/videoInList.dart';
 import 'package:invidious/myRouteObserver.dart';
 import 'package:invidious/views/components/videoThumbnail.dart';
-import 'package:invidious/views/video/addToPlayList.dart';
 import 'package:invidious/views/video/videoModalSheet.dart';
 import 'package:logging/logging.dart';
 
@@ -28,9 +26,7 @@ class VideoListItem extends StatelessWidget {
     if (_.video.filtered) {
       _.showVideoDetails();
     } else {
-      navigatorKey.currentState?.push(MaterialPageRoute(
-          settings: ROUTE_VIDEO,
-          builder: (context) => VideoView(videoId: video.videoId)));
+      navigatorKey.currentState?.push(MaterialPageRoute(settings: ROUTE_VIDEO, builder: (context) => VideoView(videoId: video.videoId)));
     }
   }
 
@@ -39,17 +35,14 @@ class VideoListItem extends StatelessWidget {
     ColorScheme colorScheme = Theme.of(context).colorScheme;
     var locals = AppLocalizations.of(context)!;
 
-    TextStyle filterStyle =
-        TextStyle(fontSize: 11, color: colorScheme.secondary.withOpacity(0.7));
+    TextStyle filterStyle = TextStyle(fontSize: 11, color: colorScheme.secondary.withOpacity(0.7));
 
     return GetBuilder(
       init: VideoInListController(video),
       tag: video.videoId,
       builder: (_) => InkWell(
         onTap: () => openVideo(context, _),
-        onLongPress: _.video.filtered
-            ? null
-            : () => VideoModalSheet.showVideoModalSheet(context, video),
+        onLongPress: _.video.filtered ? null : () => VideoModalSheet.showVideoModalSheet(context, video),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
@@ -88,10 +81,7 @@ class VideoListItem extends StatelessWidget {
                   )
                 : VideoThumbnailView(
                     videoId: video.videoId,
-                    thumbnailUrl:
-                        ImageObject.getBestThumbnail(video.videoThumbnails)
-                                ?.url ??
-                            '',
+                    thumbnailUrl: ImageObject.getBestThumbnail(video.videoThumbnails)?.url ?? '',
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Column(
@@ -103,8 +93,7 @@ class VideoListItem extends StatelessWidget {
                             children: [
                               Expanded(
                                 child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 4.0, vertical: 8),
+                                  padding: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 8),
                                   child: AnimatedOpacity(
                                     duration: animationDuration,
                                     opacity: _.progress > 0.1 ? 1 : 0,
@@ -117,17 +106,14 @@ class VideoListItem extends StatelessWidget {
                                         borderRadius: BorderRadius.circular(20),
                                       ),
                                       child: AnimatedFractionallySizedBox(
-                                          widthFactor:
-                                              _.progress > 0 ? _.progress : 0,
+                                          widthFactor: _.progress > 0 ? _.progress : 0,
                                           heightFactor: 1,
-                                          duration:
-                                              const Duration(milliseconds: 750),
+                                          duration: const Duration(milliseconds: 750),
                                           curve: Curves.easeInOutQuad,
                                           child: Container(
                                             decoration: BoxDecoration(
                                               color: colorScheme.primary,
-                                              borderRadius:
-                                                  BorderRadius.circular(20),
+                                              borderRadius: BorderRadius.circular(20),
                                             ),
                                           )),
                                     ),
@@ -141,16 +127,12 @@ class VideoListItem extends StatelessWidget {
                                   child: Container(
                                     alignment: Alignment.center,
                                     height: 25,
-                                    decoration: BoxDecoration(
-                                        color: Colors.black.withOpacity(0.75),
-                                        borderRadius: BorderRadius.circular(5)),
+                                    decoration: BoxDecoration(color: Colors.black.withOpacity(0.75), borderRadius: BorderRadius.circular(5)),
                                     child: Padding(
                                       padding: const EdgeInsets.all(4.0),
                                       child: Text(
-                                        prettyDuration(Duration(
-                                            seconds: video.lengthSeconds)),
-                                        style: const TextStyle(
-                                            color: Colors.white, fontSize: 12),
+                                        prettyDuration(Duration(seconds: video.lengthSeconds)),
+                                        style: const TextStyle(color: Colors.white, fontSize: 12),
                                       ),
                                     ),
                                   ),
@@ -165,17 +147,13 @@ class VideoListItem extends StatelessWidget {
             Text(
               _.video.filtered ? '**********' : video.title,
               textAlign: TextAlign.left,
-              style: TextStyle(
-                  color: colorScheme.primary, fontWeight: FontWeight.normal),
+              style: TextStyle(color: colorScheme.primary, fontWeight: FontWeight.normal),
             ),
             Visibility(
               child: InkWell(
                 onTap: () {
                   log.fine('Opening channel ${video.authorId}');
-                  navigatorKey.currentState?.push(MaterialPageRoute(
-                      settings: ROUTE_CHANNEL,
-                      builder: (context) =>
-                          ChannelView(channelId: video.authorId!)));
+                  navigatorKey.currentState?.push(MaterialPageRoute(settings: ROUTE_CHANNEL, builder: (context) => ChannelView(channelId: video.authorId!)));
                 },
                 child: Row(
                   children: [
@@ -189,9 +167,7 @@ class VideoListItem extends StatelessWidget {
             ),
             Row(
               children: [
-                Visibility(
-                    visible: (video.viewCount ?? 0) > 0,
-                    child: const Icon(Icons.visibility)),
+                Visibility(visible: (video.viewCount ?? 0) > 0, child: const Icon(Icons.visibility)),
                 Visibility(
                     visible: (video.viewCount ?? 0) > 0,
                     child: Padding(

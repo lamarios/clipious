@@ -1,14 +1,11 @@
 import 'package:invidious/models/baseVideo.dart';
-import 'package:invidious/models/db/server.dart';
-import 'package:invidious/models/interfaces/sharelink.dart';
+import 'package:json_annotation/json_annotation.dart';
 
 import 'adaptiveFormat.dart';
 import 'caption.dart';
 import 'formatStream.dart';
 import 'imageObject.dart';
 import 'recommendedVideo.dart';
-
-import 'package:json_annotation/json_annotation.dart';
 
 part 'video.g.dart';
 
@@ -81,8 +78,7 @@ class Video extends BaseVideo {
       String? authorId,
       this.captions,
       this.recommendedVideos)
-      : super(title, videoId, lengthSeconds, author, authorId, authorUrl,
-            videoThumbnails);
+      : super(title, videoId, lengthSeconds, author, authorId, authorUrl, videoThumbnails);
 
   factory Video.fromJson(Map<String, dynamic> json) => _$VideoFromJson(json);
 
@@ -90,8 +86,7 @@ class Video extends BaseVideo {
 
   ImageObject? getBestThumbnail() {
     if (videoThumbnails.isNotEmpty) {
-      return videoThumbnails
-          .firstWhere((element) => element.quality == 'maxres');
+      return videoThumbnails.firstWhere((element) => element.quality == 'maxres');
     } else {
       return null;
     }

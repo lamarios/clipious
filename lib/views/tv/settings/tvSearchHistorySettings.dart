@@ -23,8 +23,7 @@ class TvSearchHistorySettings extends StatelessWidget {
                   Text(locals.clearSearchHistory, textScaleFactor: 3),
                   Padding(
                     padding: const EdgeInsets.only(top: 36),
-                    child:
-                        Text(locals.irreversibleAction, textScaleFactor: 1.5),
+                    child: Text(locals.irreversibleAction, textScaleFactor: 1.5),
                   )
                 ],
               ),
@@ -35,8 +34,7 @@ class TvSearchHistorySettings extends StatelessWidget {
               Navigator.of(context).pop();
             },
             child: Padding(
-              padding:
-                  const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
+              padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
               child: Text(locals.cancel),
             ),
           ),
@@ -47,8 +45,7 @@ class TvSearchHistorySettings extends StatelessWidget {
             },
             focusedColor: Colors.red,
             child: Padding(
-              padding:
-                  const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
+              padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
               child: Text(locals.ok),
             ),
           ),
@@ -70,8 +67,7 @@ class TvSearchHistorySettings extends StatelessWidget {
               SettingsTitle(title: locals.searchHistoryDescription),
               SettingsTile(
                 title: locals.enableSearchHistory,
-                trailing:
-                    Switch(onChanged: (value) {}, value: _.useSearchHistory),
+                trailing: Switch(onChanged: (value) {}, value: _.useSearchHistory),
                 onSelected: (ctx) => _.toggleSearchHistory(!_.useSearchHistory),
               ),
               AdjustmentSettingTile(

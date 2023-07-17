@@ -9,8 +9,7 @@ class SearchSuggestion {
 
   SearchSuggestion(this.query, this.suggestions);
 
-  factory SearchSuggestion.fromJson(Map<String, dynamic> json) =>
-      _$SearchSuggestionFromJson(json);
+  factory SearchSuggestion.fromJson(Map<String, dynamic> json) => _$SearchSuggestionFromJson(json);
 
   Map<String, dynamic> toJson() => _$SearchSuggestionToJson(this);
 }

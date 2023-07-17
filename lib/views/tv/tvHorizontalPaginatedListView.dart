@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 
 import '../../controllers/paginatedListViewController.dart';
@@ -10,18 +9,12 @@ class TvHorizontalPaginatedListView<T> extends StatelessWidget {
   final List<T>? startItems;
   final Widget Function(T item) itemBuilder;
 
-  const TvHorizontalPaginatedListView(
-      {Key? key,
-      required this.paginatedList,
-      required this.itemBuilder,
-      this.startItems})
-      : super(key: key);
+  const TvHorizontalPaginatedListView({Key? key, required this.paginatedList, required this.itemBuilder, this.startItems}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GetBuilder<PaginatedListViewController<T>>(
-        init: PaginatedListViewController<T>(
-            paginatedList: this.paginatedList, startItems: this.startItems),
+        init: PaginatedListViewController<T>(paginatedList: this.paginatedList, startItems: this.startItems),
         global: false,
         builder: (_) => Stack(
               children: [

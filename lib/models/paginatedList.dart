@@ -131,8 +131,7 @@ class SubscriptionVideoList extends PaginatedVideoList {
 
   @override
   Future<List<VideoInList>> getItems() async {
-    UserFeed feed =
-        await service.getUserFeed(page: page, maxResults: maxResults);
+    UserFeed feed = await service.getUserFeed(page: page, maxResults: maxResults);
     List<VideoInList> subs = [];
     subs.addAll(feed.notifications ?? []);
     subs.addAll(feed.videos ?? []);
@@ -174,12 +173,7 @@ class SearchPaginatedList<T> extends PaginatedList<T> {
 
   List<T> Function(SearchResults res) getFromResults;
 
-  SearchPaginatedList(
-      {required this.query,
-      required this.items,
-      required this.type,
-      required this.getFromResults,
-      required this.sortBy});
+  SearchPaginatedList({required this.query, required this.items, required this.type, required this.getFromResults, required this.sortBy});
 
   @override
   bool getHasMore() {
@@ -188,8 +182,7 @@ class SearchPaginatedList<T> extends PaginatedList<T> {
 
   @override
   Future<List<T>> getItems() async {
-    SearchResults results =
-        await service.search(query, type: type, page: page, sortBy: sortBy);
+    SearchResults results = await service.search(query, type: type, page: page, sortBy: sortBy);
     return getFromResults(results);
   }
 
@@ -212,12 +205,7 @@ class SearchPaginatedList<T> extends PaginatedList<T> {
 
 // Force refresh to fetch all videos as search endpoint only returns 2 videos for each playlist
 class PlaylistSearchPaginatedList<T> extends SearchPaginatedList<T> {
-  PlaylistSearchPaginatedList(
-      {required super.query,
-      required super.items,
-      required super.type,
-      required super.getFromResults,
-      required super.sortBy});
+  PlaylistSearchPaginatedList({required super.query, required super.items, required super.type, required super.getFromResults, required super.sortBy});
 
   @override
   bool getHasMore() {

@@ -1,21 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:invidious/controllers/videoFilterEditController.dart';
 import 'package:search_choices/search_choices.dart';
 
 import '../../models/channel.dart';
 import '../../models/db/videoFilter.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class VideoFilterSetup extends StatelessWidget {
   final String? channelId;
   final VideoFilter? filter;
 
-  const VideoFilterSetup({Key? key, this.channelId, this.filter})
-      : super(key: key);
+  const VideoFilterSetup({Key? key, this.channelId, this.filter}) : super(key: key);
 
-  List<Widget> getFilterWidgets(
-      AppLocalizations locals, VideoFilterEditController _) {
+  List<Widget> getFilterWidgets(AppLocalizations locals, VideoFilterEditController _) {
     return _.filter?.filterAll ?? false
         ? []
         : [
@@ -23,13 +21,7 @@ class VideoFilterSetup extends StatelessWidget {
               children: [
                 Expanded(child: Text(locals.videoFilterType)),
                 DropdownButton<FilterType>(
-                    value: _.filter?.type,
-                    items: FilterType.values
-                        .map((e) => DropdownMenuItem<FilterType>(
-                            value: e,
-                            child: Text(FilterType.localizedType(e, locals))))
-                        .toList(),
-                    onChanged: _.setType)
+                    value: _.filter?.type, items: FilterType.values.map((e) => DropdownMenuItem<FilterType>(value: e, child: Text(FilterType.localizedType(e, locals)))).toList(), onChanged: _.setType)
               ],
             ),
             Visibility(
@@ -39,13 +31,7 @@ class VideoFilterSetup extends StatelessWidget {
                   Expanded(child: Text(locals.videoFilterOperation)),
                   DropdownButton<FilterOperation>(
                       value: _.filter?.operation,
-                      items: _
-                          .getAvailableOperations()
-                          .map((e) => DropdownMenuItem<FilterOperation>(
-                              value: e,
-                              child: Text(
-                                  FilterOperation.localizedLabel(e, locals))))
-                          .toList(),
+                      items: _.getAvailableOperations().map((e) => DropdownMenuItem<FilterOperation>(value: e, child: Text(FilterOperation.localizedLabel(e, locals)))).toList(),
                       onChanged: _.setOperation)
                 ],
               ),
@@ -62,8 +48,7 @@ class VideoFilterSetup extends StatelessWidget {
                     child: TextField(
                       autocorrect: false,
                       maxLines: 1,
-                      keyboardType:
-                          _.isNumberValue() ? TextInputType.number : null,
+                      keyboardType: _.isNumberValue() ? TextInputType.number : null,
                       controller: _.valueController,
                       onChanged: _.valueChanged,
                     ),
@@ -83,9 +68,7 @@ class VideoFilterSetup extends StatelessWidget {
         init: VideoFilterEditController(filter: filter),
         builder: (_) => Scaffold(
               appBar: AppBar(
-                title: Text(filter == null
-                    ? locals.addVideoFilter
-                    : locals.editVideoFilter),
+                title: Text(filter == null ? locals.addVideoFilter : locals.editVideoFilter),
               ),
               body: SafeArea(
                 bottom: false,
@@ -106,10 +89,8 @@ class VideoFilterSetup extends StatelessWidget {
                           dialogBox: true,
                           onChanged: _.selectChannel,
                           onClear: _.channelClear,
-                          futureSearchFn: (keyword, orderBy, orderAsc, filters,
-                              pageNb) async {
-                            List<Channel> channels =
-                                await _.searchChannel(keyword ?? '');
+                          futureSearchFn: (keyword, orderBy, orderAsc, filters, pageNb) async {
+                            List<Channel> channels = await _.searchChannel(keyword ?? '');
 
                             return Tuple2(
                                 channels
@@ -123,18 +104,13 @@ class VideoFilterSetup extends StatelessWidget {
                         ),
                         Visibility(
                             visible: _.filter?.channelId != null,
-                            child: SwitchListTile(
-                                title:
-                                    Text(locals.videoFilterHideAllFromChannel),
-                                value: _.filter?.filterAll ?? false,
-                                onChanged: _.channelHideAll)),
+                            child: SwitchListTile(title: Text(locals.videoFilterHideAllFromChannel), value: _.filter?.filterAll ?? false, onChanged: _.channelHideAll)),
                         ...getFilterWidgets(locals, _),
                         SwitchListTile(
                             title: Text(locals.videoFilterHide),
                             subtitle: Text(
                               locals.videoFilterHideDescription,
-                              style: TextStyle(
-                                  fontSize: 11, color: colors.secondary),
+                              style: TextStyle(fontSize: 11, color: colors.secondary),
                             ),
                             value: _.filter?.hideFromFeed ?? false,
                             onChanged: _.hideOnFilteredChanged),
@@ -149,9 +125,7 @@ class VideoFilterSetup extends StatelessWidget {
                             )),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: FilledButton(
-                              onPressed: _.isFilterValid() ? _.onSave : null,
-                              child: Text(locals.save)),
+                          child: FilledButton(onPressed: _.isFilterValid() ? _.onSave : null, child: Text(locals.save)),
                         )
                       ],
                     ),

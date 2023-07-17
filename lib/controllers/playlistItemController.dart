@@ -15,11 +15,9 @@ class PlaylistItemController extends GetxController {
   }
 
   getThumbnailsFromYoutube() async {
-    if (playlist.videoCount > 0 &&
-        playlist.videos.length < playlist.videoCount) {
+    if (playlist.videoCount > 0 && playlist.videos.length < playlist.videoCount) {
       // something is not right, let's get the full playlist
-      Playlist playlist =
-          await service.getPublicPlaylists(this.playlist.playlistId);
+      Playlist playlist = await service.getPublicPlaylists(this.playlist.playlistId);
       videos = playlist.videos;
       update();
     }

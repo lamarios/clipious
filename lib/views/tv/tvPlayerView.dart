@@ -3,7 +3,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:invidious/controllers/tvPlayerController.dart';
 import 'package:invidious/models/paginatedList.dart';
-import 'package:invidious/models/recommendedVideo.dart';
 import 'package:invidious/models/videoInList.dart';
 import 'package:invidious/utils.dart';
 import 'package:invidious/views/tv/tvButton.dart';
@@ -16,7 +15,6 @@ import '../../globals.dart';
 import '../../main.dart';
 import '../../models/baseVideo.dart';
 import '../../models/imageObject.dart';
-import '../../models/video.dart';
 import '../components/videoThumbnail.dart';
 
 class TvPlayerView extends StatelessWidget {
@@ -24,8 +22,7 @@ class TvPlayerView extends StatelessWidget {
 
   const TvPlayerView({Key? key, required this.videos}) : super(key: key);
 
-  onVideoQueueSelected(
-      BuildContext context, TvPlayerController _, VideoInList video) {
+  onVideoQueueSelected(BuildContext context, TvPlayerController _, VideoInList video) {
     _.playFromQueue(video);
   }
 
@@ -52,8 +49,7 @@ class TvPlayerView extends StatelessWidget {
                 )
               : Focus(
                   autofocus: true,
-                  onKeyEvent: (node, event) =>
-                      _.handleRemoteEvents(node, event),
+                  onKeyEvent: (node, event) => _.handleRemoteEvents(node, event),
                   child: Stack(
                     children: [
                       VideoPlayer(
@@ -73,13 +69,7 @@ class TvPlayerView extends StatelessWidget {
                           child: Container(
                             decoration: BoxDecoration(
                                 gradient: LinearGradient(
-                                    begin: Alignment.topCenter,
-                                    end: Alignment.bottomCenter,
-                                    colors: [
-                                  Colors.black.withOpacity(1),
-                                  Colors.black.withOpacity(0),
-                                  Colors.black.withOpacity(1)
-                                ])),
+                                    begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: [Colors.black.withOpacity(1), Colors.black.withOpacity(0), Colors.black.withOpacity(1)])),
                           ),
                         ),
                       ),
@@ -98,9 +88,7 @@ class TvPlayerView extends StatelessWidget {
                       ),
                       Positioned(
                           child: TvOverscan(
-                        child: _.showSettings
-                            ? const TvPlayerSettings()
-                            : const SizedBox.shrink(),
+                        child: _.showSettings ? const TvPlayerSettings() : const SizedBox.shrink(),
                       )),
                       Positioned(
                           top: 0,
@@ -114,42 +102,29 @@ class TvPlayerView extends StatelessWidget {
                                   child: TvOverscan(
                                     child: Column(
                                       mainAxisSize: MainAxisSize.min,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         Text(
                                           _.currentlyPlaying.title,
                                           style: textTheme.headlineLarge,
                                         ),
                                         Padding(
-                                          padding:
-                                              const EdgeInsets.only(top: 16.0),
+                                          padding: const EdgeInsets.only(top: 16.0),
                                           child: Row(
                                             mainAxisSize: MainAxisSize.min,
                                             children: [
                                               Thumbnail(
-                                                thumbnailUrl: ImageObject
-                                                            .getBestThumbnail(_
-                                                                .currentlyPlaying
-                                                                .authorThumbnails)
-                                                        ?.url ??
-                                                    '',
+                                                thumbnailUrl: ImageObject.getBestThumbnail(_.currentlyPlaying.authorThumbnails)?.url ?? '',
                                                 width: 40,
                                                 height: 40,
                                                 id: 'author-small-${_.currentlyPlaying.authorId}',
-                                                decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            20)),
+                                                decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
                                               ),
                                               Padding(
-                                                padding: const EdgeInsets.only(
-                                                    left: 8.0, right: 20),
+                                                padding: const EdgeInsets.only(left: 8.0, right: 20),
                                                 child: Text(
-                                                  _.currentlyPlaying.author ??
-                                                      '',
-                                                  style:
-                                                      textTheme.headlineSmall,
+                                                  _.currentlyPlaying.author ?? '',
+                                                  style: textTheme.headlineSmall,
                                                 ),
                                               )
                                             ],
@@ -173,41 +148,30 @@ class TvPlayerView extends StatelessWidget {
                                 _.currentlyPlaying.liveNow || _.showControls
                                     ? const SizedBox.shrink()
                                     : Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.end,
+                                        mainAxisAlignment: MainAxisAlignment.end,
                                         children: [
                                           Text(
                                             '${prettyDuration(_.currentPosition)} / ${prettyDuration(_.videoLength)}',
-                                            style: const TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 24),
+                                            style: const TextStyle(color: Colors.white, fontSize: 24),
                                           )
                                         ],
                                       ),
                                 _.showControls
                                     ? Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 8.0, vertical: 16),
+                                        padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 16),
                                         child: FocusScope(
                                           child: Row(
                                             children: [
                                               Padding(
-                                                padding: const EdgeInsets.only(
-                                                    right: 16.0),
+                                                padding: const EdgeInsets.only(right: 16.0),
                                                 child: TvButton(
-                                                  onPressed: (context) =>
-                                                      _.togglePlayPause(),
-                                                  unfocusedColor:
-                                                      Colors.transparent,
+                                                  onPressed: (context) => _.togglePlayPause(),
+                                                  unfocusedColor: Colors.transparent,
                                                   autofocus: true,
                                                   child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            8.0),
+                                                    padding: const EdgeInsets.all(8.0),
                                                     child: Icon(
-                                                      _.isPlaying
-                                                          ? Icons.pause
-                                                          : Icons.play_arrow,
+                                                      _.isPlaying ? Icons.pause : Icons.play_arrow,
                                                       size: 50,
                                                     ),
                                                   ),
@@ -216,17 +180,12 @@ class TvPlayerView extends StatelessWidget {
                                               Visibility(
                                                 visible: _.videos.length > 1,
                                                 child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          right: 16.0),
+                                                  padding: const EdgeInsets.only(right: 16.0),
                                                   child: TvButton(
-                                                    onPressed: (context) =>
-                                                        _.playPrevious(),
-                                                    unfocusedColor:
-                                                        Colors.transparent,
+                                                    onPressed: (context) => _.playPrevious(),
+                                                    unfocusedColor: Colors.transparent,
                                                     child: const Padding(
-                                                      padding:
-                                                          EdgeInsets.all(8.0),
+                                                      padding: EdgeInsets.all(8.0),
                                                       child: Icon(
                                                         Icons.skip_previous,
                                                         size: 50,
@@ -236,16 +195,12 @@ class TvPlayerView extends StatelessWidget {
                                                 ),
                                               ),
                                               Padding(
-                                                padding: const EdgeInsets.only(
-                                                    right: 16.0),
+                                                padding: const EdgeInsets.only(right: 16.0),
                                                 child: TvButton(
-                                                  unfocusedColor:
-                                                      Colors.transparent,
-                                                  onPressed: (context) =>
-                                                      _.fastRewind(),
+                                                  unfocusedColor: Colors.transparent,
+                                                  onPressed: (context) => _.fastRewind(),
                                                   child: const Padding(
-                                                    padding:
-                                                        EdgeInsets.all(8.0),
+                                                    padding: EdgeInsets.all(8.0),
                                                     child: Icon(
                                                       Icons.fast_rewind,
                                                       size: 50,
@@ -254,16 +209,12 @@ class TvPlayerView extends StatelessWidget {
                                                 ),
                                               ),
                                               Padding(
-                                                padding: const EdgeInsets.only(
-                                                    right: 16.0),
+                                                padding: const EdgeInsets.only(right: 16.0),
                                                 child: TvButton(
-                                                  onPressed: (context) =>
-                                                      _.fastForward(),
-                                                  unfocusedColor:
-                                                      Colors.transparent,
+                                                  onPressed: (context) => _.fastForward(),
+                                                  unfocusedColor: Colors.transparent,
                                                   child: const Padding(
-                                                    padding:
-                                                        EdgeInsets.all(8.0),
+                                                    padding: EdgeInsets.all(8.0),
                                                     child: Icon(
                                                       Icons.fast_forward,
                                                       size: 50,
@@ -274,13 +225,10 @@ class TvPlayerView extends StatelessWidget {
                                               Visibility(
                                                 visible: _.videos.length > 1,
                                                 child: TvButton(
-                                                  onPressed: (context) =>
-                                                      _.playNext(),
-                                                  unfocusedColor:
-                                                      Colors.transparent,
+                                                  onPressed: (context) => _.playNext(),
+                                                  unfocusedColor: Colors.transparent,
                                                   child: const Padding(
-                                                    padding:
-                                                        EdgeInsets.all(8.0),
+                                                    padding: EdgeInsets.all(8.0),
                                                     child: Icon(
                                                       Icons.skip_next,
                                                       size: 50,
@@ -290,16 +238,12 @@ class TvPlayerView extends StatelessWidget {
                                               ),
                                               Expanded(child: Container()),
                                               Padding(
-                                                padding: const EdgeInsets.only(
-                                                    right: 16.0),
+                                                padding: const EdgeInsets.only(right: 16.0),
                                                 child: TvButton(
-                                                  onPressed: (context) =>
-                                                      _.displayQueue(),
-                                                  unfocusedColor:
-                                                      Colors.transparent,
+                                                  onPressed: (context) => _.displayQueue(),
+                                                  unfocusedColor: Colors.transparent,
                                                   child: const Padding(
-                                                    padding:
-                                                        EdgeInsets.all(8.0),
+                                                    padding: EdgeInsets.all(8.0),
                                                     child: Icon(
                                                       Icons.video_library,
                                                       size: 30,
@@ -308,16 +252,12 @@ class TvPlayerView extends StatelessWidget {
                                                 ),
                                               ),
                                               Padding(
-                                                padding: const EdgeInsets.only(
-                                                    right: 16.0),
+                                                padding: const EdgeInsets.only(right: 16.0),
                                                 child: TvButton(
-                                                  onPressed: (context) =>
-                                                      _.displaySettings(),
-                                                  unfocusedColor:
-                                                      Colors.transparent,
+                                                  onPressed: (context) => _.displaySettings(),
+                                                  unfocusedColor: Colors.transparent,
                                                   child: const Padding(
-                                                    padding:
-                                                        EdgeInsets.all(8.0),
+                                                    padding: EdgeInsets.all(8.0),
                                                     child: Icon(
                                                       Icons.settings,
                                                       size: 30,
@@ -337,32 +277,23 @@ class TvPlayerView extends StatelessWidget {
                                         ? Container(
                                             decoration: BoxDecoration(
                                               color: Colors.red,
-                                              borderRadius:
-                                                  BorderRadius.circular(30),
+                                              borderRadius: BorderRadius.circular(30),
                                             ),
                                             child: Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      horizontal: 8.0,
-                                                      vertical: 2),
+                                              padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 2),
                                               child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.end,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.center,
+                                                mainAxisAlignment: MainAxisAlignment.end,
+                                                crossAxisAlignment: CrossAxisAlignment.center,
                                                 children: [
                                                   const Icon(
                                                     Icons.podcasts,
                                                     size: 15,
                                                   ),
                                                   Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            left: 8.0),
+                                                    padding: const EdgeInsets.only(left: 8.0),
                                                     child: Text(
                                                       locals.streamIsLive,
-                                                      style:
-                                                          textTheme.bodyLarge,
+                                                      style: textTheme.bodyLarge,
                                                     ),
                                                   ),
                                                 ],
@@ -372,27 +303,14 @@ class TvPlayerView extends StatelessWidget {
                                         : Expanded(
                                             child: _.progress >= 0
                                                 ? Container(
-                                                    decoration: BoxDecoration(
-                                                        color: Colors.black
-                                                            .withOpacity(0.5),
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(5)),
-                                                    child:
-                                                        AnimatedFractionallySizedBox(
-                                                      alignment:
-                                                          Alignment.centerLeft,
-                                                      duration:
-                                                          animationDuration,
+                                                    decoration: BoxDecoration(color: Colors.black.withOpacity(0.5), borderRadius: BorderRadius.circular(5)),
+                                                    child: AnimatedFractionallySizedBox(
+                                                      alignment: Alignment.centerLeft,
+                                                      duration: animationDuration,
                                                       widthFactor: _.progress,
                                                       child: Container(
                                                         height: 8,
-                                                        decoration: BoxDecoration(
-                                                            color: Colors.white,
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        5)),
+                                                        decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(5)),
                                                       ),
                                                     ))
                                                 : const SizedBox.shrink())
@@ -414,31 +332,17 @@ class TvPlayerView extends StatelessWidget {
                                       child: FocusScope(
                                       autofocus: true,
                                       child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Text(
                                             locals.videoQueue,
                                             style: textTheme.titleLarge,
                                           ),
                                           TvHorizontalVideoList(
-                                              onSelect: (ctx, video) =>
-                                                  onVideoQueueSelected(
-                                                      ctx, _, video),
-                                              paginatedVideoList: FixedItemList(
-                                                  videos
-                                                      .map((e) => VideoInList(
-                                                          e.title,
-                                                          e.videoId,
-                                                          e.lengthSeconds,
-                                                          null,
-                                                          e.author,
-                                                          e.authorId,
-                                                          e.authorUrl,
-                                                          null,
-                                                          null,
-                                                          e.videoThumbnails))
-                                                      .toList())),
+                                              onSelect: (ctx, video) => onVideoQueueSelected(ctx, _, video),
+                                              paginatedVideoList: FixedItemList(videos
+                                                  .map((e) => VideoInList(e.title, e.videoId, e.lengthSeconds, null, e.author, e.authorId, e.authorUrl, null, null, e.videoThumbnails))
+                                                  .toList())),
                                         ],
                                       ),
                                     ))

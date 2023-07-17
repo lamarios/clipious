@@ -10,9 +10,7 @@ class PlayButton extends StatelessWidget {
     ColorScheme colorScheme = Theme.of(context).colorScheme;
     return IconButton(
       onPressed: onPressed,
-      style: ButtonStyle(
-          backgroundColor: MaterialStateColor.resolveWith(
-              (states) => colorScheme.secondaryContainer.withOpacity(0.7))),
+      style: ButtonStyle(backgroundColor: MaterialStateColor.resolveWith((states) => colorScheme.secondaryContainer.withOpacity(0.7))),
       icon: const Icon(
         Icons.play_arrow,
         size: 75,
