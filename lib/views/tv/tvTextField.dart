@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:invidious/globals.dart';
-import 'package:invidious/main.dart';
 import 'package:invidious/utils.dart';
 import 'package:invidious/views/tv/tvOverScan.dart';
 

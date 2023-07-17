@@ -4,11 +4,9 @@ import 'package:get/get.dart';
 import 'package:invidious/controllers/serverListSettingsController.dart';
 import 'package:invidious/main.dart';
 import 'package:invidious/myRouteObserver.dart';
-import 'package:invidious/views/components/miniPlayerAware.dart';
 import 'package:invidious/views/settings/manageSingleServer.dart';
 import 'package:settings_ui/settings_ui.dart';
 
-import '../../globals.dart';
 import '../../models/db/server.dart';
 import '../../utils.dart';
 import '../settings.dart';
@@ -117,13 +115,12 @@ class ManagerServersView extends StatelessWidget {
   }
 
   openServer(BuildContext context, Server s) {
-    navigatorKey.currentState?.push(
-        MaterialPageRoute(
-          settings: ROUTE_SETTINGS_MANAGE_ONE_SERVER,
-          builder: (context) => ManageSingleServer(
-            server: s,
-          ),
-        ));
+    navigatorKey.currentState?.push(MaterialPageRoute(
+      settings: ROUTE_SETTINGS_MANAGE_ONE_SERVER,
+      builder: (context) => ManageSingleServer(
+        server: s,
+      ),
+    ));
   }
 
   @override

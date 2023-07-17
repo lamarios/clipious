@@ -9,7 +9,6 @@ class VideoInListController extends GetxController {
   late double progress;
   BaseVideo video;
 
-
   VideoInListController(this.video) {
     progress = _getProgress();
   }

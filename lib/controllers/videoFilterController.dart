@@ -10,6 +10,7 @@ import 'VideoFilterChannelController.dart';
 
 class VideoFilterController extends GetxController {
   final Logger log = Logger('VideoFilterController');
+
   static VideoFilterController? to() => safeGet();
   late List<VideoFilter> filters = [];
   bool hideFilteredVideos = db.getSettings(HIDE_FILTERED_VIDEOS)?.value == 'true';

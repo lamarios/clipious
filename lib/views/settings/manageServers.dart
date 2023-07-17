@@ -18,7 +18,7 @@ class ManageServerState extends State<ManageServers> {
         appBar: AppBar(
           backgroundColor: colorScheme.background,
           scrolledUnderElevation: 0,
-          title:  Text(locals.manageServers),
+          title: Text(locals.manageServers),
         ),
         backgroundColor: colorScheme.background,
         body: const SafeArea(bottom: false, child: ManagerServersView()));

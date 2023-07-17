@@ -4,15 +4,11 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:invidious/controllers/channelController.dart';
 import 'package:invidious/globals.dart';
-import 'package:invidious/models/imageObject.dart';
 import 'package:invidious/views/channel/info.dart';
 import 'package:invidious/views/channel/playlists.dart';
 import 'package:invidious/views/channel/videos.dart';
-import 'package:invidious/views/components/miniPlayerAware.dart';
-import 'package:invidious/views/components/videoThumbnail.dart';
 
 import '../utils.dart';
-import 'components/subscribeButton.dart';
 
 double channelMinBarHeight = AppBar().preferredSize.height;
 

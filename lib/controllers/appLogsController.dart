@@ -1,8 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
+
 import '../globals.dart';
-import '../main.dart';
 import '../models/db/appLog.dart';
 
 class AppLogsController extends GetxController {
@@ -40,9 +39,9 @@ class AppLogsController extends GetxController {
   }
 
   void selectAll() {
-    if(selected.isEmpty) {
+    if (selected.isEmpty) {
       selected = logs.map((e) => e.id).toList(growable: true);
-    }else{
+    } else {
       selected = [];
     }
     update();

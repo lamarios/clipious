@@ -6,7 +6,6 @@ import 'package:flutter/src/widgets/focus_manager.dart';
 import 'package:get/get.dart';
 import 'package:invidious/controllers/playerController.dart';
 import 'package:invidious/globals.dart';
-import 'package:invidious/main.dart';
 import 'package:invidious/models/baseVideo.dart';
 import 'package:invidious/models/videoInList.dart';
 import 'package:logging/logging.dart';
@@ -154,7 +153,6 @@ class TvPlayerController extends GetxController {
     loading = false;
     update();
   }
-
 
   displaySettings() {
     showSettings = true;

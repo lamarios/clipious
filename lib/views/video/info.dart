@@ -12,7 +12,6 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../models/imageObject.dart';
 import '../../utils.dart';
-import '../searchDelegate.dart';
 
 class VideoInfo extends StatelessWidget {
   Video video;
@@ -25,7 +24,12 @@ class VideoInfo extends StatelessWidget {
   }
 
   showSearchWindow(BuildContext context, String query) {
-    navigatorKey.currentState?.push(MaterialPageRoute(settings: ROUTE_CHANNEL, builder: (context) => Search(query: query, searchNow: true,)));
+    navigatorKey.currentState?.push(MaterialPageRoute(
+        settings: ROUTE_CHANNEL,
+        builder: (context) => Search(
+              query: query,
+              searchNow: true,
+            )));
   }
 
   @override
@@ -63,9 +67,9 @@ class VideoInfo extends StatelessWidget {
                     child: const Padding(
                       padding: EdgeInsets.only(left: 5.0),
                       child: Icon(
-                          Icons.thumb_up,
-                          size: 15,
-                        ),
+                        Icons.thumb_up,
+                        size: 15,
+                      ),
                     )),
                 Visibility(
                     visible: video.likeCount > 0,

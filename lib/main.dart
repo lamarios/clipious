@@ -119,7 +119,7 @@ class MyApp extends StatelessWidget {
                 localizationsDelegates: AppLocalizations.localizationsDelegates,
                 localeListResolutionCallback: (locales, supportedLocales) {
                   log.info('device locales=$locales supported locales=$supportedLocales');
-                  if(savedLocale != null){
+                  if (savedLocale != null) {
                     log.info("using saved locale, ${savedLocale}");
                     return savedLocale;
                   }
@@ -130,9 +130,9 @@ class MyApp extends StatelessWidget {
                       if (supportedLocales.contains(locale)) {
                         log.info("Locale match found, $locale");
                         return locale;
-                      }else {
+                      } else {
                         Locale? match = supportedLocales.where((element) => element.languageCode == locale.languageCode).firstOrNull;
-                        if(match != null){
+                        if (match != null) {
                           log.info("found partial match $locale with $match");
                           return match;
                         }

@@ -24,7 +24,7 @@ class VideoModalSheet extends StatelessWidget {
     AddToPlaylist.showAddToPlaylistDialog(context, video.videoId);
   }
 
-  void playNext(BuildContext context){
+  void playNext(BuildContext context) {
     var locals = AppLocalizations.of(context)!;
     Navigator.of(context).pop();
     MiniPlayerController.to()?.playVideoNext(video);

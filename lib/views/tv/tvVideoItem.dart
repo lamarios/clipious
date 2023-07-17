@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:invidious/utils.dart';
 import 'package:invidious/views/tv/tvVideoView.dart';
 
 import '../../globals.dart';

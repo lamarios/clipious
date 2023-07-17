@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import '../models/comment.dart';
 import '../models/videoComments.dart';
 
-class SingleCommentController extends GetxController{
+class SingleCommentController extends GetxController {
   bool showingChildren = false;
   Comment comment;
 
@@ -11,7 +11,7 @@ class SingleCommentController extends GetxController{
 
   SingleCommentController({required this.comment});
 
-  toggleShowChildren(){
+  toggleShowChildren() {
     showingChildren = !showingChildren;
     update();
   }

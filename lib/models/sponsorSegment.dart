@@ -1,5 +1,6 @@
 import 'package:invidious/models/sponsorSegmentTypes.dart';
 import 'package:json_annotation/json_annotation.dart';
+
 /*
 
  {
@@ -19,7 +20,7 @@ import 'package:json_annotation/json_annotation.dart';
 part 'sponsorSegment.g.dart';
 
 @JsonSerializable()
-class SponsorSegment{
+class SponsorSegment {
   String actionType;
   List<double> segment;
   SponsorSegmentType category;

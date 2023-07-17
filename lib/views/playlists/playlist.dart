@@ -5,7 +5,6 @@ import 'package:invidious/controllers/playlistItemController.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/main.dart';
 import 'package:invidious/models/imageObject.dart';
-import 'package:invidious/models/paginatedList.dart';
 import 'package:invidious/models/playlist.dart';
 import 'package:invidious/models/videoInList.dart';
 import 'package:invidious/myRouteObserver.dart';
@@ -13,10 +12,6 @@ import 'package:invidious/utils.dart';
 import 'package:invidious/views/components/videoThumbnail.dart';
 import 'package:invidious/views/playlistView.dart';
 import 'package:invidious/views/tv/tvPlaylistView.dart';
-import 'package:invidious/views/tv/tvVideoGridView.dart';
-
-import '../../models/searchSortBy.dart';
-import '../../models/searchType.dart';
 
 class PlaylistItem extends StatelessWidget {
   final Playlist playlist;
@@ -86,7 +81,7 @@ class PlaylistItem extends StatelessWidget {
             onKeyEvent: (node, event) => onTvSelect(event, context, (_) => openTvPlaylist(context)),
             autofocus: false,
             child: AspectRatio(
-              aspectRatio: 16/13,
+              aspectRatio: 16 / 13,
               child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Builder(builder: (ctx) {

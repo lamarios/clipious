@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:invidious/views/tv/tvButton.dart';
 import 'package:invidious/views/tv/tvOverScan.dart';
 import 'package:invidious/views/tv/tvSettings.dart';
 
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../controllers/serverSettingsController.dart';
 import '../../../models/db/server.dart';
 import '../../../utils.dart';
@@ -31,25 +31,39 @@ class TvManageSingleServer extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: TvTextField(
-                        leading: Icon(Icons.person, color: colors.secondary,),
+                        leading: Icon(
+                          Icons.person,
+                          color: colors.secondary,
+                        ),
                         autofocus: true,
                         focusNode: focusNode,
                         textInputAction: TextInputAction.next,
                         controller: userController,
                         autocorrect: false,
                         autofillHints: const [AutofillHints.username, AutofillHints.email],
-                        decoration: InputDecoration(label: Text(locals.username, style: TextStyle(color: colors.secondary),))),
+                        decoration: InputDecoration(
+                            label: Text(
+                          locals.username,
+                          style: TextStyle(color: colors.secondary),
+                        ))),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: TvTextField(
-                      leading: Icon(Icons.password, color: colors.secondary,),
+                      leading: Icon(
+                        Icons.password,
+                        color: colors.secondary,
+                      ),
                       obscureText: true,
                       textInputAction: TextInputAction.next,
                       autocorrect: false,
                       controller: passwordController,
                       autofillHints: const [AutofillHints.password],
-                      decoration: InputDecoration(label: Text(locals.password, style: TextStyle(color: colors.secondary),)),
+                      decoration: InputDecoration(
+                          label: Text(
+                        locals.password,
+                        style: TextStyle(color: colors.secondary),
+                      )),
                     ),
                   ),
                 ],

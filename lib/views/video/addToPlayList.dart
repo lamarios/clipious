@@ -50,12 +50,7 @@ class AddToPlaylist extends StatelessWidget {
   }
 
   openServerSettings(BuildContext context) {
-    navigatorKey.currentState?.push(
-        MaterialPageRoute(
-            settings: ROUTE_SETTINGS_MANAGE_ONE_SERVER,
-            builder: (context) => ManageSingleServer(server: db.getCurrentlySelectedServer())
-        )
-    );
+    navigatorKey.currentState?.push(MaterialPageRoute(settings: ROUTE_SETTINGS_MANAGE_ONE_SERVER, builder: (context) => ManageSingleServer(server: db.getCurrentlySelectedServer())));
   }
 
   @override
@@ -69,43 +64,45 @@ class AddToPlaylist extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: Column(mainAxisSize: MainAxisSize.min, children: [
           Text(locals.selectPlaylist),
-          !_.isLoggedIn ? Expanded(
-              child: Align(
-                  alignment: Alignment.center,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(locals.notLoggedIn),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 4.0),
-                        child: FilledButton(
-                            onPressed: () => openServerSettings(context),
-                            child: Text(locals.logIn)
-                        ),
-                      )
-                    ],
-                  )
-              )
-          ) : const SizedBox.shrink(),
+          !_.isLoggedIn
+              ? Expanded(
+                  child: Align(
+                      alignment: Alignment.center,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(locals.notLoggedIn),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 4.0),
+                            child: FilledButton(onPressed: () => openServerSettings(context), child: Text(locals.logIn)),
+                          )
+                        ],
+                      )))
+              : const SizedBox.shrink(),
           _.loading ? const Expanded(child: Align(alignment: Alignment.center, child: CircularProgressIndicator())) : const SizedBox.shrink(),
           Expanded(
             child: ListView(
-              children: _.playlists
-                  .map((p) {
-                    bool inPlaylist  = _.videoInPlaylist(p.playlistId);
-                    return FilledButton.tonal(
-                      onPressed: inPlaylist ? null : () => addToPlaylist(context, _, p.playlistId),
-                      child: Row(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: SizedBox(width: 20, child: inPlaylist ? const Icon(Icons.check, size: 15,) : const SizedBox.shrink()),
-                          ),
-                          Expanded(child: Text(p.title)),
-                        ],
-                      ));
-                  })
-                  .toList(),
+              children: _.playlists.map((p) {
+                bool inPlaylist = _.videoInPlaylist(p.playlistId);
+                return FilledButton.tonal(
+                    onPressed: inPlaylist ? null : () => addToPlaylist(context, _, p.playlistId),
+                    child: Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: SizedBox(
+                              width: 20,
+                              child: inPlaylist
+                                  ? const Icon(
+                                      Icons.check,
+                                      size: 15,
+                                    )
+                                  : const SizedBox.shrink()),
+                        ),
+                        Expanded(child: Text(p.title)),
+                      ],
+                    ));
+              }).toList(),
             ),
           ),
           FilledButton.tonal(

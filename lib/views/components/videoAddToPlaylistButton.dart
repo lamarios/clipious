@@ -27,13 +27,13 @@ class VideoAddToPlaylistButton extends StatelessWidget {
             ),
             _.playListCount > 0
                 ? Positioned(
-                  top:10,
-                  right: 10,
-                  child: Text(
-                    _.playListCount.toString(),
-                    style: const TextStyle(fontSize: 8),
-                  ),
-                )
+                    top: 10,
+                    right: 10,
+                    child: Text(
+                      _.playListCount.toString(),
+                      style: const TextStyle(fontSize: 8),
+                    ),
+                  )
                 : const SizedBox.shrink()
           ],
         ),

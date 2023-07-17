@@ -2,20 +2,21 @@ import 'package:better_player/better_player.dart';
 import 'package:fbroadcast/fbroadcast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:invidious/controllers/settingsController.dart';
 import 'package:invidious/controllers/tvPlayerController.dart';
 import 'package:invidious/controllers/videoInListController.dart';
 import 'package:invidious/utils.dart';
 import 'package:logging/logging.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:wakelock/wakelock.dart';
+
+import '../../models/db/progress.dart' as dbProgress;
 import '../database.dart';
 import '../globals.dart';
 import '../main.dart';
 import '../models/db/settings.dart';
 import '../models/pair.dart';
-import '../../models/db/progress.dart' as dbProgress;
 import '../models/sponsorSegment.dart';
 import '../models/sponsorSegmentTypes.dart';
 import '../models/video.dart';
@@ -251,8 +252,6 @@ class PlayerController extends GetxController {
         ));
 
     Wakelock.enable();
-
-
 
     videoController = BetterPlayerController(
         BetterPlayerConfiguration(

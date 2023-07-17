@@ -1,8 +1,8 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/models/baseVideo.dart';
 import 'package:logging/logging.dart';
 import 'package:objectbox/objectbox.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../database.dart';
 

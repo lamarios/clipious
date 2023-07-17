@@ -12,13 +12,11 @@ import 'package:invidious/views/video/innverViewTablet.dart';
 
 import '../utils.dart';
 
-
 class VideoView extends StatelessWidget {
   final String videoId;
   bool? playNow;
 
   VideoView({super.key, required this.videoId, this.playNow});
-
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +60,7 @@ class VideoView extends StatelessWidget {
           bottomNavigationBar: _.loadingVideo
               ? null
               : NavigationBar(
-            backgroundColor: colorScheme.background,
+                  backgroundColor: colorScheme.background,
                   labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
                   elevation: 0,
                   onDestinationSelected: _.selectIndex,

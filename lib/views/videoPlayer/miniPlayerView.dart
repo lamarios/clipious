@@ -19,10 +19,13 @@ class MiniPlayerView {
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Builder(builder: (context) {
-
                       return Column(
                         children: [
-                          Text('${vid.title} - ${vid.author}', overflow: TextOverflow.ellipsis, style: const TextStyle(fontSize: 11),),
+                          Text(
+                            '${vid.title} - ${vid.author}',
+                            overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(fontSize: 11),
+                          ),
                           MiniPlayerControls(
                             videoId: vid.videoId,
                             controller: controller,

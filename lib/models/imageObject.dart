@@ -15,7 +15,6 @@ class ImageObject {
 
   Map<String, dynamic> toJson() => _$ImageObjectToJson(this);
 
-
   static ImageObject? getBestThumbnail(List<ImageObject>? images) {
     if (images != null && images.isNotEmpty) {
       images.sort((a, b) {
@@ -27,6 +26,7 @@ class ImageObject {
       return null;
     }
   }
+
   static ImageObject? getWorstThumbnail(List<ImageObject>? images) {
     if (images != null && images.isNotEmpty) {
       images.sort((a, b) {

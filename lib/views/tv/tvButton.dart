@@ -31,7 +31,7 @@ class TvButton extends StatelessWidget {
             child: AnimatedContainer(
               duration: animationDuration,
               decoration: BoxDecoration(
-                color: hasFocus ? focusedColor ?? (brightness == Brightness.dark ? colors.primaryContainer: colors.primary.withOpacity(0.5)) : unfocusedColor ?? colors.secondaryContainer,
+                color: hasFocus ? focusedColor ?? (brightness == Brightness.dark ? colors.primaryContainer : colors.primary.withOpacity(0.5)) : unfocusedColor ?? colors.secondaryContainer,
                 borderRadius: BorderRadius.circular(borderRadius ?? 2000),
               ),
               child: builder != null ? builder!(ctx, hasFocus) : child,

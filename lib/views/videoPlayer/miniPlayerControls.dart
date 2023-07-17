@@ -20,7 +20,9 @@ class MiniPlayerControls extends StatelessWidget {
       padding: controller.isMini ? EdgeInsets.zero : const EdgeInsets.all(8.0),
       child: Container(
         decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), color: colors.secondaryContainer),
-        constraints: BoxConstraints(maxWidth: tabletMaxVideoWidth, ),
+        constraints: BoxConstraints(
+          maxWidth: tabletMaxVideoWidth,
+        ),
         child: GetBuilder<MiniPlayerControlsController>(
           // global: false,
           init: MiniPlayerControlsController(videoId),
