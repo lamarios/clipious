@@ -77,6 +77,19 @@ Or download the latest APK from the [Releases Section](https://github.com/lamari
 
 ## Contribute
 
+### Code
+
+To get started, you'll need to create a fork of the repo and might run:
+```
+git submodule init
+git submodule update
+```
+Flutter itself is used as a submodule of this repo in order to pin the version I want to use to enable reproducible build on f-droid
+
+You'll need to also set up your android SDK and a device / emulator to run the app on.
+
+There is a pre-commit hook to format the code.
+
 ### Translations
 
 ![Translation status](https://hosted.weblate.org/widgets/clipious/-/app-translation/multi-auto.svg)
