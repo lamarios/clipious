@@ -407,11 +407,11 @@
   "@addRecommendedToQueue": {
     "description": "Switch when playing a video to automatically add the recommended videos to the video queue"
   },
-  "sponsorBlockSettingsQuickDescription": "Auswählen, welche Art von Segmenten übersprungen werden soll",
+  "sponsorBlockSettingsQuickDescription": "Wähle aus, welche Art von Segmenten übersprungen werden sollen",
   "@sponsorBlockSettingsQuickDescription": {
     "description": "Small description of what the sponsor block settings do"
   },
-  "sponsorBlockCategorySponsor": "Sponsor",
+  "sponsorBlockCategorySponsor": "Sponsoren",
   "@sponsorBlockCategorySponsor": {
     "description": "Sponsor block 'Sponsor' Category"
   },
@@ -423,7 +423,7 @@
   "@addToQueueList": {
     "description": "Label on button to add a video to the queue list"
   },
-  "sponsorBlockCategorySponsorDescription": "Bezahlte Werbung, bezahlte Empfehlungen und direkte Anzeigen. Keine Selbstwerbung oder kostenlose Unterstützung von Ursachen/Kreatoren/Webseiten/Produkten, die ihnen gefallen.",
+  "sponsorBlockCategorySponsorDescription": "Bezahlte Werbung, bezahlte Empfehlungen und Direktwerbung. Nicht für Eigenwerbung oder kostenlose Ausrufen zu Anliegen/Erstellern/Webseiten/Produkten die sie mögen.",
   "@sponsorBlockCategorySponsorDescription": {
     "description": "Sponsor block 'Sponsor' Category description"
   },
@@ -455,7 +455,7 @@
   "@sponsorBlockCategoryMusicOffTopic": {
     "description": "Sponsorblock 'MusicOffTopic' Category"
   },
-  "sponsorBlockCategoryUnpaidSelfPromoDescription": "Ähnlich zu \"Sponsoren\" außer für unbezahlte oder Eigenwerbung. Das beinhaltet Abschnitte über Merchandise, Spenden oder Informationen darüber, mit wem sie zusammengearbeitet haben. ",
+  "sponsorBlockCategoryUnpaidSelfPromoDescription": "Ähnlich zu \"sponsor\" außer für unbezahlte oder Eigenwerbung. Dies beinhaltet Abschnitte über Merchandise, Spenden oder Informationen darüber, mit wem sie zusammengearbeitet haben. ",
   "@sponsorBlockCategoryUnpaidSelfPromoDescription": {
     "description": "Sponsor block 'Unpaid/Self promotion' Category description"
   },
@@ -499,7 +499,7 @@
   "@subtitleFontSize": {
     "description": "Settings label for the size of the subtitles"
   },
-  "skipSslVerification": "SSL Zertifikatsprüfung überspringen",
+  "skipSslVerification": "Überspringe die SSL-Zertifikat überprüfung",
   "@skipSslVerification": {
     "description": "Setting label to skip ssl certification verification"
   },
@@ -511,7 +511,7 @@
   "@searchHistoryDescription": {
     "description": "Description for search history settings"
   },
-  "rememberSubtitleLanguageDescription": "Automatisch Untertitel auf die zuletzt ausgewählte Sprache einstellen, falls verfügbar",
+  "rememberSubtitleLanguageDescription": "Setze die Untertitelsprache automatisch auf die letzte ausgewählte Sprache, falls vorhanden",
   "@rememberSubtitleLanguageDescription": {
     "description": "Settings description for remembering subtitle language"
   },
@@ -615,7 +615,7 @@
   "@followSystem": {
     "description": "Follow system label"
   },
-  "requiresRestart": "Benötigt einen App-Neustart",
+  "requiresRestart": "Erfordert einen App Neustart",
   "@requiresRestart": {
     "description": "Requires app restart label"
   },
@@ -635,7 +635,7 @@
   "@sponsorBlockCategoryMusicOffTopicDescription": {
     "description": "Only for use in music videos. This only should be used for sections of music videos that aren't already covered by another category."
   },
-  "pressDownToShowSettings": "Drücken Sie nach unten, um die Einstellungen anzuzeigen",
+  "pressDownToShowSettings": "Drücke den Pfeil nach unten um die Einstellungen anzuzeigen",
   "@pressDownToShowSettings": {
     "description": "Instruction on how to show video settings when playing a video on TV"
   },
@@ -768,5 +768,41 @@
   "rememberPlaybackSpeedDescription": "Wiedergabegeschwindigkeit automatisch auf die zuletzt gewählte Geschwindigkeit einstellen",
   "@rememberPlaybackSpeedDescription": {
     "description": "Settings description for remembering playback speed"
+  },
+  "redirectInvidiousLink": "Invidious Redirect-Link teilen",
+  "@redirectInvidiousLink": {
+    "description": "asking user to share redirecting invidious link"
+  },
+  "videoFilterEditDescription": "Wähle einen Kanal, Filtertyp, Operation und einen Wert, um Videos aus Listen herauszufiltern. Zum Beispiel: \"Typ: Videoname, Operation: Enthält, Wert: test\" würde alle Videos mit dem Wort \"test\" in ihrem Namen herausfiltern.",
+  "@videoFilterEditDescription": {
+    "description": "Descriptive test for video filter set up"
+  },
+  "videoFilterTapToReveal": "Tippen zum Anzeigen",
+  "@videoFilterTapToReveal": {
+    "description": "Label to tell user to tap to show a filtered video"
+  },
+  "videoFilterNoFilters": "Keine Videofilter. Tippe auf '+', um Filter hinzuzufügen.",
+  "@videoFilterNoFilters": {
+    "description": "Label when there are no video filters"
+  },
+  "playNext": "Als nächstes spielen",
+  "@playNext": {
+    "description": "Label to play the video after the current one."
+  },
+  "videoFiltersExplanation": "Verstecke oder Obfuskiere Videos aus allen Feeds in dieser Anwendung basierend auf die unten definierten Filter. Dies erlaubt zum Beispiel das Verstecken von Sportergebnissen oder blendet Shorts bestimmter Kanäle aus.",
+  "@videoFiltersExplanation": {
+    "description": "Description on how filter work"
+  },
+  "videoFilterHideDescription": "Standardmäßig werden gefilterte Videos nicht ausgeblended, sondern unter Angabe des relenvanten Filters unkenntlich gemacht. Diese Einstellung entfernt die gefilterten Videos stattdessen komplett.",
+  "@videoFilterHideDescription": {
+    "description": ""
+  },
+  "lockFullScreenToLandscape": "Orientierung im Vollbild an Bildseitenverhältnis anpassen",
+  "@lockFullScreenToLandscape": {
+    "description": "Title to force full screen to landscape"
+  },
+  "lockFullScreenToLandscapeDescription": "Zeige Videos im Vollbild immer im nativen Seitenverhältnis an - Quer bei Horizontalen/\"klassischen\" Videos, Hochkant bei Vertikalen Videos",
+  "@lockFullScreenToLandscapeDescription": {
+    "description": "Setting description for forcing video to landscape when in full screen"
   }
 }
