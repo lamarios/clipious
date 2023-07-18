@@ -88,8 +88,6 @@ Flutter itself is used as a submodule of this repo in order to pin the version I
 
 You'll need to also set up your android SDK and a device / emulator to run the app on.
 
-There is a pre-commit hook to format the code.
-
 ### Translations
 
 ![Translation status](https://hosted.weblate.org/widgets/clipious/-/app-translation/multi-auto.svg)
