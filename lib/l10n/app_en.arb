@@ -797,6 +797,14 @@
     "@lockFullScreenToLandscapeDescription": {
         "description": "Setting description for forcing video to landscape when in full screen"
     },
+    "fillFullscreen": "Maximize video to fit screen",
+    "@fillFullscreen": {
+        "description": "Title to maximize video to fit screen"
+    },
+    "fillFullscreenDescription": "Adjusts the video to fill the entire screen in landscape mode",
+    "@fillFullscreenDescription": {
+        "description": "Setting description for filling video to screen in landscape"
+    },
     "rememberPlaybackSpeed": "Remember playback speed",
     "@rememberPlaybackSpeed": {
         "description": "Setting label for remembering playback speed"

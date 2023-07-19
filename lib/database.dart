@@ -38,6 +38,7 @@ const HIDE_FILTERED_VIDEOS = 'hide-filtered-videos';
 const REMEMBER_PLAYBACK_SPEED = 'remember-playback-speed';
 const LAST_SPEED = 'last-speed';
 const LOCK_ORIENTATION_FULLSCREEN = 'lock-orientation-fullscreen';
+const FILL_FULLSCREEN = 'fill-fullscreen';
 
 const ON_OPEN = "on-open";
 
