@@ -53,7 +53,7 @@ class VideoInnerView extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              SizedBox(height:25,child: Checkbox(value: videoController.playRecommendedNext, onChanged: videoController.togglePlayRecommendedNext, visualDensity: VisualDensity.compact)),
+              SizedBox(height: 25, child: Checkbox(value: videoController.playRecommendedNext, onChanged: videoController.togglePlayRecommendedNext, visualDensity: VisualDensity.compact)),
               InkWell(
                   onTap: () => videoController.togglePlayRecommendedNext(!videoController.playRecommendedNext),
                   child: Text(

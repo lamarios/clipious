@@ -73,7 +73,8 @@ class TvSearchHistorySettings extends StatelessWidget {
               AdjustmentSettingTile(
                 title: locals.searchHistoryLimit,
                 description: locals.searchHistoryLimitDescription,
-                value: _.searchHistoryLimit, onNewValue: _.setHistoryLimit,
+                value: _.searchHistoryLimit,
+                onNewValue: _.setHistoryLimit,
               ),
               SettingsTile(
                 title: locals.clearSearchHistory,

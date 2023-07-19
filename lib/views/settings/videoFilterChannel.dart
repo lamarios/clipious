@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_swipe_action_cell/core/cell.dart';
 import 'package:get/get.dart';
 import 'package:invidious/controllers/VideoFilterChannelController.dart';
@@ -10,7 +11,6 @@ import '../../models/db/videoFilter.dart';
 import '../../models/imageObject.dart';
 import '../../myRouteObserver.dart';
 import '../components/videoThumbnail.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class VideoFilterChannel extends StatelessWidget {
   final List<VideoFilter> filters;
@@ -20,8 +20,7 @@ class VideoFilterChannel extends StatelessWidget {
   editFilter(BuildContext context, {required VideoFilter filter}) {
     navigatorKey.currentState?.push(MaterialPageRoute(
         settings: ROUTE_SETTINGS_VIDEO_FILTERS,
-        builder: (context) =>
-            VideoFilterSetup(
+        builder: (context) => VideoFilterSetup(
               channelId: filter.channelId,
               filter: filter,
             )));
@@ -30,9 +29,7 @@ class VideoFilterChannel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var locals = AppLocalizations.of(context)!;
-    ColorScheme colors = Theme
-        .of(context)
-        .colorScheme;
+    ColorScheme colors = Theme.of(context).colorScheme;
 
     return GetBuilder<VideoFilterChannelController>(
       init: VideoFilterChannelController(filters: filters),
@@ -68,9 +65,7 @@ class VideoFilterChannel extends StatelessWidget {
                         child: Padding(
                           padding: const EdgeInsets.only(right: 8.0),
                           child: Thumbnail(
-                            thumbnailUrl: ImageObject
-                                .getBestThumbnail(_.channel?.authorThumbnails)
-                                ?.url ?? '',
+                            thumbnailUrl: ImageObject.getBestThumbnail(_.channel?.authorThumbnails)?.url ?? '',
                             width: 20,
                             height: 20,
                             id: 'author-small-${_.channel?.authorId ?? ''}',
@@ -88,8 +83,7 @@ class VideoFilterChannel extends StatelessWidget {
                 ),
               ),
               ..._.filters
-                  .map((e) =>
-                  SwipeActionCell(
+                  .map((e) => SwipeActionCell(
                       key: ValueKey('filter-swipe-${e.id}'),
                       trailingActions: [
                         SwipeAction(

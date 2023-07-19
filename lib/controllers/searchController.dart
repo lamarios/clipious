@@ -42,7 +42,7 @@ class ClipiousSearchController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    if(searchNow){
+    if (searchNow) {
       search(queryController.value.text);
     }
   }

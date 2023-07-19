@@ -6,7 +6,6 @@ class CommentsContainerController extends GetxController {
 
   changeSorting(String? value) {
     if (value != sortBy) {
-
       sortBy = value ?? 'top';
       update();
     }

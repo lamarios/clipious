@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:invidious/models/video.dart';
 import 'package:invidious/views/components/playButton.dart';
 import 'package:invidious/views/video/commentsContainer.dart';
 import 'package:invidious/views/video/recommendedVideos.dart';
 
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../controllers/videoController.dart';
 import '../../controllers/videoInnerViewController.dart';
 import '../../globals.dart';
@@ -64,7 +64,7 @@ class VideoTabletInnerView extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      SizedBox(height:25,child: Checkbox(value: videoController.playRecommendedNext, onChanged: videoController.togglePlayRecommendedNext, visualDensity: VisualDensity.compact)),
+                      SizedBox(height: 25, child: Checkbox(value: videoController.playRecommendedNext, onChanged: videoController.togglePlayRecommendedNext, visualDensity: VisualDensity.compact)),
                       InkWell(
                           onTap: () => videoController.togglePlayRecommendedNext(!videoController.playRecommendedNext),
                           child: Text(

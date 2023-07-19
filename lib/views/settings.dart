@@ -5,9 +5,9 @@ import 'package:get/get.dart';
 import 'package:invidious/myRouteObserver.dart';
 import 'package:invidious/views/settings/applogs.dart';
 import 'package:invidious/views/settings/searchHistorySettings.dart';
+import 'package:invidious/views/settings/sponsorBlockSettings.dart';
 import 'package:invidious/views/settings/videoFilter.dart';
 import 'package:locale_names/locale_names.dart';
-import 'package:invidious/views/settings/sponsorBlockSettings.dart';
 import 'package:select_dialog/select_dialog.dart';
 import 'package:settings_ui/settings_ui.dart';
 
@@ -39,6 +39,7 @@ class Settings extends StatelessWidget {
   openVideoFilterSettings(BuildContext context) {
     navigatorKey.currentState?.push(MaterialPageRoute(settings: ROUTE_SETTINGS_VIDEO_FILTERS, builder: (context) => const VideoFilterSettings()));
   }
+
   openSearchHistorySettings(BuildContext context) {
     navigatorKey.currentState?.push(MaterialPageRoute(settings: ROUTE_SETTINGS_SEARCH_HISTORY, builder: (context) => const SearchHistorySettings()));
   }

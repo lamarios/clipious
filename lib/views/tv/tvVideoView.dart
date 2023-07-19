@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
-import 'package:invidious/controllers/settingsController.dart';
 import 'package:invidious/models/paginatedList.dart';
 import 'package:invidious/models/videoInList.dart';
 import 'package:invidious/utils.dart';
@@ -62,8 +60,8 @@ class TvVideoView extends StatelessWidget {
                       child: CircularProgressIndicator(),
                     )
                   : SingleChildScrollView(
-            controller: _.scrollController,
-                    child: Column(
+                      controller: _.scrollController,
+                      child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           SizedBox(
@@ -79,7 +77,7 @@ class TvVideoView extends StatelessWidget {
                                       child: TvButton(
                                         autofocus: true,
                                         onFocusChanged: (focus) {
-                                          if(focus){
+                                          if (focus) {
                                             _.scrollUp();
                                           }
                                         },
@@ -183,7 +181,7 @@ class TvVideoView extends StatelessWidget {
                           )
                         ],
                       ),
-                  ),
+                    ),
         ),
       ),
     ));

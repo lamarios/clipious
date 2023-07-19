@@ -1,5 +1,5 @@
-
 import 'package:json_annotation/json_annotation.dart';
+
 part 'caption.g.dart';
 
 @JsonSerializable()
@@ -9,7 +9,6 @@ class Caption {
   String url;
 
   Caption(this.label, this.languageCode, this.url);
-
 
   factory Caption.fromJson(Map<String, dynamic> json) => _$CaptionFromJson(json);
 

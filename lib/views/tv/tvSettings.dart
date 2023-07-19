@@ -1,19 +1,16 @@
-import 'package:application_icon/application_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:invidious/utils.dart';
 import 'package:invidious/views/tv/settings/tvManageServers.dart';
 import 'package:invidious/views/tv/settings/tvSearchHistorySettings.dart';
 import 'package:invidious/views/tv/settings/tvSelectFromList.dart';
 import 'package:invidious/views/tv/settings/tvSponsorBlockSettings.dart';
-import 'package:invidious/views/tv/tvButton.dart';
 import 'package:invidious/views/tv/tvOverScan.dart';
 import 'package:locale_names/locale_names.dart';
 
 import '../../controllers/settingsController.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 import '../../globals.dart';
 
 class TVSettings extends StatelessWidget {

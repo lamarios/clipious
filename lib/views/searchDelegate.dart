@@ -64,13 +64,17 @@ class MySearchDelegate extends SearchDelegate<String> {
   @override
   Widget buildResults(BuildContext context) {
     return FutureBuilder<List<SearchResults>>(
-      future: Future.wait([service.search(query, type: SearchType.video, sortBy: sortBy), service.search(query, type: SearchType.channel, sortBy: sortBy), service.search(query, type: SearchType.playlist, sortBy: sortBy)]),
+      future: Future.wait([
+        service.search(query, type: SearchType.video, sortBy: sortBy),
+        service.search(query, type: SearchType.channel, sortBy: sortBy),
+        service.search(query, type: SearchType.playlist, sortBy: sortBy)
+      ]),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done && snapshot.data != null) {
           return Search(
-            // results: snapshot.data!,
-            // query: query,
-          );
+              // results: snapshot.data!,
+              // query: query,
+              );
         } else if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(
             child: CircularProgressIndicator(),

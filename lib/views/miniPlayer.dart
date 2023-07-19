@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:invidious/controllers/miniPayerController.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/views/video/player.dart';
 import 'package:invidious/views/videoPlayer/fullScreenView.dart';
 import 'package:invidious/views/videoPlayer/miniPlayerView.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../utils.dart';
-import 'components/videoAddToPlaylistButton.dart';
-import 'components/videoLikeButton.dart';
 import 'components/videoShareButton.dart';
 
 class MiniPlayer extends StatelessWidget {

@@ -1,3 +1,6 @@
 enum SearchSortBy {
-  relevance, rating, upload_date, view_count;
+  relevance,
+  rating,
+  upload_date,
+  view_count;
 }

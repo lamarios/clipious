@@ -221,5 +221,4 @@ class PlaylistSearchPaginatedList<T> extends SearchPaginatedList<T> {
   Future<List<T>> refresh() async {
     return (await service.getPublicPlaylists(super.query)).videos as List<T>;
   }
-
 }

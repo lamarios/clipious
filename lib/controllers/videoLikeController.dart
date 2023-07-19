@@ -29,10 +29,10 @@ class VideoLikeButtonController extends GetxController {
   }
 
   Future<Playlist?> getPlaylist() async {
-      List<Playlist> playlists = await service.getUserPlaylists();
-      Playlist? pl = playlists.firstWhereOrNull((pl) => pl.title == likePlaylistName);
+    List<Playlist> playlists = await service.getUserPlaylists();
+    Playlist? pl = playlists.firstWhereOrNull((pl) => pl.title == likePlaylistName);
 
-      return pl;
+    return pl;
   }
 
   checkVideoLikeStatus() async {

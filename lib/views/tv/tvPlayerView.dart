@@ -3,7 +3,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:invidious/controllers/tvPlayerController.dart';
 import 'package:invidious/models/paginatedList.dart';
-import 'package:invidious/models/recommendedVideo.dart';
 import 'package:invidious/models/videoInList.dart';
 import 'package:invidious/utils.dart';
 import 'package:invidious/views/tv/tvButton.dart';
@@ -16,7 +15,6 @@ import '../../globals.dart';
 import '../../main.dart';
 import '../../models/baseVideo.dart';
 import '../../models/imageObject.dart';
-import '../../models/video.dart';
 import '../components/videoThumbnail.dart';
 
 class TvPlayerView extends StatelessWidget {

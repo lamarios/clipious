@@ -23,8 +23,8 @@ class PlaylistListController extends GetxController {
 
   PlaylistListController(this.paginatedList);
 
-  static String? getTag(String? source){
-    return source != null ? 'play-list-controller-${source}': null;
+  static String? getTag(String? source) {
+    return source != null ? 'play-list-controller-${source}' : null;
   }
 
   @override

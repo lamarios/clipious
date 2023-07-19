@@ -38,18 +38,13 @@ class ChannelInfo extends StatelessWidget {
               right: 0,
               child: Container(
                 alignment: Alignment.bottomLeft,
-                decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        colors: [
-                          Colors.transparent,
-                          colors.background
-                        ])
-                ),
+                decoration: BoxDecoration(gradient: LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: [Colors.transparent, colors.background])),
                 child: Padding(
                   padding: const EdgeInsets.only(left: 8.0, top: 128),
-                  child: Text(channel.author ?? '', style: TextStyle(fontSize: 30, color:  colors.primary),),
+                  child: Text(
+                    channel.author ?? '',
+                    style: TextStyle(fontSize: 30, color: colors.primary),
+                  ),
                 ),
               ))
         ]),
@@ -90,11 +85,12 @@ class ChannelInfo extends StatelessWidget {
           mainAxisSpacing: 5,
           childAspectRatio: getGridAspectRatio(context),
           children: channel.latestVideos?.map((e) {
-            VideoInList videoInList = VideoInList(e.title, e.videoId, e.lengthSeconds, 0, e.author, channel.authorId, 'authorUrl', 0, '', e.videoThumbnails);
-            videoInList.filtered = e.filtered;
-            videoInList.matchedFilters = e.matchedFilters;
-            return VideoListItem(video: videoInList);
-          }).toList() ?? []),
+                VideoInList videoInList = VideoInList(e.title, e.videoId, e.lengthSeconds, 0, e.author, channel.authorId, 'authorUrl', 0, '', e.videoThumbnails);
+                videoInList.filtered = e.filtered;
+                videoInList.matchedFilters = e.matchedFilters;
+                return VideoListItem(video: videoInList);
+              }).toList() ??
+              []),
     ));
 
     return SingleChildScrollView(

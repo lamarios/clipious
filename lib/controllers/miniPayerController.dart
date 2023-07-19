@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:back_button_interceptor/back_button_interceptor.dart';
 import 'package:better_player/better_player.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -14,7 +15,6 @@ import 'package:invidious/models/db/settings.dart';
 import 'package:invidious/utils.dart';
 import 'package:logging/logging.dart';
 
-import 'package:back_button_interceptor/back_button_interceptor.dart';
 import '../main.dart';
 import '../models/baseVideo.dart';
 import '../models/video.dart';

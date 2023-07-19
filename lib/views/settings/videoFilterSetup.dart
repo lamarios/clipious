@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:invidious/controllers/videoFilterEditController.dart';
 import 'package:search_choices/search_choices.dart';
 
 import '../../models/channel.dart';
 import '../../models/db/videoFilter.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class VideoFilterSetup extends StatelessWidget {
   final String? channelId;

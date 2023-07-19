@@ -18,16 +18,14 @@ class AppLogs extends StatelessWidget {
     return GetBuilder<AppLogsController>(
       global: false,
       init: AppLogsController(),
-      builder: (_) =>Scaffold(
-      appBar: AppBar(
-        title: Text(locals.appLogs),
-        actions: [
-          IconButton(onPressed: _.selectAll, icon: const Icon(Icons.checklist))
-        ],
-      ),
-      body: SafeArea(
-        bottom: false,
-        child:  Stack(
+      builder: (_) => Scaffold(
+        appBar: AppBar(
+          title: Text(locals.appLogs),
+          actions: [IconButton(onPressed: _.selectAll, icon: const Icon(Icons.checklist))],
+        ),
+        body: SafeArea(
+          bottom: false,
+          child: Stack(
             children: [
               AnimatedPositioned(
                 duration: animationDuration,

@@ -12,7 +12,6 @@ class MiniPlayerControlsController extends GetxController {
 
   String videoId;
 
-
   togglePlay() {
     PlayerController.to()?.togglePlaying();
     update();

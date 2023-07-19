@@ -1,8 +1,5 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:invidious/views/channel.dart';
 
 import '../globals.dart';
 import '../models/channel.dart';
@@ -62,5 +59,4 @@ class ChannelController extends GetxController {
       update();
     }
   }
-
 }

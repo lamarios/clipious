@@ -1,6 +1,5 @@
-abstract class ItemtWithContinuation<T>{
+abstract class ItemtWithContinuation<T> {
   String? continuation;
-
 
   ItemtWithContinuation(this.continuation);
 

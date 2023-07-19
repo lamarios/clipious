@@ -5,10 +5,11 @@ import '../globals.dart';
 import '../models/playlist.dart';
 import '../utils.dart';
 
-
 class AddToPlaylistButtonController extends GetxController {
   var log = Logger('AddToPlaylistButtonController');
+
   static AddToPlaylistButtonController? to({String? tag}) => safeGet(tag: tag);
+
   static String? tags(String videoId) => 'add-to-playlist-controller-button-${videoId}';
 
   String? videoId;

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:invidious/controllers/tvPlayerSettingsController.dart';
 import 'package:invidious/views/tv/tvButton.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 const TextStyle settingStyle = TextStyle(fontSize: 20);
 
@@ -93,7 +92,7 @@ class TvPlayerSettings extends StatelessWidget {
                       padding: const EdgeInsets.all(8.0),
                       child: TvButton(
                         onFocusChanged: _.captionsButtonFocusChange,
-                        unfocusedColor: _.selected == Tabs.captions? colors.secondaryContainer : Colors.transparent,
+                        unfocusedColor: _.selected == Tabs.captions ? colors.secondaryContainer : Colors.transparent,
                         child: Padding(
                           padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
                           child: Text(locals.subtitles, style: settingStyle),
@@ -118,7 +117,11 @@ class TvPlayerSettings extends StatelessWidget {
                   child: ListView(
                     shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
-                    children: getContent(_).map((e) => Center(child: e,)).toList(),
+                    children: getContent(_)
+                        .map((e) => Center(
+                              child: e,
+                            ))
+                        .toList(),
                   ),
                 )
               ],

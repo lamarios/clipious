@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:get/get.dart';
 import 'package:invidious/controllers/playlistListController.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/models/paginatedList.dart';
 import 'package:invidious/views/playlistList.dart';
-import 'package:logging/logging.dart';
 
 import '../utils.dart';
 

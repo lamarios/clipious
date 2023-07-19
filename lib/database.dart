@@ -4,7 +4,6 @@ import 'package:invidious/models/db/progress.dart';
 import 'package:invidious/models/db/searchHistoryItem.dart';
 import 'package:invidious/models/db/settings.dart';
 import 'package:invidious/models/errors/noServerSelected.dart';
-import 'package:invidious/views/video.dart';
 import 'package:logging/logging.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
@@ -42,6 +41,7 @@ const LOCK_ORIENTATION_FULLSCREEN = 'lock-orientation-fullscreen';
 const FILL_FULLSCREEN = 'fill-fullscreen';
 
 const ON_OPEN = "on-open";
+
 const MAX_LOGS = 1000;
 
 class DbClient {

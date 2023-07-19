@@ -1,14 +1,11 @@
 import 'package:invidious/models/baseVideo.dart';
-import 'package:invidious/models/db/server.dart';
-import 'package:invidious/models/interfaces/sharelink.dart';
+import 'package:json_annotation/json_annotation.dart';
 
 import 'adaptiveFormat.dart';
 import 'caption.dart';
 import 'formatStream.dart';
 import 'imageObject.dart';
 import 'recommendedVideo.dart';
-
-import 'package:json_annotation/json_annotation.dart';
 
 part 'video.g.dart';
 
@@ -94,5 +91,4 @@ class Video extends BaseVideo {
       return null;
     }
   }
-
 }

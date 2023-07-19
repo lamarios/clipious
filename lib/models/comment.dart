@@ -4,7 +4,6 @@ import 'package:json_annotation/json_annotation.dart';
 
 import 'imageObject.dart';
 
-
 part 'comment.g.dart';
 
 @JsonSerializable()
@@ -28,5 +27,4 @@ class Comment {
   factory Comment.fromJson(Map<String, dynamic> json) => _$CommentFromJson(json);
 
   Map<String, dynamic> toJson() => _$CommentToJson(this);
-
 }

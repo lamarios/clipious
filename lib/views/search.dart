@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
-import 'package:invidious/globals.dart';
-import 'package:invidious/models/searchResult.dart';
-import 'package:invidious/models/searchSortBy.dart';
 import 'package:invidious/models/searchType.dart';
 import 'package:invidious/models/videoInList.dart';
 import 'package:invidious/utils.dart';
 import 'package:invidious/views/channel.dart';
-import 'package:invidious/views/components/miniPlayerAware.dart';
 import 'package:invidious/views/playlistList.dart';
 
 import '../controllers/playlistListController.dart';
@@ -23,6 +19,7 @@ import 'videoList.dart';
 class Search extends StatelessWidget {
   final String? query;
   final bool? searchNow;
+
   const Search({super.key, this.query, this.searchNow});
 
   @override

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:invidious/controllers/addToQueueButtonController.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../models/baseVideo.dart';
-import '../../models/video.dart';
 
 class AddToQueueButton extends StatelessWidget {
   final List<BaseVideo> videos;

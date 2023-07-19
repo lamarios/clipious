@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:invidious/controllers/welcomeWizardController.dart';
-import 'package:invidious/views/tv/settings/tvManageServers.dart';
 import 'package:invidious/views/tv/settings/tvManageServersInner.dart';
 import 'package:invidious/views/tv/tvButton.dart';
 import 'package:invidious/views/tv/tvOverScan.dart';

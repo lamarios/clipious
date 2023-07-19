@@ -30,7 +30,9 @@ class TvPlaylistView extends PlaylistView {
                     child: SizedBox(
                       width: 50,
                       height: 50,
-                      child: CircularProgressIndicator(value: _.loadingProgress,),
+                      child: CircularProgressIndicator(
+                        value: _.loadingProgress,
+                      ),
                     ),
                   )
                 : SingleChildScrollView(

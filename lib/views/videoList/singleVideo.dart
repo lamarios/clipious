@@ -1,14 +1,12 @@
-import 'package:fbroadcast/fbroadcast.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:invidious/controllers/videoInListController.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/main.dart';
 import 'package:invidious/models/videoInList.dart';
 import 'package:invidious/myRouteObserver.dart';
 import 'package:invidious/views/components/videoThumbnail.dart';
-import 'package:invidious/views/video/addToPlayList.dart';
 import 'package:invidious/views/video/videoModalSheet.dart';
 import 'package:logging/logging.dart';
 
