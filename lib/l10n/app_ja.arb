@@ -727,7 +727,7 @@
   "@lockFullScreenToLandscapeDescription": {
     "description": "Setting description for forcing video to landscape when in full screen"
   },
-  "lockFullScreenToLandscape": "アスペクト比により全画面の向きをロック",
+  "lockFullScreenToLandscape": "アスペクト比に従い全画面の向きをロック",
   "@lockFullScreenToLandscape": {
     "description": "Title to force full screen to landscape"
   },
@@ -804,5 +804,13 @@
   "videoFilterHideDescription": "標準では、フィルターされた動画は非表示ではなく、理由と共に不明確に表示されます。この設定は、フィルタリングされた動画を一覧から除去します。",
   "@videoFilterHideDescription": {
     "description": ""
+  },
+  "fillFullscreen": "画面に合わせ映像を最大化",
+  "@fillFullscreen": {
+    "description": "Title to maximize video to fit screen"
+  },
+  "fillFullscreenDescription": "横向き表示では画面全体に映像が広がるよう調整",
+  "@fillFullscreenDescription": {
+    "description": "Setting description for filling video to screen in landscape"
   }
 }
