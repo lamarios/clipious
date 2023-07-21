@@ -89,7 +89,7 @@
   "@ok": {
     "description": "Ok"
   },
-  "wizardIntro": "Valitse julkinen palvelin tai lisää oma. (Voidaan muuttaa myöhemmin asetuksissa.)",
+  "wizardIntro": "Valitse julkinen palvelin tai lisää oma. (Voidaan muuttaa myöhemmin asetuksissa)",
   "@wizardIntro": {
     "description": "Welcome message on frst time use"
   },
@@ -235,7 +235,7 @@
   "@loggedIn": {
     "description": "Label to tell the user that he is logged in to the server"
   },
-  "notLoggedIn": "Ei kirjautunut sisään. Kirjaudu sisään napauttamalla.",
+  "notLoggedIn": "Ei kirjautuneena sisään",
   "@notLoggedIn": {
     "description": "Label when the user is not logged in to the server"
   },
@@ -263,7 +263,7 @@
   "@useDynamicTheme": {
     "description": ""
   },
-  "useDynamicThemeDescription": "Käytä materiaalin värejä (käytettävissä vain Android 12+). Vaatii sovelluksen uudelleenkäynnistyksen",
+  "useDynamicThemeDescription": "Käytä Material You-värejä (käytettävissä vain Android 12+)",
   "@useDynamicThemeDescription": {
     "description": ""
   },
@@ -403,7 +403,7 @@
   "@blackBackground": {
     "description": "Settings name for black background"
   },
-  "blackBackgroundDescription": "OLED-näytön tumma teema. Vaatii sovelluksen käynnistämisen uudelleen.",
+  "blackBackgroundDescription": "OLED-näytön tumma teema",
   "@blackBackgroundDescription": {
     "description": "Description for dark background setting"
   },
@@ -498,5 +498,133 @@
   "appLanguage": "Sovelluksen kieli",
   "@appLanguage": {
     "description": "Select app language"
+  },
+  "appLogs": "Sovelluksen lokit",
+  "@appLogs": {
+    "description": "Title for settings that leads to application logs"
+  },
+  "logsCopied": "Lokit kopioitu leikepöydälle",
+  "@logsCopied": {
+    "description": "Message to tell user that logs have been copied to the clipboard"
+  },
+  "searchSortRating": "Arviointi",
+  "@searchSortRating": {
+    "description": "Sort search by rating"
+  },
+  "videoUnlisted": "Listaamaton",
+  "@videoUnlisted": {
+    "description": "Status of a video that is only accessible by link"
+  },
+  "searchHistory": "Hakuhistoria",
+  "@searchHistory": {
+    "description": "Settings label for search history"
+  },
+  "searchSortUploadDate": "Latauspäivämäärä",
+  "@searchSortUploadDate": {
+    "description": "Sort search by upload date"
+  },
+  "searchSortViewCount": "Katselumäärä",
+  "@searchSortViewCount": {
+    "description": "Sort search by view count"
+  },
+  "clearSearchHistory": "Tyhjennä hakuhistoria",
+  "@clearSearchHistory": {
+    "description": "Settings label for clearing search history"
+  },
+  "copyToClipBoard": "Kopioi leikepöydälle",
+  "@copyToClipBoard": {
+    "description": "Text to copy something to clipboard"
+  },
+  "rememberSubtitleLanguage": "Muista tekstitysten kieli",
+  "@rememberSubtitleLanguage": {
+    "description": "Settings label for remembering subtitle language"
+  },
+  "topSorting": "Top",
+  "@topSorting": {
+    "description": "Content sorting: top"
+  },
+  "rememberPlaybackSpeed": "Muista toistonopeus",
+  "@rememberPlaybackSpeed": {
+    "description": "Setting label for remembering playback speed"
+  },
+  "videoFilterHideLabel": "Piilota",
+  "@videoFilterHideLabel": {
+    "description": "Label to hide videos"
+  },
+  "optional": "valinnainen",
+  "@optional": {
+    "description": "Optional label"
+  },
+  "addToPlaylist": "Lisää soittolistaan",
+  "@addToPlaylist": {
+    "description": "Label to add a video to a playlist"
+  },
+  "playNextAddedToQueue": "Video toistetaan seuraavaksi",
+  "@playNextAddedToQueue": {
+    "description": "Pop up message to confirm that the video has been properly set to play next"
+  },
+  "playNext": "Toista seuraavaksi",
+  "@playNext": {
+    "description": "Label to play the video after the current one."
+  },
+  "videoFilterAllChannels": "Kaikki kanavat",
+  "@videoFilterAllChannels": {
+    "description": "Title for the sections that applies to all channels"
+  },
+  "videoFilterOperation": "Toiminta",
+  "@videoFilterOperation": {
+    "description": "Label for filter operation"
+  },
+  "videoFilterValue": "Arvo",
+  "@videoFilterValue": {
+    "description": "Label for filter value"
+  },
+  "addVideoFilter": "Luo suodatin",
+  "@addVideoFilter": {
+    "description": "Title when creating a new filter"
+  },
+  "editVideoFilter": "Muokkaa suodatinta",
+  "@editVideoFilter": {
+    "description": "Title when editting a filter"
+  },
+  "videoFilterType": "Tyyppi",
+  "@videoFilterType": {
+    "description": "Label for filter type"
+  },
+  "save": "Tallenna",
+  "@save": {
+    "description": "Text for save action"
+  },
+  "videoFilterTypeVideoTitle": "Videon otsikko",
+  "@videoFilterTypeVideoTitle": {
+    "description": "Label for video filter video title"
+  },
+  "videoFilterTypeChannelName": "Kanavan nimi",
+  "@videoFilterTypeChannelName": {
+    "description": "Label for video filter channel name"
+  },
+  "videoFilterTypeVideoLength": "Videon pituus (sekunteina)",
+  "@videoFilterTypeVideoLength": {
+    "description": "Label for video filter video length"
+  },
+  "videoFilterOperationContains": "Sisältää",
+  "@videoFilterOperationContains": {
+    "description": "Label for video filter operation Contains"
+  },
+  "videoFilterOperationNotContain": "Ei sisällä",
+  "@videoFilterOperationNotContain": {
+    "description": "Label for video filter operation Does not contain"
+  },
+  "channel": "Kanava",
+  "@channel": {
+    "description": "A single channel"
+  },
+  "enableSearchHistory": "Ota hakuhistoria käyttöön",
+  "@enableSearchHistory": {
+    "description": "Settings label for enabling search history"
+  },
+  "searchHistoryDescription": "Hakuhistorian asetukset",
+  "@searchHistoryDescription": {
+    "description": "Description for search history settings"
   }
 }
