@@ -479,7 +479,7 @@
   "@sponsorBlockCategoryFillerDescription": {
     "description": "Sponsorblock 'Filler' Category description"
   },
-  "sponsorBlockCategoryMusicOffTopicDescription": "Un interval fără conținut real. Ar putea fi o pauză, un cadru static, o animație care se repetă. Aceasta nu ar trebui folosită pentru tranzițiile care conțin informații.",
+  "sponsorBlockCategoryMusicOffTopicDescription": "Numai pentru utilizare în videoclipuri muzicale. Acest lucru ar trebui folosit numai pentru secțiuni de videoclipuri muzicale care nu sunt deja acoperite de altă categorie.",
   "@sponsorBlockCategoryMusicOffTopicDescription": {
     "description": "Only for use in music videos. This only should be used for sections of music videos that aren't already covered by another category."
   },
@@ -626,5 +626,195 @@
   "redirectInvidiousLink": "Partajați linkul de redirecționare Invidious",
   "@redirectInvidiousLink": {
     "description": "asking user to share redirecting invidious link"
+  },
+  "fillFullscreen": "Maximizați videoclipul pentru a se potrivi cu ecranul",
+  "@fillFullscreen": {
+    "description": "Title to maximize video to fit screen"
+  },
+  "videoFilters": "Filtre video",
+  "@videoFilters": {
+    "description": "Title for video filter settings"
+  },
+  "optional": "opțional",
+  "@optional": {
+    "description": "Optional label"
+  },
+  "videoFilterTapToReveal": "Atingeți pentru a dezvălui",
+  "@videoFilterTapToReveal": {
+    "description": "Label to tell user to tap to show a filtered video"
+  },
+  "channel": "Canal",
+  "@channel": {
+    "description": "A single channel"
+  },
+  "rememberPlaybackSpeedDescription": "Setați automat viteza de redare la ultima viteză selectată",
+  "@rememberPlaybackSpeedDescription": {
+    "description": "Settings description for remembering playback speed"
+  },
+  "videoFilterHideDescription": "În mod prestabilit, videoclipurile filtrate nu sunt ascunse, ci afișate ca fiind obscucate cu motivul (motivele) pentru care au fost filtrate. Această setare elimină videoclipurile filtrate din liste.",
+  "@videoFilterHideDescription": {
+    "description": ""
+  },
+  "videoFilterOperationHigherThan": "Mai mare decât",
+  "@videoFilterOperationHigherThan": {
+    "description": "Label for video filter operation Higher than"
+  },
+  "lockFullScreenToLandscape": "Blocați orientarea pe întregul ecran în raport cu aspectul video",
+  "@lockFullScreenToLandscape": {
+    "description": "Title to force full screen to landscape"
+  },
+  "fillFullscreenDescription": "Reglează videoclipul pentru a umple întregul ecran în modul peisaj",
+  "@fillFullscreenDescription": {
+    "description": "Setting description for filling video to screen in landscape"
+  },
+  "videoAddedToQueue": "Videoclip adăugat la coadă",
+  "@videoAddedToQueue": {
+    "description": "Pop up message when a video was added at the end of the video queue"
+  },
+  "videoFilterType": "Tip",
+  "@videoFilterType": {
+    "description": "Label for filter type"
+  },
+  "videoFilterValue": "Valoare",
+  "@videoFilterValue": {
+    "description": "Label for filter value"
+  },
+  "videoFilterAllChannels": "Toate canalele",
+  "@videoFilterAllChannels": {
+    "description": "Title for the sections that applies to all channels"
+  },
+  "videoFilterEditDescription": "Selectați un canal opțional, un tip de filtru, o operațiune și o valoare pentru a filtra videoclipurile OUT din liste. Exemplu, tastați: numele videoclipului, operațiunea: conține, valoare: testul va EXCLUDE toate videoclipurile cu cuvântul „test” în numele lor.",
+  "@videoFilterEditDescription": {
+    "description": "Descriptive test for video filter set up"
+  },
+  "appLogs": "Jurnalele aplicației",
+  "@appLogs": {
+    "description": "Title for settings that leads to application logs"
+  },
+  "videoFilterHide": "Ascundeți videoclipurile filtrate",
+  "@videoFilterHide": {
+    "description": "Label for settings to hide filtered videos"
+  },
+  "rememberPlaybackSpeed": "Reținere viteza de redare",
+  "@rememberPlaybackSpeed": {
+    "description": "Setting label for remembering playback speed"
+  },
+  "addToPlaylist": "Adaugă la playlist",
+  "@addToPlaylist": {
+    "description": "Label to add a video to a playlist"
+  },
+  "playNext": "Redă următorul",
+  "@playNext": {
+    "description": "Label to play the video after the current one."
+  },
+  "playNextAddedToQueue": "Video va rula în continuare",
+  "@playNextAddedToQueue": {
+    "description": "Pop up message to confirm that the video has been properly set to play next"
+  },
+  "appLogsDescription": "Obține jurnale cu ceea ce se întâmplă în aplicație, poate fi util pentru a raporta probleme",
+  "@appLogsDescription": {
+    "description": "Description of the app log settings"
+  },
+  "logsCopied": "Jurnalele copiate în clipboard",
+  "@logsCopied": {
+    "description": "Message to tell user that logs have been copied to the clipboard"
+  },
+  "copyToClipBoard": "Copiați în clipboard",
+  "@copyToClipBoard": {
+    "description": "Text to copy something to clipboard"
+  },
+  "videoFiltersExplanation": "Ascundeți sau estompați videoclipurile din toate fluxurile video din aplicație pe baza filtrelor definite mai jos. Acest lucru vă permite, de exemplu, să ascundeți spoilerele sportive sau să ascundeți scurtmetraje de pe un anumit canal.",
+  "@videoFiltersExplanation": {
+    "description": "Description on how filter work"
+  },
+  "videoFiltersSettingTileDescriptions": "Definiți reguli pentru a filtra videoclipurile",
+  "@videoFiltersSettingTileDescriptions": {
+    "description": "Description for the main settings page"
+  },
+  "addVideoFilter": "Creați un filtru",
+  "@addVideoFilter": {
+    "description": "Title when creating a new filter"
+  },
+  "editVideoFilter": "Editați filtrul",
+  "@editVideoFilter": {
+    "description": "Title when editting a filter"
+  },
+  "videoFilterOperation": "Operațiune",
+  "@videoFilterOperation": {
+    "description": "Label for filter operation"
+  },
+  "save": "Salvați",
+  "@save": {
+    "description": "Text for save action"
+  },
+  "videoFilterHideLabel": "Ascunde",
+  "@videoFilterHideLabel": {
+    "description": "Label to hide videos"
+  },
+  "videoFilterFilterLabel": "Obfuscate",
+  "@videoFilterFilterLabel": {
+    "description": "Label to filter videos"
+  },
+  "videoFilterDescriptionString": "{hideOrFilter} videoclipuri în care {type} {operation} ''{value}''.",
+  "@videoFilterDescriptionString": {
+    "description": "Human readable description of a video filter, in this case is it for string comparison, example: Hide videos where the name of the video does not contain the following string 'test' (Do not translate text between { })",
+    "placeholders": {
+      "hideOrFilter": {
+        "type": "String",
+        "example": "Hide"
+      },
+      "type": {
+        "type": "String",
+        "example": "video title"
+      },
+      "operation": {
+        "type": "String",
+        "example": "does not contain"
+      },
+      "value": {
+        "type": "String",
+        "example": "some filter text"
+      }
+    }
+  },
+  "videoFiltered": "Videoclipul a fost filtrat din următoarele motive:",
+  "@videoFiltered": {
+    "description": "Label shown on video list when it is filtered out"
+  },
+  "videoFilterNoFilters": "Fără filtre video, atingeți butonul '+' de mai jos pentru a începe să adăugați filtre.",
+  "@videoFilterNoFilters": {
+    "description": "Label when there are no video filters"
+  },
+  "videoFilterTypeVideoTitle": "Titlul videoclipului",
+  "@videoFilterTypeVideoTitle": {
+    "description": "Label for video filter video title"
+  },
+  "videoFilterTypeChannelName": "Numele canalului",
+  "@videoFilterTypeChannelName": {
+    "description": "Label for video filter channel name"
+  },
+  "videoFilterTypeVideoLength": "Durata videoclipului (secunde)",
+  "@videoFilterTypeVideoLength": {
+    "description": "Label for video filter video length"
+  },
+  "videoFilterOperationContains": "Conține",
+  "@videoFilterOperationContains": {
+    "description": "Label for video filter operation Contains"
+  },
+  "videoFilterOperationNotContain": "Nu conține",
+  "@videoFilterOperationNotContain": {
+    "description": "Label for video filter operation Does not contain"
+  },
+  "videoFilterOperationLowerThan": "Mai mică decât",
+  "@videoFilterOperationLowerThan": {
+    "description": "Label for video filter operation Lower than"
+  },
+  "videoFilterHideAllFromChannel": "Filtrați toate videoclipurile din canal",
+  "@videoFilterHideAllFromChannel": {
+    "description": "Label for video filter switch to allow to hide all videos from a channel"
+  },
+  "lockFullScreenToLandscapeDescription": "Blochează orientarea ecranului complet pe baza formatului video, peisaj pentru video lat și portret pentru videoclipuri portret",
+  "@lockFullScreenToLandscapeDescription": {
+    "description": "Setting description for forcing video to landscape when in full screen"
   }
 }
