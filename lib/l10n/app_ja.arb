@@ -812,5 +812,9 @@
   "fillFullscreenDescription": "横向き表示では画面全体に映像が広がるよう調整",
   "@fillFullscreenDescription": {
     "description": "Setting description for filling video to screen in landscape"
+  },
+  "videoAddedToQueue": "動画をキューに追加しました",
+  "@videoAddedToQueue": {
+    "description": "Pop up message when a video was added at the end of the video queue"
   }
 }
