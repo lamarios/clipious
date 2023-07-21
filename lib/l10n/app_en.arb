@@ -820,5 +820,13 @@
     "rememberPlaybackSpeedDescription": "Automatically set playback speed to the last speed selected",
     "@rememberPlaybackSpeedDescription": {
         "description": "Settings description for remembering playback speed"
+    },
+    "downloads": "Downloads",
+    "@downloads": {
+        "description": "Downloads"
+    },
+    "download": "Download",
+    "@download": {
+        "description": "A single download or CTA for downloading a video"
     }
 }

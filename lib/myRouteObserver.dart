@@ -3,6 +3,7 @@ import 'package:invidious/controllers/miniPayerController.dart';
 import 'package:logging/logging.dart';
 
 const RouteSettings ROUTE_SETTINGS = RouteSettings(name: 'settings');
+const RouteSettings ROUTE_DOWNLOAD_MANAGER = RouteSettings(name: 'download-manager');
 const RouteSettings ROUTE_SETTINGS_MANAGE_SERVERS = RouteSettings(name: 'settings-manage-servers');
 const RouteSettings ROUTE_SETTINGS_MANAGE_ONE_SERVER = RouteSettings(name: 'settings-manage-one-server');
 const RouteSettings ROUTE_SETTINGS_SPONSOR_BLOCK = RouteSettings(name: 'settings-sponsor-block');

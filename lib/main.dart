@@ -13,6 +13,7 @@ import 'package:invidious/controllers/homeController.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/httpOverrides.dart';
 import 'package:invidious/utils.dart';
+import 'package:invidious/views/components/downloadAppBarButton.dart';
 import 'package:invidious/views/components/miniPlayerAware.dart';
 import 'package:invidious/views/miniPlayer.dart';
 import 'package:invidious/views/playlists.dart';
@@ -253,6 +254,7 @@ class _HomeState extends State<Home> with AfterLayoutMixin {
               // backgroundColor: Colors.pink,
               backgroundColor: colorScheme.background,
               actions: [
+                const AppBarDownloadButton(),
                 IconButton(
                   onPressed: () {
                     // showSearch(context: context, delegate: MySearchDelegate());

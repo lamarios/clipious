@@ -25,6 +25,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.13.0"
+  animate_to:
+    dependency: "direct main"
+    description:
+      name: animate_to
+      sha256: bdcde4039fe2a718f2c84866aaa48d9f8aaa2ced5bb8211de8be87f1e20cb986
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.0"
   application_icon:
     dependency: "direct main"
     description:
@@ -1304,5 +1312,5 @@ packages:
     source: hosted
     version: "3.1.2"
 sdks:
-  dart: ">=3.0.0 <4.0.0"
+  dart: ">=3.0.5 <4.0.0"
   flutter: ">=3.4.0-17.0.pre"
