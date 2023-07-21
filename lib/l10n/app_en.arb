@@ -152,6 +152,10 @@
     "@videoAddedToPlaylist": {
         "description": "Pop up message when a video was added to a playlist"
     },
+    "videoAddedToQueue": "Video added to queue",
+    "@videoAddedToQueue": {
+        "description": "Pop up message when a video was added at the end of the video queue"
+    },
     "errorAddingVideoToPlaylist": "Error while adding video to playlist",
     "@errorAddingVideoToPlaylist": {
         "description": "Error while adding video to playlist"
