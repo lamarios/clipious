@@ -36,6 +36,18 @@ class VideoModalSheet extends StatelessWidget {
     ));
   }
 
+  void addToQueue(BuildContext context) {
+    var locals = AppLocalizations.of(context)!;
+    Navigator.of(context).pop();
+    MiniPlayerController.to()?.queueVideos([video]);
+
+    final ScaffoldMessengerState? scaffold = scaffoldKey.currentState;
+    scaffold?.showSnackBar(SnackBar(
+      content: Text(locals.videoAddedToQueue),
+      duration: const Duration(seconds: 1),
+    ));
+  }
+
   @override
   Widget build(BuildContext context) {
     var locals = AppLocalizations.of(context)!;
@@ -49,6 +61,13 @@ class VideoModalSheet extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [IconButton.filledTonal(onPressed: () => addToPlaylist(context), icon: const Icon(Icons.playlist_add)), Text(locals.addToPlaylist)],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(right: 16.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [IconButton.filledTonal(onPressed: () => addToQueue(context), icon: const Icon(Icons.playlist_play)), Text(locals.addToQueueList)],
             ),
           ),
           Column(

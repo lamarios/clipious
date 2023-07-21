@@ -403,15 +403,15 @@
   "@sponsorBlockSettingsQuickDescription": {
     "description": "Small description of what the sponsor block settings do"
   },
-  "sponsorBlockCategoryInteraction": "Rappel d'interaction (abonnement)",
+  "sponsorBlockCategoryInteraction": "Rappel d''interaction (abonnement)",
   "@sponsorBlockCategoryInteraction": {
     "description": "Sponsor block 'Interaction' Category"
   },
-  "sponsorBlockCategoryIntro": "Entracte/Animation d'introduction",
+  "sponsorBlockCategoryIntro": "Entracte/Animation d''introduction",
   "@sponsorBlockCategoryIntro": {
     "description": "Sponsorblock 'Intro' Category"
   },
-  "sponsorBlockCategoryIntroDescription": "Un intervalle sans réel contenu, par exemple une pause, une image statique ou une animation répétitive. N'utilisez pas cette catégorie pour les transitions contenant de l'information.",
+  "sponsorBlockCategoryIntroDescription": "Un intervalle sans réel contenu, par exemple une pause, une image statique ou une animation répétitive. N''utilisez pas cette catégorie pour les transitions contenant de l''information.",
   "@sponsorBlockCategoryIntroDescription": {
     "description": "Sponsorblock 'Intro' Category description"
   },
@@ -443,11 +443,11 @@
   "@sponsorBlockCategoryMusicOffTopicDescription": {
     "description": "Only for use in music videos. This only should be used for sections of music videos that aren't already covered by another category."
   },
-  "appLogsDescription": "Obtenir les évènements de ce qui se passe dans l'application, peut être utile pour signaler des problèmes",
+  "appLogsDescription": "Obtenir les évènements de ce qui se passe dans l''application, peut être utile pour signaler des problèmes",
   "@appLogsDescription": {
     "description": "Description of the app log settings"
   },
-  "appLogs": "Journaux d'application",
+  "appLogs": "Journaux d''application",
   "@appLogs": {
     "description": "Title for settings that leads to application logs"
   },
@@ -459,7 +459,7 @@
   "@logsCopied": {
     "description": "Message to tell user that logs have been copied to the clipboard"
   },
-  "clearSearchHistory": "Effacer l'historique de recherches",
+  "clearSearchHistory": "Effacer l''historique de recherches",
   "@clearSearchHistory": {
     "description": "Settings label for clearing search history"
   },
@@ -475,11 +475,11 @@
   "@redirectInvidiousLink": {
     "description": "asking user to share redirecting invidious link"
   },
-  "addToQueueList": "Ajouter à la file d'attente",
+  "addToQueueList": "Ajouter à la file d''attente",
   "@addToQueueList": {
     "description": "Label on button to add a video to the queue list"
   },
-  "videoQueue": "File d'attente",
+  "videoQueue": "File d''attente",
   "@videoQueue": {
     "description": "Label for button to display the video queue"
   },
@@ -495,7 +495,7 @@
   "@sponsorBlockCategoryUnpaidSelfPromo": {
     "description": "Sponsor block 'Unpaid/Self promotion' Category"
   },
-  "sponsorBlockCategoryFillerDescription": "Digressions ajoutées uniquement dans un but de remplissage ou de l'humour non requis pour comprendre le sujet principal de la vidéo. Ne dois pas inclure des segments fournissant du contexte ou des détails de fond. Il s'agit d'une catégorie très agressive destinée aux moments qui ne sont pas « pour le fun ».",
+  "sponsorBlockCategoryFillerDescription": "Digressions ajoutées uniquement dans un but de remplissage ou de l''humour non requis pour comprendre le sujet principal de la vidéo. Ne dois pas inclure des segments fournissant du contexte ou des détails de fond. Il s''agit d''une catégorie très agressive destinée aux moments qui ne sont pas « pour le fun ».",
   "@sponsorBlockCategoryFillerDescription": {
     "description": "Sponsorblock 'Filler' Category description"
   },
@@ -519,7 +519,7 @@
   "@subtitleFontSizeDescription": {
     "description": "Settings description for subtitle size"
   },
-  "returnYoutubeDislikeDescription": "Afficher les « Je n'aime pas » estimés à l'aide de l'API fournie par returnyoutubedislike.com",
+  "returnYoutubeDislikeDescription": "Afficher les « Je n''aime pas » estimés à l''aide de l''API fournie par returnyoutubedislike.com",
   "@returnYoutubeDislikeDescription": {
     "description": "ReturnYoutubeDislike setting description"
   },
@@ -535,11 +535,11 @@
   "@searchHistory": {
     "description": "Settings label for search history"
   },
-  "enableSearchHistory": "Activer l'historique de recherche",
+  "enableSearchHistory": "Activer l''historique de recherche",
   "@enableSearchHistory": {
     "description": "Settings label for enabling search history"
   },
-  "searchHistoryDescription": "Réglages de l'historique de recherche",
+  "searchHistoryDescription": "Réglages de l''historique de recherche",
   "@searchHistoryDescription": {
     "description": "Description for search history settings"
   },
@@ -547,7 +547,7 @@
   "@searchHistoryLimitDescription": {
     "description": "Settings label for search history limit description"
   },
-  "searchHistoryLimit": "Limite de l'historique de recherches",
+  "searchHistoryLimit": "Limite de l''historique de recherches",
   "@searchHistoryLimit": {
     "description": "Settings label for search history limit"
   },
@@ -579,15 +579,15 @@
   "@rememberSubtitleLanguageDescription": {
     "description": "Settings description for remembering subtitle language"
   },
-  "sponsorBlockCategorySponsorDescription": "Promotion rémunérée, parrainage rémunéré et publicité directe. Ne concerne pas l'autopromotion ou le partage gratuit de causes, créateurices, sites web ou produits appréciés.",
+  "sponsorBlockCategorySponsorDescription": "Promotion rémunérée, parrainage rémunéré et publicité directe. Ne concerne pas l''autopromotion ou le partage gratuit de causes, créateurices, sites web ou produits appréciés.",
   "@sponsorBlockCategorySponsorDescription": {
     "description": "Sponsor block 'Sponsor' Category description"
   },
-  "sponsorBlockCategoryUnpaidSelfPromoDescription": "Semblable aux « sponsor », excepté pour la promotion non rémunérée ou l'autopromotion. Cela inclut les marchandises, les dons et les informations sur leurs collaborateurs. ",
+  "sponsorBlockCategoryUnpaidSelfPromoDescription": "Semblable aux « sponsor », excepté pour la promotion non rémunérée ou l''autopromotion. Cela inclut les marchandises, les dons et les informations sur leurs collaborateurs. ",
   "@sponsorBlockCategoryUnpaidSelfPromoDescription": {
     "description": "Sponsor block 'Unpaid/Self promotion' Category description"
   },
-  "sponsorBlockCategoryInteractionDescription": "Bref rappel d'aimer la vidéo ou de s'abonner à la chaîne au milieu de la vidéo. Si le message est long ou porte sur quelque chose de précis, classez plutôt le segment comme autopromotion.",
+  "sponsorBlockCategoryInteractionDescription": "Bref rappel d''aimer la vidéo ou de s''abonner à la chaîne au milieu de la vidéo. Si le message est long ou porte sur quelque chose de précis, classez plutôt le segment comme autopromotion.",
   "@sponsorBlockCategoryInteractionDescription": {
     "description": "Sponsor block 'Interaction' Category description"
   },
@@ -595,7 +595,7 @@
   "@skipSslVerification": {
     "description": "Setting label to skip ssl certification verification"
   },
-  "videoFiltersExplanation": "Masquer ou flouter les contenus de tous les flux vidéo de l'application en fonction des filtres définis ci-dessous. Cela vous permet par exemple de masquer des résultats sportifs ou les shorts d'une certaine chaîne.",
+  "videoFiltersExplanation": "Masquer ou flouter les contenus de tous les flux vidéo de l''application en fonction des filtres définis ci-dessous. Cela vous permet par exemple de masquer des résultats sportifs ou les shorts d''une certaine chaîne.",
   "@videoFiltersExplanation": {
     "description": "Description on how filter work"
   },
@@ -635,7 +635,7 @@
   "@playNextAddedToQueue": {
     "description": "Pop up message to confirm that the video has been properly set to play next"
   },
-  "sponsorBlockCategoryPreviewDescription": "Collection de clips qui montrent ce qui se passe dans cette vidéo ou d'autres vidéos d'une série où toutes les informations sont répétées plus tard dans la vidéo.",
+  "sponsorBlockCategoryPreviewDescription": "Collection de clips qui montrent ce qui se passe dans cette vidéo ou d''autres vidéos d''une série où toutes les informations sont répétées plus tard dans la vidéo.",
   "@sponsorBlockCategoryPreviewDescription": {
     "description": "Sponsorblock 'Preview' Category description"
   },
@@ -733,7 +733,7 @@
   "@videoFilterHideDescription": {
     "description": ""
   },
-  "videoFilterNoFilters": "Pas de filtres vidéo, appuyez sur le bouton '+' ci-dessous pour ajouter des filtres.",
+  "videoFilterNoFilters": "Pas de filtres vidéo, appuyez sur le bouton ''+'' ci-dessous pour ajouter des filtres.",
   "@videoFilterNoFilters": {
     "description": "Label when there are no video filters"
   },
@@ -765,11 +765,11 @@
   "@videoFilterHideAllFromChannel": {
     "description": "Label for video filter switch to allow to hide all videos from a channel"
   },
-  "lockFullScreenToLandscape": "Verrouiller l'orientation plein écran sur le rapport hauteur/largeur de la vidéo",
+  "lockFullScreenToLandscape": "Verrouiller l''orientation plein écran sur le rapport hauteur/largeur de la vidéo",
   "@lockFullScreenToLandscape": {
     "description": "Title to force full screen to landscape"
   },
-  "lockFullScreenToLandscapeDescription": "Verrouille l'orientation plein écran en fonction du format vidéo, paysage pour les vidéos larges et portrait pour les vidéos portrait",
+  "lockFullScreenToLandscapeDescription": "Verrouille l''orientation plein écran en fonction du format vidéo, paysage pour les vidéos larges et portrait pour les vidéos portrait",
   "@lockFullScreenToLandscapeDescription": {
     "description": "Setting description for forcing video to landscape when in full screen"
   },
@@ -777,7 +777,7 @@
   "@rememberPlaybackSpeed": {
     "description": "Setting label for remembering playback speed"
   },
-  "skipSslVerificationDescription": "Pour utiliser un certificat SSL autosigné ou en cas d'erreur serveur liée à SSL.",
+  "skipSslVerificationDescription": "Pour utiliser un certificat SSL autosigné ou en cas d''erreur serveur liée à SSL.",
   "@skipSslVerificationDescription": {
     "description": "Setting description for the skip ssl certification verification"
   },
