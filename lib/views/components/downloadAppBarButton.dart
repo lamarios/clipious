@@ -29,7 +29,7 @@ class AppBarDownloadButton extends StatelessWidget {
               },
               icon: const Icon(Icons.download),
             ),
-            _.downloads > 0 ? Text(_.downloads.toString()) : SizedBox.shrink()
+            Positioned(bottom: -1, right: -1, child: _.downloads > 0 ? Text(_.downloads.toString()) : SizedBox.shrink())
           ],
         ),
         builder: (context, child, animation) => Transform.translate(

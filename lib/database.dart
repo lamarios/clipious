@@ -9,6 +9,7 @@ import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 
 import 'models/db/appLog.dart';
+import 'models/db/downloadedVideo.dart';
 import 'models/db/server.dart';
 import 'models/db/videoFilter.dart';
 import 'objectbox.g.dart'; // created by `flutter pub run build_runner build`
@@ -197,5 +198,17 @@ class DbClient {
 
   void deleteFilter(VideoFilter filter) {
     store.box<VideoFilter>().remove(filter.id);
+  }
+
+  List<DownloadedVideo> getAllDownloads() {
+    return store.box<DownloadedVideo>().getAll();
+  }
+
+  void upsertDownload(DownloadedVideo vid) {
+    store.box<DownloadedVideo>().put(vid);
+  }
+
+  void deleteDownload(DownloadedVideo vid) {
+    store.box<DownloadedVideo>().remove(vid.id);
   }
 }
