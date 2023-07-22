@@ -812,5 +812,9 @@
   "fillFullscreenDescription": "Налаштовує відео на заповнення всього екрану в альбомному режимі",
   "@fillFullscreenDescription": {
     "description": "Setting description for filling video to screen in landscape"
+  },
+  "videoAddedToQueue": "Відео додано до черги",
+  "@videoAddedToQueue": {
+    "description": "Pop up message when a video was added at the end of the video queue"
   }
 }
