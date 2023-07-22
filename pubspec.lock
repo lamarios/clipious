@@ -298,6 +298,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "7.0.0"
+  dio:
+    dependency: "direct main"
+    description:
+      name: dio
+      sha256: "3866d67f93523161b643187af65f5ac08bc991a5bcdaf41a2d587fe4ccb49993"
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.3.0"
   dynamic_color:
     dependency: "direct main"
     description:

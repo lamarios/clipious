@@ -211,4 +211,12 @@ class DbClient {
   void deleteDownload(DownloadedVideo vid) {
     store.box<DownloadedVideo>().remove(vid.id);
   }
+
+  DownloadedVideo? getDownloadById(int id) {
+    return store.box<DownloadedVideo>().get(id);
+  }
+
+  DownloadedVideo? getDownloadByVideoId(String id) {
+    return store.box<DownloadedVideo>().query(DownloadedVideo_.videoId.equals(id)).build().findFirst();
+  }
 }

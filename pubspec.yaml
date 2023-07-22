@@ -76,6 +76,7 @@ dependencies:
   search_choices: 2.2.5
   uuid: 3.0.7
   animate_to: 0.1.0
+  dio: 5.3.0
 
 dependency_overrides:
   #  wakelock_windows:

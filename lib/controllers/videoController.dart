@@ -9,6 +9,7 @@ import 'package:logging/logging.dart';
 import '../globals.dart';
 import '../models/errors/invidiousServiceError.dart';
 import '../models/video.dart';
+import 'downloadController.dart';
 import 'miniPayerController.dart';
 
 const String coulnotLoadVideos = 'cannot-load-videos';
@@ -25,6 +26,7 @@ class VideoController extends GetxController {
   int selectedIndex = 0;
   String videoId;
   bool isLoggedIn = service.isLoggedIn();
+  bool downloading = false;
 
   double opacity = 1;
 
@@ -81,6 +83,27 @@ class VideoController extends GetxController {
         videos.addAll(video?.recommendedVideos ?? []);
       }
       MiniPlayerController.to()?.playVideo(videos, goBack: true);
+    }
+  }
+
+  bool get isDownloaded {
+    if (video != null) {
+      return db.getDownloadByVideoId(videoId) != null;
+    } else {
+      return false;
+    }
+  }
+
+  Future<bool> downloadVideo() async {
+    if (video != null) {
+      downloading = true;
+      update();
+      var bool = await DownloadController.to()?.addDownload(video!) ?? false;
+      downloading = false;
+      update();
+      return bool;
+    } else {
+      return false;
     }
   }
 }

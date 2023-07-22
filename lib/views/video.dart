@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
+import 'package:invidious/controllers/downloadController.dart';
 import 'package:invidious/controllers/videoController.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/views/components/videoAddToPlaylistButton.dart';
@@ -47,6 +48,17 @@ class VideoView extends StatelessWidget {
             actions: _.loadingVideo || _.video == null
                 ? []
                 : [
+                    AnimatedSwitcher(
+                        duration: animationDuration,
+                        child: _.downloading
+                            ? SizedBox(
+                                height: 15,
+                                width: 15,
+                                child: CircularProgressIndicator(
+                                  value: DownloadController.to()?.downloadProgresses[_.videoId],
+                                  strokeWidth: 2,
+                                ))
+                            : IconButton(onPressed: _.isDownloaded ? null : _.downloadVideo, icon: _.isDownloaded ? const Icon(Icons.download_done) : const Icon(Icons.download))),
                     Visibility(
                       visible: _.video != null,
                       child: VideoShareButton(video: _.video!),

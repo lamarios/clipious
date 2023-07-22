@@ -828,5 +828,13 @@
     "download": "Download",
     "@download": {
         "description": "A single download or CTA for downloading a video"
+    },
+    "videoAlreadyDownloaded": "Video already downloaded",
+    "@videoAlreadyDownloaded": {
+        "description": "Message when a user tries to download a video he already has"
+    },
+    "noDownloadedVideos": "No downloaded videos, browse, long press on a video in a list of tap the download button on a video screen to download",
+    "@noDownloadedVideos": {
+        "description": "Message showing when the user goes to the download screen but there are no offline videos."
     }
 }

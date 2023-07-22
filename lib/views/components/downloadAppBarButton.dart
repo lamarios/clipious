@@ -15,21 +15,36 @@ class AppBarDownloadButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var colors = Theme.of(context).colorScheme;
     return GetBuilder<DownloadController>(
       init: DownloadController(),
       tag: 'dl',
       builder: (_) => AnimateTo<BaseVideo>(
-        onArrival: _.addDownload,
+        // onArrival: _.addDownload,
         controller: _.animateToController,
         child: Stack(
+          alignment: Alignment.center,
           children: [
             IconButton(
-              onPressed: () {
-                navigatorKey.currentState?.push(MaterialPageRoute(settings: ROUTE_DOWNLOAD_MANAGER, builder: (context) => const DownloadManager()));
-              },
-              icon: const Icon(Icons.download),
+              onPressed: openDownloadManager,
+              icon: Icon(
+                Icons.download,
+                color: _.totalProgress > 0 ? colors.background : null,
+              ),
             ),
-            Positioned(bottom: -1, right: -1, child: _.downloads > 0 ? Text(_.downloads.toString()) : SizedBox.shrink())
+            _.totalProgress > 0
+                ? InkWell(
+                    onTap: openDownloadManager,
+                    child: SizedBox(
+                        width: 15,
+                        height: 15,
+                        child: CircularProgressIndicator(
+                          value: _.totalProgress,
+                          strokeWidth: 2,
+                        )),
+                  )
+                : const SizedBox.shrink(),
+            Positioned(top: 5, right: 5, child: _.videos.isNotEmpty ? Text(_.videos.length.toString()) : const SizedBox.shrink())
           ],
         ),
         builder: (context, child, animation) => Transform.translate(
@@ -38,5 +53,9 @@ class AppBarDownloadButton extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void openDownloadManager() {
+    navigatorKey.currentState?.push(MaterialPageRoute(settings: ROUTE_DOWNLOAD_MANAGER, builder: (context) => const DownloadManager()));
   }
 }

@@ -49,10 +49,15 @@ class VideoModalSheet extends StatelessWidget {
     ));
   }
 
-  void downloadVideo(BuildContext context) {
+  void downloadVideo(BuildContext context) async {
+    var locals = AppLocalizations.of(context)!;
     Navigator.of(context).pop();
     var downloadController = DownloadController.to();
     downloadController?.animateToController.animateTag('video-animate-to-${video.videoId}', duration: const Duration(milliseconds: 300), curve: Curves.easeInOutQuad);
+    bool canDownload = await downloadController?.addDownload(video) ?? false;
+    if(!canDownload){
+      scaffoldKey.currentState?.showSnackBar(SnackBar(content: Text(locals.videoAlreadyDownloaded)));
+    }
   }
 
   @override

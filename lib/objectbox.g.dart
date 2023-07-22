@@ -533,8 +533,11 @@ ModelDefinition getObjectBoxModel() {
         objectToFB: (DownloadedVideo object, fb.Builder fbb) {
           final videoIdOffset = fbb.writeString(object.videoId);
           final titleOffset = fbb.writeString(object.title);
-          final authorOffset = fbb.writeString(object.author);
-          final authorUrlOffset = fbb.writeString(object.authorUrl);
+          final authorOffset =
+              object.author == null ? null : fbb.writeString(object.author!);
+          final authorUrlOffset = object.authorUrl == null
+              ? null
+              : fbb.writeString(object.authorUrl!);
           fbb.startTable(7);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, videoIdOffset);
@@ -556,9 +559,9 @@ ModelDefinition getObjectBoxModel() {
               title: const fb.StringReader(asciiOptimization: true)
                   .vTableGet(buffer, rootOffset, 8, ''),
               author: const fb.StringReader(asciiOptimization: true)
-                  .vTableGet(buffer, rootOffset, 10, ''),
+                  .vTableGetNullable(buffer, rootOffset, 10),
               authorUrl: const fb.StringReader(asciiOptimization: true)
-                  .vTableGet(buffer, rootOffset, 12, ''),
+                  .vTableGetNullable(buffer, rootOffset, 12),
               downloadComplete: const fb.BoolReader()
                   .vTableGet(buffer, rootOffset, 14, false));
 
