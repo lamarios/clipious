@@ -70,7 +70,7 @@ Future<void> showAlertDialog(BuildContext context, String title, List<Widget> bo
 }
 
 void showSharingSheet(BuildContext context, ShareLinks links,
-    {bool showShareWithTimestamp = false}) {
+    {bool showTimestampOption = false}) {
   var locals = AppLocalizations.of(context)!;
 
   bool shareWithTimestamp = false;
@@ -90,7 +90,7 @@ void showSharingSheet(BuildContext context, ShareLinks links,
       return StatefulBuilder(
         builder: (BuildContext context, StateSetter setState) {
         return Container(
-            height: showShareWithTimestamp ? 200 : 150,
+            height: showTimestampOption ? 200 : 150,
             width: double.infinity,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -124,7 +124,7 @@ void showSharingSheet(BuildContext context, ShareLinks links,
                     Navigator.of(context).pop();
                   },
                 ),
-                if (showShareWithTimestamp)
+                if (showTimestampOption)
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
