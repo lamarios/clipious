@@ -804,5 +804,17 @@
   "lockFullScreenToLandscapeDescription": "Zeige Videos im Vollbild immer im nativen Seitenverhältnis an - Quer bei Horizontalen/\"klassischen\" Videos, Hochkant bei Vertikalen Videos",
   "@lockFullScreenToLandscapeDescription": {
     "description": "Setting description for forcing video to landscape when in full screen"
+  },
+  "fillFullscreen": "Video auf Bildschirmgröße maximieren",
+  "@fillFullscreen": {
+    "description": "Title to maximize video to fit screen"
+  },
+  "videoAddedToQueue": "Video zur Warteschlange hinzugefügt",
+  "@videoAddedToQueue": {
+    "description": "Pop up message when a video was added at the end of the video queue"
+  },
+  "fillFullscreenDescription": "Video anpassen, dass es den gesamten Bildschirm im Querformat ausfüllt",
+  "@fillFullscreenDescription": {
+    "description": "Setting description for filling video to screen in landscape"
   }
 }
