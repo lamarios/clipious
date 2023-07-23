@@ -32,7 +32,7 @@ class TvPlayerController extends GetxController {
   bool showControls = false;
   late Video currentlyPlaying;
 
-  Duration get videoLength => Duration(seconds: PlayerController.to()?.video.lengthSeconds ?? 0);
+  Duration get videoLength => Duration(seconds: PlayerController.to()?.video?.lengthSeconds ?? 0);
 
   TvPlayerController({required this.videos});
 

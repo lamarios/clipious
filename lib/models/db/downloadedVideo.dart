@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:dio/dio.dart';
 import 'package:objectbox/objectbox.dart';
 import 'package:path_provider/path_provider.dart';
 

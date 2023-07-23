@@ -94,10 +94,18 @@ class VideoController extends GetxController {
     }
   }
 
+  /// refresh the ui while downlading, not sure if it's the best way.
+  refreshUiWhileDownloading(){
+    if(downloading){
+      update();
+      Future.delayed(const Duration(milliseconds: 1000), refreshUiWhileDownloading);
+    }
+  }
+
   Future<bool> downloadVideo() async {
     if (video != null) {
       downloading = true;
-      update();
+      refreshUiWhileDownloading();
       var bool = await DownloadController.to()?.addDownload(video!) ?? false;
       downloading = false;
       update();

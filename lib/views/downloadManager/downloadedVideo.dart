@@ -8,9 +8,8 @@ import 'package:invidious/models/db/downloadedVideo.dart';
 
 class DownloadedVideoView extends StatelessWidget {
   final DownloadedVideo video;
-  final double? progress;
 
-  const DownloadedVideoView({Key? key, required this.video, this.progress}) : super(key: key);
+  const DownloadedVideoView({Key? key, required this.video}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +62,7 @@ class DownloadedVideoView extends StatelessWidget {
                     padding: const EdgeInsets.all(8.0),
                     child: _.video.downloadComplete
                         ? IconButton.filledTonal(
-                            onPressed: () {},
+                            onPressed: _.playVideo,
                             icon: const Icon(Icons.play_arrow),
                           )
                         : SizedBox(
@@ -71,7 +70,7 @@ class DownloadedVideoView extends StatelessWidget {
                             width: 20,
                             child: CircularProgressIndicator(
                               strokeWidth: 2,
-                              value: progress ?? 0,
+                              value: _.progress,
                             ),
                           ),
                   )

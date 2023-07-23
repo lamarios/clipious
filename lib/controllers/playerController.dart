@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:invidious/controllers/settingsController.dart';
 import 'package:invidious/controllers/tvPlayerController.dart';
 import 'package:invidious/controllers/videoInListController.dart';
+import 'package:invidious/models/db/downloadedVideo.dart';
 import 'package:invidious/utils.dart';
 import 'package:logging/logging.dart';
 import 'package:wakelock/wakelock.dart';
@@ -32,7 +33,8 @@ class PlayerController extends GetxController {
   int previousSponsorCheck = 0;
   bool useDash = db.getSettings(USE_DASH)?.value == 'true';
   AppLocalizations locals;
-  Video video;
+  Video? video;
+  DownloadedVideo? offlineVideo;
   final bool miniPlayer;
   bool? playNow;
   bool? disableControls;
@@ -40,7 +42,7 @@ class PlayerController extends GetxController {
   final Color overFlowTextColor;
   final GlobalKey key;
 
-  PlayerController({required this.colors, required this.overFlowTextColor, required this.key, required this.video, required this.miniPlayer, required this.locals, this.disableControls});
+  PlayerController({required this.colors, required this.overFlowTextColor, required this.key, this.video, this.offlineVideo, required this.miniPlayer, required this.locals, this.disableControls});
 
   @override
   void onInit() {
@@ -75,11 +77,11 @@ class PlayerController extends GetxController {
   }
 
   saveProgress(int timeInSeconds) {
-    if (videoController != null) {
+    if (videoController != null && video != null) {
       int currentPosition = timeInSeconds;
       // saving progress
-      int max = video.lengthSeconds;
-      var progress = dbProgress.Progress.named(progress: currentPosition / max, videoId: video.videoId);
+      int max = video!.lengthSeconds;
+      var progress = dbProgress.Progress.named(progress: currentPosition / max, videoId: video!.videoId);
       db.saveProgress(progress);
 
       VideoInListController.to(progress.videoId)?.updateProgress();
@@ -117,8 +119,10 @@ class PlayerController extends GetxController {
         }
         break;
       case BetterPlayerEventType.finished:
-        saveProgress(video.lengthSeconds);
-        broadcastEvent(event);
+        if (video != null) {
+          saveProgress(video!.lengthSeconds);
+          broadcastEvent(event);
+        }
         break;
 
       case BetterPlayerEventType.pipStart:
@@ -193,110 +197,171 @@ class PlayerController extends GetxController {
   }
 
   playVideo() {
-    // we get segments if there are any, no need to wait.
-    setSponsorBlock();
-    double progress = db.getVideoProgress(video.videoId);
-    Duration? startAt;
-    if (progress > 0 && progress < 0.90) {
-      startAt = Duration(seconds: (video.lengthSeconds * progress).floor());
-    }
-
-    print('start at $startAt');
-
-    String baseUrl = db.getCurrentlySelectedServer().url;
-
-    Map<String, String> resolutions = {};
-
-    bool isHls = video.hlsUrl != null;
-    String videoUrl = isHls
-        ? '${video.hlsUrl!}${service.useProxy() ? '?local=true' : ''}'
-        : useDash
-            ? '${video.dashUrl}${service.useProxy() ? '?local=true' : ''}'
-            : video.formatStreams[video.formatStreams.length - 1].url;
-
-    log.info('Playing url (dash ${useDash},  hasHls ? ${video.hlsUrl != null})  ${videoUrl}');
-
-    BetterPlayerVideoFormat format = isHls
-        ? BetterPlayerVideoFormat.hls
-        : useDash
-            ? BetterPlayerVideoFormat.dash
-            : BetterPlayerVideoFormat.other;
-
-    if (format == BetterPlayerVideoFormat.other) {
-      for (var value in video.formatStreams) {
-        resolutions[value.qualityLabel] = value.url;
+    if (video != null) {
+      videoController?.dispose();
+      videoController = null;
+      // we get segments if there are any, no need to wait.
+      setSponsorBlock();
+      double progress = db.getVideoProgress(video!.videoId);
+      Duration? startAt;
+      if (progress > 0 && progress < 0.90) {
+        startAt = Duration(seconds: (video!.lengthSeconds * progress).floor());
       }
+
+      print('start at $startAt');
+
+      String baseUrl = db.getCurrentlySelectedServer().url;
+
+      Map<String, String> resolutions = {};
+
+      bool isHls = video!.hlsUrl != null;
+      String videoUrl = isHls
+          ? '${video!.hlsUrl!}${service.useProxy() ? '?local=true' : ''}'
+          : useDash
+              ? '${video!.dashUrl}${service.useProxy() ? '?local=true' : ''}'
+              : video!.formatStreams[video!.formatStreams.length - 1].url;
+
+      log.info('Playing url (dash ${useDash},  hasHls ? ${video!.hlsUrl != null})  ${videoUrl}');
+
+      BetterPlayerVideoFormat format = isHls
+          ? BetterPlayerVideoFormat.hls
+          : useDash
+              ? BetterPlayerVideoFormat.dash
+              : BetterPlayerVideoFormat.other;
+
+      if (format == BetterPlayerVideoFormat.other) {
+        for (var value in video!.formatStreams) {
+          resolutions[value.qualityLabel] = value.url;
+        }
+      }
+
+      String lastSubtitle = '';
+      if (db.getSettings(REMEMBER_LAST_SUBTITLE)?.value == 'true') {
+        lastSubtitle = db.getSettings(LAST_SUBTITLE)?.value ?? '';
+      }
+
+      bool lockOrientation = db.getSettings(LOCK_ORIENTATION_FULLSCREEN)?.value == 'true';
+      bool fillVideo = db.getSettings(FILL_FULLSCREEN)?.value == 'true';
+
+      BetterPlayerDataSource betterPlayerDataSource = BetterPlayerDataSource(BetterPlayerDataSourceType.network, videoUrl,
+          videoFormat: format,
+          liveStream: video!.liveNow,
+          subtitles: video!.captions
+              .map((s) => BetterPlayerSubtitlesSource(type: BetterPlayerSubtitlesSourceType.network, urls: ['${baseUrl}${s.url}'], name: s.label, selectedByDefault: s.label == lastSubtitle))
+              .toList(),
+          resolutions: resolutions.isNotEmpty ? resolutions : null,
+          // placeholder: VideoThumbnailView(videoId: video.videoId, thumbnailUrl: video.getBestThumbnail()?.url ?? ''),
+          notificationConfiguration: BetterPlayerNotificationConfiguration(
+            showNotification: true,
+            activityName: 'MainActivity',
+            title: video!.title,
+            author: video!.author,
+            imageUrl: video!.getBestThumbnail()?.url ?? '',
+          ));
+
+      Wakelock.enable();
+
+      videoController = BetterPlayerController(
+          BetterPlayerConfiguration(
+              deviceOrientationsOnFullScreen: [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight, DeviceOrientation.portraitDown, DeviceOrientation.portraitUp],
+              deviceOrientationsAfterFullScreen: [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight, DeviceOrientation.portraitDown, DeviceOrientation.portraitUp],
+              handleLifecycle: false,
+              autoDetectFullscreenDeviceOrientation: lockOrientation,
+              autoDetectFullscreenAspectRatio: true,
+              startAt: startAt,
+              autoPlay: true,
+              allowedScreenSleep: false,
+              fit: fillVideo ? BoxFit.cover : BoxFit.contain,
+              subtitlesConfiguration: BetterPlayerSubtitlesConfiguration(
+                fontSize: double.parse(db.getSettings(SUBTITLE_SIZE)?.value ?? subtitleDefaultSize),
+              ),
+              controlsConfiguration: BetterPlayerControlsConfiguration(
+                  showControls: !(disableControls ?? false),
+                  enablePlayPause: false,
+                  overflowModalColor: colors.background,
+                  overflowModalTextColor: overFlowTextColor,
+                  overflowMenuIconsColor: overFlowTextColor,
+                  overflowMenuCustomItems: [BetterPlayerOverflowMenuItem(useDash ? Icons.check_box_outlined : Icons.check_box_outline_blank, locals.useDash, toggleDash)])),
+          betterPlayerDataSource: betterPlayerDataSource);
+      videoController!.addEventsListener(onVideoListener);
+      videoController!.setBetterPlayerGlobalKey(key);
+      update();
     }
-
-    String lastSubtitle = '';
-    if (db.getSettings(REMEMBER_LAST_SUBTITLE)?.value == 'true') {
-      lastSubtitle = db.getSettings(LAST_SUBTITLE)?.value ?? '';
-    }
-
-    bool lockOrientation = db.getSettings(LOCK_ORIENTATION_FULLSCREEN)?.value == 'true';
-    bool fillVideo = db.getSettings(FILL_FULLSCREEN)?.value == 'true';
-
-    BetterPlayerDataSource betterPlayerDataSource = BetterPlayerDataSource(BetterPlayerDataSourceType.network, videoUrl,
-        videoFormat: format,
-        liveStream: video.liveNow,
-        subtitles: video.captions
-            .map((s) => BetterPlayerSubtitlesSource(type: BetterPlayerSubtitlesSourceType.network, urls: ['${baseUrl}${s.url}'], name: s.label, selectedByDefault: s.label == lastSubtitle))
-            .toList(),
-        resolutions: resolutions.isNotEmpty ? resolutions : null,
-        // placeholder: VideoThumbnailView(videoId: video.videoId, thumbnailUrl: video.getBestThumbnail()?.url ?? ''),
-        notificationConfiguration: BetterPlayerNotificationConfiguration(
-          showNotification: true,
-          activityName: 'MainActivity',
-          title: video.title,
-          author: video.author,
-          imageUrl: video.getBestThumbnail()?.url ?? '',
-        ));
-
-    Wakelock.enable();
-
-    videoController = BetterPlayerController(
-        BetterPlayerConfiguration(
-            deviceOrientationsOnFullScreen: [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight, DeviceOrientation.portraitDown, DeviceOrientation.portraitUp],
-            deviceOrientationsAfterFullScreen: [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight, DeviceOrientation.portraitDown, DeviceOrientation.portraitUp],
-            handleLifecycle: false,
-            autoDetectFullscreenDeviceOrientation: lockOrientation,
-            autoDetectFullscreenAspectRatio: true,
-            startAt: startAt,
-            autoPlay: true,
-            allowedScreenSleep: false,
-            fit: fillVideo ? BoxFit.cover : BoxFit.contain,
-            subtitlesConfiguration: BetterPlayerSubtitlesConfiguration(
-              fontSize: double.parse(db.getSettings(SUBTITLE_SIZE)?.value ?? subtitleDefaultSize),
-            ),
-            controlsConfiguration: BetterPlayerControlsConfiguration(
-                showControls: !(disableControls ?? false),
-                enablePlayPause: false,
-                overflowModalColor: colors.background,
-                overflowModalTextColor: overFlowTextColor,
-                overflowMenuIconsColor: overFlowTextColor,
-                overflowMenuCustomItems: [BetterPlayerOverflowMenuItem(useDash ? Icons.check_box_outlined : Icons.check_box_outline_blank, locals.useDash, toggleDash)])),
-        betterPlayerDataSource: betterPlayerDataSource);
-    videoController!.addEventsListener(onVideoListener);
-    videoController!.setBetterPlayerGlobalKey(key);
-    update();
   }
 
   setSponsorBlock() async {
-    List<SponsorSegmentType> types = SponsorSegmentType.values.where((e) => db.getSettings(e.settingsName())?.value == 'true').toList();
+    if (video != null) {
+      List<SponsorSegmentType> types = SponsorSegmentType.values.where((e) => db.getSettings(e.settingsName())?.value == 'true').toList();
 
-    if (types.isNotEmpty) {
-      List<SponsorSegment> sponsorSegments = await service.getSponsorSegments(video.videoId, types);
-      List<Pair<int>> segments = List.from(sponsorSegments.map((e) {
-        Duration start = Duration(seconds: e.segment[0].floor());
-        Duration end = Duration(seconds: e.segment[1].floor());
-        Pair<int> segment = Pair(start.inMilliseconds, end.inMilliseconds);
-        return segment;
-      }));
+      if (types.isNotEmpty) {
+        List<SponsorSegment> sponsorSegments = await service.getSponsorSegments(video!.videoId, types);
+        List<Pair<int>> segments = List.from(sponsorSegments.map((e) {
+          Duration start = Duration(seconds: e.segment[0].floor());
+          Duration end = Duration(seconds: e.segment[1].floor());
+          Pair<int> segment = Pair(start.inMilliseconds, end.inMilliseconds);
+          return segment;
+        }));
 
-      this.sponsorSegments = segments;
-      log.fine('we found ${segments.length} segments to skip');
-    } else {
-      sponsorSegments = [];
+        this.sponsorSegments = segments;
+        log.fine('we found ${segments.length} segments to skip');
+      } else {
+        sponsorSegments = [];
+      }
     }
+  }
+
+  void playOfflineVideo() async {
+    if (offlineVideo != null) {
+      videoController?.dispose();
+      videoController = null;
+      // we get segments if there are any, no need to wait.
+
+      bool lockOrientation = db.getSettings(LOCK_ORIENTATION_FULLSCREEN)?.value == 'true';
+      bool fillVideo = db.getSettings(FILL_FULLSCREEN)?.value == 'true';
+
+      String videoPath = await offlineVideo!.videoPath;
+      String thumbPath = await offlineVideo!.thumbnailPath;
+
+      BetterPlayerDataSource betterPlayerDataSource = BetterPlayerDataSource(BetterPlayerDataSourceType.file, videoPath,
+          videoFormat: BetterPlayerVideoFormat.other,
+          liveStream: false,
+          // placeholder: VideoThumbnailView(videoId: video.videoId, thumbnailUrl: video.getBestThumbnail()?.url ?? ''),
+          notificationConfiguration: BetterPlayerNotificationConfiguration(
+            showNotification: true,
+            activityName: 'MainActivity',
+            title: offlineVideo!.title,
+            author: offlineVideo!.author,
+            imageUrl: thumbPath,
+          ));
+
+      Wakelock.enable();
+
+      videoController = BetterPlayerController(
+          BetterPlayerConfiguration(
+              deviceOrientationsOnFullScreen: [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight, DeviceOrientation.portraitDown, DeviceOrientation.portraitUp],
+              deviceOrientationsAfterFullScreen: [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight, DeviceOrientation.portraitDown, DeviceOrientation.portraitUp],
+              handleLifecycle: false,
+              autoDetectFullscreenDeviceOrientation: lockOrientation,
+              autoDetectFullscreenAspectRatio: true,
+              autoPlay: true,
+              allowedScreenSleep: false,
+              fit: fillVideo ? BoxFit.cover : BoxFit.contain,
+              controlsConfiguration: BetterPlayerControlsConfiguration(
+                  showControls: !(disableControls ?? false),
+                  enablePlayPause: false,
+                  overflowModalColor: colors.background,
+                  overflowModalTextColor: overFlowTextColor,
+                  overflowMenuIconsColor: overFlowTextColor)),
+          betterPlayerDataSource: betterPlayerDataSource);
+      videoController!.addEventsListener(onVideoListener);
+      videoController!.setBetterPlayerGlobalKey(key);
+      update();
+    }
+  }
+
+  void switchToOfflineVideo(DownloadedVideo v) {
+    offlineVideo = v;
+    update();
+    playOfflineVideo();
   }
 }

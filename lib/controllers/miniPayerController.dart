@@ -17,6 +17,7 @@ import 'package:logging/logging.dart';
 
 import '../main.dart';
 import '../models/baseVideo.dart';
+import '../models/db/downloadedVideo.dart';
 import '../models/video.dart';
 
 const double targetHeight = 75;
@@ -40,6 +41,7 @@ class MiniPlayerController extends GetxController {
   bool isFullScreen = false;
   double progress = 0;
   Video? currentlyPlaying;
+  DownloadedVideo? offlineCurrentlyPlaying;
   double opacity = 0;
   double dragDistance = 0;
   bool dragStartMini = true;
@@ -49,7 +51,11 @@ class MiniPlayerController extends GetxController {
   List<String> playedVideos = [];
   Offset offset = Offset.zero;
 
+  List<DownloadedVideo> offlineVideos = [];
+
   MiniPlayerController();
+
+  bool get isPlaying => currentlyPlaying != null || offlineCurrentlyPlaying != null;
 
   @override
   onReady() {
@@ -103,6 +109,7 @@ class MiniPlayerController extends GetxController {
 
   setVideos(List<BaseVideo> videos) {
     this.videos = videos.where((element) => !element.filtered).toList();
+    offlineVideos = [];
     update();
   }
 
@@ -133,6 +140,7 @@ class MiniPlayerController extends GetxController {
   }
 
   queueVideos(List<BaseVideo> videos) {
+    offlineVideos = [];
     if (videos.isNotEmpty) {
       //removing videos that are already in the queue
       this.videos.addAll(videos.where((v) => this.videos.indexWhere((v2) => v2.videoId == v.videoId) == -1).where((element) => !element.filtered));
@@ -154,7 +162,7 @@ class MiniPlayerController extends GetxController {
   }
 
   showMiniPlayer() {
-    if (currentlyPlaying != null) {
+    if (currentlyPlaying != null || offlineCurrentlyPlaying != null) {
       isMini = true;
       top = null;
       isHidden = false;
@@ -166,12 +174,18 @@ class MiniPlayerController extends GetxController {
   }
 
   playNext() {
-    if (videos.isNotEmpty) {
+    if (videos.isNotEmpty || offlineVideos.isNotEmpty) {
+      var listToUpdate = videos.isNotEmpty ? videos : offlineVideos;
+
       log.fine('Play next: played length: ${playedVideos.length} videos: ${videos.length} Repeat mode: $repeat');
       if (repeat == PlayerRepeat.repeatOne) {
-        switchToVideo(currentlyPlaying!);
+        if (videos.isNotEmpty) {
+          switchToVideo(currentlyPlaying!);
+        } else if (offlineVideos.isNotEmpty) {
+          switchToOfflineVideo(offlineCurrentlyPlaying!);
+        }
       } else {
-        if (playedVideos.length >= videos.length) {
+        if (playedVideos.length >= listToUpdate.length) {
           if (repeat == PlayerRepeat.repeatAll) {
             playedVideos = [];
             currentIndex = 0;
@@ -181,7 +195,7 @@ class MiniPlayerController extends GetxController {
         } else {
           if (!shuffle) {
             // making sure we play something that can be played
-            if (currentIndex + 1 < videos.length) {
+            if (currentIndex + 1 < listToUpdate.length) {
               currentIndex++;
             } else if (repeat == PlayerRepeat.repeatAll) {
               // we might reach here if user changes repeat mode and play with previous/next buttons
@@ -191,12 +205,22 @@ class MiniPlayerController extends GetxController {
               return;
             }
           } else {
-            List<BaseVideo> availableVideos = videos.where((e) => !playedVideos.contains(e.videoId)).toList();
-            String nextVideoId = availableVideos[Random().nextInt(availableVideos.length)].videoId;
-            currentIndex = videos.indexWhere((e) => e.videoId == nextVideoId);
+            if (videos.isNotEmpty) {
+              List<BaseVideo> availableVideos = videos.where((e) => !playedVideos.contains(e.videoId)).toList();
+              String nextVideoId = availableVideos[Random().nextInt(availableVideos.length)].videoId;
+              currentIndex = videos.indexWhere((e) => e.videoId == nextVideoId);
+            } else {
+              List<DownloadedVideo> availableVideos = offlineVideos.where((e) => !playedVideos.contains(e.videoId)).toList();
+              String nextVideoId = availableVideos[Random().nextInt(availableVideos.length)].videoId;
+              currentIndex = videos.indexWhere((e) => e.videoId == nextVideoId);
+            }
           }
         }
-        switchToVideo(videos[currentIndex]);
+        if (videos.isNotEmpty) {
+          switchToVideo(videos[currentIndex]);
+        } else if (offlineVideos.isNotEmpty) {
+          switchToOfflineVideo(offlineVideos[currentIndex]);
+        }
         PlayerController.to()?.toggleControls(!isMini);
         update();
       }
@@ -204,12 +228,19 @@ class MiniPlayerController extends GetxController {
   }
 
   playPrevious() {
-    if (videos.length > 1) {
+    var listToUpdate = videos.isNotEmpty ? videos : offlineVideos;
+    if (listToUpdate.length > 1) {
       currentIndex--;
       if (currentIndex < 0) {
         currentIndex = videos.length - 1;
       }
-      switchToVideo(videos[currentIndex]);
+
+      if (videos.isNotEmpty) {
+        switchToVideo(videos[currentIndex]);
+      } else if (offlineVideos.isNotEmpty) {
+        switchToOfflineVideo(offlineVideos[currentIndex]);
+      }
+
       PlayerController.to()?.toggleControls(!isMini);
       update();
     }
@@ -220,6 +251,7 @@ class MiniPlayerController extends GetxController {
     if (goBack ?? false) navigatorKey.currentState?.pop();
     log.fine('Playing ${videos.length} videos');
     if (videos.isNotEmpty) {
+      offlineVideos = [];
       this.videos = List.from(videos, growable: true);
       playedVideos = [];
       currentIndex = 0;
@@ -237,6 +269,8 @@ class MiniPlayerController extends GetxController {
   }
 
   switchToVideo(BaseVideo video) async {
+    offlineVideos = [];
+    offlineCurrentlyPlaying = null;
     int index = videos.indexWhere((element) => element.videoId == video.videoId);
     if (index >= 0 && index < videos.length) {
       currentIndex = index;
@@ -264,14 +298,14 @@ class MiniPlayerController extends GetxController {
     MiniPlayerControlsController.to()?.setVideo(v.videoId);
   }
 
-  BaseVideo get currentVideo => videos[currentIndex];
+  BaseVideo? get currentVideo => videos.isNotEmpty ? videos[currentIndex] : null;
 
-  removeVideoFromQueue(BaseVideo video) {
+  removeVideoFromQueue(String videoId) {
     if (videos.length == 1) {
       hide();
     } else {
-      int index = videos.indexWhere((element) => element.videoId == video.videoId);
-      playedVideos.remove(video.videoId);
+      int index = videos.indexWhere((element) => element.videoId == videoId);
+      playedVideos.remove(videoId);
       if (index >= 0) {
         if (index < currentIndex) {
           currentIndex--;
@@ -318,7 +352,8 @@ class MiniPlayerController extends GetxController {
       case BetterPlayerEventType.progress:
         if (isMini) {
           int currentPosition = (event.parameters?['progress'] as Duration).inSeconds;
-          progress = currentPosition / currentVideo.lengthSeconds;
+          int total = (event.parameters?['duration'] as Duration).inSeconds;
+          progress = currentPosition / total;
           MiniPlayerProgressController.to()?.setProgress(progress);
         }
         break;
@@ -348,9 +383,10 @@ class MiniPlayerController extends GetxController {
 
   onQueueReorder(int oldItemIndex, int newItemIndex) {
     log.fine('Dragged video');
-    var movedItem = videos.removeAt(oldItemIndex);
-    videos.insert(newItemIndex, movedItem);
-    log.fine('Reordered list: $oldItemIndex new index: ${videos.indexOf(movedItem)}');
+    var listToUpdate = videos.isNotEmpty ? videos : offlineVideos;
+    var movedItem = listToUpdate.removeAt(oldItemIndex);
+    listToUpdate.insert(newItemIndex, movedItem);
+    log.fine('Reordered list: $oldItemIndex new index: ${listToUpdate.indexOf(movedItem)}');
     if (oldItemIndex == currentIndex) {
       currentIndex = newItemIndex;
     } else if (oldItemIndex > currentIndex && newItemIndex <= currentIndex) {
@@ -375,6 +411,45 @@ class MiniPlayerController extends GetxController {
       }
 
       update();
+    }
+  }
+
+  /// Offline video management
+  void switchToOfflineVideo(DownloadedVideo video) {
+    if (!playedVideos.contains(video.videoId)) {
+      playedVideos.add(video.videoId);
+    }
+
+    int index = offlineVideos.indexWhere((element) => element.videoId == video.videoId);
+    if (index >= 0 && index < videos.length) {
+      currentIndex = index;
+    } else {
+      currentIndex = 0;
+    }
+    currentlyPlaying = null;
+    progress = 0;
+    offlineCurrentlyPlaying = offlineVideos[0];
+
+    PlayerController.to()?.switchToOfflineVideo(video);
+    PlayerController.to()?.toggleControls(!isMini);
+    update();
+  }
+
+  void playOfflineVideos(List<DownloadedVideo> offlineVids) {
+    if (offlineVids.isNotEmpty) {
+      playedVideos = [];
+      log.fine("Preparing to watch ${offlineVids.length}");
+
+      offlineVideos = offlineVids;
+      videos = [];
+      selectedFullScreenIndex = 0;
+      if (videos.length > 1) {
+        selectedFullScreenIndex = 3;
+      }
+      opacity = 0;
+      top = 500;
+      switchToOfflineVideo(offlineVideos[0]);
+      showBigPlayer();
     }
   }
 }

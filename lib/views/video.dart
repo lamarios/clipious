@@ -51,13 +51,25 @@ class VideoView extends StatelessWidget {
                     AnimatedSwitcher(
                         duration: animationDuration,
                         child: _.downloading
-                            ? SizedBox(
-                                height: 15,
-                                width: 15,
-                                child: CircularProgressIndicator(
-                                  value: DownloadController.to()?.downloadProgresses[_.videoId],
-                                  strokeWidth: 2,
-                                ))
+                            ? Stack(
+                                alignment: Alignment.center,
+                                children: [
+                                  IconButton(
+                                    icon: Icon(
+                                      Icons.add,
+                                      color: colorScheme.background,
+                                    ),
+                                    onPressed: () {},
+                                  ),
+                                  SizedBox(
+                                      height: 15,
+                                      width: 15,
+                                      child: CircularProgressIndicator(
+                                        value: DownloadController.to()?.downloadProgresses[_.videoId],
+                                        strokeWidth: 2,
+                                      ))
+                                ],
+                              )
                             : IconButton(onPressed: _.isDownloaded ? null : _.downloadVideo, icon: _.isDownloaded ? const Icon(Icons.download_done) : const Icon(Icons.download))),
                     Visibility(
                       visible: _.video != null,

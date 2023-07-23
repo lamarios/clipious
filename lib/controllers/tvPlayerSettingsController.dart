@@ -18,7 +18,7 @@ class TvPlayerSettingsController extends GetxController {
   Tabs selected = Tabs.video;
   bool useDash = db.getSettings(USE_DASH)?.value == 'true';
 
-  List<String> get videoTrackNames => useDash || (PlayerController.to()?.video.liveNow ?? false)
+  List<String> get videoTrackNames => useDash || (PlayerController.to()?.video?.liveNow ?? false)
       ? PlayerController.to()?.videoController?.betterPlayerAsmsTracks.map((e) => '${e.height}p').toSet().toList() ?? []
       : PlayerController.to()?.videoController?.betterPlayerDataSource?.resolutions?.keys.toList() ?? [];
 

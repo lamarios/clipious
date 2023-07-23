@@ -1,4 +1,6 @@
 import 'dart:io';
+import 'package:invidious/controllers/miniPayerController.dart';
+import 'package:logging/logging.dart';
 
 import 'package:get/get.dart';
 import 'package:invidious/globals.dart';
@@ -7,9 +9,11 @@ import 'package:invidious/utils.dart';
 
 class DownloadedVideoController extends GetxController {
   static DownloadedVideoController? to({required String tag}) => safeGet(tag: tag);
+  Logger log = Logger('DownloadedVideoController');
 
   DownloadedVideo video;
   String? thumbnailPath;
+  double progress = 0;
 
   DownloadedVideoController(this.video);
 
@@ -34,5 +38,14 @@ class DownloadedVideoController extends GetxController {
     video = db.getDownloadById(video.id)!;
     setThumbnail();
     update();
+  }
+
+  void setProgress(double progress) {
+    this.progress = progress;
+    update();
+  }
+
+  void playVideo() async {
+    MiniPlayerController.to()?.playOfflineVideos([video]);
   }
 }

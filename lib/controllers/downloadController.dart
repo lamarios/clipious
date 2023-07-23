@@ -17,6 +17,7 @@ import 'package:path_provider/path_provider.dart';
 
 import '../models/video.dart';
 import 'downloadedVideoController.dart';
+import 'miniPayerController.dart';
 
 class DownloadController extends GetxController {
   final Logger log = Logger('DownloadController');
@@ -26,6 +27,8 @@ class DownloadController extends GetxController {
   List<DownloadedVideo> videos = db.getAllDownloads();
 
   final Map<String, double> downloadProgresses = {};
+
+  bool get canPlayAll => videos.where((element) => element.downloadComplete).length > 1;
 
   double get totalProgress {
     if (downloadProgresses.isEmpty) {
@@ -42,6 +45,10 @@ class DownloadController extends GetxController {
     super.onClose();
   }
 
+  void playAll() {
+    MiniPlayerController.to()?.playOfflineVideos(videos.where((element) => element.downloadComplete).toList());
+  }
+
   onProgress(int count, int total, DownloadedVideo video) {
     // log.fine('Download of video $videoId}, $count / $total =  ${count / total}');
     if (count == total) {
@@ -50,7 +57,9 @@ class DownloadController extends GetxController {
       db.upsertDownload(video);
       DownloadedVideoController.to(tag: video.id.toString())?.refreshVideo();
     } else {
-      downloadProgresses[video.videoId] = count / total;
+      var progress = count / total;
+      downloadProgresses[video.videoId] = progress;
+      DownloadedVideoController.to(tag: video.id.toString())?.setProgress(progress);
     }
     update();
   }

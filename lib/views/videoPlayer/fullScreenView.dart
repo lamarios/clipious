@@ -4,6 +4,7 @@ import 'package:invidious/controllers/miniPayerController.dart';
 import 'package:invidious/utils.dart';
 import 'package:invidious/views/videoPlayer/videoQueue.dart';
 
+import '../../models/db/downloadedVideo.dart';
 import '../../models/video.dart';
 import '../video/commentsContainer.dart';
 import '../video/info.dart';
@@ -17,14 +18,15 @@ class VideoPlayerFullScreenView {
     ColorScheme colors = Theme.of(context).colorScheme;
 
     Video? video = controller.currentlyPlaying;
+    DownloadedVideo? offlineVid = controller.offlineCurrentlyPlaying;
 
-    return video != null
+    return video != null || offlineVid != null
         ? [
             Visibility(
                 visible: !controller.isMini,
                 child: MiniPlayerControls(
                   controller: controller,
-                  videoId: controller.currentVideo.videoId,
+                  videoId: video?.videoId ?? offlineVid?.videoId ?? '',
                 )),
             Visibility(
                 visible: !controller.isMini,
@@ -33,26 +35,28 @@ class VideoPlayerFullScreenView {
                     padding: const EdgeInsets.symmetric(horizontal: 16),
                     child: Container(
                       constraints: BoxConstraints(maxWidth: tabletMaxVideoWidth),
-                      child: <Widget>[
-                        SingleChildScrollView(
-                          child: VideoInfo(
-                            video: video,
-                          ),
-                        ),
-                        SingleChildScrollView(
-                          child: CommentsContainer(
-                            video: video,
-                            key: ValueKey('comms-${video.videoId}'),
-                          ),
-                        ),
-                        SingleChildScrollView(child: RecommendedVideos(video: video)),
-                        VideoQueue(controller: controller),
-                      ][controller.selectedFullScreenIndex],
+                      child: video != null
+                          ? <Widget>[
+                              SingleChildScrollView(
+                                child: VideoInfo(
+                                  video: video,
+                                ),
+                              ),
+                              SingleChildScrollView(
+                                child: CommentsContainer(
+                                  video: video,
+                                  key: ValueKey('comms-${video.videoId}'),
+                                ),
+                              ),
+                              SingleChildScrollView(child: RecommendedVideos(video: video)),
+                              VideoQueue(controller: controller),
+                            ][controller.selectedFullScreenIndex]
+                          : VideoQueue(controller: controller),
                     ),
                   ),
                 )),
             Visibility(
-              visible: !controller.isMini,
+              visible: !controller.isMini && video != null,
               child: SizedBox(
                 // height: 80,
                 child: NavigationBar(backgroundColor: colors.background, elevation: 0, selectedIndex: controller.selectedFullScreenIndex, onDestinationSelected: controller.selectTab, destinations: [

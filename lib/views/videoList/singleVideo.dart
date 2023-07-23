@@ -42,6 +42,25 @@ class VideoListItem extends StatelessWidget {
 
     return AnimateFrom<BaseVideo>(
       value: video,
+      builder: (context, child, animation) {
+        /// You can build your animation inside this builder
+        ///
+        /// By default I'm using a TweenSequanceto scale up then
+        /// Start scaling down at the middle of the animation
+        return ScaleTransition(
+          scale: TweenSequence<double>([
+            TweenSequenceItem<double>(
+              tween: Tween(begin: 1, end: 1.1),
+              weight: 50,
+            ),
+            TweenSequenceItem<double>(
+              tween: Tween(begin: 1.1, end: .2),
+              weight: 50,
+            ),
+          ]).animate(animation),
+          child: child,
+        );
+      },
       key: DownloadController.to()?.animateToController.tag('video-animate-to-${video.videoId}') ?? GlobalKey(),
       child: GetBuilder(
         init: VideoInListController(video),
