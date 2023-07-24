@@ -60,7 +60,7 @@ class PlayerController extends GetxController {
 
   @override
   onReady() async {
-    playVideo();
+    video != null ? playVideo() : playOfflineVideo();
   }
 
   @override
@@ -70,6 +70,7 @@ class PlayerController extends GetxController {
 
   disposeControllers() {
     Wakelock.disable();
+    log.fine("Disposing video controller");
     saveProgress(videoController?.videoPlayerController?.value.position.inSeconds ?? 0);
     videoController?.removeEventsListener(onVideoListener);
     videoController?.dispose();
@@ -360,6 +361,9 @@ class PlayerController extends GetxController {
   }
 
   void switchToOfflineVideo(DownloadedVideo v) {
+    videoController?.exitFullScreen();
+    MiniPlayerController.to()?.handleVideoEvent(BetterPlayerEvent(BetterPlayerEventType.hideFullscreen));
+    disposeControllers();
     offlineVideo = v;
     update();
     playOfflineVideo();

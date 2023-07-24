@@ -126,6 +126,8 @@ class MiniPlayerController extends GetxController {
     videos = [];
     playedVideos = [];
     currentlyPlaying = null;
+    offlineCurrentlyPlaying = null;
+    offlineVideos = [];
     opacity = 0;
     MiniPlayerAwareController.to()?.setPadding(false);
     update();
@@ -301,16 +303,17 @@ class MiniPlayerController extends GetxController {
   BaseVideo? get currentVideo => videos.isNotEmpty ? videos[currentIndex] : null;
 
   removeVideoFromQueue(String videoId) {
-    if (videos.length == 1) {
+    var listToUpdate = videos.isNotEmpty ? videos : offlineVideos;
+    if (listToUpdate.length == 1) {
       hide();
     } else {
-      int index = videos.indexWhere((element) => element.videoId == videoId);
+      int index = videos.isNotEmpty ? videos.indexWhere((element) => element.videoId == videoId) : offlineVideos.indexWhere((element) => element.videoId == videoId);
       playedVideos.remove(videoId);
       if (index >= 0) {
         if (index < currentIndex) {
           currentIndex--;
         }
-        videos.removeAt(index);
+        listToUpdate.removeAt(index);
       }
     }
     update();
@@ -416,40 +419,45 @@ class MiniPlayerController extends GetxController {
 
   /// Offline video management
   void switchToOfflineVideo(DownloadedVideo video) {
-    if (!playedVideos.contains(video.videoId)) {
-      playedVideos.add(video.videoId);
-    }
-
+    videos = [];
+    currentlyPlaying = null;
     int index = offlineVideos.indexWhere((element) => element.videoId == video.videoId);
-    if (index >= 0 && index < videos.length) {
+    if (index >= 0 && index < offlineVideos.length) {
       currentIndex = index;
     } else {
       currentIndex = 0;
     }
-    currentlyPlaying = null;
-    progress = 0;
-    offlineCurrentlyPlaying = offlineVideos[0];
 
+    offlineCurrentlyPlaying = video;
+
+    if (!playedVideos.contains(video.videoId)) {
+      playedVideos.add(video.videoId);
+    }
+    progress = 0;
     PlayerController.to()?.switchToOfflineVideo(video);
     PlayerController.to()?.toggleControls(!isMini);
     update();
+    // VideoLikeButtonController.to(tag: VideoLikeButtonController.tags(video.videoId))?.checkVideoLikeStatus();
+    // MiniPlayerControlsController.to()?.setVideo(video.videoId);
   }
 
   void playOfflineVideos(List<DownloadedVideo> offlineVids) {
+    log.fine('Playing ${offlineVids.length} oflfine videos');
     if (offlineVids.isNotEmpty) {
-      playedVideos = [];
-      log.fine("Preparing to watch ${offlineVids.length}");
-
-      offlineVideos = offlineVids;
       videos = [];
+      offlineVideos = List.from(offlineVids, growable: true);
+      playedVideos = [];
+      currentIndex = 0;
       selectedFullScreenIndex = 0;
-      if (videos.length > 1) {
+      if (offlineVideos.length > 1) {
         selectedFullScreenIndex = 3;
       }
       opacity = 0;
       top = 500;
-      switchToOfflineVideo(offlineVideos[0]);
+      update();
+
       showBigPlayer();
+      switchToOfflineVideo(offlineVideos[0]);
     }
   }
 }

@@ -65,7 +65,7 @@ class VideoView extends StatelessWidget {
                                       height: 15,
                                       width: 15,
                                       child: CircularProgressIndicator(
-                                        value: DownloadController.to()?.downloadProgresses[_.videoId],
+                                        value: DownloadController.to()?.downloadProgresses[_.videoId]?.progress,
                                         strokeWidth: 2,
                                       ))
                                 ],

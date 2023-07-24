@@ -79,7 +79,7 @@ class VideoPlayerState extends State<VideoPlayer> {
       builder: (_) => AspectRatio(
           aspectRatio: 16 / 9,
           child: _.videoController == null
-              ? SizedBox.shrink()
+              ? const SizedBox.shrink()
               : BetterPlayer(
                   controller: _.videoController!,
                   key: _betterPlayerKey,
