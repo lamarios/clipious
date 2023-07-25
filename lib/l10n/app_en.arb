@@ -840,5 +840,9 @@
     "downloadsPlayAll": "Play all",
     "@downloadsPlayAll": {
         "description": "Button to play all downloaded videos"
+    },
+    "videoDownloadStarted": "Video download started",
+    "@videoDownloadStarted": {
+        "description": "Message when a video starts being downloaded"
     }
 }

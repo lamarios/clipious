@@ -29,17 +29,17 @@ class AppBarDownloadButton extends StatelessWidget {
               onPressed: openDownloadManager,
               icon: Icon(
                 Icons.download,
-                color: _.totalProgress > 0 ? colors.background : null,
+                color: _.downloadProgresses.isNotEmpty ? colors.background : null,
               ),
             ),
-            _.totalProgress > 0
+            _.downloadProgresses.isNotEmpty
                 ? InkWell(
                     onTap: openDownloadManager,
                     child: SizedBox(
                         width: 15,
                         height: 15,
                         child: CircularProgressIndicator(
-                          value: _.totalProgress,
+                          value: _.totalProgress == 0 ? null : _.totalProgress,
                           strokeWidth: 2,
                         )),
                   )

@@ -25,6 +25,7 @@ class SubscriptionsState extends State<Subscriptions> {
               tags: VideoListController.subscriptionTag,
             )
           : VideoList(
+              animateDownload: true,
               paginatedVideoList: SubscriptionVideoList(),
               tags: VideoListController.subscriptionTag,
             ),

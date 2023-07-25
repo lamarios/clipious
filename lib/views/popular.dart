@@ -20,6 +20,7 @@ class Popular extends StatelessWidget {
               tags: VideoListController.popularTag,
             )
           : VideoList(
+              animateDownload: true,
               paginatedVideoList: SingleEndpointList(service.getPopular),
               tags: VideoListController.popularTag,
             ),

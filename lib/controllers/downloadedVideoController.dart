@@ -26,19 +26,17 @@ class DownloadedVideoController extends GetxController {
   void onReady() async {
     super.onReady();
     await setThumbnail();
-    DownloadController.to()?.addProgressListener(setProgress);
-    DownloadController.to()?.addCompletionListener(setComplete);
+    DownloadController.to()?.downloadProgresses[video?.videoId]?.addListener(setProgress);
     update();
   }
 
   @override
   onClose() {
-    DownloadController.to()?.removeProgressListener(setProgress);
-    DownloadController.to()?.removeCompletionListener(setComplete);
+    DownloadController.to()?.downloadProgresses[video?.videoId]?.removeListener(setProgress);
   }
 
   Future<void> setThumbnail() async {
-    if (video != null) {
+    if (video != null || thumbnailPath == null) {
       String path = await video!.thumbnailPath;
       var file = File(path);
       var fileExists = await file.exists();
@@ -55,30 +53,31 @@ class DownloadedVideoController extends GetxController {
     update();
   }
 
-  void setProgress(String videoId, double progress) {
-    if (videoId == video?.videoId) {
-      if (progress == 0) {
-        setThumbnail();
-      }
-      this.progress = progress;
-      update();
+  void setProgress(double progress) {
+    if (progress == 0) {
+      setThumbnail();
     }
+    if (progress == 1) {
+      setComplete();
+    }
+    this.progress = progress;
+    update();
   }
 
   void playVideo() async {
-    if (video != null) {
+    refreshVideo();
+    if (video != null && video!.downloadComplete) {
       MiniPlayerController.to()?.playOfflineVideos([video!]);
     }
   }
 
-  setComplete(String videoId) {
-    if (videoId == video?.videoId) {
-      progress = 1;
-      var downloadById = db.getDownloadById(video!.id);
-      if (downloadById != null) {
-        video = downloadById;
-      }
-      update();
+  setComplete() {
+    log.fine("Video ${video!.videoId} download complete");
+    progress = 1;
+    var downloadById = db.getDownloadById(video!.id);
+    if (downloadById != null) {
+      video = downloadById;
     }
+    update();
   }
 }

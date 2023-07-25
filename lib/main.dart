@@ -152,10 +152,9 @@ class MyApp extends StatelessWidget {
                 themeMode: ThemeMode.values.firstWhere((element) => element.name == db.getSettings(THEME_MODE)?.value, orElse: () => ThemeMode.system),
                 title: 'Clipious',
                 theme: ThemeData(
-                  useMaterial3: true,
-                  colorScheme: lightColorScheme,
-                ),
-                darkTheme: ThemeData(useMaterial3: true, colorScheme: darkColorScheme),
+                    useMaterial3: true, colorScheme: lightColorScheme, progressIndicatorTheme: ProgressIndicatorThemeData(circularTrackColor: lightColorScheme.secondaryContainer.withOpacity(0.8))),
+                darkTheme: ThemeData(
+                    useMaterial3: true, colorScheme: darkColorScheme, progressIndicatorTheme: ProgressIndicatorThemeData(circularTrackColor: darkColorScheme.secondaryContainer.withOpacity(0.8))),
                 home: Shortcuts(
                   shortcuts: <LogicalKeySet, Intent>{
                     LogicalKeySet(LogicalKeyboardKey.select): const ActivateIntent(),

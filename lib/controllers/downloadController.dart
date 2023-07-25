@@ -1,8 +1,8 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:animate_to/animate_to.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter_swipe_action_cell/core/cell.dart';
 import 'package:get/get.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/models/baseVideo.dart';
@@ -16,10 +16,20 @@ import '../models/video.dart';
 import 'miniPayerController.dart';
 
 class DownloadProgress {
-  double progress;
   CancelToken cancelToken;
+  int count = 0, total = 1;
 
-  DownloadProgress(this.progress, this.cancelToken);
+  List<Function(double progress)> listeners = [];
+
+  DownloadProgress(this.cancelToken);
+
+  addListener(Function(double progress) f) {
+    listeners.add(f);
+  }
+
+  removeListener(Function(double progress) f) {
+    listeners.remove(f);
+  }
 }
 
 class DownloadController extends GetxController {
@@ -29,21 +39,20 @@ class DownloadController extends GetxController {
   final animateToController = AnimateToController();
   List<DownloadedVideo> videos = db.getAllDownloads();
 
-  List<Function(String videoId, double progress)> progressListeners = [];
-
-  List<Function(String videoId)> completionListeners = [];
-
   final Map<String, DownloadProgress> downloadProgresses = {};
 
   bool get canPlayAll => videos.where((element) => element.downloadComplete).isNotEmpty;
 
   double get totalProgress {
-    if (downloadProgresses.isEmpty) {
-      return 0;
+    int downloaded = 0;
+    int total = 0;
+
+    for (var element in downloadProgresses.values) {
+      downloaded += element.count;
+      total += element.total;
     }
-    var total = (downloadProgresses.values.map((e) => e.progress).reduce((value, element) => value + element) / downloadProgresses.length);
-    // log.fine('total progress: $total');
-    return total;
+
+    return downloaded / total;
   }
 
   @override
@@ -58,38 +67,21 @@ class DownloadController extends GetxController {
     MiniPlayerController.to()?.playOfflineVideos(videos.where((element) => element.downloadComplete).toList());
   }
 
-  addProgressListener(Function(String videoId, double progress) func) {
-    progressListeners.add(func);
-  }
-
-  removeProgressListener(Function(String videoId, double progress) func) {
-    progressListeners.remove(func);
-  }
-
-  addCompletionListener(Function(String videoId) func) {
-    completionListeners.add(func);
-  }
-
-  removeCompletionListener(Function(String videoId) func) {
-    completionListeners.remove(func);
-  }
-
   onProgress(int count, int total, DownloadedVideo video) {
     // log.fine('Download of video $videoId}, $count / $total =  ${count / total}');
+    var downloadProgress = downloadProgresses[video.videoId];
+    downloadProgress?.count = count;
+    downloadProgress?.total = total;
+
     if (count == total) {
       downloadProgresses.remove(video.videoId);
       video.downloadComplete = true;
       db.upsertDownload(video);
       videos = db.getAllDownloads();
-      for (var f in completionListeners) {
-        f(video.videoId);
-      }
-    } else {
-      var progress = count / total;
-      downloadProgresses[video.videoId]?.progress = progress;
-      for (var f in progressListeners) {
-        f(video.videoId, progress);
-      }
+    }
+
+    for (var f in downloadProgress?.listeners ?? []) {
+      f(count / total);
     }
     update();
   }
@@ -109,6 +101,8 @@ class DownloadController extends GetxController {
       Dio dio = Dio();
       CancelToken cancelToken = CancelToken();
 
+      downloadProgresses[downloadedVideo.videoId] = DownloadProgress(cancelToken);
+      update();
       // download thumbnail
       String? thumbUrl = ImageObject.getBestThumbnail(vid.videoThumbnails)?.url;
       log.fine(thumbUrl);
@@ -119,23 +113,17 @@ class DownloadController extends GetxController {
         await dio.download(thumbUrl, thumbnailPath, cancelToken: cancelToken);
       }
 
-      downloadProgresses[downloadedVideo.videoId] = DownloadProgress(0, cancelToken);
-
-      for (var f in progressListeners) {
-        f(downloadedVideo.videoId, 0);
-      }
-
       // download video
       var videoPath = await downloadedVideo.videoPath;
-      await dio.download(stream.url, videoPath, onReceiveProgress: (count, total) => onProgress(count, total, downloadedVideo), cancelToken: cancelToken);
+      dio
+          .download(stream.url, videoPath, onReceiveProgress: (count, total) => onProgress(count, total, downloadedVideo), cancelToken: cancelToken)
+          .catchError((err) => onDownloadError(err, downloadedVideo));
 
       return true;
     }
   }
 
-  void deleteVideo(CompletionHandler handler, DownloadedVideo vid) async {
-    await handler(true);
-
+  void deleteVideo(DownloadedVideo vid) async {
     var downloadProgress = downloadProgresses[vid.videoId];
     log.fine('cancelling download for video ${vid.videoId}, present ? : ${downloadProgress != null}');
     downloadProgress?.cancelToken.cancel();
@@ -159,5 +147,15 @@ class DownloadController extends GetxController {
     db.deleteDownload(vid);
     videos = db.getAllDownloads();
     update();
+  }
+
+  Future<void> onDownloadError(DioException err, DownloadedVideo downloadedVideo) async {
+    if (err.type == DioExceptionType.cancel) {
+      log.fine("video cancelled, nothing to do");
+      return;
+    }
+    log.severe("Failed to download video ${downloadedVideo.title}, removing it", err.stackTrace);
+    deleteVideo(downloadedVideo);
+    return;
   }
 }

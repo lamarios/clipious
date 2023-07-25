@@ -48,7 +48,10 @@ class DownloadManager extends StatelessWidget {
                                   SwipeAction(
                                     performsFirstActionWithFullSwipe: true,
                                     icon: const Icon(Icons.delete, color: Colors.white),
-                                    onTap: (handler) => _.deleteVideo(handler, v),
+                                    onTap: (handler) async {
+                                      await handler(true);
+                                      _.deleteVideo(v);
+                                    },
                                   )
                                 ],
                                 child: DownloadedVideoView(

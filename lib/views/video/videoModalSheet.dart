@@ -9,14 +9,15 @@ import 'addToPlayList.dart';
 
 class VideoModalSheet extends StatelessWidget {
   final BaseVideo video;
+  final bool animateDownload;
 
-  const VideoModalSheet({Key? key, required this.video}) : super(key: key);
+  const VideoModalSheet({Key? key, required this.video, this.animateDownload = false}) : super(key: key);
 
-  static showVideoModalSheet(BuildContext context, BaseVideo video) {
+  static showVideoModalSheet(BuildContext context, BaseVideo video, {bool animateDownload = false}) {
     showModalBottomSheet<void>(
         context: context,
         builder: (BuildContext context) {
-          return VideoModalSheet(video: video);
+          return VideoModalSheet(video: video, animateDownload: animateDownload);
         });
   }
 
@@ -53,9 +54,13 @@ class VideoModalSheet extends StatelessWidget {
     var locals = AppLocalizations.of(context)!;
     Navigator.of(context).pop();
     var downloadController = DownloadController.to();
-    downloadController?.animateToController.animateTag('video-animate-to-${video.videoId}', duration: const Duration(milliseconds: 300), curve: Curves.easeInOutQuad);
+    if (animateDownload) {
+      downloadController?.animateToController.animateTag('video-animate-to-${video.videoId}', duration: const Duration(milliseconds: 300), curve: Curves.easeInOutQuad);
+    } else {
+      scaffoldKey.currentState?.showSnackBar(SnackBar(content: Text(locals.videoDownloadStarted)));
+    }
     bool canDownload = await downloadController?.addDownload(video) ?? false;
-    if(!canDownload){
+    if (!canDownload) {
       scaffoldKey.currentState?.showSnackBar(SnackBar(content: Text(locals.videoAlreadyDownloaded)));
     }
   }

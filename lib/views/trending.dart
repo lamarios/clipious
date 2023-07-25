@@ -78,6 +78,7 @@ doesn't seem to be working for now
 */
                 Expanded(
                   child: VideoList(
+                    animateDownload: true,
                     paginatedVideoList: SingleEndpointList(service.getTrending),
                     tags: VideoListController.trendingTag,
                   ),

@@ -27,6 +27,7 @@ class VideoController extends GetxController {
   String videoId;
   bool isLoggedIn = service.isLoggedIn();
   bool downloading = false;
+  double downloadProgress = 0;
 
   double opacity = 1;
 
@@ -47,6 +48,8 @@ class VideoController extends GetxController {
         dislikes = dislike.dislikes;
       }
 
+      initStreamListener();
+
       update();
 
       if (autoplayOnLoad) {
@@ -62,6 +65,29 @@ class VideoController extends GetxController {
       update();
       rethrow;
     }
+  }
+
+  @override
+  onClose() {
+    var downloadProgress = DownloadController.to()?.downloadProgresses[videoId];
+    log.fine('Can find download progress ? ${downloadProgress != null}');
+    downloadProgress?.removeListener(onDownloadProgress);
+  }
+
+  onDownloadProgress(double progress) {
+    this.downloadProgress = progress;
+    if (progress < 1) {
+      downloading = true;
+    } else {
+      downloading = false;
+    }
+    update();
+  }
+
+  initStreamListener() {
+    var downloadProgress = DownloadController.to()?.downloadProgresses[videoId];
+    log.fine('Can find download progress ? ${downloadProgress != null}');
+    downloadProgress?.addListener(onDownloadProgress);
   }
 
   togglePlayRecommendedNext(bool? value) {
@@ -94,21 +120,12 @@ class VideoController extends GetxController {
     }
   }
 
-  /// refresh the ui while downlading, not sure if it's the best way.
-  refreshUiWhileDownloading(){
-    if(downloading){
-      update();
-      Future.delayed(const Duration(milliseconds: 1000), refreshUiWhileDownloading);
-    }
-  }
-
-  Future<bool> downloadVideo() async {
+  downloadVideo() async {
     if (video != null) {
       downloading = true;
-      refreshUiWhileDownloading();
-      var bool = await DownloadController.to()?.addDownload(video!) ?? false;
-      downloading = false;
       update();
+      await DownloadController.to()?.addDownload(video!) ?? false;
+      initStreamListener();
       return bool;
     } else {
       return false;

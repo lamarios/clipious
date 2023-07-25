@@ -53,17 +53,19 @@ class CompactVideo extends StatelessWidget {
                             )
                           : video != null
                               ? VideoThumbnailView(cacheKey: 'v-worst/${videoId}', videoId: videoId, thumbnailUrl: ImageObject.getWorstThumbnail(video?.videoThumbnails)?.url ?? '')
-                              : _.offlineVideoThumbnailPath != null
-                                  ? ClipRRect(
-                                      borderRadius: BorderRadius.circular(10),
-                                      child: Image.file(
-                                        File(_.offlineVideoThumbnailPath!),
-                                        fit: BoxFit.contain,
-                                      ))
-                                  : Container(
-                                      height: double.infinity,
-                                      decoration: BoxDecoration(color: colors.secondaryContainer, borderRadius: BorderRadius.circular(10)),
-                                    ),
+                              : AspectRatio(
+                                  aspectRatio: 16 / 9,
+                                  child: _.offlineVideoThumbnailPath != null
+                                      ? ClipRRect(
+                                          borderRadius: BorderRadius.circular(10),
+                                          child: Image.file(
+                                            File(_.offlineVideoThumbnailPath!),
+                                            fit: BoxFit.contain,
+                                          ))
+                                      : Container(
+                                          decoration: BoxDecoration(color: colors.secondaryContainer, borderRadius: BorderRadius.circular(10)),
+                                        ),
+                                ),
                       Expanded(
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
