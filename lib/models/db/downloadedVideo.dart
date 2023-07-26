@@ -14,6 +14,7 @@ class DownloadedVideo {
   String? author;
   String? authorUrl;
   bool downloadComplete;
+  bool downloadFailed;
 
   @Transient()
   Future<String> get videoPath async {
@@ -27,5 +28,5 @@ class DownloadedVideo {
     return "${dir.path}/$videoId.jpg";
   }
 
-  DownloadedVideo({this.id = 0, required this.videoId, required this.title, this.author, this.authorUrl, this.downloadComplete = false});
+  DownloadedVideo({this.id = 0, required this.videoId, required this.title, this.author, this.authorUrl, this.downloadComplete = false, this.downloadFailed = false});
 }

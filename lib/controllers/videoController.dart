@@ -28,6 +28,7 @@ class VideoController extends GetxController {
   bool isLoggedIn = service.isLoggedIn();
   bool downloading = false;
   double downloadProgress = 0;
+  bool downloadFailed = false;
 
   double opacity = 1;
 
@@ -47,6 +48,8 @@ class VideoController extends GetxController {
         Dislike dislike = await service.getDislikes(videoId);
         dislikes = dislike.dislikes;
       }
+
+      downloadFailed = db.getDownloadByVideoId(videoId)?.downloadFailed ?? false;
 
       initStreamListener();
 
@@ -75,13 +78,17 @@ class VideoController extends GetxController {
   }
 
   onDownloadProgress(double progress) {
-    this.downloadProgress = progress;
-    if (progress < 1) {
-      downloading = true;
-    } else {
-      downloading = false;
+    if (video != null) {
+      downloadProgress = progress;
+      if (progress < 1) {
+        downloadFailed = false;
+        downloading = true;
+      } else {
+        downloadFailed = db.getDownloadByVideoId(video!.videoId)?.downloadFailed ?? false;
+        downloading = false;
+      }
+      update();
     }
-    update();
   }
 
   initStreamListener() {
@@ -123,8 +130,16 @@ class VideoController extends GetxController {
   downloadVideo() async {
     if (video != null) {
       downloading = true;
+      downloadFailed = false;
       update();
-      await DownloadController.to()?.addDownload(video!) ?? false;
+      if (downloadFailed) {
+        var vid = db.getDownloadByVideoId(videoId);
+        if (vid != null) {
+          await DownloadController.to()?.retryDownload(vid);
+        }
+      } else {
+        await DownloadController.to()?.addDownload(video!.videoId);
+      }
       initStreamListener();
       return bool;
     } else {

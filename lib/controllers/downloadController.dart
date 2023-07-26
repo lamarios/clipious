@@ -5,7 +5,6 @@ import 'package:animate_to/animate_to.dart';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:invidious/globals.dart';
-import 'package:invidious/models/baseVideo.dart';
 import 'package:invidious/models/db/downloadedVideo.dart';
 import 'package:invidious/models/formatStream.dart';
 import 'package:invidious/models/imageObject.dart';
@@ -64,7 +63,7 @@ class DownloadController extends GetxController {
   void playAll() {
     videos = db.getAllDownloads();
     update();
-    MiniPlayerController.to()?.playOfflineVideos(videos.where((element) => element.downloadComplete).toList());
+    MiniPlayerController.to()?.playOfflineVideos(videos.where((element) => element.downloadComplete && !element.downloadFailed).toList());
   }
 
   onProgress(int count, int total, DownloadedVideo video) {
@@ -86,12 +85,12 @@ class DownloadController extends GetxController {
     update();
   }
 
-  Future<bool> addDownload(BaseVideo video) async {
-    if (videos.any((element) => element.videoId == video.videoId)) {
+  Future<bool> addDownload(String videoId) async {
+    if (videos.any((element) => element.videoId == videoId)) {
       return false;
     } else {
-      Video vid = await service.getVideo(video.videoId);
-      var downloadedVideo = DownloadedVideo(videoId: video.videoId, title: video.title, author: video.author, authorUrl: video.authorUrl);
+      Video vid = await service.getVideo(videoId);
+      var downloadedVideo = DownloadedVideo(videoId: vid.videoId, title: vid.title, author: vid.author, authorUrl: vid.authorUrl);
       db.upsertDownload(downloadedVideo);
       videos = db.getAllDownloads();
       update();
@@ -123,7 +122,7 @@ class DownloadController extends GetxController {
     }
   }
 
-  void deleteVideo(DownloadedVideo vid) async {
+  Future<void> deleteVideo(DownloadedVideo vid) async {
     var downloadProgress = downloadProgresses[vid.videoId];
     log.fine('cancelling download for video ${vid.videoId}, present ? : ${downloadProgress != null}');
     downloadProgress?.cancelToken.cancel();
@@ -149,13 +148,24 @@ class DownloadController extends GetxController {
     update();
   }
 
-  Future<void> onDownloadError(DioException err, DownloadedVideo downloadedVideo) async {
+  Future<void> onDownloadError(DioException err, DownloadedVideo vid) async {
     if (err.type == DioExceptionType.cancel) {
       log.fine("video cancelled, nothing to do");
       return;
     }
-    log.severe("Failed to download video ${downloadedVideo.title}, removing it", err.stackTrace);
-    deleteVideo(downloadedVideo);
+    log.severe("Failed to download video ${vid.title}, removing it", err.stackTrace);
+    vid.downloadFailed = true;
+    vid.downloadComplete = false;
+    onProgress(1, 1, vid);
+    downloadProgresses.remove(vid.videoId);
+    db.upsertDownload(vid);
+    videos = db.getAllDownloads();
+    update();
     return;
+  }
+
+  Future<void> retryDownload(DownloadedVideo vid) async {
+    await deleteVideo(vid);
+    await addDownload(vid.videoId);
   }
 }

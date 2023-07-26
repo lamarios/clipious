@@ -221,7 +221,7 @@ final _entities = <ModelEntity>[
   ModelEntity(
       id: const IdUid(7, 7737259498144569754),
       name: 'DownloadedVideo',
-      lastPropertyId: const IdUid(6, 107924486215845740),
+      lastPropertyId: const IdUid(7, 4130320220878296738),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
@@ -252,6 +252,11 @@ final _entities = <ModelEntity>[
         ModelProperty(
             id: const IdUid(6, 107924486215845740),
             name: 'downloadComplete',
+            type: 1,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(7, 4130320220878296738),
+            name: 'downloadFailed',
             type: 1,
             flags: 0)
       ],
@@ -538,13 +543,14 @@ ModelDefinition getObjectBoxModel() {
           final authorUrlOffset = object.authorUrl == null
               ? null
               : fbb.writeString(object.authorUrl!);
-          fbb.startTable(7);
+          fbb.startTable(8);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, videoIdOffset);
           fbb.addOffset(2, titleOffset);
           fbb.addOffset(3, authorOffset);
           fbb.addOffset(4, authorUrlOffset);
           fbb.addBool(5, object.downloadComplete);
+          fbb.addBool(6, object.downloadFailed);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -563,7 +569,9 @@ ModelDefinition getObjectBoxModel() {
               authorUrl: const fb.StringReader(asciiOptimization: true)
                   .vTableGetNullable(buffer, rootOffset, 12),
               downloadComplete: const fb.BoolReader()
-                  .vTableGet(buffer, rootOffset, 14, false));
+                  .vTableGet(buffer, rootOffset, 14, false),
+              downloadFailed: const fb.BoolReader()
+                  .vTableGet(buffer, rootOffset, 16, false));
 
           return object;
         })
@@ -715,4 +723,8 @@ class DownloadedVideo_ {
   /// see [DownloadedVideo.downloadComplete]
   static final downloadComplete =
       QueryBooleanProperty<DownloadedVideo>(_entities[6].properties[5]);
+
+  /// see [DownloadedVideo.downloadFailed]
+  static final downloadFailed =
+      QueryBooleanProperty<DownloadedVideo>(_entities[6].properties[6]);
 }

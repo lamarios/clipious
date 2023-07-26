@@ -50,7 +50,7 @@ class VideoFilterController extends GetxController {
     } else if (a == allChannels && b == allChannels) {
       return 0;
     } else {
-      return a.compareTo(b ?? '') ?? 0;
+      return a.compareTo(b);
     }
   }
 

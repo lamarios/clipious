@@ -844,5 +844,9 @@
     "videoDownloadStarted": "Video download started",
     "@videoDownloadStarted": {
         "description": "Message when a video starts being downloaded"
+    },
+    "videoFailedDownloadRetry": "Download failed, tap to retry",
+    "@videoFailedDownloadRetry": {
+        "description": "Shown on download manager when a download fails and prompt the user to retry"
     }
 }

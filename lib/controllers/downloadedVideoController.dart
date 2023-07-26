@@ -71,6 +71,12 @@ class DownloadedVideoController extends GetxController {
     }
   }
 
+  void retryDownload() {
+    if (video != null && video!.downloadFailed) {
+      DownloadController.to()?.retryDownload(video!);
+    }
+  }
+
   setComplete() {
     log.fine("Video ${video!.videoId} download complete");
     progress = 1;

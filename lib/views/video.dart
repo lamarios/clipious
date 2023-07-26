@@ -69,7 +69,23 @@ class VideoView extends StatelessWidget {
                                       ))
                                 ],
                               )
-                            : IconButton(onPressed: _.isDownloaded ? null : _.downloadVideo, icon: _.isDownloaded ? const Icon(Icons.download_done) : const Icon(Icons.download))),
+                            : Stack(
+                                children: [
+                                  IconButton(
+                                      onPressed: _.isDownloaded && !_.downloadFailed ? null : _.downloadVideo,
+                                      icon: _.isDownloaded && !_.downloadFailed ? const Icon(Icons.download_done) : const Icon(Icons.download)),
+                                  Positioned(
+                                      right: 5,
+                                      top: 5,
+                                      child: _.downloadFailed
+                                          ? const Icon(
+                                              Icons.error,
+                                              size: 15,
+                                              color: Colors.red,
+                                            )
+                                          : const SizedBox.shrink())
+                                ],
+                              )),
                     Visibility(
                       visible: _.video != null,
                       child: VideoShareButton(video: _.video!),

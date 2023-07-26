@@ -59,7 +59,7 @@ class VideoModalSheet extends StatelessWidget {
     } else {
       scaffoldKey.currentState?.showSnackBar(SnackBar(content: Text(locals.videoDownloadStarted)));
     }
-    bool canDownload = await downloadController?.addDownload(video) ?? false;
+    bool canDownload = await downloadController?.addDownload(video.videoId) ?? false;
     if (!canDownload) {
       scaffoldKey.currentState?.showSnackBar(SnackBar(content: Text(locals.videoAlreadyDownloaded)));
     }
