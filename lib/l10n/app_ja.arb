@@ -816,5 +816,9 @@
   "videoAddedToQueue": "動画をキューに追加しました",
   "@videoAddedToQueue": {
     "description": "Pop up message when a video was added at the end of the video queue"
+  },
+  "shareLinkWithTimestamp": "時間指定",
+  "@shareLinkWithTimestamp": {
+    "description": "asking user to share link along with timestamp"
   }
 }
