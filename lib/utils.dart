@@ -11,6 +11,7 @@ import 'package:invidious/views/tv/tvOverScan.dart';
 import 'package:logging/logging.dart';
 import 'package:share_plus/share_plus.dart';
 
+import 'controllers/playerController.dart';
 import 'models/country.dart';
 
 const PHONE_MAX = 600;
@@ -68,44 +69,83 @@ Future<void> showAlertDialog(BuildContext context, String title, List<Widget> bo
   );
 }
 
-void showSharingSheet(BuildContext context, ShareLinks links) {
+void showSharingSheet(BuildContext context, ShareLinks links,
+    {bool showTimestampOption = false}) {
   var locals = AppLocalizations.of(context)!;
+
+  bool shareWithTimestamp = false;
+  Future<Duration?> getTimestamp() async {
+    if (shareWithTimestamp) {
+      return PlayerController.to()
+          ?.videoController
+          ?.videoPlayerController
+          ?.position;
+    }
+    return null;
+  }
+
   showModalBottomSheet<void>(
       context: context,
       builder: (BuildContext context) {
+      return StatefulBuilder(
+        builder: (BuildContext context, StateSetter setState) {
         return Container(
-          height: 150,
-          child: Center(
+            height: showTimestampOption ? 200 : 150,
+            width: double.infinity,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 FilledButton.tonal(
                   child: Text(locals.shareInvidiousLink),
-                  onPressed: () {
-                    Share.share(links.getInvidiousLink(db.getCurrentlySelectedServer()));
+                  onPressed: () async {
+                    final timestamp = await getTimestamp();
+
+                    Share.share(links.getInvidiousLink(
+                        db.getCurrentlySelectedServer(), timestamp?.inSeconds));
                     Navigator.of(context).pop();
                   },
                 ),
                 FilledButton.tonal(
                   child: Text(locals.redirectInvidiousLink),
-                  onPressed: () {
-                    Share.share(links.getRedirectLink());
+                  onPressed: () async {
+                    final timestamp = await getTimestamp();
+
+                    Share.share(links.getRedirectLink(timestamp?.inSeconds));
                     Navigator.of(context).pop();
                   },
                 ),
                 FilledButton.tonal(
                   child: Text(locals.shareYoutubeLink),
-                  onPressed: () {
-                    Share.share(links.getYoutubeLink());
+                  onPressed: () async {
+                    final timestamp = await getTimestamp();
+
+                    Share.share(links.getYoutubeLink(timestamp?.inSeconds));
                     Navigator.of(context).pop();
                   },
                 ),
+                if (showTimestampOption)
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Checkbox(
+                        value: shareWithTimestamp,
+                      onChanged: (bool? newValue) {
+                        setState(() {
+                            shareWithTimestamp = newValue ?? false;
+                        });
+                      },
+                    ),
+                    Text(locals.shareLinkWithTimestamp),
+                  ],
+                  )
               ],
             ),
-          ),
+          );
+        },
+      );
+    },
         );
-      });
 }
 
 double getScreenWidth() {
