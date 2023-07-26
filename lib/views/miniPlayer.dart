@@ -83,7 +83,10 @@ class MiniPlayer extends StatelessWidget {
                                           : [
                                               Visibility(
                                                 visible: _.isPlaying,
-                                                child: VideoShareButton(video: _.currentlyPlaying!, showTimestampOption: true,),
+                                                child: VideoShareButton(
+                                                  video: _.currentlyPlaying!,
+                                                  showTimestampOption: true,
+                                                ),
                                               ),
                                             ],
                                     ),
