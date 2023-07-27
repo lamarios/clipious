@@ -365,7 +365,6 @@ class PlayerController extends GetxController {
     MiniPlayerController.to()?.handleVideoEvent(BetterPlayerEvent(BetterPlayerEventType.hideFullscreen));
     disposeControllers();
     offlineVideo = v;
-    update();
     playOfflineVideo();
   }
 }

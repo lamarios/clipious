@@ -4,11 +4,11 @@ import 'package:invidious/controllers/videoLikeController.dart';
 
 class VideoLikeButton extends StatelessWidget {
   final String? videoId;
-  double? size;
-  ButtonStyle? style;
-  bool? global;
+  final double? size;
+  final ButtonStyle? style;
+  final bool? global;
 
-  VideoLikeButton({Key? key, this.videoId, this.size, this.style, this.global}) : super(key: key);
+  const VideoLikeButton({Key? key, this.videoId, this.size, this.style, this.global}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
