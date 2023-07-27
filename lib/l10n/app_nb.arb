@@ -1,538 +1,538 @@
 {
-  "noVideoInPlayList": "Tom spilleliste",
-  "@noVideoInPlayList": {
-    "description": "When no videos in the playlist"
-  },
-  "removeFromPlayList": "Fjern fra spilleliste",
-  "@removeFromPlayList": {
-    "description": "Menu item description to show remove a video from a playlist"
-  },
-  "irreversibleAction": "Dette kan ikke angres",
-  "@irreversibleAction": {
-    "description": "Tell the user that the action cannot be undone"
-  },
-  "addPlayList": "Legg til spilleliste",
-  "@addPlayList": {
-    "description": "Title for add playlist dialog"
-  },
-  "deletePlayListQ": "Slett spilleliste?",
-  "@deletePlayListQ": {
-    "description": "Ask user to delete a playlist"
-  },
-  "add": "Legg til",
-  "@add": {
-    "description": "Add button abel"
-  },
-  "subscribed": "Abonnert",
-  "@subscribed": {
-    "description": "When the user is subscribed to a channel"
-  },
-  "noChannels": "Ingen kanaler",
-  "@noChannels": {
-    "description": "when there are no channels to display"
-  },
-  "comments": "Kommentarer",
-  "@comments": {
-    "description": "Comments label"
-  },
-  "recommended": "Anbefalt",
-  "@recommended": {
-    "description": "Recommended label"
-  },
-  "shareInvidiousLink": "Del Invidious-lenke",
-  "@shareInvidiousLink": {
-    "description": "asking user to share invidious link"
-  },
-  "couldntLoadVideo": "Kunne ikke laste inn videoen",
-  "@couldntLoadVideo": {
-    "description": "Message to display when a video can't be loaded"
-  },
-  "couldntFetchVideos": "Kunne ikke hente videoer. Trykk for å prøve igjen.",
-  "@couldntFetchVideos": {
-    "description": "Can't load bunch of videos, asking  user to try again"
-  },
-  "startUsingClipious": "Begynn å bruke Clipious",
-  "@startUsingClipious": {
-    "description": "button label to start using the app"
-  },
-  "errorAddingVideoToPlaylist": "Kunne ikke legge til video på spilleliste",
-  "@errorAddingVideoToPlaylist": {
-    "description": "Error while adding video to playlist"
-  },
-  "selectBrowsingCountry": "Velg utforskningsland",
-  "@selectBrowsingCountry": {
-    "description": "Select country for trending content"
-  },
-  "browsing": "Utforskning",
-  "@browsing": {
-    "description": "video browsing preferences"
-  },
-  "whenAppStartsShow": "Når programmer starter, vis …",
-  "@whenAppStartsShow": {
-    "description": "Setting title for selecting the screen to show on start"
-  },
-  "addServer": "Legg til tjener",
-  "@addServer": {
-    "description": "Add server label"
-  },
-  "subscriptions": "Abonnementer",
-  "@subscriptions": {
-    "description": "User subscriptions"
-  },
-  "trending": "På vei opp",
-  "@trending": {
-    "description": "Trending videos title"
-  },
-  "privatePlaylist": "Privat",
-  "@privatePlaylist": {
-    "description": "Private playlist"
-  },
-  "subscribe": "Abonner",
-  "@subscribe": {
-    "description": "Label for user to subscribe to a channel"
-  },
-  "topSorting": "Topp",
-  "@topSorting": {
-    "description": "Content sorting: top"
-  },
-  "playlists": "Spillelister",
-  "@playlists": {
-    "description": "User playlists"
-  },
-  "popular": "Populært",
-  "@popular": {
-    "description": "Popular videos title"
-  },
-  "playListName": "Spillelistenavn",
-  "@playListName": {
-    "description": "Place holder for new playlist name text field"
-  },
-  "publicPlaylist": "Offentlig",
-  "@publicPlaylist": {
-    "description": "Public playlist"
-  },
-  "unlistedPlaylist": "Ulistet",
-  "@unlistedPlaylist": {
-    "description": "Unlisted playlist"
-  },
-  "playlistVisibility": "Synlighet",
-  "@playlistVisibility": {
-    "description": "Dropdown label for playlist visibility"
-  },
-  "cancel": "Avbryt",
-  "@cancel": {
-    "description": "Cancel button label"
-  },
-  "videos": "Videoer",
-  "@videos": {
-    "description": "Videos label"
-  },
-  "info": "Info",
-  "@info": {
-    "description": "Info label"
-  },
-  "streams": "Strømmer",
-  "@streams": {
-    "description": "Streams label"
-  },
-  "latestVideos": "Nyligste videoer",
-  "@latestVideos": {
-    "description": "Latest channel videos"
-  },
-  "noPlaylists": "Ingen spillelister",
-  "@noPlaylists": {
-    "description": "when there are no playlists to display"
-  },
-  "channels": "Kanaler",
-  "@channels": {
-    "description": "Channels label"
-  },
-  "videoAddedToPlaylist": "Video lagt til på spilleliste",
-  "@videoAddedToPlaylist": {
-    "description": "Pop up message when a video was added to a playlist"
-  },
-  "manageServers": "Håndter tjenere",
-  "@manageServers": {
-    "description": "Settings to manage servers"
-  },
-  "name": "Navn",
-  "@name": {
-    "description": "NAme label"
-  },
-  "selectPlaylist": "Velg spilleliste",
-  "@selectPlaylist": {
-    "description": "Title when users wants to add a video to a playlist"
-  },
-  "loadMore": "Last inn flere",
-  "@loadMore": {
-    "description": "CTA to load more"
-  },
-  "newSorting": "Nye",
-  "@newSorting": {
-    "description": "Content sorting: new"
-  },
-  "streamIsLive": "Direkte",
-  "@streamIsLive": {
-    "description": "Label when a video is a live stream"
-  },
-  "settings": "Innstillinger",
-  "@settings": {
-    "description": "Settings title"
-  },
-  "servers": "Tjenere",
-  "@servers": {
-    "description": "Server management settings category"
-  },
-  "useSponsorBlock": "Bruk SponsorBlock",
-  "@useSponsorBlock": {
-    "description": "label for sponsorblock checkbox"
-  },
-  "logIn": "Logg inn",
-  "@logIn": {
-    "description": "CTA to log in to server"
-  },
-  "loggedIn": "Innlogget",
-  "@loggedIn": {
-    "description": "Label to tell the user that he is logged in to the server"
-  },
-  "country": "Land",
-  "@country": {
-    "description": "Country label"
-  },
-  "about": "Om",
-  "@about": {
-    "description": "About"
-  },
-  "delete": "Slett",
-  "@delete": {
-    "description": "Delete label"
-  },
-  "version": "Versjon",
-  "@version": {
-    "description": "version label"
-  },
-  "build": "Bygg",
-  "@build": {
-    "description": "build label"
-  },
-  "useThisServer": "Bruk denne tjeneren",
-  "@useThisServer": {
-    "description": "Use this server label"
-  },
-  "invalidInvidiousServer": "Ugyldig Invidious-tjener",
-  "@invalidInvidiousServer": {
-    "description": "Error when the user tries to add a server that is not a proper or reachable invidious server"
-  },
-  "yourServers": "Dine tjenere",
-  "@yourServers": {
-    "description": "Your servers label"
-  },
-  "ok": "OK",
-  "@ok": {
-    "description": "Ok"
-  },
-  "sponsorSkipped": "Segment skippet",
-  "@sponsorSkipped": {
-    "description": "When a sponsor segment is skipped thanks to sponsor block"
-  },
-  "publicServers": "Offentlige tjenere",
-  "@publicServers": {
-    "description": "Public servers label"
-  },
-  "appearance": "Utseende",
-  "@appearance": {
-    "description": "Settings category title"
-  },
-  "useDynamicTheme": "Dynamiske farger",
-  "@useDynamicTheme": {
-    "description": ""
-  },
-  "nSubscribers": "{count, select, no{Ingen abonnenter} other{{count} abonnenter}}",
-  "@nSubscribers": {
-    "description": "number of subscribers",
-    "placeholders": {
-      "count": {
-        "type": "String"
-      }
+    "noVideoInPlayList": "Tom spilleliste",
+    "@noVideoInPlayList": {
+        "description": "When no videos in the playlist"
+    },
+    "removeFromPlayList": "Fjern fra spilleliste",
+    "@removeFromPlayList": {
+        "description": "Menu item description to show remove a video from a playlist"
+    },
+    "irreversibleAction": "Dette kan ikke angres",
+    "@irreversibleAction": {
+        "description": "Tell the user that the action cannot be undone"
+    },
+    "addPlayList": "Legg til spilleliste",
+    "@addPlayList": {
+        "description": "Title for add playlist dialog"
+    },
+    "deletePlayListQ": "Slett spilleliste?",
+    "@deletePlayListQ": {
+        "description": "Ask user to delete a playlist"
+    },
+    "add": "Legg til",
+    "@add": {
+        "description": "Add button abel"
+    },
+    "subscribed": "Abonnert",
+    "@subscribed": {
+        "description": "When the user is subscribed to a channel"
+    },
+    "noChannels": "Ingen kanaler",
+    "@noChannels": {
+        "description": "when there are no channels to display"
+    },
+    "comments": "Kommentarer",
+    "@comments": {
+        "description": "Comments label"
+    },
+    "recommended": "Anbefalt",
+    "@recommended": {
+        "description": "Recommended label"
+    },
+    "shareInvidiousLink": "Del Invidious-lenke",
+    "@shareInvidiousLink": {
+        "description": "asking user to share invidious link"
+    },
+    "couldntLoadVideo": "Kunne ikke laste inn videoen",
+    "@couldntLoadVideo": {
+        "description": "Message to display when a video can't be loaded"
+    },
+    "couldntFetchVideos": "Kunne ikke hente videoer. Trykk for å prøve igjen.",
+    "@couldntFetchVideos": {
+        "description": "Can't load bunch of videos, asking  user to try again"
+    },
+    "startUsingClipious": "Begynn å bruke Clipious",
+    "@startUsingClipious": {
+        "description": "button label to start using the app"
+    },
+    "errorAddingVideoToPlaylist": "Kunne ikke legge til video på spilleliste",
+    "@errorAddingVideoToPlaylist": {
+        "description": "Error while adding video to playlist"
+    },
+    "selectBrowsingCountry": "Velg utforskningsland",
+    "@selectBrowsingCountry": {
+        "description": "Select country for trending content"
+    },
+    "browsing": "Utforskning",
+    "@browsing": {
+        "description": "video browsing preferences"
+    },
+    "whenAppStartsShow": "Når programmer starter, vis …",
+    "@whenAppStartsShow": {
+        "description": "Setting title for selecting the screen to show on start"
+    },
+    "addServer": "Legg til tjener",
+    "@addServer": {
+        "description": "Add server label"
+    },
+    "subscriptions": "Abonnementer",
+    "@subscriptions": {
+        "description": "User subscriptions"
+    },
+    "trending": "På vei opp",
+    "@trending": {
+        "description": "Trending videos title"
+    },
+    "privatePlaylist": "Privat",
+    "@privatePlaylist": {
+        "description": "Private playlist"
+    },
+    "subscribe": "Abonner",
+    "@subscribe": {
+        "description": "Label for user to subscribe to a channel"
+    },
+    "topSorting": "Topp",
+    "@topSorting": {
+        "description": "Content sorting: top"
+    },
+    "playlists": "Spillelister",
+    "@playlists": {
+        "description": "User playlists"
+    },
+    "popular": "Populært",
+    "@popular": {
+        "description": "Popular videos title"
+    },
+    "playListName": "Spillelistenavn",
+    "@playListName": {
+        "description": "Place holder for new playlist name text field"
+    },
+    "publicPlaylist": "Offentlig",
+    "@publicPlaylist": {
+        "description": "Public playlist"
+    },
+    "unlistedPlaylist": "Ulistet",
+    "@unlistedPlaylist": {
+        "description": "Unlisted playlist"
+    },
+    "playlistVisibility": "Synlighet",
+    "@playlistVisibility": {
+        "description": "Dropdown label for playlist visibility"
+    },
+    "cancel": "Avbryt",
+    "@cancel": {
+        "description": "Cancel button label"
+    },
+    "videos": "Videoer",
+    "@videos": {
+        "description": "Videos label"
+    },
+    "info": "Info",
+    "@info": {
+        "description": "Info label"
+    },
+    "streams": "Strømmer",
+    "@streams": {
+        "description": "Streams label"
+    },
+    "latestVideos": "Nyligste videoer",
+    "@latestVideos": {
+        "description": "Latest channel videos"
+    },
+    "noPlaylists": "Ingen spillelister",
+    "@noPlaylists": {
+        "description": "when there are no playlists to display"
+    },
+    "channels": "Kanaler",
+    "@channels": {
+        "description": "Channels label"
+    },
+    "videoAddedToPlaylist": "Video lagt til på spilleliste",
+    "@videoAddedToPlaylist": {
+        "description": "Pop up message when a video was added to a playlist"
+    },
+    "manageServers": "Håndter tjenere",
+    "@manageServers": {
+        "description": "Settings to manage servers"
+    },
+    "name": "Navn",
+    "@name": {
+        "description": "NAme label"
+    },
+    "selectPlaylist": "Velg spilleliste",
+    "@selectPlaylist": {
+        "description": "Title when users wants to add a video to a playlist"
+    },
+    "loadMore": "Last inn flere",
+    "@loadMore": {
+        "description": "CTA to load more"
+    },
+    "newSorting": "Nye",
+    "@newSorting": {
+        "description": "Content sorting: new"
+    },
+    "streamIsLive": "Direkte",
+    "@streamIsLive": {
+        "description": "Label when a video is a live stream"
+    },
+    "settings": "Innstillinger",
+    "@settings": {
+        "description": "Settings title"
+    },
+    "servers": "Tjenere",
+    "@servers": {
+        "description": "Server management settings category"
+    },
+    "useSponsorBlock": "Bruk SponsorBlock",
+    "@useSponsorBlock": {
+        "description": "label for sponsorblock checkbox"
+    },
+    "logIn": "Logg inn",
+    "@logIn": {
+        "description": "CTA to log in to server"
+    },
+    "loggedIn": "Innlogget",
+    "@loggedIn": {
+        "description": "Label to tell the user that he is logged in to the server"
+    },
+    "country": "Land",
+    "@country": {
+        "description": "Country label"
+    },
+    "about": "Om",
+    "@about": {
+        "description": "About"
+    },
+    "delete": "Slett",
+    "@delete": {
+        "description": "Delete label"
+    },
+    "version": "Versjon",
+    "@version": {
+        "description": "version label"
+    },
+    "build": "Bygg",
+    "@build": {
+        "description": "build label"
+    },
+    "useThisServer": "Bruk denne tjeneren",
+    "@useThisServer": {
+        "description": "Use this server label"
+    },
+    "invalidInvidiousServer": "Ugyldig Invidious-tjener",
+    "@invalidInvidiousServer": {
+        "description": "Error when the user tries to add a server that is not a proper or reachable invidious server"
+    },
+    "yourServers": "Dine tjenere",
+    "@yourServers": {
+        "description": "Your servers label"
+    },
+    "ok": "OK",
+    "@ok": {
+        "description": "Ok"
+    },
+    "sponsorSkipped": "Segment skippet",
+    "@sponsorSkipped": {
+        "description": "When a sponsor segment is skipped thanks to sponsor block"
+    },
+    "publicServers": "Offentlige tjenere",
+    "@publicServers": {
+        "description": "Public servers label"
+    },
+    "appearance": "Utseende",
+    "@appearance": {
+        "description": "Settings category title"
+    },
+    "useDynamicTheme": "Dynamiske farger",
+    "@useDynamicTheme": {
+        "description": ""
+    },
+    "nSubscribers": "{count, select, no{Ingen abonnenter} other{{count} abonnenter}}",
+    "@nSubscribers": {
+        "description": "number of subscribers",
+        "placeholders": {
+            "count": {
+                "type": "String"
+            }
+        }
+    },
+    "createNewPlaylist": "Opprett ny spilleliste",
+    "@createNewPlaylist": {
+        "description": "Button label to create a new playlist when the user wants to add a video to a playlist"
+    },
+    "sponsorBlockDescription": "Hopp over sponsorsegmenter gemenskapen finner",
+    "@sponsorBlockDescription": {
+        "description": "Sponsorblock setting description"
+    },
+    "tapToAddServer": "Trykk for å legge til en tjener på listen din",
+    "@tapToAddServer": {
+        "description": "public server description"
+    },
+    "nReplies": "{count, plural, =0{Ingen svar} =1{1 svar} other{{count} svar}}",
+    "@nReplies": {
+        "description": "number of replies to a comment",
+        "placeholders": {
+            "count": {
+                "type": "num",
+                "format": "compact"
+            }
+        }
+    },
+    "addServerHelpText": "Bruk «+»-knappen for å legge til egne tjenere, eller trykk på en offentlig tjener for å legge den til.",
+    "@addServerHelpText": {
+        "description": "label for when the user hasn't chosen a server yet"
+    },
+    "showOnStart": "Velg hva som skal vises når programmet starter",
+    "@showOnStart": {
+        "description": "Title of dialog asking which screen the users prefers to see"
+    },
+    "useDynamicThemeDescription": "Bruker Material You-farger (kun tilgjengelig på Android 12+). Krever programomstart.",
+    "@useDynamicThemeDescription": {
+        "description": ""
+    },
+    "notLoggedIn": "Ikke innlogget. Trykk for å logge inn.",
+    "@notLoggedIn": {
+        "description": "Label when the user is not logged in to the server"
+    },
+    "loadingPublicServer": "Laster inn offentlige tjenere",
+    "@loadingPublicServer": {
+        "description": "Message telling users the app is loading the list of public servers"
+    },
+    "publicServersError": "Kunne ikke hente liste over offentlige tjenere. Trykk for å prøve igjen.",
+    "@publicServersError": {
+        "description": "Error message when trying to get public servers but it failed"
+    },
+    "shareYoutubeLink": "Del YouTube-lenke",
+    "@shareYoutubeLink": {
+        "description": "asking user to share youtube link"
+    },
+    "nVideos": "{count, plural, =0{Ingen videoer} =1{1 video} other{{count} videoer}}",
+    "@nVideos": {
+        "description": "One or more videos",
+        "placeholders": {
+            "count": {
+                "type": "num",
+                "format": "compact"
+            }
+        }
+    },
+    "wizardIntro": "Velg en offentlig tjener, eller legg til din egen. Du kan endre dette senere i innstillingene.",
+    "@wizardIntro": {
+        "description": "Welcome message on frst time use"
+    },
+    "package": "Pakke",
+    "@package": {
+        "description": "package label"
+    },
+    "error": "Feil",
+    "@error": {},
+    "currentServer": "Bruker for øyeblikket {current}",
+    "@currentServer": {
+        "description": "Which server the user is currently using",
+        "placeholders": {
+            "current": {
+                "type": "String"
+            }
+        }
+    },
+    "sponsorBlockCategoryMusicOffTopic": "Musikk: Stille del",
+    "@sponsorBlockCategoryMusicOffTopic": {
+        "description": "Sponsorblock 'MusicOffTopic' Category"
+    },
+    "sponsorBlockCategoryFiller": "Fyllstoff/avsporing",
+    "@sponsorBlockCategoryFiller": {
+        "description": "Sponsorblock 'Filler' Category"
+    },
+    "sponsorBlockCategoryFillerDescription": "Ting kun for humor eller som ikke kreves for å forstå hovedinnholdet i videoen. Ikke for segmenter som har bindeleddsinfo eller bakgrunnsinfo. Veldig aggressiv kategori ment for dem som ikke er interessert i «gøy».",
+    "@sponsorBlockCategoryFillerDescription": {
+        "description": "Sponsorblock 'Filler' Category description"
+    },
+    "sponsorBlockSettingsQuickDescription": "Velg segmenttyper å hoppe over",
+    "@sponsorBlockSettingsQuickDescription": {
+        "description": "Small description of what the sponsor block settings do"
+    },
+    "username": "Brukernavn",
+    "@username": {
+        "description": "Username label for login to a server"
+    },
+    "sponsorBlockCategorySponsor": "Sponsor",
+    "@sponsorBlockCategorySponsor": {
+        "description": "Sponsor block 'Sponsor' Category"
+    },
+    "useProxy": "Mellomtjen videoer",
+    "@useProxy": {
+        "description": "label for settings switch to proxy videos from server"
+    },
+    "useProxyDescription": "Ved å mellomtjene videostrømmer fra tjeneren kan du omgå lokal blokkering eller ISP-er som blokkerer YouTube. Krever programomstart",
+    "@useProxyDescription": {
+        "description": "Description for the use proxy settings"
+    },
+    "sponsorBlockCategoryIntro": "Intro/mellom",
+    "@sponsorBlockCategoryIntro": {
+        "description": "Sponsorblock 'Intro' Category"
+    },
+    "sponsorBlockCategoryPreviewDescription": "Samling av klipp som viser det som kommer i serien der all info gjentas senere i videoen.",
+    "@sponsorBlockCategoryPreviewDescription": {
+        "description": "Sponsorblock 'Preview' Category description"
+    },
+    "sponsorBlockCategoryInteraction": "Interaksjonspåminnelse (abonnering)",
+    "@sponsorBlockCategoryInteraction": {
+        "description": "Sponsor block 'Interaction' Category"
+    },
+    "sponsorBlockCategoryUnpaidSelfPromoDescription": "Ligner «Sponsor», men for ubetalt-/ selvpromotering. Varer, donasjoner, eller info om hvem skaperen har samarbeidet med. ",
+    "@sponsorBlockCategoryUnpaidSelfPromoDescription": {
+        "description": "Sponsor block 'Unpaid/Self promotion' Category description"
+    },
+    "sponsorBlockCategoryInteractionDescription": "Kort påminnelse om abonnering midt i innhold. Lange innlegg skal legges i «Selvpromotering».",
+    "@sponsorBlockCategoryInteractionDescription": {
+        "description": "Sponsor block 'Interaction' Category description"
+    },
+    "sponsorBlockCategoryOutro": "Slutt/rulletekst",
+    "@sponsorBlockCategoryOutro": {
+        "description": "Outro block 'Outro' Category"
+    },
+    "sponsorBlockCategoryIntroDescription": "Intervall uten innhold. Kan være pause, statisk bilde, eller gjentagende animasjon. Ikke for overganger som inneholder info.",
+    "@sponsorBlockCategoryIntroDescription": {
+        "description": "Sponsorblock 'Intro' Category description"
+    },
+    "sponsorBlockCategoryUnpaidSelfPromo": "Ubetalt/selvpromotering",
+    "@sponsorBlockCategoryUnpaidSelfPromo": {
+        "description": "Sponsor block 'Unpaid/Self promotion' Category"
+    },
+    "sponsorBlockCategoryMusicOffTopicDescription": "Intervall uten innhold. Pause, statisk bilde, eller gjentagende animasjon. Ikke for overganger som inneholder info.",
+    "@sponsorBlockCategoryMusicOffTopicDescription": {
+        "description": "Only for use in music videos. This only should be used for sections of music videos that aren't already covered by another category."
+    },
+    "sponsorBlockCategorySponsorDescription": "Betalt promotering og direktereklame. Ikke for egenreklame eller gratis nevning av ting skaperen liker.",
+    "@sponsorBlockCategorySponsorDescription": {
+        "description": "Sponsor block 'Sponsor' Category description"
+    },
+    "sponsorBlockCategoryOutroDescription": "Når sluttsekvensen vises. Ikke for konklusjoner med info.",
+    "@sponsorBlockCategoryOutroDescription": {
+        "description": "Outro block 'Outro' Category description"
+    },
+    "sponsorBlockCategoryPreview": "Forhåndsvisning/gjennomgang",
+    "@sponsorBlockCategoryPreview": {
+        "description": "Sponsorblock 'Preview' Category"
+    },
+    "useDash": "Bruk DASH",
+    "@useDash": {
+        "description": "Label on video options if a user wants to switch to dash urls instead of the regular quality selection"
+    },
+    "videoPlayer": "Videospiller",
+    "@videoPlayer": {
+        "description": "Title for video player related options"
+    },
+    "useDashDescription": "Adaptiv DASH-strømming kan være problematisk når YouTube struper den.",
+    "@useDashDescription": {
+        "description": "Description for dash in the settings screen"
+    },
+    "videoListed": "Offentlig",
+    "@videoListed": {
+        "description": "Status of a publicly available video"
+    },
+    "videoUnlisted": "Ulistet",
+    "@videoUnlisted": {
+        "description": "Status of a video that is only accessible by link"
+    },
+    "videoIsFamilyFriendly": "Familievennlig",
+    "@videoIsFamilyFriendly": {
+        "description": "Displayed only when a video is family friendly"
+    },
+    "tapToManage": "Trykk for å håndtere",
+    "@tapToManage": {
+        "description": "Text shown below a server in the 'Your servers' list"
+    },
+    "authentication": "Identitetsbekreftelse",
+    "@authentication": {
+        "description": "Label for server settings related to authentications"
+    },
+    "tokenLoginDescription": "Anbefalt innloggingsmetode",
+    "@tokenLoginDescription": {
+        "description": "Recommended way to log in"
+    },
+    "logout": "Logg ut",
+    "@logout": {
+        "description": "CTA to logout of a server"
+    },
+    "password": "Passord",
+    "@password": {
+        "description": "Password label for login to a server"
+    },
+    "wrongUsernamePassword": "Feil brukernavn eller passord",
+    "@wrongUsernamePassword": {
+        "description": "Error message when authentication fails"
+    },
+    "cookieLoginDescription": "Bruk denne metoden hvis du har problemer med symbol-identitetsbekreftelse",
+    "@cookieLoginDescription": {
+        "description": "Cookie log in description"
+    },
+    "tokenLogin": "Logg inn med symbol",
+    "@tokenLogin": {
+        "description": "Textto login to a server using the recommended way"
+    },
+    "cookieLogin": "Logg inn med kake",
+    "@cookieLogin": {
+        "description": "Text to login to a server using the cookie jar method"
+    },
+    "videoQueue": "Videokø",
+    "@videoQueue": {
+        "description": "Label for button to display the video queue"
+    },
+    "addToQueueList": "Legg til i kø",
+    "@addToQueueList": {
+        "description": "Label on button to add a video to the queue list"
+    },
+    "addRecommendedToQueue": "Auto-spill anbefalte etterpå",
+    "@addRecommendedToQueue": {
+        "description": "Switch when playing a video to automatically add the recommended videos to the video queue"
+    },
+    "blackBackground": "Svart bakgrunn",
+    "@blackBackground": {
+        "description": "Settings name for black background"
+    },
+    "search": "Søk",
+    "@search": {
+        "description": "search title"
+    },
+    "blackBackgroundDescription": "For helsvart drakt. Krever programomstart.",
+    "@blackBackgroundDescription": {
+        "description": "Description for dark background setting"
+    },
+    "subtitleFontSize": "Skriftstørrelse for undertekster",
+    "@subtitleFontSize": {
+        "description": "Settings label for the size of the subtitles"
+    },
+    "subtitles": "Undertekster",
+    "@subtitles": {
+        "description": "Name of TV ui subtitles settings"
+    },
+    "quality": "Kvalitet",
+    "@quality": {
+        "description": "Name of TV ui video settings"
+    },
+    "pressDownToShowSettings": "Trykk ↓ for å vise innstillinger",
+    "@pressDownToShowSettings": {
+        "description": "Instruction on how to show video settings when playing a video on TV"
+    },
+    "audio": "Lyd",
+    "@audio": {
+        "description": "Name TV ui audio settings"
+    },
+    "playbackSpeed": "Avspillingshastighet",
+    "@playbackSpeed": {
+        "description": "Name of TV ui Playback speed"
+    },
+    "skipSslVerification": "Hopp over SSL-sertifikatsbekreftelse",
+    "@skipSslVerification": {
+        "description": "Setting label to skip ssl certification verification"
+    },
+    "skipSslVerificationDescription": "Bruk dette hvis du bruker selvsignert SSL-sertifikat, eller har SSL-relaterte problemer med tjeneren din.",
+    "@skipSslVerificationDescription": {
+        "description": "Setting description for the skip ssl certification verification"
+    },
+    "subtitleFontSizeDescription": "Endre størrelsen på undertekstene hvis de er for store eller små på enheten din",
+    "@subtitleFontSizeDescription": {
+        "description": "Settings description for subtitle size"
     }
-  },
-  "createNewPlaylist": "Opprett ny spilleliste",
-  "@createNewPlaylist": {
-    "description": "Button label to create a new playlist when the user wants to add a video to a playlist"
-  },
-  "sponsorBlockDescription": "Hopp over sponsorsegmenter gemenskapen finner",
-  "@sponsorBlockDescription": {
-    "description": "Sponsorblock setting description"
-  },
-  "tapToAddServer": "Trykk for å legge til en tjener på listen din",
-  "@tapToAddServer": {
-    "description": "public server description"
-  },
-  "nReplies": "{count, plural, =0{Ingen svar} =1{1 svar} other{{count} svar}}",
-  "@nReplies": {
-    "description": "number of replies to a comment",
-    "placeholders": {
-      "count": {
-        "type": "num",
-        "format": "compact"
-      }
-    }
-  },
-  "addServerHelpText": "Bruk «+»-knappen for å legge til egne tjenere, eller trykk på en offentlig tjener for å legge den til.",
-  "@addServerHelpText": {
-    "description": "label for when the user hasn't chosen a server yet"
-  },
-  "showOnStart": "Velg hva som skal vises når programmet starter",
-  "@showOnStart": {
-    "description": "Title of dialog asking which screen the users prefers to see"
-  },
-  "useDynamicThemeDescription": "Bruker Material You-farger (kun tilgjengelig på Android 12+). Krever programomstart.",
-  "@useDynamicThemeDescription": {
-    "description": ""
-  },
-  "notLoggedIn": "Ikke innlogget. Trykk for å logge inn.",
-  "@notLoggedIn": {
-    "description": "Label when the user is not logged in to the server"
-  },
-  "loadingPublicServer": "Laster inn offentlige tjenere",
-  "@loadingPublicServer": {
-    "description": "Message telling users the app is loading the list of public servers"
-  },
-  "publicServersError": "Kunne ikke hente liste over offentlige tjenere. Trykk for å prøve igjen.",
-  "@publicServersError": {
-    "description": "Error message when trying to get public servers but it failed"
-  },
-  "shareYoutubeLink": "Del YouTube-lenke",
-  "@shareYoutubeLink": {
-    "description": "asking user to share youtube link"
-  },
-  "nVideos": "{count, plural, =0{Ingen videoer} =1{1 video} other{{count} videoer}}",
-  "@nVideos": {
-    "description": "One or more videos",
-    "placeholders": {
-      "count": {
-        "type": "num",
-        "format": "compact"
-      }
-    }
-  },
-  "wizardIntro": "Velg en offentlig tjener, eller legg til din egen. Du kan endre dette senere i innstillingene.",
-  "@wizardIntro": {
-    "description": "Welcome message on frst time use"
-  },
-  "package": "Pakke",
-  "@package": {
-    "description": "package label"
-  },
-  "error": "Feil",
-  "@error": {},
-  "currentServer": "Bruker for øyeblikket {current}",
-  "@currentServer": {
-    "description": "Which server the user is currently using",
-    "placeholders": {
-      "current": {
-        "type": "String"
-      }
-    }
-  },
-  "sponsorBlockCategoryMusicOffTopic": "Musikk: Stille del",
-  "@sponsorBlockCategoryMusicOffTopic": {
-    "description": "Sponsorblock 'MusicOffTopic' Category"
-  },
-  "sponsorBlockCategoryFiller": "Fyllstoff/avsporing",
-  "@sponsorBlockCategoryFiller": {
-    "description": "Sponsorblock 'Filler' Category"
-  },
-  "sponsorBlockCategoryFillerDescription": "Ting kun for humor eller som ikke kreves for å forstå hovedinnholdet i videoen. Ikke for segmenter som har bindeleddsinfo eller bakgrunnsinfo. Veldig aggressiv kategori ment for dem som ikke er interessert i «gøy».",
-  "@sponsorBlockCategoryFillerDescription": {
-    "description": "Sponsorblock 'Filler' Category description"
-  },
-  "sponsorBlockSettingsQuickDescription": "Velg segmenttyper å hoppe over",
-  "@sponsorBlockSettingsQuickDescription": {
-    "description": "Small description of what the sponsor block settings do"
-  },
-  "username": "Brukernavn",
-  "@username": {
-    "description": "Username label for login to a server"
-  },
-  "sponsorBlockCategorySponsor": "Sponsor",
-  "@sponsorBlockCategorySponsor": {
-    "description": "Sponsor block 'Sponsor' Category"
-  },
-  "useProxy": "Mellomtjen videoer",
-  "@useProxy": {
-    "description": "label for settings switch to proxy videos from server"
-  },
-  "useProxyDescription": "Ved å mellomtjene videostrømmer fra tjeneren kan du omgå lokal blokkering eller ISP-er som blokkerer YouTube. Krever programomstart",
-  "@useProxyDescription": {
-    "description": "Description for the use proxy settings"
-  },
-  "sponsorBlockCategoryIntro": "Intro/mellom",
-  "@sponsorBlockCategoryIntro": {
-    "description": "Sponsorblock 'Intro' Category"
-  },
-  "sponsorBlockCategoryPreviewDescription": "Samling av klipp som viser det som kommer i serien der all info gjentas senere i videoen.",
-  "@sponsorBlockCategoryPreviewDescription": {
-    "description": "Sponsorblock 'Preview' Category description"
-  },
-  "sponsorBlockCategoryInteraction": "Interaksjonspåminnelse (abonnering)",
-  "@sponsorBlockCategoryInteraction": {
-    "description": "Sponsor block 'Interaction' Category"
-  },
-  "sponsorBlockCategoryUnpaidSelfPromoDescription": "Ligner «Sponsor», men for ubetalt-/ selvpromotering. Varer, donasjoner, eller info om hvem skaperen har samarbeidet med. ",
-  "@sponsorBlockCategoryUnpaidSelfPromoDescription": {
-    "description": "Sponsor block 'Unpaid/Self promotion' Category description"
-  },
-  "sponsorBlockCategoryInteractionDescription": "Kort påminnelse om abonnering midt i innhold. Lange innlegg skal legges i «Selvpromotering».",
-  "@sponsorBlockCategoryInteractionDescription": {
-    "description": "Sponsor block 'Interaction' Category description"
-  },
-  "sponsorBlockCategoryOutro": "Slutt/rulletekst",
-  "@sponsorBlockCategoryOutro": {
-    "description": "Outro block 'Outro' Category"
-  },
-  "sponsorBlockCategoryIntroDescription": "Intervall uten innhold. Kan være pause, statisk bilde, eller gjentagende animasjon. Ikke for overganger som inneholder info.",
-  "@sponsorBlockCategoryIntroDescription": {
-    "description": "Sponsorblock 'Intro' Category description"
-  },
-  "sponsorBlockCategoryUnpaidSelfPromo": "Ubetalt/selvpromotering",
-  "@sponsorBlockCategoryUnpaidSelfPromo": {
-    "description": "Sponsor block 'Unpaid/Self promotion' Category"
-  },
-  "sponsorBlockCategoryMusicOffTopicDescription": "Intervall uten innhold. Pause, statisk bilde, eller gjentagende animasjon. Ikke for overganger som inneholder info.",
-  "@sponsorBlockCategoryMusicOffTopicDescription": {
-    "description": "Only for use in music videos. This only should be used for sections of music videos that aren't already covered by another category."
-  },
-  "sponsorBlockCategorySponsorDescription": "Betalt promotering og direktereklame. Ikke for egenreklame eller gratis nevning av ting skaperen liker.",
-  "@sponsorBlockCategorySponsorDescription": {
-    "description": "Sponsor block 'Sponsor' Category description"
-  },
-  "sponsorBlockCategoryOutroDescription": "Når sluttsekvensen vises. Ikke for konklusjoner med info.",
-  "@sponsorBlockCategoryOutroDescription": {
-    "description": "Outro block 'Outro' Category description"
-  },
-  "sponsorBlockCategoryPreview": "Forhåndsvisning/gjennomgang",
-  "@sponsorBlockCategoryPreview": {
-    "description": "Sponsorblock 'Preview' Category"
-  },
-  "useDash": "Bruk DASH",
-  "@useDash": {
-    "description": "Label on video options if a user wants to switch to dash urls instead of the regular quality selection"
-  },
-  "videoPlayer": "Videospiller",
-  "@videoPlayer": {
-    "description": "Title for video player related options"
-  },
-  "useDashDescription": "Adaptiv DASH-strømming kan være problematisk når YouTube struper den.",
-  "@useDashDescription": {
-    "description": "Description for dash in the settings screen"
-  },
-  "videoListed": "Offentlig",
-  "@videoListed": {
-    "description": "Status of a publicly available video"
-  },
-  "videoUnlisted": "Ulistet",
-  "@videoUnlisted": {
-    "description": "Status of a video that is only accessible by link"
-  },
-  "videoIsFamilyFriendly": "Familievennlig",
-  "@videoIsFamilyFriendly": {
-    "description": "Displayed only when a video is family friendly"
-  },
-  "tapToManage": "Trykk for å håndtere",
-  "@tapToManage": {
-    "description": "Text shown below a server in the 'Your servers' list"
-  },
-  "authentication": "Identitetsbekreftelse",
-  "@authentication": {
-    "description": "Label for server settings related to authentications"
-  },
-  "tokenLoginDescription": "Anbefalt innloggingsmetode",
-  "@tokenLoginDescription": {
-    "description": "Recommended way to log in"
-  },
-  "logout": "Logg ut",
-  "@logout": {
-    "description": "CTA to logout of a server"
-  },
-  "password": "Passord",
-  "@password": {
-    "description": "Password label for login to a server"
-  },
-  "wrongUsernamePassword": "Feil brukernavn eller passord",
-  "@wrongUsernamePassword": {
-    "description": "Error message when authentication fails"
-  },
-  "cookieLoginDescription": "Bruk denne metoden hvis du har problemer med symbol-identitetsbekreftelse",
-  "@cookieLoginDescription": {
-    "description": "Cookie log in description"
-  },
-  "tokenLogin": "Logg inn med symbol",
-  "@tokenLogin": {
-    "description": "Textto login to a server using the recommended way"
-  },
-  "cookieLogin": "Logg inn med kake",
-  "@cookieLogin": {
-    "description": "Text to login to a server using the cookie jar method"
-  },
-  "videoQueue": "Videokø",
-  "@videoQueue": {
-    "description": "Label for button to display the video queue"
-  },
-  "addToQueueList": "Legg til i kø",
-  "@addToQueueList": {
-    "description": "Label on button to add a video to the queue list"
-  },
-  "addRecommendedToQueue": "Auto-spill anbefalte etterpå",
-  "@addRecommendedToQueue": {
-    "description": "Switch when playing a video to automatically add the recommended videos to the video queue"
-  },
-  "blackBackground": "Svart bakgrunn",
-  "@blackBackground": {
-    "description": "Settings name for black background"
-  },
-  "search": "Søk",
-  "@search": {
-    "description": "search title"
-  },
-  "blackBackgroundDescription": "For helsvart drakt. Krever programomstart.",
-  "@blackBackgroundDescription": {
-    "description": "Description for dark background setting"
-  },
-  "subtitleFontSize": "Skriftstørrelse for undertekster",
-  "@subtitleFontSize": {
-    "description": "Settings label for the size of the subtitles"
-  },
-  "subtitles": "Undertekster",
-  "@subtitles": {
-    "description": "Name of TV ui subtitles settings"
-  },
-  "quality": "Kvalitet",
-  "@quality": {
-    "description": "Name of TV ui video settings"
-  },
-  "pressDownToShowSettings": "Trykk ↓ for å vise innstillinger",
-  "@pressDownToShowSettings": {
-    "description": "Instruction on how to show video settings when playing a video on TV"
-  },
-  "audio": "Lyd",
-  "@audio": {
-    "description": "Name TV ui audio settings"
-  },
-  "playbackSpeed": "Avspillingshastighet",
-  "@playbackSpeed": {
-    "description": "Name of TV ui Playback speed"
-  },
-  "skipSslVerification": "Hopp over SSL-sertifikatsbekreftelse",
-  "@skipSslVerification": {
-    "description": "Setting label to skip ssl certification verification"
-  },
-  "skipSslVerificationDescription": "Bruk dette hvis du bruker selvsignert SSL-sertifikat, eller har SSL-relaterte problemer med tjeneren din.",
-  "@skipSslVerificationDescription": {
-    "description": "Setting description for the skip ssl certification verification"
-  },
-  "subtitleFontSizeDescription": "Endre størrelsen på undertekstene hvis de er for store eller små på enheten din",
-  "@subtitleFontSizeDescription": {
-    "description": "Settings description for subtitle size"
-  }
 }

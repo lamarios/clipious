@@ -1,0 +1,5 @@
+- New feature: Video download
+- New Settings: Make video fill screen
+- Add monochrome icon for themed icons
+- New feature: Add timestmap while sharing the currently playing video
+- Updated translations
