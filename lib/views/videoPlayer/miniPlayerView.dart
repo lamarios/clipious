@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:invidious/controllers/miniPayerController.dart';
+import 'package:invidious/models/db/downloadedVideo.dart';
 import 'package:invidious/views/videoPlayer/miniPlayerControls.dart';
 import 'package:invidious/views/videoPlayer/miniPlayerProgress.dart';
 
@@ -10,7 +11,13 @@ class MiniPlayerView {
   static List<Widget> build(BuildContext context, MiniPlayerController controller) {
     ColorScheme colors = Theme.of(context).colorScheme;
     Video? vid = controller.currentlyPlaying;
-    return vid != null && controller.videos.isNotEmpty && controller.isMini
+    DownloadedVideo? offlineVid = controller.offlineCurrentlyPlaying;
+
+    String title = vid?.title ?? offlineVid?.title ?? '';
+    String author = vid?.author ?? offlineVid?.author ?? '';
+    String videoId = vid?.videoId ?? offlineVid?.videoId ?? '';
+
+    return ((vid != null && controller.videos.isNotEmpty) || (offlineVid != null && controller.offlineVideos.isNotEmpty)) && controller.isMini
         ? [
             Expanded(
                 flex: 2,
@@ -22,12 +29,12 @@ class MiniPlayerView {
                       return Column(
                         children: [
                           Text(
-                            '${vid.title} - ${vid.author}',
+                            '$title - $author',
                             overflow: TextOverflow.ellipsis,
                             style: const TextStyle(fontSize: 11),
                           ),
                           MiniPlayerControls(
-                            videoId: vid.videoId,
+                            videoId: videoId,
                             controller: controller,
                           ),
                           const MiniPlayerProgress(),

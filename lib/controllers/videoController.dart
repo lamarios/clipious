@@ -9,6 +9,7 @@ import 'package:logging/logging.dart';
 import '../globals.dart';
 import '../models/errors/invidiousServiceError.dart';
 import '../models/video.dart';
+import 'downloadController.dart';
 import 'miniPayerController.dart';
 
 const String coulnotLoadVideos = 'cannot-load-videos';
@@ -25,6 +26,9 @@ class VideoController extends GetxController {
   int selectedIndex = 0;
   String videoId;
   bool isLoggedIn = service.isLoggedIn();
+  bool downloading = false;
+  double downloadProgress = 0;
+  bool downloadFailed = false;
 
   double opacity = 1;
 
@@ -45,6 +49,10 @@ class VideoController extends GetxController {
         dislikes = dislike.dislikes;
       }
 
+      downloadFailed = db.getDownloadByVideoId(videoId)?.downloadFailed ?? false;
+
+      initStreamListener();
+
       update();
 
       if (autoplayOnLoad) {
@@ -60,6 +68,33 @@ class VideoController extends GetxController {
       update();
       rethrow;
     }
+  }
+
+  @override
+  onClose() {
+    var downloadProgress = DownloadController.to()?.downloadProgresses[videoId];
+    log.fine('Can find download progress ? ${downloadProgress != null}');
+    downloadProgress?.removeListener(onDownloadProgress);
+  }
+
+  onDownloadProgress(double progress) {
+    if (video != null) {
+      downloadProgress = progress;
+      if (progress < 1) {
+        downloadFailed = false;
+        downloading = true;
+      } else {
+        downloadFailed = db.getDownloadByVideoId(video!.videoId)?.downloadFailed ?? false;
+        downloading = false;
+      }
+      update();
+    }
+  }
+
+  initStreamListener() {
+    var downloadProgress = DownloadController.to()?.downloadProgresses[videoId];
+    log.fine('Can find download progress ? ${downloadProgress != null}');
+    downloadProgress?.addListener(onDownloadProgress);
   }
 
   togglePlayRecommendedNext(bool? value) {
@@ -81,6 +116,34 @@ class VideoController extends GetxController {
         videos.addAll(video?.recommendedVideos ?? []);
       }
       MiniPlayerController.to()?.playVideo(videos, goBack: true);
+    }
+  }
+
+  bool get isDownloaded {
+    if (video != null) {
+      return db.getDownloadByVideoId(videoId) != null;
+    } else {
+      return false;
+    }
+  }
+
+  downloadVideo() async {
+    if (video != null) {
+      downloading = true;
+      downloadFailed = false;
+      update();
+      if (downloadFailed) {
+        var vid = db.getDownloadByVideoId(videoId);
+        if (vid != null) {
+          await DownloadController.to()?.retryDownload(vid);
+        }
+      } else {
+        await DownloadController.to()?.addDownload(video!.videoId);
+      }
+      initStreamListener();
+      return bool;
+    } else {
+      return false;
     }
   }
 }

@@ -13,6 +13,7 @@ import 'package:invidious/controllers/homeController.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/httpOverrides.dart';
 import 'package:invidious/utils.dart';
+import 'package:invidious/views/components/downloadAppBarButton.dart';
 import 'package:invidious/views/components/miniPlayerAware.dart';
 import 'package:invidious/views/miniPlayer.dart';
 import 'package:invidious/views/playlists.dart';
@@ -151,10 +152,9 @@ class MyApp extends StatelessWidget {
                 themeMode: ThemeMode.values.firstWhere((element) => element.name == db.getSettings(THEME_MODE)?.value, orElse: () => ThemeMode.system),
                 title: 'Clipious',
                 theme: ThemeData(
-                  useMaterial3: true,
-                  colorScheme: lightColorScheme,
-                ),
-                darkTheme: ThemeData(useMaterial3: true, colorScheme: darkColorScheme),
+                    useMaterial3: true, colorScheme: lightColorScheme, progressIndicatorTheme: ProgressIndicatorThemeData(circularTrackColor: lightColorScheme.secondaryContainer.withOpacity(0.8))),
+                darkTheme: ThemeData(
+                    useMaterial3: true, colorScheme: darkColorScheme, progressIndicatorTheme: ProgressIndicatorThemeData(circularTrackColor: darkColorScheme.secondaryContainer.withOpacity(0.8))),
                 home: Shortcuts(
                   shortcuts: <LogicalKeySet, Intent>{
                     LogicalKeySet(LogicalKeyboardKey.select): const ActivateIntent(),
@@ -253,6 +253,7 @@ class _HomeState extends State<Home> with AfterLayoutMixin {
               // backgroundColor: Colors.pink,
               backgroundColor: colorScheme.background,
               actions: [
+                const AppBarDownloadButton(),
                 IconButton(
                   onPressed: () {
                     // showSearch(context: context, delegate: MySearchDelegate());

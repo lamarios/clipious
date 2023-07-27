@@ -199,9 +199,53 @@
         }
       ],
       "relations": []
+    },
+    {
+      "id": "7:7737259498144569754",
+      "lastPropertyId": "7:4130320220878296738",
+      "name": "DownloadedVideo",
+      "properties": [
+        {
+          "id": "1:4941717954477256691",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:6600296338817128660",
+          "name": "videoId",
+          "type": 9
+        },
+        {
+          "id": "3:2383320059961158921",
+          "name": "title",
+          "type": 9
+        },
+        {
+          "id": "4:8378509179540529921",
+          "name": "author",
+          "type": 9
+        },
+        {
+          "id": "5:1179720564271059922",
+          "name": "authorUrl",
+          "type": 9
+        },
+        {
+          "id": "6:107924486215845740",
+          "name": "downloadComplete",
+          "type": 1
+        },
+        {
+          "id": "7:4130320220878296738",
+          "name": "downloadFailed",
+          "type": 1
+        }
+      ],
+      "relations": []
     }
   ],
-  "lastEntityId": "6:8304874620604193998",
+  "lastEntityId": "7:7737259498144569754",
   "lastIndexId": "5:7262786699272501249",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",

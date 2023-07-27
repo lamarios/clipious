@@ -69,27 +69,29 @@ Future<void> showAlertDialog(BuildContext context, String title, List<Widget> bo
   );
 }
 
-void showSharingSheet(BuildContext context, ShareLinks links,
-    {bool showTimestampOption = false}) {
+void showSharingSheet(BuildContext context, ShareLinks links, {bool showTimestampOption = false}) {
   var locals = AppLocalizations.of(context)!;
 
   bool shareWithTimestamp = false;
   Future<Duration?> getTimestamp() async {
     if (shareWithTimestamp) {
-      return PlayerController.to()
-          ?.videoController
-          ?.videoPlayerController
-          ?.position;
+      return PlayerController.to()?.videoController?.videoPlayerController?.position;
     }
     return null;
   }
 
   showModalBottomSheet<void>(
-      context: context,
-      builder: (BuildContext context) {
+    context: context,
+    builder: (BuildContext context) {
       return StatefulBuilder(
         builder: (BuildContext context, StateSetter setState) {
-        return Container(
+          setShowTimeStamp(bool? value) {
+            setState(() {
+              shareWithTimestamp = value ?? false;
+            });
+          }
+
+          return Container(
             height: showTimestampOption ? 200 : 150,
             width: double.infinity,
             child: Column(
@@ -101,8 +103,7 @@ void showSharingSheet(BuildContext context, ShareLinks links,
                   onPressed: () async {
                     final timestamp = await getTimestamp();
 
-                    Share.share(links.getInvidiousLink(
-                        db.getCurrentlySelectedServer(), timestamp?.inSeconds));
+                    Share.share(links.getInvidiousLink(db.getCurrentlySelectedServer(), timestamp?.inSeconds));
                     Navigator.of(context).pop();
                   },
                 ),
@@ -125,19 +126,18 @@ void showSharingSheet(BuildContext context, ShareLinks links,
                   },
                 ),
                 if (showTimestampOption)
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Checkbox(
-                        value: shareWithTimestamp,
-                      onChanged: (bool? newValue) {
-                        setState(() {
-                            shareWithTimestamp = newValue ?? false;
-                        });
-                      },
+                  InkWell(
+                    onTap: () => setShowTimeStamp(!shareWithTimestamp),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Checkbox(
+                          value: shareWithTimestamp,
+                          onChanged: setShowTimeStamp,
+                        ),
+                        Text(locals.shareLinkWithTimestamp),
+                      ],
                     ),
-                    Text(locals.shareLinkWithTimestamp),
-                  ],
                   )
               ],
             ),
@@ -145,7 +145,7 @@ void showSharingSheet(BuildContext context, ShareLinks links,
         },
       );
     },
-        );
+  );
 }
 
 double getScreenWidth() {

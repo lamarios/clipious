@@ -16,6 +16,9 @@ class MiniPlayerControls extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ColorScheme colors = Theme.of(context).colorScheme;
+
+    bool enablePrevNext = controller.offlineVideos.length > 1 || controller.videos.length > 1;
+
     return Padding(
       padding: controller.isMini ? EdgeInsets.zero : const EdgeInsets.all(8.0),
       child: Container(
@@ -35,7 +38,7 @@ class MiniPlayerControls extends StatelessWidget {
                 children: [
                   IconButton(
                       style: buttonStyle,
-                      onPressed: controller.videos.length > 1 ? _.playPrevious : null,
+                      onPressed: enablePrevNext ? _.playPrevious : null,
                       icon: const Icon(
                         Icons.skip_previous,
                       )),
@@ -46,7 +49,7 @@ class MiniPlayerControls extends StatelessWidget {
                         _.isPlaying() ? Icons.pause : Icons.play_arrow,
                       )),
                   IconButton(
-                      onPressed: controller.videos.length > 1 ? _.playNext : null,
+                      onPressed: enablePrevNext ? _.playNext : null,
                       style: buttonStyle,
                       icon: const Icon(
                         Icons.skip_next,

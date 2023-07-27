@@ -47,6 +47,45 @@ class VideoView extends StatelessWidget {
             actions: _.loadingVideo || _.video == null
                 ? []
                 : [
+                    AnimatedSwitcher(
+                        duration: animationDuration,
+                        child: _.downloading
+                            ? Stack(
+                                alignment: Alignment.center,
+                                children: [
+                                  IconButton(
+                                    icon: Icon(
+                                      Icons.add,
+                                      color: colorScheme.background,
+                                    ),
+                                    onPressed: () {},
+                                  ),
+                                  SizedBox(
+                                      height: 15,
+                                      width: 15,
+                                      child: CircularProgressIndicator(
+                                        value: _.downloadProgress == 0 ? null : _.downloadProgress,
+                                        strokeWidth: 2,
+                                      ))
+                                ],
+                              )
+                            : Stack(
+                                children: [
+                                  IconButton(
+                                      onPressed: _.isDownloaded && !_.downloadFailed ? null : _.downloadVideo,
+                                      icon: _.isDownloaded && !_.downloadFailed ? const Icon(Icons.download_done) : const Icon(Icons.download)),
+                                  Positioned(
+                                      right: 5,
+                                      top: 5,
+                                      child: _.downloadFailed
+                                          ? const Icon(
+                                              Icons.error,
+                                              size: 15,
+                                              color: Colors.red,
+                                            )
+                                          : const SizedBox.shrink())
+                                ],
+                              )),
                     Visibility(
                       visible: _.video != null,
                       child: VideoShareButton(video: _.video!),

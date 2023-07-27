@@ -1,3 +1,4 @@
+import 'package:animate_to/animate_to.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
@@ -10,6 +11,8 @@ import 'package:invidious/views/components/videoThumbnail.dart';
 import 'package:invidious/views/video/videoModalSheet.dart';
 import 'package:logging/logging.dart';
 
+import '../../controllers/downloadController.dart';
+import '../../models/baseVideo.dart';
 import '../../models/imageObject.dart';
 import '../../utils.dart';
 import '../channel.dart';
@@ -17,8 +20,9 @@ import '../video.dart';
 
 class VideoListItem extends StatelessWidget {
   final VideoInList video;
+  final bool animateDownload;
 
-  VideoListItem({super.key, required this.video});
+  VideoListItem({super.key, required this.video, this.animateDownload = false});
 
   final log = Logger('VideoInList');
 
@@ -37,12 +41,12 @@ class VideoListItem extends StatelessWidget {
 
     TextStyle filterStyle = TextStyle(fontSize: 11, color: colorScheme.secondary.withOpacity(0.7));
 
-    return GetBuilder(
+    var widget = GetBuilder(
       init: VideoInListController(video),
       tag: video.videoId,
       builder: (_) => InkWell(
         onTap: () => openVideo(context, _),
-        onLongPress: _.video.filtered ? null : () => VideoModalSheet.showVideoModalSheet(context, video),
+        onLongPress: _.video.filtered ? null : () => VideoModalSheet.showVideoModalSheet(context, video, animateDownload: animateDownload),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
@@ -185,5 +189,32 @@ class VideoListItem extends StatelessWidget {
         ),
       ),
     );
+
+    return animateDownload
+        ? AnimateFrom<BaseVideo>(
+            value: video,
+            builder: (context, child, animation) {
+              /// You can build your animation inside this builder
+              ///
+              /// By default I'm using a TweenSequanceto scale up then
+              /// Start scaling down at the middle of the animation
+              return ScaleTransition(
+                scale: TweenSequence<double>([
+                  TweenSequenceItem<double>(
+                    tween: Tween(begin: 1, end: 1.1),
+                    weight: 50,
+                  ),
+                  TweenSequenceItem<double>(
+                    tween: Tween(begin: 1.1, end: .2),
+                    weight: 50,
+                  ),
+                ]).animate(animation),
+                child: child,
+              );
+            },
+            key: DownloadController.to()?.animateToController.tag('video-animate-to-${video.videoId}') ?? GlobalKey(),
+            child: widget,
+          )
+        : widget;
   }
 }

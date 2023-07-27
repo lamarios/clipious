@@ -14,12 +14,9 @@ import '../models/paginatedList.dart';
 class VideoList extends StatelessWidget {
   final PaginatedList<VideoInList> paginatedVideoList;
   final String? tags;
+  final bool animateDownload;
 
-  const VideoList({
-    super.key,
-    required this.paginatedVideoList,
-    this.tags,
-  });
+  const VideoList({super.key, required this.paginatedVideoList, this.tags, this.animateDownload = false});
 
 /*
   @override
@@ -70,7 +67,7 @@ class VideoList extends StatelessWidget {
                               crossAxisSpacing: 5,
                               mainAxisSpacing: 5,
                               childAspectRatio: getGridAspectRatio(context),
-                              children: (_.items).map((v) => VideoListItem(key: ValueKey(v.videoId), video: v)).toList()),
+                              children: (_.items).map((v) => VideoListItem(key: ValueKey(v.videoId), video: v, animateDownload: animateDownload)).toList()),
                         ),
                       ),
                     ),

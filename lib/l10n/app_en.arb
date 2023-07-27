@@ -820,5 +820,33 @@
     "rememberPlaybackSpeedDescription": "Automatically set playback speed to the last speed selected",
     "@rememberPlaybackSpeedDescription": {
         "description": "Settings description for remembering playback speed"
+    },
+    "downloads": "Downloads",
+    "@downloads": {
+        "description": "Downloads"
+    },
+    "download": "Download",
+    "@download": {
+        "description": "A single download or CTA for downloading a video"
+    },
+    "videoAlreadyDownloaded": "Video already downloaded",
+    "@videoAlreadyDownloaded": {
+        "description": "Message when a user tries to download a video he already has"
+    },
+    "noDownloadedVideos": "No downloaded videos, browse, long press on a video in a list of tap the download button on a video screen to download",
+    "@noDownloadedVideos": {
+        "description": "Message showing when the user goes to the download screen but there are no offline videos."
+    },
+    "downloadsPlayAll": "Play all",
+    "@downloadsPlayAll": {
+        "description": "Button to play all downloaded videos"
+    },
+    "videoDownloadStarted": "Video download started",
+    "@videoDownloadStarted": {
+        "description": "Message when a video starts being downloaded"
+    },
+    "videoFailedDownloadRetry": "Download failed, tap to retry",
+    "@videoFailedDownloadRetry": {
+        "description": "Shown on download manager when a download fails and prompt the user to retry"
     }
 }

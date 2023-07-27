@@ -21,7 +21,7 @@ class MiniPlayer extends StatelessWidget {
     return GetBuilder<MiniPlayerController>(
       init: MiniPlayerController(),
       builder: (_) {
-        bool showPlayer = _.currentlyPlaying != null;
+        bool showPlayer = _.isPlaying;
         bool onPhone = getDeviceType() == DeviceType.phone;
 
         Widget videoPlayer = showPlayer
@@ -29,7 +29,8 @@ class MiniPlayer extends StatelessWidget {
                 padding: _.isMini || _.isPip ? EdgeInsets.zero : const EdgeInsets.only(top: 8, left: 8.0, right: 8),
                 child: VideoPlayer(
                   key: const ValueKey('player'),
-                  video: _.currentlyPlaying!,
+                  video: _.currentlyPlaying,
+                  offlineVideo: _.offlineCurrentlyPlaying,
                   miniPlayer: false,
                 ),
               )
@@ -77,11 +78,15 @@ class MiniPlayer extends StatelessWidget {
                                         icon: const Icon(Icons.expand_more),
                                         onPressed: _.showMiniPlayer,
                                       ),
-                                      actions: _.isHidden
+                                      actions: _.isHidden || _.currentlyPlaying == null
                                           ? []
                                           : [
                                               Visibility(
+                                                visible: _.isPlaying,
+                                                child: VideoShareButton(
+                                                  video: _.currentlyPlaying!,
                                                   showTimestampOption: true,
+                                                ),
                                               ),
                                             ],
                                     ),
