@@ -1,344 +1,344 @@
 {
-  "privatePlaylist": "Privada",
-  "@privatePlaylist": {
-    "description": "Private playlist"
-  },
-  "playlists": "Llistes de reproducció",
-  "@playlists": {
-    "description": "User playlists"
-  },
-  "popular": "Populars",
-  "@popular": {
-    "description": "Popular videos title"
-  },
-  "noVideoInPlayList": "No hi ha cap vídeo en la llista",
-  "@noVideoInPlayList": {
-    "description": "When no videos in the playlist"
-  },
-  "removeFromPlayList": "Treu de la llista",
-  "@removeFromPlayList": {
-    "description": "Menu item description to show remove a video from a playlist"
-  },
-  "subscriptions": "Subscripcions",
-  "@subscriptions": {
-    "description": "User subscriptions"
-  },
-  "publicPlaylist": "Pública",
-  "@publicPlaylist": {
-    "description": "Public playlist"
-  },
-  "trending": "En tendència",
-  "@trending": {
-    "description": "Trending videos title"
-  },
-  "createNewPlaylist": "Crea una llista nova",
-  "@createNewPlaylist": {
-    "description": "Button label to create a new playlist when the user wants to add a video to a playlist"
-  },
-  "deletePlayListQ": "Voleu suprimir la llista?",
-  "@deletePlayListQ": {
-    "description": "Ask user to delete a playlist"
-  },
-  "irreversibleAction": "Aquesta acció no es pot desfer",
-  "@irreversibleAction": {
-    "description": "Tell the user that the action cannot be undone"
-  },
-  "addPlayList": "Afegeix una llista",
-  "@addPlayList": {
-    "description": "Title for add playlist dialog"
-  },
-  "playListName": "Nom de la llista",
-  "@playListName": {
-    "description": "Place holder for new playlist name text field"
-  },
-  "playlistVisibility": "Visibilitat",
-  "@playlistVisibility": {
-    "description": "Dropdown label for playlist visibility"
-  },
-  "cancel": "Cancel·la",
-  "@cancel": {
-    "description": "Cancel button label"
-  },
-  "add": "Afegeix",
-  "@add": {
-    "description": "Add button abel"
-  },
-  "streams": "Retransmissions",
-  "@streams": {
-    "description": "Streams label"
-  },
-  "latestVideos": "Vídeos més recents",
-  "@latestVideos": {
-    "description": "Latest channel videos"
-  },
-  "ok": "D’acord",
-  "@ok": {
-    "description": "Ok"
-  },
-  "noChannels": "No hi ha cap canal",
-  "@noChannels": {
-    "description": "when there are no channels to display"
-  },
-  "noPlaylists": "No hi ha cap llista",
-  "@noPlaylists": {
-    "description": "when there are no playlists to display"
-  },
-  "couldntLoadVideo": "No s’ha pogut carregar el vídeo",
-  "@couldntLoadVideo": {
-    "description": "Message to display when a video can't be loaded"
-  },
-  "comments": "Comentaris",
-  "@comments": {
-    "description": "Comments label"
-  },
-  "recommended": "Recomanats",
-  "@recommended": {
-    "description": "Recommended label"
-  },
-  "shareYoutubeLink": "Comparteix l’enllaç del YouTube",
-  "@shareYoutubeLink": {
-    "description": "asking user to share youtube link"
-  },
-  "subscribe": "Subscriu-m’hi",
-  "@subscribe": {
-    "description": "Label for user to subscribe to a channel"
-  },
-  "selectPlaylist": "Seleccioneu una llista",
-  "@selectPlaylist": {
-    "description": "Title when users wants to add a video to a playlist"
-  },
-  "loadMore": "Carrega’n més",
-  "@loadMore": {
-    "description": "CTA to load more"
-  },
-  "startUsingClipious": "Comença a usar el Clipious",
-  "@startUsingClipious": {
-    "description": "button label to start using the app"
-  },
-  "videoAddedToPlaylist": "S’ha afegit el vídeo a la llista",
-  "@videoAddedToPlaylist": {
-    "description": "Pop up message when a video was added to a playlist"
-  },
-  "newSorting": "Nous",
-  "@newSorting": {
-    "description": "Content sorting: new"
-  },
-  "topSorting": "Populars",
-  "@topSorting": {
-    "description": "Content sorting: top"
-  },
-  "servers": "Servidors",
-  "@servers": {
-    "description": "Server management settings category"
-  },
-  "manageServers": "Gestiona els servidors",
-  "@manageServers": {
-    "description": "Settings to manage servers"
-  },
-  "streamIsLive": "En directe",
-  "@streamIsLive": {
-    "description": "Label when a video is a live stream"
-  },
-  "showOnStart": "Seleccioneu el que es mostrarà quan s’iniciï l’aplicació",
-  "@showOnStart": {
-    "description": "Title of dialog asking which screen the users prefers to see"
-  },
-  "settings": "Paràmetres",
-  "@settings": {
-    "description": "Settings title"
-  },
-  "browsing": "Exploració",
-  "@browsing": {
-    "description": "video browsing preferences"
-  },
-  "country": "País",
-  "@country": {
-    "description": "Country label"
-  },
-  "whenAppStartsShow": "Quan s’iniciï l’aplicació, mostra…",
-  "@whenAppStartsShow": {
-    "description": "Setting title for selecting the screen to show on start"
-  },
-  "useSponsorBlock": "Usa l’SponsorBlock",
-  "@useSponsorBlock": {
-    "description": "label for sponsorblock checkbox"
-  },
-  "about": "Quant a",
-  "@about": {
-    "description": "About"
-  },
-  "name": "Nom",
-  "@name": {
-    "description": "NAme label"
-  },
-  "package": "Paquet",
-  "@package": {
-    "description": "package label"
-  },
-  "useThisServer": "Usa aquest servidor",
-  "@useThisServer": {
-    "description": "Use this server label"
-  },
-  "publicServers": "Servidors públics",
-  "@publicServers": {
-    "description": "Public servers label"
-  },
-  "loadingPublicServer": "S’estan carregant els servidors públics",
-  "@loadingPublicServer": {
-    "description": "Message telling users the app is loading the list of public servers"
-  },
-  "delete": "Suprimeix",
-  "@delete": {
-    "description": "Delete label"
-  },
-  "yourServers": "Els vostres servidors",
-  "@yourServers": {
-    "description": "Your servers label"
-  },
-  "useDash": "Utilitza el DASH",
-  "@useDash": {
-    "description": "Label on video options if a user wants to switch to dash urls instead of the regular quality selection"
-  },
-  "videoPlayer": "Reproductor de vídeos",
-  "@videoPlayer": {
-    "description": "Title for video player related options"
-  },
-  "videoUnlisted": "Descatalogat",
-  "@videoUnlisted": {
-    "description": "Status of a video that is only accessible by link"
-  },
-  "videoIsFamilyFriendly": "Per a tota la família",
-  "@videoIsFamilyFriendly": {
-    "description": "Displayed only when a video is family friendly"
-  },
-  "authentication": "Autenticació",
-  "@authentication": {
-    "description": "Label for server settings related to authentications"
-  },
-  "tokenLogin": "Inicia la sessió amb un testimoni",
-  "@tokenLogin": {
-    "description": "Textto login to a server using the recommended way"
-  },
-  "logout": "Finalitza la sessió",
-  "@logout": {
-    "description": "CTA to logout of a server"
-  },
-  "videoQueue": "Cua de vídeos",
-  "@videoQueue": {
-    "description": "Label for button to display the video queue"
-  },
-  "addToQueueList": "Afegeix a la cua",
-  "@addToQueueList": {
-    "description": "Label on button to add a video to the queue list"
-  },
-  "addRecommendedToQueue": "Reprodueix automàticament el recomanat següent",
-  "@addRecommendedToQueue": {
-    "description": "Switch when playing a video to automatically add the recommended videos to the video queue"
-  },
-  "blackBackground": "Fons negre",
-  "@blackBackground": {
-    "description": "Settings name for black background"
-  },
-  "search": "Cerca",
-  "@search": {
-    "description": "search title"
-  },
-  "subtitleFontSize": "Mida de lletra dels subtítols",
-  "@subtitleFontSize": {
-    "description": "Settings label for the size of the subtitles"
-  },
-  "themeLight": "Clar",
-  "@themeLight": {
-    "description": "Light theme"
-  },
-  "themeDark": "Fosc",
-  "@themeDark": {
-    "description": "Dark theme"
-  },
-  "requiresRestart": "Cal reiniciar l’aplicació",
-  "@requiresRestart": {
-    "description": "Requires app restart label"
-  },
-  "appLanguage": "Llengua de l’aplicació",
-  "@appLanguage": {
-    "description": "Select app language"
-  },
-  "nVideos": "{count, plural, =0{Cap vídeo} =1{1 vídeo} other{{count} vídeos}}",
-  "@nVideos": {
-    "description": "One or more videos",
-    "placeholders": {
-      "count": {
-        "type": "num",
-        "format": "compact"
-      }
+    "privatePlaylist": "Privada",
+    "@privatePlaylist": {
+        "description": "Private playlist"
+    },
+    "playlists": "Llistes de reproducció",
+    "@playlists": {
+        "description": "User playlists"
+    },
+    "popular": "Populars",
+    "@popular": {
+        "description": "Popular videos title"
+    },
+    "noVideoInPlayList": "No hi ha cap vídeo en la llista",
+    "@noVideoInPlayList": {
+        "description": "When no videos in the playlist"
+    },
+    "removeFromPlayList": "Treu de la llista",
+    "@removeFromPlayList": {
+        "description": "Menu item description to show remove a video from a playlist"
+    },
+    "subscriptions": "Subscripcions",
+    "@subscriptions": {
+        "description": "User subscriptions"
+    },
+    "publicPlaylist": "Pública",
+    "@publicPlaylist": {
+        "description": "Public playlist"
+    },
+    "trending": "En tendència",
+    "@trending": {
+        "description": "Trending videos title"
+    },
+    "createNewPlaylist": "Crea una llista nova",
+    "@createNewPlaylist": {
+        "description": "Button label to create a new playlist when the user wants to add a video to a playlist"
+    },
+    "deletePlayListQ": "Voleu suprimir la llista?",
+    "@deletePlayListQ": {
+        "description": "Ask user to delete a playlist"
+    },
+    "irreversibleAction": "Aquesta acció no es pot desfer",
+    "@irreversibleAction": {
+        "description": "Tell the user that the action cannot be undone"
+    },
+    "addPlayList": "Afegeix una llista",
+    "@addPlayList": {
+        "description": "Title for add playlist dialog"
+    },
+    "playListName": "Nom de la llista",
+    "@playListName": {
+        "description": "Place holder for new playlist name text field"
+    },
+    "playlistVisibility": "Visibilitat",
+    "@playlistVisibility": {
+        "description": "Dropdown label for playlist visibility"
+    },
+    "cancel": "Cancel·la",
+    "@cancel": {
+        "description": "Cancel button label"
+    },
+    "add": "Afegeix",
+    "@add": {
+        "description": "Add button abel"
+    },
+    "streams": "Retransmissions",
+    "@streams": {
+        "description": "Streams label"
+    },
+    "latestVideos": "Vídeos més recents",
+    "@latestVideos": {
+        "description": "Latest channel videos"
+    },
+    "ok": "D’acord",
+    "@ok": {
+        "description": "Ok"
+    },
+    "noChannels": "No hi ha cap canal",
+    "@noChannels": {
+        "description": "when there are no channels to display"
+    },
+    "noPlaylists": "No hi ha cap llista",
+    "@noPlaylists": {
+        "description": "when there are no playlists to display"
+    },
+    "couldntLoadVideo": "No s’ha pogut carregar el vídeo",
+    "@couldntLoadVideo": {
+        "description": "Message to display when a video can't be loaded"
+    },
+    "comments": "Comentaris",
+    "@comments": {
+        "description": "Comments label"
+    },
+    "recommended": "Recomanats",
+    "@recommended": {
+        "description": "Recommended label"
+    },
+    "shareYoutubeLink": "Comparteix l’enllaç del YouTube",
+    "@shareYoutubeLink": {
+        "description": "asking user to share youtube link"
+    },
+    "subscribe": "Subscriu-m’hi",
+    "@subscribe": {
+        "description": "Label for user to subscribe to a channel"
+    },
+    "selectPlaylist": "Seleccioneu una llista",
+    "@selectPlaylist": {
+        "description": "Title when users wants to add a video to a playlist"
+    },
+    "loadMore": "Carrega’n més",
+    "@loadMore": {
+        "description": "CTA to load more"
+    },
+    "startUsingClipious": "Comença a usar el Clipious",
+    "@startUsingClipious": {
+        "description": "button label to start using the app"
+    },
+    "videoAddedToPlaylist": "S’ha afegit el vídeo a la llista",
+    "@videoAddedToPlaylist": {
+        "description": "Pop up message when a video was added to a playlist"
+    },
+    "newSorting": "Nous",
+    "@newSorting": {
+        "description": "Content sorting: new"
+    },
+    "topSorting": "Populars",
+    "@topSorting": {
+        "description": "Content sorting: top"
+    },
+    "servers": "Servidors",
+    "@servers": {
+        "description": "Server management settings category"
+    },
+    "manageServers": "Gestiona els servidors",
+    "@manageServers": {
+        "description": "Settings to manage servers"
+    },
+    "streamIsLive": "En directe",
+    "@streamIsLive": {
+        "description": "Label when a video is a live stream"
+    },
+    "showOnStart": "Seleccioneu el que es mostrarà quan s’iniciï l’aplicació",
+    "@showOnStart": {
+        "description": "Title of dialog asking which screen the users prefers to see"
+    },
+    "settings": "Paràmetres",
+    "@settings": {
+        "description": "Settings title"
+    },
+    "browsing": "Exploració",
+    "@browsing": {
+        "description": "video browsing preferences"
+    },
+    "country": "País",
+    "@country": {
+        "description": "Country label"
+    },
+    "whenAppStartsShow": "Quan s’iniciï l’aplicació, mostra…",
+    "@whenAppStartsShow": {
+        "description": "Setting title for selecting the screen to show on start"
+    },
+    "useSponsorBlock": "Usa l’SponsorBlock",
+    "@useSponsorBlock": {
+        "description": "label for sponsorblock checkbox"
+    },
+    "about": "Quant a",
+    "@about": {
+        "description": "About"
+    },
+    "name": "Nom",
+    "@name": {
+        "description": "NAme label"
+    },
+    "package": "Paquet",
+    "@package": {
+        "description": "package label"
+    },
+    "useThisServer": "Usa aquest servidor",
+    "@useThisServer": {
+        "description": "Use this server label"
+    },
+    "publicServers": "Servidors públics",
+    "@publicServers": {
+        "description": "Public servers label"
+    },
+    "loadingPublicServer": "S’estan carregant els servidors públics",
+    "@loadingPublicServer": {
+        "description": "Message telling users the app is loading the list of public servers"
+    },
+    "delete": "Suprimeix",
+    "@delete": {
+        "description": "Delete label"
+    },
+    "yourServers": "Els vostres servidors",
+    "@yourServers": {
+        "description": "Your servers label"
+    },
+    "useDash": "Utilitza el DASH",
+    "@useDash": {
+        "description": "Label on video options if a user wants to switch to dash urls instead of the regular quality selection"
+    },
+    "videoPlayer": "Reproductor de vídeos",
+    "@videoPlayer": {
+        "description": "Title for video player related options"
+    },
+    "videoUnlisted": "Descatalogat",
+    "@videoUnlisted": {
+        "description": "Status of a video that is only accessible by link"
+    },
+    "videoIsFamilyFriendly": "Per a tota la família",
+    "@videoIsFamilyFriendly": {
+        "description": "Displayed only when a video is family friendly"
+    },
+    "authentication": "Autenticació",
+    "@authentication": {
+        "description": "Label for server settings related to authentications"
+    },
+    "tokenLogin": "Inicia la sessió amb un testimoni",
+    "@tokenLogin": {
+        "description": "Textto login to a server using the recommended way"
+    },
+    "logout": "Finalitza la sessió",
+    "@logout": {
+        "description": "CTA to logout of a server"
+    },
+    "videoQueue": "Cua de vídeos",
+    "@videoQueue": {
+        "description": "Label for button to display the video queue"
+    },
+    "addToQueueList": "Afegeix a la cua",
+    "@addToQueueList": {
+        "description": "Label on button to add a video to the queue list"
+    },
+    "addRecommendedToQueue": "Reprodueix automàticament el recomanat següent",
+    "@addRecommendedToQueue": {
+        "description": "Switch when playing a video to automatically add the recommended videos to the video queue"
+    },
+    "blackBackground": "Fons negre",
+    "@blackBackground": {
+        "description": "Settings name for black background"
+    },
+    "search": "Cerca",
+    "@search": {
+        "description": "search title"
+    },
+    "subtitleFontSize": "Mida de lletra dels subtítols",
+    "@subtitleFontSize": {
+        "description": "Settings label for the size of the subtitles"
+    },
+    "themeLight": "Clar",
+    "@themeLight": {
+        "description": "Light theme"
+    },
+    "themeDark": "Fosc",
+    "@themeDark": {
+        "description": "Dark theme"
+    },
+    "requiresRestart": "Cal reiniciar l’aplicació",
+    "@requiresRestart": {
+        "description": "Requires app restart label"
+    },
+    "appLanguage": "Llengua de l’aplicació",
+    "@appLanguage": {
+        "description": "Select app language"
+    },
+    "nVideos": "{count, plural, =0{Cap vídeo} =1{1 vídeo} other{{count} vídeos}}",
+    "@nVideos": {
+        "description": "One or more videos",
+        "placeholders": {
+            "count": {
+                "type": "num",
+                "format": "compact"
+            }
+        }
+    },
+    "unlistedPlaylist": "Descatalogada",
+    "@unlistedPlaylist": {
+        "description": "Unlisted playlist"
+    },
+    "info": "Informació",
+    "@info": {
+        "description": "Info label"
+    },
+    "errorAddingVideoToPlaylist": "S’ha produït un error en afegir el vídeo a la llista",
+    "@errorAddingVideoToPlaylist": {
+        "description": "Error while adding video to playlist"
+    },
+    "videos": "Vídeos",
+    "@videos": {
+        "description": "Videos label"
+    },
+    "username": "Nom d’usuari",
+    "@username": {
+        "description": "Username label for login to a server"
+    },
+    "videoListed": "Públic",
+    "@videoListed": {
+        "description": "Status of a publicly available video"
+    },
+    "cookieLogin": "Inicia la sessió amb una galeta",
+    "@cookieLogin": {
+        "description": "Text to login to a server using the cookie jar method"
+    },
+    "appearance": "Aspecte",
+    "@appearance": {
+        "description": "Settings category title"
+    },
+    "useDynamicTheme": "Colors dinàmics",
+    "@useDynamicTheme": {
+        "description": ""
+    },
+    "password": "Contrasenya",
+    "@password": {
+        "description": "Password label for login to a server"
+    },
+    "audio": "Àudio",
+    "@audio": {
+        "description": "Name TV ui audio settings"
+    },
+    "subtitles": "Subtítols",
+    "@subtitles": {
+        "description": "Name of TV ui subtitles settings"
+    },
+    "followSystem": "Segueix el sistema",
+    "@followSystem": {
+        "description": "Follow system label"
+    },
+    "shareInvidiousLink": "Comparteix l’enllaç de l’Invidious",
+    "@shareInvidiousLink": {
+        "description": "asking user to share invidious link"
+    },
+    "themeBrightness": "Tema",
+    "@themeBrightness": {
+        "description": "Ask the user to user dark / light / system theme"
+    },
+    "version": "Versió",
+    "@version": {
+        "description": "version label"
+    },
+    "addServer": "Afegeix un servidor",
+    "@addServer": {
+        "description": "Add server label"
     }
-  },
-  "unlistedPlaylist": "Descatalogada",
-  "@unlistedPlaylist": {
-    "description": "Unlisted playlist"
-  },
-  "info": "Informació",
-  "@info": {
-    "description": "Info label"
-  },
-  "errorAddingVideoToPlaylist": "S’ha produït un error en afegir el vídeo a la llista",
-  "@errorAddingVideoToPlaylist": {
-    "description": "Error while adding video to playlist"
-  },
-  "videos": "Vídeos",
-  "@videos": {
-    "description": "Videos label"
-  },
-  "username": "Nom d’usuari",
-  "@username": {
-    "description": "Username label for login to a server"
-  },
-  "videoListed": "Públic",
-  "@videoListed": {
-    "description": "Status of a publicly available video"
-  },
-  "cookieLogin": "Inicia la sessió amb una galeta",
-  "@cookieLogin": {
-    "description": "Text to login to a server using the cookie jar method"
-  },
-  "appearance": "Aspecte",
-  "@appearance": {
-    "description": "Settings category title"
-  },
-  "useDynamicTheme": "Colors dinàmics",
-  "@useDynamicTheme": {
-    "description": ""
-  },
-  "password": "Contrasenya",
-  "@password": {
-    "description": "Password label for login to a server"
-  },
-  "audio": "Àudio",
-  "@audio": {
-    "description": "Name TV ui audio settings"
-  },
-  "subtitles": "Subtítols",
-  "@subtitles": {
-    "description": "Name of TV ui subtitles settings"
-  },
-  "followSystem": "Segueix el sistema",
-  "@followSystem": {
-    "description": "Follow system label"
-  },
-  "shareInvidiousLink": "Comparteix l’enllaç de l’Invidious",
-  "@shareInvidiousLink": {
-    "description": "asking user to share invidious link"
-  },
-  "themeBrightness": "Tema",
-  "@themeBrightness": {
-    "description": "Ask the user to user dark / light / system theme"
-  },
-  "version": "Versió",
-  "@version": {
-    "description": "version label"
-  },
-  "addServer": "Afegeix un servidor",
-  "@addServer": {
-    "description": "Add server label"
-  }
 }

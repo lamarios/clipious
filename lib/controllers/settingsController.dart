@@ -61,7 +61,7 @@ class SettingsController extends GetxController {
     update();
   }
 
-  toggleFillFullscreen(bool value){
+  toggleFillFullscreen(bool value) {
     db.saveSetting(SettingsValue(FILL_FULLSCREEN, value.toString()));
     fillFullscreen = db.getSettings(FILL_FULLSCREEN)?.value == 'true';
     update();
