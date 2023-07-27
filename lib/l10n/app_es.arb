@@ -816,5 +816,9 @@
   "videoAddedToQueue": "Vídeo añadido a la cola",
   "@videoAddedToQueue": {
     "description": "Pop up message when a video was added at the end of the video queue"
+  },
+  "shareLinkWithTimestamp": "Agregar marca de tiempo",
+  "@shareLinkWithTimestamp": {
+    "description": "asking user to share link along with timestamp"
   }
 }
