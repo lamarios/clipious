@@ -816,5 +816,37 @@
   "videoAddedToQueue": "Відео додано до черги",
   "@videoAddedToQueue": {
     "description": "Pop up message when a video was added at the end of the video queue"
+  },
+  "shareLinkWithTimestamp": "Додати мітку часу",
+  "@shareLinkWithTimestamp": {
+    "description": "asking user to share link along with timestamp"
+  },
+  "download": "Завантаження",
+  "@download": {
+    "description": "A single download or CTA for downloading a video"
+  },
+  "videoAlreadyDownloaded": "Відео вже завантажено",
+  "@videoAlreadyDownloaded": {
+    "description": "Message when a user tries to download a video he already has"
+  },
+  "downloadsPlayAll": "Відтворити все",
+  "@downloadsPlayAll": {
+    "description": "Button to play all downloaded videos"
+  },
+  "downloads": "Завантаження",
+  "@downloads": {
+    "description": "Downloads"
+  },
+  "noDownloadedVideos": "Немає завантажених відео, переглядайте, довго натискайте відео в списку, натисніть кнопку завантаження на екрані відео, щоб завантажити",
+  "@noDownloadedVideos": {
+    "description": "Message showing when the user goes to the download screen but there are no offline videos."
+  },
+  "videoDownloadStarted": "Почалося завантаження відео",
+  "@videoDownloadStarted": {
+    "description": "Message when a video starts being downloaded"
+  },
+  "videoFailedDownloadRetry": "Завантаження не вдалося, торкніться, щоб повторити спробу",
+  "@videoFailedDownloadRetry": {
+    "description": "Shown on download manager when a download fails and prompt the user to retry"
   }
 }
