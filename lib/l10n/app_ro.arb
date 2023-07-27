@@ -816,5 +816,9 @@
   "lockFullScreenToLandscapeDescription": "Blochează orientarea ecranului complet pe baza formatului video, peisaj pentru video lat și portret pentru videoclipuri portret",
   "@lockFullScreenToLandscapeDescription": {
     "description": "Setting description for forcing video to landscape when in full screen"
+  },
+  "shareLinkWithTimestamp": "Adaugă timp de cod",
+  "@shareLinkWithTimestamp": {
+    "description": "asking user to share link along with timestamp"
   }
 }
