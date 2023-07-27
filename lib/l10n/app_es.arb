@@ -804,5 +804,17 @@
   "videoFiltersExplanation": "Oculta u ofusca los videos de todas las fuentes de video en la aplicación según los filtros definidos a continuación. Esto te permite, por ejemplo, ocultar spoilers deportivos u ocultar cortos de un determinado canal.",
   "@videoFiltersExplanation": {
     "description": "Description on how filter work"
+  },
+  "fillFullscreen": "Maximiza el video para que se ajuste a la pantalla",
+  "@fillFullscreen": {
+    "description": "Title to maximize video to fit screen"
+  },
+  "fillFullscreenDescription": "Ajusta el video para que la imagen se extienda por toda la pantalla en visualización horizontal",
+  "@fillFullscreenDescription": {
+    "description": "Setting description for filling video to screen in landscape"
+  },
+  "videoAddedToQueue": "Vídeo añadido a la cola",
+  "@videoAddedToQueue": {
+    "description": "Pop up message when a video was added at the end of the video queue"
   }
 }

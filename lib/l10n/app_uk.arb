@@ -804,5 +804,17 @@
   "lockFullScreenToLandscapeDescription": "Блокує повноекранну орієнтацію залежно від формату відео: альбомну для широкоформатного відео та книжкову для відео в книжковій орієнтації",
   "@lockFullScreenToLandscapeDescription": {
     "description": "Setting description for forcing video to landscape when in full screen"
+  },
+  "fillFullscreen": "Розгорнути відео до розміру екрана",
+  "@fillFullscreen": {
+    "description": "Title to maximize video to fit screen"
+  },
+  "fillFullscreenDescription": "Налаштовує відео на заповнення всього екрану в альбомному режимі",
+  "@fillFullscreenDescription": {
+    "description": "Setting description for filling video to screen in landscape"
+  },
+  "videoAddedToQueue": "Відео додано до черги",
+  "@videoAddedToQueue": {
+    "description": "Pop up message when a video was added at the end of the video queue"
   }
 }
