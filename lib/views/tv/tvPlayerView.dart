@@ -106,7 +106,7 @@ class TvPlayerView extends StatelessWidget {
                                       children: [
                                         Text(
                                           _.currentlyPlaying.title,
-                                          style: textTheme.headlineLarge,
+                                          style: textTheme.headlineLarge?.copyWith(color: Colors.white),
                                         ),
                                         Padding(
                                           padding: const EdgeInsets.only(top: 16.0),
@@ -124,7 +124,7 @@ class TvPlayerView extends StatelessWidget {
                                                 padding: const EdgeInsets.only(left: 8.0, right: 20),
                                                 child: Text(
                                                   _.currentlyPlaying.author ?? '',
-                                                  style: textTheme.headlineSmall,
+                                                  style: textTheme.headlineSmall?.copyWith(color: Colors.white),
                                                 ),
                                               )
                                             ],
