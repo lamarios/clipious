@@ -4,10 +4,11 @@ import 'package:back_button_interceptor/back_button_interceptor.dart';
 import 'package:better_player/better_player.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:invidious/controllers/audioPlayerController.dart';
 import 'package:invidious/controllers/miniPlayerAwareController.dart';
 import 'package:invidious/controllers/miniPlayerProgressController.dart';
 import 'package:invidious/controllers/miniplayerControlsController.dart';
-import 'package:invidious/controllers/playerController.dart';
+import 'package:invidious/controllers/videoPlayerController.dart';
 import 'package:invidious/controllers/videoLikeController.dart';
 import 'package:invidious/database.dart';
 import 'package:invidious/globals.dart';
@@ -19,6 +20,7 @@ import '../main.dart';
 import '../models/baseVideo.dart';
 import '../models/db/downloadedVideo.dart';
 import '../models/video.dart';
+import 'interfaces/playerController.dart';
 
 const double targetHeight = 75;
 const double miniPlayerThreshold = 300;
@@ -50,12 +52,15 @@ class MiniPlayerController extends GetxController {
   bool shuffle = db.getSettings(PLAYER_SHUFFLE)?.value == 'true';
   List<String> playedVideos = [];
   Offset offset = Offset.zero;
+  bool isAudio = true;
 
   List<DownloadedVideo> offlineVideos = [];
 
   MiniPlayerController();
 
   bool get isPlaying => currentlyPlaying != null || offlineCurrentlyPlaying != null;
+
+  PlayerController? get playerController => isAudio ? AudioPlayerController.to() : VideoPlayerController.to();
 
   @override
   onReady() {
@@ -158,7 +163,7 @@ class MiniPlayerController extends GetxController {
     top = 0;
     opacity = 1;
     isHidden = false;
-    PlayerController.to()?.toggleControls(true);
+    playerController?.toggleControls(true);
     MiniPlayerAwareController.to()?.setPadding(false);
     update();
   }
@@ -169,7 +174,7 @@ class MiniPlayerController extends GetxController {
       top = null;
       isHidden = false;
       opacity = 1;
-      PlayerController.to()?.toggleControls(false);
+      playerController?.toggleControls(false);
       MiniPlayerAwareController.to()?.setPadding(true);
       update();
     }
@@ -223,7 +228,7 @@ class MiniPlayerController extends GetxController {
         } else if (offlineVideos.isNotEmpty) {
           switchToOfflineVideo(offlineVideos[currentIndex]);
         }
-        PlayerController.to()?.toggleControls(!isMini);
+        playerController?.toggleControls(!isMini);
         update();
       }
     }
@@ -243,15 +248,18 @@ class MiniPlayerController extends GetxController {
         switchToOfflineVideo(offlineVideos[currentIndex]);
       }
 
-      PlayerController.to()?.toggleControls(!isMini);
+      playerController?.toggleControls(!isMini);
       update();
     }
   }
 
-  playVideo(List<BaseVideo> v, {bool? goBack}) {
+  playVideo(List<BaseVideo> v, {bool? goBack, bool? audio}) {
     List<BaseVideo> videos = v.where((element) => !element.filtered).toList();
     if (goBack ?? false) navigatorKey.currentState?.pop();
     log.fine('Playing ${videos.length} videos');
+
+    isAudio = audio ?? false;
+
     if (videos.isNotEmpty) {
       offlineVideos = [];
       this.videos = List.from(videos, growable: true);
@@ -293,8 +301,8 @@ class MiniPlayerController extends GetxController {
       playedVideos.add(v.videoId);
     }
     progress = 0;
-    PlayerController.to()?.switchVideo(v);
-    PlayerController.to()?.toggleControls(!isMini);
+    playerController?.switchVideo(v);
+    playerController?.toggleControls(!isMini);
     update();
     VideoLikeButtonController.to(tag: VideoLikeButtonController.tags(v.videoId))?.checkVideoLikeStatus();
     MiniPlayerControlsController.to()?.setVideo(v.videoId);
@@ -434,8 +442,8 @@ class MiniPlayerController extends GetxController {
       playedVideos.add(video.videoId);
     }
     progress = 0;
-    PlayerController.to()?.switchToOfflineVideo(video);
-    PlayerController.to()?.toggleControls(!isMini);
+    playerController?.switchToOfflineVideo(video);
+    playerController?.toggleControls(!isMini);
     update();
     // VideoLikeButtonController.to(tag: VideoLikeButtonController.tags(video.videoId))?.checkVideoLikeStatus();
     // MiniPlayerControlsController.to()?.setVideo(video.videoId);

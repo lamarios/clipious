@@ -1,6 +1,6 @@
 import 'package:better_player/better_player.dart';
 import 'package:get/get.dart';
-import 'package:invidious/controllers/playerController.dart';
+import 'package:invidious/controllers/videoPlayerController.dart';
 import 'package:invidious/database.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/models/db/settings.dart';
@@ -18,16 +18,16 @@ class TvPlayerSettingsController extends GetxController {
   Tabs selected = Tabs.video;
   bool useDash = db.getSettings(USE_DASH)?.value == 'true';
 
-  List<String> get videoTrackNames => useDash || (PlayerController.to()?.video?.liveNow ?? false)
-      ? PlayerController.to()?.videoController?.betterPlayerAsmsTracks.map((e) => '${e.height}p').toSet().toList() ?? []
-      : PlayerController.to()?.videoController?.betterPlayerDataSource?.resolutions?.keys.toList() ?? [];
+  List<String> get videoTrackNames => useDash || (VideoPlayerController.to()?.video?.liveNow ?? false)
+      ? VideoPlayerController.to()?.videoController?.betterPlayerAsmsTracks.map((e) => '${e.height}p').toSet().toList() ?? []
+      : VideoPlayerController.to()?.videoController?.betterPlayerDataSource?.resolutions?.keys.toList() ?? [];
 
-  List<String> get audioTrackNames => useDash ? PlayerController.to()?.videoController?.betterPlayerAsmsAudioTracks?.map((e) => '${e.label}').toList() ?? [] : [];
+  List<String> get audioTrackNames => useDash ? VideoPlayerController.to()?.videoController?.betterPlayerAsmsAudioTracks?.map((e) => '${e.label}').toList() ?? [] : [];
 
-  List<String> get availableCaptions => PlayerController.to()?.videoController?.betterPlayerSubtitlesSourceList.map((e) => '${e.name}').toList() ?? [];
+  List<String> get availableCaptions => VideoPlayerController.to()?.videoController?.betterPlayerSubtitlesSourceList.map((e) => '${e.name}').toList() ?? [];
   final List<String> playbackSpeeds = ['0.5x', '0.75x', '1x', '1.25x', '1.5x', '1.75x', '2x', '2.25x', '2.5x', '2.75x', '3x'];
 
-  BetterPlayerController? get videoController => PlayerController.to()?.videoController;
+  BetterPlayerController? get videoController => VideoPlayerController.to()?.videoController;
 
   videoButtonFocusChange(bool focus) {
     print('Focus changed $focus');

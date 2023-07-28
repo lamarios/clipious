@@ -180,7 +180,7 @@ class PlaylistView extends StatelessWidget {
                                               children: [
                                                 ...buildThumbnails(context, _),
                                                 PlayButton(
-                                                  onPressed: _.play,
+                                                  onPressed:(isAudio) => _.play(isAudio),
                                                 ),
                                                 Positioned(
                                                     right: 5,

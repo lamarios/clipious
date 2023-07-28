@@ -4,7 +4,7 @@ import 'package:easy_debounce/easy_throttle.dart';
 import 'package:flutter/src/services/hardware_keyboard.dart';
 import 'package:flutter/src/widgets/focus_manager.dart';
 import 'package:get/get.dart';
-import 'package:invidious/controllers/playerController.dart';
+import 'package:invidious/controllers/videoPlayerController.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/models/baseVideo.dart';
 import 'package:invidious/models/videoInList.dart';
@@ -32,7 +32,7 @@ class TvPlayerController extends GetxController {
   bool showControls = false;
   late Video currentlyPlaying;
 
-  Duration get videoLength => Duration(seconds: PlayerController.to()?.video?.lengthSeconds ?? 0);
+  Duration get videoLength => Duration(seconds: VideoPlayerController.to()?.video?.lengthSeconds ?? 0);
 
   TvPlayerController({required this.videos});
 
@@ -40,10 +40,10 @@ class TvPlayerController extends GetxController {
     showUi();
     if (isPlaying) {
       log.info('Pausing video');
-      PlayerController.to()?.videoController?.pause();
+      VideoPlayerController.to()?.videoController?.pause();
     } else {
       log.info('Playing video');
-      PlayerController.to()?.videoController?.play();
+      VideoPlayerController.to()?.videoController?.play();
     }
     update();
   }
@@ -62,7 +62,7 @@ class TvPlayerController extends GetxController {
     super.onClose();
   }
 
-  bool get isPlaying => PlayerController.to()?.videoController?.isPlaying() ?? false;
+  bool get isPlaying => VideoPlayerController.to()?.videoController?.isPlaying() ?? false;
 
   int get currentlyPlayingIndex => videos.indexWhere((element) => element.videoId == currentlyPlaying.videoId);
 
@@ -114,11 +114,11 @@ class TvPlayerController extends GetxController {
   }
 
   fastForward() {
-    PlayerController.to()?.videoController?.seekTo(currentPosition + const Duration(seconds: 10));
+    VideoPlayerController.to()?.videoController?.seekTo(currentPosition + const Duration(seconds: 10));
   }
 
   fastRewind() {
-    PlayerController.to()?.videoController?.seekTo(currentPosition - const Duration(seconds: 10));
+    VideoPlayerController.to()?.videoController?.seekTo(currentPosition - const Duration(seconds: 10));
   }
 
   playNext() async {
@@ -133,7 +133,7 @@ class TvPlayerController extends GetxController {
     loading = true;
     update();
     currentlyPlaying = await service.getVideo(videos[newIndex].videoId);
-    PlayerController.to()?.switchVideo(currentlyPlaying);
+    VideoPlayerController.to()?.switchVideo(currentlyPlaying);
     loading = false;
     update();
   }
@@ -149,7 +149,7 @@ class TvPlayerController extends GetxController {
     loading = true;
     update();
     currentlyPlaying = await service.getVideo(videos[newIndex].videoId);
-    PlayerController.to()?.switchVideo(currentlyPlaying);
+    VideoPlayerController.to()?.switchVideo(currentlyPlaying);
     loading = false;
     update();
   }
@@ -215,7 +215,7 @@ class TvPlayerController extends GetxController {
     loading = true;
     update();
     currentlyPlaying = await service.getVideo(video.videoId);
-    PlayerController.to()?.switchVideo(currentlyPlaying);
+    VideoPlayerController.to()?.switchVideo(currentlyPlaying);
     loading = false;
     update();
   }

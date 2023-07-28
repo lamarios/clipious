@@ -56,7 +56,7 @@ class VideoController extends GetxController {
       update();
 
       if (autoplayOnLoad) {
-        playVideo();
+        playVideo(false);
       }
     } catch (err) {
       if (err is InvidiousServiceError) {
@@ -109,13 +109,13 @@ class VideoController extends GetxController {
     VideoInnerViewController.to(tag: VideoInnerViewController.getControllerTags(video?.videoId ?? ''))?.scrollUp();
   }
 
-  void playVideo() {
+  void playVideo(bool? audio) {
     if (video != null) {
       List<BaseVideo> videos = [video!];
       if (playRecommendedNext) {
         videos.addAll(video?.recommendedVideos ?? []);
       }
-      MiniPlayerController.to()?.playVideo(videos, goBack: true);
+      MiniPlayerController.to()?.playVideo(videos, goBack: true, audio: audio);
     }
   }
 

@@ -2,7 +2,7 @@ import 'package:better_player/better_player.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
-import 'package:invidious/controllers/playerController.dart';
+import 'package:invidious/controllers/videoPlayerController.dart';
 import 'package:invidious/models/db/downloadedVideo.dart';
 
 import '../../models/video.dart';
@@ -66,8 +66,8 @@ class VideoPlayerState extends State<VideoPlayer> {
     ColorScheme colorScheme = Theme.of(context).colorScheme;
     AppLocalizations locals = AppLocalizations.of(context)!;
     Color overFlowTextColor = Theme.of(context).textTheme.bodyMedium?.color ?? Colors.black;
-    return GetBuilder<PlayerController>(
-      init: PlayerController(
+    return GetBuilder<VideoPlayerController>(
+      init: VideoPlayerController(
           locals: locals,
           overFlowTextColor: overFlowTextColor,
           colors: colorScheme,

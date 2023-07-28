@@ -1,9 +1,11 @@
 import 'package:get/get.dart';
+import 'package:invidious/controllers/audioPlayerController.dart';
 import 'package:invidious/controllers/miniPayerController.dart';
-import 'package:invidious/controllers/playerController.dart';
+import 'package:invidious/controllers/videoPlayerController.dart';
 import 'package:invidious/controllers/videoLikeController.dart';
 
 import '../utils.dart';
+import 'interfaces/playerController.dart';
 
 class MiniPlayerControlsController extends GetxController {
   MiniPlayerControlsController(this.videoId);
@@ -12,13 +14,21 @@ class MiniPlayerControlsController extends GetxController {
 
   String videoId;
 
+  PlayerController? get player {
+    if (MiniPlayerController.to()?.isAudio ?? false) {
+      return AudioPlayerController.to();
+    } else {
+      return VideoPlayerController.to();
+    }
+  }
+
   togglePlay() {
-    PlayerController.to()?.togglePlaying();
+    player?.togglePlaying();
     update();
   }
 
   bool isPlaying() {
-    return (PlayerController.to()?.videoController?.isPlaying() ?? false);
+    return player?.isPlaying() ?? false;
   }
 
   setVideo(String videoId) {

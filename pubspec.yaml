@@ -77,6 +77,7 @@ dependencies:
   uuid: 3.0.7
   animate_to: 0.1.0
   dio: 5.3.0
+  audioplayers: 5.0.0
 dependency_overrides:
   #  wakelock_windows:
   #    git: # see https://github.com/creativecreatorormaybenot/wakelock/pull/203 for updates

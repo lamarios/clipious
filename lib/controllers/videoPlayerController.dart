@@ -3,7 +3,6 @@ import 'package:fbroadcast/fbroadcast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:get/get.dart';
 import 'package:invidious/controllers/settingsController.dart';
 import 'package:invidious/controllers/tvPlayerController.dart';
 import 'package:invidious/controllers/videoInListController.dart';
@@ -21,10 +20,11 @@ import '../models/pair.dart';
 import '../models/sponsorSegment.dart';
 import '../models/sponsorSegmentTypes.dart';
 import '../models/video.dart';
+import 'interfaces/playerController.dart';
 import 'miniPayerController.dart';
 
-class PlayerController extends GetxController {
-  static PlayerController? to() => safeGet();
+class VideoPlayerController extends PlayerController {
+  static VideoPlayerController? to() => safeGet();
 
   final log = Logger('VideoPlayer');
   List<Pair<int>> sponsorSegments = List.of([]);
@@ -33,16 +33,14 @@ class PlayerController extends GetxController {
   int previousSponsorCheck = 0;
   bool useDash = db.getSettings(USE_DASH)?.value == 'true';
   AppLocalizations locals;
-  Video? video;
-  DownloadedVideo? offlineVideo;
   final bool miniPlayer;
-  bool? playNow;
-  bool? disableControls;
   final ColorScheme colors;
   final Color overFlowTextColor;
   final GlobalKey key;
 
-  PlayerController({required this.colors, required this.overFlowTextColor, required this.key, this.video, this.offlineVideo, required this.miniPlayer, required this.locals, this.disableControls});
+  VideoPlayerController(
+      {required this.colors, required this.overFlowTextColor, required this.key, Video? video, DownloadedVideo? offlineVideo, required this.miniPlayer, required this.locals, bool? disableControls})
+      : super(video: video, offlineVideo: offlineVideo, disableControls: disableControls);
 
   @override
   void onInit() {
@@ -68,6 +66,7 @@ class PlayerController extends GetxController {
     disposeControllers();
   }
 
+  @override
   disposeControllers() {
     Wakelock.disable();
     log.fine("Disposing video controller");
@@ -77,6 +76,7 @@ class PlayerController extends GetxController {
     videoController = null;
   }
 
+  @override
   saveProgress(int timeInSeconds) {
     if (videoController != null && video != null) {
       int currentPosition = timeInSeconds;
@@ -178,6 +178,7 @@ class PlayerController extends GetxController {
     update();
   }
 
+  @override
   switchVideo(Video video) {
     videoController?.exitFullScreen();
     MiniPlayerController.to()?.handleVideoEvent(BetterPlayerEvent(BetterPlayerEventType.hideFullscreen));
@@ -186,6 +187,7 @@ class PlayerController extends GetxController {
     playVideo();
   }
 
+  @override
   togglePlaying() {
     if (videoController != null) {
       (videoController?.isPlaying() ?? false) ? videoController?.pause() : videoController?.play();
@@ -193,10 +195,12 @@ class PlayerController extends GetxController {
     }
   }
 
+  @override
   toggleControls(bool visible) {
     videoController?.setControlsEnabled(visible);
   }
 
+  @override
   playVideo() {
     if (video != null) {
       videoController?.dispose();
@@ -290,6 +294,7 @@ class PlayerController extends GetxController {
     }
   }
 
+  @override
   setSponsorBlock() async {
     if (video != null) {
       List<SponsorSegmentType> types = SponsorSegmentType.values.where((e) => db.getSettings(e.settingsName())?.value == 'true').toList();
@@ -311,6 +316,7 @@ class PlayerController extends GetxController {
     }
   }
 
+  @override
   void playOfflineVideo() async {
     if (offlineVideo != null) {
       videoController?.dispose();
@@ -360,11 +366,17 @@ class PlayerController extends GetxController {
     }
   }
 
+  @override
   void switchToOfflineVideo(DownloadedVideo v) {
     videoController?.exitFullScreen();
     MiniPlayerController.to()?.handleVideoEvent(BetterPlayerEvent(BetterPlayerEventType.hideFullscreen));
     disposeControllers();
     offlineVideo = v;
     playOfflineVideo();
+  }
+
+  @override
+  bool isPlaying() {
+    return videoController?.isPlaying() ?? false;
   }
 }

@@ -11,7 +11,7 @@ import 'package:invidious/views/tv/tvOverScan.dart';
 import 'package:logging/logging.dart';
 import 'package:share_plus/share_plus.dart';
 
-import 'controllers/playerController.dart';
+import 'package:invidious/controllers/videoPlayerController.dart';
 import 'models/country.dart';
 
 const PHONE_MAX = 600;
@@ -75,7 +75,7 @@ void showSharingSheet(BuildContext context, ShareLinks links, {bool showTimestam
   bool shareWithTimestamp = false;
   Future<Duration?> getTimestamp() async {
     if (shareWithTimestamp) {
-      return PlayerController.to()?.videoController?.videoPlayerController?.position;
+      return VideoPlayerController.to()?.videoController?.videoPlayerController?.position;
     }
     return null;
   }

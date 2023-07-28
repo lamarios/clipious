@@ -1,0 +1,93 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:invidious/globals.dart';
+
+import '../../controllers/audioPlayerController.dart';
+import '../../models/db/downloadedVideo.dart';
+import '../../models/video.dart';
+import '../../utils.dart';
+import '../components/videoThumbnail.dart';
+
+class AudioPlayer extends StatelessWidget {
+  final Video? video;
+  final DownloadedVideo? offlineVideo;
+  final bool miniPlayer;
+
+  const AudioPlayer({super.key, this.video, required this.miniPlayer, this.offlineVideo}) : assert(video == null || offlineVideo == null, 'cannot provide both video and offline video\n');
+
+  @override
+  Widget build(BuildContext context) {
+    ColorScheme colors = Theme.of(context).colorScheme;
+    AppLocalizations locals = AppLocalizations.of(context)!;
+    return GetBuilder<AudioPlayerController>(
+      init: AudioPlayerController(offlineVideo: offlineVideo, video: video),
+      builder: (_) {
+        return Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: AspectRatio(
+            aspectRatio: 16 / 9,
+            child: Stack(
+              alignment: Alignment.topCenter,
+              children: [
+                _.video != null
+                    ? VideoThumbnailView(
+                        videoId: video!.videoId,
+                        thumbnailUrl: video?.getBestThumbnail()?.url ?? '',
+                        child: Stack(
+                          alignment: Alignment.center,
+                          children: [],
+                        ),
+                      )
+                    : Text('offline video'),
+                !(_.disableControls ?? false) && !_.loading
+                    ? Positioned(
+                        left: 0,
+                        right: 0,
+                        bottom: 0,
+                        child: Container(
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              gradient: LinearGradient(begin: Alignment.bottomCenter, end: Alignment.topCenter, colors: [Colors.black.withOpacity(0.8), Colors.black.withOpacity(0)])),
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 16.0, right: 8),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: Slider(
+                                    min: 0,
+                                    value: _.audioPosition.inMilliseconds.toDouble(),
+                                    max: _.audioLength.inMilliseconds.toDouble(),
+                                    onChangeEnd: _.onScrubbed,
+                                    onChanged: _.onScrubDrag,
+                                  ),
+                                ),
+                                Text(
+                                  '${prettyDuration(_.audioPosition)} / ${prettyDuration(_.audioLength)}',
+                                  style: TextStyle(fontSize: 10),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      )
+                    : _.loading
+                        ? Container(
+                            color: Colors.black.withOpacity(0.5),
+                            child: const Center(
+                              child: SizedBox(
+                                width: 50,
+                                height: 50,
+                                child: CircularProgressIndicator(),
+                              ),
+                            ),
+                          )
+                        : const SizedBox.shrink(),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
