@@ -817,7 +817,7 @@
   "@videoAddedToQueue": {
     "description": "Pop up message when a video was added at the end of the video queue"
   },
-  "shareLinkWithTimestamp": "時間指定",
+  "shareLinkWithTimestamp": "再生位置の情報を追加",
   "@shareLinkWithTimestamp": {
     "description": "asking user to share link along with timestamp"
   },
@@ -845,7 +845,7 @@
   "@download": {
     "description": "A single download or CTA for downloading a video"
   },
-  "downloads": "ダウンロード",
+  "downloads": "ダウンロード一覧",
   "@downloads": {
     "description": "Downloads"
   }
