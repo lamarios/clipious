@@ -28,20 +28,21 @@ class MiniPlayer extends StatelessWidget {
         Widget videoPlayer = showPlayer
             ? Padding(
                 padding: _.isMini || _.isPip ? EdgeInsets.zero : const EdgeInsets.only(top: 8, left: 8.0, right: 8),
-                child: _.isAudio
-                    ? AudioPlayer(
-                        key: const ValueKey('audio-player'),
-                        video: _.currentlyPlaying,
-                        offlineVideo: _.offlineCurrentlyPlaying,
-                        miniPlayer: false,
-                      )
-                    : VideoPlayer(
-                        key: const ValueKey('player'),
-                        video: _.currentlyPlaying,
-                        offlineVideo: _.offlineCurrentlyPlaying,
-                        miniPlayer: false,
-                      ),
-              )
+                child: AnimatedCrossFade(
+                    crossFadeState: _.isAudio ? CrossFadeState.showFirst : CrossFadeState.showSecond,
+                    duration: animationDuration,
+                    firstChild: AudioPlayer(
+                      key: const ValueKey('audio-player'),
+                      video: _.isAudio ? _.currentlyPlaying : null,
+                      offlineVideo: _.isAudio ? _.offlineCurrentlyPlaying : null,
+                      miniPlayer: false,
+                    ),
+                    secondChild: VideoPlayer(
+                      key: const ValueKey('player'),
+                      video: !_.isAudio ? _.currentlyPlaying : null,
+                      offlineVideo: !_.isAudio ? _.offlineCurrentlyPlaying : null,
+                      miniPlayer: false,
+                    )))
             : const SizedBox.shrink();
 
         List<Widget> miniPlayerWidgets = [];

@@ -32,8 +32,8 @@ class AudioPlayer extends StatelessWidget {
               children: [
                 _.video != null
                     ? VideoThumbnailView(
-                        videoId: video!.videoId,
-                        thumbnailUrl: video?.getBestThumbnail()?.url ?? '',
+                        videoId: _.video!.videoId,
+                        thumbnailUrl: _.video?.getBestThumbnail()?.url ?? '',
                         child: Stack(
                           alignment: Alignment.center,
                           children: [],
@@ -71,16 +71,21 @@ class AudioPlayer extends StatelessWidget {
                           ),
                         ),
                       )
-                    : _.loading
+                    : _.loading || _.error != null
                         ? Container(
-                            color: Colors.black.withOpacity(0.5),
-                            child: const Center(
-                              child: SizedBox(
-                                width: 50,
-                                height: 50,
-                                child: CircularProgressIndicator(),
-                              ),
+                            decoration: BoxDecoration(
+                              color: Colors.black.withOpacity(0.5),
+                              borderRadius: BorderRadius.circular(10),
                             ),
+                            child: _.loading
+                                ? const Center(
+                                    child: SizedBox(
+                                      width: 50,
+                                      height: 50,
+                                      child: CircularProgressIndicator(),
+                                    ),
+                                  )
+                                : Center(child: Text(_.error ?? '')),
                           )
                         : const SizedBox.shrink(),
               ],

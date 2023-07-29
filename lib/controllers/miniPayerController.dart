@@ -60,7 +60,10 @@ class MiniPlayerController extends GetxController {
 
   bool get isPlaying => currentlyPlaying != null || offlineCurrentlyPlaying != null;
 
-  PlayerController? get playerController => isAudio ? AudioPlayerController.to() : VideoPlayerController.to();
+  PlayerController? get playerController {
+    var playerController = isAudio ? AudioPlayerController.to() : VideoPlayerController.to();
+    return playerController;
+  }
 
   @override
   onReady() {
@@ -120,6 +123,16 @@ class MiniPlayerController extends GetxController {
 
   selectTab(int index) {
     selectedFullScreenIndex = index;
+    update();
+  }
+
+  setAudio(bool? newValue) {
+    newValue ??= false;
+    if (newValue != isAudio) {
+      playerController?.disposeControllers();
+    }
+
+    isAudio = newValue;
     update();
   }
 
@@ -258,7 +271,7 @@ class MiniPlayerController extends GetxController {
     if (goBack ?? false) navigatorKey.currentState?.pop();
     log.fine('Playing ${videos.length} videos');
 
-    isAudio = audio ?? false;
+    setAudio(audio);
 
     if (videos.isNotEmpty) {
       offlineVideos = [];
@@ -358,6 +371,7 @@ class MiniPlayerController extends GetxController {
     return videos.indexWhere((element) => element.videoId == video.videoId) >= 0;
   }
 
+
   void handleVideoEvent(BetterPlayerEvent event) {
     switch (event.betterPlayerEventType) {
       case BetterPlayerEventType.progress:
@@ -369,7 +383,6 @@ class MiniPlayerController extends GetxController {
         }
         break;
       case BetterPlayerEventType.finished:
-        playNext();
         break;
       case BetterPlayerEventType.pipStart:
         isPip = true;

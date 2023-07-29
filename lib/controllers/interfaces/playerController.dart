@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:invidious/controllers/miniPayerController.dart';
 import 'package:invidious/models/db/downloadedVideo.dart';
 
 import '../../models/video.dart';
@@ -30,4 +31,8 @@ abstract class PlayerController extends GetxController {
   void switchToOfflineVideo(DownloadedVideo v);
 
   bool isPlaying();
+
+  void onVideoFinished(){
+    MiniPlayerController.to()?.playNext();
+  }
 }

@@ -122,7 +122,8 @@ class VideoPlayerController extends PlayerController {
       case BetterPlayerEventType.finished:
         if (video != null) {
           saveProgress(video!.lengthSeconds);
-          broadcastEvent(event);
+          onVideoFinished();
+          // broadcastEvent(event);
         }
         break;
 

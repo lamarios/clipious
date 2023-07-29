@@ -259,7 +259,6 @@ T? safeGet<T>({String? tag}) {
   try {
     return Get.find<T>(tag: tag);
   } catch (err) {
-    err.printError();
     log.fine('could not find controller of class ${T.toString()}');
     return null;
   }

@@ -16,7 +16,7 @@ class AudioPlayerController extends PlayerController {
   Logger log = Logger('AudioPlayerController');
 
   static AudioPlayerController? to() => safeGet();
-  AudioPlayer player = AudioPlayer();
+  AudioPlayer? player;
 
   AudioPlayerController({Video? video, DownloadedVideo? offlineVideo}) : super(video: video, offlineVideo: offlineVideo);
 
@@ -26,6 +26,7 @@ class AudioPlayerController extends PlayerController {
   int previousSponsorCheck = 0;
   bool playing = false;
   bool loading = false;
+  String? error;
 
   @override
   void onClose() {
@@ -34,16 +35,26 @@ class AudioPlayerController extends PlayerController {
   }
 
   @override
-  void onReady() {
-    player.onDurationChanged.listen(onDurationChanged);
-    player.onPositionChanged.listen(onPositionChanged);
-    player.onPlayerStateChanged.listen(onPlayerStateChanged);
-    super.onReady();
+  void onInit() {
+    super.onInit();
+    initPlayer();
+  }
+
+  @override
+  onReady() async {
+    video != null ? playVideo() : playOfflineVideo();
   }
 
   @override
   void disposeControllers() {
-    player.dispose();
+    player?.dispose();
+  }
+
+  initPlayer() {
+    player = AudioPlayer();
+    player?.onDurationChanged.listen(onDurationChanged);
+    player?.onPositionChanged.listen(onPositionChanged);
+    player?.onPlayerStateChanged.listen(onPlayerStateChanged);
   }
 
   @override
@@ -73,15 +84,30 @@ class AudioPlayerController extends PlayerController {
   }
 
   @override
-  void playVideo() {
+  Future<void> playVideo() async {
     if (video != null) {
+      disposeControllers();
+      initPlayer();
       loading = true;
-      playing = false;
+      playing = true;
       AdaptiveFormat? audio = video?.adaptiveFormats.where((element) => element.type.contains("audio")).sortByReversed((e) => int.parse(e.bitrate ?? "0")).first;
       if (audio != null) {
-        player.setSourceUrl(audio.url);
+        double progress = db.getVideoProgress(video!.videoId);
+        Duration? startAt;
+        if (progress > 0 && progress < 0.90) {
+          startAt = Duration(seconds: (video!.lengthSeconds * progress).floor());
+        }
+        update();
+
+        try {
+          await player?.play(UrlSource(audio.url), position: startAt);
+        } catch (e) {
+          log.severe("Couldn't play video", e);
+          error = e.toString();
+          loading = false;
+          update();
+        }
       }
-      update();
     }
     // TODO: implement playVideo
   }
@@ -112,20 +138,19 @@ class AudioPlayerController extends PlayerController {
     offlineVideo = null;
     audioPosition = Duration.zero;
     audioLength = const Duration(milliseconds: 1);
-    await player.release();
     this.video = video;
     playVideo();
   }
 
   @override
   void togglePlaying() {
-    playing ? player.pause() : player.resume();
+    playing ? player?.pause() : player?.resume();
     update();
   }
 
   void onScrubbed(double value) {
     Duration seekTo = Duration(milliseconds: value.toInt());
-    player.seek(seekTo);
+    player?.seek(seekTo);
     audioPosition = seekTo;
     update();
   }
@@ -150,6 +175,12 @@ class AudioPlayerController extends PlayerController {
         break;
       case "paused":
         playing = false;
+        break;
+      case "completed":
+        if (error == null) {
+          saveProgress(audioLength.inSeconds);
+          onVideoFinished();
+        }
         break;
     }
 
