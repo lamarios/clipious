@@ -90,6 +90,8 @@ class MiniPlayerController extends GetxController {
           MediaAction.seek,
           MediaAction.seekForward,
           MediaAction.seekBackward,
+          MediaAction.setShuffleMode,
+          MediaAction.setRepeatMode
         },
         androidCompactActionIndices: const [0, 1, 3],
         processingState: const {

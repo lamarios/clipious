@@ -57,4 +57,12 @@ class MiniPlayerControlsController extends GetxController {
     MiniPlayerController.to()?.setNextRepeatMode();
     update();
   }
+
+  void rewind() {
+    miniPlayerController?.rewind();
+  }
+
+  void fastForward() {
+    miniPlayerController?.fastForward();
+  }
 }

@@ -1,4 +1,3 @@
-import 'package:audioplayers/audioplayers.dart';
 import 'package:invidious/controllers/interfaces/playerController.dart';
 import 'package:invidious/controllers/miniPlayerProgressController.dart';
 import 'package:invidious/controllers/videoInListController.dart';
@@ -7,6 +6,7 @@ import 'package:invidious/globals.dart';
 import 'package:invidious/models/db/downloadedVideo.dart';
 import 'package:invidious/models/video.dart';
 import 'package:invidious/utils.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:logging/logging.dart';
 import '../../models/db/progress.dart' as dbProgress;
 
@@ -26,7 +26,7 @@ class AudioPlayerController extends PlayerController {
   Duration audioLength = const Duration(milliseconds: 1);
   Duration audioPosition = const Duration(milliseconds: 0);
   int previousSponsorCheck = 0;
-  bool playing = false;
+  bool get playing => player?.playing ?? false;
   bool loading = false;
   String? error;
 
@@ -54,9 +54,9 @@ class AudioPlayerController extends PlayerController {
 
   initPlayer() {
     player = AudioPlayer();
-    player?.onDurationChanged.listen(onDurationChanged);
-    player?.onPositionChanged.listen(onPositionChanged);
-    player?.onPlayerStateChanged.listen(onPlayerStateChanged);
+    player?.playerStateStream.listen(onStateStreamChange);
+    player?.positionStream.listen(onPositionChanged);
+    player?.durationStream.listen(onDurationChanged);
   }
 
   @override
@@ -64,8 +64,33 @@ class AudioPlayerController extends PlayerController {
     // TODO: implement playOfflineVideo
   }
 
-  onDurationChanged(Duration duration) async {
-    audioLength = duration;
+  onStateStreamChange(PlayerState state){
+    log.fine('Player state event $state');
+    if (state.playing) {
+
+    } else {
+      switch (state.processingState) {
+      case ProcessingState.idle:
+        MiniPlayerController.to()?.eventStream.add(MediaEvent(state: MediaState.idle));
+        break;
+      case ProcessingState.loading:
+        MiniPlayerController.to()?.eventStream.add(MediaEvent(state: MediaState.loading));
+      break;
+      case ProcessingState.buffering:
+        MiniPlayerController.to()?.eventStream.add(MediaEvent(state: MediaState.buffering));
+      break;
+      case ProcessingState.ready:
+        MiniPlayerController.to()?.eventStream.add(MediaEvent(state: MediaState.ready));
+      break;
+      case ProcessingState.completed:
+        MiniPlayerController.to()?.eventStream.add(MediaEvent(state: MediaState.completed));
+      break;
+      }
+    }
+  }
+
+  onDurationChanged(Duration? duration) async {
+    audioLength = duration ?? const Duration(milliseconds: 1);
     loading = false;
     update();
   }
@@ -91,7 +116,6 @@ class AudioPlayerController extends PlayerController {
       disposeControllers();
       initPlayer();
       loading = true;
-      playing = true;
       MiniPlayerController.to()?.eventStream.add(MediaEvent(state: MediaState.loading));
       AdaptiveFormat? audio = video?.adaptiveFormats.where((element) => element.type.contains("audio")).sortByReversed((e) => int.parse(e.bitrate ?? "0")).first;
       if (audio != null) {
@@ -103,7 +127,8 @@ class AudioPlayerController extends PlayerController {
         update();
 
         try {
-          await player?.play(UrlSource(audio.url), position: startAt);
+          await player?.setAudioSource(AudioSource.uri(Uri.parse(audio.url)), initialPosition: startAt);
+          player?.play();
         } catch (e) {
           log.severe("Couldn't play video", e);
           error = e.toString();
@@ -147,13 +172,13 @@ class AudioPlayerController extends PlayerController {
 
   @override
   void togglePlaying() {
-    playing ? player?.pause() : player?.resume();
+    playing ? play() : pause();
     update();
   }
 
   void onScrubbed(double value) {
     Duration seekTo = Duration(milliseconds: value.toInt());
-    player?.seek(seekTo);
+    seek(seekTo);
     audioPosition = seekTo;
     update();
   }
@@ -170,28 +195,6 @@ class AudioPlayerController extends PlayerController {
     update();
   }
 
-  void onPlayerStateChanged(PlayerState event) {
-    log.fine("Player state changed: ${event.name}");
-    switch (event.name) {
-      case "playing":
-        playing = true;
-        MiniPlayerController.to()?.eventStream.add(MediaEvent(state: MediaState.ready, type: MediaEventType.play));
-        break;
-      case "paused":
-        playing = false;
-        MiniPlayerController.to()?.eventStream.add(MediaEvent(state: MediaState.ready, type: MediaEventType.pause));
-        break;
-      case "completed":
-        if (error == null) {
-          saveProgress(audioLength.inSeconds);
-          onVideoFinished();
-        }
-        MiniPlayerController.to()?.eventStream.add(MediaEvent(state: MediaState.completed));
-        break;
-    }
-
-    update();
-  }
 
   @override
   bool isPlaying() {
@@ -200,7 +203,8 @@ class AudioPlayerController extends PlayerController {
 
   @override
   void play() {
-    player?.resume();
+    player?.play();
+    MiniPlayerController.to()?.eventStream.add(MediaEvent(state: MediaState.completed, type: MediaEventType.play));
   }
 
   @override
@@ -212,6 +216,7 @@ class AudioPlayerController extends PlayerController {
   @override
   void pause() {
     player?.pause();
+    MiniPlayerController.to()?.eventStream.add(MediaEvent(state: MediaState.completed, type: MediaEventType.pause));
   }
 
   @override
