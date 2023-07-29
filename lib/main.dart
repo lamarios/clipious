@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:after_layout/after_layout.dart';
+import 'package:audio_service/audio_service.dart';
 import 'package:back_button_interceptor/back_button_interceptor.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/foundation.dart';
@@ -12,6 +13,7 @@ import 'package:get/get.dart';
 import 'package:invidious/controllers/homeController.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/httpOverrides.dart';
+import 'package:invidious/mediaHander.dart';
 import 'package:invidious/utils.dart';
 import 'package:invidious/views/components/downloadAppBarButton.dart';
 import 'package:invidious/views/components/miniPlayerAware.dart';
@@ -40,6 +42,8 @@ final GlobalKey<NavigatorState> globalNavigator = GlobalKey<NavigatorState>();
 final RouteObserver<ModalRoute> routeObserver = MyRouteObserver();
 bool isTv = false;
 
+late MediaHandler mediaHandler;
+
 Future<void> main() async {
   Logger.root.level = kDebugMode ? Level.FINEST : Level.INFO; // defaults to Level.INFO
   Logger.root.onRecord.listen((record) {
@@ -49,6 +53,15 @@ Future<void> main() async {
       db.insertLogs(AppLog(logger: record.loggerName, level: record.level.name, time: record.time, message: record.message, stacktrace: record.stackTrace?.toString()));
     }
   });
+
+  mediaHandler = await AudioService.init(
+    builder: () => MediaHandler(),
+    config: const AudioServiceConfig(
+      androidNotificationChannelId: 'com.github.lamarios.clipious.channel.audio',
+      androidNotificationChannelName: 'Video playback',
+      androidNotificationOngoing: true,
+    ),
+  );
 
   HttpOverrides.global = MyHttpOverrides();
 

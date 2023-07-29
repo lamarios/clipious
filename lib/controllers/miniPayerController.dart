@@ -1,5 +1,7 @@
+import 'dart:async';
 import 'dart:math';
 
+import 'package:audio_service/audio_service.dart';
 import 'package:back_button_interceptor/back_button_interceptor.dart';
 import 'package:better_player/better_player.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +15,8 @@ import 'package:invidious/controllers/videoLikeController.dart';
 import 'package:invidious/database.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/models/db/settings.dart';
+import 'package:invidious/models/imageObject.dart';
+import 'package:invidious/models/mediaEvent.dart';
 import 'package:invidious/utils.dart';
 import 'package:logging/logging.dart';
 
@@ -58,7 +62,11 @@ class MiniPlayerController extends GetxController {
 
   MiniPlayerController();
 
-  bool get isPlaying => currentlyPlaying != null || offlineCurrentlyPlaying != null;
+  final eventStream = StreamController<MediaEvent>();
+
+  bool get isPlaying => playerController?.isPlaying() ?? false;
+
+  bool get hasVideo => currentlyPlaying != null || offlineCurrentlyPlaying != null;
 
   PlayerController? get playerController {
     var playerController = isAudio ? AudioPlayerController.to() : VideoPlayerController.to();
@@ -69,6 +77,37 @@ class MiniPlayerController extends GetxController {
   onReady() {
     super.onReady();
     BackButtonInterceptor.add(handleBackButton, name: 'miniPlayer', zIndex: 2);
+    eventStream.stream.map((event) {
+      bool hasQueue = videos.length > 1 || offlineVideos.length > 1;
+      var state = PlaybackState(
+        controls: [
+          hasQueue ? MediaControl.skipToPrevious : MediaControl.rewind,
+          if (isPlaying) MediaControl.pause else MediaControl.play,
+          MediaControl.stop,
+          hasQueue ? MediaControl.skipToNext : MediaControl.fastForward,
+        ],
+        systemActions: const {
+          MediaAction.seek,
+          MediaAction.seekForward,
+          MediaAction.seekBackward,
+        },
+        androidCompactActionIndices: const [0, 1, 3],
+        processingState: const {
+          MediaState.idle: AudioProcessingState.idle,
+          MediaState.loading: AudioProcessingState.loading,
+          MediaState.buffering: AudioProcessingState.buffering,
+          MediaState.ready: AudioProcessingState.ready,
+          MediaState.completed: AudioProcessingState.completed,
+        }[event.state]!,
+        playing: event.state == MediaState.idle || event.state == MediaState.completed ? false : isPlaying,
+        updatePosition: playerController?.position() ?? Duration.zero,
+        bufferedPosition: playerController?.bufferedPosition() ?? Duration.zero,
+        speed: playerController?.speed() ?? 1,
+        queueIndex: currentIndex,
+      );
+      return state;
+    }).pipe(mediaHandler.playbackState);
+
     // show();
   }
 
@@ -148,6 +187,7 @@ class MiniPlayerController extends GetxController {
     offlineVideos = [];
     opacity = 0;
     MiniPlayerAwareController.to()?.setPadding(false);
+    eventStream.add(MediaEvent(state: MediaState.idle));
     update();
   }
 
@@ -266,8 +306,9 @@ class MiniPlayerController extends GetxController {
     }
   }
 
-  playVideo(List<BaseVideo> v, {bool? goBack, bool? audio}) {
+  playVideo(List<BaseVideo> v, {bool? goBack, bool? audio}) async {
     List<BaseVideo> videos = v.where((element) => !element.filtered).toList();
+    eventStream.add(MediaEvent(state: MediaState.loading));
     if (goBack ?? false) navigatorKey.currentState?.pop();
     log.fine('Playing ${videos.length} videos');
 
@@ -291,7 +332,20 @@ class MiniPlayerController extends GetxController {
     }
   }
 
+  void togglePlaying() {
+    isPlaying ? pause() : play();
+  }
+
+  play() {
+    playerController?.play();
+  }
+
+  pause() {
+    playerController?.pause();
+  }
+
   switchToVideo(BaseVideo video) async {
+    eventStream.add(MediaEvent(state: MediaState.loading));
     offlineVideos = [];
     offlineCurrentlyPlaying = null;
     int index = videos.indexWhere((element) => element.videoId == video.videoId);
@@ -307,6 +361,7 @@ class MiniPlayerController extends GetxController {
     } else {
       v = await service.getVideo(video.videoId);
     }
+
     // if we already have a full Video, no need to call the backend again
     currentlyPlaying = v;
 
@@ -319,6 +374,8 @@ class MiniPlayerController extends GetxController {
     update();
     VideoLikeButtonController.to(tag: VideoLikeButtonController.tags(v.videoId))?.checkVideoLikeStatus();
     MiniPlayerControlsController.to()?.setVideo(v.videoId);
+
+    mediaHandler.skipToQueueItem(currentIndex);
   }
 
   BaseVideo? get currentVideo => videos.isNotEmpty ? videos[currentIndex] : null;
@@ -370,7 +427,6 @@ class MiniPlayerController extends GetxController {
   bool isVideoInQueue(Video video) {
     return videos.indexWhere((element) => element.videoId == video.videoId) >= 0;
   }
-
 
   void handleVideoEvent(BetterPlayerEvent event) {
     switch (event.betterPlayerEventType) {
@@ -480,5 +536,24 @@ class MiniPlayerController extends GetxController {
       showBigPlayer();
       switchToOfflineVideo(offlineVideos[0]);
     }
+  }
+
+  void fastForward() {
+    Duration newDuration = Duration(seconds: (playerController?.position().inSeconds ?? 0) + 10);
+    playerController?.seek(newDuration);
+  }
+
+  void rewind() {
+    Duration newDuration = Duration(seconds: (playerController?.position().inSeconds ?? 0) - 10);
+    playerController?.seek(newDuration);
+  }
+
+  MediaItem? getMediaItem(int index) {
+    if (videos.isNotEmpty) {
+      var e = videos[index];
+      return MediaItem(
+          id: e.videoId, title: e.title, artist: e.author, duration: Duration(seconds: e.lengthSeconds), album: '', artUri: Uri.parse(ImageObject.getBestThumbnail(e.videoThumbnails)?.url ?? ''));
+    }
+    return null;
   }
 }

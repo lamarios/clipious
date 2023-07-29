@@ -20,7 +20,7 @@ abstract class PlayerController extends GetxController {
 
   void togglePlaying();
 
-  void toggleControls(bool  visible);
+  void toggleControls(bool visible);
 
   void playVideo();
 
@@ -32,7 +32,20 @@ abstract class PlayerController extends GetxController {
 
   bool isPlaying();
 
-  void onVideoFinished(){
+  void play();
+
+  void pause();
+
+  void seek(Duration position);
+
+  Duration position();
+
+  Duration? bufferedPosition();
+
+  double? speed();
+
+  void onVideoFinished() {
     MiniPlayerController.to()?.playNext();
   }
+
 }

@@ -14,6 +14,9 @@ class MiniPlayerControlsController extends GetxController {
 
   String videoId;
 
+
+  MiniPlayerController? get miniPlayerController => MiniPlayerController.to();
+
   PlayerController? get player {
     if (MiniPlayerController.to()?.isAudio ?? false) {
       return AudioPlayerController.to();
@@ -23,12 +26,12 @@ class MiniPlayerControlsController extends GetxController {
   }
 
   togglePlay() {
-    player?.togglePlaying();
+    miniPlayerController?.togglePlaying();
     update();
   }
 
   bool isPlaying() {
-    return player?.isPlaying() ?? false;
+    return miniPlayerController?.isPlaying ?? false;
   }
 
   setVideo(String videoId) {

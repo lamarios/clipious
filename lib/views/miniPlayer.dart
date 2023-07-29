@@ -22,7 +22,7 @@ class MiniPlayer extends StatelessWidget {
     return GetBuilder<MiniPlayerController>(
       init: MiniPlayerController(),
       builder: (_) {
-        bool showPlayer = _.isPlaying;
+        bool showPlayer = _.hasVideo;
         bool onPhone = getDeviceType() == DeviceType.phone;
 
         Widget videoPlayer = showPlayer

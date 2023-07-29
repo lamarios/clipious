@@ -7,6 +7,7 @@ import 'package:invidious/controllers/settingsController.dart';
 import 'package:invidious/controllers/tvPlayerController.dart';
 import 'package:invidious/controllers/videoInListController.dart';
 import 'package:invidious/models/db/downloadedVideo.dart';
+import 'package:invidious/models/mediaEvent.dart';
 import 'package:invidious/utils.dart';
 import 'package:logging/logging.dart';
 import 'package:wakelock/wakelock.dart';
@@ -125,18 +126,30 @@ class VideoPlayerController extends PlayerController {
           onVideoFinished();
           // broadcastEvent(event);
         }
+        MiniPlayerController.to()?.eventStream.add(MediaEvent(state: MediaState.completed));
         break;
-
+      case BetterPlayerEventType.initialized:
+        MiniPlayerController.to()?.eventStream.add(MediaEvent(state: MediaState.ready));
+        break;
+      case BetterPlayerEventType.setupDataSource:
+        MiniPlayerController.to()?.eventStream.add(MediaEvent(state: MediaState.loading));
+        break;
       case BetterPlayerEventType.pipStart:
       case BetterPlayerEventType.pipStop:
       case BetterPlayerEventType.openFullscreen:
       case BetterPlayerEventType.hideFullscreen:
       case BetterPlayerEventType.overflowClosed:
       case BetterPlayerEventType.overflowOpened:
-      case BetterPlayerEventType.seekTo:
       case BetterPlayerEventType.initialized:
       case BetterPlayerEventType.bufferingEnd:
+        broadcastEvent(event);
+        break;
+      case BetterPlayerEventType.seekTo:
+        MiniPlayerController.to()?.eventStream.add(MediaEvent(state: MediaState.ready, type: MediaEventType.seek));
+        broadcastEvent(event);
+        break;
       case BetterPlayerEventType.bufferingStart:
+        MiniPlayerController.to()?.eventStream.add(MediaEvent(state: MediaState.buffering));
         broadcastEvent(event);
         break;
       case BetterPlayerEventType.play:
@@ -147,7 +160,11 @@ class VideoPlayerController extends PlayerController {
           log.fine("Setting playback speed to $speed");
           videoController?.setSpeed(speed);
         }
+        MiniPlayerController.to()?.eventStream.add(MediaEvent(state: MediaState.ready, type: MediaEventType.play));
         broadcastEvent(event);
+        break;
+      case BetterPlayerEventType.pause:
+        MiniPlayerController.to()?.eventStream.add(MediaEvent(state: MediaState.ready, type: MediaEventType.pause));
         break;
       case BetterPlayerEventType.changedSubtitles:
         db.saveSetting(SettingsValue(LAST_SUBTITLE, videoController?.betterPlayerSubtitlesSource?.name ?? ''));
@@ -156,6 +173,7 @@ class VideoPlayerController extends PlayerController {
         if (event.parameters?.containsKey("speed") ?? false) {
           db.saveSetting(SettingsValue(LAST_SPEED, event.parameters?["speed"].toString() ?? '1.0'));
         }
+        MiniPlayerController.to()?.eventStream.add(MediaEvent(state: MediaState.ready, type: MediaEventType.speedChanged));
         break;
       default:
         break;
@@ -249,21 +267,25 @@ class VideoPlayerController extends PlayerController {
       bool lockOrientation = db.getSettings(LOCK_ORIENTATION_FULLSCREEN)?.value == 'true';
       bool fillVideo = db.getSettings(FILL_FULLSCREEN)?.value == 'true';
 
-      BetterPlayerDataSource betterPlayerDataSource = BetterPlayerDataSource(BetterPlayerDataSourceType.network, videoUrl,
-          videoFormat: format,
-          liveStream: video!.liveNow,
-          subtitles: video!.captions
-              .map((s) => BetterPlayerSubtitlesSource(type: BetterPlayerSubtitlesSourceType.network, urls: ['${baseUrl}${s.url}'], name: s.label, selectedByDefault: s.label == lastSubtitle))
-              .toList(),
-          resolutions: resolutions.isNotEmpty ? resolutions : null,
-          // placeholder: VideoThumbnailView(videoId: video.videoId, thumbnailUrl: video.getBestThumbnail()?.url ?? ''),
+      BetterPlayerDataSource betterPlayerDataSource = BetterPlayerDataSource(
+        BetterPlayerDataSourceType.network, videoUrl,
+        videoFormat: format,
+        liveStream: video!.liveNow,
+        subtitles: video!.captions
+            .map((s) => BetterPlayerSubtitlesSource(type: BetterPlayerSubtitlesSourceType.network, urls: ['${baseUrl}${s.url}'], name: s.label, selectedByDefault: s.label == lastSubtitle))
+            .toList(),
+        resolutions: resolutions.isNotEmpty ? resolutions : null,
+        // placeholder: VideoThumbnailView(videoId: video.videoId, thumbnailUrl: video.getBestThumbnail()?.url ?? ''),
+/*
           notificationConfiguration: BetterPlayerNotificationConfiguration(
             showNotification: true,
             activityName: 'MainActivity',
             title: video!.title,
             author: video!.author,
             imageUrl: video!.getBestThumbnail()?.url ?? '',
-          ));
+          )
+*/
+      );
 
       Wakelock.enable();
 
@@ -330,17 +352,21 @@ class VideoPlayerController extends PlayerController {
       String videoPath = await offlineVideo!.videoPath;
       String thumbPath = await offlineVideo!.thumbnailPath;
 
-      BetterPlayerDataSource betterPlayerDataSource = BetterPlayerDataSource(BetterPlayerDataSourceType.file, videoPath,
-          videoFormat: BetterPlayerVideoFormat.other,
-          liveStream: false,
-          // placeholder: VideoThumbnailView(videoId: video.videoId, thumbnailUrl: video.getBestThumbnail()?.url ?? ''),
+      BetterPlayerDataSource betterPlayerDataSource = BetterPlayerDataSource(
+        BetterPlayerDataSourceType.file, videoPath,
+        videoFormat: BetterPlayerVideoFormat.other,
+        liveStream: false,
+        // placeholder: VideoThumbnailView(videoId: video.videoId, thumbnailUrl: video.getBestThumbnail()?.url ?? ''),
+/*
           notificationConfiguration: BetterPlayerNotificationConfiguration(
             showNotification: true,
             activityName: 'MainActivity',
             title: offlineVideo!.title,
             author: offlineVideo!.author,
             imageUrl: thumbPath,
-          ));
+          )
+*/
+      );
 
       Wakelock.enable();
 
@@ -379,5 +405,35 @@ class VideoPlayerController extends PlayerController {
   @override
   bool isPlaying() {
     return videoController?.isPlaying() ?? false;
+  }
+
+  @override
+  void pause() {
+    videoController?.pause();
+  }
+
+  @override
+  void play() {
+    videoController?.play();
+  }
+
+  @override
+  void seek(Duration position) {
+    videoController?.seekTo(position);
+  }
+
+  @override
+  Duration? bufferedPosition() {
+    return null;
+  }
+
+  @override
+  Duration position() {
+    return videoController?.videoPlayerController?.value.position ?? Duration.zero;
+  }
+
+  @override
+  double? speed() {
+    videoController?.videoPlayerController?.value.speed ?? 1;
   }
 }

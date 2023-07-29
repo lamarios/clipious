@@ -11,6 +11,8 @@ import 'package:logging/logging.dart';
 import '../../models/db/progress.dart' as dbProgress;
 
 import '../models/adaptiveFormat.dart';
+import '../models/mediaEvent.dart';
+import 'miniPayerController.dart';
 
 class AudioPlayerController extends PlayerController {
   Logger log = Logger('AudioPlayerController');
@@ -90,6 +92,7 @@ class AudioPlayerController extends PlayerController {
       initPlayer();
       loading = true;
       playing = true;
+      MiniPlayerController.to()?.eventStream.add(MediaEvent(state: MediaState.loading));
       AdaptiveFormat? audio = video?.adaptiveFormats.where((element) => element.type.contains("audio")).sortByReversed((e) => int.parse(e.bitrate ?? "0")).first;
       if (audio != null) {
         double progress = db.getVideoProgress(video!.videoId);
@@ -172,15 +175,18 @@ class AudioPlayerController extends PlayerController {
     switch (event.name) {
       case "playing":
         playing = true;
+        MiniPlayerController.to()?.eventStream.add(MediaEvent(state: MediaState.ready, type: MediaEventType.play));
         break;
       case "paused":
         playing = false;
+        MiniPlayerController.to()?.eventStream.add(MediaEvent(state: MediaState.ready, type: MediaEventType.pause));
         break;
       case "completed":
         if (error == null) {
           saveProgress(audioLength.inSeconds);
           onVideoFinished();
         }
+        MiniPlayerController.to()?.eventStream.add(MediaEvent(state: MediaState.completed));
         break;
     }
 
@@ -190,5 +196,36 @@ class AudioPlayerController extends PlayerController {
   @override
   bool isPlaying() {
     return playing;
+  }
+
+  @override
+  void play() {
+    player?.resume();
+  }
+
+  @override
+  void seek(Duration position) {
+    player?.seek(position);
+    MiniPlayerController.to()?.eventStream.add(MediaEvent(state: MediaState.ready, type: MediaEventType.seek));
+  }
+
+  @override
+  void pause() {
+    player?.pause();
+  }
+
+  @override
+  Duration? bufferedPosition() {
+    return null;
+  }
+
+  @override
+  Duration position() {
+    return audioPosition;
+  }
+
+  @override
+  double? speed() {
+    return 1;
   }
 }
