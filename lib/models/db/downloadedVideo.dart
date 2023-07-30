@@ -15,11 +15,12 @@ class DownloadedVideo {
   String? authorUrl;
   bool downloadComplete;
   bool downloadFailed;
+  bool audioOnly;
 
   @Transient()
-  Future<String> get videoPath async {
+  Future<String> get mediaPath async {
     Directory dir = await getApplicationDocumentsDirectory();
-    return "${dir.path}/$videoId.mp4";
+    return "${dir.path}/$videoId.${audioOnly ? 'm4a' : 'mp4'}";
   }
 
   @Transient()
@@ -28,5 +29,5 @@ class DownloadedVideo {
     return "${dir.path}/$videoId.jpg";
   }
 
-  DownloadedVideo({this.id = 0, required this.videoId, required this.title, this.author, this.authorUrl, this.downloadComplete = false, this.downloadFailed = false});
+  DownloadedVideo({this.id = 0, required this.videoId, required this.title, this.author, this.authorUrl, this.downloadComplete = false, this.downloadFailed = false, this.audioOnly = false});
 }

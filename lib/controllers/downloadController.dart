@@ -113,7 +113,7 @@ class DownloadController extends GetxController {
       }
 
       // download video
-      var videoPath = await downloadedVideo.videoPath;
+      var videoPath = await downloadedVideo.mediaPath;
       dio
           .download(stream.url, videoPath, onReceiveProgress: (count, total) => onProgress(count, total, downloadedVideo), cancelToken: cancelToken)
           .catchError((err) => onDownloadError(err, downloadedVideo));
@@ -130,7 +130,7 @@ class DownloadController extends GetxController {
     downloadProgresses.remove(vid.videoId);
 
     try {
-      String path = await vid.videoPath;
+      String path = await vid.mediaPath;
       await File(path).delete();
     } catch (e) {
       log.fine('File might not be available, that\'s ok');

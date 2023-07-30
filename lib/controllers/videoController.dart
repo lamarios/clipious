@@ -77,6 +77,12 @@ class VideoController extends GetxController {
     downloadProgress?.removeListener(onDownloadProgress);
   }
 
+  onDownload(){
+    downloading = true;
+    downloadProgress = 0;
+    update();
+  }
+
   onDownloadProgress(double progress) {
     if (video != null) {
       downloadProgress = progress;
@@ -122,26 +128,6 @@ class VideoController extends GetxController {
   bool get isDownloaded {
     if (video != null) {
       return db.getDownloadByVideoId(videoId) != null;
-    } else {
-      return false;
-    }
-  }
-
-  downloadVideo() async {
-    if (video != null) {
-      downloading = true;
-      downloadFailed = false;
-      update();
-      if (downloadFailed) {
-        var vid = db.getDownloadByVideoId(videoId);
-        if (vid != null) {
-          await DownloadController.to()?.retryDownload(vid);
-        }
-      } else {
-        await DownloadController.to()?.addDownload(video!.videoId);
-      }
-      initStreamListener();
-      return bool;
     } else {
       return false;
     }

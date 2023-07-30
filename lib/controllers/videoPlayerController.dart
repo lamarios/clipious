@@ -349,7 +349,7 @@ class VideoPlayerController extends PlayerController {
       bool lockOrientation = db.getSettings(LOCK_ORIENTATION_FULLSCREEN)?.value == 'true';
       bool fillVideo = db.getSettings(FILL_FULLSCREEN)?.value == 'true';
 
-      String videoPath = await offlineVideo!.videoPath;
+      String videoPath = await offlineVideo!.mediaPath;
       String thumbPath = await offlineVideo!.thumbnailPath;
 
       BetterPlayerDataSource betterPlayerDataSource = BetterPlayerDataSource(

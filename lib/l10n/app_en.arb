@@ -848,5 +848,9 @@
     "videoFailedDownloadRetry": "Download failed, tap to retry",
     "@videoFailedDownloadRetry": {
         "description": "Shown on download manager when a download fails and prompt the user to retry"
+    },
+    "videoDownloadAudioOnly": "Audio only",
+    "@videoDownloadAudioOnly": {
+        "description": "Label for toggle to download audio only "
     }
 }
