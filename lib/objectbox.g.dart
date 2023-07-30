@@ -221,7 +221,7 @@ final _entities = <ModelEntity>[
   ModelEntity(
       id: const IdUid(7, 7737259498144569754),
       name: 'DownloadedVideo',
-      lastPropertyId: const IdUid(8, 6560523765053270041),
+      lastPropertyId: const IdUid(10, 7860866333154890990),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
@@ -263,6 +263,16 @@ final _entities = <ModelEntity>[
             id: const IdUid(8, 6560523765053270041),
             name: 'audioOnly',
             type: 1,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(9, 345286493546760360),
+            name: 'videoLenthInSeconds',
+            type: 6,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(10, 7860866333154890990),
+            name: 'quality',
+            type: 9,
             flags: 0)
       ],
       relations: <ModelRelation>[],
@@ -548,7 +558,8 @@ ModelDefinition getObjectBoxModel() {
           final authorUrlOffset = object.authorUrl == null
               ? null
               : fbb.writeString(object.authorUrl!);
-          fbb.startTable(9);
+          final qualityOffset = fbb.writeString(object.quality);
+          fbb.startTable(11);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, videoIdOffset);
           fbb.addOffset(2, titleOffset);
@@ -557,6 +568,8 @@ ModelDefinition getObjectBoxModel() {
           fbb.addBool(5, object.downloadComplete);
           fbb.addBool(6, object.downloadFailed);
           fbb.addBool(7, object.audioOnly);
+          fbb.addInt64(8, object.videoLenthInSeconds);
+          fbb.addOffset(9, qualityOffset);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -579,7 +592,10 @@ ModelDefinition getObjectBoxModel() {
               downloadFailed: const fb.BoolReader()
                   .vTableGet(buffer, rootOffset, 16, false),
               audioOnly: const fb.BoolReader()
-                  .vTableGet(buffer, rootOffset, 18, false));
+                  .vTableGet(buffer, rootOffset, 18, false),
+              videoLenthInSeconds:
+                  const fb.Int64Reader().vTableGet(buffer, rootOffset, 20, 0),
+              quality: const fb.StringReader(asciiOptimization: true).vTableGet(buffer, rootOffset, 22, ''));
 
           return object;
         })
@@ -739,4 +755,12 @@ class DownloadedVideo_ {
   /// see [DownloadedVideo.audioOnly]
   static final audioOnly =
       QueryBooleanProperty<DownloadedVideo>(_entities[6].properties[7]);
+
+  /// see [DownloadedVideo.videoLenthInSeconds]
+  static final videoLenthInSeconds =
+      QueryIntegerProperty<DownloadedVideo>(_entities[6].properties[8]);
+
+  /// see [DownloadedVideo.quality]
+  static final quality =
+      QueryStringProperty<DownloadedVideo>(_entities[6].properties[9]);
 }

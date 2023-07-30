@@ -202,7 +202,7 @@
     },
     {
       "id": "7:7737259498144569754",
-      "lastPropertyId": "8:6560523765053270041",
+      "lastPropertyId": "10:7860866333154890990",
       "name": "DownloadedVideo",
       "properties": [
         {
@@ -245,6 +245,16 @@
           "id": "8:6560523765053270041",
           "name": "audioOnly",
           "type": 1
+        },
+        {
+          "id": "9:345286493546760360",
+          "name": "videoLenthInSeconds",
+          "type": 6
+        },
+        {
+          "id": "10:7860866333154890990",
+          "name": "quality",
+          "type": 9
         }
       ],
       "relations": []

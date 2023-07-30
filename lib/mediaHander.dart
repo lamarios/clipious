@@ -53,6 +53,7 @@ class MediaHandler extends BaseAudioHandler
 
   @override
   Future<void> skipToQueueItem(int index) async {
-    mediaItem.add(controller?.getMediaItem(index));
+    var item = await controller?.getMediaItem(index);
+    mediaItem.add(item);
   }
 }

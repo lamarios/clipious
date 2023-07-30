@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/globals.dart';
+import 'package:invidious/views/components/offlineVideoThumbnail.dart';
 
 import '../../controllers/audioPlayerController.dart';
 import '../../models/db/downloadedVideo.dart';
@@ -24,7 +25,7 @@ class AudioPlayer extends StatelessWidget {
       init: AudioPlayerController(offlineVideo: offlineVideo, video: video),
       builder: (_) {
         return Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: EdgeInsets.all(miniPlayer ? 8 : 0.0),
           child: AspectRatio(
             aspectRatio: 16 / 9,
             child: Stack(
@@ -34,12 +35,10 @@ class AudioPlayer extends StatelessWidget {
                     ? VideoThumbnailView(
                         videoId: _.video!.videoId,
                         thumbnailUrl: _.video?.getBestThumbnail()?.url ?? '',
-                        child: Stack(
-                          alignment: Alignment.center,
-                          children: [],
-                        ),
                       )
-                    : Text('offline video'),
+                    : _.offlineVideo != null
+                        ? OfflineVideoThumbnail(video: _.offlineVideo!)
+                        : const SizedBox.shrink(),
                 !(_.disableControls ?? false) && !_.loading
                     ? Positioned(
                         left: 0,

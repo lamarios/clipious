@@ -9,6 +9,7 @@ import 'package:invidious/models/imageObject.dart';
 import 'package:invidious/views/components/videoThumbnail.dart';
 
 import '../../models/baseVideo.dart';
+import 'offlineVideoThumbnail.dart';
 
 class CompactVideo extends StatelessWidget {
   final Function()? onTap;
@@ -53,19 +54,11 @@ class CompactVideo extends StatelessWidget {
                             )
                           : video != null
                               ? VideoThumbnailView(cacheKey: 'v-worst/${videoId}', videoId: videoId, thumbnailUrl: ImageObject.getWorstThumbnail(video?.videoThumbnails)?.url ?? '')
-                              : AspectRatio(
-                                  aspectRatio: 16 / 9,
-                                  child: _.offlineVideoThumbnailPath != null
-                                      ? ClipRRect(
-                                          borderRadius: BorderRadius.circular(10),
-                                          child: Image.file(
-                                            File(_.offlineVideoThumbnailPath!),
-                                            fit: BoxFit.contain,
-                                          ))
-                                      : Container(
-                                          decoration: BoxDecoration(color: colors.secondaryContainer, borderRadius: BorderRadius.circular(10)),
-                                        ),
-                                ),
+                              : offlineVideo != null
+                                  ? OfflineVideoThumbnail(
+                                      video: offlineVideo!,
+                                    )
+                                  : const SizedBox.shrink(),
                       Expanded(
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),

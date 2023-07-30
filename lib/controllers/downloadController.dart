@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:animate_to/animate_to.dart';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
+import 'package:invidious/extensions.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/models/db/downloadedVideo.dart';
 import 'package:invidious/models/formatStream.dart';
@@ -11,6 +12,7 @@ import 'package:invidious/models/imageObject.dart';
 import 'package:invidious/utils.dart';
 import 'package:logging/logging.dart';
 
+import '../models/adaptiveFormat.dart';
 import '../models/video.dart';
 import 'miniPayerController.dart';
 
@@ -36,7 +38,7 @@ class DownloadController extends GetxController {
 
   static DownloadController? to() => safeGet(tag: 'dl');
   final animateToController = AnimateToController();
-  List<DownloadedVideo> videos = db.getAllDownloads();
+  List<DownloadedVideo> videos = [];
 
   final Map<String, DownloadProgress> downloadProgresses = {};
 
@@ -60,8 +62,29 @@ class DownloadController extends GetxController {
     super.onClose();
   }
 
+  @override
+  onReady() {
+    super.onReady();
+    setVideos();
+    update();
+  }
+
+  setVideos() {
+    var vids = db.getAllDownloads();
+    // checking if we have any video that are not fail, not completed and not currently downloading
+    for (var v in vids) {
+      if (!v.downloadComplete && !v.downloadFailed && !downloadProgresses.containsKey(v.videoId)) {
+        // this download was interrupted by app restart or crash or something else, we set it as errored
+        v.downloadFailed = true;
+        db.upsertDownload(v);
+      }
+    }
+
+    videos = vids;
+  }
+
   void playAll() {
-    videos = db.getAllDownloads();
+    setVideos();
     update();
     MiniPlayerController.to()?.playOfflineVideos(videos.where((element) => element.downloadComplete && !element.downloadFailed).toList());
   }
@@ -76,7 +99,7 @@ class DownloadController extends GetxController {
       downloadProgresses.remove(video.videoId);
       video.downloadComplete = true;
       db.upsertDownload(video);
-      videos = db.getAllDownloads();
+      setVideos();
     }
 
     for (var f in downloadProgress?.listeners ?? []) {
@@ -85,22 +108,31 @@ class DownloadController extends GetxController {
     update();
   }
 
-  Future<bool> addDownload(String videoId) async {
+  Future<bool> addDownload(String videoId, {String quality = '720p', bool audioOnly = false}) async {
     if (videos.any((element) => element.videoId == videoId)) {
       return false;
     } else {
       Video vid = await service.getVideo(videoId);
-      var downloadedVideo = DownloadedVideo(videoId: vid.videoId, title: vid.title, author: vid.author, authorUrl: vid.authorUrl);
+      var downloadedVideo =
+          DownloadedVideo(videoId: vid.videoId, title: vid.title, author: vid.author, authorUrl: vid.authorUrl, audioOnly: audioOnly, videoLenthInSeconds: vid.lengthSeconds, quality: quality);
       db.upsertDownload(downloadedVideo);
-      videos = db.getAllDownloads();
-      update();
 
-      FormatStream stream = vid.formatStreams.firstWhere((element) => element.resolution == '720p');
+      String contentUrl;
+
+      if (!audioOnly) {
+        FormatStream stream = vid.formatStreams.firstWhere((element) => element.resolution == quality);
+        contentUrl = stream.url;
+      } else {
+        AdaptiveFormat audio = vid.adaptiveFormats.sortByReversed((e) => int.parse(e.bitrate ?? "0")).firstWhere((element) => element.type.contains("audio"));
+        contentUrl = audio.url;
+      }
 
       Dio dio = Dio();
       CancelToken cancelToken = CancelToken();
 
       downloadProgresses[downloadedVideo.videoId] = DownloadProgress(cancelToken);
+
+      setVideos();
       update();
       // download thumbnail
       String? thumbUrl = ImageObject.getBestThumbnail(vid.videoThumbnails)?.url;
@@ -114,8 +146,10 @@ class DownloadController extends GetxController {
 
       // download video
       var videoPath = await downloadedVideo.mediaPath;
+
+      log.info("Downloading video ${vid.title}, audioOnly ? $audioOnly, quality: $quality (if not only audio) to path: $videoPath");
       dio
-          .download(stream.url, videoPath, onReceiveProgress: (count, total) => onProgress(count, total, downloadedVideo), cancelToken: cancelToken)
+          .download(contentUrl, videoPath, onReceiveProgress: (count, total) => onProgress(count, total, downloadedVideo), cancelToken: cancelToken)
           .catchError((err) => onDownloadError(err, downloadedVideo));
 
       return true;
@@ -144,7 +178,7 @@ class DownloadController extends GetxController {
     }
 
     db.deleteDownload(vid);
-    videos = db.getAllDownloads();
+    setVideos();
     update();
   }
 
@@ -159,13 +193,13 @@ class DownloadController extends GetxController {
     onProgress(1, 1, vid);
     downloadProgresses.remove(vid.videoId);
     db.upsertDownload(vid);
-    videos = db.getAllDownloads();
+    setVideos();
     update();
     return;
   }
 
   Future<void> retryDownload(DownloadedVideo vid) async {
     await deleteVideo(vid);
-    await addDownload(vid.videoId);
+    await addDownload(vid.videoId, quality: vid.quality, audioOnly: vid.audioOnly);
   }
 }

@@ -36,7 +36,7 @@ class DownloadModalSheet extends StatelessWidget {
         });
   }
 
-  void downloadVideo(BuildContext context, DownloadModalSheetController downloadModalSheetController) async {
+  void downloadVideo(BuildContext context, DownloadModalSheetController _) async {
     if (onDownload != null) {
       onDownload!();
     }
@@ -48,7 +48,7 @@ class DownloadModalSheet extends StatelessWidget {
     } else {
       scaffoldKey.currentState?.showSnackBar(SnackBar(content: Text(locals.videoDownloadStarted)));
     }
-    bool canDownload = await downloadController?.addDownload(video.videoId) ?? false;
+    bool canDownload = await downloadController?.addDownload(video.videoId, audioOnly: _.audioOnly, quality: _.quality) ?? false;
     if (!canDownload) {
       scaffoldKey.currentState?.showSnackBar(SnackBar(content: Text(locals.videoAlreadyDownloaded)));
     }

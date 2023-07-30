@@ -77,6 +77,8 @@ class MiniPlayerController extends GetxController {
   onReady() {
     super.onReady();
     BackButtonInterceptor.add(handleBackButton, name: 'miniPlayer', zIndex: 2);
+
+
     eventStream.stream.map((event) {
       bool hasQueue = videos.length > 1 || offlineVideos.length > 1;
       var state = PlaybackState(
@@ -86,13 +88,7 @@ class MiniPlayerController extends GetxController {
           MediaControl.stop,
           hasQueue ? MediaControl.skipToNext : MediaControl.fastForward,
         ],
-        systemActions: const {
-          MediaAction.seek,
-          MediaAction.seekForward,
-          MediaAction.seekBackward,
-          MediaAction.setShuffleMode,
-          MediaAction.setRepeatMode
-        },
+        systemActions: const {MediaAction.seek, MediaAction.seekForward, MediaAction.seekBackward, MediaAction.setShuffleMode, MediaAction.setRepeatMode},
         androidCompactActionIndices: const [0, 1, 3],
         processingState: const {
           MediaState.idle: AudioProcessingState.idle,
@@ -310,13 +306,13 @@ class MiniPlayerController extends GetxController {
 
   playVideo(List<BaseVideo> v, {bool? goBack, bool? audio}) async {
     List<BaseVideo> videos = v.where((element) => !element.filtered).toList();
-    eventStream.add(MediaEvent(state: MediaState.loading));
     if (goBack ?? false) navigatorKey.currentState?.pop();
     log.fine('Playing ${videos.length} videos');
 
     setAudio(audio);
 
     if (videos.isNotEmpty) {
+      eventStream.add(MediaEvent(state: MediaState.loading));
       offlineVideos = [];
       this.videos = List.from(videos, growable: true);
       playedVideos = [];
@@ -498,6 +494,9 @@ class MiniPlayerController extends GetxController {
 
   /// Offline video management
   void switchToOfflineVideo(DownloadedVideo video) {
+    setAudio(video.audioOnly);
+    eventStream.add(MediaEvent(state: MediaState.loading));
+
     videos = [];
     currentlyPlaying = null;
     int index = offlineVideos.indexWhere((element) => element.videoId == video.videoId);
@@ -516,13 +515,15 @@ class MiniPlayerController extends GetxController {
     playerController?.switchToOfflineVideo(video);
     playerController?.toggleControls(!isMini);
     update();
-    // VideoLikeButtonController.to(tag: VideoLikeButtonController.tags(video.videoId))?.checkVideoLikeStatus();
-    // MiniPlayerControlsController.to()?.setVideo(video.videoId);
+
+    mediaHandler.skipToQueueItem(currentIndex);
   }
 
   void playOfflineVideos(List<DownloadedVideo> offlineVids) {
     log.fine('Playing ${offlineVids.length} oflfine videos');
     if (offlineVids.isNotEmpty) {
+      eventStream.add(MediaEvent(state: MediaState.loading));
+
       videos = [];
       offlineVideos = List.from(offlineVids, growable: true);
       playedVideos = [];
@@ -550,11 +551,15 @@ class MiniPlayerController extends GetxController {
     playerController?.seek(newDuration);
   }
 
-  MediaItem? getMediaItem(int index) {
+  Future<MediaItem?> getMediaItem(int index) async {
     if (videos.isNotEmpty) {
       var e = videos[index];
       return MediaItem(
           id: e.videoId, title: e.title, artist: e.author, duration: Duration(seconds: e.lengthSeconds), album: '', artUri: Uri.parse(ImageObject.getBestThumbnail(e.videoThumbnails)?.url ?? ''));
+    } else if (offlineVideos.isNotEmpty) {
+      var e = offlineVideos[index];
+      var path = await e.thumbnailPath;
+      return MediaItem(id: e.videoId, title: e.title, artist: e.author, duration: Duration(seconds: e.videoLenthInSeconds), album: '', artUri: Uri.file(path));
     }
     return null;
   }

@@ -38,6 +38,7 @@ class VideoQueue extends StatelessWidget {
   }
 
   List<Widget> offlineVideoQueue(BuildContext context) {
+    var colors = Theme.of(context).colorScheme;
     return controller.offlineVideos.map((e) {
       bool isPlaying = controller.offlineVideos[controller.currentIndex].videoId == e.videoId;
       return SwipeActionCell(
@@ -61,6 +62,9 @@ class VideoQueue extends StatelessWidget {
           onTap: isPlaying ? () {} : () => controller.switchToOfflineVideo(e),
           offlineVideo: e,
           highlighted: isPlaying,
+          trailing: [
+            e.audioOnly ? Icon(Icons.audiotrack, color: colors.secondary,) : const SizedBox.shrink(),
+          ],
         ),
       );
     }).toList();
