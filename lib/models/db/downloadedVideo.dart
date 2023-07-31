@@ -1,14 +1,13 @@
 import 'dart:io';
 
+import 'package:invidious/models/baseVideo.dart';
 import 'package:objectbox/objectbox.dart';
 import 'package:path_provider/path_provider.dart';
 
 @Entity()
-class DownloadedVideo {
+class DownloadedVideo extends IdedVideo {
   @Id()
   int id = 0;
-
-  String videoId;
 
   String title;
   String? author;
@@ -32,5 +31,15 @@ class DownloadedVideo {
   }
 
   DownloadedVideo(
-      {this.id = 0, required this.videoId, required this.title, this.author, this.authorUrl, this.downloadComplete = false, this.downloadFailed = false, this.audioOnly = false, this.videoLenthInSeconds = 1, this.quality = '720p'});
+      {this.id = 0,
+      required String videoId,
+      required this.title,
+      this.author,
+      this.authorUrl,
+      this.downloadComplete = false,
+      this.downloadFailed = false,
+      this.audioOnly = false,
+      this.videoLenthInSeconds = 1,
+      this.quality = '720p'})
+      : super(videoId);
 }

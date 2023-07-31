@@ -10,8 +10,8 @@ import 'package:invidious/controllers/audioPlayerController.dart';
 import 'package:invidious/controllers/miniPlayerAwareController.dart';
 import 'package:invidious/controllers/miniPlayerProgressController.dart';
 import 'package:invidious/controllers/miniplayerControlsController.dart';
-import 'package:invidious/controllers/videoPlayerController.dart';
 import 'package:invidious/controllers/videoLikeController.dart';
+import 'package:invidious/controllers/videoPlayerController.dart';
 import 'package:invidious/database.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/models/db/settings.dart';
@@ -78,9 +78,23 @@ class MiniPlayerController extends GetxController {
     super.onReady();
     BackButtonInterceptor.add(handleBackButton, name: 'miniPlayer', zIndex: 2);
 
-
     eventStream.stream.map((event) {
+      switch (event.state) {
+        case MediaState.completed:
+          playNext();
+          break;
+        default:
+          break;
+      }
+
+      switch (event.type) {
+        default:
+          MiniPlayerControlsController.to()?.update();
+          break;
+      }
+
       bool hasQueue = videos.length > 1 || offlineVideos.length > 1;
+      log.fine("Received event: ${event.state}");
       var state = PlaybackState(
         controls: [
           hasQueue ? MediaControl.skipToPrevious : MediaControl.rewind,
@@ -270,7 +284,7 @@ class MiniPlayerController extends GetxController {
             } else {
               List<DownloadedVideo> availableVideos = offlineVideos.where((e) => !playedVideos.contains(e.videoId)).toList();
               String nextVideoId = availableVideos[Random().nextInt(availableVideos.length)].videoId;
-              currentIndex = videos.indexWhere((e) => e.videoId == nextVideoId);
+              currentIndex = offlineVideos.indexWhere((e) => e.videoId == nextVideoId);
             }
           }
         }
@@ -304,21 +318,24 @@ class MiniPlayerController extends GetxController {
     }
   }
 
-  playVideo(List<BaseVideo> v, {bool? goBack, bool? audio}) async {
-    List<BaseVideo> videos = v.where((element) => !element.filtered).toList();
-    if (goBack ?? false) navigatorKey.currentState?.pop();
-    log.fine('Playing ${videos.length} videos');
+  _playVideos(List<IdedVideo> vids) async {
+    if (vids.isNotEmpty) {
+      bool isOffline = vids[0] is DownloadedVideo;
 
-    setAudio(audio);
-
-    if (videos.isNotEmpty) {
       eventStream.add(MediaEvent(state: MediaState.loading));
-      offlineVideos = [];
-      this.videos = List.from(videos, growable: true);
+
+      if (isOffline) {
+        videos = [];
+        offlineVideos = List.from(vids, growable: true);
+      } else {
+        offlineVideos = [];
+        videos = List.from(vids, growable: true);
+      }
+
       playedVideos = [];
       currentIndex = 0;
       selectedFullScreenIndex = 0;
-      if (videos.length > 1) {
+      if (vids.length > 1) {
         selectedFullScreenIndex = 3;
       }
       opacity = 0;
@@ -326,8 +343,87 @@ class MiniPlayerController extends GetxController {
       update();
 
       showBigPlayer();
-      switchToVideo(videos[0]);
+      if (isOffline) {
+        await switchToOfflineVideo(offlineVideos[0]);
+      } else {
+        await switchToVideo(videos[0]);
+      }
     }
+  }
+
+  _switchToVideo(IdedVideo video) async {
+    bool isOffline = video is DownloadedVideo;
+
+    eventStream.add(MediaEvent(state: MediaState.loading));
+
+    if (isOffline) {
+      videos = [];
+      currentlyPlaying = null;
+    } else {
+      offlineVideos = [];
+      offlineCurrentlyPlaying = null;
+    }
+
+    List<IdedVideo> toCheck = isOffline ? offlineVideos : videos;
+
+    int index = toCheck.indexWhere((element) => element.videoId == video.videoId);
+    if (index >= 0 && index < toCheck.length) {
+      currentIndex = index;
+    } else {
+      currentIndex = 0;
+    }
+
+    if (!isOffline) {
+      late Video v;
+      if (video is Video) {
+        v = video;
+      } else {
+        v = await service.getVideo(video.videoId);
+      }
+      currentlyPlaying = v;
+      playerController?.switchVideo(v);
+    } else {
+      offlineCurrentlyPlaying = video;
+      playerController?.switchToOfflineVideo(video);
+    }
+
+    // if we already have a full Video, no need to call the backend again
+
+    if (!playedVideos.contains(video.videoId)) {
+      playedVideos.add(video.videoId);
+    }
+    progress = 0;
+    playerController?.toggleControls(!isMini);
+    update();
+
+    VideoLikeButtonController.to(tag: VideoLikeButtonController.tags(video.videoId))?.checkVideoLikeStatus();
+    MiniPlayerControlsController.to()?.setVideo(video.videoId);
+
+    mediaHandler.skipToQueueItem(currentIndex);
+  }
+
+  playOfflineVideos(List<DownloadedVideo> offlineVids) async {
+    log.fine('Playing ${offlineVids.length} offline videos');
+    await _playVideos(offlineVids);
+  }
+
+  playVideo(List<BaseVideo> v, {bool? goBack, bool? audio}) async {
+    List<BaseVideo> videos = v.where((element) => !element.filtered).toList();
+    if (goBack ?? false) navigatorKey.currentState?.pop();
+    log.fine('Playing ${videos.length} videos');
+
+    setAudio(audio);
+
+    await _playVideos(videos);
+  }
+
+  switchToOfflineVideo(DownloadedVideo video) async {
+    setAudio(video.audioOnly);
+    await _switchToVideo(video);
+  }
+
+  switchToVideo(BaseVideo video) async {
+    await _switchToVideo(video);
   }
 
   void togglePlaying() {
@@ -340,40 +436,6 @@ class MiniPlayerController extends GetxController {
 
   pause() {
     playerController?.pause();
-  }
-
-  switchToVideo(BaseVideo video) async {
-    eventStream.add(MediaEvent(state: MediaState.loading));
-    offlineVideos = [];
-    offlineCurrentlyPlaying = null;
-    int index = videos.indexWhere((element) => element.videoId == video.videoId);
-    if (index >= 0 && index < videos.length) {
-      currentIndex = index;
-    } else {
-      currentIndex = 0;
-    }
-
-    late Video v;
-    if (video is Video) {
-      v = video;
-    } else {
-      v = await service.getVideo(video.videoId);
-    }
-
-    // if we already have a full Video, no need to call the backend again
-    currentlyPlaying = v;
-
-    if (!playedVideos.contains(v.videoId)) {
-      playedVideos.add(v.videoId);
-    }
-    progress = 0;
-    playerController?.switchVideo(v);
-    playerController?.toggleControls(!isMini);
-    update();
-    VideoLikeButtonController.to(tag: VideoLikeButtonController.tags(v.videoId))?.checkVideoLikeStatus();
-    MiniPlayerControlsController.to()?.setVideo(v.videoId);
-
-    mediaHandler.skipToQueueItem(currentIndex);
   }
 
   BaseVideo? get currentVideo => videos.isNotEmpty ? videos[currentIndex] : null;
@@ -493,53 +555,6 @@ class MiniPlayerController extends GetxController {
   }
 
   /// Offline video management
-  void switchToOfflineVideo(DownloadedVideo video) {
-    setAudio(video.audioOnly);
-    eventStream.add(MediaEvent(state: MediaState.loading));
-
-    videos = [];
-    currentlyPlaying = null;
-    int index = offlineVideos.indexWhere((element) => element.videoId == video.videoId);
-    if (index >= 0 && index < offlineVideos.length) {
-      currentIndex = index;
-    } else {
-      currentIndex = 0;
-    }
-
-    offlineCurrentlyPlaying = video;
-
-    if (!playedVideos.contains(video.videoId)) {
-      playedVideos.add(video.videoId);
-    }
-    progress = 0;
-    playerController?.switchToOfflineVideo(video);
-    playerController?.toggleControls(!isMini);
-    update();
-
-    mediaHandler.skipToQueueItem(currentIndex);
-  }
-
-  void playOfflineVideos(List<DownloadedVideo> offlineVids) {
-    log.fine('Playing ${offlineVids.length} oflfine videos');
-    if (offlineVids.isNotEmpty) {
-      eventStream.add(MediaEvent(state: MediaState.loading));
-
-      videos = [];
-      offlineVideos = List.from(offlineVids, growable: true);
-      playedVideos = [];
-      currentIndex = 0;
-      selectedFullScreenIndex = 0;
-      if (offlineVideos.length > 1) {
-        selectedFullScreenIndex = 3;
-      }
-      opacity = 0;
-      top = 500;
-      update();
-
-      showBigPlayer();
-      switchToOfflineVideo(offlineVideos[0]);
-    }
-  }
 
   void fastForward() {
     Duration newDuration = Duration(seconds: (playerController?.position().inSeconds ?? 0) + 10);

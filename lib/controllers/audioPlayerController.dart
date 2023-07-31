@@ -8,8 +8,8 @@ import 'package:invidious/models/video.dart';
 import 'package:invidious/utils.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:logging/logging.dart';
-import '../../models/db/progress.dart' as dbProgress;
 
+import '../../models/db/progress.dart' as dbProgress;
 import '../models/adaptiveFormat.dart';
 import '../models/mediaEvent.dart';
 import 'miniPayerController.dart';
@@ -45,7 +45,7 @@ class AudioPlayerController extends PlayerController {
 
   @override
   onReady() async {
-    video != null ? playVideo() : playOfflineVideo();
+    playVideo(offlineVideo != null);
   }
 
   @override
@@ -60,52 +60,24 @@ class AudioPlayerController extends PlayerController {
     player?.durationStream.listen(onDurationChanged);
   }
 
-  @override
-  void playOfflineVideo() async {
-    if (offlineVideo != null) {
-      disposeControllers();
-      initPlayer();
-      audioPosition = Duration.zero;
-      audioLength = Duration(seconds: offlineVideo!.videoLenthInSeconds);
-      loading = true;
-      MiniPlayerController.to()?.eventStream.add(MediaEvent(state: MediaState.loading));
-      String path = await offlineVideo!.mediaPath;
-
-      update();
-
-      try {
-        await player?.setAudioSource(AudioSource.file(path));
-        player?.play();
-      } catch (e) {
-        log.severe("Couldn't play video", e);
-        error = e.toString();
-        loading = false;
-        update();
-      }
-    }
-  }
-
   onStateStreamChange(PlayerState state) {
     log.fine('Player state event $state');
-    if (state.playing) {
-    } else {
-      switch (state.processingState) {
-        case ProcessingState.idle:
-          MiniPlayerController.to()?.eventStream.add(MediaEvent(state: MediaState.idle));
-          break;
-        case ProcessingState.loading:
-          MiniPlayerController.to()?.eventStream.add(MediaEvent(state: MediaState.loading));
-          break;
-        case ProcessingState.buffering:
-          MiniPlayerController.to()?.eventStream.add(MediaEvent(state: MediaState.buffering));
-          break;
-        case ProcessingState.ready:
-          MiniPlayerController.to()?.eventStream.add(MediaEvent(state: MediaState.ready));
-          break;
-        case ProcessingState.completed:
-          MiniPlayerController.to()?.eventStream.add(MediaEvent(state: MediaState.completed));
-          break;
-      }
+    switch (state.processingState) {
+      case ProcessingState.idle:
+        MiniPlayerController.to()?.eventStream.add(MediaEvent(state: MediaState.idle));
+        break;
+      case ProcessingState.loading:
+        MiniPlayerController.to()?.eventStream.add(MediaEvent(state: MediaState.loading));
+        break;
+      case ProcessingState.buffering:
+        MiniPlayerController.to()?.eventStream.add(MediaEvent(state: MediaState.buffering));
+        break;
+      case ProcessingState.ready:
+        MiniPlayerController.to()?.eventStream.add(MediaEvent(state: MediaState.ready));
+        break;
+      case ProcessingState.completed:
+        MiniPlayerController.to()?.eventStream.add(MediaEvent(state: MediaState.completed));
+        break;
     }
   }
 
@@ -118,6 +90,9 @@ class AudioPlayerController extends PlayerController {
     int currentPosition = position.inSeconds;
     if (currentPosition > previousSponsorCheck + 1) {
       audioPosition = position;
+      if (audioPosition.inMilliseconds > audioLength.inMilliseconds) {
+        audioPosition = audioLength;
+      }
       saveProgress(currentPosition);
       MiniPlayerProgressController.to()?.setProgress(progress);
       update();
@@ -130,35 +105,45 @@ class AudioPlayerController extends PlayerController {
   }
 
   @override
-  Future<void> playVideo() async {
-    if (video != null) {
+  playVideo(bool offline) async {
+    if (video != null || offlineVideo != null) {
       disposeControllers();
       initPlayer();
       audioPosition = Duration.zero;
-      audioLength = Duration(seconds: video!.lengthSeconds);
+      audioLength = Duration(seconds: offline ? offlineVideo!.videoLenthInSeconds : video!.lengthSeconds);
       loading = true;
       MiniPlayerController.to()?.eventStream.add(MediaEvent(state: MediaState.loading));
-      AdaptiveFormat? audio = video?.adaptiveFormats.where((element) => element.type.contains("audio")).sortByReversed((e) => int.parse(e.bitrate ?? "0")).first;
-      if (audio != null) {
-        double progress = db.getVideoProgress(video!.videoId);
+      try {
+        AudioSource? source;
         Duration? startAt;
-        if (progress > 0 && progress < 0.90) {
-          startAt = Duration(seconds: (video!.lengthSeconds * progress).floor());
+        if (!offline) {
+          AdaptiveFormat? audio = video?.adaptiveFormats.where((element) => element.type.contains("audio")).sortByReversed((e) => int.parse(e.bitrate ?? "0")).first;
+          if (audio != null) {
+            double progress = db.getVideoProgress(video!.videoId);
+            if (progress > 0 && progress < 0.90) {
+              startAt = Duration(seconds: (video!.lengthSeconds * progress).floor());
+            }
+            update();
+            source = AudioSource.uri(Uri.parse(audio.url));
+          }
+        } else {
+          String path = await offlineVideo!.mediaPath;
+          source = AudioSource.file(path);
         }
-        update();
 
-        try {
-          await player?.setAudioSource(AudioSource.uri(Uri.parse(audio.url)), initialPosition: startAt);
-          player?.play();
-        } catch (e) {
-          log.severe("Couldn't play video", e);
-          error = e.toString();
-          loading = false;
-          update();
+        if (source == null) {
+          throw Error();
         }
+
+        player?.setAudioSource(source, initialPosition: startAt);
+        player?.play();
+      } catch (e) {
+        log.severe("Couldn't play video", e);
+        error = e.toString();
+        loading = false;
+        update();
       }
     }
-    // TODO: implement playVideo
   }
 
   @override
@@ -183,14 +168,14 @@ class AudioPlayerController extends PlayerController {
   void switchToOfflineVideo(DownloadedVideo v) {
     video = null;
     offlineVideo = v;
-    playOfflineVideo();
+    playVideo(true);
   }
 
   @override
   void switchVideo(Video video) async {
     offlineVideo = null;
     this.video = video;
-    playVideo();
+    playVideo(false);
   }
 
   @override
@@ -226,7 +211,7 @@ class AudioPlayerController extends PlayerController {
   @override
   void play() {
     player?.play();
-    MiniPlayerController.to()?.eventStream.add(MediaEvent(state: MediaState.completed, type: MediaEventType.play));
+    MiniPlayerController.to()?.eventStream.add(MediaEvent(state: MediaState.ready, type: MediaEventType.play));
   }
 
   @override
@@ -238,7 +223,7 @@ class AudioPlayerController extends PlayerController {
   @override
   void pause() {
     player?.pause();
-    MiniPlayerController.to()?.eventStream.add(MediaEvent(state: MediaState.completed, type: MediaEventType.pause));
+    MiniPlayerController.to()?.eventStream.add(MediaEvent(state: MediaState.ready, type: MediaEventType.pause));
   }
 
   @override

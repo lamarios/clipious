@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:invidious/globals.dart';
+import 'package:get/get.dart';
 import 'package:invidious/views/components/offlineVideoThumbnail.dart';
 
 import '../../controllers/audioPlayerController.dart';
@@ -63,7 +62,7 @@ class AudioPlayer extends StatelessWidget {
                                 ),
                                 Text(
                                   '${prettyDuration(_.audioPosition)} / ${prettyDuration(_.audioLength)}',
-                                  style: TextStyle(fontSize: 10),
+                                  style: const TextStyle(fontSize: 10),
                                 ),
                               ],
                             ),
@@ -78,10 +77,13 @@ class AudioPlayer extends StatelessWidget {
                             ),
                             child: _.loading
                                 ? const Center(
-                                    child: SizedBox(
-                                      width: 50,
-                                      height: 50,
-                                      child: CircularProgressIndicator(),
+                                    child: FractionallySizedBox(
+                                      heightFactor: 0.3,
+                                      child: AspectRatio(
+                                          aspectRatio: 1,
+                                          child: CircularProgressIndicator(
+                                            strokeWidth: 2,
+                                          )),
                                     ),
                                   )
                                 : Center(child: Text(_.error ?? '')),

@@ -6,6 +6,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/controllers/settingsController.dart';
 import 'package:invidious/controllers/tvPlayerController.dart';
 import 'package:invidious/controllers/videoInListController.dart';
+import 'package:invidious/models/baseVideo.dart';
 import 'package:invidious/models/db/downloadedVideo.dart';
 import 'package:invidious/models/mediaEvent.dart';
 import 'package:invidious/utils.dart';
@@ -59,7 +60,7 @@ class VideoPlayerController extends PlayerController {
 
   @override
   onReady() async {
-    video != null ? playVideo() : playOfflineVideo();
+    playVideo(offlineVideo != null);
   }
 
   @override
@@ -123,7 +124,6 @@ class VideoPlayerController extends PlayerController {
       case BetterPlayerEventType.finished:
         if (video != null) {
           saveProgress(video!.lengthSeconds);
-          onVideoFinished();
           // broadcastEvent(event);
         }
         MiniPlayerController.to()?.eventStream.add(MediaEvent(state: MediaState.completed));
@@ -193,7 +193,7 @@ class VideoPlayerController extends PlayerController {
 
     db.saveSetting(SettingsValue(USE_DASH, (!useDash).toString()));
     useDash = !useDash;
-    playVideo();
+    playVideo(false);
     update();
   }
 
@@ -203,7 +203,7 @@ class VideoPlayerController extends PlayerController {
     MiniPlayerController.to()?.handleVideoEvent(BetterPlayerEvent(BetterPlayerEventType.hideFullscreen));
     disposeControllers();
     this.video = video;
-    playVideo();
+    playVideo(false);
   }
 
   @override
@@ -220,74 +220,80 @@ class VideoPlayerController extends PlayerController {
   }
 
   @override
-  playVideo() {
-    if (video != null) {
+  playVideo(bool offline) async {
+    if (video != null || offlineVideo != null) {
+      IdedVideo idedVideo = offline ? offlineVideo! : video!;
       videoController?.dispose();
       videoController = null;
       // we get segments if there are any, no need to wait.
       setSponsorBlock();
-      double progress = db.getVideoProgress(video!.videoId);
+      double progress = db.getVideoProgress(idedVideo.videoId);
       Duration? startAt;
       if (progress > 0 && progress < 0.90) {
-        startAt = Duration(seconds: (video!.lengthSeconds * progress).floor());
+        startAt = Duration(seconds: (offline ? offlineVideo!.videoLenthInSeconds : video!.lengthSeconds * progress).floor());
       }
 
       print('start at $startAt');
 
-      String baseUrl = db.getCurrentlySelectedServer().url;
+      late BetterPlayerDataSource betterPlayerDataSource;
 
-      Map<String, String> resolutions = {};
+      // getting data sources
+      if (offline) {
+        String videoPath = await offlineVideo!.mediaPath;
 
-      bool isHls = video!.hlsUrl != null;
-      String videoUrl = isHls
-          ? '${video!.hlsUrl!}${service.useProxy() ? '?local=true' : ''}'
-          : useDash
-              ? '${video!.dashUrl}${service.useProxy() ? '?local=true' : ''}'
-              : video!.formatStreams[video!.formatStreams.length - 1].url;
+        betterPlayerDataSource = BetterPlayerDataSource(
+          BetterPlayerDataSourceType.file,
+          videoPath,
+          videoFormat: BetterPlayerVideoFormat.other,
+          liveStream: false,
+        );
+      } else {
+        String baseUrl = db.getCurrentlySelectedServer().url;
 
-      log.info('Playing url (dash ${useDash},  hasHls ? ${video!.hlsUrl != null})  ${videoUrl}');
+        Map<String, String> resolutions = {};
 
-      BetterPlayerVideoFormat format = isHls
-          ? BetterPlayerVideoFormat.hls
-          : useDash
-              ? BetterPlayerVideoFormat.dash
-              : BetterPlayerVideoFormat.other;
+        bool isHls = video!.hlsUrl != null;
+        String videoUrl = isHls
+            ? '${video!.hlsUrl!}${service.useProxy() ? '?local=true' : ''}'
+            : useDash
+                ? '${video!.dashUrl}${service.useProxy() ? '?local=true' : ''}'
+                : video!.formatStreams[video!.formatStreams.length - 1].url;
 
-      if (format == BetterPlayerVideoFormat.other) {
-        for (var value in video!.formatStreams) {
-          resolutions[value.qualityLabel] = value.url;
+        log.info('Playing url (dash ${useDash},  hasHls ? ${video!.hlsUrl != null})  ${videoUrl}');
+
+        BetterPlayerVideoFormat format = isHls
+            ? BetterPlayerVideoFormat.hls
+            : useDash
+                ? BetterPlayerVideoFormat.dash
+                : BetterPlayerVideoFormat.other;
+
+        if (format == BetterPlayerVideoFormat.other) {
+          for (var value in video!.formatStreams) {
+            resolutions[value.qualityLabel] = value.url;
+          }
         }
+
+        String lastSubtitle = '';
+        if (db.getSettings(REMEMBER_LAST_SUBTITLE)?.value == 'true') {
+          lastSubtitle = db.getSettings(LAST_SUBTITLE)?.value ?? '';
+        }
+
+        betterPlayerDataSource = BetterPlayerDataSource(
+          BetterPlayerDataSourceType.network,
+          videoUrl,
+          videoFormat: format,
+          liveStream: video!.liveNow,
+          subtitles: video!.captions
+              .map((s) => BetterPlayerSubtitlesSource(type: BetterPlayerSubtitlesSourceType.network, urls: ['${baseUrl}${s.url}'], name: s.label, selectedByDefault: s.label == lastSubtitle))
+              .toList(),
+          resolutions: resolutions.isNotEmpty ? resolutions : null,
+        );
       }
 
-      String lastSubtitle = '';
-      if (db.getSettings(REMEMBER_LAST_SUBTITLE)?.value == 'true') {
-        lastSubtitle = db.getSettings(LAST_SUBTITLE)?.value ?? '';
-      }
+      Wakelock.enable();
 
       bool lockOrientation = db.getSettings(LOCK_ORIENTATION_FULLSCREEN)?.value == 'true';
       bool fillVideo = db.getSettings(FILL_FULLSCREEN)?.value == 'true';
-
-      BetterPlayerDataSource betterPlayerDataSource = BetterPlayerDataSource(
-        BetterPlayerDataSourceType.network, videoUrl,
-        videoFormat: format,
-        liveStream: video!.liveNow,
-        subtitles: video!.captions
-            .map((s) => BetterPlayerSubtitlesSource(type: BetterPlayerSubtitlesSourceType.network, urls: ['${baseUrl}${s.url}'], name: s.label, selectedByDefault: s.label == lastSubtitle))
-            .toList(),
-        resolutions: resolutions.isNotEmpty ? resolutions : null,
-        // placeholder: VideoThumbnailView(videoId: video.videoId, thumbnailUrl: video.getBestThumbnail()?.url ?? ''),
-/*
-          notificationConfiguration: BetterPlayerNotificationConfiguration(
-            showNotification: true,
-            activityName: 'MainActivity',
-            title: video!.title,
-            author: video!.author,
-            imageUrl: video!.getBestThumbnail()?.url ?? '',
-          )
-*/
-      );
-
-      Wakelock.enable();
 
       videoController = BetterPlayerController(
           BetterPlayerConfiguration(
@@ -340,66 +346,12 @@ class VideoPlayerController extends PlayerController {
   }
 
   @override
-  void playOfflineVideo() async {
-    if (offlineVideo != null) {
-      videoController?.dispose();
-      videoController = null;
-      // we get segments if there are any, no need to wait.
-
-      bool lockOrientation = db.getSettings(LOCK_ORIENTATION_FULLSCREEN)?.value == 'true';
-      bool fillVideo = db.getSettings(FILL_FULLSCREEN)?.value == 'true';
-
-      String videoPath = await offlineVideo!.mediaPath;
-      String thumbPath = await offlineVideo!.thumbnailPath;
-
-      BetterPlayerDataSource betterPlayerDataSource = BetterPlayerDataSource(
-        BetterPlayerDataSourceType.file, videoPath,
-        videoFormat: BetterPlayerVideoFormat.other,
-        liveStream: false,
-        // placeholder: VideoThumbnailView(videoId: video.videoId, thumbnailUrl: video.getBestThumbnail()?.url ?? ''),
-/*
-          notificationConfiguration: BetterPlayerNotificationConfiguration(
-            showNotification: true,
-            activityName: 'MainActivity',
-            title: offlineVideo!.title,
-            author: offlineVideo!.author,
-            imageUrl: thumbPath,
-          )
-*/
-      );
-
-      Wakelock.enable();
-
-      videoController = BetterPlayerController(
-          BetterPlayerConfiguration(
-              deviceOrientationsOnFullScreen: [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight, DeviceOrientation.portraitDown, DeviceOrientation.portraitUp],
-              deviceOrientationsAfterFullScreen: [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight, DeviceOrientation.portraitDown, DeviceOrientation.portraitUp],
-              handleLifecycle: false,
-              autoDetectFullscreenDeviceOrientation: lockOrientation,
-              autoDetectFullscreenAspectRatio: true,
-              autoPlay: true,
-              allowedScreenSleep: false,
-              fit: fillVideo ? BoxFit.cover : BoxFit.contain,
-              controlsConfiguration: BetterPlayerControlsConfiguration(
-                  showControls: !(disableControls ?? false),
-                  enablePlayPause: false,
-                  overflowModalColor: colors.background,
-                  overflowModalTextColor: overFlowTextColor,
-                  overflowMenuIconsColor: overFlowTextColor)),
-          betterPlayerDataSource: betterPlayerDataSource);
-      videoController!.addEventsListener(onVideoListener);
-      videoController!.setBetterPlayerGlobalKey(key);
-      update();
-    }
-  }
-
-  @override
   void switchToOfflineVideo(DownloadedVideo v) {
     videoController?.exitFullScreen();
     MiniPlayerController.to()?.handleVideoEvent(BetterPlayerEvent(BetterPlayerEventType.hideFullscreen));
     disposeControllers();
     offlineVideo = v;
-    playOfflineVideo();
+    playVideo(true);
   }
 
   @override

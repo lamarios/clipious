@@ -11,7 +11,10 @@ import 'package:invidious/views/video/downloadModalSheet.dart';
 import 'package:invidious/views/video/innverView.dart';
 import 'package:invidious/views/video/innverViewTablet.dart';
 
+import '../main.dart';
+import '../myRouteObserver.dart';
 import '../utils.dart';
+import 'downloadManager.dart';
 
 class VideoView extends StatelessWidget {
   final String videoId;
@@ -27,6 +30,10 @@ class VideoView extends StatelessWidget {
         }
       }, onDownload: _.onDownload);
     }
+  }
+
+  void openDownloadManager() {
+    navigatorKey.currentState?.push(MaterialPageRoute(settings: ROUTE_DOWNLOAD_MANAGER, builder: (context) => const DownloadManager()));
   }
 
   @override
@@ -83,7 +90,7 @@ class VideoView extends StatelessWidget {
                             : Stack(
                                 children: [
                                   IconButton(
-                                      onPressed: _.isDownloaded && !_.downloadFailed ? null : () => downloadVideo(context, _),
+                                      onPressed: _.isDownloaded || _.downloadFailed ? openDownloadManager : () => downloadVideo(context, _),
                                       icon: _.isDownloaded && !_.downloadFailed ? const Icon(Icons.download_done) : const Icon(Icons.download)),
                                   Positioned(
                                       right: 5,

@@ -4,3 +4,10 @@ class Pair<E> {
 
   Pair(this.first, this.last);
 }
+
+class Couple<E, M> {
+  E first;
+  M last;
+
+  Couple(this.first, this.last);
+}

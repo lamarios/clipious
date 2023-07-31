@@ -22,11 +22,9 @@ abstract class PlayerController extends GetxController {
 
   void toggleControls(bool visible);
 
-  void playVideo();
+  void playVideo(bool offline);
 
   void setSponsorBlock();
-
-  void playOfflineVideo();
 
   void switchToOfflineVideo(DownloadedVideo v);
 
@@ -47,5 +45,4 @@ abstract class PlayerController extends GetxController {
   void onVideoFinished() {
     MiniPlayerController.to()?.playNext();
   }
-
 }
