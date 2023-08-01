@@ -32,8 +32,8 @@ class VideoView extends StatelessWidget {
     }
   }
 
-  void openDownloadManager() {
-    navigatorKey.currentState?.push(MaterialPageRoute(settings: ROUTE_DOWNLOAD_MANAGER, builder: (context) => const DownloadManager()));
+  void openDownloadManager(VideoController _) {
+    navigatorKey.currentState?.push(MaterialPageRoute(settings: ROUTE_DOWNLOAD_MANAGER, builder: (context) => const DownloadManager())).then((value) => _.getDownloadStatus());
   }
 
   @override
@@ -90,7 +90,7 @@ class VideoView extends StatelessWidget {
                             : Stack(
                                 children: [
                                   IconButton(
-                                      onPressed: _.isDownloaded || _.downloadFailed ? openDownloadManager : () => downloadVideo(context, _),
+                                      onPressed: _.isDownloaded || _.downloadFailed ? () => openDownloadManager(_) : () => downloadVideo(context, _),
                                       icon: _.isDownloaded && !_.downloadFailed ? const Icon(Icons.download_done) : const Icon(Icons.download)),
                                   Positioned(
                                       right: 5,

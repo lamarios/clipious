@@ -36,7 +36,7 @@ class AudioPlayer extends StatelessWidget {
                         thumbnailUrl: _.video?.getBestThumbnail()?.url ?? '',
                       )
                     : _.offlineVideo != null
-                        ? OfflineVideoThumbnail(video: _.offlineVideo!)
+                        ? OfflineVideoThumbnail(key: ValueKey(_.offlineVideo?.videoId ?? ''), video: _.offlineVideo!)
                         : const SizedBox.shrink(),
                 !(_.disableControls ?? false) && !_.loading
                     ? Positioned(

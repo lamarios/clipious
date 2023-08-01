@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:invidious/controllers/videoInnerViewController.dart';
 import 'package:invidious/database.dart';
 import 'package:invidious/models/baseVideo.dart';
+import 'package:invidious/models/db/downloadedVideo.dart';
 import 'package:invidious/models/db/settings.dart';
 import 'package:invidious/models/dislike.dart';
 import 'package:logging/logging.dart';
@@ -28,7 +29,7 @@ class VideoController extends GetxController {
   bool isLoggedIn = service.isLoggedIn();
   bool downloading = false;
   double downloadProgress = 0;
-  bool downloadFailed = false;
+  DownloadedVideo? downloadedVideo;
 
   double opacity = 1;
 
@@ -49,9 +50,7 @@ class VideoController extends GetxController {
         dislikes = dislike.dislikes;
       }
 
-      downloadFailed = db.getDownloadByVideoId(videoId)?.downloadFailed ?? false;
-
-      initStreamListener();
+      getDownloadStatus();
 
       update();
 
@@ -70,6 +69,13 @@ class VideoController extends GetxController {
     }
   }
 
+  getDownloadStatus() {
+    downloadedVideo = db.getDownloadByVideoId(videoId);
+
+    initStreamListener();
+    update();
+  }
+
   @override
   onClose() {
     var downloadProgress = DownloadController.to()?.downloadProgresses[videoId];
@@ -77,7 +83,7 @@ class VideoController extends GetxController {
     downloadProgress?.removeListener(onDownloadProgress);
   }
 
-  onDownload(){
+  onDownload() {
     downloading = true;
     downloadProgress = 0;
     update();
@@ -87,10 +93,9 @@ class VideoController extends GetxController {
     if (video != null) {
       downloadProgress = progress;
       if (progress < 1) {
-        downloadFailed = false;
         downloading = true;
       } else {
-        downloadFailed = db.getDownloadByVideoId(video!.videoId)?.downloadFailed ?? false;
+        getDownloadStatus();
         downloading = false;
       }
       update();
@@ -127,9 +132,11 @@ class VideoController extends GetxController {
 
   bool get isDownloaded {
     if (video != null) {
-      return db.getDownloadByVideoId(videoId) != null;
+      return downloadedVideo != null;
     } else {
       return false;
     }
   }
+
+  bool get downloadFailed => downloadedVideo?.downloadFailed ?? false;
 }

@@ -64,7 +64,8 @@ class AudioPlayerController extends PlayerController {
     log.fine('Player state event $state');
     switch (state.processingState) {
       case ProcessingState.idle:
-        MiniPlayerController.to()?.eventStream.add(MediaEvent(state: MediaState.idle));
+        // looks like this is causing issues with the player control notification
+        // MiniPlayerController.to()?.eventStream.add(MediaEvent(state: MediaState.idle));
         break;
       case ProcessingState.loading:
         MiniPlayerController.to()?.eventStream.add(MediaEvent(state: MediaState.loading));
