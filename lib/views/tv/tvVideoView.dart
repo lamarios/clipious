@@ -106,6 +106,12 @@ class TvVideoView extends StatelessWidget {
                             ),
                           ),
                           Row(children: [
+                            const Icon(Icons.timer, size: 20),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 4),
+                              child: Text(prettyDuration(Duration(seconds: _.video?.lengthSeconds ?? 0))),
+                            ),
+                            const Padding(padding: EdgeInsets.symmetric(horizontal: 8.0), child: Text('•')),
                             const Icon(Icons.visibility, size: 20),
                             Padding(
                               padding: const EdgeInsets.only(left: 4),

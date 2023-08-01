@@ -42,30 +42,34 @@ class TvChannelView extends StatelessWidget {
                     child: Stack(
                       children: [
                         Positioned(top: 0, left: 0, right: 0, child: CachedNetworkImage(imageUrl: ImageObject.getBestThumbnail(_.channel?.authorBanners)?.url ?? '')),
-                        TvOverscan(
-                          child: Padding(
-                            padding: const EdgeInsets.only(top: 100),
+                        AnimatedContainer(
+                          color: _.showBackground ? colors.background.withOpacity(0.5) : colors.background.withOpacity(0),
+                          duration: animationDuration,
+                          child: TvOverscan(
                             child: ListView(controller: _.scrollController, children: [
-                              Align(
-                                alignment: Alignment.centerLeft,
-                                child: Container(
-                                  decoration: BoxDecoration(color: colors.background.withOpacity(1), borderRadius: BorderRadius.circular(35)),
-                                  child: Row(mainAxisSize: MainAxisSize.min, children: [
-                                    Thumbnail(
-                                      thumbnailUrl: ImageObject.getBestThumbnail(_.channel?.authorThumbnails)?.url ?? '',
-                                      width: 70,
-                                      height: 70,
-                                      id: 'author-big-${_.channel?.authorId}',
-                                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(35)),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 8.0, right: 20),
-                                      child: Text(
-                                        _.channel?.author ?? '',
-                                        style: textTheme.displaySmall,
+                              Padding(
+                                padding: const EdgeInsets.only(top: 100.0),
+                                child: Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Container(
+                                    decoration: BoxDecoration(color: colors.background.withOpacity(1), borderRadius: BorderRadius.circular(35)),
+                                    child: Row(mainAxisSize: MainAxisSize.min, children: [
+                                      Thumbnail(
+                                        thumbnailUrl: ImageObject.getBestThumbnail(_.channel?.authorThumbnails)?.url ?? '',
+                                        width: 70,
+                                        height: 70,
+                                        id: 'author-big-${_.channel?.authorId}',
+                                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(35)),
                                       ),
-                                    )
-                                  ]),
+                                      Padding(
+                                        padding: const EdgeInsets.only(left: 8.0, right: 20),
+                                        child: Text(
+                                          _.channel?.author ?? '',
+                                          style: textTheme.displaySmall,
+                                        ),
+                                      )
+                                    ]),
+                                  ),
                                 ),
                               ),
                               TvSubscribeButton(

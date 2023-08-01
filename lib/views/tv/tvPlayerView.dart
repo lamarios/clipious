@@ -95,7 +95,7 @@ class TvPlayerView extends StatelessWidget {
                           left: 0,
                           right: 0,
                           child: _.showSettings
-                              ? SizedBox.shrink()
+                              ? const SizedBox.shrink()
                               : AnimatedOpacity(
                                   opacity: _.controlsOpacity,
                                   duration: animationDuration,
