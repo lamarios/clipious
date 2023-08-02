@@ -848,5 +848,9 @@
   "downloads": "ダウンロード一覧",
   "@downloads": {
     "description": "Downloads"
+  },
+  "videoDownloadAudioOnly": "音声のみ",
+  "@videoDownloadAudioOnly": {
+    "description": "Label for toggle to download audio only "
   }
 }
