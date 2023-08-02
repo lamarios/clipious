@@ -848,5 +848,9 @@
   "videoDownloadStarted": "Comienza la descarga del vídeo",
   "@videoDownloadStarted": {
     "description": "Message when a video starts being downloaded"
+  },
+  "videoDownloadAudioOnly": "Sólo el audio",
+  "@videoDownloadAudioOnly": {
+    "description": "Label for toggle to download audio only "
   }
 }
