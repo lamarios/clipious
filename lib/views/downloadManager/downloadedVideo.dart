@@ -32,6 +32,7 @@ class DownloadedVideoView extends StatelessWidget {
                         offlineVideo: _.video,
                         onTap: downloadFailed ? _.retryDownload : _.playVideo,
                         trailing: [
+                          (_.video?.audioOnly ?? false) ? Icon(Icons.audiotrack, color: colors.secondary,) : const SizedBox.shrink(),
                           (_.video?.downloadComplete ?? false) || downloadFailed
                               ? const SizedBox.shrink()
                               : SizedBox(

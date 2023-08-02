@@ -3,6 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:invidious/controllers/miniPayerController.dart';
 import 'package:invidious/globals.dart';
+import 'package:invidious/views/video/audioPlayer.dart';
 import 'package:invidious/views/video/player.dart';
 import 'package:invidious/views/videoPlayer/fullScreenView.dart';
 import 'package:invidious/views/videoPlayer/miniPlayerView.dart';
@@ -21,19 +22,27 @@ class MiniPlayer extends StatelessWidget {
     return GetBuilder<MiniPlayerController>(
       init: MiniPlayerController(),
       builder: (_) {
-        bool showPlayer = _.isPlaying;
+        bool showPlayer = _.hasVideo;
         bool onPhone = getDeviceType() == DeviceType.phone;
 
         Widget videoPlayer = showPlayer
             ? Padding(
                 padding: _.isMini || _.isPip ? EdgeInsets.zero : const EdgeInsets.only(top: 8, left: 8.0, right: 8),
-                child: VideoPlayer(
-                  key: const ValueKey('player'),
-                  video: _.currentlyPlaying,
-                  offlineVideo: _.offlineCurrentlyPlaying,
-                  miniPlayer: false,
-                ),
-              )
+                child: AnimatedCrossFade(
+                    crossFadeState: _.isAudio ? CrossFadeState.showFirst : CrossFadeState.showSecond,
+                    duration: animationDuration,
+                    firstChild: AudioPlayer(
+                      key: const ValueKey('audio-player'),
+                      video: _.isAudio ? _.currentlyPlaying : null,
+                      offlineVideo: _.isAudio ? _.offlineCurrentlyPlaying : null,
+                      miniPlayer: false,
+                    ),
+                    secondChild: VideoPlayer(
+                      key: const ValueKey('player'),
+                      video: !_.isAudio ? _.currentlyPlaying : null,
+                      offlineVideo: !_.isAudio ? _.offlineCurrentlyPlaying : null,
+                      miniPlayer: false,
+                    )))
             : const SizedBox.shrink();
 
         List<Widget> miniPlayerWidgets = [];

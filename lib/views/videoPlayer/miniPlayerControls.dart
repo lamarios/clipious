@@ -36,11 +36,20 @@ class MiniPlayerControls extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  Visibility(
+                    visible: enablePrevNext,
+                    child: IconButton(
+                        style: buttonStyle,
+                        onPressed: _.playPrevious,
+                        icon: const Icon(
+                          Icons.skip_previous,
+                        )),
+                  ),
                   IconButton(
+                      onPressed: _.rewind,
                       style: buttonStyle,
-                      onPressed: enablePrevNext ? _.playPrevious : null,
                       icon: const Icon(
-                        Icons.skip_previous,
+                        Icons.fast_rewind,
                       )),
                   IconButton(
                       onPressed: _.togglePlay,
@@ -49,11 +58,20 @@ class MiniPlayerControls extends StatelessWidget {
                         _.isPlaying() ? Icons.pause : Icons.play_arrow,
                       )),
                   IconButton(
-                      onPressed: enablePrevNext ? _.playNext : null,
+                      onPressed: _.fastForward,
                       style: buttonStyle,
                       icon: const Icon(
-                        Icons.skip_next,
-                      ))
+                        Icons.fast_forward,
+                      )),
+                  Visibility(
+                    visible: enablePrevNext,
+                    child: IconButton(
+                        onPressed: _.playNext,
+                        style: buttonStyle,
+                        icon: const Icon(
+                          Icons.skip_next,
+                        )),
+                  )
                 ],
               ),
               controller.isMini

@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:invidious/controllers/videoInnerViewController.dart';
 import 'package:invidious/database.dart';
 import 'package:invidious/models/baseVideo.dart';
+import 'package:invidious/models/db/downloadedVideo.dart';
 import 'package:invidious/models/db/settings.dart';
 import 'package:invidious/models/dislike.dart';
 import 'package:logging/logging.dart';
@@ -28,7 +29,7 @@ class VideoController extends GetxController {
   bool isLoggedIn = service.isLoggedIn();
   bool downloading = false;
   double downloadProgress = 0;
-  bool downloadFailed = false;
+  DownloadedVideo? downloadedVideo;
 
   double opacity = 1;
 
@@ -49,14 +50,12 @@ class VideoController extends GetxController {
         dislikes = dislike.dislikes;
       }
 
-      downloadFailed = db.getDownloadByVideoId(videoId)?.downloadFailed ?? false;
-
-      initStreamListener();
+      getDownloadStatus();
 
       update();
 
       if (autoplayOnLoad) {
-        playVideo();
+        playVideo(false);
       }
     } catch (err) {
       if (err is InvidiousServiceError) {
@@ -70,6 +69,13 @@ class VideoController extends GetxController {
     }
   }
 
+  getDownloadStatus() {
+    downloadedVideo = db.getDownloadByVideoId(videoId);
+
+    initStreamListener();
+    update();
+  }
+
   @override
   onClose() {
     var downloadProgress = DownloadController.to()?.downloadProgresses[videoId];
@@ -77,14 +83,19 @@ class VideoController extends GetxController {
     downloadProgress?.removeListener(onDownloadProgress);
   }
 
+  onDownload() {
+    downloading = true;
+    downloadProgress = 0;
+    update();
+  }
+
   onDownloadProgress(double progress) {
     if (video != null) {
       downloadProgress = progress;
       if (progress < 1) {
-        downloadFailed = false;
         downloading = true;
       } else {
-        downloadFailed = db.getDownloadByVideoId(video!.videoId)?.downloadFailed ?? false;
+        getDownloadStatus();
         downloading = false;
       }
       update();
@@ -109,41 +120,23 @@ class VideoController extends GetxController {
     VideoInnerViewController.to(tag: VideoInnerViewController.getControllerTags(video?.videoId ?? ''))?.scrollUp();
   }
 
-  void playVideo() {
+  void playVideo(bool? audio) {
     if (video != null) {
       List<BaseVideo> videos = [video!];
       if (playRecommendedNext) {
         videos.addAll(video?.recommendedVideos ?? []);
       }
-      MiniPlayerController.to()?.playVideo(videos, goBack: true);
+      MiniPlayerController.to()?.playVideo(videos, goBack: true, audio: audio);
     }
   }
 
   bool get isDownloaded {
     if (video != null) {
-      return db.getDownloadByVideoId(videoId) != null;
+      return downloadedVideo != null;
     } else {
       return false;
     }
   }
 
-  downloadVideo() async {
-    if (video != null) {
-      downloading = true;
-      downloadFailed = false;
-      update();
-      if (downloadFailed) {
-        var vid = db.getDownloadByVideoId(videoId);
-        if (vid != null) {
-          await DownloadController.to()?.retryDownload(vid);
-        }
-      } else {
-        await DownloadController.to()?.addDownload(video!.videoId);
-      }
-      initStreamListener();
-      return bool;
-    } else {
-      return false;
-    }
-  }
+  bool get downloadFailed => downloadedVideo?.downloadFailed ?? false;
 }

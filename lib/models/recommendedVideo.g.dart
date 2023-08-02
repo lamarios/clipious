@@ -6,10 +6,13 @@ part of 'recommendedVideo.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-RecommendedVideo _$RecommendedVideoFromJson(Map<String, dynamic> json) => RecommendedVideo(
+RecommendedVideo _$RecommendedVideoFromJson(Map<String, dynamic> json) =>
+    RecommendedVideo(
       json['videoId'] as String,
       json['title'] as String,
-      (json['videoThumbnails'] as List<dynamic>).map((e) => ImageObject.fromJson(e as Map<String, dynamic>)).toList(),
+      (json['videoThumbnails'] as List<dynamic>)
+          .map((e) => ImageObject.fromJson(e as Map<String, dynamic>))
+          .toList(),
       json['author'] as String?,
       json['lengthSeconds'] as int,
       json['viewCountText'] as String,
@@ -17,7 +20,8 @@ RecommendedVideo _$RecommendedVideoFromJson(Map<String, dynamic> json) => Recomm
       ..authorId = json['authorId'] as String?
       ..authorUrl = json['authorUrl'] as String?;
 
-Map<String, dynamic> _$RecommendedVideoToJson(RecommendedVideo instance) => <String, dynamic>{
+Map<String, dynamic> _$RecommendedVideoToJson(RecommendedVideo instance) =>
+    <String, dynamic>{
       'title': instance.title,
       'videoId': instance.videoId,
       'lengthSeconds': instance.lengthSeconds,

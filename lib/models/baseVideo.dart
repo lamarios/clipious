@@ -5,9 +5,14 @@ import 'db/videoFilter.dart';
 import 'imageObject.dart';
 import 'interfaces/sharelink.dart';
 
-abstract class BaseVideo implements ShareLinks {
-  String title;
+abstract class IdedVideo {
   String videoId;
+
+  IdedVideo(this.videoId);
+}
+
+abstract class BaseVideo extends IdedVideo implements ShareLinks {
+  String title;
   int lengthSeconds;
   String? author;
   String? authorId;
@@ -19,7 +24,7 @@ abstract class BaseVideo implements ShareLinks {
   @JsonKey(includeFromJson: false, includeToJson: false)
   List<VideoFilter> matchedFilters = [];
 
-  BaseVideo(this.title, this.videoId, this.lengthSeconds, this.author, this.authorId, this.authorUrl, this.videoThumbnails);
+  BaseVideo(this.title, String videoId, this.lengthSeconds, this.author, this.authorId, this.authorUrl, this.videoThumbnails) : super(videoId);
 
   @override
   String getInvidiousLink(Server server, int? timestamp) {

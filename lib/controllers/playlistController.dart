@@ -36,8 +36,8 @@ class PlaylistController extends GetxController {
     return false;
   }
 
-  play() {
-    MiniPlayerController.to()?.playVideo(playlist.videos, goBack: false);
+  play(bool? isAudio) {
+    MiniPlayerController.to()?.playVideo(playlist.videos, goBack: false, audio: isAudio);
   }
 
   scrollToTop() {

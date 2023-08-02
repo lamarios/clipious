@@ -7,16 +7,34 @@ import 'package:invidious/globals.dart';
 import 'package:invidious/views/components/videoAddToPlaylistButton.dart';
 import 'package:invidious/views/components/videoLikeButton.dart';
 import 'package:invidious/views/components/videoShareButton.dart';
+import 'package:invidious/views/video/downloadModalSheet.dart';
 import 'package:invidious/views/video/innverView.dart';
 import 'package:invidious/views/video/innverViewTablet.dart';
 
+import '../main.dart';
+import '../myRouteObserver.dart';
 import '../utils.dart';
+import 'downloadManager.dart';
 
 class VideoView extends StatelessWidget {
   final String videoId;
   bool? playNow;
 
   VideoView({super.key, required this.videoId, this.playNow});
+
+  void downloadVideo(BuildContext context, VideoController _) {
+    if (_.video != null) {
+      DownloadModalSheet.showVideoModalSheet(context, _.video!, animateDownload: false, onDownloadStarted: (isDownloadStarted) {
+        if (isDownloadStarted) {
+          _.initStreamListener();
+        }
+      }, onDownload: _.onDownload);
+    }
+  }
+
+  void openDownloadManager(VideoController _) {
+    navigatorKey.currentState?.push(MaterialPageRoute(settings: ROUTE_DOWNLOAD_MANAGER, builder: (context) => const DownloadManager())).then((value) => _.getDownloadStatus());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +90,7 @@ class VideoView extends StatelessWidget {
                             : Stack(
                                 children: [
                                   IconButton(
-                                      onPressed: _.isDownloaded && !_.downloadFailed ? null : _.downloadVideo,
+                                      onPressed: _.isDownloaded || _.downloadFailed ? () => openDownloadManager(_) : () => downloadVideo(context, _),
                                       icon: _.isDownloaded && !_.downloadFailed ? const Icon(Icons.download_done) : const Icon(Icons.download)),
                                   Positioned(
                                       right: 5,

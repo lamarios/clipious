@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/controllers/miniPayerController.dart';
 import 'package:invidious/models/baseVideo.dart';
+import 'package:invidious/views/video/downloadModalSheet.dart';
 
 import '../../controllers/downloadController.dart';
 import '../../main.dart';
@@ -16,6 +17,7 @@ class VideoModalSheet extends StatelessWidget {
   static showVideoModalSheet(BuildContext context, BaseVideo video, {bool animateDownload = false}) {
     showModalBottomSheet<void>(
         context: context,
+        showDragHandle: true,
         builder: (BuildContext context) {
           return VideoModalSheet(video: video, animateDownload: animateDownload);
         });
@@ -50,19 +52,10 @@ class VideoModalSheet extends StatelessWidget {
     ));
   }
 
-  void downloadVideo(BuildContext context) async {
-    var locals = AppLocalizations.of(context)!;
+
+  void downloadVideo(BuildContext context){
     Navigator.of(context).pop();
-    var downloadController = DownloadController.to();
-    if (animateDownload) {
-      downloadController?.animateToController.animateTag('video-animate-to-${video.videoId}', duration: const Duration(milliseconds: 300), curve: Curves.easeInOutQuad);
-    } else {
-      scaffoldKey.currentState?.showSnackBar(SnackBar(content: Text(locals.videoDownloadStarted)));
-    }
-    bool canDownload = await downloadController?.addDownload(video.videoId) ?? false;
-    if (!canDownload) {
-      scaffoldKey.currentState?.showSnackBar(SnackBar(content: Text(locals.videoAlreadyDownloaded)));
-    }
+    DownloadModalSheet.showVideoModalSheet(context, video, animateDownload: animateDownload);
   }
 
   @override
