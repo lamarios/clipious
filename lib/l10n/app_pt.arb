@@ -848,5 +848,9 @@
   "noDownloadedVideos": "Sem vídeos descarregados, navegue, prima longamente sobre um vídeo numa lista ou toque no botão de descarregamento no ecrã de um vídeo para descarregar",
   "@noDownloadedVideos": {
     "description": "Message showing when the user goes to the download screen but there are no offline videos."
+  },
+  "videoDownloadAudioOnly": "Apenas áudio",
+  "@videoDownloadAudioOnly": {
+    "description": "Label for toggle to download audio only "
   }
 }
