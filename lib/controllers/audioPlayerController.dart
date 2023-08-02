@@ -106,7 +106,7 @@ class AudioPlayerController extends PlayerController {
   }
 
   @override
-  playVideo(bool offline) async {
+  playVideo(bool offline, {Duration? startAt}) async {
     if (video != null || offlineVideo != null) {
       disposeControllers();
       initPlayer();
@@ -116,13 +116,15 @@ class AudioPlayerController extends PlayerController {
       MiniPlayerController.to()?.eventStream.add(MediaEvent(state: MediaState.loading));
       try {
         AudioSource? source;
-        Duration? startAt;
+
         if (!offline) {
           AdaptiveFormat? audio = video?.adaptiveFormats.where((element) => element.type.contains("audio")).sortByReversed((e) => int.parse(e.bitrate ?? "0")).first;
           if (audio != null) {
-            double progress = db.getVideoProgress(video!.videoId);
-            if (progress > 0 && progress < 0.90) {
-              startAt = Duration(seconds: (video!.lengthSeconds * progress).floor());
+            if (startAt == null) {
+              double progress = db.getVideoProgress(video!.videoId);
+              if (progress > 0 && progress < 0.90) {
+                startAt = Duration(seconds: (video!.lengthSeconds * progress).floor());
+              }
             }
             update();
             source = AudioSource.uri(Uri.parse(audio.url));
@@ -173,10 +175,10 @@ class AudioPlayerController extends PlayerController {
   }
 
   @override
-  void switchVideo(Video video) async {
+  void switchVideo(Video video, {Duration? startAt}) async {
     offlineVideo = null;
     this.video = video;
-    playVideo(false);
+    playVideo(false, startAt: startAt);
   }
 
   @override

@@ -39,9 +39,18 @@ class VideoPlayerController extends PlayerController {
   final ColorScheme colors;
   final Color overFlowTextColor;
   final GlobalKey key;
+  Duration? startAt;
 
   VideoPlayerController(
-      {required this.colors, required this.overFlowTextColor, required this.key, Video? video, DownloadedVideo? offlineVideo, required this.miniPlayer, required this.locals, bool? disableControls})
+      {required this.colors,
+      required this.overFlowTextColor,
+      required this.key,
+      Video? video,
+      DownloadedVideo? offlineVideo,
+      required this.miniPlayer,
+      required this.locals,
+      bool? disableControls,
+      this.startAt})
       : super(video: video, offlineVideo: offlineVideo, disableControls: disableControls);
 
   @override
@@ -60,7 +69,7 @@ class VideoPlayerController extends PlayerController {
 
   @override
   onReady() async {
-    playVideo(offlineVideo != null);
+    playVideo(offlineVideo != null, startAt: startAt);
   }
 
   @override
@@ -198,12 +207,13 @@ class VideoPlayerController extends PlayerController {
   }
 
   @override
-  switchVideo(Video video) {
+  switchVideo(Video video, {Duration? startAt}) {
     videoController?.exitFullScreen();
+    this.startAt = startAt;
     MiniPlayerController.to()?.handleVideoEvent(BetterPlayerEvent(BetterPlayerEventType.hideFullscreen));
     disposeControllers();
     this.video = video;
-    playVideo(false);
+    playVideo(false, startAt: startAt);
   }
 
   @override
@@ -220,17 +230,22 @@ class VideoPlayerController extends PlayerController {
   }
 
   @override
-  playVideo(bool offline) async {
+  playVideo(bool offline, {Duration? startAt}) async {
+    // only used if the player is currently close because it is onReady that will actually play the video
+    // need better way of handling this
+    this.startAt = startAt;
     if (video != null || offlineVideo != null) {
       IdedVideo idedVideo = offline ? offlineVideo! : video!;
       videoController?.dispose();
       videoController = null;
       // we get segments if there are any, no need to wait.
       setSponsorBlock();
-      double progress = db.getVideoProgress(idedVideo.videoId);
-      Duration? startAt;
-      if (progress > 0 && progress < 0.90) {
-        startAt = Duration(seconds: (offline ? offlineVideo!.videoLenthInSeconds : video!.lengthSeconds * progress).floor());
+
+      if (startAt == null) {
+        double progress = db.getVideoProgress(idedVideo.videoId);
+        if (progress > 0 && progress < 0.90) {
+          startAt = Duration(seconds: (offline ? offlineVideo!.videoLenthInSeconds : video!.lengthSeconds * progress).floor());
+        }
       }
 
       print('start at $startAt');

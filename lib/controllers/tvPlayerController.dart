@@ -43,10 +43,9 @@ class TvPlayerController extends GetxController {
   togglePlayPause() {
     showUi();
     if (isPlaying) {
-      log.info('Pausing video');
-      VideoPlayerController.to()?.videoController?.pause();
+      pause();
     } else {
-      VideoPlayerController.to()?.videoController?.pause();
+      play();
     }
     update();
   }
@@ -58,7 +57,7 @@ class TvPlayerController extends GetxController {
 
   pause() {
     log.info('Pausing video');
-    PlayerController.to()?.videoController?.pause();
+    VideoPlayerController.to()?.videoController?.pause();
   }
 
   @override

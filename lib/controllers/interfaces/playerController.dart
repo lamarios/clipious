@@ -16,7 +16,7 @@ abstract class PlayerController extends GetxController {
 
   void saveProgress(int timeInSeconds);
 
-  void switchVideo(Video video);
+  void switchVideo(Video video, {Duration? startAt});
 
   void togglePlaying();
 

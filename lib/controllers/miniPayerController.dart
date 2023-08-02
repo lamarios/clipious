@@ -57,6 +57,7 @@ class MiniPlayerController extends GetxController {
   List<String> playedVideos = [];
   Offset offset = Offset.zero;
   bool isAudio = true;
+  Duration? startAt;
 
   List<DownloadedVideo> offlineVideos = [];
 
@@ -318,8 +319,9 @@ class MiniPlayerController extends GetxController {
     }
   }
 
-  _playVideos(List<IdedVideo> vids) async {
+  _playVideos(List<IdedVideo> vids, {Duration? startAt}) async {
     if (vids.isNotEmpty) {
+      this.startAt = startAt;
       bool isOffline = vids[0] is DownloadedVideo;
 
       eventStream.add(MediaEvent(state: MediaState.loading));
@@ -346,12 +348,12 @@ class MiniPlayerController extends GetxController {
       if (isOffline) {
         await switchToOfflineVideo(offlineVideos[0]);
       } else {
-        await switchToVideo(videos[0]);
+        await switchToVideo(videos[0], startAt: startAt);
       }
     }
   }
 
-  _switchToVideo(IdedVideo video) async {
+  _switchToVideo(IdedVideo video, {Duration? startAt}) async {
     bool isOffline = video is DownloadedVideo;
 
     eventStream.add(MediaEvent(state: MediaState.loading));
@@ -381,7 +383,7 @@ class MiniPlayerController extends GetxController {
         v = await service.getVideo(video.videoId);
       }
       currentlyPlaying = v;
-      playerController?.switchVideo(v);
+      playerController?.switchVideo(v, startAt: startAt);
     } else {
       offlineCurrentlyPlaying = video;
       playerController?.switchToOfflineVideo(video);
@@ -407,14 +409,14 @@ class MiniPlayerController extends GetxController {
     await _playVideos(offlineVids);
   }
 
-  playVideo(List<BaseVideo> v, {bool? goBack, bool? audio}) async {
+  playVideo(List<BaseVideo> v, {bool? goBack, bool? audio, Duration? startAt}) async {
     List<BaseVideo> videos = v.where((element) => !element.filtered).toList();
     if (goBack ?? false) navigatorKey.currentState?.pop();
     log.fine('Playing ${videos.length} videos');
 
     setAudio(audio);
 
-    await _playVideos(videos);
+    await _playVideos(videos, startAt: startAt);
   }
 
   switchToOfflineVideo(DownloadedVideo video) async {
@@ -422,8 +424,8 @@ class MiniPlayerController extends GetxController {
     await _switchToVideo(video);
   }
 
-  switchToVideo(BaseVideo video) async {
-    await _switchToVideo(video);
+  switchToVideo(BaseVideo video, {Duration? startAt}) async {
+    await _switchToVideo(video, startAt: startAt);
   }
 
   void togglePlaying() {

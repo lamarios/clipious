@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:invidious/controllers/singleCommentController.dart';
 import 'package:invidious/myRouteObserver.dart';
 import 'package:invidious/views/channel.dart';
+import 'package:invidious/views/components/textLinkified.dart';
 import 'package:invidious/views/components/videoThumbnail.dart';
 import 'package:invidious/views/video/comments.dart';
 
@@ -93,7 +94,7 @@ class SingleCommentView extends StatelessWidget {
                       ),
                     ],
                   ),
-                  Text(_.comment.content),
+                  TextLinkified(text: _.comment.content),
                   Row(
                     children: [
                       Visibility(

@@ -13,8 +13,9 @@ class VideoPlayer extends StatefulWidget {
   final bool miniPlayer;
   final bool? playNow;
   final bool? disableControls;
+  final Duration? startAt;
 
-  const VideoPlayer({super.key, this.video, required this.miniPlayer, this.playNow, this.disableControls, this.offlineVideo})
+  const VideoPlayer({super.key, this.video, required this.miniPlayer, this.playNow, this.disableControls, this.offlineVideo, this.startAt})
       : assert(video == null || offlineVideo == null, 'cannot provide both video and offline video\n');
 
   @override
@@ -68,6 +69,7 @@ class VideoPlayerState extends State<VideoPlayer> {
     Color overFlowTextColor = Theme.of(context).textTheme.bodyMedium?.color ?? Colors.black;
     return GetBuilder<VideoPlayerController>(
       init: VideoPlayerController(
+          startAt: widget.startAt,
           locals: locals,
           overFlowTextColor: overFlowTextColor,
           colors: colorScheme,

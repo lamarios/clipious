@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:invidious/main.dart';
 import 'package:invidious/models/video.dart';
 import 'package:invidious/myRouteObserver.dart';
 import 'package:invidious/views/channel.dart';
 import 'package:invidious/views/components/subscribeButton.dart';
+import 'package:invidious/views/components/textLinkified.dart';
 import 'package:invidious/views/components/videoThumbnail.dart';
 import 'package:invidious/views/search.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '../../models/imageObject.dart';
 import '../../utils.dart';
@@ -177,11 +176,10 @@ class VideoInfo extends StatelessWidget {
               )
             ],
           ),
-          SelectableLinkify(
-              text: video.description,
-              linkStyle: TextStyle(color: colorScheme.primary, decoration: TextDecoration.none),
-              onOpen: (link) => launchUrl(Uri.parse(link.url), mode: LaunchMode.externalApplication),
-              options: const LinkifyOptions(humanize: true, removeWww: true)),
+          TextLinkified(
+            text: video.description,
+            video: video,
+          ),
           const Divider(),
           Row(
             children: [
