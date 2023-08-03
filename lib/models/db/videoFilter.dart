@@ -1,10 +1,11 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/models/baseVideo.dart';
 import 'package:logging/logging.dart';
 import 'package:objectbox/objectbox.dart';
 
-import '../../database.dart';
+import '../pair.dart';
 
 final log = Logger('Video Filter DB');
 
@@ -80,23 +81,28 @@ class VideoFilter {
     operation = FilterOperation.values.where((element) => element.name == value).firstOrNull;
   }
 
+  static BaseVideo _innerFilterVideo(BaseVideo v, List<VideoFilter> filters) {
+    final log = Logger('VideoFilterCompute');
+    var matches = filters.where((element) => element.filterVideo(v)).toList();
+    v.matchedFilters = matches;
+    v.filtered = matches.isNotEmpty;
+    log.fine('Video ${v.title} filtered ? ${v.filtered}');
+    v.filterHide = v.filtered && matches.any((element) => element.hideFromFeed);
+    return v;
+  }
+
   /// Returns the number of videos removed
-  static int filterVideos(List<BaseVideo>? videos) {
-    int startCount = videos?.length ?? 0;
-    bool hideFilteredVideos = db.getSettings(HIDE_FILTERED_VIDEOS)?.value == 'true';
+  static Future<List<BaseVideo>> filterVideos(List<BaseVideo>? videos) async {
     List<VideoFilter> filters = db.getAllFilters();
 
     log.fine('filtering videos, we have ${filters.length} filters');
 
-    videos?.forEach((v) {
-      var matches = filters.where((element) => element.filterVideo(v)).toList();
-      v.matchedFilters = matches;
-      v.filtered = matches.isNotEmpty;
-      log.fine('Video ${v.title} filtered ? ${v.filtered}');
-    });
+    videos = await Future.wait(videos?.map((v) {
+          return compute((message) => _innerFilterVideo(message.first, message.last), Couple(v, filters));
+        }).toList() ??
+        []);
 
-    videos?.removeWhere((v) => v.matchedFilters.any((f) => f.hideFromFeed));
-    return startCount - (videos?.length ?? 0);
+    return videos;
   }
 
   bool filterVideo(BaseVideo video) {

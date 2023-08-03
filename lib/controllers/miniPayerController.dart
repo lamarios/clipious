@@ -576,7 +576,7 @@ class MiniPlayerController extends GetxController {
     } else if (offlineVideos.isNotEmpty) {
       var e = offlineVideos[index];
       var path = await e.thumbnailPath;
-      return MediaItem(id: e.videoId, title: e.title, artist: e.author, duration: Duration(seconds: e.videoLenthInSeconds), album: '', artUri: Uri.file(path));
+      return MediaItem(id: e.videoId, title: e.title, artist: e.author, duration: Duration(seconds: e.lengthSeconds), album: '', artUri: Uri.file(path));
     }
     return null;
   }

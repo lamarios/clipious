@@ -68,6 +68,7 @@ class VideoFilterSetup extends StatelessWidget {
         init: VideoFilterEditController(filter: filter),
         builder: (_) => Scaffold(
               appBar: AppBar(
+                backgroundColor: colors.background,
                 title: Text(filter == null ? locals.addVideoFilter : locals.editVideoFilter),
               ),
               body: SafeArea(

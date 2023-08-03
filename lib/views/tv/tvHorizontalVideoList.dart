@@ -19,27 +19,29 @@ class TvHorizontalItemList<T> extends StatelessWidget {
       global: tags != null,
       tag: tags,
       init: ItemListController(itemList: paginatedList),
-      builder: (_) => Stack(
-        children: [
-          _.loading
-              ? const LinearProgressIndicator(
-                  minHeight: 3,
-                )
-              : const SizedBox.shrink(),
-          SizedBox(
-            height: 250,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              controller: _.scrollController,
-              itemCount: _.items.length,
-              itemBuilder: (context, index) {
-                T e = _.items[index];
-                return buildItem(context, index, e);
-              },
-            ),
-          ),
-        ],
-      ),
+      builder: (_) => _.items.isNotEmpty
+          ? Stack(
+              children: [
+                _.loading
+                    ? const LinearProgressIndicator(
+                        minHeight: 3,
+                      )
+                    : const SizedBox.shrink(),
+                SizedBox(
+                  height: 250,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    controller: _.scrollController,
+                    itemCount: _.items.length,
+                    itemBuilder: (context, index) {
+                      T e = _.items[index];
+                      return buildItem(context, index, e);
+                    },
+                  ),
+                ),
+              ],
+            )
+          : const SizedBox.shrink(),
     );
   }
 }

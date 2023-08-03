@@ -111,7 +111,7 @@ class AudioPlayerController extends PlayerController {
       disposeControllers();
       initPlayer();
       audioPosition = Duration.zero;
-      audioLength = Duration(seconds: offline ? offlineVideo!.videoLenthInSeconds : video!.lengthSeconds);
+      audioLength = Duration(seconds: offline ? offlineVideo!.lengthSeconds : video!.lengthSeconds);
       loading = true;
       MiniPlayerController.to()?.eventStream.add(MediaEvent(state: MediaState.loading));
       try {

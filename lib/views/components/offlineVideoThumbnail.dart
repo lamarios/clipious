@@ -17,7 +17,6 @@ class OfflineVideoThumbnail extends StatelessWidget {
         init: OfflineVideoThumbnailController(video),
         global: false,
         builder: (_) {
-          print('REPAAAIINT) ${video.videoId} / ${_.path} / ${_.video.videoId}');
           return AspectRatio(
             aspectRatio: 16 / 9,
             child: _.path != null

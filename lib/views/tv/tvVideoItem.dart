@@ -50,7 +50,7 @@ class TvVideoItem extends StatelessWidget {
                   child: AnimatedContainer(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15),
-                        color: hasFocus ? colors.primaryContainer : colors.background,
+                        color: colors.primaryContainer.withOpacity(hasFocus ? 1 : 0),
                       ),
                       duration: animationDuration,
                       child: AspectRatio(

@@ -59,8 +59,8 @@ Video _$VideoFromJson(Map<String, dynamic> json) => Video(
     );
 
 Map<String, dynamic> _$VideoToJson(Video instance) => <String, dynamic>{
-      'title': instance.title,
       'videoId': instance.videoId,
+      'title': instance.title,
       'lengthSeconds': instance.lengthSeconds,
       'author': instance.author,
       'authorId': instance.authorId,

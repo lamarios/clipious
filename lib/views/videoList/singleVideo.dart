@@ -148,43 +148,66 @@ class VideoListItem extends StatelessWidget {
                       ),
                     ),
                   ),
-            Text(
-              _.video.filtered ? '**********' : video.title,
-              textAlign: TextAlign.left,
-              style: TextStyle(color: colorScheme.primary, fontWeight: FontWeight.normal),
-            ),
-            Visibility(
-              child: InkWell(
-                onTap: () {
-                  log.fine('Opening channel ${video.authorId}');
-                  navigatorKey.currentState?.push(MaterialPageRoute(settings: ROUTE_CHANNEL, builder: (context) => ChannelView(channelId: video.authorId!)));
-                },
-                child: Row(
-                  children: [
-                    Text(
-                      video.author ?? '',
-                      style: TextStyle(color: colorScheme.secondary),
-                    ),
-                  ],
-                ),
-              ),
-            ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Visibility(visible: (video.viewCount ?? 0) > 0, child: const Icon(Icons.visibility)),
-                Visibility(
-                    visible: (video.viewCount ?? 0) > 0,
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 5.0),
-                      child: Text(compactCurrency.format(video.viewCount)),
-                    )),
                 Expanded(
-                    child: Text(
-                  video.publishedText ?? '',
-                  textAlign: TextAlign.end,
-                )),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        _.video.filtered ? '**********' : video.title,
+                        textAlign: TextAlign.left,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                        style: TextStyle(color: colorScheme.primary, fontWeight: FontWeight.normal),
+                      ),
+                      Visibility(
+                        child: InkWell(
+                          onTap: () {
+                            log.fine('Opening channel ${video.authorId}');
+                            navigatorKey.currentState?.push(MaterialPageRoute(settings: ROUTE_CHANNEL, builder: (context) => ChannelView(channelId: video.authorId!)));
+                          },
+                          child: Row(
+                            children: [
+                              Text(
+                                video.author ?? '',
+                                style: TextStyle(color: colorScheme.secondary),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Row(
+                        children: [
+                          Visibility(visible: (video.viewCount ?? 0) > 0, child: const Icon(Icons.visibility)),
+                          Visibility(
+                              visible: (video.viewCount ?? 0) > 0,
+                              child: Padding(
+                                padding: const EdgeInsets.only(left: 5.0),
+                                child: Text(compactCurrency.format(video.viewCount)),
+                              )),
+                          Expanded(
+                              child: Text(
+                            video.publishedText ?? '',
+                            textAlign: TextAlign.end,
+                          )),
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+                InkWell(
+                  onTap: _.video.filtered ? null : () => VideoModalSheet.showVideoModalSheet(context, video, animateDownload: animateDownload),
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 4.0, top: 4),
+                    child: Icon(Icons.more_vert),
+                  ),
+                )
               ],
-            )
+            ),
           ],
         ),
       ),

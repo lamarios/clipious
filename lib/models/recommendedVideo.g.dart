@@ -22,8 +22,8 @@ RecommendedVideo _$RecommendedVideoFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$RecommendedVideoToJson(RecommendedVideo instance) =>
     <String, dynamic>{
-      'title': instance.title,
       'videoId': instance.videoId,
+      'title': instance.title,
       'lengthSeconds': instance.lengthSeconds,
       'author': instance.author,
       'authorId': instance.authorId,

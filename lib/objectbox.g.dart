@@ -221,7 +221,7 @@ final _entities = <ModelEntity>[
   ModelEntity(
       id: const IdUid(7, 7737259498144569754),
       name: 'DownloadedVideo',
-      lastPropertyId: const IdUid(10, 7860866333154890990),
+      lastPropertyId: const IdUid(12, 5585556588689024155),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
@@ -229,11 +229,6 @@ final _entities = <ModelEntity>[
             name: 'id',
             type: 6,
             flags: 1),
-        ModelProperty(
-            id: const IdUid(2, 6600296338817128660),
-            name: 'videoId',
-            type: 9,
-            flags: 0),
         ModelProperty(
             id: const IdUid(3, 2383320059961158921),
             name: 'title',
@@ -265,13 +260,18 @@ final _entities = <ModelEntity>[
             type: 1,
             flags: 0),
         ModelProperty(
-            id: const IdUid(9, 345286493546760360),
-            name: 'videoLenthInSeconds',
+            id: const IdUid(10, 7860866333154890990),
+            name: 'quality',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(11, 4090966965717168930),
+            name: 'lengthSeconds',
             type: 6,
             flags: 0),
         ModelProperty(
-            id: const IdUid(10, 7860866333154890990),
-            name: 'quality',
+            id: const IdUid(12, 5585556588689024155),
+            name: 'videoId',
             type: 9,
             flags: 0)
       ],
@@ -308,7 +308,9 @@ ModelDefinition getObjectBoxModel() {
       retiredPropertyUids: const [
         3422621380867834787,
         971220157301355316,
-        7030952573865954657
+        7030952573865954657,
+        6600296338817128660,
+        345286493546760360
       ],
       retiredRelationUids: const [],
       modelVersion: 5,
@@ -551,7 +553,6 @@ ModelDefinition getObjectBoxModel() {
           object.id = id;
         },
         objectToFB: (DownloadedVideo object, fb.Builder fbb) {
-          final videoIdOffset = fbb.writeString(object.videoId);
           final titleOffset = fbb.writeString(object.title);
           final authorOffset =
               object.author == null ? null : fbb.writeString(object.author!);
@@ -559,17 +560,18 @@ ModelDefinition getObjectBoxModel() {
               ? null
               : fbb.writeString(object.authorUrl!);
           final qualityOffset = fbb.writeString(object.quality);
-          fbb.startTable(11);
+          final videoIdOffset = fbb.writeString(object.videoId);
+          fbb.startTable(13);
           fbb.addInt64(0, object.id);
-          fbb.addOffset(1, videoIdOffset);
           fbb.addOffset(2, titleOffset);
           fbb.addOffset(3, authorOffset);
           fbb.addOffset(4, authorUrlOffset);
           fbb.addBool(5, object.downloadComplete);
           fbb.addBool(6, object.downloadFailed);
           fbb.addBool(7, object.audioOnly);
-          fbb.addInt64(8, object.videoLenthInSeconds);
           fbb.addOffset(9, qualityOffset);
+          fbb.addInt64(10, object.lengthSeconds);
+          fbb.addOffset(11, videoIdOffset);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -580,7 +582,7 @@ ModelDefinition getObjectBoxModel() {
           final object = DownloadedVideo(
               id: const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0),
               videoId: const fb.StringReader(asciiOptimization: true)
-                  .vTableGet(buffer, rootOffset, 6, ''),
+                  .vTableGet(buffer, rootOffset, 26, ''),
               title: const fb.StringReader(asciiOptimization: true)
                   .vTableGet(buffer, rootOffset, 8, ''),
               author: const fb.StringReader(asciiOptimization: true)
@@ -593,8 +595,8 @@ ModelDefinition getObjectBoxModel() {
                   .vTableGet(buffer, rootOffset, 16, false),
               audioOnly: const fb.BoolReader()
                   .vTableGet(buffer, rootOffset, 18, false),
-              videoLenthInSeconds:
-                  const fb.Int64Reader().vTableGet(buffer, rootOffset, 20, 0),
+              lengthSeconds:
+                  const fb.Int64Reader().vTableGet(buffer, rootOffset, 24, 0),
               quality: const fb.StringReader(asciiOptimization: true).vTableGet(buffer, rootOffset, 22, ''));
 
           return object;
@@ -728,39 +730,39 @@ class DownloadedVideo_ {
   static final id =
       QueryIntegerProperty<DownloadedVideo>(_entities[6].properties[0]);
 
-  /// see [DownloadedVideo.videoId]
-  static final videoId =
-      QueryStringProperty<DownloadedVideo>(_entities[6].properties[1]);
-
   /// see [DownloadedVideo.title]
   static final title =
-      QueryStringProperty<DownloadedVideo>(_entities[6].properties[2]);
+      QueryStringProperty<DownloadedVideo>(_entities[6].properties[1]);
 
   /// see [DownloadedVideo.author]
   static final author =
-      QueryStringProperty<DownloadedVideo>(_entities[6].properties[3]);
+      QueryStringProperty<DownloadedVideo>(_entities[6].properties[2]);
 
   /// see [DownloadedVideo.authorUrl]
   static final authorUrl =
-      QueryStringProperty<DownloadedVideo>(_entities[6].properties[4]);
+      QueryStringProperty<DownloadedVideo>(_entities[6].properties[3]);
 
   /// see [DownloadedVideo.downloadComplete]
   static final downloadComplete =
-      QueryBooleanProperty<DownloadedVideo>(_entities[6].properties[5]);
+      QueryBooleanProperty<DownloadedVideo>(_entities[6].properties[4]);
 
   /// see [DownloadedVideo.downloadFailed]
   static final downloadFailed =
-      QueryBooleanProperty<DownloadedVideo>(_entities[6].properties[6]);
+      QueryBooleanProperty<DownloadedVideo>(_entities[6].properties[5]);
 
   /// see [DownloadedVideo.audioOnly]
   static final audioOnly =
-      QueryBooleanProperty<DownloadedVideo>(_entities[6].properties[7]);
-
-  /// see [DownloadedVideo.videoLenthInSeconds]
-  static final videoLenthInSeconds =
-      QueryIntegerProperty<DownloadedVideo>(_entities[6].properties[8]);
+      QueryBooleanProperty<DownloadedVideo>(_entities[6].properties[6]);
 
   /// see [DownloadedVideo.quality]
   static final quality =
+      QueryStringProperty<DownloadedVideo>(_entities[6].properties[7]);
+
+  /// see [DownloadedVideo.lengthSeconds]
+  static final lengthSeconds =
+      QueryIntegerProperty<DownloadedVideo>(_entities[6].properties[8]);
+
+  /// see [DownloadedVideo.videoId]
+  static final videoId =
       QueryStringProperty<DownloadedVideo>(_entities[6].properties[9]);
 }

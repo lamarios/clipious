@@ -20,6 +20,9 @@ class AppLogs extends StatelessWidget {
       init: AppLogsController(),
       builder: (_) => Scaffold(
         appBar: AppBar(
+          elevation: 0,
+          scrolledUnderElevation: 0,
+          backgroundColor: colors.background,
           title: Text(locals.appLogs),
           actions: [IconButton(onPressed: _.selectAll, icon: const Icon(Icons.checklist))],
         ),

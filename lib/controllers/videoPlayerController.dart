@@ -244,7 +244,7 @@ class VideoPlayerController extends PlayerController {
       if (startAt == null) {
         double progress = db.getVideoProgress(idedVideo.videoId);
         if (progress > 0 && progress < 0.90) {
-          startAt = Duration(seconds: (offline ? offlineVideo!.videoLenthInSeconds : video!.lengthSeconds * progress).floor());
+          startAt = Duration(seconds: (offline ? offlineVideo!.lengthSeconds : video!.lengthSeconds * progress).floor());
         }
       }
 

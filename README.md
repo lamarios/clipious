@@ -34,6 +34,9 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 - background playback
 - Live stream support
 - Android TV ui
+- Audio playback
+- Video / audio download
+- Video filtering
 
 ## Installation
 The best way to install is to get it directly from the release page. Using [Obtainium](https://github.com/ImranR98/Obtainium) can help keeping the app up to date.

@@ -25,8 +25,8 @@ VideoInList _$VideoInListFromJson(Map<String, dynamic> json) => VideoInList(
 
 Map<String, dynamic> _$VideoInListToJson(VideoInList instance) =>
     <String, dynamic>{
-      'title': instance.title,
       'videoId': instance.videoId,
+      'title': instance.title,
       'lengthSeconds': instance.lengthSeconds,
       'author': instance.author,
       'authorId': instance.authorId,

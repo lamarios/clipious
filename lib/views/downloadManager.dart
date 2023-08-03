@@ -11,9 +11,12 @@ class DownloadManager extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var colors = Theme.of(context).colorScheme;
     var locals = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
+        scrolledUnderElevation: 0,
+        backgroundColor: colors.background,
         title: Text(locals.downloads),
       ),
       body: SafeArea(

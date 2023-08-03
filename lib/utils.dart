@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:invidious/controllers/videoPlayerController.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/models/interfaces/sharelink.dart';
 import 'package:invidious/views/tv/tvButton.dart';
@@ -11,7 +12,6 @@ import 'package:invidious/views/tv/tvOverScan.dart';
 import 'package:logging/logging.dart';
 import 'package:share_plus/share_plus.dart';
 
-import 'package:invidious/controllers/videoPlayerController.dart';
 import 'models/country.dart';
 
 const PHONE_MAX = 600;
@@ -174,7 +174,7 @@ int getGridCount(BuildContext context) {
 }
 
 double getGridAspectRatio(BuildContext context) {
-  return getGridCount(context) > 1 ? 16 / 15 : 16 / 13;
+  return getGridCount(context) > 1 ? 16 / 15 : 16 / 12;
 }
 
 okCancelDialog(BuildContext context, String title, String message, Function() onOk) {

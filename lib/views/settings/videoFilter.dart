@@ -37,6 +37,7 @@ class VideoFilterSettings extends StatelessWidget {
           keys.sort(_.sortChannels);
           return Scaffold(
               appBar: AppBar(
+                backgroundColor: colors.background,
                 title: Text(locals.videoFilters),
               ),
               floatingActionButton: FloatingActionButton(onPressed: () => createFilter(context), backgroundColor: colors.primaryContainer, child: const Icon(Icons.add)),

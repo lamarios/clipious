@@ -5,17 +5,22 @@ import 'package:invidious/globals.dart';
 class VideoThumbnailView extends StatelessWidget {
   final String videoId;
   final String thumbnailUrl;
-  Widget? child;
-  String? cacheKey;
+  final Widget? child;
+  final String? cacheKey;
+  final BoxDecoration? decoration;
 
-  VideoThumbnailView({super.key, required this.videoId, required this.thumbnailUrl, this.child, this.cacheKey});
+  VideoThumbnailView({super.key, required this.videoId, required this.thumbnailUrl, this.child, this.cacheKey, this.decoration});
 
   @override
   Widget build(BuildContext context) {
     ColorScheme colors = Theme.of(context).colorScheme;
     return AspectRatio(
       aspectRatio: 16 / 9,
-      child: Thumbnail(id: cacheKey ?? 'v/$videoId', thumbnailUrl: thumbnailUrl, decoration: BoxDecoration(color: colors.secondaryContainer, borderRadius: BorderRadius.circular(10)), child: child),
+      child: Thumbnail(
+          id: cacheKey ?? 'v/$videoId',
+          thumbnailUrl: thumbnailUrl,
+          decoration: decoration != null ? decoration! : BoxDecoration(color: colors.secondaryContainer, borderRadius: BorderRadius.circular(10)),
+          child: child),
     );
   }
 }

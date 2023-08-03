@@ -1,25 +1,16 @@
 import 'package:invidious/controllers/playlistController.dart';
 
 class TvPlaylistController extends PlaylistController {
-  bool miniTop = false;
+  bool showImage = true;
 
   @override
   onReady() {
     super.onReady();
-    scrollController.addListener(onScroll);
   }
 
   TvPlaylistController({required super.playlist, required super.playlistItemHeight});
-  void setMiniTop(bool bool) {
-    miniTop = bool;
+  void setShowImage(bool bool) {
+    showImage = bool;
     update();
-  }
-
-  void onScroll() {
-    if (scrollController.offset == 0) {
-      setMiniTop(false);
-    } else if (!miniTop) {
-      setMiniTop(true);
-    }
   }
 }

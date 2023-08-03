@@ -45,6 +45,7 @@ class Search extends StatelessWidget {
               )
             : null,
         appBar: AppBar(
+          backgroundColor: colorScheme.background,
           scrolledUnderElevation: 0,
           title: TextField(
             controller: _.queryController,
