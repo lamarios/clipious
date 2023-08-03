@@ -63,7 +63,12 @@ class VideoQueue extends StatelessWidget {
           offlineVideo: e,
           highlighted: isPlaying,
           trailing: [
-            e.audioOnly ? Icon(Icons.audiotrack, color: colors.secondary,) : const SizedBox.shrink(),
+            e.audioOnly
+                ? Icon(
+                    Icons.audiotrack,
+                    color: colors.secondary,
+                  )
+                : const SizedBox.shrink(),
           ],
         ),
       );

@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
 import 'package:invidious/controllers/audioPlayerController.dart';
 import 'package:invidious/controllers/miniPayerController.dart';
-import 'package:invidious/controllers/videoPlayerController.dart';
 import 'package:invidious/controllers/videoLikeController.dart';
+import 'package:invidious/controllers/videoPlayerController.dart';
 
 import '../utils.dart';
 import 'interfaces/playerController.dart';
@@ -13,7 +13,6 @@ class MiniPlayerControlsController extends GetxController {
   static MiniPlayerControlsController? to() => safeGet();
 
   String videoId;
-
 
   MiniPlayerController? get miniPlayerController => MiniPlayerController.to();
 

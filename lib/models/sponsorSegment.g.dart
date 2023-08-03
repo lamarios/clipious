@@ -6,17 +6,13 @@ part of 'sponsorSegment.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-SponsorSegment _$SponsorSegmentFromJson(Map<String, dynamic> json) =>
-    SponsorSegment(
+SponsorSegment _$SponsorSegmentFromJson(Map<String, dynamic> json) => SponsorSegment(
       json['actionType'] as String,
-      (json['segment'] as List<dynamic>)
-          .map((e) => (e as num).toDouble())
-          .toList(),
+      (json['segment'] as List<dynamic>).map((e) => (e as num).toDouble()).toList(),
       $enumDecode(_$SponsorSegmentTypeEnumMap, json['category']),
     );
 
-Map<String, dynamic> _$SponsorSegmentToJson(SponsorSegment instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$SponsorSegmentToJson(SponsorSegment instance) => <String, dynamic>{
       'actionType': instance.actionType,
       'segment': instance.segment,
       'category': _$SponsorSegmentTypeEnumMap[instance.category]!,

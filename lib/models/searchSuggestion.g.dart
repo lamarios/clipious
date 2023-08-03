@@ -6,14 +6,12 @@ part of 'searchSuggestion.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-SearchSuggestion _$SearchSuggestionFromJson(Map<String, dynamic> json) =>
-    SearchSuggestion(
+SearchSuggestion _$SearchSuggestionFromJson(Map<String, dynamic> json) => SearchSuggestion(
       json['query'] as String,
       (json['suggestions'] as List<dynamic>).map((e) => e as String).toList(),
     );
 
-Map<String, dynamic> _$SearchSuggestionToJson(SearchSuggestion instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$SearchSuggestionToJson(SearchSuggestion instance) => <String, dynamic>{
       'query': instance.query,
       'suggestions': instance.suggestions,
     };

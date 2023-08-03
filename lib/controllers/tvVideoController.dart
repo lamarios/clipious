@@ -7,6 +7,7 @@ double defaultBottomOffset = -400;
 class TvVideoController extends VideoController {
   final ScrollController scrollController = ScrollController();
   bool showImage = true;
+
   TvVideoController({required super.videoId});
 
   @override

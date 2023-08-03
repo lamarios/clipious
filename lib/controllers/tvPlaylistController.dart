@@ -9,6 +9,7 @@ class TvPlaylistController extends PlaylistController {
   }
 
   TvPlaylistController({required super.playlist, required super.playlistItemHeight});
+
   void setShowImage(bool bool) {
     showImage = bool;
     update();
