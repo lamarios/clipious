@@ -1,816 +1,856 @@
 {
-    "subscriptions": "Subscrições",
-    "@subscriptions": {
-        "description": "User subscriptions"
-    },
-    "playlists": "Listas de reprodução",
-    "@playlists": {
-        "description": "User playlists"
-    },
-    "popular": "Mais popular",
-    "@popular": {
-        "description": "Popular videos title"
-    },
-    "trending": "Tendência",
-    "@trending": {
-        "description": "Trending videos title"
-    },
-    "irreversibleAction": "Esta ação é irreversível",
-    "@irreversibleAction": {
-        "description": "Tell the user that the action cannot be undone"
-    },
-    "addPlayList": "Adicionar lista de reprodução",
-    "@addPlayList": {
-        "description": "Title for add playlist dialog"
-    },
-    "playListName": "Nome da lista de reprodução",
-    "@playListName": {
-        "description": "Place holder for new playlist name text field"
-    },
-    "shareYoutubeLink": "Partilhar o link do YouTube",
-    "@shareYoutubeLink": {
-        "description": "asking user to share youtube link"
-    },
-    "shareInvidiousLink": "Partilhar link Invidious",
-    "@shareInvidiousLink": {
-        "description": "asking user to share invidious link"
-    },
-    "ok": "OK",
-    "@ok": {
-        "description": "Ok"
-    },
-    "videoAddedToPlaylist": "Vídeo adicionado à lista de reprodução",
-    "@videoAddedToPlaylist": {
-        "description": "Pop up message when a video was added to a playlist"
-    },
-    "errorAddingVideoToPlaylist": "Erro ao adicionar vídeo à lista de reprodução",
-    "@errorAddingVideoToPlaylist": {
-        "description": "Error while adding video to playlist"
-    },
-    "loadMore": "Carregar mais",
-    "@loadMore": {
-        "description": "CTA to load more"
-    },
-    "showOnStart": "Selecione o que mostrar quando a aplicação começar",
-    "@showOnStart": {
-        "description": "Title of dialog asking which screen the users prefers to see"
-    },
-    "settings": "Definições",
-    "@settings": {
-        "description": "Settings title"
-    },
-    "browsing": "Navegação",
-    "@browsing": {
-        "description": "video browsing preferences"
-    },
-    "country": "País",
-    "@country": {
-        "description": "Country label"
-    },
-    "whenAppStartsShow": "Quando a aplicação começar, mostrar…",
-    "@whenAppStartsShow": {
-        "description": "Setting title for selecting the screen to show on start"
-    },
-    "package": "Pacote",
-    "@package": {
-        "description": "package label"
-    },
-    "delete": "Eliminar",
-    "@delete": {
-        "description": "Delete label"
-    },
-    "invalidInvidiousServer": "Servidor Invidious inválido",
-    "@invalidInvidiousServer": {
-        "description": "Error when the user tries to add a server that is not a proper or reachable invidious server"
-    },
-    "yourServers": "Os seus servidores",
-    "@yourServers": {
-        "description": "Your servers label"
-    },
-    "useDynamicThemeDescription": "Usar cores Material You (apenas disponível no Android 12+)",
-    "@useDynamicThemeDescription": {
-        "description": ""
-    },
-    "useDash": "Usar DASH",
-    "@useDash": {
-        "description": "Label on video options if a user wants to switch to dash urls instead of the regular quality selection"
-    },
-    "useDashDescription": "Às vezes, o streaming adaptativo do DASH pode ser problemático, o Youtube pode limitá-lo.",
-    "@useDashDescription": {
-        "description": "Description for dash in the settings screen"
-    },
-    "error": "Erro",
-    "@error": {},
-    "sponsorBlockDescription": "Ignorar segmentos de patrocinadores apresentados pela comunidade",
-    "@sponsorBlockDescription": {
-        "description": "Sponsorblock setting description"
-    },
-    "name": "Nome",
-    "@name": {
-        "description": "NAme label"
-    },
-    "about": "Sobre",
-    "@about": {
-        "description": "About"
-    },
-    "addServer": "Adicionar servidor",
-    "@addServer": {
-        "description": "Add server label"
-    },
-    "useThisServer": "Utilizar este servidor",
-    "@useThisServer": {
-        "description": "Use this server label"
-    },
-    "publicServersError": "Não foi possível obter uma lista de Servidores Públicos. Toque em para tentar novamente.",
-    "@publicServersError": {
-        "description": "Error message when trying to get public servers but it failed"
-    },
-    "loggedIn": "Não ligado",
-    "@loggedIn": {
-        "description": "Label to tell the user that he is logged in to the server"
-    },
-    "addServerHelpText": "Use o botão + para adicionar os seus próprios servidores ou toque num servidor público e adicione-o.",
-    "@addServerHelpText": {
-        "description": "label for when the user hasn't chosen a server yet"
-    },
-    "publicServers": "Servidores públicos",
-    "@publicServers": {
-        "description": "Public servers label"
-    },
-    "loadingPublicServer": "Carregando servidores públicos",
-    "@loadingPublicServer": {
-        "description": "Message telling users the app is loading the list of public servers"
-    },
-    "appearance": "Aparência",
-    "@appearance": {
-        "description": "Settings category title"
-    },
-    "nReplies": "{count, plural, =0{Sem respostas} =1{1 responder} other{{count} respostas}}",
-    "@nReplies": {
-        "description": "number of replies to a comment",
-        "placeholders": {
-            "count": {
-                "type": "num",
-                "format": "compact"
-            }
-        }
-    },
-    "nVideos": "{count, plural, =0{Sem vídeos} =1{1 vídeo} other{{count} vídeos}}",
-    "@nVideos": {
-        "description": "One or more videos",
-        "placeholders": {
-            "count": {
-                "type": "num",
-                "format": "compact"
-            }
-        }
-    },
-    "recommended": "Recomendado",
-    "@recommended": {
-        "description": "Recommended label"
-    },
-    "topSorting": "Topo",
-    "@topSorting": {
-        "description": "Content sorting: top"
-    },
-    "manageServers": "Gerir servidores",
-    "@manageServers": {
-        "description": "Settings to manage servers"
-    },
-    "useDynamicTheme": "Cores dinâmicas",
-    "@useDynamicTheme": {
-        "description": ""
-    },
-    "notLoggedIn": "Não está conectado",
-    "@notLoggedIn": {
-        "description": "Label when the user is not logged in to the server"
-    },
-    "videoPlayer": "Reprodutor de vídeo",
-    "@videoPlayer": {
-        "description": "Title for video player related options"
-    },
-    "nSubscribers": "{count, select, no{Sem subscritores} other{{count} subscritores}}",
-    "@nSubscribers": {
-        "description": "number of subscribers",
-        "placeholders": {
-            "count": {
-                "type": "String"
-            }
-        }
-    },
-    "publicPlaylist": "Público",
-    "@publicPlaylist": {
-        "description": "Public playlist"
-    },
-    "cancel": "Cancelar",
-    "@cancel": {
-        "description": "Cancel button label"
-    },
-    "add": "Adicionar",
-    "@add": {
-        "description": "Add button abel"
-    },
-    "subscribe": "Subscrever",
-    "@subscribe": {
-        "description": "Label for user to subscribe to a channel"
-    },
-    "channels": "Canais",
-    "@channels": {
-        "description": "Channels label"
-    },
-    "removeFromPlayList": "Remover da lista de reprodução",
-    "@removeFromPlayList": {
-        "description": "Menu item description to show remove a video from a playlist"
-    },
-    "noVideoInPlayList": "Sem vídeo na lista de reprodução",
-    "@noVideoInPlayList": {
-        "description": "When no videos in the playlist"
-    },
-    "deletePlayListQ": "Eliminar a lista de reprodução?",
-    "@deletePlayListQ": {
-        "description": "Ask user to delete a playlist"
-    },
-    "videos": "Vídeos",
-    "@videos": {
-        "description": "Videos label"
-    },
-    "latestVideos": "Vídeos mais recentes",
-    "@latestVideos": {
-        "description": "Latest channel videos"
-    },
-    "subscribed": "Subscrito",
-    "@subscribed": {
-        "description": "When the user is subscribed to a channel"
-    },
-    "playlistVisibility": "Visibilidade",
-    "@playlistVisibility": {
-        "description": "Dropdown label for playlist visibility"
-    },
-    "privatePlaylist": "Privado",
-    "@privatePlaylist": {
-        "description": "Private playlist"
-    },
-    "unlistedPlaylist": "Não listado",
-    "@unlistedPlaylist": {
-        "description": "Unlisted playlist"
-    },
-    "streams": "Transmissão",
-    "@streams": {
-        "description": "Streams label"
-    },
-    "comments": "Comentários",
-    "@comments": {
-        "description": "Comments label"
-    },
-    "selectPlaylist": "Selecionar lista de reprodução",
-    "@selectPlaylist": {
-        "description": "Title when users wants to add a video to a playlist"
-    },
-    "info": "Informação",
-    "@info": {
-        "description": "Info label"
-    },
-    "noChannels": "Sem canais",
-    "@noChannels": {
-        "description": "when there are no channels to display"
-    },
-    "noPlaylists": "Sem listas de reprodução",
-    "@noPlaylists": {
-        "description": "when there are no playlists to display"
-    },
-    "couldntLoadVideo": "Não foi possível carregar o vídeo",
-    "@couldntLoadVideo": {
-        "description": "Message to display when a video can't be loaded"
-    },
-    "startUsingClipious": "Comece a usar o Clipious",
-    "@startUsingClipious": {
-        "description": "button label to start using the app"
-    },
-    "createNewPlaylist": "Criar nova lista de reprodução",
-    "@createNewPlaylist": {
-        "description": "Button label to create a new playlist when the user wants to add a video to a playlist"
-    },
-    "couldntFetchVideos": "Não foi possível ir buscar vídeos. Toque para tentar novamente.",
-    "@couldntFetchVideos": {
-        "description": "Can't load bunch of videos, asking  user to try again"
-    },
-    "wizardIntro": "Selecione um servidor público ou adicione o seu próprio. (Pode ser alterado mais tarde nas definições)",
-    "@wizardIntro": {
-        "description": "Welcome message on frst time use"
-    },
-    "newSorting": "Novo",
-    "@newSorting": {
-        "description": "Content sorting: new"
-    },
-    "streamIsLive": "Em directo",
-    "@streamIsLive": {
-        "description": "Label when a video is a live stream"
-    },
-    "sponsorSkipped": "Patrocinador ignorado",
-    "@sponsorSkipped": {
-        "description": "When a sponsor segment is skipped thanks to sponsor block"
-    },
-    "selectBrowsingCountry": "Selecione o país de navegação",
-    "@selectBrowsingCountry": {
-        "description": "Select country for trending content"
-    },
-    "servers": "Servidores",
-    "@servers": {
-        "description": "Server management settings category"
-    },
-    "build": "Compilação",
-    "@build": {
-        "description": "build label"
-    },
-    "logIn": "Iniciar Sessão",
-    "@logIn": {
-        "description": "CTA to log in to server"
-    },
-    "currentServer": "Atualmente a utilizar {current}",
-    "@currentServer": {
-        "description": "Which server the user is currently using",
-        "placeholders": {
-            "current": {
-                "type": "String"
-            }
-        }
-    },
-    "tapToAddServer": "Toque para adicionar servidor à sua lista",
-    "@tapToAddServer": {
-        "description": "public server description"
-    },
-    "useSponsorBlock": "Usar SponsorBlock",
-    "@useSponsorBlock": {
-        "description": "label for sponsorblock checkbox"
-    },
-    "version": "Versão",
-    "@version": {
-        "description": "version label"
-    },
-    "videoListed": "Público",
-    "@videoListed": {
-        "description": "Status of a publicly available video"
-    },
-    "videoUnlisted": "Não listado",
-    "@videoUnlisted": {
-        "description": "Status of a video that is only accessible by link"
-    },
-    "videoIsFamilyFriendly": "Familiar",
-    "@videoIsFamilyFriendly": {
-        "description": "Displayed only when a video is family friendly"
-    },
-    "tapToManage": "Toque para gerir",
-    "@tapToManage": {
-        "description": "Text shown below a server in the 'Your servers' list"
-    },
-    "authentication": "Autenticação",
-    "@authentication": {
-        "description": "Label for server settings related to authentications"
-    },
-    "tokenLoginDescription": "Forma recomendada de iniciar sessão",
-    "@tokenLoginDescription": {
-        "description": "Recommended way to log in"
-    },
-    "cookieLoginDescription": "Utilize este método se enfrentar problemas com a autenticação simbólica",
-    "@cookieLoginDescription": {
-        "description": "Cookie log in description"
-    },
-    "logout": "Terminar sessão",
-    "@logout": {
-        "description": "CTA to logout of a server"
-    },
-    "username": "Nome de utilizador",
-    "@username": {
-        "description": "Username label for login to a server"
-    },
-    "password": "Palavra-passe",
-    "@password": {
-        "description": "Password label for login to a server"
-    },
-    "wrongUsernamePassword": "Nome de utilizador ou palavra-passe incorretos",
-    "@wrongUsernamePassword": {
-        "description": "Error message when authentication fails"
-    },
-    "tokenLogin": "Iniciar sessão com token",
-    "@tokenLogin": {
-        "description": "Textto login to a server using the recommended way"
-    },
-    "cookieLogin": "Iniciar sessão com cookie",
-    "@cookieLogin": {
-        "description": "Text to login to a server using the cookie jar method"
-    },
-    "videoQueue": "Fila de vídeo",
-    "@videoQueue": {
-        "description": "Label for button to display the video queue"
-    },
-    "addToQueueList": "Adicionar à fila",
-    "@addToQueueList": {
-        "description": "Label on button to add a video to the queue list"
-    },
-    "addRecommendedToQueue": "Reprodução automática recomendada a seguir",
-    "@addRecommendedToQueue": {
-        "description": "Switch when playing a video to automatically add the recommended videos to the video queue"
-    },
-    "sponsorBlockCategorySponsor": "Patrocinador",
-    "@sponsorBlockCategorySponsor": {
-        "description": "Sponsor block 'Sponsor' Category"
-    },
-    "sponsorBlockCategoryUnpaidSelfPromo": "Promoção não remunerada/auto-própria",
-    "@sponsorBlockCategoryUnpaidSelfPromo": {
-        "description": "Sponsor block 'Unpaid/Self promotion' Category"
-    },
-    "sponsorBlockCategoryUnpaidSelfPromoDescription": "Semelhante a \"patrocinador\" exceto para promoção não remunerada ou auto-promoção. Isto inclui secções sobre mercadorias, doações, ou informação sobre quem colaboraram ",
-    "@sponsorBlockCategoryUnpaidSelfPromoDescription": {
-        "description": "Sponsor block 'Unpaid/Self promotion' Category description"
-    },
-    "sponsorBlockCategoryInteraction": "Lembrete de Interação (Subscrição)",
-    "@sponsorBlockCategoryInteraction": {
-        "description": "Sponsor block 'Interaction' Category"
-    },
-    "sponsorBlockCategoryIntroDescription": "Um intervalo sem conteúdo real. Pode ser uma pausa, frame estático, repetição de animação. Isto não deve ser utilizado para transições que contenham informação.",
-    "@sponsorBlockCategoryIntroDescription": {
-        "description": "Sponsorblock 'Intro' Category description"
-    },
-    "sponsorBlockCategoryOutro": "Endcards / Créditos",
-    "@sponsorBlockCategoryOutro": {
-        "description": "Outro block 'Outro' Category"
-    },
-    "sponsorBlockCategoryOutroDescription": "Créditos ou quando os endcards do YouTube aparecem. Não para conclusões com informações.",
-    "@sponsorBlockCategoryOutroDescription": {
-        "description": "Outro block 'Outro' Category description"
-    },
-    "sponsorBlockCategoryPreview": "Pré-visualização/Recapitulação",
-    "@sponsorBlockCategoryPreview": {
-        "description": "Sponsorblock 'Preview' Category"
-    },
-    "sponsorBlockCategoryFiller": "Filler Tangente / Piadas",
-    "@sponsorBlockCategoryFiller": {
-        "description": "Sponsorblock 'Filler' Category"
-    },
-    "sponsorBlockCategoryMusicOffTopic": "Música: Secção de Não-Música",
-    "@sponsorBlockCategoryMusicOffTopic": {
-        "description": "Sponsorblock 'MusicOffTopic' Category"
-    },
-    "sponsorBlockCategoryMusicOffTopicDescription": "Apenas para utilização em vídeos musicais. Esta categoria só deve ser utilizada para secções de vídeos musicais que ainda não estejam abrangidas por outra categoria.",
-    "@sponsorBlockCategoryMusicOffTopicDescription": {
-        "description": "Only for use in music videos. This only should be used for sections of music videos that aren't already covered by another category."
-    },
-    "useProxy": "Proxy videos",
-    "@useProxy": {
-        "description": "label for settings switch to proxy videos from server"
-    },
-    "useProxyDescription": "Ao fazer proxy de fluxos de vídeo do servidor, você pode ignorar bloqueios regionais ou ISP bloqueando o YouTube",
-    "@useProxyDescription": {
-        "description": "Description for the use proxy settings"
-    },
-    "sponsorBlockSettingsQuickDescription": "Selecione o tipo de segmentos a saltar",
-    "@sponsorBlockSettingsQuickDescription": {
-        "description": "Small description of what the sponsor block settings do"
-    },
-    "sponsorBlockCategorySponsorDescription": "Promoção paga, referências pagas e publicidade direta. Não para auto-promoção ou gritos gratuitos a causas/criadores/websites/produtos de que eles gostam.",
-    "@sponsorBlockCategorySponsorDescription": {
-        "description": "Sponsor block 'Sponsor' Category description"
-    },
-    "sponsorBlockCategoryInteractionDescription": "Quando houver um breve lembrete para gostar, subscrever ou segui-los no meio do conteúdo. Se for longo ou sobre algo específico, deve, em vez disso, estar sob auto-promoção.",
-    "@sponsorBlockCategoryInteractionDescription": {
-        "description": "Sponsor block 'Interaction' Category description"
-    },
-    "sponsorBlockCategoryIntro": "Interrupção/Animação Internacional",
-    "@sponsorBlockCategoryIntro": {
-        "description": "Sponsorblock 'Intro' Category"
-    },
-    "sponsorBlockCategoryPreviewDescription": "Coleção de clips que mostram o que está a aparecer neste vídeo ou noutros vídeos de uma série onde toda a informação é repetida mais tarde no vídeo.",
-    "@sponsorBlockCategoryPreviewDescription": {
-        "description": "Sponsorblock 'Preview' Category description"
-    },
-    "sponsorBlockCategoryFillerDescription": "Cenas tangenciais adicionadas apenas para preenchimento ou humor que não são necessárias para compreender o conteúdo principal do vídeo. Isto não deve incluir segmentos que forneçam o contexto ou detalhes de fundo. Esta é uma categoria muito agressiva destinada a quando não se está com disposição para \"diversão\".",
-    "@sponsorBlockCategoryFillerDescription": {
-        "description": "Sponsorblock 'Filler' Category description"
-    },
-    "blackBackground": "Fundo preto",
-    "@blackBackground": {
-        "description": "Black backgroun option label for dark theme with oled"
-    },
-    "blackBackgroundDescription": "Para tema escuro no ecrã OLED",
-    "@blackBackgroundDescription": {
-        "description": ""
-    },
-    "pressDownToShowSettings": "Pressione para baixo para mostrar as definições",
-    "@pressDownToShowSettings": {
-        "description": "Instruction on how to show video settings when playing a video on TV"
-    },
-    "quality": "Qualidade",
-    "@quality": {
-        "description": "Name of TV ui video settings"
-    },
-    "subtitles": "Subtítulos",
-    "@subtitles": {
-        "description": "Name of TV ui subtitles settings"
-    },
-    "playbackSpeed": "Velocidade de reprodução",
-    "@playbackSpeed": {
-        "description": "Name of TV ui Playback speed"
-    },
-    "search": "Pesquisa",
-    "@search": {
-        "description": "search title"
-    },
-    "audio": "Áudio",
-    "@audio": {
-        "description": "Name TV ui audio settings"
-    },
-    "subtitleFontSize": "Tamanho de letra das legendas",
-    "@subtitleFontSize": {
-        "description": "Settings label for the size of the subtitles"
-    },
-    "subtitleFontSizeDescription": "Mude o tamanho das legendas se forem demasiado pequenas ou demasiado grandes no seu dispositivo",
-    "@subtitleFontSizeDescription": {
-        "description": "Settings description for subtitle size"
-    },
-    "skipSslVerification": "Ignorar verificação do certificado SSL",
-    "@skipSslVerification": {
-        "description": "Setting label to skip ssl certification verification"
-    },
-    "skipSslVerificationDescription": "Para usar um certificado SSL auto-assinado, ou quando tiver problemas relacionados com SSL com o seu servidor.",
-    "@skipSslVerificationDescription": {
-        "description": "Setting description for the skip ssl certification verification"
-    },
-    "returnYoutubeDislikeDescription": "Mostrar a estimativa de aversões a vídeos utilizando a API fornecida por returnyoutubedislike.com",
-    "@returnYoutubeDislikeDescription": {
-        "description": "ReturnYoutubeDislike setting description"
-    },
-    "themeBrightness": "Tema",
-    "@themeBrightness": {
-        "description": "Ask the user to user dark / light / system theme"
-    },
-    "themeLight": "Claro",
-    "@themeLight": {
-        "description": "Light theme"
-    },
-    "themeDark": "Escuro",
-    "@themeDark": {
-        "description": "Dark theme"
-    },
-    "followSystem": "Seguir sistema",
-    "@followSystem": {
-        "description": "Follow system label"
-    },
-    "requiresRestart": "Requer reinício da aplicação",
-    "@requiresRestart": {
-        "description": "Requires app restart label"
-    },
-    "appLanguage": "Idioma da aplicação",
-    "@appLanguage": {
-        "description": "Select app language"
-    },
-    "shorts": "Curtos",
-    "@shorts": {
-        "description": "Youtube shorts"
-    },
-    "searchSortRelevance": "Relevância",
-    "@searchSortRelevance": {
-        "description": "Sort search by relevance"
-    },
-    "searchSortRating": "Classificação",
-    "@searchSortRating": {
-        "description": "Sort search by rating"
-    },
-    "searchSortUploadDate": "Data de carregamento",
-    "@searchSortUploadDate": {
-        "description": "Sort search by upload date"
-    },
-    "searchSortViewCount": "Ver contagem",
-    "@searchSortViewCount": {
-        "description": "Sort search by view count"
-    },
-    "rememberSubtitleLanguage": "Recordar o idioma das legendas",
-    "@rememberSubtitleLanguage": {
-        "description": "Settings label for remembering subtitle language"
-    },
-    "rememberSubtitleLanguageDescription": "Definir automaticamente as legendas para o último idioma selecionado, se disponível",
-    "@rememberSubtitleLanguageDescription": {
-        "description": "Settings description for remembering subtitle language"
-    },
-    "searchHistoryLimit": "Limite do histórico de pesquisa",
-    "@searchHistoryLimit": {
-        "description": "Settings label for search history limit"
-    },
-    "searchHistoryLimitDescription": "Definir o número de pesquisas anteriores que aparecerão nas sugestões",
-    "@searchHistoryLimitDescription": {
-        "description": "Settings label for search history limit description"
-    },
-    "clearSearchHistory": "Limpar o histórico de pesquisa",
-    "@clearSearchHistory": {
-        "description": "Settings label for clearing search history"
-    },
-    "autoplayVideoOnLoad": "Reprodução automática de vídeo ao carregar",
-    "@autoplayVideoOnLoad": {
-        "description": "Label for settings to enable autoplay when a video loads"
-    },
-    "autoplayVideoOnLoadDescription": "Iniciar automaticamente a reprodução do vídeo depois de este ter sido carregado",
-    "@autoplayVideoOnLoadDescription": {
-        "description": "Description for the autoplay video on load setting"
-    },
-    "searchHistory": "Histórico de pesquisa",
-    "@searchHistory": {
-        "description": "Settings label for search history"
-    },
-    "searchHistoryDescription": "Definições do histórico de pesquisa",
-    "@searchHistoryDescription": {
-        "description": "Description for search history settings"
-    },
-    "enableSearchHistory": "Ativar o histórico de pesquisa",
-    "@enableSearchHistory": {
-        "description": "Settings label for enabling search history"
-    },
-    "logsCopied": "Registos copiados para a área de transferência",
-    "@logsCopied": {
-        "description": "Message to tell user that logs have been copied to the clipboard"
-    },
-    "copyToClipBoard": "Copiar para a área de transferência",
-    "@copyToClipBoard": {
-        "description": "Text to copy something to clipboard"
-    },
-    "appLogs": "Registos de aplicações",
-    "@appLogs": {
-        "description": "Title for settings that leads to application logs"
-    },
-    "appLogsDescription": "Obter registos do que está a acontecer na aplicação, o que pode ser útil para comunicar problemas",
-    "@appLogsDescription": {
-        "description": "Description of the app log settings"
-    },
-    "videoFilterNoFilters": "Sem filtros de vídeo, toque no botão '+' abaixo para começar a adicionar filtros.",
-    "@videoFilterNoFilters": {
-        "description": "Label when there are no video filters"
-    },
-    "addVideoFilter": "Criar filtro",
-    "@addVideoFilter": {
-        "description": "Title when creating a new filter"
-    },
-    "videoFilterOperation": "Funcionamento",
-    "@videoFilterOperation": {
-        "description": "Label for filter operation"
-    },
-    "videoFilterValue": "Valor",
-    "@videoFilterValue": {
-        "description": "Label for filter value"
-    },
-    "videoFilterDescriptionString": "{hideOrFilter} vídeos em que {type} {operation} ''{value}''.",
-    "@videoFilterDescriptionString": {
-        "description": "Human readable description of a video filter, in this case is it for string comparison, example: Hide videos where the name of the video does not contain the following string 'test' (Do not translate text between { })",
-        "placeholders": {
-            "hideOrFilter": {
-                "type": "String",
-                "example": "Hide"
-            },
-            "type": {
-                "type": "String",
-                "example": "video title"
-            },
-            "operation": {
-                "type": "String",
-                "example": "does not contain"
-            },
-            "value": {
-                "type": "String",
-                "example": "some filter text"
-            }
-        }
-    },
-    "videoFilterHideDescription": "Por predefinição, os vídeos filtrados não são ocultados, mas mostrados como ofuscados com o(s) motivo(s) por que foram filtrados. Esta definição remove os vídeos filtrados das listas.",
-    "@videoFilterHideDescription": {
-        "description": ""
-    },
-    "fillFullscreen": "Maximizar o vídeo para caber no ecrã",
-    "@fillFullscreen": {
-        "description": "Title to maximize video to fit screen"
-    },
-    "fillFullscreenDescription": "Ajusta o vídeo para preencher todo o ecrã no modo paisagem",
-    "@fillFullscreenDescription": {
-        "description": "Setting description for filling video to screen in landscape"
-    },
-    "redirectInvidiousLink": "Partilhar Invidious Link de redireccionamento",
-    "@redirectInvidiousLink": {
-        "description": "asking user to share redirecting invidious link"
-    },
-    "save": "Guardar",
-    "@save": {
-        "description": "Text for save action"
-    },
-    "videoFilterEditDescription": "Seleccione um canal opcional, um tipo de filtro, uma operação e um valor para filtrar os vídeos OUT das listas. Exemplo, tipo: nome do vídeo, operação: contém, valor: teste EXCLUIRÁ todos os vídeos com a palavra \"teste\" no seu nome.",
-    "@videoFilterEditDescription": {
-        "description": "Descriptive test for video filter set up"
-    },
-    "optional": "facultativo",
-    "@optional": {
-        "description": "Optional label"
-    },
-    "videoFilterHideLabel": "Ocultar",
-    "@videoFilterHideLabel": {
-        "description": "Label to hide videos"
-    },
-    "videoFilterFilterLabel": "Ofuscar",
-    "@videoFilterFilterLabel": {
-        "description": "Label to filter videos"
-    },
-    "videoFilterTapToReveal": "Toque para revelar",
-    "@videoFilterTapToReveal": {
-        "description": "Label to tell user to tap to show a filtered video"
-    },
-    "videoFilterOperationContains": "Contém",
-    "@videoFilterOperationContains": {
-        "description": "Label for video filter operation Contains"
-    },
-    "videoFilterOperationNotContain": "Não contém",
-    "@videoFilterOperationNotContain": {
-        "description": "Label for video filter operation Does not contain"
-    },
-    "rememberPlaybackSpeedDescription": "Definir automaticamente a velocidade de reprodução para a última velocidade selecionada",
-    "@rememberPlaybackSpeedDescription": {
-        "description": "Settings description for remembering playback speed"
-    },
-    "addToPlaylist": "Adicionar à lista de reprodução",
-    "@addToPlaylist": {
-        "description": "Label to add a video to a playlist"
-    },
-    "playNext": "Reproduzir o próximo",
-    "@playNext": {
-        "description": "Label to play the video after the current one."
-    },
-    "playNextAddedToQueue": "O vídeo será reproduzido a seguir",
-    "@playNextAddedToQueue": {
-        "description": "Pop up message to confirm that the video has been properly set to play next"
-    },
-    "videoFilters": "Filtros de vídeo",
-    "@videoFilters": {
-        "description": "Title for video filter settings"
-    },
-    "videoFiltersExplanation": "Oculte ou ofusque vídeos de todos os feeds de vídeo na aplicação com base nos filtros definidos abaixo. Isto permite-lhe, por exemplo, ocultar spoilers desportivos ou ocultar curtas-metragens de um determinado canal.",
-    "@videoFiltersExplanation": {
-        "description": "Description on how filter work"
-    },
-    "videoFiltersSettingTileDescriptions": "Definir regras para filtrar vídeos",
-    "@videoFiltersSettingTileDescriptions": {
-        "description": "Description for the main settings page"
-    },
-    "videoFilterAllChannels": "Todos os canais",
-    "@videoFilterAllChannels": {
-        "description": "Title for the sections that applies to all channels"
-    },
-    "editVideoFilter": "Editar filtro",
-    "@editVideoFilter": {
-        "description": "Title when editting a filter"
-    },
-    "videoFilterType": "Tipo",
-    "@videoFilterType": {
-        "description": "Label for filter type"
-    },
-    "videoFiltered": "Vídeo filtrado pelo(s) seguinte(s) motivo(s):",
-    "@videoFiltered": {
-        "description": "Label shown on video list when it is filtered out"
-    },
-    "videoFilterHide": "Ocultar vídeos filtrados",
-    "@videoFilterHide": {
-        "description": "Label for settings to hide filtered videos"
-    },
-    "videoFilterTypeVideoTitle": "Título do vídeo",
-    "@videoFilterTypeVideoTitle": {
-        "description": "Label for video filter video title"
-    },
-    "videoFilterTypeChannelName": "Nome do canal",
-    "@videoFilterTypeChannelName": {
-        "description": "Label for video filter channel name"
-    },
-    "videoFilterTypeVideoLength": "Duração do vídeo (segundos)",
-    "@videoFilterTypeVideoLength": {
-        "description": "Label for video filter video length"
-    },
-    "videoFilterOperationLowerThan": "Inferior a",
-    "@videoFilterOperationLowerThan": {
-        "description": "Label for video filter operation Lower than"
-    },
-    "videoFilterOperationHigherThan": "Superior a",
-    "@videoFilterOperationHigherThan": {
-        "description": "Label for video filter operation Higher than"
-    },
-    "channel": "Canal",
-    "@channel": {
-        "description": "A single channel"
-    },
-    "videoFilterHideAllFromChannel": "Filtrar todos os vídeos do canal",
-    "@videoFilterHideAllFromChannel": {
-        "description": "Label for video filter switch to allow to hide all videos from a channel"
-    },
-    "lockFullScreenToLandscape": "Bloquear a orientação do ecrã inteiro para o rácio de aspeto do vídeo",
-    "@lockFullScreenToLandscape": {
-        "description": "Title to force full screen to landscape"
-    },
-    "lockFullScreenToLandscapeDescription": "Bloqueia a orientação do ecrã inteiro com base no formato de vídeo, paisagem para vídeos largos e retrato para vídeos em retrato",
-    "@lockFullScreenToLandscapeDescription": {
-        "description": "Setting description for forcing video to landscape when in full screen"
-    },
-    "rememberPlaybackSpeed": "Recordar a velocidade de reprodução",
-    "@rememberPlaybackSpeed": {
-        "description": "Setting label for remembering playback speed"
+  "subscriptions": "Subscrições",
+  "@subscriptions": {
+    "description": "User subscriptions"
+  },
+  "playlists": "Listas de reprodução",
+  "@playlists": {
+    "description": "User playlists"
+  },
+  "popular": "Mais popular",
+  "@popular": {
+    "description": "Popular videos title"
+  },
+  "trending": "Tendência",
+  "@trending": {
+    "description": "Trending videos title"
+  },
+  "irreversibleAction": "Esta ação é irreversível",
+  "@irreversibleAction": {
+    "description": "Tell the user that the action cannot be undone"
+  },
+  "addPlayList": "Adicionar lista de reprodução",
+  "@addPlayList": {
+    "description": "Title for add playlist dialog"
+  },
+  "playListName": "Nome da lista de reprodução",
+  "@playListName": {
+    "description": "Place holder for new playlist name text field"
+  },
+  "shareYoutubeLink": "Partilhar o link do YouTube",
+  "@shareYoutubeLink": {
+    "description": "asking user to share youtube link"
+  },
+  "shareInvidiousLink": "Partilhar link Invidious",
+  "@shareInvidiousLink": {
+    "description": "asking user to share invidious link"
+  },
+  "ok": "OK",
+  "@ok": {
+    "description": "Ok"
+  },
+  "videoAddedToPlaylist": "Vídeo adicionado à lista de reprodução",
+  "@videoAddedToPlaylist": {
+    "description": "Pop up message when a video was added to a playlist"
+  },
+  "errorAddingVideoToPlaylist": "Erro ao adicionar vídeo à lista de reprodução",
+  "@errorAddingVideoToPlaylist": {
+    "description": "Error while adding video to playlist"
+  },
+  "loadMore": "Carregar mais",
+  "@loadMore": {
+    "description": "CTA to load more"
+  },
+  "showOnStart": "Selecione o que mostrar quando a aplicação começar",
+  "@showOnStart": {
+    "description": "Title of dialog asking which screen the users prefers to see"
+  },
+  "settings": "Definições",
+  "@settings": {
+    "description": "Settings title"
+  },
+  "browsing": "Navegação",
+  "@browsing": {
+    "description": "video browsing preferences"
+  },
+  "country": "País",
+  "@country": {
+    "description": "Country label"
+  },
+  "whenAppStartsShow": "Quando a aplicação começar, mostrar…",
+  "@whenAppStartsShow": {
+    "description": "Setting title for selecting the screen to show on start"
+  },
+  "package": "Pacote",
+  "@package": {
+    "description": "package label"
+  },
+  "delete": "Eliminar",
+  "@delete": {
+    "description": "Delete label"
+  },
+  "invalidInvidiousServer": "Servidor Invidious inválido",
+  "@invalidInvidiousServer": {
+    "description": "Error when the user tries to add a server that is not a proper or reachable invidious server"
+  },
+  "yourServers": "Os seus servidores",
+  "@yourServers": {
+    "description": "Your servers label"
+  },
+  "useDynamicThemeDescription": "Usar cores Material You (apenas disponível no Android 12+)",
+  "@useDynamicThemeDescription": {
+    "description": ""
+  },
+  "useDash": "Usar DASH",
+  "@useDash": {
+    "description": "Label on video options if a user wants to switch to dash urls instead of the regular quality selection"
+  },
+  "useDashDescription": "Às vezes, o streaming adaptativo do DASH pode ser problemático, o Youtube pode limitá-lo.",
+  "@useDashDescription": {
+    "description": "Description for dash in the settings screen"
+  },
+  "error": "Erro",
+  "@error": {},
+  "sponsorBlockDescription": "Ignorar segmentos de patrocinadores apresentados pela comunidade",
+  "@sponsorBlockDescription": {
+    "description": "Sponsorblock setting description"
+  },
+  "name": "Nome",
+  "@name": {
+    "description": "NAme label"
+  },
+  "about": "Sobre",
+  "@about": {
+    "description": "About"
+  },
+  "addServer": "Adicionar servidor",
+  "@addServer": {
+    "description": "Add server label"
+  },
+  "useThisServer": "Utilizar este servidor",
+  "@useThisServer": {
+    "description": "Use this server label"
+  },
+  "publicServersError": "Não foi possível obter uma lista de Servidores Públicos. Toque em para tentar novamente.",
+  "@publicServersError": {
+    "description": "Error message when trying to get public servers but it failed"
+  },
+  "loggedIn": "Não ligado",
+  "@loggedIn": {
+    "description": "Label to tell the user that he is logged in to the server"
+  },
+  "addServerHelpText": "Use o botão + para adicionar os seus próprios servidores ou toque num servidor público e adicione-o.",
+  "@addServerHelpText": {
+    "description": "label for when the user hasn't chosen a server yet"
+  },
+  "publicServers": "Servidores públicos",
+  "@publicServers": {
+    "description": "Public servers label"
+  },
+  "loadingPublicServer": "Carregando servidores públicos",
+  "@loadingPublicServer": {
+    "description": "Message telling users the app is loading the list of public servers"
+  },
+  "appearance": "Aparência",
+  "@appearance": {
+    "description": "Settings category title"
+  },
+  "nReplies": "{count, plural, =0{Sem respostas} =1{1 responder} other{{count} respostas}}",
+  "@nReplies": {
+    "description": "number of replies to a comment",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
     }
+  },
+  "nVideos": "{count, plural, =0{Sem vídeos} =1{1 vídeo} other{{count} vídeos}}",
+  "@nVideos": {
+    "description": "One or more videos",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "recommended": "Recomendado",
+  "@recommended": {
+    "description": "Recommended label"
+  },
+  "topSorting": "Topo",
+  "@topSorting": {
+    "description": "Content sorting: top"
+  },
+  "manageServers": "Gerir servidores",
+  "@manageServers": {
+    "description": "Settings to manage servers"
+  },
+  "useDynamicTheme": "Cores dinâmicas",
+  "@useDynamicTheme": {
+    "description": ""
+  },
+  "notLoggedIn": "Não está conectado",
+  "@notLoggedIn": {
+    "description": "Label when the user is not logged in to the server"
+  },
+  "videoPlayer": "Reprodutor de vídeo",
+  "@videoPlayer": {
+    "description": "Title for video player related options"
+  },
+  "nSubscribers": "{count, select, no{Sem subscritores} other{{count} subscritores}}",
+  "@nSubscribers": {
+    "description": "number of subscribers",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "publicPlaylist": "Público",
+  "@publicPlaylist": {
+    "description": "Public playlist"
+  },
+  "cancel": "Cancelar",
+  "@cancel": {
+    "description": "Cancel button label"
+  },
+  "add": "Adicionar",
+  "@add": {
+    "description": "Add button abel"
+  },
+  "subscribe": "Subscrever",
+  "@subscribe": {
+    "description": "Label for user to subscribe to a channel"
+  },
+  "channels": "Canais",
+  "@channels": {
+    "description": "Channels label"
+  },
+  "removeFromPlayList": "Remover da lista de reprodução",
+  "@removeFromPlayList": {
+    "description": "Menu item description to show remove a video from a playlist"
+  },
+  "noVideoInPlayList": "Sem vídeo na lista de reprodução",
+  "@noVideoInPlayList": {
+    "description": "When no videos in the playlist"
+  },
+  "deletePlayListQ": "Eliminar a lista de reprodução?",
+  "@deletePlayListQ": {
+    "description": "Ask user to delete a playlist"
+  },
+  "videos": "Vídeos",
+  "@videos": {
+    "description": "Videos label"
+  },
+  "latestVideos": "Vídeos mais recentes",
+  "@latestVideos": {
+    "description": "Latest channel videos"
+  },
+  "subscribed": "Subscrito",
+  "@subscribed": {
+    "description": "When the user is subscribed to a channel"
+  },
+  "playlistVisibility": "Visibilidade",
+  "@playlistVisibility": {
+    "description": "Dropdown label for playlist visibility"
+  },
+  "privatePlaylist": "Privado",
+  "@privatePlaylist": {
+    "description": "Private playlist"
+  },
+  "unlistedPlaylist": "Não listado",
+  "@unlistedPlaylist": {
+    "description": "Unlisted playlist"
+  },
+  "streams": "Transmissão",
+  "@streams": {
+    "description": "Streams label"
+  },
+  "comments": "Comentários",
+  "@comments": {
+    "description": "Comments label"
+  },
+  "selectPlaylist": "Selecionar lista de reprodução",
+  "@selectPlaylist": {
+    "description": "Title when users wants to add a video to a playlist"
+  },
+  "info": "Informação",
+  "@info": {
+    "description": "Info label"
+  },
+  "noChannels": "Sem canais",
+  "@noChannels": {
+    "description": "when there are no channels to display"
+  },
+  "noPlaylists": "Sem listas de reprodução",
+  "@noPlaylists": {
+    "description": "when there are no playlists to display"
+  },
+  "couldntLoadVideo": "Não foi possível carregar o vídeo",
+  "@couldntLoadVideo": {
+    "description": "Message to display when a video can't be loaded"
+  },
+  "startUsingClipious": "Comece a usar o Clipious",
+  "@startUsingClipious": {
+    "description": "button label to start using the app"
+  },
+  "createNewPlaylist": "Criar nova lista de reprodução",
+  "@createNewPlaylist": {
+    "description": "Button label to create a new playlist when the user wants to add a video to a playlist"
+  },
+  "couldntFetchVideos": "Não foi possível ir buscar vídeos. Toque para tentar novamente.",
+  "@couldntFetchVideos": {
+    "description": "Can't load bunch of videos, asking  user to try again"
+  },
+  "wizardIntro": "Selecione um servidor público ou adicione o seu próprio. (Pode ser alterado mais tarde nas definições)",
+  "@wizardIntro": {
+    "description": "Welcome message on frst time use"
+  },
+  "newSorting": "Novo",
+  "@newSorting": {
+    "description": "Content sorting: new"
+  },
+  "streamIsLive": "Em directo",
+  "@streamIsLive": {
+    "description": "Label when a video is a live stream"
+  },
+  "sponsorSkipped": "Patrocinador ignorado",
+  "@sponsorSkipped": {
+    "description": "When a sponsor segment is skipped thanks to sponsor block"
+  },
+  "selectBrowsingCountry": "Selecione o país de navegação",
+  "@selectBrowsingCountry": {
+    "description": "Select country for trending content"
+  },
+  "servers": "Servidores",
+  "@servers": {
+    "description": "Server management settings category"
+  },
+  "build": "Compilação",
+  "@build": {
+    "description": "build label"
+  },
+  "logIn": "Iniciar Sessão",
+  "@logIn": {
+    "description": "CTA to log in to server"
+  },
+  "currentServer": "Atualmente a utilizar {current}",
+  "@currentServer": {
+    "description": "Which server the user is currently using",
+    "placeholders": {
+      "current": {
+        "type": "String"
+      }
+    }
+  },
+  "tapToAddServer": "Toque para adicionar servidor à sua lista",
+  "@tapToAddServer": {
+    "description": "public server description"
+  },
+  "useSponsorBlock": "Usar SponsorBlock",
+  "@useSponsorBlock": {
+    "description": "label for sponsorblock checkbox"
+  },
+  "version": "Versão",
+  "@version": {
+    "description": "version label"
+  },
+  "videoListed": "Público",
+  "@videoListed": {
+    "description": "Status of a publicly available video"
+  },
+  "videoUnlisted": "Não listado",
+  "@videoUnlisted": {
+    "description": "Status of a video that is only accessible by link"
+  },
+  "videoIsFamilyFriendly": "Familiar",
+  "@videoIsFamilyFriendly": {
+    "description": "Displayed only when a video is family friendly"
+  },
+  "tapToManage": "Toque para gerir",
+  "@tapToManage": {
+    "description": "Text shown below a server in the 'Your servers' list"
+  },
+  "authentication": "Autenticação",
+  "@authentication": {
+    "description": "Label for server settings related to authentications"
+  },
+  "tokenLoginDescription": "Forma recomendada de iniciar sessão",
+  "@tokenLoginDescription": {
+    "description": "Recommended way to log in"
+  },
+  "cookieLoginDescription": "Utilize este método se enfrentar problemas com a autenticação simbólica",
+  "@cookieLoginDescription": {
+    "description": "Cookie log in description"
+  },
+  "logout": "Terminar sessão",
+  "@logout": {
+    "description": "CTA to logout of a server"
+  },
+  "username": "Nome de utilizador",
+  "@username": {
+    "description": "Username label for login to a server"
+  },
+  "password": "Palavra-passe",
+  "@password": {
+    "description": "Password label for login to a server"
+  },
+  "wrongUsernamePassword": "Nome de utilizador ou palavra-passe incorretos",
+  "@wrongUsernamePassword": {
+    "description": "Error message when authentication fails"
+  },
+  "tokenLogin": "Iniciar sessão com token",
+  "@tokenLogin": {
+    "description": "Textto login to a server using the recommended way"
+  },
+  "cookieLogin": "Iniciar sessão com cookie",
+  "@cookieLogin": {
+    "description": "Text to login to a server using the cookie jar method"
+  },
+  "videoQueue": "Fila de vídeo",
+  "@videoQueue": {
+    "description": "Label for button to display the video queue"
+  },
+  "addToQueueList": "Adicionar à fila",
+  "@addToQueueList": {
+    "description": "Label on button to add a video to the queue list"
+  },
+  "addRecommendedToQueue": "Reprodução automática recomendada a seguir",
+  "@addRecommendedToQueue": {
+    "description": "Switch when playing a video to automatically add the recommended videos to the video queue"
+  },
+  "sponsorBlockCategorySponsor": "Patrocinador",
+  "@sponsorBlockCategorySponsor": {
+    "description": "Sponsor block 'Sponsor' Category"
+  },
+  "sponsorBlockCategoryUnpaidSelfPromo": "Promoção não remunerada/auto-própria",
+  "@sponsorBlockCategoryUnpaidSelfPromo": {
+    "description": "Sponsor block 'Unpaid/Self promotion' Category"
+  },
+  "sponsorBlockCategoryUnpaidSelfPromoDescription": "Semelhante a \"patrocinador\" exceto para promoção não remunerada ou auto-promoção. Isto inclui secções sobre mercadorias, doações, ou informação sobre quem colaboraram ",
+  "@sponsorBlockCategoryUnpaidSelfPromoDescription": {
+    "description": "Sponsor block 'Unpaid/Self promotion' Category description"
+  },
+  "sponsorBlockCategoryInteraction": "Lembrete de Interação (Subscrição)",
+  "@sponsorBlockCategoryInteraction": {
+    "description": "Sponsor block 'Interaction' Category"
+  },
+  "sponsorBlockCategoryIntroDescription": "Um intervalo sem conteúdo real. Pode ser uma pausa, frame estático, repetição de animação. Isto não deve ser utilizado para transições que contenham informação.",
+  "@sponsorBlockCategoryIntroDescription": {
+    "description": "Sponsorblock 'Intro' Category description"
+  },
+  "sponsorBlockCategoryOutro": "Endcards / Créditos",
+  "@sponsorBlockCategoryOutro": {
+    "description": "Outro block 'Outro' Category"
+  },
+  "sponsorBlockCategoryOutroDescription": "Créditos ou quando os endcards do YouTube aparecem. Não para conclusões com informações.",
+  "@sponsorBlockCategoryOutroDescription": {
+    "description": "Outro block 'Outro' Category description"
+  },
+  "sponsorBlockCategoryPreview": "Pré-visualização/Recapitulação",
+  "@sponsorBlockCategoryPreview": {
+    "description": "Sponsorblock 'Preview' Category"
+  },
+  "sponsorBlockCategoryFiller": "Filler Tangente / Piadas",
+  "@sponsorBlockCategoryFiller": {
+    "description": "Sponsorblock 'Filler' Category"
+  },
+  "sponsorBlockCategoryMusicOffTopic": "Música: Secção de Não-Música",
+  "@sponsorBlockCategoryMusicOffTopic": {
+    "description": "Sponsorblock 'MusicOffTopic' Category"
+  },
+  "sponsorBlockCategoryMusicOffTopicDescription": "Apenas para utilização em vídeos musicais. Esta categoria só deve ser utilizada para secções de vídeos musicais que ainda não estejam abrangidas por outra categoria.",
+  "@sponsorBlockCategoryMusicOffTopicDescription": {
+    "description": "Only for use in music videos. This only should be used for sections of music videos that aren't already covered by another category."
+  },
+  "useProxy": "Proxy videos",
+  "@useProxy": {
+    "description": "label for settings switch to proxy videos from server"
+  },
+  "useProxyDescription": "Ao fazer proxy de fluxos de vídeo do servidor, você pode ignorar bloqueios regionais ou ISP bloqueando o YouTube",
+  "@useProxyDescription": {
+    "description": "Description for the use proxy settings"
+  },
+  "sponsorBlockSettingsQuickDescription": "Selecione o tipo de segmentos a saltar",
+  "@sponsorBlockSettingsQuickDescription": {
+    "description": "Small description of what the sponsor block settings do"
+  },
+  "sponsorBlockCategorySponsorDescription": "Promoção paga, referências pagas e publicidade direta. Não para auto-promoção ou gritos gratuitos a causas/criadores/websites/produtos de que eles gostam.",
+  "@sponsorBlockCategorySponsorDescription": {
+    "description": "Sponsor block 'Sponsor' Category description"
+  },
+  "sponsorBlockCategoryInteractionDescription": "Quando houver um breve lembrete para gostar, subscrever ou segui-los no meio do conteúdo. Se for longo ou sobre algo específico, deve, em vez disso, estar sob auto-promoção.",
+  "@sponsorBlockCategoryInteractionDescription": {
+    "description": "Sponsor block 'Interaction' Category description"
+  },
+  "sponsorBlockCategoryIntro": "Interrupção/Animação Internacional",
+  "@sponsorBlockCategoryIntro": {
+    "description": "Sponsorblock 'Intro' Category"
+  },
+  "sponsorBlockCategoryPreviewDescription": "Coleção de clips que mostram o que está a aparecer neste vídeo ou noutros vídeos de uma série onde toda a informação é repetida mais tarde no vídeo.",
+  "@sponsorBlockCategoryPreviewDescription": {
+    "description": "Sponsorblock 'Preview' Category description"
+  },
+  "sponsorBlockCategoryFillerDescription": "Cenas tangenciais adicionadas apenas para preenchimento ou humor que não são necessárias para compreender o conteúdo principal do vídeo. Isto não deve incluir segmentos que forneçam o contexto ou detalhes de fundo. Esta é uma categoria muito agressiva destinada a quando não se está com disposição para \"diversão\".",
+  "@sponsorBlockCategoryFillerDescription": {
+    "description": "Sponsorblock 'Filler' Category description"
+  },
+  "blackBackground": "Fundo preto",
+  "@blackBackground": {
+    "description": "Black backgroun option label for dark theme with oled"
+  },
+  "blackBackgroundDescription": "Para tema escuro no ecrã OLED",
+  "@blackBackgroundDescription": {
+    "description": ""
+  },
+  "pressDownToShowSettings": "Pressione para baixo para mostrar as definições",
+  "@pressDownToShowSettings": {
+    "description": "Instruction on how to show video settings when playing a video on TV"
+  },
+  "quality": "Qualidade",
+  "@quality": {
+    "description": "Name of TV ui video settings"
+  },
+  "subtitles": "Subtítulos",
+  "@subtitles": {
+    "description": "Name of TV ui subtitles settings"
+  },
+  "playbackSpeed": "Velocidade de reprodução",
+  "@playbackSpeed": {
+    "description": "Name of TV ui Playback speed"
+  },
+  "search": "Pesquisa",
+  "@search": {
+    "description": "search title"
+  },
+  "audio": "Áudio",
+  "@audio": {
+    "description": "Name TV ui audio settings"
+  },
+  "subtitleFontSize": "Tamanho de letra das legendas",
+  "@subtitleFontSize": {
+    "description": "Settings label for the size of the subtitles"
+  },
+  "subtitleFontSizeDescription": "Mude o tamanho das legendas se forem demasiado pequenas ou demasiado grandes no seu dispositivo",
+  "@subtitleFontSizeDescription": {
+    "description": "Settings description for subtitle size"
+  },
+  "skipSslVerification": "Ignorar verificação do certificado SSL",
+  "@skipSslVerification": {
+    "description": "Setting label to skip ssl certification verification"
+  },
+  "skipSslVerificationDescription": "Para usar um certificado SSL auto-assinado, ou quando tiver problemas relacionados com SSL com o seu servidor.",
+  "@skipSslVerificationDescription": {
+    "description": "Setting description for the skip ssl certification verification"
+  },
+  "returnYoutubeDislikeDescription": "Mostrar a estimativa de aversões a vídeos utilizando a API fornecida por returnyoutubedislike.com",
+  "@returnYoutubeDislikeDescription": {
+    "description": "ReturnYoutubeDislike setting description"
+  },
+  "themeBrightness": "Tema",
+  "@themeBrightness": {
+    "description": "Ask the user to user dark / light / system theme"
+  },
+  "themeLight": "Claro",
+  "@themeLight": {
+    "description": "Light theme"
+  },
+  "themeDark": "Escuro",
+  "@themeDark": {
+    "description": "Dark theme"
+  },
+  "followSystem": "Seguir sistema",
+  "@followSystem": {
+    "description": "Follow system label"
+  },
+  "requiresRestart": "Requer reinício da aplicação",
+  "@requiresRestart": {
+    "description": "Requires app restart label"
+  },
+  "appLanguage": "Idioma da aplicação",
+  "@appLanguage": {
+    "description": "Select app language"
+  },
+  "shorts": "Curtos",
+  "@shorts": {
+    "description": "Youtube shorts"
+  },
+  "searchSortRelevance": "Relevância",
+  "@searchSortRelevance": {
+    "description": "Sort search by relevance"
+  },
+  "searchSortRating": "Classificação",
+  "@searchSortRating": {
+    "description": "Sort search by rating"
+  },
+  "searchSortUploadDate": "Data de carregamento",
+  "@searchSortUploadDate": {
+    "description": "Sort search by upload date"
+  },
+  "searchSortViewCount": "Ver contagem",
+  "@searchSortViewCount": {
+    "description": "Sort search by view count"
+  },
+  "rememberSubtitleLanguage": "Recordar o idioma das legendas",
+  "@rememberSubtitleLanguage": {
+    "description": "Settings label for remembering subtitle language"
+  },
+  "rememberSubtitleLanguageDescription": "Definir automaticamente as legendas para o último idioma selecionado, se disponível",
+  "@rememberSubtitleLanguageDescription": {
+    "description": "Settings description for remembering subtitle language"
+  },
+  "searchHistoryLimit": "Limite do histórico de pesquisa",
+  "@searchHistoryLimit": {
+    "description": "Settings label for search history limit"
+  },
+  "searchHistoryLimitDescription": "Definir o número de pesquisas anteriores que aparecerão nas sugestões",
+  "@searchHistoryLimitDescription": {
+    "description": "Settings label for search history limit description"
+  },
+  "clearSearchHistory": "Limpar o histórico de pesquisa",
+  "@clearSearchHistory": {
+    "description": "Settings label for clearing search history"
+  },
+  "autoplayVideoOnLoad": "Reprodução automática de vídeo ao carregar",
+  "@autoplayVideoOnLoad": {
+    "description": "Label for settings to enable autoplay when a video loads"
+  },
+  "autoplayVideoOnLoadDescription": "Iniciar automaticamente a reprodução do vídeo depois de este ter sido carregado",
+  "@autoplayVideoOnLoadDescription": {
+    "description": "Description for the autoplay video on load setting"
+  },
+  "searchHistory": "Histórico de pesquisa",
+  "@searchHistory": {
+    "description": "Settings label for search history"
+  },
+  "searchHistoryDescription": "Definições do histórico de pesquisa",
+  "@searchHistoryDescription": {
+    "description": "Description for search history settings"
+  },
+  "enableSearchHistory": "Ativar o histórico de pesquisa",
+  "@enableSearchHistory": {
+    "description": "Settings label for enabling search history"
+  },
+  "logsCopied": "Registos copiados para a área de transferência",
+  "@logsCopied": {
+    "description": "Message to tell user that logs have been copied to the clipboard"
+  },
+  "copyToClipBoard": "Copiar para a área de transferência",
+  "@copyToClipBoard": {
+    "description": "Text to copy something to clipboard"
+  },
+  "appLogs": "Registos de aplicações",
+  "@appLogs": {
+    "description": "Title for settings that leads to application logs"
+  },
+  "appLogsDescription": "Obter registos do que está a acontecer na aplicação, o que pode ser útil para comunicar problemas",
+  "@appLogsDescription": {
+    "description": "Description of the app log settings"
+  },
+  "videoFilterNoFilters": "Sem filtros de vídeo, toque no botão '+' abaixo para começar a adicionar filtros.",
+  "@videoFilterNoFilters": {
+    "description": "Label when there are no video filters"
+  },
+  "addVideoFilter": "Criar filtro",
+  "@addVideoFilter": {
+    "description": "Title when creating a new filter"
+  },
+  "videoFilterOperation": "Funcionamento",
+  "@videoFilterOperation": {
+    "description": "Label for filter operation"
+  },
+  "videoFilterValue": "Valor",
+  "@videoFilterValue": {
+    "description": "Label for filter value"
+  },
+  "videoFilterDescriptionString": "{hideOrFilter} vídeos em que {type} {operation} ''{value}''.",
+  "@videoFilterDescriptionString": {
+    "description": "Human readable description of a video filter, in this case is it for string comparison, example: Hide videos where the name of the video does not contain the following string 'test' (Do not translate text between { })",
+    "placeholders": {
+      "hideOrFilter": {
+        "type": "String",
+        "example": "Hide"
+      },
+      "type": {
+        "type": "String",
+        "example": "video title"
+      },
+      "operation": {
+        "type": "String",
+        "example": "does not contain"
+      },
+      "value": {
+        "type": "String",
+        "example": "some filter text"
+      }
+    }
+  },
+  "videoFilterHideDescription": "Por predefinição, os vídeos filtrados não são ocultados, mas mostrados como ofuscados com o(s) motivo(s) por que foram filtrados. Esta definição remove os vídeos filtrados das listas.",
+  "@videoFilterHideDescription": {
+    "description": ""
+  },
+  "fillFullscreen": "Maximizar o vídeo para caber no ecrã",
+  "@fillFullscreen": {
+    "description": "Title to maximize video to fit screen"
+  },
+  "fillFullscreenDescription": "Ajusta o vídeo para preencher todo o ecrã no modo paisagem",
+  "@fillFullscreenDescription": {
+    "description": "Setting description for filling video to screen in landscape"
+  },
+  "redirectInvidiousLink": "Partilhar Invidious Link de redireccionamento",
+  "@redirectInvidiousLink": {
+    "description": "asking user to share redirecting invidious link"
+  },
+  "save": "Guardar",
+  "@save": {
+    "description": "Text for save action"
+  },
+  "videoFilterEditDescription": "Seleccione um canal opcional, um tipo de filtro, uma operação e um valor para filtrar os vídeos OUT das listas. Exemplo, tipo: nome do vídeo, operação: contém, valor: teste EXCLUIRÁ todos os vídeos com a palavra \"teste\" no seu nome.",
+  "@videoFilterEditDescription": {
+    "description": "Descriptive test for video filter set up"
+  },
+  "optional": "facultativo",
+  "@optional": {
+    "description": "Optional label"
+  },
+  "videoFilterHideLabel": "Ocultar",
+  "@videoFilterHideLabel": {
+    "description": "Label to hide videos"
+  },
+  "videoFilterFilterLabel": "Ofuscar",
+  "@videoFilterFilterLabel": {
+    "description": "Label to filter videos"
+  },
+  "videoFilterTapToReveal": "Toque para revelar",
+  "@videoFilterTapToReveal": {
+    "description": "Label to tell user to tap to show a filtered video"
+  },
+  "videoFilterOperationContains": "Contém",
+  "@videoFilterOperationContains": {
+    "description": "Label for video filter operation Contains"
+  },
+  "videoFilterOperationNotContain": "Não contém",
+  "@videoFilterOperationNotContain": {
+    "description": "Label for video filter operation Does not contain"
+  },
+  "rememberPlaybackSpeedDescription": "Definir automaticamente a velocidade de reprodução para a última velocidade selecionada",
+  "@rememberPlaybackSpeedDescription": {
+    "description": "Settings description for remembering playback speed"
+  },
+  "addToPlaylist": "Adicionar à lista de reprodução",
+  "@addToPlaylist": {
+    "description": "Label to add a video to a playlist"
+  },
+  "playNext": "Reproduzir o próximo",
+  "@playNext": {
+    "description": "Label to play the video after the current one."
+  },
+  "playNextAddedToQueue": "O vídeo será reproduzido a seguir",
+  "@playNextAddedToQueue": {
+    "description": "Pop up message to confirm that the video has been properly set to play next"
+  },
+  "videoFilters": "Filtros de vídeo",
+  "@videoFilters": {
+    "description": "Title for video filter settings"
+  },
+  "videoFiltersExplanation": "Oculte ou ofusque vídeos de todos os feeds de vídeo na aplicação com base nos filtros definidos abaixo. Isto permite-lhe, por exemplo, ocultar spoilers desportivos ou ocultar curtas-metragens de um determinado canal.",
+  "@videoFiltersExplanation": {
+    "description": "Description on how filter work"
+  },
+  "videoFiltersSettingTileDescriptions": "Definir regras para filtrar vídeos",
+  "@videoFiltersSettingTileDescriptions": {
+    "description": "Description for the main settings page"
+  },
+  "videoFilterAllChannels": "Todos os canais",
+  "@videoFilterAllChannels": {
+    "description": "Title for the sections that applies to all channels"
+  },
+  "editVideoFilter": "Editar filtro",
+  "@editVideoFilter": {
+    "description": "Title when editting a filter"
+  },
+  "videoFilterType": "Tipo",
+  "@videoFilterType": {
+    "description": "Label for filter type"
+  },
+  "videoFiltered": "Vídeo filtrado pelo(s) seguinte(s) motivo(s):",
+  "@videoFiltered": {
+    "description": "Label shown on video list when it is filtered out"
+  },
+  "videoFilterHide": "Ocultar vídeos filtrados",
+  "@videoFilterHide": {
+    "description": "Label for settings to hide filtered videos"
+  },
+  "videoFilterTypeVideoTitle": "Título do vídeo",
+  "@videoFilterTypeVideoTitle": {
+    "description": "Label for video filter video title"
+  },
+  "videoFilterTypeChannelName": "Nome do canal",
+  "@videoFilterTypeChannelName": {
+    "description": "Label for video filter channel name"
+  },
+  "videoFilterTypeVideoLength": "Duração do vídeo (segundos)",
+  "@videoFilterTypeVideoLength": {
+    "description": "Label for video filter video length"
+  },
+  "videoFilterOperationLowerThan": "Inferior a",
+  "@videoFilterOperationLowerThan": {
+    "description": "Label for video filter operation Lower than"
+  },
+  "videoFilterOperationHigherThan": "Superior a",
+  "@videoFilterOperationHigherThan": {
+    "description": "Label for video filter operation Higher than"
+  },
+  "channel": "Canal",
+  "@channel": {
+    "description": "A single channel"
+  },
+  "videoFilterHideAllFromChannel": "Filtrar todos os vídeos do canal",
+  "@videoFilterHideAllFromChannel": {
+    "description": "Label for video filter switch to allow to hide all videos from a channel"
+  },
+  "lockFullScreenToLandscape": "Bloquear a orientação do ecrã inteiro para o rácio de aspeto do vídeo",
+  "@lockFullScreenToLandscape": {
+    "description": "Title to force full screen to landscape"
+  },
+  "lockFullScreenToLandscapeDescription": "Bloqueia a orientação do ecrã inteiro com base no formato de vídeo, paisagem para vídeos largos e retrato para vídeos em retrato",
+  "@lockFullScreenToLandscapeDescription": {
+    "description": "Setting description for forcing video to landscape when in full screen"
+  },
+  "rememberPlaybackSpeed": "Recordar a velocidade de reprodução",
+  "@rememberPlaybackSpeed": {
+    "description": "Setting label for remembering playback speed"
+  },
+  "videoAddedToQueue": "Vídeo adicionado à fila de espera",
+  "@videoAddedToQueue": {
+    "description": "Pop up message when a video was added at the end of the video queue"
+  },
+  "downloads": "Transferências",
+  "@downloads": {
+    "description": "Downloads"
+  },
+  "videoAlreadyDownloaded": "Vídeo já transferido",
+  "@videoAlreadyDownloaded": {
+    "description": "Message when a user tries to download a video he already has"
+  },
+  "downloadsPlayAll": "Reproduzir tudo",
+  "@downloadsPlayAll": {
+    "description": "Button to play all downloaded videos"
+  },
+  "videoDownloadStarted": "Início da transferência de vídeo",
+  "@videoDownloadStarted": {
+    "description": "Message when a video starts being downloaded"
+  },
+  "videoFailedDownloadRetry": "A transferência falhou, toque para tentar de novo",
+  "@videoFailedDownloadRetry": {
+    "description": "Shown on download manager when a download fails and prompt the user to retry"
+  },
+  "download": "Transferir",
+  "@download": {
+    "description": "A single download or CTA for downloading a video"
+  },
+  "shareLinkWithTimestamp": "Adicionar carimbo de data/hora",
+  "@shareLinkWithTimestamp": {
+    "description": "asking user to share link along with timestamp"
+  },
+  "noDownloadedVideos": "Sem vídeos descarregados, navegue, prima longamente sobre um vídeo numa lista ou toque no botão de descarregamento no ecrã de um vídeo para descarregar",
+  "@noDownloadedVideos": {
+    "description": "Message showing when the user goes to the download screen but there are no offline videos."
+  },
+  "videoDownloadAudioOnly": "Apenas áudio",
+  "@videoDownloadAudioOnly": {
+    "description": "Label for toggle to download audio only "
+  }
 }
