@@ -180,7 +180,7 @@ class PlaylistView extends StatelessWidget {
                                               children: [
                                                 ...buildThumbnails(context, _),
                                                 PlayButton(
-                                                  onPressed:(isAudio) => _.play(isAudio),
+                                                  onPressed: (isAudio) => _.play(isAudio),
                                                 ),
                                                 Positioned(
                                                     right: 5,
@@ -195,6 +195,7 @@ class PlaylistView extends StatelessWidget {
                                   child: ListView(
                                 controller: _.scrollController,
                                 children: _.playlist.videos
+                                    .where((element) => !element.filterHide)
                                     .map((v) => SwipeActionCell(
                                         key: ValueKey('swipe-${v.videoId}'),
                                         trailingActions: canDeleteVideos
@@ -227,7 +228,7 @@ class PlaylistView extends StatelessWidget {
                             duration: animationDuration,
                             curve: Curves.easeInOutQuad,
                             builder: (context, value, child) => CircularProgressIndicator(
-                              value: value > 0 ? value : null,
+                              value: value > 0 && value < 1 ? value : null,
                             ),
                           ))
                         : Container(alignment: Alignment.center, child: Text(locals.noVideoInPlayList))));

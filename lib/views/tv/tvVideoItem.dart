@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:invidious/utils.dart';
 import 'package:invidious/views/tv/tvVideoView.dart';
 
 import '../../globals.dart';
@@ -49,7 +50,7 @@ class TvVideoItem extends StatelessWidget {
                   child: AnimatedContainer(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15),
-                        color: hasFocus ? colors.primaryContainer : colors.background,
+                        color: colors.primaryContainer.withOpacity(hasFocus ? 1 : 0),
                       ),
                       duration: animationDuration,
                       child: AspectRatio(
@@ -59,7 +60,25 @@ class TvVideoItem extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            VideoThumbnailView(videoId: video.videoId, thumbnailUrl: ImageObject.getBestThumbnail(video.videoThumbnails)?.url ?? ''),
+                            VideoThumbnailView(
+                                videoId: video.videoId,
+                                thumbnailUrl: ImageObject.getBestThumbnail(video.videoThumbnails)?.url ?? '',
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Container(
+                                    alignment: Alignment.bottomRight,
+                                    child: Container(
+                                      decoration: BoxDecoration(color: Colors.black.withOpacity(0.5), borderRadius: BorderRadius.circular(5)),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(3.0),
+                                        child: Text(
+                                          prettyDuration(Duration(seconds: video.lengthSeconds)),
+                                          style: textTheme.bodySmall?.copyWith(color: Colors.white),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                )),
                             Padding(
                               padding: const EdgeInsets.only(left: 8.0),
                               child: Text(

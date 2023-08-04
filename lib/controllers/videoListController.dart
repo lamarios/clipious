@@ -17,6 +17,8 @@ class VideoListController extends ItemListController<VideoInList> {
 
   VideoListController({required PaginatedList<VideoInList> videoList}) : super(itemList: videoList) {}
 
+  List<VideoInList> get filteredItems => items.where((element) => !element.filterHide).toList();
+
   static VideoListController? to(String? tags) => safeGet(tag: tags);
 
   static List<VideoListController?> getAllGlobal() {

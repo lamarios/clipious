@@ -37,44 +37,47 @@ class VideoList extends StatelessWidget {
       init: VideoListController(videoList: paginatedVideoList),
       global: tags != null,
       tag: tags,
-      builder: (_) => Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Visibility(visible: _.loading, child: const SizedBox(height: 1, child: LinearProgressIndicator())),
-          Expanded(
-            child: _.error != VideoListErrors.none
-                ? Container(
-                    alignment: Alignment.center,
-                    color: colorScheme.background,
-                    child: InkWell(onTap: () => _.getVideos(), child: Text(locals.couldntFetchVideos)),
-                  )
-                : Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: FadeIn(
-                      duration: animationDuration,
-                      curve: Curves.easeInOutQuad,
-                      child: Visibility(
-                        visible: _.items.isNotEmpty,
-                        child: SmartRefresher(
-                          controller: _.refreshController,
-                          enablePullDown: _.itemList.hasRefresh(),
-                          enablePullUp: false,
-                          onRefresh: _.refreshVideos,
-                          child: GridView.count(
-                              crossAxisCount: getGridCount(context),
-                              controller: _.scrollController,
-                              padding: const EdgeInsets.all(4),
-                              crossAxisSpacing: 5,
-                              mainAxisSpacing: 5,
-                              childAspectRatio: getGridAspectRatio(context),
-                              children: (_.items).map((v) => VideoListItem(key: ValueKey(v.videoId), video: v, animateDownload: animateDownload)).toList()),
+      builder: (_) {
+        var items = _.filteredItems;
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Visibility(visible: _.loading, child: const SizedBox(height: 1, child: LinearProgressIndicator())),
+            Expanded(
+              child: _.error != VideoListErrors.none
+                  ? Container(
+                      alignment: Alignment.center,
+                      color: colorScheme.background,
+                      child: InkWell(onTap: () => _.getVideos(), child: Text(locals.couldntFetchVideos)),
+                    )
+                  : Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: FadeIn(
+                        duration: animationDuration,
+                        curve: Curves.easeInOutQuad,
+                        child: Visibility(
+                          visible: items.isNotEmpty,
+                          child: SmartRefresher(
+                            controller: _.refreshController,
+                            enablePullDown: _.itemList.hasRefresh(),
+                            enablePullUp: false,
+                            onRefresh: _.refreshVideos,
+                            child: GridView.count(
+                                crossAxisCount: getGridCount(context),
+                                controller: _.scrollController,
+                                padding: const EdgeInsets.all(4),
+                                crossAxisSpacing: 5,
+                                mainAxisSpacing: 5,
+                                childAspectRatio: getGridAspectRatio(context),
+                                children: items.map((v) => VideoListItem(key: ValueKey(v.videoId), video: v, animateDownload: animateDownload)).toList()),
+                          ),
                         ),
                       ),
                     ),
-                  ),
-          ),
-        ],
-      ),
+            ),
+          ],
+        );
+      },
     );
   }
 }

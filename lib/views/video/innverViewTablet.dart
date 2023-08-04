@@ -61,17 +61,20 @@ class VideoTabletInnerView extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      SizedBox(height: 25, child: Checkbox(value: videoController.playRecommendedNext, onChanged: videoController.togglePlayRecommendedNext, visualDensity: VisualDensity.compact)),
-                      InkWell(
-                          onTap: () => videoController.togglePlayRecommendedNext(!videoController.playRecommendedNext),
-                          child: Text(
-                            locals.addRecommendedToQueue,
-                            style: const TextStyle(fontSize: 11),
-                          ))
-                    ],
+                  Container(
+                    constraints: BoxConstraints(maxWidth: tabletMaxVideoWidth),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        SizedBox(height: 25, child: Checkbox(value: videoController.playRecommendedNext, onChanged: videoController.togglePlayRecommendedNext, visualDensity: VisualDensity.compact)),
+                        InkWell(
+                            onTap: () => videoController.togglePlayRecommendedNext(!videoController.playRecommendedNext),
+                            child: Text(
+                              locals.addRecommendedToQueue,
+                              style: const TextStyle(fontSize: 11),
+                            ))
+                      ],
+                    ),
                   ),
                   Expanded(
                       child: Padding(

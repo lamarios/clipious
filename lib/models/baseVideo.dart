@@ -24,6 +24,9 @@ abstract class BaseVideo extends IdedVideo implements ShareLinks {
   @JsonKey(includeFromJson: false, includeToJson: false)
   List<VideoFilter> matchedFilters = [];
 
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  bool filterHide = false;
+
   BaseVideo(this.title, String videoId, this.lengthSeconds, this.author, this.authorId, this.authorUrl, this.videoThumbnails) : super(videoId);
 
   @override

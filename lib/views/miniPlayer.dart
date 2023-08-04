@@ -42,6 +42,7 @@ class MiniPlayer extends StatelessWidget {
                       video: !_.isAudio ? _.currentlyPlaying : null,
                       offlineVideo: !_.isAudio ? _.offlineCurrentlyPlaying : null,
                       miniPlayer: false,
+                      startAt: _.startAt,
                     )))
             : const SizedBox.shrink();
 

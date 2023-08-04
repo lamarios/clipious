@@ -202,7 +202,7 @@ class Service {
 
     Iterable i = handleResponse(response);
     var list = List<VideoInList>.from(i.map((e) => VideoInList.fromJson(e)));
-    VideoFilter.filterVideos(list);
+    list = (await VideoFilter.filterVideos(list)).cast();
     return list;
   }
 
@@ -210,7 +210,7 @@ class Service {
     final response = await http.get(buildUrl(GET_POPULAR));
     Iterable i = handleResponse(response);
     var list = List<VideoInList>.from(i.map((e) => VideoInList.fromJson(e)));
-    VideoFilter.filterVideos(list);
+    list = (await VideoFilter.filterVideos(list)).cast();
     return list;
   }
 
@@ -244,7 +244,7 @@ class Service {
       db.addToSearchHistory(SearchHistoryItem(query, (DateTime.now().millisecondsSinceEpoch / 1000).round()));
     }
 
-    VideoFilter.filterVideos(results.videos);
+    results.videos = (await VideoFilter.filterVideos(results.videos)).cast();
     return results;
   }
 
@@ -256,8 +256,8 @@ class Service {
     var headers = getAuthenticationHeaders(currentlySelectedServer);
     final response = await http.get(uri, headers: headers);
     var feed = UserFeed.fromJson(handleResponse(response));
-    VideoFilter.filterVideos(feed.videos);
-    VideoFilter.filterVideos(feed.notifications);
+    feed.videos = (await VideoFilter.filterVideos(feed.videos)).cast();
+    feed.notifications = (await VideoFilter.filterVideos(feed.notifications)).cast();
     return feed;
   }
 
@@ -360,7 +360,7 @@ class Service {
     final response = await http.get(buildUrl(GET_CHANNEL, pathParams: {':id': channelId}), headers: {'Content-Type': 'application/json; charset=utf-16'});
 
     var channel = Channel.fromJson(handleResponse(response));
-    VideoFilter.filterVideos(channel.latestVideos);
+    channel.latestVideos = (await VideoFilter.filterVideos(channel.latestVideos)).cast();
     return channel;
   }
 
@@ -369,7 +369,7 @@ class Service {
     final response = await http.get(uri, headers: {'Content-Type': 'application/json; charset=utf-16'});
 
     var videosWithContinuation = VideosWithContinuation.fromJson(handleResponse(response));
-    VideoFilter.filterVideos(videosWithContinuation.videos);
+    videosWithContinuation.videos = (await VideoFilter.filterVideos(videosWithContinuation.videos)).cast();
     return videosWithContinuation;
   }
 
@@ -378,7 +378,7 @@ class Service {
     final response = await http.get(uri, headers: {'Content-Type': 'application/json; charset=utf-16'});
 
     var videosWithContinuation = VideosWithContinuation.fromJson(handleResponse(response));
-    VideoFilter.filterVideos(videosWithContinuation.videos);
+    videosWithContinuation.videos = (await VideoFilter.filterVideos(videosWithContinuation.videos)).cast();
     return videosWithContinuation;
   }
 
@@ -387,7 +387,7 @@ class Service {
     final response = await http.get(uri, headers: {'Content-Type': 'application/json; charset=utf-16'});
 
     var videosWithContinuation = VideosWithContinuation.fromJson(handleResponse(response));
-    VideoFilter.filterVideos(videosWithContinuation.videos);
+    videosWithContinuation.videos = (await VideoFilter.filterVideos(videosWithContinuation.videos)).cast();
     return videosWithContinuation;
   }
 
@@ -402,7 +402,7 @@ class Service {
       Iterable i = handleResponse(response);
       var list = List<Playlist>.from(i.map((e) => Playlist.fromJson(e)));
       for (var pl in list) {
-        VideoFilter.filterVideos(pl.videos);
+        pl.videos = (await VideoFilter.filterVideos(pl.videos)).cast();
       }
       return list.sortByReversed((e) => e.updated ?? 0).toList();
     } catch (e) {
@@ -416,7 +416,7 @@ class Service {
     final response = await http.get(uri);
     var channelPlaylists = ChannelPlaylists.fromJson(handleResponse(response));
     for (var pl in channelPlaylists.playlists) {
-      VideoFilter.filterVideos(pl.videos);
+      pl.videos = (await VideoFilter.filterVideos(pl.videos)).cast();
     }
     return channelPlaylists;
   }
@@ -514,7 +514,9 @@ class Service {
 
     final response = await http.get(uri);
     var playlist = Playlist.fromJson(handleResponse(response));
-    playlist.removedByFilter = VideoFilter.filterVideos(playlist.videos);
+    var oldLength = playlist.videos.length;
+    playlist.videos = (await VideoFilter.filterVideos(playlist.videos)).cast();
+    playlist.removedByFilter = oldLength - playlist.videos.length;
 
     return playlist;
   }

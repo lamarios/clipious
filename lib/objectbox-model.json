@@ -1,280 +1,282 @@
 {
-  "_note1": "KEEP THIS FILE! Check it into a version control system (VCS) like git.",
-  "_note2": "ObjectBox manages crucial IDs for your object model. See docs for details.",
-  "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
-  "entities": [
-    {
-      "id": "1:8038281984607819042",
-      "lastPropertyId": "7:7993511472188126727",
-      "name": "Server",
-      "properties": [
+    "_note1": "KEEP THIS FILE! Check it into a version control system (VCS) like git.",
+    "_note2": "ObjectBox manages crucial IDs for your object model. See docs for details.",
+    "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
+    "entities": [
         {
-          "id": "1:2410037502505490239",
-          "name": "id",
-          "type": 6,
-          "flags": 1
+            "id": "1:8038281984607819042",
+            "lastPropertyId": "7:7993511472188126727",
+            "name": "Server",
+            "properties": [
+                {
+                    "id": "1:2410037502505490239",
+                    "name": "id",
+                    "type": 6,
+                    "flags": 1
+                },
+                {
+                    "id": "2:8956955780928852647",
+                    "name": "url",
+                    "type": 9,
+                    "flags": 34848,
+                    "indexId": "1:2407620149040502806"
+                },
+                {
+                    "id": "3:2983333445278944481",
+                    "name": "authToken",
+                    "type": 9
+                },
+                {
+                    "id": "6:2632576147281157993",
+                    "name": "inUse",
+                    "type": 1
+                },
+                {
+                    "id": "7:7993511472188126727",
+                    "name": "sidCookie",
+                    "type": 9
+                }
+            ],
+            "relations": []
         },
         {
-          "id": "2:8956955780928852647",
-          "name": "url",
-          "type": 9,
-          "flags": 34848,
-          "indexId": "1:2407620149040502806"
+            "id": "2:2463187106197509769",
+            "lastPropertyId": "3:4665740245375834282",
+            "name": "SettingsValue",
+            "properties": [
+                {
+                    "id": "1:3567602159840796895",
+                    "name": "id",
+                    "type": 6,
+                    "flags": 1
+                },
+                {
+                    "id": "2:525293931186831855",
+                    "name": "name",
+                    "type": 9,
+                    "flags": 34848,
+                    "indexId": "2:1004000799244198133"
+                },
+                {
+                    "id": "3:4665740245375834282",
+                    "name": "value",
+                    "type": 9
+                }
+            ],
+            "relations": []
         },
         {
-          "id": "3:2983333445278944481",
-          "name": "authToken",
-          "type": 9
+            "id": "3:8787382286414233697",
+            "lastPropertyId": "3:8602536477328513343",
+            "name": "Progress",
+            "properties": [
+                {
+                    "id": "1:5651818511313053101",
+                    "name": "id",
+                    "type": 6,
+                    "flags": 1
+                },
+                {
+                    "id": "2:4301486387527660152",
+                    "name": "progress",
+                    "type": 8
+                },
+                {
+                    "id": "3:8602536477328513343",
+                    "name": "videoId",
+                    "type": 9,
+                    "flags": 34848,
+                    "indexId": "3:4343529106190079511"
+                }
+            ],
+            "relations": []
         },
         {
-          "id": "6:2632576147281157993",
-          "name": "inUse",
-          "type": 1
+            "id": "4:6956330633348216454",
+            "lastPropertyId": "3:4799661758354837094",
+            "name": "SearchHistoryItem",
+            "properties": [
+                {
+                    "id": "1:5055652677379509965",
+                    "name": "id",
+                    "type": 6,
+                    "flags": 1
+                },
+                {
+                    "id": "2:1184322842379216559",
+                    "name": "search",
+                    "type": 9,
+                    "flags": 34848,
+                    "indexId": "5:7262786699272501249"
+                },
+                {
+                    "id": "3:4799661758354837094",
+                    "name": "time",
+                    "type": 6
+                }
+            ],
+            "relations": []
         },
         {
-          "id": "7:7993511472188126727",
-          "name": "sidCookie",
-          "type": 9
+            "id": "5:8446250266008376981",
+            "lastPropertyId": "6:5023716219165786985",
+            "name": "AppLog",
+            "properties": [
+                {
+                    "id": "1:3160197863614923332",
+                    "name": "id",
+                    "type": 6,
+                    "flags": 1
+                },
+                {
+                    "id": "2:3008237629246315185",
+                    "name": "level",
+                    "type": 9
+                },
+                {
+                    "id": "3:2647517759142178088",
+                    "name": "time",
+                    "type": 10
+                },
+                {
+                    "id": "4:7759611646931835814",
+                    "name": "message",
+                    "type": 9
+                },
+                {
+                    "id": "5:1230803493579490035",
+                    "name": "stacktrace",
+                    "type": 9
+                },
+                {
+                    "id": "6:5023716219165786985",
+                    "name": "logger",
+                    "type": 9
+                }
+            ],
+            "relations": []
+        },
+        {
+            "id": "6:8304874620604193998",
+            "lastPropertyId": "8:6020474727686624632",
+            "name": "VideoFilter",
+            "properties": [
+                {
+                    "id": "1:4718003498405944371",
+                    "name": "id",
+                    "type": 6,
+                    "flags": 1
+                },
+                {
+                    "id": "2:906689741192359458",
+                    "name": "channelId",
+                    "type": 9
+                },
+                {
+                    "id": "3:19321448094437321",
+                    "name": "value",
+                    "type": 9
+                },
+                {
+                    "id": "4:7050038042672519102",
+                    "name": "dbType",
+                    "type": 9
+                },
+                {
+                    "id": "5:2812361632619055204",
+                    "name": "dbOperation",
+                    "type": 9
+                },
+                {
+                    "id": "7:4560530621575797576",
+                    "name": "filterAll",
+                    "type": 1
+                },
+                {
+                    "id": "8:6020474727686624632",
+                    "name": "hideFromFeed",
+                    "type": 1
+                }
+            ],
+            "relations": []
+        },
+        {
+            "id": "7:7737259498144569754",
+            "lastPropertyId": "12:5585556588689024155",
+            "name": "DownloadedVideo",
+            "properties": [
+                {
+                    "id": "1:4941717954477256691",
+                    "name": "id",
+                    "type": 6,
+                    "flags": 1
+                },
+                {
+                    "id": "3:2383320059961158921",
+                    "name": "title",
+                    "type": 9
+                },
+                {
+                    "id": "4:8378509179540529921",
+                    "name": "author",
+                    "type": 9
+                },
+                {
+                    "id": "5:1179720564271059922",
+                    "name": "authorUrl",
+                    "type": 9
+                },
+                {
+                    "id": "6:107924486215845740",
+                    "name": "downloadComplete",
+                    "type": 1
+                },
+                {
+                    "id": "7:4130320220878296738",
+                    "name": "downloadFailed",
+                    "type": 1
+                },
+                {
+                    "id": "8:6560523765053270041",
+                    "name": "audioOnly",
+                    "type": 1
+                },
+                {
+                    "id": "10:7860866333154890990",
+                    "name": "quality",
+                    "type": 9
+                },
+                {
+                    "id": "11:4090966965717168930",
+                    "name": "lengthSeconds",
+                    "type": 6
+                },
+                {
+                    "id": "12:5585556588689024155",
+                    "name": "videoId",
+                    "type": 9
+                }
+            ],
+            "relations": []
         }
-      ],
-      "relations": []
-    },
-    {
-      "id": "2:2463187106197509769",
-      "lastPropertyId": "3:4665740245375834282",
-      "name": "SettingsValue",
-      "properties": [
-        {
-          "id": "1:3567602159840796895",
-          "name": "id",
-          "type": 6,
-          "flags": 1
-        },
-        {
-          "id": "2:525293931186831855",
-          "name": "name",
-          "type": 9,
-          "flags": 34848,
-          "indexId": "2:1004000799244198133"
-        },
-        {
-          "id": "3:4665740245375834282",
-          "name": "value",
-          "type": 9
-        }
-      ],
-      "relations": []
-    },
-    {
-      "id": "3:8787382286414233697",
-      "lastPropertyId": "3:8602536477328513343",
-      "name": "Progress",
-      "properties": [
-        {
-          "id": "1:5651818511313053101",
-          "name": "id",
-          "type": 6,
-          "flags": 1
-        },
-        {
-          "id": "2:4301486387527660152",
-          "name": "progress",
-          "type": 8
-        },
-        {
-          "id": "3:8602536477328513343",
-          "name": "videoId",
-          "type": 9,
-          "flags": 34848,
-          "indexId": "3:4343529106190079511"
-        }
-      ],
-      "relations": []
-    },
-    {
-      "id": "4:6956330633348216454",
-      "lastPropertyId": "3:4799661758354837094",
-      "name": "SearchHistoryItem",
-      "properties": [
-        {
-          "id": "1:5055652677379509965",
-          "name": "id",
-          "type": 6,
-          "flags": 1
-        },
-        {
-          "id": "2:1184322842379216559",
-          "name": "search",
-          "type": 9,
-          "flags": 34848,
-          "indexId": "5:7262786699272501249"
-        },
-        {
-          "id": "3:4799661758354837094",
-          "name": "time",
-          "type": 6
-        }
-      ],
-      "relations": []
-    },
-    {
-      "id": "5:8446250266008376981",
-      "lastPropertyId": "6:5023716219165786985",
-      "name": "AppLog",
-      "properties": [
-        {
-          "id": "1:3160197863614923332",
-          "name": "id",
-          "type": 6,
-          "flags": 1
-        },
-        {
-          "id": "2:3008237629246315185",
-          "name": "level",
-          "type": 9
-        },
-        {
-          "id": "3:2647517759142178088",
-          "name": "time",
-          "type": 10
-        },
-        {
-          "id": "4:7759611646931835814",
-          "name": "message",
-          "type": 9
-        },
-        {
-          "id": "5:1230803493579490035",
-          "name": "stacktrace",
-          "type": 9
-        },
-        {
-          "id": "6:5023716219165786985",
-          "name": "logger",
-          "type": 9
-        }
-      ],
-      "relations": []
-    },
-    {
-      "id": "6:8304874620604193998",
-      "lastPropertyId": "8:6020474727686624632",
-      "name": "VideoFilter",
-      "properties": [
-        {
-          "id": "1:4718003498405944371",
-          "name": "id",
-          "type": 6,
-          "flags": 1
-        },
-        {
-          "id": "2:906689741192359458",
-          "name": "channelId",
-          "type": 9
-        },
-        {
-          "id": "3:19321448094437321",
-          "name": "value",
-          "type": 9
-        },
-        {
-          "id": "4:7050038042672519102",
-          "name": "dbType",
-          "type": 9
-        },
-        {
-          "id": "5:2812361632619055204",
-          "name": "dbOperation",
-          "type": 9
-        },
-        {
-          "id": "7:4560530621575797576",
-          "name": "filterAll",
-          "type": 1
-        },
-        {
-          "id": "8:6020474727686624632",
-          "name": "hideFromFeed",
-          "type": 1
-        }
-      ],
-      "relations": []
-    },
-    {
-      "id": "7:7737259498144569754",
-      "lastPropertyId": "10:7860866333154890990",
-      "name": "DownloadedVideo",
-      "properties": [
-        {
-          "id": "1:4941717954477256691",
-          "name": "id",
-          "type": 6,
-          "flags": 1
-        },
-        {
-          "id": "2:6600296338817128660",
-          "name": "videoId",
-          "type": 9
-        },
-        {
-          "id": "3:2383320059961158921",
-          "name": "title",
-          "type": 9
-        },
-        {
-          "id": "4:8378509179540529921",
-          "name": "author",
-          "type": 9
-        },
-        {
-          "id": "5:1179720564271059922",
-          "name": "authorUrl",
-          "type": 9
-        },
-        {
-          "id": "6:107924486215845740",
-          "name": "downloadComplete",
-          "type": 1
-        },
-        {
-          "id": "7:4130320220878296738",
-          "name": "downloadFailed",
-          "type": 1
-        },
-        {
-          "id": "8:6560523765053270041",
-          "name": "audioOnly",
-          "type": 1
-        },
-        {
-          "id": "9:345286493546760360",
-          "name": "videoLenthInSeconds",
-          "type": 6
-        },
-        {
-          "id": "10:7860866333154890990",
-          "name": "quality",
-          "type": 9
-        }
-      ],
-      "relations": []
-    }
-  ],
-  "lastEntityId": "7:7737259498144569754",
-  "lastIndexId": "5:7262786699272501249",
-  "lastRelationId": "0:0",
-  "lastSequenceId": "0:0",
-  "modelVersion": 5,
-  "modelVersionParserMinimum": 5,
-  "retiredEntityUids": [],
-  "retiredIndexUids": [
-    9110274326691932798
-  ],
-  "retiredPropertyUids": [
-    3422621380867834787,
-    971220157301355316,
-    7030952573865954657
-  ],
-  "retiredRelationUids": [],
-  "version": 1
+    ],
+    "lastEntityId": "7:7737259498144569754",
+    "lastIndexId": "5:7262786699272501249",
+    "lastRelationId": "0:0",
+    "lastSequenceId": "0:0",
+    "modelVersion": 5,
+    "modelVersionParserMinimum": 5,
+    "retiredEntityUids": [],
+    "retiredIndexUids": [
+        9110274326691932798
+    ],
+    "retiredPropertyUids": [
+        3422621380867834787,
+        971220157301355316,
+        7030952573865954657,
+        6600296338817128660,
+        345286493546760360
+    ],
+    "retiredRelationUids": [],
+    "version": 1
 }

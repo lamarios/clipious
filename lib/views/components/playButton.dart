@@ -12,7 +12,7 @@ class PlayButton extends StatelessWidget {
       alignment: Alignment.center,
       children: [
         Padding(
-          padding: const EdgeInsets.only(left: 100.0,top: 60),
+          padding: const EdgeInsets.only(left: 100.0, top: 60),
           child: IconButton(
             onPressed: () => onPressed(true),
             style: ButtonStyle(backgroundColor: MaterialStateColor.resolveWith((states) => colorScheme.primary.withOpacity(1))),

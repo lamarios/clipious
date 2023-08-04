@@ -12,7 +12,7 @@ class TvPlainText extends StatefulWidget {
 }
 
 class _TvPlainTextState extends State<TvPlainText> {
-  ScrollController _scrollController = new ScrollController();
+  final ScrollController _scrollController = new ScrollController();
 
   KeyEventResult scroll(FocusNode node, KeyEvent event) {
     if (event.logicalKey == LogicalKeyboardKey.arrowDown) {

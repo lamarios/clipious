@@ -15,8 +15,14 @@ class DownloadedVideo extends IdedVideo {
   bool downloadComplete;
   bool downloadFailed;
   bool audioOnly;
-  int videoLenthInSeconds;
+  int lengthSeconds;
   String quality;
+
+  @override
+  String get videoId => super.videoId;
+
+  @override
+  set videoId(String videoId) => super.videoId = videoId;
 
   @Transient()
   Future<String> get mediaPath async {
@@ -39,7 +45,7 @@ class DownloadedVideo extends IdedVideo {
       this.downloadComplete = false,
       this.downloadFailed = false,
       this.audioOnly = false,
-      this.videoLenthInSeconds = 1,
+      this.lengthSeconds = 1,
       this.quality = '720p'})
       : super(videoId);
 }

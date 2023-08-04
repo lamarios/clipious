@@ -114,7 +114,7 @@ class DownloadController extends GetxController {
     } else {
       Video vid = await service.getVideo(videoId);
       var downloadedVideo =
-          DownloadedVideo(videoId: vid.videoId, title: vid.title, author: vid.author, authorUrl: vid.authorUrl, audioOnly: audioOnly, videoLenthInSeconds: vid.lengthSeconds, quality: quality);
+          DownloadedVideo(videoId: vid.videoId, title: vid.title, author: vid.author, authorUrl: vid.authorUrl, audioOnly: audioOnly, lengthSeconds: vid.lengthSeconds, quality: quality);
       db.upsertDownload(downloadedVideo);
 
       String contentUrl;

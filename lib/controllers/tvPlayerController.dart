@@ -16,6 +16,9 @@ import '../utils.dart';
 const Duration controlFadeOut = Duration(seconds: 4);
 const Duration throttleDuration = Duration(milliseconds: 250);
 
+const defaultStep = 10;
+const stepMultiplier = 0.2;
+
 class TvPlayerController extends GetxController {
   Logger log = Logger('TvPlayerController');
 
@@ -31,6 +34,7 @@ class TvPlayerController extends GetxController {
   bool showQueue = false;
   bool showControls = false;
   late Video currentlyPlaying;
+  int forwardStep = defaultStep, rewindStep = defaultStep;
 
   Duration get videoLength => Duration(seconds: VideoPlayerController.to()?.video?.lengthSeconds ?? 0);
 
@@ -39,13 +43,21 @@ class TvPlayerController extends GetxController {
   togglePlayPause() {
     showUi();
     if (isPlaying) {
-      log.info('Pausing video');
-      VideoPlayerController.to()?.videoController?.pause();
+      pause();
     } else {
-      log.info('Playing video');
-      VideoPlayerController.to()?.videoController?.play();
+      play();
     }
     update();
+  }
+
+  play() {
+    log.info('Playing video');
+    VideoPlayerController.to()?.videoController?.play();
+  }
+
+  pause() {
+    log.info('Pausing video');
+    VideoPlayerController.to()?.videoController?.pause();
   }
 
   @override
@@ -114,11 +126,19 @@ class TvPlayerController extends GetxController {
   }
 
   fastForward() {
-    VideoPlayerController.to()?.videoController?.seekTo(currentPosition + const Duration(seconds: 10));
+    VideoPlayerController.to()?.videoController?.seekTo(currentPosition + Duration(seconds: forwardStep));
+    forwardStep += (forwardStep * stepMultiplier).floor();
+    EasyDebounce.debounce('fast-forward-step', const Duration(seconds: 1), () {
+      forwardStep = defaultStep;
+    });
   }
 
   fastRewind() {
-    VideoPlayerController.to()?.videoController?.seekTo(currentPosition - const Duration(seconds: 10));
+    VideoPlayerController.to()?.videoController?.seekTo(currentPosition - Duration(seconds: rewindStep));
+    rewindStep += (rewindStep * stepMultiplier).floor();
+    EasyDebounce.debounce('fast-rewind-step', const Duration(seconds: 1), () {
+      rewindStep = defaultStep;
+    });
   }
 
   playNext() async {
@@ -185,6 +205,35 @@ class TvPlayerController extends GetxController {
       update();
       return KeyEventResult.handled;
     } else if (event is KeyUpEvent) {
+      switch (event.logicalKey) {
+        case LogicalKeyboardKey.mediaPlay:
+          play();
+          break;
+        case LogicalKeyboardKey.mediaPause:
+          pause();
+          break;
+        case LogicalKeyboardKey.mediaPlayPause:
+          togglePlayPause();
+          break;
+
+        case LogicalKeyboardKey.mediaFastForward:
+        case LogicalKeyboardKey.mediaStepForward:
+        case LogicalKeyboardKey.mediaSkipForward:
+          fastForward();
+          break;
+        case LogicalKeyboardKey.mediaRewind:
+        case LogicalKeyboardKey.mediaStepBackward:
+        case LogicalKeyboardKey.mediaSkipBackward:
+          fastRewind();
+          break;
+        case LogicalKeyboardKey.mediaTrackNext:
+          playNext();
+          break;
+        case LogicalKeyboardKey.mediaTrackPrevious:
+          playPrevious();
+          break;
+      }
+
       if (timeLineControl) {
         if (event.logicalKey == LogicalKeyboardKey.arrowRight) {
           fastForward();

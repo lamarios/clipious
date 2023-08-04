@@ -135,9 +135,7 @@ class SubscriptionVideoList extends PaginatedVideoList {
     List<VideoInList> subs = [];
     subs.addAll(feed.notifications ?? []);
     subs.addAll(feed.videos ?? []);
-    if (subs.length < maxResults) {
-      hasMore = false;
-    }
+    hasMore = subs.length >= maxResults;
     return subs;
   }
 

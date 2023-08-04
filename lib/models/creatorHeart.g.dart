@@ -11,8 +11,7 @@ CreatorHeart _$CreatorHeartFromJson(Map<String, dynamic> json) => CreatorHeart(
       json['creatorName'] as String,
     );
 
-Map<String, dynamic> _$CreatorHeartToJson(CreatorHeart instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$CreatorHeartToJson(CreatorHeart instance) => <String, dynamic>{
       'creatorThumbnail': instance.creatorThumbnail,
       'creatorName': instance.creatorName,
     };

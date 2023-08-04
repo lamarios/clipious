@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:invidious/main.dart';
 import 'package:invidious/models/video.dart';
 import 'package:invidious/myRouteObserver.dart';
 import 'package:invidious/views/channel.dart';
 import 'package:invidious/views/components/subscribeButton.dart';
+import 'package:invidious/views/components/textLinkified.dart';
 import 'package:invidious/views/components/videoThumbnail.dart';
 import 'package:invidious/views/search.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:invidious/views/video/videoMetrics.dart';
 
 import '../../models/imageObject.dart';
-import '../../utils.dart';
 
 class VideoInfo extends StatelessWidget {
   Video video;
@@ -48,89 +47,11 @@ class VideoInfo extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.only(bottom: 8.0),
-            child: Row(
-              children: [
-                Visibility(
-                    visible: video.viewCount > 0,
-                    child: const Icon(
-                      Icons.visibility,
-                      size: 15,
-                    )),
-                Visibility(
-                    visible: video.viewCount > 0,
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 3.0),
-                      child: Text(compactCurrency.format(video.viewCount)),
-                    )),
-                Visibility(
-                    visible: video.likeCount > 0,
-                    child: const Padding(
-                      padding: EdgeInsets.only(left: 5.0),
-                      child: Icon(
-                        Icons.thumb_up,
-                        size: 15,
-                      ),
-                    )),
-                Visibility(
-                    visible: video.likeCount > 0,
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 3.0),
-                      child: Text(compactCurrency.format(video.likeCount)),
-                    )),
-                Visibility(
-                    visible: (dislikes ?? 0) > 0,
-                    child: const Padding(
-                      padding: EdgeInsets.only(left: 5.0),
-                      child: Icon(
-                        Icons.thumb_down,
-                        size: 15,
-                      ),
-                    )),
-                Visibility(
-                    visible: (dislikes ?? 0) > 0,
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 3.0),
-                      child: Text(compactCurrency.format(dislikes ?? 0).replaceAll(".00", "")),
-                    )),
-                Expanded(child: Container()),
-                Visibility(
-                  visible: !video.liveNow,
-                  child: Expanded(
-                      child: Text(
-                    video.publishedText,
-                    textAlign: TextAlign.end,
-                  )),
-                ),
-                Visibility(
-                  visible: video.liveNow,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.red,
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 2),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          const Icon(
-                            Icons.podcasts,
-                            size: 15,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 8.0),
-                            child: Text(
-                              locals.streamIsLive,
-                              style: const TextStyle(fontSize: 10),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ],
+            child: VideoMetrics(
+              video: video,
+              dislikes: dislikes,
+              style: const TextStyle(fontSize: 12),
+              iconSize: 15,
             ),
           ),
           Row(
@@ -177,11 +98,10 @@ class VideoInfo extends StatelessWidget {
               )
             ],
           ),
-          SelectableLinkify(
-              text: video.description,
-              linkStyle: TextStyle(color: colorScheme.primary, decoration: TextDecoration.none),
-              onOpen: (link) => launchUrl(Uri.parse(link.url), mode: LaunchMode.externalApplication),
-              options: const LinkifyOptions(humanize: true, removeWww: true)),
+          TextLinkified(
+            text: video.description,
+            video: video,
+          ),
           const Divider(),
           Row(
             children: [
