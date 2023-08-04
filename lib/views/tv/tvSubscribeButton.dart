@@ -26,7 +26,6 @@ class TvSubscribeButton extends StatelessWidget {
             child: TvButton(
               autofocus: autoFocus,
               onFocusChanged: onFocusChanged,
-              focusedColor: colors.secondaryContainer,
               unfocusedColor: colors.background.withOpacity(0.0),
               onPressed: (context) => _.isLoggedIn ? _.toggleSubscription() : null,
               child: Padding(

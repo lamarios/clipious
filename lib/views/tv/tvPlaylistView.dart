@@ -42,8 +42,13 @@ class TvPlaylistView extends PlaylistView {
               child: SizedBox(
                 width: 50,
                 height: 50,
-                child: CircularProgressIndicator(
-                  value: _.loadingProgress,
+                child: TweenAnimationBuilder(
+                  tween: Tween<double>(begin: 0, end: _.loadingProgress),
+                  duration: animationDuration,
+                  curve: Curves.easeInOutQuad,
+                  builder: (context, value, child) => CircularProgressIndicator(
+                    value: value > 0 && value < 1 ? value : null,
+                  ),
                 ),
               ),
             ),
@@ -69,7 +74,7 @@ class TvPlaylistView extends PlaylistView {
                       AnimatedPositioned(
                         duration: animationDuration,
                         curve: Curves.easeInOutQuad,
-                        top: _.showImage ? 350 : 0,
+                        top: _.showImage ? 335 : 0,
                         left: 0,
                         bottom: 0,
                         right: 0,
@@ -83,60 +88,66 @@ class TvPlaylistView extends PlaylistView {
                                   sigmaX: value,
                                   sigmaY: value,
                                 ),
-                                child: Container(
-                                  color: colors.background.withOpacity(overlayBackgroundOpacity),
-                                  child: TvOverscan(
-                                    child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Row(
-                                          crossAxisAlignment: CrossAxisAlignment.center,
-                                          children: [
-                                            Padding(
-                                              padding: const EdgeInsets.only(right: 16.0),
-                                              child: TvButton(
-                                                autofocus: true,
-                                                onFocusChanged: (focus) {
-                                                  _.setShowImage(focus);
-                                                },
-                                                onPressed: (context) => playPlaylist(context, _),
-                                                child: const Padding(
-                                                  padding: EdgeInsets.all(15.0),
-                                                  child: Icon(
-                                                    Icons.play_arrow,
-                                                    size: 50,
+                                child: TvOverscan(
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20),
+                                      color: colors.background.withOpacity(overlayBackgroundOpacity),
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(16.0),
+                                      child: Column(
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Row(
+                                            crossAxisAlignment: CrossAxisAlignment.center,
+                                            children: [
+                                              Padding(
+                                                padding: const EdgeInsets.only(right: 16.0),
+                                                child: TvButton(
+                                                  autofocus: true,
+                                                  onFocusChanged: (focus) {
+                                                    _.setShowImage(focus);
+                                                  },
+                                                  onPressed: (context) => playPlaylist(context, _),
+                                                  child: const Padding(
+                                                    padding: EdgeInsets.all(15.0),
+                                                    child: Icon(
+                                                      Icons.play_arrow,
+                                                      size: 50,
+                                                    ),
                                                   ),
                                                 ),
                                               ),
-                                            ),
-                                            Column(
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  _.playlist.title,
-                                                  style: textTheme.headlineLarge,
-                                                ),
-                                                Text(
-                                                  locals.nVideos(_.playlist.videos.length),
-                                                  style: textTheme.bodyLarge,
-                                                ),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                        Expanded(
-                                          child: Padding(
-                                            padding: const EdgeInsets.only(top: 16.0),
-                                            child: GridView.count(
-                                              controller: _.scrollController,
-                                              childAspectRatio: 16 / 13,
-                                              crossAxisCount: 3,
-                                              children: _.playlist.videos.map((e) => TvVideoItem(video: e, autoFocus: false)).toList(),
+                                              Column(
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    _.playlist.title,
+                                                    style: textTheme.headlineLarge,
+                                                  ),
+                                                  Text(
+                                                    locals.nVideos(_.playlist.videos.length),
+                                                    style: textTheme.bodyLarge,
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                          Expanded(
+                                            child: Padding(
+                                              padding: const EdgeInsets.only(top: 16.0),
+                                              child: GridView.count(
+                                                controller: _.scrollController,
+                                                childAspectRatio: 16 / 13,
+                                                crossAxisCount: 3,
+                                                children: _.playlist.videos.map((e) => TvVideoItem(video: e, autoFocus: false)).toList(),
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ),

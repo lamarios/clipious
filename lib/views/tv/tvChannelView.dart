@@ -38,7 +38,7 @@ class TvChannelView extends StatelessWidget {
           builder: (_) {
             return _.loading
                 ? const Center(
-                    child: CircularProgressIndicator(),
+                    child: SizedBox(width: 50, height: 50, child: CircularProgressIndicator()),
                   )
                 : DefaultTextStyle(
                     style: textTheme.bodyLarge!,
@@ -64,8 +64,10 @@ class TvChannelView extends StatelessWidget {
                                         padding: const EdgeInsets.only(top: 100.0),
                                         child: Align(
                                           alignment: Alignment.centerLeft,
-                                          child: Container(
-                                            decoration: BoxDecoration(color: colors.background.withOpacity(1), borderRadius: BorderRadius.circular(35)),
+                                          child: AnimatedContainer(
+                                            decoration:
+                                                BoxDecoration(color: _.showBackground ? colors.background.withOpacity(0) : colors.background.withOpacity(1), borderRadius: BorderRadius.circular(35)),
+                                            duration: animationDuration,
                                             child: Row(mainAxisSize: MainAxisSize.min, children: [
                                               Thumbnail(
                                                 thumbnailUrl: ImageObject.getBestThumbnail(_.channel?.authorThumbnails)?.url ?? '',

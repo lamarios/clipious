@@ -32,7 +32,7 @@ class TvExpandableText extends StatelessWidget {
             return AnimatedContainer(
               duration: animationDuration,
               decoration: BoxDecoration(
-                color: hasFocus ? colors.secondaryContainer : colors.background.withOpacity(0),
+                color: hasFocus ? colors.primaryContainer : colors.background.withOpacity(0),
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Padding(

@@ -12,6 +12,7 @@ class TvPlaylistController extends PlaylistController {
 
   void setShowImage(bool bool) {
     showImage = bool;
+    scrollController.jumpTo(0);
     update();
   }
 }

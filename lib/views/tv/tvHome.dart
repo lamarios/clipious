@@ -16,7 +16,7 @@ import 'package:invidious/views/tv/tvVideoGridView.dart';
 
 import '../popular.dart';
 
-const overlayBackgroundOpacity = 0.9;
+const overlayBackgroundOpacity = 0.8;
 const double overlayBlur = 25.0;
 
 class TvHome extends StatelessWidget {
