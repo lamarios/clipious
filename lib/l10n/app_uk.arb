@@ -837,7 +837,7 @@
   "@downloads": {
     "description": "Downloads"
   },
-  "noDownloadedVideos": "Немає завантажених відео, переглядайте, довго натискайте відео в списку, натисніть кнопку завантаження на екрані відео, щоб завантажити",
+  "noDownloadedVideos": "Немає завантажених відео, переглядайте, довго натискайте відео в списку або натисніть кнопку завантаження на екрані відео, щоб завантажити",
   "@noDownloadedVideos": {
     "description": "Message showing when the user goes to the download screen but there are no offline videos."
   },
@@ -848,5 +848,9 @@
   "videoFailedDownloadRetry": "Завантаження не вдалося, торкніться, щоб повторити спробу",
   "@videoFailedDownloadRetry": {
     "description": "Shown on download manager when a download fails and prompt the user to retry"
+  },
+  "videoDownloadAudioOnly": "Тільки аудіо",
+  "@videoDownloadAudioOnly": {
+    "description": "Label for toggle to download audio only "
   }
 }
