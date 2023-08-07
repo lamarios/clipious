@@ -220,3 +220,45 @@ class PlaylistSearchPaginatedList<T> extends SearchPaginatedList<T> {
     return (await service.getPublicPlaylists(super.query)).videos as List<T>;
   }
 }
+
+class PageBasedPaginatedList<T> extends PaginatedList<T> {
+  final int maxResults;
+  int page = 1;
+  bool hasMore = true;
+  final Future<List<T>> Function(int page, int maxResults) getItemsFunc;
+
+  PageBasedPaginatedList({required this.maxResults, required this.getItemsFunc});
+
+  @override
+  bool getHasMore() {
+    return hasMore;
+  }
+
+  @override
+  Future<List<T>> getItems() async {
+    var list = await getItemsFunc(page, maxResults);
+    hasMore = list.length == maxResults;
+    return list;
+  }
+
+  @override
+  Future<List<T>> getMoreItems() async {
+    try {
+      page++;
+      return await getItems();
+    } catch (err) {
+      page--;
+      rethrow;
+    }
+  }
+
+  @override
+  bool hasRefresh() {
+    return true;
+  }
+
+  @override
+  Future<List<T>> refresh() async {
+    return await getItemsFunc(1, maxResults * page);
+  }
+}

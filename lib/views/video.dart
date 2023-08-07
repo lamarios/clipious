@@ -16,6 +16,13 @@ import '../myRouteObserver.dart';
 import '../utils.dart';
 import 'downloadManager.dart';
 
+class VideoRouteArguments {
+  final String videoId;
+  bool? playNow;
+
+  VideoRouteArguments({required this.videoId, this.playNow});
+}
+
 class VideoView extends StatelessWidget {
   final String videoId;
   bool? playNow;

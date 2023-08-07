@@ -1,3 +1,4 @@
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:invidious/controllers/interfaces/playerController.dart';
 import 'package:invidious/controllers/miniPlayerProgressController.dart';
 import 'package:invidious/controllers/videoInListController.dart';
@@ -151,14 +152,8 @@ class AudioPlayerController extends PlayerController {
 
   @override
   void saveProgress(int timeInSeconds) {
-    if (video != null && playing) {
-      int currentPosition = timeInSeconds;
-      // saving progress
-      int max = audioLength.inSeconds;
-      var progress = dbProgress.Progress.named(progress: currentPosition / max, videoId: video!.videoId);
-      db.saveProgress(progress);
-
-      VideoInListController.to(progress.videoId)?.updateProgress();
+    if (video != null) {
+      MiniPlayerController.to()?.saveProgress(video!.videoId, video!.lengthSeconds, timeInSeconds);
     }
   }
 

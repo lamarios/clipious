@@ -4,12 +4,14 @@ import 'dart:math';
 import 'package:audio_service/audio_service.dart';
 import 'package:back_button_interceptor/back_button_interceptor.dart';
 import 'package:better_player/better_player.dart';
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:invidious/controllers/audioPlayerController.dart';
 import 'package:invidious/controllers/miniPlayerAwareController.dart';
 import 'package:invidious/controllers/miniPlayerProgressController.dart';
 import 'package:invidious/controllers/miniplayerControlsController.dart';
+import 'package:invidious/controllers/videoInListController.dart';
 import 'package:invidious/controllers/videoLikeController.dart';
 import 'package:invidious/controllers/videoPlayerController.dart';
 import 'package:invidious/database.dart';
@@ -19,7 +21,7 @@ import 'package:invidious/models/imageObject.dart';
 import 'package:invidious/models/mediaEvent.dart';
 import 'package:invidious/utils.dart';
 import 'package:logging/logging.dart';
-
+import '../../models/db/progress.dart' as dbProgress;
 import '../main.dart';
 import '../models/baseVideo.dart';
 import '../models/db/downloadedVideo.dart';
@@ -210,6 +212,23 @@ class MiniPlayerController extends GetxController {
     var video = videos[currentIndex];
     hide();
     return video;
+  }
+
+  saveProgress(String videoId, int max, int timeInSeconds) {
+    int currentPosition = timeInSeconds;
+    // saving progress
+    var progress = dbProgress.Progress.named(progress: currentPosition / max, videoId: videoId);
+    db.saveProgress(progress);
+
+    if (progress.progress > 0.7) {
+      EasyDebounce.debounce('invidious-progress-update-${progress.videoId}', const Duration(seconds: 5), () {
+        if (service.isLoggedIn()) {
+          service.addToUserHistory(progress.videoId);
+        }
+      });
+    }
+
+    VideoInListController.to(progress.videoId)?.updateProgress();
   }
 
   queueVideos(List<BaseVideo> videos) {

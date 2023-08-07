@@ -11,7 +11,7 @@ abstract class IdedVideo {
   IdedVideo(this.videoId);
 }
 
-abstract class BaseVideo extends IdedVideo implements ShareLinks {
+class BaseVideo extends IdedVideo implements ShareLinks {
   String title;
   int lengthSeconds;
   String? author;

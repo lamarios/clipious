@@ -34,7 +34,7 @@ String prettyDuration(Duration duration) {
   components.add('${minutes.toString().padLeft(2, '0')}:');
 
   var seconds = duration.inSeconds % 60;
-  components.add('${seconds.toString().padLeft(2, '0')}');
+  components.add(seconds.toString().padLeft(2, '0'));
   return components.join();
 }
 

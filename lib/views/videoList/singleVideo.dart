@@ -15,7 +15,6 @@ import '../../controllers/downloadController.dart';
 import '../../models/baseVideo.dart';
 import '../../models/imageObject.dart';
 import '../../utils.dart';
-import '../channel.dart';
 import '../video.dart';
 
 class VideoListItem extends StatelessWidget {
@@ -168,7 +167,7 @@ class VideoListItem extends StatelessWidget {
                         child: InkWell(
                           onTap: () {
                             log.fine('Opening channel ${video.authorId}');
-                            navigatorKey.currentState?.push(MaterialPageRoute(settings: ROUTE_CHANNEL, builder: (context) => ChannelView(channelId: video.authorId!)));
+                            navigatorKey.currentState?.pushNamed(PATH_CHANNEL, arguments: video.authorId);
                           },
                           child: Row(
                             children: [

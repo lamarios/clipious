@@ -2,24 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/main.dart';
 import 'package:invidious/models/video.dart';
-import 'package:invidious/myRouteObserver.dart';
-import 'package:invidious/views/channel.dart';
-import 'package:invidious/views/components/subscribeButton.dart';
 import 'package:invidious/views/components/textLinkified.dart';
 import 'package:invidious/views/components/videoThumbnail.dart';
 import 'package:invidious/views/search.dart';
 import 'package:invidious/views/video/videoMetrics.dart';
 
 import '../../models/imageObject.dart';
+import '../../myRouteObserver.dart';
+import '../components/subscribeButton.dart';
 
 class VideoInfo extends StatelessWidget {
-  Video video;
-  int? dislikes;
+  final Video video;
+  final int? dislikes;
 
-  VideoInfo({super.key, required this.video, this.dislikes});
+  const VideoInfo({super.key, required this.video, this.dislikes});
 
   openChannel(BuildContext context) {
-    navigatorKey.currentState?.push(MaterialPageRoute(settings: ROUTE_CHANNEL, builder: (context) => ChannelView(channelId: video.authorId ?? '')));
+    navigatorKey.currentState?.pushNamed(PATH_CHANNEL, arguments: video.authorId);
   }
 
   showSearchWindow(BuildContext context, String query) {

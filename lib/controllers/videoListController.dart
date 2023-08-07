@@ -57,19 +57,19 @@ class ItemListController<T> extends GetxController {
   @override
   onReady() {
     super.onReady();
-    getVideos();
+    getItems();
     scrollController.addListener(onScrollEvent);
   }
 
   onScrollEvent() {
     if (scrollController.hasClients) {
       if (scrollController.position.maxScrollExtent * 0.9 < scrollController.offset) {
-        EasyDebounce.debounce('loading-more-videos', const Duration(milliseconds: 250), getMoreVideos);
+        EasyDebounce.debounce('loading-more-videos', const Duration(milliseconds: 250), getMoreItems);
       }
     }
   }
 
-  getMoreVideos() async {
+  getMoreItems() async {
     if (!loading && itemList.getHasMore()) {
       loadVideo(() async {
         List<T> videos = await itemList.getMoreItems();
@@ -80,11 +80,11 @@ class ItemListController<T> extends GetxController {
     }
   }
 
-  refreshVideos() async {
+  refreshItems() async {
     loadVideo(itemList.refresh);
   }
 
-  getVideos() async {
+  getItems() async {
     loadVideo(itemList.getItems);
   }
 

@@ -852,5 +852,31 @@
     "videoDownloadAudioOnly": "Audio only",
     "@videoDownloadAudioOnly": {
         "description": "Label for toggle to download audio only "
-    }
+    },
+      "manageSubscriptions": "Manage Subscriptions",
+        "@manageSubscriptions": {
+          "description": "Title of manage subscriptions page"
+        },
+          "noSubscriptions": "No subscriptions, browse videos and subscribe to any channel you like.",
+            "@noSubscriptions": {
+              "description": "Message when the user has no subs"
+            },
+              "youCanSubscribeAgainLater": "You can subscribe to this channel again later",
+                "@youCanSubscribeAgainLater": {
+                  "description": "Text for the unscubscribe confirmation dialog"
+                },
+
+                  "unSubscribeQuestion": "Unsubscribe ?",
+                    "@unSubscribeQuestion": {
+                      "description": "Title for dialog if a user wants to unsubscribe in the subscribtion management screen"
+                    },
+                      "history": "History",
+                        "@history": {
+                          "description": "User view history label"
+                        }
+
+
+
+
+
 }

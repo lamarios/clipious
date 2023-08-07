@@ -21,9 +21,16 @@ class SubscribeButton extends StatelessWidget {
           child: FilledButton.tonal(
             onPressed: _.isLoggedIn ? _.toggleSubscription : null,
             child: Row(
-              children: !_.loading && _.isLoggedIn
+              children: _.isLoggedIn
                   ? [
-                      Icon(_.isSubscribed ? Icons.done : Icons.add),
+                      _.loading
+                          ? SizedBox(
+                              width: 15,
+                              height: 15,
+                              child: CircularProgressIndicator(
+                                strokeWidth: 1,
+                              ))
+                          : Icon(_.isSubscribed ? Icons.done : Icons.add),
                       Padding(
                         padding: const EdgeInsets.only(left: 8.0),
                         child: Text('${(_.isSubscribed ? locals.subscribed : locals.subscribe)} | $subCount'),

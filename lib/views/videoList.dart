@@ -48,7 +48,7 @@ class VideoList extends StatelessWidget {
                   ? Container(
                       alignment: Alignment.center,
                       color: colorScheme.background,
-                      child: InkWell(onTap: () => _.getVideos(), child: Text(locals.couldntFetchVideos)),
+                      child: InkWell(onTap: () => _.getItems(), child: Text(locals.couldntFetchVideos)),
                     )
                   : Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -61,7 +61,7 @@ class VideoList extends StatelessWidget {
                             controller: _.refreshController,
                             enablePullDown: _.itemList.hasRefresh(),
                             enablePullUp: false,
-                            onRefresh: _.refreshVideos,
+                            onRefresh: _.refreshItems,
                             child: GridView.count(
                                 crossAxisCount: getGridCount(context),
                                 controller: _.scrollController,
