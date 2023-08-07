@@ -281,7 +281,7 @@
   "@useDynamicTheme": {
     "description": ""
   },
-  "useDynamicThemeDescription": "Utiliser les couleurs de Material You (Android 12+ uniquement)",
+  "useDynamicThemeDescription": "Utilisez les couleurs de Material You (disponible uniquement sur Android 12+)",
   "@useDynamicThemeDescription": {
     "description": ""
   },
@@ -575,7 +575,7 @@
   "@blackBackgroundDescription": {
     "description": "Description for dark background setting"
   },
-  "rememberSubtitleLanguageDescription": "Définir automatiquement les sous-titres à la dernière langue séléctionée, si disponible",
+  "rememberSubtitleLanguageDescription": "Définir automatiquement les sous-titres sur la dernière langue séléctionée, si disponible",
   "@rememberSubtitleLanguageDescription": {
     "description": "Settings description for remembering subtitle language"
   },
