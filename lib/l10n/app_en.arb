@@ -793,6 +793,16 @@
     "@videoFilterHideAllFromChannel": {
         "description": "Label for video filter switch to allow to hide all videos from a channel"
     },
+    "videoFilterWholeChannel": "{hideOrFilter} all videos from channel",
+    "@videoFilterWholeChannel": {
+      "description": "Label for whole channel filtering",
+        "placeholders": {
+            "hideOrFilter": {
+                "type": "String",
+                "example": "Hide"
+            }
+        }
+    },
     "rememberSubtitleLanguageDescription": "Automatically set subtitles to last language selected, if available",
     "@rememberSubtitleLanguageDescription": {
         "description": "Settings description for remembering subtitle language"
@@ -870,6 +880,21 @@
                     "@unSubscribeQuestion": {
                       "description": "Title for dialog if a user wants to unsubscribe in the subscribtion management screen"
                     },
+                      "clearHistoryQuestion": "Clear history ?",
+                        "@clearHistory": {
+                          "description": "Title for dialog before clearing full viewing history"
+                        },
+                          "clearHistoryQuestionExplanation": "This will clear your viewing history of your account on the Invidious instance you use. This cannot be undone.",
+                            "@clearHistoryQuestionExplanation": {
+                              "description": "Message for dialog before clearing full viewing history"
+                            },
+                              "noHistory": "No viewing history, watch some videos and it will appear here",
+                                "@noHistory": {
+                                  "description": "Message when the user visits the history tab but it's empty"
+                                },
+
+
+
                       "history": "History",
                         "@history": {
                           "description": "User view history label"

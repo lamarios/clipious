@@ -30,7 +30,7 @@ class Playlists extends StatelessWidget {
 }
 
 class AddPlayListButton extends StatefulWidget {
-  AddPlayListButton({super.key});
+  const AddPlayListButton({super.key});
 
   @override
   State<AddPlayListButton> createState() => _AddPlayListButtonState();
@@ -50,7 +50,6 @@ class _AddPlayListButtonState extends State<AddPlayListButton> {
     ColorScheme colors = Theme.of(context).colorScheme;
     return FloatingActionButton(
       onPressed: () => addPlaylistDialog(context),
-      backgroundColor: colors.primaryContainer,
       child: const Icon(Icons.add),
     );
   }

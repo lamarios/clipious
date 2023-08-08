@@ -319,7 +319,12 @@ class Service {
 
     final response = await http.post(url, headers: headers);
     log.info('${response.statusCode} - ${response.body}');
-    return response.statusCode == 204;
+
+    if (response.statusCode == 204 || response.statusCode == 403) {
+      return response.statusCode == 204;
+    } else {
+      throw InvidiousServiceError("Couldn't subscribe to channel");
+    }
   }
 
   Future<bool> unSubscribe(String channelId) async {
@@ -332,7 +337,12 @@ class Service {
 
     final response = await http.delete(url, headers: headers);
     log.info('${response.statusCode} - ${response.body}');
-    return response.statusCode == 204;
+
+    if (response.statusCode == 204 || response.statusCode == 403) {
+      return response.statusCode == 204;
+    } else {
+      throw InvidiousServiceError("Couldn't subscribe to channel");
+    }
   }
 
   Future<bool> isSubscribedToChannel(String channelId) async {

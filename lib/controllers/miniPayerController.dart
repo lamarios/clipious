@@ -220,8 +220,8 @@ class MiniPlayerController extends GetxController {
     var progress = dbProgress.Progress.named(progress: currentPosition / max, videoId: videoId);
     db.saveProgress(progress);
 
-    if (progress.progress > 0.7) {
-      EasyDebounce.debounce('invidious-progress-update-${progress.videoId}', const Duration(seconds: 5), () {
+    if (progress.progress > 0.5) {
+      EasyDebounce.debounce('invidious-progress-sync-${progress.videoId}', const Duration(seconds: 5), () {
         if (service.isLoggedIn()) {
           service.addToUserHistory(progress.videoId);
         }

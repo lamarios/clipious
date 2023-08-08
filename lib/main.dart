@@ -284,7 +284,7 @@ class _HomeState extends State<Home> with AfterLayoutMixin {
               selectedIndex: _.selectedIndex,
               destinations: navigationWidgets,
             ),
-            floatingActionButton: _.selectedIndex == 3 ? AddPlayListButton() : null,
+            floatingActionButton: switch (_.selectedIndex) { 3 => const AddPlayListButton(), 4 => const ClearHistoryButton(), _ => null },
             appBar: AppBar(
               systemOverlayStyle: getUiOverlayStyle(context),
               title: Text(navigationLabels[_.selectedIndex]),

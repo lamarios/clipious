@@ -147,6 +147,9 @@ class VideoListItem extends StatelessWidget {
                       ),
                     ),
                   ),
+            const SizedBox(
+              height: 4,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -160,7 +163,7 @@ class VideoListItem extends StatelessWidget {
                         _.video.filtered ? '**********' : video.title,
                         textAlign: TextAlign.left,
                         overflow: TextOverflow.ellipsis,
-                        maxLines: 1,
+                        maxLines: 2,
                         style: TextStyle(color: colorScheme.primary, fontWeight: FontWeight.normal),
                       ),
                       Visibility(
@@ -200,8 +203,8 @@ class VideoListItem extends StatelessWidget {
                 ),
                 InkWell(
                   onTap: _.video.filtered ? null : () => VideoModalSheet.showVideoModalSheet(context, video, animateDownload: animateDownload),
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 4.0, top: 4),
+                  child: const Padding(
+                    padding: EdgeInsets.all(4),
                     child: Icon(Icons.more_vert),
                   ),
                 )

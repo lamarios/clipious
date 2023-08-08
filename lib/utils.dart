@@ -82,6 +82,7 @@ void showSharingSheet(BuildContext context, ShareLinks links, {bool showTimestam
 
   showModalBottomSheet<void>(
     context: context,
+    showDragHandle: true,
     builder: (BuildContext context) {
       return StatefulBuilder(
         builder: (BuildContext context, StateSetter setState) {
@@ -174,7 +175,7 @@ int getGridCount(BuildContext context) {
 }
 
 double getGridAspectRatio(BuildContext context) {
-  return getGridCount(context) > 1 ? 16 / 15 : 16 / 12;
+  return getGridCount(context) > 1 ? 16 / 15 : 16 / 13;
 }
 
 okCancelDialog(BuildContext context, String title, String message, Function() onOk) {

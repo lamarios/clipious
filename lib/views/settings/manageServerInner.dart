@@ -17,6 +17,7 @@ class ManagerServersView extends StatelessWidget {
   showPublicServerActions(BuildContext context, ServerListSettingsController controller, Server server) {
     var locals = AppLocalizations.of(context)!;
     showModalBottomSheet<void>(
+        showDragHandle: true,
         context: context,
         builder: (BuildContext context) {
           return SizedBox(
@@ -31,7 +32,7 @@ class ManagerServersView extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        IconButton(
+                        IconButton.filledTonal(
                           onPressed: () {
                             controller.upsertServer(server);
                             Navigator.pop(context);

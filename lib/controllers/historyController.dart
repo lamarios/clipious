@@ -2,16 +2,23 @@ import 'package:get/get.dart';
 import 'package:invidious/controllers/videoListController.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/models/imageObject.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:invidious/utils.dart';
 
 import '../models/db/baseVideoCache.dart';
 
 class HistoryController extends ItemListController<String> {
+  static HistoryController? to() => safeGet();
+
   HistoryController({required super.itemList});
 
   removeFromHistory(String videoId) async {
     await service.deleteFromUserHistory(videoId);
     super.refreshItems();
+  }
+
+  clearHistory() async {
+    await service.clearUserHistory();
+    refreshItems();
   }
 }
 
