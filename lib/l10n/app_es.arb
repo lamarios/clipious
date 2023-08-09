@@ -852,5 +852,53 @@
   "videoDownloadAudioOnly": "Sólo el audio",
   "@videoDownloadAudioOnly": {
     "description": "Label for toggle to download audio only "
+  },
+  "manageSubscriptions": "Gestionar las suscripciones",
+  "@manageSubscriptions": {
+    "description": "Title of manage subscriptions page"
+  },
+  "noSubscriptions": "Sin suscripciones, navega por los vídeos y suscríbete al canal que quieras.",
+  "@noSubscriptions": {
+    "description": "Message when the user has no subs"
+  },
+  "noHistory": "No hay historial de visualización, mira algunos videos y aparecerán aquí",
+  "@noHistory": {
+    "description": "Message when the user visits the history tab but it's empty"
+  },
+  "history": "Historia",
+  "@history": {
+    "description": "User view history label"
+  },
+  "itemlistErrorGeneric": "No se han podido recuperar los datos",
+  "@itemlistErrorGeneric": {
+    "description": "Error showing when the data can't be fetch"
+  },
+  "unSubscribeQuestion": "¿Darse de baja?",
+  "@unSubscribeQuestion": {
+    "description": "Title for dialog if a user wants to unsubscribe in the subscribtion management screen"
+  },
+  "itemListErrorInvalidScope": "No tienes permiso para ver esto, si has entrado usando el método del token intenta salir y entrar de nuevo",
+  "@itemListErrorInvalidScope": {
+    "description": "Error when the user doesn't have the proper scope to its current token"
+  },
+  "videoFilterWholeChannel": "{hideOrFilter} todos los vídeos del canal",
+  "@videoFilterWholeChannel": {
+    "description": "Label for whole channel filtering",
+    "placeholders": {
+      "hideOrFilter": {
+        "type": "String",
+        "example": "Hide"
+      }
+    }
+  },
+  "youCanSubscribeAgainLater": "Puedes volver a suscribirte a este canal más tarde",
+  "@youCanSubscribeAgainLater": {
+    "description": "Text for the unscubscribe confirmation dialog"
+  },
+  "clearHistoryQuestion": "¿Borrar el historial?",
+  "@clearHistoryQuestion": {},
+  "clearHistoryQuestionExplanation": "Esto borrará el historial de visualización de tu cuenta en la instancia de Invidious que utilices. Esto no se puede deshacer.",
+  "@clearHistoryQuestionExplanation": {
+    "description": "Message for dialog before clearing full viewing history"
   }
 }
