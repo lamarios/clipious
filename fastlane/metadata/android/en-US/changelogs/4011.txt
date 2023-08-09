@@ -2,3 +2,4 @@
 - Synchronize video view status with invidious if the user is logged in
 - Add subscription management screen for user to review / find channels they're subscribed to
 - Fix issue with video filtering description not showing appropriate text when filtering whole channel
+- small UI tidy up
