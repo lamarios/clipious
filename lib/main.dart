@@ -32,6 +32,7 @@ import 'package:invidious/views/tv/tvWelcomeWizard.dart';
 import 'package:invidious/views/video.dart';
 import 'package:invidious/views/welcomeWizard.dart';
 import 'package:logging/logging.dart';
+import 'package:media_kit/media_kit.dart';
 
 import 'controllers/appController.dart';
 import 'database.dart';
@@ -70,6 +71,7 @@ Future<void> main() async {
   HttpOverrides.global = MyHttpOverrides();
 
   WidgetsFlutterBinding.ensureInitialized();
+  MediaKit.ensureInitialized();
   isTv = await isDeviceTv();
   db = await DbClient.create();
   runApp(const MyApp());

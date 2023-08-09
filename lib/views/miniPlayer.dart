@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:invidious/controllers/miniPayerController.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/views/video/audioPlayer.dart';
+import 'package:invidious/views/video/mediaKitPlayer.dart';
 import 'package:invidious/views/video/player.dart';
 import 'package:invidious/views/videoPlayer/fullScreenView.dart';
 import 'package:invidious/views/videoPlayer/miniPlayerView.dart';
@@ -37,7 +38,7 @@ class MiniPlayer extends StatelessWidget {
                       offlineVideo: _.isAudio ? _.offlineCurrentlyPlaying : null,
                       miniPlayer: false,
                     ),
-                    secondChild: VideoPlayer(
+                    secondChild: MediaKitPlayer(
                       key: const ValueKey('player'),
                       video: !_.isAudio ? _.currentlyPlaying : null,
                       offlineVideo: !_.isAudio ? _.offlineCurrentlyPlaying : null,
