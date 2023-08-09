@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:invidious/controllers/miniPayerController.dart';
 import 'package:logging/logging.dart';
 
+const String PATH_CHANNEL = "/channel";
+const String PATH_VIDEO = "/video";
+const String PATH_MANAGE_SUBS = "/manage-subscriptions";
+
 const RouteSettings ROUTE_SETTINGS = RouteSettings(name: 'settings');
 const RouteSettings ROUTE_DOWNLOAD_MANAGER = RouteSettings(name: 'download-manager');
 const RouteSettings ROUTE_SETTINGS_MANAGE_SERVERS = RouteSettings(name: 'settings-manage-servers');
@@ -9,10 +13,11 @@ const RouteSettings ROUTE_SETTINGS_MANAGE_ONE_SERVER = RouteSettings(name: 'sett
 const RouteSettings ROUTE_SETTINGS_SPONSOR_BLOCK = RouteSettings(name: 'settings-sponsor-block');
 const RouteSettings ROUTE_SETTINGS_VIDEO_FILTERS = RouteSettings(name: 'settings-video-filters');
 const RouteSettings ROUTE_SETTINGS_SEARCH_HISTORY = RouteSettings(name: 'settings-search-history');
-const RouteSettings ROUTE_VIDEO = RouteSettings(name: 'video');
-const RouteSettings ROUTE_CHANNEL = RouteSettings(name: 'channel');
+const RouteSettings ROUTE_VIDEO = RouteSettings(name: PATH_VIDEO);
+const RouteSettings ROUTE_CHANNEL = RouteSettings(name: PATH_CHANNEL);
 const RouteSettings ROUTE_PLAYLIST_LIST = RouteSettings(name: 'playlist-list');
 const RouteSettings ROUTE_PLAYLIST = RouteSettings(name: 'playlist');
+const RouteSettings ROUTE_MANAGE_SUBSCRIPTIONS = RouteSettings(name: PATH_MANAGE_SUBS);
 
 class MyRouteObserver extends RouteObserver<PageRoute<dynamic>> {
   var log = Logger('MyRouteObserver');
@@ -29,6 +34,7 @@ class MyRouteObserver extends RouteObserver<PageRoute<dynamic>> {
         case ROUTE_VIDEO:
         case ROUTE_PLAYLIST_LIST:
         case ROUTE_CHANNEL:
+        case ROUTE_MANAGE_SUBSCRIPTIONS:
           log.fine('We should stop playing video');
           MiniPlayerController.to()?.showMiniPlayer();
           break;

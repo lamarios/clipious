@@ -102,12 +102,11 @@ class Settings extends StatelessWidget {
 
   List<String> getCategories(BuildContext context) {
     var locals = AppLocalizations.of(context)!;
-    return [locals.popular, locals.trending, locals.subscriptions, locals.playlists];
+    return [locals.popular, locals.trending, locals.subscriptions, locals.playlists, locals.history];
   }
 
   selectTheme(BuildContext context, SettingsController _) {
     var locals = AppLocalizations.of(context)!;
-    ColorScheme colors = Theme.of(context).colorScheme;
     showDialog(
         context: context,
         useRootNavigator: true,

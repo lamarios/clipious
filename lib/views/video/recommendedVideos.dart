@@ -13,12 +13,13 @@ class RecommendedVideos extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var locals = AppLocalizations.of(context)!;
+    var textTheme = Theme.of(context).textTheme;
 
     ColorScheme colorScheme = Theme.of(context).colorScheme;
     List<Widget> widgets = [
       Text(
         locals.recommended,
-        style: TextStyle(color: colorScheme.secondary, fontSize: 20),
+        style: textTheme.titleMedium?.copyWith(color: colorScheme.secondary),
       ),
     ];
 

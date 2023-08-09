@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:invidious/controllers/compactVideoController.dart';
 import 'package:invidious/globals.dart';
@@ -23,6 +24,7 @@ class CompactVideo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ColorScheme colors = Theme.of(context).colorScheme;
+    var textTheme = Theme.of(context).textTheme;
 
     String title = video?.title ?? offlineVideo?.title ?? '';
     String author = video?.author ?? offlineVideo?.author ?? '';
@@ -61,7 +63,7 @@ class CompactVideo extends StatelessWidget {
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
@@ -70,7 +72,7 @@ class CompactVideo extends StatelessWidget {
                               ),
                               Text(
                                 author,
-                                style: TextStyle(color: colors.secondary, fontSize: 10),
+                                style: textTheme.bodySmall?.copyWith(color: colors.secondary),
                               )
                             ],
                           ),
@@ -82,5 +84,54 @@ class CompactVideo extends StatelessWidget {
                 ),
               ));
         });
+  }
+}
+
+class CompactVideoPlaceHolder extends StatelessWidget {
+  const CompactVideoPlaceHolder({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    var colors = Theme.of(context).colorScheme;
+    return Animate(
+      autoPlay: true,
+      onComplete: (controller) => controller.repeat(reverse: true),
+      effects: [FadeEffect(end: 0.5, begin: 1, duration: Duration(seconds: 2))],
+      child: SizedBox(
+        height: 70,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            children: [
+              AspectRatio(
+                aspectRatio: 16 / 9,
+                child: Container(
+                  decoration: BoxDecoration(color: colors.secondaryContainer, borderRadius: BorderRadius.circular(10)),
+                ),
+              ),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        height: 10,
+                        decoration: BoxDecoration(color: colors.secondaryContainer, borderRadius: BorderRadius.circular(10)),
+                      ),
+                      Container(
+                        height: 10,
+                        decoration: BoxDecoration(color: colors.secondaryContainer, borderRadius: BorderRadius.circular(10)),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }

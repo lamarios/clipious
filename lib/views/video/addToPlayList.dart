@@ -16,6 +16,7 @@ class AddToPlaylist extends StatelessWidget {
 
   static showAddToPlaylistDialog(BuildContext context, String videoId) {
     showModalBottomSheet<void>(
+        showDragHandle: true,
         context: context,
         builder: (BuildContext context) {
           return AddToPlaylist(videoId: videoId);

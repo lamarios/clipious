@@ -1,4 +1,5 @@
 import 'package:better_player/better_player.dart';
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:fbroadcast/fbroadcast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -89,14 +90,8 @@ class VideoPlayerController extends PlayerController {
 
   @override
   saveProgress(int timeInSeconds) {
-    if (videoController != null && video != null) {
-      int currentPosition = timeInSeconds;
-      // saving progress
-      int max = video!.lengthSeconds;
-      var progress = dbProgress.Progress.named(progress: currentPosition / max, videoId: video!.videoId);
-      db.saveProgress(progress);
-
-      VideoInListController.to(progress.videoId)?.updateProgress();
+    if (video != null) {
+      MiniPlayerController.to()?.saveProgress(video!.videoId, video!.lengthSeconds, timeInSeconds);
     }
   }
 
@@ -241,7 +236,7 @@ class VideoPlayerController extends PlayerController {
       // we get segments if there are any, no need to wait.
       setSponsorBlock();
 
-      if (startAt == null) {
+      if (startAt == null && !offline) {
         double progress = db.getVideoProgress(idedVideo.videoId);
         if (progress > 0 && progress < 0.90) {
           startAt = Duration(seconds: (offline ? offlineVideo!.lengthSeconds : video!.lengthSeconds * progress).floor());

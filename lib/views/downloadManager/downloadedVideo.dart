@@ -16,6 +16,8 @@ class DownloadedVideoView extends StatelessWidget {
   Widget build(BuildContext context) {
     var colors = Theme.of(context).colorScheme;
     var locals = AppLocalizations.of(context)!;
+    var textTheme = Theme.of(context).textTheme;
+
     return GetBuilder<DownloadedVideoController>(
         global: false,
         init: DownloadedVideoController(video.id),
@@ -70,7 +72,7 @@ class DownloadedVideoView extends StatelessWidget {
                                       padding: const EdgeInsets.only(left: 4.0),
                                       child: Text(
                                         locals.videoFailedDownloadRetry,
-                                        style: TextStyle(fontSize: 11),
+                                        style: textTheme.bodySmall,
                                       ),
                                     )
                                   ],

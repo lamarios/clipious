@@ -63,6 +63,7 @@ class VideoFilterSetup extends StatelessWidget {
   Widget build(BuildContext context) {
     var locals = AppLocalizations.of(context)!;
     ColorScheme colors = Theme.of(context).colorScheme;
+    var textTheme = Theme.of(context).textTheme;
 
     return GetBuilder<VideoFilterEditController>(
         init: VideoFilterEditController(filter: filter),
@@ -111,7 +112,7 @@ class VideoFilterSetup extends StatelessWidget {
                             title: Text(locals.videoFilterHide),
                             subtitle: Text(
                               locals.videoFilterHideDescription,
-                              style: TextStyle(fontSize: 11, color: colors.secondary),
+                              style: textTheme.bodySmall?.copyWith(color: colors.secondary),
                             ),
                             value: _.filter?.hideFromFeed ?? false,
                             onChanged: _.hideOnFilteredChanged),

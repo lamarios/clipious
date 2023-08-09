@@ -6,7 +6,8 @@ part of 'adaptiveFormat.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-AdaptiveFormat _$AdaptiveFormatFromJson(Map<String, dynamic> json) => AdaptiveFormat(
+AdaptiveFormat _$AdaptiveFormatFromJson(Map<String, dynamic> json) =>
+    AdaptiveFormat(
       json['index'] as String?,
       json['bitrate'] as String?,
       json['init'] as String?,
@@ -22,7 +23,8 @@ AdaptiveFormat _$AdaptiveFormatFromJson(Map<String, dynamic> json) => AdaptiveFo
       json['resolution'] as String?,
     );
 
-Map<String, dynamic> _$AdaptiveFormatToJson(AdaptiveFormat instance) => <String, dynamic>{
+Map<String, dynamic> _$AdaptiveFormatToJson(AdaptiveFormat instance) =>
+    <String, dynamic>{
       'index': instance.index,
       'bitrate': instance.bitrate,
       'init': instance.init,

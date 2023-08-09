@@ -10,6 +10,7 @@ class MiniPlayerView {
   @override
   static List<Widget> build(BuildContext context, MiniPlayerController controller) {
     ColorScheme colors = Theme.of(context).colorScheme;
+    var textTheme = Theme.of(context).textTheme;
     Video? vid = controller.currentlyPlaying;
     DownloadedVideo? offlineVid = controller.offlineCurrentlyPlaying;
 
@@ -31,7 +32,7 @@ class MiniPlayerView {
                           Text(
                             '$title - $author',
                             overflow: TextOverflow.ellipsis,
-                            style: const TextStyle(fontSize: 11),
+                            style: textTheme.bodySmall,
                           ),
                           MiniPlayerControls(
                             videoId: videoId,

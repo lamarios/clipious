@@ -164,6 +164,14 @@
     "@errorAddingVideoToPlaylist": {
         "description": "Error while adding video to playlist"
     },
+    "itemlistErrorGeneric": "Could not fetch data",
+    "@itemlistErrorGeneric": {
+        "description": "Error showing when the data can't be fetch"
+    },
+    "itemListErrorInvalidScope": "You don''t have the permission to see this, if you logged in using the token method try to log out and in again",
+    "@itemListErrorInvalidScope": {
+        "description": "Error when the user doesn't have the proper scope to its current token"
+    },
     "selectPlaylist": "Select playlist",
     "@selectPlaylist": {
         "description": "Title when users wants to add a video to a playlist"
@@ -793,6 +801,16 @@
     "@videoFilterHideAllFromChannel": {
         "description": "Label for video filter switch to allow to hide all videos from a channel"
     },
+    "videoFilterWholeChannel": "{hideOrFilter} all videos from channel",
+    "@videoFilterWholeChannel": {
+        "description": "Label for whole channel filtering",
+        "placeholders": {
+            "hideOrFilter": {
+                "type": "String",
+                "example": "Hide"
+            }
+        }
+    },
     "rememberSubtitleLanguageDescription": "Automatically set subtitles to last language selected, if available",
     "@rememberSubtitleLanguageDescription": {
         "description": "Settings description for remembering subtitle language"
@@ -852,5 +870,37 @@
     "videoDownloadAudioOnly": "Audio only",
     "@videoDownloadAudioOnly": {
         "description": "Label for toggle to download audio only "
+    },
+    "manageSubscriptions": "Manage Subscriptions",
+    "@manageSubscriptions": {
+        "description": "Title of manage subscriptions page"
+    },
+    "noSubscriptions": "No subscriptions, browse videos and subscribe to any channel you like.",
+    "@noSubscriptions": {
+        "description": "Message when the user has no subs"
+    },
+    "youCanSubscribeAgainLater": "You can subscribe to this channel again later",
+    "@youCanSubscribeAgainLater": {
+        "description": "Text for the unscubscribe confirmation dialog"
+    },
+    "unSubscribeQuestion": "Unsubscribe ?",
+    "@unSubscribeQuestion": {
+        "description": "Title for dialog if a user wants to unsubscribe in the subscribtion management screen"
+    },
+    "clearHistoryQuestion": "Clear history ?",
+    "@clearHistory": {
+        "description": "Title for dialog before clearing full viewing history"
+    },
+    "clearHistoryQuestionExplanation": "This will clear your viewing history of your account on the Invidious instance you use. This cannot be undone.",
+    "@clearHistoryQuestionExplanation": {
+        "description": "Message for dialog before clearing full viewing history"
+    },
+    "noHistory": "No viewing history, watch some videos and it will appear here",
+    "@noHistory": {
+        "description": "Message when the user visits the history tab but it's empty"
+    },
+    "history": "History",
+    "@history": {
+        "description": "User view history label"
     }
 }

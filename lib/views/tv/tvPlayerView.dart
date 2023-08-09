@@ -152,7 +152,7 @@ class TvPlayerView extends StatelessWidget {
                                         children: [
                                           Text(
                                             '${prettyDuration(_.currentPosition)} / ${prettyDuration(_.videoLength)}',
-                                            style: const TextStyle(color: Colors.white, fontSize: 24),
+                                            style: textTheme.titleLarge?.copyWith(color: Colors.white),
                                           )
                                         ],
                                       ),

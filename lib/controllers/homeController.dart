@@ -50,7 +50,7 @@ class HomeController extends GetxController {
     isLoggedIn = db.isLoggedInToCurrentServer();
     log.fine('logged in ? ${isLoggedIn}');
     update();
-    VideoListController.to(VideoListController.popularTag)?.refreshVideos();
+    VideoListController.to(VideoListController.popularTag)?.refreshItems();
   }
 
   void openAppLink(String url) {

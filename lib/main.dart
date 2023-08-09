@@ -15,8 +15,11 @@ import 'package:invidious/globals.dart';
 import 'package:invidious/httpOverrides.dart';
 import 'package:invidious/mediaHander.dart';
 import 'package:invidious/utils.dart';
+import 'package:invidious/views/channel.dart';
 import 'package:invidious/views/components/downloadAppBarButton.dart';
 import 'package:invidious/views/components/miniPlayerAware.dart';
+import 'package:invidious/views/history.dart';
+import 'package:invidious/views/manageSubscriptions.dart';
 import 'package:invidious/views/miniPlayer.dart';
 import 'package:invidious/views/playlists.dart';
 import 'package:invidious/views/popular.dart';
@@ -26,6 +29,7 @@ import 'package:invidious/views/subscriptions.dart';
 import 'package:invidious/views/trending.dart';
 import 'package:invidious/views/tv/tvHome.dart';
 import 'package:invidious/views/tv/tvWelcomeWizard.dart';
+import 'package:invidious/views/video.dart';
 import 'package:invidious/views/welcomeWizard.dart';
 import 'package:logging/logging.dart';
 
@@ -156,7 +160,7 @@ class MyApp extends StatelessWidget {
                   // if device language is not supported by the app,
                   // the app will set it to english but return this to set to Bahasa instead
                   log.info("locale not supported, returning english");
-                  return Locale('en', 'US');
+                  return const Locale('en', 'US');
                 },
                 supportedLocales: AppLocalizations.supportedLocales,
                 scaffoldMessengerKey: scaffoldKey,
@@ -184,8 +188,25 @@ class MyApp extends StatelessWidget {
                                   key: navigatorKey,
                                   initialRoute: '/',
                                   onGenerateRoute: (settings) {
-                                    if (settings.name == '/') {
-                                      return GetPageRoute(page: () => showWizard ? const WelcomeWizard() : const Home());
+                                    switch (settings.name) {
+                                      case "/":
+                                        return MaterialPageRoute(builder: (context) => showWizard ? const WelcomeWizard() : const Home());
+                                      case PATH_MANAGE_SUBS:
+                                        return MaterialPageRoute(builder: (context) => const ManageSubscriptions(), settings: ROUTE_MANAGE_SUBSCRIPTIONS);
+                                      case PATH_VIDEO:
+                                        VideoRouteArguments args = settings.arguments as VideoRouteArguments;
+                                        return MaterialPageRoute(
+                                            builder: (context) => VideoView(
+                                                  videoId: args.videoId,
+                                                  playNow: args.playNow,
+                                                ));
+                                      case PATH_CHANNEL:
+                                        if (settings.arguments is String) {
+                                          return MaterialPageRoute(
+                                            builder: (context) => ChannelView(channelId: settings.arguments! as String),
+                                            settings: ROUTE_CHANNEL,
+                                          );
+                                        }
                                     }
                                   }),
                             ),
@@ -208,6 +229,10 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> with AfterLayoutMixin {
   openSettings(BuildContext context) {
     navigatorKey.currentState?.push(MaterialPageRoute(settings: ROUTE_SETTINGS, builder: (context) => const Settings()));
+  }
+
+  openSubscriptionManagement(BuildContext context) {
+    navigatorKey.currentState?.pushNamed(PATH_MANAGE_SUBS);
   }
 
   @override
@@ -234,7 +259,7 @@ class _HomeState extends State<Home> with AfterLayoutMixin {
   Widget build(BuildContext context) {
     ColorScheme colorScheme = Theme.of(context).colorScheme;
     var locals = AppLocalizations.of(context)!;
-    List<String> navigationLabels = [locals.popular, locals.trending, locals.subscriptions, locals.playlists];
+    List<String> navigationLabels = [locals.popular, locals.trending, locals.subscriptions, locals.playlists, locals.history];
 
     return GetBuilder<HomeController>(
       init: HomeController(),
@@ -246,6 +271,7 @@ class _HomeState extends State<Home> with AfterLayoutMixin {
         if (_.isLoggedIn) {
           navigationWidgets.add(NavigationDestination(icon: const Icon(Icons.subscriptions), label: navigationLabels[2]));
           navigationWidgets.add(NavigationDestination(icon: const Icon(Icons.playlist_play), label: navigationLabels[3]));
+          navigationWidgets.add(NavigationDestination(icon: const Icon(Icons.history), label: navigationLabels[4]));
         }
 
         return Scaffold(
@@ -258,7 +284,7 @@ class _HomeState extends State<Home> with AfterLayoutMixin {
               selectedIndex: _.selectedIndex,
               destinations: navigationWidgets,
             ),
-            floatingActionButton: _.selectedIndex == 3 ? AddPlayListButton() : null,
+            floatingActionButton: switch (_.selectedIndex) { 3 => const AddPlayListButton(), 4 => const ClearHistoryButton(), _ => null },
             appBar: AppBar(
               systemOverlayStyle: getUiOverlayStyle(context),
               title: Text(navigationLabels[_.selectedIndex]),
@@ -266,6 +292,7 @@ class _HomeState extends State<Home> with AfterLayoutMixin {
               // backgroundColor: Colors.pink,
               backgroundColor: colorScheme.background,
               actions: [
+                _.selectedIndex == 2 ? IconButton(onPressed: () => openSubscriptionManagement(context), icon: const Icon(Icons.checklist)) : const SizedBox.shrink(),
                 const AppBarDownloadButton(),
                 IconButton(
                   onPressed: () {
@@ -303,7 +330,10 @@ class _HomeState extends State<Home> with AfterLayoutMixin {
                       const Playlists(
                         key: ValueKey(3),
                         canDeleteVideos: true,
-                      )
+                      ),
+                      const HistoryView(
+                        key: ValueKey(4),
+                      ),
                     ][_.selectedIndex],
                   )
                 ])));

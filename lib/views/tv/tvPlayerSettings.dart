@@ -4,8 +4,6 @@ import 'package:get/get.dart';
 import 'package:invidious/controllers/tvPlayerSettingsController.dart';
 import 'package:invidious/views/tv/tvButton.dart';
 
-const TextStyle settingStyle = TextStyle(fontSize: 20);
-
 class TvPlayerSettings extends StatelessWidget {
   const TvPlayerSettings({Key? key}) : super(key: key);
 
@@ -47,7 +45,9 @@ class TvPlayerSettings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var locals = AppLocalizations.of(context)!;
+    var textTheme = Theme.of(context).textTheme;
     ColorScheme colors = Theme.of(context).colorScheme;
+    TextStyle? settingStyle = textTheme.titleLarge;
     return GetBuilder<TvPlayerSettingsController>(
         init: TvPlayerSettingsController(),
         global: false,
@@ -139,12 +139,13 @@ class TvSettingButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var textTheme = Theme.of(context).textTheme;
     return TvButton(
         unfocusedColor: Colors.transparent,
         onPressed: (context) => onPressed(label),
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
-          child: Text(label, style: settingStyle),
+          child: Text(label, style: textTheme.titleLarge),
         ));
   }
 }

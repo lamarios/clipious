@@ -56,6 +56,8 @@ const DELETE_USER_PLAYLIST = '/api/v1/auth/playlists/:id';
 const DELETE_USER_PLAYLIST_VIDEO = '/api/v1/auth/playlists/:id/videos/:index';
 const GET_PUBLIC_PLAYLIST = '/api/v1/playlists/:id';
 const GET_DISLIKES = 'https://returnyoutubedislikeapi.com/votes?videoId=';
+const GET_CLEAR_HISTORY = '/api/v1/auth/history';
+const ADD_DELETE_HISTORY = '/api/v1/auth/history/:id';
 
 const MAX_PING = 9007199254740991;
 
@@ -158,7 +160,7 @@ class Service {
   }
 
   Future<String?> logIn(String serverUrl) async {
-    String url = '$serverUrl/authorize_token?scopes=:feed,:subscriptions*,:playlists*&callback_url=clipious-auth://';
+    String url = '$serverUrl/authorize_token?scopes=:feed,:subscriptions*,:playlists*,:history*&callback_url=clipious-auth://';
     final result = await FlutterWebAuth.authenticate(url: url, callbackUrlScheme: 'clipious-auth');
 
     final token = Uri.parse(result).queryParameters['token'];
@@ -307,8 +309,8 @@ class Service {
     return db.isLoggedInToCurrentServer();
   }
 
-  Future<void> subscribe(String channelId) async {
-    if (!isLoggedIn()) return;
+  Future<bool> subscribe(String channelId) async {
+    if (!isLoggedIn()) return false;
 
     var currentlySelectedServer = db.getCurrentlySelectedServer();
 
@@ -316,10 +318,17 @@ class Service {
     var headers = getAuthenticationHeaders(currentlySelectedServer);
 
     final response = await http.post(url, headers: headers);
+    log.info('${response.statusCode} - ${response.body}');
+
+    if (response.statusCode == 204 || response.statusCode == 403) {
+      return response.statusCode == 204;
+    } else {
+      throw InvidiousServiceError("Couldn't subscribe to channel");
+    }
   }
 
-  Future<void> unSubscribe(String channelId) async {
-    if (!isLoggedIn()) return;
+  Future<bool> unSubscribe(String channelId) async {
+    if (!isLoggedIn()) return false;
 
     var currentlySelectedServer = db.getCurrentlySelectedServer();
 
@@ -328,10 +337,22 @@ class Service {
 
     final response = await http.delete(url, headers: headers);
     log.info('${response.statusCode} - ${response.body}');
+
+    if (response.statusCode == 204 || response.statusCode == 403) {
+      return response.statusCode == 204;
+    } else {
+      throw InvidiousServiceError("Couldn't subscribe to channel");
+    }
   }
 
   Future<bool> isSubscribedToChannel(String channelId) async {
     if (!isLoggedIn()) return false;
+
+    return (await getSubscriptions()).indexWhere((element) => element.authorId == channelId) > -1;
+  }
+
+  Future<List<Subscription>> getSubscriptions() async {
+    if (!isLoggedIn()) return [];
 
     var currentlySelectedServer = db.getCurrentlySelectedServer();
 
@@ -341,7 +362,7 @@ class Service {
     final response = await http.get(url, headers: headers);
     Iterable i = handleResponse(response);
 
-    return List<Subscription>.from(i.map((e) => Subscription.fromJson(e))).indexWhere((element) => element.authorId == channelId) > -1;
+    return List<Subscription>.from(i.map((e) => Subscription.fromJson(e)));
   }
 
   Future<VideoComments> getComments(String videoId, {String? continuation, String? sortBy, String? source}) async {
@@ -475,6 +496,52 @@ class Service {
     headers['Content-Type'] = 'application/json';
 
     final response = await http.delete(url, headers: headers);
+    handleResponse(response);
+  }
+
+  Future<List<String>> getUserHistory(int page, int maxResults) async {
+    var currentlySelectedServer = db.getCurrentlySelectedServer();
+
+    var url = buildUrl(GET_CLEAR_HISTORY, query: {'page': page.toString(), 'max_results': maxResults.toString()});
+    var headers = getAuthenticationHeaders(currentlySelectedServer);
+    headers['Content-Type'] = 'application/json';
+
+    final response = await http.get(url, headers: headers);
+    Iterable i = handleResponse(response);
+
+    return List<String>.from(i.map((e) => e as String));
+  }
+
+  Future<void> clearUserHistory() async {
+    var currentlySelectedServer = db.getCurrentlySelectedServer();
+
+    var url = buildUrl(GET_CLEAR_HISTORY);
+    var headers = getAuthenticationHeaders(currentlySelectedServer);
+    headers['Content-Type'] = 'application/json';
+
+    final response = await http.delete(url, headers: headers);
+    handleResponse(response);
+  }
+
+  Future<void> deleteFromUserHistory(String videoId) async {
+    var currentlySelectedServer = db.getCurrentlySelectedServer();
+
+    var url = buildUrl(ADD_DELETE_HISTORY, pathParams: {':id': videoId});
+    var headers = getAuthenticationHeaders(currentlySelectedServer);
+    headers['Content-Type'] = 'application/json';
+
+    final response = await http.delete(url, headers: headers);
+    handleResponse(response);
+  }
+
+  Future<void> addToUserHistory(String videoId) async {
+    var currentlySelectedServer = db.getCurrentlySelectedServer();
+
+    var url = buildUrl(ADD_DELETE_HISTORY, pathParams: {':id': videoId});
+    var headers = getAuthenticationHeaders(currentlySelectedServer);
+    headers['Content-Type'] = 'application/json';
+
+    final response = await http.post(url, headers: headers);
     handleResponse(response);
   }
 

@@ -14,9 +14,10 @@ import 'package:logging/logging.dart';
 import '../../controllers/downloadController.dart';
 import '../../models/baseVideo.dart';
 import '../../models/imageObject.dart';
+import '../../models/video.dart';
 import '../../utils.dart';
-import '../channel.dart';
 import '../video.dart';
+import '../video/videoMetrics.dart';
 
 class VideoListItem extends StatelessWidget {
   final VideoInList video;
@@ -39,7 +40,9 @@ class VideoListItem extends StatelessWidget {
     ColorScheme colorScheme = Theme.of(context).colorScheme;
     var locals = AppLocalizations.of(context)!;
 
-    TextStyle filterStyle = TextStyle(fontSize: 11, color: colorScheme.secondary.withOpacity(0.7));
+    var textTheme = Theme.of(context).textTheme;
+
+    TextStyle filterStyle = (textTheme.bodySmall ?? const TextStyle()).copyWith(color: colorScheme.secondary.withOpacity(0.7));
 
     var widget = GetBuilder(
       init: VideoInListController(video),
@@ -136,7 +139,7 @@ class VideoListItem extends StatelessWidget {
                                       padding: const EdgeInsets.all(4.0),
                                       child: Text(
                                         prettyDuration(Duration(seconds: video.lengthSeconds)),
-                                        style: const TextStyle(color: Colors.white, fontSize: 12),
+                                        style: textTheme.bodySmall?.copyWith(color: Colors.white),
                                       ),
                                     ),
                                   ),
@@ -148,6 +151,9 @@ class VideoListItem extends StatelessWidget {
                       ),
                     ),
                   ),
+            const SizedBox(
+              height: 4,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -161,14 +167,14 @@ class VideoListItem extends StatelessWidget {
                         _.video.filtered ? '**********' : video.title,
                         textAlign: TextAlign.left,
                         overflow: TextOverflow.ellipsis,
-                        maxLines: 1,
+                        maxLines: 2,
                         style: TextStyle(color: colorScheme.primary, fontWeight: FontWeight.normal),
                       ),
                       Visibility(
                         child: InkWell(
                           onTap: () {
                             log.fine('Opening channel ${video.authorId}');
-                            navigatorKey.currentState?.push(MaterialPageRoute(settings: ROUTE_CHANNEL, builder: (context) => ChannelView(channelId: video.authorId!)));
+                            navigatorKey.currentState?.pushNamed(PATH_CHANNEL, arguments: video.authorId);
                           },
                           child: Row(
                             children: [
@@ -180,29 +186,19 @@ class VideoListItem extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Row(
-                        children: [
-                          Visibility(visible: (video.viewCount ?? 0) > 0, child: const Icon(Icons.visibility)),
-                          Visibility(
-                              visible: (video.viewCount ?? 0) > 0,
-                              child: Padding(
-                                padding: const EdgeInsets.only(left: 5.0),
-                                child: Text(compactCurrency.format(video.viewCount)),
-                              )),
-                          Expanded(
-                              child: Text(
-                            video.publishedText ?? '',
-                            textAlign: TextAlign.end,
-                          )),
-                        ],
+                      VideoMetrics(
+                        viewCount: video.viewCount,
+                        publishedText: video.publishedText,
+                        style: textTheme.bodySmall,
+                        iconSize: 13,
                       )
                     ],
                   ),
                 ),
                 InkWell(
                   onTap: _.video.filtered ? null : () => VideoModalSheet.showVideoModalSheet(context, video, animateDownload: animateDownload),
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 4.0, top: 4),
+                  child: const Padding(
+                    padding: EdgeInsets.all(4),
                     child: Icon(Icons.more_vert),
                   ),
                 )

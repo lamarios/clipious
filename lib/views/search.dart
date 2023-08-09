@@ -3,8 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:invidious/models/searchType.dart';
 import 'package:invidious/models/videoInList.dart';
-import 'package:invidious/utils.dart';
-import 'package:invidious/views/channel.dart';
+import 'package:invidious/myRouteObserver.dart';
 import 'package:invidious/views/playlistList.dart';
 
 import '../controllers/playlistListController.dart';
@@ -13,6 +12,7 @@ import '../main.dart';
 import '../models/channel.dart';
 import '../models/paginatedList.dart';
 import '../models/playlist.dart';
+import '../utils.dart';
 import 'components/paginatedListView.dart';
 import 'videoList.dart';
 
@@ -133,9 +133,7 @@ class Search extends StatelessWidget {
                                   startItems: _.channels,
                                   itemBuilder: (e) => InkWell(
                                         onTap: () {
-                                          navigatorKey.currentState?.push(MaterialPageRoute(
-                                            builder: (context) => ChannelView(channelId: e.authorId),
-                                          ));
+                                          navigatorKey.currentState?.pushNamed(PATH_CHANNEL, arguments: e.authorId);
                                         },
                                         child: Padding(
                                           padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 20),

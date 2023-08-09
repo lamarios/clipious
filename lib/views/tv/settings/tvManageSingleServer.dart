@@ -17,6 +17,7 @@ class TvManageSingleServer extends StatelessWidget {
 
   void showLogInWithCookiesDialog(BuildContext context, ServerSettingsController controller) async {
     var locals = AppLocalizations.of(context)!;
+    var textTheme = Theme.of(context).textTheme;
     TextEditingController userController = TextEditingController();
     TextEditingController passwordController = TextEditingController();
     FocusNode focusNode = FocusNode();
@@ -88,7 +89,7 @@ class TvManageSingleServer extends StatelessWidget {
                 showTvAlertdialog(context, locals.error, [
                   Text(
                     locals.wrongUsernamePassword,
-                    style: const TextStyle(fontSize: 20),
+                    style: textTheme.titleLarge,
                   )
                 ]);
                 rethrow;

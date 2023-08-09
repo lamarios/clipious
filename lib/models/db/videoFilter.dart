@@ -162,8 +162,9 @@ class VideoFilter {
 
   String localizedLabel(AppLocalizations locals) {
     if (filterAll) {
-      return locals.videoFilterHideAllFromChannel;
+      return locals.videoFilterWholeChannel(hideFromFeed ? locals.videoFilterHideLabel : locals.videoFilterFilterLabel);
     } else if (type != null && operation != null) {
+      log.fine("Filter type $hideFromFeed");
       return locals.videoFilterDescriptionString(hideFromFeed ? locals.videoFilterHideLabel : locals.videoFilterFilterLabel, FilterType.localizedType(type!, locals).toLowerCase(),
           FilterOperation.localizedLabel(operation!, locals).toLowerCase(), value ?? '');
     } else {

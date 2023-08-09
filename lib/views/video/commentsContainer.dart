@@ -15,6 +15,7 @@ class CommentsContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     var locals = AppLocalizations.of(context)!;
     ColorScheme colorScheme = Theme.of(context).colorScheme;
+    var textTheme = Theme.of(context).textTheme;
 
     return GetBuilder<CommentsContainerController>(
       global: false,
@@ -27,7 +28,7 @@ class CommentsContainer extends StatelessWidget {
               Expanded(
                 child: Text(
                   locals.comments,
-                  style: TextStyle(color: colorScheme.secondary, fontSize: 20),
+                  style: textTheme.titleMedium?.copyWith(color: colorScheme.secondary),
                 ),
               ),
               DropdownButton<String>(
@@ -68,7 +69,7 @@ class CommentsContainer extends StatelessWidget {
 */
             ],
           ),
-          CommentsView(key: ValueKey<String>('comments-${_.sortBy}-${_.source}'), videoId: video.videoId, source: _.source, sortBy: _.sortBy),
+          CommentsView(key: ValueKey<String>('comments-${_.sortBy}-${_.source}'), video: video, source: _.source, sortBy: _.sortBy),
         ],
       ),
     );

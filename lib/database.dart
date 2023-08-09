@@ -1,5 +1,6 @@
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:invidious/controllers/settingsController.dart';
+import 'package:invidious/models/db/baseVideoCache.dart';
 import 'package:invidious/models/db/progress.dart';
 import 'package:invidious/models/db/searchHistoryItem.dart';
 import 'package:invidious/models/db/settings.dart';
@@ -218,5 +219,13 @@ class DbClient {
 
   DownloadedVideo? getDownloadByVideoId(String id) {
     return store.box<DownloadedVideo>().query(DownloadedVideo_.videoId.equals(id)).build().findFirst();
+  }
+
+  HistoryVideoCache? getHistoryVideoByVideoId(String videoId) {
+    return store.box<HistoryVideoCache>().query(HistoryVideoCache_.videoId.equals(videoId)).build().findFirst();
+  }
+
+  void upsertHistoryVideo(HistoryVideoCache vid) {
+    store.box<HistoryVideoCache>().put(vid);
   }
 }

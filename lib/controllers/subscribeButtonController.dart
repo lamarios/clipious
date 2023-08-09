@@ -15,13 +15,21 @@ class SubscribeButtonController extends GetxController {
   SubscribeButtonController({required this.channelId});
 
   toggleSubscription() async {
-    if (this.isSubscribed) {
-      await service.unSubscribe(channelId);
+    loading = true;
+    update();
+    bool wasSubscribed = this.isSubscribed;
+    bool success = false;
+    if (wasSubscribed) {
+      success = await service.unSubscribe(channelId);
     } else {
-      await service.subscribe(channelId);
+      success = await service.subscribe(channelId);
     }
     bool isSubscribed = await service.isSubscribedToChannel(channelId);
+    if (!success || isSubscribed == wasSubscribed) {
+      return toggleSubscription();
+    }
     this.isSubscribed = isSubscribed;
+    loading = false;
     update();
   }
 

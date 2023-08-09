@@ -67,7 +67,7 @@ class DownloadManager extends StatelessWidget {
                   )
                 : Padding(
                     padding: const EdgeInsets.all(16.0),
-                    child: Text(locals.noDownloadedVideos),
+                    child: Center(child: Text(locals.noDownloadedVideos)),
                   );
           },
         ),

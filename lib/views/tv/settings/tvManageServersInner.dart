@@ -22,6 +22,7 @@ class TvManageServersInner extends StatelessWidget {
 
   addServerDialog(BuildContext context, ServerListSettingsController controller) {
     var locals = AppLocalizations.of(context)!;
+    var textTheme = Theme.of(context).textTheme;
     FocusNode focusNode = FocusNode();
     showTvDialog(
       title: locals.addServer,
@@ -45,7 +46,7 @@ class TvManageServersInner extends StatelessWidget {
               await showTvAlertdialog(context, 'Error', [
                 Text(
                   locals.invalidInvidiousServer,
-                  style: const TextStyle(fontSize: 20),
+                  style: textTheme.titleLarge,
                 )
               ]);
             }

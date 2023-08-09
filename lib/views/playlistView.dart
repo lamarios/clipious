@@ -10,6 +10,7 @@ import 'package:invidious/myRouteObserver.dart';
 import 'package:invidious/utils.dart';
 import 'package:invidious/views/components/compactVideo.dart';
 import 'package:invidious/views/components/videoThumbnail.dart';
+import 'package:invidious/views/playlists/playlistThumbnail.dart';
 import 'package:invidious/views/video.dart';
 
 import '../controllers/playlistController.dart';
@@ -35,44 +36,6 @@ class PlaylistView extends StatelessWidget {
     });
   }
 
-  showPlayListVideoDialog(BuildContext context, PlaylistController controller, VideoInList v) {
-    showModalBottomSheet<void>(
-        context: context,
-        builder: (BuildContext context) {
-          var locals = AppLocalizations.of(context)!;
-          return SizedBox(
-            height: 100,
-            child: Center(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        IconButton(
-                          onPressed: () async {
-                            removeVideoFromPlayList(context, controller, v);
-                            Navigator.pop(context);
-                          },
-                          icon: const Icon(Icons.delete),
-                        ),
-                        Text(
-                          locals.removeFromPlayList,
-                          style: const TextStyle(fontSize: 10),
-                        )
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          );
-        });
-  }
-
   openVideo(String videoId) {
     navigatorKey.currentState?.push(MaterialPageRoute(
         settings: ROUTE_VIDEO,
@@ -94,38 +57,6 @@ class PlaylistView extends StatelessWidget {
         showAlertDialog(context, locals.error, [Text(err.message)]);
       }
     }
-  }
-
-  List<Widget> buildThumbnails(BuildContext context, PlaylistController _) {
-    List<Widget> thumbs = [];
-
-    ColorScheme colors = Theme.of(context).colorScheme;
-    List<VideoInList> videosToUse = _.playlist.videos.where((element) => !element.filtered).toList();
-    for (int i = 2; i >= 0; i--) {
-      // for (VideoInList video in playlist.videos) {
-      thumbs.add(Align(
-        alignment: Alignment(i * 0.5, i * 0.5),
-        child: FractionallySizedBox(
-          widthFactor: 0.8,
-          child: AspectRatio(
-            aspectRatio: 16 / 9,
-            child: Opacity(
-              opacity: 1 - (0.3 * i),
-              child: videosToUse.length > i
-                  ? VideoThumbnailView(
-                      videoId: videosToUse[i].videoId,
-                      thumbnailUrl: ImageObject.getBestThumbnail(videosToUse[i].videoThumbnails)?.url ?? '',
-                    )
-                  : Container(
-                      decoration: BoxDecoration(color: colors.secondaryContainer, borderRadius: BorderRadius.circular(10)),
-                    ),
-            ),
-          ),
-        ),
-      ));
-    }
-
-    return thumbs;
   }
 
   @override
@@ -173,23 +104,24 @@ class PlaylistView extends StatelessWidget {
                                   child: Padding(
                                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
                                       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                                        AspectRatio(
-                                            aspectRatio: 16 / 9,
-                                            child: Stack(
-                                              alignment: Alignment.center,
-                                              children: [
-                                                ...buildThumbnails(context, _),
-                                                PlayButton(
-                                                  onPressed: (isAudio) => _.play(isAudio),
-                                                ),
-                                                Positioned(
-                                                    right: 5,
-                                                    bottom: 3,
-                                                    child: AddToQueueButton(
-                                                      videos: _.playlist.videos,
-                                                    ))
-                                              ],
-                                            ))
+                                        SizedBox(
+                                          height: 250,
+                                          child: PlaylistThumbnails(
+                                            videos: _.playlist.videos,
+                                            bestThumbnails: true,
+                                            children: [
+                                              PlayButton(
+                                                onPressed: (isAudio) => _.play(isAudio),
+                                              ),
+                                              Positioned(
+                                                  right: 5,
+                                                  bottom: 3,
+                                                  child: AddToQueueButton(
+                                                    videos: _.playlist.videos,
+                                                  ))
+                                            ],
+                                          ),
+                                        )
                                       ]))),
                               Expanded(
                                   child: ListView(

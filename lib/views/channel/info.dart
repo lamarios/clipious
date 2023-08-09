@@ -20,7 +20,7 @@ class ChannelInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     var locals = AppLocalizations.of(context)!;
     ColorScheme colors = Theme.of(context).colorScheme;
-
+    var textTheme = Theme.of(context).textTheme;
     List<Widget> widgets = [
       SizedBox(
         height: 230,
@@ -43,7 +43,7 @@ class ChannelInfo extends StatelessWidget {
                   padding: const EdgeInsets.only(left: 8.0, top: 128),
                   child: Text(
                     channel.author ?? '',
-                    style: TextStyle(fontSize: 30, color: colors.primary),
+                    style: textTheme.titleLarge?.copyWith(color: colors.primary),
                   ),
                 ),
               ))
@@ -69,7 +69,7 @@ class ChannelInfo extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 8.0),
         child: Text(
           locals.latestVideos,
-          style: TextStyle(color: colors.secondary, fontSize: 20),
+          style: textTheme.titleMedium?.copyWith(color: colors.secondary),
         ),
       ),
     ];

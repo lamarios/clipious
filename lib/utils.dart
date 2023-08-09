@@ -34,7 +34,7 @@ String prettyDuration(Duration duration) {
   components.add('${minutes.toString().padLeft(2, '0')}:');
 
   var seconds = duration.inSeconds % 60;
-  components.add('${seconds.toString().padLeft(2, '0')}');
+  components.add(seconds.toString().padLeft(2, '0'));
   return components.join();
 }
 
@@ -82,6 +82,7 @@ void showSharingSheet(BuildContext context, ShareLinks links, {bool showTimestam
 
   showModalBottomSheet<void>(
     context: context,
+    showDragHandle: true,
     builder: (BuildContext context) {
       return StatefulBuilder(
         builder: (BuildContext context, StateSetter setState) {
@@ -174,7 +175,7 @@ int getGridCount(BuildContext context) {
 }
 
 double getGridAspectRatio(BuildContext context) {
-  return getGridCount(context) > 1 ? 16 / 15 : 16 / 12;
+  return getGridCount(context) > 1 ? 16 / 15 : 16 / 13;
 }
 
 okCancelDialog(BuildContext context, String title, String message, Function() onOk) {
@@ -223,13 +224,15 @@ showTvAlertdialog(BuildContext context, String title, List<Widget> body) {
 }
 
 showTvDialog({required BuildContext context, String? title, required List<Widget> Function(BuildContext context) builder, required List<Widget> actions}) {
+  var textTheme = Theme.of(context).textTheme;
+
   Navigator.of(context).push(MaterialPageRoute(
     builder: (context) {
       ColorScheme colors = Theme.of(context).colorScheme;
       return Scaffold(
         body: TvOverscan(
           child: Column(children: [
-            if (title != null) Text(title, style: TextStyle(color: colors.primary, fontSize: 25)) else SizedBox.shrink(),
+            if (title != null) Text(title, style: textTheme.titleLarge?.copyWith(color: colors.primary)),
             Expanded(
               child: ListView(
                 children: builder(context),

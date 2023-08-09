@@ -19,7 +19,7 @@ class VideoFilterItem extends StatelessWidget {
           decoration: BoxDecoration(color: colors.secondaryContainer, borderRadius: BorderRadius.circular(10)),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: filter.filterAll ? Text(locals.videoFilterHideAllFromChannel) : Text(filter.localizedLabel(locals)),
+            child: Text(filter.localizedLabel(locals)),
           )),
     );
   }
