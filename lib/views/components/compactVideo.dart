@@ -24,6 +24,7 @@ class CompactVideo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ColorScheme colors = Theme.of(context).colorScheme;
+    var textTheme = Theme.of(context).textTheme;
 
     String title = video?.title ?? offlineVideo?.title ?? '';
     String author = video?.author ?? offlineVideo?.author ?? '';
@@ -71,7 +72,7 @@ class CompactVideo extends StatelessWidget {
                               ),
                               Text(
                                 author,
-                                style: TextStyle(color: colors.secondary, fontSize: 10),
+                                style: textTheme.bodySmall?.copyWith(color: colors.secondary),
                               )
                             ],
                           ),

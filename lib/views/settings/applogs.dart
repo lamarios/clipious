@@ -14,6 +14,7 @@ class AppLogs extends StatelessWidget {
   Widget build(BuildContext context) {
     var locals = AppLocalizations.of(context)!;
     ColorScheme colors = Theme.of(context).colorScheme;
+    var textTheme = Theme.of(context).textTheme;
 
     return GetBuilder<AppLogsController>(
       global: false,
@@ -43,7 +44,7 @@ class AppLogs extends StatelessWidget {
                     return CheckboxListTile(
                       title: Text(
                         '${log.level ?? ''} - ${log.logger} - ${log.time}',
-                        style: TextStyle(fontSize: 10, color: colors.secondary),
+                        style: textTheme.labelSmall?.copyWith(color: colors.secondary),
                       ),
                       subtitle: Text('${log.message}${log.stacktrace != null ? '\n\n${log.stacktrace}' : ''}'),
                       dense: true,

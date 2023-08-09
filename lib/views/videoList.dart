@@ -44,7 +44,7 @@ class VideoList extends StatelessWidget {
           children: [
             Visibility(visible: _.loading, child: const SizedBox(height: 1, child: LinearProgressIndicator())),
             Expanded(
-              child: _.error != VideoListErrors.none
+              child: _.error != ItemListErrors.none
                   ? Container(
                       alignment: Alignment.center,
                       color: colorScheme.background,

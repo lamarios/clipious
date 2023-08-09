@@ -26,6 +26,7 @@ class VideoTabletInnerView extends StatelessWidget {
   Widget build(BuildContext context) {
     ColorScheme colorScheme = Theme.of(context).colorScheme;
     AppLocalizations locals = AppLocalizations.of(context)!;
+    var textTheme = Theme.of(context).textTheme;
 
     return GetBuilder(
       init: VideoInnerViewController(),
@@ -71,7 +72,7 @@ class VideoTabletInnerView extends StatelessWidget {
                             onTap: () => videoController.togglePlayRecommendedNext(!videoController.playRecommendedNext),
                             child: Text(
                               locals.addRecommendedToQueue,
-                              style: const TextStyle(fontSize: 11),
+                              style: textTheme.bodySmall,
                             ))
                       ],
                     ),

@@ -236,7 +236,7 @@ class VideoPlayerController extends PlayerController {
       // we get segments if there are any, no need to wait.
       setSponsorBlock();
 
-      if (startAt == null) {
+      if (startAt == null && !offline) {
         double progress = db.getVideoProgress(idedVideo.videoId);
         if (progress > 0 && progress < 0.90) {
           startAt = Duration(seconds: (offline ? offlineVideo!.lengthSeconds : video!.lengthSeconds * progress).floor());

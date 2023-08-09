@@ -18,7 +18,7 @@ const String coulnotLoadVideos = 'cannot-load-videos';
 class VideoController extends GetxController {
   final log = Logger('Video');
   Video? video;
-  int dislikes = 0;
+  int? dislikes;
   bool loadingVideo = true;
   bool autoplayOnLoad = db.getSettings(PLAYER_AUTOPLAY_ON_LOAD)?.value == 'true';
   bool playRecommendedNext = db.getSettings(PLAY_RECOMMENDED_NEXT)?.value == 'true';

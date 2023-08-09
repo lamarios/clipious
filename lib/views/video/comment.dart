@@ -9,14 +9,15 @@ import 'package:invidious/views/components/videoThumbnail.dart';
 import 'package:invidious/views/video/comments.dart';
 
 import '../../main.dart';
+import '../../models/baseVideo.dart';
 import '../../models/comment.dart';
 import '../../models/imageObject.dart';
 
 class SingleCommentView extends StatelessWidget {
   final Comment comment;
-  final String videoId;
+  final BaseVideo video;
 
-  const SingleCommentView({super.key, required this.comment, required this.videoId});
+  const SingleCommentView({super.key, required this.comment, required this.video});
 
   openChannel(BuildContext context, String authorId) {
     navigatorKey.currentState?.push(MaterialPageRoute(settings: ROUTE_CHANNEL, builder: (context) => ChannelView(channelId: authorId)));
@@ -26,6 +27,8 @@ class SingleCommentView extends StatelessWidget {
   Widget build(BuildContext context) {
     var locals = AppLocalizations.of(context)!;
     ColorScheme colors = Theme.of(context).colorScheme;
+    var textTheme = Theme.of(context).textTheme;
+
     return GetBuilder<SingleCommentController>(
       init: SingleCommentController(comment: comment),
       global: false,
@@ -94,7 +97,10 @@ class SingleCommentView extends StatelessWidget {
                       ),
                     ],
                   ),
-                  TextLinkified(text: _.comment.content),
+                  TextLinkified(
+                    text: _.comment.content,
+                    video: video,
+                  ),
                   Row(
                     children: [
                       Visibility(
@@ -123,14 +129,14 @@ class SingleCommentView extends StatelessWidget {
                                 child: Text(
                                   // locals.nReplies(comment.replies?.replyCount ?? 0).toString()),
                                   locals.nReplies(_.comment.replies?.replyCount ?? 0),
-                                  style: const TextStyle(fontSize: 10),
+                                  style: TextStyle(fontSize: textTheme.labelSmall?.fontSize),
                                 ))),
                       )),
                   Visibility(
                       visible: _.showingChildren,
                       child: CommentsView(
                         key: ValueKey('children-of-${_.comment.commentId}'),
-                        videoId: videoId,
+                        video: video,
                         continuation: _.comment.replies?.continuation,
                       ))
                 ],

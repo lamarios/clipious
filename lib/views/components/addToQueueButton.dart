@@ -13,6 +13,7 @@ class AddToQueueButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     AppLocalizations locals = AppLocalizations.of(context)!;
+    var textTheme = Theme.of(context).textTheme;
     return GetBuilder<AddToQueueButtonController>(
         init: AddToQueueButtonController(videos: videos),
         global: false,
@@ -30,7 +31,7 @@ class AddToQueueButton extends StatelessWidget {
                 ),
                 Text(
                   locals.addToQueueList,
-                  style: const TextStyle(fontSize: 11),
+                  style: TextStyle(fontSize: textTheme.labelSmall?.fontSize),
                 ),
               ],
             )));

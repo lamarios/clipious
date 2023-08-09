@@ -20,6 +20,8 @@ class AudioPlayer extends StatelessWidget {
   Widget build(BuildContext context) {
     ColorScheme colors = Theme.of(context).colorScheme;
     AppLocalizations locals = AppLocalizations.of(context)!;
+    var textTheme = Theme.of(context).textTheme;
+
     return GetBuilder<AudioPlayerController>(
       init: AudioPlayerController(offlineVideo: offlineVideo, video: video),
       builder: (_) {
@@ -62,7 +64,7 @@ class AudioPlayer extends StatelessWidget {
                                 ),
                                 Text(
                                   '${prettyDuration(_.audioPosition)} / ${prettyDuration(_.audioLength)}',
-                                  style: const TextStyle(fontSize: 10),
+                                  style: textTheme.bodySmall,
                                 ),
                               ],
                             ),

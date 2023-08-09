@@ -14,8 +14,10 @@ import 'package:logging/logging.dart';
 import '../../controllers/downloadController.dart';
 import '../../models/baseVideo.dart';
 import '../../models/imageObject.dart';
+import '../../models/video.dart';
 import '../../utils.dart';
 import '../video.dart';
+import '../video/videoMetrics.dart';
 
 class VideoListItem extends StatelessWidget {
   final VideoInList video;
@@ -38,7 +40,9 @@ class VideoListItem extends StatelessWidget {
     ColorScheme colorScheme = Theme.of(context).colorScheme;
     var locals = AppLocalizations.of(context)!;
 
-    TextStyle filterStyle = TextStyle(fontSize: 11, color: colorScheme.secondary.withOpacity(0.7));
+    var textTheme = Theme.of(context).textTheme;
+
+    TextStyle filterStyle = (textTheme.bodySmall ?? const TextStyle()).copyWith(color: colorScheme.secondary.withOpacity(0.7));
 
     var widget = GetBuilder(
       init: VideoInListController(video),
@@ -135,7 +139,7 @@ class VideoListItem extends StatelessWidget {
                                       padding: const EdgeInsets.all(4.0),
                                       child: Text(
                                         prettyDuration(Duration(seconds: video.lengthSeconds)),
-                                        style: const TextStyle(color: Colors.white, fontSize: 12),
+                                        style: textTheme.bodySmall?.copyWith(color: Colors.white),
                                       ),
                                     ),
                                   ),
@@ -182,21 +186,11 @@ class VideoListItem extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Row(
-                        children: [
-                          Visibility(visible: (video.viewCount ?? 0) > 0, child: const Icon(Icons.visibility)),
-                          Visibility(
-                              visible: (video.viewCount ?? 0) > 0,
-                              child: Padding(
-                                padding: const EdgeInsets.only(left: 5.0),
-                                child: Text(compactCurrency.format(video.viewCount)),
-                              )),
-                          Expanded(
-                              child: Text(
-                            video.publishedText ?? '',
-                            textAlign: TextAlign.end,
-                          )),
-                        ],
+                      VideoMetrics(
+                        viewCount: video.viewCount,
+                        publishedText: video.publishedText,
+                        style: textTheme.bodySmall,
+                        iconSize: 13,
                       )
                     ],
                   ),

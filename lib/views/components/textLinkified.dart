@@ -28,6 +28,7 @@ class TextLinkified extends StatelessWidget {
   }
 
   void openLink(LinkableElement link) {
+    print('CLICKED $video');
     if (link is UrlElement) {
       var uri = Uri.parse(link.url);
       if (YOUTUBE_HOSTS.contains(uri.host)) {

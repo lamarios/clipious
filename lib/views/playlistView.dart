@@ -36,44 +36,6 @@ class PlaylistView extends StatelessWidget {
     });
   }
 
-  showPlayListVideoDialog(BuildContext context, PlaylistController controller, VideoInList v) {
-    showModalBottomSheet<void>(
-        context: context,
-        builder: (BuildContext context) {
-          var locals = AppLocalizations.of(context)!;
-          return SizedBox(
-            height: 100,
-            child: Center(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        IconButton(
-                          onPressed: () async {
-                            removeVideoFromPlayList(context, controller, v);
-                            Navigator.pop(context);
-                          },
-                          icon: const Icon(Icons.delete),
-                        ),
-                        Text(
-                          locals.removeFromPlayList,
-                          style: const TextStyle(fontSize: 10),
-                        )
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          );
-        });
-  }
-
   openVideo(String videoId) {
     navigatorKey.currentState?.push(MaterialPageRoute(
         settings: ROUTE_VIDEO,

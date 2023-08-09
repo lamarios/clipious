@@ -13,6 +13,7 @@ class WelcomeWizard extends StatelessWidget {
   Widget build(BuildContext context) {
     var locals = AppLocalizations.of(context)!;
     ColorScheme colors = Theme.of(context).colorScheme;
+    var textTheme = Theme.of(context).textTheme;
 
     return GetBuilder<WelcomeWizardController>(
       init: WelcomeWizardController(),
@@ -30,7 +31,7 @@ class WelcomeWizard extends StatelessWidget {
               const SizedBox(width: 150, height: 150, child: AppIconImage()),
               Text(
                 'Clipious',
-                style: TextStyle(color: colors.primary, fontSize: 30),
+                style: textTheme.displaySmall?.copyWith(color: colors.primary),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),

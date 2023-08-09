@@ -16,6 +16,8 @@ class ManagerServersView extends StatelessWidget {
 
   showPublicServerActions(BuildContext context, ServerListSettingsController controller, Server server) {
     var locals = AppLocalizations.of(context)!;
+    var textTheme = Theme.of(context).textTheme;
+
     showModalBottomSheet<void>(
         showDragHandle: true,
         context: context,
@@ -41,7 +43,6 @@ class ManagerServersView extends StatelessWidget {
                         ),
                         Text(
                           locals.addServer,
-                          style: const TextStyle(fontSize: 10),
                         )
                       ],
                     ),
@@ -129,6 +130,7 @@ class ManagerServersView extends StatelessWidget {
     ColorScheme colorScheme = Theme.of(context).colorScheme;
     SettingsThemeData theme = settingsTheme(colorScheme);
     var locals = AppLocalizations.of(context)!;
+    var textTheme = Theme.of(context).textTheme;
 
     return GetBuilder<ServerListSettingsController>(
       init: ServerListSettingsController(),
@@ -164,7 +166,6 @@ class ManagerServersView extends StatelessWidget {
                             SettingsTile(
                               title: Text(
                                 locals.addServerHelpText,
-                                style: const TextStyle(fontSize: 12),
                               ),
                               enabled: false,
                             )
@@ -198,7 +199,7 @@ class ManagerServersView extends StatelessWidget {
                                         children: [
                                           Expanded(child: Text('${s.url} ')),
                                           Text((s.ping != null && s.ping!.compareTo(const Duration(seconds: pingTimeout)) == -1) ? '${s.ping?.inMilliseconds}ms' : '>${pingTimeout}s',
-                                              style: TextStyle(fontSize: 15, color: colorScheme.secondary))
+                                              style: textTheme.labelLarge?.copyWith(color: colorScheme.secondary))
                                         ],
                                       ),
                                       value: Row(

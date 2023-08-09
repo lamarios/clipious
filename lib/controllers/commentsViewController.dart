@@ -1,11 +1,12 @@
 import 'package:get/get.dart';
+import 'package:invidious/models/baseVideo.dart';
 import 'package:invidious/models/videoComments.dart';
 
 import '../globals.dart';
 import '../models/errors/invidiousServiceError.dart';
 
 class CommentsViewController extends GetxController {
-  String videoId;
+  final BaseVideo video;
   bool loadingComments = true;
   late VideoComments comments;
   bool continuationLoaded = false;
@@ -14,8 +15,8 @@ class CommentsViewController extends GetxController {
   String? source;
   String? sortBy;
 
-  CommentsViewController({required this.videoId, this.continuation, this.source, this.sortBy}) {
-    comments = VideoComments(0, this.videoId, '', []);
+  CommentsViewController({required this.video, this.continuation, this.source, this.sortBy}) {
+    comments = VideoComments(0, video.videoId, '', []);
   }
 
   @override
@@ -27,7 +28,7 @@ class CommentsViewController extends GetxController {
   loadMore() async {
     loadingComments = true;
     update();
-    VideoComments comments = await service.getComments(videoId, continuation: continuation);
+    VideoComments comments = await service.getComments(video.videoId, continuation: continuation);
 
     this.comments.comments.addAll(comments.comments);
     continuation = comments.continuation;
@@ -38,11 +39,11 @@ class CommentsViewController extends GetxController {
   getComments() async {
     error = '';
     loadingComments = true;
-    this.comments = VideoComments(0, videoId, '', []);
+    this.comments = VideoComments(0, video.videoId, '', []);
     update();
 
     try {
-      VideoComments comments = await service.getComments(videoId, continuation: continuation, sortBy: sortBy, source: source);
+      VideoComments comments = await service.getComments(video.videoId, continuation: continuation, sortBy: sortBy, source: source);
       this.comments = comments;
       loadingComments = false;
       continuation = comments.continuation;

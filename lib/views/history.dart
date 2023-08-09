@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_swipe_action_cell/core/cell.dart';
 import 'package:get/get.dart';
+import 'package:invidious/controllers/videoListController.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/views/history/historyVideo.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -26,38 +27,48 @@ class HistoryView extends StatelessWidget {
                       minHeight: 2,
                     )
                   : const SizedBox.shrink(),
-              _.items.isEmpty
+              _.error != ItemListErrors.none
                   ? Expanded(
                       child: Center(
-                        child: Text(locals.noHistory),
-                      ),
-                    )
-                  : Expanded(
-                      child: SmartRefresher(
-                        controller: _.refreshController,
-                        onRefresh: _.refreshItems,
-                        child: ListView.builder(
-                          controller: _.scrollController,
-                          itemCount: _.items.length,
-                          itemBuilder: (context, index) => Padding(
-                            padding: EdgeInsets.only(bottom: index == _.items.length - 1 ? 70.0 : 0),
-                            child: SwipeActionCell(
-                                key: ValueKey(_.items[index]),
-                                trailingActions: [
-                                  SwipeAction(
-                                    performsFirstActionWithFullSwipe: true,
-                                    icon: const Icon(Icons.delete, color: Colors.white),
-                                    onTap: (handler) async {
-                                      await handler(true);
-                                      _.removeFromHistory(_.items[index]);
-                                    },
-                                  )
-                                ],
-                                child: HistoryVideoView(videoId: _.items[index])),
+                          child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(switch (_.error) { ItemListErrors.invalidScope => locals.itemListErrorInvalidScope, _ => locals.itemlistErrorGeneric }),
+                    )))
+                  : _.items.isEmpty
+                      ? Expanded(
+                          child: Center(
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(locals.noHistory),
+                            ),
+                          ),
+                        )
+                      : Expanded(
+                          child: SmartRefresher(
+                            controller: _.refreshController,
+                            onRefresh: _.refreshItems,
+                            child: ListView.builder(
+                              controller: _.scrollController,
+                              itemCount: _.items.length,
+                              itemBuilder: (context, index) => Padding(
+                                padding: EdgeInsets.only(bottom: index == _.items.length - 1 ? 70.0 : 0),
+                                child: SwipeActionCell(
+                                    key: ValueKey(_.items[index]),
+                                    trailingActions: [
+                                      SwipeAction(
+                                        performsFirstActionWithFullSwipe: true,
+                                        icon: const Icon(Icons.delete, color: Colors.white),
+                                        onTap: (handler) async {
+                                          await handler(true);
+                                          _.removeFromHistory(_.items[index]);
+                                        },
+                                      )
+                                    ],
+                                    child: HistoryVideoView(videoId: _.items[index])),
+                              ),
+                            ),
                           ),
                         ),
-                      ),
-                    ),
             ],
           );
         });

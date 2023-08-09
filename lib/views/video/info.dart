@@ -34,6 +34,8 @@ class VideoInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     var locals = AppLocalizations.of(context)!;
     ColorScheme colorScheme = Theme.of(context).colorScheme;
+    var textTheme = Theme.of(context).textTheme;
+
     return Padding(
       padding: const EdgeInsets.only(bottom: 8.0),
       child: Column(
@@ -41,7 +43,7 @@ class VideoInfo extends StatelessWidget {
         children: [
           Text(
             video.title,
-            style: TextStyle(color: colorScheme.primary, fontWeight: FontWeight.normal, fontSize: 20),
+            style: textTheme.titleLarge?.copyWith(color: colorScheme.primary),
             textAlign: TextAlign.start,
           ),
           Padding(
@@ -49,7 +51,7 @@ class VideoInfo extends StatelessWidget {
             child: VideoMetrics(
               video: video,
               dislikes: dislikes,
-              style: const TextStyle(fontSize: 12),
+              style: textTheme.bodyMedium,
               iconSize: 15,
             ),
           ),

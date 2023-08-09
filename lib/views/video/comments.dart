@@ -4,26 +4,29 @@ import 'package:get/get.dart';
 import 'package:invidious/controllers/commentsViewController.dart';
 import 'package:invidious/views/video/comment.dart';
 
+import '../../models/baseVideo.dart';
+
 class CommentsView extends StatelessWidget {
-  final String videoId;
+  final BaseVideo video;
   final String? continuation;
   final String? source;
   final String? sortBy;
 
-  CommentsView({super.key, required this.videoId, this.continuation, this.source, this.sortBy});
+  CommentsView({super.key, required this.video, this.continuation, this.source, this.sortBy});
 
   @override
   Widget build(BuildContext context) {
     var locals = AppLocalizations.of(context)!;
+    var textTheme = Theme.of(context).textTheme;
     return GetBuilder<CommentsViewController>(
         global: false,
-        init: CommentsViewController(videoId: videoId, sortBy: sortBy, source: source, continuation: continuation),
+        init: CommentsViewController(video: video, sortBy: sortBy, source: source, continuation: continuation),
         builder: (_) {
           List<Widget> widgets = [];
 
           widgets.addAll(_.comments.comments
               .map((c) => SingleCommentView(
-                    videoId: videoId,
+                    video: video,
                     comment: c,
                   ))
               .toList(growable: true));
@@ -38,7 +41,7 @@ class CommentsView extends StatelessWidget {
                         onPressed: _.loadMore,
                         child: Text(
                           locals.loadMore,
-                          style: const TextStyle(fontSize: 10),
+                          style: TextStyle(fontSize: textTheme.labelSmall?.fontSize),
                         ))),
               ),
             );

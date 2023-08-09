@@ -16,6 +16,7 @@ class TvPlaylistGridView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var locals = AppLocalizations.of(context)!;
+    var textTheme = Theme.of(context).textTheme;
     return Scaffold(
       body: TvOverscan(
         child: GetBuilder<PlaylistListController>(
@@ -29,7 +30,7 @@ class TvPlaylistGridView extends StatelessWidget {
                     children: [
                       Text(
                         locals.playlists,
-                        style: const TextStyle(fontSize: 20),
+                        style: textTheme.titleLarge,
                       ),
                       _.loading
                           ? const Padding(

@@ -8,6 +8,7 @@ import '../models/db/baseVideoCache.dart';
 
 class HistoryController extends ItemListController<String> {
   static HistoryController? to() => safeGet();
+  String? historyError;
 
   HistoryController({required super.itemList});
 

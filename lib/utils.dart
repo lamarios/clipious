@@ -224,13 +224,15 @@ showTvAlertdialog(BuildContext context, String title, List<Widget> body) {
 }
 
 showTvDialog({required BuildContext context, String? title, required List<Widget> Function(BuildContext context) builder, required List<Widget> actions}) {
+  var textTheme = Theme.of(context).textTheme;
+
   Navigator.of(context).push(MaterialPageRoute(
     builder: (context) {
       ColorScheme colors = Theme.of(context).colorScheme;
       return Scaffold(
         body: TvOverscan(
           child: Column(children: [
-            if (title != null) Text(title, style: TextStyle(color: colors.primary, fontSize: 25)) else SizedBox.shrink(),
+            if (title != null) Text(title, style: textTheme.titleLarge?.copyWith(color: colors.primary)),
             Expanded(
               child: ListView(
                 children: builder(context),

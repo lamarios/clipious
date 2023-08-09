@@ -70,7 +70,6 @@ class TvHome extends StatelessWidget {
     ColorScheme colors = Theme.of(context).colorScheme;
     TextTheme textTheme = Theme.of(context).textTheme;
     var locals = AppLocalizations.of(context)!;
-    const TextStyle titleStyle = TextStyle(fontSize: 20);
     bool isLoggedIn = service.isLoggedIn();
 
     return Scaffold(

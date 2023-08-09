@@ -16,6 +16,7 @@ class TvGridView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var textTheme = Theme.of(context).textTheme;
     return Scaffold(
       body: TvOverscan(
         child: GetBuilder<VideoListController>(
@@ -29,7 +30,7 @@ class TvGridView extends StatelessWidget {
                     children: [
                       Text(
                         title,
-                        style: const TextStyle(fontSize: 20),
+                        style: textTheme.titleLarge,
                       ),
                       _.loading
                           ? const Padding(

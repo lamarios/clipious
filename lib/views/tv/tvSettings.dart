@@ -236,6 +236,7 @@ class SettingsTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var textTheme = Theme.of(context).textTheme;
     return Padding(
       padding: const EdgeInsets.only(
         left: 16.0,
@@ -243,7 +244,7 @@ class SettingsTitle extends StatelessWidget {
       ),
       child: Text(
         title,
-        style: const TextStyle(fontSize: 20),
+        style: textTheme.titleMedium,
       ),
     );
   }

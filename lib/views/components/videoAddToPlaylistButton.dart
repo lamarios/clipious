@@ -11,6 +11,7 @@ class VideoAddToPlaylistButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var textTheme = Theme.of(context).textTheme;
     return GetBuilder<AddToPlaylistButtonController>(
       tag: AddToPlaylistButtonController.tags(videoId ?? ''),
       init: AddToPlaylistButtonController(videoId: videoId),
@@ -21,17 +22,17 @@ class VideoAddToPlaylistButton extends StatelessWidget {
             IconButton(
               style: ButtonStyle(padding: MaterialStateProperty.all<EdgeInsets>(EdgeInsets.zero)),
               onPressed: () => AddToPlaylist.showAddToPlaylistDialog(context, _.videoId!),
-              icon: Icon(
+              icon: const Icon(
                 Icons.add,
               ),
             ),
             _.playListCount > 0
                 ? Positioned(
-                    top: 10,
-                    right: 10,
+                    top: 8,
+                    right: 8,
                     child: Text(
                       _.playListCount.toString(),
-                      style: const TextStyle(fontSize: 8),
+                      style: textTheme.labelSmall,
                     ),
                   )
                 : const SizedBox.shrink()
