@@ -8,6 +8,7 @@ import 'package:invidious/globals.dart';
 import 'package:invidious/models/imageObject.dart';
 import 'package:invidious/models/paginatedList.dart';
 import 'package:invidious/models/videoInList.dart';
+import 'package:invidious/views/components/placeholders.dart';
 import 'package:invidious/views/tv/tvExpandableText.dart';
 import 'package:invidious/views/tv/tvHome.dart';
 import 'package:invidious/views/tv/tvHorizontalVideoList.dart';
@@ -149,6 +150,7 @@ class TvChannelView extends StatelessWidget {
                                             )
                                           : const SizedBox.shrink(),
                                       TvHorizontalItemList<Playlist>(
+                                        getPlaceholder: () => const TvPlaylistPlaceHolder(),
                                         paginatedList: ContinuationList<Playlist>((continuation) => service.getChannelPlaylists(_.channel?.authorId ?? '', continuation: continuation).then((value) {
                                               _.setHasPlaylists(value.playlists.isNotEmpty);
                                               return value;

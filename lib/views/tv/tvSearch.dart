@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:invidious/models/paginatedList.dart';
 import 'package:invidious/models/playlist.dart';
 import 'package:invidious/models/searchType.dart';
+import 'package:invidious/views/components/placeholders.dart';
 import 'package:invidious/views/playlists/playlist.dart';
 import 'package:invidious/views/tv/tvButton.dart';
 import 'package:invidious/views/tv/tvChannelView.dart';
@@ -133,6 +134,7 @@ class TvSearch extends StatelessWidget {
                                               child: SizedBox(
                                                 height: 60,
                                                 child: TvHorizontalPaginatedListView<Channel>(
+                                                  getPlaceHolder: () => const TvChannelPlaceholder(),
                                                   paginatedList: SearchPaginatedList<Channel>(
                                                       getFromResults: (res) => res.channels, sortBy: _.sortBy, query: _.queryController.value.text, items: _.channels, type: SearchType.channel),
                                                   startItems: _.channels,
@@ -164,6 +166,7 @@ class TvSearch extends StatelessWidget {
                                             Visibility(
                                               visible: _.playlists.isNotEmpty ?? false,
                                               child: TvHorizontalItemList<Playlist>(
+                                                getPlaceholder: () => const TvPlaylistPlaceHolder(),
                                                 paginatedList: SearchPaginatedList<Playlist>(
                                                     getFromResults: (res) => res.playlists, sortBy: _.sortBy, query: _.queryController.value.text, items: _.playlists, type: SearchType.playlist),
                                                 buildItem: (context, index, item) => Padding(

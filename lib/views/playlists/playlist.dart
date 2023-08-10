@@ -97,39 +97,35 @@ class PlaylistItem extends StatelessWidget {
         } else {
           return InkWell(
             onTap: () => openPlayList(context),
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                          height: 95,
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: PlaylistThumbnails(videos: videosToUse, bestThumbnails: isTv),
-                          )),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Text(
-                              playlist.title,
-                              overflow: TextOverflow.ellipsis,
-                              maxLines: 2,
-                              style: TextStyle(color: colors.primary),
-                            ),
-                            Text(locals.nVideos(playlist.videoCount)),
-                          ],
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SizedBox(
+                      height: 95,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: PlaylistThumbnails(videos: videosToUse, bestThumbnails: isTv),
+                      )),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Text(
+                          playlist.title,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 2,
+                          style: TextStyle(color: colors.primary),
                         ),
-                      )
-                    ],
-                  ),
-                ),
-              ],
+                        Text(locals.nVideos(playlist.videoCount)),
+                      ],
+                    ),
+                  )
+                ],
+              ),
             ),
           );
         }

@@ -8,8 +8,9 @@ class TvHorizontalPaginatedListView<T> extends StatelessWidget {
   final PaginatedList<T> paginatedList;
   final List<T>? startItems;
   final Widget Function(T item) itemBuilder;
+  final Widget Function() getPlaceHolder;
 
-  const TvHorizontalPaginatedListView({Key? key, required this.paginatedList, required this.itemBuilder, this.startItems}) : super(key: key);
+  const TvHorizontalPaginatedListView({Key? key, required this.paginatedList, required this.itemBuilder, this.startItems, required this.getPlaceHolder}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,11 +27,8 @@ class TvHorizontalPaginatedListView<T> extends StatelessWidget {
                 ListView.builder(
                   controller: _.scrollController,
                   scrollDirection: Axis.horizontal,
-                  itemCount: _.items.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    T item = _.items[index];
-                    return itemBuilder(item);
-                  },
+                  itemCount: _.items.length + (_.loading ? 10 : 0),
+                  itemBuilder: (BuildContext context, int index) => index >= _.items.length ? getPlaceHolder() : itemBuilder(_.items[index]),
                 ),
               ],
             ));

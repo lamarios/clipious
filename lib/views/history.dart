@@ -10,6 +10,7 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 import '../controllers/historyController.dart';
 import '../models/paginatedList.dart';
 import '../utils.dart';
+import 'components/placeholders.dart';
 
 class HistoryView extends StatelessWidget {
   const HistoryView({super.key});
@@ -20,6 +21,7 @@ class HistoryView extends StatelessWidget {
     return GetBuilder<HistoryController>(
         init: HistoryController(itemList: PageBasedPaginatedList<String>(getItemsFunc: service.getUserHistory, maxResults: 20)),
         builder: (_) {
+          bool showPlaceholder = _.loading && _.items.isEmpty;
           return Stack(
             children: [
               _.error != ItemListErrors.none
@@ -28,7 +30,7 @@ class HistoryView extends StatelessWidget {
                       padding: const EdgeInsets.all(8.0),
                       child: Text(switch (_.error) { ItemListErrors.invalidScope => locals.itemListErrorInvalidScope, _ => locals.itemlistErrorGeneric }),
                     ))
-                  : _.items.isEmpty
+                  : !_.loading && _.items.isEmpty
                       ? Center(
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
@@ -40,22 +42,24 @@ class HistoryView extends StatelessWidget {
                           onRefresh: _.refreshItems,
                           child: ListView.builder(
                             controller: _.scrollController,
-                            itemCount: _.items.length,
+                            itemCount: _.items.length + (_.loading ? 10 : 0),
                             itemBuilder: (context, index) => Padding(
                               padding: EdgeInsets.only(bottom: index == _.items.length - 1 ? 70.0 : 0),
-                              child: SwipeActionCell(
-                                  key: ValueKey(_.items[index]),
-                                  trailingActions: [
-                                    SwipeAction(
-                                      performsFirstActionWithFullSwipe: true,
-                                      icon: const Icon(Icons.delete, color: Colors.white),
-                                      onTap: (handler) async {
-                                        await handler(true);
-                                        _.removeFromHistory(_.items[index]);
-                                      },
-                                    )
-                                  ],
-                                  child: HistoryVideoView(videoId: _.items[index])),
+                              child: index >= _.items.length
+                                  ? const CompactVideoPlaceHolder()
+                                  : SwipeActionCell(
+                                      key: ValueKey(_.items[index]),
+                                      trailingActions: [
+                                        SwipeAction(
+                                          performsFirstActionWithFullSwipe: true,
+                                          icon: const Icon(Icons.delete, color: Colors.white),
+                                          onTap: (handler) async {
+                                            await handler(true);
+                                            _.removeFromHistory(_.items[index]);
+                                          },
+                                        )
+                                      ],
+                                      child: HistoryVideoView(videoId: _.items[index])),
                             ),
                           ),
                         ),

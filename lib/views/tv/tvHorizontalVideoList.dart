@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:invidious/controllers/videoListController.dart';
+import 'package:invidious/views/components/placeholders.dart';
 import 'package:invidious/views/tv/tvVideoItem.dart';
 
 import '../../models/paginatedList.dart';
@@ -8,10 +9,11 @@ import '../../models/videoInList.dart';
 
 class TvHorizontalItemList<T> extends StatelessWidget {
   final PaginatedList<T> paginatedList;
+  final Widget Function() getPlaceholder;
   final String? tags;
   final Widget Function(BuildContext context, int index, T item) buildItem;
 
-  const TvHorizontalItemList({Key? key, this.tags, required this.paginatedList, required this.buildItem}) : super(key: key);
+  const TvHorizontalItemList({Key? key, this.tags, required this.paginatedList, required this.buildItem, required this.getPlaceholder}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,29 +21,32 @@ class TvHorizontalItemList<T> extends StatelessWidget {
       global: tags != null,
       tag: tags,
       init: ItemListController(itemList: paginatedList),
-      builder: (_) => _.items.isNotEmpty
-          ? Stack(
-              children: [
-                _.loading
-                    ? const LinearProgressIndicator(
-                        minHeight: 3,
-                      )
-                    : const SizedBox.shrink(),
-                SizedBox(
+      builder: (_) => Stack(
+        children: [
+          if (_.loading)
+            const LinearProgressIndicator(
+              minHeight: 3,
+            ),
+          !_.loading && _.items.isEmpty
+              ? SizedBox.shrink()
+              : SizedBox(
                   height: 250,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
                     controller: _.scrollController,
-                    itemCount: _.items.length,
+                    itemCount: _.items.length + (_.loading ? 10 : 0),
                     itemBuilder: (context, index) {
+                      if (index >= _.items.length) {
+                        print('GETTING PLACE Oodsfsd');
+                        return getPlaceholder();
+                      }
                       T e = _.items[index];
                       return buildItem(context, index, e);
                     },
                   ),
                 ),
-              ],
-            )
-          : const SizedBox.shrink(),
+        ],
+      ),
     );
   }
 }
@@ -57,6 +62,7 @@ class TvHorizontalVideoList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TvHorizontalItemList<VideoInList>(
+      getPlaceholder: () => const TvVideoItemPlaceHolder(),
       paginatedList: paginatedVideoList,
       buildItem: (context, index, e) => TvVideoItem(
         key: ValueKey('video-item-${e.videoId}'),

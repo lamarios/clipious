@@ -36,8 +36,8 @@ class PlaylistListController extends GetxController {
   onScrollEvent() {
     if (paginatedList.getHasMore()) {
       if (scrollController.hasClients) {
-        if (scrollController.position.maxScrollExtent == scrollController.offset) {
-          EasyDebounce.debounce('get-more-playlists', const Duration(milliseconds: 250), getMorePlaylists);
+        if (scrollController.position.maxScrollExtent * 0.9 == scrollController.offset) {
+          EasyDebounce.debounce('get-more-playlists', const Duration(milliseconds: 500), getMorePlaylists);
         }
       }
     }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:invidious/models/paginatedList.dart';
+import 'package:invidious/views/components/placeholders.dart';
 import 'package:invidious/views/tv/tvOverScan.dart';
 import 'package:invidious/views/tv/tvVideoItem.dart';
 
@@ -50,7 +51,7 @@ class TvGridView extends StatelessWidget {
                     controller: _.scrollController,
                     childAspectRatio: 16 / 13,
                     crossAxisCount: 3,
-                    children: _.items.map((e) => TvVideoItem(video: e, autoFocus: false)).toList(),
+                    children: [..._.items.map((e) => TvVideoItem(video: e, autoFocus: false)).toList(), if (_.loading) ...repeatWidget(() => const TvVideoItemPlaceHolder(), count: 10)],
                   ))
                 ],
               );

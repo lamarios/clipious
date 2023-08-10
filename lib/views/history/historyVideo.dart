@@ -7,6 +7,7 @@ import 'package:invidious/views/components/compactVideo.dart';
 import 'package:invidious/views/video.dart';
 
 import '../../controllers/historyController.dart';
+import '../components/placeholders.dart';
 
 class HistoryVideoView extends StatelessWidget {
   final String videoId;

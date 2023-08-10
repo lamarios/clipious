@@ -42,7 +42,7 @@ class HistoryItemController extends GetxController {
     cachedVid = db.getHistoryVideoByVideoId(videoId);
     if (cachedVid == null) {
       var vid = await service.getVideo(videoId);
-      cachedVid = HistoryVideoCache(vid.videoId, vid.title, vid.author, ImageObject.getBestThumbnail(vid.videoThumbnails)?.url ?? '');
+      cachedVid = HistoryVideoCache(vid.videoId, vid.title, vid.author, ImageObject.getWorstThumbnail(vid.videoThumbnails)?.url ?? '');
       db.upsertHistoryVideo(cachedVid!);
     }
 

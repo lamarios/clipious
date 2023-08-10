@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:invidious/globals.dart';
+import 'package:invidious/views/components/placeholders.dart';
 
 import '../../models/baseVideo.dart';
 import '../../models/imageObject.dart';
@@ -11,8 +12,9 @@ class PlaylistThumbnails extends StatelessWidget {
   final bool bestThumbnails;
   final double scale = 0.7;
   final int maxThumbs;
+  final bool isPlaceHolder;
 
-  const PlaylistThumbnails({super.key, required this.videos, this.children, this.bestThumbnails = false, this.maxThumbs = 4});
+  const PlaylistThumbnails({super.key, required this.videos, this.children, this.bestThumbnails = false, this.maxThumbs = 4, this.isPlaceHolder = false});
 
   List<Widget> getThumbs(BuildContext context, BoxConstraints constraints) {
     var thumbs = <Widget>[];
@@ -34,17 +36,26 @@ class PlaylistThumbnails extends StatelessWidget {
                 opacity: 1 - (i / (maxThumbs)),
                 child: AnimatedCrossFade(
                   duration: animationDuration,
-                  firstChild: videosToUse.length > i
-                      ? VideoThumbnailView(
-                          cacheKey: 'v-${bestThumbnails ? 'best' : 'worst'}/${videosToUse[i].videoId}',
-                          videoId: videosToUse[i].videoId,
-                          thumbnailUrl: (bestThumbnails ? ImageObject.getBestThumbnail(videosToUse[i].videoThumbnails)?.url : ImageObject.getWorstThumbnail(videosToUse[i].videoThumbnails)?.url) ?? '',
+                  firstChild: isPlaceHolder
+                      ? const ThumbnailPlaceHolder(
+                          borderRadius: 10,
                         )
-                      : const SizedBox.shrink(),
+                      : videosToUse.length > i
+                          ? VideoThumbnailView(
+                              cacheKey: 'v-${bestThumbnails ? 'best' : 'worst'}/${videosToUse[i].videoId}',
+                              videoId: videosToUse[i].videoId,
+                              thumbnailUrl:
+                                  (bestThumbnails ? ImageObject.getBestThumbnail(videosToUse[i].videoThumbnails)?.url : ImageObject.getWorstThumbnail(videosToUse[i].videoThumbnails)?.url) ?? '',
+                            )
+                          : const SizedBox.shrink(),
                   secondChild: Container(
                     decoration: BoxDecoration(color: colors.secondaryContainer, borderRadius: BorderRadius.circular(10)),
                   ),
-                  crossFadeState: videosToUse.length > i ? CrossFadeState.showFirst : CrossFadeState.showSecond,
+                  crossFadeState: isPlaceHolder
+                      ? CrossFadeState.showFirst
+                      : videosToUse.length > i
+                          ? CrossFadeState.showFirst
+                          : CrossFadeState.showSecond,
                 ),
               ),
             ),
