@@ -14,7 +14,6 @@ import 'package:logging/logging.dart';
 import '../../controllers/downloadController.dart';
 import '../../models/baseVideo.dart';
 import '../../models/imageObject.dart';
-import '../../models/video.dart';
 import '../../utils.dart';
 import '../video.dart';
 import '../video/videoMetrics.dart';

@@ -9,6 +9,7 @@ import 'package:invidious/views/playlists/playlist.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../globals.dart';
+import 'components/placeholders.dart';
 
 class PlaylistList extends StatelessWidget {
   final PaginatedList<Playlist> paginatedList;
@@ -25,21 +26,21 @@ class PlaylistList extends StatelessWidget {
       tag: PlaylistListController.getTag(tag!),
       global: tag != null,
       init: PlaylistListController(paginatedList),
-      builder: (_) => Stack(
-        children: [
-          _.error.isNotEmpty
-              ? Container(
-                  alignment: Alignment.center,
-                  color: colorScheme.background,
-                  child: Visibility(visible: _.error.isNotEmpty, child: InkWell(onTap: () => _.getPlaylists(), child: Text(_.error == couldNotGetPlaylits ? locals.couldntFetchVideos : _.error))),
-                )
-              : Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: FadeIn(
-                    duration: animationDuration,
-                    curve: Curves.easeInOutQuad,
-                    child: Visibility(
-                      visible: _.playlists.isNotEmpty,
+      builder: (_) {
+        bool showPlaceHolder = _.loading && _.playlists.isEmpty;
+        return Stack(
+          children: [
+            _.error.isNotEmpty
+                ? Container(
+                    alignment: Alignment.center,
+                    color: colorScheme.background,
+                    child: Visibility(visible: _.error.isNotEmpty, child: InkWell(onTap: () => _.getPlaylists(), child: Text(_.error == couldNotGetPlaylits ? locals.couldntFetchVideos : _.error))),
+                  )
+                : Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: FadeIn(
+                      duration: animationDuration,
+                      curve: Curves.easeInOutQuad,
                       child: SmartRefresher(
                         controller: _.refreshController,
                         enablePullDown: _.paginatedList.hasRefresh(),
@@ -47,16 +48,17 @@ class PlaylistList extends StatelessWidget {
                         onRefresh: _.refreshPlaylists,
                         child: ListView.builder(
                             controller: _.scrollController,
-                            itemBuilder: (context, index) => PlaylistItem(playlist: _.playlists[index], canDeleteVideos: canDeleteVideos),
+                            itemBuilder: (context, index) =>
+                                showPlaceHolder ? const PlaylistPlaceHolder() : FadeIn(child: PlaylistItem(playlist: _.playlists[index], canDeleteVideos: canDeleteVideos)),
                             // separatorBuilder: (context, index) => const Divider(),
-                            itemCount: _.playlists.length),
+                            itemCount: showPlaceHolder ? 10 : _.playlists.length),
                       ),
                     ),
                   ),
-                ),
-          Visibility(visible: _.loading, child: const SizedBox(height: 1, child: LinearProgressIndicator())),
-        ],
-      ),
+            Visibility(visible: _.loading, child: const SizedBox(height: 1, child: LinearProgressIndicator())),
+          ],
+        );
+      },
     );
   }
 }

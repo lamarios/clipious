@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:invidious/controllers/videoListController.dart';
 import 'package:invidious/models/videoInList.dart';
 import 'package:invidious/utils.dart';
+import 'package:invidious/views/components/placeholders.dart';
 import 'package:invidious/views/videoList/singleVideo.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -40,6 +41,7 @@ class VideoList extends StatelessWidget {
       builder: (_) {
         var items = _.filteredItems;
         return Stack(
+          alignment: Alignment.topCenter,
           children: [
             Visibility(visible: _.loading, child: const SizedBox(height: 1, child: LinearProgressIndicator())),
             _.error != ItemListErrors.none
@@ -50,28 +52,25 @@ class VideoList extends StatelessWidget {
                   )
                 : Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: FadeIn(
-                      duration: animationDuration,
-                      curve: Curves.easeInOutQuad,
-                      child: Visibility(
-                        visible: items.isNotEmpty,
-                        child: SmartRefresher(
-                          controller: _.refreshController,
-                          enablePullDown: _.itemList.hasRefresh(),
-                          enablePullUp: false,
-                          onRefresh: _.refreshItems,
-                          child: GridView.count(
-                              crossAxisCount: getGridCount(context),
-                              controller: _.scrollController,
-                              padding: const EdgeInsets.all(4),
-                              crossAxisSpacing: 5,
-                              mainAxisSpacing: 5,
-                              childAspectRatio: getGridAspectRatio(context),
-                              children: items.map((v) => VideoListItem(key: ValueKey(v.videoId), video: v, animateDownload: animateDownload)).toList()),
-                        ),
-                      ),
+                    child: SmartRefresher(
+                      controller: _.refreshController,
+                      enablePullDown: _.itemList.hasRefresh(),
+                      enablePullUp: false,
+                      onRefresh: _.refreshItems,
+                      child: GridView.count(
+                          crossAxisCount: getGridCount(context),
+                          controller: _.scrollController,
+                          padding: const EdgeInsets.all(4),
+                          crossAxisSpacing: 5,
+                          mainAxisSpacing: 5,
+                          childAspectRatio: getGridAspectRatio(context),
+                          children: _.loading && _.items.isEmpty
+                              ? videoPlaceholderList
+                              : _.items.isEmpty
+                                  ? []
+                                  : items.map((v) => FadeIn(child: VideoListItem(key: ValueKey(v.videoId), video: v, animateDownload: animateDownload))).toList()),
                     ),
-                  ),
+                  )
           ],
         );
       },
