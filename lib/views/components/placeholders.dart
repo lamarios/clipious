@@ -13,7 +13,7 @@ class AnimatedPlaceHolder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FadeIn(
-        child: Animate(autoPlay: true, onComplete: (controller) => controller.repeat(reverse: true), effects: const [FadeEffect(end: 0.1, begin: 0.4, duration: Duration(seconds: 2))], child: child));
+        child: Animate(autoPlay: true, onComplete: (controller) => controller.repeat(reverse: true), effects: const [FadeEffect(begin: 0.3, end: 0.6, duration: Duration(seconds: 2))], child: child));
   }
 }
 
