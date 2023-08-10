@@ -845,7 +845,7 @@
   "@shareLinkWithTimestamp": {
     "description": "asking user to share link along with timestamp"
   },
-  "noDownloadedVideos": "Sem vídeos descarregados, navegue, prima longamente sobre um vídeo numa lista ou toque no botão de descarregamento no ecrã de um vídeo para descarregar",
+  "noDownloadedVideos": "Nenhum vídeo descarregado, navegar, premir longamente um vídeo numa lista ou tocar no botão de descarregamento no ecrã de um vídeo para descarregar",
   "@noDownloadedVideos": {
     "description": "Message showing when the user goes to the download screen but there are no offline videos."
   },

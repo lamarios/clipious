@@ -841,7 +841,7 @@
   "@videoAlreadyDownloaded": {
     "description": "Message when a user tries to download a video he already has"
   },
-  "noDownloadedVideos": "No hay vídeos descargados, navega, mantén presionado un vídeo en una lista de toca el botón de descarga en la pantalla del vídeo para descargar",
+  "noDownloadedVideos": "No hay vídeos descargados, navega, pulsa prolongadamente en un vídeo de una lista o toca el botón de descarga en la pantalla de un vídeo para descargarlo",
   "@noDownloadedVideos": {
     "description": "Message showing when the user goes to the download screen but there are no offline videos."
   },
