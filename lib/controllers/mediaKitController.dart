@@ -1,18 +1,24 @@
-import 'package:invidious/models/db/downloadedVideo.dart';
+import 'dart:io';
 
+import 'package:dio/dio.dart';
+import 'package:invidious/models/db/downloadedVideo.dart';
 import 'package:invidious/models/video.dart' as videoModel;
 import 'package:logging/logging.dart';
 import 'package:media_kit/media_kit.dart';
 import 'package:media_kit_video/media_kit_video.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:wakelock/wakelock.dart';
 
 import '../database.dart';
 import '../globals.dart';
 import '../models/baseVideo.dart';
+import '../utils.dart';
 import 'interfaces/playerController.dart';
 import 'miniPayerController.dart';
 
 class MediaKitPlayerController extends PlayerController {
+  static MediaKitPlayerController? to() => safeGet();
+
   Player? player;
   VideoController? controller;
   Duration? startAt;
@@ -54,6 +60,18 @@ class MediaKitPlayerController extends PlayerController {
     player?.play();
   }
 
+  setListeners() {
+    player?.stream.tracks.listen((event) {
+      print('Tracks: ${event.video.length}');
+    });
+    player?.stream.buffering.listen((event) {
+      print('buffering $event');
+    });
+    player?.stream.error.listen((event) {
+      print('error $event');
+    });
+  }
+
   @override
   playVideo(bool offline, {Duration? startAt}) async {
     this.startAt = startAt;
@@ -90,6 +108,17 @@ class MediaKitPlayerController extends PlayerController {
 
         log.info('Playing url (dash ${useDash},  hasHls ? ${video!.hlsUrl != null})  ${videoUrl}');
 
+/*
+        Directory dir = await getApplicationDocumentsDirectory();
+        Dio dio = Dio();
+        var path = '${dir.path}/dash.mpd';
+        await dio.download(videoUrl, path);
+        print(path);
+        for (var l in File(path).readAsLinesSync()) {
+          print(l);
+        }
+        media = Media('file://$path');
+*/
         media = Media(videoUrl);
 
         String lastSubtitle = '';
@@ -104,6 +133,7 @@ class MediaKitPlayerController extends PlayerController {
       bool fillVideo = db.getSettings(FILL_FULLSCREEN)?.value == 'true';
 
       player = Player();
+      setListeners();
       controller = VideoController(player!);
       player?.open(media);
       update();

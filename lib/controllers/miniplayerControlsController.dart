@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:invidious/controllers/audioPlayerController.dart';
+import 'package:invidious/controllers/mediaKitController.dart';
 import 'package:invidious/controllers/miniPayerController.dart';
 import 'package:invidious/controllers/videoLikeController.dart';
 import 'package:invidious/controllers/videoPlayerController.dart';
@@ -20,7 +21,7 @@ class MiniPlayerControlsController extends GetxController {
     if (MiniPlayerController.to()?.isAudio ?? false) {
       return AudioPlayerController.to();
     } else {
-      return VideoPlayerController.to();
+      return MediaKitPlayerController.to();
     }
   }
 

@@ -8,6 +8,7 @@ import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:invidious/controllers/audioPlayerController.dart';
+import 'package:invidious/controllers/mediaKitController.dart';
 import 'package:invidious/controllers/miniPlayerAwareController.dart';
 import 'package:invidious/controllers/miniPlayerProgressController.dart';
 import 'package:invidious/controllers/miniplayerControlsController.dart';
@@ -72,7 +73,7 @@ class MiniPlayerController extends GetxController {
   bool get hasVideo => currentlyPlaying != null || offlineCurrentlyPlaying != null;
 
   PlayerController? get playerController {
-    var playerController = isAudio ? AudioPlayerController.to() : VideoPlayerController.to();
+    var playerController = isAudio ? AudioPlayerController.to() : MediaKitPlayerController.to();
     return playerController;
   }
 

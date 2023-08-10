@@ -81,7 +81,6 @@ class MediaKitPlayerState extends State<MediaKitPlayer> {
               ? const SizedBox.shrink()
               : Video(
                   controller: _.controller!,
-                  controls: (state) => Text('test'),
                 )),
     );
   }
