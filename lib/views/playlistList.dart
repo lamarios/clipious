@@ -25,39 +25,36 @@ class PlaylistList extends StatelessWidget {
       tag: PlaylistListController.getTag(tag!),
       global: tag != null,
       init: PlaylistListController(paginatedList),
-      builder: (_) => Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      builder: (_) => Stack(
         children: [
-          Visibility(visible: _.loading, child: const SizedBox(height: 1, child: LinearProgressIndicator())),
-          Expanded(
-            child: _.error.isNotEmpty
-                ? Container(
-                    alignment: Alignment.center,
-                    color: colorScheme.background,
-                    child: Visibility(visible: _.error.isNotEmpty, child: InkWell(onTap: () => _.getPlaylists(), child: Text(_.error == couldNotGetPlaylits ? locals.couldntFetchVideos : _.error))),
-                  )
-                : Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: FadeIn(
-                      duration: animationDuration,
-                      curve: Curves.easeInOutQuad,
-                      child: Visibility(
-                        visible: _.playlists.isNotEmpty,
-                        child: SmartRefresher(
-                          controller: _.refreshController,
-                          enablePullDown: _.paginatedList.hasRefresh(),
-                          enablePullUp: false,
-                          onRefresh: _.refreshPlaylists,
-                          child: ListView.builder(
-                              controller: _.scrollController,
-                              itemBuilder: (context, index) => PlaylistItem(playlist: _.playlists[index], canDeleteVideos: canDeleteVideos),
-                              // separatorBuilder: (context, index) => const Divider(),
-                              itemCount: _.playlists.length),
-                        ),
+          _.error.isNotEmpty
+              ? Container(
+                  alignment: Alignment.center,
+                  color: colorScheme.background,
+                  child: Visibility(visible: _.error.isNotEmpty, child: InkWell(onTap: () => _.getPlaylists(), child: Text(_.error == couldNotGetPlaylits ? locals.couldntFetchVideos : _.error))),
+                )
+              : Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: FadeIn(
+                    duration: animationDuration,
+                    curve: Curves.easeInOutQuad,
+                    child: Visibility(
+                      visible: _.playlists.isNotEmpty,
+                      child: SmartRefresher(
+                        controller: _.refreshController,
+                        enablePullDown: _.paginatedList.hasRefresh(),
+                        enablePullUp: false,
+                        onRefresh: _.refreshPlaylists,
+                        child: ListView.builder(
+                            controller: _.scrollController,
+                            itemBuilder: (context, index) => PlaylistItem(playlist: _.playlists[index], canDeleteVideos: canDeleteVideos),
+                            // separatorBuilder: (context, index) => const Divider(),
+                            itemCount: _.playlists.length),
                       ),
                     ),
                   ),
-          ),
+                ),
+          Visibility(visible: _.loading, child: const SizedBox(height: 1, child: LinearProgressIndicator())),
         ],
       ),
     );

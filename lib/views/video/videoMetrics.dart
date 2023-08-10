@@ -31,8 +31,8 @@ class VideoMetrics extends StatelessWidget {
 
     List<Widget> metrics = [];
 
-    var length = video?.lengthSeconds ?? lengthSeconds;
-    if (length != null) {
+    var length = video?.lengthSeconds ?? lengthSeconds ?? 0;
+    if (length > 0) {
       metrics.addAll([
         Icon(Icons.timer, size: iconSize),
         Padding(
@@ -46,8 +46,8 @@ class VideoMetrics extends StatelessWidget {
       ]);
     }
 
-    var views = video?.viewCount ?? viewCount;
-    if (views != null) {
+    var views = video?.viewCount ?? viewCount ?? 0;
+    if (views > 0) {
       metrics.addAll([
         Icon(Icons.visibility, size: iconSize),
         Padding(
@@ -61,8 +61,8 @@ class VideoMetrics extends StatelessWidget {
       ]);
     }
 
-    var likes = video?.likeCount ?? likeCount;
-    if (likes != null) {
+    var likes = video?.likeCount ?? likeCount ?? 0;
+    if (likes > 0) {
       metrics.addAll([
         Icon(Icons.thumb_up, size: iconSize),
         Padding(
@@ -76,7 +76,7 @@ class VideoMetrics extends StatelessWidget {
       ]);
     }
 
-    if (dislikes != null) {
+    if ((dislikes ?? 0) > 0) {
       metrics.addAll([
         Icon(Icons.thumb_down, size: iconSize),
         Padding(
@@ -90,8 +90,8 @@ class VideoMetrics extends StatelessWidget {
       ]);
     }
 
-    var date = video?.publishedText ?? publishedText;
-    if (date != null || video?.liveNow == true) {
+    var date = video?.publishedText ?? publishedText ?? '';
+    if (date.isNotEmpty || video?.liveNow == true) {
       metrics.addAll([
         (video?.liveNow ?? false)
             ? Visibility(
@@ -124,7 +124,7 @@ class VideoMetrics extends StatelessWidget {
                 ),
               )
             : Text(
-                date ?? '',
+                date,
                 style: style,
               ),
         separator
@@ -132,8 +132,10 @@ class VideoMetrics extends StatelessWidget {
     }
 
     // removing last separator
-    metrics.removeAt(metrics.length - 1);
+    if (metrics.isNotEmpty) {
+      metrics.removeAt(metrics.length - 1);
+    }
 
-    return Row(children: metrics);
+    return metrics.isNotEmpty ? Row(children: metrics) : const SizedBox.shrink();
   }
 }
