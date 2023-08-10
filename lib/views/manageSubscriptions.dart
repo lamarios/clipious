@@ -32,39 +32,47 @@ class ManageSubscriptions extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: !_.loading && _.subs.isEmpty
                   ? Center(child: Text(locals.noChannels))
-                  : SmartRefresher(
-                      onRefresh: _.refreshSubs,
-                      controller: _.refreshController,
-                      child: ListView.builder(
-                        itemCount: _.subs.length,
-                        itemBuilder: (context, index) {
-                          Subscription sub = _.subs[index];
+                  : Stack(
+                      children: [
+                        SmartRefresher(
+                          onRefresh: _.refreshSubs,
+                          controller: _.refreshController,
+                          child: ListView.builder(
+                            itemCount: _.subs.length,
+                            itemBuilder: (context, index) {
+                              Subscription sub = _.subs[index];
 
-                          return GestureDetector(
-                            onTap: () => navigatorKey.currentState?.pushNamed(PATH_CHANNEL, arguments: sub.authorId).then((value) => _.refreshSubs()),
-                            child: Container(
-                              padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-                              decoration: BoxDecoration(color: index % 2 == 0 ? colors.secondaryContainer.withOpacity(0.2) : colors.background, borderRadius: BorderRadius.circular(10)),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(sub.author),
-                                  IconButton.filledTonal(
-                                    visualDensity: VisualDensity.compact,
-                                    onPressed: () {
-                                      okCancelDialog(context, locals.unSubscribeQuestion, locals.youCanSubscribeAgainLater, () => _.unsubscribe(sub.authorId));
-                                    },
-                                    icon: const Icon(
-                                      Icons.clear,
-                                      size: 15,
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          );
-                        },
-                      ),
+                              return GestureDetector(
+                                onTap: () => navigatorKey.currentState?.pushNamed(PATH_CHANNEL, arguments: sub.authorId).then((value) => _.refreshSubs()),
+                                child: Container(
+                                  padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                                  decoration: BoxDecoration(color: index % 2 != 0 ? colors.secondaryContainer.withOpacity(0.5) : colors.background, borderRadius: BorderRadius.circular(10)),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(sub.author),
+                                      IconButton.filledTonal(
+                                        visualDensity: VisualDensity.compact,
+                                        onPressed: () {
+                                          okCancelDialog(context, locals.unSubscribeQuestion, locals.youCanSubscribeAgainLater, () => _.unsubscribe(sub.authorId));
+                                        },
+                                        icon: const Icon(
+                                          Icons.clear,
+                                          size: 15,
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                        if (_.loading)
+                          const LinearProgressIndicator(
+                            minHeight: 2,
+                          ),
+                      ],
                     ),
             );
           },

@@ -22,32 +22,12 @@ class ChannelInfo extends StatelessWidget {
     ColorScheme colors = Theme.of(context).colorScheme;
     var textTheme = Theme.of(context).textTheme;
     List<Widget> widgets = [
-      SizedBox(
-        height: 230,
-        child: Stack(children: [
-          Thumbnail(
-              width: double.infinity,
-              thumbnailUrl: ImageObject.getBestThumbnail(channel.authorThumbnails)?.url ?? '',
-              id: 'channel-banner/${channel.authorId}',
-              decoration: BoxDecoration(
-                color: colors.secondaryContainer,
-              )),
-          Positioned(
-              bottom: 0,
-              left: 0,
-              right: 0,
-              child: Container(
-                alignment: Alignment.bottomLeft,
-                decoration: BoxDecoration(gradient: LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: [Colors.transparent, colors.background])),
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 8.0, top: 128),
-                  child: Text(
-                    channel.author ?? '',
-                    style: textTheme.titleLarge?.copyWith(color: colors.primary),
-                  ),
-                ),
-              ))
-        ]),
+      Padding(
+        padding: const EdgeInsets.only(left: 8.0, bottom: 0),
+        child: Text(
+          channel.author ?? '',
+          style: textTheme.titleLarge?.copyWith(color: colors.primary),
+        ),
       ),
       Padding(
         padding: const EdgeInsets.all(8.0),
@@ -85,7 +65,7 @@ class ChannelInfo extends StatelessWidget {
           mainAxisSpacing: 5,
           childAspectRatio: getGridAspectRatio(context),
           children: channel.latestVideos?.map((e) {
-                VideoInList videoInList = VideoInList(e.title, e.videoId, e.lengthSeconds, 0, e.author, channel.authorId, 'authorUrl', 0, '', e.videoThumbnails);
+                VideoInList videoInList = VideoInList(e.title, e.videoId, e.lengthSeconds, 0, e.author, channel.authorId, channel.authorId, 0, '', e.videoThumbnails);
                 videoInList.filtered = e.filtered;
                 videoInList.matchedFilters = e.matchedFilters;
                 return VideoListItem(video: videoInList);
@@ -94,9 +74,31 @@ class ChannelInfo extends StatelessWidget {
     ));
 
     return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: widgets,
+      child: Stack(
+        children: [
+          SizedBox(
+            height: 230,
+            child: Thumbnail(
+                width: double.infinity,
+                thumbnailUrl: ImageObject.getBestThumbnail(channel.authorThumbnails)?.url ?? '',
+                id: 'channel-banner/${channel.authorId}',
+                decoration: BoxDecoration(
+                  color: colors.secondaryContainer,
+                )),
+          ),
+          Container(
+            decoration: BoxDecoration(
+                gradient: LinearGradient(
+                    begin: Alignment(0, Alignment.topCenter.y + 0.035), end: Alignment(0, Alignment.topCenter.y + 0.044), colors: [colors.background.withOpacity(0), colors.background])),
+            child: Padding(
+              padding: const EdgeInsets.only(top: 200),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: widgets,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

@@ -20,55 +20,50 @@ class HistoryView extends StatelessWidget {
     return GetBuilder<HistoryController>(
         init: HistoryController(itemList: PageBasedPaginatedList<String>(getItemsFunc: service.getUserHistory, maxResults: 20)),
         builder: (_) {
-          return Column(
+          return Stack(
             children: [
-              _.loading
-                  ? const LinearProgressIndicator(
-                      minHeight: 2,
-                    )
-                  : const SizedBox.shrink(),
               _.error != ItemListErrors.none
-                  ? Expanded(
-                      child: Center(
-                          child: Padding(
+                  ? Center(
+                      child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(switch (_.error) { ItemListErrors.invalidScope => locals.itemListErrorInvalidScope, _ => locals.itemlistErrorGeneric }),
-                    )))
+                    ))
                   : _.items.isEmpty
-                      ? Expanded(
-                          child: Center(
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(locals.noHistory),
-                            ),
+                      ? Center(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(locals.noHistory),
                           ),
                         )
-                      : Expanded(
-                          child: SmartRefresher(
-                            controller: _.refreshController,
-                            onRefresh: _.refreshItems,
-                            child: ListView.builder(
-                              controller: _.scrollController,
-                              itemCount: _.items.length,
-                              itemBuilder: (context, index) => Padding(
-                                padding: EdgeInsets.only(bottom: index == _.items.length - 1 ? 70.0 : 0),
-                                child: SwipeActionCell(
-                                    key: ValueKey(_.items[index]),
-                                    trailingActions: [
-                                      SwipeAction(
-                                        performsFirstActionWithFullSwipe: true,
-                                        icon: const Icon(Icons.delete, color: Colors.white),
-                                        onTap: (handler) async {
-                                          await handler(true);
-                                          _.removeFromHistory(_.items[index]);
-                                        },
-                                      )
-                                    ],
-                                    child: HistoryVideoView(videoId: _.items[index])),
-                              ),
+                      : SmartRefresher(
+                          controller: _.refreshController,
+                          onRefresh: _.refreshItems,
+                          child: ListView.builder(
+                            controller: _.scrollController,
+                            itemCount: _.items.length,
+                            itemBuilder: (context, index) => Padding(
+                              padding: EdgeInsets.only(bottom: index == _.items.length - 1 ? 70.0 : 0),
+                              child: SwipeActionCell(
+                                  key: ValueKey(_.items[index]),
+                                  trailingActions: [
+                                    SwipeAction(
+                                      performsFirstActionWithFullSwipe: true,
+                                      icon: const Icon(Icons.delete, color: Colors.white),
+                                      onTap: (handler) async {
+                                        await handler(true);
+                                        _.removeFromHistory(_.items[index]);
+                                      },
+                                    )
+                                  ],
+                                  child: HistoryVideoView(videoId: _.items[index])),
                             ),
                           ),
                         ),
+              _.loading
+                  ? const LinearProgressIndicator(
+                      minHeight: 1,
+                    )
+                  : const SizedBox.shrink(),
             ],
           );
         });
