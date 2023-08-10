@@ -443,7 +443,7 @@
   "@sponsorBlockCategoryMusicOffTopicDescription": {
     "description": "Only for use in music videos. This only should be used for sections of music videos that aren't already covered by another category."
   },
-  "appLogsDescription": "Obtenir les registres de ce qui se passe dans l'application, peut être utile pour signaler les problèmes",
+  "appLogsDescription": "Obtenir les registres de ce qui se passe dans l''application, peut être utile pour signaler les problèmes",
   "@appLogsDescription": {
     "description": "Description of the app log settings"
   },
@@ -459,7 +459,7 @@
   "@logsCopied": {
     "description": "Message to tell user that logs have been copied to the clipboard"
   },
-  "clearSearchHistory": "Effacer l'historique de recherche",
+  "clearSearchHistory": "Effacer l''historique de recherche",
   "@clearSearchHistory": {
     "description": "Settings label for clearing search history"
   },
@@ -535,7 +535,7 @@
   "@searchHistory": {
     "description": "Settings label for search history"
   },
-  "enableSearchHistory": "Activer l'historique de recherches",
+  "enableSearchHistory": "Activer l''historique de recherches",
   "@enableSearchHistory": {
     "description": "Settings label for enabling search history"
   },
@@ -805,11 +805,11 @@
   "@appLanguage": {
     "description": "Select app language"
   },
-  "fillFullscreen": "Maximiser la vidéo pour la grandeur de l'écran",
+  "fillFullscreen": "Maximiser la vidéo pour la grandeur de l''écran",
   "@fillFullscreen": {
     "description": "Title to maximize video to fit screen"
   },
-  "fillFullscreenDescription": "Ajuste la vidéo pour remplir tout l'écran en mode paysage",
+  "fillFullscreenDescription": "Ajuste la vidéo pour remplir tout l''écran en mode paysage",
   "@fillFullscreenDescription": {
     "description": "Setting description for filling video to screen in landscape"
   },
@@ -825,7 +825,7 @@
   "@videoAddedToQueue": {
     "description": "Pop up message when a video was added at the end of the video queue"
   },
-  "shareLinkWithTimestamp": "Ajouter l'horodatage",
+  "shareLinkWithTimestamp": "Ajouter l''horodatage",
   "@shareLinkWithTimestamp": {
     "description": "asking user to share link along with timestamp"
   },
