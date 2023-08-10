@@ -49,23 +49,21 @@ class PlaylistController extends GetxController {
       loading = true;
       update();
       int page = 1;
-      List<VideoInList> videos = [];
       int totalFiltered = 0;
       // something is not right, let's get the full playlist
       Playlist pl;
       do {
         pl = await service.getPublicPlaylists(playlist.playlistId, page: page);
-        videos.addAll(pl.videos);
+        playlist.videos.addAll(pl.videos);
 
         totalFiltered += pl.removedByFilter;
         log.fine('filtered removed ${pl.removedByFilter} videos');
         page++;
 
-        loadingProgress = (videos.length + totalFiltered) / playlist.videoCount;
+        loadingProgress = (playlist.videos.length + totalFiltered) / playlist.videoCount;
         update();
       } while (pl.videos.isNotEmpty || pl.removedByFilter > 0);
 
-      playlist.videos = videos;
       loading = false;
       update();
     }

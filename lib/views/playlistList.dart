@@ -48,10 +48,9 @@ class PlaylistList extends StatelessWidget {
                         onRefresh: _.refreshPlaylists,
                         child: ListView.builder(
                             controller: _.scrollController,
-                            itemBuilder: (context, index) =>
-                                showPlaceHolder ? const PlaylistPlaceHolder() : FadeIn(child: PlaylistItem(playlist: _.playlists[index], canDeleteVideos: canDeleteVideos)),
+                            itemBuilder: (context, index) => index >= _.playlists.length ? const PlaylistPlaceHolder() : PlaylistItem(playlist: _.playlists[index], canDeleteVideos: canDeleteVideos),
                             // separatorBuilder: (context, index) => const Divider(),
-                            itemCount: showPlaceHolder ? 10 : _.playlists.length),
+                            itemCount: _.playlists.length + (_.loading ? 7 : 0)),
                       ),
                     ),
                   ),

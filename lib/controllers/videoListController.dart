@@ -65,7 +65,7 @@ class ItemListController<T> extends GetxController {
   onScrollEvent() {
     if (scrollController.hasClients) {
       if (scrollController.position.maxScrollExtent * 0.9 < scrollController.offset) {
-        EasyDebounce.debounce('loading-more-videos', const Duration(milliseconds: 250), getMoreItems);
+        EasyDebounce.debounce('loading-more-videos', const Duration(milliseconds: 500), getMoreItems);
       }
     }
   }

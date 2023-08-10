@@ -1,0 +1,2 @@
+- add placeholders when loading stuff so that UI doesn't "jump" when the items are loaded
+- make playlists load videos dynamically on the playlist screen instead of showing a long loading indicator in case of big playlists

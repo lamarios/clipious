@@ -9,7 +9,6 @@ import 'package:invidious/views/components/placeholders.dart';
 import 'package:invidious/views/videoList/singleVideo.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-import '../globals.dart';
 import '../models/paginatedList.dart';
 
 class VideoList extends StatelessWidget {
@@ -40,6 +39,7 @@ class VideoList extends StatelessWidget {
       tag: tags,
       builder: (_) {
         var items = _.filteredItems;
+        var gridCount = getGridCount(context);
         return Stack(
           alignment: Alignment.topCenter,
           children: [
@@ -58,19 +58,18 @@ class VideoList extends StatelessWidget {
                       enablePullUp: false,
                       onRefresh: _.refreshItems,
                       child: GridView.count(
-                          crossAxisCount: getGridCount(context),
-                          controller: _.scrollController,
-                          padding: const EdgeInsets.all(4),
-                          crossAxisSpacing: 5,
-                          mainAxisSpacing: 5,
-                          childAspectRatio: getGridAspectRatio(context),
-                          children: _.loading && _.items.isEmpty
-                              ? videoPlaceholderList
-                              : _.items.isEmpty
-                                  ? []
-                                  : items.map((v) => FadeIn(child: VideoListItem(key: ValueKey(v.videoId), video: v, animateDownload: animateDownload))).toList()),
-                    ),
-                  )
+                        crossAxisCount: gridCount,
+                        controller: _.scrollController,
+                        padding: const EdgeInsets.all(4),
+                        crossAxisSpacing: 5,
+                        mainAxisSpacing: 5,
+                        childAspectRatio: getGridAspectRatio(context),
+                        children: [
+                          ...items.map((v) => VideoListItem(key: ValueKey(v.videoId), video: v, animateDownload: animateDownload)).toList(),
+                          if (_.loading) ...videoPlaceholderList(count: 5 * gridCount)
+                        ],
+                      ),
+                    ))
           ],
         );
       },

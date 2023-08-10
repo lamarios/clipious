@@ -42,10 +42,10 @@ class HistoryView extends StatelessWidget {
                           onRefresh: _.refreshItems,
                           child: ListView.builder(
                             controller: _.scrollController,
-                            itemCount: showPlaceholder ? 10 : _.items.length,
+                            itemCount: _.items.length + (_.loading ? 10 : 0),
                             itemBuilder: (context, index) => Padding(
                               padding: EdgeInsets.only(bottom: index == _.items.length - 1 ? 70.0 : 0),
-                              child: showPlaceholder
+                              child: index >= _.items.length
                                   ? const CompactVideoPlaceHolder()
                                   : SwipeActionCell(
                                       key: ValueKey(_.items[index]),

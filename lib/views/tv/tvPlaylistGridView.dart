@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:invidious/controllers/playlistListController.dart';
 import 'package:invidious/models/paginatedList.dart';
 import 'package:invidious/models/playlist.dart';
+import 'package:invidious/views/components/placeholders.dart';
 import 'package:invidious/views/playlists/playlist.dart';
 import 'package:invidious/views/tv/tvOverScan.dart';
 
@@ -45,7 +46,10 @@ class TvPlaylistGridView extends StatelessWidget {
                     controller: _.scrollController,
                     childAspectRatio: 16 / 13,
                     crossAxisCount: 3,
-                    children: _.playlists.map((e) => PlaylistItem(playlist: e, canDeleteVideos: false, isTv: true)).toList(),
+                    children: [
+                      ..._.playlists.map((e) => PlaylistItem(playlist: e, canDeleteVideos: false, isTv: true)).toList(),
+                      if (_.loading) ...repeatWidget(() => const TvPlaylistPlaceHolder(), count: 10)
+                    ],
                   ))
                 ],
               );
