@@ -19,8 +19,8 @@ import 'miniPayerController.dart';
 class MediaKitPlayerController extends PlayerController {
   static MediaKitPlayerController? to() => safeGet();
 
-  Player? player;
-  VideoController? controller;
+  Player player = Player();
+  late VideoController? controller = VideoController(player);
   Duration? startAt;
   bool useDash = db.getSettings(USE_DASH)?.value == 'true';
 
@@ -31,43 +31,55 @@ class MediaKitPlayerController extends PlayerController {
 
   @override
   Duration? bufferedPosition() {
-    // TODO: implement bufferedPosition
-    throw UnimplementedError();
+    return player.state.buffer;
   }
 
   @override
   onReady() async {
+    setListeners();
     playVideo(offlineVideo != null, startAt: startAt);
   }
 
   @override
   void disposeControllers() {
-    player?.dispose();
+    player.dispose();
   }
 
   @override
   bool isPlaying() {
-    return player?.state.playing ?? false;
+    return player.state.playing ?? false;
   }
 
   @override
   void pause() {
-    player?.pause();
+    player.pause();
   }
 
   @override
   void play() {
-    player?.play();
+    player.play();
   }
 
   setListeners() {
-    player?.stream.tracks.listen((event) {
-      print('Tracks: ${event.video.length}');
+    player.stream.tracks.listen((event) {
+      print('VIDEO');
+      for (VideoTrack t in event.video) {
+        print('${t.toString()}');
+      }
+      print('AUDIO');
+      for (var t in event.audio) {
+        print(t.toString());
+      }
+
+      print('SUBS');
+      for (var t in event.subtitle) {
+        print(t.toString());
+      }
     });
-    player?.stream.buffering.listen((event) {
+    player.stream.buffering.listen((event) {
       print('buffering $event');
     });
-    player?.stream.error.listen((event) {
+    player.stream.error.listen((event) {
       print('error $event');
     });
   }
@@ -77,7 +89,7 @@ class MediaKitPlayerController extends PlayerController {
     this.startAt = startAt;
     if (video != null || offlineVideo != null) {
       IdedVideo idedVideo = offline ? offlineVideo! : video!;
-      disposeControllers();
+      // disposeControllers();
       // we get segments if there are any, no need to wait.
       setSponsorBlock();
 
@@ -108,17 +120,6 @@ class MediaKitPlayerController extends PlayerController {
 
         log.info('Playing url (dash ${useDash},  hasHls ? ${video!.hlsUrl != null})  ${videoUrl}');
 
-/*
-        Directory dir = await getApplicationDocumentsDirectory();
-        Dio dio = Dio();
-        var path = '${dir.path}/dash.mpd';
-        await dio.download(videoUrl, path);
-        print(path);
-        for (var l in File(path).readAsLinesSync()) {
-          print(l);
-        }
-        media = Media('file://$path');
-*/
         media = Media(videoUrl);
 
         String lastSubtitle = '';
@@ -132,17 +133,17 @@ class MediaKitPlayerController extends PlayerController {
       bool lockOrientation = db.getSettings(LOCK_ORIENTATION_FULLSCREEN)?.value == 'true';
       bool fillVideo = db.getSettings(FILL_FULLSCREEN)?.value == 'true';
 
-      player = Player();
-      setListeners();
-      controller = VideoController(player!);
-      player?.open(media);
+      // player = Player();
+      // setListeners();
+      // controller = VideoController(player!);
+      player.open(media);
       update();
     }
   }
 
   @override
   Duration position() {
-    return player?.state.position ?? Duration.zero;
+    return player.state.position;
     ;
   }
 
@@ -155,7 +156,7 @@ class MediaKitPlayerController extends PlayerController {
 
   @override
   void seek(Duration position) {
-    player?.seek(position);
+    player.seek(position);
   }
 
   @override
@@ -165,7 +166,7 @@ class MediaKitPlayerController extends PlayerController {
 
   @override
   double? speed() {
-    return player?.state.rate;
+    return player.state.rate;
   }
 
   @override
@@ -176,7 +177,7 @@ class MediaKitPlayerController extends PlayerController {
   @override
   void switchVideo(videoModel.Video video, {Duration? startAt}) {
     this.startAt = startAt;
-    disposeControllers();
+    // disposeControllers();
     this.video = video;
     playVideo(false, startAt: startAt);
   }
@@ -188,6 +189,6 @@ class MediaKitPlayerController extends PlayerController {
 
   @override
   void togglePlaying() {
-    player?.playOrPause();
+    player.playOrPause();
   }
 }
