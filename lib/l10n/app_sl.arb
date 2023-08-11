@@ -1,1 +1,248 @@
-{}
+{
+  "add": "Dodaj",
+  "@add": {
+    "description": "Add button abel"
+  },
+  "shareInvidiousLink": "Deli Invidious povezavo",
+  "@shareInvidiousLink": {
+    "description": "asking user to share invidious link"
+  },
+  "ok": "OK",
+  "@ok": {
+    "description": "Ok"
+  },
+  "noChannels": "Brez kanalov",
+  "@noChannels": {
+    "description": "when there are no channels to display"
+  },
+  "noPlaylists": "Brez seznamov predvajanja",
+  "@noPlaylists": {
+    "description": "when there are no playlists to display"
+  },
+  "channels": "Kanali",
+  "@channels": {
+    "description": "Channels label"
+  },
+  "redirectInvidiousLink": "Deli Invidious Redirect povezavo",
+  "@redirectInvidiousLink": {
+    "description": "asking user to share redirecting invidious link"
+  },
+  "shareLinkWithTimestamp": "Dodaj časovni žig",
+  "@shareLinkWithTimestamp": {
+    "description": "asking user to share link along with timestamp"
+  },
+  "info": "Informacije",
+  "@info": {
+    "description": "Info label"
+  },
+  "videos": "Videoposnetki",
+  "@videos": {
+    "description": "Videos label"
+  },
+  "subscribed": "Naročeno",
+  "@subscribed": {
+    "description": "When the user is subscribed to a channel"
+  },
+  "subscribe": "Naročite se",
+  "@subscribe": {
+    "description": "Label for user to subscribe to a channel"
+  },
+  "downloads": "Prenosi",
+  "@downloads": {
+    "description": "Downloads"
+  },
+  "subscriptions": "Naročnine",
+  "@subscriptions": {
+    "description": "User subscriptions"
+  },
+  "playlists": "Seznami predvajanja",
+  "@playlists": {
+    "description": "User playlists"
+  },
+  "popular": "Priljubljeno",
+  "@popular": {
+    "description": "Popular videos title"
+  },
+  "trending": "Trendi",
+  "@trending": {
+    "description": "Trending videos title"
+  },
+  "noVideoInPlayList": "Seznam predvajanja je brez videoposnetkov",
+  "@noVideoInPlayList": {
+    "description": "When no videos in the playlist"
+  },
+  "removeFromPlayList": "Odstranite s seznama predvajanja",
+  "@removeFromPlayList": {
+    "description": "Menu item description to show remove a video from a playlist"
+  },
+  "deletePlayListQ": "Izbriši seznam predvajanja?",
+  "@deletePlayListQ": {
+    "description": "Ask user to delete a playlist"
+  },
+  "irreversibleAction": "To dejanje je nepovratno",
+  "@irreversibleAction": {
+    "description": "Tell the user that the action cannot be undone"
+  },
+  "addPlayList": "Dodaj seznam predvajanja",
+  "@addPlayList": {
+    "description": "Title for add playlist dialog"
+  },
+  "playListName": "Ime seznama predvajanja",
+  "@playListName": {
+    "description": "Place holder for new playlist name text field"
+  },
+  "playlistVisibility": "Vidljivost",
+  "@playlistVisibility": {
+    "description": "Dropdown label for playlist visibility"
+  },
+  "privatePlaylist": "Zasebno",
+  "@privatePlaylist": {
+    "description": "Private playlist"
+  },
+  "publicPlaylist": "Javno",
+  "@publicPlaylist": {
+    "description": "Public playlist"
+  },
+  "cancel": "Prekliči",
+  "@cancel": {
+    "description": "Cancel button label"
+  },
+  "latestVideos": "Najnovejši videoposnetki",
+  "@latestVideos": {
+    "description": "Latest channel videos"
+  },
+  "shareYoutubeLink": "Deli YouTube povezavo",
+  "@shareYoutubeLink": {
+    "description": "asking user to share youtube link"
+  },
+  "couldntLoadVideo": "Ni možno naložiti videoposnetka",
+  "@couldntLoadVideo": {
+    "description": "Message to display when a video can't be loaded"
+  },
+  "username": "Uporabniško ime",
+  "@username": {
+    "description": "Username label for login to a server"
+  },
+  "appLogsDescription": "Pridobi dnevnike tega, kar se dogaja v aplikaciji, lahko so koristni za poročanje napak",
+  "@appLogsDescription": {
+    "description": "Description of the app log settings"
+  },
+  "authentication": "Avtentikacija",
+  "@authentication": {
+    "description": "Label for server settings related to authentications"
+  },
+  "password": "Geslo",
+  "@password": {
+    "description": "Password label for login to a server"
+  },
+  "error": "Napaka",
+  "@error": {},
+  "quality": "Kakovost",
+  "@quality": {
+    "description": "Name of TV ui video settings"
+  },
+  "sponsorBlockCategorySponsor": "Sponzor",
+  "@sponsorBlockCategorySponsor": {
+    "description": "Sponsor block 'Sponsor' Category"
+  },
+  "subtitles": "Podnapisi",
+  "@subtitles": {
+    "description": "Name of TV ui subtitles settings"
+  },
+  "audio": "Zvok",
+  "@audio": {
+    "description": "Name TV ui audio settings"
+  },
+  "search": "Iskanje",
+  "@search": {
+    "description": "search title"
+  },
+  "themeBrightness": "Tema",
+  "@themeBrightness": {
+    "description": "Ask the user to user dark / light / system theme"
+  },
+  "themeDark": "Temno",
+  "@themeDark": {
+    "description": "Dark theme"
+  },
+  "themeLight": "Svetlo",
+  "@themeLight": {
+    "description": "Light theme"
+  },
+  "searchSortRelevance": "Ustreznost",
+  "@searchSortRelevance": {
+    "description": "Sort search by relevance"
+  },
+  "searchSortRating": "Ocena",
+  "@searchSortRating": {
+    "description": "Sort search by rating"
+  },
+  "videoFilterType": "Tip",
+  "@videoFilterType": {
+    "description": "Label for filter type"
+  },
+  "videoFilterOperation": "Operacija",
+  "@videoFilterOperation": {
+    "description": "Label for filter operation"
+  },
+  "videoFilterValue": "Vrednost",
+  "@videoFilterValue": {
+    "description": "Label for filter value"
+  },
+  "save": "Shrani",
+  "@save": {
+    "description": "Text for save action"
+  },
+  "videoFilterHideLabel": "Skrij",
+  "@videoFilterHideLabel": {
+    "description": "Label to hide videos"
+  },
+  "videoFilterOperationContains": "Vsebuje",
+  "@videoFilterOperationContains": {
+    "description": "Label for video filter operation Contains"
+  },
+  "channel": "Kanal",
+  "@channel": {
+    "description": "A single channel"
+  },
+  "history": "Zgodovina",
+  "@history": {
+    "description": "User view history label"
+  },
+  "addServer": "Dodaj strežnik",
+  "@addServer": {
+    "description": "Add server label"
+  },
+  "download": "Prenos",
+  "@download": {
+    "description": "A single download or CTA for downloading a video"
+  },
+  "selectPlaylist": "Izberi seznam predvajanja",
+  "@selectPlaylist": {
+    "description": "Title when users wants to add a video to a playlist"
+  },
+  "manageServers": "Upravljanje strežnikov",
+  "@manageServers": {
+    "description": "Settings to manage servers"
+  },
+  "useSponsorBlock": "Uporabi SponsorBlock",
+  "@useSponsorBlock": {
+    "description": "label for sponsorblock checkbox"
+  },
+  "yourServers": "Vaši strežniki",
+  "@yourServers": {
+    "description": "Your servers label"
+  },
+  "publicServers": "Javni strežniki",
+  "@publicServers": {
+    "description": "Public servers label"
+  },
+  "loadMore": "Naloži več",
+  "@loadMore": {
+    "description": "CTA to load more"
+  },
+  "useDynamicTheme": "Dinamične barve",
+  "@useDynamicTheme": {
+    "description": ""
+  }
+}
