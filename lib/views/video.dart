@@ -1,9 +1,12 @@
 // import 'package:video_player/video_player.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_fadein/flutter_fadein.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:invidious/controllers/videoController.dart';
 import 'package:invidious/globals.dart';
+import 'package:invidious/views/components/placeholders.dart';
 import 'package:invidious/views/components/videoAddToPlaylistButton.dart';
 import 'package:invidious/views/components/videoLikeButton.dart';
 import 'package:invidious/views/components/videoShareButton.dart';
@@ -123,13 +126,15 @@ class VideoView extends StatelessWidget {
           backgroundColor: colorScheme.background,
           bottomNavigationBar: _.loadingVideo
               ? null
-              : NavigationBar(
-                  backgroundColor: colorScheme.background,
-                  labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
-                  elevation: 0,
-                  onDestinationSelected: _.selectIndex,
-                  selectedIndex: _.selectedIndex,
-                  destinations: destinations,
+              : FadeIn(
+                  child: NavigationBar(
+                    backgroundColor: colorScheme.background,
+                    labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
+                    elevation: 0,
+                    onDestinationSelected: _.selectIndex,
+                    selectedIndex: _.selectedIndex,
+                    destinations: destinations,
+                  ),
                 ),
           body: SafeArea(
             bottom: false,
@@ -146,24 +151,24 @@ class VideoView extends StatelessWidget {
                             alignment: Alignment.center,
                             child: Text(_.error == coulnotLoadVideos ? locals.couldntLoadVideo : _.error),
                           )
-                        : _.loadingVideo
-                            ? const CircularProgressIndicator()
-                            : Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                                child: show3Navigation
-                                    ? VideoInnerView(
+                        : Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                            child: show3Navigation
+                                ? _.loadingVideo
+                                    ? const VideoPlaceHolder()
+                                    : VideoInnerView(
                                         video: _.video!,
                                         selectedIndex: _.selectedIndex,
                                         playNow: playNow,
                                         videoController: _,
                                       )
-                                    : VideoTabletInnerView(
-                                        video: _.video!,
-                                        playNow: playNow,
-                                        selectedIndex: _.selectedIndex,
-                                        videoController: _,
-                                      ),
-                              )),
+                                : VideoTabletInnerView(
+                                    video: _.video!,
+                                    playNow: playNow,
+                                    selectedIndex: _.selectedIndex,
+                                    videoController: _,
+                                  ),
+                          )),
               ),
             ),
           ),

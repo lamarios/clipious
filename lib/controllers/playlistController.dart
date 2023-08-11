@@ -12,7 +12,7 @@ class PlaylistController extends GetxController {
   final log = Logger('PlaylistController');
   double loadingProgress = 0;
   late Playlist playlist;
-  bool loading = false;
+  bool loading = true;
   ScrollController scrollController = ScrollController();
   late double playlistItemHeight;
 
@@ -46,8 +46,6 @@ class PlaylistController extends GetxController {
 
   getAllVideos() async {
     if (playlist.videoCount > 0 && playlist.videos.length < playlist.videoCount) {
-      loading = true;
-      update();
       int page = 1;
       int totalFiltered = 0;
       // something is not right, let's get the full playlist
@@ -65,8 +63,10 @@ class PlaylistController extends GetxController {
       } while (pl.videos.isNotEmpty || pl.removedByFilter > 0);
 
       loading = false;
-      update();
+    } else {
+      loading = false;
     }
+    update();
   }
 
   @override

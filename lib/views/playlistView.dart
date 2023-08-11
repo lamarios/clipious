@@ -159,7 +159,7 @@ class PlaylistView extends StatelessWidget {
                                             key: ValueKey(v.videoId),
                                           )))
                                       .toList(),
-                                  if (_.loading) ...repeatWidget(() => const CompactVideoPlaceHolder(), count: 10)
+                                  if (_.loading) ...repeatWidget(() => const CompactVideoPlaceHolder(), count: 5)
                                 ],
                               ))
                             ],

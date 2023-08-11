@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_fadein/flutter_fadein.dart';
@@ -7,13 +9,18 @@ import '../playlists/playlistThumbnail.dart';
 
 class AnimatedPlaceHolder extends StatelessWidget {
   final Widget child;
+  final bool animate;
 
-  const AnimatedPlaceHolder({super.key, required this.child});
+  const AnimatedPlaceHolder({super.key, required this.child, this.animate = true});
 
   @override
   Widget build(BuildContext context) {
-    return FadeIn(
-        child: Animate(autoPlay: true, onComplete: (controller) => controller.repeat(reverse: true), effects: const [FadeEffect(begin: 0.3, end: 0.6, duration: Duration(seconds: 2))], child: child));
+    var colors = Theme.of(context).colorScheme;
+    return animate
+        ? FadeIn(
+            child:
+                Animate(autoPlay: true, onComplete: (controller) => controller.repeat(reverse: true), effects: const [FadeEffect(begin: 0.4, end: 0.8, duration: Duration(seconds: 2))], child: child))
+        : child;
   }
 }
 
@@ -51,13 +58,16 @@ class ThumbnailPlaceHolder extends StatelessWidget {
 }
 
 class VideoListItemPlaceHolder extends StatelessWidget {
-  const VideoListItemPlaceHolder({super.key});
+  final bool animate;
+
+  const VideoListItemPlaceHolder({super.key, this.animate = true});
 
   @override
   Widget build(BuildContext context) {
     var colorScheme = Theme.of(context).colorScheme;
 
     return AnimatedPlaceHolder(
+      animate: animate,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
@@ -320,6 +330,19 @@ class TvPlaylistPlaceHolder extends StatelessWidget {
   }
 }
 
+class ParagraphPlaceHolder extends StatelessWidget {
+  const ParagraphPlaceHolder({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Wrap(
+      spacing: 4,
+      runSpacing: 4,
+      children: repeatWidget(() => SizedBox(width: Random().nextInt(100) + 50, child: const TextPlaceHolder()), count: Random().nextInt(30) + 10),
+    );
+  }
+}
+
 class TvChannelPlaceholder extends StatelessWidget {
   const TvChannelPlaceholder({super.key});
 
@@ -334,5 +357,164 @@ class TvChannelPlaceholder extends StatelessWidget {
       ),
       child: const Text('               '),
     ));
+  }
+}
+
+class VideoPlaceHolder extends StatelessWidget {
+  const VideoPlaceHolder({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    var colors = Theme.of(context).colorScheme;
+    return AnimatedPlaceHolder(
+        child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const ThumbnailPlaceHolder(),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            SizedBox(
+                height: 25,
+                child: Checkbox(
+                  visualDensity: VisualDensity.compact,
+                  value: false,
+                  onChanged: (value) {},
+                )),
+            const SizedBox(width: 140, child: TextPlaceHolder())
+          ],
+        ),
+        Expanded(
+            child: Padding(
+          padding: const EdgeInsets.only(top: 0),
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 20, child: TextPlaceHolder()),
+                  const SizedBox(
+                    height: 4,
+                  ),
+                  Row(
+                    children: repeatWidget(() => const SizedBox(height: 15, width: 50, child: TextPlaceHolder()), count: 3),
+                  ),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 4.0),
+                        child: Container(
+                          width: 40,
+                          height: 40,
+                          decoration: BoxDecoration(color: colors.secondaryContainer, shape: BoxShape.circle),
+                        ),
+                      ),
+                      const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 8.0),
+                        child: SizedBox(width: 150, child: TextPlaceHolder()),
+                      ),
+                    ],
+                  ),
+                  // subscribe button
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 8.0),
+                    child: Container(
+                      width: 120,
+                      height: 25,
+                      decoration: BoxDecoration(color: colors.secondaryContainer, borderRadius: BorderRadius.circular(50)),
+                    ),
+                  ),
+                  ...repeatWidget(() => const Padding(
+                        padding: EdgeInsets.only(bottom: 8.0),
+                        child: ParagraphPlaceHolder(),
+                      )),
+                  const Divider(),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8.0),
+                    child: Wrap(
+                        spacing: 5,
+                        runSpacing: 5,
+                        children: repeatWidget(
+                            () => Container(
+                                  width: Random().nextInt(100) + 50,
+                                  decoration: BoxDecoration(color: colors.secondaryContainer, borderRadius: BorderRadius.circular(20)),
+                                  child: const Padding(
+                                    padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 4),
+                                    child: Text(''),
+                                  ),
+                                ),
+                            count: 15)),
+                  )
+                ],
+              ),
+            ),
+          ),
+        )),
+      ],
+    ));
+  }
+}
+
+class ChannelPlaceHolder extends StatelessWidget {
+  const ChannelPlaceHolder({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    var colors = Theme.of(context).colorScheme;
+    return SingleChildScrollView(
+      child: AnimatedPlaceHolder(
+          child: Stack(alignment: Alignment.topCenter, children: [
+        Container(
+          padding: const EdgeInsets.only(top: 200, left: 8, right: 8),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                child: const SizedBox(
+                  width: 250,
+                  height: 25,
+                  child: TextPlaceHolder(),
+                ),
+              ),
+              const SizedBox(
+                height: 4,
+              ),
+              // subscribe button
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                child: Container(
+                  width: 120,
+                  height: 25,
+                  decoration: BoxDecoration(color: colors.secondaryContainer, borderRadius: BorderRadius.circular(50)),
+                ),
+              ),
+              ...repeatWidget(
+                  () => const Padding(
+                        padding: EdgeInsets.only(bottom: 8.0),
+                        child: ParagraphPlaceHolder(),
+                      ),
+                  count: 3),
+              const Padding(
+                padding: EdgeInsets.symmetric(vertical: 8.0),
+                child: SizedBox(
+                  width: 200,
+                  height: 20,
+                  child: TextPlaceHolder(),
+                ),
+              ),
+              ...repeatWidget(
+                  () => const Padding(
+                        padding: EdgeInsets.only(bottom: 8.0),
+                        child: VideoListItemPlaceHolder(animate: false),
+                      ),
+                  count: 5)
+            ],
+          ),
+        ),
+      ])),
+    );
   }
 }
