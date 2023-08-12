@@ -4,6 +4,12 @@ import 'package:invidious/models/db/downloadedVideo.dart';
 
 import '../../models/video.dart';
 
+enum FullScreenState {
+  fullScreen,
+  notFullScreen,
+  unsupported;
+}
+
 abstract class PlayerController extends GetxController {
   Video? video;
   DownloadedVideo? offlineVideo;
@@ -45,4 +51,30 @@ abstract class PlayerController extends GetxController {
   void onVideoFinished() {
     MiniPlayerController.to()?.playNext();
   }
+
+  FullScreenState isFullScreen();
+
+  setFullScreen(bool bool);
+
+  List<String> getVideoTracks();
+
+  List<String> getAudioTracks();
+
+  List<String> getSubtitles();
+
+  int selectedVideoTrack();
+
+  int selectedAudioTrack();
+
+  int selectedSubtitle();
+
+  selectVideoTrack(int index);
+
+  selectAudioTrack(int index);
+
+  selectSubtitle(int index);
+
+  bool supportsPip();
+
+  void enterPip();
 }

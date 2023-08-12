@@ -226,7 +226,7 @@ class AudioPlayerController extends PlayerController {
 
   @override
   Duration? bufferedPosition() {
-    return null;
+    return player?.bufferedPosition;
   }
 
   @override
@@ -237,5 +237,79 @@ class AudioPlayerController extends PlayerController {
   @override
   double? speed() {
     return 1;
+  }
+
+  @override
+  FullScreenState isFullScreen() {
+    return FullScreenState.unsupported;
+  }
+
+  @override
+  setFullScreen(bool bool) {
+    throw UnimplementedError();
+  }
+
+  @override
+  List<String> getVideoTracks() {
+    // TODO: implement getVideoTracks
+    throw UnimplementedError();
+  }
+
+  @override
+  List<String> getAudioTracks() {
+    // TODO: implement getAudioTracks
+    throw UnimplementedError();
+  }
+
+  @override
+  List<String> getSubtitles() {
+    // TODO: implement getSubtitles
+    throw UnimplementedError();
+  }
+
+  @override
+  int selectedAudioTrack() {
+    // TODO: implement selectedAudioTrack
+    throw UnimplementedError();
+  }
+
+  @override
+  int selectedSubtitle() {
+    // TODO: implement selectedSubtitleTrack
+    throw UnimplementedError();
+  }
+
+  @override
+  int selectedVideoTrack() {
+    // TODO: implement selectedVideoTrack
+    throw UnimplementedError();
+  }
+
+  @override
+  selectAudioTrack(int index) {
+    // TODO: implement selectAudioTrack
+    throw UnimplementedError();
+  }
+
+  @override
+  selectSubtitle(int index) {
+    // TODO: implement selectSubtitleTrack
+    throw UnimplementedError();
+  }
+
+  @override
+  selectVideoTrack(int index) {
+    // TODO: implement selectVideoTrack
+    throw UnimplementedError();
+  }
+
+  @override
+  bool supportsPip() {
+    return false;
+  }
+
+  @override
+  void enterPip() {
+    // TODO: implement enterPip
   }
 }
