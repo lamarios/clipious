@@ -61,11 +61,14 @@ class MiniPlayerController extends GetxController {
   bool isAudio = true;
   Duration? startAt;
 
+
+
   List<DownloadedVideo> offlineVideos = [];
 
   MiniPlayerController();
 
   final eventStream = StreamController<MediaEvent>();
+  final controlStream = StreamController<MediaEvent>();
 
   bool get isPlaying => playerController?.isPlaying() ?? false;
 
@@ -120,6 +123,8 @@ class MiniPlayerController extends GetxController {
         speed: playerController?.speed() ?? 1,
         queueIndex: currentIndex,
       );
+
+      controlStream.add(event);
       return state;
     }).pipe(mediaHandler.playbackState);
 
@@ -215,6 +220,7 @@ class MiniPlayerController extends GetxController {
   }
 
   saveProgress(String videoId, int max, int timeInSeconds) {
+    controlStream.add(MediaEvent(state: MediaState.playing, type: MediaEventType.progress));
     int currentPosition = timeInSeconds;
     // saving progress
     var progress = dbProgress.Progress.named(progress: currentPosition / max, videoId: videoId);

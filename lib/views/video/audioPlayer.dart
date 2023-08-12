@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:invidious/views/components/offlineVideoThumbnail.dart';
+import 'package:invidious/views/videoPlayer/playerControls.dart';
 
 import '../../controllers/audioPlayerController.dart';
 import '../../models/db/downloadedVideo.dart';
@@ -40,57 +41,7 @@ class AudioPlayer extends StatelessWidget {
                     : _.offlineVideo != null
                         ? OfflineVideoThumbnail(key: ValueKey(_.offlineVideo?.videoId ?? ''), video: _.offlineVideo!)
                         : const SizedBox.shrink(),
-                !(_.disableControls ?? false) && !_.loading
-                    ? Positioned(
-                        left: 0,
-                        right: 0,
-                        bottom: 0,
-                        child: Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              gradient: LinearGradient(begin: Alignment.bottomCenter, end: Alignment.topCenter, colors: [Colors.black.withOpacity(0.8), Colors.black.withOpacity(0)])),
-                          child: Padding(
-                            padding: const EdgeInsets.only(top: 16.0, right: 8),
-                            child: Row(
-                              children: [
-                                Expanded(
-                                  child: Slider(
-                                    min: 0,
-                                    value: _.audioPosition.inMilliseconds.toDouble(),
-                                    max: _.audioLength.inMilliseconds.toDouble(),
-                                    onChangeEnd: _.onScrubbed,
-                                    onChanged: _.onScrubDrag,
-                                  ),
-                                ),
-                                Text(
-                                  '${prettyDuration(_.audioPosition)} / ${prettyDuration(_.audioLength)}',
-                                  style: textTheme.bodySmall,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      )
-                    : _.loading || _.error != null
-                        ? Container(
-                            decoration: BoxDecoration(
-                              color: Colors.black.withOpacity(0.5),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: _.loading
-                                ? const Center(
-                                    child: FractionallySizedBox(
-                                      heightFactor: 0.3,
-                                      child: AspectRatio(
-                                          aspectRatio: 1,
-                                          child: CircularProgressIndicator(
-                                            strokeWidth: 2,
-                                          )),
-                                    ),
-                                  )
-                                : Center(child: Text(_.error ?? '')),
-                          )
-                        : const SizedBox.shrink(),
+                const PlayerControls()
               ],
             ),
           ),
