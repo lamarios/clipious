@@ -1,8 +1,6 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:get/get_state_manager/src/simple/get_state.dart';
-import 'package:invidious/controllers/offlineVideoThumbnailController.dart';
 import 'package:invidious/models/db/downloadedVideo.dart';
 
 class OfflineVideoThumbnail extends StatelessWidget {
@@ -11,20 +9,34 @@ class OfflineVideoThumbnail extends StatelessWidget {
 
   const OfflineVideoThumbnail({Key? key, required this.video, this.borderRadius = 10}) : super(key: key);
 
+  Future<String?> getThumbnail() async {
+    var tries = 0;
+    while (tries < 20) {
+      tries++;
+      var expectedPath = await video.thumbnailPath;
+      var exists = await File(expectedPath).exists();
+      if (exists) {
+        return expectedPath;
+      } else {
+        await Future.delayed(const Duration(seconds: 1));
+      }
+    }
+    return null;
+  }
+
   @override
   Widget build(BuildContext context) {
     var colors = Theme.of(context).colorScheme;
-    return GetBuilder<OfflineVideoThumbnailController>(
-        init: OfflineVideoThumbnailController(video),
-        global: false,
-        builder: (_) {
+    return FutureBuilder<String?>(
+        future: getThumbnail(),
+        builder: (context, snapshot) {
           return AspectRatio(
             aspectRatio: 16 / 9,
-            child: _.path != null
+            child: snapshot.data != null
                 ? ClipRRect(
                     borderRadius: BorderRadius.circular(borderRadius),
                     child: Image.file(
-                      File(_.path!),
+                      File(snapshot.data!),
                       fit: BoxFit.contain,
                     ))
                 : Container(
