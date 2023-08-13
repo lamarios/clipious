@@ -425,7 +425,6 @@ class VideoPlayerController extends PlayerController {
 
   @override
   List<String> getVideoTracks() {
-    // TODO: implement getVideoTracks
     if (video != null) {
       if (videoController?.betterPlayerAsmsTracks.isNotEmpty ?? false) {
         return videoController?.betterPlayerAsmsTracks.map(_videoTrackToString).toList() ?? [];
@@ -457,7 +456,6 @@ class VideoPlayerController extends PlayerController {
 
   @override
   List<String> getAudioTracks() {
-    // TODO: implement getVideoTracks
     if (video != null) {
       if (videoController?.betterPlayerAsmsAudioTracks?.isNotEmpty ?? false) {
         return videoController?.betterPlayerAsmsAudioTracks?.map(_audioTrackToString).toList() ?? [];
@@ -483,7 +481,7 @@ class VideoPlayerController extends PlayerController {
 
   @override
   List<String> getSubtitles() {
-    return videoController?.betterPlayerSubtitlesSourceList.map(_subtitleToString).toList() ?? [];
+    return video != null ? videoController?.betterPlayerSubtitlesSourceList.map(_subtitleToString).toList() ?? [] : [];
   }
 
   @override
@@ -551,7 +549,7 @@ class VideoPlayerController extends PlayerController {
 
   @override
   bool hasDashToggle() {
-    return true;
+    return video != null;
   }
 
   @override

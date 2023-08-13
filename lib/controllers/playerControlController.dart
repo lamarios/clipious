@@ -53,7 +53,7 @@ class PlayerControlController extends GetxController {
         break;
     }
     this.event = event;
-    print('UPDATE ${displayControls} ${event.state}');
+    // print('UPDATE ${displayControls} ${event.state}');
     if (displayControls || event.state == MediaState.miniDisplayChanged) {
       update();
     }
