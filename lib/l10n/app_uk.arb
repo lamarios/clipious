@@ -852,5 +852,53 @@
   "videoDownloadAudioOnly": "Тільки аудіо",
   "@videoDownloadAudioOnly": {
     "description": "Label for toggle to download audio only "
+  },
+  "videoFilterWholeChannel": "{hideOrFilter} всі відео з каналу",
+  "@videoFilterWholeChannel": {
+    "description": "Label for whole channel filtering",
+    "placeholders": {
+      "hideOrFilter": {
+        "type": "String",
+        "example": "Hide"
+      }
+    }
+  },
+  "history": "Історія",
+  "@history": {
+    "description": "User view history label"
+  },
+  "itemlistErrorGeneric": "Не вдалося отримати дані",
+  "@itemlistErrorGeneric": {
+    "description": "Error showing when the data can't be fetch"
+  },
+  "itemListErrorInvalidScope": "Ви не маєте дозволу на перегляд цього, якщо ви увійшли за допомогою методу токенів, спробуйте вийти та ввійти",
+  "@itemListErrorInvalidScope": {
+    "description": "Error when the user doesn't have the proper scope to its current token"
+  },
+  "manageSubscriptions": "Керувати підписками",
+  "@manageSubscriptions": {
+    "description": "Title of manage subscriptions page"
+  },
+  "noSubscriptions": "Немає підписок, переглядайте відео та підписуйтеся на будь-який канал, який вам подобається.",
+  "@noSubscriptions": {
+    "description": "Message when the user has no subs"
+  },
+  "youCanSubscribeAgainLater": "Ви можете підписатися на цей канал пізніше",
+  "@youCanSubscribeAgainLater": {
+    "description": "Text for the unscubscribe confirmation dialog"
+  },
+  "unSubscribeQuestion": "Відписатися?",
+  "@unSubscribeQuestion": {
+    "description": "Title for dialog if a user wants to unsubscribe in the subscribtion management screen"
+  },
+  "clearHistoryQuestion": "Очистити історію?",
+  "@clearHistoryQuestion": {},
+  "clearHistoryQuestionExplanation": "Це очистить історію переглядів вашого облікового запису в Invidious, який ви використовуєте. Цю дію неможливо скасувати.",
+  "@clearHistoryQuestionExplanation": {
+    "description": "Message for dialog before clearing full viewing history"
+  },
+  "noHistory": "Немає історії перегляду, перегляньте кілька відео, і вона з'явиться тут",
+  "@noHistory": {
+    "description": "Message when the user visits the history tab but it's empty"
   }
 }
