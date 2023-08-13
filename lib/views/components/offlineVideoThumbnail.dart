@@ -7,8 +7,9 @@ import 'package:invidious/models/db/downloadedVideo.dart';
 
 class OfflineVideoThumbnail extends StatelessWidget {
   final DownloadedVideo video;
+  final double borderRadius;
 
-  const OfflineVideoThumbnail({Key? key, required this.video}) : super(key: key);
+  const OfflineVideoThumbnail({Key? key, required this.video, this.borderRadius = 10}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,13 +22,13 @@ class OfflineVideoThumbnail extends StatelessWidget {
             aspectRatio: 16 / 9,
             child: _.path != null
                 ? ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(borderRadius),
                     child: Image.file(
                       File(_.path!),
                       fit: BoxFit.contain,
                     ))
                 : Container(
-                    decoration: BoxDecoration(color: colors.secondaryContainer, borderRadius: BorderRadius.circular(10)),
+                    decoration: BoxDecoration(color: colors.secondaryContainer, borderRadius: BorderRadius.circular(borderRadius)),
                   ),
           );
         });

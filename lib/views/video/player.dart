@@ -30,37 +30,6 @@ class VideoPlayerState extends State<VideoPlayer> {
     super.initState();
   }
 
-/*
-  @override
-  void didChangeDependencies() {
-    disposeControllers();
-    if (!widget.miniPlayer) {
-      routeObserver.subscribe(this, ModalRoute.of(context) as PageRoute<dynamic>);
-    } else {
-      playVideo();
-    }
-    super.didChangeDependencies();
-  }
-*/
-
-/*
-  @override
-  void dispose() {
-    disposeControllers();
-    super.dispose();
-  }
-*/
-
-/*
-  @override
-  didUpdateWidget(VideoPlayer old) {
-    super.didUpdateWidget(old);
-    if (old.video.videoId != widget.video.videoId) {
-      disposeControllers();
-      playVideo();
-    }
-  }
-*/
 
   @override
   Widget build(BuildContext context) {

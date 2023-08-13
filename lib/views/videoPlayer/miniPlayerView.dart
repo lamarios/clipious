@@ -25,7 +25,7 @@ class MiniPlayerView {
                 child: Visibility(
                   visible: controller.isMini,
                   child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(4.0),
                     child: Builder(builder: (context) {
                       return Column(
                         children: [

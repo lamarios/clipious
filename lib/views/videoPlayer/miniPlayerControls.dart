@@ -17,12 +17,13 @@ class MiniPlayerControls extends StatelessWidget {
   Widget build(BuildContext context) {
     ColorScheme colors = Theme.of(context).colorScheme;
 
-    bool enablePrevNext = controller.offlineVideos.length > 1 || controller.videos.length > 1;
+    bool enablePrevNext = controller.hasQueue;
 
+    var isMini = controller.isMini;
     return Padding(
-      padding: controller.isMini ? EdgeInsets.zero : const EdgeInsets.all(8.0),
+      padding: isMini ? EdgeInsets.zero : const EdgeInsets.all(8.0),
       child: Container(
-        decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), color: colors.secondaryContainer),
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), color: isMini ? colors.secondaryContainer : colors.background),
         constraints: BoxConstraints(
           maxWidth: tabletMaxVideoWidth,
         ),
@@ -33,68 +34,67 @@ class MiniPlayerControls extends StatelessWidget {
             alignment: Alignment.center,
             children: [
               // Positioned(left: 0, child: VideoLikeButton(videoId: videoId, style: buttonStyle)),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Visibility(
-                    visible: enablePrevNext,
-                    child: IconButton(
-                        style: buttonStyle,
-                        onPressed: _.playPrevious,
-                        icon: const Icon(
-                          Icons.skip_previous,
-                        )),
-                  ),
-                  IconButton(
-                      onPressed: _.rewind,
-                      style: buttonStyle,
-                      icon: const Icon(
-                        Icons.fast_rewind,
-                      )),
-                  IconButton(
-                      onPressed: _.togglePlay,
-                      style: buttonStyle,
-                      icon: Icon(
-                        _.isPlaying() ? Icons.pause : Icons.play_arrow,
-                      )),
-                  IconButton(
-                      onPressed: _.fastForward,
-                      style: buttonStyle,
-                      icon: const Icon(
-                        Icons.fast_forward,
-                      )),
-                  Visibility(
-                    visible: enablePrevNext,
-                    child: IconButton(
-                        onPressed: _.playNext,
+              if (isMini)
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Visibility(
+                      visible: enablePrevNext,
+                      child: IconButton(
+                          style: buttonStyle,
+                          onPressed: _.playPrevious,
+                          icon: const Icon(
+                            Icons.skip_previous,
+                          )),
+                    ),
+                    IconButton(
+                        onPressed: _.rewind,
                         style: buttonStyle,
                         icon: const Icon(
-                          Icons.skip_next,
+                          Icons.fast_rewind,
                         )),
-                  )
-                ],
-              ),
-              controller.isMini
-                  ? const SizedBox.shrink()
-                  : Positioned(
-                      right: 0,
-                      child: Row(
-                        children: [
-                          IconButton(
-                              style: buttonStyle,
-                              onPressed: _.switchToNextRepeat,
-                              color: controller.repeat == PlayerRepeat.noRepeat ? null : colors.primary,
-                              icon: Icon(
-                                controller.repeat == PlayerRepeat.repeatOne ? Icons.repeat_one : Icons.repeat,
-                              )),
-                          IconButton(
-                            onPressed: _.toggleShuffle,
-                            style: buttonStyle,
-                            icon: const Icon(Icons.shuffle),
-                            color: controller.shuffle ? colors.primary : null,
-                          ),
-                        ],
-                      ))
+                    IconButton(
+                        onPressed: _.togglePlay,
+                        style: buttonStyle,
+                        icon: Icon(
+                          _.isPlaying() ? Icons.pause : Icons.play_arrow,
+                        )),
+                    IconButton(
+                        onPressed: _.fastForward,
+                        style: buttonStyle,
+                        icon: const Icon(
+                          Icons.fast_forward,
+                        )),
+                    Visibility(
+                      visible: enablePrevNext,
+                      child: IconButton(
+                          onPressed: _.playNext,
+                          style: buttonStyle,
+                          icon: const Icon(
+                            Icons.skip_next,
+                          )),
+                    )
+                  ],
+                ),
+              if (!isMini)
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    IconButton(
+                        style: buttonStyle,
+                        onPressed: _.switchToNextRepeat,
+                        color: controller.repeat == PlayerRepeat.noRepeat ? null : colors.primary,
+                        icon: Icon(
+                          controller.repeat == PlayerRepeat.repeatOne ? Icons.repeat_one : Icons.repeat,
+                        )),
+                    if(controller.hasQueue)IconButton(
+                      onPressed: _.toggleShuffle,
+                      style: buttonStyle,
+                      icon: const Icon(Icons.shuffle),
+                      color: controller.shuffle ? colors.primary : null,
+                    ),
+                  ],
+                )
             ],
           ),
         ),

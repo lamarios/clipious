@@ -20,8 +20,6 @@ abstract class PlayerController extends GetxController {
 
   void disposeControllers();
 
-  void saveProgress(int timeInSeconds);
-
   void switchVideo(Video video, {Duration? startAt});
 
   void togglePlaying();
@@ -29,8 +27,6 @@ abstract class PlayerController extends GetxController {
   void toggleControls(bool visible);
 
   void playVideo(bool offline);
-
-  void setSponsorBlock();
 
   void switchToOfflineVideo(DownloadedVideo v);
 
@@ -47,10 +43,6 @@ abstract class PlayerController extends GetxController {
   Duration? bufferedPosition();
 
   double? speed();
-
-  void onVideoFinished() {
-    MiniPlayerController.to()?.playNext();
-  }
 
   FullScreenState isFullScreen();
 
@@ -77,4 +69,20 @@ abstract class PlayerController extends GetxController {
   bool supportsPip();
 
   void enterPip();
+
+  bool isMuted();
+
+  void toggleVolume(bool soundOn);
+
+  void setSpeed(double d);
+
+  double getSpeed();
+
+  bool hasDashToggle();
+
+  bool isUsingDash();
+
+  void toggleDash();
+
+  Duration duration();
 }

@@ -89,21 +89,8 @@ class AudioPlayerController extends PlayerController {
   }
 
   onPositionChanged(Duration position) {
-    int currentPosition = position.inSeconds;
-    if (currentPosition > previousSponsorCheck + 1) {
-      audioPosition = position;
-      if (audioPosition.inMilliseconds > audioLength.inMilliseconds) {
-        audioPosition = audioLength;
-      }
-      saveProgress(currentPosition);
-      MiniPlayerProgressController.to()?.setProgress(progress);
-      update();
-      previousSponsorCheck = currentPosition;
-    } else if (currentPosition + 2 < previousSponsorCheck) {
-      // if we're more than 2 seconds behind, means we probably seek backward manually far away
-      // so we reset the position
-      previousSponsorCheck = currentPosition;
-    }
+    audioPosition = position;
+    MiniPlayerController.to()?.eventStream.add(MediaEvent(state: MediaState.playing, type: MediaEventType.progress));
   }
 
   @override
@@ -148,18 +135,6 @@ class AudioPlayerController extends PlayerController {
         update();
       }
     }
-  }
-
-  @override
-  void saveProgress(int timeInSeconds) {
-    if (video != null) {
-      MiniPlayerController.to()?.saveProgress(video!.videoId, video!.lengthSeconds, timeInSeconds);
-    }
-  }
-
-  @override
-  void setSponsorBlock() {
-    // TODO: implement setSponsorBlock
   }
 
   @override
@@ -251,57 +226,44 @@ class AudioPlayerController extends PlayerController {
 
   @override
   List<String> getVideoTracks() {
-    // TODO: implement getVideoTracks
-    throw UnimplementedError();
+    return [];
   }
 
   @override
   List<String> getAudioTracks() {
-    // TODO: implement getAudioTracks
-    throw UnimplementedError();
+    return [];
   }
 
   @override
   List<String> getSubtitles() {
-    // TODO: implement getSubtitles
-    throw UnimplementedError();
+    return [];
   }
 
   @override
   int selectedAudioTrack() {
-    // TODO: implement selectedAudioTrack
-    throw UnimplementedError();
+    return 0;
   }
 
   @override
   int selectedSubtitle() {
-    // TODO: implement selectedSubtitleTrack
-    throw UnimplementedError();
+    return 0;
   }
 
   @override
   int selectedVideoTrack() {
-    // TODO: implement selectedVideoTrack
-    throw UnimplementedError();
+    return 0;
   }
 
   @override
   selectAudioTrack(int index) {
-    // TODO: implement selectAudioTrack
-    throw UnimplementedError();
+    return 0;
   }
 
   @override
-  selectSubtitle(int index) {
-    // TODO: implement selectSubtitleTrack
-    throw UnimplementedError();
-  }
+  selectSubtitle(int index) {}
 
   @override
-  selectVideoTrack(int index) {
-    // TODO: implement selectVideoTrack
-    throw UnimplementedError();
-  }
+  selectVideoTrack(int index) {}
 
   @override
   bool supportsPip() {
@@ -309,7 +271,46 @@ class AudioPlayerController extends PlayerController {
   }
 
   @override
-  void enterPip() {
-    // TODO: implement enterPip
+  void enterPip() {}
+
+  @override
+  bool isMuted() {
+    return (player?.volume ?? 0) == 0;
+  }
+
+  @override
+  void toggleVolume(bool soundOn) {
+    player?.setVolume(soundOn ? 1 : 0);
+  }
+
+  @override
+  void setSpeed(double d) {
+    player?.setSpeed(d);
+  }
+
+  @override
+  double getSpeed() {
+    return player?.speed ?? 1;
+  }
+
+  @override
+  bool hasDashToggle() {
+    return false;
+  }
+
+  @override
+  void toggleDash() {
+    // TODO: implement toggleDash
+  }
+
+  @override
+  bool isUsingDash() {
+    // TODO: implement isUsingDash
+    throw UnimplementedError();
+  }
+
+  @override
+  Duration duration() {
+    return player?.duration ?? const Duration(milliseconds: 1);
   }
 }
