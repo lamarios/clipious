@@ -647,7 +647,7 @@
   "@rememberPlaybackSpeed": {
     "description": "Setting label for remembering playback speed"
   },
-  "videoFiltered": "この理由で動画はフィルター済み:",
+  "videoFiltered": "次の理由で動画をフィルター済み:",
   "@videoFiltered": {
     "description": "Label shown on video list when it is filtered out"
   },
@@ -797,7 +797,7 @@
   "@videoFilterOperationNotContain": {
     "description": "Label for video filter operation Does not contain"
   },
-  "videoFilterTapToReveal": "タップして表示",
+  "videoFilterTapToReveal": "タップで表示",
   "@videoFilterTapToReveal": {
     "description": "Label to tell user to tap to show a filtered video"
   },
