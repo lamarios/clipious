@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
+import 'package:invidious/objectbox.g.dart';
 import 'package:invidious/views/components/offlineVideoThumbnail.dart';
 import 'package:invidious/views/videoPlayer/playerControls.dart';
 
@@ -35,11 +36,12 @@ class AudioPlayer extends StatelessWidget {
               children: [
                 _.video != null
                     ? VideoThumbnailView(
+                        decoration: const BoxDecoration(),
                         videoId: _.video!.videoId,
                         thumbnailUrl: _.video?.getBestThumbnail()?.url ?? '',
                       )
                     : _.offlineVideo != null
-                        ? OfflineVideoThumbnail(key: ValueKey(_.offlineVideo?.videoId ?? ''), video: _.offlineVideo!)
+                        ? OfflineVideoThumbnail(borderRadius: 0, key: ValueKey(_.offlineVideo?.videoId ?? ''), video: _.offlineVideo!)
                         : const SizedBox.shrink(),
                 const PlayerControls()
               ],

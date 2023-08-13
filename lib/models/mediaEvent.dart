@@ -5,7 +5,7 @@ class MediaEvent {
   MediaEvent({this.type, required this.state});
 }
 
-enum MediaEventType { play, pause, seek, speedChanged, progress }
+enum MediaEventType { play, pause, seek, speedChanged, progress, volumeChanged }
 
 enum MediaState {
   idle,
@@ -13,5 +13,6 @@ enum MediaState {
   buffering,
   playing,
   ready,
-  completed;
+  error,
+  completed, miniDisplayChanged;
 }

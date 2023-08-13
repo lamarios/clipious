@@ -24,6 +24,13 @@ class MiniPlayerControlsController extends GetxController {
     }
   }
 
+  @override
+  onReady() {
+    MiniPlayerController.to()?.eventStream.stream.listen((event) {
+      update();
+    });
+  }
+
   togglePlay() {
     miniPlayerController?.togglePlaying();
     update();

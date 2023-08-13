@@ -1,12 +1,15 @@
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:get/get.dart';
 import 'package:invidious/models/mediaEvent.dart';
+import 'package:invidious/utils.dart';
 import 'package:logging/logging.dart';
 
+import '../main.dart';
 import 'interfaces/playerController.dart';
 import 'miniPayerController.dart';
 
 class PlayerControlController extends GetxController {
+  static PlayerControlController? to() => safeGet();
   MediaEvent event = MediaEvent(state: MediaState.idle);
   Duration audioPosition = Duration.zero;
   var log = Logger('PlayerControlControllers');
@@ -16,7 +19,8 @@ class PlayerControlController extends GetxController {
 
   @override
   void onReady() {
-    MiniPlayerController.to()?.controlStream.stream.listen(onStreamEvent);
+    log.fine("Controls ready!");
+    MiniPlayerController.to()?.eventStream.stream.listen(onStreamEvent);
     showControls();
     super.onReady();
   }
@@ -25,11 +29,14 @@ class PlayerControlController extends GetxController {
     log.fine('Event: ${event.state}, ${event.type}');
     switch (event.state) {
       case MediaState.buffering:
-        showControls();
+        // showControls();
         break;
       case MediaState.loading:
       case MediaState.ready:
         showControls();
+        break;
+      case MediaState.miniDisplayChanged:
+        displayControls = false;
         break;
       default:
         break;
@@ -46,21 +53,26 @@ class PlayerControlController extends GetxController {
         break;
     }
     this.event = event;
-    update();
+    print('UPDATE ${displayControls} ${event.state}');
+    if (displayControls || event.state == MediaState.miniDisplayChanged) {
+      update();
+    }
   }
 
   void showControls() {
-    displayControls = true;
-    update();
+    if (isTv || !(MiniPlayerController.to()?.isMini ?? true)) {
+      displayControls = true;
+      update();
 
-    EasyDebounce.debounce(
-      'player-controls-hide',
-      Duration(seconds: 3),
-      () {
-        displayControls = false;
-        update();
-      },
-    );
+      EasyDebounce.debounce(
+        'player-controls-hide',
+        const Duration(seconds: 3),
+        () {
+          displayControls = false;
+          update();
+        },
+      );
+    }
   }
 
   void onScrubbed(double value) {
@@ -74,5 +86,9 @@ class PlayerControlController extends GetxController {
     Duration seekTo = Duration(milliseconds: value.toInt());
     audioPosition = seekTo;
     update();
+  }
+
+  void setPlaybackSpeed(double d) {
+    MiniPlayerController.to()?.playerController?.setSpeed(d);
   }
 }

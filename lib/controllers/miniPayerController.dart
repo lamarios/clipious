@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:audio_service/audio_service.dart';
 import 'package:back_button_interceptor/back_button_interceptor.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:better_player/better_player.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
@@ -25,10 +26,13 @@ import '../../models/db/progress.dart' as dbProgress;
 import '../main.dart';
 import '../models/baseVideo.dart';
 import '../models/db/downloadedVideo.dart';
+import '../models/pair.dart';
+import '../models/sponsorSegment.dart';
+import '../models/sponsorSegmentTypes.dart';
 import '../models/video.dart';
 import 'interfaces/playerController.dart';
 
-const double targetHeight = 75;
+const double targetHeight = 69;
 const double miniPlayerThreshold = 300;
 const double bigPlayerThreshold = 700;
 
@@ -61,20 +65,30 @@ class MiniPlayerController extends GetxController {
   bool isAudio = true;
   Duration? startAt;
 
+  // sponsor block variables
+  int previousSponsorCheck = 0;
+  List<Pair<int>> sponsorSegments = List.of([]);
+  Pair<int> nextSegment = Pair(0, 0);
 
+  // end of sponsor block variables
 
   List<DownloadedVideo> offlineVideos = [];
 
   MiniPlayerController();
 
-  final eventStream = StreamController<MediaEvent>();
-  final controlStream = StreamController<MediaEvent>();
+  MiniPlayerController.withVideos(this.videos);
+
+  final eventStream = StreamController<MediaEvent>.broadcast();
 
   bool get isPlaying => playerController?.isPlaying() ?? false;
 
   bool get hasVideo => currentlyPlaying != null || offlineCurrentlyPlaying != null;
 
+  bool get hasQueue => offlineVideos.length > 1 || videos.length > 1;
+
   PlayerController? get playerController {
+    if (isTv) return VideoPlayerController.to();
+
     var playerController = isAudio ? AudioPlayerController.to() : VideoPlayerController.to();
     return playerController;
   }
@@ -82,53 +96,70 @@ class MiniPlayerController extends GetxController {
   @override
   onReady() {
     super.onReady();
-    BackButtonInterceptor.add(handleBackButton, name: 'miniPlayer', zIndex: 2);
 
-    eventStream.stream.map((event) {
-      switch (event.state) {
-        case MediaState.completed:
-          playNext();
-          break;
-        default:
-          break;
-      }
+    if (!isTv) {
+      BackButtonInterceptor.add(handleBackButton, name: 'miniPlayer', zIndex: 2);
 
-      switch (event.type) {
-        default:
-          MiniPlayerControlsController.to()?.update();
-          break;
-      }
+      eventStream.stream
+          .map((event) {
+            handleMediaEvent(event);
 
-      bool hasQueue = videos.length > 1 || offlineVideos.length > 1;
-      log.fine("Received event: ${event.state}");
-      var state = PlaybackState(
-        controls: [
-          hasQueue ? MediaControl.skipToPrevious : MediaControl.rewind,
-          if (isPlaying) MediaControl.pause else MediaControl.play,
-          MediaControl.stop,
-          hasQueue ? MediaControl.skipToNext : MediaControl.fastForward,
-        ],
-        systemActions: const {MediaAction.seek, MediaAction.seekForward, MediaAction.seekBackward, MediaAction.setShuffleMode, MediaAction.setRepeatMode},
-        androidCompactActionIndices: const [0, 1, 3],
-        processingState: const {
-          MediaState.idle: AudioProcessingState.idle,
-          MediaState.loading: AudioProcessingState.loading,
-          MediaState.buffering: AudioProcessingState.buffering,
-          MediaState.ready: AudioProcessingState.ready,
-          MediaState.completed: AudioProcessingState.completed,
-        }[event.state]!,
-        playing: event.state == MediaState.idle || event.state == MediaState.completed ? false : isPlaying,
-        updatePosition: playerController?.position() ?? Duration.zero,
-        bufferedPosition: playerController?.bufferedPosition() ?? Duration.zero,
-        speed: playerController?.speed() ?? 1,
-        queueIndex: currentIndex,
-      );
+            return event;
+          })
+          .where((event) => event.type != MediaEventType.progress)
+          .map((event) {
+            log.fine("Event state: ${event.state}");
+            var state = PlaybackState(
+              controls: [
+                hasQueue ? MediaControl.skipToPrevious : MediaControl.rewind,
+                if (isPlaying) MediaControl.pause else MediaControl.play,
+                MediaControl.stop,
+                hasQueue ? MediaControl.skipToNext : MediaControl.fastForward,
+              ],
+              systemActions: const {MediaAction.seek, MediaAction.seekForward, MediaAction.seekBackward, MediaAction.setShuffleMode, MediaAction.setRepeatMode},
+              androidCompactActionIndices: const [0, 1, 3],
+              processingState: const {
+                MediaState.idle: AudioProcessingState.idle,
+                MediaState.loading: AudioProcessingState.loading,
+                MediaState.buffering: AudioProcessingState.buffering,
+                MediaState.ready: AudioProcessingState.ready,
+                MediaState.completed: AudioProcessingState.completed,
+                MediaState.playing: AudioProcessingState.ready,
+              }[event.state]!,
+              playing: event.state == MediaState.idle || event.state == MediaState.completed ? false : isPlaying,
+              updatePosition: playerController?.position() ?? Duration.zero,
+              bufferedPosition: playerController?.bufferedPosition() ?? Duration.zero,
+              speed: playerController?.speed() ?? 1,
+              queueIndex: currentIndex,
+            );
 
-      controlStream.add(event);
-      return state;
-    }).pipe(mediaHandler.playbackState);
+            return state;
+          })
+          .pipe(mediaHandler.playbackState);
+    } else {
+      eventStream.stream.listen(handleMediaEvent);
+    }
+  }
 
-    // show();
+  handleMediaEvent(MediaEvent event) {
+    switch (event.state) {
+      case MediaState.completed:
+        if (currentlyPlaying != null) {
+          saveProgress(currentlyPlaying!.lengthSeconds);
+        }
+        playNext();
+        break;
+      default:
+        break;
+    }
+
+    switch (event.type) {
+      case MediaEventType.progress:
+        onProgress();
+        break;
+      default:
+        break;
+    }
   }
 
   @override
@@ -197,6 +228,7 @@ class MiniPlayerController extends GetxController {
 
   hide() {
     isMini = true;
+    eventStream.add(MediaEvent(state: MediaState.miniDisplayChanged));
     top = null;
     height = targetHeight;
     isHidden = true;
@@ -219,22 +251,23 @@ class MiniPlayerController extends GetxController {
     return video;
   }
 
-  saveProgress(String videoId, int max, int timeInSeconds) {
-    controlStream.add(MediaEvent(state: MediaState.playing, type: MediaEventType.progress));
-    int currentPosition = timeInSeconds;
-    // saving progress
-    var progress = dbProgress.Progress.named(progress: currentPosition / max, videoId: videoId);
-    db.saveProgress(progress);
+  saveProgress(int timeInSeconds) {
+    if (currentlyPlaying != null) {
+      int currentPosition = timeInSeconds;
+      // saving progress
+      var progress = dbProgress.Progress.named(progress: currentPosition / currentlyPlaying!.lengthSeconds, videoId: currentlyPlaying!.videoId);
+      db.saveProgress(progress);
 
-    if (progress.progress > 0.5) {
-      EasyDebounce.debounce('invidious-progress-sync-${progress.videoId}', const Duration(seconds: 5), () {
-        if (service.isLoggedIn()) {
-          service.addToUserHistory(progress.videoId);
-        }
-      });
+      if (progress.progress > 0.5) {
+        EasyDebounce.debounce('invidious-progress-sync-${progress.videoId}', const Duration(seconds: 5), () {
+          if (service.isLoggedIn()) {
+            service.addToUserHistory(progress.videoId);
+          }
+        });
+      }
+
+      VideoInListController.to(progress.videoId)?.updateProgress();
     }
-
-    VideoInListController.to(progress.videoId)?.updateProgress();
   }
 
   queueVideos(List<BaseVideo> videos) {
@@ -251,6 +284,7 @@ class MiniPlayerController extends GetxController {
 
   showBigPlayer() {
     isMini = false;
+    eventStream.add(MediaEvent(state: MediaState.miniDisplayChanged));
     top = 0;
     opacity = 1;
     isHidden = false;
@@ -262,12 +296,49 @@ class MiniPlayerController extends GetxController {
   showMiniPlayer() {
     if (currentlyPlaying != null || offlineCurrentlyPlaying != null) {
       isMini = true;
+      eventStream.add(MediaEvent(state: MediaState.miniDisplayChanged));
       top = null;
       isHidden = false;
       opacity = 1;
       playerController?.toggleControls(false);
       MiniPlayerAwareController.to()?.setPadding(true);
       update();
+    }
+  }
+
+  onProgress() {
+    if (playerController != null) {
+      var pc = playerController!;
+
+      int currentPosition = pc.position().inSeconds;
+      if (currentPosition > previousSponsorCheck + 1) {
+        // saving progress
+        saveProgress(currentPosition);
+        log.fine("video event");
+
+        if (sponsorSegments.isNotEmpty) {
+          double positionInMs = currentPosition * 1000;
+          Pair<int> nextSegment = sponsorSegments.firstWhere((e) => e.first <= positionInMs && positionInMs <= e.last, orElse: () => Pair<int>(-1, -1));
+          if (nextSegment.first != -1) {
+            pc.seek(Duration(milliseconds: nextSegment.last + 1000));
+            final ScaffoldMessengerState? scaffold = scaffoldKey.currentState;
+
+            if (scaffold != null) {
+              var locals = AppLocalizations.of(scaffold.context)!;
+              scaffold.showSnackBar(SnackBar(
+                content: Text(locals.sponsorSkipped),
+                duration: const Duration(seconds: 1),
+              ));
+            }
+          }
+        }
+
+        previousSponsorCheck = currentPosition;
+      } else if (currentPosition + 2 < previousSponsorCheck) {
+        // if we're more than 2 seconds behind, means we probably seek backward manually far away
+        // so we reset the position
+        previousSponsorCheck = currentPosition;
+      }
     }
   }
 
@@ -408,6 +479,7 @@ class MiniPlayerController extends GetxController {
         v = await service.getVideo(video.videoId);
       }
       currentlyPlaying = v;
+      setSponsorBlock();
       playerController?.switchVideo(v, startAt: startAt);
     } else {
       offlineCurrentlyPlaying = video;
@@ -491,6 +563,7 @@ class MiniPlayerController extends GetxController {
     // we  change the display mode if there's a big enough drag movement to avoid jittery behavior when dragging slow
     if (details.delta.dy.abs() > 3) {
       isMini = details.delta.dy > 0;
+      eventStream.add(MediaEvent(state: MediaState.miniDisplayChanged));
     }
     dragDistance += details.delta.dy;
     // we're going down, putting threshold high easier to switch to mini player
@@ -513,39 +586,6 @@ class MiniPlayerController extends GetxController {
 
   bool isVideoInQueue(Video video) {
     return videos.indexWhere((element) => element.videoId == video.videoId) >= 0;
-  }
-
-  void handleVideoEvent(BetterPlayerEvent event) {
-    switch (event.betterPlayerEventType) {
-      case BetterPlayerEventType.progress:
-        if (isMini) {
-          int currentPosition = (event.parameters?['progress'] as Duration).inSeconds;
-          int total = (event.parameters?['duration'] as Duration).inSeconds;
-          progress = currentPosition / total;
-          MiniPlayerProgressController.to()?.setProgress(progress);
-        }
-        break;
-      case BetterPlayerEventType.finished:
-        break;
-      case BetterPlayerEventType.pipStart:
-        isPip = true;
-        update();
-        break;
-      case BetterPlayerEventType.pipStop:
-        isPip = false;
-        update();
-        break;
-      case BetterPlayerEventType.openFullscreen:
-        isFullScreen = true;
-        update();
-        break;
-      case BetterPlayerEventType.hideFullscreen:
-        isFullScreen = false;
-        update();
-        break;
-      default:
-        break;
-    }
   }
 
   onQueueReorder(int oldItemIndex, int newItemIndex) {
@@ -578,6 +618,27 @@ class MiniPlayerController extends GetxController {
       }
 
       update();
+    }
+  }
+
+  setSponsorBlock() async {
+    if (currentlyPlaying != null) {
+      List<SponsorSegmentType> types = SponsorSegmentType.values.where((e) => db.getSettings(e.settingsName())?.value == 'true').toList();
+
+      if (types.isNotEmpty) {
+        List<SponsorSegment> sponsorSegments = await service.getSponsorSegments(currentlyPlaying!.videoId, types);
+        List<Pair<int>> segments = List.from(sponsorSegments.map((e) {
+          Duration start = Duration(seconds: e.segment[0].floor());
+          Duration end = Duration(seconds: e.segment[1].floor());
+          Pair<int> segment = Pair(start.inMilliseconds, end.inMilliseconds);
+          return segment;
+        }));
+
+        this.sponsorSegments = segments;
+        log.fine('we found ${segments.length} segments to skip');
+      } else {
+        sponsorSegments = [];
+      }
     }
   }
 
