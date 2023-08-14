@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:invidious/utils.dart';
@@ -9,15 +10,19 @@ import 'package:invidious/views/tv/settings/tvSelectFromList.dart';
 import 'package:invidious/views/tv/settings/tvSponsorBlockSettings.dart';
 import 'package:invidious/views/tv/tvOverScan.dart';
 import 'package:locale_names/locale_names.dart';
+import 'package:logging/logging.dart';
 
 import '../../controllers/settingsController.dart';
 import '../../globals.dart';
 
+var log = Logger('TvSettings');
+
 class TVSettings extends StatelessWidget {
   const TVSettings({Key? key}) : super(key: key);
 
-  openSelectCountry(BuildContext context, SettingsController controller) {
+  openSelectCountry(BuildContext context) {
     AppLocalizations locals = AppLocalizations.of(context)!;
+    var cubit = context.read<SettingsCubit>();
 
     Navigator.of(context).push(MaterialPageRoute(
       builder: (context) {
@@ -26,22 +31,23 @@ class TVSettings extends StatelessWidget {
         return TvSelectFromList(
           title: locals.selectBrowsingCountry,
           options: countryNames,
-          selected: controller.country.name,
-          onSelect: controller.selectCountry,
+          selected: cubit.state.country.name,
+          onSelect: cubit.selectCountry,
         );
       },
     ));
   }
 
-  openSelectOnStart(BuildContext context, SettingsController controller) {
+  openSelectOnStart(BuildContext context) {
     AppLocalizations locals = AppLocalizations.of(context)!;
+    var cubit = context.read<SettingsCubit>();
     var categories = getCategories(context);
     Navigator.of(context).push(MaterialPageRoute(
       builder: (context) => TvSelectFromList(
         title: locals.whenAppStartsShow,
         options: categories,
-        selected: categories[controller.onOpen],
-        onSelect: (selected) => controller.selectOnOpen(selected, categories),
+        selected: categories[cubit.state.onOpen],
+        onSelect: (selected) => cubit.selectOnOpen(selected, categories),
       ),
     ));
   }
@@ -69,12 +75,13 @@ class TVSettings extends StatelessWidget {
     ));
   }
 
-  showSelectLanguage(BuildContext context, SettingsController controller) {
+  showSelectLanguage(BuildContext context) {
     var localsList = AppLocalizations.supportedLocales;
     var localsStrings = localsList.map((e) => e.nativeDisplayLanguageScript ?? '').toList();
     var locals = AppLocalizations.of(context)!;
+    var cubit = context.read<SettingsCubit>();
 
-    List<String>? localeString = controller.locale?.split('_');
+    List<String>? localeString = cubit.state.locale?.split('_');
     Locale? selected = localeString != null ? Locale.fromSubtags(languageCode: localeString[0], scriptCode: localeString.length >= 2 ? localeString[1] : null) : null;
 
     Navigator.of(context).push(MaterialPageRoute(
@@ -84,27 +91,28 @@ class TVSettings extends StatelessWidget {
         selected: selected?.nativeDisplayLanguageScript ?? locals.followSystem,
         onSelect: (String selected) {
           if (selected == locals.followSystem) {
-            controller.setLocale(localsList, localsStrings, null);
+            cubit.setLocale(localsList, localsStrings, null);
           } else {
-            controller.setLocale(localsList, localsStrings, selected);
+            cubit.setLocale(localsList, localsStrings, selected);
           }
         },
       ),
     ));
   }
 
-  selectTheme(BuildContext context, SettingsController _) {
+  selectTheme(BuildContext context) {
     var locals = AppLocalizations.of(context)!;
     ColorScheme colors = Theme.of(context).colorScheme;
+    var cubit = context.read<SettingsCubit>();
 
     Navigator.of(context).push(MaterialPageRoute(
       builder: (context) => TvSelectFromList(
         title: locals.themeBrightness,
-        options: ThemeMode.values.map((e) => _.getThemeLabel(locals, e)).toList(),
-        selected: _.getThemeLabel(locals, _.themeMode),
+        options: ThemeMode.values.map((e) => cubit.getThemeLabel(locals, e)).toList(),
+        selected: cubit.getThemeLabel(locals, cubit.state.themeMode),
         onSelect: (String selected) {
-          ThemeMode? theme = ThemeMode.values.firstWhereOrNull((element) => _.getThemeLabel(locals, element) == selected);
-          _.setThemeMode(theme);
+          ThemeMode? theme = ThemeMode.values.firstWhereOrNull((element) => cubit.getThemeLabel(locals, element) == selected);
+          cubit.setThemeMode(theme);
         },
       ),
     ));
@@ -117,113 +125,115 @@ class TVSettings extends StatelessWidget {
     TextTheme textTheme = Theme.of(context).textTheme;
     return Scaffold(
       body: TvOverscan(
-        child: GetBuilder<SettingsController>(
-            init: SettingsController(),
-            builder: (_) {
-              return DefaultTextStyle(
-                style: textTheme.bodyLarge!,
-                child: ListView(
-                  children: [
-                    SettingsTitle(title: locals.browsing),
-                    SettingsTile(
-                      title: locals.country,
-                      description: _.country.name,
-                      onSelected: (context) => openSelectCountry(context, _),
-                    ),
-                    SettingsTile(
-                      title: locals.appLanguage,
-                      description: _.getLocaleDisplayName() ?? locals.followSystem,
-                      onSelected: (context) => showSelectLanguage(context, _),
-                    ),
-                    SettingsTile(
-                      title: 'Return YouTube Dislike',
-                      description: locals.returnYoutubeDislikeDescription,
-                      onSelected: (context) => _.toggleReturnYoutubeDislike(!_.useReturnYoutubeDislike),
-                      trailing: Switch(onChanged: (value) {}, value: _.useReturnYoutubeDislike),
-                    ),
-                    SettingsTile(
-                      title: locals.searchHistory,
-                      description: locals.searchHistoryDescription,
-                      onSelected: openSearchHistorySettings,
-                    ),
+        child: BlocProvider(
+          create: (context) => SettingsCubit(SettingsController()),
+          child: BlocBuilder<SettingsCubit, SettingsController>(builder: (context, _) {
+            var cubit = context.read<SettingsCubit>();
+            return DefaultTextStyle(
+              style: textTheme.bodyLarge!,
+              child: ListView(
+                children: [
+                  SettingsTitle(title: locals.browsing),
+                  SettingsTile(
+                    title: locals.country,
+                    description: _.country.name,
+                    onSelected: (context) => openSelectCountry(context),
+                  ),
+                  SettingsTile(
+                    title: locals.appLanguage,
+                    description: cubit.getLocaleDisplayName() ?? locals.followSystem,
+                    onSelected: (context) => showSelectLanguage(context),
+                  ),
+                  SettingsTile(
+                    title: 'Return YouTube Dislike',
+                    description: locals.returnYoutubeDislikeDescription,
+                    onSelected: (context) => cubit.toggleReturnYoutubeDislike(!_.useReturnYoutubeDislike),
+                    trailing: Switch(onChanged: (value) {}, value: _.useReturnYoutubeDislike),
+                  ),
+                  SettingsTile(
+                    title: locals.searchHistory,
+                    description: locals.searchHistoryDescription,
+                    onSelected: openSearchHistorySettings,
+                  ),
 /*
-                    SettingsTile(
-                      title: locals.whenAppStartsShow,
-                      description: getCategories(context)[_.onOpen],
-                      onSelected: (context) => openSelectOnStart(context, _),
-                    ),
+                      SettingsTile(
+                        title: locals.whenAppStartsShow,
+                        description: getCategories(context)[_.onOpen],
+                        onSelected: (context) => openSelectOnStart(context, _),
+                      ),
 */
-                    SettingsTitle(title: locals.servers),
-                    SettingsTile(title: locals.manageServers, description: locals.currentServer(db.getCurrentlySelectedServer().url), onSelected: openManageServers),
-                    SettingsTile(
-                      title: locals.skipSslVerification,
-                      description: locals.skipSslVerification,
-                      onSelected: (context) => _.toggleSslVerification(!_.skipSslVerification),
-                      trailing: Switch(onChanged: (value) {}, value: _.skipSslVerification),
-                    ),
-                    SettingsTitle(title: locals.videoPlayer),
-                    SettingsTile(
-                      title: locals.useDash,
-                      description: locals.useDashDescription,
-                      onSelected: (context) => _.toggleDash(!_.useDash),
-                      trailing: Switch(onChanged: (value) {}, value: _.useDash),
-                    ),
-                    SettingsTile(
-                      title: locals.useProxy,
-                      description: locals.useProxyDescription,
-                      onSelected: (context) => _.toggleProxy(!_.useProxy),
-                      trailing: Switch(onChanged: (value) {}, value: _.useProxy),
-                    ),
-                    AdjustmentSettingTile(
-                      title: locals.subtitleFontSize,
-                      value: _.subtitleSize.floor(),
-                      description: locals.subtitleFontSizeDescription,
-                      onNewValue: _.setSubtitleSize,
-                    ),
-                    SettingsTile(
-                      title: locals.rememberSubtitleLanguage,
-                      description: locals.rememberSubtitleLanguageDescription,
-                      onSelected: (context) => _.toggleRememberSubtitles(!_.rememberSubtitles),
-                      trailing: Switch(onChanged: (value) {}, value: _.rememberSubtitles),
-                    ),
-                    SettingsTile(
-                      title: locals.rememberPlaybackSpeed,
-                      description: locals.rememberPlaybackSpeedDescription,
-                      onSelected: (context) => _.toggleRememberPlaybackSpeed(!_.rememberPlayBackSpeed),
-                      trailing: Switch(onChanged: (value) {}, value: _.rememberPlayBackSpeed),
-                    ),
-                    SettingsTile(
-                      title: 'SponsorBlock',
-                      description: locals.sponsorBlockDescription,
-                      onSelected: openSponsorBlockSettings,
-                    ),
-                    SettingsTitle(title: locals.appearance),
-                    SettingsTile(
-                      title: locals.themeBrightness,
-                      description: _.getThemeLabel(locals, _.themeMode),
-                      onSelected: (context) => selectTheme(context, _),
-                    ),
-                    SettingsTile(
-                      title: locals.blackBackground,
-                      description: locals.blackBackgroundDescription,
-                      onSelected: (context) => _.toggleBlackBackground(!_.blackBackground),
-                      trailing: Switch(onChanged: (value) {}, value: _.blackBackground),
-                    ),
-                    SettingsTitle(title: locals.about),
-                    SettingsTile(
-                      title: '${locals.name}: ${_.packageInfo.appName}',
-                      description: '${locals.package}: ${_.packageInfo.packageName}',
-                      onSelected: (context) {},
-                    ),
-                    SettingsTile(
-                      title: '${locals.version}: ${_.packageInfo.version}',
-                      description: '${locals.build}: ${_.packageInfo.buildNumber}',
-                      onSelected: (context) {},
-                    )
-                  ],
-                ),
-              );
-            }),
+                  SettingsTitle(title: locals.servers),
+                  SettingsTile(title: locals.manageServers, description: locals.currentServer(db.getCurrentlySelectedServer().url), onSelected: openManageServers),
+                  SettingsTile(
+                    title: locals.skipSslVerification,
+                    description: locals.skipSslVerification,
+                    onSelected: (context) => cubit.toggleSslVerification(!_.skipSslVerification),
+                    trailing: Switch(onChanged: (value) {}, value: _.skipSslVerification),
+                  ),
+                  SettingsTitle(title: locals.videoPlayer),
+                  SettingsTile(
+                    title: locals.useDash,
+                    description: locals.useDashDescription,
+                    onSelected: (context) => cubit.toggleDash(!_.useDash),
+                    trailing: Switch(onChanged: (value) {}, value: _.useDash),
+                  ),
+                  SettingsTile(
+                    title: locals.useProxy,
+                    description: locals.useProxyDescription,
+                    onSelected: (context) => cubit.toggleProxy(!_.useProxy),
+                    trailing: Switch(onChanged: (value) {}, value: _.useProxy),
+                  ),
+                  AdjustmentSettingTile(
+                    title: locals.subtitleFontSize,
+                    value: _.subtitleSize.floor(),
+                    description: locals.subtitleFontSizeDescription,
+                    onNewValue: cubit.setSubtitleSize,
+                  ),
+                  SettingsTile(
+                    title: locals.rememberSubtitleLanguage,
+                    description: locals.rememberSubtitleLanguageDescription,
+                    onSelected: (context) => cubit.toggleRememberSubtitles(!_.rememberSubtitles),
+                    trailing: Switch(onChanged: (value) {}, value: _.rememberSubtitles),
+                  ),
+                  SettingsTile(
+                    title: locals.rememberPlaybackSpeed,
+                    description: locals.rememberPlaybackSpeedDescription,
+                    onSelected: (context) => cubit.toggleRememberPlaybackSpeed(!_.rememberPlayBackSpeed),
+                    trailing: Switch(onChanged: (value) {}, value: _.rememberPlayBackSpeed),
+                  ),
+                  SettingsTile(
+                    title: 'SponsorBlock',
+                    description: locals.sponsorBlockDescription,
+                    onSelected: openSponsorBlockSettings,
+                  ),
+                  SettingsTitle(title: locals.appearance),
+                  SettingsTile(
+                    title: locals.themeBrightness,
+                    description: cubit.getThemeLabel(locals, _.themeMode),
+                    onSelected: (context) => selectTheme(context),
+                  ),
+                  SettingsTile(
+                    title: locals.blackBackground,
+                    description: locals.blackBackgroundDescription,
+                    onSelected: (context) => cubit.toggleBlackBackground(!_.blackBackground),
+                    trailing: Switch(onChanged: (value) {}, value: _.blackBackground),
+                  ),
+                  SettingsTitle(title: locals.about),
+                  SettingsTile(
+                    title: '${locals.name}: ${_.packageInfo.appName}',
+                    description: '${locals.package}: ${_.packageInfo.packageName}',
+                    onSelected: (context) {},
+                  ),
+                  SettingsTile(
+                    title: '${locals.version}: ${_.packageInfo.version}',
+                    description: '${locals.build}: ${_.packageInfo.buildNumber}',
+                    onSelected: (context) {},
+                  )
+                ],
+              ),
+            );
+          }),
+        ),
       ),
     );
   }

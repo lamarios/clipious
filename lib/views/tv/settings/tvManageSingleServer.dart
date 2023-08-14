@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:invidious/views/tv/tvButton.dart';
@@ -15,13 +16,15 @@ class TvManageSingleServer extends StatelessWidget {
 
   const TvManageSingleServer({Key? key, required this.server}) : super(key: key);
 
-  void showLogInWithCookiesDialog(BuildContext context, ServerSettingsController controller) async {
+  void showLogInWithCookiesDialog(BuildContext context) async {
     var locals = AppLocalizations.of(context)!;
     var textTheme = Theme.of(context).textTheme;
     TextEditingController userController = TextEditingController();
     TextEditingController passwordController = TextEditingController();
     FocusNode focusNode = FocusNode();
     ColorScheme colors = Theme.of(context).colorScheme;
+
+    var cubit = context.read<ServerSettingsCubit>();
 
     showTvDialog(
         context: context,
@@ -83,7 +86,7 @@ class TvManageSingleServer extends StatelessWidget {
           TvButton(
             onPressed: (context) async {
               try {
-                await controller.logInWithCookie(userController.text, passwordController.text);
+                await cubit.logInWithCookie(userController.text, passwordController.text);
                 Navigator.of(context).pop();
               } catch (err) {
                 showTvAlertdialog(context, locals.error, [
@@ -174,45 +177,46 @@ class TvManageSingleServer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: TvOverscan(
-        child: GetBuilder<ServerSettingsController>(
-            init: ServerSettingsController(server),
-            builder: (_) {
-              AppLocalizations locals = AppLocalizations.of(context)!;
-              Server server = _.server;
-              bool isLoggedIn = (server.authToken != null && server.authToken!.isNotEmpty) || (server.sidCookie != null && server.sidCookie!.isNotEmpty);
+        child: BlocProvider(
+          create: (BuildContext context) => ServerSettingsCubit(server),
+          child: BlocBuilder<ServerSettingsCubit, Server>(builder: (context, server) {
+            var cubit = context.read<ServerSettingsCubit>();
+            AppLocalizations locals = AppLocalizations.of(context)!;
+            bool isLoggedIn = (server.authToken != null && server.authToken!.isNotEmpty) || (server.sidCookie != null && server.sidCookie!.isNotEmpty);
 
-              return ListView(
-                children: [
-                  SettingsTitle(title: server.url),
-                  SettingsTile(
-                    enabled: !server.inUse,
-                    title: locals.useThisServer,
-                    onSelected: (context) => _.useServer(true),
-                    autofocus: true,
-                    trailing: Switch(onChanged: server.inUse ? null : (value) {}, value: server.inUse),
-                  ),
-                  SettingsTitle(title: locals.authentication),
-                  SettingsTile(
-                    title: locals.cookieLogin,
-                    enabled: !isLoggedIn,
-                    onSelected: (context) => showLogInWithCookiesDialog(context, _),
-                  ),
-                  SettingsTile(
-                    title: locals.logout,
-                    enabled: isLoggedIn,
-                    onSelected: (context) => _.logOut(),
-                  ),
-                  SettingsTile(
-                    title: locals.delete,
-                    enabled: _.canDelete,
-                    onSelected: (context) {
-                      _.deleteServer();
-                      Navigator.of(context).pop();
-                    },
-                  )
-                ],
-              );
-            }),
+            return ListView(
+              children: [
+                SettingsTitle(title: server.url),
+                SettingsTile(
+                  enabled: !server.inUse,
+                  title: locals.useThisServer,
+                  onSelected: (context) => cubit.useServer(true),
+                  autofocus: true,
+                  trailing: Switch(onChanged: server.inUse ? null : (value) {}, value: server.inUse),
+                ),
+                SettingsTitle(title: locals.authentication),
+                SettingsTile(
+                  title: locals.cookieLogin,
+                  enabled: !isLoggedIn,
+                  onSelected: (context) => showLogInWithCookiesDialog(context),
+                ),
+                SettingsTile(
+                  title: locals.logout,
+                  enabled: isLoggedIn,
+                  onSelected: (context) => cubit.logOut(),
+                ),
+                SettingsTile(
+                  title: locals.delete,
+                  enabled: cubit.canDelete,
+                  onSelected: (context) {
+                    cubit.deleteServer();
+                    Navigator.of(context).pop();
+                  },
+                )
+              ],
+            );
+          }),
+        ),
       ),
     );
   }

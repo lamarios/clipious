@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:invidious/controllers/sponsorBlockSettingsController.dart';
@@ -14,21 +15,25 @@ class TvSponsorBlockSettings extends StatelessWidget {
   Widget build(BuildContext context) {
     AppLocalizations locals = AppLocalizations.of(context)!;
     return Scaffold(
-      body: GetBuilder<SponsorBlockSettingsController>(
-        init: SponsorBlockSettingsController(),
-        global: false,
-        builder: (_) => TvOverscan(
-          child: ListView(
-            children: [
-              SettingsTitle(title: locals.sponsorBlockSettingsQuickDescription),
-              ...SponsorSegmentType.values.map((t) => SettingsTile(
-                    trailing: Switch(value: _.value(t), onChanged: (value) {}),
-                    onSelected: (context) => _.setValue(t, !_.value(t)),
-                    title: SponsorSegmentType.getLabel(t, locals),
-                    description: SponsorSegmentType.getDescription(t, locals),
-                  ))
-            ],
-          ),
+      body: BlocProvider(
+        create: (context) => SponsorBlockCubit(0),
+        child: BlocBuilder<SponsorBlockCubit, int>(
+          builder: (context, _) {
+            var cubit = context.read<SponsorBlockCubit>();
+            return TvOverscan(
+              child: ListView(
+                children: [
+                  SettingsTitle(title: locals.sponsorBlockSettingsQuickDescription),
+                  ...SponsorSegmentType.values.map((t) => SettingsTile(
+                        trailing: Switch(value: cubit.value(t), onChanged: (value) {}),
+                        onSelected: (context) => cubit.setValue(t, !cubit.value(t)),
+                        title: SponsorSegmentType.getLabel(t, locals),
+                        description: SponsorSegmentType.getDescription(t, locals),
+                      ))
+                ],
+              ),
+            );
+          },
         ),
       ),
     );

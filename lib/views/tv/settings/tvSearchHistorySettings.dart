@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:invidious/controllers/settingsController.dart';
@@ -58,31 +59,32 @@ class TvSearchHistorySettings extends StatelessWidget {
     TextTheme textTheme = Theme.of(context).textTheme;
 
     return Scaffold(
-      body: GetBuilder<SettingsController>(
-        init: SettingsController(),
-        global: false,
-        builder: (_) => TvOverscan(
-          child: ListView(
-            children: [
-              SettingsTitle(title: locals.searchHistoryDescription),
-              SettingsTile(
-                title: locals.enableSearchHistory,
-                trailing: Switch(onChanged: (value) {}, value: _.useSearchHistory),
-                onSelected: (ctx) => _.toggleSearchHistory(!_.useSearchHistory),
-              ),
-              AdjustmentSettingTile(
-                title: locals.searchHistoryLimit,
-                description: locals.searchHistoryLimitDescription,
-                value: _.searchHistoryLimit,
-                onNewValue: _.setHistoryLimit,
-              ),
-              SettingsTile(
-                title: locals.clearSearchHistory,
-                onSelected: (context) => showClearHistoryDialog(context),
-              )
-            ],
-          ),
-        ),
+      body: BlocBuilder<SettingsCubit, SettingsController>(
+        builder: (context, _) {
+          var cubit = context.read<SettingsCubit>();
+          return TvOverscan(
+            child: ListView(
+              children: [
+                SettingsTitle(title: locals.searchHistoryDescription),
+                SettingsTile(
+                  title: locals.enableSearchHistory,
+                  trailing: Switch(onChanged: (value) {}, value: _.useSearchHistory),
+                  onSelected: (ctx) => cubit.toggleSearchHistory(!_.useSearchHistory),
+                ),
+                AdjustmentSettingTile(
+                  title: locals.searchHistoryLimit,
+                  description: locals.searchHistoryLimitDescription,
+                  value: _.searchHistoryLimit,
+                  onNewValue: cubit.setHistoryLimit,
+                ),
+                SettingsTile(
+                  title: locals.clearSearchHistory,
+                  onSelected: (context) => showClearHistoryDialog(context),
+                )
+              ],
+            ),
+          );
+        },
       ),
     );
   }

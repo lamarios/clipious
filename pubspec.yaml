@@ -32,7 +32,7 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  json_annotation: 4.8.1
+  json_annotation: ^4.8.1
   http: 1.1.0
   after_layout: 1.2.0
   #  video_player: 2.5.1
@@ -81,6 +81,9 @@ dependencies:
   audio_service: 0.18.10
   carousel_slider: 4.2.1
   flutter_animate: 4.2.0+1
+  bloc: 8.1.2
+  flutter_bloc: 8.1.3
+  copy_with_extension: 5.0.4
 dependency_overrides:
   #  wakelock_windows:
   #    git: # see https://github.com/creativecreatorormaybenot/wakelock/pull/203 for updates
@@ -103,10 +106,11 @@ dev_dependencies:
     sdk: flutter
   flutter_test:
     sdk: flutter
-  build_runner: 2.4.6
-  json_serializable: 6.7.1
+  build_runner: ^2.4.6
+  json_serializable: ^6.7.1
   objectbox_generator: any
   test: any
+  copy_with_extension_gen: 5.0.4
   flutter_launcher_icons: ^0.13.1
 
   # The "flutter_lints" package below contains a set of recommended lints to

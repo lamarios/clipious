@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:invidious/utils.dart';
@@ -13,16 +14,21 @@ class TvManageServersInner extends StatelessWidget {
   const TvManageServersInner({Key? key}) : super(key: key);
 
   openServer(BuildContext context, Server s) {
-    Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) => TvManageSingleServer(
-        server: s,
-      ),
-    ));
+    var cubit = context.read<ServerListSettingsCubit>();
+    Navigator.of(context)
+        .push(MaterialPageRoute(
+          builder: (context) => TvManageSingleServer(
+            server: s,
+          ),
+        ))
+        .then((value) => cubit.refreshServers());
   }
 
   addServerDialog(BuildContext context, ServerListSettingsController controller) {
     var locals = AppLocalizations.of(context)!;
     var textTheme = Theme.of(context).textTheme;
+    var cubit = context.read<ServerListSettingsCubit>();
+
     FocusNode focusNode = FocusNode();
     showTvDialog(
       title: locals.addServer,
@@ -40,7 +46,7 @@ class TvManageServersInner extends StatelessWidget {
         TvButton(
           onPressed: (context) async {
             try {
-              await controller.saveServer();
+              await cubit.saveServer();
               Navigator.pop(context);
             } catch (err) {
               await showTvAlertdialog(context, 'Error', [
@@ -74,7 +80,7 @@ class TvManageServersInner extends StatelessWidget {
                 enableSuggestions: false,
                 enableIMEPersonalizedLearning: false,
               ),
-              Row(
+              const Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [],
               ),
@@ -89,68 +95,67 @@ class TvManageServersInner extends StatelessWidget {
   Widget build(BuildContext context) {
     ColorScheme colorScheme = Theme.of(context).colorScheme;
     AppLocalizations locals = AppLocalizations.of(context)!;
-    return GetBuilder<ServerListSettingsController>(
-        init: ServerListSettingsController(),
-        builder: (_) {
-          var filteredPublicServers = _.publicServers.where((s) => _.dbServers.indexWhere((element) => element.url == s.url) == -1).toList();
-          return ListView(children: [
-            SettingsTitle(title: locals.yourServers),
-            ..._.dbServers.map((s) => SettingsTile(
-                  leading: InkWell(
-                    onTap: () => _.switchServer(s),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Icon(
-                        Icons.done,
-                        color: s.inUse ? colorScheme.primary : colorScheme.secondaryContainer,
-                      ),
-                    ),
+    return BlocBuilder<ServerListSettingsCubit, ServerListSettingsController>(builder: (context, _) {
+      var cubit = context.read<ServerListSettingsCubit>();
+      var filteredPublicServers = _.publicServers.where((s) => _.dbServers.indexWhere((element) => element.url == s.url) == -1).toList();
+      return ListView(children: [
+        SettingsTitle(title: locals.yourServers),
+        ..._.dbServers.map((s) => SettingsTile(
+              leading: InkWell(
+                onTap: () => cubit.switchServer(s),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Icon(
+                    Icons.done,
+                    color: s.inUse ? colorScheme.primary : colorScheme.secondaryContainer,
                   ),
-                  title: s.url,
-                  description: '${_.isLoggedInToServer(s.url) ? '${locals.loggedIn}, ' : ''} ${locals.tapToManage}',
-                  onSelected: (context) => openServer(context, s),
-                )),
-            SettingsTile(
-              title: locals.addServer,
-              leading: Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Icon(
-                  Icons.add,
-                  color: colorScheme.secondary,
                 ),
               ),
-              onSelected: (context) => addServerDialog(context, _),
+              title: s.url,
+              description: '${cubit.isLoggedInToServer(s.url) ? '${locals.loggedIn}, ' : ''} ${locals.tapToManage}',
+              onSelected: (context) => openServer(context, s),
+            )),
+        SettingsTile(
+          title: locals.addServer,
+          leading: Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Icon(
+              Icons.add,
+              color: colorScheme.secondary,
             ),
-            SettingsTitle(title: locals.publicServers),
-            ..._.publicServersError != PublicServerErrors.none
+          ),
+          onSelected: (context) => addServerDialog(context, _),
+        ),
+        SettingsTitle(title: locals.publicServers),
+        ..._.publicServersError != PublicServerErrors.none
+            ? [
+                SettingsTile(
+                  onSelected: (context) => cubit.getPublicServers(),
+                  title: locals.publicServersError,
+                )
+              ]
+            : _.pinging
                 ? [
                     SettingsTile(
-                      onSelected: (context) => _.getPublicServers(),
-                      title: locals.publicServersError,
+                      title: locals.loadingPublicServer,
+                      leading: SizedBox(
+                          height: 15,
+                          width: 15,
+                          child: CircularProgressIndicator(
+                            strokeWidth: 2,
+                            value: _.publicServerProgress > 0 ? _.publicServerProgress : null,
+                          )),
                     )
                   ]
-                : _.pinging
-                    ? [
-                        SettingsTile(
-                          title: locals.loadingPublicServer,
-                          leading: SizedBox(
-                              height: 15,
-                              width: 15,
-                              child: CircularProgressIndicator(
-                                strokeWidth: 2,
-                                value: _.publicServerProgress > 0 ? _.publicServerProgress : null,
-                              )),
-                        )
-                      ]
-                    : filteredPublicServers
-                        .map((s) => SettingsTile(
-                              key: Key(s.url),
-                              title: '${s.url} - ${(s.ping != null && s.ping!.compareTo(const Duration(seconds: pingTimeout)) == -1) ? '${s.ping?.inMilliseconds}ms' : '>${pingTimeout}s'}',
-                              description: '${(s.flag != null && s.region != null) ? '${s.flag} - ${s.region} - ' : ''} ${locals.tapToAddServer}',
-                              onSelected: (context) => _.upsertServer(s),
-                            ))
-                        .toList()
-          ]);
-        });
+                : filteredPublicServers
+                    .map((s) => SettingsTile(
+                          key: Key(s.url),
+                          title: '${s.url} - ${(s.ping != null && s.ping!.compareTo(const Duration(seconds: pingTimeout)) == -1) ? '${s.ping?.inMilliseconds}ms' : '>${pingTimeout}s'}',
+                          description: '${(s.flag != null && s.region != null) ? '${s.flag} - ${s.region} - ' : ''} ${locals.tapToAddServer}',
+                          onSelected: (context) => cubit.upsertServer(s),
+                        ))
+                    .toList()
+      ]);
+    });
   }
 }

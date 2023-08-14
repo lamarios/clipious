@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:get/get.dart';
 import 'package:invidious/controllers/serverListSettingsController.dart';
 import 'package:invidious/main.dart';
 import 'package:invidious/myRouteObserver.dart';
@@ -17,6 +17,7 @@ class ManagerServersView extends StatelessWidget {
   showPublicServerActions(BuildContext context, ServerListSettingsController controller, Server server) {
     var locals = AppLocalizations.of(context)!;
     var textTheme = Theme.of(context).textTheme;
+    ServerListSettingsCubit cubit = context.read<ServerListSettingsCubit>();
 
     showModalBottomSheet<void>(
         showDragHandle: true,
@@ -36,7 +37,7 @@ class ManagerServersView extends StatelessWidget {
                       children: [
                         IconButton.filledTonal(
                           onPressed: () {
-                            controller.upsertServer(server);
+                            cubit.upsertServer(server);
                             Navigator.pop(context);
                           },
                           icon: const Icon(Icons.add),
@@ -56,9 +57,10 @@ class ManagerServersView extends StatelessWidget {
 
   saveServer(BuildContext context, ServerListSettingsController controller) async {
     var locals = AppLocalizations.of(context)!;
+    ServerListSettingsCubit cubit = context.read<ServerListSettingsCubit>();
 
     try {
-      await controller.saveServer();
+      await cubit.saveServer();
       Navigator.pop(context);
     } catch (err) {
       await showAlertDialog(context, 'Error', [Text(locals.invalidInvidiousServer)]);
@@ -66,50 +68,49 @@ class ManagerServersView extends StatelessWidget {
   }
 
   addServerDialog(BuildContext context) {
+    ServerListSettingsCubit cubit = context.read<ServerListSettingsCubit>();
     var locals = AppLocalizations.of(context)!;
     showDialog<String>(
         context: context,
-        builder: (BuildContext context) => GetBuilder<ServerListSettingsController>(
-              builder: (controller) => Dialog(
-                child: SizedBox(
-                  width: 400,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text(locals.addServer),
-                        TextField(
-                          controller: controller.addServerController,
-                          autocorrect: false,
-                          enableSuggestions: false,
-                          enableIMEPersonalizedLearning: false,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            TextButton(
-                              onPressed: () {
+        builder: (BuildContext context) => Dialog(
+              child: SizedBox(
+                width: 400,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text(locals.addServer),
+                      TextField(
+                        controller: cubit.state.addServerController,
+                        autocorrect: false,
+                        enableSuggestions: false,
+                        enableIMEPersonalizedLearning: false,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          TextButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: Text(locals.cancel),
+                          ),
+                          TextButton(
+                            onPressed: () async {
+                              try {
+                                await cubit.saveServer();
                                 Navigator.pop(context);
-                              },
-                              child: Text(locals.cancel),
-                            ),
-                            TextButton(
-                              onPressed: () async {
-                                try {
-                                  await controller.saveServer();
-                                  Navigator.pop(context);
-                                } catch (err) {
-                                  await showAlertDialog(context, 'Error', [Text(locals.invalidInvidiousServer)]);
-                                }
-                              },
-                              child: Text(locals.add),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
+                              } catch (err) {
+                                await showAlertDialog(context, 'Error', [Text(locals.invalidInvidiousServer)]);
+                              }
+                            },
+                            child: Text(locals.add),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
                 ),
               ),
@@ -117,12 +118,15 @@ class ManagerServersView extends StatelessWidget {
   }
 
   openServer(BuildContext context, Server s) {
-    navigatorKey.currentState?.push(MaterialPageRoute(
-      settings: ROUTE_SETTINGS_MANAGE_ONE_SERVER,
-      builder: (context) => ManageSingleServer(
-        server: s,
-      ),
-    ));
+    var cubit = context.read<ServerListSettingsCubit>();
+    navigatorKey.currentState
+        ?.push(MaterialPageRoute(
+          settings: ROUTE_SETTINGS_MANAGE_ONE_SERVER,
+          builder: (context) => ManageSingleServer(
+            server: s,
+          ),
+        ))
+        .then((value) => cubit.refreshServers());
   }
 
   @override
@@ -132,9 +136,9 @@ class ManagerServersView extends StatelessWidget {
     var locals = AppLocalizations.of(context)!;
     var textTheme = Theme.of(context).textTheme;
 
-    return GetBuilder<ServerListSettingsController>(
-      init: ServerListSettingsController(),
-      builder: (_) {
+    return BlocBuilder<ServerListSettingsCubit, ServerListSettingsController>(
+      builder: (ctx, _) {
+        ServerListSettingsCubit cubit = context.read<ServerListSettingsCubit>();
         var filteredPublicServers = _.publicServers.where((s) => _.dbServers.indexWhere((element) => element.url == s.url) == -1).toList();
         return Stack(
           children: [
@@ -148,7 +152,7 @@ class ManagerServersView extends StatelessWidget {
                         ? _.dbServers
                             .map((s) => SettingsTile(
                                   leading: InkWell(
-                                    onTap: () => _.switchServer(s),
+                                    onTap: () => cubit.switchServer(s),
                                     child: Padding(
                                       padding: const EdgeInsets.all(8.0),
                                       child: Icon(
@@ -158,7 +162,7 @@ class ManagerServersView extends StatelessWidget {
                                     ),
                                   ),
                                   title: Text(s.url),
-                                  value: Text('${_.isLoggedInToServer(s.url) ? '${locals.loggedIn}, ' : ''} ${locals.tapToManage}'),
+                                  value: Text('${cubit.isLoggedInToServer(s.url) ? '${locals.loggedIn}, ' : ''} ${locals.tapToManage}'),
                                   onPressed: (context) => openServer(context, s),
                                 ))
                             .toList()
@@ -175,7 +179,7 @@ class ManagerServersView extends StatelessWidget {
                     tiles: _.publicServersError != PublicServerErrors.none
                         ? [
                             SettingsTile(
-                              onPressed: (context) => _.getPublicServers(),
+                              onPressed: (context) => cubit.getPublicServers(),
                               title: Text(locals.publicServersError),
                             )
                           ]
@@ -214,7 +218,7 @@ class ManagerServersView extends StatelessWidget {
               right: 20,
               bottom: 20,
               child: FloatingActionButton(
-                onPressed: () => addServerDialog(context),
+                onPressed: () => addServerDialog(ctx),
                 backgroundColor: colorScheme.primaryContainer,
                 child: const Icon(Icons.add),
               ),

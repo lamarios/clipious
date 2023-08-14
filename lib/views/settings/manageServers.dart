@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:invidious/controllers/serverListSettingsController.dart';
 import 'package:invidious/views/settings/manageServerInner.dart';
 
 class ManageServers extends StatefulWidget {
@@ -21,6 +23,8 @@ class ManageServerState extends State<ManageServers> {
           title: Text(locals.manageServers),
         ),
         backgroundColor: colorScheme.background,
-        body: const SafeArea(bottom: false, child: ManagerServersView()));
+        body: SafeArea(
+            bottom: false,
+            child: BlocProvider(create: (BuildContext context) => ServerListSettingsCubit(ServerListSettingsController(dbServers: [], publicServers: [])), child: const ManagerServersView())));
   }
 }

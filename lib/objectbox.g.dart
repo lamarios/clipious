@@ -396,14 +396,18 @@ ModelDefinition getObjectBoxModel() {
           final rootOffset = buffer.derefObject(0);
           final urlParam = const fb.StringReader(asciiOptimization: true)
               .vTableGet(buffer, rootOffset, 6, '');
-          final object = Server(urlParam)
-            ..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0)
-            ..authToken = const fb.StringReader(asciiOptimization: true)
-                .vTableGetNullable(buffer, rootOffset, 8)
-            ..inUse =
-                const fb.BoolReader().vTableGet(buffer, rootOffset, 14, false)
-            ..sidCookie = const fb.StringReader(asciiOptimization: true)
-                .vTableGetNullable(buffer, rootOffset, 16);
+          final authTokenParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGetNullable(buffer, rootOffset, 8);
+          final sidCookieParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGetNullable(buffer, rootOffset, 16);
+          final inUseParam =
+              const fb.BoolReader().vTableGet(buffer, rootOffset, 14, false);
+          final object = Server(
+              url: urlParam,
+              authToken: authTokenParam,
+              sidCookie: sidCookieParam,
+              inUse: inUseParam)
+            ..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
 
           return object;
         }),

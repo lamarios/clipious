@@ -1,70 +1,68 @@
+import 'package:bloc/bloc.dart';
 import 'package:fbroadcast/fbroadcast.dart';
-import 'package:get/get.dart';
-import 'package:invidious/controllers/serverListSettingsController.dart';
-import 'package:invidious/controllers/settingsController.dart';
 
 import '../database.dart';
 import '../globals.dart';
 import '../models/db/server.dart';
 
-class ServerSettingsController extends GetxController {
-  late Server server;
-
-  bool get canDelete => db.getServers().length > 1;
-
-  ServerSettingsController(this.server);
+class ServerSettingsCubit extends Cubit<Server> {
+  ServerSettingsCubit(super.initialState);
 
   useServer(bool value) {
-    db.useServer(server);
-    server.inUse = true;
-    update();
-    refreshServerList();
-    SettingsController.to()?.serverChanged();
+    db.useServer(state);
+    state.inUse = true;
+    emit(state);
+  }
+
+  @override
+  emit(Server state) {
+    super.emit(state.copyWith());
   }
 
   void logOut() {
-    Server s = server;
+    Server s = state;
     s.sidCookie = null;
     s.authToken = null;
-    db.upsertServer(server);
-    server = s;
-    update();
-    refreshServerList();
+    db.upsertServer(s);
+    emit(state);
   }
 
   Future<void> logInWithToken() async {
-    await service.logIn(server.url);
-    server = db.getServer(server.url)!;
-    update();
-    refreshServerList();
+    await service.logIn(state.url);
+    Server server = db.getServer(state.url)!;
+    emit(server);
   }
 
   Future<void> logInWithCookie(String username, String password) async {
     print('login with $username, $password');
-    String cookie = await service.loginWithCookies(server.url, username, password);
+    String cookie = await service.loginWithCookies(state.url, username, password);
 
-    server.sidCookie = cookie;
-    db.upsertServer(server);
+    state.sidCookie = cookie;
+    db.upsertServer(state);
     FBroadcast.instance().broadcast(BROADCAST_SERVER_CHANGED);
-    refreshServerList();
-    update();
-  }
-
-  refreshServerList() {
-    ServerListSettingsController.to()?.refreshServers();
-    SettingsController.to()?.serverChanged();
+    emit(state);
   }
 
   deleteServer() {
-    db.deleteServer(server);
+    db.deleteServer(state);
     // widget.refreshServers();
 
     Server currentServer = db.getCurrentlySelectedServer();
-    if (currentServer.url == server.url) {
+    if (currentServer.url == state.url) {
       db.deleteSetting(SELECTED_SERVER);
     }
-    update();
-    refreshServerList();
-    // Navigator.pop(context);
+    emit(state);
   }
+
+  bool get canDelete => db.getServers().length > 1;
 }
+
+/*
+class ServerSettingsController {
+  late Server server;
+
+
+  ServerSettingsController(this.server);
+
+}
+*/
