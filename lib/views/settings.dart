@@ -30,23 +30,23 @@ class Settings extends StatelessWidget {
 
   manageServers(BuildContext context) {
     var cubit = context.read<SettingsCubit>();
-    navigatorKey.currentState?.push(MaterialPageRoute(settings: ROUTE_SETTINGS_MANAGE_SERVERS, builder: (context) => const ManageServers())).then((value) => cubit.serverChanged());
+    Navigator.of(context).push(MaterialPageRoute(settings: ROUTE_SETTINGS_MANAGE_SERVERS, builder: (context) => const ManageServers())).then((value) => cubit.serverChanged());
   }
 
   openSponsorBlockSettings(BuildContext context) {
-    navigatorKey.currentState?.push(MaterialPageRoute(settings: ROUTE_SETTINGS_SPONSOR_BLOCK, builder: (context) => const SponsorBlockSettings()));
+    Navigator.of(context).push(MaterialPageRoute(settings: ROUTE_SETTINGS_SPONSOR_BLOCK, builder: (context) => const SponsorBlockSettings()));
   }
 
   openVideoFilterSettings(BuildContext context) {
-    navigatorKey.currentState?.push(MaterialPageRoute(settings: ROUTE_SETTINGS_VIDEO_FILTERS, builder: (context) => const VideoFilterSettings()));
+    Navigator.of(context).push(MaterialPageRoute(settings: ROUTE_SETTINGS_VIDEO_FILTERS, builder: (context) => const VideoFilterSettings()));
   }
 
-  openSearchHistorySettings(BuildContext context) {
-    navigatorKey.currentState?.push(MaterialPageRoute(settings: ROUTE_SETTINGS_SEARCH_HISTORY, builder: (context) => const SearchHistorySettings()));
+  openSearchHistorySettings(BuildContext ctx) {
+    Navigator.of(ctx).push(MaterialPageRoute(settings: ROUTE_SETTINGS_SEARCH_HISTORY, builder: (context) => const SearchHistorySettings()));
   }
 
   openAppLogs(BuildContext context) {
-    navigatorKey.currentState?.push(MaterialPageRoute(settings: ROUTE_SETTINGS_SEARCH_HISTORY, builder: (context) => const AppLogs()));
+    Navigator.of(context).push(MaterialPageRoute(settings: ROUTE_SETTINGS_SEARCH_HISTORY, builder: (context) => const AppLogs()));
   }
 
   searchCountry(BuildContext context, SettingsController controller) {
@@ -143,8 +143,8 @@ class Settings extends StatelessWidget {
     return BlocProvider(
       create: (BuildContext context) => SettingsCubit(SettingsController()),
       child: BlocBuilder<SettingsCubit, SettingsController>(
-        builder: (context, _) {
-          var cubit = context.read<SettingsCubit>();
+        builder: (ctx, _) {
+          var cubit = ctx.read<SettingsCubit>();
           return Scaffold(
               extendBody: true,
               bottomNavigationBar: const SizedBox.shrink(),
@@ -165,17 +165,17 @@ class Settings extends StatelessWidget {
                       SettingsTile(
                         title: Text(locals.country),
                         value: Text(_.country.name),
-                        onPressed: (context) => searchCountry(context, _),
+                        onPressed: (ctx) => searchCountry(ctx, _),
                       ),
                       SettingsTile(
                         title: Text(locals.whenAppStartsShow),
-                        value: Text(getCategories(context)[_.onOpen]),
-                        onPressed: (context) => selectOnOpen(context, _),
+                        value: Text(getCategories(ctx)[_.onOpen]),
+                        onPressed: (ctx) => selectOnOpen(ctx, _),
                       ),
                       SettingsTile(
                         title: Text(locals.appLanguage),
                         value: Text(cubit.getLocaleDisplayName() ?? locals.followSystem),
-                        onPressed: (context) => showSelectLanguage(context, _),
+                        onPressed: (ctx) => showSelectLanguage(ctx, _),
                       ),
                       SettingsTile.switchTile(
                         title: const Text('Return YouTube Dislike'),
@@ -186,7 +186,7 @@ class Settings extends StatelessWidget {
                       SettingsTile.navigation(
                         title: Text(locals.searchHistory),
                         description: Text(locals.searchHistoryDescription),
-                        onPressed: openSearchHistorySettings,
+                        onPressed: (context) => openSearchHistorySettings(ctx),
                       ),
                       SettingsTile.navigation(
                         title: Text(locals.videoFilters),
@@ -281,7 +281,7 @@ class Settings extends StatelessWidget {
                       SettingsTile(
                         title: Text(locals.themeBrightness),
                         value: Text(cubit.getThemeLabel(locals, _.themeMode)),
-                        onPressed: (context) => selectTheme(context, _),
+                        onPressed: (ctx) => selectTheme(ctx, _),
                       ),
                       SettingsTile.switchTile(
                         initialValue: _.blackBackground,

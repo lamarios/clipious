@@ -29,6 +29,7 @@ class SettingsCubit extends Cubit<SettingsController> {
 
   onReady() {
     getPackageInfo();
+    getSettings();
   }
 
   emit(SettingsController state) {
@@ -36,56 +37,47 @@ class SettingsCubit extends Cubit<SettingsController> {
   }
 
   toggleSponsorBlock(bool value) {
-    db.saveSetting(SettingsValue(USE_SPONSORBLOCK, value.toString()));
-    state.sponsorBlock = db.getSettings(USE_SPONSORBLOCK)?.value == 'true';
+    state.sponsorBlock = value;
     emit(state);
   }
 
   toggleForceLandscapeFullScreen(bool value) {
-    db.saveSetting(SettingsValue(LOCK_ORIENTATION_FULLSCREEN, value.toString()));
-    state.forceLandscapeFullScreen = db.getSettings(LOCK_ORIENTATION_FULLSCREEN)?.value == 'true';
+    state.forceLandscapeFullScreen = value;
     emit(state);
   }
 
   toggleFillFullscreen(bool value) {
-    db.saveSetting(SettingsValue(FILL_FULLSCREEN, value.toString()));
-    state.fillFullscreen = db.getSettings(FILL_FULLSCREEN)?.value == 'true';
+    state.fillFullscreen = value;
     emit(state);
   }
 
   toggleDynamicTheme(bool value) {
-    db.saveSetting(SettingsValue(DYNAMIC_THEME, value.toString()));
     state.useDynamicTheme = value;
     emit(state);
     updateApp();
   }
 
   toggleDash(bool value) {
-    db.saveSetting(SettingsValue(USE_DASH, value.toString()));
     state.useDash = value;
     emit(state);
   }
 
   toggleProxy(bool value) {
-    db.saveSetting(SettingsValue(USE_PROXY, value.toString()));
     state.useProxy = value;
     emit(state);
   }
 
   toggleAutoplayOnLoad(bool value) {
-    db.saveSetting(SettingsValue(PLAYER_AUTOPLAY_ON_LOAD, value.toString()));
     state.autoplayVideoOnLoad = value;
     emit(state);
   }
 
   toggleReturnYoutubeDislike(bool value) {
-    db.saveSetting(SettingsValue(USE_RETURN_YOUTUBE_DISLIKE, value.toString()));
     state.useReturnYoutubeDislike = value;
     emit(state);
   }
 
   toggleSearchHistory(bool value) {
-    db.saveSetting(SettingsValue(USE_SEARCH_HISTORY, value.toString()));
     state.useSearchHistory = value;
     emit(state);
     if (!value) {
@@ -94,22 +86,18 @@ class SettingsCubit extends Cubit<SettingsController> {
   }
 
   toggleRememberPlaybackSpeed(bool value) {
-    db.saveSetting(SettingsValue(REMEMBER_PLAYBACK_SPEED, value.toString()));
     state.rememberPlayBackSpeed = value;
     emit(state);
   }
 
   selectOnOpen(String selected, List<String> categories) {
     int selectedIndex = categories.indexOf(selected);
-    db.saveSetting(SettingsValue(ON_OPEN, selectedIndex.toString()));
     state.onOpen = selectedIndex;
     emit(state);
   }
 
   void selectCountry(String selected) {
-    String code = countryCodes.firstWhere((element) => element.name == selected, orElse: () => state.country).code;
-    db.saveSetting(SettingsValue(BROWSING_COUNTRY, code));
-    state.country = getCountryFromCode(code);
+    state.country = countryCodes.firstWhere((element) => element.name == selected, orElse: () => state.country);
     emit(state);
   }
 
@@ -120,7 +108,6 @@ class SettingsCubit extends Cubit<SettingsController> {
   }
 
   toggleSslVerification(bool value) {
-    db.saveSetting(SettingsValue(SKIP_SSL_VERIFICATION, value.toString()));
     state.skipSslVerification = value;
     emit(state);
   }
@@ -132,7 +119,6 @@ class SettingsCubit extends Cubit<SettingsController> {
   }
 
   toggleBlackBackground(bool value) {
-    db.saveSetting(SettingsValue(BLACK_BACKGROUND, value.toString()));
     state.blackBackground = value;
     emit(state);
     AppController.to()?.update();
@@ -147,7 +133,6 @@ class SettingsCubit extends Cubit<SettingsController> {
       }
     }
     emit(state);
-    db.saveSetting(SettingsValue(SUBTITLE_SIZE, state.subtitleSize.toString()));
   }
 
   setSubtitleSize(int value) {
@@ -158,11 +143,9 @@ class SettingsCubit extends Cubit<SettingsController> {
     }
 
     emit(state);
-    db.saveSetting(SettingsValue(SUBTITLE_SIZE, state.subtitleSize.toString()));
   }
 
   toggleRememberSubtitles(bool value) {
-    db.saveSetting(SettingsValue(REMEMBER_LAST_SUBTITLE, value.toString()));
     state.rememberSubtitles = value;
     emit(state);
   }
@@ -178,7 +161,6 @@ class SettingsCubit extends Cubit<SettingsController> {
       }
     }
     emit(state);
-    db.saveSetting(SettingsValue(SEARCH_HISTORY_LIMIT, state.searchHistoryLimit.toString()));
     if (!increase) {
       db.clearExcessSearchHistory();
     }
@@ -192,7 +174,6 @@ class SettingsCubit extends Cubit<SettingsController> {
     }
 
     emit(state);
-    db.saveSetting(SettingsValue(SEARCH_HISTORY_LIMIT, state.searchHistoryLimit.toString()));
     if (value < state.searchHistoryLimit) {
       db.clearExcessSearchHistory();
     }
@@ -212,7 +193,6 @@ class SettingsCubit extends Cubit<SettingsController> {
   setThemeMode(ThemeMode? theme) {
     if (theme != null) {
       state.themeMode = theme;
-      db.saveSetting(SettingsValue(THEME_MODE, theme.name));
     }
     emit(state);
     updateApp();
@@ -233,10 +213,15 @@ class SettingsCubit extends Cubit<SettingsController> {
       }
 
       state.locale = toSave;
-      db.saveSetting(SettingsValue(LOCALE, toSave));
     }
     emit(state);
     updateApp();
+  }
+
+  getSettings() async {
+    var allSettings = await db.getAllSettings();
+    state.settings = {for (var s in allSettings) s.name: s};
+    emit(state);
   }
 
   updateApp() {
@@ -253,93 +238,108 @@ class SettingsCubit extends Cubit<SettingsController> {
 
 @CopyWith()
 class SettingsController {
+  Map<String, SettingsValue> settings;
   List<Server> dbServers;
+  PackageInfo packageInfo;
 
   Server currentServer;
 
-  bool sponsorBlock;
+  bool get sponsorBlock => _get(USE_SPONSORBLOCK)?.value == 'true';
 
-  Country country;
+  Country get country => getCountryFromCode(_get(BROWSING_COUNTRY)?.value ?? 'US');
 
-  PackageInfo packageInfo;
+  int get onOpen => int.parse(_get(ON_OPEN)?.value ?? '0');
 
-  int onOpen;
+  bool get useDynamicTheme => _get(DYNAMIC_THEME)?.value == 'true';
 
-  bool useDynamicTheme;
+  bool get useDash => _get(USE_DASH)?.value == 'true';
 
-  bool useDash;
+  bool get useProxy => _get(USE_PROXY)?.value == 'true';
 
-  bool useProxy;
+  bool get autoplayVideoOnLoad => _get(PLAYER_AUTOPLAY_ON_LOAD)?.value == 'true';
 
-  bool autoplayVideoOnLoad;
+  bool get useReturnYoutubeDislike => _get(USE_RETURN_YOUTUBE_DISLIKE)?.value == 'true';
 
-  bool useReturnYoutubeDislike;
+  bool get blackBackground => _get(BLACK_BACKGROUND)?.value == 'true';
 
-  bool blackBackground;
+  double get subtitleSize => double.parse(_get(SUBTITLE_SIZE)?.value ?? subtitleDefaultSize);
 
-  double subtitleSize;
+  bool get rememberSubtitles => _get(REMEMBER_LAST_SUBTITLE)?.value == 'true';
 
-  bool rememberSubtitles;
+  bool get skipSslVerification => _get(SKIP_SSL_VERIFICATION)?.value == 'true';
 
-  bool skipSslVerification;
+  bool get rememberPlayBackSpeed => _get(REMEMBER_PLAYBACK_SPEED)?.value == 'true';
 
-  bool rememberPlayBackSpeed;
+  bool get forceLandscapeFullScreen => _get(LOCK_ORIENTATION_FULLSCREEN)?.value == 'true';
 
-  bool forceLandscapeFullScreen;
+  bool get fillFullscreen => _get(FILL_FULLSCREEN)?.value == 'true';
 
-  bool fillFullscreen;
+  ThemeMode get themeMode => ThemeMode.values.firstWhere((element) => element.name == _get(THEME_MODE)?.value, orElse: () => ThemeMode.system);
 
-  ThemeMode themeMode;
+  String? get locale => _get(LOCALE)?.value;
 
-  String? locale;
+  bool get useSearchHistory => _get(USE_SEARCH_HISTORY)?.value == 'true';
 
-  bool useSearchHistory;
+  int get searchHistoryLimit => int.parse(_get(SEARCH_HISTORY_LIMIT)?.value ?? searchHistoryDefaultLength);
 
-  int searchHistoryLimit;
+  set sponsorBlock(bool b) => _set(USE_SPONSORBLOCK, b);
 
-  SettingsController({
-    List<Server>? dbServers,
-    Server? currentServer,
-    bool? sponsorBlock,
-    Country? country,
-    PackageInfo? packageInfo,
-    int? onOpen,
-    bool? useDynamicTheme,
-    bool? useDash,
-    bool? useProxy,
-    bool? autoplayVideoOnLoad,
-    bool? useReturnYoutubeDislike,
-    bool? blackBackground,
-    double? subtitleSize,
-    bool? rememberSubtitles,
-    bool? skipSslVerification,
-    bool? rememberPlayBackSpeed,
-    bool? forceLandscapeFullScreen,
-    bool? fillFullscreen,
-    ThemeMode? themeMode,
-    String? locale,
-    bool? useSearchHistory,
-    int? searchHistoryLimit,
-  })  : dbServers = dbServers ?? db.getServers(),
-        currentServer = currentServer ?? db.getCurrentlySelectedServer(),
-        sponsorBlock = sponsorBlock ?? db.getSettings(USE_SPONSORBLOCK)?.value == 'true',
-        country = country ?? getCountryFromCode(db.getSettings(BROWSING_COUNTRY)?.value ?? 'US'),
-        packageInfo = packageInfo ?? PackageInfo(appName: '', packageName: '', version: '', buildNumber: ''),
-        onOpen = onOpen ?? int.parse(db.getSettings(ON_OPEN)?.value ?? '0'),
-        useDynamicTheme = useDynamicTheme ?? db.getSettings(DYNAMIC_THEME)?.value == 'true',
-        useDash = useDash ?? db.getSettings(USE_DASH)?.value == 'true',
-        useProxy = useProxy ?? db.getSettings(USE_PROXY)?.value == 'true',
-        autoplayVideoOnLoad = autoplayVideoOnLoad ?? db.getSettings(PLAYER_AUTOPLAY_ON_LOAD)?.value == 'true',
-        useReturnYoutubeDislike = useReturnYoutubeDislike ?? db.getSettings(USE_RETURN_YOUTUBE_DISLIKE)?.value == 'true',
-        blackBackground = blackBackground ?? db.getSettings(BLACK_BACKGROUND)?.value == 'true',
-        subtitleSize = subtitleSize ?? double.parse(db.getSettings(SUBTITLE_SIZE)?.value ?? subtitleDefaultSize),
-        rememberSubtitles = rememberSubtitles ?? db.getSettings(REMEMBER_LAST_SUBTITLE)?.value == 'true',
-        skipSslVerification = skipSslVerification ?? db.getSettings(SKIP_SSL_VERIFICATION)?.value == 'true',
-        rememberPlayBackSpeed = rememberPlayBackSpeed ?? db.getSettings(REMEMBER_PLAYBACK_SPEED)?.value == 'true',
-        forceLandscapeFullScreen = forceLandscapeFullScreen ?? db.getSettings(LOCK_ORIENTATION_FULLSCREEN)?.value == 'true',
-        fillFullscreen = fillFullscreen ?? db.getSettings(FILL_FULLSCREEN)?.value == 'true',
-        themeMode = themeMode ?? ThemeMode.values.firstWhere((element) => element.name == db.getSettings(THEME_MODE)?.value, orElse: () => ThemeMode.system),
-        locale = locale ?? db.getSettings(LOCALE)?.value,
-        useSearchHistory = useSearchHistory ?? db.getSettings(USE_SEARCH_HISTORY)?.value == 'true',
-        searchHistoryLimit = searchHistoryLimit ?? int.parse(db.getSettings(SEARCH_HISTORY_LIMIT)?.value ?? searchHistoryDefaultLength);
+  set country(Country c) {
+    String code = countryCodes.firstWhere((element) => element.name == c.name, orElse: () => country).code;
+    _set(BROWSING_COUNTRY, code);
+  }
+
+  set onOpen(int i) => _set(ON_OPEN, i);
+
+  set useDynamicTheme(bool b) => _set(DYNAMIC_THEME, b);
+
+  set useDash(bool b) => _set(USE_DASH, b);
+
+  set useProxy(bool b) => _set(USE_PROXY, b);
+
+  set autoplayVideoOnLoad(bool b) => _set(PLAYER_AUTOPLAY_ON_LOAD, b);
+
+  set useReturnYoutubeDislike(bool b) => _set(USE_RETURN_YOUTUBE_DISLIKE, b);
+
+  set blackBackground(bool b) => _set(BLACK_BACKGROUND, b);
+
+  set subtitleSize(double d) => _set(SUBTITLE_SIZE, d);
+
+  set rememberSubtitles(bool b) => _set(REMEMBER_LAST_SUBTITLE, b);
+
+  set skipSslVerification(bool b) => _set(SKIP_SSL_VERIFICATION, b);
+
+  set rememberPlayBackSpeed(bool b) => _set(REMEMBER_PLAYBACK_SPEED, b);
+
+  set forceLandscapeFullScreen(bool b) => _set(LOCK_ORIENTATION_FULLSCREEN, b);
+
+  set fillFullscreen(bool b) => _set(FILL_FULLSCREEN, b);
+
+  set themeMode(ThemeMode t) => _set(THEME_MODE, t.name);
+
+  set locale(String? s) => _set(LOCALE, s);
+
+  set useSearchHistory(bool b) => _set(USE_SEARCH_HISTORY, b);
+
+  set searchHistoryLimit(int b) => _set(SEARCH_HISTORY_LIMIT, b);
+
+  void _set<T>(String name, T value) {
+    var settingsValue = SettingsValue(name, value.toString());
+    settings[name] = settingsValue;
+    db.saveSetting(settingsValue);
+  }
+
+  SettingsValue? _get(String settingName) {
+    if (settings.containsKey(settingName)) {
+      return settings[settingName];
+    } else {
+      return null;
+    }
+  }
+
+  SettingsController({Map<String, SettingsValue>? settings, List<Server>? dbServers, Server? currentServer, PackageInfo? packageInfo})
+      : packageInfo = packageInfo ?? PackageInfo(appName: '', packageName: '', version: '', buildNumber: ''),
+        settings = settings ?? {},
+        dbServers = dbServers ?? db.getServers(),
+        currentServer = currentServer ?? db.getCurrentlySelectedServer();
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:invidious/controllers/welcomeWizardController.dart';
@@ -6,6 +7,9 @@ import 'package:invidious/views/tv/settings/tvManageServersInner.dart';
 import 'package:invidious/views/tv/tvButton.dart';
 import 'package:invidious/views/tv/tvOverScan.dart';
 
+import '../../controllers/serverListSettingsController.dart';
+import '../../controllers/settingsController.dart';
+import '../../models/db/server.dart';
 import 'tvHome.dart';
 
 class TvWelcomeWizard extends StatelessWidget {
@@ -18,9 +22,19 @@ class TvWelcomeWizard extends StatelessWidget {
     TextTheme textTheme = Theme.of(context).textTheme;
     return Scaffold(
       body: TvOverscan(
-        child: GetBuilder<WelcomeWizardController>(
-            init: WelcomeWizardController(),
-            builder: (_) {
+        child: MultiBlocProvider(
+          providers: [
+            BlocProvider(create: (context) => WelcomeWizardCubit(null)),
+            BlocProvider(
+              create: (context) => ServerListSettingsCubit(ServerListSettingsController(publicServers: [], dbServers: [])),
+            )
+          ],
+          child: BlocListener<ServerListSettingsCubit, ServerListSettingsController>(
+            listener: (context, state) {
+              context.read<WelcomeWizardCubit>().getSelectedServer();
+            },
+            child: BlocBuilder<WelcomeWizardCubit, Server?>(builder: (context, server) {
+              var cubit = context.read<WelcomeWizardCubit>();
               return DefaultTextStyle(
                 style: textTheme.bodyLarge!,
                 child: Column(
@@ -31,8 +45,8 @@ class TvWelcomeWizard extends StatelessWidget {
                     ),
                     const Expanded(child: TvManageServersInner()),
                     TvButton(
-                      unfocusedColor: _.selected == null ? colors.background : null,
-                      onPressed: _.selected != null
+                      unfocusedColor: server == null ? colors.background : null,
+                      onPressed: server != null
                           ? (context) {
                               Navigator.of(context).push(MaterialPageRoute(
                                 builder: (context) => const TvHome(),
@@ -43,7 +57,7 @@ class TvWelcomeWizard extends StatelessWidget {
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
                           locals.startUsingClipious,
-                          style: textTheme.titleLarge!.copyWith(color: _.selected == null ? Colors.white.withOpacity(0.5) : Colors.white),
+                          style: textTheme.titleLarge!.copyWith(color: server == null ? Colors.white.withOpacity(0.5) : Colors.white),
                         ),
                       ),
                     )
@@ -51,6 +65,8 @@ class TvWelcomeWizard extends StatelessWidget {
                 ),
               );
             }),
+          ),
+        ),
       ),
     );
   }

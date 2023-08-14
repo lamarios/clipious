@@ -34,7 +34,6 @@ class ServerListSettingsCubit extends Cubit<ServerListSettingsController> {
     db.upsertServer(server);
 
     refreshServers();
-    refreshWizard();
   }
 
   refreshServers() {
@@ -48,8 +47,7 @@ class ServerListSettingsCubit extends Cubit<ServerListSettingsController> {
 
   @override
   emit(ServerListSettingsController state) {
-    var newState = state.copyWith();
-    super.emit(newState);
+    super.emit(state.copyWith());
   }
 
   getPublicServers() async {
@@ -103,10 +101,6 @@ class ServerListSettingsCubit extends Cubit<ServerListSettingsController> {
     return (server.authToken?.isNotEmpty ?? false) || (server.sidCookie?.isNotEmpty ?? false);
   }
 
-  refreshWizard() {
-    WelcomeWizardController.to()?.getSelectedServer();
-  }
-
   saveServer() async {
     var serverUrl = state.addServerController.value.text;
     if (serverUrl.endsWith("/")) {
@@ -125,7 +119,6 @@ class ServerListSettingsCubit extends Cubit<ServerListSettingsController> {
       db.upsertServer(server);
       state.addServerController.text = 'https://';
       refreshServers();
-      refreshWizard();
     } else {
       throw Error();
     }
@@ -134,9 +127,6 @@ class ServerListSettingsCubit extends Cubit<ServerListSettingsController> {
   switchServer(Server s) {
     db.useServer(s);
     refreshServers();
-
-    // we might be on the welcome wizard
-    WelcomeWizardController.to()?.getSelectedServer();
   }
 }
 

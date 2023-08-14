@@ -1,6 +1,7 @@
+import 'package:bloc/bloc.dart';
+import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:invidious/controllers/videoFilterController.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/main.dart';
 import 'package:invidious/models/searchType.dart';
@@ -9,51 +10,49 @@ import 'package:logging/logging.dart';
 import '../models/channel.dart';
 import '../models/db/videoFilter.dart';
 
-class VideoFilterEditController extends GetxController {
-  final log = Logger('Video Filter Edit Controller');
-  VideoFilter? filter;
-  int searchPage = 1;
-  Channel? channel;
-  List<Channel> channelResults = [];
+part 'videoFilterEditController.g.dart';
 
-  late final TextEditingController valueController;
+final log = Logger('Video Filter Edit Controller');
 
-  VideoFilterEditController({this.filter}) {
-    valueController = TextEditingController(text: filter?.value ?? '');
+class VideoFilterEditCubit extends Cubit<VideoFilterEditController> {
+  VideoFilterEditCubit(super.initialState) {
+    onReady();
   }
 
-  @override
   void onReady() async {
-    super.onReady();
-    if (filter?.channelId != null) {
-      channel = await service.getChannel(filter?.channelId ?? '');
-      update();
+    if (state.filter?.channelId != null) {
+      state.channel = await service.getChannel(state.filter?.channelId ?? '');
+      emit(state);
     }
   }
 
+  emit(VideoFilterEditController state) {
+    super.emit(state.copyWith());
+  }
+
   @override
-  void onClose() {
-    valueController.dispose();
-    super.onClose();
+  close() async {
+    state.valueController.dispose();
+    super.close();
   }
 
   void ensureFilter() {
-    filter ??= VideoFilter(value: "");
+    state.filter ??= VideoFilter(value: "");
   }
 
   void setType(FilterType? value) {
     ensureFilter();
     if (value != null) {
-      filter?.type = value;
-      filter?.operation = null;
-      filter?.value = '';
+      state.filter?.type = value;
+      state.filter?.operation = null;
+      state.filter?.value = '';
     }
 
-    update();
+    emit(state);
   }
 
   List<FilterOperation> getAvailableOperations() {
-    switch (filter?.type) {
+    switch (state.filter?.type) {
       case FilterType.title:
       case FilterType.channelName:
         return [FilterOperation.contain, FilterOperation.notContain];
@@ -67,41 +66,42 @@ class VideoFilterEditController extends GetxController {
   void setOperation(FilterOperation? value) {
     ensureFilter();
     if (value != null) {
-      filter?.operation = value;
+      state.filter?.operation = value;
     }
 
-    update();
+    emit(state);
   }
 
   void valueChanged(String value) {
     ensureFilter();
-    filter?.value = value;
+    state.filter?.value = value;
     log.fine('Filter value changed: $value');
-    update();
+    emit(state);
   }
 
   bool isFilterValid() {
-    return (filter != null && filter?.channelId != null && (filter?.filterAll ?? false)) || (filter != null && filter?.type != null && filter?.operation != null && (filter?.value ?? '').isNotEmpty);
+    return (state.filter != null && state.filter?.channelId != null && (state.filter?.filterAll ?? false)) ||
+        (state.filter != null && state.filter?.type != null && state.filter?.operation != null && (state.filter?.value ?? '').isNotEmpty);
   }
 
   void onSave() {
-    if (filter != null) {
-      filter?.channelId = channel?.authorId;
-      log.fine('hide all ? ${filter?.filterAll}');
-      db.saveFilter(filter!);
-      VideoFilterController.to()?.refreshFilters();
+    if (state.filter != null) {
+      state.filter?.channelId = state.channel?.authorId;
+      log.fine('hide all ? ${state.filter?.filterAll}');
+      db.saveFilter(state.filter!);
+      // VideoFilterController.to()?.refreshFilters();
       navigatorKey.currentState?.pop();
     }
   }
 
   Future<List<Channel>> searchChannel(String query) async {
     if (query.trim() == '') return [];
-    var searchResults = await service.search(query, type: SearchType.channel, page: searchPage);
+    var searchResults = await service.search(query, type: SearchType.channel, page: state.searchPage);
     return searchResults.channels;
   }
 
   bool isNumberValue() {
-    switch (filter?.operation) {
+    switch (state.filter?.operation) {
       case FilterOperation.higherThan:
       case FilterOperation.lowerThan:
         return true;
@@ -112,27 +112,41 @@ class VideoFilterEditController extends GetxController {
 
   selectChannel(Channel? value) {
     ensureFilter();
-    channel = value;
-    filter?.channelId = channel?.authorId;
-    update();
+    state.channel = value;
+    state.filter?.channelId = state.channel?.authorId;
+    emit(state);
   }
 
   void channelHideAll(bool? value) {
     ensureFilter();
-    filter?.filterAll = value ?? false;
-    update();
+    state.filter?.filterAll = value ?? false;
+    emit(state);
   }
 
   channelClear() {
     ensureFilter();
-    channel = null;
-    filter?.channelId = null;
-    update();
+    state.channel = null;
+    state.filter?.channelId = null;
+    emit(state);
   }
 
   void hideOnFilteredChanged(bool value) {
     ensureFilter();
-    filter?.hideFromFeed = value;
-    update();
+    state.filter?.hideFromFeed = value;
+    emit(state);
   }
+}
+
+@CopyWith()
+class VideoFilterEditController extends GetxController {
+  VideoFilter? filter;
+  int searchPage;
+  Channel? channel;
+  List<Channel> channelResults;
+
+  TextEditingController valueController;
+
+  VideoFilterEditController({this.filter, this.searchPage = 1, this.channel, List<Channel>? channelResults, TextEditingController? valueController})
+      : channelResults = channelResults ?? [],
+        valueController = valueController ?? TextEditingController(text: filter?.value ?? '');
 }
