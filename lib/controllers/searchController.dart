@@ -1,6 +1,7 @@
+import 'package:bloc/bloc.dart';
+import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:invidious/database.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/main.dart';
@@ -12,104 +13,158 @@ import '../models/playlist.dart';
 import '../models/searchType.dart';
 import '../models/videoInList.dart';
 
-class ClipiousSearchController extends GetxController {
-  TextEditingController queryController = TextEditingController();
+part 'searchController.g.dart';
 
-  int selectedIndex = 0;
-
-  late List<VideoInList> videos = [];
-  late List<Channel> channels = [];
-  late List<Playlist> playlists = [];
-
-  bool useHistory = db.getSettings(USE_SEARCH_HISTORY)?.value == 'true';
-  bool searchNow = false;
-
-  List<String> suggestions = [];
-
-  SearchSortBy sortBy = SearchSortBy.relevance;
-  bool showResults = false;
-  bool loading = false;
-
-  int videoPage = 1, channelPage = 1, playlistPage = 1;
-
-  ClipiousSearchController({String? query, bool? searchNow}) {
-    queryController.text = query ?? '';
-    queryController.addListener(getSuggestions);
-
-    this.searchNow = searchNow ?? false;
+class SearchCubit<T extends ClipiousSearchController> extends Cubit<ClipiousSearchController> {
+  SearchCubit(super.initialState) {
+    onInit();
   }
 
   @override
+  emit(ClipiousSearchController state) {
+    super.emit(state.copyWith());
+  }
+
   void onInit() {
-    super.onInit();
-    if (searchNow) {
-      search(queryController.value.text);
+    state.queryController.addListener(getSuggestions);
+    if (state.searchNow) {
+      search(state.queryController.value.text);
     }
   }
 
   @override
-  void onClose() {
-    queryController.dispose();
-    super.onClose();
+  Future<void> close() async {
+    state.queryController.dispose();
+    super.close();
   }
 
   void sortChanged(SearchSortBy? value) {
-    sortBy = value ?? sortBy;
-    update();
-    search(queryController.value.text);
+    state.sortBy = value ?? state.sortBy;
+    emit(state);
+    search(state.queryController.value.text);
   }
 
   void searchCleared() {
-    if (queryController.value.text.isEmpty) {
+    if (state.queryController.value.text.isEmpty) {
       navigatorKey.currentState?.pop();
     } else {
-      queryController.clear();
-      showResults = false;
-      update();
+      state.queryController.clear();
+      state.showResults = false;
+      emit(state);
     }
   }
 
   void getSuggestions() {
-    showResults = false;
-    update();
+    state.showResults = false;
+    emit(state);
     EasyDebounce.debounce('search-suggestions', const Duration(milliseconds: 500), () async {
-      suggestions = (await service.getSearchSuggestion(queryController.value.text)).suggestions;
-      update();
+      state.suggestions = (await service.getSearchSuggestion(state.queryController.value.text)).suggestions;
+      emit(state);
     });
   }
 
   List<String> getHistory() {
-    return useHistory ? db.getSearchHistory() : [];
+    return state.useHistory ? db.getSearchHistory() : [];
   }
 
   void search(String value) async {
-    showResults = true;
-    loading = true;
-    videos = [];
-    channels = [];
-    playlists = [];
-    update();
+    state.showResults = true;
+    state.loading = true;
+    state.videos = [];
+    state.channels = [];
+    state.playlists = [];
+    emit(state);
 
     List<SearchResults> results = await Future.wait([
-      service.search(queryController.value.text, type: SearchType.video, sortBy: sortBy),
-      service.search(queryController.value.text, type: SearchType.channel, sortBy: sortBy),
-      service.search(queryController.value.text, type: SearchType.playlist, sortBy: sortBy)
+      service.search(state.queryController.value.text, type: SearchType.video, sortBy: state.sortBy),
+      service.search(state.queryController.value.text, type: SearchType.channel, sortBy: state.sortBy),
+      service.search(state.queryController.value.text, type: SearchType.playlist, sortBy: state.sortBy)
     ]);
 
-    videos = results[0].videos;
-    channels = results[1].channels;
-    playlists = results[2].playlists;
-    loading = false;
-    update();
+    state.videos = results[0].videos;
+    state.channels = results[1].channels;
+    state.playlists = results[2].playlists;
+    state.loading = false;
+    emit(state);
   }
 
   setSearchQuery(String e) {
-    queryController.text = e;
+    state.queryController.text = e;
     search(e);
   }
 
   void selectIndex(int value) {
-    selectedIndex = value;
-    update();
+    state.selectedIndex = value;
+    emit(state);
+  }
+}
+
+abstract class Clonable<T> {
+  T clone();
+}
+
+@CopyWith(constructor: "inLine")
+class ClipiousSearchController extends Clonable<ClipiousSearchController> {
+  TextEditingController queryController;
+
+  int selectedIndex;
+
+  List<VideoInList> videos;
+
+  List<Channel> channels;
+
+  List<Playlist> playlists;
+
+  bool useHistory;
+
+  bool searchNow;
+
+  List<String> suggestions;
+
+  SearchSortBy sortBy;
+
+  bool showResults;
+
+  bool loading;
+
+  int videoPage, channelPage, playlistPage;
+
+  ClipiousSearchController(
+      {TextEditingController? queryController,
+      int? selectedIndex,
+      List<VideoInList>? videos,
+      List<Channel>? channels,
+      List<Playlist>? playlists,
+      bool? useHistory,
+      bool? searchNow,
+      List<String>? suggestions,
+      SearchSortBy? sortBy,
+      bool? showResults,
+      bool? loading,
+      int? videoPage,
+      channelPage,
+      playlistPage,
+      String? query})
+      : queryController = queryController ?? TextEditingController(text: query ?? ''),
+        selectedIndex = selectedIndex ?? 0,
+        channels = channels ?? [],
+        videos = videos ?? [],
+        playlists = playlists ?? [],
+        useHistory = useHistory ?? db.getSettings(USE_SEARCH_HISTORY)?.value == 'true',
+        searchNow = searchNow ?? false,
+        suggestions = suggestions ?? [],
+        sortBy = sortBy ?? SearchSortBy.relevance,
+        showResults = showResults ?? false,
+        loading = loading ?? false,
+        videoPage = videoPage ?? 1,
+        channelPage = channelPage ?? 1,
+        playlistPage = playlistPage ?? 1;
+
+  ClipiousSearchController.inLine(this.queryController, this.selectedIndex, this.videos, this.channels, this.playlists, this.useHistory, this.searchNow, this.suggestions, this.sortBy,
+      this.showResults, this.loading, this.videoPage, this.channelPage, this.playlistPage);
+
+  @override
+  ClipiousSearchController clone() {
+    return copyWith();
   }
 }

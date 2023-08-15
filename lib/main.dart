@@ -19,23 +19,23 @@ import 'package:invidious/views/channel.dart';
 import 'package:invidious/views/components/downloadAppBarButton.dart';
 import 'package:invidious/views/components/miniPlayerAware.dart';
 import 'package:invidious/views/history.dart';
-import 'package:invidious/views/manageSubscriptions.dart';
+import 'package:invidious/subscriptions/view/screens/manage_subscriptions.dart';
 import 'package:invidious/views/miniPlayer.dart';
 import 'package:invidious/views/playlists.dart';
 import 'package:invidious/views/popular.dart';
 import 'package:invidious/views/search.dart';
-import 'package:invidious/views/settings.dart';
+import 'package:invidious/settings/views/screens/settings.dart';
 import 'package:invidious/views/subscriptions.dart';
 import 'package:invidious/views/trending.dart';
 import 'package:invidious/views/tv/tvHome.dart';
-import 'package:invidious/views/tv/tvWelcomeWizard.dart';
+import 'package:invidious/welcome_wizard/views/tv/screens/welcome_wizard.dart';
 import 'package:invidious/views/video.dart';
-import 'package:invidious/views/welcomeWizard.dart';
+import 'package:invidious/welcome_wizard/views/screens/welcome_wizard.dart';
 import 'package:logging/logging.dart';
 
 import 'controllers/appController.dart';
 import 'database.dart';
-import 'models/db/appLog.dart';
+import 'settings/models/db/app_logs.dart';
 import 'myRouteObserver.dart';
 
 const brandColor = Color(0xFF4f0096);

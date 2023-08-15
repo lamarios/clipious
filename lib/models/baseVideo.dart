@@ -1,7 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 
-import 'db/server.dart';
-import 'db/videoFilter.dart';
+import '../settings/models/db/server.dart';
+import '../settings/models/db/video_filter.dart';
 import 'imageObject.dart';
 import 'interfaces/sharelink.dart';
 

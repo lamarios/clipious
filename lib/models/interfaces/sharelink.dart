@@ -1,4 +1,4 @@
-import '../db/server.dart';
+import '../../settings/models/db/server.dart';
 
 abstract class ShareLinks {
   String getYoutubeLink(int? timestamp);

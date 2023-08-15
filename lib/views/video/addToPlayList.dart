@@ -7,7 +7,7 @@ import 'package:invidious/main.dart';
 import 'package:invidious/myRouteObserver.dart';
 
 import '../playlists.dart';
-import '../settings/manageSingleServer.dart';
+import '../../settings/views/screens/manage_single_server.dart';
 
 class AddToPlaylist extends StatelessWidget {
   final String videoId;

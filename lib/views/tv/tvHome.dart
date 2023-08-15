@@ -11,7 +11,7 @@ import 'package:invidious/views/tv/tvButton.dart';
 import 'package:invidious/views/tv/tvOverScan.dart';
 import 'package:invidious/views/tv/tvPlaylistGridView.dart';
 import 'package:invidious/views/tv/tvSearch.dart';
-import 'package:invidious/views/tv/tvSettings.dart';
+import 'package:invidious/settings/views/tv/screens/settings.dart';
 import 'package:invidious/views/tv/tvVideoGridView.dart';
 
 import '../popular.dart';

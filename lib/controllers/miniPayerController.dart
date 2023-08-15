@@ -17,7 +17,7 @@ import 'package:invidious/controllers/videoLikeController.dart';
 import 'package:invidious/controllers/videoPlayerController.dart';
 import 'package:invidious/database.dart';
 import 'package:invidious/globals.dart';
-import 'package:invidious/models/db/settings.dart';
+import 'package:invidious/settings/models/db/settings.dart';
 import 'package:invidious/models/imageObject.dart';
 import 'package:invidious/models/mediaEvent.dart';
 import 'package:invidious/utils.dart';

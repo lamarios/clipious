@@ -14,14 +14,14 @@ import 'package:objectbox/internal.dart'; // generated code can access "internal
 import 'package:objectbox/objectbox.dart';
 import 'package:objectbox_flutter_libs/objectbox_flutter_libs.dart';
 
-import 'models/db/appLog.dart';
 import 'models/db/baseVideoCache.dart';
 import 'models/db/downloadedVideo.dart';
 import 'models/db/progress.dart';
 import 'models/db/searchHistoryItem.dart';
-import 'models/db/server.dart';
-import 'models/db/settings.dart';
-import 'models/db/videoFilter.dart';
+import 'settings/models/db/app_logs.dart';
+import 'settings/models/db/server.dart';
+import 'settings/models/db/settings.dart';
+import 'settings/models/db/video_filter.dart';
 
 export 'package:objectbox/objectbox.dart'; // so that callers only have to import this file
 

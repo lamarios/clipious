@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:invidious/controllers/videoPlayerController.dart';
 import 'package:invidious/database.dart';
 import 'package:invidious/globals.dart';
-import 'package:invidious/models/db/settings.dart';
+import 'package:invidious/settings/models/db/settings.dart';
 import 'package:logging/logging.dart';
 
 enum Tabs {

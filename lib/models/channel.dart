@@ -1,4 +1,4 @@
-import 'package:invidious/models/db/server.dart';
+import 'package:invidious/settings/models/db/server.dart';
 import 'package:invidious/models/interfaces/sharelink.dart';
 import 'package:invidious/models/videoInList.dart';
 import 'package:json_annotation/json_annotation.dart';

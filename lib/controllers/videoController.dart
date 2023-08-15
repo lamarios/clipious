@@ -3,7 +3,7 @@ import 'package:invidious/controllers/videoInnerViewController.dart';
 import 'package:invidious/database.dart';
 import 'package:invidious/models/baseVideo.dart';
 import 'package:invidious/models/db/downloadedVideo.dart';
-import 'package:invidious/models/db/settings.dart';
+import 'package:invidious/settings/models/db/settings.dart';
 import 'package:invidious/models/dislike.dart';
 import 'package:logging/logging.dart';
 
