@@ -897,7 +897,7 @@
   "@clearHistoryQuestionExplanation": {
     "description": "Message for dialog before clearing full viewing history"
   },
-  "noHistory": "Немає історії перегляду, перегляньте кілька відео, і вона з'явиться тут",
+  "noHistory": "Немає історії перегляду, перегляньте кілька відео, і вона з''явиться тут",
   "@noHistory": {
     "description": "Message when the user visits the history tab but it's empty"
   }
