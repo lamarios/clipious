@@ -254,7 +254,7 @@
   "@yourServers": {
     "description": "Your servers label"
   },
-  "notLoggedIn": "Вы не авторизованы. Нажмите, чтобы войти в систему.",
+  "notLoggedIn": "Вы не авторизованы",
   "@notLoggedIn": {
     "description": "Label when the user is not logged in to the server"
   },
@@ -519,7 +519,7 @@
   "@useProxyDescription": {
     "description": "Description for the use proxy settings"
   },
-  "sponsorBlockCategoryMusicOffTopicDescription": "Интервал без фактического содержания. Это может быть пауза, статичный кадр, повторяющаяся анимация. Не следует использовать для переходов, содержащих информацию.",
+  "sponsorBlockCategoryMusicOffTopicDescription": "Только для использования в музыкальных видео. Этот пункт должен быть использован только для секций музыкальных видео, которые не попадают под другие категории.",
   "@sponsorBlockCategoryMusicOffTopicDescription": {
     "description": "Only for use in music videos. This only should be used for sections of music videos that aren't already covered by another category."
   },
@@ -835,7 +835,7 @@
   "@manageSubscriptions": {
     "description": "Title of manage subscriptions page"
   },
-  "noSubscriptions": "Подписок нет, ищите видео и подписывайтесь на любые понравившиеся вам каналы",
+  "noSubscriptions": "Подписок нет, ищите видео и подписывайтесь на любые понравившиеся вам каналы.",
   "@noSubscriptions": {
     "description": "Message when the user has no subs"
   },
@@ -852,5 +852,53 @@
   "videoDownloadAudioOnly": "Только звук",
   "@videoDownloadAudioOnly": {
     "description": "Label for toggle to download audio only "
+  },
+  "appLogs": "Журнал приложения",
+  "@appLogs": {
+    "description": "Title for settings that leads to application logs"
+  },
+  "shorts": "Shorts",
+  "@shorts": {
+    "description": "Youtube shorts"
+  },
+  "noHistory": "Истории просмотра нет, откройте любые видео и они появятся здесь",
+  "@noHistory": {
+    "description": "Message when the user visits the history tab but it's empty"
+  },
+  "history": "История",
+  "@history": {
+    "description": "User view history label"
+  },
+  "logsCopied": "Логи скопированы в буфер обмена",
+  "@logsCopied": {
+    "description": "Message to tell user that logs have been copied to the clipboard"
+  },
+  "lockFullScreenToLandscape": "Блокировка полноэкранной ориентации к пропорциям видео",
+  "@lockFullScreenToLandscape": {
+    "description": "Title to force full screen to landscape"
+  },
+  "lockFullScreenToLandscapeDescription": "Блокирует полноэкранную ориентацию на основе формата видео, ландшафтная для горизонтальных видео и портретная для вертикальных",
+  "@lockFullScreenToLandscapeDescription": {
+    "description": "Setting description for forcing video to landscape when in full screen"
+  },
+  "clearHistoryQuestionExplanation": "Это очистит историю просмотра из вашего аккаунта на используемом вами сервере Invidious. Данное действие нельзя отменить.",
+  "@clearHistoryQuestionExplanation": {
+    "description": "Message for dialog before clearing full viewing history"
+  },
+  "appLogsDescription": "Получите логи того, что происходит в приложении, может быть полезно при сообщении проблем",
+  "@appLogsDescription": {
+    "description": "Description of the app log settings"
+  },
+  "fillFullscreen": "Увеличивать видео за рамки экрана",
+  "@fillFullscreen": {
+    "description": "Title to maximize video to fit screen"
+  },
+  "fillFullscreenDescription": "Растягивает видео чтобы оно занимало весь экран в полноэкранном режиме",
+  "@fillFullscreenDescription": {
+    "description": "Setting description for filling video to screen in landscape"
+  },
+  "videoFiltered": "Видео отфильтровано по следующим причинам:",
+  "@videoFiltered": {
+    "description": "Label shown on video list when it is filtered out"
   }
 }
