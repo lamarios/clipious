@@ -827,8 +827,30 @@
   "@videoDownloadStarted": {
     "description": "Message when a video starts being downloaded"
   },
-  "videoFailedDownloadRetry": "Загрузка не удалась, нажмите чтобы повторить попытку",
+  "videoFailedDownloadRetry": "Скачивание не удалось, нажмите чтобы начать заново",
   "@videoFailedDownloadRetry": {
     "description": "Shown on download manager when a download fails and prompt the user to retry"
+  },
+  "manageSubscriptions": "Управление подписками",
+  "@manageSubscriptions": {
+    "description": "Title of manage subscriptions page"
+  },
+  "noSubscriptions": "Подписок нет, ищите видео и подписывайтесь на любые понравившиеся вам каналы",
+  "@noSubscriptions": {
+    "description": "Message when the user has no subs"
+  },
+  "youCanSubscribeAgainLater": "Позже вы сможете снова подписаться на этот канал",
+  "@youCanSubscribeAgainLater": {
+    "description": "Text for the unscubscribe confirmation dialog"
+  },
+  "unSubscribeQuestion": "Отписаться?",
+  "@unSubscribeQuestion": {
+    "description": "Title for dialog if a user wants to unsubscribe in the subscribtion management screen"
+  },
+  "clearHistoryQuestion": "Очистить историю?",
+  "@clearHistoryQuestion": {},
+  "videoDownloadAudioOnly": "Только звук",
+  "@videoDownloadAudioOnly": {
+    "description": "Label for toggle to download audio only "
   }
 }
