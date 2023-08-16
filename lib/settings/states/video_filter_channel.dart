@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:get/get.dart';
 import 'package:invidious/globals.dart';
-import 'package:invidious/models/channel.dart';
+import 'package:invidious/channels/models/channel.dart';
 
 import '../models/db/video_filter.dart';
 

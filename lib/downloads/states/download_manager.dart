@@ -2,19 +2,25 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:animate_to/animate_to.dart';
+import 'package:bloc/bloc.dart';
+import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:invidious/extensions.dart';
 import 'package:invidious/globals.dart';
-import 'package:invidious/models/db/downloadedVideo.dart';
+import 'package:invidious/downloads/models/downloaded_video.dart';
 import 'package:invidious/models/formatStream.dart';
 import 'package:invidious/models/imageObject.dart';
 import 'package:invidious/utils.dart';
 import 'package:logging/logging.dart';
 
-import '../models/adaptiveFormat.dart';
-import '../models/video.dart';
-import 'miniPayerController.dart';
+import '../../models/adaptiveFormat.dart';
+import '../../models/video.dart';
+import '../../controllers/miniPayerController.dart';
+
+part 'download_manager.g.dart';
+
+final Logger log = Logger('DownloadState');
 
 class DownloadProgress {
   CancelToken cancelToken;
@@ -33,70 +39,54 @@ class DownloadProgress {
   }
 }
 
-class DownloadController extends GetxController {
-  final Logger log = Logger('DownloadController');
+class DownloadManagerCubit extends Cubit<DownloadManagerState> {
+  DownloadManagerCubit(super.initialState) {
+    onReady();
+  }
 
-  static DownloadController? to() => safeGet(tag: 'dl');
-  final animateToController = AnimateToController();
-  List<DownloadedVideo> videos = [];
-
-  final Map<String, DownloadProgress> downloadProgresses = {};
-
-  bool get canPlayAll => videos.where((element) => element.downloadComplete).isNotEmpty;
-
-  double get totalProgress {
-    int downloaded = 0;
-    int total = 0;
-
-    for (var element in downloadProgresses.values) {
-      downloaded += element.count;
-      total += element.total;
-    }
-
-    return downloaded / total;
+  emit(DownloadManagerState state) {
+    super.emit(state.copyWith());
   }
 
   @override
-  onClose() {
-    animateToController.dispose();
-    super.onClose();
+  close() async {
+    state.animateToController.dispose();
+    super.close();
   }
 
-  @override
   onReady() {
-    super.onReady();
     setVideos();
-    update();
+    emit(state);
   }
 
   setVideos() {
     var vids = db.getAllDownloads();
     // checking if we have any video that are not fail, not completed and not currently downloading
     for (var v in vids) {
-      if (!v.downloadComplete && !v.downloadFailed && !downloadProgresses.containsKey(v.videoId)) {
+      if (!v.downloadComplete && !v.downloadFailed && !state.downloadProgresses.containsKey(v.videoId)) {
         // this download was interrupted by app restart or crash or something else, we set it as errored
         v.downloadFailed = true;
         db.upsertDownload(v);
       }
     }
 
-    videos = vids;
+    state.videos = vids;
   }
 
   void playAll() {
     setVideos();
-    update();
-    MiniPlayerController.to()?.playOfflineVideos(videos.where((element) => element.downloadComplete && !element.downloadFailed).toList());
+    emit(state);
+    MiniPlayerController.to()?.playOfflineVideos(state.videos.where((element) => element.downloadComplete && !element.downloadFailed).toList());
   }
 
   onProgress(int count, int total, DownloadedVideo video) {
     // log.fine('Download of video $videoId}, $count / $total =  ${count / total}');
-    var downloadProgress = downloadProgresses[video.videoId];
+    var downloadProgress = state.downloadProgresses[video.videoId];
     downloadProgress?.count = count;
     downloadProgress?.total = total;
 
     if (count == total) {
-      downloadProgresses.remove(video.videoId);
+      state.downloadProgresses.remove(video.videoId);
       video.downloadComplete = true;
       db.upsertDownload(video);
       setVideos();
@@ -105,11 +95,11 @@ class DownloadController extends GetxController {
     for (var f in downloadProgress?.listeners ?? []) {
       f(count / total);
     }
-    update();
+    emit(state);
   }
 
   Future<bool> addDownload(String videoId, {String quality = '720p', bool audioOnly = false}) async {
-    if (videos.any((element) => element.videoId == videoId)) {
+    if (state.videos.any((element) => element.videoId == videoId)) {
       return false;
     } else {
       Video vid = await service.getVideo(videoId);
@@ -130,10 +120,10 @@ class DownloadController extends GetxController {
       Dio dio = Dio();
       CancelToken cancelToken = CancelToken();
 
-      downloadProgresses[downloadedVideo.videoId] = DownloadProgress(cancelToken);
+      state.downloadProgresses[downloadedVideo.videoId] = DownloadProgress(cancelToken);
 
       setVideos();
-      update();
+      emit(state);
       // download thumbnail
       String? thumbUrl = ImageObject.getBestThumbnail(vid.videoThumbnails)?.url;
       log.fine(thumbUrl);
@@ -157,11 +147,11 @@ class DownloadController extends GetxController {
   }
 
   Future<void> deleteVideo(DownloadedVideo vid) async {
-    var downloadProgress = downloadProgresses[vid.videoId];
+    var downloadProgress = state.downloadProgresses[vid.videoId];
     log.fine('cancelling download for video ${vid.videoId}, present ? : ${downloadProgress != null}');
     downloadProgress?.cancelToken.cancel();
 
-    downloadProgresses.remove(vid.videoId);
+    state.downloadProgresses.remove(vid.videoId);
 
     try {
       String path = await vid.mediaPath;
@@ -179,7 +169,7 @@ class DownloadController extends GetxController {
 
     db.deleteDownload(vid);
     setVideos();
-    update();
+    emit(state);
   }
 
   Future<void> onDownloadError(DioException err, DownloadedVideo vid) async {
@@ -191,10 +181,10 @@ class DownloadController extends GetxController {
     vid.downloadFailed = true;
     vid.downloadComplete = false;
     onProgress(1, 1, vid);
-    downloadProgresses.remove(vid.videoId);
+    state.downloadProgresses.remove(vid.videoId);
     db.upsertDownload(vid);
     setVideos();
-    update();
+    emit(state);
     return;
   }
 
@@ -202,4 +192,40 @@ class DownloadController extends GetxController {
     await deleteVideo(vid);
     await addDownload(vid.videoId, quality: vid.quality, audioOnly: vid.audioOnly);
   }
+
+  void addListener(String? videoId, void Function(double progress) setProgress) {
+    state.downloadProgresses[videoId]?.addListener(setProgress);
+    emit(state);
+  }
+
+  void removeListener(String? videoId, void Function(double progress) setProgress) {
+    state.downloadProgresses[videoId]?.removeListener(setProgress);
+    emit(state);
+  }
+}
+
+@CopyWith(constructor: "_")
+class DownloadManagerState {
+  DownloadManagerState();
+
+  AnimateToController animateToController = AnimateToController();
+  List<DownloadedVideo> videos = [];
+
+  Map<String, DownloadProgress> downloadProgresses = {};
+
+  bool get canPlayAll => videos.where((element) => element.downloadComplete).isNotEmpty;
+
+  double get totalProgress {
+    int downloaded = 0;
+    int total = 0;
+
+    for (var element in downloadProgresses.values) {
+      downloaded += element.count;
+      total += element.total;
+    }
+
+    return downloaded / total;
+  }
+
+  DownloadManagerState._(this.animateToController, this.videos, this.downloadProgresses);
 }

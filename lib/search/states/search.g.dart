@@ -6,9 +6,8 @@ part of 'search.dart';
 // CopyWithGenerator
 // **************************************************************************
 
-abstract class _$ClipiousSearchControllerCWProxy {
-  SearchState queryController(
-      TextEditingController queryController);
+abstract class _$SearchStateCWProxy {
+  SearchState queryController(TextEditingController queryController);
 
   SearchState selectedIndex(int selectedIndex);
 
@@ -36,11 +35,11 @@ abstract class _$ClipiousSearchControllerCWProxy {
 
   SearchState playlistPage(int playlistPage);
 
-  /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `ClipiousSearchController(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
+  /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `SearchState(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
   /// Usage
   /// ```dart
-  /// ClipiousSearchController(...).copyWith(id: 12, name: "My name")
+  /// SearchState(...).copyWith(id: 12, name: "My name")
   /// ````
   SearchState call({
     TextEditingController? queryController,
@@ -60,16 +59,14 @@ abstract class _$ClipiousSearchControllerCWProxy {
   });
 }
 
-/// Proxy class for `copyWith` functionality. This is a callable class and can be used as follows: `instanceOfClipiousSearchController.copyWith(...)`. Additionally contains functions for specific fields e.g. `instanceOfClipiousSearchController.copyWith.fieldName(...)`
-class _$ClipiousSearchControllerCWProxyImpl
-    implements _$ClipiousSearchControllerCWProxy {
-  const _$ClipiousSearchControllerCWProxyImpl(this._value);
+/// Proxy class for `copyWith` functionality. This is a callable class and can be used as follows: `instanceOfSearchState.copyWith(...)`. Additionally contains functions for specific fields e.g. `instanceOfSearchState.copyWith.fieldName(...)`
+class _$SearchStateCWProxyImpl implements _$SearchStateCWProxy {
+  const _$SearchStateCWProxyImpl(this._value);
 
   final SearchState _value;
 
   @override
-  SearchState queryController(
-          TextEditingController queryController) =>
+  SearchState queryController(TextEditingController queryController) =>
       this(queryController: queryController);
 
   @override
@@ -77,24 +74,19 @@ class _$ClipiousSearchControllerCWProxyImpl
       this(selectedIndex: selectedIndex);
 
   @override
-  SearchState videos(List<VideoInList> videos) =>
-      this(videos: videos);
+  SearchState videos(List<VideoInList> videos) => this(videos: videos);
 
   @override
-  SearchState channels(List<Channel> channels) =>
-      this(channels: channels);
+  SearchState channels(List<Channel> channels) => this(channels: channels);
 
   @override
-  SearchState playlists(List<Playlist> playlists) =>
-      this(playlists: playlists);
+  SearchState playlists(List<Playlist> playlists) => this(playlists: playlists);
 
   @override
-  SearchState useHistory(bool useHistory) =>
-      this(useHistory: useHistory);
+  SearchState useHistory(bool useHistory) => this(useHistory: useHistory);
 
   @override
-  SearchState searchNow(bool searchNow) =>
-      this(searchNow: searchNow);
+  SearchState searchNow(bool searchNow) => this(searchNow: searchNow);
 
   @override
   SearchState suggestions(List<String> suggestions) =>
@@ -104,19 +96,16 @@ class _$ClipiousSearchControllerCWProxyImpl
   SearchState sortBy(SearchSortBy sortBy) => this(sortBy: sortBy);
 
   @override
-  SearchState showResults(bool showResults) =>
-      this(showResults: showResults);
+  SearchState showResults(bool showResults) => this(showResults: showResults);
 
   @override
   SearchState loading(bool loading) => this(loading: loading);
 
   @override
-  SearchState videoPage(int videoPage) =>
-      this(videoPage: videoPage);
+  SearchState videoPage(int videoPage) => this(videoPage: videoPage);
 
   @override
-  SearchState channelPage(int channelPage) =>
-      this(channelPage: channelPage);
+  SearchState channelPage(int channelPage) => this(channelPage: channelPage);
 
   @override
   SearchState playlistPage(int playlistPage) =>
@@ -124,11 +113,11 @@ class _$ClipiousSearchControllerCWProxyImpl
 
   @override
 
-  /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `ClipiousSearchController(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
+  /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `SearchState(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
   /// Usage
   /// ```dart
-  /// ClipiousSearchController(...).copyWith(id: 12, name: "My name")
+  /// SearchState(...).copyWith(id: 12, name: "My name")
   /// ````
   SearchState call({
     Object? queryController = const $CopyWithPlaceholder(),
@@ -207,9 +196,8 @@ class _$ClipiousSearchControllerCWProxyImpl
   }
 }
 
-extension $ClipiousSearchControllerCopyWith on SearchState {
-  /// Returns a callable class that can be used as follows: `instanceOfClipiousSearchController.copyWith(...)` or like so:`instanceOfClipiousSearchController.copyWith.fieldName(...)`.
+extension $SearchStateCopyWith on SearchState {
+  /// Returns a callable class that can be used as follows: `instanceOfSearchState.copyWith(...)` or like so:`instanceOfSearchState.copyWith.fieldName(...)`.
   // ignore: library_private_types_in_public_api
-  _$ClipiousSearchControllerCWProxy get copyWith =>
-      _$ClipiousSearchControllerCWProxyImpl(this);
+  _$SearchStateCWProxy get copyWith => _$SearchStateCWProxyImpl(this);
 }

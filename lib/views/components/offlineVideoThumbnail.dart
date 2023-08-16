@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:invidious/models/db/downloadedVideo.dart';
+import 'package:invidious/downloads/models/downloaded_video.dart';
 
 class OfflineVideoThumbnail extends StatelessWidget {
   final DownloadedVideo video;

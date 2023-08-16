@@ -10,7 +10,7 @@ import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 
 import 'settings/models/db/app_logs.dart';
-import 'models/db/downloadedVideo.dart';
+import 'downloads/models/downloaded_video.dart';
 import 'settings/models/db/server.dart';
 import 'settings/models/db/video_filter.dart';
 import 'objectbox.g.dart'; // created by `flutter pub run build_runner build`

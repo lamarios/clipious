@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:invidious/controllers/miniPayerController.dart';
-import 'package:invidious/models/db/downloadedVideo.dart';
+import 'package:invidious/downloads/models/downloaded_video.dart';
 import 'package:invidious/views/videoPlayer/miniPlayerControls.dart';
 import 'package:invidious/views/videoPlayer/miniPlayerProgress.dart';
 

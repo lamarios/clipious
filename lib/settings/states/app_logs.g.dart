@@ -6,16 +6,16 @@ part of 'app_logs.dart';
 // CopyWithGenerator
 // **************************************************************************
 
-abstract class _$AppLogsModelCWProxy {
+abstract class _$AppLogsStateCWProxy {
   AppLogsState logs(List<AppLog>? logs);
 
   AppLogsState selected(List<int>? selected);
 
-  /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `AppLogsModel(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
+  /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `AppLogsState(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
   /// Usage
   /// ```dart
-  /// AppLogsModel(...).copyWith(id: 12, name: "My name")
+  /// AppLogsState(...).copyWith(id: 12, name: "My name")
   /// ````
   AppLogsState call({
     List<AppLog>? logs,
@@ -23,9 +23,9 @@ abstract class _$AppLogsModelCWProxy {
   });
 }
 
-/// Proxy class for `copyWith` functionality. This is a callable class and can be used as follows: `instanceOfAppLogsModel.copyWith(...)`. Additionally contains functions for specific fields e.g. `instanceOfAppLogsModel.copyWith.fieldName(...)`
-class _$AppLogsModelCWProxyImpl implements _$AppLogsModelCWProxy {
-  const _$AppLogsModelCWProxyImpl(this._value);
+/// Proxy class for `copyWith` functionality. This is a callable class and can be used as follows: `instanceOfAppLogsState.copyWith(...)`. Additionally contains functions for specific fields e.g. `instanceOfAppLogsState.copyWith.fieldName(...)`
+class _$AppLogsStateCWProxyImpl implements _$AppLogsStateCWProxy {
+  const _$AppLogsStateCWProxyImpl(this._value);
 
   final AppLogsState _value;
 
@@ -37,11 +37,11 @@ class _$AppLogsModelCWProxyImpl implements _$AppLogsModelCWProxy {
 
   @override
 
-  /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `AppLogsModel(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
+  /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `AppLogsState(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
   /// Usage
   /// ```dart
-  /// AppLogsModel(...).copyWith(id: 12, name: "My name")
+  /// AppLogsState(...).copyWith(id: 12, name: "My name")
   /// ````
   AppLogsState call({
     Object? logs = const $CopyWithPlaceholder(),
@@ -60,8 +60,8 @@ class _$AppLogsModelCWProxyImpl implements _$AppLogsModelCWProxy {
   }
 }
 
-extension $AppLogsModelCopyWith on AppLogsState {
-  /// Returns a callable class that can be used as follows: `instanceOfAppLogsModel.copyWith(...)` or like so:`instanceOfAppLogsModel.copyWith.fieldName(...)`.
+extension $AppLogsStateCopyWith on AppLogsState {
+  /// Returns a callable class that can be used as follows: `instanceOfAppLogsState.copyWith(...)` or like so:`instanceOfAppLogsState.copyWith.fieldName(...)`.
   // ignore: library_private_types_in_public_api
-  _$AppLogsModelCWProxy get copyWith => _$AppLogsModelCWProxyImpl(this);
+  _$AppLogsStateCWProxy get copyWith => _$AppLogsStateCWProxyImpl(this);
 }

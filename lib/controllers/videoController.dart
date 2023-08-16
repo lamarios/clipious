@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 import 'package:invidious/controllers/videoInnerViewController.dart';
 import 'package:invidious/database.dart';
 import 'package:invidious/models/baseVideo.dart';
-import 'package:invidious/models/db/downloadedVideo.dart';
+import 'package:invidious/downloads/models/downloaded_video.dart';
 import 'package:invidious/settings/models/db/settings.dart';
 import 'package:invidious/models/dislike.dart';
 import 'package:logging/logging.dart';
@@ -10,13 +10,14 @@ import 'package:logging/logging.dart';
 import '../globals.dart';
 import '../models/errors/invidiousServiceError.dart';
 import '../models/video.dart';
-import 'downloadController.dart';
+import '../downloads/states/download_manager.dart';
 import 'miniPayerController.dart';
 
 const String coulnotLoadVideos = 'cannot-load-videos';
 
 class VideoController extends GetxController {
   final log = Logger('Video');
+  final DownloadManagerCubit downloadManager;
   Video? video;
   int? dislikes;
   bool loadingVideo = true;
@@ -35,7 +36,7 @@ class VideoController extends GetxController {
 
   String error = '';
 
-  VideoController({required this.videoId});
+  VideoController({required this.downloadManager, required this.videoId});
 
   @override
   Future<void> onReady() async {
@@ -78,9 +79,9 @@ class VideoController extends GetxController {
 
   @override
   onClose() {
-    var downloadProgress = DownloadController.to()?.downloadProgresses[videoId];
-    log.fine('Can find download progress ? ${downloadProgress != null}');
-    downloadProgress?.removeListener(onDownloadProgress);
+    if (downloadManager.state.downloadProgresses.containsKey(videoId)) {
+      downloadManager.removeListener(videoId, onDownloadProgress);
+    }
   }
 
   onDownload() {
@@ -103,9 +104,9 @@ class VideoController extends GetxController {
   }
 
   initStreamListener() {
-    var downloadProgress = DownloadController.to()?.downloadProgresses[videoId];
-    log.fine('Can find download progress ? ${downloadProgress != null}');
-    downloadProgress?.addListener(onDownloadProgress);
+    if (downloadManager.state.downloadProgresses.containsKey(videoId)) {
+      downloadManager.addListener(videoId, onDownloadProgress);
+    }
   }
 
   togglePlayRecommendedNext(bool? value) {

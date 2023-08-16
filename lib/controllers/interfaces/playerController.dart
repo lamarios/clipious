@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:invidious/controllers/miniPayerController.dart';
-import 'package:invidious/models/db/downloadedVideo.dart';
+import 'package:invidious/downloads/models/downloaded_video.dart';
 
 import '../../models/video.dart';
 

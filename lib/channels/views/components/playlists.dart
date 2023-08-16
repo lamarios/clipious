@@ -3,7 +3,7 @@ import 'package:invidious/globals.dart';
 import 'package:invidious/models/paginatedList.dart';
 import 'package:invidious/views/playlistList.dart';
 
-import '../../models/playlist.dart';
+import '../../../models/playlist.dart';
 
 class ChannelPlayListsView extends StatelessWidget {
   final String channelId;

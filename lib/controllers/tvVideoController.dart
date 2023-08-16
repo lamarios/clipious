@@ -8,7 +8,7 @@ class TvVideoController extends VideoController {
   final ScrollController scrollController = ScrollController();
   bool showImage = true;
 
-  TvVideoController({required super.videoId});
+  TvVideoController({required super.downloadManager, required super.videoId});
 
   @override
   void onClose() {

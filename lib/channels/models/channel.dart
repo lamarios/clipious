@@ -3,7 +3,7 @@ import 'package:invidious/models/interfaces/sharelink.dart';
 import 'package:invidious/models/videoInList.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-import 'imageObject.dart';
+import '../../models/imageObject.dart';
 
 part 'channel.g.dart';
 

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:invidious/controllers/videoPlayerController.dart';
-import 'package:invidious/models/db/downloadedVideo.dart';
+import 'package:invidious/downloads/models/downloaded_video.dart';
 
 import '../../models/video.dart';
 
@@ -29,7 +29,6 @@ class VideoPlayerState extends State<VideoPlayer> {
   void initState() {
     super.initState();
   }
-
 
   @override
   Widget build(BuildContext context) {

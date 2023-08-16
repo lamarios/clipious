@@ -6,7 +6,7 @@ part of 'server_list_settings.dart';
 // CopyWithGenerator
 // **************************************************************************
 
-abstract class _$ServerListSettingsModelCWProxy {
+abstract class _$ServerListSettingsStateCWProxy {
   ServerListSettingsState dbServers(List<Server> dbServers);
 
   ServerListSettingsState publicServers(List<Server> publicServers);
@@ -15,11 +15,11 @@ abstract class _$ServerListSettingsModelCWProxy {
 
   ServerListSettingsState pinging(bool pinging);
 
-  /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `ServerListSettingsModel(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
+  /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `ServerListSettingsState(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
   /// Usage
   /// ```dart
-  /// ServerListSettingsModel(...).copyWith(id: 12, name: "My name")
+  /// ServerListSettingsState(...).copyWith(id: 12, name: "My name")
   /// ````
   ServerListSettingsState call({
     List<Server>? dbServers,
@@ -29,10 +29,10 @@ abstract class _$ServerListSettingsModelCWProxy {
   });
 }
 
-/// Proxy class for `copyWith` functionality. This is a callable class and can be used as follows: `instanceOfServerListSettingsModel.copyWith(...)`. Additionally contains functions for specific fields e.g. `instanceOfServerListSettingsModel.copyWith.fieldName(...)`
-class _$ServerListSettingsModelCWProxyImpl
-    implements _$ServerListSettingsModelCWProxy {
-  const _$ServerListSettingsModelCWProxyImpl(this._value);
+/// Proxy class for `copyWith` functionality. This is a callable class and can be used as follows: `instanceOfServerListSettingsState.copyWith(...)`. Additionally contains functions for specific fields e.g. `instanceOfServerListSettingsState.copyWith.fieldName(...)`
+class _$ServerListSettingsStateCWProxyImpl
+    implements _$ServerListSettingsStateCWProxy {
+  const _$ServerListSettingsStateCWProxyImpl(this._value);
 
   final ServerListSettingsState _value;
 
@@ -53,11 +53,11 @@ class _$ServerListSettingsModelCWProxyImpl
 
   @override
 
-  /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `ServerListSettingsModel(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
+  /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `ServerListSettingsState(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
   /// Usage
   /// ```dart
-  /// ServerListSettingsModel(...).copyWith(id: 12, name: "My name")
+  /// ServerListSettingsState(...).copyWith(id: 12, name: "My name")
   /// ````
   ServerListSettingsState call({
     Object? dbServers = const $CopyWithPlaceholder(),
@@ -89,9 +89,9 @@ class _$ServerListSettingsModelCWProxyImpl
   }
 }
 
-extension $ServerListSettingsModelCopyWith on ServerListSettingsState {
-  /// Returns a callable class that can be used as follows: `instanceOfServerListSettingsModel.copyWith(...)` or like so:`instanceOfServerListSettingsModel.copyWith.fieldName(...)`.
+extension $ServerListSettingsStateCopyWith on ServerListSettingsState {
+  /// Returns a callable class that can be used as follows: `instanceOfServerListSettingsState.copyWith(...)` or like so:`instanceOfServerListSettingsState.copyWith.fieldName(...)`.
   // ignore: library_private_types_in_public_api
-  _$ServerListSettingsModelCWProxy get copyWith =>
-      _$ServerListSettingsModelCWProxyImpl(this);
+  _$ServerListSettingsStateCWProxy get copyWith =>
+      _$ServerListSettingsStateCWProxyImpl(this);
 }

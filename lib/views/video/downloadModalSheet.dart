@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:invidious/controllers/downloadModalSheetController.dart';
 import 'package:invidious/main.dart';
 
-import '../../controllers/downloadController.dart';
+import '../../downloads/states/download_manager.dart';
 import '../../models/baseVideo.dart';
 
 const List<String> qualities = <String>['144p', '360p', '720p'];
@@ -37,18 +39,19 @@ class DownloadModalSheet extends StatelessWidget {
   }
 
   void downloadVideo(BuildContext context, DownloadModalSheetController _) async {
+    var downloadManager = context.read<DownloadManagerCubit>();
     if (onDownload != null) {
       onDownload!();
     }
     var locals = AppLocalizations.of(context)!;
     Navigator.of(context).pop();
-    var downloadController = DownloadController.to();
+    var downloadController = context.read<DownloadManagerCubit>();
     if (animateDownload) {
-      downloadController?.animateToController.animateTag('video-animate-to-${video.videoId}', duration: const Duration(milliseconds: 300), curve: Curves.easeInOutQuad);
+      downloadController.state.animateToController.animateTag('video-animate-to-${video.videoId}', duration: const Duration(milliseconds: 300), curve: Curves.easeInOutQuad);
     } else {
       scaffoldKey.currentState?.showSnackBar(SnackBar(content: Text(locals.videoDownloadStarted)));
     }
-    bool canDownload = await downloadController?.addDownload(video.videoId, audioOnly: _.audioOnly, quality: _.quality) ?? false;
+    bool canDownload = await downloadManager.addDownload(video.videoId, audioOnly: _.audioOnly, quality: _.quality) ?? false;
     if (!canDownload) {
       scaffoldKey.currentState?.showSnackBar(SnackBar(content: Text(locals.videoAlreadyDownloaded)));
     }

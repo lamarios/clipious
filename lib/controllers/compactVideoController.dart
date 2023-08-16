@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:get/get.dart';
-import 'package:invidious/models/db/downloadedVideo.dart';
+import 'package:invidious/downloads/models/downloaded_video.dart';
 
 class CompactVideoController extends GetxController {
   final DownloadedVideo? offlineVideo;

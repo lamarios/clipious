@@ -6,7 +6,7 @@ part of 'video_filter_edit.dart';
 // CopyWithGenerator
 // **************************************************************************
 
-abstract class _$VideoFilterEditModelCWProxy {
+abstract class _$VideoFilterEditStateCWProxy {
   VideoFilterEditState filter(VideoFilter? filter);
 
   VideoFilterEditState searchPage(int searchPage);
@@ -17,11 +17,11 @@ abstract class _$VideoFilterEditModelCWProxy {
 
   VideoFilterEditState valueController(TextEditingController? valueController);
 
-  /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `VideoFilterEditModel(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
+  /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `VideoFilterEditState(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
   /// Usage
   /// ```dart
-  /// VideoFilterEditModel(...).copyWith(id: 12, name: "My name")
+  /// VideoFilterEditState(...).copyWith(id: 12, name: "My name")
   /// ````
   VideoFilterEditState call({
     VideoFilter? filter,
@@ -32,9 +32,10 @@ abstract class _$VideoFilterEditModelCWProxy {
   });
 }
 
-/// Proxy class for `copyWith` functionality. This is a callable class and can be used as follows: `instanceOfVideoFilterEditModel.copyWith(...)`. Additionally contains functions for specific fields e.g. `instanceOfVideoFilterEditModel.copyWith.fieldName(...)`
-class _$VideoFilterEditModelCWProxyImpl implements _$VideoFilterEditModelCWProxy {
-  const _$VideoFilterEditModelCWProxyImpl(this._value);
+/// Proxy class for `copyWith` functionality. This is a callable class and can be used as follows: `instanceOfVideoFilterEditState.copyWith(...)`. Additionally contains functions for specific fields e.g. `instanceOfVideoFilterEditState.copyWith.fieldName(...)`
+class _$VideoFilterEditStateCWProxyImpl
+    implements _$VideoFilterEditStateCWProxy {
+  const _$VideoFilterEditStateCWProxyImpl(this._value);
 
   final VideoFilterEditState _value;
 
@@ -42,24 +43,28 @@ class _$VideoFilterEditModelCWProxyImpl implements _$VideoFilterEditModelCWProxy
   VideoFilterEditState filter(VideoFilter? filter) => this(filter: filter);
 
   @override
-  VideoFilterEditState searchPage(int searchPage) => this(searchPage: searchPage);
+  VideoFilterEditState searchPage(int searchPage) =>
+      this(searchPage: searchPage);
 
   @override
   VideoFilterEditState channel(Channel? channel) => this(channel: channel);
 
   @override
-  VideoFilterEditState channelResults(List<Channel>? channelResults) => this(channelResults: channelResults);
+  VideoFilterEditState channelResults(List<Channel>? channelResults) =>
+      this(channelResults: channelResults);
 
   @override
-  VideoFilterEditState valueController(TextEditingController? valueController) => this(valueController: valueController);
+  VideoFilterEditState valueController(
+          TextEditingController? valueController) =>
+      this(valueController: valueController);
 
   @override
 
-  /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `VideoFilterEditModel(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
+  /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `VideoFilterEditState(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
   /// Usage
   /// ```dart
-  /// VideoFilterEditModel(...).copyWith(id: 12, name: "My name")
+  /// VideoFilterEditState(...).copyWith(id: 12, name: "My name")
   /// ````
   VideoFilterEditState call({
     Object? filter = const $CopyWithPlaceholder(),
@@ -73,10 +78,11 @@ class _$VideoFilterEditModelCWProxyImpl implements _$VideoFilterEditModelCWProxy
           ? _value.filter
           // ignore: cast_nullable_to_non_nullable
           : filter as VideoFilter?,
-      searchPage: searchPage == const $CopyWithPlaceholder() || searchPage == null
-          ? _value.searchPage
-          // ignore: cast_nullable_to_non_nullable
-          : searchPage as int,
+      searchPage:
+          searchPage == const $CopyWithPlaceholder() || searchPage == null
+              ? _value.searchPage
+              // ignore: cast_nullable_to_non_nullable
+              : searchPage as int,
       channel: channel == const $CopyWithPlaceholder()
           ? _value.channel
           // ignore: cast_nullable_to_non_nullable
@@ -93,8 +99,9 @@ class _$VideoFilterEditModelCWProxyImpl implements _$VideoFilterEditModelCWProxy
   }
 }
 
-extension $VideoFilterEditModelCopyWith on VideoFilterEditState {
-  /// Returns a callable class that can be used as follows: `instanceOfVideoFilterEditModel.copyWith(...)` or like so:`instanceOfVideoFilterEditModel.copyWith.fieldName(...)`.
+extension $VideoFilterEditStateCopyWith on VideoFilterEditState {
+  /// Returns a callable class that can be used as follows: `instanceOfVideoFilterEditState.copyWith(...)` or like so:`instanceOfVideoFilterEditState.copyWith.fieldName(...)`.
   // ignore: library_private_types_in_public_api
-  _$VideoFilterEditModelCWProxy get copyWith => _$VideoFilterEditModelCWProxyImpl(this);
+  _$VideoFilterEditStateCWProxy get copyWith =>
+      _$VideoFilterEditStateCWProxyImpl(this);
 }

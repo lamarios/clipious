@@ -8,7 +8,7 @@ import 'package:invidious/settings/states/settings.dart';
 import 'package:invidious/controllers/tvPlayerController.dart';
 import 'package:invidious/extensions.dart';
 import 'package:invidious/models/baseVideo.dart';
-import 'package:invidious/models/db/downloadedVideo.dart';
+import 'package:invidious/downloads/models/downloaded_video.dart';
 import 'package:invidious/models/mediaEvent.dart';
 import 'package:invidious/utils.dart';
 import 'package:logging/logging.dart';

@@ -1,12 +1,12 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:invidious/models/channelVideos.dart';
+import 'package:invidious/channels/models/channelVideos.dart';
 import 'package:invidious/models/videoInList.dart';
 import 'package:invidious/views/videoList.dart';
 
 import '../../models/channel.dart';
-import '../../models/paginatedList.dart';
+import '../../../models/paginatedList.dart';
 
 class ChannelVideosView extends StatelessWidget {
   final Channel channel;

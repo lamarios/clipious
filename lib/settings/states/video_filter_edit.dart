@@ -6,7 +6,7 @@ import 'package:invidious/main.dart';
 import 'package:invidious/models/searchType.dart';
 import 'package:logging/logging.dart';
 
-import '../../models/channel.dart';
+import '../../channels/models/channel.dart';
 import '../models/db/video_filter.dart';
 
 part 'video_filter_edit.g.dart';

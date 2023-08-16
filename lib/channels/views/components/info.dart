@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
-import 'package:invidious/models/channel.dart';
+import 'package:invidious/channels/models/channel.dart';
 import 'package:invidious/utils.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../models/imageObject.dart';
-import '../../models/videoInList.dart';
-import '../components/subscribeButton.dart';
-import '../components/videoThumbnail.dart';
-import '../videoList/singleVideo.dart';
+import '../../../models/imageObject.dart';
+import '../../../models/videoInList.dart';
+import '../../../views/components/subscribeButton.dart';
+import '../../../views/components/videoThumbnail.dart';
+import '../../../views/videoList/singleVideo.dart';
 
 class ChannelInfo extends StatelessWidget {
   final Channel channel;

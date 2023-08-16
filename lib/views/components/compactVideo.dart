@@ -3,7 +3,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:invidious/controllers/compactVideoController.dart';
 import 'package:invidious/globals.dart';
-import 'package:invidious/models/db/downloadedVideo.dart';
+import 'package:invidious/downloads/models/downloaded_video.dart';
 import 'package:invidious/models/imageObject.dart';
 import 'package:invidious/views/components/videoThumbnail.dart';
 

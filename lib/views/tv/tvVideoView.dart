@@ -1,13 +1,15 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
+import 'package:invidious/downloads/states/download_manager.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/models/paginatedList.dart';
 import 'package:invidious/models/videoInList.dart';
 import 'package:invidious/views/tv/tvButton.dart';
-import 'package:invidious/views/tv/tvChannelView.dart';
+import 'package:invidious/channels/views/tv/screens/channel.dart';
 import 'package:invidious/views/tv/tvExpandableText.dart';
 import 'package:invidious/views/tv/tvHome.dart';
 import 'package:invidious/views/tv/tvHorizontalVideoList.dart';
@@ -42,10 +44,13 @@ class TvVideoView extends StatelessWidget {
     TextTheme textTheme = Theme.of(context).textTheme;
     ColorScheme colors = Theme.of(context).colorScheme;
     AppLocalizations locals = AppLocalizations.of(context)!;
+
+    var downloadManager = context.read<DownloadManagerCubit>();
+
     return Scaffold(
         body: GetBuilder<TvVideoController>(
             global: false,
-            init: TvVideoController(videoId: videoId),
+            init: TvVideoController(videoId: videoId, downloadManager: downloadManager),
             builder: (_) => DefaultTextStyle(
                   style: textTheme.bodyLarge!,
                   child: AnimatedCrossFade(

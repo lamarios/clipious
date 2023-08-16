@@ -22,9 +22,9 @@ import 'package:invidious/models/video.dart';
 import 'package:invidious/models/videoInList.dart';
 import 'package:logging/logging.dart';
 
-import 'models/channel.dart';
-import 'models/channelPlaylists.dart';
-import 'models/channelVideos.dart';
+import 'channels/models/channel.dart';
+import 'channels/models/channelPlaylists.dart';
+import 'channels/models/channelVideos.dart';
 import 'settings/models/db/server.dart';
 import 'models/invidiousPublicServer.dart';
 import 'models/searchSuggestion.dart';

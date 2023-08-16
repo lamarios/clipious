@@ -3,7 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:invidious/controllers/singleCommentController.dart';
 import 'package:invidious/myRouteObserver.dart';
-import 'package:invidious/views/channel.dart';
+import 'package:invidious/channels/views/screens/channel.dart';
 import 'package:invidious/views/components/textLinkified.dart';
 import 'package:invidious/views/components/videoThumbnail.dart';
 import 'package:invidious/views/video/comments.dart';

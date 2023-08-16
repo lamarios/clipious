@@ -6,18 +6,18 @@ part of 'video_filter_channel.dart';
 // CopyWithGenerator
 // **************************************************************************
 
-abstract class _$VideoFilterChannelModelCWProxy {
+abstract class _$VideoFilterChannelStateCWProxy {
   VideoFilterChannelState filters(List<VideoFilter> filters);
 
   VideoFilterChannelState channel(Channel? channel);
 
   VideoFilterChannelState loading(bool loading);
 
-  /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `VideoFilterChannelModel(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
+  /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `VideoFilterChannelState(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
   /// Usage
   /// ```dart
-  /// VideoFilterChannelModel(...).copyWith(id: 12, name: "My name")
+  /// VideoFilterChannelState(...).copyWith(id: 12, name: "My name")
   /// ````
   VideoFilterChannelState call({
     List<VideoFilter>? filters,
@@ -26,14 +26,16 @@ abstract class _$VideoFilterChannelModelCWProxy {
   });
 }
 
-/// Proxy class for `copyWith` functionality. This is a callable class and can be used as follows: `instanceOfVideoFilterChannelModel.copyWith(...)`. Additionally contains functions for specific fields e.g. `instanceOfVideoFilterChannelModel.copyWith.fieldName(...)`
-class _$VideoFilterChannelModelCWProxyImpl implements _$VideoFilterChannelModelCWProxy {
-  const _$VideoFilterChannelModelCWProxyImpl(this._value);
+/// Proxy class for `copyWith` functionality. This is a callable class and can be used as follows: `instanceOfVideoFilterChannelState.copyWith(...)`. Additionally contains functions for specific fields e.g. `instanceOfVideoFilterChannelState.copyWith.fieldName(...)`
+class _$VideoFilterChannelStateCWProxyImpl
+    implements _$VideoFilterChannelStateCWProxy {
+  const _$VideoFilterChannelStateCWProxyImpl(this._value);
 
   final VideoFilterChannelState _value;
 
   @override
-  VideoFilterChannelState filters(List<VideoFilter> filters) => this(filters: filters);
+  VideoFilterChannelState filters(List<VideoFilter> filters) =>
+      this(filters: filters);
 
   @override
   VideoFilterChannelState channel(Channel? channel) => this(channel: channel);
@@ -43,11 +45,11 @@ class _$VideoFilterChannelModelCWProxyImpl implements _$VideoFilterChannelModelC
 
   @override
 
-  /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `VideoFilterChannelModel(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
+  /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `VideoFilterChannelState(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
   /// Usage
   /// ```dart
-  /// VideoFilterChannelModel(...).copyWith(id: 12, name: "My name")
+  /// VideoFilterChannelState(...).copyWith(id: 12, name: "My name")
   /// ````
   VideoFilterChannelState call({
     Object? filters = const $CopyWithPlaceholder(),
@@ -71,8 +73,9 @@ class _$VideoFilterChannelModelCWProxyImpl implements _$VideoFilterChannelModelC
   }
 }
 
-extension $VideoFilterChannelModelCopyWith on VideoFilterChannelState {
-  /// Returns a callable class that can be used as follows: `instanceOfVideoFilterChannelModel.copyWith(...)` or like so:`instanceOfVideoFilterChannelModel.copyWith.fieldName(...)`.
+extension $VideoFilterChannelStateCopyWith on VideoFilterChannelState {
+  /// Returns a callable class that can be used as follows: `instanceOfVideoFilterChannelState.copyWith(...)` or like so:`instanceOfVideoFilterChannelState.copyWith.fieldName(...)`.
   // ignore: library_private_types_in_public_api
-  _$VideoFilterChannelModelCWProxy get copyWith => _$VideoFilterChannelModelCWProxyImpl(this);
+  _$VideoFilterChannelStateCWProxy get copyWith =>
+      _$VideoFilterChannelStateCWProxyImpl(this);
 }

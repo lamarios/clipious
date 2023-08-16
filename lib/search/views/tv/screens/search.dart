@@ -9,7 +9,7 @@ import 'package:invidious/views/components/placeholders.dart';
 import 'package:invidious/views/playlists/playlist.dart';
 import 'package:invidious/search/views/screens/search.dart';
 import 'package:invidious/views/tv/tvButton.dart';
-import 'package:invidious/views/tv/tvChannelView.dart';
+import 'package:invidious/channels/views/tv/screens/channel.dart';
 import 'package:invidious/views/tv/tvHorizontalPaginatedListView.dart';
 import 'package:invidious/views/tv/tvHorizontalVideoList.dart';
 import 'package:invidious/views/tv/tvOverScan.dart';
@@ -17,7 +17,7 @@ import 'package:invidious/views/tv/tvTextField.dart';
 
 import '../../../states/search.dart';
 import '../../../states/tv_search.dart';
-import '../../../../models/channel.dart';
+import '../../../../channels/models/channel.dart';
 import '../../../../models/videoInList.dart';
 
 class TvSearch extends StatelessWidget {

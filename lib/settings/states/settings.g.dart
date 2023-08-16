@@ -6,7 +6,7 @@ part of 'settings.dart';
 // CopyWithGenerator
 // **************************************************************************
 
-abstract class _$SettingsModelCWProxy {
+abstract class _$SettingsStateCWProxy {
   SettingsState settings(Map<String, SettingsValue>? settings);
 
   SettingsState dbServers(List<Server>? dbServers);
@@ -15,11 +15,11 @@ abstract class _$SettingsModelCWProxy {
 
   SettingsState packageInfo(PackageInfo? packageInfo);
 
-  /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `SettingsModel(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
+  /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `SettingsState(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
   /// Usage
   /// ```dart
-  /// SettingsModel(...).copyWith(id: 12, name: "My name")
+  /// SettingsState(...).copyWith(id: 12, name: "My name")
   /// ````
   SettingsState call({
     Map<String, SettingsValue>? settings,
@@ -29,31 +29,35 @@ abstract class _$SettingsModelCWProxy {
   });
 }
 
-/// Proxy class for `copyWith` functionality. This is a callable class and can be used as follows: `instanceOfSettingsModel.copyWith(...)`. Additionally contains functions for specific fields e.g. `instanceOfSettingsModel.copyWith.fieldName(...)`
-class _$SettingsModelCWProxyImpl implements _$SettingsModelCWProxy {
-  const _$SettingsModelCWProxyImpl(this._value);
+/// Proxy class for `copyWith` functionality. This is a callable class and can be used as follows: `instanceOfSettingsState.copyWith(...)`. Additionally contains functions for specific fields e.g. `instanceOfSettingsState.copyWith.fieldName(...)`
+class _$SettingsStateCWProxyImpl implements _$SettingsStateCWProxy {
+  const _$SettingsStateCWProxyImpl(this._value);
 
   final SettingsState _value;
 
   @override
-  SettingsState settings(Map<String, SettingsValue>? settings) => this(settings: settings);
+  SettingsState settings(Map<String, SettingsValue>? settings) =>
+      this(settings: settings);
 
   @override
-  SettingsState dbServers(List<Server>? dbServers) => this(dbServers: dbServers);
+  SettingsState dbServers(List<Server>? dbServers) =>
+      this(dbServers: dbServers);
 
   @override
-  SettingsState currentServer(Server? currentServer) => this(currentServer: currentServer);
+  SettingsState currentServer(Server? currentServer) =>
+      this(currentServer: currentServer);
 
   @override
-  SettingsState packageInfo(PackageInfo? packageInfo) => this(packageInfo: packageInfo);
+  SettingsState packageInfo(PackageInfo? packageInfo) =>
+      this(packageInfo: packageInfo);
 
   @override
 
-  /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `SettingsModel(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
+  /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `SettingsState(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
   /// Usage
   /// ```dart
-  /// SettingsModel(...).copyWith(id: 12, name: "My name")
+  /// SettingsState(...).copyWith(id: 12, name: "My name")
   /// ````
   SettingsState call({
     Object? settings = const $CopyWithPlaceholder(),
@@ -82,8 +86,8 @@ class _$SettingsModelCWProxyImpl implements _$SettingsModelCWProxy {
   }
 }
 
-extension $SettingsModelCopyWith on SettingsState {
-  /// Returns a callable class that can be used as follows: `instanceOfSettingsModel.copyWith(...)` or like so:`instanceOfSettingsModel.copyWith.fieldName(...)`.
+extension $SettingsStateCopyWith on SettingsState {
+  /// Returns a callable class that can be used as follows: `instanceOfSettingsState.copyWith(...)` or like so:`instanceOfSettingsState.copyWith.fieldName(...)`.
   // ignore: library_private_types_in_public_api
-  _$SettingsModelCWProxy get copyWith => _$SettingsModelCWProxyImpl(this);
+  _$SettingsStateCWProxy get copyWith => _$SettingsStateCWProxyImpl(this);
 }

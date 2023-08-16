@@ -8,15 +8,17 @@ import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
+import 'package:invidious/downloads/states/download_manager.dart';
 import 'package:invidious/controllers/homeController.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/httpOverrides.dart';
 import 'package:invidious/mediaHander.dart';
 import 'package:invidious/utils.dart';
-import 'package:invidious/views/channel.dart';
-import 'package:invidious/views/components/downloadAppBarButton.dart';
+import 'package:invidious/channels/views/screens/channel.dart';
+import 'package:invidious/downloads/views/components/download_app_bar_button.dart';
 import 'package:invidious/views/components/miniPlayerAware.dart';
 import 'package:invidious/views/history.dart';
 import 'package:invidious/subscriptions/view/screens/manage_subscriptions.dart';
@@ -48,6 +50,8 @@ bool isTv = false;
 
 late MediaHandler mediaHandler;
 
+final Logger log = Logger('main');
+
 Future<void> main() async {
   Logger.root.level = kDebugMode ? Level.FINEST : Level.INFO; // defaults to Level.INFO
   Logger.root.onRecord.listen((record) {
@@ -72,7 +76,11 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   isTv = await isDeviceTv();
   db = await DbClient.create();
-  runApp(const MyApp());
+  runApp(MultiBlocProvider(providers: [
+    BlocProvider(
+      create: (context) => DownloadManagerCubit(DownloadManagerState()),
+    )
+  ], child: const MyApp()));
 }
 
 late ColorScheme darkColorScheme;

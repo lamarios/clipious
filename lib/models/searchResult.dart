@@ -1,6 +1,6 @@
 import 'dart:core';
 
-import 'channel.dart';
+import '../channels/models/channel.dart';
 import 'playlist.dart';
 import 'videoInList.dart';
 

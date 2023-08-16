@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_swipe_action_cell/core/cell.dart';
 import 'package:get/get.dart';
-import 'package:invidious/views/downloadManager/downloadedVideo.dart';
+import 'package:invidious/downloads/views/components/downloaded_video.dart';
 
-import '../controllers/downloadController.dart';
+import '../../states/download_manager.dart';
 
 class DownloadManager extends StatelessWidget {
   const DownloadManager({Key? key}) : super(key: key);
@@ -21,15 +22,14 @@ class DownloadManager extends StatelessWidget {
       ),
       body: SafeArea(
         bottom: false,
-        child: GetBuilder<DownloadController>(
-          init: DownloadController(),
-          tag: 'dl',
-          builder: (_) {
+        child: BlocBuilder<DownloadManagerCubit, DownloadManagerState>(
+          builder: (context, _) {
+            var cubit = context.read<DownloadManagerCubit>();
             return _.videos.isNotEmpty
                 ? Column(
                     children: [
                       FilledButton.tonal(
-                          onPressed: _.canPlayAll ? _.playAll : null,
+                          onPressed: _.canPlayAll ? cubit.playAll : null,
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
@@ -53,7 +53,7 @@ class DownloadManager extends StatelessWidget {
                                     icon: const Icon(Icons.delete, color: Colors.white),
                                     onTap: (handler) async {
                                       await handler(true);
-                                      _.deleteVideo(v);
+                                      cubit.deleteVideo(v);
                                     },
                                   )
                                 ],

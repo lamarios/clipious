@@ -14,8 +14,8 @@ import 'package:objectbox/internal.dart'; // generated code can access "internal
 import 'package:objectbox/objectbox.dart';
 import 'package:objectbox_flutter_libs/objectbox_flutter_libs.dart';
 
+import 'downloads/models/downloaded_video.dart';
 import 'models/db/baseVideoCache.dart';
-import 'models/db/downloadedVideo.dart';
 import 'models/db/progress.dart';
 import 'models/db/searchHistoryItem.dart';
 import 'settings/models/db/app_logs.dart';

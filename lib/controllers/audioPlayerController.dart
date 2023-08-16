@@ -4,7 +4,7 @@ import 'package:invidious/controllers/miniPlayerProgressController.dart';
 import 'package:invidious/controllers/videoInListController.dart';
 import 'package:invidious/extensions.dart';
 import 'package:invidious/globals.dart';
-import 'package:invidious/models/db/downloadedVideo.dart';
+import 'package:invidious/downloads/models/downloaded_video.dart';
 import 'package:invidious/models/video.dart';
 import 'package:invidious/utils.dart';
 import 'package:just_audio/just_audio.dart';

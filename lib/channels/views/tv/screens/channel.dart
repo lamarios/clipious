@@ -2,8 +2,9 @@ import 'dart:ui';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:get/get.dart';
+import 'package:invidious/channels/states/channel.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/models/imageObject.dart';
 import 'package:invidious/models/paginatedList.dart';
@@ -15,11 +16,11 @@ import 'package:invidious/views/tv/tvHorizontalVideoList.dart';
 import 'package:invidious/views/tv/tvOverScan.dart';
 import 'package:invidious/views/tv/tvSubscribeButton.dart';
 
-import '../../controllers/tvChannelController.dart';
-import '../../models/playlist.dart';
-import '../../utils.dart';
-import '../components/videoThumbnail.dart';
-import '../playlists/playlist.dart';
+import '../../../states/tv_channel.dart';
+import '../../../../models/playlist.dart';
+import '../../../../utils.dart';
+import '../../../../views/components/videoThumbnail.dart';
+import '../../../../views/playlists/playlist.dart';
 
 class TvChannelView extends StatelessWidget {
   final String channelId;
@@ -33,11 +34,20 @@ class TvChannelView extends StatelessWidget {
     ColorScheme colors = Theme.of(context).colorScheme;
 
     return Scaffold(
-      body: GetBuilder<TvChannelController>(
-          init: TvChannelController(channelId),
-          global: false,
-          builder: (_) {
-            return _.loading
+      body: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => ChannelCubit(ChannelController(channelId)),
+          ),
+          BlocProvider(
+            create: (context) => TvChannelCubit(TvChannelController()),
+          )
+        ],
+        child: BlocBuilder<ChannelCubit, ChannelController>(
+          builder: (context, channel) => BlocBuilder<TvChannelCubit, TvChannelController>(builder: (context, tv) {
+            var tvCubit = context.read<TvChannelCubit>();
+
+            return channel.loading
                 ? const Center(
                     child: SizedBox(width: 50, height: 50, child: CircularProgressIndicator()),
                   )
@@ -45,9 +55,9 @@ class TvChannelView extends StatelessWidget {
                     style: textTheme.bodyLarge!,
                     child: Stack(
                       children: [
-                        Positioned(top: 0, left: 0, right: 0, child: CachedNetworkImage(imageUrl: ImageObject.getBestThumbnail(_.channel?.authorBanners)?.url ?? '')),
+                        Positioned(top: 0, left: 0, right: 0, child: CachedNetworkImage(imageUrl: ImageObject.getBestThumbnail(channel.channel?.authorBanners)?.url ?? '')),
                         TweenAnimationBuilder(
-                            tween: Tween<double>(begin: 0, end: _.showBackground ? overlayBlur : 0),
+                            tween: Tween<double>(begin: 0, end: tv.showBackground ? overlayBlur : 0),
                             duration: animationDuration,
                             curve: Curves.easeInOutQuad,
                             builder: (context, value, child) {
@@ -57,30 +67,30 @@ class TvChannelView extends StatelessWidget {
                                   sigmaY: value,
                                 ),
                                 child: AnimatedContainer(
-                                  color: colors.background.withOpacity(_.showBackground ? overlayBackgroundOpacity : 0),
+                                  color: colors.background.withOpacity(tv.showBackground ? overlayBackgroundOpacity : 0),
                                   duration: animationDuration,
                                   child: TvOverscan(
-                                    child: ListView(controller: _.scrollController, children: [
+                                    child: ListView(controller: tv.scrollController, children: [
                                       Padding(
                                         padding: const EdgeInsets.only(top: 100.0),
                                         child: Align(
                                           alignment: Alignment.centerLeft,
                                           child: AnimatedContainer(
                                             decoration:
-                                                BoxDecoration(color: _.showBackground ? colors.background.withOpacity(0) : colors.background.withOpacity(1), borderRadius: BorderRadius.circular(35)),
+                                                BoxDecoration(color: tv.showBackground ? colors.background.withOpacity(0) : colors.background.withOpacity(1), borderRadius: BorderRadius.circular(35)),
                                             duration: animationDuration,
                                             child: Row(mainAxisSize: MainAxisSize.min, children: [
                                               Thumbnail(
-                                                thumbnailUrl: ImageObject.getBestThumbnail(_.channel?.authorThumbnails)?.url ?? '',
+                                                thumbnailUrl: ImageObject.getBestThumbnail(channel.channel?.authorThumbnails)?.url ?? '',
                                                 width: 70,
                                                 height: 70,
-                                                id: 'author-big-${_.channel?.authorId}',
+                                                id: 'author-big-${channel.channel?.authorId}',
                                                 decoration: BoxDecoration(borderRadius: BorderRadius.circular(35)),
                                               ),
                                               Padding(
                                                 padding: const EdgeInsets.only(left: 8.0, right: 20),
                                                 child: Text(
-                                                  _.channel?.author ?? '',
+                                                  channel.channel?.author ?? '',
                                                   style: textTheme.displaySmall,
                                                 ),
                                               )
@@ -91,14 +101,14 @@ class TvChannelView extends StatelessWidget {
                                       TvSubscribeButton(
                                         autoFocus: true,
                                         channelId: channelId,
-                                        subCount: compactCurrency.format(_.channel!.subCount),
-                                        onFocusChanged: _.scrollToTop,
+                                        subCount: compactCurrency.format(channel.channel!.subCount),
+                                        onFocusChanged: tvCubit.scrollToTop,
                                       ),
                                       TvExpandableText(
-                                        text: _.channel?.description ?? '',
+                                        text: channel.channel?.description ?? '',
                                         maxLines: 3,
                                       ),
-                                      _.hasVideos
+                                      tv.hasVideos
                                           ? Padding(
                                               padding: const EdgeInsets.only(top: 20.0),
                                               child: Text(
@@ -108,11 +118,11 @@ class TvChannelView extends StatelessWidget {
                                             )
                                           : const SizedBox.shrink(),
                                       TvHorizontalVideoList(
-                                          paginatedVideoList: ContinuationList<VideoInList>((continuation) => service.getChannelVideos(_.channel?.authorId ?? '', continuation).then((value) {
-                                                _.setHasVideos(value.videos.isNotEmpty);
+                                          paginatedVideoList: ContinuationList<VideoInList>((continuation) => service.getChannelVideos(channel.channel?.authorId ?? '', continuation).then((value) {
+                                                tvCubit.setHasVideos(value.videos.isNotEmpty);
                                                 return value;
                                               }))),
-                                      _.hasShorts
+                                      tv.hasShorts
                                           ? Padding(
                                               padding: const EdgeInsets.only(top: 20.0),
                                               child: Text(
@@ -122,11 +132,11 @@ class TvChannelView extends StatelessWidget {
                                             )
                                           : const SizedBox.shrink(),
                                       TvHorizontalVideoList(
-                                          paginatedVideoList: ContinuationList<VideoInList>((continuation) => service.getChannelShorts(_.channel?.authorId ?? '', continuation).then((value) {
-                                                _.setHasShorts(value.videos.isNotEmpty);
+                                          paginatedVideoList: ContinuationList<VideoInList>((continuation) => service.getChannelShorts(channel.channel?.authorId ?? '', continuation).then((value) {
+                                                tvCubit.setHasShorts(value.videos.isNotEmpty);
                                                 return value;
                                               }))),
-                                      _.hasStreams
+                                      tv.hasStreams
                                           ? Padding(
                                               padding: const EdgeInsets.only(top: 20.0),
                                               child: Text(
@@ -136,11 +146,11 @@ class TvChannelView extends StatelessWidget {
                                             )
                                           : const SizedBox.shrink(),
                                       TvHorizontalVideoList(
-                                          paginatedVideoList: ContinuationList<VideoInList>((continuation) => service.getChannelStreams(_.channel?.authorId ?? '', continuation).then((value) {
-                                                _.setHasStreams(value.videos.isNotEmpty);
+                                          paginatedVideoList: ContinuationList<VideoInList>((continuation) => service.getChannelStreams(channel.channel?.authorId ?? '', continuation).then((value) {
+                                                tvCubit.setHasStreams(value.videos.isNotEmpty);
                                                 return value;
                                               }))),
-                                      _.hasPlaylist
+                                      tv.hasPlaylist
                                           ? Padding(
                                               padding: const EdgeInsets.only(top: 20.0),
                                               child: Text(
@@ -151,10 +161,11 @@ class TvChannelView extends StatelessWidget {
                                           : const SizedBox.shrink(),
                                       TvHorizontalItemList<Playlist>(
                                         getPlaceholder: () => const TvPlaylistPlaceHolder(),
-                                        paginatedList: ContinuationList<Playlist>((continuation) => service.getChannelPlaylists(_.channel?.authorId ?? '', continuation: continuation).then((value) {
-                                              _.setHasPlaylists(value.playlists.isNotEmpty);
-                                              return value;
-                                            })),
+                                        paginatedList:
+                                            ContinuationList<Playlist>((continuation) => service.getChannelPlaylists(channel.channel?.authorId ?? '', continuation: continuation).then((value) {
+                                                  tvCubit.setHasPlaylists(value.playlists.isNotEmpty);
+                                                  return value;
+                                                })),
                                         buildItem: (context, index, item) => Padding(
                                             padding: const EdgeInsets.all(8.0),
                                             child: PlaylistItem(
@@ -173,6 +184,8 @@ class TvChannelView extends StatelessWidget {
                     ),
                   );
           }),
+        ),
+      ),
     );
   }
 }

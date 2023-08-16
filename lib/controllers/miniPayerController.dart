@@ -25,7 +25,7 @@ import 'package:logging/logging.dart';
 import '../../models/db/progress.dart' as dbProgress;
 import '../main.dart';
 import '../models/baseVideo.dart';
-import '../models/db/downloadedVideo.dart';
+import '../downloads/models/downloaded_video.dart';
 import '../models/pair.dart';
 import '../models/sponsorSegment.dart';
 import '../models/sponsorSegmentTypes.dart';

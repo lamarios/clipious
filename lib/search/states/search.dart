@@ -8,7 +8,7 @@ import 'package:invidious/main.dart';
 import 'package:invidious/models/searchResult.dart';
 import 'package:invidious/models/searchSortBy.dart';
 
-import '../../models/channel.dart';
+import '../../channels/models/channel.dart';
 import '../../models/playlist.dart';
 import '../../models/searchType.dart';
 import '../../models/videoInList.dart';
@@ -160,8 +160,8 @@ class SearchState extends Clonable<SearchState> {
         channelPage = channelPage ?? 1,
         playlistPage = playlistPage ?? 1;
 
-  SearchState.inLine(this.queryController, this.selectedIndex, this.videos, this.channels, this.playlists, this.useHistory, this.searchNow, this.suggestions, this.sortBy,
-      this.showResults, this.loading, this.videoPage, this.channelPage, this.playlistPage);
+  SearchState.inLine(this.queryController, this.selectedIndex, this.videos, this.channels, this.playlists, this.useHistory, this.searchNow, this.suggestions, this.sortBy, this.showResults,
+      this.loading, this.videoPage, this.channelPage, this.playlistPage);
 
   @override
   SearchState clone() {

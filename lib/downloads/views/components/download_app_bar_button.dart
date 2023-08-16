@@ -2,13 +2,13 @@ import 'dart:math';
 
 import 'package:animate_to/animate_to.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:invidious/models/baseVideo.dart';
 
-import '../../controllers/downloadController.dart';
-import '../../main.dart';
-import '../../myRouteObserver.dart';
-import '../downloadManager.dart';
+import '../../states/download_manager.dart';
+import '../../../main.dart';
+import '../../../myRouteObserver.dart';
+import '../screens/download_manager.dart';
 
 class AppBarDownloadButton extends StatelessWidget {
   const AppBarDownloadButton({Key? key}) : super(key: key);
@@ -16,10 +16,8 @@ class AppBarDownloadButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var colors = Theme.of(context).colorScheme;
-    return GetBuilder<DownloadController>(
-      init: DownloadController(),
-      tag: 'dl',
-      builder: (_) => AnimateTo<BaseVideo>(
+    return BlocBuilder<DownloadManagerCubit, DownloadManagerState>(
+      builder: (context, _) => AnimateTo<BaseVideo>(
         // onArrival: _.addDownload,
         controller: _.animateToController,
         child: Stack(

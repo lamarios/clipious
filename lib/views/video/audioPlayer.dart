@@ -6,7 +6,7 @@ import 'package:invidious/views/components/offlineVideoThumbnail.dart';
 import 'package:invidious/views/videoPlayer/playerControls.dart';
 
 import '../../controllers/audioPlayerController.dart';
-import '../../models/db/downloadedVideo.dart';
+import '../../downloads/models/downloaded_video.dart';
 import '../../models/video.dart';
 import '../../utils.dart';
 import '../components/videoThumbnail.dart';

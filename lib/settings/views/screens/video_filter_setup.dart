@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:invidious/settings/states/video_filter_edit.dart';
 import 'package:search_choices/search_choices.dart';
 
-import '../../../models/channel.dart';
+import '../../../channels/models/channel.dart';
 import '../../models/db/video_filter.dart';
 
 class VideoFilterSetup extends StatelessWidget {

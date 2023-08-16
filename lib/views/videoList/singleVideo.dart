@@ -1,5 +1,6 @@
 import 'package:animate_to/animate_to.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:invidious/controllers/videoInListController.dart';
@@ -11,7 +12,7 @@ import 'package:invidious/views/components/videoThumbnail.dart';
 import 'package:invidious/views/video/videoModalSheet.dart';
 import 'package:logging/logging.dart';
 
-import '../../controllers/downloadController.dart';
+import '../../downloads/states/download_manager.dart';
 import '../../models/baseVideo.dart';
 import '../../models/imageObject.dart';
 import '../../utils.dart';
@@ -42,6 +43,7 @@ class VideoListItem extends StatelessWidget {
     var textTheme = Theme.of(context).textTheme;
 
     TextStyle filterStyle = (textTheme.bodySmall ?? const TextStyle()).copyWith(color: colorScheme.secondary.withOpacity(0.7));
+    var downloadManager = context.read<DownloadManagerCubit>();
 
     var widget = GetBuilder(
       init: VideoInListController(video),
@@ -230,7 +232,7 @@ class VideoListItem extends StatelessWidget {
                 child: child,
               );
             },
-            key: DownloadController.to()?.animateToController.tag('video-animate-to-${video.videoId}') ?? GlobalKey(),
+            key: downloadManager.state.animateToController.tag('video-animate-to-${video.videoId}') ?? GlobalKey(),
             child: widget,
           )
         : widget;

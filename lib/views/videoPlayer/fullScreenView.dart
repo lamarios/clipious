@@ -4,7 +4,7 @@ import 'package:invidious/controllers/miniPayerController.dart';
 import 'package:invidious/utils.dart';
 import 'package:invidious/views/videoPlayer/videoQueue.dart';
 
-import '../../models/db/downloadedVideo.dart';
+import '../../downloads/models/downloaded_video.dart';
 import '../../models/video.dart';
 import '../video/commentsContainer.dart';
 import '../video/info.dart';

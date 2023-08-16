@@ -10,7 +10,7 @@ import 'package:invidious/views/playlistList.dart';
 import '../../../controllers/playlistListController.dart';
 import '../../states/search.dart';
 import '../../../main.dart';
-import '../../../models/channel.dart';
+import '../../../channels/models/channel.dart';
 import '../../../models/paginatedList.dart';
 import '../../../models/playlist.dart';
 import '../../../utils.dart';
