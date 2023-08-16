@@ -7,7 +7,7 @@
    viewBox="0 0 270.93332 132.29167"
    version="1.1"
    id="svg1162"
-   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   inkscape:version="1.3 (0e150ed6c4, 2023-07-21)"
    sodipodi:docname="banner.svg"
    inkscape:export-filename="banner.png"
    inkscape:export-xdpi="96"
@@ -28,29 +28,17 @@
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
      showgrid="false"
-     inkscape:zoom="0.914906"
-     inkscape:cx="735.04819"
-     inkscape:cy="194.55551"
-     inkscape:window-width="2560"
-     inkscape:window-height="1371"
+     inkscape:zoom="1.7001518"
+     inkscape:cx="308.20778"
+     inkscape:cy="194.39441"
+     inkscape:window-width="2540"
+     inkscape:window-height="1351"
      inkscape:window-x="26"
      inkscape:window-y="23"
      inkscape:window-maximized="0"
      inkscape:current-layer="layer1" />
   <defs
      id="defs1159">
-    <radialGradient
-       inkscape:collect="always"
-       xlink:href="#icon_gradient"
-       id="radialGradient8762"
-       cx="282.19751"
-       cy="264.0994"
-       fx="282.19751"
-       fy="264.0994"
-       r="246.7025"
-       gradientTransform="matrix(0.12496604,0,0,0.12326976,-94.904715,130.56339)"
-       gradientUnits="userSpaceOnUse"
-       spreadMethod="pad" />
     <linearGradient
        inkscape:collect="always"
        id="icon_gradient">
@@ -63,6 +51,18 @@
          offset="1"
          id="stop8758" />
     </linearGradient>
+    <radialGradient
+       inkscape:collect="always"
+       xlink:href="#icon_gradient"
+       id="radialGradient8762-5"
+       cx="282.19751"
+       cy="264.0994"
+       fx="282.19751"
+       fy="264.0994"
+       r="246.7025"
+       gradientTransform="matrix(0.12421154,0,0,0.12252624,-86.571611,130.75975)"
+       gradientUnits="userSpaceOnUse"
+       spreadMethod="pad" />
   </defs>
   <g
      inkscape:label="Layer 1"
@@ -77,10 +77,10 @@
        x="-108.98691"
        y="96.973022" />
     <path
-       style="fill:#4400aa;fill-opacity:0;stroke:url(#radialGradient8762);stroke-width:7.97205;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
-       d="m -31.934319,163.11886 -55.410565,-27.70554 v 55.41108 l 41.538612,-20.7695 -29.1512,-14.80983 -0.04729,15.96135"
-       id="path1085"
-       sodipodi:nodetypes="cccccc" />
+       style="display:inline;fill:#4400aa;fill-opacity:0;stroke:url(#radialGradient8762-5);stroke-width:7.92398;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+       d="m -23.981408,163.11886 -55.076018,-27.53843 v 55.07685 l 54.982896,-27.4709"
+       id="path1085-9"
+       sodipodi:nodetypes="cccc" />
     <text
        xml:space="preserve"
        style="font-size:35.2778px;fill:#9c1ef5;fill-opacity:1;stroke:#5a00a8;stroke-width:0;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"

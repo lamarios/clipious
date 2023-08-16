@@ -7,7 +7,7 @@
    viewBox="0 0 1152 1152"
    version="1.1"
    id="svg323"
-   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   inkscape:version="1.3 (0e150ed6c4, 2023-07-21)"
    sodipodi:docname="icon-splash.svg"
    inkscape:export-filename="icon-splash.png"
    inkscape:export-xdpi="25.400002"
@@ -28,29 +28,17 @@
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
      showgrid="false"
-     inkscape:zoom="0.2287265"
-     inkscape:cx="745.43177"
-     inkscape:cy="2159.7847"
-     inkscape:window-width="2560"
-     inkscape:window-height="1371"
+     inkscape:zoom="0.42503794"
+     inkscape:cx="748.16851"
+     inkscape:cy="2160.9836"
+     inkscape:window-width="2540"
+     inkscape:window-height="1351"
      inkscape:window-x="26"
      inkscape:window-y="23"
      inkscape:window-maximized="0"
-     inkscape:current-layer="layer1" />
+     inkscape:current-layer="layer1-5" />
   <defs
      id="defs320">
-    <radialGradient
-       inkscape:collect="always"
-       xlink:href="#icon_gradient"
-       id="radialGradient8762"
-       cx="282.19751"
-       cy="264.0994"
-       fx="282.19751"
-       fy="264.0994"
-       r="246.7025"
-       gradientTransform="matrix(1.1207149,0,0,0.93434208,372.01751,417.21955)"
-       gradientUnits="userSpaceOnUse"
-       spreadMethod="pad" />
     <linearGradient
        inkscape:collect="always"
        id="icon_gradient">
@@ -63,16 +51,35 @@
          offset="1"
          id="stop8758" />
     </linearGradient>
+    <radialGradient
+       inkscape:collect="always"
+       xlink:href="#icon_gradient"
+       id="radialGradient8762-3"
+       cx="282.19751"
+       cy="264.0994"
+       fx="282.19751"
+       fy="264.0994"
+       r="246.7025"
+       gradientTransform="matrix(3.3110473,0,0,3.5855848,610.46102,1.9652313)"
+       gradientUnits="userSpaceOnUse"
+       spreadMethod="pad" />
   </defs>
   <g
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
      transform="translate(-54.549925,-87.978697)">
-    <path
-       style="fill:#4400aa;fill-opacity:0;stroke:url(#radialGradient8762);stroke-width:65.7274;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
-       d="M 821.28453,663.97875 439.81532,453.98034 V 873.97712 L 720.56305,716.5515 544.98646,616.80905 544.56238,725.27966"
-       id="path1085"
-       sodipodi:nodetypes="cccccc" />
+    <g
+       inkscape:label="Layer 1"
+       inkscape:groupmode="layer"
+       id="layer1-5"
+       style="display:inline"
+       transform="matrix(0.26458333,0,0,0.26458333,221.81351,412.91133)">
+      <path
+         style="fill:#4400aa;fill-opacity:0;stroke:url(#radialGradient8762-3);stroke-width:221.314;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+         d="M 2278.898,948.91599 810.76311,143.03669 V 1754.7954 L 2276.4157,950.89179"
+         id="path1085-3"
+         sodipodi:nodetypes="cccc" />
+    </g>
   </g>
 </svg>
