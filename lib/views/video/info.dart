@@ -4,7 +4,7 @@ import 'package:invidious/main.dart';
 import 'package:invidious/models/video.dart';
 import 'package:invidious/views/components/textLinkified.dart';
 import 'package:invidious/views/components/videoThumbnail.dart';
-import 'package:invidious/views/search.dart';
+import 'package:invidious/search/views/screens/search.dart';
 import 'package:invidious/views/video/videoMetrics.dart';
 
 import '../../models/imageObject.dart';

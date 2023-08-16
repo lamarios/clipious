@@ -8,20 +8,20 @@ import 'package:invidious/main.dart';
 import 'package:invidious/models/searchResult.dart';
 import 'package:invidious/models/searchSortBy.dart';
 
-import '../models/channel.dart';
-import '../models/playlist.dart';
-import '../models/searchType.dart';
-import '../models/videoInList.dart';
+import '../../models/channel.dart';
+import '../../models/playlist.dart';
+import '../../models/searchType.dart';
+import '../../models/videoInList.dart';
 
-part 'searchController.g.dart';
+part 'search.g.dart';
 
-class SearchCubit<T extends ClipiousSearchController> extends Cubit<ClipiousSearchController> {
+class SearchCubit<T extends SearchState> extends Cubit<SearchState> {
   SearchCubit(super.initialState) {
     onInit();
   }
 
   @override
-  emit(ClipiousSearchController state) {
+  emit(SearchState state) {
     super.emit(state.copyWith());
   }
 
@@ -104,7 +104,7 @@ abstract class Clonable<T> {
 }
 
 @CopyWith(constructor: "inLine")
-class ClipiousSearchController extends Clonable<ClipiousSearchController> {
+class SearchState extends Clonable<SearchState> {
   TextEditingController queryController;
 
   int selectedIndex;
@@ -129,7 +129,7 @@ class ClipiousSearchController extends Clonable<ClipiousSearchController> {
 
   int videoPage, channelPage, playlistPage;
 
-  ClipiousSearchController(
+  SearchState(
       {TextEditingController? queryController,
       int? selectedIndex,
       List<VideoInList>? videos,
@@ -160,11 +160,11 @@ class ClipiousSearchController extends Clonable<ClipiousSearchController> {
         channelPage = channelPage ?? 1,
         playlistPage = playlistPage ?? 1;
 
-  ClipiousSearchController.inLine(this.queryController, this.selectedIndex, this.videos, this.channels, this.playlists, this.useHistory, this.searchNow, this.suggestions, this.sortBy,
+  SearchState.inLine(this.queryController, this.selectedIndex, this.videos, this.channels, this.playlists, this.useHistory, this.searchNow, this.suggestions, this.sortBy,
       this.showResults, this.loading, this.videoPage, this.channelPage, this.playlistPage);
 
   @override
-  ClipiousSearchController clone() {
+  SearchState clone() {
     return copyWith();
   }
 }

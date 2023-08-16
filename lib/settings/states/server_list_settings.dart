@@ -18,7 +18,7 @@ enum PublicServerErrors { none, couldNotGetList }
 
 final log = Logger('ManagerServerView');
 
-class ServerListSettingsCubit extends Cubit<ServerListSettingsModel> {
+class ServerListSettingsCubit extends Cubit<ServerListSettingsState> {
   ServerListSettingsCubit(super.initialState) {
     refreshServers();
     getPublicServers();
@@ -46,7 +46,7 @@ class ServerListSettingsCubit extends Cubit<ServerListSettingsModel> {
   }
 
   @override
-  emit(ServerListSettingsModel state) {
+  emit(ServerListSettingsState state) {
     super.emit(state.copyWith());
   }
 
@@ -131,8 +131,8 @@ class ServerListSettingsCubit extends Cubit<ServerListSettingsModel> {
 }
 
 @CopyWith()
-class ServerListSettingsModel {
-  ServerListSettingsModel({required this.dbServers, required this.publicServers, this.publicServerProgress = 0, this.pinging = true});
+class ServerListSettingsState {
+  ServerListSettingsState({required this.dbServers, required this.publicServers, this.publicServerProgress = 0, this.pinging = true});
 
   List<Server> dbServers;
   List<Server> publicServers;

@@ -13,7 +13,7 @@ part 'video_filter.g.dart';
 
 final Logger log = Logger('VideoFilterController');
 
-class VideoFilterCubit extends Cubit<VideoFilterModel> {
+class VideoFilterCubit extends Cubit<VideoFilterState> {
   VideoFilterCubit(super.initialState) {
     refreshFilters();
   }
@@ -23,7 +23,7 @@ class VideoFilterCubit extends Cubit<VideoFilterModel> {
   }
 
   @override
-  emit(VideoFilterModel state) {
+  emit(VideoFilterState state) {
     super.emit(state.copyWith());
   }
 
@@ -64,11 +64,11 @@ class VideoFilterCubit extends Cubit<VideoFilterModel> {
 }
 
 @CopyWith()
-class VideoFilterModel extends GetxController {
+class VideoFilterState {
   List<VideoFilter> filters;
   bool hideFilteredVideos;
 
-  VideoFilterModel({List<VideoFilter>? filters, bool? hideFilteredVideos})
+  VideoFilterState({List<VideoFilter>? filters, bool? hideFilteredVideos})
       : filters = filters ?? [],
         hideFilteredVideos = hideFilteredVideos ?? (db.getSettings(HIDE_FILTERED_VIDEOS)?.value == true);
 }

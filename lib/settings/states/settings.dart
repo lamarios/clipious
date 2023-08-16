@@ -22,7 +22,7 @@ const String searchHistoryDefaultLength = '12';
 
 var log = Logger('SettingsController');
 
-class SettingsCubit extends Cubit<SettingsModel> {
+class SettingsCubit extends Cubit<SettingsState> {
   SettingsCubit(super.initialState) {
     onReady();
   }
@@ -32,7 +32,7 @@ class SettingsCubit extends Cubit<SettingsModel> {
     getSettings();
   }
 
-  emit(SettingsModel state) {
+  emit(SettingsState state) {
     super.emit(state.copyWith());
   }
 
@@ -237,7 +237,7 @@ class SettingsCubit extends Cubit<SettingsModel> {
 }
 
 @CopyWith()
-class SettingsModel {
+class SettingsState {
   Map<String, SettingsValue> settings;
   List<Server> dbServers;
   PackageInfo packageInfo;
@@ -337,7 +337,7 @@ class SettingsModel {
     }
   }
 
-  SettingsModel({Map<String, SettingsValue>? settings, List<Server>? dbServers, Server? currentServer, PackageInfo? packageInfo})
+  SettingsState({Map<String, SettingsValue>? settings, List<Server>? dbServers, Server? currentServer, PackageInfo? packageInfo})
       : packageInfo = packageInfo ?? PackageInfo(appName: '', packageName: '', version: '', buildNumber: ''),
         settings = settings ?? {},
         dbServers = dbServers ?? db.getServers(),

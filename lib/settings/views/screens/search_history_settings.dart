@@ -42,8 +42,8 @@ class SearchHistorySettings extends StatelessWidget {
     SettingsThemeData theme = settingsTheme(colorScheme);
 
     return BlocProvider(
-      create: (context) => SettingsCubit(SettingsModel()),
-      child: BlocBuilder<SettingsCubit, SettingsModel>(
+      create: (context) => SettingsCubit(SettingsState()),
+      child: BlocBuilder<SettingsCubit, SettingsState>(
         builder: (context, _) {
           var cubit = context.read<SettingsCubit>();
           return Scaffold(

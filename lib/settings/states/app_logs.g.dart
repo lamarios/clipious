@@ -7,9 +7,9 @@ part of 'app_logs.dart';
 // **************************************************************************
 
 abstract class _$AppLogsModelCWProxy {
-  AppLogsModel logs(List<AppLog>? logs);
+  AppLogsState logs(List<AppLog>? logs);
 
-  AppLogsModel selected(List<int>? selected);
+  AppLogsState selected(List<int>? selected);
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `AppLogsModel(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
@@ -17,7 +17,7 @@ abstract class _$AppLogsModelCWProxy {
   /// ```dart
   /// AppLogsModel(...).copyWith(id: 12, name: "My name")
   /// ````
-  AppLogsModel call({
+  AppLogsState call({
     List<AppLog>? logs,
     List<int>? selected,
   });
@@ -27,13 +27,13 @@ abstract class _$AppLogsModelCWProxy {
 class _$AppLogsModelCWProxyImpl implements _$AppLogsModelCWProxy {
   const _$AppLogsModelCWProxyImpl(this._value);
 
-  final AppLogsModel _value;
+  final AppLogsState _value;
 
   @override
-  AppLogsModel logs(List<AppLog>? logs) => this(logs: logs);
+  AppLogsState logs(List<AppLog>? logs) => this(logs: logs);
 
   @override
-  AppLogsModel selected(List<int>? selected) => this(selected: selected);
+  AppLogsState selected(List<int>? selected) => this(selected: selected);
 
   @override
 
@@ -43,11 +43,11 @@ class _$AppLogsModelCWProxyImpl implements _$AppLogsModelCWProxy {
   /// ```dart
   /// AppLogsModel(...).copyWith(id: 12, name: "My name")
   /// ````
-  AppLogsModel call({
+  AppLogsState call({
     Object? logs = const $CopyWithPlaceholder(),
     Object? selected = const $CopyWithPlaceholder(),
   }) {
-    return AppLogsModel(
+    return AppLogsState(
       logs: logs == const $CopyWithPlaceholder()
           ? _value.logs
           // ignore: cast_nullable_to_non_nullable
@@ -60,7 +60,7 @@ class _$AppLogsModelCWProxyImpl implements _$AppLogsModelCWProxy {
   }
 }
 
-extension $AppLogsModelCopyWith on AppLogsModel {
+extension $AppLogsModelCopyWith on AppLogsState {
   /// Returns a callable class that can be used as follows: `instanceOfAppLogsModel.copyWith(...)` or like so:`instanceOfAppLogsModel.copyWith.fieldName(...)`.
   // ignore: library_private_types_in_public_api
   _$AppLogsModelCWProxy get copyWith => _$AppLogsModelCWProxyImpl(this);

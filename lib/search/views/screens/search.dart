@@ -7,15 +7,15 @@ import 'package:invidious/models/videoInList.dart';
 import 'package:invidious/myRouteObserver.dart';
 import 'package:invidious/views/playlistList.dart';
 
-import '../controllers/playlistListController.dart';
-import '../controllers/searchController.dart';
-import '../main.dart';
-import '../models/channel.dart';
-import '../models/paginatedList.dart';
-import '../models/playlist.dart';
-import '../utils.dart';
-import 'components/paginatedListView.dart';
-import 'videoList.dart';
+import '../../../controllers/playlistListController.dart';
+import '../../states/search.dart';
+import '../../../main.dart';
+import '../../../models/channel.dart';
+import '../../../models/paginatedList.dart';
+import '../../../models/playlist.dart';
+import '../../../utils.dart';
+import '../../../views/components/paginatedListView.dart';
+import '../../../views/videoList.dart';
 
 class Search extends StatelessWidget {
   final String? query;
@@ -28,8 +28,8 @@ class Search extends StatelessWidget {
     var colorScheme = Theme.of(context).colorScheme;
     var locals = AppLocalizations.of(context)!;
     return BlocProvider(
-      create: (context) => SearchCubit<ClipiousSearchController>(ClipiousSearchController(query: query, searchNow: searchNow)),
-      child: BlocBuilder<SearchCubit, ClipiousSearchController>(
+      create: (context) => SearchCubit<SearchState>(SearchState(query: query, searchNow: searchNow)),
+      child: BlocBuilder<SearchCubit, SearchState>(
         builder: (context, _) {
           var cubit = context.read<SearchCubit>();
           return Scaffold(

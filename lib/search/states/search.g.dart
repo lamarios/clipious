@@ -1,40 +1,40 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'searchController.dart';
+part of 'search.dart';
 
 // **************************************************************************
 // CopyWithGenerator
 // **************************************************************************
 
 abstract class _$ClipiousSearchControllerCWProxy {
-  ClipiousSearchController queryController(
+  SearchState queryController(
       TextEditingController queryController);
 
-  ClipiousSearchController selectedIndex(int selectedIndex);
+  SearchState selectedIndex(int selectedIndex);
 
-  ClipiousSearchController videos(List<VideoInList> videos);
+  SearchState videos(List<VideoInList> videos);
 
-  ClipiousSearchController channels(List<Channel> channels);
+  SearchState channels(List<Channel> channels);
 
-  ClipiousSearchController playlists(List<Playlist> playlists);
+  SearchState playlists(List<Playlist> playlists);
 
-  ClipiousSearchController useHistory(bool useHistory);
+  SearchState useHistory(bool useHistory);
 
-  ClipiousSearchController searchNow(bool searchNow);
+  SearchState searchNow(bool searchNow);
 
-  ClipiousSearchController suggestions(List<String> suggestions);
+  SearchState suggestions(List<String> suggestions);
 
-  ClipiousSearchController sortBy(SearchSortBy sortBy);
+  SearchState sortBy(SearchSortBy sortBy);
 
-  ClipiousSearchController showResults(bool showResults);
+  SearchState showResults(bool showResults);
 
-  ClipiousSearchController loading(bool loading);
+  SearchState loading(bool loading);
 
-  ClipiousSearchController videoPage(int videoPage);
+  SearchState videoPage(int videoPage);
 
-  ClipiousSearchController channelPage(int channelPage);
+  SearchState channelPage(int channelPage);
 
-  ClipiousSearchController playlistPage(int playlistPage);
+  SearchState playlistPage(int playlistPage);
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `ClipiousSearchController(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
@@ -42,7 +42,7 @@ abstract class _$ClipiousSearchControllerCWProxy {
   /// ```dart
   /// ClipiousSearchController(...).copyWith(id: 12, name: "My name")
   /// ````
-  ClipiousSearchController call({
+  SearchState call({
     TextEditingController? queryController,
     int? selectedIndex,
     List<VideoInList>? videos,
@@ -65,61 +65,61 @@ class _$ClipiousSearchControllerCWProxyImpl
     implements _$ClipiousSearchControllerCWProxy {
   const _$ClipiousSearchControllerCWProxyImpl(this._value);
 
-  final ClipiousSearchController _value;
+  final SearchState _value;
 
   @override
-  ClipiousSearchController queryController(
+  SearchState queryController(
           TextEditingController queryController) =>
       this(queryController: queryController);
 
   @override
-  ClipiousSearchController selectedIndex(int selectedIndex) =>
+  SearchState selectedIndex(int selectedIndex) =>
       this(selectedIndex: selectedIndex);
 
   @override
-  ClipiousSearchController videos(List<VideoInList> videos) =>
+  SearchState videos(List<VideoInList> videos) =>
       this(videos: videos);
 
   @override
-  ClipiousSearchController channels(List<Channel> channels) =>
+  SearchState channels(List<Channel> channels) =>
       this(channels: channels);
 
   @override
-  ClipiousSearchController playlists(List<Playlist> playlists) =>
+  SearchState playlists(List<Playlist> playlists) =>
       this(playlists: playlists);
 
   @override
-  ClipiousSearchController useHistory(bool useHistory) =>
+  SearchState useHistory(bool useHistory) =>
       this(useHistory: useHistory);
 
   @override
-  ClipiousSearchController searchNow(bool searchNow) =>
+  SearchState searchNow(bool searchNow) =>
       this(searchNow: searchNow);
 
   @override
-  ClipiousSearchController suggestions(List<String> suggestions) =>
+  SearchState suggestions(List<String> suggestions) =>
       this(suggestions: suggestions);
 
   @override
-  ClipiousSearchController sortBy(SearchSortBy sortBy) => this(sortBy: sortBy);
+  SearchState sortBy(SearchSortBy sortBy) => this(sortBy: sortBy);
 
   @override
-  ClipiousSearchController showResults(bool showResults) =>
+  SearchState showResults(bool showResults) =>
       this(showResults: showResults);
 
   @override
-  ClipiousSearchController loading(bool loading) => this(loading: loading);
+  SearchState loading(bool loading) => this(loading: loading);
 
   @override
-  ClipiousSearchController videoPage(int videoPage) =>
+  SearchState videoPage(int videoPage) =>
       this(videoPage: videoPage);
 
   @override
-  ClipiousSearchController channelPage(int channelPage) =>
+  SearchState channelPage(int channelPage) =>
       this(channelPage: channelPage);
 
   @override
-  ClipiousSearchController playlistPage(int playlistPage) =>
+  SearchState playlistPage(int playlistPage) =>
       this(playlistPage: playlistPage);
 
   @override
@@ -130,7 +130,7 @@ class _$ClipiousSearchControllerCWProxyImpl
   /// ```dart
   /// ClipiousSearchController(...).copyWith(id: 12, name: "My name")
   /// ````
-  ClipiousSearchController call({
+  SearchState call({
     Object? queryController = const $CopyWithPlaceholder(),
     Object? selectedIndex = const $CopyWithPlaceholder(),
     Object? videos = const $CopyWithPlaceholder(),
@@ -146,7 +146,7 @@ class _$ClipiousSearchControllerCWProxyImpl
     Object? channelPage = const $CopyWithPlaceholder(),
     Object? playlistPage = const $CopyWithPlaceholder(),
   }) {
-    return ClipiousSearchController.inLine(
+    return SearchState.inLine(
       queryController == const $CopyWithPlaceholder() || queryController == null
           ? _value.queryController
           // ignore: cast_nullable_to_non_nullable
@@ -207,7 +207,7 @@ class _$ClipiousSearchControllerCWProxyImpl
   }
 }
 
-extension $ClipiousSearchControllerCopyWith on ClipiousSearchController {
+extension $ClipiousSearchControllerCopyWith on SearchState {
   /// Returns a callable class that can be used as follows: `instanceOfClipiousSearchController.copyWith(...)` or like so:`instanceOfClipiousSearchController.copyWith.fieldName(...)`.
   // ignore: library_private_types_in_public_api
   _$ClipiousSearchControllerCWProxy get copyWith =>

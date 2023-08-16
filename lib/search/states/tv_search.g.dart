@@ -1,15 +1,15 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'tvSearchController.dart';
+part of 'tv_search.dart';
 
 // **************************************************************************
 // CopyWithGenerator
 // **************************************************************************
 
 abstract class _$TvSearchControllerCWProxy {
-  TvSearchController resultFocus(FocusNode resultFocus);
+  TvSearchState resultFocus(FocusNode resultFocus);
 
-  TvSearchController searchFocus(FocusNode searchFocus);
+  TvSearchState searchFocus(FocusNode searchFocus);
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `TvSearchController(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
@@ -17,7 +17,7 @@ abstract class _$TvSearchControllerCWProxy {
   /// ```dart
   /// TvSearchController(...).copyWith(id: 12, name: "My name")
   /// ````
-  TvSearchController call({
+  TvSearchState call({
     FocusNode? resultFocus,
     FocusNode? searchFocus,
   });
@@ -27,15 +27,13 @@ abstract class _$TvSearchControllerCWProxy {
 class _$TvSearchControllerCWProxyImpl implements _$TvSearchControllerCWProxy {
   const _$TvSearchControllerCWProxyImpl(this._value);
 
-  final TvSearchController _value;
+  final TvSearchState _value;
 
   @override
-  TvSearchController resultFocus(FocusNode resultFocus) =>
-      this(resultFocus: resultFocus);
+  TvSearchState resultFocus(FocusNode resultFocus) => this(resultFocus: resultFocus);
 
   @override
-  TvSearchController searchFocus(FocusNode searchFocus) =>
-      this(searchFocus: searchFocus);
+  TvSearchState searchFocus(FocusNode searchFocus) => this(searchFocus: searchFocus);
 
   @override
 
@@ -45,11 +43,11 @@ class _$TvSearchControllerCWProxyImpl implements _$TvSearchControllerCWProxy {
   /// ```dart
   /// TvSearchController(...).copyWith(id: 12, name: "My name")
   /// ````
-  TvSearchController call({
+  TvSearchState call({
     Object? resultFocus = const $CopyWithPlaceholder(),
     Object? searchFocus = const $CopyWithPlaceholder(),
   }) {
-    return TvSearchController._(
+    return TvSearchState._(
       resultFocus == const $CopyWithPlaceholder() || resultFocus == null
           ? _value.resultFocus
           // ignore: cast_nullable_to_non_nullable
@@ -62,9 +60,8 @@ class _$TvSearchControllerCWProxyImpl implements _$TvSearchControllerCWProxy {
   }
 }
 
-extension $TvSearchControllerCopyWith on TvSearchController {
+extension $TvSearchControllerCopyWith on TvSearchState {
   /// Returns a callable class that can be used as follows: `instanceOfTvSearchController.copyWith(...)` or like so:`instanceOfTvSearchController.copyWith.fieldName(...)`.
   // ignore: library_private_types_in_public_api
-  _$TvSearchControllerCWProxy get copyWith =>
-      _$TvSearchControllerCWProxyImpl(this);
+  _$TvSearchControllerCWProxy get copyWith => _$TvSearchControllerCWProxyImpl(this);
 }

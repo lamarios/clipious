@@ -14,7 +14,7 @@ import '../screens/settings.dart';
 class ManagerServersView extends StatelessWidget {
   const ManagerServersView({super.key});
 
-  showPublicServerActions(BuildContext context, ServerListSettingsModel controller, Server server) {
+  showPublicServerActions(BuildContext context, ServerListSettingsState controller, Server server) {
     var locals = AppLocalizations.of(context)!;
     var textTheme = Theme.of(context).textTheme;
     ServerListSettingsCubit cubit = context.read<ServerListSettingsCubit>();
@@ -55,7 +55,7 @@ class ManagerServersView extends StatelessWidget {
         });
   }
 
-  saveServer(BuildContext context, ServerListSettingsModel controller) async {
+  saveServer(BuildContext context, ServerListSettingsState controller) async {
     var locals = AppLocalizations.of(context)!;
     ServerListSettingsCubit cubit = context.read<ServerListSettingsCubit>();
 
@@ -136,7 +136,7 @@ class ManagerServersView extends StatelessWidget {
     var locals = AppLocalizations.of(context)!;
     var textTheme = Theme.of(context).textTheme;
 
-    return BlocBuilder<ServerListSettingsCubit, ServerListSettingsModel>(
+    return BlocBuilder<ServerListSettingsCubit, ServerListSettingsState>(
       builder: (ctx, _) {
         ServerListSettingsCubit cubit = context.read<ServerListSettingsCubit>();
         var filteredPublicServers = _.publicServers.where((s) => _.dbServers.indexWhere((element) => element.url == s.url) == -1).toList();

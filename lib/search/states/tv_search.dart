@@ -3,13 +3,13 @@ import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 
-part 'tvSearchController.g.dart';
+part 'tv_search.g.dart';
 
-class TvSearchCubit extends Cubit<TvSearchController> {
+class TvSearchCubit extends Cubit<TvSearchState> {
   TvSearchCubit(super.initialState);
 
   @override
-  emit(TvSearchController state) {
+  emit(TvSearchState state) {
     super.emit(state.copyWith());
   }
 
@@ -32,10 +32,10 @@ class TvSearchCubit extends Cubit<TvSearchController> {
 }
 
 @CopyWith(constructor: "_")
-class TvSearchController {
+class TvSearchState {
   FocusNode resultFocus = FocusNode();
   FocusNode searchFocus = FocusNode();
 
-  TvSearchController();
-  TvSearchController._(this.resultFocus, this.searchFocus);
+  TvSearchState();
+  TvSearchState._(this.resultFocus, this.searchFocus);
 }

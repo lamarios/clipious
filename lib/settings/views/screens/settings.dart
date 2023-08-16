@@ -49,7 +49,7 @@ class Settings extends StatelessWidget {
     Navigator.of(context).push(MaterialPageRoute(settings: ROUTE_SETTINGS_SEARCH_HISTORY, builder: (context) => const AppLogs()));
   }
 
-  searchCountry(BuildContext context, SettingsModel controller) {
+  searchCountry(BuildContext context, SettingsState controller) {
     var locals = AppLocalizations.of(context);
     var cubit = context.read<SettingsCubit>();
     SelectDialog.showModal<String>(
@@ -63,7 +63,7 @@ class Settings extends StatelessWidget {
     );
   }
 
-  selectOnOpen(BuildContext context, SettingsModel controller) {
+  selectOnOpen(BuildContext context, SettingsState controller) {
     var categories = getCategories(context);
     var locals = AppLocalizations.of(context)!;
     var cubit = context.read<SettingsCubit>();
@@ -80,7 +80,7 @@ class Settings extends StatelessWidget {
     );
   }
 
-  showSelectLanguage(BuildContext context, SettingsModel controller) {
+  showSelectLanguage(BuildContext context, SettingsState controller) {
     var localsList = AppLocalizations.supportedLocales;
     var localsStrings = localsList.map((e) => e.nativeDisplayLanguageScript ?? '').toList();
     var locals = AppLocalizations.of(context)!;
@@ -110,7 +110,7 @@ class Settings extends StatelessWidget {
     return [locals.popular, locals.trending, locals.subscriptions, locals.playlists, locals.history];
   }
 
-  selectTheme(BuildContext context, SettingsModel _) {
+  selectTheme(BuildContext context, SettingsState _) {
     var cubit = context.read<SettingsCubit>();
     var locals = AppLocalizations.of(context)!;
     showDialog(
@@ -141,8 +141,8 @@ class Settings extends StatelessWidget {
     SettingsThemeData theme = settingsTheme(colorScheme);
 
     return BlocProvider(
-      create: (BuildContext context) => SettingsCubit(SettingsModel()),
-      child: BlocBuilder<SettingsCubit, SettingsModel>(
+      create: (BuildContext context) => SettingsCubit(SettingsState()),
+      child: BlocBuilder<SettingsCubit, SettingsState>(
         builder: (ctx, _) {
           var cubit = ctx.read<SettingsCubit>();
           return Scaffold(

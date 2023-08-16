@@ -7,7 +7,7 @@ import '../models/db/app_logs.dart';
 
 part 'app_logs.g.dart';
 
-class AppLogsCubit extends Cubit<AppLogsModel> {
+class AppLogsCubit extends Cubit<AppLogsState> {
   AppLogsCubit(super.initialState) {
     onInit();
   }
@@ -17,7 +17,7 @@ class AppLogsCubit extends Cubit<AppLogsModel> {
   }
 
   @override
-  emit(AppLogsModel state) {
+  emit(AppLogsState state) {
     super.emit(state.copyWith());
   }
 
@@ -56,12 +56,12 @@ class AppLogsCubit extends Cubit<AppLogsModel> {
 }
 
 @CopyWith()
-class AppLogsModel {
+class AppLogsState {
   List<AppLog> logs;
 
   List<int> selected;
 
-  AppLogsModel({List<AppLog>? logs, List<int>? selected})
+  AppLogsState({List<AppLog>? logs, List<int>? selected})
       : logs = logs ?? [],
         selected = selected ?? [];
 }

@@ -23,7 +23,7 @@ import 'package:invidious/subscriptions/view/screens/manage_subscriptions.dart';
 import 'package:invidious/views/miniPlayer.dart';
 import 'package:invidious/views/playlists.dart';
 import 'package:invidious/views/popular.dart';
-import 'package:invidious/views/search.dart';
+import 'package:invidious/search/views/screens/search.dart';
 import 'package:invidious/settings/views/screens/settings.dart';
 import 'package:invidious/views/subscriptions.dart';
 import 'package:invidious/views/trending.dart';

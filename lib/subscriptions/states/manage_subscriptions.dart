@@ -11,7 +11,7 @@ part 'manage_subscriptions.g.dart';
 
 final logger = Logger('ManageSubscriptionController');
 
-class ManageSubscriptionCubit extends Cubit<ManageSubscriptionsController> {
+class ManageSubscriptionCubit extends Cubit<ManageSubscriptionsState> {
   ManageSubscriptionCubit(super.initialState) {
     onReady();
   }
@@ -21,7 +21,7 @@ class ManageSubscriptionCubit extends Cubit<ManageSubscriptionsController> {
   }
 
   @override
-  emit(ManageSubscriptionsController state) {
+  emit(ManageSubscriptionsState state) {
     super.emit(state.copyWith());
   }
 
@@ -48,12 +48,12 @@ class ManageSubscriptionCubit extends Cubit<ManageSubscriptionsController> {
 }
 
 @CopyWith()
-class ManageSubscriptionsController {
+class ManageSubscriptionsState {
   List<Subscription> subs;
   bool loading;
   RefreshController refreshController;
 
-  ManageSubscriptionsController({List<Subscription>? subs, bool? loading = true, RefreshController? refreshController})
+  ManageSubscriptionsState({List<Subscription>? subs, bool? loading = true, RefreshController? refreshController})
       : subs = subs ?? [],
         loading = loading ?? true,
         refreshController = refreshController ?? RefreshController(initialRefresh: false);

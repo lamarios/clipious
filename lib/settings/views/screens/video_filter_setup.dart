@@ -72,8 +72,8 @@ class VideoFilterSetup extends StatelessWidget {
     var textTheme = Theme.of(context).textTheme;
 
     return BlocProvider(
-      create: (context) => VideoFilterEditCubit(VideoFilterEditModel(filter: filter)),
-      child: BlocBuilder<VideoFilterEditCubit, VideoFilterEditModel>(builder: (context, _) {
+      create: (context) => VideoFilterEditCubit(VideoFilterEditState(filter: filter)),
+      child: BlocBuilder<VideoFilterEditCubit, VideoFilterEditState>(builder: (context, _) {
         var cubit = context.read<VideoFilterEditCubit>();
         return Scaffold(
           appBar: AppBar(

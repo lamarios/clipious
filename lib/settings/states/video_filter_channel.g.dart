@@ -7,11 +7,11 @@ part of 'video_filter_channel.dart';
 // **************************************************************************
 
 abstract class _$VideoFilterChannelModelCWProxy {
-  VideoFilterChannelModel filters(List<VideoFilter> filters);
+  VideoFilterChannelState filters(List<VideoFilter> filters);
 
-  VideoFilterChannelModel channel(Channel? channel);
+  VideoFilterChannelState channel(Channel? channel);
 
-  VideoFilterChannelModel loading(bool loading);
+  VideoFilterChannelState loading(bool loading);
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `VideoFilterChannelModel(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
@@ -19,7 +19,7 @@ abstract class _$VideoFilterChannelModelCWProxy {
   /// ```dart
   /// VideoFilterChannelModel(...).copyWith(id: 12, name: "My name")
   /// ````
-  VideoFilterChannelModel call({
+  VideoFilterChannelState call({
     List<VideoFilter>? filters,
     Channel? channel,
     bool? loading,
@@ -27,21 +27,19 @@ abstract class _$VideoFilterChannelModelCWProxy {
 }
 
 /// Proxy class for `copyWith` functionality. This is a callable class and can be used as follows: `instanceOfVideoFilterChannelModel.copyWith(...)`. Additionally contains functions for specific fields e.g. `instanceOfVideoFilterChannelModel.copyWith.fieldName(...)`
-class _$VideoFilterChannelModelCWProxyImpl
-    implements _$VideoFilterChannelModelCWProxy {
+class _$VideoFilterChannelModelCWProxyImpl implements _$VideoFilterChannelModelCWProxy {
   const _$VideoFilterChannelModelCWProxyImpl(this._value);
 
-  final VideoFilterChannelModel _value;
+  final VideoFilterChannelState _value;
 
   @override
-  VideoFilterChannelModel filters(List<VideoFilter> filters) =>
-      this(filters: filters);
+  VideoFilterChannelState filters(List<VideoFilter> filters) => this(filters: filters);
 
   @override
-  VideoFilterChannelModel channel(Channel? channel) => this(channel: channel);
+  VideoFilterChannelState channel(Channel? channel) => this(channel: channel);
 
   @override
-  VideoFilterChannelModel loading(bool loading) => this(loading: loading);
+  VideoFilterChannelState loading(bool loading) => this(loading: loading);
 
   @override
 
@@ -51,12 +49,12 @@ class _$VideoFilterChannelModelCWProxyImpl
   /// ```dart
   /// VideoFilterChannelModel(...).copyWith(id: 12, name: "My name")
   /// ````
-  VideoFilterChannelModel call({
+  VideoFilterChannelState call({
     Object? filters = const $CopyWithPlaceholder(),
     Object? channel = const $CopyWithPlaceholder(),
     Object? loading = const $CopyWithPlaceholder(),
   }) {
-    return VideoFilterChannelModel(
+    return VideoFilterChannelState(
       filters: filters == const $CopyWithPlaceholder() || filters == null
           ? _value.filters
           // ignore: cast_nullable_to_non_nullable
@@ -73,9 +71,8 @@ class _$VideoFilterChannelModelCWProxyImpl
   }
 }
 
-extension $VideoFilterChannelModelCopyWith on VideoFilterChannelModel {
+extension $VideoFilterChannelModelCopyWith on VideoFilterChannelState {
   /// Returns a callable class that can be used as follows: `instanceOfVideoFilterChannelModel.copyWith(...)` or like so:`instanceOfVideoFilterChannelModel.copyWith.fieldName(...)`.
   // ignore: library_private_types_in_public_api
-  _$VideoFilterChannelModelCWProxy get copyWith =>
-      _$VideoFilterChannelModelCWProxyImpl(this);
+  _$VideoFilterChannelModelCWProxy get copyWith => _$VideoFilterChannelModelCWProxyImpl(this);
 }

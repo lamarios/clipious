@@ -32,8 +32,8 @@ class VideoFilterSettings extends StatelessWidget {
     var locals = AppLocalizations.of(context)!;
     ColorScheme colors = Theme.of(context).colorScheme;
     return BlocProvider(
-      create: (context) => VideoFilterCubit(VideoFilterModel()),
-      child: BlocBuilder<VideoFilterCubit, VideoFilterModel>(builder: (context, _) {
+      create: (context) => VideoFilterCubit(VideoFilterState()),
+      child: BlocBuilder<VideoFilterCubit, VideoFilterState>(builder: (context, _) {
         var cubit = context.read<VideoFilterCubit>();
 
         Map<String, List<VideoFilter>> mappedFilters = _.filters.groupBy(

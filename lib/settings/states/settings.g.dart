@@ -7,13 +7,13 @@ part of 'settings.dart';
 // **************************************************************************
 
 abstract class _$SettingsModelCWProxy {
-  SettingsModel settings(Map<String, SettingsValue>? settings);
+  SettingsState settings(Map<String, SettingsValue>? settings);
 
-  SettingsModel dbServers(List<Server>? dbServers);
+  SettingsState dbServers(List<Server>? dbServers);
 
-  SettingsModel currentServer(Server? currentServer);
+  SettingsState currentServer(Server? currentServer);
 
-  SettingsModel packageInfo(PackageInfo? packageInfo);
+  SettingsState packageInfo(PackageInfo? packageInfo);
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `SettingsModel(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
@@ -21,7 +21,7 @@ abstract class _$SettingsModelCWProxy {
   /// ```dart
   /// SettingsModel(...).copyWith(id: 12, name: "My name")
   /// ````
-  SettingsModel call({
+  SettingsState call({
     Map<String, SettingsValue>? settings,
     List<Server>? dbServers,
     Server? currentServer,
@@ -33,23 +33,19 @@ abstract class _$SettingsModelCWProxy {
 class _$SettingsModelCWProxyImpl implements _$SettingsModelCWProxy {
   const _$SettingsModelCWProxyImpl(this._value);
 
-  final SettingsModel _value;
+  final SettingsState _value;
 
   @override
-  SettingsModel settings(Map<String, SettingsValue>? settings) =>
-      this(settings: settings);
+  SettingsState settings(Map<String, SettingsValue>? settings) => this(settings: settings);
 
   @override
-  SettingsModel dbServers(List<Server>? dbServers) =>
-      this(dbServers: dbServers);
+  SettingsState dbServers(List<Server>? dbServers) => this(dbServers: dbServers);
 
   @override
-  SettingsModel currentServer(Server? currentServer) =>
-      this(currentServer: currentServer);
+  SettingsState currentServer(Server? currentServer) => this(currentServer: currentServer);
 
   @override
-  SettingsModel packageInfo(PackageInfo? packageInfo) =>
-      this(packageInfo: packageInfo);
+  SettingsState packageInfo(PackageInfo? packageInfo) => this(packageInfo: packageInfo);
 
   @override
 
@@ -59,13 +55,13 @@ class _$SettingsModelCWProxyImpl implements _$SettingsModelCWProxy {
   /// ```dart
   /// SettingsModel(...).copyWith(id: 12, name: "My name")
   /// ````
-  SettingsModel call({
+  SettingsState call({
     Object? settings = const $CopyWithPlaceholder(),
     Object? dbServers = const $CopyWithPlaceholder(),
     Object? currentServer = const $CopyWithPlaceholder(),
     Object? packageInfo = const $CopyWithPlaceholder(),
   }) {
-    return SettingsModel(
+    return SettingsState(
       settings: settings == const $CopyWithPlaceholder()
           ? _value.settings
           // ignore: cast_nullable_to_non_nullable
@@ -86,7 +82,7 @@ class _$SettingsModelCWProxyImpl implements _$SettingsModelCWProxy {
   }
 }
 
-extension $SettingsModelCopyWith on SettingsModel {
+extension $SettingsModelCopyWith on SettingsState {
   /// Returns a callable class that can be used as follows: `instanceOfSettingsModel.copyWith(...)` or like so:`instanceOfSettingsModel.copyWith.fieldName(...)`.
   // ignore: library_private_types_in_public_api
   _$SettingsModelCWProxy get copyWith => _$SettingsModelCWProxyImpl(this);

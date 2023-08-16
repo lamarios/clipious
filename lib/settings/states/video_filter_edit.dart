@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:get/get.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/main.dart';
 import 'package:invidious/models/searchType.dart';
@@ -14,7 +13,7 @@ part 'video_filter_edit.g.dart';
 
 final log = Logger('Video Filter Edit Controller');
 
-class VideoFilterEditCubit extends Cubit<VideoFilterEditModel> {
+class VideoFilterEditCubit extends Cubit<VideoFilterEditState> {
   VideoFilterEditCubit(super.initialState) {
     onReady();
   }
@@ -26,7 +25,7 @@ class VideoFilterEditCubit extends Cubit<VideoFilterEditModel> {
     }
   }
 
-  emit(VideoFilterEditModel state) {
+  emit(VideoFilterEditState state) {
     super.emit(state.copyWith());
   }
 
@@ -138,7 +137,7 @@ class VideoFilterEditCubit extends Cubit<VideoFilterEditModel> {
 }
 
 @CopyWith()
-class VideoFilterEditModel extends GetxController {
+class VideoFilterEditState {
   VideoFilter? filter;
   int searchPage;
   Channel? channel;
@@ -146,7 +145,7 @@ class VideoFilterEditModel extends GetxController {
 
   TextEditingController valueController;
 
-  VideoFilterEditModel({this.filter, this.searchPage = 1, this.channel, List<Channel>? channelResults, TextEditingController? valueController})
+  VideoFilterEditState({this.filter, this.searchPage = 1, this.channel, List<Channel>? channelResults, TextEditingController? valueController})
       : channelResults = channelResults ?? [],
         valueController = valueController ?? TextEditingController(text: filter?.value ?? '');
 }

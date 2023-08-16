@@ -7,7 +7,7 @@ import 'package:invidious/models/playlist.dart';
 import 'package:invidious/models/searchType.dart';
 import 'package:invidious/views/components/placeholders.dart';
 import 'package:invidious/views/playlists/playlist.dart';
-import 'package:invidious/views/search.dart';
+import 'package:invidious/search/views/screens/search.dart';
 import 'package:invidious/views/tv/tvButton.dart';
 import 'package:invidious/views/tv/tvChannelView.dart';
 import 'package:invidious/views/tv/tvHorizontalPaginatedListView.dart';
@@ -15,15 +15,15 @@ import 'package:invidious/views/tv/tvHorizontalVideoList.dart';
 import 'package:invidious/views/tv/tvOverScan.dart';
 import 'package:invidious/views/tv/tvTextField.dart';
 
-import '../../controllers/searchController.dart';
-import '../../controllers/tvSearchController.dart';
-import '../../models/channel.dart';
-import '../../models/videoInList.dart';
+import '../../../states/search.dart';
+import '../../../states/tv_search.dart';
+import '../../../../models/channel.dart';
+import '../../../../models/videoInList.dart';
 
 class TvSearch extends StatelessWidget {
   const TvSearch({Key? key}) : super(key: key);
 
-  Widget buildSuggestion(BuildContext context, ClipiousSearchController _, bool isHistory, String suggestion) {
+  Widget buildSuggestion(BuildContext context, SearchState _, bool isHistory, String suggestion) {
     ColorScheme colors = Theme.of(context).colorScheme;
     var searchCubit = context.read<SearchCubit>();
 
@@ -63,14 +63,14 @@ class TvSearch extends StatelessWidget {
           child: MultiBlocProvider(
             providers: [
               BlocProvider(
-                create: (context) => TvSearchCubit(TvSearchController()),
+                create: (context) => TvSearchCubit(TvSearchState()),
               ),
               BlocProvider(
-                create: (context) => SearchCubit(ClipiousSearchController()),
+                create: (context) => SearchCubit(SearchState()),
               )
             ],
-            child: BlocBuilder<SearchCubit, ClipiousSearchController>(builder: (context, search) {
-              return BlocBuilder<TvSearchCubit, TvSearchController>(
+            child: BlocBuilder<SearchCubit, SearchState>(builder: (context, search) {
+              return BlocBuilder<TvSearchCubit, TvSearchState>(
                 builder: (context, tv) {
                   var tvCubit = context.read<TvSearchCubit>();
                   var searchCubit = context.read<SearchCubit>();

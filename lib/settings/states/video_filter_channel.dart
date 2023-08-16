@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:get/get.dart';
-import 'package:invidious/settings/states/video_filter.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/models/channel.dart';
 
@@ -11,7 +10,7 @@ part 'video_filter_channel.g.dart';
 
 const String allChannels = 'all';
 
-class VideoFilterChannelCubit extends Cubit<VideoFilterChannelModel> {
+class VideoFilterChannelCubit extends Cubit<VideoFilterChannelState> {
   VideoFilterChannelCubit(super.initialState) {
     onReady();
   }
@@ -27,7 +26,7 @@ class VideoFilterChannelCubit extends Cubit<VideoFilterChannelModel> {
   Future<void> getChannel() async {
     if (state.filters.isNotEmpty && state.filters[0].channelId != null && state.filters[0].channelId != allChannels) {
       state.loading = true;
-      state.update();
+      emit(state);
       state.channel = await service.getChannel(state.filters[0].channelId!);
       state.loading = false;
     }
@@ -35,7 +34,7 @@ class VideoFilterChannelCubit extends Cubit<VideoFilterChannelModel> {
   }
 
   @override
-  emit(VideoFilterChannelModel state) {
+  emit(VideoFilterChannelState state) {
     super.emit(state.copyWith());
   }
 
@@ -46,10 +45,10 @@ class VideoFilterChannelCubit extends Cubit<VideoFilterChannelModel> {
 }
 
 @CopyWith()
-class VideoFilterChannelModel extends GetxController {
+class VideoFilterChannelState {
   final List<VideoFilter> filters;
   Channel? channel;
   bool loading;
 
-  VideoFilterChannelModel({required this.filters, this.channel, this.loading = false});
+  VideoFilterChannelState({required this.filters, this.channel, this.loading = false});
 }

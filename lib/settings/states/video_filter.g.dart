@@ -7,9 +7,9 @@ part of 'video_filter.dart';
 // **************************************************************************
 
 abstract class _$VideoFilterModelCWProxy {
-  VideoFilterModel filters(List<VideoFilter>? filters);
+  VideoFilterState filters(List<VideoFilter>? filters);
 
-  VideoFilterModel hideFilteredVideos(bool? hideFilteredVideos);
+  VideoFilterState hideFilteredVideos(bool? hideFilteredVideos);
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `VideoFilterModel(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
@@ -17,7 +17,7 @@ abstract class _$VideoFilterModelCWProxy {
   /// ```dart
   /// VideoFilterModel(...).copyWith(id: 12, name: "My name")
   /// ````
-  VideoFilterModel call({
+  VideoFilterState call({
     List<VideoFilter>? filters,
     bool? hideFilteredVideos,
   });
@@ -27,14 +27,14 @@ abstract class _$VideoFilterModelCWProxy {
 class _$VideoFilterModelCWProxyImpl implements _$VideoFilterModelCWProxy {
   const _$VideoFilterModelCWProxyImpl(this._value);
 
-  final VideoFilterModel _value;
+  final VideoFilterState _value;
 
   @override
-  VideoFilterModel filters(List<VideoFilter>? filters) =>
+  VideoFilterState filters(List<VideoFilter>? filters) =>
       this(filters: filters);
 
   @override
-  VideoFilterModel hideFilteredVideos(bool? hideFilteredVideos) =>
+  VideoFilterState hideFilteredVideos(bool? hideFilteredVideos) =>
       this(hideFilteredVideos: hideFilteredVideos);
 
   @override
@@ -45,11 +45,11 @@ class _$VideoFilterModelCWProxyImpl implements _$VideoFilterModelCWProxy {
   /// ```dart
   /// VideoFilterModel(...).copyWith(id: 12, name: "My name")
   /// ````
-  VideoFilterModel call({
+  VideoFilterState call({
     Object? filters = const $CopyWithPlaceholder(),
     Object? hideFilteredVideos = const $CopyWithPlaceholder(),
   }) {
-    return VideoFilterModel(
+    return VideoFilterState(
       filters: filters == const $CopyWithPlaceholder()
           ? _value.filters
           // ignore: cast_nullable_to_non_nullable
@@ -62,7 +62,7 @@ class _$VideoFilterModelCWProxyImpl implements _$VideoFilterModelCWProxy {
   }
 }
 
-extension $VideoFilterModelCopyWith on VideoFilterModel {
+extension $VideoFilterModelCopyWith on VideoFilterState {
   /// Returns a callable class that can be used as follows: `instanceOfVideoFilterModel.copyWith(...)` or like so:`instanceOfVideoFilterModel.copyWith.fieldName(...)`.
   // ignore: library_private_types_in_public_api
   _$VideoFilterModelCWProxy get copyWith => _$VideoFilterModelCWProxyImpl(this);

@@ -37,8 +37,8 @@ class VideoFilterChannel extends StatelessWidget {
     ColorScheme colors = Theme.of(context).colorScheme;
 
     return BlocProvider(
-      create: (context) => VideoFilterChannelCubit(VideoFilterChannelModel(filters: filters)),
-      child: BlocBuilder<VideoFilterChannelCubit, VideoFilterChannelModel>(
+      create: (context) => VideoFilterChannelCubit(VideoFilterChannelState(filters: filters)),
+      child: BlocBuilder<VideoFilterChannelCubit, VideoFilterChannelState>(
         builder: (context, _) {
           var cubit = context.read<VideoFilterChannelCubit>();
           var filterCubit = context.read<VideoFilterCubit>();

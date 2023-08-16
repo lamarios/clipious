@@ -7,13 +7,13 @@ part of 'server_list_settings.dart';
 // **************************************************************************
 
 abstract class _$ServerListSettingsModelCWProxy {
-  ServerListSettingsModel dbServers(List<Server> dbServers);
+  ServerListSettingsState dbServers(List<Server> dbServers);
 
-  ServerListSettingsModel publicServers(List<Server> publicServers);
+  ServerListSettingsState publicServers(List<Server> publicServers);
 
-  ServerListSettingsModel publicServerProgress(double publicServerProgress);
+  ServerListSettingsState publicServerProgress(double publicServerProgress);
 
-  ServerListSettingsModel pinging(bool pinging);
+  ServerListSettingsState pinging(bool pinging);
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `ServerListSettingsModel(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
@@ -21,7 +21,7 @@ abstract class _$ServerListSettingsModelCWProxy {
   /// ```dart
   /// ServerListSettingsModel(...).copyWith(id: 12, name: "My name")
   /// ````
-  ServerListSettingsModel call({
+  ServerListSettingsState call({
     List<Server>? dbServers,
     List<Server>? publicServers,
     double? publicServerProgress,
@@ -34,22 +34,22 @@ class _$ServerListSettingsModelCWProxyImpl
     implements _$ServerListSettingsModelCWProxy {
   const _$ServerListSettingsModelCWProxyImpl(this._value);
 
-  final ServerListSettingsModel _value;
+  final ServerListSettingsState _value;
 
   @override
-  ServerListSettingsModel dbServers(List<Server> dbServers) =>
+  ServerListSettingsState dbServers(List<Server> dbServers) =>
       this(dbServers: dbServers);
 
   @override
-  ServerListSettingsModel publicServers(List<Server> publicServers) =>
+  ServerListSettingsState publicServers(List<Server> publicServers) =>
       this(publicServers: publicServers);
 
   @override
-  ServerListSettingsModel publicServerProgress(double publicServerProgress) =>
+  ServerListSettingsState publicServerProgress(double publicServerProgress) =>
       this(publicServerProgress: publicServerProgress);
 
   @override
-  ServerListSettingsModel pinging(bool pinging) => this(pinging: pinging);
+  ServerListSettingsState pinging(bool pinging) => this(pinging: pinging);
 
   @override
 
@@ -59,13 +59,13 @@ class _$ServerListSettingsModelCWProxyImpl
   /// ```dart
   /// ServerListSettingsModel(...).copyWith(id: 12, name: "My name")
   /// ````
-  ServerListSettingsModel call({
+  ServerListSettingsState call({
     Object? dbServers = const $CopyWithPlaceholder(),
     Object? publicServers = const $CopyWithPlaceholder(),
     Object? publicServerProgress = const $CopyWithPlaceholder(),
     Object? pinging = const $CopyWithPlaceholder(),
   }) {
-    return ServerListSettingsModel(
+    return ServerListSettingsState(
       dbServers: dbServers == const $CopyWithPlaceholder() || dbServers == null
           ? _value.dbServers
           // ignore: cast_nullable_to_non_nullable
@@ -89,7 +89,7 @@ class _$ServerListSettingsModelCWProxyImpl
   }
 }
 
-extension $ServerListSettingsModelCopyWith on ServerListSettingsModel {
+extension $ServerListSettingsModelCopyWith on ServerListSettingsState {
   /// Returns a callable class that can be used as follows: `instanceOfServerListSettingsModel.copyWith(...)` or like so:`instanceOfServerListSettingsModel.copyWith.fieldName(...)`.
   // ignore: library_private_types_in_public_api
   _$ServerListSettingsModelCWProxy get copyWith =>

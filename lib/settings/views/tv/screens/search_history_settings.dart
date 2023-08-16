@@ -59,7 +59,7 @@ class TvSearchHistorySettings extends StatelessWidget {
     TextTheme textTheme = Theme.of(context).textTheme;
 
     return Scaffold(
-      body: BlocBuilder<SettingsCubit, SettingsModel>(
+      body: BlocBuilder<SettingsCubit, SettingsState>(
         builder: (context, _) {
           var cubit = context.read<SettingsCubit>();
           return TvOverscan(

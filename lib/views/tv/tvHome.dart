@@ -10,7 +10,7 @@ import 'package:invidious/views/trending.dart';
 import 'package:invidious/views/tv/tvButton.dart';
 import 'package:invidious/views/tv/tvOverScan.dart';
 import 'package:invidious/views/tv/tvPlaylistGridView.dart';
-import 'package:invidious/views/tv/tvSearch.dart';
+import 'package:invidious/search/views/tv/screens/search.dart';
 import 'package:invidious/settings/views/tv/screens/settings.dart';
 import 'package:invidious/views/tv/tvVideoGridView.dart';
 

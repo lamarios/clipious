@@ -27,8 +27,8 @@ class ManageSubscriptions extends StatelessWidget {
       body: SafeArea(
         bottom: true,
         child: BlocProvider(
-          create: (context) => ManageSubscriptionCubit(ManageSubscriptionsController()),
-          child: BlocBuilder<ManageSubscriptionCubit, ManageSubscriptionsController>(
+          create: (context) => ManageSubscriptionCubit(ManageSubscriptionsState()),
+          child: BlocBuilder<ManageSubscriptionCubit, ManageSubscriptionsState>(
             builder: (context, _) {
               var cubit = context.read<ManageSubscriptionCubit>();
 

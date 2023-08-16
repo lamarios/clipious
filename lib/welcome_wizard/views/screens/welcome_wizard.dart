@@ -24,10 +24,10 @@ class WelcomeWizard extends StatelessWidget {
       providers: [
         BlocProvider(create: (context) => WelcomeWizardCubit(null)),
         BlocProvider(
-          create: (context) => ServerListSettingsCubit(ServerListSettingsModel(publicServers: [], dbServers: [])),
+          create: (context) => ServerListSettingsCubit(ServerListSettingsState(publicServers: [], dbServers: [])),
         )
       ],
-      child: BlocListener<ServerListSettingsCubit, ServerListSettingsModel>(
+      child: BlocListener<ServerListSettingsCubit, ServerListSettingsState>(
         listener: (context, state) {
           context.read<WelcomeWizardCubit>().getSelectedServer();
         },

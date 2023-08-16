@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/controllers/miniPayerController.dart';
 import 'package:invidious/models/searchSortBy.dart';
-import 'package:invidious/views/search.dart';
+import 'package:invidious/search/views/screens/search.dart';
 
 import '../globals.dart';
 import '../models/searchResult.dart';

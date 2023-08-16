@@ -7,12 +7,11 @@ part of 'manage_subscriptions.dart';
 // **************************************************************************
 
 abstract class _$ManageSubscriptionsControllerCWProxy {
-  ManageSubscriptionsController subs(List<Subscription>? subs);
+  ManageSubscriptionsState subs(List<Subscription>? subs);
 
-  ManageSubscriptionsController loading(bool? loading);
+  ManageSubscriptionsState loading(bool? loading);
 
-  ManageSubscriptionsController refreshController(
-      RefreshController? refreshController);
+  ManageSubscriptionsState refreshController(RefreshController? refreshController);
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `ManageSubscriptionsController(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
@@ -20,7 +19,7 @@ abstract class _$ManageSubscriptionsControllerCWProxy {
   /// ```dart
   /// ManageSubscriptionsController(...).copyWith(id: 12, name: "My name")
   /// ````
-  ManageSubscriptionsController call({
+  ManageSubscriptionsState call({
     List<Subscription>? subs,
     bool? loading,
     RefreshController? refreshController,
@@ -28,24 +27,19 @@ abstract class _$ManageSubscriptionsControllerCWProxy {
 }
 
 /// Proxy class for `copyWith` functionality. This is a callable class and can be used as follows: `instanceOfManageSubscriptionsController.copyWith(...)`. Additionally contains functions for specific fields e.g. `instanceOfManageSubscriptionsController.copyWith.fieldName(...)`
-class _$ManageSubscriptionsControllerCWProxyImpl
-    implements _$ManageSubscriptionsControllerCWProxy {
+class _$ManageSubscriptionsControllerCWProxyImpl implements _$ManageSubscriptionsControllerCWProxy {
   const _$ManageSubscriptionsControllerCWProxyImpl(this._value);
 
-  final ManageSubscriptionsController _value;
+  final ManageSubscriptionsState _value;
 
   @override
-  ManageSubscriptionsController subs(List<Subscription>? subs) =>
-      this(subs: subs);
+  ManageSubscriptionsState subs(List<Subscription>? subs) => this(subs: subs);
 
   @override
-  ManageSubscriptionsController loading(bool? loading) =>
-      this(loading: loading);
+  ManageSubscriptionsState loading(bool? loading) => this(loading: loading);
 
   @override
-  ManageSubscriptionsController refreshController(
-          RefreshController? refreshController) =>
-      this(refreshController: refreshController);
+  ManageSubscriptionsState refreshController(RefreshController? refreshController) => this(refreshController: refreshController);
 
   @override
 
@@ -55,12 +49,12 @@ class _$ManageSubscriptionsControllerCWProxyImpl
   /// ```dart
   /// ManageSubscriptionsController(...).copyWith(id: 12, name: "My name")
   /// ````
-  ManageSubscriptionsController call({
+  ManageSubscriptionsState call({
     Object? subs = const $CopyWithPlaceholder(),
     Object? loading = const $CopyWithPlaceholder(),
     Object? refreshController = const $CopyWithPlaceholder(),
   }) {
-    return ManageSubscriptionsController(
+    return ManageSubscriptionsState(
       subs: subs == const $CopyWithPlaceholder()
           ? _value.subs
           // ignore: cast_nullable_to_non_nullable
@@ -77,10 +71,8 @@ class _$ManageSubscriptionsControllerCWProxyImpl
   }
 }
 
-extension $ManageSubscriptionsControllerCopyWith
-    on ManageSubscriptionsController {
+extension $ManageSubscriptionsControllerCopyWith on ManageSubscriptionsState {
   /// Returns a callable class that can be used as follows: `instanceOfManageSubscriptionsController.copyWith(...)` or like so:`instanceOfManageSubscriptionsController.copyWith.fieldName(...)`.
   // ignore: library_private_types_in_public_api
-  _$ManageSubscriptionsControllerCWProxy get copyWith =>
-      _$ManageSubscriptionsControllerCWProxyImpl(this);
+  _$ManageSubscriptionsControllerCWProxy get copyWith => _$ManageSubscriptionsControllerCWProxyImpl(this);
 }

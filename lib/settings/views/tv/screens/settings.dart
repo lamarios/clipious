@@ -126,8 +126,8 @@ class TVSettings extends StatelessWidget {
     return Scaffold(
       body: TvOverscan(
         child: BlocProvider(
-          create: (context) => SettingsCubit(SettingsModel()),
-          child: BlocBuilder<SettingsCubit, SettingsModel>(builder: (context, _) {
+          create: (context) => SettingsCubit(SettingsState()),
+          child: BlocBuilder<SettingsCubit, SettingsState>(builder: (context, _) {
             var cubit = context.read<SettingsCubit>();
             return DefaultTextStyle(
               style: textTheme.bodyLarge!,

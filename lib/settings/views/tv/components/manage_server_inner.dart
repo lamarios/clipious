@@ -24,7 +24,7 @@ class TvManageServersInner extends StatelessWidget {
         .then((value) => cubit.refreshServers());
   }
 
-  addServerDialog(BuildContext context, ServerListSettingsModel controller) {
+  addServerDialog(BuildContext context, ServerListSettingsState controller) {
     var locals = AppLocalizations.of(context)!;
     var textTheme = Theme.of(context).textTheme;
     var cubit = context.read<ServerListSettingsCubit>();
@@ -95,7 +95,7 @@ class TvManageServersInner extends StatelessWidget {
   Widget build(BuildContext context) {
     ColorScheme colorScheme = Theme.of(context).colorScheme;
     AppLocalizations locals = AppLocalizations.of(context)!;
-    return BlocBuilder<ServerListSettingsCubit, ServerListSettingsModel>(builder: (context, _) {
+    return BlocBuilder<ServerListSettingsCubit, ServerListSettingsState>(builder: (context, _) {
       var cubit = context.read<ServerListSettingsCubit>();
       var filteredPublicServers = _.publicServers.where((s) => _.dbServers.indexWhere((element) => element.url == s.url) == -1).toList();
       return ListView(children: [
