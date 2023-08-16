@@ -675,12 +675,62 @@
   "@download": {
     "description": "A single download or CTA for downloading a video"
   },
-  "noDownloadedVideos": "Ei ladattuja videoita. Lataa video joko painamalla pitkään videota hakutuloksissa tai paina latauspainiketta videonäkymässä",
+  "noDownloadedVideos": "Ei ladattuja videoita. Lataa video painamalla pitkään videota hakutuloksissa tai paina latauspainiketta videonäkymässä",
   "@noDownloadedVideos": {
     "description": "Message showing when the user goes to the download screen but there are no offline videos."
   },
   "rememberSubtitleLanguageDescription": "Aseta teksitykset viimeksi asetetulle kielelle, jos tekstit ovat saatavilla",
   "@rememberSubtitleLanguageDescription": {
     "description": "Settings description for remembering subtitle language"
+  },
+  "searchSortRelevance": "Relevanssi",
+  "@searchSortRelevance": {
+    "description": "Sort search by relevance"
+  },
+  "itemlistErrorGeneric": "Tietojen haku epäonnistui",
+  "@itemlistErrorGeneric": {
+    "description": "Error showing when the data can't be fetch"
+  },
+  "manageSubscriptions": "Hallinnoi tilauksia",
+  "@manageSubscriptions": {
+    "description": "Title of manage subscriptions page"
+  },
+  "noSubscriptions": "Ei tilauksia, selaa videoita ja tilaa kanavia, joista pidät.",
+  "@noSubscriptions": {
+    "description": "Message when the user has no subs"
+  },
+  "history": "Historia",
+  "@history": {
+    "description": "User view history label"
+  },
+  "noHistory": "Ei katseluhistoriaa, katsomasi videot tulevat tänne näkyviin",
+  "@noHistory": {
+    "description": "Message when the user visits the history tab but it's empty"
+  },
+  "redirectInvidiousLink": "Jaa Invidious-uudelleenohjauksen linkki",
+  "@redirectInvidiousLink": {
+    "description": "asking user to share redirecting invidious link"
+  },
+  "videoDownloadAudioOnly": "Vain ääni",
+  "@videoDownloadAudioOnly": {
+    "description": "Label for toggle to download audio only "
+  },
+  "videoFilters": "Videosuodattimet",
+  "@videoFilters": {
+    "description": "Title for video filter settings"
+  },
+  "clearHistoryQuestion": "Tyhjennetäänkö historia?",
+  "@clearHistoryQuestion": {},
+  "unSubscribeQuestion": "Perutaanko tilaus?",
+  "@unSubscribeQuestion": {
+    "description": "Title for dialog if a user wants to unsubscribe in the subscribtion management screen"
+  },
+  "youCanSubscribeAgainLater": "Voit tilata kanavan uudelleen myöhemmin",
+  "@youCanSubscribeAgainLater": {
+    "description": "Text for the unscubscribe confirmation dialog"
+  },
+  "videoFilterTapToReveal": "Napauta näyttääksesi",
+  "@videoFilterTapToReveal": {
+    "description": "Label to tell user to tap to show a filtered video"
   }
 }

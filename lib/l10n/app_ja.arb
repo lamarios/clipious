@@ -647,7 +647,7 @@
   "@rememberPlaybackSpeed": {
     "description": "Setting label for remembering playback speed"
   },
-  "videoFiltered": "この理由で動画はフィルター済み:",
+  "videoFiltered": "次の理由で動画をフィルター済み:",
   "@videoFiltered": {
     "description": "Label shown on video list when it is filtered out"
   },
@@ -797,7 +797,7 @@
   "@videoFilterOperationNotContain": {
     "description": "Label for video filter operation Does not contain"
   },
-  "videoFilterTapToReveal": "タップして表示",
+  "videoFilterTapToReveal": "タップで表示",
   "@videoFilterTapToReveal": {
     "description": "Label to tell user to tap to show a filtered video"
   },
@@ -852,5 +852,53 @@
   "videoDownloadAudioOnly": "音声のみ",
   "@videoDownloadAudioOnly": {
     "description": "Label for toggle to download audio only "
+  },
+  "itemlistErrorGeneric": "データを取得できませんでした",
+  "@itemlistErrorGeneric": {
+    "description": "Error showing when the data can't be fetch"
+  },
+  "itemListErrorInvalidScope": "視聴する権限がありません。トークンでログインしてるなら、ログアウトし再びログインしてみてください",
+  "@itemListErrorInvalidScope": {
+    "description": "Error when the user doesn't have the proper scope to its current token"
+  },
+  "videoFilterWholeChannel": "{hideOrFilter} このチャンネルの全動画",
+  "@videoFilterWholeChannel": {
+    "description": "Label for whole channel filtering",
+    "placeholders": {
+      "hideOrFilter": {
+        "type": "String",
+        "example": "Hide"
+      }
+    }
+  },
+  "noSubscriptions": "登録チャンネルなし。動画を探し、好きなチャンネルを登録できます。",
+  "@noSubscriptions": {
+    "description": "Message when the user has no subs"
+  },
+  "unSubscribeQuestion": "登録を解除しますか？",
+  "@unSubscribeQuestion": {
+    "description": "Title for dialog if a user wants to unsubscribe in the subscribtion management screen"
+  },
+  "clearHistoryQuestion": "履歴を消去しますか？",
+  "@clearHistoryQuestion": {},
+  "history": "履歴",
+  "@history": {
+    "description": "User view history label"
+  },
+  "noHistory": "視聴履歴なし。動画を視聴すると表示されます",
+  "@noHistory": {
+    "description": "Message when the user visits the history tab but it's empty"
+  },
+  "manageSubscriptions": "登録チャンネルの管理",
+  "@manageSubscriptions": {
+    "description": "Title of manage subscriptions page"
+  },
+  "youCanSubscribeAgainLater": "いつでも再びチャンネル登録できます",
+  "@youCanSubscribeAgainLater": {
+    "description": "Text for the unscubscribe confirmation dialog"
+  },
+  "clearHistoryQuestionExplanation": "使用している Invidious のインスタンスにあるアカウントの視聴履歴が消去されます。元に戻せません。",
+  "@clearHistoryQuestionExplanation": {
+    "description": "Message for dialog before clearing full viewing history"
   }
 }
