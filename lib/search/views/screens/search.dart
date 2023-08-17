@@ -2,20 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
-import 'package:invidious/models/searchType.dart';
-import 'package:invidious/models/videoInList.dart';
+import 'package:invidious/search/models/search_type.dart';
+import 'package:invidious/videos/models/video_in_list.dart';
 import 'package:invidious/myRouteObserver.dart';
-import 'package:invidious/views/playlistList.dart';
+import 'package:invidious/playlists/views/components/playlist_list.dart';
 
-import '../../../controllers/playlistListController.dart';
+import '../../../playlists/states/playlist_list.dart';
 import '../../states/search.dart';
 import '../../../main.dart';
 import '../../../channels/models/channel.dart';
-import '../../../models/paginatedList.dart';
-import '../../../models/playlist.dart';
+import '../../../utils/models/paginatedList.dart';
+import '../../../playlists/models/playlist.dart';
 import '../../../utils.dart';
-import '../../../views/components/paginatedListView.dart';
-import '../../../views/videoList.dart';
+import '../../../utils/views/components/paginated_list_view.dart';
+import '../../../videos/views/components/video_list.dart';
 
 class Search extends StatelessWidget {
   final String? query;

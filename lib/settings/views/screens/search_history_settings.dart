@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:invidious/app/states/app.dart';
 import 'package:invidious/settings/states/settings.dart';
 import 'package:invidious/globals.dart';
 import 'package:settings_ui/settings_ui.dart';
@@ -42,7 +43,7 @@ class SearchHistorySettings extends StatelessWidget {
     SettingsThemeData theme = settingsTheme(colorScheme);
 
     return BlocProvider(
-      create: (context) => SettingsCubit(SettingsState()),
+      create: (context) => SettingsCubit(SettingsState(), context.read<AppCubit>()),
       child: BlocBuilder<SettingsCubit, SettingsState>(
         builder: (context, _) {
           var cubit = context.read<SettingsCubit>();

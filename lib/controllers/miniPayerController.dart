@@ -12,24 +12,24 @@ import 'package:invidious/controllers/audioPlayerController.dart';
 import 'package:invidious/controllers/miniPlayerAwareController.dart';
 import 'package:invidious/controllers/miniPlayerProgressController.dart';
 import 'package:invidious/controllers/miniplayerControlsController.dart';
-import 'package:invidious/controllers/videoInListController.dart';
-import 'package:invidious/controllers/videoLikeController.dart';
+import 'package:invidious/videos/states/video_in_list.dart';
+import 'package:invidious/videos/states/video_like.dart';
 import 'package:invidious/controllers/videoPlayerController.dart';
 import 'package:invidious/database.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/settings/models/db/settings.dart';
-import 'package:invidious/models/imageObject.dart';
+import 'package:invidious/utils/models/image_object.dart';
 import 'package:invidious/models/mediaEvent.dart';
 import 'package:invidious/utils.dart';
 import 'package:logging/logging.dart';
-import '../../models/db/progress.dart' as dbProgress;
+import '../videos/models/db/progress.dart' as dbProgress;
 import '../main.dart';
-import '../models/baseVideo.dart';
+import '../videos/models/base_video.dart';
 import '../downloads/models/downloaded_video.dart';
-import '../models/pair.dart';
-import '../models/sponsorSegment.dart';
-import '../models/sponsorSegmentTypes.dart';
-import '../models/video.dart';
+import '../utils/models/pair.dart';
+import '../videos/models/sponsor_segment.dart';
+import '../videos/models/sponsor_segment_types.dart';
+import '../videos/models/video.dart';
 import 'interfaces/playerController.dart';
 
 const double targetHeight = 69;
@@ -265,8 +265,6 @@ class MiniPlayerController extends GetxController {
           }
         });
       }
-
-      VideoInListController.to(progress.videoId)?.updateProgress();
     }
   }
 
@@ -495,7 +493,6 @@ class MiniPlayerController extends GetxController {
     playerController?.toggleControls(!isMini);
     update();
 
-    VideoLikeButtonController.to(tag: VideoLikeButtonController.tags(video.videoId))?.checkVideoLikeStatus();
     MiniPlayerControlsController.to()?.setVideo(video.videoId);
 
     mediaHandler.skipToQueueItem(currentIndex);

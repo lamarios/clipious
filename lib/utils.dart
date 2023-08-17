@@ -6,13 +6,14 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:invidious/controllers/videoPlayerController.dart';
 import 'package:invidious/globals.dart';
-import 'package:invidious/models/interfaces/sharelink.dart';
-import 'package:invidious/views/tv/tvButton.dart';
-import 'package:invidious/views/tv/tvOverScan.dart';
+import 'package:invidious/utils/models/sharelink.dart';
+import 'package:invidious/videos/models/base_video.dart';
+import 'package:invidious/utils/views/tv/components/tv_button.dart';
+import 'package:invidious/utils/views/tv/components/tv_overscan.dart';
 import 'package:logging/logging.dart';
 import 'package:share_plus/share_plus.dart';
 
-import 'models/country.dart';
+import 'utils/models/country.dart';
 
 const PHONE_MAX = 600;
 const TABLET_PORTRAIT_MAX = 900;
@@ -150,12 +151,12 @@ void showSharingSheet(BuildContext context, ShareLinks links, {bool showTimestam
 }
 
 double getScreenWidth() {
-  final data = MediaQueryData.fromWindow(WidgetsBinding.instance.window);
+  final data = MediaQueryData.fromView(WidgetsBinding.instance.window);
   return data.size.width;
 }
 
 DeviceType getDeviceType() {
-  final data = MediaQueryData.fromWindow(WidgetsBinding.instance.window);
+  final data = MediaQueryData.fromView(WidgetsBinding.instance.window);
   return data.size.shortestSide < 600 ? DeviceType.phone : DeviceType.tablet;
 }
 
@@ -287,3 +288,5 @@ SystemUiOverlayStyle getUiOverlayStyle(BuildContext context) {
       statusBarColor: colorScheme.background,
       statusBarIconBrightness: colorScheme.brightness == Brightness.dark ? Brightness.light : Brightness.dark);
 }
+
+List<T> filteredVideos<T extends BaseVideo>(List<T> videos) => videos.where((element) => !element.filterHide).toList();

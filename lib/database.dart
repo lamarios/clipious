@@ -1,10 +1,10 @@
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:invidious/settings/states/settings.dart';
-import 'package:invidious/models/db/baseVideoCache.dart';
-import 'package:invidious/models/db/progress.dart';
-import 'package:invidious/models/db/searchHistoryItem.dart';
+import 'package:invidious/videos/models/db/history_video_cache.dart';
+import 'package:invidious/videos/models/db/progress.dart';
+import 'package:invidious/search/models/db/searchHistoryItem.dart';
 import 'package:invidious/settings/models/db/settings.dart';
-import 'package:invidious/models/errors/noServerSelected.dart';
+import 'package:invidious/settings/models/errors/noServerSelected.dart';
 import 'package:logging/logging.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';

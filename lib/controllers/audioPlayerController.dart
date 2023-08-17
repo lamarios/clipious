@@ -1,17 +1,17 @@
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:invidious/controllers/interfaces/playerController.dart';
 import 'package:invidious/controllers/miniPlayerProgressController.dart';
-import 'package:invidious/controllers/videoInListController.dart';
+import 'package:invidious/videos/states/video_in_list.dart';
 import 'package:invidious/extensions.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/downloads/models/downloaded_video.dart';
-import 'package:invidious/models/video.dart';
+import 'package:invidious/videos/models/video.dart';
 import 'package:invidious/utils.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:logging/logging.dart';
 
-import '../../models/db/progress.dart' as dbProgress;
-import '../models/adaptiveFormat.dart';
+import '../videos/models/db/progress.dart' as dbProgress;
+import '../videos/models/adaptive_format.dart';
 import '../models/mediaEvent.dart';
 import 'miniPayerController.dart';
 

@@ -1,10 +1,8 @@
 import 'package:bloc/bloc.dart';
-import 'package:get/get.dart';
 import 'package:logging/logging.dart';
 
 import '../../globals.dart';
 import '../../settings/models/db/server.dart';
-import '../../utils.dart';
 
 final log = Logger('WelcomeWizard');
 

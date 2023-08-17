@@ -3,19 +3,19 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:invidious/controllers/tvPlayerController.dart';
 import 'package:invidious/controllers/tvPlayerControlsController.dart';
-import 'package:invidious/views/tv/tvButton.dart';
-import 'package:invidious/views/tv/tvHorizontalVideoList.dart';
-import 'package:invidious/views/tv/tvOverScan.dart';
+import 'package:invidious/utils/views/tv/components/tv_button.dart';
+import 'package:invidious/utils/views/tv/components/tv_horizontal_item_list.dart';
+import 'package:invidious/utils/views/tv/components/tv_overscan.dart';
 import 'package:invidious/views/tv/tvPlayerSettings.dart';
 
 import '../../controllers/interfaces/playerController.dart';
 import '../../controllers/miniPayerController.dart';
 import '../../globals.dart';
-import '../../models/imageObject.dart';
-import '../../models/paginatedList.dart';
-import '../../models/videoInList.dart';
+import '../../utils/models/image_object.dart';
+import '../../utils/models/paginatedList.dart';
+import '../../videos/models/video_in_list.dart';
 import '../../utils.dart';
-import '../components/videoThumbnail.dart';
+import '../../videos/views/components/video_thumbnail.dart';
 
 class TvPlayerControls extends StatelessWidget {
   const TvPlayerControls({super.key});

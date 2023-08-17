@@ -4,8 +4,8 @@ import 'package:bloc/bloc.dart';
 import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:get/get.dart';
 import 'package:invidious/controllers/miniPayerController.dart';
-import 'package:invidious/globals.dart';
 import 'package:invidious/downloads/models/downloaded_video.dart';
+import 'package:invidious/globals.dart';
 import 'package:logging/logging.dart';
 
 import 'download_manager.dart';
@@ -21,13 +21,10 @@ class DownloadedVideoCubit extends Cubit<DownloadedVideoState> {
     onReady();
   }
 
-  @override
-  emit(DownloadedVideoState state) {
-    super.emit(state.copyWith());
-  }
-
   void onReady() async {
     await setThumbnail();
+
+    var state = this.state.copyWith();
     downloadManager.addListener(state.video?.videoId, setProgress);
     emit(state);
   }
@@ -39,6 +36,7 @@ class DownloadedVideoCubit extends Cubit<DownloadedVideoState> {
   }
 
   Future<void> setThumbnail() async {
+    var state = this.state.copyWith();
     if (state.video != null || state.thumbnailPath == null) {
       String path = await state.video!.thumbnailPath;
       var file = File(path);
@@ -48,21 +46,24 @@ class DownloadedVideoCubit extends Cubit<DownloadedVideoState> {
         state.thumbnailPath = path;
       }
     }
+    emit(state);
   }
 
   void refreshVideo() async {
     state.video = db.getDownloadById(state.video?.id ?? -1)!;
-    setThumbnail();
     emit(state);
+
+    setThumbnail();
   }
 
-  void setProgress(double progress) {
+  void setProgress(double progress) async {
     if (progress == 0) {
-      setThumbnail();
+      await setThumbnail();
     }
     if (progress == 1) {
-      setComplete();
+      await setComplete();
     }
+    var state = this.state.copyWith();
     state.progress = progress;
     emit(state);
   }
@@ -81,6 +82,7 @@ class DownloadedVideoCubit extends Cubit<DownloadedVideoState> {
   }
 
   setComplete() {
+    var state = this.state.copyWith();
     log.fine("Video ${state.video!.videoId} download complete");
     state.progress = 1;
     var downloadById = db.getDownloadById(state.video!.id);

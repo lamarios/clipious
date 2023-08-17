@@ -4,13 +4,13 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:invidious/welcome_wizard/states/welcome_wizard.dart';
 import 'package:invidious/settings/views/tv/components/manage_server_inner.dart';
-import 'package:invidious/views/tv/tvButton.dart';
-import 'package:invidious/views/tv/tvOverScan.dart';
+import 'package:invidious/utils/views/tv/components/tv_button.dart';
+import 'package:invidious/utils/views/tv/components/tv_overscan.dart';
 
 import '../../../../settings/states/server_list_settings.dart';
 import '../../../../settings/states/settings.dart';
 import '../../../../settings/models/db/server.dart';
-import '../../../../views/tv/tvHome.dart';
+import '../../../../app/views/screens/tvHome.dart';
 
 class TvWelcomeWizard extends StatelessWidget {
   const TvWelcomeWizard({Key? key}) : super(key: key);

@@ -1,6 +1,6 @@
 import 'package:invidious/controllers/miniPayerController.dart';
 import 'package:invidious/controllers/tvPlayerControlsController.dart';
-import 'package:invidious/models/baseVideo.dart';
+import 'package:invidious/videos/models/base_video.dart';
 import 'package:logging/logging.dart';
 
 import '../utils.dart';
@@ -8,8 +8,7 @@ import '../utils.dart';
 class TvPlayerController extends MiniPlayerController {
   Logger log = Logger('TvPlayerController');
 
-  TvPlayerController(List<BaseVideo> videos):super.withVideos(videos);
-
+  TvPlayerController(List<BaseVideo> videos) : super.withVideos(videos);
 
   static TvPlayerController? to() => safeGet();
 
@@ -18,5 +17,4 @@ class TvPlayerController extends MiniPlayerController {
     super.onReady();
     switchToVideo(videos[0]);
   }
-
 }

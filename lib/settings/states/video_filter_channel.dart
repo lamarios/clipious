@@ -25,20 +25,18 @@ class VideoFilterChannelCubit extends Cubit<VideoFilterChannelState> {
 
   Future<void> getChannel() async {
     if (state.filters.isNotEmpty && state.filters[0].channelId != null && state.filters[0].channelId != allChannels) {
+      var state = this.state.copyWith();
       state.loading = true;
       emit(state);
+      state = this.state.copyWith();
       state.channel = await service.getChannel(state.filters[0].channelId!);
       state.loading = false;
+      emit(state);
     }
-    emit(state);
-  }
-
-  @override
-  emit(VideoFilterChannelState state) {
-    super.emit(state.copyWith());
   }
 
   void deleteFilter(VideoFilter filter) {
+    var state = this.state.copyWith();
     db.deleteFilter(filter);
     emit(state);
   }

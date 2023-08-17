@@ -12,27 +12,20 @@ import 'package:invidious/channels/views/components/playlists.dart';
 import 'package:invidious/channels/views/components/videos.dart';
 
 import '../../../utils.dart';
-import '../../../views/components/placeholders.dart';
+import '../../../utils/views/components/placeholders.dart';
 
-double channelMinBarHeight = AppBar().preferredSize.height;
-
-class ChannelView extends StatefulWidget {
+class ChannelView extends StatelessWidget {
   final String channelId;
 
   const ChannelView({super.key, required this.channelId});
 
-  @override
-  State<ChannelView> createState() => ChannelViewState();
-}
-
-class ChannelViewState extends State<ChannelView> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     ColorScheme colorScheme = Theme.of(context).colorScheme;
     var locals = AppLocalizations.of(context)!;
 
     return BlocProvider(
-      create: (BuildContext context) => ChannelCubit(ChannelController(widget.channelId, backgroundColor: colorScheme.background, vsync: this)),
+      create: (BuildContext context) => ChannelCubit(ChannelController(channelId)),
       child: BlocBuilder<ChannelCubit, ChannelController>(
         builder: (context, _) {
           var cubit = context.read<ChannelCubit>();

@@ -11,7 +11,7 @@ import 'package:invidious/views/videoPlayer/miniPlayerView.dart';
 
 import '../controllers/playerControlController.dart';
 import '../utils.dart';
-import 'components/videoShareButton.dart';
+import '../videos/views/components/video_share_button.dart';
 
 class MiniPlayer extends StatelessWidget {
   const MiniPlayer({Key? key}) : super(key: key);
@@ -69,7 +69,6 @@ class MiniPlayer extends StatelessWidget {
                 elevation: 0,
                 child: showPlayer
                     ? GestureDetector(
-
                         child: AnimatedContainer(
                           duration: animationDuration,
                           color: _.isMini ? colors.secondaryContainer : colors.background,

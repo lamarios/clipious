@@ -3,10 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:invidious/settings/states/sponsor_block_settings.dart';
-import 'package:invidious/views/tv/tvOverScan.dart';
+import 'package:invidious/utils/views/tv/components/tv_overscan.dart';
 import 'package:invidious/settings/views/tv/screens/settings.dart';
 
-import '../../../../models/sponsorSegmentTypes.dart';
+import '../../../../videos/models/sponsor_segment_types.dart';
 
 class TvSponsorBlockSettings extends StatelessWidget {
   const TvSponsorBlockSettings({Key? key}) : super(key: key);

@@ -9,11 +9,6 @@ class TvSearchCubit extends Cubit<TvSearchState> {
   TvSearchCubit(super.initialState);
 
   @override
-  emit(TvSearchState state) {
-    super.emit(state.copyWith());
-  }
-
-  @override
   close() async {
     super.close();
     state.resultFocus.dispose();
@@ -21,7 +16,6 @@ class TvSearchCubit extends Cubit<TvSearchState> {
   }
 
   KeyEventResult handleResultScopeKeyEvent(FocusNode node, KeyEvent event) {
-    print(event);
     if (event is KeyUpEvent && event.logicalKey == LogicalKeyboardKey.goBack) {
       state.searchFocus.requestFocus();
       return KeyEventResult.handled;

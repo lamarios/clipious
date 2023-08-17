@@ -3,7 +3,7 @@ import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/main.dart';
-import 'package:invidious/models/searchType.dart';
+import 'package:invidious/search/models/search_type.dart';
 import 'package:logging/logging.dart';
 
 import '../../channels/models/channel.dart';
@@ -20,13 +20,10 @@ class VideoFilterEditCubit extends Cubit<VideoFilterEditState> {
 
   void onReady() async {
     if (state.filter?.channelId != null) {
+      var state = this.state.copyWith();
       state.channel = await service.getChannel(state.filter?.channelId ?? '');
       emit(state);
     }
-  }
-
-  emit(VideoFilterEditState state) {
-    super.emit(state.copyWith());
   }
 
   @override
@@ -40,6 +37,7 @@ class VideoFilterEditCubit extends Cubit<VideoFilterEditState> {
   }
 
   void setType(FilterType? value) {
+    var state = this.state.copyWith();
     ensureFilter();
     if (value != null) {
       state.filter?.type = value;
@@ -63,6 +61,7 @@ class VideoFilterEditCubit extends Cubit<VideoFilterEditState> {
   }
 
   void setOperation(FilterOperation? value) {
+    var state = this.state.copyWith();
     ensureFilter();
     if (value != null) {
       state.filter?.operation = value;
@@ -72,6 +71,7 @@ class VideoFilterEditCubit extends Cubit<VideoFilterEditState> {
   }
 
   void valueChanged(String value) {
+    var state = this.state.copyWith();
     ensureFilter();
     state.filter?.value = value;
     log.fine('Filter value changed: $value');
@@ -110,6 +110,7 @@ class VideoFilterEditCubit extends Cubit<VideoFilterEditState> {
   }
 
   selectChannel(Channel? value) {
+    var state = this.state.copyWith();
     ensureFilter();
     state.channel = value;
     state.filter?.channelId = state.channel?.authorId;
@@ -117,12 +118,14 @@ class VideoFilterEditCubit extends Cubit<VideoFilterEditState> {
   }
 
   void channelHideAll(bool? value) {
+    var state = this.state.copyWith();
     ensureFilter();
     state.filter?.filterAll = value ?? false;
     emit(state);
   }
 
   channelClear() {
+    var state = this.state.copyWith();
     ensureFilter();
     state.channel = null;
     state.filter?.channelId = null;
@@ -130,6 +133,7 @@ class VideoFilterEditCubit extends Cubit<VideoFilterEditState> {
   }
 
   void hideOnFilteredChanged(bool value) {
+    var state = this.state.copyWith();
     ensureFilter();
     state.filter?.hideFromFeed = value;
     emit(state);

@@ -13,12 +13,8 @@ class ChannelCubit extends Cubit<ChannelController> {
     onReady();
   }
 
-  @override
-  emit(ChannelController state) {
-    super.emit(state.copyWith());
-  }
-
   Future<void> onReady() async {
+    var state = this.state.copyWith();
     bool isSubscribed = await service.isSubscribedToChannel(state.channelId);
     Channel channel = await service.getChannel(state.channelId);
 
@@ -28,18 +24,22 @@ class ChannelCubit extends Cubit<ChannelController> {
     emit(state);
   }
 
+/*
   @override
   close() async {
     state.controller?.dispose();
     super.close();
   }
+*/
 
   selectIndex(int index) {
+    var state = this.state.copyWith();
     state.selectedIndex = index;
     emit(state);
   }
 
   toggleSubscription() async {
+    var state = this.state.copyWith();
     if (state.channel != null) {
       if (state.isSubscribed) {
         await service.unSubscribe(state.channel!.authorId);
@@ -64,15 +64,8 @@ class ChannelController {
   bool smallHeader = false;
   double barHeight = 200;
   double barOpacity = 1;
-  late Animation<Color?>? animation;
-  late AnimationController? controller;
 
-  ChannelController(this.channelId, {Color? backgroundColor, TickerProvider? vsync}) {
-    if (backgroundColor != null && vsync != null) {
-      controller = AnimationController(duration: animationDuration, vsync: vsync);
-      animation = ColorTween(begin: backgroundColor.withOpacity(0.4), end: backgroundColor).animate(controller!)..addListener(() {});
-    }
-  }
+  ChannelController(this.channelId);
 
-  ChannelController._(this.channelId, this.isSubscribed, this.selectedIndex, this.channel, this.loading, this.smallHeader, this.barHeight, this.barOpacity, this.animation, this.controller);
+  ChannelController._(this.channelId, this.isSubscribed, this.selectedIndex, this.channel, this.loading, this.smallHeader, this.barHeight, this.barOpacity);
 }

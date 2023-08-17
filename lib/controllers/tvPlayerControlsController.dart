@@ -8,7 +8,7 @@ import 'package:invidious/controllers/tvPlayerController.dart';
 import 'package:invidious/controllers/videoPlayerController.dart';
 import 'package:invidious/utils.dart';
 
-import '../models/videoInList.dart';
+import '../videos/models/video_in_list.dart';
 import 'interfaces/playerController.dart';
 
 const Duration controlFadeOut = Duration(seconds: 4);
@@ -42,10 +42,10 @@ class TvPlayerControlsController extends PlayerControlController {
   @override
   void onReady() {
     log.fine("Controls ready!");
-    if(mpc == null){
-      Future.delayed(const Duration(seconds:1), onReady);
+    if (mpc == null) {
+      Future.delayed(const Duration(seconds: 1), onReady);
       return;
-    }else {
+    } else {
       mpc!.eventStream.stream.listen(onStreamEvent);
     }
   }
@@ -179,5 +179,4 @@ class TvPlayerControlsController extends PlayerControlController {
     loading = false;
     update();
   }
-
 }

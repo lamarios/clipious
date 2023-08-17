@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:invidious/objectbox.g.dart';
-import 'package:invidious/views/components/offlineVideoThumbnail.dart';
+import 'package:invidious/videos/views/components/offline_video_thumbnail.dart';
 import 'package:invidious/views/videoPlayer/playerControls.dart';
 
 import '../../controllers/audioPlayerController.dart';
 import '../../downloads/models/downloaded_video.dart';
-import '../../models/video.dart';
+import '../../videos/models/video.dart';
 import '../../utils.dart';
-import '../components/videoThumbnail.dart';
+import '../../videos/views/components/video_thumbnail.dart';
 
 class AudioPlayer extends StatelessWidget {
   final Video? video;

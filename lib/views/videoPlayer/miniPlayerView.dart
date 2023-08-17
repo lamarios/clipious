@@ -4,7 +4,7 @@ import 'package:invidious/downloads/models/downloaded_video.dart';
 import 'package:invidious/views/videoPlayer/miniPlayerControls.dart';
 import 'package:invidious/views/videoPlayer/miniPlayerProgress.dart';
 
-import '../../models/video.dart';
+import '../../videos/models/video.dart';
 
 class MiniPlayerView {
   @override

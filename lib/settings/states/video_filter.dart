@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:copy_with_extension/copy_with_extension.dart';
-import 'package:get/get.dart';
 import 'package:invidious/database.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/settings/models/db/settings.dart';
@@ -22,12 +21,8 @@ class VideoFilterCubit extends Cubit<VideoFilterState> {
     refreshFilters();
   }
 
-  @override
-  emit(VideoFilterState state) {
-    super.emit(state.copyWith());
-  }
-
   refreshFilters() {
+    var state = this.state.copyWith();
     state.filters = db.getAllFilters();
     state.filters.sort((a, b) {
       if (a.channelId == null && b.channelId != null) {
@@ -57,6 +52,7 @@ class VideoFilterCubit extends Cubit<VideoFilterState> {
   }
 
   void hideOnFilteredChanged(bool value) {
+    var state = this.state.copyWith();
     state.hideFilteredVideos = value;
     db.saveSetting(SettingsValue(HIDE_FILTERED_VIDEOS, value.toString()));
     emit(state);

@@ -5,24 +5,19 @@ import 'package:flutter/material.dart';
 import 'package:invidious/database.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/main.dart';
-import 'package:invidious/models/searchResult.dart';
-import 'package:invidious/models/searchSortBy.dart';
+import 'package:invidious/search/models/search_results.dart';
+import 'package:invidious/search/models/search_sort_by.dart';
 
 import '../../channels/models/channel.dart';
-import '../../models/playlist.dart';
-import '../../models/searchType.dart';
-import '../../models/videoInList.dart';
+import '../../playlists/models/playlist.dart';
+import '../models/search_type.dart';
+import '../../videos/models/video_in_list.dart';
 
 part 'search.g.dart';
 
 class SearchCubit<T extends SearchState> extends Cubit<SearchState> {
   SearchCubit(super.initialState) {
     onInit();
-  }
-
-  @override
-  emit(SearchState state) {
-    super.emit(state.copyWith());
   }
 
   void onInit() {
@@ -39,6 +34,7 @@ class SearchCubit<T extends SearchState> extends Cubit<SearchState> {
   }
 
   void sortChanged(SearchSortBy? value) {
+    var state = this.state.copyWith();
     state.sortBy = value ?? state.sortBy;
     emit(state);
     search(state.queryController.value.text);
@@ -48,6 +44,7 @@ class SearchCubit<T extends SearchState> extends Cubit<SearchState> {
     if (state.queryController.value.text.isEmpty) {
       navigatorKey.currentState?.pop();
     } else {
+      var state = this.state.copyWith();
       state.queryController.clear();
       state.showResults = false;
       emit(state);
@@ -55,6 +52,7 @@ class SearchCubit<T extends SearchState> extends Cubit<SearchState> {
   }
 
   void getSuggestions() {
+    var state = this.state.copyWith();
     state.showResults = false;
     emit(state);
     EasyDebounce.debounce('search-suggestions', const Duration(milliseconds: 500), () async {
@@ -68,6 +66,7 @@ class SearchCubit<T extends SearchState> extends Cubit<SearchState> {
   }
 
   void search(String value) async {
+    var state = this.state.copyWith();
     state.showResults = true;
     state.loading = true;
     state.videos = [];
@@ -75,6 +74,7 @@ class SearchCubit<T extends SearchState> extends Cubit<SearchState> {
     state.playlists = [];
     emit(state);
 
+    state = state.copyWith();
     List<SearchResults> results = await Future.wait([
       service.search(state.queryController.value.text, type: SearchType.video, sortBy: state.sortBy),
       service.search(state.queryController.value.text, type: SearchType.channel, sortBy: state.sortBy),
@@ -94,6 +94,7 @@ class SearchCubit<T extends SearchState> extends Cubit<SearchState> {
   }
 
   void selectIndex(int value) {
+    var state = this.state.copyWith();
     state.selectedIndex = value;
     emit(state);
   }

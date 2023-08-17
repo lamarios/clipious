@@ -5,10 +5,10 @@ import 'package:invidious/utils.dart';
 import 'package:invidious/views/videoPlayer/videoQueue.dart';
 
 import '../../downloads/models/downloaded_video.dart';
-import '../../models/video.dart';
-import '../video/commentsContainer.dart';
-import '../video/info.dart';
-import '../video/recommendedVideos.dart';
+import '../../videos/models/video.dart';
+import '../../comments/views/components/comments_container.dart';
+import '../../videos/views/components/info.dart';
+import '../../videos/views/components/recommended_videos.dart';
 import 'miniPlayerControls.dart';
 
 class VideoPlayerFullScreenView {

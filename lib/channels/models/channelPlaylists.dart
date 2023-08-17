@@ -1,5 +1,5 @@
-import 'package:invidious/models/itemWithContinuation.dart';
-import 'package:invidious/models/playlist.dart';
+import 'package:invidious/utils/models/item_with_continuation.dart';
+import 'package:invidious/playlists/models/playlist.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'channelPlaylists.g.dart';

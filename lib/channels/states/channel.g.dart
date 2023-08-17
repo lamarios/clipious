@@ -23,10 +23,6 @@ abstract class _$ChannelControllerCWProxy {
 
   ChannelController barOpacity(double barOpacity);
 
-  ChannelController animation(Animation<Color?>? animation);
-
-  ChannelController controller(AnimationController? controller);
-
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `ChannelController(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
   /// Usage
@@ -42,8 +38,6 @@ abstract class _$ChannelControllerCWProxy {
     bool? smallHeader,
     double? barHeight,
     double? barOpacity,
-    Animation<Color?>? animation,
-    AnimationController? controller,
   });
 }
 
@@ -57,10 +51,12 @@ class _$ChannelControllerCWProxyImpl implements _$ChannelControllerCWProxy {
   ChannelController channelId(String channelId) => this(channelId: channelId);
 
   @override
-  ChannelController isSubscribed(bool isSubscribed) => this(isSubscribed: isSubscribed);
+  ChannelController isSubscribed(bool isSubscribed) =>
+      this(isSubscribed: isSubscribed);
 
   @override
-  ChannelController selectedIndex(int selectedIndex) => this(selectedIndex: selectedIndex);
+  ChannelController selectedIndex(int selectedIndex) =>
+      this(selectedIndex: selectedIndex);
 
   @override
   ChannelController channel(Channel? channel) => this(channel: channel);
@@ -69,19 +65,15 @@ class _$ChannelControllerCWProxyImpl implements _$ChannelControllerCWProxy {
   ChannelController loading(bool loading) => this(loading: loading);
 
   @override
-  ChannelController smallHeader(bool smallHeader) => this(smallHeader: smallHeader);
+  ChannelController smallHeader(bool smallHeader) =>
+      this(smallHeader: smallHeader);
 
   @override
   ChannelController barHeight(double barHeight) => this(barHeight: barHeight);
 
   @override
-  ChannelController barOpacity(double barOpacity) => this(barOpacity: barOpacity);
-
-  @override
-  ChannelController animation(Animation<Color?>? animation) => this(animation: animation);
-
-  @override
-  ChannelController controller(AnimationController? controller) => this(controller: controller);
+  ChannelController barOpacity(double barOpacity) =>
+      this(barOpacity: barOpacity);
 
   @override
 
@@ -100,8 +92,6 @@ class _$ChannelControllerCWProxyImpl implements _$ChannelControllerCWProxy {
     Object? smallHeader = const $CopyWithPlaceholder(),
     Object? barHeight = const $CopyWithPlaceholder(),
     Object? barOpacity = const $CopyWithPlaceholder(),
-    Object? animation = const $CopyWithPlaceholder(),
-    Object? controller = const $CopyWithPlaceholder(),
   }) {
     return ChannelController._(
       channelId == const $CopyWithPlaceholder() || channelId == null
@@ -136,14 +126,6 @@ class _$ChannelControllerCWProxyImpl implements _$ChannelControllerCWProxy {
           ? _value.barOpacity
           // ignore: cast_nullable_to_non_nullable
           : barOpacity as double,
-      animation == const $CopyWithPlaceholder()
-          ? _value.animation
-          // ignore: cast_nullable_to_non_nullable
-          : animation as Animation<Color?>?,
-      controller == const $CopyWithPlaceholder()
-          ? _value.controller
-          // ignore: cast_nullable_to_non_nullable
-          : controller as AnimationController?,
     );
   }
 }
@@ -151,5 +133,6 @@ class _$ChannelControllerCWProxyImpl implements _$ChannelControllerCWProxy {
 extension $ChannelControllerCopyWith on ChannelController {
   /// Returns a callable class that can be used as follows: `instanceOfChannelController.copyWith(...)` or like so:`instanceOfChannelController.copyWith.fieldName(...)`.
   // ignore: library_private_types_in_public_api
-  _$ChannelControllerCWProxy get copyWith => _$ChannelControllerCWProxyImpl(this);
+  _$ChannelControllerCWProxy get copyWith =>
+      _$ChannelControllerCWProxyImpl(this);
 }

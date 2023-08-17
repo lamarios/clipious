@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:invidious/controllers/tvPlayerSettingsController.dart';
-import 'package:invidious/views/tv/tvButton.dart';
+import 'package:invidious/utils/views/tv/components/tv_button.dart';
 
 class TvPlayerSettings extends StatelessWidget {
   const TvPlayerSettings({Key? key}) : super(key: key);

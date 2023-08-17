@@ -14,17 +14,12 @@ class ServerSettingsCubit extends Cubit<Server> {
     emit(state);
   }
 
-  @override
-  emit(Server state) {
-    super.emit(state.copyWith());
-  }
-
   void logOut() {
     Server s = state;
     s.sidCookie = null;
     s.authToken = null;
     db.upsertServer(s);
-    emit(state);
+    emit(s);
   }
 
   Future<void> logInWithToken() async {
@@ -34,6 +29,7 @@ class ServerSettingsCubit extends Cubit<Server> {
   }
 
   Future<void> logInWithCookie(String username, String password) async {
+    var state = this.state.copyWith();
     print('login with $username, $password');
     String cookie = await service.loginWithCookies(state.url, username, password);
 

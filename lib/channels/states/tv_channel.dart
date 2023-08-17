@@ -16,11 +16,6 @@ class TvChannelCubit extends Cubit<TvChannelController> {
   }
 
   @override
-  emit(TvChannelController state) {
-    super.emit(state.copyWith());
-  }
-
-  @override
   close() async {
     state.scrollController.dispose();
     super.close();
@@ -35,6 +30,7 @@ class TvChannelCubit extends Cubit<TvChannelController> {
   // we only update those values if is false because with continuation there could be no new values but we still want to display those
   // meaning we expect it to be modified once.
   setHasPlaylists(bool value) {
+    var state = this.state.copyWith();
     if (!state.hasPlaylist) {
       state.hasPlaylist = value;
       emit(state);
@@ -42,6 +38,7 @@ class TvChannelCubit extends Cubit<TvChannelController> {
   }
 
   setHasStreams(bool value) {
+    var state = this.state.copyWith();
     if (!state.hasStreams) {
       state.hasStreams = value;
       emit(state);
@@ -49,6 +46,7 @@ class TvChannelCubit extends Cubit<TvChannelController> {
   }
 
   setHasVideos(bool value) {
+    var state = this.state.copyWith();
     if (!state.hasVideos) {
       state.hasVideos = value;
       emit(state);
@@ -56,6 +54,7 @@ class TvChannelCubit extends Cubit<TvChannelController> {
   }
 
   setHasShorts(bool value) {
+    var state = this.state.copyWith();
     if (!state.hasShorts) {
       state.hasShorts = value;
       emit(state);
@@ -63,6 +62,7 @@ class TvChannelCubit extends Cubit<TvChannelController> {
   }
 
   void onScroll() {
+    var state = this.state.copyWith();
     if (state.scrollController.offset == 0) {
       state.showBackground = false;
       emit(state);

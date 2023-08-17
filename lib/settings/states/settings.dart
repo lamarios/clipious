@@ -2,18 +2,17 @@ import 'package:bloc/bloc.dart';
 import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:invidious/controllers/homeController.dart';
+import 'package:invidious/app/states/app.dart';
 import 'package:locale_names/locale_names.dart';
 import 'package:logging/logging.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 import '../../database.dart';
 import '../../globals.dart';
-import '../../models/country.dart';
+import '../../utils/models/country.dart';
 import '../models/db/server.dart';
 import '../models/db/settings.dart';
 import '../../utils.dart';
-import '../../controllers/appController.dart';
 
 part 'settings.g.dart';
 
@@ -23,7 +22,8 @@ const String searchHistoryDefaultLength = '12';
 var log = Logger('SettingsController');
 
 class SettingsCubit extends Cubit<SettingsState> {
-  SettingsCubit(super.initialState) {
+  final AppCubit appCubit;
+  SettingsCubit(super.initialState, this.appCubit) {
     onReady();
   }
 
@@ -104,7 +104,7 @@ class SettingsCubit extends Cubit<SettingsState> {
   serverChanged() {
     state.currentServer = db.getCurrentlySelectedServer();
     emit(state);
-    HomeController.to()?.serverChanged();
+    appCubit.serverChanged();
   }
 
   toggleSslVerification(bool value) {
@@ -121,7 +121,7 @@ class SettingsCubit extends Cubit<SettingsState> {
   toggleBlackBackground(bool value) {
     state.blackBackground = value;
     emit(state);
-    AppController.to()?.update();
+    appCubit.rebuildApp();
   }
 
   changeSubtitleSize({required bool increase}) {
@@ -225,7 +225,7 @@ class SettingsCubit extends Cubit<SettingsState> {
   }
 
   updateApp() {
-    AppController.to()?.update();
+    appCubit.rebuildApp();
   }
 
   String? getLocaleDisplayName() {

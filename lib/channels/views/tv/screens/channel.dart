@@ -6,21 +6,21 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/channels/states/channel.dart';
 import 'package:invidious/globals.dart';
-import 'package:invidious/models/imageObject.dart';
-import 'package:invidious/models/paginatedList.dart';
-import 'package:invidious/models/videoInList.dart';
-import 'package:invidious/views/components/placeholders.dart';
-import 'package:invidious/views/tv/tvExpandableText.dart';
-import 'package:invidious/views/tv/tvHome.dart';
-import 'package:invidious/views/tv/tvHorizontalVideoList.dart';
-import 'package:invidious/views/tv/tvOverScan.dart';
-import 'package:invidious/views/tv/tvSubscribeButton.dart';
+import 'package:invidious/utils/models/image_object.dart';
+import 'package:invidious/utils/models/paginatedList.dart';
+import 'package:invidious/videos/models/video_in_list.dart';
+import 'package:invidious/utils/views/components/placeholders.dart';
+import 'package:invidious/utils/views/tv/components/tv_expandable_text.dart';
+import 'package:invidious/app/views/screens/tvHome.dart';
+import 'package:invidious/utils/views/tv/components/tv_horizontal_item_list.dart';
+import 'package:invidious/utils/views/tv/components/tv_overscan.dart';
+import 'package:invidious/subscription_management/view/tv/tv_subscribe_button.dart';
 
 import '../../../states/tv_channel.dart';
-import '../../../../models/playlist.dart';
+import '../../../../playlists/models/playlist.dart';
 import '../../../../utils.dart';
-import '../../../../views/components/videoThumbnail.dart';
-import '../../../../views/playlists/playlist.dart';
+import '../../../../videos/views/components/video_thumbnail.dart';
+import '../../../../playlists/views/components/playlist_in_list.dart';
 
 class TvChannelView extends StatelessWidget {
   final String channelId;
@@ -168,7 +168,7 @@ class TvChannelView extends StatelessWidget {
                                                 })),
                                         buildItem: (context, index, item) => Padding(
                                             padding: const EdgeInsets.all(8.0),
-                                            child: PlaylistItem(
+                                            child: PlaylistInList(
                                               playlist: item,
                                               canDeleteVideos: false,
                                               isTv: true,

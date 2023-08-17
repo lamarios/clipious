@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:invidious/controllers/audioPlayerController.dart';
 import 'package:invidious/controllers/miniPayerController.dart';
-import 'package:invidious/controllers/videoLikeController.dart';
+import 'package:invidious/videos/states/video_like.dart';
 import 'package:invidious/controllers/videoPlayerController.dart';
 
 import '../utils.dart';
@@ -43,7 +43,6 @@ class MiniPlayerControlsController extends GetxController {
   setVideo(String videoId) {
     this.videoId = videoId;
     update();
-    VideoLikeButtonController.to(tag: VideoLikeButtonController.tags(videoId))?.checkVideoLikeStatus();
   }
 
   playNext() {

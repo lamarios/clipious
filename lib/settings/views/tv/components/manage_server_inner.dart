@@ -4,7 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:invidious/utils.dart';
 import 'package:invidious/settings/views/tv/screens/manage_single_server.dart';
-import 'package:invidious/views/tv/tvButton.dart';
+import 'package:invidious/utils/views/tv/components/tv_button.dart';
 
 import '../../../states/server_list_settings.dart';
 import '../../../models/db/server.dart';

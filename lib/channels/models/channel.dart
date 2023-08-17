@@ -1,9 +1,9 @@
 import 'package:invidious/settings/models/db/server.dart';
-import 'package:invidious/models/interfaces/sharelink.dart';
-import 'package:invidious/models/videoInList.dart';
+import 'package:invidious/utils/models/sharelink.dart';
+import 'package:invidious/videos/models/video_in_list.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-import '../../models/imageObject.dart';
+import '../../utils/models/image_object.dart';
 
 part 'channel.g.dart';
 

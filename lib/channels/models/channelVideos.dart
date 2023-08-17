@@ -1,7 +1,7 @@
-import 'package:invidious/models/videoInList.dart';
+import 'package:invidious/videos/models/video_in_list.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-import '../../models/itemWithContinuation.dart';
+import '../../utils/models/item_with_continuation.dart';
 
 part 'channelVideos.g.dart';
 

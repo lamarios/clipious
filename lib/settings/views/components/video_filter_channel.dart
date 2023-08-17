@@ -9,9 +9,9 @@ import 'package:invidious/settings/views/components/video_filter_item.dart';
 import 'package:invidious/settings/views/screens/video_filter_setup.dart';
 
 import '../../models/db/video_filter.dart';
-import '../../../models/imageObject.dart';
+import '../../../utils/models/image_object.dart';
 import '../../../myRouteObserver.dart';
-import '../../../views/components/videoThumbnail.dart';
+import '../../../videos/views/components/video_thumbnail.dart';
 
 class VideoFilterChannel extends StatelessWidget {
   final List<VideoFilter> filters;

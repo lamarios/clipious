@@ -5,18 +5,16 @@ import 'package:animate_to/animate_to.dart';
 import 'package:bloc/bloc.dart';
 import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:dio/dio.dart';
-import 'package:get/get.dart';
+import 'package:invidious/downloads/models/downloaded_video.dart';
 import 'package:invidious/extensions.dart';
 import 'package:invidious/globals.dart';
-import 'package:invidious/downloads/models/downloaded_video.dart';
-import 'package:invidious/models/formatStream.dart';
-import 'package:invidious/models/imageObject.dart';
-import 'package:invidious/utils.dart';
+import 'package:invidious/utils/models/image_object.dart';
+import 'package:invidious/videos/models/format_stream.dart';
 import 'package:logging/logging.dart';
 
-import '../../models/adaptiveFormat.dart';
-import '../../models/video.dart';
 import '../../controllers/miniPayerController.dart';
+import '../../videos/models/adaptive_format.dart';
+import '../../videos/models/video.dart';
 
 part 'download_manager.g.dart';
 
@@ -44,22 +42,19 @@ class DownloadManagerCubit extends Cubit<DownloadManagerState> {
     onReady();
   }
 
-  emit(DownloadManagerState state) {
-    super.emit(state.copyWith());
-  }
-
   @override
   close() async {
+    var state = this.state.copyWith();
     state.animateToController.dispose();
     super.close();
   }
 
   onReady() {
     setVideos();
-    emit(state);
   }
 
   setVideos() {
+    var state = this.state.copyWith();
     var vids = db.getAllDownloads();
     // checking if we have any video that are not fail, not completed and not currently downloading
     for (var v in vids) {
@@ -71,15 +66,16 @@ class DownloadManagerCubit extends Cubit<DownloadManagerState> {
     }
 
     state.videos = vids;
+    emit(state);
   }
 
   void playAll() {
     setVideos();
-    emit(state);
     MiniPlayerController.to()?.playOfflineVideos(state.videos.where((element) => element.downloadComplete && !element.downloadFailed).toList());
   }
 
   onProgress(int count, int total, DownloadedVideo video) {
+    var state = this.state.copyWith();
     // log.fine('Download of video $videoId}, $count / $total =  ${count / total}');
     var downloadProgress = state.downloadProgresses[video.videoId];
     downloadProgress?.count = count;
@@ -120,10 +116,11 @@ class DownloadManagerCubit extends Cubit<DownloadManagerState> {
       Dio dio = Dio();
       CancelToken cancelToken = CancelToken();
 
+      var state = this.state.copyWith();
       state.downloadProgresses[downloadedVideo.videoId] = DownloadProgress(cancelToken);
+      emit(state);
 
       setVideos();
-      emit(state);
       // download thumbnail
       String? thumbUrl = ImageObject.getBestThumbnail(vid.videoThumbnails)?.url;
       log.fine(thumbUrl);
@@ -147,6 +144,7 @@ class DownloadManagerCubit extends Cubit<DownloadManagerState> {
   }
 
   Future<void> deleteVideo(DownloadedVideo vid) async {
+    var state = this.state.copyWith();
     var downloadProgress = state.downloadProgresses[vid.videoId];
     log.fine('cancelling download for video ${vid.videoId}, present ? : ${downloadProgress != null}');
     downloadProgress?.cancelToken.cancel();
@@ -168,11 +166,13 @@ class DownloadManagerCubit extends Cubit<DownloadManagerState> {
     }
 
     db.deleteDownload(vid);
-    setVideos();
     emit(state);
+
+    setVideos();
   }
 
   Future<void> onDownloadError(DioException err, DownloadedVideo vid) async {
+    var state = this.state.copyWith();
     if (err.type == DioExceptionType.cancel) {
       log.fine("video cancelled, nothing to do");
       return;
@@ -194,11 +194,13 @@ class DownloadManagerCubit extends Cubit<DownloadManagerState> {
   }
 
   void addListener(String? videoId, void Function(double progress) setProgress) {
+    var state = this.state.copyWith();
     state.downloadProgresses[videoId]?.addListener(setProgress);
     emit(state);
   }
 
   void removeListener(String? videoId, void Function(double progress) setProgress) {
+    var state = this.state.copyWith();
     state.downloadProgresses[videoId]?.removeListener(setProgress);
     emit(state);
   }

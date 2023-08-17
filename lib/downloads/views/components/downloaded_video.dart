@@ -7,7 +7,7 @@ import 'package:invidious/downloads/states/downloaded_video.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/downloads/models/downloaded_video.dart';
 
-import '../../../views/components/compactVideo.dart';
+import '../../../videos/views/components/compact_video.dart';
 
 class DownloadedVideoView extends StatelessWidget {
   final DownloadedVideo video;

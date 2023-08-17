@@ -2,6 +2,7 @@ import 'package:application_icon/application_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:invidious/app/states/app.dart';
 import 'package:invidious/myRouteObserver.dart';
 import 'package:invidious/settings/views/screens/app_logs.dart';
 import 'package:invidious/settings/views/screens/search_history_settings.dart';
@@ -141,7 +142,7 @@ class Settings extends StatelessWidget {
     SettingsThemeData theme = settingsTheme(colorScheme);
 
     return BlocProvider(
-      create: (BuildContext context) => SettingsCubit(SettingsState()),
+      create: (BuildContext context) => SettingsCubit(SettingsState(), context.read<AppCubit>()),
       child: BlocBuilder<SettingsCubit, SettingsState>(
         builder: (ctx, _) {
           var cubit = ctx.read<SettingsCubit>();

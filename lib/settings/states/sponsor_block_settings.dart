@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/settings/models/db/settings.dart';
-import 'package:invidious/models/sponsorSegmentTypes.dart';
+import 'package:invidious/videos/models/sponsor_segment_types.dart';
 
 class SponsorBlockCubit extends Cubit<int> {
   SponsorBlockCubit(super.initialState);

@@ -2,23 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
-import 'package:invidious/models/paginatedList.dart';
-import 'package:invidious/models/playlist.dart';
-import 'package:invidious/models/searchType.dart';
-import 'package:invidious/views/components/placeholders.dart';
-import 'package:invidious/views/playlists/playlist.dart';
+import 'package:invidious/utils/models/paginatedList.dart';
+import 'package:invidious/playlists/models/playlist.dart';
+import 'package:invidious/search/models/search_type.dart';
+import 'package:invidious/utils/views/components/placeholders.dart';
+import 'package:invidious/playlists/views/components/playlist_in_list.dart';
 import 'package:invidious/search/views/screens/search.dart';
-import 'package:invidious/views/tv/tvButton.dart';
+import 'package:invidious/utils/views/tv/components/tv_button.dart';
 import 'package:invidious/channels/views/tv/screens/channel.dart';
-import 'package:invidious/views/tv/tvHorizontalPaginatedListView.dart';
-import 'package:invidious/views/tv/tvHorizontalVideoList.dart';
-import 'package:invidious/views/tv/tvOverScan.dart';
-import 'package:invidious/views/tv/tvTextField.dart';
+import 'package:invidious/utils/views/tv/components/tv_horizontal_paginated_list.dart';
+import 'package:invidious/utils/views/tv/components/tv_horizontal_item_list.dart';
+import 'package:invidious/utils/views/tv/components/tv_overscan.dart';
+import 'package:invidious/utils/views/tv/components/tv_text_field.dart';
 
 import '../../../states/search.dart';
 import '../../../states/tv_search.dart';
 import '../../../../channels/models/channel.dart';
-import '../../../../models/videoInList.dart';
+import '../../../../videos/models/video_in_list.dart';
 
 class TvSearch extends StatelessWidget {
   const TvSearch({Key? key}) : super(key: key);
@@ -197,7 +197,7 @@ class TvSearch extends StatelessWidget {
                                                           type: SearchType.playlist),
                                                       buildItem: (context, index, item) => Padding(
                                                           padding: const EdgeInsets.all(8.0),
-                                                          child: PlaylistItem(
+                                                          child: PlaylistInList(
                                                             playlist: item,
                                                             canDeleteVideos: false,
                                                             isTv: true,

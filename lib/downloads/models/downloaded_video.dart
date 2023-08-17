@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:invidious/models/baseVideo.dart';
+import 'package:invidious/videos/models/base_video.dart';
 import 'package:objectbox/objectbox.dart';
 import 'package:path_provider/path_provider.dart';
 

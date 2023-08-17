@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 import 'package:invidious/controllers/miniPayerController.dart';
 import 'package:invidious/downloads/models/downloaded_video.dart';
 
-import '../../models/video.dart';
+import '../../videos/models/video.dart';
 
 enum FullScreenState {
   fullScreen,

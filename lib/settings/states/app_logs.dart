@@ -16,12 +16,8 @@ class AppLogsCubit extends Cubit<AppLogsState> {
     state.logs = db.getAppLogs().reversed.toList();
   }
 
-  @override
-  emit(AppLogsState state) {
-    super.emit(state.copyWith());
-  }
-
   void selectLog(int id, bool? value) {
+    var state = this.state.copyWith();
     if (value ?? false) {
       state.selected.add(id);
     } else {
@@ -31,6 +27,7 @@ class AppLogsCubit extends Cubit<AppLogsState> {
   }
 
   void copySelectedLogsToClipboard() {
+    var state = this.state.copyWith();
     state.selected.sort();
     String toClipboard = state.logs
         .where((element) => state.selected.contains(element.id))
@@ -46,6 +43,7 @@ class AppLogsCubit extends Cubit<AppLogsState> {
   }
 
   void selectAll() {
+    var state = this.state.copyWith();
     if (state.selected.isEmpty) {
       state.selected = state.logs.map((e) => e.id).toList(growable: true);
     } else {

@@ -15,13 +15,13 @@ import 'package:objectbox/objectbox.dart';
 import 'package:objectbox_flutter_libs/objectbox_flutter_libs.dart';
 
 import 'downloads/models/downloaded_video.dart';
-import 'models/db/baseVideoCache.dart';
-import 'models/db/progress.dart';
-import 'models/db/searchHistoryItem.dart';
+import 'search/models/db/searchHistoryItem.dart';
 import 'settings/models/db/app_logs.dart';
 import 'settings/models/db/server.dart';
 import 'settings/models/db/settings.dart';
 import 'settings/models/db/video_filter.dart';
+import 'videos/models/db/history_video_cache.dart';
+import 'videos/models/db/progress.dart';
 
 export 'package:objectbox/objectbox.dart'; // so that callers only have to import this file
 

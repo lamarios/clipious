@@ -37,6 +37,7 @@ class ServerListSettingsCubit extends Cubit<ServerListSettingsState> {
   }
 
   refreshServers() {
+    var state = this.state.copyWith();
     var servers = state.publicServers.where((s) => state.dbServers.indexWhere((element) => element.url == s.url) == -1).toList();
 
     state.dbServers = db.getServers();
@@ -45,12 +46,8 @@ class ServerListSettingsCubit extends Cubit<ServerListSettingsState> {
     emit(state);
   }
 
-  @override
-  emit(ServerListSettingsState state) {
-    super.emit(state.copyWith());
-  }
-
   getPublicServers() async {
+    var state = this.state.copyWith();
     state.pinging = true;
     state.publicServersError = PublicServerErrors.none;
 
@@ -68,10 +65,11 @@ class ServerListSettingsCubit extends Cubit<ServerListSettingsState> {
       int progress = 0;
       List<Server?> pingedServers = await Future.wait(servers.map((e) async {
         try {
+          var progressState = this.state.copyWith();
           e.ping = await service.pingServer(e.url).timeout(const Duration(seconds: pingTimeout), onTimeout: () => const Duration(seconds: pingTimeout));
           progress++;
-          state.publicServerProgress = progress / servers.length;
-          emit(state);
+          progressState.publicServerProgress = progress / servers.length;
+          emit(progressState);
           return e;
         } catch (err, stacktrace) {
           log.severe('couldn\'t reach server ${e.url}', err, stacktrace);
@@ -83,6 +81,7 @@ class ServerListSettingsCubit extends Cubit<ServerListSettingsState> {
 
       successfullyPingedServers.sort((a, b) => (a.ping ?? const Duration(seconds: pingTimeout)).compareTo(b.ping ?? const Duration(seconds: pingTimeout)));
 
+      state = this.state.copyWith();
       state.pinging = false;
       state.publicServers = successfullyPingedServers;
       state.publicServersError = PublicServerErrors.none;

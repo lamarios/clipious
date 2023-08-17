@@ -3,7 +3,7 @@ library app.globals;
 import 'package:invidious/database.dart';
 import 'package:invidious/service.dart';
 
-import 'models/country.dart';
+import 'utils/models/country.dart';
 
 const BROADCAST_SERVER_CHANGED = 'server-changed';
 const BROADCAST_STOP_PLAYING = 'stop-playing';

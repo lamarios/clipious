@@ -1,11 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/globals.dart';
-import 'package:invidious/models/baseVideo.dart';
+import 'package:invidious/videos/models/base_video.dart';
 import 'package:logging/logging.dart';
 import 'package:objectbox/objectbox.dart';
 
-import '../../../models/pair.dart';
+import '../../../utils/models/pair.dart';
 
 final log = Logger('Video Filter DB');
 

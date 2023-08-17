@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swipe_action_cell/core/cell.dart';
 import 'package:invidious/controllers/miniPayerController.dart';
-import 'package:invidious/views/components/compactVideo.dart';
+import 'package:invidious/videos/views/components/compact_video.dart';
 
 class VideoQueue extends StatelessWidget {
   final MiniPlayerController controller;

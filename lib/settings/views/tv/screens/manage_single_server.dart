@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
-import 'package:invidious/views/tv/tvButton.dart';
-import 'package:invidious/views/tv/tvOverScan.dart';
+import 'package:invidious/utils/views/tv/components/tv_button.dart';
+import 'package:invidious/utils/views/tv/components/tv_overscan.dart';
 import 'package:invidious/settings/views/tv/screens/settings.dart';
 
 import '../../../states/server_settings.dart';
 import '../../../models/db/server.dart';
 import '../../../../utils.dart';
-import '../../../../views/tv/tvTextField.dart';
+import '../../../../utils/views/tv/components/tv_text_field.dart';
 
 class TvManageSingleServer extends StatelessWidget {
   final Server server;

@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:invidious/controllers/videoPlayerController.dart';
 import 'package:invidious/downloads/models/downloaded_video.dart';
 
-import '../../models/video.dart';
+import '../../videos/models/video.dart';
 
 class VideoPlayer extends StatefulWidget {
   final Video? video;

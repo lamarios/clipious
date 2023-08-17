@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:animate_to/animate_to.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:invidious/models/baseVideo.dart';
+import 'package:invidious/videos/models/base_video.dart';
 
 import '../../states/download_manager.dart';
 import '../../../main.dart';
@@ -17,6 +17,7 @@ class AppBarDownloadButton extends StatelessWidget {
   Widget build(BuildContext context) {
     var colors = Theme.of(context).colorScheme;
     return BlocBuilder<DownloadManagerCubit, DownloadManagerState>(
+      // buildWhen: (previous, current) => previous.videos.length != current.videos.length || previous.totalProgress != current.totalProgress,
       builder: (context, _) => AnimateTo<BaseVideo>(
         // onArrival: _.addDownload,
         controller: _.animateToController,
