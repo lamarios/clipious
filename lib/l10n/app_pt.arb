@@ -852,5 +852,13 @@
   "videoDownloadAudioOnly": "Apenas áudio",
   "@videoDownloadAudioOnly": {
     "description": "Label for toggle to download audio only "
+  },
+  "itemListErrorInvalidScope": "Se iniciou sessão utilizando o método do token, tente terminar a sessão e iniciar novamente",
+  "@itemListErrorInvalidScope": {
+    "description": "Error when the user doesn't have the proper scope to its current token"
+  },
+  "itemlistErrorGeneric": "Não foi possível obter dados",
+  "@itemlistErrorGeneric": {
+    "description": "Error showing when the data can't be fetch"
   }
 }
