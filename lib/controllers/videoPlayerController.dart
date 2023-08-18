@@ -85,8 +85,6 @@ class VideoPlayerCubit extends PlayerCubit<VideoPlayerController> {
       case BetterPlayerEventType.bufferingStart:
         mediaState = MediaState.buffering;
         break;
-      case BetterPlayerEventType.bufferingUpdate:
-        break;
       case BetterPlayerEventType.changedPlayerVisibility:
         break;
       case BetterPlayerEventType.changedPlaylistItem:
@@ -128,7 +126,7 @@ class VideoPlayerCubit extends PlayerCubit<VideoPlayerController> {
       case BetterPlayerEventType.changedResolution:
         break;
       default:
-        break;
+        return;
     }
 
     player.setEvent(MediaEvent(state: mediaState, type: type));
