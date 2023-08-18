@@ -62,7 +62,7 @@ class CommentsCubit extends Cubit<CommentsState> {
 }
 
 @CopyWith(constructor: "_")
-class CommentsState extends GetxController {
+class CommentsState {
   final BaseVideo video;
   bool loadingComments = true;
   late VideoComments comments;

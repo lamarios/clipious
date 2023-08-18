@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:get/get.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/utils/models/paginatedList.dart';
 import 'package:invidious/playlists/states/playlist_list.dart';
@@ -31,10 +33,13 @@ class AddPlayListButton extends StatelessWidget {
   const AddPlayListButton({super.key});
 
   addPlaylistDialog(BuildContext context) {
+    var cubit = context.read<PlaylistListCubit>();
     showDialog<String>(
         context: context,
-        builder: (BuildContext context) => const Dialog(
-              child: AddPlayListForm(),
+        builder: (BuildContext context) => Dialog(
+              child: AddPlayListForm(
+                afterAdd: (playlistId) => cubit.refreshPlaylists(),
+              ),
             ));
   }
 

@@ -1,64 +1,51 @@
-import 'package:easy_debounce/easy_debounce.dart';
+import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:invidious/controllers/interfaces/playerController.dart';
-import 'package:invidious/controllers/miniPlayerProgressController.dart';
-import 'package:invidious/videos/states/video_in_list.dart';
+import 'package:invidious/downloads/models/downloaded_video.dart';
 import 'package:invidious/extensions.dart';
 import 'package:invidious/globals.dart';
-import 'package:invidious/downloads/models/downloaded_video.dart';
-import 'package:invidious/videos/models/video.dart';
 import 'package:invidious/utils.dart';
+import 'package:invidious/videos/models/video.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:logging/logging.dart';
 
-import '../videos/models/db/progress.dart' as dbProgress;
-import '../videos/models/adaptive_format.dart';
+import '../database.dart';
 import '../models/mediaEvent.dart';
+import '../settings/models/db/settings.dart';
+import '../videos/models/adaptive_format.dart';
 import 'miniPayerController.dart';
 
-class AudioPlayerController extends PlayerController {
-  Logger log = Logger('AudioPlayerController');
+part 'audioPlayerController.g.dart';
 
-  static AudioPlayerController? to() => safeGet();
-  AudioPlayer? player;
+Logger log = Logger('AudioPlayerController');
 
-  AudioPlayerController({Video? video, DownloadedVideo? offlineVideo}) : super(video: video, offlineVideo: offlineVideo);
+class AudioPlayerCubit extends PlayerCubit<AudioPlayerController> {
+  final MiniPlayerCubit globalPlayer;
 
-  double get progress => audioPosition.inMilliseconds / audioLength.inMilliseconds;
-  Duration audioLength = const Duration(milliseconds: 1);
-  Duration audioPosition = const Duration(milliseconds: 0);
-  int previousSponsorCheck = 0;
-
-  bool get playing => player?.playing ?? false;
-  bool loading = false;
-  String? error;
+  AudioPlayerCubit(super.initialState, this.globalPlayer) {
+    onInit();
+  }
 
   @override
-  void onClose() {
+  close() async {
     disposeControllers();
-    super.onClose();
+    super.close();
   }
 
-  @override
   void onInit() {
-    super.onInit();
     initPlayer();
-  }
-
-  @override
-  onReady() async {
-    playVideo(offlineVideo != null);
+    playVideo(state.offlineVideo != null);
   }
 
   @override
   void disposeControllers() {
-    player?.dispose();
+    state.player?.dispose();
   }
 
   initPlayer() {
-    player = AudioPlayer();
-    player?.playerStateStream.listen(onStateStreamChange);
-    player?.positionStream.listen(onPositionChanged);
-    player?.durationStream.listen(onDurationChanged);
+    state.player = AudioPlayer();
+    state.player?.playerStateStream.listen(onStateStreamChange);
+    state.player?.positionStream.listen(onPositionChanged);
+    state.player?.durationStream.listen(onDurationChanged);
   }
 
   onStateStreamChange(PlayerState state) {
@@ -69,56 +56,58 @@ class AudioPlayerController extends PlayerController {
         // MiniPlayerController.to()?.eventStream.add(MediaEvent(state: MediaState.idle));
         break;
       case ProcessingState.loading:
-        MiniPlayerController.to()?.eventStream.add(MediaEvent(state: MediaState.loading));
+        globalPlayer.setEvent(MediaEvent(state: MediaState.loading));
         break;
       case ProcessingState.buffering:
-        MiniPlayerController.to()?.eventStream.add(MediaEvent(state: MediaState.buffering));
+        globalPlayer.setEvent(MediaEvent(state: MediaState.buffering));
         break;
       case ProcessingState.ready:
-        MiniPlayerController.to()?.eventStream.add(MediaEvent(state: MediaState.ready));
+        globalPlayer.setEvent(MediaEvent(state: MediaState.ready));
         break;
       case ProcessingState.completed:
-        MiniPlayerController.to()?.eventStream.add(MediaEvent(state: MediaState.completed));
+        globalPlayer.setEvent(MediaEvent(state: MediaState.completed));
         break;
     }
   }
 
   onDurationChanged(Duration? duration) async {
-    loading = false;
-    update();
+    var state = this.state.copyWith();
+    state.loading = false;
+    emit(state);
   }
 
   onPositionChanged(Duration position) {
-    audioPosition = position;
-    MiniPlayerController.to()?.eventStream.add(MediaEvent(state: MediaState.playing, type: MediaEventType.progress));
+    state.audioPosition = position;
+    globalPlayer.setEvent(MediaEvent(state: MediaState.playing, type: MediaEventType.progress, value: position));
   }
 
   @override
   playVideo(bool offline, {Duration? startAt}) async {
-    if (video != null || offlineVideo != null) {
+    if (state.video != null || state.offlineVideo != null) {
       disposeControllers();
       initPlayer();
-      audioPosition = Duration.zero;
-      audioLength = Duration(seconds: offline ? offlineVideo!.lengthSeconds : video!.lengthSeconds);
-      loading = true;
-      MiniPlayerController.to()?.eventStream.add(MediaEvent(state: MediaState.loading));
+      var state = this.state.copyWith();
+      state.audioPosition = Duration.zero;
+      state.audioLength = Duration(seconds: offline ? state.offlineVideo!.lengthSeconds : state.video!.lengthSeconds);
+      state.loading = true;
+      globalPlayer.setEvent(MediaEvent(state: MediaState.loading));
       try {
         AudioSource? source;
 
         if (!offline) {
-          AdaptiveFormat? audio = video?.adaptiveFormats.where((element) => element.type.contains("audio")).sortByReversed((e) => int.parse(e.bitrate ?? "0")).first;
+          AdaptiveFormat? audio = state.video?.adaptiveFormats.where((element) => element.type.contains("audio")).sortByReversed((e) => int.parse(e.bitrate ?? "0")).first;
           if (audio != null) {
             if (startAt == null) {
-              double progress = db.getVideoProgress(video!.videoId);
+              double progress = db.getVideoProgress(state.video!.videoId);
               if (progress > 0 && progress < 0.90) {
-                startAt = Duration(seconds: (video!.lengthSeconds * progress).floor());
+                startAt = Duration(seconds: (state.video!.lengthSeconds * progress).floor());
               }
             }
-            update();
+            emit(state);
             source = AudioSource.uri(Uri.parse(audio.url));
           }
         } else {
-          String path = await offlineVideo!.mediaPath;
+          String path = await state.offlineVideo!.mediaPath;
           source = AudioSource.file(path);
         }
 
@@ -126,87 +115,101 @@ class AudioPlayerController extends PlayerController {
           throw Error();
         }
 
-        player?.setAudioSource(source, initialPosition: startAt);
-        player?.play();
+        state.player?.setAudioSource(source, initialPosition: startAt);
+
+        play();
+        // TODO: make this less duplicated between videos and audio
+        double speed = 1.0;
+        if (db.getSettings(REMEMBER_PLAYBACK_SPEED)?.value == 'true') {
+          speed = double.parse(db.getSettings(LAST_SPEED)?.value ?? '1.0');
+
+          log.fine("Setting playback speed to $speed");
+          state.player?.setSpeed(speed);
+        }
       } catch (e) {
         log.severe("Couldn't play video", e);
-        error = e.toString();
-        loading = false;
-        update();
+        state.error = e.toString();
+        state.loading = false;
+        emit(state);
       }
     }
   }
 
   @override
   void switchToOfflineVideo(DownloadedVideo v) {
-    video = null;
-    offlineVideo = v;
+    state.video = null;
+    state.offlineVideo = v;
     playVideo(true);
   }
 
   @override
   void switchVideo(Video video, {Duration? startAt}) async {
-    offlineVideo = null;
-    this.video = video;
+    state.offlineVideo = null;
+    state.video = video;
     playVideo(false, startAt: startAt);
   }
 
   @override
   void togglePlaying() {
-    playing ? play() : pause();
-    update();
+    var state = this.state.copyWith();
+    state.playing ? play() : pause();
+    emit(state);
   }
 
   void onScrubbed(double value) {
+    var state = this.state.copyWith();
     Duration seekTo = Duration(milliseconds: value.toInt());
     seek(seekTo);
-    audioPosition = seekTo;
-    update();
+    state.audioPosition = seekTo;
+    emit(state);
   }
 
   void onScrubDrag(double value) {
+    var state = this.state.copyWith();
     Duration seekTo = Duration(milliseconds: value.toInt());
-    audioPosition = seekTo;
-    update();
+    state.audioPosition = seekTo;
+    emit(state);
   }
 
   @override
   void toggleControls(bool visible) {
-    disableControls = !visible;
-    update();
+    var state = this.state.copyWith();
+    state.disableControls = !visible;
+    emit(state);
   }
 
   @override
   bool isPlaying() {
-    return playing;
+    return state.playing;
   }
 
   @override
   void play() {
-    player?.play();
-    MiniPlayerController.to()?.eventStream.add(MediaEvent(state: MediaState.ready, type: MediaEventType.play));
+    state.player?.play();
+    globalPlayer.setEvent(MediaEvent(state: MediaState.playing, type: MediaEventType.play));
   }
 
   @override
   void seek(Duration position) {
-    player?.seek(position);
-    MiniPlayerController.to()?.eventStream.add(MediaEvent(state: MediaState.ready, type: MediaEventType.seek));
+    state.player?.seek(position);
+    globalPlayer.setEvent(MediaEvent(state: MediaState.playing, type: MediaEventType.seek));
   }
 
   @override
   void pause() {
-    player?.pause();
-    MiniPlayerController.to()?.eventStream.add(MediaEvent(state: MediaState.ready, type: MediaEventType.pause));
+    print('HHEELLLOO');
+    state.player?.pause();
+    globalPlayer.setEvent(MediaEvent(state: MediaState.playing, type: MediaEventType.pause));
   }
 
   @override
   Duration? bufferedPosition() {
-    return player?.bufferedPosition;
+    return state.player?.bufferedPosition;
   }
 
   @override
   Duration position() {
-    return audioPosition;
+    return state.audioPosition;
   }
 
   @override
@@ -275,22 +278,23 @@ class AudioPlayerController extends PlayerController {
 
   @override
   bool isMuted() {
-    return (player?.volume ?? 0) == 0;
+    return (state.player?.volume ?? 0) == 0;
   }
 
   @override
   void toggleVolume(bool soundOn) {
-    player?.setVolume(soundOn ? 1 : 0);
+    state.player?.setVolume(soundOn ? 1 : 0);
   }
 
   @override
   void setSpeed(double d) {
-    player?.setSpeed(d);
+    state.player?.setSpeed(d);
+    db.saveSetting(SettingsValue(LAST_SPEED, d.toString()));
   }
 
   @override
   double getSpeed() {
-    return player?.speed ?? 1;
+    return state.player?.speed ?? 1;
   }
 
   @override
@@ -311,6 +315,27 @@ class AudioPlayerController extends PlayerController {
 
   @override
   Duration duration() {
-    return player?.duration ?? const Duration(milliseconds: 1);
+    return state.player?.duration ?? const Duration(milliseconds: 1);
   }
+}
+
+@CopyWith(constructor: "_")
+class AudioPlayerController extends PlayerController {
+  static AudioPlayerController? to() => safeGet();
+  AudioPlayer? player;
+
+  AudioPlayerController({Video? video, DownloadedVideo? offlineVideo}) : super(video: video, offlineVideo: offlineVideo);
+
+  double get progress => audioPosition.inMilliseconds / audioLength.inMilliseconds;
+  Duration audioLength = const Duration(milliseconds: 1);
+  Duration audioPosition = const Duration(milliseconds: 0);
+  int previousSponsorCheck = 0;
+
+  bool get playing => player?.playing ?? false;
+  bool loading = false;
+  String? error;
+
+  AudioPlayerController._(this.player, this.audioLength, this.audioPosition, this.previousSponsorCheck, this.loading, this.error,
+      {Video? video, DownloadedVideo? offlineVideo, bool? disableControls, bool? playNow})
+      : super(video: video, offlineVideo: offlineVideo, disableControls: disableControls, playNow: playNow);
 }

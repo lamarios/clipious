@@ -38,7 +38,8 @@ class DownloadProgress {
 }
 
 class DownloadManagerCubit extends Cubit<DownloadManagerState> {
-  DownloadManagerCubit(super.initialState) {
+  final MiniPlayerCubit player;
+  DownloadManagerCubit(super.initialState, this.player) {
     onReady();
   }
 
@@ -71,7 +72,7 @@ class DownloadManagerCubit extends Cubit<DownloadManagerState> {
 
   void playAll() {
     setVideos();
-    MiniPlayerController.to()?.playOfflineVideos(state.videos.where((element) => element.downloadComplete && !element.downloadFailed).toList());
+    player.playOfflineVideos(state.videos.where((element) => element.downloadComplete && !element.downloadFailed).toList());
   }
 
   onProgress(int count, int total, DownloadedVideo video) {
@@ -85,13 +86,13 @@ class DownloadManagerCubit extends Cubit<DownloadManagerState> {
       state.downloadProgresses.remove(video.videoId);
       video.downloadComplete = true;
       db.upsertDownload(video);
+      emit(state);
       setVideos();
     }
 
     for (var f in downloadProgress?.listeners ?? []) {
       f(count / total);
     }
-    emit(state);
   }
 
   Future<bool> addDownload(String videoId, {String quality = '720p', bool audioOnly = false}) async {
@@ -204,6 +205,8 @@ class DownloadManagerCubit extends Cubit<DownloadManagerState> {
     state.downloadProgresses[videoId]?.removeListener(setProgress);
     emit(state);
   }
+
+  bool canPlayAll() => state.videos.where((element) => element.downloadComplete).isNotEmpty;
 }
 
 @CopyWith(constructor: "_")
@@ -214,8 +217,6 @@ class DownloadManagerState {
   List<DownloadedVideo> videos = [];
 
   Map<String, DownloadProgress> downloadProgresses = {};
-
-  bool get canPlayAll => videos.where((element) => element.downloadComplete).isNotEmpty;
 
   double get totalProgress {
     int downloaded = 0;

@@ -13,7 +13,8 @@ part 'playlist.g.dart';
 final log = Logger('PlaylistController');
 
 class PlaylistCubit extends Cubit<PlaylistState> {
-  PlaylistCubit(super.initialState) {
+  final MiniPlayerCubit player;
+  PlaylistCubit(super.initialState, this.player) {
     onReady();
   }
 
@@ -35,7 +36,7 @@ class PlaylistCubit extends Cubit<PlaylistState> {
   }
 
   play(bool? isAudio) {
-    MiniPlayerController.to()?.playVideo(state.playlist.videos, goBack: false, audio: isAudio);
+    player.playVideo(state.playlist.videos, goBack: false, audio: isAudio);
   }
 
   scrollToTop() {

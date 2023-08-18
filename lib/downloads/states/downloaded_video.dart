@@ -16,8 +16,9 @@ Logger log = Logger('DownloadedVideoController');
 
 class DownloadedVideoCubit extends Cubit<DownloadedVideoState> {
   final DownloadManagerCubit downloadManager;
+  final MiniPlayerCubit player;
 
-  DownloadedVideoCubit(this.downloadManager, super.initialState) {
+  DownloadedVideoCubit(this.downloadManager, super.initialState, this.player) {
     onReady();
   }
 
@@ -71,7 +72,7 @@ class DownloadedVideoCubit extends Cubit<DownloadedVideoState> {
   void playVideo() async {
     refreshVideo();
     if (state.video != null && state.video!.downloadComplete) {
-      MiniPlayerController.to()?.playOfflineVideos([state.video!]);
+      player.playOfflineVideos([state.video!]);
     }
   }
 
@@ -94,7 +95,7 @@ class DownloadedVideoCubit extends Cubit<DownloadedVideoState> {
 }
 
 @CopyWith(constructor: "_")
-class DownloadedVideoState extends GetxController {
+class DownloadedVideoState {
   DownloadedVideo? video;
   String? thumbnailPath;
   double progress = 0;

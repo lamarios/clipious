@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:get/get.dart';
-import 'package:invidious/controllers/interfaces/playerController.dart';
 import 'package:invidious/controllers/miniPayerController.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/views/video/audioPlayer.dart';
@@ -9,7 +8,6 @@ import 'package:invidious/views/video/player.dart';
 import 'package:invidious/views/videoPlayer/fullScreenView.dart';
 import 'package:invidious/views/videoPlayer/miniPlayerView.dart';
 
-import '../controllers/playerControlController.dart';
 import '../utils.dart';
 import '../videos/views/components/video_share_button.dart';
 
@@ -21,29 +19,28 @@ class MiniPlayer extends StatelessWidget {
     var themeData = Theme.of(context);
     ColorScheme colors = themeData.colorScheme;
     AppLocalizations locals = AppLocalizations.of(context)!;
-    return GetBuilder<MiniPlayerController>(
-      init: MiniPlayerController(),
-      builder: (_) {
+    return BlocBuilder<MiniPlayerCubit, MiniPlayerController>(
+      builder: (context, _) {
+        var cubit = context.read<MiniPlayerCubit>();
+
         bool showPlayer = _.hasVideo;
         bool onPhone = getDeviceType() == DeviceType.phone;
 
         Widget videoPlayer = showPlayer
-            ? AnimatedCrossFade(
-                crossFadeState: _.isAudio ? CrossFadeState.showFirst : CrossFadeState.showSecond,
-                duration: animationDuration,
-                firstChild: AudioPlayer(
-                  key: const ValueKey('audio-player'),
-                  video: _.isAudio ? _.currentlyPlaying : null,
-                  offlineVideo: _.isAudio ? _.offlineCurrentlyPlaying : null,
-                  miniPlayer: false,
-                ),
-                secondChild: VideoPlayer(
-                  key: const ValueKey('player'),
-                  video: !_.isAudio ? _.currentlyPlaying : null,
-                  offlineVideo: !_.isAudio ? _.offlineCurrentlyPlaying : null,
-                  miniPlayer: false,
-                  startAt: _.startAt,
-                ))
+            ? _.isAudio
+                ? AudioPlayer(
+                    key: const ValueKey('audio-player'),
+                    video: _.isAudio ? _.currentlyPlaying : null,
+                    offlineVideo: _.isAudio ? _.offlineCurrentlyPlaying : null,
+                    miniPlayer: false,
+                  )
+                : VideoPlayer(
+                    key: const ValueKey('player'),
+                    video: !_.isAudio ? _.currentlyPlaying : null,
+                    offlineVideo: !_.isAudio ? _.offlineCurrentlyPlaying : null,
+                    miniPlayer: false,
+                    startAt: _.startAt,
+                  )
             : const SizedBox.shrink();
 
         List<Widget> miniPlayerWidgets = [];
@@ -51,14 +48,14 @@ class MiniPlayer extends StatelessWidget {
         List<Widget> bigPlayerWidgets = [];
 
         if (showPlayer) {
-          miniPlayerWidgets.addAll(MiniPlayerView.build(context, _));
-          bigPlayerWidgets.addAll(VideoPlayerFullScreenView.build(context, _));
+          miniPlayerWidgets.addAll(MiniPlayerView.build(context));
+          bigPlayerWidgets.addAll(VideoPlayerFullScreenView.build(context));
         }
 
         return AnimatedPositioned(
           left: 0,
           top: _.top,
-          bottom: _.getBottom,
+          bottom: cubit.getBottom,
           right: 0,
           duration: _.isDragging ? Duration.zero : animationDuration,
           child: AnimatedOpacity(
@@ -83,7 +80,7 @@ class MiniPlayer extends StatelessWidget {
                                       elevation: 0,
                                       leading: IconButton(
                                         icon: const Icon(Icons.expand_more),
-                                        onPressed: _.showMiniPlayer,
+                                        onPressed: cubit.showMiniPlayer,
                                       ),
                                       actions: _.isHidden || _.currentlyPlaying == null
                                           ? []

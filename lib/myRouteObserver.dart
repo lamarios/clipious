@@ -36,7 +36,7 @@ class MyRouteObserver extends RouteObserver<PageRoute<dynamic>> {
         case ROUTE_CHANNEL:
         case ROUTE_MANAGE_SUBSCRIPTIONS:
           log.fine('We should stop playing video');
-          MiniPlayerController.to()?.showMiniPlayer();
+          // MiniPlayerController.to()?.showMiniPlayer();
           break;
         default:
           log.fine('keep playing video');

@@ -1,24 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:get/get.dart';
-import 'package:invidious/utils/models/paginatedList.dart';
-import 'package:invidious/playlists/models/playlist.dart';
-import 'package:invidious/search/models/search_type.dart';
-import 'package:invidious/utils/views/components/placeholders.dart';
-import 'package:invidious/playlists/views/components/playlist_in_list.dart';
-import 'package:invidious/search/views/screens/search.dart';
-import 'package:invidious/utils/views/tv/components/tv_button.dart';
 import 'package:invidious/channels/views/tv/screens/channel.dart';
-import 'package:invidious/utils/views/tv/components/tv_horizontal_paginated_list.dart';
+import 'package:invidious/playlists/models/playlist.dart';
+import 'package:invidious/playlists/views/components/playlist_in_list.dart';
+import 'package:invidious/search/models/search_type.dart';
+import 'package:invidious/utils/models/paginatedList.dart';
+import 'package:invidious/utils/views/components/placeholders.dart';
+import 'package:invidious/utils/views/tv/components/tv_button.dart';
 import 'package:invidious/utils/views/tv/components/tv_horizontal_item_list.dart';
+import 'package:invidious/utils/views/tv/components/tv_horizontal_paginated_list.dart';
 import 'package:invidious/utils/views/tv/components/tv_overscan.dart';
 import 'package:invidious/utils/views/tv/components/tv_text_field.dart';
 
-import '../../../states/search.dart';
-import '../../../states/tv_search.dart';
 import '../../../../channels/models/channel.dart';
 import '../../../../videos/models/video_in_list.dart';
+import '../../../states/search.dart';
+import '../../../states/tv_search.dart';
 
 class TvSearch extends StatelessWidget {
   const TvSearch({Key? key}) : super(key: key);
@@ -90,7 +88,10 @@ class TvSearch extends StatelessWidget {
                         autofocus: true,
                         autocorrect: true,
                         focusNode: tv.searchFocus,
-                        onSubmitted: searchCubit.search,
+                        onSubmitted: (value) async {
+                          await searchCubit.search(value);
+                          searchCubit.getSuggestions(hideResult: false);
+                        },
                         textInputAction: TextInputAction.search,
                       ),
                       Expanded(

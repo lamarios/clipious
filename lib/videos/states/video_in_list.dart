@@ -34,7 +34,7 @@ class VideoInListCubit extends Cubit<VideoInListState> {
 }
 
 @CopyWith(constructor: "_")
-class VideoInListState extends GetxController {
+class VideoInListState {
   double progress = 0;
   BaseVideo video;
 

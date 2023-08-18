@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_swipe_action_cell/core/cell.dart';
+import 'package:invidious/controllers/miniPayerController.dart';
 import 'package:invidious/main.dart';
 import 'package:invidious/settings/models/errors/invidiousServiceError.dart';
 import 'package:invidious/myRouteObserver.dart';
@@ -64,9 +65,9 @@ class PlaylistView extends StatelessWidget {
   Widget build(BuildContext context) {
     ColorScheme colorScheme = Theme.of(context).colorScheme;
     var locals = AppLocalizations.of(context)!;
-
+    var player = context.read<MiniPlayerCubit>();
     return BlocProvider(
-      create: (context) => PlaylistCubit(PlaylistState(playlist: playlist, playlistItemHeight: 100)),
+      create: (context) => PlaylistCubit(PlaylistState(playlist: playlist, playlistItemHeight: 100), player),
       child: BlocBuilder<PlaylistCubit, PlaylistState>(
         builder: (context, _) {
           var cubit = context.read<PlaylistCubit>();

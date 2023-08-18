@@ -70,6 +70,8 @@ class CompactVideo extends StatelessWidget {
                             ),
                             Text(
                               author,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
                               style: textTheme.bodySmall?.copyWith(color: colors.secondary),
                             )
                           ],

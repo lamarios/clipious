@@ -49,7 +49,6 @@ class PlaylistInList extends StatelessWidget {
       create: (context) => PlaylistInListCubit(playlist),
       child: BlocBuilder<PlaylistInListCubit, Playlist>(
         builder: (context, _) {
-          var cubit = context.read<PlaylistInListCubit>();
           if (isTv) {
             return Focus(
               onKeyEvent: (node, event) => onTvSelect(event, context, (_) => openTvPlaylist(context)),
@@ -79,14 +78,10 @@ class PlaylistInList extends StatelessWidget {
                                   children: [
                                     SizedBox(
                                         height: 140,
-                                        child: FutureBuilder<List<VideoInList>>(
-                                            future: cubit.getThumbnailsFromYoutube(),
-                                            builder: (context, snapshot) {
-                                              return PlaylistThumbnails(
-                                                videos: snapshot.hasData ? snapshot.data! : [],
-                                                bestThumbnails: isTv,
-                                              );
-                                            })),
+                                        child: PlaylistThumbnails(
+                                          videos: _.videos,
+                                          bestThumbnails: isTv,
+                                        )),
                                     Expanded(
                                         child: Text(
                                       playlist.title,
@@ -115,14 +110,10 @@ class PlaylistInList extends StatelessWidget {
                         height: 95,
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: FutureBuilder<List<VideoInList>>(
-                              future: cubit.getThumbnailsFromYoutube(),
-                              builder: (context, snapshot) {
-                                return PlaylistThumbnails(
-                                  videos: snapshot.hasData ? snapshot.data! : [],
-                                  bestThumbnails: isTv,
-                                );
-                              }),
+                          child: PlaylistThumbnails(
+                            videos: _.videos,
+                            bestThumbnails: isTv,
+                          ),
                         )),
                     Expanded(
                       child: Column(

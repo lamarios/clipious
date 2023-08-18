@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/controllers/miniPayerController.dart';
 import 'package:invidious/videos/models/base_video.dart';
@@ -28,9 +29,10 @@ class VideoModalSheet extends StatelessWidget {
   }
 
   void playNext(BuildContext context) {
+    var player = context.read<MiniPlayerCubit>();
     var locals = AppLocalizations.of(context)!;
     Navigator.of(context).pop();
-    MiniPlayerController.to()?.playVideoNext(video);
+    player.playVideoNext(video);
 
     final ScaffoldMessengerState? scaffold = scaffoldKey.currentState;
     scaffold?.showSnackBar(SnackBar(
@@ -40,9 +42,10 @@ class VideoModalSheet extends StatelessWidget {
   }
 
   void addToQueue(BuildContext context) {
+    var player = context.read<MiniPlayerCubit>();
     var locals = AppLocalizations.of(context)!;
     Navigator.of(context).pop();
-    MiniPlayerController.to()?.queueVideos([video]);
+    player.queueVideos([video]);
 
     final ScaffoldMessengerState? scaffold = scaffoldKey.currentState;
     scaffold?.showSnackBar(SnackBar(

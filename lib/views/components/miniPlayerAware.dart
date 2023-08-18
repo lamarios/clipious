@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:invidious/controllers/miniPayerController.dart';
-import 'package:invidious/controllers/miniPlayerAwareController.dart';
 
 class MiniPlayerAware extends StatelessWidget {
   final Widget child;
@@ -10,10 +9,10 @@ class MiniPlayerAware extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<MiniPlayerAwareController>(
-      init: MiniPlayerAwareController(),
-      builder: (_) => Padding(
-        padding: EdgeInsets.only(bottom: _.applyPadding ? targetHeight : 0),
+    return BlocBuilder<MiniPlayerCubit, MiniPlayerController>(
+      buildWhen: (previous, current) => previous.isMini != current.isMini || previous.isHidden != current.isHidden,
+      builder: (context, _) => Padding(
+        padding: EdgeInsets.only(bottom: !_.isHidden && _.isMini ? targetHeight : 0),
         child: child,
       ),
     );

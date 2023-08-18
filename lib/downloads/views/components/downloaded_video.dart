@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
+import 'package:invidious/controllers/miniPayerController.dart';
 import 'package:invidious/downloads/states/download_manager.dart';
 import 'package:invidious/downloads/states/downloaded_video.dart';
 import 'package:invidious/globals.dart';
@@ -21,8 +22,9 @@ class DownloadedVideoView extends StatelessWidget {
     var textTheme = Theme.of(context).textTheme;
 
     var downloadManager = context.read<DownloadManagerCubit>();
+    var player = context.read<MiniPlayerCubit>();
     return BlocProvider(
-      create: (BuildContext context) => DownloadedVideoCubit(downloadManager, DownloadedVideoState(video.id)),
+      create: (BuildContext context) => DownloadedVideoCubit(downloadManager, DownloadedVideoState(video.id), player),
       child: BlocBuilder<DownloadedVideoCubit, DownloadedVideoState>(builder: (context, _) {
         bool downloadFailed = _.video?.downloadFailed ?? false;
         var cubit = context.read<DownloadedVideoCubit>();

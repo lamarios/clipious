@@ -12,8 +12,9 @@ import '../../../videos/views/screens/video.dart';
 class TextLinkified extends StatelessWidget {
   final String text;
   final BaseVideo? video;
+  final MiniPlayerCubit player;
 
-  const TextLinkified({super.key, required this.text, this.video});
+  const TextLinkified({super.key, required this.text, this.video, required this.player});
 
   @override
   Widget build(BuildContext context) {
@@ -54,12 +55,11 @@ class TextLinkified extends StatelessWidget {
       if (split.length >= 2 && split.length <= 3) {
         bool hours = split.length == 3;
         Duration position = Duration(hours: hours ? int.parse(split[0]) : 0, minutes: int.parse(split[hours ? 1 : 0]), seconds: int.parse(split[hours ? 2 : 1]));
-        var player = MiniPlayerController.to();
-        var videoPlaying = (player?.isPlaying ?? false) && player?.currentlyPlaying?.videoId == video?.videoId;
+        var videoPlaying = (player.state.isPlaying ?? false) && player.state.currentlyPlaying?.videoId == video?.videoId;
         if (videoPlaying) {
-          player?.playerController?.seek(position);
+          player.seek(position);
         } else if (video != null) {
-          player?.playVideo([video!], startAt: position);
+          player.playVideo([video!], startAt: position);
         }
       }
     }

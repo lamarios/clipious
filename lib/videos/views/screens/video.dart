@@ -17,6 +17,7 @@ import 'package:invidious/utils/views/components/placeholders.dart';
 import 'package:invidious/videos/views/components/add_to_playlist_button.dart';
 import 'package:invidious/videos/views/components/like_button.dart';
 
+import '../../../controllers/miniPayerController.dart';
 import '../../../downloads/views/screens/download_manager.dart';
 import '../../../main.dart';
 import '../../../myRouteObserver.dart';
@@ -69,9 +70,10 @@ class VideoView extends StatelessWidget {
 
     var downloadManager = context.read<DownloadManagerCubit>();
 
+    var player = context.read<MiniPlayerCubit>();
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (BuildContext context) => VideoCubit(VideoState(videoId: videoId), downloadManager)),
+        BlocProvider(create: (BuildContext context) => VideoCubit(VideoState(videoId: videoId), downloadManager, player)),
         BlocProvider(create: (BuildContext context) => AddToPlaylistButtonCubit(AddToPlaylistButtonState(videoId: videoId))),
         BlocProvider(
           create: (context) => VideoLikeButtonCubit(VideoLikeButtonController(videoId: videoId), addToPlaylistButtonCubit: context.read<AddToPlaylistButtonCubit>()),

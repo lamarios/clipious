@@ -50,7 +50,10 @@ class TvGridView extends StatelessWidget {
                   controller: _.scrollController,
                   childAspectRatio: 16 / 13,
                   crossAxisCount: 3,
-                  children: [..._.items.map((e) => TvVideoItem(video: e, autoFocus: false)).toList(), if (_.loading) ...repeatWidget(() => const TvVideoItemPlaceHolder(), count: 10)],
+                  children: [
+                    ..._.items.map((e) => TvVideoItem(key: ValueKey(e.videoId), video: e, autoFocus: false)).toList(),
+                    if (_.loading) ...repeatWidget(() => const TvVideoItemPlaceHolder(), count: 10)
+                  ],
                 ))
               ],
             );

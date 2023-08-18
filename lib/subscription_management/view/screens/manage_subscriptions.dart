@@ -52,6 +52,7 @@ class ManageSubscriptions extends StatelessWidget {
                                     padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
                                     decoration: BoxDecoration(color: index % 2 != 0 ? colors.secondaryContainer.withOpacity(0.5) : colors.background, borderRadius: BorderRadius.circular(10)),
                                     child: Row(
+                                      key: ValueKey(sub.authorId),
                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(sub.author),

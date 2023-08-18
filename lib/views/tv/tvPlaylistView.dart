@@ -14,12 +14,13 @@ import 'package:invidious/utils/views/tv/components/tv_overscan.dart';
 import 'package:invidious/views/tv/tvPlayerView.dart';
 import 'package:invidious/videos/views/tv/components/video_item.dart';
 
+import '../../controllers/miniPayerController.dart';
 import '../../utils/models/image_object.dart';
 import '../../videos/models/base_video.dart';
 import '../../videos/views/components/video_thumbnail.dart';
 
 class TvPlaylistView extends PlaylistView {
-  TvPlaylistView({required super.playlist, required super.canDeleteVideos});
+  const TvPlaylistView({super.key, required super.playlist, required super.canDeleteVideos});
 
   playPlaylist(BuildContext context, PlaylistState _) {
     Navigator.of(context).push(MaterialPageRoute(builder: (ctx) => TvPlayerView(videos: _.playlist.videos)));
@@ -29,9 +30,10 @@ class TvPlaylistView extends PlaylistView {
   Widget build(BuildContext context) {
     var locals = AppLocalizations.of(context)!;
     var colors = Theme.of(context).colorScheme;
+    var player = context.read<MiniPlayerCubit>();
     TextTheme textTheme = Theme.of(context).textTheme;
     return BlocProvider(
-      create: (context) => PlaylistCubit(PlaylistState(playlist: playlist, playlistItemHeight: 0)),
+      create: (context) => PlaylistCubit(PlaylistState(playlist: playlist, playlistItemHeight: 0), player),
       child: Scaffold(
         body: BlocBuilder<PlaylistCubit, PlaylistState>(
           builder: (context, _) {

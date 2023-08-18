@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:invidious/controllers/miniPayerController.dart';
 import 'package:invidious/main.dart';
-import 'package:invidious/videos/models/video.dart';
-import 'package:invidious/utils/views/components/text_linkified.dart';
-import 'package:invidious/videos/views/components/video_thumbnail.dart';
 import 'package:invidious/search/views/screens/search.dart';
+import 'package:invidious/utils/views/components/text_linkified.dart';
+import 'package:invidious/videos/models/video.dart';
 import 'package:invidious/videos/views/components/video_metrics.dart';
+import 'package:invidious/videos/views/components/video_thumbnail.dart';
 
-import '../../../utils/models/image_object.dart';
 import '../../../myRouteObserver.dart';
 import '../../../subscription_management/view/components/subscribeButton.dart';
+import '../../../utils/models/image_object.dart';
 
 class VideoInfo extends StatelessWidget {
   final Video video;
@@ -35,7 +37,7 @@ class VideoInfo extends StatelessWidget {
     var locals = AppLocalizations.of(context)!;
     ColorScheme colorScheme = Theme.of(context).colorScheme;
     var textTheme = Theme.of(context).textTheme;
-
+    var player = context.read<MiniPlayerCubit>();
     return Padding(
       padding: const EdgeInsets.only(bottom: 8.0),
       child: Column(
@@ -102,6 +104,7 @@ class VideoInfo extends StatelessWidget {
           TextLinkified(
             text: video.description,
             video: video,
+            player: player,
           ),
           const Divider(),
           Row(

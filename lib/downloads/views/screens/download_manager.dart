@@ -29,7 +29,7 @@ class DownloadManager extends StatelessWidget {
                 ? Column(
                     children: [
                       FilledButton.tonal(
-                          onPressed: _.canPlayAll ? cubit.playAll : null,
+                          onPressed: cubit.canPlayAll() ? cubit.playAll : null,
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
@@ -58,6 +58,7 @@ class DownloadManager extends StatelessWidget {
                                   )
                                 ],
                                 child: DownloadedVideoView(
+                                  key: ValueKey(v.id),
                                   video: v,
                                 ));
                           },

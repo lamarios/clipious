@@ -1,3 +1,5 @@
+import 'package:bloc/bloc.dart';
+import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:get/get.dart';
 import 'package:invidious/models/mediaEvent.dart';
@@ -8,25 +10,26 @@ import '../main.dart';
 import 'interfaces/playerController.dart';
 import 'miniPayerController.dart';
 
-class PlayerControlController extends GetxController {
-  static PlayerControlController? to() => safeGet();
-  MediaEvent event = MediaEvent(state: MediaState.idle);
-  Duration audioPosition = Duration.zero;
-  var log = Logger('PlayerControlControllers');
+part 'playerControlController.g.dart';
 
-  PlayerController? get pc => MiniPlayerController.to()?.playerController;
-  bool displayControls = true;
+final log = Logger('PlayerControlControllers');
 
-  @override
+class PlayerControlCubit extends Cubit<PlayerControlController> {
+  final MiniPlayerCubit player;
+
+  PlayerControlCubit(super.initialState, this.player) {
+    onReady();
+  }
+
   void onReady() {
     log.fine("Controls ready!");
-    MiniPlayerController.to()?.eventStream.stream.listen(onStreamEvent);
+    // MiniPlayerController.to()?.eventStream.stream.listen(onStreamEvent);
     showControls();
-    super.onReady();
   }
 
   onStreamEvent(MediaEvent event) {
     log.fine('Event: ${event.state}, ${event.type}');
+    var state = this.state.copyWith();
     switch (event.state) {
       case MediaState.buffering:
         // showControls();
@@ -34,9 +37,11 @@ class PlayerControlController extends GetxController {
       case MediaState.loading:
       case MediaState.ready:
         showControls();
+        state = this.state.copyWith();
         break;
       case MediaState.miniDisplayChanged:
-        displayControls = false;
+        hideControls();
+        state = this.state.copyWith();
         break;
       default:
         break;
@@ -44,51 +49,68 @@ class PlayerControlController extends GetxController {
 
     switch (event.type) {
       case MediaEventType.progress:
-        audioPosition = pc?.position() ?? Duration.zero;
+        state.audioPosition = event.value;
         break;
       case MediaEventType.seek:
         showControls();
+        state = this.state.copyWith();
         break;
       default:
         break;
     }
-    this.event = event;
+    state.event = event;
     // print('UPDATE ${displayControls} ${event.state}');
-    if (displayControls || event.state == MediaState.miniDisplayChanged) {
-      update();
-    }
+    emit(state);
+  }
+
+  void hideControls() {
+    var state = this.state.copyWith();
+    state.displayControls = false;
+    emit(state);
   }
 
   void showControls() {
-    if (isTv || !(MiniPlayerController.to()?.isMini ?? true)) {
-      displayControls = true;
-      update();
+    if (isTv || !player.state.isMini) {
+      var state = this.state.copyWith();
+      state.displayControls = true;
+      emit(state);
 
       EasyDebounce.debounce(
         'player-controls-hide',
         const Duration(seconds: 3),
-        () {
-          displayControls = false;
-          update();
-        },
+        hideControls,
       );
     }
   }
 
   void onScrubbed(double value) {
+    var state = this.state.copyWith();
     Duration seekTo = Duration(milliseconds: value.toInt());
-    pc?.seek(seekTo);
-    audioPosition = seekTo;
-    update();
+    player.seek(seekTo);
+    state.audioPosition = seekTo;
+    emit(state);
   }
 
   void onScrubDrag(double value) {
+    var state = this.state.copyWith();
     Duration seekTo = Duration(milliseconds: value.toInt());
-    audioPosition = seekTo;
-    update();
+    state.audioPosition = seekTo;
+    emit(state);
   }
 
   void setPlaybackSpeed(double d) {
-    MiniPlayerController.to()?.playerController?.setSpeed(d);
+    player.setSpeed(d);
   }
+}
+
+@CopyWith(constructor: "_")
+class PlayerControlController {
+  PlayerControlController();
+
+  MediaEvent event = MediaEvent(state: MediaState.idle);
+  Duration audioPosition = Duration.zero;
+
+  bool displayControls = false;
+
+  PlayerControlController._(this.event, this.audioPosition, this.displayControls);
 }

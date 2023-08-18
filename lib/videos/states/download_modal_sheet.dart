@@ -21,7 +21,7 @@ class DownloadModalSheetCubit extends Cubit<DownloadModalSheetState> {
 }
 
 @CopyWith(constructor: "_")
-class DownloadModalSheetState extends GetxController {
+class DownloadModalSheetState {
   bool audioOnly = false;
   String quality = '720p';
 

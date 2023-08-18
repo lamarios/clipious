@@ -13,6 +13,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:invidious/channels/views/screens/channel.dart';
 import 'package:invidious/app/states/app.dart';
+import 'package:invidious/controllers/miniPayerController.dart';
 import 'package:invidious/downloads/states/download_manager.dart';
 import 'package:invidious/downloads/views/components/download_app_bar_button.dart';
 import 'package:invidious/globals.dart';
@@ -61,15 +62,6 @@ Future<void> main() async {
     }
   });
 
-  mediaHandler = await AudioService.init(
-    builder: () => MediaHandler(),
-    config: const AudioServiceConfig(
-      androidNotificationChannelId: 'com.github.lamarios.clipious.channel.audio',
-      androidNotificationChannelName: 'Video playback',
-      androidNotificationOngoing: true,
-    ),
-  );
-
   HttpOverrides.global = MyHttpOverrides();
 
   WidgetsFlutterBinding.ensureInitialized();
@@ -80,7 +72,10 @@ Future<void> main() async {
       create: (context) => AppCubit(AppState()),
     ),
     BlocProvider(
-      create: (context) => DownloadManagerCubit(DownloadManagerState()),
+      create: (context) => MiniPlayerCubit(MiniPlayerController()),
+    ),
+    BlocProvider(
+      create: (context) => DownloadManagerCubit(DownloadManagerState(), context.read<MiniPlayerCubit>()),
     )
   ], child: const MyApp()));
 }

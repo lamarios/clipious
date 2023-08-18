@@ -41,7 +41,7 @@ class AddToPlaylistCubit extends Cubit<AddToPlaylistController> {
 }
 
 @CopyWith(constructor: "_")
-class AddToPlaylistController extends GetxController {
+class AddToPlaylistController {
   List<Playlist> playlists = [];
   int playListCount = 0;
   String videoId;

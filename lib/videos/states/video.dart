@@ -21,8 +21,9 @@ final log = Logger('Video');
 
 class VideoCubit extends Cubit<VideoState> {
   final DownloadManagerCubit downloadManager;
+  final MiniPlayerCubit player;
 
-  VideoCubit(super.initialState, this.downloadManager) {
+  VideoCubit(super.initialState, this.downloadManager, this.player) {
     onReady();
   }
 
@@ -124,7 +125,7 @@ class VideoCubit extends Cubit<VideoState> {
       if (state.playRecommendedNext) {
         videos.addAll(state.video?.recommendedVideos ?? []);
       }
-      MiniPlayerController.to()?.playVideo(videos, goBack: true, audio: audio);
+      player.playVideo(videos, goBack: true, audio: audio);
     }
   }
 

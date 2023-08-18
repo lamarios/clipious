@@ -66,7 +66,7 @@ class HistoryView extends StatelessWidget {
                                         },
                                       )
                                     ],
-                                    child: HistoryVideoView(videoId: _.items[index])),
+                                    child: HistoryVideoView(key: ValueKey(_.items[index]), videoId: _.items[index])),
                           ),
                         ),
                       ),

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:invidious/playlists/states/playlist_list.dart';
-import 'package:invidious/utils/models/paginatedList.dart';
 import 'package:invidious/playlists/models/playlist.dart';
-import 'package:invidious/utils/views/components/placeholders.dart';
+import 'package:invidious/playlists/states/playlist_list.dart';
 import 'package:invidious/playlists/views/components/playlist_in_list.dart';
+import 'package:invidious/utils/models/paginatedList.dart';
+import 'package:invidious/utils/views/components/placeholders.dart';
 import 'package:invidious/utils/views/tv/components/tv_overscan.dart';
 
 class TvPlaylistGridView extends StatelessWidget {
@@ -45,7 +45,7 @@ class TvPlaylistGridView extends StatelessWidget {
                   childAspectRatio: 16 / 13,
                   crossAxisCount: 3,
                   children: [
-                    ..._.playlists.map((e) => PlaylistInList(playlist: e, canDeleteVideos: false, isTv: true)).toList(),
+                    ..._.playlists.map((e) => PlaylistInList(key: ValueKey(e.playlistId), playlist: e, canDeleteVideos: false, isTv: true)).toList(),
                     if (_.loading) ...repeatWidget(() => const TvPlaylistPlaceHolder(), count: 10)
                   ],
                 ))

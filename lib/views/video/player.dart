@@ -1,10 +1,12 @@
 import 'package:better_player/better_player.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:invidious/controllers/videoPlayerController.dart';
 import 'package:invidious/downloads/models/downloaded_video.dart';
 
+import '../../controllers/miniPayerController.dart';
 import '../../videos/models/video.dart';
 
 class VideoPlayer extends StatefulWidget {
@@ -35,25 +37,32 @@ class VideoPlayerState extends State<VideoPlayer> {
     ColorScheme colorScheme = Theme.of(context).colorScheme;
     AppLocalizations locals = AppLocalizations.of(context)!;
     Color overFlowTextColor = Theme.of(context).textTheme.bodyMedium?.color ?? Colors.black;
-    return GetBuilder<VideoPlayerController>(
-      init: VideoPlayerController(
-          startAt: widget.startAt,
-          locals: locals,
-          overFlowTextColor: overFlowTextColor,
-          colors: colorScheme,
-          key: _betterPlayerKey,
-          miniPlayer: widget.miniPlayer,
-          video: widget.video,
-          offlineVideo: widget.offlineVideo,
-          disableControls: widget.disableControls),
-      builder: (_) => AspectRatio(
-          aspectRatio: 16 / 9,
-          child: _.videoController == null
-              ? const SizedBox.shrink()
-              : BetterPlayer(
-                  controller: _.videoController!,
-                  key: _betterPlayerKey,
-                )),
+    var player = context.read<MiniPlayerCubit>();
+    return BlocProvider(
+      create: (context) => VideoPlayerCubit(
+          VideoPlayerController(
+              startAt: widget.startAt,
+              overFlowTextColor: overFlowTextColor,
+              colors: colorScheme,
+              key: _betterPlayerKey,
+              video: widget.video,
+              offlineVideo: widget.offlineVideo,
+              disableControls: widget.disableControls),
+          player),
+      child: BlocBuilder<VideoPlayerCubit, VideoPlayerController>(
+        builder: (context, _) => BlocListener<MiniPlayerCubit, MiniPlayerController>(
+          listenWhen: (previous, current) => previous.mediaCommand != current.mediaCommand && current.mediaCommand != null,
+          listener: (context, state) => context.read<VideoPlayerCubit>().handleCommand(state.mediaCommand!),
+          child: AspectRatio(
+              aspectRatio: 16 / 9,
+              child: _.videoController == null
+                  ? const SizedBox.shrink()
+                  : BetterPlayer(
+                      controller: _.videoController!,
+                      key: _betterPlayerKey,
+                    )),
+        ),
+      ),
     );
   }
 }
