@@ -7,6 +7,7 @@ import 'package:invidious/videos/views/components/download_modal_sheet.dart';
 
 import '../../../main.dart';
 import 'add_to_playlist.dart';
+import 'add_to_queue_button.dart';
 
 class VideoModalSheet extends StatelessWidget {
   final BaseVideo video;
@@ -80,7 +81,10 @@ class VideoModalSheet extends StatelessWidget {
               padding: const EdgeInsets.only(right: 16.0),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
-                children: [IconButton.filledTonal(onPressed: () => addToQueue(context), icon: const Icon(Icons.playlist_play)), Text(locals.addToQueueList)],
+                children: [
+                  IconButton.filledTonal(onPressed: AddToQueueButton.canAddToQueue(context, [video]) ? () => addToQueue(context) : null, icon: const Icon(Icons.playlist_play)),
+                  Text(locals.addToQueueList)
+                ],
               ),
             ),
             Padding(
