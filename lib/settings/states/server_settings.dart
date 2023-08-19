@@ -1,17 +1,20 @@
 import 'package:bloc/bloc.dart';
 import 'package:fbroadcast/fbroadcast.dart';
 
+import '../../app/states/app.dart';
 import '../../database.dart';
 import '../../globals.dart';
 import '../models/db/server.dart';
 
 class ServerSettingsCubit extends Cubit<Server> {
-  ServerSettingsCubit(super.initialState);
+  final AppCubit app;
+  ServerSettingsCubit(super.initialState, this.app);
 
   useServer(bool value) {
     db.useServer(state);
     state.inUse = true;
     emit(state);
+    app.setServer(state);
   }
 
   void logOut() {

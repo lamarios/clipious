@@ -9,7 +9,7 @@ import 'package:invidious/utils/views/components/text_linkified.dart';
 import 'package:invidious/videos/views/components/video_thumbnail.dart';
 import 'package:invidious/comments/views/components/comments.dart';
 
-import '../../../controllers/miniPayerController.dart';
+import '../../../player/states/player.dart';
 import '../../../main.dart';
 import '../../../videos/models/base_video.dart';
 import '../../models/comment.dart';
@@ -27,7 +27,7 @@ class SingleCommentView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var player = context.read<MiniPlayerCubit>();
+    var player = context.read<PlayerCubit>();
     var locals = AppLocalizations.of(context)!;
     ColorScheme colors = Theme.of(context).colorScheme;
     var textTheme = Theme.of(context).textTheme;

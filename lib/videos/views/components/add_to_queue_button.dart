@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../controllers/miniPayerController.dart';
+import '../../../player/states/player.dart';
 import '../../models/base_video.dart';
 
 class AddToQueueButton extends StatelessWidget {
@@ -11,12 +11,12 @@ class AddToQueueButton extends StatelessWidget {
   const AddToQueueButton({Key? key, required this.videos}) : super(key: key);
 
   bool canAddToQueue(BuildContext context) {
-    var state = context.read<MiniPlayerCubit>().state;
+    var state = context.read<PlayerCubit>().state;
     return (state.videos.isNotEmpty) && (videos.length > 1 || (videos.length == 1 && (state.videos.indexWhere((element) => element.videoId == videos[0].videoId) ?? -1) < 0));
   }
 
   addToQueue(BuildContext context) {
-    var cubit = context.read<MiniPlayerCubit>();
+    var cubit = context.read<PlayerCubit>();
     cubit.queueVideos(videos);
   }
 

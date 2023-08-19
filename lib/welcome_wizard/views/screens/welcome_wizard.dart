@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
+import 'package:invidious/app/states/app.dart';
 import 'package:invidious/settings/states/server_list_settings.dart';
 import 'package:invidious/settings/states/settings.dart';
 import 'package:invidious/welcome_wizard/states/welcome_wizard.dart';
@@ -24,7 +25,7 @@ class WelcomeWizard extends StatelessWidget {
       providers: [
         BlocProvider(create: (context) => WelcomeWizardCubit(null)),
         BlocProvider(
-          create: (context) => ServerListSettingsCubit(ServerListSettingsState(publicServers: [], dbServers: [])),
+          create: (context) => ServerListSettingsCubit(ServerListSettingsState(publicServers: [], dbServers: []), context.read<AppCubit>()),
         )
       ],
       child: BlocListener<ServerListSettingsCubit, ServerListSettingsState>(

@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:bloc/bloc.dart';
 import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:get/get.dart';
-import 'package:invidious/controllers/miniPayerController.dart';
+import 'package:invidious/player/states/player.dart';
 import 'package:invidious/downloads/models/downloaded_video.dart';
 import 'package:invidious/globals.dart';
 import 'package:logging/logging.dart';
@@ -16,7 +16,7 @@ Logger log = Logger('DownloadedVideoController');
 
 class DownloadedVideoCubit extends Cubit<DownloadedVideoState> {
   final DownloadManagerCubit downloadManager;
-  final MiniPlayerCubit player;
+  final PlayerCubit player;
 
   DownloadedVideoCubit(this.downloadManager, super.initialState, this.player) {
     onReady();

@@ -102,9 +102,7 @@ class SettingsCubit extends Cubit<SettingsState> {
   }
 
   serverChanged() {
-    state.currentServer = db.getCurrentlySelectedServer();
-    emit(state);
-    appCubit.serverChanged();
+    emit(state.copyWith());
   }
 
   toggleSslVerification(bool value) {

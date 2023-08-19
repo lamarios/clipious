@@ -1,10 +1,12 @@
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:invidious/controllers/videoPlayerController.dart';
+import 'package:invidious/player/states/player.dart';
+import 'package:invidious/player/states/video_player.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/utils/models/sharelink.dart';
 import 'package:invidious/videos/models/base_video.dart';
@@ -73,10 +75,12 @@ Future<void> showAlertDialog(BuildContext context, String title, List<Widget> bo
 void showSharingSheet(BuildContext context, ShareLinks links, {bool showTimestampOption = false}) {
   var locals = AppLocalizations.of(context)!;
 
+
   bool shareWithTimestamp = false;
   Future<Duration?> getTimestamp() async {
     if (shareWithTimestamp) {
-      return VideoPlayerController.to()?.videoController?.videoPlayerController?.position;
+      var player = context.read<PlayerCubit>();
+      return player.state.position;
     }
     return null;
   }
@@ -93,7 +97,7 @@ void showSharingSheet(BuildContext context, ShareLinks links, {bool showTimestam
             });
           }
 
-          return Container(
+          return SizedBox(
             height: showTimestampOption ? 200 : 150,
             width: double.infinity,
             child: Column(

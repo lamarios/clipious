@@ -12,7 +12,7 @@ import 'package:invidious/utils/models/image_object.dart';
 import 'package:invidious/videos/models/format_stream.dart';
 import 'package:logging/logging.dart';
 
-import '../../controllers/miniPayerController.dart';
+import '../../player/states/player.dart';
 import '../../videos/models/adaptive_format.dart';
 import '../../videos/models/video.dart';
 
@@ -38,7 +38,7 @@ class DownloadProgress {
 }
 
 class DownloadManagerCubit extends Cubit<DownloadManagerState> {
-  final MiniPlayerCubit player;
+  final PlayerCubit player;
   DownloadManagerCubit(super.initialState, this.player) {
     onReady();
   }
@@ -81,8 +81,9 @@ class DownloadManagerCubit extends Cubit<DownloadManagerState> {
     var downloadProgress = state.downloadProgresses[video.videoId];
     downloadProgress?.count = count;
     downloadProgress?.total = total;
-
+    emit(state);
     if (count == total) {
+      state = this.state.copyWith();
       state.downloadProgresses.remove(video.videoId);
       video.downloadComplete = true;
       db.upsertDownload(video);

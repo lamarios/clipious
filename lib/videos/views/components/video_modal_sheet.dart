@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:invidious/controllers/miniPayerController.dart';
+import 'package:invidious/player/states/player.dart';
 import 'package:invidious/videos/models/base_video.dart';
 import 'package:invidious/videos/views/components/download_modal_sheet.dart';
 
@@ -29,7 +29,7 @@ class VideoModalSheet extends StatelessWidget {
   }
 
   void playNext(BuildContext context) {
-    var player = context.read<MiniPlayerCubit>();
+    var player = context.read<PlayerCubit>();
     var locals = AppLocalizations.of(context)!;
     Navigator.of(context).pop();
     player.playVideoNext(video);
@@ -42,7 +42,7 @@ class VideoModalSheet extends StatelessWidget {
   }
 
   void addToQueue(BuildContext context) {
-    var player = context.read<MiniPlayerCubit>();
+    var player = context.read<PlayerCubit>();
     var locals = AppLocalizations.of(context)!;
     Navigator.of(context).pop();
     player.queueVideos([video]);

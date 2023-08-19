@@ -13,7 +13,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:invidious/channels/views/screens/channel.dart';
 import 'package:invidious/app/states/app.dart';
-import 'package:invidious/controllers/miniPayerController.dart';
+import 'package:invidious/player/states/player.dart';
 import 'package:invidious/downloads/states/download_manager.dart';
 import 'package:invidious/downloads/views/components/download_app_bar_button.dart';
 import 'package:invidious/globals.dart';
@@ -28,8 +28,8 @@ import 'package:invidious/videos/views/components/popular.dart';
 import 'package:invidious/videos/views/components/subscriptions.dart';
 import 'package:invidious/videos/views/components/trending.dart';
 import 'package:invidious/videos/views/screens/video.dart';
-import 'package:invidious/views/components/miniPlayerAware.dart';
-import 'package:invidious/views/miniPlayer.dart';
+import 'package:invidious/player/views/components/mini_player_aware.dart';
+import 'package:invidious/player/views/components/player.dart';
 import 'package:invidious/playlists/views/components/add_to_playlist_list.dart';
 import 'package:invidious/app/views/screens/tvHome.dart';
 import 'package:invidious/welcome_wizard/views/screens/welcome_wizard.dart';
@@ -72,10 +72,10 @@ Future<void> main() async {
       create: (context) => AppCubit(AppState()),
     ),
     BlocProvider(
-      create: (context) => MiniPlayerCubit(MiniPlayerController()),
+      create: (context) => PlayerCubit(PlayerState()),
     ),
     BlocProvider(
-      create: (context) => DownloadManagerCubit(DownloadManagerState(), context.read<MiniPlayerCubit>()),
+      create: (context) => DownloadManagerCubit(DownloadManagerState(), context.read<PlayerCubit>()),
     )
   ], child: const MyApp()));
 }
@@ -94,9 +94,9 @@ class MyApp extends StatelessWidget {
       showWizard = true;
     }
 
-    // TODO: implement build
     return BlocBuilder<AppCubit, AppState>(
-        buildWhen: (previous, current) => previous.selectedIndex == current.selectedIndex, // we want to rebuild only when anything other than the navigation index is changed
+        buildWhen: (previous, current) => previous.selectedIndex == current.selectedIndex || previous.server != current.server,
+        // we want to rebuild only when anything other than the navigation index is changed
         builder: (context, _) {
           bool useDynamicTheme = db.getSettings(DYNAMIC_THEME)?.value == 'true';
 
@@ -143,7 +143,7 @@ class MyApp extends StatelessWidget {
                 localeListResolutionCallback: (locales, supportedLocales) {
                   log.info('device locales=$locales supported locales=$supportedLocales');
                   if (savedLocale != null) {
-                    log.info("using saved locale, ${savedLocale}");
+                    log.info("using saved locale, $savedLocale");
                     return savedLocale;
                   }
                   if (locales != null) {
@@ -215,7 +215,7 @@ class MyApp extends StatelessWidget {
                                     }
                                   }),
                             ),
-                            const MiniPlayer()
+                            const Player()
                           ],
                         ),
                 ));
@@ -267,26 +267,27 @@ class _HomeState extends State<Home> with AfterLayoutMixin {
     List<String> navigationLabels = [locals.popular, locals.trending, locals.subscriptions, locals.playlists, locals.history];
 
     return BlocBuilder<AppCubit, AppState>(buildWhen: (previous, current) {
-      return previous.selectedIndex != current.selectedIndex;
+      return previous.selectedIndex != current.selectedIndex || previous.server != current.server;
     }, builder: (context, _) {
-      var cubit = context.read<AppCubit>();
+      var app = context.read<AppCubit>();
 
       var navigationWidgets = <Widget>[
         NavigationDestination(icon: const Icon(Icons.local_fire_department), label: navigationLabels[0]),
         NavigationDestination(icon: const Icon(Icons.trending_up), label: navigationLabels[1]),
       ];
-      if (_.isLoggedIn) {
+      if (app.isLoggedIn) {
         navigationWidgets.add(NavigationDestination(icon: const Icon(Icons.subscriptions), label: navigationLabels[2]));
         navigationWidgets.add(NavigationDestination(icon: const Icon(Icons.playlist_play), label: navigationLabels[3]));
         navigationWidgets.add(NavigationDestination(icon: const Icon(Icons.history), label: navigationLabels[4]));
       }
       return Scaffold(
+        key: ValueKey(_.server?.url), // so we rebuild the view if the server changes
           backgroundColor: colorScheme.background,
           bottomNavigationBar: NavigationBar(
             backgroundColor: colorScheme.background,
             labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
             elevation: 0,
-            onDestinationSelected: cubit.selectIndex,
+            onDestinationSelected: app.selectIndex,
             selectedIndex: _.selectedIndex,
             destinations: navigationWidgets,
           ),

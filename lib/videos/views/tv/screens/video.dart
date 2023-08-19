@@ -14,11 +14,11 @@ import 'package:invidious/utils/views/tv/components/tv_expandable_text.dart';
 import 'package:invidious/app/views/screens/tvHome.dart';
 import 'package:invidious/utils/views/tv/components/tv_horizontal_item_list.dart';
 import 'package:invidious/utils/views/tv/components/tv_overscan.dart';
-import 'package:invidious/views/tv/tvPlayerView.dart';
+import 'package:invidious/player/views/tv/screens/tvPlayerView.dart';
 import 'package:invidious/subscription_management/view/tv/tv_subscribe_button.dart';
 import 'package:invidious/videos/views/components/video_metrics.dart';
 
-import '../../../../controllers/miniPayerController.dart';
+import '../../../../player/states/player.dart';
 import '../../../states/tv_video.dart';
 import '../../../states/video.dart';
 import '../../../../utils/models/image_object.dart';
@@ -47,8 +47,8 @@ class TvVideoView extends StatelessWidget {
     AppLocalizations locals = AppLocalizations.of(context)!;
 
     var downloadManager = context.read<DownloadManagerCubit>();
+    var player = context.read<PlayerCubit>();
 
-    var player = context.read<MiniPlayerCubit>();
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => VideoCubit(VideoState(videoId: videoId), downloadManager, player)),

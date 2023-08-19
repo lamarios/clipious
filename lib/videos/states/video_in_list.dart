@@ -12,17 +12,17 @@ class VideoInListCubit extends Cubit<VideoInListState> {
     onReady();
   }
 
-  double setProgress() {
-    return db.getVideoProgress(state.video.videoId);
-  }
-
   onReady() {
     updateProgress();
   }
 
   updateProgress() {
+    setProgress(db.getVideoProgress(state.video.videoId));
+  }
+
+  setProgress(double progress){
     var state = this.state.copyWith();
-    state.progress = db.getVideoProgress(state.video.videoId);
+    state.progress = progress;
     emit(state);
   }
 

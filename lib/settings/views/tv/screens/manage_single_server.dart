@@ -6,6 +6,7 @@ import 'package:invidious/utils/views/tv/components/tv_button.dart';
 import 'package:invidious/utils/views/tv/components/tv_overscan.dart';
 import 'package:invidious/settings/views/tv/screens/settings.dart';
 
+import '../../../../app/states/app.dart';
 import '../../../states/server_settings.dart';
 import '../../../models/db/server.dart';
 import '../../../../utils.dart';
@@ -178,7 +179,7 @@ class TvManageSingleServer extends StatelessWidget {
     return Scaffold(
       body: TvOverscan(
         child: BlocProvider(
-          create: (BuildContext context) => ServerSettingsCubit(server),
+          create: (BuildContext context) => ServerSettingsCubit(server, context.read<AppCubit>()),
           child: BlocBuilder<ServerSettingsCubit, Server>(builder: (context, server) {
             var cubit = context.read<ServerSettingsCubit>();
             AppLocalizations locals = AppLocalizations.of(context)!;

@@ -9,6 +9,7 @@ import 'package:receive_sharing_intent/receive_sharing_intent.dart';
 import '../../database.dart';
 import '../../globals.dart';
 import '../../main.dart';
+import '../../settings/models/db/server.dart';
 import '../../videos/views/screens/video.dart';
 
 part 'app.g.dart';
@@ -31,21 +32,19 @@ class AppCubit extends Cubit<AppState> {
     ReceiveSharingIntent.getInitialText().then((value) {
       openAppLink((value ?? ''));
     });
+
+
+    var selectedIndex = int.parse(db.getSettings(ON_OPEN)?.value ?? '0');
+    if (!isLoggedIn && selectedIndex > 1) {
+      selectedIndex = 0;
+    }
+    selectIndex(selectedIndex);
   }
 
   @override
   close() async {
     state.intentDataStreamSubscription.cancel();
     super.close();
-  }
-
-  serverChanged() {
-    var state = this.state.copyWith();
-    state.selectedIndex = 0;
-    state.isLoggedIn = db.isLoggedInToCurrentServer();
-    log.fine('logged in ? ${state.isLoggedIn}');
-    emit(state);
-    // VideoListController.to(VideoListController.popularTag)?.refreshItems();
   }
 
   void openAppLink(String url) {
@@ -80,21 +79,30 @@ class AppCubit extends Cubit<AppState> {
   rebuildApp() {
     emit(state.copyWith());
   }
+
+  setServer(Server s) {
+    emit(state.copyWith(server: s, selectedIndex: 0));
+  }
+  bool get isLoggedIn => (state.server?.authToken?.isNotEmpty ?? false) || (state.server?.sidCookie?.isNotEmpty ?? false);
 }
 
 @CopyWith(constructor: "_")
 class AppState {
   late int selectedIndex;
-  bool isLoggedIn = db.isLoggedInToCurrentServer();
+
+  late Server? server;
+
   late StreamSubscription intentDataStreamSubscription;
 
   AppState() {
-    selectedIndex = int.parse(db.getSettings(ON_OPEN)?.value ?? '0');
-    if (!isLoggedIn && selectedIndex > 1) {
-      selectedIndex = 0;
+    try {
+      server = db.getCurrentlySelectedServer();
+    } catch (e) {
+      server = null;
     }
+
     // For sharing or opening urls/text coming from outside the app while the app is in the memory
   }
 
-  AppState._(this.selectedIndex, this.isLoggedIn, this.intentDataStreamSubscription);
+  AppState._(this.selectedIndex, this.server, this.intentDataStreamSubscription);
 }

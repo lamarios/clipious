@@ -17,7 +17,7 @@ import 'package:invidious/utils/views/components/placeholders.dart';
 import 'package:invidious/videos/views/components/add_to_playlist_button.dart';
 import 'package:invidious/videos/views/components/like_button.dart';
 
-import '../../../controllers/miniPayerController.dart';
+import '../../../player/states/player.dart';
 import '../../../downloads/views/screens/download_manager.dart';
 import '../../../main.dart';
 import '../../../myRouteObserver.dart';
@@ -70,7 +70,7 @@ class VideoView extends StatelessWidget {
 
     var downloadManager = context.read<DownloadManagerCubit>();
 
-    var player = context.read<MiniPlayerCubit>();
+    var player = context.read<PlayerCubit>();
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (BuildContext context) => VideoCubit(VideoState(videoId: videoId), downloadManager, player)),
@@ -95,24 +95,27 @@ class VideoView extends StatelessWidget {
                         AnimatedSwitcher(
                             duration: animationDuration,
                             child: _.downloading
-                                ? Stack(
-                                    alignment: Alignment.center,
-                                    children: [
-                                      IconButton(
-                                        icon: Icon(
-                                          Icons.add,
-                                          color: colorScheme.background,
+                                ? GestureDetector(
+                                    onTap: () => openDownloadManager(context),
+                                    child: Stack(
+                                      alignment: Alignment.center,
+                                      children: [
+                                        IconButton(
+                                          icon: Icon(
+                                            Icons.add,
+                                            color: colorScheme.background,
+                                          ),
+                                          onPressed: () {},
                                         ),
-                                        onPressed: () {},
-                                      ),
-                                      SizedBox(
-                                          height: 15,
-                                          width: 15,
-                                          child: CircularProgressIndicator(
-                                            value: _.downloadProgress == 0 ? null : _.downloadProgress,
-                                            strokeWidth: 2,
-                                          ))
-                                    ],
+                                        SizedBox(
+                                            height: 15,
+                                            width: 15,
+                                            child: CircularProgressIndicator(
+                                              value: _.downloadProgress == 0 ? null : _.downloadProgress,
+                                              strokeWidth: 2,
+                                            ))
+                                      ],
+                                    ),
                                   )
                                 : Stack(
                                     children: [

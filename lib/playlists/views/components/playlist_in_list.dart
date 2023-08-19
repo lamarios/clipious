@@ -10,7 +10,7 @@ import 'package:invidious/playlists/views/components/playlist_thumbnail.dart';
 import 'package:invidious/playlists/views/screens/playlist.dart';
 import 'package:invidious/utils.dart';
 import 'package:invidious/videos/models/video_in_list.dart';
-import 'package:invidious/views/tv/tvPlaylistView.dart';
+import 'package:invidious/playlists/views/tv/screens/playlist.dart';
 
 import '../../states/playlist_list.dart';
 

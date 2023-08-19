@@ -1,11 +1,11 @@
 import 'package:audio_service/audio_service.dart';
-import 'package:invidious/controllers/miniPayerController.dart';
+import 'package:invidious/player/states/player.dart';
 
 class MediaHandler extends BaseAudioHandler
     with
         QueueHandler, // mix in default queue callback implementations
         SeekHandler {
-  final MiniPlayerCubit controller;
+  final PlayerCubit controller;
 
   MediaHandler(this.controller);
   // mix in default seek callback implementations

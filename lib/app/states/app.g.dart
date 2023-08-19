@@ -9,7 +9,7 @@ part of 'app.dart';
 abstract class _$AppStateCWProxy {
   AppState selectedIndex(int selectedIndex);
 
-  AppState isLoggedIn(bool isLoggedIn);
+  AppState server(Server? server);
 
   AppState intentDataStreamSubscription(
       StreamSubscription<dynamic> intentDataStreamSubscription);
@@ -22,7 +22,7 @@ abstract class _$AppStateCWProxy {
   /// ````
   AppState call({
     int? selectedIndex,
-    bool? isLoggedIn,
+    Server? server,
     StreamSubscription<dynamic>? intentDataStreamSubscription,
   });
 }
@@ -38,7 +38,7 @@ class _$AppStateCWProxyImpl implements _$AppStateCWProxy {
       this(selectedIndex: selectedIndex);
 
   @override
-  AppState isLoggedIn(bool isLoggedIn) => this(isLoggedIn: isLoggedIn);
+  AppState server(Server? server) => this(server: server);
 
   @override
   AppState intentDataStreamSubscription(
@@ -55,7 +55,7 @@ class _$AppStateCWProxyImpl implements _$AppStateCWProxy {
   /// ````
   AppState call({
     Object? selectedIndex = const $CopyWithPlaceholder(),
-    Object? isLoggedIn = const $CopyWithPlaceholder(),
+    Object? server = const $CopyWithPlaceholder(),
     Object? intentDataStreamSubscription = const $CopyWithPlaceholder(),
   }) {
     return AppState._(
@@ -63,10 +63,10 @@ class _$AppStateCWProxyImpl implements _$AppStateCWProxy {
           ? _value.selectedIndex
           // ignore: cast_nullable_to_non_nullable
           : selectedIndex as int,
-      isLoggedIn == const $CopyWithPlaceholder() || isLoggedIn == null
-          ? _value.isLoggedIn
+      server == const $CopyWithPlaceholder()
+          ? _value.server
           // ignore: cast_nullable_to_non_nullable
-          : isLoggedIn as bool,
+          : server as Server?,
       intentDataStreamSubscription == const $CopyWithPlaceholder() ||
               intentDataStreamSubscription == null
           ? _value.intentDataStreamSubscription

@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:flutter/material.dart';
-import 'package:invidious/controllers/miniPayerController.dart';
+import 'package:invidious/player/states/player.dart';
 import 'package:logging/logging.dart';
 
 import '../../globals.dart';
@@ -13,7 +13,7 @@ part 'playlist.g.dart';
 final log = Logger('PlaylistController');
 
 class PlaylistCubit extends Cubit<PlaylistState> {
-  final MiniPlayerCubit player;
+  final PlayerCubit player;
   PlaylistCubit(super.initialState, this.player) {
     onReady();
   }

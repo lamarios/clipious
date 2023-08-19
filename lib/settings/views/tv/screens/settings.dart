@@ -164,7 +164,10 @@ class TVSettings extends StatelessWidget {
                       ),
 */
                   SettingsTitle(title: locals.servers),
-                  SettingsTile(title: locals.manageServers, description: locals.currentServer(db.getCurrentlySelectedServer().url), onSelected: openManageServers),
+                  BlocBuilder<AppCubit, AppState>(
+                      buildWhen: (previous, current) => previous.server != current.server,
+                      builder: (context, app) =>
+                          SettingsTile(title: locals.manageServers, description: app.server != null ? locals.currentServer(db.getCurrentlySelectedServer().url) : "", onSelected: openManageServers)),
                   SettingsTile(
                     title: locals.skipSslVerification,
                     description: locals.skipSslVerification,

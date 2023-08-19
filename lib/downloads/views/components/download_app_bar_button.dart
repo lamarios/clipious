@@ -16,6 +16,7 @@ class AppBarDownloadButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var colors = Theme.of(context).colorScheme;
+    var textTheme = Theme.of(context).textTheme;
     return BlocBuilder<DownloadManagerCubit, DownloadManagerState>(
       // buildWhen: (previous, current) => previous.videos.length != current.videos.length || previous.totalProgress != current.totalProgress,
       builder: (context, _) => AnimateTo<BaseVideo>(
@@ -43,7 +44,12 @@ class AppBarDownloadButton extends StatelessWidget {
                         )),
                   )
                 : const SizedBox.shrink(),
-            Positioned(top: 5, right: 5, child: _.videos.isNotEmpty ? Text(_.videos.length.toString()) : const SizedBox.shrink())
+            Positioned(top: 1, right: 1, child: _.videos.isNotEmpty ? Container(
+              padding: const EdgeInsets.all(4),
+                decoration:BoxDecoration(
+              color: colors.secondaryContainer,
+              shape: BoxShape.circle
+            ),child: Text(_.videos.length.toString(), style: textTheme.labelSmall,)) : const SizedBox.shrink())
           ],
         ),
         builder: (context, child, animation) => Transform.translate(

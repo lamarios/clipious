@@ -2,11 +2,9 @@ import 'package:bloc/bloc.dart';
 import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:invidious/settings/states/settings.dart';
-import 'package:invidious/welcome_wizard/states/welcome_wizard.dart';
-import 'package:invidious/utils.dart';
 import 'package:logging/logging.dart';
 
+import '../../app/states/app.dart';
 import '../../globals.dart';
 import '../models/db/server.dart';
 
@@ -19,7 +17,9 @@ enum PublicServerErrors { none, couldNotGetList }
 final log = Logger('ManagerServerView');
 
 class ServerListSettingsCubit extends Cubit<ServerListSettingsState> {
-  ServerListSettingsCubit(super.initialState) {
+  final AppCubit appCubit;
+
+  ServerListSettingsCubit(super.initialState, this.appCubit) {
     refreshServers();
     getPublicServers();
   }
@@ -126,6 +126,7 @@ class ServerListSettingsCubit extends Cubit<ServerListSettingsState> {
   switchServer(Server s) {
     db.useServer(s);
     refreshServers();
+    appCubit.setServer(s);
   }
 }
 

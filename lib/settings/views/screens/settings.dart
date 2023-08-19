@@ -30,8 +30,7 @@ class Settings extends StatelessWidget {
   const Settings({super.key});
 
   manageServers(BuildContext context) {
-    var cubit = context.read<SettingsCubit>();
-    Navigator.of(context).push(MaterialPageRoute(settings: ROUTE_SETTINGS_MANAGE_SERVERS, builder: (context) => const ManageServers())).then((value) => cubit.serverChanged());
+    Navigator.of(context).push(MaterialPageRoute(settings: ROUTE_SETTINGS_MANAGE_SERVERS, builder: (context) => const ManageServers()));
   }
 
   openSponsorBlockSettings(BuildContext context) {
@@ -199,7 +198,8 @@ class Settings extends StatelessWidget {
                   SettingsSection(title: Text(locals.servers), tiles: [
                     SettingsTile.navigation(
                       title: Text(locals.manageServers),
-                      description: Text(locals.currentServer(db.getCurrentlySelectedServer().url)),
+                      description: BlocBuilder<AppCubit, AppState>(
+                          buildWhen: (previous, current) => previous.server != current.server, builder: (context, app) => Text(app.server != null ? locals.currentServer(app.server!.url) : "")),
                       onPressed: manageServers,
                     ),
                     SettingsTile.switchTile(

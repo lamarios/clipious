@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
-import 'package:invidious/controllers/miniPayerController.dart';
+import 'package:invidious/player/states/player.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../globals.dart';
@@ -12,7 +12,7 @@ import '../../../videos/views/screens/video.dart';
 class TextLinkified extends StatelessWidget {
   final String text;
   final BaseVideo? video;
-  final MiniPlayerCubit player;
+  final PlayerCubit player;
 
   const TextLinkified({super.key, required this.text, this.video, required this.player});
 

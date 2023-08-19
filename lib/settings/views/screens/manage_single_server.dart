@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
+import 'package:invidious/app/states/app.dart';
 import 'package:invidious/settings/states/server_settings.dart';
 import 'package:invidious/utils.dart';
 import 'package:settings_ui/settings_ui.dart';
@@ -71,7 +72,7 @@ class ManageSingleServer extends StatelessWidget {
     SettingsThemeData theme = settingsTheme(colorScheme);
 
     return BlocProvider(
-      create: (context) => ServerSettingsCubit(server),
+      create: (context) => ServerSettingsCubit(server, context.read<AppCubit>()),
       child: BlocBuilder<ServerSettingsCubit, Server>(
         builder: (context, server) {
           var cubit = context.read<ServerSettingsCubit>();

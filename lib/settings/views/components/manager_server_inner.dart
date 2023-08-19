@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:invidious/app/states/app.dart';
 import 'package:invidious/settings/states/server_list_settings.dart';
 import 'package:invidious/main.dart';
 import 'package:invidious/myRouteObserver.dart';
@@ -139,6 +140,7 @@ class ManagerServersView extends StatelessWidget {
     return BlocBuilder<ServerListSettingsCubit, ServerListSettingsState>(
       builder: (ctx, _) {
         ServerListSettingsCubit cubit = context.read<ServerListSettingsCubit>();
+        var app = context.read<AppCubit>();
         var filteredPublicServers = _.publicServers.where((s) => _.dbServers.indexWhere((element) => element.url == s.url) == -1).toList();
         return Stack(
           children: [
@@ -157,7 +159,7 @@ class ManagerServersView extends StatelessWidget {
                                       padding: const EdgeInsets.all(8.0),
                                       child: Icon(
                                         Icons.done,
-                                        color: s.inUse ? colorScheme.primary : colorScheme.secondaryContainer,
+                                        color: s.url == app.state.server?.url ? colorScheme.primary : colorScheme.secondaryContainer,
                                       ),
                                     ),
                                   ),

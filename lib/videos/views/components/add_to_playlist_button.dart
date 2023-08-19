@@ -12,6 +12,7 @@ class VideoAddToPlaylistButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var textTheme = Theme.of(context).textTheme;
+    var colors = Theme.of(context).colorScheme;
     return BlocBuilder<AddToPlaylistButtonCubit, AddToPlaylistButtonState>(
       builder: (context, _) => Visibility(
         visible: _.isLoggedIn,
@@ -26,11 +27,18 @@ class VideoAddToPlaylistButton extends StatelessWidget {
             ),
             _.playListCount > 0
                 ? Positioned(
-                    top: 8,
-                    right: 8,
-                    child: Text(
-                      _.playListCount.toString(),
-                      style: textTheme.labelSmall,
+                    top: 1,
+                    right: 1,
+                    child: Container(
+                      padding: const EdgeInsets.all(4),
+                      decoration: BoxDecoration(
+                        color: colors.secondaryContainer,
+                        shape: BoxShape.circle
+                      ),
+                      child: Text(
+                        _.playListCount.toString(),
+                        style: textTheme.labelSmall,
+                      ),
                     ),
                   )
                 : const SizedBox.shrink()

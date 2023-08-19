@@ -12,7 +12,7 @@ import '../../downloads/states/download_manager.dart';
 import '../../globals.dart';
 import '../../settings/models/errors/invidiousServiceError.dart';
 import '../models/video.dart';
-import '../../controllers/miniPayerController.dart';
+import '../../player/states/player.dart';
 
 part 'video.g.dart';
 
@@ -21,7 +21,7 @@ final log = Logger('Video');
 
 class VideoCubit extends Cubit<VideoState> {
   final DownloadManagerCubit downloadManager;
-  final MiniPlayerCubit player;
+  final PlayerCubit player;
 
   VideoCubit(super.initialState, this.downloadManager, this.player) {
     onReady();
