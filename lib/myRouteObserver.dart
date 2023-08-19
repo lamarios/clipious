@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:invidious/controllers/miniPayerController.dart';
 import 'package:logging/logging.dart';
 
 const String PATH_CHANNEL = "/channel";
 const String PATH_VIDEO = "/video";
-const String PATH_MANAGE_SUBS = "/manage-subscriptions";
+const String PATH_MANAGE_SUBS = "/manage-subscription_management";
 
 const RouteSettings ROUTE_SETTINGS = RouteSettings(name: 'settings');
 const RouteSettings ROUTE_DOWNLOAD_MANAGER = RouteSettings(name: 'download-manager');
@@ -36,7 +35,7 @@ class MyRouteObserver extends RouteObserver<PageRoute<dynamic>> {
         case ROUTE_CHANNEL:
         case ROUTE_MANAGE_SUBSCRIPTIONS:
           log.fine('We should stop playing video');
-          MiniPlayerController.to()?.showMiniPlayer();
+          // MiniPlayerController.to()?.showMiniPlayer();
           break;
         default:
           log.fine('keep playing video');

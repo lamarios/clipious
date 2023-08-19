@@ -1,904 +1,904 @@
 {
-  "playListName": "再生リスト名",
-  "@playListName": {
-    "description": "Place holder for new playlist name text field"
-  },
-  "popular": "人気",
-  "@popular": {
-    "description": "Popular videos title"
-  },
-  "playlistVisibility": "公開範囲",
-  "@playlistVisibility": {
-    "description": "Dropdown label for playlist visibility"
-  },
-  "ok": "OK",
-  "@ok": {
-    "description": "Ok"
-  },
-  "comments": "コメント",
-  "@comments": {
-    "description": "Comments label"
-  },
-  "couldntLoadVideo": "動画を読み込めませんでした",
-  "@couldntLoadVideo": {
-    "description": "Message to display when a video can't be loaded"
-  },
-  "recommended": "おすすめ",
-  "@recommended": {
-    "description": "Recommended label"
-  },
-  "couldntFetchVideos": "動画を取得できません。タップで再試行。",
-  "@couldntFetchVideos": {
-    "description": "Can't load bunch of videos, asking  user to try again"
-  },
-  "startUsingClipious": "Clipious の使用を開始",
-  "@startUsingClipious": {
-    "description": "button label to start using the app"
-  },
-  "loadMore": "さらに読み込む",
-  "@loadMore": {
-    "description": "CTA to load more"
-  },
-  "streamIsLive": "ライブ",
-  "@streamIsLive": {
-    "description": "Label when a video is a live stream"
-  },
-  "showOnStart": "アプリの起動時に表示する内容を選択",
-  "@showOnStart": {
-    "description": "Title of dialog asking which screen the users prefers to see"
-  },
-  "settings": "設定",
-  "@settings": {
-    "description": "Settings title"
-  },
-  "country": "国",
-  "@country": {
-    "description": "Country label"
-  },
-  "currentServer": "使用中 {current}",
-  "@currentServer": {
-    "description": "Which server the user is currently using",
-    "placeholders": {
-      "current": {
-        "type": "String"
-      }
+    "playListName": "再生リスト名",
+    "@playListName": {
+        "description": "Place holder for new playlist name text field"
+    },
+    "popular": "人気",
+    "@popular": {
+        "description": "Popular videos title"
+    },
+    "playlistVisibility": "公開範囲",
+    "@playlistVisibility": {
+        "description": "Dropdown label for playlist visibility"
+    },
+    "ok": "OK",
+    "@ok": {
+        "description": "Ok"
+    },
+    "comments": "コメント",
+    "@comments": {
+        "description": "Comments label"
+    },
+    "couldntLoadVideo": "動画を読み込めませんでした",
+    "@couldntLoadVideo": {
+        "description": "Message to display when a video can't be loaded"
+    },
+    "recommended": "おすすめ",
+    "@recommended": {
+        "description": "Recommended label"
+    },
+    "couldntFetchVideos": "動画を取得できません。タップで再試行。",
+    "@couldntFetchVideos": {
+        "description": "Can't load bunch of videos, asking  user to try again"
+    },
+    "startUsingClipious": "Clipious の使用を開始",
+    "@startUsingClipious": {
+        "description": "button label to start using the app"
+    },
+    "loadMore": "さらに読み込む",
+    "@loadMore": {
+        "description": "CTA to load more"
+    },
+    "streamIsLive": "ライブ",
+    "@streamIsLive": {
+        "description": "Label when a video is a live stream"
+    },
+    "showOnStart": "アプリの起動時に表示する内容を選択",
+    "@showOnStart": {
+        "description": "Title of dialog asking which screen the users prefers to see"
+    },
+    "settings": "設定",
+    "@settings": {
+        "description": "Settings title"
+    },
+    "country": "国",
+    "@country": {
+        "description": "Country label"
+    },
+    "currentServer": "使用中 {current}",
+    "@currentServer": {
+        "description": "Which server the user is currently using",
+        "placeholders": {
+            "current": {
+                "type": "String"
+            }
+        }
+    },
+    "whenAppStartsShow": "アプリ起動時の表示…",
+    "@whenAppStartsShow": {
+        "description": "Setting title for selecting the screen to show on start"
+    },
+    "servers": "サーバー",
+    "@servers": {
+        "description": "Server management settings category"
+    },
+    "manageServers": "サーバーの管理",
+    "@manageServers": {
+        "description": "Settings to manage servers"
+    },
+    "about": "情報",
+    "@about": {
+        "description": "About"
+    },
+    "build": "ビルド",
+    "@build": {
+        "description": "build label"
+    },
+    "name": "名前",
+    "@name": {
+        "description": "NAme label"
+    },
+    "delete": "削除",
+    "@delete": {
+        "description": "Delete label"
+    },
+    "notLoggedIn": "ログインしていません",
+    "@notLoggedIn": {
+        "description": "Label when the user is not logged in to the server"
+    },
+    "noVideoInPlayList": "再生リストに動画がありません",
+    "@noVideoInPlayList": {
+        "description": "When no videos in the playlist"
+    },
+    "deletePlayListQ": "再生リストを削除しますか？",
+    "@deletePlayListQ": {
+        "description": "Ask user to delete a playlist"
+    },
+    "playlists": "再生リスト",
+    "@playlists": {
+        "description": "User playlists"
+    },
+    "subscriptions": "登録チャンネル",
+    "@subscriptions": {
+        "description": "User subscriptions"
+    },
+    "trending": "急上昇",
+    "@trending": {
+        "description": "Trending videos title"
+    },
+    "addPlayList": "再生リストを追加",
+    "@addPlayList": {
+        "description": "Title for add playlist dialog"
+    },
+    "error": "エラー",
+    "@error": {},
+    "logIn": "ログイン",
+    "@logIn": {
+        "description": "CTA to log in to server"
+    },
+    "publicServers": "公開サーバー",
+    "@publicServers": {
+        "description": "Public servers label"
+    },
+    "loadingPublicServer": "公開サーバーを読み込み中",
+    "@loadingPublicServer": {
+        "description": "Message telling users the app is loading the list of public servers"
+    },
+    "addServerHelpText": "+ ボタンで所有するサーバーを追加するか、公開サーバーをタップし追加します。",
+    "@addServerHelpText": {
+        "description": "label for when the user hasn't chosen a server yet"
+    },
+    "tapToAddServer": "タップでサーバーを一覧に追加",
+    "@tapToAddServer": {
+        "description": "public server description"
+    },
+    "publicServersError": "公開サーバーの一覧を取得できませんでした。タップで再試行。",
+    "@publicServersError": {
+        "description": "Error message when trying to get public servers but it failed"
+    },
+    "appearance": "外観",
+    "@appearance": {
+        "description": "Settings category title"
+    },
+    "useDynamicTheme": "ダイナミックカラー",
+    "@useDynamicTheme": {
+        "description": ""
+    },
+    "nSubscribers": "{count, select, no{登録者なし} other{登録者 {count} 人}}",
+    "@nSubscribers": {
+        "description": "number of subscribers",
+        "placeholders": {
+            "count": {
+                "type": "String"
+            }
+        }
+    },
+    "shareYoutubeLink": "YouTube リンクを共有",
+    "@shareYoutubeLink": {
+        "description": "asking user to share youtube link"
+    },
+    "shareInvidiousLink": "Invidious リンクを共有",
+    "@shareInvidiousLink": {
+        "description": "asking user to share invidious link"
+    },
+    "useDynamicThemeDescription": "Material You の配色を使用 (Android 12 以上で利用可能)",
+    "@useDynamicThemeDescription": {
+        "description": ""
+    },
+    "nVideos": "{count, plural, =0{動画なし} =1{1 件の動画} other{{count} 件の動画}}",
+    "@nVideos": {
+        "description": "One or more videos",
+        "placeholders": {
+            "count": {
+                "type": "num",
+                "format": "compact"
+            }
+        }
+    },
+    "publicPlaylist": "公開",
+    "@publicPlaylist": {
+        "description": "Public playlist"
+    },
+    "unlistedPlaylist": "限定公開",
+    "@unlistedPlaylist": {
+        "description": "Unlisted playlist"
+    },
+    "videos": "動画",
+    "@videos": {
+        "description": "Videos label"
+    },
+    "streams": "配信",
+    "@streams": {
+        "description": "Streams label"
+    },
+    "videoAddedToPlaylist": "動画を再生リストに追加しました",
+    "@videoAddedToPlaylist": {
+        "description": "Pop up message when a video was added to a playlist"
+    },
+    "selectPlaylist": "再生リストを選択",
+    "@selectPlaylist": {
+        "description": "Title when users wants to add a video to a playlist"
+    },
+    "useSponsorBlock": "SponsorBlock を使用",
+    "@useSponsorBlock": {
+        "description": "label for sponsorblock checkbox"
+    },
+    "yourServers": "使用するサーバー",
+    "@yourServers": {
+        "description": "Your servers label"
+    },
+    "addServer": "サーバーを追加",
+    "@addServer": {
+        "description": "Add server label"
+    },
+    "useThisServer": "このサーバーを使用",
+    "@useThisServer": {
+        "description": "Use this server label"
+    },
+    "noPlaylists": "再生リストなし",
+    "@noPlaylists": {
+        "description": "when there are no playlists to display"
+    },
+    "latestVideos": "最新の動画",
+    "@latestVideos": {
+        "description": "Latest channel videos"
+    },
+    "subscribed": "登録済み",
+    "@subscribed": {
+        "description": "When the user is subscribed to a channel"
+    },
+    "nReplies": "{count, plural, =0{返信なし} =1{1 件の返信} other{{count} 件の返信}}",
+    "@nReplies": {
+        "description": "number of replies to a comment",
+        "placeholders": {
+            "count": {
+                "type": "num",
+                "format": "compact"
+            }
+        }
+    },
+    "invalidInvidiousServer": "無効な Invidious サーバー",
+    "@invalidInvidiousServer": {
+        "description": "Error when the user tries to add a server that is not a proper or reachable invidious server"
+    },
+    "version": "バージョン",
+    "@version": {
+        "description": "version label"
+    },
+    "package": "パッケージ",
+    "@package": {
+        "description": "package label"
+    },
+    "privatePlaylist": "非公開",
+    "@privatePlaylist": {
+        "description": "Private playlist"
+    },
+    "cancel": "キャンセル",
+    "@cancel": {
+        "description": "Cancel button label"
+    },
+    "add": "追加",
+    "@add": {
+        "description": "Add button abel"
+    },
+    "info": "情報",
+    "@info": {
+        "description": "Info label"
+    },
+    "loggedIn": "ログイン中",
+    "@loggedIn": {
+        "description": "Label to tell the user that he is logged in to the server"
+    },
+    "newSorting": "新しい順",
+    "@newSorting": {
+        "description": "Content sorting: new"
+    },
+    "removeFromPlayList": "再生リストから削除",
+    "@removeFromPlayList": {
+        "description": "Menu item description to show remove a video from a playlist"
+    },
+    "irreversibleAction": "この操作は取り消せません",
+    "@irreversibleAction": {
+        "description": "Tell the user that the action cannot be undone"
+    },
+    "channels": "チャンネル",
+    "@channels": {
+        "description": "Channels label"
+    },
+    "errorAddingVideoToPlaylist": "再生リストに動画を追加する際にエラーが発生",
+    "@errorAddingVideoToPlaylist": {
+        "description": "Error while adding video to playlist"
+    },
+    "subscribe": "チャンネル登録",
+    "@subscribe": {
+        "description": "Label for user to subscribe to a channel"
+    },
+    "noChannels": "チャンネルなし",
+    "@noChannels": {
+        "description": "when there are no channels to display"
+    },
+    "createNewPlaylist": "新しい再生リスト",
+    "@createNewPlaylist": {
+        "description": "Button label to create a new playlist when the user wants to add a video to a playlist"
+    },
+    "sponsorBlockCategoryUnpaidSelfPromo": "無報酬/自己宣伝",
+    "@sponsorBlockCategoryUnpaidSelfPromo": {
+        "description": "Sponsor block 'Unpaid/Self promotion' Category"
+    },
+    "sponsorBlockCategoryInteractionDescription": "コンテンツの途中で「いいね」「登録」「フォロー」の簡単な依頼がある。長かったり、何か具体的な事に関するものであれば、代わりに自己宣伝に分類されます。",
+    "@sponsorBlockCategoryInteractionDescription": {
+        "description": "Sponsor block 'Interaction' Category description"
+    },
+    "sponsorBlockCategoryIntro": "合間 / 導入アニメ",
+    "@sponsorBlockCategoryIntro": {
+        "description": "Sponsorblock 'Intro' Category"
+    },
+    "sponsorBlockCategoryOutro": "終了画面/クレジット",
+    "@sponsorBlockCategoryOutro": {
+        "description": "Outro block 'Outro' Category"
+    },
+    "sponsorBlockCategoryFiller": "無関係の談話/冗談",
+    "@sponsorBlockCategoryFiller": {
+        "description": "Sponsorblock 'Filler' Category"
+    },
+    "sponsorBlockCategoryMusicOffTopic": "音楽: 非音楽シーン",
+    "@sponsorBlockCategoryMusicOffTopic": {
+        "description": "Sponsorblock 'MusicOffTopic' Category"
+    },
+    "sponsorBlockCategoryPreview": "予告/あらすじ",
+    "@sponsorBlockCategoryPreview": {
+        "description": "Sponsorblock 'Preview' Category"
+    },
+    "sponsorBlockSettingsQuickDescription": "飛ばしたいシーンの種類を選択",
+    "@sponsorBlockSettingsQuickDescription": {
+        "description": "Small description of what the sponsor block settings do"
+    },
+    "sponsorBlockCategorySponsor": "協賛",
+    "@sponsorBlockCategorySponsor": {
+        "description": "Sponsor block 'Sponsor' Category"
+    },
+    "sponsorBlockCategorySponsorDescription": "報酬のある販売促進、紹介、直接広告です。自己宣伝、また好きな動機/製作者/サイト/製品への無償の賞賛ではありません。",
+    "@sponsorBlockCategorySponsorDescription": {
+        "description": "Sponsor block 'Sponsor' Category description"
+    },
+    "cookieLogin": "クッキーでログイン",
+    "@cookieLogin": {
+        "description": "Text to login to a server using the cookie jar method"
+    },
+    "followSystem": "システムの設定に従う",
+    "@followSystem": {
+        "description": "Follow system label"
+    },
+    "enableSearchHistory": "検索履歴を有効化",
+    "@enableSearchHistory": {
+        "description": "Settings label for enabling search history"
+    },
+    "searchHistoryDescription": "検索履歴の設定",
+    "@searchHistoryDescription": {
+        "description": "Description for search history settings"
+    },
+    "searchHistoryLimit": "検索履歴の上限",
+    "@searchHistoryLimit": {
+        "description": "Settings label for search history limit"
+    },
+    "themeLight": "ライト",
+    "@themeLight": {
+        "description": "Light theme"
+    },
+    "themeDark": "ダーク",
+    "@themeDark": {
+        "description": "Dark theme"
+    },
+    "search": "検索",
+    "@search": {
+        "description": "search title"
+    },
+    "sponsorBlockCategoryUnpaidSelfPromoDescription": "無報酬または自己宣伝ということを除き「協賛」に似ています。商品、寄付、協力者に関する情報を含みます。 ",
+    "@sponsorBlockCategoryUnpaidSelfPromoDescription": {
+        "description": "Sponsor block 'Unpaid/Self promotion' Category description"
+    },
+    "sponsorBlockCategoryInteraction": "操作の依頼 (いいね・登録など)",
+    "@sponsorBlockCategoryInteraction": {
+        "description": "Sponsor block 'Interaction' Category"
+    },
+    "sponsorBlockCategoryOutroDescription": "クレジットやYouTubeの終了画面です。情報を含む結論のシーンではありません。",
+    "@sponsorBlockCategoryOutroDescription": {
+        "description": "Outro block 'Outro' Category description"
+    },
+    "sponsorBlockCategoryIntroDescription": "中身のあるコンテンツがない合間のシーン。一時停止、静止画、アニメの繰り返しなど。情報を含む遷移シーンではありません。",
+    "@sponsorBlockCategoryIntroDescription": {
+        "description": "Sponsorblock 'Intro' Category description"
+    },
+    "sponsorBlockCategoryFillerDescription": "動画の主な内容を理解するのに不要な、つなぎやユーモアとして追加された脱線したシーンです。文脈や背景の詳細を提供するシーンは含まれません。または楽しめないシーンの非常に強引な分類です。",
+    "@sponsorBlockCategoryFillerDescription": {
+        "description": "Sponsorblock 'Filler' Category description"
+    },
+    "blackBackground": "真っ黒な背景",
+    "@blackBackground": {
+        "description": "Settings name for black background"
+    },
+    "useProxyDescription": "プロキシを介してサーバーから動画ストリームを受信。YouTubeによる地域やISPの制限を回避します",
+    "@useProxyDescription": {
+        "description": "Description for the use proxy settings"
+    },
+    "shorts": "ショート",
+    "@shorts": {
+        "description": "Youtube shorts"
+    },
+    "searchSortRelevance": "関連度",
+    "@searchSortRelevance": {
+        "description": "Sort search by relevance"
+    },
+    "searchSortRating": "評価",
+    "@searchSortRating": {
+        "description": "Sort search by rating"
+    },
+    "searchSortUploadDate": "アップロード日",
+    "@searchSortUploadDate": {
+        "description": "Sort search by upload date"
+    },
+    "searchSortViewCount": "視聴回数",
+    "@searchSortViewCount": {
+        "description": "Sort search by view count"
+    },
+    "sponsorBlockCategoryPreviewDescription": "この動画や他の一連の動画で起こるシーンを集めたもので、すべての情報が動画の続きで繰り返されます。",
+    "@sponsorBlockCategoryPreviewDescription": {
+        "description": "Sponsorblock 'Preview' Category description"
+    },
+    "returnYoutubeDislikeDescription": "API を介し動画の低評価の推定値を表示: API 提供元 returnyoutubedislike.com",
+    "@returnYoutubeDislikeDescription": {
+        "description": "ReturnYoutubeDislike setting description"
+    },
+    "wizardIntro": "公開サーバーを選ぶか自分のものを追加します。(設定から変更可能)",
+    "@wizardIntro": {
+        "description": "Welcome message on frst time use"
+    },
+    "topSorting": "高評価",
+    "@topSorting": {
+        "description": "Content sorting: top"
+    },
+    "selectBrowsingCountry": "閲覧したい国を選択",
+    "@selectBrowsingCountry": {
+        "description": "Select country for trending content"
+    },
+    "browsing": "閲覧",
+    "@browsing": {
+        "description": "video browsing preferences"
+    },
+    "sponsorSkipped": "不要シーンを飛ばしました",
+    "@sponsorSkipped": {
+        "description": "When a sponsor segment is skipped thanks to sponsor block"
+    },
+    "sponsorBlockDescription": "みんなが登録した広告シーンを飛ばします",
+    "@sponsorBlockDescription": {
+        "description": "Sponsorblock setting description"
+    },
+    "useDash": "DASHを使用",
+    "@useDash": {
+        "description": "Label on video options if a user wants to switch to dash urls instead of the regular quality selection"
+    },
+    "useDashDescription": "DASHの適応的なストリーミングはたまに問題を起こすので、Youtubeが帯域制限を行っていることがあります。",
+    "@useDashDescription": {
+        "description": "Description for dash in the settings screen"
+    },
+    "videoPlayer": "動画プレイヤー",
+    "@videoPlayer": {
+        "description": "Title for video player related options"
+    },
+    "useProxy": "動画視聴にプロキシを経由",
+    "@useProxy": {
+        "description": "label for settings switch to proxy videos from server"
+    },
+    "pressDownToShowSettings": "下を押して、設定を表示",
+    "@pressDownToShowSettings": {
+        "description": "Instruction on how to show video settings when playing a video on TV"
+    },
+    "quality": "画質",
+    "@quality": {
+        "description": "Name of TV ui video settings"
+    },
+    "audio": "音声",
+    "@audio": {
+        "description": "Name TV ui audio settings"
+    },
+    "subtitles": "字幕",
+    "@subtitles": {
+        "description": "Name of TV ui subtitles settings"
+    },
+    "playbackSpeed": "再生速度",
+    "@playbackSpeed": {
+        "description": "Name of TV ui Playback speed"
+    },
+    "blackBackgroundDescription": "ダークテーマをOLED ディスプレイで使うのに最適",
+    "@blackBackgroundDescription": {
+        "description": "Description for dark background setting"
+    },
+    "rememberSubtitleLanguage": "字幕の言語を記憶",
+    "@rememberSubtitleLanguage": {
+        "description": "Settings label for remembering subtitle language"
+    },
+    "rememberSubtitleLanguageDescription": "字幕が利用可能なら、最後に選択した言語を自動で設定します",
+    "@rememberSubtitleLanguageDescription": {
+        "description": "Settings description for remembering subtitle language"
+    },
+    "videoListed": "公開",
+    "@videoListed": {
+        "description": "Status of a publicly available video"
+    },
+    "videoUnlisted": "限定公開",
+    "@videoUnlisted": {
+        "description": "Status of a video that is only accessible by link"
+    },
+    "videoIsFamilyFriendly": "家族向け",
+    "@videoIsFamilyFriendly": {
+        "description": "Displayed only when a video is family friendly"
+    },
+    "subtitleFontSize": "字幕の文字の大きさ",
+    "@subtitleFontSize": {
+        "description": "Settings label for the size of the subtitles"
+    },
+    "subtitleFontSizeDescription": "この端末上で字幕の文字が大きい・小さい場合に変更できます",
+    "@subtitleFontSizeDescription": {
+        "description": "Settings description for subtitle size"
+    },
+    "skipSslVerification": "SSL認証を省略",
+    "@skipSslVerification": {
+        "description": "Setting label to skip ssl certification verification"
+    },
+    "skipSslVerificationDescription": "自己署名のSSL証明書を使用、またはサーバーでSSL関連の問題がある際に。",
+    "@skipSslVerificationDescription": {
+        "description": "Setting description for the skip ssl certification verification"
+    },
+    "searchHistory": "検索履歴",
+    "@searchHistory": {
+        "description": "Settings label for search history"
+    },
+    "searchHistoryLimitDescription": "候補に表示する過去の検索語句の数",
+    "@searchHistoryLimitDescription": {
+        "description": "Settings label for search history limit description"
+    },
+    "clearSearchHistory": "検索履歴を消去",
+    "@clearSearchHistory": {
+        "description": "Settings label for clearing search history"
+    },
+    "autoplayVideoOnLoad": "読み込んだ動画を自動再生",
+    "@autoplayVideoOnLoad": {
+        "description": "Label for settings to enable autoplay when a video loads"
+    },
+    "autoplayVideoOnLoadDescription": "動画の読み込み後に自動的に再生を開始します",
+    "@autoplayVideoOnLoadDescription": {
+        "description": "Description for the autoplay video on load setting"
+    },
+    "tapToManage": "タップで設定",
+    "@tapToManage": {
+        "description": "Text shown below a server in the 'Your servers' list"
+    },
+    "authentication": "認証",
+    "@authentication": {
+        "description": "Label for server settings related to authentications"
+    },
+    "tokenLoginDescription": "推奨するログイン方法です",
+    "@tokenLoginDescription": {
+        "description": "Recommended way to log in"
+    },
+    "cookieLoginDescription": "トークン認証に問題がある際にこの方法を使用します",
+    "@cookieLoginDescription": {
+        "description": "Cookie log in description"
+    },
+    "logout": "ログアウト",
+    "@logout": {
+        "description": "CTA to logout of a server"
+    },
+    "username": "ユーザー名",
+    "@username": {
+        "description": "Username label for login to a server"
+    },
+    "password": "パスワード",
+    "@password": {
+        "description": "Password label for login to a server"
+    },
+    "wrongUsernamePassword": "ユーザー名かパスワードが間違っています",
+    "@wrongUsernamePassword": {
+        "description": "Error message when authentication fails"
+    },
+    "tokenLogin": "トークンでログイン",
+    "@tokenLogin": {
+        "description": "Textto login to a server using the recommended way"
+    },
+    "videoQueue": "動画再生待ち",
+    "@videoQueue": {
+        "description": "Label for button to display the video queue"
+    },
+    "addToQueueList": "再生待ちに追加",
+    "@addToQueueList": {
+        "description": "Label on button to add a video to the queue list"
+    },
+    "addRecommendedToQueue": "次のおすすめを自動再生",
+    "@addRecommendedToQueue": {
+        "description": "Switch when playing a video to automatically add the recommended videos to the video queue"
+    },
+    "appLanguage": "アプリの表示言語",
+    "@appLanguage": {
+        "description": "Select app language"
+    },
+    "themeBrightness": "テーマ",
+    "@themeBrightness": {
+        "description": "Ask the user to user dark / light / system theme"
+    },
+    "requiresRestart": "アプリの再起動が必要",
+    "@requiresRestart": {
+        "description": "Requires app restart label"
+    },
+    "sponsorBlockCategoryMusicOffTopicDescription": "ミュージックビデオが対象です。他のカテゴリーに分類できないミュージックビデオのシーンにのみ使用されます。",
+    "@sponsorBlockCategoryMusicOffTopicDescription": {
+        "description": "Only for use in music videos. This only should be used for sections of music videos that aren't already covered by another category."
+    },
+    "logsCopied": "ログをクリップボードにコピー",
+    "@logsCopied": {
+        "description": "Message to tell user that logs have been copied to the clipboard"
+    },
+    "appLogs": "アプリのログ",
+    "@appLogs": {
+        "description": "Title for settings that leads to application logs"
+    },
+    "copyToClipBoard": "クリップボードにコピー",
+    "@copyToClipBoard": {
+        "description": "Text to copy something to clipboard"
+    },
+    "appLogsDescription": "アプリで何が起きたかのログを取得。問題の報告に役立ちます",
+    "@appLogsDescription": {
+        "description": "Description of the app log settings"
+    },
+    "redirectInvidiousLink": "Invidious 転送リンクを共有",
+    "@redirectInvidiousLink": {
+        "description": "asking user to share redirecting invidious link"
+    },
+    "rememberPlaybackSpeed": "再生速度を記憶",
+    "@rememberPlaybackSpeed": {
+        "description": "Setting label for remembering playback speed"
+    },
+    "videoFiltered": "次の理由で動画をフィルター済み:",
+    "@videoFiltered": {
+        "description": "Label shown on video list when it is filtered out"
+    },
+    "channel": "チャンネル",
+    "@channel": {
+        "description": "A single channel"
+    },
+    "videoFilterOperationHigherThan": "より多い",
+    "@videoFilterOperationHigherThan": {
+        "description": "Label for video filter operation Higher than"
+    },
+    "rememberPlaybackSpeedDescription": "最後に選択した再生速度を自動で設定",
+    "@rememberPlaybackSpeedDescription": {
+        "description": "Settings description for remembering playback speed"
+    },
+    "playNext": "次に再生",
+    "@playNext": {
+        "description": "Label to play the video after the current one."
+    },
+    "videoFilterValue": "値",
+    "@videoFilterValue": {
+        "description": "Label for filter value"
+    },
+    "videoFilterType": "種類",
+    "@videoFilterType": {
+        "description": "Label for filter type"
+    },
+    "videoFilterAllChannels": "すべてのチャンネル",
+    "@videoFilterAllChannels": {
+        "description": "Title for the sections that applies to all channels"
+    },
+    "save": "保存",
+    "@save": {
+        "description": "Text for save action"
+    },
+    "videoFilterHideLabel": "非表示",
+    "@videoFilterHideLabel": {
+        "description": "Label to hide videos"
+    },
+    "videoFilterHide": "フィルタリングされた動画を非表示",
+    "@videoFilterHide": {
+        "description": "Label for settings to hide filtered videos"
+    },
+    "videoFilterOperationContains": "含む",
+    "@videoFilterOperationContains": {
+        "description": "Label for video filter operation Contains"
+    },
+    "videoFilterNoFilters": "動画のフィルターなし。+ のタップで、フィルター追加。",
+    "@videoFilterNoFilters": {
+        "description": "Label when there are no video filters"
+    },
+    "videoFilterTypeVideoLength": "動画の長さ (秒)",
+    "@videoFilterTypeVideoLength": {
+        "description": "Label for video filter video length"
+    },
+    "videoFilterTypeChannelName": "チャンネル名",
+    "@videoFilterTypeChannelName": {
+        "description": "Label for video filter channel name"
+    },
+    "videoFilterTypeVideoTitle": "動画の題名",
+    "@videoFilterTypeVideoTitle": {
+        "description": "Label for video filter video title"
+    },
+    "videoFilterHideAllFromChannel": "チャンネルのすべての動画をフィルタリング",
+    "@videoFilterHideAllFromChannel": {
+        "description": "Label for video filter switch to allow to hide all videos from a channel"
+    },
+    "playNextAddedToQueue": "動画は次に再生されます",
+    "@playNextAddedToQueue": {
+        "description": "Pop up message to confirm that the video has been properly set to play next"
+    },
+    "addToPlaylist": "再生リストに追加",
+    "@addToPlaylist": {
+        "description": "Label to add a video to a playlist"
+    },
+    "lockFullScreenToLandscapeDescription": "幅広映像は横向き、自撮り映像は縦向きと、動画形式よって全画面の向きロック",
+    "@lockFullScreenToLandscapeDescription": {
+        "description": "Setting description for forcing video to landscape when in full screen"
+    },
+    "lockFullScreenToLandscape": "アスペクト比に従い全画面の向きをロック",
+    "@lockFullScreenToLandscape": {
+        "description": "Title to force full screen to landscape"
+    },
+    "editVideoFilter": "フィルターの編集",
+    "@editVideoFilter": {
+        "description": "Title when editting a filter"
+    },
+    "videoFilterOperation": "比較",
+    "@videoFilterOperation": {
+        "description": "Label for filter operation"
+    },
+    "addVideoFilter": "フィルターを作成",
+    "@addVideoFilter": {
+        "description": "Title when creating a new filter"
+    },
+    "videoFilters": "動画のフィルター",
+    "@videoFilters": {
+        "description": "Title for video filter settings"
+    },
+    "optional": "任意",
+    "@optional": {
+        "description": "Optional label"
+    },
+    "videoFiltersSettingTileDescriptions": "動画のフィルタリング規則を定義",
+    "@videoFiltersSettingTileDescriptions": {
+        "description": "Description for the main settings page"
+    },
+    "videoFilterFilterLabel": "不明確に",
+    "@videoFilterFilterLabel": {
+        "description": "Label to filter videos"
+    },
+    "videoFiltersExplanation": "以下に定義したフィルタにより、アプリ内のすべての動画フィードから動画を非表示または不明確にします。例えば、スポーツのネタバレや、特定のチャンネルのショート動画を非表示にしたりできます。",
+    "@videoFiltersExplanation": {
+        "description": "Description on how filter work"
+    },
+    "videoFilterDescriptionString": "{type} ''{value}'' {operation}動画を{hideOrFilter}。",
+    "@videoFilterDescriptionString": {
+        "description": "Human readable description of a video filter, in this case is it for string comparison, example: Hide videos where the name of the video does not contain the following string 'test' (Do not translate text between { })",
+        "placeholders": {
+            "hideOrFilter": {
+                "type": "String",
+                "example": "Hide"
+            },
+            "type": {
+                "type": "String",
+                "example": "video title"
+            },
+            "operation": {
+                "type": "String",
+                "example": "does not contain"
+            },
+            "value": {
+                "type": "String",
+                "example": "some filter text"
+            }
+        }
+    },
+    "videoFilterEditDescription": "一覧から動画をフィルタリングするために、任意でチャンネルと、フィルターの種類、比較、値を指定します。例「種類: 動画の題名、比較: 含む、値: テスト」は、題名に「テスト」を含むすべての動画を除外します。",
+    "@videoFilterEditDescription": {
+        "description": "Descriptive test for video filter set up"
+    },
+    "videoFilterOperationLowerThan": "より少ない",
+    "@videoFilterOperationLowerThan": {
+        "description": "Label for video filter operation Lower than"
+    },
+    "videoFilterOperationNotContain": "含まない",
+    "@videoFilterOperationNotContain": {
+        "description": "Label for video filter operation Does not contain"
+    },
+    "videoFilterTapToReveal": "タップで表示",
+    "@videoFilterTapToReveal": {
+        "description": "Label to tell user to tap to show a filtered video"
+    },
+    "videoFilterHideDescription": "標準では、フィルターされた動画は非表示ではなく、理由と共に不明確に表示されます。この設定は、フィルタリングされた動画を一覧から除去します。",
+    "@videoFilterHideDescription": {
+        "description": ""
+    },
+    "fillFullscreen": "画面に合わせ映像を最大化",
+    "@fillFullscreen": {
+        "description": "Title to maximize video to fit screen"
+    },
+    "fillFullscreenDescription": "横向き表示では画面全体に映像が広がるよう調整",
+    "@fillFullscreenDescription": {
+        "description": "Setting description for filling video to screen in landscape"
+    },
+    "videoAddedToQueue": "動画をキューに追加しました",
+    "@videoAddedToQueue": {
+        "description": "Pop up message when a video was added at the end of the video queue"
+    },
+    "shareLinkWithTimestamp": "再生位置の情報を追加",
+    "@shareLinkWithTimestamp": {
+        "description": "asking user to share link along with timestamp"
+    },
+    "videoAlreadyDownloaded": "ダウンロード済みの動画です",
+    "@videoAlreadyDownloaded": {
+        "description": "Message when a user tries to download a video he already has"
+    },
+    "videoDownloadStarted": "動画のダウンロード開始",
+    "@videoDownloadStarted": {
+        "description": "Message when a video starts being downloaded"
+    },
+    "downloadsPlayAll": "すべて再生",
+    "@downloadsPlayAll": {
+        "description": "Button to play all downloaded videos"
+    },
+    "videoFailedDownloadRetry": "ダウンロード失敗。タップで再試行",
+    "@videoFailedDownloadRetry": {
+        "description": "Shown on download manager when a download fails and prompt the user to retry"
+    },
+    "noDownloadedVideos": "ダウンロードした動画なし。ダウンロードするには、一覧の動画を長押し、または動画の画面にあるダウンロードを押します",
+    "@noDownloadedVideos": {
+        "description": "Message showing when the user goes to the download screen but there are no offline videos."
+    },
+    "download": "ダウンロード",
+    "@download": {
+        "description": "A single download or CTA for downloading a video"
+    },
+    "downloads": "ダウンロード一覧",
+    "@downloads": {
+        "description": "Downloads"
+    },
+    "videoDownloadAudioOnly": "音声のみ",
+    "@videoDownloadAudioOnly": {
+        "description": "Label for toggle to download audio only "
+    },
+    "itemlistErrorGeneric": "データを取得できませんでした",
+    "@itemlistErrorGeneric": {
+        "description": "Error showing when the data can't be fetch"
+    },
+    "itemListErrorInvalidScope": "視聴する権限がありません。トークンでログインしてるなら、ログアウトし再びログインしてみてください",
+    "@itemListErrorInvalidScope": {
+        "description": "Error when the user doesn't have the proper scope to its current token"
+    },
+    "videoFilterWholeChannel": "{hideOrFilter} このチャンネルの全動画",
+    "@videoFilterWholeChannel": {
+        "description": "Label for whole channel filtering",
+        "placeholders": {
+            "hideOrFilter": {
+                "type": "String",
+                "example": "Hide"
+            }
+        }
+    },
+    "noSubscriptions": "登録チャンネルなし。動画を探し、好きなチャンネルを登録できます。",
+    "@noSubscriptions": {
+        "description": "Message when the user has no subs"
+    },
+    "unSubscribeQuestion": "登録を解除しますか？",
+    "@unSubscribeQuestion": {
+        "description": "Title for dialog if a user wants to unsubscribe in the subscribtion management screen"
+    },
+    "clearHistoryQuestion": "履歴を消去しますか？",
+    "@clearHistoryQuestion": {},
+    "history": "履歴",
+    "@history": {
+        "description": "User view history label"
+    },
+    "noHistory": "視聴履歴なし。動画を視聴すると表示されます",
+    "@noHistory": {
+        "description": "Message when the user visits the history tab but it's empty"
+    },
+    "manageSubscriptions": "登録チャンネルの管理",
+    "@manageSubscriptions": {
+        "description": "Title of manage subscriptions page"
+    },
+    "youCanSubscribeAgainLater": "いつでも再びチャンネル登録できます",
+    "@youCanSubscribeAgainLater": {
+        "description": "Text for the unscubscribe confirmation dialog"
+    },
+    "clearHistoryQuestionExplanation": "使用している Invidious のインスタンスにあるアカウントの視聴履歴が消去されます。元に戻せません。",
+    "@clearHistoryQuestionExplanation": {
+        "description": "Message for dialog before clearing full viewing history"
     }
-  },
-  "whenAppStartsShow": "アプリ起動時の表示…",
-  "@whenAppStartsShow": {
-    "description": "Setting title for selecting the screen to show on start"
-  },
-  "servers": "サーバー",
-  "@servers": {
-    "description": "Server management settings category"
-  },
-  "manageServers": "サーバーの管理",
-  "@manageServers": {
-    "description": "Settings to manage servers"
-  },
-  "about": "情報",
-  "@about": {
-    "description": "About"
-  },
-  "build": "ビルド",
-  "@build": {
-    "description": "build label"
-  },
-  "name": "名前",
-  "@name": {
-    "description": "NAme label"
-  },
-  "delete": "削除",
-  "@delete": {
-    "description": "Delete label"
-  },
-  "notLoggedIn": "ログインしていません",
-  "@notLoggedIn": {
-    "description": "Label when the user is not logged in to the server"
-  },
-  "noVideoInPlayList": "再生リストに動画がありません",
-  "@noVideoInPlayList": {
-    "description": "When no videos in the playlist"
-  },
-  "deletePlayListQ": "再生リストを削除しますか？",
-  "@deletePlayListQ": {
-    "description": "Ask user to delete a playlist"
-  },
-  "playlists": "再生リスト",
-  "@playlists": {
-    "description": "User playlists"
-  },
-  "subscriptions": "登録チャンネル",
-  "@subscriptions": {
-    "description": "User subscriptions"
-  },
-  "trending": "急上昇",
-  "@trending": {
-    "description": "Trending videos title"
-  },
-  "addPlayList": "再生リストを追加",
-  "@addPlayList": {
-    "description": "Title for add playlist dialog"
-  },
-  "error": "エラー",
-  "@error": {},
-  "logIn": "ログイン",
-  "@logIn": {
-    "description": "CTA to log in to server"
-  },
-  "publicServers": "公開サーバー",
-  "@publicServers": {
-    "description": "Public servers label"
-  },
-  "loadingPublicServer": "公開サーバーを読み込み中",
-  "@loadingPublicServer": {
-    "description": "Message telling users the app is loading the list of public servers"
-  },
-  "addServerHelpText": "+ ボタンで所有するサーバーを追加するか、公開サーバーをタップし追加します。",
-  "@addServerHelpText": {
-    "description": "label for when the user hasn't chosen a server yet"
-  },
-  "tapToAddServer": "タップでサーバーを一覧に追加",
-  "@tapToAddServer": {
-    "description": "public server description"
-  },
-  "publicServersError": "公開サーバーの一覧を取得できませんでした。タップで再試行。",
-  "@publicServersError": {
-    "description": "Error message when trying to get public servers but it failed"
-  },
-  "appearance": "外観",
-  "@appearance": {
-    "description": "Settings category title"
-  },
-  "useDynamicTheme": "ダイナミックカラー",
-  "@useDynamicTheme": {
-    "description": ""
-  },
-  "nSubscribers": "{count, select, no{登録者なし} other{登録者 {count} 人}}",
-  "@nSubscribers": {
-    "description": "number of subscribers",
-    "placeholders": {
-      "count": {
-        "type": "String"
-      }
-    }
-  },
-  "shareYoutubeLink": "YouTube リンクを共有",
-  "@shareYoutubeLink": {
-    "description": "asking user to share youtube link"
-  },
-  "shareInvidiousLink": "Invidious リンクを共有",
-  "@shareInvidiousLink": {
-    "description": "asking user to share invidious link"
-  },
-  "useDynamicThemeDescription": "Material You の配色を使用 (Android 12 以上で利用可能)",
-  "@useDynamicThemeDescription": {
-    "description": ""
-  },
-  "nVideos": "{count, plural, =0{動画なし} =1{1 件の動画} other{{count} 件の動画}}",
-  "@nVideos": {
-    "description": "One or more videos",
-    "placeholders": {
-      "count": {
-        "type": "num",
-        "format": "compact"
-      }
-    }
-  },
-  "publicPlaylist": "公開",
-  "@publicPlaylist": {
-    "description": "Public playlist"
-  },
-  "unlistedPlaylist": "限定公開",
-  "@unlistedPlaylist": {
-    "description": "Unlisted playlist"
-  },
-  "videos": "動画",
-  "@videos": {
-    "description": "Videos label"
-  },
-  "streams": "配信",
-  "@streams": {
-    "description": "Streams label"
-  },
-  "videoAddedToPlaylist": "動画を再生リストに追加しました",
-  "@videoAddedToPlaylist": {
-    "description": "Pop up message when a video was added to a playlist"
-  },
-  "selectPlaylist": "再生リストを選択",
-  "@selectPlaylist": {
-    "description": "Title when users wants to add a video to a playlist"
-  },
-  "useSponsorBlock": "SponsorBlock を使用",
-  "@useSponsorBlock": {
-    "description": "label for sponsorblock checkbox"
-  },
-  "yourServers": "使用するサーバー",
-  "@yourServers": {
-    "description": "Your servers label"
-  },
-  "addServer": "サーバーを追加",
-  "@addServer": {
-    "description": "Add server label"
-  },
-  "useThisServer": "このサーバーを使用",
-  "@useThisServer": {
-    "description": "Use this server label"
-  },
-  "noPlaylists": "再生リストなし",
-  "@noPlaylists": {
-    "description": "when there are no playlists to display"
-  },
-  "latestVideos": "最新の動画",
-  "@latestVideos": {
-    "description": "Latest channel videos"
-  },
-  "subscribed": "登録済み",
-  "@subscribed": {
-    "description": "When the user is subscribed to a channel"
-  },
-  "nReplies": "{count, plural, =0{返信なし} =1{1 件の返信} other{{count} 件の返信}}",
-  "@nReplies": {
-    "description": "number of replies to a comment",
-    "placeholders": {
-      "count": {
-        "type": "num",
-        "format": "compact"
-      }
-    }
-  },
-  "invalidInvidiousServer": "無効な Invidious サーバー",
-  "@invalidInvidiousServer": {
-    "description": "Error when the user tries to add a server that is not a proper or reachable invidious server"
-  },
-  "version": "バージョン",
-  "@version": {
-    "description": "version label"
-  },
-  "package": "パッケージ",
-  "@package": {
-    "description": "package label"
-  },
-  "privatePlaylist": "非公開",
-  "@privatePlaylist": {
-    "description": "Private playlist"
-  },
-  "cancel": "キャンセル",
-  "@cancel": {
-    "description": "Cancel button label"
-  },
-  "add": "追加",
-  "@add": {
-    "description": "Add button abel"
-  },
-  "info": "情報",
-  "@info": {
-    "description": "Info label"
-  },
-  "loggedIn": "ログイン中",
-  "@loggedIn": {
-    "description": "Label to tell the user that he is logged in to the server"
-  },
-  "newSorting": "新しい順",
-  "@newSorting": {
-    "description": "Content sorting: new"
-  },
-  "removeFromPlayList": "再生リストから削除",
-  "@removeFromPlayList": {
-    "description": "Menu item description to show remove a video from a playlist"
-  },
-  "irreversibleAction": "この操作は取り消せません",
-  "@irreversibleAction": {
-    "description": "Tell the user that the action cannot be undone"
-  },
-  "channels": "チャンネル",
-  "@channels": {
-    "description": "Channels label"
-  },
-  "errorAddingVideoToPlaylist": "再生リストに動画を追加する際にエラーが発生",
-  "@errorAddingVideoToPlaylist": {
-    "description": "Error while adding video to playlist"
-  },
-  "subscribe": "チャンネル登録",
-  "@subscribe": {
-    "description": "Label for user to subscribe to a channel"
-  },
-  "noChannels": "チャンネルなし",
-  "@noChannels": {
-    "description": "when there are no channels to display"
-  },
-  "createNewPlaylist": "新しい再生リスト",
-  "@createNewPlaylist": {
-    "description": "Button label to create a new playlist when the user wants to add a video to a playlist"
-  },
-  "sponsorBlockCategoryUnpaidSelfPromo": "無報酬/自己宣伝",
-  "@sponsorBlockCategoryUnpaidSelfPromo": {
-    "description": "Sponsor block 'Unpaid/Self promotion' Category"
-  },
-  "sponsorBlockCategoryInteractionDescription": "コンテンツの途中で「いいね」「登録」「フォロー」の簡単な依頼がある。長かったり、何か具体的な事に関するものであれば、代わりに自己宣伝に分類されます。",
-  "@sponsorBlockCategoryInteractionDescription": {
-    "description": "Sponsor block 'Interaction' Category description"
-  },
-  "sponsorBlockCategoryIntro": "合間 / 導入アニメ",
-  "@sponsorBlockCategoryIntro": {
-    "description": "Sponsorblock 'Intro' Category"
-  },
-  "sponsorBlockCategoryOutro": "終了画面/クレジット",
-  "@sponsorBlockCategoryOutro": {
-    "description": "Outro block 'Outro' Category"
-  },
-  "sponsorBlockCategoryFiller": "無関係の談話/冗談",
-  "@sponsorBlockCategoryFiller": {
-    "description": "Sponsorblock 'Filler' Category"
-  },
-  "sponsorBlockCategoryMusicOffTopic": "音楽: 非音楽シーン",
-  "@sponsorBlockCategoryMusicOffTopic": {
-    "description": "Sponsorblock 'MusicOffTopic' Category"
-  },
-  "sponsorBlockCategoryPreview": "予告/あらすじ",
-  "@sponsorBlockCategoryPreview": {
-    "description": "Sponsorblock 'Preview' Category"
-  },
-  "sponsorBlockSettingsQuickDescription": "飛ばしたいシーンの種類を選択",
-  "@sponsorBlockSettingsQuickDescription": {
-    "description": "Small description of what the sponsor block settings do"
-  },
-  "sponsorBlockCategorySponsor": "協賛",
-  "@sponsorBlockCategorySponsor": {
-    "description": "Sponsor block 'Sponsor' Category"
-  },
-  "sponsorBlockCategorySponsorDescription": "報酬のある販売促進、紹介、直接広告です。自己宣伝、また好きな動機/製作者/サイト/製品への無償の賞賛ではありません。",
-  "@sponsorBlockCategorySponsorDescription": {
-    "description": "Sponsor block 'Sponsor' Category description"
-  },
-  "cookieLogin": "クッキーでログイン",
-  "@cookieLogin": {
-    "description": "Text to login to a server using the cookie jar method"
-  },
-  "followSystem": "システムの設定に従う",
-  "@followSystem": {
-    "description": "Follow system label"
-  },
-  "enableSearchHistory": "検索履歴を有効化",
-  "@enableSearchHistory": {
-    "description": "Settings label for enabling search history"
-  },
-  "searchHistoryDescription": "検索履歴の設定",
-  "@searchHistoryDescription": {
-    "description": "Description for search history settings"
-  },
-  "searchHistoryLimit": "検索履歴の上限",
-  "@searchHistoryLimit": {
-    "description": "Settings label for search history limit"
-  },
-  "themeLight": "ライト",
-  "@themeLight": {
-    "description": "Light theme"
-  },
-  "themeDark": "ダーク",
-  "@themeDark": {
-    "description": "Dark theme"
-  },
-  "search": "検索",
-  "@search": {
-    "description": "search title"
-  },
-  "sponsorBlockCategoryUnpaidSelfPromoDescription": "無報酬または自己宣伝ということを除き「協賛」に似ています。商品、寄付、協力者に関する情報を含みます。 ",
-  "@sponsorBlockCategoryUnpaidSelfPromoDescription": {
-    "description": "Sponsor block 'Unpaid/Self promotion' Category description"
-  },
-  "sponsorBlockCategoryInteraction": "操作の依頼 (いいね・登録など)",
-  "@sponsorBlockCategoryInteraction": {
-    "description": "Sponsor block 'Interaction' Category"
-  },
-  "sponsorBlockCategoryOutroDescription": "クレジットやYouTubeの終了画面です。情報を含む結論のシーンではありません。",
-  "@sponsorBlockCategoryOutroDescription": {
-    "description": "Outro block 'Outro' Category description"
-  },
-  "sponsorBlockCategoryIntroDescription": "中身のあるコンテンツがない合間のシーン。一時停止、静止画、アニメの繰り返しなど。情報を含む遷移シーンではありません。",
-  "@sponsorBlockCategoryIntroDescription": {
-    "description": "Sponsorblock 'Intro' Category description"
-  },
-  "sponsorBlockCategoryFillerDescription": "動画の主な内容を理解するのに不要な、つなぎやユーモアとして追加された脱線したシーンです。文脈や背景の詳細を提供するシーンは含まれません。または楽しめないシーンの非常に強引な分類です。",
-  "@sponsorBlockCategoryFillerDescription": {
-    "description": "Sponsorblock 'Filler' Category description"
-  },
-  "blackBackground": "真っ黒な背景",
-  "@blackBackground": {
-    "description": "Settings name for black background"
-  },
-  "useProxyDescription": "プロキシを介してサーバーから動画ストリームを受信。YouTubeによる地域やISPの制限を回避します",
-  "@useProxyDescription": {
-    "description": "Description for the use proxy settings"
-  },
-  "shorts": "ショート",
-  "@shorts": {
-    "description": "Youtube shorts"
-  },
-  "searchSortRelevance": "関連度",
-  "@searchSortRelevance": {
-    "description": "Sort search by relevance"
-  },
-  "searchSortRating": "評価",
-  "@searchSortRating": {
-    "description": "Sort search by rating"
-  },
-  "searchSortUploadDate": "アップロード日",
-  "@searchSortUploadDate": {
-    "description": "Sort search by upload date"
-  },
-  "searchSortViewCount": "視聴回数",
-  "@searchSortViewCount": {
-    "description": "Sort search by view count"
-  },
-  "sponsorBlockCategoryPreviewDescription": "この動画や他の一連の動画で起こるシーンを集めたもので、すべての情報が動画の続きで繰り返されます。",
-  "@sponsorBlockCategoryPreviewDescription": {
-    "description": "Sponsorblock 'Preview' Category description"
-  },
-  "returnYoutubeDislikeDescription": "API を介し動画の低評価の推定値を表示: API 提供元 returnyoutubedislike.com",
-  "@returnYoutubeDislikeDescription": {
-    "description": "ReturnYoutubeDislike setting description"
-  },
-  "wizardIntro": "公開サーバーを選ぶか自分のものを追加します。(設定から変更可能)",
-  "@wizardIntro": {
-    "description": "Welcome message on frst time use"
-  },
-  "topSorting": "高評価",
-  "@topSorting": {
-    "description": "Content sorting: top"
-  },
-  "selectBrowsingCountry": "閲覧したい国を選択",
-  "@selectBrowsingCountry": {
-    "description": "Select country for trending content"
-  },
-  "browsing": "閲覧",
-  "@browsing": {
-    "description": "video browsing preferences"
-  },
-  "sponsorSkipped": "不要シーンを飛ばしました",
-  "@sponsorSkipped": {
-    "description": "When a sponsor segment is skipped thanks to sponsor block"
-  },
-  "sponsorBlockDescription": "みんなが登録した広告シーンを飛ばします",
-  "@sponsorBlockDescription": {
-    "description": "Sponsorblock setting description"
-  },
-  "useDash": "DASHを使用",
-  "@useDash": {
-    "description": "Label on video options if a user wants to switch to dash urls instead of the regular quality selection"
-  },
-  "useDashDescription": "DASHの適応的なストリーミングはたまに問題を起こすので、Youtubeが帯域制限を行っていることがあります。",
-  "@useDashDescription": {
-    "description": "Description for dash in the settings screen"
-  },
-  "videoPlayer": "動画プレイヤー",
-  "@videoPlayer": {
-    "description": "Title for video player related options"
-  },
-  "useProxy": "動画視聴にプロキシを経由",
-  "@useProxy": {
-    "description": "label for settings switch to proxy videos from server"
-  },
-  "pressDownToShowSettings": "下を押して、設定を表示",
-  "@pressDownToShowSettings": {
-    "description": "Instruction on how to show video settings when playing a video on TV"
-  },
-  "quality": "画質",
-  "@quality": {
-    "description": "Name of TV ui video settings"
-  },
-  "audio": "音声",
-  "@audio": {
-    "description": "Name TV ui audio settings"
-  },
-  "subtitles": "字幕",
-  "@subtitles": {
-    "description": "Name of TV ui subtitles settings"
-  },
-  "playbackSpeed": "再生速度",
-  "@playbackSpeed": {
-    "description": "Name of TV ui Playback speed"
-  },
-  "blackBackgroundDescription": "ダークテーマをOLED ディスプレイで使うのに最適",
-  "@blackBackgroundDescription": {
-    "description": "Description for dark background setting"
-  },
-  "rememberSubtitleLanguage": "字幕の言語を記憶",
-  "@rememberSubtitleLanguage": {
-    "description": "Settings label for remembering subtitle language"
-  },
-  "rememberSubtitleLanguageDescription": "字幕が利用可能なら、最後に選択した言語を自動で設定します",
-  "@rememberSubtitleLanguageDescription": {
-    "description": "Settings description for remembering subtitle language"
-  },
-  "videoListed": "公開",
-  "@videoListed": {
-    "description": "Status of a publicly available video"
-  },
-  "videoUnlisted": "限定公開",
-  "@videoUnlisted": {
-    "description": "Status of a video that is only accessible by link"
-  },
-  "videoIsFamilyFriendly": "家族向け",
-  "@videoIsFamilyFriendly": {
-    "description": "Displayed only when a video is family friendly"
-  },
-  "subtitleFontSize": "字幕の文字の大きさ",
-  "@subtitleFontSize": {
-    "description": "Settings label for the size of the subtitles"
-  },
-  "subtitleFontSizeDescription": "この端末上で字幕の文字が大きい・小さい場合に変更できます",
-  "@subtitleFontSizeDescription": {
-    "description": "Settings description for subtitle size"
-  },
-  "skipSslVerification": "SSL認証を省略",
-  "@skipSslVerification": {
-    "description": "Setting label to skip ssl certification verification"
-  },
-  "skipSslVerificationDescription": "自己署名のSSL証明書を使用、またはサーバーでSSL関連の問題がある際に。",
-  "@skipSslVerificationDescription": {
-    "description": "Setting description for the skip ssl certification verification"
-  },
-  "searchHistory": "検索履歴",
-  "@searchHistory": {
-    "description": "Settings label for search history"
-  },
-  "searchHistoryLimitDescription": "候補に表示する過去の検索語句の数",
-  "@searchHistoryLimitDescription": {
-    "description": "Settings label for search history limit description"
-  },
-  "clearSearchHistory": "検索履歴を消去",
-  "@clearSearchHistory": {
-    "description": "Settings label for clearing search history"
-  },
-  "autoplayVideoOnLoad": "読み込んだ動画を自動再生",
-  "@autoplayVideoOnLoad": {
-    "description": "Label for settings to enable autoplay when a video loads"
-  },
-  "autoplayVideoOnLoadDescription": "動画の読み込み後に自動的に再生を開始します",
-  "@autoplayVideoOnLoadDescription": {
-    "description": "Description for the autoplay video on load setting"
-  },
-  "tapToManage": "タップで設定",
-  "@tapToManage": {
-    "description": "Text shown below a server in the 'Your servers' list"
-  },
-  "authentication": "認証",
-  "@authentication": {
-    "description": "Label for server settings related to authentications"
-  },
-  "tokenLoginDescription": "推奨するログイン方法です",
-  "@tokenLoginDescription": {
-    "description": "Recommended way to log in"
-  },
-  "cookieLoginDescription": "トークン認証に問題がある際にこの方法を使用します",
-  "@cookieLoginDescription": {
-    "description": "Cookie log in description"
-  },
-  "logout": "ログアウト",
-  "@logout": {
-    "description": "CTA to logout of a server"
-  },
-  "username": "ユーザー名",
-  "@username": {
-    "description": "Username label for login to a server"
-  },
-  "password": "パスワード",
-  "@password": {
-    "description": "Password label for login to a server"
-  },
-  "wrongUsernamePassword": "ユーザー名かパスワードが間違っています",
-  "@wrongUsernamePassword": {
-    "description": "Error message when authentication fails"
-  },
-  "tokenLogin": "トークンでログイン",
-  "@tokenLogin": {
-    "description": "Textto login to a server using the recommended way"
-  },
-  "videoQueue": "動画再生待ち",
-  "@videoQueue": {
-    "description": "Label for button to display the video queue"
-  },
-  "addToQueueList": "再生待ちに追加",
-  "@addToQueueList": {
-    "description": "Label on button to add a video to the queue list"
-  },
-  "addRecommendedToQueue": "次のおすすめを自動再生",
-  "@addRecommendedToQueue": {
-    "description": "Switch when playing a video to automatically add the recommended videos to the video queue"
-  },
-  "appLanguage": "アプリの表示言語",
-  "@appLanguage": {
-    "description": "Select app language"
-  },
-  "themeBrightness": "テーマ",
-  "@themeBrightness": {
-    "description": "Ask the user to user dark / light / system theme"
-  },
-  "requiresRestart": "アプリの再起動が必要",
-  "@requiresRestart": {
-    "description": "Requires app restart label"
-  },
-  "sponsorBlockCategoryMusicOffTopicDescription": "ミュージックビデオが対象です。他のカテゴリーに分類できないミュージックビデオのシーンにのみ使用されます。",
-  "@sponsorBlockCategoryMusicOffTopicDescription": {
-    "description": "Only for use in music videos. This only should be used for sections of music videos that aren't already covered by another category."
-  },
-  "logsCopied": "ログをクリップボードにコピー",
-  "@logsCopied": {
-    "description": "Message to tell user that logs have been copied to the clipboard"
-  },
-  "appLogs": "アプリのログ",
-  "@appLogs": {
-    "description": "Title for settings that leads to application logs"
-  },
-  "copyToClipBoard": "クリップボードにコピー",
-  "@copyToClipBoard": {
-    "description": "Text to copy something to clipboard"
-  },
-  "appLogsDescription": "アプリで何が起きたかのログを取得。問題の報告に役立ちます",
-  "@appLogsDescription": {
-    "description": "Description of the app log settings"
-  },
-  "redirectInvidiousLink": "Invidious 転送リンクを共有",
-  "@redirectInvidiousLink": {
-    "description": "asking user to share redirecting invidious link"
-  },
-  "rememberPlaybackSpeed": "再生速度を記憶",
-  "@rememberPlaybackSpeed": {
-    "description": "Setting label for remembering playback speed"
-  },
-  "videoFiltered": "次の理由で動画をフィルター済み:",
-  "@videoFiltered": {
-    "description": "Label shown on video list when it is filtered out"
-  },
-  "channel": "チャンネル",
-  "@channel": {
-    "description": "A single channel"
-  },
-  "videoFilterOperationHigherThan": "より多い",
-  "@videoFilterOperationHigherThan": {
-    "description": "Label for video filter operation Higher than"
-  },
-  "rememberPlaybackSpeedDescription": "最後に選択した再生速度を自動で設定",
-  "@rememberPlaybackSpeedDescription": {
-    "description": "Settings description for remembering playback speed"
-  },
-  "playNext": "次に再生",
-  "@playNext": {
-    "description": "Label to play the video after the current one."
-  },
-  "videoFilterValue": "値",
-  "@videoFilterValue": {
-    "description": "Label for filter value"
-  },
-  "videoFilterType": "種類",
-  "@videoFilterType": {
-    "description": "Label for filter type"
-  },
-  "videoFilterAllChannels": "すべてのチャンネル",
-  "@videoFilterAllChannels": {
-    "description": "Title for the sections that applies to all channels"
-  },
-  "save": "保存",
-  "@save": {
-    "description": "Text for save action"
-  },
-  "videoFilterHideLabel": "非表示",
-  "@videoFilterHideLabel": {
-    "description": "Label to hide videos"
-  },
-  "videoFilterHide": "フィルタリングされた動画を非表示",
-  "@videoFilterHide": {
-    "description": "Label for settings to hide filtered videos"
-  },
-  "videoFilterOperationContains": "含む",
-  "@videoFilterOperationContains": {
-    "description": "Label for video filter operation Contains"
-  },
-  "videoFilterNoFilters": "動画のフィルターなし。+ のタップで、フィルター追加。",
-  "@videoFilterNoFilters": {
-    "description": "Label when there are no video filters"
-  },
-  "videoFilterTypeVideoLength": "動画の長さ (秒)",
-  "@videoFilterTypeVideoLength": {
-    "description": "Label for video filter video length"
-  },
-  "videoFilterTypeChannelName": "チャンネル名",
-  "@videoFilterTypeChannelName": {
-    "description": "Label for video filter channel name"
-  },
-  "videoFilterTypeVideoTitle": "動画の題名",
-  "@videoFilterTypeVideoTitle": {
-    "description": "Label for video filter video title"
-  },
-  "videoFilterHideAllFromChannel": "チャンネルのすべての動画をフィルタリング",
-  "@videoFilterHideAllFromChannel": {
-    "description": "Label for video filter switch to allow to hide all videos from a channel"
-  },
-  "playNextAddedToQueue": "動画は次に再生されます",
-  "@playNextAddedToQueue": {
-    "description": "Pop up message to confirm that the video has been properly set to play next"
-  },
-  "addToPlaylist": "再生リストに追加",
-  "@addToPlaylist": {
-    "description": "Label to add a video to a playlist"
-  },
-  "lockFullScreenToLandscapeDescription": "幅広映像は横向き、自撮り映像は縦向きと、動画形式よって全画面の向きロック",
-  "@lockFullScreenToLandscapeDescription": {
-    "description": "Setting description for forcing video to landscape when in full screen"
-  },
-  "lockFullScreenToLandscape": "アスペクト比に従い全画面の向きをロック",
-  "@lockFullScreenToLandscape": {
-    "description": "Title to force full screen to landscape"
-  },
-  "editVideoFilter": "フィルターの編集",
-  "@editVideoFilter": {
-    "description": "Title when editting a filter"
-  },
-  "videoFilterOperation": "比較",
-  "@videoFilterOperation": {
-    "description": "Label for filter operation"
-  },
-  "addVideoFilter": "フィルターを作成",
-  "@addVideoFilter": {
-    "description": "Title when creating a new filter"
-  },
-  "videoFilters": "動画のフィルター",
-  "@videoFilters": {
-    "description": "Title for video filter settings"
-  },
-  "optional": "任意",
-  "@optional": {
-    "description": "Optional label"
-  },
-  "videoFiltersSettingTileDescriptions": "動画のフィルタリング規則を定義",
-  "@videoFiltersSettingTileDescriptions": {
-    "description": "Description for the main settings page"
-  },
-  "videoFilterFilterLabel": "不明確に",
-  "@videoFilterFilterLabel": {
-    "description": "Label to filter videos"
-  },
-  "videoFiltersExplanation": "以下に定義したフィルタにより、アプリ内のすべての動画フィードから動画を非表示または不明確にします。例えば、スポーツのネタバレや、特定のチャンネルのショート動画を非表示にしたりできます。",
-  "@videoFiltersExplanation": {
-    "description": "Description on how filter work"
-  },
-  "videoFilterDescriptionString": "{type} ''{value}'' {operation}動画を{hideOrFilter}。",
-  "@videoFilterDescriptionString": {
-    "description": "Human readable description of a video filter, in this case is it for string comparison, example: Hide videos where the name of the video does not contain the following string 'test' (Do not translate text between { })",
-    "placeholders": {
-      "hideOrFilter": {
-        "type": "String",
-        "example": "Hide"
-      },
-      "type": {
-        "type": "String",
-        "example": "video title"
-      },
-      "operation": {
-        "type": "String",
-        "example": "does not contain"
-      },
-      "value": {
-        "type": "String",
-        "example": "some filter text"
-      }
-    }
-  },
-  "videoFilterEditDescription": "一覧から動画をフィルタリングするために、任意でチャンネルと、フィルターの種類、比較、値を指定します。例「種類: 動画の題名、比較: 含む、値: テスト」は、題名に「テスト」を含むすべての動画を除外します。",
-  "@videoFilterEditDescription": {
-    "description": "Descriptive test for video filter set up"
-  },
-  "videoFilterOperationLowerThan": "より少ない",
-  "@videoFilterOperationLowerThan": {
-    "description": "Label for video filter operation Lower than"
-  },
-  "videoFilterOperationNotContain": "含まない",
-  "@videoFilterOperationNotContain": {
-    "description": "Label for video filter operation Does not contain"
-  },
-  "videoFilterTapToReveal": "タップで表示",
-  "@videoFilterTapToReveal": {
-    "description": "Label to tell user to tap to show a filtered video"
-  },
-  "videoFilterHideDescription": "標準では、フィルターされた動画は非表示ではなく、理由と共に不明確に表示されます。この設定は、フィルタリングされた動画を一覧から除去します。",
-  "@videoFilterHideDescription": {
-    "description": ""
-  },
-  "fillFullscreen": "画面に合わせ映像を最大化",
-  "@fillFullscreen": {
-    "description": "Title to maximize video to fit screen"
-  },
-  "fillFullscreenDescription": "横向き表示では画面全体に映像が広がるよう調整",
-  "@fillFullscreenDescription": {
-    "description": "Setting description for filling video to screen in landscape"
-  },
-  "videoAddedToQueue": "動画をキューに追加しました",
-  "@videoAddedToQueue": {
-    "description": "Pop up message when a video was added at the end of the video queue"
-  },
-  "shareLinkWithTimestamp": "再生位置の情報を追加",
-  "@shareLinkWithTimestamp": {
-    "description": "asking user to share link along with timestamp"
-  },
-  "videoAlreadyDownloaded": "ダウンロード済みの動画です",
-  "@videoAlreadyDownloaded": {
-    "description": "Message when a user tries to download a video he already has"
-  },
-  "videoDownloadStarted": "動画のダウンロード開始",
-  "@videoDownloadStarted": {
-    "description": "Message when a video starts being downloaded"
-  },
-  "downloadsPlayAll": "すべて再生",
-  "@downloadsPlayAll": {
-    "description": "Button to play all downloaded videos"
-  },
-  "videoFailedDownloadRetry": "ダウンロード失敗。タップで再試行",
-  "@videoFailedDownloadRetry": {
-    "description": "Shown on download manager when a download fails and prompt the user to retry"
-  },
-  "noDownloadedVideos": "ダウンロードした動画なし。ダウンロードするには、一覧の動画を長押し、または動画の画面にあるダウンロードを押します",
-  "@noDownloadedVideos": {
-    "description": "Message showing when the user goes to the download screen but there are no offline videos."
-  },
-  "download": "ダウンロード",
-  "@download": {
-    "description": "A single download or CTA for downloading a video"
-  },
-  "downloads": "ダウンロード一覧",
-  "@downloads": {
-    "description": "Downloads"
-  },
-  "videoDownloadAudioOnly": "音声のみ",
-  "@videoDownloadAudioOnly": {
-    "description": "Label for toggle to download audio only "
-  },
-  "itemlistErrorGeneric": "データを取得できませんでした",
-  "@itemlistErrorGeneric": {
-    "description": "Error showing when the data can't be fetch"
-  },
-  "itemListErrorInvalidScope": "視聴する権限がありません。トークンでログインしてるなら、ログアウトし再びログインしてみてください",
-  "@itemListErrorInvalidScope": {
-    "description": "Error when the user doesn't have the proper scope to its current token"
-  },
-  "videoFilterWholeChannel": "{hideOrFilter} このチャンネルの全動画",
-  "@videoFilterWholeChannel": {
-    "description": "Label for whole channel filtering",
-    "placeholders": {
-      "hideOrFilter": {
-        "type": "String",
-        "example": "Hide"
-      }
-    }
-  },
-  "noSubscriptions": "登録チャンネルなし。動画を探し、好きなチャンネルを登録できます。",
-  "@noSubscriptions": {
-    "description": "Message when the user has no subs"
-  },
-  "unSubscribeQuestion": "登録を解除しますか？",
-  "@unSubscribeQuestion": {
-    "description": "Title for dialog if a user wants to unsubscribe in the subscribtion management screen"
-  },
-  "clearHistoryQuestion": "履歴を消去しますか？",
-  "@clearHistoryQuestion": {},
-  "history": "履歴",
-  "@history": {
-    "description": "User view history label"
-  },
-  "noHistory": "視聴履歴なし。動画を視聴すると表示されます",
-  "@noHistory": {
-    "description": "Message when the user visits the history tab but it's empty"
-  },
-  "manageSubscriptions": "登録チャンネルの管理",
-  "@manageSubscriptions": {
-    "description": "Title of manage subscriptions page"
-  },
-  "youCanSubscribeAgainLater": "いつでも再びチャンネル登録できます",
-  "@youCanSubscribeAgainLater": {
-    "description": "Text for the unscubscribe confirmation dialog"
-  },
-  "clearHistoryQuestionExplanation": "使用している Invidious のインスタンスにあるアカウントの視聴履歴が消去されます。元に戻せません。",
-  "@clearHistoryQuestionExplanation": {
-    "description": "Message for dialog before clearing full viewing history"
-  }
 }

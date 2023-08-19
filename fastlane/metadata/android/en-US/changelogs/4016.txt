@@ -1,0 +1,3 @@
+- big backend refactor, should make the app easier to keep sane to maintain as scope increases
+- standardize media controls between audio and video player to give more freedom for future changes.
+- few UI adjustments to make the app feel a bit better

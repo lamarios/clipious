@@ -8,29 +8,29 @@ import 'package:http/http.dart' as http;
 import 'package:invidious/database.dart';
 import 'package:invidious/extensions.dart';
 import 'package:invidious/globals.dart';
-import 'package:invidious/models/db/searchHistoryItem.dart';
-import 'package:invidious/models/db/videoFilter.dart';
-import 'package:invidious/models/dislike.dart';
-import 'package:invidious/models/errors/invidiousServiceError.dart';
-import 'package:invidious/models/playlist.dart';
-import 'package:invidious/models/searchResult.dart';
-import 'package:invidious/models/searchSortBy.dart';
-import 'package:invidious/models/searchType.dart';
-import 'package:invidious/models/sponsorSegment.dart';
-import 'package:invidious/models/userFeed.dart';
-import 'package:invidious/models/video.dart';
-import 'package:invidious/models/videoInList.dart';
+import 'package:invidious/playlists/models/playlist.dart';
+import 'package:invidious/search/models/db/searchHistoryItem.dart';
+import 'package:invidious/search/models/search_results.dart';
+import 'package:invidious/search/models/search_sort_by.dart';
+import 'package:invidious/search/models/search_type.dart';
+import 'package:invidious/settings/models/db/video_filter.dart';
+import 'package:invidious/settings/models/errors/invidiousServiceError.dart';
+import 'package:invidious/videos/models/dislike.dart';
+import 'package:invidious/videos/models/sponsor_segment.dart';
+import 'package:invidious/videos/models/userFeed.dart';
+import 'package:invidious/videos/models/video.dart';
+import 'package:invidious/videos/models/video_in_list.dart';
 import 'package:logging/logging.dart';
 
-import 'models/channel.dart';
-import 'models/channelPlaylists.dart';
-import 'models/channelVideos.dart';
-import 'models/db/server.dart';
-import 'models/invidiousPublicServer.dart';
-import 'models/searchSuggestion.dart';
-import 'models/sponsorSegmentTypes.dart';
-import 'models/subscription.dart';
-import 'models/videoComments.dart';
+import 'channels/models/channel.dart';
+import 'channels/models/channelPlaylists.dart';
+import 'channels/models/channelVideos.dart';
+import 'comments/models/video_comments.dart';
+import 'search/models/search_suggestion.dart';
+import 'settings/models/db/server.dart';
+import 'settings/models/invidious_public_server.dart';
+import 'subscription_management/models/subscription.dart';
+import 'videos/models/sponsor_segment_types.dart';
 
 const GET_INVIDIOUS_PUBLIC_SERVERS = 'https://api.invidious.io/instances.json';
 const GET_VIDEO = '/api/v1/videos/:id';
@@ -160,7 +160,7 @@ class Service {
   }
 
   Future<String?> logIn(String serverUrl) async {
-    String url = '$serverUrl/authorize_token?scopes=:feed,:subscriptions*,:playlists*,:history*&callback_url=clipious-auth://';
+    String url = '$serverUrl/authorize_token?scopes=:feed,:subscription_management*,:playlists*,:history*&callback_url=clipious-auth://';
     final result = await FlutterWebAuth.authenticate(url: url, callbackUrlScheme: 'clipious-auth');
 
     final token = Uri.parse(result).queryParameters['token'];

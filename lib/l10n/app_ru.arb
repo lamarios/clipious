@@ -1,99 +1,835 @@
 {
-  "trending": "Тенденции",
-  "@trending": {
-    "description": "Trending videos title"
-  },
-  "subscriptions": "Подписки",
-  "@subscriptions": {
-    "description": "User subscriptions"
-  },
-  "playlists": "Плейлисты",
-  "@playlists": {
-    "description": "User playlists"
-  },
-  "popular": "Популярное",
-  "@popular": {
-    "description": "Popular videos title"
-  },
-  "noVideoInPlayList": "Нет видео в плейлисте",
-  "@noVideoInPlayList": {
-    "description": "When no videos in the playlist"
-  },
-  "removeFromPlayList": "Удалить из плейлиста",
-  "@removeFromPlayList": {
-    "description": "Menu item description to show remove a video from a playlist"
-  },
-  "deletePlayListQ": "Удалить плейлист?",
-  "@deletePlayListQ": {
-    "description": "Ask user to delete a playlist"
-  },
-  "irreversibleAction": "Данное действие необратимо",
-  "@irreversibleAction": {
-    "description": "Tell the user that the action cannot be undone"
-  },
-  "addPlayList": "Добавить плейлист",
-  "@addPlayList": {
-    "description": "Title for add playlist dialog"
-  },
-  "playListName": "Название плейлиста",
-  "@playListName": {
-    "description": "Place holder for new playlist name text field"
-  },
-  "playlistVisibility": "Видимость",
-  "@playlistVisibility": {
-    "description": "Dropdown label for playlist visibility"
-  },
-  "publicPlaylist": "Публичный",
-  "@publicPlaylist": {
-    "description": "Public playlist"
-  },
-  "privatePlaylist": "Личный",
-  "@privatePlaylist": {
-    "description": "Private playlist"
-  },
-  "cancel": "Отмена",
-  "@cancel": {
-    "description": "Cancel button label"
-  },
-  "add": "Добавить",
-  "@add": {
-    "description": "Add button abel"
-  },
-  "unlistedPlaylist": "По ссылке",
-  "@unlistedPlaylist": {
-    "description": "Unlisted playlist"
-  },
-  "info": "Информация",
-  "@info": {
-    "description": "Info label"
-  },
-  "videos": "Видео",
-  "@videos": {
-    "description": "Videos label"
-  },
-  "streams": "Стримы",
-  "@streams": {
-    "description": "Streams label"
-  },
-  "latestVideos": "Последние видео",
-  "@latestVideos": {
-    "description": "Latest channel videos"
-  },
-  "subscribed": "Подписан",
-  "@subscribed": {
-    "description": "When the user is subscribed to a channel"
-  },
-  "subscribe": "Подписаться",
-  "@subscribe": {
-    "description": "Label for user to subscribe to a channel"
-  },
-  "nSubscribers": "{count, select, no{Нет подписчиков} other{{count} подписчики}}",
-  "@nSubscribers": {
-    "description": "number of subscribers",
-    "placeholders": {
-      "count": {
-        "type": "String"
-      }
+    "trending": "Тенденции",
+    "@trending": {
+        "description": "Trending videos title"
+    },
+    "subscriptions": "Подписки",
+    "@subscriptions": {
+        "description": "User subscriptions"
+    },
+    "playlists": "Плейлисты",
+    "@playlists": {
+        "description": "User playlists"
+    },
+    "popular": "Популярное",
+    "@popular": {
+        "description": "Popular videos title"
+    },
+    "noVideoInPlayList": "Нет видео в плейлисте",
+    "@noVideoInPlayList": {
+        "description": "When no videos in the playlist"
+    },
+    "removeFromPlayList": "Удалить из плейлиста",
+    "@removeFromPlayList": {
+        "description": "Menu item description to show remove a video from a playlist"
+    },
+    "deletePlayListQ": "Удалить плейлист?",
+    "@deletePlayListQ": {
+        "description": "Ask user to delete a playlist"
+    },
+    "irreversibleAction": "Данное действие необратимо",
+    "@irreversibleAction": {
+        "description": "Tell the user that the action cannot be undone"
+    },
+    "addPlayList": "Добавить плейлист",
+    "@addPlayList": {
+        "description": "Title for add playlist dialog"
+    },
+    "playListName": "Название плейлиста",
+    "@playListName": {
+        "description": "Place holder for new playlist name text field"
+    },
+    "playlistVisibility": "Видимость",
+    "@playlistVisibility": {
+        "description": "Dropdown label for playlist visibility"
+    },
+    "publicPlaylist": "Публичный",
+    "@publicPlaylist": {
+        "description": "Public playlist"
+    },
+    "privatePlaylist": "Личный",
+    "@privatePlaylist": {
+        "description": "Private playlist"
+    },
+    "cancel": "Отмена",
+    "@cancel": {
+        "description": "Cancel button label"
+    },
+    "add": "Добавить",
+    "@add": {
+        "description": "Add button abel"
+    },
+    "unlistedPlaylist": "По ссылке",
+    "@unlistedPlaylist": {
+        "description": "Unlisted playlist"
+    },
+    "info": "Информация",
+    "@info": {
+        "description": "Info label"
+    },
+    "videos": "Видео",
+    "@videos": {
+        "description": "Videos label"
+    },
+    "streams": "Стримы",
+    "@streams": {
+        "description": "Streams label"
+    },
+    "latestVideos": "Последние видео",
+    "@latestVideos": {
+        "description": "Latest channel videos"
+    },
+    "subscribed": "Подписан",
+    "@subscribed": {
+        "description": "When the user is subscribed to a channel"
+    },
+    "subscribe": "Подписаться",
+    "@subscribe": {
+        "description": "Label for user to subscribe to a channel"
+    },
+    "nSubscribers": "{count, select, no{Нет подписчиков} other{{count} подписчики}}",
+    "@nSubscribers": {
+        "description": "number of subscribers",
+        "placeholders": {
+            "count": {
+                "type": "String"
+            }
+        }
+    },
+    "shareYoutubeLink": "Поделиться ссылкой YouTube",
+    "@shareYoutubeLink": {
+        "description": "asking user to share youtube link"
+    },
+    "shareInvidiousLink": "Поделиться ссылкой Invidious",
+    "@shareInvidiousLink": {
+        "description": "asking user to share invidious link"
+    },
+    "ok": "ОК",
+    "@ok": {
+        "description": "Ok"
+    },
+    "noChannels": "Нет каналов",
+    "@noChannels": {
+        "description": "when there are no channels to display"
+    },
+    "noPlaylists": "Нет плейлистов",
+    "@noPlaylists": {
+        "description": "when there are no playlists to display"
+    },
+    "channels": "Каналы",
+    "@channels": {
+        "description": "Channels label"
+    },
+    "couldntLoadVideo": "Не удалось загрузить видео",
+    "@couldntLoadVideo": {
+        "description": "Message to display when a video can't be loaded"
+    },
+    "comments": "Комментарии",
+    "@comments": {
+        "description": "Comments label"
+    },
+    "recommended": "Рекомендовано",
+    "@recommended": {
+        "description": "Recommended label"
+    },
+    "couldntFetchVideos": "Не удалось получить видео. Нажмите, чтобы повторить попытку.",
+    "@couldntFetchVideos": {
+        "description": "Can't load bunch of videos, asking  user to try again"
+    },
+    "wizardIntro": "Выберите общедоступный сервер или добавьте свой собственный. (можно изменить позже в настройках)",
+    "@wizardIntro": {
+        "description": "Welcome message on frst time use"
+    },
+    "startUsingClipious": "Начните использовать Clipious",
+    "@startUsingClipious": {
+        "description": "button label to start using the app"
+    },
+    "errorAddingVideoToPlaylist": "Ошибка при добавлении видео в плейлист",
+    "@errorAddingVideoToPlaylist": {
+        "description": "Error while adding video to playlist"
+    },
+    "selectPlaylist": "Выбрать плейлист",
+    "@selectPlaylist": {
+        "description": "Title when users wants to add a video to a playlist"
+    },
+    "createNewPlaylist": "Создать новый плейлист",
+    "@createNewPlaylist": {
+        "description": "Button label to create a new playlist when the user wants to add a video to a playlist"
+    },
+    "nReplies": "{count, plural, =0{Нет ответов} =1{1 ответ} other{{count} repliеs}}",
+    "@nReplies": {
+        "description": "number of replies to a comment",
+        "placeholders": {
+            "count": {
+                "type": "num",
+                "format": "compact"
+            }
+        }
+    },
+    "loadMore": "Загрузить больше",
+    "@loadMore": {
+        "description": "CTA to load more"
+    },
+    "topSorting": "Сверху",
+    "@topSorting": {
+        "description": "Content sorting: top"
+    },
+    "newSorting": "Новое",
+    "@newSorting": {
+        "description": "Content sorting: new"
+    },
+    "streamIsLive": "Livе",
+    "@streamIsLive": {
+        "description": "Label when a video is a live stream"
+    },
+    "sponsorSkipped": "Спонсор пропущен",
+    "@sponsorSkipped": {
+        "description": "When a sponsor segment is skipped thanks to sponsor block"
+    },
+    "settings": "Настройки",
+    "@settings": {
+        "description": "Settings title"
+    },
+    "browsing": "Просмотр",
+    "@browsing": {
+        "description": "video browsing preferences"
+    },
+    "country": "Страна",
+    "@country": {
+        "description": "Country label"
+    },
+    "whenAppStartsShow": "Когда приложение запускается, показывать…",
+    "@whenAppStartsShow": {
+        "description": "Setting title for selecting the screen to show on start"
+    },
+    "servers": "Сервера",
+    "@servers": {
+        "description": "Server management settings category"
+    },
+    "manageServers": "Управление серверами",
+    "@manageServers": {
+        "description": "Settings to manage servers"
+    },
+    "about": "О приложении",
+    "@about": {
+        "description": "About"
+    },
+    "name": "Имя",
+    "@name": {
+        "description": "NAme label"
+    },
+    "package": "Packagе",
+    "@package": {
+        "description": "package label"
+    },
+    "version": "Версия",
+    "@version": {
+        "description": "version label"
+    },
+    "build": "Вuild",
+    "@build": {
+        "description": "build label"
+    },
+    "addServer": "Добавить сервер",
+    "@addServer": {
+        "description": "Add server label"
+    },
+    "useThisServer": "Использовать этот сервер",
+    "@useThisServer": {
+        "description": "Use this server label"
+    },
+    "logIn": "Войти",
+    "@logIn": {
+        "description": "CTA to log in to server"
+    },
+    "delete": "Удалить",
+    "@delete": {
+        "description": "Delete label"
+    },
+    "invalidInvidiousServer": "Неверный сервер Invidious",
+    "@invalidInvidiousServer": {
+        "description": "Error when the user tries to add a server that is not a proper or reachable invidious server"
+    },
+    "yourServers": "Твои сервера",
+    "@yourServers": {
+        "description": "Your servers label"
+    },
+    "notLoggedIn": "Вы не авторизованы. Нажмите, чтобы войти в систему.",
+    "@notLoggedIn": {
+        "description": "Label when the user is not logged in to the server"
+    },
+    "addServerHelpText": "Используйте кнопку + для добавления своих собственных серверов или нажмите на общедоступный сервер и добавьте его.",
+    "@addServerHelpText": {
+        "description": "label for when the user hasn't chosen a server yet"
+    },
+    "publicServers": "Публичные сервера",
+    "@publicServers": {
+        "description": "Public servers label"
+    },
+    "loadingPublicServer": "Загрузка публичных серверов",
+    "@loadingPublicServer": {
+        "description": "Message telling users the app is loading the list of public servers"
+    },
+    "tapToAddServer": "Нажмите, чтобы добавить сервер в список",
+    "@tapToAddServer": {
+        "description": "public server description"
+    },
+    "appearance": "Внешний вид",
+    "@appearance": {
+        "description": "Settings category title"
+    },
+    "useDynamicTheme": "Динамические цвета",
+    "@useDynamicTheme": {
+        "description": ""
+    },
+    "useDynamicThemeDescription": "Используйте цвета Material You (доступно только на Android 12+)",
+    "@useDynamicThemeDescription": {
+        "description": ""
+    },
+    "useDash": "Использовать DASH",
+    "@useDash": {
+        "description": "Label on video options if a user wants to switch to dash urls instead of the regular quality selection"
+    },
+    "useDashDescription": "Адаптивная потоковая передача DASH иногда может быть проблематичной, Youtube может ухудшать качество.",
+    "@useDashDescription": {
+        "description": "Description for dash in the settings screen"
+    },
+    "videoPlayer": "Видеопроигрыватель",
+    "@videoPlayer": {
+        "description": "Title for video player related options"
+    },
+    "error": "Ошибка",
+    "@error": {},
+    "videoAddedToPlaylist": "Видео добавлено в плейлист",
+    "@videoAddedToPlaylist": {
+        "description": "Pop up message when a video was added to a playlist"
+    },
+    "selectBrowsingCountry": "Выберите страну просмотра",
+    "@selectBrowsingCountry": {
+        "description": "Select country for trending content"
+    },
+    "showOnStart": "Выберите, что показывать при запуске приложения",
+    "@showOnStart": {
+        "description": "Title of dialog asking which screen the users prefers to see"
+    },
+    "currentServer": "Сейчас используется {current}",
+    "@currentServer": {
+        "description": "Which server the user is currently using",
+        "placeholders": {
+            "current": {
+                "type": "String"
+            }
+        }
+    },
+    "useSponsorBlock": "Использовать SponsorBlock",
+    "@useSponsorBlock": {
+        "description": "label for sponsorblock checkbox"
+    },
+    "sponsorBlockDescription": "Пропускать спонсорские сегменты, представленные сообществом",
+    "@sponsorBlockDescription": {
+        "description": "Sponsorblock setting description"
+    },
+    "publicServersError": "Не удалось получить список публичных серверов. Нажмите, чтобы повторить попытку.",
+    "@publicServersError": {
+        "description": "Error message when trying to get public servers but it failed"
+    },
+    "loggedIn": "Вы вошли на сервер",
+    "@loggedIn": {
+        "description": "Label to tell the user that he is logged in to the server"
+    },
+    "nVideos": "{count, plural, =0{Нет видео} =1{1 video} other{{count} видео}}",
+    "@nVideos": {
+        "description": "One or more videos",
+        "placeholders": {
+            "count": {
+                "type": "num",
+                "format": "compact"
+            }
+        }
+    },
+    "videoIsFamilyFriendly": "Для семейного просмотра",
+    "@videoIsFamilyFriendly": {
+        "description": "Displayed only when a video is family friendly"
+    },
+    "videoListed": "Публично",
+    "@videoListed": {
+        "description": "Status of a publicly available video"
+    },
+    "videoUnlisted": "По ссылке",
+    "@videoUnlisted": {
+        "description": "Status of a video that is only accessible by link"
+    },
+    "tapToManage": "Нажмите для управления",
+    "@tapToManage": {
+        "description": "Text shown below a server in the 'Your servers' list"
+    },
+    "authentication": "Аутентификация",
+    "@authentication": {
+        "description": "Label for server settings related to authentications"
+    },
+    "tokenLoginDescription": "Рекомендуемый способ входа в аккаунт",
+    "@tokenLoginDescription": {
+        "description": "Recommended way to log in"
+    },
+    "cookieLoginDescription": "Используйте этот метод, если у вас возникли проблемы с аутентификацией с помощью токена",
+    "@cookieLoginDescription": {
+        "description": "Cookie log in description"
+    },
+    "logout": "Выйти",
+    "@logout": {
+        "description": "CTA to logout of a server"
+    },
+    "username": "Имя пользователя",
+    "@username": {
+        "description": "Username label for login to a server"
+    },
+    "password": "Пароль",
+    "@password": {
+        "description": "Password label for login to a server"
+    },
+    "wrongUsernamePassword": "Неправильное имя пользователя или пароль",
+    "@wrongUsernamePassword": {
+        "description": "Error message when authentication fails"
+    },
+    "tokenLogin": "Вход в аккаунт через токен",
+    "@tokenLogin": {
+        "description": "Textto login to a server using the recommended way"
+    },
+    "cookieLogin": "Войти с помощью cookie",
+    "@cookieLogin": {
+        "description": "Text to login to a server using the cookie jar method"
+    },
+    "sponsorBlockSettingsQuickDescription": "Выберите тип сегментов для пропуска",
+    "@sponsorBlockSettingsQuickDescription": {
+        "description": "Small description of what the sponsor block settings do"
+    },
+    "sponsorBlockCategoryUnpaidSelfPromo": "Неоплачиваемый/самостоятельное продвижение",
+    "@sponsorBlockCategoryUnpaidSelfPromo": {
+        "description": "Sponsor block 'Unpaid/Self promotion' Category"
+    },
+    "sponsorBlockCategoryInteraction": "Напоминание о взаимодействии (Подписаться)",
+    "@sponsorBlockCategoryInteraction": {
+        "description": "Sponsor block 'Interaction' Category"
+    },
+    "sponsorBlockCategoryIntro": "Антракт/Вступительная анимация",
+    "@sponsorBlockCategoryIntro": {
+        "description": "Sponsorblock 'Intro' Category"
+    },
+    "sponsorBlockCategoryOutro": "Конечные карты/кредиты",
+    "@sponsorBlockCategoryOutro": {
+        "description": "Outro block 'Outro' Category"
+    },
+    "blackBackgroundDescription": "Для темной темы на OLED-экране",
+    "@blackBackgroundDescription": {
+        "description": "Description for dark background setting"
+    },
+    "sponsorBlockCategoryUnpaidSelfPromoDescription": "Аналогично \"спонсору\", за исключением неоплачиваемой или саморекламы. Сюда входят разделы о товарах, пожертвованиях или информация о том, с кем они сотрудничали. ",
+    "@sponsorBlockCategoryUnpaidSelfPromoDescription": {
+        "description": "Sponsor block 'Unpaid/Self promotion' Category description"
+    },
+    "sponsorBlockCategorySponsor": "Спонсор",
+    "@sponsorBlockCategorySponsor": {
+        "description": "Sponsor block 'Sponsor' Category"
+    },
+    "sponsorBlockCategoryInteractionDescription": "Если в середине контента есть короткое напоминание о необходимости поставить лайк, подписаться или следовать за ними. Если контент длинный или посвящен чему-то конкретному, его следует поместить в раздел саморекламы.",
+    "@sponsorBlockCategoryInteractionDescription": {
+        "description": "Sponsor block 'Interaction' Category description"
+    },
+    "sponsorBlockCategorySponsorDescription": "Платное продвижение, платные рефералы и прямая реклама. Не для саморекламы или бесплатных криков о причинах/создателях/сайтах/продуктах, которые им нравятся.",
+    "@sponsorBlockCategorySponsorDescription": {
+        "description": "Sponsor block 'Sponsor' Category description"
+    },
+    "sponsorBlockCategoryIntroDescription": "Интервал без фактического содержания. Это может быть пауза, статичный кадр, повторяющаяся анимация. Не следует использовать для переходов, содержащих информацию.",
+    "@sponsorBlockCategoryIntroDescription": {
+        "description": "Sponsorblock 'Intro' Category description"
+    },
+    "videoQueue": "Очередь видео",
+    "@videoQueue": {
+        "description": "Label for button to display the video queue"
+    },
+    "addToQueueList": "Добавить в очередь",
+    "@addToQueueList": {
+        "description": "Label on button to add a video to the queue list"
+    },
+    "addRecommendedToQueue": "Автовоспроизведение рекомендует следующее",
+    "@addRecommendedToQueue": {
+        "description": "Switch when playing a video to automatically add the recommended videos to the video queue"
+    },
+    "sponsorBlockCategoryPreview": "Превью/Рекап",
+    "@sponsorBlockCategoryPreview": {
+        "description": "Sponsorblock 'Preview' Category"
+    },
+    "sponsorBlockCategoryPreviewDescription": "Коллекция клипов, которые показывают, что будет дальше в этом видео или в других видео из серии, где вся информация повторяется позже в видео.",
+    "@sponsorBlockCategoryPreviewDescription": {
+        "description": "Sponsorblock 'Preview' Category description"
+    },
+    "sponsorBlockCategoryFiller": "Заполнять Наполнения/Шутки",
+    "@sponsorBlockCategoryFiller": {
+        "description": "Sponsorblock 'Filler' Category"
+    },
+    "sponsorBlockCategoryMusicOffTopic": "Музыка: Немузыкальная секция",
+    "@sponsorBlockCategoryMusicOffTopic": {
+        "description": "Sponsorblock 'MusicOffTopic' Category"
+    },
+    "useProxy": "Проксировать видео",
+    "@useProxy": {
+        "description": "label for settings switch to proxy videos from server"
+    },
+    "sponsorBlockCategoryFillerDescription": "Касательные сцены, добавленные только для наполнения или юмора, которые не требуются для понимания основного содержания видео. Сюда не должны входить сегменты, обеспечивающие контекст или фоновые детали. Это очень агрессивная категория, предназначенная для тех случаев, когда у вас нет настроения для \"веселья\".",
+    "@sponsorBlockCategoryFillerDescription": {
+        "description": "Sponsorblock 'Filler' Category description"
+    },
+    "pressDownToShowSettings": "Нажмите вниз для отображения настроек",
+    "@pressDownToShowSettings": {
+        "description": "Instruction on how to show video settings when playing a video on TV"
+    },
+    "quality": "Качество",
+    "@quality": {
+        "description": "Name of TV ui video settings"
+    },
+    "audio": "Аудио",
+    "@audio": {
+        "description": "Name TV ui audio settings"
+    },
+    "subtitles": "Субтитры",
+    "@subtitles": {
+        "description": "Name of TV ui subtitles settings"
+    },
+    "playbackSpeed": "Скорость воспроизведения",
+    "@playbackSpeed": {
+        "description": "Name of TV ui Playback speed"
+    },
+    "blackBackground": "Черный фон",
+    "@blackBackground": {
+        "description": "Settings name for black background"
+    },
+    "search": "Искать",
+    "@search": {
+        "description": "search title"
+    },
+    "subtitleFontSize": "Размер субтитров",
+    "@subtitleFontSize": {
+        "description": "Settings label for the size of the subtitles"
+    },
+    "skipSslVerification": "Пропустить проверку SSL-сертификата",
+    "@skipSslVerification": {
+        "description": "Setting label to skip ssl certification verification"
+    },
+    "useProxyDescription": "Проксируя видеопотоки с сервера, вы можете обойти региональные блокировки или блокировки провайдера YouTube",
+    "@useProxyDescription": {
+        "description": "Description for the use proxy settings"
+    },
+    "sponsorBlockCategoryMusicOffTopicDescription": "Интервал без фактического содержания. Это может быть пауза, статичный кадр, повторяющаяся анимация. Не следует использовать для переходов, содержащих информацию.",
+    "@sponsorBlockCategoryMusicOffTopicDescription": {
+        "description": "Only for use in music videos. This only should be used for sections of music videos that aren't already covered by another category."
+    },
+    "skipSslVerificationDescription": "Для использования самоподписанного SSL-сертификата или при возникновении проблем с SSL на вашем сервере.",
+    "@skipSslVerificationDescription": {
+        "description": "Setting description for the skip ssl certification verification"
+    },
+    "subtitleFontSizeDescription": "Измените размер субтитров, если они слишком маленькие или слишком большие на вашем устройстве",
+    "@subtitleFontSizeDescription": {
+        "description": "Settings description for subtitle size"
+    },
+    "sponsorBlockCategoryOutroDescription": "Для упоминаний или концовок видео. Не для важной информации.",
+    "@sponsorBlockCategoryOutroDescription": {
+        "description": "Outro block 'Outro' Category description"
+    },
+    "themeBrightness": "Тема",
+    "@themeBrightness": {
+        "description": "Ask the user to user dark / light / system theme"
+    },
+    "themeLight": "Светлая",
+    "@themeLight": {
+        "description": "Light theme"
+    },
+    "themeDark": "Тёмная",
+    "@themeDark": {
+        "description": "Dark theme"
+    },
+    "followSystem": "Система следования",
+    "@followSystem": {
+        "description": "Follow system label"
+    },
+    "requiresRestart": "Требуется перезапуск приложения",
+    "@requiresRestart": {
+        "description": "Requires app restart label"
+    },
+    "appLanguage": "Язык приложения",
+    "@appLanguage": {
+        "description": "Select app language"
+    },
+    "copyToClipBoard": "Копировать в буфер обмена",
+    "@copyToClipBoard": {
+        "description": "Text to copy something to clipboard"
+    },
+    "searchSortRating": "Оценка",
+    "@searchSortRating": {
+        "description": "Sort search by rating"
+    },
+    "itemlistErrorGeneric": "Не удалось получить данные",
+    "@itemlistErrorGeneric": {
+        "description": "Error showing when the data can't be fetch"
+    },
+    "playNextAddedToQueue": "Это видео будет следующим",
+    "@playNextAddedToQueue": {
+        "description": "Pop up message to confirm that the video has been properly set to play next"
+    },
+    "videoFilterAllChannels": "Все каналы",
+    "@videoFilterAllChannels": {
+        "description": "Title for the sections that applies to all channels"
+    },
+    "addVideoFilter": "Создать фильтр",
+    "@addVideoFilter": {
+        "description": "Title when creating a new filter"
+    },
+    "videoFilterWholeChannel": "{hideOrFilter} все видео от канала",
+    "@videoFilterWholeChannel": {
+        "description": "Label for whole channel filtering",
+        "placeholders": {
+            "hideOrFilter": {
+                "type": "String",
+                "example": "Hide"
+            }
+        }
+    },
+    "addToPlaylist": "Добавить в плейлист",
+    "@addToPlaylist": {
+        "description": "Label to add a video to a playlist"
+    },
+    "searchSortRelevance": "Актуальность",
+    "@searchSortRelevance": {
+        "description": "Sort search by relevance"
+    },
+    "videoFilters": "Фильтры видео",
+    "@videoFilters": {
+        "description": "Title for video filter settings"
+    },
+    "videoFilterHide": "Скрывать отфильтрованные видео",
+    "@videoFilterHide": {
+        "description": "Label for settings to hide filtered videos"
+    },
+    "searchHistoryDescription": "Настройки истории поиска",
+    "@searchHistoryDescription": {
+        "description": "Description for search history settings"
+    },
+    "searchHistoryLimit": "Предел истории поиска",
+    "@searchHistoryLimit": {
+        "description": "Settings label for search history limit"
+    },
+    "searchHistoryLimitDescription": "Укажите сколько предыдущих поисковых запросов будут показываться в предложениях",
+    "@searchHistoryLimitDescription": {
+        "description": "Settings label for search history limit description"
+    },
+    "rememberSubtitleLanguage": "Запомнить язык субтитров",
+    "@rememberSubtitleLanguage": {
+        "description": "Settings label for remembering subtitle language"
+    },
+    "rememberPlaybackSpeedDescription": "Автоматически менять скорость воспроизведения на последнюю выбранную",
+    "@rememberPlaybackSpeedDescription": {
+        "description": "Settings description for remembering playback speed"
+    },
+    "shareLinkWithTimestamp": "Добавить отметку времени",
+    "@shareLinkWithTimestamp": {
+        "description": "asking user to share link along with timestamp"
+    },
+    "videoAddedToQueue": "Видео добавлено в очередь",
+    "@videoAddedToQueue": {
+        "description": "Pop up message when a video was added at the end of the video queue"
+    },
+    "videoFilterFilterLabel": "Спрятать",
+    "@videoFilterFilterLabel": {
+        "description": "Label to filter videos"
+    },
+    "videoFilterTypeVideoTitle": "Название видео",
+    "@videoFilterTypeVideoTitle": {
+        "description": "Label for video filter video title"
+    },
+    "rememberSubtitleLanguageDescription": "Автоматически менять язык субтитров на последний выбранный если доступно",
+    "@rememberSubtitleLanguageDescription": {
+        "description": "Settings description for remembering subtitle language"
+    },
+    "playNext": "Воспроизвести следующим",
+    "@playNext": {
+        "description": "Label to play the video after the current one."
+    },
+    "returnYoutubeDislikeDescription": "Показать примерное количество дизлайков с помощью API от returnyoutubedislike.com",
+    "@returnYoutubeDislikeDescription": {
+        "description": "ReturnYoutubeDislike setting description"
+    },
+    "autoplayVideoOnLoad": "Автоматически воспроизводить видео при загрузке",
+    "@autoplayVideoOnLoad": {
+        "description": "Label for settings to enable autoplay when a video loads"
+    },
+    "autoplayVideoOnLoadDescription": "Автоматически начать воспроизведение видео после его загрузки",
+    "@autoplayVideoOnLoadDescription": {
+        "description": "Description for the autoplay video on load setting"
+    },
+    "searchHistory": "История поиска",
+    "@searchHistory": {
+        "description": "Settings label for search history"
+    },
+    "searchSortUploadDate": "Дата загрузки",
+    "@searchSortUploadDate": {
+        "description": "Sort search by upload date"
+    },
+    "videoFiltersSettingTileDescriptions": "Задайте правила для фильтрации видео",
+    "@videoFiltersSettingTileDescriptions": {
+        "description": "Description for the main settings page"
+    },
+    "editVideoFilter": "Изменить фильтр",
+    "@editVideoFilter": {
+        "description": "Title when editting a filter"
+    },
+    "videoFilterType": "Тип",
+    "@videoFilterType": {
+        "description": "Label for filter type"
+    },
+    "videoFilterOperation": "Операция",
+    "@videoFilterOperation": {
+        "description": "Label for filter operation"
+    },
+    "videoFilterValue": "Значение",
+    "@videoFilterValue": {
+        "description": "Label for filter value"
+    },
+    "optional": "по желанию",
+    "@optional": {
+        "description": "Optional label"
+    },
+    "videoFilterHideLabel": "Скрыть",
+    "@videoFilterHideLabel": {
+        "description": "Label to hide videos"
+    },
+    "videoFilterDescriptionString": "{hideOrFilter} видео где {type} {operation} \"{value}\".",
+    "@videoFilterDescriptionString": {
+        "description": "Human readable description of a video filter, in this case is it for string comparison, example: Hide videos where the name of the video does not contain the following string 'test' (Do not translate text between { })",
+        "placeholders": {
+            "hideOrFilter": {
+                "type": "String",
+                "example": "Hide"
+            },
+            "type": {
+                "type": "String",
+                "example": "video title"
+            },
+            "operation": {
+                "type": "String",
+                "example": "does not contain"
+            },
+            "value": {
+                "type": "String",
+                "example": "some filter text"
+            }
+        }
+    },
+    "videoFilterTapToReveal": "Нажмите чтобы показать",
+    "@videoFilterTapToReveal": {
+        "description": "Label to tell user to tap to show a filtered video"
+    },
+    "videoFilterTypeChannelName": "Название канала",
+    "@videoFilterTypeChannelName": {
+        "description": "Label for video filter channel name"
+    },
+    "videoFilterTypeVideoLength": "Длительность видео (в секундах)",
+    "@videoFilterTypeVideoLength": {
+        "description": "Label for video filter video length"
+    },
+    "videoFilterOperationContains": "Содержит",
+    "@videoFilterOperationContains": {
+        "description": "Label for video filter operation Contains"
+    },
+    "videoFilterOperationLowerThan": "Меньше чем",
+    "@videoFilterOperationLowerThan": {
+        "description": "Label for video filter operation Lower than"
+    },
+    "channel": "Канал",
+    "@channel": {
+        "description": "A single channel"
+    },
+    "videoFilterHideAllFromChannel": "Фильтровать все видео от канала",
+    "@videoFilterHideAllFromChannel": {
+        "description": "Label for video filter switch to allow to hide all videos from a channel"
+    },
+    "rememberPlaybackSpeed": "Запомнить скорость воспроизведения",
+    "@rememberPlaybackSpeed": {
+        "description": "Setting label for remembering playback speed"
+    },
+    "download": "Скачать",
+    "@download": {
+        "description": "A single download or CTA for downloading a video"
+    },
+    "downloadsPlayAll": "Смотреть все",
+    "@downloadsPlayAll": {
+        "description": "Button to play all downloaded videos"
+    },
+    "redirectInvidiousLink": "Поделиться перенаправляющей ссылкой Invidious",
+    "@redirectInvidiousLink": {
+        "description": "asking user to share redirecting invidious link"
+    },
+    "itemListErrorInvalidScope": "У вас нет прав на просмотр этого, если вы вошли через токен, то попробуйте выйти и снова войти",
+    "@itemListErrorInvalidScope": {
+        "description": "Error when the user doesn't have the proper scope to its current token"
+    },
+    "enableSearchHistory": "Включить историю поиска",
+    "@enableSearchHistory": {
+        "description": "Settings label for enabling search history"
+    },
+    "searchSortViewCount": "Количество просмотров",
+    "@searchSortViewCount": {
+        "description": "Sort search by view count"
+    },
+    "clearSearchHistory": "Очистить историю поиска",
+    "@clearSearchHistory": {
+        "description": "Settings label for clearing search history"
+    },
+    "videoFiltersExplanation": "Скрывать или прятать видео из всех лент в приложении на основе заданных ниже фильтров. Это позволяет вам, например, скрыть спойлеры к фильму или скрыть Shorts от определённого канала.",
+    "@videoFiltersExplanation": {
+        "description": "Description on how filter work"
+    },
+    "save": "Сохранить",
+    "@save": {
+        "description": "Text for save action"
+    },
+    "videoFilterEditDescription": "Выберите желаемый канал, тип фильтра, операцию и значение чтобы ОТФИЛЬТРОВАТЬ видео из лент. К примеру, тип: название видео, операция: содержит, значение: тест будет ИСКЛЮЧАТЬ все видео со словом 'тест' в их названии.",
+    "@videoFilterEditDescription": {
+        "description": "Descriptive test for video filter set up"
+    },
+    "videoFilterHideDescription": "По умолчанию отфильтрованные видео не скрыты, а показаны как спрятанные с причинами, по которым они были отфильтрованы. Этот параметр уберёт отфильтрованные видео с лент.",
+    "@videoFilterHideDescription": {
+        "description": ""
+    },
+    "videoFilterNoFilters": "Фильтров нет, нажмите на '+' внизу чтобы начать добавлять фильтры.",
+    "@videoFilterNoFilters": {
+        "description": "Label when there are no video filters"
+    },
+    "videoFilterOperationNotContain": "Не содержит",
+    "@videoFilterOperationNotContain": {
+        "description": "Label for video filter operation Does not contain"
+    },
+    "videoFilterOperationHigherThan": "Больше чем",
+    "@videoFilterOperationHigherThan": {
+        "description": "Label for video filter operation Higher than"
+    },
+    "downloads": "Скачивания",
+    "@downloads": {
+        "description": "Downloads"
+    },
+    "videoAlreadyDownloaded": "Видео уже скачано",
+    "@videoAlreadyDownloaded": {
+        "description": "Message when a user tries to download a video he already has"
+    },
+    "noDownloadedVideos": "Загруженных видео нет, найдите, нажмите и удерживайте видео и нажмите на кнопку загрузки на экране видео чтобы его скачать",
+    "@noDownloadedVideos": {
+        "description": "Message showing when the user goes to the download screen but there are no offline videos."
+    },
+    "videoDownloadStarted": "Началось скачивание видео",
+    "@videoDownloadStarted": {
+        "description": "Message when a video starts being downloaded"
+    },
+    "videoFailedDownloadRetry": "Загрузка не удалась, нажмите чтобы повторить попытку",
+    "@videoFailedDownloadRetry": {
+        "description": "Shown on download manager when a download fails and prompt the user to retry"
     }
   },
   "shareYoutubeLink": "Поделиться ссылкой YouTube",
