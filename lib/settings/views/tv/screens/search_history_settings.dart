@@ -59,36 +59,33 @@ class TvSearchHistorySettings extends StatelessWidget {
     TextTheme textTheme = Theme.of(context).textTheme;
 
     var appCubit = context.read<AppCubit>();
-    return BlocProvider(
-      create: (context) => SettingsCubit(SettingsState(), appCubit),
-      child: Scaffold(
-        body: BlocBuilder<SettingsCubit, SettingsState>(
-          builder: (context, _) {
-            var cubit = context.read<SettingsCubit>();
-            return TvOverscan(
-              child: ListView(
-                children: [
-                  SettingsTitle(title: locals.searchHistoryDescription),
-                  SettingsTile(
-                    title: locals.enableSearchHistory,
-                    trailing: Switch(onChanged: (value) {}, value: _.useSearchHistory),
-                    onSelected: (ctx) => cubit.toggleSearchHistory(!_.useSearchHistory),
-                  ),
-                  AdjustmentSettingTile(
-                    title: locals.searchHistoryLimit,
-                    description: locals.searchHistoryLimitDescription,
-                    value: _.searchHistoryLimit,
-                    onNewValue: cubit.setHistoryLimit,
-                  ),
-                  SettingsTile(
-                    title: locals.clearSearchHistory,
-                    onSelected: (context) => showClearHistoryDialog(context),
-                  )
-                ],
-              ),
-            );
-          },
-        ),
+    return Scaffold(
+      body: BlocBuilder<SettingsCubit, SettingsState>(
+        builder: (context, _) {
+          var cubit = context.read<SettingsCubit>();
+          return TvOverscan(
+            child: ListView(
+              children: [
+                SettingsTitle(title: locals.searchHistoryDescription),
+                SettingsTile(
+                  title: locals.enableSearchHistory,
+                  trailing: Switch(onChanged: (value) {}, value: _.useSearchHistory),
+                  onSelected: (ctx) => cubit.toggleSearchHistory(!_.useSearchHistory),
+                ),
+                AdjustmentSettingTile(
+                  title: locals.searchHistoryLimit,
+                  description: locals.searchHistoryLimitDescription,
+                  value: _.searchHistoryLimit,
+                  onNewValue: cubit.setHistoryLimit,
+                ),
+                SettingsTile(
+                  title: locals.clearSearchHistory,
+                  onSelected: (context) => showClearHistoryDialog(context),
+                )
+              ],
+            ),
+          );
+        },
       ),
     );
   }
