@@ -17,8 +17,6 @@ abstract class _$SearchStateCWProxy {
 
   SearchState playlists(List<Playlist> playlists);
 
-  SearchState useHistory(bool useHistory);
-
   SearchState searchNow(bool searchNow);
 
   SearchState suggestions(List<String> suggestions);
@@ -47,7 +45,6 @@ abstract class _$SearchStateCWProxy {
     List<VideoInList>? videos,
     List<Channel>? channels,
     List<Playlist>? playlists,
-    bool? useHistory,
     bool? searchNow,
     List<String>? suggestions,
     SearchSortBy? sortBy,
@@ -81,9 +78,6 @@ class _$SearchStateCWProxyImpl implements _$SearchStateCWProxy {
 
   @override
   SearchState playlists(List<Playlist> playlists) => this(playlists: playlists);
-
-  @override
-  SearchState useHistory(bool useHistory) => this(useHistory: useHistory);
 
   @override
   SearchState searchNow(bool searchNow) => this(searchNow: searchNow);
@@ -125,7 +119,6 @@ class _$SearchStateCWProxyImpl implements _$SearchStateCWProxy {
     Object? videos = const $CopyWithPlaceholder(),
     Object? channels = const $CopyWithPlaceholder(),
     Object? playlists = const $CopyWithPlaceholder(),
-    Object? useHistory = const $CopyWithPlaceholder(),
     Object? searchNow = const $CopyWithPlaceholder(),
     Object? suggestions = const $CopyWithPlaceholder(),
     Object? sortBy = const $CopyWithPlaceholder(),
@@ -156,10 +149,6 @@ class _$SearchStateCWProxyImpl implements _$SearchStateCWProxy {
           ? _value.playlists
           // ignore: cast_nullable_to_non_nullable
           : playlists as List<Playlist>,
-      useHistory == const $CopyWithPlaceholder() || useHistory == null
-          ? _value.useHistory
-          // ignore: cast_nullable_to_non_nullable
-          : useHistory as bool,
       searchNow == const $CopyWithPlaceholder() || searchNow == null
           ? _value.searchNow
           // ignore: cast_nullable_to_non_nullable

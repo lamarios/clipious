@@ -14,6 +14,7 @@ import 'package:invidious/utils/views/tv/components/tv_overscan.dart';
 import 'package:invidious/utils/views/tv/components/tv_text_field.dart';
 
 import '../../../../channels/models/channel.dart';
+import '../../../../settings/states/settings.dart';
 import '../../../../videos/models/video_in_list.dart';
 import '../../../states/search.dart';
 import '../../../states/tv_search.dart';
@@ -54,6 +55,7 @@ class TvSearch extends StatelessWidget {
 
     var colors = Theme.of(context).colorScheme;
 
+    var settings = context.read<SettingsCubit>();
     return Scaffold(
       body: TvOverscan(
         child: DefaultTextStyle(
@@ -64,7 +66,7 @@ class TvSearch extends StatelessWidget {
                 create: (context) => TvSearchCubit(TvSearchState()),
               ),
               BlocProvider(
-                create: (context) => SearchCubit(SearchState()),
+                create: (context) => SearchCubit(SearchState(), settings),
               )
             ],
             child: BlocBuilder<SearchCubit, SearchState>(builder: (context, search) {

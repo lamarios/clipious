@@ -5,6 +5,7 @@ import 'package:flutter_fadein/flutter_fadein.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/downloads/states/download_manager.dart';
 import 'package:invidious/globals.dart';
+import 'package:invidious/settings/states/settings.dart';
 import 'package:invidious/utils/views/components/placeholders.dart';
 import 'package:invidious/videos/states/add_to_playlist_button.dart';
 import 'package:invidious/videos/states/video.dart';
@@ -70,9 +71,10 @@ class VideoView extends StatelessWidget {
     var downloadManager = context.read<DownloadManagerCubit>();
 
     var player = context.read<PlayerCubit>();
+    var settings = context.read<SettingsCubit>();
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (BuildContext context) => VideoCubit(VideoState(videoId: videoId), downloadManager, player)),
+        BlocProvider(create: (BuildContext context) => VideoCubit(VideoState(videoId: videoId), downloadManager, player, settings)),
         BlocProvider(create: (BuildContext context) => AddToPlaylistButtonCubit(AddToPlaylistButtonState(videoId: videoId))),
         BlocProvider(
           create: (context) => VideoLikeButtonCubit(VideoLikeButtonController(videoId: videoId), addToPlaylistButtonCubit: context.read<AddToPlaylistButtonCubit>()),

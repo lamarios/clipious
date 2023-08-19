@@ -15,12 +15,6 @@ abstract class _$VideoStateCWProxy {
 
   VideoState loadingVideo(bool loadingVideo);
 
-  VideoState autoplayOnLoad(bool autoplayOnLoad);
-
-  VideoState playRecommendedNext(bool playRecommendedNext);
-
-  VideoState getDislikes(bool getDislikes);
-
   VideoState selectedIndex(int selectedIndex);
 
   VideoState videoId(String videoId);
@@ -48,9 +42,6 @@ abstract class _$VideoStateCWProxy {
     Video? video,
     int? dislikes,
     bool? loadingVideo,
-    bool? autoplayOnLoad,
-    bool? playRecommendedNext,
-    bool? getDislikes,
     int? selectedIndex,
     String? videoId,
     bool? isLoggedIn,
@@ -81,17 +72,6 @@ class _$VideoStateCWProxyImpl implements _$VideoStateCWProxy {
   @override
   VideoState loadingVideo(bool loadingVideo) =>
       this(loadingVideo: loadingVideo);
-
-  @override
-  VideoState autoplayOnLoad(bool autoplayOnLoad) =>
-      this(autoplayOnLoad: autoplayOnLoad);
-
-  @override
-  VideoState playRecommendedNext(bool playRecommendedNext) =>
-      this(playRecommendedNext: playRecommendedNext);
-
-  @override
-  VideoState getDislikes(bool getDislikes) => this(getDislikes: getDislikes);
 
   @override
   VideoState selectedIndex(int selectedIndex) =>
@@ -133,9 +113,6 @@ class _$VideoStateCWProxyImpl implements _$VideoStateCWProxy {
     Object? video = const $CopyWithPlaceholder(),
     Object? dislikes = const $CopyWithPlaceholder(),
     Object? loadingVideo = const $CopyWithPlaceholder(),
-    Object? autoplayOnLoad = const $CopyWithPlaceholder(),
-    Object? playRecommendedNext = const $CopyWithPlaceholder(),
-    Object? getDislikes = const $CopyWithPlaceholder(),
     Object? selectedIndex = const $CopyWithPlaceholder(),
     Object? videoId = const $CopyWithPlaceholder(),
     Object? isLoggedIn = const $CopyWithPlaceholder(),
@@ -163,19 +140,6 @@ class _$VideoStateCWProxyImpl implements _$VideoStateCWProxy {
           ? _value.loadingVideo
           // ignore: cast_nullable_to_non_nullable
           : loadingVideo as bool,
-      autoplayOnLoad == const $CopyWithPlaceholder() || autoplayOnLoad == null
-          ? _value.autoplayOnLoad
-          // ignore: cast_nullable_to_non_nullable
-          : autoplayOnLoad as bool,
-      playRecommendedNext == const $CopyWithPlaceholder() ||
-              playRecommendedNext == null
-          ? _value.playRecommendedNext
-          // ignore: cast_nullable_to_non_nullable
-          : playRecommendedNext as bool,
-      getDislikes == const $CopyWithPlaceholder() || getDislikes == null
-          ? _value.getDislikes
-          // ignore: cast_nullable_to_non_nullable
-          : getDislikes as bool,
       selectedIndex == const $CopyWithPlaceholder() || selectedIndex == null
           ? _value.selectedIndex
           // ignore: cast_nullable_to_non_nullable

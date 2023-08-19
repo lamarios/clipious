@@ -42,48 +42,45 @@ class SearchHistorySettings extends StatelessWidget {
     ColorScheme colorScheme = Theme.of(context).colorScheme;
     SettingsThemeData theme = settingsTheme(colorScheme);
 
-    return BlocProvider(
-      create: (context) => SettingsCubit(SettingsState(), context.read<AppCubit>()),
-      child: BlocBuilder<SettingsCubit, SettingsState>(
-        builder: (context, _) {
-          var cubit = context.read<SettingsCubit>();
-          return Scaffold(
-              appBar: AppBar(
-                backgroundColor: colorScheme.background,
-                scrolledUnderElevation: 0,
-                title: Text(locals.searchHistory),
-              ),
+    return BlocBuilder<SettingsCubit, SettingsState>(
+      builder: (context, _) {
+        var cubit = context.read<SettingsCubit>();
+        return Scaffold(
+            appBar: AppBar(
               backgroundColor: colorScheme.background,
-              body: SafeArea(
-                bottom: false,
-                child: SettingsList(lightTheme: theme, darkTheme: theme, sections: [
-                  SettingsSection(title: Text(locals.searchHistoryDescription), tiles: [
-                    SettingsTile.switchTile(
-                      initialValue: _.useSearchHistory,
-                      onToggle: cubit.toggleSearchHistory,
-                      title: Text(locals.enableSearchHistory),
+              scrolledUnderElevation: 0,
+              title: Text(locals.searchHistory),
+            ),
+            backgroundColor: colorScheme.background,
+            body: SafeArea(
+              bottom: false,
+              child: SettingsList(lightTheme: theme, darkTheme: theme, sections: [
+                SettingsSection(title: Text(locals.searchHistoryDescription), tiles: [
+                  SettingsTile.switchTile(
+                    initialValue: _.useSearchHistory,
+                    onToggle: cubit.toggleSearchHistory,
+                    title: Text(locals.enableSearchHistory),
+                  ),
+                  SettingsTile(
+                    title: Text(locals.searchHistoryLimit),
+                    description: Text(locals.searchHistoryLimitDescription),
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        IconButton(onPressed: () => _.useSearchHistory ? cubit.changeSearchHistoryLimit(increase: false) : null, icon: const Icon(Icons.remove)),
+                        Text(_.searchHistoryLimit.toString()),
+                        IconButton(onPressed: () => _.useSearchHistory ? cubit.changeSearchHistoryLimit(increase: true) : null, icon: const Icon(Icons.add)),
+                      ],
                     ),
-                    SettingsTile(
-                      title: Text(locals.searchHistoryLimit),
-                      description: Text(locals.searchHistoryLimitDescription),
-                      trailing: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          IconButton(onPressed: () => _.useSearchHistory ? cubit.changeSearchHistoryLimit(increase: false) : null, icon: const Icon(Icons.remove)),
-                          Text(_.searchHistoryLimit.toString()),
-                          IconButton(onPressed: () => _.useSearchHistory ? cubit.changeSearchHistoryLimit(increase: true) : null, icon: const Icon(Icons.add)),
-                        ],
-                      ),
-                    ),
-                    SettingsTile(
-                      title: Text(locals.clearSearchHistory),
-                      onPressed: (context) => confirmClear(context),
-                    )
-                  ])
-                ]),
-              ));
-        },
-      ),
+                  ),
+                  SettingsTile(
+                    title: Text(locals.clearSearchHistory),
+                    onPressed: (context) => confirmClear(context),
+                  )
+                ])
+              ]),
+            ));
+      },
     );
   }
 }

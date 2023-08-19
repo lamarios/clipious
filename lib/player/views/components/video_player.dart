@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/downloads/models/downloaded_video.dart';
 import 'package:invidious/player/states/video_player.dart';
+import 'package:invidious/settings/states/settings.dart';
 
 import '../../../videos/models/video.dart';
 import '../../states/player.dart';
@@ -31,7 +32,10 @@ class _VideoPlayerState extends State<VideoPlayer> {
     ColorScheme colorScheme = Theme.of(context).colorScheme;
     AppLocalizations locals = AppLocalizations.of(context)!;
     Color overFlowTextColor = Theme.of(context).textTheme.bodyMedium?.color ?? Colors.black;
+
     var player = context.read<PlayerCubit>();
+    var settings = context.read<SettingsCubit>();
+
     return BlocProvider(
       create: (context) => VideoPlayerCubit(
           VideoPlayerState(
@@ -42,7 +46,7 @@ class _VideoPlayerState extends State<VideoPlayer> {
               video: widget.video,
               offlineVideo: widget.offlineVideo,
               disableControls: widget.disableControls),
-          player),
+          player, settings),
       child: BlocBuilder<VideoPlayerCubit, VideoPlayerState>(
         builder: (context, _) => BlocListener<PlayerCubit, PlayerState>(
           listenWhen: (previous, current) => previous.mediaCommand != current.mediaCommand && current.mediaCommand != null,

@@ -39,10 +39,6 @@ abstract class _$PlayerStateCWProxy {
 
   PlayerState dragStartMini(bool dragStartMini);
 
-  PlayerState repeat(PlayerRepeat repeat);
-
-  PlayerState shuffle(bool shuffle);
-
   PlayerState bufferedPosition(Duration bufferedPosition);
 
   PlayerState playedVideos(List<String> playedVideos);
@@ -90,8 +86,6 @@ abstract class _$PlayerStateCWProxy {
     double? opacity,
     double? dragDistance,
     bool? dragStartMini,
-    PlayerRepeat? repeat,
-    bool? shuffle,
     Duration? bufferedPosition,
     List<String>? playedVideos,
     Offset? offset,
@@ -170,12 +164,6 @@ class _$PlayerStateCWProxyImpl implements _$PlayerStateCWProxy {
       this(dragStartMini: dragStartMini);
 
   @override
-  PlayerState repeat(PlayerRepeat repeat) => this(repeat: repeat);
-
-  @override
-  PlayerState shuffle(bool shuffle) => this(shuffle: shuffle);
-
-  @override
   PlayerState bufferedPosition(Duration bufferedPosition) =>
       this(bufferedPosition: bufferedPosition);
 
@@ -243,8 +231,6 @@ class _$PlayerStateCWProxyImpl implements _$PlayerStateCWProxy {
     Object? opacity = const $CopyWithPlaceholder(),
     Object? dragDistance = const $CopyWithPlaceholder(),
     Object? dragStartMini = const $CopyWithPlaceholder(),
-    Object? repeat = const $CopyWithPlaceholder(),
-    Object? shuffle = const $CopyWithPlaceholder(),
     Object? bufferedPosition = const $CopyWithPlaceholder(),
     Object? playedVideos = const $CopyWithPlaceholder(),
     Object? offset = const $CopyWithPlaceholder(),
@@ -324,14 +310,6 @@ class _$PlayerStateCWProxyImpl implements _$PlayerStateCWProxy {
           ? _value.dragStartMini
           // ignore: cast_nullable_to_non_nullable
           : dragStartMini as bool,
-      repeat == const $CopyWithPlaceholder() || repeat == null
-          ? _value.repeat
-          // ignore: cast_nullable_to_non_nullable
-          : repeat as PlayerRepeat,
-      shuffle == const $CopyWithPlaceholder() || shuffle == null
-          ? _value.shuffle
-          // ignore: cast_nullable_to_non_nullable
-          : shuffle as bool,
       bufferedPosition == const $CopyWithPlaceholder() ||
               bufferedPosition == null
           ? _value.bufferedPosition

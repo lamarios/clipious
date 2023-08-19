@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:invidious/utils.dart';
 
+import '../../../settings/states/settings.dart';
 import '../../states/player.dart';
 import '../../states/player_controls.dart';
 
@@ -78,24 +79,29 @@ class MiniPlayerControls extends StatelessWidget {
                     ],
                   ),
                 if (!isMini)
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      IconButton(
-                          style: buttonStyle,
-                          onPressed: player.setNextRepeatMode,
-                          color: controller.repeat == PlayerRepeat.noRepeat ? null : colors.primary,
-                          icon: Icon(
-                            controller.repeat == PlayerRepeat.repeatOne ? Icons.repeat_one : Icons.repeat,
-                          )),
-                      if (controller.hasQueue)
-                        IconButton(
-                          onPressed: player.toggleShuffle,
-                          style: buttonStyle,
-                          icon: const Icon(Icons.shuffle),
-                          color: controller.shuffle ? colors.primary : null,
-                        ),
-                    ],
+                  BlocBuilder<SettingsCubit, SettingsState>(
+                   buildWhen: (previous, current) => previous.playerRepeatMode != current.playerRepeatMode || previous.playerShuffleMode != current.playerShuffleMode,
+                    builder: (context, settings) {
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          IconButton(
+                              style: buttonStyle,
+                              onPressed: player.setNextRepeatMode,
+                              color: settings.playerRepeatMode == PlayerRepeat.noRepeat ? null : colors.primary,
+                              icon: Icon(
+                                settings.playerRepeatMode == PlayerRepeat.repeatOne ? Icons.repeat_one : Icons.repeat,
+                              )),
+                          if (controller.hasQueue)
+                            IconButton(
+                              onPressed: player.toggleShuffle,
+                              style: buttonStyle,
+                              icon: const Icon(Icons.shuffle),
+                              color: settings.playerShuffleMode ? colors.primary : null,
+                            ),
+                        ],
+                      );
+                    }
                   )
               ],
             ),

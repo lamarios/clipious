@@ -48,13 +48,16 @@ class AppBarDownloadButton extends StatelessWidget {
                 top: 1,
                 right: 1,
                 child: _.videos.isNotEmpty
-                    ? Container(
-                        padding: const EdgeInsets.all(4),
-                        decoration: BoxDecoration(color: colors.secondaryContainer, shape: BoxShape.circle),
-                        child: Text(
-                          _.videos.length.toString(),
-                          style: textTheme.labelSmall,
-                        ))
+                    ? GestureDetector(
+                        onTap: openDownloadManager,
+                        child: Container(
+                            padding: const EdgeInsets.all(4),
+                            decoration: BoxDecoration(color: colors.secondaryContainer, shape: BoxShape.circle),
+                            child: Text(
+                              _.videos.length.toString(),
+                              style: textTheme.labelSmall,
+                            )),
+                      )
                     : const SizedBox.shrink())
           ],
         ),

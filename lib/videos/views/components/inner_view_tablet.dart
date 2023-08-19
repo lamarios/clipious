@@ -7,6 +7,7 @@ import 'package:invidious/videos/views/components/play_button.dart';
 import 'package:invidious/videos/views/components/recommended_videos.dart';
 
 import '../../../globals.dart';
+import '../../../settings/states/settings.dart';
 import '../../../utils.dart';
 import '../../states/video.dart';
 import 'add_to_queue_button.dart';
@@ -27,6 +28,7 @@ class VideoTabletInnerView extends StatelessWidget {
     AppLocalizations locals = AppLocalizations.of(context)!;
     var textTheme = Theme.of(context).textTheme;
     var cubit = context.read<VideoCubit>();
+    var settings = context.read<SettingsCubit>();
     return Row(
       children: [
         Expanded(
@@ -63,9 +65,9 @@ class VideoTabletInnerView extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      SizedBox(height: 25, child: Checkbox(value: videoController.playRecommendedNext, onChanged: cubit.togglePlayRecommendedNext, visualDensity: VisualDensity.compact)),
+                      SizedBox(height: 25, child: Checkbox(value: settings.state.playRecommendedNext, onChanged: cubit.togglePlayRecommendedNext, visualDensity: VisualDensity.compact)),
                       InkWell(
-                          onTap: () => cubit.togglePlayRecommendedNext(!videoController.playRecommendedNext),
+                          onTap: () => cubit.togglePlayRecommendedNext(!settings.state.playRecommendedNext),
                           child: Text(
                             locals.addRecommendedToQueue,
                             style: textTheme.bodySmall,

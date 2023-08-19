@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:invidious/player/views/components/player_controls.dart';
+import 'package:invidious/settings/states/settings.dart';
 import 'package:invidious/videos/views/components/offline_video_thumbnail.dart';
 
 import '../../../downloads/models/downloaded_video.dart';
@@ -19,9 +20,10 @@ class AudioPlayer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var player = context.read<PlayerCubit>();
+    var settings = context.read<SettingsCubit>();
 
     return BlocProvider(
-      create: (context) => AudioPlayerCubit(AudioPlayerState(offlineVideo: offlineVideo, video: video), player),
+      create: (context) => AudioPlayerCubit(AudioPlayerState(offlineVideo: offlineVideo, video: video), player, settings),
       child: BlocBuilder<AudioPlayerCubit, AudioPlayerState>(
         builder: (context, _) => BlocListener<PlayerCubit, PlayerState>(
           listenWhen: (previous, current) => previous.mediaCommand != current.mediaCommand && current.mediaCommand != null,

@@ -139,178 +139,175 @@ class Settings extends StatelessWidget {
     var locals = AppLocalizations.of(context)!;
     SettingsThemeData theme = settingsTheme(colorScheme);
 
-    return BlocProvider(
-      create: (BuildContext context) => SettingsCubit(SettingsState(), context.read<AppCubit>()),
-      child: BlocBuilder<SettingsCubit, SettingsState>(
-        builder: (ctx, _) {
-          var cubit = ctx.read<SettingsCubit>();
-          return Scaffold(
-              extendBody: true,
-              bottomNavigationBar: const SizedBox.shrink(),
-              appBar: AppBar(
-                backgroundColor: colorScheme.background,
-                scrolledUnderElevation: 0,
-                title: Text(locals.settings),
-              ),
+    return BlocBuilder<SettingsCubit, SettingsState>(
+      builder: (ctx, _) {
+        var cubit = ctx.read<SettingsCubit>();
+        return Scaffold(
+            extendBody: true,
+            bottomNavigationBar: const SizedBox.shrink(),
+            appBar: AppBar(
               backgroundColor: colorScheme.background,
-              body: SafeArea(
-                  child: SettingsList(
-                lightTheme: theme,
-                darkTheme: theme,
-                sections: [
-                  SettingsSection(
-                    title: Text(locals.browsing),
-                    tiles: [
-                      SettingsTile(
-                        title: Text(locals.country),
-                        value: Text(_.country.name),
-                        onPressed: (ctx) => searchCountry(ctx, _),
-                      ),
-                      SettingsTile(
-                        title: Text(locals.whenAppStartsShow),
-                        value: Text(getCategories(ctx)[_.onOpen]),
-                        onPressed: (ctx) => selectOnOpen(ctx, _),
-                      ),
-                      SettingsTile(
-                        title: Text(locals.appLanguage),
-                        value: Text(cubit.getLocaleDisplayName() ?? locals.followSystem),
-                        onPressed: (ctx) => showSelectLanguage(ctx, _),
-                      ),
-                      SettingsTile.switchTile(
-                        title: const Text('Return YouTube Dislike'),
-                        description: Text(locals.returnYoutubeDislikeDescription),
-                        initialValue: _.useReturnYoutubeDislike,
-                        onToggle: cubit.toggleReturnYoutubeDislike,
-                      ),
-                      SettingsTile.navigation(
-                        title: Text(locals.searchHistory),
-                        description: Text(locals.searchHistoryDescription),
-                        onPressed: (context) => openSearchHistorySettings(ctx),
-                      ),
-                      SettingsTile.navigation(
-                        title: Text(locals.videoFilters),
-                        description: Text(locals.videoFiltersSettingTileDescriptions),
-                        onPressed: openVideoFilterSettings,
-                      ),
-                    ],
-                  ),
-                  SettingsSection(title: Text(locals.servers), tiles: [
-                    SettingsTile.navigation(
-                      title: Text(locals.manageServers),
-                      description: BlocBuilder<AppCubit, AppState>(
-                          buildWhen: (previous, current) => previous.server != current.server, builder: (context, app) => Text(app.server != null ? locals.currentServer(app.server!.url) : "")),
-                      onPressed: manageServers,
-                    ),
-                    SettingsTile.switchTile(
-                      title: Text(locals.skipSslVerification),
-                      description: Text(locals.skipSslVerificationDescription),
-                      initialValue: _.skipSslVerification,
-                      onToggle: cubit.toggleSslVerification,
-                    )
-                  ]),
-                  SettingsSection(title: Text(locals.videoPlayer), tiles: [
-                    SettingsTile.switchTile(
-                      initialValue: _.useDash,
-                      onToggle: cubit.toggleDash,
-                      title: Text(locals.useDash),
-                      description: Text(locals.useDashDescription),
-                    ),
-                    SettingsTile.switchTile(
-                      initialValue: _.useProxy,
-                      onToggle: cubit.toggleProxy,
-                      title: Text(locals.useProxy),
-                      description: Text(locals.useProxyDescription),
-                    ),
-                    SettingsTile.switchTile(
-                      initialValue: _.autoplayVideoOnLoad,
-                      onToggle: cubit.toggleAutoplayOnLoad,
-                      title: Text(locals.autoplayVideoOnLoad),
-                      description: Text(locals.autoplayVideoOnLoadDescription),
+              scrolledUnderElevation: 0,
+              title: Text(locals.settings),
+            ),
+            backgroundColor: colorScheme.background,
+            body: SafeArea(
+                child: SettingsList(
+              lightTheme: theme,
+              darkTheme: theme,
+              sections: [
+                SettingsSection(
+                  title: Text(locals.browsing),
+                  tiles: [
+                    SettingsTile(
+                      title: Text(locals.country),
+                      value: Text(_.country.name),
+                      onPressed: (ctx) => searchCountry(ctx, _),
                     ),
                     SettingsTile(
-                      title: Text(locals.subtitleFontSize),
-                      description: Text(locals.subtitleFontSizeDescription),
-                      trailing: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          IconButton(onPressed: () => cubit.changeSubtitleSize(increase: false), icon: const Icon(Icons.remove)),
-                          Text(_.subtitleSize.floor().toString()),
-                          IconButton(onPressed: () => cubit.changeSubtitleSize(increase: true), icon: const Icon(Icons.add)),
-                        ],
-                      ),
+                      title: Text(locals.whenAppStartsShow),
+                      value: Text(getCategories(ctx)[_.onOpen]),
+                      onPressed: (ctx) => selectOnOpen(ctx, _),
+                    ),
+                    SettingsTile(
+                      title: Text(locals.appLanguage),
+                      value: Text(cubit.getLocaleDisplayName() ?? locals.followSystem),
+                      onPressed: (ctx) => showSelectLanguage(ctx, _),
                     ),
                     SettingsTile.switchTile(
-                      initialValue: _.rememberSubtitles,
-                      onToggle: cubit.toggleRememberSubtitles,
-                      title: Text(locals.rememberSubtitleLanguage),
-                      description: Text(locals.rememberSubtitleLanguageDescription),
-                    ),
-                    SettingsTile.switchTile(
-                      initialValue: _.rememberPlayBackSpeed,
-                      onToggle: cubit.toggleRememberPlaybackSpeed,
-                      title: Text(locals.rememberPlaybackSpeed),
-                      description: Text(locals.rememberPlaybackSpeedDescription),
+                      title: const Text('Return YouTube Dislike'),
+                      description: Text(locals.returnYoutubeDislikeDescription),
+                      initialValue: _.useReturnYoutubeDislike,
+                      onToggle: cubit.toggleReturnYoutubeDislike,
                     ),
                     SettingsTile.navigation(
-                      title: const Text('SponsorBlock'),
-                      description: Text(locals.sponsorBlockDescription),
-                      onPressed: openSponsorBlockSettings,
+                      title: Text(locals.searchHistory),
+                      description: Text(locals.searchHistoryDescription),
+                      onPressed: (context) => openSearchHistorySettings(ctx),
                     ),
-                    SettingsTile.switchTile(
-                      initialValue: _.forceLandscapeFullScreen,
-                      onToggle: cubit.toggleForceLandscapeFullScreen,
-                      title: Text(locals.lockFullScreenToLandscape),
-                      description: Text(locals.lockFullScreenToLandscapeDescription),
+                    SettingsTile.navigation(
+                      title: Text(locals.videoFilters),
+                      description: Text(locals.videoFiltersSettingTileDescriptions),
+                      onPressed: openVideoFilterSettings,
                     ),
-                    SettingsTile.switchTile(
-                      initialValue: _.fillFullscreen,
-                      onToggle: cubit.toggleFillFullscreen,
-                      title: Text(locals.fillFullscreen),
-                      description: Text(locals.fillFullscreenDescription),
-                    ),
-                  ]),
-                  SettingsSection(
-                    title: Text(locals.appearance),
-                    tiles: [
-                      SettingsTile.switchTile(
-                        initialValue: _.useDynamicTheme,
-                        onToggle: cubit.toggleDynamicTheme,
-                        title: Text(locals.useDynamicTheme),
-                        description: Text(locals.useDynamicThemeDescription),
-                      ),
-                      SettingsTile(
-                        title: Text(locals.themeBrightness),
-                        value: Text(cubit.getThemeLabel(locals, _.themeMode)),
-                        onPressed: (ctx) => selectTheme(ctx, _),
-                      ),
-                      SettingsTile.switchTile(
-                        initialValue: _.blackBackground,
-                        onToggle: cubit.toggleBlackBackground,
-                        title: Text(locals.blackBackground),
-                        description: Text(locals.blackBackgroundDescription),
-                      ),
-                    ],
+                  ],
+                ),
+                SettingsSection(title: Text(locals.servers), tiles: [
+                  SettingsTile.navigation(
+                    title: Text(locals.manageServers),
+                    description: BlocBuilder<AppCubit, AppState>(
+                        buildWhen: (previous, current) => previous.server != current.server, builder: (context, app) => Text(app.server != null ? locals.currentServer(app.server!.url) : "")),
+                    onPressed: manageServers,
                   ),
-                  SettingsSection(title: (Text(locals.about)), tiles: [
-                    SettingsTile(title: const Center(child: SizedBox(height: 150, width: 150, child: AppIconImage()))),
-                    SettingsTile(
-                      title: Text('${locals.name}: ${_.packageInfo.appName}'),
-                      description: Text('${locals.package}: ${_.packageInfo.packageName}'),
+                  SettingsTile.switchTile(
+                    title: Text(locals.skipSslVerification),
+                    description: Text(locals.skipSslVerificationDescription),
+                    initialValue: _.skipSslVerification,
+                    onToggle: cubit.toggleSslVerification,
+                  )
+                ]),
+                SettingsSection(title: Text(locals.videoPlayer), tiles: [
+                  SettingsTile.switchTile(
+                    initialValue: _.useDash,
+                    onToggle: cubit.toggleDash,
+                    title: Text(locals.useDash),
+                    description: Text(locals.useDashDescription),
+                  ),
+                  SettingsTile.switchTile(
+                    initialValue: _.useProxy,
+                    onToggle: cubit.toggleProxy,
+                    title: Text(locals.useProxy),
+                    description: Text(locals.useProxyDescription),
+                  ),
+                  SettingsTile.switchTile(
+                    initialValue: _.autoplayVideoOnLoad,
+                    onToggle: cubit.toggleAutoplayOnLoad,
+                    title: Text(locals.autoplayVideoOnLoad),
+                    description: Text(locals.autoplayVideoOnLoadDescription),
+                  ),
+                  SettingsTile(
+                    title: Text(locals.subtitleFontSize),
+                    description: Text(locals.subtitleFontSizeDescription),
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        IconButton(onPressed: () => cubit.changeSubtitleSize(increase: false), icon: const Icon(Icons.remove)),
+                        Text(_.subtitleSize.floor().toString()),
+                        IconButton(onPressed: () => cubit.changeSubtitleSize(increase: true), icon: const Icon(Icons.add)),
+                      ],
+                    ),
+                  ),
+                  SettingsTile.switchTile(
+                    initialValue: _.rememberSubtitles,
+                    onToggle: cubit.toggleRememberSubtitles,
+                    title: Text(locals.rememberSubtitleLanguage),
+                    description: Text(locals.rememberSubtitleLanguageDescription),
+                  ),
+                  SettingsTile.switchTile(
+                    initialValue: _.rememberPlayBackSpeed,
+                    onToggle: cubit.toggleRememberPlaybackSpeed,
+                    title: Text(locals.rememberPlaybackSpeed),
+                    description: Text(locals.rememberPlaybackSpeedDescription),
+                  ),
+                  SettingsTile.navigation(
+                    title: const Text('SponsorBlock'),
+                    description: Text(locals.sponsorBlockDescription),
+                    onPressed: openSponsorBlockSettings,
+                  ),
+                  SettingsTile.switchTile(
+                    initialValue: _.forceLandscapeFullScreen,
+                    onToggle: cubit.toggleForceLandscapeFullScreen,
+                    title: Text(locals.lockFullScreenToLandscape),
+                    description: Text(locals.lockFullScreenToLandscapeDescription),
+                  ),
+                  SettingsTile.switchTile(
+                    initialValue: _.fillFullscreen,
+                    onToggle: cubit.toggleFillFullscreen,
+                    title: Text(locals.fillFullscreen),
+                    description: Text(locals.fillFullscreenDescription),
+                  ),
+                ]),
+                SettingsSection(
+                  title: Text(locals.appearance),
+                  tiles: [
+                    SettingsTile.switchTile(
+                      initialValue: _.useDynamicTheme,
+                      onToggle: cubit.toggleDynamicTheme,
+                      title: Text(locals.useDynamicTheme),
+                      description: Text(locals.useDynamicThemeDescription),
                     ),
                     SettingsTile(
-                      title: Text('${locals.version}: ${_.packageInfo.version}'),
-                      description: Text('${locals.build}: ${_.packageInfo.buildNumber}'),
+                      title: Text(locals.themeBrightness),
+                      value: Text(cubit.getThemeLabel(locals, _.themeMode)),
+                      onPressed: (ctx) => selectTheme(ctx, _),
                     ),
-                    SettingsTile(
-                      title: Text(locals.appLogs),
-                      description: Text(locals.appLogsDescription),
-                      onPressed: openAppLogs,
-                    )
-                  ])
-                ],
-              )));
-        },
-      ),
+                    SettingsTile.switchTile(
+                      initialValue: _.blackBackground,
+                      onToggle: cubit.toggleBlackBackground,
+                      title: Text(locals.blackBackground),
+                      description: Text(locals.blackBackgroundDescription),
+                    ),
+                  ],
+                ),
+                SettingsSection(title: (Text(locals.about)), tiles: [
+                  SettingsTile(title: const Center(child: SizedBox(height: 150, width: 150, child: AppIconImage()))),
+                  SettingsTile(
+                    title: Text('${locals.name}: ${_.packageInfo.appName}'),
+                    description: Text('${locals.package}: ${_.packageInfo.packageName}'),
+                  ),
+                  SettingsTile(
+                    title: Text('${locals.version}: ${_.packageInfo.version}'),
+                    description: Text('${locals.build}: ${_.packageInfo.buildNumber}'),
+                  ),
+                  SettingsTile(
+                    title: Text(locals.appLogs),
+                    description: Text(locals.appLogsDescription),
+                    onPressed: openAppLogs,
+                  )
+                ])
+              ],
+            )));
+      },
     );
   }
 }

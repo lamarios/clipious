@@ -10,13 +10,15 @@ import 'package:invidious/search/models/search_sort_by.dart';
 
 import '../../channels/models/channel.dart';
 import '../../playlists/models/playlist.dart';
+import '../../settings/states/settings.dart';
 import '../../videos/models/video_in_list.dart';
 import '../models/search_type.dart';
 
 part 'search.g.dart';
 
 class SearchCubit<T extends SearchState> extends Cubit<SearchState> {
-  SearchCubit(super.initialState) {
+  final SettingsCubit settings;
+  SearchCubit(super.initialState, this.settings) {
     onInit();
   }
 
@@ -63,7 +65,7 @@ class SearchCubit<T extends SearchState> extends Cubit<SearchState> {
   }
 
   List<String> getHistory() {
-    return state.useHistory ? db.getSearchHistory() : [];
+    return settings.state.useSearchHistory ? db.getSearchHistory() : [];
   }
 
   search(String value) async {
@@ -117,7 +119,6 @@ class SearchState extends Clonable<SearchState> {
 
   List<Playlist> playlists;
 
-  bool useHistory;
 
   bool searchNow;
 
@@ -152,7 +153,6 @@ class SearchState extends Clonable<SearchState> {
         channels = channels ?? [],
         videos = videos ?? [],
         playlists = playlists ?? [],
-        useHistory = useHistory ?? db.getSettings(USE_SEARCH_HISTORY)?.value == 'true',
         searchNow = searchNow ?? false,
         suggestions = suggestions ?? [],
         sortBy = sortBy ?? SearchSortBy.relevance,
@@ -162,7 +162,7 @@ class SearchState extends Clonable<SearchState> {
         channelPage = channelPage ?? 1,
         playlistPage = playlistPage ?? 1;
 
-  SearchState.inLine(this.queryController, this.selectedIndex, this.videos, this.channels, this.playlists, this.useHistory, this.searchNow, this.suggestions, this.sortBy, this.showResults,
+  SearchState.inLine(this.queryController, this.selectedIndex, this.videos, this.channels, this.playlists,  this.searchNow, this.suggestions, this.sortBy, this.showResults,
       this.loading, this.videoPage, this.channelPage, this.playlistPage);
 
   @override

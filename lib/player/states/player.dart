@@ -9,17 +9,16 @@ import 'package:easy_debounce/easy_debounce.dart';
 import 'package:easy_debounce/easy_throttle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:invidious/database.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/player/models/mediaCommand.dart';
 import 'package:invidious/player/models/mediaEvent.dart';
-import 'package:invidious/settings/models/db/settings.dart';
 import 'package:invidious/utils/models/image_object.dart';
 import 'package:logging/logging.dart';
 
 import '../../downloads/models/downloaded_video.dart';
 import '../../main.dart';
 import '../../mediaHander.dart';
+import '../../settings/states/settings.dart';
 import '../../utils/models/pair.dart';
 import '../../videos/models/base_video.dart';
 import '../../videos/models/db/progress.dart' as dbProgress;
@@ -31,6 +30,7 @@ part 'player.g.dart';
 
 const double targetHeight = 69;
 const double miniPlayerThreshold = 300;
+const skipToVideoThrottleName = 'skip-to-video';
 const double bigPlayerThreshold = 700;
 
 var log = Logger('MiniPlayerController');
@@ -38,7 +38,9 @@ var log = Logger('MiniPlayerController');
 enum PlayerRepeat { noRepeat, repeatAll, repeatOne }
 
 class PlayerCubit extends Cubit<PlayerState> {
-  PlayerCubit(super.initialState) {
+  final SettingsCubit settings;
+
+  PlayerCubit(super.initialState, this.settings) {
     onReady();
   }
 
@@ -148,26 +150,25 @@ class PlayerCubit extends Cubit<PlayerState> {
   }
 
   toggleShuffle() {
-    var state = this.state.copyWith();
-    state.shuffle = !state.shuffle;
-    db.saveSetting(SettingsValue(PLAYER_SHUFFLE, state.shuffle.toString()));
-    emit(state);
+    settings.setShuffle(!settings.state.playerShuffleMode);
+    emit(state.copyWith());
   }
 
   setNextRepeatMode() {
-    switch (state.repeat) {
+    var repeat = PlayerRepeat.noRepeat;
+    switch (settings.state.playerRepeatMode) {
       case PlayerRepeat.noRepeat:
-        state.repeat = PlayerRepeat.repeatAll;
+        repeat = PlayerRepeat.repeatAll;
         break;
       case PlayerRepeat.repeatAll:
-        state.repeat = PlayerRepeat.repeatOne;
+        repeat = PlayerRepeat.repeatOne;
         break;
       case PlayerRepeat.repeatOne:
-        state.repeat = PlayerRepeat.noRepeat;
+        repeat = PlayerRepeat.noRepeat;
         break;
     }
 
-    db.saveSetting(SettingsValue(PLAYER_REPEAT, PlayerRepeat.values.indexOf(state.repeat).toString()));
+    settings.setRepeatMode(repeat);
   }
 
   setVideos(List<BaseVideo> videos) {
@@ -301,50 +302,70 @@ class PlayerCubit extends Cubit<PlayerState> {
   }
 
   playNext() {
+    EasyThrottle.throttle(skipToVideoThrottleName, Duration(seconds: 1), () {
+      if (state.videos.isNotEmpty || state.offlineVideos.isNotEmpty) {
+        var state = this.state.copyWith();
+        var listToUpdate = state.videos.isNotEmpty ? state.videos : state.offlineVideos;
 
-    if (state.videos.isNotEmpty || state.offlineVideos.isNotEmpty) {
-      var state = this.state.copyWith();
-      var listToUpdate = state.videos.isNotEmpty ? state.videos : state.offlineVideos;
-
-      log.fine('Play next: played length: ${state.playedVideos.length} videos: ${state.videos.length} Repeat mode: ${state.repeat}');
-      if (state.repeat == PlayerRepeat.repeatOne) {
-        if (state.videos.isNotEmpty) {
-          switchToVideo(state.currentlyPlaying!);
-        } else if (state.offlineVideos.isNotEmpty) {
-          switchToOfflineVideo(state.offlineCurrentlyPlaying!);
-        }
-      } else {
-        state = this.state.copyWith();
-        if (state.playedVideos.length >= listToUpdate.length) {
-          if (state.repeat == PlayerRepeat.repeatAll) {
-            state.playedVideos = [];
-            state.currentIndex = 0;
-          } else {
-            return;
+        log.fine('Play next: played length: ${state.playedVideos.length} videos: ${state.videos.length} Repeat mode: ${settings.state.playerRepeatMode}');
+        if (settings.state.playerRepeatMode == PlayerRepeat.repeatOne) {
+          if (state.videos.isNotEmpty) {
+            switchToVideo(state.currentlyPlaying!);
+          } else if (state.offlineVideos.isNotEmpty) {
+            switchToOfflineVideo(state.offlineCurrentlyPlaying!);
           }
         } else {
-          if (!state.shuffle) {
-            // making sure we play something that can be played
-            if (state.currentIndex + 1 < listToUpdate.length) {
-              state.currentIndex++;
-            } else if (state.repeat == PlayerRepeat.repeatAll) {
-              // we might reach here if user changes repeat mode and play with previous/next buttons
-              state.currentIndex = 0;
+          state = this.state.copyWith();
+          if (state.playedVideos.length >= listToUpdate.length) {
+            if (settings.state.playerRepeatMode == PlayerRepeat.repeatAll) {
               state.playedVideos = [];
+              state.currentIndex = 0;
             } else {
               return;
             }
           } else {
-            if (state.videos.isNotEmpty) {
-              List<BaseVideo> availableVideos = state.videos.where((e) => !state.playedVideos.contains(e.videoId)).toList();
-              String nextVideoId = availableVideos[Random().nextInt(availableVideos.length)].videoId;
-              state.currentIndex = state.videos.indexWhere((e) => e.videoId == nextVideoId);
+            if (!settings.state.playerShuffleMode) {
+              // making sure we play something that can be played
+              if (state.currentIndex + 1 < listToUpdate.length) {
+                state.currentIndex++;
+              } else if (settings.state.playerRepeatMode == PlayerRepeat.repeatAll) {
+                // we might reach here if user changes repeat mode and play with previous/next buttons
+                state.currentIndex = 0;
+                state.playedVideos = [];
+              } else {
+                return;
+              }
             } else {
-              List<DownloadedVideo> availableVideos = state.offlineVideos.where((e) => !state.playedVideos.contains(e.videoId)).toList();
-              String nextVideoId = availableVideos[Random().nextInt(availableVideos.length)].videoId;
-              state.currentIndex = state.offlineVideos.indexWhere((e) => e.videoId == nextVideoId);
+              if (state.videos.isNotEmpty) {
+                List<BaseVideo> availableVideos = state.videos.where((e) => !state.playedVideos.contains(e.videoId)).toList();
+                String nextVideoId = availableVideos[Random().nextInt(availableVideos.length)].videoId;
+                state.currentIndex = state.videos.indexWhere((e) => e.videoId == nextVideoId);
+              } else {
+                List<DownloadedVideo> availableVideos = state.offlineVideos.where((e) => !state.playedVideos.contains(e.videoId)).toList();
+                String nextVideoId = availableVideos[Random().nextInt(availableVideos.length)].videoId;
+                state.currentIndex = state.offlineVideos.indexWhere((e) => e.videoId == nextVideoId);
+              }
             }
           }
+          emit(state);
+          if (state.videos.isNotEmpty) {
+            switchToVideo(state.videos[state.currentIndex]);
+          } else if (state.offlineVideos.isNotEmpty) {
+            switchToOfflineVideo(state.offlineVideos[state.currentIndex]);
+          }
+        }
+      }
+    });
+  }
+
+  playPrevious() {
+    EasyThrottle.throttle(skipToVideoThrottleName, const Duration(seconds: 1), () {
+      var listToUpdate = state.videos.isNotEmpty ? state.videos : state.offlineVideos;
+      if (listToUpdate.length > 1) {
+        var state = this.state.copyWith();
+        state.currentIndex--;
+        if (state.currentIndex < 0) {
+          state.currentIndex = state.videos.length - 1;
         }
         emit(state);
         if (state.videos.isNotEmpty) {
@@ -352,27 +373,9 @@ class PlayerCubit extends Cubit<PlayerState> {
         } else if (state.offlineVideos.isNotEmpty) {
           switchToOfflineVideo(state.offlineVideos[state.currentIndex]);
         }
-      }
-    }
-  }
 
-  playPrevious() {
-    var listToUpdate = state.videos.isNotEmpty ? state.videos : state.offlineVideos;
-    if (listToUpdate.length > 1) {
-      var state = this.state.copyWith();
-      state.currentIndex--;
-      if (state.currentIndex < 0) {
-        state.currentIndex = state.videos.length - 1;
       }
-
-      if (state.videos.isNotEmpty) {
-        switchToVideo(state.videos[state.currentIndex]);
-      } else if (state.offlineVideos.isNotEmpty) {
-        switchToOfflineVideo(state.offlineVideos[state.currentIndex]);
-      }
-
-      emit(state);
-    }
+    });
   }
 
   _setPlaying(bool playing) {
@@ -688,9 +691,7 @@ class PlayerState {
   List<DownloadedVideo> offlineVideos = [];
 
   // playlist controls
-  PlayerRepeat repeat = PlayerRepeat.values[int.parse(db.getSettings(PLAYER_REPEAT)?.value ?? '0')];
   List<String> playedVideos = [];
-  bool shuffle = db.getSettings(PLAYER_SHUFFLE)?.value == 'true';
   bool isAudio = true;
 
   // playing video data
@@ -738,8 +739,6 @@ class PlayerState {
       this.opacity,
       this.dragDistance,
       this.dragStartMini,
-      this.repeat,
-      this.shuffle,
       this.bufferedPosition,
       this.playedVideos,
       this.offset,

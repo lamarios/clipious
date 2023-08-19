@@ -54,7 +54,6 @@ class VideoFilterCubit extends Cubit<VideoFilterState> {
   void hideOnFilteredChanged(bool value) {
     var state = this.state.copyWith();
     state.hideFilteredVideos = value;
-    db.saveSetting(SettingsValue(HIDE_FILTERED_VIDEOS, value.toString()));
     emit(state);
   }
 }

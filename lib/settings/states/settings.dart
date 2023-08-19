@@ -9,6 +9,7 @@ import 'package:package_info_plus/package_info_plus.dart';
 
 import '../../database.dart';
 import '../../globals.dart';
+import '../../player/states/player.dart';
 import '../../utils.dart';
 import '../../utils/models/country.dart';
 import '../models/db/server.dart';
@@ -227,6 +228,36 @@ class SettingsCubit extends Cubit<SettingsState> {
     appCubit.rebuildApp();
   }
 
+  setLastSpeed(double d) {
+    var state = this.state.copyWith();
+    state.lastSpeed = d;
+    emit(state);
+  }
+
+  setShuffle(bool b) {
+    var state = this.state.copyWith();
+    state.playerShuffleMode = b;
+    emit(state);
+  }
+
+  setRepeatMode(PlayerRepeat repeat) {
+    var state = this.state.copyWith();
+    state.playerRepeatMode = repeat;
+    emit(state);
+  }
+
+  setLastSubtitle(String s) {
+    var state = this.state.copyWith();
+    state.lastSubtitles = s;
+    emit(state);
+  }
+
+  setPlayRecommendedNext(bool b) {
+    var state = this.state.copyWith();
+    state.playRecommendedNext =b;
+    emit(state);
+  }
+
   String? getLocaleDisplayName() {
     List<String>? localeString = state.locale?.split('_');
     Locale? l = localeString != null ? Locale.fromSubtags(languageCode: localeString[0], scriptCode: localeString.length >= 2 ? localeString[1] : null) : null;
@@ -280,6 +311,26 @@ class SettingsState {
   bool get useSearchHistory => _get(USE_SEARCH_HISTORY)?.value == 'true';
 
   int get searchHistoryLimit => int.parse(_get(SEARCH_HISTORY_LIMIT)?.value ?? searchHistoryDefaultLength);
+
+  double get lastSpeed => double.parse(_get(LAST_SPEED)?.value ?? "1.0");
+
+  bool get playerShuffleMode => _get(PLAYER_SHUFFLE)?.value == "true";
+
+  PlayerRepeat get playerRepeatMode => PlayerRepeat.values[int.parse(_get(PLAYER_REPEAT)?.value ?? '0')];
+
+  String get lastSubtitles => _get(LAST_SUBTITLE)?.value ?? '';
+
+  bool get playRecommendedNext => _get(PLAY_RECOMMENDED_NEXT)?.value == "true";
+
+  set playRecommendedNext(bool b) => _set(PLAY_RECOMMENDED_NEXT, b);
+
+  set lastSubtitles(String s) => _set(LAST_SUBTITLE, s);
+
+  set playerRepeatMode(PlayerRepeat repeatMode) => _set(PLAYER_REPEAT, PlayerRepeat.values.indexOf(repeatMode));
+
+  set playerShuffleMode(bool b) => _set(PLAYER_SHUFFLE, b);
+
+  set lastSpeed(double d) => _set(LAST_SPEED, d);
 
   set sponsorBlock(bool b) => _set(USE_SPONSORBLOCK, b);
 
