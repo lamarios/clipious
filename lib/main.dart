@@ -136,14 +136,20 @@ class MyApp extends StatelessWidget {
               darkColorScheme = darkColorScheme.copyWith(background: Colors.black);
             }
 
-            List<String>? localeString = settings.state.locale?.split('_');
+            List<String>? localeString;
+            var dbLocale = settings.state.locale;
+            if (dbLocale != null && dbLocale != 'null') {
+              localeString = dbLocale.split('_');
+            }
+
+            log.fine('locale from db ${db.getSettings(LOCALE)?.value} from cubit: ${dbLocale}, ${localeString}');
             Locale? savedLocale = localeString != null ? Locale.fromSubtags(languageCode: localeString[0], scriptCode: localeString.length >= 2 ? localeString[1] : null) : null;
 
             return MaterialApp(
                 locale: savedLocale,
                 localizationsDelegates: AppLocalizations.localizationsDelegates,
                 localeListResolutionCallback: (locales, supportedLocales) {
-                  log.info('device locales=$locales supported locales=$supportedLocales');
+                  log.info('device locales=$locales supported locales=$supportedLocales, saved: $savedLocale');
                   if (savedLocale != null) {
                     log.info("using saved locale, $savedLocale");
                     return savedLocale;
