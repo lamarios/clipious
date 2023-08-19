@@ -70,7 +70,9 @@ Future<void> main() async {
     BlocProvider(
       create: (context) => AppCubit(AppState()),
     ),
-    BlocProvider(create: (context) => SettingsCubit(SettingsState(), context.read<AppCubit>()),),
+    BlocProvider(
+      create: (context) => SettingsCubit(SettingsState(), context.read<AppCubit>()),
+    ),
     BlocProvider(
       create: (context) => PlayerCubit(PlayerState(), context.read<SettingsCubit>()),
     ),
@@ -87,19 +89,18 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool showWizard = false;
-    try {
-      db.getCurrentlySelectedServer();
-    } catch (err) {
-      showWizard = true;
-    }
-
     return BlocBuilder<AppCubit, AppState>(
         buildWhen: (previous, current) => previous.selectedIndex == current.selectedIndex || previous.server != current.server,
         // we want to rebuild only when anything other than the navigation index is changed
         builder: (context, _) {
+          var app = context.read<AppCubit>();
           var settings = context.read<SettingsCubit>();
           bool useDynamicTheme = settings.state.useDynamicTheme;
+          bool showWizard = false;
+
+          if (app.state.server == null) {
+            showWizard = true;
+          }
 
           return DynamicColorBuilder(builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) {
             ColorScheme lightColorScheme;

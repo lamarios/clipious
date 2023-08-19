@@ -13,7 +13,13 @@ abstract class _$ServerListSettingsStateCWProxy {
 
   ServerListSettingsState publicServerProgress(double publicServerProgress);
 
+  ServerListSettingsState addServerController(
+      TextEditingController addServerController);
+
   ServerListSettingsState pinging(bool pinging);
+
+  ServerListSettingsState publicServersError(
+      PublicServerErrors publicServersError);
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `ServerListSettingsState(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
@@ -25,7 +31,9 @@ abstract class _$ServerListSettingsStateCWProxy {
     List<Server>? dbServers,
     List<Server>? publicServers,
     double? publicServerProgress,
+    TextEditingController? addServerController,
     bool? pinging,
+    PublicServerErrors? publicServersError,
   });
 }
 
@@ -49,7 +57,17 @@ class _$ServerListSettingsStateCWProxyImpl
       this(publicServerProgress: publicServerProgress);
 
   @override
+  ServerListSettingsState addServerController(
+          TextEditingController addServerController) =>
+      this(addServerController: addServerController);
+
+  @override
   ServerListSettingsState pinging(bool pinging) => this(pinging: pinging);
+
+  @override
+  ServerListSettingsState publicServersError(
+          PublicServerErrors publicServersError) =>
+      this(publicServersError: publicServersError);
 
   @override
 
@@ -63,28 +81,38 @@ class _$ServerListSettingsStateCWProxyImpl
     Object? dbServers = const $CopyWithPlaceholder(),
     Object? publicServers = const $CopyWithPlaceholder(),
     Object? publicServerProgress = const $CopyWithPlaceholder(),
+    Object? addServerController = const $CopyWithPlaceholder(),
     Object? pinging = const $CopyWithPlaceholder(),
+    Object? publicServersError = const $CopyWithPlaceholder(),
   }) {
-    return ServerListSettingsState(
-      dbServers: dbServers == const $CopyWithPlaceholder() || dbServers == null
+    return ServerListSettingsState._(
+      dbServers == const $CopyWithPlaceholder() || dbServers == null
           ? _value.dbServers
           // ignore: cast_nullable_to_non_nullable
           : dbServers as List<Server>,
-      publicServers:
-          publicServers == const $CopyWithPlaceholder() || publicServers == null
-              ? _value.publicServers
-              // ignore: cast_nullable_to_non_nullable
-              : publicServers as List<Server>,
-      publicServerProgress:
-          publicServerProgress == const $CopyWithPlaceholder() ||
-                  publicServerProgress == null
-              ? _value.publicServerProgress
-              // ignore: cast_nullable_to_non_nullable
-              : publicServerProgress as double,
-      pinging: pinging == const $CopyWithPlaceholder() || pinging == null
+      publicServers == const $CopyWithPlaceholder() || publicServers == null
+          ? _value.publicServers
+          // ignore: cast_nullable_to_non_nullable
+          : publicServers as List<Server>,
+      publicServerProgress == const $CopyWithPlaceholder() ||
+              publicServerProgress == null
+          ? _value.publicServerProgress
+          // ignore: cast_nullable_to_non_nullable
+          : publicServerProgress as double,
+      addServerController == const $CopyWithPlaceholder() ||
+              addServerController == null
+          ? _value.addServerController
+          // ignore: cast_nullable_to_non_nullable
+          : addServerController as TextEditingController,
+      pinging == const $CopyWithPlaceholder() || pinging == null
           ? _value.pinging
           // ignore: cast_nullable_to_non_nullable
           : pinging as bool,
+      publicServersError == const $CopyWithPlaceholder() ||
+              publicServersError == null
+          ? _value.publicServersError
+          // ignore: cast_nullable_to_non_nullable
+          : publicServersError as PublicServerErrors,
     );
   }
 }

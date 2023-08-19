@@ -114,7 +114,7 @@ class AudioPlayerCubit extends MediaPlayerCubit<AudioPlayerState> {
           throw Error();
         }
 
-        state.player?.setAudioSource(source, initialPosition: startAt);
+        await state.player?.setAudioSource(source, initialPosition: startAt);
 
         play();
         // TODO: make this less duplicated between videos and audio

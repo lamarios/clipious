@@ -58,10 +58,8 @@ class ServerSettingsCubit extends Cubit<Server> {
     // widget.refreshServers();
 
     Server currentServer = db.getCurrentlySelectedServer();
-    if (currentServer.url == state.url) {
-      db.deleteSetting(SELECTED_SERVER);
-    }
     emit(state);
+    app.setServer(currentServer);
   }
 
   bool get canDelete => db.getServers().length > 1;

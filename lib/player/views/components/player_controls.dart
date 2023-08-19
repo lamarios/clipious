@@ -21,7 +21,7 @@ class PlayerControls extends StatelessWidget {
   showPlaybackSpeedSelection(BuildContext context, MediaPlayerCubit player) {
     Navigator.of(context).pop();
     showModalBottomSheet(
-      isScrollControlled:true,
+      isScrollControlled: true,
       showDragHandle: true,
       context: context,
       builder: (context) {
@@ -73,7 +73,7 @@ class PlayerControls extends StatelessWidget {
 
     showModalBottomSheet(
       showDragHandle: true,
-      isScrollControlled:true,
+      isScrollControlled: true,
       context: context,
       builder: (context) {
         return SingleChildScrollView(
@@ -199,7 +199,7 @@ class PlayerControls extends StatelessWidget {
               },
               child: GestureDetector(
                 behavior: HitTestBehavior.translucent,
-                onTap: _.displayControls ? cubit.hideControls: cubit.showControls,
+                onTap: _.displayControls ? cubit.hideControls : cubit.showControls,
                 onVerticalDragEnd: pc.isFullScreen() == FullScreenState.fullScreen ? null : player.videoDraggedEnd,
                 onVerticalDragUpdate: pc.isFullScreen() == FullScreenState.fullScreen ? null : player.videoDragged,
                 onVerticalDragStart: pc.isFullScreen() == FullScreenState.fullScreen ? null : player.videoDragStarted,
@@ -243,30 +243,31 @@ class PlayerControls extends StatelessWidget {
                                               }
                                             ],
                                           ),
-                                        if(!(player.state.currentlyPlaying?.liveNow ?? false))  Padding(
-                                            padding: const EdgeInsets.only(top: 0.0, right: 8),
-                                            child: Row(
-                                              children: [
-                                                Expanded(
-                                                  child: SizedBox(
-                                                    height: 25,
-                                                    child: Slider(
-                                                      min: 0,
-                                                      value: min(_.audioPosition.inMilliseconds.toDouble(), pc.duration().inMilliseconds.toDouble()),
-                                                      max: pc.duration().inMilliseconds.toDouble(),
-                                                      secondaryTrackValue: pc.bufferedPosition()?.inMilliseconds.toDouble(),
-                                                      onChangeEnd: cubit.onScrubbed,
-                                                      onChanged: cubit.onScrubDrag,
+                                          if (!(player.state.currentlyPlaying?.liveNow ?? false))
+                                            Padding(
+                                              padding: const EdgeInsets.only(top: 0.0, right: 8),
+                                              child: Row(
+                                                children: [
+                                                  Expanded(
+                                                    child: SizedBox(
+                                                      height: 25,
+                                                      child: Slider(
+                                                        min: 0,
+                                                        value: min(_.audioPosition.inMilliseconds.toDouble(), pc.duration().inMilliseconds.toDouble()),
+                                                        max: pc.duration().inMilliseconds.toDouble(),
+                                                        secondaryTrackValue: min(pc.bufferedPosition()?.inMilliseconds.toDouble() ?? 0, pc.duration().inMilliseconds.toDouble()),
+                                                        onChangeEnd: cubit.onScrubbed,
+                                                        onChanged: cubit.onScrubDrag,
+                                                      ),
                                                     ),
                                                   ),
-                                                ),
-                                                Text(
-                                                  '${prettyDuration(pc.position())} / ${prettyDuration(pc.duration())}',
-                                                  style: textTheme.bodySmall?.copyWith(color: Colors.white),
-                                                ),
-                                              ],
+                                                  Text(
+                                                    '${prettyDuration(pc.position())} / ${prettyDuration(pc.duration())}',
+                                                    style: textTheme.bodySmall?.copyWith(color: Colors.white),
+                                                  ),
+                                                ],
+                                              ),
                                             ),
-                                          ),
                                         ],
                                       ),
                                     )

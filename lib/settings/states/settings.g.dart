@@ -7,13 +7,9 @@ part of 'settings.dart';
 // **************************************************************************
 
 abstract class _$SettingsStateCWProxy {
-  SettingsState settings(Map<String, SettingsValue>? settings);
+  SettingsState settings(Map<String, SettingsValue> settings);
 
-  SettingsState dbServers(List<Server>? dbServers);
-
-  SettingsState currentServer(Server? currentServer);
-
-  SettingsState packageInfo(PackageInfo? packageInfo);
+  SettingsState packageInfo(PackageInfo packageInfo);
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `SettingsState(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
@@ -23,8 +19,6 @@ abstract class _$SettingsStateCWProxy {
   /// ````
   SettingsState call({
     Map<String, SettingsValue>? settings,
-    List<Server>? dbServers,
-    Server? currentServer,
     PackageInfo? packageInfo,
   });
 }
@@ -36,19 +30,11 @@ class _$SettingsStateCWProxyImpl implements _$SettingsStateCWProxy {
   final SettingsState _value;
 
   @override
-  SettingsState settings(Map<String, SettingsValue>? settings) =>
+  SettingsState settings(Map<String, SettingsValue> settings) =>
       this(settings: settings);
 
   @override
-  SettingsState dbServers(List<Server>? dbServers) =>
-      this(dbServers: dbServers);
-
-  @override
-  SettingsState currentServer(Server? currentServer) =>
-      this(currentServer: currentServer);
-
-  @override
-  SettingsState packageInfo(PackageInfo? packageInfo) =>
+  SettingsState packageInfo(PackageInfo packageInfo) =>
       this(packageInfo: packageInfo);
 
   @override
@@ -61,27 +47,17 @@ class _$SettingsStateCWProxyImpl implements _$SettingsStateCWProxy {
   /// ````
   SettingsState call({
     Object? settings = const $CopyWithPlaceholder(),
-    Object? dbServers = const $CopyWithPlaceholder(),
-    Object? currentServer = const $CopyWithPlaceholder(),
     Object? packageInfo = const $CopyWithPlaceholder(),
   }) {
-    return SettingsState(
-      settings: settings == const $CopyWithPlaceholder()
+    return SettingsState._(
+      settings == const $CopyWithPlaceholder() || settings == null
           ? _value.settings
           // ignore: cast_nullable_to_non_nullable
-          : settings as Map<String, SettingsValue>?,
-      dbServers: dbServers == const $CopyWithPlaceholder()
-          ? _value.dbServers
-          // ignore: cast_nullable_to_non_nullable
-          : dbServers as List<Server>?,
-      currentServer: currentServer == const $CopyWithPlaceholder()
-          ? _value.currentServer
-          // ignore: cast_nullable_to_non_nullable
-          : currentServer as Server?,
-      packageInfo: packageInfo == const $CopyWithPlaceholder()
+          : settings as Map<String, SettingsValue>,
+      packageInfo == const $CopyWithPlaceholder() || packageInfo == null
           ? _value.packageInfo
           // ignore: cast_nullable_to_non_nullable
-          : packageInfo as PackageInfo?,
+          : packageInfo as PackageInfo,
     );
   }
 }
