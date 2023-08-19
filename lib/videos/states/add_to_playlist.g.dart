@@ -33,16 +33,19 @@ abstract class _$AddToPlaylistControllerCWProxy {
 }
 
 /// Proxy class for `copyWith` functionality. This is a callable class and can be used as follows: `instanceOfAddToPlaylistController.copyWith(...)`. Additionally contains functions for specific fields e.g. `instanceOfAddToPlaylistController.copyWith.fieldName(...)`
-class _$AddToPlaylistControllerCWProxyImpl implements _$AddToPlaylistControllerCWProxy {
+class _$AddToPlaylistControllerCWProxyImpl
+    implements _$AddToPlaylistControllerCWProxy {
   const _$AddToPlaylistControllerCWProxyImpl(this._value);
 
   final AddToPlaylistController _value;
 
   @override
-  AddToPlaylistController playlists(List<Playlist> playlists) => this(playlists: playlists);
+  AddToPlaylistController playlists(List<Playlist> playlists) =>
+      this(playlists: playlists);
 
   @override
-  AddToPlaylistController playListCount(int playListCount) => this(playListCount: playListCount);
+  AddToPlaylistController playListCount(int playListCount) =>
+      this(playListCount: playListCount);
 
   @override
   AddToPlaylistController videoId(String videoId) => this(videoId: videoId);
@@ -51,7 +54,8 @@ class _$AddToPlaylistControllerCWProxyImpl implements _$AddToPlaylistControllerC
   AddToPlaylistController loading(bool loading) => this(loading: loading);
 
   @override
-  AddToPlaylistController isLoggedIn(bool isLoggedIn) => this(isLoggedIn: isLoggedIn);
+  AddToPlaylistController isLoggedIn(bool isLoggedIn) =>
+      this(isLoggedIn: isLoggedIn);
 
   @override
 
@@ -96,5 +100,6 @@ class _$AddToPlaylistControllerCWProxyImpl implements _$AddToPlaylistControllerC
 extension $AddToPlaylistControllerCopyWith on AddToPlaylistController {
   /// Returns a callable class that can be used as follows: `instanceOfAddToPlaylistController.copyWith(...)` or like so:`instanceOfAddToPlaylistController.copyWith.fieldName(...)`.
   // ignore: library_private_types_in_public_api
-  _$AddToPlaylistControllerCWProxy get copyWith => _$AddToPlaylistControllerCWProxyImpl(this);
+  _$AddToPlaylistControllerCWProxy get copyWith =>
+      _$AddToPlaylistControllerCWProxyImpl(this);
 }

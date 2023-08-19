@@ -27,13 +27,15 @@ abstract class _$VideoFilterChannelStateCWProxy {
 }
 
 /// Proxy class for `copyWith` functionality. This is a callable class and can be used as follows: `instanceOfVideoFilterChannelState.copyWith(...)`. Additionally contains functions for specific fields e.g. `instanceOfVideoFilterChannelState.copyWith.fieldName(...)`
-class _$VideoFilterChannelStateCWProxyImpl implements _$VideoFilterChannelStateCWProxy {
+class _$VideoFilterChannelStateCWProxyImpl
+    implements _$VideoFilterChannelStateCWProxy {
   const _$VideoFilterChannelStateCWProxyImpl(this._value);
 
   final VideoFilterChannelState _value;
 
   @override
-  VideoFilterChannelState filters(List<VideoFilter> filters) => this(filters: filters);
+  VideoFilterChannelState filters(List<VideoFilter> filters) =>
+      this(filters: filters);
 
   @override
   VideoFilterChannelState channel(Channel? channel) => this(channel: channel);
@@ -74,5 +76,6 @@ class _$VideoFilterChannelStateCWProxyImpl implements _$VideoFilterChannelStateC
 extension $VideoFilterChannelStateCopyWith on VideoFilterChannelState {
   /// Returns a callable class that can be used as follows: `instanceOfVideoFilterChannelState.copyWith(...)` or like so:`instanceOfVideoFilterChannelState.copyWith.fieldName(...)`.
   // ignore: library_private_types_in_public_api
-  _$VideoFilterChannelStateCWProxy get copyWith => _$VideoFilterChannelStateCWProxyImpl(this);
+  _$VideoFilterChannelStateCWProxy get copyWith =>
+      _$VideoFilterChannelStateCWProxyImpl(this);
 }

@@ -114,7 +114,8 @@ class _$PlayerStateCWProxyImpl implements _$PlayerStateCWProxy {
   final PlayerState _value;
 
   @override
-  PlayerState currentIndex(int currentIndex) => this(currentIndex: currentIndex);
+  PlayerState currentIndex(int currentIndex) =>
+      this(currentIndex: currentIndex);
 
   @override
   PlayerState videos(List<BaseVideo> videos) => this(videos: videos);
@@ -132,7 +133,8 @@ class _$PlayerStateCWProxyImpl implements _$PlayerStateCWProxy {
   PlayerState isDragging(bool isDragging) => this(isDragging: isDragging);
 
   @override
-  PlayerState selectedFullScreenIndex(int selectedFullScreenIndex) => this(selectedFullScreenIndex: selectedFullScreenIndex);
+  PlayerState selectedFullScreenIndex(int selectedFullScreenIndex) =>
+      this(selectedFullScreenIndex: selectedFullScreenIndex);
 
   @override
   PlayerState isPip(bool isPip) => this(isPip: isPip);
@@ -144,22 +146,28 @@ class _$PlayerStateCWProxyImpl implements _$PlayerStateCWProxy {
   PlayerState speed(double speed) => this(speed: speed);
 
   @override
-  PlayerState isFullScreen(bool isFullScreen) => this(isFullScreen: isFullScreen);
+  PlayerState isFullScreen(bool isFullScreen) =>
+      this(isFullScreen: isFullScreen);
 
   @override
-  PlayerState currentlyPlaying(Video? currentlyPlaying) => this(currentlyPlaying: currentlyPlaying);
+  PlayerState currentlyPlaying(Video? currentlyPlaying) =>
+      this(currentlyPlaying: currentlyPlaying);
 
   @override
-  PlayerState offlineCurrentlyPlaying(DownloadedVideo? offlineCurrentlyPlaying) => this(offlineCurrentlyPlaying: offlineCurrentlyPlaying);
+  PlayerState offlineCurrentlyPlaying(
+          DownloadedVideo? offlineCurrentlyPlaying) =>
+      this(offlineCurrentlyPlaying: offlineCurrentlyPlaying);
 
   @override
   PlayerState opacity(double opacity) => this(opacity: opacity);
 
   @override
-  PlayerState dragDistance(double dragDistance) => this(dragDistance: dragDistance);
+  PlayerState dragDistance(double dragDistance) =>
+      this(dragDistance: dragDistance);
 
   @override
-  PlayerState dragStartMini(bool dragStartMini) => this(dragStartMini: dragStartMini);
+  PlayerState dragStartMini(bool dragStartMini) =>
+      this(dragStartMini: dragStartMini);
 
   @override
   PlayerState repeat(PlayerRepeat repeat) => this(repeat: repeat);
@@ -168,10 +176,12 @@ class _$PlayerStateCWProxyImpl implements _$PlayerStateCWProxy {
   PlayerState shuffle(bool shuffle) => this(shuffle: shuffle);
 
   @override
-  PlayerState bufferedPosition(Duration bufferedPosition) => this(bufferedPosition: bufferedPosition);
+  PlayerState bufferedPosition(Duration bufferedPosition) =>
+      this(bufferedPosition: bufferedPosition);
 
   @override
-  PlayerState playedVideos(List<String> playedVideos) => this(playedVideos: playedVideos);
+  PlayerState playedVideos(List<String> playedVideos) =>
+      this(playedVideos: playedVideos);
 
   @override
   PlayerState offset(Offset offset) => this(offset: offset);
@@ -186,22 +196,27 @@ class _$PlayerStateCWProxyImpl implements _$PlayerStateCWProxy {
   PlayerState isPlaying(bool isPlaying) => this(isPlaying: isPlaying);
 
   @override
-  PlayerState sponsorSegments(List<Pair<int>> sponsorSegments) => this(sponsorSegments: sponsorSegments);
+  PlayerState sponsorSegments(List<Pair<int>> sponsorSegments) =>
+      this(sponsorSegments: sponsorSegments);
 
   @override
-  PlayerState nextSegment(Pair<int> nextSegment) => this(nextSegment: nextSegment);
+  PlayerState nextSegment(Pair<int> nextSegment) =>
+      this(nextSegment: nextSegment);
 
   @override
-  PlayerState offlineVideos(List<DownloadedVideo> offlineVideos) => this(offlineVideos: offlineVideos);
+  PlayerState offlineVideos(List<DownloadedVideo> offlineVideos) =>
+      this(offlineVideos: offlineVideos);
 
   @override
   PlayerState position(Duration position) => this(position: position);
 
   @override
-  PlayerState mediaCommand(MediaCommand<dynamic>? mediaCommand) => this(mediaCommand: mediaCommand);
+  PlayerState mediaCommand(MediaCommand<dynamic>? mediaCommand) =>
+      this(mediaCommand: mediaCommand);
 
   @override
-  PlayerState mediaEvent(MediaEvent<dynamic> mediaEvent) => this(mediaEvent: mediaEvent);
+  PlayerState mediaEvent(MediaEvent<dynamic> mediaEvent) =>
+      this(mediaEvent: mediaEvent);
 
   @override
 
@@ -268,7 +283,8 @@ class _$PlayerStateCWProxyImpl implements _$PlayerStateCWProxy {
           ? _value.isDragging
           // ignore: cast_nullable_to_non_nullable
           : isDragging as bool,
-      selectedFullScreenIndex == const $CopyWithPlaceholder() || selectedFullScreenIndex == null
+      selectedFullScreenIndex == const $CopyWithPlaceholder() ||
+              selectedFullScreenIndex == null
           ? _value.selectedFullScreenIndex
           // ignore: cast_nullable_to_non_nullable
           : selectedFullScreenIndex as int,
@@ -316,7 +332,8 @@ class _$PlayerStateCWProxyImpl implements _$PlayerStateCWProxy {
           ? _value.shuffle
           // ignore: cast_nullable_to_non_nullable
           : shuffle as bool,
-      bufferedPosition == const $CopyWithPlaceholder() || bufferedPosition == null
+      bufferedPosition == const $CopyWithPlaceholder() ||
+              bufferedPosition == null
           ? _value.bufferedPosition
           // ignore: cast_nullable_to_non_nullable
           : bufferedPosition as Duration,

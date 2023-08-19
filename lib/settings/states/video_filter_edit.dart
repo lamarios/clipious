@@ -24,6 +24,7 @@ class VideoFilterEditCubit extends Cubit<VideoFilterEditState> {
       state.channel = await service.getChannel(state.filter?.channelId ?? '');
       emit(state);
     }
+    ensureFilter();
   }
 
   @override
@@ -38,7 +39,6 @@ class VideoFilterEditCubit extends Cubit<VideoFilterEditState> {
 
   void setType(FilterType? value) {
     var state = this.state.copyWith();
-    ensureFilter();
     if (value != null) {
       state.filter?.type = value;
       state.filter?.operation = null;
@@ -62,7 +62,6 @@ class VideoFilterEditCubit extends Cubit<VideoFilterEditState> {
 
   void setOperation(FilterOperation? value) {
     var state = this.state.copyWith();
-    ensureFilter();
     if (value != null) {
       state.filter?.operation = value;
     }
@@ -72,7 +71,6 @@ class VideoFilterEditCubit extends Cubit<VideoFilterEditState> {
 
   void valueChanged(String value) {
     var state = this.state.copyWith();
-    ensureFilter();
     state.filter?.value = value;
     log.fine('Filter value changed: $value');
     emit(state);
@@ -111,7 +109,6 @@ class VideoFilterEditCubit extends Cubit<VideoFilterEditState> {
 
   selectChannel(Channel? value) {
     var state = this.state.copyWith();
-    ensureFilter();
     state.channel = value;
     state.filter?.channelId = state.channel?.authorId;
     emit(state);
@@ -119,14 +116,12 @@ class VideoFilterEditCubit extends Cubit<VideoFilterEditState> {
 
   void channelHideAll(bool? value) {
     var state = this.state.copyWith();
-    ensureFilter();
     state.filter?.filterAll = value ?? false;
     emit(state);
   }
 
   channelClear() {
     var state = this.state.copyWith();
-    ensureFilter();
     state.channel = null;
     state.filter?.channelId = null;
     emit(state);
@@ -134,13 +129,12 @@ class VideoFilterEditCubit extends Cubit<VideoFilterEditState> {
 
   void hideOnFilteredChanged(bool value) {
     var state = this.state.copyWith();
-    ensureFilter();
     state.filter?.hideFromFeed = value;
     emit(state);
   }
 }
 
-@CopyWith()
+@CopyWith(constructor: "_")
 class VideoFilterEditState {
   VideoFilter? filter;
   int searchPage;
@@ -152,4 +146,6 @@ class VideoFilterEditState {
   VideoFilterEditState({this.filter, this.searchPage = 1, this.channel, List<Channel>? channelResults, TextEditingController? valueController})
       : channelResults = channelResults ?? [],
         valueController = valueController ?? TextEditingController(text: filter?.value ?? '');
+
+  VideoFilterEditState._(this.filter, this.searchPage, this.channel, this.channelResults, this.valueController);
 }

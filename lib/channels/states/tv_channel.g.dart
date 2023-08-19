@@ -42,22 +42,26 @@ class _$TvChannelControllerCWProxyImpl implements _$TvChannelControllerCWProxy {
   final TvChannelController _value;
 
   @override
-  TvChannelController scrollController(ScrollController scrollController) => this(scrollController: scrollController);
+  TvChannelController scrollController(ScrollController scrollController) =>
+      this(scrollController: scrollController);
 
   @override
-  TvChannelController showBackground(bool showBackground) => this(showBackground: showBackground);
+  TvChannelController showBackground(bool showBackground) =>
+      this(showBackground: showBackground);
 
   @override
   TvChannelController hasShorts(bool hasShorts) => this(hasShorts: hasShorts);
 
   @override
-  TvChannelController hasStreams(bool hasStreams) => this(hasStreams: hasStreams);
+  TvChannelController hasStreams(bool hasStreams) =>
+      this(hasStreams: hasStreams);
 
   @override
   TvChannelController hasVideos(bool hasVideos) => this(hasVideos: hasVideos);
 
   @override
-  TvChannelController hasPlaylist(bool hasPlaylist) => this(hasPlaylist: hasPlaylist);
+  TvChannelController hasPlaylist(bool hasPlaylist) =>
+      this(hasPlaylist: hasPlaylist);
 
   @override
 
@@ -76,7 +80,8 @@ class _$TvChannelControllerCWProxyImpl implements _$TvChannelControllerCWProxy {
     Object? hasPlaylist = const $CopyWithPlaceholder(),
   }) {
     return TvChannelController._(
-      scrollController == const $CopyWithPlaceholder() || scrollController == null
+      scrollController == const $CopyWithPlaceholder() ||
+              scrollController == null
           ? _value.scrollController
           // ignore: cast_nullable_to_non_nullable
           : scrollController as ScrollController,
@@ -107,5 +112,6 @@ class _$TvChannelControllerCWProxyImpl implements _$TvChannelControllerCWProxy {
 extension $TvChannelControllerCopyWith on TvChannelController {
   /// Returns a callable class that can be used as follows: `instanceOfTvChannelController.copyWith(...)` or like so:`instanceOfTvChannelController.copyWith.fieldName(...)`.
   // ignore: library_private_types_in_public_api
-  _$TvChannelControllerCWProxy get copyWith => _$TvChannelControllerCWProxyImpl(this);
+  _$TvChannelControllerCWProxy get copyWith =>
+      _$TvChannelControllerCWProxyImpl(this);
 }

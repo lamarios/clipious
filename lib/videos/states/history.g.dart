@@ -39,7 +39,8 @@ class _$HistoryItemStateCWProxyImpl implements _$HistoryItemStateCWProxy {
   HistoryItemState loading(bool loading) => this(loading: loading);
 
   @override
-  HistoryItemState cachedVid(HistoryVideoCache? cachedVid) => this(cachedVid: cachedVid);
+  HistoryItemState cachedVid(HistoryVideoCache? cachedVid) =>
+      this(cachedVid: cachedVid);
 
   @override
 

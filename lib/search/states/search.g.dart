@@ -66,10 +66,12 @@ class _$SearchStateCWProxyImpl implements _$SearchStateCWProxy {
   final SearchState _value;
 
   @override
-  SearchState queryController(TextEditingController queryController) => this(queryController: queryController);
+  SearchState queryController(TextEditingController queryController) =>
+      this(queryController: queryController);
 
   @override
-  SearchState selectedIndex(int selectedIndex) => this(selectedIndex: selectedIndex);
+  SearchState selectedIndex(int selectedIndex) =>
+      this(selectedIndex: selectedIndex);
 
   @override
   SearchState videos(List<VideoInList> videos) => this(videos: videos);
@@ -87,7 +89,8 @@ class _$SearchStateCWProxyImpl implements _$SearchStateCWProxy {
   SearchState searchNow(bool searchNow) => this(searchNow: searchNow);
 
   @override
-  SearchState suggestions(List<String> suggestions) => this(suggestions: suggestions);
+  SearchState suggestions(List<String> suggestions) =>
+      this(suggestions: suggestions);
 
   @override
   SearchState sortBy(SearchSortBy sortBy) => this(sortBy: sortBy);
@@ -105,7 +108,8 @@ class _$SearchStateCWProxyImpl implements _$SearchStateCWProxy {
   SearchState channelPage(int channelPage) => this(channelPage: channelPage);
 
   @override
-  SearchState playlistPage(int playlistPage) => this(playlistPage: playlistPage);
+  SearchState playlistPage(int playlistPage) =>
+      this(playlistPage: playlistPage);
 
   @override
 

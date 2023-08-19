@@ -24,7 +24,8 @@ abstract class _$CommentsContainerStateCWProxy {
 }
 
 /// Proxy class for `copyWith` functionality. This is a callable class and can be used as follows: `instanceOfCommentsContainerState.copyWith(...)`. Additionally contains functions for specific fields e.g. `instanceOfCommentsContainerState.copyWith.fieldName(...)`
-class _$CommentsContainerStateCWProxyImpl implements _$CommentsContainerStateCWProxy {
+class _$CommentsContainerStateCWProxyImpl
+    implements _$CommentsContainerStateCWProxy {
   const _$CommentsContainerStateCWProxyImpl(this._value);
 
   final CommentsContainerState _value;
@@ -63,5 +64,6 @@ class _$CommentsContainerStateCWProxyImpl implements _$CommentsContainerStateCWP
 extension $CommentsContainerStateCopyWith on CommentsContainerState {
   /// Returns a callable class that can be used as follows: `instanceOfCommentsContainerState.copyWith(...)` or like so:`instanceOfCommentsContainerState.copyWith.fieldName(...)`.
   // ignore: library_private_types_in_public_api
-  _$CommentsContainerStateCWProxy get copyWith => _$CommentsContainerStateCWProxyImpl(this);
+  _$CommentsContainerStateCWProxy get copyWith =>
+      _$CommentsContainerStateCWProxyImpl(this);
 }

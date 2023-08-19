@@ -33,13 +33,15 @@ class _$SingleCommentStateCWProxyImpl implements _$SingleCommentStateCWProxy {
   final SingleCommentState _value;
 
   @override
-  SingleCommentState showingChildren(bool showingChildren) => this(showingChildren: showingChildren);
+  SingleCommentState showingChildren(bool showingChildren) =>
+      this(showingChildren: showingChildren);
 
   @override
   SingleCommentState comment(Comment comment) => this(comment: comment);
 
   @override
-  SingleCommentState children(VideoComments? children) => this(children: children);
+  SingleCommentState children(VideoComments? children) =>
+      this(children: children);
 
   @override
 
@@ -74,5 +76,6 @@ class _$SingleCommentStateCWProxyImpl implements _$SingleCommentStateCWProxy {
 extension $SingleCommentStateCopyWith on SingleCommentState {
   /// Returns a callable class that can be used as follows: `instanceOfSingleCommentState.copyWith(...)` or like so:`instanceOfSingleCommentState.copyWith.fieldName(...)`.
   // ignore: library_private_types_in_public_api
-  _$SingleCommentStateCWProxy get copyWith => _$SingleCommentStateCWProxyImpl(this);
+  _$SingleCommentStateCWProxy get copyWith =>
+      _$SingleCommentStateCWProxyImpl(this);
 }

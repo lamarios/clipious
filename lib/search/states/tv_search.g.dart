@@ -30,10 +30,12 @@ class _$TvSearchStateCWProxyImpl implements _$TvSearchStateCWProxy {
   final TvSearchState _value;
 
   @override
-  TvSearchState resultFocus(FocusNode resultFocus) => this(resultFocus: resultFocus);
+  TvSearchState resultFocus(FocusNode resultFocus) =>
+      this(resultFocus: resultFocus);
 
   @override
-  TvSearchState searchFocus(FocusNode searchFocus) => this(searchFocus: searchFocus);
+  TvSearchState searchFocus(FocusNode searchFocus) =>
+      this(searchFocus: searchFocus);
 
   @override
 

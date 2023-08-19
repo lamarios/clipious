@@ -27,7 +27,8 @@ abstract class _$AddToPlaylistButtonStateCWProxy {
 }
 
 /// Proxy class for `copyWith` functionality. This is a callable class and can be used as follows: `instanceOfAddToPlaylistButtonState.copyWith(...)`. Additionally contains functions for specific fields e.g. `instanceOfAddToPlaylistButtonState.copyWith.fieldName(...)`
-class _$AddToPlaylistButtonStateCWProxyImpl implements _$AddToPlaylistButtonStateCWProxy {
+class _$AddToPlaylistButtonStateCWProxyImpl
+    implements _$AddToPlaylistButtonStateCWProxy {
   const _$AddToPlaylistButtonStateCWProxyImpl(this._value);
 
   final AddToPlaylistButtonState _value;
@@ -36,10 +37,12 @@ class _$AddToPlaylistButtonStateCWProxyImpl implements _$AddToPlaylistButtonStat
   AddToPlaylistButtonState videoId(String? videoId) => this(videoId: videoId);
 
   @override
-  AddToPlaylistButtonState isLoggedIn(bool isLoggedIn) => this(isLoggedIn: isLoggedIn);
+  AddToPlaylistButtonState isLoggedIn(bool isLoggedIn) =>
+      this(isLoggedIn: isLoggedIn);
 
   @override
-  AddToPlaylistButtonState playListCount(int playListCount) => this(playListCount: playListCount);
+  AddToPlaylistButtonState playListCount(int playListCount) =>
+      this(playListCount: playListCount);
 
   @override
 
@@ -74,5 +77,6 @@ class _$AddToPlaylistButtonStateCWProxyImpl implements _$AddToPlaylistButtonStat
 extension $AddToPlaylistButtonStateCopyWith on AddToPlaylistButtonState {
   /// Returns a callable class that can be used as follows: `instanceOfAddToPlaylistButtonState.copyWith(...)` or like so:`instanceOfAddToPlaylistButtonState.copyWith.fieldName(...)`.
   // ignore: library_private_types_in_public_api
-  _$AddToPlaylistButtonStateCWProxy get copyWith => _$AddToPlaylistButtonStateCWProxyImpl(this);
+  _$AddToPlaylistButtonStateCWProxy get copyWith =>
+      _$AddToPlaylistButtonStateCWProxyImpl(this);
 }

@@ -45,7 +45,8 @@ class _$PlaylistStateCWProxyImpl implements _$PlaylistStateCWProxy {
   PlaylistState showImage(bool showImage) => this(showImage: showImage);
 
   @override
-  PlaylistState loadingProgress(double loadingProgress) => this(loadingProgress: loadingProgress);
+  PlaylistState loadingProgress(double loadingProgress) =>
+      this(loadingProgress: loadingProgress);
 
   @override
   PlaylistState playlist(Playlist playlist) => this(playlist: playlist);
@@ -54,10 +55,12 @@ class _$PlaylistStateCWProxyImpl implements _$PlaylistStateCWProxy {
   PlaylistState loading(bool loading) => this(loading: loading);
 
   @override
-  PlaylistState scrollController(ScrollController scrollController) => this(scrollController: scrollController);
+  PlaylistState scrollController(ScrollController scrollController) =>
+      this(scrollController: scrollController);
 
   @override
-  PlaylistState playlistItemHeight(double playlistItemHeight) => this(playlistItemHeight: playlistItemHeight);
+  PlaylistState playlistItemHeight(double playlistItemHeight) =>
+      this(playlistItemHeight: playlistItemHeight);
 
   @override
 
@@ -92,11 +95,13 @@ class _$PlaylistStateCWProxyImpl implements _$PlaylistStateCWProxy {
           ? _value.loading
           // ignore: cast_nullable_to_non_nullable
           : loading as bool,
-      scrollController == const $CopyWithPlaceholder() || scrollController == null
+      scrollController == const $CopyWithPlaceholder() ||
+              scrollController == null
           ? _value.scrollController
           // ignore: cast_nullable_to_non_nullable
           : scrollController as ScrollController,
-      playlistItemHeight == const $CopyWithPlaceholder() || playlistItemHeight == null
+      playlistItemHeight == const $CopyWithPlaceholder() ||
+              playlistItemHeight == null
           ? _value.playlistItemHeight
           // ignore: cast_nullable_to_non_nullable
           : playlistItemHeight as double,

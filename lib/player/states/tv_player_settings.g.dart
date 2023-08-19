@@ -24,7 +24,8 @@ abstract class _$TvPlayerSettingsStateCWProxy {
 }
 
 /// Proxy class for `copyWith` functionality. This is a callable class and can be used as follows: `instanceOfTvPlayerSettingsState.copyWith(...)`. Additionally contains functions for specific fields e.g. `instanceOfTvPlayerSettingsState.copyWith.fieldName(...)`
-class _$TvPlayerSettingsStateCWProxyImpl implements _$TvPlayerSettingsStateCWProxy {
+class _$TvPlayerSettingsStateCWProxyImpl
+    implements _$TvPlayerSettingsStateCWProxy {
   const _$TvPlayerSettingsStateCWProxyImpl(this._value);
 
   final TvPlayerSettingsState _value;
@@ -63,5 +64,6 @@ class _$TvPlayerSettingsStateCWProxyImpl implements _$TvPlayerSettingsStateCWPro
 extension $TvPlayerSettingsStateCopyWith on TvPlayerSettingsState {
   /// Returns a callable class that can be used as follows: `instanceOfTvPlayerSettingsState.copyWith(...)` or like so:`instanceOfTvPlayerSettingsState.copyWith.fieldName(...)`.
   // ignore: library_private_types_in_public_api
-  _$TvPlayerSettingsStateCWProxy get copyWith => _$TvPlayerSettingsStateCWProxyImpl(this);
+  _$TvPlayerSettingsStateCWProxy get copyWith =>
+      _$TvPlayerSettingsStateCWProxyImpl(this);
 }

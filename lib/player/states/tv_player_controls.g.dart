@@ -39,16 +39,19 @@ abstract class _$TvPlayerControlsStateCWProxy {
 }
 
 /// Proxy class for `copyWith` functionality. This is a callable class and can be used as follows: `instanceOfTvPlayerControlsState.copyWith(...)`. Additionally contains functions for specific fields e.g. `instanceOfTvPlayerControlsState.copyWith.fieldName(...)`
-class _$TvPlayerControlsStateCWProxyImpl implements _$TvPlayerControlsStateCWProxy {
+class _$TvPlayerControlsStateCWProxyImpl
+    implements _$TvPlayerControlsStateCWProxy {
   const _$TvPlayerControlsStateCWProxyImpl(this._value);
 
   final TvPlayerControlsState _value;
 
   @override
-  TvPlayerControlsState controlsOpacity(double controlsOpacity) => this(controlsOpacity: controlsOpacity);
+  TvPlayerControlsState controlsOpacity(double controlsOpacity) =>
+      this(controlsOpacity: controlsOpacity);
 
   @override
-  TvPlayerControlsState showSettings(bool showSettings) => this(showSettings: showSettings);
+  TvPlayerControlsState showSettings(bool showSettings) =>
+      this(showSettings: showSettings);
 
   @override
   TvPlayerControlsState showQueue(bool showQueue) => this(showQueue: showQueue);
@@ -57,13 +60,16 @@ class _$TvPlayerControlsStateCWProxyImpl implements _$TvPlayerControlsStateCWPro
   TvPlayerControlsState loading(bool loading) => this(loading: loading);
 
   @override
-  TvPlayerControlsState displayControls(bool displayControls) => this(displayControls: displayControls);
+  TvPlayerControlsState displayControls(bool displayControls) =>
+      this(displayControls: displayControls);
 
   @override
-  TvPlayerControlsState forwardStep(int forwardStep) => this(forwardStep: forwardStep);
+  TvPlayerControlsState forwardStep(int forwardStep) =>
+      this(forwardStep: forwardStep);
 
   @override
-  TvPlayerControlsState rewindStep(int rewindStep) => this(rewindStep: rewindStep);
+  TvPlayerControlsState rewindStep(int rewindStep) =>
+      this(rewindStep: rewindStep);
 
   @override
 
@@ -118,5 +124,6 @@ class _$TvPlayerControlsStateCWProxyImpl implements _$TvPlayerControlsStateCWPro
 extension $TvPlayerControlsStateCopyWith on TvPlayerControlsState {
   /// Returns a callable class that can be used as follows: `instanceOfTvPlayerControlsState.copyWith(...)` or like so:`instanceOfTvPlayerControlsState.copyWith.fieldName(...)`.
   // ignore: library_private_types_in_public_api
-  _$TvPlayerControlsStateCWProxy get copyWith => _$TvPlayerControlsStateCWProxyImpl(this);
+  _$TvPlayerControlsStateCWProxy get copyWith =>
+      _$TvPlayerControlsStateCWProxyImpl(this);
 }

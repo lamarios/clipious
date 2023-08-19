@@ -27,7 +27,8 @@ abstract class _$DownloadedVideoStateCWProxy {
 }
 
 /// Proxy class for `copyWith` functionality. This is a callable class and can be used as follows: `instanceOfDownloadedVideoState.copyWith(...)`. Additionally contains functions for specific fields e.g. `instanceOfDownloadedVideoState.copyWith.fieldName(...)`
-class _$DownloadedVideoStateCWProxyImpl implements _$DownloadedVideoStateCWProxy {
+class _$DownloadedVideoStateCWProxyImpl
+    implements _$DownloadedVideoStateCWProxy {
   const _$DownloadedVideoStateCWProxyImpl(this._value);
 
   final DownloadedVideoState _value;
@@ -36,7 +37,8 @@ class _$DownloadedVideoStateCWProxyImpl implements _$DownloadedVideoStateCWProxy
   DownloadedVideoState video(DownloadedVideo? video) => this(video: video);
 
   @override
-  DownloadedVideoState thumbnailPath(String? thumbnailPath) => this(thumbnailPath: thumbnailPath);
+  DownloadedVideoState thumbnailPath(String? thumbnailPath) =>
+      this(thumbnailPath: thumbnailPath);
 
   @override
   DownloadedVideoState progress(double progress) => this(progress: progress);
@@ -74,5 +76,6 @@ class _$DownloadedVideoStateCWProxyImpl implements _$DownloadedVideoStateCWProxy
 extension $DownloadedVideoStateCopyWith on DownloadedVideoState {
   /// Returns a callable class that can be used as follows: `instanceOfDownloadedVideoState.copyWith(...)` or like so:`instanceOfDownloadedVideoState.copyWith.fieldName(...)`.
   // ignore: library_private_types_in_public_api
-  _$DownloadedVideoStateCWProxy get copyWith => _$DownloadedVideoStateCWProxyImpl(this);
+  _$DownloadedVideoStateCWProxy get copyWith =>
+      _$DownloadedVideoStateCWProxyImpl(this);
 }

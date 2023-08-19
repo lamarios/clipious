@@ -30,22 +30,26 @@ abstract class _$SubscribeButtonStateCWProxy {
 }
 
 /// Proxy class for `copyWith` functionality. This is a callable class and can be used as follows: `instanceOfSubscribeButtonState.copyWith(...)`. Additionally contains functions for specific fields e.g. `instanceOfSubscribeButtonState.copyWith.fieldName(...)`
-class _$SubscribeButtonStateCWProxyImpl implements _$SubscribeButtonStateCWProxy {
+class _$SubscribeButtonStateCWProxyImpl
+    implements _$SubscribeButtonStateCWProxy {
   const _$SubscribeButtonStateCWProxyImpl(this._value);
 
   final SubscribeButtonState _value;
 
   @override
-  SubscribeButtonState channelId(String channelId) => this(channelId: channelId);
+  SubscribeButtonState channelId(String channelId) =>
+      this(channelId: channelId);
 
   @override
-  SubscribeButtonState isSubscribed(bool isSubscribed) => this(isSubscribed: isSubscribed);
+  SubscribeButtonState isSubscribed(bool isSubscribed) =>
+      this(isSubscribed: isSubscribed);
 
   @override
   SubscribeButtonState loading(bool loading) => this(loading: loading);
 
   @override
-  SubscribeButtonState isLoggedIn(bool isLoggedIn) => this(isLoggedIn: isLoggedIn);
+  SubscribeButtonState isLoggedIn(bool isLoggedIn) =>
+      this(isLoggedIn: isLoggedIn);
 
   @override
 
@@ -85,5 +89,6 @@ class _$SubscribeButtonStateCWProxyImpl implements _$SubscribeButtonStateCWProxy
 extension $SubscribeButtonStateCopyWith on SubscribeButtonState {
   /// Returns a callable class that can be used as follows: `instanceOfSubscribeButtonState.copyWith(...)` or like so:`instanceOfSubscribeButtonState.copyWith.fieldName(...)`.
   // ignore: library_private_types_in_public_api
-  _$SubscribeButtonStateCWProxy get copyWith => _$SubscribeButtonStateCWProxyImpl(this);
+  _$SubscribeButtonStateCWProxy get copyWith =>
+      _$SubscribeButtonStateCWProxyImpl(this);
 }

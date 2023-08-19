@@ -13,7 +13,8 @@ ImageObject _$ImageObjectFromJson(Map<String, dynamic> json) => ImageObject(
       json['height'] as int,
     );
 
-Map<String, dynamic> _$ImageObjectToJson(ImageObject instance) => <String, dynamic>{
+Map<String, dynamic> _$ImageObjectToJson(ImageObject instance) =>
+    <String, dynamic>{
       'quality': instance.quality,
       'url': instance.url,
       'width': instance.width,

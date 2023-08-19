@@ -30,7 +30,8 @@ class _$TvVideoStateCWProxyImpl implements _$TvVideoStateCWProxy {
   final TvVideoState _value;
 
   @override
-  TvVideoState scrollController(ScrollController? scrollController) => this(scrollController: scrollController);
+  TvVideoState scrollController(ScrollController? scrollController) =>
+      this(scrollController: scrollController);
 
   @override
   TvVideoState showImage(bool showImage) => this(showImage: showImage);

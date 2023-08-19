@@ -51,10 +51,12 @@ class _$ChannelControllerCWProxyImpl implements _$ChannelControllerCWProxy {
   ChannelController channelId(String channelId) => this(channelId: channelId);
 
   @override
-  ChannelController isSubscribed(bool isSubscribed) => this(isSubscribed: isSubscribed);
+  ChannelController isSubscribed(bool isSubscribed) =>
+      this(isSubscribed: isSubscribed);
 
   @override
-  ChannelController selectedIndex(int selectedIndex) => this(selectedIndex: selectedIndex);
+  ChannelController selectedIndex(int selectedIndex) =>
+      this(selectedIndex: selectedIndex);
 
   @override
   ChannelController channel(Channel? channel) => this(channel: channel);
@@ -63,13 +65,15 @@ class _$ChannelControllerCWProxyImpl implements _$ChannelControllerCWProxy {
   ChannelController loading(bool loading) => this(loading: loading);
 
   @override
-  ChannelController smallHeader(bool smallHeader) => this(smallHeader: smallHeader);
+  ChannelController smallHeader(bool smallHeader) =>
+      this(smallHeader: smallHeader);
 
   @override
   ChannelController barHeight(double barHeight) => this(barHeight: barHeight);
 
   @override
-  ChannelController barOpacity(double barOpacity) => this(barOpacity: barOpacity);
+  ChannelController barOpacity(double barOpacity) =>
+      this(barOpacity: barOpacity);
 
   @override
 
@@ -129,5 +133,6 @@ class _$ChannelControllerCWProxyImpl implements _$ChannelControllerCWProxy {
 extension $ChannelControllerCopyWith on ChannelController {
   /// Returns a callable class that can be used as follows: `instanceOfChannelController.copyWith(...)` or like so:`instanceOfChannelController.copyWith.fieldName(...)`.
   // ignore: library_private_types_in_public_api
-  _$ChannelControllerCWProxy get copyWith => _$ChannelControllerCWProxyImpl(this);
+  _$ChannelControllerCWProxy get copyWith =>
+      _$ChannelControllerCWProxyImpl(this);
 }

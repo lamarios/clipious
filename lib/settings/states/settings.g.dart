@@ -36,16 +36,20 @@ class _$SettingsStateCWProxyImpl implements _$SettingsStateCWProxy {
   final SettingsState _value;
 
   @override
-  SettingsState settings(Map<String, SettingsValue>? settings) => this(settings: settings);
+  SettingsState settings(Map<String, SettingsValue>? settings) =>
+      this(settings: settings);
 
   @override
-  SettingsState dbServers(List<Server>? dbServers) => this(dbServers: dbServers);
+  SettingsState dbServers(List<Server>? dbServers) =>
+      this(dbServers: dbServers);
 
   @override
-  SettingsState currentServer(Server? currentServer) => this(currentServer: currentServer);
+  SettingsState currentServer(Server? currentServer) =>
+      this(currentServer: currentServer);
 
   @override
-  SettingsState packageInfo(PackageInfo? packageInfo) => this(packageInfo: packageInfo);
+  SettingsState packageInfo(PackageInfo? packageInfo) =>
+      this(packageInfo: packageInfo);
 
   @override
 

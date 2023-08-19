@@ -30,19 +30,22 @@ abstract class _$VideoLikeButtonControllerCWProxy {
 }
 
 /// Proxy class for `copyWith` functionality. This is a callable class and can be used as follows: `instanceOfVideoLikeButtonController.copyWith(...)`. Additionally contains functions for specific fields e.g. `instanceOfVideoLikeButtonController.copyWith.fieldName(...)`
-class _$VideoLikeButtonControllerCWProxyImpl implements _$VideoLikeButtonControllerCWProxy {
+class _$VideoLikeButtonControllerCWProxyImpl
+    implements _$VideoLikeButtonControllerCWProxy {
   const _$VideoLikeButtonControllerCWProxyImpl(this._value);
 
   final VideoLikeButtonController _value;
 
   @override
-  VideoLikeButtonController isLoggedIn(bool isLoggedIn) => this(isLoggedIn: isLoggedIn);
+  VideoLikeButtonController isLoggedIn(bool isLoggedIn) =>
+      this(isLoggedIn: isLoggedIn);
 
   @override
   VideoLikeButtonController videoId(String? videoId) => this(videoId: videoId);
 
   @override
-  VideoLikeButtonController isVideoLiked(bool isVideoLiked) => this(isVideoLiked: isVideoLiked);
+  VideoLikeButtonController isVideoLiked(bool isVideoLiked) =>
+      this(isVideoLiked: isVideoLiked);
 
   @override
   VideoLikeButtonController loading(bool loading) => this(loading: loading);
@@ -85,5 +88,6 @@ class _$VideoLikeButtonControllerCWProxyImpl implements _$VideoLikeButtonControl
 extension $VideoLikeButtonControllerCopyWith on VideoLikeButtonController {
   /// Returns a callable class that can be used as follows: `instanceOfVideoLikeButtonController.copyWith(...)` or like so:`instanceOfVideoLikeButtonController.copyWith.fieldName(...)`.
   // ignore: library_private_types_in_public_api
-  _$VideoLikeButtonControllerCWProxy get copyWith => _$VideoLikeButtonControllerCWProxyImpl(this);
+  _$VideoLikeButtonControllerCWProxy get copyWith =>
+      _$VideoLikeButtonControllerCWProxyImpl(this);
 }

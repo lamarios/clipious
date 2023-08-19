@@ -11,7 +11,8 @@ abstract class _$AppStateCWProxy {
 
   AppState server(Server? server);
 
-  AppState intentDataStreamSubscription(StreamSubscription<dynamic> intentDataStreamSubscription);
+  AppState intentDataStreamSubscription(
+      StreamSubscription<dynamic> intentDataStreamSubscription);
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `AppState(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
@@ -33,13 +34,16 @@ class _$AppStateCWProxyImpl implements _$AppStateCWProxy {
   final AppState _value;
 
   @override
-  AppState selectedIndex(int selectedIndex) => this(selectedIndex: selectedIndex);
+  AppState selectedIndex(int selectedIndex) =>
+      this(selectedIndex: selectedIndex);
 
   @override
   AppState server(Server? server) => this(server: server);
 
   @override
-  AppState intentDataStreamSubscription(StreamSubscription<dynamic> intentDataStreamSubscription) => this(intentDataStreamSubscription: intentDataStreamSubscription);
+  AppState intentDataStreamSubscription(
+          StreamSubscription<dynamic> intentDataStreamSubscription) =>
+      this(intentDataStreamSubscription: intentDataStreamSubscription);
 
   @override
 
@@ -63,7 +67,8 @@ class _$AppStateCWProxyImpl implements _$AppStateCWProxy {
           ? _value.server
           // ignore: cast_nullable_to_non_nullable
           : server as Server?,
-      intentDataStreamSubscription == const $CopyWithPlaceholder() || intentDataStreamSubscription == null
+      intentDataStreamSubscription == const $CopyWithPlaceholder() ||
+              intentDataStreamSubscription == null
           ? _value.intentDataStreamSubscription
           // ignore: cast_nullable_to_non_nullable
           : intentDataStreamSubscription as StreamSubscription<dynamic>,

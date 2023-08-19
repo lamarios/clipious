@@ -69,7 +69,8 @@ class _$VideoStateCWProxyImpl implements _$VideoStateCWProxy {
   final VideoState _value;
 
   @override
-  VideoState scrollController(ScrollController scrollController) => this(scrollController: scrollController);
+  VideoState scrollController(ScrollController scrollController) =>
+      this(scrollController: scrollController);
 
   @override
   VideoState video(Video? video) => this(video: video);
@@ -78,19 +79,23 @@ class _$VideoStateCWProxyImpl implements _$VideoStateCWProxy {
   VideoState dislikes(int? dislikes) => this(dislikes: dislikes);
 
   @override
-  VideoState loadingVideo(bool loadingVideo) => this(loadingVideo: loadingVideo);
+  VideoState loadingVideo(bool loadingVideo) =>
+      this(loadingVideo: loadingVideo);
 
   @override
-  VideoState autoplayOnLoad(bool autoplayOnLoad) => this(autoplayOnLoad: autoplayOnLoad);
+  VideoState autoplayOnLoad(bool autoplayOnLoad) =>
+      this(autoplayOnLoad: autoplayOnLoad);
 
   @override
-  VideoState playRecommendedNext(bool playRecommendedNext) => this(playRecommendedNext: playRecommendedNext);
+  VideoState playRecommendedNext(bool playRecommendedNext) =>
+      this(playRecommendedNext: playRecommendedNext);
 
   @override
   VideoState getDislikes(bool getDislikes) => this(getDislikes: getDislikes);
 
   @override
-  VideoState selectedIndex(int selectedIndex) => this(selectedIndex: selectedIndex);
+  VideoState selectedIndex(int selectedIndex) =>
+      this(selectedIndex: selectedIndex);
 
   @override
   VideoState videoId(String videoId) => this(videoId: videoId);
@@ -102,10 +107,12 @@ class _$VideoStateCWProxyImpl implements _$VideoStateCWProxy {
   VideoState downloading(bool downloading) => this(downloading: downloading);
 
   @override
-  VideoState downloadProgress(double downloadProgress) => this(downloadProgress: downloadProgress);
+  VideoState downloadProgress(double downloadProgress) =>
+      this(downloadProgress: downloadProgress);
 
   @override
-  VideoState downloadedVideo(DownloadedVideo? downloadedVideo) => this(downloadedVideo: downloadedVideo);
+  VideoState downloadedVideo(DownloadedVideo? downloadedVideo) =>
+      this(downloadedVideo: downloadedVideo);
 
   @override
   VideoState opacity(double opacity) => this(opacity: opacity);
@@ -139,7 +146,8 @@ class _$VideoStateCWProxyImpl implements _$VideoStateCWProxy {
     Object? error = const $CopyWithPlaceholder(),
   }) {
     return VideoState._(
-      scrollController == const $CopyWithPlaceholder() || scrollController == null
+      scrollController == const $CopyWithPlaceholder() ||
+              scrollController == null
           ? _value.scrollController
           // ignore: cast_nullable_to_non_nullable
           : scrollController as ScrollController,
@@ -159,7 +167,8 @@ class _$VideoStateCWProxyImpl implements _$VideoStateCWProxy {
           ? _value.autoplayOnLoad
           // ignore: cast_nullable_to_non_nullable
           : autoplayOnLoad as bool,
-      playRecommendedNext == const $CopyWithPlaceholder() || playRecommendedNext == null
+      playRecommendedNext == const $CopyWithPlaceholder() ||
+              playRecommendedNext == null
           ? _value.playRecommendedNext
           // ignore: cast_nullable_to_non_nullable
           : playRecommendedNext as bool,
@@ -183,7 +192,8 @@ class _$VideoStateCWProxyImpl implements _$VideoStateCWProxy {
           ? _value.downloading
           // ignore: cast_nullable_to_non_nullable
           : downloading as bool,
-      downloadProgress == const $CopyWithPlaceholder() || downloadProgress == null
+      downloadProgress == const $CopyWithPlaceholder() ||
+              downloadProgress == null
           ? _value.downloadProgress
           // ignore: cast_nullable_to_non_nullable
           : downloadProgress as double,

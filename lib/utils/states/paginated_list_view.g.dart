@@ -7,7 +7,8 @@ part of 'paginated_list_view.dart';
 // **************************************************************************
 
 abstract class _$PaginatedListViewControllerCWProxy<T> {
-  PaginatedListViewController<T> scrollController(ScrollController scrollController);
+  PaginatedListViewController<T> scrollController(
+      ScrollController scrollController);
 
   PaginatedListViewController<T> paginatedList(PaginatedList<T> paginatedList);
 
@@ -30,22 +31,28 @@ abstract class _$PaginatedListViewControllerCWProxy<T> {
 }
 
 /// Proxy class for `copyWith` functionality. This is a callable class and can be used as follows: `instanceOfPaginatedListViewController.copyWith(...)`. Additionally contains functions for specific fields e.g. `instanceOfPaginatedListViewController.copyWith.fieldName(...)`
-class _$PaginatedListViewControllerCWProxyImpl<T> implements _$PaginatedListViewControllerCWProxy<T> {
+class _$PaginatedListViewControllerCWProxyImpl<T>
+    implements _$PaginatedListViewControllerCWProxy<T> {
   const _$PaginatedListViewControllerCWProxyImpl(this._value);
 
   final PaginatedListViewController<T> _value;
 
   @override
-  PaginatedListViewController<T> scrollController(ScrollController scrollController) => this(scrollController: scrollController);
+  PaginatedListViewController<T> scrollController(
+          ScrollController scrollController) =>
+      this(scrollController: scrollController);
 
   @override
-  PaginatedListViewController<T> paginatedList(PaginatedList<T> paginatedList) => this(paginatedList: paginatedList);
+  PaginatedListViewController<T> paginatedList(
+          PaginatedList<T> paginatedList) =>
+      this(paginatedList: paginatedList);
 
   @override
   PaginatedListViewController<T> items(List<T> items) => this(items: items);
 
   @override
-  PaginatedListViewController<T> loading(bool loading) => this(loading: loading);
+  PaginatedListViewController<T> loading(bool loading) =>
+      this(loading: loading);
 
   @override
 
@@ -62,7 +69,8 @@ class _$PaginatedListViewControllerCWProxyImpl<T> implements _$PaginatedListView
     Object? loading = const $CopyWithPlaceholder(),
   }) {
     return PaginatedListViewController<T>._(
-      scrollController == const $CopyWithPlaceholder() || scrollController == null
+      scrollController == const $CopyWithPlaceholder() ||
+              scrollController == null
           ? _value.scrollController
           // ignore: cast_nullable_to_non_nullable
           : scrollController as ScrollController,
@@ -82,8 +90,10 @@ class _$PaginatedListViewControllerCWProxyImpl<T> implements _$PaginatedListView
   }
 }
 
-extension $PaginatedListViewControllerCopyWith<T> on PaginatedListViewController<T> {
+extension $PaginatedListViewControllerCopyWith<T>
+    on PaginatedListViewController<T> {
   /// Returns a callable class that can be used as follows: `instanceOfPaginatedListViewController.copyWith(...)` or like so:`instanceOfPaginatedListViewController.copyWith.fieldName(...)`.
   // ignore: library_private_types_in_public_api
-  _$PaginatedListViewControllerCWProxy<T> get copyWith => _$PaginatedListViewControllerCWProxyImpl<T>(this);
+  _$PaginatedListViewControllerCWProxy<T> get copyWith =>
+      _$PaginatedListViewControllerCWProxyImpl<T>(this);
 }
