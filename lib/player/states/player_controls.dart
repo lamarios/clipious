@@ -63,7 +63,9 @@ class PlayerControlsCubit extends Cubit<PlayerControlsState> {
   void hideControls() {
     var state = this.state.copyWith();
     state.displayControls = false;
-    emit(state);
+    if(!isClosed) {
+      emit(state);
+    }
   }
 
   void showControls() {

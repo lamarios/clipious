@@ -10,6 +10,7 @@ import '../../../channels/models/channel.dart';
 import '../../../main.dart';
 import '../../../playlists/models/playlist.dart';
 import '../../../playlists/states/playlist_list.dart';
+import '../../../settings/states/settings.dart';
 import '../../../utils.dart';
 import '../../../utils/models/paginatedList.dart';
 import '../../../utils/views/components/paginated_list_view.dart';
@@ -26,8 +27,9 @@ class Search extends StatelessWidget {
   Widget build(BuildContext context) {
     var colorScheme = Theme.of(context).colorScheme;
     var locals = AppLocalizations.of(context)!;
+    var settings = context.read<SettingsCubit>();
     return BlocProvider(
-      create: (context) => SearchCubit<SearchState>(SearchState(query: query, searchNow: searchNow)),
+      create: (context) => SearchCubit<SearchState>(SearchState(query: query, searchNow: searchNow), settings),
       child: BlocBuilder<SearchCubit, SearchState>(
         builder: (context, _) {
           var cubit = context.read<SearchCubit>();

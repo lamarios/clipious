@@ -4,7 +4,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:invidious/app/views/screens/tvHome.dart';
+import 'package:invidious/app/views/tv/screens/tv_home.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/player/views/tv/screens/tvPlayerView.dart';
 import 'package:invidious/playlists/states/playlist.dart';

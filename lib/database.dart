@@ -91,8 +91,8 @@ class DbClient {
     store.box<SettingsValue>().put(setting, mode: PutMode.put);
   }
 
-  Future<List<SettingsValue>> getAllSettings() async {
-    return store.box<SettingsValue>().getAllAsync();
+  List<SettingsValue> getAllSettings()  {
+    return store.box<SettingsValue>().getAll();
   }
 
   deleteSetting(String name) {

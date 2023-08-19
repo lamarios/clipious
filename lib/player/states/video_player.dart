@@ -13,10 +13,8 @@ import 'package:logging/logging.dart';
 import 'package:pretty_bytes/pretty_bytes.dart';
 import 'package:wakelock/wakelock.dart';
 
-import '../../database.dart';
 import '../../globals.dart';
 import '../../main.dart';
-import '../../settings/models/db/settings.dart';
 import '../../videos/models/video.dart';
 import '../views/components/player_controls.dart';
 import 'interfaces/media_player.dart';
@@ -28,8 +26,9 @@ final log = Logger('VideoPlayer');
 
 class VideoPlayerCubit extends MediaPlayerCubit<VideoPlayerState> {
   final PlayerCubit player;
+  final SettingsCubit settings;
 
-  VideoPlayerCubit(super.initialState, this.player) {
+  VideoPlayerCubit(super.initialState, this.player, this.settings) {
     onInit();
   }
 
@@ -143,19 +142,17 @@ class VideoPlayerCubit extends MediaPlayerCubit<VideoPlayerState> {
         break;
       case BetterPlayerEventType.play:
         double speed = 1.0;
-        if (db.getSettings(REMEMBER_PLAYBACK_SPEED)?.value == 'true') {
-          speed = double.parse(db.getSettings(LAST_SPEED)?.value ?? '1.0');
-
+        if (settings.state.rememberPlayBackSpeed) {
           log.fine("Setting playback speed to $speed");
-          state.videoController?.setSpeed(speed);
+          state.videoController?.setSpeed(settings.state.lastSpeed);
         }
         break;
       case BetterPlayerEventType.changedSubtitles:
-        db.saveSetting(SettingsValue(LAST_SUBTITLE, state.videoController?.betterPlayerSubtitlesSource?.name ?? ''));
+        settings.setLastSubtitle(state.videoController?.betterPlayerSubtitlesSource?.name ?? '');
         break;
       case BetterPlayerEventType.setSpeed:
         if (event.parameters?.containsKey("speed") ?? false) {
-          db.saveSetting(SettingsValue(LAST_SPEED, event.parameters?["speed"].toString() ?? '1.0'));
+          settings.setLastSpeed(event.parameters?["speed"]);
         }
         break;
       default:
@@ -173,8 +170,8 @@ class VideoPlayerCubit extends MediaPlayerCubit<VideoPlayerState> {
 
     disposeControllers();
 
-    db.saveSetting(SettingsValue(USE_DASH, (!state.useDash).toString()));
-    state.useDash = !state.useDash;
+    settings.toggleDash(!isUsingDash());
+
     emit(state);
     playVideo(false);
   }
@@ -242,20 +239,18 @@ class VideoPlayerCubit extends MediaPlayerCubit<VideoPlayerState> {
         var formatStream = isHls ? null : state.video!.formatStreams[state.video!.formatStreams.length - 1];
         String videoUrl = isHls
             ? '${state.video!.hlsUrl!}${service.useProxy() ? '?local=true' : ''}'
-            : state.useDash
+            : isUsingDash()
                 ? '${state.video!.dashUrl}${service.useProxy() ? '?local=true' : ''}'
                 : formatStream?.url ?? '';
-        if (!state.useDash && formatStream != null) {
+        if (!isUsingDash() && formatStream != null) {
           state.selectedNonDashTrack = formatStream.resolution;
         }
 
-        log.info('Playing url (dash ${state.useDash},  hasHls ? ${state.video!.hlsUrl != null})  ${videoUrl}');
-
-        state.useDash = db.getSettings(USE_DASH)?.value == 'true';
+        log.info('Playing url (dash ${isUsingDash()},  hasHls ? ${state.video!.hlsUrl != null})  $videoUrl');
 
         BetterPlayerVideoFormat format = isHls
             ? BetterPlayerVideoFormat.hls
-            : state.useDash
+            : isUsingDash()
                 ? BetterPlayerVideoFormat.dash
                 : BetterPlayerVideoFormat.other;
 
@@ -266,8 +261,8 @@ class VideoPlayerCubit extends MediaPlayerCubit<VideoPlayerState> {
         }
 
         String lastSubtitle = '';
-        if (db.getSettings(REMEMBER_LAST_SUBTITLE)?.value == 'true') {
-          lastSubtitle = db.getSettings(LAST_SUBTITLE)?.value ?? '';
+        if (settings.state.rememberSubtitles) {
+          lastSubtitle = settings.state.lastSubtitles;
         }
 
         betterPlayerDataSource = BetterPlayerDataSource(
@@ -284,8 +279,8 @@ class VideoPlayerCubit extends MediaPlayerCubit<VideoPlayerState> {
 
       Wakelock.enable();
 
-      bool lockOrientation = db.getSettings(LOCK_ORIENTATION_FULLSCREEN)?.value == 'true';
-      bool fillVideo = db.getSettings(FILL_FULLSCREEN)?.value == 'true';
+      bool lockOrientation = settings.state.forceLandscapeFullScreen;
+      bool fillVideo = settings.state.fillFullscreen;
 
       state.videoController = BetterPlayerController(
           BetterPlayerConfiguration(
@@ -300,7 +295,7 @@ class VideoPlayerCubit extends MediaPlayerCubit<VideoPlayerState> {
               allowedScreenSleep: false,
               fit: fillVideo ? BoxFit.cover : BoxFit.contain,
               subtitlesConfiguration: BetterPlayerSubtitlesConfiguration(
-                fontSize: double.parse(db.getSettings(SUBTITLE_SIZE)?.value ?? subtitleDefaultSize),
+                fontSize: settings.state.subtitleSize,
               ),
               controlsConfiguration: BetterPlayerControlsConfiguration(
                 showControls: false,
@@ -405,7 +400,7 @@ class VideoPlayerCubit extends MediaPlayerCubit<VideoPlayerState> {
   @override
   int selectedVideoTrack() {
     if (state.video != null) {
-      if (state.useDash) {
+      if (isUsingDash()) {
         var tracks = getVideoTracks();
         var track = _videoTrackToString(state.videoController?.betterPlayerAsmsTrack);
         log.fine("Current track: $track");
@@ -434,7 +429,7 @@ class VideoPlayerCubit extends MediaPlayerCubit<VideoPlayerState> {
   @override
   int selectedAudioTrack() {
     if (state.video != null) {
-      if (state.useDash) {
+      if (settings.state.useDash) {
         var tracks = getAudioTracks();
         var track = _audioTrackToString(state.videoController?.betterPlayerAsmsAudioTrack);
         log.fine("Current audio track: $track");
@@ -520,7 +515,7 @@ class VideoPlayerCubit extends MediaPlayerCubit<VideoPlayerState> {
 
   @override
   bool isUsingDash() {
-    return state.useDash;
+    return settings.state.useDash;
   }
 
   @override
@@ -532,7 +527,6 @@ class VideoPlayerCubit extends MediaPlayerCubit<VideoPlayerState> {
 @CopyWith(constructor: "_")
 class VideoPlayerState extends MediaPlayerState {
   BetterPlayerController? videoController;
-  bool useDash = db.getSettings(USE_DASH)?.value == 'true';
   final ColorScheme colors;
   final Color overFlowTextColor;
   final GlobalKey key;
@@ -543,7 +537,7 @@ class VideoPlayerState extends MediaPlayerState {
   VideoPlayerState({required this.colors, required this.overFlowTextColor, required this.key, Video? video, DownloadedVideo? offlineVideo, bool? disableControls, this.startAt})
       : super(video: video, offlineVideo: offlineVideo, disableControls: disableControls);
 
-  VideoPlayerState._(this.videoController, this.useDash, this.colors, this.overFlowTextColor, this.key, this.startAt, this.selectedNonDashTrack, this.bufferPosition,
+  VideoPlayerState._(this.videoController, this.colors, this.overFlowTextColor, this.key, this.startAt, this.selectedNonDashTrack, this.bufferPosition,
       {Video? video, DownloadedVideo? offlineVideo, bool? disableControls, bool? playNow})
       : super(video: video, offlineVideo: offlineVideo, disableControls: disableControls, playNow: playNow);
 }

@@ -12,6 +12,7 @@ import '../../downloads/states/download_manager.dart';
 import '../../globals.dart';
 import '../../player/states/player.dart';
 import '../../settings/models/errors/invidiousServiceError.dart';
+import '../../settings/states/settings.dart';
 import '../models/video.dart';
 
 part 'video.g.dart';
@@ -22,8 +23,9 @@ final log = Logger('Video');
 class VideoCubit extends Cubit<VideoState> {
   final DownloadManagerCubit downloadManager;
   final PlayerCubit player;
+  final SettingsCubit settings;
 
-  VideoCubit(super.initialState, this.downloadManager, this.player) {
+  VideoCubit(super.initialState, this.downloadManager, this.player, this.settings) {
     onReady();
   }
 
@@ -34,7 +36,7 @@ class VideoCubit extends Cubit<VideoState> {
       state.video = video;
       state.loadingVideo = false;
 
-      if (state.getDislikes) {
+      if (settings.state.useReturnYoutubeDislike) {
         Dislike dislike = await service.getDislikes(state.videoId);
         state.dislikes = dislike.dislikes;
       }
@@ -43,7 +45,7 @@ class VideoCubit extends Cubit<VideoState> {
 
       getDownloadStatus();
 
-      if (state.autoplayOnLoad) {
+      if (settings.state.autoplayVideoOnLoad) {
         playVideo(false);
       }
     } catch (err) {
@@ -107,8 +109,7 @@ class VideoCubit extends Cubit<VideoState> {
 
   togglePlayRecommendedNext(bool? value) {
     var state = this.state.copyWith();
-    db.saveSetting(SettingsValue(PLAY_RECOMMENDED_NEXT, value.toString()));
-    state.playRecommendedNext = value ?? false;
+    settings.setPlayRecommendedNext(value ?? false);
     emit(state);
   }
 
@@ -122,7 +123,7 @@ class VideoCubit extends Cubit<VideoState> {
   void playVideo(bool? audio) {
     if (state.video != null) {
       List<BaseVideo> videos = [state.video!];
-      if (state.playRecommendedNext) {
+      if (settings.state.playRecommendedNext) {
         videos.addAll(state.video?.recommendedVideos ?? []);
       }
       player.playVideo(videos, goBack: true, audio: audio);
@@ -139,9 +140,6 @@ class VideoState {
   Video? video;
   int? dislikes;
   bool loadingVideo = true;
-  bool autoplayOnLoad = db.getSettings(PLAYER_AUTOPLAY_ON_LOAD)?.value == 'true';
-  bool playRecommendedNext = db.getSettings(PLAY_RECOMMENDED_NEXT)?.value == 'true';
-  bool getDislikes = db.getSettings(USE_RETURN_YOUTUBE_DISLIKE)?.value == 'true';
 
   int selectedIndex = 0;
   String videoId;
@@ -167,6 +165,6 @@ class VideoState {
     }
   }
 
-  VideoState._(this.scrollController, this.video, this.dislikes, this.loadingVideo, this.autoplayOnLoad, this.playRecommendedNext, this.getDislikes, this.selectedIndex, this.videoId, this.isLoggedIn,
+  VideoState._(this.scrollController, this.video, this.dislikes, this.loadingVideo, this.selectedIndex, this.videoId, this.isLoggedIn,
       this.downloading, this.downloadProgress, this.downloadedVideo, this.opacity, this.error);
 }

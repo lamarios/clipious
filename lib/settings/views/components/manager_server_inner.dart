@@ -208,7 +208,7 @@ class ManagerServersView extends StatelessWidget {
                                               style: textTheme.labelLarge?.copyWith(color: colorScheme.secondary))
                                         ],
                                       ),
-                                      value: Row(
+                                      value: Wrap(
                                         children: [Visibility(visible: s.flag != null && s.region != null, child: Text('${s.flag} - ${s.region} - ')), Text(locals.tapToAddServer)],
                                       ),
                                       onPressed: (context) => showPublicServerActions(context, _, s),

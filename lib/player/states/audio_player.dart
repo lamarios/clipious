@@ -7,8 +7,7 @@ import 'package:invidious/videos/models/video.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:logging/logging.dart';
 
-import '../../database.dart';
-import '../../settings/models/db/settings.dart';
+import '../../settings/states/settings.dart';
 import '../../videos/models/adaptive_format.dart';
 import '../models/mediaEvent.dart';
 import 'player.dart' as clipious_player;
@@ -19,8 +18,9 @@ Logger log = Logger('AudioPlayerController');
 
 class AudioPlayerCubit extends MediaPlayerCubit<AudioPlayerState> {
   final clipious_player.PlayerCubit globalPlayer;
+  final SettingsCubit settings;
 
-  AudioPlayerCubit(super.initialState, this.globalPlayer) {
+  AudioPlayerCubit(super.initialState, this.globalPlayer, this.settings) {
     onInit();
   }
 
@@ -114,13 +114,13 @@ class AudioPlayerCubit extends MediaPlayerCubit<AudioPlayerState> {
           throw Error();
         }
 
-        state.player?.setAudioSource(source, initialPosition: startAt);
+        await state.player?.setAudioSource(source, initialPosition: startAt);
 
         play();
         // TODO: make this less duplicated between videos and audio
         double speed = 1.0;
-        if (db.getSettings(REMEMBER_PLAYBACK_SPEED)?.value == 'true') {
-          speed = double.parse(db.getSettings(LAST_SPEED)?.value ?? '1.0');
+        if (settings.state.rememberPlayBackSpeed) {
+          speed = settings.state.lastSpeed;
 
           log.fine("Setting playback speed to $speed");
           state.player?.setSpeed(speed);
@@ -288,7 +288,7 @@ class AudioPlayerCubit extends MediaPlayerCubit<AudioPlayerState> {
   @override
   void setSpeed(double d) {
     state.player?.setSpeed(d);
-    db.saveSetting(SettingsValue(LAST_SPEED, d.toString()));
+    settings.setLastSpeed(d);
   }
 
   @override

@@ -29,12 +29,15 @@ class VideoAddToPlaylistButton extends StatelessWidget {
                 ? Positioned(
                     top: 1,
                     right: 1,
-                    child: Container(
-                      padding: const EdgeInsets.all(4),
-                      decoration: BoxDecoration(color: colors.secondaryContainer, shape: BoxShape.circle),
-                      child: Text(
-                        _.playListCount.toString(),
-                        style: textTheme.labelSmall,
+                    child: GestureDetector(
+                      onTap: () => AddToPlaylist.showAddToPlaylistDialog(context, _.videoId!),
+                      child: Container(
+                        padding: const EdgeInsets.all(4),
+                        decoration: BoxDecoration(color: colors.secondaryContainer, shape: BoxShape.circle),
+                        child: Text(
+                          _.playListCount.toString(),
+                          style: textTheme.labelSmall,
+                        ),
                       ),
                     ),
                   )

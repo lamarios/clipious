@@ -9,8 +9,6 @@ part of 'video_player.dart';
 abstract class _$VideoPlayerStateCWProxy {
   VideoPlayerState videoController(BetterPlayerController? videoController);
 
-  VideoPlayerState useDash(bool useDash);
-
   VideoPlayerState colors(ColorScheme colors);
 
   VideoPlayerState overFlowTextColor(Color overFlowTextColor);
@@ -39,7 +37,6 @@ abstract class _$VideoPlayerStateCWProxy {
   /// ````
   VideoPlayerState call({
     BetterPlayerController? videoController,
-    bool? useDash,
     ColorScheme? colors,
     Color? overFlowTextColor,
     GlobalKey<State<StatefulWidget>>? key,
@@ -62,9 +59,6 @@ class _$VideoPlayerStateCWProxyImpl implements _$VideoPlayerStateCWProxy {
   @override
   VideoPlayerState videoController(BetterPlayerController? videoController) =>
       this(videoController: videoController);
-
-  @override
-  VideoPlayerState useDash(bool useDash) => this(useDash: useDash);
 
   @override
   VideoPlayerState colors(ColorScheme colors) => this(colors: colors);
@@ -111,7 +105,6 @@ class _$VideoPlayerStateCWProxyImpl implements _$VideoPlayerStateCWProxy {
   /// ````
   VideoPlayerState call({
     Object? videoController = const $CopyWithPlaceholder(),
-    Object? useDash = const $CopyWithPlaceholder(),
     Object? colors = const $CopyWithPlaceholder(),
     Object? overFlowTextColor = const $CopyWithPlaceholder(),
     Object? key = const $CopyWithPlaceholder(),
@@ -128,10 +121,6 @@ class _$VideoPlayerStateCWProxyImpl implements _$VideoPlayerStateCWProxy {
           ? _value.videoController
           // ignore: cast_nullable_to_non_nullable
           : videoController as BetterPlayerController?,
-      useDash == const $CopyWithPlaceholder() || useDash == null
-          ? _value.useDash
-          // ignore: cast_nullable_to_non_nullable
-          : useDash as bool,
       colors == const $CopyWithPlaceholder() || colors == null
           ? _value.colors
           // ignore: cast_nullable_to_non_nullable

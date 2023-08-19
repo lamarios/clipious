@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/player/states/tv_player_settings.dart';
 import 'package:invidious/player/states/video_player.dart';
+import 'package:invidious/settings/states/settings.dart';
 import 'package:invidious/utils/views/tv/components/tv_button.dart';
 
 class TvPlayerSettings extends StatelessWidget {
@@ -50,10 +51,13 @@ class TvPlayerSettings extends StatelessWidget {
     var textTheme = Theme.of(context).textTheme;
     ColorScheme colors = Theme.of(context).colorScheme;
     TextStyle? settingStyle = textTheme.titleLarge;
+    var settings = context.read<SettingsCubit>();
     return BlocProvider(
-      create: (context) => TvPlayerSettingsCubit(TvPlayerSettingsState(), context.read<VideoPlayerCubit>()),
+      create: (context) => TvPlayerSettingsCubit(TvPlayerSettingsState(), context.read<VideoPlayerCubit>(), settings),
       child: BlocBuilder<TvPlayerSettingsCubit, TvPlayerSettingsState>(builder: (context, _) {
         var cubit = context.read<TvPlayerSettingsCubit>();
+        var settings = context.read<SettingsCubit>();
+
         return FocusScope(
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -77,7 +81,7 @@ class TvPlayerSettings extends StatelessWidget {
                     ),
                   ),
                   Visibility(
-                    visible: _.useDash,
+                    visible: settings.state.useDash,
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: TvButton(

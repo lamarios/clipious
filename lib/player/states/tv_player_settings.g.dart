@@ -9,8 +9,6 @@ part of 'tv_player_settings.dart';
 abstract class _$TvPlayerSettingsStateCWProxy {
   TvPlayerSettingsState selected(Tabs selected);
 
-  TvPlayerSettingsState useDash(bool useDash);
-
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `TvPlayerSettingsState(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
   /// Usage
@@ -19,7 +17,6 @@ abstract class _$TvPlayerSettingsStateCWProxy {
   /// ````
   TvPlayerSettingsState call({
     Tabs? selected,
-    bool? useDash,
   });
 }
 
@@ -34,9 +31,6 @@ class _$TvPlayerSettingsStateCWProxyImpl
   TvPlayerSettingsState selected(Tabs selected) => this(selected: selected);
 
   @override
-  TvPlayerSettingsState useDash(bool useDash) => this(useDash: useDash);
-
-  @override
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `TvPlayerSettingsState(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
@@ -46,17 +40,12 @@ class _$TvPlayerSettingsStateCWProxyImpl
   /// ````
   TvPlayerSettingsState call({
     Object? selected = const $CopyWithPlaceholder(),
-    Object? useDash = const $CopyWithPlaceholder(),
   }) {
     return TvPlayerSettingsState._(
       selected == const $CopyWithPlaceholder() || selected == null
           ? _value.selected
           // ignore: cast_nullable_to_non_nullable
           : selected as Tabs,
-      useDash == const $CopyWithPlaceholder() || useDash == null
-          ? _value.useDash
-          // ignore: cast_nullable_to_non_nullable
-          : useDash as bool,
     );
   }
 }

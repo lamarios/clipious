@@ -53,10 +53,17 @@ class PlaylistCubit extends Cubit<PlaylistState> {
       Playlist pl;
       do {
         pl = await service.getPublicPlaylists(state.playlist.playlistId, page: page);
-        state.playlist.videos.addAll(pl.videos);
+
+        var toAdd = pl.videos.where((v) => state.playlist.videos.indexWhere((v2) => v2.videoId == v.videoId) == -1).toList();
+
+        if (page == 1) {
+          state.playlist.videos = toAdd;
+        } else {
+          state.playlist.videos.addAll(toAdd);
+        }
 
         totalFiltered += pl.removedByFilter;
-        log.fine('filtered removed ${pl.removedByFilter} videos');
+        log.fine('filtered removed ${pl.removedByFilter} videos,adding ${pl.videos.length}');
         page++;
 
         state.loadingProgress = (state.playlist.videos.length + totalFiltered) / state.playlist.videoCount;

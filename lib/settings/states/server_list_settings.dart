@@ -84,13 +84,13 @@ class ServerListSettingsCubit extends Cubit<ServerListSettingsState> {
       state.pinging = false;
       state.publicServers = successfullyPingedServers;
       state.publicServersError = PublicServerErrors.none;
-      if(!isClosed) {
+      if (!isClosed) {
         emit(state);
       }
     } catch (err) {
       log.severe("couldn't get public playlist", err);
       state.publicServersError = PublicServerErrors.couldNotGetList;
-      if(!isClosed) {
+      if (!isClosed) {
         emit(state);
       }
       rethrow;
@@ -133,7 +133,7 @@ class ServerListSettingsCubit extends Cubit<ServerListSettingsState> {
   }
 }
 
-@CopyWith()
+@CopyWith(constructor: "_")
 class ServerListSettingsState {
   ServerListSettingsState({required this.dbServers, required this.publicServers, this.publicServerProgress = 0, this.pinging = true});
 
@@ -149,4 +149,6 @@ class ServerListSettingsState {
   void onClose() {
     addServerController.dispose();
   }
+
+  ServerListSettingsState._(this.dbServers, this.publicServers, this.publicServerProgress, this.addServerController, this.pinging, this.publicServersError);
 }

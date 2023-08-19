@@ -9,6 +9,7 @@ import 'package:package_info_plus/package_info_plus.dart';
 
 import '../../database.dart';
 import '../../globals.dart';
+import '../../player/states/player.dart';
 import '../../utils.dart';
 import '../../utils/models/country.dart';
 import '../models/db/server.dart';
@@ -30,55 +31,59 @@ class SettingsCubit extends Cubit<SettingsState> {
 
   onReady() {
     getPackageInfo();
-    getSettings();
-  }
-
-  emit(SettingsState state) {
-    super.emit(state.copyWith());
   }
 
   toggleSponsorBlock(bool value) {
+    var state = this.state.copyWith();
     state.sponsorBlock = value;
     emit(state);
   }
 
   toggleForceLandscapeFullScreen(bool value) {
+    var state = this.state.copyWith();
     state.forceLandscapeFullScreen = value;
     emit(state);
   }
 
   toggleFillFullscreen(bool value) {
+    var state = this.state.copyWith();
     state.fillFullscreen = value;
     emit(state);
   }
 
   toggleDynamicTheme(bool value) {
+    var state = this.state.copyWith();
     state.useDynamicTheme = value;
     emit(state);
     updateApp();
   }
 
   toggleDash(bool value) {
+    var state = this.state.copyWith();
     state.useDash = value;
     emit(state);
   }
 
   toggleProxy(bool value) {
+    var state = this.state.copyWith();
     state.useProxy = value;
     emit(state);
   }
 
   toggleAutoplayOnLoad(bool value) {
+    var state = this.state.copyWith();
     state.autoplayVideoOnLoad = value;
     emit(state);
   }
 
   toggleReturnYoutubeDislike(bool value) {
+    var state = this.state.copyWith();
     state.useReturnYoutubeDislike = value;
     emit(state);
   }
 
   toggleSearchHistory(bool value) {
+    var state = this.state.copyWith();
     state.useSearchHistory = value;
     emit(state);
     if (!value) {
@@ -87,17 +92,20 @@ class SettingsCubit extends Cubit<SettingsState> {
   }
 
   toggleRememberPlaybackSpeed(bool value) {
+    var state = this.state.copyWith();
     state.rememberPlayBackSpeed = value;
     emit(state);
   }
 
   selectOnOpen(String selected, List<String> categories) {
+    var state = this.state.copyWith();
     int selectedIndex = categories.indexOf(selected);
     state.onOpen = selectedIndex;
     emit(state);
   }
 
   void selectCountry(String selected) {
+    var state = this.state.copyWith();
     state.country = countryCodes.firstWhere((element) => element.name == selected, orElse: () => state.country);
     emit(state);
   }
@@ -107,23 +115,27 @@ class SettingsCubit extends Cubit<SettingsState> {
   }
 
   toggleSslVerification(bool value) {
+    var state = this.state.copyWith();
     state.skipSslVerification = value;
     emit(state);
   }
 
   getPackageInfo() async {
+    var state = this.state.copyWith();
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
     state.packageInfo = packageInfo;
     emit(state);
   }
 
   toggleBlackBackground(bool value) {
+    var state = this.state.copyWith();
     state.blackBackground = value;
     emit(state);
     appCubit.rebuildApp();
   }
 
   changeSubtitleSize({required bool increase}) {
+    var state = this.state.copyWith();
     if (increase) {
       state.subtitleSize++;
     } else {
@@ -135,6 +147,7 @@ class SettingsCubit extends Cubit<SettingsState> {
   }
 
   setSubtitleSize(int value) {
+    var state = this.state.copyWith();
     if (value < 1) {
       state.subtitleSize = 1;
     } else {
@@ -145,11 +158,13 @@ class SettingsCubit extends Cubit<SettingsState> {
   }
 
   toggleRememberSubtitles(bool value) {
+    var state = this.state.copyWith();
     state.rememberSubtitles = value;
     emit(state);
   }
 
   changeSearchHistoryLimit({required bool increase}) {
+    var state = this.state.copyWith();
     if (increase) {
       if (state.searchHistoryLimit < 30) {
         state.searchHistoryLimit++;
@@ -166,6 +181,7 @@ class SettingsCubit extends Cubit<SettingsState> {
   }
 
   setHistoryLimit(int value) {
+    var state = this.state.copyWith();
     if (value < 1) {
       state.searchHistoryLimit = 1;
     } else if (value <= 30) {
@@ -190,6 +206,7 @@ class SettingsCubit extends Cubit<SettingsState> {
   }
 
   setThemeMode(ThemeMode? theme) {
+    var state = this.state.copyWith();
     if (theme != null) {
       state.themeMode = theme;
     }
@@ -198,6 +215,7 @@ class SettingsCubit extends Cubit<SettingsState> {
   }
 
   setLocale(List<Locale> locals, List<String> localStrings, String? locale) {
+    var state = this.state.copyWith();
     if (locale == null) {
       db.deleteSetting(LOCALE);
       state.locale = null;
@@ -217,14 +235,38 @@ class SettingsCubit extends Cubit<SettingsState> {
     updateApp();
   }
 
-  getSettings() async {
-    var allSettings = await db.getAllSettings();
-    state.settings = {for (var s in allSettings) s.name: s};
+  updateApp() {
+    appCubit.rebuildApp();
+  }
+
+  setLastSpeed(double d) {
+    var state = this.state.copyWith();
+    state.lastSpeed = d;
     emit(state);
   }
 
-  updateApp() {
-    appCubit.rebuildApp();
+  setShuffle(bool b) {
+    var state = this.state.copyWith();
+    state.playerShuffleMode = b;
+    emit(state);
+  }
+
+  setRepeatMode(PlayerRepeat repeat) {
+    var state = this.state.copyWith();
+    state.playerRepeatMode = repeat;
+    emit(state);
+  }
+
+  setLastSubtitle(String s) {
+    var state = this.state.copyWith();
+    state.lastSubtitles = s;
+    emit(state);
+  }
+
+  setPlayRecommendedNext(bool b) {
+    var state = this.state.copyWith();
+    state.playRecommendedNext = b;
+    emit(state);
   }
 
   String? getLocaleDisplayName() {
@@ -235,92 +277,109 @@ class SettingsCubit extends Cubit<SettingsState> {
   }
 }
 
-@CopyWith()
+@CopyWith(constructor: "_")
 class SettingsState {
-  Map<String, SettingsValue> settings;
-  List<Server> dbServers;
-  PackageInfo packageInfo;
-
-  Server currentServer;
+  late Map<String, SettingsValue> settings;
+  PackageInfo packageInfo = PackageInfo(appName: '', packageName: '', version: '', buildNumber: '');
 
   bool get sponsorBlock => _get(USE_SPONSORBLOCK)?.value == 'true';
 
-  Country get country => getCountryFromCode(_get(BROWSING_COUNTRY)?.value ?? 'US');
+  set sponsorBlock(bool b) => _set(USE_SPONSORBLOCK, b);
 
   int get onOpen => int.parse(_get(ON_OPEN)?.value ?? '0');
 
-  bool get useDynamicTheme => _get(DYNAMIC_THEME)?.value == 'true';
-
-  bool get useDash => _get(USE_DASH)?.value == 'true';
+  set onOpen(int i) => _set(ON_OPEN, i);
 
   bool get useProxy => _get(USE_PROXY)?.value == 'true';
 
-  bool get autoplayVideoOnLoad => _get(PLAYER_AUTOPLAY_ON_LOAD)?.value == 'true';
-
-  bool get useReturnYoutubeDislike => _get(USE_RETURN_YOUTUBE_DISLIKE)?.value == 'true';
+  set useProxy(bool b) => _set(USE_PROXY, b);
 
   bool get blackBackground => _get(BLACK_BACKGROUND)?.value == 'true';
 
-  double get subtitleSize => double.parse(_get(SUBTITLE_SIZE)?.value ?? subtitleDefaultSize);
+  set blackBackground(bool b) => _set(BLACK_BACKGROUND, b);
 
   bool get rememberSubtitles => _get(REMEMBER_LAST_SUBTITLE)?.value == 'true';
 
-  bool get skipSslVerification => _get(SKIP_SSL_VERIFICATION)?.value == 'true';
+  set rememberSubtitles(bool b) => _set(REMEMBER_LAST_SUBTITLE, b);
 
   bool get rememberPlayBackSpeed => _get(REMEMBER_PLAYBACK_SPEED)?.value == 'true';
 
-  bool get forceLandscapeFullScreen => _get(LOCK_ORIENTATION_FULLSCREEN)?.value == 'true';
+  set rememberPlayBackSpeed(bool b) => _set(REMEMBER_PLAYBACK_SPEED, b);
 
   bool get fillFullscreen => _get(FILL_FULLSCREEN)?.value == 'true';
 
-  ThemeMode get themeMode => ThemeMode.values.firstWhere((element) => element.name == _get(THEME_MODE)?.value, orElse: () => ThemeMode.system);
+  set fillFullscreen(bool b) => _set(FILL_FULLSCREEN, b);
 
   String? get locale => _get(LOCALE)?.value;
 
-  bool get useSearchHistory => _get(USE_SEARCH_HISTORY)?.value == 'true';
+  set locale(String? s) => _set(LOCALE, s);
 
   int get searchHistoryLimit => int.parse(_get(SEARCH_HISTORY_LIMIT)?.value ?? searchHistoryDefaultLength);
 
-  set sponsorBlock(bool b) => _set(USE_SPONSORBLOCK, b);
+  set searchHistoryLimit(int b) => _set(SEARCH_HISTORY_LIMIT, b);
+
+  double get lastSpeed => double.parse(_get(LAST_SPEED)?.value ?? "1.0");
+
+  set lastSpeed(double d) => _set(LAST_SPEED, d);
+
+  bool get playerShuffleMode => _get(PLAYER_SHUFFLE)?.value == "true";
+
+  set playerShuffleMode(bool b) => _set(PLAYER_SHUFFLE, b);
+
+  PlayerRepeat get playerRepeatMode => PlayerRepeat.values[int.parse(_get(PLAYER_REPEAT)?.value ?? '0')];
+
+  set playerRepeatMode(PlayerRepeat repeatMode) => _set(PLAYER_REPEAT, PlayerRepeat.values.indexOf(repeatMode));
+
+  String get lastSubtitles => _get(LAST_SUBTITLE)?.value ?? '';
+
+  set lastSubtitles(String s) => _set(LAST_SUBTITLE, s);
+
+  bool get playRecommendedNext => _get(PLAY_RECOMMENDED_NEXT)?.value == "true";
+
+  set playRecommendedNext(bool b) => _set(PLAY_RECOMMENDED_NEXT, b);
+
+  Country get country => getCountryFromCode(_get(BROWSING_COUNTRY)?.value ?? 'US');
 
   set country(Country c) {
     String code = countryCodes.firstWhere((element) => element.name == c.name, orElse: () => country).code;
     _set(BROWSING_COUNTRY, code);
   }
 
-  set onOpen(int i) => _set(ON_OPEN, i);
+  bool get useDynamicTheme => _get(DYNAMIC_THEME)?.value == 'true';
 
   set useDynamicTheme(bool b) => _set(DYNAMIC_THEME, b);
 
+  bool get useDash => _get(USE_DASH)?.value == 'true';
+
   set useDash(bool b) => _set(USE_DASH, b);
 
-  set useProxy(bool b) => _set(USE_PROXY, b);
+  bool get autoplayVideoOnLoad => _get(PLAYER_AUTOPLAY_ON_LOAD)?.value == 'true';
 
   set autoplayVideoOnLoad(bool b) => _set(PLAYER_AUTOPLAY_ON_LOAD, b);
 
+  bool get useReturnYoutubeDislike => _get(USE_RETURN_YOUTUBE_DISLIKE)?.value == 'true';
+
   set useReturnYoutubeDislike(bool b) => _set(USE_RETURN_YOUTUBE_DISLIKE, b);
 
-  set blackBackground(bool b) => _set(BLACK_BACKGROUND, b);
+  double get subtitleSize => double.parse(_get(SUBTITLE_SIZE)?.value ?? subtitleDefaultSize);
 
   set subtitleSize(double d) => _set(SUBTITLE_SIZE, d);
 
-  set rememberSubtitles(bool b) => _set(REMEMBER_LAST_SUBTITLE, b);
+  bool get skipSslVerification => _get(SKIP_SSL_VERIFICATION)?.value == 'true';
 
   set skipSslVerification(bool b) => _set(SKIP_SSL_VERIFICATION, b);
 
-  set rememberPlayBackSpeed(bool b) => _set(REMEMBER_PLAYBACK_SPEED, b);
+  bool get forceLandscapeFullScreen => _get(LOCK_ORIENTATION_FULLSCREEN)?.value == 'true';
 
   set forceLandscapeFullScreen(bool b) => _set(LOCK_ORIENTATION_FULLSCREEN, b);
 
-  set fillFullscreen(bool b) => _set(FILL_FULLSCREEN, b);
+  ThemeMode get themeMode => ThemeMode.values.firstWhere((element) => element.name == _get(THEME_MODE)?.value, orElse: () => ThemeMode.system);
 
   set themeMode(ThemeMode t) => _set(THEME_MODE, t.name);
 
-  set locale(String? s) => _set(LOCALE, s);
+  bool get useSearchHistory => _get(USE_SEARCH_HISTORY)?.value == 'true';
 
   set useSearchHistory(bool b) => _set(USE_SEARCH_HISTORY, b);
-
-  set searchHistoryLimit(int b) => _set(SEARCH_HISTORY_LIMIT, b);
 
   void _set<T>(String name, T value) {
     var settingsValue = SettingsValue(name, value.toString());
@@ -336,9 +395,10 @@ class SettingsState {
     }
   }
 
-  SettingsState({Map<String, SettingsValue>? settings, List<Server>? dbServers, Server? currentServer, PackageInfo? packageInfo})
-      : packageInfo = packageInfo ?? PackageInfo(appName: '', packageName: '', version: '', buildNumber: ''),
-        settings = settings ?? {},
-        dbServers = dbServers ?? db.getServers(),
-        currentServer = currentServer ?? db.getCurrentlySelectedServer();
+  SettingsState() {
+    var allSettings = db.getAllSettings();
+    settings = {for (var s in allSettings) s.name: s};
+  }
+
+  SettingsState._(this.settings, this.packageInfo);
 }

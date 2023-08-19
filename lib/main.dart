@@ -10,7 +10,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/app/states/app.dart';
-import 'package:invidious/app/views/screens/tvHome.dart';
+import 'package:invidious/app/views/tv/screens/tv_home.dart';
 import 'package:invidious/channels/views/screens/channel.dart';
 import 'package:invidious/downloads/states/download_manager.dart';
 import 'package:invidious/downloads/views/components/download_app_bar_button.dart';
@@ -22,6 +22,7 @@ import 'package:invidious/player/views/components/mini_player_aware.dart';
 import 'package:invidious/player/views/components/player.dart';
 import 'package:invidious/playlists/views/components/add_to_playlist_list.dart';
 import 'package:invidious/search/views/screens/search.dart';
+import 'package:invidious/settings/states/settings.dart';
 import 'package:invidious/settings/views/screens/settings.dart';
 import 'package:invidious/subscription_management/view/screens/manage_subscriptions.dart';
 import 'package:invidious/utils.dart';
@@ -70,7 +71,10 @@ Future<void> main() async {
       create: (context) => AppCubit(AppState()),
     ),
     BlocProvider(
-      create: (context) => PlayerCubit(PlayerState()),
+      create: (context) => SettingsCubit(SettingsState(), context.read<AppCubit>()),
+    ),
+    BlocProvider(
+      create: (context) => PlayerCubit(PlayerState(), context.read<SettingsCubit>()),
     ),
     BlocProvider(
       create: (context) => DownloadManagerCubit(DownloadManagerState(), context.read<PlayerCubit>()),
@@ -85,18 +89,18 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool showWizard = false;
-    try {
-      db.getCurrentlySelectedServer();
-    } catch (err) {
-      showWizard = true;
-    }
-
     return BlocBuilder<AppCubit, AppState>(
         buildWhen: (previous, current) => previous.selectedIndex == current.selectedIndex || previous.server != current.server,
         // we want to rebuild only when anything other than the navigation index is changed
         builder: (context, _) {
-          bool useDynamicTheme = db.getSettings(DYNAMIC_THEME)?.value == 'true';
+          var app = context.read<AppCubit>();
+          var settings = context.read<SettingsCubit>();
+          bool useDynamicTheme = settings.state.useDynamicTheme;
+          bool showWizard = false;
+
+          if (app.state.server == null) {
+            showWizard = true;
+          }
 
           return DynamicColorBuilder(builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) {
             ColorScheme lightColorScheme;
@@ -128,11 +132,11 @@ class MyApp extends StatelessWidget {
               );
             }
 
-            if (db.getSettings(BLACK_BACKGROUND)?.value == 'true') {
+            if (settings.state.blackBackground) {
               darkColorScheme = darkColorScheme.copyWith(background: Colors.black);
             }
 
-            List<String>? localeString = db.getSettings(LOCALE)?.value.split('_');
+            List<String>? localeString = settings.state.locale?.split('_');
             Locale? savedLocale = localeString != null ? Locale.fromSubtags(languageCode: localeString[0], scriptCode: localeString.length >= 2 ? localeString[1] : null) : null;
 
             return MaterialApp(
@@ -169,7 +173,7 @@ class MyApp extends StatelessWidget {
                 scaffoldMessengerKey: scaffoldKey,
                 navigatorKey: globalNavigator,
                 debugShowCheckedModeBanner: false,
-                themeMode: ThemeMode.values.firstWhere((element) => element.name == db.getSettings(THEME_MODE)?.value, orElse: () => ThemeMode.system),
+                themeMode: ThemeMode.values.firstWhere((element) => element.name == settings.state.themeMode.name, orElse: () => ThemeMode.system),
                 title: 'Clipious',
                 theme: ThemeData(
                     useMaterial3: true, colorScheme: lightColorScheme, progressIndicatorTheme: ProgressIndicatorThemeData(circularTrackColor: lightColorScheme.secondaryContainer.withOpacity(0.8))),
