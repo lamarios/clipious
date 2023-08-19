@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:fbroadcast/fbroadcast.dart';
 
 import '../../app/states/app.dart';
 import '../../database.dart';
@@ -24,12 +23,20 @@ class ServerSettingsCubit extends Cubit<Server> {
     s.authToken = null;
     db.upsertServer(s);
     emit(s);
+    // we only refresh the app if the app is currently on this server
+    if (app.state.server?.url == s.url) {
+      app.setServer(s.copyWith());
+    }
   }
 
   Future<void> logInWithToken() async {
     await service.logIn(state.url);
     Server server = db.getServer(state.url)!;
     emit(server);
+    // we only refresh the app if the app is currently on this server
+    if (app.state.server?.url == server.url) {
+      app.setServer(server.copyWith());
+    }
   }
 
   Future<void> logInWithCookie(String username, String password) async {
@@ -39,8 +46,11 @@ class ServerSettingsCubit extends Cubit<Server> {
 
     state.sidCookie = cookie;
     db.upsertServer(state);
-    FBroadcast.instance().broadcast(BROADCAST_SERVER_CHANGED);
     emit(state);
+    // we only refresh the app if the app is currently on this server
+    if (app.state.server?.url == state.url) {
+      app.setServer(state.copyWith());
+    }
   }
 
   deleteServer() {

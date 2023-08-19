@@ -84,11 +84,15 @@ class ServerListSettingsCubit extends Cubit<ServerListSettingsState> {
       state.pinging = false;
       state.publicServers = successfullyPingedServers;
       state.publicServersError = PublicServerErrors.none;
-      emit(state);
+      if(!isClosed) {
+        emit(state);
+      }
     } catch (err) {
       log.severe("couldn't get public playlist", err);
       state.publicServersError = PublicServerErrors.couldNotGetList;
-      emit(state);
+      if(!isClosed) {
+        emit(state);
+      }
       rethrow;
     }
   }
