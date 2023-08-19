@@ -196,7 +196,7 @@ class PlayerControls extends StatelessWidget {
               },
               child: GestureDetector(
                 behavior: HitTestBehavior.translucent,
-                onTap: cubit.showControls,
+                onTap: _.displayControls ? cubit.hideControls: cubit.showControls,
                 onVerticalDragEnd: pc.isFullScreen() == FullScreenState.fullScreen ? null : player.videoDraggedEnd,
                 onVerticalDragUpdate: pc.isFullScreen() == FullScreenState.fullScreen ? null : player.videoDragged,
                 onVerticalDragStart: pc.isFullScreen() == FullScreenState.fullScreen ? null : player.videoDragStarted,
