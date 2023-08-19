@@ -4,23 +4,23 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:invidious/app/views/screens/tvHome.dart';
 import 'package:invidious/channels/states/channel.dart';
 import 'package:invidious/globals.dart';
+import 'package:invidious/subscription_management/view/tv/tv_subscribe_button.dart';
 import 'package:invidious/utils/models/image_object.dart';
 import 'package:invidious/utils/models/paginatedList.dart';
-import 'package:invidious/videos/models/video_in_list.dart';
 import 'package:invidious/utils/views/components/placeholders.dart';
 import 'package:invidious/utils/views/tv/components/tv_expandable_text.dart';
-import 'package:invidious/app/views/screens/tvHome.dart';
 import 'package:invidious/utils/views/tv/components/tv_horizontal_item_list.dart';
 import 'package:invidious/utils/views/tv/components/tv_overscan.dart';
-import 'package:invidious/subscription_management/view/tv/tv_subscribe_button.dart';
+import 'package:invidious/videos/models/video_in_list.dart';
 
-import '../../../states/tv_channel.dart';
 import '../../../../playlists/models/playlist.dart';
+import '../../../../playlists/views/components/playlist_in_list.dart';
 import '../../../../utils.dart';
 import '../../../../videos/views/components/video_thumbnail.dart';
-import '../../../../playlists/views/components/playlist_in_list.dart';
+import '../../../states/tv_channel.dart';
 
 class TvChannelView extends StatelessWidget {
   final String channelId;

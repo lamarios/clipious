@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:copy_with_extension/copy_with_extension.dart';
-import 'package:get/get.dart';
+import 'package:invidious/extensions.dart';
 import 'package:invidious/playlists/models/playlist.dart';
 import 'package:logging/logging.dart';
 
@@ -16,6 +16,7 @@ final log = Logger('VideoLikeButtonController');
 
 class VideoLikeButtonCubit extends Cubit<VideoLikeButtonController> {
   final AddToPlaylistButtonCubit addToPlaylistButtonCubit;
+
   //TODO: need add to playlistbutton cubit
   VideoLikeButtonCubit(super.initialState, {required this.addToPlaylistButtonCubit}) {
     onReady();

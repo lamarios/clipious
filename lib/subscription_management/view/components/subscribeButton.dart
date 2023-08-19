@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:get/get.dart';
 import 'package:invidious/subscription_management/states/subscribe_button.dart';
 
 class SubscribeButton extends StatelessWidget {

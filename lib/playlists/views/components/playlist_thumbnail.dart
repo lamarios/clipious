@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/utils/views/components/placeholders.dart';
 
-import '../../../videos/models/base_video.dart';
 import '../../../utils/models/image_object.dart';
+import '../../../videos/models/base_video.dart';
 import '../../../videos/views/components/video_thumbnail.dart';
 
 class PlaylistThumbnails extends StatelessWidget {

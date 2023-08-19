@@ -31,5 +31,6 @@ class TvSearchState {
   FocusNode searchFocus = FocusNode();
 
   TvSearchState();
+
   TvSearchState._(this.resultFocus, this.searchFocus);
 }

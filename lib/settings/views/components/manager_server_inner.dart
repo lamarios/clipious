@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/app/states/app.dart';
-import 'package:invidious/settings/states/server_list_settings.dart';
 import 'package:invidious/main.dart';
 import 'package:invidious/myRouteObserver.dart';
+import 'package:invidious/settings/states/server_list_settings.dart';
 import 'package:invidious/settings/views/screens/manage_single_server.dart';
 import 'package:settings_ui/settings_ui.dart';
 
-import '../../models/db/server.dart';
 import '../../../utils.dart';
+import '../../models/db/server.dart';
 import '../screens/settings.dart';
 
 class ManagerServersView extends StatelessWidget {

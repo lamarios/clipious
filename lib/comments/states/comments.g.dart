@@ -51,19 +51,16 @@ class _$CommentsStateCWProxyImpl implements _$CommentsStateCWProxy {
   CommentsState video(BaseVideo video) => this(video: video);
 
   @override
-  CommentsState loadingComments(bool loadingComments) =>
-      this(loadingComments: loadingComments);
+  CommentsState loadingComments(bool loadingComments) => this(loadingComments: loadingComments);
 
   @override
   CommentsState comments(VideoComments comments) => this(comments: comments);
 
   @override
-  CommentsState continuationLoaded(bool continuationLoaded) =>
-      this(continuationLoaded: continuationLoaded);
+  CommentsState continuationLoaded(bool continuationLoaded) => this(continuationLoaded: continuationLoaded);
 
   @override
-  CommentsState continuation(String? continuation) =>
-      this(continuation: continuation);
+  CommentsState continuation(String? continuation) => this(continuation: continuation);
 
   @override
   CommentsState error(String error) => this(error: error);
@@ -105,8 +102,7 @@ class _$CommentsStateCWProxyImpl implements _$CommentsStateCWProxy {
           ? _value.comments
           // ignore: cast_nullable_to_non_nullable
           : comments as VideoComments,
-      continuationLoaded == const $CopyWithPlaceholder() ||
-              continuationLoaded == null
+      continuationLoaded == const $CopyWithPlaceholder() || continuationLoaded == null
           ? _value.continuationLoaded
           // ignore: cast_nullable_to_non_nullable
           : continuationLoaded as bool,

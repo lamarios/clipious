@@ -30,23 +30,19 @@ abstract class _$ServerListSettingsStateCWProxy {
 }
 
 /// Proxy class for `copyWith` functionality. This is a callable class and can be used as follows: `instanceOfServerListSettingsState.copyWith(...)`. Additionally contains functions for specific fields e.g. `instanceOfServerListSettingsState.copyWith.fieldName(...)`
-class _$ServerListSettingsStateCWProxyImpl
-    implements _$ServerListSettingsStateCWProxy {
+class _$ServerListSettingsStateCWProxyImpl implements _$ServerListSettingsStateCWProxy {
   const _$ServerListSettingsStateCWProxyImpl(this._value);
 
   final ServerListSettingsState _value;
 
   @override
-  ServerListSettingsState dbServers(List<Server> dbServers) =>
-      this(dbServers: dbServers);
+  ServerListSettingsState dbServers(List<Server> dbServers) => this(dbServers: dbServers);
 
   @override
-  ServerListSettingsState publicServers(List<Server> publicServers) =>
-      this(publicServers: publicServers);
+  ServerListSettingsState publicServers(List<Server> publicServers) => this(publicServers: publicServers);
 
   @override
-  ServerListSettingsState publicServerProgress(double publicServerProgress) =>
-      this(publicServerProgress: publicServerProgress);
+  ServerListSettingsState publicServerProgress(double publicServerProgress) => this(publicServerProgress: publicServerProgress);
 
   @override
   ServerListSettingsState pinging(bool pinging) => this(pinging: pinging);
@@ -70,17 +66,14 @@ class _$ServerListSettingsStateCWProxyImpl
           ? _value.dbServers
           // ignore: cast_nullable_to_non_nullable
           : dbServers as List<Server>,
-      publicServers:
-          publicServers == const $CopyWithPlaceholder() || publicServers == null
-              ? _value.publicServers
-              // ignore: cast_nullable_to_non_nullable
-              : publicServers as List<Server>,
-      publicServerProgress:
-          publicServerProgress == const $CopyWithPlaceholder() ||
-                  publicServerProgress == null
-              ? _value.publicServerProgress
-              // ignore: cast_nullable_to_non_nullable
-              : publicServerProgress as double,
+      publicServers: publicServers == const $CopyWithPlaceholder() || publicServers == null
+          ? _value.publicServers
+          // ignore: cast_nullable_to_non_nullable
+          : publicServers as List<Server>,
+      publicServerProgress: publicServerProgress == const $CopyWithPlaceholder() || publicServerProgress == null
+          ? _value.publicServerProgress
+          // ignore: cast_nullable_to_non_nullable
+          : publicServerProgress as double,
       pinging: pinging == const $CopyWithPlaceholder() || pinging == null
           ? _value.pinging
           // ignore: cast_nullable_to_non_nullable
@@ -92,6 +85,5 @@ class _$ServerListSettingsStateCWProxyImpl
 extension $ServerListSettingsStateCopyWith on ServerListSettingsState {
   /// Returns a callable class that can be used as follows: `instanceOfServerListSettingsState.copyWith(...)` or like so:`instanceOfServerListSettingsState.copyWith.fieldName(...)`.
   // ignore: library_private_types_in_public_api
-  _$ServerListSettingsStateCWProxy get copyWith =>
-      _$ServerListSettingsStateCWProxyImpl(this);
+  _$ServerListSettingsStateCWProxy get copyWith => _$ServerListSettingsStateCWProxyImpl(this);
 }

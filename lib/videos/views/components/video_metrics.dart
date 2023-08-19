@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../models/video.dart';
 import '../../../utils.dart';
+import '../../models/video.dart';
 
 class VideoMetrics extends StatelessWidget {
   final Video? video;

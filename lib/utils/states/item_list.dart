@@ -3,7 +3,6 @@ import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:invidious/settings/models/errors/invidiousServiceError.dart';
-import 'package:invidious/utils.dart';
 import 'package:logging/logging.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -92,8 +91,6 @@ class ItemListCubit<T> extends Cubit<ItemListState<T>> {
 
 @CopyWith(constructor: "_")
 class ItemListState<T> {
-  static ItemListState? to(String? tags) => safeGet(tag: tags);
-
   PaginatedList<T> itemList;
   RefreshController refreshController = RefreshController(initialRefresh: false);
   List<T> items = [];

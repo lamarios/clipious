@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:get/get.dart';
-import 'package:get/get_state_manager/src/simple/get_state.dart';
-import 'package:invidious/videos/states/download_modal_sheet.dart';
 import 'package:invidious/main.dart';
+import 'package:invidious/videos/states/download_modal_sheet.dart';
 
 import '../../../downloads/states/download_manager.dart';
 import '../../models/base_video.dart';

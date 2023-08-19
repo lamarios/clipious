@@ -1,17 +1,16 @@
 import 'package:copy_with_extension/copy_with_extension.dart';
-import 'package:invidious/player/states/interfaces/media_player.dart';
 import 'package:invidious/downloads/models/downloaded_video.dart';
 import 'package:invidious/extensions.dart';
 import 'package:invidious/globals.dart';
-import 'package:invidious/utils.dart';
+import 'package:invidious/player/states/interfaces/media_player.dart';
 import 'package:invidious/videos/models/video.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:logging/logging.dart';
 
 import '../../database.dart';
-import '../models/mediaEvent.dart';
 import '../../settings/models/db/settings.dart';
 import '../../videos/models/adaptive_format.dart';
+import '../models/mediaEvent.dart';
 import 'player.dart' as clipious_player;
 
 part 'audio_player.g.dart';
@@ -321,7 +320,6 @@ class AudioPlayerCubit extends MediaPlayerCubit<AudioPlayerState> {
 
 @CopyWith(constructor: "_")
 class AudioPlayerState extends MediaPlayerState {
-  static AudioPlayerState? to() => safeGet();
   AudioPlayer? player;
 
   AudioPlayerState({Video? video, DownloadedVideo? offlineVideo}) : super(video: video, offlineVideo: offlineVideo);

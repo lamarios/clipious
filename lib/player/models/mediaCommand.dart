@@ -5,11 +5,13 @@ enum MediaCommandType { play, pause, seek, mute, unmute, speed, switchVideo, swi
 class MediaCommand<T> {
   MediaCommandType type;
   T? value;
+
   MediaCommand(this.type, {this.value});
 }
 
 class SwitchVideoValue {
   Video video;
   Duration? startAt;
+
   SwitchVideoValue({required this.video, this.startAt});
 }

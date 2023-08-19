@@ -1,13 +1,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:easy_debounce/easy_debounce.dart';
-import 'package:get/get.dart';
 import 'package:invidious/player/models/mediaEvent.dart';
-import 'package:invidious/utils.dart';
 import 'package:logging/logging.dart';
 
 import '../../main.dart';
-import 'interfaces/media_player.dart';
 import 'player.dart';
 
 part 'player_controls.g.dart';

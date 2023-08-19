@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:copy_with_extension/copy_with_extension.dart';
-import 'package:get/get.dart';
 import 'package:invidious/videos/states/add_to_playlist_button.dart';
 import 'package:invidious/videos/states/video_like.dart';
 
@@ -18,7 +17,7 @@ class AddToPlaylistCubit extends Cubit<AddToPlaylistController> {
   }
 
   bool videoInPlaylist(String playlistId) {
-    Playlist? pl = state.playlists.firstWhereOrNull((pl) => pl.playlistId == playlistId);
+    Playlist? pl = state.playlists.firstWhere((pl) => pl.playlistId == playlistId);
 
     return (pl?.videos.indexWhere((element) => element.videoId == state.videoId) ?? -1) >= 0;
   }

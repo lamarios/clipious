@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:invidious/videos/views/components/offline_video_thumbnail.dart';
 import 'package:invidious/player/views/components/player_controls.dart';
+import 'package:invidious/videos/views/components/offline_video_thumbnail.dart';
 
-import '../../states/audio_player.dart';
-import '../../states/player.dart';
 import '../../../downloads/models/downloaded_video.dart';
 import '../../../videos/models/video.dart';
 import '../../../videos/views/components/video_thumbnail.dart';
+import '../../states/audio_player.dart';
+import '../../states/player.dart';
 
 class AudioPlayer extends StatelessWidget {
   final Video? video;

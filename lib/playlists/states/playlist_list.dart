@@ -2,7 +2,6 @@ import 'package:bloc/bloc.dart';
 import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:invidious/utils/models/paginatedList.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 

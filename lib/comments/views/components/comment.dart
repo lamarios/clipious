@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:get/get.dart';
-import 'package:invidious/comments/states/single_comment.dart';
-import 'package:invidious/myRouteObserver.dart';
 import 'package:invidious/channels/views/screens/channel.dart';
+import 'package:invidious/comments/states/single_comment.dart';
+import 'package:invidious/comments/views/components/comments.dart';
+import 'package:invidious/myRouteObserver.dart';
 import 'package:invidious/utils/views/components/text_linkified.dart';
 import 'package:invidious/videos/views/components/video_thumbnail.dart';
-import 'package:invidious/comments/views/components/comments.dart';
 
-import '../../../player/states/player.dart';
 import '../../../main.dart';
+import '../../../player/states/player.dart';
+import '../../../utils/models/image_object.dart';
 import '../../../videos/models/base_video.dart';
 import '../../models/comment.dart';
-import '../../../utils/models/image_object.dart';
 
 class SingleCommentView extends StatelessWidget {
   final Comment comment;

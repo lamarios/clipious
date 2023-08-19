@@ -3,26 +3,25 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:get/get.dart';
+import 'package:invidious/app/views/screens/tvHome.dart';
+import 'package:invidious/channels/views/tv/screens/channel.dart';
 import 'package:invidious/downloads/states/download_manager.dart';
 import 'package:invidious/globals.dart';
-import 'package:invidious/utils/models/paginatedList.dart';
-import 'package:invidious/videos/models/video_in_list.dart';
-import 'package:invidious/utils/views/tv/components/tv_button.dart';
-import 'package:invidious/channels/views/tv/screens/channel.dart';
-import 'package:invidious/utils/views/tv/components/tv_expandable_text.dart';
-import 'package:invidious/app/views/screens/tvHome.dart';
-import 'package:invidious/utils/views/tv/components/tv_horizontal_item_list.dart';
-import 'package:invidious/utils/views/tv/components/tv_overscan.dart';
 import 'package:invidious/player/views/tv/screens/tvPlayerView.dart';
 import 'package:invidious/subscription_management/view/tv/tv_subscribe_button.dart';
+import 'package:invidious/utils/models/paginatedList.dart';
+import 'package:invidious/utils/views/tv/components/tv_button.dart';
+import 'package:invidious/utils/views/tv/components/tv_expandable_text.dart';
+import 'package:invidious/utils/views/tv/components/tv_horizontal_item_list.dart';
+import 'package:invidious/utils/views/tv/components/tv_overscan.dart';
+import 'package:invidious/videos/models/video_in_list.dart';
 import 'package:invidious/videos/views/components/video_metrics.dart';
 
 import '../../../../player/states/player.dart';
-import '../../../states/tv_video.dart';
-import '../../../states/video.dart';
 import '../../../../utils/models/image_object.dart';
 import '../../../models/video.dart';
+import '../../../states/tv_video.dart';
+import '../../../states/video.dart';
 import '../../components/video_thumbnail.dart';
 
 class TvVideoView extends StatelessWidget {

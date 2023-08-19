@@ -3,15 +3,15 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:invidious/player/states/interfaces/media_player.dart';
-import 'package:invidious/player/states/player.dart';
 import 'package:invidious/main.dart';
 import 'package:invidious/player/models/mediaEvent.dart';
+import 'package:invidious/player/states/interfaces/media_player.dart';
+import 'package:invidious/player/states/player.dart';
 
+import '../../../utils.dart';
 import '../../states/audio_player.dart';
 import '../../states/player_controls.dart';
 import '../../states/video_player.dart';
-import '../../../utils.dart';
 
 class PlayerControls extends StatelessWidget {
   final MediaPlayerCubit? mediaPlayerCubit;

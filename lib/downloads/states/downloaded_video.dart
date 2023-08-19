@@ -2,10 +2,9 @@ import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:copy_with_extension/copy_with_extension.dart';
-import 'package:get/get.dart';
-import 'package:invidious/player/states/player.dart';
 import 'package:invidious/downloads/models/downloaded_video.dart';
 import 'package:invidious/globals.dart';
+import 'package:invidious/player/states/player.dart';
 import 'package:logging/logging.dart';
 
 import 'download_manager.dart';

@@ -9,8 +9,7 @@ part of 'compact_video.dart';
 abstract class _$CompactVideoStateCWProxy {
   CompactVideoState offlineVideo(DownloadedVideo? offlineVideo);
 
-  CompactVideoState offlineVideoThumbnailPath(
-      String? offlineVideoThumbnailPath);
+  CompactVideoState offlineVideoThumbnailPath(String? offlineVideoThumbnailPath);
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `CompactVideoState(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
@@ -31,13 +30,10 @@ class _$CompactVideoStateCWProxyImpl implements _$CompactVideoStateCWProxy {
   final CompactVideoState _value;
 
   @override
-  CompactVideoState offlineVideo(DownloadedVideo? offlineVideo) =>
-      this(offlineVideo: offlineVideo);
+  CompactVideoState offlineVideo(DownloadedVideo? offlineVideo) => this(offlineVideo: offlineVideo);
 
   @override
-  CompactVideoState offlineVideoThumbnailPath(
-          String? offlineVideoThumbnailPath) =>
-      this(offlineVideoThumbnailPath: offlineVideoThumbnailPath);
+  CompactVideoState offlineVideoThumbnailPath(String? offlineVideoThumbnailPath) => this(offlineVideoThumbnailPath: offlineVideoThumbnailPath);
 
   @override
 
@@ -67,6 +63,5 @@ class _$CompactVideoStateCWProxyImpl implements _$CompactVideoStateCWProxy {
 extension $CompactVideoStateCopyWith on CompactVideoState {
   /// Returns a callable class that can be used as follows: `instanceOfCompactVideoState.copyWith(...)` or like so:`instanceOfCompactVideoState.copyWith.fieldName(...)`.
   // ignore: library_private_types_in_public_api
-  _$CompactVideoStateCWProxy get copyWith =>
-      _$CompactVideoStateCWProxyImpl(this);
+  _$CompactVideoStateCWProxy get copyWith => _$CompactVideoStateCWProxyImpl(this);
 }

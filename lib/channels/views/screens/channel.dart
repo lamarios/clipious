@@ -1,15 +1,13 @@
 // import 'package:video_player/video_player.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_fadein/flutter_fadein.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:get/get.dart';
 import 'package:invidious/channels/states/channel.dart';
-import 'package:invidious/globals.dart';
 import 'package:invidious/channels/views/components/info.dart';
 import 'package:invidious/channels/views/components/playlists.dart';
 import 'package:invidious/channels/views/components/videos.dart';
+import 'package:invidious/globals.dart';
 
 import '../../../utils.dart';
 import '../../../utils/views/components/placeholders.dart';

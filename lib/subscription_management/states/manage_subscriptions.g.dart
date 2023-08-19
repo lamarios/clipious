@@ -11,8 +11,7 @@ abstract class _$ManageSubscriptionsStateCWProxy {
 
   ManageSubscriptionsState loading(bool? loading);
 
-  ManageSubscriptionsState refreshController(
-      RefreshController? refreshController);
+  ManageSubscriptionsState refreshController(RefreshController? refreshController);
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `ManageSubscriptionsState(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
@@ -28,8 +27,7 @@ abstract class _$ManageSubscriptionsStateCWProxy {
 }
 
 /// Proxy class for `copyWith` functionality. This is a callable class and can be used as follows: `instanceOfManageSubscriptionsState.copyWith(...)`. Additionally contains functions for specific fields e.g. `instanceOfManageSubscriptionsState.copyWith.fieldName(...)`
-class _$ManageSubscriptionsStateCWProxyImpl
-    implements _$ManageSubscriptionsStateCWProxy {
+class _$ManageSubscriptionsStateCWProxyImpl implements _$ManageSubscriptionsStateCWProxy {
   const _$ManageSubscriptionsStateCWProxyImpl(this._value);
 
   final ManageSubscriptionsState _value;
@@ -41,9 +39,7 @@ class _$ManageSubscriptionsStateCWProxyImpl
   ManageSubscriptionsState loading(bool? loading) => this(loading: loading);
 
   @override
-  ManageSubscriptionsState refreshController(
-          RefreshController? refreshController) =>
-      this(refreshController: refreshController);
+  ManageSubscriptionsState refreshController(RefreshController? refreshController) => this(refreshController: refreshController);
 
   @override
 
@@ -78,6 +74,5 @@ class _$ManageSubscriptionsStateCWProxyImpl
 extension $ManageSubscriptionsStateCopyWith on ManageSubscriptionsState {
   /// Returns a callable class that can be used as follows: `instanceOfManageSubscriptionsState.copyWith(...)` or like so:`instanceOfManageSubscriptionsState.copyWith.fieldName(...)`.
   // ignore: library_private_types_in_public_api
-  _$ManageSubscriptionsStateCWProxy get copyWith =>
-      _$ManageSubscriptionsStateCWProxyImpl(this);
+  _$ManageSubscriptionsStateCWProxy get copyWith => _$ManageSubscriptionsStateCWProxyImpl(this);
 }

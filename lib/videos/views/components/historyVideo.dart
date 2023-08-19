@@ -3,11 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/main.dart';
 import 'package:invidious/myRouteObserver.dart';
-import 'package:invidious/videos/views/screens/video.dart';
 import 'package:invidious/videos/views/components/compact_video.dart';
+import 'package:invidious/videos/views/screens/video.dart';
 
-import '../../states/history.dart';
 import '../../../utils/views/components/placeholders.dart';
+import '../../states/history.dart';
 
 class HistoryVideoView extends StatelessWidget {
   final String videoId;

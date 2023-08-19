@@ -33,7 +33,6 @@ class AppCubit extends Cubit<AppState> {
       openAppLink((value ?? ''));
     });
 
-
     var selectedIndex = int.parse(db.getSettings(ON_OPEN)?.value ?? '0');
     if (!isLoggedIn && selectedIndex > 1) {
       selectedIndex = 0;
@@ -83,6 +82,7 @@ class AppCubit extends Cubit<AppState> {
   setServer(Server s) {
     emit(state.copyWith(server: s, selectedIndex: 0));
   }
+
   bool get isLoggedIn => (state.server?.authToken?.isNotEmpty ?? false) || (state.server?.sidCookie?.isNotEmpty ?? false);
 }
 

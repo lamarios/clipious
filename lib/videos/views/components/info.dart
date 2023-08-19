@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:invidious/player/states/player.dart';
 import 'package:invidious/main.dart';
+import 'package:invidious/player/states/player.dart';
 import 'package:invidious/search/views/screens/search.dart';
 import 'package:invidious/utils/views/components/text_linkified.dart';
 import 'package:invidious/videos/models/video.dart';

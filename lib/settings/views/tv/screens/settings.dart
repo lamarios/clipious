@@ -2,19 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:get/get.dart';
 import 'package:invidious/app/states/app.dart';
-import 'package:invidious/utils.dart';
+import 'package:invidious/extensions.dart';
 import 'package:invidious/settings/views/tv/screens/manage_servers.dart';
 import 'package:invidious/settings/views/tv/screens/search_history_settings.dart';
-import 'package:invidious/utils/views/tv/components/select_from_list.dart';
 import 'package:invidious/settings/views/tv/screens/sponsor_block_settings.dart';
+import 'package:invidious/utils.dart';
+import 'package:invidious/utils/views/tv/components/select_from_list.dart';
 import 'package:invidious/utils/views/tv/components/tv_overscan.dart';
 import 'package:locale_names/locale_names.dart';
 import 'package:logging/logging.dart';
 
-import '../../../states/settings.dart';
 import '../../../../globals.dart';
+import '../../../states/settings.dart';
 
 var log = Logger('TvSettings');
 

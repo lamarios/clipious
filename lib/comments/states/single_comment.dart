@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:copy_with_extension/copy_with_extension.dart';
-import 'package:get/get.dart';
 
 import '../models/comment.dart';
 import '../models/video_comments.dart';

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:invidious/utils/states/item_list.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/utils/views/tv/components/tv_horizontal_item_list.dart';
 

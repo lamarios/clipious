@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_swipe_action_cell/core/cell.dart';
-import 'package:invidious/player/states/player.dart';
 import 'package:invidious/downloads/models/downloaded_video.dart';
+import 'package:invidious/player/states/player.dart';
 import 'package:invidious/videos/models/base_video.dart';
 import 'package:invidious/videos/views/components/compact_video.dart';
 

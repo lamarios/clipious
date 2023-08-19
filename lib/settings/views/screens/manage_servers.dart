@@ -27,6 +27,7 @@ class ManageServerState extends State<ManageServers> {
         backgroundColor: colorScheme.background,
         body: SafeArea(
             bottom: false,
-            child: BlocProvider(create: (BuildContext context) => ServerListSettingsCubit(ServerListSettingsState(dbServers: [], publicServers: []), context.read<AppCubit>()), child: const ManagerServersView())));
+            child: BlocProvider(
+                create: (BuildContext context) => ServerListSettingsCubit(ServerListSettingsState(dbServers: [], publicServers: []), context.read<AppCubit>()), child: const ManagerServersView())));
   }
 }

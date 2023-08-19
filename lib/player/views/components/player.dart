@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:invidious/player/states/player.dart';
 import 'package:invidious/globals.dart';
+import 'package:invidious/player/states/player.dart';
 import 'package:invidious/player/views/components/audio_player.dart';
-import 'package:invidious/player/views/components/video_player.dart';
 import 'package:invidious/player/views/components/expanded_player.dart';
 import 'package:invidious/player/views/components/mini_player.dart';
+import 'package:invidious/player/views/components/video_player.dart';
 
 import '../../../utils.dart';
 import '../../../videos/views/components/video_share_button.dart';

@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:invidious/videos/models/base_video.dart';
 
-import '../../states/download_manager.dart';
 import '../../../main.dart';
 import '../../../myRouteObserver.dart';
+import '../../states/download_manager.dart';
 import '../screens/download_manager.dart';
 
 class AppBarDownloadButton extends StatelessWidget {
@@ -44,12 +44,18 @@ class AppBarDownloadButton extends StatelessWidget {
                         )),
                   )
                 : const SizedBox.shrink(),
-            Positioned(top: 1, right: 1, child: _.videos.isNotEmpty ? Container(
-              padding: const EdgeInsets.all(4),
-                decoration:BoxDecoration(
-              color: colors.secondaryContainer,
-              shape: BoxShape.circle
-            ),child: Text(_.videos.length.toString(), style: textTheme.labelSmall,)) : const SizedBox.shrink())
+            Positioned(
+                top: 1,
+                right: 1,
+                child: _.videos.isNotEmpty
+                    ? Container(
+                        padding: const EdgeInsets.all(4),
+                        decoration: BoxDecoration(color: colors.secondaryContainer, shape: BoxShape.circle),
+                        child: Text(
+                          _.videos.length.toString(),
+                          style: textTheme.labelSmall,
+                        ))
+                    : const SizedBox.shrink())
           ],
         ),
         builder: (context, child, animation) => Transform.translate(

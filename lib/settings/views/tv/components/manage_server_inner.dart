@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:get/get.dart';
-import 'package:invidious/utils.dart';
 import 'package:invidious/settings/views/tv/screens/manage_single_server.dart';
+import 'package:invidious/utils.dart';
 import 'package:invidious/utils/views/tv/components/tv_button.dart';
 
-import '../../../states/server_list_settings.dart';
 import '../../../models/db/server.dart';
+import '../../../states/server_list_settings.dart';
 import '../screens/settings.dart';
 
 class TvManageServersInner extends StatelessWidget {

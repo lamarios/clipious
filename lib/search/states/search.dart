@@ -10,8 +10,8 @@ import 'package:invidious/search/models/search_sort_by.dart';
 
 import '../../channels/models/channel.dart';
 import '../../playlists/models/playlist.dart';
-import '../models/search_type.dart';
 import '../../videos/models/video_in_list.dart';
+import '../models/search_type.dart';
 
 part 'search.g.dart';
 

@@ -5,11 +5,11 @@ import 'package:invidious/channels/models/channel.dart';
 import 'package:invidious/utils.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../../subscription_management/view/components/subscribeButton.dart';
 import '../../../utils/models/image_object.dart';
 import '../../../videos/models/video_in_list.dart';
-import '../../../subscription_management/view/components/subscribeButton.dart';
-import '../../../videos/views/components/video_thumbnail.dart';
 import '../../../videos/views/components/video_in_list.dart';
+import '../../../videos/views/components/video_thumbnail.dart';
 
 class ChannelInfo extends StatelessWidget {
   final Channel channel;

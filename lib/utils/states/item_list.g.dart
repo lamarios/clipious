@@ -45,12 +45,10 @@ class _$ItemListStateCWProxyImpl<T> implements _$ItemListStateCWProxy<T> {
   final ItemListState<T> _value;
 
   @override
-  ItemListState<T> itemList(PaginatedList<T> itemList) =>
-      this(itemList: itemList);
+  ItemListState<T> itemList(PaginatedList<T> itemList) => this(itemList: itemList);
 
   @override
-  ItemListState<T> refreshController(RefreshController refreshController) =>
-      this(refreshController: refreshController);
+  ItemListState<T> refreshController(RefreshController refreshController) => this(refreshController: refreshController);
 
   @override
   ItemListState<T> items(List<T> items) => this(items: items);
@@ -59,12 +57,10 @@ class _$ItemListStateCWProxyImpl<T> implements _$ItemListStateCWProxy<T> {
   ItemListState<T> loading(bool loading) => this(loading: loading);
 
   @override
-  ItemListState<T> imageCache(Map<String, Image> imageCache) =>
-      this(imageCache: imageCache);
+  ItemListState<T> imageCache(Map<String, Image> imageCache) => this(imageCache: imageCache);
 
   @override
-  ItemListState<T> scrollController(ScrollController scrollController) =>
-      this(scrollController: scrollController);
+  ItemListState<T> scrollController(ScrollController scrollController) => this(scrollController: scrollController);
 
   @override
   ItemListState<T> error(ItemListErrors error) => this(error: error);
@@ -91,8 +87,7 @@ class _$ItemListStateCWProxyImpl<T> implements _$ItemListStateCWProxy<T> {
           ? _value.itemList
           // ignore: cast_nullable_to_non_nullable
           : itemList as PaginatedList<T>,
-      refreshController == const $CopyWithPlaceholder() ||
-              refreshController == null
+      refreshController == const $CopyWithPlaceholder() || refreshController == null
           ? _value.refreshController
           // ignore: cast_nullable_to_non_nullable
           : refreshController as RefreshController,
@@ -108,8 +103,7 @@ class _$ItemListStateCWProxyImpl<T> implements _$ItemListStateCWProxy<T> {
           ? _value.imageCache
           // ignore: cast_nullable_to_non_nullable
           : imageCache as Map<String, Image>,
-      scrollController == const $CopyWithPlaceholder() ||
-              scrollController == null
+      scrollController == const $CopyWithPlaceholder() || scrollController == null
           ? _value.scrollController
           // ignore: cast_nullable_to_non_nullable
           : scrollController as ScrollController,

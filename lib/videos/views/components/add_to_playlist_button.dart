@@ -31,10 +31,7 @@ class VideoAddToPlaylistButton extends StatelessWidget {
                     right: 1,
                     child: Container(
                       padding: const EdgeInsets.all(4),
-                      decoration: BoxDecoration(
-                        color: colors.secondaryContainer,
-                        shape: BoxShape.circle
-                      ),
+                      decoration: BoxDecoration(color: colors.secondaryContainer, shape: BoxShape.circle),
                       child: Text(
                         _.playListCount.toString(),
                         style: textTheme.labelSmall,

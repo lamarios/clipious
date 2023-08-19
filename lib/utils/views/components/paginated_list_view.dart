@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../states/paginated_list_view.dart';
 import '../../models/paginatedList.dart';
+import '../../states/paginated_list_view.dart';
 
 class PaginatedListView<T> extends StatelessWidget {
   final PaginatedList<T> paginatedList;

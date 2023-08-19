@@ -1,10 +1,8 @@
 import 'package:bloc/bloc.dart';
-import 'package:get/get.dart';
-import 'package:invidious/player/states/player.dart';
 import 'package:invidious/downloads/models/downloaded_video.dart';
 
-import '../../models/mediaCommand.dart';
 import '../../../videos/models/video.dart';
+import '../../models/mediaCommand.dart';
 
 enum FullScreenState {
   fullScreen,

@@ -1,11 +1,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:copy_with_extension/copy_with_extension.dart';
-import 'package:get/get.dart';
 import 'package:logging/logging.dart';
 
 import '../../globals.dart';
 import '../../playlists/models/playlist.dart';
-import '../../utils.dart';
+
 part 'add_to_playlist_button.g.dart';
 
 var log = Logger('AddToPlaylistButtonController');

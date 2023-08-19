@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:after_layout/after_layout.dart';
-import 'package:audio_service/audio_service.dart';
 import 'package:back_button_interceptor/back_button_interceptor.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/foundation.dart';
@@ -10,15 +9,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:get/get.dart';
-import 'package:invidious/channels/views/screens/channel.dart';
 import 'package:invidious/app/states/app.dart';
-import 'package:invidious/player/states/player.dart';
+import 'package:invidious/app/views/screens/tvHome.dart';
+import 'package:invidious/channels/views/screens/channel.dart';
 import 'package:invidious/downloads/states/download_manager.dart';
 import 'package:invidious/downloads/views/components/download_app_bar_button.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/httpOverrides.dart';
 import 'package:invidious/mediaHander.dart';
+import 'package:invidious/player/states/player.dart';
+import 'package:invidious/player/views/components/mini_player_aware.dart';
+import 'package:invidious/player/views/components/player.dart';
+import 'package:invidious/playlists/views/components/add_to_playlist_list.dart';
 import 'package:invidious/search/views/screens/search.dart';
 import 'package:invidious/settings/views/screens/settings.dart';
 import 'package:invidious/subscription_management/view/screens/manage_subscriptions.dart';
@@ -28,10 +30,6 @@ import 'package:invidious/videos/views/components/popular.dart';
 import 'package:invidious/videos/views/components/subscriptions.dart';
 import 'package:invidious/videos/views/components/trending.dart';
 import 'package:invidious/videos/views/screens/video.dart';
-import 'package:invidious/player/views/components/mini_player_aware.dart';
-import 'package:invidious/player/views/components/player.dart';
-import 'package:invidious/playlists/views/components/add_to_playlist_list.dart';
-import 'package:invidious/app/views/screens/tvHome.dart';
 import 'package:invidious/welcome_wizard/views/screens/welcome_wizard.dart';
 import 'package:invidious/welcome_wizard/views/tv/screens/welcome_wizard.dart';
 import 'package:logging/logging.dart';
@@ -137,7 +135,7 @@ class MyApp extends StatelessWidget {
             List<String>? localeString = db.getSettings(LOCALE)?.value.split('_');
             Locale? savedLocale = localeString != null ? Locale.fromSubtags(languageCode: localeString[0], scriptCode: localeString.length >= 2 ? localeString[1] : null) : null;
 
-            return GetMaterialApp(
+            return MaterialApp(
                 locale: savedLocale,
                 localizationsDelegates: AppLocalizations.localizationsDelegates,
                 localeListResolutionCallback: (locales, supportedLocales) {
@@ -281,7 +279,8 @@ class _HomeState extends State<Home> with AfterLayoutMixin {
         navigationWidgets.add(NavigationDestination(icon: const Icon(Icons.history), label: navigationLabels[4]));
       }
       return Scaffold(
-        key: ValueKey(_.server?.url), // so we rebuild the view if the server changes
+          key: ValueKey(_.server?.url),
+          // so we rebuild the view if the server changes
           backgroundColor: colorScheme.background,
           bottomNavigationBar: NavigationBar(
             backgroundColor: colorScheme.background,

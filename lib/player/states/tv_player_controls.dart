@@ -5,13 +5,10 @@ import 'package:easy_debounce/easy_throttle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:invidious/player/states/player.dart';
-import 'package:invidious/player/states/player_controls.dart';
-import 'package:invidious/utils.dart';
 import 'package:logging/logging.dart';
 
-import '../models/mediaEvent.dart';
 import '../../videos/models/video_in_list.dart';
-import 'interfaces/media_player.dart';
+import '../models/mediaEvent.dart';
 
 part 'tv_player_controls.g.dart';
 
@@ -25,6 +22,7 @@ final log = Logger('TvPlayerController');
 
 class TvPlayerControlsCubit extends Cubit<TvPlayerControlsState> {
   final PlayerCubit player;
+
   TvPlayerControlsCubit(super.initialState, this.player);
 
   fastForward() {
@@ -138,7 +136,7 @@ class TvPlayerControlsCubit extends Cubit<TvPlayerControlsState> {
       state.showSettings = false;
       state.showQueue = false;
       state.displayControls = false;
-      if(!isClosed) {
+      if (!isClosed) {
         emit(state);
       }
     });
@@ -167,7 +165,7 @@ class TvPlayerControlsCubit extends Cubit<TvPlayerControlsState> {
     var state = this.state.copyWith();
     switch (event.state) {
       case MediaState.buffering:
-      // showControls();
+        // showControls();
         break;
       case MediaState.loading:
       case MediaState.ready:

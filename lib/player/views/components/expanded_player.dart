@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/player/states/player.dart';
-import 'package:invidious/utils.dart';
 import 'package:invidious/player/views/components/video_queue.dart';
+import 'package:invidious/utils.dart';
 
+import '../../../comments/views/components/comments_container.dart';
 import '../../../downloads/models/downloaded_video.dart';
 import '../../../videos/models/video.dart';
-import '../../../comments/views/components/comments_container.dart';
 import '../../../videos/views/components/info.dart';
 import '../../../videos/views/components/recommended_videos.dart';
 import 'mini_player_controls.dart';

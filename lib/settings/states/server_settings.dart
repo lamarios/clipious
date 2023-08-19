@@ -8,6 +8,7 @@ import '../models/db/server.dart';
 
 class ServerSettingsCubit extends Cubit<Server> {
   final AppCubit app;
+
   ServerSettingsCubit(super.initialState, this.app);
 
   useServer(bool value) {

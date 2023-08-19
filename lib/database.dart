@@ -1,19 +1,19 @@
 import 'package:easy_debounce/easy_debounce.dart';
-import 'package:invidious/settings/states/settings.dart';
-import 'package:invidious/videos/models/db/history_video_cache.dart';
-import 'package:invidious/videos/models/db/progress.dart';
 import 'package:invidious/search/models/db/searchHistoryItem.dart';
 import 'package:invidious/settings/models/db/settings.dart';
 import 'package:invidious/settings/models/errors/noServerSelected.dart';
+import 'package:invidious/settings/states/settings.dart';
+import 'package:invidious/videos/models/db/history_video_cache.dart';
+import 'package:invidious/videos/models/db/progress.dart';
 import 'package:logging/logging.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 
-import 'settings/models/db/app_logs.dart';
 import 'downloads/models/downloaded_video.dart';
+import 'objectbox.g.dart'; // created by `flutter pub run build_runner build`
+import 'settings/models/db/app_logs.dart';
 import 'settings/models/db/server.dart';
 import 'settings/models/db/video_filter.dart';
-import 'objectbox.g.dart'; // created by `flutter pub run build_runner build`
 
 const SELECTED_SERVER = 'selected-server';
 const USE_SPONSORBLOCK = 'use-sponsor-block';

@@ -12,9 +12,8 @@ import 'package:locale_names/locale_names.dart';
 import 'package:select_dialog/select_dialog.dart';
 import 'package:settings_ui/settings_ui.dart';
 
-import '../../states/settings.dart';
 import '../../../globals.dart';
-import '../../../main.dart';
+import '../../states/settings.dart';
 import 'manage_servers.dart';
 
 settingsTheme(ColorScheme colorScheme) => SettingsThemeData(

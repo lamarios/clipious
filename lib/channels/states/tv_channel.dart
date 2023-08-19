@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:flutter/material.dart';
-import 'package:invidious/channels/states/channel.dart';
 import 'package:invidious/globals.dart';
 
 part 'tv_channel.g.dart';

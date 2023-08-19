@@ -1,0 +1,2 @@
+- big backend refactor, should make the app easier to keep sane as scope increases
+- standardize media controls between audio and video player to give more freedom for future changes.

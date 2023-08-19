@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_fadein/flutter_fadein.dart';
 
-import '../../../utils.dart';
 import '../../../playlists/views/components/playlist_thumbnail.dart';
+import '../../../utils.dart';
 
 class AnimatedPlaceHolder extends StatelessWidget {
   final Widget child;

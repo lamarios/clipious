@@ -8,6 +8,7 @@ class MediaHandler extends BaseAudioHandler
   final PlayerCubit controller;
 
   MediaHandler(this.controller);
+
   // mix in default seek callback implementations
 
   // The most common callbacks:

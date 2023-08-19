@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:easy_debounce/easy_debounce.dart';
-import 'package:get/get.dart';
 
 class TvHomeCubit extends Cubit<bool> {
   TvHomeCubit(super.initialState);

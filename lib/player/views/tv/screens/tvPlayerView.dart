@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/player/states/player.dart';
-import 'package:invidious/player/views/tv/components/player_controls.dart';
 import 'package:invidious/player/views/components/video_player.dart';
 
 import '../../../../main.dart';

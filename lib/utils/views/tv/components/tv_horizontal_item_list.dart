@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart';
 import 'package:invidious/utils/states/item_list.dart';
 import 'package:invidious/utils/views/components/placeholders.dart';
 import 'package:invidious/videos/views/tv/components/video_item.dart';
 
-import '../../../models/paginatedList.dart';
 import '../../../../videos/models/video_in_list.dart';
+import '../../../models/paginatedList.dart';
 
 class TvHorizontalItemList<T> extends StatelessWidget {
   final PaginatedList<T> paginatedList;

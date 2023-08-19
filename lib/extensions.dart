@@ -5,3 +5,16 @@ extension Iterables<E> on Iterable<E> {
 
   Iterable<E> sortByReversed(Comparable Function(E e) key) => sortBy((e) => key(e)).toList().reversed;
 }
+
+extension Lists<E> on List<E> {
+  E? firstWhereOrNull(bool Function(E e) condition) {
+    try {
+      return firstWhere((element) => condition(element));
+    } catch (err) {
+      if (err is StateError) {
+        return null;
+      }
+      rethrow;
+    }
+  }
+}

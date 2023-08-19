@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_swipe_action_cell/core/cell.dart';
-import 'package:invidious/utils/states/item_list.dart';
 import 'package:invidious/globals.dart';
+import 'package:invidious/utils/states/item_list.dart';
 import 'package:invidious/videos/views/components/historyVideo.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-import '../../states/history.dart';
-import '../../../utils/models/paginatedList.dart';
 import '../../../utils.dart';
+import '../../../utils/models/paginatedList.dart';
 import '../../../utils/views/components/placeholders.dart';
+import '../../states/history.dart';
 
 class HistoryView extends StatelessWidget {
   const HistoryView({super.key});

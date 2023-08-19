@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:logging/logging.dart';
 
 import '../../app/states/app.dart';
@@ -87,7 +86,7 @@ class ServerListSettingsCubit extends Cubit<ServerListSettingsState> {
       state.publicServersError = PublicServerErrors.none;
       emit(state);
     } catch (err) {
-      err.printError();
+      log.severe("couldn't get public playlist", err);
       state.publicServersError = PublicServerErrors.couldNotGetList;
       emit(state);
       rethrow;

@@ -9,10 +9,10 @@ import 'package:package_info_plus/package_info_plus.dart';
 
 import '../../database.dart';
 import '../../globals.dart';
+import '../../utils.dart';
 import '../../utils/models/country.dart';
 import '../models/db/server.dart';
 import '../models/db/settings.dart';
-import '../../utils.dart';
 
 part 'settings.g.dart';
 
@@ -23,6 +23,7 @@ var log = Logger('SettingsController');
 
 class SettingsCubit extends Cubit<SettingsState> {
   final AppCubit appCubit;
+
   SettingsCubit(super.initialState, this.appCubit) {
     onReady();
   }

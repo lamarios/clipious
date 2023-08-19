@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:get/get.dart';
 import 'package:invidious/player/states/tv_player_settings.dart';
 import 'package:invidious/player/states/video_player.dart';
 import 'package:invidious/utils/views/tv/components/tv_button.dart';
@@ -53,85 +52,84 @@ class TvPlayerSettings extends StatelessWidget {
     TextStyle? settingStyle = textTheme.titleLarge;
     return BlocProvider(
       create: (context) => TvPlayerSettingsCubit(TvPlayerSettingsState(), context.read<VideoPlayerCubit>()),
-      child: BlocBuilder<TvPlayerSettingsCubit,TvPlayerSettingsState>(
-          builder: (context, _) {
-            var cubit = context.read<TvPlayerSettingsCubit>();
-            return FocusScope(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
+      child: BlocBuilder<TvPlayerSettingsCubit, TvPlayerSettingsState>(builder: (context, _) {
+        var cubit = context.read<TvPlayerSettingsCubit>();
+        return FocusScope(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: TvButton(
-                          autofocus: true,
-                          unfocusedColor: _.selected == Tabs.video ? colors.secondaryContainer : Colors.transparent,
-                          onFocusChanged: cubit.videoButtonFocusChange,
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
-                            child: Text(
-                              locals.quality,
-                              style: settingStyle,
-                            ),
-                          ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TvButton(
+                      autofocus: true,
+                      unfocusedColor: _.selected == Tabs.video ? colors.secondaryContainer : Colors.transparent,
+                      onFocusChanged: cubit.videoButtonFocusChange,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
+                        child: Text(
+                          locals.quality,
+                          style: settingStyle,
                         ),
                       ),
-                      Visibility(
-                        visible: _.useDash,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: TvButton(
-                            onFocusChanged: cubit.audioButtonFocusChange,
-                            unfocusedColor: _.selected == Tabs.audio ? colors.secondaryContainer : Colors.transparent,
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
-                              child: Text(locals.audio, style: settingStyle),
-                            ),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: TvButton(
-                          onFocusChanged: cubit.captionsButtonFocusChange,
-                          unfocusedColor: _.selected == Tabs.captions ? colors.secondaryContainer : Colors.transparent,
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
-                            child: Text(locals.subtitles, style: settingStyle),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: TvButton(
-                          onFocusChanged: cubit.playbackSpeedButtonFocusChange,
-                          unfocusedColor: _.selected == Tabs.playbackSpeed ? colors.secondaryContainer : Colors.transparent,
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
-                            child: Text(locals.playbackSpeed, style: settingStyle),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 90,
-                    child: ListView(
-                      shrinkWrap: true,
-                      scrollDirection: Axis.horizontal,
-                      children: getContent(context)
-                          .map((e) => Center(
-                                child: e,
-                              ))
-                          .toList(),
                     ),
-                  )
+                  ),
+                  Visibility(
+                    visible: _.useDash,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TvButton(
+                        onFocusChanged: cubit.audioButtonFocusChange,
+                        unfocusedColor: _.selected == Tabs.audio ? colors.secondaryContainer : Colors.transparent,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
+                          child: Text(locals.audio, style: settingStyle),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TvButton(
+                      onFocusChanged: cubit.captionsButtonFocusChange,
+                      unfocusedColor: _.selected == Tabs.captions ? colors.secondaryContainer : Colors.transparent,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
+                        child: Text(locals.subtitles, style: settingStyle),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TvButton(
+                      onFocusChanged: cubit.playbackSpeedButtonFocusChange,
+                      unfocusedColor: _.selected == Tabs.playbackSpeed ? colors.secondaryContainer : Colors.transparent,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
+                        child: Text(locals.playbackSpeed, style: settingStyle),
+                      ),
+                    ),
+                  ),
                 ],
               ),
-            );
-          }),
+              SizedBox(
+                height: 90,
+                child: ListView(
+                  shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+                  children: getContent(context)
+                      .map((e) => Center(
+                            child: e,
+                          ))
+                      .toList(),
+                ),
+              )
+            ],
+          ),
+        );
+      }),
     );
   }
 }

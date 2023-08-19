@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/utils.dart';
-import 'package:invidious/videos/models/video_in_list.dart';
 import 'package:invidious/utils/states/item_list.dart';
-import 'package:invidious/videos/views/components/video_in_list.dart';
 import 'package:invidious/utils/views/components/placeholders.dart';
+import 'package:invidious/videos/models/video_in_list.dart';
+import 'package:invidious/videos/views/components/video_in_list.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../../utils/models/paginatedList.dart';

@@ -3,15 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:invidious/player/states/player.dart';
-import 'package:invidious/player/states/video_player.dart';
 import 'package:invidious/globals.dart';
+import 'package:invidious/player/states/player.dart';
 import 'package:invidious/utils/models/sharelink.dart';
-import 'package:invidious/videos/models/base_video.dart';
 import 'package:invidious/utils/views/tv/components/tv_button.dart';
 import 'package:invidious/utils/views/tv/components/tv_overscan.dart';
+import 'package:invidious/videos/models/base_video.dart';
 import 'package:logging/logging.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -74,7 +72,6 @@ Future<void> showAlertDialog(BuildContext context, String title, List<Widget> bo
 
 void showSharingSheet(BuildContext context, ShareLinks links, {bool showTimestampOption = false}) {
   var locals = AppLocalizations.of(context)!;
-
 
   bool shareWithTimestamp = false;
   Future<Duration?> getTimestamp() async {
@@ -261,15 +258,6 @@ showTvDialog({required BuildContext context, String? title, required List<Widget
 
 Country getCountryFromCode(String code) {
   return countryCodes.firstWhere((element) => element.code == code, orElse: () => Country('US', 'United States of America'));
-}
-
-T? safeGet<T>({String? tag}) {
-  try {
-    return Get.find<T>(tag: tag);
-  } catch (err) {
-    log.fine('could not find controller of class ${T.toString()}');
-    return null;
-  }
 }
 
 KeyEventResult onTvSelect(KeyEvent event, BuildContext context, Function(BuildContext context) func) {

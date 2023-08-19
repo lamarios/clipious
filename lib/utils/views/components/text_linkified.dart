@@ -5,9 +5,9 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../../globals.dart';
 import '../../../main.dart';
-import '../../models/timestampLinkifier.dart';
 import '../../../videos/models/base_video.dart';
 import '../../../videos/views/screens/video.dart';
+import '../../models/timestampLinkifier.dart';
 
 class TextLinkified extends StatelessWidget {
   final String text;

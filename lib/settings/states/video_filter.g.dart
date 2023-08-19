@@ -30,12 +30,10 @@ class _$VideoFilterStateCWProxyImpl implements _$VideoFilterStateCWProxy {
   final VideoFilterState _value;
 
   @override
-  VideoFilterState filters(List<VideoFilter>? filters) =>
-      this(filters: filters);
+  VideoFilterState filters(List<VideoFilter>? filters) => this(filters: filters);
 
   @override
-  VideoFilterState hideFilteredVideos(bool? hideFilteredVideos) =>
-      this(hideFilteredVideos: hideFilteredVideos);
+  VideoFilterState hideFilteredVideos(bool? hideFilteredVideos) => this(hideFilteredVideos: hideFilteredVideos);
 
   @override
 

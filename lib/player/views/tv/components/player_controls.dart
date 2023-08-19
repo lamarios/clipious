@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:get/get.dart';
 import 'package:invidious/player/states/tv_player_controls.dart';
 import 'package:invidious/utils/views/tv/components/tv_button.dart';
 import 'package:invidious/utils/views/tv/components/tv_horizontal_item_list.dart';

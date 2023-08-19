@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart';
 import 'package:invidious/utils/models/paginatedList.dart';
 import 'package:invidious/utils/views/components/placeholders.dart';
 import 'package:invidious/utils/views/tv/components/tv_overscan.dart';

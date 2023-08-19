@@ -60,8 +60,7 @@ class _$VideoPlayerStateCWProxyImpl implements _$VideoPlayerStateCWProxy {
   final VideoPlayerState _value;
 
   @override
-  VideoPlayerState videoController(BetterPlayerController? videoController) =>
-      this(videoController: videoController);
+  VideoPlayerState videoController(BetterPlayerController? videoController) => this(videoController: videoController);
 
   @override
   VideoPlayerState useDash(bool useDash) => this(useDash: useDash);
@@ -70,8 +69,7 @@ class _$VideoPlayerStateCWProxyImpl implements _$VideoPlayerStateCWProxy {
   VideoPlayerState colors(ColorScheme colors) => this(colors: colors);
 
   @override
-  VideoPlayerState overFlowTextColor(Color overFlowTextColor) =>
-      this(overFlowTextColor: overFlowTextColor);
+  VideoPlayerState overFlowTextColor(Color overFlowTextColor) => this(overFlowTextColor: overFlowTextColor);
 
   @override
   VideoPlayerState key(GlobalKey<State<StatefulWidget>> key) => this(key: key);
@@ -80,23 +78,19 @@ class _$VideoPlayerStateCWProxyImpl implements _$VideoPlayerStateCWProxy {
   VideoPlayerState startAt(Duration? startAt) => this(startAt: startAt);
 
   @override
-  VideoPlayerState selectedNonDashTrack(String selectedNonDashTrack) =>
-      this(selectedNonDashTrack: selectedNonDashTrack);
+  VideoPlayerState selectedNonDashTrack(String selectedNonDashTrack) => this(selectedNonDashTrack: selectedNonDashTrack);
 
   @override
-  VideoPlayerState bufferPosition(Duration? bufferPosition) =>
-      this(bufferPosition: bufferPosition);
+  VideoPlayerState bufferPosition(Duration? bufferPosition) => this(bufferPosition: bufferPosition);
 
   @override
   VideoPlayerState video(Video? video) => this(video: video);
 
   @override
-  VideoPlayerState offlineVideo(DownloadedVideo? offlineVideo) =>
-      this(offlineVideo: offlineVideo);
+  VideoPlayerState offlineVideo(DownloadedVideo? offlineVideo) => this(offlineVideo: offlineVideo);
 
   @override
-  VideoPlayerState disableControls(bool? disableControls) =>
-      this(disableControls: disableControls);
+  VideoPlayerState disableControls(bool? disableControls) => this(disableControls: disableControls);
 
   @override
   VideoPlayerState playNow(bool? playNow) => this(playNow: playNow);
@@ -136,8 +130,7 @@ class _$VideoPlayerStateCWProxyImpl implements _$VideoPlayerStateCWProxy {
           ? _value.colors
           // ignore: cast_nullable_to_non_nullable
           : colors as ColorScheme,
-      overFlowTextColor == const $CopyWithPlaceholder() ||
-              overFlowTextColor == null
+      overFlowTextColor == const $CopyWithPlaceholder() || overFlowTextColor == null
           ? _value.overFlowTextColor
           // ignore: cast_nullable_to_non_nullable
           : overFlowTextColor as Color,
@@ -149,8 +142,7 @@ class _$VideoPlayerStateCWProxyImpl implements _$VideoPlayerStateCWProxy {
           ? _value.startAt
           // ignore: cast_nullable_to_non_nullable
           : startAt as Duration?,
-      selectedNonDashTrack == const $CopyWithPlaceholder() ||
-              selectedNonDashTrack == null
+      selectedNonDashTrack == const $CopyWithPlaceholder() || selectedNonDashTrack == null
           ? _value.selectedNonDashTrack
           // ignore: cast_nullable_to_non_nullable
           : selectedNonDashTrack as String,

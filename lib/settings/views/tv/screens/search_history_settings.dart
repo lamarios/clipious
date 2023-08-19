@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:get/get.dart';
 import 'package:invidious/app/states/app.dart';
-import 'package:invidious/settings/states/settings.dart';
 import 'package:invidious/globals.dart';
-import 'package:invidious/utils/views/tv/components/tv_overscan.dart';
+import 'package:invidious/settings/states/settings.dart';
 import 'package:invidious/settings/views/tv/screens/settings.dart';
+import 'package:invidious/utils/views/tv/components/tv_overscan.dart';
 
 import '../../../../utils.dart';
 import '../../../../utils/views/tv/components/tv_button.dart';

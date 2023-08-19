@@ -3,24 +3,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_fadein/flutter_fadein.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:invidious/videos/states/add_to_playlist_button.dart';
-import 'package:invidious/videos/states/add_to_playlist.dart';
-import 'package:invidious/videos/states/video_like.dart';
 import 'package:invidious/downloads/states/download_manager.dart';
 import 'package:invidious/globals.dart';
+import 'package:invidious/utils/views/components/placeholders.dart';
+import 'package:invidious/videos/states/add_to_playlist_button.dart';
 import 'package:invidious/videos/states/video.dart';
+import 'package:invidious/videos/states/video_like.dart';
+import 'package:invidious/videos/views/components/add_to_playlist_button.dart';
 import 'package:invidious/videos/views/components/download_modal_sheet.dart';
 import 'package:invidious/videos/views/components/inner_view_tablet.dart';
 import 'package:invidious/videos/views/components/innter_view.dart';
-import 'package:invidious/videos/views/components/video_share_button.dart';
-import 'package:invidious/utils/views/components/placeholders.dart';
-import 'package:invidious/videos/views/components/add_to_playlist_button.dart';
 import 'package:invidious/videos/views/components/like_button.dart';
+import 'package:invidious/videos/views/components/video_share_button.dart';
 
-import '../../../player/states/player.dart';
 import '../../../downloads/views/screens/download_manager.dart';
 import '../../../main.dart';
 import '../../../myRouteObserver.dart';
+import '../../../player/states/player.dart';
 import '../../../utils.dart';
 
 class VideoRouteArguments {

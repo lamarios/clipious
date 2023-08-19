@@ -1,14 +1,11 @@
 import 'package:better_player/better_player.dart';
 import 'package:bloc/bloc.dart';
 import 'package:copy_with_extension/copy_with_extension.dart';
-import 'package:get/get.dart';
-import 'package:invidious/player/states/video_player.dart';
 import 'package:invidious/database.dart';
 import 'package:invidious/globals.dart';
+import 'package:invidious/player/states/video_player.dart';
 import 'package:invidious/settings/models/db/settings.dart';
 import 'package:logging/logging.dart';
-
-import 'interfaces/media_player.dart';
 
 part 'tv_player_settings.g.dart';
 
@@ -117,7 +114,7 @@ class TvPlayerSettingsCubit extends Cubit<TvPlayerSettingsState> {
 }
 
 @CopyWith(constructor: "_")
-class TvPlayerSettingsState extends GetxController {
+class TvPlayerSettingsState {
   Tabs selected = Tabs.video;
   bool useDash = db.getSettings(USE_DASH)?.value == 'true';
 

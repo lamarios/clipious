@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../models/base_video.dart';
 import '../../../utils.dart';
+import '../../models/base_video.dart';
 
 class VideoShareButton extends StatelessWidget {
   final BaseVideo video;

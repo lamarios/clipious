@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:invidious/videos/states/add_to_playlist_button.dart';
-import 'package:invidious/videos/states/add_to_playlist.dart';
-import 'package:invidious/videos/states/video_like.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/main.dart';
 import 'package:invidious/myRouteObserver.dart';
+import 'package:invidious/videos/states/add_to_playlist.dart';
+import 'package:invidious/videos/states/add_to_playlist_button.dart';
+import 'package:invidious/videos/states/video_like.dart';
 import 'package:logging/logging.dart';
 
 import '../../../playlists/views/components/add_to_playlist_list.dart';

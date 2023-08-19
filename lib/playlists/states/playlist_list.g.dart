@@ -42,23 +42,19 @@ class _$PlaylistListStateCWProxyImpl implements _$PlaylistListStateCWProxy {
   final PlaylistListState _value;
 
   @override
-  PlaylistListState paginatedList(PaginatedList<Playlist> paginatedList) =>
-      this(paginatedList: paginatedList);
+  PlaylistListState paginatedList(PaginatedList<Playlist> paginatedList) => this(paginatedList: paginatedList);
 
   @override
-  PlaylistListState refreshController(RefreshController refreshController) =>
-      this(refreshController: refreshController);
+  PlaylistListState refreshController(RefreshController refreshController) => this(refreshController: refreshController);
 
   @override
-  PlaylistListState playlists(List<Playlist> playlists) =>
-      this(playlists: playlists);
+  PlaylistListState playlists(List<Playlist> playlists) => this(playlists: playlists);
 
   @override
   PlaylistListState loading(bool loading) => this(loading: loading);
 
   @override
-  PlaylistListState scrollController(ScrollController scrollController) =>
-      this(scrollController: scrollController);
+  PlaylistListState scrollController(ScrollController scrollController) => this(scrollController: scrollController);
 
   @override
   PlaylistListState error(String error) => this(error: error);
@@ -84,8 +80,7 @@ class _$PlaylistListStateCWProxyImpl implements _$PlaylistListStateCWProxy {
           ? _value.paginatedList
           // ignore: cast_nullable_to_non_nullable
           : paginatedList as PaginatedList<Playlist>,
-      refreshController == const $CopyWithPlaceholder() ||
-              refreshController == null
+      refreshController == const $CopyWithPlaceholder() || refreshController == null
           ? _value.refreshController
           // ignore: cast_nullable_to_non_nullable
           : refreshController as RefreshController,
@@ -97,8 +92,7 @@ class _$PlaylistListStateCWProxyImpl implements _$PlaylistListStateCWProxy {
           ? _value.loading
           // ignore: cast_nullable_to_non_nullable
           : loading as bool,
-      scrollController == const $CopyWithPlaceholder() ||
-              scrollController == null
+      scrollController == const $CopyWithPlaceholder() || scrollController == null
           ? _value.scrollController
           // ignore: cast_nullable_to_non_nullable
           : scrollController as ScrollController,
@@ -113,6 +107,5 @@ class _$PlaylistListStateCWProxyImpl implements _$PlaylistListStateCWProxy {
 extension $PlaylistListStateCopyWith on PlaylistListState {
   /// Returns a callable class that can be used as follows: `instanceOfPlaylistListState.copyWith(...)` or like so:`instanceOfPlaylistListState.copyWith.fieldName(...)`.
   // ignore: library_private_types_in_public_api
-  _$PlaylistListStateCWProxy get copyWith =>
-      _$PlaylistListStateCWProxyImpl(this);
+  _$PlaylistListStateCWProxy get copyWith => _$PlaylistListStateCWProxyImpl(this);
 }

@@ -1,7 +1,7 @@
-import 'package:invidious/utils/models/item_with_continuation.dart';
 import 'package:invidious/search/models/search_results.dart';
 import 'package:invidious/search/models/search_sort_by.dart';
 import 'package:invidious/search/models/search_type.dart';
+import 'package:invidious/utils/models/item_with_continuation.dart';
 import 'package:invidious/videos/models/userFeed.dart';
 import 'package:invidious/videos/models/video_in_list.dart';
 

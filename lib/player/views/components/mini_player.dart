@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:invidious/player/states/player.dart';
 import 'package:invidious/downloads/models/downloaded_video.dart';
+import 'package:invidious/player/states/player.dart';
 import 'package:invidious/player/views/components/mini_player_controls.dart';
 import 'package:invidious/player/views/components/mini_player_progress.dart';
 

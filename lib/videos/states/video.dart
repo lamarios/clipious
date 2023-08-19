@@ -3,16 +3,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:invidious/database.dart';
 import 'package:invidious/downloads/models/downloaded_video.dart';
+import 'package:invidious/settings/models/db/settings.dart';
 import 'package:invidious/videos/models/base_video.dart';
 import 'package:invidious/videos/models/dislike.dart';
-import 'package:invidious/settings/models/db/settings.dart';
 import 'package:logging/logging.dart';
 
 import '../../downloads/states/download_manager.dart';
 import '../../globals.dart';
+import '../../player/states/player.dart';
 import '../../settings/models/errors/invidiousServiceError.dart';
 import '../models/video.dart';
-import '../../player/states/player.dart';
 
 part 'video.g.dart';
 

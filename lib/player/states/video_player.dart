@@ -6,10 +6,9 @@ import 'package:flutter/services.dart';
 import 'package:invidious/downloads/models/downloaded_video.dart';
 import 'package:invidious/extensions.dart';
 import 'package:invidious/player/models/mediaEvent.dart';
-import 'package:invidious/settings/states/settings.dart';
-import 'package:invidious/utils.dart';
-import 'package:invidious/videos/models/base_video.dart';
 import 'package:invidious/player/views/tv/components/player_controls.dart';
+import 'package:invidious/settings/states/settings.dart';
+import 'package:invidious/videos/models/base_video.dart';
 import 'package:logging/logging.dart';
 import 'package:wakelock/wakelock.dart';
 
@@ -530,7 +529,6 @@ class VideoPlayerCubit extends MediaPlayerCubit<VideoPlayerState> {
 
 @CopyWith(constructor: "_")
 class VideoPlayerState extends MediaPlayerState {
-
   BetterPlayerController? videoController;
   bool useDash = db.getSettings(USE_DASH)?.value == 'true';
   final ColorScheme colors;

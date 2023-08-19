@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:get/get.dart';
 import 'package:invidious/globals.dart';
-import 'package:invidious/utils/models/paginatedList.dart';
 import 'package:invidious/playlists/states/playlist_list.dart';
 import 'package:invidious/playlists/views/components/playlist_list.dart';
+import 'package:invidious/utils/models/paginatedList.dart';
 
 import '../../../utils.dart';
 

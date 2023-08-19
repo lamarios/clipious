@@ -36,12 +36,10 @@ class _$PlayerControlsStateCWProxyImpl implements _$PlayerControlsStateCWProxy {
   PlayerControlsState event(MediaEvent<dynamic> event) => this(event: event);
 
   @override
-  PlayerControlsState audioPosition(Duration audioPosition) =>
-      this(audioPosition: audioPosition);
+  PlayerControlsState audioPosition(Duration audioPosition) => this(audioPosition: audioPosition);
 
   @override
-  PlayerControlsState displayControls(bool displayControls) =>
-      this(displayControls: displayControls);
+  PlayerControlsState displayControls(bool displayControls) => this(displayControls: displayControls);
 
   @override
 
@@ -76,6 +74,5 @@ class _$PlayerControlsStateCWProxyImpl implements _$PlayerControlsStateCWProxy {
 extension $PlayerControlsStateCopyWith on PlayerControlsState {
   /// Returns a callable class that can be used as follows: `instanceOfPlayerControlsState.copyWith(...)` or like so:`instanceOfPlayerControlsState.copyWith.fieldName(...)`.
   // ignore: library_private_types_in_public_api
-  _$PlayerControlsStateCWProxy get copyWith =>
-      _$PlayerControlsStateCWProxyImpl(this);
+  _$PlayerControlsStateCWProxy get copyWith => _$PlayerControlsStateCWProxyImpl(this);
 }

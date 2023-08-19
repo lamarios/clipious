@@ -39,6 +39,7 @@ class DownloadProgress {
 
 class DownloadManagerCubit extends Cubit<DownloadManagerState> {
   final PlayerCubit player;
+
   DownloadManagerCubit(super.initialState, this.player) {
     onReady();
   }

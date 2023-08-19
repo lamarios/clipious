@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:invidious/comments/views/components/comments_container.dart';
 import 'package:invidious/videos/models/video.dart';
 import 'package:invidious/videos/views/components/add_to_queue_button.dart';
 import 'package:invidious/videos/views/components/play_button.dart';
-import 'package:invidious/comments/views/components/comments_container.dart';
 import 'package:invidious/videos/views/components/recommended_videos.dart';
 
-import '../../states/video.dart';
 import '../../../globals.dart';
-import 'video_thumbnail.dart';
+import '../../states/video.dart';
 import 'info.dart';
+import 'video_thumbnail.dart';
 
 class VideoInnerView extends StatelessWidget {
   final Video video;

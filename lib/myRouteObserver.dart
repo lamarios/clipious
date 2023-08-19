@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:invidious/player/states/player.dart';
 import 'package:logging/logging.dart';
 
 const String PATH_CHANNEL = "/channel";

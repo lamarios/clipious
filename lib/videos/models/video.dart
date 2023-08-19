@@ -1,10 +1,10 @@
 import 'package:invidious/videos/models/base_video.dart';
 import 'package:json_annotation/json_annotation.dart';
 
+import '../../utils/models/image_object.dart';
 import 'adaptive_format.dart';
 import 'caption.dart';
 import 'format_stream.dart';
-import '../../utils/models/image_object.dart';
 import 'recommended_video.dart';
 
 part 'video.g.dart';

@@ -5,8 +5,8 @@ import 'package:invidious/player/states/player.dart';
 import 'package:logging/logging.dart';
 
 import '../../globals.dart';
-import '../models/playlist.dart';
 import '../../videos/models/video_in_list.dart';
+import '../models/playlist.dart';
 
 part 'playlist.g.dart';
 
@@ -14,6 +14,7 @@ final log = Logger('PlaylistController');
 
 class PlaylistCubit extends Cubit<PlaylistState> {
   final PlayerCubit player;
+
   PlaylistCubit(super.initialState, this.player) {
     onReady();
   }

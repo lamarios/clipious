@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:invidious/utils/views/tv/components/tv_overscan.dart';
 import 'package:invidious/settings/views/tv/screens/settings.dart';
+import 'package:invidious/utils/views/tv/components/tv_overscan.dart';
 
 class TvSelectFromList extends StatelessWidget {
   final List<String> options;
