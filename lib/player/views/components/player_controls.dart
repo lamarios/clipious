@@ -21,6 +21,7 @@ class PlayerControls extends StatelessWidget {
   showPlaybackSpeedSelection(BuildContext context, MediaPlayerCubit player) {
     Navigator.of(context).pop();
     showModalBottomSheet(
+      isScrollControlled:true,
       showDragHandle: true,
       context: context,
       builder: (context) {
@@ -72,6 +73,7 @@ class PlayerControls extends StatelessWidget {
 
     showModalBottomSheet(
       showDragHandle: true,
+      isScrollControlled:true,
       context: context,
       builder: (context) {
         return SingleChildScrollView(
@@ -92,6 +94,7 @@ class PlayerControls extends StatelessWidget {
     var subtitles = pc.getSubtitles();
 
     showModalBottomSheet(
+      isScrollControlled: true,
       showDragHandle: true,
       context: context,
       builder: (ctx) {
