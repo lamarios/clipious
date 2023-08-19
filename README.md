@@ -3,6 +3,8 @@
 [![license agpl v3](https://shields.io/badge/License-AGPL%20v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0.en.html)
 Android client application for [invidious](https://invidious.io), the privacy focused youtube front end
 
+[![Build Status](https://drone.ftpix.com/api/badges/lamarios/clipious/status.svg)](https://drone.ftpix.com/lamarios/clipious)
+
 ## Community
 
 [Join the matrix channel](https://matrix.to/#/#clipious:matrix.org)
