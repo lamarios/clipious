@@ -4,7 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:invidious/app/views/screens/tvHome.dart';
+import 'package:invidious/app/views/tv/screens/tv_home.dart';
 import 'package:invidious/channels/states/channel.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/subscription_management/view/tv/tv_subscribe_button.dart';

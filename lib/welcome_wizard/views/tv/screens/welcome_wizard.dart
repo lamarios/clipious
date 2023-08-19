@@ -7,7 +7,7 @@ import 'package:invidious/utils/views/tv/components/tv_button.dart';
 import 'package:invidious/utils/views/tv/components/tv_overscan.dart';
 import 'package:invidious/welcome_wizard/states/welcome_wizard.dart';
 
-import '../../../../app/views/screens/tvHome.dart';
+import '../../../../app/views/tv/screens/tv_home.dart';
 import '../../../../settings/models/db/server.dart';
 import '../../../../settings/states/server_list_settings.dart';
 

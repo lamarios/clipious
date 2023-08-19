@@ -467,7 +467,9 @@ class PlayerCubit extends Cubit<PlayerState> {
       setSponsorBlock();
     }
 
-    mediaHandler.skipToQueueItem(state.currentIndex);
+    if(!isTv) {
+      mediaHandler.skipToQueueItem(state.currentIndex);
+    }
   }
 
   playOfflineVideos(List<DownloadedVideo> offlineVids) async {
