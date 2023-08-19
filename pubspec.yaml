@@ -83,6 +83,7 @@ dependencies:
   bloc: 8.1.2
   flutter_bloc: 8.1.3
   copy_with_extension: 5.0.4
+  pretty_bytes: 6.1.0
 dependency_overrides:
   #  wakelock_windows:
   #    git: # see https://github.com/creativecreatorormaybenot/wakelock/pull/203 for updates

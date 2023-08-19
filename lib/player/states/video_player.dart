@@ -10,6 +10,7 @@ import 'package:invidious/player/views/tv/components/player_controls.dart';
 import 'package:invidious/settings/states/settings.dart';
 import 'package:invidious/videos/models/base_video.dart';
 import 'package:logging/logging.dart';
+import 'package:pretty_bytes/pretty_bytes.dart';
 import 'package:wakelock/wakelock.dart';
 
 import '../../database.dart';
@@ -377,7 +378,7 @@ class VideoPlayerCubit extends MediaPlayerCubit<VideoPlayerState> {
   }
 
   String _videoTrackToString(BetterPlayerAsmsTrack? track) {
-    return '${track?.height}p' ?? '';
+    return '${track?.height}p - ${prettyBytes((track?.bitrate ?? 0).toDouble(), bits: true)}/s';
   }
 
   String _audioTrackToString(BetterPlayerAsmsAudioTrack? track) {
