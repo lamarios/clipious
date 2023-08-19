@@ -56,11 +56,7 @@ class PlaylistCubit extends Cubit<PlaylistState> {
 
         var toAdd = pl.videos.where((v) => state.playlist.videos.indexWhere((v2) => v2.videoId == v.videoId) == -1).toList();
 
-        if (page == 1) {
-          state.playlist.videos = toAdd;
-        } else {
-          state.playlist.videos.addAll(toAdd);
-        }
+        state.playlist.videos.addAll(toAdd);
 
         totalFiltered += pl.removedByFilter;
         log.fine('filtered removed ${pl.removedByFilter} videos,adding ${pl.videos.length}');

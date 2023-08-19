@@ -120,6 +120,9 @@ class ServerListSettingsCubit extends Cubit<ServerListSettingsState> {
       Server server = Server(url: serverUrl);
       db.upsertServer(server);
       state.addServerController.text = 'https://';
+      if (state.dbServers.isEmpty) {
+        switchServer(server);
+      }
       refreshServers();
     } else {
       throw Error();
