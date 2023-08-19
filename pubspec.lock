@@ -937,6 +937,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.5.1"
+  pretty_bytes:
+    dependency: "direct main"
+    description:
+      name: pretty_bytes
+      sha256: "7631053feb43bef3cf700244758c021bf74a906fae6fa459684a142f9c2bbcd4"
+      url: "https://pub.dev"
+    source: hosted
+    version: "6.1.0"
   process:
     dependency: transitive
     description:
