@@ -1,19 +1,19 @@
 import 'package:easy_debounce/easy_debounce.dart';
-import 'package:invidious/controllers/settingsController.dart';
-import 'package:invidious/models/db/baseVideoCache.dart';
-import 'package:invidious/models/db/progress.dart';
-import 'package:invidious/models/db/searchHistoryItem.dart';
-import 'package:invidious/models/db/settings.dart';
-import 'package:invidious/models/errors/noServerSelected.dart';
+import 'package:invidious/search/models/db/searchHistoryItem.dart';
+import 'package:invidious/settings/models/db/settings.dart';
+import 'package:invidious/settings/models/errors/noServerSelected.dart';
+import 'package:invidious/settings/states/settings.dart';
+import 'package:invidious/videos/models/db/history_video_cache.dart';
+import 'package:invidious/videos/models/db/progress.dart';
 import 'package:logging/logging.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 
-import 'models/db/appLog.dart';
-import 'models/db/downloadedVideo.dart';
-import 'models/db/server.dart';
-import 'models/db/videoFilter.dart';
+import 'downloads/models/downloaded_video.dart';
 import 'objectbox.g.dart'; // created by `flutter pub run build_runner build`
+import 'settings/models/db/app_logs.dart';
+import 'settings/models/db/server.dart';
+import 'settings/models/db/video_filter.dart';
 
 const SELECTED_SERVER = 'selected-server';
 const USE_SPONSORBLOCK = 'use-sponsor-block';
@@ -89,6 +89,10 @@ class DbClient {
 
   saveSetting(SettingsValue setting) {
     store.box<SettingsValue>().put(setting, mode: PutMode.put);
+  }
+
+  Future<List<SettingsValue>> getAllSettings() async {
+    return store.box<SettingsValue>().getAllAsync();
   }
 
   deleteSetting(String name) {

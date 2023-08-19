@@ -1,736 +1,736 @@
 {
-  "noChannels": "Ei kanavia",
-  "@noChannels": {
-    "description": "when there are no channels to display"
-  },
-  "noPlaylists": "Ei soittolistoja",
-  "@noPlaylists": {
-    "description": "when there are no playlists to display"
-  },
-  "addServer": "Lisää palvelin",
-  "@addServer": {
-    "description": "Add server label"
-  },
-  "invalidInvidiousServer": "Virheellinen Invidious-palvelin",
-  "@invalidInvidiousServer": {
-    "description": "Error when the user tries to add a server that is not a proper or reachable invidious server"
-  },
-  "yourServers": "Omat palvelimet",
-  "@yourServers": {
-    "description": "Your servers label"
-  },
-  "recommended": "Suositeltu",
-  "@recommended": {
-    "description": "Recommended label"
-  },
-  "error": "Vihre",
-  "@error": {},
-  "subscriptions": "Tilaukset",
-  "@subscriptions": {
-    "description": "User subscriptions"
-  },
-  "playlists": "Soittolistat",
-  "@playlists": {
-    "description": "User playlists"
-  },
-  "popular": "Suosittu",
-  "@popular": {
-    "description": "Popular videos title"
-  },
-  "trending": "Nousussa",
-  "@trending": {
-    "description": "Trending videos title"
-  },
-  "noVideoInPlayList": "Soittolistalla ei ole videota",
-  "@noVideoInPlayList": {
-    "description": "When no videos in the playlist"
-  },
-  "removeFromPlayList": "Poista soittolistasta",
-  "@removeFromPlayList": {
-    "description": "Menu item description to show remove a video from a playlist"
-  },
-  "deletePlayListQ": "Poistetaanko soittolista?",
-  "@deletePlayListQ": {
-    "description": "Ask user to delete a playlist"
-  },
-  "irreversibleAction": "Tämä toiminta on peruuttamatonta",
-  "@irreversibleAction": {
-    "description": "Tell the user that the action cannot be undone"
-  },
-  "addPlayList": "Lisää soittolista",
-  "@addPlayList": {
-    "description": "Title for add playlist dialog"
-  },
-  "playListName": "Soittolistan nimi",
-  "@playListName": {
-    "description": "Place holder for new playlist name text field"
-  },
-  "playlistVisibility": "Näkyvyys",
-  "@playlistVisibility": {
-    "description": "Dropdown label for playlist visibility"
-  },
-  "publicPlaylist": "Julkinen",
-  "@publicPlaylist": {
-    "description": "Public playlist"
-  },
-  "privatePlaylist": "Yksityinen",
-  "@privatePlaylist": {
-    "description": "Private playlist"
-  },
-  "cancel": "Peruuta",
-  "@cancel": {
-    "description": "Cancel button label"
-  },
-  "add": "Lisää",
-  "@add": {
-    "description": "Add button abel"
-  },
-  "ok": "OK",
-  "@ok": {
-    "description": "Ok"
-  },
-  "wizardIntro": "Valitse julkinen palvelin tai lisää oma. (Voidaan muuttaa myöhemmin asetuksissa)",
-  "@wizardIntro": {
-    "description": "Welcome message on frst time use"
-  },
-  "videoAddedToPlaylist": "Video lisätty soittolistaan",
-  "@videoAddedToPlaylist": {
-    "description": "Pop up message when a video was added to a playlist"
-  },
-  "errorAddingVideoToPlaylist": "Virhe videon lisäämisessä soittolistaan",
-  "@errorAddingVideoToPlaylist": {
-    "description": "Error while adding video to playlist"
-  },
-  "unlistedPlaylist": "Luetteloimaton",
-  "@unlistedPlaylist": {
-    "description": "Unlisted playlist"
-  },
-  "shareYoutubeLink": "Jaa YouTube-linkki",
-  "@shareYoutubeLink": {
-    "description": "asking user to share youtube link"
-  },
-  "selectPlaylist": "Valitse soittolista",
-  "@selectPlaylist": {
-    "description": "Title when users wants to add a video to a playlist"
-  },
-  "createNewPlaylist": "Luo uusi soittolista",
-  "@createNewPlaylist": {
-    "description": "Button label to create a new playlist when the user wants to add a video to a playlist"
-  },
-  "info": "Tiedot",
-  "@info": {
-    "description": "Info label"
-  },
-  "videos": "Videot",
-  "@videos": {
-    "description": "Videos label"
-  },
-  "loadMore": "Lataa lisää",
-  "@loadMore": {
-    "description": "CTA to load more"
-  },
-  "streams": "Striimaukset",
-  "@streams": {
-    "description": "Streams label"
-  },
-  "latestVideos": "Uusimmat videot",
-  "@latestVideos": {
-    "description": "Latest channel videos"
-  },
-  "newSorting": "Uusi",
-  "@newSorting": {
-    "description": "Content sorting: new"
-  },
-  "streamIsLive": "Livenä",
-  "@streamIsLive": {
-    "description": "Label when a video is a live stream"
-  },
-  "selectBrowsingCountry": "Valitse selainmaa",
-  "@selectBrowsingCountry": {
-    "description": "Select country for trending content"
-  },
-  "settings": "Asetukset",
-  "@settings": {
-    "description": "Settings title"
-  },
-  "browsing": "Selaus",
-  "@browsing": {
-    "description": "video browsing preferences"
-  },
-  "country": "Maa",
-  "@country": {
-    "description": "Country label"
-  },
-  "whenAppStartsShow": "Kun sovellus käynnistyy, näytä…",
-  "@whenAppStartsShow": {
-    "description": "Setting title for selecting the screen to show on start"
-  },
-  "servers": "Palvelimet",
-  "@servers": {
-    "description": "Server management settings category"
-  },
-  "loadingPublicServer": "Ladataan julkisia palvelimia",
-  "@loadingPublicServer": {
-    "description": "Message telling users the app is loading the list of public servers"
-  },
-  "currentServer": "Tällä hetkellä käytössä {current}",
-  "@currentServer": {
-    "description": "Which server the user is currently using",
-    "placeholders": {
-      "current": {
-        "type": "String"
-      }
+    "noChannels": "Ei kanavia",
+    "@noChannels": {
+        "description": "when there are no channels to display"
+    },
+    "noPlaylists": "Ei soittolistoja",
+    "@noPlaylists": {
+        "description": "when there are no playlists to display"
+    },
+    "addServer": "Lisää palvelin",
+    "@addServer": {
+        "description": "Add server label"
+    },
+    "invalidInvidiousServer": "Virheellinen Invidious-palvelin",
+    "@invalidInvidiousServer": {
+        "description": "Error when the user tries to add a server that is not a proper or reachable invidious server"
+    },
+    "yourServers": "Omat palvelimet",
+    "@yourServers": {
+        "description": "Your servers label"
+    },
+    "recommended": "Suositeltu",
+    "@recommended": {
+        "description": "Recommended label"
+    },
+    "error": "Vihre",
+    "@error": {},
+    "subscriptions": "Tilaukset",
+    "@subscriptions": {
+        "description": "User subscriptions"
+    },
+    "playlists": "Soittolistat",
+    "@playlists": {
+        "description": "User playlists"
+    },
+    "popular": "Suosittu",
+    "@popular": {
+        "description": "Popular videos title"
+    },
+    "trending": "Nousussa",
+    "@trending": {
+        "description": "Trending videos title"
+    },
+    "noVideoInPlayList": "Soittolistalla ei ole videota",
+    "@noVideoInPlayList": {
+        "description": "When no videos in the playlist"
+    },
+    "removeFromPlayList": "Poista soittolistasta",
+    "@removeFromPlayList": {
+        "description": "Menu item description to show remove a video from a playlist"
+    },
+    "deletePlayListQ": "Poistetaanko soittolista?",
+    "@deletePlayListQ": {
+        "description": "Ask user to delete a playlist"
+    },
+    "irreversibleAction": "Tämä toiminta on peruuttamatonta",
+    "@irreversibleAction": {
+        "description": "Tell the user that the action cannot be undone"
+    },
+    "addPlayList": "Lisää soittolista",
+    "@addPlayList": {
+        "description": "Title for add playlist dialog"
+    },
+    "playListName": "Soittolistan nimi",
+    "@playListName": {
+        "description": "Place holder for new playlist name text field"
+    },
+    "playlistVisibility": "Näkyvyys",
+    "@playlistVisibility": {
+        "description": "Dropdown label for playlist visibility"
+    },
+    "publicPlaylist": "Julkinen",
+    "@publicPlaylist": {
+        "description": "Public playlist"
+    },
+    "privatePlaylist": "Yksityinen",
+    "@privatePlaylist": {
+        "description": "Private playlist"
+    },
+    "cancel": "Peruuta",
+    "@cancel": {
+        "description": "Cancel button label"
+    },
+    "add": "Lisää",
+    "@add": {
+        "description": "Add button abel"
+    },
+    "ok": "OK",
+    "@ok": {
+        "description": "Ok"
+    },
+    "wizardIntro": "Valitse julkinen palvelin tai lisää oma. (Voidaan muuttaa myöhemmin asetuksissa)",
+    "@wizardIntro": {
+        "description": "Welcome message on frst time use"
+    },
+    "videoAddedToPlaylist": "Video lisätty soittolistaan",
+    "@videoAddedToPlaylist": {
+        "description": "Pop up message when a video was added to a playlist"
+    },
+    "errorAddingVideoToPlaylist": "Virhe videon lisäämisessä soittolistaan",
+    "@errorAddingVideoToPlaylist": {
+        "description": "Error while adding video to playlist"
+    },
+    "unlistedPlaylist": "Luetteloimaton",
+    "@unlistedPlaylist": {
+        "description": "Unlisted playlist"
+    },
+    "shareYoutubeLink": "Jaa YouTube-linkki",
+    "@shareYoutubeLink": {
+        "description": "asking user to share youtube link"
+    },
+    "selectPlaylist": "Valitse soittolista",
+    "@selectPlaylist": {
+        "description": "Title when users wants to add a video to a playlist"
+    },
+    "createNewPlaylist": "Luo uusi soittolista",
+    "@createNewPlaylist": {
+        "description": "Button label to create a new playlist when the user wants to add a video to a playlist"
+    },
+    "info": "Tiedot",
+    "@info": {
+        "description": "Info label"
+    },
+    "videos": "Videot",
+    "@videos": {
+        "description": "Videos label"
+    },
+    "loadMore": "Lataa lisää",
+    "@loadMore": {
+        "description": "CTA to load more"
+    },
+    "streams": "Striimaukset",
+    "@streams": {
+        "description": "Streams label"
+    },
+    "latestVideos": "Uusimmat videot",
+    "@latestVideos": {
+        "description": "Latest channel videos"
+    },
+    "newSorting": "Uusi",
+    "@newSorting": {
+        "description": "Content sorting: new"
+    },
+    "streamIsLive": "Livenä",
+    "@streamIsLive": {
+        "description": "Label when a video is a live stream"
+    },
+    "selectBrowsingCountry": "Valitse selainmaa",
+    "@selectBrowsingCountry": {
+        "description": "Select country for trending content"
+    },
+    "settings": "Asetukset",
+    "@settings": {
+        "description": "Settings title"
+    },
+    "browsing": "Selaus",
+    "@browsing": {
+        "description": "video browsing preferences"
+    },
+    "country": "Maa",
+    "@country": {
+        "description": "Country label"
+    },
+    "whenAppStartsShow": "Kun sovellus käynnistyy, näytä…",
+    "@whenAppStartsShow": {
+        "description": "Setting title for selecting the screen to show on start"
+    },
+    "servers": "Palvelimet",
+    "@servers": {
+        "description": "Server management settings category"
+    },
+    "loadingPublicServer": "Ladataan julkisia palvelimia",
+    "@loadingPublicServer": {
+        "description": "Message telling users the app is loading the list of public servers"
+    },
+    "currentServer": "Tällä hetkellä käytössä {current}",
+    "@currentServer": {
+        "description": "Which server the user is currently using",
+        "placeholders": {
+            "current": {
+                "type": "String"
+            }
+        }
+    },
+    "useSponsorBlock": "Käytä SponsorBlock",
+    "@useSponsorBlock": {
+        "description": "label for sponsorblock checkbox"
+    },
+    "sponsorBlockDescription": "Ohita yhteisön lähettämät sponsoripätkät",
+    "@sponsorBlockDescription": {
+        "description": "Sponsorblock setting description"
+    },
+    "package": "Paketti",
+    "@package": {
+        "description": "package label"
+    },
+    "logIn": "Kirjaudu sisään",
+    "@logIn": {
+        "description": "CTA to log in to server"
+    },
+    "delete": "Poista",
+    "@delete": {
+        "description": "Delete label"
+    },
+    "about": "Tietoja",
+    "@about": {
+        "description": "About"
+    },
+    "name": "Nimi",
+    "@name": {
+        "description": "NAme label"
+    },
+    "version": "Versio",
+    "@version": {
+        "description": "version label"
+    },
+    "nSubscribers": "{count, select, no{Ei tilaajia} other{{count} tilajaa}}",
+    "@nSubscribers": {
+        "description": "number of subscribers",
+        "placeholders": {
+            "count": {
+                "type": "String"
+            }
+        }
+    },
+    "shareInvidiousLink": "Jaa Invidious-linkki",
+    "@shareInvidiousLink": {
+        "description": "asking user to share invidious link"
+    },
+    "useThisServer": "Käytä tätä palvelinta",
+    "@useThisServer": {
+        "description": "Use this server label"
+    },
+    "loggedIn": "Kirjautunut sisään",
+    "@loggedIn": {
+        "description": "Label to tell the user that he is logged in to the server"
+    },
+    "notLoggedIn": "Ei kirjautuneena sisään",
+    "@notLoggedIn": {
+        "description": "Label when the user is not logged in to the server"
+    },
+    "addServerHelpText": "Lisää omia palvelimia +-painikkeella tai napauta julkista palvelinta ja lisää se.",
+    "@addServerHelpText": {
+        "description": "label for when the user hasn't chosen a server yet"
+    },
+    "publicServers": "Julkiset palvelimet",
+    "@publicServers": {
+        "description": "Public servers label"
+    },
+    "tapToAddServer": "Lisää palvelin luetteloon napauttamalla",
+    "@tapToAddServer": {
+        "description": "public server description"
+    },
+    "publicServersError": "Julkisten palvelimien luetteloa ei voitu hakea. Yritä uudelleen napauttamalla.",
+    "@publicServersError": {
+        "description": "Error message when trying to get public servers but it failed"
+    },
+    "appearance": "Ulkonäkö",
+    "@appearance": {
+        "description": "Settings category title"
+    },
+    "useDynamicTheme": "Dynaamiset värit",
+    "@useDynamicTheme": {
+        "description": ""
+    },
+    "useDynamicThemeDescription": "Käytä Material You-värejä (käytettävissä vain Android 12+)",
+    "@useDynamicThemeDescription": {
+        "description": ""
+    },
+    "nVideos": "{count, plural, =0{Ei videoita} =1{1 video} other{{count} videota}}",
+    "@nVideos": {
+        "description": "One or more videos",
+        "placeholders": {
+            "count": {
+                "type": "num",
+                "format": "compact"
+            }
+        }
+    },
+    "subscribed": "Tilattu",
+    "@subscribed": {
+        "description": "When the user is subscribed to a channel"
+    },
+    "subscribe": "Tilaa",
+    "@subscribe": {
+        "description": "Label for user to subscribe to a channel"
+    },
+    "channels": "Kanavat",
+    "@channels": {
+        "description": "Channels label"
+    },
+    "couldntLoadVideo": "Videota ei voitu ladata",
+    "@couldntLoadVideo": {
+        "description": "Message to display when a video can't be loaded"
+    },
+    "comments": "Kommentit",
+    "@comments": {
+        "description": "Comments label"
+    },
+    "couldntFetchVideos": "Videoita ei voitu hakea. Yritä uudelleen napauttamalla.",
+    "@couldntFetchVideos": {
+        "description": "Can't load bunch of videos, asking  user to try again"
+    },
+    "startUsingClipious": "Aloita Clipiousin käyttö",
+    "@startUsingClipious": {
+        "description": "button label to start using the app"
+    },
+    "nReplies": "{count, plural, =0{Ei vastauksia} =1{1 vastaus} other{{count} vastausta}}",
+    "@nReplies": {
+        "description": "number of replies to a comment",
+        "placeholders": {
+            "count": {
+                "type": "num",
+                "format": "compact"
+            }
+        }
+    },
+    "sponsorSkipped": "Sponsori jätti väliin",
+    "@sponsorSkipped": {
+        "description": "When a sponsor segment is skipped thanks to sponsor block"
+    },
+    "showOnStart": "Valitse, mitä näytetään sovelluksen käynnistyessä",
+    "@showOnStart": {
+        "description": "Title of dialog asking which screen the users prefers to see"
+    },
+    "manageServers": "Hallitse palvelimia",
+    "@manageServers": {
+        "description": "Settings to manage servers"
+    },
+    "useDash": "Käytä DASH",
+    "@useDash": {
+        "description": "Label on video options if a user wants to switch to dash urls instead of the regular quality selection"
+    },
+    "useDashDescription": "DASH-adaptiivinen suoratoisto voi joskus olla ongelmallista, YouTube voi rajoittaa sitä.",
+    "@useDashDescription": {
+        "description": "Description for dash in the settings screen"
+    },
+    "videoPlayer": "Videosoitin",
+    "@videoPlayer": {
+        "description": "Title for video player related options"
+    },
+    "sponsorBlockCategorySponsor": "Sponsori",
+    "@sponsorBlockCategorySponsor": {
+        "description": "Sponsor block 'Sponsor' Category"
+    },
+    "sponsorBlockSettingsQuickDescription": "Valitse, minkä tyyppiset segmentit ohitetaan",
+    "@sponsorBlockSettingsQuickDescription": {
+        "description": "Small description of what the sponsor block settings do"
+    },
+    "sponsorBlockCategoryIntro": "Intro/välianimaatio",
+    "@sponsorBlockCategoryIntro": {
+        "description": "Sponsorblock 'Intro' Category"
+    },
+    "wrongUsernamePassword": "Virheellinen käyttäjänimi tai salasana",
+    "@wrongUsernamePassword": {
+        "description": "Error message when authentication fails"
+    },
+    "password": "Salasana",
+    "@password": {
+        "description": "Password label for login to a server"
+    },
+    "sponsorBlockCategoryUnpaidSelfPromo": "Oma promootio / ei maksettu",
+    "@sponsorBlockCategoryUnpaidSelfPromo": {
+        "description": "Sponsor block 'Unpaid/Self promotion' Category"
+    },
+    "sponsorBlockCategoryInteraction": "Interaktiomuistutus (Tilaus)",
+    "@sponsorBlockCategoryInteraction": {
+        "description": "Sponsor block 'Interaction' Category"
+    },
+    "sponsorBlockCategoryIntroDescription": "Ajanjakso vailla varsinaista sisältöä. Voi olla tauko, staattinen kuva tai toistuva animaatio. Tätä ei tulisi käyttää siirtymiin, jotka sisältävät tietoa.",
+    "@sponsorBlockCategoryIntroDescription": {
+        "description": "Sponsorblock 'Intro' Category description"
+    },
+    "sponsorBlockCategoryOutro": "Lopputekstit / Outro",
+    "@sponsorBlockCategoryOutro": {
+        "description": "Outro block 'Outro' Category"
+    },
+    "subtitleFontSizeDescription": "Aseta sopiva tekstityksen koko näytöllesi",
+    "@subtitleFontSizeDescription": {
+        "description": "Settings description for subtitle size"
+    },
+    "useProxy": "Käytä välityspalvelinta",
+    "@useProxy": {
+        "description": "label for settings switch to proxy videos from server"
+    },
+    "quality": "Laatu",
+    "@quality": {
+        "description": "Name of TV ui video settings"
+    },
+    "audio": "Ääni",
+    "@audio": {
+        "description": "Name TV ui audio settings"
+    },
+    "subtitles": "Tekstitykset",
+    "@subtitles": {
+        "description": "Name of TV ui subtitles settings"
+    },
+    "playbackSpeed": "Toistonopeus",
+    "@playbackSpeed": {
+        "description": "Name of TV ui Playback speed"
+    },
+    "blackBackground": "Musta tausta",
+    "@blackBackground": {
+        "description": "Settings name for black background"
+    },
+    "blackBackgroundDescription": "OLED-näytön tumma teema",
+    "@blackBackgroundDescription": {
+        "description": "Description for dark background setting"
+    },
+    "search": "Etsi",
+    "@search": {
+        "description": "search title"
+    },
+    "videoListed": "Julkinen",
+    "@videoListed": {
+        "description": "Status of a publicly available video"
+    },
+    "videoIsFamilyFriendly": "Lapsiystävällinen",
+    "@videoIsFamilyFriendly": {
+        "description": "Displayed only when a video is family friendly"
+    },
+    "subtitleFontSize": "Tekstityksen koko",
+    "@subtitleFontSize": {
+        "description": "Settings label for the size of the subtitles"
+    },
+    "skipSslVerification": "Ohita SSL-varmenteen varmistus",
+    "@skipSslVerification": {
+        "description": "Setting label to skip ssl certification verification"
+    },
+    "skipSslVerificationDescription": "Kun käytössä on itse allekirjoitettu SSL-varmenne tai palvelimella on SSL-varmenteeseen liittyviä ongelmia.",
+    "@skipSslVerificationDescription": {
+        "description": "Setting description for the skip ssl certification verification"
+    },
+    "tapToManage": "Muokkaa napauttamalla",
+    "@tapToManage": {
+        "description": "Text shown below a server in the 'Your servers' list"
+    },
+    "authentication": "Tunnistautuminen",
+    "@authentication": {
+        "description": "Label for server settings related to authentications"
+    },
+    "tokenLoginDescription": "Suositeltu kirjautumistapa",
+    "@tokenLoginDescription": {
+        "description": "Recommended way to log in"
+    },
+    "cookieLoginDescription": "Käytä tätä tapaa, jos tunnistautuminen tokenilla ei onnistu",
+    "@cookieLoginDescription": {
+        "description": "Cookie log in description"
+    },
+    "logout": "Kirjaudu ulos",
+    "@logout": {
+        "description": "CTA to logout of a server"
+    },
+    "username": "Käyttäjänimi",
+    "@username": {
+        "description": "Username label for login to a server"
+    },
+    "tokenLogin": "Kirjaudu tokenilla",
+    "@tokenLogin": {
+        "description": "Textto login to a server using the recommended way"
+    },
+    "cookieLogin": "Kirjaudu evästeellä",
+    "@cookieLogin": {
+        "description": "Text to login to a server using the cookie jar method"
+    },
+    "videoQueue": "Jono",
+    "@videoQueue": {
+        "description": "Label for button to display the video queue"
+    },
+    "addToQueueList": "Lisää jonoon",
+    "@addToQueueList": {
+        "description": "Label on button to add a video to the queue list"
+    },
+    "addRecommendedToQueue": "Jatka automaattisesti suositeltuun videoon",
+    "@addRecommendedToQueue": {
+        "description": "Switch when playing a video to automatically add the recommended videos to the video queue"
+    },
+    "themeBrightness": "Teema",
+    "@themeBrightness": {
+        "description": "Ask the user to user dark / light / system theme"
+    },
+    "themeLight": "Vaalea",
+    "@themeLight": {
+        "description": "Light theme"
+    },
+    "themeDark": "Tumma",
+    "@themeDark": {
+        "description": "Dark theme"
+    },
+    "followSystem": "Järjestelmä",
+    "@followSystem": {
+        "description": "Follow system label"
+    },
+    "requiresRestart": "Vaatii sovelluksen uudelleen käynnistämisen",
+    "@requiresRestart": {
+        "description": "Requires app restart label"
+    },
+    "appLanguage": "Sovelluksen kieli",
+    "@appLanguage": {
+        "description": "Select app language"
+    },
+    "appLogs": "Sovelluksen lokit",
+    "@appLogs": {
+        "description": "Title for settings that leads to application logs"
+    },
+    "logsCopied": "Lokit kopioitu leikepöydälle",
+    "@logsCopied": {
+        "description": "Message to tell user that logs have been copied to the clipboard"
+    },
+    "searchSortRating": "Arviointi",
+    "@searchSortRating": {
+        "description": "Sort search by rating"
+    },
+    "videoUnlisted": "Listaamaton",
+    "@videoUnlisted": {
+        "description": "Status of a video that is only accessible by link"
+    },
+    "searchHistory": "Hakuhistoria",
+    "@searchHistory": {
+        "description": "Settings label for search history"
+    },
+    "searchSortUploadDate": "Latauspäivämäärä",
+    "@searchSortUploadDate": {
+        "description": "Sort search by upload date"
+    },
+    "searchSortViewCount": "Katselumäärä",
+    "@searchSortViewCount": {
+        "description": "Sort search by view count"
+    },
+    "clearSearchHistory": "Tyhjennä hakuhistoria",
+    "@clearSearchHistory": {
+        "description": "Settings label for clearing search history"
+    },
+    "copyToClipBoard": "Kopioi leikepöydälle",
+    "@copyToClipBoard": {
+        "description": "Text to copy something to clipboard"
+    },
+    "rememberSubtitleLanguage": "Muista tekstitysten kieli",
+    "@rememberSubtitleLanguage": {
+        "description": "Settings label for remembering subtitle language"
+    },
+    "topSorting": "Top",
+    "@topSorting": {
+        "description": "Content sorting: top"
+    },
+    "rememberPlaybackSpeed": "Muista toistonopeus",
+    "@rememberPlaybackSpeed": {
+        "description": "Setting label for remembering playback speed"
+    },
+    "videoFilterHideLabel": "Piilota",
+    "@videoFilterHideLabel": {
+        "description": "Label to hide videos"
+    },
+    "optional": "valinnainen",
+    "@optional": {
+        "description": "Optional label"
+    },
+    "addToPlaylist": "Lisää soittolistaan",
+    "@addToPlaylist": {
+        "description": "Label to add a video to a playlist"
+    },
+    "playNextAddedToQueue": "Video toistetaan seuraavaksi",
+    "@playNextAddedToQueue": {
+        "description": "Pop up message to confirm that the video has been properly set to play next"
+    },
+    "playNext": "Toista seuraavaksi",
+    "@playNext": {
+        "description": "Label to play the video after the current one."
+    },
+    "videoFilterAllChannels": "Kaikki kanavat",
+    "@videoFilterAllChannels": {
+        "description": "Title for the sections that applies to all channels"
+    },
+    "videoFilterOperation": "Toiminta",
+    "@videoFilterOperation": {
+        "description": "Label for filter operation"
+    },
+    "videoFilterValue": "Arvo",
+    "@videoFilterValue": {
+        "description": "Label for filter value"
+    },
+    "addVideoFilter": "Luo suodatin",
+    "@addVideoFilter": {
+        "description": "Title when creating a new filter"
+    },
+    "editVideoFilter": "Muokkaa suodatinta",
+    "@editVideoFilter": {
+        "description": "Title when editting a filter"
+    },
+    "videoFilterType": "Tyyppi",
+    "@videoFilterType": {
+        "description": "Label for filter type"
+    },
+    "save": "Tallenna",
+    "@save": {
+        "description": "Text for save action"
+    },
+    "videoFilterTypeVideoTitle": "Videon otsikko",
+    "@videoFilterTypeVideoTitle": {
+        "description": "Label for video filter video title"
+    },
+    "videoFilterTypeChannelName": "Kanavan nimi",
+    "@videoFilterTypeChannelName": {
+        "description": "Label for video filter channel name"
+    },
+    "videoFilterTypeVideoLength": "Videon pituus (sekunteina)",
+    "@videoFilterTypeVideoLength": {
+        "description": "Label for video filter video length"
+    },
+    "videoFilterOperationContains": "Sisältää",
+    "@videoFilterOperationContains": {
+        "description": "Label for video filter operation Contains"
+    },
+    "videoFilterOperationNotContain": "Ei sisällä",
+    "@videoFilterOperationNotContain": {
+        "description": "Label for video filter operation Does not contain"
+    },
+    "channel": "Kanava",
+    "@channel": {
+        "description": "A single channel"
+    },
+    "enableSearchHistory": "Ota hakuhistoria käyttöön",
+    "@enableSearchHistory": {
+        "description": "Settings label for enabling search history"
+    },
+    "searchHistoryDescription": "Hakuhistorian asetukset",
+    "@searchHistoryDescription": {
+        "description": "Description for search history settings"
+    },
+    "fillFullscreen": "Suurenna video ruudulle",
+    "@fillFullscreen": {
+        "description": "Title to maximize video to fit screen"
+    },
+    "fillFullscreenDescription": "Aseta video täyttämään koko ruutu vaakatilassa",
+    "@fillFullscreenDescription": {
+        "description": "Setting description for filling video to screen in landscape"
+    },
+    "videoAddedToQueue": "Video lisätty jonoon",
+    "@videoAddedToQueue": {
+        "description": "Pop up message when a video was added at the end of the video queue"
+    },
+    "build": "Build",
+    "@build": {
+        "description": "build label"
+    },
+    "rememberPlaybackSpeedDescription": "Aseta toistonopeus automaattisesti viimeksi valittuun nopeuteen",
+    "@rememberPlaybackSpeedDescription": {
+        "description": "Settings description for remembering playback speed"
+    },
+    "shareLinkWithTimestamp": "Lisää aikaleima",
+    "@shareLinkWithTimestamp": {
+        "description": "asking user to share link along with timestamp"
+    },
+    "downloads": "Lataukset",
+    "@downloads": {
+        "description": "Downloads"
+    },
+    "downloadsPlayAll": "Toista kaikki",
+    "@downloadsPlayAll": {
+        "description": "Button to play all downloaded videos"
+    },
+    "videoDownloadStarted": "Videon lataus aloitettu",
+    "@videoDownloadStarted": {
+        "description": "Message when a video starts being downloaded"
+    },
+    "videoFailedDownloadRetry": "Lataus epäonnistui, napauta yrittääksesi uudelleen",
+    "@videoFailedDownloadRetry": {
+        "description": "Shown on download manager when a download fails and prompt the user to retry"
+    },
+    "videoAlreadyDownloaded": "Video on jo ladattu",
+    "@videoAlreadyDownloaded": {
+        "description": "Message when a user tries to download a video he already has"
+    },
+    "download": "Lataa",
+    "@download": {
+        "description": "A single download or CTA for downloading a video"
+    },
+    "noDownloadedVideos": "Ei ladattuja videoita. Lataa video painamalla pitkään videota hakutuloksissa tai paina latauspainiketta videonäkymässä",
+    "@noDownloadedVideos": {
+        "description": "Message showing when the user goes to the download screen but there are no offline videos."
+    },
+    "rememberSubtitleLanguageDescription": "Aseta teksitykset viimeksi asetetulle kielelle, jos tekstit ovat saatavilla",
+    "@rememberSubtitleLanguageDescription": {
+        "description": "Settings description for remembering subtitle language"
+    },
+    "searchSortRelevance": "Relevanssi",
+    "@searchSortRelevance": {
+        "description": "Sort search by relevance"
+    },
+    "itemlistErrorGeneric": "Tietojen haku epäonnistui",
+    "@itemlistErrorGeneric": {
+        "description": "Error showing when the data can't be fetch"
+    },
+    "manageSubscriptions": "Hallinnoi tilauksia",
+    "@manageSubscriptions": {
+        "description": "Title of manage subscriptions page"
+    },
+    "noSubscriptions": "Ei tilauksia, selaa videoita ja tilaa kanavia, joista pidät.",
+    "@noSubscriptions": {
+        "description": "Message when the user has no subs"
+    },
+    "history": "Historia",
+    "@history": {
+        "description": "User view history label"
+    },
+    "noHistory": "Ei katseluhistoriaa, katsomasi videot tulevat tänne näkyviin",
+    "@noHistory": {
+        "description": "Message when the user visits the history tab but it's empty"
+    },
+    "redirectInvidiousLink": "Jaa Invidious-uudelleenohjauksen linkki",
+    "@redirectInvidiousLink": {
+        "description": "asking user to share redirecting invidious link"
+    },
+    "videoDownloadAudioOnly": "Vain ääni",
+    "@videoDownloadAudioOnly": {
+        "description": "Label for toggle to download audio only "
+    },
+    "videoFilters": "Videosuodattimet",
+    "@videoFilters": {
+        "description": "Title for video filter settings"
+    },
+    "clearHistoryQuestion": "Tyhjennetäänkö historia?",
+    "@clearHistoryQuestion": {},
+    "unSubscribeQuestion": "Perutaanko tilaus?",
+    "@unSubscribeQuestion": {
+        "description": "Title for dialog if a user wants to unsubscribe in the subscribtion management screen"
+    },
+    "youCanSubscribeAgainLater": "Voit tilata kanavan uudelleen myöhemmin",
+    "@youCanSubscribeAgainLater": {
+        "description": "Text for the unscubscribe confirmation dialog"
+    },
+    "videoFilterTapToReveal": "Napauta näyttääksesi",
+    "@videoFilterTapToReveal": {
+        "description": "Label to tell user to tap to show a filtered video"
     }
-  },
-  "useSponsorBlock": "Käytä SponsorBlock",
-  "@useSponsorBlock": {
-    "description": "label for sponsorblock checkbox"
-  },
-  "sponsorBlockDescription": "Ohita yhteisön lähettämät sponsoripätkät",
-  "@sponsorBlockDescription": {
-    "description": "Sponsorblock setting description"
-  },
-  "package": "Paketti",
-  "@package": {
-    "description": "package label"
-  },
-  "logIn": "Kirjaudu sisään",
-  "@logIn": {
-    "description": "CTA to log in to server"
-  },
-  "delete": "Poista",
-  "@delete": {
-    "description": "Delete label"
-  },
-  "about": "Tietoja",
-  "@about": {
-    "description": "About"
-  },
-  "name": "Nimi",
-  "@name": {
-    "description": "NAme label"
-  },
-  "version": "Versio",
-  "@version": {
-    "description": "version label"
-  },
-  "nSubscribers": "{count, select, no{Ei tilaajia} other{{count} tilajaa}}",
-  "@nSubscribers": {
-    "description": "number of subscribers",
-    "placeholders": {
-      "count": {
-        "type": "String"
-      }
-    }
-  },
-  "shareInvidiousLink": "Jaa Invidious-linkki",
-  "@shareInvidiousLink": {
-    "description": "asking user to share invidious link"
-  },
-  "useThisServer": "Käytä tätä palvelinta",
-  "@useThisServer": {
-    "description": "Use this server label"
-  },
-  "loggedIn": "Kirjautunut sisään",
-  "@loggedIn": {
-    "description": "Label to tell the user that he is logged in to the server"
-  },
-  "notLoggedIn": "Ei kirjautuneena sisään",
-  "@notLoggedIn": {
-    "description": "Label when the user is not logged in to the server"
-  },
-  "addServerHelpText": "Lisää omia palvelimia +-painikkeella tai napauta julkista palvelinta ja lisää se.",
-  "@addServerHelpText": {
-    "description": "label for when the user hasn't chosen a server yet"
-  },
-  "publicServers": "Julkiset palvelimet",
-  "@publicServers": {
-    "description": "Public servers label"
-  },
-  "tapToAddServer": "Lisää palvelin luetteloon napauttamalla",
-  "@tapToAddServer": {
-    "description": "public server description"
-  },
-  "publicServersError": "Julkisten palvelimien luetteloa ei voitu hakea. Yritä uudelleen napauttamalla.",
-  "@publicServersError": {
-    "description": "Error message when trying to get public servers but it failed"
-  },
-  "appearance": "Ulkonäkö",
-  "@appearance": {
-    "description": "Settings category title"
-  },
-  "useDynamicTheme": "Dynaamiset värit",
-  "@useDynamicTheme": {
-    "description": ""
-  },
-  "useDynamicThemeDescription": "Käytä Material You-värejä (käytettävissä vain Android 12+)",
-  "@useDynamicThemeDescription": {
-    "description": ""
-  },
-  "nVideos": "{count, plural, =0{Ei videoita} =1{1 video} other{{count} videota}}",
-  "@nVideos": {
-    "description": "One or more videos",
-    "placeholders": {
-      "count": {
-        "type": "num",
-        "format": "compact"
-      }
-    }
-  },
-  "subscribed": "Tilattu",
-  "@subscribed": {
-    "description": "When the user is subscribed to a channel"
-  },
-  "subscribe": "Tilaa",
-  "@subscribe": {
-    "description": "Label for user to subscribe to a channel"
-  },
-  "channels": "Kanavat",
-  "@channels": {
-    "description": "Channels label"
-  },
-  "couldntLoadVideo": "Videota ei voitu ladata",
-  "@couldntLoadVideo": {
-    "description": "Message to display when a video can't be loaded"
-  },
-  "comments": "Kommentit",
-  "@comments": {
-    "description": "Comments label"
-  },
-  "couldntFetchVideos": "Videoita ei voitu hakea. Yritä uudelleen napauttamalla.",
-  "@couldntFetchVideos": {
-    "description": "Can't load bunch of videos, asking  user to try again"
-  },
-  "startUsingClipious": "Aloita Clipiousin käyttö",
-  "@startUsingClipious": {
-    "description": "button label to start using the app"
-  },
-  "nReplies": "{count, plural, =0{Ei vastauksia} =1{1 vastaus} other{{count} vastausta}}",
-  "@nReplies": {
-    "description": "number of replies to a comment",
-    "placeholders": {
-      "count": {
-        "type": "num",
-        "format": "compact"
-      }
-    }
-  },
-  "sponsorSkipped": "Sponsori jätti väliin",
-  "@sponsorSkipped": {
-    "description": "When a sponsor segment is skipped thanks to sponsor block"
-  },
-  "showOnStart": "Valitse, mitä näytetään sovelluksen käynnistyessä",
-  "@showOnStart": {
-    "description": "Title of dialog asking which screen the users prefers to see"
-  },
-  "manageServers": "Hallitse palvelimia",
-  "@manageServers": {
-    "description": "Settings to manage servers"
-  },
-  "useDash": "Käytä DASH",
-  "@useDash": {
-    "description": "Label on video options if a user wants to switch to dash urls instead of the regular quality selection"
-  },
-  "useDashDescription": "DASH-adaptiivinen suoratoisto voi joskus olla ongelmallista, YouTube voi rajoittaa sitä.",
-  "@useDashDescription": {
-    "description": "Description for dash in the settings screen"
-  },
-  "videoPlayer": "Videosoitin",
-  "@videoPlayer": {
-    "description": "Title for video player related options"
-  },
-  "sponsorBlockCategorySponsor": "Sponsori",
-  "@sponsorBlockCategorySponsor": {
-    "description": "Sponsor block 'Sponsor' Category"
-  },
-  "sponsorBlockSettingsQuickDescription": "Valitse, minkä tyyppiset segmentit ohitetaan",
-  "@sponsorBlockSettingsQuickDescription": {
-    "description": "Small description of what the sponsor block settings do"
-  },
-  "sponsorBlockCategoryIntro": "Intro/välianimaatio",
-  "@sponsorBlockCategoryIntro": {
-    "description": "Sponsorblock 'Intro' Category"
-  },
-  "wrongUsernamePassword": "Virheellinen käyttäjänimi tai salasana",
-  "@wrongUsernamePassword": {
-    "description": "Error message when authentication fails"
-  },
-  "password": "Salasana",
-  "@password": {
-    "description": "Password label for login to a server"
-  },
-  "sponsorBlockCategoryUnpaidSelfPromo": "Oma promootio / ei maksettu",
-  "@sponsorBlockCategoryUnpaidSelfPromo": {
-    "description": "Sponsor block 'Unpaid/Self promotion' Category"
-  },
-  "sponsorBlockCategoryInteraction": "Interaktiomuistutus (Tilaus)",
-  "@sponsorBlockCategoryInteraction": {
-    "description": "Sponsor block 'Interaction' Category"
-  },
-  "sponsorBlockCategoryIntroDescription": "Ajanjakso vailla varsinaista sisältöä. Voi olla tauko, staattinen kuva tai toistuva animaatio. Tätä ei tulisi käyttää siirtymiin, jotka sisältävät tietoa.",
-  "@sponsorBlockCategoryIntroDescription": {
-    "description": "Sponsorblock 'Intro' Category description"
-  },
-  "sponsorBlockCategoryOutro": "Lopputekstit / Outro",
-  "@sponsorBlockCategoryOutro": {
-    "description": "Outro block 'Outro' Category"
-  },
-  "subtitleFontSizeDescription": "Aseta sopiva tekstityksen koko näytöllesi",
-  "@subtitleFontSizeDescription": {
-    "description": "Settings description for subtitle size"
-  },
-  "useProxy": "Käytä välityspalvelinta",
-  "@useProxy": {
-    "description": "label for settings switch to proxy videos from server"
-  },
-  "quality": "Laatu",
-  "@quality": {
-    "description": "Name of TV ui video settings"
-  },
-  "audio": "Ääni",
-  "@audio": {
-    "description": "Name TV ui audio settings"
-  },
-  "subtitles": "Tekstitykset",
-  "@subtitles": {
-    "description": "Name of TV ui subtitles settings"
-  },
-  "playbackSpeed": "Toistonopeus",
-  "@playbackSpeed": {
-    "description": "Name of TV ui Playback speed"
-  },
-  "blackBackground": "Musta tausta",
-  "@blackBackground": {
-    "description": "Settings name for black background"
-  },
-  "blackBackgroundDescription": "OLED-näytön tumma teema",
-  "@blackBackgroundDescription": {
-    "description": "Description for dark background setting"
-  },
-  "search": "Etsi",
-  "@search": {
-    "description": "search title"
-  },
-  "videoListed": "Julkinen",
-  "@videoListed": {
-    "description": "Status of a publicly available video"
-  },
-  "videoIsFamilyFriendly": "Lapsiystävällinen",
-  "@videoIsFamilyFriendly": {
-    "description": "Displayed only when a video is family friendly"
-  },
-  "subtitleFontSize": "Tekstityksen koko",
-  "@subtitleFontSize": {
-    "description": "Settings label for the size of the subtitles"
-  },
-  "skipSslVerification": "Ohita SSL-varmenteen varmistus",
-  "@skipSslVerification": {
-    "description": "Setting label to skip ssl certification verification"
-  },
-  "skipSslVerificationDescription": "Kun käytössä on itse allekirjoitettu SSL-varmenne tai palvelimella on SSL-varmenteeseen liittyviä ongelmia.",
-  "@skipSslVerificationDescription": {
-    "description": "Setting description for the skip ssl certification verification"
-  },
-  "tapToManage": "Muokkaa napauttamalla",
-  "@tapToManage": {
-    "description": "Text shown below a server in the 'Your servers' list"
-  },
-  "authentication": "Tunnistautuminen",
-  "@authentication": {
-    "description": "Label for server settings related to authentications"
-  },
-  "tokenLoginDescription": "Suositeltu kirjautumistapa",
-  "@tokenLoginDescription": {
-    "description": "Recommended way to log in"
-  },
-  "cookieLoginDescription": "Käytä tätä tapaa, jos tunnistautuminen tokenilla ei onnistu",
-  "@cookieLoginDescription": {
-    "description": "Cookie log in description"
-  },
-  "logout": "Kirjaudu ulos",
-  "@logout": {
-    "description": "CTA to logout of a server"
-  },
-  "username": "Käyttäjänimi",
-  "@username": {
-    "description": "Username label for login to a server"
-  },
-  "tokenLogin": "Kirjaudu tokenilla",
-  "@tokenLogin": {
-    "description": "Textto login to a server using the recommended way"
-  },
-  "cookieLogin": "Kirjaudu evästeellä",
-  "@cookieLogin": {
-    "description": "Text to login to a server using the cookie jar method"
-  },
-  "videoQueue": "Jono",
-  "@videoQueue": {
-    "description": "Label for button to display the video queue"
-  },
-  "addToQueueList": "Lisää jonoon",
-  "@addToQueueList": {
-    "description": "Label on button to add a video to the queue list"
-  },
-  "addRecommendedToQueue": "Jatka automaattisesti suositeltuun videoon",
-  "@addRecommendedToQueue": {
-    "description": "Switch when playing a video to automatically add the recommended videos to the video queue"
-  },
-  "themeBrightness": "Teema",
-  "@themeBrightness": {
-    "description": "Ask the user to user dark / light / system theme"
-  },
-  "themeLight": "Vaalea",
-  "@themeLight": {
-    "description": "Light theme"
-  },
-  "themeDark": "Tumma",
-  "@themeDark": {
-    "description": "Dark theme"
-  },
-  "followSystem": "Järjestelmä",
-  "@followSystem": {
-    "description": "Follow system label"
-  },
-  "requiresRestart": "Vaatii sovelluksen uudelleen käynnistämisen",
-  "@requiresRestart": {
-    "description": "Requires app restart label"
-  },
-  "appLanguage": "Sovelluksen kieli",
-  "@appLanguage": {
-    "description": "Select app language"
-  },
-  "appLogs": "Sovelluksen lokit",
-  "@appLogs": {
-    "description": "Title for settings that leads to application logs"
-  },
-  "logsCopied": "Lokit kopioitu leikepöydälle",
-  "@logsCopied": {
-    "description": "Message to tell user that logs have been copied to the clipboard"
-  },
-  "searchSortRating": "Arviointi",
-  "@searchSortRating": {
-    "description": "Sort search by rating"
-  },
-  "videoUnlisted": "Listaamaton",
-  "@videoUnlisted": {
-    "description": "Status of a video that is only accessible by link"
-  },
-  "searchHistory": "Hakuhistoria",
-  "@searchHistory": {
-    "description": "Settings label for search history"
-  },
-  "searchSortUploadDate": "Latauspäivämäärä",
-  "@searchSortUploadDate": {
-    "description": "Sort search by upload date"
-  },
-  "searchSortViewCount": "Katselumäärä",
-  "@searchSortViewCount": {
-    "description": "Sort search by view count"
-  },
-  "clearSearchHistory": "Tyhjennä hakuhistoria",
-  "@clearSearchHistory": {
-    "description": "Settings label for clearing search history"
-  },
-  "copyToClipBoard": "Kopioi leikepöydälle",
-  "@copyToClipBoard": {
-    "description": "Text to copy something to clipboard"
-  },
-  "rememberSubtitleLanguage": "Muista tekstitysten kieli",
-  "@rememberSubtitleLanguage": {
-    "description": "Settings label for remembering subtitle language"
-  },
-  "topSorting": "Top",
-  "@topSorting": {
-    "description": "Content sorting: top"
-  },
-  "rememberPlaybackSpeed": "Muista toistonopeus",
-  "@rememberPlaybackSpeed": {
-    "description": "Setting label for remembering playback speed"
-  },
-  "videoFilterHideLabel": "Piilota",
-  "@videoFilterHideLabel": {
-    "description": "Label to hide videos"
-  },
-  "optional": "valinnainen",
-  "@optional": {
-    "description": "Optional label"
-  },
-  "addToPlaylist": "Lisää soittolistaan",
-  "@addToPlaylist": {
-    "description": "Label to add a video to a playlist"
-  },
-  "playNextAddedToQueue": "Video toistetaan seuraavaksi",
-  "@playNextAddedToQueue": {
-    "description": "Pop up message to confirm that the video has been properly set to play next"
-  },
-  "playNext": "Toista seuraavaksi",
-  "@playNext": {
-    "description": "Label to play the video after the current one."
-  },
-  "videoFilterAllChannels": "Kaikki kanavat",
-  "@videoFilterAllChannels": {
-    "description": "Title for the sections that applies to all channels"
-  },
-  "videoFilterOperation": "Toiminta",
-  "@videoFilterOperation": {
-    "description": "Label for filter operation"
-  },
-  "videoFilterValue": "Arvo",
-  "@videoFilterValue": {
-    "description": "Label for filter value"
-  },
-  "addVideoFilter": "Luo suodatin",
-  "@addVideoFilter": {
-    "description": "Title when creating a new filter"
-  },
-  "editVideoFilter": "Muokkaa suodatinta",
-  "@editVideoFilter": {
-    "description": "Title when editting a filter"
-  },
-  "videoFilterType": "Tyyppi",
-  "@videoFilterType": {
-    "description": "Label for filter type"
-  },
-  "save": "Tallenna",
-  "@save": {
-    "description": "Text for save action"
-  },
-  "videoFilterTypeVideoTitle": "Videon otsikko",
-  "@videoFilterTypeVideoTitle": {
-    "description": "Label for video filter video title"
-  },
-  "videoFilterTypeChannelName": "Kanavan nimi",
-  "@videoFilterTypeChannelName": {
-    "description": "Label for video filter channel name"
-  },
-  "videoFilterTypeVideoLength": "Videon pituus (sekunteina)",
-  "@videoFilterTypeVideoLength": {
-    "description": "Label for video filter video length"
-  },
-  "videoFilterOperationContains": "Sisältää",
-  "@videoFilterOperationContains": {
-    "description": "Label for video filter operation Contains"
-  },
-  "videoFilterOperationNotContain": "Ei sisällä",
-  "@videoFilterOperationNotContain": {
-    "description": "Label for video filter operation Does not contain"
-  },
-  "channel": "Kanava",
-  "@channel": {
-    "description": "A single channel"
-  },
-  "enableSearchHistory": "Ota hakuhistoria käyttöön",
-  "@enableSearchHistory": {
-    "description": "Settings label for enabling search history"
-  },
-  "searchHistoryDescription": "Hakuhistorian asetukset",
-  "@searchHistoryDescription": {
-    "description": "Description for search history settings"
-  },
-  "fillFullscreen": "Suurenna video ruudulle",
-  "@fillFullscreen": {
-    "description": "Title to maximize video to fit screen"
-  },
-  "fillFullscreenDescription": "Aseta video täyttämään koko ruutu vaakatilassa",
-  "@fillFullscreenDescription": {
-    "description": "Setting description for filling video to screen in landscape"
-  },
-  "videoAddedToQueue": "Video lisätty jonoon",
-  "@videoAddedToQueue": {
-    "description": "Pop up message when a video was added at the end of the video queue"
-  },
-  "build": "Build",
-  "@build": {
-    "description": "build label"
-  },
-  "rememberPlaybackSpeedDescription": "Aseta toistonopeus automaattisesti viimeksi valittuun nopeuteen",
-  "@rememberPlaybackSpeedDescription": {
-    "description": "Settings description for remembering playback speed"
-  },
-  "shareLinkWithTimestamp": "Lisää aikaleima",
-  "@shareLinkWithTimestamp": {
-    "description": "asking user to share link along with timestamp"
-  },
-  "downloads": "Lataukset",
-  "@downloads": {
-    "description": "Downloads"
-  },
-  "downloadsPlayAll": "Toista kaikki",
-  "@downloadsPlayAll": {
-    "description": "Button to play all downloaded videos"
-  },
-  "videoDownloadStarted": "Videon lataus aloitettu",
-  "@videoDownloadStarted": {
-    "description": "Message when a video starts being downloaded"
-  },
-  "videoFailedDownloadRetry": "Lataus epäonnistui, napauta yrittääksesi uudelleen",
-  "@videoFailedDownloadRetry": {
-    "description": "Shown on download manager when a download fails and prompt the user to retry"
-  },
-  "videoAlreadyDownloaded": "Video on jo ladattu",
-  "@videoAlreadyDownloaded": {
-    "description": "Message when a user tries to download a video he already has"
-  },
-  "download": "Lataa",
-  "@download": {
-    "description": "A single download or CTA for downloading a video"
-  },
-  "noDownloadedVideos": "Ei ladattuja videoita. Lataa video painamalla pitkään videota hakutuloksissa tai paina latauspainiketta videonäkymässä",
-  "@noDownloadedVideos": {
-    "description": "Message showing when the user goes to the download screen but there are no offline videos."
-  },
-  "rememberSubtitleLanguageDescription": "Aseta teksitykset viimeksi asetetulle kielelle, jos tekstit ovat saatavilla",
-  "@rememberSubtitleLanguageDescription": {
-    "description": "Settings description for remembering subtitle language"
-  },
-  "searchSortRelevance": "Relevanssi",
-  "@searchSortRelevance": {
-    "description": "Sort search by relevance"
-  },
-  "itemlistErrorGeneric": "Tietojen haku epäonnistui",
-  "@itemlistErrorGeneric": {
-    "description": "Error showing when the data can't be fetch"
-  },
-  "manageSubscriptions": "Hallinnoi tilauksia",
-  "@manageSubscriptions": {
-    "description": "Title of manage subscriptions page"
-  },
-  "noSubscriptions": "Ei tilauksia, selaa videoita ja tilaa kanavia, joista pidät.",
-  "@noSubscriptions": {
-    "description": "Message when the user has no subs"
-  },
-  "history": "Historia",
-  "@history": {
-    "description": "User view history label"
-  },
-  "noHistory": "Ei katseluhistoriaa, katsomasi videot tulevat tänne näkyviin",
-  "@noHistory": {
-    "description": "Message when the user visits the history tab but it's empty"
-  },
-  "redirectInvidiousLink": "Jaa Invidious-uudelleenohjauksen linkki",
-  "@redirectInvidiousLink": {
-    "description": "asking user to share redirecting invidious link"
-  },
-  "videoDownloadAudioOnly": "Vain ääni",
-  "@videoDownloadAudioOnly": {
-    "description": "Label for toggle to download audio only "
-  },
-  "videoFilters": "Videosuodattimet",
-  "@videoFilters": {
-    "description": "Title for video filter settings"
-  },
-  "clearHistoryQuestion": "Tyhjennetäänkö historia?",
-  "@clearHistoryQuestion": {},
-  "unSubscribeQuestion": "Perutaanko tilaus?",
-  "@unSubscribeQuestion": {
-    "description": "Title for dialog if a user wants to unsubscribe in the subscribtion management screen"
-  },
-  "youCanSubscribeAgainLater": "Voit tilata kanavan uudelleen myöhemmin",
-  "@youCanSubscribeAgainLater": {
-    "description": "Text for the unscubscribe confirmation dialog"
-  },
-  "videoFilterTapToReveal": "Napauta näyttääksesi",
-  "@videoFilterTapToReveal": {
-    "description": "Label to tell user to tap to show a filtered video"
-  }
 }
