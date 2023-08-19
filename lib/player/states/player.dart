@@ -301,6 +301,7 @@ class PlayerCubit extends Cubit<PlayerState> {
   }
 
   playNext() {
+
     if (state.videos.isNotEmpty || state.offlineVideos.isNotEmpty) {
       var state = this.state.copyWith();
       var listToUpdate = state.videos.isNotEmpty ? state.videos : state.offlineVideos;

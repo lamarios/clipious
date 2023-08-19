@@ -237,13 +237,14 @@ class VideoPlayerCubit extends MediaPlayerCubit<VideoPlayerState> {
         Map<String, String> resolutions = {};
 
         bool isHls = state.video!.hlsUrl != null;
-        var formatStream = state.video!.formatStreams[state.video!.formatStreams.length - 1];
+
+        var formatStream = isHls ? null : state.video!.formatStreams[state.video!.formatStreams.length - 1];
         String videoUrl = isHls
             ? '${state.video!.hlsUrl!}${service.useProxy() ? '?local=true' : ''}'
             : state.useDash
                 ? '${state.video!.dashUrl}${service.useProxy() ? '?local=true' : ''}'
-                : formatStream.url;
-        if (!state.useDash) {
+                : formatStream?.url ?? '';
+        if (!state.useDash && formatStream != null) {
           state.selectedNonDashTrack = formatStream.resolution;
         }
 

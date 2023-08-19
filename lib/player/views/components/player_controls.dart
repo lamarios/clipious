@@ -86,7 +86,7 @@ class PlayerControls extends StatelessWidget {
 
   showOptionMenu(BuildContext context, PlayerControlsState controls, MediaPlayerCubit pc) {
     var locals = AppLocalizations.of(context)!;
-
+    var player = context.read<PlayerCubit>();
     var videoTracks = pc.getVideoTracks();
     var audioTracks = pc.getAudioTracks();
     var subtitles = pc.getSubtitles();
@@ -149,7 +149,7 @@ class PlayerControls extends StatelessWidget {
                   leading: const Icon(Icons.music_note),
                   title: Text(locals.audio),
                 ),
-              if (pc.hasDashToggle())
+              if (pc.hasDashToggle() && !(player.state.currentlyPlaying?.liveNow ?? false))
                 ListTile(
                   onTap: () {
                     Navigator.of(context).pop();
@@ -240,7 +240,7 @@ class PlayerControls extends StatelessWidget {
                                               }
                                             ],
                                           ),
-                                          Padding(
+                                        if(!(player.state.currentlyPlaying?.liveNow ?? false))  Padding(
                                             padding: const EdgeInsets.only(top: 0.0, right: 8),
                                             child: Row(
                                               children: [
