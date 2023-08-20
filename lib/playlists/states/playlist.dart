@@ -63,16 +63,20 @@ class PlaylistCubit extends Cubit<PlaylistState> {
         page++;
 
         state.loadingProgress = (state.playlist.videos.length + totalFiltered) / state.playlist.videoCount;
-        emit(state);
+        if (!isClosed) {
+          emit(state);
+        } else {
+          return;
+        }
         state = this.state.copyWith();
-      } while (pl.videos.isNotEmpty || pl.removedByFilter > 0);
+      } while (!isClosed && pl.videos.isNotEmpty || pl.removedByFilter > 0);
 
       state = this.state.copyWith();
       state.loading = false;
     } else {
       state.loading = false;
     }
-    emit(state);
+    if (!isClosed) emit(state);
   }
 
   @override

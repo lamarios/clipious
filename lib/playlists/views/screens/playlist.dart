@@ -63,7 +63,7 @@ class PlaylistView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ColorScheme colorScheme = Theme.of(context).colorScheme;
+    ColorScheme colors = Theme.of(context).colorScheme;
     var locals = AppLocalizations.of(context)!;
     var player = context.read<PlayerCubit>();
     return BlocProvider(
@@ -73,7 +73,7 @@ class PlaylistView extends StatelessWidget {
           var cubit = context.read<PlaylistCubit>();
           return Scaffold(
               appBar: AppBar(
-                backgroundColor: colorScheme.background,
+                backgroundColor: colors.background,
                 title: Text(
                   _.playlist.title,
                 ),
@@ -86,14 +86,14 @@ class PlaylistView extends StatelessWidget {
                             padding: const EdgeInsets.all(8.0),
                             child: Icon(
                               Icons.delete,
-                              color: colorScheme.secondary,
+                              color: colors.secondary,
                             ),
                           ),
                         )
                       : const SizedBox.shrink()
                 ],
               ),
-              backgroundColor: colorScheme.background,
+              backgroundColor: colors.background,
               body: SafeArea(
                   bottom: false,
                   child: _.loading || _.playlist.videos.isNotEmpty
@@ -113,12 +113,16 @@ class PlaylistView extends StatelessWidget {
                                           children: _.loading
                                               ? [
                                                   Center(
-                                                      child: TweenAnimationBuilder(
-                                                    tween: Tween<double>(begin: 0, end: _.loadingProgress),
-                                                    duration: animationDuration,
-                                                    curve: Curves.easeInOutQuad,
-                                                    builder: (context, value, child) => CircularProgressIndicator(
-                                                      value: value > 0 && value < 1 ? value : null,
+                                                      child: Container(
+                                                    padding: const EdgeInsets.all(5),
+                                                    decoration: BoxDecoration(color: colors.background.withOpacity(0.5), shape: BoxShape.circle),
+                                                    child: TweenAnimationBuilder(
+                                                      tween: Tween<double>(begin: 0, end: _.loadingProgress),
+                                                      duration: animationDuration,
+                                                      curve: Curves.easeInOutQuad,
+                                                      builder: (context, value, child) => CircularProgressIndicator(
+                                                        value: value > 0 && value < 1 ? value : null,
+                                                      ),
                                                     ),
                                                   ))
                                                 ]

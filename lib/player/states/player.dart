@@ -310,7 +310,7 @@ class PlayerCubit extends Cubit<PlayerState> {
         log.fine('Play next: played length: ${state.playedVideos.length} videos: ${state.videos.length} Repeat mode: ${settings.state.playerRepeatMode}');
         if (settings.state.playerRepeatMode == PlayerRepeat.repeatOne) {
           if (state.videos.isNotEmpty) {
-            switchToVideo(state.currentlyPlaying!);
+            switchToVideo(state.currentlyPlaying!, startAt: Duration.zero);
           } else if (state.offlineVideos.isNotEmpty) {
             switchToOfflineVideo(state.offlineCurrentlyPlaying!);
           }

@@ -9,6 +9,8 @@ import 'package:invidious/videos/views/components/video_thumbnail.dart';
 import '../../models/base_video.dart';
 import 'offline_video_thumbnail.dart';
 
+
+const double compactVideoHeight = 70;
 class CompactVideo extends StatelessWidget {
   final Function()? onTap;
   final BaseVideo? video;
@@ -36,7 +38,7 @@ class CompactVideo extends StatelessWidget {
             onTap: onTap,
             child: AnimatedContainer(
               decoration: BoxDecoration(color: (highlighted ?? false) ? colors.secondaryContainer : colors.background, borderRadius: BorderRadius.circular(10)),
-              height: 70,
+              height: compactVideoHeight,
               duration: animationDuration,
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
