@@ -149,27 +149,6 @@ class PlayerCubit extends Cubit<PlayerState> {
     }
   }
 
-  toggleShuffle() {
-    settings.setShuffle(!settings.state.playerShuffleMode);
-    emit(state.copyWith());
-  }
-
-  setNextRepeatMode() {
-    var repeat = PlayerRepeat.noRepeat;
-    switch (settings.state.playerRepeatMode) {
-      case PlayerRepeat.noRepeat:
-        repeat = PlayerRepeat.repeatAll;
-        break;
-      case PlayerRepeat.repeatAll:
-        repeat = PlayerRepeat.repeatOne;
-        break;
-      case PlayerRepeat.repeatOne:
-        repeat = PlayerRepeat.noRepeat;
-        break;
-    }
-
-    settings.setRepeatMode(repeat);
-  }
 
   setVideos(List<BaseVideo> videos) {
     var state = this.state.copyWith();
