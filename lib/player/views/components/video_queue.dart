@@ -105,8 +105,16 @@ class VideoQueue extends StatelessWidget {
                     scrollController.animateTo(offset, duration: animationDuration * 4, curve: Curves.easeInOutQuad);
                   });
 
-                   */
+            */
                 },
+                buildWhen: (previous, current) =>
+                    previous.videos != current.videos ||
+                    previous.videos.length != current.videos.length ||
+                    previous.offlineVideos != current.offlineVideos ||
+                    previous.offlineVideos.length != current.offlineVideos.length ||
+                    previous.currentIndex != current.currentIndex ||
+                    previous.currentlyPlaying != current.currentlyPlaying ||
+                    previous.offlineCurrentlyPlaying != current.offlineCurrentlyPlaying,
                 builder: (context, state) => ReorderableListView.builder(
                     scrollController: scrollController,
                     itemCount: state.videos.isNotEmpty ? state.videos.length : state.offlineVideos.length,
