@@ -1,9 +1,7 @@
-import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_swipe_action_cell/core/cell.dart';
 import 'package:invidious/downloads/models/downloaded_video.dart';
-import 'package:invidious/globals.dart';
 import 'package:invidious/player/states/player.dart';
 import 'package:invidious/player/states/video_queue.dart';
 import 'package:invidious/videos/models/base_video.dart';
@@ -92,9 +90,22 @@ class VideoQueue extends StatelessWidget {
               return BlocConsumer<PlayerCubit, PlayerState>(
                 listenWhen: (previous, current) => previous.currentIndex != current.currentIndex,
                 listener: (context, state) {
+                  /*
+                  final offset = state.currentIndex * compactVideoHeight;
+                  bool goingDown = offset > scrollController.offset;
+
+                  // if we want to go up and we're already at the top we don't do anything
+                  if ((!goingDown && scrollController.offset == 0)
+                      // if we want to go down and we're already at the bottom we don't do anything
+                      ||
+                      (goingDown && scrollController.offset == scrollController.position.maxScrollExtent)) {
+                    return;
+                  }
                   EasyDebounce.debounce('video-queue-scrolling', const Duration(milliseconds: 500), () {
-                    scrollController.animateTo(state.currentIndex * compactVideoHeight, duration: animationDuration, curve: Curves.easeInOutQuad);
+                    scrollController.animateTo(offset, duration: animationDuration * 4, curve: Curves.easeInOutQuad);
                   });
+
+                   */
                 },
                 builder: (context, state) => ReorderableListView.builder(
                     scrollController: scrollController,
