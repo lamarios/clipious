@@ -1,1 +1,110 @@
-{}
+{
+  "sponsorBlockCategorySponsor": "Sponsorowane",
+  "@sponsorBlockCategorySponsor": {
+    "description": "Sponsor block 'Sponsor' Category"
+  },
+  "playNext": "Odtwórz następne",
+  "@playNext": {
+    "description": "Label to play the video after the current one."
+  },
+  "sponsorBlockCategoryOutro": "Napisy/karty końcowe",
+  "@sponsorBlockCategoryOutro": {
+    "description": "Outro block 'Outro' Category"
+  },
+  "sponsorBlockCategoryUnpaidSelfPromo": "Niepłatne/autopromocja",
+  "@sponsorBlockCategoryUnpaidSelfPromo": {
+    "description": "Sponsor block 'Unpaid/Self promotion' Category"
+  },
+  "sponsorBlockCategoryIntro": "Przerwa/animacja wejściowa",
+  "@sponsorBlockCategoryIntro": {
+    "description": "Sponsorblock 'Intro' Category"
+  },
+  "downloads": "Pobrane",
+  "@downloads": {
+    "description": "Downloads"
+  },
+  "history": "Historia",
+  "@history": {
+    "description": "User view history label"
+  },
+  "quality": "Jakość",
+  "@quality": {
+    "description": "Name of TV ui video settings"
+  },
+  "audio": "Dźwięk",
+  "@audio": {
+    "description": "Name TV ui audio settings"
+  },
+  "subtitles": "Napisy",
+  "@subtitles": {
+    "description": "Name of TV ui subtitles settings"
+  },
+  "search": "Wyszukaj",
+  "@search": {
+    "description": "search title"
+  },
+  "themeBrightness": "Motyw",
+  "@themeBrightness": {
+    "description": "Ask the user to user dark / light / system theme"
+  },
+  "shorts": "Shorts",
+  "@shorts": {
+    "description": "Youtube shorts"
+  },
+  "videoFilterType": "Rodzaj",
+  "@videoFilterType": {
+    "description": "Label for filter type"
+  },
+  "videoFilterOperation": "Działanie",
+  "@videoFilterOperation": {
+    "description": "Label for filter operation"
+  },
+  "videoFilterValue": "Wartość",
+  "@videoFilterValue": {
+    "description": "Label for filter value"
+  },
+  "save": "Zapisz",
+  "@save": {
+    "description": "Text for save action"
+  },
+  "optional": "opcjonalne",
+  "@optional": {
+    "description": "Optional label"
+  },
+  "videoFilterHideLabel": "Ukryj",
+  "@videoFilterHideLabel": {
+    "description": "Label to hide videos"
+  },
+  "searchSortRelevance": "Trafność",
+  "@searchSortRelevance": {
+    "description": "Sort search by relevance"
+  },
+  "searchSortRating": "Oceny",
+  "@searchSortRating": {
+    "description": "Sort search by rating"
+  },
+  "themeLight": "Jasny",
+  "@themeLight": {
+    "description": "Light theme"
+  },
+  "themeDark": "Ciemny",
+  "@themeDark": {
+    "description": "Dark theme"
+  },
+  "videoFilterFilterLabel": "Zaciemnienie",
+  "@videoFilterFilterLabel": {
+    "description": "Label to filter videos"
+  },
+  "videoFilterOperationContains": "Zawiera",
+  "@videoFilterOperationContains": {
+    "description": "Label for video filter operation Contains"
+  },
+  "download": "Pobierz",
+  "@download": {
+    "description": "A single download or CTA for downloading a video"
+  },
+  "channel": "Kanał",
+  "@channel": {
+    "description": "A single channel"
+  }
+}
