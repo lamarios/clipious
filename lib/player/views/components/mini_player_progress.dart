@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:invidious/videos/models/video.dart';
 
 import '../../states/player.dart';
 
@@ -9,11 +10,13 @@ class MiniPlayerProgress extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ColorScheme colors = Theme.of(context).colorScheme;
-    return BlocBuilder<PlayerCubit, PlayerState>(
-      buildWhen: (previous, current) => previous.position != current.position,
-      builder: (context, _) {
-        var player = context.read<PlayerCubit>();
-        return !(player.state.currentlyPlaying?.liveNow ?? false)
+    return Builder(
+      builder: (context) {
+        Video? currentlyPlaying = context.select((PlayerCubit cubit) => cubit.state.currentlyPlaying);
+        Duration duration = context.select((PlayerCubit cubit) => cubit.duration);
+        Duration position = context.select((PlayerCubit cubit) => cubit.state.position);
+
+        return !(currentlyPlaying?.liveNow ?? false)
             ? Container(
                 alignment: Alignment.centerLeft,
                 width: double.infinity,
@@ -23,7 +26,7 @@ class MiniPlayerProgress extends StatelessWidget {
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: AnimatedFractionallySizedBox(
-                    widthFactor: _.position.inMilliseconds / player.duration.inMilliseconds,
+                    widthFactor: position.inMilliseconds / duration.inMilliseconds,
                     heightFactor: 1,
                     duration: const Duration(milliseconds: 750),
                     curve: Curves.easeInOutQuad,

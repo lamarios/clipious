@@ -9,12 +9,17 @@ class MiniPlayerAware extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<PlayerCubit, PlayerState>(
-      buildWhen: (previous, current) => previous.isMini != current.isMini || previous.isHidden != current.isHidden,
-      builder: (context, _) => Padding(
-        padding: EdgeInsets.only(bottom: !_.isHidden && _.isMini ? targetHeight : 0),
-        child: child,
-      ),
+    return Builder(
+      builder: (
+        context,
+      ) {
+        bool isHidden = context.select((PlayerCubit cubit) => cubit.state.isHidden);
+        bool isMini = context.select((PlayerCubit cubit) => cubit.state.isMini);
+        return Padding(
+          padding: EdgeInsets.only(bottom: !isHidden && isMini ? targetHeight : 0),
+          child: child,
+        );
+      },
     );
   }
 }
