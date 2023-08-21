@@ -91,7 +91,7 @@
   "@themeDark": {
     "description": "Dark theme"
   },
-  "videoFilterFilterLabel": "Zaciemnienie",
+  "videoFilterFilterLabel": "Zasłoń",
   "@videoFilterFilterLabel": {
     "description": "Label to filter videos"
   },
@@ -524,5 +524,381 @@
   "useDash": "Użyj DASH",
   "@useDash": {
     "description": "Label on video options if a user wants to switch to dash urls instead of the regular quality selection"
+  },
+  "addToPlaylist": "Dodaj do playlisty",
+  "@addToPlaylist": {
+    "description": "Label to add a video to a playlist"
+  },
+  "playNextAddedToQueue": "Film zostanie odtworzony jako następny",
+  "@playNextAddedToQueue": {
+    "description": "Pop up message to confirm that the video has been properly set to play next"
+  },
+  "addRecommendedToQueue": "Automatycznie odtwarzaj listę polecanych",
+  "@addRecommendedToQueue": {
+    "description": "Switch when playing a video to automatically add the recommended videos to the video queue"
+  },
+  "sponsorBlockSettingsQuickDescription": "Wybierz który typ segmentów pomijać",
+  "@sponsorBlockSettingsQuickDescription": {
+    "description": "Small description of what the sponsor block settings do"
+  },
+  "sponsorBlockCategorySponsorDescription": "Płatna promocja, płatne polecenia i bezpośrednie reklamy. Nie dla autopromocji lub darmowego promowania spraw/twórców/stron internetowych/produktów, które lubią.",
+  "@sponsorBlockCategorySponsorDescription": {
+    "description": "Sponsor block 'Sponsor' Category description"
+  },
+  "sponsorBlockCategoryUnpaidSelfPromoDescription": "Podobne do \"sponsora\", z wyjątkiem bezpłatnej lub własnej promocji. Obejmuje to sekcje dotyczące produktów (merch), dotacji lub informacji o tym, z kim współpracowali ",
+  "@sponsorBlockCategoryUnpaidSelfPromoDescription": {
+    "description": "Sponsor block 'Unpaid/Self promotion' Category description"
+  },
+  "sponsorBlockCategoryInteraction": "Przypomnienie o interakcji (subskrypcja)",
+  "@sponsorBlockCategoryInteraction": {
+    "description": "Sponsor block 'Interaction' Category"
+  },
+  "sponsorBlockCategoryInteractionDescription": "Gdy w środku treści znajduje się krótkie przypomnienie o polubieniu, zasubskrybowaniu lub obserwowaniu. Jeśli jest długa lub dotyczy czegoś konkretnego, powinna zamiast tego znajdować się pod autopromocją.",
+  "@sponsorBlockCategoryInteractionDescription": {
+    "description": "Sponsor block 'Interaction' Category description"
+  },
+  "sponsorBlockCategoryIntroDescription": "Przerwa bez rzeczywistej zawartości. Może to być pauza, statyczna klatka, powtarzająca się animacja. Nie powinno być to używane do przejść zawierających informacje.",
+  "@sponsorBlockCategoryIntroDescription": {
+    "description": "Sponsorblock 'Intro' Category description"
+  },
+  "sponsorBlockCategoryOutroDescription": "Uznania lub gdy pojawią się karty końcowe YouTube. Nie dla wniosków z informacjami.",
+  "@sponsorBlockCategoryOutroDescription": {
+    "description": "Outro block 'Outro' Category description"
+  },
+  "sponsorBlockCategoryPreview": "Podgląd/Podsumowanie",
+  "@sponsorBlockCategoryPreview": {
+    "description": "Sponsorblock 'Preview' Category"
+  },
+  "useProxyDescription": "Poprzez użycie proxy do streamowania filmu z serwera można ominąć blokady regionalne lub blokady YouTube przez dostawców usług internetowych",
+  "@useProxyDescription": {
+    "description": "Description for the use proxy settings"
+  },
+  "pressDownToShowSettings": "Naciśnij przycisk w dół, aby wyświetlić ustawienia",
+  "@pressDownToShowSettings": {
+    "description": "Instruction on how to show video settings when playing a video on TV"
+  },
+  "playbackSpeed": "Prędkość odtwarzania",
+  "@playbackSpeed": {
+    "description": "Name of TV ui Playback speed"
+  },
+  "blackBackground": "Czarne tło",
+  "@blackBackground": {
+    "description": "Settings name for black background"
+  },
+  "blackBackgroundDescription": "Dla trybu ciemnego na ekranie OLED",
+  "@blackBackgroundDescription": {
+    "description": "Description for dark background setting"
+  },
+  "followSystem": "Użyj ustawień systemu",
+  "@followSystem": {
+    "description": "Follow system label"
+  },
+  "copyToClipBoard": "Kopiuj do schowka",
+  "@copyToClipBoard": {
+    "description": "Text to copy something to clipboard"
+  },
+  "logsCopied": "Logi skopiowane do schowka",
+  "@logsCopied": {
+    "description": "Message to tell user that logs have been copied to the clipboard"
+  },
+  "rememberSubtitleLanguage": "Zapamiętaj język napisów",
+  "@rememberSubtitleLanguage": {
+    "description": "Settings label for remembering subtitle language"
+  },
+  "videoFilters": "Filtry filmów",
+  "@videoFilters": {
+    "description": "Title for video filter settings"
+  },
+  "videoFiltersSettingTileDescriptions": "Zdefiniuj reguły filtrowania filmów",
+  "@videoFiltersSettingTileDescriptions": {
+    "description": "Description for the main settings page"
+  },
+  "videoFilterAllChannels": "Wszystkie kanały",
+  "@videoFilterAllChannels": {
+    "description": "Title for the sections that applies to all channels"
+  },
+  "addVideoFilter": "Utwórz filtr",
+  "@addVideoFilter": {
+    "description": "Title when creating a new filter"
+  },
+  "editVideoFilter": "Edytuj filtr",
+  "@editVideoFilter": {
+    "description": "Title when editting a filter"
+  },
+  "rememberPlaybackSpeedDescription": "Automatycznie ustawia prędkość odtwarzania na ostatnio wybraną prędkość",
+  "@rememberPlaybackSpeedDescription": {
+    "description": "Settings description for remembering playback speed"
+  },
+  "sponsorBlockCategoryPreviewDescription": "Zbiór klipów, które pokazują co pojawi się w tym filmie lub innych filmach z serii, w których wszystkie informacje są powtarzane w dalszej części filmu.",
+  "@sponsorBlockCategoryPreviewDescription": {
+    "description": "Sponsorblock 'Preview' Category description"
+  },
+  "sponsorBlockCategoryFiller": "Wypełniacz/żart",
+  "@sponsorBlockCategoryFiller": {
+    "description": "Sponsorblock 'Filler' Category"
+  },
+  "sponsorBlockCategoryFillerDescription": "Sceny styczne dodane wyłącznie w celu wypełnienia lub dodania humoru, które nie są wymagane do zrozumienia głównej treści filmu. Nie powinno to obejmować segmentów zapewniających kontekst lub szczegóły. Jest to bardzo agresywna kategoria przeznaczona dla osób, które nie są w nastroju do \"zabawy\".",
+  "@sponsorBlockCategoryFillerDescription": {
+    "description": "Sponsorblock 'Filler' Category description"
+  },
+  "sponsorBlockCategoryMusicOffTopic": "Muzyka: Sekcja nie zawierająca muzyki",
+  "@sponsorBlockCategoryMusicOffTopic": {
+    "description": "Sponsorblock 'MusicOffTopic' Category"
+  },
+  "sponsorBlockCategoryMusicOffTopicDescription": "Tylko do użytku w teledyskach. Ta kategoria powinna być używana tylko w sekcjach teledysków, które nie są jeszcze objęte inną kategorią.",
+  "@sponsorBlockCategoryMusicOffTopicDescription": {
+    "description": "Only for use in music videos. This only should be used for sections of music videos that aren't already covered by another category."
+  },
+  "useProxy": "Filmy przez proxy",
+  "@useProxy": {
+    "description": "label for settings switch to proxy videos from server"
+  },
+  "skipSslVerification": "Pomiń weryfikację certyfikatu SSL",
+  "@skipSslVerification": {
+    "description": "Setting label to skip ssl certification verification"
+  },
+  "skipSslVerificationDescription": "W przypadku korzystania z własnego certyfikatu SSL lub w przypadku problemów związanych z SSL na serwerze.",
+  "@skipSslVerificationDescription": {
+    "description": "Setting description for the skip ssl certification verification"
+  },
+  "searchHistoryLimitDescription": "Ustaw liczbę poprzednich wyszukiwań, które będą wyświetlane w sugestiach",
+  "@searchHistoryLimitDescription": {
+    "description": "Settings label for search history limit description"
+  },
+  "searchHistory": "Historia wyszukiwania",
+  "@searchHistory": {
+    "description": "Settings label for search history"
+  },
+  "searchHistoryDescription": "Ustawienia historii wyszukiwania",
+  "@searchHistoryDescription": {
+    "description": "Description for search history settings"
+  },
+  "enableSearchHistory": "Włącz historię wyszukiwania",
+  "@enableSearchHistory": {
+    "description": "Settings label for enabling search history"
+  },
+  "requiresRestart": "Wymaga uruchomienia ponownie aplikacji",
+  "@requiresRestart": {
+    "description": "Requires app restart label"
+  },
+  "nVideos": "{count, plural, =0{Brak filmów} =1{1 film} other{{count} filmów}}",
+  "@nVideos": {
+    "description": "One or more videos",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "returnYoutubeDislikeDescription": "Wyświetl szacunkową liczbę polubień filmu przy użyciu API dostarczonego przez returnyoutubedislike.com",
+  "@returnYoutubeDislikeDescription": {
+    "description": "ReturnYoutubeDislike setting description"
+  },
+  "autoplayVideoOnLoad": "Automatycznie odtwarzaj film po załadowaniu",
+  "@autoplayVideoOnLoad": {
+    "description": "Label for settings to enable autoplay when a video loads"
+  },
+  "searchHistoryLimit": "Limit historii wyszukiwania",
+  "@searchHistoryLimit": {
+    "description": "Settings label for search history limit"
+  },
+  "clearSearchHistory": "Wyczyść historię wyszukiwania",
+  "@clearSearchHistory": {
+    "description": "Settings label for clearing search history"
+  },
+  "subtitleFontSize": "Rozmiar czcionki napisów",
+  "@subtitleFontSize": {
+    "description": "Settings label for the size of the subtitles"
+  },
+  "appLanguage": "Język aplikacji",
+  "@appLanguage": {
+    "description": "Select app language"
+  },
+  "autoplayVideoOnLoadDescription": "Automatycznie odtwarzaj film po jego załadowaniu",
+  "@autoplayVideoOnLoadDescription": {
+    "description": "Description for the autoplay video on load setting"
+  },
+  "searchSortUploadDate": "Data przesłania",
+  "@searchSortUploadDate": {
+    "description": "Sort search by upload date"
+  },
+  "appLogs": "Logi aplikacji",
+  "@appLogs": {
+    "description": "Title for settings that leads to application logs"
+  },
+  "subtitleFontSizeDescription": "Zmień rozmiar napisów, jeśli są zbyt małe lub zbyt duże na Twoim urządzeniu",
+  "@subtitleFontSizeDescription": {
+    "description": "Settings description for subtitle size"
+  },
+  "appLogsDescription": "Uzyskanie logów tego, co dzieje się w aplikacji. Może być przydatne do zgłaszania problemów",
+  "@appLogsDescription": {
+    "description": "Description of the app log settings"
+  },
+  "searchSortViewCount": "Liczba wyświetleń",
+  "@searchSortViewCount": {
+    "description": "Sort search by view count"
+  },
+  "videoFilterEditDescription": "Wybierz opcjonalny kanał, typ filtra, operację i wartość, aby ODFILTROWAĆ filmy z list. Przykład: typ: nazwa wideo, operacja: zawiera, wartość: test spowoduje WYKLUCZENIE wszystkich filmów ze słowem \"test\" w nazwie.",
+  "@videoFilterEditDescription": {
+    "description": "Descriptive test for video filter set up"
+  },
+  "videoFilterDescriptionString": "{hideOrFilter} filmy gdzie {type} {operation} ''{value}''.",
+  "@videoFilterDescriptionString": {
+    "description": "Human readable description of a video filter, in this case is it for string comparison, example: Hide videos where the name of the video does not contain the following string 'test' (Do not translate text between { })",
+    "placeholders": {
+      "hideOrFilter": {
+        "type": "String",
+        "example": "Hide"
+      },
+      "type": {
+        "type": "String",
+        "example": "video title"
+      },
+      "operation": {
+        "type": "String",
+        "example": "does not contain"
+      },
+      "value": {
+        "type": "String",
+        "example": "some filter text"
+      }
+    }
+  },
+  "videoFiltered": "Film odfiltrowany z następujących powodów:",
+  "@videoFiltered": {
+    "description": "Label shown on video list when it is filtered out"
+  },
+  "videoFilterTapToReveal": "Stuknij, aby odkryć",
+  "@videoFilterTapToReveal": {
+    "description": "Label to tell user to tap to show a filtered video"
+  },
+  "videoFilterHide": "Ukryj filtrowane filmy",
+  "@videoFilterHide": {
+    "description": "Label for settings to hide filtered videos"
+  },
+  "videoFilterHideDescription": "Domyślnie odfiltrowane filmy nie są ukrywane, ale wyświetlane jako zasłonięte z powodami, dla których zostały odfiltrowane. To ustawienie usuwa odfiltrowane filmy z list.",
+  "@videoFilterHideDescription": {
+    "description": ""
+  },
+  "lockFullScreenToLandscape": "Zablokowanie orientacji pełnoekranowej do proporcji wideo",
+  "@lockFullScreenToLandscape": {
+    "description": "Title to force full screen to landscape"
+  },
+  "lockFullScreenToLandscapeDescription": "Blokuje orientację pełnoekranową w oparciu o format wideo, poziomy dla szerokich filmów i pionowy dla filmów pionowych",
+  "@lockFullScreenToLandscapeDescription": {
+    "description": "Setting description for forcing video to landscape when in full screen"
+  },
+  "fillFullscreen": "Powiększ film aby zapełnił ekran",
+  "@fillFullscreen": {
+    "description": "Title to maximize video to fit screen"
+  },
+  "videoFiltersExplanation": "Ukryj lub zasłoń filmy ze wszystkich kanałów wideo w aplikacji w oparciu o filtry zdefiniowane poniżej. Pozwala to na przykład ukryć spoilery sportowe lub ukryć krótkie filmy z określonego kanału.",
+  "@videoFiltersExplanation": {
+    "description": "Description on how filter work"
+  },
+  "videoFilterNoFilters": "Brak filtrów wideo, stuknij przycisk \"+\" poniżej, aby rozpocząć dodawanie filtrów.",
+  "@videoFilterNoFilters": {
+    "description": "Label when there are no video filters"
+  },
+  "videoFilterTypeVideoTitle": "Tytuł filmu",
+  "@videoFilterTypeVideoTitle": {
+    "description": "Label for video filter video title"
+  },
+  "videoFilterTypeVideoLength": "Długość wideo (w sekundach)",
+  "@videoFilterTypeVideoLength": {
+    "description": "Label for video filter video length"
+  },
+  "videoFilterWholeChannel": "{hideOrFilter} wszystkie filmy z kanału",
+  "@videoFilterWholeChannel": {
+    "description": "Label for whole channel filtering",
+    "placeholders": {
+      "hideOrFilter": {
+        "type": "String",
+        "example": "Hide"
+      }
+    }
+  },
+  "videoAlreadyDownloaded": "Film został już pobrany",
+  "@videoAlreadyDownloaded": {
+    "description": "Message when a user tries to download a video he already has"
+  },
+  "videoFilterTypeChannelName": "Nazwa kanału",
+  "@videoFilterTypeChannelName": {
+    "description": "Label for video filter channel name"
+  },
+  "rememberSubtitleLanguageDescription": "Automatycznie ustaw napisy na ostatnio wybrany język, jeśli jest dostępny",
+  "@rememberSubtitleLanguageDescription": {
+    "description": "Settings description for remembering subtitle language"
+  },
+  "fillFullscreenDescription": "Dostosowuje wideo tak, aby wypełniało cały ekran w trybie poziomym",
+  "@fillFullscreenDescription": {
+    "description": "Setting description for filling video to screen in landscape"
+  },
+  "noDownloadedVideos": "Brak pobranych filmów, znajdź film, przytrzymaj film na liście lub stuknij przycisk pobierania na ekranie filmu w celu pobrania",
+  "@noDownloadedVideos": {
+    "description": "Message showing when the user goes to the download screen but there are no offline videos."
+  },
+  "videoFilterOperationNotContain": "Nie zawiera",
+  "@videoFilterOperationNotContain": {
+    "description": "Label for video filter operation Does not contain"
+  },
+  "rememberPlaybackSpeed": "Zapamiętaj prędkość odtwarzania",
+  "@rememberPlaybackSpeed": {
+    "description": "Setting label for remembering playback speed"
+  },
+  "videoFailedDownloadRetry": "Pobieranie nie powiodło się. Stuknij, aby ponowić próbę",
+  "@videoFailedDownloadRetry": {
+    "description": "Shown on download manager when a download fails and prompt the user to retry"
+  },
+  "videoFilterOperationLowerThan": "Mniejsze od",
+  "@videoFilterOperationLowerThan": {
+    "description": "Label for video filter operation Lower than"
+  },
+  "downloadsPlayAll": "Odtwórz wszystkie",
+  "@downloadsPlayAll": {
+    "description": "Button to play all downloaded videos"
+  },
+  "videoDownloadAudioOnly": "Tylko audio",
+  "@videoDownloadAudioOnly": {
+    "description": "Label for toggle to download audio only "
+  },
+  "videoDownloadStarted": "Pobieranie wideo rozpoczęte",
+  "@videoDownloadStarted": {
+    "description": "Message when a video starts being downloaded"
+  },
+  "videoFilterOperationHigherThan": "Większe od",
+  "@videoFilterOperationHigherThan": {
+    "description": "Label for video filter operation Higher than"
+  },
+  "videoFilterHideAllFromChannel": "Filtrowanie wszystkich filmów z kanału",
+  "@videoFilterHideAllFromChannel": {
+    "description": "Label for video filter switch to allow to hide all videos from a channel"
+  },
+  "manageSubscriptions": "Zarządzaj subskrypcjami",
+  "@manageSubscriptions": {
+    "description": "Title of manage subscriptions page"
+  },
+  "noSubscriptions": "Bez subskrypcji. Przeglądaj filmy i zasubskrybuj kanał, który polubisz.",
+  "@noSubscriptions": {
+    "description": "Message when the user has no subs"
+  },
+  "youCanSubscribeAgainLater": "Możesz zasubskrybować ten kanał ponownie później",
+  "@youCanSubscribeAgainLater": {
+    "description": "Text for the unscubscribe confirmation dialog"
+  },
+  "unSubscribeQuestion": "Zrezygnować z subskrypcji?",
+  "@unSubscribeQuestion": {
+    "description": "Title for dialog if a user wants to unsubscribe in the subscribtion management screen"
+  },
+  "clearHistoryQuestion": "Wyczyścić historię?",
+  "@clearHistoryQuestion": {},
+  "clearHistoryQuestionExplanation": "Spowoduje to wyczyszczenie historii przeglądania na koncie, w używanej instancji Invidious. Nie można tego cofnąć.",
+  "@clearHistoryQuestionExplanation": {
+    "description": "Message for dialog before clearing full viewing history"
+  },
+  "noHistory": "Brak historii oglądania. Obejrzyj kilka filmów, a te pojawią się tutaj",
+  "@noHistory": {
+    "description": "Message when the user visits the history tab but it's empty"
   }
 }
