@@ -7,6 +7,8 @@ import 'package:invidious/player/states/video_queue.dart';
 import 'package:invidious/videos/models/base_video.dart';
 import 'package:invidious/videos/views/components/compact_video.dart';
 
+import '../../../globals.dart';
+
 class VideoQueue extends StatelessWidget {
   const VideoQueue({Key? key}) : super(key: key);
 
@@ -15,7 +17,7 @@ class VideoQueue extends StatelessWidget {
     var state = controller.state;
     bool isPlaying = index == state.currentIndex;
     return SwipeActionCell(
-      key: ValueKey(video.videoId),
+      key: ValueKey('$index-${video.videoId}'),
       trailingActions: isPlaying
           ? []
           : [
@@ -46,7 +48,7 @@ class VideoQueue extends StatelessWidget {
     bool isPlaying = state.currentIndex == index;
 
     return SwipeActionCell(
-      key: ValueKey(v.id),
+      key: ValueKey('$index-${v.id}'),
       trailingActions: isPlaying
           ? []
           : [
@@ -90,8 +92,7 @@ class VideoQueue extends StatelessWidget {
               return BlocConsumer<PlayerCubit, PlayerState>(
                 listenWhen: (previous, current) => previous.currentIndex != current.currentIndex,
                 listener: (context, state) {
-                  /*
-                  final offset = state.currentIndex * compactVideoHeight;
+                  final offset = (state.currentIndex - 1) * compactVideoHeight;
                   bool goingDown = offset > scrollController.offset;
 
                   // if we want to go up and we're already at the top we don't do anything
@@ -101,11 +102,7 @@ class VideoQueue extends StatelessWidget {
                       (goingDown && scrollController.offset == scrollController.position.maxScrollExtent)) {
                     return;
                   }
-                  EasyDebounce.debounce('video-queue-scrolling', const Duration(milliseconds: 500), () {
-                    scrollController.animateTo(offset, duration: animationDuration * 4, curve: Curves.easeInOutQuad);
-                  });
-
-            */
+                  scrollController.animateTo(offset, duration: animationDuration * 4, curve: Curves.easeInOutQuad);
                 },
                 buildWhen: (previous, current) =>
                     previous.videos != current.videos ||

@@ -58,7 +58,6 @@ class TvTextField extends StatelessWidget {
       onKeyEvent: (node, event) => onTvSelect(event, context, (context) => openTextField(context)),
       child: Builder(builder: (ctx) {
         bool hasFocus = Focus.of(ctx).hasFocus;
-        print(hasFocus);
 
         bool showLabel = controller.text.isEmpty && decoration?.label != null;
 

@@ -40,11 +40,9 @@ abstract class MediaPlayerCubit<T extends MediaPlayerState> extends Cubit<T> {
         switchToOfflineVideo(command.value);
         break;
       case MediaCommandType.play:
-        print("PLAAAYYYY");
         play();
         break;
       case MediaCommandType.pause:
-        print("PAUSEEE ${this.runtimeType.toString()}");
         pause();
         break;
       case MediaCommandType.mute:

@@ -149,7 +149,6 @@ class PlayerCubit extends Cubit<PlayerState> {
     }
   }
 
-
   setVideos(List<BaseVideo> videos) {
     var state = this.state.copyWith();
     state.videos = videos.where((element) => !element.filtered).toList();
@@ -416,6 +415,9 @@ class PlayerCubit extends Cubit<PlayerState> {
     } else {
       state.currentIndex = 0;
     }
+
+    emit(state);
+    state = this.state.copyWith();
 
     if (!isOffline) {
       late Video v;

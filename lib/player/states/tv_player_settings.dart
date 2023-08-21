@@ -38,7 +38,6 @@ class TvPlayerSettingsCubit extends Cubit<TvPlayerSettingsState> {
   BetterPlayerController? get videoController => player.state.videoController;
 
   videoButtonFocusChange(bool focus) {
-    print('Focus changed $focus');
     if (focus) {
       var state = this.state.copyWith();
       state.selected = Tabs.video;

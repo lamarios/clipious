@@ -4,6 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/player/states/player.dart';
 import 'package:invidious/videos/models/base_video.dart';
 import 'package:invidious/videos/views/components/download_modal_sheet.dart';
+import 'package:invidious/videos/views/components/video_in_list.dart';
 
 import '../../../main.dart';
 import 'add_to_playlist.dart';
@@ -12,15 +13,20 @@ import 'add_to_queue_button.dart';
 class VideoModalSheet extends StatelessWidget {
   final BaseVideo video;
   final bool animateDownload;
+  final VideoListSource source;
 
-  const VideoModalSheet({Key? key, required this.video, this.animateDownload = false}) : super(key: key);
+  const VideoModalSheet({Key? key, required this.video, this.animateDownload = false, required this.source}) : super(key: key);
 
-  static showVideoModalSheet(BuildContext context, BaseVideo video, {bool animateDownload = false}) {
+  static showVideoModalSheet(BuildContext context, BaseVideo video, {bool animateDownload = false, required VideoListSource source}) {
     showModalBottomSheet<void>(
         context: context,
         showDragHandle: true,
         builder: (BuildContext context) {
-          return VideoModalSheet(video: video, animateDownload: animateDownload);
+          return VideoModalSheet(
+            video: video,
+            animateDownload: animateDownload,
+            source: source,
+          );
         });
   }
 
@@ -57,7 +63,7 @@ class VideoModalSheet extends StatelessWidget {
 
   void downloadVideo(BuildContext context) {
     Navigator.of(context).pop();
-    DownloadModalSheet.showVideoModalSheet(context, video, animateDownload: animateDownload);
+    DownloadModalSheet.showVideoModalSheet(context, video, animateDownload: animateDownload, source: source);
   }
 
   @override

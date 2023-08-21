@@ -80,29 +80,29 @@ class MiniPlayerControls extends StatelessWidget {
                   ),
                 if (!isMini)
                   BlocBuilder<SettingsCubit, SettingsState>(
-                      buildWhen: (previous, current) => previous.playerRepeatMode != current.playerRepeatMode || previous.playerShuffleMode != current.playerShuffleMode,
+                      // buildWhen: (previous, current) => previous.playerRepeatMode != current.playerRepeatMode || previous.playerShuffleMode != current.playerShuffleMode,
                       builder: (context, settings) {
-                        var cubit = context.read<SettingsCubit>();
-                        return Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            IconButton(
-                                style: buttonStyle,
-                                onPressed: cubit.setNextRepeatMode,
-                                color: settings.playerRepeatMode == PlayerRepeat.noRepeat ? null : colors.primary,
-                                icon: Icon(
-                                  settings.playerRepeatMode == PlayerRepeat.repeatOne ? Icons.repeat_one : Icons.repeat,
-                                )),
-                            if (controller.hasQueue)
-                              IconButton(
-                                onPressed: cubit.toggleShuffle,
-                                style: buttonStyle,
-                                icon: const Icon(Icons.shuffle),
-                                color: settings.playerShuffleMode ? colors.primary : null,
-                              ),
-                          ],
-                        );
-                      })
+                    var cubit = context.read<SettingsCubit>();
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        IconButton(
+                            style: buttonStyle,
+                            onPressed: cubit.setNextRepeatMode,
+                            color: settings.playerRepeatMode == PlayerRepeat.noRepeat ? null : colors.primary,
+                            icon: Icon(
+                              settings.playerRepeatMode == PlayerRepeat.repeatOne ? Icons.repeat_one : Icons.repeat,
+                            )),
+                        if (controller.hasQueue)
+                          IconButton(
+                            onPressed: cubit.toggleShuffle,
+                            style: buttonStyle,
+                            icon: const Icon(Icons.shuffle),
+                            color: settings.playerShuffleMode ? colors.primary : null,
+                          ),
+                      ],
+                    );
+                  })
               ],
             ),
           ),

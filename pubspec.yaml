@@ -53,7 +53,6 @@ dependencies:
   path: 1.8.3
   flutter_web_auth: 0.5.0
   select_dialog: 2.0.0
-  fbroadcast: 2.0.0
   cached_network_image: 3.2.3
   pull_to_refresh: 2.0.0
   share_plus: 7.1.0

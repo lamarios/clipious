@@ -41,10 +41,12 @@ class AudioPlayerCubit extends MediaPlayerCubit<AudioPlayerState> {
   }
 
   initPlayer() {
-    state.player = AudioPlayer();
-    state.player?.playerStateStream.listen(onStateStreamChange);
-    state.player?.positionStream.listen(onPositionChanged);
-    state.player?.durationStream.listen(onDurationChanged);
+    if (state.player == null) {
+      state.player = AudioPlayer();
+      state.player?.playerStateStream.listen(onStateStreamChange);
+      state.player?.positionStream.listen(onPositionChanged);
+      state.player?.durationStream.listen(onDurationChanged);
+    }
   }
 
   onStateStreamChange(PlayerState state) {
@@ -72,7 +74,7 @@ class AudioPlayerCubit extends MediaPlayerCubit<AudioPlayerState> {
   onDurationChanged(Duration? duration) async {
     var state = this.state.copyWith();
     state.loading = false;
-    emit(state);
+    if (!isClosed) emit(state);
   }
 
   onPositionChanged(Duration position) {
@@ -83,7 +85,7 @@ class AudioPlayerCubit extends MediaPlayerCubit<AudioPlayerState> {
   @override
   playVideo(bool offline, {Duration? startAt}) async {
     if (state.video != null || state.offlineVideo != null) {
-      disposeControllers();
+      // disposeControllers();
       initPlayer();
       var state = this.state.copyWith();
       state.audioPosition = Duration.zero;
@@ -129,7 +131,7 @@ class AudioPlayerCubit extends MediaPlayerCubit<AudioPlayerState> {
         log.severe("Couldn't play video", e);
         state.error = e.toString();
         state.loading = false;
-        emit(state);
+        if (!isClosed) emit(state);
       }
     }
   }
@@ -196,7 +198,6 @@ class AudioPlayerCubit extends MediaPlayerCubit<AudioPlayerState> {
 
   @override
   void pause() {
-    print('HHEELLLOO');
     state.player?.pause();
     globalPlayer.setEvent(MediaEvent(state: MediaState.playing, type: MediaEventType.pause));
   }

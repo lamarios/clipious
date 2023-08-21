@@ -36,7 +36,6 @@ class TvHorizontalItemList<T> extends StatelessWidget {
                       itemCount: _.items.length + (_.loading ? 10 : 0),
                       itemBuilder: (context, index) {
                         if (index >= _.items.length) {
-                          print('GETTING PLACE Oodsfsd');
                           return getPlaceholder();
                         }
                         T e = _.items[index];

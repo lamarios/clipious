@@ -34,7 +34,7 @@ class AppCubit extends Cubit<AppState> {
     });
 
     var selectedIndex = int.parse(db.getSettings(ON_OPEN)?.value ?? '0');
-    if (!isLoggedIn && selectedIndex > 1) {
+    if (!isLoggedIn && selectedIndex > 1 || selectedIndex < 0) {
       selectedIndex = 0;
     }
     selectIndex(selectedIndex);

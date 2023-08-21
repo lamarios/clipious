@@ -25,7 +25,7 @@ class PlayerControls extends StatelessWidget {
       showDragHandle: true,
       context: context,
       builder: (context) {
-        const double minValue = 0.25, maxValue = 6;
+        const double minValue = 0.1, maxValue = 6;
         return StatefulBuilder(
           builder: (context, setState) => Column(
             mainAxisSize: MainAxisSize.min,
@@ -41,14 +41,14 @@ class PlayerControls extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  IconButton(onPressed: () => setState(() => player.setSpeed(max(minValue, player.getSpeed() - 0.25))), icon: const Icon(Icons.remove)),
+                  IconButton(onPressed: () => setState(() => player.setSpeed(max(minValue, player.getSpeed() - minValue))), icon: const Icon(Icons.remove)),
                   SizedBox(
                       width: 50,
                       child: Text(
                         '${player.getSpeed().toStringAsFixed(2)}x',
                         textAlign: TextAlign.center,
                       )),
-                  IconButton(onPressed: () => setState(() => player.setSpeed(min(maxValue, player.getSpeed() + 0.25))), icon: const Icon(Icons.add)),
+                  IconButton(onPressed: () => setState(() => player.setSpeed(min(maxValue, player.getSpeed() + minValue))), icon: const Icon(Icons.add)),
                 ],
               )
             ],
