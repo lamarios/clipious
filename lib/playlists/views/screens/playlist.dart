@@ -130,12 +130,14 @@ class PlaylistView extends StatelessWidget {
                                                   PlayButton(
                                                     onPressed: (isAudio) => cubit.play(isAudio),
                                                   ),
-                                                  Positioned(
-                                                      right: 5,
-                                                      bottom: 3,
-                                                      child: AddToQueueButton(
-                                                        videos: _.playlist.videos,
-                                                      ))
+                                                  Builder(builder: (context) {
+                                                    return Positioned(
+                                                        right: 5,
+                                                        bottom: 3,
+                                                        child: AddToQueueButton(
+                                                          videos: _.playlist.videos,
+                                                        ));
+                                                  })
                                                 ],
                                         ),
                                       )

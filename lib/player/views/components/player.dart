@@ -9,6 +9,7 @@ import 'package:invidious/player/views/components/mini_player.dart';
 import 'package:invidious/player/views/components/video_player.dart';
 
 import '../../../utils.dart';
+import '../../../videos/models/video.dart';
 import '../../../videos/views/components/video_share_button.dart';
 
 class Player extends StatelessWidget {
@@ -19,12 +20,18 @@ class Player extends StatelessWidget {
     var themeData = Theme.of(context);
     ColorScheme colors = themeData.colorScheme;
     AppLocalizations locals = AppLocalizations.of(context)!;
-    return BlocBuilder<PlayerCubit, PlayerState>(
-      buildWhen: (previous, current) => previous.hasVideo != current.hasVideo || previous.top != current.top || previous.opacity != current.opacity || previous.isMini != current.isMini,
-      builder: (context, _) {
+    return Builder(
+      builder: (context) {
         var cubit = context.read<PlayerCubit>();
 
-        bool showPlayer = _.hasVideo;
+        bool showPlayer = context.select((PlayerCubit value) => value.state.hasVideo);
+        double? top = context.select((PlayerCubit value) => value.state.top);
+        bool isMini = context.select((PlayerCubit value) => value.state.isMini);
+        bool isPip = context.select((PlayerCubit value) => value.state.isPip);
+        bool isHidden = context.select((PlayerCubit value) => value.state.isHidden);
+        bool isDragging = context.select((PlayerCubit value) => value.state.isDragging);
+        double opacity = context.select((PlayerCubit value) => value.state.opacity);
+        Video? currentlyPlaying = context.select((PlayerCubit value) => value.state.currentlyPlaying);
         bool onPhone = getDeviceType() == DeviceType.phone;
 
         Widget videoPlayer = showPlayer
@@ -60,12 +67,12 @@ class Player extends StatelessWidget {
 
         return AnimatedPositioned(
           left: 0,
-          top: _.top,
+          top: top,
           bottom: cubit.getBottom,
           right: 0,
-          duration: _.isDragging ? Duration.zero : animationDuration,
+          duration: isDragging ? Duration.zero : animationDuration,
           child: AnimatedOpacity(
-            opacity: _.opacity,
+            opacity: opacity,
             duration: animationDuration,
             child: SafeArea(
               child: Material(
@@ -74,11 +81,11 @@ class Player extends StatelessWidget {
                     ? GestureDetector(
                         child: AnimatedContainer(
                           duration: animationDuration,
-                          color: _.isMini ? colors.secondaryContainer : colors.background,
+                          color: isMini ? colors.secondaryContainer : colors.background,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              _.isMini || _.isPip
+                              isMini || isPip
                                   ? const SizedBox.shrink()
                                   : AppBar(
                                       backgroundColor: colors.background,
@@ -88,13 +95,13 @@ class Player extends StatelessWidget {
                                         icon: const Icon(Icons.expand_more),
                                         onPressed: cubit.showMiniPlayer,
                                       ),
-                                      actions: _.isHidden || _.currentlyPlaying == null
+                                      actions: isHidden || currentlyPlaying == null
                                           ? []
                                           : [
                                               Visibility(
-                                                visible: _.currentlyPlaying != null,
+                                                visible: currentlyPlaying != null,
                                                 child: VideoShareButton(
-                                                  video: _.currentlyPlaying!,
+                                                  video: currentlyPlaying!,
                                                   showTimestampOption: true,
                                                 ),
                                               ),
@@ -102,10 +109,10 @@ class Player extends StatelessWidget {
                                     ),
                               AnimatedContainer(
                                 width: double.infinity,
-                                constraints: BoxConstraints(maxHeight: _.isMini ? targetHeight : 500, maxWidth: tabletMaxVideoWidth),
+                                constraints: BoxConstraints(maxHeight: isMini ? targetHeight : 500, maxWidth: tabletMaxVideoWidth),
                                 duration: animationDuration,
                                 child: Row(
-                                  mainAxisAlignment: _.isMini ? MainAxisAlignment.start : MainAxisAlignment.center,
+                                  mainAxisAlignment: isMini ? MainAxisAlignment.start : MainAxisAlignment.center,
                                   children: [Expanded(flex: 1, child: videoPlayer), ...miniPlayerWidgets],
                                 ),
                               ),

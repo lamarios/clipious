@@ -9,30 +9,29 @@ import '../../states/player_controls.dart';
 const ButtonStyle buttonStyle = ButtonStyle(visualDensity: VisualDensity.compact);
 
 class MiniPlayerControls extends StatelessWidget {
-  final PlayerState controller;
   final String videoId;
 
-  const MiniPlayerControls({Key? key, required this.controller, required this.videoId}) : super(key: key);
+  const MiniPlayerControls({Key? key, required this.videoId}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     ColorScheme colors = Theme.of(context).colorScheme;
 
-    bool enablePrevNext = controller.hasQueue;
-
-    var isMini = controller.isMini;
     var player = context.read<PlayerCubit>();
-    return Padding(
-      padding: isMini ? EdgeInsets.zero : const EdgeInsets.all(8.0),
-      child: Container(
-        decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), color: isMini ? colors.secondaryContainer : colors.background),
-        constraints: BoxConstraints(
-          maxWidth: tabletMaxVideoWidth,
-        ),
-        child: BlocProvider(
-          create: (context) => PlayerControlsCubit(PlayerControlsState(), player),
-          child: BlocBuilder<PlayerControlsCubit, PlayerControlsState>(
-            builder: (context, _) => Stack(
+    return BlocProvider(
+      create: (context) => PlayerControlsCubit(PlayerControlsState(), player),
+      child: BlocBuilder<PlayerControlsCubit, PlayerControlsState>(builder: (context, _) {
+        bool isMini = context.select((PlayerCubit value) => value.state.isMini);
+        bool hasQueue = context.select((PlayerCubit value) => value.state.hasQueue);
+
+        return Padding(
+          padding: isMini ? EdgeInsets.zero : const EdgeInsets.all(8.0),
+          child: Container(
+            decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), color: isMini ? colors.secondaryContainer : colors.background),
+            constraints: BoxConstraints(
+              maxWidth: tabletMaxVideoWidth,
+            ),
+            child: Stack(
               alignment: Alignment.center,
               children: [
                 // Positioned(left: 0, child: VideoLikeButton(videoId: videoId, style: buttonStyle)),
@@ -41,7 +40,7 @@ class MiniPlayerControls extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Visibility(
-                        visible: enablePrevNext,
+                        visible: hasQueue,
                         child: IconButton(
                             style: buttonStyle,
                             onPressed: player.playPrevious,
@@ -68,7 +67,7 @@ class MiniPlayerControls extends StatelessWidget {
                             Icons.fast_forward,
                           )),
                       Visibility(
-                        visible: enablePrevNext,
+                        visible: hasQueue,
                         child: IconButton(
                             onPressed: player.playNext,
                             style: buttonStyle,
@@ -93,7 +92,7 @@ class MiniPlayerControls extends StatelessWidget {
                             icon: Icon(
                               settings.playerRepeatMode == PlayerRepeat.repeatOne ? Icons.repeat_one : Icons.repeat,
                             )),
-                        if (controller.hasQueue)
+                        if (hasQueue)
                           IconButton(
                             onPressed: cubit.toggleShuffle,
                             style: buttonStyle,
@@ -106,8 +105,8 @@ class MiniPlayerControls extends StatelessWidget {
               ],
             ),
           ),
-        ),
-      ),
+        );
+      }),
     );
   }
 }

@@ -29,7 +29,6 @@ class ExpandedPlayer {
             Visibility(
                 visible: !controller.isMini,
                 child: MiniPlayerControls(
-                  controller: controller,
                   videoId: video?.videoId ?? offlineVid?.videoId ?? '',
                 )),
             Visibility(
@@ -39,23 +38,26 @@ class ExpandedPlayer {
                     padding: const EdgeInsets.symmetric(horizontal: 16),
                     child: Container(
                       constraints: BoxConstraints(maxWidth: tabletMaxVideoWidth),
-                      child: video != null
-                          ? <Widget>[
-                              SingleChildScrollView(
-                                child: VideoInfo(
-                                  video: video,
+                      child: Builder(builder: (context) {
+                        var selectedIndex = context.select((PlayerCubit value) => value.state.selectedFullScreenIndex);
+                        return video != null
+                            ? <Widget>[
+                                SingleChildScrollView(
+                                  child: VideoInfo(
+                                    video: video,
+                                  ),
                                 ),
-                              ),
-                              SingleChildScrollView(
-                                child: CommentsContainer(
-                                  video: video,
-                                  key: ValueKey('comms-${video.videoId}'),
+                                SingleChildScrollView(
+                                  child: CommentsContainer(
+                                    video: video,
+                                    key: ValueKey('comms-${video.videoId}'),
+                                  ),
                                 ),
-                              ),
-                              SingleChildScrollView(child: RecommendedVideos(video: video)),
-                              const VideoQueue(),
-                            ][controller.selectedFullScreenIndex]
-                          : const VideoQueue(),
+                                SingleChildScrollView(child: RecommendedVideos(video: video)),
+                                const VideoQueue(),
+                              ][selectedIndex]
+                            : const VideoQueue();
+                      }),
                     ),
                   ),
                 )),
@@ -63,12 +65,15 @@ class ExpandedPlayer {
               visible: !controller.isMini && video != null,
               child: SizedBox(
                 // height: 80,
-                child: NavigationBar(backgroundColor: colors.background, elevation: 0, selectedIndex: controller.selectedFullScreenIndex, onDestinationSelected: player.selectTab, destinations: [
-                  NavigationDestination(icon: const Icon(Icons.info), label: locals.info),
-                  NavigationDestination(icon: const Icon(Icons.chat_bubble), label: locals.comments),
-                  NavigationDestination(icon: const Icon(Icons.schema), label: locals.recommended),
-                  NavigationDestination(icon: const Icon(Icons.playlist_play), label: locals.videoQueue)
-                ]),
+                child: Builder(builder: (context) {
+                  var selectedIndex = context.select((PlayerCubit value) => value.state.selectedFullScreenIndex);
+                  return NavigationBar(backgroundColor: colors.background, elevation: 0, selectedIndex: selectedIndex, onDestinationSelected: player.selectTab, destinations: [
+                    NavigationDestination(icon: const Icon(Icons.info), label: locals.info),
+                    NavigationDestination(icon: const Icon(Icons.chat_bubble), label: locals.comments),
+                    NavigationDestination(icon: const Icon(Icons.schema), label: locals.recommended),
+                    NavigationDestination(icon: const Icon(Icons.playlist_play), label: locals.videoQueue)
+                  ]);
+                }),
               ),
             )
           ]

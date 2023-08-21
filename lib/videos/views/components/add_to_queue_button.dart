@@ -24,23 +24,27 @@ class AddToQueueButton extends StatelessWidget {
   Widget build(BuildContext context) {
     AppLocalizations locals = AppLocalizations.of(context)!;
     var textTheme = Theme.of(context).textTheme;
-    return FilledButton.tonal(
-        style: const ButtonStyle(visualDensity: VisualDensity.compact),
-        onPressed: canAddToQueue(context, videos) ? () => addToQueue(context) : null,
-        child: Row(
-          children: [
-            const Padding(
-              padding: EdgeInsets.only(right: 8.0),
-              child: Icon(
-                Icons.playlist_add,
-                size: 13,
-              ),
-            ),
-            Text(
-              locals.addToQueueList,
-              style: TextStyle(fontSize: textTheme.labelSmall?.fontSize),
-            ),
-          ],
-        ));
+    return BlocBuilder<PlayerCubit, PlayerState>(
+        buildWhen: (previous, current) => previous.videos != current.videos,
+        builder: (context, _) {
+          return FilledButton.tonal(
+              style: const ButtonStyle(visualDensity: VisualDensity.compact),
+              onPressed: canAddToQueue(context, videos) ? () => addToQueue(context) : null,
+              child: Row(
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.only(right: 8.0),
+                    child: Icon(
+                      Icons.playlist_add,
+                      size: 13,
+                    ),
+                  ),
+                  Text(
+                    locals.addToQueueList,
+                    style: TextStyle(fontSize: textTheme.labelSmall?.fontSize),
+                  ),
+                ],
+              ));
+        });
   }
 }

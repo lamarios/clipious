@@ -24,31 +24,28 @@ class MiniPlayer {
                   child: Padding(
                     padding: const EdgeInsets.all(4.0),
                     child: Builder(builder: (context) {
-                      return BlocBuilder<PlayerCubit, PlayerState>(
-                          buildWhen: (previous, current) => previous.currentlyPlaying != current.currentlyPlaying || previous.offlineCurrentlyPlaying != current.offlineCurrentlyPlaying,
-                          builder: (context, _) {
-                            DownloadedVideo? offlineVid = _.offlineCurrentlyPlaying;
-                            Video? vid = _.currentlyPlaying;
+                      return Builder(builder: (context) {
+                        DownloadedVideo? offlineVid = context.select((PlayerCubit value) => value.state.offlineCurrentlyPlaying);
+                        Video? vid = context.select((PlayerCubit value) => value.state.currentlyPlaying);
 
-                            String title = vid?.title ?? offlineVid?.title ?? '';
-                            String author = vid?.author ?? offlineVid?.author ?? '';
-                            String videoId = vid?.videoId ?? offlineVid?.videoId ?? '';
+                        String title = vid?.title ?? offlineVid?.title ?? '';
+                        String author = vid?.author ?? offlineVid?.author ?? '';
+                        String videoId = vid?.videoId ?? offlineVid?.videoId ?? '';
 
-                            return Column(
-                              children: [
-                                Text(
-                                  '$title - $author',
-                                  overflow: TextOverflow.ellipsis,
-                                  style: textTheme.bodySmall,
-                                ),
-                                MiniPlayerControls(
-                                  videoId: videoId,
-                                  controller: controller,
-                                ),
-                                const MiniPlayerProgress(),
-                              ],
-                            );
-                          });
+                        return Column(
+                          children: [
+                            Text(
+                              '$title - $author',
+                              overflow: TextOverflow.ellipsis,
+                              style: textTheme.bodySmall,
+                            ),
+                            MiniPlayerControls(
+                              videoId: videoId,
+                            ),
+                            const MiniPlayerProgress(),
+                          ],
+                        );
+                      });
                     }),
                   ),
                 )),
