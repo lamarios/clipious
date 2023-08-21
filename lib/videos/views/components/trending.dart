@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/utils/views/tv/components/tv_horizontal_item_list.dart';
+import 'package:invidious/videos/views/components/video_in_list.dart';
 
 import '../../../main.dart';
 import '../../../utils/models/paginatedList.dart';
@@ -78,6 +79,7 @@ doesn't seem to be working for now
                   child: VideoList(
                     animateDownload: true,
                     paginatedVideoList: SingleEndpointList(service.getTrending),
+                    source: VideoListSource.trending,
                   ),
                 ),
               ],

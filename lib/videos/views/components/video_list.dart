@@ -14,8 +14,9 @@ class VideoList extends StatelessWidget {
   final PaginatedList<VideoInList> paginatedVideoList;
   final String? tags;
   final bool animateDownload;
+  final VideoListSource source;
 
-  const VideoList({super.key, required this.paginatedVideoList, this.tags, this.animateDownload = false});
+  const VideoList({super.key, required this.paginatedVideoList, this.tags, this.animateDownload = false, required this.source});
 
 /*
   @override
@@ -64,7 +65,14 @@ class VideoList extends StatelessWidget {
                           mainAxisSpacing: 5,
                           childAspectRatio: getGridAspectRatio(context),
                           children: [
-                            ...items.map((v) => VideoListItem(key: ValueKey(v.videoId), video: v, animateDownload: animateDownload)).toList(),
+                            ...items
+                                .map((v) => VideoListItem(
+                                      key: ValueKey('${v.videoId}-${source.name}'),
+                                      video: v,
+                                      animateDownload: animateDownload,
+                                      source: source,
+                                    ))
+                                .toList(),
                             if (_.loading) ...videoPlaceholderList(count: 5 * gridCount)
                           ],
                         ),

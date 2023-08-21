@@ -1,9 +1,7 @@
 import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:invidious/database.dart';
 import 'package:invidious/downloads/models/downloaded_video.dart';
-import 'package:invidious/settings/models/db/settings.dart';
 import 'package:invidious/videos/models/base_video.dart';
 import 'package:invidious/videos/models/dislike.dart';
 import 'package:logging/logging.dart';
@@ -66,7 +64,7 @@ class VideoCubit extends Cubit<VideoState> {
     state.downloadedVideo = db.getDownloadByVideoId(state.videoId);
 
     initStreamListener();
-    emit(state);
+    if (!isClosed) emit(state);
   }
 
   @override
@@ -165,6 +163,6 @@ class VideoState {
     }
   }
 
-  VideoState._(this.scrollController, this.video, this.dislikes, this.loadingVideo, this.selectedIndex, this.videoId, this.isLoggedIn,
-      this.downloading, this.downloadProgress, this.downloadedVideo, this.opacity, this.error);
+  VideoState._(this.scrollController, this.video, this.dislikes, this.loadingVideo, this.selectedIndex, this.videoId, this.isLoggedIn, this.downloading, this.downloadProgress, this.downloadedVideo,
+      this.opacity, this.error);
 }

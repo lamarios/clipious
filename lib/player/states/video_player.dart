@@ -48,6 +48,7 @@ class VideoPlayerCubit extends MediaPlayerCubit<VideoPlayerState> {
     Wakelock.disable();
     log.fine("Disposing video controller");
     var state = this.state.copyWith();
+    state.videoController?.exitFullScreen();
     state.videoController?.removeEventsListener(onVideoListener);
     state.videoController?.dispose();
     state.videoController = null;
@@ -168,7 +169,7 @@ class VideoPlayerCubit extends MediaPlayerCubit<VideoPlayerState> {
     // saveProgress(videoController?.videoPlayerController?.value.position.inSeconds ?? 0);
     player.saveProgress(position().inSeconds);
 
-    disposeControllers();
+    // disposeControllers();
 
     settings.toggleDash(!isUsingDash());
 
@@ -178,9 +179,9 @@ class VideoPlayerCubit extends MediaPlayerCubit<VideoPlayerState> {
 
   @override
   switchVideo(Video video, {Duration? startAt}) {
-    state.videoController?.exitFullScreen();
+    // state.videoController?.exitFullScreen();
     state.startAt = startAt;
-    disposeControllers();
+    // disposeControllers();
     state.video = video;
     playVideo(false, startAt: startAt);
   }
@@ -200,14 +201,15 @@ class VideoPlayerCubit extends MediaPlayerCubit<VideoPlayerState> {
 
   @override
   playVideo(bool offline, {Duration? startAt}) async {
+    bool wasFullscreen = this.state.videoController?.isFullScreen ?? false;
     var state = this.state.copyWith();
     // only used if the player is currently close because it is onReady that will actually play the video
     // need better way of handling this
     state.startAt = startAt;
     if (state.video != null || state.offlineVideo != null) {
       IdedVideo idedVideo = offline ? state.offlineVideo! : state.video!;
-      state.videoController?.dispose();
-      state.videoController = null;
+      // state.videoController?.dispose();
+      // state.videoController = null;
       state.bufferPosition = Duration.zero;
 
       if (startAt == null && !offline) {
@@ -282,34 +284,39 @@ class VideoPlayerCubit extends MediaPlayerCubit<VideoPlayerState> {
       bool lockOrientation = settings.state.forceLandscapeFullScreen;
       bool fillVideo = settings.state.fillFullscreen;
 
-      state.videoController = BetterPlayerController(
-          BetterPlayerConfiguration(
-              overlay: isTv ? const TvPlayerControls() : PlayerControls(mediaPlayerCubit: this),
-              deviceOrientationsOnFullScreen: [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight, DeviceOrientation.portraitDown, DeviceOrientation.portraitUp],
-              deviceOrientationsAfterFullScreen: [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight, DeviceOrientation.portraitDown, DeviceOrientation.portraitUp],
-              handleLifecycle: false,
-              autoDetectFullscreenDeviceOrientation: lockOrientation,
-              autoDetectFullscreenAspectRatio: true,
-              startAt: startAt,
-              autoPlay: true,
-              allowedScreenSleep: false,
-              fit: fillVideo ? BoxFit.cover : BoxFit.contain,
-              subtitlesConfiguration: BetterPlayerSubtitlesConfiguration(
-                fontSize: settings.state.subtitleSize,
-              ),
-              controlsConfiguration: BetterPlayerControlsConfiguration(
-                showControls: false,
-                // customControlsBuilder: (controller, onPlayerVisibilityChanged) => const PlayerControls(),
-                // enablePlayPause: false,
-                // overflowModalColor: colors.background,
-                // overflowModalTextColor: overFlowTextColor,
-                // overflowMenuIconsColor: overFlowTextColor,
-                // overflowMenuCustomItems: [BetterPlayerOverflowMenuItem(useDash ? Icons.check_box_outlined : Icons.check_box_outline_blank, locals.useDash, toggleDash)])
-              )),
-          betterPlayerDataSource: betterPlayerDataSource);
-      state.videoController!.addEventsListener(onVideoListener);
-      state.videoController!.setBetterPlayerGlobalKey(state.key);
-      // isPipSupported = await videoController?.isPictureInPictureSupported() ?? false;
+      if (state.videoController == null) {
+        state.videoController = BetterPlayerController(
+            BetterPlayerConfiguration(
+                overlay: isTv ? const TvPlayerControls() : PlayerControls(mediaPlayerCubit: this),
+                deviceOrientationsOnFullScreen: [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight, DeviceOrientation.portraitDown, DeviceOrientation.portraitUp],
+                deviceOrientationsAfterFullScreen: [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight, DeviceOrientation.portraitDown, DeviceOrientation.portraitUp],
+                handleLifecycle: false,
+                autoDetectFullscreenDeviceOrientation: lockOrientation,
+                autoDetectFullscreenAspectRatio: true,
+                startAt: startAt,
+                autoPlay: true,
+                allowedScreenSleep: false,
+                fit: fillVideo ? BoxFit.cover : BoxFit.contain,
+                subtitlesConfiguration: BetterPlayerSubtitlesConfiguration(
+                  fontSize: settings.state.subtitleSize,
+                ),
+                controlsConfiguration: BetterPlayerControlsConfiguration(
+                  showControls: false,
+                  // customControlsBuilder: (controller, onPlayerVisibilityChanged) => const PlayerControls(),
+                  // enablePlayPause: false,
+                  // overflowModalColor: colors.background,
+                  // overflowModalTextColor: overFlowTextColor,
+                  // overflowMenuIconsColor: overFlowTextColor,
+                  // overflowMenuCustomItems: [BetterPlayerOverflowMenuItem(useDash ? Icons.check_box_outlined : Icons.check_box_outline_blank, locals.useDash, toggleDash)])
+                )),
+            betterPlayerDataSource: betterPlayerDataSource);
+        state.videoController!.addEventsListener(onVideoListener);
+        state.videoController!.setBetterPlayerGlobalKey(state.key);
+        // isPipSupported = await videoController?.isPictureInPictureSupported() ?? false;
+      } else {
+        await state.videoController?.setupDataSource(betterPlayerDataSource);
+        seek(startAt ?? Duration.zero);
+      }
 
       emit(state);
     }
@@ -317,8 +324,8 @@ class VideoPlayerCubit extends MediaPlayerCubit<VideoPlayerState> {
 
   @override
   void switchToOfflineVideo(DownloadedVideo v) {
-    state.videoController?.exitFullScreen();
-    disposeControllers();
+    // state.videoController?.exitFullScreen();
+    // disposeControllers();
     state.offlineVideo = v;
     playVideo(true);
   }

@@ -28,7 +28,10 @@ class RecommendedVideos extends StatelessWidget {
       v.filterHide = e.filterHide;
       v.filtered = e.filtered;
       v.matchedFilters = e.matchedFilters;
-      return VideoListItem(video: v);
+      return VideoListItem(
+        video: v,
+        source: VideoListSource.recommendedVideos,
+      );
     }).toList());
 
     return Column(

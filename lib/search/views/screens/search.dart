@@ -5,6 +5,7 @@ import 'package:invidious/myRouteObserver.dart';
 import 'package:invidious/playlists/views/components/playlist_list.dart';
 import 'package:invidious/search/models/search_type.dart';
 import 'package:invidious/videos/models/video_in_list.dart';
+import 'package:invidious/videos/views/components/video_in_list.dart';
 
 import '../../../channels/models/channel.dart';
 import '../../../main.dart';
@@ -128,6 +129,7 @@ class Search extends StatelessWidget {
                                   ? VideoList(
                                       paginatedVideoList: SearchPaginatedList<VideoInList>(
                                           type: SearchType.video, query: _.queryController.value.text, items: _.videos, getFromResults: (res) => res.videos, sortBy: _.sortBy),
+                                      source: VideoListSource.search,
                                     )
                                   : Center(child: Text(locals.nVideos(0))),
                               _.channels.isNotEmpty

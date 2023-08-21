@@ -15,6 +15,7 @@ import 'package:invidious/videos/views/components/download_modal_sheet.dart';
 import 'package:invidious/videos/views/components/inner_view_tablet.dart';
 import 'package:invidious/videos/views/components/innter_view.dart';
 import 'package:invidious/videos/views/components/like_button.dart';
+import 'package:invidious/videos/views/components/video_in_list.dart';
 import 'package:invidious/videos/views/components/video_share_button.dart';
 
 import '../../../downloads/views/screens/download_manager.dart';
@@ -43,7 +44,7 @@ class VideoView extends StatelessWidget {
         if (isDownloadStarted) {
           cubit.initStreamListener();
         }
-      }, onDownload: cubit.onDownload);
+      }, onDownload: cubit.onDownload, source: VideoListSource.videoScreen);
     }
   }
 

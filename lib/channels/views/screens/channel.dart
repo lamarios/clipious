@@ -8,6 +8,7 @@ import 'package:invidious/channels/views/components/info.dart';
 import 'package:invidious/channels/views/components/playlists.dart';
 import 'package:invidious/channels/views/components/videos.dart';
 import 'package:invidious/globals.dart';
+import 'package:invidious/videos/views/components/video_in_list.dart';
 
 import '../../../utils.dart';
 import '../../../utils/views/components/placeholders.dart';
@@ -78,18 +79,21 @@ class ChannelView extends StatelessWidget {
                         key: const ValueKey('videos'),
                         channel: _.channel!,
                         getVideos: service.getChannelVideos,
+                        source: VideoListSource.channelVideos,
                       ),
                     if (!_.loading)
                       ChannelVideosView(
                         key: const ValueKey('shorts'),
                         channel: _.channel!,
                         getVideos: service.getChannelShorts,
+                        source: VideoListSource.channelShorts,
                       ),
                     if (!_.loading)
                       ChannelVideosView(
                         key: const ValueKey('streams'),
                         channel: _.channel!,
                         getVideos: service.getChannelStreams,
+                        source: VideoListSource.channelStreams,
                       ),
                     if (!_.loading) ChannelPlayListsView(key: const ValueKey('playlists'), channelId: _.channel!.authorId, canDeleteVideos: false)
                   ][_.selectedIndex],

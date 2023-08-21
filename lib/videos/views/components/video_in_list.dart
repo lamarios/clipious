@@ -19,13 +19,16 @@ import '../../models/base_video.dart';
 import '../screens/video.dart';
 import 'video_metrics.dart';
 
+final log = Logger('VideoInList');
+
+enum VideoListSource { subscriptions, trending, popular, history, search, recommendedVideos, channelLatest, channelVideos, channelStreams, channelShorts, videoScreen }
+
 class VideoListItem extends StatelessWidget {
   final VideoInList video;
   final bool animateDownload;
+  final VideoListSource source;
 
-  VideoListItem({super.key, required this.video, this.animateDownload = false});
-
-  final log = Logger('VideoInList');
+  const VideoListItem({super.key, required this.video, this.animateDownload = false, required this.source});
 
   openVideo(BuildContext context) {
     var cubit = context.read<VideoInListCubit>();
@@ -54,7 +57,7 @@ class VideoListItem extends StatelessWidget {
           listener: (context, state) => context.read<VideoInListCubit>().updateProgress(),
           child: InkWell(
             onTap: () => openVideo(context),
-            onLongPress: _.video.filtered ? null : () => VideoModalSheet.showVideoModalSheet(context, video, animateDownload: animateDownload),
+            onLongPress: _.video.filtered ? null : () => VideoModalSheet.showVideoModalSheet(context, video, animateDownload: animateDownload, source: source),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
@@ -201,7 +204,7 @@ class VideoListItem extends StatelessWidget {
                       ),
                     ),
                     InkWell(
-                      onTap: _.video.filtered ? null : () => VideoModalSheet.showVideoModalSheet(context, video, animateDownload: animateDownload),
+                      onTap: _.video.filtered ? null : () => VideoModalSheet.showVideoModalSheet(context, video, animateDownload: animateDownload, source: source),
                       child: const Padding(
                         padding: EdgeInsets.all(4),
                         child: Icon(Icons.more_vert),
@@ -238,7 +241,7 @@ class VideoListItem extends StatelessWidget {
                 child: child,
               );
             },
-            key: downloadManager.state.animateToController.tag('video-animate-to-${video.videoId}') ?? GlobalKey(),
+            key: downloadManager.state.animateToController.tag('video-animate-to-${video.videoId}-${source.name}'),
             child: widget,
           )
         : widget;

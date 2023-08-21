@@ -44,7 +44,6 @@ const brandColor = Color(0xFF4f0096);
 final scaffoldKey = GlobalKey<ScaffoldMessengerState>();
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 final GlobalKey<NavigatorState> globalNavigator = GlobalKey<NavigatorState>();
-final RouteObserver<ModalRoute> routeObserver = MyRouteObserver();
 bool isTv = false;
 
 late MediaHandler mediaHandler;
@@ -197,7 +196,6 @@ class MyApp extends StatelessWidget {
                           children: [
                             MiniPlayerAware(
                               child: Navigator(
-                                  observers: [MyRouteObserver()],
                                   key: navigatorKey,
                                   initialRoute: '/',
                                   onGenerateRoute: (settings) {

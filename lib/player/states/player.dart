@@ -149,28 +149,6 @@ class PlayerCubit extends Cubit<PlayerState> {
     }
   }
 
-  toggleShuffle() {
-    settings.setShuffle(!settings.state.playerShuffleMode);
-    emit(state.copyWith());
-  }
-
-  setNextRepeatMode() {
-    var repeat = PlayerRepeat.noRepeat;
-    switch (settings.state.playerRepeatMode) {
-      case PlayerRepeat.noRepeat:
-        repeat = PlayerRepeat.repeatAll;
-        break;
-      case PlayerRepeat.repeatAll:
-        repeat = PlayerRepeat.repeatOne;
-        break;
-      case PlayerRepeat.repeatOne:
-        repeat = PlayerRepeat.noRepeat;
-        break;
-    }
-
-    settings.setRepeatMode(repeat);
-  }
-
   setVideos(List<BaseVideo> videos) {
     var state = this.state.copyWith();
     state.videos = videos.where((element) => !element.filtered).toList();
@@ -305,18 +283,24 @@ class PlayerCubit extends Cubit<PlayerState> {
     EasyThrottle.throttle(skipToVideoThrottleName, Duration(seconds: 1), () {
       if (state.videos.isNotEmpty || state.offlineVideos.isNotEmpty) {
         var state = this.state.copyWith();
-        var listToUpdate = state.videos.isNotEmpty ? state.videos : state.offlineVideos;
+        var allVideos = state.videos.isNotEmpty ? state.videos : state.offlineVideos;
 
         log.fine('Play next: played length: ${state.playedVideos.length} videos: ${state.videos.length} Repeat mode: ${settings.state.playerRepeatMode}');
         if (settings.state.playerRepeatMode == PlayerRepeat.repeatOne) {
           if (state.videos.isNotEmpty) {
-            switchToVideo(state.currentlyPlaying!);
+            switchToVideo(state.currentlyPlaying!, startAt: Duration.zero);
           } else if (state.offlineVideos.isNotEmpty) {
             switchToOfflineVideo(state.offlineCurrentlyPlaying!);
           }
         } else {
           state = this.state.copyWith();
-          if (state.playedVideos.length >= listToUpdate.length) {
+
+          // we get all the available videos to play ( played - all videos)
+
+          var available = allVideos.where((element) => !state.playedVideos.contains(element.videoId)).toList();
+
+          // if none left we restart if repeat, do nothing otherwise
+          if (available.isEmpty) {
             if (settings.state.playerRepeatMode == PlayerRepeat.repeatAll) {
               state.playedVideos = [];
               state.currentIndex = 0;
@@ -324,29 +308,17 @@ class PlayerCubit extends Cubit<PlayerState> {
               return;
             }
           } else {
-            if (!settings.state.playerShuffleMode) {
-              // making sure we play something that can be played
-              if (state.currentIndex + 1 < listToUpdate.length) {
-                state.currentIndex++;
-              } else if (settings.state.playerRepeatMode == PlayerRepeat.repeatAll) {
-                // we might reach here if user changes repeat mode and play with previous/next buttons
-                state.currentIndex = 0;
-                state.playedVideos = [];
-              } else {
-                return;
-              }
+            // if remaining, we choose  either the enxt one or a random one if shuffle`
+            late IdedVideo nextVid;
+            if (settings.state.playerShuffleMode) {
+              nextVid = available[Random().nextInt(available.length)];
             } else {
-              if (state.videos.isNotEmpty) {
-                List<BaseVideo> availableVideos = state.videos.where((e) => !state.playedVideos.contains(e.videoId)).toList();
-                String nextVideoId = availableVideos[Random().nextInt(availableVideos.length)].videoId;
-                state.currentIndex = state.videos.indexWhere((e) => e.videoId == nextVideoId);
-              } else {
-                List<DownloadedVideo> availableVideos = state.offlineVideos.where((e) => !state.playedVideos.contains(e.videoId)).toList();
-                String nextVideoId = availableVideos[Random().nextInt(availableVideos.length)].videoId;
-                state.currentIndex = state.offlineVideos.indexWhere((e) => e.videoId == nextVideoId);
-              }
+              // we play the first one
+              nextVid = available[0];
             }
+            state.currentIndex = allVideos.indexWhere((element) => element.videoId == nextVid.videoId);
           }
+
           emit(state);
           if (state.videos.isNotEmpty) {
             switchToVideo(state.videos[state.currentIndex]);
@@ -360,20 +332,22 @@ class PlayerCubit extends Cubit<PlayerState> {
 
   playPrevious() {
     EasyThrottle.throttle(skipToVideoThrottleName, const Duration(seconds: 1), () {
-      var listToUpdate = state.videos.isNotEmpty ? state.videos : state.offlineVideos;
-      if (listToUpdate.length > 1) {
-        var state = this.state.copyWith();
-        state.currentIndex--;
-        if (state.currentIndex < 0) {
-          state.currentIndex = state.videos.length - 1;
-        }
-        emit(state);
-        if (state.videos.isNotEmpty) {
-          switchToVideo(state.videos[state.currentIndex]);
-        } else if (state.offlineVideos.isNotEmpty) {
-          switchToOfflineVideo(state.offlineVideos[state.currentIndex]);
-        }
+      var state = this.state.copyWith();
+      var allVideos = state.videos.isNotEmpty ? state.videos : state.offlineVideos;
+      state.playedVideos.removeLast();
+      // we remove the last video and see if there's anything else to play
+      if (state.playedVideos.isEmpty) {
+        state.currentIndex = 0;
+      } else {
+        String nextId = state.playedVideos.last;
+        state.currentIndex = allVideos.indexWhere((element) => element.videoId == nextId);
+      }
 
+      emit(state);
+      if (state.videos.isNotEmpty) {
+        switchToVideo(state.videos[state.currentIndex], startAt: Duration.zero);
+      } else if (state.offlineVideos.isNotEmpty) {
+        switchToOfflineVideo(state.offlineVideos[state.currentIndex]);
       }
     });
   }
@@ -442,6 +416,9 @@ class PlayerCubit extends Cubit<PlayerState> {
       state.currentIndex = 0;
     }
 
+    emit(state);
+    state = this.state.copyWith();
+
     if (!isOffline) {
       late Video v;
       if (video is Video) {
@@ -457,9 +434,9 @@ class PlayerCubit extends Cubit<PlayerState> {
       state.mediaCommand = MediaCommand(MediaCommandType.switchToOfflineVideo, value: video);
     }
 
-    if (!state.playedVideos.contains(video.videoId)) {
-      state.playedVideos.add(video.videoId);
-    }
+    //if we replay a video, we move it to the top of the played stack
+    state.playedVideos.removeWhere((element) => element == video.videoId);
+    state.playedVideos.add(video.videoId);
     state.position = Duration.zero;
 
     emit(state);
@@ -467,7 +444,7 @@ class PlayerCubit extends Cubit<PlayerState> {
       setSponsorBlock();
     }
 
-    if(!isTv) {
+    if (!isTv) {
       mediaHandler.skipToQueueItem(state.currentIndex);
     }
   }

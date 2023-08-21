@@ -3,8 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_swipe_action_cell/core/cell.dart';
 import 'package:invidious/downloads/models/downloaded_video.dart';
 import 'package:invidious/player/states/player.dart';
+import 'package:invidious/player/states/video_queue.dart';
 import 'package:invidious/videos/models/base_video.dart';
 import 'package:invidious/videos/views/components/compact_video.dart';
+
+import '../../../globals.dart';
 
 class VideoQueue extends StatelessWidget {
   const VideoQueue({Key? key}) : super(key: key);
@@ -14,7 +17,7 @@ class VideoQueue extends StatelessWidget {
     var state = controller.state;
     bool isPlaying = index == state.currentIndex;
     return SwipeActionCell(
-      key: ValueKey(video.videoId),
+      key: ValueKey('$index-${video.videoId}'),
       trailingActions: isPlaying
           ? []
           : [
@@ -45,7 +48,7 @@ class VideoQueue extends StatelessWidget {
     bool isPlaying = state.currentIndex == index;
 
     return SwipeActionCell(
-      key: ValueKey(v.id),
+      key: ValueKey('$index-${v.id}'),
       trailingActions: isPlaying
           ? []
           : [
@@ -83,11 +86,39 @@ class VideoQueue extends StatelessWidget {
     var controller = context.read<PlayerCubit>();
     var state = controller.state;
     return state.videos.isNotEmpty || state.offlineVideos.isNotEmpty
-        ? BlocBuilder<PlayerCubit, PlayerState>(
-            builder: (context, state) => ReorderableListView.builder(
-                itemCount: state.videos.isNotEmpty ? state.videos.length : state.offlineVideos.length,
-                onReorder: controller.onQueueReorder,
-                itemBuilder: (context, index) => state.videos.isNotEmpty ? onlineVideoQueue(context, index, state.videos[index]) : offlineVideoQueue(context, index, state.offlineVideos[index])),
+        ? BlocProvider(
+            create: (BuildContext context) => VideoQueueCubit(ScrollController()),
+            child: BlocBuilder<VideoQueueCubit, ScrollController>(builder: (context, scrollController) {
+              return BlocConsumer<PlayerCubit, PlayerState>(
+                listenWhen: (previous, current) => previous.currentIndex != current.currentIndex,
+                listener: (context, state) {
+                  final offset = (state.currentIndex - 1) * compactVideoHeight;
+                  bool goingDown = offset > scrollController.offset;
+
+                  // if we want to go up and we're already at the top we don't do anything
+                  if ((!goingDown && scrollController.offset == 0)
+                      // if we want to go down and we're already at the bottom we don't do anything
+                      ||
+                      (goingDown && scrollController.offset == scrollController.position.maxScrollExtent)) {
+                    return;
+                  }
+                  scrollController.animateTo(offset, duration: animationDuration * 4, curve: Curves.easeInOutQuad);
+                },
+                buildWhen: (previous, current) =>
+                    previous.videos != current.videos ||
+                    previous.videos.length != current.videos.length ||
+                    previous.offlineVideos != current.offlineVideos ||
+                    previous.offlineVideos.length != current.offlineVideos.length ||
+                    previous.currentIndex != current.currentIndex ||
+                    previous.currentlyPlaying != current.currentlyPlaying ||
+                    previous.offlineCurrentlyPlaying != current.offlineCurrentlyPlaying,
+                builder: (context, state) => ReorderableListView.builder(
+                    scrollController: scrollController,
+                    itemCount: state.videos.isNotEmpty ? state.videos.length : state.offlineVideos.length,
+                    onReorder: controller.onQueueReorder,
+                    itemBuilder: (context, index) => state.videos.isNotEmpty ? onlineVideoQueue(context, index, state.videos[index]) : offlineVideoQueue(context, index, state.offlineVideos[index])),
+              );
+            }),
           )
         : const Text('empty queue, should never be displayed');
   }

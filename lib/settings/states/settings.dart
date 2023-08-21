@@ -12,7 +12,6 @@ import '../../globals.dart';
 import '../../player/states/player.dart';
 import '../../utils.dart';
 import '../../utils/models/country.dart';
-import '../models/db/server.dart';
 import '../models/db/settings.dart';
 
 part 'settings.g.dart';
@@ -257,6 +256,24 @@ class SettingsCubit extends Cubit<SettingsState> {
     emit(state);
   }
 
+  toggleShuffle() {
+    setShuffle(!state.playerShuffleMode);
+  }
+
+  setNextRepeatMode() {
+    switch (state.playerRepeatMode) {
+      case PlayerRepeat.noRepeat:
+        setRepeatMode(PlayerRepeat.repeatAll);
+        break;
+      case PlayerRepeat.repeatAll:
+        setRepeatMode(PlayerRepeat.repeatOne);
+        break;
+      case PlayerRepeat.repeatOne:
+        setRepeatMode(PlayerRepeat.noRepeat);
+        break;
+    }
+  }
+
   setLastSubtitle(String s) {
     var state = this.state.copyWith();
     state.lastSubtitles = s;
@@ -382,9 +399,14 @@ class SettingsState {
   set useSearchHistory(bool b) => _set(USE_SEARCH_HISTORY, b);
 
   void _set<T>(String name, T value) {
-    var settingsValue = SettingsValue(name, value.toString());
-    settings[name] = settingsValue;
-    db.saveSetting(settingsValue);
+    if (value == null) {
+      db.deleteSetting(name);
+      settings.remove(name);
+    } else {
+      var settingsValue = SettingsValue(name, value.toString());
+      settings[name] = settingsValue;
+      db.saveSetting(settingsValue);
+    }
   }
 
   SettingsValue? _get(String settingName) {

@@ -20,6 +20,7 @@ class Player extends StatelessWidget {
     ColorScheme colors = themeData.colorScheme;
     AppLocalizations locals = AppLocalizations.of(context)!;
     return BlocBuilder<PlayerCubit, PlayerState>(
+      buildWhen: (previous, current) => previous.hasVideo != current.hasVideo || previous.top != current.top || previous.opacity != current.opacity || previous.isMini != current.isMini,
       builder: (context, _) {
         var cubit = context.read<PlayerCubit>();
 
@@ -27,20 +28,25 @@ class Player extends StatelessWidget {
         bool onPhone = getDeviceType() == DeviceType.phone;
 
         Widget videoPlayer = showPlayer
-            ? _.isAudio
-                ? AudioPlayer(
-                    key: const ValueKey('audio-player'),
-                    video: _.isAudio ? _.currentlyPlaying : null,
-                    offlineVideo: _.isAudio ? _.offlineCurrentlyPlaying : null,
-                    miniPlayer: false,
-                  )
-                : VideoPlayer(
-                    key: const ValueKey('player'),
-                    video: !_.isAudio ? _.currentlyPlaying : null,
-                    offlineVideo: !_.isAudio ? _.offlineCurrentlyPlaying : null,
-                    miniPlayer: false,
-                    startAt: _.startAt,
-                  )
+            ? BlocBuilder<PlayerCubit, PlayerState>(
+                buildWhen: (previous, current) =>
+                    previous.isAudio != current.isAudio || previous.currentlyPlaying != current.currentlyPlaying || previous.offlineCurrentlyPlaying != current.offlineCurrentlyPlaying,
+                builder: (context, _) {
+                  return _.isAudio
+                      ? AudioPlayer(
+                          key: const ValueKey('audio-player'),
+                          video: _.isAudio ? _.currentlyPlaying : null,
+                          offlineVideo: _.isAudio ? _.offlineCurrentlyPlaying : null,
+                          miniPlayer: false,
+                        )
+                      : VideoPlayer(
+                          key: const ValueKey('player'),
+                          video: !_.isAudio ? _.currentlyPlaying : null,
+                          offlineVideo: !_.isAudio ? _.offlineCurrentlyPlaying : null,
+                          miniPlayer: false,
+                          startAt: _.startAt,
+                        );
+                })
             : const SizedBox.shrink();
 
         List<Widget> miniPlayerWidgets = [];
