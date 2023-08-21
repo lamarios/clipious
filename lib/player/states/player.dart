@@ -440,9 +440,8 @@ class PlayerCubit extends Cubit<PlayerState> {
     state.position = Duration.zero;
 
     emit(state);
-    if (!isOffline) {
-      setSponsorBlock();
-    }
+
+    setSponsorBlock();
 
     if (!isTv) {
       mediaHandler.skipToQueueItem(state.currentIndex);
@@ -594,6 +593,8 @@ class PlayerCubit extends Cubit<PlayerState> {
       } else {
         state.sponsorSegments = [];
       }
+    } else {
+      state.sponsorSegments = [];
     }
     emit(state);
   }

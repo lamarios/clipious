@@ -14,14 +14,8 @@ class MiniPlayer {
 
     ColorScheme colors = Theme.of(context).colorScheme;
     var textTheme = Theme.of(context).textTheme;
-    Video? vid = controller.currentlyPlaying;
-    DownloadedVideo? offlineVid = controller.offlineCurrentlyPlaying;
 
-    String title = vid?.title ?? offlineVid?.title ?? '';
-    String author = vid?.author ?? offlineVid?.author ?? '';
-    String videoId = vid?.videoId ?? offlineVid?.videoId ?? '';
-
-    return ((vid != null && controller.videos.isNotEmpty) || (offlineVid != null && controller.offlineVideos.isNotEmpty)) && controller.isMini
+    return controller.isMini
         ? [
             Expanded(
                 flex: 2,
@@ -30,20 +24,31 @@ class MiniPlayer {
                   child: Padding(
                     padding: const EdgeInsets.all(4.0),
                     child: Builder(builder: (context) {
-                      return Column(
-                        children: [
-                          Text(
-                            '$title - $author',
-                            overflow: TextOverflow.ellipsis,
-                            style: textTheme.bodySmall,
-                          ),
-                          MiniPlayerControls(
-                            videoId: videoId,
-                            controller: controller,
-                          ),
-                          const MiniPlayerProgress(),
-                        ],
-                      );
+                      return BlocBuilder<PlayerCubit, PlayerState>(
+                          buildWhen: (previous, current) => previous.currentlyPlaying != current.currentlyPlaying || previous.offlineCurrentlyPlaying != current.offlineCurrentlyPlaying,
+                          builder: (context, _) {
+                            DownloadedVideo? offlineVid = _.offlineCurrentlyPlaying;
+                            Video? vid = _.currentlyPlaying;
+
+                            String title = vid?.title ?? offlineVid?.title ?? '';
+                            String author = vid?.author ?? offlineVid?.author ?? '';
+                            String videoId = vid?.videoId ?? offlineVid?.videoId ?? '';
+
+                            return Column(
+                              children: [
+                                Text(
+                                  '$title - $author',
+                                  overflow: TextOverflow.ellipsis,
+                                  style: textTheme.bodySmall,
+                                ),
+                                MiniPlayerControls(
+                                  videoId: videoId,
+                                  controller: controller,
+                                ),
+                                const MiniPlayerProgress(),
+                              ],
+                            );
+                          });
                     }),
                   ),
                 )),
