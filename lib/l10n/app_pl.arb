@@ -1,0 +1,528 @@
+{
+  "sponsorBlockCategorySponsor": "Sponsorowane",
+  "@sponsorBlockCategorySponsor": {
+    "description": "Sponsor block 'Sponsor' Category"
+  },
+  "playNext": "Odtwórz następne",
+  "@playNext": {
+    "description": "Label to play the video after the current one."
+  },
+  "sponsorBlockCategoryOutro": "Napisy/karty końcowe",
+  "@sponsorBlockCategoryOutro": {
+    "description": "Outro block 'Outro' Category"
+  },
+  "sponsorBlockCategoryUnpaidSelfPromo": "Niepłatne/autopromocja",
+  "@sponsorBlockCategoryUnpaidSelfPromo": {
+    "description": "Sponsor block 'Unpaid/Self promotion' Category"
+  },
+  "sponsorBlockCategoryIntro": "Przerwa/animacja wejściowa",
+  "@sponsorBlockCategoryIntro": {
+    "description": "Sponsorblock 'Intro' Category"
+  },
+  "downloads": "Pobrane",
+  "@downloads": {
+    "description": "Downloads"
+  },
+  "history": "Historia",
+  "@history": {
+    "description": "User view history label"
+  },
+  "quality": "Jakość",
+  "@quality": {
+    "description": "Name of TV ui video settings"
+  },
+  "audio": "Dźwięk",
+  "@audio": {
+    "description": "Name TV ui audio settings"
+  },
+  "subtitles": "Napisy",
+  "@subtitles": {
+    "description": "Name of TV ui subtitles settings"
+  },
+  "search": "Wyszukaj",
+  "@search": {
+    "description": "search title"
+  },
+  "themeBrightness": "Motyw",
+  "@themeBrightness": {
+    "description": "Ask the user to user dark / light / system theme"
+  },
+  "shorts": "Shorts",
+  "@shorts": {
+    "description": "Youtube shorts"
+  },
+  "videoFilterType": "Rodzaj",
+  "@videoFilterType": {
+    "description": "Label for filter type"
+  },
+  "videoFilterOperation": "Działanie",
+  "@videoFilterOperation": {
+    "description": "Label for filter operation"
+  },
+  "videoFilterValue": "Wartość",
+  "@videoFilterValue": {
+    "description": "Label for filter value"
+  },
+  "save": "Zapisz",
+  "@save": {
+    "description": "Text for save action"
+  },
+  "optional": "opcjonalne",
+  "@optional": {
+    "description": "Optional label"
+  },
+  "videoFilterHideLabel": "Ukryj",
+  "@videoFilterHideLabel": {
+    "description": "Label to hide videos"
+  },
+  "searchSortRelevance": "Trafność",
+  "@searchSortRelevance": {
+    "description": "Sort search by relevance"
+  },
+  "searchSortRating": "Oceny",
+  "@searchSortRating": {
+    "description": "Sort search by rating"
+  },
+  "themeLight": "Jasny",
+  "@themeLight": {
+    "description": "Light theme"
+  },
+  "themeDark": "Ciemny",
+  "@themeDark": {
+    "description": "Dark theme"
+  },
+  "videoFilterFilterLabel": "Zaciemnienie",
+  "@videoFilterFilterLabel": {
+    "description": "Label to filter videos"
+  },
+  "videoFilterOperationContains": "Zawiera",
+  "@videoFilterOperationContains": {
+    "description": "Label for video filter operation Contains"
+  },
+  "download": "Pobierz",
+  "@download": {
+    "description": "A single download or CTA for downloading a video"
+  },
+  "channel": "Kanał",
+  "@channel": {
+    "description": "A single channel"
+  },
+  "subscriptions": "Subskrypcje",
+  "@subscriptions": {
+    "description": "User subscriptions"
+  },
+  "playlists": "Playlisty",
+  "@playlists": {
+    "description": "User playlists"
+  },
+  "popular": "Popularne",
+  "@popular": {
+    "description": "Popular videos title"
+  },
+  "noVideoInPlayList": "Brak filmów w playliście",
+  "@noVideoInPlayList": {
+    "description": "When no videos in the playlist"
+  },
+  "deletePlayListQ": "Usunąć playlistę?",
+  "@deletePlayListQ": {
+    "description": "Ask user to delete a playlist"
+  },
+  "removeFromPlayList": "Usuń z playlisty",
+  "@removeFromPlayList": {
+    "description": "Menu item description to show remove a video from a playlist"
+  },
+  "trending": "Na czasie",
+  "@trending": {
+    "description": "Trending videos title"
+  },
+  "irreversibleAction": "Ta akcja jest nieodwracalna",
+  "@irreversibleAction": {
+    "description": "Tell the user that the action cannot be undone"
+  },
+  "add": "Dodaj",
+  "@add": {
+    "description": "Add button abel"
+  },
+  "addPlayList": "Dodaj playlistę",
+  "@addPlayList": {
+    "description": "Title for add playlist dialog"
+  },
+  "unlistedPlaylist": "Niewidoczna",
+  "@unlistedPlaylist": {
+    "description": "Unlisted playlist"
+  },
+  "info": "Info",
+  "@info": {
+    "description": "Info label"
+  },
+  "subscribe": "Subskrybuj",
+  "@subscribe": {
+    "description": "Label for user to subscribe to a channel"
+  },
+  "nSubscribers": "{count, select, no{Brak subskrybentów} other{{count} subskrybentów}}",
+  "@nSubscribers": {
+    "description": "number of subscribers",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "redirectInvidiousLink": "Udostępnij przekierowujący link Invidious",
+  "@redirectInvidiousLink": {
+    "description": "asking user to share redirecting invidious link"
+  },
+  "shareLinkWithTimestamp": "Uwzględnij timestamp",
+  "@shareLinkWithTimestamp": {
+    "description": "asking user to share link along with timestamp"
+  },
+  "wizardIntro": "Wybierz serwer publiczny lub dodaj własny. (Możesz to zmienić później w ustawieniach)",
+  "@wizardIntro": {
+    "description": "Welcome message on frst time use"
+  },
+  "startUsingClipious": "Zacznij używać Clipious",
+  "@startUsingClipious": {
+    "description": "button label to start using the app"
+  },
+  "videoAddedToQueue": "Film dodany do kolejki odtwarzania",
+  "@videoAddedToQueue": {
+    "description": "Pop up message when a video was added at the end of the video queue"
+  },
+  "itemlistErrorGeneric": "Nie można wczytać danych",
+  "@itemlistErrorGeneric": {
+    "description": "Error showing when the data can't be fetch"
+  },
+  "itemListErrorInvalidScope": "Nie masz uprawnień, aby to zobaczyć. Jeśli zalogowałeś się przy użyciu metody tokenu, spróbuj się wylogować i zalogować ponownie",
+  "@itemListErrorInvalidScope": {
+    "description": "Error when the user doesn't have the proper scope to its current token"
+  },
+  "selectPlaylist": "Wybierz playlistę",
+  "@selectPlaylist": {
+    "description": "Title when users wants to add a video to a playlist"
+  },
+  "streams": "Transmisje na żywo",
+  "@streams": {
+    "description": "Streams label"
+  },
+  "playListName": "Nazwa playlisty",
+  "@playListName": {
+    "description": "Place holder for new playlist name text field"
+  },
+  "videos": "Filmy",
+  "@videos": {
+    "description": "Videos label"
+  },
+  "latestVideos": "Najnowsze filmy",
+  "@latestVideos": {
+    "description": "Latest channel videos"
+  },
+  "ok": "OK",
+  "@ok": {
+    "description": "Ok"
+  },
+  "recommended": "Polecane",
+  "@recommended": {
+    "description": "Recommended label"
+  },
+  "videoAddedToPlaylist": "Film dodany do playlisty",
+  "@videoAddedToPlaylist": {
+    "description": "Pop up message when a video was added to a playlist"
+  },
+  "playlistVisibility": "Widoczność",
+  "@playlistVisibility": {
+    "description": "Dropdown label for playlist visibility"
+  },
+  "subscribed": "Subskrybujesz",
+  "@subscribed": {
+    "description": "When the user is subscribed to a channel"
+  },
+  "noChannels": "Brak kanałów",
+  "@noChannels": {
+    "description": "when there are no channels to display"
+  },
+  "couldntFetchVideos": "Nie można wczytać filmów. Stuknij, aby spróbować ponownie.",
+  "@couldntFetchVideos": {
+    "description": "Can't load bunch of videos, asking  user to try again"
+  },
+  "errorAddingVideoToPlaylist": "Błąd podczas dodawania filmu do playlisty",
+  "@errorAddingVideoToPlaylist": {
+    "description": "Error while adding video to playlist"
+  },
+  "createNewPlaylist": "Stwórz nową playlistę",
+  "@createNewPlaylist": {
+    "description": "Button label to create a new playlist when the user wants to add a video to a playlist"
+  },
+  "publicPlaylist": "Publiczna",
+  "@publicPlaylist": {
+    "description": "Public playlist"
+  },
+  "privatePlaylist": "Prywatna",
+  "@privatePlaylist": {
+    "description": "Private playlist"
+  },
+  "cancel": "Anuluj",
+  "@cancel": {
+    "description": "Cancel button label"
+  },
+  "shareYoutubeLink": "Udostępnij link YouTube",
+  "@shareYoutubeLink": {
+    "description": "asking user to share youtube link"
+  },
+  "noPlaylists": "Brak playlist",
+  "@noPlaylists": {
+    "description": "when there are no playlists to display"
+  },
+  "channels": "Kanały",
+  "@channels": {
+    "description": "Channels label"
+  },
+  "nReplies": "{count, plural, =0{Brak odpowiedzi} =1{1 odpowiedź} other{{count} odpowiedzi}}",
+  "@nReplies": {
+    "description": "number of replies to a comment",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "loadMore": "Załaduj więcej",
+  "@loadMore": {
+    "description": "CTA to load more"
+  },
+  "topSorting": "Top",
+  "@topSorting": {
+    "description": "Content sorting: top"
+  },
+  "sponsorSkipped": "Sponsor pominięty",
+  "@sponsorSkipped": {
+    "description": "When a sponsor segment is skipped thanks to sponsor block"
+  },
+  "selectBrowsingCountry": "Wybierz kraj przeglądania",
+  "@selectBrowsingCountry": {
+    "description": "Select country for trending content"
+  },
+  "settings": "Ustawienia",
+  "@settings": {
+    "description": "Settings title"
+  },
+  "browsing": "Przeglądanie",
+  "@browsing": {
+    "description": "video browsing preferences"
+  },
+  "whenAppStartsShow": "Po uruchomieniu aplikacji pokaż…",
+  "@whenAppStartsShow": {
+    "description": "Setting title for selecting the screen to show on start"
+  },
+  "useSponsorBlock": "Używaj SponsorBlock",
+  "@useSponsorBlock": {
+    "description": "label for sponsorblock checkbox"
+  },
+  "sponsorBlockDescription": "Pomiń segmenty sponsorowane, zgłoszone przez społeczność",
+  "@sponsorBlockDescription": {
+    "description": "Sponsorblock setting description"
+  },
+  "shareInvidiousLink": "Udostępnij link Invidious",
+  "@shareInvidiousLink": {
+    "description": "asking user to share invidious link"
+  },
+  "couldntLoadVideo": "Nie można załadować filmu",
+  "@couldntLoadVideo": {
+    "description": "Message to display when a video can't be loaded"
+  },
+  "newSorting": "Nowe",
+  "@newSorting": {
+    "description": "Content sorting: new"
+  },
+  "country": "Kraj",
+  "@country": {
+    "description": "Country label"
+  },
+  "manageServers": "Zarządzaj serwerami",
+  "@manageServers": {
+    "description": "Settings to manage servers"
+  },
+  "currentServer": "Obecnie używasz {current}",
+  "@currentServer": {
+    "description": "Which server the user is currently using",
+    "placeholders": {
+      "current": {
+        "type": "String"
+      }
+    }
+  },
+  "comments": "Komentarze",
+  "@comments": {
+    "description": "Comments label"
+  },
+  "streamIsLive": "Na żywo",
+  "@streamIsLive": {
+    "description": "Label when a video is a live stream"
+  },
+  "showOnStart": "Wybierz, co ma być wyświetlane po uruchomieniu aplikacji",
+  "@showOnStart": {
+    "description": "Title of dialog asking which screen the users prefers to see"
+  },
+  "servers": "Serwery",
+  "@servers": {
+    "description": "Server management settings category"
+  },
+  "about": "Informacje",
+  "@about": {
+    "description": "About"
+  },
+  "build": "Build",
+  "@build": {
+    "description": "build label"
+  },
+  "addServer": "Dodaj serwer",
+  "@addServer": {
+    "description": "Add server label"
+  },
+  "useThisServer": "Użyj tego serwera",
+  "@useThisServer": {
+    "description": "Use this server label"
+  },
+  "logIn": "Zaloguj się",
+  "@logIn": {
+    "description": "CTA to log in to server"
+  },
+  "delete": "Usuń",
+  "@delete": {
+    "description": "Delete label"
+  },
+  "invalidInvidiousServer": "Niepoprawny serwer Invidious",
+  "@invalidInvidiousServer": {
+    "description": "Error when the user tries to add a server that is not a proper or reachable invidious server"
+  },
+  "yourServers": "Twoje serwery",
+  "@yourServers": {
+    "description": "Your servers label"
+  },
+  "notLoggedIn": "Wylogowano",
+  "@notLoggedIn": {
+    "description": "Label when the user is not logged in to the server"
+  },
+  "addServerHelpText": "Użyj przycisku +, aby dodać własne serwery lub stuknij na serwer publiczny i dodaj go.",
+  "@addServerHelpText": {
+    "description": "label for when the user hasn't chosen a server yet"
+  },
+  "tapToAddServer": "Stuknij, aby dodać serwer do twojej listy",
+  "@tapToAddServer": {
+    "description": "public server description"
+  },
+  "publicServersError": "Nie można załadować listy publicznych serwerów. Stuknij, aby ponowić próbę.",
+  "@publicServersError": {
+    "description": "Error message when trying to get public servers but it failed"
+  },
+  "useDashDescription": "Strumieniowanie adaptacyjne DASH może być czasami problematyczne, Youtube może je dławić.",
+  "@useDashDescription": {
+    "description": "Description for dash in the settings screen"
+  },
+  "videoPlayer": "Odtwarzacz wideo",
+  "@videoPlayer": {
+    "description": "Title for video player related options"
+  },
+  "videoListed": "Publiczny",
+  "@videoListed": {
+    "description": "Status of a publicly available video"
+  },
+  "videoUnlisted": "Niewidoczny",
+  "@videoUnlisted": {
+    "description": "Status of a video that is only accessible by link"
+  },
+  "tokenLoginDescription": "Zalecany sposób logowania",
+  "@tokenLoginDescription": {
+    "description": "Recommended way to log in"
+  },
+  "cookieLogin": "Zaloguj się za pomocą pliku cookie",
+  "@cookieLogin": {
+    "description": "Text to login to a server using the cookie jar method"
+  },
+  "cookieLoginDescription": "Użyj tej metody, jeśli napotkasz problemy z uwierzytelnianiem za pomocą tokenu",
+  "@cookieLoginDescription": {
+    "description": "Cookie log in description"
+  },
+  "logout": "Wyloguj się",
+  "@logout": {
+    "description": "CTA to logout of a server"
+  },
+  "password": "Hasło",
+  "@password": {
+    "description": "Password label for login to a server"
+  },
+  "videoQueue": "Kolejka odtwarzania fimów",
+  "@videoQueue": {
+    "description": "Label for button to display the video queue"
+  },
+  "addToQueueList": "Dodaj do kolejki odtwarzania",
+  "@addToQueueList": {
+    "description": "Label on button to add a video to the queue list"
+  },
+  "name": "Nazwa",
+  "@name": {
+    "description": "NAme label"
+  },
+  "loggedIn": "Zalogowano",
+  "@loggedIn": {
+    "description": "Label to tell the user that he is logged in to the server"
+  },
+  "publicServers": "Serwery publiczne",
+  "@publicServers": {
+    "description": "Public servers label"
+  },
+  "useDynamicTheme": "Dynamiczne kolory",
+  "@useDynamicTheme": {
+    "description": ""
+  },
+  "videoIsFamilyFriendly": "Przyjazny dla rodziny",
+  "@videoIsFamilyFriendly": {
+    "description": "Displayed only when a video is family friendly"
+  },
+  "loadingPublicServer": "Wczytywanie publicznych serwerów",
+  "@loadingPublicServer": {
+    "description": "Message telling users the app is loading the list of public servers"
+  },
+  "appearance": "Wygląd",
+  "@appearance": {
+    "description": "Settings category title"
+  },
+  "tapToManage": "Stuknij, aby zarządzać",
+  "@tapToManage": {
+    "description": "Text shown below a server in the 'Your servers' list"
+  },
+  "tokenLogin": "Zaloguj się za pomocą tokenu",
+  "@tokenLogin": {
+    "description": "Textto login to a server using the recommended way"
+  },
+  "username": "Nazwa użytkownika",
+  "@username": {
+    "description": "Username label for login to a server"
+  },
+  "authentication": "Uwierzytelnianie",
+  "@authentication": {
+    "description": "Label for server settings related to authentications"
+  },
+  "error": "Błąd",
+  "@error": {},
+  "package": "Package",
+  "@package": {
+    "description": "package label"
+  },
+  "version": "Wersja",
+  "@version": {
+    "description": "version label"
+  },
+  "useDynamicThemeDescription": "Użyj kolorów Material You (Tylko na Android 12+)",
+  "@useDynamicThemeDescription": {
+    "description": ""
+  },
+  "wrongUsernamePassword": "Nieprawidłowa nazwa użytkownika lub hasło",
+  "@wrongUsernamePassword": {
+    "description": "Error message when authentication fails"
+  },
+  "useDash": "Użyj DASH",
+  "@useDash": {
+    "description": "Label on video options if a user wants to switch to dash urls instead of the regular quality selection"
+  }
+}
