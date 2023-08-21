@@ -1,6 +1,6 @@
 - fix playback queue behavior when skip next / previous
 - scroll to playing item in video queue when it is being played
-- playlist loading ui ajustment to make it more legible
+- playlist loading ui adjustment to make it more legible
 - stop loading public playlist videos when the user exists the screen before the loading is done
 - fix issue where user would be kicked out of full screen when skipping to next video
 - optimize video transition between videos of same types ( audio / video )
