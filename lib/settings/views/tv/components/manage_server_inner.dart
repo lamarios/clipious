@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:invidious/settings/states/settings.dart';
 import 'package:invidious/settings/views/tv/screens/manage_single_server.dart';
 import 'package:invidious/utils.dart';
 import 'package:invidious/utils/views/tv/components/tv_button.dart';
@@ -96,8 +97,15 @@ class TvManageServersInner extends StatelessWidget {
     AppLocalizations locals = AppLocalizations.of(context)!;
     return BlocBuilder<ServerListSettingsCubit, ServerListSettingsState>(builder: (context, _) {
       var cubit = context.read<ServerListSettingsCubit>();
+      var settings = context.watch<SettingsCubit>();
       var filteredPublicServers = _.publicServers.where((s) => _.dbServers.indexWhere((element) => element.url == s.url) == -1).toList();
       return ListView(children: [
+        SettingsTile(
+          title: locals.skipSslVerification,
+          description: locals.skipSslVerification,
+          onSelected: (context) => settings.toggleSslVerification(!settings.state.skipSslVerification),
+          trailing: Switch(onChanged: (value) {}, value: settings.state.skipSslVerification),
+        ),
         SettingsTitle(title: locals.yourServers),
         ..._.dbServers.map((s) => SettingsTile(
               leading: InkWell(

@@ -94,7 +94,7 @@ class PlayerCubit extends Cubit<PlayerState> {
           androidNotificationOngoing: true,
         ),
       );
-      BackButtonInterceptor.add(handleBackButton, name: 'miniPlayer', zIndex: 2);
+      BackButtonInterceptor.add(handleBackButton, name: 'miniPlayer', zIndex: 2, ifNotYetIntercepted: true);
     } else if (isTv && state.videos.isNotEmpty) {
       switchToVideo(state.videos[0]);
     }
@@ -109,6 +109,11 @@ class PlayerCubit extends Cubit<PlayerState> {
         playNext();
         _setPlaying(false);
         break;
+      case MediaState.enteredPip:
+        _setPip(true);
+        break;
+      case MediaState.exitedPip:
+        _setPip(false);
       default:
         break;
     }
@@ -125,6 +130,12 @@ class PlayerCubit extends Cubit<PlayerState> {
       default:
         break;
     }
+  }
+
+  _setPip(bool pip) {
+    var state = this.state.copyWith();
+    state.isPip = pip;
+    emit(state);
   }
 
   @override

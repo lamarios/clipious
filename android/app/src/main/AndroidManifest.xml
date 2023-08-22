@@ -22,8 +22,9 @@
                 <data android:scheme="clipious-auth"/>
             </intent-filter>
         </activity>
+        <!--                android:name="com.ryanheise.audioservice.AudioServiceActivity"-->
         <activity
-                android:name="com.ryanheise.audioservice.AudioServiceActivity"
+                android:name=".MainActivity"
                 android:exported="true"
                 android:launchMode="singleTop"
                 android:supportsPictureInPicture="true"

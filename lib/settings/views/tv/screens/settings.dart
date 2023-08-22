@@ -166,12 +166,6 @@ class TVSettings extends StatelessWidget {
                     buildWhen: (previous, current) => previous.server != current.server,
                     builder: (context, app) =>
                         SettingsTile(title: locals.manageServers, description: app.server != null ? locals.currentServer(db.getCurrentlySelectedServer().url) : "", onSelected: openManageServers)),
-                SettingsTile(
-                  title: locals.skipSslVerification,
-                  description: locals.skipSslVerification,
-                  onSelected: (context) => cubit.toggleSslVerification(!_.skipSslVerification),
-                  trailing: Switch(onChanged: (value) {}, value: _.skipSslVerification),
-                ),
                 SettingsTitle(title: locals.videoPlayer),
                 SettingsTile(
                   title: locals.useDash,
