@@ -5,6 +5,7 @@ import 'package:invidious/app/states/app.dart';
 import 'package:invidious/main.dart';
 import 'package:invidious/myRouteObserver.dart';
 import 'package:invidious/settings/states/server_list_settings.dart';
+import 'package:invidious/settings/states/settings.dart';
 import 'package:invidious/settings/views/screens/manage_single_server.dart';
 import 'package:settings_ui/settings_ui.dart';
 
@@ -139,6 +140,7 @@ class ManagerServersView extends StatelessWidget {
 
     return BlocBuilder<ServerListSettingsCubit, ServerListSettingsState>(
       builder: (ctx, _) {
+        SettingsCubit settings = context.watch<SettingsCubit>();
         ServerListSettingsCubit cubit = context.read<ServerListSettingsCubit>();
         var app = context.read<AppCubit>();
         var filteredPublicServers = _.publicServers.where((s) => _.dbServers.indexWhere((element) => element.url == s.url) == -1).toList();
@@ -148,6 +150,16 @@ class ManagerServersView extends StatelessWidget {
               lightTheme: theme,
               darkTheme: theme,
               sections: [
+                SettingsSection(
+                  tiles: [
+                    SettingsTile.switchTile(
+                      title: Text(locals.skipSslVerification),
+                      description: Text(locals.skipSslVerificationDescription),
+                      initialValue: settings.state.skipSslVerification,
+                      onToggle: settings.toggleSslVerification,
+                    )
+                  ],
+                ),
                 SettingsSection(
                     title: Text(locals.yourServers),
                     tiles: _.dbServers.isNotEmpty

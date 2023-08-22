@@ -1065,6 +1065,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.4"
+  simple_pip_mode:
+    dependency: "direct main"
+    description:
+      name: simple_pip_mode
+      sha256: "89f8137fa5a8d113f39c61007d4b658048a9359362447b8cfb8bce93631882ad"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.8.0"
   sky_engine:
     dependency: transitive
     description: flutter

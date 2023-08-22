@@ -198,12 +198,6 @@ class Settings extends StatelessWidget {
                     description: BlocBuilder<AppCubit, AppState>(
                         buildWhen: (previous, current) => previous.server != current.server, builder: (context, app) => Text(app.server != null ? locals.currentServer(app.server!.url) : "")),
                     onPressed: manageServers,
-                  ),
-                  SettingsTile.switchTile(
-                    title: Text(locals.skipSslVerification),
-                    description: Text(locals.skipSslVerificationDescription),
-                    initialValue: _.skipSslVerification,
-                    onToggle: cubit.toggleSslVerification,
                   )
                 ]),
                 SettingsSection(title: Text(locals.videoPlayer), tiles: [

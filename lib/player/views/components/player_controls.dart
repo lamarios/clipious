@@ -181,6 +181,11 @@ class PlayerControls extends StatelessWidget {
         create: (context) => PlayerControlsCubit(PlayerControlsState(), player),
         child: BlocBuilder<PlayerControlsCubit, PlayerControlsState>(
           builder: (context, _) {
+            bool isMini = context.select((PlayerCubit cubit) => cubit.state.isMini);
+            bool hasQueue = context.select((PlayerCubit cubit) => cubit.state.hasQueue);
+            bool isPip = context.select((PlayerCubit cubit) => cubit.state.isPip);
+            String videoTitle = context.select((PlayerCubit cubit) => cubit.state.currentlyPlaying?.title ?? cubit.state.offlineCurrentlyPlaying?.title ?? '');
+
             late MediaPlayerCubit pc;
             if (mediaPlayerCubit != null) {
               pc = mediaPlayerCubit!;
@@ -189,7 +194,7 @@ class PlayerControls extends StatelessWidget {
             } else {
               pc = context.read<VideoPlayerCubit>();
             }
-            PlayerState mpc = player.state;
+            // PlayerState mpc = player.state;
             var event = _.event;
             var cubit = context.read<PlayerControlsCubit>();
             return BlocListener<PlayerCubit, PlayerState>(
@@ -204,7 +209,7 @@ class PlayerControls extends StatelessWidget {
                 onVerticalDragUpdate: pc.isFullScreen() == FullScreenState.fullScreen ? null : player.videoDragged,
                 onVerticalDragStart: pc.isFullScreen() == FullScreenState.fullScreen ? null : player.videoDragStarted,
                 child: Padding(
-                  padding: EdgeInsets.all(mpc.isMini ? 8 : 0.0),
+                  padding: EdgeInsets.all(isMini ? 8 : 0.0),
                   child: AspectRatio(
                     aspectRatio: 16 / 9,
                     child: Stack(
@@ -215,16 +220,26 @@ class PlayerControls extends StatelessWidget {
                           right: 0,
                           bottom: 0,
                           top: 0,
-                          child: mpc.isMini
+                          child: isMini || isPip
                               ? const SizedBox.shrink()
-                              : _.displayControls && !mpc.isMini
+                              : _.displayControls
                                   ? Container(
-                                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(0), color: Colors.black.withOpacity(0.6)),
+                                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(0), color: Colors.black.withOpacity(0.4)),
                                       child: Column(
                                         children: [
                                           Row(
                                             mainAxisAlignment: MainAxisAlignment.end,
                                             children: [
+                                              if (pc.isFullScreen() == FullScreenState.fullScreen)
+                                                Expanded(
+                                                    child: Padding(
+                                                  padding: const EdgeInsets.only(left: 8.0),
+                                                  child: Text(
+                                                    videoTitle,
+                                                    maxLines: 1,
+                                                    overflow: TextOverflow.ellipsis,
+                                                  ),
+                                                )),
                                               if (pc.supportsPip()) IconButton(onPressed: pc.enterPip, icon: const Icon(Icons.picture_in_picture)),
                                               IconButton(onPressed: () => showOptionMenu(context, _, pc), icon: const Icon(Icons.more_vert))
                                             ],
@@ -273,7 +288,7 @@ class PlayerControls extends StatelessWidget {
                                     )
                                   : const SizedBox.expand(),
                         ),
-                        if (_.displayControls)
+                        if (!isMini && !isPip && _.displayControls)
                           Positioned(
                             top: 0,
                             left: 0,
@@ -283,7 +298,7 @@ class PlayerControls extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                if (mpc.hasQueue)
+                                if (hasQueue)
                                   IconButton(
                                       onPressed: () => player.playPrevious(),
                                       icon: const Icon(
@@ -306,7 +321,7 @@ class PlayerControls extends StatelessWidget {
                                       Icons.fast_forward,
                                       size: 30,
                                     )),
-                                if (mpc.hasQueue)
+                                if (hasQueue)
                                   IconButton(
                                       onPressed: () => player.playNext(),
                                       icon: const Icon(

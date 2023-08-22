@@ -1,3 +1,4 @@
+import 'package:back_button_interceptor/back_button_interceptor.dart';
 import 'package:better_player/better_player.dart';
 import 'package:better_player/src/video_player/video_player_platform_interface.dart';
 import 'package:copy_with_extension/copy_with_extension.dart';
@@ -11,6 +12,7 @@ import 'package:invidious/settings/states/settings.dart';
 import 'package:invidious/videos/models/base_video.dart';
 import 'package:logging/logging.dart';
 import 'package:pretty_bytes/pretty_bytes.dart';
+import 'package:simple_pip_mode/simple_pip.dart';
 import 'package:wakelock/wakelock.dart';
 
 import '../../globals.dart';
@@ -94,8 +96,10 @@ class VideoPlayerCubit extends MediaPlayerCubit<VideoPlayerState> {
         mediaState = MediaState.loading;
         break;
       case BetterPlayerEventType.pipStop:
+        mediaState = MediaState.exitedPip;
         break;
       case BetterPlayerEventType.pipStart:
+        mediaState = MediaState.enteredPip;
         break;
       case BetterPlayerEventType.overflowOpened:
         break;
@@ -201,7 +205,6 @@ class VideoPlayerCubit extends MediaPlayerCubit<VideoPlayerState> {
 
   @override
   playVideo(bool offline, {Duration? startAt}) async {
-    bool wasFullscreen = this.state.videoController?.isFullScreen ?? false;
     var state = this.state.copyWith();
     // only used if the player is currently close because it is onReady that will actually play the video
     // need better way of handling this
@@ -300,7 +303,7 @@ class VideoPlayerCubit extends MediaPlayerCubit<VideoPlayerState> {
                 subtitlesConfiguration: BetterPlayerSubtitlesConfiguration(
                   fontSize: settings.state.subtitleSize,
                 ),
-                controlsConfiguration: BetterPlayerControlsConfiguration(
+                controlsConfiguration: const BetterPlayerControlsConfiguration(
                   showControls: false,
                   // customControlsBuilder: (controller, onPlayerVisibilityChanged) => const PlayerControls(),
                   // enablePlayPause: false,
@@ -374,9 +377,16 @@ class VideoPlayerCubit extends MediaPlayerCubit<VideoPlayerState> {
   setFullScreen(bool fullScreen) {
     if (fullScreen) {
       state.videoController?.enterFullScreen();
+      BackButtonInterceptor.add(backButtonInterceptor, zIndex: 10, name: 'full screen player');
     } else {
       state.videoController?.exitFullScreen();
+      BackButtonInterceptor.remove(backButtonInterceptor);
     }
+  }
+
+  bool backButtonInterceptor(bool stopDefaultButtonEvent, RouteInfo info) {
+    setFullScreen(false);
+    return true;
   }
 
   String _videoTrackToString(BetterPlayerAsmsTrack? track) {
@@ -487,12 +497,20 @@ class VideoPlayerCubit extends MediaPlayerCubit<VideoPlayerState> {
 
   @override
   bool supportsPip() {
-    return isFullScreen() == FullScreenState.notFullScreen;
+    return true;
   }
 
   @override
   void enterPip() {
-    state.videoController?.enablePictureInPicture(state.key);
+    player.setEvent(MediaEvent(state: MediaState.enteredPip));
+    setFullScreen(true);
+    SimplePip(
+      onPipExited: () {
+        player.setEvent(MediaEvent(state: MediaState.exitedPip));
+        setFullScreen(false);
+      },
+    ).enterPipMode();
+    // state.videoController?.enablePictureInPicture(state.key);
   }
 
   @override

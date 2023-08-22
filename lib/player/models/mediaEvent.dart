@@ -17,5 +17,7 @@ enum MediaState {
   ready,
   error,
   completed,
+  enteredPip,
+  exitedPip,
   miniDisplayChanged;
 }
