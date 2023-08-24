@@ -73,7 +73,6 @@ dependencies:
       ref: master
   search_choices: 2.2.5
   uuid: 3.0.7
-  animate_to: 0.1.0
   dio: 5.3.2
   just_audio: 0.9.34
   audio_service: 0.18.10

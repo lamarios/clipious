@@ -1,0 +1,108 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:invidious/app/states/app.dart';
+import 'package:invidious/globals.dart';
+import 'package:invidious/home/models/db/home_layout.dart';
+import 'package:invidious/home/states/home.dart';
+
+import '../../../main.dart';
+import '../../../search/views/screens/search.dart';
+
+const double smallVideoViewHeight = 120;
+
+class HomeView extends StatelessWidget {
+  const HomeView({super.key});
+
+  static openSearch(BuildContext context, String search) {
+    navigatorKey.currentState
+        ?.push(MaterialPageRoute(
+            builder: (context) => Search(
+                  query: search,
+                  searchNow: true,
+                )))
+        .then((value) => context.read<AppCubit>().updateLayout());
+  }
+
+  List<Widget> getSmallSources(BuildContext context, HomeLayout layout) {
+    var textTheme = Theme.of(context).textTheme;
+    var colors = Theme.of(context).colorScheme;
+    var locals = AppLocalizations.of(context)!;
+    return layout.smallSources
+        .where((element) => element.isPermitted(context))
+        .map((e) => Padding(
+              key: ValueKey(e),
+              padding: const EdgeInsets.only(bottom: 8.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8.0),
+                    child: Text(
+                      e.getLabel(locals),
+                      style: textTheme.titleSmall?.copyWith(color: colors.secondary),
+                    ),
+                  ),
+                  e.build(context, true)
+                ],
+              ),
+            ))
+        .toList();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    var colors = Theme.of(context).colorScheme;
+
+    return BlocProvider(
+      create: (context) => HomeCubit(HomeState()),
+      child: Builder(builder: (context) {
+        var layout = context.select((AppCubit value) => value.state.homeLayout);
+        var textTheme = Theme.of(context).textTheme;
+        var locals = AppLocalizations.of(context)!;
+        var scrolled = context.select((HomeCubit home) => home.state.scrolled);
+        var home = context.read<HomeCubit>();
+
+        return NotificationListener(
+          onNotification: (notificationInfo) {
+            if (notificationInfo is ScrollUpdateNotification) {
+              home.setScroll(notificationInfo.metrics.pixels > 100);
+            }
+            return true;
+          },
+          child: Container(
+              color: colors.background,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  AnimatedCrossFade(
+                    crossFadeState: scrolled ? CrossFadeState.showSecond : CrossFadeState.showFirst,
+                    duration: animationDuration,
+                    firstChild: Column(mainAxisSize: MainAxisSize.min, children: getSmallSources(context, layout)),
+                    secondChild: const Row(
+                      children: [
+                        SizedBox.shrink(),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                      padding: const EdgeInsets.only(left: 8.0),
+                      child: Row(
+                        children: [
+                          Text(
+                            layout.bigSource.getLabel(locals),
+                            style: textTheme.titleMedium?.copyWith(color: colors.secondary),
+                          ),
+                        ],
+                      )),
+                  Expanded(key: ValueKey(layout.bigSource), child: layout.bigSource.build(context, false))
+                ],
+              )),
+        );
+      }),
+    );
+  }
+}

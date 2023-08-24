@@ -15,7 +15,6 @@ import 'package:invidious/videos/views/components/download_modal_sheet.dart';
 import 'package:invidious/videos/views/components/inner_view_tablet.dart';
 import 'package:invidious/videos/views/components/innter_view.dart';
 import 'package:invidious/videos/views/components/like_button.dart';
-import 'package:invidious/videos/views/components/video_in_list.dart';
 import 'package:invidious/videos/views/components/video_share_button.dart';
 
 import '../../../downloads/views/screens/download_manager.dart';
@@ -40,11 +39,16 @@ class VideoView extends StatelessWidget {
   void downloadVideo(BuildContext context, VideoState _) {
     var cubit = context.read<VideoCubit>();
     if (_.video != null) {
-      DownloadModalSheet.showVideoModalSheet(context, _.video!, animateDownload: false, onDownloadStarted: (isDownloadStarted) {
-        if (isDownloadStarted) {
-          cubit.initStreamListener();
-        }
-      }, onDownload: cubit.onDownload, source: VideoListSource.videoScreen);
+      DownloadModalSheet.showVideoModalSheet(
+        context,
+        _.video!,
+        onDownloadStarted: (isDownloadStarted) {
+          if (isDownloadStarted) {
+            cubit.initStreamListener();
+          }
+        },
+        onDownload: cubit.onDownload,
+      );
     }
   }
 

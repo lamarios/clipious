@@ -30,7 +30,6 @@ class RecommendedVideos extends StatelessWidget {
       v.matchedFilters = e.matchedFilters;
       return VideoListItem(
         video: v,
-        source: VideoListSource.recommendedVideos,
       );
     }).toList());
 

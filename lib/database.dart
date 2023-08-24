@@ -1,4 +1,5 @@
 import 'package:easy_debounce/easy_debounce.dart';
+import 'package:invidious/home/models/db/home_layout.dart';
 import 'package:invidious/search/models/db/searchHistoryItem.dart';
 import 'package:invidious/settings/models/db/settings.dart';
 import 'package:invidious/settings/models/errors/noServerSelected.dart';
@@ -41,6 +42,8 @@ const REMEMBER_PLAYBACK_SPEED = 'remember-playback-speed';
 const LAST_SPEED = 'last-speed';
 const LOCK_ORIENTATION_FULLSCREEN = 'lock-orientation-fullscreen';
 const FILL_FULLSCREEN = 'fill-fullscreen';
+const APP_LAYOUT = 'app-layout';
+const NAVIGATION_BAR_LABEL_BEHAVIOR = 'navigation-bar-label-behavior';
 
 const ON_OPEN = "on-open";
 
@@ -91,7 +94,7 @@ class DbClient {
     store.box<SettingsValue>().put(setting, mode: PutMode.put);
   }
 
-  List<SettingsValue> getAllSettings()  {
+  List<SettingsValue> getAllSettings() {
     return store.box<SettingsValue>().getAll();
   }
 
@@ -231,5 +234,16 @@ class DbClient {
 
   void upsertHistoryVideo(HistoryVideoCache vid) {
     store.box<HistoryVideoCache>().put(vid);
+  }
+
+  // we only want one layout
+  void upsertHomeLayout(HomeLayout layout) {
+    store.box<HomeLayout>().removeAll();
+    store.box<HomeLayout>().put(layout);
+  }
+
+  HomeLayout getHomeLayout() {
+    var all = store.box<HomeLayout>().getAll();
+    return all.firstOrNull ?? HomeLayout();
   }
 }

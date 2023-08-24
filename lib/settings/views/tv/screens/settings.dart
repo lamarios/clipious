@@ -39,6 +39,7 @@ class TVSettings extends StatelessWidget {
     ));
   }
 
+/*
   openSelectOnStart(BuildContext context) {
     AppLocalizations locals = AppLocalizations.of(context)!;
     var cubit = context.read<SettingsCubit>();
@@ -52,6 +53,7 @@ class TVSettings extends StatelessWidget {
       ),
     ));
   }
+*/
 
   List<String> getCategories(BuildContext context) {
     var locals = AppLocalizations.of(context)!;

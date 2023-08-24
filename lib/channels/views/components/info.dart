@@ -65,7 +65,6 @@ class ChannelInfo extends StatelessWidget {
               videoInList.matchedFilters = e.matchedFilters;
               return VideoListItem(
                 video: videoInList,
-                source: VideoListSource.channelLatest,
               );
             }).toList() ??
             []));

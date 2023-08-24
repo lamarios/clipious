@@ -9,6 +9,7 @@ import 'package:package_info_plus/package_info_plus.dart';
 
 import '../../database.dart';
 import '../../globals.dart';
+import '../../home/models/db/home_layout.dart';
 import '../../player/states/player.dart';
 import '../../utils.dart';
 import '../../utils/models/country.dart';
@@ -96,10 +97,9 @@ class SettingsCubit extends Cubit<SettingsState> {
     emit(state);
   }
 
-  selectOnOpen(String selected, List<String> categories) {
+  selectOnOpen(int index) {
     var state = this.state.copyWith();
-    int selectedIndex = categories.indexOf(selected);
-    state.onOpen = selectedIndex;
+    state.onOpen = index;
     emit(state);
   }
 
@@ -292,6 +292,18 @@ class SettingsCubit extends Cubit<SettingsState> {
 
     return l?.nativeDisplayLanguageScript;
   }
+
+  setAppLayout(List<HomeDataSource> layout) {
+    var state = this.state.copyWith();
+    state.appLayout = layout;
+    emit(state);
+  }
+
+  setNavigationBarLabelBehavior(NavigationDestinationLabelBehavior behavior) {
+    var state = this.state.copyWith();
+    state.navigationBarLabelBehavior = behavior;
+    emit(state);
+  }
 }
 
 @CopyWith(constructor: "_")
@@ -397,6 +409,19 @@ class SettingsState {
   bool get useSearchHistory => _get(USE_SEARCH_HISTORY)?.value == 'true';
 
   set useSearchHistory(bool b) => _set(USE_SEARCH_HISTORY, b);
+
+  List<HomeDataSource> get appLayout => (_get(APP_LAYOUT)?.value ?? '${HomeDataSource.home.name},${HomeDataSource.popular.name},${HomeDataSource.subscription.name}')
+      .split(',')
+      .where((element) => element.isNotEmpty)
+      .map((e) => HomeDataSource.values.firstWhere((element) => element.name == e))
+      .toList();
+
+  set appLayout(List<HomeDataSource> layout) => _set(APP_LAYOUT, layout.map((e) => e.name).join(","));
+
+  NavigationDestinationLabelBehavior get navigationBarLabelBehavior =>
+      NavigationDestinationLabelBehavior.values.firstWhere((e) => e.name == (_get(NAVIGATION_BAR_LABEL_BEHAVIOR)?.value ?? NavigationDestinationLabelBehavior.onlyShowSelected.name));
+
+  set navigationBarLabelBehavior(NavigationDestinationLabelBehavior behavior) => _set(NAVIGATION_BAR_LABEL_BEHAVIOR, behavior.name);
 
   void _set<T>(String name, T value) {
     if (value == null) {

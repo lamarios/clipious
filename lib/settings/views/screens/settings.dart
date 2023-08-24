@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/app/states/app.dart';
 import 'package:invidious/myRouteObserver.dart';
+import 'package:invidious/settings/views/components/app_customizer.dart';
 import 'package:invidious/settings/views/screens/app_logs.dart';
 import 'package:invidious/settings/views/screens/search_history_settings.dart';
 import 'package:invidious/settings/views/screens/sponsor_block_settings.dart';
@@ -62,6 +63,7 @@ class Settings extends StatelessWidget {
     );
   }
 
+/*
   selectOnOpen(BuildContext context, SettingsState controller) {
     var categories = getCategories(context);
     var locals = AppLocalizations.of(context)!;
@@ -77,6 +79,11 @@ class Settings extends StatelessWidget {
         cubit.selectOnOpen(selected, categories);
       },
     );
+  }
+*/
+
+  customizeApp(BuildContext context) {
+    showDialog(barrierDismissible: true, context: context, builder: (context) => const AlertDialog(content: SizedBox(width: 300, height: 500, child: AppCustomizer())));
   }
 
   showSelectLanguage(BuildContext context, SettingsState controller) {
@@ -165,9 +172,9 @@ class Settings extends StatelessWidget {
                       onPressed: (ctx) => searchCountry(ctx, _),
                     ),
                     SettingsTile(
-                      title: Text(locals.whenAppStartsShow),
-                      value: Text(getCategories(ctx)[_.onOpen]),
-                      onPressed: (ctx) => selectOnOpen(ctx, _),
+                      title: Text(locals.customizeAppLayout),
+                      value: Text(_.appLayout.map((e) => e.getLabel(locals)).join(", ")),
+                      onPressed: (ctx) => customizeApp(ctx),
                     ),
                     SettingsTile(
                       title: Text(locals.appLanguage),

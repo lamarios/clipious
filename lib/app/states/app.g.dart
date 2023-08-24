@@ -14,6 +14,8 @@ abstract class _$AppStateCWProxy {
   AppState intentDataStreamSubscription(
       StreamSubscription<dynamic> intentDataStreamSubscription);
 
+  AppState homeLayout(HomeLayout homeLayout);
+
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `AppState(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
   /// Usage
@@ -24,6 +26,7 @@ abstract class _$AppStateCWProxy {
     int? selectedIndex,
     Server? server,
     StreamSubscription<dynamic>? intentDataStreamSubscription,
+    HomeLayout? homeLayout,
   });
 }
 
@@ -46,6 +49,9 @@ class _$AppStateCWProxyImpl implements _$AppStateCWProxy {
       this(intentDataStreamSubscription: intentDataStreamSubscription);
 
   @override
+  AppState homeLayout(HomeLayout homeLayout) => this(homeLayout: homeLayout);
+
+  @override
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `AppState(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
@@ -57,6 +63,7 @@ class _$AppStateCWProxyImpl implements _$AppStateCWProxy {
     Object? selectedIndex = const $CopyWithPlaceholder(),
     Object? server = const $CopyWithPlaceholder(),
     Object? intentDataStreamSubscription = const $CopyWithPlaceholder(),
+    Object? homeLayout = const $CopyWithPlaceholder(),
   }) {
     return AppState._(
       selectedIndex == const $CopyWithPlaceholder() || selectedIndex == null
@@ -72,6 +79,10 @@ class _$AppStateCWProxyImpl implements _$AppStateCWProxy {
           ? _value.intentDataStreamSubscription
           // ignore: cast_nullable_to_non_nullable
           : intentDataStreamSubscription as StreamSubscription<dynamic>,
+      homeLayout == const $CopyWithPlaceholder() || homeLayout == null
+          ? _value.homeLayout
+          // ignore: cast_nullable_to_non_nullable
+          : homeLayout as HomeLayout,
     );
   }
 }

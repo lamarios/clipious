@@ -4,6 +4,7 @@ import 'package:logging/logging.dart';
 const String PATH_CHANNEL = "/channel";
 const String PATH_VIDEO = "/video";
 const String PATH_MANAGE_SUBS = "/manage-subscription_management";
+const String PATH_LAYOUT_EDITOR = '/edit-layout';
 
 const RouteSettings ROUTE_SETTINGS = RouteSettings(name: 'settings');
 const RouteSettings ROUTE_DOWNLOAD_MANAGER = RouteSettings(name: 'download-manager');

@@ -129,7 +129,6 @@ class Search extends StatelessWidget {
                                   ? VideoList(
                                       paginatedVideoList: SearchPaginatedList<VideoInList>(
                                           type: SearchType.video, query: _.queryController.value.text, items: _.videos, getFromResults: (res) => res.videos, sortBy: _.sortBy),
-                                      source: VideoListSource.search,
                                     )
                                   : Center(child: Text(locals.nVideos(0))),
                               _.channels.isNotEmpty
@@ -168,7 +167,6 @@ class Search extends StatelessWidget {
                               _.playlists.isNotEmpty
                                   ? FractionallySizedBox(
                                       child: PlaylistList(
-                                          tag: searchPlayListTag,
                                           paginatedList: SearchPaginatedList<Playlist>(
                                               type: SearchType.playlist, query: _.queryController.value.text, items: _.playlists, getFromResults: (res) => res.playlists, sortBy: _.sortBy),
                                           canDeleteVideos: false),

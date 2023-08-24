@@ -8,6 +8,7 @@ import 'package:receive_sharing_intent/receive_sharing_intent.dart';
 
 import '../../database.dart';
 import '../../globals.dart';
+import '../../home/models/db/home_layout.dart';
 import '../../main.dart';
 import '../../settings/models/db/server.dart';
 import '../../videos/views/screens/video.dart';
@@ -83,6 +84,10 @@ class AppCubit extends Cubit<AppState> {
     emit(state.copyWith(server: s, selectedIndex: 0));
   }
 
+  updateLayout() {
+    emit(state.copyWith(homeLayout: db.getHomeLayout()));
+  }
+
   bool get isLoggedIn => (state.server?.authToken?.isNotEmpty ?? false) || (state.server?.sidCookie?.isNotEmpty ?? false);
 }
 
@@ -94,15 +99,15 @@ class AppState {
 
   late StreamSubscription intentDataStreamSubscription;
 
+  HomeLayout homeLayout = db.getHomeLayout();
+
   AppState() {
     try {
       server = db.getCurrentlySelectedServer();
     } catch (e) {
       server = null;
     }
-
-    // For sharing or opening urls/text coming from outside the app while the app is in the memory
   }
 
-  AppState._(this.selectedIndex, this.server, this.intentDataStreamSubscription);
+  AppState._(this.selectedIndex, this.server, this.intentDataStreamSubscription, this.homeLayout);
 }

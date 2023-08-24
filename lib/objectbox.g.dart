@@ -15,6 +15,7 @@ import 'package:objectbox/objectbox.dart';
 import 'package:objectbox_flutter_libs/objectbox_flutter_libs.dart';
 
 import 'downloads/models/downloaded_video.dart';
+import 'home/models/db/home_layout.dart';
 import 'search/models/db/searchHistoryItem.dart';
 import 'settings/models/db/app_logs.dart';
 import 'settings/models/db/server.dart';
@@ -316,6 +317,35 @@ final _entities = <ModelEntity>[
             flags: 0)
       ],
       relations: <ModelRelation>[],
+      backlinks: <ModelBacklink>[]),
+  ModelEntity(
+      id: const IdUid(10, 6821162325360407377),
+      name: 'HomeLayout',
+      lastPropertyId: const IdUid(4, 8172441605240321034),
+      flags: 0,
+      properties: <ModelProperty>[
+        ModelProperty(
+            id: const IdUid(1, 2141116138730176870),
+            name: 'id',
+            type: 6,
+            flags: 1),
+        ModelProperty(
+            id: const IdUid(2, 4699190633584236247),
+            name: 'showBigSource',
+            type: 1,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(3, 2336366876714802775),
+            name: 'dbBigSource',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(4, 8172441605240321034),
+            name: 'dbSmallSources',
+            type: 30,
+            flags: 0)
+      ],
+      relations: <ModelRelation>[],
       backlinks: <ModelBacklink>[])
 ];
 
@@ -346,7 +376,7 @@ Future<Store> openStore(
 ModelDefinition getObjectBoxModel() {
   final model = ModelInfo(
       entities: _entities,
-      lastEntityId: const IdUid(9, 4192516430920036128),
+      lastEntityId: const IdUid(10, 6821162325360407377),
       lastIndexId: const IdUid(5, 7262786699272501249),
       lastRelationId: const IdUid(0, 0),
       lastSequenceId: const IdUid(0, 0),
@@ -710,6 +740,44 @@ ModelDefinition getObjectBoxModel() {
                 const fb.Int64Reader().vTableGet(buffer, rootOffset, 12, 0));
 
           return object;
+        }),
+    HomeLayout: EntityDefinition<HomeLayout>(
+        model: _entities[8],
+        toOneRelations: (HomeLayout object) => [],
+        toManyRelations: (HomeLayout object) => {},
+        getId: (HomeLayout object) => object.id,
+        setId: (HomeLayout object, int id) {
+          object.id = id;
+        },
+        objectToFB: (HomeLayout object, fb.Builder fbb) {
+          final dbBigSourceOffset = fbb.writeString(object.dbBigSource);
+          final dbSmallSourcesOffset = fbb.writeList(object.dbSmallSources
+              .map(fbb.writeString)
+              .toList(growable: false));
+          fbb.startTable(5);
+          fbb.addInt64(0, object.id);
+          fbb.addBool(1, object.showBigSource);
+          fbb.addOffset(2, dbBigSourceOffset);
+          fbb.addOffset(3, dbSmallSourcesOffset);
+          fbb.finish(fbb.endTable());
+          return object.id;
+        },
+        objectFromFB: (Store store, ByteData fbData) {
+          final buffer = fb.BufferContext(fbData);
+          final rootOffset = buffer.derefObject(0);
+
+          final object = HomeLayout()
+            ..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0)
+            ..showBigSource =
+                const fb.BoolReader().vTableGet(buffer, rootOffset, 6, false)
+            ..dbBigSource = const fb.StringReader(asciiOptimization: true)
+                .vTableGet(buffer, rootOffset, 8, '')
+            ..dbSmallSources = const fb.ListReader<String>(
+                    fb.StringReader(asciiOptimization: true),
+                    lazy: false)
+                .vTableGet(buffer, rootOffset, 10, []);
+
+          return object;
         })
   };
 
@@ -902,4 +970,23 @@ class HistoryVideoCache_ {
   /// see [HistoryVideoCache.thumbnail]
   static final thumbnail =
       QueryStringProperty<HistoryVideoCache>(_entities[7].properties[5]);
+}
+
+/// [HomeLayout] entity fields to define ObjectBox queries.
+class HomeLayout_ {
+  /// see [HomeLayout.id]
+  static final id =
+      QueryIntegerProperty<HomeLayout>(_entities[8].properties[0]);
+
+  /// see [HomeLayout.showBigSource]
+  static final showBigSource =
+      QueryBooleanProperty<HomeLayout>(_entities[8].properties[1]);
+
+  /// see [HomeLayout.dbBigSource]
+  static final dbBigSource =
+      QueryStringProperty<HomeLayout>(_entities[8].properties[2]);
+
+  /// see [HomeLayout.dbSmallSources]
+  static final dbSmallSources =
+      QueryStringVectorProperty<HomeLayout>(_entities[8].properties[3]);
 }

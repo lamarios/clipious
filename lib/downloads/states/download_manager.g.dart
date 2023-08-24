@@ -7,9 +7,6 @@ part of 'download_manager.dart';
 // **************************************************************************
 
 abstract class _$DownloadManagerStateCWProxy {
-  DownloadManagerState animateToController(
-      AnimateToController animateToController);
-
   DownloadManagerState videos(List<DownloadedVideo> videos);
 
   DownloadManagerState downloadProgresses(
@@ -22,7 +19,6 @@ abstract class _$DownloadManagerStateCWProxy {
   /// DownloadManagerState(...).copyWith(id: 12, name: "My name")
   /// ````
   DownloadManagerState call({
-    AnimateToController? animateToController,
     List<DownloadedVideo>? videos,
     Map<String, DownloadProgress>? downloadProgresses,
   });
@@ -34,11 +30,6 @@ class _$DownloadManagerStateCWProxyImpl
   const _$DownloadManagerStateCWProxyImpl(this._value);
 
   final DownloadManagerState _value;
-
-  @override
-  DownloadManagerState animateToController(
-          AnimateToController animateToController) =>
-      this(animateToController: animateToController);
 
   @override
   DownloadManagerState videos(List<DownloadedVideo> videos) =>
@@ -58,16 +49,10 @@ class _$DownloadManagerStateCWProxyImpl
   /// DownloadManagerState(...).copyWith(id: 12, name: "My name")
   /// ````
   DownloadManagerState call({
-    Object? animateToController = const $CopyWithPlaceholder(),
     Object? videos = const $CopyWithPlaceholder(),
     Object? downloadProgresses = const $CopyWithPlaceholder(),
   }) {
     return DownloadManagerState._(
-      animateToController == const $CopyWithPlaceholder() ||
-              animateToController == null
-          ? _value.animateToController
-          // ignore: cast_nullable_to_non_nullable
-          : animateToController as AnimateToController,
       videos == const $CopyWithPlaceholder() || videos == null
           ? _value.videos
           // ignore: cast_nullable_to_non_nullable

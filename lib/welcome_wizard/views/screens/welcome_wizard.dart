@@ -60,7 +60,7 @@ class WelcomeWizard extends StatelessWidget {
                           onPressed: server != null
                               ? () {
                                   navigatorKey.currentState
-                                      ?.push(MaterialPageRoute(
+                                      ?.pushReplacement(MaterialPageRoute(
                                         builder: (context) => const Home(),
                                       ))
                                       .then((value) => cubit.getSelectedServer());

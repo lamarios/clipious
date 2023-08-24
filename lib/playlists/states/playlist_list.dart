@@ -11,9 +11,6 @@ part 'playlist_list.g.dart';
 
 const couldNotGetPlaylits = 'could-not-get-playlists';
 
-const String userPlayListTag = 'user-playlists';
-const String searchPlayListTag = 'search-playlists';
-
 class PlaylistListCubit extends Cubit<PlaylistListState> {
   PlaylistListCubit(super.initialState) {
     onReady();

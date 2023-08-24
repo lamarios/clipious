@@ -26,7 +26,6 @@ class SubscriptionsState extends State<Subscriptions> {
           : VideoList(
               animateDownload: true,
               paginatedVideoList: SubscriptionVideoList(),
-              source: VideoListSource.subscriptions,
             ),
     );
   }

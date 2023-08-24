@@ -79,21 +79,18 @@ class ChannelView extends StatelessWidget {
                         key: const ValueKey('videos'),
                         channel: _.channel!,
                         getVideos: service.getChannelVideos,
-                        source: VideoListSource.channelVideos,
                       ),
                     if (!_.loading)
                       ChannelVideosView(
                         key: const ValueKey('shorts'),
                         channel: _.channel!,
                         getVideos: service.getChannelShorts,
-                        source: VideoListSource.channelShorts,
                       ),
                     if (!_.loading)
                       ChannelVideosView(
                         key: const ValueKey('streams'),
                         channel: _.channel!,
                         getVideos: service.getChannelStreams,
-                        source: VideoListSource.channelStreams,
                       ),
                     if (!_.loading) ChannelPlayListsView(key: const ValueKey('playlists'), channelId: _.channel!.authorId, canDeleteVideos: false)
                   ][_.selectedIndex],

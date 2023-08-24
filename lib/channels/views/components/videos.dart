@@ -12,9 +12,8 @@ import '../../models/channel.dart';
 class ChannelVideosView extends StatelessWidget {
   final Channel channel;
   final Future<VideosWithContinuation> Function(String channelId, String? continuation) getVideos;
-  final VideoListSource source;
 
-  const ChannelVideosView({super.key, required this.channel, required this.getVideos, required this.source});
+  const ChannelVideosView({super.key, required this.channel, required this.getVideos});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +23,6 @@ class ChannelVideosView extends StatelessWidget {
       child: VideoList(
         key: const ValueKey('channel-videos'),
         paginatedVideoList: ContinuationList<VideoInList>((continuation) => getVideos(channel.authorId, continuation)),
-        source: source,
         // tags: 'channel-video-list-${(key as ValueKey<String>).value}'
       ),
     );

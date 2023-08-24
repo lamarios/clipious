@@ -19,7 +19,6 @@ class AddToPlaylistList extends StatelessWidget {
       children: [
         Expanded(
             child: PlaylistList(
-          tag: userPlayListTag,
           canDeleteVideos: canDeleteVideos,
           paginatedList: SingleEndpointList(service.getUserPlaylists),
         ))

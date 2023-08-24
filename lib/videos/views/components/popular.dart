@@ -21,7 +21,6 @@ class Popular extends StatelessWidget {
           : VideoList(
               animateDownload: true,
               paginatedVideoList: SingleEndpointList(service.getPopular),
-              source: VideoListSource.popular,
             ),
     );
   }

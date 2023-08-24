@@ -15,21 +15,18 @@ import 'package:invidious/channels/views/screens/channel.dart';
 import 'package:invidious/downloads/states/download_manager.dart';
 import 'package:invidious/downloads/views/components/download_app_bar_button.dart';
 import 'package:invidious/globals.dart';
+import 'package:invidious/home/models/db/home_layout.dart';
+import 'package:invidious/home/views/screens/edit_layout.dart';
 import 'package:invidious/httpOverrides.dart';
 import 'package:invidious/mediaHander.dart';
 import 'package:invidious/player/states/player.dart';
 import 'package:invidious/player/views/components/mini_player_aware.dart';
 import 'package:invidious/player/views/components/player.dart';
-import 'package:invidious/playlists/views/components/add_to_playlist_list.dart';
 import 'package:invidious/search/views/screens/search.dart';
 import 'package:invidious/settings/states/settings.dart';
 import 'package:invidious/settings/views/screens/settings.dart';
 import 'package:invidious/subscription_management/view/screens/manage_subscriptions.dart';
 import 'package:invidious/utils.dart';
-import 'package:invidious/videos/views/components/history.dart';
-import 'package:invidious/videos/views/components/popular.dart';
-import 'package:invidious/videos/views/components/subscriptions.dart';
-import 'package:invidious/videos/views/components/trending.dart';
 import 'package:invidious/videos/views/screens/video.dart';
 import 'package:invidious/welcome_wizard/views/screens/welcome_wizard.dart';
 import 'package:invidious/welcome_wizard/views/tv/screens/welcome_wizard.dart';
@@ -218,6 +215,13 @@ class MyApp extends StatelessWidget {
                                             settings: ROUTE_CHANNEL,
                                           );
                                         }
+                                        break;
+                                      case PATH_LAYOUT_EDITOR:
+                                        return MaterialPageRoute(
+                                          builder: (context) => const EditHomeLayout(),
+                                          settings: ROUTE_CHANNEL,
+                                        );
+                                        break;
                                     }
                                   }),
                             ),
@@ -246,6 +250,11 @@ class _HomeState extends State<Home> with AfterLayoutMixin {
     navigatorKey.currentState?.pushNamed(PATH_MANAGE_SUBS);
   }
 
+  openLayoutEditor(BuildContext context) {
+    var app = context.read<AppCubit>();
+    navigatorKey.currentState?.pushNamed(PATH_LAYOUT_EDITOR).then((value) => app.updateLayout());
+  }
+
   @override
   void initState() {
     super.initState();
@@ -270,42 +279,67 @@ class _HomeState extends State<Home> with AfterLayoutMixin {
   Widget build(BuildContext context) {
     ColorScheme colorScheme = Theme.of(context).colorScheme;
     var locals = AppLocalizations.of(context)!;
-    List<String> navigationLabels = [locals.popular, locals.trending, locals.subscriptions, locals.playlists, locals.history];
 
     return BlocBuilder<AppCubit, AppState>(buildWhen: (previous, current) {
       return previous.selectedIndex != current.selectedIndex || previous.server != current.server;
     }, builder: (context, _) {
       var app = context.read<AppCubit>();
+      var settings = context.watch<SettingsCubit>().state;
 
-      var navigationWidgets = <Widget>[
-        NavigationDestination(icon: const Icon(Icons.local_fire_department), label: navigationLabels[0]),
-        NavigationDestination(icon: const Icon(Icons.trending_up), label: navigationLabels[1]),
-      ];
-      if (app.isLoggedIn) {
-        navigationWidgets.add(NavigationDestination(icon: const Icon(Icons.subscriptions), label: navigationLabels[2]));
-        navigationWidgets.add(NavigationDestination(icon: const Icon(Icons.playlist_play), label: navigationLabels[3]));
-        navigationWidgets.add(NavigationDestination(icon: const Icon(Icons.history), label: navigationLabels[4]));
+      // var navigationWidgets = <Widget>[
+      //   NavigationDestination(icon: const Icon(Icons.home), label: navigationLabels[0]),
+      //   NavigationDestination(icon: const Icon(Icons.trending_up), label: navigationLabels[1]),
+      // ];
+      // if (app.isLoggedIn) {
+      //   navigationWidgets.add(NavigationDestination(icon: const Icon(Icons.subscriptions), label: navigationLabels[2]));
+      //   navigationWidgets.add(NavigationDestination(icon: const Icon(Icons.playlist_play), label: navigationLabels[3]));
+      //   navigationWidgets.add(NavigationDestination(icon: const Icon(Icons.history), label: navigationLabels[4]));
+      // }
+      var allowedPages = settings.appLayout.where((element) => element.isPermitted(context)).toList();
+      var navigationWidgets = allowedPages.map((e) => e.getBottomBarNavigationWidget(context)).toList();
+
+      var selectedIndex = _.selectedIndex;
+      if (selectedIndex >= allowedPages.length) {
+        selectedIndex = 0;
       }
+
+      var selectedPage = allowedPages[selectedIndex];
+
       return Scaffold(
           key: ValueKey(_.server?.url),
           // so we rebuild the view if the server changes
           backgroundColor: colorScheme.background,
-          bottomNavigationBar: NavigationBar(
-            backgroundColor: colorScheme.background,
-            labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
-            elevation: 0,
-            onDestinationSelected: app.selectIndex,
-            selectedIndex: _.selectedIndex,
-            destinations: navigationWidgets,
-          ),
+          bottomNavigationBar: allowedPages.length >= 2
+              ? NavigationBar(
+                  backgroundColor: colorScheme.background,
+                  labelBehavior: settings.navigationBarLabelBehavior,
+                  elevation: 0,
+                  onDestinationSelected: app.selectIndex,
+                  selectedIndex: selectedIndex,
+                  destinations: navigationWidgets,
+                )
+              : null,
           appBar: AppBar(
             systemOverlayStyle: getUiOverlayStyle(context),
-            title: Text(navigationLabels[_.selectedIndex]),
+            title: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(selectedPage.getLabel(locals)),
+                if (selectedPage == HomeDataSource.home)
+                  IconButton(
+                      iconSize: 15,
+                      onPressed: () => openLayoutEditor(context),
+                      icon: Icon(
+                        Icons.edit,
+                        color: colorScheme.secondary,
+                      ))
+              ],
+            ),
             scrolledUnderElevation: 0,
             // backgroundColor: Colors.pink,
             backgroundColor: colorScheme.background,
             actions: [
-              _.selectedIndex == 2 ? IconButton(onPressed: () => openSubscriptionManagement(context), icon: const Icon(Icons.checklist)) : const SizedBox.shrink(),
+              selectedPage == HomeDataSource.subscription ? IconButton(onPressed: () => openSubscriptionManagement(context), icon: const Icon(Icons.checklist)) : const SizedBox.shrink(),
               const AppBarDownloadButton(),
               IconButton(
                 onPressed: () {
@@ -323,31 +357,40 @@ class _HomeState extends State<Home> with AfterLayoutMixin {
           body: SafeArea(
               bottom: false,
               child: Stack(children: [
-                AnimatedSwitcher(
-                  switchInCurve: Curves.easeInOutQuad,
-                  switchOutCurve: Curves.easeInOutQuad,
-                  transitionBuilder: (Widget child, Animation<double> animation) {
-                    return FadeTransition(opacity: animation, child: child);
-                  },
-                  duration: animationDuration,
-                  child: <Widget>[
-                    const Popular(
-                      key: ValueKey(0),
-                    ),
-                    const Trending(
-                      key: ValueKey(1),
-                    ),
-                    const Subscriptions(
-                      key: ValueKey(2),
-                    ),
-                    const AddToPlaylistList(
-                      key: ValueKey(3),
-                      canDeleteVideos: true,
-                    ),
-                    const HistoryView(
-                      key: ValueKey(4),
-                    ),
-                  ][_.selectedIndex],
+                Positioned(
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  child: AnimatedSwitcher(
+                    switchInCurve: Curves.easeInOutQuad,
+                    switchOutCurve: Curves.easeInOutQuad,
+                    transitionBuilder: (Widget child, Animation<double> animation) {
+                      return FadeTransition(opacity: animation, child: child);
+                    },
+                    duration: animationDuration,
+                    child: Container(key: ValueKey(selectedPage), child: selectedPage.build(context, false)),
+/*
+                    child: <Widget>[
+                      const HomeView(
+                        key: ValueKey(0),
+                      ),
+                      const Trending(
+                        key: ValueKey(1),
+                      ),
+                      const Subscriptions(
+                        key: ValueKey(2),
+                      ),
+                      const AddToPlaylistList(
+                        key: ValueKey(3),
+                        canDeleteVideos: true,
+                      ),
+                      const HistoryView(
+                        key: ValueKey(4),
+                      ),
+                    ][_.selectedIndex],
+*/
+                  ),
                 )
               ])));
     });
