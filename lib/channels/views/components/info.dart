@@ -84,7 +84,7 @@ class ChannelInfo extends StatelessWidget {
                 )),
           ),
           Container(
-            padding: const EdgeInsets.only(top: 200, left: 8, right: 8),
+            padding: const EdgeInsets.only(top: 200, left: 16, right: 16),
             decoration: BoxDecoration(
                 gradient: LinearGradient(
                     begin: Alignment(0, Alignment.topCenter.y + 0.033), end: Alignment(0, Alignment.topCenter.y + 0.045), colors: [colors.background.withOpacity(0), colors.background])),

@@ -9,7 +9,7 @@ import 'package:invidious/home/states/home.dart';
 import '../../../main.dart';
 import '../../../search/views/screens/search.dart';
 
-const double smallVideoViewHeight = 120;
+const double smallVideoViewHeight = 140;
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -38,12 +38,9 @@ class HomeView extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 8.0),
-                    child: Text(
-                      e.getLabel(locals),
-                      style: textTheme.titleSmall?.copyWith(color: colors.secondary),
-                    ),
+                  Text(
+                    e.getLabel(locals),
+                    style: textTheme.titleSmall?.copyWith(color: colors.secondary),
                   ),
                   e.build(context, true)
                 ],
@@ -67,12 +64,14 @@ class HomeView extends StatelessWidget {
 
         return NotificationListener(
           onNotification: (notificationInfo) {
-            if (notificationInfo is ScrollUpdateNotification) {
+            if (notificationInfo is ScrollUpdateNotification && (notificationInfo.metrics.axisDirection == AxisDirection.down || notificationInfo.metrics.axisDirection == AxisDirection.up)) {
               home.setScroll(notificationInfo.metrics.pixels > 100);
             }
             return true;
           },
           child: Container(
+              // only left because we don't want to cut horizontal scrolling lists
+              padding: const EdgeInsets.only(left: innerHorizontalPadding),
               color: colors.background,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -80,6 +79,9 @@ class HomeView extends StatelessWidget {
                 children: [
                   AnimatedCrossFade(
                     crossFadeState: scrolled ? CrossFadeState.showSecond : CrossFadeState.showFirst,
+                    firstCurve: Curves.easeInOutQuad,
+                    secondCurve: Curves.easeInOutQuad,
+                    sizeCurve: Curves.easeInOutQuad,
                     duration: animationDuration,
                     firstChild: Column(mainAxisSize: MainAxisSize.min, children: getSmallSources(context, layout)),
                     secondChild: const Row(
@@ -88,17 +90,20 @@ class HomeView extends StatelessWidget {
                       ],
                     ),
                   ),
-                  Padding(
-                      padding: const EdgeInsets.only(left: 8.0),
-                      child: Row(
-                        children: [
-                          Text(
-                            layout.bigSource.getLabel(locals),
-                            style: textTheme.titleMedium?.copyWith(color: colors.secondary),
-                          ),
-                        ],
-                      )),
-                  Expanded(key: ValueKey(layout.bigSource), child: layout.bigSource.build(context, false))
+                  Row(
+                    children: [
+                      Text(
+                        layout.bigSource.getLabel(locals),
+                        style: textTheme.titleMedium?.copyWith(color: colors.secondary),
+                      ),
+                    ],
+                  ),
+                  Expanded(
+                      key: ValueKey(layout.bigSource),
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: innerHorizontalPadding),
+                        child: layout.bigSource.build(context, false),
+                      ))
                 ],
               )),
         );

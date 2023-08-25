@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:invidious/globals.dart';
 import 'package:invidious/player/states/player.dart';
 import 'package:invidious/player/views/components/video_queue.dart';
 import 'package:invidious/utils.dart';
@@ -35,7 +36,7 @@ class ExpandedPlayer {
                 visible: !controller.isMini,
                 child: Expanded(
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    padding: const EdgeInsets.symmetric(horizontal: innerHorizontalPadding),
                     child: Container(
                       constraints: BoxConstraints(maxWidth: tabletMaxVideoWidth),
                       child: Builder(builder: (context) {

@@ -165,7 +165,7 @@ class VideoView extends StatelessWidget {
               body: SafeArea(
                 bottom: false,
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 8.0, right: 8, top: 8),
+                  padding: const EdgeInsets.only(left: innerHorizontalPadding, right: innerHorizontalPadding, top: 8),
                   child: Container(
                     color: colorScheme.background,
                     width: double.infinity,
@@ -177,24 +177,21 @@ class VideoView extends StatelessWidget {
                                 alignment: Alignment.center,
                                 child: Text(_.error == coulnotLoadVideos ? locals.couldntLoadVideo : _.error),
                               )
-                            : Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                                child: show3Navigation
-                                    ? _.loadingVideo
-                                        ? const VideoPlaceHolder()
-                                        : VideoInnerView(
-                                            video: _.video!,
-                                            selectedIndex: _.selectedIndex,
-                                            playNow: playNow,
-                                            videoController: _,
-                                          )
-                                    : VideoTabletInnerView(
+                            : show3Navigation
+                                ? _.loadingVideo
+                                    ? const VideoPlaceHolder()
+                                    : VideoInnerView(
                                         video: _.video!,
-                                        playNow: playNow,
                                         selectedIndex: _.selectedIndex,
+                                        playNow: playNow,
                                         videoController: _,
-                                      ),
-                              )),
+                                      )
+                                : VideoTabletInnerView(
+                                    video: _.video!,
+                                    playNow: playNow,
+                                    selectedIndex: _.selectedIndex,
+                                    videoController: _,
+                                  )),
                   ),
                 ),
               ),

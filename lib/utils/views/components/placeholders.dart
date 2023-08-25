@@ -143,10 +143,10 @@ class CompactVideoPlaceHolder extends StatelessWidget {
   Widget build(BuildContext context) {
     var colors = Theme.of(context).colorScheme;
     return AnimatedPlaceHolder(
-      child: SizedBox(
-        height: 70,
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
+      child: Padding(
+        padding: const EdgeInsets.only(bottom: 16.0),
+        child: SizedBox(
+          height: 70,
           child: Row(
             children: [
               AspectRatio(

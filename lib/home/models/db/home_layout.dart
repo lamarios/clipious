@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/app/states/app.dart';
-import 'package:invidious/extensions.dart';
+import 'package:invidious/videos/models/video_in_list.dart';
 import 'package:objectbox/objectbox.dart';
 
 import '../../../downloads/states/download_manager.dart';
@@ -11,8 +11,8 @@ import '../../../globals.dart';
 import '../../../playlists/views/components/playlist_list.dart';
 import '../../../settings/states/settings.dart';
 import '../../../utils/models/paginatedList.dart';
+import '../../../videos/models/db/history_video_cache.dart';
 import '../../../videos/views/components/history.dart';
-import '../../../videos/views/components/video_in_list.dart';
 import '../../../videos/views/components/video_list.dart';
 import '../../views/components/home.dart';
 
@@ -26,7 +26,7 @@ enum HomeDataSource {
   history,
   playlist,
   downloads,
-  searchHistory(big: false);
+  searchHistory;
 
   final bool small;
   final bool big;
@@ -103,26 +103,15 @@ enum HomeDataSource {
           )),
       (HomeDataSource.downloads) => SizedBox(
           height: small ? smallVideoViewHeight : null,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Builder(builder: (context) {
-              var videos = context.select((DownloadManagerCubit value) => value.state.videos);
-              return ListView(
-                scrollDirection: small ? Axis.horizontal : Axis.vertical,
-                children: videos
-                    .where((e) => e.downloadComplete && !e.downloadFailed) // we keep only downloaded videos
-                    .sortByReversed((e) => e.id)
-                    .map((e) => AspectRatio(
-                          aspectRatio: smallHistoryAspectRatio,
-                          child: VideoListItem(
-                            offlineVideo: e,
-                            small: small,
-                          ),
-                        ))
-                    .toList(),
-              );
-            }),
-          )),
+          child: Builder(builder: (context) {
+            var videos = context.select((DownloadManagerCubit value) => value.state.videos).reversed.toList();
+            return VideoList(
+              scrollDirection: small ? Axis.horizontal : Axis.vertical,
+              small: small,
+              animateDownload: true,
+              paginatedVideoList: FixedItemList(videos),
+            );
+          })),
       (HomeDataSource.searchHistory) => SizedBox(
           height: small ? 40 : null,
           child: ListView(
@@ -130,16 +119,27 @@ enum HomeDataSource {
             children: db
                 .getSearchHistory()
                 .map((e) => Padding(
-                      padding: const EdgeInsets.all(8),
+                      padding: const EdgeInsets.symmetric(vertical: 8),
                       child: FilledButton.tonal(onPressed: () => HomeView.openSearch(context, e), child: Text(e)),
                     ))
                 .toList(),
           )),
       (HomeDataSource.history) => SizedBox(
           height: small ? smallVideoViewHeight : null,
-          child: HistoryView(
-            small: small,
-          ),
+          child: small
+              ? VideoList(
+                  scrollDirection: small ? Axis.horizontal : Axis.vertical,
+                  small: small,
+                  animateDownload: true,
+                  paginatedVideoList: PageBasedPaginatedList<VideoInList>(
+                      getItemsFunc: (page, maxResults) =>
+                          // we get the data for each video
+                          service
+                              .getUserHistory(page, maxResults)
+                              .then((value) => Future.wait(value.map((e) async => (await HistoryVideoCache.fromVideoIdToVideo(e)).toBaseVideo().toVideoInList()).toList())),
+                      maxResults: 20),
+                )
+              : const HistoryView(),
         ),
       (HomeDataSource.home) => small ? const SizedBox.shrink() : const HomeView(),
       (_) => const SizedBox.shrink()

@@ -14,9 +14,8 @@ import '../../states/history.dart';
 
 class HistoryVideoView extends StatelessWidget {
   final String videoId;
-  final bool small;
 
-  const HistoryVideoView({super.key, required this.videoId, this.small = false});
+  const HistoryVideoView({super.key, required this.videoId});
 
   @override
   Widget build(BuildContext context) {
@@ -24,34 +23,13 @@ class HistoryVideoView extends StatelessWidget {
       create: (context) => HistoryItemCubit(HistoryItemState(videoId: videoId)),
       child: BlocBuilder<HistoryItemCubit, HistoryItemState>(builder: (context, _) {
         return AnimatedCrossFade(
-          firstChild: small
-              ? const AspectRatio(
-                  aspectRatio: smallVideoAspectRatio,
-                  child: VideoListItemPlaceHolder(
-                    small: true,
-                  ))
-              : const CompactVideoPlaceHolder(),
+          firstChild: const CompactVideoPlaceHolder(),
           secondChild: _.cachedVid != null
-              ? small
-                  ? AspectRatio(
-                      aspectRatio: smallHistoryAspectRatio,
-                      child: VideoListItem(
-                        small: true,
-                        video: _.cachedVid?.toBaseVideo().toVideoInList(),
-                      ),
-                    )
-                  : CompactVideo(
-                      onTap: () => navigatorKey.currentState?.pushNamed(PATH_VIDEO, arguments: VideoRouteArguments(videoId: _.cachedVid!.videoId)),
-                      video: _.cachedVid?.toBaseVideo(),
-                    )
-              : small
-                  ? const AspectRatio(
-                      aspectRatio: smallHistoryAspectRatio,
-                      child: VideoListItemPlaceHolder(
-                        small: true,
-                      ),
-                    )
-                  : const CompactVideoPlaceHolder(),
+              ? CompactVideo(
+                  onTap: () => navigatorKey.currentState?.pushNamed(PATH_VIDEO, arguments: VideoRouteArguments(videoId: _.cachedVid!.videoId)),
+                  video: _.cachedVid?.toBaseVideo(),
+                )
+              : const CompactVideoPlaceHolder(),
           crossFadeState: _.loading ? CrossFadeState.showFirst : CrossFadeState.showSecond,
           duration: animationDuration,
         );

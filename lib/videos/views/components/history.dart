@@ -14,9 +14,7 @@ import '../../states/history.dart';
 const smallHistoryAspectRatio = 1.15;
 
 class HistoryView extends StatelessWidget {
-  final bool small;
-
-  const HistoryView({super.key, this.small = false});
+  const HistoryView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -48,44 +46,33 @@ class HistoryView extends StatelessWidget {
                         ),
                       )
                     : Padding(
-                        padding: EdgeInsets.all(small ? 12.0 : 0),
+                        padding: EdgeInsets.all(0),
                         child: RefreshIndicator(
-                          onRefresh: () => small ? null : listcubit.refreshItems(),
+                          onRefresh: () => listcubit.refreshItems(),
                           child: ListView.builder(
                             controller: _.scrollController,
-                            scrollDirection: small ? Axis.horizontal : Axis.vertical,
+                            scrollDirection: Axis.vertical,
                             itemCount: _.items.length + (_.loading ? 5 : 0),
                             itemBuilder: (context, index) => Padding(
-                              padding: EdgeInsets.only(bottom: !small && index == _.items.length - 1 ? 70.0 : 0),
+                              padding: EdgeInsets.only(bottom: index == _.items.length - 1 ? 70.0 : 0),
                               child: index >= _.items.length
-                                  ? small
-                                      ? const AspectRatio(aspectRatio: smallHistoryAspectRatio, child: VideoListItemPlaceHolder(small: true))
-                                      : const CompactVideoPlaceHolder()
-                                  : small
-                                      ? HistoryVideoView(
-                                          key: ValueKey(_.items[index]),
-                                          videoId: _.items[index],
-                                          small: small,
+                                  ? const CompactVideoPlaceHolder()
+                                  : SwipeActionCell(
+                                      key: ValueKey(_.items[index]),
+                                      trailingActions: [
+                                        SwipeAction(
+                                          performsFirstActionWithFullSwipe: true,
+                                          icon: const Icon(Icons.delete, color: Colors.white),
+                                          onTap: (handler) async {
+                                            await handler(true);
+                                            historyCubit.removeFromHistory(_.items[index]);
+                                          },
                                         )
-                                      : SwipeActionCell(
-                                          key: ValueKey(_.items[index]),
-                                          trailingActions: small
-                                              ? []
-                                              : [
-                                                  SwipeAction(
-                                                    performsFirstActionWithFullSwipe: true,
-                                                    icon: const Icon(Icons.delete, color: Colors.white),
-                                                    onTap: (handler) async {
-                                                      await handler(true);
-                                                      historyCubit.removeFromHistory(_.items[index]);
-                                                    },
-                                                  )
-                                                ],
-                                          child: HistoryVideoView(
-                                            key: ValueKey(_.items[index]),
-                                            videoId: _.items[index],
-                                            small: small,
-                                          )),
+                                      ],
+                                      child: HistoryVideoView(
+                                        key: ValueKey(_.items[index]),
+                                        videoId: _.items[index],
+                                      )),
                             ),
                           ),
                         ),
@@ -95,16 +82,15 @@ class HistoryView extends StatelessWidget {
                     minHeight: 1,
                   )
                 : const SizedBox.shrink(),
-            if (!small)
-              Positioned(
-                  bottom: 15,
-                  right: 15,
-                  child: FloatingActionButton(
-                    onPressed: () {
-                      okCancelDialog(context, locals.clearHistoryQuestion, locals.clearHistoryQuestionExplanation, () => historyCubit.clearHistory());
-                    },
-                    child: const Icon(Icons.delete),
-                  ))
+            Positioned(
+                bottom: 15,
+                right: 15,
+                child: FloatingActionButton(
+                  onPressed: () {
+                    okCancelDialog(context, locals.clearHistoryQuestion, locals.clearHistoryQuestionExplanation, () => historyCubit.clearHistory());
+                  },
+                  child: const Icon(Icons.delete),
+                ))
           ],
         );
       }),

@@ -37,65 +37,69 @@ class EditHomeLayout extends StatelessWidget {
       ),
       body: SafeArea(
         bottom: false,
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Text(locals.layoutEditorExplanation, style: textStyle.bodySmall),
-            ),
-            Expanded(
-                child: Container(
-              width: double.infinity,
-              padding: const EdgeInsets.all(8),
-              margin: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: colors.secondaryContainer, width: 2),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: innerHorizontalPadding),
+          child: Column(
+            children: [
+              Text(
+                locals.layoutEditorExplanation,
+                style: textStyle.bodySmall,
+                textAlign: TextAlign.justify,
               ),
-              child: BlocProvider(
-                create: (context) => EditLayoutCubit(db.getHomeLayout()),
-                child: BlocBuilder<EditLayoutCubit, HomeLayout>(builder: (context, layout) {
-                  var editLayout = context.read<EditLayoutCubit>();
+              Expanded(
+                  child: Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(8),
+                margin: const EdgeInsets.symmetric(vertical: 16),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(color: colors.secondaryContainer, width: 2),
+                ),
+                child: BlocProvider(
+                  create: (context) => EditLayoutCubit(db.getHomeLayout()),
+                  child: BlocBuilder<EditLayoutCubit, HomeLayout>(builder: (context, layout) {
+                    var editLayout = context.read<EditLayoutCubit>();
 
-                  return Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      ...buildSmallSources(context, layout, editLayout),
-                      if (layout.smallSources.length < maxSmallSources)
-                        SizedBox(
-                            height: 20,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                FilledButton.tonal(
-                                    onPressed: editLayout.addSmallSource,
-                                    child: Text(
-                                      locals.layoutEditorAddVideoSource,
-                                      style: textStyle.bodySmall,
-                                    )),
-                              ],
-                            )),
-                      SourceSwitcher(
-                        onChange: editLayout.editBigSource,
-                        source: layout.bigSource,
-                        textStyle: textStyle.bodyLarge,
-                      ),
-                      Expanded(
-                          child: ListView(
-                        children: repeatWidget(() => const Padding(
-                              padding: EdgeInsets.symmetric(vertical: 8.0),
-                              child: VideoListItemPlaceHolder(
-                                animate: false,
-                              ),
-                            )),
-                      ))
-                    ],
-                  );
-                }),
-              ),
-            ))
-          ],
+                    return Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        ...buildSmallSources(context, layout, editLayout),
+                        if (layout.smallSources.length < maxSmallSources)
+                          SizedBox(
+                              height: 20,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  FilledButton.tonal(
+                                      onPressed: editLayout.addSmallSource,
+                                      child: Text(
+                                        locals.layoutEditorAddVideoSource,
+                                        style: textStyle.bodySmall,
+                                      )),
+                                ],
+                              )),
+                        SourceSwitcher(
+                          onChange: editLayout.editBigSource,
+                          source: layout.bigSource,
+                          textStyle: textStyle.bodyLarge,
+                        ),
+                        Expanded(
+                            child: ListView(
+                          children: repeatWidget(() => const Padding(
+                                padding: EdgeInsets.symmetric(vertical: 8.0),
+                                child: VideoListItemPlaceHolder(
+                                  animate: false,
+                                ),
+                              )),
+                        ))
+                      ],
+                    );
+                  }),
+                ),
+              ))
+            ],
+          ),
         ),
       ),
     );

@@ -99,7 +99,7 @@ class PlaylistInList extends StatelessWidget {
             );
           } else if (small) {
             return AspectRatio(
-              aspectRatio: 1.5,
+              aspectRatio: 1.54,
               child: InkWell(
                 onTap: () => openPlayList(context),
                 child: Column(

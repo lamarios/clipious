@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:after_layout/after_layout.dart';
+import 'package:application_icon/application_icon.dart';
 import 'package:back_button_interceptor/back_button_interceptor.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/foundation.dart';
@@ -286,15 +287,6 @@ class _HomeState extends State<Home> with AfterLayoutMixin {
       var app = context.read<AppCubit>();
       var settings = context.watch<SettingsCubit>().state;
 
-      // var navigationWidgets = <Widget>[
-      //   NavigationDestination(icon: const Icon(Icons.home), label: navigationLabels[0]),
-      //   NavigationDestination(icon: const Icon(Icons.trending_up), label: navigationLabels[1]),
-      // ];
-      // if (app.isLoggedIn) {
-      //   navigationWidgets.add(NavigationDestination(icon: const Icon(Icons.subscriptions), label: navigationLabels[2]));
-      //   navigationWidgets.add(NavigationDestination(icon: const Icon(Icons.playlist_play), label: navigationLabels[3]));
-      //   navigationWidgets.add(NavigationDestination(icon: const Icon(Icons.history), label: navigationLabels[4]));
-      // }
       var allowedPages = settings.appLayout.where((element) => element.isPermitted(context)).toList();
       var navigationWidgets = allowedPages.map((e) => e.getBottomBarNavigationWidget(context)).toList();
 
@@ -303,7 +295,10 @@ class _HomeState extends State<Home> with AfterLayoutMixin {
         selectedIndex = 0;
       }
 
-      var selectedPage = allowedPages[selectedIndex];
+      HomeDataSource? selectedPage;
+      if (selectedIndex < allowedPages.length) {
+        selectedPage = allowedPages[selectedIndex];
+      }
 
       return Scaffold(
           key: ValueKey(_.server?.url),
@@ -324,7 +319,7 @@ class _HomeState extends State<Home> with AfterLayoutMixin {
             title: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text(selectedPage.getLabel(locals)),
+                Text(selectedPage?.getLabel(locals) ?? 'Clipious'),
                 if (selectedPage == HomeDataSource.home)
                   IconButton(
                       iconSize: 15,
@@ -369,7 +364,11 @@ class _HomeState extends State<Home> with AfterLayoutMixin {
                       return FadeTransition(opacity: animation, child: child);
                     },
                     duration: animationDuration,
-                    child: Container(key: ValueKey(selectedPage), child: selectedPage.build(context, false)),
+                    child: Container(
+                        // home handles its own padding because we don't want to cut horizontal scroll lists on the right
+                        padding: EdgeInsets.symmetric(horizontal: selectedPage == HomeDataSource.home ? 0 : innerHorizontalPadding),
+                        key: ValueKey(selectedPage),
+                        child: selectedPage?.build(context, false) ?? const Opacity(opacity: 0.2, child: AppIconImage())),
 /*
                     child: <Widget>[
                       const HomeView(
