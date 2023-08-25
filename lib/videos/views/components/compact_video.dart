@@ -37,50 +37,74 @@ class CompactVideo extends StatelessWidget {
         return InkWell(
             onTap: onTap,
             child: Padding(
-              padding: const EdgeInsets.only(bottom: 16.0),
-              child: AnimatedContainer(
-                decoration: BoxDecoration(color: (highlighted ?? false) ? colors.secondaryContainer : colors.background, borderRadius: BorderRadius.circular(10)),
+              padding: const EdgeInsets.only(bottom: innerHorizontalPadding),
+              child: SizedBox(
                 height: compactVideoHeight,
-                duration: animationDuration,
-                child: Row(
+                child: Stack(
                   children: [
-                    video?.filtered ?? false
-                        ? AspectRatio(
-                            aspectRatio: 16 / 9,
-                            child: Container(
-                              decoration: BoxDecoration(color: colors.secondaryContainer, borderRadius: BorderRadius.circular(10)),
-                              child: Icon(Icons.visibility_off_outlined, color: colors.secondary.withOpacity(0.7), size: 15),
-                            ),
-                          )
-                        : video != null
-                            ? VideoThumbnailView(cacheKey: 'v-worst/${videoId}', videoId: videoId, thumbnailUrl: ImageObject.getWorstThumbnail(video?.videoThumbnails)?.url ?? '')
-                            : offlineVideo != null
-                                ? OfflineVideoThumbnail(
-                                    video: offlineVideo!,
-                                  )
-                                : const SizedBox.shrink(),
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              video?.filtered ?? false ? '**********' : title,
-                              style: TextStyle(color: colors.primary, overflow: TextOverflow.ellipsis),
-                            ),
-                            Text(
-                              author,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: textTheme.bodySmall?.copyWith(color: colors.secondary),
-                            )
-                          ],
+                    Positioned(
+                      top: 0,
+                      left: 0,
+                      right: 0,
+                      bottom: 0,
+                      child: AnimatedFractionallySizedBox(
+                        alignment: Alignment.centerLeft,
+                        duration: animationDuration * 2,
+                        widthFactor: (highlighted ?? false) ? 1 : 0,
+                        curve: Curves.easeInOutQuad,
+                        child: AnimatedContainer(
+                          decoration: BoxDecoration(color: (highlighted ?? false) ? colors.secondaryContainer : colors.background, borderRadius: BorderRadius.circular(10)),
+                          duration: animationDuration * 2,
                         ),
                       ),
                     ),
-                    ...trailing ?? []
+                    Positioned(
+                      top: 0,
+                      left: 0,
+                      right: 0,
+                      bottom: 0,
+                      child: Row(
+                        children: [
+                          video?.filtered ?? false
+                              ? AspectRatio(
+                                  aspectRatio: 16 / 9,
+                                  child: Container(
+                                    decoration: BoxDecoration(color: colors.secondaryContainer, borderRadius: BorderRadius.circular(10)),
+                                    child: Icon(Icons.visibility_off_outlined, color: colors.secondary.withOpacity(0.7), size: 15),
+                                  ),
+                                )
+                              : video != null
+                                  ? VideoThumbnailView(cacheKey: 'v-worst/${videoId}', videoId: videoId, thumbnailUrl: ImageObject.getWorstThumbnail(video?.videoThumbnails)?.url ?? '')
+                                  : offlineVideo != null
+                                      ? OfflineVideoThumbnail(
+                                          video: offlineVideo!,
+                                        )
+                                      : const SizedBox.shrink(),
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    video?.filtered ?? false ? '**********' : title,
+                                    style: TextStyle(color: colors.primary, overflow: TextOverflow.ellipsis),
+                                  ),
+                                  Text(
+                                    author,
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: textTheme.bodySmall?.copyWith(color: colors.secondary),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                          ...trailing ?? []
+                        ],
+                      ),
+                    )
                   ],
                 ),
               ),

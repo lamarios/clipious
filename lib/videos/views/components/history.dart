@@ -4,6 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_swipe_action_cell/core/cell.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/utils/states/item_list.dart';
+import 'package:invidious/utils/views/components/top_loading.dart';
 import 'package:invidious/videos/views/components/historyVideo.dart';
 
 import '../../../utils.dart';
@@ -46,7 +47,7 @@ class HistoryView extends StatelessWidget {
                         ),
                       )
                     : Padding(
-                        padding: EdgeInsets.all(0),
+                        padding: const EdgeInsets.only(top: 3),
                         child: RefreshIndicator(
                           onRefresh: () => listcubit.refreshItems(),
                           child: ListView.builder(
@@ -77,11 +78,7 @@ class HistoryView extends StatelessWidget {
                           ),
                         ),
                       ),
-            _.loading
-                ? const LinearProgressIndicator(
-                    minHeight: 1,
-                  )
-                : const SizedBox.shrink(),
+            if (_.loading) const TopListLoading(),
             Positioned(
                 bottom: 15,
                 right: 15,

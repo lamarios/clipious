@@ -7,6 +7,7 @@ import 'package:invidious/playlists/states/playlist_list.dart';
 import 'package:invidious/playlists/views/components/add_to_playlist_list.dart';
 import 'package:invidious/playlists/views/components/playlist_in_list.dart';
 import 'package:invidious/utils/models/paginatedList.dart';
+import 'package:invidious/utils/views/components/top_loading.dart';
 
 import '../../../globals.dart';
 import '../../../utils/views/components/placeholders.dart';
@@ -54,7 +55,7 @@ class PlaylistList extends StatelessWidget {
                         ),
                       ),
                     ),
-              Visibility(visible: _.loading, child: const SizedBox(height: 1, child: LinearProgressIndicator())),
+              Visibility(visible: _.loading && !small, child: const TopListLoading()),
               Visibility(visible: !small && canDeleteVideos, child: const Positioned(bottom: 15, right: 15, child: AddPlayListButton()))
             ],
           );

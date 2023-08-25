@@ -92,7 +92,7 @@ class VideoQueue extends StatelessWidget {
               return BlocConsumer<PlayerCubit, PlayerState>(
                 listenWhen: (previous, current) => previous.currentIndex != current.currentIndex,
                 listener: (context, state) {
-                  final offset = (state.currentIndex - 1) * compactVideoHeight;
+                  final offset = (state.currentIndex - 1) * (compactVideoHeight + innerHorizontalPadding);
                   bool goingDown = offset > scrollController.offset;
 
                   // if we want to go up and we're already at the top we don't do anything

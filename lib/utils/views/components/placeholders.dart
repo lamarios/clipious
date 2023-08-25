@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_fadein/flutter_fadein.dart';
+import 'package:invidious/playlists/views/components/playlist_in_list.dart';
 
 import '../../../playlists/views/components/playlist_thumbnail.dart';
 import '../../../utils.dart';
@@ -224,7 +225,7 @@ class PlaylistPlaceHolder extends StatelessWidget {
     return AnimatedPlaceHolder(
       child: small
           ? const AspectRatio(
-              aspectRatio: 1.2,
+              aspectRatio: smallPlaylistAspectRatio,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -235,14 +236,6 @@ class PlaylistPlaceHolder extends StatelessWidget {
                       child: TextPlaceHolder(
                         small: true,
                       )),
-                  SizedBox(
-                    height: 4,
-                  ),
-                  FractionallySizedBox(
-                      widthFactor: 0.4,
-                      child: TextPlaceHolder(
-                        small: true,
-                      ))
                 ],
               ),
             )

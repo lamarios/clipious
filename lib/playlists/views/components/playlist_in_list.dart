@@ -13,6 +13,8 @@ import 'package:invidious/utils.dart';
 
 import '../../states/playlist_list.dart';
 
+const smallPlaylistAspectRatio = 1.54;
+
 class PlaylistInList extends StatelessWidget {
   final Playlist playlist;
   final bool canDeleteVideos;
@@ -99,8 +101,9 @@ class PlaylistInList extends StatelessWidget {
             );
           } else if (small) {
             return AspectRatio(
-              aspectRatio: 1.54,
+              aspectRatio: smallPlaylistAspectRatio,
               child: InkWell(
+                borderRadius: BorderRadius.circular(10),
                 onTap: () => openPlayList(context),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -122,6 +125,7 @@ class PlaylistInList extends StatelessWidget {
             );
           } else {
             return InkWell(
+              borderRadius: BorderRadius.circular(10),
               onTap: () => openPlayList(context),
               child: Padding(
                 padding: const EdgeInsets.all(8.0),

@@ -4,6 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/utils.dart';
 import 'package:invidious/utils/states/item_list.dart';
 import 'package:invidious/utils/views/components/placeholders.dart';
+import 'package:invidious/utils/views/components/top_loading.dart';
 import 'package:invidious/videos/models/base_video.dart';
 import 'package:invidious/videos/models/video_in_list.dart';
 import 'package:invidious/videos/views/components/video_in_list.dart';
@@ -55,7 +56,7 @@ class VideoList<T extends IdedVideo> extends StatelessWidget {
           return Stack(
             alignment: Alignment.topCenter,
             children: [
-              Visibility(visible: _.loading, child: const SizedBox(height: 1, child: LinearProgressIndicator())),
+              if (!small && _.loading) const TopListLoading(),
               _.error != ItemListErrors.none
                   ? Container(
                       alignment: Alignment.center,
@@ -67,43 +68,46 @@ class VideoList<T extends IdedVideo> extends StatelessWidget {
                             style: small ? textTheme.labelSmall : textTheme.bodyMedium,
                           )),
                     )
-                  : RefreshIndicator(
-                      onRefresh: () => !small && _.itemList.hasRefresh() ? cubit.refreshItems() : Future.delayed(Duration.zero),
-                      child: GridView.count(
-                        crossAxisCount: gridCount,
-                        controller: _.scrollController,
-                        scrollDirection: scrollDirection,
-                        crossAxisSpacing: small ? 8 : 5,
-                        mainAxisSpacing: small ? 8 : 5,
-                        childAspectRatio: small ? smallVideoAspectRatio : getGridAspectRatio(context),
-                        children: [
-                          ...items.map((v) {
-                            VideoInList? onlineVideo;
-                            DownloadedVideo? offlineVideo;
+                  : Padding(
+                      padding: EdgeInsets.only(top: small ? 0.0 : 4.0),
+                      child: RefreshIndicator(
+                        onRefresh: () async => !small && _.itemList.hasRefresh() ? await cubit.refreshItems() : Future.delayed(Duration.zero),
+                        child: GridView.count(
+                          crossAxisCount: gridCount,
+                          controller: _.scrollController,
+                          scrollDirection: scrollDirection,
+                          crossAxisSpacing: small ? 8 : 5,
+                          mainAxisSpacing: small ? 8 : 5,
+                          childAspectRatio: small ? smallVideoAspectRatio : getGridAspectRatio(context),
+                          children: [
+                            ...items.map((v) {
+                              VideoInList? onlineVideo;
+                              DownloadedVideo? offlineVideo;
 
-                            if (v is VideoInList) {
-                              onlineVideo = v;
-                            }
+                              if (v is VideoInList) {
+                                onlineVideo = v;
+                              }
 
-                            if (v is DownloadedVideo) {
-                              offlineVideo = v;
-                            }
+                              if (v is DownloadedVideo) {
+                                offlineVideo = v;
+                              }
 
-                            return VideoListItem(
-                              small: small,
-                              key: ValueKey('${v.videoId}-${small.toString()}'),
-                              video: onlineVideo,
-                              offlineVideo: offlineVideo,
-                              animateDownload: animateDownload,
-                            );
-                          }).toList(),
-                          if (_.loading)
-                            ...repeatWidget(
-                                () => VideoListItemPlaceHolder(
-                                      small: small,
-                                    ),
-                                count: 5 * gridCount)
-                        ],
+                              return VideoListItem(
+                                small: small,
+                                key: ValueKey('${v.videoId}-${small.toString()}'),
+                                video: onlineVideo,
+                                offlineVideo: offlineVideo,
+                                animateDownload: animateDownload,
+                              );
+                            }).toList(),
+                            if (_.loading)
+                              ...repeatWidget(
+                                  () => VideoListItemPlaceHolder(
+                                        small: small,
+                                      ),
+                                  count: 5 * gridCount)
+                          ],
+                        ),
                       ),
                     )
             ],
