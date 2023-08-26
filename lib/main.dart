@@ -194,6 +194,7 @@ class MyApp extends StatelessWidget {
                           children: [
                             MiniPlayerAware(
                               child: Navigator(
+                                  observers: [MyRouteObserver()],
                                   key: navigatorKey,
                                   initialRoute: '/',
                                   onGenerateRoute: (settings) {

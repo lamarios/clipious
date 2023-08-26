@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:invidious/player/states/player.dart';
 import 'package:logging/logging.dart';
 
 const String PATH_CHANNEL = "/channel";
@@ -23,6 +25,7 @@ class MyRouteObserver extends RouteObserver<PageRoute<dynamic>> {
   var log = Logger('MyRouteObserver');
 
   stopPlayingOnPop(PageRoute<dynamic>? newRoute, PageRoute<dynamic>? poppedRoute) {
+    newRoute?.navigator?.context.read<PlayerCubit>().showMiniPlayer();
     if (newRoute != null) {
       switch (newRoute.settings) {
         case ROUTE_SETTINGS:
@@ -47,6 +50,8 @@ class MyRouteObserver extends RouteObserver<PageRoute<dynamic>> {
 
   @override
   void didPush(Route<dynamic> route, Route<dynamic>? previousRoute) {
+    log.fine("New route context: ${route.navigator?.context}");
+    route.navigator?.context.read<PlayerCubit>().showMiniPlayer();
     super.didPush(route, previousRoute);
     if (route is PageRoute) {
       if (previousRoute is PageRoute) {
