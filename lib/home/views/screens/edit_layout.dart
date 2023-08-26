@@ -82,23 +82,39 @@ class EditHomeLayout extends StatelessWidget {
                                       )),
                                 ],
                               )),
-                        SourceSwitcher(
-                          onChange: editLayout.editBigSource,
-                          source: layout.bigSource,
-                          textStyle: textStyle.bodyLarge,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            SourceSwitcher(
+                              onChange: editLayout.editBigSource,
+                              source: layout.bigSource,
+                              textStyle: textStyle.bodyLarge,
+                            ),
+                            IconButton(
+                                onPressed: editLayout.toggleShowBigSource,
+                                icon: Icon(
+                                  layout.showBigSource ? Icons.visibility : Icons.visibility_off,
+                                ))
+                          ],
                         ),
                         Expanded(
-                            child: GridView.count(
-                          crossAxisCount: getGridCount(context),
-                          crossAxisSpacing: 5,
-                          mainAxisSpacing: 5,
-                          childAspectRatio: getGridAspectRatio(context),
-                          children: repeatWidget(() => const Padding(
-                                padding: EdgeInsets.symmetric(vertical: 8.0),
-                                child: VideoListItemPlaceHolder(
-                                  animate: false,
-                                ),
-                              ), count: 10),
+                            child: AnimatedOpacity(
+                          opacity: layout.showBigSource ? 1 : 0.1,
+                          duration: animationDuration,
+                          child: GridView.count(
+                            crossAxisCount: getGridCount(context),
+                            crossAxisSpacing: 5,
+                            mainAxisSpacing: 5,
+                            childAspectRatio: getGridAspectRatio(context),
+                            children: repeatWidget(
+                                () => const Padding(
+                                      padding: EdgeInsets.symmetric(vertical: 8.0),
+                                      child: VideoListItemPlaceHolder(
+                                        animate: false,
+                                      ),
+                                    ),
+                                count: 10),
+                          ),
                         ))
                       ],
                     );
@@ -150,16 +166,18 @@ class SmallSource extends StatelessWidget {
           height: 80,
           child: ListView(
             scrollDirection: Axis.horizontal,
-            children: repeatWidget(() => const Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: SizedBox(
-                    width: 75,
-                    child: VideoListItemPlaceHolder(
-                      small: true,
-                      animate: false,
+            children: repeatWidget(
+                () => const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: SizedBox(
+                        width: 75,
+                        child: VideoListItemPlaceHolder(
+                          small: true,
+                          animate: false,
+                        ),
+                      ),
                     ),
-                  ),
-                ), count: 10),
+                count: 10),
           ),
         )
       ],

@@ -907,7 +907,7 @@
     "@layoutEditorAddVideoSource": {
         "description": "Label for button to allow user to add more video sources to the home screen"
     },
-    "layoutEditorExplanation": "You can decide what to display on your home screen, you can have up to 3 small view with horizontal video scrolling and one big source that you can hide if you want.\nThe big video source selection is a default selection that can be change if you want to browse different videos",
+    "layoutEditorExplanation": "You can decide what to display on your home screen, you can have up to 2 small view with horizontal scrolling and one big source.",
     "@layoutEditorExplanation": {
         "description": "text to explain the home layout editor"
     },

@@ -46,4 +46,10 @@ class EditLayoutCubit extends Cubit<HomeLayout> {
     state.bigSource = newSource ?? HomeDataSource.trending;
     emit(state);
   }
+
+  void toggleShowBigSource() {
+    var state = this.state.copyWith();
+    state.showBigSource = !state.showBigSource;
+    emit(state);
+  }
 }

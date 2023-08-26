@@ -1,3 +1,4 @@
+import 'package:application_icon/application_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -73,39 +74,43 @@ class HomeView extends StatelessWidget {
               // only left because we don't want to cut horizontal scrolling lists
               padding: const EdgeInsets.only(left: innerHorizontalPadding),
               color: colors.background,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  AnimatedCrossFade(
-                    crossFadeState: scrolled ? CrossFadeState.showSecond : CrossFadeState.showFirst,
-                    firstCurve: Curves.easeInOutQuad,
-                    secondCurve: Curves.easeInOutQuad,
-                    sizeCurve: Curves.easeInOutQuad,
-                    duration: animationDuration,
-                    firstChild: Column(mainAxisSize: MainAxisSize.min, children: getSmallSources(context, layout)),
-                    secondChild: const Row(
+              child: layout.smallSources.isEmpty && !layout.showBigSource
+                  ? const Opacity(opacity: 0.2, child: AppIconImage())
+                  : Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        SizedBox.shrink(),
+                        AnimatedCrossFade(
+                          crossFadeState: scrolled ? CrossFadeState.showSecond : CrossFadeState.showFirst,
+                          firstCurve: Curves.easeInOutQuad,
+                          secondCurve: Curves.easeInOutQuad,
+                          sizeCurve: Curves.easeInOutQuad,
+                          duration: animationDuration,
+                          firstChild: Column(mainAxisSize: MainAxisSize.min, children: getSmallSources(context, layout)),
+                          secondChild: const Row(
+                            children: [
+                              SizedBox.shrink(),
+                            ],
+                          ),
+                        ),
+                        if (layout.showBigSource)
+                          Row(
+                            children: [
+                              Text(
+                                layout.bigSource.getLabel(locals),
+                                style: textTheme.titleMedium?.copyWith(color: colors.secondary),
+                              ),
+                            ],
+                          ),
+                        if (layout.showBigSource)
+                          Expanded(
+                              key: ValueKey(layout.bigSource),
+                              child: Padding(
+                                padding: const EdgeInsets.only(right: innerHorizontalPadding),
+                                child: layout.bigSource.build(context, false),
+                              ))
                       ],
-                    ),
-                  ),
-                  Row(
-                    children: [
-                      Text(
-                        layout.bigSource.getLabel(locals),
-                        style: textTheme.titleMedium?.copyWith(color: colors.secondary),
-                      ),
-                    ],
-                  ),
-                  Expanded(
-                      key: ValueKey(layout.bigSource),
-                      child: Padding(
-                        padding: const EdgeInsets.only(right: innerHorizontalPadding),
-                        child: layout.bigSource.build(context, false),
-                      ))
-                ],
-              )),
+                    )),
         );
       }),
     );
