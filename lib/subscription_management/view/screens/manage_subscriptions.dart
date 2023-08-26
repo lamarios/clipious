@@ -6,7 +6,6 @@ import 'package:invidious/myRouteObserver.dart';
 import 'package:invidious/subscription_management/models/subscription.dart';
 import 'package:invidious/utils.dart';
 import 'package:invidious/utils/views/components/top_loading.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../states/manage_subscriptions.dart';
 
@@ -38,9 +37,8 @@ class ManageSubscriptions extends StatelessWidget {
                     ? Center(child: Text(locals.noChannels))
                     : Stack(
                         children: [
-                          SmartRefresher(
-                            onRefresh: cubit.refreshSubs,
-                            controller: _.refreshController,
+                          RefreshIndicator(
+                            onRefresh: () => cubit.refreshSubs(),
                             child: ListView.builder(
                               itemCount: _.subs.length,
                               itemBuilder: (context, index) {

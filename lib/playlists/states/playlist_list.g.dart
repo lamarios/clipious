@@ -9,8 +9,6 @@ part of 'playlist_list.dart';
 abstract class _$PlaylistListStateCWProxy {
   PlaylistListState paginatedList(PaginatedList<Playlist> paginatedList);
 
-  PlaylistListState refreshController(RefreshController refreshController);
-
   PlaylistListState playlists(List<Playlist> playlists);
 
   PlaylistListState loading(bool loading);
@@ -27,7 +25,6 @@ abstract class _$PlaylistListStateCWProxy {
   /// ````
   PlaylistListState call({
     PaginatedList<Playlist>? paginatedList,
-    RefreshController? refreshController,
     List<Playlist>? playlists,
     bool? loading,
     ScrollController? scrollController,
@@ -44,10 +41,6 @@ class _$PlaylistListStateCWProxyImpl implements _$PlaylistListStateCWProxy {
   @override
   PlaylistListState paginatedList(PaginatedList<Playlist> paginatedList) =>
       this(paginatedList: paginatedList);
-
-  @override
-  PlaylistListState refreshController(RefreshController refreshController) =>
-      this(refreshController: refreshController);
 
   @override
   PlaylistListState playlists(List<Playlist> playlists) =>
@@ -73,7 +66,6 @@ class _$PlaylistListStateCWProxyImpl implements _$PlaylistListStateCWProxy {
   /// ````
   PlaylistListState call({
     Object? paginatedList = const $CopyWithPlaceholder(),
-    Object? refreshController = const $CopyWithPlaceholder(),
     Object? playlists = const $CopyWithPlaceholder(),
     Object? loading = const $CopyWithPlaceholder(),
     Object? scrollController = const $CopyWithPlaceholder(),
@@ -84,11 +76,6 @@ class _$PlaylistListStateCWProxyImpl implements _$PlaylistListStateCWProxy {
           ? _value.paginatedList
           // ignore: cast_nullable_to_non_nullable
           : paginatedList as PaginatedList<Playlist>,
-      refreshController == const $CopyWithPlaceholder() ||
-              refreshController == null
-          ? _value.refreshController
-          // ignore: cast_nullable_to_non_nullable
-          : refreshController as RefreshController,
       playlists == const $CopyWithPlaceholder() || playlists == null
           ? _value.playlists
           // ignore: cast_nullable_to_non_nullable

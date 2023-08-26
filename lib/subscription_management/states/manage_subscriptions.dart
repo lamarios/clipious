@@ -2,7 +2,6 @@ import 'package:bloc/bloc.dart';
 import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:invidious/extensions.dart';
 import 'package:logging/logging.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../globals.dart';
 import '../models/subscription.dart';
@@ -40,7 +39,6 @@ class ManageSubscriptionCubit extends Cubit<ManageSubscriptionsState> {
     state.subs = (await service.getSubscriptions()).sortBy((e) => e.author).toList();
     state.loading = false;
     emit(state);
-    state.refreshController.refreshCompleted();
   }
 }
 
@@ -48,10 +46,8 @@ class ManageSubscriptionCubit extends Cubit<ManageSubscriptionsState> {
 class ManageSubscriptionsState {
   List<Subscription> subs;
   bool loading;
-  RefreshController refreshController;
 
-  ManageSubscriptionsState({List<Subscription>? subs, bool? loading = true, RefreshController? refreshController})
+  ManageSubscriptionsState({List<Subscription>? subs, bool? loading = true})
       : subs = subs ?? [],
-        loading = loading ?? true,
-        refreshController = refreshController ?? RefreshController(initialRefresh: false);
+        loading = loading ?? true;
 }

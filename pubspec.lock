@@ -509,10 +509,10 @@ packages:
     dependency: "direct main"
     description:
       name: flutter_native_splash
-      sha256: ba45d8cfbd778478a74696b012f33ffb6b1760c9bc531b21e2964444a4870dae
+      sha256: ecff62b3b893f2f665de7e4ad3de89f738941fcfcaaba8ee601e749efafa4698
       url: "https://pub.dev"
     source: hosted
-    version: "2.3.1"
+    version: "2.3.2"
   flutter_swipe_action_cell:
     dependency: "direct main"
     description:
@@ -773,26 +773,26 @@ packages:
     dependency: "direct main"
     description:
       name: objectbox
-      sha256: "73b1533d84f538a6912775ba5880b4b4a708ede58df0adc58391506b284d9feb"
+      sha256: "3c9d13df69e0d0084f5c395b11dc9c8fbe6d9dbca5051f9ac981b5d93c773461"
       url: "https://pub.dev"
     source: hosted
-    version: "2.2.0"
+    version: "2.2.1"
   objectbox_flutter_libs:
     dependency: "direct main"
     description:
       name: objectbox_flutter_libs
-      sha256: f29c0d31da142e9e96424edf382f901c0360688b5a063129cafb5b7c9530c6dd
+      sha256: b2589ed58a04fd7c44a00baa38431ce0e980d052808f87e35a3ee338e586dba9
       url: "https://pub.dev"
     source: hosted
-    version: "2.2.0"
+    version: "2.2.1"
   objectbox_generator:
     dependency: "direct dev"
     description:
       name: objectbox_generator
-      sha256: bfad1cf58c71461f9b5190064fe637004b8faed38656a4c23288ed34d7d48197
+      sha256: adb562ce5fe39439255b05890e748021250d9102726d8603f54d51e4620c7b33
       url: "https://pub.dev"
     source: hosted
-    version: "2.2.0"
+    version: "2.2.1"
   octo_image:
     dependency: transitive
     description:
@@ -961,14 +961,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.3"
-  pull_to_refresh:
-    dependency: "direct main"
-    description:
-      name: pull_to_refresh
-      sha256: bbadd5a931837b57739cf08736bea63167e284e71fb23b218c8c9a6e042aad12
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.0.0"
   receive_sharing_intent:
     dependency: "direct main"
     description:
@@ -989,10 +981,10 @@ packages:
     dependency: "direct main"
     description:
       name: search_choices
-      sha256: "4c379407ea642613669f788ec9b41cfb156f55800e8f69c727478c37db025c47"
+      sha256: aae91d632573e9805342c8ef4679215a81566427a80ed79ca58dfa07cc7bb00d
       url: "https://pub.dev"
     source: hosted
-    version: "2.2.5"
+    version: "2.2.6"
   select_dialog:
     dependency: "direct main"
     description:

@@ -11,9 +11,6 @@ abstract class _$ManageSubscriptionsStateCWProxy {
 
   ManageSubscriptionsState loading(bool? loading);
 
-  ManageSubscriptionsState refreshController(
-      RefreshController? refreshController);
-
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `ManageSubscriptionsState(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
   /// Usage
@@ -23,7 +20,6 @@ abstract class _$ManageSubscriptionsStateCWProxy {
   ManageSubscriptionsState call({
     List<Subscription>? subs,
     bool? loading,
-    RefreshController? refreshController,
   });
 }
 
@@ -41,11 +37,6 @@ class _$ManageSubscriptionsStateCWProxyImpl
   ManageSubscriptionsState loading(bool? loading) => this(loading: loading);
 
   @override
-  ManageSubscriptionsState refreshController(
-          RefreshController? refreshController) =>
-      this(refreshController: refreshController);
-
-  @override
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `ManageSubscriptionsState(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
@@ -56,7 +47,6 @@ class _$ManageSubscriptionsStateCWProxyImpl
   ManageSubscriptionsState call({
     Object? subs = const $CopyWithPlaceholder(),
     Object? loading = const $CopyWithPlaceholder(),
-    Object? refreshController = const $CopyWithPlaceholder(),
   }) {
     return ManageSubscriptionsState(
       subs: subs == const $CopyWithPlaceholder()
@@ -67,10 +57,6 @@ class _$ManageSubscriptionsStateCWProxyImpl
           ? _value.loading
           // ignore: cast_nullable_to_non_nullable
           : loading as bool?,
-      refreshController: refreshController == const $CopyWithPlaceholder()
-          ? _value.refreshController
-          // ignore: cast_nullable_to_non_nullable
-          : refreshController as RefreshController?,
     );
   }
 }
