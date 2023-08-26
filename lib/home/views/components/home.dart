@@ -39,9 +39,12 @@ class HomeView extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text(
-                    e.getLabel(locals),
-                    style: textTheme.titleSmall?.copyWith(color: colors.secondary),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 2.0),
+                    child: Text(
+                      e.getLabel(locals),
+                      style: textTheme.titleSmall?.copyWith(color: colors.secondary),
+                    ),
                   ),
                   e.build(context, true)
                 ],
