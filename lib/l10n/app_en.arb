@@ -943,7 +943,7 @@
     "@distractionFreeMode": {
         "description": "title for distraction free mode settings"
     },
-    "distractionFreeModeDescription": "Disable video comments and recommendation",
+    "distractionFreeModeDescription": "Disable video comments and recommendations",
     "@distractionFreeModeDescription": {
         "description": "Description for distraction free mode"
     },

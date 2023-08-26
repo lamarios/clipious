@@ -1,0 +1,4 @@
+- Adds fully customizable app layout
+- Adds a new customizable "Home" screen that can show multiple data sources at the same time
+- Adds distraction free mode
+- Fix few issues here and there

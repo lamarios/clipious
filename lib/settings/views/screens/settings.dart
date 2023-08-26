@@ -207,11 +207,6 @@ class Settings extends StatelessWidget {
                       value: Text(_.appLayout.map((e) => e.getLabel(locals)).join(", ")),
                       onPressed: (ctx) => customizeApp(ctx),
                     ),
-                    SettingsTile(
-                      title: Text(locals.navigationBarStyle),
-                      value: Text(getNavigationLabelText(context, _.navigationBarLabelBehavior)),
-                      onPressed: (ctx) => customizeNavigationLabel(ctx),
-                    ),
                     SettingsTile.switchTile(
                       title: Text(locals.distractionFreeMode),
                       description: Text(locals.distractionFreeModeDescription),
@@ -329,6 +324,11 @@ class Settings extends StatelessWidget {
                       onToggle: cubit.toggleBlackBackground,
                       title: Text(locals.blackBackground),
                       description: Text(locals.blackBackgroundDescription),
+                    ),
+                    SettingsTile(
+                      title: Text(locals.navigationBarStyle),
+                      value: Text(getNavigationLabelText(context, _.navigationBarLabelBehavior)),
+                      onPressed: (ctx) => customizeNavigationLabel(ctx),
                     ),
                   ],
                 ),

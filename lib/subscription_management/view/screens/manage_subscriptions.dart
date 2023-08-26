@@ -5,6 +5,7 @@ import 'package:invidious/main.dart';
 import 'package:invidious/myRouteObserver.dart';
 import 'package:invidious/subscription_management/models/subscription.dart';
 import 'package:invidious/utils.dart';
+import 'package:invidious/utils/views/components/top_loading.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../states/manage_subscriptions.dart';
@@ -73,9 +74,7 @@ class ManageSubscriptions extends StatelessWidget {
                             ),
                           ),
                           if (_.loading)
-                            const LinearProgressIndicator(
-                              minHeight: 2,
-                            ),
+                            const TopListLoading()
                         ],
                       ),
               );
