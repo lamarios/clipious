@@ -52,7 +52,7 @@ class VideoList<T extends IdedVideo> extends StatelessWidget {
             items = filteredVideos<VideoInList>(_.items.cast());
           }
 
-          var gridCount = getGridCount(context);
+          var gridCount = small ? 1 : getGridCount(context);
           return Stack(
             alignment: Alignment.topCenter,
             children: [

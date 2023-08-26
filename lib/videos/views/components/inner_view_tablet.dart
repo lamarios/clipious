@@ -104,7 +104,7 @@ class VideoTabletInnerView extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(width: 350, child: SingleChildScrollView(child: RecommendedVideos(video: video)))
+        if (!settings.state.distractionFreeMode) SizedBox(width: 350, child: SingleChildScrollView(child: RecommendedVideos(video: video)))
       ],
     );
   }

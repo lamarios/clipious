@@ -6,6 +6,8 @@ import 'package:invidious/home/models/db/home_layout.dart';
 import 'package:invidious/home/states/edit_layout.dart';
 import 'package:invidious/utils/views/components/placeholders.dart';
 
+import '../../../utils.dart';
+
 class EditHomeLayout extends StatelessWidget {
   const EditHomeLayout({super.key});
 
@@ -86,13 +88,17 @@ class EditHomeLayout extends StatelessWidget {
                           textStyle: textStyle.bodyLarge,
                         ),
                         Expanded(
-                            child: ListView(
+                            child: GridView.count(
+                          crossAxisCount: getGridCount(context),
+                          crossAxisSpacing: 5,
+                          mainAxisSpacing: 5,
+                          childAspectRatio: getGridAspectRatio(context),
                           children: repeatWidget(() => const Padding(
                                 padding: EdgeInsets.symmetric(vertical: 8.0),
                                 child: VideoListItemPlaceHolder(
                                   animate: false,
                                 ),
-                              )),
+                              ), count: 10),
                         ))
                       ],
                     );
@@ -153,7 +159,7 @@ class SmallSource extends StatelessWidget {
                       animate: false,
                     ),
                   ),
-                )),
+                ), count: 10),
           ),
         )
       ],

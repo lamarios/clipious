@@ -188,12 +188,14 @@ class VideoView extends StatelessWidget {
                                         playNow: playNow,
                                         videoController: _,
                                       )
-                                : VideoTabletInnerView(
-                                    video: _.video!,
-                                    playNow: playNow,
-                                    selectedIndex: _.selectedIndex,
-                                    videoController: _,
-                                  )),
+                                : _.loadingVideo
+                                    ? Container(constraints: BoxConstraints(maxWidth: tabletMaxVideoWidth), child: const VideoPlaceHolder())
+                                    : VideoTabletInnerView(
+                                        video: _.video!,
+                                        playNow: playNow,
+                                        selectedIndex: _.selectedIndex,
+                                        videoController: _,
+                                      )),
                   ),
                 ),
               ),
