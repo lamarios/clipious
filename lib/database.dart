@@ -44,6 +44,7 @@ const LOCK_ORIENTATION_FULLSCREEN = 'lock-orientation-fullscreen';
 const FILL_FULLSCREEN = 'fill-fullscreen';
 const APP_LAYOUT = 'app-layout';
 const NAVIGATION_BAR_LABEL_BEHAVIOR = 'navigation-bar-label-behavior';
+const DISTRACTION_FREE_MODE = 'distraction-free-mode';
 
 const ON_OPEN = "on-open";
 

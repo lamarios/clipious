@@ -10,6 +10,7 @@ import 'package:invidious/channels/views/components/videos.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/videos/views/components/video_in_list.dart';
 
+import '../../../settings/states/settings.dart';
 import '../../../utils.dart';
 import '../../../utils/views/components/placeholders.dart';
 
@@ -54,7 +55,7 @@ class ChannelView extends StatelessWidget {
                 : FadeIn(
                     child: NavigationBar(
                       backgroundColor: colorScheme.background,
-                      labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
+                      labelBehavior: context.read<SettingsCubit>().state.navigationBarLabelBehavior,
                       elevation: 0,
                       onDestinationSelected: cubit.selectIndex,
                       selectedIndex: _.selectedIndex,

@@ -63,6 +63,15 @@ class Settings extends StatelessWidget {
     );
   }
 
+  String getNavigationLabelText(BuildContext context, NavigationDestinationLabelBehavior behavior) {
+    var locals = AppLocalizations.of(context)!;
+    return switch (behavior) {
+      NavigationDestinationLabelBehavior.alwaysHide => locals.navigationBarLabelNeverShow,
+      NavigationDestinationLabelBehavior.alwaysShow => locals.navigationBarLabelAlwaysShowing,
+      NavigationDestinationLabelBehavior.onlyShowSelected => locals.navigationBarLabelShowOnSelect,
+    };
+  }
+
 /*
   selectOnOpen(BuildContext context, SettingsState controller) {
     var categories = getCategories(context);
@@ -84,6 +93,28 @@ class Settings extends StatelessWidget {
 
   customizeApp(BuildContext context) {
     showDialog(barrierDismissible: true, context: context, builder: (context) => const AlertDialog(content: SizedBox(width: 300, height: 500, child: AppCustomizer())));
+  }
+
+  customizeNavigationLabel(BuildContext context) {
+    var locals = AppLocalizations.of(context)!;
+    var settings = context.read<SettingsCubit>();
+    var colors = Theme.of(context).colorScheme;
+    var textTheme = Theme.of(context).textTheme;
+    SelectDialog.showModal<NavigationDestinationLabelBehavior>(
+      context,
+      label: locals.navigationBarStyle,
+      selectedValue: settings.state.navigationBarLabelBehavior,
+      itemBuilder: (context, item, isSelected) => Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Text(
+          getNavigationLabelText(context, item),
+          style: textTheme.bodyLarge?.copyWith(color: isSelected ? colors.primary : null),
+        ),
+      ),
+      showSearchBox: false,
+      items: NavigationDestinationLabelBehavior.values,
+      onChange: (p0) => settings.setNavigationBarLabelBehavior(p0),
+    );
   }
 
   showSelectLanguage(BuildContext context, SettingsState controller) {
@@ -175,6 +206,17 @@ class Settings extends StatelessWidget {
                       title: Text(locals.customizeAppLayout),
                       value: Text(_.appLayout.map((e) => e.getLabel(locals)).join(", ")),
                       onPressed: (ctx) => customizeApp(ctx),
+                    ),
+                    SettingsTile(
+                      title: Text(locals.navigationBarStyle),
+                      value: Text(getNavigationLabelText(context, _.navigationBarLabelBehavior)),
+                      onPressed: (ctx) => customizeNavigationLabel(ctx),
+                    ),
+                    SettingsTile.switchTile(
+                      title: Text(locals.distractionFreeMode),
+                      description: Text(locals.distractionFreeModeDescription),
+                      initialValue: _.distractionFreeMode,
+                      onToggle: cubit.setDistractionFreeMode,
                     ),
                     SettingsTile(
                       title: Text(locals.appLanguage),

@@ -8,6 +8,7 @@ import 'package:invidious/utils.dart';
 
 import '../../../comments/views/components/comments_container.dart';
 import '../../../downloads/models/downloaded_video.dart';
+import '../../../settings/states/settings.dart';
 import '../../../videos/models/video.dart';
 import '../../../videos/views/components/info.dart';
 import '../../../videos/views/components/recommended_videos.dart';
@@ -24,6 +25,8 @@ class ExpandedPlayer {
 
     Video? video = controller.currentlyPlaying;
     DownloadedVideo? offlineVid = controller.offlineCurrentlyPlaying;
+    var settings = context.watch<SettingsCubit>().state;
+
 
     return video != null || offlineVid != null
         ? [
@@ -63,12 +66,16 @@ class ExpandedPlayer {
                   ),
                 )),
             Visibility(
-              visible: !controller.isMini && video != null,
+              visible: !settings.distractionFreeMode &&  !controller.isMini && video != null,
               child: SizedBox(
                 // height: 80,
                 child: Builder(builder: (context) {
+
+
                   var selectedIndex = context.select((PlayerCubit value) => value.state.selectedFullScreenIndex);
-                  return NavigationBar(backgroundColor: colors.background, elevation: 0, selectedIndex: selectedIndex, onDestinationSelected: player.selectTab, destinations: [
+                  return NavigationBar(backgroundColor: colors.background, elevation: 0, selectedIndex: selectedIndex,
+                      labelBehavior: settings.navigationBarLabelBehavior,
+                      onDestinationSelected: player.selectTab, destinations: [
                     NavigationDestination(icon: const Icon(Icons.info), label: locals.info),
                     NavigationDestination(icon: const Icon(Icons.chat_bubble), label: locals.comments),
                     NavigationDestination(icon: const Icon(Icons.schema), label: locals.recommended),

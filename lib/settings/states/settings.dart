@@ -286,6 +286,12 @@ class SettingsCubit extends Cubit<SettingsState> {
     emit(state);
   }
 
+  setDistractionFreeMode(bool b) {
+    var state = this.state.copyWith();
+    state.distractionFreeMode = b;
+    emit(state);
+  }
+
   String? getLocaleDisplayName() {
     List<String>? localeString = state.locale?.split('_');
     Locale? l = localeString != null ? Locale.fromSubtags(languageCode: localeString[0], scriptCode: localeString.length >= 2 ? localeString[1] : null) : null;
@@ -410,11 +416,12 @@ class SettingsState {
 
   set useSearchHistory(bool b) => _set(USE_SEARCH_HISTORY, b);
 
-  List<HomeDataSource> get appLayout => (_get(APP_LAYOUT)?.value ?? '${HomeDataSource.home.name},${HomeDataSource.popular.name},${HomeDataSource.subscription.name}')
-      .split(',')
-      .where((element) => element.isNotEmpty)
-      .map((e) => HomeDataSource.values.firstWhere((element) => element.name == e))
-      .toList();
+  List<HomeDataSource> get appLayout =>
+      (_get(APP_LAYOUT)?.value ?? '${HomeDataSource.home.name},${HomeDataSource.popular.name},${HomeDataSource.subscription.name},${HomeDataSource.playlist.name},${HomeDataSource.history.name}')
+          .split(',')
+          .where((element) => element.isNotEmpty)
+          .map((e) => HomeDataSource.values.firstWhere((element) => element.name == e))
+          .toList();
 
   set appLayout(List<HomeDataSource> layout) => _set(APP_LAYOUT, layout.map((e) => e.name).join(","));
 
@@ -422,6 +429,10 @@ class SettingsState {
       NavigationDestinationLabelBehavior.values.firstWhere((e) => e.name == (_get(NAVIGATION_BAR_LABEL_BEHAVIOR)?.value ?? NavigationDestinationLabelBehavior.onlyShowSelected.name));
 
   set navigationBarLabelBehavior(NavigationDestinationLabelBehavior behavior) => _set(NAVIGATION_BAR_LABEL_BEHAVIOR, behavior.name);
+
+  bool get distractionFreeMode => _get(DISTRACTION_FREE_MODE)?.value == "true";
+
+  set distractionFreeMode(bool b) => _set(DISTRACTION_FREE_MODE, b);
 
   void _set<T>(String name, T value) {
     if (value == null) {

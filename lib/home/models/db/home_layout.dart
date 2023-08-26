@@ -119,7 +119,7 @@ enum HomeDataSource {
             children: db
                 .getSearchHistory()
                 .map((e) => Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8),
+                      padding: EdgeInsets.symmetric(vertical:  8, horizontal: small ? 8 : 0),
                       child: FilledButton.tonal(onPressed: () => HomeView.openSearch(context, e), child: Text(e)),
                     ))
                 .toList(),

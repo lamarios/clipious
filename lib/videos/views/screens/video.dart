@@ -89,6 +89,8 @@ class VideoView extends StatelessWidget {
       child: BlocBuilder<VideoCubit, VideoState>(
         builder: (context, _) {
           var cubit = context.read<VideoCubit>();
+          var settings = context.read<SettingsCubit>();
+
           return AnimatedOpacity(
             duration: animationDuration,
             opacity: _.opacity,
@@ -150,12 +152,12 @@ class VideoView extends StatelessWidget {
                 scrolledUnderElevation: 0,
               ),
               backgroundColor: colorScheme.background,
-              bottomNavigationBar: _.loadingVideo
+              bottomNavigationBar: _.loadingVideo || settings.state.distractionFreeMode
                   ? null
                   : FadeIn(
                       child: NavigationBar(
                         backgroundColor: colorScheme.background,
-                        labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
+                        labelBehavior: context.read<SettingsCubit>().state.navigationBarLabelBehavior,
                         elevation: 0,
                         onDestinationSelected: cubit.selectIndex,
                         selectedIndex: _.selectedIndex,

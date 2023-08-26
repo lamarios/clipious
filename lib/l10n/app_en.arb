@@ -923,6 +923,30 @@
     "@customizeAppLayout": {
         "description": "Settings label for the settings to allow the user to set up the app layout themselves"
     },
+    "navigationBarStyle": "Navigation bar style",
+    "@navigationBarStyle": {
+        "description": "Label for settings on customizing navigation bar style"
+    },
+    "navigationBarLabelAlwaysShowing": "Label always showing",
+    "@navigationBarLabelAlwaysShowing": {
+        "description": "Label always showing option for navigation bar"
+    },
+    "navigationBarLabelShowOnSelect": "Label shown on selected item",
+    "@navigationBarLabelShowOnSelect": {
+        "description": "Label only showing when selected option for navigation bar"
+    },
+    "navigationBarLabelNeverShow": "Never show label",
+    "@navigationBarLabelNeverShow": {
+        "description": "Never show label option for navigation bar"
+    },
+    "distractionFreeMode": "Distraction free mode",
+    "@distractionFreeMode": {
+        "description": "title for distraction free mode settings"
+    },
+    "distractionFreeModeDescription": "Disable video comments and recommendation",
+    "@distractionFreeModeDescription": {
+        "description": "Description for distraction free mode"
+    },
     "history": "History",
     "@history": {
         "description": "User view history label"

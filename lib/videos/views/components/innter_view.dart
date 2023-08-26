@@ -49,7 +49,7 @@ class VideoInnerView extends StatelessWidget {
             ],
           ),
         ),
-        Builder(
+        if(!settings.state.distractionFreeMode)Builder(
           builder: (context) {
             return Row(
               mainAxisAlignment: MainAxisAlignment.end,
