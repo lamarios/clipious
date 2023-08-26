@@ -417,7 +417,7 @@ class SettingsState {
   set useSearchHistory(bool b) => _set(USE_SEARCH_HISTORY, b);
 
   List<HomeDataSource> get appLayout =>
-      (_get(APP_LAYOUT)?.value ?? '${HomeDataSource.home.name},${HomeDataSource.popular.name},${HomeDataSource.subscription.name},${HomeDataSource.playlist.name},${HomeDataSource.history.name}')
+      (_get(APP_LAYOUT)?.value ?? '${HomeDataSource.home.name},${HomeDataSource.subscription.name},${HomeDataSource.playlist.name},${HomeDataSource.history.name}')
           .split(',')
           .where((element) => element.isNotEmpty)
           .map((e) => HomeDataSource.values.firstWhere((element) => element.name == e))
