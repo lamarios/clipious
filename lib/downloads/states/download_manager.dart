@@ -58,6 +58,7 @@ class DownloadManagerCubit extends Cubit<DownloadManagerState> {
         db.upsertDownload(v);
       }
     }
+    print('setting videos');
 
     state.videos = vids;
     emit(state);

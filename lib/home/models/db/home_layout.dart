@@ -103,15 +103,18 @@ enum HomeDataSource {
           )),
       (HomeDataSource.downloads) => SizedBox(
           height: small ? smallVideoViewHeight : null,
-          child: Builder(builder: (context) {
-            var videos = context.select((DownloadManagerCubit value) => value.state.videos).reversed.toList();
-            return VideoList(
-              scrollDirection: small ? Axis.horizontal : Axis.vertical,
-              small: small,
-              animateDownload: true,
-              paginatedVideoList: FixedItemList(videos),
-            );
-          })),
+          child: BlocBuilder<DownloadManagerCubit, DownloadManagerState>(
+              buildWhen: (previous, current) => previous.videos != current.videos,
+              builder: (context, downloads) {
+                var videos = downloads.videos.reversed.where((e) => e.downloadComplete && !e.downloadFailed).toList();
+                return VideoList(
+                  key: ValueKey(videos),
+                  scrollDirection: small ? Axis.horizontal : Axis.vertical,
+                  small: small,
+                  animateDownload: true,
+                  paginatedVideoList: FixedItemList(videos),
+                );
+              })),
       (HomeDataSource.searchHistory) => SizedBox(
           height: small ? 40 : null,
           child: ListView(
@@ -119,7 +122,7 @@ enum HomeDataSource {
             children: db
                 .getSearchHistory()
                 .map((e) => Padding(
-                      padding: EdgeInsets.symmetric(vertical:  8, horizontal: small ? 8 : 0),
+                      padding: EdgeInsets.symmetric(vertical: 8, horizontal: small ? 8 : 0),
                       child: FilledButton.tonal(onPressed: () => HomeView.openSearch(context, e), child: Text(e)),
                     ))
                 .toList(),
