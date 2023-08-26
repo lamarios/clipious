@@ -919,9 +919,13 @@
     "@library": {
         "description": "Name for user library"
     },
-    "customizeAppLayout": "Customize app layout",
+    "customizeAppLayout": "Customize app sections",
     "@customizeAppLayout": {
-        "description": "Settings label for the settings to allow the user to set up the app layout themselves"
+        "description": "Settings label for the settings to allow the user to set up the app sections themselves"
+    },
+    "customizeAppLayoutExplanation": "Select which sections you want to appear in the main app navigation bar. Click on the home icon to select which screen shows when the application starts. You can reorder the sections by dragging them around.",
+    "@customizeAppLayoutExplanation": {
+        "description": ""
     },
     "navigationBarStyle": "Navigation bar style",
     "@navigationBarStyle": {

@@ -92,7 +92,7 @@ class Settings extends StatelessWidget {
 */
 
   customizeApp(BuildContext context) {
-    showDialog(barrierDismissible: true, context: context, builder: (context) => const AlertDialog(content: SizedBox(width: 300, height: 500, child: AppCustomizer())));
+    showDialog(barrierDismissible: true, context: context, builder: (context) => const AlertDialog(content: SizedBox(width: 300, child: AppCustomizer())));
   }
 
   customizeNavigationLabel(BuildContext context) {

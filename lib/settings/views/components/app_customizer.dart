@@ -13,6 +13,7 @@ class AppCustomizer extends StatelessWidget {
   Widget build(BuildContext context) {
     var locals = AppLocalizations.of(context)!;
     var colors = Theme.of(context).colorScheme;
+    var textTheme = Theme.of(context).textTheme;
     return BlocProvider(
       create: (context) => AppCustomizerCubit(context.read<SettingsCubit>().state.appLayout, context.read<SettingsCubit>()),
       child: BlocBuilder<AppCustomizerCubit, List<HomeDataSource>>(
@@ -23,6 +24,10 @@ class AppCustomizer extends StatelessWidget {
           if (onStart >= state.length) onStart = 0;
           return Column(
             children: [
+              Padding(
+                padding: const EdgeInsets.only(bottom: 8.0),
+                child: Text(locals.customizeAppLayoutExplanation, style: textTheme.labelSmall),
+              ),
               ReorderableListView.builder(
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
@@ -38,11 +43,17 @@ class AppCustomizer extends StatelessWidget {
                         value: state.contains(source),
                         onChanged: (value) => appLayout.updateSource(source, value ?? false),
                       ),
-                      Expanded(child: Text(source.getLabel(locals))),
-                      Icon(
-                        Icons.drag_indicator,
-                        color: colors.secondary,
-                        size: 15,
+                      Expanded(child: ReorderableDragStartListener(index: index, child: Text(source.getLabel(locals)))),
+                      ReorderableDragStartListener(
+                        index: index,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Icon(
+                            Icons.drag_indicator,
+                            color: colors.secondary,
+                            size: 15,
+                          ),
+                        ),
                       )
                     ],
                   );
