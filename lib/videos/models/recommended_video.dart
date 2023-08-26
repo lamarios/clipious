@@ -16,8 +16,4 @@ class RecommendedVideo extends BaseVideo {
   factory RecommendedVideo.fromJson(Map<String, dynamic> json) => _$RecommendedVideoFromJson(json);
 
   Map<String, dynamic> toJson() => _$RecommendedVideoToJson(this);
-
-  static VideoInList toVideoInList(RecommendedVideo e) {
-    return VideoInList(e.title, e.videoId, e.lengthSeconds, 0, e.author, '', 'authorUrl', 0, '', e.videoThumbnails);
-  }
 }

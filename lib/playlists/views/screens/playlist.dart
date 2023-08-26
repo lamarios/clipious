@@ -143,33 +143,36 @@ class PlaylistView extends StatelessWidget {
                                       )
                                     ])),
                                 Expanded(
-                                    child: ListView(
-                                  controller: _.scrollController,
-                                  children: [
-                                    ..._.playlist.videos
-                                        .where((element) => !element.filterHide)
-                                        .map((v) => SwipeActionCell(
-                                            key: ValueKey('swipe-${v.videoId}'),
-                                            trailingActions: canDeleteVideos
-                                                ? [
-                                                    SwipeAction(
-                                                      icon: const Icon(Icons.delete, color: Colors.white),
-                                                      performsFirstActionWithFullSwipe: true,
-                                                      onTap: (handler) async {
-                                                        await handler(true);
-                                                        removeVideoFromPlayList(context, v);
-                                                      },
-                                                    )
-                                                  ]
-                                                : null,
-                                            child: CompactVideo(
-                                              video: v,
-                                              onTap: () => openVideo(v.videoId),
-                                              key: ValueKey(v.videoId),
-                                            )))
-                                        .toList(),
-                                    if (_.loading) ...repeatWidget(() => const CompactVideoPlaceHolder(), count: 5)
-                                  ],
+                                    child: Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: innerHorizontalPadding),
+                                  child: ListView(
+                                    controller: _.scrollController,
+                                    children: [
+                                      ..._.playlist.videos
+                                          .where((element) => !element.filterHide)
+                                          .map((v) => SwipeActionCell(
+                                              key: ValueKey('swipe-${v.videoId}'),
+                                              trailingActions: canDeleteVideos
+                                                  ? [
+                                                      SwipeAction(
+                                                        icon: const Icon(Icons.delete, color: Colors.white),
+                                                        performsFirstActionWithFullSwipe: true,
+                                                        onTap: (handler) async {
+                                                          await handler(true);
+                                                          removeVideoFromPlayList(context, v);
+                                                        },
+                                                      )
+                                                    ]
+                                                  : null,
+                                              child: CompactVideo(
+                                                video: v,
+                                                onTap: () => openVideo(v.videoId),
+                                                key: ValueKey(v.videoId),
+                                              )))
+                                          .toList(),
+                                      if (_.loading) ...repeatWidget(() => const CompactVideoPlaceHolder(), count: 5)
+                                    ],
+                                  ),
                                 ))
                               ],
                             ),

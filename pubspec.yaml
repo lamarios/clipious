@@ -16,7 +16,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 # In Windows, build-name is used as the major, minor, and patch parts
 # of the product and file versions while build-number is used as the build suffix.
-version: 1.14.7+4023
+version: 1.15.0+4024
 
 environment:
   sdk: '>=3.0.0 <4.0.0'
@@ -47,20 +47,19 @@ dependencies:
 
   intl: any
   settings_ui: 2.0.2
-  objectbox: 2.2.0
-  objectbox_flutter_libs: 2.2.0
+  objectbox: 2.2.1
+  objectbox_flutter_libs: 2.2.1
   path_provider: 2.1.0
   path: 1.8.3
   flutter_web_auth: 0.5.0
   select_dialog: 2.0.0
   cached_network_image: 3.2.3
-  pull_to_refresh: 2.0.0
   share_plus: 7.1.0
   package_info_plus: 4.1.0
   receive_sharing_intent: 1.4.5
   logging: 1.2.0
   application_icon: 2.0.0
-  flutter_native_splash: 2.3.1
+  flutter_native_splash: 2.3.2
   flutter_linkify: 6.0.0
   url_launcher: 6.1.12
   back_button_interceptor: ^7.0.0
@@ -71,9 +70,8 @@ dependencies:
     git:
       url: https://github.com/lamarios/locale_names.git
       ref: master
-  search_choices: 2.2.5
+  search_choices: 2.2.6
   uuid: 3.0.7
-  animate_to: 0.1.0
   dio: 5.3.2
   just_audio: 0.9.34
   audio_service: 0.18.10

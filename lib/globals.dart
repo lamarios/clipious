@@ -16,6 +16,8 @@ const animationDuration = Duration(milliseconds: 250);
 
 Service service = Service();
 
+const double innerHorizontalPadding = 16;
+
 late DbClient db;
 
 List<Country> countryCodes = [

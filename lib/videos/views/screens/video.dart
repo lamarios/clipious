@@ -15,7 +15,6 @@ import 'package:invidious/videos/views/components/download_modal_sheet.dart';
 import 'package:invidious/videos/views/components/inner_view_tablet.dart';
 import 'package:invidious/videos/views/components/innter_view.dart';
 import 'package:invidious/videos/views/components/like_button.dart';
-import 'package:invidious/videos/views/components/video_in_list.dart';
 import 'package:invidious/videos/views/components/video_share_button.dart';
 
 import '../../../downloads/views/screens/download_manager.dart';
@@ -40,11 +39,16 @@ class VideoView extends StatelessWidget {
   void downloadVideo(BuildContext context, VideoState _) {
     var cubit = context.read<VideoCubit>();
     if (_.video != null) {
-      DownloadModalSheet.showVideoModalSheet(context, _.video!, animateDownload: false, onDownloadStarted: (isDownloadStarted) {
-        if (isDownloadStarted) {
-          cubit.initStreamListener();
-        }
-      }, onDownload: cubit.onDownload, source: VideoListSource.videoScreen);
+      DownloadModalSheet.showVideoModalSheet(
+        context,
+        _.video!,
+        onDownloadStarted: (isDownloadStarted) {
+          if (isDownloadStarted) {
+            cubit.initStreamListener();
+          }
+        },
+        onDownload: cubit.onDownload,
+      );
     }
   }
 
@@ -85,6 +89,8 @@ class VideoView extends StatelessWidget {
       child: BlocBuilder<VideoCubit, VideoState>(
         builder: (context, _) {
           var cubit = context.read<VideoCubit>();
+          var settings = context.read<SettingsCubit>();
+
           return AnimatedOpacity(
             duration: animationDuration,
             opacity: _.opacity,
@@ -146,12 +152,12 @@ class VideoView extends StatelessWidget {
                 scrolledUnderElevation: 0,
               ),
               backgroundColor: colorScheme.background,
-              bottomNavigationBar: _.loadingVideo
+              bottomNavigationBar: _.loadingVideo || settings.state.distractionFreeMode
                   ? null
                   : FadeIn(
                       child: NavigationBar(
                         backgroundColor: colorScheme.background,
-                        labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
+                        labelBehavior: context.read<SettingsCubit>().state.navigationBarLabelBehavior,
                         elevation: 0,
                         onDestinationSelected: cubit.selectIndex,
                         selectedIndex: _.selectedIndex,
@@ -161,7 +167,7 @@ class VideoView extends StatelessWidget {
               body: SafeArea(
                 bottom: false,
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 8.0, right: 8, top: 8),
+                  padding: const EdgeInsets.only(left: innerHorizontalPadding, right: innerHorizontalPadding, top: 8),
                   child: Container(
                     color: colorScheme.background,
                     width: double.infinity,
@@ -173,24 +179,23 @@ class VideoView extends StatelessWidget {
                                 alignment: Alignment.center,
                                 child: Text(_.error == coulnotLoadVideos ? locals.couldntLoadVideo : _.error),
                               )
-                            : Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                                child: show3Navigation
-                                    ? _.loadingVideo
-                                        ? const VideoPlaceHolder()
-                                        : VideoInnerView(
-                                            video: _.video!,
-                                            selectedIndex: _.selectedIndex,
-                                            playNow: playNow,
-                                            videoController: _,
-                                          )
+                            : show3Navigation
+                                ? _.loadingVideo
+                                    ? const VideoPlaceHolder()
+                                    : VideoInnerView(
+                                        video: _.video!,
+                                        selectedIndex: _.selectedIndex,
+                                        playNow: playNow,
+                                        videoController: _,
+                                      )
+                                : _.loadingVideo
+                                    ? Container(constraints: BoxConstraints(maxWidth: tabletMaxVideoWidth), child: const VideoPlaceHolder())
                                     : VideoTabletInnerView(
                                         video: _.video!,
                                         playNow: playNow,
                                         selectedIndex: _.selectedIndex,
                                         videoController: _,
-                                      ),
-                              )),
+                                      )),
                   ),
                 ),
               ),

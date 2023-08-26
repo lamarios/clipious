@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:animate_to/animate_to.dart';
 import 'package:bloc/bloc.dart';
 import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:dio/dio.dart';
@@ -44,13 +43,6 @@ class DownloadManagerCubit extends Cubit<DownloadManagerState> {
     onReady();
   }
 
-  @override
-  close() async {
-    var state = this.state.copyWith();
-    state.animateToController.dispose();
-    super.close();
-  }
-
   onReady() {
     setVideos();
   }
@@ -66,6 +58,7 @@ class DownloadManagerCubit extends Cubit<DownloadManagerState> {
         db.upsertDownload(v);
       }
     }
+    print('setting videos');
 
     state.videos = vids;
     emit(state);
@@ -215,7 +208,6 @@ class DownloadManagerCubit extends Cubit<DownloadManagerState> {
 class DownloadManagerState {
   DownloadManagerState();
 
-  AnimateToController animateToController = AnimateToController();
   List<DownloadedVideo> videos = [];
 
   Map<String, DownloadProgress> downloadProgresses = {};
@@ -232,5 +224,5 @@ class DownloadManagerState {
     return downloaded / total;
   }
 
-  DownloadManagerState._(this.animateToController, this.videos, this.downloadProgresses);
+  DownloadManagerState._(this.videos, this.downloadProgresses);
 }

@@ -4,13 +4,15 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_swipe_action_cell/core/cell.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/utils/states/item_list.dart';
+import 'package:invidious/utils/views/components/top_loading.dart';
 import 'package:invidious/videos/views/components/historyVideo.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../../utils.dart';
 import '../../../utils/models/paginatedList.dart';
 import '../../../utils/views/components/placeholders.dart';
 import '../../states/history.dart';
+
+const smallHistoryAspectRatio = 1.15;
 
 class HistoryView extends StatelessWidget {
   const HistoryView({super.key});
@@ -44,37 +46,39 @@ class HistoryView extends StatelessWidget {
                           child: Text(locals.noHistory),
                         ),
                       )
-                    : SmartRefresher(
-                        controller: _.refreshController,
-                        onRefresh: listcubit.refreshItems,
-                        child: ListView.builder(
-                          controller: _.scrollController,
-                          itemCount: _.items.length + (_.loading ? 10 : 0),
-                          itemBuilder: (context, index) => Padding(
-                            padding: EdgeInsets.only(bottom: index == _.items.length - 1 ? 70.0 : 0),
-                            child: index >= _.items.length
-                                ? const CompactVideoPlaceHolder()
-                                : SwipeActionCell(
-                                    key: ValueKey(_.items[index]),
-                                    trailingActions: [
-                                      SwipeAction(
-                                        performsFirstActionWithFullSwipe: true,
-                                        icon: const Icon(Icons.delete, color: Colors.white),
-                                        onTap: (handler) async {
-                                          await handler(true);
-                                          historyCubit.removeFromHistory(_.items[index]);
-                                        },
-                                      )
-                                    ],
-                                    child: HistoryVideoView(key: ValueKey(_.items[index]), videoId: _.items[index])),
+                    : Padding(
+                        padding: const EdgeInsets.only(top: 3),
+                        child: RefreshIndicator(
+                          onRefresh: () => listcubit.refreshItems(),
+                          child: ListView.builder(
+                            controller: _.scrollController,
+                            scrollDirection: Axis.vertical,
+                            itemCount: _.items.length + (_.loading ? 5 : 0),
+                            itemBuilder: (context, index) => Padding(
+                              padding: EdgeInsets.only(bottom: index == _.items.length - 1 ? 70.0 : 0),
+                              child: index >= _.items.length
+                                  ? const CompactVideoPlaceHolder()
+                                  : SwipeActionCell(
+                                      key: ValueKey(_.items[index]),
+                                      trailingActions: [
+                                        SwipeAction(
+                                          performsFirstActionWithFullSwipe: true,
+                                          icon: const Icon(Icons.delete, color: Colors.white),
+                                          onTap: (handler) async {
+                                            await handler(true);
+                                            historyCubit.removeFromHistory(_.items[index]);
+                                          },
+                                        )
+                                      ],
+                                      child: HistoryVideoView(
+                                        key: ValueKey(_.items[index]),
+                                        videoId: _.items[index],
+                                      )),
+                            ),
                           ),
                         ),
                       ),
-            _.loading
-                ? const LinearProgressIndicator(
-                    minHeight: 1,
-                  )
-                : const SizedBox.shrink(),
+            if (_.loading) const TopListLoading(),
             Positioned(
                 bottom: 15,
                 right: 15,

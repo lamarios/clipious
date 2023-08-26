@@ -4,19 +4,26 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/utils.dart';
 import 'package:invidious/utils/states/item_list.dart';
 import 'package:invidious/utils/views/components/placeholders.dart';
+import 'package:invidious/utils/views/components/top_loading.dart';
+import 'package:invidious/videos/models/base_video.dart';
 import 'package:invidious/videos/models/video_in_list.dart';
 import 'package:invidious/videos/views/components/video_in_list.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
 
+// import 'package:pull_to_refresh/pull_to_refresh.dart';
+
+import '../../../downloads/models/downloaded_video.dart';
 import '../../../utils/models/paginatedList.dart';
 
-class VideoList extends StatelessWidget {
-  final PaginatedList<VideoInList> paginatedVideoList;
+const smallVideoAspectRatio = 0.76;
+
+class VideoList<T extends IdedVideo> extends StatelessWidget {
+  final PaginatedList<T> paginatedVideoList;
   final String? tags;
   final bool animateDownload;
-  final VideoListSource source;
+  final Axis scrollDirection;
+  final bool small;
 
-  const VideoList({super.key, required this.paginatedVideoList, this.tags, this.animateDownload = false, required this.source});
+  const VideoList({super.key, required this.paginatedVideoList, this.tags, this.animateDownload = false, this.scrollDirection = Axis.vertical, this.small = false});
 
 /*
   @override
@@ -33,50 +40,76 @@ class VideoList extends StatelessWidget {
   Widget build(BuildContext context) {
     ColorScheme colorScheme = Theme.of(context).colorScheme;
     var locals = AppLocalizations.of(context)!;
+    var textTheme = Theme.of(context).textTheme;
     return BlocProvider(
-      create: (context) => ItemListCubit<VideoInList>(ItemListState<VideoInList>(itemList: paginatedVideoList)),
-      child: BlocBuilder<ItemListCubit<VideoInList>, ItemListState<VideoInList>>(
+      create: (context) => ItemListCubit<T>(ItemListState<T>(itemList: paginatedVideoList)),
+      child: BlocBuilder<ItemListCubit<T>, ItemListState<T>>(
         builder: (context, _) {
-          var cubit = context.read<ItemListCubit<VideoInList>>();
-          var items = filteredVideos<VideoInList>(_.items);
-          var gridCount = getGridCount(context);
+          var cubit = context.read<ItemListCubit<T>>();
+
+          List<IdedVideo> items = _.items;
+          if (items.isNotEmpty && items[0] is VideoInList) {
+            items = filteredVideos<VideoInList>(_.items.cast());
+          }
+
+          var gridCount = small ? 1 : getGridCount(context);
           return Stack(
             alignment: Alignment.topCenter,
             children: [
-              Visibility(visible: _.loading, child: const SizedBox(height: 1, child: LinearProgressIndicator())),
+              if (!small && _.loading) const TopListLoading(),
               _.error != ItemListErrors.none
                   ? Container(
                       alignment: Alignment.center,
                       color: colorScheme.background,
-                      child: InkWell(onTap: () => cubit.getItems(), child: Text(locals.couldntFetchVideos)),
+                      child: InkWell(
+                          onTap: () => cubit.getItems(),
+                          child: Text(
+                            locals.couldntFetchVideos,
+                            style: small ? textTheme.labelSmall : textTheme.bodyMedium,
+                          )),
                     )
                   : Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: SmartRefresher(
-                        controller: _.refreshController,
-                        enablePullDown: _.itemList.hasRefresh(),
-                        enablePullUp: false,
-                        onRefresh: cubit.refreshItems,
+                      padding: EdgeInsets.only(top: small ? 0.0 : 4.0),
+                      child: RefreshIndicator(
+                        onRefresh: () async => !small && _.itemList.hasRefresh() ? await cubit.refreshItems() : Future.delayed(Duration.zero),
                         child: GridView.count(
                           crossAxisCount: gridCount,
                           controller: _.scrollController,
-                          padding: const EdgeInsets.all(4),
-                          crossAxisSpacing: 5,
-                          mainAxisSpacing: 5,
-                          childAspectRatio: getGridAspectRatio(context),
+                          scrollDirection: scrollDirection,
+                          crossAxisSpacing: small ? 8 : 5,
+                          mainAxisSpacing: small ? 8 : 5,
+                          childAspectRatio: small ? smallVideoAspectRatio : getGridAspectRatio(context),
                           children: [
-                            ...items
-                                .map((v) => VideoListItem(
-                                      key: ValueKey('${v.videoId}-${source.name}'),
-                                      video: v,
-                                      animateDownload: animateDownload,
-                                      source: source,
-                                    ))
-                                .toList(),
-                            if (_.loading) ...videoPlaceholderList(count: 5 * gridCount)
+                            ...items.map((v) {
+                              VideoInList? onlineVideo;
+                              DownloadedVideo? offlineVideo;
+
+                              if (v is VideoInList) {
+                                onlineVideo = v;
+                              }
+
+                              if (v is DownloadedVideo) {
+                                offlineVideo = v;
+                              }
+
+                              return VideoListItem(
+                                small: small,
+                                key: ValueKey('${v.videoId}-${small.toString()}'),
+                                video: onlineVideo,
+                                offlineVideo: offlineVideo,
+                                animateDownload: animateDownload,
+                              );
+                            }).toList(),
+                            if (_.loading)
+                              ...repeatWidget(
+                                  () => VideoListItemPlaceHolder(
+                                        small: small,
+                                      ),
+                                  count: 5 * gridCount)
                           ],
                         ),
-                      ))
+                      ),
+                    )
             ],
           );
         },

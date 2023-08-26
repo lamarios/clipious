@@ -121,7 +121,7 @@ class VideoCubit extends Cubit<VideoState> {
   void playVideo(bool? audio) {
     if (state.video != null) {
       List<BaseVideo> videos = [state.video!];
-      if (settings.state.playRecommendedNext) {
+      if (!settings.state.distractionFreeMode && settings.state.playRecommendedNext) {
         videos.addAll(state.video?.recommendedVideos ?? []);
       }
       player.playVideo(videos, goBack: true, audio: audio);

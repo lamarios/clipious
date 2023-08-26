@@ -5,7 +5,7 @@ import 'package:invidious/main.dart';
 import 'package:invidious/myRouteObserver.dart';
 import 'package:invidious/subscription_management/models/subscription.dart';
 import 'package:invidious/utils.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:invidious/utils/views/components/top_loading.dart';
 
 import '../../states/manage_subscriptions.dart';
 
@@ -25,61 +25,63 @@ class ManageSubscriptions extends StatelessWidget {
       ),
       body: SafeArea(
         bottom: true,
-        child: BlocProvider(
-          create: (context) => ManageSubscriptionCubit(ManageSubscriptionsState()),
-          child: BlocBuilder<ManageSubscriptionCubit, ManageSubscriptionsState>(
-            builder: (context, _) {
-              var cubit = context.read<ManageSubscriptionCubit>();
+        child: Center(
+          child: Container(
+            alignment: Alignment.topCenter,
+            constraints: BoxConstraints(maxWidth: tabletMaxVideoWidth),
+            child: BlocProvider(
+              create: (context) => ManageSubscriptionCubit(ManageSubscriptionsState()),
+              child: BlocBuilder<ManageSubscriptionCubit, ManageSubscriptionsState>(
+                builder: (context, _) {
+                  var cubit = context.read<ManageSubscriptionCubit>();
 
-              return Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: !_.loading && _.subs.isEmpty
-                    ? Center(child: Text(locals.noChannels))
-                    : Stack(
-                        children: [
-                          SmartRefresher(
-                            onRefresh: cubit.refreshSubs,
-                            controller: _.refreshController,
-                            child: ListView.builder(
-                              itemCount: _.subs.length,
-                              itemBuilder: (context, index) {
-                                Subscription sub = _.subs[index];
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: !_.loading && _.subs.isEmpty
+                        ? Center(child: Text(locals.noChannels))
+                        : Stack(
+                            children: [
+                              RefreshIndicator(
+                                onRefresh: () => cubit.refreshSubs(),
+                                child: ListView.builder(
+                                  itemCount: _.subs.length,
+                                  itemBuilder: (context, index) {
+                                    Subscription sub = _.subs[index];
 
-                                return GestureDetector(
-                                  onTap: () => navigatorKey.currentState?.pushNamed(PATH_CHANNEL, arguments: sub.authorId).then((value) => cubit.refreshSubs()),
-                                  child: Container(
-                                    padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-                                    decoration: BoxDecoration(color: index % 2 != 0 ? colors.secondaryContainer.withOpacity(0.5) : colors.background, borderRadius: BorderRadius.circular(10)),
-                                    child: Row(
-                                      key: ValueKey(sub.authorId),
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(sub.author),
-                                        IconButton.filledTonal(
-                                          visualDensity: VisualDensity.compact,
-                                          onPressed: () {
-                                            okCancelDialog(context, locals.unSubscribeQuestion, locals.youCanSubscribeAgainLater, () => cubit.unsubscribe(sub.authorId));
-                                          },
-                                          icon: const Icon(
-                                            Icons.clear,
-                                            size: 15,
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                );
-                              },
-                            ),
+                                    return GestureDetector(
+                                      onTap: () => navigatorKey.currentState?.pushNamed(PATH_CHANNEL, arguments: sub.authorId).then((value) => cubit.refreshSubs()),
+                                      child: Container(
+                                        padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                                        decoration: BoxDecoration(color: index % 2 != 0 ? colors.secondaryContainer.withOpacity(0.5) : colors.background, borderRadius: BorderRadius.circular(10)),
+                                        child: Row(
+                                          key: ValueKey(sub.authorId),
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(sub.author),
+                                            IconButton.filledTonal(
+                                              visualDensity: VisualDensity.compact,
+                                              onPressed: () {
+                                                okCancelDialog(context, locals.unSubscribeQuestion, locals.youCanSubscribeAgainLater, () => cubit.unsubscribe(sub.authorId));
+                                              },
+                                              icon: const Icon(
+                                                Icons.clear,
+                                                size: 15,
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ),
+                              if (_.loading) const TopListLoading()
+                            ],
                           ),
-                          if (_.loading)
-                            const LinearProgressIndicator(
-                              minHeight: 2,
-                            ),
-                        ],
-                      ),
-              );
-            },
+                  );
+                },
+              ),
+            ),
           ),
         ),
       ),

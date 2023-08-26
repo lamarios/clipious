@@ -47,7 +47,7 @@ class TvWelcomeWizard extends StatelessWidget {
                       unfocusedColor: server == null ? colors.background : null,
                       onPressed: server != null
                           ? (context) {
-                              Navigator.of(context).push(MaterialPageRoute(
+                              Navigator.of(context).pushReplacement(MaterialPageRoute(
                                 builder: (context) => const TvHome(),
                               ));
                             }

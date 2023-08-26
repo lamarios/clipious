@@ -13,12 +13,15 @@ import 'package:invidious/utils.dart';
 
 import '../../states/playlist_list.dart';
 
+const smallPlaylistAspectRatio = 1.54;
+
 class PlaylistInList extends StatelessWidget {
   final Playlist playlist;
   final bool canDeleteVideos;
   final bool isTv;
+  final bool small;
 
-  const PlaylistInList({super.key, required this.playlist, required this.canDeleteVideos, this.isTv = false});
+  const PlaylistInList({super.key, required this.playlist, required this.canDeleteVideos, this.isTv = false, this.small = false});
 
   openPlayList(BuildContext context) {
     var cubit = context.read<PlaylistListCubit>();
@@ -96,8 +99,33 @@ class PlaylistInList extends StatelessWidget {
                     })),
               ),
             );
+          } else if (small) {
+            return AspectRatio(
+              aspectRatio: smallPlaylistAspectRatio,
+              child: InkWell(
+                borderRadius: BorderRadius.circular(10),
+                onTap: () => openPlayList(context),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    PlaylistThumbnails(
+                      videos: _.videos,
+                      bestThumbnails: isTv,
+                    ),
+                    Text(
+                      playlist.title,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                      style: textTheme.labelSmall?.copyWith(color: colors.primary),
+                    ),
+                  ],
+                ),
+              ),
+            );
           } else {
             return InkWell(
+              borderRadius: BorderRadius.circular(10),
               onTap: () => openPlayList(context),
               child: Padding(
                 padding: const EdgeInsets.all(8.0),

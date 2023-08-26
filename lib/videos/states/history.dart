@@ -40,12 +40,8 @@ class HistoryItemCubit extends Cubit<HistoryItemState> {
     emit(state);
 
     state = state.copyWith();
-    state.cachedVid = db.getHistoryVideoByVideoId(state.videoId);
-    if (state.cachedVid == null) {
-      var vid = await service.getVideo(state.videoId);
-      state.cachedVid = HistoryVideoCache(vid.videoId, vid.title, vid.author, ImageObject.getWorstThumbnail(vid.videoThumbnails)?.url ?? '');
-      db.upsertHistoryVideo(state.cachedVid!);
-    }
+
+    state.cachedVid = await HistoryVideoCache.fromVideoIdToVideo(state.videoId);
 
     state.loading = false;
     emit(state);

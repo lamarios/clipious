@@ -3,16 +3,12 @@ import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:invidious/utils/models/paginatedList.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../models/playlist.dart';
 
 part 'playlist_list.g.dart';
 
 const couldNotGetPlaylits = 'could-not-get-playlists';
-
-const String userPlayListTag = 'user-playlists';
-const String searchPlayListTag = 'search-playlists';
 
 class PlaylistListCubit extends Cubit<PlaylistListState> {
   PlaylistListCubit(super.initialState) {
@@ -72,13 +68,11 @@ class PlaylistListCubit extends Cubit<PlaylistListState> {
       emit(state);
       rethrow;
     }
-    state.refreshController.refreshCompleted();
   }
 
   @override
   close() async {
     state.scrollController.dispose();
-    state.refreshController.dispose();
     super.close();
   }
 }
@@ -86,7 +80,6 @@ class PlaylistListCubit extends Cubit<PlaylistListState> {
 @CopyWith(constructor: "_")
 class PlaylistListState {
   PaginatedList<Playlist> paginatedList;
-  RefreshController refreshController = RefreshController(initialRefresh: false);
   List<Playlist> playlists = [];
   bool loading = true;
   ScrollController scrollController = ScrollController();
@@ -94,5 +87,5 @@ class PlaylistListState {
 
   PlaylistListState(this.paginatedList);
 
-  PlaylistListState._(this.paginatedList, this.refreshController, this.playlists, this.loading, this.scrollController, this.error);
+  PlaylistListState._(this.paginatedList,  this.playlists, this.loading, this.scrollController, this.error);
 }

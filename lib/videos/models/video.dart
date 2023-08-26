@@ -1,4 +1,5 @@
 import 'package:invidious/videos/models/base_video.dart';
+import 'package:invidious/videos/models/video_in_list.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import '../../utils/models/image_object.dart';
@@ -90,5 +91,9 @@ class Video extends BaseVideo {
     } else {
       return null;
     }
+  }
+
+  VideoInList toVideoInList() {
+    return VideoInList(title, videoId, lengthSeconds, viewCount, author, authorId, authorUrl, published, publishedText, videoThumbnails);
   }
 }

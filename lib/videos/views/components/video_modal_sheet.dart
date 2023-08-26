@@ -12,20 +12,16 @@ import 'add_to_queue_button.dart';
 
 class VideoModalSheet extends StatelessWidget {
   final BaseVideo video;
-  final bool animateDownload;
-  final VideoListSource source;
 
-  const VideoModalSheet({Key? key, required this.video, this.animateDownload = false, required this.source}) : super(key: key);
+  const VideoModalSheet({Key? key, required this.video}) : super(key: key);
 
-  static showVideoModalSheet(BuildContext context, BaseVideo video, {bool animateDownload = false, required VideoListSource source}) {
+  static showVideoModalSheet(BuildContext context, BaseVideo video) {
     showModalBottomSheet<void>(
         context: context,
         showDragHandle: true,
         builder: (BuildContext context) {
           return VideoModalSheet(
             video: video,
-            animateDownload: animateDownload,
-            source: source,
           );
         });
   }
@@ -63,7 +59,7 @@ class VideoModalSheet extends StatelessWidget {
 
   void downloadVideo(BuildContext context) {
     Navigator.of(context).pop();
-    DownloadModalSheet.showVideoModalSheet(context, video, animateDownload: animateDownload, source: source);
+    DownloadModalSheet.showVideoModalSheet(context, video);
   }
 
   @override

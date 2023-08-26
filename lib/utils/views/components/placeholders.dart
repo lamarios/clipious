@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_fadein/flutter_fadein.dart';
+import 'package:invidious/playlists/views/components/playlist_in_list.dart';
 
 import '../../../playlists/views/components/playlist_thumbnail.dart';
 import '../../../utils.dart';
@@ -25,13 +26,14 @@ class AnimatedPlaceHolder extends StatelessWidget {
 }
 
 class TextPlaceHolder extends StatelessWidget {
-  const TextPlaceHolder({super.key});
+  final bool small;
+  const TextPlaceHolder({super.key, this.small = false});
 
   @override
   Widget build(BuildContext context) {
     var colorScheme = Theme.of(context).colorScheme;
     return Container(
-      height: 10,
+      height: small ? 5 : 10,
       decoration: BoxDecoration(color: colorScheme.secondaryContainer, borderRadius: BorderRadius.circular(10)),
     );
   }
@@ -59,8 +61,9 @@ class ThumbnailPlaceHolder extends StatelessWidget {
 
 class VideoListItemPlaceHolder extends StatelessWidget {
   final bool animate;
+  final bool small;
 
-  const VideoListItemPlaceHolder({super.key, this.animate = true});
+  const VideoListItemPlaceHolder({super.key, this.animate = true, this.small = false});
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +75,7 @@ class VideoListItemPlaceHolder extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          const ThumbnailPlaceHolder(),
+          ThumbnailPlaceHolder(borderRadius: small ? 5 : 10),
           const SizedBox(
             height: 4,
           ),
@@ -80,47 +83,52 @@ class VideoListItemPlaceHolder extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Expanded(
+              Expanded(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    TextPlaceHolder(),
-                    SizedBox(
+                    TextPlaceHolder(small: small),
+                    const SizedBox(
                       height: 4,
                     ),
                     FractionallySizedBox(
                       widthFactor: 0.7,
-                      child: TextPlaceHolder(),
+                      child: TextPlaceHolder(
+                        small: small,
+                      ),
                     ),
-                    SizedBox(
-                      height: 4,
-                    ),
-                    Row(
-                      children: [
-                        SizedBox(
-                          width: 50,
-                          child: TextPlaceHolder(),
-                        ),
-                        SizedBox(
-                          width: 4,
-                        ),
-                        SizedBox(
-                          width: 20,
-                          child: TextPlaceHolder(),
-                        ),
-                      ],
-                    )
+                    if (!small)
+                      const SizedBox(
+                        height: 4,
+                      ),
+                    if (!small)
+                      const Row(
+                        children: [
+                          SizedBox(
+                            width: 50,
+                            child: TextPlaceHolder(),
+                          ),
+                          SizedBox(
+                            width: 4,
+                          ),
+                          SizedBox(
+                            width: 20,
+                            child: TextPlaceHolder(),
+                          ),
+                        ],
+                      )
                   ],
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(4),
-                child: Icon(
-                  Icons.more_vert,
-                  color: colorScheme.secondaryContainer,
-                ),
-              )
+              if (!small)
+                Padding(
+                  padding: const EdgeInsets.all(4),
+                  child: Icon(
+                    Icons.more_vert,
+                    color: colorScheme.secondaryContainer,
+                  ),
+                )
             ],
           ),
         ],
@@ -136,10 +144,10 @@ class CompactVideoPlaceHolder extends StatelessWidget {
   Widget build(BuildContext context) {
     var colors = Theme.of(context).colorScheme;
     return AnimatedPlaceHolder(
-      child: SizedBox(
-        height: 70,
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
+      child: Padding(
+        padding: const EdgeInsets.only(bottom: 16.0),
+        child: SizedBox(
+          height: 70,
           child: Row(
             children: [
               AspectRatio(
@@ -209,39 +217,53 @@ class VideoGridPlaceHolder extends StatelessWidget {
 }
 
 class PlaylistPlaceHolder extends StatelessWidget {
-  const PlaylistPlaceHolder({super.key});
+  final bool small;
+  const PlaylistPlaceHolder({super.key, this.small = false});
 
   @override
   Widget build(BuildContext context) {
-    return const AnimatedPlaceHolder(
-      child: Padding(
-        padding: EdgeInsets.all(8.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            SizedBox(
-                height: 95,
-                child: Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: PlaylistThumbnails(videos: [], isPlaceHolder: true),
-                )),
-            Expanded(
+    return AnimatedPlaceHolder(
+      child: small
+          ? const AspectRatio(
+              aspectRatio: smallPlaylistAspectRatio,
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  FractionallySizedBox(widthFactor: 0.7, child: TextPlaceHolder()),
-                  SizedBox(
-                    height: 4,
-                  ),
-                  FractionallySizedBox(widthFactor: 0.4, child: TextPlaceHolder()),
+                  SizedBox(child: PlaylistThumbnails(videos: [], isPlaceHolder: true)),
+                  FractionallySizedBox(
+                      widthFactor: 0.7,
+                      child: TextPlaceHolder(
+                        small: true,
+                      )),
                 ],
               ),
             )
-          ],
-        ),
-      ),
+          : const Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(
+                    height: 95,
+                    child: Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: PlaylistThumbnails(videos: [], isPlaceHolder: true),
+                    )),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      FractionallySizedBox(widthFactor: 0.7, child: TextPlaceHolder()),
+                      SizedBox(
+                        height: 4,
+                      ),
+                      FractionallySizedBox(widthFactor: 0.4, child: TextPlaceHolder()),
+                    ],
+                  ),
+                )
+              ],
+            ),
     );
   }
 }

@@ -1,3 +1,5 @@
+import 'package:flutter/services.dart';
+import 'package:invidious/videos/models/video_in_list.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import '../../settings/models/db/server.dart';
@@ -54,5 +56,9 @@ class BaseVideo extends IdedVideo implements ShareLinks {
     if (timestamp != null) link += '?t=$timestamp';
 
     return link;
+  }
+
+  VideoInList toVideoInList() {
+    return VideoInList(title, videoId, lengthSeconds, 0, author, authorId, authorUrl, null, null, videoThumbnails);
   }
 }

@@ -9,8 +9,6 @@ part of 'item_list.dart';
 abstract class _$ItemListStateCWProxy<T> {
   ItemListState<T> itemList(PaginatedList<T> itemList);
 
-  ItemListState<T> refreshController(RefreshController refreshController);
-
   ItemListState<T> items(List<T> items);
 
   ItemListState<T> loading(bool loading);
@@ -29,7 +27,6 @@ abstract class _$ItemListStateCWProxy<T> {
   /// ````
   ItemListState<T> call({
     PaginatedList<T>? itemList,
-    RefreshController? refreshController,
     List<T>? items,
     bool? loading,
     Map<String, Image>? imageCache,
@@ -47,10 +44,6 @@ class _$ItemListStateCWProxyImpl<T> implements _$ItemListStateCWProxy<T> {
   @override
   ItemListState<T> itemList(PaginatedList<T> itemList) =>
       this(itemList: itemList);
-
-  @override
-  ItemListState<T> refreshController(RefreshController refreshController) =>
-      this(refreshController: refreshController);
 
   @override
   ItemListState<T> items(List<T> items) => this(items: items);
@@ -79,7 +72,6 @@ class _$ItemListStateCWProxyImpl<T> implements _$ItemListStateCWProxy<T> {
   /// ````
   ItemListState<T> call({
     Object? itemList = const $CopyWithPlaceholder(),
-    Object? refreshController = const $CopyWithPlaceholder(),
     Object? items = const $CopyWithPlaceholder(),
     Object? loading = const $CopyWithPlaceholder(),
     Object? imageCache = const $CopyWithPlaceholder(),
@@ -91,11 +83,6 @@ class _$ItemListStateCWProxyImpl<T> implements _$ItemListStateCWProxy<T> {
           ? _value.itemList
           // ignore: cast_nullable_to_non_nullable
           : itemList as PaginatedList<T>,
-      refreshController == const $CopyWithPlaceholder() ||
-              refreshController == null
-          ? _value.refreshController
-          // ignore: cast_nullable_to_non_nullable
-          : refreshController as RefreshController,
       items == const $CopyWithPlaceholder() || items == null
           ? _value.items
           // ignore: cast_nullable_to_non_nullable

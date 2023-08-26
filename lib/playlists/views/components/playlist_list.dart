@@ -7,7 +7,7 @@ import 'package:invidious/playlists/states/playlist_list.dart';
 import 'package:invidious/playlists/views/components/add_to_playlist_list.dart';
 import 'package:invidious/playlists/views/components/playlist_in_list.dart';
 import 'package:invidious/utils/models/paginatedList.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:invidious/utils/views/components/top_loading.dart';
 
 import '../../../globals.dart';
 import '../../../utils/views/components/placeholders.dart';
@@ -15,9 +15,9 @@ import '../../../utils/views/components/placeholders.dart';
 class PlaylistList extends StatelessWidget {
   final PaginatedList<Playlist> paginatedList;
   final bool canDeleteVideos;
-  final String? tag;
+  final bool small;
 
-  const PlaylistList({super.key, required this.tag, required this.paginatedList, required this.canDeleteVideos});
+  const PlaylistList({super.key, required this.paginatedList, required this.canDeleteVideos, this.small = false});
 
   @override
   Widget build(BuildContext context) {
@@ -42,23 +42,21 @@ class PlaylistList extends StatelessWidget {
                       child: FadeIn(
                         duration: animationDuration,
                         curve: Curves.easeInOutQuad,
-                        child: SmartRefresher(
-                          controller: _.refreshController,
-                          enablePullDown: _.paginatedList.hasRefresh(),
-                          enablePullUp: false,
-                          onRefresh: cubit.refreshPlaylists,
+                        child: RefreshIndicator(
+                          onRefresh: () => !small && _.paginatedList.hasRefresh() ? cubit.refreshPlaylists() : null,
                           child: ListView.builder(
+                              scrollDirection: small ? Axis.horizontal : Axis.vertical,
                               controller: _.scrollController,
                               itemBuilder: (context, index) => index >= _.playlists.length
-                                  ? const PlaylistPlaceHolder()
-                                  : PlaylistInList(key: ValueKey(_.playlists[index].playlistId), playlist: _.playlists[index], canDeleteVideos: canDeleteVideos),
+                                  ? PlaylistPlaceHolder(small: small)
+                                  : PlaylistInList(key: ValueKey(_.playlists[index].playlistId), playlist: _.playlists[index], canDeleteVideos: canDeleteVideos, small: small),
                               // separatorBuilder: (context, index) => const Divider(),
                               itemCount: _.playlists.length + (_.loading ? 7 : 0)),
                         ),
                       ),
                     ),
-              Visibility(visible: _.loading, child: const SizedBox(height: 1, child: LinearProgressIndicator())),
-              Visibility(visible: canDeleteVideos, child: const Positioned(bottom: 15, right: 15, child: AddPlayListButton()))
+              Visibility(visible: _.loading && !small, child: const TopListLoading()),
+              Visibility(visible: !small && canDeleteVideos, child: const Positioned(bottom: 15, right: 15, child: AddPlayListButton()))
             ],
           );
         },

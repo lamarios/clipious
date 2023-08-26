@@ -899,6 +899,58 @@
     "@noHistory": {
         "description": "Message when the user visits the history tab but it's empty"
     },
+    "homeLayoutEditor": "Edit home layout",
+    "@homeLayoutEditor": {
+        "description": "Title of layout editor screen"
+    },
+    "layoutEditorAddVideoSource": "Add video source",
+    "@layoutEditorAddVideoSource": {
+        "description": "Label for button to allow user to add more video sources to the home screen"
+    },
+    "layoutEditorExplanation": "You can decide what to display on your home screen, you can have up to 2 small view with horizontal scrolling and one big source.",
+    "@layoutEditorExplanation": {
+        "description": "text to explain the home layout editor"
+    },
+    "home": "Home",
+    "@home": {
+        "description": "Label for Home browsing tab"
+    },
+    "library": "Library",
+    "@library": {
+        "description": "Name for user library"
+    },
+    "customizeAppLayout": "Customize app sections",
+    "@customizeAppLayout": {
+        "description": "Settings label for the settings to allow the user to set up the app sections themselves"
+    },
+    "customizeAppLayoutExplanation": "Select which sections you want to appear in the main app navigation bar. Click on the home icon to select which screen shows when the application starts. You can reorder the sections by dragging them around.",
+    "@customizeAppLayoutExplanation": {
+        "description": ""
+    },
+    "navigationBarStyle": "Navigation bar style",
+    "@navigationBarStyle": {
+        "description": "Label for settings on customizing navigation bar style"
+    },
+    "navigationBarLabelAlwaysShowing": "Label always showing",
+    "@navigationBarLabelAlwaysShowing": {
+        "description": "Label always showing option for navigation bar"
+    },
+    "navigationBarLabelShowOnSelect": "Label shown on selected item",
+    "@navigationBarLabelShowOnSelect": {
+        "description": "Label only showing when selected option for navigation bar"
+    },
+    "navigationBarLabelNeverShow": "Never show label",
+    "@navigationBarLabelNeverShow": {
+        "description": "Never show label option for navigation bar"
+    },
+    "distractionFreeMode": "Distraction free mode",
+    "@distractionFreeMode": {
+        "description": "title for distraction free mode settings"
+    },
+    "distractionFreeModeDescription": "Disable video comments and recommendations",
+    "@distractionFreeModeDescription": {
+        "description": "Description for distraction free mode"
+    },
     "history": "History",
     "@history": {
         "description": "User view history label"

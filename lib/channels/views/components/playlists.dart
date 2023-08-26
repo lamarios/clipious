@@ -20,7 +20,6 @@ class ChannelPlayListsView extends StatelessWidget {
     return PlaylistList(
       canDeleteVideos: canDeleteVideos,
       paginatedList: ContinuationList<Playlist>((continuation) => service.getChannelPlaylists(channelId, continuation: continuation)),
-      tag: 'channel-$channelId',
     );
   }
 }

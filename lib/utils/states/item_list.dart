@@ -4,7 +4,6 @@ import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:invidious/settings/models/errors/invidiousServiceError.dart';
 import 'package:logging/logging.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../models/paginatedList.dart';
 
@@ -21,7 +20,6 @@ class ItemListCubit<T> extends Cubit<ItemListState<T>> {
 
   @override
   close() async {
-    state.refreshController.dispose();
     state.scrollController.dispose();
     super.close();
   }
@@ -82,7 +80,6 @@ class ItemListCubit<T> extends Cubit<ItemListState<T>> {
       emit(state);
       rethrow;
     }
-    state.refreshController.refreshCompleted();
   }
 
   // similar
@@ -92,7 +89,6 @@ class ItemListCubit<T> extends Cubit<ItemListState<T>> {
 @CopyWith(constructor: "_")
 class ItemListState<T> {
   PaginatedList<T> itemList;
-  RefreshController refreshController = RefreshController(initialRefresh: false);
   List<T> items = [];
   bool loading = true;
   Map<String, Image> imageCache = {};
@@ -101,5 +97,5 @@ class ItemListState<T> {
 
   ItemListState({required this.itemList}) {}
 
-  ItemListState._(this.itemList, this.refreshController, this.items, this.loading, this.imageCache, this.scrollController, this.error);
+  ItemListState._(this.itemList,  this.items, this.loading, this.imageCache, this.scrollController, this.error);
 }

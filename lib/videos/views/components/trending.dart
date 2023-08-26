@@ -79,7 +79,6 @@ doesn't seem to be working for now
                   child: VideoList(
                     animateDownload: true,
                     paginatedVideoList: SingleEndpointList(service.getTrending),
-                    source: VideoListSource.trending,
                   ),
                 ),
               ],
