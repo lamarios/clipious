@@ -271,5 +271,77 @@
   "appearance": "Uiterlijk",
   "@appearance": {
     "description": "Settings category title"
+  },
+  "searchSortRating": "Beoordeling",
+  "@searchSortRating": {
+    "description": "Sort search by rating"
+  },
+  "noVideoInPlayList": "Geen video's in afspeellijst",
+  "@noVideoInPlayList": {
+    "description": "When no videos in the playlist"
+  },
+  "irreversibleAction": "Deze actie is onomkeerbaar",
+  "@irreversibleAction": {
+    "description": "Tell the user that the action cannot be undone"
+  },
+  "latestVideos": "Nieuwste video's",
+  "@latestVideos": {
+    "description": "Latest channel videos"
+  },
+  "shareYoutubeLink": "YouTube-link delen",
+  "@shareYoutubeLink": {
+    "description": "asking user to share youtube link"
+  },
+  "shareInvidiousLink": "Invidious-link delen",
+  "@shareInvidiousLink": {
+    "description": "asking user to share invidious link"
+  },
+  "sponsorBlockCategoryOutro": "Eindkaarten/credits",
+  "@sponsorBlockCategoryOutro": {
+    "description": "Outro block 'Outro' Category"
+  },
+  "subtitles": "Ondertitels",
+  "@subtitles": {
+    "description": "Name of TV ui subtitles settings"
+  },
+  "sponsorBlockCategoryPreview": "Voorvertoning/terugblik",
+  "@sponsorBlockCategoryPreview": {
+    "description": "Sponsorblock 'Preview' Category"
+  },
+  "videoFilterHideLabel": "Verbergen",
+  "@videoFilterHideLabel": {
+    "description": "Label to hide videos"
+  },
+  "removeFromPlayList": "Verwijderen uit afspeellijst",
+  "@removeFromPlayList": {
+    "description": "Menu item description to show remove a video from a playlist"
+  },
+  "searchSortRelevance": "Relevantie",
+  "@searchSortRelevance": {
+    "description": "Sort search by relevance"
+  },
+  "shorts": "Shorts",
+  "@shorts": {
+    "description": "Youtube shorts"
+  },
+  "videoFilterValue": "Waarde",
+  "@videoFilterValue": {
+    "description": "Label for filter value"
+  },
+  "save": "Opslaan",
+  "@save": {
+    "description": "Text for save action"
+  },
+  "optional": "optioneel",
+  "@optional": {
+    "description": "Optional label"
+  },
+  "videoFilterType": "Type",
+  "@videoFilterType": {
+    "description": "Label for filter type"
+  },
+  "videoFilterOperation": "Handeling",
+  "@videoFilterOperation": {
+    "description": "Label for filter operation"
   }
 }
