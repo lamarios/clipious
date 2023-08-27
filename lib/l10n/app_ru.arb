@@ -653,7 +653,7 @@
   "@playNext": {
     "description": "Label to play the video after the current one."
   },
-  "returnYoutubeDislikeDescription": "Показать примерное количество дизлайков с помощью API от returnyoutubedislike.com",
+  "returnYoutubeDislikeDescription": "Показывать примерное количество дизлайков видео с помощью API от returnyoutubedislike.com",
   "@returnYoutubeDislikeDescription": {
     "description": "ReturnYoutubeDislike setting description"
   },
@@ -928,5 +928,29 @@
   "customizeAppLayoutExplanation": "Выберите какие разделы вы хотите видеть на панели навигации приложения. Нажмите на значок главной чтобы выбрать страницу, которая будет показываться при запуске приложения. Вы можете сортировать разделы перетаскиванием.",
   "@customizeAppLayoutExplanation": {
     "description": ""
+  },
+  "homeLayoutEditor": "Изменить расстоновку главного меню",
+  "@homeLayoutEditor": {
+    "description": "Title of layout editor screen"
+  },
+  "navigationBarLabelNeverShow": "Не показывать названия",
+  "@navigationBarLabelNeverShow": {
+    "description": "Never show label option for navigation bar"
+  },
+  "navigationBarLabelAlwaysShowing": "Всегда показывать названия",
+  "@navigationBarLabelAlwaysShowing": {
+    "description": "Label always showing option for navigation bar"
+  },
+  "navigationBarLabelShowOnSelect": "Показывать название на выбранном элементе",
+  "@navigationBarLabelShowOnSelect": {
+    "description": "Label only showing when selected option for navigation bar"
+  },
+  "distractionFreeMode": "Режим фокусировки",
+  "@distractionFreeMode": {
+    "description": "title for distraction free mode settings"
+  },
+  "distractionFreeModeDescription": "Отключить комментарии и рекомендации",
+  "@distractionFreeModeDescription": {
+    "description": "Description for distraction free mode"
   }
 }
