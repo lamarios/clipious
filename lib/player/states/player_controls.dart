@@ -40,6 +40,10 @@ class PlayerControlsCubit extends Cubit<PlayerControlsState> {
         hideControls();
         state = this.state.copyWith();
         break;
+      case MediaState.error:
+        hideControls();
+        state = this.state.copyWith();
+        state.errored = true;
       default:
         break;
     }
@@ -47,6 +51,7 @@ class PlayerControlsCubit extends Cubit<PlayerControlsState> {
     switch (event.type) {
       case MediaEventType.progress:
         state.audioPosition = event.value;
+        state.errored = false;
         break;
       case MediaEventType.seek:
         showControls();
@@ -63,7 +68,7 @@ class PlayerControlsCubit extends Cubit<PlayerControlsState> {
   void hideControls() {
     var state = this.state.copyWith();
     state.displayControls = false;
-    if(!isClosed) {
+    if (!isClosed) {
       emit(state);
     }
   }
@@ -100,16 +105,22 @@ class PlayerControlsCubit extends Cubit<PlayerControlsState> {
   void setPlaybackSpeed(double d) {
     player.setSpeed(d);
   }
+
+  void removeError() {
+    emit(state.copyWith(errored: false));
+  }
 }
 
 @CopyWith(constructor: "_")
 class PlayerControlsState {
   PlayerControlsState();
 
+  bool errored = false;
+
   MediaEvent event = MediaEvent(state: MediaState.idle);
   Duration audioPosition = Duration.zero;
 
   bool displayControls = false;
 
-  PlayerControlsState._(this.event, this.audioPosition, this.displayControls);
+  PlayerControlsState._(this.event, this.audioPosition, this.displayControls, this.errored);
 }

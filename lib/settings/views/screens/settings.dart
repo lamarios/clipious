@@ -1,4 +1,3 @@
-import 'package:application_icon/application_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -9,8 +8,9 @@ import 'package:invidious/settings/views/screens/app_logs.dart';
 import 'package:invidious/settings/views/screens/search_history_settings.dart';
 import 'package:invidious/settings/views/screens/sponsor_block_settings.dart';
 import 'package:invidious/settings/views/screens/video_filter.dart';
+import 'package:invidious/utils/views/components/app_icon.dart';
+import 'package:invidious/utils/views/components/select_list_dialog.dart';
 import 'package:locale_names/locale_names.dart';
-import 'package:select_dialog/select_dialog.dart';
 import 'package:settings_ui/settings_ui.dart';
 
 import '../../../globals.dart';
@@ -50,17 +50,20 @@ class Settings extends StatelessWidget {
   }
 
   searchCountry(BuildContext context, SettingsState controller) {
-    var locals = AppLocalizations.of(context);
+    var locals = AppLocalizations.of(context)!;
     var cubit = context.read<SettingsCubit>();
-    SelectDialog.showModal<String>(
-      context,
-      label: locals?.selectBrowsingCountry,
-      selectedValue: controller.country.name,
-      items: countryCodes.map((e) => e.name).toList(),
-      onChange: (String selected) {
-        cubit.selectCountry(selected);
-      },
-    );
+    var colors = Theme.of(context).colorScheme;
+
+    SelectList.show(context,
+        values: countryCodes.map((e) => e.name).toList(),
+        value: controller.country.name,
+        searchFilter: (filter, value) => value.toLowerCase().contains(filter.toLowerCase()),
+        itemBuilder: (value, selected) => Text(
+              value,
+              style: TextStyle(color: selected ? colors.primary : null),
+            ),
+        onSelect: cubit.selectCountry,
+        title: locals.selectBrowsingCountry);
   }
 
   String getNavigationLabelText(BuildContext context, NavigationDestinationLabelBehavior behavior) {
@@ -100,21 +103,16 @@ class Settings extends StatelessWidget {
     var settings = context.read<SettingsCubit>();
     var colors = Theme.of(context).colorScheme;
     var textTheme = Theme.of(context).textTheme;
-    SelectDialog.showModal<NavigationDestinationLabelBehavior>(
-      context,
-      label: locals.navigationBarStyle,
-      selectedValue: settings.state.navigationBarLabelBehavior,
-      itemBuilder: (context, item, isSelected) => Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Text(
-          getNavigationLabelText(context, item),
-          style: textTheme.bodyLarge?.copyWith(color: isSelected ? colors.primary : null),
-        ),
-      ),
-      showSearchBox: false,
-      items: NavigationDestinationLabelBehavior.values,
-      onChange: (p0) => settings.setNavigationBarLabelBehavior(p0),
-    );
+
+    SelectList.show<NavigationDestinationLabelBehavior>(context,
+        values: NavigationDestinationLabelBehavior.values,
+        value: settings.state.navigationBarLabelBehavior,
+        itemBuilder: (value, selected) => Text(
+              getNavigationLabelText(context, value),
+              style: textTheme.bodyLarge?.copyWith(color: selected ? colors.primary : null),
+            ),
+        onSelect: settings.setNavigationBarLabelBehavior,
+        title: locals.navigationBarStyle);
   }
 
   showSelectLanguage(BuildContext context, SettingsState controller) {
@@ -122,10 +120,28 @@ class Settings extends StatelessWidget {
     var localsStrings = localsList.map((e) => e.nativeDisplayLanguageScript ?? '').toList();
     var locals = AppLocalizations.of(context)!;
     var cubit = context.read<SettingsCubit>();
+    var colors = Theme.of(context).colorScheme;
 
     List<String>? localeString = controller.locale?.split('_');
     Locale? selected = localeString != null ? Locale.fromSubtags(languageCode: localeString[0], scriptCode: localeString.length >= 2 ? localeString[1] : null) : null;
 
+    SelectList.show<String>(context,
+        values: [locals.followSystem, ...localsStrings],
+        value: selected?.nativeDisplayLanguageScript ?? locals.followSystem,
+        itemBuilder: (value, selected) => Text(
+              value,
+              style: TextStyle(color: selected ? colors.primary : null),
+            ),
+        onSelect: (value) {
+          if (value == locals.followSystem) {
+            cubit.setLocale(localsList, localsStrings, null);
+          } else {
+            cubit.setLocale(localsList, localsStrings, value);
+          }
+        },
+        title: locals.appLanguage);
+
+/*
     SelectDialog.showModal<String>(
       context,
       label: locals.appLanguage,
@@ -140,6 +156,7 @@ class Settings extends StatelessWidget {
         }
       },
     );
+*/
   }
 
   List<String> getCategories(BuildContext context) {
@@ -333,7 +350,7 @@ class Settings extends StatelessWidget {
                   ],
                 ),
                 SettingsSection(title: (Text(locals.about)), tiles: [
-                  SettingsTile(title: const Center(child: SizedBox(height: 150, width: 150, child: AppIconImage()))),
+                  SettingsTile(title: const Center(child: SizedBox(height: 150, width: 150, child: AppIcon()))),
                   SettingsTile(
                     title: Text('${locals.name}: ${_.packageInfo.appName}'),
                     description: Text('${locals.package}: ${_.packageInfo.packageName}'),

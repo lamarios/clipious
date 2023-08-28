@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/settings/states/video_filter_edit.dart';
-import 'package:search_choices/search_choices.dart';
+import 'package:invidious/utils/views/components/select_list_dialog.dart';
 
 import '../../../channels/models/channel.dart';
 import '../../models/db/video_filter.dart';
@@ -64,6 +64,13 @@ class VideoFilterSetup extends StatelessWidget {
           ];
   }
 
+  searchChannel(BuildContext context) {
+    var cubit = context.read<VideoFilterEditCubit>();
+    var locals = AppLocalizations.of(context)!;
+    SelectList.show<Channel>(context,
+        itemBuilder: (value, selected) => Text(value.author), asyncSearch: (filter) => cubit.searchChannel(filter ?? ''), onSelect: (value) => cubit.selectChannel(value), title: locals.channel);
+  }
+
   @override
   Widget build(BuildContext context) {
     var locals = AppLocalizations.of(context)!;
@@ -87,6 +94,27 @@ class VideoFilterSetup extends StatelessWidget {
                 child: Column(
                   children: [
                     Text(locals.videoFilterEditDescription),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          if (_.channel == null)
+                            FilledButton.tonalIcon(onPressed: () => searchChannel(context), icon: const Icon(Icons.personal_video), label: Text('${locals.channel} (${locals.optional})')),
+                          if (_.channel != null)
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: RichText(
+                                  text: TextSpan(children: [
+                                TextSpan(text: '${locals.channel}: ', style: textTheme.bodyLarge),
+                                TextSpan(text: _.channel?.author ?? '', style: textTheme.bodyLarge?.copyWith(color: colors.primary))
+                              ])),
+                            ),
+                          if (_.channel != null) IconButton(onPressed: () => cubit.channelClear(), icon: Icon(Icons.clear))
+                        ],
+                      ),
+                    )
+/*
                     SearchChoices.single(
                       isExpanded: true,
                       value: _.channel,
@@ -111,6 +139,8 @@ class VideoFilterSetup extends StatelessWidget {
                             channels.length);
                       },
                     ),
+*/
+                    ,
                     Visibility(
                         visible: _.filter?.channelId != null,
                         child: SwitchListTile(title: Text(locals.videoFilterHideAllFromChannel), value: _.filter?.filterAll ?? false, onChanged: cubit.channelHideAll)),

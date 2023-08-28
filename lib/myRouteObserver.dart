@@ -26,26 +26,6 @@ class MyRouteObserver extends RouteObserver<PageRoute<dynamic>> {
 
   stopPlayingOnPop(PageRoute<dynamic>? newRoute, PageRoute<dynamic>? poppedRoute) {
     newRoute?.navigator?.context.read<PlayerCubit>().showMiniPlayer();
-    if (newRoute != null) {
-      switch (newRoute.settings) {
-        case ROUTE_SETTINGS:
-        case ROUTE_PLAYLIST:
-        case ROUTE_SETTINGS_MANAGE_SERVERS:
-        case ROUTE_SETTINGS_MANAGE_ONE_SERVER:
-        case ROUTE_SETTINGS_SPONSOR_BLOCK:
-        case ROUTE_SETTINGS_VIDEO_FILTERS:
-        case ROUTE_VIDEO:
-        case ROUTE_PLAYLIST_LIST:
-        case ROUTE_CHANNEL:
-        case ROUTE_MANAGE_SUBSCRIPTIONS:
-          log.fine('We should stop playing video');
-          // MiniPlayerController.to()?.showMiniPlayer();
-          break;
-        default:
-          log.fine('keep playing video');
-          break;
-      }
-    }
   }
 
   @override

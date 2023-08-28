@@ -13,6 +13,8 @@ abstract class _$PlayerControlsStateCWProxy {
 
   PlayerControlsState displayControls(bool displayControls);
 
+  PlayerControlsState errored(bool errored);
+
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `PlayerControlsState(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
   /// Usage
@@ -23,6 +25,7 @@ abstract class _$PlayerControlsStateCWProxy {
     MediaEvent<dynamic>? event,
     Duration? audioPosition,
     bool? displayControls,
+    bool? errored,
   });
 }
 
@@ -44,6 +47,9 @@ class _$PlayerControlsStateCWProxyImpl implements _$PlayerControlsStateCWProxy {
       this(displayControls: displayControls);
 
   @override
+  PlayerControlsState errored(bool errored) => this(errored: errored);
+
+  @override
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `PlayerControlsState(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
@@ -55,6 +61,7 @@ class _$PlayerControlsStateCWProxyImpl implements _$PlayerControlsStateCWProxy {
     Object? event = const $CopyWithPlaceholder(),
     Object? audioPosition = const $CopyWithPlaceholder(),
     Object? displayControls = const $CopyWithPlaceholder(),
+    Object? errored = const $CopyWithPlaceholder(),
   }) {
     return PlayerControlsState._(
       event == const $CopyWithPlaceholder() || event == null
@@ -69,6 +76,10 @@ class _$PlayerControlsStateCWProxyImpl implements _$PlayerControlsStateCWProxy {
           ? _value.displayControls
           // ignore: cast_nullable_to_non_nullable
           : displayControls as bool,
+      errored == const $CopyWithPlaceholder() || errored == null
+          ? _value.errored
+          // ignore: cast_nullable_to_non_nullable
+          : errored as bool,
     );
   }
 }

@@ -1,4 +1,3 @@
-import 'package:application_icon/application_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -6,6 +5,7 @@ import 'package:invidious/app/states/app.dart';
 import 'package:invidious/main.dart';
 import 'package:invidious/settings/states/server_list_settings.dart';
 import 'package:invidious/settings/views/components/manager_server_inner.dart';
+import 'package:invidious/utils/views/components/app_icon.dart';
 import 'package:invidious/welcome_wizard/states/welcome_wizard.dart';
 
 import '../../../settings/models/db/server.dart';
@@ -44,7 +44,7 @@ class WelcomeWizard extends StatelessWidget {
               body: SafeArea(
                   top: true,
                   child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-                    const SizedBox(width: 150, height: 150, child: AppIconImage()),
+                    const SizedBox(width: 150, height: 150, child: AppIcon()),
                     Text(
                       'Clipious',
                       style: textTheme.displaySmall?.copyWith(color: colors.primary),
