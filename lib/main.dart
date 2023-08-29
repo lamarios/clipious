@@ -369,7 +369,12 @@ class _HomeState extends State<Home> with AfterLayoutMixin {
                         // home handles its own padding because we don't want to cut horizontal scroll lists on the right
                         padding: EdgeInsets.symmetric(horizontal: selectedPage == HomeDataSource.home ? 0 : innerHorizontalPadding),
                         key: ValueKey(selectedPage),
-                        child: selectedPage?.build(context, false) ?? const Opacity(opacity: 0.2, child: AppIcon())),
+                        child: selectedPage?.build(context, false) ??
+                            const Opacity(
+                                opacity: 0.2,
+                                child: AppIcon(
+                                  height: 200,
+                                ))),
 /*
                     child: <Widget>[
                       const HomeView(

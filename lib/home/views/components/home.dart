@@ -78,7 +78,11 @@ class HomeView extends StatelessWidget {
               padding: const EdgeInsets.only(left: innerHorizontalPadding),
               color: colors.background,
               child: layout.smallSources.isEmpty && !layout.showBigSource
-                  ? const Opacity(opacity: 0.2, child: AppIcon())
+                  ? const Opacity(
+                      opacity: 0.2,
+                      child: AppIcon(
+                        height: 200,
+                      ))
                   : Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
