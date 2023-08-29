@@ -1,4 +1,3 @@
-import 'package:application_icon/application_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -9,6 +8,7 @@ import 'package:invidious/home/states/home.dart';
 
 import '../../../main.dart';
 import '../../../search/views/screens/search.dart';
+import '../../../utils/views/components/app_icon.dart';
 
 const double smallVideoViewHeight = 140;
 
@@ -78,7 +78,11 @@ class HomeView extends StatelessWidget {
               padding: const EdgeInsets.only(left: innerHorizontalPadding),
               color: colors.background,
               child: layout.smallSources.isEmpty && !layout.showBigSource
-                  ? const Opacity(opacity: 0.2, child: AppIconImage())
+                  ? const Opacity(
+                      opacity: 0.2,
+                      child: AppIcon(
+                        height: 200,
+                      ))
                   : Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,

@@ -52,13 +52,12 @@ dependencies:
   path_provider: 2.1.0
   path: 1.8.3
   flutter_web_auth: 0.5.0
-  select_dialog: 2.0.0
   cached_network_image: 3.2.3
   share_plus: 7.1.0
   package_info_plus: 4.1.0
   receive_sharing_intent: 1.4.5
   logging: 1.2.0
-  application_icon: 2.0.0
+  flutter_svg: 2.0.7
   flutter_native_splash: 2.3.2
   flutter_linkify: 6.0.0
   url_launcher: 6.1.12
@@ -70,7 +69,6 @@ dependencies:
     git:
       url: https://github.com/lamarios/locale_names.git
       ref: master
-  search_choices: 2.2.6
   uuid: 3.0.7
   dio: 5.3.2
   just_audio: 0.9.34
@@ -131,8 +129,8 @@ flutter:
   generate: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
+  assets:
+    - assets/icon.svg
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

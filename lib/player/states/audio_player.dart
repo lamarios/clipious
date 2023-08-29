@@ -43,7 +43,10 @@ class AudioPlayerCubit extends MediaPlayerCubit<AudioPlayerState> {
   initPlayer() {
     if (state.player == null) {
       state.player = AudioPlayer();
-      state.player?.playerStateStream.listen(onStateStreamChange);
+      state.player?.playerStateStream.listen(onStateStreamChange, onError: (e, st) {
+        print('ERRRRRROOOORR');
+        return globalPlayer.setEvent(MediaEvent(state: MediaState.error));
+      });
       state.player?.positionStream.listen(onPositionChanged);
       state.player?.durationStream.listen(onDurationChanged);
     }
@@ -129,6 +132,7 @@ class AudioPlayerCubit extends MediaPlayerCubit<AudioPlayerState> {
         }
       } catch (e) {
         log.severe("Couldn't play video", e);
+        globalPlayer.setEvent(MediaEvent(state: MediaState.error));
         state.error = e.toString();
         state.loading = false;
         if (!isClosed) emit(state);

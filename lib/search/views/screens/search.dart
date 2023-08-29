@@ -54,6 +54,7 @@ class Search extends StatelessWidget {
               backgroundColor: colorScheme.background,
               scrolledUnderElevation: 0,
               title: TextField(
+                autofocus: query == null,
                 controller: _.queryController,
                 textInputAction: TextInputAction.search,
                 onSubmitted: cubit.search,

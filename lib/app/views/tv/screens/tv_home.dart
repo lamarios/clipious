@@ -1,5 +1,5 @@
-import 'package:application_icon/application_icon.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/app/states/tv_home.dart';
@@ -14,6 +14,7 @@ import 'package:invidious/videos/views/components/subscriptions.dart';
 import 'package:invidious/videos/views/components/trending.dart';
 import 'package:invidious/videos/views/tv/screens/video_grid_view.dart';
 
+import '../../../../utils/views/components/app_icon.dart';
 import '../../../../videos/views/components/popular.dart';
 import '../../../states/app.dart';
 
@@ -78,7 +79,7 @@ class TvHome extends StatelessWidget {
         body: BlocBuilder<TvHomeCubit, bool>(builder: (context, expandMenu) {
           var cubit = context.read<TvHomeCubit>();
           return BlocBuilder<AppCubit, AppState>(buildWhen: (previous, current) {
-            return  previous.server != current.server;
+            return previous.server != current.server;
           }, builder: (context, _) {
             var app = context.read<AppCubit>();
             return DefaultTextStyle(
@@ -100,13 +101,17 @@ class TvHome extends StatelessWidget {
                                 height: 50,
                                 child: Row(
                                   children: [
-                                    const AppIconImage(),
-                                    Visibility(
-                                        visible: expandMenu,
-                                        child: Text(
-                                          'Clipious',
-                                          style: textTheme.titleLarge!.copyWith(color: colors.primary),
-                                        ))
+                                    const AppIcon(
+                                      width: 50,
+                                      height: 50,
+                                    ),
+                                    if (expandMenu)
+                                      Padding(
+                                          padding: const EdgeInsets.only(left: 16.0),
+                                          child: MenuItemText(
+                                            'Clipious',
+                                            style: textTheme.titleLarge!.copyWith(color: colors.primary),
+                                          ))
                                   ],
                                 )),
                           ),
@@ -124,7 +129,7 @@ class TvHome extends StatelessWidget {
                                       padding: EdgeInsets.only(right: 8.0),
                                       child: Icon(Icons.search),
                                     ),
-                                    expandMenu ? Text(locals.search) : const SizedBox.shrink()
+                                    if (expandMenu) MenuItemText(locals.search)
                                   ],
                                 ),
                               ),
@@ -146,7 +151,7 @@ class TvHome extends StatelessWidget {
                                         padding: EdgeInsets.only(right: 8.0),
                                         child: Icon(Icons.subscriptions),
                                       ),
-                                      expandMenu ? Text(locals.subscriptions) : const SizedBox.shrink()
+                                      if (expandMenu) MenuItemText(locals.subscriptions)
                                     ],
                                   ),
                                 ),
@@ -169,7 +174,7 @@ class TvHome extends StatelessWidget {
                                         padding: EdgeInsets.only(right: 8.0),
                                         child: Icon(Icons.playlist_play),
                                       ),
-                                      expandMenu ? Text(locals.playlists) : const SizedBox.shrink()
+                                      if (expandMenu) MenuItemText(locals.playlists)
                                     ],
                                   ),
                                 ),
@@ -190,7 +195,7 @@ class TvHome extends StatelessWidget {
                                       padding: EdgeInsets.only(right: 8.0),
                                       child: Icon(Icons.local_fire_department),
                                     ),
-                                    expandMenu ? Text(locals.popular) : const SizedBox.shrink()
+                                    if (expandMenu) MenuItemText(locals.popular)
                                   ],
                                 ),
                               ),
@@ -210,7 +215,7 @@ class TvHome extends StatelessWidget {
                                       padding: EdgeInsets.only(right: 8.0),
                                       child: Icon(Icons.trending_up),
                                     ),
-                                    expandMenu ? Text(locals.trending) : const SizedBox.shrink()
+                                    if (expandMenu) MenuItemText(locals.trending)
                                   ],
                                 ),
                               ),
@@ -228,7 +233,7 @@ class TvHome extends StatelessWidget {
                                     padding: EdgeInsets.only(right: 8.0),
                                     child: Icon(Icons.settings),
                                   ),
-                                  expandMenu ? Text(locals.settings) : const SizedBox.shrink()
+                                  if (expandMenu) MenuItemText(locals.settings)
                                 ],
                               ),
                             ),
@@ -276,5 +281,20 @@ class TvHome extends StatelessWidget {
         }),
       ),
     );
+  }
+}
+
+class MenuItemText extends StatelessWidget {
+  final String text;
+  final TextStyle? style;
+
+  const MenuItemText(this.text, {super.key, this.style});
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      text,
+      style: style,
+    ).animate().fadeIn(delay: animationDuration ~/ 2, duration: animationDuration).slideX(curve: Curves.easeInOutQuad);
   }
 }

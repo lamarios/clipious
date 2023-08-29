@@ -208,142 +208,152 @@ class PlayerControls extends StatelessWidget {
                 onVerticalDragEnd: pc.isFullScreen() == FullScreenState.fullScreen ? null : player.videoDraggedEnd,
                 onVerticalDragUpdate: pc.isFullScreen() == FullScreenState.fullScreen ? null : player.videoDragged,
                 onVerticalDragStart: pc.isFullScreen() == FullScreenState.fullScreen ? null : player.videoDragStarted,
-                child: Padding(
-                  padding: EdgeInsets.all(isMini ? 8 : 0.0),
-                  child: AspectRatio(
-                    aspectRatio: 16 / 9,
-                    child: Stack(
-                      alignment: Alignment.topCenter,
-                      children: [
+                child: AspectRatio(
+                  aspectRatio: 16 / 9,
+                  child: Stack(
+                    alignment: Alignment.topCenter,
+                    children: [
+                      if (_.errored)
+                        Container(
+                          color: Colors.black.withOpacity(0.8),
+                          child: const Center(
+                            child: Icon(Icons.error),
+                          ),
+                        ),
+                      Positioned(
+                        left: 0,
+                        right: 0,
+                        bottom: 0,
+                        top: 0,
+                        child: isMini || isPip
+                            ? const SizedBox.shrink()
+                            : _.displayControls
+                                ? Container(
+                                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(0), color: Colors.black.withOpacity(0.4)),
+                                    child: Column(
+                                      children: [
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.end,
+                                          children: [
+                                            if (pc.isFullScreen() == FullScreenState.fullScreen)
+                                              Expanded(
+                                                  child: Padding(
+                                                padding: const EdgeInsets.only(left: 8.0),
+                                                child: Text(
+                                                  videoTitle,
+                                                  maxLines: 1,
+                                                  overflow: TextOverflow.ellipsis,
+                                                ),
+                                              )),
+                                            if (pc.supportsPip()) IconButton(onPressed: pc.enterPip, icon: const Icon(Icons.picture_in_picture)),
+                                            IconButton(onPressed: () => showOptionMenu(context, _, pc), icon: const Icon(Icons.more_vert))
+                                          ],
+                                        ),
+                                        Expanded(child: Container()),
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.end,
+                                          children: [
+                                            pc.isMuted()
+                                                ? IconButton(onPressed: () => pc.toggleVolume(true), icon: const Icon(Icons.volume_off))
+                                                : IconButton(onPressed: () => pc.toggleVolume(false), icon: const Icon(Icons.volume_up)),
+                                            switch (pc.isFullScreen()) {
+                                              FullScreenState.fullScreen => IconButton(onPressed: () => pc.setFullScreen((false)), icon: const Icon(Icons.fullscreen_exit)),
+                                              FullScreenState.notFullScreen => IconButton(onPressed: () => pc.setFullScreen(true), icon: const Icon(Icons.fullscreen)),
+                                              _ => const SizedBox.shrink()
+                                            }
+                                          ],
+                                        ),
+                                        if (!(player.state.currentlyPlaying?.liveNow ?? false))
+                                          Padding(
+                                            padding: const EdgeInsets.only(top: 0.0, right: 8),
+                                            child: Row(
+                                              children: [
+                                                Expanded(
+                                                  child: SizedBox(
+                                                    height: 25,
+                                                    child: Slider(
+                                                      min: 0,
+                                                      value: min(_.audioPosition.inMilliseconds.toDouble(), pc.duration().inMilliseconds.toDouble()),
+                                                      max: pc.duration().inMilliseconds.toDouble(),
+                                                      secondaryTrackValue: min(pc.bufferedPosition()?.inMilliseconds.toDouble() ?? 0, pc.duration().inMilliseconds.toDouble()),
+                                                      onChangeEnd: cubit.onScrubbed,
+                                                      onChanged: cubit.onScrubDrag,
+                                                    ),
+                                                  ),
+                                                ),
+                                                Text(
+                                                  '${prettyDuration(pc.position())} / ${prettyDuration(pc.duration())}',
+                                                  style: textTheme.bodySmall?.copyWith(color: Colors.white),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                      ],
+                                    ),
+                                  )
+                                : const SizedBox.expand(),
+                      ),
+                      if (!isMini && !isPip && _.displayControls)
                         Positioned(
+                          top: 0,
                           left: 0,
                           right: 0,
                           bottom: 0,
-                          top: 0,
-                          child: isMini || isPip
-                              ? const SizedBox.shrink()
-                              : _.displayControls
-                                  ? Container(
-                                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(0), color: Colors.black.withOpacity(0.4)),
-                                      child: Column(
-                                        children: [
-                                          Row(
-                                            mainAxisAlignment: MainAxisAlignment.end,
-                                            children: [
-                                              if (pc.isFullScreen() == FullScreenState.fullScreen)
-                                                Expanded(
-                                                    child: Padding(
-                                                  padding: const EdgeInsets.only(left: 8.0),
-                                                  child: Text(
-                                                    videoTitle,
-                                                    maxLines: 1,
-                                                    overflow: TextOverflow.ellipsis,
-                                                  ),
-                                                )),
-                                              if (pc.supportsPip()) IconButton(onPressed: pc.enterPip, icon: const Icon(Icons.picture_in_picture)),
-                                              IconButton(onPressed: () => showOptionMenu(context, _, pc), icon: const Icon(Icons.more_vert))
-                                            ],
-                                          ),
-                                          Expanded(child: Container()),
-                                          Row(
-                                            mainAxisAlignment: MainAxisAlignment.end,
-                                            children: [
-                                              pc.isMuted()
-                                                  ? IconButton(onPressed: () => pc.toggleVolume(true), icon: const Icon(Icons.volume_off))
-                                                  : IconButton(onPressed: () => pc.toggleVolume(false), icon: const Icon(Icons.volume_up)),
-                                              switch (pc.isFullScreen()) {
-                                                FullScreenState.fullScreen => IconButton(onPressed: () => pc.setFullScreen((false)), icon: const Icon(Icons.fullscreen_exit)),
-                                                FullScreenState.notFullScreen => IconButton(onPressed: () => pc.setFullScreen(true), icon: const Icon(Icons.fullscreen)),
-                                                _ => const SizedBox.shrink()
-                                              }
-                                            ],
-                                          ),
-                                          if (!(player.state.currentlyPlaying?.liveNow ?? false))
-                                            Padding(
-                                              padding: const EdgeInsets.only(top: 0.0, right: 8),
-                                              child: Row(
-                                                children: [
-                                                  Expanded(
-                                                    child: SizedBox(
-                                                      height: 25,
-                                                      child: Slider(
-                                                        min: 0,
-                                                        value: min(_.audioPosition.inMilliseconds.toDouble(), pc.duration().inMilliseconds.toDouble()),
-                                                        max: pc.duration().inMilliseconds.toDouble(),
-                                                        secondaryTrackValue: min(pc.bufferedPosition()?.inMilliseconds.toDouble() ?? 0, pc.duration().inMilliseconds.toDouble()),
-                                                        onChangeEnd: cubit.onScrubbed,
-                                                        onChanged: cubit.onScrubDrag,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  Text(
-                                                    '${prettyDuration(pc.position())} / ${prettyDuration(pc.duration())}',
-                                                    style: textTheme.bodySmall?.copyWith(color: Colors.white),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                        ],
-                                      ),
-                                    )
-                                  : const SizedBox.expand(),
-                        ),
-                        if (!isMini && !isPip && _.displayControls)
-                          Positioned(
-                            top: 0,
-                            left: 0,
-                            right: 0,
-                            bottom: 0,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                if (hasQueue)
-                                  IconButton(
-                                      onPressed: () => player.playPrevious(),
-                                      icon: const Icon(
-                                        Icons.skip_previous,
-                                        size: 20,
-                                      )),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              if (hasQueue)
                                 IconButton(
-                                    onPressed: () => player.rewind(),
+                                    onPressed: () {
+                                      player.playPrevious();
+                                      cubit.removeError();
+                                    },
                                     icon: const Icon(
-                                      Icons.fast_rewind,
-                                      size: 30,
+                                      Icons.skip_previous,
+                                      size: 20,
                                     )),
-                                IconButton(
-                                  onPressed: () => player.state.isPlaying ? player.pause() : player.play(),
-                                  icon: Icon(player.state.isPlaying ? Icons.pause : Icons.play_arrow, size: 55),
-                                ),
-                                IconButton(
-                                    onPressed: () => player.fastForward(),
-                                    icon: const Icon(
-                                      Icons.fast_forward,
-                                      size: 30,
-                                    )),
-                                if (hasQueue)
-                                  IconButton(
-                                      onPressed: () => player.playNext(),
-                                      icon: const Icon(
-                                        Icons.skip_next,
-                                        size: 20,
-                                      )),
-                              ],
-                            ),
-                          ),
-                        if (event.state == MediaState.buffering)
-                          const Center(
-                            child: FractionallySizedBox(
-                              heightFactor: 0.3,
-                              child: AspectRatio(
-                                  aspectRatio: 1,
-                                  child: CircularProgressIndicator(
-                                    strokeWidth: 2,
+                              IconButton(
+                                  onPressed: () => player.rewind(),
+                                  icon: const Icon(
+                                    Icons.fast_rewind,
+                                    size: 30,
                                   )),
-                            ),
-                          )
-                      ],
-                    ),
+                              IconButton(
+                                onPressed: () => player.state.isPlaying ? player.pause() : player.play(),
+                                icon: Icon(player.state.isPlaying ? Icons.pause : Icons.play_arrow, size: 55),
+                              ),
+                              IconButton(
+                                  onPressed: () => player.fastForward(),
+                                  icon: const Icon(
+                                    Icons.fast_forward,
+                                    size: 30,
+                                  )),
+                              if (hasQueue)
+                                IconButton(
+                                    onPressed: () {
+                                      player.playNext();
+                                      cubit.removeError();
+                                    },
+                                    icon: const Icon(
+                                      Icons.skip_next,
+                                      size: 20,
+                                    )),
+                            ],
+                          ),
+                        ),
+                      if (event.state == MediaState.buffering)
+                        const Center(
+                          child: FractionallySizedBox(
+                            heightFactor: 0.3,
+                            child: AspectRatio(
+                                aspectRatio: 1,
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 2,
+                                )),
+                          ),
+                        )
+                    ],
                   ),
                 ),
               ),

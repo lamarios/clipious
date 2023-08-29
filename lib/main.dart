@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:after_layout/after_layout.dart';
-import 'package:application_icon/application_icon.dart';
 import 'package:back_button_interceptor/back_button_interceptor.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/foundation.dart';
@@ -28,6 +27,7 @@ import 'package:invidious/settings/states/settings.dart';
 import 'package:invidious/settings/views/screens/settings.dart';
 import 'package:invidious/subscription_management/view/screens/manage_subscriptions.dart';
 import 'package:invidious/utils.dart';
+import 'package:invidious/utils/views/components/app_icon.dart';
 import 'package:invidious/videos/views/screens/video.dart';
 import 'package:invidious/welcome_wizard/views/screens/welcome_wizard.dart';
 import 'package:invidious/welcome_wizard/views/tv/screens/welcome_wizard.dart';
@@ -369,7 +369,12 @@ class _HomeState extends State<Home> with AfterLayoutMixin {
                         // home handles its own padding because we don't want to cut horizontal scroll lists on the right
                         padding: EdgeInsets.symmetric(horizontal: selectedPage == HomeDataSource.home ? 0 : innerHorizontalPadding),
                         key: ValueKey(selectedPage),
-                        child: selectedPage?.build(context, false) ?? const Opacity(opacity: 0.2, child: AppIconImage())),
+                        child: selectedPage?.build(context, false) ??
+                            const Opacity(
+                                opacity: 0.2,
+                                child: AppIcon(
+                                  height: 200,
+                                ))),
 /*
                     child: <Widget>[
                       const HomeView(
