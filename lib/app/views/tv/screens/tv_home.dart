@@ -20,6 +20,8 @@ import '../../../states/app.dart';
 
 const overlayBackgroundOpacity = 0.8;
 const double overlayBlur = 25.0;
+GlobalKey popularTitle = GlobalKey(debugLabel: 'popular title');
+GlobalKey subscriptionTitle = GlobalKey(debugLabel: 'subscription title');
 
 class TvHome extends StatelessWidget {
   const TvHome({Key? key}) : super(key: key);
@@ -74,10 +76,10 @@ class TvHome extends StatelessWidget {
     var locals = AppLocalizations.of(context)!;
 
     return BlocProvider(
-      create: (BuildContext context) => TvHomeCubit(false),
+      create: (BuildContext context) => TvHomeCubit(TvHomeState()),
       child: Scaffold(
-        body: BlocBuilder<TvHomeCubit, bool>(builder: (context, expandMenu) {
-          var cubit = context.read<TvHomeCubit>();
+        body: BlocBuilder<TvHomeCubit, TvHomeState>(builder: (context, homeState) {
+          var homeCubit = context.read<TvHomeCubit>();
           return BlocBuilder<AppCubit, AppState>(buildWhen: (previous, current) {
             return previous.server != current.server;
           }, builder: (context, _) {
@@ -88,12 +90,12 @@ class TvHome extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   AnimatedContainer(
-                    width: expandMenu ? 250 : 118,
+                    width: homeState.expandMenu ? 250 : 118,
                     duration: animationDuration ~/ 2,
                     curve: Curves.easeInOutQuad,
-                    decoration: BoxDecoration(color: expandMenu ? colors.secondaryContainer.withOpacity(0.5) : Colors.transparent),
+                    decoration: BoxDecoration(color: homeState.expandMenu ? colors.secondaryContainer.withOpacity(0.5) : Colors.transparent),
                     child: Padding(
-                        padding: EdgeInsets.only(top: TvOverscan.vertical, left: TvOverscan.horizontal, bottom: TvOverscan.vertical, right: expandMenu ? TvOverscan.horizontal : 8),
+                        padding: EdgeInsets.only(top: TvOverscan.vertical, left: TvOverscan.horizontal, bottom: TvOverscan.vertical, right: homeState.expandMenu ? TvOverscan.horizontal : 8),
                         child: Column(mainAxisAlignment: MainAxisAlignment.start, crossAxisAlignment: CrossAxisAlignment.start, children: [
                           Padding(
                             padding: const EdgeInsets.only(bottom: 30.0),
@@ -105,7 +107,7 @@ class TvHome extends StatelessWidget {
                                       width: 50,
                                       height: 50,
                                     ),
-                                    if (expandMenu)
+                                    if (homeState.expandMenu)
                                       Padding(
                                           padding: const EdgeInsets.only(left: 16.0),
                                           child: MenuItemText(
@@ -118,7 +120,7 @@ class TvHome extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.only(bottom: 8.0),
                             child: TvButton(
-                              onFocusChanged: cubit.menuItemFocusChanged,
+                              onFocusChanged: homeCubit.menuItemFocusChanged,
                               onPressed: openSearch,
                               unfocusedColor: colors.secondaryContainer.withOpacity(0.0),
                               child: Padding(
@@ -129,7 +131,7 @@ class TvHome extends StatelessWidget {
                                       padding: EdgeInsets.only(right: 8.0),
                                       child: Icon(Icons.search),
                                     ),
-                                    if (expandMenu) MenuItemText(locals.search)
+                                    if (homeState.expandMenu) MenuItemText(locals.search)
                                   ],
                                 ),
                               ),
@@ -140,7 +142,7 @@ class TvHome extends StatelessWidget {
                             child: Padding(
                               padding: const EdgeInsets.only(bottom: 8.0),
                               child: TvButton(
-                                onFocusChanged: cubit.menuItemFocusChanged,
+                                onFocusChanged: homeCubit.menuItemFocusChanged,
                                 onPressed: openSubscriptions,
                                 unfocusedColor: colors.secondaryContainer.withOpacity(0.0),
                                 child: Padding(
@@ -151,7 +153,7 @@ class TvHome extends StatelessWidget {
                                         padding: EdgeInsets.only(right: 8.0),
                                         child: Icon(Icons.subscriptions),
                                       ),
-                                      if (expandMenu) MenuItemText(locals.subscriptions)
+                                      if (homeState.expandMenu) MenuItemText(locals.subscriptions)
                                     ],
                                   ),
                                 ),
@@ -163,7 +165,7 @@ class TvHome extends StatelessWidget {
                             child: Padding(
                               padding: const EdgeInsets.only(bottom: 8.0),
                               child: TvButton(
-                                onFocusChanged: cubit.menuItemFocusChanged,
+                                onFocusChanged: homeCubit.menuItemFocusChanged,
                                 onPressed: openPlaylists,
                                 unfocusedColor: colors.secondaryContainer.withOpacity(0.0),
                                 child: Padding(
@@ -174,7 +176,7 @@ class TvHome extends StatelessWidget {
                                         padding: EdgeInsets.only(right: 8.0),
                                         child: Icon(Icons.playlist_play),
                                       ),
-                                      if (expandMenu) MenuItemText(locals.playlists)
+                                      if (homeState.expandMenu) MenuItemText(locals.playlists)
                                     ],
                                   ),
                                 ),
@@ -184,7 +186,7 @@ class TvHome extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.only(bottom: 8.0),
                             child: TvButton(
-                              onFocusChanged: cubit.menuItemFocusChanged,
+                              onFocusChanged: homeCubit.menuItemFocusChanged,
                               onPressed: openPopular,
                               unfocusedColor: colors.secondaryContainer.withOpacity(0.0),
                               child: Padding(
@@ -195,7 +197,7 @@ class TvHome extends StatelessWidget {
                                       padding: EdgeInsets.only(right: 8.0),
                                       child: Icon(Icons.local_fire_department),
                                     ),
-                                    if (expandMenu) MenuItemText(locals.popular)
+                                    if (homeState.expandMenu) MenuItemText(locals.popular)
                                   ],
                                 ),
                               ),
@@ -204,7 +206,7 @@ class TvHome extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.only(bottom: 8.0),
                             child: TvButton(
-                              onFocusChanged: cubit.menuItemFocusChanged,
+                              onFocusChanged: homeCubit.menuItemFocusChanged,
                               onPressed: openTrending,
                               unfocusedColor: colors.secondaryContainer.withOpacity(0.0),
                               child: Padding(
@@ -215,14 +217,14 @@ class TvHome extends StatelessWidget {
                                       padding: EdgeInsets.only(right: 8.0),
                                       child: Icon(Icons.trending_up),
                                     ),
-                                    if (expandMenu) MenuItemText(locals.trending)
+                                    if (homeState.expandMenu) MenuItemText(locals.trending)
                                   ],
                                 ),
                               ),
                             ),
                           ),
                           TvButton(
-                            onFocusChanged: cubit.menuItemFocusChanged,
+                            onFocusChanged: homeCubit.menuItemFocusChanged,
                             onPressed: (context) => openSettings(context),
                             unfocusedColor: colors.secondaryContainer.withOpacity(0.0),
                             child: Padding(
@@ -233,7 +235,7 @@ class TvHome extends StatelessWidget {
                                     padding: EdgeInsets.only(right: 8.0),
                                     child: Icon(Icons.settings),
                                   ),
-                                  if (expandMenu) MenuItemText(locals.settings)
+                                  if (homeState.expandMenu) MenuItemText(locals.settings)
                                 ],
                               ),
                             ),
@@ -241,35 +243,64 @@ class TvHome extends StatelessWidget {
                         ])),
                   ),
                   Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: TvOverscan.vertical, bottom: TvOverscan.vertical, right: TvOverscan.horizontal, left: 8),
-                      child: ListView(
-                        // crossAxisAlignment: CrossAxisAlignment.start,
+                    // terrible work around to be able to scroll to all the global keys
+                    child: SingleChildScrollView(
+                      child: Column(
                         children: [
-                          Visibility(
-                            visible: app.isLoggedIn,
-                            child: Text(
-                              locals.subscriptions,
-                              style: textTheme.titleLarge,
+                          Padding(
+                            padding: const EdgeInsets.only(top: TvOverscan.vertical, bottom: TvOverscan.vertical, right: TvOverscan.horizontal, left: 8),
+                            child: ListView(
+                              controller: homeState.scrollController,
+                              physics: const NeverScrollableScrollPhysics(),
+                              shrinkWrap: true,
+                              // crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Visibility(
+                                  key: subscriptionTitle,
+                                  visible: app.isLoggedIn,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(top: 16.0),
+                                    child: Text(
+                                      locals.subscriptions,
+                                      style: textTheme.titleLarge,
+                                    ),
+                                  ),
+                                ),
+                                Visibility(
+                                  visible: app.isLoggedIn,
+                                  child: Subscriptions(
+                                    onItemFocus: (video, index, focus) {
+                                      if (focus) {
+                                        Scrollable.ensureVisible(subscriptionTitle.currentContext!,
+                                            duration: animationDuration, curve: Curves.easeInOutQuad, alignmentPolicy: ScrollPositionAlignmentPolicy.keepVisibleAtStart);
+                                      }
+                                    },
+                                  ),
+                                ),
+                                Padding(
+                                  key: popularTitle,
+                                  padding: const EdgeInsets.only(top: 16.0),
+                                  child: Text(locals.popular, style: textTheme.titleLarge),
+                                ),
+                                Popular(
+                                  onItemFocus: (video, index, focus) {
+                                    if (focus) {
+                                      Scrollable.ensureVisible(popularTitle.currentContext!,
+                                          duration: animationDuration, curve: Curves.easeInOutQuad, alignmentPolicy: ScrollPositionAlignmentPolicy.keepVisibleAtStart);
+                                    }
+                                  },
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 16.0),
+                                  child: Text(
+                                    locals.trending,
+                                    style: textTheme.titleLarge,
+                                  ),
+                                ),
+                                const Trending(),
+                              ],
                             ),
                           ),
-                          Visibility(
-                            visible: app.isLoggedIn,
-                            child: const Padding(
-                              padding: EdgeInsets.only(bottom: 16.0),
-                              child: Subscriptions(),
-                            ),
-                          ),
-                          Text(locals.popular, style: textTheme.titleLarge),
-                          const Padding(
-                            padding: EdgeInsets.only(bottom: 16.0),
-                            child: Popular(),
-                          ),
-                          Text(
-                            locals.trending,
-                            style: textTheme.titleLarge,
-                          ),
-                          const Trending()
                         ],
                       ),
                     ),
@@ -295,6 +326,6 @@ class MenuItemText extends StatelessWidget {
     return Text(
       text,
       style: style,
-    ).animate().fadeIn(delay: animationDuration ~/ 2, duration: animationDuration).slideX(curve: Curves.easeInOutQuad);
+    ).animate().fadeIn(delay: animationDuration ~/ 2, duration: animationDuration ~/ 2).slideX(curve: Curves.easeInOutQuad);
   }
 }

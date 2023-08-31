@@ -20,17 +20,15 @@ import '../../main.dart';
 import '../../videos/models/video.dart';
 import '../views/components/player_controls.dart';
 import 'interfaces/media_player.dart';
-import 'player.dart';
 
 part 'video_player.g.dart';
 
 final log = Logger('VideoPlayer');
 
 class VideoPlayerCubit extends MediaPlayerCubit<VideoPlayerState> {
-  final PlayerCubit player;
   final SettingsCubit settings;
 
-  VideoPlayerCubit(super.initialState, this.player, this.settings) {
+  VideoPlayerCubit(super.initialState, super.player, this.settings) {
     onInit();
   }
 
@@ -71,7 +69,6 @@ class VideoPlayerCubit extends MediaPlayerCubit<VideoPlayerState> {
         type = MediaEventType.pause;
         break;
       case BetterPlayerEventType.setVolume:
-        type = MediaEventType.volumeChanged;
         break;
       case BetterPlayerEventType.play:
         type = MediaEventType.play;
@@ -95,15 +92,11 @@ class VideoPlayerCubit extends MediaPlayerCubit<VideoPlayerState> {
       case BetterPlayerEventType.setupDataSource:
         mediaState = MediaState.loading;
         break;
-      case BetterPlayerEventType.pipStop:
-        mediaState = MediaState.exitedPip;
-        break;
-      case BetterPlayerEventType.pipStart:
-        mediaState = MediaState.enteredPip;
-        break;
       case BetterPlayerEventType.overflowOpened:
         break;
       case BetterPlayerEventType.overflowClosed:
+        break;
+      case BetterPlayerEventType.controlsVisible:
         break;
       case BetterPlayerEventType.openFullscreen:
         break;
@@ -144,6 +137,7 @@ class VideoPlayerCubit extends MediaPlayerCubit<VideoPlayerState> {
       case BetterPlayerEventType.bufferingUpdate:
         List<DurationRange> durations = event.parameters?['buffered'] ?? [];
         state.bufferPosition = durations.sortBy((e) => e.end).map((e) => e.end).last;
+        player.setEvent(MediaEvent(state: MediaState.playing, type: MediaEventType.bufferChanged, value: state.bufferPosition));
         break;
       case BetterPlayerEventType.play:
         double speed = 1.0;
@@ -205,6 +199,9 @@ class VideoPlayerCubit extends MediaPlayerCubit<VideoPlayerState> {
 
   @override
   playVideo(bool offline, {Duration? startAt}) async {
+    if (player.state.isAudio) {
+      return;
+    }
     var state = this.state.copyWith();
     // only used if the player is currently close because it is onReady that will actually play the video
     // need better way of handling this
@@ -323,6 +320,8 @@ class VideoPlayerCubit extends MediaPlayerCubit<VideoPlayerState> {
 
       emit(state);
     }
+
+    super.playVideo(offline);
   }
 
   @override
@@ -502,11 +501,11 @@ class VideoPlayerCubit extends MediaPlayerCubit<VideoPlayerState> {
 
   @override
   void enterPip() {
-    player.setEvent(MediaEvent(state: MediaState.enteredPip));
+    player.setEvent(MediaEvent(state: MediaState.playing, type: MediaEventType.enteredPip));
     setFullScreen(true);
     SimplePip(
       onPipExited: () {
-        player.setEvent(MediaEvent(state: MediaState.exitedPip));
+        player.setEvent(MediaEvent(state: MediaState.playing, type: MediaEventType.exitedPip));
         setFullScreen(false);
       },
     ).enterPipMode();

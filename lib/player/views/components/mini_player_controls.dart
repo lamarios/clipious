@@ -24,85 +24,91 @@ class MiniPlayerControls extends StatelessWidget {
         bool isMini = context.select((PlayerCubit value) => value.state.isMini);
         bool hasQueue = context.select((PlayerCubit value) => value.state.hasQueue);
 
-        return Padding(
-          padding: isMini ? EdgeInsets.zero : const EdgeInsets.all(8.0),
-          child: Container(
-            decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), color: isMini ? colors.secondaryContainer : colors.background),
-            constraints: BoxConstraints(
-              maxWidth: tabletMaxVideoWidth,
-            ),
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-                // Positioned(left: 0, child: VideoLikeButton(videoId: videoId, style: buttonStyle)),
-                if (isMini)
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Visibility(
-                        visible: hasQueue,
-                        child: IconButton(
-                            style: buttonStyle,
-                            onPressed: player.playPrevious,
-                            icon: const Icon(
-                              Icons.skip_previous,
-                            )),
-                      ),
-                      IconButton(
-                          onPressed: player.rewind,
-                          style: buttonStyle,
-                          icon: const Icon(
-                            Icons.fast_rewind,
-                          )),
-                      IconButton(
-                          onPressed: player.togglePlay,
-                          style: buttonStyle,
-                          icon: Icon(
-                            player.state.isPlaying ? Icons.pause : Icons.play_arrow,
-                          )),
-                      IconButton(
-                          onPressed: player.fastForward,
-                          style: buttonStyle,
-                          icon: const Icon(
-                            Icons.fast_forward,
-                          )),
-                      Visibility(
-                        visible: hasQueue,
-                        child: IconButton(
-                            onPressed: player.playNext,
-                            style: buttonStyle,
-                            icon: const Icon(
-                              Icons.skip_next,
-                            )),
-                      )
-                    ],
-                  ),
-                if (!isMini)
-                  BlocBuilder<SettingsCubit, SettingsState>(
-                      // buildWhen: (previous, current) => previous.playerRepeatMode != current.playerRepeatMode || previous.playerShuffleMode != current.playerShuffleMode,
-                      builder: (context, settings) {
-                    var cubit = context.read<SettingsCubit>();
-                    return Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
+        return BlocListener<PlayerCubit, PlayerState>(
+          listenWhen: (previous, current) => previous.mediaEvent != current.mediaEvent,
+          listener: (BuildContext context, state) {
+            context.read<PlayerControlsCubit>().onStreamEvent(state.mediaEvent);
+          },
+          child: Padding(
+            padding: isMini ? EdgeInsets.zero : const EdgeInsets.all(8.0),
+            child: Container(
+              decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), color: isMini ? colors.secondaryContainer : colors.background),
+              constraints: BoxConstraints(
+                maxWidth: tabletMaxVideoWidth,
+              ),
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  // Positioned(left: 0, child: VideoLikeButton(videoId: videoId, style: buttonStyle)),
+                  if (isMini)
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
+                        Visibility(
+                          visible: hasQueue,
+                          child: IconButton(
+                              style: buttonStyle,
+                              onPressed: player.playPrevious,
+                              icon: const Icon(
+                                Icons.skip_previous,
+                              )),
+                        ),
                         IconButton(
+                            onPressed: player.rewind,
                             style: buttonStyle,
-                            onPressed: cubit.setNextRepeatMode,
-                            color: settings.playerRepeatMode == PlayerRepeat.noRepeat ? null : colors.primary,
-                            icon: Icon(
-                              settings.playerRepeatMode == PlayerRepeat.repeatOne ? Icons.repeat_one : Icons.repeat,
+                            icon: const Icon(
+                              Icons.fast_rewind,
                             )),
-                        if (hasQueue)
-                          IconButton(
-                            onPressed: cubit.toggleShuffle,
+                        IconButton(
+                            onPressed: player.togglePlay,
                             style: buttonStyle,
-                            icon: const Icon(Icons.shuffle),
-                            color: settings.playerShuffleMode ? colors.primary : null,
-                          ),
+                            icon: Icon(
+                              player.state.isPlaying ? Icons.pause : Icons.play_arrow,
+                            )),
+                        IconButton(
+                            onPressed: player.fastForward,
+                            style: buttonStyle,
+                            icon: const Icon(
+                              Icons.fast_forward,
+                            )),
+                        Visibility(
+                          visible: hasQueue,
+                          child: IconButton(
+                              onPressed: player.playNext,
+                              style: buttonStyle,
+                              icon: const Icon(
+                                Icons.skip_next,
+                              )),
+                        )
                       ],
-                    );
-                  })
-              ],
+                    ),
+                  if (!isMini)
+                    BlocBuilder<SettingsCubit, SettingsState>(
+                        // buildWhen: (previous, current) => previous.playerRepeatMode != current.playerRepeatMode || previous.playerShuffleMode != current.playerShuffleMode,
+                        builder: (context, settings) {
+                      var cubit = context.read<SettingsCubit>();
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          IconButton(
+                              style: buttonStyle,
+                              onPressed: cubit.setNextRepeatMode,
+                              color: settings.playerRepeatMode == PlayerRepeat.noRepeat ? null : colors.primary,
+                              icon: Icon(
+                                settings.playerRepeatMode == PlayerRepeat.repeatOne ? Icons.repeat_one : Icons.repeat,
+                              )),
+                          if (hasQueue)
+                            IconButton(
+                              onPressed: cubit.toggleShuffle,
+                              style: buttonStyle,
+                              icon: const Icon(Icons.shuffle),
+                              color: settings.playerShuffleMode ? colors.primary : null,
+                            ),
+                        ],
+                      );
+                    })
+                ],
+              ),
             ),
           ),
         );

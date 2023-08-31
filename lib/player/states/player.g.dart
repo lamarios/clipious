@@ -61,6 +61,12 @@ abstract class _$PlayerStateCWProxy {
 
   PlayerState mediaCommand(MediaCommand<dynamic>? mediaCommand);
 
+  PlayerState fullScreenState(FullScreenState fullScreenState);
+
+  PlayerState muted(bool muted);
+
+  PlayerState supportsPip(bool supportsPip);
+
   PlayerState mediaEvent(MediaEvent<dynamic> mediaEvent);
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `PlayerState(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
@@ -97,6 +103,9 @@ abstract class _$PlayerStateCWProxy {
     List<DownloadedVideo>? offlineVideos,
     Duration? position,
     MediaCommand<dynamic>? mediaCommand,
+    FullScreenState? fullScreenState,
+    bool? muted,
+    bool? supportsPip,
     MediaEvent<dynamic>? mediaEvent,
   });
 }
@@ -203,6 +212,16 @@ class _$PlayerStateCWProxyImpl implements _$PlayerStateCWProxy {
       this(mediaCommand: mediaCommand);
 
   @override
+  PlayerState fullScreenState(FullScreenState fullScreenState) =>
+      this(fullScreenState: fullScreenState);
+
+  @override
+  PlayerState muted(bool muted) => this(muted: muted);
+
+  @override
+  PlayerState supportsPip(bool supportsPip) => this(supportsPip: supportsPip);
+
+  @override
   PlayerState mediaEvent(MediaEvent<dynamic> mediaEvent) =>
       this(mediaEvent: mediaEvent);
 
@@ -242,6 +261,9 @@ class _$PlayerStateCWProxyImpl implements _$PlayerStateCWProxy {
     Object? offlineVideos = const $CopyWithPlaceholder(),
     Object? position = const $CopyWithPlaceholder(),
     Object? mediaCommand = const $CopyWithPlaceholder(),
+    Object? fullScreenState = const $CopyWithPlaceholder(),
+    Object? muted = const $CopyWithPlaceholder(),
+    Object? supportsPip = const $CopyWithPlaceholder(),
     Object? mediaEvent = const $CopyWithPlaceholder(),
   }) {
     return PlayerState._(
@@ -355,6 +377,18 @@ class _$PlayerStateCWProxyImpl implements _$PlayerStateCWProxy {
           ? _value.mediaCommand
           // ignore: cast_nullable_to_non_nullable
           : mediaCommand as MediaCommand<dynamic>?,
+      fullScreenState == const $CopyWithPlaceholder() || fullScreenState == null
+          ? _value.fullScreenState
+          // ignore: cast_nullable_to_non_nullable
+          : fullScreenState as FullScreenState,
+      muted == const $CopyWithPlaceholder() || muted == null
+          ? _value.muted
+          // ignore: cast_nullable_to_non_nullable
+          : muted as bool,
+      supportsPip == const $CopyWithPlaceholder() || supportsPip == null
+          ? _value.supportsPip
+          // ignore: cast_nullable_to_non_nullable
+          : supportsPip as bool,
       mediaEvent == const $CopyWithPlaceholder() || mediaEvent == null
           ? _value.mediaEvent
           // ignore: cast_nullable_to_non_nullable

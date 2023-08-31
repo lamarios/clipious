@@ -1,6 +1,6 @@
 import '../../videos/models/video.dart';
 
-enum MediaCommandType { play, pause, seek, mute, unmute, speed, switchVideo, switchToOfflineVideo }
+enum MediaCommandType { play, pause, seek, mute, unmute, speed, switchVideo, switchToOfflineVideo, fullScreen, enterPip }
 
 class MediaCommand<T> {
   MediaCommandType type;

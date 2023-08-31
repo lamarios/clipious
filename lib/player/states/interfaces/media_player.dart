@@ -1,8 +1,11 @@
 import 'package:bloc/bloc.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:invidious/downloads/models/downloaded_video.dart';
+import 'package:invidious/player/models/mediaEvent.dart';
 
 import '../../../videos/models/video.dart';
 import '../../models/mediaCommand.dart';
+import '../player.dart';
 
 enum FullScreenState {
   fullScreen,
@@ -11,7 +14,9 @@ enum FullScreenState {
 }
 
 abstract class MediaPlayerCubit<T extends MediaPlayerState> extends Cubit<T> {
-  MediaPlayerCubit(super.initialState);
+  final PlayerCubit player;
+
+  MediaPlayerCubit(super.initialState, this.player);
 
   void disposeControllers();
 
@@ -21,7 +26,13 @@ abstract class MediaPlayerCubit<T extends MediaPlayerState> extends Cubit<T> {
 
   void toggleControls(bool visible);
 
-  void playVideo(bool offline);
+  @mustCallSuper
+  void playVideo(bool offline) {
+    var duration = Duration(seconds: state.offlineVideo?.lengthSeconds ?? state.video?.lengthSeconds ?? 1);
+    player.setEvent(MediaEvent<Duration>(state: MediaState.ready, type: MediaEventType.durationChanged, value: duration));
+    player.setEvent(MediaEvent<FullScreenState>(state: MediaState.ready, type: MediaEventType.fullScreenChanged, value: isFullScreen()));
+    player.setEvent(MediaEvent<bool>(state: MediaState.ready, type: MediaEventType.pipSupportChanged, value: supportsPip()));
+  }
 
   void switchToOfflineVideo(DownloadedVideo v);
 
@@ -31,28 +42,47 @@ abstract class MediaPlayerCubit<T extends MediaPlayerState> extends Cubit<T> {
     switch (command.type) {
       case MediaCommandType.speed:
         setSpeed(command.value);
+        player.setEvent(MediaEvent(state: MediaState.playing, type: MediaEventType.speedChanged, value: command.value));
         break;
       case MediaCommandType.switchVideo:
         SwitchVideoValue val = command.value;
         switchVideo(val.video, startAt: val.startAt);
         break;
       case MediaCommandType.switchToOfflineVideo:
-        switchToOfflineVideo(command.value);
+        DownloadedVideo offlineVideo = command.value;
+        switchToOfflineVideo(offlineVideo);
         break;
       case MediaCommandType.play:
         play();
+        player.setEvent(MediaEvent(state: MediaState.playing, type: MediaEventType.play));
         break;
       case MediaCommandType.pause:
         pause();
+        player.setEvent(MediaEvent(state: MediaState.playing, type: MediaEventType.pause));
         break;
       case MediaCommandType.mute:
         toggleVolume(false);
+        player.setEvent(MediaEvent(state: MediaState.playing, type: MediaEventType.volumeChanged, value: false));
         break;
       case MediaCommandType.unmute:
         toggleVolume(true);
+        player.setEvent(MediaEvent(state: MediaState.playing, type: MediaEventType.volumeChanged, value: true));
         break;
       case MediaCommandType.seek:
         seek(command.value);
+        player.setEvent(MediaEvent(state: MediaState.playing, type: MediaEventType.seek, value: command.value));
+        break;
+      case MediaCommandType.fullScreen:
+        if (isFullScreen() != FullScreenState.unsupported) {
+          setFullScreen(command.value == FullScreenState.fullScreen);
+          player.setEvent(MediaEvent(state: MediaState.playing, type: MediaEventType.fullScreenChanged, value: command.value));
+        }
+        break;
+      case MediaCommandType.enterPip:
+        if (supportsPip()) {
+          enterPip();
+          player.setEvent(MediaEvent(state: MediaState.playing, type: MediaEventType.enteredPip, value: true));
+        }
         break;
     }
   }

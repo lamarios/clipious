@@ -12,6 +12,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/player/models/mediaCommand.dart';
 import 'package:invidious/player/models/mediaEvent.dart';
+import 'package:invidious/player/states/interfaces/media_player.dart';
 import 'package:invidious/utils/models/image_object.dart';
 import 'package:logging/logging.dart';
 
@@ -45,11 +46,11 @@ class PlayerCubit extends Cubit<PlayerState> {
   }
 
   setEvent(MediaEvent event) {
+    handleMediaEvent(event);
+    mapMediaEventToMediaHandler(event);
     var state = this.state.copyWith();
     state.mediaEvent = event;
     emit(state);
-    handleMediaEvent(event);
-    mapMediaEventToMediaHandler(event);
   }
 
   mapMediaEventToMediaHandler(MediaEvent event) {
@@ -109,16 +110,16 @@ class PlayerCubit extends Cubit<PlayerState> {
         playNext();
         _setPlaying(false);
         break;
-      case MediaState.enteredPip:
-        _setPip(true);
-        break;
-      case MediaState.exitedPip:
-        _setPip(false);
       default:
         break;
     }
 
     switch (event.type) {
+      case MediaEventType.enteredPip:
+        _setPip(true);
+        break;
+      case MediaEventType.exitedPip:
+        _setPip(false);
       case MediaEventType.progress:
         onProgress(event.value);
         break;
@@ -127,15 +128,35 @@ class PlayerCubit extends Cubit<PlayerState> {
         break;
       case MediaEventType.pause:
         _setPlaying(false);
+        break;
+      case MediaEventType.pipSupportChanged:
+        _setPipSupport(event.value);
+      case MediaEventType.fullScreenChanged:
+        _setFullScreen(event.value);
+        break;
+      case MediaEventType.volumeChanged:
+        _setMuted(!event.value);
       default:
         break;
     }
   }
 
+
+  _setPipSupport(bool supported){
+    emit(state.copyWith(supportsPip: supported));
+  }
   _setPip(bool pip) {
     var state = this.state.copyWith();
     state.isPip = pip;
     emit(state);
+  }
+
+  _setMuted(bool muted) {
+    emit(state.copyWith(muted: muted));
+  }
+
+  _setFullScreen(FullScreenState fsState) {
+    emit(state.copyWith(fullScreenState: fsState));
   }
 
   @override
@@ -184,7 +205,7 @@ class PlayerCubit extends Cubit<PlayerState> {
   hide() {
     var state = this.state.copyWith();
     state.isMini = true;
-    state.mediaEvent = MediaEvent(state: MediaState.miniDisplayChanged);
+    state.mediaEvent = MediaEvent(state: MediaState.playing, type: MediaEventType.miniDisplayChanged, value: state.isMini);
     state.top = null;
     state.height = targetHeight;
     state.isHidden = true;
@@ -242,7 +263,7 @@ class PlayerCubit extends Cubit<PlayerState> {
   showBigPlayer() {
     var state = this.state.copyWith();
     state.isMini = false;
-    state.mediaEvent = MediaEvent(state: MediaState.miniDisplayChanged);
+    state.mediaEvent = MediaEvent(state: MediaState.playing, type: MediaEventType.miniDisplayChanged, value: state.isMini);
     state.top = 0;
     state.opacity = 1;
     state.isHidden = false;
@@ -253,7 +274,7 @@ class PlayerCubit extends Cubit<PlayerState> {
     if (state.currentlyPlaying != null || state.offlineCurrentlyPlaying != null) {
       var state = this.state.copyWith();
       state.isMini = true;
-      state.mediaEvent = MediaEvent(state: MediaState.miniDisplayChanged);
+      state.mediaEvent = MediaEvent(state: MediaState.playing, type: MediaEventType.miniDisplayChanged, value: state.isMini);
       state.top = null;
       state.isHidden = false;
       state.opacity = 1;
@@ -405,8 +426,13 @@ class PlayerCubit extends Cubit<PlayerState> {
   }
 
   _switchToVideo(IdedVideo video, {Duration? startAt}) async {
-    var state = this.state.copyWith();
     bool isOffline = video is DownloadedVideo;
+    // we want to switch to audio mode as soon as we can to prevent problems when switching from audio to video or the other way
+    if(isOffline){
+      setAudio(video.audioOnly);
+    }
+
+    var state = this.state.copyWith();
 
     state.mediaEvent = MediaEvent(state: MediaState.loading);
 
@@ -440,7 +466,6 @@ class PlayerCubit extends Cubit<PlayerState> {
       state.currentlyPlaying = v;
       state.mediaCommand = MediaCommand(MediaCommandType.switchVideo, value: SwitchVideoValue(video: v, startAt: startAt));
     } else {
-      state.isAudio = video.audioOnly;
       state.offlineCurrentlyPlaying = video;
       state.mediaCommand = MediaCommand(MediaCommandType.switchToOfflineVideo, value: video);
     }
@@ -526,7 +551,7 @@ class PlayerCubit extends Cubit<PlayerState> {
     // we  change the display mode if there's a big enough drag movement to avoid jittery behavior when dragging slow
     if (details.delta.dy.abs() > 3) {
       state.isMini = details.delta.dy > 0;
-      state.mediaEvent = MediaEvent(state: MediaState.miniDisplayChanged);
+      state.mediaEvent = MediaEvent(state: MediaState.playing, type: MediaEventType.miniDisplayChanged, value: state.isMini);
     }
     state.dragDistance += details.delta.dy;
     // we're going down, putting threshold high easier to switch to mini player
@@ -646,6 +671,18 @@ class PlayerCubit extends Cubit<PlayerState> {
     emit(state);
   }
 
+  void setFullScreen(FullScreenState fsState) {
+    emit(state.copyWith(mediaCommand: MediaCommand(MediaCommandType.fullScreen, value: fsState)));
+  }
+
+  void enterPip() {
+    emit(state.copyWith(mediaCommand: MediaCommand(MediaCommandType.enterPip)));
+  }
+
+  void setMuted(bool muted) {
+    emit(state.copyWith(mediaCommand: MediaCommand(muted ? MediaCommandType.mute : MediaCommandType.unmute)));
+  }
+
   void togglePlay() {
     if (state.isPlaying) {
       pause();
@@ -672,6 +709,9 @@ class PlayerState {
   double dragDistance = 0;
   bool dragStartMini = true;
   double height = targetHeight;
+  FullScreenState fullScreenState = FullScreenState.unsupported;
+  bool muted = false;
+  bool supportsPip = false;
 
   // videos to play
   Video? currentlyPlaying;
@@ -683,7 +723,7 @@ class PlayerState {
 
   // playlist controls
   List<String> playedVideos = [];
-  bool isAudio = true;
+  bool isAudio = false;
 
   // playing video data
   int currentIndex = 0;
@@ -741,5 +781,8 @@ class PlayerState {
       this.offlineVideos,
       this.position,
       this.mediaCommand,
+      this.fullScreenState,
+      this.muted,
+      this.supportsPip,
       this.mediaEvent);
 }

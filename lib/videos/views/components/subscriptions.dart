@@ -4,16 +4,14 @@ import 'package:invidious/utils/views/tv/components/tv_horizontal_item_list.dart
 import 'package:invidious/videos/views/components/video_in_list.dart';
 
 import '../../../utils/models/paginatedList.dart';
+import '../../models/video_in_list.dart';
 import 'video_list.dart';
 
-class Subscriptions extends StatefulWidget {
-  const Subscriptions({super.key});
+class Subscriptions extends StatelessWidget {
+  final void Function(VideoInList video, int index, bool focus)? onItemFocus;
 
-  @override
-  SubscriptionsState createState() => SubscriptionsState();
-}
+  const Subscriptions({super.key, this.onItemFocus});
 
-class SubscriptionsState extends State<Subscriptions> {
   @override
   Widget build(BuildContext context) {
     var colorScheme = Theme.of(context).colorScheme;
@@ -22,6 +20,7 @@ class SubscriptionsState extends State<Subscriptions> {
       child: isTv
           ? TvHorizontalVideoList(
               paginatedVideoList: SubscriptionVideoList(),
+              onItemFocus: onItemFocus,
             )
           : VideoList(
               animateDownload: true,

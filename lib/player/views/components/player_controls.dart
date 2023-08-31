@@ -86,9 +86,17 @@ class PlayerControls extends StatelessWidget {
     );
   }
 
-  showOptionMenu(BuildContext context, PlayerControlsState controls, MediaPlayerCubit pc) {
-    var locals = AppLocalizations.of(context)!;
+  showOptionMenu(BuildContext context, PlayerControlsState controls) {
+    late MediaPlayerCubit pc;
     var player = context.read<PlayerCubit>();
+    if (mediaPlayerCubit != null) {
+      pc = mediaPlayerCubit!;
+    } else if (player.state.isAudio) {
+      pc = context.read<AudioPlayerCubit>();
+    } else {
+      pc = context.read<VideoPlayerCubit>();
+    }
+    var locals = AppLocalizations.of(context)!;
     var videoTracks = pc.getVideoTracks();
     var audioTracks = pc.getAudioTracks();
     var subtitles = pc.getSubtitles();
@@ -186,6 +194,7 @@ class PlayerControls extends StatelessWidget {
             bool isPip = context.select((PlayerCubit cubit) => cubit.state.isPip);
             String videoTitle = context.select((PlayerCubit cubit) => cubit.state.currentlyPlaying?.title ?? cubit.state.offlineCurrentlyPlaying?.title ?? '');
 
+/*
             late MediaPlayerCubit pc;
             if (mediaPlayerCubit != null) {
               pc = mediaPlayerCubit!;
@@ -194,6 +203,7 @@ class PlayerControls extends StatelessWidget {
             } else {
               pc = context.read<VideoPlayerCubit>();
             }
+*/
             // PlayerState mpc = player.state;
             var event = _.event;
             var cubit = context.read<PlayerControlsCubit>();
@@ -205,9 +215,9 @@ class PlayerControls extends StatelessWidget {
               child: GestureDetector(
                 behavior: HitTestBehavior.translucent,
                 onTap: _.displayControls ? cubit.hideControls : cubit.showControls,
-                onVerticalDragEnd: pc.isFullScreen() == FullScreenState.fullScreen ? null : player.videoDraggedEnd,
-                onVerticalDragUpdate: pc.isFullScreen() == FullScreenState.fullScreen ? null : player.videoDragged,
-                onVerticalDragStart: pc.isFullScreen() == FullScreenState.fullScreen ? null : player.videoDragStarted,
+                onVerticalDragEnd: _.fullScreenState == FullScreenState.fullScreen ? null : player.videoDraggedEnd,
+                onVerticalDragUpdate: _.fullScreenState == FullScreenState.fullScreen ? null : player.videoDragged,
+                onVerticalDragStart: _.fullScreenState == FullScreenState.fullScreen ? null : player.videoDragStarted,
                 child: AspectRatio(
                   aspectRatio: 16 / 9,
                   child: Stack(
@@ -235,7 +245,7 @@ class PlayerControls extends StatelessWidget {
                                         Row(
                                           mainAxisAlignment: MainAxisAlignment.end,
                                           children: [
-                                            if (pc.isFullScreen() == FullScreenState.fullScreen)
+                                            if (_.fullScreenState == FullScreenState.fullScreen)
                                               Expanded(
                                                   child: Padding(
                                                 padding: const EdgeInsets.only(left: 8.0),
@@ -245,20 +255,20 @@ class PlayerControls extends StatelessWidget {
                                                   overflow: TextOverflow.ellipsis,
                                                 ),
                                               )),
-                                            if (pc.supportsPip()) IconButton(onPressed: pc.enterPip, icon: const Icon(Icons.picture_in_picture)),
-                                            IconButton(onPressed: () => showOptionMenu(context, _, pc), icon: const Icon(Icons.more_vert))
+                                            if (_.supportsPip) IconButton(onPressed: () => player.enterPip(), icon: const Icon(Icons.picture_in_picture)),
+                                            IconButton(onPressed: () => showOptionMenu(context, _), icon: const Icon(Icons.more_vert))
                                           ],
                                         ),
                                         Expanded(child: Container()),
                                         Row(
                                           mainAxisAlignment: MainAxisAlignment.end,
                                           children: [
-                                            pc.isMuted()
-                                                ? IconButton(onPressed: () => pc.toggleVolume(true), icon: const Icon(Icons.volume_off))
-                                                : IconButton(onPressed: () => pc.toggleVolume(false), icon: const Icon(Icons.volume_up)),
-                                            switch (pc.isFullScreen()) {
-                                              FullScreenState.fullScreen => IconButton(onPressed: () => pc.setFullScreen((false)), icon: const Icon(Icons.fullscreen_exit)),
-                                              FullScreenState.notFullScreen => IconButton(onPressed: () => pc.setFullScreen(true), icon: const Icon(Icons.fullscreen)),
+                                            _.muted
+                                                ? IconButton(onPressed: () => player.setMuted(false), icon: const Icon(Icons.volume_off))
+                                                : IconButton(onPressed: () => player.setMuted(true), icon: const Icon(Icons.volume_up)),
+                                            switch (_.fullScreenState) {
+                                              FullScreenState.fullScreen => IconButton(onPressed: () => player.setFullScreen(FullScreenState.notFullScreen), icon: const Icon(Icons.fullscreen_exit)),
+                                              FullScreenState.notFullScreen => IconButton(onPressed: () => player.setFullScreen(FullScreenState.fullScreen), icon: const Icon(Icons.fullscreen)),
                                               _ => const SizedBox.shrink()
                                             }
                                           ],
@@ -273,16 +283,16 @@ class PlayerControls extends StatelessWidget {
                                                     height: 25,
                                                     child: Slider(
                                                       min: 0,
-                                                      value: min(_.audioPosition.inMilliseconds.toDouble(), pc.duration().inMilliseconds.toDouble()),
-                                                      max: pc.duration().inMilliseconds.toDouble(),
-                                                      secondaryTrackValue: min(pc.bufferedPosition()?.inMilliseconds.toDouble() ?? 0, pc.duration().inMilliseconds.toDouble()),
+                                                      value: min(_.position.inMilliseconds.toDouble(), _.duration.inMilliseconds.toDouble()),
+                                                      max: _.duration.inMilliseconds.toDouble(),
+                                                      secondaryTrackValue: min(_.buffer.inMilliseconds.toDouble() , _.duration.inMilliseconds.toDouble()),
                                                       onChangeEnd: cubit.onScrubbed,
                                                       onChanged: cubit.onScrubDrag,
                                                     ),
                                                   ),
                                                 ),
                                                 Text(
-                                                  '${prettyDuration(pc.position())} / ${prettyDuration(pc.duration())}',
+                                                  '${prettyDuration(_.position)} / ${prettyDuration(_.duration)}',
                                                   style: textTheme.bodySmall?.copyWith(color: Colors.white),
                                                 ),
                                               ],

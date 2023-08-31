@@ -172,10 +172,12 @@ class TvPlayerControlsCubit extends Cubit<TvPlayerControlsState> {
         showUi();
         state = this.state.copyWith();
         break;
+/*
       case MediaState.miniDisplayChanged:
         hideControls();
         state = this.state.copyWith();
         break;
+*/
       default:
         break;
     }
