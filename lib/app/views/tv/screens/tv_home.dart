@@ -245,63 +245,59 @@ class TvHome extends StatelessWidget {
                   Expanded(
                     // terrible work around to be able to scroll to all the global keys
                     child: SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(top: TvOverscan.vertical, bottom: TvOverscan.vertical, right: TvOverscan.horizontal, left: 8),
-                            child: ListView(
-                              controller: homeState.scrollController,
-                              physics: const NeverScrollableScrollPhysics(),
-                              shrinkWrap: true,
-                              // crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Visibility(
-                                  key: subscriptionTitle,
-                                  visible: app.isLoggedIn,
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(top: 16.0),
-                                    child: Text(
-                                      locals.subscriptions,
-                                      style: textTheme.titleLarge,
-                                    ),
-                                  ),
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: TvOverscan.vertical, bottom: TvOverscan.vertical, right: TvOverscan.horizontal, left: 8),
+                        child: ListView(
+                          controller: homeState.scrollController,
+                          physics: const NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          // crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Visibility(
+                              key: subscriptionTitle,
+                              visible: app.isLoggedIn,
+                              child: Padding(
+                                padding: const EdgeInsets.only(top: 16.0),
+                                child: Text(
+                                  locals.subscriptions,
+                                  style: textTheme.titleLarge,
                                 ),
-                                Visibility(
-                                  visible: app.isLoggedIn,
-                                  child: Subscriptions(
-                                    onItemFocus: (video, index, focus) {
-                                      if (focus) {
-                                        Scrollable.ensureVisible(subscriptionTitle.currentContext!,
-                                            duration: animationDuration, curve: Curves.easeInOutQuad, alignmentPolicy: ScrollPositionAlignmentPolicy.keepVisibleAtStart);
-                                      }
-                                    },
-                                  ),
-                                ),
-                                Padding(
-                                  key: popularTitle,
-                                  padding: const EdgeInsets.only(top: 16.0),
-                                  child: Text(locals.popular, style: textTheme.titleLarge),
-                                ),
-                                Popular(
-                                  onItemFocus: (video, index, focus) {
-                                    if (focus) {
-                                      Scrollable.ensureVisible(popularTitle.currentContext!,
-                                          duration: animationDuration, curve: Curves.easeInOutQuad, alignmentPolicy: ScrollPositionAlignmentPolicy.keepVisibleAtStart);
-                                    }
-                                  },
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 16.0),
-                                  child: Text(
-                                    locals.trending,
-                                    style: textTheme.titleLarge,
-                                  ),
-                                ),
-                                const Trending(),
-                              ],
+                              ),
                             ),
-                          ),
-                        ],
+                            Visibility(
+                              visible: app.isLoggedIn,
+                              child: Subscriptions(
+                                onItemFocus: (video, index, focus) {
+                                  if (focus) {
+                                    Scrollable.ensureVisible(subscriptionTitle.currentContext!,
+                                        duration: animationDuration, curve: Curves.easeInOutQuad, alignmentPolicy: ScrollPositionAlignmentPolicy.keepVisibleAtStart);
+                                  }
+                                },
+                              ),
+                            ),
+                            Padding(
+                              key: popularTitle,
+                              padding: const EdgeInsets.only(top: 16.0),
+                              child: Text(locals.popular, style: textTheme.titleLarge),
+                            ),
+                            Popular(
+                              onItemFocus: (video, index, focus) {
+                                if (focus) {
+                                  Scrollable.ensureVisible(popularTitle.currentContext!,
+                                      duration: animationDuration, curve: Curves.easeInOutQuad, alignmentPolicy: ScrollPositionAlignmentPolicy.keepVisibleAtStart);
+                                }
+                              },
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 16.0),
+                              child: Text(
+                                locals.trending,
+                                style: textTheme.titleLarge,
+                              ),
+                            ),
+                            const Trending(),
+                          ],
+                        ),
                       ),
                     ),
                   ),
