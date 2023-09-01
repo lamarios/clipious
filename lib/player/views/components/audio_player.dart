@@ -30,23 +30,20 @@ class AudioPlayer extends StatelessWidget {
           listener: (context, state) => context.read<AudioPlayerCubit>().handleCommand(state.mediaCommand!),
           child: Padding(
             padding: EdgeInsets.all(miniPlayer ? 8 : 0.0),
-            child: AspectRatio(
-              aspectRatio: 16 / 9,
-              child: Stack(
-                alignment: Alignment.topCenter,
-                children: [
-                  _.video != null
-                      ? VideoThumbnailView(
-                          decoration: const BoxDecoration(),
-                          videoId: _.video!.videoId,
-                          thumbnailUrl: _.video?.getBestThumbnail()?.url ?? '',
-                        )
-                      : _.offlineVideo != null
-                          ? OfflineVideoThumbnail(borderRadius: 0, key: ValueKey(_.offlineVideo?.videoId ?? ''), video: _.offlineVideo!)
-                          : const SizedBox.shrink(),
-                  PlayerControls(mediaPlayerCubit: context.read<AudioPlayerCubit>())
-                ],
-              ),
+            child: Stack(
+              alignment: Alignment.topCenter,
+              children: [
+                _.video != null
+                    ? VideoThumbnailView(
+                        decoration: const BoxDecoration(),
+                        videoId: _.video!.videoId,
+                        thumbnailUrl: _.video?.getBestThumbnail()?.url ?? '',
+                      )
+                    : _.offlineVideo != null
+                        ? OfflineVideoThumbnail(borderRadius: 0, key: ValueKey(_.offlineVideo?.videoId ?? ''), video: _.offlineVideo!)
+                        : const SizedBox.shrink(),
+                PlayerControls(mediaPlayerCubit: context.read<AudioPlayerCubit>())
+              ],
             ),
           ),
         ),

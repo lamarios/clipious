@@ -86,7 +86,7 @@ class AudioPlayerCubit extends MediaPlayerCubit<AudioPlayerState> {
 
   @override
   playVideo(bool offline, {Duration? startAt}) async {
-    if(!player.state.isAudio){
+    if (!player.state.isAudio) {
       return;
     }
     if (state.video != null || state.offlineVideo != null) {
@@ -141,6 +141,11 @@ class AudioPlayerCubit extends MediaPlayerCubit<AudioPlayerState> {
       }
     }
     super.playVideo(offline);
+  }
+
+  @override
+  double getAspectRatio() {
+    return 16 / 9;
   }
 
   @override
@@ -222,16 +227,6 @@ class AudioPlayerCubit extends MediaPlayerCubit<AudioPlayerState> {
   @override
   double? speed() {
     return 1;
-  }
-
-  @override
-  FullScreenState isFullScreen() {
-    return FullScreenState.unsupported;
-  }
-
-  @override
-  setFullScreen(bool bool) {
-    throw UnimplementedError();
   }
 
   @override

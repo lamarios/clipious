@@ -194,18 +194,6 @@ class PlayerControls extends StatelessWidget {
             bool isPip = context.select((PlayerCubit cubit) => cubit.state.isPip);
             String videoTitle = context.select((PlayerCubit cubit) => cubit.state.currentlyPlaying?.title ?? cubit.state.offlineCurrentlyPlaying?.title ?? '');
 
-/*
-            late MediaPlayerCubit pc;
-            if (mediaPlayerCubit != null) {
-              pc = mediaPlayerCubit!;
-            } else if (player.state.isAudio) {
-              pc = context.read<AudioPlayerCubit>();
-            } else {
-              pc = context.read<VideoPlayerCubit>();
-            }
-*/
-            // PlayerState mpc = player.state;
-            var event = _.event;
             var cubit = context.read<PlayerControlsCubit>();
             return BlocListener<PlayerCubit, PlayerState>(
               listenWhen: (previous, current) => previous.mediaEvent != current.mediaEvent,
@@ -214,7 +202,6 @@ class PlayerControls extends StatelessWidget {
               },
               child: GestureDetector(
                 behavior: HitTestBehavior.translucent,
-                onTap: _.displayControls ? cubit.hideControls : cubit.showControls,
                 onVerticalDragEnd: _.fullScreenState == FullScreenState.fullScreen ? null : player.videoDraggedEnd,
                 onVerticalDragUpdate: _.fullScreenState == FullScreenState.fullScreen ? null : player.videoDragged,
                 onVerticalDragStart: _.fullScreenState == FullScreenState.fullScreen ? null : player.videoDragStarted,
@@ -223,6 +210,31 @@ class PlayerControls extends StatelessWidget {
                   child: Stack(
                     alignment: Alignment.topCenter,
                     children: [
+                      if (!isMini && !isPip)
+                        Positioned(
+                            left: 0,
+                            right: 0,
+                            top: 0,
+                            bottom: 0,
+                            child: Row(
+                              children: [
+                                Expanded(
+                                    child: GestureDetector(
+                                        behavior: HitTestBehavior.translucent,
+                                        onTap: _.displayControls ? cubit.hideControls : cubit.showControls,
+                                        onDoubleTap: cubit.doubleTapRewind,
+                                        child: DoubleTapButton(opacity: _.doubleTapRewindedOpacity, icon: Icons.fast_rewind))),
+                                Expanded(
+                                    child: GestureDetector(
+                                        onTap: _.displayControls ? cubit.hideControls : cubit.showControls,
+                                        behavior: HitTestBehavior.translucent,
+                                        onDoubleTap: cubit.doubleTapFastForward,
+                                        child: DoubleTapButton(
+                                          opacity: _.doubleTapFastForwardedOpacity,
+                                          icon: Icons.fast_forward,
+                                        ))),
+                              ],
+                            )),
                       if (_.errored)
                         Container(
                           color: Colors.black.withOpacity(0.8),
@@ -255,7 +267,7 @@ class PlayerControls extends StatelessWidget {
                                                   overflow: TextOverflow.ellipsis,
                                                 ),
                                               )),
-                                            if (_.supportsPip) IconButton(onPressed: () => player.enterPip(), icon: const Icon(Icons.picture_in_picture)),
+                                            IconButton(onPressed: () => player.enterPip(), icon: const Icon(Icons.picture_in_picture)),
                                             IconButton(onPressed: () => showOptionMenu(context, _), icon: const Icon(Icons.more_vert))
                                           ],
                                         ),
@@ -285,7 +297,7 @@ class PlayerControls extends StatelessWidget {
                                                       min: 0,
                                                       value: min(_.position.inMilliseconds.toDouble(), _.duration.inMilliseconds.toDouble()),
                                                       max: _.duration.inMilliseconds.toDouble(),
-                                                      secondaryTrackValue: min(_.buffer.inMilliseconds.toDouble() , _.duration.inMilliseconds.toDouble()),
+                                                      secondaryTrackValue: min(_.buffer.inMilliseconds.toDouble(), _.duration.inMilliseconds.toDouble()),
                                                       onChangeEnd: cubit.onScrubbed,
                                                       onChanged: cubit.onScrubDrag,
                                                     ),
@@ -352,7 +364,7 @@ class PlayerControls extends StatelessWidget {
                             ],
                           ),
                         ),
-                      if (event.state == MediaState.buffering)
+                      if (_.buffering)
                         const Center(
                           child: FractionallySizedBox(
                             heightFactor: 0.3,
@@ -362,13 +374,40 @@ class PlayerControls extends StatelessWidget {
                                   strokeWidth: 2,
                                 )),
                           ),
-                        )
+                        ),
+                      Text(_.displayControls.toString())
                     ],
                   ),
                 ),
               ),
             );
           },
+        ),
+      ),
+    );
+  }
+}
+
+class DoubleTapButton extends StatelessWidget {
+  final double opacity;
+  final IconData icon;
+
+  const DoubleTapButton({super.key, required this.opacity, required this.icon});
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedContainer(
+      curve: Curves.easeInOutQuad,
+      margin: EdgeInsets.all(opacity == 1 ? 50 : 0),
+      decoration: BoxDecoration(color: Colors.black.withOpacity(opacity == 1 ? 0.3 : 0), shape: BoxShape.circle),
+      duration: const Duration(milliseconds: 150),
+      height: double.infinity,
+      child: AnimatedOpacity(
+        opacity: opacity,
+        duration: Duration(milliseconds: opacity == 1 ? 150 : 500),
+        child: Icon(
+          icon,
+          size: 50,
         ),
       ),
     );

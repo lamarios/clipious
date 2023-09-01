@@ -51,14 +51,12 @@ class _VideoPlayerState extends State<VideoPlayer> {
         builder: (context, _) => BlocListener<PlayerCubit, PlayerState>(
           listenWhen: (previous, current) => previous.mediaCommand != current.mediaCommand && current.mediaCommand != null,
           listener: (context, state) => context.read<VideoPlayerCubit>().handleCommand(state.mediaCommand!),
-          child: AspectRatio(
-              aspectRatio: 16 / 9,
-              child: _.videoController == null
-                  ? const Text('nullll')
-                  : BetterPlayer(
-                      controller: _.videoController!,
-                      key: _betterPlayerKey,
-                    )),
+          child: _.videoController == null
+              ? const Text('nullll')
+              : BetterPlayer(
+                  controller: _.videoController!,
+                  key: _betterPlayerKey,
+                ),
         ),
       ),
     );

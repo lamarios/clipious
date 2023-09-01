@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/globals.dart';
+import 'package:invidious/player/states/interfaces/media_player.dart';
 import 'package:invidious/player/states/player.dart';
 import 'package:invidious/player/views/components/video_queue.dart';
 import 'package:invidious/utils.dart';
@@ -27,16 +28,17 @@ class ExpandedPlayer {
     DownloadedVideo? offlineVid = controller.offlineCurrentlyPlaying;
     var settings = context.watch<SettingsCubit>().state;
 
+    bool isFullScreen = controller.fullScreenState == FullScreenState.fullScreen;
 
     return video != null || offlineVid != null
         ? [
             Visibility(
-                visible: !controller.isMini,
+                visible: !controller.isMini && !isFullScreen,
                 child: MiniPlayerControls(
                   videoId: video?.videoId ?? offlineVid?.videoId ?? '',
                 )),
             Visibility(
-                visible: !controller.isMini,
+                visible: !controller.isMini && !isFullScreen,
                 child: Expanded(
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: innerHorizontalPadding),
@@ -66,7 +68,7 @@ class ExpandedPlayer {
                   ),
                 )),
             Visibility(
-              visible: !settings.distractionFreeMode &&  !controller.isMini && video != null,
+              visible: !settings.distractionFreeMode &&  !controller.isMini && video != null && !isFullScreen,
               child: SizedBox(
                 // height: 80,
                 child: Builder(builder: (context) {

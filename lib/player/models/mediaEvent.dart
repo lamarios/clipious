@@ -6,7 +6,7 @@ class MediaEvent<T> {
   MediaEvent({this.type, required this.state, this.value});
 }
 
-enum MediaEventType { play, pause, seek, speedChanged, durationChanged, bufferChanged, progress, volumeChanged, fullScreenChanged, pipSupportChanged, enteredPip, exitedPip, miniDisplayChanged }
+enum MediaEventType { aspectRatioChanged, play, pause, seek, speedChanged, durationChanged, bufferChanged, progress, volumeChanged, fullScreenChanged, enteredPip, exitedPip, miniDisplayChanged }
 
 enum MediaState {
   idle,

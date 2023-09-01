@@ -1,4 +1,3 @@
-import 'package:back_button_interceptor/back_button_interceptor.dart';
 import 'package:better_player/better_player.dart';
 import 'package:better_player/src/video_player/video_player_platform_interface.dart';
 import 'package:copy_with_extension/copy_with_extension.dart';
@@ -7,18 +6,17 @@ import 'package:flutter/services.dart';
 import 'package:invidious/downloads/models/downloaded_video.dart';
 import 'package:invidious/extensions.dart';
 import 'package:invidious/player/models/mediaEvent.dart';
-import 'package:invidious/player/views/tv/components/player_controls.dart';
 import 'package:invidious/settings/states/settings.dart';
 import 'package:invidious/videos/models/base_video.dart';
 import 'package:logging/logging.dart';
 import 'package:pretty_bytes/pretty_bytes.dart';
-import 'package:simple_pip_mode/simple_pip.dart';
 import 'package:wakelock/wakelock.dart';
 
 import '../../globals.dart';
 import '../../main.dart';
 import '../../videos/models/video.dart';
 import '../views/components/player_controls.dart';
+import '../views/tv/components/player_controls.dart';
 import 'interfaces/media_player.dart';
 
 part 'video_player.g.dart';
@@ -92,15 +90,12 @@ class VideoPlayerCubit extends MediaPlayerCubit<VideoPlayerState> {
       case BetterPlayerEventType.setupDataSource:
         mediaState = MediaState.loading;
         break;
-      case BetterPlayerEventType.overflowOpened:
-        break;
-      case BetterPlayerEventType.overflowClosed:
-        break;
       case BetterPlayerEventType.controlsVisible:
         break;
       case BetterPlayerEventType.openFullscreen:
         break;
       case BetterPlayerEventType.initialized:
+        player.setEvent(MediaEvent<double>(state: MediaState.ready, type: MediaEventType.aspectRatioChanged, value: getAspectRatio()));
         mediaState = MediaState.ready;
         break;
       case BetterPlayerEventType.hideFullscreen:
@@ -300,15 +295,15 @@ class VideoPlayerCubit extends MediaPlayerCubit<VideoPlayerState> {
                 subtitlesConfiguration: BetterPlayerSubtitlesConfiguration(
                   fontSize: settings.state.subtitleSize,
                 ),
-                controlsConfiguration: const BetterPlayerControlsConfiguration(
-                  showControls: false,
-                  // customControlsBuilder: (controller, onPlayerVisibilityChanged) => const PlayerControls(),
-                  // enablePlayPause: false,
-                  // overflowModalColor: colors.background,
-                  // overflowModalTextColor: overFlowTextColor,
-                  // overflowMenuIconsColor: overFlowTextColor,
-                  // overflowMenuCustomItems: [BetterPlayerOverflowMenuItem(useDash ? Icons.check_box_outlined : Icons.check_box_outline_blank, locals.useDash, toggleDash)])
-                )),
+                controlsConfiguration: BetterPlayerControlsConfiguration(showControls: false
+                    // customControlsBuilder: (controller, onPlayerVisibilityChanged) => PlayerControls(mediaPlayerCubit: this),
+                    // customControlsBuilder: (controller, onPlayerVisibilityChanged) => const PlayerControls(),
+                    // enablePlayPause: false,
+                    // overflowModalColor: colors.background,
+                    // overflowModalTextColor: overFlowTextColor,
+                    // overflowMenuIconsColor: overFlowTextColor,
+                    // overflowMenuCustomItems: [BetterPlayerOverflowMenuItem(useDash ? Icons.check_box_outlined : Icons.check_box_outline_blank, locals.useDash, toggleDash)])
+                    )),
             betterPlayerDataSource: betterPlayerDataSource);
         state.videoController!.addEventsListener(onVideoListener);
         state.videoController!.setBetterPlayerGlobalKey(state.key);
@@ -365,27 +360,6 @@ class VideoPlayerCubit extends MediaPlayerCubit<VideoPlayerState> {
   @override
   double? speed() {
     return state.videoController?.videoPlayerController?.value.speed ?? 1;
-  }
-
-  @override
-  FullScreenState isFullScreen() {
-    return (state.videoController?.isFullScreen ?? false) ? FullScreenState.fullScreen : FullScreenState.notFullScreen;
-  }
-
-  @override
-  setFullScreen(bool fullScreen) {
-    if (fullScreen) {
-      state.videoController?.enterFullScreen();
-      BackButtonInterceptor.add(backButtonInterceptor, zIndex: 10, name: 'full screen player');
-    } else {
-      state.videoController?.exitFullScreen();
-      BackButtonInterceptor.remove(backButtonInterceptor);
-    }
-  }
-
-  bool backButtonInterceptor(bool stopDefaultButtonEvent, RouteInfo info) {
-    setFullScreen(false);
-    return true;
   }
 
   String _videoTrackToString(BetterPlayerAsmsTrack? track) {
@@ -495,24 +469,6 @@ class VideoPlayerCubit extends MediaPlayerCubit<VideoPlayerState> {
   }
 
   @override
-  bool supportsPip() {
-    return true;
-  }
-
-  @override
-  void enterPip() {
-    player.setEvent(MediaEvent(state: MediaState.playing, type: MediaEventType.enteredPip));
-    setFullScreen(true);
-    SimplePip(
-      onPipExited: () {
-        player.setEvent(MediaEvent(state: MediaState.playing, type: MediaEventType.exitedPip));
-        setFullScreen(false);
-      },
-    ).enterPipMode();
-    // state.videoController?.enablePictureInPicture(state.key);
-  }
-
-  @override
   bool isMuted() {
     return state.videoController?.videoPlayerController?.value.volume == 0;
   }
@@ -545,6 +501,23 @@ class VideoPlayerCubit extends MediaPlayerCubit<VideoPlayerState> {
   @override
   Duration duration() {
     return state.videoController?.videoPlayerController?.value.duration ?? const Duration(milliseconds: 1);
+  }
+
+  @override
+  double getAspectRatio() {
+    double width = state.videoController?.videoPlayerController?.value.size?.width ?? 16;
+    double height = state.videoController?.videoPlayerController?.value.size?.height ?? 9;
+    return width / height;
+  }
+
+  @override
+  void onEnterFullScreen() {
+    state.videoController?.setOverriddenAspectRatio(getAspectRatio());
+  }
+
+  @override
+  void onExitFullScreen() {
+    state.videoController?.setOverriddenAspectRatio(16 / 9);
   }
 }
 

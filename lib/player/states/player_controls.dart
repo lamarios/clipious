@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:easy_debounce/easy_debounce.dart';
+import 'package:easy_debounce/easy_throttle.dart';
 import 'package:invidious/player/models/mediaEvent.dart';
 import 'package:invidious/player/states/interfaces/media_player.dart';
 import 'package:logging/logging.dart';
@@ -22,28 +23,25 @@ class PlayerControlsCubit extends Cubit<PlayerControlsState> {
   void onReady() {
     log.fine("Controls ready!");
 
-    emit(state.copyWith(duration:  player.duration, muted: player.state.muted, fullScreenState: player.state.fullScreenState, supportsPip: player.state.supportsPip));
-    // MiniPlayerController.to()?.eventStream.stream.listen(onStreamEvent);
+    emit(state.copyWith(duration: player.duration, muted: player.state.muted, fullScreenState: player.state.fullScreenState));
     showControls();
   }
 
   onStreamEvent(MediaEvent event) {
     log.fine('Event: ${event.state}, ${event.type}');
-    var state = this.state.copyWith();
     switch (event.state) {
       case MediaState.buffering:
         setBuffer(event.value ?? Duration.zero);
-        state = this.state.copyWith();
         break;
       case MediaState.loading:
+        emit(state.copyWith(buffering: true));
+        break;
       case MediaState.ready:
         showControls();
-        state = this.state.copyWith();
         break;
       case MediaState.error:
         hideControls();
-        state = this.state.copyWith();
-        state.errored = true;
+        setErrored();
         break;
       default:
         break;
@@ -52,93 +50,81 @@ class PlayerControlsCubit extends Cubit<PlayerControlsState> {
     switch (event.type) {
       case MediaEventType.miniDisplayChanged:
         hideControls();
-        state = this.state.copyWith();
         break;
       case MediaEventType.progress:
         if (!state.draggingPositionSlider) {
-          state.position = event.value;
+          // EasyThrottle.throttle('controls-progress-throttle', const Duration(seconds: 1), () {
+            emit(state.copyWith(position: event.value, buffering: false, errored: false));
+          // });
         }
-        state.errored = false;
         break;
       case MediaEventType.seek:
-        showControls();
-        state = this.state.copyWith();
+        hideControlsDebounce();
         break;
       case MediaEventType.fullScreenChanged:
         setFullScreenState(event.value);
-        state = this.state.copyWith();
         break;
       case MediaEventType.volumeChanged:
         setMuted(!event.value);
-        state = this.state.copyWith();
         break;
       case MediaEventType.durationChanged:
         setDuration(event.value);
-        state = this.state.copyWith();
-        break;
-      case MediaEventType.pipSupportChanged:
-        setSupportsPip(event.value);
-        state = this.state.copyWith();
         break;
       case MediaEventType.bufferChanged:
         setBuffer(event.value);
-        state = this.state.copyWith();
+        break;
+      case MediaEventType.pause:
+      case MediaEventType.play:
+        emit(state.copyWith());
         break;
       default:
         break;
     }
-    state.event = event;
-    // print('UPDATE ${displayControls} ${event.state}');
-    emit(state);
+  }
+
+  void setErrored() {
+    emit(state.copyWith(errored: true));
+  }
+
+  @override
+  emit(PlayerControlsState state) {
+    print('Emiting');
+    super.emit(state);
   }
 
   void hideControls() {
-    var state = this.state.copyWith();
-
     // we don't want the controls to disappear if we're dragging the position slider
-    if(!state.draggingPositionSlider) {
-      state.displayControls = false;
-      if (!isClosed) {
-        emit(state);
-      }
-    }else{
-      EasyDebounce.debounce(
-        'player-controls-hide',
-        const Duration(seconds: 3),
-        hideControls,
-      );
+    if (!state.draggingPositionSlider && !isClosed) {
+      emit(state.copyWith(displayControls: false));
+    } else {
+      hideControlsDebounce();
     }
+  }
+
+  void hideControlsDebounce() {
+    EasyDebounce.debounce(
+      'player-controls-hide',
+      const Duration(seconds: 3),
+      hideControls,
+    );
   }
 
   void showControls() {
     if (isTv || !player.state.isMini) {
-      var state = this.state.copyWith();
-      state.displayControls = true;
-      emit(state);
-
-      EasyDebounce.debounce(
-        'player-controls-hide',
-        const Duration(seconds: 3),
-        hideControls,
-      );
+      emit(state.copyWith(displayControls: true));
     }
+    hideControlsDebounce();
   }
 
   void onScrubbed(double value) {
-    var state = this.state.copyWith();
     Duration seekTo = Duration(milliseconds: value.toInt());
     player.seek(seekTo);
-    state.position = seekTo;
-    state.draggingPositionSlider = false;
-    emit(state);
+    emit(state.copyWith(position: seekTo, draggingPositionSlider: false));
   }
 
   void onScrubDrag(double value) {
-    var state = this.state.copyWith();
     Duration seekTo = Duration(milliseconds: value.toInt());
-    state.position = seekTo;
-    state.draggingPositionSlider = true;
-    emit(state);
+    emit(state.copyWith(position: seekTo, draggingPositionSlider: true));
   }
 
   void setPlaybackSpeed(double d) {
@@ -147,10 +133,6 @@ class PlayerControlsCubit extends Cubit<PlayerControlsState> {
 
   void removeError() {
     emit(state.copyWith(errored: false));
-  }
-
-  setSupportsPip(bool hasSupport) {
-    emit(state.copyWith(supportsPip: hasSupport));
   }
 
   setDuration(Duration duration) {
@@ -166,7 +148,25 @@ class PlayerControlsCubit extends Cubit<PlayerControlsState> {
   }
 
   setBuffer(Duration buffer) {
-    emit(state.copyWith(buffer: buffer));
+    EasyThrottle.throttle('video-buffer-update', const Duration(seconds: 1), () {
+      emit(state.copyWith(buffer: buffer));
+    });
+  }
+
+  void doubleTapFastForward() {
+    player.fastForward();
+    emit(state.copyWith(doubleTapFastForwardedOpacity: 1));
+    EasyDebounce.debounce('fast-forward', const Duration(milliseconds: 250), () {
+      emit(state.copyWith(doubleTapFastForwardedOpacity: 0));
+    });
+  }
+
+  void doubleTapRewind() {
+    player.rewind();
+    emit(state.copyWith(doubleTapRewindedOpacity: 1));
+    EasyDebounce.debounce('fast-rewind', const Duration(milliseconds: 250), () {
+      emit(state.copyWith(doubleTapRewindedOpacity: 0));
+    });
   }
 }
 
@@ -176,15 +176,17 @@ class PlayerControlsState {
 
   bool errored = false;
 
-  MediaEvent event = MediaEvent(state: MediaState.idle);
   Duration position = Duration.zero;
   Duration duration = const Duration(seconds: 1);
   Duration buffer = Duration.zero;
   FullScreenState fullScreenState = FullScreenState.notFullScreen;
-  bool supportsPip = false;
   bool displayControls = false;
   bool muted = false;
+  bool buffering = false;
   bool draggingPositionSlider = false;
+  double doubleTapFastForwardedOpacity = 0;
+  double doubleTapRewindedOpacity = 0;
 
-  PlayerControlsState._(this.event, this.position, this.displayControls, this.errored, this.supportsPip, this.duration, this.fullScreenState, this.muted, this.buffer, this.draggingPositionSlider);
+  PlayerControlsState._(this.buffering, this.position, this.displayControls, this.errored, this.duration, this.fullScreenState, this.muted, this.buffer, this.draggingPositionSlider,
+      this.doubleTapFastForwardedOpacity, this.doubleTapRewindedOpacity);
 }

@@ -10,7 +10,6 @@ import '../player.dart';
 enum FullScreenState {
   fullScreen,
   notFullScreen,
-  unsupported;
 }
 
 abstract class MediaPlayerCubit<T extends MediaPlayerState> extends Cubit<T> {
@@ -26,12 +25,13 @@ abstract class MediaPlayerCubit<T extends MediaPlayerState> extends Cubit<T> {
 
   void toggleControls(bool visible);
 
+  double getAspectRatio();
+
   @mustCallSuper
   void playVideo(bool offline) {
     var duration = Duration(seconds: state.offlineVideo?.lengthSeconds ?? state.video?.lengthSeconds ?? 1);
     player.setEvent(MediaEvent<Duration>(state: MediaState.ready, type: MediaEventType.durationChanged, value: duration));
-    player.setEvent(MediaEvent<FullScreenState>(state: MediaState.ready, type: MediaEventType.fullScreenChanged, value: isFullScreen()));
-    player.setEvent(MediaEvent<bool>(state: MediaState.ready, type: MediaEventType.pipSupportChanged, value: supportsPip()));
+    player.setEvent(MediaEvent<double>(state: MediaState.ready, type: MediaEventType.aspectRatioChanged, value: getAspectRatio()));
   }
 
   void switchToOfflineVideo(DownloadedVideo v);
@@ -72,17 +72,11 @@ abstract class MediaPlayerCubit<T extends MediaPlayerState> extends Cubit<T> {
         seek(command.value);
         player.setEvent(MediaEvent(state: MediaState.playing, type: MediaEventType.seek, value: command.value));
         break;
-      case MediaCommandType.fullScreen:
-        if (isFullScreen() != FullScreenState.unsupported) {
-          setFullScreen(command.value == FullScreenState.fullScreen);
-          player.setEvent(MediaEvent(state: MediaState.playing, type: MediaEventType.fullScreenChanged, value: command.value));
-        }
+      case MediaCommandType.enterFullScreen:
+        onEnterFullScreen();
         break;
-      case MediaCommandType.enterPip:
-        if (supportsPip()) {
-          enterPip();
-          player.setEvent(MediaEvent(state: MediaState.playing, type: MediaEventType.enteredPip, value: true));
-        }
+      case MediaCommandType.exitFullScreen:
+        onExitFullScreen();
         break;
     }
   }
@@ -98,10 +92,6 @@ abstract class MediaPlayerCubit<T extends MediaPlayerState> extends Cubit<T> {
   Duration? bufferedPosition();
 
   double? speed();
-
-  FullScreenState isFullScreen();
-
-  setFullScreen(bool bool);
 
   List<String> getVideoTracks();
 
@@ -121,10 +111,6 @@ abstract class MediaPlayerCubit<T extends MediaPlayerState> extends Cubit<T> {
 
   selectSubtitle(int index);
 
-  bool supportsPip();
-
-  void enterPip();
-
   bool isMuted();
 
   void toggleVolume(bool soundOn);
@@ -140,6 +126,10 @@ abstract class MediaPlayerCubit<T extends MediaPlayerState> extends Cubit<T> {
   void toggleDash();
 
   Duration duration();
+
+  void onEnterFullScreen() {}
+
+  void onExitFullScreen() {}
 }
 
 abstract class MediaPlayerState {

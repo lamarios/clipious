@@ -8,6 +8,7 @@ import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:easy_debounce/easy_throttle.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/player/models/mediaCommand.dart';
@@ -15,6 +16,7 @@ import 'package:invidious/player/models/mediaEvent.dart';
 import 'package:invidious/player/states/interfaces/media_player.dart';
 import 'package:invidious/utils/models/image_object.dart';
 import 'package:logging/logging.dart';
+import 'package:simple_pip_mode/simple_pip.dart';
 
 import '../../downloads/models/downloaded_video.dart';
 import '../../main.dart';
@@ -120,6 +122,7 @@ class PlayerCubit extends Cubit<PlayerState> {
         break;
       case MediaEventType.exitedPip:
         _setPip(false);
+        break;
       case MediaEventType.progress:
         onProgress(event.value);
         break;
@@ -129,22 +132,17 @@ class PlayerCubit extends Cubit<PlayerState> {
       case MediaEventType.pause:
         _setPlaying(false);
         break;
-      case MediaEventType.pipSupportChanged:
-        _setPipSupport(event.value);
-      case MediaEventType.fullScreenChanged:
-        _setFullScreen(event.value);
-        break;
       case MediaEventType.volumeChanged:
         _setMuted(!event.value);
+        break;
+      case MediaEventType.aspectRatioChanged:
+        emit(state.copyWith(aspectRatio: event.value));
+        break;
       default:
         break;
     }
   }
 
-
-  _setPipSupport(bool supported){
-    emit(state.copyWith(supportsPip: supported));
-  }
   _setPip(bool pip) {
     var state = this.state.copyWith();
     state.isPip = pip;
@@ -155,10 +153,6 @@ class PlayerCubit extends Cubit<PlayerState> {
     emit(state.copyWith(muted: muted));
   }
 
-  _setFullScreen(FullScreenState fsState) {
-    emit(state.copyWith(fullScreenState: fsState));
-  }
-
   @override
   close() async {
     BackButtonInterceptor.removeByName('miniPlayer');
@@ -166,11 +160,8 @@ class PlayerCubit extends Cubit<PlayerState> {
   }
 
   bool handleBackButton(bool stopDefaultButtonEvent, RouteInfo info) {
-    if (state.isFullScreen) {
-      var state = this.state.copyWith();
-      state.isFullScreen = false;
-      emit(state);
-      globalNavigator.currentState?.pop();
+    if (state.fullScreenState == FullScreenState.fullScreen) {
+      setFullScreen(FullScreenState.notFullScreen);
       return true;
     } else if (!state.isMini) {
       // we block the backbutton behavior and we make the player small
@@ -428,7 +419,7 @@ class PlayerCubit extends Cubit<PlayerState> {
   _switchToVideo(IdedVideo video, {Duration? startAt}) async {
     bool isOffline = video is DownloadedVideo;
     // we want to switch to audio mode as soon as we can to prevent problems when switching from audio to video or the other way
-    if(isOffline){
+    if (isOffline) {
       setAudio(video.audioOnly);
     }
 
@@ -672,11 +663,36 @@ class PlayerCubit extends Cubit<PlayerState> {
   }
 
   void setFullScreen(FullScreenState fsState) {
-    emit(state.copyWith(mediaCommand: MediaCommand(MediaCommandType.fullScreen, value: fsState)));
+    // emit(state.copyWith(mediaCommand: MediaCommand(MediaCommandType.fullScreen, value: fsState)));
+    emit(state.copyWith(
+        fullScreenState: fsState,
+        mediaCommand: MediaCommand(fsState == FullScreenState.notFullScreen ? MediaCommandType.exitFullScreen : MediaCommandType.enterFullScreen),
+        mediaEvent: MediaEvent(state: state.mediaEvent.state, type: MediaEventType.fullScreenChanged, value: fsState)));
+
+    switch (fsState) {
+      case FullScreenState.fullScreen:
+        SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
+        if (settings.state.forceLandscapeFullScreen && state.aspectRatio > 1) {
+          SystemChrome.setPreferredOrientations([
+            DeviceOrientation.landscapeLeft,
+          ]);
+        }
+        break;
+      default:
+        SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: SystemUiOverlay.values);
+        SystemChrome.setPreferredOrientations([]);
+    }
   }
 
   void enterPip() {
-    emit(state.copyWith(mediaCommand: MediaCommand(MediaCommandType.enterPip)));
+    setFullScreen(FullScreenState.fullScreen);
+    setEvent(MediaEvent(state: MediaState.playing, type: MediaEventType.enteredPip));
+    SimplePip(
+      onPipExited: () {
+        setEvent(MediaEvent(state: MediaState.playing, type: MediaEventType.exitedPip));
+        setFullScreen(FullScreenState.notFullScreen);
+      },
+    ).enterPipMode();
   }
 
   void setMuted(bool muted) {
@@ -704,14 +720,13 @@ class PlayerState {
   bool isDragging = false;
   int selectedFullScreenIndex = 0;
   bool isHidden = true;
-  bool isFullScreen = false;
   double opacity = 0;
   double dragDistance = 0;
   bool dragStartMini = true;
   double height = targetHeight;
-  FullScreenState fullScreenState = FullScreenState.unsupported;
+  FullScreenState fullScreenState = FullScreenState.notFullScreen;
   bool muted = false;
-  bool supportsPip = false;
+  double aspectRatio = 16 / 9;
 
   // videos to play
   Video? currentlyPlaying;
@@ -764,10 +779,10 @@ class PlayerState {
       this.isPip,
       this.isHidden,
       this.speed,
-      this.isFullScreen,
       this.currentlyPlaying,
       this.offlineCurrentlyPlaying,
       this.opacity,
+      this.aspectRatio,
       this.dragDistance,
       this.dragStartMini,
       this.bufferedPosition,
@@ -783,6 +798,5 @@ class PlayerState {
       this.mediaCommand,
       this.fullScreenState,
       this.muted,
-      this.supportsPip,
       this.mediaEvent);
 }

@@ -7,15 +7,13 @@ part of 'player_controls.dart';
 // **************************************************************************
 
 abstract class _$PlayerControlsStateCWProxy {
-  PlayerControlsState event(MediaEvent<dynamic> event);
+  PlayerControlsState buffering(bool buffering);
 
   PlayerControlsState position(Duration position);
 
   PlayerControlsState displayControls(bool displayControls);
 
   PlayerControlsState errored(bool errored);
-
-  PlayerControlsState supportsPip(bool supportsPip);
 
   PlayerControlsState duration(Duration duration);
 
@@ -27,6 +25,11 @@ abstract class _$PlayerControlsStateCWProxy {
 
   PlayerControlsState draggingPositionSlider(bool draggingPositionSlider);
 
+  PlayerControlsState doubleTapFastForwardedOpacity(
+      double doubleTapFastForwardedOpacity);
+
+  PlayerControlsState doubleTapRewindedOpacity(double doubleTapRewindedOpacity);
+
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `PlayerControlsState(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
   /// Usage
@@ -34,16 +37,17 @@ abstract class _$PlayerControlsStateCWProxy {
   /// PlayerControlsState(...).copyWith(id: 12, name: "My name")
   /// ````
   PlayerControlsState call({
-    MediaEvent<dynamic>? event,
+    bool? buffering,
     Duration? position,
     bool? displayControls,
     bool? errored,
-    bool? supportsPip,
     Duration? duration,
     FullScreenState? fullScreenState,
     bool? muted,
     Duration? buffer,
     bool? draggingPositionSlider,
+    double? doubleTapFastForwardedOpacity,
+    double? doubleTapRewindedOpacity,
   });
 }
 
@@ -54,7 +58,7 @@ class _$PlayerControlsStateCWProxyImpl implements _$PlayerControlsStateCWProxy {
   final PlayerControlsState _value;
 
   @override
-  PlayerControlsState event(MediaEvent<dynamic> event) => this(event: event);
+  PlayerControlsState buffering(bool buffering) => this(buffering: buffering);
 
   @override
   PlayerControlsState position(Duration position) => this(position: position);
@@ -65,10 +69,6 @@ class _$PlayerControlsStateCWProxyImpl implements _$PlayerControlsStateCWProxy {
 
   @override
   PlayerControlsState errored(bool errored) => this(errored: errored);
-
-  @override
-  PlayerControlsState supportsPip(bool supportsPip) =>
-      this(supportsPip: supportsPip);
 
   @override
   PlayerControlsState duration(Duration duration) => this(duration: duration);
@@ -88,6 +88,16 @@ class _$PlayerControlsStateCWProxyImpl implements _$PlayerControlsStateCWProxy {
       this(draggingPositionSlider: draggingPositionSlider);
 
   @override
+  PlayerControlsState doubleTapFastForwardedOpacity(
+          double doubleTapFastForwardedOpacity) =>
+      this(doubleTapFastForwardedOpacity: doubleTapFastForwardedOpacity);
+
+  @override
+  PlayerControlsState doubleTapRewindedOpacity(
+          double doubleTapRewindedOpacity) =>
+      this(doubleTapRewindedOpacity: doubleTapRewindedOpacity);
+
+  @override
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `PlayerControlsState(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
@@ -96,22 +106,23 @@ class _$PlayerControlsStateCWProxyImpl implements _$PlayerControlsStateCWProxy {
   /// PlayerControlsState(...).copyWith(id: 12, name: "My name")
   /// ````
   PlayerControlsState call({
-    Object? event = const $CopyWithPlaceholder(),
+    Object? buffering = const $CopyWithPlaceholder(),
     Object? position = const $CopyWithPlaceholder(),
     Object? displayControls = const $CopyWithPlaceholder(),
     Object? errored = const $CopyWithPlaceholder(),
-    Object? supportsPip = const $CopyWithPlaceholder(),
     Object? duration = const $CopyWithPlaceholder(),
     Object? fullScreenState = const $CopyWithPlaceholder(),
     Object? muted = const $CopyWithPlaceholder(),
     Object? buffer = const $CopyWithPlaceholder(),
     Object? draggingPositionSlider = const $CopyWithPlaceholder(),
+    Object? doubleTapFastForwardedOpacity = const $CopyWithPlaceholder(),
+    Object? doubleTapRewindedOpacity = const $CopyWithPlaceholder(),
   }) {
     return PlayerControlsState._(
-      event == const $CopyWithPlaceholder() || event == null
-          ? _value.event
+      buffering == const $CopyWithPlaceholder() || buffering == null
+          ? _value.buffering
           // ignore: cast_nullable_to_non_nullable
-          : event as MediaEvent<dynamic>,
+          : buffering as bool,
       position == const $CopyWithPlaceholder() || position == null
           ? _value.position
           // ignore: cast_nullable_to_non_nullable
@@ -124,10 +135,6 @@ class _$PlayerControlsStateCWProxyImpl implements _$PlayerControlsStateCWProxy {
           ? _value.errored
           // ignore: cast_nullable_to_non_nullable
           : errored as bool,
-      supportsPip == const $CopyWithPlaceholder() || supportsPip == null
-          ? _value.supportsPip
-          // ignore: cast_nullable_to_non_nullable
-          : supportsPip as bool,
       duration == const $CopyWithPlaceholder() || duration == null
           ? _value.duration
           // ignore: cast_nullable_to_non_nullable
@@ -149,6 +156,16 @@ class _$PlayerControlsStateCWProxyImpl implements _$PlayerControlsStateCWProxy {
           ? _value.draggingPositionSlider
           // ignore: cast_nullable_to_non_nullable
           : draggingPositionSlider as bool,
+      doubleTapFastForwardedOpacity == const $CopyWithPlaceholder() ||
+              doubleTapFastForwardedOpacity == null
+          ? _value.doubleTapFastForwardedOpacity
+          // ignore: cast_nullable_to_non_nullable
+          : doubleTapFastForwardedOpacity as double,
+      doubleTapRewindedOpacity == const $CopyWithPlaceholder() ||
+              doubleTapRewindedOpacity == null
+          ? _value.doubleTapRewindedOpacity
+          // ignore: cast_nullable_to_non_nullable
+          : doubleTapRewindedOpacity as double,
     );
   }
 }
