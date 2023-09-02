@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/globals.dart';
+import 'package:invidious/player/states/interfaces/media_player.dart';
 import 'package:invidious/player/states/player.dart';
 import 'package:invidious/player/views/components/audio_player.dart';
 import 'package:invidious/player/views/components/expanded_player.dart';
 import 'package:invidious/player/views/components/mini_player.dart';
 import 'package:invidious/player/views/components/video_player.dart';
+import 'package:invidious/settings/states/settings.dart';
 
 import '../../../utils.dart';
 import '../../../videos/models/video.dart';
@@ -33,26 +35,32 @@ class Player extends StatelessWidget {
         double opacity = context.select((PlayerCubit value) => value.state.opacity);
         Video? currentlyPlaying = context.select((PlayerCubit value) => value.state.currentlyPlaying);
         bool onPhone = getDeviceType() == DeviceType.phone;
+        FullScreenState fullScreen = context.select((PlayerCubit value) => value.state.fullScreenState);
+        bool isFullScreen = fullScreen == FullScreenState.fullScreen;
+        double aspectRatio = context.select((PlayerCubit value) => value.state.aspectRatio);
 
         Widget videoPlayer = showPlayer
             ? BlocBuilder<PlayerCubit, PlayerState>(
                 buildWhen: (previous, current) =>
                     previous.isAudio != current.isAudio || previous.currentlyPlaying != current.currentlyPlaying || previous.offlineCurrentlyPlaying != current.offlineCurrentlyPlaying,
                 builder: (context, _) {
-                  return _.isAudio
-                      ? AudioPlayer(
-                          key: const ValueKey('audio-player'),
-                          video: _.isAudio ? _.currentlyPlaying : null,
-                          offlineVideo: _.isAudio ? _.offlineCurrentlyPlaying : null,
-                          miniPlayer: false,
-                        )
-                      : VideoPlayer(
-                          key: const ValueKey('player'),
-                          video: !_.isAudio ? _.currentlyPlaying : null,
-                          offlineVideo: !_.isAudio ? _.offlineCurrentlyPlaying : null,
-                          miniPlayer: false,
-                          startAt: _.startAt,
-                        );
+                  return AspectRatio(
+                    aspectRatio: isFullScreen ? aspectRatio : 16 / 9,
+                    child: _.isAudio
+                        ? AudioPlayer(
+                            key: const ValueKey('audio-player'),
+                            video: _.isAudio ? _.currentlyPlaying : null,
+                            offlineVideo: _.isAudio ? _.offlineCurrentlyPlaying : null,
+                            miniPlayer: false,
+                          )
+                        : VideoPlayer(
+                            key: const ValueKey('player'),
+                            video: !_.isAudio ? _.currentlyPlaying : null,
+                            offlineVideo: !_.isAudio ? _.offlineCurrentlyPlaying : null,
+                            miniPlayer: false,
+                            startAt: _.startAt,
+                          ),
+                  );
                 })
             : const SizedBox.shrink();
 
@@ -68,24 +76,32 @@ class Player extends StatelessWidget {
         return AnimatedPositioned(
           left: 0,
           top: top,
-          bottom: cubit.getBottom,
+          bottom: isFullScreen ? 0 : cubit.getBottom,
           right: 0,
           duration: isDragging ? Duration.zero : animationDuration,
           child: AnimatedOpacity(
             opacity: opacity,
             duration: animationDuration,
             child: SafeArea(
+              bottom: fullScreen == FullScreenState.notFullScreen,
+              top: fullScreen == FullScreenState.notFullScreen,
+              left: fullScreen == FullScreenState.notFullScreen,
+              right: fullScreen == FullScreenState.notFullScreen,
               child: Material(
                 elevation: 0,
                 child: showPlayer
                     ? GestureDetector(
                         child: AnimatedContainer(
                           duration: animationDuration,
-                          color: isMini ? colors.secondaryContainer : colors.background,
+                          color: isFullScreen
+                              ? Colors.black
+                              : isMini
+                                  ? colors.secondaryContainer
+                                  : colors.background,
                           child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
+                            mainAxisAlignment: isFullScreen ? MainAxisAlignment.center : MainAxisAlignment.start,
                             children: [
-                              isMini || isPip
+                              isMini || isPip || isFullScreen
                                   ? const SizedBox.shrink()
                                   : AppBar(
                                       backgroundColor: colors.background,
@@ -109,7 +125,14 @@ class Player extends StatelessWidget {
                                     ),
                               AnimatedContainer(
                                 width: double.infinity,
-                                constraints: BoxConstraints(maxHeight: isMini ? targetHeight : 500, maxWidth: tabletMaxVideoWidth),
+                                height: isFullScreen ? double.infinity : null,
+                                constraints: BoxConstraints(
+                                    maxHeight: isFullScreen
+                                        ? MediaQuery.of(context).size.height
+                                        : isMini
+                                            ? targetHeight
+                                            : 500,
+                                    maxWidth: isFullScreen ? double.infinity : tabletMaxVideoWidth),
                                 duration: animationDuration,
                                 child: Row(
                                   mainAxisAlignment: isMini ? MainAxisAlignment.start : MainAxisAlignment.center,

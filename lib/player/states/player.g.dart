@@ -27,13 +27,13 @@ abstract class _$PlayerStateCWProxy {
 
   PlayerState speed(double speed);
 
-  PlayerState isFullScreen(bool isFullScreen);
-
   PlayerState currentlyPlaying(Video? currentlyPlaying);
 
   PlayerState offlineCurrentlyPlaying(DownloadedVideo? offlineCurrentlyPlaying);
 
   PlayerState opacity(double opacity);
+
+  PlayerState aspectRatio(double aspectRatio);
 
   PlayerState dragDistance(double dragDistance);
 
@@ -61,6 +61,14 @@ abstract class _$PlayerStateCWProxy {
 
   PlayerState mediaCommand(MediaCommand<dynamic>? mediaCommand);
 
+  PlayerState fullScreenState(FullScreenState fullScreenState);
+
+  PlayerState muted(bool muted);
+
+  PlayerState forwardStep(int forwardStep);
+
+  PlayerState rewindStep(int rewindStep);
+
   PlayerState mediaEvent(MediaEvent<dynamic> mediaEvent);
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `PlayerState(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
@@ -80,10 +88,10 @@ abstract class _$PlayerStateCWProxy {
     bool? isPip,
     bool? isHidden,
     double? speed,
-    bool? isFullScreen,
     Video? currentlyPlaying,
     DownloadedVideo? offlineCurrentlyPlaying,
     double? opacity,
+    double? aspectRatio,
     double? dragDistance,
     bool? dragStartMini,
     Duration? bufferedPosition,
@@ -97,6 +105,10 @@ abstract class _$PlayerStateCWProxy {
     List<DownloadedVideo>? offlineVideos,
     Duration? position,
     MediaCommand<dynamic>? mediaCommand,
+    FullScreenState? fullScreenState,
+    bool? muted,
+    int? forwardStep,
+    int? rewindStep,
     MediaEvent<dynamic>? mediaEvent,
   });
 }
@@ -140,10 +152,6 @@ class _$PlayerStateCWProxyImpl implements _$PlayerStateCWProxy {
   PlayerState speed(double speed) => this(speed: speed);
 
   @override
-  PlayerState isFullScreen(bool isFullScreen) =>
-      this(isFullScreen: isFullScreen);
-
-  @override
   PlayerState currentlyPlaying(Video? currentlyPlaying) =>
       this(currentlyPlaying: currentlyPlaying);
 
@@ -154,6 +162,9 @@ class _$PlayerStateCWProxyImpl implements _$PlayerStateCWProxy {
 
   @override
   PlayerState opacity(double opacity) => this(opacity: opacity);
+
+  @override
+  PlayerState aspectRatio(double aspectRatio) => this(aspectRatio: aspectRatio);
 
   @override
   PlayerState dragDistance(double dragDistance) =>
@@ -203,6 +214,19 @@ class _$PlayerStateCWProxyImpl implements _$PlayerStateCWProxy {
       this(mediaCommand: mediaCommand);
 
   @override
+  PlayerState fullScreenState(FullScreenState fullScreenState) =>
+      this(fullScreenState: fullScreenState);
+
+  @override
+  PlayerState muted(bool muted) => this(muted: muted);
+
+  @override
+  PlayerState forwardStep(int forwardStep) => this(forwardStep: forwardStep);
+
+  @override
+  PlayerState rewindStep(int rewindStep) => this(rewindStep: rewindStep);
+
+  @override
   PlayerState mediaEvent(MediaEvent<dynamic> mediaEvent) =>
       this(mediaEvent: mediaEvent);
 
@@ -225,10 +249,10 @@ class _$PlayerStateCWProxyImpl implements _$PlayerStateCWProxy {
     Object? isPip = const $CopyWithPlaceholder(),
     Object? isHidden = const $CopyWithPlaceholder(),
     Object? speed = const $CopyWithPlaceholder(),
-    Object? isFullScreen = const $CopyWithPlaceholder(),
     Object? currentlyPlaying = const $CopyWithPlaceholder(),
     Object? offlineCurrentlyPlaying = const $CopyWithPlaceholder(),
     Object? opacity = const $CopyWithPlaceholder(),
+    Object? aspectRatio = const $CopyWithPlaceholder(),
     Object? dragDistance = const $CopyWithPlaceholder(),
     Object? dragStartMini = const $CopyWithPlaceholder(),
     Object? bufferedPosition = const $CopyWithPlaceholder(),
@@ -242,6 +266,10 @@ class _$PlayerStateCWProxyImpl implements _$PlayerStateCWProxy {
     Object? offlineVideos = const $CopyWithPlaceholder(),
     Object? position = const $CopyWithPlaceholder(),
     Object? mediaCommand = const $CopyWithPlaceholder(),
+    Object? fullScreenState = const $CopyWithPlaceholder(),
+    Object? muted = const $CopyWithPlaceholder(),
+    Object? forwardStep = const $CopyWithPlaceholder(),
+    Object? rewindStep = const $CopyWithPlaceholder(),
     Object? mediaEvent = const $CopyWithPlaceholder(),
   }) {
     return PlayerState._(
@@ -286,10 +314,6 @@ class _$PlayerStateCWProxyImpl implements _$PlayerStateCWProxy {
           ? _value.speed
           // ignore: cast_nullable_to_non_nullable
           : speed as double,
-      isFullScreen == const $CopyWithPlaceholder() || isFullScreen == null
-          ? _value.isFullScreen
-          // ignore: cast_nullable_to_non_nullable
-          : isFullScreen as bool,
       currentlyPlaying == const $CopyWithPlaceholder()
           ? _value.currentlyPlaying
           // ignore: cast_nullable_to_non_nullable
@@ -302,6 +326,10 @@ class _$PlayerStateCWProxyImpl implements _$PlayerStateCWProxy {
           ? _value.opacity
           // ignore: cast_nullable_to_non_nullable
           : opacity as double,
+      aspectRatio == const $CopyWithPlaceholder() || aspectRatio == null
+          ? _value.aspectRatio
+          // ignore: cast_nullable_to_non_nullable
+          : aspectRatio as double,
       dragDistance == const $CopyWithPlaceholder() || dragDistance == null
           ? _value.dragDistance
           // ignore: cast_nullable_to_non_nullable
@@ -355,6 +383,22 @@ class _$PlayerStateCWProxyImpl implements _$PlayerStateCWProxy {
           ? _value.mediaCommand
           // ignore: cast_nullable_to_non_nullable
           : mediaCommand as MediaCommand<dynamic>?,
+      fullScreenState == const $CopyWithPlaceholder() || fullScreenState == null
+          ? _value.fullScreenState
+          // ignore: cast_nullable_to_non_nullable
+          : fullScreenState as FullScreenState,
+      muted == const $CopyWithPlaceholder() || muted == null
+          ? _value.muted
+          // ignore: cast_nullable_to_non_nullable
+          : muted as bool,
+      forwardStep == const $CopyWithPlaceholder() || forwardStep == null
+          ? _value.forwardStep
+          // ignore: cast_nullable_to_non_nullable
+          : forwardStep as int,
+      rewindStep == const $CopyWithPlaceholder() || rewindStep == null
+          ? _value.rewindStep
+          // ignore: cast_nullable_to_non_nullable
+          : rewindStep as int,
       mediaEvent == const $CopyWithPlaceholder() || mediaEvent == null
           ? _value.mediaEvent
           // ignore: cast_nullable_to_non_nullable

@@ -11,9 +11,10 @@ import '../../components/video_thumbnail.dart';
 class TvVideoItem extends StatelessWidget {
   final VideoInList video;
   final bool autoFocus;
+  final void Function(bool focus)? onFocusChange;
   final Function(BuildContext context, VideoInList video)? onSelect;
 
-  const TvVideoItem({Key? key, required this.video, required this.autoFocus, this.onSelect}) : super(key: key);
+  const TvVideoItem({Key? key, required this.video, required this.autoFocus, this.onSelect, this.onFocusChange}) : super(key: key);
 
   openVideo(BuildContext context, VideoInList e, FocusNode node, KeyEvent event) {
     if (event is KeyUpEvent && (event.logicalKey == LogicalKeyboardKey.enter || event.logicalKey == LogicalKeyboardKey.select)) {
@@ -36,7 +37,7 @@ class TvVideoItem extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.only(right: 8.0),
         child: Focus(
-            // onFocusChange: (value) => _.focusChanged(value, index),
+            onFocusChange: onFocusChange,
             onKeyEvent: (node, event) => openVideo(context, video, node, event),
             autofocus: autoFocus,
             child: Builder(builder: (ctx) {

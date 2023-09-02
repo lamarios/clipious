@@ -8,12 +8,15 @@ import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:easy_debounce/easy_throttle.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/player/models/mediaCommand.dart';
 import 'package:invidious/player/models/mediaEvent.dart';
+import 'package:invidious/player/states/interfaces/media_player.dart';
 import 'package:invidious/utils/models/image_object.dart';
 import 'package:logging/logging.dart';
+import 'package:simple_pip_mode/simple_pip.dart';
 
 import '../../downloads/models/downloaded_video.dart';
 import '../../main.dart';
@@ -32,6 +35,8 @@ const double targetHeight = 69;
 const double miniPlayerThreshold = 300;
 const skipToVideoThrottleName = 'skip-to-video';
 const double bigPlayerThreshold = 700;
+const defaultStep = 9;
+const stepMultiplier = 0.15;
 
 var log = Logger('MiniPlayerController');
 
@@ -45,11 +50,11 @@ class PlayerCubit extends Cubit<PlayerState> {
   }
 
   setEvent(MediaEvent event) {
+    handleMediaEvent(event);
+    mapMediaEventToMediaHandler(event);
     var state = this.state.copyWith();
     state.mediaEvent = event;
     emit(state);
-    handleMediaEvent(event);
-    mapMediaEventToMediaHandler(event);
   }
 
   mapMediaEventToMediaHandler(MediaEvent event) {
@@ -109,16 +114,17 @@ class PlayerCubit extends Cubit<PlayerState> {
         playNext();
         _setPlaying(false);
         break;
-      case MediaState.enteredPip:
-        _setPip(true);
-        break;
-      case MediaState.exitedPip:
-        _setPip(false);
       default:
         break;
     }
 
     switch (event.type) {
+      case MediaEventType.enteredPip:
+        _setPip(true);
+        break;
+      case MediaEventType.exitedPip:
+        _setPip(false);
+        break;
       case MediaEventType.progress:
         onProgress(event.value);
         break;
@@ -127,6 +133,13 @@ class PlayerCubit extends Cubit<PlayerState> {
         break;
       case MediaEventType.pause:
         _setPlaying(false);
+        break;
+      case MediaEventType.volumeChanged:
+        _setMuted(!event.value);
+        break;
+      case MediaEventType.aspectRatioChanged:
+        emit(state.copyWith(aspectRatio: event.value));
+        break;
       default:
         break;
     }
@@ -138,6 +151,10 @@ class PlayerCubit extends Cubit<PlayerState> {
     emit(state);
   }
 
+  _setMuted(bool muted) {
+    emit(state.copyWith(muted: muted));
+  }
+
   @override
   close() async {
     BackButtonInterceptor.removeByName('miniPlayer');
@@ -145,11 +162,8 @@ class PlayerCubit extends Cubit<PlayerState> {
   }
 
   bool handleBackButton(bool stopDefaultButtonEvent, RouteInfo info) {
-    if (state.isFullScreen) {
-      var state = this.state.copyWith();
-      state.isFullScreen = false;
-      emit(state);
-      globalNavigator.currentState?.pop();
+    if (state.fullScreenState == FullScreenState.fullScreen) {
+      setFullScreen(FullScreenState.notFullScreen);
       return true;
     } else if (!state.isMini) {
       // we block the backbutton behavior and we make the player small
@@ -184,7 +198,7 @@ class PlayerCubit extends Cubit<PlayerState> {
   hide() {
     var state = this.state.copyWith();
     state.isMini = true;
-    state.mediaEvent = MediaEvent(state: MediaState.miniDisplayChanged);
+    state.mediaEvent = MediaEvent(state: MediaState.playing, type: MediaEventType.miniDisplayChanged, value: state.isMini);
     state.top = null;
     state.height = targetHeight;
     state.isHidden = true;
@@ -242,7 +256,7 @@ class PlayerCubit extends Cubit<PlayerState> {
   showBigPlayer() {
     var state = this.state.copyWith();
     state.isMini = false;
-    state.mediaEvent = MediaEvent(state: MediaState.miniDisplayChanged);
+    state.mediaEvent = MediaEvent(state: MediaState.playing, type: MediaEventType.miniDisplayChanged, value: state.isMini);
     state.top = 0;
     state.opacity = 1;
     state.isHidden = false;
@@ -253,7 +267,7 @@ class PlayerCubit extends Cubit<PlayerState> {
     if (state.currentlyPlaying != null || state.offlineCurrentlyPlaying != null) {
       var state = this.state.copyWith();
       state.isMini = true;
-      state.mediaEvent = MediaEvent(state: MediaState.miniDisplayChanged);
+      state.mediaEvent = MediaEvent(state: MediaState.playing, type: MediaEventType.miniDisplayChanged, value: state.isMini);
       state.top = null;
       state.isHidden = false;
       state.opacity = 1;
@@ -262,32 +276,30 @@ class PlayerCubit extends Cubit<PlayerState> {
   }
 
   onProgress(Duration? position) {
-    EasyThrottle.throttle('media-progress', const Duration(seconds: 1), () {
-      var state = this.state.copyWith();
-      state.position = position ?? Duration.zero;
-      int currentPosition = state.position.inSeconds;
-      saveProgress(currentPosition);
-      log.fine("video event");
+    var state = this.state.copyWith();
+    state.position = position ?? Duration.zero;
+    int currentPosition = state.position.inSeconds;
+    saveProgress(currentPosition);
+    log.fine("video event");
 
-      emit(state);
+    emit(state);
 
-      if (state.sponsorSegments.isNotEmpty) {
-        double positionInMs = currentPosition * 1000;
-        Pair<int> nextSegment = state.sponsorSegments.firstWhere((e) => e.first <= positionInMs && positionInMs <= e.last, orElse: () => Pair<int>(-1, -1));
-        if (nextSegment.first != -1) {
-          seek(Duration(milliseconds: nextSegment.last + 1000));
-          final ScaffoldMessengerState? scaffold = scaffoldKey.currentState;
+    if (state.sponsorSegments.isNotEmpty) {
+      double positionInMs = currentPosition * 1000;
+      Pair<int> nextSegment = state.sponsorSegments.firstWhere((e) => e.first <= positionInMs && positionInMs <= e.last, orElse: () => Pair<int>(-1, -1));
+      if (nextSegment.first != -1) {
+        seek(Duration(milliseconds: nextSegment.last + 1000));
+        final ScaffoldMessengerState? scaffold = scaffoldKey.currentState;
 
-          if (scaffold != null) {
-            var locals = AppLocalizations.of(scaffold.context)!;
-            scaffold.showSnackBar(SnackBar(
-              content: Text(locals.sponsorSkipped),
-              duration: const Duration(seconds: 1),
-            ));
-          }
+        if (scaffold != null) {
+          var locals = AppLocalizations.of(scaffold.context)!;
+          scaffold.showSnackBar(SnackBar(
+            content: Text(locals.sponsorSkipped),
+            duration: const Duration(seconds: 1),
+          ));
         }
       }
-    });
+    }
   }
 
   playNext() {
@@ -405,8 +417,13 @@ class PlayerCubit extends Cubit<PlayerState> {
   }
 
   _switchToVideo(IdedVideo video, {Duration? startAt}) async {
-    var state = this.state.copyWith();
     bool isOffline = video is DownloadedVideo;
+    // we want to switch to audio mode as soon as we can to prevent problems when switching from audio to video or the other way
+    if (isOffline) {
+      setAudio(video.audioOnly);
+    }
+
+    var state = this.state.copyWith();
 
     state.mediaEvent = MediaEvent(state: MediaState.loading);
 
@@ -440,7 +457,6 @@ class PlayerCubit extends Cubit<PlayerState> {
       state.currentlyPlaying = v;
       state.mediaCommand = MediaCommand(MediaCommandType.switchVideo, value: SwitchVideoValue(video: v, startAt: startAt));
     } else {
-      state.isAudio = video.audioOnly;
       state.offlineCurrentlyPlaying = video;
       state.mediaCommand = MediaCommand(MediaCommandType.switchToOfflineVideo, value: video);
     }
@@ -449,6 +465,8 @@ class PlayerCubit extends Cubit<PlayerState> {
     state.playedVideos.removeWhere((element) => element == video.videoId);
     state.playedVideos.add(video.videoId);
     state.position = Duration.zero;
+    state.forwardStep = defaultStep;
+    state.rewindStep = defaultStep;
 
     emit(state);
 
@@ -526,7 +544,7 @@ class PlayerCubit extends Cubit<PlayerState> {
     // we  change the display mode if there's a big enough drag movement to avoid jittery behavior when dragging slow
     if (details.delta.dy.abs() > 3) {
       state.isMini = details.delta.dy > 0;
-      state.mediaEvent = MediaEvent(state: MediaState.miniDisplayChanged);
+      state.mediaEvent = MediaEvent(state: MediaState.playing, type: MediaEventType.miniDisplayChanged, value: state.isMini);
     }
     state.dragDistance += details.delta.dy;
     // we're going down, putting threshold high easier to switch to mini player
@@ -611,6 +629,15 @@ class PlayerCubit extends Cubit<PlayerState> {
   }
 
   seek(Duration duration) {
+    if (duration.inSeconds < 0) {
+      duration = Duration.zero;
+    }
+
+    var videoLength = this.state.currentlyPlaying?.lengthSeconds ?? this.state.offlineCurrentlyPlaying?.lengthSeconds ?? 1;
+    if (duration.inSeconds > (videoLength)) {
+      duration = Duration(seconds: videoLength);
+    }
+
     var state = this.state.copyWith();
     state.position = duration;
     state.mediaCommand = MediaCommand(MediaCommandType.seek, value: duration);
@@ -618,13 +645,19 @@ class PlayerCubit extends Cubit<PlayerState> {
   }
 
   void fastForward() {
-    Duration newDuration = Duration(seconds: (state.position.inSeconds ?? 0) + 10);
-    seek(newDuration);
+    state.forwardStep += (state.forwardStep * stepMultiplier).floor();
+    seek(state.position + Duration(seconds: state.forwardStep));
+    EasyDebounce.debounce('fast-forward-step', const Duration(seconds: 1), () {
+      emit(state.copyWith(forwardStep: defaultStep));
+    });
   }
 
   void rewind() {
-    Duration newDuration = Duration(seconds: (state.position.inSeconds ?? 0) - 10);
-    seek(newDuration);
+    state.rewindStep += (state.rewindStep * stepMultiplier).floor();
+    seek(state.position - Duration(seconds: state.rewindStep));
+    EasyDebounce.debounce('fast-rewind-step', const Duration(seconds: 1), () {
+      emit(state.copyWith(rewindStep: defaultStep));
+    });
   }
 
   Future<MediaItem?> getMediaItem(int index) async {
@@ -644,6 +677,45 @@ class PlayerCubit extends Cubit<PlayerState> {
     var state = this.state.copyWith();
     state.mediaCommand = MediaCommand(MediaCommandType.speed, value: d);
     emit(state);
+  }
+
+  void setFullScreen(FullScreenState fsState) {
+    // emit(state.copyWith(mediaCommand: MediaCommand(MediaCommandType.fullScreen, value: fsState)));
+    emit(state.copyWith(
+        fullScreenState: fsState,
+        mediaCommand: MediaCommand(fsState == FullScreenState.notFullScreen ? MediaCommandType.exitFullScreen : MediaCommandType.enterFullScreen),
+        mediaEvent: MediaEvent(state: state.mediaEvent.state, type: MediaEventType.fullScreenChanged, value: fsState)));
+
+    switch (fsState) {
+      case FullScreenState.fullScreen:
+        SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
+        // SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(statusBarColor: Colors.black));
+        if (settings.state.forceLandscapeFullScreen && state.aspectRatio > 1) {
+          SystemChrome.setPreferredOrientations([
+            DeviceOrientation.landscapeLeft,
+          ]);
+        }
+        break;
+      default:
+        SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: SystemUiOverlay.values);
+        SystemChrome.setPreferredOrientations([]);
+        SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle());
+    }
+  }
+
+  void enterPip() {
+    setFullScreen(FullScreenState.fullScreen);
+    setEvent(MediaEvent(state: MediaState.playing, type: MediaEventType.enteredPip));
+    SimplePip(
+      onPipExited: () {
+        setEvent(MediaEvent(state: MediaState.playing, type: MediaEventType.exitedPip));
+        setFullScreen(FullScreenState.notFullScreen);
+      },
+    ).enterPipMode();
+  }
+
+  void setMuted(bool muted) {
+    emit(state.copyWith(mediaCommand: MediaCommand(muted ? MediaCommandType.mute : MediaCommandType.unmute)));
   }
 
   void togglePlay() {
@@ -667,11 +739,13 @@ class PlayerState {
   bool isDragging = false;
   int selectedFullScreenIndex = 0;
   bool isHidden = true;
-  bool isFullScreen = false;
   double opacity = 0;
   double dragDistance = 0;
   bool dragStartMini = true;
   double height = targetHeight;
+  FullScreenState fullScreenState = FullScreenState.notFullScreen;
+  bool muted = false;
+  double aspectRatio = 16 / 9;
 
   // videos to play
   Video? currentlyPlaying;
@@ -683,7 +757,7 @@ class PlayerState {
 
   // playlist controls
   List<String> playedVideos = [];
-  bool isAudio = true;
+  bool isAudio = false;
 
   // playing video data
   int currentIndex = 0;
@@ -709,6 +783,9 @@ class PlayerState {
   List<Pair<int>> sponsorSegments = List.of([]);
   Pair<int> nextSegment = Pair(0, 0);
 
+  // step in seconds when fast forawrd or fast rewind
+  int forwardStep = defaultStep, rewindStep = defaultStep;
+
   PlayerState();
 
   PlayerState.withVideos(this.videos);
@@ -724,10 +801,10 @@ class PlayerState {
       this.isPip,
       this.isHidden,
       this.speed,
-      this.isFullScreen,
       this.currentlyPlaying,
       this.offlineCurrentlyPlaying,
       this.opacity,
+      this.aspectRatio,
       this.dragDistance,
       this.dragStartMini,
       this.bufferedPosition,
@@ -741,5 +818,9 @@ class PlayerState {
       this.offlineVideos,
       this.position,
       this.mediaCommand,
+      this.fullScreenState,
+      this.muted,
+      this.forwardStep,
+      this.rewindStep,
       this.mediaEvent);
 }

@@ -55,8 +55,9 @@ class TvHorizontalVideoList extends StatelessWidget {
   final Function(BuildContext context, VideoInList video)? onSelect;
   final String? tags;
   final int autoFocusedIndex;
+  final void Function(VideoInList video, int index, bool focus)? onItemFocus;
 
-  const TvHorizontalVideoList({Key? key, this.tags, required this.paginatedVideoList, this.onSelect, this.autoFocusedIndex = 0}) : super(key: key);
+  const TvHorizontalVideoList({Key? key, this.tags, required this.paginatedVideoList, this.onSelect, this.autoFocusedIndex = 0, this.onItemFocus}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -68,6 +69,7 @@ class TvHorizontalVideoList extends StatelessWidget {
         video: e,
         autoFocus: index == autoFocusedIndex,
         onSelect: onSelect,
+        onFocusChange: onItemFocus != null ? (focus) => onItemFocus!(e, index, focus) : null,
       ),
     );
   }

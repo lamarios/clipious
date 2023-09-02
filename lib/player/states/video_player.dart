@@ -1,36 +1,33 @@
-import 'package:back_button_interceptor/back_button_interceptor.dart';
 import 'package:better_player/better_player.dart';
 import 'package:better_player/src/video_player/video_player_platform_interface.dart';
 import 'package:copy_with_extension/copy_with_extension.dart';
+import 'package:easy_debounce/easy_throttle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:invidious/downloads/models/downloaded_video.dart';
 import 'package:invidious/extensions.dart';
 import 'package:invidious/player/models/mediaEvent.dart';
-import 'package:invidious/player/views/tv/components/player_controls.dart';
 import 'package:invidious/settings/states/settings.dart';
 import 'package:invidious/videos/models/base_video.dart';
 import 'package:logging/logging.dart';
 import 'package:pretty_bytes/pretty_bytes.dart';
-import 'package:simple_pip_mode/simple_pip.dart';
 import 'package:wakelock/wakelock.dart';
 
 import '../../globals.dart';
 import '../../main.dart';
 import '../../videos/models/video.dart';
 import '../views/components/player_controls.dart';
+import '../views/tv/components/player_controls.dart';
 import 'interfaces/media_player.dart';
-import 'player.dart';
 
 part 'video_player.g.dart';
 
 final log = Logger('VideoPlayer');
 
 class VideoPlayerCubit extends MediaPlayerCubit<VideoPlayerState> {
-  final PlayerCubit player;
   final SettingsCubit settings;
 
-  VideoPlayerCubit(super.initialState, this.player, this.settings) {
+  VideoPlayerCubit(super.initialState, super.player, this.settings) {
     onInit();
   }
 
@@ -71,13 +68,15 @@ class VideoPlayerCubit extends MediaPlayerCubit<VideoPlayerState> {
         type = MediaEventType.pause;
         break;
       case BetterPlayerEventType.setVolume:
-        type = MediaEventType.volumeChanged;
         break;
       case BetterPlayerEventType.play:
         type = MediaEventType.play;
         break;
 
       case BetterPlayerEventType.progress:
+        EasyThrottle.throttle('video-player-progress', Duration(seconds: 1), () {
+          player.setEvent(MediaEvent(state: MediaState.playing, type: MediaEventType.progress, value: state.videoController?.videoPlayerController?.value.position ?? Duration.zero));
+        });
       case BetterPlayerEventType.seekTo:
         // we bypass the rest so we can send the current progress
         player.setEvent(MediaEvent(state: MediaState.playing, type: MediaEventType.progress, value: state.videoController?.videoPlayerController?.value.position ?? Duration.zero));
@@ -95,19 +94,12 @@ class VideoPlayerCubit extends MediaPlayerCubit<VideoPlayerState> {
       case BetterPlayerEventType.setupDataSource:
         mediaState = MediaState.loading;
         break;
-      case BetterPlayerEventType.pipStop:
-        mediaState = MediaState.exitedPip;
-        break;
-      case BetterPlayerEventType.pipStart:
-        mediaState = MediaState.enteredPip;
-        break;
-      case BetterPlayerEventType.overflowOpened:
-        break;
-      case BetterPlayerEventType.overflowClosed:
+      case BetterPlayerEventType.controlsVisible:
         break;
       case BetterPlayerEventType.openFullscreen:
         break;
       case BetterPlayerEventType.initialized:
+        player.setEvent(MediaEvent<double>(state: MediaState.ready, type: MediaEventType.aspectRatioChanged, value: getAspectRatio()));
         mediaState = MediaState.ready;
         break;
       case BetterPlayerEventType.hideFullscreen:
@@ -142,8 +134,11 @@ class VideoPlayerCubit extends MediaPlayerCubit<VideoPlayerState> {
 
     switch (event.betterPlayerEventType) {
       case BetterPlayerEventType.bufferingUpdate:
-        List<DurationRange> durations = event.parameters?['buffered'] ?? [];
-        state.bufferPosition = durations.sortBy((e) => e.end).map((e) => e.end).last;
+        EasyThrottle.throttle('video-buffering', Duration(seconds: 1), () {
+          List<DurationRange> durations = event.parameters?['buffered'] ?? [];
+          state.bufferPosition = durations.sortBy((e) => e.end).map((e) => e.end).last;
+          player.setEvent(MediaEvent(state: MediaState.playing, type: MediaEventType.bufferChanged, value: state.bufferPosition));
+        });
         break;
       case BetterPlayerEventType.play:
         double speed = 1.0;
@@ -205,6 +200,9 @@ class VideoPlayerCubit extends MediaPlayerCubit<VideoPlayerState> {
 
   @override
   playVideo(bool offline, {Duration? startAt}) async {
+    if (player.state.isAudio) {
+      return;
+    }
     var state = this.state.copyWith();
     // only used if the player is currently close because it is onReady that will actually play the video
     // need better way of handling this
@@ -284,7 +282,6 @@ class VideoPlayerCubit extends MediaPlayerCubit<VideoPlayerState> {
 
       Wakelock.enable();
 
-      bool lockOrientation = settings.state.forceLandscapeFullScreen;
       bool fillVideo = settings.state.fillFullscreen;
 
       if (state.videoController == null) {
@@ -294,8 +291,6 @@ class VideoPlayerCubit extends MediaPlayerCubit<VideoPlayerState> {
                 deviceOrientationsOnFullScreen: [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight, DeviceOrientation.portraitDown, DeviceOrientation.portraitUp],
                 deviceOrientationsAfterFullScreen: [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight, DeviceOrientation.portraitDown, DeviceOrientation.portraitUp],
                 handleLifecycle: false,
-                autoDetectFullscreenDeviceOrientation: lockOrientation,
-                autoDetectFullscreenAspectRatio: true,
                 startAt: startAt,
                 autoPlay: true,
                 allowedScreenSleep: false,
@@ -303,15 +298,15 @@ class VideoPlayerCubit extends MediaPlayerCubit<VideoPlayerState> {
                 subtitlesConfiguration: BetterPlayerSubtitlesConfiguration(
                   fontSize: settings.state.subtitleSize,
                 ),
-                controlsConfiguration: const BetterPlayerControlsConfiguration(
-                  showControls: false,
-                  // customControlsBuilder: (controller, onPlayerVisibilityChanged) => const PlayerControls(),
-                  // enablePlayPause: false,
-                  // overflowModalColor: colors.background,
-                  // overflowModalTextColor: overFlowTextColor,
-                  // overflowMenuIconsColor: overFlowTextColor,
-                  // overflowMenuCustomItems: [BetterPlayerOverflowMenuItem(useDash ? Icons.check_box_outlined : Icons.check_box_outline_blank, locals.useDash, toggleDash)])
-                )),
+                controlsConfiguration: BetterPlayerControlsConfiguration(showControls: false
+                    // customControlsBuilder: (controller, onPlayerVisibilityChanged) => PlayerControls(mediaPlayerCubit: this),
+                    // customControlsBuilder: (controller, onPlayerVisibilityChanged) => const PlayerControls(),
+                    // enablePlayPause: false,
+                    // overflowModalColor: colors.background,
+                    // overflowModalTextColor: overFlowTextColor,
+                    // overflowMenuIconsColor: overFlowTextColor,
+                    // overflowMenuCustomItems: [BetterPlayerOverflowMenuItem(useDash ? Icons.check_box_outlined : Icons.check_box_outline_blank, locals.useDash, toggleDash)])
+                    )),
             betterPlayerDataSource: betterPlayerDataSource);
         state.videoController!.addEventsListener(onVideoListener);
         state.videoController!.setBetterPlayerGlobalKey(state.key);
@@ -323,6 +318,8 @@ class VideoPlayerCubit extends MediaPlayerCubit<VideoPlayerState> {
 
       emit(state);
     }
+
+    super.playVideo(offline);
   }
 
   @override
@@ -366,27 +363,6 @@ class VideoPlayerCubit extends MediaPlayerCubit<VideoPlayerState> {
   @override
   double? speed() {
     return state.videoController?.videoPlayerController?.value.speed ?? 1;
-  }
-
-  @override
-  FullScreenState isFullScreen() {
-    return (state.videoController?.isFullScreen ?? false) ? FullScreenState.fullScreen : FullScreenState.notFullScreen;
-  }
-
-  @override
-  setFullScreen(bool fullScreen) {
-    if (fullScreen) {
-      state.videoController?.enterFullScreen();
-      BackButtonInterceptor.add(backButtonInterceptor, zIndex: 10, name: 'full screen player');
-    } else {
-      state.videoController?.exitFullScreen();
-      BackButtonInterceptor.remove(backButtonInterceptor);
-    }
-  }
-
-  bool backButtonInterceptor(bool stopDefaultButtonEvent, RouteInfo info) {
-    setFullScreen(false);
-    return true;
   }
 
   String _videoTrackToString(BetterPlayerAsmsTrack? track) {
@@ -496,24 +472,6 @@ class VideoPlayerCubit extends MediaPlayerCubit<VideoPlayerState> {
   }
 
   @override
-  bool supportsPip() {
-    return true;
-  }
-
-  @override
-  void enterPip() {
-    player.setEvent(MediaEvent(state: MediaState.enteredPip));
-    setFullScreen(true);
-    SimplePip(
-      onPipExited: () {
-        player.setEvent(MediaEvent(state: MediaState.exitedPip));
-        setFullScreen(false);
-      },
-    ).enterPipMode();
-    // state.videoController?.enablePictureInPicture(state.key);
-  }
-
-  @override
   bool isMuted() {
     return state.videoController?.videoPlayerController?.value.volume == 0;
   }
@@ -546,6 +504,23 @@ class VideoPlayerCubit extends MediaPlayerCubit<VideoPlayerState> {
   @override
   Duration duration() {
     return state.videoController?.videoPlayerController?.value.duration ?? const Duration(milliseconds: 1);
+  }
+
+  @override
+  double getAspectRatio() {
+    double width = state.videoController?.videoPlayerController?.value.size?.width ?? 16;
+    double height = state.videoController?.videoPlayerController?.value.size?.height ?? 9;
+    return width / height;
+  }
+
+  @override
+  void onEnterFullScreen() {
+    state.videoController?.setOverriddenAspectRatio(getAspectRatio());
+  }
+
+  @override
+  void onExitFullScreen() {
+    state.videoController?.setOverriddenAspectRatio(16 / 9);
   }
 }
 

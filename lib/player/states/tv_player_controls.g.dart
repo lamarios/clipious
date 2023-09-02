@@ -17,10 +17,6 @@ abstract class _$TvPlayerControlsStateCWProxy {
 
   TvPlayerControlsState displayControls(bool displayControls);
 
-  TvPlayerControlsState forwardStep(int forwardStep);
-
-  TvPlayerControlsState rewindStep(int rewindStep);
-
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `TvPlayerControlsState(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
   /// Usage
@@ -33,8 +29,6 @@ abstract class _$TvPlayerControlsStateCWProxy {
     bool? showQueue,
     bool? loading,
     bool? displayControls,
-    int? forwardStep,
-    int? rewindStep,
   });
 }
 
@@ -64,14 +58,6 @@ class _$TvPlayerControlsStateCWProxyImpl
       this(displayControls: displayControls);
 
   @override
-  TvPlayerControlsState forwardStep(int forwardStep) =>
-      this(forwardStep: forwardStep);
-
-  @override
-  TvPlayerControlsState rewindStep(int rewindStep) =>
-      this(rewindStep: rewindStep);
-
-  @override
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `TvPlayerControlsState(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
@@ -85,8 +71,6 @@ class _$TvPlayerControlsStateCWProxyImpl
     Object? showQueue = const $CopyWithPlaceholder(),
     Object? loading = const $CopyWithPlaceholder(),
     Object? displayControls = const $CopyWithPlaceholder(),
-    Object? forwardStep = const $CopyWithPlaceholder(),
-    Object? rewindStep = const $CopyWithPlaceholder(),
   }) {
     return TvPlayerControlsState._(
       controlsOpacity == const $CopyWithPlaceholder() || controlsOpacity == null
@@ -109,14 +93,6 @@ class _$TvPlayerControlsStateCWProxyImpl
           ? _value.displayControls
           // ignore: cast_nullable_to_non_nullable
           : displayControls as bool,
-      forwardStep == const $CopyWithPlaceholder() || forwardStep == null
-          ? _value.forwardStep
-          // ignore: cast_nullable_to_non_nullable
-          : forwardStep as int,
-      rewindStep == const $CopyWithPlaceholder() || rewindStep == null
-          ? _value.rewindStep
-          // ignore: cast_nullable_to_non_nullable
-          : rewindStep as int,
     );
   }
 }

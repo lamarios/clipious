@@ -1,4 +1,5 @@
 import 'package:copy_with_extension/copy_with_extension.dart';
+import 'package:easy_debounce/easy_throttle.dart';
 import 'package:invidious/downloads/models/downloaded_video.dart';
 import 'package:invidious/extensions.dart';
 import 'package:invidious/globals.dart';
@@ -10,17 +11,15 @@ import 'package:logging/logging.dart';
 import '../../settings/states/settings.dart';
 import '../../videos/models/adaptive_format.dart';
 import '../models/mediaEvent.dart';
-import 'player.dart' as clipious_player;
 
 part 'audio_player.g.dart';
 
 Logger log = Logger('AudioPlayerController');
 
 class AudioPlayerCubit extends MediaPlayerCubit<AudioPlayerState> {
-  final clipious_player.PlayerCubit globalPlayer;
   final SettingsCubit settings;
 
-  AudioPlayerCubit(super.initialState, this.globalPlayer, this.settings) {
+  AudioPlayerCubit(super.initialState, super.player, this.settings) {
     onInit();
   }
 
@@ -45,10 +44,11 @@ class AudioPlayerCubit extends MediaPlayerCubit<AudioPlayerState> {
       state.player = AudioPlayer();
       state.player?.playerStateStream.listen(onStateStreamChange, onError: (e, st) {
         print('ERRRRRROOOORR');
-        return globalPlayer.setEvent(MediaEvent(state: MediaState.error));
+        return player.setEvent(MediaEvent(state: MediaState.error));
       });
       state.player?.positionStream.listen(onPositionChanged);
       state.player?.durationStream.listen(onDurationChanged);
+      state.player?.bufferedPositionStream.listen(onBufferChanged);
     }
   }
 
@@ -60,16 +60,16 @@ class AudioPlayerCubit extends MediaPlayerCubit<AudioPlayerState> {
         // MiniPlayerController.to()?.eventStream.add(MediaEvent(state: MediaState.idle));
         break;
       case ProcessingState.loading:
-        globalPlayer.setEvent(MediaEvent(state: MediaState.loading));
+        player.setEvent(MediaEvent(state: MediaState.loading));
         break;
       case ProcessingState.buffering:
-        globalPlayer.setEvent(MediaEvent(state: MediaState.buffering));
+        player.setEvent(MediaEvent(state: MediaState.buffering));
         break;
       case ProcessingState.ready:
-        globalPlayer.setEvent(MediaEvent(state: MediaState.ready));
+        player.setEvent(MediaEvent(state: MediaState.ready));
         break;
       case ProcessingState.completed:
-        globalPlayer.setEvent(MediaEvent(state: MediaState.completed));
+        player.setEvent(MediaEvent(state: MediaState.completed));
         break;
     }
   }
@@ -78,15 +78,21 @@ class AudioPlayerCubit extends MediaPlayerCubit<AudioPlayerState> {
     var state = this.state.copyWith();
     state.loading = false;
     if (!isClosed) emit(state);
+    player.setEvent(MediaEvent(state: MediaState.playing, type: MediaEventType.durationChanged, value: duration ?? const Duration(seconds: 1)));
   }
 
   onPositionChanged(Duration position) {
-    state.audioPosition = position;
-    globalPlayer.setEvent(MediaEvent(state: MediaState.playing, type: MediaEventType.progress, value: position));
+    EasyThrottle.throttle('audio-progress', Duration(seconds: 1), () {
+      state.audioPosition = position;
+      player.setEvent(MediaEvent(state: MediaState.playing, type: MediaEventType.progress, value: position));
+    });
   }
 
   @override
   playVideo(bool offline, {Duration? startAt}) async {
+    if (!player.state.isAudio) {
+      return;
+    }
     if (state.video != null || state.offlineVideo != null) {
       // disposeControllers();
       initPlayer();
@@ -94,7 +100,7 @@ class AudioPlayerCubit extends MediaPlayerCubit<AudioPlayerState> {
       state.audioPosition = Duration.zero;
       state.audioLength = Duration(seconds: offline ? state.offlineVideo!.lengthSeconds : state.video!.lengthSeconds);
       state.loading = true;
-      globalPlayer.setEvent(MediaEvent(state: MediaState.loading));
+      player.setEvent(MediaEvent(state: MediaState.loading));
       try {
         AudioSource? source;
 
@@ -132,12 +138,18 @@ class AudioPlayerCubit extends MediaPlayerCubit<AudioPlayerState> {
         }
       } catch (e) {
         log.severe("Couldn't play video", e);
-        globalPlayer.setEvent(MediaEvent(state: MediaState.error));
+        player.setEvent(MediaEvent(state: MediaState.error));
         state.error = e.toString();
         state.loading = false;
         if (!isClosed) emit(state);
       }
     }
+    super.playVideo(offline);
+  }
+
+  @override
+  double getAspectRatio() {
+    return 16 / 9;
   }
 
   @override
@@ -191,19 +203,20 @@ class AudioPlayerCubit extends MediaPlayerCubit<AudioPlayerState> {
   @override
   void play() {
     state.player?.play();
-    globalPlayer.setEvent(MediaEvent(state: MediaState.playing, type: MediaEventType.play));
+    player.setEvent(MediaEvent(state: MediaState.playing, type: MediaEventType.play));
   }
 
   @override
   void seek(Duration position) {
     state.player?.seek(position);
-    globalPlayer.setEvent(MediaEvent(state: MediaState.playing, type: MediaEventType.seek));
+    player.setEvent(MediaEvent(state: MediaState.playing, type: MediaEventType.seek));
+    player.setEvent(MediaEvent(state: MediaState.playing, type: MediaEventType.progress, value: position));
   }
 
   @override
   void pause() {
     state.player?.pause();
-    globalPlayer.setEvent(MediaEvent(state: MediaState.playing, type: MediaEventType.pause));
+    player.setEvent(MediaEvent(state: MediaState.playing, type: MediaEventType.pause));
   }
 
   @override
@@ -219,16 +232,6 @@ class AudioPlayerCubit extends MediaPlayerCubit<AudioPlayerState> {
   @override
   double? speed() {
     return 1;
-  }
-
-  @override
-  FullScreenState isFullScreen() {
-    return FullScreenState.unsupported;
-  }
-
-  @override
-  setFullScreen(bool bool) {
-    throw UnimplementedError();
   }
 
   @override
@@ -320,6 +323,13 @@ class AudioPlayerCubit extends MediaPlayerCubit<AudioPlayerState> {
   @override
   Duration duration() {
     return state.player?.duration ?? const Duration(milliseconds: 1);
+  }
+
+  void onBufferChanged(Duration event) {
+    EasyThrottle.throttle('audio-buffering', const Duration(seconds: 1), () {
+      player.setEvent(MediaEvent(state: MediaState.playing, type: MediaEventType.bufferChanged, value: event));
+    });
+
   }
 }
 

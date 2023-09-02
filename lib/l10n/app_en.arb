@@ -951,6 +951,10 @@
     "@distractionFreeModeDescription": {
         "description": "Description for distraction free mode"
     },
+    "secondsShortForm": "secs",
+    "@secondsShortForm": {
+        "description": "Short form for the word seconds"
+    },
     "history": "History",
     "@history": {
         "description": "User view history label"

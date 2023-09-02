@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/main.dart';
-import 'package:invidious/player/models/mediaEvent.dart';
 import 'package:invidious/player/states/interfaces/media_player.dart';
 import 'package:invidious/player/states/player.dart';
 
@@ -86,9 +85,17 @@ class PlayerControls extends StatelessWidget {
     );
   }
 
-  showOptionMenu(BuildContext context, PlayerControlsState controls, MediaPlayerCubit pc) {
-    var locals = AppLocalizations.of(context)!;
+  showOptionMenu(BuildContext context, PlayerControlsState controls) {
+    late MediaPlayerCubit pc;
     var player = context.read<PlayerCubit>();
+    if (mediaPlayerCubit != null) {
+      pc = mediaPlayerCubit!;
+    } else if (player.state.isAudio) {
+      pc = context.read<AudioPlayerCubit>();
+    } else {
+      pc = context.read<VideoPlayerCubit>();
+    }
+    var locals = AppLocalizations.of(context)!;
     var videoTracks = pc.getVideoTracks();
     var audioTracks = pc.getAudioTracks();
     var subtitles = pc.getSubtitles();
@@ -173,8 +180,10 @@ class PlayerControls extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var locals = AppLocalizations.of(context)!;
     var textTheme = Theme.of(context).textTheme;
     var player = context.read<PlayerCubit>();
+    var colors = Theme.of(context).colorScheme;
     return Theme(
       data: ThemeData(useMaterial3: true, colorScheme: darkColorScheme, progressIndicatorTheme: ProgressIndicatorThemeData(circularTrackColor: darkColorScheme.secondaryContainer.withOpacity(0.8))),
       child: BlocProvider(
@@ -184,18 +193,10 @@ class PlayerControls extends StatelessWidget {
             bool isMini = context.select((PlayerCubit cubit) => cubit.state.isMini);
             bool hasQueue = context.select((PlayerCubit cubit) => cubit.state.hasQueue);
             bool isPip = context.select((PlayerCubit cubit) => cubit.state.isPip);
+            int fastForwardStep = context.select((PlayerCubit cubit) => cubit.state.forwardStep);
+            int rewindStep = context.select((PlayerCubit cubit) => cubit.state.rewindStep);
             String videoTitle = context.select((PlayerCubit cubit) => cubit.state.currentlyPlaying?.title ?? cubit.state.offlineCurrentlyPlaying?.title ?? '');
 
-            late MediaPlayerCubit pc;
-            if (mediaPlayerCubit != null) {
-              pc = mediaPlayerCubit!;
-            } else if (player.state.isAudio) {
-              pc = context.read<AudioPlayerCubit>();
-            } else {
-              pc = context.read<VideoPlayerCubit>();
-            }
-            // PlayerState mpc = player.state;
-            var event = _.event;
             var cubit = context.read<PlayerControlsCubit>();
             return BlocListener<PlayerCubit, PlayerState>(
               listenWhen: (previous, current) => previous.mediaEvent != current.mediaEvent,
@@ -204,15 +205,48 @@ class PlayerControls extends StatelessWidget {
               },
               child: GestureDetector(
                 behavior: HitTestBehavior.translucent,
-                onTap: _.displayControls ? cubit.hideControls : cubit.showControls,
-                onVerticalDragEnd: pc.isFullScreen() == FullScreenState.fullScreen ? null : player.videoDraggedEnd,
-                onVerticalDragUpdate: pc.isFullScreen() == FullScreenState.fullScreen ? null : player.videoDragged,
-                onVerticalDragStart: pc.isFullScreen() == FullScreenState.fullScreen ? null : player.videoDragStarted,
+                onVerticalDragEnd: _.fullScreenState == FullScreenState.fullScreen || _.displayControls ? null : player.videoDraggedEnd,
+                onVerticalDragUpdate: _.fullScreenState == FullScreenState.fullScreen || _.displayControls ? null : player.videoDragged,
+                onVerticalDragStart: _.fullScreenState == FullScreenState.fullScreen || _.displayControls ? null : player.videoDragStarted,
                 child: AspectRatio(
                   aspectRatio: 16 / 9,
                   child: Stack(
                     alignment: Alignment.topCenter,
                     children: [
+                      if (!isMini && !isPip)
+                        Positioned(
+                            left: 0,
+                            right: 0,
+                            top: 0,
+                            bottom: 0,
+                            child: Row(
+                              children: [
+                                Expanded(
+                                    child: GestureDetector(
+                                        behavior: HitTestBehavior.translucent,
+                                        onTap: _.justDoubleTappedSkip
+                                            ? cubit.doubleTapRewind
+                                            : _.displayControls
+                                                ? cubit.hideControls
+                                                : cubit.showControls,
+                                        onDoubleTap: _.justDoubleTappedSkip ? null : cubit.doubleTapRewind,
+                                        child: DoubleTapButton(stepText: '-$rewindStep ${locals.secondsShortForm}', opacity: _.doubleTapRewindedOpacity, icon: Icons.fast_rewind))),
+                                Expanded(
+                                    child: GestureDetector(
+                                        onTap: _.justDoubleTappedSkip
+                                            ? cubit.doubleTapFastForward
+                                            : _.displayControls
+                                                ? cubit.hideControls
+                                                : cubit.showControls,
+                                        behavior: HitTestBehavior.translucent,
+                                        onDoubleTap: _.justDoubleTappedSkip ? null : cubit.doubleTapFastForward,
+                                        child: DoubleTapButton(
+                                          stepText: '+$fastForwardStep ${locals.secondsShortForm}',
+                                          opacity: _.doubleTapFastForwardedOpacity,
+                                          icon: Icons.fast_forward,
+                                        ))),
+                              ],
+                            )),
                       if (_.errored)
                         Container(
                           color: Colors.black.withOpacity(0.8),
@@ -228,71 +262,100 @@ class PlayerControls extends StatelessWidget {
                         child: isMini || isPip
                             ? const SizedBox.shrink()
                             : _.displayControls
-                                ? Container(
-                                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(0), color: Colors.black.withOpacity(0.4)),
-                                    child: Column(
-                                      children: [
-                                        Row(
-                                          mainAxisAlignment: MainAxisAlignment.end,
-                                          children: [
-                                            if (pc.isFullScreen() == FullScreenState.fullScreen)
-                                              Expanded(
-                                                  child: Padding(
-                                                padding: const EdgeInsets.only(left: 8.0),
-                                                child: Text(
-                                                  videoTitle,
-                                                  maxLines: 1,
-                                                  overflow: TextOverflow.ellipsis,
-                                                ),
-                                              )),
-                                            if (pc.supportsPip()) IconButton(onPressed: pc.enterPip, icon: const Icon(Icons.picture_in_picture)),
-                                            IconButton(onPressed: () => showOptionMenu(context, _, pc), icon: const Icon(Icons.more_vert))
-                                          ],
-                                        ),
-                                        Expanded(child: Container()),
-                                        Row(
-                                          mainAxisAlignment: MainAxisAlignment.end,
-                                          children: [
-                                            pc.isMuted()
-                                                ? IconButton(onPressed: () => pc.toggleVolume(true), icon: const Icon(Icons.volume_off))
-                                                : IconButton(onPressed: () => pc.toggleVolume(false), icon: const Icon(Icons.volume_up)),
-                                            switch (pc.isFullScreen()) {
-                                              FullScreenState.fullScreen => IconButton(onPressed: () => pc.setFullScreen((false)), icon: const Icon(Icons.fullscreen_exit)),
-                                              FullScreenState.notFullScreen => IconButton(onPressed: () => pc.setFullScreen(true), icon: const Icon(Icons.fullscreen)),
-                                              _ => const SizedBox.shrink()
-                                            }
-                                          ],
-                                        ),
-                                        if (!(player.state.currentlyPlaying?.liveNow ?? false))
-                                          Padding(
-                                            padding: const EdgeInsets.only(top: 0.0, right: 8),
-                                            child: Row(
-                                              children: [
+                                ? GestureDetector(
+                                    onTap: cubit.hideControls,
+                                    child: Container(
+                                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(0), color: Colors.black.withOpacity(0.4)),
+                                      child: Column(
+                                        children: [
+                                          Row(
+                                            mainAxisAlignment: MainAxisAlignment.end,
+                                            children: [
+                                              if (_.fullScreenState == FullScreenState.fullScreen)
                                                 Expanded(
-                                                  child: SizedBox(
-                                                    height: 25,
-                                                    child: Slider(
-                                                      min: 0,
-                                                      value: min(_.audioPosition.inMilliseconds.toDouble(), pc.duration().inMilliseconds.toDouble()),
-                                                      max: pc.duration().inMilliseconds.toDouble(),
-                                                      secondaryTrackValue: min(pc.bufferedPosition()?.inMilliseconds.toDouble() ?? 0, pc.duration().inMilliseconds.toDouble()),
-                                                      onChangeEnd: cubit.onScrubbed,
-                                                      onChanged: cubit.onScrubDrag,
-                                                    ),
+                                                    child: Padding(
+                                                  padding: const EdgeInsets.only(left: 8.0),
+                                                  child: Text(
+                                                    videoTitle,
+                                                    maxLines: 1,
+                                                    overflow: TextOverflow.ellipsis,
+                                                    style: textTheme.bodyMedium?.copyWith(color: Colors.white.withOpacity(0.8)),
                                                   ),
-                                                ),
-                                                Text(
-                                                  '${prettyDuration(pc.position())} / ${prettyDuration(pc.duration())}',
-                                                  style: textTheme.bodySmall?.copyWith(color: Colors.white),
-                                                ),
-                                              ],
-                                            ),
+                                                )),
+                                              IconButton(onPressed: () => player.enterPip(), icon: const Icon(Icons.picture_in_picture)),
+                                              IconButton(onPressed: () => showOptionMenu(context, _), icon: const Icon(Icons.more_vert))
+                                            ],
                                           ),
-                                      ],
+                                          Expanded(child: Container()),
+                                          Row(
+                                            mainAxisAlignment: MainAxisAlignment.end,
+                                            children: [
+                                              _.muted
+                                                  ? IconButton(
+                                                      onPressed: () {
+                                                        player.setMuted(false);
+                                                        cubit.hideControlsDebounce();
+                                                      },
+                                                      icon: const Icon(Icons.volume_off))
+                                                  : IconButton(
+                                                      onPressed: () {
+                                                        player.setMuted(true);
+                                                        cubit.hideControlsDebounce();
+                                                      },
+                                                      icon: const Icon(Icons.volume_up)),
+                                              switch (_.fullScreenState) {
+                                                FullScreenState.fullScreen => IconButton(onPressed: () => player.setFullScreen(FullScreenState.notFullScreen), icon: const Icon(Icons.fullscreen_exit)),
+                                                FullScreenState.notFullScreen => IconButton(onPressed: () => player.setFullScreen(FullScreenState.fullScreen), icon: const Icon(Icons.fullscreen)),
+                                              }
+                                            ],
+                                          ),
+                                          const SizedBox(
+                                            height: 15,
+                                          )
+                                        ],
+                                      ),
                                     ),
                                   )
                                 : const SizedBox.expand(),
                       ),
+                      if ((_.displayControls || _.justDoubleTappedSkip) && !(player.state.currentlyPlaying?.liveNow ?? false))
+                        Positioned(
+                          bottom: 0,
+                          left: 0,
+                          right: 0,
+                          child: Stack(
+                            children: [
+                              Container(
+                                decoration: _.justDoubleTappedSkip
+                                    ? BoxDecoration(
+                                        gradient: LinearGradient(begin: Alignment.bottomCenter, end: Alignment.topCenter, colors: [Colors.black.withOpacity(1), Colors.black.withOpacity(0)]))
+                                    : null,
+                                child: Padding(
+                                    padding: const EdgeInsets.only(top: 16.0, right: 8),
+                                    child: Row(
+                                      children: [
+                                        Expanded(
+                                          child: SizedBox(
+                                              height: 25,
+                                              child: Slider(
+                                                min: 0,
+                                                value: min(_.position.inMilliseconds.toDouble(), _.duration.inMilliseconds.toDouble()),
+                                                max: _.duration.inMilliseconds.toDouble(),
+                                                secondaryTrackValue: min(_.buffer.inMilliseconds.toDouble(), _.duration.inMilliseconds.toDouble()),
+                                                onChangeEnd: cubit.onScrubbed,
+                                                onChanged: cubit.onScrubDrag,
+                                              )),
+                                        ),
+                                        Text(
+                                          '${prettyDuration(_.position)} / ${prettyDuration(_.duration)}',
+                                          style: textTheme.bodySmall?.copyWith(color: Colors.white),
+                                        ),
+                                      ],
+                                    )),
+                              ),
+                            ],
+                          ),
+                        ),
                       if (!isMini && !isPip && _.displayControls)
                         Positioned(
                           top: 0,
@@ -308,6 +371,7 @@ class PlayerControls extends StatelessWidget {
                                     onPressed: () {
                                       player.playPrevious();
                                       cubit.removeError();
+                                      cubit.hideControlsDebounce();
                                     },
                                     icon: const Icon(
                                       Icons.skip_previous,
@@ -334,6 +398,7 @@ class PlayerControls extends StatelessWidget {
                                     onPressed: () {
                                       player.playNext();
                                       cubit.removeError();
+                                      cubit.hideControlsDebounce();
                                     },
                                     icon: const Icon(
                                       Icons.skip_next,
@@ -342,7 +407,7 @@ class PlayerControls extends StatelessWidget {
                             ],
                           ),
                         ),
-                      if (event.state == MediaState.buffering)
+                      if (_.buffering)
                         const Center(
                           child: FractionallySizedBox(
                             heightFactor: 0.3,
@@ -352,13 +417,51 @@ class PlayerControls extends StatelessWidget {
                                   strokeWidth: 2,
                                 )),
                           ),
-                        )
+                        ),
                     ],
                   ),
                 ),
               ),
             );
           },
+        ),
+      ),
+    );
+  }
+}
+
+class DoubleTapButton extends StatelessWidget {
+  final double opacity;
+  final IconData icon;
+  final String stepText;
+
+  const DoubleTapButton({super.key, required this.opacity, required this.icon, required this.stepText});
+
+  @override
+  Widget build(BuildContext context) {
+    var textTheme = Theme.of(context).textTheme;
+    return AnimatedContainer(
+      curve: Curves.easeInOutQuad,
+      margin: EdgeInsets.all(opacity == 1 ? 50 : 0),
+      decoration: BoxDecoration(color: Colors.black.withOpacity(opacity == 1 ? 0.3 : 0), shape: BoxShape.circle),
+      duration: const Duration(milliseconds: 150),
+      height: double.infinity,
+      child: AnimatedOpacity(
+        opacity: opacity,
+        duration: Duration(milliseconds: opacity == 1 ? 150 : 500),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              icon,
+              size: 50,
+            ),
+            Text(
+              stepText,
+              style: textTheme.bodySmall?.copyWith(color: Colors.white.withOpacity(0.8)),
+            )
+          ],
         ),
       ),
     );

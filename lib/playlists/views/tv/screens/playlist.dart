@@ -62,7 +62,7 @@ class TvPlaylistView extends PlaylistView {
                 AnimatedPositioned(
                   duration: animationDuration,
                   curve: Curves.easeInOutQuad,
-                  top: _.showImage ? 335 : 0,
+                  top: _.showImage ? 285 : 0,
                   left: 0,
                   bottom: 0,
                   right: 0,
@@ -143,7 +143,7 @@ class TvPlaylistView extends PlaylistView {
                                         ),
                                       ],
                                     ),
-                                    Expanded(
+                                    if(!_.loading)Expanded(
                                       child: Padding(
                                         padding: const EdgeInsets.only(top: 16.0),
                                         child: GridView.count(

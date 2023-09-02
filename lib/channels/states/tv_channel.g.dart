@@ -19,6 +19,15 @@ abstract class _$TvChannelControllerCWProxy {
 
   TvChannelController hasPlaylist(bool hasPlaylist);
 
+  TvChannelController videosTitle(GlobalKey<State<StatefulWidget>> videosTitle);
+
+  TvChannelController shortTitle(GlobalKey<State<StatefulWidget>> shortTitle);
+
+  TvChannelController streamTitle(GlobalKey<State<StatefulWidget>> streamTitle);
+
+  TvChannelController playlistsTitle(
+      GlobalKey<State<StatefulWidget>> playlistsTitle);
+
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `TvChannelController(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
   /// Usage
@@ -32,6 +41,10 @@ abstract class _$TvChannelControllerCWProxy {
     bool? hasStreams,
     bool? hasVideos,
     bool? hasPlaylist,
+    GlobalKey<State<StatefulWidget>>? videosTitle,
+    GlobalKey<State<StatefulWidget>>? shortTitle,
+    GlobalKey<State<StatefulWidget>>? streamTitle,
+    GlobalKey<State<StatefulWidget>>? playlistsTitle,
   });
 }
 
@@ -64,6 +77,25 @@ class _$TvChannelControllerCWProxyImpl implements _$TvChannelControllerCWProxy {
       this(hasPlaylist: hasPlaylist);
 
   @override
+  TvChannelController videosTitle(
+          GlobalKey<State<StatefulWidget>> videosTitle) =>
+      this(videosTitle: videosTitle);
+
+  @override
+  TvChannelController shortTitle(GlobalKey<State<StatefulWidget>> shortTitle) =>
+      this(shortTitle: shortTitle);
+
+  @override
+  TvChannelController streamTitle(
+          GlobalKey<State<StatefulWidget>> streamTitle) =>
+      this(streamTitle: streamTitle);
+
+  @override
+  TvChannelController playlistsTitle(
+          GlobalKey<State<StatefulWidget>> playlistsTitle) =>
+      this(playlistsTitle: playlistsTitle);
+
+  @override
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `TvChannelController(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
@@ -78,6 +110,10 @@ class _$TvChannelControllerCWProxyImpl implements _$TvChannelControllerCWProxy {
     Object? hasStreams = const $CopyWithPlaceholder(),
     Object? hasVideos = const $CopyWithPlaceholder(),
     Object? hasPlaylist = const $CopyWithPlaceholder(),
+    Object? videosTitle = const $CopyWithPlaceholder(),
+    Object? shortTitle = const $CopyWithPlaceholder(),
+    Object? streamTitle = const $CopyWithPlaceholder(),
+    Object? playlistsTitle = const $CopyWithPlaceholder(),
   }) {
     return TvChannelController._(
       scrollController == const $CopyWithPlaceholder() ||
@@ -105,6 +141,22 @@ class _$TvChannelControllerCWProxyImpl implements _$TvChannelControllerCWProxy {
           ? _value.hasPlaylist
           // ignore: cast_nullable_to_non_nullable
           : hasPlaylist as bool,
+      videosTitle == const $CopyWithPlaceholder() || videosTitle == null
+          ? _value.videosTitle
+          // ignore: cast_nullable_to_non_nullable
+          : videosTitle as GlobalKey<State<StatefulWidget>>,
+      shortTitle == const $CopyWithPlaceholder() || shortTitle == null
+          ? _value.shortTitle
+          // ignore: cast_nullable_to_non_nullable
+          : shortTitle as GlobalKey<State<StatefulWidget>>,
+      streamTitle == const $CopyWithPlaceholder() || streamTitle == null
+          ? _value.streamTitle
+          // ignore: cast_nullable_to_non_nullable
+          : streamTitle as GlobalKey<State<StatefulWidget>>,
+      playlistsTitle == const $CopyWithPlaceholder() || playlistsTitle == null
+          ? _value.playlistsTitle
+          // ignore: cast_nullable_to_non_nullable
+          : playlistsTitle as GlobalKey<State<StatefulWidget>>,
     );
   }
 }

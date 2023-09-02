@@ -20,9 +20,10 @@ class MiniPlayerControls extends StatelessWidget {
     var player = context.read<PlayerCubit>();
     return BlocProvider(
       create: (context) => PlayerControlsCubit(PlayerControlsState(), player),
-      child: BlocBuilder<PlayerControlsCubit, PlayerControlsState>(builder: (context, _) {
+      child: Builder(builder: (context) {
         bool isMini = context.select((PlayerCubit value) => value.state.isMini);
         bool hasQueue = context.select((PlayerCubit value) => value.state.hasQueue);
+        bool isPlaying = context.select((PlayerCubit value)=> value.state.isPlaying);
 
         return Padding(
           padding: isMini ? EdgeInsets.zero : const EdgeInsets.all(8.0),
@@ -58,7 +59,7 @@ class MiniPlayerControls extends StatelessWidget {
                           onPressed: player.togglePlay,
                           style: buttonStyle,
                           icon: Icon(
-                            player.state.isPlaying ? Icons.pause : Icons.play_arrow,
+                            isPlaying ? Icons.pause : Icons.play_arrow,
                           )),
                       IconButton(
                           onPressed: player.fastForward,
@@ -78,9 +79,10 @@ class MiniPlayerControls extends StatelessWidget {
                     ],
                   ),
                 if (!isMini)
-                  BlocBuilder<SettingsCubit, SettingsState>(
-                      // buildWhen: (previous, current) => previous.playerRepeatMode != current.playerRepeatMode || previous.playerShuffleMode != current.playerShuffleMode,
-                      builder: (context, settings) {
+                  Builder(
+                      builder: (context) {
+                        var playerRepeatMode = context.select((SettingsCubit s) => s.state.playerRepeatMode);
+                        var shuffleMode = context.select((SettingsCubit s) => s.state.playerShuffleMode);
                     var cubit = context.read<SettingsCubit>();
                     return Row(
                       mainAxisAlignment: MainAxisAlignment.end,
@@ -88,16 +90,16 @@ class MiniPlayerControls extends StatelessWidget {
                         IconButton(
                             style: buttonStyle,
                             onPressed: cubit.setNextRepeatMode,
-                            color: settings.playerRepeatMode == PlayerRepeat.noRepeat ? null : colors.primary,
+                            color: playerRepeatMode == PlayerRepeat.noRepeat ? null : colors.primary,
                             icon: Icon(
-                              settings.playerRepeatMode == PlayerRepeat.repeatOne ? Icons.repeat_one : Icons.repeat,
+                              playerRepeatMode == PlayerRepeat.repeatOne ? Icons.repeat_one : Icons.repeat,
                             )),
                         if (hasQueue)
                           IconButton(
                             onPressed: cubit.toggleShuffle,
                             style: buttonStyle,
                             icon: const Icon(Icons.shuffle),
-                            color: settings.playerShuffleMode ? colors.primary : null,
+                            color: shuffleMode ? colors.primary : null,
                           ),
                       ],
                     );
