@@ -35,11 +35,12 @@ class Search extends StatelessWidget {
       child: BlocBuilder<SearchCubit, SearchState>(
         builder: (context, _) {
           var cubit = context.read<SearchCubit>();
+          var navigationBarLabel = context.select((SettingsCubit s) => s.state.navigationBarLabelBehavior);
           return Scaffold(
             bottomNavigationBar: _.showResults
                 ? NavigationBar(
                     backgroundColor: colorScheme.background,
-                    labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
+                    labelBehavior: navigationBarLabel,
                     elevation: 0,
                     selectedIndex: _.selectedIndex,
                     onDestinationSelected: cubit.selectIndex,
