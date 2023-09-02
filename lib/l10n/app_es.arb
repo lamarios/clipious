@@ -952,5 +952,9 @@
   "distractionFreeModeDescription": "Desactivar los comentarios y las recomendaciones de los vídeos",
   "@distractionFreeModeDescription": {
     "description": "Description for distraction free mode"
+  },
+  "secondsShortForm": "s",
+  "@secondsShortForm": {
+    "description": "Short form for the word seconds"
   }
 }
