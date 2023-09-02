@@ -279,7 +279,7 @@ class PlayerControls extends StatelessWidget {
                                                     videoTitle,
                                                     maxLines: 1,
                                                     overflow: TextOverflow.ellipsis,
-                                                    style: textTheme.bodyMedium?.copyWith(color: colors.onPrimary),
+                                                    style: textTheme.bodyMedium?.copyWith(color: Colors.white.withOpacity(0.8)),
                                                   ),
                                                 )),
                                               IconButton(onPressed: () => player.enterPip(), icon: const Icon(Icons.picture_in_picture)),
