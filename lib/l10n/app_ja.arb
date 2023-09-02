@@ -900,5 +900,57 @@
   "clearHistoryQuestionExplanation": "使用している Invidious のインスタンスにあるアカウントの視聴履歴が消去されます。元に戻せません。",
   "@clearHistoryQuestionExplanation": {
     "description": "Message for dialog before clearing full viewing history"
+  },
+  "home": "ホーム",
+  "@home": {
+    "description": "Label for Home browsing tab"
+  },
+  "navigationBarStyle": "ナビゲーションバーのスタイル",
+  "@navigationBarStyle": {
+    "description": "Label for settings on customizing navigation bar style"
+  },
+  "homeLayoutEditor": "ホームの配置を編集",
+  "@homeLayoutEditor": {
+    "description": "Title of layout editor screen"
+  },
+  "layoutEditorExplanation": "ホーム画面の表示を変更できます。横スクロールの小さな表示部分を2つ、大きな表示部分を1つ表示できます。",
+  "@layoutEditorExplanation": {
+    "description": "text to explain the home layout editor"
+  },
+  "layoutEditorAddVideoSource": "動画の表示を追加",
+  "@layoutEditorAddVideoSource": {
+    "description": "Label for button to allow user to add more video sources to the home screen"
+  },
+  "customizeAppLayoutExplanation": "アプリのメインのナビゲーションバーに表示したいボタンを選択します。家型のアイコンをクリックすると、アプリ起動時に表示される画面を選択できます。ドラッグで並び替えることもできます。",
+  "@customizeAppLayoutExplanation": {
+    "description": ""
+  },
+  "customizeAppLayout": "表示ボタンを変更",
+  "@customizeAppLayout": {
+    "description": "Settings label for the settings to allow the user to set up the app sections themselves"
+  },
+  "navigationBarLabelShowOnSelect": "選択時にラベルの文字を表示",
+  "@navigationBarLabelShowOnSelect": {
+    "description": "Label only showing when selected option for navigation bar"
+  },
+  "navigationBarLabelAlwaysShowing": "常にラベルの文字を表示",
+  "@navigationBarLabelAlwaysShowing": {
+    "description": "Label always showing option for navigation bar"
+  },
+  "navigationBarLabelNeverShow": "ラベルの文字を表示しない",
+  "@navigationBarLabelNeverShow": {
+    "description": "Never show label option for navigation bar"
+  },
+  "distractionFreeModeDescription": "動画のコメントとおすすめを非表示にします",
+  "@distractionFreeModeDescription": {
+    "description": "Description for distraction free mode"
+  },
+  "distractionFreeMode": "集中モード",
+  "@distractionFreeMode": {
+    "description": "title for distraction free mode settings"
+  },
+  "library": "ライブラリ",
+  "@library": {
+    "description": "Name for user library"
   }
 }

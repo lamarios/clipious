@@ -1,0 +1,310 @@
+{
+  "playlists": "Lejátszási listáim",
+  "@playlists": {
+    "description": "User playlists"
+  },
+  "publicPlaylist": "Nyilvános",
+  "@publicPlaylist": {
+    "description": "Public playlist"
+  },
+  "privatePlaylist": "Privát",
+  "@privatePlaylist": {
+    "description": "Private playlist"
+  },
+  "cancel": "Vissza",
+  "@cancel": {
+    "description": "Cancel button label"
+  },
+  "add": "Hozzáad",
+  "@add": {
+    "description": "Add button abel"
+  },
+  "info": "Információ",
+  "@info": {
+    "description": "Info label"
+  },
+  "videos": "Videók",
+  "@videos": {
+    "description": "Videos label"
+  },
+  "latestVideos": "Legújabb videók",
+  "@latestVideos": {
+    "description": "Latest channel videos"
+  },
+  "subscribed": "Feliratkozva",
+  "@subscribed": {
+    "description": "When the user is subscribed to a channel"
+  },
+  "subscribe": "Feliratkozás",
+  "@subscribe": {
+    "description": "Label for user to subscribe to a channel"
+  },
+  "nSubscribers": "{count, select, no{Nincs feliratkozó} other{{count} feliratkozó}}",
+  "@nSubscribers": {
+    "description": "number of subscribers",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "shareYoutubeLink": "YouTube-link megosztása",
+  "@shareYoutubeLink": {
+    "description": "asking user to share youtube link"
+  },
+  "shareInvidiousLink": "Invidious-link megosztása",
+  "@shareInvidiousLink": {
+    "description": "asking user to share invidious link"
+  },
+  "redirectInvidiousLink": "Átirányításos Invidious-link megosztása",
+  "@redirectInvidiousLink": {
+    "description": "asking user to share redirecting invidious link"
+  },
+  "shareLinkWithTimestamp": "Időpont hozzáadása",
+  "@shareLinkWithTimestamp": {
+    "description": "asking user to share link along with timestamp"
+  },
+  "ok": "OK",
+  "@ok": {
+    "description": "Ok"
+  },
+  "noPlaylists": "Nincsenek lejátszási listák",
+  "@noPlaylists": {
+    "description": "when there are no playlists to display"
+  },
+  "noChannels": "Nincsenek csatornák",
+  "@noChannels": {
+    "description": "when there are no channels to display"
+  },
+  "channels": "Csatornák",
+  "@channels": {
+    "description": "Channels label"
+  },
+  "comments": "Megjegyzések",
+  "@comments": {
+    "description": "Comments label"
+  },
+  "recommended": "Ajánlott",
+  "@recommended": {
+    "description": "Recommended label"
+  },
+  "couldntFetchVideos": "A videókat nem sikerült betölteni. Nyomjon ide az újrakezdéshez.",
+  "@couldntFetchVideos": {
+    "description": "Can't load bunch of videos, asking  user to try again"
+  },
+  "wizardIntro": "Válasszon ki egy nyilvános szervert vagy adjon hozzá egy sajátot. (Később meg tudja változtatni a beállításoknál.)",
+  "@wizardIntro": {
+    "description": "Welcome message on frst time use"
+  },
+  "startUsingClipious": "Clipious használatának megkezdése",
+  "@startUsingClipious": {
+    "description": "button label to start using the app"
+  },
+  "videoAddedToPlaylist": "Videó hozzáadva a listához",
+  "@videoAddedToPlaylist": {
+    "description": "Pop up message when a video was added to a playlist"
+  },
+  "videoAddedToQueue": "Videó műsorra tűzve",
+  "@videoAddedToQueue": {
+    "description": "Pop up message when a video was added at the end of the video queue"
+  },
+  "newSorting": "Legújabb",
+  "@newSorting": {
+    "description": "Content sorting: new"
+  },
+  "streamIsLive": "Élő",
+  "@streamIsLive": {
+    "description": "Label when a video is a live stream"
+  },
+  "country": "Ország",
+  "@country": {
+    "description": "Country label"
+  },
+  "servers": "Szerverek",
+  "@servers": {
+    "description": "Server management settings category"
+  },
+  "manageServers": "Szerverek adminisztrációja",
+  "@manageServers": {
+    "description": "Settings to manage servers"
+  },
+  "useSponsorBlock": "SponsorBlock használata",
+  "@useSponsorBlock": {
+    "description": "label for sponsorblock checkbox"
+  },
+  "name": "Név",
+  "@name": {
+    "description": "NAme label"
+  },
+  "version": "Verzió",
+  "@version": {
+    "description": "version label"
+  },
+  "logIn": "Bejelentkezés",
+  "@logIn": {
+    "description": "CTA to log in to server"
+  },
+  "invalidInvidiousServer": "Hibás Invidious-szerver",
+  "@invalidInvidiousServer": {
+    "description": "Error when the user tries to add a server that is not a proper or reachable invidious server"
+  },
+  "loggedIn": "Bejelentkezve",
+  "@loggedIn": {
+    "description": "Label to tell the user that he is logged in to the server"
+  },
+  "notLoggedIn": "Kijelentkezve",
+  "@notLoggedIn": {
+    "description": "Label when the user is not logged in to the server"
+  },
+  "yourServers": "Szervereim",
+  "@yourServers": {
+    "description": "Your servers label"
+  },
+  "loadingPublicServer": "Nyilvános szerverek betöltése",
+  "@loadingPublicServer": {
+    "description": "Message telling users the app is loading the list of public servers"
+  },
+  "tapToAddServer": "Nyomjon ide a szerver hozzáadásához",
+  "@tapToAddServer": {
+    "description": "public server description"
+  },
+  "appearance": "Megjelenés",
+  "@appearance": {
+    "description": "Settings category title"
+  },
+  "useDynamicThemeDescription": "Material You színek használata (csak Android 12+ esetén)",
+  "@useDynamicThemeDescription": {
+    "description": ""
+  },
+  "useDash": "DASH használata",
+  "@useDash": {
+    "description": "Label on video options if a user wants to switch to dash urls instead of the regular quality selection"
+  },
+  "popular": "Népszerű",
+  "@popular": {
+    "description": "Popular videos title"
+  },
+  "subscriptions": "Feliratkozásaim",
+  "@subscriptions": {
+    "description": "User subscriptions"
+  },
+  "trending": "Divatos",
+  "@trending": {
+    "description": "Trending videos title"
+  },
+  "noVideoInPlayList": "A lejátszási lista üres",
+  "@noVideoInPlayList": {
+    "description": "When no videos in the playlist"
+  },
+  "removeFromPlayList": "Eltávolítás a listából",
+  "@removeFromPlayList": {
+    "description": "Menu item description to show remove a video from a playlist"
+  },
+  "deletePlayListQ": "Törli a listát?",
+  "@deletePlayListQ": {
+    "description": "Ask user to delete a playlist"
+  },
+  "addPlayList": "Lejátszási lista hozzáadása",
+  "@addPlayList": {
+    "description": "Title for add playlist dialog"
+  },
+  "playListName": "Lista neve",
+  "@playListName": {
+    "description": "Place holder for new playlist name text field"
+  },
+  "playlistVisibility": "Láthatóság",
+  "@playlistVisibility": {
+    "description": "Dropdown label for playlist visibility"
+  },
+  "couldntLoadVideo": "A videót nem sikerült betölteni",
+  "@couldntLoadVideo": {
+    "description": "Message to display when a video can't be loaded"
+  },
+  "errorAddingVideoToPlaylist": "Hiba történt a videó hozzáadása közben",
+  "@errorAddingVideoToPlaylist": {
+    "description": "Error while adding video to playlist"
+  },
+  "itemlistErrorGeneric": "Az adatokat nem sikerült betölteni",
+  "@itemlistErrorGeneric": {
+    "description": "Error showing when the data can't be fetch"
+  },
+  "selectPlaylist": "Válassza ki a lejátszási listát",
+  "@selectPlaylist": {
+    "description": "Title when users wants to add a video to a playlist"
+  },
+  "nReplies": "{count, plural, =0{Nincsenek válaszok} =1{1 válasz} other{{count} válasz}}",
+  "@nReplies": {
+    "description": "number of replies to a comment",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "createNewPlaylist": "Új lista létrehozása",
+  "@createNewPlaylist": {
+    "description": "Button label to create a new playlist when the user wants to add a video to a playlist"
+  },
+  "showOnStart": "Válassza ki, mit muttasson az app induláskor",
+  "@showOnStart": {
+    "description": "Title of dialog asking which screen the users prefers to see"
+  },
+  "loadMore": "Továbbiak betöltése",
+  "@loadMore": {
+    "description": "CTA to load more"
+  },
+  "topSorting": "Legnépszerűbb",
+  "@topSorting": {
+    "description": "Content sorting: top"
+  },
+  "selectBrowsingCountry": "Ország kiválasztása",
+  "@selectBrowsingCountry": {
+    "description": "Select country for trending content"
+  },
+  "addServer": "Szerver hozzáadása",
+  "@addServer": {
+    "description": "Add server label"
+  },
+  "settings": "Beállítások",
+  "@settings": {
+    "description": "Settings title"
+  },
+  "whenAppStartsShow": "Amikor az app elindul, mutassa ezt':",
+  "@whenAppStartsShow": {
+    "description": "Setting title for selecting the screen to show on start"
+  },
+  "currentServer": "Jelenleg ezt használja': {current}",
+  "@currentServer": {
+    "description": "Which server the user is currently using",
+    "placeholders": {
+      "current": {
+        "type": "String"
+      }
+    }
+  },
+  "about": "Információ",
+  "@about": {
+    "description": "About"
+  },
+  "useThisServer": "Szerver használata",
+  "@useThisServer": {
+    "description": "Use this server label"
+  },
+  "delete": "Törlés",
+  "@delete": {
+    "description": "Delete label"
+  },
+  "addServerHelpText": "Saját szerver hozzáadásához nyomjon a + gombra, vagy nyomjon egy nyilvános szerverre a hozzáadáshoz.",
+  "@addServerHelpText": {
+    "description": "label for when the user hasn't chosen a server yet"
+  },
+  "publicServers": "Nyilvános szerverek",
+  "@publicServers": {
+    "description": "Public servers label"
+  },
+  "publicServersError": "A nyilvános szerverek listáját nem sikerült betölteni. Nyomjon ide az újrakezdéshez.",
+  "@publicServersError": {
+    "description": "Error message when trying to get public servers but it failed"
+  }
+}

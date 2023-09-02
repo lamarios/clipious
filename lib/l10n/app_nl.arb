@@ -1,193 +1,347 @@
 {
-    "password": "Wachtwoord",
-    "@password": {
-        "description": "Password label for login to a server"
-    },
-    "username": "Gebruikersnaam",
-    "@username": {
-        "description": "Username label for login to a server"
-    },
-    "audio": "Audio",
-    "@audio": {
-        "description": "Name TV ui audio settings"
-    },
-    "themeLight": "Licht",
-    "@themeLight": {
-        "description": "Light theme"
-    },
-    "themeDark": "Donker",
-    "@themeDark": {
-        "description": "Dark theme"
-    },
-    "about": "Over",
-    "@about": {
-        "description": "About"
-    },
-    "build": "",
-    "@build": {
-        "description": "build label"
-    },
-    "cancel": "Annuleren",
-    "@cancel": {
-        "description": "Cancel button label"
-    },
-    "newSorting": "Nieuw",
-    "@newSorting": {
-        "description": "Content sorting: new"
-    },
-    "authentication": "Authenticatie",
-    "@authentication": {
-        "description": "Label for server settings related to authentications"
-    },
-    "name": "Naam",
-    "@name": {
-        "description": "NAme label"
-    },
-    "version": "Versie",
-    "@version": {
-        "description": "version label"
-    },
-    "search": "Zoeken",
-    "@search": {
-        "description": "search title"
-    },
-    "themeBrightness": "Thema",
-    "@themeBrightness": {
-        "description": "Ask the user to user dark / light / system theme"
-    },
-    "subscriptions": "Abonnementen",
-    "@subscriptions": {
-        "description": "User subscriptions"
-    },
-    "playlists": "Afspeellijsten",
-    "@playlists": {
-        "description": "User playlists"
-    },
-    "popular": "Populair",
-    "@popular": {
-        "description": "Popular videos title"
-    },
-    "trending": "Uitgelicht",
-    "@trending": {
-        "description": "Trending videos title"
-    },
-    "playListName": "Afspeellijstnaam",
-    "@playListName": {
-        "description": "Place holder for new playlist name text field"
-    },
-    "videos": "Videos",
-    "@videos": {
-        "description": "Videos label"
-    },
-    "subscribe": "Abonneren",
-    "@subscribe": {
-        "description": "Label for user to subscribe to a channel"
-    },
-    "subscribed": "Geabonneerd",
-    "@subscribed": {
-        "description": "When the user is subscribed to a channel"
-    },
-    "nSubscribers": "{count, select, no{Geen abonnees} other{{count} abonnees}}",
-    "@nSubscribers": {
-        "description": "number of subscribers",
-        "placeholders": {
-            "count": {
-                "type": "String"
-            }
-        }
-    },
-    "channels": "Kanalen",
-    "@channels": {
-        "description": "Channels label"
-    },
-    "loadMore": "Meer laden",
-    "@loadMore": {
-        "description": "CTA to load more"
-    },
-    "settings": "Instellingen",
-    "@settings": {
-        "description": "Settings title"
-    },
-    "useSponsorBlock": "Gebruik Sponsorblock",
-    "@useSponsorBlock": {
-        "description": "label for sponsorblock checkbox"
-    },
-    "useThisServer": "Gebruik deze server",
-    "@useThisServer": {
-        "description": "Use this server label"
-    },
-    "addServer": "Server toevoegen",
-    "@addServer": {
-        "description": "Add server label"
-    },
-    "logIn": "Inloggen",
-    "@logIn": {
-        "description": "CTA to log in to server"
-    },
-    "loggedIn": "Ingelogd",
-    "@loggedIn": {
-        "description": "Label to tell the user that he is logged in to the server"
-    },
-    "useDash": "Gebruik DASH",
-    "@useDash": {
-        "description": "Label on video options if a user wants to switch to dash urls instead of the regular quality selection"
-    },
-    "cookieLogin": "Inloggen met cookie",
-    "@cookieLogin": {
-        "description": "Text to login to a server using the cookie jar method"
-    },
-    "tokenLogin": "Inloggen met token",
-    "@tokenLogin": {
-        "description": "Textto login to a server using the recommended way"
-    },
-    "logout": "Uitloggen",
-    "@logout": {
-        "description": "CTA to logout of a server"
-    },
-    "sponsorBlockCategorySponsor": "Sponsor",
-    "@sponsorBlockCategorySponsor": {
-        "description": "Sponsor block 'Sponsor' Category"
-    },
-    "sponsorBlockCategoryUnpaidSelfPromo": "Onbetaald/Zelfpromotie",
-    "@sponsorBlockCategoryUnpaidSelfPromo": {
-        "description": "Sponsor block 'Unpaid/Self promotion' Category"
-    },
-    "sponsorBlockCategoryInteraction": "Interactieherinnering (Abonneren)",
-    "@sponsorBlockCategoryInteraction": {
-        "description": "Sponsor block 'Interaction' Category"
-    },
-    "sponsorBlockCategoryIntro": "Pauze/Intro Animatie",
-    "@sponsorBlockCategoryIntro": {
-        "description": "Sponsorblock 'Intro' Category"
-    },
-    "sponsorBlockCategoryMusicOffTopic": "Muziek: Niet-Muziek Sectie",
-    "@sponsorBlockCategoryMusicOffTopic": {
-        "description": "Sponsorblock 'MusicOffTopic' Category"
-    },
-    "quality": "Kwaliteit",
-    "@quality": {
-        "description": "Name of TV ui video settings"
-    },
-    "appLanguage": "App taal",
-    "@appLanguage": {
-        "description": "Select app language"
-    },
-    "nVideos": "{count, plural, =0{No videos} =1{1 video} other{{count} videos}}",
-    "@nVideos": {
-        "description": "One or more videos",
-        "placeholders": {
-            "count": {
-                "type": "num",
-                "format": "compact"
-            }
-        }
-    },
-    "addPlayList": "Afspeellijst maken",
-    "@addPlayList": {
-        "description": "Title for add playlist dialog"
-    },
-    "deletePlayListQ": "Afspeellijst verwijderen?",
-    "@deletePlayListQ": {
-        "description": "Ask user to delete a playlist"
+  "password": "Wachtwoord",
+  "@password": {
+    "description": "Password label for login to a server"
+  },
+  "username": "Gebruikersnaam",
+  "@username": {
+    "description": "Username label for login to a server"
+  },
+  "audio": "Audio",
+  "@audio": {
+    "description": "Name TV ui audio settings"
+  },
+  "themeLight": "Licht",
+  "@themeLight": {
+    "description": "Light theme"
+  },
+  "themeDark": "Donker",
+  "@themeDark": {
+    "description": "Dark theme"
+  },
+  "about": "Over",
+  "@about": {
+    "description": "About"
+  },
+  "build": "Bouwversie",
+  "@build": {
+    "description": "build label"
+  },
+  "cancel": "Annuleren",
+  "@cancel": {
+    "description": "Cancel button label"
+  },
+  "newSorting": "Nieuw",
+  "@newSorting": {
+    "description": "Content sorting: new"
+  },
+  "authentication": "Authenticatie",
+  "@authentication": {
+    "description": "Label for server settings related to authentications"
+  },
+  "name": "Naam",
+  "@name": {
+    "description": "NAme label"
+  },
+  "version": "Versie",
+  "@version": {
+    "description": "version label"
+  },
+  "search": "Zoeken",
+  "@search": {
+    "description": "search title"
+  },
+  "themeBrightness": "Thema",
+  "@themeBrightness": {
+    "description": "Ask the user to user dark / light / system theme"
+  },
+  "subscriptions": "Abonnementen",
+  "@subscriptions": {
+    "description": "User subscriptions"
+  },
+  "playlists": "Afspeellijsten",
+  "@playlists": {
+    "description": "User playlists"
+  },
+  "popular": "Populair",
+  "@popular": {
+    "description": "Popular videos title"
+  },
+  "trending": "Uitgelicht",
+  "@trending": {
+    "description": "Trending videos title"
+  },
+  "playListName": "Afspeellijstnaam",
+  "@playListName": {
+    "description": "Place holder for new playlist name text field"
+  },
+  "videos": "Videos",
+  "@videos": {
+    "description": "Videos label"
+  },
+  "subscribe": "Abonneren",
+  "@subscribe": {
+    "description": "Label for user to subscribe to a channel"
+  },
+  "subscribed": "Geabonneerd",
+  "@subscribed": {
+    "description": "When the user is subscribed to a channel"
+  },
+  "nSubscribers": "{count, select, no{Geen abonnees} other{{count} abonnees}}",
+  "@nSubscribers": {
+    "description": "number of subscribers",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
     }
+  },
+  "channels": "Kanalen",
+  "@channels": {
+    "description": "Channels label"
+  },
+  "loadMore": "Meer laden",
+  "@loadMore": {
+    "description": "CTA to load more"
+  },
+  "settings": "Instellingen",
+  "@settings": {
+    "description": "Settings title"
+  },
+  "useSponsorBlock": "Gebruik Sponsorblock",
+  "@useSponsorBlock": {
+    "description": "label for sponsorblock checkbox"
+  },
+  "useThisServer": "Gebruik deze server",
+  "@useThisServer": {
+    "description": "Use this server label"
+  },
+  "addServer": "Server toevoegen",
+  "@addServer": {
+    "description": "Add server label"
+  },
+  "logIn": "Inloggen",
+  "@logIn": {
+    "description": "CTA to log in to server"
+  },
+  "loggedIn": "Ingelogd",
+  "@loggedIn": {
+    "description": "Label to tell the user that he is logged in to the server"
+  },
+  "useDash": "Gebruik DASH",
+  "@useDash": {
+    "description": "Label on video options if a user wants to switch to dash urls instead of the regular quality selection"
+  },
+  "cookieLogin": "Inloggen met cookie",
+  "@cookieLogin": {
+    "description": "Text to login to a server using the cookie jar method"
+  },
+  "tokenLogin": "Inloggen met token",
+  "@tokenLogin": {
+    "description": "Textto login to a server using the recommended way"
+  },
+  "logout": "Uitloggen",
+  "@logout": {
+    "description": "CTA to logout of a server"
+  },
+  "sponsorBlockCategorySponsor": "Sponsor",
+  "@sponsorBlockCategorySponsor": {
+    "description": "Sponsor block 'Sponsor' Category"
+  },
+  "sponsorBlockCategoryUnpaidSelfPromo": "Onbetaald/Zelfpromotie",
+  "@sponsorBlockCategoryUnpaidSelfPromo": {
+    "description": "Sponsor block 'Unpaid/Self promotion' Category"
+  },
+  "sponsorBlockCategoryInteraction": "Interactieherinnering (Abonneren)",
+  "@sponsorBlockCategoryInteraction": {
+    "description": "Sponsor block 'Interaction' Category"
+  },
+  "sponsorBlockCategoryIntro": "Pauze/Intro Animatie",
+  "@sponsorBlockCategoryIntro": {
+    "description": "Sponsorblock 'Intro' Category"
+  },
+  "sponsorBlockCategoryMusicOffTopic": "Muziek: Niet-Muziek Sectie",
+  "@sponsorBlockCategoryMusicOffTopic": {
+    "description": "Sponsorblock 'MusicOffTopic' Category"
+  },
+  "quality": "Kwaliteit",
+  "@quality": {
+    "description": "Name of TV ui video settings"
+  },
+  "appLanguage": "App taal",
+  "@appLanguage": {
+    "description": "Select app language"
+  },
+  "nVideos": "{count, plural, =0{No videos} =1{1 video} other{{count} videos}}",
+  "@nVideos": {
+    "description": "One or more videos",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "addPlayList": "Afspeellijst maken",
+  "@addPlayList": {
+    "description": "Title for add playlist dialog"
+  },
+  "deletePlayListQ": "Afspeellijst verwijderen?",
+  "@deletePlayListQ": {
+    "description": "Ask user to delete a playlist"
+  },
+  "streams": "Streams",
+  "@streams": {
+    "description": "Streams label"
+  },
+  "ok": "Oké",
+  "@ok": {
+    "description": "Ok"
+  },
+  "package": "Pakket",
+  "@package": {
+    "description": "package label"
+  },
+  "delete": "Verwijderen",
+  "@delete": {
+    "description": "Delete label"
+  },
+  "videoUnlisted": "Verborgen",
+  "@videoUnlisted": {
+    "description": "Status of a video that is only accessible by link"
+  },
+  "error": "Fout",
+  "@error": {},
+  "topSorting": "Top",
+  "@topSorting": {
+    "description": "Content sorting: top"
+  },
+  "videoListed": "Publiek",
+  "@videoListed": {
+    "description": "Status of a publicly available video"
+  },
+  "comments": "Opmerkingen",
+  "@comments": {
+    "description": "Comments label"
+  },
+  "recommended": "Aanbevolen",
+  "@recommended": {
+    "description": "Recommended label"
+  },
+  "streamIsLive": "Live",
+  "@streamIsLive": {
+    "description": "Label when a video is a live stream"
+  },
+  "playlistVisibility": "Zichtbaarheid",
+  "@playlistVisibility": {
+    "description": "Dropdown label for playlist visibility"
+  },
+  "publicPlaylist": "Publiek",
+  "@publicPlaylist": {
+    "description": "Public playlist"
+  },
+  "privatePlaylist": "Privé",
+  "@privatePlaylist": {
+    "description": "Private playlist"
+  },
+  "add": "Toevoegen",
+  "@add": {
+    "description": "Add button abel"
+  },
+  "info": "Info",
+  "@info": {
+    "description": "Info label"
+  },
+  "unlistedPlaylist": "Verborgen",
+  "@unlistedPlaylist": {
+    "description": "Unlisted playlist"
+  },
+  "browsing": "Bladeren",
+  "@browsing": {
+    "description": "video browsing preferences"
+  },
+  "country": "Land",
+  "@country": {
+    "description": "Country label"
+  },
+  "servers": "Servers",
+  "@servers": {
+    "description": "Server management settings category"
+  },
+  "appearance": "Uiterlijk",
+  "@appearance": {
+    "description": "Settings category title"
+  },
+  "searchSortRating": "Beoordeling",
+  "@searchSortRating": {
+    "description": "Sort search by rating"
+  },
+  "noVideoInPlayList": "Geen video's in afspeellijst",
+  "@noVideoInPlayList": {
+    "description": "When no videos in the playlist"
+  },
+  "irreversibleAction": "Deze actie is onomkeerbaar",
+  "@irreversibleAction": {
+    "description": "Tell the user that the action cannot be undone"
+  },
+  "latestVideos": "Nieuwste video's",
+  "@latestVideos": {
+    "description": "Latest channel videos"
+  },
+  "shareYoutubeLink": "YouTube-link delen",
+  "@shareYoutubeLink": {
+    "description": "asking user to share youtube link"
+  },
+  "shareInvidiousLink": "Invidious-link delen",
+  "@shareInvidiousLink": {
+    "description": "asking user to share invidious link"
+  },
+  "sponsorBlockCategoryOutro": "Eindkaarten/credits",
+  "@sponsorBlockCategoryOutro": {
+    "description": "Outro block 'Outro' Category"
+  },
+  "subtitles": "Ondertitels",
+  "@subtitles": {
+    "description": "Name of TV ui subtitles settings"
+  },
+  "sponsorBlockCategoryPreview": "Voorvertoning/terugblik",
+  "@sponsorBlockCategoryPreview": {
+    "description": "Sponsorblock 'Preview' Category"
+  },
+  "videoFilterHideLabel": "Verbergen",
+  "@videoFilterHideLabel": {
+    "description": "Label to hide videos"
+  },
+  "removeFromPlayList": "Verwijderen uit afspeellijst",
+  "@removeFromPlayList": {
+    "description": "Menu item description to show remove a video from a playlist"
+  },
+  "searchSortRelevance": "Relevantie",
+  "@searchSortRelevance": {
+    "description": "Sort search by relevance"
+  },
+  "shorts": "Shorts",
+  "@shorts": {
+    "description": "Youtube shorts"
+  },
+  "videoFilterValue": "Waarde",
+  "@videoFilterValue": {
+    "description": "Label for filter value"
+  },
+  "save": "Opslaan",
+  "@save": {
+    "description": "Text for save action"
+  },
+  "optional": "optioneel",
+  "@optional": {
+    "description": "Optional label"
+  },
+  "videoFilterType": "Type",
+  "@videoFilterType": {
+    "description": "Label for filter type"
+  },
+  "videoFilterOperation": "Handeling",
+  "@videoFilterOperation": {
+    "description": "Label for filter operation"
+  }
 }
