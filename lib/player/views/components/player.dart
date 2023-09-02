@@ -83,6 +83,10 @@ class Player extends StatelessWidget {
             opacity: opacity,
             duration: animationDuration,
             child: SafeArea(
+              bottom: fullScreen == FullScreenState.notFullScreen,
+              top: fullScreen == FullScreenState.notFullScreen,
+              left: fullScreen == FullScreenState.notFullScreen,
+              right: fullScreen == FullScreenState.notFullScreen,
               child: Material(
                 elevation: 0,
                 child: showPlayer

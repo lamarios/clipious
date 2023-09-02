@@ -9,6 +9,8 @@ part of 'player_controls.dart';
 abstract class _$PlayerControlsStateCWProxy {
   PlayerControlsState buffering(bool buffering);
 
+  PlayerControlsState justDoubleTappedSkip(bool justDoubleTappedSkip);
+
   PlayerControlsState position(Duration position);
 
   PlayerControlsState displayControls(bool displayControls);
@@ -38,6 +40,7 @@ abstract class _$PlayerControlsStateCWProxy {
   /// ````
   PlayerControlsState call({
     bool? buffering,
+    bool? justDoubleTappedSkip,
     Duration? position,
     bool? displayControls,
     bool? errored,
@@ -59,6 +62,10 @@ class _$PlayerControlsStateCWProxyImpl implements _$PlayerControlsStateCWProxy {
 
   @override
   PlayerControlsState buffering(bool buffering) => this(buffering: buffering);
+
+  @override
+  PlayerControlsState justDoubleTappedSkip(bool justDoubleTappedSkip) =>
+      this(justDoubleTappedSkip: justDoubleTappedSkip);
 
   @override
   PlayerControlsState position(Duration position) => this(position: position);
@@ -107,6 +114,7 @@ class _$PlayerControlsStateCWProxyImpl implements _$PlayerControlsStateCWProxy {
   /// ````
   PlayerControlsState call({
     Object? buffering = const $CopyWithPlaceholder(),
+    Object? justDoubleTappedSkip = const $CopyWithPlaceholder(),
     Object? position = const $CopyWithPlaceholder(),
     Object? displayControls = const $CopyWithPlaceholder(),
     Object? errored = const $CopyWithPlaceholder(),
@@ -123,6 +131,11 @@ class _$PlayerControlsStateCWProxyImpl implements _$PlayerControlsStateCWProxy {
           ? _value.buffering
           // ignore: cast_nullable_to_non_nullable
           : buffering as bool,
+      justDoubleTappedSkip == const $CopyWithPlaceholder() ||
+              justDoubleTappedSkip == null
+          ? _value.justDoubleTappedSkip
+          // ignore: cast_nullable_to_non_nullable
+          : justDoubleTappedSkip as bool,
       position == const $CopyWithPlaceholder() || position == null
           ? _value.position
           // ignore: cast_nullable_to_non_nullable

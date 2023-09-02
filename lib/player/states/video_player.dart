@@ -1,6 +1,7 @@
 import 'package:better_player/better_player.dart';
 import 'package:better_player/src/video_player/video_player_platform_interface.dart';
 import 'package:copy_with_extension/copy_with_extension.dart';
+import 'package:easy_debounce/easy_throttle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:invidious/downloads/models/downloaded_video.dart';
@@ -73,6 +74,9 @@ class VideoPlayerCubit extends MediaPlayerCubit<VideoPlayerState> {
         break;
 
       case BetterPlayerEventType.progress:
+        EasyThrottle.throttle('video-player-progress', Duration(seconds: 1), () {
+          player.setEvent(MediaEvent(state: MediaState.playing, type: MediaEventType.progress, value: state.videoController?.videoPlayerController?.value.position ?? Duration.zero));
+        });
       case BetterPlayerEventType.seekTo:
         // we bypass the rest so we can send the current progress
         player.setEvent(MediaEvent(state: MediaState.playing, type: MediaEventType.progress, value: state.videoController?.videoPlayerController?.value.position ?? Duration.zero));
@@ -130,9 +134,11 @@ class VideoPlayerCubit extends MediaPlayerCubit<VideoPlayerState> {
 
     switch (event.betterPlayerEventType) {
       case BetterPlayerEventType.bufferingUpdate:
-        List<DurationRange> durations = event.parameters?['buffered'] ?? [];
-        state.bufferPosition = durations.sortBy((e) => e.end).map((e) => e.end).last;
-        player.setEvent(MediaEvent(state: MediaState.playing, type: MediaEventType.bufferChanged, value: state.bufferPosition));
+        EasyThrottle.throttle('video-buffering', Duration(seconds: 1), () {
+          List<DurationRange> durations = event.parameters?['buffered'] ?? [];
+          state.bufferPosition = durations.sortBy((e) => e.end).map((e) => e.end).last;
+          player.setEvent(MediaEvent(state: MediaState.playing, type: MediaEventType.bufferChanged, value: state.bufferPosition));
+        });
         break;
       case BetterPlayerEventType.play:
         double speed = 1.0;
@@ -276,7 +282,6 @@ class VideoPlayerCubit extends MediaPlayerCubit<VideoPlayerState> {
 
       Wakelock.enable();
 
-      bool lockOrientation = settings.state.forceLandscapeFullScreen;
       bool fillVideo = settings.state.fillFullscreen;
 
       if (state.videoController == null) {
@@ -286,8 +291,6 @@ class VideoPlayerCubit extends MediaPlayerCubit<VideoPlayerState> {
                 deviceOrientationsOnFullScreen: [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight, DeviceOrientation.portraitDown, DeviceOrientation.portraitUp],
                 deviceOrientationsAfterFullScreen: [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight, DeviceOrientation.portraitDown, DeviceOrientation.portraitUp],
                 handleLifecycle: false,
-                autoDetectFullscreenDeviceOrientation: lockOrientation,
-                autoDetectFullscreenAspectRatio: true,
                 startAt: startAt,
                 autoPlay: true,
                 allowedScreenSleep: false,

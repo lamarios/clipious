@@ -274,32 +274,30 @@ class PlayerCubit extends Cubit<PlayerState> {
   }
 
   onProgress(Duration? position) {
-    EasyThrottle.throttle('media-progress', const Duration(seconds: 1), () {
-      var state = this.state.copyWith();
-      state.position = position ?? Duration.zero;
-      int currentPosition = state.position.inSeconds;
-      saveProgress(currentPosition);
-      log.fine("video event");
+    var state = this.state.copyWith();
+    state.position = position ?? Duration.zero;
+    int currentPosition = state.position.inSeconds;
+    saveProgress(currentPosition);
+    log.fine("video event");
 
-      emit(state);
+    emit(state);
 
-      if (state.sponsorSegments.isNotEmpty) {
-        double positionInMs = currentPosition * 1000;
-        Pair<int> nextSegment = state.sponsorSegments.firstWhere((e) => e.first <= positionInMs && positionInMs <= e.last, orElse: () => Pair<int>(-1, -1));
-        if (nextSegment.first != -1) {
-          seek(Duration(milliseconds: nextSegment.last + 1000));
-          final ScaffoldMessengerState? scaffold = scaffoldKey.currentState;
+    if (state.sponsorSegments.isNotEmpty) {
+      double positionInMs = currentPosition * 1000;
+      Pair<int> nextSegment = state.sponsorSegments.firstWhere((e) => e.first <= positionInMs && positionInMs <= e.last, orElse: () => Pair<int>(-1, -1));
+      if (nextSegment.first != -1) {
+        seek(Duration(milliseconds: nextSegment.last + 1000));
+        final ScaffoldMessengerState? scaffold = scaffoldKey.currentState;
 
-          if (scaffold != null) {
-            var locals = AppLocalizations.of(scaffold.context)!;
-            scaffold.showSnackBar(SnackBar(
-              content: Text(locals.sponsorSkipped),
-              duration: const Duration(seconds: 1),
-            ));
-          }
+        if (scaffold != null) {
+          var locals = AppLocalizations.of(scaffold.context)!;
+          scaffold.showSnackBar(SnackBar(
+            content: Text(locals.sponsorSkipped),
+            duration: const Duration(seconds: 1),
+          ));
         }
       }
-    });
+    }
   }
 
   playNext() {
@@ -627,6 +625,15 @@ class PlayerCubit extends Cubit<PlayerState> {
   }
 
   seek(Duration duration) {
+    if (duration.inSeconds < 0) {
+      duration = Duration.zero;
+    }
+
+    var videoLength = this.state.currentlyPlaying?.lengthSeconds ?? this.state.offlineCurrentlyPlaying?.lengthSeconds ?? 1;
+    if (duration.inSeconds > (videoLength)) {
+      duration = Duration(seconds: videoLength);
+    }
+
     var state = this.state.copyWith();
     state.position = duration;
     state.mediaCommand = MediaCommand(MediaCommandType.seek, value: duration);
@@ -672,6 +679,7 @@ class PlayerCubit extends Cubit<PlayerState> {
     switch (fsState) {
       case FullScreenState.fullScreen:
         SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
+        // SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(statusBarColor: Colors.black));
         if (settings.state.forceLandscapeFullScreen && state.aspectRatio > 1) {
           SystemChrome.setPreferredOrientations([
             DeviceOrientation.landscapeLeft,
@@ -681,6 +689,7 @@ class PlayerCubit extends Cubit<PlayerState> {
       default:
         SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: SystemUiOverlay.values);
         SystemChrome.setPreferredOrientations([]);
+        SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle());
     }
   }
 

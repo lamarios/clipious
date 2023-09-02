@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:easy_debounce/easy_debounce.dart';
-import 'package:easy_debounce/easy_throttle.dart';
 import 'package:invidious/player/models/mediaEvent.dart';
 import 'package:invidious/player/states/interfaces/media_player.dart';
 import 'package:logging/logging.dart';
@@ -37,7 +36,7 @@ class PlayerControlsCubit extends Cubit<PlayerControlsState> {
         emit(state.copyWith(buffering: true));
         break;
       case MediaState.ready:
-        showControls();
+        // showControls();
         break;
       case MediaState.error:
         hideControls();
@@ -53,9 +52,7 @@ class PlayerControlsCubit extends Cubit<PlayerControlsState> {
         break;
       case MediaEventType.progress:
         if (!state.draggingPositionSlider) {
-          // EasyThrottle.throttle('controls-progress-throttle', const Duration(seconds: 1), () {
-            emit(state.copyWith(position: event.value, buffering: false, errored: false));
-          // });
+          emit(state.copyWith(position: event.value, buffering: false, errored: false));
         }
         break;
       case MediaEventType.seek:
@@ -88,7 +85,6 @@ class PlayerControlsCubit extends Cubit<PlayerControlsState> {
 
   @override
   emit(PlayerControlsState state) {
-    print('Emiting');
     super.emit(state);
   }
 
@@ -96,6 +92,7 @@ class PlayerControlsCubit extends Cubit<PlayerControlsState> {
     // we don't want the controls to disappear if we're dragging the position slider
     if (!state.draggingPositionSlider && !isClosed) {
       emit(state.copyWith(displayControls: false));
+      log.info("Hiding controls ${state.displayControls}");
     } else {
       hideControlsDebounce();
     }
@@ -110,7 +107,7 @@ class PlayerControlsCubit extends Cubit<PlayerControlsState> {
   }
 
   void showControls() {
-    if (isTv || !player.state.isMini) {
+    if (isTv || !player.state.isMini && !state.justDoubleTappedSkip) {
       emit(state.copyWith(displayControls: true));
     }
     hideControlsDebounce();
@@ -120,6 +117,7 @@ class PlayerControlsCubit extends Cubit<PlayerControlsState> {
     Duration seekTo = Duration(milliseconds: value.toInt());
     player.seek(seekTo);
     emit(state.copyWith(position: seekTo, draggingPositionSlider: false));
+    hideControlsDebounce();
   }
 
   void onScrubDrag(double value) {
@@ -148,24 +146,30 @@ class PlayerControlsCubit extends Cubit<PlayerControlsState> {
   }
 
   setBuffer(Duration buffer) {
-    EasyThrottle.throttle('video-buffer-update', const Duration(seconds: 1), () {
-      emit(state.copyWith(buffer: buffer));
-    });
+    emit(state.copyWith(buffer: buffer));
   }
 
   void doubleTapFastForward() {
     player.fastForward();
-    emit(state.copyWith(doubleTapFastForwardedOpacity: 1));
+    emit(state.copyWith(doubleTapFastForwardedOpacity: 1, justDoubleTappedSkip: true));
     EasyDebounce.debounce('fast-forward', const Duration(milliseconds: 250), () {
       emit(state.copyWith(doubleTapFastForwardedOpacity: 0));
+    });
+    // we prevent controls showing to avoid issues where if hte user taps 3 times it will show the controls right after
+    EasyDebounce.debounce('preventControlsShowing', Duration(seconds: 1), () {
+      emit(state.copyWith(justDoubleTappedSkip: false));
     });
   }
 
   void doubleTapRewind() {
     player.rewind();
-    emit(state.copyWith(doubleTapRewindedOpacity: 1));
+    emit(state.copyWith(doubleTapRewindedOpacity: 1, justDoubleTappedSkip: true));
     EasyDebounce.debounce('fast-rewind', const Duration(milliseconds: 250), () {
       emit(state.copyWith(doubleTapRewindedOpacity: 0));
+    });
+    EasyDebounce.debounce('preventControlsShowing', Duration(seconds: 1), () {
+      // we prevent controls showing to avoid issues where if hte user taps 3 times it will show the controls right after
+      emit(state.copyWith(justDoubleTappedSkip: false));
     });
   }
 }
@@ -186,7 +190,8 @@ class PlayerControlsState {
   bool draggingPositionSlider = false;
   double doubleTapFastForwardedOpacity = 0;
   double doubleTapRewindedOpacity = 0;
+  bool justDoubleTappedSkip = false;
 
-  PlayerControlsState._(this.buffering, this.position, this.displayControls, this.errored, this.duration, this.fullScreenState, this.muted, this.buffer, this.draggingPositionSlider,
-      this.doubleTapFastForwardedOpacity, this.doubleTapRewindedOpacity);
+  PlayerControlsState._(this.buffering, this.justDoubleTappedSkip, this.position, this.displayControls, this.errored, this.duration, this.fullScreenState, this.muted, this.buffer,
+      this.draggingPositionSlider, this.doubleTapFastForwardedOpacity, this.doubleTapRewindedOpacity);
 }

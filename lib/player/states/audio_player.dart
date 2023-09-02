@@ -1,4 +1,5 @@
 import 'package:copy_with_extension/copy_with_extension.dart';
+import 'package:easy_debounce/easy_throttle.dart';
 import 'package:invidious/downloads/models/downloaded_video.dart';
 import 'package:invidious/extensions.dart';
 import 'package:invidious/globals.dart';
@@ -47,6 +48,7 @@ class AudioPlayerCubit extends MediaPlayerCubit<AudioPlayerState> {
       });
       state.player?.positionStream.listen(onPositionChanged);
       state.player?.durationStream.listen(onDurationChanged);
+      state.player?.bufferedPositionStream.listen(onBufferChanged);
     }
   }
 
@@ -80,8 +82,10 @@ class AudioPlayerCubit extends MediaPlayerCubit<AudioPlayerState> {
   }
 
   onPositionChanged(Duration position) {
-    state.audioPosition = position;
-    player.setEvent(MediaEvent(state: MediaState.playing, type: MediaEventType.progress, value: position));
+    EasyThrottle.throttle('audio-progress', Duration(seconds: 1), () {
+      state.audioPosition = position;
+      player.setEvent(MediaEvent(state: MediaState.playing, type: MediaEventType.progress, value: position));
+    });
   }
 
   @override
@@ -206,6 +210,7 @@ class AudioPlayerCubit extends MediaPlayerCubit<AudioPlayerState> {
   void seek(Duration position) {
     state.player?.seek(position);
     player.setEvent(MediaEvent(state: MediaState.playing, type: MediaEventType.seek));
+    player.setEvent(MediaEvent(state: MediaState.playing, type: MediaEventType.progress, value: position));
   }
 
   @override
@@ -318,6 +323,13 @@ class AudioPlayerCubit extends MediaPlayerCubit<AudioPlayerState> {
   @override
   Duration duration() {
     return state.player?.duration ?? const Duration(milliseconds: 1);
+  }
+
+  void onBufferChanged(Duration event) {
+    EasyThrottle.throttle('audio-buffering', const Duration(seconds: 1), () {
+      player.setEvent(MediaEvent(state: MediaState.playing, type: MediaEventType.bufferChanged, value: event));
+    });
+
   }
 }
 
