@@ -270,11 +270,11 @@
   "@settings": {
     "description": "Settings title"
   },
-  "whenAppStartsShow": "Amikor az app elindul, mutassa ezt':",
+  "whenAppStartsShow": "Amikor az app elindul, mutassa ezt'':",
   "@whenAppStartsShow": {
     "description": "Setting title for selecting the screen to show on start"
   },
-  "currentServer": "Jelenleg ezt használja': {current}",
+  "currentServer": "Jelenleg ezt használja'': {current}",
   "@currentServer": {
     "description": "Which server the user is currently using",
     "placeholders": {

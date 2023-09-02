@@ -276,7 +276,7 @@
   "@searchSortRating": {
     "description": "Sort search by rating"
   },
-  "noVideoInPlayList": "Geen video's in afspeellijst",
+  "noVideoInPlayList": "Geen video''s in afspeellijst",
   "@noVideoInPlayList": {
     "description": "When no videos in the playlist"
   },
@@ -284,7 +284,7 @@
   "@irreversibleAction": {
     "description": "Tell the user that the action cannot be undone"
   },
-  "latestVideos": "Nieuwste video's",
+  "latestVideos": "Nieuwste video''s",
   "@latestVideos": {
     "description": "Latest channel videos"
   },

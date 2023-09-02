@@ -57,7 +57,7 @@ if (keystorePropertiesFile.exists()) {
 }
 
 android {
-    compileSdkVersion 33
+    compileSdk 33
 
     lintOptions {
         checkReleaseBuilds false
@@ -70,7 +70,7 @@ android {
     defaultConfig {
         applicationId "com.github.lamarios.clipious"
         minSdkVersion 21
-        targetSdkVersion 31
+        targetSdkVersion 33
         versionCode buildNumber
         versionName flutterVersionName
     }
