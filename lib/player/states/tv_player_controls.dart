@@ -15,9 +15,6 @@ part 'tv_player_controls.g.dart';
 const Duration controlFadeOut = Duration(seconds: 4);
 const Duration throttleDuration = Duration(milliseconds: 250);
 
-const defaultStep = 10;
-const stepMultiplier = 0.2;
-
 final log = Logger('TvPlayerController');
 
 class TvPlayerControlsCubit extends Cubit<TvPlayerControlsState> {
@@ -26,19 +23,11 @@ class TvPlayerControlsCubit extends Cubit<TvPlayerControlsState> {
   TvPlayerControlsCubit(super.initialState, this.player);
 
   fastForward() {
-    player.seek(player.state.position + Duration(seconds: state.forwardStep));
-    state.forwardStep += (state.forwardStep * stepMultiplier).floor();
-    EasyDebounce.debounce('fast-forward-step', const Duration(seconds: 1), () {
-      state.forwardStep = defaultStep;
-    });
+    player.fastForward();
   }
 
   fastRewind() {
-    player.seek(player.state.position - Duration(seconds: state.forwardStep));
-    state.rewindStep += (state.rewindStep * stepMultiplier).floor();
-    EasyDebounce.debounce('fast-rewind-step', const Duration(seconds: 1), () {
-      state.rewindStep = defaultStep;
-    });
+    player.rewind();
   }
 
   displaySettings() {
@@ -196,9 +185,7 @@ class TvPlayerControlsState {
   bool loading = false;
   bool displayControls = false;
 
-  int forwardStep = defaultStep, rewindStep = defaultStep;
-
   bool get isShowUi => controlsOpacity == 1;
 
-  TvPlayerControlsState._(this.controlsOpacity, this.showSettings, this.showQueue, this.loading, this.displayControls, this.forwardStep, this.rewindStep);
+  TvPlayerControlsState._(this.controlsOpacity, this.showSettings, this.showQueue, this.loading, this.displayControls);
 }

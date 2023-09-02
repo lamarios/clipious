@@ -180,6 +180,7 @@ class PlayerControls extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var locals = AppLocalizations.of(context)!;
     var textTheme = Theme.of(context).textTheme;
     var player = context.read<PlayerCubit>();
     var colors = Theme.of(context).colorScheme;
@@ -192,6 +193,8 @@ class PlayerControls extends StatelessWidget {
             bool isMini = context.select((PlayerCubit cubit) => cubit.state.isMini);
             bool hasQueue = context.select((PlayerCubit cubit) => cubit.state.hasQueue);
             bool isPip = context.select((PlayerCubit cubit) => cubit.state.isPip);
+            int fastForwardStep = context.select((PlayerCubit cubit) => cubit.state.forwardStep);
+            int rewindStep = context.select((PlayerCubit cubit) => cubit.state.rewindStep);
             String videoTitle = context.select((PlayerCubit cubit) => cubit.state.currentlyPlaying?.title ?? cubit.state.offlineCurrentlyPlaying?.title ?? '');
 
             var cubit = context.read<PlayerControlsCubit>();
@@ -221,15 +224,24 @@ class PlayerControls extends StatelessWidget {
                                 Expanded(
                                     child: GestureDetector(
                                         behavior: HitTestBehavior.translucent,
-                                        onTap: _.displayControls ? cubit.hideControls : cubit.showControls,
-                                        onDoubleTap: cubit.doubleTapRewind,
-                                        child: DoubleTapButton(opacity: _.doubleTapRewindedOpacity, icon: Icons.fast_rewind))),
+                                        onTap: _.justDoubleTappedSkip
+                                            ? cubit.doubleTapRewind
+                                            : _.displayControls
+                                                ? cubit.hideControls
+                                                : cubit.showControls,
+                                        onDoubleTap: _.justDoubleTappedSkip ? null : cubit.doubleTapRewind,
+                                        child: DoubleTapButton(stepText: '-$rewindStep ${locals.secondsShortForm}', opacity: _.doubleTapRewindedOpacity, icon: Icons.fast_rewind))),
                                 Expanded(
                                     child: GestureDetector(
-                                        onTap: _.displayControls ? cubit.hideControls : cubit.showControls,
+                                        onTap: _.justDoubleTappedSkip
+                                            ? cubit.doubleTapFastForward
+                                            : _.displayControls
+                                                ? cubit.hideControls
+                                                : cubit.showControls,
                                         behavior: HitTestBehavior.translucent,
-                                        onDoubleTap: cubit.doubleTapFastForward,
+                                        onDoubleTap: _.justDoubleTappedSkip ? null : cubit.doubleTapFastForward,
                                         child: DoubleTapButton(
+                                          stepText: '+$fastForwardStep ${locals.secondsShortForm}',
                                           opacity: _.doubleTapFastForwardedOpacity,
                                           icon: Icons.fast_forward,
                                         ))),
@@ -421,11 +433,13 @@ class PlayerControls extends StatelessWidget {
 class DoubleTapButton extends StatelessWidget {
   final double opacity;
   final IconData icon;
+  final String stepText;
 
-  const DoubleTapButton({super.key, required this.opacity, required this.icon});
+  const DoubleTapButton({super.key, required this.opacity, required this.icon, required this.stepText});
 
   @override
   Widget build(BuildContext context) {
+    var textTheme = Theme.of(context).textTheme;
     return AnimatedContainer(
       curve: Curves.easeInOutQuad,
       margin: EdgeInsets.all(opacity == 1 ? 50 : 0),
@@ -435,9 +449,19 @@ class DoubleTapButton extends StatelessWidget {
       child: AnimatedOpacity(
         opacity: opacity,
         duration: Duration(milliseconds: opacity == 1 ? 150 : 500),
-        child: Icon(
-          icon,
-          size: 50,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              icon,
+              size: 50,
+            ),
+            Text(
+              stepText,
+              style: textTheme.bodySmall?.copyWith(color: Colors.white.withOpacity(0.8)),
+            )
+          ],
         ),
       ),
     );

@@ -35,6 +35,8 @@ const double targetHeight = 69;
 const double miniPlayerThreshold = 300;
 const skipToVideoThrottleName = 'skip-to-video';
 const double bigPlayerThreshold = 700;
+const defaultStep = 9;
+const stepMultiplier = 0.2;
 
 var log = Logger('MiniPlayerController');
 
@@ -463,6 +465,8 @@ class PlayerCubit extends Cubit<PlayerState> {
     state.playedVideos.removeWhere((element) => element == video.videoId);
     state.playedVideos.add(video.videoId);
     state.position = Duration.zero;
+    state.forwardStep = defaultStep;
+    state.rewindStep = defaultStep;
 
     emit(state);
 
@@ -641,13 +645,19 @@ class PlayerCubit extends Cubit<PlayerState> {
   }
 
   void fastForward() {
-    Duration newDuration = Duration(seconds: (state.position.inSeconds ?? 0) + 10);
-    seek(newDuration);
+    state.forwardStep += (state.forwardStep * stepMultiplier).floor();
+    seek(state.position + Duration(seconds: state.forwardStep));
+    EasyDebounce.debounce('fast-forward-step', const Duration(seconds: 1), () {
+      emit(state.copyWith(forwardStep: defaultStep));
+    });
   }
 
   void rewind() {
-    Duration newDuration = Duration(seconds: (state.position.inSeconds ?? 0) - 10);
-    seek(newDuration);
+    state.rewindStep += (state.rewindStep * stepMultiplier).floor();
+    seek(state.position - Duration(seconds: state.rewindStep));
+    EasyDebounce.debounce('fast-rewind-step', const Duration(seconds: 1), () {
+      emit(state.copyWith(rewindStep: defaultStep));
+    });
   }
 
   Future<MediaItem?> getMediaItem(int index) async {
@@ -773,6 +783,9 @@ class PlayerState {
   List<Pair<int>> sponsorSegments = List.of([]);
   Pair<int> nextSegment = Pair(0, 0);
 
+  // step in seconds when fast forawrd or fast rewind
+  int forwardStep = defaultStep, rewindStep = defaultStep;
+
   PlayerState();
 
   PlayerState.withVideos(this.videos);
@@ -807,5 +820,7 @@ class PlayerState {
       this.mediaCommand,
       this.fullScreenState,
       this.muted,
+      this.forwardStep,
+      this.rewindStep,
       this.mediaEvent);
 }
