@@ -36,7 +36,7 @@ const double miniPlayerThreshold = 300;
 const skipToVideoThrottleName = 'skip-to-video';
 const double bigPlayerThreshold = 700;
 const defaultStep = 9;
-const stepMultiplier = 0.2;
+const stepMultiplier = 0.15;
 
 var log = Logger('MiniPlayerController');
 
