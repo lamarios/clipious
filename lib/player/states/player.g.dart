@@ -69,6 +69,10 @@ abstract class _$PlayerStateCWProxy {
 
   PlayerState rewindStep(int rewindStep);
 
+  PlayerState totalRewind(int totalRewind);
+
+  PlayerState totalFastForward(int totalFastForward);
+
   PlayerState mediaEvent(MediaEvent<dynamic> mediaEvent);
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `PlayerState(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
@@ -109,6 +113,8 @@ abstract class _$PlayerStateCWProxy {
     bool? muted,
     int? forwardStep,
     int? rewindStep,
+    int? totalRewind,
+    int? totalFastForward,
     MediaEvent<dynamic>? mediaEvent,
   });
 }
@@ -227,6 +233,13 @@ class _$PlayerStateCWProxyImpl implements _$PlayerStateCWProxy {
   PlayerState rewindStep(int rewindStep) => this(rewindStep: rewindStep);
 
   @override
+  PlayerState totalRewind(int totalRewind) => this(totalRewind: totalRewind);
+
+  @override
+  PlayerState totalFastForward(int totalFastForward) =>
+      this(totalFastForward: totalFastForward);
+
+  @override
   PlayerState mediaEvent(MediaEvent<dynamic> mediaEvent) =>
       this(mediaEvent: mediaEvent);
 
@@ -270,6 +283,8 @@ class _$PlayerStateCWProxyImpl implements _$PlayerStateCWProxy {
     Object? muted = const $CopyWithPlaceholder(),
     Object? forwardStep = const $CopyWithPlaceholder(),
     Object? rewindStep = const $CopyWithPlaceholder(),
+    Object? totalRewind = const $CopyWithPlaceholder(),
+    Object? totalFastForward = const $CopyWithPlaceholder(),
     Object? mediaEvent = const $CopyWithPlaceholder(),
   }) {
     return PlayerState._(
@@ -399,6 +414,15 @@ class _$PlayerStateCWProxyImpl implements _$PlayerStateCWProxy {
           ? _value.rewindStep
           // ignore: cast_nullable_to_non_nullable
           : rewindStep as int,
+      totalRewind == const $CopyWithPlaceholder() || totalRewind == null
+          ? _value.totalRewind
+          // ignore: cast_nullable_to_non_nullable
+          : totalRewind as int,
+      totalFastForward == const $CopyWithPlaceholder() ||
+              totalFastForward == null
+          ? _value.totalFastForward
+          // ignore: cast_nullable_to_non_nullable
+          : totalFastForward as int,
       mediaEvent == const $CopyWithPlaceholder() || mediaEvent == null
           ? _value.mediaEvent
           // ignore: cast_nullable_to_non_nullable

@@ -35,8 +35,8 @@ const double targetHeight = 69;
 const double miniPlayerThreshold = 300;
 const skipToVideoThrottleName = 'skip-to-video';
 const double bigPlayerThreshold = 700;
-const defaultStep = 9;
-const stepMultiplier = 0.15;
+const defaultStep = 10;
+const stepMultiplier = 1.15;
 
 var log = Logger('MiniPlayerController');
 
@@ -288,8 +288,12 @@ class PlayerCubit extends Cubit<PlayerState> {
       double positionInMs = currentPosition * 1000;
       Pair<int> nextSegment = state.sponsorSegments.firstWhere((e) => e.first <= positionInMs && positionInMs <= e.last, orElse: () => Pair<int>(-1, -1));
       if (nextSegment.first != -1) {
+        emit(state.copyWith(mediaEvent: MediaEvent(state: MediaState.playing, type: MediaEventType.sponsorSkipped)));
+        //for some reasons this needs to be last
         seek(Duration(milliseconds: nextSegment.last + 1000));
+/*
         final ScaffoldMessengerState? scaffold = scaffoldKey.currentState;
+
 
         if (scaffold != null) {
           var locals = AppLocalizations.of(scaffold.context)!;
@@ -298,6 +302,9 @@ class PlayerCubit extends Cubit<PlayerState> {
             duration: const Duration(seconds: 1),
           ));
         }
+*/
+
+        // log.info('SPONSOR SKIPPED');
       }
     }
   }
@@ -645,18 +652,32 @@ class PlayerCubit extends Cubit<PlayerState> {
   }
 
   void fastForward() {
-    state.forwardStep += (state.forwardStep * stepMultiplier).floor();
-    seek(state.position + Duration(seconds: state.forwardStep));
+    var newPosition = state.position + Duration(seconds: state.forwardStep);
+    seek(newPosition);
+    log.info('fast forward $newPosition - step: ${state.forwardStep}');
+    emit(state.copyWith(
+      totalFastForward: state.totalFastForward + state.forwardStep,
+      forwardStep: (state.forwardStep * stepMultiplier).floor(),
+    ));
     EasyDebounce.debounce('fast-forward-step', const Duration(seconds: 1), () {
-      emit(state.copyWith(forwardStep: defaultStep));
+      emit(state.copyWith(
+        forwardStep: defaultStep,
+        totalFastForward: 0,
+      ));
     });
   }
 
   void rewind() {
-    state.rewindStep += (state.rewindStep * stepMultiplier).floor();
     seek(state.position - Duration(seconds: state.rewindStep));
+    emit(state.copyWith(
+      totalRewind: state.totalRewind + state.rewindStep,
+      rewindStep: (state.rewindStep * stepMultiplier).floor(),
+    ));
     EasyDebounce.debounce('fast-rewind-step', const Duration(seconds: 1), () {
-      emit(state.copyWith(rewindStep: defaultStep));
+      emit(state.copyWith(
+        rewindStep: defaultStep,
+        totalRewind: 0,
+      ));
     });
   }
 
@@ -785,6 +806,7 @@ class PlayerState {
 
   // step in seconds when fast forawrd or fast rewind
   int forwardStep = defaultStep, rewindStep = defaultStep;
+  int totalFastForward = 0, totalRewind = 0;
 
   PlayerState();
 
@@ -822,5 +844,7 @@ class PlayerState {
       this.muted,
       this.forwardStep,
       this.rewindStep,
+      this.totalRewind,
+      this.totalFastForward,
       this.mediaEvent);
 }
