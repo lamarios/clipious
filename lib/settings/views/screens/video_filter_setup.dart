@@ -170,55 +170,58 @@ class VideoFilterSetup extends StatelessWidget {
                         value: cubit.showDateSettings,
                         onChanged: (value) => cubit.showDateSettings = value),
                     AnimatedCrossFade(
-                      firstChild: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: wholeWeek.map((e) {
-                                String day = getWeekdayName(e).substring(0, 1);
-                                return GestureDetector(
-                                  onTap: () => cubit.toggleDay(e),
-                                  child: AnimatedContainer(
-                                    padding: const EdgeInsets.all(8),
-                                    margin: const EdgeInsets.symmetric(horizontal: 8),
-                                    width: 30,
-                                    height: 30,
-                                    alignment: Alignment.center,
-                                    decoration: BoxDecoration(shape: BoxShape.circle, color: (_.filter?.daysOfWeek.contains(e) ?? false) ? colors.primaryContainer : colors.secondaryContainer),
-                                    duration: animationDuration,
-                                    curve: Curves.easeInOutQuad,
-                                    child: Text(
-                                      day,
-                                      style: textTheme.bodySmall,
+                      firstChild: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8.0),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: wholeWeek.map((e) {
+                                  String day = getWeekdayName(e).substring(0, 1);
+                                  return GestureDetector(
+                                    onTap: () => cubit.toggleDay(e),
+                                    child: AnimatedContainer(
+                                      padding: const EdgeInsets.all(8),
+                                      margin: const EdgeInsets.symmetric(horizontal: 8),
+                                      width: 30,
+                                      height: 30,
+                                      alignment: Alignment.center,
+                                      decoration: BoxDecoration(shape: BoxShape.circle, color: (_.filter?.daysOfWeek.contains(e) ?? false) ? colors.primaryContainer : colors.secondaryContainer),
+                                      duration: animationDuration,
+                                      curve: Curves.easeInOutQuad,
+                                      child: Text(
+                                        day,
+                                        style: textTheme.bodySmall,
+                                      ),
                                     ),
-                                  ),
-                                );
-                              }).toList()),
-                          SizedBox(
-                            height: 4,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text('${locals.from}:'),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                                child: FilledButton.tonal(
-                                    onPressed: () => selectTime(context, _.filter?.startTime ?? defaultStartTime, cubit.setStartTime),
-                                    child: Text(timeStringToTimeOfDay(_.filter?.startTime ?? defaultStartTime).format(context))),
-                              ),
-                              Text('${locals.to}:'),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                                child: FilledButton.tonal(
-                                    onPressed: () => selectTime(context, _.filter?.endTime ?? defaultEndTime, cubit.setEndTime),
-                                    child: Text(timeStringToTimeOfDay(_.filter?.endTime ?? defaultEndTime).format(context))),
-                              ),
-                            ],
-                          )
-                        ],
+                                  );
+                                }).toList()),
+                            SizedBox(
+                              height: 4,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text('${locals.from}:'),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                                  child: FilledButton.tonal(
+                                      onPressed: () => selectTime(context, _.filter?.startTime ?? defaultStartTime, cubit.setStartTime),
+                                      child: Text(timeStringToTimeOfDay(_.filter?.startTime ?? defaultStartTime).format(context))),
+                                ),
+                                Text('${locals.to}:'),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                                  child: FilledButton.tonal(
+                                      onPressed: () => selectTime(context, _.filter?.endTime ?? defaultEndTime, cubit.setEndTime),
+                                      child: Text(timeStringToTimeOfDay(_.filter?.endTime ?? defaultEndTime).format(context))),
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
                       ),
                       secondChild: const SizedBox.shrink(),
                       crossFadeState: cubit.showDateSettings ? CrossFadeState.showFirst : CrossFadeState.showSecond,

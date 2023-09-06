@@ -1,13 +1,10 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/utils.dart';
 import 'package:invidious/videos/models/base_video.dart';
 import 'package:logging/logging.dart';
 import 'package:objectbox/objectbox.dart';
-
-import '../../../utils/models/pair.dart';
 
 final log = Logger('Video Filter DB');
 
@@ -161,7 +158,7 @@ class VideoFilter {
     bool isDayAllowed = !daysToTest.contains(now.weekday);
 
     if (isDayAllowed) {
-      print("Filter daysOfWeek ${daysOfWeek}, now day of week: ${now.weekday}");
+      log.fine("Filter daysOfWeek ${daysOfWeek}, now day of week: ${now.weekday}");
       return true;
     }
 
@@ -174,7 +171,7 @@ class VideoFilter {
     // we only allow the video if current time is outside current time range
     bool isTimeAllowed = now.isBefore(startDateTime) || now.isAfter(endDateTime);
 
-    print("Filter daysOfWeek ${daysOfWeek}, now day of week: ${now.weekday}, Filter from ${startDateTime} to ${endDateTime} current time ${now} ");
+    log.fine("Filter daysOfWeek ${daysOfWeek}, now day of week: ${now.weekday}, Filter from ${startDateTime} to ${endDateTime} current time ${now} ");
 
     return isTimeAllowed;
   }
