@@ -83,27 +83,30 @@ class VideoListItem extends StatelessWidget {
                                   size: 10,
                                   color: colorScheme.secondary,
                                 )
-                              : Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      locals.videoFiltered,
-                                      style: filterStyle,
-                                    ),
-                                    ...video!.matchedFilters
-                                        .map((e) => Text(
-                                              e.localizedLabel(locals),
-                                              style: filterStyle,
-                                            ))
-                                        .toList(growable: false),
-                                    Padding(
-                                      padding: const EdgeInsets.only(top: 16.0),
-                                      child: Text(
-                                        locals.videoFilterTapToReveal,
+                              : Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                    children: [
+                                      Text(
+                                        locals.videoFiltered,
                                         style: filterStyle,
                                       ),
-                                    )
-                                  ],
+                                      ...video!.matchedFilters
+                                          .map((e) => Text(
+                                                e.localizedLabel(locals, context),
+                                                style: filterStyle,
+                                              ))
+                                          .toList(growable: false),
+                                      Padding(
+                                        padding: const EdgeInsets.only(top: 16.0),
+                                        child: Text(
+                                          locals.videoFilterTapToReveal,
+                                          style: filterStyle,
+                                        ),
+                                      )
+                                    ],
+                                  ),
                                 ),
                         ),
                       )

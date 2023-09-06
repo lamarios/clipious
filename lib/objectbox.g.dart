@@ -179,7 +179,7 @@ final _entities = <ModelEntity>[
   ModelEntity(
       id: const IdUid(6, 8304874620604193998),
       name: 'VideoFilter',
-      lastPropertyId: const IdUid(8, 6020474727686624632),
+      lastPropertyId: const IdUid(11, 8416925878752879022),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
@@ -216,6 +216,21 @@ final _entities = <ModelEntity>[
             id: const IdUid(8, 6020474727686624632),
             name: 'hideFromFeed',
             type: 1,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(9, 385259419700560741),
+            name: 'daysOfWeek',
+            type: 27,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(10, 4391992064156904605),
+            name: 'startTime',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(11, 8416925878752879022),
+            name: 'endTime',
+            type: 9,
             flags: 0)
       ],
       relations: <ModelRelation>[],
@@ -598,7 +613,10 @@ ModelDefinition getObjectBoxModel() {
           final dbOperationOffset = object.dbOperation == null
               ? null
               : fbb.writeString(object.dbOperation!);
-          fbb.startTable(9);
+          final daysOfWeekOffset = fbb.writeListInt64(object.daysOfWeek);
+          final startTimeOffset = fbb.writeString(object.startTime);
+          final endTimeOffset = fbb.writeString(object.endTime);
+          fbb.startTable(12);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, channelIdOffset);
           fbb.addOffset(2, valueOffset);
@@ -606,6 +624,9 @@ ModelDefinition getObjectBoxModel() {
           fbb.addOffset(4, dbOperationOffset);
           fbb.addBool(6, object.filterAll);
           fbb.addBool(7, object.hideFromFeed);
+          fbb.addOffset(8, daysOfWeekOffset);
+          fbb.addOffset(9, startTimeOffset);
+          fbb.addOffset(10, endTimeOffset);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -626,7 +647,14 @@ ModelDefinition getObjectBoxModel() {
             ..filterAll =
                 const fb.BoolReader().vTableGet(buffer, rootOffset, 16, false)
             ..hideFromFeed =
-                const fb.BoolReader().vTableGet(buffer, rootOffset, 18, false);
+                const fb.BoolReader().vTableGet(buffer, rootOffset, 18, false)
+            ..daysOfWeek =
+                const fb.ListReader<int>(fb.Int64Reader(), lazy: false)
+                    .vTableGet(buffer, rootOffset, 20, [])
+            ..startTime = const fb.StringReader(asciiOptimization: true)
+                .vTableGet(buffer, rootOffset, 22, '')
+            ..endTime = const fb.StringReader(asciiOptimization: true)
+                .vTableGet(buffer, rootOffset, 24, '');
 
           return object;
         }),
@@ -900,6 +928,18 @@ class VideoFilter_ {
   /// see [VideoFilter.hideFromFeed]
   static final hideFromFeed =
       QueryBooleanProperty<VideoFilter>(_entities[5].properties[6]);
+
+  /// see [VideoFilter.daysOfWeek]
+  static final daysOfWeek =
+      QueryIntegerVectorProperty<VideoFilter>(_entities[5].properties[7]);
+
+  /// see [VideoFilter.startTime]
+  static final startTime =
+      QueryStringProperty<VideoFilter>(_entities[5].properties[8]);
+
+  /// see [VideoFilter.endTime]
+  static final endTime =
+      QueryStringProperty<VideoFilter>(_entities[5].properties[9]);
 }
 
 /// [DownloadedVideo] entity fields to define ObjectBox queries.

@@ -1,6 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/globals.dart';
+import 'package:invidious/utils.dart';
 import 'package:invidious/videos/models/base_video.dart';
 import 'package:logging/logging.dart';
 import 'package:objectbox/objectbox.dart';
@@ -8,6 +10,10 @@ import 'package:objectbox/objectbox.dart';
 import '../../../utils/models/pair.dart';
 
 final log = Logger('Video Filter DB');
+
+const defaultStartTime = "00:00:00";
+const defaultEndTime = "23:59:59";
+const wholeWeek = [1, 2, 3, 4, 5, 6, 7];
 
 enum FilterType {
   title,
@@ -69,6 +75,10 @@ class VideoFilter {
     return type?.name ?? '';
   }
 
+  List<int> daysOfWeek = wholeWeek;
+  String startTime = defaultStartTime;
+  String endTime = defaultEndTime;
+
   set dbType(String? value) {
     type = FilterType.values.where((element) => element.name == value).firstOrNull;
   }
@@ -97,10 +107,14 @@ class VideoFilter {
 
     log.fine('filtering videos, we have ${filters.length} filters');
 
+/*
     videos = await Future.wait(videos?.map((v) {
           return compute((message) => _innerFilterVideo(message.first, message.last), Couple(v, filters));
         }).toList() ??
         []);
+*/
+
+    videos = videos?.map((v) => _innerFilterVideo(v, filters)).toList() ?? [];
 
     return videos;
   }
@@ -115,21 +129,54 @@ class VideoFilter {
     // Channel hide all
     if (channelId != null && filterAll == true && videoChannel == channelId) {
       log.fine('Video filtered because hide all == $filterAll, video channel id: ${videoChannel}, channel id ${channelId}');
-      return true;
+      return !isTimeAllowed();
     }
+
+    bool filter = false;
 
     switch (type) {
       // string base operation
       case FilterType.title:
-        return filterVideoStringOperation(video.title);
+        filter = filterVideoStringOperation(video.title);
       case FilterType.channelName:
-        return video.author != null ? filterVideoStringOperation(video.author!) : true;
+        filter = video.author != null ? filterVideoStringOperation(video.author!) : true;
       // int base operation
       case FilterType.length:
-        return filterVideoNumberOperation(video.lengthSeconds);
+        filter = filterVideoNumberOperation(video.lengthSeconds);
       default:
-        return false;
+        filter = false;
     }
+
+    if (!filter) {
+      return false;
+    }
+    //if we need to filter, we need to check the time
+    return filter && !isTimeAllowed();
+  }
+
+  bool isTimeAllowed() {
+    var now = DateTime.now();
+
+    var daysToTest = daysOfWeek.isEmpty ? wholeWeek : daysOfWeek;
+    bool isDayAllowed = !daysToTest.contains(now.weekday);
+
+    if (isDayAllowed) {
+      print("Filter daysOfWeek ${daysOfWeek}, now day of week: ${now.weekday}");
+      return true;
+    }
+
+    List<String> safeStartTime = (startTime.isEmpty ? defaultStartTime : startTime).split(":");
+    List<String> safeEndTime = (endTime.isEmpty ? defaultEndTime : endTime).split(":");
+
+    DateTime startDateTime = DateTime.now().copyWith(hour: int.parse(safeStartTime[0]), minute: int.parse(safeStartTime[1]), second: int.parse(safeStartTime[2]));
+    DateTime endDateTime = DateTime.now().copyWith(hour: int.parse(safeEndTime[0]), minute: int.parse(safeEndTime[1]), second: int.parse(safeEndTime[2]));
+
+    // we only allow the video if current time is outside current time range
+    bool isTimeAllowed = now.isBefore(startDateTime) || now.isAfter(endDateTime);
+
+    print("Filter daysOfWeek ${daysOfWeek}, now day of week: ${now.weekday}, Filter from ${startDateTime} to ${endDateTime} current time ${now} ");
+
+    return isTimeAllowed;
   }
 
   bool filterVideoNumberOperation(int numberToCompare) {
@@ -160,15 +207,54 @@ class VideoFilter {
     }
   }
 
-  String localizedLabel(AppLocalizations locals) {
+  String localizedLabel(AppLocalizations locals, BuildContext context) {
+    String str = "";
     if (filterAll) {
-      return locals.videoFilterWholeChannel(hideFromFeed ? locals.videoFilterHideLabel : locals.videoFilterFilterLabel);
+      str = locals.videoFilterWholeChannel(hideFromFeed ? locals.videoFilterHideLabel : locals.videoFilterFilterLabel);
     } else if (type != null && operation != null) {
       log.fine("Filter type $hideFromFeed");
-      return locals.videoFilterDescriptionString(hideFromFeed ? locals.videoFilterHideLabel : locals.videoFilterFilterLabel, FilterType.localizedType(type!, locals).toLowerCase(),
+      str = locals.videoFilterDescriptionString(hideFromFeed ? locals.videoFilterHideLabel : locals.videoFilterFilterLabel, FilterType.localizedType(type!, locals).toLowerCase(),
           FilterOperation.localizedLabel(operation!, locals).toLowerCase(), value ?? '');
-    } else {
-      return "";
     }
+
+    String daysOfWeek = localizedDaysOfWeek(locals);
+    if (daysOfWeek.isNotEmpty) {
+      if (str.isNotEmpty) {
+        str += "\n$daysOfWeek";
+      } else {
+        str = daysOfWeek;
+      }
+    }
+
+    String localizedTime = localizedTimes(locals, context);
+    if (localizedTime.isNotEmpty) {
+      if (str.isNotEmpty) {
+        str += "\n$localizedTime";
+      } else {
+        str = localizedTime;
+      }
+    }
+
+    return str;
+  }
+
+  String localizedDaysOfWeek(AppLocalizations locals) {
+    if (daysOfWeek.isNotEmpty && daysOfWeek.length != 7) {
+      daysOfWeek.sort();
+      return locals.videoFilterAppliedOn(daysOfWeek.map((e) => getWeekdayName(e)).join(", "));
+    } else {
+      return '';
+    }
+  }
+
+  String localizedTimes(AppLocalizations locals, BuildContext context) {
+    String str = '';
+    if (startTime != defaultStartTime || endTime != defaultEndTime) {
+      var start = timeStringToTimeOfDay(startTime);
+      var end = timeStringToTimeOfDay(endTime);
+      str = locals.videoFilterTimeOfDayFromTo(start.format(context), end.format(context));
+    }
+
+    return str;
   }
 }

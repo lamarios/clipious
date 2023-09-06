@@ -282,3 +282,23 @@ SystemUiOverlayStyle getUiOverlayStyle(BuildContext context) {
 }
 
 List<T> filteredVideos<T extends BaseVideo>(List<T> videos) => videos.where((element) => !element.filterHide).toList();
+
+String getWeekdayName(int weekday) {
+  final DateTime now = DateTime.now().toLocal();
+  final int diff = now.weekday - weekday; // weekday is our 1-7 ISO value
+  var udpatedDt;
+  if (diff > 0) {
+    udpatedDt = now.subtract(Duration(days: diff));
+  } else if (diff == 0) {
+    udpatedDt = now;
+  } else {
+    udpatedDt = now.add(Duration(days: diff * -1));
+  }
+  final String weekdayName = DateFormat('EEEE').format(udpatedDt);
+  return weekdayName;
+}
+
+TimeOfDay timeStringToTimeOfDay(String time) {
+  var split = time.split(":");
+  return TimeOfDay(hour: int.parse(split[0]), minute: int.parse(split[1]));
+}
