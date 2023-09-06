@@ -35,6 +35,16 @@ class VideoFilterEditCubit extends Cubit<VideoFilterEditState> {
 
   void ensureFilter() {
     state.filter ??= VideoFilter(value: "");
+    if ((state.filter?.daysOfWeek ?? wholeWeek).isEmpty) {
+      state.filter?.daysOfWeek = wholeWeek;
+    }
+
+    if ((state.filter?.startTime ?? '').isEmpty) {
+      state.filter?.startTime = defaultStartTime;
+    }
+    if ((state.filter?.endTime ?? '').isEmpty) {
+      state.filter?.endTime = defaultEndTime;
+    }
   }
 
   void setType(FilterType? value) {
@@ -127,10 +137,57 @@ class VideoFilterEditCubit extends Cubit<VideoFilterEditState> {
     emit(state);
   }
 
+  set showDateSettings(bool show) {
+    var state = this.state.copyWith();
+    state.showDateSettings = show;
+    if (!show) {
+      state.filter?.daysOfWeek = wholeWeek;
+      state.filter?.startTime = defaultStartTime;
+      state.filter?.endTime = defaultEndTime;
+    }
+    emit(state);
+  }
+
   void hideOnFilteredChanged(bool value) {
     var state = this.state.copyWith();
     state.filter?.hideFromFeed = value;
     emit(state);
+  }
+
+  toggleDay(int e) {
+    var days = List.of(state.filter?.daysOfWeek ?? wholeWeek);
+    if (days.contains(e)) {
+      if (days.length >= 2) days.remove(e);
+    } else {
+      days.add(e);
+    }
+    var filter = state.filter;
+    filter?.daysOfWeek = days;
+    emit(state.copyWith(filter: filter));
+  }
+
+  bool get showDateSettings =>
+      state.showDateSettings ||
+      (state.filter?.daysOfWeek.length ?? wholeWeek.length) != wholeWeek.length ||
+      (state.filter?.startTime ?? defaultStartTime) != defaultStartTime ||
+      (state.filter?.endTime ?? defaultEndTime) != defaultEndTime;
+
+  setStartTime(String newTime) {
+    var state = this.state.copyWith();
+    var comparison = newTime.compareTo(state.filter?.endTime ?? defaultEndTime);
+    if (comparison < 0) {
+      state.filter?.startTime = newTime;
+      emit(state);
+    }
+  }
+
+  setEndTime(String newTime) {
+    var state = this.state.copyWith();
+    var comparison = newTime.compareTo(state.filter?.startTime ?? defaultStartTime);
+    if (comparison > 0) {
+      state.filter?.endTime = newTime;
+      emit(state);
+    }
   }
 }
 
@@ -140,6 +197,7 @@ class VideoFilterEditState {
   int searchPage;
   Channel? channel;
   List<Channel> channelResults;
+  bool showDateSettings = false;
 
   TextEditingController valueController;
 
@@ -147,5 +205,5 @@ class VideoFilterEditState {
       : channelResults = channelResults ?? [],
         valueController = valueController ?? TextEditingController(text: filter?.value ?? '');
 
-  VideoFilterEditState._(this.filter, this.searchPage, this.channel, this.channelResults, this.valueController);
+  VideoFilterEditState._(this.filter, this.searchPage, this.channel, this.channelResults, this.valueController, this.showDateSettings);
 }

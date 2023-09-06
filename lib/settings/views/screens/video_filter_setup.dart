@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:invidious/globals.dart';
 import 'package:invidious/settings/states/video_filter_edit.dart';
+import 'package:invidious/utils.dart';
 import 'package:invidious/utils/views/components/select_list_dialog.dart';
 
 import '../../../channels/models/channel.dart';
@@ -71,6 +74,17 @@ class VideoFilterSetup extends StatelessWidget {
         itemBuilder: (value, selected) => Text(value.author), asyncSearch: (filter) => cubit.searchChannel(filter ?? ''), onSelect: (value) => cubit.selectChannel(value), title: locals.channel);
   }
 
+  selectTime(BuildContext context, String initialTime, Function(String newTime) onNewTime) async {
+    var split = initialTime.split(":");
+    if (split.length == 3) {
+      TimeOfDay? selectedTime = await showTimePicker(context: context, initialTime: timeStringToTimeOfDay(initialTime));
+      if (selectedTime != null) {
+        String newTime = '${selectedTime.hour.toString().padLeft(2, "0")}:${selectedTime.minute.toString().padLeft(2, "0")}:${split[2]}';
+        onNewTime(newTime);
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     var locals = AppLocalizations.of(context)!;
@@ -81,6 +95,8 @@ class VideoFilterSetup extends StatelessWidget {
       create: (context) => VideoFilterEditCubit(VideoFilterEditState(filter: filter)),
       child: BlocBuilder<VideoFilterEditCubit, VideoFilterEditState>(builder: (context, _) {
         var cubit = context.read<VideoFilterEditCubit>();
+        print(_.filter?.daysOfWeek);
+        print(_.filter?.startTime);
         return Scaffold(
           appBar: AppBar(
             backgroundColor: colors.background,
@@ -146,6 +162,72 @@ class VideoFilterSetup extends StatelessWidget {
                         child: SwitchListTile(title: Text(locals.videoFilterHideAllFromChannel), value: _.filter?.filterAll ?? false, onChanged: cubit.channelHideAll)),
                     ...getFilterWidgets(context),
                     SwitchListTile(
+                        title: Text(locals.videoFilterDayOfWeek),
+                        subtitle: Text(
+                          locals.videoFilterDayOfWeekDescription,
+                          style: textTheme.bodySmall?.copyWith(color: colors.secondary),
+                        ),
+                        value: cubit.showDateSettings,
+                        onChanged: (value) => cubit.showDateSettings = value),
+                    AnimatedCrossFade(
+                      firstChild: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: wholeWeek.map((e) {
+                                String day = getWeekdayName(e).substring(0, 1);
+                                return GestureDetector(
+                                  onTap: () => cubit.toggleDay(e),
+                                  child: AnimatedContainer(
+                                    padding: const EdgeInsets.all(8),
+                                    margin: const EdgeInsets.symmetric(horizontal: 8),
+                                    width: 30,
+                                    height: 30,
+                                    alignment: Alignment.center,
+                                    decoration: BoxDecoration(shape: BoxShape.circle, color: (_.filter?.daysOfWeek.contains(e) ?? false) ? colors.primaryContainer : colors.secondaryContainer),
+                                    duration: animationDuration,
+                                    curve: Curves.easeInOutQuad,
+                                    child: Text(
+                                      day,
+                                      style: textTheme.bodySmall,
+                                    ),
+                                  ),
+                                );
+                              }).toList()),
+                          SizedBox(
+                            height: 4,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text('${locals.from}:'),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                                child: FilledButton.tonal(
+                                    onPressed: () => selectTime(context, _.filter?.startTime ?? defaultStartTime, cubit.setStartTime),
+                                    child: Text(timeStringToTimeOfDay(_.filter?.startTime ?? defaultStartTime).format(context))),
+                              ),
+                              Text('${locals.to}:'),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                                child: FilledButton.tonal(
+                                    onPressed: () => selectTime(context, _.filter?.endTime ?? defaultEndTime, cubit.setEndTime),
+                                    child: Text(timeStringToTimeOfDay(_.filter?.endTime ?? defaultEndTime).format(context))),
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
+                      secondChild: const SizedBox.shrink(),
+                      crossFadeState: cubit.showDateSettings ? CrossFadeState.showFirst : CrossFadeState.showSecond,
+                      duration: animationDuration,
+                      sizeCurve: Curves.easeInOutQuad,
+                      firstCurve: Curves.easeInOutQuad,
+                      secondCurve: Curves.easeInOutQuad,
+                    ).animate().slideY(duration: animationDuration, curve: Curves.easeInOutQuad).fadeIn(duration: animationDuration),
+                    SwitchListTile(
                         title: Text(locals.videoFilterHide),
                         subtitle: Text(
                           locals.videoFilterHideDescription,
@@ -158,7 +240,7 @@ class VideoFilterSetup extends StatelessWidget {
                         child: Padding(
                           padding: const EdgeInsets.all(16.0),
                           child: Text(
-                            _.filter?.localizedLabel(locals) ?? '',
+                            _.filter?.localizedLabel(locals, context) ?? '',
                             style: TextStyle(color: colors.primary),
                           ),
                         )),

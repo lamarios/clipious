@@ -955,6 +955,58 @@
     "@secondsShortForm": {
         "description": "Short form for the word seconds"
     },
+    "videoFilterApplyDateToFilter": "Filter videos on given times",
+    "@videoFilterApplyDateToFilter": {
+        "description": "Label for switch to allow user to customize video filter and set days of week and time to them"
+    },
+    "videoFilterDayOfWeek": "Select days to apply filters",
+    "@videoFilterDayOfWeek": {
+        "description": "Title for day selection for the filter"
+    },
+    "videoFilterDayOfWeekDescription": "You can selectively choose days of the week and time to which the filters apply to, for example, avoid sport events spoilers.",
+    "@videoFilterDayOfWeekDescription": {
+        "description": ""
+    },
+    "videoFilterStartTime": "Start time",
+    "@videoFilterStartTime": {
+        "description": "Title for filter start time"
+    },
+    "videoFilterEndTime": "End time",
+    "@videoFilterEndTime": {
+        "description": "Title for filter end time"
+    },
+    "videoFilterAppliedOn": "Applied on {selectedDays}",
+    "@videoFilterAppliedOn": {
+        "description": "Readable text on when the filter should apply",
+        "placeholders": {
+            "selectedDays": {
+                "type": "String",
+                "example": "Monday, Wednesday, Friday"
+            }
+        }
+    },
+    "from": "From",
+    "@from": {
+        "description": "From word (as in 'From xx To xx')"
+    },
+    "to": "To",
+    "@to": {
+        "description": "To word as in 'From xx To xx')"
+    },
+    "videoFilterTimeOfDayFromTo": "From {from} to {to}",
+    "@videoFilterTimeOfDayFromTo": {
+        "description": "Time of day range",
+        "placeholders": {
+            "from": {
+                "type": "String",
+                "example": "3:00 AM"
+            },
+            "to": {
+                "type": "String",
+                "example": "5:00 PM"
+            }
+        }
+    },
     "history": "History",
     "@history": {
         "description": "User view history label"

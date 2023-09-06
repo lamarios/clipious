@@ -17,6 +17,8 @@ abstract class _$VideoFilterEditStateCWProxy {
 
   VideoFilterEditState valueController(TextEditingController valueController);
 
+  VideoFilterEditState showDateSettings(bool showDateSettings);
+
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `VideoFilterEditState(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
   /// Usage
@@ -29,6 +31,7 @@ abstract class _$VideoFilterEditStateCWProxy {
     Channel? channel,
     List<Channel>? channelResults,
     TextEditingController? valueController,
+    bool? showDateSettings,
   });
 }
 
@@ -58,6 +61,10 @@ class _$VideoFilterEditStateCWProxyImpl
       this(valueController: valueController);
 
   @override
+  VideoFilterEditState showDateSettings(bool showDateSettings) =>
+      this(showDateSettings: showDateSettings);
+
+  @override
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `VideoFilterEditState(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
@@ -71,6 +78,7 @@ class _$VideoFilterEditStateCWProxyImpl
     Object? channel = const $CopyWithPlaceholder(),
     Object? channelResults = const $CopyWithPlaceholder(),
     Object? valueController = const $CopyWithPlaceholder(),
+    Object? showDateSettings = const $CopyWithPlaceholder(),
   }) {
     return VideoFilterEditState._(
       filter == const $CopyWithPlaceholder()
@@ -93,6 +101,11 @@ class _$VideoFilterEditStateCWProxyImpl
           ? _value.valueController
           // ignore: cast_nullable_to_non_nullable
           : valueController as TextEditingController,
+      showDateSettings == const $CopyWithPlaceholder() ||
+              showDateSettings == null
+          ? _value.showDateSettings
+          // ignore: cast_nullable_to_non_nullable
+          : showDateSettings as bool,
     );
   }
 }

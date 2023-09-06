@@ -158,7 +158,7 @@
     },
     {
       "id": "6:8304874620604193998",
-      "lastPropertyId": "8:6020474727686624632",
+      "lastPropertyId": "11:8416925878752879022",
       "name": "VideoFilter",
       "properties": [
         {
@@ -196,6 +196,21 @@
           "id": "8:6020474727686624632",
           "name": "hideFromFeed",
           "type": 1
+        },
+        {
+          "id": "9:385259419700560741",
+          "name": "daysOfWeek",
+          "type": 27
+        },
+        {
+          "id": "10:4391992064156904605",
+          "name": "startTime",
+          "type": 9
+        },
+        {
+          "id": "11:8416925878752879022",
+          "name": "endTime",
+          "type": 9
         }
       ],
       "relations": []
