@@ -956,5 +956,57 @@
   "secondsShortForm": "s",
   "@secondsShortForm": {
     "description": "Short form for the word seconds"
+  },
+  "from": "De",
+  "@from": {
+    "description": "From word (as in 'From xx To xx')"
+  },
+  "videoFilterApplyDateToFilter": "Filtrar vídeos en función de la hora",
+  "@videoFilterApplyDateToFilter": {
+    "description": "Label for switch to allow user to customize video filter and set days of week and time to them"
+  },
+  "to": "A",
+  "@to": {
+    "description": "To word as in 'From xx To xx')"
+  },
+  "videoFilterDayOfWeekDescription": "Puedes elegir selectivamente los días de la semana y la hora a la que se aplican los filtros para, por ejemplo, evitar spoilers de acontecimientos deportivos.",
+  "@videoFilterDayOfWeekDescription": {
+    "description": ""
+  },
+  "videoFilterStartTime": "Hora de inicio",
+  "@videoFilterStartTime": {
+    "description": "Title for filter start time"
+  },
+  "videoFilterTimeOfDayFromTo": "De {from} a {to}",
+  "@videoFilterTimeOfDayFromTo": {
+    "description": "Time of day range",
+    "placeholders": {
+      "from": {
+        "type": "String",
+        "example": "3:00 AM"
+      },
+      "to": {
+        "type": "String",
+        "example": "5:00 PM"
+      }
+    }
+  },
+  "videoFilterDayOfWeek": "Seleccionar los días para aplicar los filtros",
+  "@videoFilterDayOfWeek": {
+    "description": "Title for day selection for the filter"
+  },
+  "videoFilterEndTime": "Hora de finalización",
+  "@videoFilterEndTime": {
+    "description": "Title for filter end time"
+  },
+  "videoFilterAppliedOn": "Se aplica en {selectedDays}",
+  "@videoFilterAppliedOn": {
+    "description": "Readable text on when the filter should apply",
+    "placeholders": {
+      "selectedDays": {
+        "type": "String",
+        "example": "Monday, Wednesday, Friday"
+      }
+    }
   }
 }
