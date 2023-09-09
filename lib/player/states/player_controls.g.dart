@@ -32,6 +32,8 @@ abstract class _$PlayerControlsStateCWProxy {
 
   PlayerControlsState doubleTapRewindedOpacity(double doubleTapRewindedOpacity);
 
+  PlayerControlsState showSponsorBlocked(bool showSponsorBlocked);
+
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `PlayerControlsState(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
   /// Usage
@@ -51,6 +53,7 @@ abstract class _$PlayerControlsStateCWProxy {
     bool? draggingPositionSlider,
     double? doubleTapFastForwardedOpacity,
     double? doubleTapRewindedOpacity,
+    bool? showSponsorBlocked,
   });
 }
 
@@ -105,6 +108,10 @@ class _$PlayerControlsStateCWProxyImpl implements _$PlayerControlsStateCWProxy {
       this(doubleTapRewindedOpacity: doubleTapRewindedOpacity);
 
   @override
+  PlayerControlsState showSponsorBlocked(bool showSponsorBlocked) =>
+      this(showSponsorBlocked: showSponsorBlocked);
+
+  @override
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `PlayerControlsState(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
@@ -125,6 +132,7 @@ class _$PlayerControlsStateCWProxyImpl implements _$PlayerControlsStateCWProxy {
     Object? draggingPositionSlider = const $CopyWithPlaceholder(),
     Object? doubleTapFastForwardedOpacity = const $CopyWithPlaceholder(),
     Object? doubleTapRewindedOpacity = const $CopyWithPlaceholder(),
+    Object? showSponsorBlocked = const $CopyWithPlaceholder(),
   }) {
     return PlayerControlsState._(
       buffering == const $CopyWithPlaceholder() || buffering == null
@@ -179,6 +187,11 @@ class _$PlayerControlsStateCWProxyImpl implements _$PlayerControlsStateCWProxy {
           ? _value.doubleTapRewindedOpacity
           // ignore: cast_nullable_to_non_nullable
           : doubleTapRewindedOpacity as double,
+      showSponsorBlocked == const $CopyWithPlaceholder() ||
+              showSponsorBlocked == null
+          ? _value.showSponsorBlocked
+          // ignore: cast_nullable_to_non_nullable
+          : showSponsorBlocked as bool,
     );
   }
 }

@@ -1,8 +1,10 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:invidious/globals.dart';
 import 'package:invidious/main.dart';
 import 'package:invidious/player/states/interfaces/media_player.dart';
 import 'package:invidious/player/states/player.dart';
@@ -193,8 +195,8 @@ class PlayerControls extends StatelessWidget {
             bool isMini = context.select((PlayerCubit cubit) => cubit.state.isMini);
             bool hasQueue = context.select((PlayerCubit cubit) => cubit.state.hasQueue);
             bool isPip = context.select((PlayerCubit cubit) => cubit.state.isPip);
-            int fastForwardStep = context.select((PlayerCubit cubit) => cubit.state.forwardStep);
-            int rewindStep = context.select((PlayerCubit cubit) => cubit.state.rewindStep);
+            int totalFastForward = context.select((PlayerCubit cubit) => cubit.state.totalFastForward);
+            int totalRewind = context.select((PlayerCubit cubit) => cubit.state.totalRewind);
             String videoTitle = context.select((PlayerCubit cubit) => cubit.state.currentlyPlaying?.title ?? cubit.state.offlineCurrentlyPlaying?.title ?? '');
 
             var cubit = context.read<PlayerControlsCubit>();
@@ -213,6 +215,35 @@ class PlayerControls extends StatelessWidget {
                   child: Stack(
                     alignment: Alignment.topCenter,
                     children: [
+                      if (!isMini && _.showSponsorBlocked)
+                        Positioned(
+                            top: 10,
+                            left: 10,
+                            child: Container(
+                              padding: const EdgeInsets.all(8),
+                              decoration: BoxDecoration(color: Colors.black.withOpacity(0.5), borderRadius: BorderRadius.circular(20)),
+                              child: Row(
+                                children: [
+                                  const Icon(
+                                    Icons.fast_forward,
+                                    color: Colors.white,
+                                    size: 15,
+                                  ),
+                                  const SizedBox(
+                                    width: 5,
+                                  ),
+                                  Text(
+                                    locals.sponsorSkipped,
+                                    style: textTheme.bodySmall?.copyWith(color: Colors.white),
+                                  ),
+                                ],
+                              ),
+                            )
+                                .animate()
+                                .slideX(duration: animationDuration, curve: Curves.easeInOutQuad)
+                                .fadeIn(duration: animationDuration)
+                                .fadeOut(delay: const Duration(seconds: 1), duration: animationDuration)
+                                .slideX(end: -0.5, duration: animationDuration, curve: Curves.easeInOutQuad, delay: const Duration(seconds: 1))),
                       if (!isMini && !isPip)
                         Positioned(
                             left: 0,
@@ -230,7 +261,7 @@ class PlayerControls extends StatelessWidget {
                                                 ? cubit.hideControls
                                                 : cubit.showControls,
                                         onDoubleTap: _.justDoubleTappedSkip ? null : cubit.doubleTapRewind,
-                                        child: DoubleTapButton(stepText: '-$rewindStep ${locals.secondsShortForm}', opacity: _.doubleTapRewindedOpacity, icon: Icons.fast_rewind))),
+                                        child: DoubleTapButton(stepText: '-$totalRewind ${locals.secondsShortForm}', opacity: _.doubleTapRewindedOpacity, icon: Icons.fast_rewind))),
                                 Expanded(
                                     child: GestureDetector(
                                         onTap: _.justDoubleTappedSkip
@@ -241,7 +272,7 @@ class PlayerControls extends StatelessWidget {
                                         behavior: HitTestBehavior.translucent,
                                         onDoubleTap: _.justDoubleTappedSkip ? null : cubit.doubleTapFastForward,
                                         child: DoubleTapButton(
-                                          stepText: '+$fastForwardStep ${locals.secondsShortForm}',
+                                          stepText: '+$totalFastForward ${locals.secondsShortForm}',
                                           opacity: _.doubleTapFastForwardedOpacity,
                                           icon: Icons.fast_forward,
                                         ))),

@@ -5,6 +5,7 @@ import 'package:invidious/player/models/mediaEvent.dart';
 import 'package:invidious/player/states/interfaces/media_player.dart';
 import 'package:logging/logging.dart';
 
+import '../../globals.dart';
 import '../../main.dart';
 import 'player.dart';
 
@@ -74,6 +75,11 @@ class PlayerControlsCubit extends Cubit<PlayerControlsState> {
       case MediaEventType.play:
         emit(state.copyWith());
         break;
+      case MediaEventType.sponsorSkipped:
+        emit(state.copyWith(showSponsorBlocked: true));
+        EasyDebounce.debounce('player-control-sponsor-blocked', (animationDuration * 2) + Duration(seconds: 1), () {
+          emit(state.copyWith(showSponsorBlocked: false));
+        });
       default:
         break;
     }
@@ -191,7 +197,8 @@ class PlayerControlsState {
   double doubleTapFastForwardedOpacity = 0;
   double doubleTapRewindedOpacity = 0;
   bool justDoubleTappedSkip = false;
+  bool showSponsorBlocked = false;
 
   PlayerControlsState._(this.buffering, this.justDoubleTappedSkip, this.position, this.displayControls, this.errored, this.duration, this.fullScreenState, this.muted, this.buffer,
-      this.draggingPositionSlider, this.doubleTapFastForwardedOpacity, this.doubleTapRewindedOpacity);
+      this.draggingPositionSlider, this.doubleTapFastForwardedOpacity, this.doubleTapRewindedOpacity, this.showSponsorBlocked);
 }
