@@ -178,6 +178,7 @@ class VideoFilterSetup extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: wholeWeek.map((e) {
                                 String day = getWeekdayName(e).substring(0, 1);
+                                bool selected =_.filter?.daysOfWeek.contains(e) ?? false;
                                 return GestureDetector(
                                   onTap: () => cubit.toggleDay(e),
                                   child: AnimatedContainer(
@@ -186,17 +187,17 @@ class VideoFilterSetup extends StatelessWidget {
                                     width: 30,
                                     height: 30,
                                     alignment: Alignment.center,
-                                    decoration: BoxDecoration(shape: BoxShape.circle, color: (_.filter?.daysOfWeek.contains(e) ?? false) ? colors.primaryContainer : colors.secondaryContainer),
+                                    decoration: BoxDecoration(shape: BoxShape.circle, color: selected ? colors.primary : colors.secondary),
                                     duration: animationDuration,
                                     curve: Curves.easeInOutQuad,
                                     child: Text(
                                       day,
-                                      style: textTheme.bodySmall,
+                                      style: textTheme.bodySmall?.copyWith(color: selected ? colors.onPrimary: colors.onSecondary),
                                     ),
                                   ),
                                 );
                               }).toList()),
-                          SizedBox(
+                          const SizedBox(
                             height: 4,
                           ),
                           Row(
