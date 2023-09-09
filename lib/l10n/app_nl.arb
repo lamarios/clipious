@@ -343,5 +343,234 @@
   "videoFilterOperation": "Handeling",
   "@videoFilterOperation": {
     "description": "Label for filter operation"
+  },
+  "appLogs": "App-logboek",
+  "@appLogs": {
+    "description": "Title for settings that leads to application logs"
+  },
+  "startUsingClipious": "Beginnen",
+  "@startUsingClipious": {
+    "description": "button label to start using the app"
+  },
+  "videoFilterTypeChannelName": "Kanaal­naam",
+  "@videoFilterTypeChannelName": {
+    "description": "Label for video filter channel name"
+  },
+  "videoFilterFilterLabel": "Obfusceren",
+  "@videoFilterFilterLabel": {
+    "description": "Label to filter videos"
+  },
+  "sponsorSkipped": "Sponsor overgeslagen",
+  "@sponsorSkipped": {
+    "description": "When a sponsor segment is skipped thanks to sponsor block"
+  },
+  "videoFilterTypeVideoTitle": "Videotitel",
+  "@videoFilterTypeVideoTitle": {
+    "description": "Label for video filter video title"
+  },
+  "from": "Van",
+  "@from": {
+    "description": "From word (as in 'From xx To xx')"
+  },
+  "addToQueueList": "Toevoegen aan wachtrij",
+  "@addToQueueList": {
+    "description": "Label on button to add a video to the queue list"
+  },
+  "videoIsFamilyFriendly": "Kindvriendelijk",
+  "@videoIsFamilyFriendly": {
+    "description": "Displayed only when a video is family friendly"
+  },
+  "tapToManage": "Druk om te beheren",
+  "@tapToManage": {
+    "description": "Text shown below a server in the 'Your servers' list"
+  },
+  "videoFilterOperationContains": "Bevat",
+  "@videoFilterOperationContains": {
+    "description": "Label for video filter operation Contains"
+  },
+  "selectBrowsingCountry": "Land voor inhoud",
+  "@selectBrowsingCountry": {
+    "description": "Select country for trending content"
+  },
+  "videoFilterAllChannels": "Alle kanalen",
+  "@videoFilterAllChannels": {
+    "description": "Title for the sections that applies to all channels"
+  },
+  "videoQueue": "Video­wachtrij",
+  "@videoQueue": {
+    "description": "Label for button to display the video queue"
+  },
+  "noChannels": "Geen kanalen",
+  "@noChannels": {
+    "description": "when there are no channels to display"
+  },
+  "invalidInvidiousServer": "Ongeldige Invidious-server",
+  "@invalidInvidiousServer": {
+    "description": "Error when the user tries to add a server that is not a proper or reachable invidious server"
+  },
+  "searchHistory": "Zoek­geschiedenis",
+  "@searchHistory": {
+    "description": "Settings label for search history"
+  },
+  "addVideoFilter": "Filter aanmaken",
+  "@addVideoFilter": {
+    "description": "Title when creating a new filter"
+  },
+  "videoDownloadAudioOnly": "Enkel audio",
+  "@videoDownloadAudioOnly": {
+    "description": "Label for toggle to download audio only "
+  },
+  "createNewPlaylist": "Afspeellijst aanmaken",
+  "@createNewPlaylist": {
+    "description": "Button label to create a new playlist when the user wants to add a video to a playlist"
+  },
+  "downloads": "Downloads",
+  "@downloads": {
+    "description": "Downloads"
+  },
+  "downloadsPlayAll": "Alles afspelen",
+  "@downloadsPlayAll": {
+    "description": "Button to play all downloaded videos"
+  },
+  "searchSortUploadDate": "Uploaddatum",
+  "@searchSortUploadDate": {
+    "description": "Sort search by upload date"
+  },
+  "useProxy": "Video's omleiden",
+  "@useProxy": {
+    "description": "label for settings switch to proxy videos from server"
+  },
+  "to": "Aan",
+  "@to": {
+    "description": "To word as in 'From xx To xx')"
+  },
+  "notLoggedIn": "Niet ingelogd",
+  "@notLoggedIn": {
+    "description": "Label when the user is not logged in to the server"
+  },
+  "sponsorBlockCategoryFiller": "Opvulling",
+  "@sponsorBlockCategoryFiller": {
+    "description": "Sponsorblock 'Filler' Category"
+  },
+  "noPlaylists": "Geen afspeellijsten",
+  "@noPlaylists": {
+    "description": "when there are no playlists to display"
+  },
+  "useDynamicTheme": "Dynamische kleuren",
+  "@useDynamicTheme": {
+    "description": ""
+  },
+  "unSubscribeQuestion": "Deabonneren?",
+  "@unSubscribeQuestion": {
+    "description": "Title for dialog if a user wants to unsubscribe in the subscribtion management screen"
+  },
+  "download": "Downloaden",
+  "@download": {
+    "description": "A single download or CTA for downloading a video"
+  },
+  "library": "Bibliotheek",
+  "@library": {
+    "description": "Name for user library"
+  },
+  "editVideoFilter": "Filter bewerken",
+  "@editVideoFilter": {
+    "description": "Title when editting a filter"
+  },
+  "videoFilterStartTime": "Starttijd",
+  "@videoFilterStartTime": {
+    "description": "Title for filter start time"
+  },
+  "yourServers": "Uw servers",
+  "@yourServers": {
+    "description": "Your servers label"
+  },
+  "videoPlayer": "Videospeler",
+  "@videoPlayer": {
+    "description": "Title for video player related options"
+  },
+  "followSystem": "Systeem volgen",
+  "@followSystem": {
+    "description": "Follow system label"
+  },
+  "currentServer": "{current} wordt gebruikt",
+  "@currentServer": {
+    "description": "Which server the user is currently using",
+    "placeholders": {
+      "current": {
+        "type": "String"
+      }
+    }
+  },
+  "shareLinkWithTimestamp": "Tijdstempel toevoegen",
+  "@shareLinkWithTimestamp": {
+    "description": "asking user to share link along with timestamp"
+  },
+  "channel": "Kanaal",
+  "@channel": {
+    "description": "A single channel"
+  },
+  "home": "Start",
+  "@home": {
+    "description": "Label for Home browsing tab"
+  },
+  "videoFilterOperationLowerThan": "Minder dan",
+  "@videoFilterOperationLowerThan": {
+    "description": "Label for video filter operation Lower than"
+  },
+  "history": "Geschiedenis",
+  "@history": {
+    "description": "User view history label"
+  },
+  "videoFilters": "Video­filters",
+  "@videoFilters": {
+    "description": "Title for video filter settings"
+  },
+  "videoFilterEndTime": "Eindtijd",
+  "@videoFilterEndTime": {
+    "description": "Title for filter end time"
+  },
+  "searchSortViewCount": "Weergaven",
+  "@searchSortViewCount": {
+    "description": "Sort search by view count"
+  },
+  "selectPlaylist": "Afspeellijst selecteren",
+  "@selectPlaylist": {
+    "description": "Title when users wants to add a video to a playlist"
+  },
+  "playNext": "Volgende afspelen",
+  "@playNext": {
+    "description": "Label to play the video after the current one."
+  },
+  "secondsShortForm": "sec",
+  "@secondsShortForm": {
+    "description": "Short form for the word seconds"
+  },
+  "playbackSpeed": "Afspeel­snelheid",
+  "@playbackSpeed": {
+    "description": "Name of TV ui Playback speed"
+  },
+  "loadingPublicServer": "Publieke servers laden",
+  "@loadingPublicServer": {
+    "description": "Message telling users the app is loading the list of public servers"
+  },
+  "manageSubscriptions": "Abonnementen beheren",
+  "@manageSubscriptions": {
+    "description": "Title of manage subscriptions page"
+  },
+  "publicServers": "Publieke servers",
+  "@publicServers": {
+    "description": "Public servers label"
+  },
+  "blackBackground": "Zwarte achtergrond",
+  "@blackBackground": {
+    "description": "Settings name for black background"
+  },
+  "manageServers": "Servers beheren",
+  "@manageServers": {
+    "description": "Settings to manage servers"
+  },
+  "videoFilterOperationHigherThan": "Meer dan",
+  "@videoFilterOperationHigherThan": {
+    "description": "Label for video filter operation Higher than"
   }
 }
