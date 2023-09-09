@@ -222,6 +222,7 @@ class VideoFilterSetup extends StatelessWidget {
                             )
                           ],
                         ),
+
                       ),
                       secondChild: const SizedBox.shrink(),
                       crossFadeState: cubit.showDateSettings ? CrossFadeState.showFirst : CrossFadeState.showSecond,
