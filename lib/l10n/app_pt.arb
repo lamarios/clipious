@@ -455,7 +455,7 @@
   "@sponsorBlockCategoryMusicOffTopicDescription": {
     "description": "Only for use in music videos. This only should be used for sections of music videos that aren't already covered by another category."
   },
-  "useProxy": "Proxy videos",
+  "useProxy": "Vídeos proxy",
   "@useProxy": {
     "description": "label for settings switch to proxy videos from server"
   },
@@ -952,5 +952,61 @@
   "history": "Histórico",
   "@history": {
     "description": "User view history label"
+  },
+  "from": "de",
+  "@from": {
+    "description": "From word (as in 'From xx To xx')"
+  },
+  "videoFilterApplyDateToFilter": "Filtrar vídeos para datas fornecidas",
+  "@videoFilterApplyDateToFilter": {
+    "description": "Label for switch to allow user to customize video filter and set days of week and time to them"
+  },
+  "to": "até",
+  "@to": {
+    "description": "To word as in 'From xx To xx')"
+  },
+  "videoFilterDayOfWeekDescription": "Você pode escolher, via seleção, dias da semana e horários para aplicar os filtros e, por exemplo, evitar spoilers de eventos esportivos.",
+  "@videoFilterDayOfWeekDescription": {
+    "description": ""
+  },
+  "videoFilterStartTime": "Horário inicial",
+  "@videoFilterStartTime": {
+    "description": "Title for filter start time"
+  },
+  "videoFilterTimeOfDayFromTo": "De {from} até {to}",
+  "@videoFilterTimeOfDayFromTo": {
+    "description": "Time of day range",
+    "placeholders": {
+      "from": {
+        "type": "String",
+        "example": "3:00 AM"
+      },
+      "to": {
+        "type": "String",
+        "example": "5:00 PM"
+      }
+    }
+  },
+  "videoFilterDayOfWeek": "Selecionar dias para aplicar filtros",
+  "@videoFilterDayOfWeek": {
+    "description": "Title for day selection for the filter"
+  },
+  "videoFilterEndTime": "Horário final",
+  "@videoFilterEndTime": {
+    "description": "Title for filter end time"
+  },
+  "secondsShortForm": "segs",
+  "@secondsShortForm": {
+    "description": "Short form for the word seconds"
+  },
+  "videoFilterAppliedOn": "Aplicado em {selectedDays}",
+  "@videoFilterAppliedOn": {
+    "description": "Readable text on when the filter should apply",
+    "placeholders": {
+      "selectedDays": {
+        "type": "String",
+        "example": "Monday, Wednesday, Friday"
+      }
+    }
   }
 }
