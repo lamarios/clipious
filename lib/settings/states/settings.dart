@@ -2,7 +2,9 @@ import 'package:bloc/bloc.dart';
 import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:invidious/app/states/app.dart';
+import 'package:invidious/background_service.dart';
 import 'package:locale_names/locale_names.dart';
 import 'package:logging/logging.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -294,7 +296,10 @@ class SettingsCubit extends Cubit<SettingsState> {
 
   String? getLocaleDisplayName() {
     List<String>? localeString = state.locale?.split('_');
-    Locale? l = localeString != null ? Locale.fromSubtags(languageCode: localeString[0], scriptCode: localeString.length >= 2 ? localeString[1] : null) : null;
+    Locale? l = localeString != null
+        ? Locale.fromSubtags(
+            languageCode: localeString[0], scriptCode: localeString.length >= 2 ? localeString[1] : null)
+        : null;
 
     return l?.nativeDisplayLanguageScript;
   }
@@ -308,6 +313,27 @@ class SettingsCubit extends Cubit<SettingsState> {
   setNavigationBarLabelBehavior(NavigationDestinationLabelBehavior behavior) {
     var state = this.state.copyWith();
     state.navigationBarLabelBehavior = behavior;
+    emit(state);
+  }
+
+  setBackgroundNotifications(bool b) {
+    var state = this.state.copyWith();
+    state.backgroundNotifications = b;
+    if (!b) {
+      backgroundService.invoke('stopService');
+    } else {
+      backgroundService.startService();
+      FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+      flutterLocalNotificationsPlugin
+          .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
+          ?.requestPermission();
+    }
+    emit(state);
+  }
+
+  setSubscriptionsNotifications(bool b) async {
+    var state = this.state.copyWith();
+    state.subscriptionsNotifications = b;
     emit(state);
   }
 }
@@ -408,7 +434,8 @@ class SettingsState {
 
   set forceLandscapeFullScreen(bool b) => _set(LOCK_ORIENTATION_FULLSCREEN, b);
 
-  ThemeMode get themeMode => ThemeMode.values.firstWhere((element) => element.name == _get(THEME_MODE)?.value, orElse: () => ThemeMode.system);
+  ThemeMode get themeMode =>
+      ThemeMode.values.firstWhere((element) => element.name == _get(THEME_MODE)?.value, orElse: () => ThemeMode.system);
 
   set themeMode(ThemeMode t) => _set(THEME_MODE, t.name);
 
@@ -416,23 +443,34 @@ class SettingsState {
 
   set useSearchHistory(bool b) => _set(USE_SEARCH_HISTORY, b);
 
-  List<HomeDataSource> get appLayout =>
-      (_get(APP_LAYOUT)?.value ?? '${HomeDataSource.home.name},${HomeDataSource.subscription.name},${HomeDataSource.playlist.name},${HomeDataSource.history.name}')
-          .split(',')
-          .where((element) => element.isNotEmpty)
-          .map((e) => HomeDataSource.values.firstWhere((element) => element.name == e))
-          .toList();
+  List<HomeDataSource> get appLayout => (_get(APP_LAYOUT)?.value ??
+          '${HomeDataSource.home.name},${HomeDataSource.subscription.name},${HomeDataSource.playlist.name},${HomeDataSource.history.name}')
+      .split(',')
+      .where((element) => element.isNotEmpty)
+      .map((e) => HomeDataSource.values.firstWhere((element) => element.name == e))
+      .toList();
 
   set appLayout(List<HomeDataSource> layout) => _set(APP_LAYOUT, layout.map((e) => e.name).join(","));
 
   NavigationDestinationLabelBehavior get navigationBarLabelBehavior =>
-      NavigationDestinationLabelBehavior.values.firstWhere((e) => e.name == (_get(NAVIGATION_BAR_LABEL_BEHAVIOR)?.value ?? NavigationDestinationLabelBehavior.onlyShowSelected.name));
+      NavigationDestinationLabelBehavior.values.firstWhere((e) =>
+          e.name ==
+          (_get(NAVIGATION_BAR_LABEL_BEHAVIOR)?.value ?? NavigationDestinationLabelBehavior.onlyShowSelected.name));
 
-  set navigationBarLabelBehavior(NavigationDestinationLabelBehavior behavior) => _set(NAVIGATION_BAR_LABEL_BEHAVIOR, behavior.name);
+  set navigationBarLabelBehavior(NavigationDestinationLabelBehavior behavior) =>
+      _set(NAVIGATION_BAR_LABEL_BEHAVIOR, behavior.name);
 
   bool get distractionFreeMode => _get(DISTRACTION_FREE_MODE)?.value == "true";
 
   set distractionFreeMode(bool b) => _set(DISTRACTION_FREE_MODE, b);
+
+  bool get backgroundNotifications => _get(BACKGROUND_NOTIFICATIONS)?.value == 'true';
+
+  set backgroundNotifications(bool b) => _set(BACKGROUND_NOTIFICATIONS, b);
+
+  bool get subscriptionsNotifications => _get(SUBSCRIPTION_NOTIFICATIONS)?.value == 'true';
+
+  set subscriptionsNotifications(bool b) => _set(SUBSCRIPTION_NOTIFICATIONS, b);
 
   void _set<T>(String name, T value) {
     if (value == null) {

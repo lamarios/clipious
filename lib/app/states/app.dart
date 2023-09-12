@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:logging/logging.dart';
 import 'package:receive_sharing_intent/receive_sharing_intent.dart';
 
@@ -16,6 +17,7 @@ import '../../videos/views/screens/video.dart';
 part 'app.g.dart';
 
 final log = Logger('HomeState');
+
 
 class AppCubit extends Cubit<AppState> {
   AppCubit(super.initialState) {
@@ -51,7 +53,9 @@ class AppCubit extends Cubit<AppState> {
     try {
       Uri uri = Uri.parse(url);
       if (YOUTUBE_HOSTS.contains(uri.host)) {
-        if (uri.pathSegments.length == 1 && uri.pathSegments.contains("watch") && uri.queryParameters.containsKey('v')) {
+        if (uri.pathSegments.length == 1 &&
+            uri.pathSegments.contains("watch") &&
+            uri.queryParameters.containsKey('v')) {
           String videoId = uri.queryParameters['v']!;
           navigatorKey.currentState?.push(MaterialPageRoute(
               builder: (context) => VideoView(
@@ -88,7 +92,10 @@ class AppCubit extends Cubit<AppState> {
     emit(state.copyWith(homeLayout: db.getHomeLayout()));
   }
 
-  bool get isLoggedIn => (state.server?.authToken?.isNotEmpty ?? false) || (state.server?.sidCookie?.isNotEmpty ?? false);
+  bool get isLoggedIn =>
+      (state.server?.authToken?.isNotEmpty ?? false) || (state.server?.sidCookie?.isNotEmpty ?? false);
+
+  void onDidReceiveNotificationResponse(NotificationResponse details) {}
 }
 
 @CopyWith(constructor: "_")

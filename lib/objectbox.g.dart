@@ -16,6 +16,7 @@ import 'package:objectbox_flutter_libs/objectbox_flutter_libs.dart';
 
 import 'downloads/models/downloaded_video.dart';
 import 'home/models/db/home_layout.dart';
+import 'notifications/models/db/subscription_notifications.dart';
 import 'search/models/db/searchHistoryItem.dart';
 import 'settings/models/db/app_logs.dart';
 import 'settings/models/db/server.dart';
@@ -361,6 +362,30 @@ final _entities = <ModelEntity>[
             flags: 0)
       ],
       relations: <ModelRelation>[],
+      backlinks: <ModelBacklink>[]),
+  ModelEntity(
+      id: const IdUid(11, 3657792956132207980),
+      name: 'SubscriptionNotification',
+      lastPropertyId: const IdUid(3, 1941341505549292694),
+      flags: 0,
+      properties: <ModelProperty>[
+        ModelProperty(
+            id: const IdUid(1, 2430225471686599517),
+            name: 'id',
+            type: 6,
+            flags: 1),
+        ModelProperty(
+            id: const IdUid(2, 2835271477274198093),
+            name: 'lastSeenVideoId',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(3, 1941341505549292694),
+            name: 'timestamp',
+            type: 6,
+            flags: 0)
+      ],
+      relations: <ModelRelation>[],
       backlinks: <ModelBacklink>[])
 ];
 
@@ -391,7 +416,7 @@ Future<Store> openStore(
 ModelDefinition getObjectBoxModel() {
   final model = ModelInfo(
       entities: _entities,
-      lastEntityId: const IdUid(10, 6821162325360407377),
+      lastEntityId: const IdUid(11, 3657792956132207980),
       lastIndexId: const IdUid(5, 7262786699272501249),
       lastRelationId: const IdUid(0, 0),
       lastSequenceId: const IdUid(0, 0),
@@ -806,6 +831,37 @@ ModelDefinition getObjectBoxModel() {
                 .vTableGet(buffer, rootOffset, 10, []);
 
           return object;
+        }),
+    SubscriptionNotification: EntityDefinition<SubscriptionNotification>(
+        model: _entities[9],
+        toOneRelations: (SubscriptionNotification object) => [],
+        toManyRelations: (SubscriptionNotification object) => {},
+        getId: (SubscriptionNotification object) => object.id,
+        setId: (SubscriptionNotification object, int id) {
+          object.id = id;
+        },
+        objectToFB: (SubscriptionNotification object, fb.Builder fbb) {
+          final lastSeenVideoIdOffset = fbb.writeString(object.lastSeenVideoId);
+          fbb.startTable(4);
+          fbb.addInt64(0, object.id);
+          fbb.addOffset(1, lastSeenVideoIdOffset);
+          fbb.addInt64(2, object.timestamp);
+          fbb.finish(fbb.endTable());
+          return object.id;
+        },
+        objectFromFB: (Store store, ByteData fbData) {
+          final buffer = fb.BufferContext(fbData);
+          final rootOffset = buffer.derefObject(0);
+          final lastSeenVideoIdParam =
+              const fb.StringReader(asciiOptimization: true)
+                  .vTableGet(buffer, rootOffset, 6, '');
+          final timestampParam =
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 8, 0);
+          final object = SubscriptionNotification(
+              lastSeenVideoIdParam, timestampParam)
+            ..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
+
+          return object;
         })
   };
 
@@ -1029,4 +1085,19 @@ class HomeLayout_ {
   /// see [HomeLayout.dbSmallSources]
   static final dbSmallSources =
       QueryStringVectorProperty<HomeLayout>(_entities[8].properties[3]);
+}
+
+/// [SubscriptionNotification] entity fields to define ObjectBox queries.
+class SubscriptionNotification_ {
+  /// see [SubscriptionNotification.id]
+  static final id = QueryIntegerProperty<SubscriptionNotification>(
+      _entities[9].properties[0]);
+
+  /// see [SubscriptionNotification.lastSeenVideoId]
+  static final lastSeenVideoId =
+      QueryStringProperty<SubscriptionNotification>(_entities[9].properties[1]);
+
+  /// see [SubscriptionNotification.timestamp]
+  static final timestamp = QueryIntegerProperty<SubscriptionNotification>(
+      _entities[9].properties[2]);
 }

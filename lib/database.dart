@@ -1,5 +1,10 @@
+import 'dart:io';
+import 'dart:ui';
+
 import 'package:easy_debounce/easy_debounce.dart';
+import 'package:invidious/background_service.dart';
 import 'package:invidious/home/models/db/home_layout.dart';
+import 'package:invidious/notifications/models/db/subscription_notifications.dart';
 import 'package:invidious/search/models/db/searchHistoryItem.dart';
 import 'package:invidious/settings/models/db/settings.dart';
 import 'package:invidious/settings/models/errors/noServerSelected.dart';
@@ -45,6 +50,8 @@ const FILL_FULLSCREEN = 'fill-fullscreen';
 const APP_LAYOUT = 'app-layout';
 const NAVIGATION_BAR_LABEL_BEHAVIOR = 'navigation-bar-label-behavior';
 const DISTRACTION_FREE_MODE = 'distraction-free-mode';
+const BACKGROUND_NOTIFICATIONS = 'background-notifications';
+const SUBSCRIPTION_NOTIFICATIONS = 'subscriptions-notifications';
 
 const ON_OPEN = "on-open";
 
@@ -57,12 +64,25 @@ class DbClient {
 
   DbClient._create(this.store) {}
 
+
   /// Create an instance of ObjectBox to use throughout the app.
   static Future<DbClient> create() async {
     final docsDir = await getApplicationDocumentsDirectory();
     // Future<Store> openStore() {...} is defined in the generated objectbox.g.dart
-    final store = await openStore(directory: p.join(docsDir.path, "impuc-data"));
+    var dbPath = p.join(docsDir.path, "impuc-data");
+    Store? store;
+    if(Store.isOpen(dbPath)){
+      store = Store.attach(getObjectBoxModel(), dbPath);
+    }else {
+      store = await openStore(directory: dbPath);
+    }
     return DbClient._create(store);
+  }
+
+  bool get isClosed => store.isClosed();
+
+  close() {
+    store.close();
   }
 
   Server? getServer(String url) {
@@ -130,7 +150,8 @@ class DbClient {
 
   bool isLoggedInToCurrentServer() {
     var currentlySelectedServer = getCurrentlySelectedServer();
-    return (currentlySelectedServer.authToken?.isNotEmpty ?? false) || (currentlySelectedServer.sidCookie?.isNotEmpty ?? false);
+    return (currentlySelectedServer.authToken?.isNotEmpty ?? false) ||
+        (currentlySelectedServer.sidCookie?.isNotEmpty ?? false);
   }
 
   double getVideoProgress(String videoId) {
@@ -159,7 +180,9 @@ class DbClient {
   }
 
   List<SearchHistoryItem> _getSearchHistory() {
-    return (store.box<SearchHistoryItem>().query()..order(SearchHistoryItem_.time, flags: Order.descending)).build().find();
+    return (store.box<SearchHistoryItem>().query()..order(SearchHistoryItem_.time, flags: Order.descending))
+        .build()
+        .find();
   }
 
   void addToSearchHistory(SearchHistoryItem searchHistoryItem) {
@@ -246,5 +269,14 @@ class DbClient {
   HomeLayout getHomeLayout() {
     var all = store.box<HomeLayout>().getAll();
     return all.firstOrNull ?? HomeLayout();
+  }
+
+  SubscriptionNotification? getLastSubscriptionNotification() {
+    return store.box<SubscriptionNotification>().getAll().lastOrNull;
+  }
+
+  void setLastSubscriptionNotification(SubscriptionNotification sub) {
+    store.box<SubscriptionNotification>().removeAll();
+    store.box<SubscriptionNotification>().put(sub);
   }
 }

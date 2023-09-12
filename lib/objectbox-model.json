@@ -341,9 +341,33 @@
         }
       ],
       "relations": []
+    },
+    {
+      "id": "11:3657792956132207980",
+      "lastPropertyId": "3:1941341505549292694",
+      "name": "SubscriptionNotification",
+      "properties": [
+        {
+          "id": "1:2430225471686599517",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:2835271477274198093",
+          "name": "lastSeenVideoId",
+          "type": 9
+        },
+        {
+          "id": "3:1941341505549292694",
+          "name": "timestamp",
+          "type": 6
+        }
+      ],
+      "relations": []
     }
   ],
-  "lastEntityId": "10:6821162325360407377",
+  "lastEntityId": "11:3657792956132207980",
   "lastIndexId": "5:7262786699272501249",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",

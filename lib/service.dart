@@ -249,6 +249,8 @@ class Service {
   }
 
   Future<UserFeed> getUserFeed({int? maxResults, int? page}) async {
+
+    // for background service to be able to use
     var currentlySelectedServer = db.getCurrentlySelectedServer();
 
     Uri uri = buildUrl(urlGetUserFeed, query: {'max_results': maxResults?.toString(), 'page': page?.toString()});
