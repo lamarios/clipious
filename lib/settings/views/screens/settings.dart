@@ -139,7 +139,7 @@ class Settings extends StatelessWidget {
                   ),
                   SettingsTile.navigation(
                     leading: const Icon(Icons.notifications),
-                    title: Text(locals.notifications),
+                    title: Text('${locals.notifications} (beta)'),
                     description: Text(locals.notificationsDescription),
                     onPressed: openNotificationSettings,
                   ),
