@@ -7,6 +7,7 @@ import 'package:invidious/app/states/app.dart';
 import 'package:invidious/background_service.dart';
 import 'package:locale_names/locale_names.dart';
 import 'package:logging/logging.dart';
+import 'package:optimize_battery/optimize_battery.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 import '../../database.dart';
@@ -21,6 +22,11 @@ part 'settings.g.dart';
 
 const String subtitleDefaultSize = '14';
 const String searchHistoryDefaultLength = '12';
+
+enum EnableBackGroundNotificationResponse {
+  ok,
+  needBatteryOptimization;
+}
 
 var log = Logger('SettingsController');
 
@@ -316,19 +322,31 @@ class SettingsCubit extends Cubit<SettingsState> {
     emit(state);
   }
 
-  setBackgroundNotifications(bool b) {
-    var state = this.state.copyWith();
-    state.backgroundNotifications = b;
+  Future<EnableBackGroundNotificationResponse> setBackgroundNotifications(bool b) async {
     if (!b) {
+      var state = this.state.copyWith();
+      state.backgroundNotifications = b;
       backgroundService.invoke('stopService');
+      emit(state);
     } else {
-      backgroundService.startService();
       FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
       flutterLocalNotificationsPlugin
           .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
           ?.requestPermission();
+
+      var ignoringBatterOptimization = await OptimizeBattery.isIgnoringBatteryOptimizations();
+      if (!ignoringBatterOptimization) {
+        return EnableBackGroundNotificationResponse.needBatteryOptimization;
+      } else {
+        var state = this.state.copyWith();
+        state.backgroundNotifications = b;
+        backgroundService.startService();
+        emit(state);
+        return EnableBackGroundNotificationResponse.ok;
+      }
     }
-    emit(state);
+
+    return EnableBackGroundNotificationResponse.ok;
   }
 
   setSubscriptionsNotifications(bool b) async {

@@ -365,10 +365,46 @@
         }
       ],
       "relations": []
+    },
+    {
+      "id": "12:2070539588161609146",
+      "lastPropertyId": "5:2886321232475223602",
+      "name": "ChannelNotification",
+      "properties": [
+        {
+          "id": "1:8845605462686818448",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:2512902621149037266",
+          "name": "channelId",
+          "type": 9,
+          "flags": 34848,
+          "indexId": "6:1543728882665646543"
+        },
+        {
+          "id": "3:1308895344490646098",
+          "name": "lastSeenVideoId",
+          "type": 9
+        },
+        {
+          "id": "4:4272759280615528314",
+          "name": "timestamp",
+          "type": 6
+        },
+        {
+          "id": "5:2886321232475223602",
+          "name": "channelName",
+          "type": 9
+        }
+      ],
+      "relations": []
     }
   ],
-  "lastEntityId": "11:3657792956132207980",
-  "lastIndexId": "5:7262786699272501249",
+  "lastEntityId": "12:2070539588161609146",
+  "lastIndexId": "6:1543728882665646543",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",
   "modelVersion": 5,

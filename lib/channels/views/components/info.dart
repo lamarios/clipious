@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:invidious/channels/models/channel.dart';
+import 'package:invidious/notifications/views/components/bell_icon.dart';
 import 'package:invidious/utils.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -31,6 +32,7 @@ class ChannelInfo extends StatelessWidget {
         child: Row(
           children: [
             SubscribeButton(channelId: channel.authorId, subCount: compactCurrency.format(channel.subCount)),
+            BellIcon(channelId: channel.authorId)
           ],
         ),
       ),
@@ -60,7 +62,8 @@ class ChannelInfo extends StatelessWidget {
         mainAxisSpacing: 5,
         childAspectRatio: getGridAspectRatio(context),
         children: channel.latestVideos?.map((e) {
-              VideoInList videoInList = VideoInList(e.title, e.videoId, e.lengthSeconds, 0, e.author, channel.authorId, channel.authorId, 0, '', e.videoThumbnails);
+              VideoInList videoInList = VideoInList(e.title, e.videoId, e.lengthSeconds, 0, e.author, channel.authorId,
+                  channel.authorId, 0, '', e.videoThumbnails);
               videoInList.filtered = e.filtered;
               videoInList.matchedFilters = e.matchedFilters;
               return VideoListItem(
@@ -87,7 +90,9 @@ class ChannelInfo extends StatelessWidget {
             padding: const EdgeInsets.only(top: 200, left: 16, right: 16),
             decoration: BoxDecoration(
                 gradient: LinearGradient(
-                    begin: Alignment(0, Alignment.topCenter.y + 0.033), end: Alignment(0, Alignment.topCenter.y + 0.045), colors: [colors.background.withOpacity(0), colors.background])),
+                    begin: Alignment(0, Alignment.topCenter.y + 0.033),
+                    end: Alignment(0, Alignment.topCenter.y + 0.045),
+                    colors: [colors.background.withOpacity(0), colors.background])),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: widgets,

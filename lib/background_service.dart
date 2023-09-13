@@ -49,7 +49,7 @@ onStart(ServiceInstance service) async {
   });
 
   Timer.periodic(const Duration(seconds: 10), (timer) {
-    print('test');
+    print('back ground service running');
     _backgroundCheck();
   });
 }
@@ -59,6 +59,7 @@ _backgroundCheck() async {
     db = await DbClient.create();
     print('we have a db ${db.isClosed}');
     await _handleSubscriptionsNotifications();
+    await _handleChannelNotifications();
   } catch (e) {
     if (e is StateError) {
       print('app is likely running, we don\'t do anything: ${e.message}, global client ? ${db.isClosed}');
@@ -82,16 +83,56 @@ Future<AppLocalizations> getLocalization() async {
   return await AppLocalizations.delegate.load(locale);
 }
 
+_handleChannelNotifications() async {
+  var notifs = db.getAllChannelNotifications();
+
+  print('Watching ${notifs.length} channels');
+  for (var n in notifs) {
+    // we get the latest video,
+    var videos = await service.getChannelVideos(n.channelId, null);
+
+    if ((videos.videos ?? []).isNotEmpty) {
+      if (n.lastSeenVideoId.isNotEmpty) {
+        // if in list, we calculate
+        int videosToNotifyAbout = 0;
+
+        int index = videos.videos.indexWhere((element) => element.videoId == n.lastSeenVideoId);
+
+        if (index >= 0) {
+          videosToNotifyAbout = index;
+        } else {
+          videosToNotifyAbout = videos.videos.length;
+        }
+
+        // if not we tell that list.size+ new videos are available
+        var locals = await getLocalization();
+
+        print('$videosToNotifyAbout videos from channel ${n.channelName} to notify about');
+        if (videosToNotifyAbout >= 0) {
+          sendNotification(locals.channelNotificationTitle(n.channelName),
+              locals.channelNotificationContent(n.channelName, videosToNotifyAbout),
+              type: NotificationTypes.channelNotification, payload: n.channelId, id: n.id);
+        }
+      }
+
+      n.lastSeenVideoId = videos.videos.first.videoId;
+      n.timestamp = DateTime.now().millisecondsSinceEpoch;
+      db.upsertChannelNotification(n);
+    }
+  }
+}
+
 _handleSubscriptionsNotifications() async {
   bool isEnabled = db.getSettings(SUBSCRIPTION_NOTIFICATIONS)?.value == 'true';
   if (isEnabled) {
+    // we need to get the last notification before we call the feed endpoint as it is going to save the last seen video
     final lastNotification = db.getLastSubscriptionNotification();
     print('getting feed...');
     var feed = await service.getUserFeed(maxResults: 100);
 
     List<VideoInList> videos = [];
-    videos.addAll(feed.videos ?? []);
     videos.addAll(feed.notifications ?? []);
+    videos.addAll(feed.videos ?? []);
 
     print('we have a feed with ${videos.length} videos');
 
@@ -108,7 +149,7 @@ _handleSubscriptionsNotifications() async {
         if (index == -1) {
           videosToNotifyAbout = videos.length;
         } else {
-          videosToNotifyAbout = videos.length - 1 - index;
+          videosToNotifyAbout = index;
         }
 
         var locals = await getLocalization();

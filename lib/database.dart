@@ -4,6 +4,7 @@ import 'dart:ui';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:invidious/background_service.dart';
 import 'package:invidious/home/models/db/home_layout.dart';
+import 'package:invidious/notifications/models/db/channel_notifications.dart';
 import 'package:invidious/notifications/models/db/subscription_notifications.dart';
 import 'package:invidious/search/models/db/searchHistoryItem.dart';
 import 'package:invidious/settings/models/db/settings.dart';
@@ -64,16 +65,15 @@ class DbClient {
 
   DbClient._create(this.store) {}
 
-
   /// Create an instance of ObjectBox to use throughout the app.
   static Future<DbClient> create() async {
     final docsDir = await getApplicationDocumentsDirectory();
     // Future<Store> openStore() {...} is defined in the generated objectbox.g.dart
     var dbPath = p.join(docsDir.path, "impuc-data");
     Store? store;
-    if(Store.isOpen(dbPath)){
+    if (Store.isOpen(dbPath)) {
       store = Store.attach(getObjectBoxModel(), dbPath);
-    }else {
+    } else {
       store = await openStore(directory: dbPath);
     }
     return DbClient._create(store);
@@ -278,5 +278,21 @@ class DbClient {
   void setLastSubscriptionNotification(SubscriptionNotification sub) {
     store.box<SubscriptionNotification>().removeAll();
     store.box<SubscriptionNotification>().put(sub);
+  }
+
+  ChannelNotification? getChannelNotification(String channelId) {
+    return store.box<ChannelNotification>().query(ChannelNotification_.channelId.equals(channelId)).build().findFirst();
+  }
+
+  List<ChannelNotification> getAllChannelNotifications() {
+    return store.box<ChannelNotification>().getAll();
+  }
+
+  void deleteChannelNotification(ChannelNotification notif) {
+    store.box<ChannelNotification>().remove(notif.id);
+  }
+
+  void upsertChannelNotification(ChannelNotification notif) {
+    store.box<ChannelNotification>().put(notif);
   }
 }

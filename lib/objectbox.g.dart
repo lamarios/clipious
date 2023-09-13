@@ -16,6 +16,7 @@ import 'package:objectbox_flutter_libs/objectbox_flutter_libs.dart';
 
 import 'downloads/models/downloaded_video.dart';
 import 'home/models/db/home_layout.dart';
+import 'notifications/models/db/channel_notifications.dart';
 import 'notifications/models/db/subscription_notifications.dart';
 import 'search/models/db/searchHistoryItem.dart';
 import 'settings/models/db/app_logs.dart';
@@ -386,6 +387,41 @@ final _entities = <ModelEntity>[
             flags: 0)
       ],
       relations: <ModelRelation>[],
+      backlinks: <ModelBacklink>[]),
+  ModelEntity(
+      id: const IdUid(12, 2070539588161609146),
+      name: 'ChannelNotification',
+      lastPropertyId: const IdUid(5, 2886321232475223602),
+      flags: 0,
+      properties: <ModelProperty>[
+        ModelProperty(
+            id: const IdUid(1, 8845605462686818448),
+            name: 'id',
+            type: 6,
+            flags: 1),
+        ModelProperty(
+            id: const IdUid(2, 2512902621149037266),
+            name: 'channelId',
+            type: 9,
+            flags: 34848,
+            indexId: const IdUid(6, 1543728882665646543)),
+        ModelProperty(
+            id: const IdUid(3, 1308895344490646098),
+            name: 'lastSeenVideoId',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(4, 4272759280615528314),
+            name: 'timestamp',
+            type: 6,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(5, 2886321232475223602),
+            name: 'channelName',
+            type: 9,
+            flags: 0)
+      ],
+      relations: <ModelRelation>[],
       backlinks: <ModelBacklink>[])
 ];
 
@@ -416,8 +452,8 @@ Future<Store> openStore(
 ModelDefinition getObjectBoxModel() {
   final model = ModelInfo(
       entities: _entities,
-      lastEntityId: const IdUid(11, 3657792956132207980),
-      lastIndexId: const IdUid(5, 7262786699272501249),
+      lastEntityId: const IdUid(12, 2070539588161609146),
+      lastIndexId: const IdUid(6, 1543728882665646543),
       lastRelationId: const IdUid(0, 0),
       lastSequenceId: const IdUid(0, 0),
       retiredEntityUids: const [6897417709810972885],
@@ -862,6 +898,46 @@ ModelDefinition getObjectBoxModel() {
             ..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
 
           return object;
+        }),
+    ChannelNotification: EntityDefinition<ChannelNotification>(
+        model: _entities[10],
+        toOneRelations: (ChannelNotification object) => [],
+        toManyRelations: (ChannelNotification object) => {},
+        getId: (ChannelNotification object) => object.id,
+        setId: (ChannelNotification object, int id) {
+          object.id = id;
+        },
+        objectToFB: (ChannelNotification object, fb.Builder fbb) {
+          final channelIdOffset = fbb.writeString(object.channelId);
+          final lastSeenVideoIdOffset = fbb.writeString(object.lastSeenVideoId);
+          final channelNameOffset = fbb.writeString(object.channelName);
+          fbb.startTable(6);
+          fbb.addInt64(0, object.id);
+          fbb.addOffset(1, channelIdOffset);
+          fbb.addOffset(2, lastSeenVideoIdOffset);
+          fbb.addInt64(3, object.timestamp);
+          fbb.addOffset(4, channelNameOffset);
+          fbb.finish(fbb.endTable());
+          return object.id;
+        },
+        objectFromFB: (Store store, ByteData fbData) {
+          final buffer = fb.BufferContext(fbData);
+          final rootOffset = buffer.derefObject(0);
+          final channelIdParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 6, '');
+          final channelNameParam =
+              const fb.StringReader(asciiOptimization: true)
+                  .vTableGet(buffer, rootOffset, 12, '');
+          final lastSeenVideoIdParam =
+              const fb.StringReader(asciiOptimization: true)
+                  .vTableGet(buffer, rootOffset, 8, '');
+          final timestampParam =
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 10, 0);
+          final object = ChannelNotification(channelIdParam, channelNameParam,
+              lastSeenVideoIdParam, timestampParam)
+            ..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
+
+          return object;
         })
   };
 
@@ -1100,4 +1176,27 @@ class SubscriptionNotification_ {
   /// see [SubscriptionNotification.timestamp]
   static final timestamp = QueryIntegerProperty<SubscriptionNotification>(
       _entities[9].properties[2]);
+}
+
+/// [ChannelNotification] entity fields to define ObjectBox queries.
+class ChannelNotification_ {
+  /// see [ChannelNotification.id]
+  static final id =
+      QueryIntegerProperty<ChannelNotification>(_entities[10].properties[0]);
+
+  /// see [ChannelNotification.channelId]
+  static final channelId =
+      QueryStringProperty<ChannelNotification>(_entities[10].properties[1]);
+
+  /// see [ChannelNotification.lastSeenVideoId]
+  static final lastSeenVideoId =
+      QueryStringProperty<ChannelNotification>(_entities[10].properties[2]);
+
+  /// see [ChannelNotification.timestamp]
+  static final timestamp =
+      QueryIntegerProperty<ChannelNotification>(_entities[10].properties[3]);
+
+  /// see [ChannelNotification.channelName]
+  static final channelName =
+      QueryStringProperty<ChannelNotification>(_entities[10].properties[4]);
 }
