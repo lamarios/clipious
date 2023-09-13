@@ -32,7 +32,6 @@ class ChannelInfo extends StatelessWidget {
         child: Row(
           children: [
             SubscribeButton(channelId: channel.authorId, subCount: compactCurrency.format(channel.subCount)),
-            BellIcon(channelId: channel.authorId)
           ],
         ),
       ),

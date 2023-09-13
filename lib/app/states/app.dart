@@ -11,13 +11,13 @@ import '../../database.dart';
 import '../../globals.dart';
 import '../../home/models/db/home_layout.dart';
 import '../../main.dart';
+import '../../notifications/notifications.dart';
 import '../../settings/models/db/server.dart';
 import '../../videos/views/screens/video.dart';
 
 part 'app.g.dart';
 
 final log = Logger('HomeState');
-
 
 class AppCubit extends Cubit<AppState> {
   AppCubit(super.initialState) {
@@ -41,6 +41,9 @@ class AppCubit extends Cubit<AppState> {
       selectedIndex = 0;
     }
     selectIndex(selectedIndex);
+
+    
+    onNotificationAppLaunch();
   }
 
   @override

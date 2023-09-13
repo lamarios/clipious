@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:invidious/globals.dart';
 import 'package:invidious/settings/states/settings.dart';
 import 'package:invidious/settings/views/components/channel_notifications.dart';
 import 'package:invidious/settings/views/screens/settings.dart';
@@ -15,7 +17,7 @@ class NotificationSettings extends StatelessWidget {
     var settings = context.read<SettingsCubit>();
     var result = await settings.setBackgroundNotifications(enable);
     if (result == EnableBackGroundNotificationResponse.needBatteryOptimization && context.mounted) {
-          showBatteryOptimizationDialog(context);
+      showBatteryOptimizationDialog(context);
     }
   }
 
@@ -62,16 +64,22 @@ class NotificationSettings extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(height: 8,),
-              Text(locals.otherNotifications),
-              TabBar(tabs: [
-                Tab(icon: const Icon(Icons.people), text: locals.channels),
-                Tab(icon: const Icon(Icons.playlist_play), text: locals.playlists)
-              ]),
-              const Expanded(child: TabBarView(children: [
-                ChannelNotificationList(),
-                Text('yo')
-              ],))
+              Expanded(
+                child: Column(children: [
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  Text(locals.otherNotifications),
+                  TabBar(tabs: [
+                    Tab(icon: const Icon(Icons.people), text: locals.channels),
+                    Tab(icon: const Icon(Icons.playlist_play), text: locals.playlists)
+                  ]),
+                  const Expanded(
+                      child: TabBarView(
+                    children: [ChannelNotificationList(), Text('yo')],
+                  ))
+                ]),
+              )
             ],
           ),
         );

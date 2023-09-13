@@ -27,8 +27,11 @@ import 'package:invidious/player/views/components/mini_player_aware.dart';
 import 'package:invidious/player/views/components/player.dart';
 import 'package:invidious/search/views/screens/search.dart';
 import 'package:invidious/settings/states/settings.dart';
+import 'package:invidious/settings/views/screens/appearance.dart';
+import 'package:invidious/settings/views/screens/browsing.dart';
 import 'package:invidious/settings/views/screens/notifications.dart';
 import 'package:invidious/settings/views/screens/settings.dart';
+import 'package:invidious/settings/views/screens/video_player.dart';
 import 'package:invidious/subscription_management/view/screens/manage_subscriptions.dart';
 import 'package:invidious/utils.dart';
 import 'package:invidious/utils/views/components/app_icon.dart';
@@ -259,6 +262,15 @@ class MyApp extends StatelessWidget {
                                         return MaterialPageRoute(
                                             builder: (context) => const NotificationSettings(),
                                             settings: ROUTE_SETTINGS);
+                                      case pathSettingsBrowsing:
+                                        return MaterialPageRoute(
+                                            builder: (context) => const BrowsingSettings(), settings: ROUTE_SETTINGS);
+                                      case pathSettingsVideoPlayer:
+                                        return MaterialPageRoute(
+                                            builder: (context) => const VideoPlayerSettings(), settings: ROUTE_SETTINGS);
+                                      case pathSettingsAppearance:
+                                        return MaterialPageRoute(
+                                            builder: (context) => const AppearanceSettings(), settings: ROUTE_SETTINGS);
                                     }
                                   }),
                             ),
