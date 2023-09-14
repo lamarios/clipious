@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:invidious/notifications/models/db/channel_notifications.dart';
 import 'package:invidious/subscription_management/states/subscribe_button.dart';
 
 import '../../../notifications/views/components/bell_icon.dart';
@@ -56,7 +57,10 @@ class SubscribeButton extends StatelessWidget {
             },
           ),
         ),
-        BellIcon(channelId: channelId)
+        BellIcon(
+          itemId: channelId,
+          type: BellIconType.channel,
+        )
       ],
     );
   }

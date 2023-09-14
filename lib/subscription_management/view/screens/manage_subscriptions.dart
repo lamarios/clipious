@@ -5,6 +5,7 @@ import 'package:invidious/main.dart';
 import 'package:invidious/myRouteObserver.dart';
 import 'package:invidious/subscription_management/models/subscription.dart';
 import 'package:invidious/utils.dart';
+import 'package:invidious/utils/views/components/simple_list_item.dart';
 import 'package:invidious/utils/views/components/top_loading.dart';
 
 import '../../states/manage_subscriptions.dart';
@@ -49,19 +50,24 @@ class ManageSubscriptions extends StatelessWidget {
                                     Subscription sub = _.subs[index];
 
                                     return GestureDetector(
-                                      onTap: () => navigatorKey.currentState?.pushNamed(PATH_CHANNEL, arguments: sub.authorId).then((value) => cubit.refreshSubs()),
-                                      child: Container(
-                                        padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-                                        decoration: BoxDecoration(color: index % 2 != 0 ? colors.secondaryContainer.withOpacity(0.5) : colors.background, borderRadius: BorderRadius.circular(10)),
+                                      onTap: () => navigatorKey.currentState
+                                          ?.pushNamed(PATH_CHANNEL, arguments: sub.authorId)
+                                          .then((value) => cubit.refreshSubs()),
+                                      child: SimpleListItem(
+                                        key: ValueKey(sub.authorId),
+                                        index: index,
                                         child: Row(
-                                          key: ValueKey(sub.authorId),
                                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                           children: [
                                             Text(sub.author),
                                             IconButton.filledTonal(
                                               visualDensity: VisualDensity.compact,
                                               onPressed: () {
-                                                okCancelDialog(context, locals.unSubscribeQuestion, locals.youCanSubscribeAgainLater, () => cubit.unsubscribe(sub.authorId));
+                                                okCancelDialog(
+                                                    context,
+                                                    locals.unSubscribeQuestion,
+                                                    locals.youCanSubscribeAgainLater,
+                                                    () => cubit.unsubscribe(sub.authorId));
                                               },
                                               icon: const Icon(
                                                 Icons.clear,

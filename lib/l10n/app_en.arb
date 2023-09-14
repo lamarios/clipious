@@ -1069,6 +1069,14 @@
   "@deleteChannelNotificationContent": {
     "description": "Title for dialog to confirm whether to delete channel notifications"
   },
+  "deletePlaylistNotificationTitle": "Delete playlist notification ?",
+  "@deletePlaylistNotificationTitle": {
+    "description": "Title for dialog to confirm whether to delete playlist notifications"
+  },
+  "deletePlaylistNotificationContent": "You won''t receive anymore notifications from this playlist.",
+  "@deletePlaylistNotificationContent": {
+    "description": "Title for dialog to confirm whether to delete playlist notifications"
+  },
   "channelNotificationTitle": "New videos from {channel}",
   "@channelNotificationTitle": {
     "description": "Title for the channel notifications when there are new videos",
@@ -1086,6 +1094,30 @@
       "channel": {
         "type": "String",
         "example": "MKBHD"
+      },
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "playlistNotificationTitle": "New videos in {playlist} playlist",
+  "@playlistNotificationTitle": {
+    "description": "Title for the playlist notifications when there are new videos",
+    "placeholders": {
+      "playlist": {
+        "type": "String",
+        "example": "Lo-Fi girl"
+      }
+    }
+  },
+  "playlistNotificationContent": "There are {count, plural, =0{no new videos} =1{1 new video} other{{count} new videos}} in the {playlist} playlist",
+  "@playlistNotificationContent": {
+    "description": "Content for playlist notification when there are new videos",
+    "placeholders": {
+      "playlist": {
+        "type": "String",
+        "example": "Lo-Fi girl"
       },
       "count": {
         "type": "num",

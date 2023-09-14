@@ -17,6 +17,7 @@ import 'package:objectbox_flutter_libs/objectbox_flutter_libs.dart';
 import 'downloads/models/downloaded_video.dart';
 import 'home/models/db/home_layout.dart';
 import 'notifications/models/db/channel_notifications.dart';
+import 'notifications/models/db/playlist_notifications.dart';
 import 'notifications/models/db/subscription_notifications.dart';
 import 'search/models/db/searchHistoryItem.dart';
 import 'settings/models/db/app_logs.dart';
@@ -422,6 +423,41 @@ final _entities = <ModelEntity>[
             flags: 0)
       ],
       relations: <ModelRelation>[],
+      backlinks: <ModelBacklink>[]),
+  ModelEntity(
+      id: const IdUid(13, 8331886434292283747),
+      name: 'PlaylistNotification',
+      lastPropertyId: const IdUid(5, 5316267761398216511),
+      flags: 0,
+      properties: <ModelProperty>[
+        ModelProperty(
+            id: const IdUid(1, 7681992295553062859),
+            name: 'id',
+            type: 6,
+            flags: 1),
+        ModelProperty(
+            id: const IdUid(2, 8328838064368170718),
+            name: 'playlistId',
+            type: 9,
+            flags: 34848,
+            indexId: const IdUid(7, 4488140487903335246)),
+        ModelProperty(
+            id: const IdUid(3, 7229926964587744944),
+            name: 'lastVideoCount',
+            type: 6,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(4, 6825540046607174830),
+            name: 'timestamp',
+            type: 6,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(5, 5316267761398216511),
+            name: 'playlistName',
+            type: 9,
+            flags: 0)
+      ],
+      relations: <ModelRelation>[],
       backlinks: <ModelBacklink>[])
 ];
 
@@ -452,8 +488,8 @@ Future<Store> openStore(
 ModelDefinition getObjectBoxModel() {
   final model = ModelInfo(
       entities: _entities,
-      lastEntityId: const IdUid(12, 2070539588161609146),
-      lastIndexId: const IdUid(6, 1543728882665646543),
+      lastEntityId: const IdUid(13, 8331886434292283747),
+      lastIndexId: const IdUid(7, 4488140487903335246),
       lastRelationId: const IdUid(0, 0),
       lastSequenceId: const IdUid(0, 0),
       retiredEntityUids: const [6897417709810972885],
@@ -938,6 +974,44 @@ ModelDefinition getObjectBoxModel() {
             ..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
 
           return object;
+        }),
+    PlaylistNotification: EntityDefinition<PlaylistNotification>(
+        model: _entities[11],
+        toOneRelations: (PlaylistNotification object) => [],
+        toManyRelations: (PlaylistNotification object) => {},
+        getId: (PlaylistNotification object) => object.id,
+        setId: (PlaylistNotification object, int id) {
+          object.id = id;
+        },
+        objectToFB: (PlaylistNotification object, fb.Builder fbb) {
+          final playlistIdOffset = fbb.writeString(object.playlistId);
+          final playlistNameOffset = fbb.writeString(object.playlistName);
+          fbb.startTable(6);
+          fbb.addInt64(0, object.id);
+          fbb.addOffset(1, playlistIdOffset);
+          fbb.addInt64(2, object.lastVideoCount);
+          fbb.addInt64(3, object.timestamp);
+          fbb.addOffset(4, playlistNameOffset);
+          fbb.finish(fbb.endTable());
+          return object.id;
+        },
+        objectFromFB: (Store store, ByteData fbData) {
+          final buffer = fb.BufferContext(fbData);
+          final rootOffset = buffer.derefObject(0);
+          final playlistIdParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 6, '');
+          final lastVideoCountParam =
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 8, 0);
+          final timestampParam =
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 10, 0);
+          final playlistNameParam =
+              const fb.StringReader(asciiOptimization: true)
+                  .vTableGet(buffer, rootOffset, 12, '');
+          final object = PlaylistNotification(playlistIdParam,
+              lastVideoCountParam, timestampParam, playlistNameParam)
+            ..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
+
+          return object;
         })
   };
 
@@ -1199,4 +1273,27 @@ class ChannelNotification_ {
   /// see [ChannelNotification.channelName]
   static final channelName =
       QueryStringProperty<ChannelNotification>(_entities[10].properties[4]);
+}
+
+/// [PlaylistNotification] entity fields to define ObjectBox queries.
+class PlaylistNotification_ {
+  /// see [PlaylistNotification.id]
+  static final id =
+      QueryIntegerProperty<PlaylistNotification>(_entities[11].properties[0]);
+
+  /// see [PlaylistNotification.playlistId]
+  static final playlistId =
+      QueryStringProperty<PlaylistNotification>(_entities[11].properties[1]);
+
+  /// see [PlaylistNotification.lastVideoCount]
+  static final lastVideoCount =
+      QueryIntegerProperty<PlaylistNotification>(_entities[11].properties[2]);
+
+  /// see [PlaylistNotification.timestamp]
+  static final timestamp =
+      QueryIntegerProperty<PlaylistNotification>(_entities[11].properties[3]);
+
+  /// see [PlaylistNotification.playlistName]
+  static final playlistName =
+      QueryStringProperty<PlaylistNotification>(_entities[11].properties[4]);
 }

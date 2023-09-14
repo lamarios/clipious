@@ -4,6 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_swipe_action_cell/core/cell.dart';
 import 'package:invidious/main.dart';
 import 'package:invidious/myRouteObserver.dart';
+import 'package:invidious/notifications/views/components/bell_icon.dart';
 import 'package:invidious/player/states/player.dart';
 import 'package:invidious/playlists/views/components/playlist_thumbnail.dart';
 import 'package:invidious/settings/models/errors/invidiousServiceError.dart';
@@ -90,7 +91,7 @@ class PlaylistView extends StatelessWidget {
                             ),
                           ),
                         )
-                      : const SizedBox.shrink()
+                      : BellIcon(itemId: playlist.playlistId, type: BellIconType.playlist)
                 ],
               ),
               backgroundColor: colors.background,
@@ -115,7 +116,9 @@ class PlaylistView extends StatelessWidget {
                                                   Center(
                                                       child: Container(
                                                     padding: const EdgeInsets.all(5),
-                                                    decoration: BoxDecoration(color: colors.background.withOpacity(0.5), shape: BoxShape.circle),
+                                                    decoration: BoxDecoration(
+                                                        color: colors.background.withOpacity(0.5),
+                                                        shape: BoxShape.circle),
                                                     child: TweenAnimationBuilder(
                                                       tween: Tween<double>(begin: 0, end: _.loadingProgress),
                                                       duration: animationDuration,

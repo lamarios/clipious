@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:invidious/globals.dart';
 import 'package:invidious/utils.dart';
 
 import '../../../settings/states/settings.dart';
@@ -23,12 +24,11 @@ class MiniPlayerControls extends StatelessWidget {
       child: Builder(builder: (context) {
         bool isMini = context.select((PlayerCubit value) => value.state.isMini);
         bool hasQueue = context.select((PlayerCubit value) => value.state.hasQueue);
-        bool isPlaying = context.select((PlayerCubit value)=> value.state.isPlaying);
+        bool isPlaying = context.select((PlayerCubit value) => value.state.isPlaying);
 
         return Padding(
           padding: isMini ? EdgeInsets.zero : const EdgeInsets.all(8.0),
           child: Container(
-            decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), color: isMini ? colors.secondaryContainer : colors.background),
             constraints: BoxConstraints(
               maxWidth: tabletMaxVideoWidth,
             ),
@@ -79,10 +79,9 @@ class MiniPlayerControls extends StatelessWidget {
                     ],
                   ),
                 if (!isMini)
-                  Builder(
-                      builder: (context) {
-                        var playerRepeatMode = context.select((SettingsCubit s) => s.state.playerRepeatMode);
-                        var shuffleMode = context.select((SettingsCubit s) => s.state.playerShuffleMode);
+                  Builder(builder: (context) {
+                    var playerRepeatMode = context.select((SettingsCubit s) => s.state.playerRepeatMode);
+                    var shuffleMode = context.select((SettingsCubit s) => s.state.playerShuffleMode);
                     var cubit = context.read<SettingsCubit>();
                     return Row(
                       mainAxisAlignment: MainAxisAlignment.end,

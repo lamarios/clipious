@@ -25,6 +25,8 @@ import 'package:invidious/notifications/notifications.dart';
 import 'package:invidious/player/states/player.dart';
 import 'package:invidious/player/views/components/mini_player_aware.dart';
 import 'package:invidious/player/views/components/player.dart';
+import 'package:invidious/playlists/models/playlist.dart';
+import 'package:invidious/playlists/views/screens/playlist.dart';
 import 'package:invidious/search/views/screens/search.dart';
 import 'package:invidious/settings/states/settings.dart';
 import 'package:invidious/settings/views/screens/appearance.dart';
@@ -35,6 +37,7 @@ import 'package:invidious/settings/views/screens/video_player.dart';
 import 'package:invidious/subscription_management/view/screens/manage_subscriptions.dart';
 import 'package:invidious/utils.dart';
 import 'package:invidious/utils/views/components/app_icon.dart';
+import 'package:invidious/videos/views/screens/subscriptions.dart';
 import 'package:invidious/videos/views/screens/video.dart';
 import 'package:invidious/welcome_wizard/views/screens/welcome_wizard.dart';
 import 'package:invidious/welcome_wizard/views/tv/screens/welcome_wizard.dart';
@@ -267,10 +270,22 @@ class MyApp extends StatelessWidget {
                                             builder: (context) => const BrowsingSettings(), settings: ROUTE_SETTINGS);
                                       case pathSettingsVideoPlayer:
                                         return MaterialPageRoute(
-                                            builder: (context) => const VideoPlayerSettings(), settings: ROUTE_SETTINGS);
+                                            builder: (context) => const VideoPlayerSettings(),
+                                            settings: ROUTE_SETTINGS);
                                       case pathSettingsAppearance:
                                         return MaterialPageRoute(
                                             builder: (context) => const AppearanceSettings(), settings: ROUTE_SETTINGS);
+                                      case pathSubscriptions:
+                                        return MaterialPageRoute(
+                                            builder: (context) => const SubscriptionScreen(),
+                                            settings: routeSubscriptions);
+                                      case pathPublicPlaylist:
+                                        if (settings.arguments != null && settings.arguments is Playlist) {
+                                          return MaterialPageRoute(
+                                              builder: (context) => PlaylistView(
+                                                  playlist: settings.arguments as Playlist, canDeleteVideos: false),
+                                              settings: ROUTE_PLAYLIST);
+                                        }
                                     }
                                   }),
                             ),

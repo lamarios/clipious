@@ -1,24 +1,37 @@
 import 'package:bloc/bloc.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/notifications/models/db/channel_notifications.dart';
+import 'package:invidious/notifications/models/db/playlist_notifications.dart';
+import 'package:invidious/notifications/models/db/subscription_notifications.dart';
 
 import '../../settings/states/settings.dart';
+import '../views/components/bell_icon.dart';
 
 enum TurnOnStatus { ok, needToEnableBackGroundServices, needToEnableBatteryOptimization }
 
 class BellIconCubit extends Cubit<bool> {
   final SettingsCubit settings;
-  final String channelId;
+  final String itemId;
+  final BellIconType type;
 
-  BellIconCubit(super.initialState, this.settings, this.channelId) {
+  BellIconCubit(super.initialState, this.settings, this.itemId, this.type) {
     onInit();
   }
 
   void onInit() {
     if (settings.state.backgroundNotifications) {
-      emit(db.getChannelNotification(channelId) != null);
+      emit(getNotification());
     } else {
       emit(false);
+    }
+  }
+
+  bool getNotification() {
+    switch (type) {
+      case BellIconType.channel:
+        return db.getChannelNotification(itemId) != null;
+      case BellIconType.playlist:
+        return db.getPlaylistNotification(itemId) != null;
     }
   }
 
@@ -37,12 +50,21 @@ class BellIconCubit extends Cubit<bool> {
       }
 
       emit(true);
-      var channel = await service.getChannel(channelId);
+      switch (type) {
+        case BellIconType.channel:
+          var channel = await service.getChannel(itemId);
+          db.upsertChannelNotification(ChannelNotification(itemId, channel.author,
+              channel.latestVideos?.firstOrNull?.videoId ?? '', DateTime.now().millisecondsSinceEpoch));
+          break;
+        case BellIconType.playlist:
+          var playlist = await service.getPublicPlaylists(itemId);
+          db.upsertPlaylistNotification(
+              PlaylistNotification(itemId, playlist.videoCount, DateTime.now().millisecondsSinceEpoch, playlist.title));
 
-      db.upsertChannelNotification(ChannelNotification(channelId, channel.author,
-          channel.latestVideos?.firstOrNull?.videoId ?? '', DateTime.now().millisecondsSinceEpoch));
+          break;
+      }
     } else {
-      var notif = db.getChannelNotification(channelId);
+      var notif = db.getChannelNotification(itemId);
       if (notif != null) {
         db.deleteChannelNotification(notif);
         emit(false);

@@ -411,6 +411,10 @@ class Service {
 
     var channel = Channel.fromJson(handleResponse(response));
     channel.latestVideos = (await VideoFilter.filterVideos(channel.latestVideos)).cast();
+
+    if (channel.latestVideos != null && channel.latestVideos!.isNotEmpty) {
+      db.setChannelNotificationLastViewedVideo(channel.authorUrl, channel.latestVideos![0].videoId);
+    }
     return channel;
   }
 
@@ -420,6 +424,10 @@ class Service {
 
     var videosWithContinuation = VideosWithContinuation.fromJson(handleResponse(response));
     videosWithContinuation.videos = (await VideoFilter.filterVideos(videosWithContinuation.videos)).cast();
+
+    if (videosWithContinuation.videos.isNotEmpty) {
+      db.setChannelNotificationLastViewedVideo(channelId, videosWithContinuation.videos.first.videoId);
+    }
     return videosWithContinuation;
   }
 
@@ -613,6 +621,8 @@ class Service {
     var oldLength = playlist.videos.length;
     playlist.videos = (await VideoFilter.filterVideos(playlist.videos)).cast();
     playlist.removedByFilter = oldLength - playlist.videos.length;
+
+    db.setPlaylistNotificationLastViewedVideo(playlist.playlistId, playlist.videoCount);
 
     return playlist;
   }

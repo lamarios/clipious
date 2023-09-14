@@ -78,6 +78,7 @@ class AppearanceSettings extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: colorScheme.background,
         title: Text(locals.appearance),
         elevation: 0,
         scrolledUnderElevation: 0,

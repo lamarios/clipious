@@ -5,6 +5,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/settings/states/settings.dart';
 import 'package:invidious/settings/views/components/channel_notifications.dart';
+import 'package:invidious/settings/views/components/playlist_notifications.dart';
 import 'package:invidious/settings/views/screens/settings.dart';
 import 'package:invidious/utils.dart';
 import 'package:optimize_battery/optimize_battery.dart';
@@ -29,6 +30,7 @@ class NotificationSettings extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: colorScheme.background,
         title: Text(locals.notifications),
         elevation: 0,
         scrolledUnderElevation: 0,
@@ -76,7 +78,7 @@ class NotificationSettings extends StatelessWidget {
                   ]),
                   const Expanded(
                       child: TabBarView(
-                    children: [ChannelNotificationList(), Text('yo')],
+                    children: [ChannelNotificationList(), PlaylistNotificationList()],
                   ))
                 ]),
               )

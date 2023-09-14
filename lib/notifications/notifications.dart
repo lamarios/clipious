@@ -1,12 +1,14 @@
 import 'dart:ffi';
 
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:invidious/globals.dart';
 import 'package:invidious/main.dart';
 import 'package:invidious/myRouteObserver.dart';
 import 'package:logging/logging.dart';
 
 const openChannel = "open-channel";
 const openSubscriptions = "open-subscriptions";
+const openPublicPlaylist = "open-public-playlist";
 
 final log = Logger('notifications');
 
@@ -26,7 +28,15 @@ enum NotificationTypes {
       importance: Importance.low,
       priority: Priority.low,
       actions: [],
-      payloadPrefix: openChannel);
+      payloadPrefix: openChannel),
+  playlistNotification(
+      id: 'playlist-notifications',
+      description: 'Get notification from selected playlists (bell icon)',
+      name: 'Playlist new videos',
+      importance: Importance.low,
+      priority: Priority.low,
+      actions: [],
+      payloadPrefix: openPublicPlaylist);
 
   final String id, name, description;
   final Importance importance;
@@ -74,6 +84,15 @@ void onDidReceiveNotificationResponse(NotificationResponse details) {
       case openChannel:
         log.fine('Launching channel screen ${details.payload}, navigator state: ${navigatorKey.currentState}');
         navigatorKey.currentState?.pushNamed(PATH_CHANNEL, arguments: split[1]);
+        break;
+      case openPublicPlaylist:
+        log.fine('Launching playlist screen ${details.payload}, navigator state: ${navigatorKey.currentState}');
+        service
+            .getPublicPlaylists(split[1])
+            .then((value) => navigatorKey.currentState?.pushNamed(pathPublicPlaylist, arguments: value));
+        break;
+      case openSubscriptions:
+        navigatorKey.currentState?.pushNamed(pathSubscriptions);
         break;
     }
   }

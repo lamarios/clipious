@@ -49,7 +49,7 @@ onStart(ServiceInstance service) async {
     service.stopSelf();
   });
 
-  Timer.periodic(kDebugMode ? const Duration(seconds: 10): const Duration(hours: 2), (timer) {
+  Timer.periodic(kDebugMode ? const Duration(seconds: 60) : const Duration(hours: 2), (timer) {
     print('back ground service running');
     _backgroundCheck();
   });
@@ -61,12 +61,9 @@ _backgroundCheck() async {
     print('we have a db ${db.isClosed}');
     await _handleSubscriptionsNotifications();
     await _handleChannelNotifications();
+    await _handlePlaylistNotifications();
   } catch (e) {
-    if (e is StateError) {
-      print('app is likely running, we don\'t do anything: ${e.message}, global client ? ${db.isClosed}');
-    } else {
-      print('we have a background service error: ${e}');
-    }
+    print('we have a background service error: ${e}');
   } finally {
     db.close();
   }
@@ -82,6 +79,36 @@ Future<AppLocalizations> getLocalization() async {
       Locale.fromSubtags(languageCode: localeString[0], scriptCode: localeString.length >= 2 ? localeString[1] : null);
 
   return await AppLocalizations.delegate.load(locale);
+}
+
+_handlePlaylistNotifications() async {
+  var notifs = db.getAllPlaylistNotifications();
+  print('Watching ${notifs.length} playlists');
+  for (var n in notifs) {
+    // we get the latest video,
+    var videos = await service.getPublicPlaylists(n.playlistId);
+
+    if ((videos.videos ?? []).isNotEmpty) {
+      if (n.lastVideoCount > 0) {
+        // if in list, we calculate
+        int videosToNotifyAbout = n.lastVideoCount - videos.videoCount;
+
+        // if not we tell that list.size+ new videos are available
+        var locals = await getLocalization();
+
+        print('$videosToNotifyAbout videos from playlist ${n.playlistName} to notify about');
+        if (kDebugMode || videosToNotifyAbout > 0) {
+          sendNotification(locals.playlistNotificationTitle(n.playlistName),
+              locals.playlistNotificationContent(n.playlistName, videosToNotifyAbout),
+              type: NotificationTypes.playlistNotification, payload: n.playlistId, id: n.id);
+        }
+      }
+
+      n.lastVideoCount = videos.videoCount;
+      n.timestamp = DateTime.now().millisecondsSinceEpoch;
+      db.upsertPlaylistNotification(n);
+    }
+  }
 }
 
 _handleChannelNotifications() async {
@@ -159,7 +186,7 @@ _handleSubscriptionsNotifications() async {
         if (kDebugMode || videosToNotifyAbout > 0) {
           sendNotification(
               locals.subscriptionNotificationTitle, locals.subscriptionNotificationContent(videosToNotifyAbout),
-              type: NotificationTypes.subscriptionNotifications);
+              type: NotificationTypes.subscriptionNotifications, payload: '');
         }
       }
     }

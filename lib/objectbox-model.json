@@ -401,10 +401,46 @@
         }
       ],
       "relations": []
+    },
+    {
+      "id": "13:8331886434292283747",
+      "lastPropertyId": "5:5316267761398216511",
+      "name": "PlaylistNotification",
+      "properties": [
+        {
+          "id": "1:7681992295553062859",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:8328838064368170718",
+          "name": "playlistId",
+          "type": 9,
+          "flags": 34848,
+          "indexId": "7:4488140487903335246"
+        },
+        {
+          "id": "3:7229926964587744944",
+          "name": "lastVideoCount",
+          "type": 6
+        },
+        {
+          "id": "4:6825540046607174830",
+          "name": "timestamp",
+          "type": 6
+        },
+        {
+          "id": "5:5316267761398216511",
+          "name": "playlistName",
+          "type": 9
+        }
+      ],
+      "relations": []
     }
   ],
-  "lastEntityId": "12:2070539588161609146",
-  "lastIndexId": "6:1543728882665646543",
+  "lastEntityId": "13:8331886434292283747",
+  "lastIndexId": "7:4488140487903335246",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",
   "modelVersion": 5,

@@ -17,6 +17,7 @@ import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 
 import 'downloads/models/downloaded_video.dart';
+import 'notifications/models/db/playlist_notifications.dart';
 import 'objectbox.g.dart'; // created by `flutter pub run build_runner build`
 import 'settings/models/db/app_logs.dart';
 import 'settings/models/db/server.dart';
@@ -294,5 +295,43 @@ class DbClient {
 
   void upsertChannelNotification(ChannelNotification notif) {
     store.box<ChannelNotification>().put(notif);
+  }
+
+  void setChannelNotificationLastViewedVideo(String channelId, String videoId) {
+    var notif = getChannelNotification(channelId);
+    if (notif != null) {
+      notif.lastSeenVideoId = videoId;
+      notif.timestamp = DateTime.now().millisecondsSinceEpoch;
+      upsertChannelNotification(notif);
+    }
+  }
+
+  PlaylistNotification? getPlaylistNotification(String channelId) {
+    return store
+        .box<PlaylistNotification>()
+        .query(PlaylistNotification_.playlistId.equals(channelId))
+        .build()
+        .findFirst();
+  }
+
+  List<PlaylistNotification> getAllPlaylistNotifications() {
+    return store.box<PlaylistNotification>().getAll();
+  }
+
+  void deletePlaylistNotification(PlaylistNotification notif) {
+    store.box<PlaylistNotification>().remove(notif.id);
+  }
+
+  void upsertPlaylistNotification(PlaylistNotification notif) {
+    store.box<PlaylistNotification>().put(notif);
+  }
+
+  void setPlaylistNotificationLastViewedVideo(String playlistId, int videoCount) {
+    var notif = getPlaylistNotification(playlistId);
+    if (notif != null) {
+      notif.lastVideoCount = videoCount;
+      notif.timestamp = DateTime.now().millisecondsSinceEpoch;
+      upsertPlaylistNotification(notif);
+    }
   }
 }

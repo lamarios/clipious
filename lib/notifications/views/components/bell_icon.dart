@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/notifications/state/bell_icon.dart';
 import 'package:invidious/settings/states/settings.dart';
-import 'package:optimize_battery/optimize_battery.dart';
 
 import '../../../utils.dart';
 
-class BellIcon extends StatelessWidget {
-  final String channelId;
+enum BellIconType {
+  playlist, channel;
+}
 
-  const BellIcon({super.key, required this.channelId});
+class BellIcon<T> extends StatelessWidget {
+  final BellIconType type;
+  final String itemId;
+
+  const BellIcon({super.key, required this.itemId, required this.type});
 
   toggleNotifications(BuildContext context) async {
     var cubit = context.read<BellIconCubit>();
@@ -46,7 +50,7 @@ class BellIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     var colors = Theme.of(context).colorScheme;
     return BlocProvider(
-      create: (context) => BellIconCubit(false, context.read<SettingsCubit>(), channelId),
+      create: (context) => BellIconCubit(false, context.read<SettingsCubit>(), itemId, type),
       child: BlocBuilder<BellIconCubit, bool>(
         builder: (context, state) {
           return IconButton(
