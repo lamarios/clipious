@@ -99,7 +99,7 @@ class Settings extends StatelessWidget {
               sections: [
                 SettingsSection( tiles: [
                   SettingsTile.navigation(
-                    leading: const Icon(Icons.home),
+                    leading: const Icon(Icons.home_outlined),
                     title: Text(locals.browsing),
                     description: Text(List.of([
                       locals.country,
@@ -138,13 +138,13 @@ class Settings extends StatelessWidget {
                     onPressed: openVideoPlayerSettings,
                   ),
                   SettingsTile.navigation(
-                    leading: const Icon(Icons.notifications),
+                    leading: const Icon(Icons.notifications_outlined),
                     title: Text('${locals.notifications} (beta)'),
                     description: Text(locals.notificationsDescription),
                     onPressed: openNotificationSettings,
                   ),
                   SettingsTile.navigation(
-                    leading: const Icon(Icons.palette),
+                    leading: const Icon(Icons.palette_outlined),
                     title: Text(locals.appearance),
                     description: Text(
                       List.of([
