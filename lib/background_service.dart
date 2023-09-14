@@ -152,7 +152,7 @@ _handleChannelNotifications() async {
 
 _handleSubscriptionsNotifications() async {
   bool isEnabled = db.getSettings(SUBSCRIPTION_NOTIFICATIONS)?.value == 'true';
-  if (isEnabled) {
+  if (isEnabled && db.isLoggedInToCurrentServer()) {
     // we need to get the last notification before we call the feed endpoint as it is going to save the last seen video
     final lastNotification = db.getLastSubscriptionNotification();
     print('getting feed...');
