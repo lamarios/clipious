@@ -1,16 +1,14 @@
 import 'dart:async';
+import 'dart:ui';
 
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_background_service/flutter_background_service.dart';
 import 'package:flutter_background_service_android/flutter_background_service_android.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
 import 'package:invidious/database.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/notifications/models/db/subscription_notifications.dart';
 import 'package:invidious/settings/states/settings.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/videos/models/video_in_list.dart';
 import 'package:logging/logging.dart';
 
@@ -19,6 +17,9 @@ import 'notifications/notifications.dart';
 final backgroundService = FlutterBackgroundService();
 
 final log = Logger('Background service');
+
+// const debugMode = kDebugMode;
+const debugMode = true;
 
 void configureBackgroundService(SettingsCubit settings) {
   backgroundService.configure(
@@ -33,6 +34,7 @@ void configureBackgroundService(SettingsCubit settings) {
 @pragma('vm:entry-point')
 onStart(ServiceInstance service) async {
   print("Background service started");
+  DartPluginRegistrant.ensureInitialized();
 
   if (service is AndroidServiceInstance) {
     service.on('setAsForeground').listen((event) {
@@ -49,7 +51,7 @@ onStart(ServiceInstance service) async {
     service.stopSelf();
   });
 
-  Timer.periodic(kDebugMode ? const Duration(seconds: 60) : const Duration(hours: 2), (timer) {
+  Timer.periodic(debugMode ? const Duration(seconds: 60) : const Duration(hours: 2), (timer) {
     print('back ground service running');
     _backgroundCheck();
   });
@@ -97,7 +99,7 @@ _handlePlaylistNotifications() async {
         var locals = await getLocalization();
 
         print('$videosToNotifyAbout videos from playlist ${n.playlistName} to notify about');
-        if (kDebugMode || videosToNotifyAbout > 0) {
+        if (debugMode || videosToNotifyAbout > 0) {
           sendNotification(locals.playlistNotificationTitle(n.playlistName),
               locals.playlistNotificationContent(n.playlistName, videosToNotifyAbout),
               type: NotificationTypes.playlistNotification, payload: n.playlistId, id: n.id);
@@ -136,7 +138,7 @@ _handleChannelNotifications() async {
         var locals = await getLocalization();
 
         print('$videosToNotifyAbout videos from channel ${n.channelName} to notify about');
-        if (kDebugMode || videosToNotifyAbout > 0) {
+        if (debugMode || videosToNotifyAbout > 0) {
           sendNotification(locals.channelNotificationTitle(n.channelName),
               locals.channelNotificationContent(n.channelName, videosToNotifyAbout),
               type: NotificationTypes.channelNotification, payload: n.channelId, id: n.id);
@@ -183,7 +185,7 @@ _handleSubscriptionsNotifications() async {
         var locals = await getLocalization();
 
         print('$videosToNotifyAbout videos to notify about');
-        if (kDebugMode || videosToNotifyAbout > 0) {
+        if (debugMode || videosToNotifyAbout > 0) {
           sendNotification(
               locals.subscriptionNotificationTitle, locals.subscriptionNotificationContent(videosToNotifyAbout),
               type: NotificationTypes.subscriptionNotifications, payload: '');

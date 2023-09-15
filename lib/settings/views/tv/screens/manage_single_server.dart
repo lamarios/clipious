@@ -182,7 +182,8 @@ class TvManageSingleServer extends StatelessWidget {
           child: BlocBuilder<ServerSettingsCubit, Server>(builder: (context, server) {
             var cubit = context.read<ServerSettingsCubit>();
             AppLocalizations locals = AppLocalizations.of(context)!;
-            bool isLoggedIn = (server.authToken != null && server.authToken!.isNotEmpty) || (server.sidCookie != null && server.sidCookie!.isNotEmpty);
+            bool isLoggedIn = (server.authToken != null && server.authToken!.isNotEmpty) ||
+                (server.sidCookie != null && server.sidCookie!.isNotEmpty);
 
             return ListView(
               children: [

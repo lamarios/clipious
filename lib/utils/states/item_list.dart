@@ -97,5 +97,5 @@ class ItemListState<T> {
 
   ItemListState({required this.itemList}) {}
 
-  ItemListState._(this.itemList,  this.items, this.loading, this.imageCache, this.scrollController, this.error);
+  ItemListState._(this.itemList, this.items, this.loading, this.imageCache, this.scrollController, this.error);
 }

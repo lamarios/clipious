@@ -4,7 +4,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/player/states/player.dart';
 import 'package:invidious/videos/models/base_video.dart';
 import 'package:invidious/videos/views/components/download_modal_sheet.dart';
-import 'package:invidious/videos/views/components/video_in_list.dart';
 
 import '../../../main.dart';
 import 'add_to_playlist.dart';
@@ -76,7 +75,10 @@ class VideoModalSheet extends StatelessWidget {
               padding: const EdgeInsets.only(right: 16.0),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
-                children: [IconButton.filledTonal(onPressed: () => addToPlaylist(context), icon: const Icon(Icons.playlist_add)), Text(locals.addToPlaylist)],
+                children: [
+                  IconButton.filledTonal(onPressed: () => addToPlaylist(context), icon: const Icon(Icons.playlist_add)),
+                  Text(locals.addToPlaylist)
+                ],
               ),
             ),
             Padding(
@@ -84,7 +86,9 @@ class VideoModalSheet extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  IconButton.filledTonal(onPressed: AddToQueueButton.canAddToQueue(context, [video]) ? () => addToQueue(context) : null, icon: const Icon(Icons.playlist_play)),
+                  IconButton.filledTonal(
+                      onPressed: AddToQueueButton.canAddToQueue(context, [video]) ? () => addToQueue(context) : null,
+                      icon: const Icon(Icons.playlist_play)),
                   Text(locals.addToQueueList)
                 ],
               ),
@@ -93,14 +97,20 @@ class VideoModalSheet extends StatelessWidget {
               padding: const EdgeInsets.only(right: 16.0),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
-                children: [IconButton.filledTonal(onPressed: () => playNext(context), icon: const Icon(Icons.play_arrow)), Text(locals.playNext)],
+                children: [
+                  IconButton.filledTonal(onPressed: () => playNext(context), icon: const Icon(Icons.play_arrow)),
+                  Text(locals.playNext)
+                ],
               ),
             ),
             Padding(
               padding: const EdgeInsets.only(right: 16.0),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
-                children: [IconButton.filledTonal(onPressed: () => downloadVideo(context), icon: const Icon(Icons.download)), Text(locals.download)],
+                children: [
+                  IconButton.filledTonal(onPressed: () => downloadVideo(context), icon: const Icon(Icons.download)),
+                  Text(locals.download)
+                ],
               ),
             ),
           ],

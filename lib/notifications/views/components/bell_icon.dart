@@ -8,7 +8,8 @@ import 'package:invidious/settings/states/settings.dart';
 import '../../../utils.dart';
 
 enum BellIconType {
-  playlist, channel;
+  playlist,
+  channel;
 }
 
 class BellIcon<T> extends StatelessWidget {
@@ -57,7 +58,7 @@ class BellIcon<T> extends StatelessWidget {
             onPressed: () => toggleNotifications(context),
             icon: const Icon(Icons.notifications),
             color: state ? colors.primary : null,
-          ).animate(target: state ? 1 : 0, effects: state?[const ShakeEffect()]:[]);
+          ).animate(target: state ? 1 : 0, effects: state ? [const ShakeEffect()] : []);
         },
       ),
     );

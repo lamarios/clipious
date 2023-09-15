@@ -37,7 +37,8 @@ class ServerListSettingsCubit extends Cubit<ServerListSettingsState> {
 
   refreshServers() {
     var state = this.state.copyWith();
-    var servers = state.publicServers.where((s) => state.dbServers.indexWhere((element) => element.url == s.url) == -1).toList();
+    var servers =
+        state.publicServers.where((s) => state.dbServers.indexWhere((element) => element.url == s.url) == -1).toList();
 
     state.dbServers = db.getServers();
     state.publicServers = servers;
@@ -65,7 +66,9 @@ class ServerListSettingsCubit extends Cubit<ServerListSettingsState> {
       List<Server?> pingedServers = await Future.wait(servers.map((e) async {
         try {
           var progressState = this.state.copyWith();
-          e.ping = await service.pingServer(e.url).timeout(const Duration(seconds: pingTimeout), onTimeout: () => const Duration(seconds: pingTimeout));
+          e.ping = await service
+              .pingServer(e.url)
+              .timeout(const Duration(seconds: pingTimeout), onTimeout: () => const Duration(seconds: pingTimeout));
           progress++;
           progressState.publicServerProgress = progress / servers.length;
           emit(progressState);
@@ -76,9 +79,11 @@ class ServerListSettingsCubit extends Cubit<ServerListSettingsState> {
         }
       }));
 
-      List<Server> successfullyPingedServers = pingedServers.where((element) => element != null).map((e) => e!).toList();
+      List<Server> successfullyPingedServers =
+          pingedServers.where((element) => element != null).map((e) => e!).toList();
 
-      successfullyPingedServers.sort((a, b) => (a.ping ?? const Duration(seconds: pingTimeout)).compareTo(b.ping ?? const Duration(seconds: pingTimeout)));
+      successfullyPingedServers.sort((a, b) =>
+          (a.ping ?? const Duration(seconds: pingTimeout)).compareTo(b.ping ?? const Duration(seconds: pingTimeout)));
 
       state = this.state.copyWith();
       state.pinging = false;
@@ -138,7 +143,8 @@ class ServerListSettingsCubit extends Cubit<ServerListSettingsState> {
 
 @CopyWith(constructor: "_")
 class ServerListSettingsState {
-  ServerListSettingsState({required this.dbServers, required this.publicServers, this.publicServerProgress = 0, this.pinging = true});
+  ServerListSettingsState(
+      {required this.dbServers, required this.publicServers, this.publicServerProgress = 0, this.pinging = true});
 
   List<Server> dbServers;
   List<Server> publicServers;
@@ -153,5 +159,6 @@ class ServerListSettingsState {
     addServerController.dispose();
   }
 
-  ServerListSettingsState._(this.dbServers, this.publicServers, this.publicServerProgress, this.addServerController, this.pinging, this.publicServersError);
+  ServerListSettingsState._(this.dbServers, this.publicServers, this.publicServerProgress, this.addServerController,
+      this.pinging, this.publicServersError);
 }

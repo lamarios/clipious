@@ -20,7 +20,8 @@ class VideoTabletInnerView extends StatelessWidget {
   final bool? playNow;
   final VideoState videoController;
 
-  const VideoTabletInnerView({super.key, required this.video, required this.selectedIndex, this.playNow, required this.videoController});
+  const VideoTabletInnerView(
+      {super.key, required this.video, required this.selectedIndex, this.playNow, required this.videoController});
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +67,12 @@ class VideoTabletInnerView extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        SizedBox(height: 25, child: Checkbox(value: settings.state.playRecommendedNext, onChanged: cubit.togglePlayRecommendedNext, visualDensity: VisualDensity.compact)),
+                        SizedBox(
+                            height: 25,
+                            child: Checkbox(
+                                value: settings.state.playRecommendedNext,
+                                onChanged: cubit.togglePlayRecommendedNext,
+                                visualDensity: VisualDensity.compact)),
                         InkWell(
                             onTap: () => cubit.togglePlayRecommendedNext(!settings.state.playRecommendedNext),
                             child: Text(
@@ -104,7 +110,8 @@ class VideoTabletInnerView extends StatelessWidget {
             ),
           ),
         ),
-        if (!settings.state.distractionFreeMode) SizedBox(width: 350, child: SingleChildScrollView(child: RecommendedVideos(video: video)))
+        if (!settings.state.distractionFreeMode)
+          SizedBox(width: 350, child: SingleChildScrollView(child: RecommendedVideos(video: video)))
       ],
     );
   }

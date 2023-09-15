@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:invidious/globals.dart';
 import 'package:invidious/utils.dart';
 
 import '../../../settings/states/settings.dart';

@@ -1,3 +1,4 @@
+import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -7,8 +8,9 @@ import '../../../globals.dart';
 import '../../../main.dart';
 import '../../models/db/app_logs.dart';
 
-class AppLogs extends StatelessWidget {
-  const AppLogs({super.key});
+@RoutePage()
+class AppLogsScreen extends StatelessWidget {
+  const AppLogsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

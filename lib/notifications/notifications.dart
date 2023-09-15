@@ -3,7 +3,6 @@ import 'dart:ffi';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/main.dart';
-import 'package:invidious/myRouteObserver.dart';
 import 'package:logging/logging.dart';
 
 const openChannel = "open-channel";
@@ -70,16 +69,22 @@ Future<void> initializeNotifications() async {
 void onNotificationAppLaunch() {
   // checking if the app was launched from a notification
   flutterLocalNotificationsPlugin.getNotificationAppLaunchDetails().then((details) {
-    log.info("App started by notification with payload: ${details?.notificationResponse?.payload}");
-    if (details?.notificationResponse != null) {
-      onDidReceiveNotificationResponse(details!.notificationResponse!);
+    log.info(
+        "App started by notification ? ${details?.didNotificationLaunchApp} with payload: ${details?.notificationResponse?.payload}");
+    if (details?.didNotificationLaunchApp ?? false) {
+      if (details?.notificationResponse != null) {
+        onDidReceiveNotificationResponse(details!.notificationResponse!);
+      }
     }
+  }).onError((error, stackTrace) {
+    log.severe("Error getting notification on start");
   });
 }
 
 void onDidReceiveNotificationResponse(NotificationResponse details) {
   if (details.payload != null && details.payload!.isNotEmpty) {
     var split = details.payload!.split(":");
+/*
     switch (split[0]) {
       case openChannel:
         log.fine('Launching channel screen ${details.payload}, navigator state: ${navigatorKey.currentState}');
@@ -95,6 +100,7 @@ void onDidReceiveNotificationResponse(NotificationResponse details) {
         navigatorKey.currentState?.pushNamed(pathSubscriptions);
         break;
     }
+*/
   }
 }
 

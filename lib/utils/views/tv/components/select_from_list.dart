@@ -8,7 +8,9 @@ class TvSelectFromList extends StatelessWidget {
   final String selected;
   final Function(String selected) onSelect;
 
-  const TvSelectFromList({Key? key, required this.options, required this.selected, required this.onSelect, required this.title}) : super(key: key);
+  const TvSelectFromList(
+      {Key? key, required this.options, required this.selected, required this.onSelect, required this.title})
+      : super(key: key);
 
   selectOption(BuildContext context, String s) {
     onSelect(s);

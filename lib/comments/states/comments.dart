@@ -41,7 +41,8 @@ class CommentsCubit extends Cubit<CommentsState> {
     state = this.state.copyWith();
 
     try {
-      VideoComments comments = await service.getComments(state.video.videoId, continuation: state.continuation, sortBy: state.sortBy, source: state.source);
+      VideoComments comments = await service.getComments(state.video.videoId,
+          continuation: state.continuation, sortBy: state.sortBy, source: state.source);
       state.comments = comments;
       state.loadingComments = false;
       state.continuation = comments.continuation;
@@ -75,5 +76,6 @@ class CommentsState {
     comments = VideoComments(0, video.videoId, '', []);
   }
 
-  CommentsState._(this.video, this.loadingComments, this.comments, this.continuationLoaded, this.continuation, this.error, this.source, this.sortBy);
+  CommentsState._(this.video, this.loadingComments, this.comments, this.continuationLoaded, this.continuation,
+      this.error, this.source, this.sortBy);
 }

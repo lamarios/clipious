@@ -55,7 +55,12 @@ class TvChannelView extends StatelessWidget {
                     style: textTheme.bodyLarge!,
                     child: Stack(
                       children: [
-                        Positioned(top: 0, left: 0, right: 0, child: CachedNetworkImage(imageUrl: ImageObject.getBestThumbnail(channel.channel?.authorBanners)?.url ?? '')),
+                        Positioned(
+                            top: 0,
+                            left: 0,
+                            right: 0,
+                            child: CachedNetworkImage(
+                                imageUrl: ImageObject.getBestThumbnail(channel.channel?.authorBanners)?.url ?? '')),
                         TweenAnimationBuilder(
                             tween: Tween<double>(begin: 0, end: tv.showBackground ? overlayBlur : 0),
                             duration: animationDuration,
@@ -67,123 +72,149 @@ class TvChannelView extends StatelessWidget {
                                   sigmaY: value,
                                 ),
                                 child: AnimatedContainer(
-                                  color: colors.background.withOpacity(tv.showBackground ? overlayBackgroundOpacity : 0),
+                                  color:
+                                      colors.background.withOpacity(tv.showBackground ? overlayBackgroundOpacity : 0),
                                   duration: animationDuration,
                                   child: TvOverscan(
                                     child: SingleChildScrollView(
                                       controller: tv.scrollController,
-                                      child: ListView(physics: const NeverScrollableScrollPhysics(), shrinkWrap: true, children: [
-                                        Padding(
-                                          padding: const EdgeInsets.only(top: 100.0),
-                                          child: Align(
-                                            alignment: Alignment.centerLeft,
-                                            child: AnimatedContainer(
-                                              decoration: BoxDecoration(
-                                                  color: tv.showBackground ? colors.background.withOpacity(0) : colors.background.withOpacity(1), borderRadius: BorderRadius.circular(35)),
-                                              duration: animationDuration,
-                                              child: Row(mainAxisSize: MainAxisSize.min, children: [
-                                                Thumbnail(
-                                                  thumbnailUrl: ImageObject.getBestThumbnail(channel.channel?.authorThumbnails)?.url ?? '',
-                                                  width: 70,
-                                                  height: 70,
-                                                  id: 'author-big-${channel.channel?.authorId}',
-                                                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(35)),
+                                      child: ListView(
+                                          physics: const NeverScrollableScrollPhysics(),
+                                          shrinkWrap: true,
+                                          children: [
+                                            Padding(
+                                              padding: const EdgeInsets.only(top: 100.0),
+                                              child: Align(
+                                                alignment: Alignment.centerLeft,
+                                                child: AnimatedContainer(
+                                                  decoration: BoxDecoration(
+                                                      color: tv.showBackground
+                                                          ? colors.background.withOpacity(0)
+                                                          : colors.background.withOpacity(1),
+                                                      borderRadius: BorderRadius.circular(35)),
+                                                  duration: animationDuration,
+                                                  child: Row(mainAxisSize: MainAxisSize.min, children: [
+                                                    Thumbnail(
+                                                      thumbnailUrl: ImageObject.getBestThumbnail(
+                                                                  channel.channel?.authorThumbnails)
+                                                              ?.url ??
+                                                          '',
+                                                      width: 70,
+                                                      height: 70,
+                                                      id: 'author-big-${channel.channel?.authorId}',
+                                                      decoration:
+                                                          BoxDecoration(borderRadius: BorderRadius.circular(35)),
+                                                    ),
+                                                    Padding(
+                                                      padding: const EdgeInsets.only(left: 8.0, right: 20),
+                                                      child: Text(
+                                                        channel.channel?.author ?? '',
+                                                        style: textTheme.displaySmall,
+                                                      ),
+                                                    )
+                                                  ]),
                                                 ),
-                                                Padding(
-                                                  padding: const EdgeInsets.only(left: 8.0, right: 20),
-                                                  child: Text(
-                                                    channel.channel?.author ?? '',
-                                                    style: textTheme.displaySmall,
-                                                  ),
-                                                )
-                                              ]),
+                                              ),
                                             ),
-                                          ),
-                                        ),
-                                        TvSubscribeButton(
-                                          autoFocus: true,
-                                          channelId: channelId,
-                                          subCount: compactCurrency.format(channel.channel!.subCount),
-                                          onFocusChanged: tvCubit.scrollToTop,
-                                        ),
-                                        TvExpandableText(
-                                          text: channel.channel?.description ?? '',
-                                          maxLines: 3,
-                                        ),
-                                        tv.hasVideos
-                                            ? Padding(
-                                                key: tv.videosTitle,
-                                                padding: const EdgeInsets.only(top: 20.0),
-                                                child: Text(
-                                                  locals.videos,
-                                                  style: textTheme.titleLarge,
-                                                ),
-                                              )
-                                            : const SizedBox.shrink(),
-                                        TvHorizontalVideoList(
-                                            onItemFocus: (video, index, focus) => tvCubit.scrollTo(tv.videosTitle, focus),
-                                            paginatedVideoList: ContinuationList<VideoInList>((continuation) => service.getChannelVideos(channel.channel?.authorId ?? '', continuation).then((value) {
-                                                  tvCubit.setHasVideos(value.videos.isNotEmpty);
-                                                  return value;
-                                                }))),
-                                        tv.hasShorts
-                                            ? Padding(
-                                                key: tv.shortTitle,
-                                                padding: const EdgeInsets.only(top: 20.0),
-                                                child: Text(
-                                                  locals.shorts,
-                                                  style: textTheme.titleLarge,
-                                                ),
-                                              )
-                                            : const SizedBox.shrink(),
-                                        TvHorizontalVideoList(
-                                            onItemFocus: (video, index, focus) => tvCubit.scrollTo(tv.shortTitle, focus),
-                                            paginatedVideoList: ContinuationList<VideoInList>((continuation) => service.getChannelShorts(channel.channel?.authorId ?? '', continuation).then((value) {
-                                                  tvCubit.setHasShorts(value.videos.isNotEmpty);
-                                                  return value;
-                                                }))),
-                                        tv.hasStreams
-                                            ? Padding(
-                                                key: tv.streamTitle,
-                                                padding: const EdgeInsets.only(top: 20.0),
-                                                child: Text(
-                                                  locals.streams,
-                                                  style: textTheme.titleLarge,
-                                                ),
-                                              )
-                                            : const SizedBox.shrink(),
-                                        TvHorizontalVideoList(
-                                            onItemFocus: (video, index, focus) => tvCubit.scrollTo(tv.streamTitle, focus),
-                                            paginatedVideoList: ContinuationList<VideoInList>((continuation) => service.getChannelStreams(channel.channel?.authorId ?? '', continuation).then((value) {
-                                                  tvCubit.setHasStreams(value.videos.isNotEmpty);
-                                                  return value;
-                                                }))),
-                                        tv.hasPlaylist
-                                            ? Padding(
-                                                padding: const EdgeInsets.only(top: 20.0),
-                                                child: Text(
-                                                  locals.playlists,
-                                                  style: textTheme.titleLarge,
-                                                ),
-                                              )
-                                            : const SizedBox.shrink(),
-                                        TvHorizontalItemList<Playlist>(
-                                          getPlaceholder: () => const TvPlaylistPlaceHolder(),
-                                          paginatedList:
-                                              ContinuationList<Playlist>((continuation) => service.getChannelPlaylists(channel.channel?.authorId ?? '', continuation: continuation).then((value) {
+                                            TvSubscribeButton(
+                                              autoFocus: true,
+                                              channelId: channelId,
+                                              subCount: compactCurrency.format(channel.channel!.subCount),
+                                              onFocusChanged: tvCubit.scrollToTop,
+                                            ),
+                                            TvExpandableText(
+                                              text: channel.channel?.description ?? '',
+                                              maxLines: 3,
+                                            ),
+                                            tv.hasVideos
+                                                ? Padding(
+                                                    key: tv.videosTitle,
+                                                    padding: const EdgeInsets.only(top: 20.0),
+                                                    child: Text(
+                                                      locals.videos,
+                                                      style: textTheme.titleLarge,
+                                                    ),
+                                                  )
+                                                : const SizedBox.shrink(),
+                                            TvHorizontalVideoList(
+                                                onItemFocus: (video, index, focus) =>
+                                                    tvCubit.scrollTo(tv.videosTitle, focus),
+                                                paginatedVideoList: ContinuationList<VideoInList>((continuation) =>
+                                                    service
+                                                        .getChannelVideos(channel.channel?.authorId ?? '', continuation)
+                                                        .then((value) {
+                                                      tvCubit.setHasVideos(value.videos.isNotEmpty);
+                                                      return value;
+                                                    }))),
+                                            tv.hasShorts
+                                                ? Padding(
+                                                    key: tv.shortTitle,
+                                                    padding: const EdgeInsets.only(top: 20.0),
+                                                    child: Text(
+                                                      locals.shorts,
+                                                      style: textTheme.titleLarge,
+                                                    ),
+                                                  )
+                                                : const SizedBox.shrink(),
+                                            TvHorizontalVideoList(
+                                                onItemFocus: (video, index, focus) =>
+                                                    tvCubit.scrollTo(tv.shortTitle, focus),
+                                                paginatedVideoList: ContinuationList<VideoInList>((continuation) =>
+                                                    service
+                                                        .getChannelShorts(channel.channel?.authorId ?? '', continuation)
+                                                        .then((value) {
+                                                      tvCubit.setHasShorts(value.videos.isNotEmpty);
+                                                      return value;
+                                                    }))),
+                                            tv.hasStreams
+                                                ? Padding(
+                                                    key: tv.streamTitle,
+                                                    padding: const EdgeInsets.only(top: 20.0),
+                                                    child: Text(
+                                                      locals.streams,
+                                                      style: textTheme.titleLarge,
+                                                    ),
+                                                  )
+                                                : const SizedBox.shrink(),
+                                            TvHorizontalVideoList(
+                                                onItemFocus: (video, index, focus) =>
+                                                    tvCubit.scrollTo(tv.streamTitle, focus),
+                                                paginatedVideoList: ContinuationList<VideoInList>((continuation) =>
+                                                    service
+                                                        .getChannelStreams(
+                                                            channel.channel?.authorId ?? '', continuation)
+                                                        .then((value) {
+                                                      tvCubit.setHasStreams(value.videos.isNotEmpty);
+                                                      return value;
+                                                    }))),
+                                            tv.hasPlaylist
+                                                ? Padding(
+                                                    padding: const EdgeInsets.only(top: 20.0),
+                                                    child: Text(
+                                                      locals.playlists,
+                                                      style: textTheme.titleLarge,
+                                                    ),
+                                                  )
+                                                : const SizedBox.shrink(),
+                                            TvHorizontalItemList<Playlist>(
+                                              getPlaceholder: () => const TvPlaylistPlaceHolder(),
+                                              paginatedList: ContinuationList<Playlist>((continuation) => service
+                                                      .getChannelPlaylists(channel.channel?.authorId ?? '',
+                                                          continuation: continuation)
+                                                      .then((value) {
                                                     tvCubit.setHasPlaylists(value.playlists.isNotEmpty);
                                                     return value;
                                                   })),
-                                          buildItem: (context, index, item) => Padding(
-                                              padding: const EdgeInsets.all(8.0),
-                                              child: PlaylistInList(
-                                                playlist: item,
-                                                canDeleteVideos: false,
-                                                isTv: true,
-                                                // cameFromSearch: true,
-                                              )),
-                                        ),
-                                      ]),
+                                              buildItem: (context, index, item) => Padding(
+                                                  padding: const EdgeInsets.all(8.0),
+                                                  child: PlaylistInList(
+                                                    playlist: item,
+                                                    canDeleteVideos: false,
+                                                    isTv: true,
+                                                    // cameFromSearch: true,
+                                                  )),
+                                            ),
+                                          ]),
                                     ),
                                   ),
                                 ),

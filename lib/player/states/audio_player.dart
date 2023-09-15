@@ -78,7 +78,10 @@ class AudioPlayerCubit extends MediaPlayerCubit<AudioPlayerState> {
     var state = this.state.copyWith();
     state.loading = false;
     if (!isClosed) emit(state);
-    player.setEvent(MediaEvent(state: MediaState.playing, type: MediaEventType.durationChanged, value: duration ?? const Duration(seconds: 1)));
+    player.setEvent(MediaEvent(
+        state: MediaState.playing,
+        type: MediaEventType.durationChanged,
+        value: duration ?? const Duration(seconds: 1)));
   }
 
   onPositionChanged(Duration position) {
@@ -105,7 +108,10 @@ class AudioPlayerCubit extends MediaPlayerCubit<AudioPlayerState> {
         AudioSource? source;
 
         if (!offline) {
-          AdaptiveFormat? audio = state.video?.adaptiveFormats.where((element) => element.type.contains("audio")).sortByReversed((e) => int.parse(e.bitrate ?? "0")).first;
+          AdaptiveFormat? audio = state.video?.adaptiveFormats
+              .where((element) => element.type.contains("audio"))
+              .sortByReversed((e) => int.parse(e.bitrate ?? "0"))
+              .first;
           if (audio != null) {
             if (startAt == null) {
               double progress = db.getVideoProgress(state.video!.videoId);
@@ -329,7 +335,6 @@ class AudioPlayerCubit extends MediaPlayerCubit<AudioPlayerState> {
     EasyThrottle.throttle('audio-buffering', const Duration(seconds: 1), () {
       player.setEvent(MediaEvent(state: MediaState.playing, type: MediaEventType.bufferChanged, value: event));
     });
-
   }
 }
 
@@ -348,7 +353,8 @@ class AudioPlayerState extends MediaPlayerState {
   bool loading = false;
   String? error;
 
-  AudioPlayerState._(this.player, this.audioLength, this.audioPosition, this.previousSponsorCheck, this.loading, this.error,
+  AudioPlayerState._(
+      this.player, this.audioLength, this.audioPosition, this.previousSponsorCheck, this.loading, this.error,
       {Video? video, DownloadedVideo? offlineVideo, bool? disableControls, bool? playNow})
       : super(video: video, offlineVideo: offlineVideo, disableControls: disableControls, playNow: playNow);
 }

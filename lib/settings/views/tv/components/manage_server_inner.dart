@@ -98,7 +98,8 @@ class TvManageServersInner extends StatelessWidget {
     return BlocBuilder<ServerListSettingsCubit, ServerListSettingsState>(builder: (context, _) {
       var cubit = context.read<ServerListSettingsCubit>();
       var settings = context.watch<SettingsCubit>();
-      var filteredPublicServers = _.publicServers.where((s) => _.dbServers.indexWhere((element) => element.url == s.url) == -1).toList();
+      var filteredPublicServers =
+          _.publicServers.where((s) => _.dbServers.indexWhere((element) => element.url == s.url) == -1).toList();
       return ListView(children: [
         SettingsTile(
           title: locals.skipSslVerification,
@@ -157,8 +158,10 @@ class TvManageServersInner extends StatelessWidget {
                 : filteredPublicServers
                     .map((s) => SettingsTile(
                           key: Key(s.url),
-                          title: '${s.url} - ${(s.ping != null && s.ping!.compareTo(const Duration(seconds: pingTimeout)) == -1) ? '${s.ping?.inMilliseconds}ms' : '>${pingTimeout}s'}',
-                          description: '${(s.flag != null && s.region != null) ? '${s.flag} - ${s.region} - ' : ''} ${locals.tapToAddServer}',
+                          title:
+                              '${s.url} - ${(s.ping != null && s.ping!.compareTo(const Duration(seconds: pingTimeout)) == -1) ? '${s.ping?.inMilliseconds}ms' : '>${pingTimeout}s'}',
+                          description:
+                              '${(s.flag != null && s.region != null) ? '${s.flag} - ${s.region} - ' : ''} ${locals.tapToAddServer}',
                           onSelected: (context) => cubit.upsertServer(s),
                         ))
                     .toList()

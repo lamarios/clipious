@@ -25,7 +25,8 @@ class TvWelcomeWizard extends StatelessWidget {
           providers: [
             BlocProvider(create: (context) => WelcomeWizardCubit(null)),
             BlocProvider(
-              create: (context) => ServerListSettingsCubit(ServerListSettingsState(publicServers: [], dbServers: []), context.read<AppCubit>()),
+              create: (context) => ServerListSettingsCubit(
+                  ServerListSettingsState(publicServers: [], dbServers: []), context.read<AppCubit>()),
             )
           ],
           child: BlocListener<ServerListSettingsCubit, ServerListSettingsState>(
@@ -48,7 +49,7 @@ class TvWelcomeWizard extends StatelessWidget {
                       onPressed: server != null
                           ? (context) {
                               Navigator.of(context).pushReplacement(MaterialPageRoute(
-                                builder: (context) => const TvHome(),
+                                builder: (context) => const TvHomeScreen(),
                               ));
                             }
                           : null,
@@ -56,7 +57,8 @@ class TvWelcomeWizard extends StatelessWidget {
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
                           locals.startUsingClipious,
-                          style: textTheme.titleLarge!.copyWith(color: server == null ? Colors.white.withOpacity(0.5) : Colors.white),
+                          style: textTheme.titleLarge!
+                              .copyWith(color: server == null ? Colors.white.withOpacity(0.5) : Colors.white),
                         ),
                       ),
                     )

@@ -1,17 +1,15 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/globals.dart';
-import 'package:invidious/myRouteObserver.dart';
 import 'package:invidious/playlists/views/components/playlist_list.dart';
+import 'package:invidious/router.dart';
 import 'package:invidious/search/models/search_type.dart';
 import 'package:invidious/videos/models/video_in_list.dart';
-import 'package:invidious/videos/views/components/video_in_list.dart';
 
 import '../../../channels/models/channel.dart';
-import '../../../main.dart';
 import '../../../playlists/models/playlist.dart';
-import '../../../playlists/states/playlist_list.dart';
 import '../../../settings/states/settings.dart';
 import '../../../utils.dart';
 import '../../../utils/models/paginatedList.dart';
@@ -19,11 +17,12 @@ import '../../../utils/views/components/paginated_list_view.dart';
 import '../../../videos/views/components/video_list.dart';
 import '../../states/search.dart';
 
-class Search extends StatelessWidget {
+@RoutePage()
+class SearchScreen extends StatelessWidget {
   final String? query;
   final bool? searchNow;
 
-  const Search({super.key, this.query, this.searchNow});
+  const SearchScreen({super.key, this.query, this.searchNow});
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +60,13 @@ class Search extends StatelessWidget {
                 onSubmitted: cubit.search,
               ),
               actions: [
-                IconButton(onPressed: cubit.searchCleared, icon: const Icon(Icons.clear)),
+                IconButton(
+                    onPressed: () {
+                      if (cubit.searchCleared()) {
+                        AutoRouter.of(context).pop();
+                      }
+                    },
+                    icon: const Icon(Icons.clear)),
               ],
             ),
             body: SafeArea(
@@ -76,7 +81,10 @@ class Search extends StatelessWidget {
                                       onTap: () => cubit.setSearchQuery(e),
                                       child: Padding(
                                         padding: const EdgeInsets.all(8.0),
-                                        child: Row(children: [const Icon(Icons.history), Padding(padding: const EdgeInsets.only(left: 8), child: Text(e))]),
+                                        child: Row(children: [
+                                          const Icon(Icons.history),
+                                          Padding(padding: const EdgeInsets.only(left: 8), child: Text(e))
+                                        ]),
                                       ),
                                     ))
                                 .toList()
@@ -135,18 +143,26 @@ class Search extends StatelessWidget {
                                         padding: const EdgeInsets.only(top: 8.0),
                                         child: VideoList(
                                           paginatedVideoList: SearchPaginatedList<VideoInList>(
-                                              type: SearchType.video, query: _.queryController.value.text, items: _.videos, getFromResults: (res) => res.videos, sortBy: _.sortBy),
+                                              type: SearchType.video,
+                                              query: _.queryController.value.text,
+                                              items: _.videos,
+                                              getFromResults: (res) => res.videos,
+                                              sortBy: _.sortBy),
                                         ),
                                       )
                                     : Center(child: Text(locals.nVideos(0))),
                                 _.channels.isNotEmpty
                                     ? PaginatedListView<Channel>(
                                         paginatedList: SearchPaginatedList<Channel>(
-                                            type: SearchType.channel, query: _.queryController.value.text, items: _.channels, getFromResults: (res) => res.channels, sortBy: _.sortBy),
+                                            type: SearchType.channel,
+                                            query: _.queryController.value.text,
+                                            items: _.channels,
+                                            getFromResults: (res) => res.channels,
+                                            sortBy: _.sortBy),
                                         startItems: _.channels,
                                         itemBuilder: (e) => InkWell(
                                               onTap: () {
-                                                navigatorKey.currentState?.pushNamed(PATH_CHANNEL, arguments: e.authorId);
+                                                AutoRouter.of(context).push(ChannelRoute(channelId: e.authorId));
                                               },
                                               child: Padding(
                                                 padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 20),
@@ -176,7 +192,11 @@ class Search extends StatelessWidget {
                                     ? FractionallySizedBox(
                                         child: PlaylistList(
                                             paginatedList: SearchPaginatedList<Playlist>(
-                                                type: SearchType.playlist, query: _.queryController.value.text, items: _.playlists, getFromResults: (res) => res.playlists, sortBy: _.sortBy),
+                                                type: SearchType.playlist,
+                                                query: _.queryController.value.text,
+                                                items: _.playlists,
+                                                getFromResults: (res) => res.playlists,
+                                                sortBy: _.sortBy),
                                             canDeleteVideos: false),
                                       )
                                     : Center(child: Text(locals.noPlaylists))

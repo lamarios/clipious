@@ -1,21 +1,13 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/app/states/app.dart';
-import 'package:invidious/myRouteObserver.dart';
-import 'package:invidious/settings/views/components/app_customizer.dart';
-import 'package:invidious/settings/views/screens/app_logs.dart';
-import 'package:invidious/settings/views/screens/search_history_settings.dart';
-import 'package:invidious/settings/views/screens/sponsor_block_settings.dart';
-import 'package:invidious/settings/views/screens/video_filter.dart';
+import 'package:invidious/router.dart';
 import 'package:invidious/utils/views/components/app_icon.dart';
-import 'package:invidious/utils/views/components/select_list_dialog.dart';
-import 'package:locale_names/locale_names.dart';
 import 'package:settings_ui/settings_ui.dart';
 
-import '../../../globals.dart';
 import '../../states/settings.dart';
-import 'manage_servers.dart';
 
 settingsTheme(ColorScheme colorScheme) => SettingsThemeData(
     settingsSectionBackground: colorScheme.background,
@@ -26,33 +18,32 @@ settingsTheme(ColorScheme colorScheme) => SettingsThemeData(
     leadingIconsColor: colorScheme.secondary,
     tileHighlightColor: colorScheme.secondaryContainer);
 
-class Settings extends StatelessWidget {
-  const Settings({super.key});
+@RoutePage()
+class SettingsScreen extends StatelessWidget {
+  const SettingsScreen({super.key});
 
   manageServers(BuildContext context) {
-    Navigator.of(context)
-        .push(MaterialPageRoute(settings: ROUTE_SETTINGS_MANAGE_SERVERS, builder: (context) => const ManageServers()));
+    AutoRouter.of(context).push(const ManageServersRoute());
   }
 
   openAppLogs(BuildContext context) {
-    Navigator.of(context)
-        .push(MaterialPageRoute(settings: ROUTE_SETTINGS_SEARCH_HISTORY, builder: (context) => const AppLogs()));
+    AutoRouter.of(context).push(const AppLogsRoute());
   }
 
   openNotificationSettings(BuildContext context) {
-    Navigator.of(context).pushNamed(PATH_SETTINGS_NOTIFICATIONS);
+    AutoRouter.of(context).push(const NotificationSettingsRoute());
   }
 
   openBrowsingSettings(BuildContext context) {
-    Navigator.of(context).pushNamed(pathSettingsBrowsing);
+    AutoRouter.of(context).push(const BrowsingSettingsRoute());
   }
 
   openVideoPlayerSettings(BuildContext context) {
-    Navigator.of(context).pushNamed(pathSettingsVideoPlayer);
+    AutoRouter.of(context).push(const VideoPlayerSettingsRoute());
   }
 
   openAppearanceSettings(BuildContext context) {
-    Navigator.of(context).pushNamed(pathSettingsAppearance);
+    AutoRouter.of(context).push(const AppearanceSettingsRoute());
   }
 
 /*
@@ -97,7 +88,7 @@ class Settings extends StatelessWidget {
               lightTheme: theme,
               darkTheme: theme,
               sections: [
-                SettingsSection( tiles: [
+                SettingsSection(tiles: [
                   SettingsTile.navigation(
                     leading: const Icon(Icons.home_outlined),
                     title: Text(locals.browsing),

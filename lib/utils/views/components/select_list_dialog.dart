@@ -12,7 +12,15 @@ class SelectList<T> extends StatelessWidget {
   final Future<List<T>> Function(String filter)? asyncSearch;
   final bool Function(String filter, T value)? searchFilter;
 
-  SelectList({super.key, required this.title, required this.values, this.value, required this.itemBuilder, required this.onSelect, this.searchFilter, this.asyncSearch})
+  SelectList(
+      {super.key,
+      required this.title,
+      required this.values,
+      this.value,
+      required this.itemBuilder,
+      required this.onSelect,
+      this.searchFilter,
+      this.asyncSearch})
       : assert(values == null || asyncSearch == null, 'Cannot provide both async search and list of values');
 
   static show<T>(BuildContext context,

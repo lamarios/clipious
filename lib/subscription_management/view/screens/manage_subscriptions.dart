@@ -1,8 +1,8 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:invidious/main.dart';
-import 'package:invidious/myRouteObserver.dart';
+import 'package:invidious/router.dart';
 import 'package:invidious/subscription_management/models/subscription.dart';
 import 'package:invidious/utils.dart';
 import 'package:invidious/utils/views/components/simple_list_item.dart';
@@ -10,8 +10,9 @@ import 'package:invidious/utils/views/components/top_loading.dart';
 
 import '../../states/manage_subscriptions.dart';
 
-class ManageSubscriptions extends StatelessWidget {
-  const ManageSubscriptions({super.key});
+@RoutePage()
+class ManageSubscriptionsScreen extends StatelessWidget {
+  const ManageSubscriptionsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -50,8 +51,8 @@ class ManageSubscriptions extends StatelessWidget {
                                     Subscription sub = _.subs[index];
 
                                     return GestureDetector(
-                                      onTap: () => navigatorKey.currentState
-                                          ?.pushNamed(PATH_CHANNEL, arguments: sub.authorId)
+                                      onTap: () => AutoRouter.of(context)
+                                          .push(ChannelRoute(channelId: sub.authorId))
                                           .then((value) => cubit.refreshSubs()),
                                       child: SimpleListItem(
                                         key: ValueKey(sub.authorId),

@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:invidious/globals.dart';
-import 'package:invidious/utils/models/image_object.dart';
 import 'package:invidious/utils/states/item_list.dart';
 
 import '../models/db/history_video_cache.dart';

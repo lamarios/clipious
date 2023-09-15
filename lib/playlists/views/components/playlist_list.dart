@@ -34,8 +34,11 @@ class PlaylistList extends StatelessWidget {
                   ? Container(
                       alignment: Alignment.center,
                       color: colorScheme.background,
-                      child:
-                          Visibility(visible: _.error.isNotEmpty, child: InkWell(onTap: () => cubit.getPlaylists(), child: Text(_.error == couldNotGetPlaylits ? locals.couldntFetchVideos : _.error))),
+                      child: Visibility(
+                          visible: _.error.isNotEmpty,
+                          child: InkWell(
+                              onTap: () => cubit.getPlaylists(),
+                              child: Text(_.error == couldNotGetPlaylits ? locals.couldntFetchVideos : _.error))),
                     )
                   : Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -49,14 +52,20 @@ class PlaylistList extends StatelessWidget {
                               controller: _.scrollController,
                               itemBuilder: (context, index) => index >= _.playlists.length
                                   ? PlaylistPlaceHolder(small: small)
-                                  : PlaylistInList(key: ValueKey(_.playlists[index].playlistId), playlist: _.playlists[index], canDeleteVideos: canDeleteVideos, small: small),
+                                  : PlaylistInList(
+                                      key: ValueKey(_.playlists[index].playlistId),
+                                      playlist: _.playlists[index],
+                                      canDeleteVideos: canDeleteVideos,
+                                      small: small),
                               // separatorBuilder: (context, index) => const Divider(),
                               itemCount: _.playlists.length + (_.loading ? 7 : 0)),
                         ),
                       ),
                     ),
               Visibility(visible: _.loading && !small, child: const TopListLoading()),
-              Visibility(visible: !small && canDeleteVideos, child: const Positioned(bottom: 15, right: 15, child: AddPlayListButton()))
+              Visibility(
+                  visible: !small && canDeleteVideos,
+                  child: const Positioned(bottom: 15, right: 15, child: AddPlayListButton()))
             ],
           );
         },

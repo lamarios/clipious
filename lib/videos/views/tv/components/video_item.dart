@@ -14,10 +14,12 @@ class TvVideoItem extends StatelessWidget {
   final void Function(bool focus)? onFocusChange;
   final Function(BuildContext context, VideoInList video)? onSelect;
 
-  const TvVideoItem({Key? key, required this.video, required this.autoFocus, this.onSelect, this.onFocusChange}) : super(key: key);
+  const TvVideoItem({Key? key, required this.video, required this.autoFocus, this.onSelect, this.onFocusChange})
+      : super(key: key);
 
   openVideo(BuildContext context, VideoInList e, FocusNode node, KeyEvent event) {
-    if (event is KeyUpEvent && (event.logicalKey == LogicalKeyboardKey.enter || event.logicalKey == LogicalKeyboardKey.select)) {
+    if (event is KeyUpEvent &&
+        (event.logicalKey == LogicalKeyboardKey.enter || event.logicalKey == LogicalKeyboardKey.select)) {
       if (onSelect != null) {
         onSelect!(context, e);
       } else {
@@ -69,7 +71,8 @@ class TvVideoItem extends StatelessWidget {
                                   child: Container(
                                     alignment: Alignment.bottomRight,
                                     child: Container(
-                                      decoration: BoxDecoration(color: Colors.black.withOpacity(0.5), borderRadius: BorderRadius.circular(5)),
+                                      decoration: BoxDecoration(
+                                          color: Colors.black.withOpacity(0.5), borderRadius: BorderRadius.circular(5)),
                                       child: Padding(
                                         padding: const EdgeInsets.all(3.0),
                                         child: Text(

@@ -1,12 +1,11 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/app/states/app.dart';
-import 'package:invidious/main.dart';
-import 'package:invidious/myRouteObserver.dart';
+import 'package:invidious/router.dart';
 import 'package:invidious/settings/states/server_list_settings.dart';
 import 'package:invidious/settings/states/settings.dart';
-import 'package:invidious/settings/views/screens/manage_single_server.dart';
 import 'package:settings_ui/settings_ui.dart';
 
 import '../../../utils.dart';
@@ -121,14 +120,7 @@ class ManagerServersView extends StatelessWidget {
 
   openServer(BuildContext context, Server s) {
     var cubit = context.read<ServerListSettingsCubit>();
-    navigatorKey.currentState
-        ?.push(MaterialPageRoute(
-          settings: ROUTE_SETTINGS_MANAGE_ONE_SERVER,
-          builder: (context) => ManageSingleServer(
-            server: s,
-          ),
-        ))
-        .then((value) => cubit.refreshServers());
+    AutoRouter.of(context).push(ManageSingleServerRoute(server: s)).then((value) => cubit.refreshServers());
   }
 
   @override
@@ -143,7 +135,8 @@ class ManagerServersView extends StatelessWidget {
         SettingsCubit settings = context.watch<SettingsCubit>();
         ServerListSettingsCubit cubit = context.read<ServerListSettingsCubit>();
         var app = context.read<AppCubit>();
-        var filteredPublicServers = _.publicServers.where((s) => _.dbServers.indexWhere((element) => element.url == s.url) == -1).toList();
+        var filteredPublicServers =
+            _.publicServers.where((s) => _.dbServers.indexWhere((element) => element.url == s.url) == -1).toList();
         return Stack(
           children: [
             SettingsList(
@@ -171,12 +164,15 @@ class ManagerServersView extends StatelessWidget {
                                       padding: const EdgeInsets.all(8.0),
                                       child: Icon(
                                         Icons.done,
-                                        color: s.url == app.state.server?.url ? colorScheme.primary : colorScheme.secondaryContainer,
+                                        color: s.url == app.state.server?.url
+                                            ? colorScheme.primary
+                                            : colorScheme.secondaryContainer,
                                       ),
                                     ),
                                   ),
                                   title: Text(s.url),
-                                  value: Text('${cubit.isLoggedInToServer(s.url) ? '${locals.loggedIn}, ' : ''} ${locals.tapToManage}'),
+                                  value: Text(
+                                      '${cubit.isLoggedInToServer(s.url) ? '${locals.loggedIn}, ' : ''} ${locals.tapToManage}'),
                                   onPressed: (context) => openServer(context, s),
                                 ))
                             .toList()
@@ -216,12 +212,21 @@ class ManagerServersView extends StatelessWidget {
                                       title: Row(
                                         children: [
                                           Expanded(child: Text('${s.url} ')),
-                                          Text((s.ping != null && s.ping!.compareTo(const Duration(seconds: pingTimeout)) == -1) ? '${s.ping?.inMilliseconds}ms' : '>${pingTimeout}s',
+                                          Text(
+                                              (s.ping != null &&
+                                                      s.ping!.compareTo(const Duration(seconds: pingTimeout)) == -1)
+                                                  ? '${s.ping?.inMilliseconds}ms'
+                                                  : '>${pingTimeout}s',
                                               style: textTheme.labelLarge?.copyWith(color: colorScheme.secondary))
                                         ],
                                       ),
                                       value: Wrap(
-                                        children: [Visibility(visible: s.flag != null && s.region != null, child: Text('${s.flag} - ${s.region} - ')), Text(locals.tapToAddServer)],
+                                        children: [
+                                          Visibility(
+                                              visible: s.flag != null && s.region != null,
+                                              child: Text('${s.flag} - ${s.region} - ')),
+                                          Text(locals.tapToAddServer)
+                                        ],
                                       ),
                                       onPressed: (context) => showPublicServerActions(context, _, s),
                                     ))

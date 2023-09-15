@@ -12,7 +12,8 @@ class TvSettingsManageServers extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: BlocProvider(
-          create: (BuildContext context) => ServerListSettingsCubit(ServerListSettingsState(publicServers: [], dbServers: []), context.read<AppCubit>()),
+          create: (BuildContext context) => ServerListSettingsCubit(
+              ServerListSettingsState(publicServers: [], dbServers: []), context.read<AppCubit>()),
           child: const TvOverscan(child: TvManageServersInner())),
     );
   }

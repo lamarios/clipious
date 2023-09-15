@@ -94,6 +94,7 @@ class Video extends BaseVideo {
   }
 
   VideoInList toVideoInList() {
-    return VideoInList(title, videoId, lengthSeconds, viewCount, author, authorId, authorUrl, published, publishedText, videoThumbnails);
+    return VideoInList(title, videoId, lengthSeconds, viewCount, author, authorId, authorUrl, published, publishedText,
+        videoThumbnails);
   }
 }

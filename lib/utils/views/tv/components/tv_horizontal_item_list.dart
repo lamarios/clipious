@@ -13,7 +13,9 @@ class TvHorizontalItemList<T> extends StatelessWidget {
   final String? tags;
   final Widget Function(BuildContext context, int index, T item) buildItem;
 
-  const TvHorizontalItemList({Key? key, this.tags, required this.paginatedList, required this.buildItem, required this.getPlaceholder}) : super(key: key);
+  const TvHorizontalItemList(
+      {Key? key, this.tags, required this.paginatedList, required this.buildItem, required this.getPlaceholder})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +59,14 @@ class TvHorizontalVideoList extends StatelessWidget {
   final int autoFocusedIndex;
   final void Function(VideoInList video, int index, bool focus)? onItemFocus;
 
-  const TvHorizontalVideoList({Key? key, this.tags, required this.paginatedVideoList, this.onSelect, this.autoFocusedIndex = 0, this.onItemFocus}) : super(key: key);
+  const TvHorizontalVideoList(
+      {Key? key,
+      this.tags,
+      required this.paginatedVideoList,
+      this.onSelect,
+      this.autoFocusedIndex = 0,
+      this.onItemFocus})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

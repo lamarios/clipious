@@ -1,9 +1,10 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/main.dart';
-import 'package:invidious/myRouteObserver.dart';
+import 'package:invidious/router.dart';
 import 'package:invidious/videos/states/add_to_playlist.dart';
 import 'package:invidious/videos/states/add_to_playlist_button.dart';
 import 'package:invidious/videos/states/video_like.dart';
@@ -60,7 +61,7 @@ class AddToPlaylist extends StatelessWidget {
     }
 
     if (context.mounted) {
-      navigatorKey.currentState?.pop();
+      Navigator.of(context).pop();
     }
   }
 
@@ -73,7 +74,7 @@ class AddToPlaylist extends StatelessWidget {
   }
 
   openServerSettings(BuildContext context) {
-    navigatorKey.currentState?.push(MaterialPageRoute(settings: ROUTE_SETTINGS_MANAGE_ONE_SERVER, builder: (context) => ManageSingleServer(server: db.getCurrentlySelectedServer())));
+    AutoRouter.of(context).push(ManageSingleServerRoute(server: db.getCurrentlySelectedServer()));
   }
 
   @override
@@ -81,7 +82,8 @@ class AddToPlaylist extends StatelessWidget {
     var locals = AppLocalizations.of(context)!;
 
     return BlocProvider(
-      create: (context) => AddToPlaylistCubit(AddToPlaylistController(videoId), videoLikeButtonCubit: videoLikeButtonCubit, addToPlaylistButtonCubit: addToPlaylistButtonCubit),
+      create: (context) => AddToPlaylistCubit(AddToPlaylistController(videoId),
+          videoLikeButtonCubit: videoLikeButtonCubit, addToPlaylistButtonCubit: addToPlaylistButtonCubit),
       child: BlocBuilder<AddToPlaylistCubit, AddToPlaylistController>(
         builder: (context, _) {
           var cubit = context.read<AddToPlaylistCubit>();
@@ -99,12 +101,15 @@ class AddToPlaylist extends StatelessWidget {
                               Text(locals.notLoggedIn),
                               Padding(
                                 padding: const EdgeInsets.only(top: 4.0),
-                                child: FilledButton(onPressed: () => openServerSettings(context), child: Text(locals.logIn)),
+                                child: FilledButton(
+                                    onPressed: () => openServerSettings(context), child: Text(locals.logIn)),
                               )
                             ],
                           )))
                   : const SizedBox.shrink(),
-              _.loading ? const Expanded(child: Align(alignment: Alignment.center, child: CircularProgressIndicator())) : const SizedBox.shrink(),
+              _.loading
+                  ? const Expanded(child: Align(alignment: Alignment.center, child: CircularProgressIndicator()))
+                  : const SizedBox.shrink(),
               Expanded(
                 child: ListView(
                   children: _.playlists.map((p) {

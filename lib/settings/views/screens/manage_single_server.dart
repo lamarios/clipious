@@ -1,3 +1,4 @@
+import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -9,10 +10,11 @@ import 'package:settings_ui/settings_ui.dart';
 import '../../models/db/server.dart';
 import 'settings.dart';
 
-class ManageSingleServer extends StatelessWidget {
+@RoutePage()
+class ManageSingleServerScreen extends StatelessWidget {
   final Server server;
 
-  const ManageSingleServer({Key? key, required this.server}) : super(key: key);
+  const ManageSingleServerScreen({Key? key, required this.server}) : super(key: key);
 
   void showLogInWithCookiesDialog(BuildContext context) async {
     var locals = AppLocalizations.of(context)!;
@@ -28,7 +30,11 @@ class ManageSingleServer extends StatelessWidget {
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              TextField(controller: userController, autocorrect: false, autofillHints: const [AutofillHints.username, AutofillHints.email], decoration: InputDecoration(label: Text(locals.username))),
+              TextField(
+                  controller: userController,
+                  autocorrect: false,
+                  autofillHints: const [AutofillHints.username, AutofillHints.email],
+                  decoration: InputDecoration(label: Text(locals.username))),
               TextField(
                 obscureText: true,
                 autocorrect: false,
@@ -75,7 +81,8 @@ class ManageSingleServer extends StatelessWidget {
       child: BlocBuilder<ServerSettingsCubit, Server>(
         builder: (context, server) {
           var cubit = context.read<ServerSettingsCubit>();
-          bool isLoggedIn = (server.authToken != null && server.authToken!.isNotEmpty) || (server.sidCookie != null && server.sidCookie!.isNotEmpty);
+          bool isLoggedIn = (server.authToken != null && server.authToken!.isNotEmpty) ||
+              (server.sidCookie != null && server.sidCookie!.isNotEmpty);
           return Scaffold(
               appBar: AppBar(
                 backgroundColor: colorScheme.background,
@@ -96,19 +103,24 @@ class ManageSingleServer extends StatelessWidget {
                   ]),
                   SettingsSection(title: Text(locals.authentication), tiles: [
                     SettingsTile(
-                      leading: server.authToken?.isNotEmpty ?? false ? const Icon(Icons.check) : const Icon(Icons.token),
+                      leading:
+                          server.authToken?.isNotEmpty ?? false ? const Icon(Icons.check) : const Icon(Icons.token),
                       enabled: !isLoggedIn,
                       title: Text(locals.tokenLogin),
-                      value: Text(server.authToken?.isNotEmpty ?? false ? locals.loggedIn : locals.tokenLoginDescription),
+                      value:
+                          Text(server.authToken?.isNotEmpty ?? false ? locals.loggedIn : locals.tokenLoginDescription),
                       onPressed: (context) async {
                         await cubit.logInWithToken();
                       },
                     ),
                     SettingsTile(
-                      leading: server.sidCookie?.isNotEmpty ?? false ? const Icon(Icons.check) : const Icon(Icons.cookie_outlined),
+                      leading: server.sidCookie?.isNotEmpty ?? false
+                          ? const Icon(Icons.check)
+                          : const Icon(Icons.cookie_outlined),
                       enabled: !isLoggedIn,
                       title: Text(locals.cookieLogin),
-                      value: Text(server.sidCookie?.isNotEmpty ?? false ? locals.loggedIn : locals.cookieLoginDescription),
+                      value:
+                          Text(server.sidCookie?.isNotEmpty ?? false ? locals.loggedIn : locals.cookieLoginDescription),
                       onPressed: showLogInWithCookiesDialog,
                     ),
                     SettingsTile(

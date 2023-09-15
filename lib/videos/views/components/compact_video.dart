@@ -53,7 +53,9 @@ class CompactVideo extends StatelessWidget {
                         widthFactor: (highlighted ?? false) ? 1 : 0,
                         curve: Curves.easeInOutQuad,
                         child: AnimatedContainer(
-                          decoration: BoxDecoration(color: (highlighted ?? false) ? colors.secondaryContainer : colors.background, borderRadius: BorderRadius.circular(10)),
+                          decoration: BoxDecoration(
+                              color: (highlighted ?? false) ? colors.secondaryContainer : colors.background,
+                              borderRadius: BorderRadius.circular(10)),
                           duration: animationDuration * 2,
                         ),
                       ),
@@ -69,12 +71,17 @@ class CompactVideo extends StatelessWidget {
                               ? AspectRatio(
                                   aspectRatio: 16 / 9,
                                   child: Container(
-                                    decoration: BoxDecoration(color: colors.secondaryContainer, borderRadius: BorderRadius.circular(10)),
-                                    child: Icon(Icons.visibility_off_outlined, color: colors.secondary.withOpacity(0.7), size: 15),
+                                    decoration: BoxDecoration(
+                                        color: colors.secondaryContainer, borderRadius: BorderRadius.circular(10)),
+                                    child: Icon(Icons.visibility_off_outlined,
+                                        color: colors.secondary.withOpacity(0.7), size: 15),
                                   ),
                                 )
                               : video != null
-                                  ? VideoThumbnailView(cacheKey: 'v-worst/${videoId}', videoId: videoId, thumbnailUrl: ImageObject.getWorstThumbnail(video?.videoThumbnails)?.url ?? '')
+                                  ? VideoThumbnailView(
+                                      cacheKey: 'v-worst/${videoId}',
+                                      videoId: videoId,
+                                      thumbnailUrl: ImageObject.getWorstThumbnail(video?.videoThumbnails)?.url ?? '')
                                   : offlineVideo != null
                                       ? OfflineVideoThumbnail(
                                           video: offlineVideo!,

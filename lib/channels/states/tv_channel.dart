@@ -62,7 +62,10 @@ class TvChannelCubit extends Cubit<TvChannelController> {
 
   scrollTo(GlobalKey key, bool focus) {
     if (key.currentContext != null && focus) {
-      Scrollable.ensureVisible(key.currentContext!, alignmentPolicy: ScrollPositionAlignmentPolicy.keepVisibleAtStart, duration: animationDuration, curve: Curves.easeInOutQuad);
+      Scrollable.ensureVisible(key.currentContext!,
+          alignmentPolicy: ScrollPositionAlignmentPolicy.keepVisibleAtStart,
+          duration: animationDuration,
+          curve: Curves.easeInOutQuad);
     }
   }
 
@@ -91,6 +94,6 @@ class TvChannelController {
 
   TvChannelController();
 
-  TvChannelController._(
-      this.scrollController, this.showBackground, this.hasShorts, this.hasStreams, this.hasVideos, this.hasPlaylist, this.videosTitle, this.shortTitle, this.streamTitle, this.playlistsTitle);
+  TvChannelController._(this.scrollController, this.showBackground, this.hasShorts, this.hasStreams, this.hasVideos,
+      this.hasPlaylist, this.videosTitle, this.shortTitle, this.streamTitle, this.playlistsTitle);
 }

@@ -1,4 +1,5 @@
 // import 'package:video_player/video_player.dart';
+import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_fadein/flutter_fadein.dart';
@@ -8,16 +9,16 @@ import 'package:invidious/channels/views/components/info.dart';
 import 'package:invidious/channels/views/components/playlists.dart';
 import 'package:invidious/channels/views/components/videos.dart';
 import 'package:invidious/globals.dart';
-import 'package:invidious/videos/views/components/video_in_list.dart';
 
 import '../../../settings/states/settings.dart';
 import '../../../utils.dart';
 import '../../../utils/views/components/placeholders.dart';
 
-class ChannelView extends StatelessWidget {
+@RoutePage()
+class ChannelScreen extends StatelessWidget {
   final String channelId;
 
-  const ChannelView({super.key, required this.channelId});
+  const ChannelScreen({super.key, required this.channelId});
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +75,9 @@ class ChannelView extends StatelessWidget {
                 child: AnimatedSwitcher(
                   duration: animationDuration,
                   child: <Widget>[
-                    _.loading ? const ChannelPlaceHolder() : ChannelInfo(key: const ValueKey('info'), channel: _.channel!),
+                    _.loading
+                        ? const ChannelPlaceHolder()
+                        : ChannelInfo(key: const ValueKey('info'), channel: _.channel!),
                     if (!_.loading)
                       ChannelVideosView(
                         key: const ValueKey('videos'),
@@ -93,7 +96,9 @@ class ChannelView extends StatelessWidget {
                         channel: _.channel!,
                         getVideos: service.getChannelStreams,
                       ),
-                    if (!_.loading) ChannelPlayListsView(key: const ValueKey('playlists'), channelId: _.channel!.authorId, canDeleteVideos: false)
+                    if (!_.loading)
+                      ChannelPlayListsView(
+                          key: const ValueKey('playlists'), channelId: _.channel!.authorId, canDeleteVideos: false)
                   ][_.selectedIndex],
                 )),
           );

@@ -14,7 +14,8 @@ class FormatStream {
   String resolution;
   String size;
 
-  FormatStream(this.url, this.itag, this.type, this.quality, this.container, this.encoding, this.qualityLabel, this.resolution, this.size);
+  FormatStream(this.url, this.itag, this.type, this.quality, this.container, this.encoding, this.qualityLabel,
+      this.resolution, this.size);
 
   factory FormatStream.fromJson(Map<String, dynamic> json) => _$FormatStreamFromJson(json);
 

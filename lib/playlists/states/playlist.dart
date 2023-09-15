@@ -54,7 +54,8 @@ class PlaylistCubit extends Cubit<PlaylistState> {
       do {
         pl = await service.getPublicPlaylists(state.playlist.playlistId, page: page);
 
-        var toAdd = pl.videos.where((v) => state.playlist.videos.indexWhere((v2) => v2.videoId == v.videoId) == -1).toList();
+        var toAdd =
+            pl.videos.where((v) => state.playlist.videos.indexWhere((v2) => v2.videoId == v.videoId) == -1).toList();
 
         state.playlist.videos.addAll(toAdd);
 
@@ -106,5 +107,6 @@ class PlaylistState {
 
   PlaylistState({required this.playlist, required this.playlistItemHeight});
 
-  PlaylistState._(this.showImage, this.loadingProgress, this.playlist, this.loading, this.scrollController, this.playlistItemHeight);
+  PlaylistState._(this.showImage, this.loadingProgress, this.playlist, this.loading, this.scrollController,
+      this.playlistItemHeight);
 }

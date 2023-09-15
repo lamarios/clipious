@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/notifications/models/db/channel_notifications.dart';
 import 'package:invidious/settings/states/channel_notifications.dart';
 import 'package:invidious/utils.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ChannelNotificationList extends StatelessWidget {
   const ChannelNotificationList({super.key});

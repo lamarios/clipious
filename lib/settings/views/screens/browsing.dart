@@ -1,38 +1,31 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/globals.dart';
+import 'package:invidious/router.dart';
 import 'package:invidious/settings/states/settings.dart';
-import 'package:invidious/settings/views/components/channel_notifications.dart';
-import 'package:invidious/settings/views/screens/search_history_settings.dart';
 import 'package:invidious/settings/views/screens/settings.dart';
-import 'package:invidious/settings/views/screens/video_filter.dart';
-import 'package:invidious/utils.dart';
 import 'package:locale_names/locale_names.dart';
-import 'package:optimize_battery/optimize_battery.dart';
 import 'package:settings_ui/settings_ui.dart';
 
-import '../../../myRouteObserver.dart';
 import '../../../utils/views/components/select_list_dialog.dart';
 import '../components/app_customizer.dart';
 
-class BrowsingSettings extends StatelessWidget {
-  const BrowsingSettings({super.key});
-
+@RoutePage()
+class BrowsingSettingsScreen extends StatelessWidget {
+  const BrowsingSettingsScreen({super.key});
 
   customizeApp(BuildContext context) {
     showDialog(
         barrierDismissible: true,
         context: context,
-        builder: (context) => const AlertDialog(
-            content: SizedBox(width: 300, child: AppCustomizer())));
+        builder: (context) => const AlertDialog(content: SizedBox(width: 300, child: AppCustomizer())));
   }
 
   showSelectLanguage(BuildContext context, SettingsState controller) {
     var localsList = AppLocalizations.supportedLocales;
-    var localsStrings =
-    localsList.map((e) => e.nativeDisplayLanguageScript ?? '').toList();
+    var localsStrings = localsList.map((e) => e.nativeDisplayLanguageScript ?? '').toList();
     var locals = AppLocalizations.of(context)!;
     var cubit = context.read<SettingsCubit>();
     var colors = Theme.of(context).colorScheme;
@@ -40,17 +33,16 @@ class BrowsingSettings extends StatelessWidget {
     List<String>? localeString = controller.locale?.split('_');
     Locale? selected = localeString != null
         ? Locale.fromSubtags(
-        languageCode: localeString[0],
-        scriptCode: localeString.length >= 2 ? localeString[1] : null)
+            languageCode: localeString[0], scriptCode: localeString.length >= 2 ? localeString[1] : null)
         : null;
 
     SelectList.show<String>(context,
         values: [locals.followSystem, ...localsStrings],
         value: selected?.nativeDisplayLanguageScript ?? locals.followSystem,
         itemBuilder: (value, selected) => Text(
-          value,
-          style: TextStyle(color: selected ? colors.primary : null),
-        ),
+              value,
+              style: TextStyle(color: selected ? colors.primary : null),
+            ),
         onSelect: (value) {
           if (value == locals.followSystem) {
             cubit.setLocale(localsList, localsStrings, null);
@@ -59,18 +51,11 @@ class BrowsingSettings extends StatelessWidget {
           }
         },
         title: locals.appLanguage);
-
   }
 
   List<String> getCategories(BuildContext context) {
     var locals = AppLocalizations.of(context)!;
-    return [
-      locals.popular,
-      locals.trending,
-      locals.subscriptions,
-      locals.playlists,
-      locals.history
-    ];
+    return [locals.popular, locals.trending, locals.subscriptions, locals.playlists, locals.history];
   }
 
   searchCountry(BuildContext context, SettingsState controller) {
@@ -81,26 +66,21 @@ class BrowsingSettings extends StatelessWidget {
     SelectList.show(context,
         values: countryCodes.map((e) => e.name).toList(),
         value: controller.country.name,
-        searchFilter: (filter, value) =>
-            value.toLowerCase().contains(filter.toLowerCase()),
+        searchFilter: (filter, value) => value.toLowerCase().contains(filter.toLowerCase()),
         itemBuilder: (value, selected) => Text(
-          value,
-          style: TextStyle(color: selected ? colors.primary : null),
-        ),
+              value,
+              style: TextStyle(color: selected ? colors.primary : null),
+            ),
         onSelect: cubit.selectCountry,
         title: locals.selectBrowsingCountry);
   }
 
   openVideoFilterSettings(BuildContext context) {
-    Navigator.of(context).push(MaterialPageRoute(
-        settings: ROUTE_SETTINGS_VIDEO_FILTERS,
-        builder: (context) => const VideoFilterSettings()));
+    AutoRouter.of(context).push(const VideoFilterSettingsRoute());
   }
 
-  openSearchHistorySettings(BuildContext ctx) {
-    Navigator.of(ctx).push(MaterialPageRoute(
-        settings: ROUTE_SETTINGS_SEARCH_HISTORY,
-        builder: (context) => const SearchHistorySettings()));
+  openSearchHistorySettings(BuildContext context) {
+    AutoRouter.of(context).push(const SearchHistorySettingsRoute());
   }
 
   @override
@@ -133,9 +113,7 @@ class BrowsingSettings extends StatelessWidget {
                   ),
                   SettingsTile(
                     title: Text(locals.customizeAppLayout),
-                    value: Text(_.appLayout
-                        .map((e) => e.getLabel(locals))
-                        .join(", ")),
+                    value: Text(_.appLayout.map((e) => e.getLabel(locals)).join(", ")),
                     onPressed: (ctx) => customizeApp(ctx),
                   ),
                   SettingsTile.switchTile(
@@ -146,8 +124,7 @@ class BrowsingSettings extends StatelessWidget {
                   ),
                   SettingsTile(
                     title: Text(locals.appLanguage),
-                    value: Text(
-                        cubit.getLocaleDisplayName() ?? locals.followSystem),
+                    value: Text(cubit.getLocaleDisplayName() ?? locals.followSystem),
                     onPressed: (ctx) => showSelectLanguage(ctx, _),
                   ),
                   SettingsTile.switchTile(
@@ -163,8 +140,7 @@ class BrowsingSettings extends StatelessWidget {
                   ),
                   SettingsTile.navigation(
                     title: Text(locals.videoFilters),
-                    description:
-                    Text(locals.videoFiltersSettingTileDescriptions),
+                    description: Text(locals.videoFiltersSettingTileDescriptions),
                     onPressed: openVideoFilterSettings,
                   ),
                 ],

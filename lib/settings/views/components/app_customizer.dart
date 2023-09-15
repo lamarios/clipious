@@ -15,7 +15,8 @@ class AppCustomizer extends StatelessWidget {
     var colors = Theme.of(context).colorScheme;
     var textTheme = Theme.of(context).textTheme;
     return BlocProvider(
-      create: (context) => AppCustomizerCubit(context.read<SettingsCubit>().state.appLayout, context.read<SettingsCubit>()),
+      create: (context) =>
+          AppCustomizerCubit(context.read<SettingsCubit>().state.appLayout, context.read<SettingsCubit>()),
       child: BlocBuilder<AppCustomizerCubit, List<HomeDataSource>>(
         builder: (context, state) {
           var settings = context.read<SettingsCubit>();
@@ -38,7 +39,9 @@ class AppCustomizer extends StatelessWidget {
                     key: ValueKey(source),
                     children: [
                       IconButton(
-                          onPressed: () => settings.selectOnOpen(index), icon: Icon(onStart == index ? Icons.home : Icons.home_outlined, color: onStart == index ? colors.primary : colors.secondary)),
+                          onPressed: () => settings.selectOnOpen(index),
+                          icon: Icon(onStart == index ? Icons.home : Icons.home_outlined,
+                              color: onStart == index ? colors.primary : colors.secondary)),
                       Checkbox(
                         value: state.contains(source),
                         onChanged: (value) => appLayout.updateSource(source, value ?? false),

@@ -19,14 +19,18 @@ class AnimatedPlaceHolder extends StatelessWidget {
     var colors = Theme.of(context).colorScheme;
     return animate
         ? FadeIn(
-            child:
-                Animate(autoPlay: true, onComplete: (controller) => controller.repeat(reverse: true), effects: const [FadeEffect(begin: 0.4, end: 0.8, duration: Duration(seconds: 2))], child: child))
+            child: Animate(
+                autoPlay: true,
+                onComplete: (controller) => controller.repeat(reverse: true),
+                effects: const [FadeEffect(begin: 0.4, end: 0.8, duration: Duration(seconds: 2))],
+                child: child))
         : child;
   }
 }
 
 class TextPlaceHolder extends StatelessWidget {
   final bool small;
+
   const TextPlaceHolder({super.key, this.small = false});
 
   @override
@@ -165,11 +169,13 @@ class CompactVideoPlaceHolder extends StatelessWidget {
                     children: [
                       Container(
                         height: 10,
-                        decoration: BoxDecoration(color: colors.secondaryContainer, borderRadius: BorderRadius.circular(10)),
+                        decoration:
+                            BoxDecoration(color: colors.secondaryContainer, borderRadius: BorderRadius.circular(10)),
                       ),
                       Container(
                         height: 10,
-                        decoration: BoxDecoration(color: colors.secondaryContainer, borderRadius: BorderRadius.circular(10)),
+                        decoration:
+                            BoxDecoration(color: colors.secondaryContainer, borderRadius: BorderRadius.circular(10)),
                       )
                     ],
                   ),
@@ -218,6 +224,7 @@ class VideoGridPlaceHolder extends StatelessWidget {
 
 class PlaylistPlaceHolder extends StatelessWidget {
   final bool small;
+
   const PlaylistPlaceHolder({super.key, this.small = false});
 
   @override
@@ -343,7 +350,9 @@ class TvPlaylistPlaceHolder extends StatelessWidget {
                   SizedBox(
                     height: 4,
                   ),
-                  Padding(padding: EdgeInsets.only(bottom: 8.0), child: FractionallySizedBox(widthFactor: 0.4, child: TextPlaceHolder())),
+                  Padding(
+                      padding: EdgeInsets.only(bottom: 8.0),
+                      child: FractionallySizedBox(widthFactor: 0.4, child: TextPlaceHolder())),
                 ],
               ),
             ),
@@ -360,7 +369,8 @@ class ParagraphPlaceHolder extends StatelessWidget {
     return Wrap(
       spacing: 4,
       runSpacing: 4,
-      children: repeatWidget(() => SizedBox(width: Random().nextInt(100) + 50, child: const TextPlaceHolder()), count: Random().nextInt(30) + 10),
+      children: repeatWidget(() => SizedBox(width: Random().nextInt(100) + 50, child: const TextPlaceHolder()),
+          count: Random().nextInt(30) + 10),
     );
   }
 }
@@ -420,7 +430,8 @@ class VideoPlaceHolder extends StatelessWidget {
                     height: 4,
                   ),
                   Row(
-                    children: repeatWidget(() => const SizedBox(height: 15, width: 50, child: TextPlaceHolder()), count: 3),
+                    children:
+                        repeatWidget(() => const SizedBox(height: 15, width: 50, child: TextPlaceHolder()), count: 3),
                   ),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -446,7 +457,8 @@ class VideoPlaceHolder extends StatelessWidget {
                     child: Container(
                       width: 120,
                       height: 25,
-                      decoration: BoxDecoration(color: colors.secondaryContainer, borderRadius: BorderRadius.circular(50)),
+                      decoration:
+                          BoxDecoration(color: colors.secondaryContainer, borderRadius: BorderRadius.circular(50)),
                     ),
                   ),
                   ...repeatWidget(() => const Padding(
@@ -462,7 +474,8 @@ class VideoPlaceHolder extends StatelessWidget {
                         children: repeatWidget(
                             () => Container(
                                   width: Random().nextInt(100) + 50,
-                                  decoration: BoxDecoration(color: colors.secondaryContainer, borderRadius: BorderRadius.circular(20)),
+                                  decoration: BoxDecoration(
+                                      color: colors.secondaryContainer, borderRadius: BorderRadius.circular(20)),
                                   child: const Padding(
                                     padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 4),
                                     child: Text(''),

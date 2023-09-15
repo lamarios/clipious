@@ -24,15 +24,13 @@ abstract class _$DownloadModalSheetStateCWProxy {
 }
 
 /// Proxy class for `copyWith` functionality. This is a callable class and can be used as follows: `instanceOfDownloadModalSheetState.copyWith(...)`. Additionally contains functions for specific fields e.g. `instanceOfDownloadModalSheetState.copyWith.fieldName(...)`
-class _$DownloadModalSheetStateCWProxyImpl
-    implements _$DownloadModalSheetStateCWProxy {
+class _$DownloadModalSheetStateCWProxyImpl implements _$DownloadModalSheetStateCWProxy {
   const _$DownloadModalSheetStateCWProxyImpl(this._value);
 
   final DownloadModalSheetState _value;
 
   @override
-  DownloadModalSheetState audioOnly(bool audioOnly) =>
-      this(audioOnly: audioOnly);
+  DownloadModalSheetState audioOnly(bool audioOnly) => this(audioOnly: audioOnly);
 
   @override
   DownloadModalSheetState quality(String quality) => this(quality: quality);
@@ -65,6 +63,5 @@ class _$DownloadModalSheetStateCWProxyImpl
 extension $DownloadModalSheetStateCopyWith on DownloadModalSheetState {
   /// Returns a callable class that can be used as follows: `instanceOfDownloadModalSheetState.copyWith(...)` or like so:`instanceOfDownloadModalSheetState.copyWith.fieldName(...)`.
   // ignore: library_private_types_in_public_api
-  _$DownloadModalSheetStateCWProxy get copyWith =>
-      _$DownloadModalSheetStateCWProxyImpl(this);
+  _$DownloadModalSheetStateCWProxy get copyWith => _$DownloadModalSheetStateCWProxyImpl(this);
 }

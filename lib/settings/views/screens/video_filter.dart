@@ -1,30 +1,24 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/extensions.dart';
+import 'package:invidious/router.dart';
 import 'package:invidious/settings/states/video_filter_channel.dart';
 import 'package:invidious/settings/views/components/video_filter_channel.dart';
-import 'package:invidious/settings/views/screens/video_filter_setup.dart';
 import 'package:uuid/uuid.dart';
 
-import '../../../main.dart';
-import '../../../myRouteObserver.dart';
 import '../../models/db/video_filter.dart';
 import '../../states/video_filter.dart';
 
-class VideoFilterSettings extends StatelessWidget {
-  const VideoFilterSettings({Key? key}) : super(key: key);
+@RoutePage()
+class VideoFilterSettingsScreen extends StatelessWidget {
+  const VideoFilterSettingsScreen({Key? key}) : super(key: key);
 
   createFilter(BuildContext context, {String? channelId}) {
     var cubit = context.read<VideoFilterCubit>();
 
-    navigatorKey.currentState
-        ?.push(MaterialPageRoute(
-            settings: ROUTE_SETTINGS_VIDEO_FILTERS,
-            builder: (context) => VideoFilterSetup(
-                  channelId: channelId,
-                )))
-        .then((value) => cubit.refreshFilters());
+    AutoRouter.of(context).push(VideoFilterSetupRoute(channelId: channelId)).then((value) => cubit.refreshFilters());
   }
 
   @override
@@ -46,7 +40,10 @@ class VideoFilterSettings extends StatelessWidget {
               backgroundColor: colors.background,
               title: Text(locals.videoFilters),
             ),
-            floatingActionButton: FloatingActionButton(onPressed: () => createFilter(context), backgroundColor: colors.primaryContainer, child: const Icon(Icons.add)),
+            floatingActionButton: FloatingActionButton(
+                onPressed: () => createFilter(context),
+                backgroundColor: colors.primaryContainer,
+                child: const Icon(Icons.add)),
             body: SafeArea(
               bottom: false,
               child: Column(
@@ -60,7 +57,8 @@ class VideoFilterSettings extends StatelessWidget {
                           child: ListView.builder(
                             itemCount: keys.length,
                             itemBuilder: (context, index) {
-                              return VideoFilterChannel(key: ValueKey(const Uuid().v4()), filters: mappedFilters[keys[index]] ?? []);
+                              return VideoFilterChannel(
+                                  key: ValueKey(const Uuid().v4()), filters: mappedFilters[keys[index]] ?? []);
                             },
                           ),
                         )

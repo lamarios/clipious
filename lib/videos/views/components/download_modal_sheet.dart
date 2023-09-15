@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/main.dart';
 import 'package:invidious/videos/states/download_modal_sheet.dart';
-import 'package:invidious/videos/views/components/video_in_list.dart';
 
 import '../../../downloads/states/download_manager.dart';
 import '../../models/base_video.dart';
@@ -21,7 +20,8 @@ class DownloadModalSheet extends StatelessWidget {
 
   const DownloadModalSheet({Key? key, required this.video, this.onDownloadStarted, this.onDownload}) : super(key: key);
 
-  static showVideoModalSheet(BuildContext context, BaseVideo video, {Function(bool isDownloadStarted)? onDownloadStarted, Function()? onDownload}) {
+  static showVideoModalSheet(BuildContext context, BaseVideo video,
+      {Function(bool isDownloadStarted)? onDownloadStarted, Function()? onDownload}) {
     showModalBottomSheet<void>(
         enableDrag: true,
         showDragHandle: true,
@@ -44,7 +44,8 @@ class DownloadModalSheet extends StatelessWidget {
     Navigator.of(context).pop();
     var downloadController = context.read<DownloadManagerCubit>();
     scaffoldKey.currentState?.showSnackBar(SnackBar(content: Text(locals.videoDownloadStarted)));
-    bool canDownload = await downloadManager.addDownload(video.videoId, audioOnly: _.audioOnly, quality: _.quality) ?? false;
+    bool canDownload =
+        await downloadManager.addDownload(video.videoId, audioOnly: _.audioOnly, quality: _.quality) ?? false;
     if (!canDownload) {
       scaffoldKey.currentState?.showSnackBar(SnackBar(content: Text(locals.videoAlreadyDownloaded)));
     }

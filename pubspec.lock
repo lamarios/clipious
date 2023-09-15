@@ -81,6 +81,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.1.16"
+  auto_route:
+    dependency: "direct main"
+    description:
+      name: auto_route
+      sha256: "72f21e8b6cbbe25f02ea69183e024996530bf495cc1b077a49e0ec6726f0c271"
+      url: "https://pub.dev"
+    source: hosted
+    version: "7.8.3"
+  auto_route_generator:
+    dependency: "direct dev"
+    description:
+      name: auto_route_generator
+      sha256: e7aa9ab44b77cd31a4619d94db645ab5736e543fd0b4c6058c281249e479dfb8
+      url: "https://pub.dev"
+    source: hosted
+    version: "7.3.1"
   back_button_interceptor:
     dependency: "direct main"
     description:
@@ -1537,4 +1553,4 @@ packages:
     version: "3.1.2"
 sdks:
   dart: ">=3.1.0-185.0.dev <4.0.0"
-  flutter: ">=3.10.0"
+  flutter: ">=3.13.0"

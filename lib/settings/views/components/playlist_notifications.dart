@@ -13,7 +13,7 @@ class PlaylistNotificationList extends StatelessWidget {
     var cubit = context.read<PlaylistNotificationListCubit>();
     var locals = AppLocalizations.of(context)!;
     okCancelDialog(context, locals.deletePlaylistNotificationTitle, locals.deletePlaylistNotificationContent,
-            () => cubit.deleteNotification(notif));
+        () => cubit.deleteNotification(notif));
   }
 
   @override

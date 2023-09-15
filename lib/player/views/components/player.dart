@@ -8,7 +8,6 @@ import 'package:invidious/player/views/components/audio_player.dart';
 import 'package:invidious/player/views/components/expanded_player.dart';
 import 'package:invidious/player/views/components/mini_player.dart';
 import 'package:invidious/player/views/components/video_player.dart';
-import 'package:invidious/settings/states/settings.dart';
 
 import '../../../utils.dart';
 import '../../../videos/models/video.dart';
@@ -42,7 +41,9 @@ class Player extends StatelessWidget {
         Widget videoPlayer = showPlayer
             ? BlocBuilder<PlayerCubit, PlayerState>(
                 buildWhen: (previous, current) =>
-                    previous.isAudio != current.isAudio || previous.currentlyPlaying != current.currentlyPlaying || previous.offlineCurrentlyPlaying != current.offlineCurrentlyPlaying,
+                    previous.isAudio != current.isAudio ||
+                    previous.currentlyPlaying != current.currentlyPlaying ||
+                    previous.offlineCurrentlyPlaying != current.offlineCurrentlyPlaying,
                 builder: (context, _) {
                   return AspectRatio(
                     aspectRatio: isFullScreen ? aspectRatio : 16 / 9,

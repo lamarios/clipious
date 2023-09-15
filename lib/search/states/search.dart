@@ -1,8 +1,8 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:bloc/bloc.dart';
 import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
-import 'package:invidious/database.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/main.dart';
 import 'package:invidious/search/models/search_results.dart';
@@ -18,6 +18,7 @@ part 'search.g.dart';
 
 class SearchCubit<T extends SearchState> extends Cubit<SearchState> {
   final SettingsCubit settings;
+
   SearchCubit(super.initialState, this.settings) {
     onInit();
   }
@@ -42,14 +43,16 @@ class SearchCubit<T extends SearchState> extends Cubit<SearchState> {
     search(state.queryController.value.text);
   }
 
-  void searchCleared() {
+  // returns true search is already cleared
+  bool searchCleared() {
     if (state.queryController.value.text.isEmpty) {
-      navigatorKey.currentState?.pop();
+      return true;
     } else {
       var state = this.state.copyWith();
       state.queryController.clear();
       state.showResults = false;
       emit(state);
+      return false;
     }
   }
 
@@ -119,7 +122,6 @@ class SearchState extends Clonable<SearchState> {
 
   List<Playlist> playlists;
 
-
   bool searchNow;
 
   List<String> suggestions;
@@ -162,8 +164,20 @@ class SearchState extends Clonable<SearchState> {
         channelPage = channelPage ?? 1,
         playlistPage = playlistPage ?? 1;
 
-  SearchState.inLine(this.queryController, this.selectedIndex, this.videos, this.channels, this.playlists,  this.searchNow, this.suggestions, this.sortBy, this.showResults,
-      this.loading, this.videoPage, this.channelPage, this.playlistPage);
+  SearchState.inLine(
+      this.queryController,
+      this.selectedIndex,
+      this.videos,
+      this.channels,
+      this.playlists,
+      this.searchNow,
+      this.suggestions,
+      this.sortBy,
+      this.showResults,
+      this.loading,
+      this.videoPage,
+      this.channelPage,
+      this.playlistPage);
 
   @override
   SearchState clone() {

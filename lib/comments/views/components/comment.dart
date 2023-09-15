@@ -1,14 +1,13 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:invidious/channels/views/screens/channel.dart';
 import 'package:invidious/comments/states/single_comment.dart';
 import 'package:invidious/comments/views/components/comments.dart';
-import 'package:invidious/myRouteObserver.dart';
+import 'package:invidious/router.dart';
 import 'package:invidious/utils/views/components/text_linkified.dart';
 import 'package:invidious/videos/views/components/video_thumbnail.dart';
 
-import '../../../main.dart';
 import '../../../player/states/player.dart';
 import '../../../utils/models/image_object.dart';
 import '../../../videos/models/base_video.dart';
@@ -21,7 +20,7 @@ class SingleCommentView extends StatelessWidget {
   const SingleCommentView({super.key, required this.comment, required this.video});
 
   openChannel(BuildContext context, String authorId) {
-    navigatorKey.currentState?.push(MaterialPageRoute(settings: ROUTE_CHANNEL, builder: (context) => ChannelView(channelId: authorId)));
+    AutoRouter.of(context).push(ChannelRoute(channelId: authorId));
   }
 
   @override
@@ -72,7 +71,8 @@ class SingleCommentView extends StatelessWidget {
                             child: Padding(
                               padding: const EdgeInsets.symmetric(vertical: 8.0),
                               child: Container(
-                                decoration: BoxDecoration(color: colors.primaryContainer, borderRadius: BorderRadius.circular(20)),
+                                decoration: BoxDecoration(
+                                    color: colors.primaryContainer, borderRadius: BorderRadius.circular(20)),
                                 child: Padding(
                                   padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8),
                                   child: Row(

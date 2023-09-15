@@ -85,7 +85,10 @@ class TVSettings extends StatelessWidget {
     var cubit = context.read<SettingsCubit>();
 
     List<String>? localeString = cubit.state.locale?.split('_');
-    Locale? selected = localeString != null ? Locale.fromSubtags(languageCode: localeString[0], scriptCode: localeString.length >= 2 ? localeString[1] : null) : null;
+    Locale? selected = localeString != null
+        ? Locale.fromSubtags(
+            languageCode: localeString[0], scriptCode: localeString.length >= 2 ? localeString[1] : null)
+        : null;
 
     Navigator.of(context).push(MaterialPageRoute(
       builder: (context) => TvSelectFromList(
@@ -114,7 +117,8 @@ class TVSettings extends StatelessWidget {
         options: ThemeMode.values.map((e) => cubit.getThemeLabel(locals, e)).toList(),
         selected: cubit.getThemeLabel(locals, cubit.state.themeMode),
         onSelect: (String selected) {
-          ThemeMode? theme = ThemeMode.values.firstWhereOrNull((element) => cubit.getThemeLabel(locals, element) == selected);
+          ThemeMode? theme =
+              ThemeMode.values.firstWhereOrNull((element) => cubit.getThemeLabel(locals, element) == selected);
           cubit.setThemeMode(theme);
         },
       ),
@@ -166,8 +170,11 @@ class TVSettings extends StatelessWidget {
                 SettingsTitle(title: locals.servers),
                 BlocBuilder<AppCubit, AppState>(
                     buildWhen: (previous, current) => previous.server != current.server,
-                    builder: (context, app) =>
-                        SettingsTile(title: locals.manageServers, description: app.server != null ? locals.currentServer(db.getCurrentlySelectedServer().url) : "", onSelected: openManageServers)),
+                    builder: (context, app) => SettingsTile(
+                        title: locals.manageServers,
+                        description:
+                            app.server != null ? locals.currentServer(db.getCurrentlySelectedServer().url) : "",
+                        onSelected: openManageServers)),
                 SettingsTitle(title: locals.videoPlayer),
                 SettingsTile(
                   title: locals.useDash,
@@ -264,7 +271,9 @@ class AdjustmentSettingTile extends StatelessWidget {
   final String? description;
   final Function(int) onNewValue;
 
-  const AdjustmentSettingTile({Key? key, required this.onNewValue, required this.title, this.description, required this.value, this.step = 1}) : super(key: key);
+  const AdjustmentSettingTile(
+      {Key? key, required this.onNewValue, required this.title, this.description, required this.value, this.step = 1})
+      : super(key: key);
 
   onKeyEvent(FocusNode node, KeyEvent event, BuildContext ctx) {
     if (event is KeyUpEvent) {
@@ -327,7 +336,17 @@ class SettingsTile extends StatelessWidget {
   final Widget? leading;
   final Function(FocusNode, KeyEvent, BuildContext)? onKeyEvent;
 
-  const SettingsTile({Key? key, required this.title, this.description, this.onSelected, this.trailing, this.autofocus, this.leading, this.enabled, this.onKeyEvent}) : super(key: key);
+  const SettingsTile(
+      {Key? key,
+      required this.title,
+      this.description,
+      this.onSelected,
+      this.trailing,
+      this.autofocus,
+      this.leading,
+      this.enabled,
+      this.onKeyEvent})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -336,7 +355,9 @@ class SettingsTile extends StatelessWidget {
     return Focus(
         canRequestFocus: enabled,
         autofocus: autofocus ?? false,
-        onKeyEvent: (node, event) => onKeyEvent != null ? onKeyEvent!(node, event, context) : onTvSelect(event, context, onSelected != null ? onSelected! : (context) {}),
+        onKeyEvent: (node, event) => onKeyEvent != null
+            ? onKeyEvent!(node, event, context)
+            : onTvSelect(event, context, onSelected != null ? onSelected! : (context) {}),
         child: Builder(builder: (ctx) {
           final FocusNode focusNode = Focus.of(ctx);
           final bool hasFocus = focusNode.hasFocus;
@@ -351,7 +372,8 @@ class SettingsTile extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: textTheme.headlineSmall!.copyWith(color: enabled ?? true ? colors.primary : colors.primary.withOpacity(0.5)),
+                  style: textTheme.headlineSmall!
+                      .copyWith(color: enabled ?? true ? colors.primary : colors.primary.withOpacity(0.5)),
                 ),
                 description != null
                     ? Text(

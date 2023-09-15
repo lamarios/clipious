@@ -1,4 +1,3 @@
-import 'package:flutter/services.dart';
 import 'package:invidious/videos/models/video_in_list.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -29,7 +28,9 @@ class BaseVideo extends IdedVideo implements ShareLinks {
   @JsonKey(includeFromJson: false, includeToJson: false)
   bool filterHide = false;
 
-  BaseVideo(this.title, String videoId, this.lengthSeconds, this.author, this.authorId, this.authorUrl, this.videoThumbnails) : super(videoId);
+  BaseVideo(
+      this.title, String videoId, this.lengthSeconds, this.author, this.authorId, this.authorUrl, this.videoThumbnails)
+      : super(videoId);
 
   @override
   String getInvidiousLink(Server server, int? timestamp) {

@@ -71,7 +71,11 @@ class CommentsContainer extends StatelessWidget {
 */
                 ],
               ),
-              CommentsView(key: ValueKey<String>('comments-${_.sortBy}-${_.source}'), video: video, source: _.source, sortBy: _.sortBy),
+              CommentsView(
+                  key: ValueKey<String>('comments-${_.sortBy}-${_.source}'),
+                  video: video,
+                  source: _.source,
+                  sortBy: _.sortBy),
             ],
           );
         },

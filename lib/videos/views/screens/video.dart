@@ -1,10 +1,12 @@
 // import 'package:video_player/video_player.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_fadein/flutter_fadein.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/downloads/states/download_manager.dart';
 import 'package:invidious/globals.dart';
+import 'package:invidious/router.dart';
 import 'package:invidious/settings/states/settings.dart';
 import 'package:invidious/utils/views/components/placeholders.dart';
 import 'package:invidious/videos/states/add_to_playlist_button.dart';
@@ -17,9 +19,6 @@ import 'package:invidious/videos/views/components/innter_view.dart';
 import 'package:invidious/videos/views/components/like_button.dart';
 import 'package:invidious/videos/views/components/video_share_button.dart';
 
-import '../../../downloads/views/screens/download_manager.dart';
-import '../../../main.dart';
-import '../../../myRouteObserver.dart';
 import '../../../player/states/player.dart';
 import '../../../utils.dart';
 
@@ -30,11 +29,12 @@ class VideoRouteArguments {
   VideoRouteArguments({required this.videoId, this.playNow});
 }
 
-class VideoView extends StatelessWidget {
+@RoutePage()
+class VideoScreen extends StatelessWidget {
   final String videoId;
   final bool? playNow;
 
-  const VideoView({super.key, required this.videoId, this.playNow});
+  const VideoScreen({super.key, required this.videoId, this.playNow});
 
   void downloadVideo(BuildContext context, VideoState _) {
     var cubit = context.read<VideoCubit>();
@@ -54,7 +54,7 @@ class VideoView extends StatelessWidget {
 
   void openDownloadManager(BuildContext context) {
     var cubit = context.read<VideoCubit>();
-    navigatorKey.currentState?.push(MaterialPageRoute(settings: ROUTE_DOWNLOAD_MANAGER, builder: (context) => const DownloadManager())).then((value) => cubit.getDownloadStatus());
+    AutoRouter.of(context).push(const DownloadManagerRoute()).then((value) => cubit.getDownloadStatus());
   }
 
   @override
@@ -79,10 +79,14 @@ class VideoView extends StatelessWidget {
     var settings = context.read<SettingsCubit>();
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (BuildContext context) => VideoCubit(VideoState(videoId: videoId), downloadManager, player, settings)),
-        BlocProvider(create: (BuildContext context) => AddToPlaylistButtonCubit(AddToPlaylistButtonState(videoId: videoId))),
         BlocProvider(
-          create: (context) => VideoLikeButtonCubit(VideoLikeButtonController(videoId: videoId), addToPlaylistButtonCubit: context.read<AddToPlaylistButtonCubit>()),
+            create: (BuildContext context) =>
+                VideoCubit(VideoState(videoId: videoId), downloadManager, player, settings)),
+        BlocProvider(
+            create: (BuildContext context) => AddToPlaylistButtonCubit(AddToPlaylistButtonState(videoId: videoId))),
+        BlocProvider(
+          create: (context) => VideoLikeButtonCubit(VideoLikeButtonController(videoId: videoId),
+              addToPlaylistButtonCubit: context.read<AddToPlaylistButtonCubit>()),
         ),
         // BlocProvider(create: (context) => AddToPlaylistCubit(AddToPlaylistController(videoId), videoLikeButtonCubit: context.read<VideoLikeButtonCubit>(), addToPlaylistButtonCubit: context.read<AddToPlaylistButtonCubit>()),)
       ],
@@ -128,8 +132,12 @@ class VideoView extends StatelessWidget {
                                 : Stack(
                                     children: [
                                       IconButton(
-                                          onPressed: _.isDownloaded || _.downloadFailed ? () => openDownloadManager(context) : () => downloadVideo(context, _),
-                                          icon: _.isDownloaded && !_.downloadFailed ? const Icon(Icons.download_done) : const Icon(Icons.download)),
+                                          onPressed: _.isDownloaded || _.downloadFailed
+                                              ? () => openDownloadManager(context)
+                                              : () => downloadVideo(context, _),
+                                          icon: _.isDownloaded && !_.downloadFailed
+                                              ? const Icon(Icons.download_done)
+                                              : const Icon(Icons.download)),
                                       Positioned(
                                           right: 5,
                                           top: 5,
@@ -189,7 +197,9 @@ class VideoView extends StatelessWidget {
                                         videoController: _,
                                       )
                                 : _.loadingVideo
-                                    ? Container(constraints: BoxConstraints(maxWidth: tabletMaxVideoWidth), child: const VideoPlaceHolder())
+                                    ? Container(
+                                        constraints: BoxConstraints(maxWidth: tabletMaxVideoWidth),
+                                        child: const VideoPlaceHolder())
                                     : VideoTabletInnerView(
                                         video: _.video!,
                                         playNow: playNow,

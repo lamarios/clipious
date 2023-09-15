@@ -31,7 +31,8 @@ class AppLogsCubit extends Cubit<AppLogsState> {
     state.selected.sort();
     String toClipboard = state.logs
         .where((element) => state.selected.contains(element.id))
-        .map((e) => '[${e.level}] [${e.logger}] - ${e.time} - ${e.message} ${e.stacktrace != null ? '\n${e.stacktrace}' : ''}')
+        .map((e) =>
+            '[${e.level}] [${e.logger}] - ${e.time} - ${e.message} ${e.stacktrace != null ? '\n${e.stacktrace}' : ''}')
         .toList()
         .reversed
         .join("\n");

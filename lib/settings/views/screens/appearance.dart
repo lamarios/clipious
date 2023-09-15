@@ -1,24 +1,16 @@
+import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:invidious/globals.dart';
 import 'package:invidious/settings/states/settings.dart';
-import 'package:invidious/settings/views/components/channel_notifications.dart';
-import 'package:invidious/settings/views/screens/search_history_settings.dart';
 import 'package:invidious/settings/views/screens/settings.dart';
-import 'package:invidious/settings/views/screens/video_filter.dart';
-import 'package:invidious/utils.dart';
-import 'package:locale_names/locale_names.dart';
-import 'package:optimize_battery/optimize_battery.dart';
 import 'package:settings_ui/settings_ui.dart';
 
-import '../../../myRouteObserver.dart';
 import '../../../utils/views/components/select_list_dialog.dart';
-import '../components/app_customizer.dart';
 
-class AppearanceSettings extends StatelessWidget {
-  const AppearanceSettings({super.key});
+@RoutePage()
+class AppearanceSettingsScreen extends StatelessWidget {
+  const AppearanceSettingsScreen({super.key});
 
   selectTheme(BuildContext context, SettingsState _) {
     var cubit = context.read<SettingsCubit>();

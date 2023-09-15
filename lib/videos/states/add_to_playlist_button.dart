@@ -22,7 +22,8 @@ class AddToPlaylistButtonCubit extends Cubit<AddToPlaylistButtonState> {
     var state = this.state.copyWith();
     List<Playlist> lists = await service.getUserPlaylists();
 
-    state.playListCount = lists.where((list) => list.videos.indexWhere((video) => video.videoId == state.videoId) >= 0).length;
+    state.playListCount =
+        lists.where((list) => list.videos.indexWhere((video) => video.videoId == state.videoId) >= 0).length;
     log.fine('playlist count $state.playListCount');
     emit(state);
   }

@@ -45,7 +45,10 @@ class TvPlaylistGridView extends StatelessWidget {
                   childAspectRatio: 16 / 13,
                   crossAxisCount: 3,
                   children: [
-                    ..._.playlists.map((e) => PlaylistInList(key: ValueKey(e.playlistId), playlist: e, canDeleteVideos: false, isTv: true)).toList(),
+                    ..._.playlists
+                        .map((e) => PlaylistInList(
+                            key: ValueKey(e.playlistId), playlist: e, canDeleteVideos: false, isTv: true))
+                        .toList(),
                     if (_.loading) ...repeatWidget(() => const TvPlaylistPlaceHolder(), count: 10)
                   ],
                 ))

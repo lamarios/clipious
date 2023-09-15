@@ -30,8 +30,10 @@ abstract class MediaPlayerCubit<T extends MediaPlayerState> extends Cubit<T> {
   @mustCallSuper
   void playVideo(bool offline) {
     var duration = Duration(seconds: state.offlineVideo?.lengthSeconds ?? state.video?.lengthSeconds ?? 1);
-    player.setEvent(MediaEvent<Duration>(state: MediaState.ready, type: MediaEventType.durationChanged, value: duration));
-    player.setEvent(MediaEvent<double>(state: MediaState.ready, type: MediaEventType.aspectRatioChanged, value: getAspectRatio()));
+    player
+        .setEvent(MediaEvent<Duration>(state: MediaState.ready, type: MediaEventType.durationChanged, value: duration));
+    player.setEvent(
+        MediaEvent<double>(state: MediaState.ready, type: MediaEventType.aspectRatioChanged, value: getAspectRatio()));
   }
 
   void switchToOfflineVideo(DownloadedVideo v);

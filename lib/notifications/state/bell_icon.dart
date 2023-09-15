@@ -2,7 +2,6 @@ import 'package:bloc/bloc.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/notifications/models/db/channel_notifications.dart';
 import 'package:invidious/notifications/models/db/playlist_notifications.dart';
-import 'package:invidious/notifications/models/db/subscription_notifications.dart';
 
 import '../../settings/states/settings.dart';
 import '../views/components/bell_icon.dart';

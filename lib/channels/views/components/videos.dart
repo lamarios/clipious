@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:invidious/channels/models/channelVideos.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/videos/models/video_in_list.dart';
-import 'package:invidious/videos/views/components/video_in_list.dart';
 import 'package:invidious/videos/views/components/video_list.dart';
 
 import '../../../utils/models/paginatedList.dart';
@@ -25,7 +24,8 @@ class ChannelVideosView extends StatelessWidget {
         color: colorScheme.background,
         child: VideoList(
           key: const ValueKey('channel-videos'),
-          paginatedVideoList: ContinuationList<VideoInList>((continuation) => getVideos(channel.authorId, continuation)),
+          paginatedVideoList:
+              ContinuationList<VideoInList>((continuation) => getVideos(channel.authorId, continuation)),
           // tags: 'channel-video-list-${(key as ValueKey<String>).value}'
         ),
       ),

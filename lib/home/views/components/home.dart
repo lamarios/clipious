@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -5,9 +6,8 @@ import 'package:invidious/app/states/app.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/home/models/db/home_layout.dart';
 import 'package:invidious/home/states/home.dart';
+import 'package:invidious/router.dart';
 
-import '../../../main.dart';
-import '../../../search/views/screens/search.dart';
 import '../../../utils/views/components/app_icon.dart';
 
 const double smallVideoViewHeight = 140;
@@ -16,12 +16,11 @@ class HomeView extends StatelessWidget {
   const HomeView({super.key});
 
   static openSearch(BuildContext context, String search) {
-    navigatorKey.currentState
-        ?.push(MaterialPageRoute(
-            builder: (context) => Search(
-                  query: search,
-                  searchNow: true,
-                )))
+    AutoRouter.of(context)
+        .push(SearchRoute(
+          query: search,
+          searchNow: true,
+        ))
         .then((value) => context.read<AppCubit>().updateLayout());
   }
 
@@ -68,7 +67,9 @@ class HomeView extends StatelessWidget {
 
         return NotificationListener(
           onNotification: (notificationInfo) {
-            if (notificationInfo is ScrollUpdateNotification && (notificationInfo.metrics.axisDirection == AxisDirection.down || notificationInfo.metrics.axisDirection == AxisDirection.up)) {
+            if (notificationInfo is ScrollUpdateNotification &&
+                (notificationInfo.metrics.axisDirection == AxisDirection.down ||
+                    notificationInfo.metrics.axisDirection == AxisDirection.up)) {
               home.setScroll(notificationInfo.metrics.pixels > 100);
             }
             return true;
@@ -93,7 +94,8 @@ class HomeView extends StatelessWidget {
                           secondCurve: Curves.easeInOutQuad,
                           sizeCurve: Curves.easeInOutQuad,
                           duration: animationDuration,
-                          firstChild: Column(mainAxisSize: MainAxisSize.min, children: getSmallSources(context, layout)),
+                          firstChild:
+                              Column(mainAxisSize: MainAxisSize.min, children: getSmallSources(context, layout)),
                           secondChild: const Row(
                             children: [
                               SizedBox.shrink(),

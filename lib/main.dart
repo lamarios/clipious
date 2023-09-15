@@ -1,57 +1,32 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:after_layout/after_layout.dart';
-import 'package:back_button_interceptor/back_button_interceptor.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_background_service/flutter_background_service.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:invidious/app/states/app.dart';
-import 'package:invidious/app/views/tv/screens/tv_home.dart';
 import 'package:invidious/background_service.dart';
-import 'package:invidious/channels/views/screens/channel.dart';
 import 'package:invidious/downloads/states/download_manager.dart';
-import 'package:invidious/downloads/views/components/download_app_bar_button.dart';
 import 'package:invidious/globals.dart';
-import 'package:invidious/home/models/db/home_layout.dart';
-import 'package:invidious/home/views/screens/edit_layout.dart';
 import 'package:invidious/httpOverrides.dart';
 import 'package:invidious/mediaHander.dart';
 import 'package:invidious/notifications/notifications.dart';
 import 'package:invidious/player/states/player.dart';
-import 'package:invidious/player/views/components/mini_player_aware.dart';
-import 'package:invidious/player/views/components/player.dart';
-import 'package:invidious/playlists/models/playlist.dart';
-import 'package:invidious/playlists/views/screens/playlist.dart';
-import 'package:invidious/search/views/screens/search.dart';
+import 'package:invidious/router.dart';
 import 'package:invidious/settings/states/settings.dart';
-import 'package:invidious/settings/views/screens/appearance.dart';
-import 'package:invidious/settings/views/screens/browsing.dart';
-import 'package:invidious/settings/views/screens/notifications.dart';
-import 'package:invidious/settings/views/screens/settings.dart';
-import 'package:invidious/settings/views/screens/video_player.dart';
-import 'package:invidious/subscription_management/view/screens/manage_subscriptions.dart';
 import 'package:invidious/utils.dart';
-import 'package:invidious/utils/views/components/app_icon.dart';
-import 'package:invidious/videos/views/screens/subscriptions.dart';
-import 'package:invidious/videos/views/screens/video.dart';
-import 'package:invidious/welcome_wizard/views/screens/welcome_wizard.dart';
-import 'package:invidious/welcome_wizard/views/tv/screens/welcome_wizard.dart';
 import 'package:logging/logging.dart';
 
 import 'database.dart';
-import 'myRouteObserver.dart';
 import 'settings/models/db/app_logs.dart';
 
 const brandColor = Color(0xFF4f0096);
 
 final scaffoldKey = GlobalKey<ScaffoldMessengerState>();
-final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
-final GlobalKey<NavigatorState> globalNavigator = GlobalKey<NavigatorState>();
 bool isTv = false;
 
 late MediaHandler mediaHandler;
@@ -78,12 +53,20 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   db = await DbClient.create();
 
+  NotificationResponse? selectedNotificationPayload;
+  final NotificationAppLaunchDetails? notificationAppLaunchDetails =
+      !kIsWeb && Platform.isLinux ? null : await flutterLocalNotificationsPlugin.getNotificationAppLaunchDetails();
+  if (notificationAppLaunchDetails?.didNotificationLaunchApp ?? false) {
+    selectedNotificationPayload = notificationAppLaunchDetails!.notificationResponse;
+    log.info("app started from notification  ${selectedNotificationPayload?.payload}");
+  }
+
   initializeNotifications();
 
   isTv = await isDeviceTv();
   runApp(MultiBlocProvider(providers: [
     BlocProvider(
-      create: (context) => AppCubit(AppState()),
+      create: (context) => AppCubit(AppState(), startupNotificationPayload: selectedNotificationPayload),
     ),
     BlocProvider(
       create: (context) {
@@ -98,13 +81,14 @@ Future<void> main() async {
     BlocProvider(
       create: (context) => DownloadManagerCubit(DownloadManagerState(), context.read<PlayerCubit>()),
     )
-  ], child: const MyApp()));
+  ], child: MyApp()));
 }
 
 late ColorScheme darkColorScheme;
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
+
 
   @override
   Widget build(BuildContext context) {
@@ -116,11 +100,6 @@ class MyApp extends StatelessWidget {
           var app = context.read<AppCubit>();
           var settings = context.read<SettingsCubit>();
           bool useDynamicTheme = settings.state.useDynamicTheme;
-          bool showWizard = false;
-
-          if (app.state.server == null) {
-            showWizard = true;
-          }
 
           return DynamicColorBuilder(builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) {
             ColorScheme lightColorScheme;
@@ -168,7 +147,8 @@ class MyApp extends StatelessWidget {
                     languageCode: localeString[0], scriptCode: localeString.length >= 2 ? localeString[1] : null)
                 : null;
 
-            return MaterialApp(
+            return MaterialApp.router(
+                routerConfig: appRouter.config(),
                 locale: savedLocale,
                 localizationsDelegates: AppLocalizations.localizationsDelegates,
                 localeListResolutionCallback: (locales, supportedLocales) {
@@ -202,7 +182,6 @@ class MyApp extends StatelessWidget {
                 },
                 supportedLocales: AppLocalizations.supportedLocales,
                 scaffoldMessengerKey: scaffoldKey,
-                navigatorKey: globalNavigator,
                 debugShowCheckedModeBanner: false,
                 themeMode: ThemeMode.values.firstWhere((element) => element.name == settings.state.themeMode.name,
                     orElse: () => ThemeMode.system),
@@ -217,257 +196,10 @@ class MyApp extends StatelessWidget {
                     colorScheme: darkColorScheme,
                     progressIndicatorTheme: ProgressIndicatorThemeData(
                         circularTrackColor: darkColorScheme.secondaryContainer.withOpacity(0.8))),
-                home: Shortcuts(
-                  shortcuts: <LogicalKeySet, Intent>{
-                    LogicalKeySet(LogicalKeyboardKey.select): const ActivateIntent(),
-                  },
-                  child: isTv
-                      ? showWizard
-                          ? const TvWelcomeWizard()
-                          : const TvHome()
-                      : Stack(
-                          children: [
-                            MiniPlayerAware(
-                              child: Navigator(
-                                  observers: [MyRouteObserver()],
-                                  key: navigatorKey,
-                                  initialRoute: '/',
-                                  onGenerateRoute: (settings) {
-                                    switch (settings.name) {
-                                      case "/":
-                                        return MaterialPageRoute(
-                                            builder: (context) => showWizard ? const WelcomeWizard() : const Home());
-                                      case PATH_MANAGE_SUBS:
-                                        return MaterialPageRoute(
-                                            builder: (context) => const ManageSubscriptions(),
-                                            settings: ROUTE_MANAGE_SUBSCRIPTIONS);
-                                      case PATH_VIDEO:
-                                        VideoRouteArguments args = settings.arguments as VideoRouteArguments;
-                                        return MaterialPageRoute(
-                                            builder: (context) => VideoView(
-                                                  videoId: args.videoId,
-                                                  playNow: args.playNow,
-                                                ));
-                                      case PATH_CHANNEL:
-                                        if (settings.arguments is String) {
-                                          return MaterialPageRoute(
-                                            builder: (context) => ChannelView(channelId: settings.arguments! as String),
-                                            settings: ROUTE_CHANNEL,
-                                          );
-                                        }
-                                        break;
-                                      case PATH_LAYOUT_EDITOR:
-                                        return MaterialPageRoute(
-                                          builder: (context) => const EditHomeLayout(),
-                                          settings: ROUTE_CHANNEL,
-                                        );
-                                      case PATH_SETTINGS_NOTIFICATIONS:
-                                        return MaterialPageRoute(
-                                            builder: (context) => const NotificationSettings(),
-                                            settings: ROUTE_SETTINGS);
-                                      case pathSettingsBrowsing:
-                                        return MaterialPageRoute(
-                                            builder: (context) => const BrowsingSettings(), settings: ROUTE_SETTINGS);
-                                      case pathSettingsVideoPlayer:
-                                        return MaterialPageRoute(
-                                            builder: (context) => const VideoPlayerSettings(),
-                                            settings: ROUTE_SETTINGS);
-                                      case pathSettingsAppearance:
-                                        return MaterialPageRoute(
-                                            builder: (context) => const AppearanceSettings(), settings: ROUTE_SETTINGS);
-                                      case pathSubscriptions:
-                                        return MaterialPageRoute(
-                                            builder: (context) => const SubscriptionScreen(),
-                                            settings: routeSubscriptions);
-                                      case pathPublicPlaylist:
-                                        if (settings.arguments != null && settings.arguments is Playlist) {
-                                          return MaterialPageRoute(
-                                              builder: (context) => PlaylistView(
-                                                  playlist: settings.arguments as Playlist, canDeleteVideos: false),
-                                              settings: ROUTE_PLAYLIST);
-                                        }
-                                    }
-                                  }),
-                            ),
-                            const Player()
-                          ],
-                        ),
-                ));
+                shortcuts: <LogicalKeySet, Intent>{
+                  LogicalKeySet(LogicalKeyboardKey.select): const ActivateIntent(),
+                });
           });
         });
   }
-}
-
-class Home extends StatefulWidget {
-  const Home({super.key});
-
-  @override
-  State<Home> createState() => _HomeState();
-}
-
-class _HomeState extends State<Home> with AfterLayoutMixin {
-  openSettings(BuildContext context) {
-    navigatorKey.currentState
-        ?.push(MaterialPageRoute(settings: ROUTE_SETTINGS, builder: (context) => const Settings()));
-  }
-
-  openSubscriptionManagement(BuildContext context) {
-    navigatorKey.currentState?.pushNamed(PATH_MANAGE_SUBS);
-  }
-
-  openLayoutEditor(BuildContext context) {
-    var app = context.read<AppCubit>();
-    navigatorKey.currentState?.pushNamed(PATH_LAYOUT_EDITOR).then((value) => app.updateLayout());
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    BackButtonInterceptor.add((stopDefaultButtonEvent, RouteInfo routeInfo) {
-      if (routeInfo.currentRoute(context)?.settings.name != null) {
-        navigatorKey.currentState?.pop();
-        return true;
-      } else {
-        return false;
-      }
-    }, name: 'mainNavigator', zIndex: 0, ifNotYetIntercepted: true);
-  }
-
-  @override
-  void dispose() {
-    BackButtonInterceptor.removeByName('mainNavigator');
-    super.dispose();
-  }
-
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    ColorScheme colorScheme = Theme.of(context).colorScheme;
-    var locals = AppLocalizations.of(context)!;
-
-    return BlocBuilder<AppCubit, AppState>(buildWhen: (previous, current) {
-      return previous.selectedIndex != current.selectedIndex || previous.server != current.server;
-    }, builder: (context, _) {
-      var app = context.read<AppCubit>();
-      var settings = context.watch<SettingsCubit>().state;
-
-      var allowedPages = settings.appLayout.where((element) => element.isPermitted(context)).toList();
-      var navigationWidgets = allowedPages.map((e) => e.getBottomBarNavigationWidget(context)).toList();
-
-      var selectedIndex = _.selectedIndex;
-      if (selectedIndex >= allowedPages.length) {
-        selectedIndex = 0;
-      }
-
-      HomeDataSource? selectedPage;
-      if (selectedIndex < allowedPages.length) {
-        selectedPage = allowedPages[selectedIndex];
-      }
-
-      return Scaffold(
-          key: ValueKey(_.server?.url),
-          // so we rebuild the view if the server changes
-          backgroundColor: colorScheme.background,
-          bottomNavigationBar: allowedPages.length >= 2
-              ? NavigationBar(
-                  backgroundColor: colorScheme.background,
-                  labelBehavior: settings.navigationBarLabelBehavior,
-                  elevation: 0,
-                  onDestinationSelected: app.selectIndex,
-                  selectedIndex: selectedIndex,
-                  destinations: navigationWidgets,
-                )
-              : null,
-          appBar: AppBar(
-            systemOverlayStyle: getUiOverlayStyle(context),
-            title: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(selectedPage?.getLabel(locals) ?? 'Clipious'),
-                if (selectedPage == HomeDataSource.home)
-                  IconButton(
-                      iconSize: 15,
-                      onPressed: () => openLayoutEditor(context),
-                      icon: Icon(
-                        Icons.edit,
-                        color: colorScheme.secondary,
-                      ))
-              ],
-            ),
-            scrolledUnderElevation: 0,
-            // backgroundColor: Colors.pink,
-            backgroundColor: colorScheme.background,
-            actions: [
-              selectedPage == HomeDataSource.subscription
-                  ? IconButton(onPressed: () => openSubscriptionManagement(context), icon: const Icon(Icons.checklist))
-                  : const SizedBox.shrink(),
-              const AppBarDownloadButton(),
-              IconButton(
-                onPressed: () {
-                  // showSearch(context: context, delegate: MySearchDelegate());
-                  navigatorKey.currentState
-                      ?.push(MaterialPageRoute(settings: ROUTE_SETTINGS, builder: (context) => const Search()));
-                },
-                icon: const Icon(Icons.search),
-              ),
-              IconButton(
-                onPressed: () => openSettings(context),
-                icon: const Icon(Icons.settings),
-              ),
-            ],
-          ),
-          body: SafeArea(
-              bottom: false,
-              child: Stack(children: [
-                Positioned(
-                  top: 0,
-                  left: 0,
-                  right: 0,
-                  bottom: 0,
-                  child: AnimatedSwitcher(
-                    switchInCurve: Curves.easeInOutQuad,
-                    switchOutCurve: Curves.easeInOutQuad,
-                    transitionBuilder: (Widget child, Animation<double> animation) {
-                      return FadeTransition(opacity: animation, child: child);
-                    },
-                    duration: animationDuration,
-                    child: Container(
-                        // home handles its own padding because we don't want to cut horizontal scroll lists on the right
-                        padding: EdgeInsets.symmetric(
-                            horizontal: selectedPage == HomeDataSource.home ? 0 : innerHorizontalPadding),
-                        key: ValueKey(selectedPage),
-                        child: selectedPage?.build(context, false) ??
-                            const Opacity(
-                                opacity: 0.2,
-                                child: AppIcon(
-                                  height: 200,
-                                ))),
-/*
-                    child: <Widget>[
-                      const HomeView(
-                        key: ValueKey(0),
-                      ),
-                      const Trending(
-                        key: ValueKey(1),
-                      ),
-                      const Subscriptions(
-                        key: ValueKey(2),
-                      ),
-                      const AddToPlaylistList(
-                        key: ValueKey(3),
-                        canDeleteVideos: true,
-                      ),
-                      const HistoryView(
-                        key: ValueKey(4),
-                      ),
-                    ][_.selectedIndex],
-*/
-                  ),
-                )
-              ])));
-    });
-  }
-
-  @override
-  FutureOr<void> afterFirstLayout(BuildContext context) {}
 }

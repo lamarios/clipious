@@ -111,8 +111,13 @@ class TvSearch extends StatelessWidget {
                                         child: ListView(
                                           shrinkWrap: true,
                                           children: search.queryController.value.text.isEmpty
-                                              ? searchCubit.getHistory().map((e) => buildSuggestion(context, search, true, e)).toList()
-                                              : search.suggestions.map((e) => buildSuggestion(context, search, false, e)).toList(),
+                                              ? searchCubit
+                                                  .getHistory()
+                                                  .map((e) => buildSuggestion(context, search, true, e))
+                                                  .toList()
+                                              : search.suggestions
+                                                  .map((e) => buildSuggestion(context, search, false, e))
+                                                  .toList(),
                                         ),
                                       ),
                                       Expanded(

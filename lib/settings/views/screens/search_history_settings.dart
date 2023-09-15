@@ -1,15 +1,16 @@
+import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:invidious/app/states/app.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/settings/states/settings.dart';
 import 'package:settings_ui/settings_ui.dart';
 
 import 'settings.dart';
 
-class SearchHistorySettings extends StatelessWidget {
-  const SearchHistorySettings({Key? key}) : super(key: key);
+@RoutePage()
+class SearchHistorySettingsScreen extends StatelessWidget {
+  const SearchHistorySettingsScreen({Key? key}) : super(key: key);
 
   confirmClear(BuildContext context) {
     var locals = AppLocalizations.of(context)!;
@@ -19,7 +20,8 @@ class SearchHistorySettings extends StatelessWidget {
         useSafeArea: true,
         builder: (ctx) => SizedBox(
             height: 200,
-            child: AlertDialog(title: Text(locals.clearSearchHistory), content: Text(locals.irreversibleAction), actions: [
+            child:
+                AlertDialog(title: Text(locals.clearSearchHistory), content: Text(locals.irreversibleAction), actions: [
               TextButton(
                 child: Text(locals.cancel),
                 onPressed: () {
@@ -67,9 +69,14 @@ class SearchHistorySettings extends StatelessWidget {
                     trailing: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        IconButton(onPressed: () => _.useSearchHistory ? cubit.changeSearchHistoryLimit(increase: false) : null, icon: const Icon(Icons.remove)),
+                        IconButton(
+                            onPressed: () =>
+                                _.useSearchHistory ? cubit.changeSearchHistoryLimit(increase: false) : null,
+                            icon: const Icon(Icons.remove)),
                         Text(_.searchHistoryLimit.toString()),
-                        IconButton(onPressed: () => _.useSearchHistory ? cubit.changeSearchHistoryLimit(increase: true) : null, icon: const Icon(Icons.add)),
+                        IconButton(
+                            onPressed: () => _.useSearchHistory ? cubit.changeSearchHistoryLimit(increase: true) : null,
+                            icon: const Icon(Icons.add)),
                       ],
                     ),
                   ),

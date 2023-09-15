@@ -2,25 +2,25 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:copy_with_extension/copy_with_extension.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:invidious/router.dart';
 import 'package:logging/logging.dart';
 import 'package:receive_sharing_intent/receive_sharing_intent.dart';
 
 import '../../database.dart';
 import '../../globals.dart';
 import '../../home/models/db/home_layout.dart';
-import '../../main.dart';
 import '../../notifications/notifications.dart';
 import '../../settings/models/db/server.dart';
-import '../../videos/views/screens/video.dart';
 
 part 'app.g.dart';
 
 final log = Logger('HomeState');
 
 class AppCubit extends Cubit<AppState> {
-  AppCubit(super.initialState) {
+  final NotificationResponse? startupNotificationPayload;
+
+  AppCubit(super.initialState, {this.startupNotificationPayload}) {
     onReady();
   }
 
@@ -42,8 +42,9 @@ class AppCubit extends Cubit<AppState> {
     }
     selectIndex(selectedIndex);
 
-    
-    onNotificationAppLaunch();
+    if (startupNotificationPayload != null) {
+      onDidReceiveNotificationResponse(startupNotificationPayload!);
+    }
   }
 
   @override
@@ -60,17 +61,11 @@ class AppCubit extends Cubit<AppState> {
             uri.pathSegments.contains("watch") &&
             uri.queryParameters.containsKey('v')) {
           String videoId = uri.queryParameters['v']!;
-          navigatorKey.currentState?.push(MaterialPageRoute(
-              builder: (context) => VideoView(
-                    videoId: videoId,
-                  )));
+          appRouter.push(VideoRoute(videoId: videoId));
         }
         if (uri.host == 'youtu.be' && uri.pathSegments.length == 1) {
           String videoId = uri.pathSegments[0];
-          navigatorKey.currentState?.push(MaterialPageRoute(
-              builder: (context) => VideoView(
-                    videoId: videoId,
-                  )));
+          appRouter.push(VideoRoute(videoId: videoId));
         }
       }
     } catch (err, stacktrace) {
@@ -97,8 +92,6 @@ class AppCubit extends Cubit<AppState> {
 
   bool get isLoggedIn =>
       (state.server?.authToken?.isNotEmpty ?? false) || (state.server?.sidCookie?.isNotEmpty ?? false);
-
-  void onDidReceiveNotificationResponse(NotificationResponse details) {}
 }
 
 @CopyWith(constructor: "_")

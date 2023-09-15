@@ -62,7 +62,8 @@ class DownloadedVideoView extends StatelessWidget {
                           right: 10,
                           bottom: 5,
                           child: Container(
-                            decoration: BoxDecoration(color: colors.secondaryContainer, borderRadius: BorderRadius.circular(20)),
+                            decoration: BoxDecoration(
+                                color: colors.secondaryContainer, borderRadius: BorderRadius.circular(20)),
                             child: Padding(
                               padding: const EdgeInsets.all(4),
                               child: Row(

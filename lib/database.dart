@@ -1,8 +1,4 @@
-import 'dart:io';
-import 'dart:ui';
-
 import 'package:easy_debounce/easy_debounce.dart';
-import 'package:invidious/background_service.dart';
 import 'package:invidious/home/models/db/home_layout.dart';
 import 'package:invidious/notifications/models/db/channel_notifications.dart';
 import 'package:invidious/notifications/models/db/subscription_notifications.dart';

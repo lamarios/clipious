@@ -1,14 +1,13 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_swipe_action_cell/core/cell.dart';
-import 'package:invidious/main.dart';
+import 'package:invidious/router.dart';
 import 'package:invidious/settings/states/video_filter.dart';
 import 'package:invidious/settings/states/video_filter_channel.dart';
 import 'package:invidious/settings/views/components/video_filter_item.dart';
-import 'package:invidious/settings/views/screens/video_filter_setup.dart';
 
-import '../../../myRouteObserver.dart';
 import '../../../utils/models/image_object.dart';
 import '../../../videos/views/components/video_thumbnail.dart';
 import '../../models/db/video_filter.dart';
@@ -21,13 +20,8 @@ class VideoFilterChannel extends StatelessWidget {
   editFilter(BuildContext context, {required VideoFilter filter}) {
     var cubit = context.read<VideoFilterCubit>();
 
-    navigatorKey.currentState
-        ?.push(MaterialPageRoute(
-            settings: ROUTE_SETTINGS_VIDEO_FILTERS,
-            builder: (context) => VideoFilterSetup(
-                  channelId: filter.channelId,
-                  filter: filter,
-                )))
+    AutoRouter.of(context)
+        .push(VideoFilterSetupRoute(channelId: filter.channelId, filter: filter))
         .then((value) => cubit.refreshFilters());
   }
 

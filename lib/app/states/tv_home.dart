@@ -20,17 +20,17 @@ class TvHomeCubit extends Cubit<TvHomeState> {
     }
   }
 
-  scrollToTop(){
+  scrollToTop() {
     state.scrollController.animateTo(0, duration: animationDuration, curve: Curves.easeInOutQuad);
   }
 }
 
 @CopyWith(constructor: "_")
-class TvHomeState{
-   bool expandMenu = false;
-   ScrollController scrollController = ScrollController();
+class TvHomeState {
+  bool expandMenu = false;
+  ScrollController scrollController = ScrollController();
 
-   TvHomeState();
+  TvHomeState();
 
   TvHomeState._(this.expandMenu, this.scrollController);
 }

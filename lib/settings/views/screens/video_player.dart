@@ -1,29 +1,19 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:invidious/globals.dart';
+import 'package:invidious/router.dart';
 import 'package:invidious/settings/states/settings.dart';
-import 'package:invidious/settings/views/components/channel_notifications.dart';
-import 'package:invidious/settings/views/screens/search_history_settings.dart';
 import 'package:invidious/settings/views/screens/settings.dart';
-import 'package:invidious/settings/views/screens/sponsor_block_settings.dart';
-import 'package:invidious/settings/views/screens/video_filter.dart';
-import 'package:invidious/utils.dart';
-import 'package:locale_names/locale_names.dart';
-import 'package:optimize_battery/optimize_battery.dart';
 import 'package:settings_ui/settings_ui.dart';
 
-import '../../../myRouteObserver.dart';
-import '../../../utils/views/components/select_list_dialog.dart';
-import '../components/app_customizer.dart';
 
-class VideoPlayerSettings extends StatelessWidget {
-  const VideoPlayerSettings({super.key});
+@RoutePage()
+class VideoPlayerSettingsScreen extends StatelessWidget {
+  const VideoPlayerSettingsScreen({super.key});
 
   openSponsorBlockSettings(BuildContext context) {
-    Navigator.of(context).push(
-        MaterialPageRoute(settings: ROUTE_SETTINGS_SPONSOR_BLOCK, builder: (context) => const SponsorBlockSettings()));
+    AutoRouter.of(context).push(const SponsorBlockSettingsRoute());
   }
 
   @override

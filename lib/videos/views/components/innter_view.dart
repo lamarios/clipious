@@ -19,7 +19,8 @@ class VideoInnerView extends StatelessWidget {
   bool? playNow;
   final VideoState videoController;
 
-  VideoInnerView({super.key, required this.video, required this.selectedIndex, this.playNow, required this.videoController});
+  VideoInnerView(
+      {super.key, required this.video, required this.selectedIndex, this.playNow, required this.videoController});
 
   @override
   Widget build(BuildContext context) {
@@ -49,12 +50,17 @@ class VideoInnerView extends StatelessWidget {
             ],
           ),
         ),
-        if(!settings.state.distractionFreeMode)Builder(
-          builder: (context) {
+        if (!settings.state.distractionFreeMode)
+          Builder(builder: (context) {
             return Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                SizedBox(height: 25, child: Checkbox(value: settings.state.playRecommendedNext, onChanged: cubit.togglePlayRecommendedNext, visualDensity: VisualDensity.compact)),
+                SizedBox(
+                    height: 25,
+                    child: Checkbox(
+                        value: settings.state.playRecommendedNext,
+                        onChanged: cubit.togglePlayRecommendedNext,
+                        visualDensity: VisualDensity.compact)),
                 InkWell(
                     onTap: () => cubit.togglePlayRecommendedNext(!settings.state.playRecommendedNext),
                     child: Text(
@@ -63,8 +69,7 @@ class VideoInnerView extends StatelessWidget {
                     ))
               ],
             );
-          }
-        ),
+          }),
         Expanded(
             child: Padding(
           padding: const EdgeInsets.only(top: 0),
