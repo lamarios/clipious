@@ -1,10 +1,11 @@
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:bloc/bloc.dart';
 import 'package:copy_with_extension/copy_with_extension.dart';
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:invidious/app/states/app.dart';
-import 'package:invidious/background_service.dart';
+import 'package:invidious/foreground_service.dart';
 import 'package:locale_names/locale_names.dart';
 import 'package:logging/logging.dart';
 import 'package:optimize_battery/optimize_battery.dart';
@@ -302,10 +303,7 @@ class SettingsCubit extends Cubit<SettingsState> {
 
   String? getLocaleDisplayName() {
     List<String>? localeString = state.locale?.split('_');
-    Locale? l = localeString != null
-        ? Locale.fromSubtags(
-            languageCode: localeString[0], scriptCode: localeString.length >= 2 ? localeString[1] : null)
-        : null;
+    Locale? l = localeString != null ? Locale.fromSubtags(languageCode: localeString[0], scriptCode: localeString.length >= 2 ? localeString[1] : null) : null;
 
     return l?.nativeDisplayLanguageScript;
   }
@@ -329,10 +327,14 @@ class SettingsCubit extends Cubit<SettingsState> {
       backgroundService.invoke('stopService');
       emit(state);
     } else {
-      FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
-      flutterLocalNotificationsPlugin
-          .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
-          ?.requestPermission();
+      AwesomeNotifications().isNotificationAllowed().then((isAllowed) {
+        if (!isAllowed) {
+          // This is just a basic example. For real apps, you must show some
+          // friendly dialog box before call the request method.
+          // This is very important to not harm the user experience
+          AwesomeNotifications().requestPermissionToSendNotifications();
+        }
+      });
 
       var ignoringBatterOptimization = await OptimizeBattery.isIgnoringBatteryOptimizations();
       if (!ignoringBatterOptimization) {
@@ -349,10 +351,21 @@ class SettingsCubit extends Cubit<SettingsState> {
     return EnableBackGroundNotificationResponse.ok;
   }
 
-  setSubscriptionsNotifications(bool b) async {
+  setSubscriptionsNotifications(bool b) {
     var state = this.state.copyWith();
     state.subscriptionsNotifications = b;
     emit(state);
+  }
+
+  setBackgroundCheckFrequency(int i) {
+    if (i > 0 && i <= 24) {
+      var state = this.state.copyWith();
+      state.backgroundNotificationFrequency = i;
+      emit(state);
+      EasyDebounce.debounce('restarting-background-service', const Duration(seconds: 2), () {
+          backgroundService.on(restartTimerMethod);
+      });
+    }
   }
 }
 
@@ -420,7 +433,9 @@ class SettingsState {
   Country get country => getCountryFromCode(_get(BROWSING_COUNTRY)?.value ?? 'US');
 
   set country(Country c) {
-    String code = countryCodes.firstWhere((element) => element.name == c.name, orElse: () => country).code;
+    String code = countryCodes
+        .firstWhere((element) => element.name == c.name, orElse: () => country)
+        .code;
     _set(BROWSING_COUNTRY, code);
   }
 
@@ -452,8 +467,7 @@ class SettingsState {
 
   set forceLandscapeFullScreen(bool b) => _set(LOCK_ORIENTATION_FULLSCREEN, b);
 
-  ThemeMode get themeMode =>
-      ThemeMode.values.firstWhere((element) => element.name == _get(THEME_MODE)?.value, orElse: () => ThemeMode.system);
+  ThemeMode get themeMode => ThemeMode.values.firstWhere((element) => element.name == _get(THEME_MODE)?.value, orElse: () => ThemeMode.system);
 
   set themeMode(ThemeMode t) => _set(THEME_MODE, t.name);
 
@@ -461,22 +475,19 @@ class SettingsState {
 
   set useSearchHistory(bool b) => _set(USE_SEARCH_HISTORY, b);
 
-  List<HomeDataSource> get appLayout => (_get(APP_LAYOUT)?.value ??
-          '${HomeDataSource.home.name},${HomeDataSource.subscription.name},${HomeDataSource.playlist.name},${HomeDataSource.history.name}')
-      .split(',')
-      .where((element) => element.isNotEmpty)
-      .map((e) => HomeDataSource.values.firstWhere((element) => element.name == e))
-      .toList();
+  List<HomeDataSource> get appLayout =>
+      (_get(APP_LAYOUT)?.value ?? '${HomeDataSource.home.name},${HomeDataSource.subscription.name},${HomeDataSource.playlist.name},${HomeDataSource.history.name}')
+          .split(',')
+          .where((element) => element.isNotEmpty)
+          .map((e) => HomeDataSource.values.firstWhere((element) => element.name == e))
+          .toList();
 
   set appLayout(List<HomeDataSource> layout) => _set(APP_LAYOUT, layout.map((e) => e.name).join(","));
 
   NavigationDestinationLabelBehavior get navigationBarLabelBehavior =>
-      NavigationDestinationLabelBehavior.values.firstWhere((e) =>
-          e.name ==
-          (_get(NAVIGATION_BAR_LABEL_BEHAVIOR)?.value ?? NavigationDestinationLabelBehavior.onlyShowSelected.name));
+      NavigationDestinationLabelBehavior.values.firstWhere((e) => e.name == (_get(NAVIGATION_BAR_LABEL_BEHAVIOR)?.value ?? NavigationDestinationLabelBehavior.onlyShowSelected.name));
 
-  set navigationBarLabelBehavior(NavigationDestinationLabelBehavior behavior) =>
-      _set(NAVIGATION_BAR_LABEL_BEHAVIOR, behavior.name);
+  set navigationBarLabelBehavior(NavigationDestinationLabelBehavior behavior) => _set(NAVIGATION_BAR_LABEL_BEHAVIOR, behavior.name);
 
   bool get distractionFreeMode => _get(DISTRACTION_FREE_MODE)?.value == "true";
 
@@ -489,6 +500,10 @@ class SettingsState {
   bool get subscriptionsNotifications => _get(SUBSCRIPTION_NOTIFICATIONS)?.value == 'true';
 
   set subscriptionsNotifications(bool b) => _set(SUBSCRIPTION_NOTIFICATIONS, b);
+
+  int get backgroundNotificationFrequency => int.parse(_get(BACKGROUND_CHECK_FREQUENCY)?.value ?? "1");
+
+  set backgroundNotificationFrequency(int i) => _set(BACKGROUND_CHECK_FREQUENCY, i);
 
   void _set<T>(String name, T value) {
     if (value == null) {

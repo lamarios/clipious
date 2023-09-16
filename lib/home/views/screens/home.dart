@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:back_button_interceptor/back_button_interceptor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,6 +14,7 @@ import 'package:invidious/utils.dart';
 import 'package:invidious/utils/views/components/app_icon.dart';
 
 import '../../../main.dart';
+import '../../../notifications/notifications.dart';
 
 @RoutePage()
 class HomeScreen extends StatefulWidget {
@@ -50,6 +52,13 @@ class _HomeScreenState extends State<HomeScreen> {
         return false;
       }
     }, name: 'mainNavigator', zIndex: 0, ifNotYetIntercepted: true);
+
+    // Only after at least the action method is set, the notification events are delivered
+    AwesomeNotifications().setListeners(
+        onActionReceivedMethod: NotificationController.onActionReceivedMethod,
+        onNotificationCreatedMethod: NotificationController.onNotificationCreatedMethod,
+        onNotificationDisplayedMethod: NotificationController.onNotificationDisplayedMethod,
+        onDismissActionReceivedMethod: NotificationController.onDismissActionReceivedMethod);
   }
 
   @override
@@ -117,9 +126,7 @@ class _HomeScreenState extends State<HomeScreen> {
             // backgroundColor: Colors.pink,
             backgroundColor: colorScheme.background,
             actions: [
-              selectedPage == HomeDataSource.subscription
-                  ? IconButton(onPressed: () => openSubscriptionManagement(context), icon: const Icon(Icons.checklist))
-                  : const SizedBox.shrink(),
+              selectedPage == HomeDataSource.subscription ? IconButton(onPressed: () => openSubscriptionManagement(context), icon: const Icon(Icons.checklist)) : const SizedBox.shrink(),
               const AppBarDownloadButton(),
               IconButton(
                 onPressed: () {
@@ -150,8 +157,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     duration: animationDuration,
                     child: Container(
                         // home handles its own padding because we don't want to cut horizontal scroll lists on the right
-                        padding: EdgeInsets.symmetric(
-                            horizontal: selectedPage == HomeDataSource.home ? 0 : innerHorizontalPadding),
+                        padding: EdgeInsets.symmetric(horizontal: selectedPage == HomeDataSource.home ? 0 : innerHorizontalPadding),
                         key: ValueKey(selectedPage),
                         child: selectedPage?.build(context, false) ??
                             const Opacity(

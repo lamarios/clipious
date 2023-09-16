@@ -1,125 +1,89 @@
 import 'dart:ffi';
 
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:awesome_notifications/awesome_notifications.dart';
+import 'package:flutter/foundation.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/main.dart';
+import 'package:invidious/notifications/models/db/subscription_notifications.dart';
+import 'package:invidious/router.dart';
 import 'package:logging/logging.dart';
-
-const openChannel = "open-channel";
-const openSubscriptions = "open-subscriptions";
-const openPublicPlaylist = "open-public-playlist";
 
 final log = Logger('notifications');
 
+const String playlistId = "playlistId", lastSeenVideo = "lastSeenVideo", channelId = "channelId";
+
 enum NotificationTypes {
-  subscriptionNotifications(
-      id: 'subscription-notifications',
-      description: 'Get notifications about your subscriptions',
-      name: 'New subscription videos',
-      importance: Importance.low,
-      priority: Priority.low,
-      actions: [],
-      payloadPrefix: openSubscriptions),
-  channelNotification(
-      id: 'channel-notifications',
-      description: 'Get notifications from selected channels (bell icon)',
-      name: 'Channel new videos',
-      importance: Importance.low,
-      priority: Priority.low,
-      actions: [],
-      payloadPrefix: openChannel),
-  playlistNotification(
-      id: 'playlist-notifications',
-      description: 'Get notification from selected playlists (bell icon)',
-      name: 'Playlist new videos',
-      importance: Importance.low,
-      priority: Priority.low,
-      actions: [],
-      payloadPrefix: openPublicPlaylist);
+  foregroundService(
+      id: 'foreground-service', description: 'Checks for new videos from sources you selected', name: 'Foreground service', idSpace: 4000000, playSound: false, importance: NotificationImportance.Min),
+  subscription(id: 'subscription-notifications', description: 'Get notifications about your subscriptions', name: 'New subscription videos', idSpace: 1000000),
+  channel(id: 'channel-notifications', description: 'Get notifications from selected channels (bell icon)', name: 'Channel new videos', idSpace: 2000000),
+  playlist(id: 'playlist-notifications', description: 'Get notification from selected playlists (bell icon)', name: 'Playlist new videos', idSpace: 3000000);
 
+  final NotificationImportance importance;
   final String id, name, description;
-  final Importance importance;
-  final Priority priority;
-  final String payloadPrefix;
-  final List<AndroidNotificationAction> actions;
+  final bool playSound;
 
-  const NotificationTypes(
-      {required this.id,
-      required this.name,
-      required this.description,
-      required this.importance,
-      required this.priority,
-      required this.actions,
-      required this.payloadPrefix});
+  // to prevent notifications with the same id, when sending notifications this will do idSpace+id
+  final int idSpace;
+
+  const NotificationTypes({required this.id, required this.name, required this.description, required this.idSpace, this.playSound = true, this.importance = NotificationImportance.Default});
 }
 
-FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
-
-Future<void> initializeNotifications() async {
-// initialise the plugin. app_icon needs to be a added as a drawable resource to the Android head project
-  const AndroidInitializationSettings initializationSettingsAndroid = AndroidInitializationSettings('app_icon');
-
-  const InitializationSettings initializationSettings = InitializationSettings(
-    android: initializationSettingsAndroid,
-  );
-  await flutterLocalNotificationsPlugin.initialize(initializationSettings,
-      onDidReceiveNotificationResponse: onDidReceiveNotificationResponse);
+initializeNotifications() {
+  var defaultIcon = 'resource://drawable/app_icon';
+  AwesomeNotifications().initialize(
+      defaultIcon,
+      NotificationTypes.values
+          .map((e) => NotificationChannel(
+              icon: defaultIcon, channelKey: e.id, channelName: e.name, channelDescription: e.description, playSound: e.playSound, enableVibration: e.playSound, importance: e.importance))
+          .toList(),
+      debug: kDebugMode);
 }
 
-void onNotificationAppLaunch() {
-  // checking if the app was launched from a notification
-  flutterLocalNotificationsPlugin.getNotificationAppLaunchDetails().then((details) {
-    log.info(
-        "App started by notification ? ${details?.didNotificationLaunchApp} with payload: ${details?.notificationResponse?.payload}");
-    if (details?.didNotificationLaunchApp ?? false) {
-      if (details?.notificationResponse != null) {
-        onDidReceiveNotificationResponse(details!.notificationResponse!);
+class NotificationController {
+  /// Use this method to detect when a new notification or a schedule is created
+  @pragma("vm:entry-point")
+  static Future<void> onNotificationCreatedMethod(ReceivedNotification receivedNotification) async {
+    // Your code goes here
+  }
+
+  /// Use this method to detect every time that a new notification is displayed
+  @pragma("vm:entry-point")
+  static Future<void> onNotificationDisplayedMethod(ReceivedNotification receivedNotification) async {
+    // Your code goes here
+  }
+
+  /// Use this method to detect if the user dismissed a notification
+  @pragma("vm:entry-point")
+  static Future<void> onDismissActionReceivedMethod(ReceivedAction receivedAction) async {
+    // Your code goes here
+  }
+
+  /// Use this method to detect when the user taps on a notification or action button
+  @pragma("vm:entry-point")
+  static Future<void> onActionReceivedMethod(ReceivedAction receivedAction) async {
+    print("notification tapped ${receivedAction.payload} ");
+    if (receivedAction.payload != null && receivedAction.payload!.isNotEmpty) {
+      var payload = receivedAction.payload!;
+      if (receivedAction.channelKey == NotificationTypes.channel.id && payload.containsKey(channelId) && payload.containsKey(lastSeenVideo)) {
+        log.fine('Launching channel screen ${receivedAction.payload}');
+        appRouter.push(ChannelRoute(channelId: payload[channelId]!));
+        db.setChannelNotificationLastViewedVideo(payload[channelId]!, payload[lastSeenVideo]!);
+      } else if (receivedAction.channelKey == NotificationTypes.playlist.id && payload.containsKey(playlistId)) {
+        log.fine('Launching playlist screen ${receivedAction.payload}');
+        service.getPublicPlaylists(payload[playlistId]!).then((value) {
+          appRouter.push(PlaylistViewRoute(playlist: value, canDeleteVideos: false));
+          db.setPlaylistNotificationLastViewedVideo(value.playlistId, value.videoCount);
+        });
+      } else if (receivedAction.channelKey == NotificationTypes.subscription.id && payload.containsKey(lastSeenVideo)) {
+        appRouter.push(const SubscriptionRoute());
+        db.setLastSubscriptionNotification(SubscriptionNotification(payload[lastSeenVideo]!, DateTime.now().millisecondsSinceEpoch));
       }
     }
-  }).onError((error, stackTrace) {
-    log.severe("Error getting notification on start");
-  });
-}
-
-void onDidReceiveNotificationResponse(NotificationResponse details) {
-  if (details.payload != null && details.payload!.isNotEmpty) {
-    var split = details.payload!.split(":");
-/*
-    switch (split[0]) {
-      case openChannel:
-        log.fine('Launching channel screen ${details.payload}, navigator state: ${navigatorKey.currentState}');
-        navigatorKey.currentState?.pushNamed(PATH_CHANNEL, arguments: split[1]);
-        break;
-      case openPublicPlaylist:
-        log.fine('Launching playlist screen ${details.payload}, navigator state: ${navigatorKey.currentState}');
-        service
-            .getPublicPlaylists(split[1])
-            .then((value) => navigatorKey.currentState?.pushNamed(pathPublicPlaylist, arguments: value));
-        break;
-      case openSubscriptions:
-        navigatorKey.currentState?.pushNamed(pathSubscriptions);
-        break;
-    }
-*/
   }
+// Your code goes here
 }
 
-sendNotification(String title, String message, {required NotificationTypes type, String? payload, int id = 0}) async {
-  final AndroidNotificationDetails androidNotificationDetails = AndroidNotificationDetails(type.id, type.name,
-      channelDescription: type.description,
-      importance: type.importance,
-      priority: type.priority,
-      autoCancel: true,
-      shortcutId: "test",
-      ticker: 'ticker',
-      actions: type.actions);
-
-  final NotificationDetails notificationDetails = NotificationDetails(android: androidNotificationDetails);
-  await flutterLocalNotificationsPlugin.show(
-    id,
-    title,
-    message,
-    notificationDetails,
-    payload: payload != null ? '${type.payloadPrefix}:$payload' : null,
-  );
+sendNotification(String title, String message, {required NotificationTypes type, Map<String, String>? payload, int id = 0}) async {
+  AwesomeNotifications().createNotification(content: NotificationContent(id: type.idSpace + id, payload: payload, channelKey: type.id, title: title, body: message, actionType: ActionType.Default));
 }

@@ -63,10 +63,20 @@ class BellIconCubit extends Cubit<bool> {
           break;
       }
     } else {
-      var notif = db.getChannelNotification(itemId);
-      if (notif != null) {
-        db.deleteChannelNotification(notif);
-        emit(false);
+      switch(type){
+        case BellIconType.channel:
+          var notif = db.getChannelNotification(itemId);
+          if (notif != null) {
+            db.deleteChannelNotification(notif);
+            emit(false);
+          }
+          break;
+        case BellIconType.playlist:
+          var notif = db.getPlaylistNotification(itemId);
+          if (notif != null) {
+            db.deletePlaylistNotification(notif);
+            emit(false);
+          }
       }
     }
 

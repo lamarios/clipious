@@ -50,6 +50,7 @@ const NAVIGATION_BAR_LABEL_BEHAVIOR = 'navigation-bar-label-behavior';
 const DISTRACTION_FREE_MODE = 'distraction-free-mode';
 const BACKGROUND_NOTIFICATIONS = 'background-notifications';
 const SUBSCRIPTION_NOTIFICATIONS = 'subscriptions-notifications';
+const BACKGROUND_CHECK_FREQUENCY  = "background-check-frequency";
 
 const ON_OPEN = "on-open";
 

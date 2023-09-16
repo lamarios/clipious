@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:copy_with_extension/copy_with_extension.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:invidious/router.dart';
 import 'package:logging/logging.dart';
 import 'package:receive_sharing_intent/receive_sharing_intent.dart';
@@ -10,7 +9,6 @@ import 'package:receive_sharing_intent/receive_sharing_intent.dart';
 import '../../database.dart';
 import '../../globals.dart';
 import '../../home/models/db/home_layout.dart';
-import '../../notifications/notifications.dart';
 import '../../settings/models/db/server.dart';
 
 part 'app.g.dart';
@@ -18,9 +16,8 @@ part 'app.g.dart';
 final log = Logger('HomeState');
 
 class AppCubit extends Cubit<AppState> {
-  final NotificationResponse? startupNotificationPayload;
 
-  AppCubit(super.initialState, {this.startupNotificationPayload}) {
+  AppCubit(super.initialState) {
     onReady();
   }
 
@@ -41,10 +38,6 @@ class AppCubit extends Cubit<AppState> {
       selectedIndex = 0;
     }
     selectIndex(selectedIndex);
-
-    if (startupNotificationPayload != null) {
-      onDidReceiveNotificationResponse(startupNotificationPayload!);
-    }
   }
 
   @override

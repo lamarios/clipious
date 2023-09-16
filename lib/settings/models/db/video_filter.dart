@@ -93,7 +93,7 @@ class VideoFilter {
     var matches = filters.where((element) => element.filterVideo(v)).toList();
     v.matchedFilters = matches;
     v.filtered = matches.isNotEmpty;
-    log.fine('Video ${v.title} filtered ? ${v.filtered}');
+    // log.fine('Video ${v.title} filtered ? ${v.filtered}');
     v.filterHide = v.filtered && matches.any((element) => element.hideFromFeed);
     return v;
   }
@@ -120,7 +120,7 @@ class VideoFilter {
     String videoChannel = video.authorId?.replaceAll("/channel/", '') ?? '';
 
     if (channelId != null && channelId != videoChannel) {
-      log.fine('Showing videos, no same channel $channelId (filter) -  ${videoChannel} / ${video.author} (video)');
+      // log.fine('Showing videos, no same channel $channelId (filter) -  ${videoChannel} / ${video.author} (video)');
       return false;
     }
     // Channel hide all

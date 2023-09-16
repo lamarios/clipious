@@ -25,8 +25,7 @@ class BellIcon<T> extends StatelessWidget {
       case TurnOnStatus.needToEnableBackGroundServices:
         if (context.mounted) {
           var locals = AppLocalizations.of(context)!;
-          okCancelDialog(context, locals.askToEnableBackgroundServiceTitle, locals.askToEnableBackgroundServiceContent,
-              () async {
+          okCancelDialog(context, locals.askToEnableBackgroundServiceTitle, locals.askToEnableBackgroundServiceContent, () async {
             var settings = context.read<SettingsCubit>();
             var res = await settings.setBackgroundNotifications(true);
             if (context.mounted) {
@@ -40,7 +39,9 @@ class BellIcon<T> extends StatelessWidget {
         }
         break;
       case TurnOnStatus.needToEnableBatteryOptimization:
-        showBatteryOptimizationDialog(context);
+        if(context.mounted) {
+          showBatteryOptimizationDialog(context);
+        }
         break;
       default:
         break;
@@ -56,7 +57,7 @@ class BellIcon<T> extends StatelessWidget {
         builder: (context, state) {
           return IconButton(
             onPressed: () => toggleNotifications(context),
-            icon: const Icon(Icons.notifications),
+            icon: Icon(state ? Icons.notifications_active : Icons.notifications),
             color: state ? colors.primary : null,
           ).animate(target: state ? 1 : 0, effects: state ? [const ShakeEffect()] : []);
         },

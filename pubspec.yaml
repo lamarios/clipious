@@ -82,7 +82,7 @@ dependencies:
   simple_pip_mode: ^0.8.0
   flutter_background_service: 5.0.1
   optimize_battery: 0.0.4
-  flutter_local_notifications: 15.1.1
+  awesome_notifications: ^0.7.5-dev.3
   auto_route: ^7.8.3
 dependency_overrides:
   #  wakelock_windows:

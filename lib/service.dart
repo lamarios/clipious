@@ -70,8 +70,7 @@ class Service {
 
   handleResponse(Response response) {
     var body = utf8.decode(response.bodyBytes);
-    log.info(
-        "Response from ${response.request?.method} ${urlFormatForLog(response.request?.url)}, status: ${response.statusCode}");
+    log.info("Response from ${response.request?.method} ${urlFormatForLog(response.request?.url)}, status: ${response.statusCode}");
 
     if (body.isNotEmpty) {
       var decoded = jsonDecode(body);
@@ -90,8 +89,7 @@ class Service {
 
       return decoded;
     } else if (response.statusCode < 200 || response.statusCode >= 400) {
-      log.severe(
-          'Error making request to ${response.request?.url}, \n status: ${response.statusCode}, \n Body: ${response.body}');
+      log.severe('Error making request to ${response.request?.url}, \n status: ${response.statusCode}, \n Body: ${response.body}');
       throw InvidiousServiceError('Couldn\'t make request, response code: ${response.statusCode}');
     }
   }
@@ -136,8 +134,7 @@ class Service {
   handleErrors(Response response) {}
 
   Future<Video> getVideo(String videoId) async {
-    final response = await http.get(buildUrl(urlGetVideo, pathParams: {':id': videoId}),
-        headers: {'Content-Type': 'application/json; charset=utf-16'});
+    final response = await http.get(buildUrl(urlGetVideo, pathParams: {':id': videoId}), headers: {'Content-Type': 'application/json; charset=utf-16'});
 
     return Video.fromJson(handleResponse(response));
   }
@@ -152,8 +149,7 @@ class Service {
         // we have a cookie to parse
         return response.headers['set-cookie']!.split(';').firstWhere((element) => element.startsWith('SID='));
       } else {
-        throw InvidiousServiceError(
-            'wrong error code (${response.statusCode}) or no cookie headers: ${response.headers['set-cookie']}');
+        throw InvidiousServiceError('wrong error code (${response.statusCode}) or no cookie headers: ${response.headers['set-cookie']}');
       }
     } catch (err, stacktrace) {
       if (err is InvidiousServiceError) {
@@ -164,8 +160,7 @@ class Service {
   }
 
   Future<String?> logIn(String serverUrl) async {
-    String url =
-        '$serverUrl/authorize_token?scopes=:feed,:subscriptions*,:playlists*,:history*&callback_url=clipious-auth://';
+    String url = '$serverUrl/authorize_token?scopes=:feed,:subscriptions*,:playlists*,:history*&callback_url=clipious-auth://';
     final result = await FlutterWebAuth.authenticate(url: url, callbackUrlScheme: 'clipious-auth');
 
     final token = Uri.parse(result).queryParameters['token'];
@@ -222,13 +217,7 @@ class Service {
 
   Future<SearchResults> search(String query, {SearchType? type, int? page, SearchSortBy? sortBy}) async {
     String countryCode = db.getSettings(BROWSING_COUNTRY)?.value ?? 'US';
-    Uri uri = buildUrl(urlSearch, query: {
-      'q': Uri.encodeQueryComponent(query),
-      'type': type?.name,
-      'page': page?.toString() ?? '1',
-      'sort_by': sortBy?.name,
-      'region': countryCode
-    });
+    Uri uri = buildUrl(urlSearch, query: {'q': Uri.encodeQueryComponent(query), 'type': type?.name, 'page': page?.toString() ?? '1', 'sort_by': sortBy?.name, 'region': countryCode});
     final response = await http.get(uri);
     Iterable i = handleResponse(response);
     // only getting videos for now
@@ -260,7 +249,7 @@ class Service {
     return results;
   }
 
-  Future<UserFeed> getUserFeed({int? maxResults, int? page}) async {
+  Future<UserFeed> getUserFeed({int? maxResults, int? page, bool saveLastSeen = true}) async {
     // for background service to be able to use
     var currentlySelectedServer = db.getCurrentlySelectedServer();
 
@@ -273,7 +262,7 @@ class Service {
     feed.notifications = (await VideoFilter.filterVideos(feed.notifications)).cast();
 
     // we only save the last video seen if we're on the first page otherwise it does not make sense
-    if ((page ?? 1) == 1) {
+    if (saveLastSeen && (page ?? 1) == 1) {
       var videos = List.from(feed.notifications ?? [], growable: true);
       videos.addAll(feed.videos ?? []);
       if (videos.isNotEmpty) {
@@ -307,14 +296,8 @@ class Service {
     final response = await http.get(buildUrl(urlSearchSuggestions, query: {"q": Uri.encodeQueryComponent(query)}));
     SearchSuggestion search = SearchSuggestion.fromJson(handleResponse(response));
     if (search.suggestions.any((element) => element.contains(";"))) {
-      search.suggestions = search.suggestions
-          .map((s) => s
-              .split(";")
-              .where((e) => e.isNotEmpty && e.startsWith("&#"))
-              .map((e) => String.fromCharCode(int.parse(e.replaceAll("&#", ""))))
-              .toList()
-              .join(""))
-          .toList();
+      search.suggestions =
+          search.suggestions.map((s) => s.split(";").where((e) => e.isNotEmpty && e.startsWith("&#")).map((e) => String.fromCharCode(int.parse(e.replaceAll("&#", "")))).toList().join("")).toList();
     }
 
     return search;
@@ -406,8 +389,7 @@ class Service {
   Future<Channel> getChannel(String channelId) async {
     // sometimes the api gives the channel with /channel/<channelid> format
     channelId = channelId.replaceAll("/channel/", '');
-    final response = await http.get(buildUrl(urlGetChannel, pathParams: {':id': channelId}),
-        headers: {'Content-Type': 'application/json; charset=utf-16'});
+    final response = await http.get(buildUrl(urlGetChannel, pathParams: {':id': channelId}), headers: {'Content-Type': 'application/json; charset=utf-16'});
 
     var channel = Channel.fromJson(handleResponse(response));
     channel.latestVideos = (await VideoFilter.filterVideos(channel.latestVideos)).cast();
@@ -418,14 +400,14 @@ class Service {
     return channel;
   }
 
-  Future<VideosWithContinuation> getChannelVideos(String channelId, String? continuation) async {
+  Future<VideosWithContinuation> getChannelVideos(String channelId, String? continuation, {bool saveLastSeen = true}) async {
     Uri uri = buildUrl(urlGetChannelVideos, pathParams: {':id': channelId}, query: {'continuation': continuation});
     final response = await http.get(uri, headers: {'Content-Type': 'application/json; charset=utf-16'});
 
     var videosWithContinuation = VideosWithContinuation.fromJson(handleResponse(response));
     videosWithContinuation.videos = (await VideoFilter.filterVideos(videosWithContinuation.videos)).cast();
 
-    if (videosWithContinuation.videos.isNotEmpty) {
+    if (saveLastSeen && videosWithContinuation.videos.isNotEmpty) {
       db.setChannelNotificationLastViewedVideo(channelId, videosWithContinuation.videos.first.videoId);
     }
     return videosWithContinuation;
@@ -613,7 +595,7 @@ class Service {
     return servers.where((s) => (s.api ?? false) && (s.stats?.openRegistrations ?? false)).toList();
   }
 
-  Future<Playlist> getPublicPlaylists(String playlistId, {int? page}) async {
+  Future<Playlist> getPublicPlaylists(String playlistId, {int? page, bool saveLastSeen = true}) async {
     Uri uri = buildUrl(urlGetPublicPlaylist, pathParams: {':id': playlistId}, query: {'page': page?.toString()});
 
     final response = await http.get(uri);
@@ -622,7 +604,7 @@ class Service {
     playlist.videos = (await VideoFilter.filterVideos(playlist.videos)).cast();
     playlist.removedByFilter = oldLength - playlist.videos.length;
 
-    db.setPlaylistNotificationLastViewedVideo(playlist.playlistId, playlist.videoCount);
+    if (saveLastSeen) db.setPlaylistNotificationLastViewedVideo(playlist.playlistId, playlist.videoCount);
 
     return playlist;
   }

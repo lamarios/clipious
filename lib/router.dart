@@ -78,7 +78,8 @@ class AppRouter extends _$AppRouter {
                 AutoRoute(page: NotificationSettingsRoute.page),
                 AutoRoute(page: ManageSubscriptionsRoute.page),
                 AutoRoute(page: AppLogsRoute.page),
-                AutoRoute(page: PlaylistViewRoute.page)
+                AutoRoute(page: PlaylistViewRoute.page),
+                AutoRoute(page: SubscriptionRoute.page)
               ],
             ),
             AutoRoute(page: WelcomeWizardRoute.page, initial: !hasServer)

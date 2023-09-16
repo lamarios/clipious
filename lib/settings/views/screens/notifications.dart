@@ -54,6 +54,52 @@ class NotificationSettingsScreen extends StatelessWidget {
                         title: Text(locals.notifications),
                         description: Text(locals.enableNotificationDescriptions),
                       ),
+                      CustomSettingsTile(
+                        child: Padding(
+                          padding: const EdgeInsetsDirectional.only(
+                            start: 24,
+                            end: 24,
+                            bottom: 19,
+                            top: 19,
+                          ),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(locals.notificationFrequencySettingsTitle,
+                                  style: TextStyle(
+                                    color: theme.settingsTileTextColor,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w400,
+                                  )),
+                              Text(locals.notificationFrequencySettingsDescription, style: TextStyle(color: theme.tileDescriptionTextColor)),
+                              Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Expanded(
+                                    child: Slider(
+                                      value: state.backgroundNotificationFrequency.toDouble(),
+                                      min: 1,
+                                      max: 24,
+                                      divisions: 23,
+                                      label: locals.notificationFrequencySliderLabel(state.backgroundNotificationFrequency.toString()),
+                                      onChanged: (value) => cubit.setBackgroundCheckFrequency(value.toInt()),
+                                      onChangeEnd: (value) => cubit.setBackgroundCheckFrequency(value.toInt()),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 30,
+                                    child: Text(
+                                      locals.notificationFrequencySliderLabel(state.backgroundNotificationFrequency.toString()),
+                                    ),
+                                  )
+                                ],
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
                       SettingsTile.switchTile(
                         enabled: state.backgroundNotifications,
                         initialValue: state.subscriptionsNotifications,
@@ -71,10 +117,7 @@ class NotificationSettingsScreen extends StatelessWidget {
                     height: 8,
                   ),
                   Text(locals.otherNotifications),
-                  TabBar(tabs: [
-                    Tab(icon: const Icon(Icons.people), text: locals.channels),
-                    Tab(icon: const Icon(Icons.playlist_play), text: locals.playlists)
-                  ]),
+                  TabBar(tabs: [Tab(icon: const Icon(Icons.people), text: locals.channels), Tab(icon: const Icon(Icons.playlist_play), text: locals.playlists)]),
                   const Expanded(
                       child: TabBarView(
                     children: [ChannelNotificationList(), PlaylistNotificationList()],

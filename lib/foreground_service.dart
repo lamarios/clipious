@@ -1,9 +1,11 @@
 import 'dart:async';
 import 'dart:ui';
 
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter_background_service/flutter_background_service.dart';
 import 'package:flutter_background_service_android/flutter_background_service_android.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:http/http.dart';
 import 'package:intl/intl.dart';
 import 'package:invidious/database.dart';
 import 'package:invidious/globals.dart';
@@ -14,6 +16,8 @@ import 'package:logging/logging.dart';
 
 import 'notifications/notifications.dart';
 
+const restartTimerMethod = 'restart-timer';
+
 final backgroundService = FlutterBackgroundService();
 
 final log = Logger('Background service');
@@ -21,19 +25,32 @@ final log = Logger('Background service');
 // const debugMode = kDebugMode;
 const debugMode = true;
 
-void configureBackgroundService(SettingsCubit settings) {
-  backgroundService.configure(
+Timer? timer;
+
+void configureBackgroundService(SettingsCubit settings) async {
+  var notif = NotificationTypes.foregroundService;
+
+  var locals = await getLocalization();
+
+  await backgroundService.configure(
       iosConfiguration: IosConfiguration(),
       androidConfiguration: AndroidConfiguration(
           onStart: onStart,
           autoStart: settings.state.backgroundNotifications,
           autoStartOnBoot: settings.state.backgroundNotifications,
-          isForegroundMode: false));
+          isForegroundMode: true,
+          foregroundServiceNotificationId: notif.idSpace,
+          initialNotificationTitle: locals.foregroundServiceNotificationTitle,
+          initialNotificationContent: locals.foregroundServiceNotificationContent(refreshRate),
+          notificationChannelId: notif.id));
 }
+
+String get refreshRate => db.getSettings(BACKGROUND_CHECK_FREQUENCY)?.value ?? "1";
 
 @pragma('vm:entry-point')
 onStart(ServiceInstance service) async {
   print("Background service started");
+
   DartPluginRegistrant.ensureInitialized();
 
   if (service is AndroidServiceInstance) {
@@ -47,23 +64,46 @@ onStart(ServiceInstance service) async {
   }
 
   service.on('stopService').listen((event) {
-    print('Background service stopped');
+    print('foreground service stopped');
     service.stopSelf();
   });
 
-  Timer.periodic(debugMode ? const Duration(seconds: 60) : const Duration(hours: 2), (timer) {
-    print('back ground service running');
+  service.on(restartTimerMethod).listen((event) async {
+    await _restartTimer();
+  });
+
+  _restartTimer();
+}
+
+_restartTimer() async {
+  print('setting background timer');
+  db = await DbClient.create();
+  var locals = await getLocalization();
+  var title = locals.foregroundServiceNotificationTitle;
+  sendNotification(title, locals.foregroundServiceNotificationContent(refreshRate), type: NotificationTypes.foregroundService);
+  timer?.cancel();
+  timer = Timer.periodic(debugMode ? const Duration(seconds: 60) : Duration(hours: int.parse(refreshRate)), (timer) {
+    print('foreground service running');
     _backgroundCheck();
   });
+
+  db.close();
 }
 
 _backgroundCheck() async {
   try {
     db = await DbClient.create();
+
+    var locals = await getLocalization();
+    var title = locals.foregroundServiceNotificationTitle;
     print('we have a db ${db.isClosed}');
+    sendNotification(title, locals.foregroundServiceUpdatingSubscriptions, type: NotificationTypes.foregroundService);
     await _handleSubscriptionsNotifications();
+    sendNotification(title, locals.foregroundServiceUpdatingChannels, type: NotificationTypes.foregroundService);
     await _handleChannelNotifications();
+    sendNotification(title, locals.foregroundServiceUpdatingPlaylist, type: NotificationTypes.foregroundService);
     await _handlePlaylistNotifications();
+    sendNotification(title, locals.foregroundServiceNotificationContent(refreshRate), type: NotificationTypes.foregroundService);
   } catch (e) {
     print('we have a background service error: ${e}');
   } finally {
@@ -77,8 +117,7 @@ Future<AppLocalizations> getLocalization() async {
   localeString = dbLocale.split('_');
 
   print('Locale to use: $dbLocale');
-  Locale locale =
-      Locale.fromSubtags(languageCode: localeString[0], scriptCode: localeString.length >= 2 ? localeString[1] : null);
+  Locale locale = Locale.fromSubtags(languageCode: localeString[0], scriptCode: localeString.length >= 2 ? localeString[1] : null);
 
   return await AppLocalizations.delegate.load(locale);
 }
@@ -88,7 +127,7 @@ _handlePlaylistNotifications() async {
   print('Watching ${notifs.length} playlists');
   for (var n in notifs) {
     // we get the latest video,
-    var videos = await service.getPublicPlaylists(n.playlistId);
+    var videos = await service.getPublicPlaylists(n.playlistId, saveLastSeen: false);
 
     if ((videos.videos ?? []).isNotEmpty) {
       if (n.lastVideoCount > 0) {
@@ -100,15 +139,14 @@ _handlePlaylistNotifications() async {
 
         print('$videosToNotifyAbout videos from playlist ${n.playlistName} to notify about');
         if (debugMode || videosToNotifyAbout > 0) {
-          sendNotification(locals.playlistNotificationTitle(n.playlistName),
-              locals.playlistNotificationContent(n.playlistName, videosToNotifyAbout),
-              type: NotificationTypes.playlistNotification, payload: n.playlistId, id: n.id);
+          sendNotification(locals.playlistNotificationTitle(n.playlistName), locals.playlistNotificationContent(n.playlistName, videosToNotifyAbout),
+              type: NotificationTypes.playlist,
+              payload: {
+                playlistId: n.playlistId,
+              },
+              id: n.id);
         }
       }
-
-      n.lastVideoCount = videos.videoCount;
-      n.timestamp = DateTime.now().millisecondsSinceEpoch;
-      db.upsertPlaylistNotification(n);
     }
   }
 }
@@ -119,7 +157,7 @@ _handleChannelNotifications() async {
   print('Watching ${notifs.length} channels');
   for (var n in notifs) {
     // we get the latest video,
-    var videos = await service.getChannelVideos(n.channelId, null);
+    var videos = await service.getChannelVideos(n.channelId, null, saveLastSeen: false);
 
     if ((videos.videos ?? []).isNotEmpty) {
       if (n.lastSeenVideoId.isNotEmpty) {
@@ -139,15 +177,10 @@ _handleChannelNotifications() async {
 
         print('$videosToNotifyAbout videos from channel ${n.channelName} to notify about');
         if (debugMode || videosToNotifyAbout > 0) {
-          sendNotification(locals.channelNotificationTitle(n.channelName),
-              locals.channelNotificationContent(n.channelName, videosToNotifyAbout),
-              type: NotificationTypes.channelNotification, payload: n.channelId, id: n.id);
+          sendNotification(locals.channelNotificationTitle(n.channelName), locals.channelNotificationContent(n.channelName, videosToNotifyAbout),
+              type: NotificationTypes.channel, payload: {channelId: n.channelId, lastSeenVideo: videos.videos.first.videoId}, id: n.id);
         }
       }
-
-      n.lastSeenVideoId = videos.videos.first.videoId;
-      n.timestamp = DateTime.now().millisecondsSinceEpoch;
-      db.upsertChannelNotification(n);
     }
   }
 }
@@ -158,7 +191,7 @@ _handleSubscriptionsNotifications() async {
     // we need to get the last notification before we call the feed endpoint as it is going to save the last seen video
     final lastNotification = db.getLastSubscriptionNotification();
     print('getting feed...');
-    var feed = await service.getUserFeed(maxResults: 100);
+    var feed = await service.getUserFeed(maxResults: 100, saveLastSeen: false);
 
     List<VideoInList> videos = [];
     videos.addAll(feed.notifications ?? []);
@@ -186,9 +219,8 @@ _handleSubscriptionsNotifications() async {
 
         print('$videosToNotifyAbout videos to notify about');
         if (debugMode || videosToNotifyAbout > 0) {
-          sendNotification(
-              locals.subscriptionNotificationTitle, locals.subscriptionNotificationContent(videosToNotifyAbout),
-              type: NotificationTypes.subscriptionNotifications, payload: '');
+          sendNotification(locals.subscriptionNotificationTitle, locals.subscriptionNotificationContent(videosToNotifyAbout),
+              type: NotificationTypes.subscription, payload: {lastSeenVideo: videos.first.videoId});
         }
       }
     }
