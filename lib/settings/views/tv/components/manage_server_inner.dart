@@ -17,7 +17,7 @@ class TvManageServersInner extends StatelessWidget {
     var cubit = context.read<ServerListSettingsCubit>();
     Navigator.of(context)
         .push(MaterialPageRoute(
-          builder: (context) => TvManageSingleServer(
+          builder: (context) => TvManageSingleServerScreen(
             server: s,
           ),
         ))

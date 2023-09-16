@@ -36,16 +36,32 @@ final _entities = <ModelEntity>[
       lastPropertyId: const IdUid(7, 7993511472188126727),
       flags: 0,
       properties: <ModelProperty>[
-        ModelProperty(id: const IdUid(1, 2410037502505490239), name: 'id', type: 6, flags: 1),
+        ModelProperty(
+            id: const IdUid(1, 2410037502505490239),
+            name: 'id',
+            type: 6,
+            flags: 1),
         ModelProperty(
             id: const IdUid(2, 8956955780928852647),
             name: 'url',
             type: 9,
             flags: 34848,
             indexId: const IdUid(1, 2407620149040502806)),
-        ModelProperty(id: const IdUid(3, 2983333445278944481), name: 'authToken', type: 9, flags: 0),
-        ModelProperty(id: const IdUid(6, 2632576147281157993), name: 'inUse', type: 1, flags: 0),
-        ModelProperty(id: const IdUid(7, 7993511472188126727), name: 'sidCookie', type: 9, flags: 0)
+        ModelProperty(
+            id: const IdUid(3, 2983333445278944481),
+            name: 'authToken',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(6, 2632576147281157993),
+            name: 'inUse',
+            type: 1,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(7, 7993511472188126727),
+            name: 'sidCookie',
+            type: 9,
+            flags: 0)
       ],
       relations: <ModelRelation>[],
       backlinks: <ModelBacklink>[]),
@@ -55,14 +71,22 @@ final _entities = <ModelEntity>[
       lastPropertyId: const IdUid(3, 4665740245375834282),
       flags: 0,
       properties: <ModelProperty>[
-        ModelProperty(id: const IdUid(1, 3567602159840796895), name: 'id', type: 6, flags: 1),
+        ModelProperty(
+            id: const IdUid(1, 3567602159840796895),
+            name: 'id',
+            type: 6,
+            flags: 1),
         ModelProperty(
             id: const IdUid(2, 525293931186831855),
             name: 'name',
             type: 9,
             flags: 34848,
             indexId: const IdUid(2, 1004000799244198133)),
-        ModelProperty(id: const IdUid(3, 4665740245375834282), name: 'value', type: 9, flags: 0)
+        ModelProperty(
+            id: const IdUid(3, 4665740245375834282),
+            name: 'value',
+            type: 9,
+            flags: 0)
       ],
       relations: <ModelRelation>[],
       backlinks: <ModelBacklink>[]),
@@ -72,8 +96,16 @@ final _entities = <ModelEntity>[
       lastPropertyId: const IdUid(3, 8602536477328513343),
       flags: 0,
       properties: <ModelProperty>[
-        ModelProperty(id: const IdUid(1, 5651818511313053101), name: 'id', type: 6, flags: 1),
-        ModelProperty(id: const IdUid(2, 4301486387527660152), name: 'progress', type: 8, flags: 0),
+        ModelProperty(
+            id: const IdUid(1, 5651818511313053101),
+            name: 'id',
+            type: 6,
+            flags: 1),
+        ModelProperty(
+            id: const IdUid(2, 4301486387527660152),
+            name: 'progress',
+            type: 8,
+            flags: 0),
         ModelProperty(
             id: const IdUid(3, 8602536477328513343),
             name: 'videoId',
@@ -89,14 +121,22 @@ final _entities = <ModelEntity>[
       lastPropertyId: const IdUid(3, 4799661758354837094),
       flags: 0,
       properties: <ModelProperty>[
-        ModelProperty(id: const IdUid(1, 5055652677379509965), name: 'id', type: 6, flags: 1),
+        ModelProperty(
+            id: const IdUid(1, 5055652677379509965),
+            name: 'id',
+            type: 6,
+            flags: 1),
         ModelProperty(
             id: const IdUid(2, 1184322842379216559),
             name: 'search',
             type: 9,
             flags: 34848,
             indexId: const IdUid(5, 7262786699272501249)),
-        ModelProperty(id: const IdUid(3, 4799661758354837094), name: 'time', type: 6, flags: 0)
+        ModelProperty(
+            id: const IdUid(3, 4799661758354837094),
+            name: 'time',
+            type: 6,
+            flags: 0)
       ],
       relations: <ModelRelation>[],
       backlinks: <ModelBacklink>[]),
@@ -106,12 +146,36 @@ final _entities = <ModelEntity>[
       lastPropertyId: const IdUid(6, 5023716219165786985),
       flags: 0,
       properties: <ModelProperty>[
-        ModelProperty(id: const IdUid(1, 3160197863614923332), name: 'id', type: 6, flags: 1),
-        ModelProperty(id: const IdUid(2, 3008237629246315185), name: 'level', type: 9, flags: 0),
-        ModelProperty(id: const IdUid(3, 2647517759142178088), name: 'time', type: 10, flags: 0),
-        ModelProperty(id: const IdUid(4, 7759611646931835814), name: 'message', type: 9, flags: 0),
-        ModelProperty(id: const IdUid(5, 1230803493579490035), name: 'stacktrace', type: 9, flags: 0),
-        ModelProperty(id: const IdUid(6, 5023716219165786985), name: 'logger', type: 9, flags: 0)
+        ModelProperty(
+            id: const IdUid(1, 3160197863614923332),
+            name: 'id',
+            type: 6,
+            flags: 1),
+        ModelProperty(
+            id: const IdUid(2, 3008237629246315185),
+            name: 'level',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(3, 2647517759142178088),
+            name: 'time',
+            type: 10,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(4, 7759611646931835814),
+            name: 'message',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(5, 1230803493579490035),
+            name: 'stacktrace',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(6, 5023716219165786985),
+            name: 'logger',
+            type: 9,
+            flags: 0)
       ],
       relations: <ModelRelation>[],
       backlinks: <ModelBacklink>[]),
@@ -121,16 +185,56 @@ final _entities = <ModelEntity>[
       lastPropertyId: const IdUid(11, 8416925878752879022),
       flags: 0,
       properties: <ModelProperty>[
-        ModelProperty(id: const IdUid(1, 4718003498405944371), name: 'id', type: 6, flags: 1),
-        ModelProperty(id: const IdUid(2, 906689741192359458), name: 'channelId', type: 9, flags: 0),
-        ModelProperty(id: const IdUid(3, 19321448094437321), name: 'value', type: 9, flags: 0),
-        ModelProperty(id: const IdUid(4, 7050038042672519102), name: 'dbType', type: 9, flags: 0),
-        ModelProperty(id: const IdUid(5, 2812361632619055204), name: 'dbOperation', type: 9, flags: 0),
-        ModelProperty(id: const IdUid(7, 4560530621575797576), name: 'filterAll', type: 1, flags: 0),
-        ModelProperty(id: const IdUid(8, 6020474727686624632), name: 'hideFromFeed', type: 1, flags: 0),
-        ModelProperty(id: const IdUid(9, 385259419700560741), name: 'daysOfWeek', type: 27, flags: 0),
-        ModelProperty(id: const IdUid(10, 4391992064156904605), name: 'startTime', type: 9, flags: 0),
-        ModelProperty(id: const IdUid(11, 8416925878752879022), name: 'endTime', type: 9, flags: 0)
+        ModelProperty(
+            id: const IdUid(1, 4718003498405944371),
+            name: 'id',
+            type: 6,
+            flags: 1),
+        ModelProperty(
+            id: const IdUid(2, 906689741192359458),
+            name: 'channelId',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(3, 19321448094437321),
+            name: 'value',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(4, 7050038042672519102),
+            name: 'dbType',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(5, 2812361632619055204),
+            name: 'dbOperation',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(7, 4560530621575797576),
+            name: 'filterAll',
+            type: 1,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(8, 6020474727686624632),
+            name: 'hideFromFeed',
+            type: 1,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(9, 385259419700560741),
+            name: 'daysOfWeek',
+            type: 27,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(10, 4391992064156904605),
+            name: 'startTime',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(11, 8416925878752879022),
+            name: 'endTime',
+            type: 9,
+            flags: 0)
       ],
       relations: <ModelRelation>[],
       backlinks: <ModelBacklink>[]),
@@ -140,16 +244,56 @@ final _entities = <ModelEntity>[
       lastPropertyId: const IdUid(12, 5585556588689024155),
       flags: 0,
       properties: <ModelProperty>[
-        ModelProperty(id: const IdUid(1, 4941717954477256691), name: 'id', type: 6, flags: 1),
-        ModelProperty(id: const IdUid(3, 2383320059961158921), name: 'title', type: 9, flags: 0),
-        ModelProperty(id: const IdUid(4, 8378509179540529921), name: 'author', type: 9, flags: 0),
-        ModelProperty(id: const IdUid(5, 1179720564271059922), name: 'authorUrl', type: 9, flags: 0),
-        ModelProperty(id: const IdUid(6, 107924486215845740), name: 'downloadComplete', type: 1, flags: 0),
-        ModelProperty(id: const IdUid(7, 4130320220878296738), name: 'downloadFailed', type: 1, flags: 0),
-        ModelProperty(id: const IdUid(8, 6560523765053270041), name: 'audioOnly', type: 1, flags: 0),
-        ModelProperty(id: const IdUid(10, 7860866333154890990), name: 'quality', type: 9, flags: 0),
-        ModelProperty(id: const IdUid(11, 4090966965717168930), name: 'lengthSeconds', type: 6, flags: 0),
-        ModelProperty(id: const IdUid(12, 5585556588689024155), name: 'videoId', type: 9, flags: 0)
+        ModelProperty(
+            id: const IdUid(1, 4941717954477256691),
+            name: 'id',
+            type: 6,
+            flags: 1),
+        ModelProperty(
+            id: const IdUid(3, 2383320059961158921),
+            name: 'title',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(4, 8378509179540529921),
+            name: 'author',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(5, 1179720564271059922),
+            name: 'authorUrl',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(6, 107924486215845740),
+            name: 'downloadComplete',
+            type: 1,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(7, 4130320220878296738),
+            name: 'downloadFailed',
+            type: 1,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(8, 6560523765053270041),
+            name: 'audioOnly',
+            type: 1,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(10, 7860866333154890990),
+            name: 'quality',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(11, 4090966965717168930),
+            name: 'lengthSeconds',
+            type: 6,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(12, 5585556588689024155),
+            name: 'videoId',
+            type: 9,
+            flags: 0)
       ],
       relations: <ModelRelation>[],
       backlinks: <ModelBacklink>[]),
@@ -159,12 +303,36 @@ final _entities = <ModelEntity>[
       lastPropertyId: const IdUid(6, 3954053412124926577),
       flags: 0,
       properties: <ModelProperty>[
-        ModelProperty(id: const IdUid(1, 2955960989783551283), name: 'id', type: 6, flags: 1),
-        ModelProperty(id: const IdUid(2, 4777842522603948496), name: 'title', type: 9, flags: 0),
-        ModelProperty(id: const IdUid(3, 4486601293052981453), name: 'author', type: 9, flags: 0),
-        ModelProperty(id: const IdUid(4, 5980827452700393174), name: 'videoId', type: 9, flags: 0),
-        ModelProperty(id: const IdUid(5, 5075309708561338655), name: 'created', type: 10, flags: 0),
-        ModelProperty(id: const IdUid(6, 3954053412124926577), name: 'thumbnail', type: 9, flags: 0)
+        ModelProperty(
+            id: const IdUid(1, 2955960989783551283),
+            name: 'id',
+            type: 6,
+            flags: 1),
+        ModelProperty(
+            id: const IdUid(2, 4777842522603948496),
+            name: 'title',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(3, 4486601293052981453),
+            name: 'author',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(4, 5980827452700393174),
+            name: 'videoId',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(5, 5075309708561338655),
+            name: 'created',
+            type: 10,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(6, 3954053412124926577),
+            name: 'thumbnail',
+            type: 9,
+            flags: 0)
       ],
       relations: <ModelRelation>[],
       backlinks: <ModelBacklink>[]),
@@ -174,10 +342,26 @@ final _entities = <ModelEntity>[
       lastPropertyId: const IdUid(4, 8172441605240321034),
       flags: 0,
       properties: <ModelProperty>[
-        ModelProperty(id: const IdUid(1, 2141116138730176870), name: 'id', type: 6, flags: 1),
-        ModelProperty(id: const IdUid(2, 4699190633584236247), name: 'showBigSource', type: 1, flags: 0),
-        ModelProperty(id: const IdUid(3, 2336366876714802775), name: 'dbBigSource', type: 9, flags: 0),
-        ModelProperty(id: const IdUid(4, 8172441605240321034), name: 'dbSmallSources', type: 30, flags: 0)
+        ModelProperty(
+            id: const IdUid(1, 2141116138730176870),
+            name: 'id',
+            type: 6,
+            flags: 1),
+        ModelProperty(
+            id: const IdUid(2, 4699190633584236247),
+            name: 'showBigSource',
+            type: 1,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(3, 2336366876714802775),
+            name: 'dbBigSource',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(4, 8172441605240321034),
+            name: 'dbSmallSources',
+            type: 30,
+            flags: 0)
       ],
       relations: <ModelRelation>[],
       backlinks: <ModelBacklink>[]),
@@ -187,9 +371,21 @@ final _entities = <ModelEntity>[
       lastPropertyId: const IdUid(3, 1941341505549292694),
       flags: 0,
       properties: <ModelProperty>[
-        ModelProperty(id: const IdUid(1, 2430225471686599517), name: 'id', type: 6, flags: 1),
-        ModelProperty(id: const IdUid(2, 2835271477274198093), name: 'lastSeenVideoId', type: 9, flags: 0),
-        ModelProperty(id: const IdUid(3, 1941341505549292694), name: 'timestamp', type: 6, flags: 0)
+        ModelProperty(
+            id: const IdUid(1, 2430225471686599517),
+            name: 'id',
+            type: 6,
+            flags: 1),
+        ModelProperty(
+            id: const IdUid(2, 2835271477274198093),
+            name: 'lastSeenVideoId',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(3, 1941341505549292694),
+            name: 'timestamp',
+            type: 6,
+            flags: 0)
       ],
       relations: <ModelRelation>[],
       backlinks: <ModelBacklink>[]),
@@ -199,16 +395,32 @@ final _entities = <ModelEntity>[
       lastPropertyId: const IdUid(5, 2886321232475223602),
       flags: 0,
       properties: <ModelProperty>[
-        ModelProperty(id: const IdUid(1, 8845605462686818448), name: 'id', type: 6, flags: 1),
+        ModelProperty(
+            id: const IdUid(1, 8845605462686818448),
+            name: 'id',
+            type: 6,
+            flags: 1),
         ModelProperty(
             id: const IdUid(2, 2512902621149037266),
             name: 'channelId',
             type: 9,
             flags: 34848,
             indexId: const IdUid(6, 1543728882665646543)),
-        ModelProperty(id: const IdUid(3, 1308895344490646098), name: 'lastSeenVideoId', type: 9, flags: 0),
-        ModelProperty(id: const IdUid(4, 4272759280615528314), name: 'timestamp', type: 6, flags: 0),
-        ModelProperty(id: const IdUid(5, 2886321232475223602), name: 'channelName', type: 9, flags: 0)
+        ModelProperty(
+            id: const IdUid(3, 1308895344490646098),
+            name: 'lastSeenVideoId',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(4, 4272759280615528314),
+            name: 'timestamp',
+            type: 6,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(5, 2886321232475223602),
+            name: 'channelName',
+            type: 9,
+            flags: 0)
       ],
       relations: <ModelRelation>[],
       backlinks: <ModelBacklink>[]),
@@ -218,16 +430,32 @@ final _entities = <ModelEntity>[
       lastPropertyId: const IdUid(5, 5316267761398216511),
       flags: 0,
       properties: <ModelProperty>[
-        ModelProperty(id: const IdUid(1, 7681992295553062859), name: 'id', type: 6, flags: 1),
+        ModelProperty(
+            id: const IdUid(1, 7681992295553062859),
+            name: 'id',
+            type: 6,
+            flags: 1),
         ModelProperty(
             id: const IdUid(2, 8328838064368170718),
             name: 'playlistId',
             type: 9,
             flags: 34848,
             indexId: const IdUid(7, 4488140487903335246)),
-        ModelProperty(id: const IdUid(3, 7229926964587744944), name: 'lastVideoCount', type: 6, flags: 0),
-        ModelProperty(id: const IdUid(4, 6825540046607174830), name: 'timestamp', type: 6, flags: 0),
-        ModelProperty(id: const IdUid(5, 5316267761398216511), name: 'playlistName', type: 9, flags: 0)
+        ModelProperty(
+            id: const IdUid(3, 7229926964587744944),
+            name: 'lastVideoCount',
+            type: 6,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(4, 6825540046607174830),
+            name: 'timestamp',
+            type: 6,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(5, 5316267761398216511),
+            name: 'playlistName',
+            type: 9,
+            flags: 0)
       ],
       relations: <ModelRelation>[],
       backlinks: <ModelBacklink>[])
@@ -290,8 +518,12 @@ ModelDefinition getObjectBoxModel() {
         },
         objectToFB: (Server object, fb.Builder fbb) {
           final urlOffset = fbb.writeString(object.url);
-          final authTokenOffset = object.authToken == null ? null : fbb.writeString(object.authToken!);
-          final sidCookieOffset = object.sidCookie == null ? null : fbb.writeString(object.sidCookie!);
+          final authTokenOffset = object.authToken == null
+              ? null
+              : fbb.writeString(object.authToken!);
+          final sidCookieOffset = object.sidCookie == null
+              ? null
+              : fbb.writeString(object.sidCookie!);
           fbb.startTable(8);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, urlOffset);
@@ -304,13 +536,19 @@ ModelDefinition getObjectBoxModel() {
         objectFromFB: (Store store, ByteData fbData) {
           final buffer = fb.BufferContext(fbData);
           final rootOffset = buffer.derefObject(0);
-          final urlParam = const fb.StringReader(asciiOptimization: true).vTableGet(buffer, rootOffset, 6, '');
-          final authTokenParam =
-              const fb.StringReader(asciiOptimization: true).vTableGetNullable(buffer, rootOffset, 8);
-          final sidCookieParam =
-              const fb.StringReader(asciiOptimization: true).vTableGetNullable(buffer, rootOffset, 16);
-          final inUseParam = const fb.BoolReader().vTableGet(buffer, rootOffset, 14, false);
-          final object = Server(url: urlParam, authToken: authTokenParam, sidCookie: sidCookieParam, inUse: inUseParam)
+          final urlParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 6, '');
+          final authTokenParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGetNullable(buffer, rootOffset, 8);
+          final sidCookieParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGetNullable(buffer, rootOffset, 16);
+          final inUseParam =
+              const fb.BoolReader().vTableGet(buffer, rootOffset, 14, false);
+          final object = Server(
+              url: urlParam,
+              authToken: authTokenParam,
+              sidCookie: sidCookieParam,
+              inUse: inUseParam)
             ..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
 
           return object;
@@ -336,8 +574,10 @@ ModelDefinition getObjectBoxModel() {
         objectFromFB: (Store store, ByteData fbData) {
           final buffer = fb.BufferContext(fbData);
           final rootOffset = buffer.derefObject(0);
-          final nameParam = const fb.StringReader(asciiOptimization: true).vTableGet(buffer, rootOffset, 6, '');
-          final valueParam = const fb.StringReader(asciiOptimization: true).vTableGet(buffer, rootOffset, 8, '');
+          final nameParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 6, '');
+          final valueParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 8, '');
           final object = SettingsValue(nameParam, valueParam)
             ..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
 
@@ -363,9 +603,12 @@ ModelDefinition getObjectBoxModel() {
         objectFromFB: (Store store, ByteData fbData) {
           final buffer = fb.BufferContext(fbData);
           final rootOffset = buffer.derefObject(0);
-          final idParam = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
-          final progressParam = const fb.Float64Reader().vTableGet(buffer, rootOffset, 6, 0);
-          final videoIdParam = const fb.StringReader(asciiOptimization: true).vTableGet(buffer, rootOffset, 8, '');
+          final idParam =
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
+          final progressParam =
+              const fb.Float64Reader().vTableGet(buffer, rootOffset, 6, 0);
+          final videoIdParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 8, '');
           final object = Progress(idParam, progressParam, videoIdParam);
 
           return object;
@@ -390,8 +633,10 @@ ModelDefinition getObjectBoxModel() {
         objectFromFB: (Store store, ByteData fbData) {
           final buffer = fb.BufferContext(fbData);
           final rootOffset = buffer.derefObject(0);
-          final searchParam = const fb.StringReader(asciiOptimization: true).vTableGet(buffer, rootOffset, 6, '');
-          final timeParam = const fb.Int64Reader().vTableGet(buffer, rootOffset, 8, 0);
+          final searchParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 6, '');
+          final timeParam =
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 8, 0);
           final object = SearchHistoryItem(searchParam, timeParam)
             ..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
 
@@ -407,8 +652,11 @@ ModelDefinition getObjectBoxModel() {
         },
         objectToFB: (AppLog object, fb.Builder fbb) {
           final levelOffset = fbb.writeString(object.level);
-          final messageOffset = object.message == null ? null : fbb.writeString(object.message!);
-          final stacktraceOffset = object.stacktrace == null ? null : fbb.writeString(object.stacktrace!);
+          final messageOffset =
+              object.message == null ? null : fbb.writeString(object.message!);
+          final stacktraceOffset = object.stacktrace == null
+              ? null
+              : fbb.writeString(object.stacktrace!);
           final loggerOffset = fbb.writeString(object.logger);
           fbb.startTable(7);
           fbb.addInt64(0, object.id);
@@ -423,13 +671,16 @@ ModelDefinition getObjectBoxModel() {
         objectFromFB: (Store store, ByteData fbData) {
           final buffer = fb.BufferContext(fbData);
           final rootOffset = buffer.derefObject(0);
-          final levelParam = const fb.StringReader(asciiOptimization: true).vTableGet(buffer, rootOffset, 6, '');
-          final loggerParam = const fb.StringReader(asciiOptimization: true).vTableGet(buffer, rootOffset, 14, '');
-          final timeParam =
-              DateTime.fromMillisecondsSinceEpoch(const fb.Int64Reader().vTableGet(buffer, rootOffset, 8, 0));
-          final messageParam = const fb.StringReader(asciiOptimization: true).vTableGetNullable(buffer, rootOffset, 10);
-          final stacktraceParam =
-              const fb.StringReader(asciiOptimization: true).vTableGetNullable(buffer, rootOffset, 12);
+          final levelParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 6, '');
+          final loggerParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 14, '');
+          final timeParam = DateTime.fromMillisecondsSinceEpoch(
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 8, 0));
+          final messageParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGetNullable(buffer, rootOffset, 10);
+          final stacktraceParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGetNullable(buffer, rootOffset, 12);
           final object = AppLog(
               level: levelParam,
               logger: loggerParam,
@@ -449,10 +700,16 @@ ModelDefinition getObjectBoxModel() {
           object.id = id;
         },
         objectToFB: (VideoFilter object, fb.Builder fbb) {
-          final channelIdOffset = object.channelId == null ? null : fbb.writeString(object.channelId!);
-          final valueOffset = object.value == null ? null : fbb.writeString(object.value!);
-          final dbTypeOffset = object.dbType == null ? null : fbb.writeString(object.dbType!);
-          final dbOperationOffset = object.dbOperation == null ? null : fbb.writeString(object.dbOperation!);
+          final channelIdOffset = object.channelId == null
+              ? null
+              : fbb.writeString(object.channelId!);
+          final valueOffset =
+              object.value == null ? null : fbb.writeString(object.value!);
+          final dbTypeOffset =
+              object.dbType == null ? null : fbb.writeString(object.dbType!);
+          final dbOperationOffset = object.dbOperation == null
+              ? null
+              : fbb.writeString(object.dbOperation!);
           final daysOfWeekOffset = fbb.writeListInt64(object.daysOfWeek);
           final startTimeOffset = fbb.writeString(object.startTime);
           final endTimeOffset = fbb.writeString(object.endTime);
@@ -473,18 +730,28 @@ ModelDefinition getObjectBoxModel() {
         objectFromFB: (Store store, ByteData fbData) {
           final buffer = fb.BufferContext(fbData);
           final rootOffset = buffer.derefObject(0);
-          final valueParam = const fb.StringReader(asciiOptimization: true).vTableGetNullable(buffer, rootOffset, 8);
-          final channelIdParam =
-              const fb.StringReader(asciiOptimization: true).vTableGetNullable(buffer, rootOffset, 6);
-          final object = VideoFilter(value: valueParam, channelId: channelIdParam)
+          final valueParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGetNullable(buffer, rootOffset, 8);
+          final channelIdParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGetNullable(buffer, rootOffset, 6);
+          final object = VideoFilter(
+              value: valueParam, channelId: channelIdParam)
             ..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0)
-            ..dbType = const fb.StringReader(asciiOptimization: true).vTableGetNullable(buffer, rootOffset, 10)
-            ..dbOperation = const fb.StringReader(asciiOptimization: true).vTableGetNullable(buffer, rootOffset, 12)
-            ..filterAll = const fb.BoolReader().vTableGet(buffer, rootOffset, 16, false)
-            ..hideFromFeed = const fb.BoolReader().vTableGet(buffer, rootOffset, 18, false)
-            ..daysOfWeek = const fb.ListReader<int>(fb.Int64Reader(), lazy: false).vTableGet(buffer, rootOffset, 20, [])
-            ..startTime = const fb.StringReader(asciiOptimization: true).vTableGet(buffer, rootOffset, 22, '')
-            ..endTime = const fb.StringReader(asciiOptimization: true).vTableGet(buffer, rootOffset, 24, '');
+            ..dbType = const fb.StringReader(asciiOptimization: true)
+                .vTableGetNullable(buffer, rootOffset, 10)
+            ..dbOperation = const fb.StringReader(asciiOptimization: true)
+                .vTableGetNullable(buffer, rootOffset, 12)
+            ..filterAll =
+                const fb.BoolReader().vTableGet(buffer, rootOffset, 16, false)
+            ..hideFromFeed =
+                const fb.BoolReader().vTableGet(buffer, rootOffset, 18, false)
+            ..daysOfWeek =
+                const fb.ListReader<int>(fb.Int64Reader(), lazy: false)
+                    .vTableGet(buffer, rootOffset, 20, [])
+            ..startTime = const fb.StringReader(asciiOptimization: true)
+                .vTableGet(buffer, rootOffset, 22, '')
+            ..endTime = const fb.StringReader(asciiOptimization: true)
+                .vTableGet(buffer, rootOffset, 24, '');
 
           return object;
         }),
@@ -498,8 +765,11 @@ ModelDefinition getObjectBoxModel() {
         },
         objectToFB: (DownloadedVideo object, fb.Builder fbb) {
           final titleOffset = fbb.writeString(object.title);
-          final authorOffset = object.author == null ? null : fbb.writeString(object.author!);
-          final authorUrlOffset = object.authorUrl == null ? null : fbb.writeString(object.authorUrl!);
+          final authorOffset =
+              object.author == null ? null : fbb.writeString(object.author!);
+          final authorUrlOffset = object.authorUrl == null
+              ? null
+              : fbb.writeString(object.authorUrl!);
           final qualityOffset = fbb.writeString(object.quality);
           final videoIdOffset = fbb.writeString(object.videoId);
           fbb.startTable(13);
@@ -519,17 +789,26 @@ ModelDefinition getObjectBoxModel() {
         objectFromFB: (Store store, ByteData fbData) {
           final buffer = fb.BufferContext(fbData);
           final rootOffset = buffer.derefObject(0);
-          final idParam = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
-          final videoIdParam = const fb.StringReader(asciiOptimization: true).vTableGet(buffer, rootOffset, 26, '');
-          final titleParam = const fb.StringReader(asciiOptimization: true).vTableGet(buffer, rootOffset, 8, '');
-          final authorParam = const fb.StringReader(asciiOptimization: true).vTableGetNullable(buffer, rootOffset, 10);
-          final authorUrlParam =
-              const fb.StringReader(asciiOptimization: true).vTableGetNullable(buffer, rootOffset, 12);
-          final downloadCompleteParam = const fb.BoolReader().vTableGet(buffer, rootOffset, 14, false);
-          final downloadFailedParam = const fb.BoolReader().vTableGet(buffer, rootOffset, 16, false);
-          final audioOnlyParam = const fb.BoolReader().vTableGet(buffer, rootOffset, 18, false);
-          final lengthSecondsParam = const fb.Int64Reader().vTableGet(buffer, rootOffset, 24, 0);
-          final qualityParam = const fb.StringReader(asciiOptimization: true).vTableGet(buffer, rootOffset, 22, '');
+          final idParam =
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
+          final videoIdParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 26, '');
+          final titleParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 8, '');
+          final authorParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGetNullable(buffer, rootOffset, 10);
+          final authorUrlParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGetNullable(buffer, rootOffset, 12);
+          final downloadCompleteParam =
+              const fb.BoolReader().vTableGet(buffer, rootOffset, 14, false);
+          final downloadFailedParam =
+              const fb.BoolReader().vTableGet(buffer, rootOffset, 16, false);
+          final audioOnlyParam =
+              const fb.BoolReader().vTableGet(buffer, rootOffset, 18, false);
+          final lengthSecondsParam =
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 24, 0);
+          final qualityParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 22, '');
           final object = DownloadedVideo(
               id: idParam,
               videoId: videoIdParam,
@@ -554,7 +833,8 @@ ModelDefinition getObjectBoxModel() {
         },
         objectToFB: (HistoryVideoCache object, fb.Builder fbb) {
           final titleOffset = fbb.writeString(object.title);
-          final authorOffset = object.author == null ? null : fbb.writeString(object.author!);
+          final authorOffset =
+              object.author == null ? null : fbb.writeString(object.author!);
           final videoIdOffset = fbb.writeString(object.videoId);
           final thumbnailOffset = fbb.writeString(object.thumbnail);
           fbb.startTable(7);
@@ -570,14 +850,19 @@ ModelDefinition getObjectBoxModel() {
         objectFromFB: (Store store, ByteData fbData) {
           final buffer = fb.BufferContext(fbData);
           final rootOffset = buffer.derefObject(0);
-          final videoIdParam = const fb.StringReader(asciiOptimization: true).vTableGet(buffer, rootOffset, 10, '');
-          final titleParam = const fb.StringReader(asciiOptimization: true).vTableGet(buffer, rootOffset, 6, '');
-          final authorParam = const fb.StringReader(asciiOptimization: true).vTableGetNullable(buffer, rootOffset, 8);
-          final thumbnailParam = const fb.StringReader(asciiOptimization: true).vTableGet(buffer, rootOffset, 14, '');
-          final object = HistoryVideoCache(videoIdParam, titleParam, authorParam, thumbnailParam)
+          final videoIdParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 10, '');
+          final titleParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 6, '');
+          final authorParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGetNullable(buffer, rootOffset, 8);
+          final thumbnailParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 14, '');
+          final object = HistoryVideoCache(
+              videoIdParam, titleParam, authorParam, thumbnailParam)
             ..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0)
-            ..created =
-                DateTime.fromMillisecondsSinceEpoch(const fb.Int64Reader().vTableGet(buffer, rootOffset, 12, 0));
+            ..created = DateTime.fromMillisecondsSinceEpoch(
+                const fb.Int64Reader().vTableGet(buffer, rootOffset, 12, 0));
 
           return object;
         }),
@@ -591,8 +876,9 @@ ModelDefinition getObjectBoxModel() {
         },
         objectToFB: (HomeLayout object, fb.Builder fbb) {
           final dbBigSourceOffset = fbb.writeString(object.dbBigSource);
-          final dbSmallSourcesOffset =
-              fbb.writeList(object.dbSmallSources.map(fbb.writeString).toList(growable: false));
+          final dbSmallSourcesOffset = fbb.writeList(object.dbSmallSources
+              .map(fbb.writeString)
+              .toList(growable: false));
           fbb.startTable(5);
           fbb.addInt64(0, object.id);
           fbb.addBool(1, object.showBigSource);
@@ -607,9 +893,13 @@ ModelDefinition getObjectBoxModel() {
 
           final object = HomeLayout()
             ..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0)
-            ..showBigSource = const fb.BoolReader().vTableGet(buffer, rootOffset, 6, false)
-            ..dbBigSource = const fb.StringReader(asciiOptimization: true).vTableGet(buffer, rootOffset, 8, '')
-            ..dbSmallSources = const fb.ListReader<String>(fb.StringReader(asciiOptimization: true), lazy: false)
+            ..showBigSource =
+                const fb.BoolReader().vTableGet(buffer, rootOffset, 6, false)
+            ..dbBigSource = const fb.StringReader(asciiOptimization: true)
+                .vTableGet(buffer, rootOffset, 8, '')
+            ..dbSmallSources = const fb.ListReader<String>(
+                    fb.StringReader(asciiOptimization: true),
+                    lazy: false)
                 .vTableGet(buffer, rootOffset, 10, []);
 
           return object;
@@ -635,9 +925,12 @@ ModelDefinition getObjectBoxModel() {
           final buffer = fb.BufferContext(fbData);
           final rootOffset = buffer.derefObject(0);
           final lastSeenVideoIdParam =
-              const fb.StringReader(asciiOptimization: true).vTableGet(buffer, rootOffset, 6, '');
-          final timestampParam = const fb.Int64Reader().vTableGet(buffer, rootOffset, 8, 0);
-          final object = SubscriptionNotification(lastSeenVideoIdParam, timestampParam)
+              const fb.StringReader(asciiOptimization: true)
+                  .vTableGet(buffer, rootOffset, 6, '');
+          final timestampParam =
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 8, 0);
+          final object = SubscriptionNotification(
+              lastSeenVideoIdParam, timestampParam)
             ..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
 
           return object;
@@ -666,12 +959,18 @@ ModelDefinition getObjectBoxModel() {
         objectFromFB: (Store store, ByteData fbData) {
           final buffer = fb.BufferContext(fbData);
           final rootOffset = buffer.derefObject(0);
-          final channelIdParam = const fb.StringReader(asciiOptimization: true).vTableGet(buffer, rootOffset, 6, '');
-          final channelNameParam = const fb.StringReader(asciiOptimization: true).vTableGet(buffer, rootOffset, 12, '');
+          final channelIdParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 6, '');
+          final channelNameParam =
+              const fb.StringReader(asciiOptimization: true)
+                  .vTableGet(buffer, rootOffset, 12, '');
           final lastSeenVideoIdParam =
-              const fb.StringReader(asciiOptimization: true).vTableGet(buffer, rootOffset, 8, '');
-          final timestampParam = const fb.Int64Reader().vTableGet(buffer, rootOffset, 10, 0);
-          final object = ChannelNotification(channelIdParam, channelNameParam, lastSeenVideoIdParam, timestampParam)
+              const fb.StringReader(asciiOptimization: true)
+                  .vTableGet(buffer, rootOffset, 8, '');
+          final timestampParam =
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 10, 0);
+          final object = ChannelNotification(channelIdParam, channelNameParam,
+              lastSeenVideoIdParam, timestampParam)
             ..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
 
           return object;
@@ -699,12 +998,17 @@ ModelDefinition getObjectBoxModel() {
         objectFromFB: (Store store, ByteData fbData) {
           final buffer = fb.BufferContext(fbData);
           final rootOffset = buffer.derefObject(0);
-          final playlistIdParam = const fb.StringReader(asciiOptimization: true).vTableGet(buffer, rootOffset, 6, '');
-          final lastVideoCountParam = const fb.Int64Reader().vTableGet(buffer, rootOffset, 8, 0);
-          final timestampParam = const fb.Int64Reader().vTableGet(buffer, rootOffset, 10, 0);
+          final playlistIdParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 6, '');
+          final lastVideoCountParam =
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 8, 0);
+          final timestampParam =
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 10, 0);
           final playlistNameParam =
-              const fb.StringReader(asciiOptimization: true).vTableGet(buffer, rootOffset, 12, '');
-          final object = PlaylistNotification(playlistIdParam, lastVideoCountParam, timestampParam, playlistNameParam)
+              const fb.StringReader(asciiOptimization: true)
+                  .vTableGet(buffer, rootOffset, 12, '');
+          final object = PlaylistNotification(playlistIdParam,
+              lastVideoCountParam, timestampParam, playlistNameParam)
             ..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
 
           return object;
@@ -723,25 +1027,30 @@ class Server_ {
   static final url = QueryStringProperty<Server>(_entities[0].properties[1]);
 
   /// see [Server.authToken]
-  static final authToken = QueryStringProperty<Server>(_entities[0].properties[2]);
+  static final authToken =
+      QueryStringProperty<Server>(_entities[0].properties[2]);
 
   /// see [Server.inUse]
   static final inUse = QueryBooleanProperty<Server>(_entities[0].properties[3]);
 
   /// see [Server.sidCookie]
-  static final sidCookie = QueryStringProperty<Server>(_entities[0].properties[4]);
+  static final sidCookie =
+      QueryStringProperty<Server>(_entities[0].properties[4]);
 }
 
 /// [SettingsValue] entity fields to define ObjectBox queries.
 class SettingsValue_ {
   /// see [SettingsValue.id]
-  static final id = QueryIntegerProperty<SettingsValue>(_entities[1].properties[0]);
+  static final id =
+      QueryIntegerProperty<SettingsValue>(_entities[1].properties[0]);
 
   /// see [SettingsValue.name]
-  static final name = QueryStringProperty<SettingsValue>(_entities[1].properties[1]);
+  static final name =
+      QueryStringProperty<SettingsValue>(_entities[1].properties[1]);
 
   /// see [SettingsValue.value]
-  static final value = QueryStringProperty<SettingsValue>(_entities[1].properties[2]);
+  static final value =
+      QueryStringProperty<SettingsValue>(_entities[1].properties[2]);
 }
 
 /// [Progress] entity fields to define ObjectBox queries.
@@ -750,22 +1059,27 @@ class Progress_ {
   static final id = QueryIntegerProperty<Progress>(_entities[2].properties[0]);
 
   /// see [Progress.progress]
-  static final progress = QueryDoubleProperty<Progress>(_entities[2].properties[1]);
+  static final progress =
+      QueryDoubleProperty<Progress>(_entities[2].properties[1]);
 
   /// see [Progress.videoId]
-  static final videoId = QueryStringProperty<Progress>(_entities[2].properties[2]);
+  static final videoId =
+      QueryStringProperty<Progress>(_entities[2].properties[2]);
 }
 
 /// [SearchHistoryItem] entity fields to define ObjectBox queries.
 class SearchHistoryItem_ {
   /// see [SearchHistoryItem.id]
-  static final id = QueryIntegerProperty<SearchHistoryItem>(_entities[3].properties[0]);
+  static final id =
+      QueryIntegerProperty<SearchHistoryItem>(_entities[3].properties[0]);
 
   /// see [SearchHistoryItem.search]
-  static final search = QueryStringProperty<SearchHistoryItem>(_entities[3].properties[1]);
+  static final search =
+      QueryStringProperty<SearchHistoryItem>(_entities[3].properties[1]);
 
   /// see [SearchHistoryItem.time]
-  static final time = QueryIntegerProperty<SearchHistoryItem>(_entities[3].properties[2]);
+  static final time =
+      QueryIntegerProperty<SearchHistoryItem>(_entities[3].properties[2]);
 }
 
 /// [AppLog] entity fields to define ObjectBox queries.
@@ -780,10 +1094,12 @@ class AppLog_ {
   static final time = QueryIntegerProperty<AppLog>(_entities[4].properties[2]);
 
   /// see [AppLog.message]
-  static final message = QueryStringProperty<AppLog>(_entities[4].properties[3]);
+  static final message =
+      QueryStringProperty<AppLog>(_entities[4].properties[3]);
 
   /// see [AppLog.stacktrace]
-  static final stacktrace = QueryStringProperty<AppLog>(_entities[4].properties[4]);
+  static final stacktrace =
+      QueryStringProperty<AppLog>(_entities[4].properties[4]);
 
   /// see [AppLog.logger]
   static final logger = QueryStringProperty<AppLog>(_entities[4].properties[5]);
@@ -792,149 +1108,192 @@ class AppLog_ {
 /// [VideoFilter] entity fields to define ObjectBox queries.
 class VideoFilter_ {
   /// see [VideoFilter.id]
-  static final id = QueryIntegerProperty<VideoFilter>(_entities[5].properties[0]);
+  static final id =
+      QueryIntegerProperty<VideoFilter>(_entities[5].properties[0]);
 
   /// see [VideoFilter.channelId]
-  static final channelId = QueryStringProperty<VideoFilter>(_entities[5].properties[1]);
+  static final channelId =
+      QueryStringProperty<VideoFilter>(_entities[5].properties[1]);
 
   /// see [VideoFilter.value]
-  static final value = QueryStringProperty<VideoFilter>(_entities[5].properties[2]);
+  static final value =
+      QueryStringProperty<VideoFilter>(_entities[5].properties[2]);
 
   /// see [VideoFilter.dbType]
-  static final dbType = QueryStringProperty<VideoFilter>(_entities[5].properties[3]);
+  static final dbType =
+      QueryStringProperty<VideoFilter>(_entities[5].properties[3]);
 
   /// see [VideoFilter.dbOperation]
-  static final dbOperation = QueryStringProperty<VideoFilter>(_entities[5].properties[4]);
+  static final dbOperation =
+      QueryStringProperty<VideoFilter>(_entities[5].properties[4]);
 
   /// see [VideoFilter.filterAll]
-  static final filterAll = QueryBooleanProperty<VideoFilter>(_entities[5].properties[5]);
+  static final filterAll =
+      QueryBooleanProperty<VideoFilter>(_entities[5].properties[5]);
 
   /// see [VideoFilter.hideFromFeed]
-  static final hideFromFeed = QueryBooleanProperty<VideoFilter>(_entities[5].properties[6]);
+  static final hideFromFeed =
+      QueryBooleanProperty<VideoFilter>(_entities[5].properties[6]);
 
   /// see [VideoFilter.daysOfWeek]
-  static final daysOfWeek = QueryIntegerVectorProperty<VideoFilter>(_entities[5].properties[7]);
+  static final daysOfWeek =
+      QueryIntegerVectorProperty<VideoFilter>(_entities[5].properties[7]);
 
   /// see [VideoFilter.startTime]
-  static final startTime = QueryStringProperty<VideoFilter>(_entities[5].properties[8]);
+  static final startTime =
+      QueryStringProperty<VideoFilter>(_entities[5].properties[8]);
 
   /// see [VideoFilter.endTime]
-  static final endTime = QueryStringProperty<VideoFilter>(_entities[5].properties[9]);
+  static final endTime =
+      QueryStringProperty<VideoFilter>(_entities[5].properties[9]);
 }
 
 /// [DownloadedVideo] entity fields to define ObjectBox queries.
 class DownloadedVideo_ {
   /// see [DownloadedVideo.id]
-  static final id = QueryIntegerProperty<DownloadedVideo>(_entities[6].properties[0]);
+  static final id =
+      QueryIntegerProperty<DownloadedVideo>(_entities[6].properties[0]);
 
   /// see [DownloadedVideo.title]
-  static final title = QueryStringProperty<DownloadedVideo>(_entities[6].properties[1]);
+  static final title =
+      QueryStringProperty<DownloadedVideo>(_entities[6].properties[1]);
 
   /// see [DownloadedVideo.author]
-  static final author = QueryStringProperty<DownloadedVideo>(_entities[6].properties[2]);
+  static final author =
+      QueryStringProperty<DownloadedVideo>(_entities[6].properties[2]);
 
   /// see [DownloadedVideo.authorUrl]
-  static final authorUrl = QueryStringProperty<DownloadedVideo>(_entities[6].properties[3]);
+  static final authorUrl =
+      QueryStringProperty<DownloadedVideo>(_entities[6].properties[3]);
 
   /// see [DownloadedVideo.downloadComplete]
-  static final downloadComplete = QueryBooleanProperty<DownloadedVideo>(_entities[6].properties[4]);
+  static final downloadComplete =
+      QueryBooleanProperty<DownloadedVideo>(_entities[6].properties[4]);
 
   /// see [DownloadedVideo.downloadFailed]
-  static final downloadFailed = QueryBooleanProperty<DownloadedVideo>(_entities[6].properties[5]);
+  static final downloadFailed =
+      QueryBooleanProperty<DownloadedVideo>(_entities[6].properties[5]);
 
   /// see [DownloadedVideo.audioOnly]
-  static final audioOnly = QueryBooleanProperty<DownloadedVideo>(_entities[6].properties[6]);
+  static final audioOnly =
+      QueryBooleanProperty<DownloadedVideo>(_entities[6].properties[6]);
 
   /// see [DownloadedVideo.quality]
-  static final quality = QueryStringProperty<DownloadedVideo>(_entities[6].properties[7]);
+  static final quality =
+      QueryStringProperty<DownloadedVideo>(_entities[6].properties[7]);
 
   /// see [DownloadedVideo.lengthSeconds]
-  static final lengthSeconds = QueryIntegerProperty<DownloadedVideo>(_entities[6].properties[8]);
+  static final lengthSeconds =
+      QueryIntegerProperty<DownloadedVideo>(_entities[6].properties[8]);
 
   /// see [DownloadedVideo.videoId]
-  static final videoId = QueryStringProperty<DownloadedVideo>(_entities[6].properties[9]);
+  static final videoId =
+      QueryStringProperty<DownloadedVideo>(_entities[6].properties[9]);
 }
 
 /// [HistoryVideoCache] entity fields to define ObjectBox queries.
 class HistoryVideoCache_ {
   /// see [HistoryVideoCache.id]
-  static final id = QueryIntegerProperty<HistoryVideoCache>(_entities[7].properties[0]);
+  static final id =
+      QueryIntegerProperty<HistoryVideoCache>(_entities[7].properties[0]);
 
   /// see [HistoryVideoCache.title]
-  static final title = QueryStringProperty<HistoryVideoCache>(_entities[7].properties[1]);
+  static final title =
+      QueryStringProperty<HistoryVideoCache>(_entities[7].properties[1]);
 
   /// see [HistoryVideoCache.author]
-  static final author = QueryStringProperty<HistoryVideoCache>(_entities[7].properties[2]);
+  static final author =
+      QueryStringProperty<HistoryVideoCache>(_entities[7].properties[2]);
 
   /// see [HistoryVideoCache.videoId]
-  static final videoId = QueryStringProperty<HistoryVideoCache>(_entities[7].properties[3]);
+  static final videoId =
+      QueryStringProperty<HistoryVideoCache>(_entities[7].properties[3]);
 
   /// see [HistoryVideoCache.created]
-  static final created = QueryIntegerProperty<HistoryVideoCache>(_entities[7].properties[4]);
+  static final created =
+      QueryIntegerProperty<HistoryVideoCache>(_entities[7].properties[4]);
 
   /// see [HistoryVideoCache.thumbnail]
-  static final thumbnail = QueryStringProperty<HistoryVideoCache>(_entities[7].properties[5]);
+  static final thumbnail =
+      QueryStringProperty<HistoryVideoCache>(_entities[7].properties[5]);
 }
 
 /// [HomeLayout] entity fields to define ObjectBox queries.
 class HomeLayout_ {
   /// see [HomeLayout.id]
-  static final id = QueryIntegerProperty<HomeLayout>(_entities[8].properties[0]);
+  static final id =
+      QueryIntegerProperty<HomeLayout>(_entities[8].properties[0]);
 
   /// see [HomeLayout.showBigSource]
-  static final showBigSource = QueryBooleanProperty<HomeLayout>(_entities[8].properties[1]);
+  static final showBigSource =
+      QueryBooleanProperty<HomeLayout>(_entities[8].properties[1]);
 
   /// see [HomeLayout.dbBigSource]
-  static final dbBigSource = QueryStringProperty<HomeLayout>(_entities[8].properties[2]);
+  static final dbBigSource =
+      QueryStringProperty<HomeLayout>(_entities[8].properties[2]);
 
   /// see [HomeLayout.dbSmallSources]
-  static final dbSmallSources = QueryStringVectorProperty<HomeLayout>(_entities[8].properties[3]);
+  static final dbSmallSources =
+      QueryStringVectorProperty<HomeLayout>(_entities[8].properties[3]);
 }
 
 /// [SubscriptionNotification] entity fields to define ObjectBox queries.
 class SubscriptionNotification_ {
   /// see [SubscriptionNotification.id]
-  static final id = QueryIntegerProperty<SubscriptionNotification>(_entities[9].properties[0]);
+  static final id = QueryIntegerProperty<SubscriptionNotification>(
+      _entities[9].properties[0]);
 
   /// see [SubscriptionNotification.lastSeenVideoId]
-  static final lastSeenVideoId = QueryStringProperty<SubscriptionNotification>(_entities[9].properties[1]);
+  static final lastSeenVideoId =
+      QueryStringProperty<SubscriptionNotification>(_entities[9].properties[1]);
 
   /// see [SubscriptionNotification.timestamp]
-  static final timestamp = QueryIntegerProperty<SubscriptionNotification>(_entities[9].properties[2]);
+  static final timestamp = QueryIntegerProperty<SubscriptionNotification>(
+      _entities[9].properties[2]);
 }
 
 /// [ChannelNotification] entity fields to define ObjectBox queries.
 class ChannelNotification_ {
   /// see [ChannelNotification.id]
-  static final id = QueryIntegerProperty<ChannelNotification>(_entities[10].properties[0]);
+  static final id =
+      QueryIntegerProperty<ChannelNotification>(_entities[10].properties[0]);
 
   /// see [ChannelNotification.channelId]
-  static final channelId = QueryStringProperty<ChannelNotification>(_entities[10].properties[1]);
+  static final channelId =
+      QueryStringProperty<ChannelNotification>(_entities[10].properties[1]);
 
   /// see [ChannelNotification.lastSeenVideoId]
-  static final lastSeenVideoId = QueryStringProperty<ChannelNotification>(_entities[10].properties[2]);
+  static final lastSeenVideoId =
+      QueryStringProperty<ChannelNotification>(_entities[10].properties[2]);
 
   /// see [ChannelNotification.timestamp]
-  static final timestamp = QueryIntegerProperty<ChannelNotification>(_entities[10].properties[3]);
+  static final timestamp =
+      QueryIntegerProperty<ChannelNotification>(_entities[10].properties[3]);
 
   /// see [ChannelNotification.channelName]
-  static final channelName = QueryStringProperty<ChannelNotification>(_entities[10].properties[4]);
+  static final channelName =
+      QueryStringProperty<ChannelNotification>(_entities[10].properties[4]);
 }
 
 /// [PlaylistNotification] entity fields to define ObjectBox queries.
 class PlaylistNotification_ {
   /// see [PlaylistNotification.id]
-  static final id = QueryIntegerProperty<PlaylistNotification>(_entities[11].properties[0]);
+  static final id =
+      QueryIntegerProperty<PlaylistNotification>(_entities[11].properties[0]);
 
   /// see [PlaylistNotification.playlistId]
-  static final playlistId = QueryStringProperty<PlaylistNotification>(_entities[11].properties[1]);
+  static final playlistId =
+      QueryStringProperty<PlaylistNotification>(_entities[11].properties[1]);
 
   /// see [PlaylistNotification.lastVideoCount]
-  static final lastVideoCount = QueryIntegerProperty<PlaylistNotification>(_entities[11].properties[2]);
+  static final lastVideoCount =
+      QueryIntegerProperty<PlaylistNotification>(_entities[11].properties[2]);
 
   /// see [PlaylistNotification.timestamp]
-  static final timestamp = QueryIntegerProperty<PlaylistNotification>(_entities[11].properties[3]);
+  static final timestamp =
+      QueryIntegerProperty<PlaylistNotification>(_entities[11].properties[3]);
 
   /// see [PlaylistNotification.playlistName]
-  static final playlistName = QueryStringProperty<PlaylistNotification>(_entities[11].properties[4]);
+  static final playlistName =
+      QueryStringProperty<PlaylistNotification>(_entities[11].properties[4]);
 }

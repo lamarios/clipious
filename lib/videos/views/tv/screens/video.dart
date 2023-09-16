@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -25,19 +26,20 @@ import '../../../states/tv_video.dart';
 import '../../../states/video.dart';
 import '../../components/video_thumbnail.dart';
 
-class TvVideoView extends StatelessWidget {
+@RoutePage()
+class TvVideoScreen extends StatelessWidget {
   final String videoId;
 
-  const TvVideoView({Key? key, required this.videoId}) : super(key: key);
+  const TvVideoScreen({Key? key, required this.videoId}) : super(key: key);
 
   playVideo(BuildContext context, Video video) {
     Navigator.of(context)
-        .push(MaterialPageRoute(builder: (ctx) => TvPlayerView(videos: [video, ...video.recommendedVideos])));
+        .push(MaterialPageRoute(builder: (ctx) => TvPlayerScreen(videos: [video, ...video.recommendedVideos])));
   }
 
   showChannel(BuildContext context, String channelId) {
     Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) => TvChannelView(channelId: channelId),
+      builder: (context) => TvChannelScreen(channelId: channelId),
     ));
   }
 

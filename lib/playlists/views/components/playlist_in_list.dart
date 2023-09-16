@@ -32,7 +32,7 @@ class PlaylistInList extends StatelessWidget {
 
   openTvPlaylist(BuildContext context) {
     Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) => TvPlaylistView(playlist: playlist, canDeleteVideos: false),
+      builder: (context) => TvPlaylistScreen(playlist: playlist, canDeleteVideos: false),
     ));
   }
 

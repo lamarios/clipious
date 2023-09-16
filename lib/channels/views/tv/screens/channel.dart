@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:auto_route/annotations.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,10 +23,12 @@ import '../../../../utils.dart';
 import '../../../../videos/views/components/video_thumbnail.dart';
 import '../../../states/tv_channel.dart';
 
-class TvChannelView extends StatelessWidget {
+
+@RoutePage()
+class TvChannelScreen extends StatelessWidget {
   final String channelId;
 
-  const TvChannelView({Key? key, required this.channelId}) : super(key: key);
+  const TvChannelScreen({Key? key, required this.channelId}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

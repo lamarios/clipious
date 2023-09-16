@@ -23,7 +23,7 @@ class TvVideoItem extends StatelessWidget {
       if (onSelect != null) {
         onSelect!(context, e);
       } else {
-        Navigator.of(context).push(MaterialPageRoute(builder: (ctx) => TvVideoView(videoId: e.videoId)));
+        Navigator.of(context).push(MaterialPageRoute(builder: (ctx) => TvVideoScreen(videoId: e.videoId)));
       }
       return KeyEventResult.handled;
     }

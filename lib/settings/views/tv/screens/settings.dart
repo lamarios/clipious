@@ -1,3 +1,4 @@
+import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,8 +19,9 @@ import '../../../states/settings.dart';
 
 var log = Logger('TvSettings');
 
-class TVSettings extends StatelessWidget {
-  const TVSettings({Key? key}) : super(key: key);
+@RoutePage()
+class TVSettingsScreen extends StatelessWidget {
+  const TVSettingsScreen({Key? key}) : super(key: key);
 
   openSelectCountry(BuildContext context) {
     AppLocalizations locals = AppLocalizations.of(context)!;
@@ -62,19 +64,19 @@ class TVSettings extends StatelessWidget {
 
   openManageServers(BuildContext context) {
     Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) => const TvSettingsManageServers(),
+      builder: (context) => const TvSettingsManageServersScreen(),
     ));
   }
 
   openSponsorBlockSettings(BuildContext context) {
     Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) => const TvSponsorBlockSettings(),
+      builder: (context) => const TvSponsorBlockSettingsScreen(),
     ));
   }
 
   openSearchHistorySettings(BuildContext context) {
     Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) => const TvSearchHistorySettings(),
+      builder: (context) => const TvSearchHistorySettingsScreen(),
     ));
   }
 

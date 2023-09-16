@@ -30,21 +30,21 @@ class TvHomeScreen extends StatelessWidget {
   const TvHomeScreen({Key? key}) : super(key: key);
 
   openSettings(BuildContext context) {
-    Navigator.of(context).push(MaterialPageRoute(builder: (builder) => const TVSettings()));
+    Navigator.of(context).push(MaterialPageRoute(builder: (builder) => const TVSettingsScreen()));
   }
 
   openPopular(BuildContext context) {
     var locals = AppLocalizations.of(context)!;
     Navigator.of(context).push(MaterialPageRoute(
       builder: (context) =>
-          TvGridView(paginatedVideoList: SingleEndpointList(service.getPopular), title: locals.popular),
+          TvGridScreen(paginatedVideoList: SingleEndpointList(service.getPopular), title: locals.popular),
     ));
   }
 
   openTrending(BuildContext context) {
     var locals = AppLocalizations.of(context)!;
     Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) => TvGridView(
+      builder: (context) => TvGridScreen(
         paginatedVideoList: SingleEndpointList(service.getTrending),
         title: locals.trending,
       ),
@@ -54,7 +54,7 @@ class TvHomeScreen extends StatelessWidget {
   openSubscriptions(BuildContext context) {
     var locals = AppLocalizations.of(context)!;
     Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) => TvGridView(
+      builder: (context) => TvGridScreen(
         paginatedVideoList: SubscriptionVideoList(),
         title: locals.subscriptions,
       ),
@@ -62,12 +62,12 @@ class TvHomeScreen extends StatelessWidget {
   }
 
   openSearch(BuildContext context) {
-    Navigator.of(context).push(MaterialPageRoute(builder: (builder) => const TvSearch()));
+    Navigator.of(context).push(MaterialPageRoute(builder: (builder) => const TvSearchScreen()));
   }
 
   openPlaylists(BuildContext context) {
     Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) => TvPlaylistGridView(
+      builder: (context) => TvPlaylistGridScreen(
         playlistList: SingleEndpointList(service.getUserPlaylists),
       ),
     ));

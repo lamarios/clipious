@@ -1,3 +1,4 @@
+import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -7,8 +8,9 @@ import 'package:invidious/utils/views/tv/components/tv_overscan.dart';
 
 import '../../../../videos/models/sponsor_segment_types.dart';
 
-class TvSponsorBlockSettings extends StatelessWidget {
-  const TvSponsorBlockSettings({Key? key}) : super(key: key);
+@RoutePage()
+class TvSponsorBlockSettingsScreen extends StatelessWidget {
+  const TvSponsorBlockSettingsScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

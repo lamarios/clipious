@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:auto_route/annotations.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,11 +20,12 @@ import '../../../../utils/models/image_object.dart';
 import '../../../../videos/models/base_video.dart';
 import '../../../../videos/views/components/video_thumbnail.dart';
 
-class TvPlaylistView extends PlaylistViewScreen {
-  const TvPlaylistView({super.key, required super.playlist, required super.canDeleteVideos});
+@RoutePage()
+class TvPlaylistScreen extends PlaylistViewScreen {
+  const TvPlaylistScreen({super.key, required super.playlist, required super.canDeleteVideos});
 
   playPlaylist(BuildContext context, PlaylistState _) {
-    Navigator.of(context).push(MaterialPageRoute(builder: (ctx) => TvPlayerView(videos: _.playlist.videos)));
+    Navigator.of(context).push(MaterialPageRoute(builder: (ctx) => TvPlayerScreen(videos: _.playlist.videos)));
   }
 
   @override

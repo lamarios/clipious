@@ -56,7 +56,7 @@ class WelcomeWizardScreen extends StatelessWidget {
                       padding: const EdgeInsets.all(8.0),
                       child: Text(locals.wizardIntro),
                     ),
-                    const Expanded(child: ManagerServersView()),
+                    const Expanded(child: ManagerServersView(fromWizard : true)),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: FilledButton.tonal(

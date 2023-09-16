@@ -363,7 +363,7 @@ class SettingsCubit extends Cubit<SettingsState> {
       state.backgroundNotificationFrequency = i;
       emit(state);
       EasyDebounce.debounce('restarting-background-service', const Duration(seconds: 2), () {
-          backgroundService.on(restartTimerMethod);
+          backgroundService.invoke(restartTimerMethod);
       });
     }
   }

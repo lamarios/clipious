@@ -1,3 +1,4 @@
+import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -19,8 +20,9 @@ import '../../../../videos/models/video_in_list.dart';
 import '../../../states/search.dart';
 import '../../../states/tv_search.dart';
 
-class TvSearch extends StatelessWidget {
-  const TvSearch({Key? key}) : super(key: key);
+@RoutePage()
+class TvSearchScreen extends StatelessWidget {
+  const TvSearchScreen({Key? key}) : super(key: key);
 
   Widget buildSuggestion(BuildContext context, SearchState _, bool isHistory, String suggestion) {
     ColorScheme colors = Theme.of(context).colorScheme;
@@ -235,7 +237,7 @@ class TvSearch extends StatelessWidget {
 
   openChannel(BuildContext context, Channel c) {
     Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) => TvChannelView(channelId: c.authorId),
+      builder: (context) => TvChannelScreen(channelId: c.authorId),
     ));
   }
 }

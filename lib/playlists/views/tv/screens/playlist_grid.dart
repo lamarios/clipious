@@ -1,3 +1,4 @@
+import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -8,11 +9,13 @@ import 'package:invidious/utils/models/paginatedList.dart';
 import 'package:invidious/utils/views/components/placeholders.dart';
 import 'package:invidious/utils/views/tv/components/tv_overscan.dart';
 
-class TvPlaylistGridView extends StatelessWidget {
+
+@RoutePage()
+class TvPlaylistGridScreen extends StatelessWidget {
   final PaginatedList<Playlist> playlistList;
   final String? tags;
 
-  const TvPlaylistGridView({Key? key, required this.playlistList, this.tags}) : super(key: key);
+  const TvPlaylistGridScreen({Key? key, required this.playlistList, this.tags}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

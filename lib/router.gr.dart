@@ -142,10 +142,114 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const SubscriptionScreen(),
       );
     },
+    TVSettingsRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const TVSettingsScreen(),
+      );
+    },
+    TvChannelRoute.name: (routeData) {
+      final args = routeData.argsAs<TvChannelRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: TvChannelScreen(
+          key: args.key,
+          channelId: args.channelId,
+        ),
+      );
+    },
+    TvGridRoute.name: (routeData) {
+      final args = routeData.argsAs<TvGridRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: TvGridScreen(
+          key: args.key,
+          paginatedVideoList: args.paginatedVideoList,
+          tags: args.tags,
+          title: args.title,
+        ),
+      );
+    },
     TvHomeRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const TvHomeScreen(),
+      );
+    },
+    TvManageSingleServerRoute.name: (routeData) {
+      final args = routeData.argsAs<TvManageSingleServerRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: TvManageSingleServerScreen(
+          key: args.key,
+          server: args.server,
+        ),
+      );
+    },
+    TvPlayerRoute.name: (routeData) {
+      final args = routeData.argsAs<TvPlayerRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: TvPlayerScreen(
+          key: args.key,
+          videos: args.videos,
+        ),
+      );
+    },
+    TvPlaylistGridRoute.name: (routeData) {
+      final args = routeData.argsAs<TvPlaylistGridRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: TvPlaylistGridScreen(
+          key: args.key,
+          playlistList: args.playlistList,
+          tags: args.tags,
+        ),
+      );
+    },
+    TvPlaylistRoute.name: (routeData) {
+      final args = routeData.argsAs<TvPlaylistRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: TvPlaylistScreen(
+          key: args.key,
+          playlist: args.playlist,
+          canDeleteVideos: args.canDeleteVideos,
+        ),
+      );
+    },
+    TvSearchHistorySettingsRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const TvSearchHistorySettingsScreen(),
+      );
+    },
+    TvSearchRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const TvSearchScreen(),
+      );
+    },
+    TvSettingsManageServersRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const TvSettingsManageServersScreen(),
+      );
+    },
+    TvSponsorBlockSettingsRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const TvSponsorBlockSettingsScreen(),
+      );
+    },
+    TvVideoRoute.name: (routeData) {
+      final args = routeData.argsAs<TvVideoRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: TvVideoScreen(
+          key: args.key,
+          videoId: args.videoId,
+        ),
       );
     },
     VideoFilterSettingsRoute.name: (routeData) {
@@ -551,6 +655,105 @@ class SubscriptionRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [TVSettingsScreen]
+class TVSettingsRoute extends PageRouteInfo<void> {
+  const TVSettingsRoute({List<PageRouteInfo>? children})
+      : super(
+          TVSettingsRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'TVSettingsRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [TvChannelScreen]
+class TvChannelRoute extends PageRouteInfo<TvChannelRouteArgs> {
+  TvChannelRoute({
+    Key? key,
+    required String channelId,
+    List<PageRouteInfo>? children,
+  }) : super(
+          TvChannelRoute.name,
+          args: TvChannelRouteArgs(
+            key: key,
+            channelId: channelId,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'TvChannelRoute';
+
+  static const PageInfo<TvChannelRouteArgs> page =
+      PageInfo<TvChannelRouteArgs>(name);
+}
+
+class TvChannelRouteArgs {
+  const TvChannelRouteArgs({
+    this.key,
+    required this.channelId,
+  });
+
+  final Key? key;
+
+  final String channelId;
+
+  @override
+  String toString() {
+    return 'TvChannelRouteArgs{key: $key, channelId: $channelId}';
+  }
+}
+
+/// generated route for
+/// [TvGridScreen]
+class TvGridRoute extends PageRouteInfo<TvGridRouteArgs> {
+  TvGridRoute({
+    Key? key,
+    required PaginatedList<VideoInList> paginatedVideoList,
+    String? tags,
+    required String title,
+    List<PageRouteInfo>? children,
+  }) : super(
+          TvGridRoute.name,
+          args: TvGridRouteArgs(
+            key: key,
+            paginatedVideoList: paginatedVideoList,
+            tags: tags,
+            title: title,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'TvGridRoute';
+
+  static const PageInfo<TvGridRouteArgs> page = PageInfo<TvGridRouteArgs>(name);
+}
+
+class TvGridRouteArgs {
+  const TvGridRouteArgs({
+    this.key,
+    required this.paginatedVideoList,
+    this.tags,
+    required this.title,
+  });
+
+  final Key? key;
+
+  final PaginatedList<VideoInList> paginatedVideoList;
+
+  final String? tags;
+
+  final String title;
+
+  @override
+  String toString() {
+    return 'TvGridRouteArgs{key: $key, paginatedVideoList: $paginatedVideoList, tags: $tags, title: $title}';
+  }
+}
+
+/// generated route for
 /// [TvHomeScreen]
 class TvHomeRoute extends PageRouteInfo<void> {
   const TvHomeRoute({List<PageRouteInfo>? children})
@@ -562,6 +765,263 @@ class TvHomeRoute extends PageRouteInfo<void> {
   static const String name = 'TvHomeRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [TvManageSingleServerScreen]
+class TvManageSingleServerRoute
+    extends PageRouteInfo<TvManageSingleServerRouteArgs> {
+  TvManageSingleServerRoute({
+    Key? key,
+    required Server server,
+    List<PageRouteInfo>? children,
+  }) : super(
+          TvManageSingleServerRoute.name,
+          args: TvManageSingleServerRouteArgs(
+            key: key,
+            server: server,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'TvManageSingleServerRoute';
+
+  static const PageInfo<TvManageSingleServerRouteArgs> page =
+      PageInfo<TvManageSingleServerRouteArgs>(name);
+}
+
+class TvManageSingleServerRouteArgs {
+  const TvManageSingleServerRouteArgs({
+    this.key,
+    required this.server,
+  });
+
+  final Key? key;
+
+  final Server server;
+
+  @override
+  String toString() {
+    return 'TvManageSingleServerRouteArgs{key: $key, server: $server}';
+  }
+}
+
+/// generated route for
+/// [TvPlayerScreen]
+class TvPlayerRoute extends PageRouteInfo<TvPlayerRouteArgs> {
+  TvPlayerRoute({
+    Key? key,
+    required List<BaseVideo> videos,
+    List<PageRouteInfo>? children,
+  }) : super(
+          TvPlayerRoute.name,
+          args: TvPlayerRouteArgs(
+            key: key,
+            videos: videos,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'TvPlayerRoute';
+
+  static const PageInfo<TvPlayerRouteArgs> page =
+      PageInfo<TvPlayerRouteArgs>(name);
+}
+
+class TvPlayerRouteArgs {
+  const TvPlayerRouteArgs({
+    this.key,
+    required this.videos,
+  });
+
+  final Key? key;
+
+  final List<BaseVideo> videos;
+
+  @override
+  String toString() {
+    return 'TvPlayerRouteArgs{key: $key, videos: $videos}';
+  }
+}
+
+/// generated route for
+/// [TvPlaylistGridScreen]
+class TvPlaylistGridRoute extends PageRouteInfo<TvPlaylistGridRouteArgs> {
+  TvPlaylistGridRoute({
+    Key? key,
+    required PaginatedList<Playlist> playlistList,
+    String? tags,
+    List<PageRouteInfo>? children,
+  }) : super(
+          TvPlaylistGridRoute.name,
+          args: TvPlaylistGridRouteArgs(
+            key: key,
+            playlistList: playlistList,
+            tags: tags,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'TvPlaylistGridRoute';
+
+  static const PageInfo<TvPlaylistGridRouteArgs> page =
+      PageInfo<TvPlaylistGridRouteArgs>(name);
+}
+
+class TvPlaylistGridRouteArgs {
+  const TvPlaylistGridRouteArgs({
+    this.key,
+    required this.playlistList,
+    this.tags,
+  });
+
+  final Key? key;
+
+  final PaginatedList<Playlist> playlistList;
+
+  final String? tags;
+
+  @override
+  String toString() {
+    return 'TvPlaylistGridRouteArgs{key: $key, playlistList: $playlistList, tags: $tags}';
+  }
+}
+
+/// generated route for
+/// [TvPlaylistScreen]
+class TvPlaylistRoute extends PageRouteInfo<TvPlaylistRouteArgs> {
+  TvPlaylistRoute({
+    Key? key,
+    required Playlist playlist,
+    required bool canDeleteVideos,
+    List<PageRouteInfo>? children,
+  }) : super(
+          TvPlaylistRoute.name,
+          args: TvPlaylistRouteArgs(
+            key: key,
+            playlist: playlist,
+            canDeleteVideos: canDeleteVideos,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'TvPlaylistRoute';
+
+  static const PageInfo<TvPlaylistRouteArgs> page =
+      PageInfo<TvPlaylistRouteArgs>(name);
+}
+
+class TvPlaylistRouteArgs {
+  const TvPlaylistRouteArgs({
+    this.key,
+    required this.playlist,
+    required this.canDeleteVideos,
+  });
+
+  final Key? key;
+
+  final Playlist playlist;
+
+  final bool canDeleteVideos;
+
+  @override
+  String toString() {
+    return 'TvPlaylistRouteArgs{key: $key, playlist: $playlist, canDeleteVideos: $canDeleteVideos}';
+  }
+}
+
+/// generated route for
+/// [TvSearchHistorySettingsScreen]
+class TvSearchHistorySettingsRoute extends PageRouteInfo<void> {
+  const TvSearchHistorySettingsRoute({List<PageRouteInfo>? children})
+      : super(
+          TvSearchHistorySettingsRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'TvSearchHistorySettingsRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [TvSearchScreen]
+class TvSearchRoute extends PageRouteInfo<void> {
+  const TvSearchRoute({List<PageRouteInfo>? children})
+      : super(
+          TvSearchRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'TvSearchRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [TvSettingsManageServersScreen]
+class TvSettingsManageServersRoute extends PageRouteInfo<void> {
+  const TvSettingsManageServersRoute({List<PageRouteInfo>? children})
+      : super(
+          TvSettingsManageServersRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'TvSettingsManageServersRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [TvSponsorBlockSettingsScreen]
+class TvSponsorBlockSettingsRoute extends PageRouteInfo<void> {
+  const TvSponsorBlockSettingsRoute({List<PageRouteInfo>? children})
+      : super(
+          TvSponsorBlockSettingsRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'TvSponsorBlockSettingsRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [TvVideoScreen]
+class TvVideoRoute extends PageRouteInfo<TvVideoRouteArgs> {
+  TvVideoRoute({
+    Key? key,
+    required String videoId,
+    List<PageRouteInfo>? children,
+  }) : super(
+          TvVideoRoute.name,
+          args: TvVideoRouteArgs(
+            key: key,
+            videoId: videoId,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'TvVideoRoute';
+
+  static const PageInfo<TvVideoRouteArgs> page =
+      PageInfo<TvVideoRouteArgs>(name);
+}
+
+class TvVideoRouteArgs {
+  const TvVideoRouteArgs({
+    this.key,
+    required this.videoId,
+  });
+
+  final Key? key;
+
+  final String videoId;
+
+  @override
+  String toString() {
+    return 'TvVideoRouteArgs{key: $key, videoId: $videoId}';
+  }
 }
 
 /// generated route for

@@ -1,3 +1,4 @@
+import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:invidious/utils/models/paginatedList.dart';
@@ -8,12 +9,13 @@ import 'package:invidious/videos/views/tv/components/video_item.dart';
 import '../../../../utils/states/item_list.dart';
 import '../../../models/video_in_list.dart';
 
-class TvGridView extends StatelessWidget {
+@RoutePage()
+class TvGridScreen extends StatelessWidget {
   final PaginatedList<VideoInList> paginatedVideoList;
   final String? tags;
   final String title;
 
-  const TvGridView({Key? key, required this.paginatedVideoList, this.tags, required this.title}) : super(key: key);
+  const TvGridScreen({Key? key, required this.paginatedVideoList, this.tags, required this.title}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

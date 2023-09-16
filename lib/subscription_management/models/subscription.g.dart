@@ -11,7 +11,8 @@ Subscription _$SubscriptionFromJson(Map<String, dynamic> json) => Subscription(
       json['authorId'] as String,
     );
 
-Map<String, dynamic> _$SubscriptionToJson(Subscription instance) => <String, dynamic>{
+Map<String, dynamic> _$SubscriptionToJson(Subscription instance) =>
+    <String, dynamic>{
       'author': instance.author,
       'authorId': instance.authorId,
     };

@@ -13,7 +13,8 @@ import '../../models/db/server.dart';
 import '../screens/settings.dart';
 
 class ManagerServersView extends StatelessWidget {
-  const ManagerServersView({super.key});
+  final bool fromWizard;
+  const ManagerServersView({super.key, bool this.fromWizard = false});
 
   showPublicServerActions(BuildContext context, ServerListSettingsState controller, Server server) {
     var locals = AppLocalizations.of(context)!;
