@@ -1015,7 +1015,7 @@
     "@notificationsDescription": {
         "description": "Setting description for notifications"
     },
-    "enableNotificationDescriptions": "Runs background service to check and notify you on the changes you are monitoring",
+    "enableNotificationDescriptions": "Runs foreground service to check and notify you on the changes you are monitoring",
     "@enableNotificationDescriptions": {
         "description": ""
     },
@@ -1153,7 +1153,7 @@
     "@notificationFrequencySettingsTitle": {
         "description": "Title for frequency settings"
     },
-    "notificationFrequencySettingsDescription": "How often the application will check for new videos in the background",
+    "notificationFrequencySettingsDescription": "How often the application will check for new videos",
     "@notificationFrequencySettingsDescription": {
         "description": "Description for frequency settings"
     },
