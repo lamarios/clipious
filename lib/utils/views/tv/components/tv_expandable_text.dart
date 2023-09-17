@@ -1,6 +1,7 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:invidious/globals.dart';
-import 'package:invidious/utils/views/tv/components/tv_plain_text.dart';
+import 'package:invidious/router.dart';
 
 import '../../../../utils.dart';
 
@@ -12,9 +13,7 @@ class TvExpandableText extends StatelessWidget {
   const TvExpandableText({Key? key, required this.text, this.maxLines, this.fontSize}) : super(key: key);
 
   showText(BuildContext context) {
-    Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) => TvPlainText(text: text),
-    ));
+    AutoRouter.of(context).push(TvPlainTextRoute(text: text));
   }
 
   @override

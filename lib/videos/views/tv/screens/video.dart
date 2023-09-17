@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:auto_route/annotations.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -9,6 +10,7 @@ import 'package:invidious/channels/views/tv/screens/channel.dart';
 import 'package:invidious/downloads/states/download_manager.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/player/views/tv/screens/tvPlayerView.dart';
+import 'package:invidious/router.dart';
 import 'package:invidious/settings/states/settings.dart';
 import 'package:invidious/subscription_management/view/tv/tv_subscribe_button.dart';
 import 'package:invidious/utils/models/paginatedList.dart';
@@ -33,14 +35,11 @@ class TvVideoScreen extends StatelessWidget {
   const TvVideoScreen({Key? key, required this.videoId}) : super(key: key);
 
   playVideo(BuildContext context, Video video) {
-    Navigator.of(context)
-        .push(MaterialPageRoute(builder: (ctx) => TvPlayerScreen(videos: [video, ...video.recommendedVideos])));
+    AutoRouter.of(context).push(TvPlayerRoute(videos: [video, ...video.recommendedVideos]));
   }
 
   showChannel(BuildContext context, String channelId) {
-    Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) => TvChannelScreen(channelId: channelId),
-    ));
+    AutoRouter.of(context).push(TvChannelRoute(channelId: channelId));
   }
 
   @override
@@ -68,9 +67,7 @@ class TvVideoScreen extends StatelessWidget {
         return DefaultTextStyle(
           style: textTheme.bodyLarge!,
           child: AnimatedCrossFade(
-            crossFadeState: videoState.loadingVideo || videoState.error.isNotEmpty
-                ? CrossFadeState.showFirst
-                : CrossFadeState.showSecond,
+            crossFadeState: videoState.loadingVideo || videoState.error.isNotEmpty ? CrossFadeState.showFirst : CrossFadeState.showSecond,
             duration: animationDuration,
             firstChild: videoState.error.isNotEmpty
                 ? Center(
@@ -90,9 +87,7 @@ class TvVideoScreen extends StatelessWidget {
                       videoState.video == null
                           ? Container(color: colors.background)
                           : VideoThumbnailView(
-                              videoId: videoState.video!.videoId,
-                              decoration: const BoxDecoration(),
-                              thumbnailUrl: ImageObject.getBestThumbnail(videoState.video?.videoThumbnails)?.url ?? ''),
+                              videoId: videoState.video!.videoId, decoration: const BoxDecoration(), thumbnailUrl: ImageObject.getBestThumbnail(videoState.video?.videoThumbnails)?.url ?? ''),
                       AnimatedPositioned(
                         top: tvState.showImage ? 315 : 0,
                         left: 0,
@@ -112,9 +107,7 @@ class TvVideoScreen extends StatelessWidget {
                                 ),
                                 child: TvOverscan(
                                   child: Container(
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(20),
-                                        color: colors.background.withOpacity(overlayBackgroundOpacity)),
+                                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), color: colors.background.withOpacity(overlayBackgroundOpacity)),
                                     child: Padding(
                                       padding: const EdgeInsets.all(16.0),
                                       child: SingleChildScrollView(
@@ -125,32 +118,29 @@ class TvVideoScreen extends StatelessWidget {
                                             Row(
                                               crossAxisAlignment: CrossAxisAlignment.center,
                                               children: [
-                                                Column(
-                                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                                    mainAxisAlignment: MainAxisAlignment.end,
-                                                    children: [
-                                                      Padding(
-                                                        padding: const EdgeInsets.only(right: 16.0),
-                                                        child: TvButton(
-                                                          autofocus: true,
-                                                          onFocusChanged: (focus) {
-                                                            if (focus) {
-                                                              tvCubit.scrollUp();
-                                                            } else {
-                                                              tvCubit.scrollDown();
-                                                            }
-                                                          },
-                                                          onPressed: (context) => playVideo(context, videoState.video!),
-                                                          child: const Padding(
-                                                            padding: EdgeInsets.all(15.0),
-                                                            child: Icon(
-                                                              Icons.play_arrow,
-                                                              size: 50,
-                                                            ),
-                                                          ),
+                                                Column(crossAxisAlignment: CrossAxisAlignment.start, mainAxisAlignment: MainAxisAlignment.end, children: [
+                                                  Padding(
+                                                    padding: const EdgeInsets.only(right: 16.0),
+                                                    child: TvButton(
+                                                      autofocus: true,
+                                                      onFocusChanged: (focus) {
+                                                        if (focus) {
+                                                          tvCubit.scrollUp();
+                                                        } else {
+                                                          tvCubit.scrollDown();
+                                                        }
+                                                      },
+                                                      onPressed: (context) => playVideo(context, videoState.video!),
+                                                      child: const Padding(
+                                                        padding: EdgeInsets.all(15.0),
+                                                        child: Icon(
+                                                          Icons.play_arrow,
+                                                          size: 50,
                                                         ),
                                                       ),
-                                                    ]),
+                                                    ),
+                                                  ),
+                                                ]),
                                                 Expanded(
                                                   child: Padding(
                                                     padding: const EdgeInsets.symmetric(vertical: 4),
@@ -160,15 +150,12 @@ class TvVideoScreen extends StatelessWidget {
                                                         Text(
                                                           videoState.video!.title,
                                                           maxLines: 1,
-                                                          style:
-                                                              textTheme.headlineMedium!.copyWith(color: colors.primary),
+                                                          style: textTheme.headlineMedium!.copyWith(color: colors.primary),
                                                           overflow: TextOverflow.ellipsis,
                                                         ),
                                                         VideoMetrics(
                                                           video: videoState.video!,
-                                                          dislikes: settings.state.useReturnYoutubeDislike
-                                                              ? videoState.dislikes
-                                                              : null,
+                                                          dislikes: settings.state.useReturnYoutubeDislike ? videoState.dislikes : null,
                                                         )
                                                       ],
                                                     ),
@@ -178,88 +165,67 @@ class TvVideoScreen extends StatelessWidget {
                                             ),
                                             Padding(
                                               padding: const EdgeInsets.only(bottom: 10.0),
-                                              child: ListView(
-                                                  physics: const NeverScrollableScrollPhysics(),
-                                                  shrinkWrap: true,
+                                              child: ListView(physics: const NeverScrollableScrollPhysics(), shrinkWrap: true, children: [
+                                                Row(
                                                   children: [
-                                                    Row(
-                                                      children: [
-                                                        TvButton(
-                                                          onPressed: (context) =>
-                                                              showChannel(context, videoState.video?.authorId ?? ''),
-                                                          unfocusedColor: colors.background.withOpacity(0),
-                                                          child: Row(
-                                                            mainAxisSize: MainAxisSize.min,
-                                                            children: [
-                                                              Thumbnail(
-                                                                thumbnailUrl: ImageObject.getBestThumbnail(
-                                                                            videoState.video?.authorThumbnails)
-                                                                        ?.url ??
-                                                                    '',
-                                                                width: 40,
-                                                                height: 40,
-                                                                id: 'author-small-${videoState.video?.authorId}',
-                                                                decoration: BoxDecoration(
-                                                                    borderRadius: BorderRadius.circular(20)),
-                                                              ),
-                                                              Padding(
-                                                                padding: const EdgeInsets.only(left: 8.0, right: 20),
-                                                                child: Text(videoState.video?.author ?? ''),
-                                                              )
-                                                            ],
+                                                    TvButton(
+                                                      onPressed: (context) => showChannel(context, videoState.video?.authorId ?? ''),
+                                                      unfocusedColor: colors.background.withOpacity(0),
+                                                      child: Row(
+                                                        mainAxisSize: MainAxisSize.min,
+                                                        children: [
+                                                          Thumbnail(
+                                                            thumbnailUrl: ImageObject.getBestThumbnail(videoState.video?.authorThumbnails)?.url ?? '',
+                                                            width: 40,
+                                                            height: 40,
+                                                            id: 'author-small-${videoState.video?.authorId}',
+                                                            decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
                                                           ),
-                                                        ),
-                                                        Padding(
-                                                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                                                          child: TvSubscribeButton(
-                                                              channelId: videoState.video?.authorId ?? '',
-                                                              subCount: videoState.video?.subCountText ?? ''),
-                                                        ),
-                                                        Expanded(
-                                                          child: Container(),
-                                                        ),
-                                                        AnimatedOpacity(
-                                                          opacity: tvState.showImage ? 1 : 0,
-                                                          duration: animationDuration,
-                                                          child: Icon(
-                                                            Icons.expand_more,
-                                                            size: 50,
-                                                            color: colors.primary.withOpacity(0.2),
-                                                          ),
-                                                        )
-                                                      ],
-                                                    ),
-                                                    Padding(
-                                                      padding: const EdgeInsets.only(right: 40.0),
-                                                      child: TvExpandableText(
-                                                        text: videoState.video?.description ?? '',
-                                                        maxLines: 3,
+                                                          Padding(
+                                                            padding: const EdgeInsets.only(left: 8.0, right: 20),
+                                                            child: Text(videoState.video?.author ?? ''),
+                                                          )
+                                                        ],
                                                       ),
                                                     ),
                                                     Padding(
-                                                      padding: const EdgeInsets.only(top: 10.0),
-                                                      child: Text(
-                                                        locals.recommended,
-                                                        style: textTheme.titleLarge!,
-                                                      ),
+                                                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                                                      child: TvSubscribeButton(channelId: videoState.video?.authorId ?? '', subCount: videoState.video?.subCountText ?? ''),
                                                     ),
-                                                    TvHorizontalVideoList(
-                                                        paginatedVideoList: FixedItemList<VideoInList>(videoState
-                                                                .video?.recommendedVideos
-                                                                .map((e) => VideoInList(
-                                                                    e.title,
-                                                                    e.videoId,
-                                                                    e.lengthSeconds,
-                                                                    0,
-                                                                    e.author,
-                                                                    '',
-                                                                    'authorUrl',
-                                                                    0,
-                                                                    '',
-                                                                    e.videoThumbnails))
-                                                                .toList() ??
-                                                            []))
-                                                  ]),
+                                                    Expanded(
+                                                      child: Container(),
+                                                    ),
+                                                    AnimatedOpacity(
+                                                      opacity: tvState.showImage ? 1 : 0,
+                                                      duration: animationDuration,
+                                                      child: Icon(
+                                                        Icons.expand_more,
+                                                        size: 50,
+                                                        color: colors.primary.withOpacity(0.2),
+                                                      ),
+                                                    )
+                                                  ],
+                                                ),
+                                                Padding(
+                                                  padding: const EdgeInsets.only(right: 40.0),
+                                                  child: TvExpandableText(
+                                                    text: videoState.video?.description ?? '',
+                                                    maxLines: 3,
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding: const EdgeInsets.only(top: 10.0),
+                                                  child: Text(
+                                                    locals.recommended,
+                                                    style: textTheme.titleLarge!,
+                                                  ),
+                                                ),
+                                                TvHorizontalVideoList(
+                                                    paginatedVideoList: FixedItemList<VideoInList>(videoState.video?.recommendedVideos
+                                                            .map((e) => VideoInList(e.title, e.videoId, e.lengthSeconds, 0, e.author, '', 'authorUrl', 0, '', e.videoThumbnails))
+                                                            .toList() ??
+                                                        []))
+                                              ]),
                                             )
                                           ],
                                         ),

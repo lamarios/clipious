@@ -20,20 +20,15 @@ class PlaylistInList extends StatelessWidget {
   final bool isTv;
   final bool small;
 
-  const PlaylistInList(
-      {super.key, required this.playlist, required this.canDeleteVideos, this.isTv = false, this.small = false});
+  const PlaylistInList({super.key, required this.playlist, required this.canDeleteVideos, this.isTv = false, this.small = false});
 
   openPlayList(BuildContext context) {
     var cubit = context.read<PlaylistListCubit>();
-    AutoRouter.of(context)
-        .push(PlaylistViewRoute(playlist: playlist, canDeleteVideos: canDeleteVideos))
-        .then((value) => cubit.refreshPlaylists());
+    AutoRouter.of(context).push(PlaylistViewRoute(playlist: playlist, canDeleteVideos: canDeleteVideos)).then((value) => cubit.refreshPlaylists());
   }
 
   openTvPlaylist(BuildContext context) {
-    Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) => TvPlaylistScreen(playlist: playlist, canDeleteVideos: false),
-    ));
+    AutoRouter.of(context).push(TvPlaylistRoute(playlist: playlist, canDeleteVideos: false));
   }
 
   @override
@@ -85,9 +80,7 @@ class PlaylistInList extends StatelessWidget {
                                       overflow: TextOverflow.ellipsis,
                                       style: textTheme.titleLarge?.copyWith(color: colors.primary),
                                     )),
-                                    Padding(
-                                        padding: const EdgeInsets.only(bottom: 8.0),
-                                        child: Text(locals.nVideos(playlist.videoCount))),
+                                    Padding(padding: const EdgeInsets.only(bottom: 8.0), child: Text(locals.nVideos(playlist.videoCount))),
                                   ],
                                 ),
                               ),

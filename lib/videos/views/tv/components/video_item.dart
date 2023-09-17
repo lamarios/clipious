@@ -1,5 +1,7 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:invidious/router.dart';
 import 'package:invidious/utils.dart';
 import 'package:invidious/videos/views/tv/screens/video.dart';
 
@@ -23,7 +25,7 @@ class TvVideoItem extends StatelessWidget {
       if (onSelect != null) {
         onSelect!(context, e);
       } else {
-        Navigator.of(context).push(MaterialPageRoute(builder: (ctx) => TvVideoScreen(videoId: e.videoId)));
+        AutoRouter.of(context).push(TvVideoRoute(videoId: e.videoId));
       }
       return KeyEventResult.handled;
     }

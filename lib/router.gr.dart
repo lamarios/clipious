@@ -186,6 +186,16 @@ abstract class _$AppRouter extends RootStackRouter {
         ),
       );
     },
+    TvPlainTextRoute.name: (routeData) {
+      final args = routeData.argsAs<TvPlainTextRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: TvPlainTextScreen(
+          key: args.key,
+          text: args.text,
+        ),
+      );
+    },
     TvPlayerRoute.name: (routeData) {
       final args = routeData.argsAs<TvPlayerRouteArgs>();
       return AutoRoutePage<dynamic>(
@@ -230,6 +240,19 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const TvSearchScreen(),
       );
     },
+    TvSelectFromListRoute.name: (routeData) {
+      final args = routeData.argsAs<TvSelectFromListRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: TvSelectFromListScreen(
+          key: args.key,
+          options: args.options,
+          selected: args.selected,
+          onSelect: args.onSelect,
+          title: args.title,
+        ),
+      );
+    },
     TvSettingsManageServersRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -242,6 +265,24 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const TvSponsorBlockSettingsScreen(),
       );
     },
+    TvTextFieldRoute.name: (routeData) {
+      final args = routeData.argsAs<TvTextFieldRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: TvTextFieldScreen(
+          key: args.key,
+          controller: args.controller,
+          autofocus: args.autofocus,
+          autocorrect: args.autocorrect,
+          focusNode: args.focusNode,
+          onSubmitted: args.onSubmitted,
+          textInputAction: args.textInputAction,
+          obscureText: args.obscureText,
+          autofillHints: args.autofillHints,
+          decoration: args.decoration,
+        ),
+      );
+    },
     TvVideoRoute.name: (routeData) {
       final args = routeData.argsAs<TvVideoRouteArgs>();
       return AutoRoutePage<dynamic>(
@@ -250,6 +291,12 @@ abstract class _$AppRouter extends RootStackRouter {
           key: args.key,
           videoId: args.videoId,
         ),
+      );
+    },
+    TvWelcomeWizardRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const TvWelcomeWizardScreen(),
       );
     },
     VideoFilterSettingsRoute.name: (routeData) {
@@ -807,6 +854,44 @@ class TvManageSingleServerRouteArgs {
 }
 
 /// generated route for
+/// [TvPlainTextScreen]
+class TvPlainTextRoute extends PageRouteInfo<TvPlainTextRouteArgs> {
+  TvPlainTextRoute({
+    Key? key,
+    required String text,
+    List<PageRouteInfo>? children,
+  }) : super(
+          TvPlainTextRoute.name,
+          args: TvPlainTextRouteArgs(
+            key: key,
+            text: text,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'TvPlainTextRoute';
+
+  static const PageInfo<TvPlainTextRouteArgs> page =
+      PageInfo<TvPlainTextRouteArgs>(name);
+}
+
+class TvPlainTextRouteArgs {
+  const TvPlainTextRouteArgs({
+    this.key,
+    required this.text,
+  });
+
+  final Key? key;
+
+  final String text;
+
+  @override
+  String toString() {
+    return 'TvPlainTextRouteArgs{key: $key, text: $text}';
+  }
+}
+
+/// generated route for
 /// [TvPlayerScreen]
 class TvPlayerRoute extends PageRouteInfo<TvPlayerRouteArgs> {
   TvPlayerRoute({
@@ -959,6 +1044,59 @@ class TvSearchRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [TvSelectFromListScreen]
+class TvSelectFromListRoute extends PageRouteInfo<TvSelectFromListRouteArgs> {
+  TvSelectFromListRoute({
+    Key? key,
+    required List<String> options,
+    required String selected,
+    required dynamic Function(String) onSelect,
+    required String title,
+    List<PageRouteInfo>? children,
+  }) : super(
+          TvSelectFromListRoute.name,
+          args: TvSelectFromListRouteArgs(
+            key: key,
+            options: options,
+            selected: selected,
+            onSelect: onSelect,
+            title: title,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'TvSelectFromListRoute';
+
+  static const PageInfo<TvSelectFromListRouteArgs> page =
+      PageInfo<TvSelectFromListRouteArgs>(name);
+}
+
+class TvSelectFromListRouteArgs {
+  const TvSelectFromListRouteArgs({
+    this.key,
+    required this.options,
+    required this.selected,
+    required this.onSelect,
+    required this.title,
+  });
+
+  final Key? key;
+
+  final List<String> options;
+
+  final String selected;
+
+  final dynamic Function(String) onSelect;
+
+  final String title;
+
+  @override
+  String toString() {
+    return 'TvSelectFromListRouteArgs{key: $key, options: $options, selected: $selected, onSelect: $onSelect, title: $title}';
+  }
+}
+
+/// generated route for
 /// [TvSettingsManageServersScreen]
 class TvSettingsManageServersRoute extends PageRouteInfo<void> {
   const TvSettingsManageServersRoute({List<PageRouteInfo>? children})
@@ -984,6 +1122,84 @@ class TvSponsorBlockSettingsRoute extends PageRouteInfo<void> {
   static const String name = 'TvSponsorBlockSettingsRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [TvTextFieldScreen]
+class TvTextFieldRoute extends PageRouteInfo<TvTextFieldRouteArgs> {
+  TvTextFieldRoute({
+    Key? key,
+    required TextEditingController controller,
+    bool? autofocus,
+    bool? autocorrect,
+    FocusNode? focusNode,
+    void Function(String)? onSubmitted,
+    TextInputAction? textInputAction,
+    bool? obscureText,
+    Iterable<String>? autofillHints,
+    InputDecoration? decoration,
+    List<PageRouteInfo>? children,
+  }) : super(
+          TvTextFieldRoute.name,
+          args: TvTextFieldRouteArgs(
+            key: key,
+            controller: controller,
+            autofocus: autofocus,
+            autocorrect: autocorrect,
+            focusNode: focusNode,
+            onSubmitted: onSubmitted,
+            textInputAction: textInputAction,
+            obscureText: obscureText,
+            autofillHints: autofillHints,
+            decoration: decoration,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'TvTextFieldRoute';
+
+  static const PageInfo<TvTextFieldRouteArgs> page =
+      PageInfo<TvTextFieldRouteArgs>(name);
+}
+
+class TvTextFieldRouteArgs {
+  const TvTextFieldRouteArgs({
+    this.key,
+    required this.controller,
+    this.autofocus,
+    this.autocorrect,
+    this.focusNode,
+    this.onSubmitted,
+    this.textInputAction,
+    this.obscureText,
+    this.autofillHints,
+    this.decoration,
+  });
+
+  final Key? key;
+
+  final TextEditingController controller;
+
+  final bool? autofocus;
+
+  final bool? autocorrect;
+
+  final FocusNode? focusNode;
+
+  final void Function(String)? onSubmitted;
+
+  final TextInputAction? textInputAction;
+
+  final bool? obscureText;
+
+  final Iterable<String>? autofillHints;
+
+  final InputDecoration? decoration;
+
+  @override
+  String toString() {
+    return 'TvTextFieldRouteArgs{key: $key, controller: $controller, autofocus: $autofocus, autocorrect: $autocorrect, focusNode: $focusNode, onSubmitted: $onSubmitted, textInputAction: $textInputAction, obscureText: $obscureText, autofillHints: $autofillHints, decoration: $decoration}';
+  }
 }
 
 /// generated route for
@@ -1022,6 +1238,20 @@ class TvVideoRouteArgs {
   String toString() {
     return 'TvVideoRouteArgs{key: $key, videoId: $videoId}';
   }
+}
+
+/// generated route for
+/// [TvWelcomeWizardScreen]
+class TvWelcomeWizardRoute extends PageRouteInfo<void> {
+  const TvWelcomeWizardRoute({List<PageRouteInfo>? children})
+      : super(
+          TvWelcomeWizardRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'TvWelcomeWizardRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for

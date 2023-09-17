@@ -31,6 +31,9 @@ import 'package:invidious/settings/views/tv/screens/settings.dart';
 import 'package:invidious/settings/views/tv/screens/sponsor_block_settings.dart';
 import 'package:invidious/subscription_management/view/screens/manage_subscriptions.dart';
 import 'package:invidious/utils/models/paginatedList.dart';
+import 'package:invidious/utils/views/tv/components/select_from_list.dart';
+import 'package:invidious/utils/views/tv/components/tv_plain_text.dart';
+import 'package:invidious/utils/views/tv/components/tv_text_field.dart';
 import 'package:invidious/videos/models/base_video.dart';
 import 'package:invidious/videos/models/video_in_list.dart';
 import 'package:invidious/videos/views/screens/subscriptions.dart';
@@ -38,6 +41,7 @@ import 'package:invidious/videos/views/screens/video.dart';
 import 'package:invidious/videos/views/tv/screens/video.dart';
 import 'package:invidious/videos/views/tv/screens/video_grid_view.dart';
 import 'package:invidious/welcome_wizard/views/screens/welcome_wizard.dart';
+import 'package:invidious/welcome_wizard/views/tv/components/welcome_wizard.dart';
 
 import 'channels/views/screens/channel.dart';
 import 'channels/views/tv/screens/channel.dart';
@@ -47,7 +51,6 @@ import 'home/views/screens/home.dart';
 import 'main.dart';
 
 part 'router.gr.dart';
-
 
 const pathManageSingleServerFromWizard = '/wizard/manage-single-server';
 const pathManageSingleServerFromSettings = 'manage-single-server';
@@ -70,12 +73,23 @@ class AppRouter extends _$AppRouter {
             AutoRoute(
               path: '/',
               page: TvHomeRoute.page,
-              initial: true,
+              initial: hasServer,
             ),
-      AutoRoute(page: TvChannelRoute.page),
-      AutoRoute(page: TvGridRoute.page),
-      AutoRoute(page: TvVideoRoute.page),
-      AutoRoute(page: TvSearchRoute.page)
+            AutoRoute(page: TvWelcomeWizardRoute.page),
+            AutoRoute(page: TvChannelRoute.page),
+            AutoRoute(page: TvGridRoute.page),
+            AutoRoute(page: TvVideoRoute.page),
+            AutoRoute(page: TvSearchRoute.page),
+            AutoRoute(page: TvPlayerRoute.page),
+            AutoRoute(page: TvPlaylistGridRoute.page),
+            AutoRoute(page: TvPlaylistRoute.page),
+            AutoRoute(page: TVSettingsRoute.page),
+            AutoRoute(page: TvSettingsManageServersRoute.page),
+            AutoRoute(page: TvSearchHistorySettingsRoute.page),
+            AutoRoute(page: TvSponsorBlockSettingsRoute.page),
+            AutoRoute(page: TvManageSingleServerRoute.page),
+            AutoRoute(page: TvSelectFromListRoute.page),
+      AutoRoute(page: TvTextFieldRoute.page)
           ]
         : [
             AutoRoute(

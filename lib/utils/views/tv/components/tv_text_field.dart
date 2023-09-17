@@ -1,5 +1,8 @@
+import 'package:auto_route/annotations.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:invidious/globals.dart';
+import 'package:invidious/router.dart';
 import 'package:invidious/utils.dart';
 import 'package:invidious/utils/views/tv/components/tv_overscan.dart';
 
@@ -34,17 +37,16 @@ class TvTextField extends StatelessWidget {
       : super(key: key);
 
   openTextField(BuildContext context) {
-    Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => TvTextFieldFiller(
-              controller: controller,
-              autocorrect: autocorrect,
-              autofocus: autofocus,
-              onSubmitted: onSubmitted,
-              textInputAction: textInputAction,
-              obscureText: obscureText,
-              autofillHints: autofillHints,
-              decoration: decoration,
-            )));
+    AutoRouter.of(context).push(TvTextFieldRoute(
+      controller: controller,
+      autocorrect: autocorrect,
+      autofocus: autofocus,
+      onSubmitted: onSubmitted,
+      textInputAction: textInputAction,
+      obscureText: obscureText,
+      autofillHints: autofillHints,
+      decoration: decoration,
+    ));
   }
 
   @override
@@ -65,9 +67,7 @@ class TvTextField extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: AnimatedContainer(
             duration: animationDuration ~/ 2,
-            decoration: BoxDecoration(
-                color: hasFocus ? colors.secondaryContainer : colors.background,
-                borderRadius: hasFocus ? BorderRadius.circular(10) : null),
+            decoration: BoxDecoration(color: hasFocus ? colors.secondaryContainer : colors.background, borderRadius: hasFocus ? BorderRadius.circular(10) : null),
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
@@ -75,13 +75,10 @@ class TvTextField extends StatelessWidget {
                   leading ?? const SizedBox.shrink(),
                   Expanded(
                     child: Container(
-                        decoration: BoxDecoration(
-                            border: Border(bottom: BorderSide(width: 2, color: colors.secondaryContainer))),
+                        decoration: BoxDecoration(border: Border(bottom: BorderSide(width: 2, color: colors.secondaryContainer))),
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: showLabel
-                              ? decoration!.label!
-                              : Text((obscureText ?? false) ? "************" : controller.text),
+                          child: showLabel ? decoration!.label! : Text((obscureText ?? false) ? "************" : controller.text),
                         )),
                   ),
                   trailing ?? const SizedBox.shrink()
@@ -95,7 +92,8 @@ class TvTextField extends StatelessWidget {
   }
 }
 
-class TvTextFieldFiller extends StatelessWidget {
+@RoutePage()
+class TvTextFieldScreen extends StatelessWidget {
   final TextEditingController controller;
   final bool? autofocus;
   final bool? autocorrect;
@@ -106,17 +104,8 @@ class TvTextFieldFiller extends StatelessWidget {
   final Iterable<String>? autofillHints;
   final InputDecoration? decoration;
 
-  const TvTextFieldFiller(
-      {Key? key,
-      required this.controller,
-      this.autofocus,
-      this.autocorrect,
-      this.focusNode,
-      this.onSubmitted,
-      this.textInputAction,
-      this.obscureText,
-      this.autofillHints,
-      this.decoration})
+  const TvTextFieldScreen(
+      {Key? key, required this.controller, this.autofocus, this.autocorrect, this.focusNode, this.onSubmitted, this.textInputAction, this.obscureText, this.autofillHints, this.decoration})
       : super(key: key);
 
   @override

@@ -1,10 +1,12 @@
 import 'package:auto_route/annotations.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/app/states/app.dart';
 import 'package:invidious/extensions.dart';
+import 'package:invidious/router.dart';
 import 'package:invidious/settings/views/tv/screens/manage_servers.dart';
 import 'package:invidious/settings/views/tv/screens/search_history_settings.dart';
 import 'package:invidious/settings/views/tv/screens/sponsor_block_settings.dart';
@@ -26,36 +28,15 @@ class TVSettingsScreen extends StatelessWidget {
   openSelectCountry(BuildContext context) {
     AppLocalizations locals = AppLocalizations.of(context)!;
     var cubit = context.read<SettingsCubit>();
-
-    Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) {
-        var countryNames = countryCodes.map((e) => e.name).toList();
-        countryNames.sort();
-        return TvSelectFromList(
-          title: locals.selectBrowsingCountry,
-          options: countryNames,
-          selected: cubit.state.country.name,
-          onSelect: cubit.selectCountry,
-        );
-      },
+    var countryNames = countryCodes.map((e) => e.name).toList();
+    countryNames.sort();
+    AutoRouter.of(context).push(TvSelectFromListRoute(
+      title: locals.selectBrowsingCountry,
+      options: countryNames,
+      selected: cubit.state.country.name,
+      onSelect: cubit.selectCountry,
     ));
   }
-
-/*
-  openSelectOnStart(BuildContext context) {
-    AppLocalizations locals = AppLocalizations.of(context)!;
-    var cubit = context.read<SettingsCubit>();
-    var categories = getCategories(context);
-    Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) => TvSelectFromList(
-        title: locals.whenAppStartsShow,
-        options: categories,
-        selected: categories[cubit.state.onOpen],
-        onSelect: (selected) => cubit.selectOnOpen(selected, categories),
-      ),
-    ));
-  }
-*/
 
   List<String> getCategories(BuildContext context) {
     var locals = AppLocalizations.of(context)!;
@@ -63,21 +44,15 @@ class TVSettingsScreen extends StatelessWidget {
   }
 
   openManageServers(BuildContext context) {
-    Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) => const TvSettingsManageServersScreen(),
-    ));
+    AutoRouter.of(context).push(const TvSettingsManageServersRoute());
   }
 
   openSponsorBlockSettings(BuildContext context) {
-    Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) => const TvSponsorBlockSettingsScreen(),
-    ));
+    AutoRouter.of(context).push(const TvSponsorBlockSettingsRoute());
   }
 
   openSearchHistorySettings(BuildContext context) {
-    Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) => const TvSearchHistorySettingsScreen(),
-    ));
+    AutoRouter.of(context).push(const TvSearchHistorySettingsRoute());
   }
 
   showSelectLanguage(BuildContext context) {
@@ -87,24 +62,19 @@ class TVSettingsScreen extends StatelessWidget {
     var cubit = context.read<SettingsCubit>();
 
     List<String>? localeString = cubit.state.locale?.split('_');
-    Locale? selected = localeString != null
-        ? Locale.fromSubtags(
-            languageCode: localeString[0], scriptCode: localeString.length >= 2 ? localeString[1] : null)
-        : null;
+    Locale? selected = localeString != null ? Locale.fromSubtags(languageCode: localeString[0], scriptCode: localeString.length >= 2 ? localeString[1] : null) : null;
 
-    Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) => TvSelectFromList(
-        title: locals.appLanguage,
-        options: [locals.followSystem, ...localsStrings],
-        selected: selected?.nativeDisplayLanguageScript ?? locals.followSystem,
-        onSelect: (String selected) {
-          if (selected == locals.followSystem) {
-            cubit.setLocale(localsList, localsStrings, null);
-          } else {
-            cubit.setLocale(localsList, localsStrings, selected);
-          }
-        },
-      ),
+    AutoRouter.of(context).push(TvSelectFromListRoute(
+      title: locals.appLanguage,
+      options: [locals.followSystem, ...localsStrings],
+      selected: selected?.nativeDisplayLanguageScript ?? locals.followSystem,
+      onSelect: (String selected) {
+        if (selected == locals.followSystem) {
+          cubit.setLocale(localsList, localsStrings, null);
+        } else {
+          cubit.setLocale(localsList, localsStrings, selected);
+        }
+      },
     ));
   }
 
@@ -112,18 +82,14 @@ class TVSettingsScreen extends StatelessWidget {
     var locals = AppLocalizations.of(context)!;
     ColorScheme colors = Theme.of(context).colorScheme;
     var cubit = context.read<SettingsCubit>();
-
-    Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) => TvSelectFromList(
-        title: locals.themeBrightness,
-        options: ThemeMode.values.map((e) => cubit.getThemeLabel(locals, e)).toList(),
-        selected: cubit.getThemeLabel(locals, cubit.state.themeMode),
-        onSelect: (String selected) {
-          ThemeMode? theme =
-              ThemeMode.values.firstWhereOrNull((element) => cubit.getThemeLabel(locals, element) == selected);
-          cubit.setThemeMode(theme);
-        },
-      ),
+    AutoRouter.of(context).push(TvSelectFromListRoute(
+      title: locals.themeBrightness,
+      options: ThemeMode.values.map((e) => cubit.getThemeLabel(locals, e)).toList(),
+      selected: cubit.getThemeLabel(locals, cubit.state.themeMode),
+      onSelect: (String selected) {
+        ThemeMode? theme = ThemeMode.values.firstWhereOrNull((element) => cubit.getThemeLabel(locals, element) == selected);
+        cubit.setThemeMode(theme);
+      },
     ));
   }
 
@@ -172,11 +138,8 @@ class TVSettingsScreen extends StatelessWidget {
                 SettingsTitle(title: locals.servers),
                 BlocBuilder<AppCubit, AppState>(
                     buildWhen: (previous, current) => previous.server != current.server,
-                    builder: (context, app) => SettingsTile(
-                        title: locals.manageServers,
-                        description:
-                            app.server != null ? locals.currentServer(db.getCurrentlySelectedServer().url) : "",
-                        onSelected: openManageServers)),
+                    builder: (context, app) =>
+                        SettingsTile(title: locals.manageServers, description: app.server != null ? locals.currentServer(db.getCurrentlySelectedServer().url) : "", onSelected: openManageServers)),
                 SettingsTitle(title: locals.videoPlayer),
                 SettingsTile(
                   title: locals.useDash,
@@ -273,9 +236,7 @@ class AdjustmentSettingTile extends StatelessWidget {
   final String? description;
   final Function(int) onNewValue;
 
-  const AdjustmentSettingTile(
-      {Key? key, required this.onNewValue, required this.title, this.description, required this.value, this.step = 1})
-      : super(key: key);
+  const AdjustmentSettingTile({Key? key, required this.onNewValue, required this.title, this.description, required this.value, this.step = 1}) : super(key: key);
 
   onKeyEvent(FocusNode node, KeyEvent event, BuildContext ctx) {
     if (event is KeyUpEvent) {
@@ -338,17 +299,7 @@ class SettingsTile extends StatelessWidget {
   final Widget? leading;
   final Function(FocusNode, KeyEvent, BuildContext)? onKeyEvent;
 
-  const SettingsTile(
-      {Key? key,
-      required this.title,
-      this.description,
-      this.onSelected,
-      this.trailing,
-      this.autofocus,
-      this.leading,
-      this.enabled,
-      this.onKeyEvent})
-      : super(key: key);
+  const SettingsTile({Key? key, required this.title, this.description, this.onSelected, this.trailing, this.autofocus, this.leading, this.enabled, this.onKeyEvent}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -357,9 +308,7 @@ class SettingsTile extends StatelessWidget {
     return Focus(
         canRequestFocus: enabled,
         autofocus: autofocus ?? false,
-        onKeyEvent: (node, event) => onKeyEvent != null
-            ? onKeyEvent!(node, event, context)
-            : onTvSelect(event, context, onSelected != null ? onSelected! : (context) {}),
+        onKeyEvent: (node, event) => onKeyEvent != null ? onKeyEvent!(node, event, context) : onTvSelect(event, context, onSelected != null ? onSelected! : (context) {}),
         child: Builder(builder: (ctx) {
           final FocusNode focusNode = Focus.of(ctx);
           final bool hasFocus = focusNode.hasFocus;
@@ -374,8 +323,7 @@ class SettingsTile extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: textTheme.headlineSmall!
-                      .copyWith(color: enabled ?? true ? colors.primary : colors.primary.withOpacity(0.5)),
+                  style: textTheme.headlineSmall!.copyWith(color: enabled ?? true ? colors.primary : colors.primary.withOpacity(0.5)),
                 ),
                 description != null
                     ? Text(

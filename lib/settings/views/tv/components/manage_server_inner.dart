@@ -1,6 +1,8 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:invidious/router.dart';
 import 'package:invidious/settings/states/settings.dart';
 import 'package:invidious/settings/views/tv/screens/manage_single_server.dart';
 import 'package:invidious/utils.dart';
@@ -15,12 +17,7 @@ class TvManageServersInner extends StatelessWidget {
 
   openServer(BuildContext context, Server s) {
     var cubit = context.read<ServerListSettingsCubit>();
-    Navigator.of(context)
-        .push(MaterialPageRoute(
-          builder: (context) => TvManageSingleServerScreen(
-            server: s,
-          ),
-        ))
+        AutoRouter.of(context).push(TvManageSingleServerRoute(server: s))
         .then((value) => cubit.refreshServers());
   }
 

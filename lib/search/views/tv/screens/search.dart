@@ -1,10 +1,12 @@
 import 'package:auto_route/annotations.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/channels/views/tv/screens/channel.dart';
 import 'package:invidious/playlists/models/playlist.dart';
 import 'package:invidious/playlists/views/components/playlist_in_list.dart';
+import 'package:invidious/router.dart';
 import 'package:invidious/search/models/search_type.dart';
 import 'package:invidious/utils/models/paginatedList.dart';
 import 'package:invidious/utils/views/components/placeholders.dart';
@@ -236,8 +238,6 @@ class TvSearchScreen extends StatelessWidget {
   }
 
   openChannel(BuildContext context, Channel c) {
-    Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) => TvChannelScreen(channelId: c.authorId),
-    ));
+    AutoRouter.of(context).push(TvChannelRoute(channelId: c.authorId));
   }
 }
