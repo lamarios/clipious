@@ -3,10 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/player/states/player.dart';
 import 'package:invidious/videos/models/base_video.dart';
+import 'package:invidious/videos/views/components/add_to_playlist_button.dart';
 import 'package:invidious/videos/views/components/download_modal_sheet.dart';
 
 import '../../../main.dart';
-import 'add_to_playlist.dart';
 import 'add_to_queue_button.dart';
 
 class VideoModalSheet extends StatelessWidget {
@@ -23,11 +23,6 @@ class VideoModalSheet extends StatelessWidget {
             video: video,
           );
         });
-  }
-
-  void addToPlaylist(BuildContext context) {
-    Navigator.of(context).pop();
-    AddToPlaylist.showAddToPlaylistDialog(context, video.videoId);
   }
 
   void playNext(BuildContext context) {
@@ -71,15 +66,10 @@ class VideoModalSheet extends StatelessWidget {
         child: Wrap(
           alignment: WrapAlignment.center,
           children: [
-            Padding(
-              padding: const EdgeInsets.only(right: 16.0),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  IconButton.filledTonal(onPressed: () => addToPlaylist(context), icon: const Icon(Icons.playlist_add)),
-                  Text(locals.addToPlaylist)
-                ],
-              ),
+            AddToPlayListButton(
+              videoId: video.videoId,
+              type: AddToPlayListButtonType.modalSheet,
+              afterAdd: () => Navigator.pop(context),
             ),
             Padding(
               padding: const EdgeInsets.only(right: 16.0),

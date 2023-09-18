@@ -9,14 +9,11 @@ import 'package:invidious/globals.dart';
 import 'package:invidious/router.dart';
 import 'package:invidious/settings/states/settings.dart';
 import 'package:invidious/utils/views/components/placeholders.dart';
-import 'package:invidious/videos/states/add_to_playlist_button.dart';
 import 'package:invidious/videos/states/video.dart';
-import 'package:invidious/videos/states/video_like.dart';
 import 'package:invidious/videos/views/components/add_to_playlist_button.dart';
 import 'package:invidious/videos/views/components/download_modal_sheet.dart';
 import 'package:invidious/videos/views/components/inner_view_tablet.dart';
 import 'package:invidious/videos/views/components/innter_view.dart';
-import 'package:invidious/videos/views/components/like_button.dart';
 import 'package:invidious/videos/views/components/video_share_button.dart';
 
 import '../../../player/states/player.dart';
@@ -82,13 +79,6 @@ class VideoScreen extends StatelessWidget {
         BlocProvider(
             create: (BuildContext context) =>
                 VideoCubit(VideoState(videoId: videoId), downloadManager, player, settings)),
-        BlocProvider(
-            create: (BuildContext context) => AddToPlaylistButtonCubit(AddToPlaylistButtonState(videoId: videoId))),
-        BlocProvider(
-          create: (context) => VideoLikeButtonCubit(VideoLikeButtonController(videoId: videoId),
-              addToPlaylistButtonCubit: context.read<AddToPlaylistButtonCubit>()),
-        ),
-        // BlocProvider(create: (context) => AddToPlaylistCubit(AddToPlaylistController(videoId), videoLikeButtonCubit: context.read<VideoLikeButtonCubit>(), addToPlaylistButtonCubit: context.read<AddToPlaylistButtonCubit>()),)
       ],
       child: BlocBuilder<VideoCubit, VideoState>(
         builder: (context, _) {
@@ -154,8 +144,11 @@ class VideoScreen extends StatelessWidget {
                           visible: _.video != null,
                           child: VideoShareButton(video: _.video!),
                         ),
+/*
                         VideoLikeButton(videoId: _.video?.videoId),
                         VideoAddToPlaylistButton(videoId: _.video?.videoId),
+*/
+                        AddToPlayListButton(videoId: _.videoId)
                       ],
                 scrolledUnderElevation: 0,
               ),

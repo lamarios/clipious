@@ -17,6 +17,8 @@ abstract class _$AddToPlaylistControllerCWProxy {
 
   AddToPlaylistController isLoggedIn(bool isLoggedIn);
 
+  AddToPlaylistController isVideoLiked(bool isVideoLiked);
+
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `AddToPlaylistController(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
   /// Usage
@@ -29,6 +31,7 @@ abstract class _$AddToPlaylistControllerCWProxy {
     String? videoId,
     bool? loading,
     bool? isLoggedIn,
+    bool? isVideoLiked,
   });
 }
 
@@ -58,6 +61,10 @@ class _$AddToPlaylistControllerCWProxyImpl
       this(isLoggedIn: isLoggedIn);
 
   @override
+  AddToPlaylistController isVideoLiked(bool isVideoLiked) =>
+      this(isVideoLiked: isVideoLiked);
+
+  @override
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `AddToPlaylistController(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
@@ -71,6 +78,7 @@ class _$AddToPlaylistControllerCWProxyImpl
     Object? videoId = const $CopyWithPlaceholder(),
     Object? loading = const $CopyWithPlaceholder(),
     Object? isLoggedIn = const $CopyWithPlaceholder(),
+    Object? isVideoLiked = const $CopyWithPlaceholder(),
   }) {
     return AddToPlaylistController._(
       playlists == const $CopyWithPlaceholder() || playlists == null
@@ -93,6 +101,10 @@ class _$AddToPlaylistControllerCWProxyImpl
           ? _value.isLoggedIn
           // ignore: cast_nullable_to_non_nullable
           : isLoggedIn as bool,
+      isVideoLiked == const $CopyWithPlaceholder() || isVideoLiked == null
+          ? _value.isVideoLiked
+          // ignore: cast_nullable_to_non_nullable
+          : isVideoLiked as bool,
     );
   }
 }
