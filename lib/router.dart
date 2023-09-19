@@ -44,6 +44,7 @@ import 'package:invidious/videos/views/tv/screens/video.dart';
 import 'package:invidious/videos/views/tv/screens/video_grid_view.dart';
 import 'package:invidious/welcome_wizard/views/screens/welcome_wizard.dart';
 import 'package:invidious/welcome_wizard/views/tv/components/welcome_wizard.dart';
+import 'package:logging/logging.dart';
 
 import 'channels/views/screens/channel.dart';
 import 'channels/views/tv/screens/channel.dart';
@@ -58,6 +59,8 @@ const pathManageSingleServerFromWizard = '/wizard/manage-single-server';
 const pathManageSingleServerFromSettings = 'manage-single-server';
 
 final appRouter = AppRouter();
+
+final log = Logger('Router');
 
 @AutoRouterConfig(replaceInRouteName: 'Screen,Route')
 class AppRouter extends _$AppRouter {
@@ -130,7 +133,7 @@ class AppRouter extends _$AppRouter {
 class MyRouteObserver extends AutoRouterObserver {
   @override
   void didPush(Route route, Route? previousRoute) {
-    print('New route pushed: ${route.settings.name}');
+    log.fine('New route pushed: ${route.settings.name}');
     route.navigator?.context.read<PlayerCubit>().showMiniPlayer();
   }
 
