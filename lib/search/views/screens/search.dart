@@ -17,6 +17,10 @@ import '../../../utils/views/components/paginated_list_view.dart';
 import '../../../videos/views/components/video_list.dart';
 import '../../states/search.dart';
 
+
+//Do not change, invidious doesn't allow any specific value, it's to make the paginated lists work as expected
+const searchPageSize = 20;
+
 @RoutePage()
 class SearchScreen extends StatelessWidget {
   final String? query;
@@ -138,68 +142,60 @@ class SearchScreen extends StatelessWidget {
                             child: FractionallySizedBox(
                               widthFactor: 1,
                               child: [
-                                _.videos.isNotEmpty
-                                    ? Padding(
-                                        padding: const EdgeInsets.only(top: 8.0),
-                                        child: VideoList(
-                                          paginatedVideoList: SearchPaginatedList<VideoInList>(
-                                              type: SearchType.video,
-                                              query: _.queryController.value.text,
-                                              items: _.videos,
-                                              getFromResults: (res) => res.videos,
-                                              sortBy: _.sortBy),
-                                        ),
-                                      )
-                                    : Center(child: Text(locals.nVideos(0))),
-                                _.channels.isNotEmpty
-                                    ? PaginatedListView<Channel>(
-                                        paginatedList: SearchPaginatedList<Channel>(
-                                            type: SearchType.channel,
-                                            query: _.queryController.value.text,
-                                            items: _.channels,
-                                            getFromResults: (res) => res.channels,
-                                            sortBy: _.sortBy),
-                                        startItems: _.channels,
-                                        itemBuilder: (e) => InkWell(
-                                              onTap: () {
-                                                AutoRouter.of(context).push(ChannelRoute(channelId: e.authorId));
-                                              },
-                                              child: Padding(
-                                                padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 20),
-                                                child: Row(
-                                                  children: [
-                                                    Expanded(
-                                                        child: Text(
-                                                      e.author,
-                                                      style: TextStyle(color: colorScheme.primary),
-                                                    )),
-                                                    const Padding(
-                                                      padding: EdgeInsets.only(right: 8.0),
-                                                      child: Icon(
-                                                        Icons.people,
-                                                        size: 15,
-                                                      ),
-                                                    ),
-                                                    Text(compactCurrency.format(e.subCount)),
-                                                  ],
+                                VideoList(
+                                  paginatedVideoList: PageBasedPaginatedList<VideoInList>(
+                                    getItemsFunc: (page, maxResults) => service
+                                        .search(_.queryController.value.text,
+                                            page: page, sortBy: _.sortBy, type: SearchType.video)
+                                        .then((value) => value.videos),
+                                    maxResults: searchPageSize,
+                                  ),
+                                ),
+                                PaginatedListView<Channel>(
+                                    paginatedList: PageBasedPaginatedList<Channel>(
+                                      getItemsFunc: (page, maxResults) => service
+                                          .search(_.queryController.value.text,
+                                              page: page, sortBy: _.sortBy, type: SearchType.channel)
+                                          .then((value) => value.channels),
+                                      maxResults: searchPageSize,
+                                    ),
+                                    startItems: [],
+                                    itemBuilder: (e) => InkWell(
+                                          onTap: () {
+                                            AutoRouter.of(context).push(ChannelRoute(channelId: e.authorId));
+                                          },
+                                          child: Padding(
+                                            padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 20),
+                                            child: Row(
+                                              children: [
+                                                Expanded(
+                                                    child: Text(
+                                                  e.author,
+                                                  style: TextStyle(color: colorScheme.primary),
+                                                )),
+                                                const Padding(
+                                                  padding: EdgeInsets.only(right: 8.0),
+                                                  child: Icon(
+                                                    Icons.people,
+                                                    size: 15,
+                                                  ),
                                                 ),
-                                              ),
-                                            ))
-                                    : Center(
-                                        child: Text(locals.noChannels),
-                                      ),
-                                _.playlists.isNotEmpty
-                                    ? FractionallySizedBox(
+                                                Text(compactCurrency.format(e.subCount)),
+                                              ],
+                                            ),
+                                          ),
+                                        )),
+                                    FractionallySizedBox(
                                         child: PlaylistList(
-                                            paginatedList: SearchPaginatedList<Playlist>(
-                                                type: SearchType.playlist,
-                                                query: _.queryController.value.text,
-                                                items: _.playlists,
-                                                getFromResults: (res) => res.playlists,
-                                                sortBy: _.sortBy),
+                                            paginatedList: PageBasedPaginatedList<Playlist>(
+                                              getItemsFunc: (page, maxResults) => service
+                                                  .search(_.queryController.value.text,
+                                                  page: page, sortBy: _.sortBy, type: SearchType.playlist)
+                                                  .then((value) => value.playlists),
+                                              maxResults: searchPageSize,
+                                               ),
                                             canDeleteVideos: false),
                                       )
-                                    : Center(child: Text(locals.noPlaylists))
                               ][_.selectedIndex],
                             ),
                           ),

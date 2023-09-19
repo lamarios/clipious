@@ -74,23 +74,6 @@ class SearchCubit<T extends SearchState> extends Cubit<SearchState> {
   search(String value) async {
     var state = this.state.copyWith();
     state.showResults = true;
-    state.loading = true;
-    state.videos = [];
-    state.channels = [];
-    state.playlists = [];
-    emit(state);
-
-    state = state.copyWith();
-    List<SearchResults> results = await Future.wait([
-      service.search(state.queryController.value.text, type: SearchType.video, sortBy: state.sortBy),
-      service.search(state.queryController.value.text, type: SearchType.channel, sortBy: state.sortBy),
-      service.search(state.queryController.value.text, type: SearchType.playlist, sortBy: state.sortBy)
-    ]);
-
-    state.videos = results[0].videos;
-    state.channels = results[1].channels;
-    state.playlists = results[2].playlists;
-    state.loading = false;
     emit(state);
   }
 
@@ -116,12 +99,6 @@ class SearchState extends Clonable<SearchState> {
 
   int selectedIndex;
 
-  List<VideoInList> videos;
-
-  List<Channel> channels;
-
-  List<Playlist> playlists;
-
   bool searchNow;
 
   List<String> suggestions;
@@ -130,7 +107,6 @@ class SearchState extends Clonable<SearchState> {
 
   bool showResults;
 
-  bool loading;
 
   int videoPage, channelPage, playlistPage;
 
@@ -152,14 +128,10 @@ class SearchState extends Clonable<SearchState> {
       String? query})
       : queryController = queryController ?? TextEditingController(text: query ?? ''),
         selectedIndex = selectedIndex ?? 0,
-        channels = channels ?? [],
-        videos = videos ?? [],
-        playlists = playlists ?? [],
         searchNow = searchNow ?? false,
         suggestions = suggestions ?? [],
         sortBy = sortBy ?? SearchSortBy.relevance,
         showResults = showResults ?? false,
-        loading = loading ?? false,
         videoPage = videoPage ?? 1,
         channelPage = channelPage ?? 1,
         playlistPage = playlistPage ?? 1;
@@ -167,14 +139,10 @@ class SearchState extends Clonable<SearchState> {
   SearchState.inLine(
       this.queryController,
       this.selectedIndex,
-      this.videos,
-      this.channels,
-      this.playlists,
       this.searchNow,
       this.suggestions,
       this.sortBy,
       this.showResults,
-      this.loading,
       this.videoPage,
       this.channelPage,
       this.playlistPage);

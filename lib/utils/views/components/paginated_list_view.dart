@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:invidious/utils/views/components/top_loading.dart';
 
 import '../../models/paginatedList.dart';
 import '../../states/paginated_list_view.dart';
@@ -18,14 +19,19 @@ class PaginatedListView<T> extends StatelessWidget {
       create: (context) => PaginatedListCubit<T>(
           PaginatedListViewController<T>(paginatedList: this.paginatedList, startItems: this.startItems)),
       child: BlocBuilder<PaginatedListCubit<T>, PaginatedListViewController<T>>(
-          builder: (context, _) => ListView.builder(
-                controller: _.scrollController,
-                itemCount: _.items.length,
-                itemBuilder: (BuildContext context, int index) {
-                  T item = _.items[index];
-                  return itemBuilder(item);
-                },
-              )),
+          builder: (context, _) => Stack(
+            children: [
+              if(_.loading) const TopListLoading(),
+              ListView.builder(
+                    controller: _.scrollController,
+                    itemCount: _.items.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      T item = _.items[index];
+                      return itemBuilder(item);
+                    },
+                  ),
+            ],
+          )),
     );
   }
 }

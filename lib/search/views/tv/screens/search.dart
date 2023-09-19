@@ -128,13 +128,7 @@ class TvSearchScreen extends StatelessWidget {
                                           child: SingleChildScrollView(
                                         child: Column(
                                           crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: search.loading
-                                              ? [
-                                                  const Center(
-                                                    child: CircularProgressIndicator(),
-                                                  )
-                                                ]
-                                              : [
+                                          children:  [
                                                   Visibility(
                                                       visible: search.videos.isNotEmpty ?? false,
                                                       child: Text(
@@ -146,7 +140,7 @@ class TvSearchScreen extends StatelessWidget {
                                                     child: Focus(
                                                         focusNode: tv.resultFocus,
                                                         child: TvHorizontalVideoList(
-                                                            paginatedVideoList: SearchPaginatedList<VideoInList>(
+                                                            paginatedVideoList: PageBasedPaginatedList<VideoInList>(
                                                                 getFromResults: (res) => res.videos,
                                                                 sortBy: search.sortBy,
                                                                 query: search.queryController.value.text,
