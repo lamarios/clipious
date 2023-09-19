@@ -5,12 +5,11 @@ import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/app/states/app.dart';
-import 'package:invidious/foreground_service.dart';
 import 'package:invidious/downloads/states/download_manager.dart';
+import 'package:invidious/foreground_service.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/httpOverrides.dart';
 import 'package:invidious/mediaHander.dart';
@@ -39,7 +38,12 @@ Future<void> main() async {
     debugPrint('[${record.level.name}] [${record.loggerName}] ${record.message}');
     // we don't want debug
     if (record.level == Level.INFO || record.level == Level.SEVERE) {
-      db.insertLogs(AppLog(logger: record.loggerName, level: record.level.name, time: record.time, message: record.message, stacktrace: record.stackTrace?.toString()));
+      db.insertLogs(AppLog(
+          logger: record.loggerName,
+          level: record.level.name,
+          time: record.time,
+          message: record.message,
+          stacktrace: record.stackTrace?.toString()));
     }
   });
 
@@ -82,7 +86,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AppCubit, AppState>(
-        buildWhen: (previous, current) => previous.selectedIndex == current.selectedIndex || previous.server != current.server,
+        buildWhen: (previous, current) =>
+            previous.selectedIndex == current.selectedIndex || previous.server != current.server,
         // we want to rebuild only when anything other than the navigation index is changed
         builder: (context, _) {
           var app = context.read<AppCubit>();
@@ -130,49 +135,62 @@ class MyApp extends StatelessWidget {
             }
 
             log.fine('locale from db ${db.getSettings(LOCALE)?.value} from cubit: ${dbLocale}, ${localeString}');
-            Locale? savedLocale = localeString != null ? Locale.fromSubtags(languageCode: localeString[0], scriptCode: localeString.length >= 2 ? localeString[1] : null) : null;
+            Locale? savedLocale = localeString != null
+                ? Locale.fromSubtags(
+                    languageCode: localeString[0], scriptCode: localeString.length >= 2 ? localeString[1] : null)
+                : null;
 
             return MaterialApp.router(
-                routerConfig: appRouter.config(),
-                locale: savedLocale,
-                localizationsDelegates: AppLocalizations.localizationsDelegates,
-                localeListResolutionCallback: (locales, supportedLocales) {
-                  log.info('device locales=$locales supported locales=$supportedLocales, saved: $savedLocale');
-                  if (savedLocale != null) {
-                    log.info("using saved locale, $savedLocale");
-                    return savedLocale;
-                  }
-                  if (locales != null) {
-                    for (Locale locale in locales) {
-                      // if device language is supported by the app,
-                      // just return it to set it as current app language
-                      if (supportedLocales.contains(locale)) {
-                        log.info("Locale match found, $locale");
-                        return locale;
-                      } else {
-                        Locale? match = supportedLocales.where((element) => element.languageCode == locale.languageCode).firstOrNull;
-                        if (match != null) {
-                          log.info("found partial match $locale with $match");
-                          return match;
-                        }
+              routerConfig: appRouter.config(
+                navigatorObservers: () => [MyRouteObserver()],
+              ),
+              locale: savedLocale,
+              localizationsDelegates: AppLocalizations.localizationsDelegates,
+              localeListResolutionCallback: (locales, supportedLocales) {
+                log.info('device locales=$locales supported locales=$supportedLocales, saved: $savedLocale');
+                if (savedLocale != null) {
+                  log.info("using saved locale, $savedLocale");
+                  return savedLocale;
+                }
+                if (locales != null) {
+                  for (Locale locale in locales) {
+                    // if device language is supported by the app,
+                    // just return it to set it as current app language
+                    if (supportedLocales.contains(locale)) {
+                      log.info("Locale match found, $locale");
+                      return locale;
+                    } else {
+                      Locale? match =
+                          supportedLocales.where((element) => element.languageCode == locale.languageCode).firstOrNull;
+                      if (match != null) {
+                        log.info("found partial match $locale with $match");
+                        return match;
                       }
                     }
                   }
-                  // if device language is not supported by the app,
-                  // the app will set it to english but return this to set to Bahasa instead
-                  log.info("locale not supported, returning english");
-                  return const Locale('en', 'US');
-                },
-                supportedLocales: AppLocalizations.supportedLocales,
-                scaffoldMessengerKey: scaffoldKey,
-                debugShowCheckedModeBanner: false,
-                themeMode: ThemeMode.values.firstWhere((element) => element.name == settings.state.themeMode.name, orElse: () => ThemeMode.system),
-                title: 'Clipious',
-                theme: ThemeData(
-                    useMaterial3: true, colorScheme: lightColorScheme, progressIndicatorTheme: ProgressIndicatorThemeData(circularTrackColor: lightColorScheme.secondaryContainer.withOpacity(0.8))),
-                darkTheme: ThemeData(
-                    useMaterial3: true, colorScheme: darkColorScheme, progressIndicatorTheme: ProgressIndicatorThemeData(circularTrackColor: darkColorScheme.secondaryContainer.withOpacity(0.8))),
-                );
+                }
+                // if device language is not supported by the app,
+                // the app will set it to english but return this to set to Bahasa instead
+                log.info("locale not supported, returning english");
+                return const Locale('en', 'US');
+              },
+              supportedLocales: AppLocalizations.supportedLocales,
+              scaffoldMessengerKey: scaffoldKey,
+              debugShowCheckedModeBanner: false,
+              themeMode: ThemeMode.values.firstWhere((element) => element.name == settings.state.themeMode.name,
+                  orElse: () => ThemeMode.system),
+              title: 'Clipious',
+              theme: ThemeData(
+                  useMaterial3: true,
+                  colorScheme: lightColorScheme,
+                  progressIndicatorTheme: ProgressIndicatorThemeData(
+                      circularTrackColor: lightColorScheme.secondaryContainer.withOpacity(0.8))),
+              darkTheme: ThemeData(
+                  useMaterial3: true,
+                  colorScheme: darkColorScheme,
+                  progressIndicatorTheme: ProgressIndicatorThemeData(
+                      circularTrackColor: darkColorScheme.secondaryContainer.withOpacity(0.8))),
+            );
           });
         });
   }

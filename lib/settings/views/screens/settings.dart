@@ -100,7 +100,7 @@ class SettingsScreen extends StatelessWidget {
                       "Return YouTube Dislike",
                       locals.searchHistory,
                       locals.videoFilters
-                    ]).join(", ")),
+                    ]).join(", "), maxLines: 3, overflow: TextOverflow.ellipsis,),
                     onPressed: openBrowsingSettings,
                   ),
                   SettingsTile.navigation(
@@ -125,7 +125,7 @@ class SettingsScreen extends StatelessWidget {
                       "SponsorBlock",
                       locals.lockFullScreenToLandscape,
                       locals.fillFullscreen
-                    ]).join(", ")),
+                    ]).join(", "), maxLines: 3, overflow: TextOverflow.ellipsis,),
                     onPressed: openVideoPlayerSettings,
                   ),
                   SettingsTile.navigation(
@@ -143,7 +143,7 @@ class SettingsScreen extends StatelessWidget {
                         locals.themeBrightness,
                         locals.blackBackground,
                         locals.navigationBarStyle
-                      ]).join(", "),
+                      ]).join(", "), maxLines: 3, overflow: TextOverflow.ellipsis,
                     ),
                     onPressed: openAppearanceSettings,
                   ),

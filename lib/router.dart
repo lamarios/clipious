@@ -1,8 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:invidious/app/views/screens/main.dart';
 import 'package:invidious/app/views/tv/screens/tv_home.dart';
 import 'package:invidious/globals.dart';
+import 'package:invidious/player/states/player.dart';
 import 'package:invidious/player/views/tv/screens/tvPlayerView.dart';
 import 'package:invidious/playlists/models/playlist.dart';
 import 'package:invidious/playlists/views/screens/playlist.dart';
@@ -89,7 +91,7 @@ class AppRouter extends _$AppRouter {
             AutoRoute(page: TvSponsorBlockSettingsRoute.page),
             AutoRoute(page: TvManageSingleServerRoute.page),
             AutoRoute(page: TvSelectFromListRoute.page),
-      AutoRoute(page: TvTextFieldRoute.page)
+            AutoRoute(page: TvTextFieldRoute.page)
           ]
         : [
             AutoRoute(
@@ -123,4 +125,25 @@ class AppRouter extends _$AppRouter {
             AutoRoute(page: WelcomeWizardRoute.page, initial: !hasServer)
           ];
   }
+}
+
+class MyRouteObserver extends AutoRouterObserver {
+  @override
+  void didPush(Route route, Route? previousRoute) {
+    print('New route pushed: ${route.settings.name}');
+    route.navigator?.context.read<PlayerCubit>().showMiniPlayer();
+  }
+
+/*
+  // only override to observer tab routes
+  @override
+  void didInitTabRoute(TabPageRoute route, TabPageRoute? previousRoute) {
+    print('Tab route visited: ${route.name}');
+  }
+
+  @override
+  void didChangeTabRoute(TabPageRoute route, TabPageRoute previousRoute) {
+    print('Tab route re-visited: ${route.name}');
+  }
+*/
 }
