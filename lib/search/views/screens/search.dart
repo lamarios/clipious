@@ -159,7 +159,6 @@ class SearchScreen extends StatelessWidget {
                                           .then((value) => value.channels),
                                       maxResults: searchPageSize,
                                     ),
-                                    startItems: [],
                                     itemBuilder: (e) => InkWell(
                                           onTap: () {
                                             AutoRouter.of(context).push(ChannelRoute(channelId: e.authorId));

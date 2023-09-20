@@ -1,18 +1,14 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:bloc/bloc.dart';
 import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:invidious/globals.dart';
-import 'package:invidious/main.dart';
-import 'package:invidious/search/models/search_results.dart';
 import 'package:invidious/search/models/search_sort_by.dart';
 
 import '../../channels/models/channel.dart';
 import '../../playlists/models/playlist.dart';
 import '../../settings/states/settings.dart';
 import '../../videos/models/video_in_list.dart';
-import '../models/search_type.dart';
 
 part 'search.g.dart';
 
@@ -56,14 +52,15 @@ class SearchCubit<T extends SearchState> extends Cubit<SearchState> {
     }
   }
 
+  clearSearch(){
+    emit(state.copyWith(showResults: false));
+  }
+
   void getSuggestions({bool hideResult = true}) {
-    var state = this.state.copyWith();
-    state.showResults = !hideResult;
-    emit(state);
+    emit(state.copyWith(showResults: !hideResult));
     EasyDebounce.debounce('search-suggestions', const Duration(milliseconds: 500), () async {
-      var state = this.state.copyWith();
-      state.suggestions = (await service.getSearchSuggestion(state.queryController.value.text)).suggestions;
-      emit(state);
+      var suggestions = (await service.getSearchSuggestion(state.queryController.value.text)).suggestions;
+      emit(state.copyWith(suggestions: suggestions));
     });
   }
 
@@ -72,9 +69,7 @@ class SearchCubit<T extends SearchState> extends Cubit<SearchState> {
   }
 
   search(String value) async {
-    var state = this.state.copyWith();
-    state.showResults = true;
-    emit(state);
+    emit(state.copyWith(showResults: true));
   }
 
   setSearchQuery(String e) {
@@ -107,7 +102,6 @@ class SearchState extends Clonable<SearchState> {
 
   bool showResults;
 
-
   int videoPage, channelPage, playlistPage;
 
   SearchState(
@@ -136,16 +130,8 @@ class SearchState extends Clonable<SearchState> {
         channelPage = channelPage ?? 1,
         playlistPage = playlistPage ?? 1;
 
-  SearchState.inLine(
-      this.queryController,
-      this.selectedIndex,
-      this.searchNow,
-      this.suggestions,
-      this.sortBy,
-      this.showResults,
-      this.videoPage,
-      this.channelPage,
-      this.playlistPage);
+  SearchState.inLine(this.queryController, this.selectedIndex, this.searchNow, this.suggestions, this.sortBy,
+      this.showResults, this.videoPage, this.channelPage, this.playlistPage);
 
   @override
   SearchState clone() {
