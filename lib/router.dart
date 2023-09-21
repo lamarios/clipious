@@ -133,8 +133,10 @@ class AppRouter extends _$AppRouter {
 class MyRouteObserver extends AutoRouterObserver {
   @override
   void didPush(Route route, Route? previousRoute) {
-    log.fine('New route pushed: ${route.settings.name}');
-    route.navigator?.context.read<PlayerCubit>().showMiniPlayer();
+    log.fine('New route pushed: ${route.settings.name}, ${route.runtimeType}');
+    if (route.settings.name != null) {
+      route.navigator?.context.read<PlayerCubit>().showMiniPlayer();
+    }
   }
 
 /*
