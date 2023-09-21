@@ -1008,5 +1008,13 @@
         "example": "Monday, Wednesday, Friday"
       }
     }
+  },
+  "notificationsDescription": "Activar y revisar las notificaciones",
+  "@notificationsDescription": {
+    "description": "Setting description for notifications"
+  },
+  "notifications": "Notificaciones",
+  "@notifications": {
+    "description": "Notification settings title"
   }
 }
