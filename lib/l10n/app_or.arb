@@ -937,7 +937,7 @@
   "@videoFilterApplyDateToFilter": {
     "description": "Label for switch to allow user to customize video filter and set days of week and time to them"
   },
-  "layoutEditorExplanation": "ଆପଣ ନିଜ ହୋମ ସ୍କ୍ରିନରେ କ 'ଣ ଦେଖିବେ ତାହା ସ୍ଥିର କରିପାରିବେ, ଆପଣ ଆଭ୍ୟନ୍ତରୀଣ ସ୍କ୍ରୋଲିଂ ଏବଂ ଗୋଟିଏ ବଡ଼ ଉତ୍ସ ସହିତ 2 ଟି ଛୋଟ ଦୃଶ୍ୟ ପାଇପାରିବେ ।",
+  "layoutEditorExplanation": "ଆପଣ ନିଜ ହୋମ ସ୍କ୍ରିନରେ କ ''ଣ ଦେଖିବେ ତାହା ସ୍ଥିର କରିପାରିବେ, ଆପଣ ଆଭ୍ୟନ୍ତରୀଣ ସ୍କ୍ରୋଲିଂ ଏବଂ ଗୋଟିଏ ବଡ଼ ଉତ୍ସ ସହିତ 2 ଟି ଛୋଟ ଦୃଶ୍ୟ ପାଇପାରିବେ ।",
   "@layoutEditorExplanation": {
     "description": "text to explain the home layout editor"
   },

@@ -861,7 +861,7 @@
   "@itemlistErrorGeneric": {
     "description": "Error showing when the data can't be fetch"
   },
-  "homeLayoutEditor": "Modifier la disposition de l'accueil",
+  "homeLayoutEditor": "Modifier la disposition de l''accueil",
   "@homeLayoutEditor": {
     "description": "Title of layout editor screen"
   },
@@ -869,11 +869,11 @@
   "@navigationBarLabelNeverShow": {
     "description": "Never show label option for navigation bar"
   },
-  "customizeAppLayout": "Personnaliser les sections de l'appli",
+  "customizeAppLayout": "Personnaliser les sections de l''appli",
   "@customizeAppLayout": {
     "description": "Settings label for the settings to allow the user to set up the app sections themselves"
   },
-  "navigationBarLabelShowOnSelect": "Afficher le label sur l'élément sélectionné",
+  "navigationBarLabelShowOnSelect": "Afficher le label sur l''élément sélectionné",
   "@navigationBarLabelShowOnSelect": {
     "description": "Label only showing when selected option for navigation bar"
   },
@@ -881,7 +881,7 @@
   "@noSubscriptions": {
     "description": "Message when the user has no subs"
   },
-  "clearHistoryQuestionExplanation": "Cette opération effacera l'historique de consultation de votre compte sur l'instance Invidious que vous utilisez. Cette opération ne peut pas être annulée.",
+  "clearHistoryQuestionExplanation": "Cette opération effacera l''historique de consultation de votre compte sur l''instance Invidious que vous utilisez. Cette opération ne peut pas être annulée.",
   "@clearHistoryQuestionExplanation": {
     "description": "Message for dialog before clearing full viewing history"
   },
@@ -923,7 +923,7 @@
   "@home": {
     "description": "Label for Home browsing tab"
   },
-  "clearHistoryQuestion": "Effacer l'historique ?",
+  "clearHistoryQuestion": "Effacer l''historique ?",
   "@clearHistoryQuestion": {},
   "youCanSubscribeAgainLater": "Vous pouvez vous réabonner à cette chaîne plus tard",
   "@youCanSubscribeAgainLater": {

@@ -436,7 +436,7 @@
   "@searchSortUploadDate": {
     "description": "Sort search by upload date"
   },
-  "useProxy": "Video's omleiden",
+  "useProxy": "Video''s omleiden",
   "@useProxy": {
     "description": "label for settings switch to proxy videos from server"
   },
