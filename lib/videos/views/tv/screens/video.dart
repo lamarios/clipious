@@ -1,5 +1,7 @@
 import 'dart:ui';
 
+import 'package:auto_route/annotations.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -8,6 +10,7 @@ import 'package:invidious/channels/views/tv/screens/channel.dart';
 import 'package:invidious/downloads/states/download_manager.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/player/views/tv/screens/tvPlayerView.dart';
+import 'package:invidious/router.dart';
 import 'package:invidious/settings/states/settings.dart';
 import 'package:invidious/subscription_management/view/tv/tv_subscribe_button.dart';
 import 'package:invidious/utils/models/paginatedList.dart';
@@ -25,19 +28,18 @@ import '../../../states/tv_video.dart';
 import '../../../states/video.dart';
 import '../../components/video_thumbnail.dart';
 
-class TvVideoView extends StatelessWidget {
+@RoutePage()
+class TvVideoScreen extends StatelessWidget {
   final String videoId;
 
-  const TvVideoView({Key? key, required this.videoId}) : super(key: key);
+  const TvVideoScreen({Key? key, required this.videoId}) : super(key: key);
 
   playVideo(BuildContext context, Video video) {
-    Navigator.of(context).push(MaterialPageRoute(builder: (ctx) => TvPlayerView(videos: [video, ...video.recommendedVideos])));
+    AutoRouter.of(context).push(TvPlayerRoute(videos: [video, ...video.recommendedVideos]));
   }
 
   showChannel(BuildContext context, String channelId) {
-    Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) => TvChannelView(channelId: channelId),
-    ));
+    AutoRouter.of(context).push(TvChannelRoute(channelId: channelId));
   }
 
   @override

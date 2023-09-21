@@ -171,7 +171,12 @@ class SearchPaginatedList<T> extends PaginatedList<T> {
 
   List<T> Function(SearchResults res) getFromResults;
 
-  SearchPaginatedList({required this.query, required this.items, required this.type, required this.getFromResults, required this.sortBy});
+  SearchPaginatedList(
+      {required this.query,
+      required this.items,
+      required this.type,
+      required this.getFromResults,
+      required this.sortBy});
 
   @override
   bool getHasMore() {
@@ -203,7 +208,12 @@ class SearchPaginatedList<T> extends PaginatedList<T> {
 
 // Force refresh to fetch all videos as search endpoint only returns 2 videos for each playlist
 class PlaylistSearchPaginatedList<T> extends SearchPaginatedList<T> {
-  PlaylistSearchPaginatedList({required super.query, required super.items, required super.type, required super.getFromResults, required super.sortBy});
+  PlaylistSearchPaginatedList(
+      {required super.query,
+      required super.items,
+      required super.type,
+      required super.getFromResults,
+      required super.sortBy});
 
   @override
   bool getHasMore() {

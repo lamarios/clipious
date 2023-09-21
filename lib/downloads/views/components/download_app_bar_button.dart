@@ -1,10 +1,9 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:invidious/router.dart';
 
-import '../../../main.dart';
-import '../../../myRouteObserver.dart';
 import '../../states/download_manager.dart';
-import '../screens/download_manager.dart';
 
 class AppBarDownloadButton extends StatelessWidget {
   const AppBarDownloadButton({Key? key}) : super(key: key);
@@ -19,7 +18,7 @@ class AppBarDownloadButton extends StatelessWidget {
         alignment: Alignment.center,
         children: [
           IconButton(
-            onPressed: openDownloadManager,
+            onPressed: () => openDownloadManager(context),
             icon: Icon(
               Icons.download,
               color: _.downloadProgresses.isNotEmpty ? colors.background : null,
@@ -27,7 +26,7 @@ class AppBarDownloadButton extends StatelessWidget {
           ),
           _.downloadProgresses.isNotEmpty
               ? InkWell(
-                  onTap: openDownloadManager,
+                  onTap: () => openDownloadManager(context),
                   child: SizedBox(
                       width: 15,
                       height: 15,
@@ -42,7 +41,7 @@ class AppBarDownloadButton extends StatelessWidget {
               right: 1,
               child: _.videos.isNotEmpty
                   ? GestureDetector(
-                      onTap: openDownloadManager,
+                      onTap: () => openDownloadManager(context),
                       child: Container(
                           padding: const EdgeInsets.all(4),
                           decoration: BoxDecoration(color: colors.secondaryContainer, shape: BoxShape.circle),
@@ -57,7 +56,7 @@ class AppBarDownloadButton extends StatelessWidget {
     );
   }
 
-  void openDownloadManager() {
-    navigatorKey.currentState?.push(MaterialPageRoute(settings: ROUTE_DOWNLOAD_MANAGER, builder: (context) => const DownloadManager()));
+  void openDownloadManager(BuildContext context) {
+    AutoRouter.of(context).push(const DownloadManagerRoute());
   }
 }

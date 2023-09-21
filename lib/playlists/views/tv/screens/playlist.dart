@@ -1,5 +1,7 @@
 import 'dart:ui';
 
+import 'package:auto_route/annotations.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,6 +11,7 @@ import 'package:invidious/globals.dart';
 import 'package:invidious/player/views/tv/screens/tvPlayerView.dart';
 import 'package:invidious/playlists/states/playlist.dart';
 import 'package:invidious/playlists/views/screens/playlist.dart';
+import 'package:invidious/router.dart';
 import 'package:invidious/utils/views/components/placeholders.dart';
 import 'package:invidious/utils/views/tv/components/tv_button.dart';
 import 'package:invidious/utils/views/tv/components/tv_overscan.dart';
@@ -19,11 +22,12 @@ import '../../../../utils/models/image_object.dart';
 import '../../../../videos/models/base_video.dart';
 import '../../../../videos/views/components/video_thumbnail.dart';
 
-class TvPlaylistView extends PlaylistView {
-  const TvPlaylistView({super.key, required super.playlist, required super.canDeleteVideos});
+@RoutePage()
+class TvPlaylistScreen extends PlaylistViewScreen {
+  const TvPlaylistScreen({super.key, required super.playlist, required super.canDeleteVideos});
 
   playPlaylist(BuildContext context, PlaylistState _) {
-    Navigator.of(context).push(MaterialPageRoute(builder: (ctx) => TvPlayerView(videos: _.playlist.videos)));
+    AutoRouter.of(context).push(TvPlayerRoute(videos: _.playlist.videos));
   }
 
   @override
@@ -45,7 +49,10 @@ class TvPlaylistView extends PlaylistView {
                         itemCount: _.playlist.videos.length,
                         itemBuilder: (BuildContext context, int itemIndex, int pageViewIndex) {
                           BaseVideo video = _.playlist.videos[itemIndex];
-                          return VideoThumbnailView(videoId: video.videoId, decoration: BoxDecoration(), thumbnailUrl: ImageObject.getBestThumbnail(video.videoThumbnails)?.url ?? '');
+                          return VideoThumbnailView(
+                              videoId: video.videoId,
+                              decoration: BoxDecoration(),
+                              thumbnailUrl: ImageObject.getBestThumbnail(video.videoThumbnails)?.url ?? '');
                         },
                         options: CarouselOptions(
                           autoPlayCurve: Curves.easeInOutQuad,
@@ -143,20 +150,24 @@ class TvPlaylistView extends PlaylistView {
                                         ),
                                       ],
                                     ),
-                                    if(!_.loading)Expanded(
-                                      child: Padding(
-                                        padding: const EdgeInsets.only(top: 16.0),
-                                        child: GridView.count(
-                                          controller: _.scrollController,
-                                          childAspectRatio: 16 / 13,
-                                          crossAxisCount: 3,
-                                          children: [
-                                            ..._.playlist.videos.map((e) => TvVideoItem(video: e, autoFocus: false)).toList(),
-                                            if (_.loading) ...repeatWidget(() => const TvVideoItemPlaceHolder(), count: 10)
-                                          ],
+                                    if (!_.loading)
+                                      Expanded(
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(top: 16.0),
+                                          child: GridView.count(
+                                            controller: _.scrollController,
+                                            childAspectRatio: 16 / 13,
+                                            crossAxisCount: 3,
+                                            children: [
+                                              ..._.playlist.videos
+                                                  .map((e) => TvVideoItem(video: e, autoFocus: false))
+                                                  .toList(),
+                                              if (_.loading)
+                                                ...repeatWidget(() => const TvVideoItemPlaceHolder(), count: 10)
+                                            ],
+                                          ),
                                         ),
                                       ),
-                                    ),
                                   ],
                                 ),
                               ),

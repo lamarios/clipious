@@ -46,7 +46,8 @@ class TvPlayerControlsCubit extends Cubit<TvPlayerControlsState> {
 
   KeyEventResult handleRemoteEvents(FocusNode node, KeyEvent event) {
     bool timeLineControl = !state.showQueue && !state.showSettings && !state.displayControls;
-    log.fine('Key: ${event.logicalKey}, Timeline control: $timeLineControl, showQueue: ${state.showQueue}, showSettings: ${state.showSettings}, showControls: ${state.displayControls}');
+    log.fine(
+        'Key: ${event.logicalKey}, Timeline control: $timeLineControl, showQueue: ${state.showQueue}, showSettings: ${state.showSettings}, showControls: ${state.displayControls}');
     showUi();
 
     // looks like back is activate on pressdown and not press up

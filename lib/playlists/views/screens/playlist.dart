@@ -1,17 +1,17 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_swipe_action_cell/core/cell.dart';
-import 'package:invidious/main.dart';
-import 'package:invidious/myRouteObserver.dart';
+import 'package:invidious/notifications/views/components/bell_icon.dart';
 import 'package:invidious/player/states/player.dart';
 import 'package:invidious/playlists/views/components/playlist_thumbnail.dart';
+import 'package:invidious/router.dart';
 import 'package:invidious/settings/models/errors/invidiousServiceError.dart';
 import 'package:invidious/utils.dart';
 import 'package:invidious/utils/views/components/placeholders.dart';
 import 'package:invidious/videos/models/video_in_list.dart';
 import 'package:invidious/videos/views/components/compact_video.dart';
-import 'package:invidious/videos/views/screens/video.dart';
 
 import '../../../globals.dart';
 import '../../../videos/views/components/add_to_queue_button.dart';
@@ -19,11 +19,12 @@ import '../../../videos/views/components/play_button.dart';
 import '../../models/playlist.dart';
 import '../../states/playlist.dart';
 
-class PlaylistView extends StatelessWidget {
+@RoutePage()
+class PlaylistViewScreen extends StatelessWidget {
   final Playlist playlist;
   final bool canDeleteVideos;
 
-  const PlaylistView({super.key, required this.playlist, required this.canDeleteVideos});
+  const PlaylistViewScreen({super.key, required this.playlist, required this.canDeleteVideos});
 
   deletePlayList(BuildContext context) {
     var cubit = context.read<PlaylistCubit>();
@@ -37,12 +38,8 @@ class PlaylistView extends StatelessWidget {
     });
   }
 
-  openVideo(String videoId) {
-    navigatorKey.currentState?.push(MaterialPageRoute(
-        settings: ROUTE_VIDEO,
-        builder: (context) => VideoView(
-              videoId: videoId,
-            )));
+  openVideo(BuildContext context, String videoId) {
+    AutoRouter.of(context).push(VideoRoute(videoId: videoId));
   }
 
   removeVideoFromPlayList(BuildContext context, VideoInList v) async {
@@ -90,7 +87,7 @@ class PlaylistView extends StatelessWidget {
                             ),
                           ),
                         )
-                      : const SizedBox.shrink()
+                      : BellIcon(itemId: playlist.playlistId, type: BellIconType.playlist)
                 ],
               ),
               backgroundColor: colors.background,
@@ -115,7 +112,9 @@ class PlaylistView extends StatelessWidget {
                                                   Center(
                                                       child: Container(
                                                     padding: const EdgeInsets.all(5),
-                                                    decoration: BoxDecoration(color: colors.background.withOpacity(0.5), shape: BoxShape.circle),
+                                                    decoration: BoxDecoration(
+                                                        color: colors.background.withOpacity(0.5),
+                                                        shape: BoxShape.circle),
                                                     child: TweenAnimationBuilder(
                                                       tween: Tween<double>(begin: 0, end: _.loadingProgress),
                                                       duration: animationDuration,
@@ -166,7 +165,7 @@ class PlaylistView extends StatelessWidget {
                                                   : null,
                                               child: CompactVideo(
                                                 video: v,
-                                                onTap: () => openVideo(v.videoId),
+                                                onTap: () => openVideo(context, v.videoId),
                                                 key: ValueKey(v.videoId),
                                               )))
                                           .toList(),

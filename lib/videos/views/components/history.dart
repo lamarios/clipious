@@ -22,7 +22,9 @@ class HistoryView extends StatelessWidget {
     var locals = AppLocalizations.of(context)!;
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (BuildContext context) => ItemListCubit<String>(ItemListState<String>(itemList: PageBasedPaginatedList<String>(getItemsFunc: service.getUserHistory, maxResults: 20)))),
+        BlocProvider(
+            create: (BuildContext context) => ItemListCubit<String>(ItemListState<String>(
+                itemList: PageBasedPaginatedList<String>(getItemsFunc: service.getUserHistory, maxResults: 20)))),
         BlocProvider(
           create: (context) => HistoryCubit(null, context.read<ItemListCubit<String>>()),
         )
@@ -37,7 +39,10 @@ class HistoryView extends StatelessWidget {
                 ? Center(
                     child: Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Text(switch (_.error) { ItemListErrors.invalidScope => locals.itemListErrorInvalidScope, _ => locals.itemlistErrorGeneric }),
+                    child: Text(switch (_.error) {
+                      ItemListErrors.invalidScope => locals.itemListErrorInvalidScope,
+                      _ => locals.itemlistErrorGeneric
+                    }),
                   ))
                 : !_.loading && _.items.isEmpty
                     ? Center(
@@ -84,7 +89,8 @@ class HistoryView extends StatelessWidget {
                 right: 15,
                 child: FloatingActionButton(
                   onPressed: () {
-                    okCancelDialog(context, locals.clearHistoryQuestion, locals.clearHistoryQuestionExplanation, () => historyCubit.clearHistory());
+                    okCancelDialog(context, locals.clearHistoryQuestion, locals.clearHistoryQuestionExplanation,
+                        () => historyCubit.clearHistory());
                   },
                   child: const Icon(Icons.delete),
                 ))

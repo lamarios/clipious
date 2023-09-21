@@ -1,3 +1,4 @@
+import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -8,10 +9,11 @@ import 'package:invidious/settings/states/settings.dart';
 import '../../../../main.dart';
 import '../../../../videos/models/base_video.dart';
 
-class TvPlayerView extends StatelessWidget {
+@RoutePage()
+class TvPlayerScreen extends StatelessWidget {
   final List<BaseVideo> videos;
 
-  const TvPlayerView({Key? key, required this.videos}) : super(key: key);
+  const TvPlayerScreen({Key? key, required this.videos}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

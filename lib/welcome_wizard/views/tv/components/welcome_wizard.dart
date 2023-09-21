@@ -1,7 +1,9 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/app/states/app.dart';
+import 'package:invidious/router.dart';
 import 'package:invidious/settings/views/tv/components/manage_server_inner.dart';
 import 'package:invidious/utils/views/tv/components/tv_button.dart';
 import 'package:invidious/utils/views/tv/components/tv_overscan.dart';
@@ -11,8 +13,10 @@ import '../../../../app/views/tv/screens/tv_home.dart';
 import '../../../../settings/models/db/server.dart';
 import '../../../../settings/states/server_list_settings.dart';
 
-class TvWelcomeWizard extends StatelessWidget {
-  const TvWelcomeWizard({Key? key}) : super(key: key);
+
+@RoutePage()
+class TvWelcomeWizardScreen extends StatelessWidget {
+  const TvWelcomeWizardScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -47,9 +51,7 @@ class TvWelcomeWizard extends StatelessWidget {
                       unfocusedColor: server == null ? colors.background : null,
                       onPressed: server != null
                           ? (context) {
-                              Navigator.of(context).pushReplacement(MaterialPageRoute(
-                                builder: (context) => const TvHome(),
-                              ));
+                              AutoRouter.of(context).replace(const TvHomeRoute());
                             }
                           : null,
                       child: Padding(

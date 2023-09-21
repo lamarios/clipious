@@ -12,7 +12,10 @@ class AddToQueueButton extends StatelessWidget {
 
   static bool canAddToQueue(BuildContext context, List<BaseVideo> videos) {
     var state = context.read<PlayerCubit>().state;
-    return (state.videos.isNotEmpty) && (videos.length > 1 || (videos.length == 1 && (state.videos.indexWhere((element) => element.videoId == videos[0].videoId) ?? -1) < 0));
+    return (state.videos.isNotEmpty) &&
+        (videos.length > 1 ||
+            (videos.length == 1 &&
+                (state.videos.indexWhere((element) => element.videoId == videos[0].videoId) ?? -1) < 0));
   }
 
   addToQueue(BuildContext context) {

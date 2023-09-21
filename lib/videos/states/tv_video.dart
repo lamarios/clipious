@@ -37,5 +37,6 @@ class TvVideoState {
 
   TvVideoState({ScrollController? scrollController}) : scrollController = scrollController ?? ScrollController();
 
-  TvVideoState._(ScrollController? scrollController, this.showImage) : scrollController = scrollController ?? ScrollController();
+  TvVideoState._(ScrollController? scrollController, this.showImage)
+      : scrollController = scrollController ?? ScrollController();
 }

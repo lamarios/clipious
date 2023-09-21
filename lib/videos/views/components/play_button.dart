@@ -15,7 +15,8 @@ class PlayButton extends StatelessWidget {
           padding: const EdgeInsets.only(left: 100.0, top: 60),
           child: IconButton(
             onPressed: () => onPressed(true),
-            style: ButtonStyle(backgroundColor: MaterialStateColor.resolveWith((states) => colorScheme.primary.withOpacity(1))),
+            style: ButtonStyle(
+                backgroundColor: MaterialStateColor.resolveWith((states) => colorScheme.primary.withOpacity(1))),
             icon: const Icon(
               Icons.music_note,
               size: 35,
@@ -25,7 +26,8 @@ class PlayButton extends StatelessWidget {
         ),
         IconButton(
           onPressed: () => onPressed(false),
-          style: ButtonStyle(backgroundColor: MaterialStateColor.resolveWith((states) => colorScheme.primaryContainer.withOpacity(1))),
+          style: ButtonStyle(
+              backgroundColor: MaterialStateColor.resolveWith((states) => colorScheme.primaryContainer.withOpacity(1))),
           icon: const Icon(
             Icons.play_arrow,
             size: 75,

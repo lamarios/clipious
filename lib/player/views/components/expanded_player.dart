@@ -68,21 +68,23 @@ class ExpandedPlayer {
                   ),
                 )),
             Visibility(
-              visible: !settings.distractionFreeMode &&  !controller.isMini && video != null && !isFullScreen,
+              visible: !settings.distractionFreeMode && !controller.isMini && video != null && !isFullScreen,
               child: SizedBox(
                 // height: 80,
                 child: Builder(builder: (context) {
-
-
                   var selectedIndex = context.select((PlayerCubit value) => value.state.selectedFullScreenIndex);
-                  return NavigationBar(backgroundColor: colors.background, elevation: 0, selectedIndex: selectedIndex,
+                  return NavigationBar(
+                      backgroundColor: colors.background,
+                      elevation: 0,
+                      selectedIndex: selectedIndex,
                       labelBehavior: settings.navigationBarLabelBehavior,
-                      onDestinationSelected: player.selectTab, destinations: [
-                    NavigationDestination(icon: const Icon(Icons.info), label: locals.info),
-                    NavigationDestination(icon: const Icon(Icons.chat_bubble), label: locals.comments),
-                    NavigationDestination(icon: const Icon(Icons.schema), label: locals.recommended),
-                    NavigationDestination(icon: const Icon(Icons.playlist_play), label: locals.videoQueue)
-                  ]);
+                      onDestinationSelected: player.selectTab,
+                      destinations: [
+                        NavigationDestination(icon: const Icon(Icons.info), label: locals.info),
+                        NavigationDestination(icon: const Icon(Icons.chat_bubble), label: locals.comments),
+                        NavigationDestination(icon: const Icon(Icons.schema), label: locals.recommended),
+                        NavigationDestination(icon: const Icon(Icons.playlist_play), label: locals.videoQueue)
+                      ]);
                 }),
               ),
             )

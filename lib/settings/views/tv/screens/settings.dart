@@ -1,9 +1,12 @@
+import 'package:auto_route/annotations.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/app/states/app.dart';
 import 'package:invidious/extensions.dart';
+import 'package:invidious/router.dart';
 import 'package:invidious/settings/views/tv/screens/manage_servers.dart';
 import 'package:invidious/settings/views/tv/screens/search_history_settings.dart';
 import 'package:invidious/settings/views/tv/screens/sponsor_block_settings.dart';
@@ -18,42 +21,22 @@ import '../../../states/settings.dart';
 
 var log = Logger('TvSettings');
 
-class TVSettings extends StatelessWidget {
-  const TVSettings({Key? key}) : super(key: key);
+@RoutePage()
+class TVSettingsScreen extends StatelessWidget {
+  const TVSettingsScreen({Key? key}) : super(key: key);
 
   openSelectCountry(BuildContext context) {
     AppLocalizations locals = AppLocalizations.of(context)!;
     var cubit = context.read<SettingsCubit>();
-
-    Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) {
-        var countryNames = countryCodes.map((e) => e.name).toList();
-        countryNames.sort();
-        return TvSelectFromList(
-          title: locals.selectBrowsingCountry,
-          options: countryNames,
-          selected: cubit.state.country.name,
-          onSelect: cubit.selectCountry,
-        );
-      },
+    var countryNames = countryCodes.map((e) => e.name).toList();
+    countryNames.sort();
+    AutoRouter.of(context).push(TvSelectFromListRoute(
+      title: locals.selectBrowsingCountry,
+      options: countryNames,
+      selected: cubit.state.country.name,
+      onSelect: cubit.selectCountry,
     ));
   }
-
-/*
-  openSelectOnStart(BuildContext context) {
-    AppLocalizations locals = AppLocalizations.of(context)!;
-    var cubit = context.read<SettingsCubit>();
-    var categories = getCategories(context);
-    Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) => TvSelectFromList(
-        title: locals.whenAppStartsShow,
-        options: categories,
-        selected: categories[cubit.state.onOpen],
-        onSelect: (selected) => cubit.selectOnOpen(selected, categories),
-      ),
-    ));
-  }
-*/
 
   List<String> getCategories(BuildContext context) {
     var locals = AppLocalizations.of(context)!;
@@ -61,21 +44,15 @@ class TVSettings extends StatelessWidget {
   }
 
   openManageServers(BuildContext context) {
-    Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) => const TvSettingsManageServers(),
-    ));
+    AutoRouter.of(context).push(const TvSettingsManageServersRoute());
   }
 
   openSponsorBlockSettings(BuildContext context) {
-    Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) => const TvSponsorBlockSettings(),
-    ));
+    AutoRouter.of(context).push(const TvSponsorBlockSettingsRoute());
   }
 
   openSearchHistorySettings(BuildContext context) {
-    Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) => const TvSearchHistorySettings(),
-    ));
+    AutoRouter.of(context).push(const TvSearchHistorySettingsRoute());
   }
 
   showSelectLanguage(BuildContext context) {
@@ -87,19 +64,17 @@ class TVSettings extends StatelessWidget {
     List<String>? localeString = cubit.state.locale?.split('_');
     Locale? selected = localeString != null ? Locale.fromSubtags(languageCode: localeString[0], scriptCode: localeString.length >= 2 ? localeString[1] : null) : null;
 
-    Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) => TvSelectFromList(
-        title: locals.appLanguage,
-        options: [locals.followSystem, ...localsStrings],
-        selected: selected?.nativeDisplayLanguageScript ?? locals.followSystem,
-        onSelect: (String selected) {
-          if (selected == locals.followSystem) {
-            cubit.setLocale(localsList, localsStrings, null);
-          } else {
-            cubit.setLocale(localsList, localsStrings, selected);
-          }
-        },
-      ),
+    AutoRouter.of(context).push(TvSelectFromListRoute(
+      title: locals.appLanguage,
+      options: [locals.followSystem, ...localsStrings],
+      selected: selected?.nativeDisplayLanguageScript ?? locals.followSystem,
+      onSelect: (String selected) {
+        if (selected == locals.followSystem) {
+          cubit.setLocale(localsList, localsStrings, null);
+        } else {
+          cubit.setLocale(localsList, localsStrings, selected);
+        }
+      },
     ));
   }
 
@@ -107,17 +82,14 @@ class TVSettings extends StatelessWidget {
     var locals = AppLocalizations.of(context)!;
     ColorScheme colors = Theme.of(context).colorScheme;
     var cubit = context.read<SettingsCubit>();
-
-    Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) => TvSelectFromList(
-        title: locals.themeBrightness,
-        options: ThemeMode.values.map((e) => cubit.getThemeLabel(locals, e)).toList(),
-        selected: cubit.getThemeLabel(locals, cubit.state.themeMode),
-        onSelect: (String selected) {
-          ThemeMode? theme = ThemeMode.values.firstWhereOrNull((element) => cubit.getThemeLabel(locals, element) == selected);
-          cubit.setThemeMode(theme);
-        },
-      ),
+    AutoRouter.of(context).push(TvSelectFromListRoute(
+      title: locals.themeBrightness,
+      options: ThemeMode.values.map((e) => cubit.getThemeLabel(locals, e)).toList(),
+      selected: cubit.getThemeLabel(locals, cubit.state.themeMode),
+      onSelect: (String selected) {
+        ThemeMode? theme = ThemeMode.values.firstWhereOrNull((element) => cubit.getThemeLabel(locals, element) == selected);
+        cubit.setThemeMode(theme);
+      },
     ));
   }
 

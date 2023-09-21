@@ -1,47 +1,31 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:after_layout/after_layout.dart';
-import 'package:back_button_interceptor/back_button_interceptor.dart';
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/app/states/app.dart';
-import 'package:invidious/app/views/tv/screens/tv_home.dart';
-import 'package:invidious/channels/views/screens/channel.dart';
 import 'package:invidious/downloads/states/download_manager.dart';
-import 'package:invidious/downloads/views/components/download_app_bar_button.dart';
+import 'package:invidious/foreground_service.dart';
 import 'package:invidious/globals.dart';
-import 'package:invidious/home/models/db/home_layout.dart';
-import 'package:invidious/home/views/screens/edit_layout.dart';
 import 'package:invidious/httpOverrides.dart';
 import 'package:invidious/mediaHander.dart';
+import 'package:invidious/notifications/notifications.dart';
 import 'package:invidious/player/states/player.dart';
-import 'package:invidious/player/views/components/mini_player_aware.dart';
-import 'package:invidious/player/views/components/player.dart';
-import 'package:invidious/search/views/screens/search.dart';
+import 'package:invidious/router.dart';
 import 'package:invidious/settings/states/settings.dart';
-import 'package:invidious/settings/views/screens/settings.dart';
-import 'package:invidious/subscription_management/view/screens/manage_subscriptions.dart';
 import 'package:invidious/utils.dart';
-import 'package:invidious/utils/views/components/app_icon.dart';
-import 'package:invidious/videos/views/screens/video.dart';
-import 'package:invidious/welcome_wizard/views/screens/welcome_wizard.dart';
-import 'package:invidious/welcome_wizard/views/tv/screens/welcome_wizard.dart';
 import 'package:logging/logging.dart';
 
 import 'database.dart';
-import 'myRouteObserver.dart';
 import 'settings/models/db/app_logs.dart';
 
 const brandColor = Color(0xFF4f0096);
 
 final scaffoldKey = GlobalKey<ScaffoldMessengerState>();
-final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
-final GlobalKey<NavigatorState> globalNavigator = GlobalKey<NavigatorState>();
 bool isTv = false;
 
 late MediaHandler mediaHandler;
@@ -54,21 +38,36 @@ Future<void> main() async {
     debugPrint('[${record.level.name}] [${record.loggerName}] ${record.message}');
     // we don't want debug
     if (record.level == Level.INFO || record.level == Level.SEVERE) {
-      db.insertLogs(AppLog(logger: record.loggerName, level: record.level.name, time: record.time, message: record.message, stacktrace: record.stackTrace?.toString()));
+      db.insertLogs(AppLog(
+          logger: record.loggerName,
+          level: record.level.name,
+          time: record.time,
+          message: record.message,
+          stacktrace: record.stackTrace?.toString()));
     }
   });
 
   HttpOverrides.global = MyHttpOverrides();
 
   WidgetsFlutterBinding.ensureInitialized();
-  isTv = await isDeviceTv();
+  // FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   db = await DbClient.create();
+
+  initializeNotifications();
+  var initialNotification = await AwesomeNotifications().getInitialNotificationAction();
+  print('Initial notification ${initialNotification?.payload}');
+
+  isTv = await isDeviceTv();
   runApp(MultiBlocProvider(providers: [
     BlocProvider(
       create: (context) => AppCubit(AppState()),
     ),
     BlocProvider(
-      create: (context) => SettingsCubit(SettingsState(), context.read<AppCubit>()),
+      create: (context) {
+        var settingsCubit = SettingsCubit(SettingsState(), context.read<AppCubit>());
+        configureBackgroundService(settingsCubit);
+        return settingsCubit;
+      },
     ),
     BlocProvider(
       create: (context) => PlayerCubit(PlayerState(), context.read<SettingsCubit>()),
@@ -87,17 +86,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AppCubit, AppState>(
-        buildWhen: (previous, current) => previous.selectedIndex == current.selectedIndex || previous.server != current.server,
+        buildWhen: (previous, current) =>
+            previous.selectedIndex == current.selectedIndex || previous.server != current.server,
         // we want to rebuild only when anything other than the navigation index is changed
         builder: (context, _) {
           var app = context.read<AppCubit>();
           var settings = context.read<SettingsCubit>();
           bool useDynamicTheme = settings.state.useDynamicTheme;
-          bool showWizard = false;
-
-          if (app.state.server == null) {
-            showWizard = true;
-          }
 
           return DynamicColorBuilder(builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) {
             ColorScheme lightColorScheme;
@@ -140,267 +135,63 @@ class MyApp extends StatelessWidget {
             }
 
             log.fine('locale from db ${db.getSettings(LOCALE)?.value} from cubit: ${dbLocale}, ${localeString}');
-            Locale? savedLocale = localeString != null ? Locale.fromSubtags(languageCode: localeString[0], scriptCode: localeString.length >= 2 ? localeString[1] : null) : null;
+            Locale? savedLocale = localeString != null
+                ? Locale.fromSubtags(
+                    languageCode: localeString[0], scriptCode: localeString.length >= 2 ? localeString[1] : null)
+                : null;
 
-            return MaterialApp(
-                locale: savedLocale,
-                localizationsDelegates: AppLocalizations.localizationsDelegates,
-                localeListResolutionCallback: (locales, supportedLocales) {
-                  log.info('device locales=$locales supported locales=$supportedLocales, saved: $savedLocale');
-                  if (savedLocale != null) {
-                    log.info("using saved locale, $savedLocale");
-                    return savedLocale;
-                  }
-                  if (locales != null) {
-                    for (Locale locale in locales) {
-                      // if device language is supported by the app,
-                      // just return it to set it as current app language
-                      if (supportedLocales.contains(locale)) {
-                        log.info("Locale match found, $locale");
-                        return locale;
-                      } else {
-                        Locale? match = supportedLocales.where((element) => element.languageCode == locale.languageCode).firstOrNull;
-                        if (match != null) {
-                          log.info("found partial match $locale with $match");
-                          return match;
-                        }
+            return MaterialApp.router(
+              routerConfig: appRouter.config(
+                navigatorObservers: () => [MyRouteObserver()],
+              ),
+              locale: savedLocale,
+              localizationsDelegates: AppLocalizations.localizationsDelegates,
+              localeListResolutionCallback: (locales, supportedLocales) {
+                log.info('device locales=$locales supported locales=$supportedLocales, saved: $savedLocale');
+                if (savedLocale != null) {
+                  log.info("using saved locale, $savedLocale");
+                  return savedLocale;
+                }
+                if (locales != null) {
+                  for (Locale locale in locales) {
+                    // if device language is supported by the app,
+                    // just return it to set it as current app language
+                    if (supportedLocales.contains(locale)) {
+                      log.info("Locale match found, $locale");
+                      return locale;
+                    } else {
+                      Locale? match =
+                          supportedLocales.where((element) => element.languageCode == locale.languageCode).firstOrNull;
+                      if (match != null) {
+                        log.info("found partial match $locale with $match");
+                        return match;
                       }
                     }
                   }
-                  // if device language is not supported by the app,
-                  // the app will set it to english but return this to set to Bahasa instead
-                  log.info("locale not supported, returning english");
-                  return const Locale('en', 'US');
-                },
-                supportedLocales: AppLocalizations.supportedLocales,
-                scaffoldMessengerKey: scaffoldKey,
-                navigatorKey: globalNavigator,
-                debugShowCheckedModeBanner: false,
-                themeMode: ThemeMode.values.firstWhere((element) => element.name == settings.state.themeMode.name, orElse: () => ThemeMode.system),
-                title: 'Clipious',
-                theme: ThemeData(
-                    useMaterial3: true, colorScheme: lightColorScheme, progressIndicatorTheme: ProgressIndicatorThemeData(circularTrackColor: lightColorScheme.secondaryContainer.withOpacity(0.8))),
-                darkTheme: ThemeData(
-                    useMaterial3: true, colorScheme: darkColorScheme, progressIndicatorTheme: ProgressIndicatorThemeData(circularTrackColor: darkColorScheme.secondaryContainer.withOpacity(0.8))),
-                home: Shortcuts(
-                  shortcuts: <LogicalKeySet, Intent>{
-                    LogicalKeySet(LogicalKeyboardKey.select): const ActivateIntent(),
-                  },
-                  child: isTv
-                      ? showWizard
-                          ? const TvWelcomeWizard()
-                          : const TvHome()
-                      : Stack(
-                          children: [
-                            MiniPlayerAware(
-                              child: Navigator(
-                                  observers: [MyRouteObserver()],
-                                  key: navigatorKey,
-                                  initialRoute: '/',
-                                  onGenerateRoute: (settings) {
-                                    switch (settings.name) {
-                                      case "/":
-                                        return MaterialPageRoute(builder: (context) => showWizard ? const WelcomeWizard() : const Home());
-                                      case PATH_MANAGE_SUBS:
-                                        return MaterialPageRoute(builder: (context) => const ManageSubscriptions(), settings: ROUTE_MANAGE_SUBSCRIPTIONS);
-                                      case PATH_VIDEO:
-                                        VideoRouteArguments args = settings.arguments as VideoRouteArguments;
-                                        return MaterialPageRoute(
-                                            builder: (context) => VideoView(
-                                                  videoId: args.videoId,
-                                                  playNow: args.playNow,
-                                                ));
-                                      case PATH_CHANNEL:
-                                        if (settings.arguments is String) {
-                                          return MaterialPageRoute(
-                                            builder: (context) => ChannelView(channelId: settings.arguments! as String),
-                                            settings: ROUTE_CHANNEL,
-                                          );
-                                        }
-                                        break;
-                                      case PATH_LAYOUT_EDITOR:
-                                        return MaterialPageRoute(
-                                          builder: (context) => const EditHomeLayout(),
-                                          settings: ROUTE_CHANNEL,
-                                        );
-                                        break;
-                                    }
-                                  }),
-                            ),
-                            const Player()
-                          ],
-                        ),
-                ));
+                }
+                // if device language is not supported by the app,
+                // the app will set it to english but return this to set to Bahasa instead
+                log.info("locale not supported, returning english");
+                return const Locale('en', 'US');
+              },
+              supportedLocales: AppLocalizations.supportedLocales,
+              scaffoldMessengerKey: scaffoldKey,
+              debugShowCheckedModeBanner: false,
+              themeMode: ThemeMode.values.firstWhere((element) => element.name == settings.state.themeMode.name,
+                  orElse: () => ThemeMode.system),
+              title: 'Clipious',
+              theme: ThemeData(
+                  useMaterial3: true,
+                  colorScheme: lightColorScheme,
+                  progressIndicatorTheme: ProgressIndicatorThemeData(
+                      circularTrackColor: lightColorScheme.secondaryContainer.withOpacity(0.8))),
+              darkTheme: ThemeData(
+                  useMaterial3: true,
+                  colorScheme: darkColorScheme,
+                  progressIndicatorTheme: ProgressIndicatorThemeData(
+                      circularTrackColor: darkColorScheme.secondaryContainer.withOpacity(0.8))),
+            );
           });
         });
   }
-}
-
-class Home extends StatefulWidget {
-  const Home({super.key});
-
-  @override
-  State<Home> createState() => _HomeState();
-}
-
-class _HomeState extends State<Home> with AfterLayoutMixin {
-  openSettings(BuildContext context) {
-    navigatorKey.currentState?.push(MaterialPageRoute(settings: ROUTE_SETTINGS, builder: (context) => const Settings()));
-  }
-
-  openSubscriptionManagement(BuildContext context) {
-    navigatorKey.currentState?.pushNamed(PATH_MANAGE_SUBS);
-  }
-
-  openLayoutEditor(BuildContext context) {
-    var app = context.read<AppCubit>();
-    navigatorKey.currentState?.pushNamed(PATH_LAYOUT_EDITOR).then((value) => app.updateLayout());
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    BackButtonInterceptor.add((stopDefaultButtonEvent, RouteInfo routeInfo) {
-      if (routeInfo.currentRoute(context)?.settings.name != null) {
-        navigatorKey.currentState?.pop();
-        return true;
-      } else {
-        return false;
-      }
-    }, name: 'mainNavigator', zIndex: 0, ifNotYetIntercepted: true);
-  }
-
-  @override
-  void dispose() {
-    BackButtonInterceptor.removeByName('mainNavigator');
-    super.dispose();
-  }
-
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    ColorScheme colorScheme = Theme.of(context).colorScheme;
-    var locals = AppLocalizations.of(context)!;
-
-    return BlocBuilder<AppCubit, AppState>(buildWhen: (previous, current) {
-      return previous.selectedIndex != current.selectedIndex || previous.server != current.server;
-    }, builder: (context, _) {
-      var app = context.read<AppCubit>();
-      var settings = context.watch<SettingsCubit>().state;
-
-      var allowedPages = settings.appLayout.where((element) => element.isPermitted(context)).toList();
-      var navigationWidgets = allowedPages.map((e) => e.getBottomBarNavigationWidget(context)).toList();
-
-      var selectedIndex = _.selectedIndex;
-      if (selectedIndex >= allowedPages.length) {
-        selectedIndex = 0;
-      }
-
-      HomeDataSource? selectedPage;
-      if (selectedIndex < allowedPages.length) {
-        selectedPage = allowedPages[selectedIndex];
-      }
-
-      return Scaffold(
-          key: ValueKey(_.server?.url),
-          // so we rebuild the view if the server changes
-          backgroundColor: colorScheme.background,
-          bottomNavigationBar: allowedPages.length >= 2
-              ? NavigationBar(
-                  backgroundColor: colorScheme.background,
-                  labelBehavior: settings.navigationBarLabelBehavior,
-                  elevation: 0,
-                  onDestinationSelected: app.selectIndex,
-                  selectedIndex: selectedIndex,
-                  destinations: navigationWidgets,
-                )
-              : null,
-          appBar: AppBar(
-            systemOverlayStyle: getUiOverlayStyle(context),
-            title: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(selectedPage?.getLabel(locals) ?? 'Clipious'),
-                if (selectedPage == HomeDataSource.home)
-                  IconButton(
-                      iconSize: 15,
-                      onPressed: () => openLayoutEditor(context),
-                      icon: Icon(
-                        Icons.edit,
-                        color: colorScheme.secondary,
-                      ))
-              ],
-            ),
-            scrolledUnderElevation: 0,
-            // backgroundColor: Colors.pink,
-            backgroundColor: colorScheme.background,
-            actions: [
-              selectedPage == HomeDataSource.subscription ? IconButton(onPressed: () => openSubscriptionManagement(context), icon: const Icon(Icons.checklist)) : const SizedBox.shrink(),
-              const AppBarDownloadButton(),
-              IconButton(
-                onPressed: () {
-                  // showSearch(context: context, delegate: MySearchDelegate());
-                  navigatorKey.currentState?.push(MaterialPageRoute(settings: ROUTE_SETTINGS, builder: (context) => const Search()));
-                },
-                icon: const Icon(Icons.search),
-              ),
-              IconButton(
-                onPressed: () => openSettings(context),
-                icon: const Icon(Icons.settings),
-              ),
-            ],
-          ),
-          body: SafeArea(
-              bottom: false,
-              child: Stack(children: [
-                Positioned(
-                  top: 0,
-                  left: 0,
-                  right: 0,
-                  bottom: 0,
-                  child: AnimatedSwitcher(
-                    switchInCurve: Curves.easeInOutQuad,
-                    switchOutCurve: Curves.easeInOutQuad,
-                    transitionBuilder: (Widget child, Animation<double> animation) {
-                      return FadeTransition(opacity: animation, child: child);
-                    },
-                    duration: animationDuration,
-                    child: Container(
-                        // home handles its own padding because we don't want to cut horizontal scroll lists on the right
-                        padding: EdgeInsets.symmetric(horizontal: selectedPage == HomeDataSource.home ? 0 : innerHorizontalPadding),
-                        key: ValueKey(selectedPage),
-                        child: selectedPage?.build(context, false) ??
-                            const Opacity(
-                                opacity: 0.2,
-                                child: AppIcon(
-                                  height: 200,
-                                ))),
-/*
-                    child: <Widget>[
-                      const HomeView(
-                        key: ValueKey(0),
-                      ),
-                      const Trending(
-                        key: ValueKey(1),
-                      ),
-                      const Subscriptions(
-                        key: ValueKey(2),
-                      ),
-                      const AddToPlaylistList(
-                        key: ValueKey(3),
-                        canDeleteVideos: true,
-                      ),
-                      const HistoryView(
-                        key: ValueKey(4),
-                      ),
-                    ][_.selectedIndex],
-*/
-                  ),
-                )
-              ])));
-    });
-  }
-
-  @override
-  FutureOr<void> afterFirstLayout(BuildContext context) {}
 }

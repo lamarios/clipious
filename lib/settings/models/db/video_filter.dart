@@ -93,7 +93,7 @@ class VideoFilter {
     var matches = filters.where((element) => element.filterVideo(v)).toList();
     v.matchedFilters = matches;
     v.filtered = matches.isNotEmpty;
-    log.fine('Video ${v.title} filtered ? ${v.filtered}');
+    // log.fine('Video ${v.title} filtered ? ${v.filtered}');
     v.filterHide = v.filtered && matches.any((element) => element.hideFromFeed);
     return v;
   }
@@ -120,12 +120,13 @@ class VideoFilter {
     String videoChannel = video.authorId?.replaceAll("/channel/", '') ?? '';
 
     if (channelId != null && channelId != videoChannel) {
-      log.fine('Showing videos, no same channel $channelId (filter) -  ${videoChannel} / ${video.author} (video)');
+      // log.fine('Showing videos, no same channel $channelId (filter) -  ${videoChannel} / ${video.author} (video)');
       return false;
     }
     // Channel hide all
     if (channelId != null && filterAll == true && videoChannel == channelId) {
-      log.fine('Video filtered because hide all == $filterAll, video channel id: ${videoChannel}, channel id ${channelId}');
+      log.fine(
+          'Video filtered because hide all == $filterAll, video channel id: ${videoChannel}, channel id ${channelId}');
       return !isTimeAllowed();
     }
 
@@ -165,13 +166,16 @@ class VideoFilter {
     List<String> safeStartTime = (startTime.isEmpty ? defaultStartTime : startTime).split(":");
     List<String> safeEndTime = (endTime.isEmpty ? defaultEndTime : endTime).split(":");
 
-    DateTime startDateTime = DateTime.now().copyWith(hour: int.parse(safeStartTime[0]), minute: int.parse(safeStartTime[1]), second: int.parse(safeStartTime[2]));
-    DateTime endDateTime = DateTime.now().copyWith(hour: int.parse(safeEndTime[0]), minute: int.parse(safeEndTime[1]), second: int.parse(safeEndTime[2]));
+    DateTime startDateTime = DateTime.now().copyWith(
+        hour: int.parse(safeStartTime[0]), minute: int.parse(safeStartTime[1]), second: int.parse(safeStartTime[2]));
+    DateTime endDateTime = DateTime.now().copyWith(
+        hour: int.parse(safeEndTime[0]), minute: int.parse(safeEndTime[1]), second: int.parse(safeEndTime[2]));
 
     // we only allow the video if current time is outside current time range
     bool isTimeAllowed = now.isBefore(startDateTime) || now.isAfter(endDateTime);
 
-    log.fine("Filter daysOfWeek ${daysOfWeek}, now day of week: ${now.weekday}, Filter from ${startDateTime} to ${endDateTime} current time ${now} ");
+    log.fine(
+        "Filter daysOfWeek ${daysOfWeek}, now day of week: ${now.weekday}, Filter from ${startDateTime} to ${endDateTime} current time ${now} ");
 
     return isTimeAllowed;
   }
@@ -210,8 +214,11 @@ class VideoFilter {
       str = locals.videoFilterWholeChannel(hideFromFeed ? locals.videoFilterHideLabel : locals.videoFilterFilterLabel);
     } else if (type != null && operation != null) {
       log.fine("Filter type $hideFromFeed");
-      str = locals.videoFilterDescriptionString(hideFromFeed ? locals.videoFilterHideLabel : locals.videoFilterFilterLabel, FilterType.localizedType(type!, locals).toLowerCase(),
-          FilterOperation.localizedLabel(operation!, locals).toLowerCase(), value ?? '');
+      str = locals.videoFilterDescriptionString(
+          hideFromFeed ? locals.videoFilterHideLabel : locals.videoFilterFilterLabel,
+          FilterType.localizedType(type!, locals).toLowerCase(),
+          FilterOperation.localizedLabel(operation!, locals).toLowerCase(),
+          value ?? '');
     }
 
     String daysOfWeek = localizedDaysOfWeek(locals);

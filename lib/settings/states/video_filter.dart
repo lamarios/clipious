@@ -2,7 +2,6 @@ import 'package:bloc/bloc.dart';
 import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:invidious/database.dart';
 import 'package:invidious/globals.dart';
-import 'package:invidious/settings/models/db/settings.dart';
 import 'package:logging/logging.dart';
 
 import '../models/db/video_filter.dart';

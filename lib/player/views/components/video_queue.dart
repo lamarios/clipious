@@ -116,7 +116,9 @@ class VideoQueue extends StatelessWidget {
                     scrollController: scrollController,
                     itemCount: state.videos.isNotEmpty ? state.videos.length : state.offlineVideos.length,
                     onReorder: controller.onQueueReorder,
-                    itemBuilder: (context, index) => state.videos.isNotEmpty ? onlineVideoQueue(context, index, state.videos[index]) : offlineVideoQueue(context, index, state.offlineVideos[index])),
+                    itemBuilder: (context, index) => state.videos.isNotEmpty
+                        ? onlineVideoQueue(context, index, state.videos[index])
+                        : offlineVideoQueue(context, index, state.offlineVideos[index])),
               );
             }),
           )

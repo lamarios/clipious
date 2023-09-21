@@ -2,7 +2,6 @@ import 'package:bloc/bloc.dart';
 import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:invidious/globals.dart';
-import 'package:invidious/main.dart';
 import 'package:invidious/search/models/search_type.dart';
 import 'package:logging/logging.dart';
 
@@ -88,7 +87,10 @@ class VideoFilterEditCubit extends Cubit<VideoFilterEditState> {
 
   bool isFilterValid() {
     return (state.filter != null && state.filter?.channelId != null && (state.filter?.filterAll ?? false)) ||
-        (state.filter != null && state.filter?.type != null && state.filter?.operation != null && (state.filter?.value ?? '').isNotEmpty);
+        (state.filter != null &&
+            state.filter?.type != null &&
+            state.filter?.operation != null &&
+            (state.filter?.value ?? '').isNotEmpty);
   }
 
   void onSave() {
@@ -97,7 +99,6 @@ class VideoFilterEditCubit extends Cubit<VideoFilterEditState> {
       log.fine('hide all ? ${state.filter?.filterAll}');
       db.saveFilter(state.filter!);
       // VideoFilterController.to()?.refreshFilters();
-      navigatorKey.currentState?.pop();
     }
   }
 
@@ -201,9 +202,15 @@ class VideoFilterEditState {
 
   TextEditingController valueController;
 
-  VideoFilterEditState({this.filter, this.searchPage = 1, this.channel, List<Channel>? channelResults, TextEditingController? valueController})
+  VideoFilterEditState(
+      {this.filter,
+      this.searchPage = 1,
+      this.channel,
+      List<Channel>? channelResults,
+      TextEditingController? valueController})
       : channelResults = channelResults ?? [],
         valueController = valueController ?? TextEditingController(text: filter?.value ?? '');
 
-  VideoFilterEditState._(this.filter, this.searchPage, this.channel, this.channelResults, this.valueController, this.showDateSettings);
+  VideoFilterEditState._(
+      this.filter, this.searchPage, this.channel, this.channelResults, this.valueController, this.showDateSettings);
 }

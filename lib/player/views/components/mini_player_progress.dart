@@ -22,7 +22,7 @@ class MiniPlayerProgress extends StatelessWidget {
                 width: double.infinity,
                 height: 2,
                 decoration: BoxDecoration(
-                  color: colors.secondaryContainer,
+                  color: colors.primary.withOpacity(0.2),
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: AnimatedFractionallySizedBox(

@@ -1,10 +1,14 @@
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:bloc/bloc.dart';
 import 'package:copy_with_extension/copy_with_extension.dart';
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/app/states/app.dart';
+import 'package:invidious/foreground_service.dart';
 import 'package:locale_names/locale_names.dart';
 import 'package:logging/logging.dart';
+import 'package:optimize_battery/optimize_battery.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 import '../../database.dart';
@@ -19,6 +23,11 @@ part 'settings.g.dart';
 
 const String subtitleDefaultSize = '14';
 const String searchHistoryDefaultLength = '12';
+
+enum EnableBackGroundNotificationResponse {
+  ok,
+  needBatteryOptimization;
+}
 
 var log = Logger('SettingsController');
 
@@ -310,6 +319,54 @@ class SettingsCubit extends Cubit<SettingsState> {
     state.navigationBarLabelBehavior = behavior;
     emit(state);
   }
+
+  Future<EnableBackGroundNotificationResponse> setBackgroundNotifications(bool b) async {
+    if (!b) {
+      var state = this.state.copyWith();
+      state.backgroundNotifications = b;
+      backgroundService.invoke('stopService');
+      emit(state);
+    } else {
+      AwesomeNotifications().isNotificationAllowed().then((isAllowed) {
+        if (!isAllowed) {
+          // This is just a basic example. For real apps, you must show some
+          // friendly dialog box before call the request method.
+          // This is very important to not harm the user experience
+          AwesomeNotifications().requestPermissionToSendNotifications();
+        }
+      });
+
+      var ignoringBatterOptimization = await OptimizeBattery.isIgnoringBatteryOptimizations();
+      if (!ignoringBatterOptimization) {
+        return EnableBackGroundNotificationResponse.needBatteryOptimization;
+      } else {
+        var state = this.state.copyWith();
+        state.backgroundNotifications = b;
+        backgroundService.startService();
+        emit(state);
+        return EnableBackGroundNotificationResponse.ok;
+      }
+    }
+
+    return EnableBackGroundNotificationResponse.ok;
+  }
+
+  setSubscriptionsNotifications(bool b) {
+    var state = this.state.copyWith();
+    state.subscriptionsNotifications = b;
+    emit(state);
+  }
+
+  setBackgroundCheckFrequency(int i) {
+    if (i > 0 && i <= 24) {
+      var state = this.state.copyWith();
+      state.backgroundNotificationFrequency = i;
+      emit(state);
+      EasyDebounce.debounce('restarting-background-service', const Duration(seconds: 2), () {
+          backgroundService.invoke(restartTimerMethod);
+      });
+    }
+  }
 }
 
 @CopyWith(constructor: "_")
@@ -376,7 +433,9 @@ class SettingsState {
   Country get country => getCountryFromCode(_get(BROWSING_COUNTRY)?.value ?? 'US');
 
   set country(Country c) {
-    String code = countryCodes.firstWhere((element) => element.name == c.name, orElse: () => country).code;
+    String code = countryCodes
+        .firstWhere((element) => element.name == c.name, orElse: () => country)
+        .code;
     _set(BROWSING_COUNTRY, code);
   }
 
@@ -433,6 +492,18 @@ class SettingsState {
   bool get distractionFreeMode => _get(DISTRACTION_FREE_MODE)?.value == "true";
 
   set distractionFreeMode(bool b) => _set(DISTRACTION_FREE_MODE, b);
+
+  bool get backgroundNotifications => _get(BACKGROUND_NOTIFICATIONS)?.value == 'true';
+
+  set backgroundNotifications(bool b) => _set(BACKGROUND_NOTIFICATIONS, b);
+
+  bool get subscriptionsNotifications => _get(SUBSCRIPTION_NOTIFICATIONS)?.value == 'true';
+
+  set subscriptionsNotifications(bool b) => _set(SUBSCRIPTION_NOTIFICATIONS, b);
+
+  int get backgroundNotificationFrequency => int.parse(_get(BACKGROUND_CHECK_FREQUENCY)?.value ?? "1");
+
+  set backgroundNotificationFrequency(int i) => _set(BACKGROUND_CHECK_FREQUENCY, i);
 
   void _set<T>(String name, T value) {
     if (value == null) {

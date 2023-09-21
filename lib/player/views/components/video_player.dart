@@ -17,7 +17,14 @@ class VideoPlayer extends StatefulWidget {
   final bool? disableControls;
   final Duration? startAt;
 
-  const VideoPlayer({super.key, this.video, required this.miniPlayer, this.playNow, this.disableControls, this.offlineVideo, this.startAt})
+  const VideoPlayer(
+      {super.key,
+      this.video,
+      required this.miniPlayer,
+      this.playNow,
+      this.disableControls,
+      this.offlineVideo,
+      this.startAt})
       : assert(video == null || offlineVideo == null, 'cannot provide both video and offline video\n');
 
   @override
@@ -46,10 +53,12 @@ class _VideoPlayerState extends State<VideoPlayer> {
               video: widget.video,
               offlineVideo: widget.offlineVideo,
               disableControls: widget.disableControls),
-          player, settings),
+          player,
+          settings),
       child: BlocBuilder<VideoPlayerCubit, VideoPlayerState>(
         builder: (context, _) => BlocListener<PlayerCubit, PlayerState>(
-          listenWhen: (previous, current) => previous.mediaCommand != current.mediaCommand && current.mediaCommand != null,
+          listenWhen: (previous, current) =>
+              previous.mediaCommand != current.mediaCommand && current.mediaCommand != null,
           listener: (context, state) => context.read<VideoPlayerCubit>().handleCommand(state.mediaCommand!),
           child: _.videoController == null
               ? const Text('nullll')

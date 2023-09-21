@@ -11,6 +11,7 @@ import 'package:invidious/utils/views/tv/components/tv_button.dart';
 import 'package:invidious/utils/views/tv/components/tv_overscan.dart';
 import 'package:invidious/videos/models/base_video.dart';
 import 'package:logging/logging.dart';
+import 'package:optimize_battery/optimize_battery.dart';
 import 'package:share_plus/share_plus.dart';
 
 import 'utils/models/country.dart';
@@ -209,6 +210,14 @@ okCancelDialog(BuildContext context, String title, String message, Function() on
   );
 }
 
+showBatteryOptimizationDialog(BuildContext context) {
+  if (!context.mounted) return;
+
+  var locals = AppLocalizations.of(context)!;
+  okCancelDialog(context, locals.askForDisableBatteryOptimizationTitle, locals.askForDisableBatteryOptimizationContent,
+      () => OptimizeBattery.openBatteryOptimizationSettings());
+}
+
 showTvAlertdialog(BuildContext context, String title, List<Widget> body) {
   var locals = AppLocalizations.of(context)!;
   showTvDialog(context: context, builder: (context) => body, actions: [
@@ -225,7 +234,11 @@ showTvAlertdialog(BuildContext context, String title, List<Widget> body) {
   ]);
 }
 
-showTvDialog({required BuildContext context, String? title, required List<Widget> Function(BuildContext context) builder, required List<Widget> actions}) {
+showTvDialog(
+    {required BuildContext context,
+    String? title,
+    required List<Widget> Function(BuildContext context) builder,
+    required List<Widget> actions}) {
   var textTheme = Theme.of(context).textTheme;
 
   Navigator.of(context).push(MaterialPageRoute(
@@ -257,7 +270,8 @@ showTvDialog({required BuildContext context, String? title, required List<Widget
 }
 
 Country getCountryFromCode(String code) {
-  return countryCodes.firstWhere((element) => element.code == code, orElse: () => Country('US', 'United States of America'));
+  return countryCodes.firstWhere((element) => element.code == code,
+      orElse: () => Country('US', 'United States of America'));
 }
 
 KeyEventResult onTvSelect(KeyEvent event, BuildContext context, Function(BuildContext context) func) {

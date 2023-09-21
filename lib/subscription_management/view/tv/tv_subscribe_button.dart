@@ -10,7 +10,9 @@ class TvSubscribeButton extends StatelessWidget {
   final bool? autoFocus;
   final Function(bool focus)? onFocusChanged;
 
-  const TvSubscribeButton({Key? key, required this.channelId, required this.subCount, this.autoFocus, this.onFocusChanged}) : super(key: key);
+  const TvSubscribeButton(
+      {Key? key, required this.channelId, required this.subCount, this.autoFocus, this.onFocusChanged})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -1,9 +1,10 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:invidious/channels/views/tv/screens/channel.dart';
 import 'package:invidious/playlists/models/playlist.dart';
 import 'package:invidious/playlists/views/components/playlist_in_list.dart';
+import 'package:invidious/router.dart';
 import 'package:invidious/search/models/search_type.dart';
 import 'package:invidious/utils/models/paginatedList.dart';
 import 'package:invidious/utils/views/components/placeholders.dart';
@@ -14,20 +15,26 @@ import 'package:invidious/utils/views/tv/components/tv_overscan.dart';
 import 'package:invidious/utils/views/tv/components/tv_text_field.dart';
 
 import '../../../../channels/models/channel.dart';
+import '../../../../globals.dart';
 import '../../../../settings/states/settings.dart';
 import '../../../../videos/models/video_in_list.dart';
 import '../../../states/search.dart';
 import '../../../states/tv_search.dart';
+import '../../screens/search.dart';
 
-class TvSearch extends StatelessWidget {
-  const TvSearch({Key? key}) : super(key: key);
+@RoutePage()
+class TvSearchScreen extends StatelessWidget {
+  const TvSearchScreen({Key? key}) : super(key: key);
 
   Widget buildSuggestion(BuildContext context, SearchState _, bool isHistory, String suggestion) {
     ColorScheme colors = Theme.of(context).colorScheme;
     var searchCubit = context.read<SearchCubit>();
 
     return TvButton(
-        onPressed: (context) => searchCubit.setSearchQuery(suggestion),
+        onPressed: (context) {
+          searchCubit.clearSearch();
+          Future.delayed(const Duration(seconds: 1), () => searchCubit.setSearchQuery(suggestion));
+        },
         focusedColor: colors.secondaryContainer,
         unfocusedColor: Colors.transparent,
         child: isHistory
@@ -111,71 +118,87 @@ class TvSearch extends StatelessWidget {
                                         child: ListView(
                                           shrinkWrap: true,
                                           children: search.queryController.value.text.isEmpty
-                                              ? searchCubit.getHistory().map((e) => buildSuggestion(context, search, true, e)).toList()
-                                              : search.suggestions.map((e) => buildSuggestion(context, search, false, e)).toList(),
+                                              ? searchCubit
+                                                  .getHistory()
+                                                  .map((e) => buildSuggestion(context, search, true, e))
+                                                  .toList()
+                                              : search.suggestions
+                                                  .map((e) => buildSuggestion(context, search, false, e))
+                                                  .toList(),
                                         ),
                                       ),
                                       Expanded(
                                           child: SingleChildScrollView(
+                                        controller: tv.scrollController,
                                         child: Column(
                                           crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: search.loading
+                                          children: search.showResults
                                               ? [
-                                                  const Center(
-                                                    child: CircularProgressIndicator(),
-                                                  )
-                                                ]
-                                              : [
                                                   Visibility(
-                                                      visible: search.videos.isNotEmpty ?? false,
+                                                      visible: tv.hasVideos,
                                                       child: Text(
                                                         locals.videos,
                                                         style: textTheme.titleLarge,
                                                       )),
+                                                  Focus(
+                                                      focusNode: tv.resultFocus,
+                                                      onFocusChange: (focused) {
+                                                        if (focused) {
+                                                          tv.scrollController.animateTo(0,
+                                                              duration: animationDuration, curve: Curves.easeOutQuad);
+                                                        }
+                                                      },
+                                                      child: TvHorizontalVideoList(
+                                                          paginatedVideoList: PageBasedPaginatedList<VideoInList>(
+                                                        getItemsFunc: (page, maxResults) => service
+                                                            .search(search.queryController.value.text,
+                                                                page: page, type: SearchType.video)
+                                                            .then((value) {
+                                                          if (page == 1) {
+                                                            tvCubit.setHasVideo(value.videos.isNotEmpty);
+                                                          }
+                                                          return value.videos;
+                                                        }),
+                                                        maxResults: searchPageSize,
+                                                      ))),
                                                   Visibility(
-                                                    visible: search.videos.isNotEmpty ?? false,
-                                                    child: Focus(
-                                                        focusNode: tv.resultFocus,
-                                                        child: TvHorizontalVideoList(
-                                                            paginatedVideoList: SearchPaginatedList<VideoInList>(
-                                                                getFromResults: (res) => res.videos,
-                                                                sortBy: search.sortBy,
-                                                                query: search.queryController.value.text,
-                                                                type: SearchType.video,
-                                                                items: search.videos))),
-                                                  ),
-                                                  Visibility(
-                                                      visible: search.channels.isNotEmpty ?? false,
+                                                      visible: tv.hasChannels,
                                                       child: Text(
                                                         locals.channels,
                                                         style: textTheme.titleLarge,
                                                       )),
-                                                  Visibility(
-                                                    visible: search.channels.isNotEmpty ?? false,
-                                                    child: SizedBox(
-                                                      height: 60,
-                                                      child: TvHorizontalPaginatedListView<Channel>(
-                                                        getPlaceHolder: () => const TvChannelPlaceholder(),
-                                                        paginatedList: SearchPaginatedList<Channel>(
-                                                            getFromResults: (res) => res.channels,
-                                                            sortBy: search.sortBy,
-                                                            query: search.queryController.value.text,
-                                                            items: search.channels,
-                                                            type: SearchType.channel),
-                                                        startItems: search.channels,
-                                                        itemBuilder: (e) => Padding(
-                                                          padding: const EdgeInsets.all(8.0),
-                                                          child: TvButton(
-                                                            onPressed: (context) => openChannel(context, e),
-                                                            borderRadius: 20,
-                                                            child: Padding(
-                                                              padding: const EdgeInsets.all(8.0),
-                                                              child: Column(
-                                                                mainAxisSize: MainAxisSize.min,
-                                                                children: [
-                                                                  Text(e.author),
-                                                                ],
-                                                              ),
+                                                  SizedBox(
+                                                    height: 60,
+                                                    child: TvHorizontalPaginatedListView<Channel>(
+                                                      getPlaceHolder: () => const Padding(
+                                                        padding: EdgeInsets.all(8.0),
+                                                        child: TvChannelPlaceholder(),
+                                                      ),
+                                                      paginatedList: PageBasedPaginatedList<Channel>(
+                                                        getItemsFunc: (page, maxResults) => service
+                                                            .search(search.queryController.value.text,
+                                                                page: page, type: SearchType.channel)
+                                                            .then((value) {
+                                                          if (page == 1) {
+                                                            tvCubit.setHasChannels(value.channels.isNotEmpty);
+                                                          }
+                                                          return value.channels;
+                                                        }),
+                                                        maxResults: searchPageSize,
+                                                      ),
+                                                      startItems: [],
+                                                      itemBuilder: (e) => Padding(
+                                                        padding: const EdgeInsets.all(8.0),
+                                                        child: TvButton(
+                                                          onPressed: (context) => openChannel(context, e),
+                                                          borderRadius: 20,
+                                                          child: Padding(
+                                                            padding: const EdgeInsets.all(8.0),
+                                                            child: Column(
+                                                              mainAxisSize: MainAxisSize.min,
+                                                              children: [
+                                                                Text(e.author),
+                                                              ],
                                                             ),
                                                           ),
                                                         ),
@@ -183,32 +206,36 @@ class TvSearch extends StatelessWidget {
                                                     ),
                                                   ),
                                                   Visibility(
-                                                      visible: search.playlists.isNotEmpty ?? false,
+                                                      visible: tv.hasPlaylists,
                                                       child: Text(
                                                         locals.playlists,
                                                         style: textTheme.titleLarge,
                                                       )),
-                                                  Visibility(
-                                                    visible: search.playlists.isNotEmpty ?? false,
-                                                    child: TvHorizontalItemList<Playlist>(
-                                                      getPlaceholder: () => const TvPlaylistPlaceHolder(),
-                                                      paginatedList: SearchPaginatedList<Playlist>(
-                                                          getFromResults: (res) => res.playlists,
-                                                          sortBy: search.sortBy,
-                                                          query: search.queryController.value.text,
-                                                          items: search.playlists,
-                                                          type: SearchType.playlist),
-                                                      buildItem: (context, index, item) => Padding(
-                                                          padding: const EdgeInsets.all(8.0),
-                                                          child: PlaylistInList(
-                                                            playlist: item,
-                                                            canDeleteVideos: false,
-                                                            isTv: true,
-                                                            // cameFromSearch: true,
-                                                          )),
+                                                  TvHorizontalItemList<Playlist>(
+                                                    getPlaceholder: () => const TvPlaylistPlaceHolder(),
+                                                    paginatedList: PageBasedPaginatedList<Playlist>(
+                                                      getItemsFunc: (page, maxResults) => service
+                                                          .search(search.queryController.value.text,
+                                                              page: page, type: SearchType.playlist)
+                                                          .then((value) {
+                                                        if (page == 1) {
+                                                          tvCubit.setHasPlaylists(value.playlists.isNotEmpty);
+                                                        }
+                                                        return value.playlists;
+                                                      }),
+                                                      maxResults: searchPageSize,
                                                     ),
+                                                    buildItem: (context, index, item) => Padding(
+                                                        padding: const EdgeInsets.all(8.0),
+                                                        child: PlaylistInList(
+                                                          playlist: item,
+                                                          canDeleteVideos: false,
+                                                          isTv: true,
+                                                          // cameFromSearch: true,
+                                                        )),
                                                   ),
-                                                ],
+                                                ]
+                                              : [const Text('YOU')],
                                         ),
                                       ))
                                     ],
@@ -229,8 +256,6 @@ class TvSearch extends StatelessWidget {
   }
 
   openChannel(BuildContext context, Channel c) {
-    Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) => TvChannelView(channelId: c.authorId),
-    ));
+    AutoRouter.of(context).push(TvChannelRoute(channelId: c.authorId));
   }
 }

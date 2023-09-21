@@ -65,5 +65,6 @@ class ChannelController {
 
   ChannelController(this.channelId);
 
-  ChannelController._(this.channelId, this.isSubscribed, this.selectedIndex, this.channel, this.loading, this.smallHeader, this.barHeight, this.barOpacity);
+  ChannelController._(this.channelId, this.isSubscribed, this.selectedIndex, this.channel, this.loading,
+      this.smallHeader, this.barHeight, this.barOpacity);
 }

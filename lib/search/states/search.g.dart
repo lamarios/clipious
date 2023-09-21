@@ -11,12 +11,6 @@ abstract class _$SearchStateCWProxy {
 
   SearchState selectedIndex(int selectedIndex);
 
-  SearchState videos(List<VideoInList> videos);
-
-  SearchState channels(List<Channel> channels);
-
-  SearchState playlists(List<Playlist> playlists);
-
   SearchState searchNow(bool searchNow);
 
   SearchState suggestions(List<String> suggestions);
@@ -24,8 +18,6 @@ abstract class _$SearchStateCWProxy {
   SearchState sortBy(SearchSortBy sortBy);
 
   SearchState showResults(bool showResults);
-
-  SearchState loading(bool loading);
 
   SearchState videoPage(int videoPage);
 
@@ -42,14 +34,10 @@ abstract class _$SearchStateCWProxy {
   SearchState call({
     TextEditingController? queryController,
     int? selectedIndex,
-    List<VideoInList>? videos,
-    List<Channel>? channels,
-    List<Playlist>? playlists,
     bool? searchNow,
     List<String>? suggestions,
     SearchSortBy? sortBy,
     bool? showResults,
-    bool? loading,
     int? videoPage,
     int? channelPage,
     int? playlistPage,
@@ -71,15 +59,6 @@ class _$SearchStateCWProxyImpl implements _$SearchStateCWProxy {
       this(selectedIndex: selectedIndex);
 
   @override
-  SearchState videos(List<VideoInList> videos) => this(videos: videos);
-
-  @override
-  SearchState channels(List<Channel> channels) => this(channels: channels);
-
-  @override
-  SearchState playlists(List<Playlist> playlists) => this(playlists: playlists);
-
-  @override
   SearchState searchNow(bool searchNow) => this(searchNow: searchNow);
 
   @override
@@ -91,9 +70,6 @@ class _$SearchStateCWProxyImpl implements _$SearchStateCWProxy {
 
   @override
   SearchState showResults(bool showResults) => this(showResults: showResults);
-
-  @override
-  SearchState loading(bool loading) => this(loading: loading);
 
   @override
   SearchState videoPage(int videoPage) => this(videoPage: videoPage);
@@ -116,14 +92,10 @@ class _$SearchStateCWProxyImpl implements _$SearchStateCWProxy {
   SearchState call({
     Object? queryController = const $CopyWithPlaceholder(),
     Object? selectedIndex = const $CopyWithPlaceholder(),
-    Object? videos = const $CopyWithPlaceholder(),
-    Object? channels = const $CopyWithPlaceholder(),
-    Object? playlists = const $CopyWithPlaceholder(),
     Object? searchNow = const $CopyWithPlaceholder(),
     Object? suggestions = const $CopyWithPlaceholder(),
     Object? sortBy = const $CopyWithPlaceholder(),
     Object? showResults = const $CopyWithPlaceholder(),
-    Object? loading = const $CopyWithPlaceholder(),
     Object? videoPage = const $CopyWithPlaceholder(),
     Object? channelPage = const $CopyWithPlaceholder(),
     Object? playlistPage = const $CopyWithPlaceholder(),
@@ -137,18 +109,6 @@ class _$SearchStateCWProxyImpl implements _$SearchStateCWProxy {
           ? _value.selectedIndex
           // ignore: cast_nullable_to_non_nullable
           : selectedIndex as int,
-      videos == const $CopyWithPlaceholder() || videos == null
-          ? _value.videos
-          // ignore: cast_nullable_to_non_nullable
-          : videos as List<VideoInList>,
-      channels == const $CopyWithPlaceholder() || channels == null
-          ? _value.channels
-          // ignore: cast_nullable_to_non_nullable
-          : channels as List<Channel>,
-      playlists == const $CopyWithPlaceholder() || playlists == null
-          ? _value.playlists
-          // ignore: cast_nullable_to_non_nullable
-          : playlists as List<Playlist>,
       searchNow == const $CopyWithPlaceholder() || searchNow == null
           ? _value.searchNow
           // ignore: cast_nullable_to_non_nullable
@@ -165,10 +125,6 @@ class _$SearchStateCWProxyImpl implements _$SearchStateCWProxy {
           ? _value.showResults
           // ignore: cast_nullable_to_non_nullable
           : showResults as bool,
-      loading == const $CopyWithPlaceholder() || loading == null
-          ? _value.loading
-          // ignore: cast_nullable_to_non_nullable
-          : loading as bool,
       videoPage == const $CopyWithPlaceholder() || videoPage == null
           ? _value.videoPage
           // ignore: cast_nullable_to_non_nullable

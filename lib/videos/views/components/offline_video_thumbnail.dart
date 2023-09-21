@@ -40,7 +40,8 @@ class OfflineVideoThumbnail extends StatelessWidget {
                       fit: BoxFit.contain,
                     ))
                 : Container(
-                    decoration: BoxDecoration(color: colors.secondaryContainer, borderRadius: BorderRadius.circular(borderRadius)),
+                    decoration: BoxDecoration(
+                        color: colors.secondaryContainer, borderRadius: BorderRadius.circular(borderRadius)),
                   ),
           );
         });

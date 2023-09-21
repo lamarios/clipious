@@ -28,10 +28,12 @@ class CompactVideoCubit extends Cubit<CompactVideoState> {
           state.offlineVideoThumbnailPath = path;
           emit(state);
         } else {
-          EasyDebounce.debounce('${state.offlineVideo?.videoId}-compact-view-thumbnail', const Duration(seconds: 1), getThumbnail);
+          EasyDebounce.debounce(
+              '${state.offlineVideo?.videoId}-compact-view-thumbnail', const Duration(seconds: 1), getThumbnail);
         }
       } catch (e) {
-        EasyDebounce.debounce('${state.offlineVideo?.videoId}-compact-view-thumbnail', const Duration(seconds: 1), getThumbnail);
+        EasyDebounce.debounce(
+            '${state.offlineVideo?.videoId}-compact-view-thumbnail', const Duration(seconds: 1), getThumbnail);
       }
     }
   }

@@ -19,7 +19,10 @@ class TopListLoading extends StatelessWidget {
         Container(
           height: height,
           decoration: BoxDecoration(
-              gradient: LinearGradient(colors: [colorScheme.background, colorScheme.background.withOpacity(0), colorScheme.background], begin: Alignment.centerLeft, end: Alignment.bottomRight)),
+              gradient: LinearGradient(
+                  colors: [colorScheme.background, colorScheme.background.withOpacity(0), colorScheme.background],
+                  begin: Alignment.centerLeft,
+                  end: Alignment.bottomRight)),
         ),
       ]),
     );

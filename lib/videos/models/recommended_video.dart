@@ -1,5 +1,4 @@
 import 'package:invidious/videos/models/base_video.dart';
-import 'package:invidious/videos/models/video_in_list.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import '../../utils/models/image_object.dart';
@@ -10,7 +9,8 @@ part 'recommended_video.g.dart';
 class RecommendedVideo extends BaseVideo {
   String viewCountText;
 
-  RecommendedVideo(String videoId, String title, List<ImageObject> videoThumbnails, String? author, int lengthSeconds, this.viewCountText)
+  RecommendedVideo(String videoId, String title, List<ImageObject> videoThumbnails, String? author, int lengthSeconds,
+      this.viewCountText)
       : super(title, videoId, lengthSeconds, author, null, null, videoThumbnails);
 
   factory RecommendedVideo.fromJson(Map<String, dynamic> json) => _$RecommendedVideoFromJson(json);

@@ -65,9 +65,10 @@ class ItemListCubit<T> extends Cubit<ItemListState<T>> {
     try {
       state = this.state.copyWith();
       state.items = await refreshFunction();
-      ;
       state.loading = false;
-      emit(state);
+      if(!isClosed) {
+        emit(state);
+      }
     } catch (err) {
       state = this.state.copyWith();
       state.items = [];
@@ -77,7 +78,9 @@ class ItemListCubit<T> extends Cubit<ItemListState<T>> {
       } else {
         state.error = ItemListErrors.couldNotFetchItems;
       }
-      emit(state);
+      if(!isClosed) {
+        emit(state);
+      }
       rethrow;
     }
   }
@@ -97,5 +100,5 @@ class ItemListState<T> {
 
   ItemListState({required this.itemList}) {}
 
-  ItemListState._(this.itemList,  this.items, this.loading, this.imageCache, this.scrollController, this.error);
+  ItemListState._(this.itemList, this.items, this.loading, this.imageCache, this.scrollController, this.error);
 }

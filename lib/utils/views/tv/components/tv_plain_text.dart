@@ -1,18 +1,21 @@
+import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:invidious/utils/views/tv/components/tv_overscan.dart';
 
-class TvPlainText extends StatefulWidget {
+
+@RoutePage()
+class TvPlainTextScreen extends StatefulWidget {
   final String text;
 
-  const TvPlainText({Key? key, required this.text}) : super(key: key);
+  const TvPlainTextScreen({Key? key, required this.text}) : super(key: key);
 
   @override
-  State<TvPlainText> createState() => _TvPlainTextState();
+  State<TvPlainTextScreen> createState() => _TvPlainTextScreenState();
 }
 
-class _TvPlainTextState extends State<TvPlainText> {
-  final ScrollController _scrollController = new ScrollController();
+class _TvPlainTextScreenState extends State<TvPlainTextScreen> {
+  final ScrollController _scrollController = ScrollController();
 
   KeyEventResult scroll(FocusNode node, KeyEvent event) {
     if (event.logicalKey == LogicalKeyboardKey.arrowDown) {

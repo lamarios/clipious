@@ -1,6 +1,8 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:invidious/router.dart';
 import 'package:invidious/settings/states/settings.dart';
 import 'package:invidious/settings/views/tv/screens/manage_single_server.dart';
 import 'package:invidious/utils.dart';
@@ -15,12 +17,7 @@ class TvManageServersInner extends StatelessWidget {
 
   openServer(BuildContext context, Server s) {
     var cubit = context.read<ServerListSettingsCubit>();
-    Navigator.of(context)
-        .push(MaterialPageRoute(
-          builder: (context) => TvManageSingleServer(
-            server: s,
-          ),
-        ))
+        AutoRouter.of(context).push(TvManageSingleServerRoute(server: s))
         .then((value) => cubit.refreshServers());
   }
 
@@ -98,7 +95,8 @@ class TvManageServersInner extends StatelessWidget {
     return BlocBuilder<ServerListSettingsCubit, ServerListSettingsState>(builder: (context, _) {
       var cubit = context.read<ServerListSettingsCubit>();
       var settings = context.watch<SettingsCubit>();
-      var filteredPublicServers = _.publicServers.where((s) => _.dbServers.indexWhere((element) => element.url == s.url) == -1).toList();
+      var filteredPublicServers =
+          _.publicServers.where((s) => _.dbServers.indexWhere((element) => element.url == s.url) == -1).toList();
       return ListView(children: [
         SettingsTile(
           title: locals.skipSslVerification,
@@ -157,8 +155,10 @@ class TvManageServersInner extends StatelessWidget {
                 : filteredPublicServers
                     .map((s) => SettingsTile(
                           key: Key(s.url),
-                          title: '${s.url} - ${(s.ping != null && s.ping!.compareTo(const Duration(seconds: pingTimeout)) == -1) ? '${s.ping?.inMilliseconds}ms' : '>${pingTimeout}s'}',
-                          description: '${(s.flag != null && s.region != null) ? '${s.flag} - ${s.region} - ' : ''} ${locals.tapToAddServer}',
+                          title:
+                              '${s.url} - ${(s.ping != null && s.ping!.compareTo(const Duration(seconds: pingTimeout)) == -1) ? '${s.ping?.inMilliseconds}ms' : '>${pingTimeout}s'}',
+                          description:
+                              '${(s.flag != null && s.region != null) ? '${s.flag} - ${s.region} - ' : ''} ${locals.tapToAddServer}',
                           onSelected: (context) => cubit.upsertServer(s),
                         ))
                     .toList()

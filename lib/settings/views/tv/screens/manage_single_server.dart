@@ -1,3 +1,4 @@
+import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -11,10 +12,11 @@ import '../../../../utils/views/tv/components/tv_text_field.dart';
 import '../../../models/db/server.dart';
 import '../../../states/server_settings.dart';
 
-class TvManageSingleServer extends StatelessWidget {
+@RoutePage()
+class TvManageSingleServerScreen extends StatelessWidget {
   final Server server;
 
-  const TvManageSingleServer({Key? key, required this.server}) : super(key: key);
+  const TvManageSingleServerScreen({Key? key, required this.server}) : super(key: key);
 
   void showLogInWithCookiesDialog(BuildContext context) async {
     var locals = AppLocalizations.of(context)!;
@@ -182,7 +184,8 @@ class TvManageSingleServer extends StatelessWidget {
           child: BlocBuilder<ServerSettingsCubit, Server>(builder: (context, server) {
             var cubit = context.read<ServerSettingsCubit>();
             AppLocalizations locals = AppLocalizations.of(context)!;
-            bool isLoggedIn = (server.authToken != null && server.authToken!.isNotEmpty) || (server.sidCookie != null && server.sidCookie!.isNotEmpty);
+            bool isLoggedIn = (server.authToken != null && server.authToken!.isNotEmpty) ||
+                (server.sidCookie != null && server.sidCookie!.isNotEmpty);
 
             return ListView(
               children: [

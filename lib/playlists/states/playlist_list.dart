@@ -87,5 +87,5 @@ class PlaylistListState {
 
   PlaylistListState(this.paginatedList);
 
-  PlaylistListState._(this.paginatedList,  this.playlists, this.loading, this.scrollController, this.error);
+  PlaylistListState._(this.paginatedList, this.playlists, this.loading, this.scrollController, this.error);
 }

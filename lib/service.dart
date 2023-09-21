@@ -25,6 +25,7 @@ import 'channels/models/channel.dart';
 import 'channels/models/channelPlaylists.dart';
 import 'channels/models/channelVideos.dart';
 import 'comments/models/video_comments.dart';
+import 'notifications/models/db/subscription_notifications.dart';
 import 'search/models/search_suggestion.dart';
 import 'settings/models/db/server.dart';
 import 'settings/models/invidious_public_server.dart';
@@ -248,7 +249,8 @@ class Service {
     return results;
   }
 
-  Future<UserFeed> getUserFeed({int? maxResults, int? page}) async {
+  Future<UserFeed> getUserFeed({int? maxResults, int? page, bool saveLastSeen = true}) async {
+    // for background service to be able to use
     var currentlySelectedServer = db.getCurrentlySelectedServer();
 
     Uri uri = buildUrl(urlGetUserFeed, query: {'max_results': maxResults?.toString(), 'page': page?.toString()});
@@ -258,6 +260,17 @@ class Service {
     var feed = UserFeed.fromJson(handleResponse(response));
     feed.videos = (await VideoFilter.filterVideos(feed.videos)).cast();
     feed.notifications = (await VideoFilter.filterVideos(feed.notifications)).cast();
+
+    // we only save the last video seen if we're on the first page otherwise it does not make sense
+    if (saveLastSeen && (page ?? 1) == 1) {
+      var videos = List.from(feed.notifications ?? [], growable: true);
+      videos.addAll(feed.videos ?? []);
+      if (videos.isNotEmpty) {
+        var toSave = SubscriptionNotification(videos.first.videoId, DateTime.now().millisecondsSinceEpoch);
+        db.setLastSubscriptionNotification(toSave);
+      }
+    }
+
     return feed;
   }
 
@@ -380,15 +393,23 @@ class Service {
 
     var channel = Channel.fromJson(handleResponse(response));
     channel.latestVideos = (await VideoFilter.filterVideos(channel.latestVideos)).cast();
+
+    if (channel.latestVideos != null && channel.latestVideos!.isNotEmpty) {
+      db.setChannelNotificationLastViewedVideo(channel.authorUrl, channel.latestVideos![0].videoId);
+    }
     return channel;
   }
 
-  Future<VideosWithContinuation> getChannelVideos(String channelId, String? continuation) async {
+  Future<VideosWithContinuation> getChannelVideos(String channelId, String? continuation, {bool saveLastSeen = true}) async {
     Uri uri = buildUrl(urlGetChannelVideos, pathParams: {':id': channelId}, query: {'continuation': continuation});
     final response = await http.get(uri, headers: {'Content-Type': 'application/json; charset=utf-16'});
 
     var videosWithContinuation = VideosWithContinuation.fromJson(handleResponse(response));
     videosWithContinuation.videos = (await VideoFilter.filterVideos(videosWithContinuation.videos)).cast();
+
+    if (saveLastSeen && videosWithContinuation.videos.isNotEmpty) {
+      db.setChannelNotificationLastViewedVideo(channelId, videosWithContinuation.videos.first.videoId);
+    }
     return videosWithContinuation;
   }
 
@@ -574,7 +595,7 @@ class Service {
     return servers.where((s) => (s.api ?? false) && (s.stats?.openRegistrations ?? false)).toList();
   }
 
-  Future<Playlist> getPublicPlaylists(String playlistId, {int? page}) async {
+  Future<Playlist> getPublicPlaylists(String playlistId, {int? page, bool saveLastSeen = true}) async {
     Uri uri = buildUrl(urlGetPublicPlaylist, pathParams: {':id': playlistId}, query: {'page': page?.toString()});
 
     final response = await http.get(uri);
@@ -582,6 +603,8 @@ class Service {
     var oldLength = playlist.videos.length;
     playlist.videos = (await VideoFilter.filterVideos(playlist.videos)).cast();
     playlist.removedByFilter = oldLength - playlist.videos.length;
+
+    if (saveLastSeen) db.setPlaylistNotificationLastViewedVideo(playlist.playlistId, playlist.videoCount);
 
     return playlist;
   }

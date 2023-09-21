@@ -11,6 +11,12 @@ abstract class _$TvSearchStateCWProxy {
 
   TvSearchState searchFocus(FocusNode searchFocus);
 
+  TvSearchState hasChannels(bool hasChannels);
+
+  TvSearchState hasVideos(bool hasVideos);
+
+  TvSearchState hasPlaylists(bool hasPlaylists);
+
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `TvSearchState(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
   /// Usage
@@ -20,6 +26,9 @@ abstract class _$TvSearchStateCWProxy {
   TvSearchState call({
     FocusNode? resultFocus,
     FocusNode? searchFocus,
+    bool? hasChannels,
+    bool? hasVideos,
+    bool? hasPlaylists,
   });
 }
 
@@ -38,6 +47,16 @@ class _$TvSearchStateCWProxyImpl implements _$TvSearchStateCWProxy {
       this(searchFocus: searchFocus);
 
   @override
+  TvSearchState hasChannels(bool hasChannels) => this(hasChannels: hasChannels);
+
+  @override
+  TvSearchState hasVideos(bool hasVideos) => this(hasVideos: hasVideos);
+
+  @override
+  TvSearchState hasPlaylists(bool hasPlaylists) =>
+      this(hasPlaylists: hasPlaylists);
+
+  @override
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `TvSearchState(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
@@ -48,6 +67,9 @@ class _$TvSearchStateCWProxyImpl implements _$TvSearchStateCWProxy {
   TvSearchState call({
     Object? resultFocus = const $CopyWithPlaceholder(),
     Object? searchFocus = const $CopyWithPlaceholder(),
+    Object? hasChannels = const $CopyWithPlaceholder(),
+    Object? hasVideos = const $CopyWithPlaceholder(),
+    Object? hasPlaylists = const $CopyWithPlaceholder(),
   }) {
     return TvSearchState._(
       resultFocus == const $CopyWithPlaceholder() || resultFocus == null
@@ -58,6 +80,18 @@ class _$TvSearchStateCWProxyImpl implements _$TvSearchStateCWProxy {
           ? _value.searchFocus
           // ignore: cast_nullable_to_non_nullable
           : searchFocus as FocusNode,
+      hasChannels == const $CopyWithPlaceholder() || hasChannels == null
+          ? _value.hasChannels
+          // ignore: cast_nullable_to_non_nullable
+          : hasChannels as bool,
+      hasVideos == const $CopyWithPlaceholder() || hasVideos == null
+          ? _value.hasVideos
+          // ignore: cast_nullable_to_non_nullable
+          : hasVideos as bool,
+      hasPlaylists == const $CopyWithPlaceholder() || hasPlaylists == null
+          ? _value.hasPlaylists
+          // ignore: cast_nullable_to_non_nullable
+          : hasPlaylists as bool,
     );
   }
 }

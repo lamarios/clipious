@@ -1,17 +1,26 @@
 import 'package:better_player/better_player.dart';
 import 'package:bloc/bloc.dart';
 import 'package:copy_with_extension/copy_with_extension.dart';
-import 'package:invidious/database.dart';
-import 'package:invidious/globals.dart';
 import 'package:invidious/player/states/video_player.dart';
-import 'package:invidious/settings/models/db/settings.dart';
 import 'package:logging/logging.dart';
 
 import '../../settings/states/settings.dart';
 
 part 'tv_player_settings.g.dart';
 
-const List<String> tvAvailablePlaybackSpeeds = ['0.5x', '0.75x', '1x', '1.25x', '1.5x', '1.75x', '2x', '2.25x', '2.5x', '2.75x', '3x'];
+const List<String> tvAvailablePlaybackSpeeds = [
+  '0.5x',
+  '0.75x',
+  '1x',
+  '1.25x',
+  '1.5x',
+  '1.75x',
+  '2x',
+  '2.25x',
+  '2.5x',
+  '2.75x',
+  '3x'
+];
 final Logger log = Logger('TvSettingsController');
 
 enum Tabs {
@@ -31,9 +40,12 @@ class TvPlayerSettingsCubit extends Cubit<TvPlayerSettingsState> {
       ? player.state.videoController?.betterPlayerAsmsTracks.map((e) => '${e.height}p').toSet().toList() ?? []
       : player.state.videoController?.betterPlayerDataSource?.resolutions?.keys.toList() ?? [];
 
-  List<String> get audioTrackNames => settings.state.useDash ? player.state.videoController?.betterPlayerAsmsAudioTracks?.map((e) => '${e.label}').toList() ?? [] : [];
+  List<String> get audioTrackNames => settings.state.useDash
+      ? player.state.videoController?.betterPlayerAsmsAudioTracks?.map((e) => '${e.label}').toList() ?? []
+      : [];
 
-  List<String> get availableCaptions => player.state.videoController?.betterPlayerSubtitlesSourceList.map((e) => '${e.name}').toList() ?? [];
+  List<String> get availableCaptions =>
+      player.state.videoController?.betterPlayerSubtitlesSourceList.map((e) => '${e.name}').toList() ?? [];
 
   BetterPlayerController? get videoController => player.state.videoController;
 
@@ -73,7 +85,8 @@ class TvPlayerSettingsCubit extends Cubit<TvPlayerSettingsState> {
     log.fine('Video quality selected $selected');
 
     if (settings.state.useDash) {
-      BetterPlayerAsmsTrack? track = videoController?.betterPlayerAsmsTracks.firstWhere((element) => '${element.height}p' == selected);
+      BetterPlayerAsmsTrack? track =
+          videoController?.betterPlayerAsmsTracks.firstWhere((element) => '${element.height}p' == selected);
 
       if (track != null) {
         log.fine('Changing video track to $selected');
@@ -89,7 +102,8 @@ class TvPlayerSettingsCubit extends Cubit<TvPlayerSettingsState> {
 
   changeChangeAudioTrack(String selected) {
     log.fine('Audio quality selected $selected');
-    BetterPlayerAsmsAudioTrack? track = videoController?.betterPlayerAsmsAudioTracks?.firstWhere((e) => '${e.label}' == selected);
+    BetterPlayerAsmsAudioTrack? track =
+        videoController?.betterPlayerAsmsAudioTracks?.firstWhere((e) => '${e.label}' == selected);
 
     if (track != null) {
       log.fine('Changing audio track to $selected');
@@ -99,7 +113,8 @@ class TvPlayerSettingsCubit extends Cubit<TvPlayerSettingsState> {
 
   changeSubtitles(String selected) {
     log.fine('Subtitles selected $selected');
-    BetterPlayerSubtitlesSource? track = videoController?.betterPlayerSubtitlesSourceList.firstWhere((e) => '${e.name}' == selected);
+    BetterPlayerSubtitlesSource? track =
+        videoController?.betterPlayerSubtitlesSourceList.firstWhere((e) => '${e.name}' == selected);
 
     settings.setLastSubtitle(selected);
 

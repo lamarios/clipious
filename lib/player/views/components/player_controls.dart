@@ -42,14 +42,18 @@ class PlayerControls extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  IconButton(onPressed: () => setState(() => player.setSpeed(max(minValue, player.getSpeed() - minValue))), icon: const Icon(Icons.remove)),
+                  IconButton(
+                      onPressed: () => setState(() => player.setSpeed(max(minValue, player.getSpeed() - minValue))),
+                      icon: const Icon(Icons.remove)),
                   SizedBox(
                       width: 50,
                       child: Text(
                         '${player.getSpeed().toStringAsFixed(2)}x',
                         textAlign: TextAlign.center,
                       )),
-                  IconButton(onPressed: () => setState(() => player.setSpeed(min(maxValue, player.getSpeed() + minValue))), icon: const Icon(Icons.add)),
+                  IconButton(
+                      onPressed: () => setState(() => player.setSpeed(min(maxValue, player.getSpeed() + minValue))),
+                      icon: const Icon(Icons.add)),
                 ],
               )
             ],
@@ -59,7 +63,8 @@ class PlayerControls extends StatelessWidget {
     );
   }
 
-  showPlayerTrackSelection(BuildContext context, PlayerControlsState _, {required List<String> tracks, required int selected, required Function(int index) onSelected}) {
+  showPlayerTrackSelection(BuildContext context, PlayerControlsState _,
+      {required List<String> tracks, required int selected, required Function(int index) onSelected}) {
     List<ListTile> widgets = [];
 
     for (int i = 0; i < tracks.length; i++) {
@@ -187,7 +192,11 @@ class PlayerControls extends StatelessWidget {
     var player = context.read<PlayerCubit>();
     var colors = Theme.of(context).colorScheme;
     return Theme(
-      data: ThemeData(useMaterial3: true, colorScheme: darkColorScheme, progressIndicatorTheme: ProgressIndicatorThemeData(circularTrackColor: darkColorScheme.secondaryContainer.withOpacity(0.8))),
+      data: ThemeData(
+          useMaterial3: true,
+          colorScheme: darkColorScheme,
+          progressIndicatorTheme:
+              ProgressIndicatorThemeData(circularTrackColor: darkColorScheme.secondaryContainer.withOpacity(0.8))),
       child: BlocProvider(
         create: (context) => PlayerControlsCubit(PlayerControlsState(), player),
         child: BlocBuilder<PlayerControlsCubit, PlayerControlsState>(
@@ -197,7 +206,8 @@ class PlayerControls extends StatelessWidget {
             bool isPip = context.select((PlayerCubit cubit) => cubit.state.isPip);
             int totalFastForward = context.select((PlayerCubit cubit) => cubit.state.totalFastForward);
             int totalRewind = context.select((PlayerCubit cubit) => cubit.state.totalRewind);
-            String videoTitle = context.select((PlayerCubit cubit) => cubit.state.currentlyPlaying?.title ?? cubit.state.offlineCurrentlyPlaying?.title ?? '');
+            String videoTitle = context.select((PlayerCubit cubit) =>
+                cubit.state.currentlyPlaying?.title ?? cubit.state.offlineCurrentlyPlaying?.title ?? '');
 
             var cubit = context.read<PlayerControlsCubit>();
             return BlocListener<PlayerCubit, PlayerState>(
@@ -207,9 +217,14 @@ class PlayerControls extends StatelessWidget {
               },
               child: GestureDetector(
                 behavior: HitTestBehavior.translucent,
-                onVerticalDragEnd: _.fullScreenState == FullScreenState.fullScreen || _.displayControls ? null : player.videoDraggedEnd,
-                onVerticalDragUpdate: _.fullScreenState == FullScreenState.fullScreen || _.displayControls ? null : player.videoDragged,
-                onVerticalDragStart: _.fullScreenState == FullScreenState.fullScreen || _.displayControls ? null : player.videoDragStarted,
+                onVerticalDragEnd: _.fullScreenState == FullScreenState.fullScreen || _.displayControls
+                    ? null
+                    : player.videoDraggedEnd,
+                onVerticalDragUpdate:
+                    _.fullScreenState == FullScreenState.fullScreen || _.displayControls ? null : player.videoDragged,
+                onVerticalDragStart: _.fullScreenState == FullScreenState.fullScreen || _.displayControls
+                    ? null
+                    : player.videoDragStarted,
                 child: AspectRatio(
                   aspectRatio: 16 / 9,
                   child: Stack(
@@ -221,7 +236,8 @@ class PlayerControls extends StatelessWidget {
                             left: 10,
                             child: Container(
                               padding: const EdgeInsets.all(8),
-                              decoration: BoxDecoration(color: Colors.black.withOpacity(0.5), borderRadius: BorderRadius.circular(20)),
+                              decoration: BoxDecoration(
+                                  color: Colors.black.withOpacity(0.5), borderRadius: BorderRadius.circular(20)),
                               child: Row(
                                 children: [
                                   const Icon(
@@ -243,7 +259,11 @@ class PlayerControls extends StatelessWidget {
                                 .slideX(duration: animationDuration, curve: Curves.easeInOutQuad)
                                 .fadeIn(duration: animationDuration)
                                 .fadeOut(delay: const Duration(seconds: 1), duration: animationDuration)
-                                .slideX(end: -0.5, duration: animationDuration, curve: Curves.easeInOutQuad, delay: const Duration(seconds: 1))),
+                                .slideX(
+                                    end: -0.5,
+                                    duration: animationDuration,
+                                    curve: Curves.easeInOutQuad,
+                                    delay: const Duration(seconds: 1))),
                       if (!isMini && !isPip)
                         Positioned(
                             left: 0,
@@ -261,7 +281,10 @@ class PlayerControls extends StatelessWidget {
                                                 ? cubit.hideControls
                                                 : cubit.showControls,
                                         onDoubleTap: _.justDoubleTappedSkip ? null : cubit.doubleTapRewind,
-                                        child: DoubleTapButton(stepText: '-$totalRewind ${locals.secondsShortForm}', opacity: _.doubleTapRewindedOpacity, icon: Icons.fast_rewind))),
+                                        child: DoubleTapButton(
+                                            stepText: '-$totalRewind ${locals.secondsShortForm}',
+                                            opacity: _.doubleTapRewindedOpacity,
+                                            icon: Icons.fast_rewind))),
                                 Expanded(
                                     child: GestureDetector(
                                         onTap: _.justDoubleTappedSkip
@@ -296,7 +319,8 @@ class PlayerControls extends StatelessWidget {
                                 ? GestureDetector(
                                     onTap: cubit.hideControls,
                                     child: Container(
-                                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(0), color: Colors.black.withOpacity(0.4)),
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(0), color: Colors.black.withOpacity(0.4)),
                                       child: Column(
                                         children: [
                                           Row(
@@ -310,11 +334,16 @@ class PlayerControls extends StatelessWidget {
                                                     videoTitle,
                                                     maxLines: 1,
                                                     overflow: TextOverflow.ellipsis,
-                                                    style: textTheme.bodyMedium?.copyWith(color: Colors.white.withOpacity(0.8)),
+                                                    style: textTheme.bodyMedium
+                                                        ?.copyWith(color: Colors.white.withOpacity(0.8)),
                                                   ),
                                                 )),
-                                              IconButton(onPressed: () => player.enterPip(), icon: const Icon(Icons.picture_in_picture)),
-                                              IconButton(onPressed: () => showOptionMenu(context, _), icon: const Icon(Icons.more_vert))
+                                              IconButton(
+                                                  onPressed: () => player.enterPip(),
+                                                  icon: const Icon(Icons.picture_in_picture)),
+                                              IconButton(
+                                                  onPressed: () => showOptionMenu(context, _),
+                                                  icon: const Icon(Icons.more_vert))
                                             ],
                                           ),
                                           Expanded(child: Container()),
@@ -335,8 +364,13 @@ class PlayerControls extends StatelessWidget {
                                                       },
                                                       icon: const Icon(Icons.volume_up)),
                                               switch (_.fullScreenState) {
-                                                FullScreenState.fullScreen => IconButton(onPressed: () => player.setFullScreen(FullScreenState.notFullScreen), icon: const Icon(Icons.fullscreen_exit)),
-                                                FullScreenState.notFullScreen => IconButton(onPressed: () => player.setFullScreen(FullScreenState.fullScreen), icon: const Icon(Icons.fullscreen)),
+                                                FullScreenState.fullScreen => IconButton(
+                                                    onPressed: () =>
+                                                        player.setFullScreen(FullScreenState.notFullScreen),
+                                                    icon: const Icon(Icons.fullscreen_exit)),
+                                                FullScreenState.notFullScreen => IconButton(
+                                                    onPressed: () => player.setFullScreen(FullScreenState.fullScreen),
+                                                    icon: const Icon(Icons.fullscreen)),
                                               }
                                             ],
                                           ),
@@ -349,7 +383,8 @@ class PlayerControls extends StatelessWidget {
                                   )
                                 : const SizedBox.expand(),
                       ),
-                      if ((_.displayControls || _.justDoubleTappedSkip) && !(player.state.currentlyPlaying?.liveNow ?? false))
+                      if ((_.displayControls || _.justDoubleTappedSkip) &&
+                          !(player.state.currentlyPlaying?.liveNow ?? false))
                         Positioned(
                           bottom: 0,
                           left: 0,
@@ -359,7 +394,10 @@ class PlayerControls extends StatelessWidget {
                               Container(
                                 decoration: _.justDoubleTappedSkip
                                     ? BoxDecoration(
-                                        gradient: LinearGradient(begin: Alignment.bottomCenter, end: Alignment.topCenter, colors: [Colors.black.withOpacity(1), Colors.black.withOpacity(0)]))
+                                        gradient: LinearGradient(
+                                            begin: Alignment.bottomCenter,
+                                            end: Alignment.topCenter,
+                                            colors: [Colors.black.withOpacity(1), Colors.black.withOpacity(0)]))
                                     : null,
                                 child: Padding(
                                     padding: const EdgeInsets.only(top: 16.0, right: 8),
@@ -370,9 +408,11 @@ class PlayerControls extends StatelessWidget {
                                               height: 25,
                                               child: Slider(
                                                 min: 0,
-                                                value: min(_.position.inMilliseconds.toDouble(), _.duration.inMilliseconds.toDouble()),
+                                                value: min(_.position.inMilliseconds.toDouble(),
+                                                    _.duration.inMilliseconds.toDouble()),
                                                 max: _.duration.inMilliseconds.toDouble(),
-                                                secondaryTrackValue: min(_.buffer.inMilliseconds.toDouble(), _.duration.inMilliseconds.toDouble()),
+                                                secondaryTrackValue: min(_.buffer.inMilliseconds.toDouble(),
+                                                    _.duration.inMilliseconds.toDouble()),
                                                 onChangeEnd: cubit.onScrubbed,
                                                 onChanged: cubit.onScrubDrag,
                                               )),

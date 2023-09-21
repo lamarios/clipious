@@ -1,3 +1,4 @@
+import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -8,8 +9,9 @@ import 'package:invidious/utils/views/components/placeholders.dart';
 
 import '../../../utils.dart';
 
-class EditHomeLayout extends StatelessWidget {
-  const EditHomeLayout({super.key});
+@RoutePage()
+class EditHomeLayoutScreen extends StatelessWidget {
+  const EditHomeLayoutScreen({super.key});
 
   List<SmallSource> buildSmallSources(BuildContext context, HomeLayout layout, EditLayoutCubit editLayout) {
     var widgets = <SmallSource>[];

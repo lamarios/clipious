@@ -2,19 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/player/states/tv_player_controls.dart';
+import 'package:invidious/player/views/tv/components/player_settings.dart';
 import 'package:invidious/utils/views/tv/components/tv_button.dart';
 import 'package:invidious/utils/views/tv/components/tv_horizontal_item_list.dart';
 import 'package:invidious/utils/views/tv/components/tv_overscan.dart';
-import 'package:invidious/player/views/tv/components/player_settings.dart';
 
-import '../../../states/interfaces/media_player.dart';
-import '../../../states/player.dart';
 import '../../../../globals.dart';
+import '../../../../utils.dart';
 import '../../../../utils/models/image_object.dart';
 import '../../../../utils/models/paginatedList.dart';
 import '../../../../videos/models/video_in_list.dart';
-import '../../../../utils.dart';
 import '../../../../videos/views/components/video_thumbnail.dart';
+import '../../../states/player.dart';
 
 class TvPlayerControls extends StatelessWidget {
   const TvPlayerControls({super.key});
@@ -56,8 +55,11 @@ class TvPlayerControls extends StatelessWidget {
                       duration: animationDuration,
                       child: Container(
                         decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                                begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: [Colors.black.withOpacity(1), Colors.black.withOpacity(0), Colors.black.withOpacity(1)])),
+                            gradient: LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: [
+                          Colors.black.withOpacity(1),
+                          Colors.black.withOpacity(0),
+                          Colors.black.withOpacity(1)
+                        ])),
                       ),
                     ),
                   ),
@@ -89,7 +91,10 @@ class TvPlayerControls extends StatelessWidget {
                                         mainAxisSize: MainAxisSize.min,
                                         children: [
                                           Thumbnail(
-                                            thumbnailUrl: ImageObject.getBestThumbnail(mpc.currentlyPlaying?.authorThumbnails)?.url ?? '',
+                                            thumbnailUrl:
+                                                ImageObject.getBestThumbnail(mpc.currentlyPlaying?.authorThumbnails)
+                                                        ?.url ??
+                                                    '',
                                             width: 40,
                                             height: 40,
                                             id: 'author-small-${mpc.currentlyPlaying?.authorId}',
@@ -267,14 +272,17 @@ class TvPlayerControls extends StatelessWidget {
                                     : Expanded(
                                         child: player.progress >= 0
                                             ? Container(
-                                                decoration: BoxDecoration(color: Colors.black.withOpacity(0.5), borderRadius: BorderRadius.circular(5)),
+                                                decoration: BoxDecoration(
+                                                    color: Colors.black.withOpacity(0.5),
+                                                    borderRadius: BorderRadius.circular(5)),
                                                 child: AnimatedFractionallySizedBox(
                                                   alignment: Alignment.centerLeft,
                                                   duration: animationDuration,
                                                   widthFactor: player.progress,
                                                   child: Container(
                                                     height: 8,
-                                                    decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(5)),
+                                                    decoration: BoxDecoration(
+                                                        color: Colors.white, borderRadius: BorderRadius.circular(5)),
                                                   ),
                                                 ))
                                             : const SizedBox.shrink()),
@@ -313,7 +321,8 @@ class TvPlayerControls extends StatelessWidget {
                                       TvHorizontalVideoList(
                                           onSelect: (ctx, video) => onVideoQueueSelected(ctx, cubit, video),
                                           paginatedVideoList: FixedItemList(mpc!.videos
-                                              .map((e) => VideoInList(e.title, e.videoId, e.lengthSeconds, null, e.author, e.authorId, e.authorUrl, null, null, e.videoThumbnails))
+                                              .map((e) => VideoInList(e.title, e.videoId, e.lengthSeconds, null,
+                                                  e.author, e.authorId, e.authorUrl, null, null, e.videoThumbnails))
                                               .toList())),
                                     ],
                                   ),

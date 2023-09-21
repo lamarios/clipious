@@ -19,7 +19,8 @@ class CommentsView extends StatelessWidget {
     var locals = AppLocalizations.of(context)!;
     var textTheme = Theme.of(context).textTheme;
     return BlocProvider(
-      create: (context) => CommentsCubit(CommentsState(video: video, sortBy: sortBy, source: source, continuation: continuation)),
+      create: (context) =>
+          CommentsCubit(CommentsState(video: video, sortBy: sortBy, source: source, continuation: continuation)),
       child: BlocBuilder<CommentsCubit, CommentsState>(builder: (context, _) {
         var cubit = context.read<CommentsCubit>();
         List<Widget> widgets = [];

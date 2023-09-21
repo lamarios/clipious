@@ -163,6 +163,6 @@ class VideoState {
     }
   }
 
-  VideoState._(this.scrollController, this.video, this.dislikes, this.loadingVideo, this.selectedIndex, this.videoId, this.isLoggedIn, this.downloading, this.downloadProgress, this.downloadedVideo,
-      this.opacity, this.error);
+  VideoState._(this.scrollController, this.video, this.dislikes, this.loadingVideo, this.selectedIndex, this.videoId,
+      this.isLoggedIn, this.downloading, this.downloadProgress, this.downloadedVideo, this.opacity, this.error);
 }

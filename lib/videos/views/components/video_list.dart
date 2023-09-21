@@ -23,7 +23,13 @@ class VideoList<T extends IdedVideo> extends StatelessWidget {
   final Axis scrollDirection;
   final bool small;
 
-  const VideoList({super.key, required this.paginatedVideoList, this.tags, this.animateDownload = false, this.scrollDirection = Axis.vertical, this.small = false});
+  const VideoList(
+      {super.key,
+      required this.paginatedVideoList,
+      this.tags,
+      this.animateDownload = false,
+      this.scrollDirection = Axis.vertical,
+      this.small = false});
 
 /*
   @override
@@ -71,7 +77,9 @@ class VideoList<T extends IdedVideo> extends StatelessWidget {
                   : Padding(
                       padding: EdgeInsets.only(top: small ? 0.0 : 4.0),
                       child: RefreshIndicator(
-                        onRefresh: () async => !small && _.itemList.hasRefresh() ? await cubit.refreshItems() : Future.delayed(Duration.zero),
+                        onRefresh: () async => !small && _.itemList.hasRefresh()
+                            ? await cubit.refreshItems()
+                            : Future.delayed(Duration.zero),
                         child: GridView.count(
                           crossAxisCount: gridCount,
                           controller: _.scrollController,

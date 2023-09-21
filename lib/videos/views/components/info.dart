@@ -1,15 +1,14 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:invidious/main.dart';
 import 'package:invidious/player/states/player.dart';
-import 'package:invidious/search/views/screens/search.dart';
+import 'package:invidious/router.dart';
 import 'package:invidious/utils/views/components/text_linkified.dart';
 import 'package:invidious/videos/models/video.dart';
 import 'package:invidious/videos/views/components/video_metrics.dart';
 import 'package:invidious/videos/views/components/video_thumbnail.dart';
 
-import '../../../myRouteObserver.dart';
 import '../../../subscription_management/view/components/subscribeButton.dart';
 import '../../../utils/models/image_object.dart';
 
@@ -20,16 +19,14 @@ class VideoInfo extends StatelessWidget {
   const VideoInfo({super.key, required this.video, this.dislikes});
 
   openChannel(BuildContext context) {
-    navigatorKey.currentState?.pushNamed(PATH_CHANNEL, arguments: video.authorId);
+    AutoRouter.of(context).push(ChannelRoute(channelId: video.authorId!));
   }
 
   showSearchWindow(BuildContext context, String query) {
-    navigatorKey.currentState?.push(MaterialPageRoute(
-        settings: ROUTE_CHANNEL,
-        builder: (context) => Search(
-              query: query,
-              searchNow: true,
-            )));
+    AutoRouter.of(context).push(SearchRoute(
+      query: query,
+      searchNow: true,
+    ));
   }
 
   @override
@@ -139,7 +136,8 @@ class VideoInfo extends StatelessWidget {
                     .map((e) => InkWell(
                           onTap: () => showSearchWindow(context, e),
                           child: Container(
-                            decoration: BoxDecoration(color: colorScheme.secondaryContainer, borderRadius: BorderRadius.circular(20)),
+                            decoration: BoxDecoration(
+                                color: colorScheme.secondaryContainer, borderRadius: BorderRadius.circular(20)),
                             child: Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4),
                               child: Text(e),
@@ -152,7 +150,8 @@ class VideoInfo extends StatelessWidget {
                       InkWell(
                         onTap: () => showSearchWindow(context, video.genre),
                         child: Container(
-                          decoration: BoxDecoration(color: colorScheme.secondaryContainer, borderRadius: BorderRadius.circular(20)),
+                          decoration: BoxDecoration(
+                              color: colorScheme.secondaryContainer, borderRadius: BorderRadius.circular(20)),
                           child: Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4),
                             child: Text(video.genre),

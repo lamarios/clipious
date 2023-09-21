@@ -1,3 +1,4 @@
+import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -7,8 +8,9 @@ import 'package:settings_ui/settings_ui.dart';
 
 import 'settings.dart';
 
-class SponsorBlockSettings extends StatelessWidget {
-  const SponsorBlockSettings({Key? key}) : super(key: key);
+@RoutePage()
+class SponsorBlockSettingsScreen extends StatelessWidget {
+  const SponsorBlockSettingsScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

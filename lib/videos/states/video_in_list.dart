@@ -45,7 +45,8 @@ class VideoInListState {
   BaseVideo? video;
   DownloadedVideo? offlineVideo;
 
-  VideoInListState({this.video, this.offlineVideo}) : assert(video == null || offlineVideo == null, 'cannot provide both video and offline video\n');
+  VideoInListState({this.video, this.offlineVideo})
+      : assert(video == null || offlineVideo == null, 'cannot provide both video and offline video\n');
 
   VideoInListState._(this.progress, this.video, this.offlineVideo);
 }

@@ -12,10 +12,24 @@ class VideoMetrics extends StatelessWidget {
   final int? lengthSeconds, viewCount, likeCount;
   final String? publishedText;
 
-  const VideoMetrics({super.key, this.video, this.dislikes, this.style, this.iconSize = 20, this.lengthSeconds, this.viewCount, this.likeCount, this.publishedText})
+  const VideoMetrics(
+      {super.key,
+      this.video,
+      this.dislikes,
+      this.style,
+      this.iconSize = 20,
+      this.lengthSeconds,
+      this.viewCount,
+      this.likeCount,
+      this.publishedText})
       : assert(
-            (video != null && lengthSeconds == null && viewCount == null && likeCount == null && publishedText == null) ||
-                (video == null && (lengthSeconds != null || viewCount != null || likeCount != null || publishedText != null)),
+            (video != null &&
+                    lengthSeconds == null &&
+                    viewCount == null &&
+                    likeCount == null &&
+                    publishedText == null) ||
+                (video == null &&
+                    (lengthSeconds != null || viewCount != null || likeCount != null || publishedText != null)),
             'need either a video or given metrics');
 
   Widget get separator => Padding(

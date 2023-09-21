@@ -70,7 +70,7 @@ class _AddPlayListFormState extends State<AddPlayListForm> {
       var id = await service.createPlayList(nameController.value.text, privacyValue);
 
       if (context.mounted) {
-        Navigator.of(context).pop();
+        Navigator.pop(context);
       }
 
       if (context.mounted && id != null && widget.afterAdd != null) {

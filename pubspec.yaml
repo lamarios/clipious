@@ -16,7 +16,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 # In Windows, build-name is used as the major, minor, and patch parts
 # of the product and file versions while build-number is used as the build suffix.
-version: 1.15.4+4028
+version: 1.16.0+4029
 
 environment:
   sdk: '>=3.0.0 <4.0.0'
@@ -80,6 +80,10 @@ dependencies:
   copy_with_extension: 5.0.4
   pretty_bytes: 6.1.0
   simple_pip_mode: ^0.8.0
+  flutter_background_service: 5.0.1
+  optimize_battery: 0.0.4
+  awesome_notifications: ^0.7.5-dev.3
+  auto_route: ^7.8.3
 dependency_overrides:
   #  wakelock_windows:
   #    git: # see https://github.com/creativecreatorormaybenot/wakelock/pull/203 for updates
@@ -108,6 +112,7 @@ dev_dependencies:
   test: any
   copy_with_extension_gen: 5.0.4
   flutter_launcher_icons: ^0.13.1
+  auto_route_generator:  ^7.3.1
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

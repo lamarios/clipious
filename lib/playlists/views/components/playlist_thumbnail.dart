@@ -14,7 +14,13 @@ class PlaylistThumbnails extends StatelessWidget {
   final int maxThumbs;
   final bool isPlaceHolder;
 
-  const PlaylistThumbnails({super.key, required this.videos, this.children, this.bestThumbnails = false, this.maxThumbs = 4, this.isPlaceHolder = false});
+  const PlaylistThumbnails(
+      {super.key,
+      required this.videos,
+      this.children,
+      this.bestThumbnails = false,
+      this.maxThumbs = 4,
+      this.isPlaceHolder = false});
 
   List<Widget> getThumbs(BuildContext context, BoxConstraints constraints) {
     var thumbs = <Widget>[];
@@ -44,12 +50,15 @@ class PlaylistThumbnails extends StatelessWidget {
                           ? VideoThumbnailView(
                               cacheKey: 'v-${bestThumbnails ? 'best' : 'worst'}/${videosToUse[i].videoId}',
                               videoId: videosToUse[i].videoId,
-                              thumbnailUrl:
-                                  (bestThumbnails ? ImageObject.getBestThumbnail(videosToUse[i].videoThumbnails)?.url : ImageObject.getWorstThumbnail(videosToUse[i].videoThumbnails)?.url) ?? '',
+                              thumbnailUrl: (bestThumbnails
+                                      ? ImageObject.getBestThumbnail(videosToUse[i].videoThumbnails)?.url
+                                      : ImageObject.getWorstThumbnail(videosToUse[i].videoThumbnails)?.url) ??
+                                  '',
                             )
                           : const SizedBox.shrink(),
                   secondChild: Container(
-                    decoration: BoxDecoration(color: colors.secondaryContainer, borderRadius: BorderRadius.circular(10)),
+                    decoration:
+                        BoxDecoration(color: colors.secondaryContainer, borderRadius: BorderRadius.circular(10)),
                   ),
                   crossFadeState: isPlaceHolder
                       ? CrossFadeState.showFirst

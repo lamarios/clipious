@@ -58,7 +58,6 @@ class DownloadManagerCubit extends Cubit<DownloadManagerState> {
         db.upsertDownload(v);
       }
     }
-    print('setting videos');
 
     state.videos = vids;
     emit(state);
@@ -66,7 +65,8 @@ class DownloadManagerCubit extends Cubit<DownloadManagerState> {
 
   void playAll() {
     setVideos();
-    player.playOfflineVideos(state.videos.where((element) => element.downloadComplete && !element.downloadFailed).toList());
+    player.playOfflineVideos(
+        state.videos.where((element) => element.downloadComplete && !element.downloadFailed).toList());
   }
 
   onProgress(int count, int total, DownloadedVideo video) {
@@ -95,8 +95,14 @@ class DownloadManagerCubit extends Cubit<DownloadManagerState> {
       return false;
     } else {
       Video vid = await service.getVideo(videoId);
-      var downloadedVideo =
-          DownloadedVideo(videoId: vid.videoId, title: vid.title, author: vid.author, authorUrl: vid.authorUrl, audioOnly: audioOnly, lengthSeconds: vid.lengthSeconds, quality: quality);
+      var downloadedVideo = DownloadedVideo(
+          videoId: vid.videoId,
+          title: vid.title,
+          author: vid.author,
+          authorUrl: vid.authorUrl,
+          audioOnly: audioOnly,
+          lengthSeconds: vid.lengthSeconds,
+          quality: quality);
       db.upsertDownload(downloadedVideo);
 
       String contentUrl;
@@ -105,7 +111,9 @@ class DownloadManagerCubit extends Cubit<DownloadManagerState> {
         FormatStream stream = vid.formatStreams.firstWhere((element) => element.resolution == quality);
         contentUrl = stream.url;
       } else {
-        AdaptiveFormat audio = vid.adaptiveFormats.sortByReversed((e) => int.parse(e.bitrate ?? "0")).firstWhere((element) => element.type.contains("audio"));
+        AdaptiveFormat audio = vid.adaptiveFormats
+            .sortByReversed((e) => int.parse(e.bitrate ?? "0"))
+            .firstWhere((element) => element.type.contains("audio"));
         contentUrl = audio.url;
       }
 
@@ -130,9 +138,11 @@ class DownloadManagerCubit extends Cubit<DownloadManagerState> {
       // download video
       var videoPath = await downloadedVideo.mediaPath;
 
-      log.info("Downloading video ${vid.title}, audioOnly ? $audioOnly, quality: $quality (if not only audio) to path: $videoPath");
+      log.info(
+          "Downloading video ${vid.title}, audioOnly ? $audioOnly, quality: $quality (if not only audio) to path: $videoPath");
       dio
-          .download(contentUrl, videoPath, onReceiveProgress: (count, total) => onProgress(count, total, downloadedVideo), cancelToken: cancelToken)
+          .download(contentUrl, videoPath,
+              onReceiveProgress: (count, total) => onProgress(count, total, downloadedVideo), cancelToken: cancelToken)
           .catchError((err) => onDownloadError(err, downloadedVideo));
 
       return true;

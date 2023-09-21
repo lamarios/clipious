@@ -23,7 +23,8 @@ class PlayerControlsCubit extends Cubit<PlayerControlsState> {
   void onReady() {
     log.fine("Controls ready!");
 
-    emit(state.copyWith(duration: player.duration, muted: player.state.muted, fullScreenState: player.state.fullScreenState));
+    emit(state.copyWith(
+        duration: player.duration, muted: player.state.muted, fullScreenState: player.state.fullScreenState));
     showControls();
   }
 
@@ -199,6 +200,18 @@ class PlayerControlsState {
   bool justDoubleTappedSkip = false;
   bool showSponsorBlocked = false;
 
-  PlayerControlsState._(this.buffering, this.justDoubleTappedSkip, this.position, this.displayControls, this.errored, this.duration, this.fullScreenState, this.muted, this.buffer,
-      this.draggingPositionSlider, this.doubleTapFastForwardedOpacity, this.doubleTapRewindedOpacity, this.showSponsorBlocked);
+  PlayerControlsState._(
+      this.buffering,
+      this.justDoubleTappedSkip,
+      this.position,
+      this.displayControls,
+      this.errored,
+      this.duration,
+      this.fullScreenState,
+      this.muted,
+      this.buffer,
+      this.draggingPositionSlider,
+      this.doubleTapFastForwardedOpacity,
+      this.doubleTapRewindedOpacity,
+      this.showSponsorBlocked);
 }

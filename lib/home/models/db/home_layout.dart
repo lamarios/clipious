@@ -48,7 +48,8 @@ enum HomeDataSource {
 
   bool isPermitted(BuildContext context) {
     return switch (this) {
-      (HomeDataSource.subscription || HomeDataSource.playlist || HomeDataSource.history) => context.read<AppCubit>().isLoggedIn,
+      (HomeDataSource.subscription || HomeDataSource.playlist || HomeDataSource.history) =>
+        context.read<AppCubit>().isLoggedIn,
       (HomeDataSource.searchHistory) => context.read<SettingsCubit>().state.useSearchHistory,
       (_) => true
     };
@@ -58,12 +59,16 @@ enum HomeDataSource {
     var locals = AppLocalizations.of(context)!;
     return switch (this) {
       (HomeDataSource.trending) => NavigationDestination(icon: const Icon(Icons.trending_up), label: getLabel(locals)),
-      (HomeDataSource.popular) => NavigationDestination(icon: const Icon(Icons.local_fire_department), label: getLabel(locals)),
-      (HomeDataSource.playlist) => NavigationDestination(icon: const Icon(Icons.playlist_play), label: getLabel(locals)),
+      (HomeDataSource.popular) =>
+        NavigationDestination(icon: const Icon(Icons.local_fire_department), label: getLabel(locals)),
+      (HomeDataSource.playlist) =>
+        NavigationDestination(icon: const Icon(Icons.playlist_play), label: getLabel(locals)),
       (HomeDataSource.history) => NavigationDestination(icon: const Icon(Icons.history), label: getLabel(locals)),
       (HomeDataSource.downloads) => NavigationDestination(icon: const Icon(Icons.download), label: getLabel(locals)),
-      (HomeDataSource.searchHistory) => NavigationDestination(icon: const Icon(Icons.saved_search), label: getLabel(locals)),
-      (HomeDataSource.subscription) => NavigationDestination(icon: const Icon(Icons.subscriptions), label: getLabel(locals)),
+      (HomeDataSource.searchHistory) =>
+        NavigationDestination(icon: const Icon(Icons.saved_search), label: getLabel(locals)),
+      (HomeDataSource.subscription) =>
+        NavigationDestination(icon: const Icon(Icons.subscriptions), label: getLabel(locals)),
       (HomeDataSource.home) => NavigationDestination(icon: const Icon(Icons.home), label: getLabel(locals)),
     };
   }
@@ -137,9 +142,10 @@ enum HomeDataSource {
                   paginatedVideoList: PageBasedPaginatedList<VideoInList>(
                       getItemsFunc: (page, maxResults) =>
                           // we get the data for each video
-                          service
-                              .getUserHistory(page, maxResults)
-                              .then((value) => Future.wait(value.map((e) async => (await HistoryVideoCache.fromVideoIdToVideo(e)).toBaseVideo().toVideoInList()).toList())),
+                          service.getUserHistory(page, maxResults).then((value) => Future.wait(value
+                              .map((e) async =>
+                                  (await HistoryVideoCache.fromVideoIdToVideo(e)).toBaseVideo().toVideoInList())
+                              .toList())),
                       maxResults: 20),
                 )
               : const HistoryView(),
@@ -177,6 +183,8 @@ class HomeLayout {
   List<String> get dbSmallSources => smallSources.map((e) => e.name).toList();
 
   set dbSmallSources(List<String> values) {
-    smallSources = values.map((e) => HomeDataSource.values.where((element) => element.name == e).firstOrNull ?? HomeDataSource.trending).toList();
+    smallSources = values
+        .map((e) => HomeDataSource.values.where((element) => element.name == e).firstOrNull ?? HomeDataSource.trending)
+        .toList();
   }
 }

@@ -1,14 +1,13 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/globals.dart';
-import 'package:invidious/main.dart';
-import 'package:invidious/myRouteObserver.dart';
 import 'package:invidious/playlists/models/playlist.dart';
 import 'package:invidious/playlists/states/playlist_in_list.dart';
 import 'package:invidious/playlists/views/components/playlist_thumbnail.dart';
-import 'package:invidious/playlists/views/screens/playlist.dart';
 import 'package:invidious/playlists/views/tv/screens/playlist.dart';
+import 'package:invidious/router.dart';
 import 'package:invidious/utils.dart';
 
 import '../../states/playlist_list.dart';
@@ -25,20 +24,11 @@ class PlaylistInList extends StatelessWidget {
 
   openPlayList(BuildContext context) {
     var cubit = context.read<PlaylistListCubit>();
-    navigatorKey.currentState
-        ?.push(MaterialPageRoute(
-            settings: ROUTE_PLAYLIST,
-            builder: (context) => PlaylistView(
-                  playlist: playlist,
-                  canDeleteVideos: canDeleteVideos,
-                )))
-        .then((value) => cubit.refreshPlaylists());
+    AutoRouter.of(context).push(PlaylistViewRoute(playlist: playlist, canDeleteVideos: canDeleteVideos)).then((value) => cubit.refreshPlaylists());
   }
 
   openTvPlaylist(BuildContext context) {
-    Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) => TvPlaylistView(playlist: playlist, canDeleteVideos: false),
-    ));
+    AutoRouter.of(context).push(TvPlaylistRoute(playlist: playlist, canDeleteVideos: false));
   }
 
   @override

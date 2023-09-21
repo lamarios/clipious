@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:invidious/main.dart';
 import 'package:invidious/utils/views/tv/components/tv_horizontal_item_list.dart';
-import 'package:invidious/videos/views/components/video_in_list.dart';
 
 import '../../../utils/models/paginatedList.dart';
 import '../../models/video_in_list.dart';

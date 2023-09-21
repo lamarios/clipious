@@ -1,13 +1,13 @@
 import 'package:bloc/bloc.dart';
 import 'package:copy_with_extension/copy_with_extension.dart';
-import 'package:flutter/cupertino.dart';
 
 part 'select_list.g.dart';
 
 class SelectListCubit<T> extends Cubit<SelectListState<T>> {
   SelectListCubit(super.initialState);
 
-  filterItems(Future<List<T>> Function(String filter)? asyncSearch, bool Function(String filter, T value)? searchFilter, List<T>? values, String searchQuery) async {
+  filterItems(Future<List<T>> Function(String filter)? asyncSearch, bool Function(String filter, T value)? searchFilter,
+      List<T>? values, String searchQuery) async {
     List<T> result = [];
 
     if (searchFilter != null && values != null) {
