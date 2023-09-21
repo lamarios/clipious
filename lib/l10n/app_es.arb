@@ -283,7 +283,7 @@
   "@latestVideos": {
     "description": "Latest channel videos"
   },
-  "subscribe": "Suscribir",
+  "subscribe": "Suscribirse",
   "@subscribe": {
     "description": "Label for user to subscribe to a channel"
   },

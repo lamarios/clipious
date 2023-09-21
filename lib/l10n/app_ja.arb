@@ -952,5 +952,61 @@
   "library": "ライブラリ",
   "@library": {
     "description": "Name for user library"
+  },
+  "from": "開始",
+  "@from": {
+    "description": "From word (as in 'From xx To xx')"
+  },
+  "videoFilterApplyDateToFilter": "時間で動画を絞り込む",
+  "@videoFilterApplyDateToFilter": {
+    "description": "Label for switch to allow user to customize video filter and set days of week and time to them"
+  },
+  "to": "終了",
+  "@to": {
+    "description": "To word as in 'From xx To xx')"
+  },
+  "videoFilterDayOfWeekDescription": "絞り込む日にちと時間を選択できます。スポーツの結果のネタバレを避けたりできます。",
+  "@videoFilterDayOfWeekDescription": {
+    "description": ""
+  },
+  "videoFilterStartTime": "開始時間",
+  "@videoFilterStartTime": {
+    "description": "Title for filter start time"
+  },
+  "videoFilterTimeOfDayFromTo": "開始 {from} 終了 {to}",
+  "@videoFilterTimeOfDayFromTo": {
+    "description": "Time of day range",
+    "placeholders": {
+      "from": {
+        "type": "String",
+        "example": "3:00 AM"
+      },
+      "to": {
+        "type": "String",
+        "example": "5:00 PM"
+      }
+    }
+  },
+  "videoFilterDayOfWeek": "絞り込む日にちを選択",
+  "@videoFilterDayOfWeek": {
+    "description": "Title for day selection for the filter"
+  },
+  "videoFilterEndTime": "終了時間",
+  "@videoFilterEndTime": {
+    "description": "Title for filter end time"
+  },
+  "secondsShortForm": "秒",
+  "@secondsShortForm": {
+    "description": "Short form for the word seconds"
+  },
+  "videoFilterAppliedOn": "{selectedDays}に適用",
+  "@videoFilterAppliedOn": {
+    "description": "Readable text on when the filter should apply",
+    "placeholders": {
+      "selectedDays": {
+        "type": "String",
+        "example": "Monday, Wednesday, Friday"
+      }
+    }
   }
 }

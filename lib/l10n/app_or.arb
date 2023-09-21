@@ -900,5 +900,113 @@
   "history": "ଇତିହାସ",
   "@history": {
     "description": "User view history label"
+  },
+  "homeLayoutEditor": "ଘର ବିନ୍ୟାସକୁ ସମ୍ପାଦନ କରନ୍ତୁ",
+  "@homeLayoutEditor": {
+    "description": "Title of layout editor screen"
+  },
+  "navigationBarLabelNeverShow": "ନାମପଟି କେବେବି ଦେଖାନ୍ତୁ ନାହିଁ",
+  "@navigationBarLabelNeverShow": {
+    "description": "Never show label option for navigation bar"
+  },
+  "customizeAppLayout": "ଆପ ବିଭାଗଗୁଡ଼ିକୁ ଇଚ୍ଛାରୂପଣ କରନ୍ତୁ",
+  "@customizeAppLayout": {
+    "description": "Settings label for the settings to allow the user to set up the app sections themselves"
+  },
+  "navigationBarLabelShowOnSelect": "ବଚ୍ଛିତ ବସ୍ତୁରେ ପ୍ରଦର୍ଶିତ ନାମପଟି",
+  "@navigationBarLabelShowOnSelect": {
+    "description": "Label only showing when selected option for navigation bar"
+  },
+  "from": "ଠାରୁ",
+  "@from": {
+    "description": "From word (as in 'From xx To xx')"
+  },
+  "distractionFreeMode": "ବିଚଳିତ ମୁକ୍ତ ଧାରା",
+  "@distractionFreeMode": {
+    "description": "title for distraction free mode settings"
+  },
+  "navigationBarLabelAlwaysShowing": "ନାମପଟି ସର୍ବଦା ଦର୍ଶାଯାଉଛି",
+  "@navigationBarLabelAlwaysShowing": {
+    "description": "Label always showing option for navigation bar"
+  },
+  "customizeAppLayoutExplanation": "ଆପଣ ମୁଖ୍ୟ ଆପ୍ ‌ ନେଭିଗେସନ୍ ‌ ବାର୍ ‌ ରେ କେଉଁ ବିଭାଗକୁ ଦର୍ଶାଇବାକୁ ଚାହୁଁଛନ୍ତି ତାହା ଚୟନ କରନ୍ତୁ । ପ୍ରୟୋଗ ଆରମ୍ଭ ହେବା ସମୟରେ କେଉଁ ସ୍କ୍ରିନ ଦର୍ଶାଇଥାଏ ତାହା ବାଛିବା ପାଇଁ ହୋମ ଆଇକନ ଉପରେ କ୍ଲିକ କରନ୍ତୁ । ଆପଣ ସେଗୁଡିକୁ ଚାରିପାଖକୁ ଟାଣିବା ଦ୍ୱାରା ସେଗୁଡିକୁ ପୁନଃ ଅର୍ଡର କରିପାରିବେ ।",
+  "@customizeAppLayoutExplanation": {
+    "description": ""
+  },
+  "videoFilterApplyDateToFilter": "ପ୍ରଦତ୍ତ ସମୟରେ ଭିଡିଓଗୁଡ଼ିକୁ ଛାଣନ୍ତୁ",
+  "@videoFilterApplyDateToFilter": {
+    "description": "Label for switch to allow user to customize video filter and set days of week and time to them"
+  },
+  "layoutEditorExplanation": "ଆପଣ ନିଜ ହୋମ ସ୍କ୍ରିନରେ କ 'ଣ ଦେଖିବେ ତାହା ସ୍ଥିର କରିପାରିବେ, ଆପଣ ଆଭ୍ୟନ୍ତରୀଣ ସ୍କ୍ରୋଲିଂ ଏବଂ ଗୋଟିଏ ବଡ଼ ଉତ୍ସ ସହିତ 2 ଟି ଛୋଟ ଦୃଶ୍ୟ ପାଇପାରିବେ ।",
+  "@layoutEditorExplanation": {
+    "description": "text to explain the home layout editor"
+  },
+  "to": "ଏଠାକୁ",
+  "@to": {
+    "description": "To word as in 'From xx To xx')"
+  },
+  "videoFilterDayOfWeekDescription": "ଆପଣ ମନୋନୀତ ଭାବରେ ସପ୍ତାହର ଦିନ ଏବଂ ସମୟକୁ ଚୟନ କରିପାରିବେ ଯେଉଁଠାରେ ଫିଲ୍ଟରଗୁଡିକ ପ୍ରୟୋଗ କରାଯାଏ, ଉଦାହରଣ ସ୍ୱରୂପ, କ୍ରୀଡ଼ା ଇଭେଣ୍ଟଗୁଡ଼ିକୁ ନଷ୍ଟ ନକରିବା ।",
+  "@videoFilterDayOfWeekDescription": {
+    "description": ""
+  },
+  "library": "ଲାଇବ୍ରେରୀ",
+  "@library": {
+    "description": "Name for user library"
+  },
+  "videoFilterStartTime": "ପ୍ରାରମ୍ଭିକ ସମୟ",
+  "@videoFilterStartTime": {
+    "description": "Title for filter start time"
+  },
+  "distractionFreeModeDescription": "ଭିଡ଼ିଓ ମନ୍ତବ୍ୟ ଏବଂ ସୁପାରିଶକୁ ନିଷ୍କ୍ରିୟ କରନ୍ତୁ",
+  "@distractionFreeModeDescription": {
+    "description": "Description for distraction free mode"
+  },
+  "videoFilterTimeOfDayFromTo": "{from} ଠାରୁ ଏଠାକୁ {to}",
+  "@videoFilterTimeOfDayFromTo": {
+    "description": "Time of day range",
+    "placeholders": {
+      "from": {
+        "type": "String",
+        "example": "3:00 AM"
+      },
+      "to": {
+        "type": "String",
+        "example": "5:00 PM"
+      }
+    }
+  },
+  "videoFilterDayOfWeek": "ଛାଣକ ପ୍ରୟୋଗ କରିବା ପାଇଁ ଦିନ ବାଛନ୍ତୁ",
+  "@videoFilterDayOfWeek": {
+    "description": "Title for day selection for the filter"
+  },
+  "home": "ମୂଳସ୍ଥାନ",
+  "@home": {
+    "description": "Label for Home browsing tab"
+  },
+  "videoFilterEndTime": "ସମାପ୍ତି ସମୟ",
+  "@videoFilterEndTime": {
+    "description": "Title for filter end time"
+  },
+  "secondsShortForm": "ସେକେଣ୍ଡ",
+  "@secondsShortForm": {
+    "description": "Short form for the word seconds"
+  },
+  "videoFilterAppliedOn": "{selectedDays} ଉପରେ ପ୍ରୟୋଗ",
+  "@videoFilterAppliedOn": {
+    "description": "Readable text on when the filter should apply",
+    "placeholders": {
+      "selectedDays": {
+        "type": "String",
+        "example": "Monday, Wednesday, Friday"
+      }
+    }
+  },
+  "layoutEditorAddVideoSource": "ଭିଡ଼ିଓ ଉତ୍ସ ଯୋଗ କରନ୍ତୁ",
+  "@layoutEditorAddVideoSource": {
+    "description": "Label for button to allow user to add more video sources to the home screen"
+  },
+  "navigationBarStyle": "ପଥପ୍ରଦର୍ଶନ ପଟି ଶୈଳୀ",
+  "@navigationBarStyle": {
+    "description": "Label for settings on customizing navigation bar style"
   }
 }
