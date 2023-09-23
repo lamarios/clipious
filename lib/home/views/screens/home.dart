@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:back_button_interceptor/back_button_interceptor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,7 +12,6 @@ import 'package:invidious/settings/states/settings.dart';
 import 'package:invidious/utils.dart';
 import 'package:invidious/utils/views/components/app_icon.dart';
 
-import '../../../main.dart';
 import '../../../notifications/notifications.dart';
 
 @RoutePage()
@@ -54,11 +52,11 @@ class _HomeScreenState extends State<HomeScreen> {
     }, name: 'mainNavigator', zIndex: 0, ifNotYetIntercepted: true);
 
     // Only after at least the action method is set, the notification events are delivered
-    AwesomeNotifications().setListeners(
-        onActionReceivedMethod: NotificationController.onActionReceivedMethod,
-        onNotificationCreatedMethod: NotificationController.onNotificationCreatedMethod,
-        onNotificationDisplayedMethod: NotificationController.onNotificationDisplayedMethod,
-        onDismissActionReceivedMethod: NotificationController.onDismissActionReceivedMethod);
+    notifications.getNotificationAppLaunchDetails().then((details) {
+      if(details?.notificationResponse != null){
+         onDidReceiveNotificationResponse(details!.notificationResponse!);
+      }
+    });
   }
 
   @override

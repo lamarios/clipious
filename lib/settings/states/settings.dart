@@ -1,11 +1,12 @@
-import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:bloc/bloc.dart';
 import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:invidious/app/states/app.dart';
 import 'package:invidious/foreground_service.dart';
+import 'package:invidious/notifications/notifications.dart';
 import 'package:locale_names/locale_names.dart';
 import 'package:logging/logging.dart';
 import 'package:optimize_battery/optimize_battery.dart';
@@ -327,14 +328,7 @@ class SettingsCubit extends Cubit<SettingsState> {
       backgroundService.invoke('stopService');
       emit(state);
     } else {
-      AwesomeNotifications().isNotificationAllowed().then((isAllowed) {
-        if (!isAllowed) {
-          // This is just a basic example. For real apps, you must show some
-          // friendly dialog box before call the request method.
-          // This is very important to not harm the user experience
-          AwesomeNotifications().requestPermissionToSendNotifications();
-        }
-      });
+      notifications.resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()?.requestPermission();
 
       var ignoringBatterOptimization = await OptimizeBattery.isIgnoringBatteryOptimizations();
       if (!ignoringBatterOptimization) {

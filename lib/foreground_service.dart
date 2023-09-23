@@ -1,12 +1,10 @@
 import 'dart:async';
 import 'dart:ui';
 
-import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_background_service/flutter_background_service.dart';
 import 'package:flutter_background_service_android/flutter_background_service_android.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:http/http.dart';
 import 'package:intl/intl.dart';
 import 'package:invidious/database.dart';
 import 'package:invidious/globals.dart';
@@ -23,8 +21,8 @@ final backgroundService = FlutterBackgroundService();
 
 final log = Logger('Background service');
 
-const debugMode = kDebugMode;
-// const debugMode = true;
+// const debugMode = kDebugMode;
+const debugMode = true;
 
 Timer? timer;
 
@@ -49,7 +47,7 @@ void configureBackgroundService(SettingsCubit settings) async {
 String get refreshRate => db.getSettings(BACKGROUND_CHECK_FREQUENCY)?.value ?? "1";
 
 @pragma('vm:entry-point')
-onStart(ServiceInstance service) async {
+onStart(ServiceInstance service) {
   print("Background service started");
 
   DartPluginRegistrant.ensureInitialized();

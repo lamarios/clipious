@@ -3,7 +3,6 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
-  awesome_notifications
   dynamic_color
   objectbox_flutter_libs
   share_plus
