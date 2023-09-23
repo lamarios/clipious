@@ -1133,7 +1133,7 @@
       "format": "compact"
     }
   },
-  "foregroundServiceNotificationContent": "Comprobará si hay vídeos nuevos una vez {hours, select, 1{por hora} 24{al día} other{cada {hours}} horas}}",
+  "foregroundServiceNotificationContent": "Comprobará si hay vídeos nuevos una vez {hours, select, 1{por hora} 24{al día} other{cada {hours} horas}}",
   "@foregroundServiceNotificationContent": {
     "description": "Content for the foreground service running notification when the user wants to receive notifications",
     "hours": {
