@@ -1008,5 +1008,163 @@
         "example": "Monday, Wednesday, Friday"
       }
     }
+  },
+  "notificationsDescription": "Activar y revisar las notificaciones",
+  "@notificationsDescription": {
+    "description": "Setting description for notifications"
+  },
+  "notifications": "Notificaciones",
+  "@notifications": {
+    "description": "Notification settings title"
+  },
+  "askToEnableBackgroundServiceContent": "Para recibir las notificaciones, es necesario activar las notificaciones en Clipious, pulse de acuerdo para activarlo.",
+  "@askToEnableBackgroundServiceContent": {
+    "description": "If the users tries to turn on notifications for a channel but hasn't enable notifications in the app we need to turn it on for them"
+  },
+  "askForDisableBatteryOptimizationTitle": "Es necesario desactivar la optimización de la batería",
+  "@askForDisableBatteryOptimizationTitle": {
+    "description": "Title for the dialog asking the user to turn off disabling battery optimization when turning on notifications"
+  },
+  "askForDisableBatteryOptimizationContent": "Para enviar notificaciones Clipious necesita ejecutar un servicio en segundo plano. Para que funcione sin problemas es necesario que Clipious tenga un uso de la batería sin restricciones, pulsando en de acuerdo se abrirá la configuración de optimización de la batería.",
+  "@askForDisableBatteryOptimizationContent": {
+    "description": "Content for the dialog asking the user to turn off disabling battery optimization when turning on notifications"
+  },
+  "playlistNotificationTitle": "Nuevos vídeos en la lista de reproducción {playlist}",
+  "@playlistNotificationTitle": {
+    "description": "Title for the playlist notifications when there are new videos",
+    "placeholders": {
+      "playlist": {
+        "type": "String",
+        "example": "Lo-Fi girl"
+      }
+    }
+  },
+  "notificationFrequencySettingsTitle": "Nueva frecuencia de verificación del video",
+  "@notificationFrequencySettingsTitle": {
+    "description": "Title for frequency settings"
+  },
+  "channelNotificationTitle": "Nuevos vídeos de {channel}",
+  "@channelNotificationTitle": {
+    "description": "Title for the channel notifications when there are new videos",
+    "placeholders": {
+      "channel": {
+        "type": "String",
+        "example": "MKBHD"
+      }
+    }
+  },
+  "playlistNotificationContent": "Hay {count, plural, =0{ningún vídeo nuevo} =1{1 vídeo nuevo} other{{count} vídeos nuevos}} en la lista de reproducción {playlist}",
+  "@playlistNotificationContent": {
+    "description": "Content for playlist notification when there are new videos",
+    "placeholders": {
+      "playlist": {
+        "type": "String",
+        "example": "Lo-Fi girl"
+      },
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "subscriptionNotificationTitle": "Nuevos vídeos de tus suscripciones",
+  "@subscriptionNotificationTitle": {
+    "description": "Title for the notification showing that there are new videos from the subscription feed"
+  },
+  "deleteChannelNotificationContent": "No recibirás más notificaciones de este canal.",
+  "@deleteChannelNotificationContent": {
+    "description": "Title for dialog to confirm whether to delete channel notifications"
+  },
+  "subscriptionNotificationDescription": "Recibe notificaciones de nuevos vídeos desde la fuente de la suscripción si has iniciado sesión en tu instancia actual",
+  "@subscriptionNotificationDescription": {
+    "description": "Description for subscription notifications"
+  },
+  "subscriptionNotification": "Notificaciones de la suscripción",
+  "@subscriptionNotification": {
+    "description": "Title for subscriptions notifications"
+  },
+  "deletePlaylistNotificationContent": "No recibirás más notificaciones de esta lista de reproducción.",
+  "@deletePlaylistNotificationContent": {
+    "description": "Title for dialog to confirm whether to delete playlist notifications"
+  },
+  "channelNotificationContent": "Hay {count, plural, =0{ningún vídeo nuevo} =1{1 vídeo nuevo} other{{count} vídeos nuevos}} de {channel}",
+  "@channelNotificationContent": {
+    "description": "Content for channel notification when there are new videos",
+    "placeholders": {
+      "channel": {
+        "type": "String",
+        "example": "MKBHD"
+      },
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "deletePlaylistNotificationTitle": "¿Notificación de eliminación de las listas de reproducción ?",
+  "@deletePlaylistNotificationTitle": {
+    "description": "Title for dialog to confirm whether to delete playlist notifications"
+  },
+  "enableNotificationDescriptions": "Ejecuta un servicio en primer plano para comprobar y notificar los cambios que estás supervisando",
+  "@enableNotificationDescriptions": {
+    "description": ""
+  },
+  "foregroundServiceUpdatingSubscriptions": "Revisando las suscripciones...",
+  "@foregroundServiceUpdatingSubscriptions": {
+    "description": "Foreground service notification text when checking for new subscription videos"
+  },
+  "deleteChannelNotificationTitle": "¿Borrar la notificación del canal?",
+  "@deleteChannelNotificationTitle": {
+    "description": "Title for dialog to confirm whether to delete channel notifications"
+  },
+  "foregroundServiceNotificationTitle": "Vigilando el vídeo",
+  "@foregroundServiceNotificationTitle": {
+    "description": "Title for the foreground service running notification when the user wants to receive notifications"
+  },
+  "otherNotifications": "Otras fuentes de notificación (iconos de campana)",
+  "@otherNotifications": {
+    "description": "Title for settings section in the notification settings"
+  },
+  "notificationFrequencySliderLabel": "{hours, select,  24{1d} other{{hours}h}}",
+  "@notificationFrequencySliderLabel": {
+    "description": "Short form for a number of hours going up to 1 day",
+    "hours": {
+      "type": "num",
+      "format": "compact"
+    }
+  },
+  "foregroundServiceNotificationContent": "Comprobará si hay vídeos nuevos una vez {hours, select, 1{por hora} 24{al día} other{cada {hours}} horas}}",
+  "@foregroundServiceNotificationContent": {
+    "description": "Content for the foreground service running notification when the user wants to receive notifications",
+    "hours": {
+      "type": "num",
+      "format": "compact"
+    }
+  },
+  "foregroundServiceUpdatingChannels": "Comprobando los canales...",
+  "@foregroundServiceUpdatingChannels": {
+    "description": "Foreground service notification text when checking for new channel videos"
+  },
+  "notificationFrequencySettingsDescription": "Frecuencia con la que la aplicación buscará nuevos vídeos",
+  "@notificationFrequencySettingsDescription": {
+    "description": "Description for frequency settings"
+  },
+  "foregroundServiceUpdatingPlaylist": "Comprobando las listas de reproducción...",
+  "@foregroundServiceUpdatingPlaylist": {
+    "description": "Foreground service notification text when checking for new playlist videos"
+  },
+  "subscriptionNotificationContent": "Hay  {count, plural, =0{ningún vídeo nuevo} =1{1 vídeo nuevo} other{{count} vídeos nuevos}} en tu feed de suscripción",
+  "@subscriptionNotificationContent": {
+    "description": "Content for subscription notification",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "askToEnableBackgroundServiceTitle": "Notificaciones desactivadas",
+  "@askToEnableBackgroundServiceTitle": {
+    "description": "If the users tries to turn on notifications for a channel but hasn't enable notifications in the app we need to turn it on for them"
   }
 }
