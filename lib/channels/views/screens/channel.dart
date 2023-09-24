@@ -9,6 +9,7 @@ import 'package:invidious/channels/views/components/info.dart';
 import 'package:invidious/channels/views/components/playlists.dart';
 import 'package:invidious/channels/views/components/videos.dart';
 import 'package:invidious/globals.dart';
+import 'package:invidious/utils/views/components/navigation_switcher.dart';
 
 import '../../../settings/states/settings.dart';
 import '../../../utils.dart';
@@ -72,8 +73,7 @@ class ChannelScreen extends StatelessWidget {
             //.animate().slideY(duration: animationDuration, begin: 1, curve: Curves.easeInOutQuad),
             body: SafeArea(
                 bottom: false,
-                child: AnimatedSwitcher(
-                  duration: animationDuration,
+                child: NavigationSwitcher(
                   child: <Widget>[
                     _.loading
                         ? const ChannelPlaceHolder()

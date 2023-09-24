@@ -12,6 +12,7 @@ import 'package:invidious/router.dart';
 import 'package:invidious/settings/states/settings.dart';
 import 'package:invidious/utils.dart';
 import 'package:invidious/utils/views/components/app_icon.dart';
+import 'package:invidious/utils/views/components/navigation_switcher.dart';
 
 import '../../../main.dart';
 import '../../../notifications/notifications.dart';
@@ -148,13 +149,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   left: 0,
                   right: 0,
                   bottom: 0,
-                  child: AnimatedSwitcher(
-                    switchInCurve: Curves.easeInOutQuad,
-                    switchOutCurve: Curves.easeInOutQuad,
-                    transitionBuilder: (Widget child, Animation<double> animation) {
-                      return FadeTransition(opacity: animation, child: child);
-                    },
-                    duration: animationDuration,
+                  child: NavigationSwitcher(
                     child: Container(
                         // home handles its own padding because we don't want to cut horizontal scroll lists on the right
                         padding: EdgeInsets.symmetric(horizontal: selectedPage == HomeDataSource.home ? 0 : innerHorizontalPadding),
@@ -165,26 +160,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                 child: AppIcon(
                                   height: 200,
                                 ))),
-/*
-                    child: <Widget>[
-                      const HomeView(
-                        key: ValueKey(0),
-                      ),
-                      const Trending(
-                        key: ValueKey(1),
-                      ),
-                      const Subscriptions(
-                        key: ValueKey(2),
-                      ),
-                      const AddToPlaylistList(
-                        key: ValueKey(3),
-                        canDeleteVideos: true,
-                      ),
-                      const HistoryView(
-                        key: ValueKey(4),
-                      ),
-                    ][_.selectedIndex],
-*/
                   ),
                 )
               ])));
