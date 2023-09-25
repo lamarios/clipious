@@ -1,4 +1,3 @@
-import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -7,16 +6,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/app/states/tv_home.dart';
 import 'package:invidious/globals.dart';
-import 'package:invidious/playlists/views/tv/screens/playlist_grid.dart';
-import 'package:invidious/search/views/tv/screens/search.dart';
-import 'package:invidious/settings/views/tv/screens/settings.dart';
 import 'package:invidious/utils/models/paginatedList.dart';
 import 'package:invidious/utils/views/tv/components/tv_button.dart';
 import 'package:invidious/utils/views/tv/components/tv_overscan.dart';
 import 'package:invidious/videos/views/components/subscriptions.dart';
 import 'package:invidious/videos/views/components/trending.dart';
-import 'package:invidious/videos/views/tv/screens/video_grid_view.dart';
-import 'package:invidious/welcome_wizard/views/tv/components/welcome_wizard.dart';
 
 import '../../../../router.dart';
 import '../../../../utils/views/components/app_icon.dart';

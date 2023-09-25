@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
 class PlayButton extends StatelessWidget {
@@ -14,7 +15,10 @@ class PlayButton extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(left: 100.0, top: 60),
           child: IconButton(
-            onPressed: () => onPressed(true),
+            onPressed: () {
+              onPressed(true);
+              AutoRouter.of(context).pop();
+            },
             style: ButtonStyle(
                 backgroundColor: MaterialStateColor.resolveWith((states) => colorScheme.primary.withOpacity(1))),
             icon: const Icon(
@@ -25,7 +29,10 @@ class PlayButton extends StatelessWidget {
           ),
         ),
         IconButton(
-          onPressed: () => onPressed(false),
+          onPressed: () {
+            onPressed(false);
+            AutoRouter.of(context).pop();
+          },
           style: ButtonStyle(
               backgroundColor: MaterialStateColor.resolveWith((states) => colorScheme.primaryContainer.withOpacity(1))),
           icon: const Icon(

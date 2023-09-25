@@ -43,7 +43,7 @@ import 'package:invidious/videos/views/screens/video.dart';
 import 'package:invidious/videos/views/tv/screens/video.dart';
 import 'package:invidious/videos/views/tv/screens/video_grid_view.dart';
 import 'package:invidious/welcome_wizard/views/screens/welcome_wizard.dart';
-import 'package:invidious/welcome_wizard/views/tv/components/welcome_wizard.dart';
+import 'package:invidious/welcome_wizard/views/tv/screens/welcome_wizard.dart';
 import 'package:logging/logging.dart';
 
 import 'channels/views/screens/channel.dart';
@@ -76,11 +76,10 @@ class AppRouter extends _$AppRouter {
     return isTv
         ? [
             AutoRoute(
-              path: '/',
               page: TvHomeRoute.page,
               initial: hasServer,
             ),
-            AutoRoute(page: TvWelcomeWizardRoute.page),
+            AutoRoute(page: TvWelcomeWizardRoute.page, initial: !hasServer),
             AutoRoute(page: TvChannelRoute.page),
             AutoRoute(page: TvGridRoute.page),
             AutoRoute(page: TvVideoRoute.page),

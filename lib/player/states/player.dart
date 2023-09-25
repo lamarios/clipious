@@ -13,6 +13,7 @@ import 'package:invidious/globals.dart';
 import 'package:invidious/player/models/mediaCommand.dart';
 import 'package:invidious/player/models/mediaEvent.dart';
 import 'package:invidious/player/states/interfaces/media_player.dart';
+import 'package:invidious/router.dart';
 import 'package:invidious/utils/models/image_object.dart';
 import 'package:logging/logging.dart';
 import 'package:simple_pip_mode/simple_pip.dart';
@@ -502,10 +503,9 @@ class PlayerCubit extends Cubit<PlayerState> {
     await _playVideos(offlineVids);
   }
 
-  playVideo(List<BaseVideo> v, {bool? goBack, bool? audio, Duration? startAt}) async {
+  playVideo(List<BaseVideo> v, {bool? audio, Duration? startAt}) async {
     List<BaseVideo> videos = v.where((element) => !element.filtered).toList();
     // TODO: find how to do this with auto router
-    // if (goBack ?? false) navigatorKey.currentState?.pop();
     log.fine('Playing ${videos.length} videos');
 
     setAudio(audio);

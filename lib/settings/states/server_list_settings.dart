@@ -94,9 +94,8 @@ class ServerListSettingsCubit extends Cubit<ServerListSettingsState> {
       }
     } catch (err) {
       log.severe("couldn't get public playlist", err);
-      state.publicServersError = PublicServerErrors.couldNotGetList;
       if (!isClosed) {
-        emit(state);
+        emit(this.state.copyWith(publicServersError: PublicServerErrors.couldNotGetList));
       }
       rethrow;
     }
