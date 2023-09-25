@@ -37,7 +37,7 @@ class PlaylistCubit extends Cubit<PlaylistState> {
   }
 
   play(bool? isAudio) {
-    player.playVideo(state.playlist.videos, goBack: false, audio: isAudio);
+    player.playVideo(state.playlist.videos, audio: isAudio);
   }
 
   scrollToTop() {
