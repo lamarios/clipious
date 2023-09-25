@@ -10,13 +10,13 @@ import '../../database.dart';
 import '../../globals.dart';
 import '../../home/models/db/home_layout.dart';
 import '../../settings/models/db/server.dart';
+import '../../videos/models/db/progress.dart';
 
 part 'app.g.dart';
 
 final log = Logger('HomeState');
 
 class AppCubit extends Cubit<AppState> {
-
   AppCubit(super.initialState) {
     onReady();
   }
@@ -38,6 +38,16 @@ class AppCubit extends Cubit<AppState> {
       selectedIndex = 0;
     }
     selectIndex(selectedIndex);
+    syncHistory();
+  }
+
+  syncHistory() async {
+    if (isLoggedIn) {
+      var history = await service.getUserHistory(1, 200);
+      for (String videoId in history) {
+        db.saveProgress(Progress.named(progress: 1, videoId: videoId));
+      }
+    }
   }
 
   @override
@@ -50,9 +60,7 @@ class AppCubit extends Cubit<AppState> {
     try {
       Uri uri = Uri.parse(url);
       if (YOUTUBE_HOSTS.contains(uri.host)) {
-        if (uri.pathSegments.length == 1 &&
-            uri.pathSegments.contains("watch") &&
-            uri.queryParameters.containsKey('v')) {
+        if (uri.pathSegments.length == 1 && uri.pathSegments.contains("watch") && uri.queryParameters.containsKey('v')) {
           String videoId = uri.queryParameters['v']!;
           appRouter.push(VideoRoute(videoId: videoId));
         }
@@ -83,8 +91,7 @@ class AppCubit extends Cubit<AppState> {
     emit(state.copyWith(homeLayout: db.getHomeLayout()));
   }
 
-  bool get isLoggedIn =>
-      (state.server?.authToken?.isNotEmpty ?? false) || (state.server?.sidCookie?.isNotEmpty ?? false);
+  bool get isLoggedIn => (state.server?.authToken?.isNotEmpty ?? false) || (state.server?.sidCookie?.isNotEmpty ?? false);
 }
 
 @CopyWith(constructor: "_")

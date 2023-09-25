@@ -236,8 +236,8 @@ class PlayerCubit extends Cubit<PlayerState> {
 
       db.saveProgress(progress);
 
-      if (progress.progress > 0.5) {
-        EasyDebounce.debounce('invidious-progress-sync-${progress.videoId}', const Duration(seconds: 5), () {
+      if (progress.progress > 0.1) {
+        EasyThrottle.throttle('invidious-progress-sync-${progress.videoId}', const Duration(minutes: 10), () {
           if (service.isLoggedIn()) {
             service.addToUserHistory(progress.videoId);
           }
