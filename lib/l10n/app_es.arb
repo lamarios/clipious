@@ -563,19 +563,19 @@
   "@returnYoutubeDislikeDescription": {
     "description": "ReturnYoutubeDislike setting description"
   },
-  "searchHistoryDescription": "Ajustes del historial de la búsqueda",
+  "searchHistoryDescription": "Ajustes del historial de búsqueda",
   "@searchHistoryDescription": {
     "description": "Description for search history settings"
   },
-  "enableSearchHistory": "Activar el historial de las búsquedas",
+  "enableSearchHistory": "Activar el historial de búsquedas",
   "@enableSearchHistory": {
     "description": "Settings label for enabling search history"
   },
-  "clearSearchHistory": "Borrar el historial de las búsquedas",
+  "clearSearchHistory": "Limpiar el historial de búsquedas",
   "@clearSearchHistory": {
     "description": "Settings label for clearing search history"
   },
-  "searchHistory": "Buscar en el historial",
+  "searchHistory": "Historial de búsquedas",
   "@searchHistory": {
     "description": "Settings label for search history"
   },
@@ -587,7 +587,7 @@
   "@autoplayVideoOnLoadDescription": {
     "description": "Description for the autoplay video on load setting"
   },
-  "searchHistoryLimit": "Límite del historial de las búsquedas",
+  "searchHistoryLimit": "Límite del historial de búsquedas",
   "@searchHistoryLimit": {
     "description": "Settings label for search history limit"
   },
@@ -865,7 +865,7 @@
   "@noHistory": {
     "description": "Message when the user visits the history tab but it's empty"
   },
-  "history": "Historia",
+  "history": "Historial",
   "@history": {
     "description": "User view history label"
   },
