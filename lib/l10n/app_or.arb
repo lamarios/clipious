@@ -1008,5 +1008,163 @@
   "navigationBarStyle": "ପଥପ୍ରଦର୍ଶନ ପଟି ଶୈଳୀ",
   "@navigationBarStyle": {
     "description": "Label for settings on customizing navigation bar style"
+  },
+  "askToEnableBackgroundServiceContent": "ବିଜ୍ଞପ୍ତିଗୁଡ଼ିକୁ ପାଇବା ପାଇଁ, କ୍ଲିପୀୟ ବିଜ୍ଞପ୍ତିଗୁଡ଼ିକୁ ସକ୍ରିୟ କରିବା ଆବଶ୍ୟକ, ଏହାକୁ ସକ୍ରିୟ କରିବା ପାଇଁ OK ଦବାନ୍ତୁ ।",
+  "@askToEnableBackgroundServiceContent": {
+    "description": "If the users tries to turn on notifications for a channel but hasn't enable notifications in the app we need to turn it on for them"
+  },
+  "askForDisableBatteryOptimizationTitle": "ବ୍ୟାଟେରୀ ଅପ୍ଟିମାଇଜେସନକୁ ନିଷ୍କ୍ରିୟ କରିବା ଆବଶ୍ୟକ",
+  "@askForDisableBatteryOptimizationTitle": {
+    "description": "Title for the dialog asking the user to turn off disabling battery optimization when turning on notifications"
+  },
+  "askForDisableBatteryOptimizationContent": "ବିଜ୍ଞପ୍ତି ପଠାଇବା ପାଇଁ Clipious କୁ ଗୋଟିଏ ପୃଷ୍ଠଭୂମି ସର୍ଭିସ ଚଳାଇବା ଆବଶ୍ୟକ । ଏହାକୁ ସୁଗମ ଭାବରେ ଚଲାଇବା ପାଇଁ କ୍ଲିପିଆସକୁ ଅନଲିମିଟେଡ ବ୍ୟାଟେରୀ ବ୍ୟବହାର ଦେବା ଆବଶ୍ୟକ, ଓକେ ଟ୍ୟାପ୍ କରିବା ଦ୍ୱାରା ବ୍ୟାଟେରୀ ଅପ୍ଟିମାଇଜେସନ ସେଟିଙ୍ଗ ଖୋଲିବ ।",
+  "@askForDisableBatteryOptimizationContent": {
+    "description": "Content for the dialog asking the user to turn off disabling battery optimization when turning on notifications"
+  },
+  "playlistNotificationTitle": "{playlist} ପ୍ଲେ ତାଲିକାରେ ନୂତନ ଭିଡିଓଗୁଡ଼ିକ",
+  "@playlistNotificationTitle": {
+    "description": "Title for the playlist notifications when there are new videos",
+    "placeholders": {
+      "playlist": {
+        "type": "String",
+        "example": "Lo-Fi girl"
+      }
+    }
+  },
+  "notificationFrequencySettingsTitle": "ନୂତନ ଭିଡ଼ିଓ ଯାଞ୍ଚ ଫ୍ରିକ୍ୱେନ୍ସି",
+  "@notificationFrequencySettingsTitle": {
+    "description": "Title for frequency settings"
+  },
+  "channelNotificationTitle": "{channel} ରୁ ନୂତନ ଭିଡିଓ",
+  "@channelNotificationTitle": {
+    "description": "Title for the channel notifications when there are new videos",
+    "placeholders": {
+      "channel": {
+        "type": "String",
+        "example": "MKBHD"
+      }
+    }
+  },
+  "notificationsDescription": "ଆପଣ ଯାହା ବିଷୟରେ ବିଜ୍ଞପିତ ହୋଇଛନ୍ତି ତାହା ସକ୍ରିୟ କରନ୍ତୁ ଏବଂ ସମୀକ୍ଷା କରନ୍ତୁ",
+  "@notificationsDescription": {
+    "description": "Setting description for notifications"
+  },
+  "playlistNotificationContent": "ଏଠାରେ {count, plural, =0{no new video} =1{1 new video} other{{count} new videos}}ଟି{playlist} playlist} ଭିଡିଓ ଅଛି",
+  "@playlistNotificationContent": {
+    "description": "Content for playlist notification when there are new videos",
+    "placeholders": {
+      "playlist": {
+        "type": "String",
+        "example": "Lo-Fi girl"
+      },
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "subscriptionNotificationTitle": "ଆପଣଙ୍କର ସବସ୍କ୍ରିପସନରୁ ନୂତନ ଭିଡିଓ",
+  "@subscriptionNotificationTitle": {
+    "description": "Title for the notification showing that there are new videos from the subscription feed"
+  },
+  "deleteChannelNotificationContent": "ଆପଣ ଏହି ଚ୍ୟାନେଲରୁ ଆଉ ବିଜ୍ଞପ୍ତି ପାଇବେ ନାହିଁ ।",
+  "@deleteChannelNotificationContent": {
+    "description": "Title for dialog to confirm whether to delete channel notifications"
+  },
+  "subscriptionNotificationDescription": "ଆପଣଙ୍କର ସବସ୍କ୍ରିପସନ ଫିଡରୁ ନୂତନ ଭିଡିଓର ବିଜ୍ଞପ୍ତି ପ୍ରାପ୍ତ କରନ୍ତୁ ଯଦି ଆପଣ ଆପଣଙ୍କର ସାମ୍ପ୍ରତିକ ଉଦାହରଣକୁ ଲଗଇନ କରନ୍ତି",
+  "@subscriptionNotificationDescription": {
+    "description": "Description for subscription notifications"
+  },
+  "notifications": "ବିଜ୍ଞପ୍ତି",
+  "@notifications": {
+    "description": "Notification settings title"
+  },
+  "subscriptionNotification": "ସଦସ୍ୟତା ବିଜ୍ଞପ୍ତି",
+  "@subscriptionNotification": {
+    "description": "Title for subscriptions notifications"
+  },
+  "deletePlaylistNotificationContent": "ଆପଣ ଏହି ପ୍ଲେ-ଲିଷ୍ଟରୁ ଆଉ ବିଜ୍ଞପ୍ତି ପାଇବେ ନାହିଁ ।",
+  "@deletePlaylistNotificationContent": {
+    "description": "Title for dialog to confirm whether to delete playlist notifications"
+  },
+  "channelNotificationContent": "{{count, plural, =0 {no new videos} =1 {1 new video} other {{count} new videos}}ରୁ{channel} ରୁ {count, plural, = 0 {no new videos} = 1 {1 new video}} ଅଛି",
+  "@channelNotificationContent": {
+    "description": "Content for channel notification when there are new videos",
+    "placeholders": {
+      "channel": {
+        "type": "String",
+        "example": "MKBHD"
+      },
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "deletePlaylistNotificationTitle": "ପ୍ଲେଲିଷ୍ଟ ବିଜ୍ଞପ୍ତିକୁ ଅପସାରଣ କରିବେ କି?",
+  "@deletePlaylistNotificationTitle": {
+    "description": "Title for dialog to confirm whether to delete playlist notifications"
+  },
+  "enableNotificationDescriptions": "ଆପଣ ନିରୀକ୍ଷଣ କରୁଥିବା ପରିବର୍ତ୍ତନଗୁଡ଼ିକୁ ଯାଞ୍ଚ କରିବା ଏବଂ ଆପଣଙ୍କୁ ସୂଚିତ କରିବା ପାଇଁ ଅଗ୍ରଭୂମି ସର୍ଭିସ ଚଲାନ୍ତୁ",
+  "@enableNotificationDescriptions": {
+    "description": ""
+  },
+  "foregroundServiceUpdatingSubscriptions": "ସଦସ୍ୟତା ଯାଞ୍ଚ କରୁଛି ..।",
+  "@foregroundServiceUpdatingSubscriptions": {
+    "description": "Foreground service notification text when checking for new subscription videos"
+  },
+  "deleteChannelNotificationTitle": "ଚ୍ୟାନେଲ ବିଜ୍ଞପ୍ତିକୁ ଅପସାରଣ କରିବେ କି?",
+  "@deleteChannelNotificationTitle": {
+    "description": "Title for dialog to confirm whether to delete channel notifications"
+  },
+  "foregroundServiceNotificationTitle": "ଭିଡ଼ିଓ ନିରୀକ୍ଷଣ",
+  "@foregroundServiceNotificationTitle": {
+    "description": "Title for the foreground service running notification when the user wants to receive notifications"
+  },
+  "otherNotifications": "ଅନ୍ୟ ବିଜ୍ଞପ୍ତି ଉତ୍ସ (ଘଣ୍ଟି ଚିତ୍ରସଂକେତ)",
+  "@otherNotifications": {
+    "description": "Title for settings section in the notification settings"
+  },
+  "notificationFrequencySliderLabel": "[ଅଗ୍ରଲେଖ, ଆଧୁନିକ ଓଡ଼ିଆ କଥା ସାହିତ୍ୟ].",
+  "@notificationFrequencySliderLabel": {
+    "description": "Short form for a number of hours going up to 1 day",
+    "hours": {
+      "type": "num",
+      "format": "compact"
+    }
+  },
+  "foregroundServiceNotificationContent": "ଥରେ {hours, select, 1 {per hour} 24 {a day} ଅନ୍ୟ {ପ୍ରତ୍ୟେକ {hours} ଘଣ୍ଟା}ନୂତନ ଭିଡିଓଗୁଡିକ ଯାଞ୍ଚ କରିବେ",
+  "@foregroundServiceNotificationContent": {
+    "description": "Content for the foreground service running notification when the user wants to receive notifications",
+    "hours": {
+      "type": "num",
+      "format": "compact"
+    }
+  },
+  "foregroundServiceUpdatingChannels": "ଚ୍ୟାନେଲଗୁଡିକ ଯାଞ୍ଚ କରୁଛି ..।",
+  "@foregroundServiceUpdatingChannels": {
+    "description": "Foreground service notification text when checking for new channel videos"
+  },
+  "notificationFrequencySettingsDescription": "ପ୍ରୟୋଗଟି ନୂତନ ଭିଡ଼ିଓଗୁଡ଼ିକ ପାଇଁ କେତେଥର ଯାଞ୍ଚ କରିବ",
+  "@notificationFrequencySettingsDescription": {
+    "description": "Description for frequency settings"
+  },
+  "foregroundServiceUpdatingPlaylist": "ପ୍ଲେଲିଷ୍ଟଗୁଡିକ ଯାଞ୍ଚ କରୁଛି ..।",
+  "@foregroundServiceUpdatingPlaylist": {
+    "description": "Foreground service notification text when checking for new playlist videos"
+  },
+  "subscriptionNotificationContent": "ଆପଣଙ୍କ ସଦସ୍ୟତା ଫିଡରେ {count, plural, =0{no new videos} =1{1 new video} other{{count} new videos}} ଅଛି",
+  "@subscriptionNotificationContent": {
+    "description": "Content for subscription notification",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "askToEnableBackgroundServiceTitle": "ବିଜ୍ଞପ୍ତିଗୁଡ଼ିକ ବନ୍ଦ ହୋଇଯାଇଛି",
+  "@askToEnableBackgroundServiceTitle": {
+    "description": "If the users tries to turn on notifications for a channel but hasn't enable notifications in the app we need to turn it on for them"
   }
 }
