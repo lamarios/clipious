@@ -38,17 +38,13 @@ class AppCubit extends Cubit<AppState> {
       selectedIndex = 0;
     }
     selectIndex(selectedIndex);
-    syncHistory();
-  }
 
-  syncHistory() async {
-    if (isLoggedIn) {
-      var history = await service.getUserHistory(1, 200);
-      for (String videoId in history) {
-        db.saveProgress(Progress.named(progress: 1, videoId: videoId));
-      }
+    // we only sync the history when the app doesn't run the foreground service
+    if((db.getSettings(BACKGROUND_NOTIFICATIONS)?.value ?? "false") == "false") {
+      service.syncHistory();
     }
   }
+
 
   @override
   close() async {
