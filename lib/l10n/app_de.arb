@@ -858,5 +858,9 @@
   "unSubscribeQuestion": "Deabonnieren?",
   "@unSubscribeQuestion": {
     "description": "Title for dialog if a user wants to unsubscribe in the subscribtion management screen"
+  },
+  "itemlistErrorGeneric": "Daten konnten nicht abgerufen werden",
+  "@itemlistErrorGeneric": {
+    "description": "Error showing when the data can't be fetch"
   }
 }

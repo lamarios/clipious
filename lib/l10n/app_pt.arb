@@ -1008,5 +1008,21 @@
         "example": "Monday, Wednesday, Friday"
       }
     }
+  },
+  "notificationsDescription": "Ativar e rever as notificações que lhe são enviadas",
+  "@notificationsDescription": {
+    "description": "Setting description for notifications"
+  },
+  "notifications": "Notificações",
+  "@notifications": {
+    "description": "Notification settings title"
+  },
+  "subscriptionNotification": "Notificações de subscrição",
+  "@subscriptionNotification": {
+    "description": "Title for subscriptions notifications"
+  },
+  "enableNotificationDescriptions": "Executa um serviço em primeiro plano para verificar e notificar o utilizador sobre as alterações que está a monitorizar",
+  "@enableNotificationDescriptions": {
+    "description": ""
   }
 }
