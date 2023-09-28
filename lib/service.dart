@@ -14,6 +14,7 @@ import 'package:invidious/search/models/search_sort_by.dart';
 import 'package:invidious/search/models/search_type.dart';
 import 'package:invidious/settings/models/db/video_filter.dart';
 import 'package:invidious/settings/models/errors/invidiousServiceError.dart';
+import 'package:invidious/videos/models/db/progress.dart';
 import 'package:invidious/videos/models/dislike.dart';
 import 'package:invidious/videos/models/sponsor_segment.dart';
 import 'package:invidious/videos/models/userFeed.dart';
@@ -529,6 +530,19 @@ class Service {
     Iterable i = handleResponse(response);
 
     return List<String>.from(i.map((e) => e as String));
+  }
+
+  void syncHistory() async {
+    try {
+      if (db.isLoggedInToCurrentServer()) {
+        (await getUserHistory(1, 200)).where((element) => db.getVideoProgress(element) == 0).forEach((element) {
+          db.saveProgress(Progress.named(progress: 1, videoId: element));
+          log.fine('updated watch status of $element');
+        });
+      }
+    } catch (err) {
+      log.fine('failed to sync history, probably not logged in');
+    }
   }
 
   Future<void> clearUserHistory() async {

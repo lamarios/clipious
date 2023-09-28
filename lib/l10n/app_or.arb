@@ -1049,7 +1049,7 @@
   "@notificationsDescription": {
     "description": "Setting description for notifications"
   },
-  "playlistNotificationContent": "ଏଠାରେ {count, plural, =0{no new video} =1{1 new video} other{{count} new videos}}ଟି{playlist} playlist} ଭିଡିଓ ଅଛି",
+  "playlistNotificationContent": "ଏଠାରେ {count, plural, =0{no new video} =1{1 new video} other{{count} new videos}}ଟି{playlist} playlist ଭିଡିଓ ଅଛି",
   "@playlistNotificationContent": {
     "description": "Content for playlist notification when there are new videos",
     "placeholders": {
@@ -1087,7 +1087,7 @@
   "@deletePlaylistNotificationContent": {
     "description": "Title for dialog to confirm whether to delete playlist notifications"
   },
-  "channelNotificationContent": "{{count, plural, =0 {no new videos} =1 {1 new video} other {{count} new videos}}ରୁ{channel} ରୁ {count, plural, = 0 {no new videos} = 1 {1 new video}} ଅଛି",
+  "channelNotificationContent": "ରୁ{channel} ରୁ {count, plural, = 0 {no new videos} = 1 {1 new video}  other {{count} new videos}} ଅଛି",
   "@channelNotificationContent": {
     "description": "Content for channel notification when there are new videos",
     "placeholders": {
@@ -1133,7 +1133,7 @@
       "format": "compact"
     }
   },
-  "foregroundServiceNotificationContent": "ଥରେ {hours, select, 1 {per hour} 24 {a day} ଅନ୍ୟ {ପ୍ରତ୍ୟେକ {hours} ଘଣ୍ଟା}ନୂତନ ଭିଡିଓଗୁଡିକ ଯାଞ୍ଚ କରିବେ",
+  "foregroundServiceNotificationContent": "ଥରେ {hours, select, 1 {per hour} 24 {a day} other {ପ୍ରତ୍ୟେକ {hours} ଘଣ୍ଟା}}ନୂତନ ଭିଡିଓଗୁଡିକ ଯାଞ୍ଚ କରିବେ",
   "@foregroundServiceNotificationContent": {
     "description": "Content for the foreground service running notification when the user wants to receive notifications",
     "hours": {

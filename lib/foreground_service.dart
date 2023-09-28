@@ -73,6 +73,8 @@ onStart(ServiceInstance service) async {
     await _restartTimer();
   });
 
+  // we run the background stuff once when it starts
+  _backgroundCheck();
   _restartTimer();
 }
 
@@ -105,6 +107,8 @@ _backgroundCheck() async {
     sendNotification(title, locals.foregroundServiceUpdatingPlaylist, type: NotificationTypes.foregroundService);
     await _handlePlaylistNotifications();
     sendNotification(title, locals.foregroundServiceNotificationContent(refreshRate), type: NotificationTypes.foregroundService);
+
+    service.syncHistory();
   } catch (e) {
     print('we have a background service error: ${e}');
   } finally {

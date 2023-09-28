@@ -320,6 +320,9 @@ class VideoPlayerCubit extends MediaPlayerCubit<VideoPlayerState> {
                 fit: fillVideo ? BoxFit.cover : BoxFit.contain,
                 subtitlesConfiguration: BetterPlayerSubtitlesConfiguration(
                   fontSize: settings.state.subtitleSize,
+                  outlineEnabled: true,
+                  outlineColor: Colors.black,
+                  outlineSize: 1
                 ),
                 controlsConfiguration: BetterPlayerControlsConfiguration(showControls: false
                     // customControlsBuilder: (controller, onPlayerVisibilityChanged) => PlayerControls(mediaPlayerCubit: this),
