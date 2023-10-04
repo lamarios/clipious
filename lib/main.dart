@@ -9,7 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/app/states/app.dart';
 import 'package:invidious/downloads/states/download_manager.dart';
-import 'package:invidious/foreground_service.dart';
+import 'package:invidious/workmanager.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/httpOverrides.dart';
 import 'package:invidious/mediaHander.dart';
@@ -54,8 +54,6 @@ Future<void> main() async {
   db = await DbClient.create();
 
   initializeNotifications();
-  var initialNotification = await AwesomeNotifications().getInitialNotificationAction();
-  print('Initial notification ${initialNotification?.payload}');
 
   isTv = await isDeviceTv();
   runApp(MultiBlocProvider(providers: [

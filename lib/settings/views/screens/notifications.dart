@@ -16,9 +16,6 @@ class NotificationSettingsScreen extends StatelessWidget {
   enableBackgroundService(BuildContext context, bool enable) async {
     var settings = context.read<SettingsCubit>();
     var result = await settings.setBackgroundNotifications(enable);
-    if (result == EnableBackGroundNotificationResponse.needBatteryOptimization && context.mounted) {
-      showBatteryOptimizationDialog(context);
-    }
   }
 
   @override

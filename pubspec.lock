@@ -455,38 +455,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.2.0+1"
-  flutter_background_service:
-    dependency: "direct main"
-    description:
-      name: flutter_background_service
-      sha256: "5ec79841c3e9f3bd1885b06c5d7502d6df415cb1665e6717792cc0e51716619f"
-      url: "https://pub.dev"
-    source: hosted
-    version: "5.0.1"
-  flutter_background_service_android:
-    dependency: transitive
-    description:
-      name: flutter_background_service_android
-      sha256: a295c7604782b3723fa356679e5b14c5e0fb694d77a7299af135364fa851ee1a
-      url: "https://pub.dev"
-    source: hosted
-    version: "6.0.1"
-  flutter_background_service_ios:
-    dependency: transitive
-    description:
-      name: flutter_background_service_ios
-      sha256: ab73657535876e16abc89e40f924df3e92ad3dee83f64d187081417e824709ed
-      url: "https://pub.dev"
-    source: hosted
-    version: "5.0.0"
-  flutter_background_service_platform_interface:
-    dependency: transitive
-    description:
-      name: flutter_background_service_platform_interface
-      sha256: cd5720ff5b051d551a4734fae16683aace779bd0425e8d3f15d84a0cdcc2d8d9
-      url: "https://pub.dev"
-    source: hosted
-    version: "5.0.0"
   flutter_bloc:
     dependency: "direct main"
     description:
@@ -849,14 +817,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.0"
-  optimize_battery:
-    dependency: "direct main"
-    description:
-      name: optimize_battery
-      sha256: "4f0f974addbe54d3a705c1da5bf3a4bdae39502b1b2d2a17f9da1e558a34a4f8"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.0.4"
   package_config:
     dependency: transitive
     description:
@@ -1487,6 +1447,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.1.1"
+  workmanager:
+    dependency: "direct main"
+    description:
+      name: workmanager
+      sha256: ed13530cccd28c5c9959ad42d657cd0666274ca74c56dea0ca183ddd527d3a00
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.5.2"
   xdg_directories:
     dependency: transitive
     description:
@@ -1512,5 +1480,5 @@ packages:
     source: hosted
     version: "3.1.2"
 sdks:
-  dart: ">=3.1.0-185.0.dev <4.0.0"
+  dart: ">=3.1.2 <4.0.0"
   flutter: ">=3.13.0"

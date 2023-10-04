@@ -11,7 +11,6 @@ import 'package:invidious/utils/views/tv/components/tv_button.dart';
 import 'package:invidious/utils/views/tv/components/tv_overscan.dart';
 import 'package:invidious/videos/models/base_video.dart';
 import 'package:logging/logging.dart';
-import 'package:optimize_battery/optimize_battery.dart';
 import 'package:share_plus/share_plus.dart';
 
 import 'utils/models/country.dart';
@@ -210,13 +209,6 @@ okCancelDialog(BuildContext context, String title, String message, Function() on
   );
 }
 
-showBatteryOptimizationDialog(BuildContext context) {
-  if (!context.mounted) return;
-
-  var locals = AppLocalizations.of(context)!;
-  okCancelDialog(context, locals.askForDisableBatteryOptimizationTitle, locals.askForDisableBatteryOptimizationContent,
-      () => OptimizeBattery.openBatteryOptimizationSettings());
-}
 
 showTvAlertdialog(BuildContext context, String title, List<Widget> body) {
   var locals = AppLocalizations.of(context)!;

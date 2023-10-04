@@ -131,7 +131,7 @@ class SettingsScreen extends StatelessWidget {
                   SettingsTile.navigation(
                     leading: const Icon(Icons.notifications_outlined),
                     title: Text('${locals.notifications} (beta)'),
-                    description: Text(locals.notificationsDescription),
+                    description: Text(_.backgroundNotifications ? locals.foregroundServiceNotificationContent(_.backgroundNotificationFrequency.toString()):locals.notificationsDescription),
                     onPressed: openNotificationSettings,
                   ),
                   SettingsTile.navigation(

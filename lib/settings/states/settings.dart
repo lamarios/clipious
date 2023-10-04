@@ -5,10 +5,9 @@ import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/app/states/app.dart';
-import 'package:invidious/foreground_service.dart';
+import 'package:invidious/workmanager.dart';
 import 'package:locale_names/locale_names.dart';
 import 'package:logging/logging.dart';
-import 'package:optimize_battery/optimize_battery.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 import '../../database.dart';
@@ -26,6 +25,7 @@ const String searchHistoryDefaultLength = '12';
 
 enum EnableBackGroundNotificationResponse {
   ok,
+  notificationsNotAllowed,
   needBatteryOptimization;
 }
 
@@ -324,28 +324,23 @@ class SettingsCubit extends Cubit<SettingsState> {
     if (!b) {
       var state = this.state.copyWith();
       state.backgroundNotifications = b;
-      backgroundService.invoke('stopService');
+      await stopTasks();
       emit(state);
     } else {
-      AwesomeNotifications().isNotificationAllowed().then((isAllowed) {
-        if (!isAllowed) {
-          // This is just a basic example. For real apps, you must show some
-          // friendly dialog box before call the request method.
-          // This is very important to not harm the user experience
-          AwesomeNotifications().requestPermissionToSendNotifications();
+      var isAllowed = await AwesomeNotifications().isNotificationAllowed();
+      if (!isAllowed) {
+        var allowed = await AwesomeNotifications().requestPermissionToSendNotifications();
+        if (!allowed) {
+          return EnableBackGroundNotificationResponse.notificationsNotAllowed;
         }
-      });
-
-      var ignoringBatterOptimization = await OptimizeBattery.isIgnoringBatteryOptimizations();
-      if (!ignoringBatterOptimization) {
-        return EnableBackGroundNotificationResponse.needBatteryOptimization;
-      } else {
-        var state = this.state.copyWith();
-        state.backgroundNotifications = b;
-        backgroundService.startService();
-        emit(state);
-        return EnableBackGroundNotificationResponse.ok;
       }
+
+      var state = this.state.copyWith();
+      state.backgroundNotifications = b;
+      await configureBackgroundService(this);
+      await setupTasks(this);
+      emit(state);
+      return EnableBackGroundNotificationResponse.ok;
     }
 
     return EnableBackGroundNotificationResponse.ok;
@@ -363,7 +358,7 @@ class SettingsCubit extends Cubit<SettingsState> {
       state.backgroundNotificationFrequency = i;
       emit(state);
       EasyDebounce.debounce('restarting-background-service', const Duration(seconds: 2), () {
-          backgroundService.invoke(restartTimerMethod);
+        setupTasks(this);
       });
     }
   }
@@ -433,9 +428,7 @@ class SettingsState {
   Country get country => getCountryFromCode(_get(BROWSING_COUNTRY)?.value ?? 'US');
 
   set country(Country c) {
-    String code = countryCodes
-        .firstWhere((element) => element.name == c.name, orElse: () => country)
-        .code;
+    String code = countryCodes.firstWhere((element) => element.name == c.name, orElse: () => country).code;
     _set(BROWSING_COUNTRY, code);
   }
 
@@ -475,12 +468,11 @@ class SettingsState {
 
   set useSearchHistory(bool b) => _set(USE_SEARCH_HISTORY, b);
 
-  List<HomeDataSource> get appLayout =>
-      (_get(APP_LAYOUT)?.value ?? '${HomeDataSource.home.name},${HomeDataSource.subscription.name},${HomeDataSource.playlist.name},${HomeDataSource.history.name}')
-          .split(',')
-          .where((element) => element.isNotEmpty)
-          .map((e) => HomeDataSource.values.firstWhere((element) => element.name == e))
-          .toList();
+  List<HomeDataSource> get appLayout => (_get(APP_LAYOUT)?.value ?? '${HomeDataSource.home.name},${HomeDataSource.subscription.name},${HomeDataSource.playlist.name},${HomeDataSource.history.name}')
+      .split(',')
+      .where((element) => element.isNotEmpty)
+      .map((e) => HomeDataSource.values.firstWhere((element) => element.name == e))
+      .toList();
 
   set appLayout(List<HomeDataSource> layout) => _set(APP_LAYOUT, layout.map((e) => e.name).join(","));
 
