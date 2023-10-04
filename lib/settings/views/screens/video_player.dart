@@ -56,26 +56,6 @@ class VideoPlayerSettingsScreen extends StatelessWidget {
                   title: Text(locals.autoplayVideoOnLoad),
                   description: Text(locals.autoplayVideoOnLoadDescription),
                 ),
-                SettingsTile(
-                  title: Text(locals.subtitleFontSize),
-                  description: Text(locals.subtitleFontSizeDescription),
-                  trailing: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      IconButton(
-                          onPressed: () => cubit.changeSubtitleSize(increase: false), icon: const Icon(Icons.remove)),
-                      Text(_.subtitleSize.floor().toString()),
-                      IconButton(
-                          onPressed: () => cubit.changeSubtitleSize(increase: true), icon: const Icon(Icons.add)),
-                    ],
-                  ),
-                ),
-                SettingsTile.switchTile(
-                  initialValue: _.rememberSubtitles,
-                  onToggle: cubit.toggleRememberSubtitles,
-                  title: Text(locals.rememberSubtitleLanguage),
-                  description: Text(locals.rememberSubtitleLanguageDescription),
-                ),
                 SettingsTile.switchTile(
                   initialValue: _.rememberPlayBackSpeed,
                   onToggle: cubit.toggleRememberPlaybackSpeed,
@@ -100,6 +80,36 @@ class VideoPlayerSettingsScreen extends StatelessWidget {
                   description: Text(locals.fillFullscreenDescription),
                 ),
               ]),
+              SettingsSection(
+                  title: Text(locals.subtitles),
+                  tiles: [
+                    SettingsTile(
+                      title: Text(locals.subtitleFontSize),
+                      description: Text(locals.subtitleFontSizeDescription),
+                      trailing: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          IconButton(
+                              onPressed: () => cubit.changeSubtitleSize(increase: false), icon: const Icon(Icons.remove)),
+                          Text(_.subtitleSize.floor().toString()),
+                          IconButton(
+                              onPressed: () => cubit.changeSubtitleSize(increase: true), icon: const Icon(Icons.add)),
+                        ],
+                      ),
+                    ),
+                    SettingsTile.switchTile(
+                      initialValue: _.subtitlesBackground,
+                      onToggle: cubit.setSubtitlesBackground,
+                      title: Text(locals.subtitlesBackground),
+                      description: Text(locals.subtitlesBackgroundDescription),
+                    ),
+                    SettingsTile.switchTile(
+                      initialValue: _.rememberSubtitles,
+                      onToggle: cubit.toggleRememberSubtitles,
+                      title: Text(locals.rememberSubtitleLanguage),
+                      description: Text(locals.rememberSubtitleLanguageDescription),
+                    ),
+                  ]),
             ],
           ),
         );
