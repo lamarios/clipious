@@ -60,6 +60,14 @@ class _HomeScreenState extends State<HomeScreen> {
         onNotificationCreatedMethod: NotificationController.onNotificationCreatedMethod,
         onNotificationDisplayedMethod: NotificationController.onNotificationDisplayedMethod,
         onDismissActionReceivedMethod: NotificationController.onDismissActionReceivedMethod);
+
+    AwesomeNotifications().getInitialNotificationAction().then((initialNotification) {
+      print('Initial notification ${initialNotification?.payload}');
+
+      if (initialNotification != null) {
+        NotificationController.onActionReceivedMethod(initialNotification);
+      }
+    });
   }
 
   @override

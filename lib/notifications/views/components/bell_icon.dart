@@ -27,20 +27,11 @@ class BellIcon<T> extends StatelessWidget {
           var locals = AppLocalizations.of(context)!;
           okCancelDialog(context, locals.askToEnableBackgroundServiceTitle, locals.askToEnableBackgroundServiceContent, () async {
             var settings = context.read<SettingsCubit>();
-            var res = await settings.setBackgroundNotifications(true);
+            await settings.setBackgroundNotifications(true);
             if (context.mounted) {
-              if (res == EnableBackGroundNotificationResponse.needBatteryOptimization) {
-                showBatteryOptimizationDialog(context);
-              } else {
-                cubit.toggle();
-              }
+              cubit.toggle();
             }
           });
-        }
-        break;
-      case TurnOnStatus.needToEnableBatteryOptimization:
-        if(context.mounted) {
-          showBatteryOptimizationDialog(context);
         }
         break;
       default:

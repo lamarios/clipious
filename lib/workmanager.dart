@@ -1,12 +1,8 @@
 import 'dart:async';
 import 'dart:ui';
 
-import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_background_service/flutter_background_service.dart';
-import 'package:flutter_background_service_android/flutter_background_service_android.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:http/http.dart';
 import 'package:intl/intl.dart';
 import 'package:invidious/database.dart';
 import 'package:invidious/globals.dart';
@@ -14,99 +10,48 @@ import 'package:invidious/notifications/models/db/subscription_notifications.dar
 import 'package:invidious/settings/states/settings.dart';
 import 'package:invidious/videos/models/video_in_list.dart';
 import 'package:logging/logging.dart';
+import 'package:workmanager/workmanager.dart';
 
 import 'notifications/notifications.dart';
 
-const restartTimerMethod = 'restart-timer';
+var log = Logger('background-task');
+const taskName = "Clipious background refresh task";
 
-final backgroundService = FlutterBackgroundService();
-
-final log = Logger('Background service');
-
-const debugMode = kDebugMode;
-// const debugMode = true;
-
-Timer? timer;
-
-void configureBackgroundService(SettingsCubit settings) async {
-  var notif = NotificationTypes.foregroundService;
-
-  var locals = await getLocalization();
-
-  await backgroundService.configure(
-      iosConfiguration: IosConfiguration(),
-      androidConfiguration: AndroidConfiguration(
-          onStart: onStart,
-          autoStart: settings.state.backgroundNotifications,
-          autoStartOnBoot: settings.state.backgroundNotifications,
-          isForegroundMode: true,
-          foregroundServiceNotificationId: notif.idSpace,
-          initialNotificationTitle: locals.foregroundServiceNotificationTitle,
-          initialNotificationContent: locals.foregroundServiceNotificationContent(refreshRate),
-          notificationChannelId: notif.id));
-}
-
-String get refreshRate => db.getSettings(BACKGROUND_CHECK_FREQUENCY)?.value ?? "1";
-
-@pragma('vm:entry-point')
-onStart(ServiceInstance service) async {
-  print("Background service started");
-
-  DartPluginRegistrant.ensureInitialized();
-
-  if (service is AndroidServiceInstance) {
-    service.on('setAsForeground').listen((event) {
-      service.setAsForegroundService();
-    });
-
-    service.on('setAsBackground').listen((event) {
-      service.setAsBackgroundService();
-    });
+Future<void> configureBackgroundService(SettingsCubit settings) async {
+  if (settings.state.backgroundNotifications) {
+    await Workmanager().initialize(callbackDispatcher, isInDebugMode: kDebugMode);
   }
-
-  service.on('stopService').listen((event) {
-    print('foreground service stopped');
-    service.stopSelf();
-  });
-
-  service.on(restartTimerMethod).listen((event) async {
-    await _restartTimer();
-  });
-
-  // we run the background stuff once when it starts
-  _backgroundCheck();
-  _restartTimer();
 }
 
-_restartTimer() async {
-  print('setting background timer');
-  db = await DbClient.create();
-  var locals = await getLocalization();
-  var title = locals.foregroundServiceNotificationTitle;
-  sendNotification(title, locals.foregroundServiceNotificationContent(refreshRate), type: NotificationTypes.foregroundService);
-  timer?.cancel();
-  timer = Timer.periodic(debugMode ? const Duration(seconds: 60) : Duration(hours: int.parse(refreshRate)), (timer) {
-    print('foreground service running');
-    _backgroundCheck();
-  });
+Future<void> setupTasks(SettingsCubit settings) async {
+  await Workmanager().registerPeriodicTask(taskName, taskName,
+      frequency: kDebugMode ? Duration(seconds: 15) : Duration(hours: settings.state.backgroundNotificationFrequency),
+      constraints: Constraints(networkType: NetworkType.connected, requiresBatteryNotLow: true));
+}
 
-  db.close();
+Future<void> stopTasks() async {
+  await Workmanager().cancelAll();
+}
+
+@pragma('vm:entry-point') // Mandatory if the App is obfuscated or using Flutter 3.1+
+void callbackDispatcher() {
+  Workmanager().executeTask((task, inputData) async {
+    log.info("Native called background task: $task"); //simpleTask will be emitted here.
+    if (task == taskName) {
+      await _backgroundCheck();
+    }
+    return Future.value(true);
+  });
 }
 
 _backgroundCheck() async {
   try {
     db = await DbClient.create();
 
-    var locals = await getLocalization();
-    var title = locals.foregroundServiceNotificationTitle;
     print('we have a db ${db.isClosed}');
-    sendNotification(title, locals.foregroundServiceUpdatingSubscriptions, type: NotificationTypes.foregroundService);
     await _handleSubscriptionsNotifications();
-    sendNotification(title, locals.foregroundServiceUpdatingChannels, type: NotificationTypes.foregroundService);
     await _handleChannelNotifications();
-    sendNotification(title, locals.foregroundServiceUpdatingPlaylist, type: NotificationTypes.foregroundService);
     await _handlePlaylistNotifications();
-    sendNotification(title, locals.foregroundServiceNotificationContent(refreshRate), type: NotificationTypes.foregroundService);
 
     service.syncHistory();
   } catch (e) {
@@ -143,7 +88,7 @@ _handlePlaylistNotifications() async {
         var locals = await getLocalization();
 
         print('$videosToNotifyAbout videos from playlist ${n.playlistName} to notify about');
-        if (debugMode || videosToNotifyAbout > 0) {
+        if (kDebugMode || videosToNotifyAbout > 0) {
           sendNotification(locals.playlistNotificationTitle(n.playlistName), locals.playlistNotificationContent(n.playlistName, videosToNotifyAbout),
               type: NotificationTypes.playlist,
               payload: {
@@ -181,7 +126,7 @@ _handleChannelNotifications() async {
         var locals = await getLocalization();
 
         print('$videosToNotifyAbout videos from channel ${n.channelName} to notify about');
-        if (debugMode || videosToNotifyAbout > 0) {
+        if (kDebugMode || videosToNotifyAbout > 0) {
           sendNotification(locals.channelNotificationTitle(n.channelName), locals.channelNotificationContent(n.channelName, videosToNotifyAbout),
               type: NotificationTypes.channel, payload: {channelId: n.channelId, lastSeenVideo: videos.videos.first.videoId}, id: n.id);
         }
@@ -223,7 +168,7 @@ _handleSubscriptionsNotifications() async {
         var locals = await getLocalization();
 
         print('$videosToNotifyAbout videos to notify about');
-        if (debugMode || videosToNotifyAbout > 0) {
+        if (kDebugMode || videosToNotifyAbout > 0) {
           sendNotification(locals.subscriptionNotificationTitle, locals.subscriptionNotificationContent(videosToNotifyAbout),
               type: NotificationTypes.subscription, payload: {lastSeenVideo: videos.first.videoId});
         }
