@@ -615,7 +615,7 @@
   "@searchSortUploadDate": {
     "description": "Sort search by upload date"
   },
-  "rememberSubtitleLanguage": "ସବ୍ଟାଇଟ୍ଲ ଭାଷା ମନେରଖ",
+  "rememberSubtitleLanguage": "ସବ୍ଟାଇଟ୍ଲ ଭାଷା କୁ ମନେରଖ",
   "@rememberSubtitleLanguage": {
     "description": "Settings label for remembering subtitle language"
   },
@@ -1166,5 +1166,13 @@
   "askToEnableBackgroundServiceTitle": "ବିଜ୍ଞପ୍ତିଗୁଡ଼ିକ ବନ୍ଦ ହୋଇଯାଇଛି",
   "@askToEnableBackgroundServiceTitle": {
     "description": "If the users tries to turn on notifications for a channel but hasn't enable notifications in the app we need to turn it on for them"
+  },
+  "subtitlesBackgroundDescription": "ଅଧିକ ପଠନୀୟ କରିବା ପାଇଁ ଉପ ଶୀର୍ଷକଗୁଡ଼ିକରେ ଗୋଟିଏ କଳା ପୃଷ୍ଠଭୂମି ଯୋଗ କରନ୍ତୁ",
+  "@subtitlesBackgroundDescription": {
+    "description": "Description for settings to set black background  for subtitles"
+  },
+  "subtitlesBackground": "ଉପଶବ୍ଦ ପୃଷ୍ଠଭୂମି",
+  "@subtitlesBackground": {
+    "description": "Title for settings to set black background  for subtitles"
   }
 }
