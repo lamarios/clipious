@@ -26,6 +26,9 @@ class MiniPlayerControls extends StatelessWidget {
         bool hasQueue = context.select((PlayerCubit value) => value.state.hasQueue);
         bool isPlaying = context.select((PlayerCubit value) => value.state.isPlaying);
 
+        bool isPausedAndDone = context.select((PlayerCubit value) => value.state.position).inMilliseconds > player.duration.inMilliseconds * 0.99 &&
+            context.select((SettingsCubit value) => value.state.playerRepeatMode == PlayerRepeat.noRepeat);
+
         return Padding(
           padding: isMini ? EdgeInsets.zero : const EdgeInsets.all(8.0),
           child: Container(
@@ -56,10 +59,19 @@ class MiniPlayerControls extends StatelessWidget {
                             Icons.fast_rewind,
                           )),
                       IconButton(
-                          onPressed: player.togglePlay,
+                          onPressed: isPausedAndDone
+                              ? () {
+                                  player.seek(Duration.zero);
+                                  player.play();
+                                }
+                              : player.togglePlay,
                           style: buttonStyle,
                           icon: Icon(
-                            isPlaying ? Icons.pause : Icons.play_arrow,
+                            isPlaying
+                                ? Icons.pause
+                                : isPausedAndDone
+                                    ? Icons.refresh
+                                    : Icons.play_arrow,
                           )),
                       IconButton(
                           onPressed: player.fastForward,
