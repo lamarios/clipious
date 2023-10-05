@@ -7,8 +7,6 @@ part of 'player.dart';
 // **************************************************************************
 
 abstract class _$PlayerStateCWProxy {
-  PlayerState currentIndex(int currentIndex);
-
   PlayerState videos(List<BaseVideo> videos);
 
   PlayerState height(double height);
@@ -75,6 +73,8 @@ abstract class _$PlayerStateCWProxy {
 
   PlayerState mediaEvent(MediaEvent<dynamic> mediaEvent);
 
+  PlayerState playQueue(ListQueue<String> playQueue);
+
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `PlayerState(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
   /// Usage
@@ -82,7 +82,6 @@ abstract class _$PlayerStateCWProxy {
   /// PlayerState(...).copyWith(id: 12, name: "My name")
   /// ````
   PlayerState call({
-    int? currentIndex,
     List<BaseVideo>? videos,
     double? height,
     bool? isMini,
@@ -116,6 +115,7 @@ abstract class _$PlayerStateCWProxy {
     int? totalRewind,
     int? totalFastForward,
     MediaEvent<dynamic>? mediaEvent,
+    ListQueue<String>? playQueue,
   });
 }
 
@@ -124,10 +124,6 @@ class _$PlayerStateCWProxyImpl implements _$PlayerStateCWProxy {
   const _$PlayerStateCWProxyImpl(this._value);
 
   final PlayerState _value;
-
-  @override
-  PlayerState currentIndex(int currentIndex) =>
-      this(currentIndex: currentIndex);
 
   @override
   PlayerState videos(List<BaseVideo> videos) => this(videos: videos);
@@ -244,6 +240,10 @@ class _$PlayerStateCWProxyImpl implements _$PlayerStateCWProxy {
       this(mediaEvent: mediaEvent);
 
   @override
+  PlayerState playQueue(ListQueue<String> playQueue) =>
+      this(playQueue: playQueue);
+
+  @override
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `PlayerState(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
@@ -252,7 +252,6 @@ class _$PlayerStateCWProxyImpl implements _$PlayerStateCWProxy {
   /// PlayerState(...).copyWith(id: 12, name: "My name")
   /// ````
   PlayerState call({
-    Object? currentIndex = const $CopyWithPlaceholder(),
     Object? videos = const $CopyWithPlaceholder(),
     Object? height = const $CopyWithPlaceholder(),
     Object? isMini = const $CopyWithPlaceholder(),
@@ -286,12 +285,9 @@ class _$PlayerStateCWProxyImpl implements _$PlayerStateCWProxy {
     Object? totalRewind = const $CopyWithPlaceholder(),
     Object? totalFastForward = const $CopyWithPlaceholder(),
     Object? mediaEvent = const $CopyWithPlaceholder(),
+    Object? playQueue = const $CopyWithPlaceholder(),
   }) {
     return PlayerState._(
-      currentIndex == const $CopyWithPlaceholder() || currentIndex == null
-          ? _value.currentIndex
-          // ignore: cast_nullable_to_non_nullable
-          : currentIndex as int,
       videos == const $CopyWithPlaceholder() || videos == null
           ? _value.videos
           // ignore: cast_nullable_to_non_nullable
@@ -427,6 +423,10 @@ class _$PlayerStateCWProxyImpl implements _$PlayerStateCWProxy {
           ? _value.mediaEvent
           // ignore: cast_nullable_to_non_nullable
           : mediaEvent as MediaEvent<dynamic>,
+      playQueue == const $CopyWithPlaceholder() || playQueue == null
+          ? _value.playQueue
+          // ignore: cast_nullable_to_non_nullable
+          : playQueue as ListQueue<String>,
     );
   }
 }
