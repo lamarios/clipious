@@ -513,6 +513,8 @@ class PlayerCubit extends Cubit<PlayerState> {
       hide();
     } else {
       state.playQueue.removeWhere((element) => element == videoId);
+      state.playedVideos.removeWhere((element) => element == videoId);
+      listToUpdate.removeWhere((element) => element.videoId == videoId);
     }
     emit(state);
   }
@@ -557,6 +559,9 @@ class PlayerCubit extends Cubit<PlayerState> {
     var movedItem = listToUpdate.removeAt(oldItemIndex);
     listToUpdate.insert(newItemIndex, movedItem);
     log.fine('Reordered list: $oldItemIndex new index: ${listToUpdate.indexOf(movedItem)}');
+    if(newItemIndex <= currentIndex){
+      state.playedVideos.add(listToUpdate[newItemIndex].videoId);
+    }
 /*
     if (oldItemIndex == state.currentIndex) {
       state.currentIndex = newItemIndex;
