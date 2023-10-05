@@ -319,6 +319,7 @@ class VideoPlayerCubit extends MediaPlayerCubit<VideoPlayerState> {
                 allowedScreenSleep: false,
                 fit: fillVideo ? BoxFit.cover : BoxFit.contain,
                 subtitlesConfiguration: BetterPlayerSubtitlesConfiguration(
+                  backgroundColor: settings.state.subtitlesBackground ? Colors.black.withOpacity(0.8): Colors.transparent,
                   fontSize: settings.state.subtitleSize,
                   outlineEnabled: true,
                   outlineColor: Colors.black,
