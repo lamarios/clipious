@@ -7,6 +7,7 @@ import 'package:invidious/videos/views/components/play_button.dart';
 import 'package:invidious/videos/views/components/recommended_videos.dart';
 
 import '../../../globals.dart';
+import '../../../player/states/player.dart';
 import '../../../settings/states/settings.dart';
 import '../../../utils.dart';
 import '../../states/video.dart';
@@ -30,6 +31,8 @@ class VideoTabletInnerView extends StatelessWidget {
     var textTheme = Theme.of(context).textTheme;
     var cubit = context.read<VideoCubit>();
     var settings = context.read<SettingsCubit>();
+    String? currentlyPlayingVideoId = context.select((PlayerCubit player) => player.state.currentlyPlaying?.videoId);
+    final bool restart = currentlyPlayingVideoId == video.videoId;
     return Row(
       children: [
         Expanded(
@@ -49,7 +52,8 @@ class VideoTabletInnerView extends StatelessWidget {
                       alignment: Alignment.center,
                       children: [
                         PlayButton(
-                          onPressed: cubit.playVideo,
+                          icon: restart ? Icons.refresh : null,
+                          onPressed: restart ? cubit.restartVideo : cubit.playVideo,
                         ),
                         Positioned(
                             right: 5,

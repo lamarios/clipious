@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:invidious/utils.dart';
+import 'package:invidious/utils/views/components/multi_value_switch.dart';
 
 import '../../../settings/states/settings.dart';
 import '../../states/player.dart';
@@ -82,9 +83,21 @@ class MiniPlayerControls extends StatelessWidget {
                     var playerRepeatMode = context.select((SettingsCubit s) => s.state.playerRepeatMode);
                     var shuffleMode = context.select((SettingsCubit s) => s.state.playerShuffleMode);
                     var cubit = context.read<SettingsCubit>();
+                    var isAudio = context.select((PlayerCubit value) => value.state.isAudio);
                     return Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
+                        Visibility(
+                          // only for online videos
+                          visible: player.state.currentlyPlaying != null,
+                          child: MultiValueSwitch(
+                            left: Icons.ondemand_video,
+                            right: Icons.audiotrack,
+                            onChange: (selected) => player.switchAudio(selected == MultiValueSwitchPosition.right),
+                            position: isAudio ? MultiValueSwitchPosition.right : MultiValueSwitchPosition.left,
+                          ),
+                        ),
+                        Expanded(child: Container()),
                         IconButton(
                             style: buttonStyle,
                             onPressed: cubit.setNextRepeatMode,
