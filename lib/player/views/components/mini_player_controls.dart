@@ -119,7 +119,10 @@ class MiniPlayerControls extends StatelessWidget {
                             )),
                         if (hasQueue)
                           IconButton(
-                            onPressed: cubit.toggleShuffle,
+                            onPressed:() {
+                              cubit.toggleShuffle();
+                              player.generatePlayQueue();
+                            } ,
                             style: buttonStyle,
                             icon: const Icon(Icons.shuffle),
                             color: shuffleMode ? colors.primary : null,

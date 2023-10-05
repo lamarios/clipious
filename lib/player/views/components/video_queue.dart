@@ -15,7 +15,7 @@ class VideoQueue extends StatelessWidget {
   Widget onlineVideoQueue(BuildContext context, int index, BaseVideo video) {
     var controller = context.read<PlayerCubit>();
     var state = controller.state;
-    bool isPlaying = index == state.currentIndex;
+    bool isPlaying = video.videoId == state.currentlyPlaying?.videoId;
     return SwipeActionCell(
       key: ValueKey('$index-${video.videoId}'),
       trailingActions: isPlaying
@@ -45,7 +45,7 @@ class VideoQueue extends StatelessWidget {
     var colors = Theme.of(context).colorScheme;
     var controller = context.read<PlayerCubit>();
     var state = controller.state;
-    bool isPlaying = state.currentIndex == index;
+    bool isPlaying = state.offlineCurrentlyPlaying?.videoId == v.videoId;
 
     return SwipeActionCell(
       key: ValueKey('$index-${v.id}'),
@@ -90,9 +90,11 @@ class VideoQueue extends StatelessWidget {
             create: (BuildContext context) => VideoQueueCubit(ScrollController()),
             child: BlocBuilder<VideoQueueCubit, ScrollController>(builder: (context, scrollController) {
               return BlocConsumer<PlayerCubit, PlayerState>(
-                listenWhen: (previous, current) => previous.currentIndex != current.currentIndex,
+                listenWhen: (previous, current) => (previous.currentlyPlaying?.videoId ?? previous?.offlineCurrentlyPlaying?.videoId) != (current.currentlyPlaying?.videoId ?? current?.offlineCurrentlyPlaying?.videoId),
                 listener: (context, state) {
-                  final offset = (state.currentIndex - 1) * (compactVideoHeight + innerHorizontalPadding);
+                  List<IdedVideo> videos = (state.videos.isNotEmpty ? state.videos : state.offlineVideos);
+
+                  final offset = ((videos.indexWhere((element) => element.videoId == (state.currentlyPlaying?.videoId ?? state.offlineCurrentlyPlaying?.videoId))) -1) * (compactVideoHeight + innerHorizontalPadding);
                   bool goingDown = offset > scrollController.offset;
 
                   // if we want to go up and we're already at the top we don't do anything
@@ -109,7 +111,7 @@ class VideoQueue extends StatelessWidget {
                     previous.videos.length != current.videos.length ||
                     previous.offlineVideos != current.offlineVideos ||
                     previous.offlineVideos.length != current.offlineVideos.length ||
-                    previous.currentIndex != current.currentIndex ||
+                    // previous.currentIndex != current.currentIndex ||
                     previous.currentlyPlaying != current.currentlyPlaying ||
                     previous.offlineCurrentlyPlaying != current.offlineCurrentlyPlaying,
                 builder: (context, state) => ReorderableListView.builder(
