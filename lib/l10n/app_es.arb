@@ -619,7 +619,7 @@
   "@rememberSubtitleLanguageDescription": {
     "description": "Settings description for remembering subtitle language"
   },
-  "rememberSubtitleLanguage": "Recordar el idioma de los subtítulos",
+  "rememberSubtitleLanguage": "Recordar el idioma del subtitulo",
   "@rememberSubtitleLanguage": {
     "description": "Settings label for remembering subtitle language"
   },
@@ -1166,5 +1166,13 @@
   "askToEnableBackgroundServiceTitle": "Notificaciones desactivadas",
   "@askToEnableBackgroundServiceTitle": {
     "description": "If the users tries to turn on notifications for a channel but hasn't enable notifications in the app we need to turn it on for them"
+  },
+  "subtitlesBackgroundDescription": "Añade un fondo negro a los subtítulos para hacerlos más legibles",
+  "@subtitlesBackgroundDescription": {
+    "description": "Description for settings to set black background  for subtitles"
+  },
+  "subtitlesBackground": "Fondo de los subtítulos",
+  "@subtitlesBackground": {
+    "description": "Title for settings to set black background  for subtitles"
   }
 }
