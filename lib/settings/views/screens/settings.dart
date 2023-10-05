@@ -119,9 +119,7 @@ class SettingsScreen extends StatelessWidget {
                       locals.useDash,
                       locals.useProxy,
                       locals.autoplayVideoOnLoad,
-                      locals.subtitleFontSize,
-                      locals.rememberSubtitleLanguage,
-                      locals.rememberPlaybackSpeed,
+                      locals.subtitles,
                       "SponsorBlock",
                       locals.lockFullScreenToLandscape,
                       locals.fillFullscreen
@@ -149,16 +147,20 @@ class SettingsScreen extends StatelessWidget {
                   ),
                 ]),
                 SettingsSection(title: (Text(locals.about)), tiles: [
-                  SettingsTile(title: const Center(child: SizedBox(height: 150, width: 150, child: AppIcon()))),
                   SettingsTile(
+                      title: const Center(child: SizedBox(height: 150, width: 150, child: AppIcon()))),
+                  SettingsTile(
+                    leading: const Icon(Icons.badge_outlined),
                     title: Text('${locals.name}: ${_.packageInfo.appName}'),
                     description: Text('${locals.package}: ${_.packageInfo.packageName}'),
                   ),
                   SettingsTile(
+                    leading: const Icon(Icons.numbers),
                     title: Text('${locals.version}: ${_.packageInfo.version}'),
                     description: Text('${locals.build}: ${_.packageInfo.buildNumber}'),
                   ),
                   SettingsTile(
+                    leading: const Icon(Icons.toc),
                     title: Text(locals.appLogs),
                     description: Text(locals.appLogsDescription),
                     onPressed: openAppLogs,
