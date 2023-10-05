@@ -118,6 +118,13 @@ class VideoCubit extends Cubit<VideoState> {
     scrollUp();
   }
 
+  void restartVideo(bool? audio){
+    if (state.video != null) {
+      player.showBigPlayer();
+      player.seek(Duration.zero);
+    }
+  }
+
   void playVideo(bool? audio) {
     if (state.video != null) {
       List<BaseVideo> videos = [state.video!];
@@ -125,6 +132,7 @@ class VideoCubit extends Cubit<VideoState> {
         videos.addAll(state.video?.recommendedVideos ?? []);
       }
       player.playVideo(videos, audio: audio);
+
     }
   }
 

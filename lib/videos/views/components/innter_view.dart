@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/comments/views/components/comments_container.dart';
+import 'package:invidious/player/states/player.dart';
 import 'package:invidious/videos/models/video.dart';
 import 'package:invidious/videos/views/components/add_to_queue_button.dart';
 import 'package:invidious/videos/views/components/play_button.dart';
@@ -19,8 +20,7 @@ class VideoInnerView extends StatelessWidget {
   bool? playNow;
   final VideoState videoController;
 
-  VideoInnerView(
-      {super.key, required this.video, required this.selectedIndex, this.playNow, required this.videoController});
+  VideoInnerView({super.key, required this.video, required this.selectedIndex, this.playNow, required this.videoController});
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +29,8 @@ class VideoInnerView extends StatelessWidget {
     var textTheme = Theme.of(context).textTheme;
     var cubit = context.read<VideoCubit>();
     var settings = context.read<SettingsCubit>();
+    String? currentlyPlayingVideoId = context.select((PlayerCubit player) => player.state.currentlyPlaying?.videoId);
+    final bool restart = currentlyPlayingVideoId == video.videoId;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -39,7 +41,8 @@ class VideoInnerView extends StatelessWidget {
             alignment: Alignment.center,
             children: [
               PlayButton(
-                onPressed: cubit.playVideo,
+                icon: restart ? Icons.refresh : null,
+                onPressed: restart ? cubit.restartVideo : cubit.playVideo,
               ),
               Positioned(
                   right: 5,
@@ -51,25 +54,18 @@ class VideoInnerView extends StatelessWidget {
           ),
         ),
         if (!settings.state.distractionFreeMode)
-          Builder(builder: (context) {
-            return Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                SizedBox(
-                    height: 25,
-                    child: Checkbox(
-                        value: settings.state.playRecommendedNext,
-                        onChanged: cubit.togglePlayRecommendedNext,
-                        visualDensity: VisualDensity.compact)),
-                InkWell(
-                    onTap: () => cubit.togglePlayRecommendedNext(!settings.state.playRecommendedNext),
-                    child: Text(
-                      locals.addRecommendedToQueue,
-                      style: textTheme.bodySmall,
-                    ))
-              ],
-            );
-          }),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              SizedBox(height: 25, child: Checkbox(value: settings.state.playRecommendedNext, onChanged: cubit.togglePlayRecommendedNext, visualDensity: VisualDensity.compact)),
+              InkWell(
+                  onTap: () => cubit.togglePlayRecommendedNext(!settings.state.playRecommendedNext),
+                  child: Text(
+                    locals.addRecommendedToQueue,
+                    style: textTheme.bodySmall,
+                  ))
+            ],
+          ),
         Expanded(
             child: Padding(
           padding: const EdgeInsets.only(top: 0),
