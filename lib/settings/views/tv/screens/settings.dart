@@ -160,6 +160,12 @@ class TVSettingsScreen extends StatelessWidget {
                   onNewValue: cubit.setSubtitleSize,
                 ),
                 SettingsTile(
+                  title: locals.subtitlesBackground,
+                  description: locals.subtitlesBackgroundDescription,
+                  onSelected: (context) => cubit.setSubtitlesBackground(!_.subtitlesBackground),
+                  trailing: Switch(onChanged: (value) {}, value: _.subtitlesBackground),
+                ),
+                SettingsTile(
                   title: locals.rememberSubtitleLanguage,
                   description: locals.rememberSubtitleLanguageDescription,
                   onSelected: (context) => cubit.toggleRememberSubtitles(!_.rememberSubtitles),

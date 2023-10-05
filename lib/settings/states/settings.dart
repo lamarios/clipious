@@ -301,6 +301,12 @@ class SettingsCubit extends Cubit<SettingsState> {
     emit(state);
   }
 
+  setSubtitlesBackground(bool b) {
+    var state = this.state.copyWith();
+    state.subtitlesBackground = b;
+    emit(state);
+  }
+
   String? getLocaleDisplayName() {
     List<String>? localeString = state.locale?.split('_');
     Locale? l = localeString != null ? Locale.fromSubtags(languageCode: localeString[0], scriptCode: localeString.length >= 2 ? localeString[1] : null) : null;
@@ -496,6 +502,10 @@ class SettingsState {
   int get backgroundNotificationFrequency => int.parse(_get(BACKGROUND_CHECK_FREQUENCY)?.value ?? "1");
 
   set backgroundNotificationFrequency(int i) => _set(BACKGROUND_CHECK_FREQUENCY, i);
+
+  bool get subtitlesBackground => _get(SUBTITLE_BACKGROUND)?.value == 'true';
+
+  set subtitlesBackground(bool b) => _set(SUBTITLE_BACKGROUND, b);
 
   void _set<T>(String name, T value) {
     if (value == null) {

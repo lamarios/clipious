@@ -25,7 +25,7 @@ Future<void> configureBackgroundService(SettingsCubit settings) async {
 
 Future<void> setupTasks(SettingsCubit settings) async {
   await Workmanager().registerPeriodicTask(taskName, taskName,
-      frequency: kDebugMode ? Duration(seconds: 15) : Duration(hours: settings.state.backgroundNotificationFrequency),
+      frequency: kDebugMode ? const Duration(seconds: 15) : Duration(hours: settings.state.backgroundNotificationFrequency),
       constraints: Constraints(networkType: NetworkType.connected, requiresBatteryNotLow: true));
 }
 

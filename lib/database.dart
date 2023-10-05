@@ -51,6 +51,7 @@ const DISTRACTION_FREE_MODE = 'distraction-free-mode';
 const BACKGROUND_NOTIFICATIONS = 'background-notifications';
 const SUBSCRIPTION_NOTIFICATIONS = 'subscriptions-notifications';
 const BACKGROUND_CHECK_FREQUENCY  = "background-check-frequency";
+const SUBTITLE_BACKGROUND = 'subtitle-background';
 
 const ON_OPEN = "on-open";
 

@@ -663,7 +663,7 @@
     "@logsCopied": {
         "description": "Message to tell user that logs have been copied to the clipboard"
     },
-    "rememberSubtitleLanguage": "Remember subtitle language",
+    "rememberSubtitleLanguage": "Remember subtitles language",
     "@rememberSubtitleLanguage": {
         "description": "Settings label for remembering subtitle language"
     },
@@ -1164,6 +1164,14 @@
             "type": "num",
             "format": "compact"
         }
+    },
+    "subtitlesBackground": "Subtitles background",
+    "@subtitlesBackground": {
+        "description": "Title for settings to set black background  for subtitles"
+    },
+    "subtitlesBackgroundDescription": "Adds a black background to subtitles to make them more readable",
+    "@subtitlesBackgroundDescription": {
+        "description": "Description for settings to set black background  for subtitles"
     },
     "history": "History",
     "@history": {
