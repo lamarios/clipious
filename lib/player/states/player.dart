@@ -90,9 +90,9 @@ class PlayerCubit extends Cubit<PlayerState> {
 
   int get currentIndex {
     String? currentVideoId = state.currentlyPlaying?.videoId ?? state.offlineCurrentlyPlaying?.videoId;
-    return (state.videos.isNotEmpty? state.videos : state.offlineVideos).indexWhere((element) => element.videoId == currentVideoId);
+    return (state.videos.isNotEmpty ? state.videos : state.offlineVideos).indexWhere((element) => element.videoId == currentVideoId);
   }
-  
+
   onReady() async {
     if (!isTv) {
       mediaHandler = await AudioService.init(
@@ -317,34 +317,32 @@ class PlayerCubit extends Cubit<PlayerState> {
   }
 
   playNext() {
-    EasyThrottle.throttle(skipToVideoThrottleName, Duration(seconds: 1), () {
-
+    EasyThrottle.throttle(skipToVideoThrottleName, Duration(seconds: 1), () async {
       if (settings.state.playerRepeatMode == PlayerRepeat.repeatOne) {
         seek(Duration.zero);
         play();
       } else if (state.videos.isNotEmpty || state.offlineVideos.isNotEmpty) {
-
         //moving current video to played list
         String? currentVideoId = state.currentlyPlaying?.videoId ?? state.offlineCurrentlyPlaying?.videoId;
         if (currentVideoId != null) {
-          state.playedVideos.remove(currentVideoId);
+          // state.playedVideos.remove(currentVideoId);
           state.playedVideos.add(currentVideoId);
         }
 
         if (state.playQueue.isNotEmpty) {
           String toPlay = state.playQueue.removeFirst();
           if (state.videos.isNotEmpty) {
-            switchToVideo(state.videos.firstWhere((element) => element.videoId == toPlay));
+            await switchToVideo(state.videos.firstWhere((element) => element.videoId == toPlay));
           } else {
-            switchToOfflineVideo(state.offlineVideos.firstWhere((element) => element.videoId == toPlay));
+            await switchToOfflineVideo(state.offlineVideos.firstWhere((element) => element.videoId == toPlay));
           }
         } else if (settings.state.playerRepeatMode == PlayerRepeat.repeatAll) {
           state.playedVideos = [];
           state.playQueue = ListQueue.from([]);
           if (state.videos.isNotEmpty) {
-            switchToVideo(state.videos[0]);
+            await switchToVideo(state.videos[0]);
           } else {
-            switchToOfflineVideo(state.offlineVideos[0]);
+            await switchToOfflineVideo(state.offlineVideos[0]);
           }
           generatePlayQueue();
         }
@@ -353,21 +351,20 @@ class PlayerCubit extends Cubit<PlayerState> {
   }
 
   playPrevious() {
-    EasyThrottle.throttle(skipToVideoThrottleName, const Duration(seconds: 1), () {
-
+    EasyThrottle.throttle(skipToVideoThrottleName, const Duration(seconds: 1), () async {
       if (state.playedVideos.isNotEmpty) {
         // putting back current video in play queue
         String? currentVideoId = state.currentlyPlaying?.videoId ?? state.offlineCurrentlyPlaying?.videoId;
         if (currentVideoId != null) {
-          state.playQueue.remove(currentVideoId);
+          // state.playQueue.remove(currentVideoId);
           state.playQueue.addFirst(currentVideoId);
         }
 
         String toPlay = state.playedVideos.removeLast();
         if (state.videos.isNotEmpty) {
-          switchToVideo(state.videos.firstWhere((element) => element.videoId == toPlay));
+          await switchToVideo(state.videos.firstWhere((element) => element.videoId == toPlay));
         } else {
-          switchToOfflineVideo(state.offlineVideos.firstWhere((element) => element.videoId == toPlay));
+          await switchToOfflineVideo(state.offlineVideos.firstWhere((element) => element.videoId == toPlay));
         }
       } else {
         // if there's nothing to go back to, we just repeat the last video
