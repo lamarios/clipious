@@ -40,7 +40,7 @@ class MultiValueSwitch extends StatelessWidget {
               duration: animationDuration,
               curve: Curves.easeInOutQuad,
               child: Container(
-                decoration: BoxDecoration(color: Colors.white, shape: BoxShape.circle),
+                decoration: BoxDecoration(color: colors.primary, shape: BoxShape.circle),
               ),
             ),
             Positioned(
@@ -56,12 +56,12 @@ class MultiValueSwitch extends StatelessWidget {
                       Icon(
                         left,
                         size: iconSize,
-                        color: isLeft ? Colors.black : colors.secondary,
+                        color: isLeft ? colors.onPrimary : colors.secondary,
                       ),
                       Icon(
                         right,
                         size: iconSize,
-                        color: isRight ? Colors.black : colors.secondary,
+                        color: isRight ? colors.onPrimary : colors.secondary,
                       )
                     ],
                   ),
