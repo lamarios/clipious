@@ -87,7 +87,9 @@ class TvVideoScreen extends StatelessWidget {
                       videoState.video == null
                           ? Container(color: colors.background)
                           : VideoThumbnailView(
-                              videoId: videoState.video!.videoId, decoration: const BoxDecoration(), thumbnailUrl: ImageObject.getBestThumbnail(videoState.video?.videoThumbnails)?.url ?? ''),
+                              videoId: videoState.video!.videoId,
+                              decoration: const BoxDecoration(),
+                              thumbnailUrl: videoState.video!.deArrowThumbnailUrl ?? ImageObject.getBestThumbnail(videoState.video?.videoThumbnails)?.url ?? ''),
                       AnimatedPositioned(
                         top: tvState.showImage ? 315 : 0,
                         left: 0,
@@ -178,7 +180,6 @@ class TvVideoScreen extends StatelessWidget {
                                                             thumbnailUrl: ImageObject.getBestThumbnail(videoState.video?.authorThumbnails)?.url ?? '',
                                                             width: 40,
                                                             height: 40,
-                                                            id: 'author-small-${videoState.video?.authorId}',
                                                             decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
                                                           ),
                                                           Padding(

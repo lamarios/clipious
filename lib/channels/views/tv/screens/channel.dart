@@ -104,7 +104,6 @@ class TvChannelScreen extends StatelessWidget {
                                                           '',
                                                       width: 70,
                                                       height: 70,
-                                                      id: 'author-big-${channel.channel?.authorId}',
                                                       decoration:
                                                           BoxDecoration(borderRadius: BorderRadius.circular(35)),
                                                     ),

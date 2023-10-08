@@ -43,6 +43,12 @@ abstract class _$AppRouter extends RootStackRouter {
         ),
       );
     },
+    DeArrowSettingsRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const DeArrowSettingsScreen(),
+      );
+    },
     DownloadManagerRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -421,6 +427,20 @@ class ChannelRouteArgs {
   String toString() {
     return 'ChannelRouteArgs{key: $key, channelId: $channelId}';
   }
+}
+
+/// generated route for
+/// [DeArrowSettingsScreen]
+class DeArrowSettingsRoute extends PageRouteInfo<void> {
+  const DeArrowSettingsRoute({List<PageRouteInfo>? children})
+      : super(
+          DeArrowSettingsRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'DeArrowSettingsRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for

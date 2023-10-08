@@ -17,6 +17,7 @@ import 'package:invidious/settings/models/db/video_filter.dart';
 import 'package:invidious/settings/views/screens/app_logs.dart';
 import 'package:invidious/settings/views/screens/appearance.dart';
 import 'package:invidious/settings/views/screens/browsing.dart';
+import 'package:invidious/settings/views/screens/dearrow.dart';
 import 'package:invidious/settings/views/screens/manage_servers.dart';
 import 'package:invidious/settings/views/screens/manage_single_server.dart';
 import 'package:invidious/settings/views/screens/notifications.dart';
@@ -120,7 +121,8 @@ class AppRouter extends _$AppRouter {
                 AutoRoute(page: ManageSubscriptionsRoute.page),
                 AutoRoute(page: AppLogsRoute.page),
                 AutoRoute(page: PlaylistViewRoute.page),
-                AutoRoute(page: SubscriptionRoute.page)
+                AutoRoute(page: SubscriptionRoute.page),
+                AutoRoute(page: DeArrowSettingsRoute.page)
               ],
             ),
             AutoRoute(page: ManageSingleServerRoute.page, path: pathManageSingleServerFromWizard),

@@ -182,6 +182,18 @@ class TVSettingsScreen extends StatelessWidget {
                   description: locals.sponsorBlockDescription,
                   onSelected: openSponsorBlockSettings,
                 ),
+                SettingsTile(
+                  title:  'DeArrow',
+                  description: locals.deArrowSettingDescription,
+                  onSelected: (context) => cubit.setDearrow(!_.dearrow),
+                  trailing: Switch(onChanged: (value) {}, value: _.dearrow),
+                ),
+                SettingsTile(
+                  title:  locals.deArrowReplaceThumbnails,
+                  description: locals.deArrowReplaceThumbnailsDescription,
+                  onSelected: (context) => cubit.setDearrowThumbnail(!_.dearrowThumbnails),
+                  trailing: Switch(onChanged: (value) {}, value: _.dearrowThumbnails),
+                ),
                 SettingsTitle(title: locals.appearance),
                 SettingsTile(
                   title: locals.themeBrightness,

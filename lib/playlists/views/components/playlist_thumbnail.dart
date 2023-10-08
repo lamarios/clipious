@@ -48,9 +48,8 @@ class PlaylistThumbnails extends StatelessWidget {
                         )
                       : videosToUse.length > i
                           ? VideoThumbnailView(
-                              cacheKey: 'v-${bestThumbnails ? 'best' : 'worst'}/${videosToUse[i].videoId}',
                               videoId: videosToUse[i].videoId,
-                              thumbnailUrl: (bestThumbnails
+                              thumbnailUrl: videosToUse[i].deArrowThumbnailUrl ?? (bestThumbnails
                                       ? ImageObject.getBestThumbnail(videosToUse[i].videoThumbnails)?.url
                                       : ImageObject.getWorstThumbnail(videosToUse[i].videoThumbnails)?.url) ??
                                   '',

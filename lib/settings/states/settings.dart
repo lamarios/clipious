@@ -358,6 +358,18 @@ class SettingsCubit extends Cubit<SettingsState> {
     emit(state);
   }
 
+  setDearrow(bool b) {
+    var state = this.state.copyWith();
+    state.dearrow = b;
+    emit(state);
+  }
+
+  setDearrowThumbnail(bool b) {
+    var state = this.state.copyWith();
+    state.dearrowThumbnails = b;
+    emit(state);
+  }
+
   setBackgroundCheckFrequency(int i) {
     if (i > 0 && i <= 24) {
       var state = this.state.copyWith();
@@ -506,6 +518,14 @@ class SettingsState {
   bool get subtitlesBackground => _get(SUBTITLE_BACKGROUND)?.value == 'true';
 
   set subtitlesBackground(bool b) => _set(SUBTITLE_BACKGROUND, b);
+
+  bool get dearrow => _get(DEARROW)?.value == 'true';
+
+  set dearrow(bool b) => _set(DEARROW, b);
+
+  bool get dearrowThumbnails => _get(DEARROW_THUMBNAILS)?.value == 'true';
+
+  set dearrowThumbnails(bool b) => _set(DEARROW_THUMBNAILS, b);
 
   void _set<T>(String name, T value) {
     if (value == null) {

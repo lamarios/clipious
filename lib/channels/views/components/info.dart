@@ -66,7 +66,7 @@ class ChannelInfo extends StatelessWidget {
         childAspectRatio: getGridAspectRatio(context),
         children: channel.latestVideos?.map((e) {
               VideoInList videoInList = VideoInList(e.title, e.videoId, e.lengthSeconds, 0, e.author, channel.authorId,
-                  channel.authorId, 0, '', e.videoThumbnails);
+                  channel.authorId, 0, '', e.videoThumbnails)..deArrowThumbnailUrl = e.deArrowThumbnailUrl;
               videoInList.filtered = e.filtered;
               videoInList.matchedFilters = e.matchedFilters;
               return VideoListItem(
@@ -84,7 +84,6 @@ class ChannelInfo extends StatelessWidget {
             child: Thumbnail(
                 width: double.infinity,
                 thumbnailUrl: ImageObject.getBestThumbnail(channel.authorThumbnails)?.url ?? '',
-                id: 'channel-banner/${channel.authorId}',
                 decoration: BoxDecoration(
                   color: colors.secondaryContainer,
                 )),

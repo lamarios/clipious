@@ -1176,5 +1176,21 @@
     "history": "History",
     "@history": {
         "description": "User view history label"
+    },
+    "deArrowSettingDescription": "Replace click bait titles and thumbnails",
+    "@deArrowSettingDescription": {
+       "description": "Description for dearrow"
+    },
+    "deArrowReplaceThumbnails": "Replace thumbnails",
+    "@deArrowReplaceThumbnails": {
+       "description": "Settings title for checkbox on whether the thumbnail should be replaced as well"
+    },
+    "deArrowReplaceThumbnailsDescription": "Replace video thumbnails in addition of the titles",
+    "@deArrowReplaceThumbnailsDescription": {
+       "description": "Description for DeArrow setting switch"
+    },
+    "deArrowWarning": "Enable DeArrow can signgificantly reduce the browsing speed of the app as extra http requests are needed for every single video",
+    "@deArrowWarning": {
+       "description": "Warning message when the user enables DeArrow"
     }
 }

@@ -52,7 +52,7 @@ class TvPlaylistScreen extends PlaylistViewScreen {
                           return VideoThumbnailView(
                               videoId: video.videoId,
                               decoration: BoxDecoration(),
-                              thumbnailUrl: ImageObject.getBestThumbnail(video.videoThumbnails)?.url ?? '');
+                              thumbnailUrl: video.deArrowThumbnailUrl ?? ImageObject.getBestThumbnail(video.videoThumbnails)?.url ?? '');
                         },
                         options: CarouselOptions(
                           autoPlayCurve: Curves.easeInOutQuad,

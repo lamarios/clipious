@@ -47,7 +47,6 @@ class SingleCommentView extends StatelessWidget {
                     child: Thumbnail(
                       width: 20,
                       height: 20,
-                      id: 'comment-author-${_.comment.authorId}',
                       thumbnailUrl: ImageObject.getBestThumbnail(_.comment.authorThumbnails)?.url ?? '',
                       decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
                     ),

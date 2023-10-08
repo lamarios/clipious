@@ -86,23 +86,27 @@ class AppearanceSettingsScreen extends StatelessWidget {
               SettingsSection(
                 tiles: [
                   SettingsTile.switchTile(
+                    leading: const Icon(Icons.palette),
                     initialValue: _.useDynamicTheme,
                     onToggle: cubit.toggleDynamicTheme,
                     title: Text(locals.useDynamicTheme),
                     description: Text(locals.useDynamicThemeDescription),
                   ),
                   SettingsTile(
+                    leading: const Icon(Icons.brightness_4_outlined),
                     title: Text(locals.themeBrightness),
                     value: Text(cubit.getThemeLabel(locals, _.themeMode)),
                     onPressed: (ctx) => selectTheme(ctx, _),
                   ),
                   SettingsTile.switchTile(
+                    leading: const Icon(Icons.contrast),
                     initialValue: _.blackBackground,
                     onToggle: cubit.toggleBlackBackground,
                     title: Text(locals.blackBackground),
                     description: Text(locals.blackBackgroundDescription),
                   ),
                   SettingsTile(
+                    leading: const Icon(Icons.label),
                     title: Text(locals.navigationBarStyle),
                     value: Text(getNavigationLabelText(context, _.navigationBarLabelBehavior)),
                     onPressed: (ctx) => customizeNavigationLabel(ctx),

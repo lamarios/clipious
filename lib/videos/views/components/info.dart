@@ -65,7 +65,6 @@ class VideoInfo extends StatelessWidget {
                     thumbnailUrl: ImageObject.getBestThumbnail(video.authorThumbnails)?.url ?? '',
                     width: 40,
                     height: 40,
-                    id: 'author-small-${video.authorId}',
                     decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
                   ) /*Container(
                     width: 40,

@@ -24,6 +24,7 @@ import 'settings/models/db/app_logs.dart';
 import 'settings/models/db/server.dart';
 import 'settings/models/db/settings.dart';
 import 'settings/models/db/video_filter.dart';
+import 'videos/models/db/dearrow_cache.dart';
 import 'videos/models/db/history_video_cache.dart';
 import 'videos/models/db/progress.dart';
 
@@ -458,6 +459,36 @@ final _entities = <ModelEntity>[
             flags: 0)
       ],
       relations: <ModelRelation>[],
+      backlinks: <ModelBacklink>[]),
+  ModelEntity(
+      id: const IdUid(15, 7475761865024216578),
+      name: 'DeArrowCache',
+      lastPropertyId: const IdUid(4, 7876161971726247302),
+      flags: 0,
+      properties: <ModelProperty>[
+        ModelProperty(
+            id: const IdUid(1, 2266267358862097191),
+            name: 'id',
+            type: 6,
+            flags: 1),
+        ModelProperty(
+            id: const IdUid(2, 6260864673962012294),
+            name: 'videoId',
+            type: 9,
+            flags: 34848,
+            indexId: const IdUid(8, 11015011236117301)),
+        ModelProperty(
+            id: const IdUid(3, 3037776482306894529),
+            name: 'title',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(4, 7876161971726247302),
+            name: 'url',
+            type: 9,
+            flags: 0)
+      ],
+      relations: <ModelRelation>[],
       backlinks: <ModelBacklink>[])
 ];
 
@@ -488,11 +519,11 @@ Future<Store> openStore(
 ModelDefinition getObjectBoxModel() {
   final model = ModelInfo(
       entities: _entities,
-      lastEntityId: const IdUid(13, 8331886434292283747),
-      lastIndexId: const IdUid(7, 4488140487903335246),
+      lastEntityId: const IdUid(15, 7475761865024216578),
+      lastIndexId: const IdUid(8, 11015011236117301),
       lastRelationId: const IdUid(0, 0),
       lastSequenceId: const IdUid(0, 0),
-      retiredEntityUids: const [6897417709810972885],
+      retiredEntityUids: const [6897417709810972885, 2895109148053406327],
       retiredIndexUids: const [9110274326691932798],
       retiredPropertyUids: const [
         3422621380867834787,
@@ -500,7 +531,8 @@ ModelDefinition getObjectBoxModel() {
         7030952573865954657,
         6600296338817128660,
         345286493546760360,
-        3278768646220204892
+        3278768646220204892,
+        6911432365687480646
       ],
       retiredRelationUids: const [],
       modelVersion: 5,
@@ -1012,6 +1044,42 @@ ModelDefinition getObjectBoxModel() {
             ..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
 
           return object;
+        }),
+    DeArrowCache: EntityDefinition<DeArrowCache>(
+        model: _entities[12],
+        toOneRelations: (DeArrowCache object) => [],
+        toManyRelations: (DeArrowCache object) => {},
+        getId: (DeArrowCache object) => object.id,
+        setId: (DeArrowCache object, int id) {
+          object.id = id;
+        },
+        objectToFB: (DeArrowCache object, fb.Builder fbb) {
+          final videoIdOffset = fbb.writeString(object.videoId);
+          final titleOffset =
+              object.title == null ? null : fbb.writeString(object.title!);
+          final urlOffset =
+              object.url == null ? null : fbb.writeString(object.url!);
+          fbb.startTable(5);
+          fbb.addInt64(0, object.id);
+          fbb.addOffset(1, videoIdOffset);
+          fbb.addOffset(2, titleOffset);
+          fbb.addOffset(3, urlOffset);
+          fbb.finish(fbb.endTable());
+          return object.id;
+        },
+        objectFromFB: (Store store, ByteData fbData) {
+          final buffer = fb.BufferContext(fbData);
+          final rootOffset = buffer.derefObject(0);
+          final videoIdParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 6, '');
+          final object = DeArrowCache(videoIdParam)
+            ..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0)
+            ..title = const fb.StringReader(asciiOptimization: true)
+                .vTableGetNullable(buffer, rootOffset, 8)
+            ..url = const fb.StringReader(asciiOptimization: true)
+                .vTableGetNullable(buffer, rootOffset, 10);
+
+          return object;
         })
   };
 
@@ -1296,4 +1364,23 @@ class PlaylistNotification_ {
   /// see [PlaylistNotification.playlistName]
   static final playlistName =
       QueryStringProperty<PlaylistNotification>(_entities[11].properties[4]);
+}
+
+/// [DeArrowCache] entity fields to define ObjectBox queries.
+class DeArrowCache_ {
+  /// see [DeArrowCache.id]
+  static final id =
+      QueryIntegerProperty<DeArrowCache>(_entities[12].properties[0]);
+
+  /// see [DeArrowCache.videoId]
+  static final videoId =
+      QueryStringProperty<DeArrowCache>(_entities[12].properties[1]);
+
+  /// see [DeArrowCache.title]
+  static final title =
+      QueryStringProperty<DeArrowCache>(_entities[12].properties[2]);
+
+  /// see [DeArrowCache.url]
+  static final url =
+      QueryStringProperty<DeArrowCache>(_entities[12].properties[3]);
 }
