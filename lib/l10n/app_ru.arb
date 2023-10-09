@@ -952,5 +952,37 @@
   "distractionFreeModeDescription": "Отключить комментарии и рекомендации",
   "@distractionFreeModeDescription": {
     "description": "Description for distraction free mode"
+  },
+  "askForDisableBatteryOptimizationTitle": "Необходимо выключить оптимизацию расхода батареи",
+  "@askForDisableBatteryOptimizationTitle": {
+    "description": "Title for the dialog asking the user to turn off disabling battery optimization when turning on notifications"
+  },
+  "askForDisableBatteryOptimizationContent": "Для того чтобы присылать уведомления Clipious требуется запускать фоновые сервисы. Для стабильной работы необходимо чтобы Clipious имел доступ к неограниченному расходу батареи, нажатие на ОК откроет настройки оптимизации расхода батареи.",
+  "@askForDisableBatteryOptimizationContent": {
+    "description": "Content for the dialog asking the user to turn off disabling battery optimization when turning on notifications"
+  },
+  "notificationsDescription": "Включите и рассмотрите, о чём вас уведомляют",
+  "@notificationsDescription": {
+    "description": "Setting description for notifications"
+  },
+  "subscriptionNotificationTitle": "Новые видео из ваших подписок",
+  "@subscriptionNotificationTitle": {
+    "description": "Title for the notification showing that there are new videos from the subscription feed"
+  },
+  "subscriptionNotificationDescription": "Получайте уведомления о новых видео из ваших подписок если вы авторизованы на текущем сервере",
+  "@subscriptionNotificationDescription": {
+    "description": "Description for subscription notifications"
+  },
+  "notifications": "Уведомления",
+  "@notifications": {
+    "description": "Notification settings title"
+  },
+  "subscriptionNotification": "Уведомления подписок",
+  "@subscriptionNotification": {
+    "description": "Title for subscriptions notifications"
+  },
+  "enableNotificationDescriptions": "Запускает приоритетный сервис для проверки и оповещения об изменениях, за которыми вы следите",
+  "@enableNotificationDescriptions": {
+    "description": ""
   }
 }
