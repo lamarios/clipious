@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/settings/states/settings.dart';
 import 'package:invidious/settings/views/screens/settings.dart';
+import 'package:invidious/utils.dart';
 import 'package:settings_ui/settings_ui.dart';
 
 @RoutePage()
@@ -37,7 +38,13 @@ class DeArrowSettingsScreen extends StatelessWidget {
                     title: Text("DeArrow"),
                     description: Text(locals.deArrowSettingDescription),
                     initialValue: _.dearrow,
-                    onToggle: cubit.setDearrow,
+                    onToggle: (value) {
+                      if (value) {
+                        okCancelDialog(context, "DeArrow", locals.deArrowWarning, () => cubit.setDearrow(value));
+                      } else {
+                        return cubit.setDearrow(value);
+                      }
+                    },
                   ),
                   SettingsTile.switchTile(
                     title: Text(locals.deArrowReplaceThumbnails),

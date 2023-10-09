@@ -141,8 +141,8 @@ class Service {
     final response = await http.get(buildUrl(urlGetVideo, pathParams: {':id': videoId}), headers: {'Content-Type': 'application/json; charset=utf-16'});
 
     var video = Video.fromJson(handleResponse(response));
-    DeArrow.processVideos([video]);
-    DeArrow.processVideos(video.recommendedVideos);
+    await DeArrow.processVideos([video]);
+    await DeArrow.processVideos(video.recommendedVideos);
     return video;
   }
 
@@ -265,8 +265,8 @@ class Service {
     var headers = getAuthenticationHeaders(currentlySelectedServer);
     final response = await http.get(uri, headers: headers);
     var feed = UserFeed.fromJson(handleResponse(response));
-    feed.videos = (await postProcessVideos(feed.videos)).cast();
-    feed.notifications = (await postProcessVideos(feed.notifications)).cast();
+    feed.videos = (await postProcessVideos(feed.videos ?? [])).cast();
+    feed.notifications = (await postProcessVideos(feed.notifications ?? [])).cast();
 
     // we only save the last video seen if we're on the first page otherwise it does not make sense
     if (saveLastSeen && (page ?? 1) == 1) {
@@ -304,7 +304,8 @@ class Service {
 
       log.fine("calling $url");
       final response = await http.get((Uri.parse(url)));
-      var deArrow = DeArrow.fromJson(handleResponse(response));
+      var body = utf8.decode(response.bodyBytes);
+      var deArrow = DeArrow.fromJson(jsonDecode(body));
       deArrow.videoId = videoId;
       return deArrow;
     } catch (err) {
@@ -423,7 +424,7 @@ class Service {
     final response = await http.get(buildUrl(urlGetChannel, pathParams: {':id': channelId}), headers: {'Content-Type': 'application/json; charset=utf-16'});
 
     var channel = Channel.fromJson(handleResponse(response));
-    channel.latestVideos = (await postProcessVideos(channel.latestVideos)).cast();
+    channel.latestVideos = (await postProcessVideos(channel.latestVideos ?? [])).cast();
 
     if (channel.latestVideos != null && channel.latestVideos!.isNotEmpty) {
       db.setChannelNotificationLastViewedVideo(channel.authorUrl, channel.latestVideos![0].videoId);

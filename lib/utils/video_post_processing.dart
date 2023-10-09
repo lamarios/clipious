@@ -1,11 +1,23 @@
+import 'package:flutter/cupertino.dart';
 import 'package:invidious/settings/models/db/video_filter.dart';
 import 'package:invidious/videos/models/dearrow.dart';
+import 'package:logging/logging.dart';
 
 import '../videos/models/base_video.dart';
 
-Future<List<BaseVideo>> postProcessVideos(List<BaseVideo>? toProcess) async {
-  List<BaseVideo> videos = toProcess ?? [];
-  videos = await VideoFilter.filterVideos(videos);
-  videos = await DeArrow.processVideos(videos);
-  return videos;
+var log = Logger('Video post process');
+
+Future<List<BaseVideo>> postProcessVideos(List<BaseVideo> toProcess) async {
+  try {
+    int start = DateTime.now().millisecondsSinceEpoch;
+    List<BaseVideo> videos = toProcess ?? [];
+    videos = await VideoFilter.filterVideos(videos);
+    videos = await DeArrow.processVideos(videos);
+
+    log.info("Filter + DeArrow took ${DateTime.now().millisecondsSinceEpoch - start}ms for ${toProcess.length} videos");
+    return videos;
+  } catch (err) {
+    log.severe('Issue while running post process', err);
+    return toProcess;
+  }
 }

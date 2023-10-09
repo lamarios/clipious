@@ -30,7 +30,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 - Use own or public  server
 - Subscription management
-- SponsorBlock
+- SponsorBlock + DeArrow (click bait removal)
 - Video view/progress tracking
 - Playlists
 - background playback
