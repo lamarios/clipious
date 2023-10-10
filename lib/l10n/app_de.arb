@@ -559,7 +559,7 @@
   "@returnYoutubeDislikeDescription": {
     "description": "ReturnYoutubeDislike setting description"
   },
-  "rememberSubtitleLanguage": "Untertitelsprache merken",
+  "rememberSubtitleLanguage": "Sprache der Untertitel merken",
   "@rememberSubtitleLanguage": {
     "description": "Settings label for remembering subtitle language"
   },
@@ -862,5 +862,171 @@
   "itemlistErrorGeneric": "Daten konnten nicht abgerufen werden",
   "@itemlistErrorGeneric": {
     "description": "Error showing when the data can't be fetch"
+  },
+  "askForDisableBatteryOptimizationTitle": "Deaktivierung der Batterieoptimierung erforderlich",
+  "@askForDisableBatteryOptimizationTitle": {
+    "description": "Title for the dialog asking the user to turn off disabling battery optimization when turning on notifications"
+  },
+  "navigationBarLabelNeverShow": "Bezeichnung nie anzeigen",
+  "@navigationBarLabelNeverShow": {
+    "description": "Never show label option for navigation bar"
+  },
+  "navigationBarLabelShowOnSelect": "Bezeichnung wird auf dem ausgewählten Element angezeigt",
+  "@navigationBarLabelShowOnSelect": {
+    "description": "Label only showing when selected option for navigation bar"
+  },
+  "from": "Von",
+  "@from": {
+    "description": "From word (as in 'From xx To xx')"
+  },
+  "playlistNotificationTitle": "Neue Videos in der Wiedergabeliste {playlist}",
+  "@playlistNotificationTitle": {
+    "description": "Title for the playlist notifications when there are new videos",
+    "placeholders": {
+      "playlist": {
+        "type": "String",
+        "example": "Lo-Fi girl"
+      }
+    }
+  },
+  "notificationFrequencySettingsTitle": "Häufigkeit der Prüfung auf neue Videos",
+  "@notificationFrequencySettingsTitle": {
+    "description": "Title for frequency settings"
+  },
+  "distractionFreeMode": "Ablenkungsfreier Modus",
+  "@distractionFreeMode": {
+    "description": "title for distraction free mode settings"
+  },
+  "channelNotificationTitle": "Neue Videos von {channel}",
+  "@channelNotificationTitle": {
+    "description": "Title for the channel notifications when there are new videos",
+    "placeholders": {
+      "channel": {
+        "type": "String",
+        "example": "MKBHD"
+      }
+    }
+  },
+  "navigationBarLabelAlwaysShowing": "Bezeichnung wird immer angezeigt",
+  "@navigationBarLabelAlwaysShowing": {
+    "description": "Label always showing option for navigation bar"
+  },
+  "videoFilterApplyDateToFilter": "Videos nach bestimmten Zeiten filtern",
+  "@videoFilterApplyDateToFilter": {
+    "description": "Label for switch to allow user to customize video filter and set days of week and time to them"
+  },
+  "to": "An",
+  "@to": {
+    "description": "To word as in 'From xx To xx')"
+  },
+  "subscriptionNotificationTitle": "Neue Videos von Ihren Abonnements",
+  "@subscriptionNotificationTitle": {
+    "description": "Title for the notification showing that there are new videos from the subscription feed"
+  },
+  "notifications": "Benachrichtigungen",
+  "@notifications": {
+    "description": "Notification settings title"
+  },
+  "library": "Bibliothek",
+  "@library": {
+    "description": "Name for user library"
+  },
+  "subscriptionNotification": "Abonnement-Benachrichtigungen",
+  "@subscriptionNotification": {
+    "description": "Title for subscriptions notifications"
+  },
+  "videoFilterStartTime": "Startzeit",
+  "@videoFilterStartTime": {
+    "description": "Title for filter start time"
+  },
+  "distractionFreeModeDescription": "Videokommentare und -empfehlungen deaktivieren",
+  "@distractionFreeModeDescription": {
+    "description": "Description for distraction free mode"
+  },
+  "videoFilterTimeOfDayFromTo": "Von {from} an {to}",
+  "@videoFilterTimeOfDayFromTo": {
+    "description": "Time of day range",
+    "placeholders": {
+      "from": {
+        "type": "String",
+        "example": "3:00 AM"
+      },
+      "to": {
+        "type": "String",
+        "example": "5:00 PM"
+      }
+    }
+  },
+  "videoFilterDayOfWeek": "Tage auswählen, um Filter anzuwenden",
+  "@videoFilterDayOfWeek": {
+    "description": "Title for day selection for the filter"
+  },
+  "deletePlaylistNotificationTitle": "Wiedergabelisten-Benachrichtigung löschen?",
+  "@deletePlaylistNotificationTitle": {
+    "description": "Title for dialog to confirm whether to delete playlist notifications"
+  },
+  "history": "Verlauf",
+  "@history": {
+    "description": "User view history label"
+  },
+  "videoFilterEndTime": "Endzeit",
+  "@videoFilterEndTime": {
+    "description": "Title for filter end time"
+  },
+  "clearHistoryQuestion": "Verlauf löschen?",
+  "@clearHistoryQuestion": {},
+  "foregroundServiceUpdatingSubscriptions": "Abonnements werden überprüft...",
+  "@foregroundServiceUpdatingSubscriptions": {
+    "description": "Foreground service notification text when checking for new subscription videos"
+  },
+  "secondsShortForm": "Sek.",
+  "@secondsShortForm": {
+    "description": "Short form for the word seconds"
+  },
+  "deleteChannelNotificationTitle": "Kanal-Benachrichtigung löschen?",
+  "@deleteChannelNotificationTitle": {
+    "description": "Title for dialog to confirm whether to delete channel notifications"
+  },
+  "subtitlesBackground": "Hintergrund der Untertitel",
+  "@subtitlesBackground": {
+    "description": "Title for settings to set black background  for subtitles"
+  },
+  "videoFilterAppliedOn": "Angewandt an {selectedDays}",
+  "@videoFilterAppliedOn": {
+    "description": "Readable text on when the filter should apply",
+    "placeholders": {
+      "selectedDays": {
+        "type": "String",
+        "example": "Monday, Wednesday, Friday"
+      }
+    }
+  },
+  "foregroundServiceNotificationTitle": "Videoüberwachung",
+  "@foregroundServiceNotificationTitle": {
+    "description": "Title for the foreground service running notification when the user wants to receive notifications"
+  },
+  "otherNotifications": "Andere Benachrichtigungsquellen (Glockensymbole)",
+  "@otherNotifications": {
+    "description": "Title for settings section in the notification settings"
+  },
+  "layoutEditorAddVideoSource": "Videoquelle hinzufügen",
+  "@layoutEditorAddVideoSource": {
+    "description": "Label for button to allow user to add more video sources to the home screen"
+  },
+  "navigationBarStyle": "Stil der Navigationsleiste",
+  "@navigationBarStyle": {
+    "description": "Label for settings on customizing navigation bar style"
+  },
+  "foregroundServiceUpdatingChannels": "Kanäle werden überprüft...",
+  "@foregroundServiceUpdatingChannels": {
+    "description": "Foreground service notification text when checking for new channel videos"
+  },
+  "foregroundServiceUpdatingPlaylist": "Wiedergabelisten werden überprüft...",
+  "@foregroundServiceUpdatingPlaylist": {
+    "description": "Foreground service notification text when checking for new playlist videos"
+  },
+  "askToEnableBackgroundServiceTitle": "Benachrichtigungen ausgeschaltet",
+  "@askToEnableBackgroundServiceTitle": {
+    "description": "If the users tries to turn on notifications for a channel but hasn't enable notifications in the app we need to turn it on for them"
   }
 }
