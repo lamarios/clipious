@@ -957,7 +957,7 @@
   "@from": {
     "description": "From word (as in 'From xx To xx')"
   },
-  "videoFilterApplyDateToFilter": "時間で動画を絞り込む",
+  "videoFilterApplyDateToFilter": "指定日時に動画をフィルター",
   "@videoFilterApplyDateToFilter": {
     "description": "Label for switch to allow user to customize video filter and set days of week and time to them"
   },
@@ -965,7 +965,7 @@
   "@to": {
     "description": "To word as in 'From xx To xx')"
   },
-  "videoFilterDayOfWeekDescription": "絞り込む日にちと時間を選択できます。スポーツの結果のネタバレを避けたりできます。",
+  "videoFilterDayOfWeekDescription": "絞り込む曜日と時間を選択できます。スポーツの結果のネタバレを避けたりできます。",
   "@videoFilterDayOfWeekDescription": {
     "description": ""
   },
@@ -987,7 +987,7 @@
       }
     }
   },
-  "videoFilterDayOfWeek": "絞り込む日にちを選択",
+  "videoFilterDayOfWeek": "絞り込む時間帯を選択",
   "@videoFilterDayOfWeek": {
     "description": "Title for day selection for the filter"
   },
@@ -1008,5 +1008,45 @@
         "example": "Monday, Wednesday, Friday"
       }
     }
+  },
+  "notificationFrequencySettingsTitle": "新着動画の確認頻度",
+  "@notificationFrequencySettingsTitle": {
+    "description": "Title for frequency settings"
+  },
+  "subscriptionNotificationTitle": "登録チャンネルの新着動画",
+  "@subscriptionNotificationTitle": {
+    "description": "Title for the notification showing that there are new videos from the subscription feed"
+  },
+  "notifications": "通知",
+  "@notifications": {
+    "description": "Notification settings title"
+  },
+  "subtitlesBackgroundDescription": "字幕に黒の背景を追加して読みやすくします",
+  "@subtitlesBackgroundDescription": {
+    "description": "Description for settings to set black background  for subtitles"
+  },
+  "enableNotificationDescriptions": "フォアグラウンドサービスを実行し監視対象の更新を通知します",
+  "@enableNotificationDescriptions": {
+    "description": ""
+  },
+  "foregroundServiceUpdatingSubscriptions": "登録チャンネルを確認中...",
+  "@foregroundServiceUpdatingSubscriptions": {
+    "description": "Foreground service notification text when checking for new subscription videos"
+  },
+  "subtitlesBackground": "字幕の背景",
+  "@subtitlesBackground": {
+    "description": "Title for settings to set black background  for subtitles"
+  },
+  "foregroundServiceUpdatingChannels": "チャンネルを確認中...",
+  "@foregroundServiceUpdatingChannels": {
+    "description": "Foreground service notification text when checking for new channel videos"
+  },
+  "notificationFrequencySettingsDescription": "アプリが新しい動画を確認する頻度",
+  "@notificationFrequencySettingsDescription": {
+    "description": "Description for frequency settings"
+  },
+  "foregroundServiceUpdatingPlaylist": "再生リストを確認中...",
+  "@foregroundServiceUpdatingPlaylist": {
+    "description": "Foreground service notification text when checking for new playlist videos"
   }
 }
