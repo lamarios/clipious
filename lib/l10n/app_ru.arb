@@ -984,5 +984,195 @@
   "enableNotificationDescriptions": "Запускает приоритетный сервис для проверки и оповещения об изменениях, за которыми вы следите",
   "@enableNotificationDescriptions": {
     "description": ""
+  },
+  "askToEnableBackgroundServiceContent": "Для того чтобы получать оповещения, уведомления Clipious должны быть включены, чтобы это сделать нажмите ОК.",
+  "@askToEnableBackgroundServiceContent": {
+    "description": "If the users tries to turn on notifications for a channel but hasn't enable notifications in the app we need to turn it on for them"
+  },
+  "from": "От",
+  "@from": {
+    "description": "From word (as in 'From xx To xx')"
+  },
+  "playlistNotificationTitle": "Новые видео в плейлисте {playlist}",
+  "@playlistNotificationTitle": {
+    "description": "Title for the playlist notifications when there are new videos",
+    "placeholders": {
+      "playlist": {
+        "type": "String",
+        "example": "Lo-Fi girl"
+      }
+    }
+  },
+  "notificationFrequencySettingsTitle": "Частота проверки новых видео",
+  "@notificationFrequencySettingsTitle": {
+    "description": "Title for frequency settings"
+  },
+  "channelNotificationTitle": "Новые видео от {channel}",
+  "@channelNotificationTitle": {
+    "description": "Title for the channel notifications when there are new videos",
+    "placeholders": {
+      "channel": {
+        "type": "String",
+        "example": "MKBHD"
+      }
+    }
+  },
+  "playlistNotificationContent": "В плейлисте {playlist} {count, plural, =0{нет новых видео} =1{появилось 1 новое видео} other{появилось {count} новых видео}}",
+  "@playlistNotificationContent": {
+    "description": "Content for playlist notification when there are new videos",
+    "placeholders": {
+      "playlist": {
+        "type": "String",
+        "example": "Lo-Fi girl"
+      },
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "videoFilterApplyDateToFilter": "Фильтровать видео в выбранное время",
+  "@videoFilterApplyDateToFilter": {
+    "description": "Label for switch to allow user to customize video filter and set days of week and time to them"
+  },
+  "to": "До",
+  "@to": {
+    "description": "To word as in 'From xx To xx')"
+  },
+  "deleteChannelNotificationContent": "Вы больше не будете получать уведомления от этого канала.",
+  "@deleteChannelNotificationContent": {
+    "description": "Title for dialog to confirm whether to delete channel notifications"
+  },
+  "videoFilterDayOfWeekDescription": "Вы можете выборочно настроить дни недели и время, в которые будут применяться фильтры, например, для того, чтобы не узнать результаты спортивных мероприятий заранее.",
+  "@videoFilterDayOfWeekDescription": {
+    "description": ""
+  },
+  "videoFilterStartTime": "Время начала",
+  "@videoFilterStartTime": {
+    "description": "Title for filter start time"
+  },
+  "deletePlaylistNotificationContent": "Вы больше не будете получать уведомления от этого плейлиста.",
+  "@deletePlaylistNotificationContent": {
+    "description": "Title for dialog to confirm whether to delete playlist notifications"
+  },
+  "videoFilterTimeOfDayFromTo": "От {from} до {to}",
+  "@videoFilterTimeOfDayFromTo": {
+    "description": "Time of day range",
+    "placeholders": {
+      "from": {
+        "type": "String",
+        "example": "3:00 AM"
+      },
+      "to": {
+        "type": "String",
+        "example": "5:00 PM"
+      }
+    }
+  },
+  "channelNotificationContent": "У {channel} {count, plural, =0{нет новых видео} =1{появилось 1 новое видео} other{появилось {count} новых видео}}",
+  "@channelNotificationContent": {
+    "description": "Content for channel notification when there are new videos",
+    "placeholders": {
+      "channel": {
+        "type": "String",
+        "example": "MKBHD"
+      },
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "videoFilterDayOfWeek": "Выберите дни применения фильтров",
+  "@videoFilterDayOfWeek": {
+    "description": "Title for day selection for the filter"
+  },
+  "subtitlesBackgroundDescription": "Добавляет к субтитрам чёрный фон чтобы сделать их разборчивее",
+  "@subtitlesBackgroundDescription": {
+    "description": "Description for settings to set black background  for subtitles"
+  },
+  "deletePlaylistNotificationTitle": "Удалить уведомления от плейлиста?",
+  "@deletePlaylistNotificationTitle": {
+    "description": "Title for dialog to confirm whether to delete playlist notifications"
+  },
+  "videoFilterEndTime": "Время конца",
+  "@videoFilterEndTime": {
+    "description": "Title for filter end time"
+  },
+  "foregroundServiceUpdatingSubscriptions": "Проверяются подписки...",
+  "@foregroundServiceUpdatingSubscriptions": {
+    "description": "Foreground service notification text when checking for new subscription videos"
+  },
+  "secondsShortForm": "с",
+  "@secondsShortForm": {
+    "description": "Short form for the word seconds"
+  },
+  "deleteChannelNotificationTitle": "Удалить уведомления от канала?",
+  "@deleteChannelNotificationTitle": {
+    "description": "Title for dialog to confirm whether to delete channel notifications"
+  },
+  "subtitlesBackground": "Задний фон субтитров",
+  "@subtitlesBackground": {
+    "description": "Title for settings to set black background  for subtitles"
+  },
+  "videoFilterAppliedOn": "Действует на {selectedDays}",
+  "@videoFilterAppliedOn": {
+    "description": "Readable text on when the filter should apply",
+    "placeholders": {
+      "selectedDays": {
+        "type": "String",
+        "example": "Monday, Wednesday, Friday"
+      }
+    }
+  },
+  "foregroundServiceNotificationTitle": "Мониторинг видео",
+  "@foregroundServiceNotificationTitle": {
+    "description": "Title for the foreground service running notification when the user wants to receive notifications"
+  },
+  "otherNotifications": "Другие источники уведомлений (значки с колокольчиком)",
+  "@otherNotifications": {
+    "description": "Title for settings section in the notification settings"
+  },
+  "notificationFrequencySliderLabel": "{hours, select,  24{1д} other{{hours}ч}}",
+  "@notificationFrequencySliderLabel": {
+    "description": "Short form for a number of hours going up to 1 day",
+    "hours": {
+      "type": "num",
+      "format": "compact"
+    }
+  },
+  "foregroundServiceNotificationContent": "Проверки на новые видео будут {hours, select, 1{каждый час} 24{каждый день} other{каждые {hours} часов}}",
+  "@foregroundServiceNotificationContent": {
+    "description": "Content for the foreground service running notification when the user wants to receive notifications",
+    "hours": {
+      "type": "num",
+      "format": "compact"
+    }
+  },
+  "foregroundServiceUpdatingChannels": "Проверяются каналы...",
+  "@foregroundServiceUpdatingChannels": {
+    "description": "Foreground service notification text when checking for new channel videos"
+  },
+  "notificationFrequencySettingsDescription": "Насколько часто приложение будет проверять наличие новых видео",
+  "@notificationFrequencySettingsDescription": {
+    "description": "Description for frequency settings"
+  },
+  "foregroundServiceUpdatingPlaylist": "Проверяются плейлисты...",
+  "@foregroundServiceUpdatingPlaylist": {
+    "description": "Foreground service notification text when checking for new playlist videos"
+  },
+  "subscriptionNotificationContent": "В ваших подписках {count, plural, =0{нет новых видео} =1{появилось 1 новое видео} other{появилось {count} новых видео}}",
+  "@subscriptionNotificationContent": {
+    "description": "Content for subscription notification",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "askToEnableBackgroundServiceTitle": "Уведомления отключены",
+  "@askToEnableBackgroundServiceTitle": {
+    "description": "If the users tries to turn on notifications for a channel but hasn't enable notifications in the app we need to turn it on for them"
   }
 }
