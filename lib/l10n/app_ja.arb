@@ -743,7 +743,7 @@
   "@addVideoFilter": {
     "description": "Title when creating a new filter"
   },
-  "videoFilters": "動画のフィルター",
+  "videoFilters": "動画フィルター",
   "@videoFilters": {
     "description": "Title for video filter settings"
   },
@@ -837,7 +837,7 @@
   "@videoFailedDownloadRetry": {
     "description": "Shown on download manager when a download fails and prompt the user to retry"
   },
-  "noDownloadedVideos": "ダウンロードした動画なし。ダウンロードするには、一覧の動画を長押し、または動画の画面にあるダウンロードを押します",
+  "noDownloadedVideos": "ダウンロードした動画なし。ダウンロードするには、一覧で動画を長押し、または動画の画面にあるダウンロードを押します",
   "@noDownloadedVideos": {
     "description": "Message showing when the user goes to the download screen but there are no offline videos."
   },
@@ -857,7 +857,7 @@
   "@itemlistErrorGeneric": {
     "description": "Error showing when the data can't be fetch"
   },
-  "itemListErrorInvalidScope": "表示する権限がありません。トークンでログインしてるなら、ログアウトし再びログインしてみてください",
+  "itemListErrorInvalidScope": "表示する権限がありません。トークンでログインしていれば、ログアウトし再度ログインをお試しください",
   "@itemListErrorInvalidScope": {
     "description": "Error when the user doesn't have the proper scope to its current token"
   },
@@ -1048,5 +1048,131 @@
   "foregroundServiceUpdatingPlaylist": "再生リストを確認中...",
   "@foregroundServiceUpdatingPlaylist": {
     "description": "Foreground service notification text when checking for new playlist videos"
+  },
+  "askToEnableBackgroundServiceContent": "通知を利用するにはClipious の通知を有効化する必要があります。OKで有効化にします。",
+  "@askToEnableBackgroundServiceContent": {
+    "description": "If the users tries to turn on notifications for a channel but hasn't enable notifications in the app we need to turn it on for them"
+  },
+  "askForDisableBatteryOptimizationTitle": "電池の最適化を無効にしてください",
+  "@askForDisableBatteryOptimizationTitle": {
+    "description": "Title for the dialog asking the user to turn off disabling battery optimization when turning on notifications"
+  },
+  "askForDisableBatteryOptimizationContent": "通知を送信するには、Clipiousがバックグラウンドサービスを実行する必要があります。円滑な動作のためには、電池の使用を制限しないでください。OKで電池の最適化の設定を開きます。",
+  "@askForDisableBatteryOptimizationContent": {
+    "description": "Content for the dialog asking the user to turn off disabling battery optimization when turning on notifications"
+  },
+  "playlistNotificationTitle": "再生リスト {playlist} に新着動画",
+  "@playlistNotificationTitle": {
+    "description": "Title for the playlist notifications when there are new videos",
+    "placeholders": {
+      "playlist": {
+        "type": "String",
+        "example": "Lo-Fi girl"
+      }
+    }
+  },
+  "channelNotificationTitle": "{channel} の新着動画",
+  "@channelNotificationTitle": {
+    "description": "Title for the channel notifications when there are new videos",
+    "placeholders": {
+      "channel": {
+        "type": "String",
+        "example": "MKBHD"
+      }
+    }
+  },
+  "notificationsDescription": "通知したいものを設定できます",
+  "@notificationsDescription": {
+    "description": "Setting description for notifications"
+  },
+  "playlistNotificationContent": "再生リスト {playlist} に{count, plural, =0{新着なし} other{{count}本の新着動画}}",
+  "@playlistNotificationContent": {
+    "description": "Content for playlist notification when there are new videos",
+    "placeholders": {
+      "playlist": {
+        "type": "String",
+        "example": "Lo-Fi girl"
+      },
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "deleteChannelNotificationContent": "このチャンネルからの通知を停止します。",
+  "@deleteChannelNotificationContent": {
+    "description": "Title for dialog to confirm whether to delete channel notifications"
+  },
+  "subscriptionNotificationDescription": "現在のインスタンスにログインしていれば、登録チャンネルのフィードからの新着動画を通知",
+  "@subscriptionNotificationDescription": {
+    "description": "Description for subscription notifications"
+  },
+  "subscriptionNotification": "登録チャンネルの通知",
+  "@subscriptionNotification": {
+    "description": "Title for subscriptions notifications"
+  },
+  "deletePlaylistNotificationContent": "この再生リストからの通知を停止します。",
+  "@deletePlaylistNotificationContent": {
+    "description": "Title for dialog to confirm whether to delete playlist notifications"
+  },
+  "channelNotificationContent": "{channel} に{count, plural, =0{新着なし} other{{count}本の新着動画}}",
+  "@channelNotificationContent": {
+    "description": "Content for channel notification when there are new videos",
+    "placeholders": {
+      "channel": {
+        "type": "String",
+        "example": "MKBHD"
+      },
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "deletePlaylistNotificationTitle": "再生リストの通知を削除しますか ?",
+  "@deletePlaylistNotificationTitle": {
+    "description": "Title for dialog to confirm whether to delete playlist notifications"
+  },
+  "deleteChannelNotificationTitle": "チャンネルの通知を削除しますか ?",
+  "@deleteChannelNotificationTitle": {
+    "description": "Title for dialog to confirm whether to delete channel notifications"
+  },
+  "foregroundServiceNotificationTitle": "動画の監視中",
+  "@foregroundServiceNotificationTitle": {
+    "description": "Title for the foreground service running notification when the user wants to receive notifications"
+  },
+  "otherNotifications": "ほかの通知対象 (鐘のアイコン)",
+  "@otherNotifications": {
+    "description": "Title for settings section in the notification settings"
+  },
+  "notificationFrequencySliderLabel": "{hours, select,  24{1日} other{{hours}時間}}",
+  "@notificationFrequencySliderLabel": {
+    "description": "Short form for a number of hours going up to 1 day",
+    "hours": {
+      "type": "num",
+      "format": "compact"
+    }
+  },
+  "foregroundServiceNotificationContent": "新着動画を{hours, select, 1{1時間} 24{1日} other{{hours}時間}}ごとに確認中",
+  "@foregroundServiceNotificationContent": {
+    "description": "Content for the foreground service running notification when the user wants to receive notifications",
+    "hours": {
+      "type": "num",
+      "format": "compact"
+    }
+  },
+  "subscriptionNotificationContent": "登録チャンネルに{count, plural, =0{新着なし} other{{count}本の新着動画}}",
+  "@subscriptionNotificationContent": {
+    "description": "Content for subscription notification",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "askToEnableBackgroundServiceTitle": "通知は無効になっています",
+  "@askToEnableBackgroundServiceTitle": {
+    "description": "If the users tries to turn on notifications for a channel but hasn't enable notifications in the app we need to turn it on for them"
   }
 }
