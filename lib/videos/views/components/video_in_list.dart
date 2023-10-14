@@ -56,7 +56,6 @@ class VideoListItem extends StatelessWidget {
     String title = video?.title ?? offlineVideo?.title ?? '';
     String author = video?.author ?? offlineVideo?.author ?? '';
     String videoId = video?.videoId ?? offlineVideo?.videoId ?? '';
-
     return BlocProvider(
       create: (context) => VideoInListCubit(VideoInListState(video: video, offlineVideo: offlineVideo)),
       child: BlocBuilder<VideoInListCubit, VideoInListState>(
@@ -119,7 +118,7 @@ class VideoListItem extends StatelessWidget {
                     : video != null
                         ? VideoThumbnailView(
                             videoId: video!.videoId,
-                            thumbnailUrl: ImageObject.getBestThumbnail(video!.videoThumbnails)?.url ?? '',
+                            thumbnailUrl: video!.deArrowThumbnailUrl ??  ImageObject.getBestThumbnail(video!.videoThumbnails)?.url ?? '',
                             decoration: BoxDecoration(borderRadius: BorderRadius.circular(small ? 5 : 10)),
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),

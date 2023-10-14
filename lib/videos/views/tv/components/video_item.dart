@@ -71,7 +71,7 @@ class TvVideoItem extends StatelessWidget {
                               children: [
                                 VideoThumbnailView(
                                     videoId: video.videoId,
-                                    thumbnailUrl: ImageObject.getBestThumbnail(video.videoThumbnails)?.url ?? '',
+                                    thumbnailUrl: video.deArrowThumbnailUrl ?? ImageObject.getBestThumbnail(video.videoThumbnails)?.url ?? '',
                                     child: Padding(
                                       padding: const EdgeInsets.all(8.0),
                                       child: Container(

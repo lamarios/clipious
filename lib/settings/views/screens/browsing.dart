@@ -17,10 +17,7 @@ class BrowsingSettingsScreen extends StatelessWidget {
   const BrowsingSettingsScreen({super.key});
 
   customizeApp(BuildContext context) {
-    showDialog(
-        barrierDismissible: true,
-        context: context,
-        builder: (context) => const AlertDialog(content: SizedBox(width: 300, child: AppCustomizer())));
+    showDialog(barrierDismissible: true, context: context, builder: (context) => const AlertDialog(content: SizedBox(width: 300, child: AppCustomizer())));
   }
 
   showSelectLanguage(BuildContext context, SettingsState controller) {
@@ -31,10 +28,7 @@ class BrowsingSettingsScreen extends StatelessWidget {
     var colors = Theme.of(context).colorScheme;
 
     List<String>? localeString = controller.locale?.split('_');
-    Locale? selected = localeString != null
-        ? Locale.fromSubtags(
-            languageCode: localeString[0], scriptCode: localeString.length >= 2 ? localeString[1] : null)
-        : null;
+    Locale? selected = localeString != null ? Locale.fromSubtags(languageCode: localeString[0], scriptCode: localeString.length >= 2 ? localeString[1] : null) : null;
 
     SelectList.show<String>(context,
         values: [locals.followSystem, ...localsStrings],
@@ -83,6 +77,10 @@ class BrowsingSettingsScreen extends StatelessWidget {
     AutoRouter.of(context).push(const SearchHistorySettingsRoute());
   }
 
+  openDearrowSettings(BuildContext context) {
+    AutoRouter.of(context).push(const DeArrowSettingsRoute());
+  }
+
   @override
   Widget build(BuildContext context) {
     ColorScheme colorScheme = Theme.of(context).colorScheme;
@@ -107,41 +105,54 @@ class BrowsingSettingsScreen extends StatelessWidget {
               SettingsSection(
                 tiles: [
                   SettingsTile(
+                    leading: const Icon(Icons.public),
                     title: Text(locals.country),
                     value: Text(_.country.name),
                     onPressed: (ctx) => searchCountry(ctx, _),
                   ),
                   SettingsTile(
+                    leading: const Icon(Icons.app_settings_alt),
                     title: Text(locals.customizeAppLayout),
                     value: Text(_.appLayout.map((e) => e.getLabel(locals)).join(", ")),
                     onPressed: (ctx) => customizeApp(ctx),
                   ),
                   SettingsTile.switchTile(
+                    leading: const Icon(Icons.self_improvement_outlined),
                     title: Text(locals.distractionFreeMode),
                     description: Text(locals.distractionFreeModeDescription),
                     initialValue: _.distractionFreeMode,
                     onToggle: cubit.setDistractionFreeMode,
                   ),
                   SettingsTile(
+                    leading: const Icon(Icons.language),
                     title: Text(locals.appLanguage),
                     value: Text(cubit.getLocaleDisplayName() ?? locals.followSystem),
                     onPressed: (ctx) => showSelectLanguage(ctx, _),
                   ),
                   SettingsTile.switchTile(
+                    leading: const Icon(Icons.thumb_down),
                     title: const Text('Return YouTube Dislike'),
                     description: Text(locals.returnYoutubeDislikeDescription),
                     initialValue: _.useReturnYoutubeDislike,
                     onToggle: cubit.toggleReturnYoutubeDislike,
                   ),
                   SettingsTile.navigation(
+                    leading: const Icon(Icons.manage_search),
                     title: Text(locals.searchHistory),
                     description: Text(locals.searchHistoryDescription),
                     onPressed: (context) => openSearchHistorySettings(context),
                   ),
                   SettingsTile.navigation(
+                    leading: const Icon(Icons.rule_sharp),
                     title: Text(locals.videoFilters),
                     description: Text(locals.videoFiltersSettingTileDescriptions),
                     onPressed: openVideoFilterSettings,
+                  ),
+                  SettingsTile.navigation(
+                    leading: const Icon(Icons.adjust),
+                    title: const Text('DeArrow'),
+                    description: Text(_.dearrow ? locals.enabled : locals.deArrowSettingDescription),
+                    onPressed: openDearrowSettings,
                   ),
                 ],
               ),

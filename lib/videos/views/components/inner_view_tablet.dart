@@ -47,7 +47,7 @@ class VideoTabletInnerView extends StatelessWidget {
                   constraints: BoxConstraints(maxWidth: tabletMaxVideoWidth),
                   child: VideoThumbnailView(
                     videoId: video.videoId,
-                    thumbnailUrl: video.getBestThumbnail()?.url ?? '',
+                    thumbnailUrl: video.deArrowThumbnailUrl ?? video.getBestThumbnail()?.url ?? '',
                     child: Stack(
                       alignment: Alignment.center,
                       children: [

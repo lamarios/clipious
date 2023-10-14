@@ -105,7 +105,8 @@ class PlayerCubit extends Cubit<PlayerState> {
       );
       BackButtonInterceptor.add(handleBackButton, name: 'miniPlayer', zIndex: 2, ifNotYetIntercepted: true);
     } else if (isTv && state.videos.isNotEmpty) {
-      switchToVideo(state.videos[0]);
+      await switchToVideo(state.videos[0]);
+      generatePlayQueue();
     }
   }
 
@@ -317,7 +318,7 @@ class PlayerCubit extends Cubit<PlayerState> {
   }
 
   playNext() {
-    EasyThrottle.throttle(skipToVideoThrottleName, Duration(seconds: 1), () async {
+    EasyThrottle.throttle(skipToVideoThrottleName, const Duration(seconds: 1), () async {
       if (settings.state.playerRepeatMode == PlayerRepeat.repeatOne) {
         seek(Duration.zero);
         play();

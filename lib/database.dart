@@ -6,6 +6,7 @@ import 'package:invidious/search/models/db/searchHistoryItem.dart';
 import 'package:invidious/settings/models/db/settings.dart';
 import 'package:invidious/settings/models/errors/noServerSelected.dart';
 import 'package:invidious/settings/states/settings.dart';
+import 'package:invidious/videos/models/db/dearrow_cache.dart';
 import 'package:invidious/videos/models/db/history_video_cache.dart';
 import 'package:invidious/videos/models/db/progress.dart';
 import 'package:logging/logging.dart';
@@ -50,8 +51,10 @@ const NAVIGATION_BAR_LABEL_BEHAVIOR = 'navigation-bar-label-behavior';
 const DISTRACTION_FREE_MODE = 'distraction-free-mode';
 const BACKGROUND_NOTIFICATIONS = 'background-notifications';
 const SUBSCRIPTION_NOTIFICATIONS = 'subscriptions-notifications';
-const BACKGROUND_CHECK_FREQUENCY  = "background-check-frequency";
+const BACKGROUND_CHECK_FREQUENCY = "background-check-frequency";
 const SUBTITLE_BACKGROUND = 'subtitle-background';
+const DEARROW = 'dearrow';
+const DEARROW_THUMBNAILS = "dearrow-thumbnails";
 
 const ON_OPEN = "on-open";
 
@@ -149,8 +152,7 @@ class DbClient {
 
   bool isLoggedInToCurrentServer() {
     var currentlySelectedServer = getCurrentlySelectedServer();
-    return (currentlySelectedServer.authToken?.isNotEmpty ?? false) ||
-        (currentlySelectedServer.sidCookie?.isNotEmpty ?? false);
+    return (currentlySelectedServer.authToken?.isNotEmpty ?? false) || (currentlySelectedServer.sidCookie?.isNotEmpty ?? false);
   }
 
   double getVideoProgress(String videoId) {
@@ -179,9 +181,7 @@ class DbClient {
   }
 
   List<SearchHistoryItem> _getSearchHistory() {
-    return (store.box<SearchHistoryItem>().query()..order(SearchHistoryItem_.time, flags: Order.descending))
-        .build()
-        .find();
+    return (store.box<SearchHistoryItem>().query()..order(SearchHistoryItem_.time, flags: Order.descending)).build().find();
   }
 
   void addToSearchHistory(SearchHistoryItem searchHistoryItem) {
@@ -305,11 +305,7 @@ class DbClient {
   }
 
   PlaylistNotification? getPlaylistNotification(String channelId) {
-    return store
-        .box<PlaylistNotification>()
-        .query(PlaylistNotification_.playlistId.equals(channelId))
-        .build()
-        .findFirst();
+    return store.box<PlaylistNotification>().query(PlaylistNotification_.playlistId.equals(channelId)).build().findFirst();
   }
 
   List<PlaylistNotification> getAllPlaylistNotifications() {
@@ -331,5 +327,13 @@ class DbClient {
       notif.timestamp = DateTime.now().millisecondsSinceEpoch;
       upsertPlaylistNotification(notif);
     }
+  }
+
+  DeArrowCache? getDeArrowCache(String videoId) {
+    return store.box<DeArrowCache>().query(DeArrowCache_.videoId.equals(videoId)).build().findFirst();
+  }
+
+  void upsertDeArrowCache(DeArrowCache cache) {
+    store.box<DeArrowCache>().put(cache);
   }
 }

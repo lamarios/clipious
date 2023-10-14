@@ -97,7 +97,6 @@ class TvPlayerControls extends StatelessWidget {
                                                     '',
                                             width: 40,
                                             height: 40,
-                                            id: 'author-small-${mpc.currentlyPlaying?.authorId}',
                                             decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
                                           ),
                                           Padding(

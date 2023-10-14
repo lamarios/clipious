@@ -14,7 +14,9 @@ import 'package:invidious/search/models/search_sort_by.dart';
 import 'package:invidious/search/models/search_type.dart';
 import 'package:invidious/settings/models/db/video_filter.dart';
 import 'package:invidious/settings/models/errors/invidiousServiceError.dart';
+import 'package:invidious/utils/video_post_processing.dart';
 import 'package:invidious/videos/models/db/progress.dart';
+import 'package:invidious/videos/models/dearrow.dart';
 import 'package:invidious/videos/models/dislike.dart';
 import 'package:invidious/videos/models/sponsor_segment.dart';
 import 'package:invidious/videos/models/userFeed.dart';
@@ -49,6 +51,7 @@ const urlGetChannelVideos = '/api/v1/channels/:id/videos';
 const urlGetChannelStreams = '/api/v1/channels/:id/streams';
 const urlGetChannelShorts = '/api/v1/channels/:id/shorts';
 const urlGetSponsorSegments = 'https://sponsor.ajay.app/api/skipSegments?videoID=:id';
+const urlGetDeArrow = 'https://sponsor.ajay.app/api/branding?videoID=:id';
 const urlGetUserPlaylists = '/api/v1/auth/playlists';
 const urlPostUserPlaylists = '/api/v1/auth/playlists';
 const urlGetChannelPlaylists = '/api/v1/channels/:id/playlists';
@@ -137,7 +140,10 @@ class Service {
   Future<Video> getVideo(String videoId) async {
     final response = await http.get(buildUrl(urlGetVideo, pathParams: {':id': videoId}), headers: {'Content-Type': 'application/json; charset=utf-16'});
 
-    return Video.fromJson(handleResponse(response));
+    var video = Video.fromJson(handleResponse(response));
+    await DeArrow.processVideos([video]);
+    await DeArrow.processVideos(video.recommendedVideos);
+    return video;
   }
 
   Future<String> loginWithCookies(String serverUrl, String username, String password) async {
@@ -204,7 +210,7 @@ class Service {
 
     Iterable i = handleResponse(response);
     var list = List<VideoInList>.from(i.map((e) => VideoInList.fromJson(e)));
-    list = (await VideoFilter.filterVideos(list)).cast();
+    list = (await postProcessVideos(list)).cast();
     return list;
   }
 
@@ -212,7 +218,7 @@ class Service {
     final response = await http.get(buildUrl(urlGetPopular));
     Iterable i = handleResponse(response);
     var list = List<VideoInList>.from(i.map((e) => VideoInList.fromJson(e)));
-    list = (await VideoFilter.filterVideos(list)).cast();
+    list = (await postProcessVideos(list)).cast();
     return list;
   }
 
@@ -246,7 +252,7 @@ class Service {
       db.addToSearchHistory(SearchHistoryItem(query, (DateTime.now().millisecondsSinceEpoch / 1000).round()));
     }
 
-    results.videos = (await VideoFilter.filterVideos(results.videos)).cast();
+    results.videos = (await postProcessVideos(results.videos)).cast();
     return results;
   }
 
@@ -259,8 +265,8 @@ class Service {
     var headers = getAuthenticationHeaders(currentlySelectedServer);
     final response = await http.get(uri, headers: headers);
     var feed = UserFeed.fromJson(handleResponse(response));
-    feed.videos = (await VideoFilter.filterVideos(feed.videos)).cast();
-    feed.notifications = (await VideoFilter.filterVideos(feed.notifications)).cast();
+    feed.videos = (await postProcessVideos(feed.videos ?? [])).cast();
+    feed.notifications = (await postProcessVideos(feed.notifications ?? [])).cast();
 
     // we only save the last video seen if we're on the first page otherwise it does not make sense
     if (saveLastSeen && (page ?? 1) == 1) {
@@ -289,6 +295,31 @@ class Service {
       return List<SponsorSegment>.from(i.map((e) => SponsorSegment.fromJson(e)));
     } catch (err) {
       return [];
+    }
+  }
+
+  Future<DeArrow?> getDeArrow(String videoId) async {
+    try {
+      String url = urlGetDeArrow.replaceAll(":id", videoId);
+
+      log.fine("calling $url");
+      final response = await http.get((Uri.parse(url)));
+      var body = utf8.decode(response.bodyBytes);
+      var deArrow = DeArrow.fromJson(jsonDecode(body));
+      deArrow.videoId = videoId;
+      return deArrow;
+    } catch (err) {
+      return null;
+    }
+  }
+
+  Future<bool> testDeArrowThumbnail(String? url) async {
+    if (url != null) {
+      final response = await http.head(Uri.parse(url));
+      log.fine("calling $url => ${response.statusCode}");
+      return response.statusCode == 200;
+    } else {
+      return false;
     }
   }
 
@@ -393,7 +424,7 @@ class Service {
     final response = await http.get(buildUrl(urlGetChannel, pathParams: {':id': channelId}), headers: {'Content-Type': 'application/json; charset=utf-16'});
 
     var channel = Channel.fromJson(handleResponse(response));
-    channel.latestVideos = (await VideoFilter.filterVideos(channel.latestVideos)).cast();
+    channel.latestVideos = (await postProcessVideos(channel.latestVideos ?? [])).cast();
 
     if (channel.latestVideos != null && channel.latestVideos!.isNotEmpty) {
       db.setChannelNotificationLastViewedVideo(channel.authorUrl, channel.latestVideos![0].videoId);
@@ -406,7 +437,7 @@ class Service {
     final response = await http.get(uri, headers: {'Content-Type': 'application/json; charset=utf-16'});
 
     var videosWithContinuation = VideosWithContinuation.fromJson(handleResponse(response));
-    videosWithContinuation.videos = (await VideoFilter.filterVideos(videosWithContinuation.videos)).cast();
+    videosWithContinuation.videos = (await postProcessVideos(videosWithContinuation.videos)).cast();
 
     if (saveLastSeen && videosWithContinuation.videos.isNotEmpty) {
       db.setChannelNotificationLastViewedVideo(channelId, videosWithContinuation.videos.first.videoId);
@@ -419,7 +450,7 @@ class Service {
     final response = await http.get(uri, headers: {'Content-Type': 'application/json; charset=utf-16'});
 
     var videosWithContinuation = VideosWithContinuation.fromJson(handleResponse(response));
-    videosWithContinuation.videos = (await VideoFilter.filterVideos(videosWithContinuation.videos)).cast();
+    videosWithContinuation.videos = (await postProcessVideos(videosWithContinuation.videos)).cast();
     return videosWithContinuation;
   }
 
@@ -428,7 +459,7 @@ class Service {
     final response = await http.get(uri, headers: {'Content-Type': 'application/json; charset=utf-16'});
 
     var videosWithContinuation = VideosWithContinuation.fromJson(handleResponse(response));
-    videosWithContinuation.videos = (await VideoFilter.filterVideos(videosWithContinuation.videos)).cast();
+    videosWithContinuation.videos = (await postProcessVideos(videosWithContinuation.videos)).cast();
     return videosWithContinuation;
   }
 
@@ -443,7 +474,7 @@ class Service {
       Iterable i = handleResponse(response);
       var list = List<Playlist>.from(i.map((e) => Playlist.fromJson(e)));
       for (var pl in list) {
-        pl.videos = (await VideoFilter.filterVideos(pl.videos)).cast();
+        pl.videos = (await postProcessVideos(pl.videos)).cast();
       }
       return list.sortByReversed((e) => e.updated ?? 0).toList();
     } catch (e) {
@@ -457,7 +488,7 @@ class Service {
     final response = await http.get(uri);
     var channelPlaylists = ChannelPlaylists.fromJson(handleResponse(response));
     for (var pl in channelPlaylists.playlists) {
-      pl.videos = (await VideoFilter.filterVideos(pl.videos)).cast();
+      pl.videos = (await postProcessVideos(pl.videos)).cast();
     }
     return channelPlaylists;
   }
@@ -615,7 +646,7 @@ class Service {
     final response = await http.get(uri);
     var playlist = Playlist.fromJson(handleResponse(response));
     var oldLength = playlist.videos.length;
-    playlist.videos = (await VideoFilter.filterVideos(playlist.videos)).cast();
+    playlist.videos = (await postProcessVideos(playlist.videos)).cast();
     playlist.removedByFilter = oldLength - playlist.videos.length;
 
     if (saveLastSeen) db.setPlaylistNotificationLastViewedVideo(playlist.playlistId, playlist.videoCount);

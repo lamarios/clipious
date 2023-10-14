@@ -36,7 +36,7 @@ class VideoInnerView extends StatelessWidget {
       children: [
         VideoThumbnailView(
           videoId: video.videoId,
-          thumbnailUrl: video.getBestThumbnail()?.url ?? '',
+          thumbnailUrl: video.deArrowThumbnailUrl ?? video.getBestThumbnail()?.url ?? '',
           child: Stack(
             alignment: Alignment.center,
             children: [

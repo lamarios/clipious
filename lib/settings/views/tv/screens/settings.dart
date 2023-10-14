@@ -51,6 +51,10 @@ class TVSettingsScreen extends StatelessWidget {
     AutoRouter.of(context).push(const TvSponsorBlockSettingsRoute());
   }
 
+  openDearrowSettings(BuildContext context) {
+    AutoRouter.of(context).push(const TvDearrowSettingsRoute());
+  }
+
   openSearchHistorySettings(BuildContext context) {
     AutoRouter.of(context).push(const TvSearchHistorySettingsRoute());
   }
@@ -128,13 +132,11 @@ class TVSettingsScreen extends StatelessWidget {
                   description: locals.searchHistoryDescription,
                   onSelected: openSearchHistorySettings,
                 ),
-/*
-                    SettingsTile(
-                      title: locals.whenAppStartsShow,
-                      description: getCategories(context)[_.onOpen],
-                      onSelected: (context) => openSelectOnStart(context, _),
-                    ),
-*/
+                SettingsTile(
+                  title: 'DeArrow',
+                  description: _.dearrow ? locals.enabled :  locals.deArrowSettingDescription,
+                  onSelected: openDearrowSettings,
+                ),
                 SettingsTitle(title: locals.servers),
                 BlocBuilder<AppCubit, AppState>(
                     buildWhen: (previous, current) => previous.server != current.server,

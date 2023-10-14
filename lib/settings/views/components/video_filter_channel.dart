@@ -69,7 +69,6 @@ class VideoFilterChannel extends StatelessWidget {
                               thumbnailUrl: ImageObject.getBestThumbnail(_.channel?.authorThumbnails)?.url ?? '',
                               width: 20,
                               height: 20,
-                              id: 'author-small-${_.channel?.authorId ?? ''}',
                               decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
                             ),
                           )),

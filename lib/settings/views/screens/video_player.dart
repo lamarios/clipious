@@ -39,41 +39,48 @@ class VideoPlayerSettingsScreen extends StatelessWidget {
             sections: [
               SettingsSection(tiles: [
                 SettingsTile.switchTile(
+                  leading: const Icon(Icons.stream),
                   initialValue: _.useDash,
                   onToggle: cubit.toggleDash,
                   title: Text(locals.useDash),
                   description: Text(locals.useDashDescription),
                 ),
                 SettingsTile.switchTile(
+                  leading: const Icon(Icons.vpn_lock),
                   initialValue: _.useProxy,
                   onToggle: cubit.toggleProxy,
                   title: Text(locals.useProxy),
                   description: Text(locals.useProxyDescription),
                 ),
                 SettingsTile.switchTile(
+                  leading: const Icon(Icons.play_arrow),
                   initialValue: _.autoplayVideoOnLoad,
                   onToggle: cubit.toggleAutoplayOnLoad,
                   title: Text(locals.autoplayVideoOnLoad),
                   description: Text(locals.autoplayVideoOnLoadDescription),
                 ),
                 SettingsTile.switchTile(
+                  leading: const Icon(Icons.speed),
                   initialValue: _.rememberPlayBackSpeed,
                   onToggle: cubit.toggleRememberPlaybackSpeed,
                   title: Text(locals.rememberPlaybackSpeed),
                   description: Text(locals.rememberPlaybackSpeedDescription),
                 ),
                 SettingsTile.navigation(
+                  leading: const Icon(Icons.dangerous),
                   title: const Text('SponsorBlock'),
                   description: Text(locals.sponsorBlockDescription),
                   onPressed: openSponsorBlockSettings,
                 ),
                 SettingsTile.switchTile(
+                  leading: const Icon(Icons.aspect_ratio),
                   initialValue: _.forceLandscapeFullScreen,
                   onToggle: cubit.toggleForceLandscapeFullScreen,
                   title: Text(locals.lockFullScreenToLandscape),
                   description: Text(locals.lockFullScreenToLandscapeDescription),
                 ),
                 SettingsTile.switchTile(
+                  leading: const Icon(Icons.open_in_full),
                   initialValue: _.fillFullscreen,
                   onToggle: cubit.toggleFillFullscreen,
                   title: Text(locals.fillFullscreen),
@@ -84,6 +91,7 @@ class VideoPlayerSettingsScreen extends StatelessWidget {
                   title: Text(locals.subtitles),
                   tiles: [
                     SettingsTile(
+                      leading: const Icon(Icons.format_size),
                       title: Text(locals.subtitleFontSize),
                       description: Text(locals.subtitleFontSizeDescription),
                       trailing: Row(
@@ -98,12 +106,14 @@ class VideoPlayerSettingsScreen extends StatelessWidget {
                       ),
                     ),
                     SettingsTile.switchTile(
+                      leading: const Icon(Icons.format_paint),
                       initialValue: _.subtitlesBackground,
                       onToggle: cubit.setSubtitlesBackground,
                       title: Text(locals.subtitlesBackground),
                       description: Text(locals.subtitlesBackgroundDescription),
                     ),
                     SettingsTile.switchTile(
+                      leading: const Icon(Icons.language),
                       initialValue: _.rememberSubtitles,
                       onToggle: cubit.toggleRememberSubtitles,
                       title: Text(locals.rememberSubtitleLanguage),
