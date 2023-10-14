@@ -51,6 +51,10 @@ class TVSettingsScreen extends StatelessWidget {
     AutoRouter.of(context).push(const TvSponsorBlockSettingsRoute());
   }
 
+  openDearrowSettings(BuildContext context) {
+    AutoRouter.of(context).push(const TvDearrowSettingsRoute());
+  }
+
   openSearchHistorySettings(BuildContext context) {
     AutoRouter.of(context).push(const TvSearchHistorySettingsRoute());
   }
@@ -128,13 +132,11 @@ class TVSettingsScreen extends StatelessWidget {
                   description: locals.searchHistoryDescription,
                   onSelected: openSearchHistorySettings,
                 ),
-/*
-                    SettingsTile(
-                      title: locals.whenAppStartsShow,
-                      description: getCategories(context)[_.onOpen],
-                      onSelected: (context) => openSelectOnStart(context, _),
-                    ),
-*/
+                SettingsTile(
+                  title: 'DeArrow',
+                  description: _.dearrow ? locals.enabled :  locals.deArrowSettingDescription,
+                  onSelected: openDearrowSettings,
+                ),
                 SettingsTitle(title: locals.servers),
                 BlocBuilder<AppCubit, AppState>(
                     buildWhen: (previous, current) => previous.server != current.server,
@@ -181,18 +183,6 @@ class TVSettingsScreen extends StatelessWidget {
                   title: 'SponsorBlock',
                   description: locals.sponsorBlockDescription,
                   onSelected: openSponsorBlockSettings,
-                ),
-                SettingsTile(
-                  title:  'DeArrow',
-                  description: locals.deArrowSettingDescription,
-                  onSelected: (context) => cubit.setDearrow(!_.dearrow),
-                  trailing: Switch(onChanged: (value) {}, value: _.dearrow),
-                ),
-                SettingsTile(
-                  title:  locals.deArrowReplaceThumbnails,
-                  description: locals.deArrowReplaceThumbnailsDescription,
-                  onSelected: (context) => cubit.setDearrowThumbnail(!_.dearrowThumbnails),
-                  trailing: Switch(onChanged: (value) {}, value: _.dearrowThumbnails),
                 ),
                 SettingsTitle(title: locals.appearance),
                 SettingsTile(

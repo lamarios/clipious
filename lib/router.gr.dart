@@ -164,6 +164,12 @@ abstract class _$AppRouter extends RootStackRouter {
         ),
       );
     },
+    TvDearrowSettingsRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const TvDearrowSettingsScreen(),
+      );
+    },
     TvGridRoute.name: (routeData) {
       final args = routeData.argsAs<TvGridRouteArgs>();
       return AutoRoutePage<dynamic>(
@@ -771,6 +777,20 @@ class TvChannelRouteArgs {
   String toString() {
     return 'TvChannelRouteArgs{key: $key, channelId: $channelId}';
   }
+}
+
+/// generated route for
+/// [TvDearrowSettingsScreen]
+class TvDearrowSettingsRoute extends PageRouteInfo<void> {
+  const TvDearrowSettingsRoute({List<PageRouteInfo>? children})
+      : super(
+          TvDearrowSettingsRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'TvDearrowSettingsRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for

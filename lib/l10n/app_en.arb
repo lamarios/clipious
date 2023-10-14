@@ -1192,5 +1192,9 @@
     "deArrowWarning": "Enable DeArrow can signgificantly reduce the browsing speed of the app as extra http requests are needed for every single video",
     "@deArrowWarning": {
        "description": "Warning message when the user enables DeArrow"
+    },
+    "enabled": "Enabled",
+    "@enabled": {
+       "description": "Text to show something is enabled"
     }
 }

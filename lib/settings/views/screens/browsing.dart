@@ -17,10 +17,7 @@ class BrowsingSettingsScreen extends StatelessWidget {
   const BrowsingSettingsScreen({super.key});
 
   customizeApp(BuildContext context) {
-    showDialog(
-        barrierDismissible: true,
-        context: context,
-        builder: (context) => const AlertDialog(content: SizedBox(width: 300, child: AppCustomizer())));
+    showDialog(barrierDismissible: true, context: context, builder: (context) => const AlertDialog(content: SizedBox(width: 300, child: AppCustomizer())));
   }
 
   showSelectLanguage(BuildContext context, SettingsState controller) {
@@ -31,10 +28,7 @@ class BrowsingSettingsScreen extends StatelessWidget {
     var colors = Theme.of(context).colorScheme;
 
     List<String>? localeString = controller.locale?.split('_');
-    Locale? selected = localeString != null
-        ? Locale.fromSubtags(
-            languageCode: localeString[0], scriptCode: localeString.length >= 2 ? localeString[1] : null)
-        : null;
+    Locale? selected = localeString != null ? Locale.fromSubtags(languageCode: localeString[0], scriptCode: localeString.length >= 2 ? localeString[1] : null) : null;
 
     SelectList.show<String>(context,
         values: [locals.followSystem, ...localsStrings],
@@ -157,7 +151,7 @@ class BrowsingSettingsScreen extends StatelessWidget {
                   SettingsTile.navigation(
                     leading: const Icon(Icons.adjust),
                     title: const Text('DeArrow'),
-                    description: Text(locals.deArrowSettingDescription),
+                    description: Text(_.dearrow ? locals.enabled : locals.deArrowSettingDescription),
                     onPressed: openDearrowSettings,
                   ),
                 ],
