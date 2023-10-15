@@ -1,15 +1,14 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_displaymode/flutter_displaymode.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/app/states/app.dart';
 import 'package:invidious/downloads/states/download_manager.dart';
-import 'package:invidious/workmanager.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/httpOverrides.dart';
 import 'package:invidious/mediaHander.dart';
@@ -18,6 +17,7 @@ import 'package:invidious/player/states/player.dart';
 import 'package:invidious/router.dart';
 import 'package:invidious/settings/states/settings.dart';
 import 'package:invidious/utils.dart';
+import 'package:invidious/workmanager.dart';
 import 'package:logging/logging.dart';
 
 import 'database.dart';
@@ -54,6 +54,13 @@ Future<void> main() async {
   db = await DbClient.create();
 
   initializeNotifications();
+
+  try {
+    log.fine("Forcing refresh rate");
+    await FlutterDisplayMode.setHighRefreshRate();
+  }catch(err){
+    log.severe("failed to set high refresh mode", err);
+  }
 
   isTv = await isDeviceTv();
   runApp(MultiBlocProvider(providers: [
