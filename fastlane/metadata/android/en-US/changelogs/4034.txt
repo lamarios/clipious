@@ -1,0 +1,2 @@
+- Add DeArrow support
+- Force high refresh rate on devices that are stuck in 60Hz in flutter
