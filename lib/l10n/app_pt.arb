@@ -1118,5 +1118,25 @@
   "askToEnableBackgroundServiceTitle": "Notificações desativadas",
   "@askToEnableBackgroundServiceTitle": {
     "description": "If the users tries to turn on notifications for a channel but hasn't enable notifications in the app we need to turn it on for them"
+  },
+  "notificationFrequencySettingsTitle": "Nova frequência de verificação de vídeo",
+  "@notificationFrequencySettingsTitle": {
+    "description": "Title for frequency settings"
+  },
+  "subtitlesBackgroundDescription": "Adiciona um fundo preto às legendas para as tornar mais legíveis",
+  "@subtitlesBackgroundDescription": {
+    "description": "Description for settings to set black background  for subtitles"
+  },
+  "subtitlesBackground": "Fundo das legendas",
+  "@subtitlesBackground": {
+    "description": "Title for settings to set black background  for subtitles"
+  },
+  "foregroundServiceUpdatingChannels": "Verificar os canais...",
+  "@foregroundServiceUpdatingChannels": {
+    "description": "Foreground service notification text when checking for new channel videos"
+  },
+  "notificationFrequencySettingsDescription": "Com que frequência a aplicação irá procurar novos vídeos",
+  "@notificationFrequencySettingsDescription": {
+    "description": "Description for frequency settings"
   }
 }
