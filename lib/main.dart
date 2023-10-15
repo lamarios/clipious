@@ -56,7 +56,7 @@ Future<void> main() async {
   initializeNotifications();
 
   try {
-    log.info("Forcing refresh rate");
+    log.fine("Forcing refresh rate");
     await FlutterDisplayMode.setHighRefreshRate();
   }catch(err){
     log.severe("failed to set high refresh mode", err);
