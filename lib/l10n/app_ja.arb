@@ -1174,5 +1174,25 @@
   "askToEnableBackgroundServiceTitle": "通知は無効になっています",
   "@askToEnableBackgroundServiceTitle": {
     "description": "If the users tries to turn on notifications for a channel but hasn't enable notifications in the app we need to turn it on for them"
+  },
+  "deArrowWarning": "DeArrow が有効であれば、個々の動画に追加の HTTP リクエストを行うためアプリの閲覧速度は大きく低下します",
+  "@deArrowWarning": {
+    "description": "Warning message when the user enables DeArrow"
+  },
+  "deArrowReplaceThumbnails": "サムネイルを置換",
+  "@deArrowReplaceThumbnails": {
+    "description": "Settings title for checkbox on whether the thumbnail should be replaced as well"
+  },
+  "enabled": "有効",
+  "@enabled": {
+    "description": "Text to show something is enabled"
+  },
+  "deArrowSettingDescription": "誇張された題名とサムネイルを置換します",
+  "@deArrowSettingDescription": {
+    "description": "Description for dearrow"
+  },
+  "deArrowReplaceThumbnailsDescription": "動画の題名に加えサムネイルも置換する",
+  "@deArrowReplaceThumbnailsDescription": {
+    "description": "Description for DeArrow setting switch"
   }
 }
