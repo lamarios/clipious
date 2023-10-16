@@ -27,11 +27,11 @@
   "@recommended": {
     "description": "Recommended label"
   },
-  "couldntFetchVideos": "動画を取得できません。タップで再試行。",
+  "couldntFetchVideos": "動画を取得できません。タップして再試行。",
   "@couldntFetchVideos": {
     "description": "Can't load bunch of videos, asking  user to try again"
   },
-  "startUsingClipious": "Clipious の使用を開始",
+  "startUsingClipious": "Clipious を使い始める",
   "@startUsingClipious": {
     "description": "button label to start using the app"
   },
@@ -295,7 +295,7 @@
   "@channels": {
     "description": "Channels label"
   },
-  "errorAddingVideoToPlaylist": "再生リストに動画を追加する際にエラーが発生",
+  "errorAddingVideoToPlaylist": "再生リストに動画を追加する際にエラーが発生しました",
   "@errorAddingVideoToPlaylist": {
     "description": "Error while adding video to playlist"
   },
@@ -439,7 +439,7 @@
   "@returnYoutubeDislikeDescription": {
     "description": "ReturnYoutubeDislike setting description"
   },
-  "wizardIntro": "公開サーバーを選ぶか自分のものを追加します。(設定から変更可能)",
+  "wizardIntro": "公開サーバーを選択するか、独自のサーバーを追加します。 (後で設定で変更できます)",
   "@wizardIntro": {
     "description": "Welcome message on frst time use"
   },
@@ -817,7 +817,7 @@
   "@videoAddedToQueue": {
     "description": "Pop up message when a video was added at the end of the video queue"
   },
-  "shareLinkWithTimestamp": "再生位置も指定",
+  "shareLinkWithTimestamp": "タイムスタンプを追加",
   "@shareLinkWithTimestamp": {
     "description": "asking user to share link along with timestamp"
   },
