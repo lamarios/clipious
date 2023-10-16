@@ -210,7 +210,7 @@
   "@add": {
     "description": "Add button abel"
   },
-  "subscribe": "Subscrever",
+  "subscribe": "Inscrever",
   "@subscribe": {
     "description": "Label for user to subscribe to a channel"
   },
@@ -1101,7 +1101,7 @@
       "format": "compact"
     }
   },
-  "foregroundServiceUpdatingPlaylist": "Verificar as subscrições...",
+  "foregroundServiceUpdatingPlaylist": "Verificando as novas listas de reprodução...",
   "@foregroundServiceUpdatingPlaylist": {
     "description": "Foreground service notification text when checking for new playlist videos"
   },
@@ -1138,5 +1138,47 @@
   "notificationFrequencySettingsDescription": "Com que frequência a aplicação irá procurar novos vídeos",
   "@notificationFrequencySettingsDescription": {
     "description": "Description for frequency settings"
+  },
+  "deArrowWarning": "Habilitar DeArrow pode reduzir significativamente a velocidade de navegação do aplicativo como pedidos adicionais http são necessários para cada vídeo único",
+  "@deArrowWarning": {
+    "description": "Warning message when the user enables DeArrow"
+  },
+  "deArrowReplaceThumbnails": "Substituir miniaturas",
+  "@deArrowReplaceThumbnails": {
+    "description": "Settings title for checkbox on whether the thumbnail should be replaced as well"
+  },
+  "enabled": "Ativado",
+  "@enabled": {
+    "description": "Text to show something is enabled"
+  },
+  "deArrowSettingDescription": "Substituir títulos de clickbait e miniaturas",
+  "@deArrowSettingDescription": {
+    "description": "Description for dearrow"
+  },
+  "deArrowReplaceThumbnailsDescription": "Substituir miniaturas de vídeo além dos títulos",
+  "@deArrowReplaceThumbnailsDescription": {
+    "description": "Description for DeArrow setting switch"
+  },
+  "channelNotificationContent": "{count, plural, =0{Ainda não tem novos videos} =1{Um novo vídeo foi adicionado} other{{count} Esses são os novos videos}} em {channel}",
+  "@channelNotificationContent": {
+    "description": "Content for channel notification when there are new videos",
+    "placeholders": {
+      "channel": {
+        "type": "String",
+        "example": "MKBHD"
+      },
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "notificationFrequencySliderLabel": "{horas, select,  24{1d} other{{horas}h}}",
+  "@notificationFrequencySliderLabel": {
+    "description": "Short form for a number of hours going up to 1 day",
+    "hours": {
+      "type": "num",
+      "format": "compact"
+    }
   }
 }
