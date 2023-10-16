@@ -603,7 +603,7 @@
   "@addToQueueList": {
     "description": "Label on button to add a video to the queue list"
   },
-  "addRecommendedToQueue": "次のおすすめを自動再生",
+  "addRecommendedToQueue": "次のおすすめ自動再生",
   "@addRecommendedToQueue": {
     "description": "Switch when playing a video to automatically add the recommended videos to the video queue"
   },
@@ -817,7 +817,7 @@
   "@videoAddedToQueue": {
     "description": "Pop up message when a video was added at the end of the video queue"
   },
-  "shareLinkWithTimestamp": "再生位置の情報を追加",
+  "shareLinkWithTimestamp": "再生位置も指定",
   "@shareLinkWithTimestamp": {
     "description": "asking user to share link along with timestamp"
   },
@@ -897,7 +897,7 @@
   "@youCanSubscribeAgainLater": {
     "description": "Text for the unscubscribe confirmation dialog"
   },
-  "clearHistoryQuestionExplanation": "使用している Invidious のインスタンスにあるアカウントの視聴履歴が消去されます。元に戻せません。",
+  "clearHistoryQuestionExplanation": "使用している Invidious のインスタンス上のアカウントの視聴履歴が消去されます。元に戻せません。",
   "@clearHistoryQuestionExplanation": {
     "description": "Message for dialog before clearing full viewing history"
   },
@@ -1137,7 +1137,7 @@
   "@deleteChannelNotificationTitle": {
     "description": "Title for dialog to confirm whether to delete channel notifications"
   },
-  "foregroundServiceNotificationTitle": "動画の監視中",
+  "foregroundServiceNotificationTitle": "動画の監視",
   "@foregroundServiceNotificationTitle": {
     "description": "Title for the foreground service running notification when the user wants to receive notifications"
   },
