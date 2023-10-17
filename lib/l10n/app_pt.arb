@@ -1173,7 +1173,7 @@
       }
     }
   },
-  "notificationFrequencySliderLabel": "",
+  "notificationFrequencySliderLabel": "{hours, select,  24{1d} other{{hours}h}}",
   "@notificationFrequencySliderLabel": {
     "description": "Short form for a number of hours going up to 1 day",
     "hours": {
