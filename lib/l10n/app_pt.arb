@@ -423,7 +423,7 @@
   "@sponsorBlockCategoryUnpaidSelfPromoDescription": {
     "description": "Sponsor block 'Unpaid/Self promotion' Category description"
   },
-  "sponsorBlockCategoryInteraction": "Lembrete de Interação (Subscrição)",
+  "sponsorBlockCategoryInteraction": "Lembrete de Interação (Inscrição)",
   "@sponsorBlockCategoryInteraction": {
     "description": "Sponsor block 'Interaction' Category"
   },
@@ -443,7 +443,7 @@
   "@sponsorBlockCategoryPreview": {
     "description": "Sponsorblock 'Preview' Category"
   },
-  "sponsorBlockCategoryFiller": "Filler Tangente / Piadas",
+  "sponsorBlockCategoryFiller": "Enrolações / Piadas",
   "@sponsorBlockCategoryFiller": {
     "description": "Sponsorblock 'Filler' Category"
   },
@@ -1139,7 +1139,7 @@
   "@notificationFrequencySettingsDescription": {
     "description": "Description for frequency settings"
   },
-  "deArrowWarning": "Habilitar DeArrow pode reduzir significativamente a velocidade de navegação do aplicativo como pedidos adicionais http são necessários para cada vídeo único",
+  "deArrowWarning": "Habilitar DeArrow pode reduzir significativamente a velocidade de navegação do aplicativo pelo motivo de pedidos adicionais ao banco de dados são necessários para cada vídeo único",
   "@deArrowWarning": {
     "description": "Warning message when the user enables DeArrow"
   },
@@ -1173,12 +1173,26 @@
       }
     }
   },
-  "notificationFrequencySliderLabel": "{horas, select,  24{1d} other{{horas}h}}",
+  "notificationFrequencySliderLabel": "",
   "@notificationFrequencySliderLabel": {
     "description": "Short form for a number of hours going up to 1 day",
     "hours": {
       "type": "num",
       "format": "compact"
+    }
+  },
+  "playlistNotificationContent": "{count, plural, =0{Não há novos vídeos} =1{Há 1 novo video} other {Há {count} Novos vídeos}} nesta {playlist} playlist",
+  "@playlistNotificationContent": {
+    "description": "Content for playlist notification when there are new videos",
+    "placeholders": {
+      "playlist": {
+        "type": "String",
+        "example": "Lo-Fi girl"
+      },
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
     }
   }
 }
