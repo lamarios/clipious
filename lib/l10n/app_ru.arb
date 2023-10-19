@@ -1174,5 +1174,25 @@
   "askToEnableBackgroundServiceTitle": "Уведомления отключены",
   "@askToEnableBackgroundServiceTitle": {
     "description": "If the users tries to turn on notifications for a channel but hasn't enable notifications in the app we need to turn it on for them"
+  },
+  "deArrowWarning": "Включение DeArrow может значительно снизить быстродействие приложения, так как для каждого видео потребуются дополнительные http-запросы",
+  "@deArrowWarning": {
+    "description": "Warning message when the user enables DeArrow"
+  },
+  "deArrowReplaceThumbnails": "Заменить превью",
+  "@deArrowReplaceThumbnails": {
+    "description": "Settings title for checkbox on whether the thumbnail should be replaced as well"
+  },
+  "enabled": "Включено",
+  "@enabled": {
+    "description": "Text to show something is enabled"
+  },
+  "deArrowSettingDescription": "Заменить кликбейтные заголовки и превью",
+  "@deArrowSettingDescription": {
+    "description": "Description for dearrow"
+  },
+  "deArrowReplaceThumbnailsDescription": "Замените превью видео в дополнение к заголовкам",
+  "@deArrowReplaceThumbnailsDescription": {
+    "description": "Description for DeArrow setting switch"
   }
 }
