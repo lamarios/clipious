@@ -31,7 +31,7 @@
   "@couldntFetchVideos": {
     "description": "Can't load bunch of videos, asking  user to try again"
   },
-  "startUsingClipious": "Clipious を使い始める",
+  "startUsingClipious": "Clipious の使用を開始",
   "@startUsingClipious": {
     "description": "button label to start using the app"
   },
@@ -295,7 +295,7 @@
   "@channels": {
     "description": "Channels label"
   },
-  "errorAddingVideoToPlaylist": "再生リストに動画を追加する際にエラーが発生しました",
+  "errorAddingVideoToPlaylist": "再生リストに動画追加中にエラー",
   "@errorAddingVideoToPlaylist": {
     "description": "Error while adding video to playlist"
   },
@@ -817,7 +817,7 @@
   "@videoAddedToQueue": {
     "description": "Pop up message when a video was added at the end of the video queue"
   },
-  "shareLinkWithTimestamp": "タイムスタンプを追加",
+  "shareLinkWithTimestamp": "再生位置を指定",
   "@shareLinkWithTimestamp": {
     "description": "asking user to share link along with timestamp"
   },
