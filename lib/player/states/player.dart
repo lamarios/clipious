@@ -416,55 +416,61 @@ class PlayerCubit extends Cubit<PlayerState> {
   }
 
   _switchToVideo(IdedVideo video, {Duration? startAt}) async {
-    // we move the existing video to the stack of played video
+    try {
+      // we move the existing video to the stack of played video
 
-    bool isOffline = video is DownloadedVideo;
-    // we want to switch to audio mode as soon as we can to prevent problems when switching from audio to video or the other way
-    if (isOffline) {
-      setAudio(video.audioOnly);
-    }
-
-    var state = this.state.copyWith();
-
-    state.mediaEvent = MediaEvent(state: MediaState.loading);
-
-    if (isOffline) {
-      state.videos = [];
-      state.currentlyPlaying = null;
-    } else {
-      state.offlineVideos = [];
-      state.offlineCurrentlyPlaying = null;
-    }
-
-    List<IdedVideo> toCheck = isOffline ? state.offlineVideos : state.videos;
-
-    emit(state);
-    state = this.state.copyWith();
-
-    if (!isOffline) {
-      late Video v;
-      if (video is Video) {
-        v = video;
-      } else {
-        v = await service.getVideo(video.videoId);
+      bool isOffline = video is DownloadedVideo;
+      // we want to switch to audio mode as soon as we can to prevent problems when switching from audio to video or the other way
+      if (isOffline) {
+        setAudio(video.audioOnly);
       }
-      state.currentlyPlaying = v;
-      state.mediaCommand = MediaCommand(MediaCommandType.switchVideo, value: SwitchVideoValue(video: v, startAt: startAt));
-    } else {
-      state.offlineCurrentlyPlaying = video;
-      state.mediaCommand = MediaCommand(MediaCommandType.switchToOfflineVideo, value: video);
-    }
 
-    state.position = Duration.zero;
-    state.forwardStep = defaultStep;
-    state.rewindStep = defaultStep;
+      var state = this.state.copyWith();
 
-    emit(state);
+      state.mediaEvent = MediaEvent(state: MediaState.loading);
 
-    setSponsorBlock();
+      if (isOffline) {
+        state.videos = [];
+        state.currentlyPlaying = null;
+      } else {
+        state.offlineVideos = [];
+        state.offlineCurrentlyPlaying = null;
+      }
 
-    if (!isTv) {
-      mediaHandler.skipToQueueItem(currentIndex);
+      List<IdedVideo> toCheck = isOffline ? state.offlineVideos : state.videos;
+
+      emit(state);
+      state = this.state.copyWith();
+
+      if (!isOffline) {
+        late Video v;
+        if (video is Video) {
+          v = video;
+        } else {
+          v = await service.getVideo(video.videoId);
+        }
+        state.currentlyPlaying = v;
+        state.mediaCommand = MediaCommand(MediaCommandType.switchVideo, value: SwitchVideoValue(video: v, startAt: startAt));
+      } else {
+        state.offlineCurrentlyPlaying = video;
+        state.mediaCommand = MediaCommand(MediaCommandType.switchToOfflineVideo, value: video);
+      }
+
+      state.position = Duration.zero;
+      state.forwardStep = defaultStep;
+      state.rewindStep = defaultStep;
+
+      emit(state);
+
+      setSponsorBlock();
+
+      if (!isTv) {
+        mediaHandler.skipToQueueItem(currentIndex);
+      }
+    } catch (err) {
+      // if we can't get video details, we need to stop everything
+      log.severe("Couldn't play video  '${video.videoId}', stopping player to avoid app crash");
+      hide();
     }
   }
 
@@ -560,7 +566,7 @@ class PlayerCubit extends Cubit<PlayerState> {
     var movedItem = listToUpdate.removeAt(oldItemIndex);
     listToUpdate.insert(newItemIndex, movedItem);
     log.fine('Reordered list: $oldItemIndex new index: ${listToUpdate.indexOf(movedItem)}');
-    if(newItemIndex <= currentIndex){
+    if (newItemIndex <= currentIndex) {
       state.playedVideos.add(listToUpdate[newItemIndex].videoId);
     }
 /*

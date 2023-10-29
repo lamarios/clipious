@@ -6,11 +6,13 @@ import 'package:logging/logging.dart';
 import '../videos/models/base_video.dart';
 
 var log = Logger('Video post process');
+const privateVideoString = "[Private video]";
 
 Future<List<BaseVideo>> postProcessVideos(List<BaseVideo> toProcess) async {
   try {
     int start = DateTime.now().millisecondsSinceEpoch;
-    List<BaseVideo> videos = toProcess ?? [];
+    List<BaseVideo> videos = toProcess.where((element) => element.title != privateVideoString).toList() ?? [];
+
     videos = await VideoFilter.filterVideos(videos);
     videos = await DeArrow.processVideos(videos);
 
