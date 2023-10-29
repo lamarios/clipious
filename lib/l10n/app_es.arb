@@ -1174,5 +1174,25 @@
   "subtitlesBackground": "Fondo de los subtítulos",
   "@subtitlesBackground": {
     "description": "Title for settings to set black background  for subtitles"
+  },
+  "deArrowWarning": "Activar DeArrow puede reducir significativamente la velocidad de navegación de la aplicación, ya que se necesitan peticiones http adicionales para cada vídeo",
+  "@deArrowWarning": {
+    "description": "Warning message when the user enables DeArrow"
+  },
+  "deArrowReplaceThumbnails": "Reemplazar las miniaturas",
+  "@deArrowReplaceThumbnails": {
+    "description": "Settings title for checkbox on whether the thumbnail should be replaced as well"
+  },
+  "enabled": "Activado",
+  "@enabled": {
+    "description": "Text to show something is enabled"
+  },
+  "deArrowSettingDescription": "Sustituir los títulos y las miniaturas de los clickbait",
+  "@deArrowSettingDescription": {
+    "description": "Description for dearrow"
+  },
+  "deArrowReplaceThumbnailsDescription": "Reemplazar las miniaturas del vídeo además de los títulos",
+  "@deArrowReplaceThumbnailsDescription": {
+    "description": "Description for DeArrow setting switch"
   }
 }
