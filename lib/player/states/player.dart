@@ -317,38 +317,40 @@ class PlayerCubit extends Cubit<PlayerState> {
     }
   }
 
-  playNext() {
-    EasyThrottle.throttle(skipToVideoThrottleName, const Duration(seconds: 1), () async {
-      if (settings.state.playerRepeatMode == PlayerRepeat.repeatOne) {
-        seek(Duration.zero);
-        play();
-      } else if (state.videos.isNotEmpty || state.offlineVideos.isNotEmpty) {
-        //moving current video to played list
-        String? currentVideoId = state.currentlyPlaying?.videoId ?? state.offlineCurrentlyPlaying?.videoId;
-        if (currentVideoId != null) {
-          // state.playedVideos.remove(currentVideoId);
-          state.playedVideos.add(currentVideoId);
-        }
-
-        if (state.playQueue.isNotEmpty) {
-          String toPlay = state.playQueue.removeFirst();
-          if (state.videos.isNotEmpty) {
-            await switchToVideo(state.videos.firstWhere((element) => element.videoId == toPlay));
-          } else {
-            await switchToOfflineVideo(state.offlineVideos.firstWhere((element) => element.videoId == toPlay));
-          }
-        } else if (settings.state.playerRepeatMode == PlayerRepeat.repeatAll) {
-          state.playedVideos = [];
-          state.playQueue = ListQueue.from([]);
-          if (state.videos.isNotEmpty) {
-            await switchToVideo(state.videos[0]);
-          } else {
-            await switchToOfflineVideo(state.offlineVideos[0]);
-          }
-          generatePlayQueue();
-        }
+  _playNextNow() async {
+    if (settings.state.playerRepeatMode == PlayerRepeat.repeatOne) {
+      seek(Duration.zero);
+      play();
+    } else if (state.videos.isNotEmpty || state.offlineVideos.isNotEmpty) {
+      //moving current video to played list
+      String? currentVideoId = state.currentlyPlaying?.videoId ?? state.offlineCurrentlyPlaying?.videoId;
+      if (currentVideoId != null) {
+        // state.playedVideos.remove(currentVideoId);
+        state.playedVideos.add(currentVideoId);
       }
-    });
+
+      if (state.playQueue.isNotEmpty) {
+        String toPlay = state.playQueue.removeFirst();
+        if (state.videos.isNotEmpty) {
+          await switchToVideo(state.videos.firstWhere((element) => element.videoId == toPlay));
+        } else {
+          await switchToOfflineVideo(state.offlineVideos.firstWhere((element) => element.videoId == toPlay));
+        }
+      } else if (settings.state.playerRepeatMode == PlayerRepeat.repeatAll) {
+        state.playedVideos = [];
+        state.playQueue = ListQueue.from([]);
+        if (state.videos.isNotEmpty) {
+          await switchToVideo(state.videos[0]);
+        } else {
+          await switchToOfflineVideo(state.offlineVideos[0]);
+        }
+        generatePlayQueue();
+      }
+    }
+  }
+
+  playNext() {
+    EasyThrottle.throttle(skipToVideoThrottleName, const Duration(seconds: 1), _playNextNow);
   }
 
   playPrevious() {
@@ -415,7 +417,33 @@ class PlayerCubit extends Cubit<PlayerState> {
     }
   }
 
+  /// skip to queue video of index
+  /// if we're not shuffling, we also rebuild the playnext and played previously queue
+  skipToVideo(int index) {
+    if (index < 0 || index >= state.videos.length) {
+      return;
+    }
+
+    if (settings.state.playerShuffleMode) {
+    } else {
+      List<String> played = [];
+      List<String> playNext = [];
+      for (int i = 0; i < state.videos.length; i++) {
+        var v = state.videos[i];
+        if (i < index) {
+          played.add(v.videoId);
+        } else if (i > index) {
+          playNext.add(v.videoId);
+        }
+      }
+      emit(state.copyWith(playedVideos: played, playQueue: ListQueue.from(playNext)));
+    }
+    switchToVideo(state.videos[index]);
+  }
+
+  /// Switches to a video without changing the queue
   _switchToVideo(IdedVideo video, {Duration? startAt}) async {
+    var state = this.state.copyWith();
     try {
       // we move the existing video to the stack of played video
 
@@ -425,7 +453,6 @@ class PlayerCubit extends Cubit<PlayerState> {
         setAudio(video.audioOnly);
       }
 
-      var state = this.state.copyWith();
 
       state.mediaEvent = MediaEvent(state: MediaState.loading);
 
@@ -462,15 +489,24 @@ class PlayerCubit extends Cubit<PlayerState> {
 
       emit(state);
 
-      setSponsorBlock();
+      await setSponsorBlock();
 
       if (!isTv) {
         mediaHandler.skipToQueueItem(currentIndex);
       }
     } catch (err) {
-      // if we can't get video details, we need to stop everything
-      log.severe("Couldn't play video  '${video.videoId}', stopping player to avoid app crash");
-      hide();
+      emit(state);
+      if(state.videos.length == 1) {
+        // if we can't get video details, we need to stop everything
+        log.severe("Couldn't play video  '${video.videoId}', stopping player to avoid app crash");
+        hide();
+      }else{
+        // if we have more than 1 video
+        log.severe("Couldn't play video  '${video.videoId}', removing it from the queue");
+
+        removeVideoFromQueue(video.videoId);
+        _playNextNow();
+      }
     }
   }
 
@@ -595,7 +631,7 @@ class PlayerCubit extends Cubit<PlayerState> {
   }
 
   setSponsorBlock() async {
-    var state = this.state.copyWith();
+    List<Pair<int>> newSegments = [];
     if (state.currentlyPlaying != null) {
       List<SponsorSegmentType> types = SponsorSegmentType.values.where((e) => db.getSettings(e.settingsName())?.value == 'true').toList();
 
@@ -608,15 +644,11 @@ class PlayerCubit extends Cubit<PlayerState> {
           return segment;
         }));
 
-        state.sponsorSegments = segments;
+        newSegments = segments;
         log.fine('we found ${segments.length} segments to skip');
-      } else {
-        state.sponsorSegments = [];
       }
-    } else {
-      state.sponsorSegments = [];
     }
-    emit(state);
+    emit(state.copyWith(sponsorSegments: newSegments));
   }
 
   seek(Duration duration) {
@@ -755,9 +787,8 @@ class PlayerCubit extends Cubit<PlayerState> {
       videos.shuffle();
     }
 
-    state.playQueue = ListQueue.from(videos);
-
-    // set up the queue
+    ListQueue<String> playQueue = ListQueue.from(videos);
+    emit(state.copyWith(playQueue: playQueue));
   }
 }
 
