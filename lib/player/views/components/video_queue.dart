@@ -34,7 +34,7 @@ class VideoQueue extends StatelessWidget {
                   ))
             ],
       child: CompactVideo(
-        onTap: isPlaying ? () {} : () => controller.switchToVideo(video),
+        onTap: isPlaying ? () {} : () => controller.skipToVideo(index),
         video: video,
         highlighted: isPlaying,
       ),
@@ -65,7 +65,7 @@ class VideoQueue extends StatelessWidget {
                   ))
             ],
       child: CompactVideo(
-        onTap: isPlaying ? () {} : () => controller.switchToOfflineVideo(v),
+        onTap: isPlaying ? () {} : () => controller.skipToVideo(index),
         offlineVideo: v,
         highlighted: isPlaying,
         trailing: [

@@ -50,13 +50,12 @@ class DeArrow {
       if (!doThumbnails) return;
 
       if (cache.url != null) {
-
-        bool isThumbnailAvailable = await service.testDeArrowThumbnail(cache.url);
-        if (isThumbnailAvailable) {
-          video.deArrowThumbnailUrl = cache.url;
-          // if we've set both things from cache, we stop otherwise we go through normal process
-          return;
-        }
+        // bool isThumbnailAvailable = await service.testDeArrowThumbnail(cache.url);
+        // if (isThumbnailAvailable) {
+        video.deArrowThumbnailUrl = cache.url;
+        // if we've set both things from cache, we stop otherwise we go through normal process
+        return;
+        // }
       }
     }
 
