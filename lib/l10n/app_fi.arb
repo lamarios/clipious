@@ -768,5 +768,257 @@
   "autoplayVideoOnLoad": "Automaattitoisto",
   "@autoplayVideoOnLoad": {
     "description": "Label for settings to enable autoplay when a video loads"
+  },
+  "askToEnableBackgroundServiceContent": "Saadaksesi ilmoituksia, Clipiouksen ilmoitukset tulee olla käytössä. Paina OK ottaaksesi ne käyttöön.",
+  "@askToEnableBackgroundServiceContent": {
+    "description": "If the users tries to turn on notifications for a channel but hasn't enable notifications in the app we need to turn it on for them"
+  },
+  "askForDisableBatteryOptimizationTitle": "Akun optimoinnin käytöstä poisto",
+  "@askForDisableBatteryOptimizationTitle": {
+    "description": "Title for the dialog asking the user to turn off disabling battery optimization when turning on notifications"
+  },
+  "askForDisableBatteryOptimizationContent": "Clipious pitää taustapalvelua käynnissä, jotta se voi lähettää ilmoituksia. Taustapalvelun käyttö vaatii rajoittamattoman akun käytön. Painamalla OK avataan akun optimointiasetukset.",
+  "@askForDisableBatteryOptimizationContent": {
+    "description": "Content for the dialog asking the user to turn off disabling battery optimization when turning on notifications"
+  },
+  "homeLayoutEditor": "Muokkaa kotinäkymän asettelua",
+  "@homeLayoutEditor": {
+    "description": "Title of layout editor screen"
+  },
+  "navigationBarLabelNeverShow": "Älä näytä tekstiä koskaan",
+  "@navigationBarLabelNeverShow": {
+    "description": "Never show label option for navigation bar"
+  },
+  "deArrowReplaceThumbnails": "Korvaa pienoiskuvat",
+  "@deArrowReplaceThumbnails": {
+    "description": "Settings title for checkbox on whether the thumbnail should be replaced as well"
+  },
+  "lockFullScreenToLandscape": "Lukitse koko näytön suunta videon kuvasuhteen mukaisesti",
+  "@lockFullScreenToLandscape": {
+    "description": "Title to force full screen to landscape"
+  },
+  "customizeAppLayout": "Mukauta sovelluksen näkymiä",
+  "@customizeAppLayout": {
+    "description": "Settings label for the settings to allow the user to set up the app sections themselves"
+  },
+  "navigationBarLabelShowOnSelect": "Näytä teksti valitussa kohteessa",
+  "@navigationBarLabelShowOnSelect": {
+    "description": "Label only showing when selected option for navigation bar"
+  },
+  "playlistNotificationTitle": "Uusia videoita soittolistalla {playlist}",
+  "@playlistNotificationTitle": {
+    "description": "Title for the playlist notifications when there are new videos",
+    "placeholders": {
+      "playlist": {
+        "type": "String",
+        "example": "Lo-Fi girl"
+      }
+    }
+  },
+  "notificationFrequencySettingsTitle": "Uusien videoiden tarkistamistiheys",
+  "@notificationFrequencySettingsTitle": {
+    "description": "Title for frequency settings"
+  },
+  "clearHistoryQuestionExplanation": "Tämä tyhjää tilisi katseluhistorian Invidious-palvelimella, jota käytät. Toimintoa ei voi perua.",
+  "@clearHistoryQuestionExplanation": {
+    "description": "Message for dialog before clearing full viewing history"
+  },
+  "distractionFreeMode": "Keskittymismoodi",
+  "@distractionFreeMode": {
+    "description": "title for distraction free mode settings"
+  },
+  "channelNotificationTitle": "Uusia videoita kanavalta {channel}",
+  "@channelNotificationTitle": {
+    "description": "Title for the channel notifications when there are new videos",
+    "placeholders": {
+      "channel": {
+        "type": "String",
+        "example": "MKBHD"
+      }
+    }
+  },
+  "notificationsDescription": "Ota käyttöön ilmoituksia",
+  "@notificationsDescription": {
+    "description": "Setting description for notifications"
+  },
+  "enabled": "Käytössä",
+  "@enabled": {
+    "description": "Text to show something is enabled"
+  },
+  "navigationBarLabelAlwaysShowing": "Näytä teksti aina",
+  "@navigationBarLabelAlwaysShowing": {
+    "description": "Label always showing option for navigation bar"
+  },
+  "customizeAppLayoutExplanation": "Valitse, mitkä näkymät haluat nähdä päänavigointipalkissa. Klikkaa kotikuvaketta valitaksesi, mikä näkymä näytetään sovelluksen käynnistyessä. Voit muokata järjestystä raahaamalla.",
+  "@customizeAppLayoutExplanation": {
+    "description": ""
+  },
+  "deArrowSettingDescription": "Korvaa klikkiotsikot ja pienoiskuvat",
+  "@deArrowSettingDescription": {
+    "description": "Description for dearrow"
+  },
+  "playlistNotificationContent": "Uusia videoita {count, plural, =0{ei ole saatavilla} =1{saatavilla 1} other{{count} saatavilla}} soittolistalla {playlist}",
+  "@playlistNotificationContent": {
+    "description": "Content for playlist notification when there are new videos",
+    "placeholders": {
+      "playlist": {
+        "type": "String",
+        "example": "Lo-Fi girl"
+      },
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "videoFilterHideAllFromChannel": "Suodata kaikki videot kanavalta",
+  "@videoFilterHideAllFromChannel": {
+    "description": "Label for video filter switch to allow to hide all videos from a channel"
+  },
+  "subscriptionNotificationTitle": "Uusia videoita tilauksiltasi",
+  "@subscriptionNotificationTitle": {
+    "description": "Title for the notification showing that there are new videos from the subscription feed"
+  },
+  "deleteChannelNotificationContent": "Et saa ilmoituksia enää tältä kanavalta.",
+  "@deleteChannelNotificationContent": {
+    "description": "Title for dialog to confirm whether to delete channel notifications"
+  },
+  "subscriptionNotificationDescription": "Saa ilmoituksia, kun tilauksillasi on uusia videoita saatavilla. Vaatii, että olet kirjautunut palvelimelle.",
+  "@subscriptionNotificationDescription": {
+    "description": "Description for subscription notifications"
+  },
+  "videoFilterWholeChannel": "{hideOrFilter} kaikki videot kanavalta",
+  "@videoFilterWholeChannel": {
+    "description": "Label for whole channel filtering",
+    "placeholders": {
+      "hideOrFilter": {
+        "type": "String",
+        "example": "Hide"
+      }
+    }
+  },
+  "notifications": "Ilmoitukset",
+  "@notifications": {
+    "description": "Notification settings title"
+  },
+  "library": "Kirjasto",
+  "@library": {
+    "description": "Name for user library"
+  },
+  "subscriptionNotification": "Tilausten ilmoitukset",
+  "@subscriptionNotification": {
+    "description": "Title for subscriptions notifications"
+  },
+  "videoFilterStartTime": "Aloitusaika",
+  "@videoFilterStartTime": {
+    "description": "Title for filter start time"
+  },
+  "distractionFreeModeDescription": "Poistaa käytöstä videoiden kommentit ja suositukset",
+  "@distractionFreeModeDescription": {
+    "description": "Description for distraction free mode"
+  },
+  "deletePlaylistNotificationContent": "Et saa ilmoituksia enää tältä soittolistalta.",
+  "@deletePlaylistNotificationContent": {
+    "description": "Title for dialog to confirm whether to delete playlist notifications"
+  },
+  "channelNotificationContent": "Uusia videoita {count, plural, =0{ei ole saatavilla} =1{saatavilla 1} other{{count} saatavilla}} kanavalla {channel}",
+  "@channelNotificationContent": {
+    "description": "Content for channel notification when there are new videos",
+    "placeholders": {
+      "channel": {
+        "type": "String",
+        "example": "MKBHD"
+      },
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "subtitlesBackgroundDescription": "Lisää tekstitysten luettavuutta näyttämällä ne mustalla taustalla",
+  "@subtitlesBackgroundDescription": {
+    "description": "Description for settings to set black background  for subtitles"
+  },
+  "home": "Koti",
+  "@home": {
+    "description": "Label for Home browsing tab"
+  },
+  "videoFilterOperationLowerThan": "Matalampi kuin",
+  "@videoFilterOperationLowerThan": {
+    "description": "Label for video filter operation Lower than"
+  },
+  "deletePlaylistNotificationTitle": "Poistetaanko soittolistan ilmoitukset?",
+  "@deletePlaylistNotificationTitle": {
+    "description": "Title for dialog to confirm whether to delete playlist notifications"
+  },
+  "lockFullScreenToLandscapeDescription": "Lukitse koko näytön suunta videoformaattiin perustuen, vaakataaso leveälle videolle ja pystykuva pystyvideoille",
+  "@lockFullScreenToLandscapeDescription": {
+    "description": "Setting description for forcing video to landscape when in full screen"
+  },
+  "videoFilterEndTime": "Päättymisaika",
+  "@videoFilterEndTime": {
+    "description": "Title for filter end time"
+  },
+  "enableNotificationDescriptions": "Palvelu joka tarkistaa ja ilmoittaa valitsemistasi kohteista, pidetään käynnissä.",
+  "@enableNotificationDescriptions": {
+    "description": ""
+  },
+  "foregroundServiceUpdatingSubscriptions": "Tarkistetaan tilauksia...",
+  "@foregroundServiceUpdatingSubscriptions": {
+    "description": "Foreground service notification text when checking for new subscription videos"
+  },
+  "secondsShortForm": "sek.",
+  "@secondsShortForm": {
+    "description": "Short form for the word seconds"
+  },
+  "deleteChannelNotificationTitle": "Poistetaanko kanavan ilmoitukset?",
+  "@deleteChannelNotificationTitle": {
+    "description": "Title for dialog to confirm whether to delete channel notifications"
+  },
+  "subtitlesBackground": "Tekstitysten taustaväri",
+  "@subtitlesBackground": {
+    "description": "Title for settings to set black background  for subtitles"
+  },
+  "otherNotifications": "Muut ilmoituslähteet (kellon kuvakkeet)",
+  "@otherNotifications": {
+    "description": "Title for settings section in the notification settings"
+  },
+  "layoutEditorAddVideoSource": "Lisää videolähde",
+  "@layoutEditorAddVideoSource": {
+    "description": "Label for button to allow user to add more video sources to the home screen"
+  },
+  "navigationBarStyle": "Navigointipalkin tyyli",
+  "@navigationBarStyle": {
+    "description": "Label for settings on customizing navigation bar style"
+  },
+  "foregroundServiceUpdatingChannels": "Tarkistetaan kanavia...",
+  "@foregroundServiceUpdatingChannels": {
+    "description": "Foreground service notification text when checking for new channel videos"
+  },
+  "notificationFrequencySettingsDescription": "Kuinka usein sovellus tarkistaa uusien videoiden saatavuuden",
+  "@notificationFrequencySettingsDescription": {
+    "description": "Description for frequency settings"
+  },
+  "foregroundServiceUpdatingPlaylist": "Tarkistetaan soittolistoja...",
+  "@foregroundServiceUpdatingPlaylist": {
+    "description": "Foreground service notification text when checking for new playlist videos"
+  },
+  "videoFilterOperationHigherThan": "Korkeampi kuin",
+  "@videoFilterOperationHigherThan": {
+    "description": "Label for video filter operation Higher than"
+  },
+  "subscriptionNotificationContent": "Uusia videoita {count, plural, =0{ei ole saatavilla} =1{1 saatavilla} other{{count} saatavilla}} tilauksiltasi",
+  "@subscriptionNotificationContent": {
+    "description": "Content for subscription notification",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "askToEnableBackgroundServiceTitle": "Ilmoitukset on poissa käytöstä",
+  "@askToEnableBackgroundServiceTitle": {
+    "description": "If the users tries to turn on notifications for a channel but hasn't enable notifications in the app we need to turn it on for them"
   }
 }
