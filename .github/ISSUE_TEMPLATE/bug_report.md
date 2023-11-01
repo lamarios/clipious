@@ -7,6 +7,13 @@ assignees: ''
 
 ---
 
+<!--
+Your thumbnails are not working ? check: https://github.com/lamarios/clipious/wiki/Common-Issues#video-thumbnails-not-working
+-->
+
+
+
+
 **Describe the bug**
 A clear and concise description of what the bug is.
 
