@@ -58,6 +58,10 @@ It is also available on F-Droid, IzzyOnDroid, and Accrescent:
 
 Or download the latest APK from the [Releases Section](https://github.com/lamarios/clipious/releases/latest).
 
+### TV
+
+For TV users it is recommended to use [Accrescent](https://accrescent.app) as it works well enough on TV and allows updates.
+
 ## Screenshots
 ### Phone
 [![Home](./screenshots/mobile-home_small.png)](./screenshots/mobile-home.png)
