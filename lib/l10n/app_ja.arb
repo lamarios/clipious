@@ -134,7 +134,7 @@
   "@loadingPublicServer": {
     "description": "Message telling users the app is loading the list of public servers"
   },
-  "addServerHelpText": "+ ボタンで所有するサーバーを追加するか、公開サーバーをタップし追加します。",
+  "addServerHelpText": "公開サーバーから選ぶか、+ ボタンからサーバーを追加します。",
   "@addServerHelpText": {
     "description": "label for when the user hasn't chosen a server yet"
   },
@@ -287,7 +287,7 @@
   "@removeFromPlayList": {
     "description": "Menu item description to show remove a video from a playlist"
   },
-  "irreversibleAction": "この操作は取り消せません",
+  "irreversibleAction": "この操作は元に戻せません",
   "@irreversibleAction": {
     "description": "Tell the user that the action cannot be undone"
   },
@@ -435,11 +435,11 @@
   "@sponsorBlockCategoryPreviewDescription": {
     "description": "Sponsorblock 'Preview' Category description"
   },
-  "returnYoutubeDislikeDescription": "API を介し動画の低評価の推定値を表示: API 提供元 returnyoutubedislike.com",
+  "returnYoutubeDislikeDescription": "API を介し動画の低評価の数を推測: API 提供元 returnyoutubedislike.com",
   "@returnYoutubeDislikeDescription": {
     "description": "ReturnYoutubeDislike setting description"
   },
-  "wizardIntro": "公開サーバーを選択するか、独自のサーバーを追加します。 (後で設定で変更できます)",
+  "wizardIntro": "公開サーバーから選ぶか、独自のものを追加します。(設定からも変更可能)",
   "@wizardIntro": {
     "description": "Welcome message on frst time use"
   },
@@ -535,7 +535,7 @@
   "@skipSslVerification": {
     "description": "Setting label to skip ssl certification verification"
   },
-  "skipSslVerificationDescription": "自己署名のSSL証明書を使用、またはサーバーでSSL関連の問題がある際に。",
+  "skipSslVerificationDescription": "自己署名のSSL証明書を使うか、使うサーバーのSSLに問題があれば。",
   "@skipSslVerificationDescription": {
     "description": "Setting description for the skip ssl certification verification"
   },
@@ -571,7 +571,7 @@
   "@tokenLoginDescription": {
     "description": "Recommended way to log in"
   },
-  "cookieLoginDescription": "トークン認証に問題がある際にこの方法を使用します",
+  "cookieLoginDescription": "トークン認証に問題がある際にお試しください",
   "@cookieLoginDescription": {
     "description": "Cookie log in description"
   },
@@ -695,7 +695,7 @@
   "@videoFilterOperationContains": {
     "description": "Label for video filter operation Contains"
   },
-  "videoFilterNoFilters": "動画のフィルターなし。+ のタップで、フィルター追加。",
+  "videoFilterNoFilters": "動画フィルターなし。+ をタップし、フィルター追加。",
   "@videoFilterNoFilters": {
     "description": "Label when there are no video filters"
   },
@@ -759,7 +759,7 @@
   "@videoFilterFilterLabel": {
     "description": "Label to filter videos"
   },
-  "videoFiltersExplanation": "以下に定義したフィルタにより、アプリ内のすべての動画フィードから動画を非表示または不明確にします。例えば、スポーツのネタバレや、特定のチャンネルのショート動画を非表示にしたりできます。",
+  "videoFiltersExplanation": "フィルタを定義し、アプリ内のすべての動画一覧から、特定の動画を非表示または不明確にします。例えば、スポーツのネタバレ、特定のチャンネルのショート動画を隠します。",
   "@videoFiltersExplanation": {
     "description": "Description on how filter work"
   },
@@ -801,7 +801,7 @@
   "@videoFilterTapToReveal": {
     "description": "Label to tell user to tap to show a filtered video"
   },
-  "videoFilterHideDescription": "標準では、フィルターされた動画は非表示ではなく、理由と共に不明確に表示されます。この設定は、フィルタリングされた動画を一覧から除去します。",
+  "videoFilterHideDescription": "動画を一覧に表示しません。標準では、フィルターされた動画は非表示ではなく、理由と共に不明確に表示されます。",
   "@videoFilterHideDescription": {
     "description": ""
   },
@@ -845,7 +845,7 @@
   "@download": {
     "description": "A single download or CTA for downloading a video"
   },
-  "downloads": "ダウンロード一覧",
+  "downloads": "ダウンロード",
   "@downloads": {
     "description": "Downloads"
   },
@@ -857,7 +857,7 @@
   "@itemlistErrorGeneric": {
     "description": "Error showing when the data can't be fetch"
   },
-  "itemListErrorInvalidScope": "表示する権限がありません。トークンでログインしていれば、ログアウトし再度ログインをお試しください",
+  "itemListErrorInvalidScope": "表示する権限なし。トークンでログイン中なら、ログアウトし再度ログインしてみてください",
   "@itemListErrorInvalidScope": {
     "description": "Error when the user doesn't have the proper scope to its current token"
   },
@@ -913,11 +913,11 @@
   "@homeLayoutEditor": {
     "description": "Title of layout editor screen"
   },
-  "layoutEditorExplanation": "ホーム画面の表示を変更できます。横スクロールの小さな表示部分を2つ、大きな表示部分を1つ表示できます。",
+  "layoutEditorExplanation": "ホームの表示を変更。横スクロールの小さな表示部分が2つまで、大きな表示部分が1つあります。",
   "@layoutEditorExplanation": {
     "description": "text to explain the home layout editor"
   },
-  "layoutEditorAddVideoSource": "動画の表示を追加",
+  "layoutEditorAddVideoSource": "動画の表示部分を追加",
   "@layoutEditorAddVideoSource": {
     "description": "Label for button to allow user to add more video sources to the home screen"
   },
