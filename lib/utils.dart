@@ -26,6 +26,10 @@ double tabletMaxVideoWidth = getDeviceType() == DeviceType.phone ? double.infini
 
 const List<LogicalKeyboardKey> selectKeys = [LogicalKeyboardKey.accept, LogicalKeyboardKey.enter, LogicalKeyboardKey.numpadEnter, LogicalKeyboardKey.select, LogicalKeyboardKey.open];
 
+bool isOk(LogicalKeyboardKey key){
+  return selectKeys.any((element) => element == key);
+}
+
 String prettyDuration(Duration duration) {
   var components = <String>[];
 
@@ -271,7 +275,7 @@ Country getCountryFromCode(String code) {
 KeyEventResult onTvSelect(KeyEvent event, BuildContext context, Function(BuildContext context) func) {
   if (event is KeyUpEvent) {
     log.fine('onTvSelect, ${event.logicalKey}, ${event}');
-    if (selectKeys.any((element) => event.logicalKey == element)) {
+    if (isOk(event.logicalKey)) {
       func(context);
       return KeyEventResult.handled;
     }

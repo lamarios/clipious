@@ -22,7 +22,7 @@ class TvVideoItem extends StatelessWidget {
   const TvVideoItem({Key? key, required this.video, required this.autoFocus, this.onSelect, this.onFocusChange}) : super(key: key);
 
   openVideo(BuildContext context, VideoInList e, FocusNode node, KeyEvent event) {
-    if (event is KeyUpEvent && (event.logicalKey == LogicalKeyboardKey.enter || event.logicalKey == LogicalKeyboardKey.select)) {
+    if (event is KeyUpEvent && isOk(event.logicalKey)) {
       if (onSelect != null) {
         onSelect!(context, e);
       } else {
