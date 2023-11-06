@@ -24,10 +24,19 @@ enum DeviceType { phone, tablet, tv }
 
 double tabletMaxVideoWidth = getDeviceType() == DeviceType.phone ? double.infinity : 500;
 
-const List<LogicalKeyboardKey> selectKeys = [LogicalKeyboardKey.accept, LogicalKeyboardKey.enter, LogicalKeyboardKey.numpadEnter, LogicalKeyboardKey.select, LogicalKeyboardKey.open];
+const List<LogicalKeyboardKey> selectKeys = [
+  LogicalKeyboardKey.accept,
+  LogicalKeyboardKey.enter,
+  LogicalKeyboardKey.numpadEnter,
+  LogicalKeyboardKey.select,
+  LogicalKeyboardKey.open
+];
+const List<int> selectPhysicalKeys = [0x1100000017];
 
-bool isOk(LogicalKeyboardKey key){
-  return selectKeys.any((element) => element == key);
+bool isOk(LogicalKeyboardKey key, {PhysicalKeyboardKey? physicalKeyboardKey}) {
+  log.fine('Received key event, Logical: ${key.debugName}, Physical ${physicalKeyboardKey?.debugName}');
+  return selectKeys.any((element) => element == key) ||
+      selectPhysicalKeys.any((element) => element == physicalKeyboardKey?.usbHidUsage);
 }
 
 String prettyDuration(Duration duration) {
@@ -215,7 +224,6 @@ okCancelDialog(BuildContext context, String title, String message, Function() on
   );
 }
 
-
 showTvAlertdialog(BuildContext context, String title, List<Widget> body) {
   var locals = AppLocalizations.of(context)!;
   showTvDialog(context: context, builder: (context) => body, actions: [
@@ -275,7 +283,7 @@ Country getCountryFromCode(String code) {
 KeyEventResult onTvSelect(KeyEvent event, BuildContext context, Function(BuildContext context) func) {
   if (event is KeyUpEvent) {
     log.fine('onTvSelect, ${event.logicalKey}, ${event}');
-    if (isOk(event.logicalKey)) {
+    if (isOk(event.logicalKey, physicalKeyboardKey: event.physicalKey)) {
       func(context);
       return KeyEventResult.handled;
     }
