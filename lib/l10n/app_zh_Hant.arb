@@ -1,338 +1,1198 @@
 {
-    "playlists": "播放列表",
-    "@playlists": {
-        "description": "User playlists"
-    },
-    "popular": "熱門",
-    "@popular": {
-        "description": "Popular videos title"
-    },
-    "trending": "時下流行",
-    "@trending": {
-        "description": "Trending videos title"
-    },
-    "deletePlayListQ": "確定刪除播放列表?",
-    "@deletePlayListQ": {
-        "description": "Ask user to delete a playlist"
-    },
-    "loadMore": "加載更多",
-    "@loadMore": {
-        "description": "CTA to load more"
-    },
-    "noVideoInPlayList": "無視頻在播放列表中",
-    "@noVideoInPlayList": {
-        "description": "When no videos in the playlist"
-    },
-    "removeFromPlayList": "從播放列表中移除",
-    "@removeFromPlayList": {
-        "description": "Menu item description to show remove a video from a playlist"
-    },
-    "irreversibleAction": "該操作是無法倒置的，請慎重選擇",
-    "@irreversibleAction": {
-        "description": "Tell the user that the action cannot be undone"
-    },
-    "addPlayList": "添加播放列表",
-    "@addPlayList": {
-        "description": "Title for add playlist dialog"
-    },
-    "playListName": "播放列表名稱",
-    "@playListName": {
-        "description": "Place holder for new playlist name text field"
-    },
-    "playlistVisibility": "播放列表隱私設置",
-    "@playlistVisibility": {
-        "description": "Dropdown label for playlist visibility"
-    },
-    "publicPlaylist": "公開",
-    "@publicPlaylist": {
-        "description": "Public playlist"
-    },
-    "privatePlaylist": "私享",
-    "@privatePlaylist": {
-        "description": "Private playlist"
-    },
-    "cancel": "取消",
-    "@cancel": {
-        "description": "Cancel button label"
-    },
-    "add": "添加",
-    "@add": {
-        "description": "Add button abel"
-    },
-    "unlistedPlaylist": "不公開的播放列表",
-    "@unlistedPlaylist": {
-        "description": "Unlisted playlist"
-    },
-    "info": "信息",
-    "@info": {
-        "description": "Info label"
-    },
-    "videos": "視頻",
-    "@videos": {
-        "description": "Videos label"
-    },
-    "streams": "直播",
-    "@streams": {
-        "description": "Streams label"
-    },
-    "subscribe": "訂閱",
-    "@subscribe": {
-        "description": "Label for user to subscribe to a channel"
-    },
-    "nSubscribers": "{count, select, no{沒有訂閱者} other{{count}位訂閱者}}",
-    "@nSubscribers": {
-        "description": "number of subscribers",
-        "placeholders": {
-            "count": {
-                "type": "String"
-            }
-        }
-    },
-    "shareYoutubeLink": "分享YouTube鏈接",
-    "@shareYoutubeLink": {
-        "description": "asking user to share youtube link"
-    },
-    "shareInvidiousLink": "分享Invidious鏈接",
-    "@shareInvidiousLink": {
-        "description": "asking user to share invidious link"
-    },
-    "ok": "好的",
-    "@ok": {
-        "description": "Ok"
-    },
-    "noChannels": "無頻道",
-    "@noChannels": {
-        "description": "when there are no channels to display"
-    },
-    "noPlaylists": "無播放列表",
-    "@noPlaylists": {
-        "description": "when there are no playlists to display"
-    },
-    "channels": "頻道",
-    "@channels": {
-        "description": "Channels label"
-    },
-    "couldntLoadVideo": "無法加載視頻",
-    "@couldntLoadVideo": {
-        "description": "Message to display when a video can't be loaded"
-    },
-    "comments": "留言",
-    "@comments": {
-        "description": "Comments label"
-    },
-    "recommended": "推薦",
-    "@recommended": {
-        "description": "Recommended label"
-    },
-    "couldntFetchVideos": "無法獲取視頻。點擊重試.",
-    "@couldntFetchVideos": {
-        "description": "Can't load bunch of videos, asking  user to try again"
-    },
-    "startUsingClipious": "開始使用Clipious",
-    "@startUsingClipious": {
-        "description": "button label to start using the app"
-    },
-    "videoAddedToPlaylist": "視頻成功添加到播放列表",
-    "@videoAddedToPlaylist": {
-        "description": "Pop up message when a video was added to a playlist"
-    },
-    "errorAddingVideoToPlaylist": "將視頻添加到播放列表時出錯",
-    "@errorAddingVideoToPlaylist": {
-        "description": "Error while adding video to playlist"
-    },
-    "selectPlaylist": "選擇播放列表",
-    "@selectPlaylist": {
-        "description": "Title when users wants to add a video to a playlist"
-    },
-    "createNewPlaylist": "新建播放列表",
-    "@createNewPlaylist": {
-        "description": "Button label to create a new playlist when the user wants to add a video to a playlist"
-    },
-    "nReplies": "{count, plural, =0{無回复} =1{1條回复} other{{count}條回复}}",
-    "@nReplies": {
-        "description": "number of replies to a comment",
-        "placeholders": {
-            "count": {
-                "type": "num",
-                "format": "compact"
-            }
-        }
-    },
-    "topSorting": "置頂",
-    "@topSorting": {
-        "description": "Content sorting: top"
-    },
-    "newSorting": "最新",
-    "@newSorting": {
-        "description": "Content sorting: new"
-    },
-    "streamIsLive": "Live直播",
-    "@streamIsLive": {
-        "description": "Label when a video is a live stream"
-    },
-    "sponsorSkipped": "跳過贊助商",
-    "@sponsorSkipped": {
-        "description": "When a sponsor segment is skipped thanks to sponsor block"
-    },
-    "selectBrowsingCountry": "選擇瀏覽國家",
-    "@selectBrowsingCountry": {
-        "description": "Select country for trending content"
-    },
-    "showOnStart": "選擇應用程序啟動時顯示的內容",
-    "@showOnStart": {
-        "description": "Title of dialog asking which screen the users prefers to see"
-    },
-    "settings": "設置",
-    "@settings": {
-        "description": "Settings title"
-    },
-    "browsing": "瀏覽",
-    "@browsing": {
-        "description": "video browsing preferences"
-    },
-    "country": "國家",
-    "@country": {
-        "description": "Country label"
-    },
-    "whenAppStartsShow": "應用程序啟動時，顯示…",
-    "@whenAppStartsShow": {
-        "description": "Setting title for selecting the screen to show on start"
-    },
-    "servers": "伺服器",
-    "@servers": {
-        "description": "Server management settings category"
-    },
-    "manageServers": "管理伺服器",
-    "@manageServers": {
-        "description": "Settings to manage servers"
-    },
-    "currentServer": "正在使用 {current}",
-    "@currentServer": {
-        "description": "Which server the user is currently using",
-        "placeholders": {
-            "current": {
-                "type": "String"
-            }
-        }
-    },
-    "useSponsorBlock": "使用 SponsorBlock",
-    "@useSponsorBlock": {
-        "description": "label for sponsorblock checkbox"
-    },
-    "sponsorBlockDescription": "跳過公眾提交的讚助商部分",
-    "@sponsorBlockDescription": {
-        "description": "Sponsorblock setting description"
-    },
-    "about": "關於",
-    "@about": {
-        "description": "About"
-    },
-    "name": "名稱",
-    "@name": {
-        "description": "NAme label"
-    },
-    "package": "應用程序包",
-    "@package": {
-        "description": "package label"
-    },
-    "version": "版本",
-    "@version": {
-        "description": "version label"
-    },
-    "build": "Build",
-    "@build": {
-        "description": "build label"
-    },
-    "addServer": "添加伺服器",
-    "@addServer": {
-        "description": "Add server label"
-    },
-    "useThisServer": "使用此伺服器",
-    "@useThisServer": {
-        "description": "Use this server label"
-    },
-    "logIn": "登入",
-    "@logIn": {
-        "description": "CTA to log in to server"
-    },
-    "delete": "刪除",
-    "@delete": {
-        "description": "Delete label"
-    },
-    "invalidInvidiousServer": "無效的Invidious伺服器",
-    "@invalidInvidiousServer": {
-        "description": "Error when the user tries to add a server that is not a proper or reachable invidious server"
-    },
-    "yourServers": "您的伺服器",
-    "@yourServers": {
-        "description": "Your servers label"
-    },
-    "loggedIn": "已登入",
-    "@loggedIn": {
-        "description": "Label to tell the user that he is logged in to the server"
-    },
-    "notLoggedIn": "未登錄。點擊以登錄。",
-    "@notLoggedIn": {
-        "description": "Label when the user is not logged in to the server"
-    },
-    "addServerHelpText": "使用 + 按鈕添加您自己的服務器或點擊公共服務器並添加它。",
-    "@addServerHelpText": {
-        "description": "label for when the user hasn't chosen a server yet"
-    },
-    "publicServers": "公共服務器",
-    "@publicServers": {
-        "description": "Public servers label"
-    },
-    "loadingPublicServer": "正在加載公共服務器",
-    "@loadingPublicServer": {
-        "description": "Message telling users the app is loading the list of public servers"
-    },
-    "tapToAddServer": "點擊以將服務器添加到您的列表",
-    "@tapToAddServer": {
-        "description": "public server description"
-    },
-    "publicServersError": "無法獲取公共服務器列表。點擊重試。",
-    "@publicServersError": {
-        "description": "Error message when trying to get public servers but it failed"
-    },
-    "appearance": "外觀",
-    "@appearance": {
-        "description": "Settings category title"
-    },
-    "useDynamicTheme": "動態色彩",
-    "@useDynamicTheme": {
-        "description": ""
-    },
-    "useDynamicThemeDescription": "使用 Material You 顏色（僅適用於 Android 12+）。需要重啟應用",
-    "@useDynamicThemeDescription": {
-        "description": ""
-    },
-    "error": "錯誤",
-    "@error": {},
-    "nVideos": "{count, plural, =0{無視頻} =1{1部視頻} other{{count}部視頻}}",
-    "@nVideos": {
-        "description": "One or more videos",
-        "placeholders": {
-            "count": {
-                "type": "num",
-                "format": "compact"
-            }
-        }
-    },
-    "subscriptions": "訂閱內容",
-    "@subscriptions": {
-        "description": "User subscriptions"
-    },
-    "latestVideos": "頻道最新視頻",
-    "@latestVideos": {
-        "description": "Latest channel videos"
-    },
-    "subscribed": "已訂閱",
-    "@subscribed": {
-        "description": "When the user is subscribed to a channel"
-    },
-    "wizardIntro": "選擇公共服務器或添加您自己的服務器。 （稍後可以在設置中更改。）",
-    "@wizardIntro": {
-        "description": "Welcome message on frst time use"
+  "playlists": "播放清單",
+  "@playlists": {
+    "description": "User playlists"
+  },
+  "popular": "熱門",
+  "@popular": {
+    "description": "Popular videos title"
+  },
+  "trending": "趨勢",
+  "@trending": {
+    "description": "Trending videos title"
+  },
+  "deletePlayListQ": "確定刪除播放清單？",
+  "@deletePlayListQ": {
+    "description": "Ask user to delete a playlist"
+  },
+  "loadMore": "載入更多",
+  "@loadMore": {
+    "description": "CTA to load more"
+  },
+  "noVideoInPlayList": "播放清單中無影片",
+  "@noVideoInPlayList": {
+    "description": "When no videos in the playlist"
+  },
+  "removeFromPlayList": "從播放清單中移除",
+  "@removeFromPlayList": {
+    "description": "Menu item description to show remove a video from a playlist"
+  },
+  "irreversibleAction": "這個操作無法復原，請謹慎選擇",
+  "@irreversibleAction": {
+    "description": "Tell the user that the action cannot be undone"
+  },
+  "addPlayList": "新增播放清單",
+  "@addPlayList": {
+    "description": "Title for add playlist dialog"
+  },
+  "playListName": "播放清單名稱",
+  "@playListName": {
+    "description": "Place holder for new playlist name text field"
+  },
+  "playlistVisibility": "播放清單隱私設定",
+  "@playlistVisibility": {
+    "description": "Dropdown label for playlist visibility"
+  },
+  "publicPlaylist": "公開",
+  "@publicPlaylist": {
+    "description": "Public playlist"
+  },
+  "privatePlaylist": "私人",
+  "@privatePlaylist": {
+    "description": "Private playlist"
+  },
+  "cancel": "取消",
+  "@cancel": {
+    "description": "Cancel button label"
+  },
+  "add": "新增",
+  "@add": {
+    "description": "Add button abel"
+  },
+  "unlistedPlaylist": "非公開的播放清單",
+  "@unlistedPlaylist": {
+    "description": "Unlisted playlist"
+  },
+  "info": "資訊",
+  "@info": {
+    "description": "Info label"
+  },
+  "videos": "影片",
+  "@videos": {
+    "description": "Videos label"
+  },
+  "streams": "串流",
+  "@streams": {
+    "description": "Streams label"
+  },
+  "subscribe": "訂閱",
+  "@subscribe": {
+    "description": "Label for user to subscribe to a channel"
+  },
+  "nSubscribers": "{count, select, no{無訂閱者} other{{count}位訂閱者}}",
+  "@nSubscribers": {
+    "description": "number of subscribers",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
     }
+  },
+  "shareYoutubeLink": "分享 YouTube 連結",
+  "@shareYoutubeLink": {
+    "description": "asking user to share youtube link"
+  },
+  "shareInvidiousLink": "分享 Invidious 連結",
+  "@shareInvidiousLink": {
+    "description": "asking user to share invidious link"
+  },
+  "ok": "確定",
+  "@ok": {
+    "description": "Ok"
+  },
+  "noChannels": "無頻道",
+  "@noChannels": {
+    "description": "when there are no channels to display"
+  },
+  "noPlaylists": "無播放清單",
+  "@noPlaylists": {
+    "description": "when there are no playlists to display"
+  },
+  "channels": "頻道",
+  "@channels": {
+    "description": "Channels label"
+  },
+  "couldntLoadVideo": "無法載入影片",
+  "@couldntLoadVideo": {
+    "description": "Message to display when a video can't be loaded"
+  },
+  "comments": "評論",
+  "@comments": {
+    "description": "Comments label"
+  },
+  "recommended": "推薦",
+  "@recommended": {
+    "description": "Recommended label"
+  },
+  "couldntFetchVideos": "無法取得影片。點選以再試一次。",
+  "@couldntFetchVideos": {
+    "description": "Can't load bunch of videos, asking  user to try again"
+  },
+  "startUsingClipious": "開始使用 Clipious",
+  "@startUsingClipious": {
+    "description": "button label to start using the app"
+  },
+  "videoAddedToPlaylist": "影片已新增至播放清單",
+  "@videoAddedToPlaylist": {
+    "description": "Pop up message when a video was added to a playlist"
+  },
+  "errorAddingVideoToPlaylist": "新增影片至播放清單時出錯",
+  "@errorAddingVideoToPlaylist": {
+    "description": "Error while adding video to playlist"
+  },
+  "selectPlaylist": "選擇播放清單",
+  "@selectPlaylist": {
+    "description": "Title when users wants to add a video to a playlist"
+  },
+  "createNewPlaylist": "建立新的播放清單",
+  "@createNewPlaylist": {
+    "description": "Button label to create a new playlist when the user wants to add a video to a playlist"
+  },
+  "nReplies": "{count, plural, =0{無回覆} =1{1條回覆} other{{count}條回覆}}",
+  "@nReplies": {
+    "description": "number of replies to a comment",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "topSorting": "最熱門",
+  "@topSorting": {
+    "description": "Content sorting: top"
+  },
+  "newSorting": "最新",
+  "@newSorting": {
+    "description": "Content sorting: new"
+  },
+  "streamIsLive": "直播中",
+  "@streamIsLive": {
+    "description": "Label when a video is a live stream"
+  },
+  "sponsorSkipped": "已跳過贊助商",
+  "@sponsorSkipped": {
+    "description": "When a sponsor segment is skipped thanks to sponsor block"
+  },
+  "selectBrowsingCountry": "選擇瀏覽國家",
+  "@selectBrowsingCountry": {
+    "description": "Select country for trending content"
+  },
+  "showOnStart": "選擇應用程式啟動時要顯示的內容",
+  "@showOnStart": {
+    "description": "Title of dialog asking which screen the users prefers to see"
+  },
+  "settings": "設定",
+  "@settings": {
+    "description": "Settings title"
+  },
+  "browsing": "瀏覽",
+  "@browsing": {
+    "description": "video browsing preferences"
+  },
+  "country": "國家",
+  "@country": {
+    "description": "Country label"
+  },
+  "whenAppStartsShow": "當應用程式啟動時，顯示…",
+  "@whenAppStartsShow": {
+    "description": "Setting title for selecting the screen to show on start"
+  },
+  "servers": "伺服器",
+  "@servers": {
+    "description": "Server management settings category"
+  },
+  "manageServers": "管理伺服器",
+  "@manageServers": {
+    "description": "Settings to manage servers"
+  },
+  "currentServer": "目前正在使用 {current}",
+  "@currentServer": {
+    "description": "Which server the user is currently using",
+    "placeholders": {
+      "current": {
+        "type": "String"
+      }
+    }
+  },
+  "useSponsorBlock": "使用 SponsorBlock",
+  "@useSponsorBlock": {
+    "description": "label for sponsorblock checkbox"
+  },
+  "sponsorBlockDescription": "跳過由社群提交的贊助商片段",
+  "@sponsorBlockDescription": {
+    "description": "Sponsorblock setting description"
+  },
+  "about": "關於",
+  "@about": {
+    "description": "About"
+  },
+  "name": "名稱",
+  "@name": {
+    "description": "NAme label"
+  },
+  "package": "套件",
+  "@package": {
+    "description": "package label"
+  },
+  "version": "版本",
+  "@version": {
+    "description": "version label"
+  },
+  "build": "建置",
+  "@build": {
+    "description": "build label"
+  },
+  "addServer": "新增伺服器",
+  "@addServer": {
+    "description": "Add server label"
+  },
+  "useThisServer": "使用此伺服器",
+  "@useThisServer": {
+    "description": "Use this server label"
+  },
+  "logIn": "登入",
+  "@logIn": {
+    "description": "CTA to log in to server"
+  },
+  "delete": "刪除",
+  "@delete": {
+    "description": "Delete label"
+  },
+  "invalidInvidiousServer": "無效的 Invidious 伺服器",
+  "@invalidInvidiousServer": {
+    "description": "Error when the user tries to add a server that is not a proper or reachable invidious server"
+  },
+  "yourServers": "您的伺服器",
+  "@yourServers": {
+    "description": "Your servers label"
+  },
+  "loggedIn": "已登入",
+  "@loggedIn": {
+    "description": "Label to tell the user that he is logged in to the server"
+  },
+  "notLoggedIn": "未登入。點選以登入。",
+  "@notLoggedIn": {
+    "description": "Label when the user is not logged in to the server"
+  },
+  "addServerHelpText": "使用 + 按鈕新增您自己的伺服器或點選公開伺服器並新增。",
+  "@addServerHelpText": {
+    "description": "label for when the user hasn't chosen a server yet"
+  },
+  "publicServers": "公開伺服器",
+  "@publicServers": {
+    "description": "Public servers label"
+  },
+  "loadingPublicServer": "正在載入公開伺服器",
+  "@loadingPublicServer": {
+    "description": "Message telling users the app is loading the list of public servers"
+  },
+  "tapToAddServer": "點選以將伺服器新增到您的清單",
+  "@tapToAddServer": {
+    "description": "public server description"
+  },
+  "publicServersError": "無法取得公開伺服器清單。點選以重試。",
+  "@publicServersError": {
+    "description": "Error message when trying to get public servers but it failed"
+  },
+  "appearance": "外觀",
+  "@appearance": {
+    "description": "Settings category title"
+  },
+  "useDynamicTheme": "動態色彩",
+  "@useDynamicTheme": {
+    "description": ""
+  },
+  "useDynamicThemeDescription": "使用 Material You 配色（僅適用於 Android 12+）。需要重新啟動應用程式",
+  "@useDynamicThemeDescription": {
+    "description": ""
+  },
+  "error": "錯誤",
+  "@error": {},
+  "nVideos": "{count, plural, =0{無影片} =1{1部影片} other{{count}部影片}}",
+  "@nVideos": {
+    "description": "One or more videos",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "subscriptions": "訂閱",
+  "@subscriptions": {
+    "description": "User subscriptions"
+  },
+  "latestVideos": "最新影片",
+  "@latestVideos": {
+    "description": "Latest channel videos"
+  },
+  "subscribed": "已訂閱",
+  "@subscribed": {
+    "description": "When the user is subscribed to a channel"
+  },
+  "wizardIntro": "選擇一個公開伺服器或新增您自己的伺服器。（可以稍後在設定中更改。）",
+  "@wizardIntro": {
+    "description": "Welcome message on frst time use"
+  },
+  "useProxyDescription": "透過從伺服器代理影片串流，您可以繞過區域封鎖或 ISP 封鎖 YouTube",
+  "@useProxyDescription": {
+    "description": "Description for the use proxy settings"
+  },
+  "itemListErrorInvalidScope": "您沒有權限檢視此內容，如果您使用 token 方法登入，請嘗試登出並再次登入",
+  "@itemListErrorInvalidScope": {
+    "description": "Error when the user doesn't have the proper scope to its current token"
+  },
+  "videoFiltersExplanation": "根據下面定義的篩選器，從應用程式中的所有影片來源隱藏或模糊影片。例如，這可以讓您隱藏體育劇透或隱藏某個頻道的 Shorts。",
+  "@videoFiltersExplanation": {
+    "description": "Description on how filter work"
+  },
+  "addRecommendedToQueue": "自動播放推薦的下一部",
+  "@addRecommendedToQueue": {
+    "description": "Switch when playing a video to automatically add the recommended videos to the video queue"
+  },
+  "videoFilterOperationNotContain": "不包含",
+  "@videoFilterOperationNotContain": {
+    "description": "Label for video filter operation Does not contain"
+  },
+  "appLogs": "應用程式日誌",
+  "@appLogs": {
+    "description": "Title for settings that leads to application logs"
+  },
+  "askToEnableBackgroundServiceContent": "要取得通知，需要啟用 Clipious 通知，按確定以啟用。",
+  "@askToEnableBackgroundServiceContent": {
+    "description": "If the users tries to turn on notifications for a channel but hasn't enable notifications in the app we need to turn it on for them"
+  },
+  "askForDisableBatteryOptimizationTitle": "需要停用電池最佳化",
+  "@askForDisableBatteryOptimizationTitle": {
+    "description": "Title for the dialog asking the user to turn off disabling battery optimization when turning on notifications"
+  },
+  "videoAddedToQueue": "影片已新增至佇列",
+  "@videoAddedToQueue": {
+    "description": "Pop up message when a video was added at the end of the video queue"
+  },
+  "itemlistErrorGeneric": "無法取得資料",
+  "@itemlistErrorGeneric": {
+    "description": "Error showing when the data can't be fetch"
+  },
+  "askForDisableBatteryOptimizationContent": "為了傳送通知，Clipious 需要執行一個背景服務。為了使其順暢執行，需要給予 Clipious 不受限制的電池使用權，點選確定將開啟電池最佳化設定。",
+  "@askForDisableBatteryOptimizationContent": {
+    "description": "Content for the dialog asking the user to turn off disabling battery optimization when turning on notifications"
+  },
+  "save": "儲存",
+  "@save": {
+    "description": "Text for save action"
+  },
+  "deArrowWarning": "啟用 DeArrow 可以顯著降低應用程式的瀏覽速度，因為每個影片都需要額外的 http 請求",
+  "@deArrowWarning": {
+    "description": "Warning message when the user enables DeArrow"
+  },
+  "homeLayoutEditor": "編輯首頁版面配置",
+  "@homeLayoutEditor": {
+    "description": "Title of layout editor screen"
+  },
+  "requiresRestart": "需要重新啟動應用程式",
+  "@requiresRestart": {
+    "description": "Requires app restart label"
+  },
+  "themeLight": "淺色",
+  "@themeLight": {
+    "description": "Light theme"
+  },
+  "navigationBarLabelNeverShow": "永不顯示標籤",
+  "@navigationBarLabelNeverShow": {
+    "description": "Never show label option for navigation bar"
+  },
+  "appLanguage": "應用程式語言",
+  "@appLanguage": {
+    "description": "Select app language"
+  },
+  "sponsorBlockCategoryOutroDescription": "片尾字幕或 YouTube 結尾卡片出現時。不適用於包含資訊的結論。",
+  "@sponsorBlockCategoryOutroDescription": {
+    "description": "Outro block 'Outro' Category description"
+  },
+  "deArrowReplaceThumbnails": "替換縮圖",
+  "@deArrowReplaceThumbnails": {
+    "description": "Settings title for checkbox on whether the thumbnail should be replaced as well"
+  },
+  "lockFullScreenToLandscape": "將全螢幕方向鎖定為影片的長寬比",
+  "@lockFullScreenToLandscape": {
+    "description": "Title to force full screen to landscape"
+  },
+  "videoFilterTypeChannelName": "頻道名稱",
+  "@videoFilterTypeChannelName": {
+    "description": "Label for video filter channel name"
+  },
+  "password": "密碼",
+  "@password": {
+    "description": "Password label for login to a server"
+  },
+  "videoFilterFilterLabel": "模糊",
+  "@videoFilterFilterLabel": {
+    "description": "Label to filter videos"
+  },
+  "customizeAppLayout": "自定義應用程式區塊",
+  "@customizeAppLayout": {
+    "description": "Settings label for the settings to allow the user to set up the app sections themselves"
+  },
+  "navigationBarLabelShowOnSelect": "在選定的專案上顯示標籤",
+  "@navigationBarLabelShowOnSelect": {
+    "description": "Label only showing when selected option for navigation bar"
+  },
+  "videoFilterTypeVideoTitle": "影片標題",
+  "@videoFilterTypeVideoTitle": {
+    "description": "Label for video filter video title"
+  },
+  "sponsorBlockCategoryUnpaidSelfPromo": "未付費/自我推廣",
+  "@sponsorBlockCategoryUnpaidSelfPromo": {
+    "description": "Sponsor block 'Unpaid/Self promotion' Category"
+  },
+  "fillFullscreenDescription": "調整影片以填滿橫向模式的整個螢幕",
+  "@fillFullscreenDescription": {
+    "description": "Setting description for filling video to screen in landscape"
+  },
+  "from": "從",
+  "@from": {
+    "description": "From word (as in 'From xx To xx')"
+  },
+  "appLogsDescription": "取得應用程式中發生的日誌，可以用於報告問題",
+  "@appLogsDescription": {
+    "description": "Description of the app log settings"
+  },
+  "sponsorBlockCategoryInteraction": "互動提醒（訂閱）",
+  "@sponsorBlockCategoryInteraction": {
+    "description": "Sponsor block 'Interaction' Category"
+  },
+  "noSubscriptions": "沒有訂閱，瀏覽影片並訂閱您喜歡的任何頻道。",
+  "@noSubscriptions": {
+    "description": "Message when the user has no subs"
+  },
+  "addToQueueList": "新增至佇列",
+  "@addToQueueList": {
+    "description": "Label on button to add a video to the queue list"
+  },
+  "playlistNotificationTitle": "{playlist} 播放清單中的新影片",
+  "@playlistNotificationTitle": {
+    "description": "Title for the playlist notifications when there are new videos",
+    "placeholders": {
+      "playlist": {
+        "type": "String",
+        "example": "Lo-Fi girl"
+      }
+    }
+  },
+  "videoIsFamilyFriendly": "適合全家觀看",
+  "@videoIsFamilyFriendly": {
+    "description": "Displayed only when a video is family friendly"
+  },
+  "notificationFrequencySettingsTitle": "新影片檢查頻率",
+  "@notificationFrequencySettingsTitle": {
+    "description": "Title for frequency settings"
+  },
+  "clearHistoryQuestionExplanation": "這將清除您在使用的 Invidious 執行個體上的帳戶的觀看紀錄。這個操作無法復原。",
+  "@clearHistoryQuestionExplanation": {
+    "description": "Message for dialog before clearing full viewing history"
+  },
+  "tapToManage": "點選以管理",
+  "@tapToManage": {
+    "description": "Text shown below a server in the 'Your servers' list"
+  },
+  "videoFilterOperationContains": "包含",
+  "@videoFilterOperationContains": {
+    "description": "Label for video filter operation Contains"
+  },
+  "skipSslVerificationDescription": "用於使用自簽名 SSL 憑證，或當伺服器有 SSL 相關問題時。",
+  "@skipSslVerificationDescription": {
+    "description": "Setting description for the skip ssl certification verification"
+  },
+  "videoFilterAllChannels": "所有頻道",
+  "@videoFilterAllChannels": {
+    "description": "Title for the sections that applies to all channels"
+  },
+  "sponsorBlockCategoryIntroDescription": "沒有實際內容的間隔。可能是暫停、靜態框架、重複的動畫。不應該用於包含資訊的轉場。",
+  "@sponsorBlockCategoryIntroDescription": {
+    "description": "Sponsorblock 'Intro' Category description"
+  },
+  "videoQueue": "影片佇列",
+  "@videoQueue": {
+    "description": "Label for button to display the video queue"
+  },
+  "videoFilterHideLabel": "隱藏",
+  "@videoFilterHideLabel": {
+    "description": "Label to hide videos"
+  },
+  "distractionFreeMode": "無干擾模式",
+  "@distractionFreeMode": {
+    "description": "title for distraction free mode settings"
+  },
+  "sponsorBlockCategoryMusicOffTopicDescription": "僅適用於音樂影片。這只應該用於音樂影片的部分，這些部分尚未被其他類別涵蓋。",
+  "@sponsorBlockCategoryMusicOffTopicDescription": {
+    "description": "Only for use in music videos. This only should be used for sections of music videos that aren't already covered by another category."
+  },
+  "channelNotificationTitle": "{channel} 的新影片",
+  "@channelNotificationTitle": {
+    "description": "Title for the channel notifications when there are new videos",
+    "placeholders": {
+      "channel": {
+        "type": "String",
+        "example": "MKBHD"
+      }
+    }
+  },
+  "sponsorBlockCategoryPreview": "預覽/回顧",
+  "@sponsorBlockCategoryPreview": {
+    "description": "Sponsorblock 'Preview' Category"
+  },
+  "notificationsDescription": "啟用並檢視您收到的通知內容",
+  "@notificationsDescription": {
+    "description": "Setting description for notifications"
+  },
+  "searchHistory": "搜尋紀錄",
+  "@searchHistory": {
+    "description": "Settings label for search history"
+  },
+  "redirectInvidiousLink": "分享 Invidious 重定向連結",
+  "@redirectInvidiousLink": {
+    "description": "asking user to share redirecting invidious link"
+  },
+  "enabled": "已啟用",
+  "@enabled": {
+    "description": "Text to show something is enabled"
+  },
+  "themeBrightness": "主題",
+  "@themeBrightness": {
+    "description": "Ask the user to user dark / light / system theme"
+  },
+  "navigationBarLabelAlwaysShowing": "永遠顯示標籤",
+  "@navigationBarLabelAlwaysShowing": {
+    "description": "Label always showing option for navigation bar"
+  },
+  "videoFilterType": "類型",
+  "@videoFilterType": {
+    "description": "Label for filter type"
+  },
+  "searchSortRelevance": "關聯性",
+  "@searchSortRelevance": {
+    "description": "Sort search by relevance"
+  },
+  "addVideoFilter": "建立篩選器",
+  "@addVideoFilter": {
+    "description": "Title when creating a new filter"
+  },
+  "videoFilterDescriptionString": "{hideOrFilter} 影片，其中 {type} {operation} ''{value}''。",
+  "@videoFilterDescriptionString": {
+    "description": "Human readable description of a video filter, in this case is it for string comparison, example: Hide videos where the name of the video does not contain the following string 'test' (Do not translate text between { })",
+    "placeholders": {
+      "hideOrFilter": {
+        "type": "String",
+        "example": "Hide"
+      },
+      "type": {
+        "type": "String",
+        "example": "video title"
+      },
+      "operation": {
+        "type": "String",
+        "example": "does not contain"
+      },
+      "value": {
+        "type": "String",
+        "example": "some filter text"
+      }
+    }
+  },
+  "customizeAppLayoutExplanation": "選擇您希望出現在主應用程式導覽列中的哪些區塊。點選首頁圖示選擇應用程式啟動時顯示哪個螢幕。您可以透過拖動來重新排序區塊。",
+  "@customizeAppLayoutExplanation": {
+    "description": ""
+  },
+  "authentication": "驗證",
+  "@authentication": {
+    "description": "Label for server settings related to authentications"
+  },
+  "deArrowSettingDescription": "替換點選誘餌標題和縮圖",
+  "@deArrowSettingDescription": {
+    "description": "Description for dearrow"
+  },
+  "clearSearchHistory": "清除搜尋紀錄",
+  "@clearSearchHistory": {
+    "description": "Settings label for clearing search history"
+  },
+  "deArrowReplaceThumbnailsDescription": "除標題外，還替換影片縮圖",
+  "@deArrowReplaceThumbnailsDescription": {
+    "description": "Description for DeArrow setting switch"
+  },
+  "skipSslVerification": "跳過 SSL 憑證驗證",
+  "@skipSslVerification": {
+    "description": "Setting label to skip ssl certification verification"
+  },
+  "fillFullscreen": "最大化影片以適應螢幕",
+  "@fillFullscreen": {
+    "description": "Title to maximize video to fit screen"
+  },
+  "videoDownloadAudioOnly": "僅音訊",
+  "@videoDownloadAudioOnly": {
+    "description": "Label for toggle to download audio only "
+  },
+  "downloads": "下載",
+  "@downloads": {
+    "description": "Downloads"
+  },
+  "downloadsPlayAll": "播放全部",
+  "@downloadsPlayAll": {
+    "description": "Button to play all downloaded videos"
+  },
+  "videoFilterOperation": "操作",
+  "@videoFilterOperation": {
+    "description": "Label for filter operation"
+  },
+  "searchSortUploadDate": "上傳日期",
+  "@searchSortUploadDate": {
+    "description": "Sort search by upload date"
+  },
+  "username": "使用者名稱",
+  "@username": {
+    "description": "Username label for login to a server"
+  },
+  "playlistNotificationContent": "{playlist} 播放清單中有 {count, plural, =0{無新影片} =1{1部新影片} other{{count}部新影片}}",
+  "@playlistNotificationContent": {
+    "description": "Content for playlist notification when there are new videos",
+    "placeholders": {
+      "playlist": {
+        "type": "String",
+        "example": "Lo-Fi girl"
+      },
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "sponsorBlockCategorySponsor": "贊助商",
+  "@sponsorBlockCategorySponsor": {
+    "description": "Sponsor block 'Sponsor' Category"
+  },
+  "useProxy": "代理影片",
+  "@useProxy": {
+    "description": "label for settings switch to proxy videos from server"
+  },
+  "videoListed": "公開",
+  "@videoListed": {
+    "description": "Status of a publicly available video"
+  },
+  "videoFilterHideAllFromChannel": "篩選頻道的所有影片",
+  "@videoFilterHideAllFromChannel": {
+    "description": "Label for video filter switch to allow to hide all videos from a channel"
+  },
+  "themeDark": "暗色",
+  "@themeDark": {
+    "description": "Dark theme"
+  },
+  "enableSearchHistory": "啟用搜尋紀錄",
+  "@enableSearchHistory": {
+    "description": "Settings label for enabling search history"
+  },
+  "videoFilterNoFilters": "沒有影片篩選器，點選下方的 '+' 按鈕開始新增篩選器。",
+  "@videoFilterNoFilters": {
+    "description": "Label when there are no video filters"
+  },
+  "searchHistoryLimit": "搜尋紀錄限制",
+  "@searchHistoryLimit": {
+    "description": "Settings label for search history limit"
+  },
+  "cookieLoginDescription": "如果您在使用 token 驗證時遇到問題，請使用此方法",
+  "@cookieLoginDescription": {
+    "description": "Cookie log in description"
+  },
+  "videoFilterApplyDateToFilter": "在指定的時間篩選影片",
+  "@videoFilterApplyDateToFilter": {
+    "description": "Label for switch to allow user to customize video filter and set days of week and time to them"
+  },
+  "videoFiltered": "影片因以下原因被篩選：",
+  "@videoFiltered": {
+    "description": "Label shown on video list when it is filtered out"
+  },
+  "layoutEditorExplanation": "您可以決定在首頁上顯示什麼，您可以有最多 2 個帶有水平滾動的小檢視和一個大型來源。",
+  "@layoutEditorExplanation": {
+    "description": "text to explain the home layout editor"
+  },
+  "to": "到",
+  "@to": {
+    "description": "To word as in 'From xx To xx')"
+  },
+  "subscriptionNotificationTitle": "您的訂閱中有新影片",
+  "@subscriptionNotificationTitle": {
+    "description": "Title for the notification showing that there are new videos from the subscription feed"
+  },
+  "addToPlaylist": "新增至播放清單",
+  "@addToPlaylist": {
+    "description": "Label to add a video to a playlist"
+  },
+  "logsCopied": "日誌已複製到剪貼簿",
+  "@logsCopied": {
+    "description": "Message to tell user that logs have been copied to the clipboard"
+  },
+  "deleteChannelNotificationContent": "您將不再收到來自此頻道的任何通知。",
+  "@deleteChannelNotificationContent": {
+    "description": "Title for dialog to confirm whether to delete channel notifications"
+  },
+  "sponsorBlockCategoryFiller": "填充片段/笑話",
+  "@sponsorBlockCategoryFiller": {
+    "description": "Sponsorblock 'Filler' Category"
+  },
+  "subscriptionNotificationDescription": "如果您已登入到目前執行個體，則會收到訂閱來源中新影片的通知",
+  "@subscriptionNotificationDescription": {
+    "description": "Description for subscription notifications"
+  },
+  "noHistory": "沒有觀看紀錄，它將在觀看一些影片後出現在這裡",
+  "@noHistory": {
+    "description": "Message when the user visits the history tab but it's empty"
+  },
+  "videoFilterDayOfWeekDescription": "您可以選擇性地選擇篩選器適用的星期幾和時間，來達到例如避免體育賽事劇透的目的。",
+  "@videoFilterDayOfWeekDescription": {
+    "description": ""
+  },
+  "sponsorBlockCategoryInteractionDescription": "當內容中間有短暫的提醒喜歡、訂閱或關注他們時。如果它很長或關於某些特定的事情，則應該歸類為自我推廣。",
+  "@sponsorBlockCategoryInteractionDescription": {
+    "description": "Sponsor block 'Interaction' Category description"
+  },
+  "videoFilterWholeChannel": "從頻道 {hideOrFilter} 所有影片",
+  "@videoFilterWholeChannel": {
+    "description": "Label for whole channel filtering",
+    "placeholders": {
+      "hideOrFilter": {
+        "type": "String",
+        "example": "Hide"
+      }
+    }
+  },
+  "sponsorBlockCategoryOutro": "結尾卡片/片尾字幕",
+  "@sponsorBlockCategoryOutro": {
+    "description": "Outro block 'Outro' Category"
+  },
+  "autoplayVideoOnLoadDescription": "影片載入後自動開始播放",
+  "@autoplayVideoOnLoadDescription": {
+    "description": "Description for the autoplay video on load setting"
+  },
+  "notifications": "通知",
+  "@notifications": {
+    "description": "Notification settings title"
+  },
+  "pressDownToShowSettings": "按下以顯示設定",
+  "@pressDownToShowSettings": {
+    "description": "Instruction on how to show video settings when playing a video on TV"
+  },
+  "unSubscribeQuestion": "取消訂閱？",
+  "@unSubscribeQuestion": {
+    "description": "Title for dialog if a user wants to unsubscribe in the subscribtion management screen"
+  },
+  "sponsorBlockCategoryUnpaidSelfPromoDescription": "與「贊助商」類似，但不包括未付費或自我推廣。這包括有關商品、贊助或他們合作的人的資訊的部分。 ",
+  "@sponsorBlockCategoryUnpaidSelfPromoDescription": {
+    "description": "Sponsor block 'Unpaid/Self promotion' Category description"
+  },
+  "download": "下載",
+  "@download": {
+    "description": "A single download or CTA for downloading a video"
+  },
+  "videoFilterHide": "隱藏篩選的影片",
+  "@videoFilterHide": {
+    "description": "Label for settings to hide filtered videos"
+  },
+  "library": "圖書館",
+  "@library": {
+    "description": "Name for user library"
+  },
+  "sponsorBlockCategorySponsorDescription": "付費推廣、付費推薦和直接廣告。不包括自我推廣或免費為他們喜歡的事業/創作者/網站/產品喊話。",
+  "@sponsorBlockCategorySponsorDescription": {
+    "description": "Sponsor block 'Sponsor' Category description"
+  },
+  "shorts": "Shorts",
+  "@shorts": {
+    "description": "Youtube shorts"
+  },
+  "subscriptionNotification": "訂閱通知",
+  "@subscriptionNotification": {
+    "description": "Title for subscriptions notifications"
+  },
+  "wrongUsernamePassword": "使用者名稱或密碼錯誤",
+  "@wrongUsernamePassword": {
+    "description": "Error message when authentication fails"
+  },
+  "editVideoFilter": "編輯篩選器",
+  "@editVideoFilter": {
+    "description": "Title when editting a filter"
+  },
+  "videoFilterStartTime": "開始時間",
+  "@videoFilterStartTime": {
+    "description": "Title for filter start time"
+  },
+  "videoPlayer": "影片播放器",
+  "@videoPlayer": {
+    "description": "Title for video player related options"
+  },
+  "distractionFreeModeDescription": "停用影片評論和推薦",
+  "@distractionFreeModeDescription": {
+    "description": "Description for distraction free mode"
+  },
+  "followSystem": "跟隨系統",
+  "@followSystem": {
+    "description": "Follow system label"
+  },
+  "deletePlaylistNotificationContent": "您將不再收到來自此播放清單的任何通知。",
+  "@deletePlaylistNotificationContent": {
+    "description": "Title for dialog to confirm whether to delete playlist notifications"
+  },
+  "returnYoutubeDislikeDescription": "使用 returnyoutubedislike.com 提供的 API 顯示預估的影片不喜歡數",
+  "@returnYoutubeDislikeDescription": {
+    "description": "ReturnYoutubeDislike setting description"
+  },
+  "blackBackgroundDescription": "適用於 OLED 螢幕的深色主題",
+  "@blackBackgroundDescription": {
+    "description": "Description for dark background setting"
+  },
+  "videoFilterTimeOfDayFromTo": "從 {from} 到 {to}",
+  "@videoFilterTimeOfDayFromTo": {
+    "description": "Time of day range",
+    "placeholders": {
+      "from": {
+        "type": "String",
+        "example": "3:00 AM"
+      },
+      "to": {
+        "type": "String",
+        "example": "5:00 PM"
+      }
+    }
+  },
+  "subtitleFontSize": "字幕字型大小",
+  "@subtitleFontSize": {
+    "description": "Settings label for the size of the subtitles"
+  },
+  "channelNotificationContent": "{channel} 有 {count, plural, =0{無新影片} =1{1部新影片} other{{count}部新影片}}",
+  "@channelNotificationContent": {
+    "description": "Content for channel notification when there are new videos",
+    "placeholders": {
+      "channel": {
+        "type": "String",
+        "example": "MKBHD"
+      },
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "shareLinkWithTimestamp": "新增時間戳記",
+  "@shareLinkWithTimestamp": {
+    "description": "asking user to share link along with timestamp"
+  },
+  "videoFilterDayOfWeek": "選擇套用篩選器的天數",
+  "@videoFilterDayOfWeek": {
+    "description": "Title for day selection for the filter"
+  },
+  "sponsorBlockCategoryPreviewDescription": "顯示在此影片或系列中其他影片中即將出現的內容的剪輯集，其中所有資訊都會在影片後面重複。",
+  "@sponsorBlockCategoryPreviewDescription": {
+    "description": "Sponsorblock 'Preview' Category description"
+  },
+  "tokenLoginDescription": "推薦的登入方式",
+  "@tokenLoginDescription": {
+    "description": "Recommended way to log in"
+  },
+  "channel": "頻道",
+  "@channel": {
+    "description": "A single channel"
+  },
+  "subtitlesBackgroundDescription": "為字幕新增黑色背景以使其更易於閱讀",
+  "@subtitlesBackgroundDescription": {
+    "description": "Description for settings to set black background  for subtitles"
+  },
+  "home": "首頁",
+  "@home": {
+    "description": "Label for Home browsing tab"
+  },
+  "videoFilterTypeVideoLength": "影片長度（秒）",
+  "@videoFilterTypeVideoLength": {
+    "description": "Label for video filter video length"
+  },
+  "videoFiltersSettingTileDescriptions": "定義篩選影片的規則",
+  "@videoFiltersSettingTileDescriptions": {
+    "description": "Description for the main settings page"
+  },
+  "videoFilterOperationLowerThan": "低於",
+  "@videoFilterOperationLowerThan": {
+    "description": "Label for video filter operation Lower than"
+  },
+  "deletePlaylistNotificationTitle": "刪除播放清單通知？",
+  "@deletePlaylistNotificationTitle": {
+    "description": "Title for dialog to confirm whether to delete playlist notifications"
+  },
+  "rememberPlaybackSpeedDescription": "自動將播放速度設定為最後選擇的速度",
+  "@rememberPlaybackSpeedDescription": {
+    "description": "Settings description for remembering playback speed"
+  },
+  "searchSortRating": "評分",
+  "@searchSortRating": {
+    "description": "Sort search by rating"
+  },
+  "sponsorBlockCategoryMusicOffTopic": "音樂：非音樂部分",
+  "@sponsorBlockCategoryMusicOffTopic": {
+    "description": "Sponsorblock 'MusicOffTopic' Category"
+  },
+  "videoFilterEditDescription": "選擇一個選擇性的頻道、篩選器類型、操作和值，從清單中篩選出影片。例如，類型：影片名稱，操作：包含，值：測試將排除所有名稱中包含 'test' 的影片。",
+  "@videoFilterEditDescription": {
+    "description": "Descriptive test for video filter set up"
+  },
+  "cookieLogin": "使用 cookie 登入",
+  "@cookieLogin": {
+    "description": "Text to login to a server using the cookie jar method"
+  },
+  "history": "紀錄",
+  "@history": {
+    "description": "User view history label"
+  },
+  "lockFullScreenToLandscapeDescription": "根據影片格式鎖定全螢幕方向，寬影片為橫向，豎向影片為豎向",
+  "@lockFullScreenToLandscapeDescription": {
+    "description": "Setting description for forcing video to landscape when in full screen"
+  },
+  "copyToClipBoard": "複製到剪貼簿",
+  "@copyToClipBoard": {
+    "description": "Text to copy something to clipboard"
+  },
+  "videoFilters": "影片篩選器",
+  "@videoFilters": {
+    "description": "Title for video filter settings"
+  },
+  "videoFilterEndTime": "結束時間",
+  "@videoFilterEndTime": {
+    "description": "Title for filter end time"
+  },
+  "rememberPlaybackSpeed": "記住播放速度",
+  "@rememberPlaybackSpeed": {
+    "description": "Setting label for remembering playback speed"
+  },
+  "enableNotificationDescriptions": "執行前臺服務以檢查並通知您正在監視的變化",
+  "@enableNotificationDescriptions": {
+    "description": ""
+  },
+  "subtitleFontSizeDescription": "如果您的裝置上的字幕太小或太大，可以更改字幕的大小",
+  "@subtitleFontSizeDescription": {
+    "description": "Settings description for subtitle size"
+  },
+  "searchSortViewCount": "觀看次數",
+  "@searchSortViewCount": {
+    "description": "Sort search by view count"
+  },
+  "search": "搜尋",
+  "@search": {
+    "description": "search title"
+  },
+  "clearHistoryQuestion": "清除紀錄？",
+  "@clearHistoryQuestion": {},
+  "sponsorBlockCategoryIntro": "間歇/介紹動畫",
+  "@sponsorBlockCategoryIntro": {
+    "description": "Sponsorblock 'Intro' Category"
+  },
+  "useDash": "使用 DASH",
+  "@useDash": {
+    "description": "Label on video options if a user wants to switch to dash urls instead of the regular quality selection"
+  },
+  "playNext": "播放下一部",
+  "@playNext": {
+    "description": "Label to play the video after the current one."
+  },
+  "logout": "登出",
+  "@logout": {
+    "description": "CTA to logout of a server"
+  },
+  "videoAlreadyDownloaded": "影片已經下載",
+  "@videoAlreadyDownloaded": {
+    "description": "Message when a user tries to download a video he already has"
+  },
+  "rememberSubtitleLanguageDescription": "如果可用，自動將字幕設定為最後選擇的語言",
+  "@rememberSubtitleLanguageDescription": {
+    "description": "Settings description for remembering subtitle language"
+  },
+  "optional": "選擇性的",
+  "@optional": {
+    "description": "Optional label"
+  },
+  "noDownloadedVideos": "沒有下載的影片，瀏覽，長按清單中的影片或在影片螢幕上點選下載按鈕進行下載",
+  "@noDownloadedVideos": {
+    "description": "Message showing when the user goes to the download screen but there are no offline videos."
+  },
+  "foregroundServiceUpdatingSubscriptions": "正在檢查訂閱...",
+  "@foregroundServiceUpdatingSubscriptions": {
+    "description": "Foreground service notification text when checking for new subscription videos"
+  },
+  "rememberSubtitleLanguage": "記住字幕語言",
+  "@rememberSubtitleLanguage": {
+    "description": "Settings label for remembering subtitle language"
+  },
+  "youCanSubscribeAgainLater": "您稍後可以再次訂閱此頻道",
+  "@youCanSubscribeAgainLater": {
+    "description": "Text for the unscubscribe confirmation dialog"
+  },
+  "videoUnlisted": "未列出",
+  "@videoUnlisted": {
+    "description": "Status of a video that is only accessible by link"
+  },
+  "secondsShortForm": "秒",
+  "@secondsShortForm": {
+    "description": "Short form for the word seconds"
+  },
+  "playbackSpeed": "播放速度",
+  "@playbackSpeed": {
+    "description": "Name of TV ui Playback speed"
+  },
+  "searchHistoryLimitDescription": "設定在建議中顯示多少先前的搜尋",
+  "@searchHistoryLimitDescription": {
+    "description": "Settings label for search history limit description"
+  },
+  "deleteChannelNotificationTitle": "刪除頻道通知？",
+  "@deleteChannelNotificationTitle": {
+    "description": "Title for dialog to confirm whether to delete channel notifications"
+  },
+  "subtitlesBackground": "字幕背景",
+  "@subtitlesBackground": {
+    "description": "Title for settings to set black background  for subtitles"
+  },
+  "quality": "畫質",
+  "@quality": {
+    "description": "Name of TV ui video settings"
+  },
+  "videoFilterAppliedOn": "套用於 {selectedDays}",
+  "@videoFilterAppliedOn": {
+    "description": "Readable text on when the filter should apply",
+    "placeholders": {
+      "selectedDays": {
+        "type": "String",
+        "example": "Monday, Wednesday, Friday"
+      }
+    }
+  },
+  "foregroundServiceNotificationTitle": "影片監控",
+  "@foregroundServiceNotificationTitle": {
+    "description": "Title for the foreground service running notification when the user wants to receive notifications"
+  },
+  "otherNotifications": "其他通知來源（鈴鐺圖示）",
+  "@otherNotifications": {
+    "description": "Title for settings section in the notification settings"
+  },
+  "layoutEditorAddVideoSource": "新增影片來源",
+  "@layoutEditorAddVideoSource": {
+    "description": "Label for button to allow user to add more video sources to the home screen"
+  },
+  "tokenLogin": "使用 token 登入",
+  "@tokenLogin": {
+    "description": "Textto login to a server using the recommended way"
+  },
+  "videoFailedDownloadRetry": "下載失敗，點選以重試",
+  "@videoFailedDownloadRetry": {
+    "description": "Shown on download manager when a download fails and prompt the user to retry"
+  },
+  "sponsorBlockSettingsQuickDescription": "選擇要跳過的片段類型",
+  "@sponsorBlockSettingsQuickDescription": {
+    "description": "Small description of what the sponsor block settings do"
+  },
+  "manageSubscriptions": "管理訂閱",
+  "@manageSubscriptions": {
+    "description": "Title of manage subscriptions page"
+  },
+  "navigationBarStyle": "導覽列樣式",
+  "@navigationBarStyle": {
+    "description": "Label for settings on customizing navigation bar style"
+  },
+  "notificationFrequencySliderLabel": "{hours, select,  24{1天} other{{hours}小時}}",
+  "@notificationFrequencySliderLabel": {
+    "description": "Short form for a number of hours going up to 1 day",
+    "hours": {
+      "type": "num",
+      "format": "compact"
+    }
+  },
+  "foregroundServiceNotificationContent": "將每 {hours, select, 1{小時} 24{天} other{每 {hours} 小時}} 檢查一次新影片",
+  "@foregroundServiceNotificationContent": {
+    "description": "Content for the foreground service running notification when the user wants to receive notifications",
+    "hours": {
+      "type": "num",
+      "format": "compact"
+    }
+  },
+  "searchHistoryDescription": "搜尋紀錄設定",
+  "@searchHistoryDescription": {
+    "description": "Description for search history settings"
+  },
+  "blackBackground": "黑色背景",
+  "@blackBackground": {
+    "description": "Settings name for black background"
+  },
+  "videoFilterValue": "值",
+  "@videoFilterValue": {
+    "description": "Label for filter value"
+  },
+  "useDashDescription": "DASH 自適應性串流有時可能會會因為受到 YouTube 的限制而導致問題。",
+  "@useDashDescription": {
+    "description": "Description for dash in the settings screen"
+  },
+  "videoFilterHideDescription": "預設情況下，篩選的影片不會被隱藏，而是以模糊的方式顯示，並說明為何被篩選。此設定將從清單中移除篩選的影片。",
+  "@videoFilterHideDescription": {
+    "description": ""
+  },
+  "sponsorBlockCategoryFillerDescription": "只為填充或幽默而新增的離題場景，並非理解影片主要內容所必需。這不應包括提供上下文或背景細節的片段。這是一個非常激進的類別，適用於您不想「開心」的時候。",
+  "@sponsorBlockCategoryFillerDescription": {
+    "description": "Sponsorblock 'Filler' Category description"
+  },
+  "videoDownloadStarted": "影片下載已開始",
+  "@videoDownloadStarted": {
+    "description": "Message when a video starts being downloaded"
+  },
+  "foregroundServiceUpdatingChannels": "正在檢查頻道...",
+  "@foregroundServiceUpdatingChannels": {
+    "description": "Foreground service notification text when checking for new channel videos"
+  },
+  "audio": "音訊",
+  "@audio": {
+    "description": "Name TV ui audio settings"
+  },
+  "notificationFrequencySettingsDescription": "應用程式將多久檢查一次新影片",
+  "@notificationFrequencySettingsDescription": {
+    "description": "Description for frequency settings"
+  },
+  "foregroundServiceUpdatingPlaylist": "正在檢查播放清單...",
+  "@foregroundServiceUpdatingPlaylist": {
+    "description": "Foreground service notification text when checking for new playlist videos"
+  },
+  "videoFilterOperationHigherThan": "高於",
+  "@videoFilterOperationHigherThan": {
+    "description": "Label for video filter operation Higher than"
+  },
+  "playNextAddedToQueue": "影片將接著播放",
+  "@playNextAddedToQueue": {
+    "description": "Pop up message to confirm that the video has been properly set to play next"
+  },
+  "autoplayVideoOnLoad": "載入時自動播放影片",
+  "@autoplayVideoOnLoad": {
+    "description": "Label for settings to enable autoplay when a video loads"
+  },
+  "subscriptionNotificationContent": "您的訂閱來源中有 {count, plural, =0{無新影片} =1{1部新影片} other{{count}部新影片}}",
+  "@subscriptionNotificationContent": {
+    "description": "Content for subscription notification",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "videoFilterTapToReveal": "點選以顯示",
+  "@videoFilterTapToReveal": {
+    "description": "Label to tell user to tap to show a filtered video"
+  },
+  "subtitles": "字幕",
+  "@subtitles": {
+    "description": "Name of TV ui subtitles settings"
+  },
+  "askToEnableBackgroundServiceTitle": "通知已關閉",
+  "@askToEnableBackgroundServiceTitle": {
+    "description": "If the users tries to turn on notifications for a channel but hasn't enable notifications in the app we need to turn it on for them"
+  }
 }
