@@ -1174,5 +1174,25 @@
   "subtitlesBackground": "ଉପଶବ୍ଦ ପୃଷ୍ଠଭୂମି",
   "@subtitlesBackground": {
     "description": "Title for settings to set black background  for subtitles"
+  },
+  "deArrowWarning": "DeArrowକୁ ସକ୍ରିୟ କରନ୍ତୁ ଆପର ବ୍ରାଉଜିଙ୍ଗ ଗତିକୁ ଉଲ୍ଲେଖନୀୟ ଭାବରେ ହ୍ରାସ କରିପାରିବେ କାରଣ ପ୍ରତ୍ୟେକ ଭିଡିଓ ପାଇଁ ଅତିରିକ୍ତ HTTP ଅନୁରୋଧ ଆବଶ୍ୟକ",
+  "@deArrowWarning": {
+    "description": "Warning message when the user enables DeArrow"
+  },
+  "deArrowReplaceThumbnails": "ଥମ୍ବନେଲଗୁଡିକ ବଦଳାନ୍ତୁ",
+  "@deArrowReplaceThumbnails": {
+    "description": "Settings title for checkbox on whether the thumbnail should be replaced as well"
+  },
+  "enabled": "ସକ୍ରିୟ",
+  "@enabled": {
+    "description": "Text to show something is enabled"
+  },
+  "deArrowSettingDescription": "କ୍ଲିକ ବାଟ ଶୀର୍ଷକ ଏବଂ ବୃହତ ନଖଗୁଡ଼ିକୁ ବଦଳାନ୍ତୁ",
+  "@deArrowSettingDescription": {
+    "description": "Description for dearrow"
+  },
+  "deArrowReplaceThumbnailsDescription": "ଟାଇଟଲ୍ ସହିତ ଭିଡିଓ ଥମ୍ବନେଲଗୁଡିକ ବଦଳାନ୍ତୁ",
+  "@deArrowReplaceThumbnailsDescription": {
+    "description": "Description for DeArrow setting switch"
   }
 }
