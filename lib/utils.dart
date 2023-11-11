@@ -31,7 +31,7 @@ const List<LogicalKeyboardKey> selectKeys = [
   LogicalKeyboardKey.select,
   LogicalKeyboardKey.open
 ];
-const List<int> selectPhysicalKeys = [0x1100000017, 0x00000017];
+const List<int> selectPhysicalKeys = [];
 
 bool isOk(LogicalKeyboardKey key, {PhysicalKeyboardKey? physicalKeyboardKey}) {
   log.fine('Received key event, Logical: ${key.debugName}, Physical ${physicalKeyboardKey?.debugName}');
