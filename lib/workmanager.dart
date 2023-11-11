@@ -52,8 +52,6 @@ _backgroundCheck() async {
     await _handleSubscriptionsNotifications();
     await _handleChannelNotifications();
     await _handlePlaylistNotifications();
-
-    service.syncHistory();
   } catch (e) {
     print('we have a background service error: ${e}');
   } finally {

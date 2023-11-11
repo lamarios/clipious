@@ -39,12 +39,8 @@ class AppCubit extends Cubit<AppState> {
     }
     selectIndex(selectedIndex);
 
-    // we only sync the history when the app doesn't run the foreground service
-    if((db.getSettings(BACKGROUND_NOTIFICATIONS)?.value ?? "false") == "false") {
-      service.syncHistory();
-    }
+    service.syncHistory();
   }
-
 
   @override
   close() async {
