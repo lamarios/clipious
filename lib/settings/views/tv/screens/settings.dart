@@ -59,6 +59,10 @@ class TVSettingsScreen extends StatelessWidget {
     AutoRouter.of(context).push(const TvSearchHistorySettingsRoute());
   }
 
+  openAppLayout(BuildContext context) {
+    AutoRouter.of(context).push(const TvAppLayoutSettingsRoute());
+  }
+
   showSelectLanguage(BuildContext context) {
     var localsList = AppLocalizations.supportedLocales;
     var localsStrings = localsList.map((e) => e.nativeDisplayLanguageScript ?? '').toList();
@@ -112,6 +116,11 @@ class TVSettingsScreen extends StatelessWidget {
               children: [
                 SettingsTitle(title: locals.browsing),
                 SettingsTile(
+                  title: locals.customizeAppLayout,
+                  description: _.appLayout.map((e) => e.getLabel(locals)).join(", "),
+                  onSelected: (context) => openAppLayout(context),
+                ),
+                SettingsTile(
                   title: locals.country,
                   description: _.country.name,
                   onSelected: (context) => openSelectCountry(context),
@@ -134,8 +143,13 @@ class TVSettingsScreen extends StatelessWidget {
                 ),
                 SettingsTile(
                   title: 'DeArrow',
-                  description: _.dearrow ? locals.enabled :  locals.deArrowSettingDescription,
+                  description: _.dearrow ? locals.enabled : locals.deArrowSettingDescription,
                   onSelected: openDearrowSettings,
+                ),
+                SettingsTile(
+                  title: locals.videoFilters,
+                  description: locals.videoFiltersSettingTileDescriptions,
+                  onSelected: (context) => AutoRouter.of(context).push(const TvFilterListSettingsRoute()),
                 ),
                 SettingsTitle(title: locals.servers),
                 BlocBuilder<AppCubit, AppState>(

@@ -112,6 +112,7 @@ class VideoFilterEditCubit extends Cubit<VideoFilterEditState> {
     switch (state.filter?.operation) {
       case FilterOperation.higherThan:
       case FilterOperation.lowerThan:
+        print('YOOO');
         return true;
       default:
         return false;

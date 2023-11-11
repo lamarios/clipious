@@ -154,6 +154,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const TVSettingsScreen(),
       );
     },
+    TvAppLayoutSettingsRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const TvAppLayoutSettingsScreen(),
+      );
+    },
     TvChannelRoute.name: (routeData) {
       final args = routeData.argsAs<TvChannelRouteArgs>();
       return AutoRoutePage<dynamic>(
@@ -168,6 +174,24 @@ abstract class _$AppRouter extends RootStackRouter {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const TvDearrowSettingsScreen(),
+      );
+    },
+    TvFilterEditSettingsRoute.name: (routeData) {
+      final args = routeData.argsAs<TvFilterEditSettingsRouteArgs>(
+          orElse: () => const TvFilterEditSettingsRouteArgs());
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: TvFilterEditSettingsScreen(
+          key: args.key,
+          channelId: args.channelId,
+          filter: args.filter,
+        ),
+      );
+    },
+    TvFilterListSettingsRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const TvFilterListSettingsScreen(),
       );
     },
     TvGridRoute.name: (routeData) {
@@ -292,6 +316,7 @@ abstract class _$AppRouter extends RootStackRouter {
           obscureText: args.obscureText,
           autofillHints: args.autofillHints,
           decoration: args.decoration,
+          keyboardType: args.keyboardType,
         ),
       );
     },
@@ -742,6 +767,20 @@ class TVSettingsRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [TvAppLayoutSettingsScreen]
+class TvAppLayoutSettingsRoute extends PageRouteInfo<void> {
+  const TvAppLayoutSettingsRoute({List<PageRouteInfo>? children})
+      : super(
+          TvAppLayoutSettingsRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'TvAppLayoutSettingsRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
 /// [TvChannelScreen]
 class TvChannelRoute extends PageRouteInfo<TvChannelRouteArgs> {
   TvChannelRoute({
@@ -789,6 +828,64 @@ class TvDearrowSettingsRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'TvDearrowSettingsRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [TvFilterEditSettingsScreen]
+class TvFilterEditSettingsRoute
+    extends PageRouteInfo<TvFilterEditSettingsRouteArgs> {
+  TvFilterEditSettingsRoute({
+    Key? key,
+    String? channelId,
+    VideoFilter? filter,
+    List<PageRouteInfo>? children,
+  }) : super(
+          TvFilterEditSettingsRoute.name,
+          args: TvFilterEditSettingsRouteArgs(
+            key: key,
+            channelId: channelId,
+            filter: filter,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'TvFilterEditSettingsRoute';
+
+  static const PageInfo<TvFilterEditSettingsRouteArgs> page =
+      PageInfo<TvFilterEditSettingsRouteArgs>(name);
+}
+
+class TvFilterEditSettingsRouteArgs {
+  const TvFilterEditSettingsRouteArgs({
+    this.key,
+    this.channelId,
+    this.filter,
+  });
+
+  final Key? key;
+
+  final String? channelId;
+
+  final VideoFilter? filter;
+
+  @override
+  String toString() {
+    return 'TvFilterEditSettingsRouteArgs{key: $key, channelId: $channelId, filter: $filter}';
+  }
+}
+
+/// generated route for
+/// [TvFilterListSettingsScreen]
+class TvFilterListSettingsRoute extends PageRouteInfo<void> {
+  const TvFilterListSettingsRoute({List<PageRouteInfo>? children})
+      : super(
+          TvFilterListSettingsRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'TvFilterListSettingsRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
@@ -1178,6 +1275,7 @@ class TvTextFieldRoute extends PageRouteInfo<TvTextFieldRouteArgs> {
     bool? obscureText,
     Iterable<String>? autofillHints,
     InputDecoration? decoration,
+    TextInputType? keyboardType,
     List<PageRouteInfo>? children,
   }) : super(
           TvTextFieldRoute.name,
@@ -1192,6 +1290,7 @@ class TvTextFieldRoute extends PageRouteInfo<TvTextFieldRouteArgs> {
             obscureText: obscureText,
             autofillHints: autofillHints,
             decoration: decoration,
+            keyboardType: keyboardType,
           ),
           initialChildren: children,
         );
@@ -1214,6 +1313,7 @@ class TvTextFieldRouteArgs {
     this.obscureText,
     this.autofillHints,
     this.decoration,
+    this.keyboardType,
   });
 
   final Key? key;
@@ -1236,9 +1336,11 @@ class TvTextFieldRouteArgs {
 
   final InputDecoration? decoration;
 
+  final TextInputType? keyboardType;
+
   @override
   String toString() {
-    return 'TvTextFieldRouteArgs{key: $key, controller: $controller, autofocus: $autofocus, autocorrect: $autocorrect, focusNode: $focusNode, onSubmitted: $onSubmitted, textInputAction: $textInputAction, obscureText: $obscureText, autofillHints: $autofillHints, decoration: $decoration}';
+    return 'TvTextFieldRouteArgs{key: $key, controller: $controller, autofocus: $autofocus, autocorrect: $autocorrect, focusNode: $focusNode, onSubmitted: $onSubmitted, textInputAction: $textInputAction, obscureText: $obscureText, autofillHints: $autofillHints, decoration: $decoration, keyboardType: $keyboardType}';
   }
 }
 

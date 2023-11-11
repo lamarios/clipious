@@ -8,6 +8,7 @@ import 'package:objectbox/objectbox.dart';
 
 import '../../../downloads/states/download_manager.dart';
 import '../../../globals.dart';
+import '../../../main.dart';
 import '../../../playlists/views/components/playlist_list.dart';
 import '../../../settings/states/settings.dart';
 import '../../../utils/models/paginatedList.dart';
@@ -18,20 +19,28 @@ import '../../views/components/home.dart';
 
 part 'home_layout.g.dart';
 
+enum HomeDataSourceAppearance { tv, phone, both }
+
 enum HomeDataSource {
-  home(big: false, small: false), // used for app layout set-up
+  home(big: false, small: false, showOn: HomeDataSourceAppearance.phone), // used for app layout set-up
   popular,
   trending,
   subscription,
-  history,
+  history(showOn: HomeDataSourceAppearance.phone),
   playlist,
-  downloads,
-  searchHistory;
+  downloads(showOn: HomeDataSourceAppearance.phone),
+  searchHistory(showOn: HomeDataSourceAppearance.phone),
+  search(showOn: HomeDataSourceAppearance.tv);
 
   final bool small;
   final bool big;
+  final HomeDataSourceAppearance showOn;
 
-  const HomeDataSource({this.small = true, this.big = true});
+  const HomeDataSource({this.small = true, this.big = true, this.showOn = HomeDataSourceAppearance.both});
+
+  static List<HomeDataSource> defaultSettings() {
+    return isTv ? [search, subscription, playlist, popular, trending] : [home, subscription, playlist, history];
+  }
 
   String getLabel(AppLocalizations locals) {
     return switch (this) {
@@ -43,13 +52,27 @@ enum HomeDataSource {
       (HomeDataSource.searchHistory) => locals.searchHistory,
       (HomeDataSource.subscription) => locals.subscriptions,
       (HomeDataSource.home) => locals.home,
+      (HomeDataSource.search) => locals.search,
+    };
+  }
+
+  IconData getIcon() {
+    return switch (this) {
+      (HomeDataSource.trending) => Icons.trending_up,
+      (HomeDataSource.popular) => Icons.local_fire_department,
+      (HomeDataSource.playlist) => Icons.playlist_play,
+      (HomeDataSource.history) => Icons.history,
+      (HomeDataSource.downloads) => Icons.download,
+      (HomeDataSource.searchHistory) => Icons.saved_search,
+      (HomeDataSource.subscription) => Icons.subscriptions,
+      (HomeDataSource.home) => Icons.home,
+      (HomeDataSource.search) => Icons.search,
     };
   }
 
   bool isPermitted(BuildContext context) {
     return switch (this) {
-      (HomeDataSource.subscription || HomeDataSource.playlist || HomeDataSource.history) =>
-        context.read<AppCubit>().isLoggedIn,
+      (HomeDataSource.subscription || HomeDataSource.playlist || HomeDataSource.history) => context.read<AppCubit>().isLoggedIn,
       (HomeDataSource.searchHistory) => context.read<SettingsCubit>().state.useSearchHistory,
       (_) => true
     };
@@ -58,18 +81,15 @@ enum HomeDataSource {
   Widget getBottomBarNavigationWidget(BuildContext context) {
     var locals = AppLocalizations.of(context)!;
     return switch (this) {
-      (HomeDataSource.trending) => NavigationDestination(icon: const Icon(Icons.trending_up), label: getLabel(locals)),
-      (HomeDataSource.popular) =>
-        NavigationDestination(icon: const Icon(Icons.local_fire_department), label: getLabel(locals)),
-      (HomeDataSource.playlist) =>
-        NavigationDestination(icon: const Icon(Icons.playlist_play), label: getLabel(locals)),
-      (HomeDataSource.history) => NavigationDestination(icon: const Icon(Icons.history), label: getLabel(locals)),
-      (HomeDataSource.downloads) => NavigationDestination(icon: const Icon(Icons.download), label: getLabel(locals)),
-      (HomeDataSource.searchHistory) =>
-        NavigationDestination(icon: const Icon(Icons.saved_search), label: getLabel(locals)),
-      (HomeDataSource.subscription) =>
-        NavigationDestination(icon: const Icon(Icons.subscriptions), label: getLabel(locals)),
-      (HomeDataSource.home) => NavigationDestination(icon: const Icon(Icons.home), label: getLabel(locals)),
+      (HomeDataSource.trending) => NavigationDestination(icon: Icon(getIcon()), label: getLabel(locals)),
+      (HomeDataSource.popular) => NavigationDestination(icon: Icon(getIcon()), label: getLabel(locals)),
+      (HomeDataSource.playlist) => NavigationDestination(icon: Icon(getIcon()), label: getLabel(locals)),
+      (HomeDataSource.history) => NavigationDestination(icon: Icon(getIcon()), label: getLabel(locals)),
+      (HomeDataSource.downloads) => NavigationDestination(icon: Icon(getIcon()), label: getLabel(locals)),
+      (HomeDataSource.searchHistory) => NavigationDestination(icon: Icon(getIcon()), label: getLabel(locals)),
+      (HomeDataSource.subscription) => NavigationDestination(icon: Icon(getIcon()), label: getLabel(locals)),
+      (HomeDataSource.home) => NavigationDestination(icon: Icon(getIcon()), label: getLabel(locals)),
+      (HomeDataSource.search) => NavigationDestination(icon: Icon(getIcon()), label: getLabel(locals))
     };
   }
 
@@ -142,10 +162,9 @@ enum HomeDataSource {
                   paginatedVideoList: PageBasedPaginatedList<VideoInList>(
                       getItemsFunc: (page, maxResults) =>
                           // we get the data for each video
-                          service.getUserHistory(page, maxResults).then((value) => Future.wait(value
-                              .map((e) async =>
-                                  (await HistoryVideoCache.fromVideoIdToVideo(e)).toBaseVideo().toVideoInList())
-                              .toList())),
+                          service
+                              .getUserHistory(page, maxResults)
+                              .then((value) => Future.wait(value.map((e) async => (await HistoryVideoCache.fromVideoIdToVideo(e)).toBaseVideo().toVideoInList()).toList())),
                       maxResults: 20),
                 )
               : const HistoryView(),
@@ -183,8 +202,6 @@ class HomeLayout {
   List<String> get dbSmallSources => smallSources.map((e) => e.name).toList();
 
   set dbSmallSources(List<String> values) {
-    smallSources = values
-        .map((e) => HomeDataSource.values.where((element) => element.name == e).firstOrNull ?? HomeDataSource.trending)
-        .toList();
+    smallSources = values.map((e) => HomeDataSource.values.where((element) => element.name == e).firstOrNull ?? HomeDataSource.trending).toList();
   }
 }

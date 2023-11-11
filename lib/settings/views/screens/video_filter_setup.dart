@@ -108,8 +108,6 @@ class VideoFilterSetupScreen extends StatelessWidget {
       create: (context) => VideoFilterEditCubit(VideoFilterEditState(filter: filter)),
       child: BlocBuilder<VideoFilterEditCubit, VideoFilterEditState>(builder: (context, _) {
         var cubit = context.read<VideoFilterEditCubit>();
-        print(_.filter?.daysOfWeek);
-        print(_.filter?.startTime);
         return Scaffold(
           appBar: AppBar(
             backgroundColor: colors.background,
