@@ -320,6 +320,17 @@ abstract class _$AppRouter extends RootStackRouter {
         ),
       );
     },
+    TvTimePickerRoute.name: (routeData) {
+      final args = routeData.argsAs<TvTimePickerRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: TvTimePickerScreen(
+          key: args.key,
+          value: args.value,
+          onTimePicked: args.onTimePicked,
+        ),
+      );
+    },
     TvVideoRoute.name: (routeData) {
       final args = routeData.argsAs<TvVideoRouteArgs>();
       return AutoRoutePage<dynamic>(
@@ -1341,6 +1352,49 @@ class TvTextFieldRouteArgs {
   @override
   String toString() {
     return 'TvTextFieldRouteArgs{key: $key, controller: $controller, autofocus: $autofocus, autocorrect: $autocorrect, focusNode: $focusNode, onSubmitted: $onSubmitted, textInputAction: $textInputAction, obscureText: $obscureText, autofillHints: $autofillHints, decoration: $decoration, keyboardType: $keyboardType}';
+  }
+}
+
+/// generated route for
+/// [TvTimePickerScreen]
+class TvTimePickerRoute extends PageRouteInfo<TvTimePickerRouteArgs> {
+  TvTimePickerRoute({
+    Key? key,
+    required String value,
+    required dynamic Function(String) onTimePicked,
+    List<PageRouteInfo>? children,
+  }) : super(
+          TvTimePickerRoute.name,
+          args: TvTimePickerRouteArgs(
+            key: key,
+            value: value,
+            onTimePicked: onTimePicked,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'TvTimePickerRoute';
+
+  static const PageInfo<TvTimePickerRouteArgs> page =
+      PageInfo<TvTimePickerRouteArgs>(name);
+}
+
+class TvTimePickerRouteArgs {
+  const TvTimePickerRouteArgs({
+    this.key,
+    required this.value,
+    required this.onTimePicked,
+  });
+
+  final Key? key;
+
+  final String value;
+
+  final dynamic Function(String) onTimePicked;
+
+  @override
+  String toString() {
+    return 'TvTimePickerRouteArgs{key: $key, value: $value, onTimePicked: $onTimePicked}';
   }
 }
 

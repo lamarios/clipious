@@ -14,6 +14,7 @@ import 'package:invidious/utils/views/tv/components/searchable_dynamic_select_fr
 import 'package:invidious/utils/views/tv/components/tv_button.dart';
 import 'package:invidious/utils/views/tv/components/tv_overscan.dart';
 import 'package:invidious/utils/views/tv/components/tv_text_field.dart';
+import 'package:invidious/utils/views/tv/components/tv_time_picker.dart';
 
 import '../../../../channels/models/channel.dart';
 import '../../../../utils.dart';
@@ -177,10 +178,11 @@ class TvFilterEditSettingsScreen extends StatelessWidget {
                                                 day,
                                                 style: textTheme.titleLarge,
                                               ),
-                                              if(isSelected) Padding(
-                                                padding: const EdgeInsets.only(left:8.0),
-                                                child: const Icon(Icons.check).animate().slideX(duration: animationDuration, curve: Curves.easeInOutQuad).fadeIn(duration: animationDuration),
-                                              )
+                                              if (isSelected)
+                                                Padding(
+                                                  padding: const EdgeInsets.only(left: 8.0),
+                                                  child: const Icon(Icons.check).animate().slideX(duration: animationDuration, curve: Curves.easeInOutQuad).fadeIn(duration: animationDuration),
+                                                )
                                             ],
                                           ),
                                         )),
@@ -188,6 +190,30 @@ class TvFilterEditSettingsScreen extends StatelessWidget {
                                 }).toList()),
                           ),
                         ),
+                        const SizedBox(height: 8,),
+                        Visibility(
+                            visible: cubit.showDateSettings,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Text('${locals.from}:',style: textTheme.titleLarge,),
+                                    const SizedBox(width: 8,),
+                                    TvTimePicker(value: _.filter?.startTime ?? '00:00', onTimePicked: cubit.setStartTime),
+                                  ],
+                                ),
+                                Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Text('${locals.to}:', style: textTheme.titleLarge,),
+                                    const SizedBox(width: 8,),
+                                    TvTimePicker(value: _.filter?.endTime ?? '00:00', onTimePicked: cubit.setEndTime),
+                                  ],
+                                ),
+                              ],
+                            )),
                         SettingsTile(
                           title: locals.videoFilterHide,
                           description: locals.videoFilterHideDescription,
@@ -211,7 +237,7 @@ class TvFilterEditSettingsScreen extends StatelessWidget {
                           children: [
                             TvButton(
                               unfocusedColor: cubit.isFilterValid() ? null : Colors.transparent,
-                              focusedColor:  cubit.isFilterValid() ? null : Colors.transparent,
+                              focusedColor: cubit.isFilterValid() ? null : Colors.transparent,
                               onPressed: cubit.isFilterValid()
                                   ? (context) {
                                       cubit.onSave();

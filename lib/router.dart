@@ -41,6 +41,7 @@ import 'package:invidious/utils/models/paginatedList.dart';
 import 'package:invidious/utils/views/tv/components/select_from_list.dart';
 import 'package:invidious/utils/views/tv/components/tv_plain_text.dart';
 import 'package:invidious/utils/views/tv/components/tv_text_field.dart';
+import 'package:invidious/utils/views/tv/components/tv_time_picker.dart';
 import 'package:invidious/videos/models/base_video.dart';
 import 'package:invidious/videos/models/video_in_list.dart';
 import 'package:invidious/videos/views/screens/subscriptions.dart';
@@ -103,6 +104,7 @@ class AppRouter extends _$AppRouter {
             AutoRoute(page: TvAppLayoutSettingsRoute.page),
             AutoRoute(page: TvFilterEditSettingsRoute.page),
             AutoRoute(page: TvFilterListSettingsRoute.page),
+            AutoRoute(page: TvTimePickerRoute.page),
           ]
         : [
             AutoRoute(
