@@ -119,6 +119,8 @@ class VideoFilter {
 
     videos = videos?.map((v) => _innerFilterVideo(v, filters)).toList() ?? [];
 
+    videos.removeWhere((element) => element.filtered && element.filterHide);
+
     return videos;
   }
 

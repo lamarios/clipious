@@ -1,6 +1,7 @@
 import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/globals.dart';
@@ -163,16 +164,24 @@ class TvFilterEditSettingsScreen extends StatelessWidget {
                                   String day = getWeekdayName(e).substring(0, 1);
                                   var isSelected = _.filter?.daysOfWeek.contains(e) ?? false;
                                   return TvButton(
-                                    focusedColor: colors.secondary.withOpacity(0.4),
-                                    unfocusedColor: isSelected ? colors.primaryContainer : colors.primaryContainer.withOpacity(0.4),
                                     onPressed: (context) => cubit.toggleDay(e),
-                                    child: Container(
+                                    child: AnimatedContainer(
+                                        duration: animationDuration,
                                         decoration: const BoxDecoration(shape: BoxShape.circle),
                                         child: Padding(
                                           padding: const EdgeInsets.all(8.0),
-                                          child: Text(
-                                            day,
-                                            style: textTheme.titleLarge,
+                                          child: Row(
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: [
+                                              Text(
+                                                day,
+                                                style: textTheme.titleLarge,
+                                              ),
+                                              if(isSelected) Padding(
+                                                padding: const EdgeInsets.only(left:8.0),
+                                                child: const Icon(Icons.check).animate().slideX(duration: animationDuration, curve: Curves.easeInOutQuad).fadeIn(duration: animationDuration),
+                                              )
+                                            ],
                                           ),
                                         )),
                                   );

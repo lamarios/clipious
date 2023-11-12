@@ -206,7 +206,6 @@ class VideoFilterSetupScreen extends StatelessWidget {
                                     child: AnimatedContainer(
                                       padding: const EdgeInsets.all(8),
                                       margin: const EdgeInsets.symmetric(horizontal: 8),
-                                      width: 30,
                                       height: 30,
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
@@ -216,11 +215,17 @@ class VideoFilterSetupScreen extends StatelessWidget {
                                               : colors.primaryContainer.withOpacity(0.4)),
                                       duration: animationDuration,
                                       curve: Curves.easeInOutQuad,
-                                      child: Text(
-                                        day,
-                                        style: textTheme.bodySmall?.copyWith(
-                                            fontWeight: FontWeight.bold,
-                                            color: isSelected ? colors.onPrimaryContainer : colors.onBackground),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Text(
+                                            day,
+                                            style: textTheme.bodySmall?.copyWith(
+                                                fontWeight: FontWeight.bold,
+                                                color: isSelected ? colors.onPrimaryContainer : colors.onBackground),
+                                          ),
+                                          if(isSelected) const Icon(Icons.check, size: 14,).animate().slideX(duration: animationDuration, curve: Curves.easeInOutQuad).fadeIn(duration: animationDuration)
+                                        ],
                                       ),
                                     ),
                                   );

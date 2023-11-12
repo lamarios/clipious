@@ -223,7 +223,13 @@ class TvVideoScreen extends StatelessWidget {
                                                 ),
                                                 TvHorizontalVideoList(
                                                     paginatedVideoList: FixedItemList<VideoInList>(videoState.video?.recommendedVideos
-                                                            .map((e) => VideoInList(e.title, e.videoId, e.lengthSeconds, 0, e.author, '', 'authorUrl', 0, '', e.videoThumbnails))
+                                                            .map((e) {
+                                                              var videoInList = VideoInList(e.title, e.videoId, e.lengthSeconds, 0, e.author, '', 'authorUrl', 0, '', e.videoThumbnails);
+                                                              videoInList.filtered = e.filtered;
+                                                              videoInList.filterHide = e.filterHide;
+                                                              videoInList.matchedFilters = e.matchedFilters;
+                                                              return videoInList;
+                                                            })
                                                             .toList() ??
                                                         []))
                                               ]),

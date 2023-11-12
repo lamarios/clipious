@@ -55,7 +55,7 @@ class VideoList<T extends IdedVideo> extends StatelessWidget {
 
           List<IdedVideo> items = _.items;
           if (items.isNotEmpty && items[0] is VideoInList) {
-            items = filteredVideos<VideoInList>(_.items.cast());
+            // items = filteredVideos<VideoInList>(_.items.cast());
           }
 
           var gridCount = small ? 1 : getGridCount(context);

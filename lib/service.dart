@@ -12,7 +12,6 @@ import 'package:invidious/search/models/db/searchHistoryItem.dart';
 import 'package:invidious/search/models/search_results.dart';
 import 'package:invidious/search/models/search_sort_by.dart';
 import 'package:invidious/search/models/search_type.dart';
-import 'package:invidious/settings/models/db/video_filter.dart';
 import 'package:invidious/settings/models/errors/invidiousServiceError.dart';
 import 'package:invidious/utils/video_post_processing.dart';
 import 'package:invidious/videos/models/db/progress.dart';
@@ -142,7 +141,7 @@ class Service {
 
     var video = Video.fromJson(handleResponse(response));
     await DeArrow.processVideos([video]);
-    await DeArrow.processVideos(video.recommendedVideos);
+    video.recommendedVideos = (await postProcessVideos(video.recommendedVideos)).cast();
     return video;
   }
 
