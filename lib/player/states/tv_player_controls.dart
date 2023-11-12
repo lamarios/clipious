@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:invidious/player/states/player.dart';
 import 'package:logging/logging.dart';
 
+import '../../utils.dart';
 import '../../videos/models/video_in_list.dart';
 import '../models/mediaEvent.dart';
 
@@ -99,7 +100,7 @@ class TvPlayerControlsCubit extends Cubit<TvPlayerControlsState> {
           fastForward();
         } else if (event.logicalKey == LogicalKeyboardKey.arrowLeft) {
           fastRewind();
-        } else if (event.logicalKey == LogicalKeyboardKey.select) {
+        } else if (isOk(event.logicalKey)) {
           var state = this.state.copyWith();
           state.displayControls = true;
           emit(state);
