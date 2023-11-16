@@ -12,7 +12,6 @@ part 'add_to_playlist.g.dart';
 const String likePlaylistName = '❤️';
 
 class AddToPlaylistCubit extends Cubit<AddToPlaylistController> {
-
   final log = Logger('AddToPlaylistcubit');
 
   AddToPlaylistCubit(super.initialState) {
@@ -31,83 +30,76 @@ class AddToPlaylistCubit extends Cubit<AddToPlaylistController> {
   }
 
   Future<void> onReady() async {
-   await  getAllPlaylists();
-   await  countPlaylistsForVideo();
-   await  checkVideoLikeStatus();
+    await getAllPlaylists();
+    await countPlaylistsForVideo();
+    await checkVideoLikeStatus();
   }
 
   getAllPlaylists() async {
-    var state = this.state.copyWith();
+    emit(state.copyWith(loading: true));
+    late List<Playlist> playlists;
     if (state.isLoggedIn) {
-      state.playlists = await service.getUserPlaylists();
+      playlists = await service.getUserPlaylists();
     }
-    state.loading = false;
-    emit(state);
+    emit(state.copyWith(playlists: playlists, loading: false));
   }
 
-  Future<Playlist?> getPlaylist() async {
-    List<Playlist> playlists = await service.getUserPlaylists();
-    Playlist? pl = playlists.firstWhereOrNull((pl) => pl.title == likePlaylistName);
+  Future<Playlist?> likePlaylist() async {
+    Playlist? pl = state.playlists.firstWhereOrNull((pl) => pl.title == likePlaylistName);
 
     return pl;
   }
 
   checkVideoLikeStatus() async {
-    var state = this.state.copyWith();
-    Playlist? p = await getPlaylist();
+    Playlist? p = await likePlaylist();
     VideoInList? video = p?.videos.firstWhereOrNull((element) => element.videoId == state.videoId);
 
-    state.isVideoLiked = video != null;
+    bool isVideoLiked = video != null;
 
     if (!isClosed) {
-      emit(state);
+      emit(state.copyWith(isVideoLiked: isVideoLiked));
       log.fine('video is currently liked ? $state.isVideoLiked');
     }
   }
 
   Future<Playlist?> createPlayList() async {
     await service.createPlayList(likePlaylistName, "private");
-    return getPlaylist();
+    await onReady();
+    return likePlaylist();
   }
 
   countPlaylistsForVideo() async {
-    var state = this.state.copyWith();
-    List<Playlist> lists = await service.getUserPlaylists();
-
-    state.playListCount =
-        lists.where((list) => list.videos.indexWhere((video) => video.videoId == state.videoId) >= 0).length;
+    int playListCount =
+        state.playlists.where((list) => list.videos.indexWhere((video) => video.videoId == state.videoId) >= 0).length;
     log.fine('playlist count ${state.playListCount}');
     if (!isClosed) {
-      emit(state);
+      emit(state.copyWith(playListCount: playListCount));
     }
   }
 
   Future<void> toggleLike() async {
-    var state = this.state.copyWith();
-    state.loading = true;
-    emit(state);
+    emit(state.copyWith(loading: true));
 
-    state = this.state.copyWith();
-    await checkVideoLikeStatus();
-    Playlist? p = await getPlaylist();
+    await onReady();
+    Playlist? p = await likePlaylist();
     p ??= await createPlayList();
 
+    bool isVideoLiked = state.isVideoLiked;
     if (p != null && state.videoId != null) {
-      if (state.isVideoLiked) {
+      if (isVideoLiked) {
         log.fine('Video is liked, unliking it');
         VideoInList? v = p.videos.firstWhereOrNull((element) => element.videoId == state.videoId!);
         if (v?.indexId != null) {
           await service.deleteUserPlaylistVideo(p.playlistId, v!.indexId!);
-          state.isVideoLiked = !state.isVideoLiked;
+          isVideoLiked = isVideoLiked;
         }
       } else {
         log.fine('Video is not liked yet, we add it to the like playlist');
         await service.addVideoToPlaylist(p.playlistId, state.videoId!);
-        state.isVideoLiked = !state.isVideoLiked;
+        isVideoLiked = isVideoLiked;
       }
     }
-    state.loading = false;
-    emit(state);
+    emit(state.copyWith(isVideoLiked: isVideoLiked, loading: false));
     onReady();
   }
 
@@ -129,5 +121,6 @@ class AddToPlaylistController {
 
   AddToPlaylistController(this.videoId);
 
-  AddToPlaylistController._(this.playlists, this.playListCount, this.videoId, this.loading, this.isLoggedIn, this.isVideoLiked);
+  AddToPlaylistController._(
+      this.playlists, this.playListCount, this.videoId, this.loading, this.isLoggedIn, this.isVideoLiked);
 }
