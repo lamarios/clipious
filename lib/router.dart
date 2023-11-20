@@ -27,7 +27,10 @@ import 'package:invidious/settings/views/screens/sponsor_block_settings.dart';
 import 'package:invidious/settings/views/screens/video_filter.dart';
 import 'package:invidious/settings/views/screens/video_filter_setup.dart';
 import 'package:invidious/settings/views/screens/video_player.dart';
+import 'package:invidious/settings/views/tv/screens/app_layout.dart';
 import 'package:invidious/settings/views/tv/screens/dearrow_settings.dart';
+import 'package:invidious/settings/views/tv/screens/filter_edit.dart';
+import 'package:invidious/settings/views/tv/screens/filter_list.dart';
 import 'package:invidious/settings/views/tv/screens/manage_servers.dart';
 import 'package:invidious/settings/views/tv/screens/manage_single_server.dart';
 import 'package:invidious/settings/views/tv/screens/search_history_settings.dart';
@@ -38,6 +41,7 @@ import 'package:invidious/utils/models/paginatedList.dart';
 import 'package:invidious/utils/views/tv/components/select_from_list.dart';
 import 'package:invidious/utils/views/tv/components/tv_plain_text.dart';
 import 'package:invidious/utils/views/tv/components/tv_text_field.dart';
+import 'package:invidious/utils/views/tv/components/tv_time_picker.dart';
 import 'package:invidious/videos/models/base_video.dart';
 import 'package:invidious/videos/models/video_in_list.dart';
 import 'package:invidious/videos/views/screens/subscriptions.dart';
@@ -96,7 +100,11 @@ class AppRouter extends _$AppRouter {
             AutoRoute(page: TvManageSingleServerRoute.page),
             AutoRoute(page: TvSelectFromListRoute.page),
             AutoRoute(page: TvTextFieldRoute.page),
-            AutoRoute(page: TvDearrowSettingsRoute.page)
+            AutoRoute(page: TvDearrowSettingsRoute.page),
+            AutoRoute(page: TvAppLayoutSettingsRoute.page),
+            AutoRoute(page: TvFilterEditSettingsRoute.page),
+            AutoRoute(page: TvFilterListSettingsRoute.page),
+            AutoRoute(page: TvTimePickerRoute.page),
           ]
         : [
             AutoRoute(

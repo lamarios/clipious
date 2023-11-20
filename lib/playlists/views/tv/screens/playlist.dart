@@ -140,6 +140,8 @@ class TvPlaylistScreen extends PlaylistViewScreen {
                                           children: [
                                             Text(
                                               _.playlist.title,
+                                              maxLines: 1,
+                                              overflow: TextOverflow.ellipsis,
                                               style: textTheme.headlineLarge,
                                             ),
                                             Text(

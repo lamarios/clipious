@@ -5,6 +5,7 @@ import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/app/states/app.dart';
+import 'package:invidious/main.dart';
 import 'package:invidious/workmanager.dart';
 import 'package:locale_names/locale_names.dart';
 import 'package:logging/logging.dart';
@@ -486,7 +487,7 @@ class SettingsState {
 
   set useSearchHistory(bool b) => _set(USE_SEARCH_HISTORY, b);
 
-  List<HomeDataSource> get appLayout => (_get(APP_LAYOUT)?.value ?? '${HomeDataSource.home.name},${HomeDataSource.subscription.name},${HomeDataSource.playlist.name},${HomeDataSource.history.name}')
+  List<HomeDataSource> get appLayout => (_get(APP_LAYOUT)?.value ?? HomeDataSource.defaultSettings().map((e) => e.name).join(","))
       .split(',')
       .where((element) => element.isNotEmpty)
       .map((e) => HomeDataSource.values.firstWhere((element) => element.name == e))

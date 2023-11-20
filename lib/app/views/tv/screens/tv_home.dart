@@ -6,12 +6,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/app/states/tv_home.dart';
 import 'package:invidious/globals.dart';
+import 'package:invidious/settings/states/settings.dart';
 import 'package:invidious/utils/models/paginatedList.dart';
 import 'package:invidious/utils/views/tv/components/tv_button.dart';
 import 'package:invidious/utils/views/tv/components/tv_overscan.dart';
 import 'package:invidious/videos/views/components/subscriptions.dart';
 import 'package:invidious/videos/views/components/trending.dart';
 
+import '../../../../home/models/db/home_layout.dart';
 import '../../../../router.dart';
 import '../../../../utils/views/components/app_icon.dart';
 import '../../../../videos/views/components/popular.dart';
@@ -21,6 +23,7 @@ const overlayBackgroundOpacity = 0.8;
 const double overlayBlur = 25.0;
 GlobalKey popularTitle = GlobalKey(debugLabel: 'popular title');
 GlobalKey subscriptionTitle = GlobalKey(debugLabel: 'subscription title');
+GlobalKey trendingTitle = GlobalKey(debugLabel: 'trending title');
 
 @RoutePage()
 class TvHomeScreen extends StatelessWidget {
@@ -67,6 +70,8 @@ class TvHomeScreen extends StatelessWidget {
         child: Scaffold(
           body: BlocBuilder<TvHomeCubit, TvHomeState>(builder: (context, homeState) {
             var homeCubit = context.read<TvHomeCubit>();
+            var appLayout = context.select((SettingsCubit value) => value.state.appLayout);
+            var allowedPages = appLayout.where((element) => element.isPermitted(context)).toList();
             return BlocBuilder<AppCubit, AppState>(buildWhen: (previous, current) {
               return previous.server != current.server;
             }, builder: (context, _) {
@@ -104,112 +109,39 @@ class TvHomeScreen extends StatelessWidget {
                                     ],
                                   )),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.only(bottom: 8.0),
-                              child: TvButton(
-                                onFocusChanged: homeCubit.menuItemFocusChanged,
-                                onPressed: openSearch,
-                                unfocusedColor: colors.secondaryContainer.withOpacity(0.0),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8),
-                                  child: Row(
-                                    children: [
-                                      const Padding(
-                                        padding: EdgeInsets.only(right: 8.0),
-                                        child: Icon(Icons.search),
-                                      ),
-                                      if (homeState.expandMenu) MenuItemText(locals.search)
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Visibility(
-                              visible: app.isLoggedIn,
-                              child: Padding(
-                                padding: const EdgeInsets.only(bottom: 8.0),
-                                child: TvButton(
-                                  onFocusChanged: homeCubit.menuItemFocusChanged,
-                                  onPressed: openSubscriptions,
-                                  unfocusedColor: colors.secondaryContainer.withOpacity(0.0),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8),
-                                    child: Row(
-                                      children: [
-                                        const Padding(
-                                          padding: EdgeInsets.only(right: 8.0),
-                                          child: Icon(Icons.subscriptions),
+                            Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: allowedPages
+                                    .map(
+                                      (e) => Padding(
+                                        padding: const EdgeInsets.only(bottom: 8.0),
+                                        child: TvButton(
+                                          onFocusChanged: homeCubit.menuItemFocusChanged,
+                                          onPressed: (context) => switch (e) {
+                                            (HomeDataSource.search) => openSearch(context),
+                                            (HomeDataSource.subscription) => openSubscriptions(context),
+                                            (HomeDataSource.playlist) => openPlaylists(context),
+                                            (HomeDataSource.trending) => openTrending(context),
+                                            (HomeDataSource.popular) => openPopular(context),
+                                            (_) => const SizedBox.shrink()
+                                          },
+                                          unfocusedColor: colors.secondaryContainer.withOpacity(0.0),
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(8),
+                                            child: Row(
+                                              children: [
+                                                Padding(
+                                                  padding: const EdgeInsets.only(right: 8.0),
+                                                  child: Icon(e.getIcon()),
+                                                ),
+                                                if (homeState.expandMenu) MenuItemText(e.getLabel(locals))
+                                              ],
+                                            ),
+                                          ),
                                         ),
-                                        if (homeState.expandMenu) MenuItemText(locals.subscriptions)
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Visibility(
-                              visible: app.isLoggedIn,
-                              child: Padding(
-                                padding: const EdgeInsets.only(bottom: 8.0),
-                                child: TvButton(
-                                  onFocusChanged: homeCubit.menuItemFocusChanged,
-                                  onPressed: openPlaylists,
-                                  unfocusedColor: colors.secondaryContainer.withOpacity(0.0),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8),
-                                    child: Row(
-                                      children: [
-                                        const Padding(
-                                          padding: EdgeInsets.only(right: 8.0),
-                                          child: Icon(Icons.playlist_play),
-                                        ),
-                                        if (homeState.expandMenu) MenuItemText(locals.playlists)
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(bottom: 8.0),
-                              child: TvButton(
-                                onFocusChanged: homeCubit.menuItemFocusChanged,
-                                onPressed: openPopular,
-                                unfocusedColor: colors.secondaryContainer.withOpacity(0.0),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8),
-                                  child: Row(
-                                    children: [
-                                      const Padding(
-                                        padding: EdgeInsets.only(right: 8.0),
-                                        child: Icon(Icons.local_fire_department),
                                       ),
-                                      if (homeState.expandMenu) MenuItemText(locals.popular)
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(bottom: 8.0),
-                              child: TvButton(
-                                onFocusChanged: homeCubit.menuItemFocusChanged,
-                                onPressed: openTrending,
-                                unfocusedColor: colors.secondaryContainer.withOpacity(0.0),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8),
-                                  child: Row(
-                                    children: [
-                                      const Padding(
-                                        padding: EdgeInsets.only(right: 8.0),
-                                        child: Icon(Icons.trending_up),
-                                      ),
-                                      if (homeState.expandMenu) MenuItemText(locals.trending)
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
+                                    )
+                                    .toList()),
                             TvButton(
                               onFocusChanged: homeCubit.menuItemFocusChanged,
                               onPressed: (context) => openSettings(context),
@@ -239,51 +171,47 @@ class TvHomeScreen extends StatelessWidget {
                             physics: const NeverScrollableScrollPhysics(),
                             shrinkWrap: true,
                             // crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Visibility(
-                                key: subscriptionTitle,
-                                visible: app.isLoggedIn,
-                                child: Padding(
-                                  padding: const EdgeInsets.only(top: 16.0),
-                                  child: Text(
-                                    locals.subscriptions,
-                                    style: textTheme.titleLarge,
+                            children: allowedPages
+                                .where((e) => e == HomeDataSource.subscription || e == HomeDataSource.trending || e == HomeDataSource.popular)
+                                .map((e) {
+                              GlobalKey? key = switch (e) {
+                                (HomeDataSource.popular) => popularTitle,
+                                (HomeDataSource.subscription) => subscriptionTitle,
+                                (HomeDataSource.trending) => trendingTitle,
+                                (_) => null,
+                              };
+
+                              focusFunction(video, index, focus) {
+                                if (key != null && focus) {
+                                  Scrollable.ensureVisible(key.currentContext!,
+                                      duration: animationDuration, curve: Curves.easeInOutQuad, alignmentPolicy: ScrollPositionAlignmentPolicy.keepVisibleAtStart);
+                                }
+                              }
+
+                              return Column(
+                                mainAxisSize: MainAxisSize.min,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Padding(
+                                    key: key,
+                                    padding: const EdgeInsets.only(top: 16.0),
+                                    child: Text(e.getLabel(locals), style: textTheme.titleLarge),
                                   ),
-                                ),
-                              ),
-                              Visibility(
-                                visible: app.isLoggedIn,
-                                child: Subscriptions(
-                                  onItemFocus: (video, index, focus) {
-                                    if (focus) {
-                                      Scrollable.ensureVisible(subscriptionTitle.currentContext!,
-                                          duration: animationDuration, curve: Curves.easeInOutQuad, alignmentPolicy: ScrollPositionAlignmentPolicy.keepVisibleAtStart);
-                                    }
-                                  },
-                                ),
-                              ),
-                              Padding(
-                                key: popularTitle,
-                                padding: const EdgeInsets.only(top: 16.0),
-                                child: Text(locals.popular, style: textTheme.titleLarge),
-                              ),
-                              Popular(
-                                onItemFocus: (video, index, focus) {
-                                  if (focus) {
-                                    Scrollable.ensureVisible(popularTitle.currentContext!,
-                                        duration: animationDuration, curve: Curves.easeInOutQuad, alignmentPolicy: ScrollPositionAlignmentPolicy.keepVisibleAtStart);
+                                  switch (e) {
+                                    (HomeDataSource.popular) => Popular(
+                                        onItemFocus: focusFunction,
+                                      ),
+                                    (HomeDataSource.subscription) => Subscriptions(
+                                        onItemFocus: focusFunction,
+                                      ),
+                                    (HomeDataSource.trending) => Trending(
+                                        onItemFocus: focusFunction,
+                                      ),
+                                    (_) => const SizedBox.shrink(),
                                   }
-                                },
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(top: 16.0),
-                                child: Text(
-                                  locals.trending,
-                                  style: textTheme.titleLarge,
-                                ),
-                              ),
-                              const Trending(),
-                            ],
+                                ],
+                              );
+                            }).toList(),
                           ),
                         ),
                       ),

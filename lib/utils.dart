@@ -301,7 +301,7 @@ SystemUiOverlayStyle getUiOverlayStyle(BuildContext context) {
       statusBarIconBrightness: colorScheme.brightness == Brightness.dark ? Brightness.light : Brightness.dark);
 }
 
-List<T> filteredVideos<T extends BaseVideo>(List<T> videos) => videos.where((element) => !element.filterHide).toList();
+//List<T> filteredVideos<T extends BaseVideo>(List<T> videos) => videos.where((element) => !element.filterHide).toList();
 
 String getWeekdayName(int weekday) {
   final DateTime now = DateTime.now().toLocal();

@@ -17,7 +17,10 @@ enum FilterType {
   channelName,
   length;
 
-  static String localizedType(FilterType type, AppLocalizations locals) {
+  static String localizedType(FilterType? type, AppLocalizations locals) {
+    if(type == null){
+      return '';
+    }
     switch (type) {
       case FilterType.channelName:
         return locals.videoFilterTypeChannelName;
@@ -35,7 +38,10 @@ enum FilterOperation {
   lowerThan,
   higherThan;
 
-  static String localizedLabel(FilterOperation op, AppLocalizations locals) {
+  static String localizedLabel(FilterOperation? op, AppLocalizations locals) {
+    if(op == null){
+      return "";
+    }
     switch (op) {
       case FilterOperation.contain:
         return locals.videoFilterOperationContains;
@@ -112,6 +118,8 @@ class VideoFilter {
 */
 
     videos = videos?.map((v) => _innerFilterVideo(v, filters)).toList() ?? [];
+
+    videos.removeWhere((element) => element.filtered && element.filterHide);
 
     return videos;
   }
