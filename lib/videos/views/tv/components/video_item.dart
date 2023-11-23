@@ -86,6 +86,7 @@ class TvVideoItem extends StatelessWidget {
                                             color: colors.secondaryContainer,
                                             borderRadius: BorderRadius.circular(10),
                                           ),
+                                          padding: const EdgeInsets.all(5),
                                           child: Column(
                                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                                             children: [
