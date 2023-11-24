@@ -144,10 +144,21 @@ class AppRouter extends _$AppRouter {
 class MyRouteObserver extends AutoRouterObserver {
   @override
   void didPush(Route route, Route? previousRoute) {
-    log.fine('New route pushed: ${route.settings.name}, ${route.runtimeType}');
+    log.fine(
+        'New route pushed: ${route.settings.name}, ${route.runtimeType}, previous route: ${previousRoute?.settings.name}, ${previousRoute.runtimeType}');
+    log.fine('current route: ${appRouter.current.name}');
     if (route.settings.name != null) {
       route.navigator?.context.read<PlayerCubit>().showMiniPlayer();
     }
+    super.didPush(route, previousRoute);
+  }
+
+  @override
+  void didPop(Route route, Route? previousRoute) {
+    log.fine(
+        'New route popped: ${route.settings.name}, ${route.runtimeType}, previous route: ${previousRoute?.settings.name}, ${previousRoute.runtimeType}');
+    log.fine('current route: ${appRouter.current.name}');
+    super.didPop(route, previousRoute);
   }
 
 /*
