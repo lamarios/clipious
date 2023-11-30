@@ -1194,5 +1194,13 @@
   "deArrowReplaceThumbnailsDescription": "動画の題名に加えサムネイルも置換する",
   "@deArrowReplaceThumbnailsDescription": {
     "description": "Description for DeArrow setting switch"
+  },
+  "copySettingsAsJsonDescription": "発生したアプリの問題を報告する際に、バグ改善を助ける設定情報を JSON としてコピー",
+  "@copySettingsAsJsonDescription": {
+    "description": ""
+  },
+  "copySettingsAsJson": "設定を JSON としてコピー",
+  "@copySettingsAsJson": {
+    "description": "title for settings sections to allow users to copy their settings as json to make debugging easier"
   }
 }
