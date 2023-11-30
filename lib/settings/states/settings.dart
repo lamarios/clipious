@@ -392,6 +392,13 @@ class SettingsCubit extends Cubit<SettingsState> {
     String json = encoder.convert(state.settings);
     Clipboard.setData(ClipboardData(text: json));
   }
+
+  saveSetting(SettingsValue settings){
+    var newSettings = state.settings;
+    newSettings[settings.name] = settings;
+    emit(state.copyWith(settings:  newSettings));
+  }
+
 }
 
 @CopyWith(constructor: "_")
