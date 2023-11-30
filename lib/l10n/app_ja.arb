@@ -635,7 +635,7 @@
   "@copyToClipBoard": {
     "description": "Text to copy something to clipboard"
   },
-  "appLogsDescription": "アプリで何が起きたかのログを取得。問題の報告に役立ちます",
+  "appLogsDescription": "アプリに起きたことのログを取得。問題の報告に役立ちます",
   "@appLogsDescription": {
     "description": "Description of the app log settings"
   },
