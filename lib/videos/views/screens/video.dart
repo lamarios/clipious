@@ -80,7 +80,12 @@ class VideoScreen extends StatelessWidget {
             create: (BuildContext context) =>
                 VideoCubit(VideoState(videoId: videoId), downloadManager, player, settings)),
       ],
-      child: BlocBuilder<VideoCubit, VideoState>(
+      child: BlocConsumer<VideoCubit, VideoState>(
+        listenWhen: (previous, current) => settings.state.autoplayVideoOnLoad && previous.video != current.video,
+        listener: (context, state) {
+            AutoRouter.of(context).pop();
+            context.read<VideoCubit>().playVideo(false);
+        },
         builder: (context, _) {
           var cubit = context.read<VideoCubit>();
           var settings = context.read<SettingsCubit>();

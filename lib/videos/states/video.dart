@@ -2,6 +2,7 @@ import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:invidious/downloads/models/downloaded_video.dart';
+import 'package:invidious/router.dart';
 import 'package:invidious/videos/models/base_video.dart';
 import 'package:invidious/videos/models/dislike.dart';
 import 'package:logging/logging.dart';
@@ -43,9 +44,6 @@ class VideoCubit extends Cubit<VideoState> {
 
       getDownloadStatus();
 
-      if (settings.state.autoplayVideoOnLoad) {
-        playVideo(false);
-      }
     } catch (err) {
       var state = this.state.copyWith();
       if (err is InvidiousServiceError) {
