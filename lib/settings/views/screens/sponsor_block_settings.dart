@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/settings/models/db/settings.dart';
 import 'package:invidious/settings/states/settings.dart';
-import 'package:invidious/settings/states/sponsor_block_settings.dart';
 import 'package:invidious/videos/models/sponsor_segment_types.dart';
 import 'package:settings_ui/settings_ui.dart';
 
