@@ -43,9 +43,6 @@ class VideoCubit extends Cubit<VideoState> {
 
       getDownloadStatus();
 
-      if (settings.state.autoplayVideoOnLoad) {
-        playVideo(false);
-      }
     } catch (err) {
       var state = this.state.copyWith();
       if (err is InvidiousServiceError) {
