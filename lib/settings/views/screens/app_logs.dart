@@ -5,7 +5,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/settings/states/app_logs.dart';
 
 import '../../../globals.dart';
-import '../../../main.dart';
 import '../../models/db/app_logs.dart';
 
 @RoutePage()
@@ -68,14 +67,7 @@ class AppLogsScreen extends StatelessWidget {
                       bottom: _.selected.isNotEmpty ? 0 : -50,
                       duration: animationDuration,
                       child: InkWell(
-                        onTap: () {
-                          cubit.copySelectedLogsToClipboard();
-                          final ScaffoldMessengerState? scaffold = scaffoldKey.currentState;
-                          scaffold?.showSnackBar(SnackBar(
-                            content: Text(locals.logsCopied),
-                            duration: const Duration(seconds: 1),
-                          ));
-                        },
+                        onTap: cubit.copySelectedLogsToClipboard,
                         child: Container(
                           alignment: Alignment.center,
                           height: 50,

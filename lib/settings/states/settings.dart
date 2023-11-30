@@ -1,11 +1,13 @@
+import 'dart:convert';
+
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:bloc/bloc.dart';
 import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/app/states/app.dart';
-import 'package:invidious/main.dart';
 import 'package:invidious/workmanager.dart';
 import 'package:locale_names/locale_names.dart';
 import 'package:logging/logging.dart';
@@ -310,7 +312,10 @@ class SettingsCubit extends Cubit<SettingsState> {
 
   String? getLocaleDisplayName() {
     List<String>? localeString = state.locale?.split('_');
-    Locale? l = localeString != null ? Locale.fromSubtags(languageCode: localeString[0], scriptCode: localeString.length >= 2 ? localeString[1] : null) : null;
+    Locale? l = localeString != null
+        ? Locale.fromSubtags(
+            languageCode: localeString[0], scriptCode: localeString.length >= 2 ? localeString[1] : null)
+        : null;
 
     return l?.nativeDisplayLanguageScript;
   }
@@ -381,6 +386,19 @@ class SettingsCubit extends Cubit<SettingsState> {
       });
     }
   }
+
+  copySettingsAsJson(BuildContext context) {
+    var encoder = const JsonEncoder.withIndent('    ');
+    String json = encoder.convert(state.settings);
+    Clipboard.setData(ClipboardData(text: json));
+  }
+
+  saveSetting(SettingsValue settings){
+    var newSettings = state.settings;
+    newSettings[settings.name] = settings;
+    emit(state.copyWith(settings:  newSettings));
+  }
+
 }
 
 @CopyWith(constructor: "_")
@@ -479,7 +497,8 @@ class SettingsState {
 
   set forceLandscapeFullScreen(bool b) => _set(LOCK_ORIENTATION_FULLSCREEN, b);
 
-  ThemeMode get themeMode => ThemeMode.values.firstWhere((element) => element.name == _get(THEME_MODE)?.value, orElse: () => ThemeMode.system);
+  ThemeMode get themeMode =>
+      ThemeMode.values.firstWhere((element) => element.name == _get(THEME_MODE)?.value, orElse: () => ThemeMode.system);
 
   set themeMode(ThemeMode t) => _set(THEME_MODE, t.name);
 
@@ -487,18 +506,22 @@ class SettingsState {
 
   set useSearchHistory(bool b) => _set(USE_SEARCH_HISTORY, b);
 
-  List<HomeDataSource> get appLayout => (_get(APP_LAYOUT)?.value ?? HomeDataSource.defaultSettings().map((e) => e.name).join(","))
-      .split(',')
-      .where((element) => element.isNotEmpty)
-      .map((e) => HomeDataSource.values.firstWhere((element) => element.name == e))
-      .toList();
+  List<HomeDataSource> get appLayout =>
+      (_get(APP_LAYOUT)?.value ?? HomeDataSource.defaultSettings().map((e) => e.name).join(","))
+          .split(',')
+          .where((element) => element.isNotEmpty)
+          .map((e) => HomeDataSource.values.firstWhere((element) => element.name == e))
+          .toList();
 
   set appLayout(List<HomeDataSource> layout) => _set(APP_LAYOUT, layout.map((e) => e.name).join(","));
 
   NavigationDestinationLabelBehavior get navigationBarLabelBehavior =>
-      NavigationDestinationLabelBehavior.values.firstWhere((e) => e.name == (_get(NAVIGATION_BAR_LABEL_BEHAVIOR)?.value ?? NavigationDestinationLabelBehavior.onlyShowSelected.name));
+      NavigationDestinationLabelBehavior.values.firstWhere((e) =>
+          e.name ==
+          (_get(NAVIGATION_BAR_LABEL_BEHAVIOR)?.value ?? NavigationDestinationLabelBehavior.onlyShowSelected.name));
 
-  set navigationBarLabelBehavior(NavigationDestinationLabelBehavior behavior) => _set(NAVIGATION_BAR_LABEL_BEHAVIOR, behavior.name);
+  set navigationBarLabelBehavior(NavigationDestinationLabelBehavior behavior) =>
+      _set(NAVIGATION_BAR_LABEL_BEHAVIOR, behavior.name);
 
   bool get distractionFreeMode => _get(DISTRACTION_FREE_MODE)?.value == "true";
 

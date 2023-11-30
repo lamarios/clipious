@@ -165,6 +165,12 @@ class SettingsScreen extends StatelessWidget {
                     title: Text(locals.appLogs),
                     description: Text(locals.appLogsDescription),
                     onPressed: openAppLogs,
+                  ),
+                  SettingsTile(
+                    leading: const Icon(Icons.settings),
+                    title: Text(locals.copySettingsAsJson),
+                    description: Text(locals.copySettingsAsJsonDescription),
+                    onPressed: cubit.copySettingsAsJson,
                   )
                 ])
               ],
