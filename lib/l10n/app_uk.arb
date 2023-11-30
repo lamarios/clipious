@@ -253,7 +253,7 @@
   "@password": {
     "description": "Password label for login to a server"
   },
-  "wrongUsernamePassword": "Неправильне ім'я користувача або пароль",
+  "wrongUsernamePassword": "Неправильне ім''я користувача або пароль",
   "@wrongUsernamePassword": {
     "description": "Error message when authentication fails"
   },
