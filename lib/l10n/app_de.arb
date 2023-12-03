@@ -1028,5 +1028,9 @@
   "askToEnableBackgroundServiceTitle": "Benachrichtigungen ausgeschaltet",
   "@askToEnableBackgroundServiceTitle": {
     "description": "If the users tries to turn on notifications for a channel but hasn't enable notifications in the app we need to turn it on for them"
+  },
+  "itemListErrorInvalidScope": "Sie haben keine Berechtigung, dies zu sehen. Wenn Sie mit der Token-Methode angemeldet sind, versuchen Sie, sich ab- und wieder anzumelden.",
+  "@itemListErrorInvalidScope": {
+    "description": "Error when the user doesn't have the proper scope to its current token"
   }
 }
