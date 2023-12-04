@@ -1194,5 +1194,13 @@
   "deArrowReplaceThumbnailsDescription": "Замените превью видео в дополнение к заголовкам",
   "@deArrowReplaceThumbnailsDescription": {
     "description": "Description for DeArrow setting switch"
+  },
+  "copySettingsAsJsonDescription": "Скопировать настройки в формате JSON, чтобы облегчить отладку, если у вас возникнет проблема с приложением и вы решите поднять обсуждение о ней",
+  "@copySettingsAsJsonDescription": {
+    "description": ""
+  },
+  "copySettingsAsJson": "Скопировать настройки в формате JSON в буфер обмена",
+  "@copySettingsAsJson": {
+    "description": "title for settings sections to allow users to copy their settings as json to make debugging easier"
   }
 }
