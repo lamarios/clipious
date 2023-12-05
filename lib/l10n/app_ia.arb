@@ -1,1 +1,127 @@
-{}
+{
+  "shareYoutubeLink": "Compartir le ligamine de YouTube",
+  "@shareYoutubeLink": {
+    "description": "asking user to share youtube link"
+  },
+  "subscribe": "Subscriber se",
+  "@subscribe": {
+    "description": "Label for user to subscribe to a channel"
+  },
+  "subscribed": "Subscribite",
+  "@subscribed": {
+    "description": "When the user is subscribed to a channel"
+  },
+  "latestVideos": "Videos plus recente",
+  "@latestVideos": {
+    "description": "Latest channel videos"
+  },
+  "shareInvidiousLink": "Compartir le ligamine de Invidious",
+  "@shareInvidiousLink": {
+    "description": "asking user to share invidious link"
+  },
+  "info": "Information",
+  "@info": {
+    "description": "Info label"
+  },
+  "noChannels": "Necun canales",
+  "@noChannels": {
+    "description": "when there are no channels to display"
+  },
+  "playlists": "Listas de reproduction",
+  "@playlists": {
+    "description": "User playlists"
+  },
+  "videos": "Videos",
+  "@videos": {
+    "description": "Videos label"
+  },
+  "redirectInvidiousLink": "Compartir le ligamine de redirection de Invidious",
+  "@redirectInvidiousLink": {
+    "description": "asking user to share redirecting invidious link"
+  },
+  "popular": "Popular",
+  "@popular": {
+    "description": "Popular videos title"
+  },
+  "streams": "Fluxos",
+  "@streams": {
+    "description": "Streams label"
+  },
+  "channels": "Canales",
+  "@channels": {
+    "description": "Channels label"
+  },
+  "deletePlayListQ": "Deler le lista de reproduction?",
+  "@deletePlayListQ": {
+    "description": "Ask user to delete a playlist"
+  },
+  "addPlayList": "Adder lista de reproduction",
+  "@addPlayList": {
+    "description": "Title for add playlist dialog"
+  },
+  "ok": "OK",
+  "@ok": {
+    "description": "Ok"
+  },
+  "noPlaylists": "Necun listas de reproduction",
+  "@noPlaylists": {
+    "description": "when there are no playlists to display"
+  },
+  "nSubscribers": "{count, select, no{Necun subscriptores} other{{count} subscribers}}",
+  "@nSubscribers": {
+    "description": "number of subscribers",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "playListName": "Nomine del lista de reproduction",
+  "@playListName": {
+    "description": "Place holder for new playlist name text field"
+  },
+  "publicPlaylist": "Public",
+  "@publicPlaylist": {
+    "description": "Public playlist"
+  },
+  "cancel": "Cancellar",
+  "@cancel": {
+    "description": "Cancel button label"
+  },
+  "playlistVisibility": "Visibilitate",
+  "@playlistVisibility": {
+    "description": "Dropdown label for playlist visibility"
+  },
+  "subscriptions": "Subscriptiones",
+  "@subscriptions": {
+    "description": "User subscriptions"
+  },
+  "irreversibleAction": "Iste action es irreversibile",
+  "@irreversibleAction": {
+    "description": "Tell the user that the action cannot be undone"
+  },
+  "unlistedPlaylist": "Non listate",
+  "@unlistedPlaylist": {
+    "description": "Unlisted playlist"
+  },
+  "noVideoInPlayList": "Necun video in le lista de reproduction",
+  "@noVideoInPlayList": {
+    "description": "When no videos in the playlist"
+  },
+  "removeFromPlayList": "Deler del lista de reproduction",
+  "@removeFromPlayList": {
+    "description": "Menu item description to show remove a video from a playlist"
+  },
+  "add": "Adder",
+  "@add": {
+    "description": "Add button abel"
+  },
+  "privatePlaylist": "Private",
+  "@privatePlaylist": {
+    "description": "Private playlist"
+  },
+  "comments": "Commentos",
+  "@comments": {
+    "description": "Comments label"
+  }
+}
