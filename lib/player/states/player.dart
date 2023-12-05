@@ -287,6 +287,7 @@ class PlayerCubit extends Cubit<PlayerState> {
     state.opacity = 1;
     state.isHidden = false;
     emit(state);
+    NativeDeviceOrientationCommunicator().orientation(useSensor: true).then(onOrientationChange);
   }
 
   showMiniPlayer() {
