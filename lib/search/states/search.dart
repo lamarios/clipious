@@ -58,10 +58,12 @@ class SearchCubit<T extends SearchState> extends Cubit<SearchState> {
 
   void getSuggestions({bool hideResult = true}) {
     emit(state.copyWith(showResults: !hideResult));
-    EasyDebounce.debounce('search-suggestions', const Duration(milliseconds: 500), () async {
-      var suggestions = (await service.getSearchSuggestion(state.queryController.value.text)).suggestions;
-      emit(state.copyWith(suggestions: suggestions));
-    });
+    if(!settings.state.distractionFreeMode) {
+      EasyDebounce.debounce('search-suggestions', const Duration(milliseconds: 500), () async {
+        var suggestions = (await service.getSearchSuggestion(state.queryController.value.text)).suggestions;
+        emit(state.copyWith(suggestions: suggestions));
+      });
+    }
   }
 
   List<String> getHistory() {
