@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../utils.dart';
+import '../../../../videos/models/base_video.dart';
 import '../../../models/paginatedList.dart';
 import '../../../states/paginated_list_view.dart';
 
@@ -20,7 +22,14 @@ class TvHorizontalPaginatedListView<T> extends StatelessWidget {
       create: (context) => PaginatedListCubit(
           PaginatedListViewController<T>(paginatedList: this.paginatedList, startItems: this.startItems)),
       child: BlocBuilder<PaginatedListCubit<T>, PaginatedListViewController<T>>(
-          builder: (context, _) => Stack(
+          builder: (context, _) {
+
+            // filter items if possible
+            List<T> items = _.items;
+            if (items.isNotEmpty && items[0] is BaseVideo) {
+              items = filteredVideos<BaseVideo>(_.items.cast()).cast();
+            }
+            return Stack(
                 children: [
                   _.loading
                       ? const LinearProgressIndicator(
@@ -30,12 +39,13 @@ class TvHorizontalPaginatedListView<T> extends StatelessWidget {
                   ListView.builder(
                     controller: _.scrollController,
                     scrollDirection: Axis.horizontal,
-                    itemCount: _.items.length + (_.loading ? 10 : 0),
+                    itemCount: items.length + (_.loading ? 10 : 0),
                     itemBuilder: (BuildContext context, int index) =>
-                        index >= _.items.length ? getPlaceHolder() : itemBuilder(_.items[index]),
+                        index >= items.length ? getPlaceHolder() : itemBuilder(items[index]),
                   ),
                 ],
-              )),
+              );
+          }),
     );
   }
 }

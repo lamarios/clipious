@@ -119,7 +119,9 @@ class VideoFilter {
 
     videos = videos?.map((v) => _innerFilterVideo(v, filters)).toList() ?? [];
 
-    videos.removeWhere((element) => element.filtered && element.filterHide);
+    // leaving this for future self. CANNOT remove videos from list, otherwise it will break pagination
+    // TODO: write test cases about this.
+    // videos.removeWhere((element) => element.filtered && element.filterHide);
 
     return videos;
   }
