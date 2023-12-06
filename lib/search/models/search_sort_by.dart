@@ -1,6 +1,10 @@
 enum SearchSortBy {
-  relevance,
-  rating,
-  upload_date,
-  view_count;
+  relevance("Relevance"),
+  rating("Rating"),
+  date("Upload date"),
+  views("View count");
+
+  final String label;
+
+  const SearchSortBy(this.label);
 }

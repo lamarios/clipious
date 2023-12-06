@@ -6,6 +6,7 @@ import 'package:invidious/globals.dart';
 import 'package:invidious/playlists/views/components/playlist_list.dart';
 import 'package:invidious/router.dart';
 import 'package:invidious/search/models/search_type.dart';
+import 'package:invidious/search/search_filters.dart';
 import 'package:invidious/utils/views/components/navigation_switcher.dart';
 import 'package:invidious/videos/models/video_in_list.dart';
 
@@ -38,7 +39,7 @@ class SearchScreen extends StatelessWidget {
       create: (context) => SearchCubit<SearchState>(SearchState(query: query, searchNow: searchNow), settings),
       child: BlocBuilder<SearchCubit, SearchState>(
         builder: (context, _) {
-          var cubit = context.read<SearchCubit>();
+          var cubit = context.watch<SearchCubit>();
           var navigationBarLabel = context.select((SettingsCubit s) => s.state.navigationBarLabelBehavior);
           return Scaffold(
             bottomNavigationBar: _.showResults
@@ -72,6 +73,15 @@ class SearchScreen extends StatelessWidget {
                       }
                     },
                     icon: const Icon(Icons.clear)),
+                SearchFiltersButton(
+                  initialSearchSortBy: _.sortBy,
+                  callback: (newSearchSortBy) {
+                    cubit.setSearchSortBy(newSearchSortBy);
+                    if (_.showResults || _.queryController.text.isNotEmpty) {
+                      cubit.search(_.queryController.text);
+                    }
+                  },
+                ),
               ],
             ),
             body: SafeArea(
@@ -145,6 +155,7 @@ class SearchScreen extends StatelessWidget {
                               child: NavigationSwitcher(
                                 child: [
                                   VideoList(
+                                    key: UniqueKey(),
                                     paginatedVideoList: PageBasedPaginatedList<VideoInList>(
                                       getItemsFunc: (page, maxResults) => service
                                           .search(_.queryController.value.text,

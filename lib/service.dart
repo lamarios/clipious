@@ -223,7 +223,13 @@ class Service {
 
   Future<SearchResults> search(String query, {SearchType? type, int? page, SearchSortBy? sortBy}) async {
     String countryCode = db.getSettings(BROWSING_COUNTRY)?.value ?? 'US';
-    Uri uri = buildUrl(urlSearch, query: {'q': Uri.encodeQueryComponent(query), 'type': type?.name, 'page': page?.toString() ?? '1', 'sort_by': sortBy?.name, 'region': countryCode});
+    Uri uri = buildUrl(urlSearch, query: {
+      'q': Uri.encodeQueryComponent(query),
+      'type': type?.name,
+      'page': page?.toString() ?? '1',
+      'sort': sortBy?.name,
+      'region': countryCode,
+    });
     final response = await http.get(uri);
     Iterable i = handleResponse(response);
     // only getting videos for now
