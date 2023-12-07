@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/search/models/search_sort_by.dart';
 
 const defaultSearchSortBy = SearchSortBy.relevance;
@@ -15,6 +16,7 @@ class SearchFiltersButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final locals = AppLocalizations.of(context)!;
     return IconButton(
       onPressed: () {
         showDialog(
@@ -25,19 +27,20 @@ class SearchFiltersButton extends StatelessWidget {
             return AlertDialog(
               content: StatefulBuilder(
                 builder: (BuildContext context, StateSetter setState) {
+                  onChanged(SearchSortBy? newSearchSortBy) {
+                    setState(() => selectedSearchSortBy = newSearchSortBy ?? defaultSearchSortBy);
+                  }
                   return SingleChildScrollView(
                     child: ListBody(
                       children: <Widget>[
-                        const Text('Sort by'),
+                        Text(locals.searchSortBy),
                         ...SearchSortBy.values.map((value) {
                           return ListTile(
-                            title: Text(value.label),
+                            title: Text(value.getLable(locals)),
                             leading: Radio<SearchSortBy>(
                               value: value,
                               groupValue: selectedSearchSortBy,
-                              onChanged: (newSearchSortBy) {
-                                setState(() => selectedSearchSortBy = newSearchSortBy ?? defaultSearchSortBy);
-                              },
+                              onChanged: onChanged,
                             ),
                           );
                         }),
@@ -48,13 +51,13 @@ class SearchFiltersButton extends StatelessWidget {
               ),
               actions: <Widget>[
                 TextButton(
-                  child: const Text('Cancel'),
+                  child: Text(locals.cancel),
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
                 ),
                 TextButton(
-                  child: const Text('OK'),
+                  child: Text(locals.ok),
                   onPressed: () {
                     callback(selectedSearchSortBy);
                     Navigator.of(context).pop();
