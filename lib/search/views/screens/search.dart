@@ -39,7 +39,7 @@ class SearchScreen extends StatelessWidget {
       create: (context) => SearchCubit<SearchState>(SearchState(query: query, searchNow: searchNow), settings),
       child: BlocBuilder<SearchCubit, SearchState>(
         builder: (context, _) {
-          var cubit = context.watch<SearchCubit>();
+          var cubit = context.read<SearchCubit>();
           var navigationBarLabel = context.select((SettingsCubit s) => s.state.navigationBarLabelBehavior);
           return Scaffold(
             bottomNavigationBar: _.showResults
