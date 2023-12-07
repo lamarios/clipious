@@ -28,24 +28,24 @@ class SearchFiltersButton extends StatelessWidget {
               content: StatefulBuilder(
                 builder: (BuildContext context, StateSetter setState) {
                   onChanged(SearchSortBy? newSearchSortBy) {
-                    setState(() => selectedSearchSortBy = newSearchSortBy ?? defaultSearchSortBy);
+                    setState(() => selectedSearchSortBy =
+                        newSearchSortBy ?? defaultSearchSortBy);
                   }
+
                   return SingleChildScrollView(
-                    child: ListBody(
-                      children: <Widget>[
-                        Text(locals.searchSortBy),
-                        ...SearchSortBy.values.map((value) {
-                          return ListTile(
-                            title: Text(value.getLable(locals)),
-                            leading: Radio<SearchSortBy>(
-                              value: value,
-                              groupValue: selectedSearchSortBy,
-                              onChanged: onChanged,
-                            ),
-                          );
-                        }),
-                      ]
-                    ),
+                    child: ListBody(children: <Widget>[
+                      Text(locals.searchSortBy),
+                      ...SearchSortBy.values.map((value) {
+                        return ListTile(
+                          title: Text(value.getLable(locals)),
+                          leading: Radio<SearchSortBy>(
+                            value: value,
+                            groupValue: selectedSearchSortBy,
+                            onChanged: onChanged,
+                          ),
+                        );
+                      }),
+                    ]),
                   );
                 },
               ),
