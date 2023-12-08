@@ -84,6 +84,10 @@ class SearchCubit<T extends SearchState> extends Cubit<SearchState> {
     state.selectedIndex = value;
     emit(state);
   }
+
+  void setSearchSortBy(SearchSortBy value) {
+    emit(state.copyWith(sortBy: value));
+  }
 }
 
 abstract class Clonable<T> {
