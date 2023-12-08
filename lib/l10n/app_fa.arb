@@ -1202,5 +1202,9 @@
   "askToEnableBackgroundServiceTitle": "اطلاع‌رسانی‌ها خاموش است",
   "@askToEnableBackgroundServiceTitle": {
     "description": "If the users tries to turn on notifications for a channel but hasn't enable notifications in the app we need to turn it on for them"
+  },
+  "searchSortBy": "به ترتیب",
+  "@searchSortBy": {
+    "description": "Search sorting option"
   }
 }
