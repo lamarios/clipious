@@ -1202,5 +1202,9 @@
   "copySettingsAsJson": "Copiar los ajustes como JSON al portapapeles",
   "@copySettingsAsJson": {
     "description": "title for settings sections to allow users to copy their settings as json to make debugging easier"
+  },
+  "searchSortBy": "Ordenar por",
+  "@searchSortBy": {
+    "description": "Search sorting option"
   }
 }
