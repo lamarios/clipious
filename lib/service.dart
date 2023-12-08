@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter_web_auth/flutter_web_auth.dart';
-import 'package:http/http.dart';
 import 'package:http/http.dart' as http;
+import 'package:http/http.dart';
 import 'package:invidious/database.dart';
 import 'package:invidious/extensions.dart';
 import 'package:invidious/globals.dart';
@@ -12,7 +12,10 @@ import 'package:invidious/search/models/db/searchHistoryItem.dart';
 import 'package:invidious/search/models/search_results.dart';
 import 'package:invidious/search/models/search_sort_by.dart';
 import 'package:invidious/search/models/search_type.dart';
+import 'package:invidious/settings/models/errors/cannot_add_server_error.dart';
 import 'package:invidious/settings/models/errors/invidiousServiceError.dart';
+import 'package:invidious/settings/models/errors/missing_software_key.dart';
+import 'package:invidious/settings/models/errors/unreacheable_server.dart';
 import 'package:invidious/utils/video_post_processing.dart';
 import 'package:invidious/videos/models/db/progress.dart';
 import 'package:invidious/videos/models/dearrow.dart';
@@ -73,7 +76,8 @@ class Service {
 
   handleResponse(Response response) {
     var body = utf8.decode(response.bodyBytes);
-    log.info("Response from ${response.request?.method} ${urlFormatForLog(response.request?.url)}, status: ${response.statusCode}");
+    log.info(
+        "Response from ${response.request?.method} ${urlFormatForLog(response.request?.url)}, status: ${response.statusCode}");
 
     if (body.isNotEmpty) {
       var decoded = jsonDecode(body);
@@ -92,7 +96,8 @@ class Service {
 
       return decoded;
     } else if (response.statusCode < 200 || response.statusCode >= 400) {
-      log.severe('Error making request to ${response.request?.url}, \n status: ${response.statusCode}, \n Body: ${response.body}');
+      log.severe(
+          'Error making request to ${response.request?.url}, \n status: ${response.statusCode}, \n Body: ${response.body}');
       throw InvidiousServiceError('Couldn\'t make request, response code: ${response.statusCode}');
     }
   }
@@ -137,7 +142,8 @@ class Service {
   handleErrors(Response response) {}
 
   Future<Video> getVideo(String videoId) async {
-    final response = await http.get(buildUrl(urlGetVideo, pathParams: {':id': videoId}), headers: {'Content-Type': 'application/json; charset=utf-16'});
+    final response = await http.get(buildUrl(urlGetVideo, pathParams: {':id': videoId}),
+        headers: {'Content-Type': 'application/json; charset=utf-16'});
 
     var video = Video.fromJson(handleResponse(response));
     await DeArrow.processVideos([video]);
@@ -155,7 +161,8 @@ class Service {
         // we have a cookie to parse
         return response.headers['set-cookie']!.split(';').firstWhere((element) => element.startsWith('SID='));
       } else {
-        throw InvidiousServiceError('wrong error code (${response.statusCode}) or no cookie headers: ${response.headers['set-cookie']}');
+        throw InvidiousServiceError(
+            'wrong error code (${response.statusCode}) or no cookie headers: ${response.headers['set-cookie']}');
       }
     } catch (err, stacktrace) {
       if (err is InvidiousServiceError) {
@@ -166,7 +173,8 @@ class Service {
   }
 
   Future<String?> logIn(String serverUrl) async {
-    String url = '$serverUrl/authorize_token?scopes=:feed,:subscriptions*,:playlists*,:history*&callback_url=clipious-auth://';
+    String url =
+        '$serverUrl/authorize_token?scopes=:feed,:subscriptions*,:playlists*,:history*&callback_url=clipious-auth://';
     final result = await FlutterWebAuth.authenticate(url: url, callbackUrlScheme: 'clipious-auth');
 
     final token = Uri.parse(result).queryParameters['token'];
@@ -333,24 +341,41 @@ class Service {
     final response = await http.get(buildUrl(urlSearchSuggestions, query: {"q": Uri.encodeQueryComponent(query)}));
     SearchSuggestion search = SearchSuggestion.fromJson(handleResponse(response));
     if (search.suggestions.any((element) => element.contains(";"))) {
-      search.suggestions =
-          search.suggestions.map((s) => s.replaceAll(" ", "&#0032;").split(";").where((e) => e.isNotEmpty && e.startsWith("&#")).map((e) => String.fromCharCode(int.parse(e.replaceAll("&#", "")))).toList().join("")).toList();
+      search.suggestions = search.suggestions
+          .map((s) => s
+              .replaceAll(" ", "&#0032;")
+              .split(";")
+              .where((e) => e.isNotEmpty && e.startsWith("&#"))
+              .map((e) => String.fromCharCode(int.parse(e.replaceAll("&#", ""))))
+              .toList()
+              .join(""))
+          .toList();
     }
 
     return search;
   }
 
-  Future<bool> isValidServer(String serverUrl) async {
-    String url = serverUrl + urlStats;
-    log.info('Calling $url');
-    final response = await http.get(Uri.parse(url));
-    Map<String, dynamic> json = handleResponse(response);
+  Future<void> validateServer(String serverUrl) async {
+    try {
+      String url = serverUrl + urlStats;
+      log.info('Calling $url');
+      final response = await http.get(Uri.parse(url));
+      Map<String, dynamic> json = handleResponse(response);
 
-    if (json.containsKey("software")) {
-      return json['software']['name'] == 'invidious';
+      if (json.containsKey("software") && json['software']['name'] == 'invidious') {
+        return;
+      } else {
+        throw MissingSoftwareKeyError(jsonEncode(json));
+      }
+    } catch (err) {
+      if (err is InvidiousServiceError) {
+        throw UnreachableServerError(error: err.message);
+      } else if (err is CannotAddServerError) {
+        rethrow;
+      } else {
+        throw CannotAddServerError(error: err.toString());
+      }
     }
-
-    return false;
   }
 
   bool isLoggedIn() {
@@ -426,7 +451,8 @@ class Service {
   Future<Channel> getChannel(String channelId) async {
     // sometimes the api gives the channel with /channel/<channelid> format
     channelId = channelId.replaceAll("/channel/", '');
-    final response = await http.get(buildUrl(urlGetChannel, pathParams: {':id': channelId}), headers: {'Content-Type': 'application/json; charset=utf-16'});
+    final response = await http.get(buildUrl(urlGetChannel, pathParams: {':id': channelId}),
+        headers: {'Content-Type': 'application/json; charset=utf-16'});
 
     var channel = Channel.fromJson(handleResponse(response));
     channel.latestVideos = (await postProcessVideos(channel.latestVideos ?? [])).cast();
@@ -437,7 +463,8 @@ class Service {
     return channel;
   }
 
-  Future<VideosWithContinuation> getChannelVideos(String channelId, String? continuation, {bool saveLastSeen = true}) async {
+  Future<VideosWithContinuation> getChannelVideos(String channelId, String? continuation,
+      {bool saveLastSeen = true}) async {
     Uri uri = buildUrl(urlGetChannelVideos, pathParams: {':id': channelId}, query: {'continuation': continuation});
     final response = await http.get(uri, headers: {'Content-Type': 'application/json; charset=utf-16'});
 

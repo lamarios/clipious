@@ -4,6 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/app/states/app.dart';
 import 'package:invidious/router.dart';
+import 'package:invidious/settings/models/errors/cannot_add_server_error.dart';
+import 'package:invidious/settings/models/errors/missing_software_key.dart';
+import 'package:invidious/settings/models/errors/unreacheable_server.dart';
 import 'package:invidious/settings/states/server_list_settings.dart';
 import 'package:invidious/settings/states/settings.dart';
 import 'package:settings_ui/settings_ui.dart';
@@ -14,6 +17,7 @@ import '../screens/settings.dart';
 
 class ManagerServersView extends StatelessWidget {
   final bool fromWizard;
+
   const ManagerServersView({super.key, bool this.fromWizard = false});
 
   showPublicServerActions(BuildContext context, ServerListSettingsState controller, Server server) {
@@ -57,15 +61,44 @@ class ManagerServersView extends StatelessWidget {
         });
   }
 
-  saveServer(BuildContext context, ServerListSettingsState controller) async {
-    var locals = AppLocalizations.of(context)!;
+  saveServer(BuildContext context) async {
     ServerListSettingsCubit cubit = context.read<ServerListSettingsCubit>();
+    _serverServerHandling(context, cubit);
+  }
 
+  _serverServerHandling(BuildContext context, ServerListSettingsCubit cubit) async {
+    var locals = AppLocalizations.of(context)!;
     try {
       await cubit.saveServer();
-      Navigator.pop(context);
+      if (context.mounted) {
+        Navigator.pop(context);
+      }
     } catch (err) {
-      await showAlertDialog(context, 'Error', [Text(locals.invalidInvidiousServer)]);
+      if (context.mounted) {
+        if (err is CannotAddServerError) {
+          showAlertDialog(
+              context,
+              switch (err.runtimeType) {
+                (MissingSoftwareKeyError _) => locals.malformedStatsEndpoint,
+                (UnreachableServerError _) => locals.serverIsNotReachable,
+                (_) => locals.error
+              },
+              [
+                SelectableText(
+                  '${err is MissingSoftwareKeyError ? "${locals.malformedStatsEndpointDescription}\n" : ""}${err.error}',
+                  minLines: 1,
+                  maxLines: 100,
+                )
+              ]);
+        } else {
+          showAlertDialog(context, locals.error, [
+            SelectableText(
+              err.toString(),
+              maxLines: 100,
+            )
+          ]);
+        }
+      }
     }
   }
 
@@ -101,12 +134,7 @@ class ManagerServersView extends StatelessWidget {
                           ),
                           TextButton(
                             onPressed: () async {
-                              try {
-                                await cubit.saveServer();
-                                Navigator.pop(context);
-                              } catch (err) {
-                                await showAlertDialog(context, 'Error', [Text(locals.invalidInvidiousServer)]);
-                              }
+                              _serverServerHandling(context, cubit);
                             },
                             child: Text(locals.add),
                           ),

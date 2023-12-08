@@ -9,6 +9,9 @@ import 'package:invidious/utils.dart';
 import 'package:invidious/utils/views/tv/components/tv_button.dart';
 
 import '../../../models/db/server.dart';
+import '../../../models/errors/cannot_add_server_error.dart';
+import '../../../models/errors/missing_software_key.dart';
+import '../../../models/errors/unreacheable_server.dart';
 import '../../../states/server_list_settings.dart';
 import '../screens/settings.dart';
 
@@ -44,14 +47,34 @@ class TvManageServersInner extends StatelessWidget {
           onPressed: (context) async {
             try {
               await cubit.saveServer();
-              Navigator.pop(context);
+              if(context.mounted) {
+                Navigator.pop(context);
+              }
             } catch (err) {
-              await showTvAlertdialog(context, 'Error', [
-                Text(
-                  locals.invalidInvidiousServer,
-                  style: textTheme.titleLarge,
-                )
-              ]);
+              if(context.mounted) {
+                if (err is CannotAddServerError) {
+                  showTvAlertdialog(
+                      context,
+                      switch (err.runtimeType) {
+                        (MissingSoftwareKeyError _) => locals.malformedStatsEndpoint,
+                        (UnreachableServerError _) => locals.serverIsNotReachable,
+                        (_) => locals.error
+                      },
+                      [
+                        Text(
+                          '${err is MissingSoftwareKeyError ? "${locals.malformedStatsEndpointDescription}\n" : ""}${err.error}',
+                          maxLines: 100,
+                        )
+                      ]);
+                } else {
+                  showTvAlertdialog(context, locals.error, [
+                    Text(
+                      err.toString(),
+                      maxLines: 100,
+                    )
+                  ]);
+                }
+              }
             }
           },
           child: Padding(
