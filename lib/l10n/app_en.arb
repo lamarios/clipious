@@ -627,6 +627,10 @@
   "@shorts": {
     "description": "Youtube shorts"
   },
+  "searchSortBy": "Sort by",
+  "@searchSortBy": {
+    "description": "Search sorting option"
+  },
   "searchSortRelevance": "Relevance",
   "@searchSortRelevance": {
     "description": "Sort search by relevance"
