@@ -409,6 +409,18 @@
   },
   "error": "Error",
   "@error": {},
+  "malformedStatsEndpoint": "/api/v1/stats is not as expected",
+  "@malformedStatsEndpoint": {
+    "description": "Title for dialog when adding a server that isn't validated as it should"
+  },
+  "malformedStatsEndpointDescription": "The server stats endpoint did not respond an expected payload, the key \"software.name\" should be equal to \"invidious\".\nResponse from the server:",
+  "@malformedStatsEndpointDescription": {
+    "description": "Description of the possible issue for an invalid stats endpoints"
+  },
+  "serverIsNotReachable": "Server is not reachable",
+  "@serverIsNotReachable": {
+    "description": "Title for dialog when adding a server that is not reachable"
+  },
   "videoQueue": "Video queue",
   "@videoQueue": {
     "description": "Label for button to display the video queue"

@@ -113,24 +113,16 @@ class ServerListSettingsCubit extends Cubit<ServerListSettingsState> {
       serverUrl = serverUrl.substring(0, serverUrl.length - 1);
     }
 
-    bool isValidServer = false;
-    try {
-      isValidServer = await service.isValidServer(serverUrl);
-    } catch (err) {
-      isValidServer = false;
-    }
 
-    if (isValidServer) {
-      Server server = Server(url: serverUrl);
-      db.upsertServer(server);
-      state.addServerController.text = 'https://';
-      if (state.dbServers.isEmpty) {
-        switchServer(server);
-      }
-      refreshServers();
-    } else {
-      throw Error();
+    await service.validateServer(serverUrl);
+
+    Server server = Server(url: serverUrl);
+    db.upsertServer(server);
+    state.addServerController.text = 'https://';
+    if (state.dbServers.isEmpty) {
+      switchServer(server);
     }
+    refreshServers();
   }
 
   switchServer(Server s) {
