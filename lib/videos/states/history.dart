@@ -43,7 +43,9 @@ class HistoryItemCubit extends Cubit<HistoryItemState> {
     state.cachedVid = await HistoryVideoCache.fromVideoIdToVideo(state.videoId);
 
     state.loading = false;
-    emit(state);
+    if(!isClosed) {
+      emit(state);
+    }
   }
 }
 

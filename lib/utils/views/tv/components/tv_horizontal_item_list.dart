@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:invidious/utils/states/item_list.dart';
 import 'package:invidious/utils/views/components/placeholders.dart';
+import 'package:invidious/videos/models/base_video.dart';
 import 'package:invidious/videos/views/tv/components/video_item.dart';
 
+import '../../../../utils.dart';
 import '../../../../videos/models/video_in_list.dart';
 import '../../../models/paginatedList.dart';
 
@@ -14,39 +16,47 @@ class TvHorizontalItemList<T> extends StatelessWidget {
   final Widget Function(BuildContext context, int index, T item) buildItem;
 
   const TvHorizontalItemList(
-      {Key? key, this.tags, required this.paginatedList, required this.buildItem, required this.getPlaceholder})
-      : super(key: key);
+      {super.key, this.tags, required this.paginatedList, required this.buildItem, required this.getPlaceholder});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => ItemListCubit<T>(ItemListState<T>(itemList: paginatedList)),
       child: BlocBuilder<ItemListCubit<T>, ItemListState<T>>(
-        builder: (context, _) => Stack(
+        builder: (context, _) {
+
+          // filter items if possible
+          List<T> items = _.items;
+          if (items.isNotEmpty && items[0] is BaseVideo) {
+            items = filteredVideos<BaseVideo>(_.items.cast()).cast();
+          }
+
+          return Stack(
           children: [
             if (_.loading)
               const LinearProgressIndicator(
                 minHeight: 3,
               ),
-            !_.loading && _.items.isEmpty
+            !_.loading && items.isEmpty
                 ? const SizedBox.shrink()
                 : SizedBox(
                     height: 250,
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
                       controller: _.scrollController,
-                      itemCount: _.items.length + (_.loading ? 10 : 0),
+                      itemCount: items.length + (_.loading ? 10 : 0),
                       itemBuilder: (context, index) {
-                        if (index >= _.items.length) {
+                        if (index >= items.length) {
                           return getPlaceholder();
                         }
-                        T e = _.items[index];
+                        T e = items[index];
                         return buildItem(context, index, e);
                       },
                     ),
                   ),
           ],
-        ),
+        );
+        },
       ),
     );
   }

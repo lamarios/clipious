@@ -35,7 +35,7 @@ class TvVideoScreen extends StatelessWidget {
   const TvVideoScreen({Key? key, required this.videoId}) : super(key: key);
 
   playVideo(BuildContext context, Video video) {
-    AutoRouter.of(context).push(TvPlayerRoute(videos: [video, ...video.recommendedVideos]));
+    AutoRouter.of(context).push(TvPlayerRoute(videos: [video, ...video.recommendedVideos.where((element) => !element.filterHide)]));
   }
 
   showChannel(BuildContext context, String channelId) {

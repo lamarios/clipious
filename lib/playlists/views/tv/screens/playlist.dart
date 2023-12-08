@@ -1,6 +1,5 @@
 import 'dart:ui';
 
-import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +7,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/app/views/tv/screens/tv_home.dart';
 import 'package:invidious/globals.dart';
-import 'package:invidious/player/views/tv/screens/tvPlayerView.dart';
 import 'package:invidious/playlists/states/playlist.dart';
 import 'package:invidious/playlists/views/screens/playlist.dart';
 import 'package:invidious/router.dart';
@@ -27,7 +25,7 @@ class TvPlaylistScreen extends PlaylistViewScreen {
   const TvPlaylistScreen({super.key, required super.playlist, required super.canDeleteVideos});
 
   playPlaylist(BuildContext context, PlaylistState _) {
-    AutoRouter.of(context).push(TvPlayerRoute(videos: _.playlist.videos));
+    AutoRouter.of(context).push(TvPlayerRoute(videos: _.playlist.videos.where((element) => !element.filterHide).toList()));
   }
 
   @override
@@ -52,7 +50,9 @@ class TvPlaylistScreen extends PlaylistViewScreen {
                           return VideoThumbnailView(
                               videoId: video.videoId,
                               decoration: BoxDecoration(),
-                              thumbnailUrl: video.deArrowThumbnailUrl ?? ImageObject.getBestThumbnail(video.videoThumbnails)?.url ?? '');
+                              thumbnailUrl: video.deArrowThumbnailUrl ??
+                                  ImageObject.getBestThumbnail(video.videoThumbnails)?.url ??
+                                  '');
                         },
                         options: CarouselOptions(
                           autoPlayCurve: Curves.easeInOutQuad,
@@ -162,6 +162,7 @@ class TvPlaylistScreen extends PlaylistViewScreen {
                                             crossAxisCount: 3,
                                             children: [
                                               ..._.playlist.videos
+                                                  .where((element) => !element.filterHide)
                                                   .map((e) => TvVideoItem(video: e, autoFocus: false))
                                                   .toList(),
                                               if (_.loading)
