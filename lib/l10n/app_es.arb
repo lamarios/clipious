@@ -1194,5 +1194,17 @@
   "deArrowReplaceThumbnailsDescription": "Reemplazar las miniaturas del vídeo además de los títulos",
   "@deArrowReplaceThumbnailsDescription": {
     "description": "Description for DeArrow setting switch"
+  },
+  "copySettingsAsJsonDescription": "Copie los ajustes como JSON para ayudar a la depuración si se encuentra con un problema con la aplicación y decide plantear un problema",
+  "@copySettingsAsJsonDescription": {
+    "description": ""
+  },
+  "copySettingsAsJson": "Copiar los ajustes como JSON al portapapeles",
+  "@copySettingsAsJson": {
+    "description": "title for settings sections to allow users to copy their settings as json to make debugging easier"
+  },
+  "searchSortBy": "Ordenar por",
+  "@searchSortBy": {
+    "description": "Search sorting option"
   }
 }

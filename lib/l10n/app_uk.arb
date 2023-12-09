@@ -619,7 +619,7 @@
   "@rememberSubtitleLanguageDescription": {
     "description": "Settings description for remembering subtitle language"
   },
-  "rememberSubtitleLanguage": "Запам''ятати мову субтитрів",
+  "rememberSubtitleLanguage": "Запам'ятайте мову субтитрів",
   "@rememberSubtitleLanguage": {
     "description": "Settings label for remembering subtitle language"
   },
@@ -900,5 +900,61 @@
   "noHistory": "Немає історії перегляду, перегляньте кілька відео, і вона з''явиться тут",
   "@noHistory": {
     "description": "Message when the user visits the history tab but it's empty"
+  },
+  "homeLayoutEditor": "Змінити макет головного екрану",
+  "@homeLayoutEditor": {
+    "description": "Title of layout editor screen"
+  },
+  "navigationBarLabelNeverShow": "Ніколи не показувати мітку",
+  "@navigationBarLabelNeverShow": {
+    "description": "Never show label option for navigation bar"
+  },
+  "customizeAppLayout": "Налаштувати розділи програми",
+  "@customizeAppLayout": {
+    "description": "Settings label for the settings to allow the user to set up the app sections themselves"
+  },
+  "navigationBarLabelShowOnSelect": "Тільки на вибраному елементі",
+  "@navigationBarLabelShowOnSelect": {
+    "description": "Label only showing when selected option for navigation bar"
+  },
+  "enabled": "Увімкнено",
+  "@enabled": {
+    "description": "Text to show something is enabled"
+  },
+  "navigationBarLabelAlwaysShowing": "Мітки завжди видно",
+  "@navigationBarLabelAlwaysShowing": {
+    "description": "Label always showing option for navigation bar"
+  },
+  "videoFilterApplyDateToFilter": "Фільтрувати відео за вказаний час",
+  "@videoFilterApplyDateToFilter": {
+    "description": "Label for switch to allow user to customize video filter and set days of week and time to them"
+  },
+  "layoutEditorExplanation": "Ви можете налаштувати, що відображати на головному екрані: у вас може бути до двох невеликих уявлень з горизонтальним прокручуванням і одне велике джерело.",
+  "@layoutEditorExplanation": {
+    "description": "text to explain the home layout editor"
+  },
+  "library": "Бібліотека",
+  "@library": {
+    "description": "Name for user library"
+  },
+  "distractionFreeModeDescription": "Вимкнути коментарі та рекомендації до відео",
+  "@distractionFreeModeDescription": {
+    "description": "Description for distraction free mode"
+  },
+  "home": "Головний екран",
+  "@home": {
+    "description": "Label for Home browsing tab"
+  },
+  "secondsShortForm": "сек.",
+  "@secondsShortForm": {
+    "description": "Short form for the word seconds"
+  },
+  "layoutEditorAddVideoSource": "Додать джерело відео",
+  "@layoutEditorAddVideoSource": {
+    "description": "Label for button to allow user to add more video sources to the home screen"
+  },
+  "navigationBarStyle": "Стиль панелі навігації",
+  "@navigationBarStyle": {
+    "description": "Label for settings on customizing navigation bar style"
   }
 }

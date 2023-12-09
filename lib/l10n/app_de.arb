@@ -100,15 +100,15 @@
   "@recommended": {
     "description": "Recommended label"
   },
-  "couldntFetchVideos": "Videos konnten nicht abgerufen werden. Tippe um es erneut zu versuchen.",
+  "couldntFetchVideos": "Videos konnten nicht abgerufen werden. Zum erneuten Versuch antippen.",
   "@couldntFetchVideos": {
     "description": "Can't load bunch of videos, asking  user to try again"
   },
-  "wizardIntro": "Wählen einen öffentlichen Server oder füge einen eigenen hinzu. (Kann später in den Einstellungen geändert werden.)",
+  "wizardIntro": "Einen öffentlichen Server auswählen oder einen eigenen hinzufügen. (Kann später in den Einstellungen geändert werden)",
   "@wizardIntro": {
     "description": "Welcome message on frst time use"
   },
-  "startUsingClipious": "Benutze Clipious",
+  "startUsingClipious": "Clipious jetzt nutzen",
   "@startUsingClipious": {
     "description": "button label to start using the app"
   },
@@ -182,7 +182,7 @@
   "@newSorting": {
     "description": "Content sorting: new"
   },
-  "showOnStart": "Wähle aus, was beim Starten der App angezeigt werden soll",
+  "showOnStart": "Auswählen, was beim Starten der App angezeigt werden soll",
   "@showOnStart": {
     "description": "Title of dialog asking which screen the users prefers to see"
   },
@@ -194,11 +194,11 @@
   "@sponsorSkipped": {
     "description": "When a sponsor segment is skipped thanks to sponsor block"
   },
-  "selectBrowsingCountry": "Wähle das Land indem du browsen möchtest",
+  "selectBrowsingCountry": "Land zum Browsen auswählen",
   "@selectBrowsingCountry": {
     "description": "Select country for trending content"
   },
-  "sponsorBlockDescription": "Überspringe von der Community eingereichte Werbungsabschnitte",
+  "sponsorBlockDescription": "Von der Community eingereichte Sponsorensegmente überspringen",
   "@sponsorBlockDescription": {
     "description": "Sponsorblock setting description"
   },
@@ -210,7 +210,7 @@
   "@invalidInvidiousServer": {
     "description": "Error when the user tries to add a server that is not a proper or reachable invidious server"
   },
-  "addServerHelpText": "Verwende die + Taste, um eigene Server hinzuzufügen, oder tippe auf einen öffentlichen Server und füge ihn hinzu.",
+  "addServerHelpText": "Verwenden Sie die Taste +, um Ihre eigenen Server hinzuzufügen, oder tippen Sie auf einen öffentlichen Server und fügen Sie ihn hinzu.",
   "@addServerHelpText": {
     "description": "label for when the user hasn't chosen a server yet"
   },
@@ -266,11 +266,11 @@
   "@loadingPublicServer": {
     "description": "Message telling users the app is loading the list of public servers"
   },
-  "tapToAddServer": "Tippe um einen Server zu deiner Liste hinzuzufügen",
+  "tapToAddServer": "Tippen Sie auf, um einen Server zu Ihrer Liste hinzuzufügen",
   "@tapToAddServer": {
     "description": "public server description"
   },
-  "publicServersError": "Die Liste der öffentlichen Server konnte nicht abgerufen werden. Tippe um es erneut zu versuchen.",
+  "publicServersError": "Die Liste der öffentlichen Server konnte nicht abgerufen werden. Zum erneuten Versuch antippen.",
   "@publicServersError": {
     "description": "Error message when trying to get public servers but it failed"
   },
@@ -310,7 +310,7 @@
   "@country": {
     "description": "Country label"
   },
-  "whenAppStartsShow": "Wenn die Anwendung startet, zeige…",
+  "whenAppStartsShow": "Wenn die App startet, zeigen …",
   "@whenAppStartsShow": {
     "description": "Setting title for selecting the screen to show on start"
   },
@@ -379,7 +379,7 @@
   "@wrongUsernamePassword": {
     "description": "Error message when authentication fails"
   },
-  "cookieLoginDescription": "Verwende diese Methode, wenn du Probleme mit der Token-Authentifizierung haben",
+  "cookieLoginDescription": "Diese Methode verwenden, wenn Probleme mit der Token-Authentifizierung auftreten",
   "@cookieLoginDescription": {
     "description": "Cookie log in description"
   },
@@ -399,7 +399,7 @@
   "@authentication": {
     "description": "Label for server settings related to authentications"
   },
-  "sponsorBlockCategoryUnpaidSelfPromo": "Unbezahlte/Eigenwerbung",
+  "sponsorBlockCategoryUnpaidSelfPromo": "Unbezahlt / Eigenwerbung",
   "@sponsorBlockCategoryUnpaidSelfPromo": {
     "description": "Sponsor block 'Unpaid/Self promotion' Category"
   },
@@ -407,7 +407,7 @@
   "@addRecommendedToQueue": {
     "description": "Switch when playing a video to automatically add the recommended videos to the video queue"
   },
-  "sponsorBlockSettingsQuickDescription": "Wähle aus, welche Art von Segmenten übersprungen werden sollen",
+  "sponsorBlockSettingsQuickDescription": "Auswählen, welche Art von Segmenten übersprungen werden soll",
   "@sponsorBlockSettingsQuickDescription": {
     "description": "Small description of what the sponsor block settings do"
   },
@@ -423,7 +423,7 @@
   "@addToQueueList": {
     "description": "Label on button to add a video to the queue list"
   },
-  "sponsorBlockCategorySponsorDescription": "Bezahlte Werbung, bezahlte Empfehlungen und Direktwerbung. Nicht für Eigenwerbung oder kostenlose Ausrufen zu Anliegen/Erstellern/Webseiten/Produkten die sie mögen.",
+  "sponsorBlockCategorySponsorDescription": "Bezahlte Werbung, bezahlte Verweise und direkte Anzeigen. Nicht für Eigenwerbung oder kostenlose Hinweise auf Ursachen / Schöpfer / Websites / Produkte, die sie mögen.",
   "@sponsorBlockCategorySponsorDescription": {
     "description": "Sponsor block 'Sponsor' Category description"
   },
@@ -431,11 +431,11 @@
   "@sponsorBlockCategoryInteraction": {
     "description": "Sponsor block 'Interaction' Category"
   },
-  "sponsorBlockCategoryIntro": "Unterbrechung/Intro Animation",
+  "sponsorBlockCategoryIntro": "Unterbrechung / Intro-Animation",
   "@sponsorBlockCategoryIntro": {
     "description": "Sponsorblock 'Intro' Category"
   },
-  "sponsorBlockCategoryOutro": "Abspann/Credits",
+  "sponsorBlockCategoryOutro": "Abspann / Credits",
   "@sponsorBlockCategoryOutro": {
     "description": "Outro block 'Outro' Category"
   },
@@ -443,23 +443,23 @@
   "@sponsorBlockCategoryOutroDescription": {
     "description": "Outro block 'Outro' Category description"
   },
-  "sponsorBlockCategoryPreview": "Vorschau/Wiederholung",
+  "sponsorBlockCategoryPreview": "Vorschau / Zusammenfassung",
   "@sponsorBlockCategoryPreview": {
     "description": "Sponsorblock 'Preview' Category"
   },
-  "sponsorBlockCategoryFiller": "Ablenkende Nebenthemen/Witze",
+  "sponsorBlockCategoryFiller": "Ablenkende Nebenthemen / Witze",
   "@sponsorBlockCategoryFiller": {
     "description": "Sponsorblock 'Filler' Category"
   },
-  "sponsorBlockCategoryMusicOffTopic": "Musik: Nicht-Musik Abschnitt",
+  "sponsorBlockCategoryMusicOffTopic": "Musik: Nicht-musikalischer Bereich",
   "@sponsorBlockCategoryMusicOffTopic": {
     "description": "Sponsorblock 'MusicOffTopic' Category"
   },
-  "sponsorBlockCategoryUnpaidSelfPromoDescription": "Ähnlich zu \"sponsor\" außer für unbezahlte oder Eigenwerbung. Dies beinhaltet Abschnitte über Merchandise, Spenden oder Informationen darüber, mit wem sie zusammengearbeitet haben. ",
+  "sponsorBlockCategoryUnpaidSelfPromoDescription": "Ähnlich wie bei „Sponsor“, außer bei unbezahlter oder Eigenwerbung. Dazu gehören auch Abschnitte über Merchandise, Spenden oder Informationen darüber, mit wem sie zusammengearbeitet haben. ",
   "@sponsorBlockCategoryUnpaidSelfPromoDescription": {
     "description": "Sponsor block 'Unpaid/Self promotion' Category description"
   },
-  "sponsorBlockCategoryInteractionDescription": "Wenn es mitten im Inhalt einen kurzen Hinweis gibt, um zu liken, abonnieren oder zu folgen. Wenn es lang ist oder sich auf etwas Bestimmtes bezieht, sollte es stattdessen unter Selbstwerbung stehen.",
+  "sponsorBlockCategoryInteractionDescription": "Wenn in der Mitte des Inhalts eine kurze Aufforderung steht, ihn zu mögen, zu abonnieren oder ihm zu folgen. Wenn er lang ist oder sich auf etwas Bestimmtes bezieht, sollte er stattdessen unter Eigenwerbung stehen.",
   "@sponsorBlockCategoryInteractionDescription": {
     "description": "Sponsor block 'Interaction' Category description"
   },
@@ -467,11 +467,11 @@
   "@sponsorBlockCategoryIntroDescription": {
     "description": "Sponsorblock 'Intro' Category description"
   },
-  "sponsorBlockCategoryPreviewDescription": "Sammlung von Clips, die zeigen was in diesem Video kommen wird oder andere Videos einer Serie, bei welchen die gesamte Information später im Video wiederholt wird.",
+  "sponsorBlockCategoryPreviewDescription": "Sammlung von Clips, die zeigen, was in diesem Video oder in anderen Videos einer Serie, in der alle Informationen später im Video wiederholt werden, behandelt wird.",
   "@sponsorBlockCategoryPreviewDescription": {
     "description": "Sponsorblock 'Preview' Category description"
   },
-  "sponsorBlockCategoryFillerDescription": "Tangentielle Szenen werden nur als Lückenfüller oder humorvolle Elemente hinzugefügt, die nicht erforderlich sind, um den Hauptinhalt des Videos zu verstehen. Dabei handelt es sich nicht um Abschnitte, die Kontext oder Hintergrundinformationen liefern. Diese Kategorie ist sehr aggressiv und für die Zeiten gedacht, in denen man nicht in Stimmung für \"Spaß\" ist.",
+  "sponsorBlockCategoryFillerDescription": "Tangentiale Szenen, die nur zur Auflockerung oder für den Humor hinzugefügt werden und für das Verständnis des Hauptinhalts des Videos nicht erforderlich sind. Dies sollte keine Segmente beinhalten, die Kontext oder Hintergrunddetails liefern. Dies ist eine sehr aggressive Kategorie für den Fall, dass Sie nicht in der Stimmung für „Spaß“ sind.",
   "@sponsorBlockCategoryFillerDescription": {
     "description": "Sponsorblock 'Filler' Category description"
   },
@@ -499,11 +499,11 @@
   "@subtitleFontSize": {
     "description": "Settings label for the size of the subtitles"
   },
-  "skipSslVerification": "Überspringe die SSL-Zertifikat überprüfung",
+  "skipSslVerification": "SSL-Zertifikatsprüfung überspringen",
   "@skipSslVerification": {
     "description": "Setting label to skip ssl certification verification"
   },
-  "skipSslVerificationDescription": "Für die Verwendung eines selbstsignierten SSL-Zertifikats oder bei SSL-bezogenen Problemen mit Ihrem Server.",
+  "skipSslVerificationDescription": "Für die Verwendung eines selbst signierten SSL-Zertifikats oder bei SSL-bezogenen Problemen mit Ihrem Server.",
   "@skipSslVerificationDescription": {
     "description": "Setting description for the skip ssl certification verification"
   },
@@ -555,7 +555,7 @@
   "@searchSortViewCount": {
     "description": "Sort search by view count"
   },
-  "returnYoutubeDislikeDescription": "Zeigen Sie die geschätzte Anzahl der Video-Dislikes mithilfe der von returnyoutubedislike.com bereitgestellten API an",
+  "returnYoutubeDislikeDescription": "Anzeige der geschätzten Videoabneigungen über die API von returnyoutubedislike.com",
   "@returnYoutubeDislikeDescription": {
     "description": "ReturnYoutubeDislike setting description"
   },
@@ -563,7 +563,7 @@
   "@rememberSubtitleLanguage": {
     "description": "Settings label for remembering subtitle language"
   },
-  "subtitleFontSizeDescription": "Ändern Sie die Größe der Untertitel, falls sie auf Ihrem Gerät zu klein oder zu groß sind",
+  "subtitleFontSizeDescription": "Die Größe der Untertitel ändern, wenn sie auf dem Gerät zu klein oder zu groß sind",
   "@subtitleFontSizeDescription": {
     "description": "Settings description for subtitle size"
   },
@@ -583,7 +583,7 @@
   "@searchHistory": {
     "description": "Settings label for search history"
   },
-  "enableSearchHistory": "Suchverlauf anschalten",
+  "enableSearchHistory": "Suchverlauf aktivieren",
   "@enableSearchHistory": {
     "description": "Settings label for enabling search history"
   },
@@ -591,7 +591,7 @@
   "@searchHistoryLimit": {
     "description": "Settings label for search history limit"
   },
-  "searchHistoryLimitDescription": "Einstellen wie viele vorherige Suchanfragen in den Vorschlägen angezeigt werden",
+  "searchHistoryLimitDescription": "Einstellen, wie viele vorherige Suchanfragen in den Vorschlägen angezeigt werden",
   "@searchHistoryLimitDescription": {
     "description": "Settings label for search history limit description"
   },
@@ -615,7 +615,7 @@
   "@followSystem": {
     "description": "Follow system label"
   },
-  "requiresRestart": "Erfordert einen App Neustart",
+  "requiresRestart": "Erfordert Neustart der App",
   "@requiresRestart": {
     "description": "Requires app restart label"
   },
@@ -627,15 +627,15 @@
   "@quality": {
     "description": "Name of TV ui video settings"
   },
-  "useProxyDescription": "Indem du die Video-Streams vom Server proxyierst, kannst du regionale Sperren umgehen oder die Sperrung von YouTube durch deinen Internetdienstanbieter umgehen",
+  "useProxyDescription": "Durch den Proxy von Videostreams vom Server können regionale Sperren oder die Blockierung von YouTube durch Internetdienstanbieter umgangen werden",
   "@useProxyDescription": {
     "description": "Description for the use proxy settings"
   },
-  "sponsorBlockCategoryMusicOffTopicDescription": "Nur zur Verwendung in Musikvideos. Dies sollte nur für Abschnitte von Musikvideos verwendet werden, die nicht bereits von einer anderen Kategorie abgedeckt sind.",
+  "sponsorBlockCategoryMusicOffTopicDescription": "Nur zur Verwendung in Musikvideos. Dies sollte nur für Abschnitte von Musikvideos verwendet werden, die nicht bereits durch eine andere Kategorie abgedeckt sind.",
   "@sponsorBlockCategoryMusicOffTopicDescription": {
     "description": "Only for use in music videos. This only should be used for sections of music videos that aren't already covered by another category."
   },
-  "pressDownToShowSettings": "Drücke den Pfeil nach unten um die Einstellungen anzuzeigen",
+  "pressDownToShowSettings": "Nach unten drücken, um Einstellungen anzuzeigen",
   "@pressDownToShowSettings": {
     "description": "Instruction on how to show video settings when playing a video on TV"
   },
@@ -1028,5 +1028,179 @@
   "askToEnableBackgroundServiceTitle": "Benachrichtigungen ausgeschaltet",
   "@askToEnableBackgroundServiceTitle": {
     "description": "If the users tries to turn on notifications for a channel but hasn't enable notifications in the app we need to turn it on for them"
+  },
+  "itemListErrorInvalidScope": "Sie haben keine Berechtigung, dies zu sehen. Wenn Sie mit der Token-Methode angemeldet sind, versuchen Sie, sich ab- und wieder anzumelden.",
+  "@itemListErrorInvalidScope": {
+    "description": "Error when the user doesn't have the proper scope to its current token"
+  },
+  "askToEnableBackgroundServiceContent": "Um Benachrichtigungen zu erhalten, müssen die Clipious-Benachrichtigungen aktiviert werden. OK drücken, um sie zu aktivieren.",
+  "@askToEnableBackgroundServiceContent": {
+    "description": "If the users tries to turn on notifications for a channel but hasn't enable notifications in the app we need to turn it on for them"
+  },
+  "askForDisableBatteryOptimizationContent": "Um Benachrichtigungen senden zu können, muss Clipious einen Hintergrunddienst ausführen. Für einen reibungslosen Betrieb ist es erforderlich, dass Clipious eine uneingeschränkte Akkunutzung erhält. Tippen Sie auf OK, um die Einstellungen für die Akkuoptimierung zu öffnen.",
+  "@askForDisableBatteryOptimizationContent": {
+    "description": "Content for the dialog asking the user to turn off disabling battery optimization when turning on notifications"
+  },
+  "deArrowWarning": "Die Aktivierung von DeArrow kann die Browsing-Geschwindigkeit der App erheblich verringern, da für jedes einzelne Video zusätzliche HTTP-Anfragen erforderlich sind",
+  "@deArrowWarning": {
+    "description": "Warning message when the user enables DeArrow"
+  },
+  "homeLayoutEditor": "Layout der Startseite bearbeiten",
+  "@homeLayoutEditor": {
+    "description": "Title of layout editor screen"
+  },
+  "deArrowReplaceThumbnails": "Miniaturansichten ersetzen",
+  "@deArrowReplaceThumbnails": {
+    "description": "Settings title for checkbox on whether the thumbnail should be replaced as well"
+  },
+  "customizeAppLayout": "App-Bereiche anpassen",
+  "@customizeAppLayout": {
+    "description": "Settings label for the settings to allow the user to set up the app sections themselves"
+  },
+  "noSubscriptions": "Keine Abonnements, Sie können Videos durchsuchen und jeden Kanal abonnieren, der Ihnen gefällt.",
+  "@noSubscriptions": {
+    "description": "Message when the user has no subs"
+  },
+  "clearHistoryQuestionExplanation": "Dadurch wird der Verlauf Ihres Kontos auf der von Ihnen verwendeten Invidious-Instanz gelöscht. Dies kann nicht rückgängig gemacht werden.",
+  "@clearHistoryQuestionExplanation": {
+    "description": "Message for dialog before clearing full viewing history"
+  },
+  "notificationsDescription": "Aktivieren und überprüfen Sie, worüber Sie benachrichtigt werden",
+  "@notificationsDescription": {
+    "description": "Setting description for notifications"
+  },
+  "enabled": "Aktiviert",
+  "@enabled": {
+    "description": "Text to show something is enabled"
+  },
+  "customizeAppLayoutExplanation": "Wählen Sie aus, welche Bereiche in der Hauptnavigationsleiste der App angezeigt werden sollen. Klicken Sie auf das Startsymbol, um auszuwählen, welcher Bildschirm beim Starten der App angezeigt wird. Sie können die Bereiche neu anordnen, indem Sie sie verschieben.",
+  "@customizeAppLayoutExplanation": {
+    "description": ""
+  },
+  "deArrowSettingDescription": "Clickbait-Titel und Miniaturbilder ersetzen",
+  "@deArrowSettingDescription": {
+    "description": "Description for dearrow"
+  },
+  "deArrowReplaceThumbnailsDescription": "Videominiaturen zusätzlich zu den Titeln ersetzen",
+  "@deArrowReplaceThumbnailsDescription": {
+    "description": "Description for DeArrow setting switch"
+  },
+  "playlistNotificationContent": "Es gibt {count, plural, =0{keine neuen Videos} =1{1 neues Video} other{{count} neue Videos}} in der Wiedergabeliste {playlist}",
+  "@playlistNotificationContent": {
+    "description": "Content for playlist notification when there are new videos",
+    "placeholders": {
+      "playlist": {
+        "type": "String",
+        "example": "Lo-Fi girl"
+      },
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "layoutEditorExplanation": "Sie können entscheiden, was auf Ihrem Startbildschirm angezeigt werden soll. Sie können bis zu 2 kleine Ansichten mit horizontalem Scrollen und eine große Quelle haben.",
+  "@layoutEditorExplanation": {
+    "description": "text to explain the home layout editor"
+  },
+  "deleteChannelNotificationContent": "Sie werden keine weiteren Benachrichtigungen von diesem Kanal erhalten.",
+  "@deleteChannelNotificationContent": {
+    "description": "Title for dialog to confirm whether to delete channel notifications"
+  },
+  "subscriptionNotificationDescription": "Lassen Sie sich über neue Videos in Ihrem Abonnement-Feed benachrichtigen, wenn Sie in Ihrer aktuellen Instanz angemeldet sind",
+  "@subscriptionNotificationDescription": {
+    "description": "Description for subscription notifications"
+  },
+  "noHistory": "Kein Verlauf, schauen Sie sich einige Videos an und es wird hier erscheinen",
+  "@noHistory": {
+    "description": "Message when the user visits the history tab but it's empty"
+  },
+  "videoFilterDayOfWeekDescription": "Sie können selektiv Wochentage und Uhrzeiten auswählen, für die die Filter gelten, um z. B. Spoiler von Sportereignissen zu vermeiden.",
+  "@videoFilterDayOfWeekDescription": {
+    "description": ""
+  },
+  "copySettingsAsJsonDescription": "Die Einstellungen als JSON kopieren, um die Fehlersuche zu erleichtern, wenn ein Problem mit der App auftritt und ein Fehler gemeldet werden soll",
+  "@copySettingsAsJsonDescription": {
+    "description": ""
+  },
+  "deletePlaylistNotificationContent": "Sie werden keine weiteren Benachrichtigungen von dieser Wiedergabeliste erhalten.",
+  "@deletePlaylistNotificationContent": {
+    "description": "Title for dialog to confirm whether to delete playlist notifications"
+  },
+  "channelNotificationContent": "Es gibt {count, plural, =0{keine neuen Videos} =1{1 neues Video} other{{count} neue Videos}} von {channel}",
+  "@channelNotificationContent": {
+    "description": "Content for channel notification when there are new videos",
+    "placeholders": {
+      "channel": {
+        "type": "String",
+        "example": "MKBHD"
+      },
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "subtitlesBackgroundDescription": "Schwarzer Hintergrund für Untertitel, um sie besser lesbar zu machen",
+  "@subtitlesBackgroundDescription": {
+    "description": "Description for settings to set black background  for subtitles"
+  },
+  "copySettingsAsJson": "Einstellungen als JSON in die Zwischenablage kopieren",
+  "@copySettingsAsJson": {
+    "description": "title for settings sections to allow users to copy their settings as json to make debugging easier"
+  },
+  "home": "Startseite",
+  "@home": {
+    "description": "Label for Home browsing tab"
+  },
+  "enableNotificationDescriptions": "Führt einen Dienst im Vordergrund aus, um die Änderungen, die Sie überwachen, zu überprüfen und Sie zu benachrichtigen",
+  "@enableNotificationDescriptions": {
+    "description": ""
+  },
+  "noDownloadedVideos": "Keine heruntergeladenen Videos, durchsuchen, langes Drücken auf ein Video in einer Liste oder Tippen auf die Download-Schaltfläche auf einem Video-Bildschirm zum Herunterladen",
+  "@noDownloadedVideos": {
+    "description": "Message showing when the user goes to the download screen but there are no offline videos."
+  },
+  "youCanSubscribeAgainLater": "Sie können diesen Kanal später erneut abonnieren",
+  "@youCanSubscribeAgainLater": {
+    "description": "Text for the unscubscribe confirmation dialog"
+  },
+  "videoFailedDownloadRetry": "Herunterladen fehlgeschlagen, zum erneuten Versuch tippen",
+  "@videoFailedDownloadRetry": {
+    "description": "Shown on download manager when a download fails and prompt the user to retry"
+  },
+  "notificationFrequencySliderLabel": "{hours, select,  24{1 Tag} other{{hours} Std.}}",
+  "@notificationFrequencySliderLabel": {
+    "description": "Short form for a number of hours going up to 1 day",
+    "hours": {
+      "type": "num",
+      "format": "compact"
+    }
+  },
+  "foregroundServiceNotificationContent": "Nach neuen Videos wird einmal {hours, select, 1{pro Stunde} 24{täglich} other{alle {hours} Stunden}} geprüft",
+  "@foregroundServiceNotificationContent": {
+    "description": "Content for the foreground service running notification when the user wants to receive notifications",
+    "hours": {
+      "type": "num",
+      "format": "compact"
+    }
+  },
+  "videoDownloadStarted": "Videodownload gestartet",
+  "@videoDownloadStarted": {
+    "description": "Message when a video starts being downloaded"
+  },
+  "notificationFrequencySettingsDescription": "Wie oft die App nach neuen Videos sucht",
+  "@notificationFrequencySettingsDescription": {
+    "description": "Description for frequency settings"
+  },
+  "subscriptionNotificationContent": "Es gibt {count, plural, =0{keine neuen Videos} =1{1 neues Video} other{{count} neue Videos}} in Ihrem Abonnement-Feed",
+  "@subscriptionNotificationContent": {
+    "description": "Content for subscription notification",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
   }
 }
