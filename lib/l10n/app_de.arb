@@ -1202,5 +1202,17 @@
         "format": "compact"
       }
     }
+  },
+  "serverIsNotReachable": "Server ist nicht erreichbar",
+  "@serverIsNotReachable": {
+    "description": "Title for dialog when adding a server that is not reachable"
+  },
+  "malformedStatsEndpoint": "/api/v1/stats ist nicht wie erwartet",
+  "@malformedStatsEndpoint": {
+    "description": "Title for dialog when adding a server that isn't validated as it should"
+  },
+  "searchSortBy": "Sortieren nach",
+  "@searchSortBy": {
+    "description": "Search sorting option"
   }
 }
