@@ -4,33 +4,30 @@ import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:invidious/globals.dart';
 
-part 'tv_home.g.dart';
 
-class TvHomeCubit extends Cubit<TvHomeState> {
+class TvHomeCubit extends Cubit<bool> {
+  ScrollController scrollController = ScrollController();
   TvHomeCubit(super.initialState);
 
   menuItemFocusChanged(bool focus) {
     if (focus) {
       EasyDebounce.cancel('expand-home-menu');
-      emit(state.copyWith(expandMenu: true));
+      emit(true);
     } else {
       EasyDebounce.debounce('expand-home-menu', const Duration(milliseconds: 50), () {
-        emit(state.copyWith(expandMenu: false));
+        emit(false);
       });
     }
   }
 
+  @override
+  close()async {
+    scrollController.dispose();
+    super.close();
+  }
+
   scrollToTop() {
-    state.scrollController.animateTo(0, duration: animationDuration, curve: Curves.easeInOutQuad);
+    scrollController.animateTo(0, duration: animationDuration, curve: Curves.easeInOutQuad);
   }
 }
 
-@CopyWith(constructor: "_")
-class TvHomeState {
-  bool expandMenu = false;
-  ScrollController scrollController = ScrollController();
-
-  TvHomeState();
-
-  TvHomeState._(this.expandMenu, this.scrollController);
-}

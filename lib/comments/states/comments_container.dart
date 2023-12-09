@@ -1,7 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:copy_with_extension/copy_with_extension.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'comments_container.g.dart';
+part 'comments_container.freezed.dart';
 
 class CommentsContainerCubit extends Cubit<CommentsContainerState> {
   CommentsContainerCubit(super.initialState);
@@ -9,18 +10,17 @@ class CommentsContainerCubit extends Cubit<CommentsContainerState> {
   changeSorting(String? value) {
     var state = this.state.copyWith();
     if (value != state.sortBy) {
-      state.sortBy = value ?? 'top';
-      emit(state);
+      emit(state.copyWith(sortBy: value ?? 'top'));
     }
   }
 }
 
-@CopyWith(constructor: "_")
-class CommentsContainerState {
-  String source = 'youtube';
-  String sortBy = 'top';
+@freezed
+class CommentsContainerState with _$CommentsContainerState {
+  const factory CommentsContainerState({
+    @Default('youtube') String source,
+    @Default('top') String sortBy
+  }
+      ) = _CommentsContainerState;
 
-  CommentsContainerState();
-
-  CommentsContainerState._(this.source, this.sortBy);
 }

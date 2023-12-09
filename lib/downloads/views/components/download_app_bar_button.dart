@@ -6,7 +6,7 @@ import 'package:invidious/router.dart';
 import '../../states/download_manager.dart';
 
 class AppBarDownloadButton extends StatelessWidget {
-  const AppBarDownloadButton({Key? key}) : super(key: key);
+  const AppBarDownloadButton({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +14,9 @@ class AppBarDownloadButton extends StatelessWidget {
     var textTheme = Theme.of(context).textTheme;
     return BlocBuilder<DownloadManagerCubit, DownloadManagerState>(
       // buildWhen: (previous, current) => previous.videos.length != current.videos.length || previous.totalProgress != current.totalProgress,
-      builder: (context, _) => Stack(
+      builder: (context, _) {
+        var cubit = context.read<DownloadManagerCubit>();
+        return Stack(
         alignment: Alignment.center,
         children: [
           IconButton(
@@ -31,7 +33,7 @@ class AppBarDownloadButton extends StatelessWidget {
                       width: 15,
                       height: 15,
                       child: CircularProgressIndicator(
-                        value: _.totalProgress == 0 ? null : _.totalProgress,
+                        value: cubit.totalProgress == 0 ? null : cubit.totalProgress,
                         strokeWidth: 2,
                       )),
                 )
@@ -52,7 +54,8 @@ class AppBarDownloadButton extends StatelessWidget {
                     )
                   : const SizedBox.shrink())
         ],
-      ),
+      );
+      },
     );
   }
 

@@ -18,7 +18,7 @@ class CommentsContainer extends StatelessWidget {
     var textTheme = Theme.of(context).textTheme;
 
     return BlocProvider(
-      create: (context) => CommentsContainerCubit(CommentsContainerState()),
+      create: (context) => CommentsContainerCubit(const CommentsContainerState()),
       child: BlocBuilder<CommentsContainerCubit, CommentsContainerState>(
         builder: (context, _) {
           var cubit = context.read<CommentsContainerCubit>();

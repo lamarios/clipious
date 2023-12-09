@@ -10,19 +10,21 @@ import '../../database.dart';
 import '../../globals.dart';
 import '../../home/models/db/home_layout.dart';
 import '../../settings/models/db/server.dart';
-import '../../videos/models/db/progress.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'app.g.dart';
+part 'app.freezed.dart';
 
 final log = Logger('HomeState');
 
 class AppCubit extends Cubit<AppState> {
+  late final StreamSubscription intentDataStreamSubscription;
   AppCubit(super.initialState) {
     onReady();
   }
 
+
   onReady() {
-    state.intentDataStreamSubscription = ReceiveSharingIntent.getTextStream().listen((String value) {
+    intentDataStreamSubscription = ReceiveSharingIntent.getTextStream().listen((String value) {
       openAppLink(value);
     }, onError: (err) {
       log.warning("getLinkStream error: $err");
@@ -33,18 +35,13 @@ class AppCubit extends Cubit<AppState> {
       openAppLink((value ?? ''));
     });
 
-    var selectedIndex = int.parse(db.getSettings(ON_OPEN)?.value ?? '0');
-    if (!isLoggedIn && selectedIndex > 1 || selectedIndex < 0) {
-      selectedIndex = 0;
-    }
-    selectIndex(selectedIndex);
 
     service.syncHistory();
   }
 
   @override
   close() async {
-    state.intentDataStreamSubscription.cancel();
+    intentDataStreamSubscription.cancel();
     super.close();
   }
 
@@ -86,23 +83,24 @@ class AppCubit extends Cubit<AppState> {
   bool get isLoggedIn => (state.server?.authToken?.isNotEmpty ?? false) || (state.server?.sidCookie?.isNotEmpty ?? false);
 }
 
-@CopyWith(constructor: "_")
-class AppState {
-  late int selectedIndex;
-
-  late Server? server;
-
-  late StreamSubscription intentDataStreamSubscription;
-
-  HomeLayout homeLayout = db.getHomeLayout();
-
-  AppState() {
+@freezed
+class AppState with _$AppState {
+  static AppState init(){
+    late Server? server;
     try {
       server = db.getCurrentlySelectedServer();
     } catch (e) {
       server = null;
     }
-  }
+    HomeLayout homeLayout = db.getHomeLayout();
+    bool isLoggedIn = (server?.authToken?.isNotEmpty ?? false) || (server?.sidCookie?.isNotEmpty ?? false);
 
-  AppState._(this.selectedIndex, this.server, this.intentDataStreamSubscription, this.homeLayout);
+    var selectedIndex = int.parse(db.getSettings(ON_OPEN)?.value ?? '0');
+    if (!isLoggedIn && selectedIndex > 1 || selectedIndex < 0) {
+      selectedIndex = 0;
+    }
+
+    return AppState(selectedIndex, server, homeLayout);
+  }
+  factory AppState(int selectedIndex, Server? server, HomeLayout homeLayout ) = _AppState;
 }

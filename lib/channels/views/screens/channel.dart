@@ -27,9 +27,9 @@ class ChannelScreen extends StatelessWidget {
     var locals = AppLocalizations.of(context)!;
 
     return BlocProvider(
-      create: (BuildContext context) => ChannelCubit(ChannelController(channelId)),
+      create: (BuildContext context) => ChannelCubit(ChannelController(channelId: channelId)),
       child: BlocBuilder<ChannelCubit, ChannelController>(
-        builder: (context, _) {
+        builder: (context, channelState) {
           var cubit = context.read<ChannelCubit>();
           return Scaffold(
             appBar: AppBar(
@@ -37,22 +37,22 @@ class ChannelScreen extends StatelessWidget {
               elevation: 0,
               scrolledUnderElevation: 0,
               title: Text(
-                _.channel?.author ?? '',
+                channelState.channel?.author ?? '',
               ),
-              actions: _.loading
+              actions: channelState.loading
                   ? []
                   : [
                       Visibility(
-                        visible: _.channel != null,
+                        visible: channelState.channel != null,
                         child: IconButton(
-                          onPressed: () => showSharingSheet(context, _.channel!),
+                          onPressed: () => showSharingSheet(context, channelState.channel!),
                           icon: const Icon(Icons.share),
                         ),
                       ),
                     ],
             ),
             backgroundColor: colorScheme.background,
-            bottomNavigationBar: _.loading
+            bottomNavigationBar: channelState.loading
                 ? null
                 : FadeIn(
                     child: NavigationBar(
@@ -60,7 +60,7 @@ class ChannelScreen extends StatelessWidget {
                       labelBehavior: context.read<SettingsCubit>().state.navigationBarLabelBehavior,
                       elevation: 0,
                       onDestinationSelected: cubit.selectIndex,
-                      selectedIndex: _.selectedIndex,
+                      selectedIndex: channelState.selectedIndex,
                       destinations: <Widget>[
                         NavigationDestination(icon: const Icon(Icons.info), label: locals.info),
                         NavigationDestination(icon: const Icon(Icons.play_arrow), label: locals.videos),
@@ -75,31 +75,31 @@ class ChannelScreen extends StatelessWidget {
                 bottom: false,
                 child: NavigationSwitcher(
                   child: <Widget>[
-                    _.loading
+                    channelState.loading
                         ? const ChannelPlaceHolder()
-                        : ChannelInfo(key: const ValueKey('info'), channel: _.channel!),
-                    if (!_.loading)
+                        : ChannelInfo(key: const ValueKey('info'), channel: channelState.channel!),
+                    if (!channelState.loading)
                       ChannelVideosView(
                         key: const ValueKey('videos'),
-                        channel: _.channel!,
+                        channel: channelState.channel!,
                         getVideos: service.getChannelVideos,
                       ),
-                    if (!_.loading)
+                    if (!channelState.loading)
                       ChannelVideosView(
                         key: const ValueKey('shorts'),
-                        channel: _.channel!,
+                        channel: channelState.channel!,
                         getVideos: service.getChannelShorts,
                       ),
-                    if (!_.loading)
+                    if (!channelState.loading)
                       ChannelVideosView(
                         key: const ValueKey('streams'),
-                        channel: _.channel!,
+                        channel: channelState.channel!,
                         getVideos: service.getChannelStreams,
                       ),
-                    if (!_.loading)
+                    if (!channelState.loading)
                       ChannelPlayListsView(
-                          key: const ValueKey('playlists'), channelId: _.channel!.authorId, canDeleteVideos: false)
-                  ][_.selectedIndex],
+                          key: const ValueKey('playlists'), channelId: channelState.channel!.authorId, canDeleteVideos: false)
+                  ][channelState.selectedIndex],
                 )),
           );
         },

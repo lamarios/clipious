@@ -20,7 +20,7 @@ class CommentsView extends StatelessWidget {
     var textTheme = Theme.of(context).textTheme;
     return BlocProvider(
       create: (context) =>
-          CommentsCubit(CommentsState(video: video, sortBy: sortBy, source: source, continuation: continuation)),
+          CommentsCubit(CommentsState.init(video: video, sortBy: sortBy, source: source, continuation: continuation)),
       child: BlocBuilder<CommentsCubit, CommentsState>(builder: (context, _) {
         var cubit = context.read<CommentsCubit>();
         List<Widget> widgets = [];

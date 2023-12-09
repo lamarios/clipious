@@ -1,10 +1,11 @@
 import 'package:bloc/bloc.dart';
 import 'package:copy_with_extension/copy_with_extension.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../globals.dart';
 import '../models/channel.dart';
 
-part 'channel.g.dart';
+part 'channel.freezed.dart';
 
 class ChannelCubit extends Cubit<ChannelController> {
   ChannelCubit(super.initialState) {
@@ -16,10 +17,7 @@ class ChannelCubit extends Cubit<ChannelController> {
     bool isSubscribed = await service.isSubscribedToChannel(state.channelId);
     Channel channel = await service.getChannel(state.channelId);
 
-    state.channel = channel;
-    state.loading = false;
-    state.isSubscribed = isSubscribed;
-    emit(state);
+    emit(state.copyWith(channel: channel, loading: false, isSubscribed: isSubscribed));
   }
 
 /*
@@ -31,9 +29,7 @@ class ChannelCubit extends Cubit<ChannelController> {
 */
 
   selectIndex(int index) {
-    var state = this.state.copyWith();
-    state.selectedIndex = index;
-    emit(state);
+    emit(state.copyWith(selectedIndex: index));
   }
 
   toggleSubscription() async {
@@ -46,25 +42,20 @@ class ChannelCubit extends Cubit<ChannelController> {
       }
       bool isSubscribed = await service.isSubscribedToChannel(state.channel!.authorId);
 
-      state.isSubscribed = isSubscribed;
-      emit(state);
+      emit(state.copyWith(isSubscribed: isSubscribed));
     }
   }
 }
 
-@CopyWith(constructor: "_")
-class ChannelController {
-  String channelId;
-  bool isSubscribed = false;
-  int selectedIndex = 0;
-  Channel? channel;
-  bool loading = true;
-  bool smallHeader = false;
-  double barHeight = 200;
-  double barOpacity = 1;
-
-  ChannelController(this.channelId);
-
-  ChannelController._(this.channelId, this.isSubscribed, this.selectedIndex, this.channel, this.loading,
-      this.smallHeader, this.barHeight, this.barOpacity);
+@freezed
+class ChannelController with _$ChannelController {
+  const factory ChannelController(
+      {required String channelId,
+      @Default(false) bool isSubscribed,
+      @Default(0) selectedIndex,
+      Channel? channel,
+      @Default(true) bool loading,
+      @Default(false) bool smallHeader,
+      @Default(200) double barHeight,
+      @Default(1) double barOpacity}) = _ChannelController;
 }

@@ -15,12 +15,14 @@ import 'package:invidious/mediaHander.dart';
 import 'package:invidious/notifications/notifications.dart';
 import 'package:invidious/player/states/player.dart';
 import 'package:invidious/router.dart';
+import 'package:invidious/settings/models/db/server.dart';
 import 'package:invidious/settings/states/settings.dart';
 import 'package:invidious/utils.dart';
 import 'package:invidious/workmanager.dart';
 import 'package:logging/logging.dart';
 
 import 'database.dart';
+import 'home/models/db/home_layout.dart';
 import 'settings/models/db/app_logs.dart';
 
 const brandColor = Color(0xFF4f0096);
@@ -65,7 +67,9 @@ Future<void> main() async {
   isTv = await isDeviceTv();
   runApp(MultiBlocProvider(providers: [
     BlocProvider(
-      create: (context) => AppCubit(AppState()),
+      create: (context) {
+        return AppCubit(AppState.init());
+      },
     ),
     BlocProvider(
       create: (context) {
