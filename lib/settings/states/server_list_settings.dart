@@ -1,13 +1,16 @@
+import 'dart:math';
+
 import 'package:bloc/bloc.dart';
 import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:flutter/material.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:logging/logging.dart';
 
 import '../../app/states/app.dart';
 import '../../globals.dart';
 import '../models/db/server.dart';
 
-part 'server_list_settings.g.dart';
+part 'server_list_settings.freezed.dart';
 
 const pingTimeout = 3;
 
@@ -16,6 +19,7 @@ enum PublicServerErrors { none, couldNotGetList }
 final log = Logger('ManagerServerView');
 
 class ServerListSettingsCubit extends Cubit<ServerListSettingsState> {
+  final TextEditingController addServerController = TextEditingController(text: 'https://');
   final AppCubit appCubit;
 
   ServerListSettingsCubit(super.initialState, this.appCubit) {
@@ -25,7 +29,7 @@ class ServerListSettingsCubit extends Cubit<ServerListSettingsState> {
 
   @override
   close() async {
-    state.onClose();
+    addServerController.dispose();
     super.close();
   }
 
@@ -36,22 +40,15 @@ class ServerListSettingsCubit extends Cubit<ServerListSettingsState> {
   }
 
   refreshServers() {
-    var state = this.state.copyWith();
     var servers =
         state.publicServers.where((s) => state.dbServers.indexWhere((element) => element.url == s.url) == -1).toList();
 
-    state.dbServers = db.getServers();
-    state.publicServers = servers;
 
-    emit(state);
+    emit(state.copyWith(dbServers: db.getServers(), publicServers: servers));
   }
 
   getPublicServers() async {
-    var state = this.state.copyWith();
-    state.pinging = true;
-    state.publicServersError = PublicServerErrors.none;
-
-    emit(state);
+    emit(state.copyWith(pinging: true, publicServersError: PublicServerErrors.none));
     try {
       var public = await service.getPublicServers();
 
@@ -65,13 +62,12 @@ class ServerListSettingsCubit extends Cubit<ServerListSettingsState> {
       int progress = 0;
       List<Server?> pingedServers = await Future.wait(servers.map((e) async {
         try {
-          var progressState = this.state.copyWith();
           e.ping = await service
               .pingServer(e.url)
               .timeout(const Duration(seconds: pingTimeout), onTimeout: () => const Duration(seconds: pingTimeout));
           progress++;
-          progressState.publicServerProgress = progress / servers.length;
-          emit(progressState);
+
+          emit(state.copyWith(publicServerProgress: progress / servers.length));
           return e;
         } catch (err, stacktrace) {
           log.severe('couldn\'t reach server ${e.url}', err, stacktrace);
@@ -85,12 +81,8 @@ class ServerListSettingsCubit extends Cubit<ServerListSettingsState> {
       successfullyPingedServers.sort((a, b) =>
           (a.ping ?? const Duration(seconds: pingTimeout)).compareTo(b.ping ?? const Duration(seconds: pingTimeout)));
 
-      state = this.state.copyWith();
-      state.pinging = false;
-      state.publicServers = successfullyPingedServers;
-      state.publicServersError = PublicServerErrors.none;
       if (!isClosed) {
-        emit(state);
+        emit(state.copyWith(pinging: false, publicServers:  successfullyPingedServers, publicServersError: PublicServerErrors.none));
       }
     } catch (err) {
       log.severe("couldn't get public playlist", err);
@@ -108,7 +100,7 @@ class ServerListSettingsCubit extends Cubit<ServerListSettingsState> {
   }
 
   saveServer() async {
-    var serverUrl = state.addServerController.value.text;
+    var serverUrl = addServerController.value.text;
     if (serverUrl.endsWith("/")) {
       serverUrl = serverUrl.substring(0, serverUrl.length - 1);
     }
@@ -118,7 +110,7 @@ class ServerListSettingsCubit extends Cubit<ServerListSettingsState> {
 
     Server server = Server(url: serverUrl);
     db.upsertServer(server);
-    state.addServerController.text = 'https://';
+    addServerController.text = 'https://';
     if (state.dbServers.isEmpty) {
       switchServer(server);
     }
@@ -132,24 +124,12 @@ class ServerListSettingsCubit extends Cubit<ServerListSettingsState> {
   }
 }
 
-@CopyWith(constructor: "_")
-class ServerListSettingsState {
-  ServerListSettingsState(
-      {required this.dbServers, required this.publicServers, this.publicServerProgress = 0, this.pinging = true});
+@freezed
+class ServerListSettingsState with _$ServerListSettingsState {
+  const factory ServerListSettingsState({
+    required List<Server> dbServers, required List<Server> publicServers, @Default(0)double publicServerProgress,
+    @Default(true) bool pinging ,
+    @Default(PublicServerErrors.none) PublicServerErrors publicServersError
+}) = _ServerListSettingsState;
 
-  List<Server> dbServers;
-  List<Server> publicServers;
-  double publicServerProgress;
-  TextEditingController addServerController = TextEditingController(text: 'https://');
-
-  bool pinging;
-
-  PublicServerErrors publicServersError = PublicServerErrors.none;
-
-  void onClose() {
-    addServerController.dispose();
-  }
-
-  ServerListSettingsState._(this.dbServers, this.publicServers, this.publicServerProgress, this.addServerController,
-      this.pinging, this.publicServersError);
 }

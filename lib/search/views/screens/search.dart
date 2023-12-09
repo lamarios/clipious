@@ -36,7 +36,7 @@ class SearchScreen extends StatelessWidget {
     var locals = AppLocalizations.of(context)!;
     var settings = context.read<SettingsCubit>();
     return BlocProvider(
-      create: (context) => SearchCubit<SearchState>(SearchState(query: query, searchNow: searchNow), settings),
+      create: (context) => SearchCubit<SearchState>(SearchState.init(query: query, searchNow: searchNow), settings),
       child: BlocBuilder<SearchCubit, SearchState>(
         builder: (context, _) {
           var cubit = context.read<SearchCubit>();

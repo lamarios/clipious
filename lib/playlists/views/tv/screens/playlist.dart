@@ -38,15 +38,15 @@ class TvPlaylistScreen extends PlaylistViewScreen {
       create: (context) => PlaylistCubit(PlaylistState(playlist: playlist, playlistItemHeight: 0), player),
       child: Scaffold(
         body: BlocBuilder<PlaylistCubit, PlaylistState>(
-          builder: (context, _) {
+          builder: (context, playlistState) {
             var cubit = context.read<PlaylistCubit>();
             return Stack(
               children: [
-                _.playlist.videos.isNotEmpty
+                playlistState.playlist.videos.isNotEmpty
                     ? CarouselSlider.builder(
-                        itemCount: _.playlist.videos.length,
+                        itemCount: playlistState.playlist.videos.length,
                         itemBuilder: (BuildContext context, int itemIndex, int pageViewIndex) {
-                          BaseVideo video = _.playlist.videos[itemIndex];
+                          BaseVideo video = playlistState.playlist.videos[itemIndex];
                           return VideoThumbnailView(
                               videoId: video.videoId,
                               decoration: BoxDecoration(),
@@ -60,7 +60,7 @@ class TvPlaylistScreen extends PlaylistViewScreen {
                           enableInfiniteScroll: true,
                           enlargeCenterPage: true,
                           autoPlayInterval: const Duration(seconds: 5),
-                          autoPlay: _.showImage,
+                          autoPlay: playlistState.showImage,
                         ),
                       )
                     : Container(
@@ -69,12 +69,12 @@ class TvPlaylistScreen extends PlaylistViewScreen {
                 AnimatedPositioned(
                   duration: animationDuration,
                   curve: Curves.easeInOutQuad,
-                  top: _.showImage ? 285 : 0,
+                  top: playlistState.showImage ? 285 : 0,
                   left: 0,
                   bottom: 0,
                   right: 0,
                   child: TweenAnimationBuilder(
-                      tween: Tween<double>(begin: 0, end: _.showImage ? 0 : overlayBlur),
+                      tween: Tween<double>(begin: 0, end: playlistState.showImage ? 0 : overlayBlur),
                       duration: animationDuration,
                       curve: Curves.easeInOutQuad,
                       builder: (context, value, child) {
@@ -100,7 +100,7 @@ class TvPlaylistScreen extends PlaylistViewScreen {
                                       children: [
                                         Padding(
                                           padding: const EdgeInsets.only(right: 16),
-                                          child: _.loading
+                                          child: playlistState.loading
                                               // child: true
                                               ? TvButton(
                                                   onFocusChanged: cubit.setShowImage,
@@ -110,7 +110,7 @@ class TvPlaylistScreen extends PlaylistViewScreen {
                                                       width: 60,
                                                       height: 60,
                                                       child: TweenAnimationBuilder(
-                                                        tween: Tween<double>(begin: 0, end: _.loadingProgress),
+                                                        tween: Tween<double>(begin: 0, end: playlistState.loadingProgress),
                                                         duration: animationDuration,
                                                         curve: Curves.easeInOutQuad,
                                                         builder: (context, value, child) => CircularProgressIndicator(
@@ -125,7 +125,7 @@ class TvPlaylistScreen extends PlaylistViewScreen {
                                                   onFocusChanged: (focus) {
                                                     cubit.setShowImage(focus);
                                                   },
-                                                  onPressed: (context) => playPlaylist(context, _),
+                                                  onPressed: (context) => playPlaylist(context, playlistState),
                                                   child: const Padding(
                                                     padding: EdgeInsets.all(15.0),
                                                     child: Icon(
@@ -139,33 +139,33 @@ class TvPlaylistScreen extends PlaylistViewScreen {
                                           crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
                                             Text(
-                                              _.playlist.title,
+                                              playlistState.playlist.title,
                                               maxLines: 1,
                                               overflow: TextOverflow.ellipsis,
                                               style: textTheme.headlineLarge,
                                             ),
                                             Text(
-                                              locals.nVideos(_.playlist.videos.length),
+                                              locals.nVideos(playlistState.playlist.videos.length),
                                               style: textTheme.bodyLarge,
                                             ),
                                           ],
                                         ),
                                       ],
                                     ),
-                                    if (!_.loading)
+                                    if (!playlistState.loading)
                                       Expanded(
                                         child: Padding(
                                           padding: const EdgeInsets.only(top: 16.0),
                                           child: GridView.count(
-                                            controller: _.scrollController,
+                                            controller: cubit.scrollController,
                                             childAspectRatio: 16 / 13,
                                             crossAxisCount: 3,
                                             children: [
-                                              ..._.playlist.videos
+                                              ...playlistState.playlist.videos
                                                   .where((element) => !element.filterHide)
                                                   .map((e) => TvVideoItem(video: e, autoFocus: false))
                                                   .toList(),
-                                              if (_.loading)
+                                              if (playlistState.loading)
                                                 ...repeatWidget(() => const TvVideoItemPlaceHolder(), count: 10)
                                             ],
                                           ),

@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/search/models/search_sort_by.dart';
 
@@ -10,7 +11,7 @@ import '../../playlists/models/playlist.dart';
 import '../../settings/states/settings.dart';
 import '../../videos/models/video_in_list.dart';
 
-part 'search.g.dart';
+part 'search.freezed.dart';
 
 class SearchCubit<T extends SearchState> extends Cubit<SearchState> {
   final SettingsCubit settings;
@@ -33,9 +34,7 @@ class SearchCubit<T extends SearchState> extends Cubit<SearchState> {
   }
 
   void sortChanged(SearchSortBy? value) {
-    var state = this.state.copyWith();
-    state.sortBy = value ?? state.sortBy;
-    emit(state);
+    emit(state.copyWith(sortBy: value ?? state.sortBy));
     search(state.queryController.value.text);
   }
 
@@ -44,21 +43,19 @@ class SearchCubit<T extends SearchState> extends Cubit<SearchState> {
     if (state.queryController.value.text.isEmpty) {
       return true;
     } else {
-      var state = this.state.copyWith();
       state.queryController.clear();
-      state.showResults = false;
-      emit(state);
+      emit(state.copyWith(showResults: false));
       return false;
     }
   }
 
-  clearSearch(){
+  clearSearch() {
     emit(state.copyWith(showResults: false));
   }
 
   void getSuggestions({bool hideResult = true}) {
     emit(state.copyWith(showResults: !hideResult));
-    if(!settings.state.distractionFreeMode) {
+    if (!settings.state.distractionFreeMode) {
       EasyDebounce.debounce('search-suggestions', const Duration(milliseconds: 500), () async {
         var suggestions = (await service.getSearchSuggestion(state.queryController.value.text)).suggestions;
         emit(state.copyWith(suggestions: suggestions));
@@ -80,9 +77,7 @@ class SearchCubit<T extends SearchState> extends Cubit<SearchState> {
   }
 
   void selectIndex(int value) {
-    var state = this.state.copyWith();
-    state.selectedIndex = value;
-    emit(state);
+    emit(state.copyWith(selectedIndex: value));
   }
 
   void setSearchSortBy(SearchSortBy value) {
@@ -94,23 +89,21 @@ abstract class Clonable<T> {
   T clone();
 }
 
-@CopyWith(constructor: "inLine")
-class SearchState extends Clonable<SearchState> {
-  TextEditingController queryController;
+@freezed
+class SearchState with _$SearchState {
+  const factory SearchState({
+    required TextEditingController queryController,
+    @Default(0) int selectedIndex,
+    @Default(false) bool searchNow,
+    @Default([]) List<String> suggestions,
+    @Default(SearchSortBy.relevance) SearchSortBy sortBy,
+    @Default(false) bool showResults,
+    @Default(1) int videoPage,
+    @Default(1) int channelPage,
+    @Default(1) int playlistPage,
+  }) = _SearchState;
 
-  int selectedIndex;
-
-  bool searchNow;
-
-  List<String> suggestions;
-
-  SearchSortBy sortBy;
-
-  bool showResults;
-
-  int videoPage, channelPage, playlistPage;
-
-  SearchState(
+  static SearchState init(
       {TextEditingController? queryController,
       int? selectedIndex,
       List<VideoInList>? videos,
@@ -125,22 +118,16 @@ class SearchState extends Clonable<SearchState> {
       int? videoPage,
       channelPage,
       playlistPage,
-      String? query})
-      : queryController = queryController ?? TextEditingController(text: query ?? ''),
-        selectedIndex = selectedIndex ?? 0,
-        searchNow = searchNow ?? false,
-        suggestions = suggestions ?? [],
-        sortBy = sortBy ?? SearchSortBy.relevance,
-        showResults = showResults ?? false,
-        videoPage = videoPage ?? 1,
-        channelPage = channelPage ?? 1,
-        playlistPage = playlistPage ?? 1;
-
-  SearchState.inLine(this.queryController, this.selectedIndex, this.searchNow, this.suggestions, this.sortBy,
-      this.showResults, this.videoPage, this.channelPage, this.playlistPage);
-
-  @override
-  SearchState clone() {
-    return copyWith();
+      String? query}) {
+    return SearchState(
+        queryController: queryController ?? TextEditingController(text: query ?? ''),
+        selectedIndex: selectedIndex ?? 0,
+        searchNow: searchNow ?? false,
+        suggestions: suggestions ?? [],
+        sortBy: sortBy ?? SearchSortBy.relevance,
+        showResults: showResults ?? false,
+        videoPage: videoPage ?? 1,
+        channelPage: channelPage ?? 1,
+        playlistPage: playlistPage ?? 1);
   }
 }

@@ -24,7 +24,7 @@ import '../../screens/search.dart';
 
 @RoutePage()
 class TvSearchScreen extends StatelessWidget {
-  const TvSearchScreen({Key? key}) : super(key: key);
+  const TvSearchScreen({super.key});
 
   Widget buildSuggestion(BuildContext context, SearchState _, bool isHistory, String suggestion) {
     ColorScheme colors = Theme.of(context).colorScheme;
@@ -70,10 +70,10 @@ class TvSearchScreen extends StatelessWidget {
           child: MultiBlocProvider(
             providers: [
               BlocProvider(
-                create: (context) => TvSearchCubit(TvSearchState()),
+                create: (context) => TvSearchCubit(const TvSearchState()),
               ),
               BlocProvider(
-                create: (context) => SearchCubit(SearchState(), settings),
+                create: (context) => SearchCubit(SearchState.init(), settings),
               )
             ],
             child: BlocBuilder<SearchCubit, SearchState>(builder: (context, search) {
@@ -96,7 +96,7 @@ class TvSearchScreen extends StatelessWidget {
                         controller: search.queryController,
                         autofocus: true,
                         autocorrect: true,
-                        focusNode: tv.searchFocus,
+                        focusNode: tvCubit.searchFocus,
                         onSubmitted: (value) async {
                           await searchCubit.search(value);
                           searchCubit.getSuggestions(hideResult: false);
@@ -129,7 +129,7 @@ class TvSearchScreen extends StatelessWidget {
                                       ),
                                       Expanded(
                                           child: SingleChildScrollView(
-                                        controller: tv.scrollController,
+                                        controller: tvCubit.scrollController,
                                         child: Column(
                                           crossAxisAlignment: CrossAxisAlignment.start,
                                           children: search.showResults
@@ -141,10 +141,10 @@ class TvSearchScreen extends StatelessWidget {
                                                         style: textTheme.titleLarge,
                                                       )),
                                                   Focus(
-                                                      focusNode: tv.resultFocus,
+                                                      focusNode: tvCubit.resultFocus,
                                                       onFocusChange: (focused) {
                                                         if (focused) {
-                                                          tv.scrollController.animateTo(0,
+                                                          tvCubit.scrollController.animateTo(0,
                                                               duration: animationDuration, curve: Curves.easeOutQuad);
                                                         }
                                                       },

@@ -57,12 +57,12 @@ class HomeView extends StatelessWidget {
     var colors = Theme.of(context).colorScheme;
 
     return BlocProvider(
-      create: (context) => HomeCubit(HomeState()),
+      create: (context) => HomeCubit(false),
       child: Builder(builder: (context) {
         var layout = context.select((AppCubit value) => value.state.homeLayout);
         var textTheme = Theme.of(context).textTheme;
         var locals = AppLocalizations.of(context)!;
-        var scrolled = context.select((HomeCubit home) => home.state.scrolled);
+        var scrolled = context.select((HomeCubit home) => home.state);
         var home = context.read<HomeCubit>();
 
         return NotificationListener(

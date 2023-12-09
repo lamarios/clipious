@@ -18,7 +18,7 @@ class AppLogsScreen extends StatelessWidget {
     var textTheme = Theme.of(context).textTheme;
 
     return BlocProvider(
-      create: (context) => AppLogsCubit(AppLogsState()),
+      create: (context) => AppLogsCubit(AppLogsState.init()),
       child: BlocBuilder<AppLogsCubit, AppLogsState>(
         builder: (context, _) {
           var cubit = context.read<AppLogsCubit>();

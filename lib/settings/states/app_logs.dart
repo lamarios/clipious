@@ -1,66 +1,57 @@
 import 'package:bloc/bloc.dart';
 import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:flutter/services.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:intl/intl.dart';
 
 import '../../globals.dart';
 import '../models/db/app_logs.dart';
 
-part 'app_logs.g.dart';
+part 'app_logs.freezed.dart';
 
 class AppLogsCubit extends Cubit<AppLogsState> {
-  AppLogsCubit(super.initialState) {
-    onInit();
-  }
-
-  void onInit() {
-    state.logs = db.getAppLogs().reversed.toList();
-  }
+  AppLogsCubit(super.initialState);
 
   void selectLog(int id, bool? value) {
-    var state = this.state.copyWith();
+    var selected = List<int>.from(state.selected);
     if (value ?? false) {
-      state.selected.add(id);
+      selected.add(id);
     } else {
-      state.selected.remove(id);
+      selected.remove(id);
     }
-    emit(state);
+    emit(state.copyWith(selected: selected));
   }
 
   void copySelectedLogsToClipboard() {
-    var state = this.state.copyWith();
-    state.selected.sort();
+    var selected = List<int>.from(state.selected);
+    selected.sort();
     String toClipboard = state.logs
-        .where((element) => state.selected.contains(element.id))
-        .map((e) =>
-            '[${e.level}] [${e.logger}] - ${e.time} - ${e.message} ${e.stacktrace != null ? '\n${e.stacktrace}' : ''}')
+        .where((element) => selected.contains(element.id))
+        .map((e) => '[${e.level}] [${e.logger}] - ${e.time} - ${e.message} ${e.stacktrace != null ? '\n${e.stacktrace}' : ''}')
         .toList()
         .reversed
         .join("\n");
 
     Clipboard.setData(ClipboardData(text: toClipboard));
-    state.selected = [];
 
-    emit(state);
+    emit(state.copyWith(selected: []));
   }
 
   void selectAll() {
     var state = this.state.copyWith();
     if (state.selected.isEmpty) {
-      state.selected = state.logs.map((e) => e.id).toList(growable: true);
+      emit(state.copyWith(selected: state.logs.map((e) => e.id).toList()));
     } else {
-      state.selected = [];
+      emit(state.copyWith(selected: []));
     }
-    emit(state);
   }
 }
 
-@CopyWith()
-class AppLogsState {
-  List<AppLog> logs;
+@freezed
+class AppLogsState with _$AppLogsState {
+  const factory AppLogsState({@Default([]) List<AppLog> logs, @Default([]) List<int> selected}) = _AppLogsState;
 
-  List<int> selected;
-
-  AppLogsState({List<AppLog>? logs, List<int>? selected})
-      : logs = logs ?? [],
-        selected = selected ?? [];
+  static AppLogsState init() {
+    return AppLogsState(logs: db.getAppLogs().reversed.toList());
+  }
 }

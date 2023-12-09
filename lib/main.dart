@@ -73,7 +73,7 @@ Future<void> main() async {
     ),
     BlocProvider(
       create: (context) {
-        var settingsCubit = SettingsCubit(SettingsState(), context.read<AppCubit>());
+        var settingsCubit = SettingsCubit(SettingsState.init(), context.read<AppCubit>());
         configureBackgroundService(settingsCubit);
         return settingsCubit;
       },
@@ -100,8 +100,10 @@ class MyApp extends StatelessWidget {
         // we want to rebuild only when anything other than the navigation index is changed
         builder: (context, _) {
           var app = context.read<AppCubit>();
-          var settings = context.read<SettingsCubit>();
-          bool useDynamicTheme = settings.state.useDynamicTheme;
+          bool useDynamicTheme = context.select((SettingsCubit value) => value.state.useDynamicTheme);
+          bool useBlackBackground = context.select((SettingsCubit value) => value.state.blackBackground);
+          String? locale = context.select((SettingsCubit value) => value.state.locale);
+          ThemeMode themeMode = context.select((SettingsCubit value) => value.state.themeMode);
 
           return DynamicColorBuilder(builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) {
             ColorScheme lightColorScheme;
@@ -133,12 +135,12 @@ class MyApp extends StatelessWidget {
               );
             }
 
-            if (settings.state.blackBackground) {
+            if (useBlackBackground) {
               darkColorScheme = darkColorScheme.copyWith(background: Colors.black);
             }
 
             List<String>? localeString;
-            var dbLocale = settings.state.locale;
+            var dbLocale = locale;
             if (dbLocale != null && dbLocale != 'null') {
               localeString = dbLocale.split('_');
             }
@@ -186,7 +188,7 @@ class MyApp extends StatelessWidget {
               supportedLocales: AppLocalizations.supportedLocales,
               scaffoldMessengerKey: scaffoldKey,
               debugShowCheckedModeBanner: false,
-              themeMode: ThemeMode.values.firstWhere((element) => element.name == settings.state.themeMode.name,
+              themeMode: ThemeMode.values.firstWhere((element) => element.name == themeMode.name,
                   orElse: () => ThemeMode.system),
               title: 'Clipious',
               theme: ThemeData(
