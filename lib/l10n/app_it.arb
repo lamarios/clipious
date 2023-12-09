@@ -423,11 +423,11 @@
   "@addRecommendedToQueue": {
     "description": "Switch when playing a video to automatically add the recommended videos to the video queue"
   },
-  "itemListErrorInvalidScope": "Non hai il permesso per vedere questo, se hai fatto l'accesso usando il metodo del token prova ad uscire e riaccedere nuovamente",
+  "itemListErrorInvalidScope": "Non hai il permesso per vedere questo, se hai fatto l''accesso usando il metodo del token prova ad uscire e riaccedere nuovamente",
   "@itemListErrorInvalidScope": {
     "description": "Error when the user doesn't have the proper scope to its current token"
   },
-  "appLogs": "Log dell'applicazione",
+  "appLogs": "Log dell''applicazione",
   "@appLogs": {
     "description": "Title for settings that leads to application logs"
   },
@@ -435,7 +435,7 @@
   "@videoAddedToQueue": {
     "description": "Pop up message when a video was added at the end of the video queue"
   },
-  "requiresRestart": "Richiede il riavvio dell'applicazione",
+  "requiresRestart": "Richiede il riavvio dell''applicazione",
   "@requiresRestart": {
     "description": "Requires app restart label"
   },
@@ -443,7 +443,7 @@
   "@themeLight": {
     "description": "Light theme"
   },
-  "appLanguage": "Lingua dell'applicazione",
+  "appLanguage": "Lingua dell''applicazione",
   "@appLanguage": {
     "description": "Select app language"
   },
@@ -455,7 +455,7 @@
   "@sponsorBlockCategoryIntroDescription": {
     "description": "Sponsorblock 'Intro' Category description"
   },
-  "sponsorBlockCategoryMusicOffTopicDescription": "Da usare solo in video musicali. Questo deve essere utilizzato per sezioni di video musicali che non sono già coperti da un'altra categoria.",
+  "sponsorBlockCategoryMusicOffTopicDescription": "Da usare solo in video musicali. Questo deve essere utilizzato per sezioni di video musicali che non sono già coperti da un''altra categoria.",
   "@sponsorBlockCategoryMusicOffTopicDescription": {
     "description": "Only for use in music videos. This only should be used for sections of music videos that aren't already covered by another category."
   },
@@ -507,7 +507,7 @@
   "@addToPlaylist": {
     "description": "Label to add a video to a playlist"
   },
-  "sponsorBlockCategoryInteractionDescription": "Quando c'è un piccolo promemoria di mettere like, abbonarsi o iscriversi in mezzo al contenuto. Se è troppo lungo o troppo specifico, dovrebbe essere \"self promotion\".",
+  "sponsorBlockCategoryInteractionDescription": "Quando c''è un piccolo promemoria di mettere like, abbonarsi o iscriversi in mezzo al contenuto. Se è troppo lungo o troppo specifico, dovrebbe essere \"self promotion\".",
   "@sponsorBlockCategoryInteractionDescription": {
     "description": "Sponsor block 'Interaction' Category description"
   },
@@ -527,7 +527,7 @@
   "@followSystem": {
     "description": "Follow system label"
   },
-  "returnYoutubeDislikeDescription": "Mostra il numero di non mi piace del video utilizzando l'API di returnyoutubedislike.com",
+  "returnYoutubeDislikeDescription": "Mostra il numero di non mi piace del video utilizzando l''API di returnyoutubedislike.com",
   "@returnYoutubeDislikeDescription": {
     "description": "ReturnYoutubeDislike setting description"
   },
