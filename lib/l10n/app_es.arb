@@ -1206,5 +1206,17 @@
   "searchSortBy": "Ordenar por",
   "@searchSortBy": {
     "description": "Search sorting option"
+  },
+  "serverIsNotReachable": "El servidor no está accesible",
+  "@serverIsNotReachable": {
+    "description": "Title for dialog when adding a server that is not reachable"
+  },
+  "malformedStatsEndpointDescription": "El punto final de las estadísticas del servidor no respondió a una carga útil esperada, la clave \"software.name\" debería ser igual a \"invidious\".\nRespuesta del servidor:",
+  "@malformedStatsEndpointDescription": {
+    "description": "Description of the possible issue for an invalid stats endpoints"
+  },
+  "malformedStatsEndpoint": "/api/v1/stats no es lo esperado",
+  "@malformedStatsEndpoint": {
+    "description": "Title for dialog when adding a server that isn't validated as it should"
   }
 }
