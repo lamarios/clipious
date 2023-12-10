@@ -25,7 +25,7 @@ class TvGridScreen extends StatelessWidget {
       child: Scaffold(
         body: TvOverscan(
           child: BlocBuilder<ItemListCubit<VideoInList>, ItemListState<VideoInList>>(builder: (context, _) {
-            
+            var cubit = context.read<ItemListCubit<VideoInList>>();
             return Column(
               children: [
                 Row(
@@ -49,7 +49,7 @@ class TvGridScreen extends StatelessWidget {
                 ),
                 Expanded(
                     child: GridView.count(
-                  controller: _.scrollController,
+                  controller: cubit.scrollController,
                   childAspectRatio: 16 / 13,
                   crossAxisCount: 3,
                   children: [

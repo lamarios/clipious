@@ -50,7 +50,7 @@ class AddToPlayListButton extends StatelessWidget {
     var locals = AppLocalizations.of(context)!;
 
     return BlocProvider(
-      create: (BuildContext context) => AddToPlaylistCubit(AddToPlaylistController(videoId)),
+      create: (BuildContext context) => AddToPlaylistCubit(AddToPlaylistController.init(videoId)),
       child: BlocBuilder<AddToPlaylistCubit, AddToPlaylistController>(builder: (context, _) {
         var cubit = context.read<AddToPlaylistCubit>();
         return switch (type) {

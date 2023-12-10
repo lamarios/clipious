@@ -11,6 +11,7 @@ import 'package:invidious/player/states/player.dart';
 import 'package:invidious/settings/states/settings.dart';
 
 import '../../../utils.dart';
+import '../../../videos/models/video.dart';
 import '../../states/audio_player.dart';
 import '../../states/player_controls.dart';
 import '../../states/video_player.dart';
@@ -185,15 +186,17 @@ class PlayerControls extends StatelessWidget {
   Widget build(BuildContext context) {
     var locals = AppLocalizations.of(context)!;
     var textTheme = Theme.of(context).textTheme;
-    var player = context.read<PlayerCubit>();
     var colors = Theme.of(context).colorScheme;
+    var player = context.read<PlayerCubit>();
     return Theme(
       data: ThemeData(useMaterial3: true, colorScheme: darkColorScheme, progressIndicatorTheme: ProgressIndicatorThemeData(circularTrackColor: darkColorScheme.secondaryContainer.withOpacity(0.8))),
       child: BlocProvider(
-        create: (context) => PlayerControlsCubit(PlayerControlsState(), player),
+        create: (context) => PlayerControlsCubit(const PlayerControlsState(), player),
         child: BlocBuilder<PlayerControlsCubit, PlayerControlsState>(
           builder: (context, _) {
             bool isMini = context.select((PlayerCubit cubit) => cubit.state.isMini);
+            bool isPlaying = context.select((PlayerCubit cubit) => cubit.state.isPlaying);
+            Video? currentlyPlaying = context.select((PlayerCubit cubit) => cubit.state.currentlyPlaying);
             bool hasQueue = context.select((PlayerCubit cubit) => cubit.state.hasQueue);
             bool isPip = context.select((PlayerCubit cubit) => cubit.state.isPip);
             int totalFastForward = context.select((PlayerCubit cubit) => cubit.state.totalFastForward);
@@ -352,7 +355,7 @@ class PlayerControls extends StatelessWidget {
                                   )
                                 : const SizedBox.expand(),
                       ),
-                      if ((_.displayControls || _.justDoubleTappedSkip) && !(player.state.currentlyPlaying?.liveNow ?? false))
+                      if ((_.displayControls || _.justDoubleTappedSkip) && !(currentlyPlaying?.liveNow ?? false))
                         Positioned(
                           bottom: 0,
                           left: 0,
@@ -419,7 +422,7 @@ class PlayerControls extends StatelessWidget {
                                   )),
                               IconButton(
                                 onPressed: () {
-                                  if (player.state.isPlaying) {
+                                  if (isPlaying) {
                                     player.pause();
                                   } else if (isPausedAndDone) {
                                     player.seek(Duration.zero);
@@ -429,7 +432,7 @@ class PlayerControls extends StatelessWidget {
                                   }
                                 },
                                 icon: Icon(
-                                    player.state.isPlaying
+                                    isPlaying
                                         ? Icons.pause
                                         : isPausedAndDone
                                             ? Icons.refresh

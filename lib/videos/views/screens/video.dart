@@ -78,7 +78,7 @@ class VideoScreen extends StatelessWidget {
       providers: [
         BlocProvider(
             create: (BuildContext context) =>
-                VideoCubit(VideoState(videoId: videoId), downloadManager, player, settings)),
+                VideoCubit(VideoState.init(videoId: videoId), downloadManager, player, settings)),
       ],
       child: BlocConsumer<VideoCubit, VideoState>(
         listenWhen: (previous, current) => settings.state.autoplayVideoOnLoad && previous.video != current.video,

@@ -2,36 +2,39 @@ import 'package:bloc/bloc.dart';
 import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:invidious/settings/models/errors/invidiousServiceError.dart';
 import 'package:logging/logging.dart';
 
 import '../models/paginatedList.dart';
 
-part 'item_list.g.dart';
+part 'item_list.freezed.dart';
 
 enum ItemListErrors { none, couldNotFetchItems, invalidScope }
 
 var log = Logger('ItemListCubit');
 
 class ItemListCubit<T> extends Cubit<ItemListState<T>> {
+  ScrollController scrollController = ScrollController();
+
   ItemListCubit(super.initialState) {
     onReady();
   }
 
   @override
   close() async {
-    state.scrollController.dispose();
+    scrollController.dispose();
     super.close();
   }
 
   onReady() {
     getItems();
-    state.scrollController.addListener(onScrollEvent);
+    scrollController.addListener(onScrollEvent);
   }
 
   onScrollEvent() {
-    if (state.scrollController.hasClients) {
-      if (state.scrollController.position.maxScrollExtent * 0.9 < state.scrollController.offset) {
+    if (scrollController.hasClients) {
+      if (scrollController.position.maxScrollExtent * 0.9 < scrollController.offset) {
         EasyDebounce.debounce('loading-more-videos', const Duration(milliseconds: 500), getMoreItems);
       }
     }
@@ -41,8 +44,7 @@ class ItemListCubit<T> extends Cubit<ItemListState<T>> {
     if (!state.loading && state.itemList.getHasMore()) {
       loadItems(() async {
         List<T> items = await state.itemList.getMoreItems();
-        List<T> currentItems = state.items;
-        currentItems.addAll(items);
+        List<T> currentItems = List.from(state.items)..addAll(items);
         return currentItems;
       });
     }
@@ -57,29 +59,21 @@ class ItemListCubit<T> extends Cubit<ItemListState<T>> {
   }
 
   loadItems(Future<List<T>> Function() refreshFunction) async {
-    var state = this.state.copyWith();
-    // var locals = AppLocalizations.of(context)!;
-    state.error = ItemListErrors.none;
-    state.loading = true;
-    emit(state);
+    emit(state.copyWith(error: ItemListErrors.none, loading: true));
     try {
-      state = this.state.copyWith();
-      state.items = await refreshFunction();
-      state.loading = false;
-      if(!isClosed) {
-        emit(state);
+      var items = await refreshFunction();
+      if (!isClosed) {
+        emit(state.copyWith(loading: false, items: items));
       }
     } catch (err) {
-      state = this.state.copyWith();
-      state.items = [];
-      state.loading = false;
+      late ItemListErrors error;
       if (err is InvidiousServiceError && err.message == "Invalid scope") {
-        state.error = ItemListErrors.invalidScope;
+        error = ItemListErrors.invalidScope;
       } else {
-        state.error = ItemListErrors.couldNotFetchItems;
+        error = ItemListErrors.couldNotFetchItems;
       }
-      if(!isClosed) {
-        emit(state);
+      if (!isClosed) {
+        emit(state.copyWith(error: error, items: [], loading: false));
       }
       rethrow;
     }
@@ -89,16 +83,12 @@ class ItemListCubit<T> extends Cubit<ItemListState<T>> {
   focusChanged(bool value, int index) {}
 }
 
-@CopyWith(constructor: "_")
-class ItemListState<T> {
-  PaginatedList<T> itemList;
-  List<T> items = [];
-  bool loading = true;
-  Map<String, Image> imageCache = {};
-  ScrollController scrollController = ScrollController();
-  ItemListErrors error = ItemListErrors.none;
-
-  ItemListState({required this.itemList}) {}
-
-  ItemListState._(this.itemList, this.items, this.loading, this.imageCache, this.scrollController, this.error);
+@freezed
+class ItemListState<T> with _$ItemListState<T> {
+  const factory ItemListState({
+    required PaginatedList<T> itemList,
+    @Default([]) List<T> items,
+    @Default(true) bool loading,
+    @Default(ItemListErrors.none) ItemListErrors error,
+  }) = _ItemListState<T>;
 }

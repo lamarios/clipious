@@ -30,7 +30,7 @@ class HistoryView extends StatelessWidget {
         )
       ],
       child: BlocBuilder<ItemListCubit<String>, ItemListState<String>>(builder: (context, _) {
-        var listcubit = context.read<ItemListCubit<String>>();
+        var listCubit = context.read<ItemListCubit<String>>();
         var historyCubit = context.read<HistoryCubit>();
         bool showPlaceholder = _.loading && _.items.isEmpty;
         return Stack(
@@ -54,9 +54,9 @@ class HistoryView extends StatelessWidget {
                     : Padding(
                         padding: const EdgeInsets.only(top: 3),
                         child: RefreshIndicator(
-                          onRefresh: () => listcubit.refreshItems(),
+                          onRefresh: () => listCubit.refreshItems(),
                           child: ListView.builder(
-                            controller: _.scrollController,
+                            controller: listCubit.scrollController,
                             scrollDirection: Axis.vertical,
                             itemCount: _.items.length + (_.loading ? 5 : 0),
                             itemBuilder: (context, index) => Padding(

@@ -269,7 +269,6 @@ class SettingsCubit extends Cubit<SettingsState> {
 
   Future<EnableBackGroundNotificationResponse> setBackgroundNotifications(bool b) async {
     if (!b) {
-      var state = this.state.copyWith();
       await stopTasks();
       backgroundNotifications = b;
     } else {
@@ -281,10 +280,9 @@ class SettingsCubit extends Cubit<SettingsState> {
         }
       }
 
-      var state = this.state.copyWith();
+      backgroundNotifications = b;
       await configureBackgroundService(this);
       await setupTasks(this);
-      backgroundNotifications = b;
       return EnableBackGroundNotificationResponse.ok;
     }
 

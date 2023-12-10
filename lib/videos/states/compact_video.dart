@@ -1,11 +1,11 @@
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
-import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:easy_debounce/easy_debounce.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:invidious/downloads/models/downloaded_video.dart';
 
-part 'compact_video.g.dart';
+part 'compact_video.freezed.dart';
 
 class CompactVideoCubit extends Cubit<CompactVideoState> {
   CompactVideoCubit(super.initialState) {
@@ -24,9 +24,7 @@ class CompactVideoCubit extends Cubit<CompactVideoState> {
         var exists = await file.exists();
         var hasSize = await file.length() > 0;
         if (exists && hasSize) {
-          var state = this.state.copyWith();
-          state.offlineVideoThumbnailPath = path;
-          emit(state);
+          emit(state.copyWith(offlineVideoThumbnailPath: path));
         } else {
           EasyDebounce.debounce(
               '${state.offlineVideo?.videoId}-compact-view-thumbnail', const Duration(seconds: 1), getThumbnail);
@@ -39,12 +37,10 @@ class CompactVideoCubit extends Cubit<CompactVideoState> {
   }
 }
 
-@CopyWith(constructor: "_")
-class CompactVideoState {
-  final DownloadedVideo? offlineVideo;
-  String? offlineVideoThumbnailPath;
-
-  CompactVideoState({this.offlineVideo});
-
-  CompactVideoState._(this.offlineVideo, this.offlineVideoThumbnailPath);
+@freezed
+class CompactVideoState with _$CompactVideoState {
+  const factory CompactVideoState({
+    DownloadedVideo? offlineVideo,
+    String? offlineVideoThumbnailPath
+  }) = _CompactVideoState;
 }

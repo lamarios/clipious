@@ -79,10 +79,10 @@ Future<void> main() async {
       },
     ),
     BlocProvider(
-      create: (context) => PlayerCubit(PlayerState(), context.read<SettingsCubit>()),
+      create: (context) => PlayerCubit(PlayerState.init(null), context.read<SettingsCubit>()),
     ),
     BlocProvider(
-      create: (context) => DownloadManagerCubit(DownloadManagerState(), context.read<PlayerCubit>()),
+      create: (context) => DownloadManagerCubit(const DownloadManagerState(), context.read<PlayerCubit>()),
     )
   ], child: const MyApp()));
 }
