@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
-import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/search/models/search_type.dart';
 import 'package:logging/logging.dart';
@@ -8,53 +8,57 @@ import 'package:logging/logging.dart';
 import '../../channels/models/channel.dart';
 import '../models/db/video_filter.dart';
 
-part 'video_filter_edit.g.dart';
+part 'video_filter_edit.freezed.dart';
 
 final log = Logger('Video Filter Edit Controller');
 
 class VideoFilterEditCubit extends Cubit<VideoFilterEditState> {
+  late final TextEditingController valueController;
+
   VideoFilterEditCubit(super.initialState) {
+    valueController = TextEditingController(text: state.filter?.value ?? '');
     onReady();
   }
 
   void onReady() async {
     if (state.filter?.channelId != null) {
-      var state = this.state.copyWith();
-      state.channel = await service.getChannel(state.filter?.channelId ?? '');
-      emit(state);
+      var channel = await service.getChannel(state.filter?.channelId ?? '');
+      emit(state.copyWith(channel: channel));
     }
     ensureFilter();
   }
 
   @override
   close() async {
-    state.valueController.dispose();
+    valueController.dispose();
     super.close();
   }
 
   void ensureFilter() {
-    state.filter ??= VideoFilter(value: "");
-    if ((state.filter?.daysOfWeek ?? wholeWeek).isEmpty) {
-      state.filter?.daysOfWeek = wholeWeek;
+    var filter = state.filter?.copyWith();
+    filter ??= VideoFilter(value: "");
+    if ((filter.daysOfWeek ?? wholeWeek).isEmpty) {
+      filter.daysOfWeek = wholeWeek;
     }
 
-    if ((state.filter?.startTime ?? '').isEmpty) {
-      state.filter?.startTime = defaultStartTime;
+    if ((filter.startTime ?? '').isEmpty) {
+      filter.startTime = defaultStartTime;
     }
-    if ((state.filter?.endTime ?? '').isEmpty) {
-      state.filter?.endTime = defaultEndTime;
+    if ((filter.endTime ?? '').isEmpty) {
+      filter.endTime = defaultEndTime;
     }
+    emit(state.copyWith(filter: filter));
   }
 
   void setType(FilterType? value) {
-    var state = this.state.copyWith();
+    var filter = state.filter?.copyWith();
     if (value != null) {
-      state.filter?.type = value;
-      state.filter?.operation = null;
-      state.filter?.value = '';
+      filter?.type = value;
+      filter?.operation = null;
+      filter?.value = '';
     }
 
-    emit(state);
+    emit(state.copyWith(filter: filter));
   }
 
   List<FilterOperation> getAvailableOperations() {
@@ -70,19 +74,19 @@ class VideoFilterEditCubit extends Cubit<VideoFilterEditState> {
   }
 
   void setOperation(FilterOperation? value) {
-    var state = this.state.copyWith();
+    var filter = state.filter?.copyWith();
     if (value != null) {
-      state.filter?.operation = value;
+      filter?.operation = value;
     }
 
-    emit(state);
+    emit(state.copyWith(filter: filter));
   }
 
   void valueChanged(String value) {
-    var state = this.state.copyWith();
-    state.filter?.value = value;
+    var filter = state.filter?.copyWith();
+    filter?.value = value;
     log.fine('Filter value changed: $value');
-    emit(state);
+    emit(state.copyWith(filter: filter));
   }
 
   bool isFilterValid() {
@@ -112,7 +116,6 @@ class VideoFilterEditCubit extends Cubit<VideoFilterEditState> {
     switch (state.filter?.operation) {
       case FilterOperation.higherThan:
       case FilterOperation.lowerThan:
-        print('YOOO');
         return true;
       default:
         return false;
@@ -120,40 +123,37 @@ class VideoFilterEditCubit extends Cubit<VideoFilterEditState> {
   }
 
   selectChannel(Channel? value) {
-    var state = this.state.copyWith();
-    state.channel = value;
-    state.filter?.channelId = state.channel?.authorId;
-    emit(state);
+    var filter = state.filter?.copyWith();
+    filter?.channelId = state.channel?.authorId;
+    emit(state.copyWith(channel: value, filter:  filter));
   }
 
   void channelHideAll(bool? value) {
-    var state = this.state.copyWith();
-    state.filter?.filterAll = value ?? false;
-    emit(state);
+    var filter = state.filter?.copyWith();
+    filter?.filterAll = value ?? false;
+    emit(state.copyWith(filter: filter));
   }
 
   channelClear() {
-    var state = this.state.copyWith();
-    state.channel = null;
-    state.filter?.channelId = null;
-    emit(state);
+    var filter = state.filter?.copyWith();
+    filter?.channelId = null;
+    emit(state.copyWith(channel: null, filter: filter));
   }
 
   set showDateSettings(bool show) {
-    var state = this.state.copyWith();
-    state.showDateSettings = show;
+    var filter = state.filter?.copyWith();
     if (!show) {
-      state.filter?.daysOfWeek = wholeWeek;
-      state.filter?.startTime = defaultStartTime;
-      state.filter?.endTime = defaultEndTime;
+      filter?.daysOfWeek = wholeWeek;
+      filter?.startTime = defaultStartTime;
+      filter?.endTime = defaultEndTime;
     }
-    emit(state);
+    emit(state.copyWith(showDateSettings: show, filter: filter));
   }
 
   void hideOnFilteredChanged(bool value) {
-    var state = this.state.copyWith();
-    state.filter?.hideFromFeed = value;
-    emit(state);
+    var filter = state.filter?.copyWith();
+    filter?.hideFromFeed = value;
+    emit(state.copyWith(filter: filter));
   }
 
   toggleDay(int e) {
@@ -163,7 +163,7 @@ class VideoFilterEditCubit extends Cubit<VideoFilterEditState> {
     } else {
       days.add(e);
     }
-    var filter = state.filter;
+    var filter = state.filter?.copyWith();
     filter?.daysOfWeek = days;
     emit(state.copyWith(filter: filter));
   }
@@ -175,43 +175,32 @@ class VideoFilterEditCubit extends Cubit<VideoFilterEditState> {
       (state.filter?.endTime ?? defaultEndTime) != defaultEndTime;
 
   setStartTime(String newTime) {
-    var state = this.state.copyWith();
     var comparison = newTime.compareTo(state.filter?.endTime ?? defaultEndTime);
     if (comparison < 0) {
-      state.filter?.startTime = newTime;
-      emit(state);
+      var filter = state.filter?.copyWith();
+      filter?.startTime = newTime;
+      emit(state.copyWith(filter: filter));
     }
   }
 
   setEndTime(String newTime) {
-    var state = this.state.copyWith();
     var comparison = newTime.compareTo(state.filter?.startTime ?? defaultStartTime);
     if (comparison > 0) {
-      state.filter?.endTime = newTime;
-      emit(state);
+      var filter = state.filter?.copyWith();
+      filter?.endTime = newTime;
+      emit(state.copyWith(filter: filter));
     }
   }
 }
 
-@CopyWith(constructor: "_")
-class VideoFilterEditState {
-  VideoFilter? filter;
-  int searchPage;
-  Channel? channel;
-  List<Channel> channelResults;
-  bool showDateSettings = false;
+@freezed
+class VideoFilterEditState with _$VideoFilterEditState {
+  const factory VideoFilterEditState({
+    VideoFilter? filter,
+    @Default(1) int searchPage,
+    Channel? channel,
+    @Default([]) List<Channel> channelResults,
+    @Default(false) showDateSettings,
+}) = _VideoFilterEditState;
 
-  TextEditingController valueController;
-
-  VideoFilterEditState(
-      {this.filter,
-      this.searchPage = 1,
-      this.channel,
-      List<Channel>? channelResults,
-      TextEditingController? valueController})
-      : channelResults = channelResults ?? [],
-        valueController = valueController ?? TextEditingController(text: filter?.value ?? '');
-
-  VideoFilterEditState._(
-      this.filter, this.searchPage, this.channel, this.channelResults, this.valueController, this.showDateSettings);
 }

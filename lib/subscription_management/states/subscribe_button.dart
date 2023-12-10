@@ -1,9 +1,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:copy_with_extension/copy_with_extension.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../globals.dart';
 
-part 'subscribe_button.g.dart';
+part 'subscribe_button.freezed.dart';
 
 class SubscribeButtonCubit extends Cubit<SubscribeButtonState> {
   SubscribeButtonCubit(super.initialState) {
@@ -11,11 +12,8 @@ class SubscribeButtonCubit extends Cubit<SubscribeButtonState> {
   }
 
   toggleSubscription() async {
-    var state = this.state.copyWith();
-    state.loading = true;
-    emit(state);
+    emit(state.copyWith(loading: true));
 
-    state = this.state.copyWith();
     bool wasSubscribed = state.isSubscribed;
     bool success = false;
     if (wasSubscribed) {
@@ -27,32 +25,26 @@ class SubscribeButtonCubit extends Cubit<SubscribeButtonState> {
     if (!success || isSubscribed == wasSubscribed) {
       return toggleSubscription();
     }
-    state.isSubscribed = isSubscribed;
-    state.loading = false;
-    emit(state);
+    emit(state.copyWith(loading: false, isSubscribed: isSubscribed));
   }
 
   Future<void> onReady() async {
-    var state = this.state.copyWith();
     bool isSubscribed = await service.isSubscribedToChannel(state.channelId);
-    state.isSubscribed = isSubscribed;
-    state.loading = false;
-    emit(state);
+    emit(state.copyWith(loading: false, isSubscribed: isSubscribed));
   }
 }
 
-@CopyWith(constructor: "_")
-class SubscribeButtonState {
-  static generateTags(String channelId) {
-    return 'subscribe-button-$channelId';
+@freezed
+class SubscribeButtonState with _$SubscribeButtonState {
+
+  const factory SubscribeButtonState({
+    required String channelId,
+    @Default(false) bool isSubscribed,
+    @Default(true) bool loading,
+    required bool isLoggedIn,
+}) = _SubscribeButtonState;
+
+  static SubscribeButtonState init(String channelId){
+    return SubscribeButtonState(channelId: channelId, isLoggedIn: db.isLoggedInToCurrentServer());
   }
-
-  String channelId;
-  bool isSubscribed = false;
-  bool loading = true;
-  bool isLoggedIn = db.isLoggedInToCurrentServer();
-
-  SubscribeButtonState({required this.channelId});
-
-  SubscribeButtonState._(this.channelId, this.isSubscribed, this.loading, this.isLoggedIn);
 }

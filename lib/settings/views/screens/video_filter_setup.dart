@@ -66,7 +66,7 @@ class VideoFilterSetupScreen extends StatelessWidget {
                       autocorrect: false,
                       maxLines: 1,
                       keyboardType: cubit.isNumberValue() ? TextInputType.number : null,
-                      controller: _.valueController,
+                      controller: cubit.valueController,
                       onChanged: cubit.valueChanged,
                     ),
                   )

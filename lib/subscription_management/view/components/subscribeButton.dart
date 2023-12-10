@@ -19,7 +19,7 @@ class SubscribeButton extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         BlocProvider(
-          create: (context) => SubscribeButtonCubit(SubscribeButtonState(channelId: channelId)),
+          create: (context) => SubscribeButtonCubit(SubscribeButtonState.init(channelId)),
           child: BlocBuilder<SubscribeButtonCubit, SubscribeButtonState>(
             builder: (context, _) {
               var cubit = context.read<SubscribeButtonCubit>();
