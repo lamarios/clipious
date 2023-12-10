@@ -108,7 +108,7 @@ class SettingsCubit extends Cubit<SettingsState> {
 
   getPackageInfo() async {
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
-    packageInfo = packageInfo;
+    emit(state.copyWith(packageInfo: packageInfo));
   }
 
   toggleBlackBackground(bool value) {

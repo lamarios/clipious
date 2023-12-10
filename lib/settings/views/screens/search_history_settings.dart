@@ -29,7 +29,7 @@ class SearchHistorySettingsScreen extends StatelessWidget {
                 },
               ),
               TextButton(
-                child: Text(locals.ok, style: const TextStyle(color: Colors.red)),
+                child: Text(locals.ok),
                 onPressed: () {
                   db.clearSearchHistory();
                   Navigator.of(context).pop();
@@ -64,6 +64,7 @@ class SearchHistorySettingsScreen extends StatelessWidget {
                     title: Text(locals.enableSearchHistory),
                   ),
                   SettingsTile(
+                    enabled: _.useSearchHistory,
                     title: Text(locals.searchHistoryLimit),
                     description: Text(locals.searchHistoryLimitDescription),
                     trailing: Row(

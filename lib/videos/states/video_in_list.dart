@@ -31,9 +31,8 @@ class VideoInListCubit extends Cubit<VideoInListState> {
 
   void showVideoDetails() {
     if (state.video != null) {
-      var state = this.state.copyWith();
-      state.video!.filtered = false;
-      emit(state);
+      var video = state.video?.copyWith(filtered: false);
+      emit(state.copyWith(video: video));
     }
   }
 }

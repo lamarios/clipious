@@ -1,3 +1,4 @@
+import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:invidious/videos/models/video_in_list.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -6,12 +7,15 @@ import '../../settings/models/db/video_filter.dart';
 import '../../utils/models/image_object.dart';
 import '../../utils/models/sharelink.dart';
 
+part 'base_video.g.dart';
+
 abstract class IdedVideo {
   String videoId;
 
   IdedVideo(this.videoId);
 }
 
+@CopyWith(constructor: '_')
 class BaseVideo extends IdedVideo implements ShareLinks {
   String title;
   int lengthSeconds;
@@ -34,6 +38,9 @@ class BaseVideo extends IdedVideo implements ShareLinks {
   String? deArrowThumbnailUrl;
 
   BaseVideo(this.title, String videoId, this.lengthSeconds, this.author, this.authorId, this.authorUrl, this.videoThumbnails) : super(videoId);
+
+  BaseVideo._(super.videoId, this.title, this.lengthSeconds, this.author, this.authorId, this.authorUrl, this.videoThumbnails, this.filtered, this.matchedFilters, this.filterHide, this.deArrowed,
+      this.deArrowThumbnailUrl);
 
   @override
   String getInvidiousLink(Server server, int? timestamp) {
