@@ -3,6 +3,7 @@ import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:invidious/globals.dart';
+import 'package:invidious/search/models/search_duration.dart';
 import 'package:invidious/search/models/search_sort_by.dart';
 import 'package:invidious/search/models/search_type.dart';
 
@@ -92,6 +93,10 @@ class SearchFiltersCubit<T extends SearchFiltersState> extends Cubit<SearchFilte
     emit(state.copyWith(date: newValue));
   }
 
+  setDuration(SearchDuration? newValue) {
+    emit(state.copyWith(duration: newValue));
+  }
+
   setSortBy(SearchSortBy? newValue) {
     emit(state.copyWith(sortBy: newValue));
   }
@@ -155,18 +160,22 @@ class SearchState extends Clonable<SearchState> {
 @CopyWith()
 class SearchFiltersState {
   final SearchDate date;
+  final SearchDuration duration;
   final SearchSortBy sortBy;
 
   SearchFiltersState({
     this.date = SearchDate.any,
+    this.duration = SearchDuration.any,
     this.sortBy = SearchSortBy.relevance,
   });
 
   copyWith({
     SearchDate? date,
+    SearchDuration? duration,
     SearchSortBy? sortBy,
   }) => SearchFiltersState(
     date: date ?? this.date,
+    duration: duration ?? this.duration,
     sortBy: sortBy ?? this.sortBy,
   );
 }

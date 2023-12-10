@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/search/models/search_date.dart';
+import 'package:invidious/search/models/search_duration.dart';
 import 'package:invidious/search/models/search_sort_by.dart';
 import 'package:invidious/search/states/search.dart';
 
@@ -32,6 +33,9 @@ class SearchFiltersButton extends StatelessWidget {
                   onDateChanged(SearchDate? newValue) {
                     cubit.setDate(newValue);
                   }
+                  onDurationChanged(SearchDuration? newValue) {
+                    cubit.setDuration(newValue);
+                  }
                   onSortByChanged(SearchSortBy? newValue) {
                     cubit.setSortBy(newValue);
                   }
@@ -46,6 +50,17 @@ class SearchFiltersButton extends StatelessWidget {
                               value: value,
                               groupValue: state.date,
                               onChanged: onDateChanged,
+                            ),
+                          );
+                        }),
+                        Text(locals.searchDuration),
+                        ...SearchDuration.values.map((value) {
+                          return ListTile(
+                            title: Text(value.getLable(locals)),
+                            leading: Radio<SearchDuration>(
+                              value: value,
+                              groupValue: state.duration,
+                              onChanged: onDurationChanged,
                             ),
                           );
                         }),

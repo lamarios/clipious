@@ -169,7 +169,7 @@ class SearchScreen extends StatelessWidget {
                                                   page: page,
                                                   sortBy: _.filters.sortBy,
                                                   type: SearchType.video,
-                                              date: _.filters.date)
+                                              date: _.filters.date, duration: _.filters.duration)
                                           .then((value) => value.videos),
                                       maxResults: searchPageSize,
                                     ),
@@ -185,7 +185,7 @@ class SearchScreen extends StatelessWidget {
                                                     page: page,
                                                     sortBy: _.filters.sortBy,
                                                     type: SearchType.channel,
-                                                date: _.filters.date)
+                                                date: _.filters.date, duration: _.filters.duration)
                                             .then((value) => value.channels),
                                         maxResults: searchPageSize,
                                       ),
@@ -235,7 +235,7 @@ class SearchScreen extends StatelessWidget {
                                                       page: page,
                                                       sortBy: _.filters.sortBy,
                                                       type: SearchType.playlist,
-                                                  date: _.filters.date)
+                                                  date: _.filters.date, duration: _.filters.duration)
                                                     .then((value) => value.playlists),
                                                 maxResults: searchPageSize,
                                                  ),
