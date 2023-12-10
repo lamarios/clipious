@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/search/models/search_sort_by.dart';
-
-const defaultSearchSortBy = SearchSortBy.relevance;
+import 'package:invidious/search/states/search.dart';
 
 class SearchFiltersButton extends StatelessWidget {
-  final SearchSortBy initialSearchSortBy;
-  final Function(SearchSortBy) callback;
+  final SearchFiltersState initialFilters;
+  final Function(SearchFiltersState) onChanged;
 
   const SearchFiltersButton({
     super.key,
-    required this.initialSearchSortBy,
-    required this.callback,
+    required this.initialFilters,
+    required this.onChanged,
   });
 
   @override
@@ -23,47 +23,48 @@ class SearchFiltersButton extends StatelessWidget {
           context: context,
           barrierDismissible: false,
           builder: (BuildContext context) {
-            SearchSortBy selectedSearchSortBy = initialSearchSortBy;
-            return AlertDialog(
-              content: StatefulBuilder(
-                builder: (BuildContext context, StateSetter setState) {
-                  onChanged(SearchSortBy? newSearchSortBy) {
-                    setState(() => selectedSearchSortBy =
-                        newSearchSortBy ?? defaultSearchSortBy);
+            return BlocProvider(
+              create: (context) => SearchFiltersCubit(initialFilters),
+              child: BlocBuilder<SearchFiltersCubit, SearchFiltersState>(
+                builder: (context, state) {
+                  final cubit = context.read<SearchFiltersCubit>();
+                  onSortByChanged(SearchSortBy? newValue) {
+                    cubit.setSortBy(newValue);
                   }
-
-                  return SingleChildScrollView(
-                    child: ListBody(children: <Widget>[
-                      Text(locals.searchSortBy),
-                      ...SearchSortBy.values.map((value) {
-                        return ListTile(
-                          title: Text(value.getLable(locals)),
-                          leading: Radio<SearchSortBy>(
-                            value: value,
-                            groupValue: selectedSearchSortBy,
-                            onChanged: onChanged,
-                          ),
-                        );
-                      }),
-                    ]),
+                  return AlertDialog(
+                    content: SingleChildScrollView(
+                      child: ListBody(children: <Widget>[
+                        Text(locals.searchSortBy),
+                        ...SearchSortBy.values.map((value) {
+                          return ListTile(
+                            title: Text(value.getLable(locals)),
+                            leading: Radio<SearchSortBy>(
+                              value: value,
+                              groupValue: state.sortBy,
+                              onChanged: onSortByChanged,
+                            ),
+                          );
+                        }),
+                      ]),
+                    ),
+                    actions: <Widget>[
+                      TextButton(
+                        child: Text(locals.cancel),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                      TextButton(
+                        child: Text(locals.ok),
+                        onPressed: () {
+                          onChanged(state);
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                    ],
                   );
                 },
               ),
-              actions: <Widget>[
-                TextButton(
-                  child: Text(locals.cancel),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                ),
-                TextButton(
-                  child: Text(locals.ok),
-                  onPressed: () {
-                    callback(selectedSearchSortBy);
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ],
             );
           },
         );

@@ -74,9 +74,9 @@ class SearchScreen extends StatelessWidget {
                     },
                     icon: const Icon(Icons.clear)),
                 SearchFiltersButton(
-                  initialSearchSortBy: _.sortBy,
-                  callback: (newSearchSortBy) {
-                    cubit.setSearchSortBy(newSearchSortBy);
+                  initialFilters: _.filters,
+                  onChanged: (newFilters) {
+                    cubit.onFiltersChanged(newFilters);
                     if (_.showResults || _.queryController.text.isNotEmpty) {
                       cubit.search(_.queryController.text);
                     }
@@ -167,7 +167,7 @@ class SearchScreen extends StatelessWidget {
                                               .search(
                                                   _.queryController.value.text,
                                                   page: page,
-                                                  sortBy: _.sortBy,
+                                                  sortBy: _.filters.sortBy,
                                                   type: SearchType.video)
                                               .then((value) => value.videos),
                                       maxResults: searchPageSize,
@@ -182,7 +182,7 @@ class SearchScreen extends StatelessWidget {
                                                     _.queryController.value
                                                         .text,
                                                     page: page,
-                                                    sortBy: _.sortBy,
+                                                    sortBy: _.filters.sortBy,
                                                     type: SearchType.channel)
                                                 .then(
                                                     (value) => value.channels),
@@ -232,7 +232,7 @@ class SearchScreen extends StatelessWidget {
                                                       _.queryController.value
                                                           .text,
                                                       page: page,
-                                                      sortBy: _.sortBy,
+                                                      sortBy: _.filters.sortBy,
                                                       type: SearchType.playlist)
                                                   .then((value) =>
                                                       value.playlists),
