@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:invidious/search/models/search_date.dart';
 import 'package:invidious/search/models/search_sort_by.dart';
 import 'package:invidious/search/states/search.dart';
 
@@ -28,12 +29,26 @@ class SearchFiltersButton extends StatelessWidget {
               child: BlocBuilder<SearchFiltersCubit, SearchFiltersState>(
                 builder: (context, state) {
                   final cubit = context.read<SearchFiltersCubit>();
+                  onDateChanged(SearchDate? newValue) {
+                    cubit.setDate(newValue);
+                  }
                   onSortByChanged(SearchSortBy? newValue) {
                     cubit.setSortBy(newValue);
                   }
                   return AlertDialog(
                     content: SingleChildScrollView(
                       child: ListBody(children: <Widget>[
+                        Text(locals.searchUploadDate),
+                        ...SearchDate.values.map((value) {
+                          return ListTile(
+                            title: Text(value.getLable(locals)),
+                            leading: Radio<SearchDate>(
+                              value: value,
+                              groupValue: state.date,
+                              onChanged: onDateChanged,
+                            ),
+                          );
+                        }),
                         Text(locals.searchSortBy),
                         ...SearchSortBy.values.map((value) {
                           return ListTile(

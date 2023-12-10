@@ -168,8 +168,9 @@ class SearchScreen extends StatelessWidget {
                                                   _.queryController.value.text,
                                                   page: page,
                                                   sortBy: _.filters.sortBy,
-                                                  type: SearchType.video)
-                                              .then((value) => value.videos),
+                                                  type: SearchType.video,
+                                              date: _.filters.date)
+                                          .then((value) => value.videos),
                                       maxResults: searchPageSize,
                                     ),
                                   ),
@@ -183,9 +184,9 @@ class SearchScreen extends StatelessWidget {
                                                         .text,
                                                     page: page,
                                                     sortBy: _.filters.sortBy,
-                                                    type: SearchType.channel)
-                                                .then(
-                                                    (value) => value.channels),
+                                                    type: SearchType.channel,
+                                                date: _.filters.date)
+                                            .then((value) => value.channels),
                                         maxResults: searchPageSize,
                                       ),
                                       itemBuilder: (e) => InkWell(
@@ -233,13 +234,13 @@ class SearchScreen extends StatelessWidget {
                                                           .text,
                                                       page: page,
                                                       sortBy: _.filters.sortBy,
-                                                      type: SearchType.playlist)
-                                                  .then((value) =>
-                                                      value.playlists),
-                                          maxResults: searchPageSize,
-                                        ),
-                                        canDeleteVideos: false),
-                                  )
+                                                      type: SearchType.playlist,
+                                                  date: _.filters.date)
+                                                    .then((value) => value.playlists),
+                                                maxResults: searchPageSize,
+                                                 ),
+                                              canDeleteVideos: false),
+                                        )
                                 ][_.selectedIndex],
                               ),
                             ),

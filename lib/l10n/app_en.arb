@@ -643,6 +643,34 @@
   "@shorts": {
     "description": "Youtube shorts"
   },
+  "searchUploadDate": "Upload date",
+  "@searchUploadDate": {
+    "description": "Filter search result by upload date"
+  },
+  "searchUploadDateAny": "Any date",
+  "@searchUploadDateAny": {
+    "description": "Do not filter search result by upload date"
+  },
+  "searchUploadDateHour": "Last Hour",
+  "@searchUploadDateHour": {
+    "description": "Search for uploaded in last hour"
+  },
+  "searchUploadDateToday": "Today",
+  "@searchUploadDateToday": {
+    "description": "Search for uploaded today"
+  },
+  "searchUploadDateWeek": "This week",
+  "@searchUploadDateToday": {
+    "description": "Search for uploaded this week"
+  },
+  "searchUploadDateMonth": "This month",
+  "@searchUploadDateMonth": {
+    "description": "Search for uploaded this month"
+  },
+  "searchUploadDateYear": "This year",
+  "@searchUploadDateYear": {
+    "description": "Search for uploaded this year"
+  },
   "searchSortBy": "Sort by",
   "@searchSortBy": {
     "description": "Search sorting option"

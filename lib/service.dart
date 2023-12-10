@@ -9,6 +9,7 @@ import 'package:invidious/extensions.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/playlists/models/playlist.dart';
 import 'package:invidious/search/models/db/search_history_item.dart';
+import 'package:invidious/search/models/search_date.dart';
 import 'package:invidious/search/models/search_results.dart';
 import 'package:invidious/search/models/search_sort_by.dart';
 import 'package:invidious/search/models/search_type.dart';
@@ -242,7 +243,7 @@ class Service {
   }
 
   Future<SearchResults> search(String query,
-      {SearchType? type, int? page, SearchSortBy? sortBy}) async {
+      {SearchType? type, int? page, SearchSortBy? sortBy, SearchDate date = SearchDate.any}) async {
     String countryCode = db.getSettings(browsingCountry)?.value ?? 'US';
     Uri uri = buildUrl(urlSearch, query: {
       'q': Uri.encodeQueryComponent(query),
@@ -250,6 +251,7 @@ class Service {
       'page': page?.toString() ?? '1',
       'sort': sortBy?.name,
       'region': countryCode,
+      'date': date != SearchDate.any ? date.name : null,
     });
     final response = await http.get(uri);
     Iterable i = handleResponse(response);
