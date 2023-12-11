@@ -44,7 +44,6 @@ enum PlayerRepeat { noRepeat, repeatAll, repeatOne }
 
 class PlayerCubit extends Cubit<PlayerState> with WidgetsBindingObserver {
   final SettingsCubit settings;
-  // late final StreamSubscription<NativeDeviceOrientation> deviceOrientationStream;
 
   PlayerCubit(super.initialState, this.settings) {
     onReady();
@@ -183,7 +182,6 @@ class PlayerCubit extends Cubit<PlayerState> with WidgetsBindingObserver {
   @override
   close() async {
     BackButtonInterceptor.removeByName('miniPlayer');
-    // await deviceOrientationStream.cancel();
     WidgetsBinding.instance.removeObserver(this);
     super.close();
   }
