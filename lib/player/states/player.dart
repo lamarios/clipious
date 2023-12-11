@@ -44,8 +44,10 @@ enum PlayerRepeat { noRepeat, repeatAll, repeatOne }
 
 class PlayerCubit extends Cubit<PlayerState> with WidgetsBindingObserver {
   final SettingsCubit settings;
+  late Orientation orientation;
 
   PlayerCubit(super.initialState, this.settings) {
+    orientation = _orientation;
     onReady();
   }
 
@@ -58,12 +60,15 @@ class PlayerCubit extends Cubit<PlayerState> with WidgetsBindingObserver {
   }
 
 
-  Orientation get orientation =>
-     (WidgetsBinding.instance.platformDispatcher.implicitView?.physicalSize.aspectRatio ?? 1) > 1 ? Orientation.landscape:Orientation.portrait;
+  Orientation get _orientation => (WidgetsBinding.instance.platformDispatcher.implicitView?.physicalSize.aspectRatio ?? 1) > 1 ? Orientation.landscape:Orientation.portrait;
 
   @override
   void didChangeMetrics() {
-    onOrientationChange();
+    var newOrientation = _orientation;
+    if(newOrientation != orientation) {
+      orientation = newOrientation;
+      onOrientationChange();
+    }
   }
 
   mapMediaEventToMediaHandler(MediaEvent event) {
