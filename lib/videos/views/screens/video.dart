@@ -83,8 +83,8 @@ class VideoScreen extends StatelessWidget {
       child: BlocConsumer<VideoCubit, VideoState>(
         listenWhen: (previous, current) => settings.state.autoplayVideoOnLoad && previous.video != current.video,
         listener: (context, state) {
-            AutoRouter.of(context).pop();
-            context.read<VideoCubit>().playVideo(false);
+          AutoRouter.of(context).pop();
+          context.read<VideoCubit>().playVideo(false);
         },
         builder: (context, _) {
           var cubit = context.read<VideoCubit>();
@@ -117,10 +117,15 @@ class VideoScreen extends StatelessWidget {
                                         SizedBox(
                                             height: 15,
                                             width: 15,
-                                            child: CircularProgressIndicator(
-                                              value: _.downloadProgress == 0 ? null : _.downloadProgress,
-                                              strokeWidth: 2,
-                                            ))
+                                            child: TweenAnimationBuilder(
+                                                duration: animationDuration,
+                                                tween: Tween<double>(begin: 0, end: _.downloadProgress),
+                                                builder: (context, value, child) {
+                                                  return CircularProgressIndicator(
+                                                    value: _.downloadProgress == 0 ? null : value,
+                                                    strokeWidth: 2,
+                                                  );
+                                                }))
                                       ],
                                     ),
                                   )

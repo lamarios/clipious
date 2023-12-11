@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:bloc/bloc.dart';
 import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:dio/dio.dart';
+import 'package:easy_debounce/easy_throttle.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:invidious/downloads/models/downloaded_video.dart';
 import 'package:invidious/extensions.dart';
@@ -64,28 +65,35 @@ class DownloadManagerCubit extends Cubit<DownloadManagerState> {
 
   void playAll() {
     setVideos();
-    player.playOfflineVideos(state.videos.where((element) => element.downloadComplete && !element.downloadFailed).toList());
+    player.playOfflineVideos(
+        state.videos.where((element) => element.downloadComplete && !element.downloadFailed).toList());
   }
 
   onProgress(int count, int total, DownloadedVideo video) {
-    // log.fine('Download of video $videoId}, $count / $total =  ${count / total}');
-    var progresses = Map<String, DownloadProgress>.from(state.downloadProgresses);
-    var downloadProgress = progresses[video.videoId];
-    downloadProgress?.count = count;
-    downloadProgress?.total = total;
-    emit(state.copyWith(downloadProgresses: progresses));
-
     if (count == total) {
       var progresses = Map<String, DownloadProgress>.from(state.downloadProgresses);
+      var downloadProgress = progresses[video.videoId];
       progresses.remove(video.videoId);
       video.downloadComplete = true;
       db.upsertDownload(video);
       emit(state.copyWith(downloadProgresses: progresses));
       setVideos();
-    }
-
-    for (var f in downloadProgress?.listeners ?? []) {
-      f(count / total);
+      for (var f in downloadProgress?.listeners ?? []) {
+        f(count / total);
+      }
+    } else {
+      EasyThrottle.throttle('download-${video.id}', const Duration(milliseconds: 500), () {
+        log.fine('Download of video ${video.id}, $count / $total =  ${count / total}, Total: ${state.totalProgress}');
+        var progresses = Map<String, DownloadProgress>.from(state.downloadProgresses);
+        var downloadProgress = progresses[video.videoId];
+        downloadProgress?.count = count;
+        downloadProgress?.total = total;
+        emit(state.copyWith(downloadProgresses: progresses));
+        setVideos();
+        for (var f in downloadProgress?.listeners ?? []) {
+          f(count / total);
+        }
+      });
     }
   }
 
@@ -94,8 +102,14 @@ class DownloadManagerCubit extends Cubit<DownloadManagerState> {
       return false;
     } else {
       Video vid = await service.getVideo(videoId);
-      var downloadedVideo =
-          DownloadedVideo(videoId: vid.videoId, title: vid.title, author: vid.author, authorUrl: vid.authorUrl, audioOnly: audioOnly, lengthSeconds: vid.lengthSeconds, quality: quality);
+      var downloadedVideo = DownloadedVideo(
+          videoId: vid.videoId,
+          title: vid.title,
+          author: vid.author,
+          authorUrl: vid.authorUrl,
+          audioOnly: audioOnly,
+          lengthSeconds: vid.lengthSeconds,
+          quality: quality);
       db.upsertDownload(downloadedVideo);
 
       String contentUrl;
@@ -104,7 +118,9 @@ class DownloadManagerCubit extends Cubit<DownloadManagerState> {
         FormatStream stream = vid.formatStreams.firstWhere((element) => element.resolution == quality);
         contentUrl = stream.url;
       } else {
-        AdaptiveFormat audio = vid.adaptiveFormats.sortByReversed((e) => int.parse(e.bitrate ?? "0")).firstWhere((element) => element.type.contains("audio"));
+        AdaptiveFormat audio = vid.adaptiveFormats
+            .sortByReversed((e) => int.parse(e.bitrate ?? "0"))
+            .firstWhere((element) => element.type.contains("audio"));
         contentUrl = audio.url;
       }
 
@@ -129,9 +145,11 @@ class DownloadManagerCubit extends Cubit<DownloadManagerState> {
       // download video
       var videoPath = await downloadedVideo.mediaPath;
 
-      log.info("Downloading video ${vid.title}, audioOnly ? $audioOnly, quality: $quality (if not only audio) to path: $videoPath");
+      log.info(
+          "Downloading video ${vid.title}, audioOnly ? $audioOnly, quality: $quality (if not only audio) to path: $videoPath");
       dio
-          .download(contentUrl, videoPath, onReceiveProgress: (count, total) => onProgress(count, total, downloadedVideo), cancelToken: cancelToken)
+          .download(contentUrl, videoPath,
+              onReceiveProgress: (count, total) => onProgress(count, total, downloadedVideo), cancelToken: cancelToken)
           .catchError((err) => onDownloadError(err, downloadedVideo));
 
       return true;
@@ -202,21 +220,25 @@ class DownloadManagerCubit extends Cubit<DownloadManagerState> {
   }
 
   bool canPlayAll() => state.videos.where((element) => element.downloadComplete).isNotEmpty;
+}
+
+@freezed
+class DownloadManagerState with _$DownloadManagerState {
+  const factory DownloadManagerState(
+      {@Default([]) List<DownloadedVideo> videos,
+      @Default({}) Map<String, DownloadProgress> downloadProgresses}) = _DownloadManagerState;
+
+  const DownloadManagerState._();
 
   double get totalProgress {
     int downloaded = 0;
     int total = 0;
 
-    for (var element in state.downloadProgresses.values) {
+    for (var element in downloadProgresses.values) {
       downloaded += element.count;
       total += element.total;
     }
 
     return downloaded / total;
   }
-}
-
-@freezed
-class DownloadManagerState with _$DownloadManagerState {
-  const factory DownloadManagerState({@Default([]) List<DownloadedVideo> videos, @Default({}) Map<String, DownloadProgress> downloadProgresses}) = _DownloadManagerState;
 }

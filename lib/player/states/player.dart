@@ -418,7 +418,8 @@ class PlayerCubit extends Cubit<PlayerState> with WidgetsBindingObserver {
   /// skip to queue video of index
   /// if we're not shuffling, we also rebuild the playnext and played previously queue
   skipToVideo(int index) {
-    if (index < 0 || index >= state.videos.length) {
+    var listToCheckAgainst = state.videos.isNotEmpty ? state.videos : state.offlineVideos;
+    if (index < 0 || index >= listToCheckAgainst.length) {
       return;
     }
 
@@ -426,8 +427,8 @@ class PlayerCubit extends Cubit<PlayerState> with WidgetsBindingObserver {
     } else {
       List<String> played = [];
       List<String> playNext = [];
-      for (int i = 0; i < state.videos.length; i++) {
-        var v = state.videos[i];
+      for (int i = 0; i < listToCheckAgainst.length; i++) {
+        var v = listToCheckAgainst[i];
         if (i < index) {
           played.add(v.videoId);
         } else if (i > index) {
@@ -436,7 +437,7 @@ class PlayerCubit extends Cubit<PlayerState> with WidgetsBindingObserver {
       }
       emit(state.copyWith(playedVideos: played, playQueue: ListQueue.from(playNext)));
     }
-    switchToVideo(state.videos[index]);
+    _switchToVideo(listToCheckAgainst[index]);
   }
 
   /// Switches to a video without changing the queue

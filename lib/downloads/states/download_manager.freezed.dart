@@ -108,12 +108,13 @@ class __$$DownloadManagerStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$DownloadManagerStateImpl implements _DownloadManagerState {
+class _$DownloadManagerStateImpl extends _DownloadManagerState {
   const _$DownloadManagerStateImpl(
       {final List<DownloadedVideo> videos = const [],
       final Map<String, DownloadProgress> downloadProgresses = const {}})
       : _videos = videos,
-        _downloadProgresses = downloadProgresses;
+        _downloadProgresses = downloadProgresses,
+        super._();
 
   final List<DownloadedVideo> _videos;
   @override
@@ -164,11 +165,12 @@ class _$DownloadManagerStateImpl implements _DownloadManagerState {
               this, _$identity);
 }
 
-abstract class _DownloadManagerState implements DownloadManagerState {
+abstract class _DownloadManagerState extends DownloadManagerState {
   const factory _DownloadManagerState(
           {final List<DownloadedVideo> videos,
           final Map<String, DownloadProgress> downloadProgresses}) =
       _$DownloadManagerStateImpl;
+  const _DownloadManagerState._() : super._();
 
   @override
   List<DownloadedVideo> get videos;

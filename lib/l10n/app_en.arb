@@ -687,6 +687,16 @@
   "@videoFilters": {
     "description": "Title for video filter settings"
   },
+  "nFilters": "{count, plural, =0{No videos} =1{1 filter} other{{count} filters}}",
+  "@nFilters": {
+    "description": "One or more video filters",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
   "videoFiltersExplanation": "Hide or Obfuscate videos from all the video feeds in the application based on the filters defined below. This allow you for example to hide sports spoilers or hide shorts from a certain channel.",
   "@videoFiltersExplanation": {
     "description": "Description on how filter work"
