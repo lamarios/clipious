@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_fadein/flutter_fadein.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:invidious/channels/models/channel_sort_by.dart';
+import 'package:invidious/channels/sort_dropdown_button.dart';
 import 'package:invidious/channels/states/channel.dart';
 import 'package:invidious/channels/views/components/info.dart';
 import 'package:invidious/channels/views/components/playlists.dart';
@@ -40,10 +42,21 @@ class ChannelScreen extends StatelessWidget {
                   : [
                       Visibility(
                         visible: channelState.channel != null,
-                        child: IconButton(
-                          onPressed: () =>
+                        child: Row(
+                          children: <Widget>[
+                            IconButton(
+                              onPressed: () =>
                               showSharingSheet(context, channelState.channel!),
-                          icon: const Icon(Icons.share),
+                              icon: const Icon(Icons.share),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Visibility(
+                        visible: _.channel != null && _.selectedIndex == 1,
+                        child: SortDropdownButton(
+                          selectedSortingOption: _.sortBy,
+                          onChanged: (ChannelSortBy newValue) => cubit.onSortByChanged(newValue),
                         ),
                       ),
                     ],
@@ -85,9 +98,11 @@ class ChannelScreen extends StatelessWidget {
                             channel: channelState.channel!),
                     if (!channelState.loading)
                       ChannelVideosView(
-                        key: const ValueKey('videos'),
+                        key: UniqueKey(),
                         channel: channelState.channel!,
-                        getVideos: service.getChannelVideos,
+                        getVideos: (String channelId, String? continuation) {
+                          return service.getChannelVideos(channelId, continuation, sortBy: _.sortBy);
+                        },
                       ),
                     if (!channelState.loading)
                       ChannelVideosView(

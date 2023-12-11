@@ -1310,5 +1310,17 @@
   "enabled": "Enabled",
   "@enabled": {
     "description": "Text to show something is enabled"
+  },
+  "channelSortByNewest": "Newest",
+  "@enabled": {
+    "description": "Sort channel videos from newest to oldest"
+  },
+  "channelSortByOldest": "Oldest",
+  "@enabled": {
+    "description": "Sort channel videos from oldest to newest"
+  },
+  "channelSortByPopular": "Popular",
+  "@enabled": {
+    "description": "Sort channel videos by popularity"
   }
 }

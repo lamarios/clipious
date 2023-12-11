@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_web_auth/flutter_web_auth.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
+import 'package:invidious/channels/models/channel_sort_by.dart';
 import 'package:invidious/database.dart';
 import 'package:invidious/extensions.dart';
 import 'package:invidious/globals.dart';
@@ -504,9 +505,12 @@ class Service {
 
   Future<VideosWithContinuation> getChannelVideos(
       String channelId, String? continuation,
-      {bool saveLastSeen = true}) async {
+      {bool saveLastSeen = true, ChannelSortBy sortBy = ChannelSortBy.newest}) async {
     Uri uri = buildUrl(urlGetChannelVideos,
-        pathParams: {':id': channelId}, query: {'continuation': continuation});
+        pathParams: {':id': channelId}, query: {
+      'continuation': continuation,
+      'sort_by': sortBy.name,
+    });
     final response = await http.get(uri,
         headers: {'Content-Type': 'application/json; charset=utf-16'});
 
