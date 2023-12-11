@@ -1206,5 +1206,13 @@
   "searchSortBy": "به ترتیب",
   "@searchSortBy": {
     "description": "Search sorting option"
+  },
+  "serverIsNotReachable": "سرویس دهنده در دسترس نیست",
+  "@serverIsNotReachable": {
+    "description": "Title for dialog when adding a server that is not reachable"
+  },
+  "malformedStatsEndpoint": "/api/v1/stats آن گونه که انتظار می‌رود نیست",
+  "@malformedStatsEndpoint": {
+    "description": "Title for dialog when adding a server that isn't validated as it should"
   }
 }
