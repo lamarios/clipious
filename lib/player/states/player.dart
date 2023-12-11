@@ -16,7 +16,6 @@ import 'package:invidious/player/states/interfaces/media_player.dart';
 import 'package:invidious/utils.dart';
 import 'package:invidious/utils/models/image_object.dart';
 import 'package:logging/logging.dart';
-import 'package:native_device_orientation/native_device_orientation.dart';
 import 'package:simple_pip_mode/simple_pip.dart';
 
 import '../../downloads/models/downloaded_video.dart';
@@ -43,9 +42,9 @@ var log = Logger('MiniPlayerController');
 
 enum PlayerRepeat { noRepeat, repeatAll, repeatOne }
 
-class PlayerCubit extends Cubit<PlayerState> {
+class PlayerCubit extends Cubit<PlayerState> with WidgetsBindingObserver {
   final SettingsCubit settings;
-  late final StreamSubscription<NativeDeviceOrientation> deviceOrientationStream;
+  // late final StreamSubscription<NativeDeviceOrientation> deviceOrientationStream;
 
   PlayerCubit(super.initialState, this.settings) {
     onReady();
@@ -57,6 +56,15 @@ class PlayerCubit extends Cubit<PlayerState> {
     var state = this.state.copyWith();
     state.mediaEvent = event;
     emit(state);
+  }
+
+
+  Orientation get orientation =>
+     (WidgetsBinding.instance.platformDispatcher.implicitView?.physicalSize.aspectRatio ?? 1) > 1 ? Orientation.landscape:Orientation.portrait;
+
+  @override
+  void didChangeMetrics() {
+    onOrientationChange();
   }
 
   mapMediaEventToMediaHandler(MediaEvent event) {
@@ -105,8 +113,7 @@ class PlayerCubit extends Cubit<PlayerState> {
 
   onReady() async {
     if (!isTv) {
-      deviceOrientationStream =
-          NativeDeviceOrientationCommunicator().onOrientationChanged(useSensor: true).listen(this.onOrientationChange);
+      WidgetsBinding.instance.addObserver(this);
 
       mediaHandler = await AudioService.init(
         builder: () => MediaHandler(this),
@@ -176,7 +183,8 @@ class PlayerCubit extends Cubit<PlayerState> {
   @override
   close() async {
     BackButtonInterceptor.removeByName('miniPlayer');
-    await deviceOrientationStream.cancel();
+    // await deviceOrientationStream.cancel();
+    WidgetsBinding.instance.removeObserver(this);
     super.close();
   }
 
@@ -287,7 +295,7 @@ class PlayerCubit extends Cubit<PlayerState> {
     state.opacity = 1;
     state.isHidden = false;
     emit(state);
-    NativeDeviceOrientationCommunicator().orientation(useSensor: true).then(onOrientationChange);
+    onOrientationChange();
   }
 
   showMiniPlayer() {
@@ -830,9 +838,9 @@ class PlayerCubit extends Cubit<PlayerState> {
     emit(state.copyWith(playQueue: playQueue));
   }
 
-  void onOrientationChange(NativeDeviceOrientation event) {
+  void onOrientationChange() {
     if (getDeviceType() == DeviceType.phone &&
-        (event == NativeDeviceOrientation.landscapeLeft || event == NativeDeviceOrientation.landscapeRight) &&
+        (orientation == Orientation.landscape) &&
         !state.isMini) {
       setFullScreen(FullScreenState.fullScreen);
     }
