@@ -20,14 +20,12 @@ mixin _$CompactVideoState {
   String? get offlineVideoThumbnailPath => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $CompactVideoStateCopyWith<CompactVideoState> get copyWith =>
-      throw _privateConstructorUsedError;
+  $CompactVideoStateCopyWith<CompactVideoState> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $CompactVideoStateCopyWith<$Res> {
-  factory $CompactVideoStateCopyWith(
-          CompactVideoState value, $Res Function(CompactVideoState) then) =
+  factory $CompactVideoStateCopyWith(CompactVideoState value, $Res Function(CompactVideoState) then) =
       _$CompactVideoStateCopyWithImpl<$Res, CompactVideoState>;
   @useResult
   $Res call({DownloadedVideo? offlineVideo, String? offlineVideoThumbnailPath});
@@ -63,10 +61,8 @@ class _$CompactVideoStateCopyWithImpl<$Res, $Val extends CompactVideoState>
 }
 
 /// @nodoc
-abstract class _$$CompactVideoStateImplCopyWith<$Res>
-    implements $CompactVideoStateCopyWith<$Res> {
-  factory _$$CompactVideoStateImplCopyWith(_$CompactVideoStateImpl value,
-          $Res Function(_$CompactVideoStateImpl) then) =
+abstract class _$$CompactVideoStateImplCopyWith<$Res> implements $CompactVideoStateCopyWith<$Res> {
+  factory _$$CompactVideoStateImplCopyWith(_$CompactVideoStateImpl value, $Res Function(_$CompactVideoStateImpl) then) =
       __$$CompactVideoStateImplCopyWithImpl<$Res>;
   @override
   @useResult
@@ -74,11 +70,9 @@ abstract class _$$CompactVideoStateImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$CompactVideoStateImplCopyWithImpl<$Res>
-    extends _$CompactVideoStateCopyWithImpl<$Res, _$CompactVideoStateImpl>
+class __$$CompactVideoStateImplCopyWithImpl<$Res> extends _$CompactVideoStateCopyWithImpl<$Res, _$CompactVideoStateImpl>
     implements _$$CompactVideoStateImplCopyWith<$Res> {
-  __$$CompactVideoStateImplCopyWithImpl(_$CompactVideoStateImpl _value,
-      $Res Function(_$CompactVideoStateImpl) _then)
+  __$$CompactVideoStateImplCopyWithImpl(_$CompactVideoStateImpl _value, $Res Function(_$CompactVideoStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -103,8 +97,7 @@ class __$$CompactVideoStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$CompactVideoStateImpl implements _CompactVideoState {
-  const _$CompactVideoStateImpl(
-      {this.offlineVideo, this.offlineVideoThumbnailPath});
+  const _$CompactVideoStateImpl({this.offlineVideo, this.offlineVideoThumbnailPath});
 
   @override
   final DownloadedVideo? offlineVideo;
@@ -121,29 +114,24 @@ class _$CompactVideoStateImpl implements _CompactVideoState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$CompactVideoStateImpl &&
-            (identical(other.offlineVideo, offlineVideo) ||
-                other.offlineVideo == offlineVideo) &&
-            (identical(other.offlineVideoThumbnailPath,
-                    offlineVideoThumbnailPath) ||
+            (identical(other.offlineVideo, offlineVideo) || other.offlineVideo == offlineVideo) &&
+            (identical(other.offlineVideoThumbnailPath, offlineVideoThumbnailPath) ||
                 other.offlineVideoThumbnailPath == offlineVideoThumbnailPath));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, offlineVideo, offlineVideoThumbnailPath);
+  int get hashCode => Object.hash(runtimeType, offlineVideo, offlineVideoThumbnailPath);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$CompactVideoStateImplCopyWith<_$CompactVideoStateImpl> get copyWith =>
-      __$$CompactVideoStateImplCopyWithImpl<_$CompactVideoStateImpl>(
-          this, _$identity);
+      __$$CompactVideoStateImplCopyWithImpl<_$CompactVideoStateImpl>(this, _$identity);
 }
 
 abstract class _CompactVideoState implements CompactVideoState {
-  const factory _CompactVideoState(
-      {final DownloadedVideo? offlineVideo,
-      final String? offlineVideoThumbnailPath}) = _$CompactVideoStateImpl;
+  const factory _CompactVideoState({final DownloadedVideo? offlineVideo, final String? offlineVideoThumbnailPath}) =
+      _$CompactVideoStateImpl;
 
   @override
   DownloadedVideo? get offlineVideo;
@@ -151,6 +139,5 @@ abstract class _CompactVideoState implements CompactVideoState {
   String? get offlineVideoThumbnailPath;
   @override
   @JsonKey(ignore: true)
-  _$$CompactVideoStateImplCopyWith<_$CompactVideoStateImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$CompactVideoStateImplCopyWith<_$CompactVideoStateImpl> get copyWith => throw _privateConstructorUsedError;
 }

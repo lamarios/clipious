@@ -23,12 +23,5 @@ class Server {
 
   bool inUse;
 
-  Server(
-      {required this.url,
-      this.authToken,
-      this.sidCookie,
-      this.ping,
-      this.flag,
-      this.region,
-      this.inUse = false});
+  Server({required this.url, this.authToken, this.sidCookie, this.ping, this.flag, this.region, this.inUse = false});
 }

@@ -3,11 +3,11 @@ import 'package:invidious/globals.dart';
 import 'package:invidious/utils/views/tv/components/tv_horizontal_item_list.dart';
 
 import '../../../main.dart';
-import '../../../utils/models/paginatedList.dart';
+import '../../../utils/models/paginated_list.dart';
 import '../../models/video_in_list.dart';
 import 'video_list.dart';
 
-const ALL = 'all';
+const all = 'all';
 
 class Trending extends StatefulWidget {
   final void Function(VideoInList video, int index, bool focus)? onItemFocus;
@@ -19,7 +19,7 @@ class Trending extends StatefulWidget {
 }
 
 class TrendingState extends State<Trending> {
-  String type = ALL;
+  String type = all;
 
   @override
   Widget build(BuildContext context) {

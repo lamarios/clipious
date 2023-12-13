@@ -17,28 +17,22 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$DownloadManagerState {
   List<DownloadedVideo> get videos => throw _privateConstructorUsedError;
-  Map<String, DownloadProgress> get downloadProgresses =>
-      throw _privateConstructorUsedError;
+  Map<String, DownloadProgress> get downloadProgresses => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $DownloadManagerStateCopyWith<DownloadManagerState> get copyWith =>
-      throw _privateConstructorUsedError;
+  $DownloadManagerStateCopyWith<DownloadManagerState> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $DownloadManagerStateCopyWith<$Res> {
-  factory $DownloadManagerStateCopyWith(DownloadManagerState value,
-          $Res Function(DownloadManagerState) then) =
+  factory $DownloadManagerStateCopyWith(DownloadManagerState value, $Res Function(DownloadManagerState) then) =
       _$DownloadManagerStateCopyWithImpl<$Res, DownloadManagerState>;
   @useResult
-  $Res call(
-      {List<DownloadedVideo> videos,
-      Map<String, DownloadProgress> downloadProgresses});
+  $Res call({List<DownloadedVideo> videos, Map<String, DownloadProgress> downloadProgresses});
 }
 
 /// @nodoc
-class _$DownloadManagerStateCopyWithImpl<$Res,
-        $Val extends DownloadManagerState>
+class _$DownloadManagerStateCopyWithImpl<$Res, $Val extends DownloadManagerState>
     implements $DownloadManagerStateCopyWith<$Res> {
   _$DownloadManagerStateCopyWithImpl(this._value, this._then);
 
@@ -67,24 +61,21 @@ class _$DownloadManagerStateCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$DownloadManagerStateImplCopyWith<$Res>
-    implements $DownloadManagerStateCopyWith<$Res> {
-  factory _$$DownloadManagerStateImplCopyWith(_$DownloadManagerStateImpl value,
-          $Res Function(_$DownloadManagerStateImpl) then) =
+abstract class _$$DownloadManagerStateImplCopyWith<$Res> implements $DownloadManagerStateCopyWith<$Res> {
+  factory _$$DownloadManagerStateImplCopyWith(
+          _$DownloadManagerStateImpl value, $Res Function(_$DownloadManagerStateImpl) then) =
       __$$DownloadManagerStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {List<DownloadedVideo> videos,
-      Map<String, DownloadProgress> downloadProgresses});
+  $Res call({List<DownloadedVideo> videos, Map<String, DownloadProgress> downloadProgresses});
 }
 
 /// @nodoc
 class __$$DownloadManagerStateImplCopyWithImpl<$Res>
     extends _$DownloadManagerStateCopyWithImpl<$Res, _$DownloadManagerStateImpl>
     implements _$$DownloadManagerStateImplCopyWith<$Res> {
-  __$$DownloadManagerStateImplCopyWithImpl(_$DownloadManagerStateImpl _value,
-      $Res Function(_$DownloadManagerStateImpl) _then)
+  __$$DownloadManagerStateImplCopyWithImpl(
+      _$DownloadManagerStateImpl _value, $Res Function(_$DownloadManagerStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -129,8 +120,7 @@ class _$DownloadManagerStateImpl extends _DownloadManagerState {
   @override
   @JsonKey()
   Map<String, DownloadProgress> get downloadProgresses {
-    if (_downloadProgresses is EqualUnmodifiableMapView)
-      return _downloadProgresses;
+    if (_downloadProgresses is EqualUnmodifiableMapView) return _downloadProgresses;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableMapView(_downloadProgresses);
   }
@@ -146,30 +136,24 @@ class _$DownloadManagerStateImpl extends _DownloadManagerState {
         (other.runtimeType == runtimeType &&
             other is _$DownloadManagerStateImpl &&
             const DeepCollectionEquality().equals(other._videos, _videos) &&
-            const DeepCollectionEquality()
-                .equals(other._downloadProgresses, _downloadProgresses));
+            const DeepCollectionEquality().equals(other._downloadProgresses, _downloadProgresses));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(_videos),
+  int get hashCode => Object.hash(runtimeType, const DeepCollectionEquality().hash(_videos),
       const DeepCollectionEquality().hash(_downloadProgresses));
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$DownloadManagerStateImplCopyWith<_$DownloadManagerStateImpl>
-      get copyWith =>
-          __$$DownloadManagerStateImplCopyWithImpl<_$DownloadManagerStateImpl>(
-              this, _$identity);
+  _$$DownloadManagerStateImplCopyWith<_$DownloadManagerStateImpl> get copyWith =>
+      __$$DownloadManagerStateImplCopyWithImpl<_$DownloadManagerStateImpl>(this, _$identity);
 }
 
 abstract class _DownloadManagerState extends DownloadManagerState {
   const factory _DownloadManagerState(
-          {final List<DownloadedVideo> videos,
-          final Map<String, DownloadProgress> downloadProgresses}) =
-      _$DownloadManagerStateImpl;
+      {final List<DownloadedVideo> videos,
+      final Map<String, DownloadProgress> downloadProgresses}) = _$DownloadManagerStateImpl;
   const _DownloadManagerState._() : super._();
 
   @override
@@ -178,6 +162,5 @@ abstract class _DownloadManagerState extends DownloadManagerState {
   Map<String, DownloadProgress> get downloadProgresses;
   @override
   @JsonKey(ignore: true)
-  _$$DownloadManagerStateImplCopyWith<_$DownloadManagerStateImpl>
-      get copyWith => throw _privateConstructorUsedError;
+  _$$DownloadManagerStateImplCopyWith<_$DownloadManagerStateImpl> get copyWith => throw _privateConstructorUsedError;
 }

@@ -10,9 +10,7 @@ class TvExpandableText extends StatelessWidget {
   final int? maxLines;
   final double? fontSize;
 
-  const TvExpandableText(
-      {Key? key, required this.text, this.maxLines, this.fontSize})
-      : super(key: key);
+  const TvExpandableText({super.key, required this.text, this.maxLines, this.fontSize});
 
   showText(BuildContext context) {
     AutoRouter.of(context).push(TvPlainTextRoute(text: text));
@@ -25,8 +23,7 @@ class TvExpandableText extends StatelessWidget {
     return DefaultTextStyle(
       style: textTheme.bodyLarge!,
       child: Focus(
-          onKeyEvent: (node, event) =>
-              onTvSelect(event, context, (context) => showText(context)),
+          onKeyEvent: (node, event) => onTvSelect(event, context, (context) => showText(context)),
           child: Builder(builder: (ctx) {
             final FocusNode focusNode = Focus.of(ctx);
             final bool hasFocus = focusNode.hasFocus;
@@ -34,9 +31,7 @@ class TvExpandableText extends StatelessWidget {
             return AnimatedContainer(
               duration: animationDuration,
               decoration: BoxDecoration(
-                color: hasFocus
-                    ? colors.primaryContainer
-                    : colors.background.withOpacity(0),
+                color: hasFocus ? colors.primaryContainer : colors.background.withOpacity(0),
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Padding(

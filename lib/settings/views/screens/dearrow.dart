@@ -24,8 +24,7 @@ class DeArrowSettingsScreen extends StatelessWidget {
         elevation: 0,
         scrolledUnderElevation: 0,
       ),
-      body: SafeArea(child:
-          BlocBuilder<SettingsCubit, SettingsState>(builder: (context, _) {
+      body: SafeArea(child: BlocBuilder<SettingsCubit, SettingsState>(builder: (context, _) {
         var cubit = context.read<SettingsCubit>();
         return DefaultTabController(
           length: 2,
@@ -36,16 +35,12 @@ class DeArrowSettingsScreen extends StatelessWidget {
               SettingsSection(
                 tiles: [
                   SettingsTile.switchTile(
-                    title: Text("DeArrow"),
+                    title: const Text("DeArrow"),
                     description: Text(locals.deArrowSettingDescription),
                     initialValue: _.dearrow,
                     onToggle: (value) {
                       if (value) {
-                        okCancelDialog(
-                            context,
-                            "DeArrow",
-                            locals.deArrowWarning,
-                            () => cubit.setDearrow(value));
+                        okCancelDialog(context, "DeArrow", locals.deArrowWarning, () => cubit.setDearrow(value));
                       } else {
                         return cubit.setDearrow(value);
                       }
@@ -53,8 +48,7 @@ class DeArrowSettingsScreen extends StatelessWidget {
                   ),
                   SettingsTile.switchTile(
                     title: Text(locals.deArrowReplaceThumbnails),
-                    description:
-                        Text(locals.deArrowReplaceThumbnailsDescription),
+                    description: Text(locals.deArrowReplaceThumbnailsDescription),
                     initialValue: _.dearrowThumbnails,
                     onToggle: cubit.setDearrowThumbnail,
                     enabled: _.dearrow,

@@ -27,8 +27,7 @@ class ChannelScreen extends StatelessWidget {
     var locals = AppLocalizations.of(context)!;
 
     return BlocProvider(
-      create: (BuildContext context) =>
-          ChannelCubit(ChannelController(channelId: channelId)),
+      create: (BuildContext context) => ChannelCubit(ChannelController(channelId: channelId)),
       child: BlocBuilder<ChannelCubit, ChannelController>(
         builder: (context, channelState) {
           var cubit = context.read<ChannelCubit>();
@@ -46,8 +45,7 @@ class ChannelScreen extends StatelessWidget {
                       Visibility(
                         visible: channelState.channel != null,
                         child: IconButton(
-                          onPressed: () =>
-                              showSharingSheet(context, channelState.channel!),
+                          onPressed: () => showSharingSheet(context, channelState.channel!),
                           icon: const Icon(Icons.share),
                         ),
                       ),
@@ -59,28 +57,16 @@ class ChannelScreen extends StatelessWidget {
                 : FadeIn(
                     child: NavigationBar(
                       backgroundColor: colorScheme.background,
-                      labelBehavior: context
-                          .read<SettingsCubit>()
-                          .state
-                          .navigationBarLabelBehavior,
+                      labelBehavior: context.read<SettingsCubit>().state.navigationBarLabelBehavior,
                       elevation: 0,
                       onDestinationSelected: cubit.selectIndex,
                       selectedIndex: channelState.selectedIndex,
                       destinations: <Widget>[
-                        NavigationDestination(
-                            icon: const Icon(Icons.info), label: locals.info),
-                        NavigationDestination(
-                            icon: const Icon(Icons.play_arrow),
-                            label: locals.videos),
-                        NavigationDestination(
-                            icon: const Icon(Icons.videocam),
-                            label: locals.shorts),
-                        NavigationDestination(
-                            icon: const Icon(Icons.stream),
-                            label: locals.streams),
-                        NavigationDestination(
-                            icon: const Icon(Icons.playlist_play),
-                            label: locals.playlists)
+                        NavigationDestination(icon: const Icon(Icons.info), label: locals.info),
+                        NavigationDestination(icon: const Icon(Icons.play_arrow), label: locals.videos),
+                        NavigationDestination(icon: const Icon(Icons.videocam), label: locals.shorts),
+                        NavigationDestination(icon: const Icon(Icons.stream), label: locals.streams),
+                        NavigationDestination(icon: const Icon(Icons.playlist_play), label: locals.playlists)
                       ],
                     ),
                   ),
@@ -91,9 +77,7 @@ class ChannelScreen extends StatelessWidget {
                   child: <Widget>[
                     channelState.loading
                         ? const ChannelPlaceHolder()
-                        : ChannelInfo(
-                            key: const ValueKey('info'),
-                            channel: channelState.channel!),
+                        : ChannelInfo(key: const ValueKey('info'), channel: channelState.channel!),
                     if (!channelState.loading)
                       ChannelVideosView(
                         key: const ValueKey('videos'),

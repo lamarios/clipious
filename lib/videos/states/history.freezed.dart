@@ -21,22 +21,19 @@ mixin _$HistoryItemState {
   HistoryVideoCache? get cachedVid => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $HistoryItemStateCopyWith<HistoryItemState> get copyWith =>
-      throw _privateConstructorUsedError;
+  $HistoryItemStateCopyWith<HistoryItemState> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $HistoryItemStateCopyWith<$Res> {
-  factory $HistoryItemStateCopyWith(
-          HistoryItemState value, $Res Function(HistoryItemState) then) =
+  factory $HistoryItemStateCopyWith(HistoryItemState value, $Res Function(HistoryItemState) then) =
       _$HistoryItemStateCopyWithImpl<$Res, HistoryItemState>;
   @useResult
   $Res call({String videoId, bool loading, HistoryVideoCache? cachedVid});
 }
 
 /// @nodoc
-class _$HistoryItemStateCopyWithImpl<$Res, $Val extends HistoryItemState>
-    implements $HistoryItemStateCopyWith<$Res> {
+class _$HistoryItemStateCopyWithImpl<$Res, $Val extends HistoryItemState> implements $HistoryItemStateCopyWith<$Res> {
   _$HistoryItemStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -69,10 +66,8 @@ class _$HistoryItemStateCopyWithImpl<$Res, $Val extends HistoryItemState>
 }
 
 /// @nodoc
-abstract class _$$HistoryItemStateImplCopyWith<$Res>
-    implements $HistoryItemStateCopyWith<$Res> {
-  factory _$$HistoryItemStateImplCopyWith(_$HistoryItemStateImpl value,
-          $Res Function(_$HistoryItemStateImpl) then) =
+abstract class _$$HistoryItemStateImplCopyWith<$Res> implements $HistoryItemStateCopyWith<$Res> {
+  factory _$$HistoryItemStateImplCopyWith(_$HistoryItemStateImpl value, $Res Function(_$HistoryItemStateImpl) then) =
       __$$HistoryItemStateImplCopyWithImpl<$Res>;
   @override
   @useResult
@@ -80,11 +75,9 @@ abstract class _$$HistoryItemStateImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$HistoryItemStateImplCopyWithImpl<$Res>
-    extends _$HistoryItemStateCopyWithImpl<$Res, _$HistoryItemStateImpl>
+class __$$HistoryItemStateImplCopyWithImpl<$Res> extends _$HistoryItemStateCopyWithImpl<$Res, _$HistoryItemStateImpl>
     implements _$$HistoryItemStateImplCopyWith<$Res> {
-  __$$HistoryItemStateImplCopyWithImpl(_$HistoryItemStateImpl _value,
-      $Res Function(_$HistoryItemStateImpl) _then)
+  __$$HistoryItemStateImplCopyWithImpl(_$HistoryItemStateImpl _value, $Res Function(_$HistoryItemStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -114,8 +107,7 @@ class __$$HistoryItemStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$HistoryItemStateImpl implements _HistoryItemState {
-  const _$HistoryItemStateImpl(
-      {required this.videoId, this.loading = true, this.cachedVid});
+  const _$HistoryItemStateImpl({required this.videoId, this.loading = true, this.cachedVid});
 
   @override
   final String videoId;
@@ -137,8 +129,7 @@ class _$HistoryItemStateImpl implements _HistoryItemState {
             other is _$HistoryItemStateImpl &&
             (identical(other.videoId, videoId) || other.videoId == videoId) &&
             (identical(other.loading, loading) || other.loading == loading) &&
-            (identical(other.cachedVid, cachedVid) ||
-                other.cachedVid == cachedVid));
+            (identical(other.cachedVid, cachedVid) || other.cachedVid == cachedVid));
   }
 
   @override
@@ -148,15 +139,12 @@ class _$HistoryItemStateImpl implements _HistoryItemState {
   @override
   @pragma('vm:prefer-inline')
   _$$HistoryItemStateImplCopyWith<_$HistoryItemStateImpl> get copyWith =>
-      __$$HistoryItemStateImplCopyWithImpl<_$HistoryItemStateImpl>(
-          this, _$identity);
+      __$$HistoryItemStateImplCopyWithImpl<_$HistoryItemStateImpl>(this, _$identity);
 }
 
 abstract class _HistoryItemState implements HistoryItemState {
   const factory _HistoryItemState(
-      {required final String videoId,
-      final bool loading,
-      final HistoryVideoCache? cachedVid}) = _$HistoryItemStateImpl;
+      {required final String videoId, final bool loading, final HistoryVideoCache? cachedVid}) = _$HistoryItemStateImpl;
 
   @override
   String get videoId;
@@ -166,6 +154,5 @@ abstract class _HistoryItemState implements HistoryItemState {
   HistoryVideoCache? get cachedVid;
   @override
   @JsonKey(ignore: true)
-  _$$HistoryItemStateImplCopyWith<_$HistoryItemStateImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$HistoryItemStateImplCopyWith<_$HistoryItemStateImpl> get copyWith => throw _privateConstructorUsedError;
 }

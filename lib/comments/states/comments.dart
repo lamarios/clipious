@@ -4,7 +4,7 @@ import 'package:invidious/comments/models/video_comments.dart';
 import 'package:invidious/videos/models/base_video.dart';
 
 import '../../globals.dart';
-import '../../settings/models/errors/invidiousServiceError.dart';
+import '../../settings/models/errors/invidious_service_error.dart';
 
 part 'comments.freezed.dart';
 
@@ -22,35 +22,23 @@ class CommentsCubit extends Cubit<CommentsState> {
     emit(state.copyWith(loadingComments: true));
 
     state = this.state.copyWith();
-    VideoComments comments = await service.getComments(state.video.videoId,
-        continuation: state.continuation);
+    VideoComments comments = await service.getComments(state.video.videoId, continuation: state.continuation);
 
     var stateComments = state.comments;
     stateComments.comments.addAll(comments.comments);
-    emit(state.copyWith(
-        comments: stateComments,
-        continuation: comments.continuation,
-        loadingComments: false));
+    emit(state.copyWith(comments: stateComments, continuation: comments.continuation, loadingComments: false));
   }
 
   getComments() async {
     var state = this.state.copyWith();
-    emit(state.copyWith(
-        error: '',
-        loadingComments: true,
-        comments: VideoComments(0, state.video.videoId, '', [])));
+    emit(state.copyWith(error: '', loadingComments: true, comments: VideoComments(0, state.video.videoId, '', [])));
 
     state = this.state.copyWith();
 
     try {
       VideoComments comments = await service.getComments(state.video.videoId,
-          continuation: state.continuation,
-          sortBy: state.sortBy,
-          source: state.source);
-      emit(state.copyWith(
-          comments: comments,
-          loadingComments: false,
-          continuation: comments.continuation));
+          continuation: state.continuation, sortBy: state.sortBy, source: state.source);
+      emit(state.copyWith(comments: comments, loadingComments: false, continuation: comments.continuation));
     } catch (err) {
       state = this.state.copyWith();
       if (err is InvidiousServiceError) {

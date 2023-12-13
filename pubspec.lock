@@ -118,7 +118,7 @@ packages:
     description:
       path: "."
       ref: master
-      resolved-ref: "13894935687897b34954c44198c0dc1896f50a5d"
+      resolved-ref: "3426a0dca12e03881279028befa368ccdd5cfc12"
       url: "https://github.com/lamarios/betterplayer.git"
     source: git
     version: "0.0.83"

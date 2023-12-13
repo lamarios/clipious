@@ -17,8 +17,7 @@ class SingleCommentView extends StatelessWidget {
   final Comment comment;
   final BaseVideo video;
 
-  const SingleCommentView(
-      {super.key, required this.comment, required this.video});
+  const SingleCommentView({super.key, required this.comment, required this.video});
 
   openChannel(BuildContext context, String authorId) {
     AutoRouter.of(context).push(ChannelRoute(channelId: authorId));
@@ -32,8 +31,7 @@ class SingleCommentView extends StatelessWidget {
     var textTheme = Theme.of(context).textTheme;
 
     return BlocProvider(
-      create: (context) =>
-          SingleCommentCubit(SingleCommentState(comment: comment)),
+      create: (context) => SingleCommentCubit(SingleCommentState(comment: comment)),
       child: BlocBuilder<SingleCommentCubit, SingleCommentState>(
         builder: (context, _) {
           var cubit = context.read<SingleCommentCubit>();
@@ -49,12 +47,8 @@ class SingleCommentView extends StatelessWidget {
                     child: Thumbnail(
                       width: 20,
                       height: 20,
-                      thumbnailUrl: ImageObject.getBestThumbnail(
-                                  _.comment.authorThumbnails)
-                              ?.url ??
-                          '',
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20)),
+                      thumbnailUrl: ImageObject.getBestThumbnail(_.comment.authorThumbnails)?.url ?? '',
+                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
                     ),
                   ),
                 ),
@@ -74,15 +68,12 @@ class SingleCommentView extends StatelessWidget {
                           Visibility(
                             visible: _.comment.creatorHeart != null,
                             child: Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(vertical: 8.0),
+                              padding: const EdgeInsets.symmetric(vertical: 8.0),
                               child: Container(
                                 decoration: BoxDecoration(
-                                    color: colors.primaryContainer,
-                                    borderRadius: BorderRadius.circular(20)),
+                                    color: colors.primaryContainer, borderRadius: BorderRadius.circular(20)),
                                 child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      vertical: 4.0, horizontal: 8),
+                                  padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8),
                                   child: Row(
                                     children: [
                                       const Icon(
@@ -91,21 +82,16 @@ class SingleCommentView extends StatelessWidget {
                                         size: 15,
                                       ),
                                       Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 8.0),
+                                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
                                         child: Image(
                                           image: NetworkImage(
-                                            _.comment.creatorHeart
-                                                    ?.creatorThumbnail ??
-                                                '',
+                                            _.comment.creatorHeart?.creatorThumbnail ?? '',
                                           ),
                                           width: 15,
                                           height: 15,
                                         ),
                                       ),
-                                      Text(
-                                          _.comment.creatorHeart?.creatorName ??
-                                              '')
+                                      Text(_.comment.creatorHeart?.creatorName ?? '')
                                     ],
                                   ),
                                 ),
@@ -125,12 +111,9 @@ class SingleCommentView extends StatelessWidget {
                               visible: _.comment.likeCount > 0,
                               child: Padding(
                                 padding: const EdgeInsets.only(right: 4.0),
-                                child: Icon(Icons.thumb_up,
-                                    size: 15, color: colors.secondary),
+                                child: Icon(Icons.thumb_up, size: 15, color: colors.secondary),
                               )),
-                          Visibility(
-                              visible: _.comment.likeCount > 0,
-                              child: Text(_.comment.likeCount.toString())),
+                          Visibility(visible: _.comment.likeCount > 0, child: Text(_.comment.likeCount.toString())),
                           Expanded(
                               child: Text(
                             _.comment.publishedText,
@@ -140,8 +123,7 @@ class SingleCommentView extends StatelessWidget {
                         ],
                       ),
                       Visibility(
-                          visible:
-                              _.comment.replies != null && !_.showingChildren,
+                          visible: _.comment.replies != null && !_.showingChildren,
                           child: Padding(
                             padding: const EdgeInsets.only(top: 4.0),
                             child: SizedBox(
@@ -150,11 +132,8 @@ class SingleCommentView extends StatelessWidget {
                                     onPressed: cubit.toggleShowChildren,
                                     child: Text(
                                       // locals.nReplies(comment.replies?.replyCount ?? 0).toString()),
-                                      locals.nReplies(
-                                          _.comment.replies?.replyCount ?? 0),
-                                      style: TextStyle(
-                                          fontSize:
-                                              textTheme.labelSmall?.fontSize),
+                                      locals.nReplies(_.comment.replies?.replyCount ?? 0),
+                                      style: TextStyle(fontSize: textTheme.labelSmall?.fontSize),
                                     ))),
                           )),
                       Visibility(

@@ -1,8 +1,6 @@
 import 'package:bloc/bloc.dart';
-import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:flutter/services.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:intl/intl.dart';
 
 import '../../globals.dart';
 import '../models/db/app_logs.dart';
@@ -50,9 +48,7 @@ class AppLogsCubit extends Cubit<AppLogsState> {
 
 @freezed
 class AppLogsState with _$AppLogsState {
-  const factory AppLogsState(
-      {@Default([]) List<AppLog> logs,
-      @Default([]) List<int> selected}) = _AppLogsState;
+  const factory AppLogsState({@Default([]) List<AppLog> logs, @Default([]) List<int> selected}) = _AppLogsState;
 
   static AppLogsState init() {
     return AppLogsState(logs: db.getAppLogs().reversed.toList());

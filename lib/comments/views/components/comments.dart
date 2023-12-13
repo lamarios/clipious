@@ -12,23 +12,15 @@ class CommentsView extends StatelessWidget {
   final String? source;
   final String? sortBy;
 
-  CommentsView(
-      {super.key,
-      required this.video,
-      this.continuation,
-      this.source,
-      this.sortBy});
+  const CommentsView({super.key, required this.video, this.continuation, this.source, this.sortBy});
 
   @override
   Widget build(BuildContext context) {
     var locals = AppLocalizations.of(context)!;
     var textTheme = Theme.of(context).textTheme;
     return BlocProvider(
-      create: (context) => CommentsCubit(CommentsState.init(
-          video: video,
-          sortBy: sortBy,
-          source: source,
-          continuation: continuation)),
+      create: (context) =>
+          CommentsCubit(CommentsState.init(video: video, sortBy: sortBy, source: source, continuation: continuation)),
       child: BlocBuilder<CommentsCubit, CommentsState>(builder: (context, _) {
         var cubit = context.read<CommentsCubit>();
         List<Widget> widgets = [];
@@ -50,8 +42,7 @@ class CommentsView extends StatelessWidget {
                       onPressed: cubit.loadMore,
                       child: Text(
                         locals.loadMore,
-                        style:
-                            TextStyle(fontSize: textTheme.labelSmall?.fontSize),
+                        style: TextStyle(fontSize: textTheme.labelSmall?.fontSize),
                       ))),
             ),
           );

@@ -20,22 +20,19 @@ mixin _$SettingsState {
   PackageInfo get packageInfo => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $SettingsStateCopyWith<SettingsState> get copyWith =>
-      throw _privateConstructorUsedError;
+  $SettingsStateCopyWith<SettingsState> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $SettingsStateCopyWith<$Res> {
-  factory $SettingsStateCopyWith(
-          SettingsState value, $Res Function(SettingsState) then) =
+  factory $SettingsStateCopyWith(SettingsState value, $Res Function(SettingsState) then) =
       _$SettingsStateCopyWithImpl<$Res, SettingsState>;
   @useResult
   $Res call({Map<String, SettingsValue> settings, PackageInfo packageInfo});
 }
 
 /// @nodoc
-class _$SettingsStateCopyWithImpl<$Res, $Val extends SettingsState>
-    implements $SettingsStateCopyWith<$Res> {
+class _$SettingsStateCopyWithImpl<$Res, $Val extends SettingsState> implements $SettingsStateCopyWith<$Res> {
   _$SettingsStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -63,10 +60,8 @@ class _$SettingsStateCopyWithImpl<$Res, $Val extends SettingsState>
 }
 
 /// @nodoc
-abstract class _$$SettingsStateImplCopyWith<$Res>
-    implements $SettingsStateCopyWith<$Res> {
-  factory _$$SettingsStateImplCopyWith(
-          _$SettingsStateImpl value, $Res Function(_$SettingsStateImpl) then) =
+abstract class _$$SettingsStateImplCopyWith<$Res> implements $SettingsStateCopyWith<$Res> {
+  factory _$$SettingsStateImplCopyWith(_$SettingsStateImpl value, $Res Function(_$SettingsStateImpl) then) =
       __$$SettingsStateImplCopyWithImpl<$Res>;
   @override
   @useResult
@@ -74,11 +69,9 @@ abstract class _$$SettingsStateImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$SettingsStateImplCopyWithImpl<$Res>
-    extends _$SettingsStateCopyWithImpl<$Res, _$SettingsStateImpl>
+class __$$SettingsStateImplCopyWithImpl<$Res> extends _$SettingsStateCopyWithImpl<$Res, _$SettingsStateImpl>
     implements _$$SettingsStateImplCopyWith<$Res> {
-  __$$SettingsStateImplCopyWithImpl(
-      _$SettingsStateImpl _value, $Res Function(_$SettingsStateImpl) _then)
+  __$$SettingsStateImplCopyWithImpl(_$SettingsStateImpl _value, $Res Function(_$SettingsStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -103,9 +96,7 @@ class __$$SettingsStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$SettingsStateImpl extends _SettingsState {
-  const _$SettingsStateImpl(
-      {required final Map<String, SettingsValue> settings,
-      required this.packageInfo})
+  const _$SettingsStateImpl({required final Map<String, SettingsValue> settings, required this.packageInfo})
       : _settings = settings,
         super._();
 
@@ -131,13 +122,11 @@ class _$SettingsStateImpl extends _SettingsState {
         (other.runtimeType == runtimeType &&
             other is _$SettingsStateImpl &&
             const DeepCollectionEquality().equals(other._settings, _settings) &&
-            (identical(other.packageInfo, packageInfo) ||
-                other.packageInfo == packageInfo));
+            (identical(other.packageInfo, packageInfo) || other.packageInfo == packageInfo));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_settings), packageInfo);
+  int get hashCode => Object.hash(runtimeType, const DeepCollectionEquality().hash(_settings), packageInfo);
 
   @JsonKey(ignore: true)
   @override
@@ -158,6 +147,5 @@ abstract class _SettingsState extends SettingsState {
   PackageInfo get packageInfo;
   @override
   @JsonKey(ignore: true)
-  _$$SettingsStateImplCopyWith<_$SettingsStateImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$SettingsStateImplCopyWith<_$SettingsStateImpl> get copyWith => throw _privateConstructorUsedError;
 }

@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:invidious/extensions.dart';
 import 'package:invidious/videos/models/video_in_list.dart';
@@ -20,13 +19,9 @@ class AddToPlaylistCubit extends Cubit<AddToPlaylistController> {
   }
 
   bool videoInPlaylist(String playlistId) {
-    Playlist? pl =
-        state.playlists.firstWhere((pl) => pl.playlistId == playlistId);
+    Playlist? pl = state.playlists.firstWhere((pl) => pl.playlistId == playlistId);
 
-    return (pl?.videos
-                .indexWhere((element) => element.videoId == state.videoId) ??
-            -1) >=
-        0;
+    return pl.videos.indexWhere((element) => element.videoId == state.videoId) >= 0;
   }
 
   addToPlaylist(String playlistId) async {
@@ -50,16 +45,14 @@ class AddToPlaylistCubit extends Cubit<AddToPlaylistController> {
   }
 
   Future<Playlist?> likePlaylist() async {
-    Playlist? pl =
-        state.playlists.firstWhereOrNull((pl) => pl.title == likePlaylistName);
+    Playlist? pl = state.playlists.firstWhereOrNull((pl) => pl.title == likePlaylistName);
 
     return pl;
   }
 
   checkVideoLikeStatus() async {
     Playlist? p = await likePlaylist();
-    VideoInList? video = p?.videos
-        .firstWhereOrNull((element) => element.videoId == state.videoId);
+    VideoInList? video = p?.videos.firstWhereOrNull((element) => element.videoId == state.videoId);
 
     bool isVideoLiked = video != null;
 
@@ -76,11 +69,8 @@ class AddToPlaylistCubit extends Cubit<AddToPlaylistController> {
   }
 
   countPlaylistsForVideo() async {
-    int playListCount = state.playlists
-        .where((list) =>
-            list.videos.indexWhere((video) => video.videoId == state.videoId) >=
-            0)
-        .length;
+    int playListCount =
+        state.playlists.where((list) => list.videos.indexWhere((video) => video.videoId == state.videoId) >= 0).length;
     log.fine('playlist count ${state.playListCount}');
     if (!isClosed) {
       emit(state.copyWith(playListCount: playListCount));
@@ -95,18 +85,17 @@ class AddToPlaylistCubit extends Cubit<AddToPlaylistController> {
     p ??= await createPlayList();
 
     bool isVideoLiked = state.isVideoLiked;
-    if (p != null && state.videoId != null) {
+    if (p != null) {
       if (isVideoLiked) {
         log.fine('Video is liked, unliking it');
-        VideoInList? v = p.videos
-            .firstWhereOrNull((element) => element.videoId == state.videoId!);
+        VideoInList? v = p.videos.firstWhereOrNull((element) => element.videoId == state.videoId);
         if (v?.indexId != null) {
           await service.deleteUserPlaylistVideo(p.playlistId, v!.indexId!);
           isVideoLiked = isVideoLiked;
         }
       } else {
         log.fine('Video is not liked yet, we add it to the like playlist');
-        await service.addVideoToPlaylist(p.playlistId, state.videoId!);
+        await service.addVideoToPlaylist(p.playlistId, state.videoId);
         isVideoLiked = isVideoLiked;
       }
     }

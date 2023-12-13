@@ -10,7 +10,7 @@ import 'package:invidious/channels/states/channel.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/subscription_management/view/tv/tv_subscribe_button.dart';
 import 'package:invidious/utils/models/image_object.dart';
-import 'package:invidious/utils/models/paginatedList.dart';
+import 'package:invidious/utils/models/paginated_list.dart';
 import 'package:invidious/utils/views/components/placeholders.dart';
 import 'package:invidious/utils/views/tv/components/tv_expandable_text.dart';
 import 'package:invidious/utils/views/tv/components/tv_horizontal_item_list.dart';
@@ -27,7 +27,7 @@ import '../../../states/tv_channel.dart';
 class TvChannelScreen extends StatelessWidget {
   final String channelId;
 
-  const TvChannelScreen({Key? key, required this.channelId}) : super(key: key);
+  const TvChannelScreen({super.key, required this.channelId});
 
   @override
   Widget build(BuildContext context) {
@@ -39,25 +39,19 @@ class TvChannelScreen extends StatelessWidget {
       body: MultiBlocProvider(
         providers: [
           BlocProvider(
-            create: (context) =>
-                ChannelCubit(ChannelController(channelId: channelId)),
+            create: (context) => ChannelCubit(ChannelController(channelId: channelId)),
           ),
           BlocProvider(
             create: (context) => TvChannelCubit(const TvChannelController()),
           )
         ],
         child: BlocBuilder<ChannelCubit, ChannelController>(
-          builder: (context, channel) =>
-              BlocBuilder<TvChannelCubit, TvChannelController>(
-                  builder: (context, tv) {
+          builder: (context, channel) => BlocBuilder<TvChannelCubit, TvChannelController>(builder: (context, tv) {
             var tvCubit = context.read<TvChannelCubit>();
 
             return channel.loading
                 ? const Center(
-                    child: SizedBox(
-                        width: 50,
-                        height: 50,
-                        child: CircularProgressIndicator()),
+                    child: SizedBox(width: 50, height: 50, child: CircularProgressIndicator()),
                   )
                 : DefaultTextStyle(
                     style: textTheme.bodyLarge!,
@@ -68,14 +62,9 @@ class TvChannelScreen extends StatelessWidget {
                             left: 0,
                             right: 0,
                             child: CachedNetworkImage(
-                                imageUrl: ImageObject.getBestThumbnail(
-                                            channel.channel?.authorBanners)
-                                        ?.url ??
-                                    '')),
+                                imageUrl: ImageObject.getBestThumbnail(channel.channel?.authorBanners)?.url ?? '')),
                         TweenAnimationBuilder(
-                            tween: Tween<double>(
-                                begin: 0,
-                                end: tv.showBackground ? overlayBlur : 0),
+                            tween: Tween<double>(begin: 0, end: tv.showBackground ? overlayBlur : 0),
                             duration: animationDuration,
                             curve: Curves.easeInOutQuad,
                             builder: (context, value, child) {
@@ -85,233 +74,146 @@ class TvChannelScreen extends StatelessWidget {
                                   sigmaY: value,
                                 ),
                                 child: AnimatedContainer(
-                                  color: colors.background.withOpacity(
-                                      tv.showBackground
-                                          ? overlayBackgroundOpacity
-                                          : 0),
+                                  color:
+                                      colors.background.withOpacity(tv.showBackground ? overlayBackgroundOpacity : 0),
                                   duration: animationDuration,
                                   child: TvOverscan(
                                     child: SingleChildScrollView(
                                       controller: tvCubit.scrollController,
                                       child: ListView(
-                                          physics:
-                                              const NeverScrollableScrollPhysics(),
+                                          physics: const NeverScrollableScrollPhysics(),
                                           shrinkWrap: true,
                                           children: [
                                             Padding(
-                                              padding: const EdgeInsets.only(
-                                                  top: 100.0),
+                                              padding: const EdgeInsets.only(top: 100.0),
                                               child: Align(
                                                 alignment: Alignment.centerLeft,
                                                 child: AnimatedContainer(
                                                   decoration: BoxDecoration(
                                                       color: tv.showBackground
-                                                          ? colors.background
-                                                              .withOpacity(0)
-                                                          : colors.background
-                                                              .withOpacity(1),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              35)),
+                                                          ? colors.background.withOpacity(0)
+                                                          : colors.background.withOpacity(1),
+                                                      borderRadius: BorderRadius.circular(35)),
                                                   duration: animationDuration,
-                                                  child: Row(
-                                                      mainAxisSize:
-                                                          MainAxisSize.min,
-                                                      children: [
-                                                        Thumbnail(
-                                                          thumbnailUrl:
-                                                              ImageObject.getBestThumbnail(channel
-                                                                          .channel
-                                                                          ?.authorThumbnails)
-                                                                      ?.url ??
-                                                                  '',
-                                                          width: 70,
-                                                          height: 70,
-                                                          decoration: BoxDecoration(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          35)),
-                                                        ),
-                                                        Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .only(
-                                                                  left: 8.0,
-                                                                  right: 20),
-                                                          child: Text(
-                                                            channel.channel
-                                                                    ?.author ??
-                                                                '',
-                                                            style: textTheme
-                                                                .displaySmall,
-                                                          ),
-                                                        )
-                                                      ]),
+                                                  child: Row(mainAxisSize: MainAxisSize.min, children: [
+                                                    Thumbnail(
+                                                      thumbnailUrl: ImageObject.getBestThumbnail(
+                                                                  channel.channel?.authorThumbnails)
+                                                              ?.url ??
+                                                          '',
+                                                      width: 70,
+                                                      height: 70,
+                                                      decoration:
+                                                          BoxDecoration(borderRadius: BorderRadius.circular(35)),
+                                                    ),
+                                                    Padding(
+                                                      padding: const EdgeInsets.only(left: 8.0, right: 20),
+                                                      child: Text(
+                                                        channel.channel?.author ?? '',
+                                                        style: textTheme.displaySmall,
+                                                      ),
+                                                    )
+                                                  ]),
                                                 ),
                                               ),
                                             ),
                                             TvSubscribeButton(
                                               autoFocus: true,
                                               channelId: channelId,
-                                              subCount: compactCurrency.format(
-                                                  channel.channel!.subCount),
-                                              onFocusChanged:
-                                                  tvCubit.scrollToTop,
+                                              subCount: compactCurrency.format(channel.channel!.subCount),
+                                              onFocusChanged: tvCubit.scrollToTop,
                                             ),
                                             TvExpandableText(
-                                              text: channel
-                                                      .channel?.description ??
-                                                  '',
+                                              text: channel.channel?.description ?? '',
                                               maxLines: 3,
                                             ),
                                             tv.hasVideos
                                                 ? Padding(
                                                     key: tvCubit.videosTitle,
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            top: 20.0),
+                                                    padding: const EdgeInsets.only(top: 20.0),
                                                     child: Text(
                                                       locals.videos,
-                                                      style:
-                                                          textTheme.titleLarge,
+                                                      style: textTheme.titleLarge,
                                                     ),
                                                   )
                                                 : const SizedBox.shrink(),
                                             TvHorizontalVideoList(
-                                                onItemFocus:
-                                                    (video, index, focus) =>
-                                                        tvCubit
-                                                            .scrollTo(
-                                                                tvCubit
-                                                                    .videosTitle,
-                                                                focus),
-                                                paginatedVideoList: ContinuationList<
-                                                        VideoInList>(
-                                                    (continuation) =>
-                                                        service
-                                                            .getChannelVideos(
-                                                                channel.channel
-                                                                        ?.authorId ??
-                                                                    '',
-                                                                continuation)
-                                                            .then((value) {
-                                                          tvCubit.setHasVideos(
-                                                              value.videos
-                                                                  .isNotEmpty);
-                                                          return value;
-                                                        }))),
+                                                onItemFocus: (video, index, focus) =>
+                                                    tvCubit.scrollTo(tvCubit.videosTitle, focus),
+                                                paginatedVideoList: ContinuationList<VideoInList>((continuation) =>
+                                                    service
+                                                        .getChannelVideos(channel.channel?.authorId ?? '', continuation)
+                                                        .then((value) {
+                                                      tvCubit.setHasVideos(value.videos.isNotEmpty);
+                                                      return value;
+                                                    }))),
                                             tv.hasShorts
                                                 ? Padding(
                                                     key: tvCubit.shortTitle,
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            top: 20.0),
+                                                    padding: const EdgeInsets.only(top: 20.0),
                                                     child: Text(
                                                       locals.shorts,
-                                                      style:
-                                                          textTheme.titleLarge,
+                                                      style: textTheme.titleLarge,
                                                     ),
                                                   )
                                                 : const SizedBox.shrink(),
                                             TvHorizontalVideoList(
-                                                onItemFocus:
-                                                    (video, index, focus) =>
-                                                        tvCubit
-                                                            .scrollTo(
-                                                                tvCubit
-                                                                    .shortTitle,
-                                                                focus),
-                                                paginatedVideoList: ContinuationList<
-                                                        VideoInList>(
-                                                    (continuation) =>
-                                                        service
-                                                            .getChannelShorts(
-                                                                channel.channel
-                                                                        ?.authorId ??
-                                                                    '',
-                                                                continuation)
-                                                            .then((value) {
-                                                          tvCubit.setHasShorts(
-                                                              value.videos
-                                                                  .isNotEmpty);
-                                                          return value;
-                                                        }))),
+                                                onItemFocus: (video, index, focus) =>
+                                                    tvCubit.scrollTo(tvCubit.shortTitle, focus),
+                                                paginatedVideoList: ContinuationList<VideoInList>((continuation) =>
+                                                    service
+                                                        .getChannelShorts(channel.channel?.authorId ?? '', continuation)
+                                                        .then((value) {
+                                                      tvCubit.setHasShorts(value.videos.isNotEmpty);
+                                                      return value;
+                                                    }))),
                                             tv.hasStreams
                                                 ? Padding(
                                                     key: tvCubit.streamTitle,
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            top: 20.0),
+                                                    padding: const EdgeInsets.only(top: 20.0),
                                                     child: Text(
                                                       locals.streams,
-                                                      style:
-                                                          textTheme.titleLarge,
+                                                      style: textTheme.titleLarge,
                                                     ),
                                                   )
                                                 : const SizedBox.shrink(),
                                             TvHorizontalVideoList(
-                                                onItemFocus:
-                                                    (video, index, focus) =>
-                                                        tvCubit.scrollTo(
-                                                            tvCubit.streamTitle,
-                                                            focus),
-                                                paginatedVideoList: ContinuationList<
-                                                        VideoInList>(
-                                                    (continuation) => service
-                                                            .getChannelStreams(
-                                                                channel.channel
-                                                                        ?.authorId ??
-                                                                    '',
-                                                                continuation)
-                                                            .then((value) {
-                                                          tvCubit.setHasStreams(
-                                                              value.videos
-                                                                  .isNotEmpty);
-                                                          return value;
-                                                        }))),
+                                                onItemFocus: (video, index, focus) =>
+                                                    tvCubit.scrollTo(tvCubit.streamTitle, focus),
+                                                paginatedVideoList: ContinuationList<VideoInList>((continuation) =>
+                                                    service
+                                                        .getChannelStreams(
+                                                            channel.channel?.authorId ?? '', continuation)
+                                                        .then((value) {
+                                                      tvCubit.setHasStreams(value.videos.isNotEmpty);
+                                                      return value;
+                                                    }))),
                                             tv.hasPlaylist
                                                 ? Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            top: 20.0),
+                                                    padding: const EdgeInsets.only(top: 20.0),
                                                     child: Text(
                                                       locals.playlists,
-                                                      style:
-                                                          textTheme.titleLarge,
+                                                      style: textTheme.titleLarge,
                                                     ),
                                                   )
                                                 : const SizedBox.shrink(),
                                             TvHorizontalItemList<Playlist>(
-                                              getPlaceholder: () =>
-                                                  const TvPlaylistPlaceHolder(),
-                                              paginatedList: ContinuationList<
-                                                      Playlist>(
-                                                  (continuation) => service
-                                                          .getChannelPlaylists(
-                                                              channel.channel
-                                                                      ?.authorId ??
-                                                                  '',
-                                                              continuation:
-                                                                  continuation)
-                                                          .then((value) {
-                                                        tvCubit.setHasPlaylists(
-                                                            value.playlists
-                                                                .isNotEmpty);
-                                                        return value;
-                                                      })),
-                                              buildItem: (context, index,
-                                                      item) =>
-                                                  Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child: PlaylistInList(
-                                                        playlist: item,
-                                                        canDeleteVideos: false,
-                                                        isTv: true,
-                                                        // cameFromSearch: true,
-                                                      )),
+                                              getPlaceholder: () => const TvPlaylistPlaceHolder(),
+                                              paginatedList: ContinuationList<Playlist>((continuation) => service
+                                                      .getChannelPlaylists(channel.channel?.authorId ?? '',
+                                                          continuation: continuation)
+                                                      .then((value) {
+                                                    tvCubit.setHasPlaylists(value.playlists.isNotEmpty);
+                                                    return value;
+                                                  })),
+                                              buildItem: (context, index, item) => Padding(
+                                                  padding: const EdgeInsets.all(8.0),
+                                                  child: PlaylistInList(
+                                                    playlist: item,
+                                                    canDeleteVideos: false,
+                                                    isTv: true,
+                                                    // cameFromSearch: true,
+                                                  )),
                                             ),
                                           ]),
                                     ),

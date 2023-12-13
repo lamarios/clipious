@@ -9,7 +9,7 @@ import 'package:logging/logging.dart';
 
 import '../../utils.dart';
 import '../../videos/models/video_in_list.dart';
-import '../models/mediaEvent.dart';
+import '../models/media_event.dart';
 
 part 'tv_player_controls.freezed.dart';
 
@@ -41,20 +41,15 @@ class TvPlayerControlsCubit extends Cubit<TvPlayerControlsState> {
   }
 
   KeyEventResult handleRemoteEvents(FocusNode node, KeyEvent event) {
-    bool timeLineControl =
-        !state.showQueue && !state.showSettings && !state.displayControls;
+    bool timeLineControl = !state.showQueue && !state.showSettings && !state.displayControls;
     log.fine(
         'Key: ${event.logicalKey}, Timeline control: $timeLineControl, showQueue: ${state.showQueue}, showSettings: ${state.showSettings}, showControls: ${state.displayControls}');
     showUi();
 
     // looks like back is activate on pressdown and not press up
-    if (event is KeyUpEvent &&
-        !timeLineControl &&
-        event.logicalKey == LogicalKeyboardKey.goBack) {
+    if (event is KeyUpEvent && !timeLineControl && event.logicalKey == LogicalKeyboardKey.goBack) {
       emit(state.copyWith(
-          showQueue: false,
-          showSettings: false,
-          displayControls: state.showQueue || state.showSettings));
+          showQueue: false, showSettings: false, displayControls: state.showQueue || state.showSettings));
       return KeyEventResult.handled;
     } else if (event is KeyUpEvent) {
       switch (event.logicalKey) {
@@ -99,12 +94,10 @@ class TvPlayerControlsCubit extends Cubit<TvPlayerControlsState> {
     if (event is KeyRepeatEvent) {
       if (timeLineControl) {
         if (event.logicalKey == LogicalKeyboardKey.arrowRight) {
-          EasyThrottle.throttle(
-              'hold-seek-forward', throttleDuration, fastForward);
+          EasyThrottle.throttle('hold-seek-forward', throttleDuration, fastForward);
         }
         if (event.logicalKey == LogicalKeyboardKey.arrowLeft) {
-          EasyThrottle.throttle(
-              'hold-seek-backward', throttleDuration, fastRewind);
+          EasyThrottle.throttle('hold-seek-backward', throttleDuration, fastRewind);
         }
       }
     }
@@ -114,11 +107,7 @@ class TvPlayerControlsCubit extends Cubit<TvPlayerControlsState> {
   hideControls() {
     EasyDebounce.debounce('tv-controls', controlFadeOut, () {
       if (!isClosed) {
-        emit(state.copyWith(
-            controlsOpacity: 0,
-            showSettings: false,
-            showQueue: false,
-            displayControls: false));
+        emit(state.copyWith(controlsOpacity: 0, showSettings: false, showQueue: false, displayControls: false));
       }
     });
   }

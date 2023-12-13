@@ -15,15 +15,14 @@ import 'package:share_plus/share_plus.dart';
 
 import 'utils/models/country.dart';
 
-const PHONE_MAX = 600;
-const TABLET_PORTRAIT_MAX = 900;
+const phoneMax = 600;
+const tabletPortraitMax = 900;
 
 var log = Logger('Utils');
 
 enum DeviceType { phone, tablet, tv }
 
-double tabletMaxVideoWidth =
-    getDeviceType() == DeviceType.phone ? double.infinity : 500;
+double tabletMaxVideoWidth = getDeviceType() == DeviceType.phone ? double.infinity : 500;
 
 const List<LogicalKeyboardKey> selectKeys = [
   LogicalKeyboardKey.accept,
@@ -35,11 +34,9 @@ const List<LogicalKeyboardKey> selectKeys = [
 const List<int> selectPhysicalKeys = [];
 
 bool isOk(LogicalKeyboardKey key, {PhysicalKeyboardKey? physicalKeyboardKey}) {
-  log.fine(
-      'Received key event, Logical: ${key.debugName}, Physical ${physicalKeyboardKey?.debugName}');
+  log.fine('Received key event, Logical: ${key.debugName}, Physical ${physicalKeyboardKey?.debugName}');
   return selectKeys.any((element) => element == key) ||
-      selectPhysicalKeys
-          .any((element) => element == physicalKeyboardKey?.usbHidUsage);
+      selectPhysicalKeys.any((element) => element == physicalKeyboardKey?.usbHidUsage);
 }
 
 String prettyDuration(Duration duration) {
@@ -47,7 +44,7 @@ String prettyDuration(Duration duration) {
 
   var hours = duration.inHours % 24;
   if (hours != 0) {
-    components.add('${hours}:');
+    components.add('$hours:');
   }
   var minutes = duration.inMinutes % 60;
   components.add('${minutes.toString().padLeft(2, '0')}:');
@@ -59,12 +56,10 @@ String prettyDuration(Duration duration) {
 
 NumberFormat compactCurrency = NumberFormat.compactCurrency(
   decimalDigits: 2,
-  symbol:
-      '', // if you want to add currency symbol then pass that in this else leave it empty.
+  symbol: '', // if you want to add currency symbol then pass that in this else leave it empty.
 );
 
-Future<void> showAlertDialog(
-    BuildContext context, String title, List<Widget> body) async {
+Future<void> showAlertDialog(BuildContext context, String title, List<Widget> body) async {
   var locals = AppLocalizations.of(context)!;
   return showDialog<void>(
     context: context,
@@ -90,8 +85,7 @@ Future<void> showAlertDialog(
   );
 }
 
-void showSharingSheet(BuildContext context, ShareLinks links,
-    {bool showTimestampOption = false}) {
+void showSharingSheet(BuildContext context, ShareLinks links, {bool showTimestampOption = false}) {
   var locals = AppLocalizations.of(context)!;
 
   bool shareWithTimestamp = false;
@@ -127,9 +121,10 @@ void showSharingSheet(BuildContext context, ShareLinks links,
                   onPressed: () async {
                     final timestamp = await getTimestamp();
 
-                    Share.share(links.getInvidiousLink(
-                        db.getCurrentlySelectedServer(), timestamp?.inSeconds));
-                    Navigator.of(context).pop();
+                    Share.share(links.getInvidiousLink(db.getCurrentlySelectedServer(), timestamp?.inSeconds));
+                    if (context.mounted) {
+                      Navigator.of(context).pop();
+                    }
                   },
                 ),
                 FilledButton.tonal(
@@ -138,7 +133,9 @@ void showSharingSheet(BuildContext context, ShareLinks links,
                     final timestamp = await getTimestamp();
 
                     Share.share(links.getRedirectLink(timestamp?.inSeconds));
-                    Navigator.of(context).pop();
+                    if (context.mounted) {
+                      Navigator.of(context).pop();
+                    }
                   },
                 ),
                 FilledButton.tonal(
@@ -147,7 +144,9 @@ void showSharingSheet(BuildContext context, ShareLinks links,
                     final timestamp = await getTimestamp();
 
                     Share.share(links.getYoutubeLink(timestamp?.inSeconds));
-                    Navigator.of(context).pop();
+                    if (context.mounted) {
+                      Navigator.of(context).pop();
+                    }
                   },
                 ),
                 if (showTimestampOption)
@@ -174,12 +173,12 @@ void showSharingSheet(BuildContext context, ShareLinks links,
 }
 
 double getScreenWidth() {
-  final data = MediaQueryData.fromView(WidgetsBinding.instance.window);
+  final data = MediaQueryData.fromView(WidgetsBinding.instance.platformDispatcher.implicitView!);
   return data.size.width;
 }
 
 DeviceType getDeviceType() {
-  final data = MediaQueryData.fromView(WidgetsBinding.instance.window);
+  final data = MediaQueryData.fromView(WidgetsBinding.instance.platformDispatcher.implicitView!);
   return data.size.shortestSide < 600 ? DeviceType.phone : DeviceType.tablet;
 }
 
@@ -191,7 +190,7 @@ Future<bool> isDeviceTv() async {
 
 int getGridCount(BuildContext context) {
   double width = MediaQuery.of(context).size.width;
-  if (width < PHONE_MAX) {
+  if (width < phoneMax) {
     return 1;
   }
 
@@ -202,8 +201,7 @@ double getGridAspectRatio(BuildContext context) {
   return getGridCount(context) > 1 ? 16 / 15 : 16 / 13;
 }
 
-okCancelDialog(
-    BuildContext context, String title, String message, Function() onOk) {
+okCancelDialog(BuildContext context, String title, String message, Function() onOk) {
   var locals = AppLocalizations.of(context)!;
   showDialog(
     context: context,
@@ -261,9 +259,7 @@ showTvDialog(
       return Scaffold(
         body: TvOverscan(
           child: Column(children: [
-            if (title != null)
-              Text(title,
-                  style: textTheme.titleLarge?.copyWith(color: colors.primary)),
+            if (title != null) Text(title, style: textTheme.titleLarge?.copyWith(color: colors.primary)),
             Expanded(
               child: ListView(
                 children: builder(context),
@@ -273,7 +269,7 @@ showTvDialog(
               mainAxisAlignment: MainAxisAlignment.end,
               children: actions
                   .map((e) => Padding(
-                        padding: EdgeInsets.all(16),
+                        padding: const EdgeInsets.all(16),
                         child: e,
                       ))
                   .toList(),
@@ -290,10 +286,9 @@ Country getCountryFromCode(String code) {
       orElse: () => Country('US', 'United States of America'));
 }
 
-KeyEventResult onTvSelect(
-    KeyEvent event, BuildContext context, Function(BuildContext context) func) {
+KeyEventResult onTvSelect(KeyEvent event, BuildContext context, Function(BuildContext context) func) {
   if (event is KeyUpEvent) {
-    log.fine('onTvSelect, ${event.logicalKey}, ${event}');
+    log.fine('onTvSelect, ${event.logicalKey}, $event');
     if (isOk(event.logicalKey, physicalKeyboardKey: event.physicalKey)) {
       func(context);
       return KeyEventResult.handled;
@@ -307,23 +302,17 @@ SystemUiOverlayStyle getUiOverlayStyle(BuildContext context) {
   ColorScheme colorScheme = Theme.of(context).colorScheme;
   return SystemUiOverlayStyle(
       systemNavigationBarColor: colorScheme.background,
-      systemNavigationBarIconBrightness:
-          colorScheme.brightness == Brightness.dark
-              ? Brightness.light
-              : Brightness.dark,
+      systemNavigationBarIconBrightness: colorScheme.brightness == Brightness.dark ? Brightness.light : Brightness.dark,
       statusBarColor: colorScheme.background,
-      statusBarIconBrightness: colorScheme.brightness == Brightness.dark
-          ? Brightness.light
-          : Brightness.dark);
+      statusBarIconBrightness: colorScheme.brightness == Brightness.dark ? Brightness.light : Brightness.dark);
 }
 
-List<T> filteredVideos<T extends BaseVideo>(List<T> videos) =>
-    videos.where((element) => !element.filterHide).toList();
+List<T> filteredVideos<T extends BaseVideo>(List<T> videos) => videos.where((element) => !element.filterHide).toList();
 
 String getWeekdayName(int weekday) {
   final DateTime now = DateTime.now().toLocal();
   final int diff = now.weekday - weekday; // weekday is our 1-7 ISO value
-  var udpatedDt;
+  DateTime udpatedDt;
   if (diff > 0) {
     udpatedDt = now.subtract(Duration(days: diff));
   } else if (diff == 0) {

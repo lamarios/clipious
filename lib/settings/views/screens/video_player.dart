@@ -28,8 +28,7 @@ class VideoPlayerSettingsScreen extends StatelessWidget {
         elevation: 0,
         scrolledUnderElevation: 0,
       ),
-      body: SafeArea(child:
-          BlocBuilder<SettingsCubit, SettingsState>(builder: (context, _) {
+      body: SafeArea(child: BlocBuilder<SettingsCubit, SettingsState>(builder: (context, _) {
         var cubit = context.read<SettingsCubit>();
         return DefaultTabController(
           length: 2,
@@ -77,8 +76,7 @@ class VideoPlayerSettingsScreen extends StatelessWidget {
                   initialValue: _.forceLandscapeFullScreen,
                   onToggle: cubit.toggleForceLandscapeFullScreen,
                   title: Text(locals.lockFullScreenToLandscape),
-                  description:
-                      Text(locals.lockFullScreenToLandscapeDescription),
+                  description: Text(locals.lockFullScreenToLandscapeDescription),
                 ),
                 SettingsTile.switchTile(
                   leading: const Icon(Icons.open_in_full),
@@ -97,14 +95,10 @@ class VideoPlayerSettingsScreen extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       IconButton(
-                          onPressed: () =>
-                              cubit.changeSubtitleSize(increase: false),
-                          icon: const Icon(Icons.remove)),
+                          onPressed: () => cubit.changeSubtitleSize(increase: false), icon: const Icon(Icons.remove)),
                       Text(_.subtitleSize.floor().toString()),
                       IconButton(
-                          onPressed: () =>
-                              cubit.changeSubtitleSize(increase: true),
-                          icon: const Icon(Icons.add)),
+                          onPressed: () => cubit.changeSubtitleSize(increase: true), icon: const Icon(Icons.add)),
                     ],
                   ),
                 ),

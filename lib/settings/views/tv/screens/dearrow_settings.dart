@@ -8,7 +8,7 @@ import 'package:invidious/utils/views/tv/components/tv_overscan.dart';
 
 @RoutePage()
 class TvDearrowSettingsScreen extends StatelessWidget {
-  const TvDearrowSettingsScreen({Key? key}) : super(key: key);
+  const TvDearrowSettingsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -31,13 +31,8 @@ class TvDearrowSettingsScreen extends StatelessWidget {
                 SettingsTile(
                   title: locals.deArrowReplaceThumbnails,
                   description: locals.deArrowReplaceThumbnailsDescription,
-                  onSelected: _.dearrow
-                      ? (context) =>
-                          settings.setDearrowThumbnail(!_.dearrowThumbnails)
-                      : null,
-                  trailing: Switch(
-                      onChanged: _.dearrow ? (value) {} : null,
-                      value: _.dearrowThumbnails),
+                  onSelected: _.dearrow ? (context) => settings.setDearrowThumbnail(!_.dearrowThumbnails) : null,
+                  trailing: Switch(onChanged: _.dearrow ? (value) {} : null, value: _.dearrowThumbnails),
                 ),
               ],
             ),

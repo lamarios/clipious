@@ -26,14 +26,12 @@ mixin _$ChannelController {
   double get barOpacity => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $ChannelControllerCopyWith<ChannelController> get copyWith =>
-      throw _privateConstructorUsedError;
+  $ChannelControllerCopyWith<ChannelController> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $ChannelControllerCopyWith<$Res> {
-  factory $ChannelControllerCopyWith(
-          ChannelController value, $Res Function(ChannelController) then) =
+  factory $ChannelControllerCopyWith(ChannelController value, $Res Function(ChannelController) then) =
       _$ChannelControllerCopyWithImpl<$Res, ChannelController>;
   @useResult
   $Res call(
@@ -107,10 +105,8 @@ class _$ChannelControllerCopyWithImpl<$Res, $Val extends ChannelController>
 }
 
 /// @nodoc
-abstract class _$$ChannelControllerImplCopyWith<$Res>
-    implements $ChannelControllerCopyWith<$Res> {
-  factory _$$ChannelControllerImplCopyWith(_$ChannelControllerImpl value,
-          $Res Function(_$ChannelControllerImpl) then) =
+abstract class _$$ChannelControllerImplCopyWith<$Res> implements $ChannelControllerCopyWith<$Res> {
+  factory _$$ChannelControllerImplCopyWith(_$ChannelControllerImpl value, $Res Function(_$ChannelControllerImpl) then) =
       __$$ChannelControllerImplCopyWithImpl<$Res>;
   @override
   @useResult
@@ -126,11 +122,9 @@ abstract class _$$ChannelControllerImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$ChannelControllerImplCopyWithImpl<$Res>
-    extends _$ChannelControllerCopyWithImpl<$Res, _$ChannelControllerImpl>
+class __$$ChannelControllerImplCopyWithImpl<$Res> extends _$ChannelControllerCopyWithImpl<$Res, _$ChannelControllerImpl>
     implements _$$ChannelControllerImplCopyWith<$Res> {
-  __$$ChannelControllerImplCopyWithImpl(_$ChannelControllerImpl _value,
-      $Res Function(_$ChannelControllerImpl) _then)
+  __$$ChannelControllerImplCopyWithImpl(_$ChannelControllerImpl _value, $Res Function(_$ChannelControllerImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -154,8 +148,7 @@ class __$$ChannelControllerImplCopyWithImpl<$Res>
           ? _value.isSubscribed
           : isSubscribed // ignore: cast_nullable_to_non_nullable
               as bool,
-      selectedIndex:
-          freezed == selectedIndex ? _value.selectedIndex! : selectedIndex,
+      selectedIndex: freezed == selectedIndex ? _value.selectedIndex! : selectedIndex,
       channel: freezed == channel
           ? _value.channel
           : channel // ignore: cast_nullable_to_non_nullable
@@ -226,40 +219,25 @@ class _$ChannelControllerImpl implements _ChannelController {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ChannelControllerImpl &&
-            (identical(other.channelId, channelId) ||
-                other.channelId == channelId) &&
-            (identical(other.isSubscribed, isSubscribed) ||
-                other.isSubscribed == isSubscribed) &&
-            const DeepCollectionEquality()
-                .equals(other.selectedIndex, selectedIndex) &&
+            (identical(other.channelId, channelId) || other.channelId == channelId) &&
+            (identical(other.isSubscribed, isSubscribed) || other.isSubscribed == isSubscribed) &&
+            const DeepCollectionEquality().equals(other.selectedIndex, selectedIndex) &&
             (identical(other.channel, channel) || other.channel == channel) &&
             (identical(other.loading, loading) || other.loading == loading) &&
-            (identical(other.smallHeader, smallHeader) ||
-                other.smallHeader == smallHeader) &&
-            (identical(other.barHeight, barHeight) ||
-                other.barHeight == barHeight) &&
-            (identical(other.barOpacity, barOpacity) ||
-                other.barOpacity == barOpacity));
+            (identical(other.smallHeader, smallHeader) || other.smallHeader == smallHeader) &&
+            (identical(other.barHeight, barHeight) || other.barHeight == barHeight) &&
+            (identical(other.barOpacity, barOpacity) || other.barOpacity == barOpacity));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      channelId,
-      isSubscribed,
-      const DeepCollectionEquality().hash(selectedIndex),
-      channel,
-      loading,
-      smallHeader,
-      barHeight,
-      barOpacity);
+  int get hashCode => Object.hash(runtimeType, channelId, isSubscribed,
+      const DeepCollectionEquality().hash(selectedIndex), channel, loading, smallHeader, barHeight, barOpacity);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$ChannelControllerImplCopyWith<_$ChannelControllerImpl> get copyWith =>
-      __$$ChannelControllerImplCopyWithImpl<_$ChannelControllerImpl>(
-          this, _$identity);
+      __$$ChannelControllerImplCopyWithImpl<_$ChannelControllerImpl>(this, _$identity);
 }
 
 abstract class _ChannelController implements ChannelController {
@@ -291,6 +269,5 @@ abstract class _ChannelController implements ChannelController {
   double get barOpacity;
   @override
   @JsonKey(ignore: true)
-  _$$ChannelControllerImplCopyWith<_$ChannelControllerImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$ChannelControllerImplCopyWith<_$ChannelControllerImpl> get copyWith => throw _privateConstructorUsedError;
 }

@@ -29,10 +29,7 @@ class VideoMetrics extends StatelessWidget {
                     likeCount == null &&
                     publishedText == null) ||
                 (video == null &&
-                    (lengthSeconds != null ||
-                        viewCount != null ||
-                        likeCount != null ||
-                        publishedText != null)),
+                    (lengthSeconds != null || viewCount != null || likeCount != null || publishedText != null)),
             'need either a video or given metrics');
 
   Widget get separator => Padding(
@@ -119,8 +116,7 @@ class VideoMetrics extends StatelessWidget {
                     borderRadius: BorderRadius.circular(30),
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 8.0, vertical: 2),
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 2),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -154,8 +150,6 @@ class VideoMetrics extends StatelessWidget {
       metrics.removeAt(metrics.length - 1);
     }
 
-    return metrics.isNotEmpty
-        ? Row(children: metrics)
-        : const SizedBox.shrink();
+    return metrics.isNotEmpty ? Row(children: metrics) : const SizedBox.shrink();
   }
 }

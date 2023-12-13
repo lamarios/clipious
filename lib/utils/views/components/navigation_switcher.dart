@@ -14,9 +14,7 @@ class NavigationSwitcher extends StatelessWidget {
       transitionBuilder: (Widget child, Animation<double> animation) {
         return ScaleTransition(
           scale: Tween<double>(begin: 0.95, end: 1).animate(animation),
-          child: FadeTransition(
-              opacity: Tween<double>(begin: 0.0, end: 1).animate(animation),
-              child: child),
+          child: FadeTransition(opacity: Tween<double>(begin: 0.0, end: 1).animate(animation), child: child),
         );
       },
       duration: animationDuration,

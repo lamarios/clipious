@@ -14,7 +14,6 @@ import 'package:invidious/videos/views/components/video_thumbnail.dart';
 import 'package:logging/logging.dart';
 
 import '../../../downloads/models/downloaded_video.dart';
-import '../../../downloads/states/download_manager.dart';
 import '../../../utils.dart';
 import '../../../utils/models/image_object.dart';
 import 'video_metrics.dart';
@@ -26,14 +25,8 @@ class VideoListItem extends StatelessWidget {
   final DownloadedVideo? offlineVideo;
   final bool small;
 
-  const VideoListItem(
-      {super.key,
-      this.video,
-      this.offlineVideo,
-      animateDownload = false,
-      this.small = false})
-      : assert(video == null || offlineVideo == null,
-            'cannot provide both video and offline video\n');
+  const VideoListItem({super.key, this.video, this.offlineVideo, animateDownload = false, this.small = false})
+      : assert(video == null || offlineVideo == null, 'cannot provide both video and offline video\n');
 
   openVideo(BuildContext context) {
     if (video != null) {
@@ -55,24 +48,21 @@ class VideoListItem extends StatelessWidget {
 
     var textTheme = Theme.of(context).textTheme;
 
-    TextStyle filterStyle = (textTheme.bodySmall ?? const TextStyle())
-        .copyWith(color: colorScheme.secondary.withOpacity(0.7));
-    var downloadManager = context.read<DownloadManagerCubit>();
+    TextStyle filterStyle =
+        (textTheme.bodySmall ?? const TextStyle()).copyWith(color: colorScheme.secondary.withOpacity(0.7));
 
     String title = video?.title ?? offlineVideo?.title ?? '';
     String author = video?.author ?? offlineVideo?.author ?? '';
-    String videoId = video?.videoId ?? offlineVideo?.videoId ?? '';
+
     return BlocProvider(
-      create: (context) => VideoInListCubit(
-          VideoInListState(video: video, offlineVideo: offlineVideo)),
+      create: (context) => VideoInListCubit(VideoInListState(video: video, offlineVideo: offlineVideo)),
       child: BlocBuilder<VideoInListCubit, VideoInListState>(
         builder: (context, _) => BlocListener<PlayerCubit, PlayerState>(
           listenWhen: (previous, current) =>
               _.video != null &&
               current.currentlyPlaying?.videoId == video!.videoId &&
               previous.position != current.position,
-          listener: (context, state) =>
-              context.read<VideoInListCubit>().updateProgress(),
+          listener: (context, state) => context.read<VideoInListCubit>().updateProgress(),
           child: InkWell(
             onTap: () => openVideo(context),
             onLongPress: _.video == null || _.video!.filtered
@@ -97,26 +87,20 @@ class VideoListItem extends StatelessWidget {
                                   color: colorScheme.secondary,
                                 )
                               : Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 8.0),
+                                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
                                   child: Column(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
+                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                                     children: [
                                       Text(
                                         locals.videoFiltered,
                                         style: filterStyle,
                                       ),
-                                      ...video!.matchedFilters
-                                          .map((e) => Text(
-                                                e.localizedLabel(
-                                                    locals, context),
-                                                style: filterStyle,
-                                              ))
-                                          .toList(growable: false),
+                                      ...video!.matchedFilters.map((e) => Text(
+                                            e.localizedLabel(locals, context),
+                                            style: filterStyle,
+                                          )),
                                       Padding(
-                                        padding:
-                                            const EdgeInsets.only(top: 16.0),
+                                        padding: const EdgeInsets.only(top: 16.0),
                                         child: Text(
                                           locals.videoFilterTapToReveal,
                                           style: filterStyle,
@@ -131,13 +115,9 @@ class VideoListItem extends StatelessWidget {
                         ? VideoThumbnailView(
                             videoId: video!.videoId,
                             thumbnailUrl: video!.deArrowThumbnailUrl ??
-                                ImageObject.getBestThumbnail(
-                                        video!.videoThumbnails)
-                                    ?.url ??
+                                ImageObject.getBestThumbnail(video!.videoThumbnails)?.url ??
                                 '',
-                            decoration: BoxDecoration(
-                                borderRadius:
-                                    BorderRadius.circular(small ? 5 : 10)),
+                            decoration: BoxDecoration(borderRadius: BorderRadius.circular(small ? 5 : 10)),
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Column(
@@ -145,8 +125,7 @@ class VideoListItem extends StatelessWidget {
                                 children: [
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.end,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
                                     children: [
                                       Expanded(
                                         child: NavigationSwitcher(
@@ -173,99 +152,53 @@ class VideoListItem extends StatelessWidget {
 
                                               _.progress > 0.05
                                                   ? Align(
-                                                      alignment:
-                                                          Alignment.centerRight,
+                                                      alignment: Alignment.centerRight,
                                                       child: Padding(
                                                         padding:
-                                                            const EdgeInsets
-                                                                .symmetric(
-                                                                horizontal: 4.0,
-                                                                vertical: 8),
-                                                        child:
-                                                            AnimatedContainer(
-                                                          curve: Curves
-                                                              .easeOutQuad,
-                                                          duration:
-                                                              animationDuration,
-                                                          alignment: Alignment
-                                                              .centerLeft,
-                                                          constraints: _
-                                                                      .progress ==
-                                                                  1
-                                                              ? const BoxConstraints(
-                                                                  maxWidth: 20)
-                                                              : const BoxConstraints(
-                                                                  maxWidth:
-                                                                      1200),
-                                                          width:
-                                                              double.infinity,
-                                                          height:
-                                                              _.progress == 1
-                                                                  ? 20
-                                                                  : small
-                                                                      ? 1
-                                                                      : 5,
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            color: colorScheme
-                                                                .secondaryContainer,
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        20),
+                                                            const EdgeInsets.symmetric(horizontal: 4.0, vertical: 8),
+                                                        child: AnimatedContainer(
+                                                          curve: Curves.easeOutQuad,
+                                                          duration: animationDuration,
+                                                          alignment: Alignment.centerLeft,
+                                                          constraints: _.progress == 1
+                                                              ? const BoxConstraints(maxWidth: 20)
+                                                              : const BoxConstraints(maxWidth: 1200),
+                                                          width: double.infinity,
+                                                          height: _.progress == 1
+                                                              ? 20
+                                                              : small
+                                                                  ? 1
+                                                                  : 5,
+                                                          decoration: BoxDecoration(
+                                                            color: colorScheme.secondaryContainer,
+                                                            borderRadius: BorderRadius.circular(20),
                                                           ),
-                                                          child:
-                                                              AnimatedFractionallySizedBox(
-                                                                  widthFactor:
-                                                                      _.progress > 0
-                                                                          ? _
-                                                                              .progress
-                                                                          : 0,
-                                                                  heightFactor:
-                                                                      1,
-                                                                  duration:
-                                                                      animationDuration,
-                                                                  curve: Curves
-                                                                      .easeInOutQuad,
-                                                                  child:
-                                                                      Container(
-                                                                    alignment:
-                                                                        Alignment
-                                                                            .center,
-                                                                    decoration:
-                                                                        BoxDecoration(
-                                                                      color: _.progress == 1
-                                                                          ? colorScheme
-                                                                              .primaryContainer
-                                                                          : colorScheme
-                                                                              .primary,
-                                                                      borderRadius:
-                                                                          BorderRadius.circular(
-                                                                              20),
-                                                                    ),
-                                                                    child:
-                                                                        AnimatedCrossFade(
-                                                                      crossFadeState: _.progress == 1
-                                                                          ? CrossFadeState
-                                                                              .showFirst
-                                                                          : CrossFadeState
-                                                                              .showSecond,
-                                                                      duration:
-                                                                          animationDuration,
-                                                                      secondChild:
-                                                                          const SizedBox
-                                                                              .shrink(),
-                                                                      firstChild:
-                                                                          Icon(
-                                                                        Icons
-                                                                            .check,
-                                                                        size:
-                                                                            15,
-                                                                        color: colorScheme
-                                                                            .primary,
-                                                                      ),
-                                                                    ),
-                                                                  )),
+                                                          child: AnimatedFractionallySizedBox(
+                                                              widthFactor: _.progress > 0 ? _.progress : 0,
+                                                              heightFactor: 1,
+                                                              duration: animationDuration,
+                                                              curve: Curves.easeInOutQuad,
+                                                              child: Container(
+                                                                alignment: Alignment.center,
+                                                                decoration: BoxDecoration(
+                                                                  color: _.progress == 1
+                                                                      ? colorScheme.primaryContainer
+                                                                      : colorScheme.primary,
+                                                                  borderRadius: BorderRadius.circular(20),
+                                                                ),
+                                                                child: AnimatedCrossFade(
+                                                                  crossFadeState: _.progress == 1
+                                                                      ? CrossFadeState.showFirst
+                                                                      : CrossFadeState.showSecond,
+                                                                  duration: animationDuration,
+                                                                  secondChild: const SizedBox.shrink(),
+                                                                  firstChild: Icon(
+                                                                    Icons.check,
+                                                                    size: 15,
+                                                                    color: colorScheme.primary,
+                                                                  ),
+                                                                ),
+                                                              )),
                                                         ),
                                                       ),
                                                     )
@@ -274,33 +207,22 @@ class VideoListItem extends StatelessWidget {
                                       ),
                                       if (!small)
                                         Visibility(
-                                          visible: (video?.lengthSeconds ??
-                                                  offlineVideo?.lengthSeconds ??
-                                                  0) >
-                                              0,
+                                          visible: (video?.lengthSeconds ?? offlineVideo?.lengthSeconds ?? 0) > 0,
                                           child: Padding(
                                             padding: const EdgeInsets.all(8.0),
                                             child: Container(
                                               alignment: Alignment.center,
                                               height: 25,
                                               decoration: BoxDecoration(
-                                                  color: Colors.black
-                                                      .withOpacity(0.75),
-                                                  borderRadius:
-                                                      BorderRadius.circular(5)),
+                                                  color: Colors.black.withOpacity(0.75),
+                                                  borderRadius: BorderRadius.circular(5)),
                                               child: Padding(
-                                                padding:
-                                                    const EdgeInsets.all(4.0),
+                                                padding: const EdgeInsets.all(4.0),
                                                 child: Text(
                                                   prettyDuration(Duration(
-                                                      seconds: video
-                                                              ?.lengthSeconds ??
-                                                          offlineVideo
-                                                              ?.lengthSeconds ??
-                                                          0)),
-                                                  style: textTheme.bodySmall
-                                                      ?.copyWith(
-                                                          color: Colors.white),
+                                                      seconds:
+                                                          video?.lengthSeconds ?? offlineVideo?.lengthSeconds ?? 0)),
+                                                  style: textTheme.bodySmall?.copyWith(color: Colors.white),
                                                 ),
                                               ),
                                             ),
@@ -330,28 +252,20 @@ class VideoListItem extends StatelessWidget {
                             textAlign: TextAlign.left,
                             overflow: TextOverflow.ellipsis,
                             maxLines: small ? 1 : 2,
-                            style: (small
-                                    ? textTheme.labelSmall
-                                    : textTheme.bodyMedium)
-                                ?.copyWith(
-                                    color: colorScheme.primary,
-                                    fontWeight: FontWeight.normal),
+                            style: (small ? textTheme.labelSmall : textTheme.bodyMedium)
+                                ?.copyWith(color: colorScheme.primary, fontWeight: FontWeight.normal),
                           ),
                           InkWell(
                             onTap: () {
-                              AutoRouter.of(context).push(ChannelRoute(
-                                  channelId: video?.authorId ??
-                                      offlineVideo?.authorUrl ??
-                                      ''));
+                              AutoRouter.of(context)
+                                  .push(ChannelRoute(channelId: video?.authorId ?? offlineVideo?.authorUrl ?? ''));
                             },
                             child: Text(
                               author,
                               maxLines: 1,
                               textAlign: TextAlign.left,
                               overflow: TextOverflow.ellipsis,
-                              style: (small
-                                      ? textTheme.labelSmall
-                                      : textTheme.bodyMedium)
+                              style: (small ? textTheme.labelSmall : textTheme.bodyMedium)
                                   ?.copyWith(color: colorScheme.secondary),
                             ),
                           ),
@@ -369,8 +283,7 @@ class VideoListItem extends StatelessWidget {
                       InkWell(
                         onTap: (_.video?.filtered ?? true)
                             ? null
-                            : () => VideoModalSheet.showVideoModalSheet(
-                                context, video!),
+                            : () => VideoModalSheet.showVideoModalSheet(context, video!),
                         child: const Padding(
                           padding: EdgeInsets.all(4),
                           child: Icon(Icons.more_vert),

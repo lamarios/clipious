@@ -28,14 +28,11 @@ mixin _$PlayerState {
   double get height => throw _privateConstructorUsedError;
   FullScreenState get fullScreenState => throw _privateConstructorUsedError;
   bool get muted => throw _privateConstructorUsedError;
-  double get aspectRatio =>
-      throw _privateConstructorUsedError; // videos to play
+  double get aspectRatio => throw _privateConstructorUsedError; // videos to play
   Video? get currentlyPlaying => throw _privateConstructorUsedError;
-  DownloadedVideo? get offlineCurrentlyPlaying =>
-      throw _privateConstructorUsedError;
+  DownloadedVideo? get offlineCurrentlyPlaying => throw _privateConstructorUsedError;
   List<BaseVideo> get videos => throw _privateConstructorUsedError;
-  List<DownloadedVideo> get offlineVideos =>
-      throw _privateConstructorUsedError; // playlist controls
+  List<DownloadedVideo> get offlineVideos => throw _privateConstructorUsedError; // playlist controls
   List<String> get playedVideos => throw _privateConstructorUsedError;
   ListQueue<String> get playQueue => throw _privateConstructorUsedError;
   bool get isAudio => throw _privateConstructorUsedError; // playing video data
@@ -49,25 +46,21 @@ mixin _$PlayerState {
 // command we send down the stack, namely video / audio player
   MediaCommand<dynamic>? get mediaCommand =>
       throw _privateConstructorUsedError; // events we receive from bottom of stack
-  MediaEvent<dynamic> get mediaEvent =>
-      throw _privateConstructorUsedError; // sponsor block variables
+  MediaEvent<dynamic> get mediaEvent => throw _privateConstructorUsedError; // sponsor block variables
   List<Pair<int>> get sponsorSegments => throw _privateConstructorUsedError;
-  Pair<int> get nextSegment =>
-      throw _privateConstructorUsedError; // step in seconds when fast forawrd or fast rewind
+  Pair<int> get nextSegment => throw _privateConstructorUsedError; // step in seconds when fast forawrd or fast rewind
   int get forwardStep => throw _privateConstructorUsedError;
   dynamic get rewindStep => throw _privateConstructorUsedError;
   int get totalFastForward => throw _privateConstructorUsedError;
   dynamic get totalRewind => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $PlayerStateCopyWith<PlayerState> get copyWith =>
-      throw _privateConstructorUsedError;
+  $PlayerStateCopyWith<PlayerState> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $PlayerStateCopyWith<$Res> {
-  factory $PlayerStateCopyWith(
-          PlayerState value, $Res Function(PlayerState) then) =
+  factory $PlayerStateCopyWith(PlayerState value, $Res Function(PlayerState) then) =
       _$PlayerStateCopyWithImpl<$Res, PlayerState>;
   @useResult
   $Res call(
@@ -108,8 +101,7 @@ abstract class $PlayerStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$PlayerStateCopyWithImpl<$Res, $Val extends PlayerState>
-    implements $PlayerStateCopyWith<$Res> {
+class _$PlayerStateCopyWithImpl<$Res, $Val extends PlayerState> implements $PlayerStateCopyWith<$Res> {
   _$PlayerStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -297,10 +289,8 @@ class _$PlayerStateCopyWithImpl<$Res, $Val extends PlayerState>
 }
 
 /// @nodoc
-abstract class _$$PlayerStateImplCopyWith<$Res>
-    implements $PlayerStateCopyWith<$Res> {
-  factory _$$PlayerStateImplCopyWith(
-          _$PlayerStateImpl value, $Res Function(_$PlayerStateImpl) then) =
+abstract class _$$PlayerStateImplCopyWith<$Res> implements $PlayerStateCopyWith<$Res> {
+  factory _$$PlayerStateImplCopyWith(_$PlayerStateImpl value, $Res Function(_$PlayerStateImpl) then) =
       __$$PlayerStateImplCopyWithImpl<$Res>;
   @override
   @useResult
@@ -342,11 +332,9 @@ abstract class _$$PlayerStateImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$PlayerStateImplCopyWithImpl<$Res>
-    extends _$PlayerStateCopyWithImpl<$Res, _$PlayerStateImpl>
+class __$$PlayerStateImplCopyWithImpl<$Res> extends _$PlayerStateCopyWithImpl<$Res, _$PlayerStateImpl>
     implements _$$PlayerStateImplCopyWith<$Res> {
-  __$$PlayerStateImplCopyWithImpl(
-      _$PlayerStateImpl _value, $Res Function(_$PlayerStateImpl) _then)
+  __$$PlayerStateImplCopyWithImpl(_$PlayerStateImpl _value, $Res Function(_$PlayerStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -710,62 +698,40 @@ class _$PlayerStateImpl extends _PlayerState {
             other is _$PlayerStateImpl &&
             (identical(other.isMini, isMini) || other.isMini == isMini) &&
             (identical(other.top, top) || other.top == top) &&
-            (identical(other.isDragging, isDragging) ||
-                other.isDragging == isDragging) &&
-            (identical(
-                    other.selectedFullScreenIndex, selectedFullScreenIndex) ||
+            (identical(other.isDragging, isDragging) || other.isDragging == isDragging) &&
+            (identical(other.selectedFullScreenIndex, selectedFullScreenIndex) ||
                 other.selectedFullScreenIndex == selectedFullScreenIndex) &&
-            (identical(other.isHidden, isHidden) ||
-                other.isHidden == isHidden) &&
+            (identical(other.isHidden, isHidden) || other.isHidden == isHidden) &&
             (identical(other.opacity, opacity) || other.opacity == opacity) &&
-            (identical(other.dragDistance, dragDistance) ||
-                other.dragDistance == dragDistance) &&
-            (identical(other.dragStartMini, dragStartMini) ||
-                other.dragStartMini == dragStartMini) &&
+            (identical(other.dragDistance, dragDistance) || other.dragDistance == dragDistance) &&
+            (identical(other.dragStartMini, dragStartMini) || other.dragStartMini == dragStartMini) &&
             (identical(other.height, height) || other.height == height) &&
-            (identical(other.fullScreenState, fullScreenState) ||
-                other.fullScreenState == fullScreenState) &&
+            (identical(other.fullScreenState, fullScreenState) || other.fullScreenState == fullScreenState) &&
             (identical(other.muted, muted) || other.muted == muted) &&
-            (identical(other.aspectRatio, aspectRatio) ||
-                other.aspectRatio == aspectRatio) &&
-            (identical(other.currentlyPlaying, currentlyPlaying) ||
-                other.currentlyPlaying == currentlyPlaying) &&
-            (identical(
-                    other.offlineCurrentlyPlaying, offlineCurrentlyPlaying) ||
+            (identical(other.aspectRatio, aspectRatio) || other.aspectRatio == aspectRatio) &&
+            (identical(other.currentlyPlaying, currentlyPlaying) || other.currentlyPlaying == currentlyPlaying) &&
+            (identical(other.offlineCurrentlyPlaying, offlineCurrentlyPlaying) ||
                 other.offlineCurrentlyPlaying == offlineCurrentlyPlaying) &&
             const DeepCollectionEquality().equals(other._videos, _videos) &&
-            const DeepCollectionEquality()
-                .equals(other._offlineVideos, _offlineVideos) &&
-            const DeepCollectionEquality()
-                .equals(other._playedVideos, _playedVideos) &&
+            const DeepCollectionEquality().equals(other._offlineVideos, _offlineVideos) &&
+            const DeepCollectionEquality().equals(other._playedVideos, _playedVideos) &&
             const DeepCollectionEquality().equals(other.playQueue, playQueue) &&
             (identical(other.isAudio, isAudio) || other.isAudio == isAudio) &&
             (identical(other.isPip, isPip) || other.isPip == isPip) &&
             (identical(other.offset, offset) || other.offset == offset) &&
             (identical(other.startAt, startAt) || other.startAt == startAt) &&
-            (identical(other.position, position) ||
-                other.position == position) &&
-            (identical(other.bufferedPosition, bufferedPosition) ||
-                other.bufferedPosition == bufferedPosition) &&
-            (identical(other.isPlaying, isPlaying) ||
-                other.isPlaying == isPlaying) &&
+            (identical(other.position, position) || other.position == position) &&
+            (identical(other.bufferedPosition, bufferedPosition) || other.bufferedPosition == bufferedPosition) &&
+            (identical(other.isPlaying, isPlaying) || other.isPlaying == isPlaying) &&
             (identical(other.speed, speed) || other.speed == speed) &&
-            (identical(other.mediaCommand, mediaCommand) ||
-                other.mediaCommand == mediaCommand) &&
-            (identical(other.mediaEvent, mediaEvent) ||
-                other.mediaEvent == mediaEvent) &&
-            const DeepCollectionEquality()
-                .equals(other._sponsorSegments, _sponsorSegments) &&
-            (identical(other.nextSegment, nextSegment) ||
-                other.nextSegment == nextSegment) &&
-            (identical(other.forwardStep, forwardStep) ||
-                other.forwardStep == forwardStep) &&
-            const DeepCollectionEquality()
-                .equals(other.rewindStep, rewindStep) &&
-            (identical(other.totalFastForward, totalFastForward) ||
-                other.totalFastForward == totalFastForward) &&
-            const DeepCollectionEquality()
-                .equals(other.totalRewind, totalRewind));
+            (identical(other.mediaCommand, mediaCommand) || other.mediaCommand == mediaCommand) &&
+            (identical(other.mediaEvent, mediaEvent) || other.mediaEvent == mediaEvent) &&
+            const DeepCollectionEquality().equals(other._sponsorSegments, _sponsorSegments) &&
+            (identical(other.nextSegment, nextSegment) || other.nextSegment == nextSegment) &&
+            (identical(other.forwardStep, forwardStep) || other.forwardStep == forwardStep) &&
+            const DeepCollectionEquality().equals(other.rewindStep, rewindStep) &&
+            (identical(other.totalFastForward, totalFastForward) || other.totalFastForward == totalFastForward) &&
+            const DeepCollectionEquality().equals(other.totalRewind, totalRewind));
   }
 
   @override
@@ -923,6 +889,5 @@ abstract class _PlayerState extends PlayerState {
   dynamic get totalRewind;
   @override
   @JsonKey(ignore: true)
-  _$$PlayerStateImplCopyWith<_$PlayerStateImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$PlayerStateImplCopyWith<_$PlayerStateImpl> get copyWith => throw _privateConstructorUsedError;
 }

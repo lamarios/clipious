@@ -12,7 +12,7 @@ import '../../../videos/views/components/compact_video.dart';
 class DownloadedVideoView extends StatelessWidget {
   final DownloadedVideo video;
 
-  const DownloadedVideoView({Key? key, required this.video}) : super(key: key);
+  const DownloadedVideoView({super.key, required this.video});
 
   @override
   Widget build(BuildContext context) {
@@ -23,10 +23,9 @@ class DownloadedVideoView extends StatelessWidget {
     var downloadManager = context.read<DownloadManagerCubit>();
     var player = context.read<PlayerCubit>();
     return BlocProvider(
-      create: (BuildContext context) => DownloadedVideoCubit(
-          downloadManager, DownloadedVideoState.init(video.id), player),
-      child: BlocBuilder<DownloadedVideoCubit, DownloadedVideoState>(
-          builder: (context, _) {
+      create: (BuildContext context) =>
+          DownloadedVideoCubit(downloadManager, DownloadedVideoState.init(video.id), player),
+      child: BlocBuilder<DownloadedVideoCubit, DownloadedVideoState>(builder: (context, _) {
         bool downloadFailed = _.video?.downloadFailed ?? false;
         var cubit = context.read<DownloadedVideoCubit>();
 
@@ -38,9 +37,7 @@ class DownloadedVideoView extends StatelessWidget {
                     duration: animationDuration,
                     child: CompactVideo(
                       offlineVideo: _.video,
-                      onTap: downloadFailed
-                          ? cubit.retryDownload
-                          : cubit.playVideo,
+                      onTap: downloadFailed ? cubit.retryDownload : cubit.playVideo,
                       trailing: [
                         (_.video?.audioOnly ?? false)
                             ? Icon(
@@ -57,8 +54,7 @@ class DownloadedVideoView extends StatelessWidget {
                                   width: 20,
                                   child: TweenAnimationBuilder(
                                       duration: animationDuration,
-                                      tween: Tween<double>(
-                                          begin: 0, end: _.progress),
+                                      tween: Tween<double>(begin: 0, end: _.progress),
                                       builder: (context, value, child) {
                                         return CircularProgressIndicator(
                                           strokeWidth: 2,
@@ -76,8 +72,7 @@ class DownloadedVideoView extends StatelessWidget {
                           bottom: 5,
                           child: Container(
                             decoration: BoxDecoration(
-                                color: colors.secondaryContainer,
-                                borderRadius: BorderRadius.circular(20)),
+                                color: colors.secondaryContainer, borderRadius: BorderRadius.circular(20)),
                             child: Padding(
                               padding: const EdgeInsets.all(4),
                               child: Row(

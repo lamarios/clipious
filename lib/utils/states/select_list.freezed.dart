@@ -20,14 +20,12 @@ mixin _$SelectListState<T> {
   bool get loading => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $SelectListStateCopyWith<T, SelectListState<T>> get copyWith =>
-      throw _privateConstructorUsedError;
+  $SelectListStateCopyWith<T, SelectListState<T>> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $SelectListStateCopyWith<T, $Res> {
-  factory $SelectListStateCopyWith(
-          SelectListState<T> value, $Res Function(SelectListState<T>) then) =
+  factory $SelectListStateCopyWith(SelectListState<T> value, $Res Function(SelectListState<T>) then) =
       _$SelectListStateCopyWithImpl<T, $Res, SelectListState<T>>;
   @useResult
   $Res call({List<T> filteredItems, bool loading});
@@ -63,10 +61,8 @@ class _$SelectListStateCopyWithImpl<T, $Res, $Val extends SelectListState<T>>
 }
 
 /// @nodoc
-abstract class _$$SelectListStateImplCopyWith<T, $Res>
-    implements $SelectListStateCopyWith<T, $Res> {
-  factory _$$SelectListStateImplCopyWith(_$SelectListStateImpl<T> value,
-          $Res Function(_$SelectListStateImpl<T>) then) =
+abstract class _$$SelectListStateImplCopyWith<T, $Res> implements $SelectListStateCopyWith<T, $Res> {
+  factory _$$SelectListStateImplCopyWith(_$SelectListStateImpl<T> value, $Res Function(_$SelectListStateImpl<T>) then) =
       __$$SelectListStateImplCopyWithImpl<T, $Res>;
   @override
   @useResult
@@ -77,8 +73,7 @@ abstract class _$$SelectListStateImplCopyWith<T, $Res>
 class __$$SelectListStateImplCopyWithImpl<T, $Res>
     extends _$SelectListStateCopyWithImpl<T, $Res, _$SelectListStateImpl<T>>
     implements _$$SelectListStateImplCopyWith<T, $Res> {
-  __$$SelectListStateImplCopyWithImpl(_$SelectListStateImpl<T> _value,
-      $Res Function(_$SelectListStateImpl<T>) _then)
+  __$$SelectListStateImplCopyWithImpl(_$SelectListStateImpl<T> _value, $Res Function(_$SelectListStateImpl<T>) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -103,8 +98,7 @@ class __$$SelectListStateImplCopyWithImpl<T, $Res>
 /// @nodoc
 
 class _$SelectListStateImpl<T> implements _SelectListState<T> {
-  const _$SelectListStateImpl(
-      {final List<T> filteredItems = const [], this.loading = false})
+  const _$SelectListStateImpl({final List<T> filteredItems = const [], this.loading = false})
       : _filteredItems = filteredItems;
 
   final List<T> _filteredItems;
@@ -130,27 +124,22 @@ class _$SelectListStateImpl<T> implements _SelectListState<T> {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SelectListStateImpl<T> &&
-            const DeepCollectionEquality()
-                .equals(other._filteredItems, _filteredItems) &&
+            const DeepCollectionEquality().equals(other._filteredItems, _filteredItems) &&
             (identical(other.loading, loading) || other.loading == loading));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType,
-      const DeepCollectionEquality().hash(_filteredItems), loading);
+  int get hashCode => Object.hash(runtimeType, const DeepCollectionEquality().hash(_filteredItems), loading);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$SelectListStateImplCopyWith<T, _$SelectListStateImpl<T>> get copyWith =>
-      __$$SelectListStateImplCopyWithImpl<T, _$SelectListStateImpl<T>>(
-          this, _$identity);
+      __$$SelectListStateImplCopyWithImpl<T, _$SelectListStateImpl<T>>(this, _$identity);
 }
 
 abstract class _SelectListState<T> implements SelectListState<T> {
-  const factory _SelectListState(
-      {final List<T> filteredItems,
-      final bool loading}) = _$SelectListStateImpl<T>;
+  const factory _SelectListState({final List<T> filteredItems, final bool loading}) = _$SelectListStateImpl<T>;
 
   @override
   List<T> get filteredItems;
@@ -158,6 +147,5 @@ abstract class _SelectListState<T> implements SelectListState<T> {
   bool get loading;
   @override
   @JsonKey(ignore: true)
-  _$$SelectListStateImplCopyWith<T, _$SelectListStateImpl<T>> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$SelectListStateImplCopyWith<T, _$SelectListStateImpl<T>> get copyWith => throw _privateConstructorUsedError;
 }

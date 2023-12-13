@@ -21,22 +21,19 @@ mixin _$TvSearchState {
   bool get hasPlaylists => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $TvSearchStateCopyWith<TvSearchState> get copyWith =>
-      throw _privateConstructorUsedError;
+  $TvSearchStateCopyWith<TvSearchState> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $TvSearchStateCopyWith<$Res> {
-  factory $TvSearchStateCopyWith(
-          TvSearchState value, $Res Function(TvSearchState) then) =
+  factory $TvSearchStateCopyWith(TvSearchState value, $Res Function(TvSearchState) then) =
       _$TvSearchStateCopyWithImpl<$Res, TvSearchState>;
   @useResult
   $Res call({bool hasVideos, bool hasChannels, bool hasPlaylists});
 }
 
 /// @nodoc
-class _$TvSearchStateCopyWithImpl<$Res, $Val extends TvSearchState>
-    implements $TvSearchStateCopyWith<$Res> {
+class _$TvSearchStateCopyWithImpl<$Res, $Val extends TvSearchState> implements $TvSearchStateCopyWith<$Res> {
   _$TvSearchStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -69,10 +66,8 @@ class _$TvSearchStateCopyWithImpl<$Res, $Val extends TvSearchState>
 }
 
 /// @nodoc
-abstract class _$$TvSearchStateImplCopyWith<$Res>
-    implements $TvSearchStateCopyWith<$Res> {
-  factory _$$TvSearchStateImplCopyWith(
-          _$TvSearchStateImpl value, $Res Function(_$TvSearchStateImpl) then) =
+abstract class _$$TvSearchStateImplCopyWith<$Res> implements $TvSearchStateCopyWith<$Res> {
+  factory _$$TvSearchStateImplCopyWith(_$TvSearchStateImpl value, $Res Function(_$TvSearchStateImpl) then) =
       __$$TvSearchStateImplCopyWithImpl<$Res>;
   @override
   @useResult
@@ -80,11 +75,9 @@ abstract class _$$TvSearchStateImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$TvSearchStateImplCopyWithImpl<$Res>
-    extends _$TvSearchStateCopyWithImpl<$Res, _$TvSearchStateImpl>
+class __$$TvSearchStateImplCopyWithImpl<$Res> extends _$TvSearchStateCopyWithImpl<$Res, _$TvSearchStateImpl>
     implements _$$TvSearchStateImplCopyWith<$Res> {
-  __$$TvSearchStateImplCopyWithImpl(
-      _$TvSearchStateImpl _value, $Res Function(_$TvSearchStateImpl) _then)
+  __$$TvSearchStateImplCopyWithImpl(_$TvSearchStateImpl _value, $Res Function(_$TvSearchStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -114,10 +107,7 @@ class __$$TvSearchStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$TvSearchStateImpl implements _TvSearchState {
-  const _$TvSearchStateImpl(
-      {this.hasVideos = false,
-      this.hasChannels = false,
-      this.hasPlaylists = false});
+  const _$TvSearchStateImpl({this.hasVideos = false, this.hasChannels = false, this.hasPlaylists = false});
 
   @override
   @JsonKey()
@@ -139,17 +129,13 @@ class _$TvSearchStateImpl implements _TvSearchState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TvSearchStateImpl &&
-            (identical(other.hasVideos, hasVideos) ||
-                other.hasVideos == hasVideos) &&
-            (identical(other.hasChannels, hasChannels) ||
-                other.hasChannels == hasChannels) &&
-            (identical(other.hasPlaylists, hasPlaylists) ||
-                other.hasPlaylists == hasPlaylists));
+            (identical(other.hasVideos, hasVideos) || other.hasVideos == hasVideos) &&
+            (identical(other.hasChannels, hasChannels) || other.hasChannels == hasChannels) &&
+            (identical(other.hasPlaylists, hasPlaylists) || other.hasPlaylists == hasPlaylists));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, hasVideos, hasChannels, hasPlaylists);
+  int get hashCode => Object.hash(runtimeType, hasVideos, hasChannels, hasPlaylists);
 
   @JsonKey(ignore: true)
   @override
@@ -159,10 +145,8 @@ class _$TvSearchStateImpl implements _TvSearchState {
 }
 
 abstract class _TvSearchState implements TvSearchState {
-  const factory _TvSearchState(
-      {final bool hasVideos,
-      final bool hasChannels,
-      final bool hasPlaylists}) = _$TvSearchStateImpl;
+  const factory _TvSearchState({final bool hasVideos, final bool hasChannels, final bool hasPlaylists}) =
+      _$TvSearchStateImpl;
 
   @override
   bool get hasVideos;
@@ -172,6 +156,5 @@ abstract class _TvSearchState implements TvSearchState {
   bool get hasPlaylists;
   @override
   @JsonKey(ignore: true)
-  _$$TvSearchStateImplCopyWith<_$TvSearchStateImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$TvSearchStateImplCopyWith<_$TvSearchStateImpl> get copyWith => throw _privateConstructorUsedError;
 }

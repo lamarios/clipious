@@ -9,8 +9,7 @@ abstract class NotificationListCubit<T> extends Cubit<List<T>> {
   deleteNotification(T notif);
 }
 
-class ChannelNotificationListCubit
-    extends NotificationListCubit<ChannelNotification> {
+class ChannelNotificationListCubit extends NotificationListCubit<ChannelNotification> {
   ChannelNotificationListCubit(super.initialState);
 
   @override
@@ -20,8 +19,7 @@ class ChannelNotificationListCubit
   }
 }
 
-class PlaylistNotificationListCubit
-    extends NotificationListCubit<PlaylistNotification> {
+class PlaylistNotificationListCubit extends NotificationListCubit<PlaylistNotification> {
   PlaylistNotificationListCubit(super.initialState);
 
   @override

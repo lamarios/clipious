@@ -16,8 +16,7 @@ class VideoFilterSetupScreen extends StatelessWidget {
   final String? channelId;
   final VideoFilter? filter;
 
-  const VideoFilterSetupScreen({Key? key, this.channelId, this.filter})
-      : super(key: key);
+  const VideoFilterSetupScreen({super.key, this.channelId, this.filter});
 
   List<Widget> getFilterWidgets(BuildContext context) {
     var locals = AppLocalizations.of(context)!;
@@ -32,9 +31,8 @@ class VideoFilterSetupScreen extends StatelessWidget {
                 DropdownButton<FilterType>(
                     value: _.filter?.type,
                     items: FilterType.values
-                        .map((e) => DropdownMenuItem<FilterType>(
-                            value: e,
-                            child: Text(FilterType.localizedType(e, locals))))
+                        .map((e) =>
+                            DropdownMenuItem<FilterType>(value: e, child: Text(FilterType.localizedType(e, locals))))
                         .toList(),
                     onChanged: cubit.setType)
               ],
@@ -49,9 +47,7 @@ class VideoFilterSetupScreen extends StatelessWidget {
                       items: cubit
                           .getAvailableOperations()
                           .map((e) => DropdownMenuItem<FilterOperation>(
-                              value: e,
-                              child: Text(
-                                  FilterOperation.localizedLabel(e, locals))))
+                              value: e, child: Text(FilterOperation.localizedLabel(e, locals))))
                           .toList(),
                       onChanged: cubit.setOperation)
                 ],
@@ -69,8 +65,7 @@ class VideoFilterSetupScreen extends StatelessWidget {
                     child: TextField(
                       autocorrect: false,
                       maxLines: 1,
-                      keyboardType:
-                          cubit.isNumberValue() ? TextInputType.number : null,
+                      keyboardType: cubit.isNumberValue() ? TextInputType.number : null,
                       controller: cubit.valueController,
                       onChanged: cubit.valueChanged,
                     ),
@@ -86,17 +81,15 @@ class VideoFilterSetupScreen extends StatelessWidget {
     var locals = AppLocalizations.of(context)!;
     SelectList.show<Channel>(context,
         itemBuilder: (value, selected) => Text(value.author),
-        asyncSearch: (filter) => cubit.searchChannel(filter ?? ''),
+        asyncSearch: (filter) => cubit.searchChannel(filter),
         onSelect: (value) => cubit.selectChannel(value),
         title: locals.channel);
   }
 
-  selectTime(BuildContext context, String initialTime,
-      Function(String newTime) onNewTime) async {
+  selectTime(BuildContext context, String initialTime, Function(String newTime) onNewTime) async {
     var split = initialTime.split(":");
     if (split.length == 3) {
-      TimeOfDay? selectedTime = await showTimePicker(
-          context: context, initialTime: timeStringToTimeOfDay(initialTime));
+      TimeOfDay? selectedTime = await showTimePicker(context: context, initialTime: timeStringToTimeOfDay(initialTime));
       if (selectedTime != null) {
         String newTime =
             '${selectedTime.hour.toString().padLeft(2, "0")}:${selectedTime.minute.toString().padLeft(2, "0")}:${split[2]}';
@@ -112,17 +105,13 @@ class VideoFilterSetupScreen extends StatelessWidget {
     var textTheme = Theme.of(context).textTheme;
 
     return BlocProvider(
-      create: (context) =>
-          VideoFilterEditCubit(VideoFilterEditState(filter: filter)),
-      child: BlocBuilder<VideoFilterEditCubit, VideoFilterEditState>(
-          builder: (context, _) {
+      create: (context) => VideoFilterEditCubit(VideoFilterEditState(filter: filter)),
+      child: BlocBuilder<VideoFilterEditCubit, VideoFilterEditState>(builder: (context, _) {
         var cubit = context.read<VideoFilterEditCubit>();
         return Scaffold(
           appBar: AppBar(
             backgroundColor: colors.background,
-            title: Text(filter == null
-                ? locals.addVideoFilter
-                : locals.editVideoFilter),
+            title: Text(filter == null ? locals.addVideoFilter : locals.editVideoFilter),
           ),
           body: SafeArea(
             bottom: false,
@@ -141,26 +130,20 @@ class VideoFilterSetupScreen extends StatelessWidget {
                             FilledButton.tonalIcon(
                                 onPressed: () => searchChannel(context),
                                 icon: const Icon(Icons.personal_video),
-                                label: Text(
-                                    '${locals.channel} (${locals.optional})')),
+                                label: Text('${locals.channel} (${locals.optional})')),
                           if (_.channel != null)
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: RichText(
                                   text: TextSpan(children: [
-                                TextSpan(
-                                    text: '${locals.channel}: ',
-                                    style: textTheme.bodyLarge),
+                                TextSpan(text: '${locals.channel}: ', style: textTheme.bodyLarge),
                                 TextSpan(
                                     text: _.channel?.author ?? '',
-                                    style: textTheme.bodyLarge
-                                        ?.copyWith(color: colors.primary))
+                                    style: textTheme.bodyLarge?.copyWith(color: colors.primary))
                               ])),
                             ),
                           if (_.channel != null)
-                            IconButton(
-                                onPressed: () => cubit.channelClear(),
-                                icon: Icon(Icons.clear))
+                            IconButton(onPressed: () => cubit.channelClear(), icon: const Icon(Icons.clear))
                         ],
                       ),
                     )
@@ -202,8 +185,7 @@ class VideoFilterSetupScreen extends StatelessWidget {
                         title: Text(locals.videoFilterDayOfWeek),
                         subtitle: Text(
                           locals.videoFilterDayOfWeekDescription,
-                          style: textTheme.bodySmall
-                              ?.copyWith(color: colors.secondary),
+                          style: textTheme.bodySmall?.copyWith(color: colors.secondary),
                         ),
                         value: cubit.showDateSettings,
                         onChanged: (value) => cubit.showDateSettings = value),
@@ -217,24 +199,20 @@ class VideoFilterSetupScreen extends StatelessWidget {
                             Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: wholeWeek.map((e) {
-                                  String day =
-                                      getWeekdayName(e).substring(0, 1);
-                                  var isSelected =
-                                      _.filter?.daysOfWeek.contains(e) ?? false;
+                                  String day = getWeekdayName(e).substring(0, 1);
+                                  var isSelected = _.filter?.daysOfWeek.contains(e) ?? false;
                                   return GestureDetector(
                                     onTap: () => cubit.toggleDay(e),
                                     child: AnimatedContainer(
                                       padding: const EdgeInsets.all(8),
-                                      margin: const EdgeInsets.symmetric(
-                                          horizontal: 8),
+                                      margin: const EdgeInsets.symmetric(horizontal: 8),
                                       height: 30,
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                           shape: BoxShape.circle,
                                           color: isSelected
                                               ? colors.primaryContainer
-                                              : colors.primaryContainer
-                                                  .withOpacity(0.4)),
+                                              : colors.primaryContainer.withOpacity(0.4)),
                                       duration: animationDuration,
                                       curve: Curves.easeInOutQuad,
                                       child: Row(
@@ -242,13 +220,9 @@ class VideoFilterSetupScreen extends StatelessWidget {
                                         children: [
                                           Text(
                                             day,
-                                            style: textTheme.bodySmall
-                                                ?.copyWith(
-                                                    fontWeight: FontWeight.bold,
-                                                    color: isSelected
-                                                        ? colors
-                                                            .onPrimaryContainer
-                                                        : colors.onBackground),
+                                            style: textTheme.bodySmall?.copyWith(
+                                                fontWeight: FontWeight.bold,
+                                                color: isSelected ? colors.onPrimaryContainer : colors.onBackground),
                                           ),
                                           if (isSelected)
                                             const Icon(
@@ -256,17 +230,14 @@ class VideoFilterSetupScreen extends StatelessWidget {
                                               size: 14,
                                             )
                                                 .animate()
-                                                .slideX(
-                                                    duration: animationDuration,
-                                                    curve: Curves.easeInOutQuad)
-                                                .fadeIn(
-                                                    duration: animationDuration)
+                                                .slideX(duration: animationDuration, curve: Curves.easeInOutQuad)
+                                                .fadeIn(duration: animationDuration)
                                         ],
                                       ),
                                     ),
                                   );
                                 }).toList()),
-                            SizedBox(
+                            const SizedBox(
                               height: 4,
                             ),
                             Row(
@@ -274,32 +245,21 @@ class VideoFilterSetupScreen extends StatelessWidget {
                               children: [
                                 Text('${locals.from}:'),
                                 Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 8.0),
+                                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
                                   child: FilledButton.tonal(
                                       onPressed: () => selectTime(
-                                          context,
-                                          _.filter?.startTime ??
-                                              defaultStartTime,
-                                          cubit.setStartTime),
-                                      child: Text(timeStringToTimeOfDay(
-                                              _.filter?.startTime ??
-                                                  defaultStartTime)
+                                          context, _.filter?.startTime ?? defaultStartTime, cubit.setStartTime),
+                                      child: Text(timeStringToTimeOfDay(_.filter?.startTime ?? defaultStartTime)
                                           .format(context))),
                                 ),
                                 Text('${locals.to}:'),
                                 Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 8.0),
+                                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
                                   child: FilledButton.tonal(
-                                      onPressed: () => selectTime(
-                                          context,
-                                          _.filter?.endTime ?? defaultEndTime,
-                                          cubit.setEndTime),
-                                      child: Text(timeStringToTimeOfDay(
-                                              _.filter?.endTime ??
-                                                  defaultEndTime)
-                                          .format(context))),
+                                      onPressed: () =>
+                                          selectTime(context, _.filter?.endTime ?? defaultEndTime, cubit.setEndTime),
+                                      child: Text(
+                                          timeStringToTimeOfDay(_.filter?.endTime ?? defaultEndTime).format(context))),
                                 ),
                               ],
                             )
@@ -307,25 +267,20 @@ class VideoFilterSetupScreen extends StatelessWidget {
                         ),
                       ),
                       secondChild: const SizedBox.shrink(),
-                      crossFadeState: cubit.showDateSettings
-                          ? CrossFadeState.showFirst
-                          : CrossFadeState.showSecond,
+                      crossFadeState: cubit.showDateSettings ? CrossFadeState.showFirst : CrossFadeState.showSecond,
                       duration: animationDuration,
                       sizeCurve: Curves.easeInOutQuad,
                       firstCurve: Curves.easeInOutQuad,
                       secondCurve: Curves.easeInOutQuad,
                     )
                         .animate()
-                        .slideY(
-                            duration: animationDuration,
-                            curve: Curves.easeInOutQuad)
+                        .slideY(duration: animationDuration, curve: Curves.easeInOutQuad)
                         .fadeIn(duration: animationDuration),
                     SwitchListTile(
                         title: Text(locals.videoFilterHide),
                         subtitle: Text(
                           locals.videoFilterHideDescription,
-                          style: textTheme.bodySmall
-                              ?.copyWith(color: colors.secondary),
+                          style: textTheme.bodySmall?.copyWith(color: colors.secondary),
                         ),
                         value: _.filter?.hideFromFeed ?? false,
                         onChanged: cubit.hideOnFilteredChanged),

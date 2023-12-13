@@ -3,17 +3,15 @@ import 'package:json_annotation/json_annotation.dart';
 
 import '../../utils/models/item_with_continuation.dart';
 
-part 'channelVideos.g.dart';
+part 'channel_videos.g.dart';
 
 @JsonSerializable()
 class VideosWithContinuation extends ItemtWithContinuation<VideoInList> {
   List<VideoInList> videos;
 
-  VideosWithContinuation(this.videos, String? continuation)
-      : super(continuation);
+  VideosWithContinuation(this.videos, String? continuation) : super(continuation);
 
-  factory VideosWithContinuation.fromJson(Map<String, dynamic> json) =>
-      _$VideosWithContinuationFromJson(json);
+  factory VideosWithContinuation.fromJson(Map<String, dynamic> json) => _$VideosWithContinuationFromJson(json);
 
   Map<String, dynamic> toJson() => _$VideosWithContinuationToJson(this);
 

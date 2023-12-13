@@ -112,11 +112,9 @@ class SettingsScreen extends StatelessWidget {
                     leading: const Icon(Icons.cloud_queue),
                     title: Text(locals.manageServers),
                     description: BlocBuilder<AppCubit, AppState>(
-                        buildWhen: (previous, current) =>
-                            previous.server != current.server,
-                        builder: (context, app) => Text(app.server != null
-                            ? locals.currentServer(app.server!.url)
-                            : "")),
+                        buildWhen: (previous, current) => previous.server != current.server,
+                        builder: (context, app) =>
+                            Text(app.server != null ? locals.currentServer(app.server!.url) : "")),
                     onPressed: manageServers,
                   ),
                   SettingsTile.navigation(
@@ -141,8 +139,7 @@ class SettingsScreen extends StatelessWidget {
                     leading: const Icon(Icons.notifications_outlined),
                     title: Text('${locals.notifications} (beta)'),
                     description: Text(_.backgroundNotifications
-                        ? locals.foregroundServiceNotificationContent(
-                            _.backgroundNotificationFrequency.toString())
+                        ? locals.foregroundServiceNotificationContent(_.backgroundNotificationFrequency.toString())
                         : locals.notificationsDescription),
                     onPressed: openNotificationSettings,
                   ),
@@ -163,21 +160,16 @@ class SettingsScreen extends StatelessWidget {
                   ),
                 ]),
                 SettingsSection(title: (Text(locals.about)), tiles: [
-                  SettingsTile(
-                      title: const Center(
-                          child: SizedBox(
-                              height: 150, width: 150, child: AppIcon()))),
+                  SettingsTile(title: const Center(child: SizedBox(height: 150, width: 150, child: AppIcon()))),
                   SettingsTile(
                     leading: const Icon(Icons.badge_outlined),
                     title: Text('${locals.name}: ${_.packageInfo.appName}'),
-                    description:
-                        Text('${locals.package}: ${_.packageInfo.packageName}'),
+                    description: Text('${locals.package}: ${_.packageInfo.packageName}'),
                   ),
                   SettingsTile(
                     leading: const Icon(Icons.numbers),
                     title: Text('${locals.version}: ${_.packageInfo.version}'),
-                    description:
-                        Text('${locals.build}: ${_.packageInfo.buildNumber}'),
+                    description: Text('${locals.build}: ${_.packageInfo.buildNumber}'),
                   ),
                   SettingsTile(
                     leading: const Icon(Icons.toc),

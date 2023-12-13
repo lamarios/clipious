@@ -17,7 +17,6 @@ class DownloadModalSheetCubit extends Cubit<DownloadModalSheetState> {
 
 @freezed
 class DownloadModalSheetState with _$DownloadModalSheetState {
-  const factory DownloadModalSheetState(
-      {@Default(false) bool audioOnly,
-      @Default('720p') String quality}) = _DownloadModalSheetState;
+  const factory DownloadModalSheetState({@Default(false) bool audioOnly, @Default('720p') String quality}) =
+      _DownloadModalSheetState;
 }

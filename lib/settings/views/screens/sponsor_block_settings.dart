@@ -11,7 +11,7 @@ import 'settings.dart';
 
 @RoutePage()
 class SponsorBlockSettingsScreen extends StatelessWidget {
-  const SponsorBlockSettingsScreen({Key? key}) : super(key: key);
+  const SponsorBlockSettingsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -31,21 +31,16 @@ class SponsorBlockSettingsScreen extends StatelessWidget {
             backgroundColor: colorScheme.background,
             body: SafeArea(
               bottom: false,
-              child:
-                  SettingsList(lightTheme: theme, darkTheme: theme, sections: [
+              child: SettingsList(lightTheme: theme, darkTheme: theme, sections: [
                 SettingsSection(
                     title: Text(locals.sponsorBlockSettingsQuickDescription),
                     tiles: SponsorSegmentType.values
                         .map((t) => SettingsTile.switchTile(
-                              initialValue:
-                                  _.settings[t.settingsName()]?.value == 'true',
-                              onToggle: (bool value) => cubit.saveSetting(
-                                  SettingsValue(
-                                      t.settingsName(), value.toString())),
-                              title:
-                                  Text(SponsorSegmentType.getLabel(t, locals)),
-                              description: Text(
-                                  SponsorSegmentType.getDescription(t, locals)),
+                              initialValue: _.settings[t.settingsName()]?.value == 'true',
+                              onToggle: (bool value) =>
+                                  cubit.saveSetting(SettingsValue(t.settingsName(), value.toString())),
+                              title: Text(SponsorSegmentType.getLabel(t, locals)),
+                              description: Text(SponsorSegmentType.getDescription(t, locals)),
                             ))
                         .toList()),
               ]),

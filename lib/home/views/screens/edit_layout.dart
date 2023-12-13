@@ -13,8 +13,7 @@ import '../../../utils.dart';
 class EditHomeLayoutScreen extends StatelessWidget {
   const EditHomeLayoutScreen({super.key});
 
-  List<SmallSource> buildSmallSources(
-      BuildContext context, HomeLayout layout, EditLayoutCubit editLayout) {
+  List<SmallSource> buildSmallSources(BuildContext context, HomeLayout layout, EditLayoutCubit editLayout) {
     var widgets = <SmallSource>[];
     for (int i = 0; i < layout.smallSources.length; i++) {
       HomeDataSource source = layout.smallSources[i];
@@ -44,8 +43,7 @@ class EditHomeLayoutScreen extends StatelessWidget {
       body: SafeArea(
         bottom: false,
         child: Padding(
-          padding:
-              const EdgeInsets.symmetric(horizontal: innerHorizontalPadding),
+          padding: const EdgeInsets.symmetric(horizontal: innerHorizontalPadding),
           child: Column(
             children: [
               Text(
@@ -60,13 +58,11 @@ class EditHomeLayoutScreen extends StatelessWidget {
                 margin: const EdgeInsets.symmetric(vertical: 16),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  border:
-                      Border.all(color: colors.secondaryContainer, width: 2),
+                  border: Border.all(color: colors.secondaryContainer, width: 2),
                 ),
                 child: BlocProvider(
                   create: (context) => EditLayoutCubit(db.getHomeLayout()),
-                  child: BlocBuilder<EditLayoutCubit, HomeLayout>(
-                      builder: (context, layout) {
+                  child: BlocBuilder<EditLayoutCubit, HomeLayout>(builder: (context, layout) {
                     var editLayout = context.read<EditLayoutCubit>();
 
                     return Column(
@@ -99,9 +95,7 @@ class EditHomeLayoutScreen extends StatelessWidget {
                             IconButton(
                                 onPressed: editLayout.toggleShowBigSource,
                                 icon: Icon(
-                                  layout.showBigSource
-                                      ? Icons.visibility
-                                      : Icons.visibility_off,
+                                  layout.showBigSource ? Icons.visibility : Icons.visibility_off,
                                 ))
                           ],
                         ),
@@ -116,8 +110,7 @@ class EditHomeLayoutScreen extends StatelessWidget {
                             childAspectRatio: getGridAspectRatio(context),
                             children: repeatWidget(
                                 () => const Padding(
-                                      padding:
-                                          EdgeInsets.symmetric(vertical: 8.0),
+                                      padding: EdgeInsets.symmetric(vertical: 8.0),
                                       child: VideoListItemPlaceHolder(
                                         animate: false,
                                       ),
@@ -143,16 +136,10 @@ class SmallSource extends StatelessWidget {
   final void Function(HomeDataSource? newSource) onSourceChange;
   final Function() onDelete;
 
-  const SmallSource(
-      {super.key,
-      required this.source,
-      required this.onSourceChange,
-      required this.onDelete});
+  const SmallSource({super.key, required this.source, required this.onSourceChange, required this.onDelete});
 
   @override
   Widget build(BuildContext context) {
-    var textTheme = Theme.of(context).textTheme;
-    var colors = Theme.of(context).colorScheme;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
@@ -204,12 +191,7 @@ class SourceSwitcher extends StatelessWidget {
   final HomeDataSource source;
   final TextStyle? textStyle;
 
-  const SourceSwitcher(
-      {super.key,
-      required this.onChange,
-      required this.source,
-      this.textStyle,
-      this.big = true});
+  const SourceSwitcher({super.key, required this.onChange, required this.source, this.textStyle, this.big = true});
 
   @override
   Widget build(BuildContext context) {
@@ -225,16 +207,13 @@ class SourceSwitcher extends StatelessWidget {
           .where((element) => big ? element.big : element.small)
           // .where((e) => e == source || layout.bigSource != e && !layout.smallSources.contains(e))
           .map((e) {
-        bool enabled = e == source ||
-            layout.bigSource != e && !layout.smallSources.contains(e);
+        bool enabled = e == source || layout.bigSource != e && !layout.smallSources.contains(e);
         return DropdownMenuItem<HomeDataSource>(
             enabled: enabled,
             value: e,
             child: Text(
               e.getLabel(locals),
-              style: !enabled
-                  ? TextStyle(color: colors.secondary.withOpacity(0.5))
-                  : null,
+              style: !enabled ? TextStyle(color: colors.secondary.withOpacity(0.5)) : null,
             ));
       }).toList(),
       onChanged: onChange,

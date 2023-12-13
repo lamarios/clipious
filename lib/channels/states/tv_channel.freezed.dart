@@ -23,22 +23,15 @@ mixin _$TvChannelController {
   bool get hasPlaylist => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $TvChannelControllerCopyWith<TvChannelController> get copyWith =>
-      throw _privateConstructorUsedError;
+  $TvChannelControllerCopyWith<TvChannelController> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $TvChannelControllerCopyWith<$Res> {
-  factory $TvChannelControllerCopyWith(
-          TvChannelController value, $Res Function(TvChannelController) then) =
+  factory $TvChannelControllerCopyWith(TvChannelController value, $Res Function(TvChannelController) then) =
       _$TvChannelControllerCopyWithImpl<$Res, TvChannelController>;
   @useResult
-  $Res call(
-      {bool showBackground,
-      bool hasShorts,
-      bool hasVideos,
-      bool hasStreams,
-      bool hasPlaylist});
+  $Res call({bool showBackground, bool hasShorts, bool hasVideos, bool hasStreams, bool hasPlaylist});
 }
 
 /// @nodoc
@@ -86,27 +79,21 @@ class _$TvChannelControllerCopyWithImpl<$Res, $Val extends TvChannelController>
 }
 
 /// @nodoc
-abstract class _$$TvChannelControllerImplCopyWith<$Res>
-    implements $TvChannelControllerCopyWith<$Res> {
-  factory _$$TvChannelControllerImplCopyWith(_$TvChannelControllerImpl value,
-          $Res Function(_$TvChannelControllerImpl) then) =
+abstract class _$$TvChannelControllerImplCopyWith<$Res> implements $TvChannelControllerCopyWith<$Res> {
+  factory _$$TvChannelControllerImplCopyWith(
+          _$TvChannelControllerImpl value, $Res Function(_$TvChannelControllerImpl) then) =
       __$$TvChannelControllerImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {bool showBackground,
-      bool hasShorts,
-      bool hasVideos,
-      bool hasStreams,
-      bool hasPlaylist});
+  $Res call({bool showBackground, bool hasShorts, bool hasVideos, bool hasStreams, bool hasPlaylist});
 }
 
 /// @nodoc
 class __$$TvChannelControllerImplCopyWithImpl<$Res>
     extends _$TvChannelControllerCopyWithImpl<$Res, _$TvChannelControllerImpl>
     implements _$$TvChannelControllerImplCopyWith<$Res> {
-  __$$TvChannelControllerImplCopyWithImpl(_$TvChannelControllerImpl _value,
-      $Res Function(_$TvChannelControllerImpl) _then)
+  __$$TvChannelControllerImplCopyWithImpl(
+      _$TvChannelControllerImpl _value, $Res Function(_$TvChannelControllerImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -179,28 +166,21 @@ class _$TvChannelControllerImpl implements _TvChannelController {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TvChannelControllerImpl &&
-            (identical(other.showBackground, showBackground) ||
-                other.showBackground == showBackground) &&
-            (identical(other.hasShorts, hasShorts) ||
-                other.hasShorts == hasShorts) &&
-            (identical(other.hasVideos, hasVideos) ||
-                other.hasVideos == hasVideos) &&
-            (identical(other.hasStreams, hasStreams) ||
-                other.hasStreams == hasStreams) &&
-            (identical(other.hasPlaylist, hasPlaylist) ||
-                other.hasPlaylist == hasPlaylist));
+            (identical(other.showBackground, showBackground) || other.showBackground == showBackground) &&
+            (identical(other.hasShorts, hasShorts) || other.hasShorts == hasShorts) &&
+            (identical(other.hasVideos, hasVideos) || other.hasVideos == hasVideos) &&
+            (identical(other.hasStreams, hasStreams) || other.hasStreams == hasStreams) &&
+            (identical(other.hasPlaylist, hasPlaylist) || other.hasPlaylist == hasPlaylist));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, showBackground, hasShorts,
-      hasVideos, hasStreams, hasPlaylist);
+  int get hashCode => Object.hash(runtimeType, showBackground, hasShorts, hasVideos, hasStreams, hasPlaylist);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$TvChannelControllerImplCopyWith<_$TvChannelControllerImpl> get copyWith =>
-      __$$TvChannelControllerImplCopyWithImpl<_$TvChannelControllerImpl>(
-          this, _$identity);
+      __$$TvChannelControllerImplCopyWithImpl<_$TvChannelControllerImpl>(this, _$identity);
 }
 
 abstract class _TvChannelController implements TvChannelController {
@@ -223,6 +203,5 @@ abstract class _TvChannelController implements TvChannelController {
   bool get hasPlaylist;
   @override
   @JsonKey(ignore: true)
-  _$$TvChannelControllerImplCopyWith<_$TvChannelControllerImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$TvChannelControllerImplCopyWith<_$TvChannelControllerImpl> get copyWith => throw _privateConstructorUsedError;
 }

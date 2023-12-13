@@ -10,8 +10,7 @@ class InvidiousServerStats {
 
   InvidiousServerStats(this.software, this.openRegistrations);
 
-  factory InvidiousServerStats.fromJson(Map<String, dynamic> json) =>
-      _$InvidiousServerStatsFromJson(json);
+  factory InvidiousServerStats.fromJson(Map<String, dynamic> json) => _$InvidiousServerStatsFromJson(json);
 
   Map<String, dynamic> toJson() => _$InvidiousServerStatsToJson(this);
 }

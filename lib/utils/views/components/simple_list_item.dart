@@ -12,9 +12,7 @@ class SimpleListItem extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
       decoration: BoxDecoration(
-          color: index % 2 != 0
-              ? colors.secondaryContainer.withOpacity(0.5)
-              : colors.background,
+          color: index % 2 != 0 ? colors.secondaryContainer.withOpacity(0.5) : colors.background,
           borderRadius: BorderRadius.circular(10)),
       child: child,
     );

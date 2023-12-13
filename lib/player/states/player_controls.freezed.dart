@@ -25,21 +25,18 @@ mixin _$PlayerControlsState {
   bool get muted => throw _privateConstructorUsedError;
   bool get buffering => throw _privateConstructorUsedError;
   bool get draggingPositionSlider => throw _privateConstructorUsedError;
-  double get doubleTapFastForwardedOpacity =>
-      throw _privateConstructorUsedError;
+  double get doubleTapFastForwardedOpacity => throw _privateConstructorUsedError;
   double get doubleTapRewindedOpacity => throw _privateConstructorUsedError;
   bool get justDoubleTappedSkip => throw _privateConstructorUsedError;
   bool get showSponsorBlocked => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $PlayerControlsStateCopyWith<PlayerControlsState> get copyWith =>
-      throw _privateConstructorUsedError;
+  $PlayerControlsStateCopyWith<PlayerControlsState> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $PlayerControlsStateCopyWith<$Res> {
-  factory $PlayerControlsStateCopyWith(
-          PlayerControlsState value, $Res Function(PlayerControlsState) then) =
+  factory $PlayerControlsStateCopyWith(PlayerControlsState value, $Res Function(PlayerControlsState) then) =
       _$PlayerControlsStateCopyWithImpl<$Res, PlayerControlsState>;
   @useResult
   $Res call(
@@ -143,10 +140,9 @@ class _$PlayerControlsStateCopyWithImpl<$Res, $Val extends PlayerControlsState>
 }
 
 /// @nodoc
-abstract class _$$PlayercontrolsStateImplCopyWith<$Res>
-    implements $PlayerControlsStateCopyWith<$Res> {
-  factory _$$PlayercontrolsStateImplCopyWith(_$PlayercontrolsStateImpl value,
-          $Res Function(_$PlayercontrolsStateImpl) then) =
+abstract class _$$PlayercontrolsStateImplCopyWith<$Res> implements $PlayerControlsStateCopyWith<$Res> {
+  factory _$$PlayercontrolsStateImplCopyWith(
+          _$PlayercontrolsStateImpl value, $Res Function(_$PlayercontrolsStateImpl) then) =
       __$$PlayercontrolsStateImplCopyWithImpl<$Res>;
   @override
   @useResult
@@ -170,8 +166,8 @@ abstract class _$$PlayercontrolsStateImplCopyWith<$Res>
 class __$$PlayercontrolsStateImplCopyWithImpl<$Res>
     extends _$PlayerControlsStateCopyWithImpl<$Res, _$PlayercontrolsStateImpl>
     implements _$$PlayercontrolsStateImplCopyWith<$Res> {
-  __$$PlayercontrolsStateImplCopyWithImpl(_$PlayercontrolsStateImpl _value,
-      $Res Function(_$PlayercontrolsStateImpl) _then)
+  __$$PlayercontrolsStateImplCopyWithImpl(
+      _$PlayercontrolsStateImpl _value, $Res Function(_$PlayercontrolsStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -317,26 +313,18 @@ class _$PlayercontrolsStateImpl implements _PlayercontrolsState {
         (other.runtimeType == runtimeType &&
             other is _$PlayercontrolsStateImpl &&
             (identical(other.errored, errored) || other.errored == errored) &&
-            (identical(other.position, position) ||
-                other.position == position) &&
-            (identical(other.duration, duration) ||
-                other.duration == duration) &&
+            (identical(other.position, position) || other.position == position) &&
+            (identical(other.duration, duration) || other.duration == duration) &&
             (identical(other.buffer, buffer) || other.buffer == buffer) &&
-            (identical(other.fullScreenState, fullScreenState) ||
-                other.fullScreenState == fullScreenState) &&
-            (identical(other.displayControls, displayControls) ||
-                other.displayControls == displayControls) &&
+            (identical(other.fullScreenState, fullScreenState) || other.fullScreenState == fullScreenState) &&
+            (identical(other.displayControls, displayControls) || other.displayControls == displayControls) &&
             (identical(other.muted, muted) || other.muted == muted) &&
-            (identical(other.buffering, buffering) ||
-                other.buffering == buffering) &&
+            (identical(other.buffering, buffering) || other.buffering == buffering) &&
             (identical(other.draggingPositionSlider, draggingPositionSlider) ||
                 other.draggingPositionSlider == draggingPositionSlider) &&
-            (identical(other.doubleTapFastForwardedOpacity,
-                    doubleTapFastForwardedOpacity) ||
-                other.doubleTapFastForwardedOpacity ==
-                    doubleTapFastForwardedOpacity) &&
-            (identical(
-                    other.doubleTapRewindedOpacity, doubleTapRewindedOpacity) ||
+            (identical(other.doubleTapFastForwardedOpacity, doubleTapFastForwardedOpacity) ||
+                other.doubleTapFastForwardedOpacity == doubleTapFastForwardedOpacity) &&
+            (identical(other.doubleTapRewindedOpacity, doubleTapRewindedOpacity) ||
                 other.doubleTapRewindedOpacity == doubleTapRewindedOpacity) &&
             (identical(other.justDoubleTappedSkip, justDoubleTappedSkip) ||
                 other.justDoubleTappedSkip == justDoubleTappedSkip) &&
@@ -365,8 +353,7 @@ class _$PlayercontrolsStateImpl implements _PlayercontrolsState {
   @override
   @pragma('vm:prefer-inline')
   _$$PlayercontrolsStateImplCopyWith<_$PlayercontrolsStateImpl> get copyWith =>
-      __$$PlayercontrolsStateImplCopyWithImpl<_$PlayercontrolsStateImpl>(
-          this, _$identity);
+      __$$PlayercontrolsStateImplCopyWithImpl<_$PlayercontrolsStateImpl>(this, _$identity);
 }
 
 abstract class _PlayercontrolsState implements PlayerControlsState {
@@ -413,6 +400,5 @@ abstract class _PlayercontrolsState implements PlayerControlsState {
   bool get showSponsorBlocked;
   @override
   @JsonKey(ignore: true)
-  _$$PlayercontrolsStateImplCopyWith<_$PlayercontrolsStateImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$PlayercontrolsStateImplCopyWith<_$PlayercontrolsStateImpl> get copyWith => throw _privateConstructorUsedError;
 }

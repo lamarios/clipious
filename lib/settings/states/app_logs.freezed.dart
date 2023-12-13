@@ -20,22 +20,19 @@ mixin _$AppLogsState {
   List<int> get selected => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $AppLogsStateCopyWith<AppLogsState> get copyWith =>
-      throw _privateConstructorUsedError;
+  $AppLogsStateCopyWith<AppLogsState> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $AppLogsStateCopyWith<$Res> {
-  factory $AppLogsStateCopyWith(
-          AppLogsState value, $Res Function(AppLogsState) then) =
+  factory $AppLogsStateCopyWith(AppLogsState value, $Res Function(AppLogsState) then) =
       _$AppLogsStateCopyWithImpl<$Res, AppLogsState>;
   @useResult
   $Res call({List<AppLog> logs, List<int> selected});
 }
 
 /// @nodoc
-class _$AppLogsStateCopyWithImpl<$Res, $Val extends AppLogsState>
-    implements $AppLogsStateCopyWith<$Res> {
+class _$AppLogsStateCopyWithImpl<$Res, $Val extends AppLogsState> implements $AppLogsStateCopyWith<$Res> {
   _$AppLogsStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -63,10 +60,8 @@ class _$AppLogsStateCopyWithImpl<$Res, $Val extends AppLogsState>
 }
 
 /// @nodoc
-abstract class _$$AppLogsStateImplCopyWith<$Res>
-    implements $AppLogsStateCopyWith<$Res> {
-  factory _$$AppLogsStateImplCopyWith(
-          _$AppLogsStateImpl value, $Res Function(_$AppLogsStateImpl) then) =
+abstract class _$$AppLogsStateImplCopyWith<$Res> implements $AppLogsStateCopyWith<$Res> {
+  factory _$$AppLogsStateImplCopyWith(_$AppLogsStateImpl value, $Res Function(_$AppLogsStateImpl) then) =
       __$$AppLogsStateImplCopyWithImpl<$Res>;
   @override
   @useResult
@@ -74,11 +69,9 @@ abstract class _$$AppLogsStateImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$AppLogsStateImplCopyWithImpl<$Res>
-    extends _$AppLogsStateCopyWithImpl<$Res, _$AppLogsStateImpl>
+class __$$AppLogsStateImplCopyWithImpl<$Res> extends _$AppLogsStateCopyWithImpl<$Res, _$AppLogsStateImpl>
     implements _$$AppLogsStateImplCopyWith<$Res> {
-  __$$AppLogsStateImplCopyWithImpl(
-      _$AppLogsStateImpl _value, $Res Function(_$AppLogsStateImpl) _then)
+  __$$AppLogsStateImplCopyWithImpl(_$AppLogsStateImpl _value, $Res Function(_$AppLogsStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -103,8 +96,7 @@ class __$$AppLogsStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$AppLogsStateImpl implements _AppLogsState {
-  const _$AppLogsStateImpl(
-      {final List<AppLog> logs = const [], final List<int> selected = const []})
+  const _$AppLogsStateImpl({final List<AppLog> logs = const [], final List<int> selected = const []})
       : _logs = logs,
         _selected = selected;
 
@@ -142,9 +134,7 @@ class _$AppLogsStateImpl implements _AppLogsState {
 
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(_logs),
-      const DeepCollectionEquality().hash(_selected));
+      runtimeType, const DeepCollectionEquality().hash(_logs), const DeepCollectionEquality().hash(_selected));
 
   @JsonKey(ignore: true)
   @override
@@ -154,8 +144,7 @@ class _$AppLogsStateImpl implements _AppLogsState {
 }
 
 abstract class _AppLogsState implements AppLogsState {
-  const factory _AppLogsState(
-      {final List<AppLog> logs, final List<int> selected}) = _$AppLogsStateImpl;
+  const factory _AppLogsState({final List<AppLog> logs, final List<int> selected}) = _$AppLogsStateImpl;
 
   @override
   List<AppLog> get logs;
@@ -163,6 +152,5 @@ abstract class _AppLogsState implements AppLogsState {
   List<int> get selected;
   @override
   @JsonKey(ignore: true)
-  _$$AppLogsStateImplCopyWith<_$AppLogsStateImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$AppLogsStateImplCopyWith<_$AppLogsStateImpl> get copyWith => throw _privateConstructorUsedError;
 }

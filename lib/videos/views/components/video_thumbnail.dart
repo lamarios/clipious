@@ -8,12 +8,7 @@ class VideoThumbnailView extends StatelessWidget {
   final Widget? child;
   final BoxDecoration? decoration;
 
-  const VideoThumbnailView(
-      {super.key,
-      required this.videoId,
-      required this.thumbnailUrl,
-      this.child,
-      this.decoration});
+  const VideoThumbnailView({super.key, required this.videoId, required this.thumbnailUrl, this.child, this.decoration});
 
   @override
   Widget build(BuildContext context) {
@@ -24,9 +19,7 @@ class VideoThumbnailView extends StatelessWidget {
           thumbnailUrl: thumbnailUrl,
           decoration: decoration != null
               ? decoration!
-              : BoxDecoration(
-                  color: colors.secondaryContainer,
-                  borderRadius: BorderRadius.circular(10)),
+              : BoxDecoration(color: colors.secondaryContainer, borderRadius: BorderRadius.circular(10)),
           child: child),
     );
   }
@@ -34,19 +27,14 @@ class VideoThumbnailView extends StatelessWidget {
 
 class Thumbnail extends StatelessWidget {
   final Widget? child;
-  double? height;
-  double? width;
+  final double? height;
+  final double? width;
 
   final String thumbnailUrl;
   final BoxDecoration decoration;
 
-  Thumbnail(
-      {super.key,
-      this.child,
-      required this.thumbnailUrl,
-      required this.decoration,
-      this.width,
-      this.height});
+  const Thumbnail(
+      {super.key, this.child, required this.thumbnailUrl, required this.decoration, this.width, this.height});
 
   @override
   Widget build(BuildContext context) {
@@ -56,8 +44,7 @@ class Thumbnail extends StatelessWidget {
       imageBuilder: (context, imageProvider) => AnimatedContainer(
         height: height,
         width: width,
-        decoration: decoration.copyWith(
-            image: DecorationImage(image: imageProvider, fit: BoxFit.cover)),
+        decoration: decoration.copyWith(image: DecorationImage(image: imageProvider, fit: BoxFit.cover)),
         // duration: animationDuration,
         duration: animationDuration ~/ 2,
         curve: Curves.easeInOutQuad,

@@ -14,6 +14,5 @@ class PlaylistNotification {
 
   String playlistName;
 
-  PlaylistNotification(
-      this.playlistId, this.lastVideoCount, this.timestamp, this.playlistName);
+  PlaylistNotification(this.playlistId, this.lastVideoCount, this.timestamp, this.playlistName);
 }

@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'commentReplies.g.dart';
+part 'comment_replies.g.dart';
 
 @JsonSerializable()
 class CommentReplies {
@@ -9,8 +9,7 @@ class CommentReplies {
 
   CommentReplies(this.replyCount, this.continuation);
 
-  factory CommentReplies.fromJson(Map<String, dynamic> json) =>
-      _$CommentRepliesFromJson(json);
+  factory CommentReplies.fromJson(Map<String, dynamic> json) => _$CommentRepliesFromJson(json);
 
   Map<String, dynamic> toJson() => _$CommentRepliesToJson(this);
 }

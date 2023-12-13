@@ -16,28 +16,21 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$PlaylistListState {
-  PaginatedList<Playlist> get paginatedList =>
-      throw _privateConstructorUsedError;
+  PaginatedList<Playlist> get paginatedList => throw _privateConstructorUsedError;
   List<Playlist> get playlists => throw _privateConstructorUsedError;
   bool get loading => throw _privateConstructorUsedError;
   String get error => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $PlaylistListStateCopyWith<PlaylistListState> get copyWith =>
-      throw _privateConstructorUsedError;
+  $PlaylistListStateCopyWith<PlaylistListState> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $PlaylistListStateCopyWith<$Res> {
-  factory $PlaylistListStateCopyWith(
-          PlaylistListState value, $Res Function(PlaylistListState) then) =
+  factory $PlaylistListStateCopyWith(PlaylistListState value, $Res Function(PlaylistListState) then) =
       _$PlaylistListStateCopyWithImpl<$Res, PlaylistListState>;
   @useResult
-  $Res call(
-      {PaginatedList<Playlist> paginatedList,
-      List<Playlist> playlists,
-      bool loading,
-      String error});
+  $Res call({PaginatedList<Playlist> paginatedList, List<Playlist> playlists, bool loading, String error});
 }
 
 /// @nodoc
@@ -80,26 +73,18 @@ class _$PlaylistListStateCopyWithImpl<$Res, $Val extends PlaylistListState>
 }
 
 /// @nodoc
-abstract class _$$PlaylistListStateImplCopyWith<$Res>
-    implements $PlaylistListStateCopyWith<$Res> {
-  factory _$$PlaylistListStateImplCopyWith(_$PlaylistListStateImpl value,
-          $Res Function(_$PlaylistListStateImpl) then) =
+abstract class _$$PlaylistListStateImplCopyWith<$Res> implements $PlaylistListStateCopyWith<$Res> {
+  factory _$$PlaylistListStateImplCopyWith(_$PlaylistListStateImpl value, $Res Function(_$PlaylistListStateImpl) then) =
       __$$PlaylistListStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {PaginatedList<Playlist> paginatedList,
-      List<Playlist> playlists,
-      bool loading,
-      String error});
+  $Res call({PaginatedList<Playlist> paginatedList, List<Playlist> playlists, bool loading, String error});
 }
 
 /// @nodoc
-class __$$PlaylistListStateImplCopyWithImpl<$Res>
-    extends _$PlaylistListStateCopyWithImpl<$Res, _$PlaylistListStateImpl>
+class __$$PlaylistListStateImplCopyWithImpl<$Res> extends _$PlaylistListStateCopyWithImpl<$Res, _$PlaylistListStateImpl>
     implements _$$PlaylistListStateImplCopyWith<$Res> {
-  __$$PlaylistListStateImplCopyWithImpl(_$PlaylistListStateImpl _value,
-      $Res Function(_$PlaylistListStateImpl) _then)
+  __$$PlaylistListStateImplCopyWithImpl(_$PlaylistListStateImpl _value, $Res Function(_$PlaylistListStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -135,10 +120,7 @@ class __$$PlaylistListStateImplCopyWithImpl<$Res>
 
 class _$PlaylistListStateImpl implements _PlaylistListState {
   const _$PlaylistListStateImpl(
-      {required this.paginatedList,
-      final List<Playlist> playlists = const [],
-      this.loading = true,
-      this.error = ''})
+      {required this.paginatedList, final List<Playlist> playlists = const [], this.loading = true, this.error = ''})
       : _playlists = playlists;
 
   @override
@@ -169,24 +151,21 @@ class _$PlaylistListStateImpl implements _PlaylistListState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$PlaylistListStateImpl &&
-            (identical(other.paginatedList, paginatedList) ||
-                other.paginatedList == paginatedList) &&
-            const DeepCollectionEquality()
-                .equals(other._playlists, _playlists) &&
+            (identical(other.paginatedList, paginatedList) || other.paginatedList == paginatedList) &&
+            const DeepCollectionEquality().equals(other._playlists, _playlists) &&
             (identical(other.loading, loading) || other.loading == loading) &&
             (identical(other.error, error) || other.error == error));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, paginatedList,
-      const DeepCollectionEquality().hash(_playlists), loading, error);
+  int get hashCode =>
+      Object.hash(runtimeType, paginatedList, const DeepCollectionEquality().hash(_playlists), loading, error);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$PlaylistListStateImplCopyWith<_$PlaylistListStateImpl> get copyWith =>
-      __$$PlaylistListStateImplCopyWithImpl<_$PlaylistListStateImpl>(
-          this, _$identity);
+      __$$PlaylistListStateImplCopyWithImpl<_$PlaylistListStateImpl>(this, _$identity);
 }
 
 abstract class _PlaylistListState implements PlaylistListState {
@@ -206,6 +185,5 @@ abstract class _PlaylistListState implements PlaylistListState {
   String get error;
   @override
   @JsonKey(ignore: true)
-  _$$PlaylistListStateImplCopyWith<_$PlaylistListStateImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$PlaylistListStateImplCopyWith<_$PlaylistListStateImpl> get copyWith => throw _privateConstructorUsedError;
 }

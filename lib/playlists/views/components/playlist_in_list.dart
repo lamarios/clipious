@@ -6,7 +6,6 @@ import 'package:invidious/globals.dart';
 import 'package:invidious/playlists/models/playlist.dart';
 import 'package:invidious/playlists/states/playlist_in_list.dart';
 import 'package:invidious/playlists/views/components/playlist_thumbnail.dart';
-import 'package:invidious/playlists/views/tv/screens/playlist.dart';
 import 'package:invidious/router.dart';
 import 'package:invidious/utils.dart';
 
@@ -21,23 +20,17 @@ class PlaylistInList extends StatelessWidget {
   final bool small;
 
   const PlaylistInList(
-      {super.key,
-      required this.playlist,
-      required this.canDeleteVideos,
-      this.isTv = false,
-      this.small = false});
+      {super.key, required this.playlist, required this.canDeleteVideos, this.isTv = false, this.small = false});
 
   openPlayList(BuildContext context) {
     var cubit = context.read<PlaylistListCubit>();
     AutoRouter.of(context)
-        .push(PlaylistViewRoute(
-            playlist: playlist, canDeleteVideos: canDeleteVideos))
+        .push(PlaylistViewRoute(playlist: playlist, canDeleteVideos: canDeleteVideos))
         .then((value) => cubit.refreshPlaylists());
   }
 
   openTvPlaylist(BuildContext context) {
-    AutoRouter.of(context)
-        .push(TvPlaylistRoute(playlist: playlist, canDeleteVideos: false));
+    AutoRouter.of(context).push(TvPlaylistRoute(playlist: playlist, canDeleteVideos: false));
   }
 
   @override
@@ -52,8 +45,7 @@ class PlaylistInList extends StatelessWidget {
         builder: (context, _) {
           if (isTv) {
             return Focus(
-              onKeyEvent: (node, event) =>
-                  onTvSelect(event, context, (_) => openTvPlaylist(context)),
+              onKeyEvent: (node, event) => onTvSelect(event, context, (_) => openTvPlaylist(context)),
               autofocus: false,
               child: AspectRatio(
                 aspectRatio: 16 / 13,
@@ -70,9 +62,7 @@ class PlaylistInList extends StatelessWidget {
                             child: AnimatedContainer(
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(15),
-                                color: hasFocus
-                                    ? colors.primaryContainer
-                                    : colors.background,
+                                color: hasFocus ? colors.primaryContainer : colors.background,
                               ),
                               duration: animationDuration,
                               child: Padding(
@@ -90,14 +80,11 @@ class PlaylistInList extends StatelessWidget {
                                         child: Text(
                                       playlist.title,
                                       overflow: TextOverflow.ellipsis,
-                                      style: textTheme.titleLarge
-                                          ?.copyWith(color: colors.primary),
+                                      style: textTheme.titleLarge?.copyWith(color: colors.primary),
                                     )),
                                     Padding(
-                                        padding:
-                                            const EdgeInsets.only(bottom: 8.0),
-                                        child: Text(locals
-                                            .nVideos(playlist.videoCount))),
+                                        padding: const EdgeInsets.only(bottom: 8.0),
+                                        child: Text(locals.nVideos(playlist.videoCount))),
                                   ],
                                 ),
                               ),
@@ -124,8 +111,7 @@ class PlaylistInList extends StatelessWidget {
                       playlist.title,
                       overflow: TextOverflow.ellipsis,
                       maxLines: 1,
-                      style:
-                          textTheme.labelSmall?.copyWith(color: colors.primary),
+                      style: textTheme.labelSmall?.copyWith(color: colors.primary),
                     ),
                   ],
                 ),

@@ -4,7 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/playlists/states/playlist_list.dart';
 import 'package:invidious/playlists/views/components/playlist_list.dart';
-import 'package:invidious/utils/models/paginatedList.dart';
+import 'package:invidious/utils/models/paginated_list.dart';
 
 import '../../../utils.dart';
 
@@ -43,7 +43,6 @@ class AddPlayListButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ColorScheme colors = Theme.of(context).colorScheme;
     return FloatingActionButton(
       onPressed: () => addPlaylistDialog(context),
       child: const Icon(Icons.add),
@@ -67,18 +66,19 @@ class _AddPlayListFormState extends State<AddPlayListForm> {
   addPlaylist(BuildContext context) async {
     var locals = AppLocalizations.of(context)!;
     try {
-      var id =
-          await service.createPlayList(nameController.value.text, privacyValue);
+      var id = await service.createPlayList(nameController.value.text, privacyValue);
 
       if (context.mounted) {
         Navigator.pop(context);
       }
 
       if (context.mounted && id != null && widget.afterAdd != null) {
-        await widget.afterAdd!(id!);
+        await widget.afterAdd!(id);
       }
     } catch (err) {
-      showAlertDialog(context, locals.error, [Text(err.toString())]);
+      if (context.mounted) {
+        showAlertDialog(context, locals.error, [Text(err.toString())]);
+      }
     }
   }
 
@@ -106,19 +106,15 @@ class _AddPlayListFormState extends State<AddPlayListForm> {
               child: Row(
                 children: [
                   Padding(
-                    padding: EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(8.0),
                     child: Text('${locals.playlistVisibility}:'),
                   ),
                   DropdownButton(
                     value: privacyValue,
                     items: [
-                      DropdownMenuItem(
-                          value: 'public', child: Text(locals.publicPlaylist)),
-                      DropdownMenuItem(
-                          value: 'unlisted',
-                          child: Text(locals.unlistedPlaylist)),
-                      DropdownMenuItem(
-                          value: 'private', child: Text(locals.privatePlaylist))
+                      DropdownMenuItem(value: 'public', child: Text(locals.publicPlaylist)),
+                      DropdownMenuItem(value: 'unlisted', child: Text(locals.unlistedPlaylist)),
+                      DropdownMenuItem(value: 'private', child: Text(locals.privatePlaylist))
                     ],
                     onChanged: (value) {
                       setState(() {

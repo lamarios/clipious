@@ -21,22 +21,19 @@ mixin _$DownloadedVideoState {
   double get progress => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $DownloadedVideoStateCopyWith<DownloadedVideoState> get copyWith =>
-      throw _privateConstructorUsedError;
+  $DownloadedVideoStateCopyWith<DownloadedVideoState> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $DownloadedVideoStateCopyWith<$Res> {
-  factory $DownloadedVideoStateCopyWith(DownloadedVideoState value,
-          $Res Function(DownloadedVideoState) then) =
+  factory $DownloadedVideoStateCopyWith(DownloadedVideoState value, $Res Function(DownloadedVideoState) then) =
       _$DownloadedVideoStateCopyWithImpl<$Res, DownloadedVideoState>;
   @useResult
   $Res call({DownloadedVideo? video, String? thumbnailPath, double progress});
 }
 
 /// @nodoc
-class _$DownloadedVideoStateCopyWithImpl<$Res,
-        $Val extends DownloadedVideoState>
+class _$DownloadedVideoStateCopyWithImpl<$Res, $Val extends DownloadedVideoState>
     implements $DownloadedVideoStateCopyWith<$Res> {
   _$DownloadedVideoStateCopyWithImpl(this._value, this._then);
 
@@ -70,10 +67,9 @@ class _$DownloadedVideoStateCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$DownloadedVideoStateImplCopyWith<$Res>
-    implements $DownloadedVideoStateCopyWith<$Res> {
-  factory _$$DownloadedVideoStateImplCopyWith(_$DownloadedVideoStateImpl value,
-          $Res Function(_$DownloadedVideoStateImpl) then) =
+abstract class _$$DownloadedVideoStateImplCopyWith<$Res> implements $DownloadedVideoStateCopyWith<$Res> {
+  factory _$$DownloadedVideoStateImplCopyWith(
+          _$DownloadedVideoStateImpl value, $Res Function(_$DownloadedVideoStateImpl) then) =
       __$$DownloadedVideoStateImplCopyWithImpl<$Res>;
   @override
   @useResult
@@ -84,8 +80,8 @@ abstract class _$$DownloadedVideoStateImplCopyWith<$Res>
 class __$$DownloadedVideoStateImplCopyWithImpl<$Res>
     extends _$DownloadedVideoStateCopyWithImpl<$Res, _$DownloadedVideoStateImpl>
     implements _$$DownloadedVideoStateImplCopyWith<$Res> {
-  __$$DownloadedVideoStateImplCopyWithImpl(_$DownloadedVideoStateImpl _value,
-      $Res Function(_$DownloadedVideoStateImpl) _then)
+  __$$DownloadedVideoStateImplCopyWithImpl(
+      _$DownloadedVideoStateImpl _value, $Res Function(_$DownloadedVideoStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -115,8 +111,7 @@ class __$$DownloadedVideoStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$DownloadedVideoStateImpl implements _DownloadedVideoState {
-  const _$DownloadedVideoStateImpl(
-      {this.video, this.thumbnailPath, this.progress = 0});
+  const _$DownloadedVideoStateImpl({this.video, this.thumbnailPath, this.progress = 0});
 
   @override
   final DownloadedVideo? video;
@@ -137,10 +132,8 @@ class _$DownloadedVideoStateImpl implements _DownloadedVideoState {
         (other.runtimeType == runtimeType &&
             other is _$DownloadedVideoStateImpl &&
             (identical(other.video, video) || other.video == video) &&
-            (identical(other.thumbnailPath, thumbnailPath) ||
-                other.thumbnailPath == thumbnailPath) &&
-            (identical(other.progress, progress) ||
-                other.progress == progress));
+            (identical(other.thumbnailPath, thumbnailPath) || other.thumbnailPath == thumbnailPath) &&
+            (identical(other.progress, progress) || other.progress == progress));
   }
 
   @override
@@ -149,17 +142,13 @@ class _$DownloadedVideoStateImpl implements _DownloadedVideoState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$DownloadedVideoStateImplCopyWith<_$DownloadedVideoStateImpl>
-      get copyWith =>
-          __$$DownloadedVideoStateImplCopyWithImpl<_$DownloadedVideoStateImpl>(
-              this, _$identity);
+  _$$DownloadedVideoStateImplCopyWith<_$DownloadedVideoStateImpl> get copyWith =>
+      __$$DownloadedVideoStateImplCopyWithImpl<_$DownloadedVideoStateImpl>(this, _$identity);
 }
 
 abstract class _DownloadedVideoState implements DownloadedVideoState {
   const factory _DownloadedVideoState(
-      {final DownloadedVideo? video,
-      final String? thumbnailPath,
-      final double progress}) = _$DownloadedVideoStateImpl;
+      {final DownloadedVideo? video, final String? thumbnailPath, final double progress}) = _$DownloadedVideoStateImpl;
 
   @override
   DownloadedVideo? get video;
@@ -169,6 +158,5 @@ abstract class _DownloadedVideoState implements DownloadedVideoState {
   double get progress;
   @override
   @JsonKey(ignore: true)
-  _$$DownloadedVideoStateImplCopyWith<_$DownloadedVideoStateImpl>
-      get copyWith => throw _privateConstructorUsedError;
+  _$$DownloadedVideoStateImplCopyWith<_$DownloadedVideoStateImpl> get copyWith => throw _privateConstructorUsedError;
 }

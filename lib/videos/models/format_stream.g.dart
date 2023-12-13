@@ -18,8 +18,7 @@ FormatStream _$FormatStreamFromJson(Map<String, dynamic> json) => FormatStream(
       json['size'] as String,
     );
 
-Map<String, dynamic> _$FormatStreamToJson(FormatStream instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$FormatStreamToJson(FormatStream instance) => <String, dynamic>{
       'url': instance.url,
       'itag': instance.itag,
       'type': instance.type,

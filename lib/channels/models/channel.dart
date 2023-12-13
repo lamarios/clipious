@@ -39,8 +39,7 @@ class Channel implements ShareLinks {
       this.allowedRegions,
       this.latestVideos);
 
-  factory Channel.fromJson(Map<String, dynamic> json) =>
-      _$ChannelFromJson(json);
+  factory Channel.fromJson(Map<String, dynamic> json) => _$ChannelFromJson(json);
 
   Map<String, dynamic> toJson() => _$ChannelToJson(this);
 

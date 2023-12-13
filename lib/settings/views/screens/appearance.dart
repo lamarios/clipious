@@ -36,16 +36,12 @@ class AppearanceSettingsScreen extends StatelessWidget {
             ));
   }
 
-  String getNavigationLabelText(
-      BuildContext context, NavigationDestinationLabelBehavior behavior) {
+  String getNavigationLabelText(BuildContext context, NavigationDestinationLabelBehavior behavior) {
     var locals = AppLocalizations.of(context)!;
     return switch (behavior) {
-      NavigationDestinationLabelBehavior.alwaysHide =>
-        locals.navigationBarLabelNeverShow,
-      NavigationDestinationLabelBehavior.alwaysShow =>
-        locals.navigationBarLabelAlwaysShowing,
-      NavigationDestinationLabelBehavior.onlyShowSelected =>
-        locals.navigationBarLabelShowOnSelect,
+      NavigationDestinationLabelBehavior.alwaysHide => locals.navigationBarLabelNeverShow,
+      NavigationDestinationLabelBehavior.alwaysShow => locals.navigationBarLabelAlwaysShowing,
+      NavigationDestinationLabelBehavior.onlyShowSelected => locals.navigationBarLabelShowOnSelect,
     };
   }
 
@@ -60,8 +56,7 @@ class AppearanceSettingsScreen extends StatelessWidget {
         value: settings.state.navigationBarLabelBehavior,
         itemBuilder: (value, selected) => Text(
               getNavigationLabelText(context, value),
-              style: textTheme.bodyLarge
-                  ?.copyWith(color: selected ? colors.primary : null),
+              style: textTheme.bodyLarge?.copyWith(color: selected ? colors.primary : null),
             ),
         onSelect: settings.setNavigationBarLabelBehavior,
         title: locals.navigationBarStyle);
@@ -80,8 +75,7 @@ class AppearanceSettingsScreen extends StatelessWidget {
         elevation: 0,
         scrolledUnderElevation: 0,
       ),
-      body: SafeArea(child:
-          BlocBuilder<SettingsCubit, SettingsState>(builder: (context, _) {
+      body: SafeArea(child: BlocBuilder<SettingsCubit, SettingsState>(builder: (context, _) {
         var cubit = context.read<SettingsCubit>();
         return DefaultTabController(
           length: 2,
@@ -114,8 +108,7 @@ class AppearanceSettingsScreen extends StatelessWidget {
                   SettingsTile(
                     leading: const Icon(Icons.label),
                     title: Text(locals.navigationBarStyle),
-                    value: Text(getNavigationLabelText(
-                        context, _.navigationBarLabelBehavior)),
+                    value: Text(getNavigationLabelText(context, _.navigationBarLabelBehavior)),
                     onPressed: (ctx) => customizeNavigationLabel(ctx),
                   ),
                 ],

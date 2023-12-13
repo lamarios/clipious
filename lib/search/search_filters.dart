@@ -28,8 +28,7 @@ class SearchFiltersButton extends StatelessWidget {
               content: StatefulBuilder(
                 builder: (BuildContext context, StateSetter setState) {
                   onChanged(SearchSortBy? newSearchSortBy) {
-                    setState(() => selectedSearchSortBy =
-                        newSearchSortBy ?? defaultSearchSortBy);
+                    setState(() => selectedSearchSortBy = newSearchSortBy ?? defaultSearchSortBy);
                   }
 
                   return SingleChildScrollView(

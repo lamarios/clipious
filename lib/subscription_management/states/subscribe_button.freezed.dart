@@ -22,23 +22,19 @@ mixin _$SubscribeButtonState {
   bool get isLoggedIn => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $SubscribeButtonStateCopyWith<SubscribeButtonState> get copyWith =>
-      throw _privateConstructorUsedError;
+  $SubscribeButtonStateCopyWith<SubscribeButtonState> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $SubscribeButtonStateCopyWith<$Res> {
-  factory $SubscribeButtonStateCopyWith(SubscribeButtonState value,
-          $Res Function(SubscribeButtonState) then) =
+  factory $SubscribeButtonStateCopyWith(SubscribeButtonState value, $Res Function(SubscribeButtonState) then) =
       _$SubscribeButtonStateCopyWithImpl<$Res, SubscribeButtonState>;
   @useResult
-  $Res call(
-      {String channelId, bool isSubscribed, bool loading, bool isLoggedIn});
+  $Res call({String channelId, bool isSubscribed, bool loading, bool isLoggedIn});
 }
 
 /// @nodoc
-class _$SubscribeButtonStateCopyWithImpl<$Res,
-        $Val extends SubscribeButtonState>
+class _$SubscribeButtonStateCopyWithImpl<$Res, $Val extends SubscribeButtonState>
     implements $SubscribeButtonStateCopyWith<$Res> {
   _$SubscribeButtonStateCopyWithImpl(this._value, this._then);
 
@@ -77,23 +73,21 @@ class _$SubscribeButtonStateCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$SubscribeButtonStateImplCopyWith<$Res>
-    implements $SubscribeButtonStateCopyWith<$Res> {
-  factory _$$SubscribeButtonStateImplCopyWith(_$SubscribeButtonStateImpl value,
-          $Res Function(_$SubscribeButtonStateImpl) then) =
+abstract class _$$SubscribeButtonStateImplCopyWith<$Res> implements $SubscribeButtonStateCopyWith<$Res> {
+  factory _$$SubscribeButtonStateImplCopyWith(
+          _$SubscribeButtonStateImpl value, $Res Function(_$SubscribeButtonStateImpl) then) =
       __$$SubscribeButtonStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String channelId, bool isSubscribed, bool loading, bool isLoggedIn});
+  $Res call({String channelId, bool isSubscribed, bool loading, bool isLoggedIn});
 }
 
 /// @nodoc
 class __$$SubscribeButtonStateImplCopyWithImpl<$Res>
     extends _$SubscribeButtonStateCopyWithImpl<$Res, _$SubscribeButtonStateImpl>
     implements _$$SubscribeButtonStateImplCopyWith<$Res> {
-  __$$SubscribeButtonStateImplCopyWithImpl(_$SubscribeButtonStateImpl _value,
-      $Res Function(_$SubscribeButtonStateImpl) _then)
+  __$$SubscribeButtonStateImplCopyWithImpl(
+      _$SubscribeButtonStateImpl _value, $Res Function(_$SubscribeButtonStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -129,10 +123,7 @@ class __$$SubscribeButtonStateImplCopyWithImpl<$Res>
 
 class _$SubscribeButtonStateImpl implements _SubscribeButtonState {
   const _$SubscribeButtonStateImpl(
-      {required this.channelId,
-      this.isSubscribed = false,
-      this.loading = true,
-      required this.isLoggedIn});
+      {required this.channelId, this.isSubscribed = false, this.loading = true, required this.isLoggedIn});
 
   @override
   final String channelId;
@@ -155,26 +146,20 @@ class _$SubscribeButtonStateImpl implements _SubscribeButtonState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SubscribeButtonStateImpl &&
-            (identical(other.channelId, channelId) ||
-                other.channelId == channelId) &&
-            (identical(other.isSubscribed, isSubscribed) ||
-                other.isSubscribed == isSubscribed) &&
+            (identical(other.channelId, channelId) || other.channelId == channelId) &&
+            (identical(other.isSubscribed, isSubscribed) || other.isSubscribed == isSubscribed) &&
             (identical(other.loading, loading) || other.loading == loading) &&
-            (identical(other.isLoggedIn, isLoggedIn) ||
-                other.isLoggedIn == isLoggedIn));
+            (identical(other.isLoggedIn, isLoggedIn) || other.isLoggedIn == isLoggedIn));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, channelId, isSubscribed, loading, isLoggedIn);
+  int get hashCode => Object.hash(runtimeType, channelId, isSubscribed, loading, isLoggedIn);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$SubscribeButtonStateImplCopyWith<_$SubscribeButtonStateImpl>
-      get copyWith =>
-          __$$SubscribeButtonStateImplCopyWithImpl<_$SubscribeButtonStateImpl>(
-              this, _$identity);
+  _$$SubscribeButtonStateImplCopyWith<_$SubscribeButtonStateImpl> get copyWith =>
+      __$$SubscribeButtonStateImplCopyWithImpl<_$SubscribeButtonStateImpl>(this, _$identity);
 }
 
 abstract class _SubscribeButtonState implements SubscribeButtonState {
@@ -194,6 +179,5 @@ abstract class _SubscribeButtonState implements SubscribeButtonState {
   bool get isLoggedIn;
   @override
   @JsonKey(ignore: true)
-  _$$SubscribeButtonStateImplCopyWith<_$SubscribeButtonStateImpl>
-      get copyWith => throw _privateConstructorUsedError;
+  _$$SubscribeButtonStateImplCopyWith<_$SubscribeButtonStateImpl> get copyWith => throw _privateConstructorUsedError;
 }

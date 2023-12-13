@@ -60,8 +60,7 @@ class _$VideoFilterCWProxyImpl implements _$VideoFilterCWProxy {
   VideoFilter channelId(String? channelId) => this(channelId: channelId);
 
   @override
-  VideoFilter operation(FilterOperation? operation) =>
-      this(operation: operation);
+  VideoFilter operation(FilterOperation? operation) => this(operation: operation);
 
   @override
   VideoFilter type(FilterType? type) => this(type: type);
@@ -73,8 +72,7 @@ class _$VideoFilterCWProxyImpl implements _$VideoFilterCWProxy {
   VideoFilter filterAll(bool filterAll) => this(filterAll: filterAll);
 
   @override
-  VideoFilter hideFromFeed(bool hideFromFeed) =>
-      this(hideFromFeed: hideFromFeed);
+  VideoFilter hideFromFeed(bool hideFromFeed) => this(hideFromFeed: hideFromFeed);
 
   @override
   VideoFilter daysOfWeek(List<int> daysOfWeek) => this(daysOfWeek: daysOfWeek);

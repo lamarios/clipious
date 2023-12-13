@@ -12,7 +12,7 @@ import 'add_to_queue_button.dart';
 class VideoModalSheet extends StatelessWidget {
   final BaseVideo video;
 
-  const VideoModalSheet({Key? key, required this.video}) : super(key: key);
+  const VideoModalSheet({super.key, required this.video});
 
   static showVideoModalSheet(BuildContext context, BaseVideo video) {
     showModalBottomSheet<void>(
@@ -77,10 +77,7 @@ class VideoModalSheet extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   IconButton.filledTonal(
-                      onPressed:
-                          AddToQueueButton.canAddToQueue(context, [video])
-                              ? () => addToQueue(context)
-                              : null,
+                      onPressed: AddToQueueButton.canAddToQueue(context, [video]) ? () => addToQueue(context) : null,
                       icon: const Icon(Icons.playlist_play)),
                   Text(locals.addToQueueList)
                 ],
@@ -91,9 +88,7 @@ class VideoModalSheet extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  IconButton.filledTonal(
-                      onPressed: () => playNext(context),
-                      icon: const Icon(Icons.play_arrow)),
+                  IconButton.filledTonal(onPressed: () => playNext(context), icon: const Icon(Icons.play_arrow)),
                   Text(locals.playNext)
                 ],
               ),
@@ -103,9 +98,7 @@ class VideoModalSheet extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  IconButton.filledTonal(
-                      onPressed: () => downloadVideo(context),
-                      icon: const Icon(Icons.download)),
+                  IconButton.filledTonal(onPressed: () => downloadVideo(context), icon: const Icon(Icons.download)),
                   Text(locals.download)
                 ],
               ),

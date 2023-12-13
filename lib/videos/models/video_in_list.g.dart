@@ -66,8 +66,7 @@ class _$VideoInListCWProxyImpl implements _$VideoInListCWProxy {
   VideoInList title(String title) => this(title: title);
 
   @override
-  VideoInList lengthSeconds(int lengthSeconds) =>
-      this(lengthSeconds: lengthSeconds);
+  VideoInList lengthSeconds(int lengthSeconds) => this(lengthSeconds: lengthSeconds);
 
   @override
   VideoInList author(String? author) => this(author: author);
@@ -79,8 +78,7 @@ class _$VideoInListCWProxyImpl implements _$VideoInListCWProxy {
   VideoInList authorUrl(String? authorUrl) => this(authorUrl: authorUrl);
 
   @override
-  VideoInList videoThumbnails(List<ImageObject> videoThumbnails) =>
-      this(videoThumbnails: videoThumbnails);
+  VideoInList videoThumbnails(List<ImageObject> videoThumbnails) => this(videoThumbnails: videoThumbnails);
 
   @override
   VideoInList viewCount(int? viewCount) => this(viewCount: viewCount);
@@ -95,8 +93,7 @@ class _$VideoInListCWProxyImpl implements _$VideoInListCWProxy {
   VideoInList indexId(String? indexId) => this(indexId: indexId);
 
   @override
-  VideoInList publishedText(String? publishedText) =>
-      this(publishedText: publishedText);
+  VideoInList publishedText(String? publishedText) => this(publishedText: publishedText);
 
   @override
 
@@ -193,15 +190,12 @@ VideoInList _$VideoInListFromJson(Map<String, dynamic> json) => VideoInList(
       json['authorUrl'] as String?,
       json['published'] as int?,
       json['publishedText'] as String?,
-      (json['videoThumbnails'] as List<dynamic>)
-          .map((e) => ImageObject.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      (json['videoThumbnails'] as List<dynamic>).map((e) => ImageObject.fromJson(e as Map<String, dynamic>)).toList(),
     )
       ..index = json['index'] as int?
       ..indexId = json['indexId'] as String?;
 
-Map<String, dynamic> _$VideoInListToJson(VideoInList instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$VideoInListToJson(VideoInList instance) => <String, dynamic>{
       'videoId': instance.videoId,
       'title': instance.title,
       'lengthSeconds': instance.lengthSeconds,

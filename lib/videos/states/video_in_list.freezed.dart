@@ -21,22 +21,19 @@ mixin _$VideoInListState {
   DownloadedVideo? get offlineVideo => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $VideoInListStateCopyWith<VideoInListState> get copyWith =>
-      throw _privateConstructorUsedError;
+  $VideoInListStateCopyWith<VideoInListState> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $VideoInListStateCopyWith<$Res> {
-  factory $VideoInListStateCopyWith(
-          VideoInListState value, $Res Function(VideoInListState) then) =
+  factory $VideoInListStateCopyWith(VideoInListState value, $Res Function(VideoInListState) then) =
       _$VideoInListStateCopyWithImpl<$Res, VideoInListState>;
   @useResult
   $Res call({double progress, BaseVideo? video, DownloadedVideo? offlineVideo});
 }
 
 /// @nodoc
-class _$VideoInListStateCopyWithImpl<$Res, $Val extends VideoInListState>
-    implements $VideoInListStateCopyWith<$Res> {
+class _$VideoInListStateCopyWithImpl<$Res, $Val extends VideoInListState> implements $VideoInListStateCopyWith<$Res> {
   _$VideoInListStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -69,10 +66,8 @@ class _$VideoInListStateCopyWithImpl<$Res, $Val extends VideoInListState>
 }
 
 /// @nodoc
-abstract class _$$VideoInListStateImplCopyWith<$Res>
-    implements $VideoInListStateCopyWith<$Res> {
-  factory _$$VideoInListStateImplCopyWith(_$VideoInListStateImpl value,
-          $Res Function(_$VideoInListStateImpl) then) =
+abstract class _$$VideoInListStateImplCopyWith<$Res> implements $VideoInListStateCopyWith<$Res> {
+  factory _$$VideoInListStateImplCopyWith(_$VideoInListStateImpl value, $Res Function(_$VideoInListStateImpl) then) =
       __$$VideoInListStateImplCopyWithImpl<$Res>;
   @override
   @useResult
@@ -80,11 +75,9 @@ abstract class _$$VideoInListStateImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$VideoInListStateImplCopyWithImpl<$Res>
-    extends _$VideoInListStateCopyWithImpl<$Res, _$VideoInListStateImpl>
+class __$$VideoInListStateImplCopyWithImpl<$Res> extends _$VideoInListStateCopyWithImpl<$Res, _$VideoInListStateImpl>
     implements _$$VideoInListStateImplCopyWith<$Res> {
-  __$$VideoInListStateImplCopyWithImpl(_$VideoInListStateImpl _value,
-      $Res Function(_$VideoInListStateImpl) _then)
+  __$$VideoInListStateImplCopyWithImpl(_$VideoInListStateImpl _value, $Res Function(_$VideoInListStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -114,10 +107,8 @@ class __$$VideoInListStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$VideoInListStateImpl implements _VideoInListState {
-  const _$VideoInListStateImpl(
-      {this.progress = 0, this.video, this.offlineVideo})
-      : assert(video == null || offlineVideo == null,
-            'cannot provide both video and offline video');
+  const _$VideoInListStateImpl({this.progress = 0, this.video, this.offlineVideo})
+      : assert(video == null || offlineVideo == null, 'cannot provide both video and offline video');
 
   @override
   @JsonKey()
@@ -137,11 +128,9 @@ class _$VideoInListStateImpl implements _VideoInListState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$VideoInListStateImpl &&
-            (identical(other.progress, progress) ||
-                other.progress == progress) &&
+            (identical(other.progress, progress) || other.progress == progress) &&
             (identical(other.video, video) || other.video == video) &&
-            (identical(other.offlineVideo, offlineVideo) ||
-                other.offlineVideo == offlineVideo));
+            (identical(other.offlineVideo, offlineVideo) || other.offlineVideo == offlineVideo));
   }
 
   @override
@@ -151,15 +140,12 @@ class _$VideoInListStateImpl implements _VideoInListState {
   @override
   @pragma('vm:prefer-inline')
   _$$VideoInListStateImplCopyWith<_$VideoInListStateImpl> get copyWith =>
-      __$$VideoInListStateImplCopyWithImpl<_$VideoInListStateImpl>(
-          this, _$identity);
+      __$$VideoInListStateImplCopyWithImpl<_$VideoInListStateImpl>(this, _$identity);
 }
 
 abstract class _VideoInListState implements VideoInListState {
   const factory _VideoInListState(
-      {final double progress,
-      final BaseVideo? video,
-      final DownloadedVideo? offlineVideo}) = _$VideoInListStateImpl;
+      {final double progress, final BaseVideo? video, final DownloadedVideo? offlineVideo}) = _$VideoInListStateImpl;
 
   @override
   double get progress;
@@ -169,6 +155,5 @@ abstract class _VideoInListState implements VideoInListState {
   DownloadedVideo? get offlineVideo;
   @override
   @JsonKey(ignore: true)
-  _$$VideoInListStateImplCopyWith<_$VideoInListStateImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$VideoInListStateImplCopyWith<_$VideoInListStateImpl> get copyWith => throw _privateConstructorUsedError;
 }

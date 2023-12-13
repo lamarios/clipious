@@ -10,7 +10,7 @@ import '../../states/download_manager.dart';
 
 @RoutePage()
 class DownloadManagerScreen extends StatelessWidget {
-  const DownloadManagerScreen({Key? key}) : super(key: key);
+  const DownloadManagerScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -29,13 +29,11 @@ class DownloadManagerScreen extends StatelessWidget {
             var cubit = context.read<DownloadManagerCubit>();
             return _.videos.isNotEmpty
                 ? Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: innerHorizontalPadding),
+                    padding: const EdgeInsets.symmetric(horizontal: innerHorizontalPadding),
                     child: Column(
                       children: [
                         FilledButton.tonal(
-                            onPressed:
-                                cubit.canPlayAll() ? cubit.playAll : null,
+                            onPressed: cubit.canPlayAll() ? cubit.playAll : null,
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
@@ -56,8 +54,7 @@ class DownloadManagerScreen extends StatelessWidget {
                                   trailingActions: [
                                     SwipeAction(
                                       performsFirstActionWithFullSwipe: true,
-                                      icon: const Icon(Icons.delete,
-                                          color: Colors.white),
+                                      icon: const Icon(Icons.delete, color: Colors.white),
                                       onTap: (handler) async {
                                         await handler(true);
                                         cubit.deleteVideo(v);

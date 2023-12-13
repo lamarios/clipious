@@ -1,7 +1,6 @@
 import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/player/states/player.dart';
 import 'package:invidious/player/views/components/video_player.dart';
 import 'package:invidious/settings/states/settings.dart';
@@ -13,14 +12,11 @@ import '../../../../videos/models/base_video.dart';
 class TvPlayerScreen extends StatelessWidget {
   final List<BaseVideo> videos;
 
-  const TvPlayerScreen({Key? key, required this.videos}) : super(key: key);
+  const TvPlayerScreen({super.key, required this.videos});
 
   @override
   Widget build(BuildContext context) {
-    ColorScheme colors = Theme.of(context).colorScheme;
-    TextTheme textTheme = Theme.of(context).textTheme;
     var settings = context.read<SettingsCubit>();
-    var locals = AppLocalizations.of(context)!;
     return MultiBlocProvider(
       providers: [
         BlocProvider(

@@ -21,15 +21,12 @@ class SubscriptionScreen extends StatelessWidget {
         scrolledUnderElevation: 0,
         actions: [
           IconButton(
-              onPressed: () =>
-                  AutoRouter.of(context).push(const ManageSubscriptionsRoute()),
+              onPressed: () => AutoRouter.of(context).push(const ManageSubscriptionsRoute()),
               icon: const Icon(Icons.checklist))
         ],
       ),
       body: const SafeArea(
-        child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: innerHorizontalPadding),
-            child: Subscriptions()),
+        child: Padding(padding: EdgeInsets.symmetric(horizontal: innerHorizontalPadding), child: Subscriptions()),
       ),
     );
   }

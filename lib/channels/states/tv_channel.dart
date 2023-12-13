@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:invidious/globals.dart';
@@ -30,8 +29,7 @@ class TvChannelCubit extends Cubit<TvChannelController> {
 
   scrollToTop(bool scroll) {
     if (scroll) {
-      scrollController.animateTo(0,
-          duration: animationDuration ~/ 2, curve: Curves.easeInOutQuad);
+      scrollController.animateTo(0, duration: animationDuration ~/ 2, curve: Curves.easeInOutQuad);
     }
   }
 

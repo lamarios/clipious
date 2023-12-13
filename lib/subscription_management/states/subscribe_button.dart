@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../globals.dart';
@@ -44,7 +43,6 @@ class SubscribeButtonState with _$SubscribeButtonState {
   }) = _SubscribeButtonState;
 
   static SubscribeButtonState init(String channelId) {
-    return SubscribeButtonState(
-        channelId: channelId, isLoggedIn: db.isLoggedInToCurrentServer());
+    return SubscribeButtonState(channelId: channelId, isLoggedIn: db.isLoggedInToCurrentServer());
   }
 }

@@ -21,22 +21,19 @@ mixin _$VideoFilterChannelState {
   bool get loading => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $VideoFilterChannelStateCopyWith<VideoFilterChannelState> get copyWith =>
-      throw _privateConstructorUsedError;
+  $VideoFilterChannelStateCopyWith<VideoFilterChannelState> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $VideoFilterChannelStateCopyWith<$Res> {
-  factory $VideoFilterChannelStateCopyWith(VideoFilterChannelState value,
-          $Res Function(VideoFilterChannelState) then) =
+  factory $VideoFilterChannelStateCopyWith(VideoFilterChannelState value, $Res Function(VideoFilterChannelState) then) =
       _$VideoFilterChannelStateCopyWithImpl<$Res, VideoFilterChannelState>;
   @useResult
   $Res call({List<VideoFilter> filters, Channel? channel, bool loading});
 }
 
 /// @nodoc
-class _$VideoFilterChannelStateCopyWithImpl<$Res,
-        $Val extends VideoFilterChannelState>
+class _$VideoFilterChannelStateCopyWithImpl<$Res, $Val extends VideoFilterChannelState>
     implements $VideoFilterChannelStateCopyWith<$Res> {
   _$VideoFilterChannelStateCopyWithImpl(this._value, this._then);
 
@@ -70,11 +67,9 @@ class _$VideoFilterChannelStateCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$VideoFilterChannelStateImplCopyWith<$Res>
-    implements $VideoFilterChannelStateCopyWith<$Res> {
+abstract class _$$VideoFilterChannelStateImplCopyWith<$Res> implements $VideoFilterChannelStateCopyWith<$Res> {
   factory _$$VideoFilterChannelStateImplCopyWith(
-          _$VideoFilterChannelStateImpl value,
-          $Res Function(_$VideoFilterChannelStateImpl) then) =
+          _$VideoFilterChannelStateImpl value, $Res Function(_$VideoFilterChannelStateImpl) then) =
       __$$VideoFilterChannelStateImplCopyWithImpl<$Res>;
   @override
   @useResult
@@ -83,12 +78,10 @@ abstract class _$$VideoFilterChannelStateImplCopyWith<$Res>
 
 /// @nodoc
 class __$$VideoFilterChannelStateImplCopyWithImpl<$Res>
-    extends _$VideoFilterChannelStateCopyWithImpl<$Res,
-        _$VideoFilterChannelStateImpl>
+    extends _$VideoFilterChannelStateCopyWithImpl<$Res, _$VideoFilterChannelStateImpl>
     implements _$$VideoFilterChannelStateImplCopyWith<$Res> {
   __$$VideoFilterChannelStateImplCopyWithImpl(
-      _$VideoFilterChannelStateImpl _value,
-      $Res Function(_$VideoFilterChannelStateImpl) _then)
+      _$VideoFilterChannelStateImpl _value, $Res Function(_$VideoFilterChannelStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -118,10 +111,7 @@ class __$$VideoFilterChannelStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$VideoFilterChannelStateImpl implements _VideoFilterChannelState {
-  const _$VideoFilterChannelStateImpl(
-      {required final List<VideoFilter> filters,
-      this.channel,
-      this.loading = false})
+  const _$VideoFilterChannelStateImpl({required final List<VideoFilter> filters, this.channel, this.loading = false})
       : _filters = filters;
 
   final List<VideoFilter> _filters;
@@ -154,15 +144,13 @@ class _$VideoFilterChannelStateImpl implements _VideoFilterChannelState {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType,
-      const DeepCollectionEquality().hash(_filters), channel, loading);
+  int get hashCode => Object.hash(runtimeType, const DeepCollectionEquality().hash(_filters), channel, loading);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$VideoFilterChannelStateImplCopyWith<_$VideoFilterChannelStateImpl>
-      get copyWith => __$$VideoFilterChannelStateImplCopyWithImpl<
-          _$VideoFilterChannelStateImpl>(this, _$identity);
+  _$$VideoFilterChannelStateImplCopyWith<_$VideoFilterChannelStateImpl> get copyWith =>
+      __$$VideoFilterChannelStateImplCopyWithImpl<_$VideoFilterChannelStateImpl>(this, _$identity);
 }
 
 abstract class _VideoFilterChannelState implements VideoFilterChannelState {
@@ -179,6 +167,6 @@ abstract class _VideoFilterChannelState implements VideoFilterChannelState {
   bool get loading;
   @override
   @JsonKey(ignore: true)
-  _$$VideoFilterChannelStateImplCopyWith<_$VideoFilterChannelStateImpl>
-      get copyWith => throw _privateConstructorUsedError;
+  _$$VideoFilterChannelStateImplCopyWith<_$VideoFilterChannelStateImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }

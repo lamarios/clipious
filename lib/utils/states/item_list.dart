@@ -1,12 +1,11 @@
 import 'package:bloc/bloc.dart';
-import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:invidious/settings/models/errors/invidiousServiceError.dart';
+import 'package:invidious/settings/models/errors/invidious_service_error.dart';
 import 'package:logging/logging.dart';
 
-import '../models/paginatedList.dart';
+import '../models/paginated_list.dart';
 
 part 'item_list.freezed.dart';
 
@@ -34,10 +33,8 @@ class ItemListCubit<T> extends Cubit<ItemListState<T>> {
 
   onScrollEvent() {
     if (scrollController.hasClients) {
-      if (scrollController.position.maxScrollExtent * 0.9 <
-          scrollController.offset) {
-        EasyDebounce.debounce('loading-more-videos',
-            const Duration(milliseconds: 500), getMoreItems);
+      if (scrollController.position.maxScrollExtent * 0.9 < scrollController.offset) {
+        EasyDebounce.debounce('loading-more-videos', const Duration(milliseconds: 500), getMoreItems);
       }
     }
   }

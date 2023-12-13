@@ -1,7 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:invidious/database.dart';
 import 'package:invidious/globals.dart';
 import 'package:logging/logging.dart';
 
@@ -57,7 +55,6 @@ class VideoFilterCubit extends Cubit<VideoFilterState> {
 
 @freezed
 class VideoFilterState with _$VideoFilterState {
-  const factory VideoFilterState(
-      {@Default([]) List<VideoFilter> filters,
-      @Default(false) bool hideFilteredVideos}) = _VideoFilterState;
+  const factory VideoFilterState({@Default([]) List<VideoFilter> filters, @Default(false) bool hideFilteredVideos}) =
+      _VideoFilterState;
 }

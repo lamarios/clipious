@@ -21,24 +21,21 @@ mixin _$SearchableSelectFromListState<T> {
   bool get loading => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $SearchableSelectFromListStateCopyWith<T, SearchableSelectFromListState<T>>
-      get copyWith => throw _privateConstructorUsedError;
+  $SearchableSelectFromListStateCopyWith<T, SearchableSelectFromListState<T>> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $SearchableSelectFromListStateCopyWith<T, $Res> {
   factory $SearchableSelectFromListStateCopyWith(
-          SearchableSelectFromListState<T> value,
-          $Res Function(SearchableSelectFromListState<T>) then) =
-      _$SearchableSelectFromListStateCopyWithImpl<T, $Res,
-          SearchableSelectFromListState<T>>;
+          SearchableSelectFromListState<T> value, $Res Function(SearchableSelectFromListState<T>) then) =
+      _$SearchableSelectFromListStateCopyWithImpl<T, $Res, SearchableSelectFromListState<T>>;
   @useResult
   $Res call({List<T> items, TextEditingController controller, bool loading});
 }
 
 /// @nodoc
-class _$SearchableSelectFromListStateCopyWithImpl<T, $Res,
-        $Val extends SearchableSelectFromListState<T>>
+class _$SearchableSelectFromListStateCopyWithImpl<T, $Res, $Val extends SearchableSelectFromListState<T>>
     implements $SearchableSelectFromListStateCopyWith<T, $Res> {
   _$SearchableSelectFromListStateCopyWithImpl(this._value, this._then);
 
@@ -75,8 +72,7 @@ class _$SearchableSelectFromListStateCopyWithImpl<T, $Res,
 abstract class _$$SearchableSelectFromListStateImplCopyWith<T, $Res>
     implements $SearchableSelectFromListStateCopyWith<T, $Res> {
   factory _$$SearchableSelectFromListStateImplCopyWith(
-          _$SearchableSelectFromListStateImpl<T> value,
-          $Res Function(_$SearchableSelectFromListStateImpl<T>) then) =
+          _$SearchableSelectFromListStateImpl<T> value, $Res Function(_$SearchableSelectFromListStateImpl<T>) then) =
       __$$SearchableSelectFromListStateImplCopyWithImpl<T, $Res>;
   @override
   @useResult
@@ -85,12 +81,10 @@ abstract class _$$SearchableSelectFromListStateImplCopyWith<T, $Res>
 
 /// @nodoc
 class __$$SearchableSelectFromListStateImplCopyWithImpl<T, $Res>
-    extends _$SearchableSelectFromListStateCopyWithImpl<T, $Res,
-        _$SearchableSelectFromListStateImpl<T>>
+    extends _$SearchableSelectFromListStateCopyWithImpl<T, $Res, _$SearchableSelectFromListStateImpl<T>>
     implements _$$SearchableSelectFromListStateImplCopyWith<T, $Res> {
   __$$SearchableSelectFromListStateImplCopyWithImpl(
-      _$SearchableSelectFromListStateImpl<T> _value,
-      $Res Function(_$SearchableSelectFromListStateImpl<T>) _then)
+      _$SearchableSelectFromListStateImpl<T> _value, $Res Function(_$SearchableSelectFromListStateImpl<T>) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -119,10 +113,8 @@ class __$$SearchableSelectFromListStateImplCopyWithImpl<T, $Res>
 
 /// @nodoc
 
-class _$SearchableSelectFromListStateImpl<T>
-    implements _SearchableSelectFromListState<T> {
-  const _$SearchableSelectFromListStateImpl(final List<T> items,
-      {required this.controller, this.loading = false})
+class _$SearchableSelectFromListStateImpl<T> implements _SearchableSelectFromListState<T> {
+  const _$SearchableSelectFromListStateImpl(final List<T> items, {required this.controller, this.loading = false})
       : _items = items;
 
   final List<T> _items;
@@ -150,29 +142,23 @@ class _$SearchableSelectFromListStateImpl<T>
         (other.runtimeType == runtimeType &&
             other is _$SearchableSelectFromListStateImpl<T> &&
             const DeepCollectionEquality().equals(other._items, _items) &&
-            (identical(other.controller, controller) ||
-                other.controller == controller) &&
+            (identical(other.controller, controller) || other.controller == controller) &&
             (identical(other.loading, loading) || other.loading == loading));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType,
-      const DeepCollectionEquality().hash(_items), controller, loading);
+  int get hashCode => Object.hash(runtimeType, const DeepCollectionEquality().hash(_items), controller, loading);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$SearchableSelectFromListStateImplCopyWith<T,
-          _$SearchableSelectFromListStateImpl<T>>
-      get copyWith => __$$SearchableSelectFromListStateImplCopyWithImpl<T,
-          _$SearchableSelectFromListStateImpl<T>>(this, _$identity);
+  _$$SearchableSelectFromListStateImplCopyWith<T, _$SearchableSelectFromListStateImpl<T>> get copyWith =>
+      __$$SearchableSelectFromListStateImplCopyWithImpl<T, _$SearchableSelectFromListStateImpl<T>>(this, _$identity);
 }
 
-abstract class _SearchableSelectFromListState<T>
-    implements SearchableSelectFromListState<T> {
+abstract class _SearchableSelectFromListState<T> implements SearchableSelectFromListState<T> {
   const factory _SearchableSelectFromListState(final List<T> items,
-      {required final TextEditingController controller,
-      final bool loading}) = _$SearchableSelectFromListStateImpl<T>;
+      {required final TextEditingController controller, final bool loading}) = _$SearchableSelectFromListStateImpl<T>;
 
   @override
   List<T> get items;
@@ -182,7 +168,6 @@ abstract class _SearchableSelectFromListState<T>
   bool get loading;
   @override
   @JsonKey(ignore: true)
-  _$$SearchableSelectFromListStateImplCopyWith<T,
-          _$SearchableSelectFromListStateImpl<T>>
-      get copyWith => throw _privateConstructorUsedError;
+  _$$SearchableSelectFromListStateImplCopyWith<T, _$SearchableSelectFromListStateImpl<T>> get copyWith =>
+      throw _privateConstructorUsedError;
 }

@@ -19,8 +19,7 @@ class EditLayoutCubit extends Cubit<HomeLayout> {
     if (state.smallSources.length < maxSmallSources) {
       state.smallSources.add(HomeDataSource.values
           .where((element) => element.small)
-          .firstWhere(
-              (e) => e != state.bigSource && !state.smallSources.contains(e)));
+          .firstWhere((e) => e != state.bigSource && !state.smallSources.contains(e)));
     }
     state.smallSources = List.of(state.smallSources);
     emit(state);

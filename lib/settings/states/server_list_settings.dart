@@ -1,7 +1,4 @@
-import 'dart:math';
-
 import 'package:bloc/bloc.dart';
-import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:logging/logging.dart';
@@ -19,8 +16,7 @@ enum PublicServerErrors { none, couldNotGetList }
 final log = Logger('ManagerServerView');
 
 class ServerListSettingsCubit extends Cubit<ServerListSettingsState> {
-  final TextEditingController addServerController =
-      TextEditingController(text: 'https://');
+  final TextEditingController addServerController = TextEditingController(text: 'https://');
   final AppCubit appCubit;
 
   ServerListSettingsCubit(super.initialState, this.appCubit) {
@@ -41,17 +37,14 @@ class ServerListSettingsCubit extends Cubit<ServerListSettingsState> {
   }
 
   refreshServers() {
-    var servers = state.publicServers
-        .where((s) =>
-            state.dbServers.indexWhere((element) => element.url == s.url) == -1)
-        .toList();
+    var servers =
+        state.publicServers.where((s) => state.dbServers.indexWhere((element) => element.url == s.url) == -1).toList();
 
     emit(state.copyWith(dbServers: db.getServers(), publicServers: servers));
   }
 
   getPublicServers() async {
-    emit(state.copyWith(
-        pinging: true, publicServersError: PublicServerErrors.none));
+    emit(state.copyWith(pinging: true, publicServersError: PublicServerErrors.none));
     try {
       var public = await service.getPublicServers();
 
@@ -65,9 +58,9 @@ class ServerListSettingsCubit extends Cubit<ServerListSettingsState> {
       int progress = 0;
       List<Server?> pingedServers = await Future.wait(servers.map((e) async {
         try {
-          e.ping = await service.pingServer(e.url).timeout(
-              const Duration(seconds: pingTimeout),
-              onTimeout: () => const Duration(seconds: pingTimeout));
+          e.ping = await service
+              .pingServer(e.url)
+              .timeout(const Duration(seconds: pingTimeout), onTimeout: () => const Duration(seconds: pingTimeout));
           progress++;
 
           emit(state.copyWith(publicServerProgress: progress / servers.length));
@@ -78,38 +71,29 @@ class ServerListSettingsCubit extends Cubit<ServerListSettingsState> {
         }
       }));
 
-      List<Server> successfullyPingedServers = pingedServers
-          .where((element) => element != null)
-          .map((e) => e!)
-          .toList();
+      List<Server> successfullyPingedServers =
+          pingedServers.where((element) => element != null).map((e) => e!).toList();
 
       successfullyPingedServers.sort((a, b) =>
-          (a.ping ?? const Duration(seconds: pingTimeout))
-              .compareTo(b.ping ?? const Duration(seconds: pingTimeout)));
+          (a.ping ?? const Duration(seconds: pingTimeout)).compareTo(b.ping ?? const Duration(seconds: pingTimeout)));
 
       if (!isClosed) {
         emit(state.copyWith(
-            pinging: false,
-            publicServers: successfullyPingedServers,
-            publicServersError: PublicServerErrors.none));
+            pinging: false, publicServers: successfullyPingedServers, publicServersError: PublicServerErrors.none));
       }
     } catch (err) {
       log.severe("couldn't get public playlist", err);
       if (!isClosed) {
-        emit(this
-            .state
-            .copyWith(publicServersError: PublicServerErrors.couldNotGetList));
+        emit(state.copyWith(publicServersError: PublicServerErrors.couldNotGetList));
       }
       rethrow;
     }
   }
 
   bool isLoggedInToServer(String url) {
-    Server server = state.dbServers
-        .firstWhere((s) => s.url == url, orElse: () => Server(url: 'notFound'));
+    Server server = state.dbServers.firstWhere((s) => s.url == url, orElse: () => Server(url: 'notFound'));
 
-    return (server.authToken?.isNotEmpty ?? false) ||
-        (server.sidCookie?.isNotEmpty ?? false);
+    return (server.authToken?.isNotEmpty ?? false) || (server.sidCookie?.isNotEmpty ?? false);
   }
 
   saveServer() async {
@@ -143,6 +127,5 @@ class ServerListSettingsState with _$ServerListSettingsState {
       required List<Server> publicServers,
       @Default(0) double publicServerProgress,
       @Default(true) bool pinging,
-      @Default(PublicServerErrors.none)
-      PublicServerErrors publicServersError}) = _ServerListSettingsState;
+      @Default(PublicServerErrors.none) PublicServerErrors publicServersError}) = _ServerListSettingsState;
 }

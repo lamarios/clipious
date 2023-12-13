@@ -20,22 +20,19 @@ mixin _$CommentsContainerState {
   String get sortBy => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $CommentsContainerStateCopyWith<CommentsContainerState> get copyWith =>
-      throw _privateConstructorUsedError;
+  $CommentsContainerStateCopyWith<CommentsContainerState> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $CommentsContainerStateCopyWith<$Res> {
-  factory $CommentsContainerStateCopyWith(CommentsContainerState value,
-          $Res Function(CommentsContainerState) then) =
+  factory $CommentsContainerStateCopyWith(CommentsContainerState value, $Res Function(CommentsContainerState) then) =
       _$CommentsContainerStateCopyWithImpl<$Res, CommentsContainerState>;
   @useResult
   $Res call({String source, String sortBy});
 }
 
 /// @nodoc
-class _$CommentsContainerStateCopyWithImpl<$Res,
-        $Val extends CommentsContainerState>
+class _$CommentsContainerStateCopyWithImpl<$Res, $Val extends CommentsContainerState>
     implements $CommentsContainerStateCopyWith<$Res> {
   _$CommentsContainerStateCopyWithImpl(this._value, this._then);
 
@@ -64,11 +61,9 @@ class _$CommentsContainerStateCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$CommentsContainerStateImplCopyWith<$Res>
-    implements $CommentsContainerStateCopyWith<$Res> {
+abstract class _$$CommentsContainerStateImplCopyWith<$Res> implements $CommentsContainerStateCopyWith<$Res> {
   factory _$$CommentsContainerStateImplCopyWith(
-          _$CommentsContainerStateImpl value,
-          $Res Function(_$CommentsContainerStateImpl) then) =
+          _$CommentsContainerStateImpl value, $Res Function(_$CommentsContainerStateImpl) then) =
       __$$CommentsContainerStateImplCopyWithImpl<$Res>;
   @override
   @useResult
@@ -77,12 +72,10 @@ abstract class _$$CommentsContainerStateImplCopyWith<$Res>
 
 /// @nodoc
 class __$$CommentsContainerStateImplCopyWithImpl<$Res>
-    extends _$CommentsContainerStateCopyWithImpl<$Res,
-        _$CommentsContainerStateImpl>
+    extends _$CommentsContainerStateCopyWithImpl<$Res, _$CommentsContainerStateImpl>
     implements _$$CommentsContainerStateImplCopyWith<$Res> {
   __$$CommentsContainerStateImplCopyWithImpl(
-      _$CommentsContainerStateImpl _value,
-      $Res Function(_$CommentsContainerStateImpl) _then)
+      _$CommentsContainerStateImpl _value, $Res Function(_$CommentsContainerStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -107,8 +100,7 @@ class __$$CommentsContainerStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$CommentsContainerStateImpl implements _CommentsContainerState {
-  const _$CommentsContainerStateImpl(
-      {this.source = 'youtube', this.sortBy = 'top'});
+  const _$CommentsContainerStateImpl({this.source = 'youtube', this.sortBy = 'top'});
 
   @override
   @JsonKey()
@@ -137,15 +129,12 @@ class _$CommentsContainerStateImpl implements _CommentsContainerState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$CommentsContainerStateImplCopyWith<_$CommentsContainerStateImpl>
-      get copyWith => __$$CommentsContainerStateImplCopyWithImpl<
-          _$CommentsContainerStateImpl>(this, _$identity);
+  _$$CommentsContainerStateImplCopyWith<_$CommentsContainerStateImpl> get copyWith =>
+      __$$CommentsContainerStateImplCopyWithImpl<_$CommentsContainerStateImpl>(this, _$identity);
 }
 
 abstract class _CommentsContainerState implements CommentsContainerState {
-  const factory _CommentsContainerState(
-      {final String source,
-      final String sortBy}) = _$CommentsContainerStateImpl;
+  const factory _CommentsContainerState({final String source, final String sortBy}) = _$CommentsContainerStateImpl;
 
   @override
   String get source;
@@ -153,6 +142,6 @@ abstract class _CommentsContainerState implements CommentsContainerState {
   String get sortBy;
   @override
   @JsonKey(ignore: true)
-  _$$CommentsContainerStateImplCopyWith<_$CommentsContainerStateImpl>
-      get copyWith => throw _privateConstructorUsedError;
+  _$$CommentsContainerStateImplCopyWith<_$CommentsContainerStateImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }

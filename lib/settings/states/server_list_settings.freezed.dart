@@ -20,18 +20,15 @@ mixin _$ServerListSettingsState {
   List<Server> get publicServers => throw _privateConstructorUsedError;
   double get publicServerProgress => throw _privateConstructorUsedError;
   bool get pinging => throw _privateConstructorUsedError;
-  PublicServerErrors get publicServersError =>
-      throw _privateConstructorUsedError;
+  PublicServerErrors get publicServersError => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $ServerListSettingsStateCopyWith<ServerListSettingsState> get copyWith =>
-      throw _privateConstructorUsedError;
+  $ServerListSettingsStateCopyWith<ServerListSettingsState> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $ServerListSettingsStateCopyWith<$Res> {
-  factory $ServerListSettingsStateCopyWith(ServerListSettingsState value,
-          $Res Function(ServerListSettingsState) then) =
+  factory $ServerListSettingsStateCopyWith(ServerListSettingsState value, $Res Function(ServerListSettingsState) then) =
       _$ServerListSettingsStateCopyWithImpl<$Res, ServerListSettingsState>;
   @useResult
   $Res call(
@@ -43,8 +40,7 @@ abstract class $ServerListSettingsStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$ServerListSettingsStateCopyWithImpl<$Res,
-        $Val extends ServerListSettingsState>
+class _$ServerListSettingsStateCopyWithImpl<$Res, $Val extends ServerListSettingsState>
     implements $ServerListSettingsStateCopyWith<$Res> {
   _$ServerListSettingsStateCopyWithImpl(this._value, this._then);
 
@@ -88,11 +84,9 @@ class _$ServerListSettingsStateCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$ServerListSettingsStateImplCopyWith<$Res>
-    implements $ServerListSettingsStateCopyWith<$Res> {
+abstract class _$$ServerListSettingsStateImplCopyWith<$Res> implements $ServerListSettingsStateCopyWith<$Res> {
   factory _$$ServerListSettingsStateImplCopyWith(
-          _$ServerListSettingsStateImpl value,
-          $Res Function(_$ServerListSettingsStateImpl) then) =
+          _$ServerListSettingsStateImpl value, $Res Function(_$ServerListSettingsStateImpl) then) =
       __$$ServerListSettingsStateImplCopyWithImpl<$Res>;
   @override
   @useResult
@@ -106,12 +100,10 @@ abstract class _$$ServerListSettingsStateImplCopyWith<$Res>
 
 /// @nodoc
 class __$$ServerListSettingsStateImplCopyWithImpl<$Res>
-    extends _$ServerListSettingsStateCopyWithImpl<$Res,
-        _$ServerListSettingsStateImpl>
+    extends _$ServerListSettingsStateCopyWithImpl<$Res, _$ServerListSettingsStateImpl>
     implements _$$ServerListSettingsStateImplCopyWith<$Res> {
   __$$ServerListSettingsStateImplCopyWithImpl(
-      _$ServerListSettingsStateImpl _value,
-      $Res Function(_$ServerListSettingsStateImpl) _then)
+      _$ServerListSettingsStateImpl _value, $Res Function(_$ServerListSettingsStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -196,10 +188,8 @@ class _$ServerListSettingsStateImpl implements _ServerListSettingsState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ServerListSettingsStateImpl &&
-            const DeepCollectionEquality()
-                .equals(other._dbServers, _dbServers) &&
-            const DeepCollectionEquality()
-                .equals(other._publicServers, _publicServers) &&
+            const DeepCollectionEquality().equals(other._dbServers, _dbServers) &&
+            const DeepCollectionEquality().equals(other._publicServers, _publicServers) &&
             (identical(other.publicServerProgress, publicServerProgress) ||
                 other.publicServerProgress == publicServerProgress) &&
             (identical(other.pinging, pinging) || other.pinging == pinging) &&
@@ -208,30 +198,23 @@ class _$ServerListSettingsStateImpl implements _ServerListSettingsState {
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(_dbServers),
-      const DeepCollectionEquality().hash(_publicServers),
-      publicServerProgress,
-      pinging,
-      publicServersError);
+  int get hashCode => Object.hash(runtimeType, const DeepCollectionEquality().hash(_dbServers),
+      const DeepCollectionEquality().hash(_publicServers), publicServerProgress, pinging, publicServersError);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$ServerListSettingsStateImplCopyWith<_$ServerListSettingsStateImpl>
-      get copyWith => __$$ServerListSettingsStateImplCopyWithImpl<
-          _$ServerListSettingsStateImpl>(this, _$identity);
+  _$$ServerListSettingsStateImplCopyWith<_$ServerListSettingsStateImpl> get copyWith =>
+      __$$ServerListSettingsStateImplCopyWithImpl<_$ServerListSettingsStateImpl>(this, _$identity);
 }
 
 abstract class _ServerListSettingsState implements ServerListSettingsState {
   const factory _ServerListSettingsState(
-          {required final List<Server> dbServers,
-          required final List<Server> publicServers,
-          final double publicServerProgress,
-          final bool pinging,
-          final PublicServerErrors publicServersError}) =
-      _$ServerListSettingsStateImpl;
+      {required final List<Server> dbServers,
+      required final List<Server> publicServers,
+      final double publicServerProgress,
+      final bool pinging,
+      final PublicServerErrors publicServersError}) = _$ServerListSettingsStateImpl;
 
   @override
   List<Server> get dbServers;
@@ -245,6 +228,6 @@ abstract class _ServerListSettingsState implements ServerListSettingsState {
   PublicServerErrors get publicServersError;
   @override
   @JsonKey(ignore: true)
-  _$$ServerListSettingsStateImplCopyWith<_$ServerListSettingsStateImpl>
-      get copyWith => throw _privateConstructorUsedError;
+  _$$ServerListSettingsStateImplCopyWith<_$ServerListSettingsStateImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }

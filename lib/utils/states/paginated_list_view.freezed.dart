@@ -21,24 +21,21 @@ mixin _$PaginatedListViewController<T> {
   bool get loading => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $PaginatedListViewControllerCopyWith<T, PaginatedListViewController<T>>
-      get copyWith => throw _privateConstructorUsedError;
+  $PaginatedListViewControllerCopyWith<T, PaginatedListViewController<T>> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $PaginatedListViewControllerCopyWith<T, $Res> {
   factory $PaginatedListViewControllerCopyWith(
-          PaginatedListViewController<T> value,
-          $Res Function(PaginatedListViewController<T>) then) =
-      _$PaginatedListViewControllerCopyWithImpl<T, $Res,
-          PaginatedListViewController<T>>;
+          PaginatedListViewController<T> value, $Res Function(PaginatedListViewController<T>) then) =
+      _$PaginatedListViewControllerCopyWithImpl<T, $Res, PaginatedListViewController<T>>;
   @useResult
   $Res call({PaginatedList<T> paginatedList, List<T> items, bool loading});
 }
 
 /// @nodoc
-class _$PaginatedListViewControllerCopyWithImpl<T, $Res,
-        $Val extends PaginatedListViewController<T>>
+class _$PaginatedListViewControllerCopyWithImpl<T, $Res, $Val extends PaginatedListViewController<T>>
     implements $PaginatedListViewControllerCopyWith<T, $Res> {
   _$PaginatedListViewControllerCopyWithImpl(this._value, this._then);
 
@@ -75,8 +72,7 @@ class _$PaginatedListViewControllerCopyWithImpl<T, $Res,
 abstract class _$$PaginatedListViewControllerImplCopyWith<T, $Res>
     implements $PaginatedListViewControllerCopyWith<T, $Res> {
   factory _$$PaginatedListViewControllerImplCopyWith(
-          _$PaginatedListViewControllerImpl<T> value,
-          $Res Function(_$PaginatedListViewControllerImpl<T>) then) =
+          _$PaginatedListViewControllerImpl<T> value, $Res Function(_$PaginatedListViewControllerImpl<T>) then) =
       __$$PaginatedListViewControllerImplCopyWithImpl<T, $Res>;
   @override
   @useResult
@@ -85,12 +81,10 @@ abstract class _$$PaginatedListViewControllerImplCopyWith<T, $Res>
 
 /// @nodoc
 class __$$PaginatedListViewControllerImplCopyWithImpl<T, $Res>
-    extends _$PaginatedListViewControllerCopyWithImpl<T, $Res,
-        _$PaginatedListViewControllerImpl<T>>
+    extends _$PaginatedListViewControllerCopyWithImpl<T, $Res, _$PaginatedListViewControllerImpl<T>>
     implements _$$PaginatedListViewControllerImplCopyWith<T, $Res> {
   __$$PaginatedListViewControllerImplCopyWithImpl(
-      _$PaginatedListViewControllerImpl<T> _value,
-      $Res Function(_$PaginatedListViewControllerImpl<T>) _then)
+      _$PaginatedListViewControllerImpl<T> _value, $Res Function(_$PaginatedListViewControllerImpl<T>) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -119,12 +113,9 @@ class __$$PaginatedListViewControllerImplCopyWithImpl<T, $Res>
 
 /// @nodoc
 
-class _$PaginatedListViewControllerImpl<T>
-    implements _PaginatedListViewController<T> {
+class _$PaginatedListViewControllerImpl<T> implements _PaginatedListViewController<T> {
   const _$PaginatedListViewControllerImpl(
-      {required this.paginatedList,
-      final List<T> items = const [],
-      this.loading = false})
+      {required this.paginatedList, final List<T> items = const [], this.loading = false})
       : _items = items;
 
   @override
@@ -152,27 +143,22 @@ class _$PaginatedListViewControllerImpl<T>
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$PaginatedListViewControllerImpl<T> &&
-            (identical(other.paginatedList, paginatedList) ||
-                other.paginatedList == paginatedList) &&
+            (identical(other.paginatedList, paginatedList) || other.paginatedList == paginatedList) &&
             const DeepCollectionEquality().equals(other._items, _items) &&
             (identical(other.loading, loading) || other.loading == loading));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, paginatedList,
-      const DeepCollectionEquality().hash(_items), loading);
+  int get hashCode => Object.hash(runtimeType, paginatedList, const DeepCollectionEquality().hash(_items), loading);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$PaginatedListViewControllerImplCopyWith<T,
-          _$PaginatedListViewControllerImpl<T>>
-      get copyWith => __$$PaginatedListViewControllerImplCopyWithImpl<T,
-          _$PaginatedListViewControllerImpl<T>>(this, _$identity);
+  _$$PaginatedListViewControllerImplCopyWith<T, _$PaginatedListViewControllerImpl<T>> get copyWith =>
+      __$$PaginatedListViewControllerImplCopyWithImpl<T, _$PaginatedListViewControllerImpl<T>>(this, _$identity);
 }
 
-abstract class _PaginatedListViewController<T>
-    implements PaginatedListViewController<T> {
+abstract class _PaginatedListViewController<T> implements PaginatedListViewController<T> {
   const factory _PaginatedListViewController(
       {required final PaginatedList<T> paginatedList,
       final List<T> items,
@@ -186,7 +172,6 @@ abstract class _PaginatedListViewController<T>
   bool get loading;
   @override
   @JsonKey(ignore: true)
-  _$$PaginatedListViewControllerImplCopyWith<T,
-          _$PaginatedListViewControllerImpl<T>>
-      get copyWith => throw _privateConstructorUsedError;
+  _$$PaginatedListViewControllerImplCopyWith<T, _$PaginatedListViewControllerImpl<T>> get copyWith =>
+      throw _privateConstructorUsedError;
 }

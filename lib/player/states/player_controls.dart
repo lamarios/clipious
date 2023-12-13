@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:invidious/player/models/mediaEvent.dart';
+import 'package:invidious/player/models/media_event.dart';
 import 'package:invidious/player/states/interfaces/media_player.dart';
 import 'package:logging/logging.dart';
 
@@ -24,9 +24,7 @@ class PlayerControlsCubit extends Cubit<PlayerControlsState> {
     log.fine("Controls ready!");
 
     emit(state.copyWith(
-        duration: player.duration,
-        muted: player.state.muted,
-        fullScreenState: player.state.fullScreenState));
+        duration: player.duration, muted: player.state.muted, fullScreenState: player.state.fullScreenState));
     showControls();
   }
 
@@ -56,8 +54,7 @@ class PlayerControlsCubit extends Cubit<PlayerControlsState> {
         break;
       case MediaEventType.progress:
         if (!state.draggingPositionSlider) {
-          emit(state.copyWith(
-              position: event.value, buffering: false, errored: false));
+          emit(state.copyWith(position: event.value, buffering: false, errored: false));
         }
         break;
       case MediaEventType.seek:
@@ -81,8 +78,8 @@ class PlayerControlsCubit extends Cubit<PlayerControlsState> {
         break;
       case MediaEventType.sponsorSkipped:
         emit(state.copyWith(showSponsorBlocked: true));
-        EasyDebounce.debounce('player-control-sponsor-blocked',
-            (animationDuration * 2) + Duration(seconds: 1), () {
+        EasyDebounce.debounce('player-control-sponsor-blocked', (animationDuration * 2) + const Duration(seconds: 1),
+            () {
           emit(state.copyWith(showSponsorBlocked: false));
         });
       default:
@@ -162,27 +159,23 @@ class PlayerControlsCubit extends Cubit<PlayerControlsState> {
 
   void doubleTapFastForward() {
     player.fastForward();
-    emit(state.copyWith(
-        doubleTapFastForwardedOpacity: 1, justDoubleTappedSkip: true));
-    EasyDebounce.debounce('fast-forward', const Duration(milliseconds: 250),
-        () {
+    emit(state.copyWith(doubleTapFastForwardedOpacity: 1, justDoubleTappedSkip: true));
+    EasyDebounce.debounce('fast-forward', const Duration(milliseconds: 250), () {
       emit(state.copyWith(doubleTapFastForwardedOpacity: 0));
     });
     // we prevent controls showing to avoid issues where if hte user taps 3 times it will show the controls right after
-    EasyDebounce.debounce('preventControlsShowing', Duration(seconds: 1), () {
+    EasyDebounce.debounce('preventControlsShowing', const Duration(seconds: 1), () {
       emit(state.copyWith(justDoubleTappedSkip: false));
     });
   }
 
   void doubleTapRewind() {
     player.rewind();
-    emit(state.copyWith(
-        doubleTapRewindedOpacity: 1, justDoubleTappedSkip: true));
+    emit(state.copyWith(doubleTapRewindedOpacity: 1, justDoubleTappedSkip: true));
     EasyDebounce.debounce('fast-rewind', const Duration(milliseconds: 250), () {
       emit(state.copyWith(doubleTapRewindedOpacity: 0));
     });
-    EasyDebounce.debounce('preventControlsShowing', const Duration(seconds: 1),
-        () {
+    EasyDebounce.debounce('preventControlsShowing', const Duration(seconds: 1), () {
       // we prevent controls showing to avoid issues where if hte user taps 3 times it will show the controls right after
       emit(state.copyWith(justDoubleTappedSkip: false));
     });

@@ -20,22 +20,19 @@ mixin _$DownloadModalSheetState {
   String get quality => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $DownloadModalSheetStateCopyWith<DownloadModalSheetState> get copyWith =>
-      throw _privateConstructorUsedError;
+  $DownloadModalSheetStateCopyWith<DownloadModalSheetState> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $DownloadModalSheetStateCopyWith<$Res> {
-  factory $DownloadModalSheetStateCopyWith(DownloadModalSheetState value,
-          $Res Function(DownloadModalSheetState) then) =
+  factory $DownloadModalSheetStateCopyWith(DownloadModalSheetState value, $Res Function(DownloadModalSheetState) then) =
       _$DownloadModalSheetStateCopyWithImpl<$Res, DownloadModalSheetState>;
   @useResult
   $Res call({bool audioOnly, String quality});
 }
 
 /// @nodoc
-class _$DownloadModalSheetStateCopyWithImpl<$Res,
-        $Val extends DownloadModalSheetState>
+class _$DownloadModalSheetStateCopyWithImpl<$Res, $Val extends DownloadModalSheetState>
     implements $DownloadModalSheetStateCopyWith<$Res> {
   _$DownloadModalSheetStateCopyWithImpl(this._value, this._then);
 
@@ -64,11 +61,9 @@ class _$DownloadModalSheetStateCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$DownloadModalSheetStateImplCopyWith<$Res>
-    implements $DownloadModalSheetStateCopyWith<$Res> {
+abstract class _$$DownloadModalSheetStateImplCopyWith<$Res> implements $DownloadModalSheetStateCopyWith<$Res> {
   factory _$$DownloadModalSheetStateImplCopyWith(
-          _$DownloadModalSheetStateImpl value,
-          $Res Function(_$DownloadModalSheetStateImpl) then) =
+          _$DownloadModalSheetStateImpl value, $Res Function(_$DownloadModalSheetStateImpl) then) =
       __$$DownloadModalSheetStateImplCopyWithImpl<$Res>;
   @override
   @useResult
@@ -77,12 +72,10 @@ abstract class _$$DownloadModalSheetStateImplCopyWith<$Res>
 
 /// @nodoc
 class __$$DownloadModalSheetStateImplCopyWithImpl<$Res>
-    extends _$DownloadModalSheetStateCopyWithImpl<$Res,
-        _$DownloadModalSheetStateImpl>
+    extends _$DownloadModalSheetStateCopyWithImpl<$Res, _$DownloadModalSheetStateImpl>
     implements _$$DownloadModalSheetStateImplCopyWith<$Res> {
   __$$DownloadModalSheetStateImplCopyWithImpl(
-      _$DownloadModalSheetStateImpl _value,
-      $Res Function(_$DownloadModalSheetStateImpl) _then)
+      _$DownloadModalSheetStateImpl _value, $Res Function(_$DownloadModalSheetStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -107,8 +100,7 @@ class __$$DownloadModalSheetStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$DownloadModalSheetStateImpl implements _DownloadModalSheetState {
-  const _$DownloadModalSheetStateImpl(
-      {this.audioOnly = false, this.quality = '720p'});
+  const _$DownloadModalSheetStateImpl({this.audioOnly = false, this.quality = '720p'});
 
   @override
   @JsonKey()
@@ -127,8 +119,7 @@ class _$DownloadModalSheetStateImpl implements _DownloadModalSheetState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$DownloadModalSheetStateImpl &&
-            (identical(other.audioOnly, audioOnly) ||
-                other.audioOnly == audioOnly) &&
+            (identical(other.audioOnly, audioOnly) || other.audioOnly == audioOnly) &&
             (identical(other.quality, quality) || other.quality == quality));
   }
 
@@ -138,15 +129,12 @@ class _$DownloadModalSheetStateImpl implements _DownloadModalSheetState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$DownloadModalSheetStateImplCopyWith<_$DownloadModalSheetStateImpl>
-      get copyWith => __$$DownloadModalSheetStateImplCopyWithImpl<
-          _$DownloadModalSheetStateImpl>(this, _$identity);
+  _$$DownloadModalSheetStateImplCopyWith<_$DownloadModalSheetStateImpl> get copyWith =>
+      __$$DownloadModalSheetStateImplCopyWithImpl<_$DownloadModalSheetStateImpl>(this, _$identity);
 }
 
 abstract class _DownloadModalSheetState implements DownloadModalSheetState {
-  const factory _DownloadModalSheetState(
-      {final bool audioOnly,
-      final String quality}) = _$DownloadModalSheetStateImpl;
+  const factory _DownloadModalSheetState({final bool audioOnly, final String quality}) = _$DownloadModalSheetStateImpl;
 
   @override
   bool get audioOnly;
@@ -154,6 +142,6 @@ abstract class _DownloadModalSheetState implements DownloadModalSheetState {
   String get quality;
   @override
   @JsonKey(ignore: true)
-  _$$DownloadModalSheetStateImplCopyWith<_$DownloadModalSheetStateImpl>
-      get copyWith => throw _privateConstructorUsedError;
+  _$$DownloadModalSheetStateImplCopyWith<_$DownloadModalSheetStateImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }

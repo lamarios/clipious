@@ -57,16 +57,13 @@ class _$AudioPlayerStateCWProxyImpl implements _$AudioPlayerStateCWProxy {
   AudioPlayerState player(AudioPlayer? player) => this(player: player);
 
   @override
-  AudioPlayerState audioLength(Duration audioLength) =>
-      this(audioLength: audioLength);
+  AudioPlayerState audioLength(Duration audioLength) => this(audioLength: audioLength);
 
   @override
-  AudioPlayerState audioPosition(Duration audioPosition) =>
-      this(audioPosition: audioPosition);
+  AudioPlayerState audioPosition(Duration audioPosition) => this(audioPosition: audioPosition);
 
   @override
-  AudioPlayerState previousSponsorCheck(int previousSponsorCheck) =>
-      this(previousSponsorCheck: previousSponsorCheck);
+  AudioPlayerState previousSponsorCheck(int previousSponsorCheck) => this(previousSponsorCheck: previousSponsorCheck);
 
   @override
   AudioPlayerState loading(bool loading) => this(loading: loading);
@@ -78,12 +75,10 @@ class _$AudioPlayerStateCWProxyImpl implements _$AudioPlayerStateCWProxy {
   AudioPlayerState video(Video? video) => this(video: video);
 
   @override
-  AudioPlayerState offlineVideo(DownloadedVideo? offlineVideo) =>
-      this(offlineVideo: offlineVideo);
+  AudioPlayerState offlineVideo(DownloadedVideo? offlineVideo) => this(offlineVideo: offlineVideo);
 
   @override
-  AudioPlayerState disableControls(bool? disableControls) =>
-      this(disableControls: disableControls);
+  AudioPlayerState disableControls(bool? disableControls) => this(disableControls: disableControls);
 
   @override
   AudioPlayerState playNow(bool? playNow) => this(playNow: playNow);
@@ -121,8 +116,7 @@ class _$AudioPlayerStateCWProxyImpl implements _$AudioPlayerStateCWProxy {
           ? _value.audioPosition
           // ignore: cast_nullable_to_non_nullable
           : audioPosition as Duration,
-      previousSponsorCheck == const $CopyWithPlaceholder() ||
-              previousSponsorCheck == null
+      previousSponsorCheck == const $CopyWithPlaceholder() || previousSponsorCheck == null
           ? _value.previousSponsorCheck
           // ignore: cast_nullable_to_non_nullable
           : previousSponsorCheck as int,

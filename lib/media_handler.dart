@@ -49,6 +49,7 @@ class MediaHandler extends BaseAudioHandler
     controller.fastForward();
   }
 
+  @override
   Future<void> rewind() async {
     controller.rewind();
   }

@@ -27,15 +27,11 @@ class CompactVideoCubit extends Cubit<CompactVideoState> {
           emit(state.copyWith(offlineVideoThumbnailPath: path));
         } else {
           EasyDebounce.debounce(
-              '${state.offlineVideo?.videoId}-compact-view-thumbnail',
-              const Duration(seconds: 1),
-              getThumbnail);
+              '${state.offlineVideo?.videoId}-compact-view-thumbnail', const Duration(seconds: 1), getThumbnail);
         }
       } catch (e) {
         EasyDebounce.debounce(
-            '${state.offlineVideo?.videoId}-compact-view-thumbnail',
-            const Duration(seconds: 1),
-            getThumbnail);
+            '${state.offlineVideo?.videoId}-compact-view-thumbnail', const Duration(seconds: 1), getThumbnail);
       }
     }
   }
@@ -43,7 +39,6 @@ class CompactVideoCubit extends Cubit<CompactVideoState> {
 
 @freezed
 class CompactVideoState with _$CompactVideoState {
-  const factory CompactVideoState(
-      {DownloadedVideo? offlineVideo,
-      String? offlineVideoThumbnailPath}) = _CompactVideoState;
+  const factory CompactVideoState({DownloadedVideo? offlineVideo, String? offlineVideoThumbnailPath}) =
+      _CompactVideoState;
 }

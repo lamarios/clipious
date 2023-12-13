@@ -2,7 +2,7 @@ import 'package:invidious/search/models/search_results.dart';
 import 'package:invidious/search/models/search_sort_by.dart';
 import 'package:invidious/search/models/search_type.dart';
 import 'package:invidious/utils/models/item_with_continuation.dart';
-import 'package:invidious/videos/models/userFeed.dart';
+import 'package:invidious/videos/models/user_feed.dart';
 import 'package:invidious/videos/models/video_in_list.dart';
 
 import '../../globals.dart';
@@ -131,8 +131,7 @@ class SubscriptionVideoList extends PaginatedVideoList {
 
   @override
   Future<List<VideoInList>> getItems() async {
-    UserFeed feed =
-        await service.getUserFeed(page: page, maxResults: maxResults);
+    UserFeed feed = await service.getUserFeed(page: page, maxResults: maxResults);
     List<VideoInList> subs = [];
     subs.addAll(feed.notifications ?? []);
     subs.addAll(feed.videos ?? []);
@@ -186,8 +185,7 @@ class SearchPaginatedList<T> extends PaginatedList<T> {
 
   @override
   Future<List<T>> getItems() async {
-    SearchResults results =
-        await service.search(query, type: type, page: page, sortBy: sortBy);
+    SearchResults results = await service.search(query, type: type, page: page, sortBy: sortBy);
     return getFromResults(results);
   }
 
@@ -239,8 +237,7 @@ class PageBasedPaginatedList<T> extends PaginatedList<T> {
   bool hasMore = true;
   final Future<List<T>> Function(int page, int maxResults) getItemsFunc;
 
-  PageBasedPaginatedList(
-      {required this.maxResults, required this.getItemsFunc});
+  PageBasedPaginatedList({required this.maxResults, required this.getItemsFunc});
 
   @override
   bool getHasMore() {

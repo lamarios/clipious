@@ -1,18 +1,13 @@
-import 'dart:ffi';
-
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/foundation.dart';
 import 'package:invidious/globals.dart';
-import 'package:invidious/main.dart';
 import 'package:invidious/notifications/models/db/subscription_notifications.dart';
 import 'package:invidious/router.dart';
 import 'package:logging/logging.dart';
 
 final log = Logger('notifications');
 
-const String playlistId = "playlistId",
-    lastSeenVideo = "lastSeenVideo",
-    channelId = "channelId";
+const String playlistId = "playlistId", lastSeenVideo = "lastSeenVideo", channelId = "channelId";
 
 enum NotificationTypes {
   foregroundService(
@@ -74,30 +69,25 @@ initializeNotifications() {
 class NotificationController {
   /// Use this method to detect when a new notification or a schedule is created
   @pragma("vm:entry-point")
-  static Future<void> onNotificationCreatedMethod(
-      ReceivedNotification receivedNotification) async {
+  static Future<void> onNotificationCreatedMethod(ReceivedNotification receivedNotification) async {
     // Your code goes here
   }
 
   /// Use this method to detect every time that a new notification is displayed
   @pragma("vm:entry-point")
-  static Future<void> onNotificationDisplayedMethod(
-      ReceivedNotification receivedNotification) async {
+  static Future<void> onNotificationDisplayedMethod(ReceivedNotification receivedNotification) async {
     // Your code goes here
   }
 
   /// Use this method to detect if the user dismissed a notification
   @pragma("vm:entry-point")
-  static Future<void> onDismissActionReceivedMethod(
-      ReceivedAction receivedAction) async {
+  static Future<void> onDismissActionReceivedMethod(ReceivedAction receivedAction) async {
     // Your code goes here
   }
 
   /// Use this method to detect when the user taps on a notification or action button
   @pragma("vm:entry-point")
-  static Future<void> onActionReceivedMethod(
-      ReceivedAction receivedAction) async {
-    print("notification tapped ${receivedAction.payload} ");
+  static Future<void> onActionReceivedMethod(ReceivedAction receivedAction) async {
     if (receivedAction.payload != null && receivedAction.payload!.isNotEmpty) {
       var payload = receivedAction.payload!;
       if (receivedAction.channelKey == NotificationTypes.channel.id &&
@@ -105,23 +95,17 @@ class NotificationController {
           payload.containsKey(lastSeenVideo)) {
         log.fine('Launching channel screen ${receivedAction.payload}');
         appRouter.push(ChannelRoute(channelId: payload[channelId]!));
-        db.setChannelNotificationLastViewedVideo(
-            payload[channelId]!, payload[lastSeenVideo]!);
-      } else if (receivedAction.channelKey == NotificationTypes.playlist.id &&
-          payload.containsKey(playlistId)) {
+        db.setChannelNotificationLastViewedVideo(payload[channelId]!, payload[lastSeenVideo]!);
+      } else if (receivedAction.channelKey == NotificationTypes.playlist.id && payload.containsKey(playlistId)) {
         log.fine('Launching playlist screen ${receivedAction.payload}');
         service.getPublicPlaylists(payload[playlistId]!).then((value) {
-          appRouter
-              .push(PlaylistViewRoute(playlist: value, canDeleteVideos: false));
-          db.setPlaylistNotificationLastViewedVideo(
-              value.playlistId, value.videoCount);
+          appRouter.push(PlaylistViewRoute(playlist: value, canDeleteVideos: false));
+          db.setPlaylistNotificationLastViewedVideo(value.playlistId, value.videoCount);
         });
-      } else if (receivedAction.channelKey ==
-              NotificationTypes.subscription.id &&
-          payload.containsKey(lastSeenVideo)) {
+      } else if (receivedAction.channelKey == NotificationTypes.subscription.id && payload.containsKey(lastSeenVideo)) {
         appRouter.push(const SubscriptionRoute());
-        db.setLastSubscriptionNotification(SubscriptionNotification(
-            payload[lastSeenVideo]!, DateTime.now().millisecondsSinceEpoch));
+        db.setLastSubscriptionNotification(
+            SubscriptionNotification(payload[lastSeenVideo]!, DateTime.now().millisecondsSinceEpoch));
       }
     }
   }
@@ -129,9 +113,7 @@ class NotificationController {
 }
 
 sendNotification(String title, String message,
-    {required NotificationTypes type,
-    Map<String, String>? payload,
-    int id = 0}) async {
+    {required NotificationTypes type, Map<String, String>? payload, int id = 0}) async {
   AwesomeNotifications().createNotification(
       content: NotificationContent(
           id: type.idSpace + id,

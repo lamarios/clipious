@@ -1,4 +1,3 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:invidious/utils/states/tv/searchable_dynamic_select_from_list.dart';
@@ -28,11 +27,8 @@ class SearchableSelectFromListScreen<T> extends StatelessWidget {
         body: TvOverscan(
       child: BlocProvider(
         create: (context) => SearchableSelectFromListCubit<T>(
-            SearchableSelectFromListState<T>([],
-                controller: TextEditingController()),
-            fetchItems),
-        child: BlocBuilder<SearchableSelectFromListCubit<T>,
-            SearchableSelectFromListState<T>>(builder: (context, _) {
+            SearchableSelectFromListState<T>([], controller: TextEditingController()), fetchItems),
+        child: BlocBuilder<SearchableSelectFromListCubit<T>, SearchableSelectFromListState<T>>(builder: (context, _) {
           var cubit = context.read<SearchableSelectFromListCubit<T>>();
           return Column(
             children: [

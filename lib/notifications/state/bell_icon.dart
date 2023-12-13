@@ -6,11 +6,7 @@ import 'package:invidious/notifications/models/db/playlist_notifications.dart';
 import '../../settings/states/settings.dart';
 import '../views/components/bell_icon.dart';
 
-enum TurnOnStatus {
-  ok,
-  needToEnableBackGroundServices,
-  needToEnableBatteryOptimization
-}
+enum TurnOnStatus { ok, needToEnableBackGroundServices, needToEnableBatteryOptimization }
 
 class BellIconCubit extends Cubit<bool> {
   final SettingsCubit settings;
@@ -47,8 +43,7 @@ class BellIconCubit extends Cubit<bool> {
 
       if (!settings.state.backgroundNotifications) {
         var settingsResponse = await settings.setBackgroundNotifications(true);
-        if (settingsResponse ==
-            EnableBackGroundNotificationResponse.needBatteryOptimization) {
+        if (settingsResponse == EnableBackGroundNotificationResponse.needBatteryOptimization) {
           return TurnOnStatus.needToEnableBatteryOptimization;
         }
       }
@@ -57,19 +52,13 @@ class BellIconCubit extends Cubit<bool> {
       switch (type) {
         case BellIconType.channel:
           var channel = await service.getChannel(itemId);
-          db.upsertChannelNotification(ChannelNotification(
-              itemId,
-              channel.author,
-              channel.latestVideos?.firstOrNull?.videoId ?? '',
-              DateTime.now().millisecondsSinceEpoch));
+          db.upsertChannelNotification(ChannelNotification(itemId, channel.author,
+              channel.latestVideos?.firstOrNull?.videoId ?? '', DateTime.now().millisecondsSinceEpoch));
           break;
         case BellIconType.playlist:
           var playlist = await service.getPublicPlaylists(itemId);
-          db.upsertPlaylistNotification(PlaylistNotification(
-              itemId,
-              playlist.videoCount,
-              DateTime.now().millisecondsSinceEpoch,
-              playlist.title));
+          db.upsertPlaylistNotification(
+              PlaylistNotification(itemId, playlist.videoCount, DateTime.now().millisecondsSinceEpoch, playlist.title));
 
           break;
       }

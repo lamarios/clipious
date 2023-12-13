@@ -19,15 +19,11 @@ class VideoFilterChannelCubit extends Cubit<VideoFilterChannelState> {
   }
 
   bool hasChannel() {
-    return state.filters.isNotEmpty &&
-        state.filters[0].channelId != null &&
-        state.filters[0].channelId != allChannels;
+    return state.filters.isNotEmpty && state.filters[0].channelId != null && state.filters[0].channelId != allChannels;
   }
 
   Future<void> getChannel() async {
-    if (state.filters.isNotEmpty &&
-        state.filters[0].channelId != null &&
-        state.filters[0].channelId != allChannels) {
+    if (state.filters.isNotEmpty && state.filters[0].channelId != null && state.filters[0].channelId != allChannels) {
       emit(state.copyWith(loading: true));
 
       var channel = await service.getChannel(state.filters[0].channelId!);
@@ -45,7 +41,5 @@ class VideoFilterChannelCubit extends Cubit<VideoFilterChannelState> {
 @freezed
 class VideoFilterChannelState with _$VideoFilterChannelState {
   const factory VideoFilterChannelState(
-      {required List<VideoFilter> filters,
-      Channel? channel,
-      @Default(false) bool loading}) = _VideoFilterChannelState;
+      {required List<VideoFilter> filters, Channel? channel, @Default(false) bool loading}) = _VideoFilterChannelState;
 }
