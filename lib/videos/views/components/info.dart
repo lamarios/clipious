@@ -9,7 +9,7 @@ import 'package:invidious/videos/models/video.dart';
 import 'package:invidious/videos/views/components/video_metrics.dart';
 import 'package:invidious/videos/views/components/video_thumbnail.dart';
 
-import '../../../subscription_management/view/components/subscribeButton.dart';
+import '../../../subscription_management/view/components/subscribe_button.dart';
 import '../../../utils/models/image_object.dart';
 
 class VideoInfo extends StatelessWidget {
@@ -62,10 +62,14 @@ class VideoInfo extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 4.0),
                   child: Thumbnail(
-                    thumbnailUrl: ImageObject.getBestThumbnail(video.authorThumbnails)?.url ?? '',
+                    thumbnailUrl:
+                        ImageObject.getBestThumbnail(video.authorThumbnails)
+                                ?.url ??
+                            '',
                     width: 40,
                     height: 40,
-                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
+                    decoration:
+                        BoxDecoration(borderRadius: BorderRadius.circular(20)),
                   ) /*Container(
                     width: 40,
                     height: 40,
@@ -123,7 +127,9 @@ class VideoInfo extends StatelessWidget {
                   ),
                 ),
               ),
-              Visibility(visible: video.isFamilyFriendly, child: Text(locals.videoIsFamilyFriendly))
+              Visibility(
+                  visible: video.isFamilyFriendly,
+                  child: Text(locals.videoIsFamilyFriendly))
             ],
           ),
           Padding(
@@ -136,9 +142,11 @@ class VideoInfo extends StatelessWidget {
                           onTap: () => showSearchWindow(context, e),
                           child: Container(
                             decoration: BoxDecoration(
-                                color: colorScheme.secondaryContainer, borderRadius: BorderRadius.circular(20)),
+                                color: colorScheme.secondaryContainer,
+                                borderRadius: BorderRadius.circular(20)),
                             child: Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 8.0, vertical: 4),
                               child: Text(e),
                             ),
                           ),
@@ -150,9 +158,11 @@ class VideoInfo extends StatelessWidget {
                         onTap: () => showSearchWindow(context, video.genre),
                         child: Container(
                           decoration: BoxDecoration(
-                              color: colorScheme.secondaryContainer, borderRadius: BorderRadius.circular(20)),
+                              color: colorScheme.secondaryContainer,
+                              borderRadius: BorderRadius.circular(20)),
                           child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 8.0, vertical: 4),
                             child: Text(video.genre),
                           ),
                         ),

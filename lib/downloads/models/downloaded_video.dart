@@ -19,9 +19,6 @@ class DownloadedVideo extends IdedVideo {
   String quality;
 
   @override
-  String get videoId => super.videoId;
-
-  @override
   set videoId(String videoId) => super.videoId = videoId;
 
   @Transient()

@@ -42,7 +42,8 @@ class HomeView extends StatelessWidget {
                     padding: const EdgeInsets.only(bottom: 2.0),
                     child: Text(
                       e.getLabel(locals),
-                      style: textTheme.titleSmall?.copyWith(color: colors.secondary),
+                      style: textTheme.titleSmall
+                          ?.copyWith(color: colors.secondary),
                     ),
                   ),
                   e.build(context, true)
@@ -69,7 +70,8 @@ class HomeView extends StatelessWidget {
           onNotification: (notificationInfo) {
             if (notificationInfo is ScrollUpdateNotification &&
                 (notificationInfo.metrics.axisDirection == AxisDirection.down ||
-                    notificationInfo.metrics.axisDirection == AxisDirection.up)) {
+                    notificationInfo.metrics.axisDirection ==
+                        AxisDirection.up)) {
               home.setScroll(notificationInfo.metrics.pixels > 100);
             }
             return true;
@@ -89,13 +91,16 @@ class HomeView extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         AnimatedCrossFade(
-                          crossFadeState: scrolled ? CrossFadeState.showSecond : CrossFadeState.showFirst,
+                          crossFadeState: scrolled
+                              ? CrossFadeState.showSecond
+                              : CrossFadeState.showFirst,
                           firstCurve: Curves.easeInOutQuad,
                           secondCurve: Curves.easeInOutQuad,
                           sizeCurve: Curves.easeInOutQuad,
                           duration: animationDuration,
-                          firstChild:
-                              Column(mainAxisSize: MainAxisSize.min, children: getSmallSources(context, layout)),
+                          firstChild: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: getSmallSources(context, layout)),
                           secondChild: const Row(
                             children: [
                               SizedBox.shrink(),
@@ -107,7 +112,8 @@ class HomeView extends StatelessWidget {
                             children: [
                               Text(
                                 layout.bigSource.getLabel(locals),
-                                style: textTheme.titleMedium?.copyWith(color: colors.secondary),
+                                style: textTheme.titleMedium
+                                    ?.copyWith(color: colors.secondary),
                               ),
                             ],
                           ),
@@ -115,7 +121,8 @@ class HomeView extends StatelessWidget {
                           Expanded(
                               key: ValueKey(layout.bigSource),
                               child: Padding(
-                                padding: const EdgeInsets.only(right: innerHorizontalPadding),
+                                padding: const EdgeInsets.only(
+                                    right: innerHorizontalPadding),
                                 child: layout.bigSource.build(context, false),
                               ))
                       ],

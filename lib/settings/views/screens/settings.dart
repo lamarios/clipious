@@ -92,45 +92,58 @@ class SettingsScreen extends StatelessWidget {
                   SettingsTile.navigation(
                     leading: const Icon(Icons.home_outlined),
                     title: Text(locals.browsing),
-                    description: Text(List.of([
-                      locals.country,
-                      locals.customizeAppLayout,
-                      locals.distractionFreeMode,
-                      locals.appLanguage,
-                      "Return YouTube Dislike",
-                      locals.searchHistory,
-                      locals.videoFilters,
-                      'DeArrow'
-                    ]).join(", "), maxLines: 3, overflow: TextOverflow.ellipsis,),
+                    description: Text(
+                      List.of([
+                        locals.country,
+                        locals.customizeAppLayout,
+                        locals.distractionFreeMode,
+                        locals.appLanguage,
+                        "Return YouTube Dislike",
+                        locals.searchHistory,
+                        locals.videoFilters,
+                        'DeArrow'
+                      ]).join(", "),
+                      maxLines: 3,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                     onPressed: openBrowsingSettings,
                   ),
                   SettingsTile.navigation(
                     leading: const Icon(Icons.cloud_queue),
                     title: Text(locals.manageServers),
                     description: BlocBuilder<AppCubit, AppState>(
-                        buildWhen: (previous, current) => previous.server != current.server,
-                        builder: (context, app) =>
-                            Text(app.server != null ? locals.currentServer(app.server!.url) : "")),
+                        buildWhen: (previous, current) =>
+                            previous.server != current.server,
+                        builder: (context, app) => Text(app.server != null
+                            ? locals.currentServer(app.server!.url)
+                            : "")),
                     onPressed: manageServers,
                   ),
                   SettingsTile.navigation(
                     leading: const Icon(Icons.video_settings),
                     title: Text(locals.videoPlayer),
-                    description: Text(List.of([
-                      locals.useDash,
-                      locals.useProxy,
-                      locals.autoplayVideoOnLoad,
-                      locals.subtitles,
-                      "SponsorBlock",
-                      locals.lockFullScreenToLandscape,
-                      locals.fillFullscreen
-                    ]).join(", "), maxLines: 3, overflow: TextOverflow.ellipsis,),
+                    description: Text(
+                      List.of([
+                        locals.useDash,
+                        locals.useProxy,
+                        locals.autoplayVideoOnLoad,
+                        locals.subtitles,
+                        "SponsorBlock",
+                        locals.lockFullScreenToLandscape,
+                        locals.fillFullscreen
+                      ]).join(", "),
+                      maxLines: 3,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                     onPressed: openVideoPlayerSettings,
                   ),
                   SettingsTile.navigation(
                     leading: const Icon(Icons.notifications_outlined),
                     title: Text('${locals.notifications} (beta)'),
-                    description: Text(_.backgroundNotifications ? locals.foregroundServiceNotificationContent(_.backgroundNotificationFrequency.toString()):locals.notificationsDescription),
+                    description: Text(_.backgroundNotifications
+                        ? locals.foregroundServiceNotificationContent(
+                            _.backgroundNotificationFrequency.toString())
+                        : locals.notificationsDescription),
                     onPressed: openNotificationSettings,
                   ),
                   SettingsTile.navigation(
@@ -142,23 +155,29 @@ class SettingsScreen extends StatelessWidget {
                         locals.themeBrightness,
                         locals.blackBackground,
                         locals.navigationBarStyle
-                      ]).join(", "), maxLines: 3, overflow: TextOverflow.ellipsis,
+                      ]).join(", "),
+                      maxLines: 3,
+                      overflow: TextOverflow.ellipsis,
                     ),
                     onPressed: openAppearanceSettings,
                   ),
                 ]),
                 SettingsSection(title: (Text(locals.about)), tiles: [
                   SettingsTile(
-                      title: const Center(child: SizedBox(height: 150, width: 150, child: AppIcon()))),
+                      title: const Center(
+                          child: SizedBox(
+                              height: 150, width: 150, child: AppIcon()))),
                   SettingsTile(
                     leading: const Icon(Icons.badge_outlined),
                     title: Text('${locals.name}: ${_.packageInfo.appName}'),
-                    description: Text('${locals.package}: ${_.packageInfo.packageName}'),
+                    description:
+                        Text('${locals.package}: ${_.packageInfo.packageName}'),
                   ),
                   SettingsTile(
                     leading: const Icon(Icons.numbers),
                     title: Text('${locals.version}: ${_.packageInfo.version}'),
-                    description: Text('${locals.build}: ${_.packageInfo.buildNumber}'),
+                    description:
+                        Text('${locals.build}: ${_.packageInfo.buildNumber}'),
                   ),
                   SettingsTile(
                     leading: const Icon(Icons.toc),

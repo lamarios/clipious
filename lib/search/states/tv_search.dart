@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -45,5 +44,8 @@ class TvSearchCubit extends Cubit<TvSearchState> {
 
 @freezed
 class TvSearchState with _$TvSearchState {
-  const factory TvSearchState({@Default(false) bool hasVideos, @Default(false) bool hasChannels, @Default(false) bool hasPlaylists}) = _TvSearchState;
+  const factory TvSearchState(
+      {@Default(false) bool hasVideos,
+      @Default(false) bool hasChannels,
+      @Default(false) bool hasPlaylists}) = _TvSearchState;
 }

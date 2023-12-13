@@ -17,26 +17,32 @@ import 'video_thumbnail.dart';
 class VideoInnerView extends StatelessWidget {
   final Video video;
   final int selectedIndex;
-  bool? playNow;
+  final bool? playNow;
   final VideoState videoController;
 
-  VideoInnerView({super.key, required this.video, required this.selectedIndex, this.playNow, required this.videoController});
+  const VideoInnerView(
+      {super.key,
+      required this.video,
+      required this.selectedIndex,
+      this.playNow,
+      required this.videoController});
 
   @override
   Widget build(BuildContext context) {
-    ColorScheme colorScheme = Theme.of(context).colorScheme;
     AppLocalizations locals = AppLocalizations.of(context)!;
     var textTheme = Theme.of(context).textTheme;
     var cubit = context.read<VideoCubit>();
     var settings = context.read<SettingsCubit>();
-    String? currentlyPlayingVideoId = context.select((PlayerCubit player) => player.state.currentlyPlaying?.videoId);
+    String? currentlyPlayingVideoId = context
+        .select((PlayerCubit player) => player.state.currentlyPlaying?.videoId);
     final bool restart = currentlyPlayingVideoId == video.videoId;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         VideoThumbnailView(
           videoId: video.videoId,
-          thumbnailUrl: video.deArrowThumbnailUrl ?? video.getBestThumbnail()?.url ?? '',
+          thumbnailUrl:
+              video.deArrowThumbnailUrl ?? video.getBestThumbnail()?.url ?? '',
           child: Stack(
             alignment: Alignment.center,
             children: [
@@ -55,22 +61,28 @@ class VideoInnerView extends StatelessWidget {
         ),
         if (!settings.state.distractionFreeMode)
           BlocBuilder<SettingsCubit, SettingsState>(
-            buildWhen: (previous, current) => previous.playRecommendedNext != current.playRecommendedNext,
-            builder: (context, settingsState) {
-              return Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  SizedBox(height: 25, child: Checkbox(value: settingsState.playRecommendedNext, onChanged: cubit.togglePlayRecommendedNext, visualDensity: VisualDensity.compact)),
-                  InkWell(
-                      onTap: () => cubit.togglePlayRecommendedNext(!settingsState.playRecommendedNext),
-                      child: Text(
-                        locals.addRecommendedToQueue,
-                        style: textTheme.bodySmall,
-                      ))
-                ],
-              );
-            }
-          ),
+              buildWhen: (previous, current) =>
+                  previous.playRecommendedNext != current.playRecommendedNext,
+              builder: (context, settingsState) {
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    SizedBox(
+                        height: 25,
+                        child: Checkbox(
+                            value: settingsState.playRecommendedNext,
+                            onChanged: cubit.togglePlayRecommendedNext,
+                            visualDensity: VisualDensity.compact)),
+                    InkWell(
+                        onTap: () => cubit.togglePlayRecommendedNext(
+                            !settingsState.playRecommendedNext),
+                        child: Text(
+                          locals.addRecommendedToQueue,
+                          style: textTheme.bodySmall,
+                        ))
+                  ],
+                );
+              }),
         Expanded(
             child: Padding(
           padding: const EdgeInsets.only(top: 0),

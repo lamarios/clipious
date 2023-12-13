@@ -3,12 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:invidious/utils/views/tv/components/tv_overscan.dart';
 
-
 @RoutePage()
 class TvPlainTextScreen extends StatefulWidget {
   final String text;
 
-  const TvPlainTextScreen({Key? key, required this.text}) : super(key: key);
+  const TvPlainTextScreen({super.key, required this.text});
 
   @override
   State<TvPlainTextScreen> createState() => _TvPlainTextScreenState();

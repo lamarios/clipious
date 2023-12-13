@@ -1,4 +1,3 @@
-import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -10,7 +9,7 @@ import 'package:logging/logging.dart';
 import '../../downloads/states/download_manager.dart';
 import '../../globals.dart';
 import '../../player/states/player.dart';
-import '../../settings/models/errors/invidiousServiceError.dart';
+import '../../settings/models/errors/invidious_service_error.dart';
 import '../../settings/states/settings.dart';
 import '../models/video.dart';
 
@@ -25,7 +24,8 @@ class VideoCubit extends Cubit<VideoState> {
   final PlayerCubit player;
   final SettingsCubit settings;
 
-  VideoCubit(super.initialState, this.downloadManager, this.player, this.settings) {
+  VideoCubit(
+      super.initialState, this.downloadManager, this.player, this.settings) {
     onReady();
   }
 
@@ -39,7 +39,8 @@ class VideoCubit extends Cubit<VideoState> {
         dislikes = dislike.dislikes;
       }
 
-      emit(state.copyWith(loadingVideo: false, video: video, dislikes: dislikes));
+      emit(state.copyWith(
+          loadingVideo: false, video: video, dislikes: dislikes));
 
       getDownloadStatus();
     } catch (err) {
@@ -83,7 +84,8 @@ class VideoCubit extends Cubit<VideoState> {
         getDownloadStatus();
         downloading = false;
       }
-      emit(state.copyWith(downloadProgress: progress, downloading: downloading));
+      emit(
+          state.copyWith(downloadProgress: progress, downloading: downloading));
     }
   }
 
@@ -112,7 +114,8 @@ class VideoCubit extends Cubit<VideoState> {
   void playVideo(bool? audio) {
     if (state.video != null) {
       List<BaseVideo> videos = [state.video!];
-      if (!settings.state.distractionFreeMode && settings.state.playRecommendedNext) {
+      if (!settings.state.distractionFreeMode &&
+          settings.state.playRecommendedNext) {
         videos.addAll(state.video?.recommendedVideos ?? []);
       }
       player.playVideo(videos, audio: audio);
@@ -120,7 +123,8 @@ class VideoCubit extends Cubit<VideoState> {
   }
 
   scrollUp() {
-    scrollController.animateTo(0, duration: animationDuration, curve: Curves.easeInOutQuad);
+    scrollController.animateTo(0,
+        duration: animationDuration, curve: Curves.easeInOutQuad);
   }
 }
 
@@ -141,7 +145,7 @@ class VideoState with _$VideoState {
 
   const VideoState._();
 
-  static VideoState init({required String videoId}){
+  static VideoState init({required String videoId}) {
     return VideoState(videoId: videoId, isLoggedIn: service.isLoggedIn());
   }
 

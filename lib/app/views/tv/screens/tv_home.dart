@@ -7,7 +7,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/app/states/tv_home.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/settings/states/settings.dart';
-import 'package:invidious/utils/models/paginatedList.dart';
+import 'package:invidious/utils/models/paginated_list.dart';
 import 'package:invidious/utils/views/tv/components/tv_button.dart';
 import 'package:invidious/utils/views/tv/components/tv_overscan.dart';
 import 'package:invidious/videos/views/components/subscriptions.dart';
@@ -27,7 +27,7 @@ GlobalKey trendingTitle = GlobalKey(debugLabel: 'trending title');
 
 @RoutePage()
 class TvHomeScreen extends StatelessWidget {
-  const TvHomeScreen({Key? key}) : super(key: key);
+  const TvHomeScreen({super.key});
 
   openSettings(BuildContext context) {
     AutoRouter.of(context).push(const TVSettingsRoute());
@@ -35,17 +35,23 @@ class TvHomeScreen extends StatelessWidget {
 
   openPopular(BuildContext context) {
     var locals = AppLocalizations.of(context)!;
-    AutoRouter.of(context).push(TvGridRoute(paginatedVideoList: SingleEndpointList(service.getPopular), title: locals.popular));
+    AutoRouter.of(context).push(TvGridRoute(
+        paginatedVideoList: SingleEndpointList(service.getPopular),
+        title: locals.popular));
   }
 
   openTrending(BuildContext context) {
     var locals = AppLocalizations.of(context)!;
-    AutoRouter.of(context).push(TvGridRoute(paginatedVideoList: SingleEndpointList(service.getTrending), title: locals.trending));
+    AutoRouter.of(context).push(TvGridRoute(
+        paginatedVideoList: SingleEndpointList(service.getTrending),
+        title: locals.trending));
   }
 
   openSubscriptions(BuildContext context) {
     var locals = AppLocalizations.of(context)!;
-    AutoRouter.of(context).push(TvGridRoute(paginatedVideoList: SubscriptionVideoList(), title: locals.subscriptions));
+    AutoRouter.of(context).push(TvGridRoute(
+        paginatedVideoList: SubscriptionVideoList(),
+        title: locals.subscriptions));
   }
 
   openSearch(BuildContext context) {
@@ -53,7 +59,8 @@ class TvHomeScreen extends StatelessWidget {
   }
 
   openPlaylists(BuildContext context) {
-    AutoRouter.of(context).push(TvPlaylistGridRoute(playlistList: SingleEndpointList(service.getUserPlaylists)));
+    AutoRouter.of(context).push(TvPlaylistGridRoute(
+        playlistList: SingleEndpointList(service.getUserPlaylists)));
   }
 
   @override
@@ -70,12 +77,15 @@ class TvHomeScreen extends StatelessWidget {
         child: Scaffold(
           body: BlocBuilder<TvHomeCubit, bool>(builder: (context, homeState) {
             var homeCubit = context.read<TvHomeCubit>();
-            var appLayout = context.select((SettingsCubit value) => value.state.appLayout);
-            var allowedPages = appLayout.where((element) => element.isPermitted(context)).toList();
-            return BlocBuilder<AppCubit, AppState>(buildWhen: (previous, current) {
+            var appLayout =
+                context.select((SettingsCubit value) => value.state.appLayout);
+            var allowedPages = appLayout
+                .where((element) => element.isPermitted(context))
+                .toList();
+            return BlocBuilder<AppCubit, AppState>(
+                buildWhen: (previous, current) {
               return previous.server != current.server;
             }, builder: (context, _) {
-              var app = context.read<AppCubit>();
               return DefaultTextStyle(
                 style: textTheme.bodyLarge!,
                 child: Row(
@@ -85,98 +95,138 @@ class TvHomeScreen extends StatelessWidget {
                       width: homeState ? 250 : 118,
                       duration: animationDuration ~/ 2,
                       curve: Curves.easeInOutQuad,
-                      decoration: BoxDecoration(color: homeState ? colors.secondaryContainer.withOpacity(0.5) : Colors.transparent),
+                      decoration: BoxDecoration(
+                          color: homeState
+                              ? colors.secondaryContainer.withOpacity(0.5)
+                              : Colors.transparent),
                       child: Padding(
-                          padding: EdgeInsets.only(top: TvOverscan.vertical, left: TvOverscan.horizontal, bottom: TvOverscan.vertical, right: homeState ? TvOverscan.horizontal : 8),
-                          child: Column(mainAxisAlignment: MainAxisAlignment.start, crossAxisAlignment: CrossAxisAlignment.start, children: [
-                            Padding(
-                              padding: const EdgeInsets.only(bottom: 30.0),
-                              child: SizedBox(
-                                  height: 50,
-                                  child: Row(
-                                    children: [
-                                      const AppIcon(
-                                        width: 50,
-                                        height: 50,
-                                      ),
-                                      if (homeState)
-                                        Padding(
-                                            padding: const EdgeInsets.only(left: 16.0),
-                                            child: MenuItemText(
-                                              'Clipious',
-                                              style: textTheme.titleLarge!.copyWith(color: colors.primary),
-                                            ))
-                                    ],
-                                  )),
-                            ),
-                            Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: allowedPages
-                                    .map(
-                                      (e) => Padding(
-                                        padding: const EdgeInsets.only(bottom: 8.0),
-                                        child: TvButton(
-                                          onFocusChanged: homeCubit.menuItemFocusChanged,
-                                          onPressed: (context) => switch (e) {
-                                            (HomeDataSource.search) => openSearch(context),
-                                            (HomeDataSource.subscription) => openSubscriptions(context),
-                                            (HomeDataSource.playlist) => openPlaylists(context),
-                                            (HomeDataSource.trending) => openTrending(context),
-                                            (HomeDataSource.popular) => openPopular(context),
-                                            (_) => const SizedBox.shrink()
-                                          },
-                                          unfocusedColor: colors.secondaryContainer.withOpacity(0.0),
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(8),
-                                            child: Row(
-                                              children: [
-                                                Padding(
-                                                  padding: const EdgeInsets.only(right: 8.0),
-                                                  child: Icon(e.getIcon()),
+                          padding: EdgeInsets.only(
+                              top: TvOverscan.vertical,
+                              left: TvOverscan.horizontal,
+                              bottom: TvOverscan.vertical,
+                              right: homeState ? TvOverscan.horizontal : 8),
+                          child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(bottom: 30.0),
+                                  child: SizedBox(
+                                      height: 50,
+                                      child: Row(
+                                        children: [
+                                          const AppIcon(
+                                            width: 50,
+                                            height: 50,
+                                          ),
+                                          if (homeState)
+                                            Padding(
+                                                padding: const EdgeInsets.only(
+                                                    left: 16.0),
+                                                child: MenuItemText(
+                                                  'Clipious',
+                                                  style: textTheme.titleLarge!
+                                                      .copyWith(
+                                                          color:
+                                                              colors.primary),
+                                                ))
+                                        ],
+                                      )),
+                                ),
+                                Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: allowedPages
+                                        .map(
+                                          (e) => Padding(
+                                            padding: const EdgeInsets.only(
+                                                bottom: 8.0),
+                                            child: TvButton(
+                                              onFocusChanged: homeCubit
+                                                  .menuItemFocusChanged,
+                                              onPressed: (context) =>
+                                                  switch (e) {
+                                                (HomeDataSource.search) =>
+                                                  openSearch(context),
+                                                (HomeDataSource.subscription) =>
+                                                  openSubscriptions(context),
+                                                (HomeDataSource.playlist) =>
+                                                  openPlaylists(context),
+                                                (HomeDataSource.trending) =>
+                                                  openTrending(context),
+                                                (HomeDataSource.popular) =>
+                                                  openPopular(context),
+                                                (_) => const SizedBox.shrink()
+                                              },
+                                              unfocusedColor: colors
+                                                  .secondaryContainer
+                                                  .withOpacity(0.0),
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8),
+                                                child: Row(
+                                                  children: [
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              right: 8.0),
+                                                      child: Icon(e.getIcon()),
+                                                    ),
+                                                    if (homeState)
+                                                      MenuItemText(
+                                                          e.getLabel(locals))
+                                                  ],
                                                 ),
-                                                if (homeState) MenuItemText(e.getLabel(locals))
-                                              ],
+                                              ),
                                             ),
                                           ),
+                                        )
+                                        .toList()),
+                                TvButton(
+                                  onFocusChanged:
+                                      homeCubit.menuItemFocusChanged,
+                                  onPressed: (context) => openSettings(context),
+                                  unfocusedColor: colors.secondaryContainer
+                                      .withOpacity(0.0),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8),
+                                    child: Row(
+                                      children: [
+                                        const Padding(
+                                          padding: EdgeInsets.only(right: 8.0),
+                                          child: Icon(Icons.settings),
                                         ),
-                                      ),
-                                    )
-                                    .toList()),
-                            TvButton(
-                              onFocusChanged: homeCubit.menuItemFocusChanged,
-                              onPressed: (context) => openSettings(context),
-                              unfocusedColor: colors.secondaryContainer.withOpacity(0.0),
-                              child: Padding(
-                                padding: const EdgeInsets.all(8),
-                                child: Row(
-                                  children: [
-                                    const Padding(
-                                      padding: EdgeInsets.only(right: 8.0),
-                                      child: Icon(Icons.settings),
+                                        if (homeState)
+                                          MenuItemText(locals.settings)
+                                      ],
                                     ),
-                                    if (homeState) MenuItemText(locals.settings)
-                                  ],
-                                ),
-                              ),
-                            )
-                          ])),
+                                  ),
+                                )
+                              ])),
                     ),
                     Expanded(
                       // terrible work around to be able to scroll to all the global keys
                       child: SingleChildScrollView(
                         child: Padding(
-                          padding: const EdgeInsets.only(top: TvOverscan.vertical, bottom: TvOverscan.vertical, right: TvOverscan.horizontal, left: 8),
+                          padding: const EdgeInsets.only(
+                              top: TvOverscan.vertical,
+                              bottom: TvOverscan.vertical,
+                              right: TvOverscan.horizontal,
+                              left: 8),
                           child: ListView(
                             controller: homeCubit.scrollController,
                             physics: const NeverScrollableScrollPhysics(),
                             shrinkWrap: true,
                             // crossAxisAlignment: CrossAxisAlignment.start,
                             children: allowedPages
-                                .where((e) => e == HomeDataSource.subscription || e == HomeDataSource.trending || e == HomeDataSource.popular)
+                                .where((e) =>
+                                    e == HomeDataSource.subscription ||
+                                    e == HomeDataSource.trending ||
+                                    e == HomeDataSource.popular)
                                 .map((e) {
                               GlobalKey? key = switch (e) {
                                 (HomeDataSource.popular) => popularTitle,
-                                (HomeDataSource.subscription) => subscriptionTitle,
+                                (HomeDataSource.subscription) =>
+                                  subscriptionTitle,
                                 (HomeDataSource.trending) => trendingTitle,
                                 (_) => null,
                               };
@@ -184,7 +234,11 @@ class TvHomeScreen extends StatelessWidget {
                               focusFunction(video, index, focus) {
                                 if (key != null && focus) {
                                   Scrollable.ensureVisible(key.currentContext!,
-                                      duration: animationDuration, curve: Curves.easeInOutQuad, alignmentPolicy: ScrollPositionAlignmentPolicy.keepVisibleAtStart);
+                                      duration: animationDuration,
+                                      curve: Curves.easeInOutQuad,
+                                      alignmentPolicy:
+                                          ScrollPositionAlignmentPolicy
+                                              .keepVisibleAtStart);
                                 }
                               }
 
@@ -195,13 +249,15 @@ class TvHomeScreen extends StatelessWidget {
                                   Padding(
                                     key: key,
                                     padding: const EdgeInsets.only(top: 16.0),
-                                    child: Text(e.getLabel(locals), style: textTheme.titleLarge),
+                                    child: Text(e.getLabel(locals),
+                                        style: textTheme.titleLarge),
                                   ),
                                   switch (e) {
                                     (HomeDataSource.popular) => Popular(
                                         onItemFocus: focusFunction,
                                       ),
-                                    (HomeDataSource.subscription) => Subscriptions(
+                                    (HomeDataSource.subscription) =>
+                                      Subscriptions(
                                         onItemFocus: focusFunction,
                                       ),
                                     (HomeDataSource.trending) => Trending(
@@ -238,6 +294,9 @@ class MenuItemText extends StatelessWidget {
     return Text(
       text,
       style: style,
-    ).animate().fadeIn(delay: animationDuration ~/ 2, duration: animationDuration ~/ 2).slideX(curve: Curves.easeInOutQuad);
+    )
+        .animate()
+        .fadeIn(delay: animationDuration ~/ 2, duration: animationDuration ~/ 2)
+        .slideX(curve: Curves.easeInOutQuad);
   }
 }

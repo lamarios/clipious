@@ -15,13 +15,14 @@ import '../../models/db/video_filter.dart';
 class VideoFilterChannel extends StatelessWidget {
   final List<VideoFilter> filters;
 
-  const VideoFilterChannel({Key? key, required this.filters}) : super(key: key);
+  const VideoFilterChannel({super.key, required this.filters});
 
   editFilter(BuildContext context, {required VideoFilter filter}) {
     var cubit = context.read<VideoFilterCubit>();
 
     AutoRouter.of(context)
-        .push(VideoFilterSetupRoute(channelId: filter.channelId, filter: filter))
+        .push(
+            VideoFilterSetupRoute(channelId: filter.channelId, filter: filter))
         .then((value) => cubit.refreshFilters());
   }
 
@@ -31,7 +32,8 @@ class VideoFilterChannel extends StatelessWidget {
     ColorScheme colors = Theme.of(context).colorScheme;
 
     return BlocProvider(
-      create: (context) => VideoFilterChannelCubit(VideoFilterChannelState(filters: filters)),
+      create: (context) =>
+          VideoFilterChannelCubit(VideoFilterChannelState(filters: filters)),
       child: BlocBuilder<VideoFilterChannelCubit, VideoFilterChannelState>(
         builder: (context, _) {
           var cubit = context.read<VideoFilterChannelCubit>();
@@ -66,10 +68,14 @@ class VideoFilterChannel extends StatelessWidget {
                           child: Padding(
                             padding: const EdgeInsets.only(right: 8.0),
                             child: Thumbnail(
-                              thumbnailUrl: ImageObject.getBestThumbnail(_.channel?.authorThumbnails)?.url ?? '',
+                              thumbnailUrl: ImageObject.getBestThumbnail(
+                                          _.channel?.authorThumbnails)
+                                      ?.url ??
+                                  '',
                               width: 20,
                               height: 20,
-                              decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20)),
                             ),
                           )),
                       Expanded(
@@ -82,31 +88,31 @@ class VideoFilterChannel extends StatelessWidget {
                     ],
                   ),
                 ),
-                ..._.filters
-                    .map((e) => SwipeActionCell(
-                        key: ValueKey('filter-swipe-${e.id}'),
-                        trailingActions: [
-                          SwipeAction(
-                            icon: const Icon(Icons.delete, color: Colors.white),
-                            performsFirstActionWithFullSwipe: true,
-                            onTap: (handler) async {
-                              await handler(true);
-                              cubit.deleteFilter(e);
-                              filterCubit.refreshFilters();
-                            },
-                          ),
-                          SwipeAction(
-                            icon: const Icon(Icons.edit, color: Colors.white),
-                            color: Colors.orangeAccent,
-                            closeOnTap: false,
-                            onTap: (handler) async {
-                              // await handler(true);
-                              editFilter(context, filter: e);
-                            },
-                          )
-                        ],
-                        child: InkWell(onTap: () => editFilter(context, filter: e), child: VideoFilterItem(filter: e))))
-                    .toList()
+                ..._.filters.map((e) => SwipeActionCell(
+                    key: ValueKey('filter-swipe-${e.id}'),
+                    trailingActions: [
+                      SwipeAction(
+                        icon: const Icon(Icons.delete, color: Colors.white),
+                        performsFirstActionWithFullSwipe: true,
+                        onTap: (handler) async {
+                          await handler(true);
+                          cubit.deleteFilter(e);
+                          filterCubit.refreshFilters();
+                        },
+                      ),
+                      SwipeAction(
+                        icon: const Icon(Icons.edit, color: Colors.white),
+                        color: Colors.orangeAccent,
+                        closeOnTap: false,
+                        onTap: (handler) async {
+                          // await handler(true);
+                          editFilter(context, filter: e);
+                        },
+                      )
+                    ],
+                    child: InkWell(
+                        onTap: () => editFilter(context, filter: e),
+                        child: VideoFilterItem(filter: e))))
               ],
             ),
           );

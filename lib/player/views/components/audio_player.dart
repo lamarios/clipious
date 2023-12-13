@@ -15,7 +15,10 @@ class AudioPlayer extends StatelessWidget {
   final DownloadedVideo? offlineVideo;
   final bool miniPlayer;
 
-  const AudioPlayer({super.key, this.video, required this.miniPlayer, this.offlineVideo}) : assert(video == null || offlineVideo == null, 'cannot provide both video and offline video\n');
+  const AudioPlayer(
+      {super.key, this.video, required this.miniPlayer, this.offlineVideo})
+      : assert(video == null || offlineVideo == null,
+            'cannot provide both video and offline video\n');
 
   @override
   Widget build(BuildContext context) {
@@ -23,11 +26,18 @@ class AudioPlayer extends StatelessWidget {
     var settings = context.read<SettingsCubit>();
 
     return BlocProvider(
-      create: (context) => AudioPlayerCubit(AudioPlayerState(offlineVideo: offlineVideo, video: video), player, settings),
+      create: (context) => AudioPlayerCubit(
+          AudioPlayerState(offlineVideo: offlineVideo, video: video),
+          player,
+          settings),
       child: BlocBuilder<AudioPlayerCubit, AudioPlayerState>(
         builder: (context, _) => BlocListener<PlayerCubit, PlayerState>(
-          listenWhen: (previous, current) => previous.mediaCommand != current.mediaCommand && current.mediaCommand != null,
-          listener: (context, state) => context.read<AudioPlayerCubit>().handleCommand(state.mediaCommand!),
+          listenWhen: (previous, current) =>
+              previous.mediaCommand != current.mediaCommand &&
+              current.mediaCommand != null,
+          listener: (context, state) => context
+              .read<AudioPlayerCubit>()
+              .handleCommand(state.mediaCommand!),
           child: Padding(
             padding: EdgeInsets.all(miniPlayer ? 8 : 0.0),
             child: Stack(
@@ -37,12 +47,18 @@ class AudioPlayer extends StatelessWidget {
                     ? VideoThumbnailView(
                         decoration: const BoxDecoration(),
                         videoId: _.video!.videoId,
-                        thumbnailUrl: _.video?.deArrowThumbnailUrl ?? _.video?.getBestThumbnail()?.url ?? '',
+                        thumbnailUrl: _.video?.deArrowThumbnailUrl ??
+                            _.video?.getBestThumbnail()?.url ??
+                            '',
                       )
                     : _.offlineVideo != null
-                        ? OfflineVideoThumbnail(borderRadius: 0, key: ValueKey(_.offlineVideo?.videoId ?? ''), video: _.offlineVideo!)
+                        ? OfflineVideoThumbnail(
+                            borderRadius: 0,
+                            key: ValueKey(_.offlineVideo?.videoId ?? ''),
+                            video: _.offlineVideo!)
                         : const SizedBox.shrink(),
-                PlayerControls(mediaPlayerCubit: context.read<AudioPlayerCubit>())
+                PlayerControls(
+                    mediaPlayerCubit: context.read<AudioPlayerCubit>())
               ],
             ),
           ),

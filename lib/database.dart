@@ -2,9 +2,9 @@ import 'package:easy_debounce/easy_debounce.dart';
 import 'package:invidious/home/models/db/home_layout.dart';
 import 'package:invidious/notifications/models/db/channel_notifications.dart';
 import 'package:invidious/notifications/models/db/subscription_notifications.dart';
-import 'package:invidious/search/models/db/searchHistoryItem.dart';
+import 'package:invidious/search/models/db/search_history_item.dart';
 import 'package:invidious/settings/models/db/settings.dart';
-import 'package:invidious/settings/models/errors/noServerSelected.dart';
+import 'package:invidious/settings/models/errors/no_server_selected.dart';
 import 'package:invidious/settings/states/settings.dart';
 import 'package:invidious/videos/models/db/dearrow_cache.dart';
 import 'package:invidious/videos/models/db/history_video_cache.dart';
@@ -20,52 +20,52 @@ import 'settings/models/db/app_logs.dart';
 import 'settings/models/db/server.dart';
 import 'settings/models/db/video_filter.dart';
 
-const SELECTED_SERVER = 'selected-server';
-const USE_SPONSORBLOCK = 'use-sponsor-block';
-const SPONSOR_BLOCK_PREFIX = 'sponsor-block-';
-const BROWSING_COUNTRY = 'browsing-country';
-const DYNAMIC_THEME = 'dynamic-theme';
-const USE_DASH = 'use-dash';
-const PLAYER_REPEAT = 'player-repeat';
-const PLAYER_SHUFFLE = 'player-shuffle';
-const PLAYER_AUTOPLAY_ON_LOAD = 'player-autoplay-on-load';
-const PLAY_RECOMMENDED_NEXT = 'play-recommended-next';
-const USE_PROXY = 'use-proxy';
-const USE_RETURN_YOUTUBE_DISLIKE = 'use-return-youtube-dislike';
-const BLACK_BACKGROUND = 'black-background';
-const SUBTITLE_SIZE = 'subtitles-size';
-const REMEMBER_LAST_SUBTITLE = 'remember-last-subtitle';
-const LAST_SUBTITLE = 'last-subtitle';
-const SKIP_SSL_VERIFICATION = 'skip-ssl-verification';
-const THEME_MODE = 'theme-mode';
-const LOCALE = 'locale';
-const USE_SEARCH_HISTORY = 'use-search-history';
-const SEARCH_HISTORY_LIMIT = 'search-history-limit';
-const HIDE_FILTERED_VIDEOS = 'hide-filtered-videos';
-const REMEMBER_PLAYBACK_SPEED = 'remember-playback-speed';
-const LAST_SPEED = 'last-speed';
-const LOCK_ORIENTATION_FULLSCREEN = 'lock-orientation-fullscreen';
-const FILL_FULLSCREEN = 'fill-fullscreen';
-const APP_LAYOUT = 'app-layout';
-const NAVIGATION_BAR_LABEL_BEHAVIOR = 'navigation-bar-label-behavior';
-const DISTRACTION_FREE_MODE = 'distraction-free-mode';
-const BACKGROUND_NOTIFICATIONS = 'background-notifications';
-const SUBSCRIPTION_NOTIFICATIONS = 'subscriptions-notifications';
-const BACKGROUND_CHECK_FREQUENCY = "background-check-frequency";
-const SUBTITLE_BACKGROUND = 'subtitle-background';
-const DEARROW = 'dearrow';
-const DEARROW_THUMBNAILS = "dearrow-thumbnails";
+const selectedServer = 'selected-server';
+const useSponsorBlock = 'use-sponsor-block';
+const sponsorBlockPrefix = 'sponsor-block-';
+const browsingCountry = 'browsing-country';
+const dynamicTheme = 'dynamic-theme';
+const useDashSettingName = 'use-dash';
+const playerRepeat = 'player-repeat';
+const playerShuffle = 'player-shuffle';
+const playerAutoplayOnLoad = 'player-autoplay-on-load';
+const playRecommendedNextSettingName = 'play-recommended-next';
+const useProxySettingName = 'use-proxy';
+const useReturnYoutubeDislikeSettingName = 'use-return-youtube-dislike';
+const blackBackgroundSettingName = 'black-background';
+const subtitleSizeSettingName = 'subtitles-size';
+const rememberLastSubtitle = 'remember-last-subtitle';
+const lastSubtitle = 'last-subtitle';
+const skipSslVerificationSettingName = 'skip-ssl-verification';
+const themeModeSettingName = 'theme-mode';
+const localeSettingName = 'locale';
+const useSearchHistorySettingName = 'use-search-history';
+const searchHistoryLimitSettingName = 'search-history-limit';
+const hideFilteredVideo = 'hide-filtered-videos';
+const remeberPlaybackSpeed = 'remember-playback-speed';
+const lastSpeedSettingName = 'last-speed';
+const lockOrientationFullScreen = 'lock-orientation-fullscreen';
+const fillFullScreen = 'fill-fullscreen';
+const appLayoutSettingName = 'app-layout';
+const navigationBarLabelBehaviorSettingName = 'navigation-bar-label-behavior';
+const distractionFreeModeSettingName = 'distraction-free-mode';
+const backgroundNotificationsSettingName = 'background-notifications';
+const subscriptionNotifications = 'subscriptions-notifications';
+const backgroundCheckFrequency = "background-check-frequency";
+const subtitleBackground = 'subtitle-background';
+const dearrowSettingName = 'dearrow';
+const dearrowThumbnailsSettingName = "dearrow-thumbnails";
 
-const ON_OPEN = "on-open";
+const onOpenSettingName = "on-open";
 
-const MAX_LOGS = 1000;
+const maxLogs = 1000;
 
 class DbClient {
   /// The Store of this app.
   late final Store store;
   final log = Logger('DbClient');
 
-  DbClient._create(this.store) {}
+  DbClient._create(this.store);
 
   /// Create an instance of ObjectBox to use throughout the app.
   static Future<DbClient> create() async {
@@ -88,7 +88,11 @@ class DbClient {
   }
 
   Server? getServer(String url) {
-    return store.box<Server>().query(Server_.url.equals(url)).build().findFirst();
+    return store
+        .box<Server>()
+        .query(Server_.url.equals(url))
+        .build()
+        .findFirst();
   }
 
   upsertServer(Server server) {
@@ -129,11 +133,19 @@ class DbClient {
   }
 
   SettingsValue? getSettings(String name) {
-    return store.box<SettingsValue>().query(SettingsValue_.name.equals(name)).build().findFirst();
+    return store
+        .box<SettingsValue>()
+        .query(SettingsValue_.name.equals(name))
+        .build()
+        .findFirst();
   }
 
   Server getCurrentlySelectedServer() {
-    Server? server = store.box<Server>().query(Server_.inUse.equals(true)).build().findFirst();
+    Server? server = store
+        .box<Server>()
+        .query(Server_.inUse.equals(true))
+        .build()
+        .findFirst();
 
     if (server == null) {
       log.fine('No servers selected, we try to find one');
@@ -152,11 +164,18 @@ class DbClient {
 
   bool isLoggedInToCurrentServer() {
     var currentlySelectedServer = getCurrentlySelectedServer();
-    return (currentlySelectedServer.authToken?.isNotEmpty ?? false) || (currentlySelectedServer.sidCookie?.isNotEmpty ?? false);
+    return (currentlySelectedServer.authToken?.isNotEmpty ?? false) ||
+        (currentlySelectedServer.sidCookie?.isNotEmpty ?? false);
   }
 
   double getVideoProgress(String videoId) {
-    return store.box<Progress>().query(Progress_.videoId.equals(videoId)).build().findFirst()?.progress ?? 0;
+    return store
+            .box<Progress>()
+            .query(Progress_.videoId.equals(videoId))
+            .build()
+            .findFirst()
+            ?.progress ??
+        0;
   }
 
   saveProgress(Progress progress) {
@@ -181,7 +200,10 @@ class DbClient {
   }
 
   List<SearchHistoryItem> _getSearchHistory() {
-    return (store.box<SearchHistoryItem>().query()..order(SearchHistoryItem_.time, flags: Order.descending)).build().find();
+    return (store.box<SearchHistoryItem>().query()
+          ..order(SearchHistoryItem_.time, flags: Order.descending))
+        .build()
+        .find();
   }
 
   void addToSearchHistory(SearchHistoryItem searchHistoryItem) {
@@ -190,9 +212,11 @@ class DbClient {
   }
 
   void clearExcessSearchHistory() {
-    final limit = int.parse(getSettings(SEARCH_HISTORY_LIMIT)?.value ?? searchHistoryDefaultLength);
+    final limit = int.parse(getSettings(searchHistoryLimitSettingName)?.value ??
+        searchHistoryDefaultLength);
     if (store.box<SearchHistoryItem>().count() > limit) {
-      store.box<SearchHistoryItem>().removeMany(_getSearchHistory().skip(limit).map((e) => e.id).toList());
+      store.box<SearchHistoryItem>().removeMany(
+          _getSearchHistory().skip(limit).map((e) => e.id).toList());
     }
   }
 
@@ -210,7 +234,7 @@ class DbClient {
   void cleanOldLogs() {
     var all = store.box<AppLog>().getAll();
 
-    List<int> ids = all.reversed.skip(MAX_LOGS).map((e) => e.id).toList();
+    List<int> ids = all.reversed.skip(maxLogs).map((e) => e.id).toList();
     store.box<AppLog>().removeMany(ids);
     log.fine("clearing ${ids.length} logs out of ${all.length}");
   }
@@ -248,11 +272,19 @@ class DbClient {
   }
 
   DownloadedVideo? getDownloadByVideoId(String id) {
-    return store.box<DownloadedVideo>().query(DownloadedVideo_.videoId.equals(id)).build().findFirst();
+    return store
+        .box<DownloadedVideo>()
+        .query(DownloadedVideo_.videoId.equals(id))
+        .build()
+        .findFirst();
   }
 
   HistoryVideoCache? getHistoryVideoByVideoId(String videoId) {
-    return store.box<HistoryVideoCache>().query(HistoryVideoCache_.videoId.equals(videoId)).build().findFirst();
+    return store
+        .box<HistoryVideoCache>()
+        .query(HistoryVideoCache_.videoId.equals(videoId))
+        .build()
+        .findFirst();
   }
 
   void upsertHistoryVideo(HistoryVideoCache vid) {
@@ -280,7 +312,11 @@ class DbClient {
   }
 
   ChannelNotification? getChannelNotification(String channelId) {
-    return store.box<ChannelNotification>().query(ChannelNotification_.channelId.equals(channelId)).build().findFirst();
+    return store
+        .box<ChannelNotification>()
+        .query(ChannelNotification_.channelId.equals(channelId))
+        .build()
+        .findFirst();
   }
 
   List<ChannelNotification> getAllChannelNotifications() {
@@ -305,7 +341,11 @@ class DbClient {
   }
 
   PlaylistNotification? getPlaylistNotification(String channelId) {
-    return store.box<PlaylistNotification>().query(PlaylistNotification_.playlistId.equals(channelId)).build().findFirst();
+    return store
+        .box<PlaylistNotification>()
+        .query(PlaylistNotification_.playlistId.equals(channelId))
+        .build()
+        .findFirst();
   }
 
   List<PlaylistNotification> getAllPlaylistNotifications() {
@@ -320,7 +360,8 @@ class DbClient {
     store.box<PlaylistNotification>().put(notif);
   }
 
-  void setPlaylistNotificationLastViewedVideo(String playlistId, int videoCount) {
+  void setPlaylistNotificationLastViewedVideo(
+      String playlistId, int videoCount) {
     var notif = getPlaylistNotification(playlistId);
     if (notif != null) {
       notif.lastVideoCount = videoCount;
@@ -330,7 +371,11 @@ class DbClient {
   }
 
   DeArrowCache? getDeArrowCache(String videoId) {
-    return store.box<DeArrowCache>().query(DeArrowCache_.videoId.equals(videoId)).build().findFirst();
+    return store
+        .box<DeArrowCache>()
+        .query(DeArrowCache_.videoId.equals(videoId))
+        .build()
+        .findFirst();
   }
 
   void upsertDeArrowCache(DeArrowCache cache) {

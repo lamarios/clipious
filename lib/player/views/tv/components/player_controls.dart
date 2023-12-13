@@ -10,7 +10,7 @@ import 'package:invidious/utils/views/tv/components/tv_overscan.dart';
 import '../../../../globals.dart';
 import '../../../../utils.dart';
 import '../../../../utils/models/image_object.dart';
-import '../../../../utils/models/paginatedList.dart';
+import '../../../../utils/models/paginated_list.dart';
 import '../../../../videos/models/video_in_list.dart';
 import '../../../../videos/views/components/video_thumbnail.dart';
 import '../../../states/player.dart';
@@ -18,31 +18,34 @@ import '../../../states/player.dart';
 class TvPlayerControls extends StatelessWidget {
   const TvPlayerControls({super.key});
 
-  onVideoQueueSelected(BuildContext context, TvPlayerControlsCubit cubit, VideoInList video) {
+  onVideoQueueSelected(
+      BuildContext context, TvPlayerControlsCubit cubit, VideoInList video) {
     cubit.playFromQueue(video);
   }
 
   @override
   Widget build(BuildContext context) {
-    ColorScheme colors = Theme.of(context).colorScheme;
     TextTheme textTheme = Theme.of(context).textTheme;
     var locals = AppLocalizations.of(context)!;
     var player = context.read<PlayerCubit>();
     return BlocProvider(
-      create: (context) => TvPlayerControlsCubit(TvPlayerControlsState(), player),
+      create: (context) =>
+          TvPlayerControlsCubit(const TvPlayerControlsState(), player),
       child: BlocBuilder<TvPlayerControlsCubit, TvPlayerControlsState>(
         builder: (context, _) {
           var cubit = context.read<TvPlayerControlsCubit>();
           var mpc = player.state;
 
           return BlocListener<PlayerCubit, PlayerState>(
-            listenWhen: (previous, current) => previous.mediaEvent != current.mediaEvent,
+            listenWhen: (previous, current) =>
+                previous.mediaEvent != current.mediaEvent,
             listener: (BuildContext context, state) {
               cubit.onStreamEvent(state.mediaEvent);
             },
             child: Focus(
               autofocus: true,
-              onKeyEvent: (node, event) => cubit.handleRemoteEvents(node, event),
+              onKeyEvent: (node, event) =>
+                  cubit.handleRemoteEvents(node, event),
               child: Stack(
                 children: [
                   Positioned(
@@ -55,17 +58,22 @@ class TvPlayerControls extends StatelessWidget {
                       duration: animationDuration,
                       child: Container(
                         decoration: BoxDecoration(
-                            gradient: LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: [
-                          Colors.black.withOpacity(1),
-                          Colors.black.withOpacity(0),
-                          Colors.black.withOpacity(1)
-                        ])),
+                            gradient: LinearGradient(
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                                colors: [
+                              Colors.black.withOpacity(1),
+                              Colors.black.withOpacity(0),
+                              Colors.black.withOpacity(1)
+                            ])),
                       ),
                     ),
                   ),
                   Positioned(
                       child: TvOverscan(
-                    child: _.showSettings ? const TvPlayerSettings() : const SizedBox.shrink(),
+                    child: _.showSettings
+                        ? const TvPlayerSettings()
+                        : const SizedBox.shrink(),
                   )),
                   Positioned(
                       top: 0,
@@ -83,7 +91,8 @@ class TvPlayerControls extends StatelessWidget {
                                   children: [
                                     Text(
                                       mpc.currentlyPlaying?.title ?? '',
-                                      style: textTheme.headlineLarge?.copyWith(color: Colors.white),
+                                      style: textTheme.headlineLarge
+                                          ?.copyWith(color: Colors.white),
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.only(top: 16.0),
@@ -92,18 +101,26 @@ class TvPlayerControls extends StatelessWidget {
                                         children: [
                                           Thumbnail(
                                             thumbnailUrl:
-                                                ImageObject.getBestThumbnail(mpc.currentlyPlaying?.authorThumbnails)
+                                                ImageObject.getBestThumbnail(mpc
+                                                            .currentlyPlaying
+                                                            ?.authorThumbnails)
                                                         ?.url ??
                                                     '',
                                             width: 40,
                                             height: 40,
-                                            decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(20)),
                                           ),
                                           Padding(
-                                            padding: const EdgeInsets.only(left: 8.0, right: 20),
+                                            padding: const EdgeInsets.only(
+                                                left: 8.0, right: 20),
                                             child: Text(
-                                              mpc.currentlyPlaying?.author ?? '',
-                                              style: textTheme.headlineSmall?.copyWith(color: Colors.white),
+                                              mpc.currentlyPlaying?.author ??
+                                                  '',
+                                              style: textTheme.headlineSmall
+                                                  ?.copyWith(
+                                                      color: Colors.white),
                                             ),
                                           )
                                         ],
@@ -126,20 +143,27 @@ class TvPlayerControls extends StatelessWidget {
                           children: [
                             _.displayControls
                                 ? Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 16),
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 8.0, vertical: 16),
                                     child: FocusScope(
                                       child: Row(
                                         children: [
                                           Padding(
-                                            padding: const EdgeInsets.only(right: 16.0),
+                                            padding: const EdgeInsets.only(
+                                                right: 16.0),
                                             child: TvButton(
-                                              onPressed: (context) => player.togglePlaying(),
-                                              unfocusedColor: Colors.transparent,
+                                              onPressed: (context) =>
+                                                  player.togglePlaying(),
+                                              unfocusedColor:
+                                                  Colors.transparent,
                                               autofocus: true,
                                               child: Padding(
-                                                padding: const EdgeInsets.all(8.0),
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
                                                 child: Icon(
-                                                  mpc.isPlaying ? Icons.pause : Icons.play_arrow,
+                                                  mpc.isPlaying
+                                                      ? Icons.pause
+                                                      : Icons.play_arrow,
                                                   size: 50,
                                                 ),
                                               ),
@@ -148,10 +172,13 @@ class TvPlayerControls extends StatelessWidget {
                                           Visibility(
                                             visible: mpc.videos.length > 1,
                                             child: Padding(
-                                              padding: const EdgeInsets.only(right: 16.0),
+                                              padding: const EdgeInsets.only(
+                                                  right: 16.0),
                                               child: TvButton(
-                                                onPressed: (context) => player.playPrevious(),
-                                                unfocusedColor: Colors.transparent,
+                                                onPressed: (context) =>
+                                                    player.playPrevious(),
+                                                unfocusedColor:
+                                                    Colors.transparent,
                                                 child: const Padding(
                                                   padding: EdgeInsets.all(8.0),
                                                   child: Icon(
@@ -163,10 +190,13 @@ class TvPlayerControls extends StatelessWidget {
                                             ),
                                           ),
                                           Padding(
-                                            padding: const EdgeInsets.only(right: 16.0),
+                                            padding: const EdgeInsets.only(
+                                                right: 16.0),
                                             child: TvButton(
-                                              unfocusedColor: Colors.transparent,
-                                              onPressed: (context) => cubit.fastRewind(),
+                                              unfocusedColor:
+                                                  Colors.transparent,
+                                              onPressed: (context) =>
+                                                  cubit.fastRewind(),
                                               child: const Padding(
                                                 padding: EdgeInsets.all(8.0),
                                                 child: Icon(
@@ -177,10 +207,13 @@ class TvPlayerControls extends StatelessWidget {
                                             ),
                                           ),
                                           Padding(
-                                            padding: const EdgeInsets.only(right: 16.0),
+                                            padding: const EdgeInsets.only(
+                                                right: 16.0),
                                             child: TvButton(
-                                              onPressed: (context) => cubit.fastForward(),
-                                              unfocusedColor: Colors.transparent,
+                                              onPressed: (context) =>
+                                                  cubit.fastForward(),
+                                              unfocusedColor:
+                                                  Colors.transparent,
                                               child: const Padding(
                                                 padding: EdgeInsets.all(8.0),
                                                 child: Icon(
@@ -193,8 +226,10 @@ class TvPlayerControls extends StatelessWidget {
                                           Visibility(
                                             visible: mpc.videos.length > 1,
                                             child: TvButton(
-                                              onPressed: (context) => player.playNext(),
-                                              unfocusedColor: Colors.transparent,
+                                              onPressed: (context) =>
+                                                  player.playNext(),
+                                              unfocusedColor:
+                                                  Colors.transparent,
                                               child: const Padding(
                                                 padding: EdgeInsets.all(8.0),
                                                 child: Icon(
@@ -206,10 +241,13 @@ class TvPlayerControls extends StatelessWidget {
                                           ),
                                           Expanded(child: Container()),
                                           Padding(
-                                            padding: const EdgeInsets.only(right: 16.0),
+                                            padding: const EdgeInsets.only(
+                                                right: 16.0),
                                             child: TvButton(
-                                              onPressed: (context) => cubit.displayQueue(),
-                                              unfocusedColor: Colors.transparent,
+                                              onPressed: (context) =>
+                                                  cubit.displayQueue(),
+                                              unfocusedColor:
+                                                  Colors.transparent,
                                               child: const Padding(
                                                 padding: EdgeInsets.all(8.0),
                                                 child: Icon(
@@ -220,10 +258,13 @@ class TvPlayerControls extends StatelessWidget {
                                             ),
                                           ),
                                           Padding(
-                                            padding: const EdgeInsets.only(right: 16.0),
+                                            padding: const EdgeInsets.only(
+                                                right: 16.0),
                                             child: TvButton(
-                                              onPressed: (context) => cubit.displaySettings(),
-                                              unfocusedColor: Colors.transparent,
+                                              onPressed: (context) =>
+                                                  cubit.displaySettings(),
+                                              unfocusedColor:
+                                                  Colors.transparent,
                                               child: const Padding(
                                                 padding: EdgeInsets.all(8.0),
                                                 child: Icon(
@@ -245,20 +286,25 @@ class TvPlayerControls extends StatelessWidget {
                                     ? Container(
                                         decoration: BoxDecoration(
                                           color: Colors.red,
-                                          borderRadius: BorderRadius.circular(30),
+                                          borderRadius:
+                                              BorderRadius.circular(30),
                                         ),
                                         child: Padding(
-                                          padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 2),
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 8.0, vertical: 2),
                                           child: Row(
-                                            mainAxisAlignment: MainAxisAlignment.end,
-                                            crossAxisAlignment: CrossAxisAlignment.center,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.end,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
                                             children: [
                                               const Icon(
                                                 Icons.podcasts,
                                                 size: 15,
                                               ),
                                               Padding(
-                                                padding: const EdgeInsets.only(left: 8.0),
+                                                padding: const EdgeInsets.only(
+                                                    left: 8.0),
                                                 child: Text(
                                                   locals.streamIsLive,
                                                   style: textTheme.bodyLarge,
@@ -272,16 +318,24 @@ class TvPlayerControls extends StatelessWidget {
                                         child: player.progress >= 0
                                             ? Container(
                                                 decoration: BoxDecoration(
-                                                    color: Colors.black.withOpacity(0.5),
-                                                    borderRadius: BorderRadius.circular(5)),
-                                                child: AnimatedFractionallySizedBox(
-                                                  alignment: Alignment.centerLeft,
+                                                    color: Colors.black
+                                                        .withOpacity(0.5),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5)),
+                                                child:
+                                                    AnimatedFractionallySizedBox(
+                                                  alignment:
+                                                      Alignment.centerLeft,
                                                   duration: animationDuration,
                                                   widthFactor: player.progress,
                                                   child: Container(
                                                     height: 8,
                                                     decoration: BoxDecoration(
-                                                        color: Colors.white, borderRadius: BorderRadius.circular(5)),
+                                                        color: Colors.white,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5)),
                                                   ),
                                                 ))
                                             : const SizedBox.shrink()),
@@ -290,7 +344,8 @@ class TvPlayerControls extends StatelessWidget {
                                     padding: const EdgeInsets.only(left: 16.0),
                                     child: Text(
                                       '${prettyDuration(player.state.position)} / ${prettyDuration(player.duration)}',
-                                      style: textTheme.titleLarge?.copyWith(color: Colors.white),
+                                      style: textTheme.titleLarge
+                                          ?.copyWith(color: Colors.white),
                                     ),
                                   )
                               ],
@@ -311,17 +366,30 @@ class TvPlayerControls extends StatelessWidget {
                                   child: FocusScope(
                                   autofocus: true,
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         locals.videoQueue,
                                         style: textTheme.titleLarge,
                                       ),
                                       TvHorizontalVideoList(
-                                          onSelect: (ctx, video) => onVideoQueueSelected(ctx, cubit, video),
-                                          paginatedVideoList: FixedItemList(mpc!.videos
-                                              .map((e) => VideoInList(e.title, e.videoId, e.lengthSeconds, null,
-                                                  e.author, e.authorId, e.authorUrl, null, null, e.videoThumbnails))
+                                          onSelect: (ctx, video) =>
+                                              onVideoQueueSelected(
+                                                  ctx, cubit, video),
+                                          paginatedVideoList: FixedItemList(mpc
+                                              .videos
+                                              .map((e) => VideoInList(
+                                                  e.title,
+                                                  e.videoId,
+                                                  e.lengthSeconds,
+                                                  null,
+                                                  e.author,
+                                                  e.authorId,
+                                                  e.authorUrl,
+                                                  null,
+                                                  null,
+                                                  e.videoThumbnails))
                                               .toList())),
                                     ],
                                   ),

@@ -1,4 +1,3 @@
-import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -20,13 +19,15 @@ class TvTimePicker extends StatelessWidget {
   final String value;
   final Function(String value) onTimePicked;
 
-  const TvTimePicker({super.key, required this.value, required this.onTimePicked});
+  const TvTimePicker(
+      {super.key, required this.value, required this.onTimePicked});
 
   @override
   Widget build(BuildContext context) {
     var textTheme = Theme.of(context).textTheme;
     return TvButton(
-      onPressed: (context) => AutoRouter.of(context).push(TvTimePickerRoute(value: value, onTimePicked: onTimePicked)),
+      onPressed: (context) => AutoRouter.of(context)
+          .push(TvTimePickerRoute(value: value, onTimePicked: onTimePicked)),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Text(
@@ -43,7 +44,8 @@ class TvTimePickerScreen extends StatelessWidget {
   final String value;
   final Function(String value) onTimePicked;
 
-  const TvTimePickerScreen({super.key, required this.value, required this.onTimePicked});
+  const TvTimePickerScreen(
+      {super.key, required this.value, required this.onTimePicked});
 
   @override
   Widget build(BuildContext context) {
@@ -122,7 +124,12 @@ class TimeChanger extends StatelessWidget {
   final Function() onDown;
   final bool autoFocus;
 
-  const TimeChanger({super.key, required this.value, required this.onUp, required this.onDown, this.autoFocus = false});
+  const TimeChanger(
+      {super.key,
+      required this.value,
+      required this.onUp,
+      required this.onDown,
+      this.autoFocus = false});
 
   KeyEventResult handleKeyEvent(FocusNode node, KeyEvent event) {
     if (event is KeyUpEvent) {
@@ -150,7 +157,9 @@ class TimeChanger extends StatelessWidget {
         return AnimatedContainer(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
-            color: hasFocus ? colors.secondaryContainer : colors.secondaryContainer.withOpacity(0),
+            color: hasFocus
+                ? colors.secondaryContainer
+                : colors.secondaryContainer.withOpacity(0),
           ),
           padding: const EdgeInsets.all(8),
           duration: animationDuration,

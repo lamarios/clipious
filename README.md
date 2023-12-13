@@ -99,6 +99,8 @@ To get started, you'll need to create a fork of the repo and might run:
 ```
 git submodule init
 git submodule update
+#enable git pre commit hooks for auto formatting
+./submodules/flutter/bin/dart run tools/setup_git_hooks.dart
 ```
 Flutter itself is used as a submodule of this repo in order to pin the version I want to use to enable reproducible build on f-droid
 

@@ -85,12 +85,12 @@ import '../../utils/models/image_object.dart';
 
 part 'playlist.g.dart';
 
-const YOUTUBE_PLAYLIST = "youtubePlayList";
-const INVIDIOUS_PLAYLIST = "invidiousPlaylist";
+const youtubePlaylist = "youtubePlayList";
+const invidiousPlaylist = "invidiousPlaylist";
 
 @JsonSerializable()
 class Playlist {
-  String type = YOUTUBE_PLAYLIST;
+  String type = youtubePlaylist;
   String title;
   String playlistId;
   String author;
@@ -107,10 +107,11 @@ class Playlist {
   @JsonKey(includeToJson: false, includeFromJson: false)
   int removedByFilter = 0;
 
-  Playlist(this.type, this.title, this.playlistId, this.author, this.authordId, this.authorUrl, this.description,
-      this.videoCount);
+  Playlist(this.type, this.title, this.playlistId, this.author, this.authordId,
+      this.authorUrl, this.description, this.videoCount);
 
-  factory Playlist.fromJson(Map<String, dynamic> json) => _$PlaylistFromJson(json);
+  factory Playlist.fromJson(Map<String, dynamic> json) =>
+      _$PlaylistFromJson(json);
 
   Map<String, dynamic> toJson() => _$PlaylistToJson(this);
 }

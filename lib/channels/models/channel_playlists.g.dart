@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'channelPlaylists.dart';
+part of 'channel_playlists.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator

@@ -19,7 +19,7 @@ import 'home/models/db/home_layout.dart';
 import 'notifications/models/db/channel_notifications.dart';
 import 'notifications/models/db/playlist_notifications.dart';
 import 'notifications/models/db/subscription_notifications.dart';
-import 'search/models/db/searchHistoryItem.dart';
+import 'search/models/db/search_history_item.dart';
 import 'settings/models/db/app_logs.dart';
 import 'settings/models/db/server.dart';
 import 'settings/models/db/settings.dart';

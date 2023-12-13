@@ -22,16 +22,20 @@ class VideoTabletInnerView extends StatelessWidget {
   final VideoState videoController;
 
   const VideoTabletInnerView(
-      {super.key, required this.video, required this.selectedIndex, this.playNow, required this.videoController});
+      {super.key,
+      required this.video,
+      required this.selectedIndex,
+      this.playNow,
+      required this.videoController});
 
   @override
   Widget build(BuildContext context) {
-    ColorScheme colorScheme = Theme.of(context).colorScheme;
     AppLocalizations locals = AppLocalizations.of(context)!;
     var textTheme = Theme.of(context).textTheme;
     var cubit = context.read<VideoCubit>();
     var settings = context.read<SettingsCubit>();
-    String? currentlyPlayingVideoId = context.select((PlayerCubit player) => player.state.currentlyPlaying?.videoId);
+    String? currentlyPlayingVideoId = context
+        .select((PlayerCubit player) => player.state.currentlyPlaying?.videoId);
     final bool restart = currentlyPlayingVideoId == video.videoId;
     return Row(
       children: [
@@ -47,13 +51,16 @@ class VideoTabletInnerView extends StatelessWidget {
                   constraints: BoxConstraints(maxWidth: tabletMaxVideoWidth),
                   child: VideoThumbnailView(
                     videoId: video.videoId,
-                    thumbnailUrl: video.deArrowThumbnailUrl ?? video.getBestThumbnail()?.url ?? '',
+                    thumbnailUrl: video.deArrowThumbnailUrl ??
+                        video.getBestThumbnail()?.url ??
+                        '',
                     child: Stack(
                       alignment: Alignment.center,
                       children: [
                         PlayButton(
                           icon: restart ? Icons.refresh : null,
-                          onPressed: restart ? cubit.restartVideo : cubit.playVideo,
+                          onPressed:
+                              restart ? cubit.restartVideo : cubit.playVideo,
                         ),
                         Positioned(
                             right: 5,
@@ -78,7 +85,8 @@ class VideoTabletInnerView extends StatelessWidget {
                                 onChanged: cubit.togglePlayRecommendedNext,
                                 visualDensity: VisualDensity.compact)),
                         InkWell(
-                            onTap: () => cubit.togglePlayRecommendedNext(!settings.state.playRecommendedNext),
+                            onTap: () => cubit.togglePlayRecommendedNext(
+                                !settings.state.playRecommendedNext),
                             child: Text(
                               locals.addRecommendedToQueue,
                               style: textTheme.bodySmall,
@@ -115,7 +123,10 @@ class VideoTabletInnerView extends StatelessWidget {
           ),
         ),
         if (!settings.state.distractionFreeMode)
-          SizedBox(width: 350, child: SingleChildScrollView(child: RecommendedVideos(video: video)))
+          SizedBox(
+              width: 350,
+              child:
+                  SingleChildScrollView(child: RecommendedVideos(video: video)))
       ],
     );
   }

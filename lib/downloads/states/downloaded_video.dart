@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
-import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:invidious/downloads/models/downloaded_video.dart';
 import 'package:invidious/globals.dart';
@@ -86,20 +85,18 @@ class DownloadedVideoCubit extends Cubit<DownloadedVideoState> {
 
 @freezed
 class DownloadedVideoState with _$DownloadedVideoState {
-  const factory DownloadedVideoState({
-    DownloadedVideo? video,
-    String? thumbnailPath,
-    @Default(0) double progress
-}) = _DownloadedVideoState;
+  const factory DownloadedVideoState(
+      {DownloadedVideo? video,
+      String? thumbnailPath,
+      @Default(0) double progress}) = _DownloadedVideoState;
 
-static  DownloadedVideoState init(int videoId) {
-  DownloadedVideo? video;
+  static DownloadedVideoState init(int videoId) {
+    DownloadedVideo? video;
     var downloadById = db.getDownloadById(videoId);
     if (downloadById != null) {
       video = downloadById;
     }
 
- return    DownloadedVideoState(video: video);
+    return DownloadedVideoState(video: video);
   }
-
 }

@@ -8,10 +8,10 @@ enum SponsorSegmentType {
   intro,
   outro,
   preview,
-  music_offtopic,
+  musicOffTopic,
   filler;
 
-  String settingsName() => '$SPONSOR_BLOCK_PREFIX$name';
+  String settingsName() => '$sponsorBlockPrefix$name';
 
   static String getLabel(SponsorSegmentType type, AppLocalizations locals) {
     switch (type) {
@@ -27,14 +27,15 @@ enum SponsorSegmentType {
         return locals.sponsorBlockCategoryOutro;
       case SponsorSegmentType.preview:
         return locals.sponsorBlockCategoryPreview;
-      case SponsorSegmentType.music_offtopic:
+      case SponsorSegmentType.musicOffTopic:
         return locals.sponsorBlockCategoryMusicOffTopic;
       case SponsorSegmentType.filler:
         return locals.sponsorBlockCategoryFiller;
     }
   }
 
-  static String getDescription(SponsorSegmentType type, AppLocalizations locals) {
+  static String getDescription(
+      SponsorSegmentType type, AppLocalizations locals) {
     switch (type) {
       case SponsorSegmentType.sponsor:
         return locals.sponsorBlockCategorySponsorDescription;
@@ -48,7 +49,7 @@ enum SponsorSegmentType {
         return locals.sponsorBlockCategoryOutroDescription;
       case SponsorSegmentType.preview:
         return locals.sponsorBlockCategoryPreviewDescription;
-      case SponsorSegmentType.music_offtopic:
+      case SponsorSegmentType.musicOffTopic:
         return locals.sponsorBlockCategoryMusicOffTopicDescription;
       case SponsorSegmentType.filler:
         return locals.sponsorBlockCategoryFillerDescription;

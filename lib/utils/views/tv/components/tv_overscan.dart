@@ -5,12 +5,13 @@ class TvOverscan extends StatelessWidget {
   static const double horizontal = 48;
   final Widget child;
 
-  const TvOverscan({Key? key, required this.child}) : super(key: key);
+  const TvOverscan({super.key, required this.child});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: TvOverscan.vertical, horizontal: TvOverscan.horizontal),
+      padding: const EdgeInsets.symmetric(
+          vertical: TvOverscan.vertical, horizontal: TvOverscan.horizontal),
       child: child,
     );
   }

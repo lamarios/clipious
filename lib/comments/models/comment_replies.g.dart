@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'commentReplies.dart';
+part of 'comment_replies.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator

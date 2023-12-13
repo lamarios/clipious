@@ -1,4 +1,3 @@
-import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:invidious/globals.dart';
@@ -22,7 +21,7 @@ class TvTextField extends StatelessWidget {
   final TextInputType? keyboardType;
 
   const TvTextField(
-      {Key? key,
+      {super.key,
       required this.controller,
       this.autofocus,
       this.autocorrect,
@@ -34,22 +33,20 @@ class TvTextField extends StatelessWidget {
       this.trailing,
       this.obscureText,
       this.autofillHints,
-      this.decoration, this.keyboardType})
-      : super(key: key);
+      this.decoration,
+      this.keyboardType});
 
   openTextField(BuildContext context) {
-    print(keyboardType?.index);
     AutoRouter.of(context).push(TvTextFieldRoute(
-      controller: controller,
-      autocorrect: autocorrect,
-      autofocus: autofocus,
-      onSubmitted: onSubmitted,
-      textInputAction: textInputAction,
-      obscureText: obscureText,
-      autofillHints: autofillHints,
-      decoration: decoration,
-      keyboardType: keyboardType
-    ));
+        controller: controller,
+        autocorrect: autocorrect,
+        autofocus: autofocus,
+        onSubmitted: onSubmitted,
+        textInputAction: textInputAction,
+        obscureText: obscureText,
+        autofillHints: autofillHints,
+        decoration: decoration,
+        keyboardType: keyboardType));
   }
 
   @override
@@ -61,7 +58,8 @@ class TvTextField extends StatelessWidget {
       autofocus: autofocus ?? false,
       onFocusChange: onFocusChanged,
       focusNode: focusNode,
-      onKeyEvent: (node, event) => onTvSelect(event, context, (context) => openTextField(context)),
+      onKeyEvent: (node, event) =>
+          onTvSelect(event, context, (context) => openTextField(context)),
       child: Builder(builder: (ctx) {
         bool hasFocus = Focus.of(ctx).hasFocus;
 
@@ -71,7 +69,9 @@ class TvTextField extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: AnimatedContainer(
             duration: animationDuration ~/ 2,
-            decoration: BoxDecoration(color: hasFocus ? colors.secondaryContainer : colors.background, borderRadius: hasFocus ? BorderRadius.circular(10) : null),
+            decoration: BoxDecoration(
+                color: hasFocus ? colors.secondaryContainer : colors.background,
+                borderRadius: hasFocus ? BorderRadius.circular(10) : null),
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
@@ -79,10 +79,21 @@ class TvTextField extends StatelessWidget {
                   leading ?? const SizedBox.shrink(),
                   Expanded(
                     child: Container(
-                        decoration: BoxDecoration(border: Border(bottom: BorderSide(width: 2, color: colors.secondaryContainer))),
+                        decoration: BoxDecoration(
+                            border: Border(
+                                bottom: BorderSide(
+                                    width: 2,
+                                    color: colors.secondaryContainer))),
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: showLabel ? decoration!.label! : Text((obscureText ?? false) ? "************" : controller.text, style: textTheme.bodyLarge,),
+                          child: showLabel
+                              ? decoration!.label!
+                              : Text(
+                                  (obscureText ?? false)
+                                      ? "************"
+                                      : controller.text,
+                                  style: textTheme.bodyLarge,
+                                ),
                         )),
                   ),
                   trailing ?? const SizedBox.shrink()
@@ -110,13 +121,21 @@ class TvTextFieldScreen extends StatelessWidget {
   final TextInputType? keyboardType;
 
   const TvTextFieldScreen(
-      {Key? key, required this.controller, this.autofocus, this.autocorrect, this.focusNode, this.onSubmitted, this.textInputAction, this.obscureText, this.autofillHints, this.decoration, this.keyboardType})
-      : super(key: key);
+      {super.key,
+      required this.controller,
+      this.autofocus,
+      this.autocorrect,
+      this.focusNode,
+      this.onSubmitted,
+      this.textInputAction,
+      this.obscureText,
+      this.autofillHints,
+      this.decoration,
+      this.keyboardType});
 
   @override
   Widget build(BuildContext context) {
     TextTheme textTheme = Theme.of(context).textTheme;
-    print(keyboardType?.index);
     return Scaffold(
       body: TvOverscan(
         child: DefaultTextStyle(

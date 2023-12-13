@@ -18,10 +18,23 @@ class AdaptiveFormat {
   String? qualityLabel;
   String? resolution;
 
-  AdaptiveFormat(this.index, this.bitrate, this.init, this.url, this.itag, this.type, this.clen, this.lmt,
-      this.projectionType, this.container, this.encoding, this.qualityLabel, this.resolution);
+  AdaptiveFormat(
+      this.index,
+      this.bitrate,
+      this.init,
+      this.url,
+      this.itag,
+      this.type,
+      this.clen,
+      this.lmt,
+      this.projectionType,
+      this.container,
+      this.encoding,
+      this.qualityLabel,
+      this.resolution);
 
-  factory AdaptiveFormat.fromJson(Map<String, dynamic> json) => _$AdaptiveFormatFromJson(json);
+  factory AdaptiveFormat.fromJson(Map<String, dynamic> json) =>
+      _$AdaptiveFormatFromJson(json);
 
   Map<String, dynamic> toJson() => _$AdaptiveFormatToJson(this);
 }

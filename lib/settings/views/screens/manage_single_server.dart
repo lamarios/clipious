@@ -14,7 +14,7 @@ import 'settings.dart';
 class ManageSingleServerScreen extends StatelessWidget {
   final Server server;
 
-  const ManageSingleServerScreen({Key? key, required this.server}) : super(key: key);
+  const ManageSingleServerScreen({super.key, required this.server});
 
   void showLogInWithCookiesDialog(BuildContext context) async {
     var locals = AppLocalizations.of(context)!;
@@ -33,7 +33,10 @@ class ManageSingleServerScreen extends StatelessWidget {
               TextField(
                   controller: userController,
                   autocorrect: false,
-                  autofillHints: const [AutofillHints.username, AutofillHints.email],
+                  autofillHints: const [
+                    AutofillHints.username,
+                    AutofillHints.email
+                  ],
                   decoration: InputDecoration(label: Text(locals.username))),
               TextField(
                 obscureText: true,
@@ -49,10 +52,16 @@ class ManageSingleServerScreen extends StatelessWidget {
               child: Text(locals.ok),
               onPressed: () async {
                 try {
-                  await cubit.logInWithCookie(userController.text, passwordController.text);
-                  Navigator.of(context).pop();
+                  await cubit.logInWithCookie(
+                      userController.text, passwordController.text);
+                  if (context.mounted) {
+                    Navigator.of(context).pop();
+                  }
                 } catch (err) {
-                  showAlertDialog(context, locals.error, [Text(locals.wrongUsernamePassword)]);
+                  if (context.mounted) {
+                    showAlertDialog(context, locals.error,
+                        [Text(locals.wrongUsernamePassword)]);
+                  }
                   rethrow;
                 }
               },
@@ -77,12 +86,14 @@ class ManageSingleServerScreen extends StatelessWidget {
     SettingsThemeData theme = settingsTheme(colorScheme);
 
     return BlocProvider(
-      create: (context) => ServerSettingsCubit(server, context.read<AppCubit>()),
+      create: (context) =>
+          ServerSettingsCubit(server, context.read<AppCubit>()),
       child: BlocBuilder<ServerSettingsCubit, Server>(
         builder: (context, server) {
           var cubit = context.read<ServerSettingsCubit>();
-          bool isLoggedIn = (server.authToken != null && server.authToken!.isNotEmpty) ||
-              (server.sidCookie != null && server.sidCookie!.isNotEmpty);
+          bool isLoggedIn =
+              (server.authToken != null && server.authToken!.isNotEmpty) ||
+                  (server.sidCookie != null && server.sidCookie!.isNotEmpty);
           return Scaffold(
               appBar: AppBar(
                 backgroundColor: colorScheme.background,
@@ -92,62 +103,75 @@ class ManageSingleServerScreen extends StatelessWidget {
               backgroundColor: colorScheme.background,
               body: SafeArea(
                 bottom: false,
-                child: SettingsList(lightTheme: theme, darkTheme: theme, sections: [
-                  SettingsSection(tiles: [
-                    SettingsTile.switchTile(
-                      initialValue: server.inUse,
-                      onToggle: cubit.useServer,
-                      title: Text(locals.useThisServer),
-                      enabled: !server.inUse,
-                    )
-                  ]),
-                  SettingsSection(title: Text(locals.authentication), tiles: [
-                    SettingsTile(
-                      leading:
-                          server.authToken?.isNotEmpty ?? false ? const Icon(Icons.check) : const Icon(Icons.token),
-                      enabled: !isLoggedIn,
-                      title: Text(locals.tokenLogin),
-                      value:
-                          Text(server.authToken?.isNotEmpty ?? false ? locals.loggedIn : locals.tokenLoginDescription),
-                      onPressed: (context) async {
-                        await cubit.logInWithToken();
-                      },
-                    ),
-                    SettingsTile(
-                      leading: server.sidCookie?.isNotEmpty ?? false
-                          ? const Icon(Icons.check)
-                          : const Icon(Icons.cookie_outlined),
-                      enabled: !isLoggedIn,
-                      title: Text(locals.cookieLogin),
-                      value:
-                          Text(server.sidCookie?.isNotEmpty ?? false ? locals.loggedIn : locals.cookieLoginDescription),
-                      onPressed: showLogInWithCookiesDialog,
-                    ),
-                    SettingsTile(
-                      leading: const Icon(Icons.exit_to_app),
-                      enabled: isLoggedIn,
-                      title: Text(locals.logout),
-                      onPressed: (context) => cubit.logOut(),
-                    )
-                  ]),
-                  SettingsSection(title: const Text(''), tiles: [
-                    SettingsTile(
-                      enabled: cubit.canDelete,
-                      onPressed: (context) {
-                        cubit.deleteServer();
-                        Navigator.of(context).pop();
-                      },
-                      leading: Icon(
-                        Icons.delete,
-                        color: cubit.canDelete ? Colors.red : Colors.red.withOpacity(0.5),
-                      ),
-                      title: Text(
-                        locals.delete,
-                        style: TextStyle(color: cubit.canDelete ? Colors.red : Colors.red.withOpacity(0.5)),
-                      ),
-                    )
-                  ])
-                ]),
+                child: SettingsList(
+                    lightTheme: theme,
+                    darkTheme: theme,
+                    sections: [
+                      SettingsSection(tiles: [
+                        SettingsTile.switchTile(
+                          initialValue: server.inUse,
+                          onToggle: cubit.useServer,
+                          title: Text(locals.useThisServer),
+                          enabled: !server.inUse,
+                        )
+                      ]),
+                      SettingsSection(
+                          title: Text(locals.authentication),
+                          tiles: [
+                            SettingsTile(
+                              leading: server.authToken?.isNotEmpty ?? false
+                                  ? const Icon(Icons.check)
+                                  : const Icon(Icons.token),
+                              enabled: !isLoggedIn,
+                              title: Text(locals.tokenLogin),
+                              value: Text(server.authToken?.isNotEmpty ?? false
+                                  ? locals.loggedIn
+                                  : locals.tokenLoginDescription),
+                              onPressed: (context) async {
+                                await cubit.logInWithToken();
+                              },
+                            ),
+                            SettingsTile(
+                              leading: server.sidCookie?.isNotEmpty ?? false
+                                  ? const Icon(Icons.check)
+                                  : const Icon(Icons.cookie_outlined),
+                              enabled: !isLoggedIn,
+                              title: Text(locals.cookieLogin),
+                              value: Text(server.sidCookie?.isNotEmpty ?? false
+                                  ? locals.loggedIn
+                                  : locals.cookieLoginDescription),
+                              onPressed: showLogInWithCookiesDialog,
+                            ),
+                            SettingsTile(
+                              leading: const Icon(Icons.exit_to_app),
+                              enabled: isLoggedIn,
+                              title: Text(locals.logout),
+                              onPressed: (context) => cubit.logOut(),
+                            )
+                          ]),
+                      SettingsSection(title: const Text(''), tiles: [
+                        SettingsTile(
+                          enabled: cubit.canDelete,
+                          onPressed: (context) {
+                            cubit.deleteServer();
+                            Navigator.of(context).pop();
+                          },
+                          leading: Icon(
+                            Icons.delete,
+                            color: cubit.canDelete
+                                ? Colors.red
+                                : Colors.red.withOpacity(0.5),
+                          ),
+                          title: Text(
+                            locals.delete,
+                            style: TextStyle(
+                                color: cubit.canDelete
+                                    ? Colors.red
+                                    : Colors.red.withOpacity(0.5)),
+                          ),
+                        )
+                      ])
+                    ]),
               ));
         },
       ),

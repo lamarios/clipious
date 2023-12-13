@@ -8,14 +8,16 @@ import '../../models/base_video.dart';
 class AddToQueueButton extends StatelessWidget {
   final List<BaseVideo> videos;
 
-  const AddToQueueButton({Key? key, required this.videos}) : super(key: key);
+  const AddToQueueButton({super.key, required this.videos});
 
   static bool canAddToQueue(BuildContext context, List<BaseVideo> videos) {
     var state = context.read<PlayerCubit>().state;
     return (state.videos.isNotEmpty) &&
         (videos.length > 1 ||
             (videos.length == 1 &&
-                (state.videos.indexWhere((element) => element.videoId == videos[0].videoId) ?? -1) < 0));
+                state.videos.indexWhere(
+                        (element) => element.videoId == videos[0].videoId) <
+                    0));
   }
 
   addToQueue(BuildContext context) {
@@ -32,7 +34,9 @@ class AddToQueueButton extends StatelessWidget {
         builder: (context, _) {
           return FilledButton.tonal(
               style: const ButtonStyle(visualDensity: VisualDensity.compact),
-              onPressed: canAddToQueue(context, videos) ? () => addToQueue(context) : null,
+              onPressed: canAddToQueue(context, videos)
+                  ? () => addToQueue(context)
+                  : null,
               child: Row(
                 children: [
                   const Padding(

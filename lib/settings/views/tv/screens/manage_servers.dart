@@ -8,14 +8,15 @@ import 'package:invidious/utils/views/tv/components/tv_overscan.dart';
 
 @RoutePage()
 class TvSettingsManageServersScreen extends StatelessWidget {
-  const TvSettingsManageServersScreen({Key? key}) : super(key: key);
+  const TvSettingsManageServersScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: BlocProvider(
           create: (BuildContext context) => ServerListSettingsCubit(
-              ServerListSettingsState(publicServers: [], dbServers: []), context.read<AppCubit>()),
+              const ServerListSettingsState(publicServers: [], dbServers: []),
+              context.read<AppCubit>()),
           child: const TvOverscan(child: TvManageServersInner())),
     );
   }

@@ -11,7 +11,8 @@ class ImageObject {
 
   ImageObject(this.quality, this.url, this.width, this.height);
 
-  factory ImageObject.fromJson(Map<String, dynamic> json) => _$ImageObjectFromJson(json);
+  factory ImageObject.fromJson(Map<String, dynamic> json) =>
+      _$ImageObjectFromJson(json);
 
   Map<String, dynamic> toJson() => _$ImageObjectToJson(this);
 

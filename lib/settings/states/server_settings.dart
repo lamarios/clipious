@@ -40,7 +40,8 @@ class ServerSettingsCubit extends Cubit<Server> {
 
   Future<void> logInWithCookie(String username, String password) async {
     var state = this.state.copyWith();
-    String cookie = await service.loginWithCookies(state.url, username, password);
+    String cookie =
+        await service.loginWithCookies(state.url, username, password);
 
     state.sidCookie = cookie;
     db.upsertServer(state);

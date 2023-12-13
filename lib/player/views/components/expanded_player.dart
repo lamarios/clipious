@@ -28,7 +28,8 @@ class ExpandedPlayer {
     DownloadedVideo? offlineVid = controller.offlineCurrentlyPlaying;
     var settings = context.watch<SettingsCubit>().state;
 
-    bool isFullScreen = controller.fullScreenState == FullScreenState.fullScreen;
+    bool isFullScreen =
+        controller.fullScreenState == FullScreenState.fullScreen;
 
     return video != null || offlineVid != null
         ? [
@@ -41,11 +42,15 @@ class ExpandedPlayer {
                 visible: !controller.isMini && !isFullScreen,
                 child: Expanded(
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: innerHorizontalPadding),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: innerHorizontalPadding),
                     child: Container(
-                      constraints: BoxConstraints(maxWidth: tabletMaxVideoWidth),
+                      constraints:
+                          BoxConstraints(maxWidth: tabletMaxVideoWidth),
                       child: Builder(builder: (context) {
-                        var selectedIndex = context.select((PlayerCubit value) => value.state.selectedFullScreenIndex);
+                        var selectedIndex = context.select(
+                            (PlayerCubit value) =>
+                                value.state.selectedFullScreenIndex);
                         return video != null
                             ? <Widget>[
                                 SingleChildScrollView(
@@ -59,7 +64,8 @@ class ExpandedPlayer {
                                     key: ValueKey('comms-${video.videoId}'),
                                   ),
                                 ),
-                                SingleChildScrollView(child: RecommendedVideos(video: video)),
+                                SingleChildScrollView(
+                                    child: RecommendedVideos(video: video)),
                                 const VideoQueue(),
                               ][selectedIndex]
                             : const VideoQueue();
@@ -68,11 +74,15 @@ class ExpandedPlayer {
                   ),
                 )),
             Visibility(
-              visible: !settings.distractionFreeMode && !controller.isMini && video != null && !isFullScreen,
+              visible: !settings.distractionFreeMode &&
+                  !controller.isMini &&
+                  video != null &&
+                  !isFullScreen,
               child: SizedBox(
                 // height: 80,
                 child: Builder(builder: (context) {
-                  var selectedIndex = context.select((PlayerCubit value) => value.state.selectedFullScreenIndex);
+                  var selectedIndex = context.select((PlayerCubit value) =>
+                      value.state.selectedFullScreenIndex);
                   return NavigationBar(
                       backgroundColor: colors.background,
                       elevation: 0,
@@ -80,10 +90,17 @@ class ExpandedPlayer {
                       labelBehavior: settings.navigationBarLabelBehavior,
                       onDestinationSelected: player.selectTab,
                       destinations: [
-                        NavigationDestination(icon: const Icon(Icons.info), label: locals.info),
-                        NavigationDestination(icon: const Icon(Icons.chat_bubble), label: locals.comments),
-                        NavigationDestination(icon: const Icon(Icons.schema), label: locals.recommended),
-                        NavigationDestination(icon: const Icon(Icons.playlist_play), label: locals.videoQueue)
+                        NavigationDestination(
+                            icon: const Icon(Icons.info), label: locals.info),
+                        NavigationDestination(
+                            icon: const Icon(Icons.chat_bubble),
+                            label: locals.comments),
+                        NavigationDestination(
+                            icon: const Icon(Icons.schema),
+                            label: locals.recommended),
+                        NavigationDestination(
+                            icon: const Icon(Icons.playlist_play),
+                            label: locals.videoQueue)
                       ]);
                 }),
               ),

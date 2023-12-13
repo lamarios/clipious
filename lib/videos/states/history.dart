@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/utils/states/item_list.dart';
@@ -46,5 +45,8 @@ class HistoryItemCubit extends Cubit<HistoryItemState> {
 
 @freezed
 class HistoryItemState with _$HistoryItemState {
-  const factory HistoryItemState({required String videoId, @Default(true) bool loading, HistoryVideoCache? cachedVid}) = _HistoryItemState;
+  const factory HistoryItemState(
+      {required String videoId,
+      @Default(true) bool loading,
+      HistoryVideoCache? cachedVid}) = _HistoryItemState;
 }

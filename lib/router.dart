@@ -5,7 +5,7 @@ import 'package:invidious/app/views/screens/main.dart';
 import 'package:invidious/app/views/tv/screens/tv_home.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/player/states/player.dart';
-import 'package:invidious/player/views/tv/screens/tvPlayerView.dart';
+import 'package:invidious/player/views/tv/screens/tv_player_view.dart';
 import 'package:invidious/playlists/models/playlist.dart';
 import 'package:invidious/playlists/views/screens/playlist.dart';
 import 'package:invidious/playlists/views/tv/screens/playlist.dart';
@@ -37,7 +37,7 @@ import 'package:invidious/settings/views/tv/screens/search_history_settings.dart
 import 'package:invidious/settings/views/tv/screens/settings.dart';
 import 'package:invidious/settings/views/tv/screens/sponsor_block_settings.dart';
 import 'package:invidious/subscription_management/view/screens/manage_subscriptions.dart';
-import 'package:invidious/utils/models/paginatedList.dart';
+import 'package:invidious/utils/models/paginated_list.dart';
 import 'package:invidious/utils/views/tv/components/select_from_list.dart';
 import 'package:invidious/utils/views/tv/components/tv_plain_text.dart';
 import 'package:invidious/utils/views/tv/components/tv_text_field.dart';
@@ -120,7 +120,9 @@ class AppRouter extends _$AppRouter {
                 AutoRoute(page: SettingsRoute.page),
                 AutoRoute(page: BrowsingSettingsRoute.page),
                 AutoRoute(page: ManageServersRoute.page),
-                AutoRoute(page: ManageSingleServerRoute.page, path: pathManageSingleServerFromSettings),
+                AutoRoute(
+                    page: ManageSingleServerRoute.page,
+                    path: pathManageSingleServerFromSettings),
                 AutoRoute(page: VideoPlayerSettingsRoute.page),
                 AutoRoute(page: AppearanceSettingsRoute.page),
                 AutoRoute(page: SearchHistorySettingsRoute.page),
@@ -135,7 +137,9 @@ class AppRouter extends _$AppRouter {
                 AutoRoute(page: DeArrowSettingsRoute.page)
               ],
             ),
-            AutoRoute(page: ManageSingleServerRoute.page, path: pathManageSingleServerFromWizard),
+            AutoRoute(
+                page: ManageSingleServerRoute.page,
+                path: pathManageSingleServerFromWizard),
             AutoRoute(page: WelcomeWizardRoute.page, initial: !hasServer)
           ];
   }

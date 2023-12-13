@@ -11,7 +11,7 @@ import '../../../../videos/models/sponsor_segment_types.dart';
 
 @RoutePage()
 class TvSponsorBlockSettingsScreen extends StatelessWidget {
-  const TvSponsorBlockSettingsScreen({Key? key}) : super(key: key);
+  const TvSponsorBlockSettingsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,15 +23,17 @@ class TvSponsorBlockSettingsScreen extends StatelessWidget {
           return TvOverscan(
             child: ListView(
               children: [
-                SettingsTitle(title: locals.sponsorBlockSettingsQuickDescription),
+                SettingsTitle(
+                    title: locals.sponsorBlockSettingsQuickDescription),
                 ...SponsorSegmentType.values.map((t) {
                   bool value = _.settings[t.settingsName()]?.value == 'true';
                   return SettingsTile(
-                      trailing: Switch(value: value, onChanged: (value) {}),
-                      onSelected: (context) => cubit.saveSetting(SettingsValue(t.settingsName(), (!value).toString())),
-                      title: SponsorSegmentType.getLabel(t, locals),
-                      description: SponsorSegmentType.getDescription(t, locals),
-                    );
+                    trailing: Switch(value: value, onChanged: (value) {}),
+                    onSelected: (context) => cubit.saveSetting(
+                        SettingsValue(t.settingsName(), (!value).toString())),
+                    title: SponsorSegmentType.getLabel(t, locals),
+                    description: SponsorSegmentType.getDescription(t, locals),
+                  );
                 })
               ],
             ),

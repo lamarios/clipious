@@ -15,19 +15,22 @@ class AppCustomizer extends StatelessWidget {
     var colors = Theme.of(context).colorScheme;
     var textTheme = Theme.of(context).textTheme;
     return BlocProvider(
-      create: (context) =>
-          AppCustomizerCubit(context.read<SettingsCubit>().state.appLayout, context.read<SettingsCubit>()),
+      create: (context) => AppCustomizerCubit(
+          context.read<SettingsCubit>().state.appLayout,
+          context.read<SettingsCubit>()),
       child: BlocBuilder<AppCustomizerCubit, List<HomeDataSource>>(
         builder: (context, state) {
           var settings = context.read<SettingsCubit>();
           var appLayout = context.read<AppCustomizerCubit>();
-          var onStart = context.select((SettingsCubit cubit) => cubit.state.onOpen);
+          var onStart =
+              context.select((SettingsCubit cubit) => cubit.state.onOpen);
           if (onStart >= state.length) onStart = 0;
           return Column(
             children: [
               Padding(
                 padding: const EdgeInsets.only(bottom: 8.0),
-                child: Text(locals.customizeAppLayoutExplanation, style: textTheme.labelSmall),
+                child: Text(locals.customizeAppLayoutExplanation,
+                    style: textTheme.labelSmall),
               ),
               ReorderableListView.builder(
                 physics: const NeverScrollableScrollPhysics(),
@@ -40,13 +43,22 @@ class AppCustomizer extends StatelessWidget {
                     children: [
                       IconButton(
                           onPressed: () => settings.selectOnOpen(index),
-                          icon: Icon(onStart == index ? Icons.home : Icons.home_outlined,
-                              color: onStart == index ? colors.primary : colors.secondary)),
+                          icon: Icon(
+                              onStart == index
+                                  ? Icons.home
+                                  : Icons.home_outlined,
+                              color: onStart == index
+                                  ? colors.primary
+                                  : colors.secondary)),
                       Checkbox(
                         value: state.contains(source),
-                        onChanged: (value) => appLayout.updateSource(source, value ?? false),
+                        onChanged: (value) =>
+                            appLayout.updateSource(source, value ?? false),
                       ),
-                      Expanded(child: ReorderableDragStartListener(index: index, child: Text(source.getLabel(locals)))),
+                      Expanded(
+                          child: ReorderableDragStartListener(
+                              index: index,
+                              child: Text(source.getLabel(locals)))),
                       ReorderableDragStartListener(
                         index: index,
                         child: Padding(
@@ -76,7 +88,8 @@ class AppCustomizer extends StatelessWidget {
                               padding: const EdgeInsets.only(left: 48.0),
                               child: Checkbox(
                                 value: state.contains(e),
-                                onChanged: (value) => appLayout.updateSource(e, value ?? false),
+                                onChanged: (value) =>
+                                    appLayout.updateSource(e, value ?? false),
                               ),
                             ),
                             Text(e.getLabel(locals))
@@ -88,7 +101,9 @@ class AppCustomizer extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  TextButton(onPressed: () => Navigator.of(context).pop(), child: Text(locals.ok)),
+                  TextButton(
+                      onPressed: () => Navigator.of(context).pop(),
+                      child: Text(locals.ok)),
                 ],
               )
             ],

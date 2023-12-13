@@ -7,7 +7,7 @@ import 'package:invidious/settings/states/settings.dart';
 import 'package:invidious/utils/views/tv/components/tv_button.dart';
 
 class TvPlayerSettings extends StatelessWidget {
-  const TvPlayerSettings({Key? key}) : super(key: key);
+  const TvPlayerSettings({super.key});
 
   List<Widget> getContent(BuildContext context) {
     var _ = context.read<TvPlayerSettingsCubit>();
@@ -53,8 +53,10 @@ class TvPlayerSettings extends StatelessWidget {
     TextStyle? settingStyle = textTheme.titleLarge;
     var settings = context.read<SettingsCubit>();
     return BlocProvider(
-      create: (context) => TvPlayerSettingsCubit(TvPlayerSettingsState(), context.read<VideoPlayerCubit>(), settings),
-      child: BlocBuilder<TvPlayerSettingsCubit, TvPlayerSettingsState>(builder: (context, _) {
+      create: (context) => TvPlayerSettingsCubit(const TvPlayerSettingsState(),
+          context.read<VideoPlayerCubit>(), settings),
+      child: BlocBuilder<TvPlayerSettingsCubit, TvPlayerSettingsState>(
+          builder: (context, _) {
         var cubit = context.read<TvPlayerSettingsCubit>();
         var settings = context.read<SettingsCubit>();
 
@@ -69,10 +71,13 @@ class TvPlayerSettings extends StatelessWidget {
                     padding: const EdgeInsets.all(8.0),
                     child: TvButton(
                       autofocus: true,
-                      unfocusedColor: _.selected == Tabs.video ? colors.secondaryContainer : Colors.transparent,
+                      unfocusedColor: _.selected == Tabs.video
+                          ? colors.secondaryContainer
+                          : Colors.transparent,
                       onFocusChanged: cubit.videoButtonFocusChange,
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 8.0, horizontal: 16),
                         child: Text(
                           locals.quality,
                           style: settingStyle,
@@ -86,9 +91,12 @@ class TvPlayerSettings extends StatelessWidget {
                       padding: const EdgeInsets.all(8.0),
                       child: TvButton(
                         onFocusChanged: cubit.audioButtonFocusChange,
-                        unfocusedColor: _.selected == Tabs.audio ? colors.secondaryContainer : Colors.transparent,
+                        unfocusedColor: _.selected == Tabs.audio
+                            ? colors.secondaryContainer
+                            : Colors.transparent,
                         child: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 8.0, horizontal: 16),
                           child: Text(locals.audio, style: settingStyle),
                         ),
                       ),
@@ -98,9 +106,12 @@ class TvPlayerSettings extends StatelessWidget {
                     padding: const EdgeInsets.all(8.0),
                     child: TvButton(
                       onFocusChanged: cubit.captionsButtonFocusChange,
-                      unfocusedColor: _.selected == Tabs.captions ? colors.secondaryContainer : Colors.transparent,
+                      unfocusedColor: _.selected == Tabs.captions
+                          ? colors.secondaryContainer
+                          : Colors.transparent,
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 8.0, horizontal: 16),
                         child: Text(locals.subtitles, style: settingStyle),
                       ),
                     ),
@@ -109,9 +120,12 @@ class TvPlayerSettings extends StatelessWidget {
                     padding: const EdgeInsets.all(8.0),
                     child: TvButton(
                       onFocusChanged: cubit.playbackSpeedButtonFocusChange,
-                      unfocusedColor: _.selected == Tabs.playbackSpeed ? colors.secondaryContainer : Colors.transparent,
+                      unfocusedColor: _.selected == Tabs.playbackSpeed
+                          ? colors.secondaryContainer
+                          : Colors.transparent,
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 8.0, horizontal: 16),
                         child: Text(locals.playbackSpeed, style: settingStyle),
                       ),
                     ),
@@ -142,7 +156,8 @@ class TvSettingButton extends StatelessWidget {
   final String label;
   final Function(String selected) onPressed;
 
-  const TvSettingButton({Key? key, required this.label, required this.onPressed}) : super(key: key);
+  const TvSettingButton(
+      {super.key, required this.label, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {

@@ -1,6 +1,5 @@
 import 'package:invidious/database.dart';
 import 'package:invidious/globals.dart';
-import 'package:invidious/utils/models/image_object.dart';
 import 'package:invidious/videos/models/base_video.dart';
 import 'package:invidious/videos/models/db/dearrow_cache.dart';
 import 'package:json_annotation/json_annotation.dart';
@@ -15,20 +14,26 @@ class DeArrow {
   @JsonKey(includeFromJson: false, includeToJson: false)
   late final String videoId;
 
-  String? get thumbnailUrl =>
-      thumbnails.isNotEmpty ? 'https://dearrow-thumb.ajay.app/api/v1/getThumbnail?videoID=:id&time=:time'.replaceAll(':id', videoId).replaceAll(":time", thumbnails.first.timestamp.toString()) : null;
+  String? get thumbnailUrl => thumbnails.isNotEmpty
+      ? 'https://dearrow-thumb.ajay.app/api/v1/getThumbnail?videoID=:id&time=:time'
+          .replaceAll(':id', videoId)
+          .replaceAll(":time", thumbnails.first.timestamp.toString())
+      : null;
 
   DeArrow({required this.titles, required this.thumbnails});
 
-  factory DeArrow.fromJson(Map<String, dynamic> json) => _$DeArrowFromJson(json);
+  factory DeArrow.fromJson(Map<String, dynamic> json) =>
+      _$DeArrowFromJson(json);
 
   Map<String, dynamic> toJson() => _$DeArrowToJson(this);
 
   static Future<List<BaseVideo>> processVideos(List<BaseVideo>? videos) async {
-    var process = db.getSettings(DEARROW)?.value == "true";
+    var process = db.getSettings(dearrowSettingName)?.value == "true";
     if (videos != null && process) {
-      bool doThumbnails = db.getSettings(DEARROW_THUMBNAILS)?.value == "true";
-      var futureTasks = videos.map((e) => _deArrowVideo(e, doThumbnails)).toList();
+      bool doThumbnails =
+          db.getSettings(dearrowThumbnailsSettingName)?.value == "true";
+      var futureTasks =
+          videos.map((e) => _deArrowVideo(e, doThumbnails)).toList();
 
       await Future.wait(futureTasks);
 
@@ -87,11 +92,18 @@ class DeArrowTitle {
   final bool original;
   final int votes;
   final bool locked;
-  final String? UUID;
+  @JsonKey(name: 'UUID')
+  final String? uuid;
 
-  DeArrowTitle({this.title, this.original = false, this.votes = 0, this.locked = false, this.UUID});
+  DeArrowTitle(
+      {this.title,
+      this.original = false,
+      this.votes = 0,
+      this.locked = false,
+      this.uuid});
 
-  factory DeArrowTitle.fromJson(Map<String, dynamic> json) => _$DeArrowTitleFromJson(json);
+  factory DeArrowTitle.fromJson(Map<String, dynamic> json) =>
+      _$DeArrowTitleFromJson(json);
 
   Map<String, dynamic> toJson() => _$DeArrowTitleToJson(this);
 }
@@ -102,11 +114,18 @@ class DeArrowThumbnail {
   final bool original;
   final int votes;
   final bool locked;
-  final String? UUID;
+  @JsonKey(name: 'UUID')
+  final String? uuid;
 
-  DeArrowThumbnail({this.timestamp, this.original = false, this.votes = 0, this.locked = false, this.UUID});
+  DeArrowThumbnail(
+      {this.timestamp,
+      this.original = false,
+      this.votes = 0,
+      this.locked = false,
+      this.uuid});
 
-  factory DeArrowThumbnail.fromJson(Map<String, dynamic> json) => _$DeArrowThumbnailFromJson(json);
+  factory DeArrowThumbnail.fromJson(Map<String, dynamic> json) =>
+      _$DeArrowThumbnailFromJson(json);
 
   Map<String, dynamic> toJson() => _$DeArrowThumbnailToJson(this);
 }

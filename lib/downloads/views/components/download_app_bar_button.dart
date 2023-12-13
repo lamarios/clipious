@@ -23,7 +23,8 @@ class AppBarDownloadButton extends StatelessWidget {
               onPressed: () => openDownloadManager(context),
               icon: Icon(
                 Icons.download,
-                color: _.downloadProgresses.isNotEmpty ? colors.background : null,
+                color:
+                    _.downloadProgresses.isNotEmpty ? colors.background : null,
               ),
             ),
             _.downloadProgresses.isNotEmpty
@@ -35,7 +36,7 @@ class AppBarDownloadButton extends StatelessWidget {
                         child: TweenAnimationBuilder(
                           builder: (context, value, child) {
                             return CircularProgressIndicator(
-                              value: _.totalProgress == 0 ? null: value,
+                              value: _.totalProgress == 0 ? null : value,
                               strokeWidth: 2,
                             );
                           },
@@ -52,7 +53,9 @@ class AppBarDownloadButton extends StatelessWidget {
                         onTap: () => openDownloadManager(context),
                         child: Container(
                             padding: const EdgeInsets.all(4),
-                            decoration: BoxDecoration(color: colors.secondaryContainer, shape: BoxShape.circle),
+                            decoration: BoxDecoration(
+                                color: colors.secondaryContainer,
+                                shape: BoxShape.circle),
                             child: Text(
                               _.videos.length.toString(),
                               style: textTheme.labelSmall,

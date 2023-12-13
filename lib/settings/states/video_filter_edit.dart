@@ -37,14 +37,14 @@ class VideoFilterEditCubit extends Cubit<VideoFilterEditState> {
   void ensureFilter() {
     var filter = state.filter?.copyWith();
     filter ??= VideoFilter(value: "");
-    if ((filter.daysOfWeek ?? wholeWeek).isEmpty) {
+    if (filter.daysOfWeek.isEmpty) {
       filter.daysOfWeek = wholeWeek;
     }
 
-    if ((filter.startTime ?? '').isEmpty) {
+    if (filter.startTime.isEmpty) {
       filter.startTime = defaultStartTime;
     }
-    if ((filter.endTime ?? '').isEmpty) {
+    if (filter.endTime.isEmpty) {
       filter.endTime = defaultEndTime;
     }
     emit(state.copyWith(filter: filter));
@@ -90,7 +90,9 @@ class VideoFilterEditCubit extends Cubit<VideoFilterEditState> {
   }
 
   bool isFilterValid() {
-    return (state.filter != null && state.filter?.channelId != null && (state.filter?.filterAll ?? false)) ||
+    return (state.filter != null &&
+            state.filter?.channelId != null &&
+            (state.filter?.filterAll ?? false)) ||
         (state.filter != null &&
             state.filter?.type != null &&
             state.filter?.operation != null &&
@@ -108,7 +110,8 @@ class VideoFilterEditCubit extends Cubit<VideoFilterEditState> {
 
   Future<List<Channel>> searchChannel(String query) async {
     if (query.trim() == '') return [];
-    var searchResults = await service.search(query, type: SearchType.channel, page: state.searchPage);
+    var searchResults = await service.search(query,
+        type: SearchType.channel, page: state.searchPage);
     return searchResults.channels;
   }
 
@@ -125,7 +128,7 @@ class VideoFilterEditCubit extends Cubit<VideoFilterEditState> {
   selectChannel(Channel? value) {
     var filter = state.filter?.copyWith();
     filter?.channelId = state.channel?.authorId;
-    emit(state.copyWith(channel: value, filter:  filter));
+    emit(state.copyWith(channel: value, filter: filter));
   }
 
   void channelHideAll(bool? value) {
@@ -170,7 +173,8 @@ class VideoFilterEditCubit extends Cubit<VideoFilterEditState> {
 
   bool get showDateSettings =>
       state.showDateSettings ||
-      (state.filter?.daysOfWeek.length ?? wholeWeek.length) != wholeWeek.length ||
+      (state.filter?.daysOfWeek.length ?? wholeWeek.length) !=
+          wholeWeek.length ||
       (state.filter?.startTime ?? defaultStartTime) != defaultStartTime ||
       (state.filter?.endTime ?? defaultEndTime) != defaultEndTime;
 
@@ -184,7 +188,8 @@ class VideoFilterEditCubit extends Cubit<VideoFilterEditState> {
   }
 
   setEndTime(String newTime) {
-    var comparison = newTime.compareTo(state.filter?.startTime ?? defaultStartTime);
+    var comparison =
+        newTime.compareTo(state.filter?.startTime ?? defaultStartTime);
     if (comparison > 0) {
       var filter = state.filter?.copyWith();
       filter?.endTime = newTime;
@@ -201,6 +206,5 @@ class VideoFilterEditState with _$VideoFilterEditState {
     Channel? channel,
     @Default([]) List<Channel> channelResults,
     @Default(false) showDateSettings,
-}) = _VideoFilterEditState;
-
+  }) = _VideoFilterEditState;
 }

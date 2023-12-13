@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:invidious/downloads/models/downloaded_video.dart';
 import 'package:invidious/videos/models/base_video.dart';
@@ -38,11 +37,11 @@ class VideoInListCubit extends Cubit<VideoInListState> {
 }
 
 @freezed
-class VideoInListState with _$VideoInListState{
-  @Assert('video == null || offlineVideo == null', 'cannot provide both video and offline video')
-  const factory VideoInListState({
-    @Default(0) double progress,
-    BaseVideo? video,
-    DownloadedVideo? offlineVideo
-}) = _VideoInListState;
+class VideoInListState with _$VideoInListState {
+  @Assert('video == null || offlineVideo == null',
+      'cannot provide both video and offline video')
+  const factory VideoInListState(
+      {@Default(0) double progress,
+      BaseVideo? video,
+      DownloadedVideo? offlineVideo}) = _VideoInListState;
 }

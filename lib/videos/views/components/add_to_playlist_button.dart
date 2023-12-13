@@ -3,7 +3,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/globals.dart';
-import 'package:invidious/settings/models/errors/invidiousServiceError.dart';
+import 'package:invidious/settings/models/errors/invidious_service_error.dart';
 import 'package:invidious/utils.dart';
 import 'package:invidious/videos/states/add_to_playlist.dart';
 
@@ -22,13 +22,17 @@ class AddToPlayListButton extends StatelessWidget {
   final Function? afterAdd;
 
   const AddToPlayListButton(
-      {super.key, required this.videoId, this.type = AddToPlayListButtonType.appBar, this.afterAdd});
+      {super.key,
+      required this.videoId,
+      this.type = AddToPlayListButtonType.appBar,
+      this.afterAdd});
 
   showAddToPlaylistDialog(BuildContext context) {
     var locals = AppLocalizations.of(context)!;
     var cubit = context.read<AddToPlaylistCubit>();
-    AddToPlaylistDialog.showAddToPlaylistDialog(context, playlists: cubit.state.playlists, videoId: videoId,
-        onAdd: (selectedPlaylistId) async {
+    AddToPlaylistDialog.showAddToPlaylistDialog(context,
+        playlists: cubit.state.playlists,
+        videoId: videoId, onAdd: (selectedPlaylistId) async {
       try {
         await cubit.saveVideoToPlaylist(selectedPlaylistId);
         if (afterAdd != null) {
@@ -36,8 +40,11 @@ class AddToPlayListButton extends StatelessWidget {
         }
       } catch (err) {
         if (context.mounted) {
-          showAlertDialog(context, locals.errorAddingVideoToPlaylist,
-              [(err is InvidiousServiceError) ? Text(err.message) : Text(err.runtimeType.toString())]);
+          showAlertDialog(context, locals.errorAddingVideoToPlaylist, [
+            (err is InvidiousServiceError)
+                ? Text(err.message)
+                : Text(err.runtimeType.toString())
+          ]);
         }
       }
     });
@@ -50,8 +57,10 @@ class AddToPlayListButton extends StatelessWidget {
     var locals = AppLocalizations.of(context)!;
 
     return BlocProvider(
-      create: (BuildContext context) => AddToPlaylistCubit(AddToPlaylistController.init(videoId)),
-      child: BlocBuilder<AddToPlaylistCubit, AddToPlaylistController>(builder: (context, _) {
+      create: (BuildContext context) =>
+          AddToPlaylistCubit(AddToPlaylistController.init(videoId)),
+      child: BlocBuilder<AddToPlaylistCubit, AddToPlaylistController>(
+          builder: (context, _) {
         var cubit = context.read<AddToPlaylistCubit>();
         return switch (type) {
           (AddToPlayListButtonType.modalSheet) => Padding(
@@ -60,11 +69,16 @@ class AddToPlayListButton extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   AnimatedCrossFade(
-                    crossFadeState: _.loading ? CrossFadeState.showSecond : CrossFadeState.showFirst,
+                    crossFadeState: _.loading
+                        ? CrossFadeState.showSecond
+                        : CrossFadeState.showFirst,
                     firstChild: IconButton.filledTonal(
-                        onPressed: () => showAddToPlaylistDialog(context), icon: const Icon(Icons.playlist_add)),
+                        onPressed: () => showAddToPlaylistDialog(context),
+                        icon: const Icon(Icons.playlist_add)),
                     secondChild: FilledButton.tonal(
-                        style: ButtonStyle(shape: MaterialStateProperty.all(const CircleBorder())),
+                        style: ButtonStyle(
+                            shape: MaterialStateProperty.all(
+                                const CircleBorder())),
                         onPressed: () {},
                         child: const SizedBox(
                             height: 10,
@@ -85,16 +99,26 @@ class AddToPlayListButton extends StatelessWidget {
               children: [
                 IconButton(
                   onPressed: _.loading ? () {} : cubit.toggleLike,
-                  icon: _.isVideoLiked ? const Icon(Icons.favorite) : const Icon(Icons.favorite_border),
-                ).animate(target: _.loading ? 0 : 1).fade(begin: 0.2, duration: animationDuration).scale(
-                    begin: const Offset(buttonScaleOffset, buttonScaleOffset),
-                    duration: animationDuration,
-                    curve: Curves.easeInOutQuad),
+                  icon: _.isVideoLiked
+                      ? const Icon(Icons.favorite)
+                      : const Icon(Icons.favorite_border),
+                )
+                    .animate(target: _.loading ? 0 : 1)
+                    .fade(begin: 0.2, duration: animationDuration)
+                    .scale(
+                        begin:
+                            const Offset(buttonScaleOffset, buttonScaleOffset),
+                        duration: animationDuration,
+                        curve: Curves.easeInOutQuad),
                 Stack(
                   children: [
                     IconButton(
-                      style: ButtonStyle(padding: MaterialStateProperty.all<EdgeInsets>(EdgeInsets.zero)),
-                      onPressed: _.loading ? () {} : () => showAddToPlaylistDialog(context),
+                      style: ButtonStyle(
+                          padding: MaterialStateProperty.all<EdgeInsets>(
+                              EdgeInsets.zero)),
+                      onPressed: _.loading
+                          ? () {}
+                          : () => showAddToPlaylistDialog(context),
                       icon: const Icon(
                         Icons.add,
                       ),
@@ -105,7 +129,8 @@ class AddToPlayListButton extends StatelessWidget {
                           duration: animationDuration,
                         )
                         .scale(
-                            begin: const Offset(buttonScaleOffset, buttonScaleOffset),
+                            begin: const Offset(
+                                buttonScaleOffset, buttonScaleOffset),
                             duration: animationDuration,
                             curve: Curves.easeInOutQuad),
                     _.playListCount > 0
@@ -116,7 +141,9 @@ class AddToPlayListButton extends StatelessWidget {
                               onTap: () => showAddToPlaylistDialog(context),
                               child: Container(
                                 padding: const EdgeInsets.all(4),
-                                decoration: BoxDecoration(color: colors.secondaryContainer, shape: BoxShape.circle),
+                                decoration: BoxDecoration(
+                                    color: colors.secondaryContainer,
+                                    shape: BoxShape.circle),
                                 child: Text(
                                   _.loading ? '-' : _.playListCount.toString(),
                                   style: textTheme.labelSmall,
@@ -128,7 +155,8 @@ class AddToPlayListButton extends StatelessWidget {
                                     duration: animationDuration,
                                   )
                                   .scale(
-                                      begin: const Offset(buttonScaleOffset, buttonScaleOffset),
+                                      begin: const Offset(
+                                          buttonScaleOffset, buttonScaleOffset),
                                       duration: animationDuration,
                                       curve: Curves.easeInOutQuad),
                             ),

@@ -3,7 +3,7 @@ type: docker
 name: Android app
 
 steps:
-  - name: build app
+  - name: Build app
     image: ghcr.io/cirruslabs/flutter:stable
     environment:
       ANDROID_KEY_FILE: /tmp/key.properties
@@ -33,6 +33,8 @@ steps:
       - cp /tmp/build/build/app/outputs/bundle/release/* build/app/outputs/bundle/release/
       - ls build/app/outputs/flutter-apk/
       - ls build/app/outputs/bundle/release/
+    when:
+      event: tag
   - name: Accrescent APKs
     image: mingc/android-build-box
     environment:
@@ -48,7 +50,7 @@ steps:
       - java -jar /opt/android-sdk/cmdline-tools/latest/bundletool.jar build-apks --bundle=app-release.aab --output=app-release.apks --ks-pass=pass:$${storePassword} --ks=/tmp/keystore.jks --ks-key-alias=upload --key-pass=pass:$${keyPassword}
     when:
       event: tag
-  - name: publish
+  - name: Publish
     image: plugins/github-release
     settings:
       api_key:

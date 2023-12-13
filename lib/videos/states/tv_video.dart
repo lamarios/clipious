@@ -10,7 +10,8 @@ double defaultBottomOffset = -400;
 class TvVideoCubit extends Cubit<TvVideoState> {
   final ScrollController scrollController;
 
-  TvVideoCubit(super.initialState, {ScrollController? scrollController}) : scrollController = scrollController ?? ScrollController();
+  TvVideoCubit(super.initialState, {ScrollController? scrollController})
+      : scrollController = scrollController ?? ScrollController();
 
   @override
   close() async {
@@ -20,7 +21,8 @@ class TvVideoCubit extends Cubit<TvVideoState> {
 
   scrollUp() {
     var state = this.state.copyWith();
-    scrollController.animateTo(0, duration: animationDuration ~/ 2, curve: Curves.easeInOutQuad);
+    scrollController.animateTo(0,
+        duration: animationDuration ~/ 2, curve: Curves.easeInOutQuad);
     emit(state.copyWith(showImage: true));
   }
 

@@ -9,7 +9,7 @@ class MyHttpOverrides extends HttpOverrides {
     return super.createHttpClient(context)
       ..badCertificateCallback = (X509Certificate cert, String host, int port) {
         // if true, it will allow all certs, if false it will throw error on a bad cert
-        return db.getSettings(SKIP_SSL_VERIFICATION)?.value == 'true';
+        return db.getSettings(skipSslVerificationSettingName)?.value == 'true';
       };
   }
 }

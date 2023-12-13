@@ -1,8 +1,6 @@
 import 'package:bloc/bloc.dart';
-import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:flutter/services.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:intl/intl.dart';
 
 import '../../globals.dart';
 import '../models/db/app_logs.dart';
@@ -27,7 +25,8 @@ class AppLogsCubit extends Cubit<AppLogsState> {
     selected.sort();
     String toClipboard = state.logs
         .where((element) => selected.contains(element.id))
-        .map((e) => '[${e.level}] [${e.logger}] - ${e.time} - ${e.message} ${e.stacktrace != null ? '\n${e.stacktrace}' : ''}')
+        .map((e) =>
+            '[${e.level}] [${e.logger}] - ${e.time} - ${e.message} ${e.stacktrace != null ? '\n${e.stacktrace}' : ''}')
         .toList()
         .reversed
         .join("\n");
@@ -49,7 +48,9 @@ class AppLogsCubit extends Cubit<AppLogsState> {
 
 @freezed
 class AppLogsState with _$AppLogsState {
-  const factory AppLogsState({@Default([]) List<AppLog> logs, @Default([]) List<int> selected}) = _AppLogsState;
+  const factory AppLogsState(
+      {@Default([]) List<AppLog> logs,
+      @Default([]) List<int> selected}) = _AppLogsState;
 
   static AppLogsState init() {
     return AppLogsState(logs: db.getAppLogs().reversed.toList());

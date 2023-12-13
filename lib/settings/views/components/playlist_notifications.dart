@@ -14,12 +14,20 @@ class PlaylistNotificationList extends StatelessWidget {
   deleteNotification(BuildContext context, PlaylistNotification notif) {
     var cubit = context.read<PlaylistNotificationListCubit>();
     var locals = AppLocalizations.of(context)!;
-    okCancelDialog(context, locals.deletePlaylistNotificationTitle, locals.deletePlaylistNotificationContent, () => cubit.deleteNotification(notif));
+    okCancelDialog(
+        context,
+        locals.deletePlaylistNotificationTitle,
+        locals.deletePlaylistNotificationContent,
+        () => cubit.deleteNotification(notif));
   }
 
   openPlaylist(BuildContext context, String playlistId) {
     service.getPublicPlaylists(playlistId).then((value) => {
-          if (context.mounted) {AutoRouter.of(context).push(PlaylistViewRoute(playlist: value, canDeleteVideos: false))}
+          if (context.mounted)
+            {
+              AutoRouter.of(context).push(
+                  PlaylistViewRoute(playlist: value, canDeleteVideos: false))
+            }
         });
   }
 
@@ -27,8 +35,10 @@ class PlaylistNotificationList extends StatelessWidget {
   Widget build(BuildContext context) {
     var colors = Theme.of(context).colorScheme;
     return BlocProvider(
-        create: (context) => PlaylistNotificationListCubit(db.getAllPlaylistNotifications()),
-        child: BlocBuilder<PlaylistNotificationListCubit, List<PlaylistNotification>>(builder: (context, channels) {
+        create: (context) =>
+            PlaylistNotificationListCubit(db.getAllPlaylistNotifications()),
+        child: BlocBuilder<PlaylistNotificationListCubit,
+            List<PlaylistNotification>>(builder: (context, channels) {
           return Padding(
             padding: const EdgeInsets.all(8.0),
             child: ListView.builder(
@@ -37,13 +47,23 @@ class PlaylistNotificationList extends StatelessWidget {
                 var notif = channels[index];
                 return Container(
                   key: ValueKey(notif.id),
-                  padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-                  decoration: BoxDecoration(color: index % 2 != 0 ? colors.secondaryContainer.withOpacity(0.5) : colors.background, borderRadius: BorderRadius.circular(10)),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                  decoration: BoxDecoration(
+                      color: index % 2 != 0
+                          ? colors.secondaryContainer.withOpacity(0.5)
+                          : colors.background,
+                      borderRadius: BorderRadius.circular(10)),
                   child: InkWell(
                     onTap: () => openPlaylist(context, notif.playlistId),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [Text(notif.playlistName), IconButton(onPressed: () => deleteNotification(context, notif), icon: const Icon(Icons.clear))],
+                      children: [
+                        Text(notif.playlistName),
+                        IconButton(
+                            onPressed: () => deleteNotification(context, notif),
+                            icon: const Icon(Icons.clear))
+                      ],
                     ),
                   ),
                 );

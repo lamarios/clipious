@@ -25,7 +25,7 @@ DeArrowTitle _$DeArrowTitleFromJson(Map<String, dynamic> json) => DeArrowTitle(
       original: json['original'] as bool? ?? false,
       votes: json['votes'] as int? ?? 0,
       locked: json['locked'] as bool? ?? false,
-      UUID: json['UUID'] as String?,
+      uuid: json['UUID'] as String?,
     );
 
 Map<String, dynamic> _$DeArrowTitleToJson(DeArrowTitle instance) =>
@@ -34,7 +34,7 @@ Map<String, dynamic> _$DeArrowTitleToJson(DeArrowTitle instance) =>
       'original': instance.original,
       'votes': instance.votes,
       'locked': instance.locked,
-      'UUID': instance.UUID,
+      'UUID': instance.uuid,
     };
 
 DeArrowThumbnail _$DeArrowThumbnailFromJson(Map<String, dynamic> json) =>
@@ -43,7 +43,7 @@ DeArrowThumbnail _$DeArrowThumbnailFromJson(Map<String, dynamic> json) =>
       original: json['original'] as bool? ?? false,
       votes: json['votes'] as int? ?? 0,
       locked: json['locked'] as bool? ?? false,
-      UUID: json['UUID'] as String?,
+      uuid: json['UUID'] as String?,
     );
 
 Map<String, dynamic> _$DeArrowThumbnailToJson(DeArrowThumbnail instance) =>
@@ -52,5 +52,5 @@ Map<String, dynamic> _$DeArrowThumbnailToJson(DeArrowThumbnail instance) =>
       'original': instance.original,
       'votes': instance.votes,
       'locked': instance.locked,
-      'UUID': instance.UUID,
+      'UUID': instance.uuid,
     };

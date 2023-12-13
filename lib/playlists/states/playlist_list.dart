@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:invidious/utils/models/paginatedList.dart';
+import 'package:invidious/utils/models/paginated_list.dart';
 
 import '../models/playlist.dart';
 
@@ -24,8 +24,10 @@ class PlaylistListCubit extends Cubit<PlaylistListState> {
   onScrollEvent() {
     if (state.paginatedList.getHasMore()) {
       if (scrollController.hasClients) {
-        if (scrollController.position.maxScrollExtent * 0.9 == scrollController.offset) {
-          EasyDebounce.debounce('get-more-playlists', const Duration(milliseconds: 500), getMorePlaylists);
+        if (scrollController.position.maxScrollExtent * 0.9 ==
+            scrollController.offset) {
+          EasyDebounce.debounce('get-more-playlists',
+              const Duration(milliseconds: 500), getMorePlaylists);
         }
       }
     }
@@ -56,7 +58,8 @@ class PlaylistListCubit extends Cubit<PlaylistListState> {
       var playlists = await refreshFunction();
       emit(state.copyWith(playlists: playlists, loading: false));
     } catch (err) {
-      emit(state.copyWith(error: couldNotGetPlaylits, playlists: [], loading: false));
+      emit(state.copyWith(
+          error: couldNotGetPlaylits, playlists: [], loading: false));
       rethrow;
     }
   }
@@ -70,10 +73,9 @@ class PlaylistListCubit extends Cubit<PlaylistListState> {
 
 @freezed
 class PlaylistListState with _$PlaylistListState {
-  const factory PlaylistListState({
-    required PaginatedList<Playlist> paginatedList,
-    @Default([]) List<Playlist> playlists,
-    @Default(true) bool loading,
-    @Default('') String error
-}) = _PlaylistListState;
+  const factory PlaylistListState(
+      {required PaginatedList<Playlist> paginatedList,
+      @Default([]) List<Playlist> playlists,
+      @Default(true) bool loading,
+      @Default('') String error}) = _PlaylistListState;
 }

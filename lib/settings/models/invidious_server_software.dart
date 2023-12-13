@@ -10,7 +10,8 @@ class InvidiousServerSoftware {
 
   InvidiousServerSoftware(this.name, this.version, this.branch);
 
-  factory InvidiousServerSoftware.fromJson(Map<String, dynamic> json) => _$InvidiousServerSoftwareFromJson(json);
+  factory InvidiousServerSoftware.fromJson(Map<String, dynamic> json) =>
+      _$InvidiousServerSoftwareFromJson(json);
 
   Map<String, dynamic> toJson() => _$InvidiousServerSoftwareToJson(this);
 }
