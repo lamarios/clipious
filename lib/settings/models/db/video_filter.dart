@@ -1,3 +1,4 @@
+import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/globals.dart';
@@ -5,6 +6,8 @@ import 'package:invidious/utils.dart';
 import 'package:invidious/videos/models/base_video.dart';
 import 'package:logging/logging.dart';
 import 'package:objectbox/objectbox.dart';
+
+part 'video_filter.g.dart';
 
 final log = Logger('Video Filter DB');
 
@@ -56,6 +59,7 @@ enum FilterOperation {
 }
 
 @Entity()
+@CopyWith(constructor: "_")
 class VideoFilter {
   @Id()
   int id = 0;
@@ -71,6 +75,8 @@ class VideoFilter {
 
   bool filterAll = false;
   bool hideFromFeed = false;
+
+  VideoFilter._(this.id, this.channelId, this.operation, this.type, this.value, this.filterAll, this.hideFromFeed, this.daysOfWeek, this.startTime, this.endTime);
 
   VideoFilter({required this.value, this.channelId});
 

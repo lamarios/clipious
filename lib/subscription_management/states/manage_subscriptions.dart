@@ -1,12 +1,13 @@
 import 'package:bloc/bloc.dart';
 import 'package:copy_with_extension/copy_with_extension.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:invidious/extensions.dart';
 import 'package:logging/logging.dart';
 
 import '../../globals.dart';
 import '../models/subscription.dart';
 
-part 'manage_subscriptions.g.dart';
+part 'manage_subscriptions.freezed.dart';
 
 final logger = Logger('ManageSubscriptionController');
 
@@ -32,22 +33,16 @@ class ManageSubscriptionCubit extends Cubit<ManageSubscriptionsState> {
   }
 
   refreshSubs() async {
-    var state = this.state.copyWith();
-    state.loading = true;
-    emit(state);
-    state = this.state.copyWith();
-    state.subs = (await service.getSubscriptions()).sortBy((e) => e.author).toList();
-    state.loading = false;
-    emit(state);
+    emit(state.copyWith(loading: true));
+    var subs = (await service.getSubscriptions()).sortBy((e) => e.author).toList();
+    emit(state.copyWith(subs: subs, loading: false));
   }
 }
 
-@CopyWith()
-class ManageSubscriptionsState {
-  List<Subscription> subs;
-  bool loading;
-
-  ManageSubscriptionsState({List<Subscription>? subs, bool? loading = true})
-      : subs = subs ?? [],
-        loading = loading ?? true;
+@freezed
+class ManageSubscriptionsState with _$ManageSubscriptionsState {
+  const factory ManageSubscriptionsState({
+    @Default([]) List<Subscription> subs,
+    @Default(true) bool loading
+}) = _ManageSubscriptionsState;
 }

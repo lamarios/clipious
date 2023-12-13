@@ -82,6 +82,8 @@ dependencies:
   auto_route: 7.8.4
   workmanager: 0.5.2
   flutter_displaymode: 0.6.0
+  freezed_annotation: ^2.4.1
+
 dependency_overrides:
   #  wakelock_windows:
   #    git: # see https://github.com/creativecreatorormaybenot/wakelock/pull/203 for updates
@@ -118,6 +120,7 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^3.0.1
+  freezed: ^2.4.5
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

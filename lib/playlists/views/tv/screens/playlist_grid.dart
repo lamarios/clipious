@@ -22,10 +22,12 @@ class TvPlaylistGridScreen extends StatelessWidget {
     var locals = AppLocalizations.of(context)!;
     var textTheme = Theme.of(context).textTheme;
     return BlocProvider(
-      create: (context) => PlaylistListCubit(PlaylistListState(playlistList)),
+      create: (context) => PlaylistListCubit(PlaylistListState(paginatedList: playlistList)),
       child: Scaffold(
         body: TvOverscan(
           child: BlocBuilder<PlaylistListCubit, PlaylistListState>(builder: (context, _) {
+            var cubit = context.read<PlaylistListCubit>();
+
             return Column(
               children: [
                 Row(
@@ -44,14 +46,13 @@ class TvPlaylistGridScreen extends StatelessWidget {
                 ),
                 Expanded(
                     child: GridView.count(
-                  controller: _.scrollController,
+                  controller: cubit.scrollController,
                   childAspectRatio: 16 / 13,
                   crossAxisCount: 3,
                   children: [
                     ..._.playlists
                         .map((e) => PlaylistInList(
-                            key: ValueKey(e.playlistId), playlist: e, canDeleteVideos: false, isTv: true))
-                        .toList(),
+                            key: ValueKey(e.playlistId), playlist: e, canDeleteVideos: false, isTv: true)),
                     if (_.loading) ...repeatWidget(() => const TvPlaylistPlaceHolder(), count: 10)
                   ],
                 ))

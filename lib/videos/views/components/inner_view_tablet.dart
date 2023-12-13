@@ -94,7 +94,7 @@ class VideoTabletInnerView extends StatelessWidget {
                     width: double.infinity,
                     constraints: const BoxConstraints(maxWidth: 500),
                     child: ListView(
-                      controller: videoController.scrollController,
+                      controller: cubit.scrollController,
                       children: [
                         AnimatedSwitcher(
                             duration: animationDuration,

@@ -66,13 +66,13 @@ class PlaylistViewScreen extends StatelessWidget {
     return BlocProvider(
       create: (context) => PlaylistCubit(PlaylistState(playlist: playlist, playlistItemHeight: 100), player),
       child: BlocBuilder<PlaylistCubit, PlaylistState>(
-        builder: (context, _) {
+        builder: (context, playlistState) {
           var cubit = context.read<PlaylistCubit>();
           return Scaffold(
               appBar: AppBar(
                 backgroundColor: colors.background,
                 title: Text(
-                  _.playlist.title,
+                  playlistState.playlist.title,
                 ),
                 scrolledUnderElevation: 0,
                 actions: [
@@ -93,7 +93,7 @@ class PlaylistViewScreen extends StatelessWidget {
               backgroundColor: colors.background,
               body: SafeArea(
                   bottom: false,
-                  child: _.loading || _.playlist.videos.isNotEmpty
+                  child: playlistState.loading || playlistState.playlist.videos.isNotEmpty
                       ? Center(
                           child: Container(
                             constraints: BoxConstraints(maxWidth: tabletMaxVideoWidth),
@@ -105,9 +105,9 @@ class PlaylistViewScreen extends StatelessWidget {
                                       SizedBox(
                                         height: 250,
                                         child: PlaylistThumbnails(
-                                          videos: _.playlist.videos,
+                                          videos: playlistState.playlist.videos,
                                           bestThumbnails: true,
-                                          children: _.loading
+                                          children: playlistState.loading
                                               ? [
                                                   Center(
                                                       child: Container(
@@ -116,7 +116,7 @@ class PlaylistViewScreen extends StatelessWidget {
                                                         color: colors.background.withOpacity(0.5),
                                                         shape: BoxShape.circle),
                                                     child: TweenAnimationBuilder(
-                                                      tween: Tween<double>(begin: 0, end: _.loadingProgress),
+                                                      tween: Tween<double>(begin: 0, end: playlistState.loadingProgress),
                                                       duration: animationDuration,
                                                       curve: Curves.easeInOutQuad,
                                                       builder: (context, value, child) => CircularProgressIndicator(
@@ -134,7 +134,7 @@ class PlaylistViewScreen extends StatelessWidget {
                                                         right: 5,
                                                         bottom: 3,
                                                         child: AddToQueueButton(
-                                                          videos: _.playlist.videos,
+                                                          videos: playlistState.playlist.videos,
                                                         ));
                                                   })
                                                 ],
@@ -145,9 +145,9 @@ class PlaylistViewScreen extends StatelessWidget {
                                     child: Padding(
                                   padding: const EdgeInsets.symmetric(horizontal: innerHorizontalPadding),
                                   child: ListView(
-                                    controller: _.scrollController,
+                                    controller: cubit.scrollController,
                                     children: [
-                                      ..._.playlist.videos
+                                      ...playlistState.playlist.videos
                                           .where((element) => !element.filterHide)
                                           .map((v) => SwipeActionCell(
                                               key: ValueKey('swipe-${v.videoId}'),
@@ -169,7 +169,7 @@ class PlaylistViewScreen extends StatelessWidget {
                                                 key: ValueKey(v.videoId),
                                               )))
                                           .toList(),
-                                      if (_.loading) ...repeatWidget(() => const CompactVideoPlaceHolder(), count: 5)
+                                      if (playlistState.loading) ...repeatWidget(() => const CompactVideoPlaceHolder(), count: 5)
                                     ],
                                   ),
                                 ))

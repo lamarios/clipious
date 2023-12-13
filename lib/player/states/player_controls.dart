@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
-import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:easy_debounce/easy_debounce.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:invidious/player/models/mediaEvent.dart';
 import 'package:invidious/player/states/interfaces/media_player.dart';
 import 'package:logging/logging.dart';
@@ -9,7 +9,7 @@ import '../../globals.dart';
 import '../../main.dart';
 import 'player.dart';
 
-part 'player_controls.g.dart';
+part 'player_controls.freezed.dart';
 
 final log = Logger('PlayerControlControllers');
 
@@ -23,8 +23,7 @@ class PlayerControlsCubit extends Cubit<PlayerControlsState> {
   void onReady() {
     log.fine("Controls ready!");
 
-    emit(state.copyWith(
-        duration: player.duration, muted: player.state.muted, fullScreenState: player.state.fullScreenState));
+    emit(state.copyWith(duration: player.duration, muted: player.state.muted, fullScreenState: player.state.fullScreenState));
     showControls();
   }
 
@@ -174,44 +173,28 @@ class PlayerControlsCubit extends Cubit<PlayerControlsState> {
     EasyDebounce.debounce('fast-rewind', const Duration(milliseconds: 250), () {
       emit(state.copyWith(doubleTapRewindedOpacity: 0));
     });
-    EasyDebounce.debounce('preventControlsShowing', Duration(seconds: 1), () {
+    EasyDebounce.debounce('preventControlsShowing', const Duration(seconds: 1), () {
       // we prevent controls showing to avoid issues where if hte user taps 3 times it will show the controls right after
       emit(state.copyWith(justDoubleTappedSkip: false));
     });
   }
 }
 
-@CopyWith(constructor: "_")
-class PlayerControlsState {
-  PlayerControlsState();
-
-  bool errored = false;
-
-  Duration position = Duration.zero;
-  Duration duration = const Duration(seconds: 1);
-  Duration buffer = Duration.zero;
-  FullScreenState fullScreenState = FullScreenState.notFullScreen;
-  bool displayControls = false;
-  bool muted = false;
-  bool buffering = false;
-  bool draggingPositionSlider = false;
-  double doubleTapFastForwardedOpacity = 0;
-  double doubleTapRewindedOpacity = 0;
-  bool justDoubleTappedSkip = false;
-  bool showSponsorBlocked = false;
-
-  PlayerControlsState._(
-      this.buffering,
-      this.justDoubleTappedSkip,
-      this.position,
-      this.displayControls,
-      this.errored,
-      this.duration,
-      this.fullScreenState,
-      this.muted,
-      this.buffer,
-      this.draggingPositionSlider,
-      this.doubleTapFastForwardedOpacity,
-      this.doubleTapRewindedOpacity,
-      this.showSponsorBlocked);
+@freezed
+class PlayerControlsState with _$PlayerControlsState {
+  const factory PlayerControlsState({
+    @Default(false) bool errored,
+    @Default(Duration.zero) Duration position,
+    @Default(Duration(seconds: 1)) Duration duration,
+    @Default(Duration.zero) Duration buffer,
+    @Default(FullScreenState.notFullScreen) FullScreenState fullScreenState,
+    @Default(false) bool displayControls,
+    @Default(false) bool muted,
+    @Default(false) bool buffering,
+    @Default(false) bool draggingPositionSlider,
+    @Default(0) double doubleTapFastForwardedOpacity,
+    @Default(0) double doubleTapRewindedOpacity,
+    @Default(false) bool justDoubleTappedSkip,
+    @Default(false) bool showSponsorBlocked,
+  }) = _PlayercontrolsState;
 }

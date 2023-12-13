@@ -20,7 +20,7 @@ class TvSubscribeButton extends StatelessWidget {
     ColorScheme colors = Theme.of(context).colorScheme;
 
     return BlocProvider(
-      create: (context) => SubscribeButtonCubit(SubscribeButtonState(channelId: channelId)),
+      create: (context) => SubscribeButtonCubit(SubscribeButtonState.init(channelId)),
       child: BlocBuilder<SubscribeButtonCubit, SubscribeButtonState>(builder: (context, _) {
         var cubit = context.read<SubscribeButtonCubit>();
         return Padding(

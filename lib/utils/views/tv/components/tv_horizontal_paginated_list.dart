@@ -20,10 +20,10 @@ class TvHorizontalPaginatedListView<T> extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => PaginatedListCubit(
-          PaginatedListViewController<T>(paginatedList: this.paginatedList, startItems: this.startItems)),
+          PaginatedListViewController.init<T>(paginatedList: this.paginatedList, startItems: this.startItems)),
       child: BlocBuilder<PaginatedListCubit<T>, PaginatedListViewController<T>>(
           builder: (context, _) {
-
+            var cubit = context.read<PaginatedListCubit<T>>();
             // filter items if possible
             List<T> items = _.items;
             if (items.isNotEmpty && items[0] is BaseVideo) {
@@ -37,7 +37,7 @@ class TvHorizontalPaginatedListView<T> extends StatelessWidget {
                         )
                       : const SizedBox.shrink(),
                   ListView.builder(
-                    controller: _.scrollController,
+                    controller: cubit.scrollController,
                     scrollDirection: Axis.horizontal,
                     itemCount: items.length + (_.loading ? 10 : 0),
                     itemBuilder: (BuildContext context, int index) =>

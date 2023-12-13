@@ -1,13 +1,13 @@
 class Pair<E> {
-  E first;
-  E last;
+ final  E first;
+ final  E last;
 
-  Pair(this.first, this.last);
+  const Pair(this.first, this.last);
 }
 
 class Couple<E, M> {
-  E first;
-  M last;
+ final E first;
+ final M last;
 
-  Couple(this.first, this.last);
+ const Couple(this.first, this.last);
 }

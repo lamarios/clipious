@@ -82,7 +82,7 @@ class VideoList<T extends IdedVideo> extends StatelessWidget {
                             : Future.delayed(Duration.zero),
                         child: GridView.count(
                           crossAxisCount: gridCount,
-                          controller: _.scrollController,
+                          controller: cubit.scrollController,
                           scrollDirection: scrollDirection,
                           crossAxisSpacing: small ? 8 : 5,
                           mainAxisSpacing: small ? 8 : 5,

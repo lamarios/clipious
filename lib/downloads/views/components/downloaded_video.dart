@@ -23,7 +23,8 @@ class DownloadedVideoView extends StatelessWidget {
     var downloadManager = context.read<DownloadManagerCubit>();
     var player = context.read<PlayerCubit>();
     return BlocProvider(
-      create: (BuildContext context) => DownloadedVideoCubit(downloadManager, DownloadedVideoState(video.id), player),
+      create: (BuildContext context) =>
+          DownloadedVideoCubit(downloadManager, DownloadedVideoState.init(video.id), player),
       child: BlocBuilder<DownloadedVideoCubit, DownloadedVideoState>(builder: (context, _) {
         bool downloadFailed = _.video?.downloadFailed ?? false;
         var cubit = context.read<DownloadedVideoCubit>();
@@ -46,12 +47,21 @@ class DownloadedVideoView extends StatelessWidget {
                             : const SizedBox.shrink(),
                         (_.video?.downloadComplete ?? false) || downloadFailed
                             ? const SizedBox.shrink()
-                            : SizedBox(
-                                height: 20,
-                                width: 20,
-                                child: CircularProgressIndicator(
-                                  strokeWidth: 2,
-                                  value: _.progress == 0 ? null : _.progress,
+                            : Padding(
+                                padding: const EdgeInsets.only(right: 8.0),
+                                child: SizedBox(
+                                  height: 20,
+                                  width: 20,
+                                  child: TweenAnimationBuilder(
+                                    duration: animationDuration,
+                                    tween: Tween<double>(begin: 0, end: _.progress),
+                                    builder: (context, value, child) {
+                                      return CircularProgressIndicator(
+                                        strokeWidth: 2,
+                                        value: _.progress == 0 ? null : value,
+                                      );
+                                    }
+                                  ),
                                 ),
                               )
                       ],

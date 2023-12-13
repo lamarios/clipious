@@ -53,9 +53,9 @@ class TvVideoScreen extends StatelessWidget {
     var settings = context.read<SettingsCubit>();
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => VideoCubit(VideoState(videoId: videoId), downloadManager, player, settings)),
+        BlocProvider(create: (context) => VideoCubit(VideoState.init(videoId: videoId), downloadManager, player, settings)),
         BlocProvider(
-          create: (context) => TvVideoCubit(TvVideoState()),
+          create: (context) => TvVideoCubit(const TvVideoState()),
         )
       ],
       child: Scaffold(body: Builder(builder: (context) {
@@ -113,7 +113,7 @@ class TvVideoScreen extends StatelessWidget {
                                     child: Padding(
                                       padding: const EdgeInsets.all(16.0),
                                       child: SingleChildScrollView(
-                                        controller: tvState.scrollController,
+                                        controller: tvCubit.scrollController,
                                         child: Column(
                                           crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [

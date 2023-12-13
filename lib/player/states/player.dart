@@ -4,11 +4,11 @@ import 'dart:collection';
 import 'package:audio_service/audio_service.dart';
 import 'package:back_button_interceptor/back_button_interceptor.dart';
 import 'package:bloc/bloc.dart';
-import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:easy_debounce/easy_throttle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/player/models/mediaCommand.dart';
 import 'package:invidious/player/models/mediaEvent.dart';
@@ -24,12 +24,12 @@ import '../../mediaHander.dart';
 import '../../settings/states/settings.dart';
 import '../../utils/models/pair.dart';
 import '../../videos/models/base_video.dart';
-import '../../videos/models/db/progress.dart' as dbProgress;
+import '../../videos/models/db/progress.dart' as db_progress;
 import '../../videos/models/sponsor_segment.dart';
 import '../../videos/models/sponsor_segment_types.dart';
 import '../../videos/models/video.dart';
 
-part 'player.g.dart';
+part 'player.freezed.dart';
 
 const double targetHeight = 69;
 const double miniPlayerThreshold = 300;
@@ -54,9 +54,8 @@ class PlayerCubit extends Cubit<PlayerState> with WidgetsBindingObserver {
   setEvent(MediaEvent event) {
     handleMediaEvent(event);
     mapMediaEventToMediaHandler(event);
-    var state = this.state.copyWith();
-    state.mediaEvent = event;
-    emit(state);
+
+    emit(state.copyWith(mediaEvent: event));
   }
 
 
@@ -81,13 +80,7 @@ class PlayerCubit extends Cubit<PlayerState> with WidgetsBindingObserver {
           MediaControl.stop,
           state.hasQueue ? MediaControl.skipToNext : MediaControl.fastForward,
         ],
-        systemActions: const {
-          MediaAction.seek,
-          MediaAction.seekForward,
-          MediaAction.seekBackward,
-          MediaAction.setShuffleMode,
-          MediaAction.setRepeatMode
-        },
+        systemActions: const {MediaAction.seek, MediaAction.seekForward, MediaAction.seekBackward, MediaAction.setShuffleMode, MediaAction.setRepeatMode},
         androidCompactActionIndices: const [0, 1, 3],
         processingState: const {
               MediaState.idle: AudioProcessingState.idle,
@@ -111,8 +104,7 @@ class PlayerCubit extends Cubit<PlayerState> with WidgetsBindingObserver {
 
   int get currentIndex {
     String? currentVideoId = state.currentlyPlaying?.videoId ?? state.offlineCurrentlyPlaying?.videoId;
-    return (state.videos.isNotEmpty ? state.videos : state.offlineVideos)
-        .indexWhere((element) => element.videoId == currentVideoId);
+    return (state.videos.isNotEmpty ? state.videos : state.offlineVideos).indexWhere((element) => element.videoId == currentVideoId);
   }
 
   onReady() async {
@@ -175,9 +167,7 @@ class PlayerCubit extends Cubit<PlayerState> with WidgetsBindingObserver {
   }
 
   _setPip(bool pip) {
-    var state = this.state.copyWith();
-    state.isPip = pip;
-    emit(state);
+    emit(state.copyWith(isPip: pip));
   }
 
   _setMuted(bool muted) {
@@ -205,42 +195,34 @@ class PlayerCubit extends Cubit<PlayerState> with WidgetsBindingObserver {
   }
 
   setVideos(List<BaseVideo> videos) {
-    var state = this.state.copyWith();
-    state.videos = videos.where((element) => !element.filtered).toList();
-    state.offlineVideos = [];
-    emit(state);
+    var newVideos = videos.where((element) => !element.filtered).toList();
+    emit(state.copyWith(videos: newVideos, offlineVideos: []));
   }
 
   selectTab(int index) {
-    var state = this.state.copyWith();
-    state.selectedFullScreenIndex = index;
-    emit(state);
+    emit(state.copyWith(selectedFullScreenIndex: index));
   }
 
   setAudio(bool? newValue) {
-    var state = this.state.copyWith();
-    newValue ??= false;
-
-    state.isAudio = newValue;
-    emit(state);
+    emit(state.copyWith(isAudio: newValue ?? false));
   }
 
   hide() {
-    var state = this.state.copyWith();
-    state.isMini = true;
-    state.mediaEvent =
-        MediaEvent(state: MediaState.playing, type: MediaEventType.miniDisplayChanged, value: state.isMini);
-    state.top = null;
-    state.height = targetHeight;
-    state.isHidden = true;
-    state.videos = [];
-    state.playedVideos = [];
-    state.currentlyPlaying = null;
-    state.offlineCurrentlyPlaying = null;
-    state.offlineVideos = [];
-    state.opacity = 0;
-    emit(state);
-    setEvent(MediaEvent(state: MediaState.idle));
+    var mediaEvent = MediaEvent(state: MediaState.playing, type: MediaEventType.miniDisplayChanged, value: state.isMini);
+
+    emit(state.copyWith(
+        isMini: true,
+        mediaEvent: mediaEvent,
+        top: null,
+        height: targetHeight,
+        isHidden: true,
+        videos: [],
+        playedVideos: [],
+        currentlyPlaying: null,
+        offlineCurrentlyPlaying: null,
+        offlineVideos: [],
+        opacity: 0));
+    setEvent(const MediaEvent(state: MediaState.idle));
   }
 
   double get getBottom => state.isHidden ? -targetHeight : 0;
@@ -259,7 +241,7 @@ class PlayerCubit extends Cubit<PlayerState> with WidgetsBindingObserver {
       // saving progress
       var currentProgress = currentPosition / state.currentlyPlaying!.lengthSeconds;
       if (currentProgress >= 0.9) currentProgress = 1; // we consider a video with 90%+ progress as watched
-      var progress = dbProgress.Progress.named(progress: currentProgress, videoId: state.currentlyPlaying!.videoId);
+      var progress = db_progress.Progress.named(progress: currentProgress, videoId: state.currentlyPlaying!.videoId);
 
       db.saveProgress(progress);
 
@@ -274,61 +256,45 @@ class PlayerCubit extends Cubit<PlayerState> with WidgetsBindingObserver {
   }
 
   queueVideos(List<BaseVideo> videos) {
-    var state = this.state.copyWith();
-    state.offlineVideos = [];
+    var stateVideos = List<BaseVideo>.from(state.videos);
     if (videos.isNotEmpty) {
       //removing videos that are already in the queue
-      state.videos.addAll(videos
-          .where((v) => state.videos.indexWhere((v2) => v2.videoId == v.videoId) == -1)
-          .where((element) => !element.filtered));
+      stateVideos.addAll(videos.where((v) => state.videos.indexWhere((v2) => v2.videoId == v.videoId) == -1).where((element) => !element.filtered));
     } else {
       playVideo(videos);
     }
     log.fine('Videos in queue ${videos.length}');
-    emit(state);
+    emit(state.copyWith(offlineVideos: [], videos: stateVideos));
     generatePlayQueue();
   }
 
   showBigPlayer() {
-    var state = this.state.copyWith();
-    state.isMini = false;
-    state.mediaEvent =
-        MediaEvent(state: MediaState.playing, type: MediaEventType.miniDisplayChanged, value: state.isMini);
-    state.top = 0;
-    state.opacity = 1;
-    state.isHidden = false;
-    emit(state);
+    var mediaEvent = MediaEvent(state: MediaState.playing, type: MediaEventType.miniDisplayChanged, value: state.isMini);
+
+    emit(state.copyWith(isMini: false, mediaEvent: mediaEvent, top: 0, opacity: 1, isHidden: false));
     onOrientationChange();
   }
 
   showMiniPlayer() {
     if (state.currentlyPlaying != null || state.offlineCurrentlyPlaying != null) {
-      var state = this.state.copyWith();
-      state.isMini = true;
-      state.mediaEvent =
-          MediaEvent(state: MediaState.playing, type: MediaEventType.miniDisplayChanged, value: state.isMini);
-      state.top = null;
-      state.isHidden = false;
-      state.opacity = 1;
-      emit(state);
+      var mediaEvent = MediaEvent(state: MediaState.playing, type: MediaEventType.miniDisplayChanged, value: state.isMini);
+      emit(state.copyWith(isMini: true, mediaEvent: mediaEvent, top: null, isHidden: false, opacity: 1));
     }
   }
 
   onProgress(Duration? position) {
-    var state = this.state.copyWith();
-    state.position = position ?? Duration.zero;
-    int currentPosition = state.position.inSeconds;
+    var newPosition = position ?? Duration.zero;
+    int currentPosition = newPosition.inSeconds;
     saveProgress(currentPosition);
     log.fine("video event");
 
-    emit(state);
+    emit(state.copyWith(position: newPosition));
 
     if (state.sponsorSegments.isNotEmpty) {
       double positionInMs = currentPosition * 1000;
-      Pair<int> nextSegment = state.sponsorSegments
-          .firstWhere((e) => e.first <= positionInMs && positionInMs <= e.last, orElse: () => Pair<int>(-1, -1));
+      Pair<int> nextSegment = state.sponsorSegments.firstWhere((e) => e.first <= positionInMs && positionInMs <= e.last, orElse: () => const Pair<int>(-1, -1));
       if (nextSegment.first != -1) {
-        emit(state.copyWith(mediaEvent: MediaEvent(state: MediaState.playing, type: MediaEventType.sponsorSkipped)));
+        emit(state.copyWith(mediaEvent: const MediaEvent(state: MediaState.playing, type: MediaEventType.sponsorSkipped)));
         //for some reasons this needs to be last
         seek(Duration(milliseconds: nextSegment.last + 1000));
 /*
@@ -358,7 +324,8 @@ class PlayerCubit extends Cubit<PlayerState> with WidgetsBindingObserver {
       String? currentVideoId = state.currentlyPlaying?.videoId ?? state.offlineCurrentlyPlaying?.videoId;
       if (currentVideoId != null) {
         // state.playedVideos.remove(currentVideoId);
-        state.playedVideos.add(currentVideoId);
+        var newPlayedVideos = List<String>.from(state.playedVideos)..add(currentVideoId);
+        emit(state.copyWith(playedVideos: newPlayedVideos));
       }
 
       if (state.playQueue.isNotEmpty) {
@@ -369,8 +336,7 @@ class PlayerCubit extends Cubit<PlayerState> with WidgetsBindingObserver {
           await switchToOfflineVideo(state.offlineVideos.firstWhere((element) => element.videoId == toPlay));
         }
       } else if (settings.state.playerRepeatMode == PlayerRepeat.repeatAll) {
-        state.playedVideos = [];
-        state.playQueue = ListQueue.from([]);
+        emit(state.copyWith(playedVideos: [], playQueue: ListQueue.from([])));
         if (state.videos.isNotEmpty) {
           await switchToVideo(state.videos[0]);
         } else {
@@ -390,17 +356,20 @@ class PlayerCubit extends Cubit<PlayerState> with WidgetsBindingObserver {
       if (state.playedVideos.isNotEmpty) {
         // putting back current video in play queue
         String? currentVideoId = state.currentlyPlaying?.videoId ?? state.offlineCurrentlyPlaying?.videoId;
+        var playQueue = ListQueue<String>.from(state.playQueue);
         if (currentVideoId != null) {
           // state.playQueue.remove(currentVideoId);
-          state.playQueue.addFirst(currentVideoId);
+          playQueue.addFirst(currentVideoId);
         }
 
-        String toPlay = state.playedVideos.removeLast();
+        var playedVideos = List<String>.from(state.playedVideos);
+        String toPlay = playedVideos.removeLast();
         if (state.videos.isNotEmpty) {
           await switchToVideo(state.videos.firstWhere((element) => element.videoId == toPlay));
         } else {
           await switchToOfflineVideo(state.offlineVideos.firstWhere((element) => element.videoId == toPlay));
         }
+        emit(state.copyWith(playQueue: playQueue, playedVideos: playedVideos));
       } else {
         // if there's nothing to go back to, we just repeat the last video
         seek(Duration.zero);
@@ -410,35 +379,32 @@ class PlayerCubit extends Cubit<PlayerState> with WidgetsBindingObserver {
   }
 
   _setPlaying(bool playing) {
-    var state = this.state.copyWith();
-    state.isPlaying = playing;
-    emit(state);
+    emit(state.copyWith(isPlaying: playing));
   }
 
   _playVideos(List<IdedVideo> vids, {Duration? startAt}) async {
     if (vids.isNotEmpty) {
-      var state = this.state.copyWith();
-      state.startAt = startAt;
       bool isOffline = vids[0] is DownloadedVideo;
 
-      state.mediaEvent = MediaEvent(state: MediaState.loading);
+      const mediaEvent = MediaEvent(state: MediaState.loading);
 
+      late List<BaseVideo> videos;
+      late List<DownloadedVideo> offlineVideos;
       if (isOffline) {
-        state.videos = [];
-        state.offlineVideos = List.from(vids, growable: true);
+        videos = [];
+        offlineVideos = List<DownloadedVideo>.from(vids, growable: true).cast();
       } else {
-        state.offlineVideos = [];
-        state.videos = List.from(vids, growable: true);
+        offlineVideos = [];
+        videos = List<BaseVideo>.from(vids, growable: true).cast();
       }
 
-      state.playedVideos = [];
-      state.selectedFullScreenIndex = 0;
+      var selectedFullScreenIndex = 0;
       if (vids.length > 1) {
-        state.selectedFullScreenIndex = 3;
+        selectedFullScreenIndex = 3;
       }
-      state.opacity = 0;
-      state.top = 500;
-      emit(state);
+      emit(state.copyWith(
+          offlineVideos: offlineVideos, videos: videos, startAt: startAt, mediaEvent: mediaEvent, playedVideos: [], selectedFullScreenIndex: selectedFullScreenIndex, opacity: 0, top: 500));
+
       showBigPlayer();
       if (isOffline) {
         await switchToOfflineVideo(state.offlineVideos[0]);
@@ -452,7 +418,8 @@ class PlayerCubit extends Cubit<PlayerState> with WidgetsBindingObserver {
   /// skip to queue video of index
   /// if we're not shuffling, we also rebuild the playnext and played previously queue
   skipToVideo(int index) {
-    if (index < 0 || index >= state.videos.length) {
+    var listToCheckAgainst = state.videos.isNotEmpty ? state.videos : state.offlineVideos;
+    if (index < 0 || index >= listToCheckAgainst.length) {
       return;
     }
 
@@ -460,8 +427,8 @@ class PlayerCubit extends Cubit<PlayerState> with WidgetsBindingObserver {
     } else {
       List<String> played = [];
       List<String> playNext = [];
-      for (int i = 0; i < state.videos.length; i++) {
-        var v = state.videos[i];
+      for (int i = 0; i < listToCheckAgainst.length; i++) {
+        var v = listToCheckAgainst[i];
         if (i < index) {
           played.add(v.videoId);
         } else if (i > index) {
@@ -470,12 +437,11 @@ class PlayerCubit extends Cubit<PlayerState> with WidgetsBindingObserver {
       }
       emit(state.copyWith(playedVideos: played, playQueue: ListQueue.from(playNext)));
     }
-    switchToVideo(state.videos[index]);
+    _switchToVideo(listToCheckAgainst[index]);
   }
 
   /// Switches to a video without changing the queue
   _switchToVideo(IdedVideo video, {Duration? startAt}) async {
-    var state = this.state.copyWith();
     try {
       // we move the existing video to the stack of played video
 
@@ -485,21 +451,27 @@ class PlayerCubit extends Cubit<PlayerState> with WidgetsBindingObserver {
         setAudio(video.audioOnly);
       }
 
-      state.mediaEvent = MediaEvent(state: MediaState.loading);
+      const mediaEvent = MediaEvent(state: MediaState.loading);
 
+      List<BaseVideo> videos = List.from(state.videos);
+      List<DownloadedVideo> offlineVideos = List.from(state.offlineVideos);
+      var currentlyPlaying = state.currentlyPlaying;
+      var offlineCurrentlyPlaying = state.offlineCurrentlyPlaying;
       if (isOffline) {
-        state.videos = [];
-        state.currentlyPlaying = null;
+        videos = [];
+        currentlyPlaying = null;
       } else {
-        state.offlineVideos = [];
-        state.offlineCurrentlyPlaying = null;
+        offlineVideos = [];
+        offlineCurrentlyPlaying = null;
       }
 
-      List<IdedVideo> toCheck = isOffline ? state.offlineVideos : state.videos;
+      // List<IdedVideo> toCheck = isOffline ? state.offlineVideos : state.videos;
 
-      emit(state);
-      state = this.state.copyWith();
+      emit(state.copyWith(mediaEvent: mediaEvent, videos: videos, currentlyPlaying: currentlyPlaying, offlineVideos: offlineVideos, offlineCurrentlyPlaying: offlineCurrentlyPlaying));
 
+      late MediaCommand mediaCommand;
+      currentlyPlaying = state.currentlyPlaying;
+      offlineCurrentlyPlaying = state.offlineCurrentlyPlaying;
       if (!isOffline) {
         late Video v;
         if (video is Video) {
@@ -507,19 +479,20 @@ class PlayerCubit extends Cubit<PlayerState> with WidgetsBindingObserver {
         } else {
           v = await service.getVideo(video.videoId);
         }
-        state.currentlyPlaying = v;
-        state.mediaCommand =
-            MediaCommand(MediaCommandType.switchVideo, value: SwitchVideoValue(video: v, startAt: startAt));
+        currentlyPlaying = v;
+        mediaCommand = MediaCommand(MediaCommandType.switchVideo, value: SwitchVideoValue(video: v, startAt: startAt));
       } else {
-        state.offlineCurrentlyPlaying = video;
-        state.mediaCommand = MediaCommand(MediaCommandType.switchToOfflineVideo, value: video);
+        offlineCurrentlyPlaying = video;
+        mediaCommand = MediaCommand(MediaCommandType.switchToOfflineVideo, value: video);
       }
 
-      state.position = Duration.zero;
-      state.forwardStep = defaultStep;
-      state.rewindStep = defaultStep;
-
-      emit(state);
+      emit(state.copyWith(
+          position: Duration.zero,
+          forwardStep: defaultStep,
+          rewindStep: defaultStep,
+          mediaCommand: mediaCommand,
+          currentlyPlaying: currentlyPlaying,
+          offlineCurrentlyPlaying: offlineCurrentlyPlaying));
 
       await setSponsorBlock();
 
@@ -527,7 +500,6 @@ class PlayerCubit extends Cubit<PlayerState> with WidgetsBindingObserver {
         mediaHandler.skipToQueueItem(currentIndex);
       }
     } catch (err) {
-      emit(state);
       if (state.videos.length == 1) {
         // if we can't get video details, we need to stop everything
         log.severe("Couldn't play video  '${video.videoId}', stopping player to avoid app crash");
@@ -570,44 +542,38 @@ class PlayerCubit extends Cubit<PlayerState> with WidgetsBindingObserver {
   }
 
   play() {
-    var state = this.state.copyWith();
-    state.mediaCommand = MediaCommand(MediaCommandType.play);
-    emit(state);
+    emit(state.copyWith(mediaCommand: const MediaCommand(MediaCommandType.play)));
   }
 
   pause() {
-    var state = this.state.copyWith();
-    state.mediaCommand = MediaCommand(MediaCommandType.pause);
-    emit(state);
+    emit(state.copyWith(mediaCommand: const MediaCommand(MediaCommandType.pause)));
   }
 
   removeVideoFromQueue(String videoId) {
-    var state = this.state.copyWith();
-    var listToUpdate = state.videos.isNotEmpty ? state.videos : state.offlineVideos;
+    var videos = List<BaseVideo>.from(state.videos);
+    var offlineVideos = List<DownloadedVideo>.from(state.offlineVideos);
+    var listToUpdate = videos.isNotEmpty ? videos : offlineVideos;
     if (listToUpdate.length == 1) {
       hide();
     } else {
-      state.playQueue.removeWhere((element) => element == videoId);
-      state.playedVideos.removeWhere((element) => element == videoId);
+      var playQueue = ListQueue<String>.from(state.playQueue)..removeWhere((element) => element == videoId);
+      var playedVideos = List<String>.from(state.playedVideos)..removeWhere((element) => element == videoId);
       listToUpdate.removeWhere((element) => element.videoId == videoId);
+      emit(state.copyWith(videos: videos, offlineVideos: offlineVideos, playQueue: playQueue, playedVideos: playedVideos));
     }
-    emit(state);
   }
 
   void videoDragged(DragUpdateDetails details) {
-    var state = this.state.copyWith();
-    // log.info('delta: ${details.delta.dy}, local: ${details.localPosition.dy}, global: ${details.globalPosition.dy}');
-    state.isDragging = true;
-    state.top = details.globalPosition.dy;
     // we  change the display mode if there's a big enough drag movement to avoid jittery behavior when dragging slow
+    var isMini = state.isMini;
+    var mediaEvent = state.mediaEvent;
     if (details.delta.dy.abs() > 3) {
-      state.isMini = details.delta.dy > 0;
-      state.mediaEvent =
-          MediaEvent(state: MediaState.playing, type: MediaEventType.miniDisplayChanged, value: state.isMini);
+      isMini = details.delta.dy > 0;
+      mediaEvent = MediaEvent(state: MediaState.playing, type: MediaEventType.miniDisplayChanged, value: state.isMini);
     }
-    state.dragDistance += details.delta.dy;
+    var dragDistance = state.dragDistance + details.delta.dy;
     // we're going down, putting threshold high easier to switch to mini player
-    emit(state);
+    emit(state.copyWith(isDragging: true, top: details.globalPosition.dy, dragDistance: dragDistance, isMini: isMini, mediaEvent: mediaEvent));
   }
 
   void videoDraggedEnd(DragEndDetails details) {
@@ -620,8 +586,7 @@ class PlayerCubit extends Cubit<PlayerState> with WidgetsBindingObserver {
   }
 
   void videoDragStarted(DragStartDetails details) {
-    state.dragDistance = 0;
-    state.dragStartMini = state.isMini;
+    emit(state.copyWith(dragDistance: 0, dragStartMini: state.isMini));
   }
 
   bool isVideoInQueue(Video video) {
@@ -629,14 +594,17 @@ class PlayerCubit extends Cubit<PlayerState> with WidgetsBindingObserver {
   }
 
   onQueueReorder(int oldItemIndex, int newItemIndex) {
-    var state = this.state.copyWith();
     log.fine('Dragged video');
-    var listToUpdate = state.videos.isNotEmpty ? state.videos : state.offlineVideos;
+    var videos = List<BaseVideo>.from(state.videos);
+    var offlineVideos = List<DownloadedVideo>.from(state.offlineVideos);
+    var listToUpdate = videos.isNotEmpty ? videos : offlineVideos;
     var movedItem = listToUpdate.removeAt(oldItemIndex);
+
     listToUpdate.insert(newItemIndex, movedItem);
     log.fine('Reordered list: $oldItemIndex new index: ${listToUpdate.indexOf(movedItem)}');
+    var playedVideos = List<String>.from(state.playedVideos);
     if (newItemIndex <= currentIndex) {
-      state.playedVideos.add(listToUpdate[newItemIndex].videoId);
+      playedVideos.add(listToUpdate[newItemIndex].videoId);
     }
 /*
     if (oldItemIndex == state.currentIndex) {
@@ -648,7 +616,7 @@ class PlayerCubit extends Cubit<PlayerState> with WidgetsBindingObserver {
     }
 */
 
-    emit(state);
+    emit(state.copyWith(playedVideos: playedVideos, videos: videos, offlineVideos: offlineVideos));
     generatePlayQueue();
   }
 
@@ -656,18 +624,16 @@ class PlayerCubit extends Cubit<PlayerState> with WidgetsBindingObserver {
     if (state.videos.isEmpty) {
       playVideo([video]);
     } else {
-      var state = this.state.copyWith();
-      state.videos.add(video);
-      state.playQueue.addFirst(video.videoId);
-      emit(state);
+      var videos = List<BaseVideo>.from(state.videos)..add(video);
+      var playQueue = ListQueue<String>.from(state.playQueue)..addFirst(video.videoId);
+      emit(state.copyWith(videos: videos, playQueue: playQueue));
     }
   }
 
   setSponsorBlock() async {
     List<Pair<int>> newSegments = [];
     if (state.currentlyPlaying != null) {
-      List<SponsorSegmentType> types =
-          SponsorSegmentType.values.where((e) => db.getSettings(e.settingsName())?.value == 'true').toList();
+      List<SponsorSegmentType> types = SponsorSegmentType.values.where((e) => db.getSettings(e.settingsName())?.value == 'true').toList();
 
       if (types.isNotEmpty) {
         List<SponsorSegment> sponsorSegments = await service.getSponsorSegments(state.currentlyPlaying!.videoId, types);
@@ -690,16 +656,12 @@ class PlayerCubit extends Cubit<PlayerState> with WidgetsBindingObserver {
       duration = Duration.zero;
     }
 
-    var videoLength =
-        this.state.currentlyPlaying?.lengthSeconds ?? this.state.offlineCurrentlyPlaying?.lengthSeconds ?? 1;
+    var videoLength = state.currentlyPlaying?.lengthSeconds ?? state.offlineCurrentlyPlaying?.lengthSeconds ?? 1;
     if (duration.inSeconds > (videoLength)) {
       duration = Duration(seconds: videoLength);
     }
 
-    var state = this.state.copyWith();
-    state.position = duration;
-    state.mediaCommand = MediaCommand(MediaCommandType.seek, value: duration);
-    emit(state);
+    emit(state.copyWith(position: duration, mediaCommand: MediaCommand(MediaCommandType.seek, value: duration)));
   }
 
   void fastForward() {
@@ -736,39 +698,24 @@ class PlayerCubit extends Cubit<PlayerState> with WidgetsBindingObserver {
     if (state.videos.isNotEmpty) {
       var e = state.videos[index];
       return MediaItem(
-          id: e.videoId,
-          title: e.title,
-          artist: e.author,
-          duration: Duration(seconds: e.lengthSeconds),
-          album: '',
-          artUri: Uri.parse(ImageObject.getBestThumbnail(e.videoThumbnails)?.url ?? ''));
+          id: e.videoId, title: e.title, artist: e.author, duration: Duration(seconds: e.lengthSeconds), album: '', artUri: Uri.parse(ImageObject.getBestThumbnail(e.videoThumbnails)?.url ?? ''));
     } else if (state.offlineVideos.isNotEmpty) {
       var e = state.offlineVideos[index];
       var path = await e.thumbnailPath;
-      return MediaItem(
-          id: e.videoId,
-          title: e.title,
-          artist: e.author,
-          duration: Duration(seconds: e.lengthSeconds),
-          album: '',
-          artUri: Uri.file(path));
+      return MediaItem(id: e.videoId, title: e.title, artist: e.author, duration: Duration(seconds: e.lengthSeconds), album: '', artUri: Uri.file(path));
     }
     return null;
   }
 
   void setSpeed(double d) {
-    var state = this.state.copyWith();
-    state.mediaCommand = MediaCommand(MediaCommandType.speed, value: d);
-    emit(state);
+    emit(state.copyWith(mediaCommand: MediaCommand(MediaCommandType.speed, value: d)));
   }
 
   void setFullScreen(FullScreenState fsState) {
     // emit(state.copyWith(mediaCommand: MediaCommand(MediaCommandType.fullScreen, value: fsState)));
     emit(state.copyWith(
         fullScreenState: fsState,
-        mediaCommand: MediaCommand(fsState == FullScreenState.notFullScreen
-            ? MediaCommandType.exitFullScreen
-            : MediaCommandType.enterFullScreen),
+        mediaCommand: MediaCommand(fsState == FullScreenState.notFullScreen ? MediaCommandType.exitFullScreen : MediaCommandType.enterFullScreen),
         mediaEvent: MediaEvent(state: state.mediaEvent.state, type: MediaEventType.fullScreenChanged, value: fsState)));
 
     switch (fsState) {
@@ -811,8 +758,7 @@ class PlayerCubit extends Cubit<PlayerState> with WidgetsBindingObserver {
     }
   }
 
-  Duration get duration =>
-      Duration(seconds: (state.currentlyPlaying?.lengthSeconds ?? state.offlineCurrentlyPlaying?.lengthSeconds ?? 1));
+  Duration get duration => Duration(seconds: (state.currentlyPlaying?.lengthSeconds ?? state.offlineCurrentlyPlaying?.lengthSeconds ?? 1));
 
   double get progress => state.position.inMilliseconds / duration.inMilliseconds;
 
@@ -827,8 +773,7 @@ class PlayerCubit extends Cubit<PlayerState> with WidgetsBindingObserver {
     // get videos minus the one we already played and the currently playing video
     List<String> videos = (state.videos.isNotEmpty ? state.videos : state.offlineVideos)
         .where((element) => !state.playedVideos.contains(element.videoId))
-        .where(
-            (element) => element.videoId != (state.currentlyPlaying?.videoId ?? state.offlineCurrentlyPlaying?.videoId))
+        .where((element) => element.videoId != (state.currentlyPlaying?.videoId ?? state.offlineCurrentlyPlaying?.videoId))
         .map((e) => e.videoId)
         .toList();
 
@@ -842,108 +787,75 @@ class PlayerCubit extends Cubit<PlayerState> with WidgetsBindingObserver {
   }
 
   void onOrientationChange() {
-    if (getDeviceType() == DeviceType.phone &&
-        (orientation == Orientation.landscape) &&
-        !state.isMini) {
+    if (getDeviceType() == DeviceType.phone && (orientation == Orientation.landscape) && !state.isMini) {
       setFullScreen(FullScreenState.fullScreen);
     }
   }
 }
 
-@CopyWith(constructor: "_")
-class PlayerState {
-  // player display properties
-  bool isMini = true;
-  double? top;
-  bool isDragging = false;
-  int selectedFullScreenIndex = 0;
-  bool isHidden = true;
-  double opacity = 0;
-  double dragDistance = 0;
-  bool dragStartMini = true;
-  double height = targetHeight;
-  FullScreenState fullScreenState = FullScreenState.notFullScreen;
-  bool muted = false;
-  double aspectRatio = 16 / 9;
+@freezed
+class PlayerState with _$PlayerState {
+  const factory PlayerState({
+    // player display properties
+    @Default(true) bool isMini,
+    double? top,
+    @Default(false) bool isDragging,
+    @Default(0) int selectedFullScreenIndex,
+    @Default(true) bool isHidden,
+    @Default(0) double opacity,
+    @Default(0) double dragDistance,
+    @Default(true) bool dragStartMini,
+    @Default(targetHeight) double height,
+    @Default(FullScreenState.notFullScreen) FullScreenState fullScreenState,
+    @Default(false) bool muted,
+    @Default(16 / 9) double aspectRatio,
 
-  // videos to play
-  Video? currentlyPlaying;
+    // videos to play
+    Video? currentlyPlaying,
+    DownloadedVideo? offlineCurrentlyPlaying,
+    @Default([]) List<BaseVideo> videos,
+    @Default([]) List<DownloadedVideo> offlineVideos,
+
+    // playlist controls
+    @Default([]) List<String> playedVideos,
+    required ListQueue<String> playQueue,
+    @Default(false) bool isAudio,
+
+    // playing video data
+    @Default(false) bool isPip,
+    @Default(Offset.zero) Offset offset,
+    Duration? startAt,
+    @Default(Duration.zero) Duration position,
+    @Default(Duration.zero) Duration bufferedPosition,
+    @Default(false) bool isPlaying,
+    @Default(1.0) double speed,
+
+    // events
+    // command we send down the stack, namely video / audio player
+    MediaCommand? mediaCommand,
+
+    // events we receive from bottom of stack
+    @Default(MediaEvent(state: MediaState.idle)) MediaEvent mediaEvent,
+
+    // sponsor block variables
+    @Default([]) List<Pair<int>> sponsorSegments,
+    @Default(Pair(0, 0)) Pair<int> nextSegment,
+
+    // step in seconds when fast forawrd or fast rewind
+    @Default(defaultStep) int forwardStep,
+    @Default(defaultStep) rewindStep,
+    @Default(0) int totalFastForward,
+    @Default(0) totalRewind,
+  }) = _PlayerState;
 
   bool get hasVideo => currentlyPlaying != null || offlineCurrentlyPlaying != null;
-  DownloadedVideo? offlineCurrentlyPlaying;
-  List<BaseVideo> videos = List.empty(growable: true);
-  List<DownloadedVideo> offlineVideos = [];
-
-  // playlist controls
-  List<String> playedVideos = [];
-  ListQueue<String> playQueue = ListQueue.from([]);
-  bool isAudio = false;
-
-  // playing video data
-  // int currentIndex = 0;
-  bool isPip = false;
-  Offset offset = Offset.zero;
-  Duration? startAt;
-  Duration position = Duration.zero;
-  Duration bufferedPosition = Duration.zero;
-  bool isPlaying = false;
 
   bool get hasQueue => offlineVideos.length > 1 || videos.length > 1;
 
-  double speed = 1.0;
+  const PlayerState._();
 
-  // events
-  // command we send down the stack, namely video / audio player
-  MediaCommand? mediaCommand;
-
-  // events we receive from bottom of stack
-  MediaEvent mediaEvent = MediaEvent(state: MediaState.idle);
-
-  // sponsor block variables
-  List<Pair<int>> sponsorSegments = List.of([]);
-  Pair<int> nextSegment = Pair(0, 0);
-
-  // step in seconds when fast forawrd or fast rewind
-  int forwardStep = defaultStep, rewindStep = defaultStep;
-  int totalFastForward = 0, totalRewind = 0;
-
-  PlayerState();
-
-  PlayerState.withVideos(this.videos);
-
-  PlayerState._(
-      this.videos,
-      this.height,
-      this.isMini,
-      this.top,
-      this.isDragging,
-      this.selectedFullScreenIndex,
-      this.isPip,
-      this.isHidden,
-      this.speed,
-      this.currentlyPlaying,
-      this.offlineCurrentlyPlaying,
-      this.opacity,
-      this.aspectRatio,
-      this.dragDistance,
-      this.dragStartMini,
-      this.bufferedPosition,
-      this.playedVideos,
-      this.offset,
-      this.isAudio,
-      this.startAt,
-      this.isPlaying,
-      this.sponsorSegments,
-      this.nextSegment,
-      this.offlineVideos,
-      this.position,
-      this.mediaCommand,
-      this.fullScreenState,
-      this.muted,
-      this.forwardStep,
-      this.rewindStep,
-      this.totalRewind,
-      this.totalFastForward,
-      this.mediaEvent,
-      this.playQueue);
+//
+  static PlayerState init(List<BaseVideo>? videos) {
+    return PlayerState(videos: videos ?? [], playQueue: ListQueue.from([]));
+  }
 }

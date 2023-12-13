@@ -24,7 +24,7 @@ class TvHorizontalItemList<T> extends StatelessWidget {
       create: (context) => ItemListCubit<T>(ItemListState<T>(itemList: paginatedList)),
       child: BlocBuilder<ItemListCubit<T>, ItemListState<T>>(
         builder: (context, _) {
-
+          var cubit = context.read<ItemListCubit<T>>();
           // filter items if possible
           List<T> items = _.items;
           if (items.isNotEmpty && items[0] is BaseVideo) {
@@ -43,7 +43,7 @@ class TvHorizontalItemList<T> extends StatelessWidget {
                     height: 250,
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
-                      controller: _.scrollController,
+                      controller: cubit.scrollController,
                       itemCount: items.length + (_.loading ? 10 : 0),
                       itemBuilder: (context, index) {
                         if (index >= items.length) {

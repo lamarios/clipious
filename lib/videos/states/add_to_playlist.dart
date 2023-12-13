@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:copy_with_extension/copy_with_extension.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:invidious/extensions.dart';
 import 'package:invidious/videos/models/video_in_list.dart';
 import 'package:logging/logging.dart';
@@ -7,7 +8,7 @@ import 'package:logging/logging.dart';
 import '../../globals.dart';
 import '../../playlists/models/playlist.dart';
 
-part 'add_to_playlist.g.dart';
+part 'add_to_playlist.freezed.dart';
 
 const String likePlaylistName = '❤️';
 
@@ -109,18 +110,19 @@ class AddToPlaylistCubit extends Cubit<AddToPlaylistController> {
   }
 }
 
-@CopyWith(constructor: "_")
-class AddToPlaylistController {
-  List<Playlist> playlists = [];
-  int playListCount = 0;
-  String videoId;
-  bool isVideoLiked = false;
+@freezed
+class AddToPlaylistController with _$AddToPlaylistController{
+  const factory AddToPlaylistController(String videoId, {
+    @Default([]) List<Playlist> playlists,
+    @Default(0) int playListCount,
+    @Default(false) bool isVideoLiked,
+    @Default(true) bool loading,
+    required bool isLoggedIn
 
-  bool loading = true;
-  bool isLoggedIn = service.isLoggedIn();
+  }) = _AddToPlaylistController;
 
-  AddToPlaylistController(this.videoId);
+  static AddToPlaylistController init(String videoId){
+    return AddToPlaylistController(videoId, isLoggedIn: service.isLoggedIn());
+  }
 
-  AddToPlaylistController._(
-      this.playlists, this.playListCount, this.videoId, this.loading, this.isLoggedIn, this.isVideoLiked);
 }

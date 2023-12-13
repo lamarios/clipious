@@ -96,6 +96,7 @@ class BrowsingSettingsScreen extends StatelessWidget {
       ),
       body: SafeArea(child: BlocBuilder<SettingsCubit, SettingsState>(builder: (context, _) {
         var cubit = context.read<SettingsCubit>();
+        var filterCount = db.getAllFilters().length;
         return DefaultTabController(
           length: 2,
           child: SettingsList(
@@ -139,13 +140,13 @@ class BrowsingSettingsScreen extends StatelessWidget {
                   SettingsTile.navigation(
                     leading: const Icon(Icons.manage_search),
                     title: Text(locals.searchHistory),
-                    description: Text(locals.searchHistoryDescription),
+                    description: Text(_.useSearchHistory ? locals.enabled : locals.searchHistoryDescription),
                     onPressed: (context) => openSearchHistorySettings(context),
                   ),
                   SettingsTile.navigation(
                     leading: const Icon(Icons.rule_sharp),
                     title: Text(locals.videoFilters),
-                    description: Text(locals.videoFiltersSettingTileDescriptions),
+                    description: Text('${locals.videoFiltersSettingTileDescriptions}${filterCount > 0 ? '\n${locals.nFilters(filterCount)}':''}'),
                     onPressed: openVideoFilterSettings,
                   ),
                   SettingsTile.navigation(

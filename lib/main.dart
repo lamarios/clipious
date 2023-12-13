@@ -15,12 +15,14 @@ import 'package:invidious/mediaHander.dart';
 import 'package:invidious/notifications/notifications.dart';
 import 'package:invidious/player/states/player.dart';
 import 'package:invidious/router.dart';
+import 'package:invidious/settings/models/db/server.dart';
 import 'package:invidious/settings/states/settings.dart';
 import 'package:invidious/utils.dart';
 import 'package:invidious/workmanager.dart';
 import 'package:logging/logging.dart';
 
 import 'database.dart';
+import 'home/models/db/home_layout.dart';
 import 'settings/models/db/app_logs.dart';
 
 const brandColor = Color(0xFF4f0096);
@@ -65,20 +67,22 @@ Future<void> main() async {
   isTv = await isDeviceTv();
   runApp(MultiBlocProvider(providers: [
     BlocProvider(
-      create: (context) => AppCubit(AppState()),
+      create: (context) {
+        return AppCubit(AppState.init());
+      },
     ),
     BlocProvider(
       create: (context) {
-        var settingsCubit = SettingsCubit(SettingsState(), context.read<AppCubit>());
+        var settingsCubit = SettingsCubit(SettingsState.init(), context.read<AppCubit>());
         configureBackgroundService(settingsCubit);
         return settingsCubit;
       },
     ),
     BlocProvider(
-      create: (context) => PlayerCubit(PlayerState(), context.read<SettingsCubit>()),
+      create: (context) => PlayerCubit(PlayerState.init(null), context.read<SettingsCubit>()),
     ),
     BlocProvider(
-      create: (context) => DownloadManagerCubit(DownloadManagerState(), context.read<PlayerCubit>()),
+      create: (context) => DownloadManagerCubit(const DownloadManagerState(), context.read<PlayerCubit>()),
     )
   ], child: const MyApp()));
 }
@@ -96,8 +100,10 @@ class MyApp extends StatelessWidget {
         // we want to rebuild only when anything other than the navigation index is changed
         builder: (context, _) {
           var app = context.read<AppCubit>();
-          var settings = context.read<SettingsCubit>();
-          bool useDynamicTheme = settings.state.useDynamicTheme;
+          bool useDynamicTheme = context.select((SettingsCubit value) => value.state.useDynamicTheme);
+          bool useBlackBackground = context.select((SettingsCubit value) => value.state.blackBackground);
+          String? locale = context.select((SettingsCubit value) => value.state.locale);
+          ThemeMode themeMode = context.select((SettingsCubit value) => value.state.themeMode);
 
           return DynamicColorBuilder(builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) {
             ColorScheme lightColorScheme;
@@ -129,12 +135,12 @@ class MyApp extends StatelessWidget {
               );
             }
 
-            if (settings.state.blackBackground) {
+            if (useBlackBackground) {
               darkColorScheme = darkColorScheme.copyWith(background: Colors.black);
             }
 
             List<String>? localeString;
-            var dbLocale = settings.state.locale;
+            var dbLocale = locale;
             if (dbLocale != null && dbLocale != 'null') {
               localeString = dbLocale.split('_');
             }
@@ -182,7 +188,7 @@ class MyApp extends StatelessWidget {
               supportedLocales: AppLocalizations.supportedLocales,
               scaffoldMessengerKey: scaffoldKey,
               debugShowCheckedModeBanner: false,
-              themeMode: ThemeMode.values.firstWhere((element) => element.name == settings.state.themeMode.name,
+              themeMode: ThemeMode.values.firstWhere((element) => element.name == themeMode.name,
                   orElse: () => ThemeMode.system),
               title: 'Clipious',
               theme: ThemeData(

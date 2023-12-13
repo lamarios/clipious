@@ -66,9 +66,9 @@ class TvHomeScreen extends StatelessWidget {
         LogicalKeySet(LogicalKeyboardKey.select): const ActivateIntent(),
       },
       child: BlocProvider(
-        create: (BuildContext context) => TvHomeCubit(TvHomeState()),
+        create: (BuildContext context) => TvHomeCubit(false),
         child: Scaffold(
-          body: BlocBuilder<TvHomeCubit, TvHomeState>(builder: (context, homeState) {
+          body: BlocBuilder<TvHomeCubit, bool>(builder: (context, homeState) {
             var homeCubit = context.read<TvHomeCubit>();
             var appLayout = context.select((SettingsCubit value) => value.state.appLayout);
             var allowedPages = appLayout.where((element) => element.isPermitted(context)).toList();
@@ -82,12 +82,12 @@ class TvHomeScreen extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     AnimatedContainer(
-                      width: homeState.expandMenu ? 250 : 118,
+                      width: homeState ? 250 : 118,
                       duration: animationDuration ~/ 2,
                       curve: Curves.easeInOutQuad,
-                      decoration: BoxDecoration(color: homeState.expandMenu ? colors.secondaryContainer.withOpacity(0.5) : Colors.transparent),
+                      decoration: BoxDecoration(color: homeState ? colors.secondaryContainer.withOpacity(0.5) : Colors.transparent),
                       child: Padding(
-                          padding: EdgeInsets.only(top: TvOverscan.vertical, left: TvOverscan.horizontal, bottom: TvOverscan.vertical, right: homeState.expandMenu ? TvOverscan.horizontal : 8),
+                          padding: EdgeInsets.only(top: TvOverscan.vertical, left: TvOverscan.horizontal, bottom: TvOverscan.vertical, right: homeState ? TvOverscan.horizontal : 8),
                           child: Column(mainAxisAlignment: MainAxisAlignment.start, crossAxisAlignment: CrossAxisAlignment.start, children: [
                             Padding(
                               padding: const EdgeInsets.only(bottom: 30.0),
@@ -99,7 +99,7 @@ class TvHomeScreen extends StatelessWidget {
                                         width: 50,
                                         height: 50,
                                       ),
-                                      if (homeState.expandMenu)
+                                      if (homeState)
                                         Padding(
                                             padding: const EdgeInsets.only(left: 16.0),
                                             child: MenuItemText(
@@ -134,7 +134,7 @@ class TvHomeScreen extends StatelessWidget {
                                                   padding: const EdgeInsets.only(right: 8.0),
                                                   child: Icon(e.getIcon()),
                                                 ),
-                                                if (homeState.expandMenu) MenuItemText(e.getLabel(locals))
+                                                if (homeState) MenuItemText(e.getLabel(locals))
                                               ],
                                             ),
                                           ),
@@ -154,7 +154,7 @@ class TvHomeScreen extends StatelessWidget {
                                       padding: EdgeInsets.only(right: 8.0),
                                       child: Icon(Icons.settings),
                                     ),
-                                    if (homeState.expandMenu) MenuItemText(locals.settings)
+                                    if (homeState) MenuItemText(locals.settings)
                                   ],
                                 ),
                               ),
@@ -167,7 +167,7 @@ class TvHomeScreen extends StatelessWidget {
                         child: Padding(
                           padding: const EdgeInsets.only(top: TvOverscan.vertical, bottom: TvOverscan.vertical, right: TvOverscan.horizontal, left: 8),
                           child: ListView(
-                            controller: homeState.scrollController,
+                            controller: homeCubit.scrollController,
                             physics: const NeverScrollableScrollPhysics(),
                             shrinkWrap: true,
                             // crossAxisAlignment: CrossAxisAlignment.start,

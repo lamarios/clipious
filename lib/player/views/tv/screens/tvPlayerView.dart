@@ -24,7 +24,7 @@ class TvPlayerScreen extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => PlayerCubit(PlayerState.withVideos(videos), settings),
+          create: (context) => PlayerCubit(PlayerState.init(videos), settings),
         )
       ],
       child: Theme(

@@ -95,7 +95,7 @@ class TvManageServersInner extends StatelessWidget {
                 autofocus: true,
                 focusNode: focusNode,
                 textInputAction: TextInputAction.next,
-                controller: controller.addServerController,
+                controller: cubit.addServerController,
                 autocorrect: false,
                 enableSuggestions: false,
                 enableIMEPersonalizedLearning: false,

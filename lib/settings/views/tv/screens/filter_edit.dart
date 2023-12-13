@@ -71,7 +71,7 @@ class TvFilterEditSettingsScreen extends StatelessWidget {
             Visibility(
                 visible: _.filter?.operation != null,
                 child: TvTextField(
-                  controller: _.valueController,
+                  controller: cubit.valueController,
                   autocorrect: false,
                   keyboardType: cubit.isNumberValue() ? TextInputType.number : null,
                   decoration: InputDecoration(label: Text(locals.videoFilterValue)),

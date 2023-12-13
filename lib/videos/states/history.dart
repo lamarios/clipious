@@ -1,11 +1,12 @@
 import 'package:bloc/bloc.dart';
 import 'package:copy_with_extension/copy_with_extension.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/utils/states/item_list.dart';
 
 import '../models/db/history_video_cache.dart';
 
-part 'history.g.dart';
+part 'history.freezed.dart';
 
 class HistoryCubit extends Cubit<void> {
   final ItemListCubit<String> historyListCubit;
@@ -33,29 +34,17 @@ class HistoryItemCubit extends Cubit<HistoryItemState> {
   }
 
   getVideo() async {
-    var state = this.state.copyWith();
-    state = this.state.copyWith();
-    state.loading = true;
-    emit(state);
+    emit(state.copyWith(loading: true));
 
-    state = state.copyWith();
+    var cachedVid = await HistoryVideoCache.fromVideoIdToVideo(state.videoId);
 
-    state.cachedVid = await HistoryVideoCache.fromVideoIdToVideo(state.videoId);
-
-    state.loading = false;
-    if(!isClosed) {
-      emit(state);
+    if (!isClosed) {
+      emit(state.copyWith(cachedVid: cachedVid, loading: false));
     }
   }
 }
 
-@CopyWith(constructor: "_")
-class HistoryItemState {
-  final String videoId;
-  bool loading = true;
-  HistoryVideoCache? cachedVid;
-
-  HistoryItemState({required this.videoId});
-
-  HistoryItemState._(this.videoId, this.loading, this.cachedVid);
+@freezed
+class HistoryItemState with _$HistoryItemState {
+  const factory HistoryItemState({required String videoId, @Default(true) bool loading, HistoryVideoCache? cachedVid}) = _HistoryItemState;
 }

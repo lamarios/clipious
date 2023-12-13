@@ -60,7 +60,7 @@ class SelectList<T> extends StatelessWidget {
       content: SizedBox(
         width: 300,
         child: BlocProvider(
-          create: (BuildContext context) => SelectListCubit<T>(SelectListState<T>(values)),
+          create: (BuildContext context) => SelectListCubit<T>(SelectListState<T>(filteredItems: values ?? [])),
           child: BlocBuilder<SelectListCubit<T>, SelectListState<T>>(builder: (context, state) {
             var cubit = context.read<SelectListCubit<T>>();
             return Column(

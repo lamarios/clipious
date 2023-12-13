@@ -1,12 +1,12 @@
 import 'package:bloc/bloc.dart';
-import 'package:copy_with_extension/copy_with_extension.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:invidious/comments/models/video_comments.dart';
 import 'package:invidious/videos/models/base_video.dart';
 
 import '../../globals.dart';
 import '../../settings/models/errors/invidiousServiceError.dart';
 
-part 'comments.g.dart';
+part 'comments.freezed.dart';
 
 class CommentsCubit extends Cubit<CommentsState> {
   CommentsCubit(super.initialState) {
@@ -19,63 +19,60 @@ class CommentsCubit extends Cubit<CommentsState> {
 
   loadMore() async {
     var state = this.state.copyWith();
-    state.loadingComments = true;
-    emit(state);
+    emit(state.copyWith(loadingComments: true));
 
     state = this.state.copyWith();
     VideoComments comments = await service.getComments(state.video.videoId, continuation: state.continuation);
 
-    state.comments.comments.addAll(comments.comments);
-    state.continuation = comments.continuation;
-    state.loadingComments = false;
-    emit(state);
+    var stateComments = state.comments;
+    stateComments.comments.addAll(comments.comments);
+    emit(state.copyWith(comments: stateComments, continuation: comments.continuation, loadingComments: false));
   }
 
   getComments() async {
     var state = this.state.copyWith();
-    state.error = '';
-    state.loadingComments = true;
-    state.comments = VideoComments(0, state.video.videoId, '', []);
-    emit(state);
+    emit(state.copyWith(error: '', loadingComments: true, comments: VideoComments(0, state.video.videoId, '', [])));
 
     state = this.state.copyWith();
 
     try {
-      VideoComments comments = await service.getComments(state.video.videoId,
-          continuation: state.continuation, sortBy: state.sortBy, source: state.source);
-      state.comments = comments;
-      state.loadingComments = false;
-      state.continuation = comments.continuation;
-      emit(state);
+      VideoComments comments = await service.getComments(state.video.videoId, continuation: state.continuation, sortBy: state.sortBy, source: state.source);
+      emit(state.copyWith(comments: comments, loadingComments: false, continuation: comments.continuation));
     } catch (err) {
       state = this.state.copyWith();
       if (err is InvidiousServiceError) {
-        state.error = err.message;
-        emit(state);
+        emit(state.copyWith(error: err.message));
       } else {
-        state.error = err.toString();
-        emit(state);
+        emit(state.copyWith(error: err.toString()));
         rethrow;
       }
     }
   }
 }
 
-@CopyWith(constructor: "_")
-class CommentsState {
-  final BaseVideo video;
-  bool loadingComments = true;
-  late VideoComments comments;
-  bool continuationLoaded = false;
-  String? continuation;
-  String error = '';
-  String? source;
-  String? sortBy;
+@freezed
+class CommentsState with _$CommentsState {
+  const factory CommentsState(
+      {required BaseVideo video,
+      @Default(true) bool loadingComments,
+      String? continuation,
+      @Default(false) bool continuationLoaded,
+      required VideoComments comments,
+      @Default('') String error,
+      String? source,
+      String? sortBy}) = _CommentsState;
 
-  CommentsState({required this.video, this.continuation, this.source, this.sortBy}) {
-    comments = VideoComments(0, video.videoId, '', []);
+  static CommentsState init({required BaseVideo video, bool? loadingComments, String? continuation, bool? continuationLoaded, String? error, String? source, String? sortBy}) {
+    var comments = VideoComments(0, video.videoId, continuation, []);
+
+    return CommentsState(
+        video: video,
+        comments: comments,
+        loadingComments: loadingComments ?? true,
+        continuation: continuation,
+        continuationLoaded: continuationLoaded ?? false,
+        error: error ?? '',
+        source: source,
+        sortBy: sortBy);
   }
-
-  CommentsState._(this.video, this.loadingComments, this.comments, this.continuationLoaded, this.continuation,
-      this.error, this.source, this.sortBy);
 }

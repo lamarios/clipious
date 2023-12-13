@@ -1,29 +1,30 @@
 import 'package:bloc/bloc.dart';
-import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:invidious/utils/models/paginatedList.dart';
 
 import '../models/playlist.dart';
 
-part 'playlist_list.g.dart';
+part 'playlist_list.freezed.dart';
 
 const couldNotGetPlaylits = 'could-not-get-playlists';
 
 class PlaylistListCubit extends Cubit<PlaylistListState> {
+  ScrollController scrollController = ScrollController();
   PlaylistListCubit(super.initialState) {
     onReady();
   }
 
   void onReady() {
-    state.scrollController.addListener(onScrollEvent);
+    scrollController.addListener(onScrollEvent);
     getPlaylists();
   }
 
   onScrollEvent() {
     if (state.paginatedList.getHasMore()) {
-      if (state.scrollController.hasClients) {
-        if (state.scrollController.position.maxScrollExtent * 0.9 == state.scrollController.offset) {
+      if (scrollController.hasClients) {
+        if (scrollController.position.maxScrollExtent * 0.9 == scrollController.offset) {
           EasyDebounce.debounce('get-more-playlists', const Duration(milliseconds: 500), getMorePlaylists);
         }
       }
@@ -50,42 +51,29 @@ class PlaylistListCubit extends Cubit<PlaylistListState> {
   }
 
   loadPlaylist(Future<List<Playlist>> Function() refreshFunction) async {
-    var state = this.state.copyWith();
-    state.error = '';
-    state.loading = true;
-    emit(state);
+    emit(state.copyWith(error: '', loading: true));
     try {
-      state = this.state.copyWith();
       var playlists = await refreshFunction();
-      state.playlists = playlists;
-      state.loading = false;
-      emit(state);
+      emit(state.copyWith(playlists: playlists, loading: false));
     } catch (err) {
-      state = this.state.copyWith();
-      state.playlists = [];
-      state.loading = false;
-      state.error = couldNotGetPlaylits;
-      emit(state);
+      emit(state.copyWith(error: couldNotGetPlaylits, playlists: [], loading: false));
       rethrow;
     }
   }
 
   @override
   close() async {
-    state.scrollController.dispose();
+    scrollController.dispose();
     super.close();
   }
 }
 
-@CopyWith(constructor: "_")
-class PlaylistListState {
-  PaginatedList<Playlist> paginatedList;
-  List<Playlist> playlists = [];
-  bool loading = true;
-  ScrollController scrollController = ScrollController();
-  String error = '';
-
-  PlaylistListState(this.paginatedList);
-
-  PlaylistListState._(this.paginatedList, this.playlists, this.loading, this.scrollController, this.error);
+@freezed
+class PlaylistListState with _$PlaylistListState {
+  const factory PlaylistListState({
+    required PaginatedList<Playlist> paginatedList,
+    @Default([]) List<Playlist> playlists,
+    @Default(true) bool loading,
+    @Default('') String error
+}) = _PlaylistListState;
 }

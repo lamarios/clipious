@@ -24,6 +24,11 @@ Future<void> configureBackgroundService(SettingsCubit settings) async {
 }
 
 Future<void> setupTasks(SettingsCubit settings) async {
+  try {
+    await Workmanager().cancelByTag(taskName);
+  }catch(e){
+    // fail silently in case no tasks have been already defined
+  }
   await Workmanager().registerPeriodicTask(taskName, taskName,
       frequency: kDebugMode ? const Duration(seconds: 15) : Duration(hours: settings.state.backgroundNotificationFrequency),
       constraints: Constraints(networkType: NetworkType.connected, requiresBatteryNotLow: true));

@@ -54,23 +54,28 @@ class VideoInnerView extends StatelessWidget {
           ),
         ),
         if (!settings.state.distractionFreeMode)
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              SizedBox(height: 25, child: Checkbox(value: settings.state.playRecommendedNext, onChanged: cubit.togglePlayRecommendedNext, visualDensity: VisualDensity.compact)),
-              InkWell(
-                  onTap: () => cubit.togglePlayRecommendedNext(!settings.state.playRecommendedNext),
-                  child: Text(
-                    locals.addRecommendedToQueue,
-                    style: textTheme.bodySmall,
-                  ))
-            ],
+          BlocBuilder<SettingsCubit, SettingsState>(
+            buildWhen: (previous, current) => previous.playRecommendedNext != current.playRecommendedNext,
+            builder: (context, settingsState) {
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  SizedBox(height: 25, child: Checkbox(value: settingsState.playRecommendedNext, onChanged: cubit.togglePlayRecommendedNext, visualDensity: VisualDensity.compact)),
+                  InkWell(
+                      onTap: () => cubit.togglePlayRecommendedNext(!settingsState.playRecommendedNext),
+                      child: Text(
+                        locals.addRecommendedToQueue,
+                        style: textTheme.bodySmall,
+                      ))
+                ],
+              );
+            }
           ),
         Expanded(
             child: Padding(
           padding: const EdgeInsets.only(top: 0),
           child: ListView(
-            controller: videoController.scrollController,
+            controller: cubit.scrollController,
             children: [
               AnimatedSwitcher(
                   duration: animationDuration,

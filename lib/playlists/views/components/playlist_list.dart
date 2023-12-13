@@ -24,7 +24,7 @@ class PlaylistList extends StatelessWidget {
     ColorScheme colorScheme = Theme.of(context).colorScheme;
     AppLocalizations locals = AppLocalizations.of(context)!;
     return BlocProvider(
-      create: (BuildContext context) => PlaylistListCubit(PlaylistListState(paginatedList)),
+      create: (BuildContext context) => PlaylistListCubit(PlaylistListState(paginatedList: paginatedList)),
       child: BlocBuilder<PlaylistListCubit, PlaylistListState>(
         builder: (context, _) {
           var cubit = context.read<PlaylistListCubit>();
@@ -49,7 +49,7 @@ class PlaylistList extends StatelessWidget {
                           onRefresh: () => !small && _.paginatedList.hasRefresh() ? cubit.refreshPlaylists() : null,
                           child: ListView.builder(
                               scrollDirection: small ? Axis.horizontal : Axis.vertical,
-                              controller: _.scrollController,
+                              controller: cubit.scrollController,
                               itemBuilder: (context, index) => index >= _.playlists.length
                                   ? PlaylistPlaceHolder(small: small)
                                   : PlaylistInList(

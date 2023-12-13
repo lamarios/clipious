@@ -118,7 +118,7 @@ class ManagerServersView extends StatelessWidget {
                     children: <Widget>[
                       Text(locals.addServer),
                       TextField(
-                        controller: cubit.state.addServerController,
+                        controller: cubit.addServerController,
                         autocorrect: false,
                         enableSuggestions: false,
                         enableIMEPersonalizedLearning: false,

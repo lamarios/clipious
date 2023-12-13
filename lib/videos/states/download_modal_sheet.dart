@@ -1,30 +1,21 @@
 import 'package:bloc/bloc.dart';
-import 'package:copy_with_extension/copy_with_extension.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'download_modal_sheet.g.dart';
+part 'download_modal_sheet.freezed.dart';
 
 class DownloadModalSheetCubit extends Cubit<DownloadModalSheetState> {
   DownloadModalSheetCubit(super.initialState);
 
   setAudioOnly(bool value) {
-    var state = this.state.copyWith();
-    state.audioOnly = value;
-    emit(state);
+    emit(state.copyWith(audioOnly: value));
   }
 
   setQuality(String quality) {
-    var state = this.state.copyWith();
-    state.quality = quality;
-    emit(state);
+    emit(state.copyWith(quality: quality));
   }
 }
 
-@CopyWith(constructor: "_")
-class DownloadModalSheetState {
-  bool audioOnly = false;
-  String quality = '720p';
-
-  DownloadModalSheetState();
-
-  DownloadModalSheetState._(this.audioOnly, this.quality);
+@freezed
+class DownloadModalSheetState with _$DownloadModalSheetState {
+  const factory DownloadModalSheetState({@Default(false) bool audioOnly, @Default('720p') String quality}) = _DownloadModalSheetState;
 }

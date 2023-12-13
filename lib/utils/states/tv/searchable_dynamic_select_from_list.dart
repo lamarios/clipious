@@ -1,10 +1,10 @@
 import 'dart:core';
 
 import 'package:bloc/bloc.dart';
-import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'searchable_dynamic_select_from_list.g.dart';
+part 'searchable_dynamic_select_from_list.freezed.dart';
 
 class SearchableSelectFromListCubit<T> extends Cubit<SearchableSelectFromListState<T>> {
   final Future<List<T>> Function(String query) fetchItems;
@@ -17,13 +17,11 @@ class SearchableSelectFromListCubit<T> extends Cubit<SearchableSelectFromListSta
   }
 }
 
-@CopyWith(constructor: "_")
-class SearchableSelectFromListState<T> {
-  final List<T> items;
-  final TextEditingController controller;
-  final bool loading;
-
-  SearchableSelectFromListState(this.items, {this.loading = false, required this.controller});
-
-  SearchableSelectFromListState._(this.items, this.controller, this.loading);
+@freezed
+class SearchableSelectFromListState<T> with _$SearchableSelectFromListState<T> {
+  const factory SearchableSelectFromListState(
+    List<T> items, {
+    required TextEditingController controller,
+    @Default(false) bool loading,
+  }) = _SearchableSelectFromListState<T>;
 }

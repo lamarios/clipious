@@ -1,28 +1,36 @@
 import 'package:bloc/bloc.dart';
 import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:flutter/material.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:invidious/globals.dart';
 
-part 'tv_channel.g.dart';
+part 'tv_channel.freezed.dart';
 
 class TvChannelCubit extends Cubit<TvChannelController> {
+  final ScrollController scrollController = ScrollController();
+  final GlobalKey videosTitle = GlobalKey();
+  final GlobalKey shortTitle = GlobalKey();
+  final GlobalKey streamTitle = GlobalKey();
+
+  GlobalKey playlistsTitle = GlobalKey();
+
   TvChannelCubit(super.initialState) {
     onReady();
   }
 
   Future<void> onReady() async {
-    state.scrollController.addListener(onScroll);
+    scrollController.addListener(onScroll);
   }
 
   @override
   close() async {
-    state.scrollController.dispose();
+    scrollController.dispose();
     super.close();
   }
 
   scrollToTop(bool scroll) {
     if (scroll) {
-      state.scrollController.animateTo(0, duration: animationDuration ~/ 2, curve: Curves.easeInOutQuad);
+      scrollController.animateTo(0, duration: animationDuration ~/ 2, curve: Curves.easeInOutQuad);
     }
   }
 
@@ -31,69 +39,54 @@ class TvChannelCubit extends Cubit<TvChannelController> {
   setHasPlaylists(bool value) {
     var state = this.state.copyWith();
     if (!state.hasPlaylist) {
-      state.hasPlaylist = value;
-      emit(state);
+      emit(state.copyWith(hasPlaylist: value));
     }
   }
 
   setHasStreams(bool value) {
     var state = this.state.copyWith();
     if (!state.hasStreams) {
-      state.hasStreams = value;
-      emit(state);
+      emit(state.copyWith(hasStreams: value));
     }
   }
 
   setHasVideos(bool value) {
     var state = this.state.copyWith();
     if (!state.hasVideos) {
-      state.hasVideos = value;
-      emit(state);
+      emit(state.copyWith(hasVideos: value));
     }
   }
 
   setHasShorts(bool value) {
     var state = this.state.copyWith();
     if (!state.hasShorts) {
-      state.hasShorts = value;
-      emit(state);
+      emit(state.copyWith(hasShorts: value));
     }
   }
 
   scrollTo(GlobalKey key, bool focus) {
     if (key.currentContext != null && focus) {
-      Scrollable.ensureVisible(key.currentContext!,
-          alignmentPolicy: ScrollPositionAlignmentPolicy.keepVisibleAtStart,
-          duration: animationDuration,
-          curve: Curves.easeInOutQuad);
+      Scrollable.ensureVisible(key.currentContext!, alignmentPolicy: ScrollPositionAlignmentPolicy.keepVisibleAtStart, duration: animationDuration, curve: Curves.easeInOutQuad);
     }
   }
 
   void onScroll() {
     var state = this.state.copyWith();
-    if (state.scrollController.offset == 0) {
-      state.showBackground = false;
-      emit(state);
+    if (scrollController.offset == 0) {
+      emit(state.copyWith(showBackground: false));
     } else if (!state.showBackground) {
-      state.showBackground = true;
-      emit(state);
+      emit(state.copyWith(showBackground: true));
     }
   }
 }
 
-@CopyWith(constructor: "_")
-class TvChannelController {
-  ScrollController scrollController = ScrollController();
-  bool showBackground = false;
-  bool hasShorts = false, hasStreams = false, hasVideos = false, hasPlaylist = false;
-  GlobalKey videosTitle = GlobalKey();
-  GlobalKey shortTitle = GlobalKey();
-  GlobalKey streamTitle = GlobalKey();
-
-  GlobalKey playlistsTitle = GlobalKey();
-
-  TvChannelController();
-
-  TvChannelController._(this.scrollController, this.showBackground, this.hasShorts, this.hasStreams, this.hasVideos,
-      this.hasPlaylist, this.videosTitle, this.shortTitle, this.streamTitle, this.playlistsTitle);
+@freezed
+class TvChannelController with _$TvChannelController {
+  const factory TvChannelController({
+    @Default(false) bool showBackground,
+    @Default(false) bool hasShorts,
+    @Default(false) bool hasVideos,
+    @Default(false) bool hasStreams,
+    @Default(false) bool hasPlaylist,
+  }) = _TvChannelController;
 }

@@ -1,6 +1,7 @@
 import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:invidious/downloads/models/downloaded_video.dart';
 import 'package:invidious/videos/models/base_video.dart';
 import 'package:invidious/videos/models/dislike.dart';
@@ -13,12 +14,13 @@ import '../../settings/models/errors/invidiousServiceError.dart';
 import '../../settings/states/settings.dart';
 import '../models/video.dart';
 
-part 'video.g.dart';
+part 'video.freezed.dart';
 
 const String coulnotLoadVideos = 'cannot-load-videos';
 final log = Logger('Video');
 
 class VideoCubit extends Cubit<VideoState> {
+  final ScrollController scrollController = ScrollController();
   final DownloadManagerCubit downloadManager;
   final PlayerCubit player;
   final SettingsCubit settings;
@@ -29,45 +31,39 @@ class VideoCubit extends Cubit<VideoState> {
 
   Future<void> onReady() async {
     try {
-      var state = this.state.copyWith();
       Video video = await service.getVideo(state.videoId);
-      state.video = video;
-      state.loadingVideo = false;
+      var dislikes = state.dislikes;
 
       if (settings.state.useReturnYoutubeDislike) {
         Dislike dislike = await service.getDislikes(state.videoId);
-        state.dislikes = dislike.dislikes;
+        dislikes = dislike.dislikes;
       }
 
-      emit(state);
+      emit(state.copyWith(loadingVideo: false, video: video, dislikes: dislikes));
 
       getDownloadStatus();
-
     } catch (err) {
-      var state = this.state.copyWith();
+      late String error;
       if (err is InvidiousServiceError) {
-        state.error = (err).message;
+        error = (err).message;
       } else {
-        state.error = coulnotLoadVideos;
+        error = coulnotLoadVideos;
       }
-      state.loadingVideo = false;
-      emit(state);
+      emit(state.copyWith(error: error, loadingVideo: false));
       rethrow;
     }
   }
 
   getDownloadStatus() {
-    var state = this.state.copyWith();
-    state.downloadedVideo = db.getDownloadByVideoId(state.videoId);
-
+    var downloadedVideo = db.getDownloadByVideoId(state.videoId);
     initStreamListener();
-    if (!isClosed) emit(state);
+    if (!isClosed) emit(state.copyWith(downloadedVideo: downloadedVideo));
   }
 
   @override
   close() async {
     var state = this.state.copyWith();
-    state.scrollController.dispose();
+    scrollController.dispose();
     if (downloadManager.state.downloadProgresses.containsKey(state.videoId)) {
       downloadManager.removeListener(state.videoId, onDownloadProgress);
     }
@@ -75,24 +71,19 @@ class VideoCubit extends Cubit<VideoState> {
   }
 
   onDownload() {
-    var state = this.state.copyWith();
-    state.downloading = true;
-    state.downloadProgress = 0;
-    emit(state);
+    emit(state.copyWith(downloading: true, downloadProgress: 0));
   }
 
   onDownloadProgress(double progress) {
-    var state = this.state.copyWith();
     if (state.video != null) {
-      state.downloadProgress = progress;
+      late bool downloading;
       if (progress < 1) {
-        state.downloading = true;
+        downloading = true;
       } else {
         getDownloadStatus();
-        state = this.state.copyWith();
-        state.downloading = false;
+        downloading = false;
       }
-      emit(state);
+      emit(state.copyWith(downloadProgress: progress, downloading: downloading));
     }
   }
 
@@ -103,19 +94,15 @@ class VideoCubit extends Cubit<VideoState> {
   }
 
   togglePlayRecommendedNext(bool? value) {
-    var state = this.state.copyWith();
     settings.setPlayRecommendedNext(value ?? false);
-    emit(state);
   }
 
   selectIndex(int index) {
-    var state = this.state.copyWith();
-    state.selectedIndex = index;
-    emit(state);
+    emit(state.copyWith(selectedIndex: index));
     scrollUp();
   }
 
-  void restartVideo(bool? audio){
+  void restartVideo(bool? audio) {
     if (state.video != null) {
       player.showBigPlayer();
       player.seek(Duration.zero);
@@ -129,34 +116,34 @@ class VideoCubit extends Cubit<VideoState> {
         videos.addAll(state.video?.recommendedVideos ?? []);
       }
       player.playVideo(videos, audio: audio);
-
     }
   }
 
   scrollUp() {
-    state.scrollController.animateTo(0, duration: animationDuration, curve: Curves.easeInOutQuad);
+    scrollController.animateTo(0, duration: animationDuration, curve: Curves.easeInOutQuad);
   }
 }
 
-@CopyWith(constructor: "_")
-class VideoState {
-  Video? video;
-  int? dislikes;
-  bool loadingVideo = true;
+@freezed
+class VideoState with _$VideoState {
+  const factory VideoState(
+      {Video? video,
+      int? dislikes,
+      @Default(true) loadingVideo,
+      @Default(0) int selectedIndex,
+      required String videoId,
+      required bool isLoggedIn,
+      @Default(false) bool downloading,
+      @Default(0) double downloadProgress,
+      DownloadedVideo? downloadedVideo,
+      @Default(1) double opacity,
+      @Default('') String error}) = _VideoState;
 
-  int selectedIndex = 0;
-  String videoId;
-  bool isLoggedIn = service.isLoggedIn();
-  bool downloading = false;
-  double downloadProgress = 0;
-  DownloadedVideo? downloadedVideo;
-  ScrollController scrollController = ScrollController();
+  const VideoState._();
 
-  double opacity = 1;
-
-  String error = '';
-
-  VideoState({required this.videoId});
+  static VideoState init({required String videoId}){
+    return VideoState(videoId: videoId, isLoggedIn: service.isLoggedIn());
+  }
 
   bool get downloadFailed => downloadedVideo?.downloadFailed ?? false;
 
@@ -167,7 +154,4 @@ class VideoState {
       return false;
     }
   }
-
-  VideoState._(this.scrollController, this.video, this.dislikes, this.loadingVideo, this.selectedIndex, this.videoId,
-      this.isLoggedIn, this.downloading, this.downloadProgress, this.downloadedVideo, this.opacity, this.error);
 }

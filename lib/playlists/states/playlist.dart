@@ -1,6 +1,9 @@
+import 'dart:ui';
+
 import 'package:bloc/bloc.dart';
 import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:flutter/material.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:invidious/player/states/player.dart';
 import 'package:logging/logging.dart';
 
@@ -8,11 +11,12 @@ import '../../globals.dart';
 import '../../videos/models/video_in_list.dart';
 import '../models/playlist.dart';
 
-part 'playlist.g.dart';
+part 'playlist.freezed.dart';
 
 final log = Logger('PlaylistController');
 
 class PlaylistCubit extends Cubit<PlaylistState> {
+  ScrollController scrollController = ScrollController();
   final PlayerCubit player;
 
   PlaylistCubit(super.initialState, this.player) {
@@ -41,11 +45,10 @@ class PlaylistCubit extends Cubit<PlaylistState> {
   }
 
   scrollToTop() {
-    state.scrollController.animateTo(0, duration: animationDuration ~/ 2, curve: Curves.easeInOutQuad);
+    scrollController.animateTo(0, duration: animationDuration ~/ 2, curve: Curves.easeInOutQuad);
   }
 
   getAllVideos() async {
-    var state = this.state.copyWith();
     if (state.playlist.videoCount > 0 && state.playlist.videos.length < state.playlist.videoCount) {
       int page = 1;
       int totalFiltered = 0;
@@ -54,59 +57,45 @@ class PlaylistCubit extends Cubit<PlaylistState> {
       do {
         pl = await service.getPublicPlaylists(state.playlist.playlistId, page: page);
 
-        var toAdd =
-            pl.videos.where((v) => state.playlist.videos.indexWhere((v2) => v2.videoId == v.videoId) == -1).toList();
+        var toAdd = pl.videos.where((v) => state.playlist.videos.indexWhere((v2) => v2.videoId == v.videoId) == -1).toList();
 
-        state.playlist.videos.addAll(toAdd);
+        var playlist = state.playlist;
+        playlist.videos.addAll(toAdd);
 
         totalFiltered += pl.removedByFilter;
         log.fine('filtered removed ${pl.removedByFilter} videos,adding ${pl.videos.length}');
         page++;
 
-        state.loadingProgress = (state.playlist.videos.length + totalFiltered) / state.playlist.videoCount;
+        var loadingProgress = (state.playlist.videos.length + totalFiltered) / state.playlist.videoCount;
         if (!isClosed) {
-          emit(state);
+          emit(state.copyWith(loadingProgress: loadingProgress, playlist: playlist));
         } else {
           return;
         }
-        state = this.state.copyWith();
       } while (!isClosed && pl.videos.isNotEmpty || pl.removedByFilter > 0);
-
-      state = this.state.copyWith();
-      state.loading = false;
-    } else {
-      state.loading = false;
     }
-    if (!isClosed) emit(state);
+    if (!isClosed) emit(state.copyWith(loading: false));
   }
 
   @override
   close() async {
-    state.scrollController.dispose();
+    scrollController.dispose();
     super.close();
   }
 
   void setShowImage(bool bool) {
-    var state = this.state.copyWith();
-    state.showImage = bool;
-    state.scrollController.jumpTo(0);
-    emit(state);
+    scrollController.jumpTo(0);
+    emit(state.copyWith(showImage: bool));
   }
 }
 
-@CopyWith(constructor: "_")
-class PlaylistState {
-  double loadingProgress = 0;
-  Playlist playlist;
-  bool loading = true;
-  ScrollController scrollController = ScrollController();
-  double playlistItemHeight;
-
-  // for TV ui
-  bool showImage = true;
-
-  PlaylistState({required this.playlist, required this.playlistItemHeight});
-
-  PlaylistState._(this.showImage, this.loadingProgress, this.playlist, this.loading, this.scrollController,
-      this.playlistItemHeight);
+@freezed
+class PlaylistState with _$PlaylistState {
+  const factory PlaylistState({
+    @Default(0) double loadingProgress,
+    required Playlist playlist,
+    @Default(true) bool loading,
+    required double playlistItemHeight,
+    @Default(true) bool showImage,
+  }) = _PlaylistState;
 }

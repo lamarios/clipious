@@ -15,10 +15,10 @@ enum MediaCommandType {
 }
 
 class MediaCommand<T> {
-  MediaCommandType type;
-  T? value;
+ final MediaCommandType type;
+ final T? value;
 
-  MediaCommand(this.type, {this.value});
+  const MediaCommand(this.type, {this.value});
 }
 
 class SwitchVideoValue {
