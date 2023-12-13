@@ -18,7 +18,7 @@ on:
 jobs:
   # This workflow contains a single job called "build"
   build:
-    name: flutter analyze
+    name: flutter analyze and build
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
     #env:
@@ -40,3 +40,5 @@ jobs:
       - run: ./submodules/flutter/bin/flutter pub get
       - run: ./submodules/flutter/bin/dart format --output=none --set-exit-if-changed ./lib
       - run: ./submodules/flutter/bin/dart analyze ./lib
+      - run: ./submodules/flutter/bin/flutter pub run flutter_native_splash:create
+      - run: ./submodules/flutter/bin/flutter build apk
