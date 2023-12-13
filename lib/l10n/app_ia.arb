@@ -123,5 +123,140 @@
   "comments": "Commentos",
   "@comments": {
     "description": "Comments label"
+  },
+  "videoAddedToQueue": "Video addite al cauda",
+  "@videoAddedToQueue": {
+    "description": "Pop up message when a video was added at the end of the video queue"
+  },
+  "trending": "Tendentias",
+  "@trending": {
+    "description": "Trending videos title"
+  },
+  "from": "Ab",
+  "@from": {
+    "description": "From word (as in 'From xx To xx')"
+  },
+  "playlistNotificationTitle": "Nove videos in le lista de reproduction {playlist}",
+  "@playlistNotificationTitle": {
+    "description": "Title for the playlist notifications when there are new videos",
+    "placeholders": {
+      "playlist": {
+        "type": "String",
+        "example": "Lo-Fi girl"
+      }
+    }
+  },
+  "selectBrowsingCountry": "Seliger pais de navigation",
+  "@selectBrowsingCountry": {
+    "description": "Select country for trending content"
+  },
+  "channelNotificationTitle": "Nove videos ab {channel}",
+  "@channelNotificationTitle": {
+    "description": "Title for the channel notifications when there are new videos",
+    "placeholders": {
+      "channel": {
+        "type": "String",
+        "example": "MKBHD"
+      }
+    }
+  },
+  "enabled": "Activate",
+  "@enabled": {
+    "description": "Text to show something is enabled"
+  },
+  "tapToAddServer": "Tocca pro adder un servitor a tu lista",
+  "@tapToAddServer": {
+    "description": "public server description"
+  },
+  "appearance": "Apparentia",
+  "@appearance": {
+    "description": "Settings category title"
+  },
+  "createNewPlaylist": "Crear nove lista de reproduction",
+  "@createNewPlaylist": {
+    "description": "Button label to create a new playlist when the user wants to add a video to a playlist"
+  },
+  "name": "Nomine",
+  "@name": {
+    "description": "NAme label"
+  },
+  "delete": "Deler",
+  "@delete": {
+    "description": "Delete label"
+  },
+  "subscriptionNotificationTitle": "Nove videos ab tu subscriptiones",
+  "@subscriptionNotificationTitle": {
+    "description": "Title for the notification showing that there are new videos from the subscription feed"
+  },
+  "browsing": "Navigation",
+  "@browsing": {
+    "description": "video browsing preferences"
+  },
+  "version": "Version",
+  "@version": {
+    "description": "version label"
+  },
+  "addServer": "Adder un servitor",
+  "@addServer": {
+    "description": "Add server label"
+  },
+  "about": "A proposito de",
+  "@about": {
+    "description": "About"
+  },
+  "country": "Pais",
+  "@country": {
+    "description": "Country label"
+  },
+  "videoFilterTimeOfDayFromTo": "Ab {from} a {to}",
+  "@videoFilterTimeOfDayFromTo": {
+    "description": "Time of day range",
+    "placeholders": {
+      "from": {
+        "type": "String",
+        "example": "3:00 AM"
+      },
+      "to": {
+        "type": "String",
+        "example": "5:00 PM"
+      }
+    }
+  },
+  "currentServer": "Actualmente usante {current}",
+  "@currentServer": {
+    "description": "Which server the user is currently using",
+    "placeholders": {
+      "current": {
+        "type": "String"
+      }
+    }
+  },
+  "selectPlaylist": "Selige un lista",
+  "@selectPlaylist": {
+    "description": "Title when users wants to add a video to a playlist"
+  },
+  "logIn": "Initiar session",
+  "@logIn": {
+    "description": "CTA to log in to server"
+  },
+  "settings": "Parametros",
+  "@settings": {
+    "description": "Settings title"
+  },
+  "publicServers": "Servitores public",
+  "@publicServers": {
+    "description": "Public servers label"
+  },
+  "newSorting": "Nove",
+  "@newSorting": {
+    "description": "Content sorting: new"
+  },
+  "servers": "Servitores",
+  "@servers": {
+    "description": "Server management settings category"
+  },
+  "manageServers": "Gerer le servitores",
+  "@manageServers": {
+    "description": "Settings to manage servers"
   }
 }
