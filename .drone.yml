@@ -3,7 +3,15 @@ type: docker
 name: Android app
 
 steps:
-  - name: build app
+  - name: Analyze
+    image: ghcr.io/cirruslabs/flutter:stable
+    commands:
+      - git submodule init
+      - git submodule update
+      - set -e
+      - ./submodules/flutter/bin/dart format --output=one --set-exit-if-changed ./lib
+      - ./submodules/flutter/bin/dart analyze ./lib
+  - name: Build app
     image: ghcr.io/cirruslabs/flutter:stable
     environment:
       ANDROID_KEY_FILE: /tmp/key.properties
@@ -48,7 +56,7 @@ steps:
       - java -jar /opt/android-sdk/cmdline-tools/latest/bundletool.jar build-apks --bundle=app-release.aab --output=app-release.apks --ks-pass=pass:$${storePassword} --ks=/tmp/keystore.jks --ks-key-alias=upload --key-pass=pass:$${keyPassword}
     when:
       event: tag
-  - name: publish
+  - name: Publish
     image: plugins/github-release
     settings:
       api_key:
