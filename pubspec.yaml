@@ -186,3 +186,6 @@ flutter_launcher_icons:
   #macos:
   #  generate: true
   #  image_path: "path/to/image.png"
+dart_pre_commit:
+  format:
+    line-length: 120
