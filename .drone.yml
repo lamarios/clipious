@@ -9,6 +9,9 @@ steps:
       - git submodule init
       - git submodule update
       - set -e
+      - ./submodules/flutter/bin/flutter doctor
+      - ./submodules/flutter/bin/flutter config --no-analytics
+      - ./submodules/flutter/bin/flutter pub get
       - ./submodules/flutter/bin/dart format --output=json --set-exit-if-changed ./lib
       - ./submodules/flutter/bin/dart analyze ./lib
   - name: Build app
