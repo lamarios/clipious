@@ -41,4 +41,4 @@ jobs:
       - run: ./submodules/flutter/bin/dart format --output=none --set-exit-if-changed ./lib
       - run: ./submodules/flutter/bin/dart analyze ./lib
       - run: ./submodules/flutter/bin/flutter pub run flutter_native_splash:create
-      - run: ./submodules/flutter/bin/flutter build apk
+      - run: ./submodules/flutter/bin/flutter build apk --profile
