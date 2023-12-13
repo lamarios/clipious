@@ -9,7 +9,7 @@ steps:
       - git submodule init
       - git submodule update
       - set -e
-      - ./submodules/flutter/bin/dart format --output=none --set-exit-if-changed ./lib
+      - ./submodules/flutter/bin/dart format --output=show --set-exit-if-changed ./lib
       - ./submodules/flutter/bin/dart analyze ./lib
   - name: Build app
     image: ghcr.io/cirruslabs/flutter:stable
