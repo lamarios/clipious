@@ -19,19 +19,22 @@ mixin _$TvVideoState {
   bool get showImage => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $TvVideoStateCopyWith<TvVideoState> get copyWith => throw _privateConstructorUsedError;
+  $TvVideoStateCopyWith<TvVideoState> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $TvVideoStateCopyWith<$Res> {
-  factory $TvVideoStateCopyWith(TvVideoState value, $Res Function(TvVideoState) then) =
+  factory $TvVideoStateCopyWith(
+          TvVideoState value, $Res Function(TvVideoState) then) =
       _$TvVideoStateCopyWithImpl<$Res, TvVideoState>;
   @useResult
   $Res call({bool showImage});
 }
 
 /// @nodoc
-class _$TvVideoStateCopyWithImpl<$Res, $Val extends TvVideoState> implements $TvVideoStateCopyWith<$Res> {
+class _$TvVideoStateCopyWithImpl<$Res, $Val extends TvVideoState>
+    implements $TvVideoStateCopyWith<$Res> {
   _$TvVideoStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -54,8 +57,10 @@ class _$TvVideoStateCopyWithImpl<$Res, $Val extends TvVideoState> implements $Tv
 }
 
 /// @nodoc
-abstract class _$$TvVideoStateImplCopyWith<$Res> implements $TvVideoStateCopyWith<$Res> {
-  factory _$$TvVideoStateImplCopyWith(_$TvVideoStateImpl value, $Res Function(_$TvVideoStateImpl) then) =
+abstract class _$$TvVideoStateImplCopyWith<$Res>
+    implements $TvVideoStateCopyWith<$Res> {
+  factory _$$TvVideoStateImplCopyWith(
+          _$TvVideoStateImpl value, $Res Function(_$TvVideoStateImpl) then) =
       __$$TvVideoStateImplCopyWithImpl<$Res>;
   @override
   @useResult
@@ -63,9 +68,11 @@ abstract class _$$TvVideoStateImplCopyWith<$Res> implements $TvVideoStateCopyWit
 }
 
 /// @nodoc
-class __$$TvVideoStateImplCopyWithImpl<$Res> extends _$TvVideoStateCopyWithImpl<$Res, _$TvVideoStateImpl>
+class __$$TvVideoStateImplCopyWithImpl<$Res>
+    extends _$TvVideoStateCopyWithImpl<$Res, _$TvVideoStateImpl>
     implements _$$TvVideoStateImplCopyWith<$Res> {
-  __$$TvVideoStateImplCopyWithImpl(_$TvVideoStateImpl _value, $Res Function(_$TvVideoStateImpl) _then)
+  __$$TvVideoStateImplCopyWithImpl(
+      _$TvVideoStateImpl _value, $Res Function(_$TvVideoStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -101,7 +108,8 @@ class _$TvVideoStateImpl implements _TvVideoState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TvVideoStateImpl &&
-            (identical(other.showImage, showImage) || other.showImage == showImage));
+            (identical(other.showImage, showImage) ||
+                other.showImage == showImage));
   }
 
   @override
@@ -121,5 +129,6 @@ abstract class _TvVideoState implements TvVideoState {
   bool get showImage;
   @override
   @JsonKey(ignore: true)
-  _$$TvVideoStateImplCopyWith<_$TvVideoStateImpl> get copyWith => throw _privateConstructorUsedError;
+  _$$TvVideoStateImplCopyWith<_$TvVideoStateImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }

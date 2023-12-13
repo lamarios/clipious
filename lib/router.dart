@@ -120,7 +120,9 @@ class AppRouter extends _$AppRouter {
                 AutoRoute(page: SettingsRoute.page),
                 AutoRoute(page: BrowsingSettingsRoute.page),
                 AutoRoute(page: ManageServersRoute.page),
-                AutoRoute(page: ManageSingleServerRoute.page, path: pathManageSingleServerFromSettings),
+                AutoRoute(
+                    page: ManageSingleServerRoute.page,
+                    path: pathManageSingleServerFromSettings),
                 AutoRoute(page: VideoPlayerSettingsRoute.page),
                 AutoRoute(page: AppearanceSettingsRoute.page),
                 AutoRoute(page: SearchHistorySettingsRoute.page),
@@ -135,7 +137,9 @@ class AppRouter extends _$AppRouter {
                 AutoRoute(page: DeArrowSettingsRoute.page)
               ],
             ),
-            AutoRoute(page: ManageSingleServerRoute.page, path: pathManageSingleServerFromWizard),
+            AutoRoute(
+                page: ManageSingleServerRoute.page,
+                path: pathManageSingleServerFromWizard),
             AutoRoute(page: WelcomeWizardRoute.page, initial: !hasServer)
           ];
   }

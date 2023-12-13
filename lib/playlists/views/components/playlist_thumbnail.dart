@@ -32,7 +32,8 @@ class PlaylistThumbnails extends StatelessWidget {
       thumbs.add(Transform.scale(
         scale: 1 - (i / (maxThumbs * 2)),
         child: Transform.translate(
-          offset: Offset((i - 1) * constraints.maxWidth * 0.1, (i - 1) * constraints.maxHeight * 0.1),
+          offset: Offset((i - 1) * constraints.maxWidth * 0.1,
+              (i - 1) * constraints.maxHeight * 0.1),
           child: SizedBox(
             width: constraints.maxWidth * scale,
             height: constraints.maxHeight * scale,
@@ -49,16 +50,22 @@ class PlaylistThumbnails extends StatelessWidget {
                       : videosToUse.length > i
                           ? VideoThumbnailView(
                               videoId: videosToUse[i].videoId,
-                              thumbnailUrl: videosToUse[i].deArrowThumbnailUrl ??
+                              thumbnailUrl: videosToUse[i]
+                                      .deArrowThumbnailUrl ??
                                   (bestThumbnails
-                                      ? ImageObject.getBestThumbnail(videosToUse[i].videoThumbnails)?.url
-                                      : ImageObject.getWorstThumbnail(videosToUse[i].videoThumbnails)?.url) ??
+                                      ? ImageObject.getBestThumbnail(
+                                              videosToUse[i].videoThumbnails)
+                                          ?.url
+                                      : ImageObject.getWorstThumbnail(
+                                              videosToUse[i].videoThumbnails)
+                                          ?.url) ??
                                   '',
                             )
                           : const SizedBox.shrink(),
                   secondChild: Container(
-                    decoration:
-                        BoxDecoration(color: colors.secondaryContainer, borderRadius: BorderRadius.circular(10)),
+                    decoration: BoxDecoration(
+                        color: colors.secondaryContainer,
+                        borderRadius: BorderRadius.circular(10)),
                   ),
                   crossFadeState: isPlaceHolder
                       ? CrossFadeState.showFirst
@@ -81,7 +88,10 @@ class PlaylistThumbnails extends StatelessWidget {
     return AspectRatio(
       aspectRatio: 16 / 9,
       child: LayoutBuilder(builder: (context, constraints) {
-        return Stack(alignment: Alignment.center, children: [...getThumbs(context, constraints), ...(children ?? [])]);
+        return Stack(alignment: Alignment.center, children: [
+          ...getThumbs(context, constraints),
+          ...(children ?? [])
+        ]);
       }),
     );
   }

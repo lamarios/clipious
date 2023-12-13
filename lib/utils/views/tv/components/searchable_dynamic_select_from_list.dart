@@ -27,8 +27,11 @@ class SearchableSelectFromListScreen<T> extends StatelessWidget {
         body: TvOverscan(
       child: BlocProvider(
         create: (context) => SearchableSelectFromListCubit<T>(
-            SearchableSelectFromListState<T>([], controller: TextEditingController()), fetchItems),
-        child: BlocBuilder<SearchableSelectFromListCubit<T>, SearchableSelectFromListState<T>>(builder: (context, _) {
+            SearchableSelectFromListState<T>([],
+                controller: TextEditingController()),
+            fetchItems),
+        child: BlocBuilder<SearchableSelectFromListCubit<T>,
+            SearchableSelectFromListState<T>>(builder: (context, _) {
           var cubit = context.read<SearchableSelectFromListCubit<T>>();
           return Column(
             children: [

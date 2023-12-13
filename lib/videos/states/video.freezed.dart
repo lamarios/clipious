@@ -29,12 +29,14 @@ mixin _$VideoState {
   String get error => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $VideoStateCopyWith<VideoState> get copyWith => throw _privateConstructorUsedError;
+  $VideoStateCopyWith<VideoState> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $VideoStateCopyWith<$Res> {
-  factory $VideoStateCopyWith(VideoState value, $Res Function(VideoState) then) =
+  factory $VideoStateCopyWith(
+          VideoState value, $Res Function(VideoState) then) =
       _$VideoStateCopyWithImpl<$Res, VideoState>;
   @useResult
   $Res call(
@@ -52,7 +54,8 @@ abstract class $VideoStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$VideoStateCopyWithImpl<$Res, $Val extends VideoState> implements $VideoStateCopyWith<$Res> {
+class _$VideoStateCopyWithImpl<$Res, $Val extends VideoState>
+    implements $VideoStateCopyWith<$Res> {
   _$VideoStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -125,8 +128,10 @@ class _$VideoStateCopyWithImpl<$Res, $Val extends VideoState> implements $VideoS
 }
 
 /// @nodoc
-abstract class _$$VideoStateImplCopyWith<$Res> implements $VideoStateCopyWith<$Res> {
-  factory _$$VideoStateImplCopyWith(_$VideoStateImpl value, $Res Function(_$VideoStateImpl) then) =
+abstract class _$$VideoStateImplCopyWith<$Res>
+    implements $VideoStateCopyWith<$Res> {
+  factory _$$VideoStateImplCopyWith(
+          _$VideoStateImpl value, $Res Function(_$VideoStateImpl) then) =
       __$$VideoStateImplCopyWithImpl<$Res>;
   @override
   @useResult
@@ -145,9 +150,12 @@ abstract class _$$VideoStateImplCopyWith<$Res> implements $VideoStateCopyWith<$R
 }
 
 /// @nodoc
-class __$$VideoStateImplCopyWithImpl<$Res> extends _$VideoStateCopyWithImpl<$Res, _$VideoStateImpl>
+class __$$VideoStateImplCopyWithImpl<$Res>
+    extends _$VideoStateCopyWithImpl<$Res, _$VideoStateImpl>
     implements _$$VideoStateImplCopyWith<$Res> {
-  __$$VideoStateImplCopyWithImpl(_$VideoStateImpl _value, $Res Function(_$VideoStateImpl) _then) : super(_value, _then);
+  __$$VideoStateImplCopyWithImpl(
+      _$VideoStateImpl _value, $Res Function(_$VideoStateImpl) _then)
+      : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
@@ -173,7 +181,8 @@ class __$$VideoStateImplCopyWithImpl<$Res> extends _$VideoStateCopyWithImpl<$Res
           ? _value.dislikes
           : dislikes // ignore: cast_nullable_to_non_nullable
               as int?,
-      loadingVideo: freezed == loadingVideo ? _value.loadingVideo! : loadingVideo,
+      loadingVideo:
+          freezed == loadingVideo ? _value.loadingVideo! : loadingVideo,
       selectedIndex: null == selectedIndex
           ? _value.selectedIndex
           : selectedIndex // ignore: cast_nullable_to_non_nullable
@@ -267,21 +276,39 @@ class _$VideoStateImpl extends _VideoState {
         (other.runtimeType == runtimeType &&
             other is _$VideoStateImpl &&
             (identical(other.video, video) || other.video == video) &&
-            (identical(other.dislikes, dislikes) || other.dislikes == dislikes) &&
-            const DeepCollectionEquality().equals(other.loadingVideo, loadingVideo) &&
-            (identical(other.selectedIndex, selectedIndex) || other.selectedIndex == selectedIndex) &&
+            (identical(other.dislikes, dislikes) ||
+                other.dislikes == dislikes) &&
+            const DeepCollectionEquality()
+                .equals(other.loadingVideo, loadingVideo) &&
+            (identical(other.selectedIndex, selectedIndex) ||
+                other.selectedIndex == selectedIndex) &&
             (identical(other.videoId, videoId) || other.videoId == videoId) &&
-            (identical(other.isLoggedIn, isLoggedIn) || other.isLoggedIn == isLoggedIn) &&
-            (identical(other.downloading, downloading) || other.downloading == downloading) &&
-            (identical(other.downloadProgress, downloadProgress) || other.downloadProgress == downloadProgress) &&
-            (identical(other.downloadedVideo, downloadedVideo) || other.downloadedVideo == downloadedVideo) &&
+            (identical(other.isLoggedIn, isLoggedIn) ||
+                other.isLoggedIn == isLoggedIn) &&
+            (identical(other.downloading, downloading) ||
+                other.downloading == downloading) &&
+            (identical(other.downloadProgress, downloadProgress) ||
+                other.downloadProgress == downloadProgress) &&
+            (identical(other.downloadedVideo, downloadedVideo) ||
+                other.downloadedVideo == downloadedVideo) &&
             (identical(other.opacity, opacity) || other.opacity == opacity) &&
             (identical(other.error, error) || other.error == error));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, video, dislikes, const DeepCollectionEquality().hash(loadingVideo),
-      selectedIndex, videoId, isLoggedIn, downloading, downloadProgress, downloadedVideo, opacity, error);
+  int get hashCode => Object.hash(
+      runtimeType,
+      video,
+      dislikes,
+      const DeepCollectionEquality().hash(loadingVideo),
+      selectedIndex,
+      videoId,
+      isLoggedIn,
+      downloading,
+      downloadProgress,
+      downloadedVideo,
+      opacity,
+      error);
 
   @JsonKey(ignore: true)
   @override
@@ -329,5 +356,6 @@ abstract class _VideoState extends VideoState {
   String get error;
   @override
   @JsonKey(ignore: true)
-  _$$VideoStateImplCopyWith<_$VideoStateImpl> get copyWith => throw _privateConstructorUsedError;
+  _$$VideoStateImplCopyWith<_$VideoStateImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }

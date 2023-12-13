@@ -20,20 +20,22 @@ mixin _$ManageSubscriptionsState {
   bool get loading => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $ManageSubscriptionsStateCopyWith<ManageSubscriptionsState> get copyWith => throw _privateConstructorUsedError;
+  $ManageSubscriptionsStateCopyWith<ManageSubscriptionsState> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $ManageSubscriptionsStateCopyWith<$Res> {
-  factory $ManageSubscriptionsStateCopyWith(
-          ManageSubscriptionsState value, $Res Function(ManageSubscriptionsState) then) =
+  factory $ManageSubscriptionsStateCopyWith(ManageSubscriptionsState value,
+          $Res Function(ManageSubscriptionsState) then) =
       _$ManageSubscriptionsStateCopyWithImpl<$Res, ManageSubscriptionsState>;
   @useResult
   $Res call({List<Subscription> subs, bool loading});
 }
 
 /// @nodoc
-class _$ManageSubscriptionsStateCopyWithImpl<$Res, $Val extends ManageSubscriptionsState>
+class _$ManageSubscriptionsStateCopyWithImpl<$Res,
+        $Val extends ManageSubscriptionsState>
     implements $ManageSubscriptionsStateCopyWith<$Res> {
   _$ManageSubscriptionsStateCopyWithImpl(this._value, this._then);
 
@@ -62,9 +64,11 @@ class _$ManageSubscriptionsStateCopyWithImpl<$Res, $Val extends ManageSubscripti
 }
 
 /// @nodoc
-abstract class _$$ManageSubscriptionsStateImplCopyWith<$Res> implements $ManageSubscriptionsStateCopyWith<$Res> {
+abstract class _$$ManageSubscriptionsStateImplCopyWith<$Res>
+    implements $ManageSubscriptionsStateCopyWith<$Res> {
   factory _$$ManageSubscriptionsStateImplCopyWith(
-          _$ManageSubscriptionsStateImpl value, $Res Function(_$ManageSubscriptionsStateImpl) then) =
+          _$ManageSubscriptionsStateImpl value,
+          $Res Function(_$ManageSubscriptionsStateImpl) then) =
       __$$ManageSubscriptionsStateImplCopyWithImpl<$Res>;
   @override
   @useResult
@@ -73,10 +77,12 @@ abstract class _$$ManageSubscriptionsStateImplCopyWith<$Res> implements $ManageS
 
 /// @nodoc
 class __$$ManageSubscriptionsStateImplCopyWithImpl<$Res>
-    extends _$ManageSubscriptionsStateCopyWithImpl<$Res, _$ManageSubscriptionsStateImpl>
+    extends _$ManageSubscriptionsStateCopyWithImpl<$Res,
+        _$ManageSubscriptionsStateImpl>
     implements _$$ManageSubscriptionsStateImplCopyWith<$Res> {
   __$$ManageSubscriptionsStateImplCopyWithImpl(
-      _$ManageSubscriptionsStateImpl _value, $Res Function(_$ManageSubscriptionsStateImpl) _then)
+      _$ManageSubscriptionsStateImpl _value,
+      $Res Function(_$ManageSubscriptionsStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -101,7 +107,9 @@ class __$$ManageSubscriptionsStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$ManageSubscriptionsStateImpl implements _ManageSubscriptionsState {
-  const _$ManageSubscriptionsStateImpl({final List<Subscription> subs = const [], this.loading = true}) : _subs = subs;
+  const _$ManageSubscriptionsStateImpl(
+      {final List<Subscription> subs = const [], this.loading = true})
+      : _subs = subs;
 
   final List<Subscription> _subs;
   @override
@@ -131,18 +139,21 @@ class _$ManageSubscriptionsStateImpl implements _ManageSubscriptionsState {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, const DeepCollectionEquality().hash(_subs), loading);
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_subs), loading);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$ManageSubscriptionsStateImplCopyWith<_$ManageSubscriptionsStateImpl> get copyWith =>
-      __$$ManageSubscriptionsStateImplCopyWithImpl<_$ManageSubscriptionsStateImpl>(this, _$identity);
+  _$$ManageSubscriptionsStateImplCopyWith<_$ManageSubscriptionsStateImpl>
+      get copyWith => __$$ManageSubscriptionsStateImplCopyWithImpl<
+          _$ManageSubscriptionsStateImpl>(this, _$identity);
 }
 
 abstract class _ManageSubscriptionsState implements ManageSubscriptionsState {
-  const factory _ManageSubscriptionsState({final List<Subscription> subs, final bool loading}) =
-      _$ManageSubscriptionsStateImpl;
+  const factory _ManageSubscriptionsState(
+      {final List<Subscription> subs,
+      final bool loading}) = _$ManageSubscriptionsStateImpl;
 
   @override
   List<Subscription> get subs;
@@ -150,6 +161,6 @@ abstract class _ManageSubscriptionsState implements ManageSubscriptionsState {
   bool get loading;
   @override
   @JsonKey(ignore: true)
-  _$$ManageSubscriptionsStateImplCopyWith<_$ManageSubscriptionsStateImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$ManageSubscriptionsStateImplCopyWith<_$ManageSubscriptionsStateImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

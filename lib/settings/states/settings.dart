@@ -94,7 +94,8 @@ class SettingsCubit extends Cubit<SettingsState> {
   }
 
   void selectCountry(String selected) {
-    country = countryCodes.firstWhere((element) => element.name == selected, orElse: () => state.country);
+    country = countryCodes.firstWhere((element) => element.name == selected,
+        orElse: () => state.country);
   }
 
   serverChanged() {
@@ -255,7 +256,8 @@ class SettingsCubit extends Cubit<SettingsState> {
     List<String>? localeString = state.locale?.split('_');
     Locale? l = localeString != null
         ? Locale.fromSubtags(
-            languageCode: localeString[0], scriptCode: localeString.length >= 2 ? localeString[1] : null)
+            languageCode: localeString[0],
+            scriptCode: localeString.length >= 2 ? localeString[1] : null)
         : null;
 
     return l?.nativeDisplayLanguageScript;
@@ -269,14 +271,16 @@ class SettingsCubit extends Cubit<SettingsState> {
     navigationBarLabelBehavior = behavior;
   }
 
-  Future<EnableBackGroundNotificationResponse> setBackgroundNotifications(bool b) async {
+  Future<EnableBackGroundNotificationResponse> setBackgroundNotifications(
+      bool b) async {
     if (!b) {
       await stopTasks();
       backgroundNotifications = b;
     } else {
       var isAllowed = await AwesomeNotifications().isNotificationAllowed();
       if (!isAllowed) {
-        var allowed = await AwesomeNotifications().requestPermissionToSendNotifications();
+        var allowed =
+            await AwesomeNotifications().requestPermissionToSendNotifications();
         if (!allowed) {
           return EnableBackGroundNotificationResponse.notificationsNotAllowed;
         }
@@ -306,7 +310,8 @@ class SettingsCubit extends Cubit<SettingsState> {
   setBackgroundCheckFrequency(int i) {
     if (i > 0 && i <= 24) {
       backgroundNotificationFrequency = i;
-      EasyDebounce.debounce('restarting-background-service', const Duration(seconds: 2), () {
+      EasyDebounce.debounce(
+          'restarting-background-service', const Duration(seconds: 2), () {
         setupTasks(this);
       });
     }
@@ -346,14 +351,18 @@ class SettingsCubit extends Cubit<SettingsState> {
 
   set playerShuffleMode(bool b) => _set(playerShuffle, b);
 
-  set playerRepeatMode(PlayerRepeat repeatMode) => _set(playerRepeat, PlayerRepeat.values.indexOf(repeatMode));
+  set playerRepeatMode(PlayerRepeat repeatMode) =>
+      _set(playerRepeat, PlayerRepeat.values.indexOf(repeatMode));
 
   set lastSubtitles(String s) => _set(lastSubtitle, s);
 
   set playRecommendedNext(bool b) => _set(playRecommendedNextSettingName, b);
 
   set country(Country c) {
-    String code = countryCodes.firstWhere((element) => element.name == c.name, orElse: () => state.country).code;
+    String code = countryCodes
+        .firstWhere((element) => element.name == c.name,
+            orElse: () => state.country)
+        .code;
     _set(browsingCountry, code);
   }
 
@@ -363,7 +372,8 @@ class SettingsCubit extends Cubit<SettingsState> {
 
   set autoplayVideoOnLoad(bool b) => _set(playerAutoplayOnLoad, b);
 
-  set useReturnYoutubeDislike(bool b) => _set(useReturnYoutubeDislikeSettingName, b);
+  set useReturnYoutubeDislike(bool b) =>
+      _set(useReturnYoutubeDislikeSettingName, b);
 
   set subtitleSize(double d) => _set(subtitleSizeSettingName, d);
 
@@ -375,18 +385,21 @@ class SettingsCubit extends Cubit<SettingsState> {
 
   set useSearchHistory(bool b) => _set(useSearchHistorySettingName, b);
 
-  set appLayout(List<HomeDataSource> layout) => _set(appLayoutSettingName, layout.map((e) => e.name).join(","));
+  set appLayout(List<HomeDataSource> layout) =>
+      _set(appLayoutSettingName, layout.map((e) => e.name).join(","));
 
   set navigationBarLabelBehavior(NavigationDestinationLabelBehavior behavior) =>
       _set(navigationBarLabelBehaviorSettingName, behavior.name);
 
   set distractionFreeMode(bool b) => _set(distractionFreeModeSettingName, b);
 
-  set backgroundNotifications(bool b) => _set(backgroundNotificationsSettingName, b);
+  set backgroundNotifications(bool b) =>
+      _set(backgroundNotificationsSettingName, b);
 
   set subscriptionsNotifications(bool b) => _set(subscriptionNotifications, b);
 
-  set backgroundNotificationFrequency(int i) => _set(backgroundCheckFrequency, i);
+  set backgroundNotificationFrequency(int i) =>
+      _set(backgroundCheckFrequency, i);
 
   set subtitlesBackground(bool b) => _set(subtitleBackground, b);
 
@@ -411,11 +424,13 @@ class SettingsCubit extends Cubit<SettingsState> {
 
 @freezed
 class SettingsState with _$SettingsState {
-  const factory SettingsState({required Map<String, SettingsValue> settings, required PackageInfo packageInfo}) =
-      _SettingsState;
+  const factory SettingsState(
+      {required Map<String, SettingsValue> settings,
+      required PackageInfo packageInfo}) = _SettingsState;
 
   static SettingsState init() {
-    PackageInfo packageInfo = PackageInfo(appName: '', packageName: '', version: '', buildNumber: '');
+    PackageInfo packageInfo =
+        PackageInfo(appName: '', packageName: '', version: '', buildNumber: '');
     var allSettings = db.getAllSettings();
     var settings = {for (var s in allSettings) s.name: s};
 
@@ -440,19 +455,24 @@ class SettingsState with _$SettingsState {
 
   String? get locale => _get(localeSettingName)?.value;
 
-  int get searchHistoryLimit => int.parse(_get(searchHistoryLimitSettingName)?.value ?? searchHistoryDefaultLength);
+  int get searchHistoryLimit => int.parse(
+      _get(searchHistoryLimitSettingName)?.value ?? searchHistoryDefaultLength);
 
-  double get lastSpeed => double.parse(_get(lastSpeedSettingName)?.value ?? "1.0");
+  double get lastSpeed =>
+      double.parse(_get(lastSpeedSettingName)?.value ?? "1.0");
 
   bool get playerShuffleMode => _get(playerShuffle)?.value == "true";
 
-  PlayerRepeat get playerRepeatMode => PlayerRepeat.values[int.parse(_get(playerRepeat)?.value ?? '0')];
+  PlayerRepeat get playerRepeatMode =>
+      PlayerRepeat.values[int.parse(_get(playerRepeat)?.value ?? '0')];
 
   String get lastSubtitles => _get(lastSubtitle)?.value ?? '';
 
-  bool get playRecommendedNext => _get(playRecommendedNextSettingName)?.value == "true";
+  bool get playRecommendedNext =>
+      _get(playRecommendedNextSettingName)?.value == "true";
 
-  Country get country => getCountryFromCode(_get(browsingCountry)?.value ?? 'US');
+  Country get country =>
+      getCountryFromCode(_get(browsingCountry)?.value ?? 'US');
 
   bool get useDynamicTheme => _get(dynamicTheme)?.value == 'true';
 
@@ -460,25 +480,32 @@ class SettingsState with _$SettingsState {
 
   bool get autoplayVideoOnLoad => _get(playerAutoplayOnLoad)?.value == 'true';
 
-  bool get useReturnYoutubeDislike => _get(useReturnYoutubeDislikeSettingName)?.value == 'true';
+  bool get useReturnYoutubeDislike =>
+      _get(useReturnYoutubeDislikeSettingName)?.value == 'true';
 
-  double get subtitleSize => double.parse(_get(subtitleSizeSettingName)?.value ?? subtitleDefaultSize);
+  double get subtitleSize =>
+      double.parse(_get(subtitleSizeSettingName)?.value ?? subtitleDefaultSize);
 
-  bool get skipSslVerification => _get(skipSslVerificationSettingName)?.value == 'true';
+  bool get skipSslVerification =>
+      _get(skipSslVerificationSettingName)?.value == 'true';
 
-  bool get forceLandscapeFullScreen => _get(lockOrientationFullScreen)?.value == 'true';
+  bool get forceLandscapeFullScreen =>
+      _get(lockOrientationFullScreen)?.value == 'true';
 
-  ThemeMode get themeMode => ThemeMode.values
-      .firstWhere((element) => element.name == _get(themeModeSettingName)?.value, orElse: () => ThemeMode.system);
+  ThemeMode get themeMode => ThemeMode.values.firstWhere(
+      (element) => element.name == _get(themeModeSettingName)?.value,
+      orElse: () => ThemeMode.system);
 
-  bool get useSearchHistory => _get(useSearchHistorySettingName)?.value == 'true';
+  bool get useSearchHistory =>
+      _get(useSearchHistorySettingName)?.value == 'true';
 
-  List<HomeDataSource> get appLayout =>
-      (_get(appLayoutSettingName)?.value ?? HomeDataSource.defaultSettings().map((e) => e.name).join(","))
-          .split(',')
-          .where((element) => element.isNotEmpty)
-          .map((e) => HomeDataSource.values.firstWhere((element) => element.name == e))
-          .toList();
+  List<HomeDataSource> get appLayout => (_get(appLayoutSettingName)?.value ??
+          HomeDataSource.defaultSettings().map((e) => e.name).join(","))
+      .split(',')
+      .where((element) => element.isNotEmpty)
+      .map((e) =>
+          HomeDataSource.values.firstWhere((element) => element.name == e))
+      .toList();
 
   NavigationDestinationLabelBehavior get navigationBarLabelBehavior =>
       NavigationDestinationLabelBehavior.values.firstWhere((e) =>
@@ -486,19 +513,24 @@ class SettingsState with _$SettingsState {
           (_get(navigationBarLabelBehaviorSettingName)?.value ??
               NavigationDestinationLabelBehavior.onlyShowSelected.name));
 
-  bool get distractionFreeMode => _get(distractionFreeModeSettingName)?.value == "true";
+  bool get distractionFreeMode =>
+      _get(distractionFreeModeSettingName)?.value == "true";
 
-  bool get backgroundNotifications => _get(backgroundNotificationsSettingName)?.value == 'true';
+  bool get backgroundNotifications =>
+      _get(backgroundNotificationsSettingName)?.value == 'true';
 
-  bool get subscriptionsNotifications => _get(subscriptionNotifications)?.value == 'true';
+  bool get subscriptionsNotifications =>
+      _get(subscriptionNotifications)?.value == 'true';
 
-  int get backgroundNotificationFrequency => int.parse(_get(backgroundCheckFrequency)?.value ?? "1");
+  int get backgroundNotificationFrequency =>
+      int.parse(_get(backgroundCheckFrequency)?.value ?? "1");
 
   bool get subtitlesBackground => _get(subtitleBackground)?.value == 'true';
 
   bool get dearrow => _get(dearrowSettingName)?.value == 'true';
 
-  bool get dearrowThumbnails => _get(dearrowThumbnailsSettingName)?.value == 'true';
+  bool get dearrowThumbnails =>
+      _get(dearrowThumbnailsSettingName)?.value == 'true';
 
   SettingsValue? _get(String settingName) {
     if (settings.containsKey(settingName)) {

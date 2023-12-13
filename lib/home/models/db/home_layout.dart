@@ -22,7 +22,10 @@ part 'home_layout.g.dart';
 enum HomeDataSourceAppearance { tv, phone, both }
 
 enum HomeDataSource {
-  home(big: false, small: false, showOn: HomeDataSourceAppearance.phone), // used for app layout set-up
+  home(
+      big: false,
+      small: false,
+      showOn: HomeDataSourceAppearance.phone), // used for app layout set-up
   popular,
   trending,
   subscription,
@@ -36,10 +39,15 @@ enum HomeDataSource {
   final bool big;
   final HomeDataSourceAppearance showOn;
 
-  const HomeDataSource({this.small = true, this.big = true, this.showOn = HomeDataSourceAppearance.both});
+  const HomeDataSource(
+      {this.small = true,
+      this.big = true,
+      this.showOn = HomeDataSourceAppearance.both});
 
   static List<HomeDataSource> defaultSettings() {
-    return isTv ? [search, subscription, playlist, popular, trending] : [home, subscription, playlist, history];
+    return isTv
+        ? [search, subscription, playlist, popular, trending]
+        : [home, subscription, playlist, history];
   }
 
   String getLabel(AppLocalizations locals) {
@@ -72,9 +80,12 @@ enum HomeDataSource {
 
   bool isPermitted(BuildContext context) {
     return switch (this) {
-      (HomeDataSource.subscription || HomeDataSource.playlist || HomeDataSource.history) =>
+      (HomeDataSource.subscription ||
+            HomeDataSource.playlist ||
+            HomeDataSource.history) =>
         context.read<AppCubit>().isLoggedIn,
-      (HomeDataSource.searchHistory) => context.read<SettingsCubit>().state.useSearchHistory,
+      (HomeDataSource.searchHistory) =>
+        context.read<SettingsCubit>().state.useSearchHistory,
       (_) => true
     };
   }
@@ -82,15 +93,24 @@ enum HomeDataSource {
   Widget getBottomBarNavigationWidget(BuildContext context) {
     var locals = AppLocalizations.of(context)!;
     return switch (this) {
-      (HomeDataSource.trending) => NavigationDestination(icon: Icon(getIcon()), label: getLabel(locals)),
-      (HomeDataSource.popular) => NavigationDestination(icon: Icon(getIcon()), label: getLabel(locals)),
-      (HomeDataSource.playlist) => NavigationDestination(icon: Icon(getIcon()), label: getLabel(locals)),
-      (HomeDataSource.history) => NavigationDestination(icon: Icon(getIcon()), label: getLabel(locals)),
-      (HomeDataSource.downloads) => NavigationDestination(icon: Icon(getIcon()), label: getLabel(locals)),
-      (HomeDataSource.searchHistory) => NavigationDestination(icon: Icon(getIcon()), label: getLabel(locals)),
-      (HomeDataSource.subscription) => NavigationDestination(icon: Icon(getIcon()), label: getLabel(locals)),
-      (HomeDataSource.home) => NavigationDestination(icon: Icon(getIcon()), label: getLabel(locals)),
-      (HomeDataSource.search) => NavigationDestination(icon: Icon(getIcon()), label: getLabel(locals))
+      (HomeDataSource.trending) =>
+        NavigationDestination(icon: Icon(getIcon()), label: getLabel(locals)),
+      (HomeDataSource.popular) =>
+        NavigationDestination(icon: Icon(getIcon()), label: getLabel(locals)),
+      (HomeDataSource.playlist) =>
+        NavigationDestination(icon: Icon(getIcon()), label: getLabel(locals)),
+      (HomeDataSource.history) =>
+        NavigationDestination(icon: Icon(getIcon()), label: getLabel(locals)),
+      (HomeDataSource.downloads) =>
+        NavigationDestination(icon: Icon(getIcon()), label: getLabel(locals)),
+      (HomeDataSource.searchHistory) =>
+        NavigationDestination(icon: Icon(getIcon()), label: getLabel(locals)),
+      (HomeDataSource.subscription) =>
+        NavigationDestination(icon: Icon(getIcon()), label: getLabel(locals)),
+      (HomeDataSource.home) =>
+        NavigationDestination(icon: Icon(getIcon()), label: getLabel(locals)),
+      (HomeDataSource.search) =>
+        NavigationDestination(icon: Icon(getIcon()), label: getLabel(locals))
     };
   }
 
@@ -130,9 +150,12 @@ enum HomeDataSource {
       (HomeDataSource.downloads) => SizedBox(
           height: small ? smallVideoViewHeight : null,
           child: BlocBuilder<DownloadManagerCubit, DownloadManagerState>(
-              buildWhen: (previous, current) => previous.videos != current.videos,
+              buildWhen: (previous, current) =>
+                  previous.videos != current.videos,
               builder: (context, downloads) {
-                var videos = downloads.videos.reversed.where((e) => e.downloadComplete && !e.downloadFailed).toList();
+                var videos = downloads.videos.reversed
+                    .where((e) => e.downloadComplete && !e.downloadFailed)
+                    .toList();
                 return VideoList(
                   key: ValueKey(videos),
                   scrollDirection: small ? Axis.horizontal : Axis.vertical,
@@ -148,8 +171,11 @@ enum HomeDataSource {
             children: db
                 .getSearchHistory()
                 .map((e) => Padding(
-                      padding: EdgeInsets.symmetric(vertical: 8, horizontal: small ? 8 : 0),
-                      child: FilledButton.tonal(onPressed: () => HomeView.openSearch(context, e), child: Text(e)),
+                      padding: EdgeInsets.symmetric(
+                          vertical: 8, horizontal: small ? 8 : 0),
+                      child: FilledButton.tonal(
+                          onPressed: () => HomeView.openSearch(context, e),
+                          child: Text(e)),
                     ))
                 .toList(),
           )),
@@ -163,15 +189,19 @@ enum HomeDataSource {
                   paginatedVideoList: PageBasedPaginatedList<VideoInList>(
                       getItemsFunc: (page, maxResults) =>
                           // we get the data for each video
-                          service.getUserHistory(page, maxResults).then((value) => Future.wait(value
-                              .map((e) async =>
-                                  (await HistoryVideoCache.fromVideoIdToVideo(e)).toBaseVideo().toVideoInList())
-                              .toList())),
+                          service.getUserHistory(page, maxResults).then(
+                              (value) => Future.wait(value
+                                  .map((e) async => (await HistoryVideoCache
+                                          .fromVideoIdToVideo(e))
+                                      .toBaseVideo()
+                                      .toVideoInList())
+                                  .toList())),
                       maxResults: 20),
                 )
               : const HistoryView(),
         ),
-      (HomeDataSource.home) => small ? const SizedBox.shrink() : const HomeView(),
+      (HomeDataSource.home) =>
+        small ? const SizedBox.shrink() : const HomeView(),
       (_) => const SizedBox.shrink()
     };
   }
@@ -198,14 +228,21 @@ class HomeLayout {
   String get dbBigSource => bigSource.name;
 
   set dbBigSource(String value) {
-    bigSource = HomeDataSource.values.where((element) => element.name == value).firstOrNull ?? HomeDataSource.trending;
+    bigSource = HomeDataSource.values
+            .where((element) => element.name == value)
+            .firstOrNull ??
+        HomeDataSource.trending;
   }
 
   List<String> get dbSmallSources => smallSources.map((e) => e.name).toList();
 
   set dbSmallSources(List<String> values) {
     smallSources = values
-        .map((e) => HomeDataSource.values.where((element) => element.name == e).firstOrNull ?? HomeDataSource.trending)
+        .map((e) =>
+            HomeDataSource.values
+                .where((element) => element.name == e)
+                .firstOrNull ??
+            HomeDataSource.trending)
         .toList();
   }
 }

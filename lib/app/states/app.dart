@@ -22,7 +22,8 @@ class AppCubit extends Cubit<AppState> {
   }
 
   onReady() {
-    intentDataStreamSubscription = ReceiveSharingIntent.getTextStream().listen((String value) {
+    intentDataStreamSubscription =
+        ReceiveSharingIntent.getTextStream().listen((String value) {
       openAppLink(value);
     }, onError: (err) {
       log.warning("getLinkStream error: $err");
@@ -80,7 +81,8 @@ class AppCubit extends Cubit<AppState> {
   }
 
   bool get isLoggedIn =>
-      (state.server?.authToken?.isNotEmpty ?? false) || (state.server?.sidCookie?.isNotEmpty ?? false);
+      (state.server?.authToken?.isNotEmpty ?? false) ||
+      (state.server?.sidCookie?.isNotEmpty ?? false);
 }
 
 @freezed
@@ -93,9 +95,11 @@ class AppState with _$AppState {
       server = null;
     }
     HomeLayout homeLayout = db.getHomeLayout();
-    bool isLoggedIn = (server?.authToken?.isNotEmpty ?? false) || (server?.sidCookie?.isNotEmpty ?? false);
+    bool isLoggedIn = (server?.authToken?.isNotEmpty ?? false) ||
+        (server?.sidCookie?.isNotEmpty ?? false);
 
-    var selectedIndex = int.parse(db.getSettings(onOpenSettingName)?.value ?? '0');
+    var selectedIndex =
+        int.parse(db.getSettings(onOpenSettingName)?.value ?? '0');
     if (!isLoggedIn && selectedIndex > 1 || selectedIndex < 0) {
       selectedIndex = 0;
     }
@@ -103,5 +107,6 @@ class AppState with _$AppState {
     return AppState(selectedIndex, server, homeLayout);
   }
 
-  factory AppState(int selectedIndex, Server? server, HomeLayout homeLayout) = _AppState;
+  factory AppState(int selectedIndex, Server? server, HomeLayout homeLayout) =
+      _AppState;
 }

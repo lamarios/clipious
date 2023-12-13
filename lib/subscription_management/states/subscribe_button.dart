@@ -43,6 +43,7 @@ class SubscribeButtonState with _$SubscribeButtonState {
   }) = _SubscribeButtonState;
 
   static SubscribeButtonState init(String channelId) {
-    return SubscribeButtonState(channelId: channelId, isLoggedIn: db.isLoggedInToCurrentServer());
+    return SubscribeButtonState(
+        channelId: channelId, isLoggedIn: db.isLoggedInToCurrentServer());
   }
 }

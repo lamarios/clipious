@@ -35,7 +35,12 @@ class TVSettingsScreen extends StatelessWidget {
 
   List<String> getCategories(BuildContext context) {
     var locals = AppLocalizations.of(context)!;
-    return [locals.popular, locals.trending, locals.subscriptions, locals.playlists];
+    return [
+      locals.popular,
+      locals.trending,
+      locals.subscriptions,
+      locals.playlists
+    ];
   }
 
   openManageServers(BuildContext context) {
@@ -60,14 +65,16 @@ class TVSettingsScreen extends StatelessWidget {
 
   showSelectLanguage(BuildContext context) {
     var localsList = AppLocalizations.supportedLocales;
-    var localsStrings = localsList.map((e) => e.nativeDisplayLanguageScript ?? '').toList();
+    var localsStrings =
+        localsList.map((e) => e.nativeDisplayLanguageScript ?? '').toList();
     var locals = AppLocalizations.of(context)!;
     var cubit = context.read<SettingsCubit>();
 
     List<String>? localeString = cubit.state.locale?.split('_');
     Locale? selected = localeString != null
         ? Locale.fromSubtags(
-            languageCode: localeString[0], scriptCode: localeString.length >= 2 ? localeString[1] : null)
+            languageCode: localeString[0],
+            scriptCode: localeString.length >= 2 ? localeString[1] : null)
         : null;
 
     AutoRouter.of(context).push(TvSelectFromListRoute(
@@ -89,11 +96,12 @@ class TVSettingsScreen extends StatelessWidget {
     var cubit = context.read<SettingsCubit>();
     AutoRouter.of(context).push(TvSelectFromListRoute(
       title: locals.themeBrightness,
-      options: ThemeMode.values.map((e) => cubit.getThemeLabel(locals, e)).toList(),
+      options:
+          ThemeMode.values.map((e) => cubit.getThemeLabel(locals, e)).toList(),
       selected: cubit.getThemeLabel(locals, cubit.state.themeMode),
       onSelect: (String selected) {
-        ThemeMode? theme =
-            ThemeMode.values.firstWhereOrNull((element) => cubit.getThemeLabel(locals, element) == selected);
+        ThemeMode? theme = ThemeMode.values.firstWhereOrNull(
+            (element) => cubit.getThemeLabel(locals, element) == selected);
         cubit.setThemeMode(theme);
       },
     ));
@@ -115,7 +123,8 @@ class TVSettingsScreen extends StatelessWidget {
                 SettingsTitle(title: locals.browsing),
                 SettingsTile(
                   title: locals.customizeAppLayout,
-                  description: _.appLayout.map((e) => e.getLabel(locals)).join(", "),
+                  description:
+                      _.appLayout.map((e) => e.getLabel(locals)).join(", "),
                   onSelected: (context) => openAppLayout(context),
                 ),
                 SettingsTile(
@@ -125,14 +134,17 @@ class TVSettingsScreen extends StatelessWidget {
                 ),
                 SettingsTile(
                   title: locals.appLanguage,
-                  description: cubit.getLocaleDisplayName() ?? locals.followSystem,
+                  description:
+                      cubit.getLocaleDisplayName() ?? locals.followSystem,
                   onSelected: (context) => showSelectLanguage(context),
                 ),
                 SettingsTile(
                   title: 'Return YouTube Dislike',
                   description: locals.returnYoutubeDislikeDescription,
-                  onSelected: (context) => cubit.toggleReturnYoutubeDislike(!_.useReturnYoutubeDislike),
-                  trailing: Switch(onChanged: (value) {}, value: _.useReturnYoutubeDislike),
+                  onSelected: (context) => cubit
+                      .toggleReturnYoutubeDislike(!_.useReturnYoutubeDislike),
+                  trailing: Switch(
+                      onChanged: (value) {}, value: _.useReturnYoutubeDislike),
                 ),
                 SettingsTile(
                   title: locals.searchHistory,
@@ -141,21 +153,27 @@ class TVSettingsScreen extends StatelessWidget {
                 ),
                 SettingsTile(
                   title: 'DeArrow',
-                  description: _.dearrow ? locals.enabled : locals.deArrowSettingDescription,
+                  description: _.dearrow
+                      ? locals.enabled
+                      : locals.deArrowSettingDescription,
                   onSelected: openDearrowSettings,
                 ),
                 SettingsTile(
                   title: locals.videoFilters,
                   description: locals.videoFiltersSettingTileDescriptions,
-                  onSelected: (context) => AutoRouter.of(context).push(const TvFilterListSettingsRoute()),
+                  onSelected: (context) => AutoRouter.of(context)
+                      .push(const TvFilterListSettingsRoute()),
                 ),
                 SettingsTitle(title: locals.servers),
                 BlocBuilder<AppCubit, AppState>(
-                    buildWhen: (previous, current) => previous.server != current.server,
+                    buildWhen: (previous, current) =>
+                        previous.server != current.server,
                     builder: (context, app) => SettingsTile(
                         title: locals.manageServers,
-                        description:
-                            app.server != null ? locals.currentServer(db.getCurrentlySelectedServer().url) : "",
+                        description: app.server != null
+                            ? locals.currentServer(
+                                db.getCurrentlySelectedServer().url)
+                            : "",
                         onSelected: openManageServers)),
                 SettingsTitle(title: locals.videoPlayer),
                 SettingsTile(
@@ -179,20 +197,26 @@ class TVSettingsScreen extends StatelessWidget {
                 SettingsTile(
                   title: locals.subtitlesBackground,
                   description: locals.subtitlesBackgroundDescription,
-                  onSelected: (context) => cubit.setSubtitlesBackground(!_.subtitlesBackground),
-                  trailing: Switch(onChanged: (value) {}, value: _.subtitlesBackground),
+                  onSelected: (context) =>
+                      cubit.setSubtitlesBackground(!_.subtitlesBackground),
+                  trailing: Switch(
+                      onChanged: (value) {}, value: _.subtitlesBackground),
                 ),
                 SettingsTile(
                   title: locals.rememberSubtitleLanguage,
                   description: locals.rememberSubtitleLanguageDescription,
-                  onSelected: (context) => cubit.toggleRememberSubtitles(!_.rememberSubtitles),
-                  trailing: Switch(onChanged: (value) {}, value: _.rememberSubtitles),
+                  onSelected: (context) =>
+                      cubit.toggleRememberSubtitles(!_.rememberSubtitles),
+                  trailing:
+                      Switch(onChanged: (value) {}, value: _.rememberSubtitles),
                 ),
                 SettingsTile(
                   title: locals.rememberPlaybackSpeed,
                   description: locals.rememberPlaybackSpeedDescription,
-                  onSelected: (context) => cubit.toggleRememberPlaybackSpeed(!_.rememberPlayBackSpeed),
-                  trailing: Switch(onChanged: (value) {}, value: _.rememberPlayBackSpeed),
+                  onSelected: (context) => cubit
+                      .toggleRememberPlaybackSpeed(!_.rememberPlayBackSpeed),
+                  trailing: Switch(
+                      onChanged: (value) {}, value: _.rememberPlayBackSpeed),
                 ),
                 SettingsTile(
                   title: 'SponsorBlock',
@@ -208,13 +232,16 @@ class TVSettingsScreen extends StatelessWidget {
                 SettingsTile(
                   title: locals.blackBackground,
                   description: locals.blackBackgroundDescription,
-                  onSelected: (context) => cubit.toggleBlackBackground(!_.blackBackground),
-                  trailing: Switch(onChanged: (value) {}, value: _.blackBackground),
+                  onSelected: (context) =>
+                      cubit.toggleBlackBackground(!_.blackBackground),
+                  trailing:
+                      Switch(onChanged: (value) {}, value: _.blackBackground),
                 ),
                 SettingsTitle(title: locals.about),
                 SettingsTile(
                   title: '${locals.name}: ${_.packageInfo.appName}',
-                  description: '${locals.package}: ${_.packageInfo.packageName}',
+                  description:
+                      '${locals.package}: ${_.packageInfo.packageName}',
                   onSelected: (context) {},
                 ),
                 SettingsTile(
@@ -260,7 +287,12 @@ class AdjustmentSettingTile extends StatelessWidget {
   final Function(int) onNewValue;
 
   const AdjustmentSettingTile(
-      {super.key, required this.onNewValue, required this.title, this.description, required this.value, this.step = 1});
+      {super.key,
+      required this.onNewValue,
+      required this.title,
+      this.description,
+      required this.value,
+      this.step = 1});
 
   onKeyEvent(FocusNode node, KeyEvent event, BuildContext ctx) {
     if (event is KeyUpEvent) {
@@ -342,7 +374,8 @@ class SettingsTile extends StatelessWidget {
         autofocus: autofocus ?? false,
         onKeyEvent: (node, event) => onKeyEvent != null
             ? onKeyEvent!(node, event, context)
-            : onTvSelect(event, context, onSelected != null ? onSelected! : (context) {}),
+            : onTvSelect(event, context,
+                onSelected != null ? onSelected! : (context) {}),
         child: Builder(builder: (ctx) {
           final FocusNode focusNode = Focus.of(ctx);
           final bool hasFocus = focusNode.hasFocus;
@@ -357,13 +390,16 @@ class SettingsTile extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: textTheme.headlineSmall!
-                      .copyWith(color: enabled ?? true ? colors.primary : colors.primary.withOpacity(0.5)),
+                  style: textTheme.headlineSmall!.copyWith(
+                      color: enabled ?? true
+                          ? colors.primary
+                          : colors.primary.withOpacity(0.5)),
                 ),
                 description != null
                     ? Text(
                         description ?? '',
-                        style: textTheme.bodyLarge!.copyWith(color: colors.secondary),
+                        style: textTheme.bodyLarge!
+                            .copyWith(color: colors.secondary),
                       )
                     : const SizedBox.shrink()
               ],

@@ -32,8 +32,10 @@ class ManageSubscriptionsScreen extends StatelessWidget {
             alignment: Alignment.topCenter,
             constraints: BoxConstraints(maxWidth: tabletMaxVideoWidth),
             child: BlocProvider(
-              create: (context) => ManageSubscriptionCubit(const ManageSubscriptionsState()),
-              child: BlocBuilder<ManageSubscriptionCubit, ManageSubscriptionsState>(
+              create: (context) =>
+                  ManageSubscriptionCubit(const ManageSubscriptionsState()),
+              child: BlocBuilder<ManageSubscriptionCubit,
+                  ManageSubscriptionsState>(
                 builder: (context, _) {
                   var cubit = context.read<ManageSubscriptionCubit>();
 
@@ -52,23 +54,28 @@ class ManageSubscriptionsScreen extends StatelessWidget {
 
                                     return GestureDetector(
                                       onTap: () => AutoRouter.of(context)
-                                          .push(ChannelRoute(channelId: sub.authorId))
+                                          .push(ChannelRoute(
+                                              channelId: sub.authorId))
                                           .then((value) => cubit.refreshSubs()),
                                       child: SimpleListItem(
                                         key: ValueKey(sub.authorId),
                                         index: index,
                                         child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
                                           children: [
                                             Text(sub.author),
                                             IconButton.filledTonal(
-                                              visualDensity: VisualDensity.compact,
+                                              visualDensity:
+                                                  VisualDensity.compact,
                                               onPressed: () {
                                                 okCancelDialog(
                                                     context,
                                                     locals.unSubscribeQuestion,
-                                                    locals.youCanSubscribeAgainLater,
-                                                    () => cubit.unsubscribe(sub.authorId));
+                                                    locals
+                                                        .youCanSubscribeAgainLater,
+                                                    () => cubit.unsubscribe(
+                                                        sub.authorId));
                                               },
                                               icon: const Icon(
                                                 Icons.clear,

@@ -17,7 +17,11 @@ class AddToPlaylistDialog extends StatelessWidget {
   final List<Playlist> playlists;
   final Function(String selectedPlaylistId) onAdd;
 
-  const AddToPlaylistDialog({super.key, required this.videoId, required this.playlists, required this.onAdd});
+  const AddToPlaylistDialog(
+      {super.key,
+      required this.videoId,
+      required this.playlists,
+      required this.onAdd});
 
   static showAddToPlaylistDialog(BuildContext context,
       {required String videoId,
@@ -63,12 +67,14 @@ class AddToPlaylistDialog extends StatelessWidget {
     showDialog<String>(
         context: context,
         builder: (BuildContext ctx) => Dialog(
-              child: AddPlayListForm(afterAdd: (playlistId) => addToPlaylist(context, playlistId)),
+              child: AddPlayListForm(
+                  afterAdd: (playlistId) => addToPlaylist(context, playlistId)),
             ));
   }
 
   openServerSettings(BuildContext context) {
-    AutoRouter.of(context).push(ManageSingleServerRoute(server: db.getCurrentlySelectedServer()));
+    AutoRouter.of(context)
+        .push(ManageSingleServerRoute(server: db.getCurrentlySelectedServer()));
   }
 
   @override
@@ -89,16 +95,21 @@ class AddToPlaylistDialog extends StatelessWidget {
                         Text(locals.notLoggedIn),
                         Padding(
                           padding: const EdgeInsets.only(top: 4.0),
-                          child: FilledButton(onPressed: () => openServerSettings(context), child: Text(locals.logIn)),
+                          child: FilledButton(
+                              onPressed: () => openServerSettings(context),
+                              child: Text(locals.logIn)),
                         )
                       ],
                     )))
             : Expanded(
                 child: ListView(
                   children: playlists.map((p) {
-                    bool inPlaylist = p.videos.any((element) => element.videoId == videoId);
+                    bool inPlaylist =
+                        p.videos.any((element) => element.videoId == videoId);
                     return FilledButton.tonal(
-                        onPressed: inPlaylist ? null : () => addToPlaylist(context, p.playlistId),
+                        onPressed: inPlaylist
+                            ? null
+                            : () => addToPlaylist(context, p.playlistId),
                         child: Row(
                           children: [
                             Padding(

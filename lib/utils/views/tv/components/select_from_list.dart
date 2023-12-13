@@ -11,7 +11,11 @@ class TvSelectFromListScreen extends StatelessWidget {
   final Function(String selected) onSelect;
 
   const TvSelectFromListScreen(
-      {super.key, required this.options, required this.selected, required this.onSelect, required this.title});
+      {super.key,
+      required this.options,
+      required this.selected,
+      required this.onSelect,
+      required this.title});
 
   selectOption(BuildContext context, String s) {
     onSelect(s);

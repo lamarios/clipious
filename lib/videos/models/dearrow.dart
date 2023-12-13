@@ -22,15 +22,18 @@ class DeArrow {
 
   DeArrow({required this.titles, required this.thumbnails});
 
-  factory DeArrow.fromJson(Map<String, dynamic> json) => _$DeArrowFromJson(json);
+  factory DeArrow.fromJson(Map<String, dynamic> json) =>
+      _$DeArrowFromJson(json);
 
   Map<String, dynamic> toJson() => _$DeArrowToJson(this);
 
   static Future<List<BaseVideo>> processVideos(List<BaseVideo>? videos) async {
     var process = db.getSettings(dearrowSettingName)?.value == "true";
     if (videos != null && process) {
-      bool doThumbnails = db.getSettings(dearrowThumbnailsSettingName)?.value == "true";
-      var futureTasks = videos.map((e) => _deArrowVideo(e, doThumbnails)).toList();
+      bool doThumbnails =
+          db.getSettings(dearrowThumbnailsSettingName)?.value == "true";
+      var futureTasks =
+          videos.map((e) => _deArrowVideo(e, doThumbnails)).toList();
 
       await Future.wait(futureTasks);
 
@@ -92,9 +95,15 @@ class DeArrowTitle {
   @JsonKey(name: 'UUID')
   final String? uuid;
 
-  DeArrowTitle({this.title, this.original = false, this.votes = 0, this.locked = false, this.uuid});
+  DeArrowTitle(
+      {this.title,
+      this.original = false,
+      this.votes = 0,
+      this.locked = false,
+      this.uuid});
 
-  factory DeArrowTitle.fromJson(Map<String, dynamic> json) => _$DeArrowTitleFromJson(json);
+  factory DeArrowTitle.fromJson(Map<String, dynamic> json) =>
+      _$DeArrowTitleFromJson(json);
 
   Map<String, dynamic> toJson() => _$DeArrowTitleToJson(this);
 }
@@ -108,9 +117,15 @@ class DeArrowThumbnail {
   @JsonKey(name: 'UUID')
   final String? uuid;
 
-  DeArrowThumbnail({this.timestamp, this.original = false, this.votes = 0, this.locked = false, this.uuid});
+  DeArrowThumbnail(
+      {this.timestamp,
+      this.original = false,
+      this.votes = 0,
+      this.locked = false,
+      this.uuid});
 
-  factory DeArrowThumbnail.fromJson(Map<String, dynamic> json) => _$DeArrowThumbnailFromJson(json);
+  factory DeArrowThumbnail.fromJson(Map<String, dynamic> json) =>
+      _$DeArrowThumbnailFromJson(json);
 
   Map<String, dynamic> toJson() => _$DeArrowThumbnailToJson(this);
 }

@@ -20,12 +20,14 @@ class BrowsingSettingsScreen extends StatelessWidget {
     showDialog(
         barrierDismissible: true,
         context: context,
-        builder: (context) => const AlertDialog(content: SizedBox(width: 300, child: AppCustomizer())));
+        builder: (context) => const AlertDialog(
+            content: SizedBox(width: 300, child: AppCustomizer())));
   }
 
   showSelectLanguage(BuildContext context, SettingsState controller) {
     var localsList = AppLocalizations.supportedLocales;
-    var localsStrings = localsList.map((e) => e.nativeDisplayLanguageScript ?? '').toList();
+    var localsStrings =
+        localsList.map((e) => e.nativeDisplayLanguageScript ?? '').toList();
     var locals = AppLocalizations.of(context)!;
     var cubit = context.read<SettingsCubit>();
     var colors = Theme.of(context).colorScheme;
@@ -33,7 +35,8 @@ class BrowsingSettingsScreen extends StatelessWidget {
     List<String>? localeString = controller.locale?.split('_');
     Locale? selected = localeString != null
         ? Locale.fromSubtags(
-            languageCode: localeString[0], scriptCode: localeString.length >= 2 ? localeString[1] : null)
+            languageCode: localeString[0],
+            scriptCode: localeString.length >= 2 ? localeString[1] : null)
         : null;
 
     SelectList.show<String>(context,
@@ -55,7 +58,13 @@ class BrowsingSettingsScreen extends StatelessWidget {
 
   List<String> getCategories(BuildContext context) {
     var locals = AppLocalizations.of(context)!;
-    return [locals.popular, locals.trending, locals.subscriptions, locals.playlists, locals.history];
+    return [
+      locals.popular,
+      locals.trending,
+      locals.subscriptions,
+      locals.playlists,
+      locals.history
+    ];
   }
 
   searchCountry(BuildContext context, SettingsState controller) {
@@ -66,7 +75,8 @@ class BrowsingSettingsScreen extends StatelessWidget {
     SelectList.show(context,
         values: countryCodes.map((e) => e.name).toList(),
         value: controller.country.name,
-        searchFilter: (filter, value) => value.toLowerCase().contains(filter.toLowerCase()),
+        searchFilter: (filter, value) =>
+            value.toLowerCase().contains(filter.toLowerCase()),
         itemBuilder: (value, selected) => Text(
               value,
               style: TextStyle(color: selected ? colors.primary : null),
@@ -100,7 +110,8 @@ class BrowsingSettingsScreen extends StatelessWidget {
         elevation: 0,
         scrolledUnderElevation: 0,
       ),
-      body: SafeArea(child: BlocBuilder<SettingsCubit, SettingsState>(builder: (context, _) {
+      body: SafeArea(child:
+          BlocBuilder<SettingsCubit, SettingsState>(builder: (context, _) {
         var cubit = context.read<SettingsCubit>();
         var filterCount = db.getAllFilters().length;
         return DefaultTabController(
@@ -120,7 +131,8 @@ class BrowsingSettingsScreen extends StatelessWidget {
                   SettingsTile(
                     leading: const Icon(Icons.app_settings_alt),
                     title: Text(locals.customizeAppLayout),
-                    value: Text(_.appLayout.map((e) => e.getLabel(locals)).join(", ")),
+                    value: Text(
+                        _.appLayout.map((e) => e.getLabel(locals)).join(", ")),
                     onPressed: (ctx) => customizeApp(ctx),
                   ),
                   SettingsTile.switchTile(
@@ -133,7 +145,8 @@ class BrowsingSettingsScreen extends StatelessWidget {
                   SettingsTile(
                     leading: const Icon(Icons.language),
                     title: Text(locals.appLanguage),
-                    value: Text(cubit.getLocaleDisplayName() ?? locals.followSystem),
+                    value: Text(
+                        cubit.getLocaleDisplayName() ?? locals.followSystem),
                     onPressed: (ctx) => showSelectLanguage(ctx, _),
                   ),
                   SettingsTile.switchTile(
@@ -146,7 +159,9 @@ class BrowsingSettingsScreen extends StatelessWidget {
                   SettingsTile.navigation(
                     leading: const Icon(Icons.manage_search),
                     title: Text(locals.searchHistory),
-                    description: Text(_.useSearchHistory ? locals.enabled : locals.searchHistoryDescription),
+                    description: Text(_.useSearchHistory
+                        ? locals.enabled
+                        : locals.searchHistoryDescription),
                     onPressed: (context) => openSearchHistorySettings(context),
                   ),
                   SettingsTile.navigation(
@@ -159,7 +174,9 @@ class BrowsingSettingsScreen extends StatelessWidget {
                   SettingsTile.navigation(
                     leading: const Icon(Icons.adjust),
                     title: const Text('DeArrow'),
-                    description: Text(_.dearrow ? locals.enabled : locals.deArrowSettingDescription),
+                    description: Text(_.dearrow
+                        ? locals.enabled
+                        : locals.deArrowSettingDescription),
                     onPressed: openDearrowSettings,
                   ),
                 ],

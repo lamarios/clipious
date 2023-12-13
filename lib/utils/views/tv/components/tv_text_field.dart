@@ -58,7 +58,8 @@ class TvTextField extends StatelessWidget {
       autofocus: autofocus ?? false,
       onFocusChange: onFocusChanged,
       focusNode: focusNode,
-      onKeyEvent: (node, event) => onTvSelect(event, context, (context) => openTextField(context)),
+      onKeyEvent: (node, event) =>
+          onTvSelect(event, context, (context) => openTextField(context)),
       child: Builder(builder: (ctx) {
         bool hasFocus = Focus.of(ctx).hasFocus;
 
@@ -79,13 +80,18 @@ class TvTextField extends StatelessWidget {
                   Expanded(
                     child: Container(
                         decoration: BoxDecoration(
-                            border: Border(bottom: BorderSide(width: 2, color: colors.secondaryContainer))),
+                            border: Border(
+                                bottom: BorderSide(
+                                    width: 2,
+                                    color: colors.secondaryContainer))),
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: showLabel
                               ? decoration!.label!
                               : Text(
-                                  (obscureText ?? false) ? "************" : controller.text,
+                                  (obscureText ?? false)
+                                      ? "************"
+                                      : controller.text,
                                   style: textTheme.bodyLarge,
                                 ),
                         )),

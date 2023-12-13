@@ -31,8 +31,13 @@ class TvDearrowSettingsScreen extends StatelessWidget {
                 SettingsTile(
                   title: locals.deArrowReplaceThumbnails,
                   description: locals.deArrowReplaceThumbnailsDescription,
-                  onSelected: _.dearrow ? (context) => settings.setDearrowThumbnail(!_.dearrowThumbnails) : null,
-                  trailing: Switch(onChanged: _.dearrow ? (value) {} : null, value: _.dearrowThumbnails),
+                  onSelected: _.dearrow
+                      ? (context) =>
+                          settings.setDearrowThumbnail(!_.dearrowThumbnails)
+                      : null,
+                  trailing: Switch(
+                      onChanged: _.dearrow ? (value) {} : null,
+                      value: _.dearrowThumbnails),
                 ),
               ],
             ),

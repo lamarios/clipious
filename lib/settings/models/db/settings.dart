@@ -16,7 +16,8 @@ class SettingsValue {
 
   SettingsValue(this.name, this.value);
 
-  factory SettingsValue.fromJson(Map<String, dynamic> json) => _$SettingsValueFromJson(json);
+  factory SettingsValue.fromJson(Map<String, dynamic> json) =>
+      _$SettingsValueFromJson(json);
 
   Map<String, dynamic> toJson() => _$SettingsValueToJson(this);
 }

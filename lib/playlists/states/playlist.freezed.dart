@@ -23,19 +23,27 @@ mixin _$PlaylistState {
   bool get showImage => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $PlaylistStateCopyWith<PlaylistState> get copyWith => throw _privateConstructorUsedError;
+  $PlaylistStateCopyWith<PlaylistState> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $PlaylistStateCopyWith<$Res> {
-  factory $PlaylistStateCopyWith(PlaylistState value, $Res Function(PlaylistState) then) =
+  factory $PlaylistStateCopyWith(
+          PlaylistState value, $Res Function(PlaylistState) then) =
       _$PlaylistStateCopyWithImpl<$Res, PlaylistState>;
   @useResult
-  $Res call({double loadingProgress, Playlist playlist, bool loading, double playlistItemHeight, bool showImage});
+  $Res call(
+      {double loadingProgress,
+      Playlist playlist,
+      bool loading,
+      double playlistItemHeight,
+      bool showImage});
 }
 
 /// @nodoc
-class _$PlaylistStateCopyWithImpl<$Res, $Val extends PlaylistState> implements $PlaylistStateCopyWith<$Res> {
+class _$PlaylistStateCopyWithImpl<$Res, $Val extends PlaylistState>
+    implements $PlaylistStateCopyWith<$Res> {
   _$PlaylistStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -78,18 +86,27 @@ class _$PlaylistStateCopyWithImpl<$Res, $Val extends PlaylistState> implements $
 }
 
 /// @nodoc
-abstract class _$$PlaylistStateImplCopyWith<$Res> implements $PlaylistStateCopyWith<$Res> {
-  factory _$$PlaylistStateImplCopyWith(_$PlaylistStateImpl value, $Res Function(_$PlaylistStateImpl) then) =
+abstract class _$$PlaylistStateImplCopyWith<$Res>
+    implements $PlaylistStateCopyWith<$Res> {
+  factory _$$PlaylistStateImplCopyWith(
+          _$PlaylistStateImpl value, $Res Function(_$PlaylistStateImpl) then) =
       __$$PlaylistStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({double loadingProgress, Playlist playlist, bool loading, double playlistItemHeight, bool showImage});
+  $Res call(
+      {double loadingProgress,
+      Playlist playlist,
+      bool loading,
+      double playlistItemHeight,
+      bool showImage});
 }
 
 /// @nodoc
-class __$$PlaylistStateImplCopyWithImpl<$Res> extends _$PlaylistStateCopyWithImpl<$Res, _$PlaylistStateImpl>
+class __$$PlaylistStateImplCopyWithImpl<$Res>
+    extends _$PlaylistStateCopyWithImpl<$Res, _$PlaylistStateImpl>
     implements _$$PlaylistStateImplCopyWith<$Res> {
-  __$$PlaylistStateImplCopyWithImpl(_$PlaylistStateImpl _value, $Res Function(_$PlaylistStateImpl) _then)
+  __$$PlaylistStateImplCopyWithImpl(
+      _$PlaylistStateImpl _value, $Res Function(_$PlaylistStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -160,16 +177,20 @@ class _$PlaylistStateImpl implements _PlaylistState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$PlaylistStateImpl &&
-            (identical(other.loadingProgress, loadingProgress) || other.loadingProgress == loadingProgress) &&
-            (identical(other.playlist, playlist) || other.playlist == playlist) &&
+            (identical(other.loadingProgress, loadingProgress) ||
+                other.loadingProgress == loadingProgress) &&
+            (identical(other.playlist, playlist) ||
+                other.playlist == playlist) &&
             (identical(other.loading, loading) || other.loading == loading) &&
             (identical(other.playlistItemHeight, playlistItemHeight) ||
                 other.playlistItemHeight == playlistItemHeight) &&
-            (identical(other.showImage, showImage) || other.showImage == showImage));
+            (identical(other.showImage, showImage) ||
+                other.showImage == showImage));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, loadingProgress, playlist, loading, playlistItemHeight, showImage);
+  int get hashCode => Object.hash(runtimeType, loadingProgress, playlist,
+      loading, playlistItemHeight, showImage);
 
   @JsonKey(ignore: true)
   @override
@@ -198,5 +219,6 @@ abstract class _PlaylistState implements PlaylistState {
   bool get showImage;
   @override
   @JsonKey(ignore: true)
-  _$$PlaylistStateImplCopyWith<_$PlaylistStateImpl> get copyWith => throw _privateConstructorUsedError;
+  _$$PlaylistStateImplCopyWith<_$PlaylistStateImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }

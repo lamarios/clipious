@@ -16,12 +16,17 @@ class TvHorizontalItemList<T> extends StatelessWidget {
   final Widget Function(BuildContext context, int index, T item) buildItem;
 
   const TvHorizontalItemList(
-      {super.key, this.tags, required this.paginatedList, required this.buildItem, required this.getPlaceholder});
+      {super.key,
+      this.tags,
+      required this.paginatedList,
+      required this.buildItem,
+      required this.getPlaceholder});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => ItemListCubit<T>(ItemListState<T>(itemList: paginatedList)),
+      create: (context) =>
+          ItemListCubit<T>(ItemListState<T>(itemList: paginatedList)),
       child: BlocBuilder<ItemListCubit<T>, ItemListState<T>>(
         builder: (context, _) {
           var cubit = context.read<ItemListCubit<T>>();
@@ -87,7 +92,9 @@ class TvHorizontalVideoList extends StatelessWidget {
         video: e,
         autoFocus: index == autoFocusedIndex,
         onSelect: onSelect,
-        onFocusChange: onItemFocus != null ? (focus) => onItemFocus!(e, index, focus) : null,
+        onFocusChange: onItemFocus != null
+            ? (focus) => onItemFocus!(e, index, focus)
+            : null,
       ),
     );
   }

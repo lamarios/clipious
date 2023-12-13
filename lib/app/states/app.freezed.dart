@@ -21,18 +21,21 @@ mixin _$AppState {
   HomeLayout get homeLayout => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $AppStateCopyWith<AppState> get copyWith => throw _privateConstructorUsedError;
+  $AppStateCopyWith<AppState> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $AppStateCopyWith<$Res> {
-  factory $AppStateCopyWith(AppState value, $Res Function(AppState) then) = _$AppStateCopyWithImpl<$Res, AppState>;
+  factory $AppStateCopyWith(AppState value, $Res Function(AppState) then) =
+      _$AppStateCopyWithImpl<$Res, AppState>;
   @useResult
   $Res call({int selectedIndex, Server? server, HomeLayout homeLayout});
 }
 
 /// @nodoc
-class _$AppStateCopyWithImpl<$Res, $Val extends AppState> implements $AppStateCopyWith<$Res> {
+class _$AppStateCopyWithImpl<$Res, $Val extends AppState>
+    implements $AppStateCopyWith<$Res> {
   _$AppStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -65,8 +68,10 @@ class _$AppStateCopyWithImpl<$Res, $Val extends AppState> implements $AppStateCo
 }
 
 /// @nodoc
-abstract class _$$AppStateImplCopyWith<$Res> implements $AppStateCopyWith<$Res> {
-  factory _$$AppStateImplCopyWith(_$AppStateImpl value, $Res Function(_$AppStateImpl) then) =
+abstract class _$$AppStateImplCopyWith<$Res>
+    implements $AppStateCopyWith<$Res> {
+  factory _$$AppStateImplCopyWith(
+          _$AppStateImpl value, $Res Function(_$AppStateImpl) then) =
       __$$AppStateImplCopyWithImpl<$Res>;
   @override
   @useResult
@@ -74,9 +79,12 @@ abstract class _$$AppStateImplCopyWith<$Res> implements $AppStateCopyWith<$Res> 
 }
 
 /// @nodoc
-class __$$AppStateImplCopyWithImpl<$Res> extends _$AppStateCopyWithImpl<$Res, _$AppStateImpl>
+class __$$AppStateImplCopyWithImpl<$Res>
+    extends _$AppStateCopyWithImpl<$Res, _$AppStateImpl>
     implements _$$AppStateImplCopyWith<$Res> {
-  __$$AppStateImplCopyWithImpl(_$AppStateImpl _value, $Res Function(_$AppStateImpl) _then) : super(_value, _then);
+  __$$AppStateImplCopyWithImpl(
+      _$AppStateImpl _value, $Res Function(_$AppStateImpl) _then)
+      : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
@@ -124,13 +132,16 @@ class _$AppStateImpl implements _AppState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AppStateImpl &&
-            (identical(other.selectedIndex, selectedIndex) || other.selectedIndex == selectedIndex) &&
+            (identical(other.selectedIndex, selectedIndex) ||
+                other.selectedIndex == selectedIndex) &&
             (identical(other.server, server) || other.server == server) &&
-            (identical(other.homeLayout, homeLayout) || other.homeLayout == homeLayout));
+            (identical(other.homeLayout, homeLayout) ||
+                other.homeLayout == homeLayout));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, selectedIndex, server, homeLayout);
+  int get hashCode =>
+      Object.hash(runtimeType, selectedIndex, server, homeLayout);
 
   @JsonKey(ignore: true)
   @override
@@ -140,7 +151,8 @@ class _$AppStateImpl implements _AppState {
 }
 
 abstract class _AppState implements AppState {
-  factory _AppState(final int selectedIndex, final Server? server, final HomeLayout homeLayout) = _$AppStateImpl;
+  factory _AppState(final int selectedIndex, final Server? server,
+      final HomeLayout homeLayout) = _$AppStateImpl;
 
   @override
   int get selectedIndex;
@@ -150,5 +162,6 @@ abstract class _AppState implements AppState {
   HomeLayout get homeLayout;
   @override
   @JsonKey(ignore: true)
-  _$$AppStateImplCopyWith<_$AppStateImpl> get copyWith => throw _privateConstructorUsedError;
+  _$$AppStateImplCopyWith<_$AppStateImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }

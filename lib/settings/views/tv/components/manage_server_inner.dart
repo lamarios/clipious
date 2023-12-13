@@ -19,7 +19,9 @@ class TvManageServersInner extends StatelessWidget {
 
   openServer(BuildContext context, Server s) {
     var cubit = context.read<ServerListSettingsCubit>();
-    AutoRouter.of(context).push(TvManageSingleServerRoute(server: s)).then((value) => cubit.refreshServers());
+    AutoRouter.of(context)
+        .push(TvManageSingleServerRoute(server: s))
+        .then((value) => cubit.refreshServers());
   }
 
   addServerDialog(BuildContext context, ServerListSettingsState controller) {
@@ -53,8 +55,10 @@ class TvManageServersInner extends StatelessWidget {
                   showTvAlertdialog(
                       context,
                       switch (err.runtimeType) {
-                        (MissingSoftwareKeyError _) => locals.malformedStatsEndpoint,
-                        (UnreachableServerError _) => locals.serverIsNotReachable,
+                        (MissingSoftwareKeyError _) =>
+                          locals.malformedStatsEndpoint,
+                        (UnreachableServerError _) =>
+                          locals.serverIsNotReachable,
                         (_) => locals.error
                       },
                       [
@@ -112,17 +116,22 @@ class TvManageServersInner extends StatelessWidget {
   Widget build(BuildContext context) {
     ColorScheme colorScheme = Theme.of(context).colorScheme;
     AppLocalizations locals = AppLocalizations.of(context)!;
-    return BlocBuilder<ServerListSettingsCubit, ServerListSettingsState>(builder: (context, _) {
+    return BlocBuilder<ServerListSettingsCubit, ServerListSettingsState>(
+        builder: (context, _) {
       var cubit = context.read<ServerListSettingsCubit>();
       var settings = context.watch<SettingsCubit>();
-      var filteredPublicServers =
-          _.publicServers.where((s) => _.dbServers.indexWhere((element) => element.url == s.url) == -1).toList();
+      var filteredPublicServers = _.publicServers
+          .where((s) =>
+              _.dbServers.indexWhere((element) => element.url == s.url) == -1)
+          .toList();
       return ListView(children: [
         SettingsTile(
           title: locals.skipSslVerification,
           description: locals.skipSslVerification,
-          onSelected: (context) => settings.toggleSslVerification(!settings.state.skipSslVerification),
-          trailing: Switch(onChanged: (value) {}, value: settings.state.skipSslVerification),
+          onSelected: (context) => settings
+              .toggleSslVerification(!settings.state.skipSslVerification),
+          trailing: Switch(
+              onChanged: (value) {}, value: settings.state.skipSslVerification),
         ),
         SettingsTitle(title: locals.yourServers),
         ..._.dbServers.map((s) => SettingsTile(
@@ -132,12 +141,15 @@ class TvManageServersInner extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: Icon(
                     Icons.done,
-                    color: s.inUse ? colorScheme.primary : colorScheme.secondaryContainer,
+                    color: s.inUse
+                        ? colorScheme.primary
+                        : colorScheme.secondaryContainer,
                   ),
                 ),
               ),
               title: s.url,
-              description: '${cubit.isLoggedInToServer(s.url) ? '${locals.loggedIn}, ' : ''} ${locals.tapToManage}',
+              description:
+                  '${cubit.isLoggedInToServer(s.url) ? '${locals.loggedIn}, ' : ''} ${locals.tapToManage}',
               onSelected: (context) => openServer(context, s),
             )),
         SettingsTile(
@@ -168,7 +180,9 @@ class TvManageServersInner extends StatelessWidget {
                           width: 15,
                           child: CircularProgressIndicator(
                             strokeWidth: 2,
-                            value: _.publicServerProgress > 0 ? _.publicServerProgress : null,
+                            value: _.publicServerProgress > 0
+                                ? _.publicServerProgress
+                                : null,
                           )),
                     )
                   ]

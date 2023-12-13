@@ -46,7 +46,10 @@ class TvManageSingleServerScreen extends StatelessWidget {
                         textInputAction: TextInputAction.next,
                         controller: userController,
                         autocorrect: false,
-                        autofillHints: const [AutofillHints.username, AutofillHints.email],
+                        autofillHints: const [
+                          AutofillHints.username,
+                          AutofillHints.email
+                        ],
                         decoration: InputDecoration(
                             label: Text(
                           locals.username,
@@ -81,14 +84,16 @@ class TvManageSingleServerScreen extends StatelessWidget {
               Navigator.of(context).pop();
             },
             child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
+              padding:
+                  const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
               child: Text(locals.cancel),
             ),
           ),
           TvButton(
             onPressed: (context) async {
               try {
-                await cubit.logInWithCookie(userController.text, passwordController.text);
+                await cubit.logInWithCookie(
+                    userController.text, passwordController.text);
                 if (context.mounted) {
                   Navigator.of(context).pop();
                 }
@@ -105,7 +110,8 @@ class TvManageSingleServerScreen extends StatelessWidget {
               }
             },
             child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
+              padding:
+                  const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
               child: Text(locals.ok),
             ),
           ),
@@ -184,12 +190,15 @@ class TvManageSingleServerScreen extends StatelessWidget {
     return Scaffold(
       body: TvOverscan(
         child: BlocProvider(
-          create: (BuildContext context) => ServerSettingsCubit(server, context.read<AppCubit>()),
-          child: BlocBuilder<ServerSettingsCubit, Server>(builder: (context, server) {
+          create: (BuildContext context) =>
+              ServerSettingsCubit(server, context.read<AppCubit>()),
+          child: BlocBuilder<ServerSettingsCubit, Server>(
+              builder: (context, server) {
             var cubit = context.read<ServerSettingsCubit>();
             AppLocalizations locals = AppLocalizations.of(context)!;
-            bool isLoggedIn = (server.authToken != null && server.authToken!.isNotEmpty) ||
-                (server.sidCookie != null && server.sidCookie!.isNotEmpty);
+            bool isLoggedIn =
+                (server.authToken != null && server.authToken!.isNotEmpty) ||
+                    (server.sidCookie != null && server.sidCookie!.isNotEmpty);
 
             return ListView(
               children: [
@@ -199,7 +208,9 @@ class TvManageSingleServerScreen extends StatelessWidget {
                   title: locals.useThisServer,
                   onSelected: (context) => cubit.useServer(true),
                   autofocus: true,
-                  trailing: Switch(onChanged: server.inUse ? null : (value) {}, value: server.inUse),
+                  trailing: Switch(
+                      onChanged: server.inUse ? null : (value) {},
+                      value: server.inUse),
                 ),
                 SettingsTitle(title: locals.authentication),
                 SettingsTile(

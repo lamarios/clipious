@@ -52,7 +52,9 @@ class DownloadManagerCubit extends Cubit<DownloadManagerState> {
     var vids = db.getAllDownloads();
     // checking if we have any video that are not fail, not completed and not currently downloading
     for (var v in vids) {
-      if (!v.downloadComplete && !v.downloadFailed && !state.downloadProgresses.containsKey(v.videoId)) {
+      if (!v.downloadComplete &&
+          !v.downloadFailed &&
+          !state.downloadProgresses.containsKey(v.videoId)) {
         // this download was interrupted by app restart or crash or something else, we set it as errored
         v.downloadFailed = true;
         db.upsertDownload(v);
@@ -64,13 +66,15 @@ class DownloadManagerCubit extends Cubit<DownloadManagerState> {
 
   void playAll() {
     setVideos();
-    player.playOfflineVideos(
-        state.videos.where((element) => element.downloadComplete && !element.downloadFailed).toList());
+    player.playOfflineVideos(state.videos
+        .where((element) => element.downloadComplete && !element.downloadFailed)
+        .toList());
   }
 
   onProgress(int count, int total, DownloadedVideo video) {
     if (count == total) {
-      var progresses = Map<String, DownloadProgress>.from(state.downloadProgresses);
+      var progresses =
+          Map<String, DownloadProgress>.from(state.downloadProgresses);
       var downloadProgress = progresses[video.videoId];
       progresses.remove(video.videoId);
       video.downloadComplete = true;
@@ -81,9 +85,12 @@ class DownloadManagerCubit extends Cubit<DownloadManagerState> {
         f(count / total);
       }
     } else {
-      EasyThrottle.throttle('download-${video.id}', const Duration(milliseconds: 500), () {
-        log.fine('Download of video ${video.id}, $count / $total =  ${count / total}, Total: ${state.totalProgress}');
-        var progresses = Map<String, DownloadProgress>.from(state.downloadProgresses);
+      EasyThrottle.throttle(
+          'download-${video.id}', const Duration(milliseconds: 500), () {
+        log.fine(
+            'Download of video ${video.id}, $count / $total =  ${count / total}, Total: ${state.totalProgress}');
+        var progresses =
+            Map<String, DownloadProgress>.from(state.downloadProgresses);
         var downloadProgress = progresses[video.videoId];
         downloadProgress?.count = count;
         downloadProgress?.total = total;
@@ -96,7 +103,8 @@ class DownloadManagerCubit extends Cubit<DownloadManagerState> {
     }
   }
 
-  Future<bool> addDownload(String videoId, {String quality = '720p', bool audioOnly = false}) async {
+  Future<bool> addDownload(String videoId,
+      {String quality = '720p', bool audioOnly = false}) async {
     if (state.videos.any((element) => element.videoId == videoId)) {
       return false;
     } else {
@@ -114,7 +122,8 @@ class DownloadManagerCubit extends Cubit<DownloadManagerState> {
       String contentUrl;
 
       if (!audioOnly) {
-        FormatStream stream = vid.formatStreams.firstWhere((element) => element.resolution == quality);
+        FormatStream stream = vid.formatStreams
+            .firstWhere((element) => element.resolution == quality);
         contentUrl = stream.url;
       } else {
         AdaptiveFormat audio = vid.adaptiveFormats
@@ -126,7 +135,8 @@ class DownloadManagerCubit extends Cubit<DownloadManagerState> {
       Dio dio = Dio();
       CancelToken cancelToken = CancelToken();
 
-      var progresses = Map<String, DownloadProgress>.from(state.downloadProgresses);
+      var progresses =
+          Map<String, DownloadProgress>.from(state.downloadProgresses);
       progresses[downloadedVideo.videoId] = DownloadProgress(cancelToken);
       emit(state.copyWith(downloadProgresses: progresses));
 
@@ -148,7 +158,8 @@ class DownloadManagerCubit extends Cubit<DownloadManagerState> {
           "Downloading video ${vid.title}, audioOnly ? $audioOnly, quality: $quality (if not only audio) to path: $videoPath");
       dio
           .download(contentUrl, videoPath,
-              onReceiveProgress: (count, total) => onProgress(count, total, downloadedVideo),
+              onReceiveProgress: (count, total) =>
+                  onProgress(count, total, downloadedVideo),
               cancelToken: cancelToken,
               deleteOnError: true)
           .catchError((err) {
@@ -161,9 +172,11 @@ class DownloadManagerCubit extends Cubit<DownloadManagerState> {
   }
 
   Future<void> deleteVideo(DownloadedVideo vid) async {
-    var progresses = Map<String, DownloadProgress>.from(state.downloadProgresses);
+    var progresses =
+        Map<String, DownloadProgress>.from(state.downloadProgresses);
     var downloadProgress = progresses[vid.videoId];
-    log.fine('cancelling download for video ${vid.videoId}, present ? : ${downloadProgress != null}');
+    log.fine(
+        'cancelling download for video ${vid.videoId}, present ? : ${downloadProgress != null}');
     downloadProgress?.cancelToken.cancel();
 
     progresses.remove(vid.videoId);
@@ -193,11 +206,13 @@ class DownloadManagerCubit extends Cubit<DownloadManagerState> {
       log.fine("video cancelled, nothing to do");
       return;
     }
-    log.severe("Failed to download video ${vid.title}, removing it", err.stackTrace);
+    log.severe(
+        "Failed to download video ${vid.title}, removing it", err.stackTrace);
     vid.downloadFailed = true;
     vid.downloadComplete = false;
     onProgress(1, 1, vid);
-    var progresses = Map<String, DownloadProgress>.from(state.downloadProgresses);
+    var progresses =
+        Map<String, DownloadProgress>.from(state.downloadProgresses);
     progresses.remove(vid.videoId);
     db.upsertDownload(vid);
     setVideos();
@@ -207,30 +222,37 @@ class DownloadManagerCubit extends Cubit<DownloadManagerState> {
 
   Future<void> retryDownload(DownloadedVideo vid) async {
     await deleteVideo(vid);
-    await addDownload(vid.videoId, quality: vid.quality, audioOnly: vid.audioOnly);
+    await addDownload(vid.videoId,
+        quality: vid.quality, audioOnly: vid.audioOnly);
   }
 
-  void addListener(String? videoId, void Function(double progress) setProgress) {
-    var progresses = Map<String, DownloadProgress>.from(state.downloadProgresses);
+  void addListener(
+      String? videoId, void Function(double progress) setProgress) {
+    var progresses =
+        Map<String, DownloadProgress>.from(state.downloadProgresses);
     progresses[videoId]?.addListener(setProgress);
     emit(state.copyWith(downloadProgresses: progresses));
   }
 
-  void removeListener(String? videoId, void Function(double progress) setProgress) {
-    var progresses = Map<String, DownloadProgress>.from(state.downloadProgresses);
+  void removeListener(
+      String? videoId, void Function(double progress) setProgress) {
+    var progresses =
+        Map<String, DownloadProgress>.from(state.downloadProgresses);
 
     progresses[videoId]?.removeListener(setProgress);
     emit(state.copyWith(downloadProgresses: progresses));
   }
 
-  bool canPlayAll() => state.videos.where((element) => element.downloadComplete).isNotEmpty;
+  bool canPlayAll() =>
+      state.videos.where((element) => element.downloadComplete).isNotEmpty;
 }
 
 @freezed
 class DownloadManagerState with _$DownloadManagerState {
   const factory DownloadManagerState(
-      {@Default([]) List<DownloadedVideo> videos,
-      @Default({}) Map<String, DownloadProgress> downloadProgresses}) = _DownloadManagerState;
+          {@Default([]) List<DownloadedVideo> videos,
+          @Default({}) Map<String, DownloadProgress> downloadProgresses}) =
+      _DownloadManagerState;
 
   const DownloadManagerState._();
 

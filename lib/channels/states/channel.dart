@@ -16,7 +16,8 @@ class ChannelCubit extends Cubit<ChannelController> {
     bool isSubscribed = await service.isSubscribedToChannel(state.channelId);
     Channel channel = await service.getChannel(state.channelId);
 
-    emit(state.copyWith(channel: channel, loading: false, isSubscribed: isSubscribed));
+    emit(state.copyWith(
+        channel: channel, loading: false, isSubscribed: isSubscribed));
   }
 
 /*
@@ -39,7 +40,8 @@ class ChannelCubit extends Cubit<ChannelController> {
       } else {
         await service.subscribe(state.channel!.authorId);
       }
-      bool isSubscribed = await service.isSubscribedToChannel(state.channel!.authorId);
+      bool isSubscribed =
+          await service.isSubscribedToChannel(state.channel!.authorId);
 
       emit(state.copyWith(isSubscribed: isSubscribed));
     }

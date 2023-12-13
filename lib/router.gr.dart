@@ -119,7 +119,8 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     SearchRoute.name: (routeData) {
-      final args = routeData.argsAs<SearchRouteArgs>(orElse: () => const SearchRouteArgs());
+      final args = routeData.argsAs<SearchRouteArgs>(
+          orElse: () => const SearchRouteArgs());
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: SearchScreen(
@@ -176,7 +177,8 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     TvFilterEditSettingsRoute.name: (routeData) {
-      final args = routeData.argsAs<TvFilterEditSettingsRouteArgs>(orElse: () => const TvFilterEditSettingsRouteArgs());
+      final args = routeData.argsAs<TvFilterEditSettingsRouteArgs>(
+          orElse: () => const TvFilterEditSettingsRouteArgs());
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: TvFilterEditSettingsScreen(
@@ -352,7 +354,8 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     VideoFilterSetupRoute.name: (routeData) {
-      final args = routeData.argsAs<VideoFilterSetupRouteArgs>(orElse: () => const VideoFilterSetupRouteArgs());
+      final args = routeData.argsAs<VideoFilterSetupRouteArgs>(
+          orElse: () => const VideoFilterSetupRouteArgs());
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: VideoFilterSetupScreen(
@@ -448,7 +451,8 @@ class ChannelRoute extends PageRouteInfo<ChannelRouteArgs> {
 
   static const String name = 'ChannelRoute';
 
-  static const PageInfo<ChannelRouteArgs> page = PageInfo<ChannelRouteArgs>(name);
+  static const PageInfo<ChannelRouteArgs> page =
+      PageInfo<ChannelRouteArgs>(name);
 }
 
 class ChannelRouteArgs {
@@ -553,7 +557,8 @@ class ManageServersRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [ManageSingleServerScreen]
-class ManageSingleServerRoute extends PageRouteInfo<ManageSingleServerRouteArgs> {
+class ManageSingleServerRoute
+    extends PageRouteInfo<ManageSingleServerRouteArgs> {
   ManageSingleServerRoute({
     Key? key,
     required Server server,
@@ -569,7 +574,8 @@ class ManageSingleServerRoute extends PageRouteInfo<ManageSingleServerRouteArgs>
 
   static const String name = 'ManageSingleServerRoute';
 
-  static const PageInfo<ManageSingleServerRouteArgs> page = PageInfo<ManageSingleServerRouteArgs>(name);
+  static const PageInfo<ManageSingleServerRouteArgs> page =
+      PageInfo<ManageSingleServerRouteArgs>(name);
 }
 
 class ManageSingleServerRouteArgs {
@@ -636,7 +642,8 @@ class PlaylistViewRoute extends PageRouteInfo<PlaylistViewRouteArgs> {
 
   static const String name = 'PlaylistViewRoute';
 
-  static const PageInfo<PlaylistViewRouteArgs> page = PageInfo<PlaylistViewRouteArgs>(name);
+  static const PageInfo<PlaylistViewRouteArgs> page =
+      PageInfo<PlaylistViewRouteArgs>(name);
 }
 
 class PlaylistViewRouteArgs {
@@ -802,7 +809,8 @@ class TvChannelRoute extends PageRouteInfo<TvChannelRouteArgs> {
 
   static const String name = 'TvChannelRoute';
 
-  static const PageInfo<TvChannelRouteArgs> page = PageInfo<TvChannelRouteArgs>(name);
+  static const PageInfo<TvChannelRouteArgs> page =
+      PageInfo<TvChannelRouteArgs>(name);
 }
 
 class TvChannelRouteArgs {
@@ -837,7 +845,8 @@ class TvDearrowSettingsRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [TvFilterEditSettingsScreen]
-class TvFilterEditSettingsRoute extends PageRouteInfo<TvFilterEditSettingsRouteArgs> {
+class TvFilterEditSettingsRoute
+    extends PageRouteInfo<TvFilterEditSettingsRouteArgs> {
   TvFilterEditSettingsRoute({
     Key? key,
     String? channelId,
@@ -855,7 +864,8 @@ class TvFilterEditSettingsRoute extends PageRouteInfo<TvFilterEditSettingsRouteA
 
   static const String name = 'TvFilterEditSettingsRoute';
 
-  static const PageInfo<TvFilterEditSettingsRouteArgs> page = PageInfo<TvFilterEditSettingsRouteArgs>(name);
+  static const PageInfo<TvFilterEditSettingsRouteArgs> page =
+      PageInfo<TvFilterEditSettingsRouteArgs>(name);
 }
 
 class TvFilterEditSettingsRouteArgs {
@@ -954,7 +964,8 @@ class TvHomeRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [TvManageSingleServerScreen]
-class TvManageSingleServerRoute extends PageRouteInfo<TvManageSingleServerRouteArgs> {
+class TvManageSingleServerRoute
+    extends PageRouteInfo<TvManageSingleServerRouteArgs> {
   TvManageSingleServerRoute({
     Key? key,
     required Server server,
@@ -970,7 +981,8 @@ class TvManageSingleServerRoute extends PageRouteInfo<TvManageSingleServerRouteA
 
   static const String name = 'TvManageSingleServerRoute';
 
-  static const PageInfo<TvManageSingleServerRouteArgs> page = PageInfo<TvManageSingleServerRouteArgs>(name);
+  static const PageInfo<TvManageSingleServerRouteArgs> page =
+      PageInfo<TvManageSingleServerRouteArgs>(name);
 }
 
 class TvManageSingleServerRouteArgs {
@@ -1007,7 +1019,8 @@ class TvPlainTextRoute extends PageRouteInfo<TvPlainTextRouteArgs> {
 
   static const String name = 'TvPlainTextRoute';
 
-  static const PageInfo<TvPlainTextRouteArgs> page = PageInfo<TvPlainTextRouteArgs>(name);
+  static const PageInfo<TvPlainTextRouteArgs> page =
+      PageInfo<TvPlainTextRouteArgs>(name);
 }
 
 class TvPlainTextRouteArgs {
@@ -1044,7 +1057,8 @@ class TvPlayerRoute extends PageRouteInfo<TvPlayerRouteArgs> {
 
   static const String name = 'TvPlayerRoute';
 
-  static const PageInfo<TvPlayerRouteArgs> page = PageInfo<TvPlayerRouteArgs>(name);
+  static const PageInfo<TvPlayerRouteArgs> page =
+      PageInfo<TvPlayerRouteArgs>(name);
 }
 
 class TvPlayerRouteArgs {
@@ -1083,7 +1097,8 @@ class TvPlaylistGridRoute extends PageRouteInfo<TvPlaylistGridRouteArgs> {
 
   static const String name = 'TvPlaylistGridRoute';
 
-  static const PageInfo<TvPlaylistGridRouteArgs> page = PageInfo<TvPlaylistGridRouteArgs>(name);
+  static const PageInfo<TvPlaylistGridRouteArgs> page =
+      PageInfo<TvPlaylistGridRouteArgs>(name);
 }
 
 class TvPlaylistGridRouteArgs {
@@ -1125,7 +1140,8 @@ class TvPlaylistRoute extends PageRouteInfo<TvPlaylistRouteArgs> {
 
   static const String name = 'TvPlaylistRoute';
 
-  static const PageInfo<TvPlaylistRouteArgs> page = PageInfo<TvPlaylistRouteArgs>(name);
+  static const PageInfo<TvPlaylistRouteArgs> page =
+      PageInfo<TvPlaylistRouteArgs>(name);
 }
 
 class TvPlaylistRouteArgs {
@@ -1199,7 +1215,8 @@ class TvSelectFromListRoute extends PageRouteInfo<TvSelectFromListRouteArgs> {
 
   static const String name = 'TvSelectFromListRoute';
 
-  static const PageInfo<TvSelectFromListRouteArgs> page = PageInfo<TvSelectFromListRouteArgs>(name);
+  static const PageInfo<TvSelectFromListRouteArgs> page =
+      PageInfo<TvSelectFromListRouteArgs>(name);
 }
 
 class TvSelectFromListRouteArgs {
@@ -1291,7 +1308,8 @@ class TvTextFieldRoute extends PageRouteInfo<TvTextFieldRouteArgs> {
 
   static const String name = 'TvTextFieldRoute';
 
-  static const PageInfo<TvTextFieldRouteArgs> page = PageInfo<TvTextFieldRouteArgs>(name);
+  static const PageInfo<TvTextFieldRouteArgs> page =
+      PageInfo<TvTextFieldRouteArgs>(name);
 }
 
 class TvTextFieldRouteArgs {
@@ -1357,7 +1375,8 @@ class TvTimePickerRoute extends PageRouteInfo<TvTimePickerRouteArgs> {
 
   static const String name = 'TvTimePickerRoute';
 
-  static const PageInfo<TvTimePickerRouteArgs> page = PageInfo<TvTimePickerRouteArgs>(name);
+  static const PageInfo<TvTimePickerRouteArgs> page =
+      PageInfo<TvTimePickerRouteArgs>(name);
 }
 
 class TvTimePickerRouteArgs {
@@ -1397,7 +1416,8 @@ class TvVideoRoute extends PageRouteInfo<TvVideoRouteArgs> {
 
   static const String name = 'TvVideoRoute';
 
-  static const PageInfo<TvVideoRouteArgs> page = PageInfo<TvVideoRouteArgs>(name);
+  static const PageInfo<TvVideoRouteArgs> page =
+      PageInfo<TvVideoRouteArgs>(name);
 }
 
 class TvVideoRouteArgs {
@@ -1464,7 +1484,8 @@ class VideoFilterSetupRoute extends PageRouteInfo<VideoFilterSetupRouteArgs> {
 
   static const String name = 'VideoFilterSetupRoute';
 
-  static const PageInfo<VideoFilterSetupRouteArgs> page = PageInfo<VideoFilterSetupRouteArgs>(name);
+  static const PageInfo<VideoFilterSetupRouteArgs> page =
+      PageInfo<VideoFilterSetupRouteArgs>(name);
 }
 
 class VideoFilterSetupRouteArgs {

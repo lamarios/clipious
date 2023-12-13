@@ -29,7 +29,8 @@ class TvChannelCubit extends Cubit<TvChannelController> {
 
   scrollToTop(bool scroll) {
     if (scroll) {
-      scrollController.animateTo(0, duration: animationDuration ~/ 2, curve: Curves.easeInOutQuad);
+      scrollController.animateTo(0,
+          duration: animationDuration ~/ 2, curve: Curves.easeInOutQuad);
     }
   }
 

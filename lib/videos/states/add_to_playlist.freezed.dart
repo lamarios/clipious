@@ -24,20 +24,28 @@ mixin _$AddToPlaylistController {
   bool get isLoggedIn => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $AddToPlaylistControllerCopyWith<AddToPlaylistController> get copyWith => throw _privateConstructorUsedError;
+  $AddToPlaylistControllerCopyWith<AddToPlaylistController> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $AddToPlaylistControllerCopyWith<$Res> {
-  factory $AddToPlaylistControllerCopyWith(AddToPlaylistController value, $Res Function(AddToPlaylistController) then) =
+  factory $AddToPlaylistControllerCopyWith(AddToPlaylistController value,
+          $Res Function(AddToPlaylistController) then) =
       _$AddToPlaylistControllerCopyWithImpl<$Res, AddToPlaylistController>;
   @useResult
   $Res call(
-      {String videoId, List<Playlist> playlists, int playListCount, bool isVideoLiked, bool loading, bool isLoggedIn});
+      {String videoId,
+      List<Playlist> playlists,
+      int playListCount,
+      bool isVideoLiked,
+      bool loading,
+      bool isLoggedIn});
 }
 
 /// @nodoc
-class _$AddToPlaylistControllerCopyWithImpl<$Res, $Val extends AddToPlaylistController>
+class _$AddToPlaylistControllerCopyWithImpl<$Res,
+        $Val extends AddToPlaylistController>
     implements $AddToPlaylistControllerCopyWith<$Res> {
   _$AddToPlaylistControllerCopyWithImpl(this._value, this._then);
 
@@ -86,22 +94,31 @@ class _$AddToPlaylistControllerCopyWithImpl<$Res, $Val extends AddToPlaylistCont
 }
 
 /// @nodoc
-abstract class _$$AddToPlaylistControllerImplCopyWith<$Res> implements $AddToPlaylistControllerCopyWith<$Res> {
+abstract class _$$AddToPlaylistControllerImplCopyWith<$Res>
+    implements $AddToPlaylistControllerCopyWith<$Res> {
   factory _$$AddToPlaylistControllerImplCopyWith(
-          _$AddToPlaylistControllerImpl value, $Res Function(_$AddToPlaylistControllerImpl) then) =
+          _$AddToPlaylistControllerImpl value,
+          $Res Function(_$AddToPlaylistControllerImpl) then) =
       __$$AddToPlaylistControllerImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
-      {String videoId, List<Playlist> playlists, int playListCount, bool isVideoLiked, bool loading, bool isLoggedIn});
+      {String videoId,
+      List<Playlist> playlists,
+      int playListCount,
+      bool isVideoLiked,
+      bool loading,
+      bool isLoggedIn});
 }
 
 /// @nodoc
 class __$$AddToPlaylistControllerImplCopyWithImpl<$Res>
-    extends _$AddToPlaylistControllerCopyWithImpl<$Res, _$AddToPlaylistControllerImpl>
+    extends _$AddToPlaylistControllerCopyWithImpl<$Res,
+        _$AddToPlaylistControllerImpl>
     implements _$$AddToPlaylistControllerImplCopyWith<$Res> {
   __$$AddToPlaylistControllerImplCopyWithImpl(
-      _$AddToPlaylistControllerImpl _value, $Res Function(_$AddToPlaylistControllerImpl) _then)
+      _$AddToPlaylistControllerImpl _value,
+      $Res Function(_$AddToPlaylistControllerImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -188,22 +205,33 @@ class _$AddToPlaylistControllerImpl implements _AddToPlaylistController {
         (other.runtimeType == runtimeType &&
             other is _$AddToPlaylistControllerImpl &&
             (identical(other.videoId, videoId) || other.videoId == videoId) &&
-            const DeepCollectionEquality().equals(other._playlists, _playlists) &&
-            (identical(other.playListCount, playListCount) || other.playListCount == playListCount) &&
-            (identical(other.isVideoLiked, isVideoLiked) || other.isVideoLiked == isVideoLiked) &&
+            const DeepCollectionEquality()
+                .equals(other._playlists, _playlists) &&
+            (identical(other.playListCount, playListCount) ||
+                other.playListCount == playListCount) &&
+            (identical(other.isVideoLiked, isVideoLiked) ||
+                other.isVideoLiked == isVideoLiked) &&
             (identical(other.loading, loading) || other.loading == loading) &&
-            (identical(other.isLoggedIn, isLoggedIn) || other.isLoggedIn == isLoggedIn));
+            (identical(other.isLoggedIn, isLoggedIn) ||
+                other.isLoggedIn == isLoggedIn));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, videoId, const DeepCollectionEquality().hash(_playlists), playListCount,
-      isVideoLiked, loading, isLoggedIn);
+  int get hashCode => Object.hash(
+      runtimeType,
+      videoId,
+      const DeepCollectionEquality().hash(_playlists),
+      playListCount,
+      isVideoLiked,
+      loading,
+      isLoggedIn);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$AddToPlaylistControllerImplCopyWith<_$AddToPlaylistControllerImpl> get copyWith =>
-      __$$AddToPlaylistControllerImplCopyWithImpl<_$AddToPlaylistControllerImpl>(this, _$identity);
+  _$$AddToPlaylistControllerImplCopyWith<_$AddToPlaylistControllerImpl>
+      get copyWith => __$$AddToPlaylistControllerImplCopyWithImpl<
+          _$AddToPlaylistControllerImpl>(this, _$identity);
 }
 
 abstract class _AddToPlaylistController implements AddToPlaylistController {
@@ -228,6 +256,6 @@ abstract class _AddToPlaylistController implements AddToPlaylistController {
   bool get isLoggedIn;
   @override
   @JsonKey(ignore: true)
-  _$$AddToPlaylistControllerImplCopyWith<_$AddToPlaylistControllerImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$AddToPlaylistControllerImplCopyWith<_$AddToPlaylistControllerImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

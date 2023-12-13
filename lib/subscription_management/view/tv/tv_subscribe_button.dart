@@ -11,7 +11,11 @@ class TvSubscribeButton extends StatelessWidget {
   final Function(bool focus)? onFocusChanged;
 
   const TvSubscribeButton(
-      {super.key, required this.channelId, required this.subCount, this.autoFocus, this.onFocusChanged});
+      {super.key,
+      required this.channelId,
+      required this.subCount,
+      this.autoFocus,
+      this.onFocusChanged});
 
   @override
   Widget build(BuildContext context) {
@@ -19,8 +23,10 @@ class TvSubscribeButton extends StatelessWidget {
     ColorScheme colors = Theme.of(context).colorScheme;
 
     return BlocProvider(
-      create: (context) => SubscribeButtonCubit(SubscribeButtonState.init(channelId)),
-      child: BlocBuilder<SubscribeButtonCubit, SubscribeButtonState>(builder: (context, _) {
+      create: (context) =>
+          SubscribeButtonCubit(SubscribeButtonState.init(channelId)),
+      child: BlocBuilder<SubscribeButtonCubit, SubscribeButtonState>(
+          builder: (context, _) {
         var cubit = context.read<SubscribeButtonCubit>();
         return Padding(
           padding: const EdgeInsets.symmetric(vertical: 16.0),
@@ -28,9 +34,11 @@ class TvSubscribeButton extends StatelessWidget {
             autofocus: autoFocus,
             onFocusChanged: onFocusChanged,
             unfocusedColor: colors.background.withOpacity(0.0),
-            onPressed: (context) => _.isLoggedIn ? cubit.toggleSubscription() : null,
+            onPressed: (context) =>
+                _.isLoggedIn ? cubit.toggleSubscription() : null,
             child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
+              padding:
+                  const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: !_.loading && _.isLoggedIn
@@ -47,7 +55,8 @@ class TvSubscribeButton extends StatelessWidget {
                         const Icon(Icons.people),
                         Padding(
                           padding: const EdgeInsets.only(left: 8.0),
-                          child: Text(locals.nSubscribers(subCount.replaceAll(RegExp(r'^0.00$'), "no"))),
+                          child: Text(locals.nSubscribers(
+                              subCount.replaceAll(RegExp(r'^0.00$'), "no"))),
                         ),
                       ],
               ),

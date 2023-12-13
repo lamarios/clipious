@@ -1,13 +1,16 @@
 import 'package:flutter_linkify/flutter_linkify.dart';
 
-final _timeStampRegex =
-    RegExp(r'^(.*?)(((([01])?[0-9]|2[0-3]):)?(([0-5])?[0-9](:[0-5][0-9])))', caseSensitive: false, dotAll: true);
+final _timeStampRegex = RegExp(
+    r'^(.*?)(((([01])?[0-9]|2[0-3]):)?(([0-5])?[0-9](:[0-5][0-9])))',
+    caseSensitive: false,
+    dotAll: true);
 
 class TimestampLinkifier extends Linkifier {
   const TimestampLinkifier();
 
   @override
-  List<LinkifyElement> parse(List<LinkifyElement> elements, LinkifyOptions options) {
+  List<LinkifyElement> parse(
+      List<LinkifyElement> elements, LinkifyOptions options) {
     final list = <LinkifyElement>[];
 
     for (var element in elements) {
@@ -30,7 +33,8 @@ class TimestampLinkifier extends Linkifier {
             var originText = originalUrl;
             String? end;
 
-            if ((options.excludeLastPeriod) && originalUrl[originalUrl.length - 1] == ".") {
+            if ((options.excludeLastPeriod) &&
+                originalUrl[originalUrl.length - 1] == ".") {
               end = ".";
               originText = originText.substring(0, originText.length - 1);
               originalUrl = originalUrl.substring(0, originalUrl.length - 1);
@@ -74,5 +78,8 @@ class TimestampElement extends LinkableElement {
   int get hashCode => Object.hash(text, originText, url, timestamp);
 
   @override
-  bool equals(other) => other is TimestampElement && super.equals(other) && other.timestamp == timestamp;
+  bool equals(other) =>
+      other is TimestampElement &&
+      super.equals(other) &&
+      other.timestamp == timestamp;
 }

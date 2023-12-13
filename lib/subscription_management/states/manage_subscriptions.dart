@@ -24,7 +24,8 @@ class ManageSubscriptionCubit extends Cubit<ManageSubscriptionsState> {
     bool isSubscribed = await service.isSubscribedToChannel(authorId);
 
     if (!success || isSubscribed) {
-      logger.fine('Issue setting subscription unsub request: $success  isSubscribed: $isSubscribed');
+      logger.fine(
+          'Issue setting subscription unsub request: $success  isSubscribed: $isSubscribed');
       return unsubscribe(authorId);
     }
 
@@ -33,13 +34,15 @@ class ManageSubscriptionCubit extends Cubit<ManageSubscriptionsState> {
 
   refreshSubs() async {
     emit(state.copyWith(loading: true));
-    var subs = (await service.getSubscriptions()).sortBy((e) => e.author).toList();
+    var subs =
+        (await service.getSubscriptions()).sortBy((e) => e.author).toList();
     emit(state.copyWith(subs: subs, loading: false));
   }
 }
 
 @freezed
 class ManageSubscriptionsState with _$ManageSubscriptionsState {
-  const factory ManageSubscriptionsState({@Default([]) List<Subscription> subs, @Default(true) bool loading}) =
-      _ManageSubscriptionsState;
+  const factory ManageSubscriptionsState(
+      {@Default([]) List<Subscription> subs,
+      @Default(true) bool loading}) = _ManageSubscriptionsState;
 }

@@ -35,11 +35,13 @@ class SearchScreen extends StatelessWidget {
     var locals = AppLocalizations.of(context)!;
     var settings = context.read<SettingsCubit>();
     return BlocProvider(
-      create: (context) => SearchCubit<SearchState>(SearchState.init(query: query, searchNow: searchNow), settings),
+      create: (context) => SearchCubit<SearchState>(
+          SearchState.init(query: query, searchNow: searchNow), settings),
       child: BlocBuilder<SearchCubit, SearchState>(
         builder: (context, _) {
           var cubit = context.read<SearchCubit>();
-          var navigationBarLabel = context.select((SettingsCubit s) => s.state.navigationBarLabelBehavior);
+          var navigationBarLabel = context
+              .select((SettingsCubit s) => s.state.navigationBarLabelBehavior);
           return Scaffold(
             bottomNavigationBar: _.showResults
                 ? NavigationBar(
@@ -49,9 +51,15 @@ class SearchScreen extends StatelessWidget {
                     selectedIndex: _.selectedIndex,
                     onDestinationSelected: cubit.selectIndex,
                     destinations: [
-                      NavigationDestination(icon: const Icon(Icons.play_arrow), label: locals.videos),
-                      NavigationDestination(icon: const Icon(Icons.people), label: locals.channels),
-                      NavigationDestination(icon: const Icon(Icons.playlist_play), label: locals.playlists),
+                      NavigationDestination(
+                          icon: const Icon(Icons.play_arrow),
+                          label: locals.videos),
+                      NavigationDestination(
+                          icon: const Icon(Icons.people),
+                          label: locals.channels),
+                      NavigationDestination(
+                          icon: const Icon(Icons.playlist_play),
+                          label: locals.playlists),
                     ],
                   )
                 : null,
@@ -85,7 +93,8 @@ class SearchScreen extends StatelessWidget {
             ),
             body: SafeArea(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: innerHorizontalPadding),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: innerHorizontalPadding),
                 child: !_.showResults
                     ? ListView(
                         children: _.queryController.value.text.isEmpty
@@ -97,7 +106,10 @@ class SearchScreen extends StatelessWidget {
                                         padding: const EdgeInsets.all(8.0),
                                         child: Row(children: [
                                           const Icon(Icons.history),
-                                          Padding(padding: const EdgeInsets.only(left: 8), child: Text(e))
+                                          Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 8),
+                                              child: Text(e))
                                         ]),
                                       ),
                                     ))
@@ -155,54 +167,82 @@ class SearchScreen extends StatelessWidget {
                                 child: [
                                   VideoList(
                                     key: UniqueKey(),
-                                    paginatedVideoList: PageBasedPaginatedList<VideoInList>(
-                                      getItemsFunc: (page, maxResults) => service
-                                          .search(_.queryController.value.text,
-                                              page: page, sortBy: _.sortBy, type: SearchType.video)
-                                          .then((value) => value.videos),
+                                    paginatedVideoList:
+                                        PageBasedPaginatedList<VideoInList>(
+                                      getItemsFunc: (page, maxResults) =>
+                                          service
+                                              .search(
+                                                  _.queryController.value.text,
+                                                  page: page,
+                                                  sortBy: _.sortBy,
+                                                  type: SearchType.video)
+                                              .then((value) => value.videos),
                                       maxResults: searchPageSize,
                                     ),
                                   ),
                                   PaginatedListView<Channel>(
-                                      paginatedList: PageBasedPaginatedList<Channel>(
-                                        getItemsFunc: (page, maxResults) => service
-                                            .search(_.queryController.value.text,
-                                                page: page, sortBy: _.sortBy, type: SearchType.channel)
-                                            .then((value) => value.channels),
+                                      paginatedList:
+                                          PageBasedPaginatedList<Channel>(
+                                        getItemsFunc: (page, maxResults) =>
+                                            service
+                                                .search(
+                                                    _.queryController.value
+                                                        .text,
+                                                    page: page,
+                                                    sortBy: _.sortBy,
+                                                    type: SearchType.channel)
+                                                .then(
+                                                    (value) => value.channels),
                                         maxResults: searchPageSize,
                                       ),
                                       itemBuilder: (e) => InkWell(
                                             onTap: () {
-                                              AutoRouter.of(context).push(ChannelRoute(channelId: e.authorId));
+                                              AutoRouter.of(context).push(
+                                                  ChannelRoute(
+                                                      channelId: e.authorId));
                                             },
                                             child: Padding(
-                                              padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 20),
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 8.0,
+                                                      vertical: 20),
                                               child: Row(
                                                 children: [
                                                   Expanded(
                                                       child: Text(
                                                     e.author,
-                                                    style: TextStyle(color: colorScheme.primary),
+                                                    style: TextStyle(
+                                                        color: colorScheme
+                                                            .primary),
                                                   )),
                                                   const Padding(
-                                                    padding: EdgeInsets.only(right: 8.0),
+                                                    padding: EdgeInsets.only(
+                                                        right: 8.0),
                                                     child: Icon(
                                                       Icons.people,
                                                       size: 15,
                                                     ),
                                                   ),
-                                                  Text(compactCurrency.format(e.subCount)),
+                                                  Text(compactCurrency
+                                                      .format(e.subCount)),
                                                 ],
                                               ),
                                             ),
                                           )),
                                   FractionallySizedBox(
                                     child: PlaylistList(
-                                        paginatedList: PageBasedPaginatedList<Playlist>(
-                                          getItemsFunc: (page, maxResults) => service
-                                              .search(_.queryController.value.text,
-                                                  page: page, sortBy: _.sortBy, type: SearchType.playlist)
-                                              .then((value) => value.playlists),
+                                        paginatedList:
+                                            PageBasedPaginatedList<Playlist>(
+                                          getItemsFunc: (page, maxResults) =>
+                                              service
+                                                  .search(
+                                                      _.queryController.value
+                                                          .text,
+                                                      page: page,
+                                                      sortBy: _.sortBy,
+                                                      type: SearchType.playlist)
+                                                  .then((value) =>
+                                                      value.playlists),
                                           maxResults: searchPageSize,
                                         ),
                                         canDeleteVideos: false),

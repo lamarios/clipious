@@ -66,7 +66,8 @@ class _$BaseVideoCWProxyImpl implements _$BaseVideoCWProxy {
   BaseVideo title(String title) => this(title: title);
 
   @override
-  BaseVideo lengthSeconds(int lengthSeconds) => this(lengthSeconds: lengthSeconds);
+  BaseVideo lengthSeconds(int lengthSeconds) =>
+      this(lengthSeconds: lengthSeconds);
 
   @override
   BaseVideo author(String? author) => this(author: author);
@@ -78,13 +79,15 @@ class _$BaseVideoCWProxyImpl implements _$BaseVideoCWProxy {
   BaseVideo authorUrl(String? authorUrl) => this(authorUrl: authorUrl);
 
   @override
-  BaseVideo videoThumbnails(List<ImageObject> videoThumbnails) => this(videoThumbnails: videoThumbnails);
+  BaseVideo videoThumbnails(List<ImageObject> videoThumbnails) =>
+      this(videoThumbnails: videoThumbnails);
 
   @override
   BaseVideo filtered(bool filtered) => this(filtered: filtered);
 
   @override
-  BaseVideo matchedFilters(List<VideoFilter> matchedFilters) => this(matchedFilters: matchedFilters);
+  BaseVideo matchedFilters(List<VideoFilter> matchedFilters) =>
+      this(matchedFilters: matchedFilters);
 
   @override
   BaseVideo filterHide(bool filterHide) => this(filterHide: filterHide);
@@ -93,7 +96,8 @@ class _$BaseVideoCWProxyImpl implements _$BaseVideoCWProxy {
   BaseVideo deArrowed(bool deArrowed) => this(deArrowed: deArrowed);
 
   @override
-  BaseVideo deArrowThumbnailUrl(String? deArrowThumbnailUrl) => this(deArrowThumbnailUrl: deArrowThumbnailUrl);
+  BaseVideo deArrowThumbnailUrl(String? deArrowThumbnailUrl) =>
+      this(deArrowThumbnailUrl: deArrowThumbnailUrl);
 
   @override
 

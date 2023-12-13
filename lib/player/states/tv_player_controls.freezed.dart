@@ -23,19 +23,27 @@ mixin _$TvPlayerControlsState {
   bool get displayControls => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $TvPlayerControlsStateCopyWith<TvPlayerControlsState> get copyWith => throw _privateConstructorUsedError;
+  $TvPlayerControlsStateCopyWith<TvPlayerControlsState> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $TvPlayerControlsStateCopyWith<$Res> {
-  factory $TvPlayerControlsStateCopyWith(TvPlayerControlsState value, $Res Function(TvPlayerControlsState) then) =
+  factory $TvPlayerControlsStateCopyWith(TvPlayerControlsState value,
+          $Res Function(TvPlayerControlsState) then) =
       _$TvPlayerControlsStateCopyWithImpl<$Res, TvPlayerControlsState>;
   @useResult
-  $Res call({double controlsOpacity, bool showSettings, bool showQueue, bool loading, bool displayControls});
+  $Res call(
+      {double controlsOpacity,
+      bool showSettings,
+      bool showQueue,
+      bool loading,
+      bool displayControls});
 }
 
 /// @nodoc
-class _$TvPlayerControlsStateCopyWithImpl<$Res, $Val extends TvPlayerControlsState>
+class _$TvPlayerControlsStateCopyWithImpl<$Res,
+        $Val extends TvPlayerControlsState>
     implements $TvPlayerControlsStateCopyWith<$Res> {
   _$TvPlayerControlsStateCopyWithImpl(this._value, this._then);
 
@@ -79,21 +87,29 @@ class _$TvPlayerControlsStateCopyWithImpl<$Res, $Val extends TvPlayerControlsSta
 }
 
 /// @nodoc
-abstract class _$$TvPlayerControlsStateImplCopyWith<$Res> implements $TvPlayerControlsStateCopyWith<$Res> {
+abstract class _$$TvPlayerControlsStateImplCopyWith<$Res>
+    implements $TvPlayerControlsStateCopyWith<$Res> {
   factory _$$TvPlayerControlsStateImplCopyWith(
-          _$TvPlayerControlsStateImpl value, $Res Function(_$TvPlayerControlsStateImpl) then) =
+          _$TvPlayerControlsStateImpl value,
+          $Res Function(_$TvPlayerControlsStateImpl) then) =
       __$$TvPlayerControlsStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({double controlsOpacity, bool showSettings, bool showQueue, bool loading, bool displayControls});
+  $Res call(
+      {double controlsOpacity,
+      bool showSettings,
+      bool showQueue,
+      bool loading,
+      bool displayControls});
 }
 
 /// @nodoc
 class __$$TvPlayerControlsStateImplCopyWithImpl<$Res>
-    extends _$TvPlayerControlsStateCopyWithImpl<$Res, _$TvPlayerControlsStateImpl>
+    extends _$TvPlayerControlsStateCopyWithImpl<$Res,
+        _$TvPlayerControlsStateImpl>
     implements _$$TvPlayerControlsStateImplCopyWith<$Res> {
-  __$$TvPlayerControlsStateImplCopyWithImpl(
-      _$TvPlayerControlsStateImpl _value, $Res Function(_$TvPlayerControlsStateImpl) _then)
+  __$$TvPlayerControlsStateImplCopyWithImpl(_$TvPlayerControlsStateImpl _value,
+      $Res Function(_$TvPlayerControlsStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -167,21 +183,27 @@ class _$TvPlayerControlsStateImpl extends _TvPlayerControlsState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TvPlayerControlsStateImpl &&
-            (identical(other.controlsOpacity, controlsOpacity) || other.controlsOpacity == controlsOpacity) &&
-            (identical(other.showSettings, showSettings) || other.showSettings == showSettings) &&
-            (identical(other.showQueue, showQueue) || other.showQueue == showQueue) &&
+            (identical(other.controlsOpacity, controlsOpacity) ||
+                other.controlsOpacity == controlsOpacity) &&
+            (identical(other.showSettings, showSettings) ||
+                other.showSettings == showSettings) &&
+            (identical(other.showQueue, showQueue) ||
+                other.showQueue == showQueue) &&
             (identical(other.loading, loading) || other.loading == loading) &&
-            (identical(other.displayControls, displayControls) || other.displayControls == displayControls));
+            (identical(other.displayControls, displayControls) ||
+                other.displayControls == displayControls));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, controlsOpacity, showSettings, showQueue, loading, displayControls);
+  int get hashCode => Object.hash(runtimeType, controlsOpacity, showSettings,
+      showQueue, loading, displayControls);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$TvPlayerControlsStateImplCopyWith<_$TvPlayerControlsStateImpl> get copyWith =>
-      __$$TvPlayerControlsStateImplCopyWithImpl<_$TvPlayerControlsStateImpl>(this, _$identity);
+  _$$TvPlayerControlsStateImplCopyWith<_$TvPlayerControlsStateImpl>
+      get copyWith => __$$TvPlayerControlsStateImplCopyWithImpl<
+          _$TvPlayerControlsStateImpl>(this, _$identity);
 }
 
 abstract class _TvPlayerControlsState extends TvPlayerControlsState {
@@ -205,5 +227,6 @@ abstract class _TvPlayerControlsState extends TvPlayerControlsState {
   bool get displayControls;
   @override
   @JsonKey(ignore: true)
-  _$$TvPlayerControlsStateImplCopyWith<_$TvPlayerControlsStateImpl> get copyWith => throw _privateConstructorUsedError;
+  _$$TvPlayerControlsStateImplCopyWith<_$TvPlayerControlsStateImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

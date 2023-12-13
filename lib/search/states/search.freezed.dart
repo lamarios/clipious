@@ -16,7 +16,8 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$SearchState {
-  TextEditingController get queryController => throw _privateConstructorUsedError;
+  TextEditingController get queryController =>
+      throw _privateConstructorUsedError;
   int get selectedIndex => throw _privateConstructorUsedError;
   bool get searchNow => throw _privateConstructorUsedError;
   List<String> get suggestions => throw _privateConstructorUsedError;
@@ -27,12 +28,14 @@ mixin _$SearchState {
   int get playlistPage => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $SearchStateCopyWith<SearchState> get copyWith => throw _privateConstructorUsedError;
+  $SearchStateCopyWith<SearchState> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $SearchStateCopyWith<$Res> {
-  factory $SearchStateCopyWith(SearchState value, $Res Function(SearchState) then) =
+  factory $SearchStateCopyWith(
+          SearchState value, $Res Function(SearchState) then) =
       _$SearchStateCopyWithImpl<$Res, SearchState>;
   @useResult
   $Res call(
@@ -48,7 +51,8 @@ abstract class $SearchStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$SearchStateCopyWithImpl<$Res, $Val extends SearchState> implements $SearchStateCopyWith<$Res> {
+class _$SearchStateCopyWithImpl<$Res, $Val extends SearchState>
+    implements $SearchStateCopyWith<$Res> {
   _$SearchStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -111,8 +115,10 @@ class _$SearchStateCopyWithImpl<$Res, $Val extends SearchState> implements $Sear
 }
 
 /// @nodoc
-abstract class _$$SearchStateImplCopyWith<$Res> implements $SearchStateCopyWith<$Res> {
-  factory _$$SearchStateImplCopyWith(_$SearchStateImpl value, $Res Function(_$SearchStateImpl) then) =
+abstract class _$$SearchStateImplCopyWith<$Res>
+    implements $SearchStateCopyWith<$Res> {
+  factory _$$SearchStateImplCopyWith(
+          _$SearchStateImpl value, $Res Function(_$SearchStateImpl) then) =
       __$$SearchStateImplCopyWithImpl<$Res>;
   @override
   @useResult
@@ -129,9 +135,11 @@ abstract class _$$SearchStateImplCopyWith<$Res> implements $SearchStateCopyWith<
 }
 
 /// @nodoc
-class __$$SearchStateImplCopyWithImpl<$Res> extends _$SearchStateCopyWithImpl<$Res, _$SearchStateImpl>
+class __$$SearchStateImplCopyWithImpl<$Res>
+    extends _$SearchStateCopyWithImpl<$Res, _$SearchStateImpl>
     implements _$$SearchStateImplCopyWith<$Res> {
-  __$$SearchStateImplCopyWithImpl(_$SearchStateImpl _value, $Res Function(_$SearchStateImpl) _then)
+  __$$SearchStateImplCopyWithImpl(
+      _$SearchStateImpl _value, $Res Function(_$SearchStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -246,20 +254,37 @@ class _$SearchStateImpl implements _SearchState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SearchStateImpl &&
-            (identical(other.queryController, queryController) || other.queryController == queryController) &&
-            (identical(other.selectedIndex, selectedIndex) || other.selectedIndex == selectedIndex) &&
-            (identical(other.searchNow, searchNow) || other.searchNow == searchNow) &&
-            const DeepCollectionEquality().equals(other._suggestions, _suggestions) &&
+            (identical(other.queryController, queryController) ||
+                other.queryController == queryController) &&
+            (identical(other.selectedIndex, selectedIndex) ||
+                other.selectedIndex == selectedIndex) &&
+            (identical(other.searchNow, searchNow) ||
+                other.searchNow == searchNow) &&
+            const DeepCollectionEquality()
+                .equals(other._suggestions, _suggestions) &&
             (identical(other.sortBy, sortBy) || other.sortBy == sortBy) &&
-            (identical(other.showResults, showResults) || other.showResults == showResults) &&
-            (identical(other.videoPage, videoPage) || other.videoPage == videoPage) &&
-            (identical(other.channelPage, channelPage) || other.channelPage == channelPage) &&
-            (identical(other.playlistPage, playlistPage) || other.playlistPage == playlistPage));
+            (identical(other.showResults, showResults) ||
+                other.showResults == showResults) &&
+            (identical(other.videoPage, videoPage) ||
+                other.videoPage == videoPage) &&
+            (identical(other.channelPage, channelPage) ||
+                other.channelPage == channelPage) &&
+            (identical(other.playlistPage, playlistPage) ||
+                other.playlistPage == playlistPage));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, queryController, selectedIndex, searchNow,
-      const DeepCollectionEquality().hash(_suggestions), sortBy, showResults, videoPage, channelPage, playlistPage);
+  int get hashCode => Object.hash(
+      runtimeType,
+      queryController,
+      selectedIndex,
+      searchNow,
+      const DeepCollectionEquality().hash(_suggestions),
+      sortBy,
+      showResults,
+      videoPage,
+      channelPage,
+      playlistPage);
 
   @JsonKey(ignore: true)
   @override
@@ -300,5 +325,6 @@ abstract class _SearchState implements SearchState {
   int get playlistPage;
   @override
   @JsonKey(ignore: true)
-  _$$SearchStateImplCopyWith<_$SearchStateImpl> get copyWith => throw _privateConstructorUsedError;
+  _$$SearchStateImplCopyWith<_$SearchStateImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }

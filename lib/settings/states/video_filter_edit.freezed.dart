@@ -23,20 +23,27 @@ mixin _$VideoFilterEditState {
   dynamic get showDateSettings => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $VideoFilterEditStateCopyWith<VideoFilterEditState> get copyWith => throw _privateConstructorUsedError;
+  $VideoFilterEditStateCopyWith<VideoFilterEditState> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $VideoFilterEditStateCopyWith<$Res> {
-  factory $VideoFilterEditStateCopyWith(VideoFilterEditState value, $Res Function(VideoFilterEditState) then) =
+  factory $VideoFilterEditStateCopyWith(VideoFilterEditState value,
+          $Res Function(VideoFilterEditState) then) =
       _$VideoFilterEditStateCopyWithImpl<$Res, VideoFilterEditState>;
   @useResult
   $Res call(
-      {VideoFilter? filter, int searchPage, Channel? channel, List<Channel> channelResults, dynamic showDateSettings});
+      {VideoFilter? filter,
+      int searchPage,
+      Channel? channel,
+      List<Channel> channelResults,
+      dynamic showDateSettings});
 }
 
 /// @nodoc
-class _$VideoFilterEditStateCopyWithImpl<$Res, $Val extends VideoFilterEditState>
+class _$VideoFilterEditStateCopyWithImpl<$Res,
+        $Val extends VideoFilterEditState>
     implements $VideoFilterEditStateCopyWith<$Res> {
   _$VideoFilterEditStateCopyWithImpl(this._value, this._then);
 
@@ -80,22 +87,27 @@ class _$VideoFilterEditStateCopyWithImpl<$Res, $Val extends VideoFilterEditState
 }
 
 /// @nodoc
-abstract class _$$VideoFilterEditStateImplCopyWith<$Res> implements $VideoFilterEditStateCopyWith<$Res> {
-  factory _$$VideoFilterEditStateImplCopyWith(
-          _$VideoFilterEditStateImpl value, $Res Function(_$VideoFilterEditStateImpl) then) =
+abstract class _$$VideoFilterEditStateImplCopyWith<$Res>
+    implements $VideoFilterEditStateCopyWith<$Res> {
+  factory _$$VideoFilterEditStateImplCopyWith(_$VideoFilterEditStateImpl value,
+          $Res Function(_$VideoFilterEditStateImpl) then) =
       __$$VideoFilterEditStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
-      {VideoFilter? filter, int searchPage, Channel? channel, List<Channel> channelResults, dynamic showDateSettings});
+      {VideoFilter? filter,
+      int searchPage,
+      Channel? channel,
+      List<Channel> channelResults,
+      dynamic showDateSettings});
 }
 
 /// @nodoc
 class __$$VideoFilterEditStateImplCopyWithImpl<$Res>
     extends _$VideoFilterEditStateCopyWithImpl<$Res, _$VideoFilterEditStateImpl>
     implements _$$VideoFilterEditStateImplCopyWith<$Res> {
-  __$$VideoFilterEditStateImplCopyWithImpl(
-      _$VideoFilterEditStateImpl _value, $Res Function(_$VideoFilterEditStateImpl) _then)
+  __$$VideoFilterEditStateImplCopyWithImpl(_$VideoFilterEditStateImpl _value,
+      $Res Function(_$VideoFilterEditStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -124,7 +136,9 @@ class __$$VideoFilterEditStateImplCopyWithImpl<$Res>
           ? _value._channelResults
           : channelResults // ignore: cast_nullable_to_non_nullable
               as List<Channel>,
-      showDateSettings: freezed == showDateSettings ? _value.showDateSettings! : showDateSettings,
+      showDateSettings: freezed == showDateSettings
+          ? _value.showDateSettings!
+          : showDateSettings,
     ));
   }
 }
@@ -171,21 +185,31 @@ class _$VideoFilterEditStateImpl implements _VideoFilterEditState {
         (other.runtimeType == runtimeType &&
             other is _$VideoFilterEditStateImpl &&
             (identical(other.filter, filter) || other.filter == filter) &&
-            (identical(other.searchPage, searchPage) || other.searchPage == searchPage) &&
+            (identical(other.searchPage, searchPage) ||
+                other.searchPage == searchPage) &&
             (identical(other.channel, channel) || other.channel == channel) &&
-            const DeepCollectionEquality().equals(other._channelResults, _channelResults) &&
-            const DeepCollectionEquality().equals(other.showDateSettings, showDateSettings));
+            const DeepCollectionEquality()
+                .equals(other._channelResults, _channelResults) &&
+            const DeepCollectionEquality()
+                .equals(other.showDateSettings, showDateSettings));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, filter, searchPage, channel,
-      const DeepCollectionEquality().hash(_channelResults), const DeepCollectionEquality().hash(showDateSettings));
+  int get hashCode => Object.hash(
+      runtimeType,
+      filter,
+      searchPage,
+      channel,
+      const DeepCollectionEquality().hash(_channelResults),
+      const DeepCollectionEquality().hash(showDateSettings));
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$VideoFilterEditStateImplCopyWith<_$VideoFilterEditStateImpl> get copyWith =>
-      __$$VideoFilterEditStateImplCopyWithImpl<_$VideoFilterEditStateImpl>(this, _$identity);
+  _$$VideoFilterEditStateImplCopyWith<_$VideoFilterEditStateImpl>
+      get copyWith =>
+          __$$VideoFilterEditStateImplCopyWithImpl<_$VideoFilterEditStateImpl>(
+              this, _$identity);
 }
 
 abstract class _VideoFilterEditState implements VideoFilterEditState {
@@ -208,5 +232,6 @@ abstract class _VideoFilterEditState implements VideoFilterEditState {
   dynamic get showDateSettings;
   @override
   @JsonKey(ignore: true)
-  _$$VideoFilterEditStateImplCopyWith<_$VideoFilterEditStateImpl> get copyWith => throw _privateConstructorUsedError;
+  _$$VideoFilterEditStateImplCopyWith<_$VideoFilterEditStateImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

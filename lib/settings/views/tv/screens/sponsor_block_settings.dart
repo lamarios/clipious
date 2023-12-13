@@ -23,12 +23,14 @@ class TvSponsorBlockSettingsScreen extends StatelessWidget {
           return TvOverscan(
             child: ListView(
               children: [
-                SettingsTitle(title: locals.sponsorBlockSettingsQuickDescription),
+                SettingsTitle(
+                    title: locals.sponsorBlockSettingsQuickDescription),
                 ...SponsorSegmentType.values.map((t) {
                   bool value = _.settings[t.settingsName()]?.value == 'true';
                   return SettingsTile(
                     trailing: Switch(value: value, onChanged: (value) {}),
-                    onSelected: (context) => cubit.saveSetting(SettingsValue(t.settingsName(), (!value).toString())),
+                    onSelected: (context) => cubit.saveSetting(
+                        SettingsValue(t.settingsName(), (!value).toString())),
                     title: SponsorSegmentType.getLabel(t, locals),
                     description: SponsorSegmentType.getDescription(t, locals),
                   );

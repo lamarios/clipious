@@ -13,10 +13,12 @@ class MiniPlayerAware extends StatelessWidget {
       builder: (
         context,
       ) {
-        bool isHidden = context.select((PlayerCubit cubit) => cubit.state.isHidden);
+        bool isHidden =
+            context.select((PlayerCubit cubit) => cubit.state.isHidden);
         bool isMini = context.select((PlayerCubit cubit) => cubit.state.isMini);
         return Padding(
-          padding: EdgeInsets.only(bottom: !isHidden && isMini ? targetHeight : 0),
+          padding:
+              EdgeInsets.only(bottom: !isHidden && isMini ? targetHeight : 0),
           child: child,
         );
       },

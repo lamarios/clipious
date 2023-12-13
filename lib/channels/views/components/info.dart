@@ -34,7 +34,9 @@ class ChannelInfo extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 8.0),
         child: Row(
           children: [
-            SubscribeButton(channelId: channel.authorId, subCount: compactCurrency.format(channel.subCount)),
+            SubscribeButton(
+                channelId: channel.authorId,
+                subCount: compactCurrency.format(channel.subCount)),
           ],
         ),
       ),
@@ -42,8 +44,10 @@ class ChannelInfo extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 8.0),
         child: SelectableLinkify(
             text: channel.description,
-            linkStyle: TextStyle(color: colors.primary, decoration: TextDecoration.none),
-            onOpen: (link) => launchUrl(Uri.parse(link.url), mode: LaunchMode.externalApplication),
+            linkStyle: TextStyle(
+                color: colors.primary, decoration: TextDecoration.none),
+            onOpen: (link) => launchUrl(Uri.parse(link.url),
+                mode: LaunchMode.externalApplication),
             options: const LinkifyOptions(humanize: true, removeWww: true)),
       ),
       Padding(
@@ -64,8 +68,17 @@ class ChannelInfo extends StatelessWidget {
         mainAxisSpacing: 5,
         childAspectRatio: getGridAspectRatio(context),
         children: channel.latestVideos?.map((e) {
-              VideoInList videoInList = VideoInList(e.title, e.videoId, e.lengthSeconds, 0, e.author, channel.authorId,
-                  channel.authorId, 0, '', e.videoThumbnails)
+              VideoInList videoInList = VideoInList(
+                  e.title,
+                  e.videoId,
+                  e.lengthSeconds,
+                  0,
+                  e.author,
+                  channel.authorId,
+                  channel.authorId,
+                  0,
+                  '',
+                  e.videoThumbnails)
                 ..deArrowThumbnailUrl = e.deArrowThumbnailUrl;
               videoInList.filtered = e.filtered;
               videoInList.matchedFilters = e.matchedFilters;
@@ -83,13 +96,17 @@ class ChannelInfo extends StatelessWidget {
             height: 230,
             child: Thumbnail(
                 width: double.infinity,
-                thumbnailUrl: ImageObject.getBestThumbnail(channel.authorThumbnails)?.url ?? '',
+                thumbnailUrl:
+                    ImageObject.getBestThumbnail(channel.authorThumbnails)
+                            ?.url ??
+                        '',
                 decoration: BoxDecoration(
                   color: colors.secondaryContainer,
                 )),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: innerHorizontalPadding),
+            padding:
+                const EdgeInsets.symmetric(horizontal: innerHorizontalPadding),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: widgets,

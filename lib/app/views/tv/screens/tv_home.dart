@@ -35,19 +35,23 @@ class TvHomeScreen extends StatelessWidget {
 
   openPopular(BuildContext context) {
     var locals = AppLocalizations.of(context)!;
-    AutoRouter.of(context)
-        .push(TvGridRoute(paginatedVideoList: SingleEndpointList(service.getPopular), title: locals.popular));
+    AutoRouter.of(context).push(TvGridRoute(
+        paginatedVideoList: SingleEndpointList(service.getPopular),
+        title: locals.popular));
   }
 
   openTrending(BuildContext context) {
     var locals = AppLocalizations.of(context)!;
-    AutoRouter.of(context)
-        .push(TvGridRoute(paginatedVideoList: SingleEndpointList(service.getTrending), title: locals.trending));
+    AutoRouter.of(context).push(TvGridRoute(
+        paginatedVideoList: SingleEndpointList(service.getTrending),
+        title: locals.trending));
   }
 
   openSubscriptions(BuildContext context) {
     var locals = AppLocalizations.of(context)!;
-    AutoRouter.of(context).push(TvGridRoute(paginatedVideoList: SubscriptionVideoList(), title: locals.subscriptions));
+    AutoRouter.of(context).push(TvGridRoute(
+        paginatedVideoList: SubscriptionVideoList(),
+        title: locals.subscriptions));
   }
 
   openSearch(BuildContext context) {
@@ -55,7 +59,8 @@ class TvHomeScreen extends StatelessWidget {
   }
 
   openPlaylists(BuildContext context) {
-    AutoRouter.of(context).push(TvPlaylistGridRoute(playlistList: SingleEndpointList(service.getUserPlaylists)));
+    AutoRouter.of(context).push(TvPlaylistGridRoute(
+        playlistList: SingleEndpointList(service.getUserPlaylists)));
   }
 
   @override
@@ -72,9 +77,13 @@ class TvHomeScreen extends StatelessWidget {
         child: Scaffold(
           body: BlocBuilder<TvHomeCubit, bool>(builder: (context, homeState) {
             var homeCubit = context.read<TvHomeCubit>();
-            var appLayout = context.select((SettingsCubit value) => value.state.appLayout);
-            var allowedPages = appLayout.where((element) => element.isPermitted(context)).toList();
-            return BlocBuilder<AppCubit, AppState>(buildWhen: (previous, current) {
+            var appLayout =
+                context.select((SettingsCubit value) => value.state.appLayout);
+            var allowedPages = appLayout
+                .where((element) => element.isPermitted(context))
+                .toList();
+            return BlocBuilder<AppCubit, AppState>(
+                buildWhen: (previous, current) {
               return previous.server != current.server;
             }, builder: (context, _) {
               return DefaultTextStyle(
@@ -87,7 +96,9 @@ class TvHomeScreen extends StatelessWidget {
                       duration: animationDuration ~/ 2,
                       curve: Curves.easeInOutQuad,
                       decoration: BoxDecoration(
-                          color: homeState ? colors.secondaryContainer.withOpacity(0.5) : Colors.transparent),
+                          color: homeState
+                              ? colors.secondaryContainer.withOpacity(0.5)
+                              : Colors.transparent),
                       child: Padding(
                           padding: EdgeInsets.only(
                               top: TvOverscan.vertical,
@@ -110,10 +121,14 @@ class TvHomeScreen extends StatelessWidget {
                                           ),
                                           if (homeState)
                                             Padding(
-                                                padding: const EdgeInsets.only(left: 16.0),
+                                                padding: const EdgeInsets.only(
+                                                    left: 16.0),
                                                 child: MenuItemText(
                                                   'Clipious',
-                                                  style: textTheme.titleLarge!.copyWith(color: colors.primary),
+                                                  style: textTheme.titleLarge!
+                                                      .copyWith(
+                                                          color:
+                                                              colors.primary),
                                                 ))
                                         ],
                                       )),
@@ -123,27 +138,42 @@ class TvHomeScreen extends StatelessWidget {
                                     children: allowedPages
                                         .map(
                                           (e) => Padding(
-                                            padding: const EdgeInsets.only(bottom: 8.0),
+                                            padding: const EdgeInsets.only(
+                                                bottom: 8.0),
                                             child: TvButton(
-                                              onFocusChanged: homeCubit.menuItemFocusChanged,
-                                              onPressed: (context) => switch (e) {
-                                                (HomeDataSource.search) => openSearch(context),
-                                                (HomeDataSource.subscription) => openSubscriptions(context),
-                                                (HomeDataSource.playlist) => openPlaylists(context),
-                                                (HomeDataSource.trending) => openTrending(context),
-                                                (HomeDataSource.popular) => openPopular(context),
+                                              onFocusChanged: homeCubit
+                                                  .menuItemFocusChanged,
+                                              onPressed: (context) =>
+                                                  switch (e) {
+                                                (HomeDataSource.search) =>
+                                                  openSearch(context),
+                                                (HomeDataSource.subscription) =>
+                                                  openSubscriptions(context),
+                                                (HomeDataSource.playlist) =>
+                                                  openPlaylists(context),
+                                                (HomeDataSource.trending) =>
+                                                  openTrending(context),
+                                                (HomeDataSource.popular) =>
+                                                  openPopular(context),
                                                 (_) => const SizedBox.shrink()
                                               },
-                                              unfocusedColor: colors.secondaryContainer.withOpacity(0.0),
+                                              unfocusedColor: colors
+                                                  .secondaryContainer
+                                                  .withOpacity(0.0),
                                               child: Padding(
-                                                padding: const EdgeInsets.all(8),
+                                                padding:
+                                                    const EdgeInsets.all(8),
                                                 child: Row(
                                                   children: [
                                                     Padding(
-                                                      padding: const EdgeInsets.only(right: 8.0),
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              right: 8.0),
                                                       child: Icon(e.getIcon()),
                                                     ),
-                                                    if (homeState) MenuItemText(e.getLabel(locals))
+                                                    if (homeState)
+                                                      MenuItemText(
+                                                          e.getLabel(locals))
                                                   ],
                                                 ),
                                               ),
@@ -152,9 +182,11 @@ class TvHomeScreen extends StatelessWidget {
                                         )
                                         .toList()),
                                 TvButton(
-                                  onFocusChanged: homeCubit.menuItemFocusChanged,
+                                  onFocusChanged:
+                                      homeCubit.menuItemFocusChanged,
                                   onPressed: (context) => openSettings(context),
-                                  unfocusedColor: colors.secondaryContainer.withOpacity(0.0),
+                                  unfocusedColor: colors.secondaryContainer
+                                      .withOpacity(0.0),
                                   child: Padding(
                                     padding: const EdgeInsets.all(8),
                                     child: Row(
@@ -163,7 +195,8 @@ class TvHomeScreen extends StatelessWidget {
                                           padding: EdgeInsets.only(right: 8.0),
                                           child: Icon(Icons.settings),
                                         ),
-                                        if (homeState) MenuItemText(locals.settings)
+                                        if (homeState)
+                                          MenuItemText(locals.settings)
                                       ],
                                     ),
                                   ),
@@ -192,7 +225,8 @@ class TvHomeScreen extends StatelessWidget {
                                 .map((e) {
                               GlobalKey? key = switch (e) {
                                 (HomeDataSource.popular) => popularTitle,
-                                (HomeDataSource.subscription) => subscriptionTitle,
+                                (HomeDataSource.subscription) =>
+                                  subscriptionTitle,
                                 (HomeDataSource.trending) => trendingTitle,
                                 (_) => null,
                               };
@@ -202,7 +236,9 @@ class TvHomeScreen extends StatelessWidget {
                                   Scrollable.ensureVisible(key.currentContext!,
                                       duration: animationDuration,
                                       curve: Curves.easeInOutQuad,
-                                      alignmentPolicy: ScrollPositionAlignmentPolicy.keepVisibleAtStart);
+                                      alignmentPolicy:
+                                          ScrollPositionAlignmentPolicy
+                                              .keepVisibleAtStart);
                                 }
                               }
 
@@ -213,13 +249,15 @@ class TvHomeScreen extends StatelessWidget {
                                   Padding(
                                     key: key,
                                     padding: const EdgeInsets.only(top: 16.0),
-                                    child: Text(e.getLabel(locals), style: textTheme.titleLarge),
+                                    child: Text(e.getLabel(locals),
+                                        style: textTheme.titleLarge),
                                   ),
                                   switch (e) {
                                     (HomeDataSource.popular) => Popular(
                                         onItemFocus: focusFunction,
                                       ),
-                                    (HomeDataSource.subscription) => Subscriptions(
+                                    (HomeDataSource.subscription) =>
+                                      Subscriptions(
                                         onItemFocus: focusFunction,
                                       ),
                                     (HomeDataSource.trending) => Trending(

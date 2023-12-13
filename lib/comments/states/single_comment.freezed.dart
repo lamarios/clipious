@@ -21,12 +21,14 @@ mixin _$SingleCommentState {
   VideoComments? get children => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $SingleCommentStateCopyWith<SingleCommentState> get copyWith => throw _privateConstructorUsedError;
+  $SingleCommentStateCopyWith<SingleCommentState> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $SingleCommentStateCopyWith<$Res> {
-  factory $SingleCommentStateCopyWith(SingleCommentState value, $Res Function(SingleCommentState) then) =
+  factory $SingleCommentStateCopyWith(
+          SingleCommentState value, $Res Function(SingleCommentState) then) =
       _$SingleCommentStateCopyWithImpl<$Res, SingleCommentState>;
   @useResult
   $Res call({Comment comment, bool showingChildren, VideoComments? children});
@@ -67,9 +69,10 @@ class _$SingleCommentStateCopyWithImpl<$Res, $Val extends SingleCommentState>
 }
 
 /// @nodoc
-abstract class _$$SingleCommentStateImplCopyWith<$Res> implements $SingleCommentStateCopyWith<$Res> {
-  factory _$$SingleCommentStateImplCopyWith(
-          _$SingleCommentStateImpl value, $Res Function(_$SingleCommentStateImpl) then) =
+abstract class _$$SingleCommentStateImplCopyWith<$Res>
+    implements $SingleCommentStateCopyWith<$Res> {
+  factory _$$SingleCommentStateImplCopyWith(_$SingleCommentStateImpl value,
+          $Res Function(_$SingleCommentStateImpl) then) =
       __$$SingleCommentStateImplCopyWithImpl<$Res>;
   @override
   @useResult
@@ -80,7 +83,8 @@ abstract class _$$SingleCommentStateImplCopyWith<$Res> implements $SingleComment
 class __$$SingleCommentStateImplCopyWithImpl<$Res>
     extends _$SingleCommentStateCopyWithImpl<$Res, _$SingleCommentStateImpl>
     implements _$$SingleCommentStateImplCopyWith<$Res> {
-  __$$SingleCommentStateImplCopyWithImpl(_$SingleCommentStateImpl _value, $Res Function(_$SingleCommentStateImpl) _then)
+  __$$SingleCommentStateImplCopyWithImpl(_$SingleCommentStateImpl _value,
+      $Res Function(_$SingleCommentStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -110,7 +114,8 @@ class __$$SingleCommentStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$SingleCommentStateImpl implements _SingleCommentState {
-  const _$SingleCommentStateImpl({required this.comment, this.showingChildren = false, this.children});
+  const _$SingleCommentStateImpl(
+      {required this.comment, this.showingChildren = false, this.children});
 
   @override
   final Comment comment;
@@ -131,18 +136,22 @@ class _$SingleCommentStateImpl implements _SingleCommentState {
         (other.runtimeType == runtimeType &&
             other is _$SingleCommentStateImpl &&
             (identical(other.comment, comment) || other.comment == comment) &&
-            (identical(other.showingChildren, showingChildren) || other.showingChildren == showingChildren) &&
-            (identical(other.children, children) || other.children == children));
+            (identical(other.showingChildren, showingChildren) ||
+                other.showingChildren == showingChildren) &&
+            (identical(other.children, children) ||
+                other.children == children));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, comment, showingChildren, children);
+  int get hashCode =>
+      Object.hash(runtimeType, comment, showingChildren, children);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$SingleCommentStateImplCopyWith<_$SingleCommentStateImpl> get copyWith =>
-      __$$SingleCommentStateImplCopyWithImpl<_$SingleCommentStateImpl>(this, _$identity);
+      __$$SingleCommentStateImplCopyWithImpl<_$SingleCommentStateImpl>(
+          this, _$identity);
 }
 
 abstract class _SingleCommentState implements SingleCommentState {
@@ -159,5 +168,6 @@ abstract class _SingleCommentState implements SingleCommentState {
   VideoComments? get children;
   @override
   @JsonKey(ignore: true)
-  _$$SingleCommentStateImplCopyWith<_$SingleCommentStateImpl> get copyWith => throw _privateConstructorUsedError;
+  _$$SingleCommentStateImplCopyWith<_$SingleCommentStateImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }

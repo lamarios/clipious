@@ -19,19 +19,22 @@ mixin _$TvPlayerSettingsState {
   Tabs get selected => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $TvPlayerSettingsStateCopyWith<TvPlayerSettingsState> get copyWith => throw _privateConstructorUsedError;
+  $TvPlayerSettingsStateCopyWith<TvPlayerSettingsState> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $TvPlayerSettingsStateCopyWith<$Res> {
-  factory $TvPlayerSettingsStateCopyWith(TvPlayerSettingsState value, $Res Function(TvPlayerSettingsState) then) =
+  factory $TvPlayerSettingsStateCopyWith(TvPlayerSettingsState value,
+          $Res Function(TvPlayerSettingsState) then) =
       _$TvPlayerSettingsStateCopyWithImpl<$Res, TvPlayerSettingsState>;
   @useResult
   $Res call({Tabs selected});
 }
 
 /// @nodoc
-class _$TvPlayerSettingsStateCopyWithImpl<$Res, $Val extends TvPlayerSettingsState>
+class _$TvPlayerSettingsStateCopyWithImpl<$Res,
+        $Val extends TvPlayerSettingsState>
     implements $TvPlayerSettingsStateCopyWith<$Res> {
   _$TvPlayerSettingsStateCopyWithImpl(this._value, this._then);
 
@@ -55,9 +58,11 @@ class _$TvPlayerSettingsStateCopyWithImpl<$Res, $Val extends TvPlayerSettingsSta
 }
 
 /// @nodoc
-abstract class _$$TvPlayerSettingsStateImplCopyWith<$Res> implements $TvPlayerSettingsStateCopyWith<$Res> {
+abstract class _$$TvPlayerSettingsStateImplCopyWith<$Res>
+    implements $TvPlayerSettingsStateCopyWith<$Res> {
   factory _$$TvPlayerSettingsStateImplCopyWith(
-          _$TvPlayerSettingsStateImpl value, $Res Function(_$TvPlayerSettingsStateImpl) then) =
+          _$TvPlayerSettingsStateImpl value,
+          $Res Function(_$TvPlayerSettingsStateImpl) then) =
       __$$TvPlayerSettingsStateImplCopyWithImpl<$Res>;
   @override
   @useResult
@@ -66,10 +71,11 @@ abstract class _$$TvPlayerSettingsStateImplCopyWith<$Res> implements $TvPlayerSe
 
 /// @nodoc
 class __$$TvPlayerSettingsStateImplCopyWithImpl<$Res>
-    extends _$TvPlayerSettingsStateCopyWithImpl<$Res, _$TvPlayerSettingsStateImpl>
+    extends _$TvPlayerSettingsStateCopyWithImpl<$Res,
+        _$TvPlayerSettingsStateImpl>
     implements _$$TvPlayerSettingsStateImplCopyWith<$Res> {
-  __$$TvPlayerSettingsStateImplCopyWithImpl(
-      _$TvPlayerSettingsStateImpl _value, $Res Function(_$TvPlayerSettingsStateImpl) _then)
+  __$$TvPlayerSettingsStateImplCopyWithImpl(_$TvPlayerSettingsStateImpl _value,
+      $Res Function(_$TvPlayerSettingsStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -105,7 +111,8 @@ class _$TvPlayerSettingsStateImpl implements _TvPlayerSettingsState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TvPlayerSettingsStateImpl &&
-            (identical(other.selected, selected) || other.selected == selected));
+            (identical(other.selected, selected) ||
+                other.selected == selected));
   }
 
   @override
@@ -114,16 +121,19 @@ class _$TvPlayerSettingsStateImpl implements _TvPlayerSettingsState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$TvPlayerSettingsStateImplCopyWith<_$TvPlayerSettingsStateImpl> get copyWith =>
-      __$$TvPlayerSettingsStateImplCopyWithImpl<_$TvPlayerSettingsStateImpl>(this, _$identity);
+  _$$TvPlayerSettingsStateImplCopyWith<_$TvPlayerSettingsStateImpl>
+      get copyWith => __$$TvPlayerSettingsStateImplCopyWithImpl<
+          _$TvPlayerSettingsStateImpl>(this, _$identity);
 }
 
 abstract class _TvPlayerSettingsState implements TvPlayerSettingsState {
-  const factory _TvPlayerSettingsState({final Tabs selected}) = _$TvPlayerSettingsStateImpl;
+  const factory _TvPlayerSettingsState({final Tabs selected}) =
+      _$TvPlayerSettingsStateImpl;
 
   @override
   Tabs get selected;
   @override
   @JsonKey(ignore: true)
-  _$$TvPlayerSettingsStateImplCopyWith<_$TvPlayerSettingsStateImpl> get copyWith => throw _privateConstructorUsedError;
+  _$$TvPlayerSettingsStateImplCopyWith<_$TvPlayerSettingsStateImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

@@ -48,7 +48,9 @@ class AppLogsCubit extends Cubit<AppLogsState> {
 
 @freezed
 class AppLogsState with _$AppLogsState {
-  const factory AppLogsState({@Default([]) List<AppLog> logs, @Default([]) List<int> selected}) = _AppLogsState;
+  const factory AppLogsState(
+      {@Default([]) List<AppLog> logs,
+      @Default([]) List<int> selected}) = _AppLogsState;
 
   static AppLogsState init() {
     return AppLogsState(logs: db.getAppLogs().reversed.toList());

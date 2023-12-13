@@ -20,7 +20,8 @@ class ManagerServersView extends StatelessWidget {
 
   const ManagerServersView({super.key, this.fromWizard = false});
 
-  showPublicServerActions(BuildContext context, ServerListSettingsState controller, Server server) {
+  showPublicServerActions(
+      BuildContext context, ServerListSettingsState controller, Server server) {
     var locals = AppLocalizations.of(context)!;
     ServerListSettingsCubit cubit = context.read<ServerListSettingsCubit>();
 
@@ -65,7 +66,8 @@ class ManagerServersView extends StatelessWidget {
     _serverServerHandling(context, cubit);
   }
 
-  _serverServerHandling(BuildContext context, ServerListSettingsCubit cubit) async {
+  _serverServerHandling(
+      BuildContext context, ServerListSettingsCubit cubit) async {
     var locals = AppLocalizations.of(context)!;
     try {
       await cubit.saveServer();
@@ -148,7 +150,9 @@ class ManagerServersView extends StatelessWidget {
 
   openServer(BuildContext context, Server s) {
     var cubit = context.read<ServerListSettingsCubit>();
-    AutoRouter.of(context).push(ManageSingleServerRoute(server: s)).then((value) => cubit.refreshServers());
+    AutoRouter.of(context)
+        .push(ManageSingleServerRoute(server: s))
+        .then((value) => cubit.refreshServers());
   }
 
   @override
@@ -163,8 +167,10 @@ class ManagerServersView extends StatelessWidget {
         SettingsCubit settings = context.watch<SettingsCubit>();
         ServerListSettingsCubit cubit = context.read<ServerListSettingsCubit>();
         var app = context.read<AppCubit>();
-        var filteredPublicServers =
-            _.publicServers.where((s) => _.dbServers.indexWhere((element) => element.url == s.url) == -1).toList();
+        var filteredPublicServers = _.publicServers
+            .where((s) =>
+                _.dbServers.indexWhere((element) => element.url == s.url) == -1)
+            .toList();
         return Stack(
           children: [
             SettingsList(
@@ -201,7 +207,8 @@ class ManagerServersView extends StatelessWidget {
                                   title: Text(s.url),
                                   value: Text(
                                       '${cubit.isLoggedInToServer(s.url) ? '${locals.loggedIn}, ' : ''} ${locals.tapToManage}'),
-                                  onPressed: (context) => openServer(context, s),
+                                  onPressed: (context) =>
+                                      openServer(context, s),
                                 ))
                             .toList()
                         : [
@@ -230,7 +237,9 @@ class ManagerServersView extends StatelessWidget {
                                       width: 15,
                                       child: CircularProgressIndicator(
                                         strokeWidth: 2,
-                                        value: _.publicServerProgress > 0 ? _.publicServerProgress : null,
+                                        value: _.publicServerProgress > 0
+                                            ? _.publicServerProgress
+                                            : null,
                                       )),
                                 )
                               ]
@@ -242,21 +251,32 @@ class ManagerServersView extends StatelessWidget {
                                           Expanded(child: Text('${s.url} ')),
                                           Text(
                                               (s.ping != null &&
-                                                      s.ping!.compareTo(const Duration(seconds: pingTimeout)) == -1)
+                                                      s.ping!.compareTo(
+                                                              const Duration(
+                                                                  seconds:
+                                                                      pingTimeout)) ==
+                                                          -1)
                                                   ? '${s.ping?.inMilliseconds}ms'
                                                   : '>${pingTimeout}s',
-                                              style: textTheme.labelLarge?.copyWith(color: colorScheme.secondary))
+                                              style: textTheme.labelLarge
+                                                  ?.copyWith(
+                                                      color: colorScheme
+                                                          .secondary))
                                         ],
                                       ),
                                       value: Wrap(
                                         children: [
                                           Visibility(
-                                              visible: s.flag != null && s.region != null,
-                                              child: Text('${s.flag} - ${s.region} - ')),
+                                              visible: s.flag != null &&
+                                                  s.region != null,
+                                              child: Text(
+                                                  '${s.flag} - ${s.region} - ')),
                                           Text(locals.tapToAddServer)
                                         ],
                                       ),
-                                      onPressed: (context) => showPublicServerActions(context, _, s),
+                                      onPressed: (context) =>
+                                          showPublicServerActions(
+                                              context, _, s),
                                     ))
                                 .toList()),
               ],

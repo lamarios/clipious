@@ -36,16 +36,30 @@ class TvPlayerSettingsCubit extends Cubit<TvPlayerSettingsState> {
 
   TvPlayerSettingsCubit(super.initialState, this.player, this.settings);
 
-  List<String> get videoTrackNames => settings.state.useDash || (player.state.video?.liveNow ?? false)
-      ? player.state.videoController?.betterPlayerAsmsTracks.map((e) => '${e.height}p').toSet().toList() ?? []
-      : player.state.videoController?.betterPlayerDataSource?.resolutions?.keys.toList() ?? [];
+  List<String> get videoTrackNames =>
+      settings.state.useDash || (player.state.video?.liveNow ?? false)
+          ? player.state.videoController?.betterPlayerAsmsTracks
+                  .map((e) => '${e.height}p')
+                  .toSet()
+                  .toList() ??
+              []
+          : player.state.videoController?.betterPlayerDataSource?.resolutions
+                  ?.keys
+                  .toList() ??
+              [];
 
   List<String> get audioTrackNames => settings.state.useDash
-      ? player.state.videoController?.betterPlayerAsmsAudioTracks?.map((e) => '${e.label}').toList() ?? []
+      ? player.state.videoController?.betterPlayerAsmsAudioTracks
+              ?.map((e) => '${e.label}')
+              .toList() ??
+          []
       : [];
 
   List<String> get availableCaptions =>
-      player.state.videoController?.betterPlayerSubtitlesSourceList.map((e) => '${e.name}').toList() ?? [];
+      player.state.videoController?.betterPlayerSubtitlesSourceList
+          .map((e) => '${e.name}')
+          .toList() ??
+      [];
 
   BetterPlayerController? get videoController => player.state.videoController;
 
@@ -77,15 +91,16 @@ class TvPlayerSettingsCubit extends Cubit<TvPlayerSettingsState> {
     log.fine('Video quality selected $selected');
 
     if (settings.state.useDash) {
-      BetterPlayerAsmsTrack? track =
-          videoController?.betterPlayerAsmsTracks.firstWhere((element) => '${element.height}p' == selected);
+      BetterPlayerAsmsTrack? track = videoController?.betterPlayerAsmsTracks
+          .firstWhere((element) => '${element.height}p' == selected);
 
       if (track != null) {
         log.fine('Changing video track to $selected');
         videoController?.setTrack(track);
       }
     } else {
-      String? url = videoController?.betterPlayerDataSource?.resolutions?[selected];
+      String? url =
+          videoController?.betterPlayerDataSource?.resolutions?[selected];
       if (url != null) {
         videoController?.setResolution(url);
       }
@@ -94,8 +109,9 @@ class TvPlayerSettingsCubit extends Cubit<TvPlayerSettingsState> {
 
   changeChangeAudioTrack(String selected) {
     log.fine('Audio quality selected $selected');
-    BetterPlayerAsmsAudioTrack? track =
-        videoController?.betterPlayerAsmsAudioTracks?.firstWhere((e) => '${e.label}' == selected);
+    BetterPlayerAsmsAudioTrack? track = videoController
+        ?.betterPlayerAsmsAudioTracks
+        ?.firstWhere((e) => '${e.label}' == selected);
 
     if (track != null) {
       log.fine('Changing audio track to $selected');
@@ -105,8 +121,9 @@ class TvPlayerSettingsCubit extends Cubit<TvPlayerSettingsState> {
 
   changeSubtitles(String selected) {
     log.fine('Subtitles selected $selected');
-    BetterPlayerSubtitlesSource? track =
-        videoController?.betterPlayerSubtitlesSourceList.firstWhere((e) => '${e.name}' == selected);
+    BetterPlayerSubtitlesSource? track = videoController
+        ?.betterPlayerSubtitlesSourceList
+        .firstWhere((e) => '${e.name}' == selected);
 
     settings.setLastSubtitle(selected);
 
@@ -124,5 +141,6 @@ class TvPlayerSettingsCubit extends Cubit<TvPlayerSettingsState> {
 
 @freezed
 class TvPlayerSettingsState with _$TvPlayerSettingsState {
-  const factory TvPlayerSettingsState({@Default(Tabs.video) Tabs selected}) = _TvPlayerSettingsState;
+  const factory TvPlayerSettingsState({@Default(Tabs.video) Tabs selected}) =
+      _TvPlayerSettingsState;
 }

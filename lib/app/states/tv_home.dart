@@ -12,7 +12,8 @@ class TvHomeCubit extends Cubit<bool> {
       EasyDebounce.cancel('expand-home-menu');
       emit(true);
     } else {
-      EasyDebounce.debounce('expand-home-menu', const Duration(milliseconds: 50), () {
+      EasyDebounce.debounce(
+          'expand-home-menu', const Duration(milliseconds: 50), () {
         emit(false);
       });
     }
@@ -25,6 +26,7 @@ class TvHomeCubit extends Cubit<bool> {
   }
 
   scrollToTop() {
-    scrollController.animateTo(0, duration: animationDuration, curve: Curves.easeInOutQuad);
+    scrollController.animateTo(0,
+        duration: animationDuration, curve: Curves.easeInOutQuad);
   }
 }

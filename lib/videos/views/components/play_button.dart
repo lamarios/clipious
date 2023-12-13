@@ -21,7 +21,8 @@ class PlayButton extends StatelessWidget {
               AutoRouter.of(context).pop();
             },
             style: ButtonStyle(
-                backgroundColor: MaterialStateColor.resolveWith((states) => colorScheme.primary.withOpacity(1))),
+                backgroundColor: MaterialStateColor.resolveWith(
+                    (states) => colorScheme.primary.withOpacity(1))),
             icon: const Icon(
               Icons.music_note,
               size: 35,
@@ -35,7 +36,8 @@ class PlayButton extends StatelessWidget {
             AutoRouter.of(context).pop();
           },
           style: ButtonStyle(
-              backgroundColor: MaterialStateColor.resolveWith((states) => colorScheme.primaryContainer.withOpacity(1))),
+              backgroundColor: MaterialStateColor.resolveWith(
+                  (states) => colorScheme.primaryContainer.withOpacity(1))),
           icon: Icon(
             icon ?? Icons.play_arrow,
             size: 75,

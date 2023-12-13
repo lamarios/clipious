@@ -23,13 +23,18 @@ class HistoryView extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-            create: (BuildContext context) => ItemListCubit<String>(ItemListState<String>(
-                itemList: PageBasedPaginatedList<String>(getItemsFunc: service.getUserHistory, maxResults: 20)))),
+            create: (BuildContext context) => ItemListCubit<String>(
+                ItemListState<String>(
+                    itemList: PageBasedPaginatedList<String>(
+                        getItemsFunc: service.getUserHistory,
+                        maxResults: 20)))),
         BlocProvider(
-          create: (context) => HistoryCubit(null, context.read<ItemListCubit<String>>()),
+          create: (context) =>
+              HistoryCubit(null, context.read<ItemListCubit<String>>()),
         )
       ],
-      child: BlocBuilder<ItemListCubit<String>, ItemListState<String>>(builder: (context, _) {
+      child: BlocBuilder<ItemListCubit<String>, ItemListState<String>>(
+          builder: (context, _) {
         var listCubit = context.read<ItemListCubit<String>>();
         var historyCubit = context.read<HistoryCubit>();
         return Stack(
@@ -39,7 +44,8 @@ class HistoryView extends StatelessWidget {
                     child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(switch (_.error) {
-                      ItemListErrors.invalidScope => locals.itemListErrorInvalidScope,
+                      ItemListErrors.invalidScope =>
+                        locals.itemListErrorInvalidScope,
                       _ => locals.itemlistErrorGeneric
                     }),
                   ))
@@ -59,18 +65,23 @@ class HistoryView extends StatelessWidget {
                             scrollDirection: Axis.vertical,
                             itemCount: _.items.length + (_.loading ? 5 : 0),
                             itemBuilder: (context, index) => Padding(
-                              padding: EdgeInsets.only(bottom: index == _.items.length - 1 ? 70.0 : 0),
+                              padding: EdgeInsets.only(
+                                  bottom:
+                                      index == _.items.length - 1 ? 70.0 : 0),
                               child: index >= _.items.length
                                   ? const CompactVideoPlaceHolder()
                                   : SwipeActionCell(
                                       key: ValueKey(_.items[index]),
                                       trailingActions: [
                                         SwipeAction(
-                                          performsFirstActionWithFullSwipe: true,
-                                          icon: const Icon(Icons.delete, color: Colors.white),
+                                          performsFirstActionWithFullSwipe:
+                                              true,
+                                          icon: const Icon(Icons.delete,
+                                              color: Colors.white),
                                           onTap: (handler) async {
                                             await handler(true);
-                                            historyCubit.removeFromHistory(_.items[index]);
+                                            historyCubit.removeFromHistory(
+                                                _.items[index]);
                                           },
                                         )
                                       ],
@@ -88,7 +99,10 @@ class HistoryView extends StatelessWidget {
                 right: 15,
                 child: FloatingActionButton(
                   onPressed: () {
-                    okCancelDialog(context, locals.clearHistoryQuestion, locals.clearHistoryQuestionExplanation,
+                    okCancelDialog(
+                        context,
+                        locals.clearHistoryQuestion,
+                        locals.clearHistoryQuestionExplanation,
                         () => historyCubit.clearHistory());
                   },
                   child: const Icon(Icons.delete),

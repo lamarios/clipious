@@ -28,7 +28,11 @@ class AppLogsScreen extends StatelessWidget {
               scrolledUnderElevation: 0,
               backgroundColor: colors.background,
               title: Text(locals.appLogs),
-              actions: [IconButton(onPressed: cubit.selectAll, icon: const Icon(Icons.checklist))],
+              actions: [
+                IconButton(
+                    onPressed: cubit.selectAll,
+                    icon: const Icon(Icons.checklist))
+              ],
             ),
             body: SafeArea(
               bottom: false,
@@ -47,13 +51,16 @@ class AppLogsScreen extends StatelessWidget {
                         return CheckboxListTile(
                           title: Text(
                             '${log.level} - ${log.logger} - ${log.time}',
-                            style: textTheme.labelSmall?.copyWith(color: colors.secondary),
+                            style: textTheme.labelSmall
+                                ?.copyWith(color: colors.secondary),
                           ),
-                          subtitle: Text('${log.message}${log.stacktrace != null ? '\n\n${log.stacktrace}' : ''}'),
+                          subtitle: Text(
+                              '${log.message}${log.stacktrace != null ? '\n\n${log.stacktrace}' : ''}'),
                           dense: true,
                           visualDensity: VisualDensity.compact,
                           value: _.selected.contains(log.id),
-                          onChanged: (bool? value) => cubit.selectLog(log.id, value),
+                          onChanged: (bool? value) =>
+                              cubit.selectLog(log.id, value),
                         );
                       },
                       separatorBuilder: (BuildContext context, int index) {
@@ -82,7 +89,8 @@ class AppLogsScreen extends StatelessWidget {
                                   size: 15,
                                 ),
                               ),
-                              Text('${locals.copyToClipBoard} (${_.selected.length})'),
+                              Text(
+                                  '${locals.copyToClipBoard} (${_.selected.length})'),
                             ],
                           ),
                         ),

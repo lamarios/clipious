@@ -22,19 +22,26 @@ mixin _$ItemListState<T> {
   ItemListErrors get error => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $ItemListStateCopyWith<T, ItemListState<T>> get copyWith => throw _privateConstructorUsedError;
+  $ItemListStateCopyWith<T, ItemListState<T>> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $ItemListStateCopyWith<T, $Res> {
-  factory $ItemListStateCopyWith(ItemListState<T> value, $Res Function(ItemListState<T>) then) =
+  factory $ItemListStateCopyWith(
+          ItemListState<T> value, $Res Function(ItemListState<T>) then) =
       _$ItemListStateCopyWithImpl<T, $Res, ItemListState<T>>;
   @useResult
-  $Res call({PaginatedList<T> itemList, List<T> items, bool loading, ItemListErrors error});
+  $Res call(
+      {PaginatedList<T> itemList,
+      List<T> items,
+      bool loading,
+      ItemListErrors error});
 }
 
 /// @nodoc
-class _$ItemListStateCopyWithImpl<T, $Res, $Val extends ItemListState<T>> implements $ItemListStateCopyWith<T, $Res> {
+class _$ItemListStateCopyWithImpl<T, $Res, $Val extends ItemListState<T>>
+    implements $ItemListStateCopyWith<T, $Res> {
   _$ItemListStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -72,18 +79,26 @@ class _$ItemListStateCopyWithImpl<T, $Res, $Val extends ItemListState<T>> implem
 }
 
 /// @nodoc
-abstract class _$$ItemListStateImplCopyWith<T, $Res> implements $ItemListStateCopyWith<T, $Res> {
-  factory _$$ItemListStateImplCopyWith(_$ItemListStateImpl<T> value, $Res Function(_$ItemListStateImpl<T>) then) =
+abstract class _$$ItemListStateImplCopyWith<T, $Res>
+    implements $ItemListStateCopyWith<T, $Res> {
+  factory _$$ItemListStateImplCopyWith(_$ItemListStateImpl<T> value,
+          $Res Function(_$ItemListStateImpl<T>) then) =
       __$$ItemListStateImplCopyWithImpl<T, $Res>;
   @override
   @useResult
-  $Res call({PaginatedList<T> itemList, List<T> items, bool loading, ItemListErrors error});
+  $Res call(
+      {PaginatedList<T> itemList,
+      List<T> items,
+      bool loading,
+      ItemListErrors error});
 }
 
 /// @nodoc
-class __$$ItemListStateImplCopyWithImpl<T, $Res> extends _$ItemListStateCopyWithImpl<T, $Res, _$ItemListStateImpl<T>>
+class __$$ItemListStateImplCopyWithImpl<T, $Res>
+    extends _$ItemListStateCopyWithImpl<T, $Res, _$ItemListStateImpl<T>>
     implements _$$ItemListStateImplCopyWith<T, $Res> {
-  __$$ItemListStateImplCopyWithImpl(_$ItemListStateImpl<T> _value, $Res Function(_$ItemListStateImpl<T>) _then)
+  __$$ItemListStateImplCopyWithImpl(_$ItemListStateImpl<T> _value,
+      $Res Function(_$ItemListStateImpl<T>) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -119,7 +134,10 @@ class __$$ItemListStateImplCopyWithImpl<T, $Res> extends _$ItemListStateCopyWith
 
 class _$ItemListStateImpl<T> implements _ItemListState<T> {
   const _$ItemListStateImpl(
-      {required this.itemList, final List<T> items = const [], this.loading = true, this.error = ItemListErrors.none})
+      {required this.itemList,
+      final List<T> items = const [],
+      this.loading = true,
+      this.error = ItemListErrors.none})
       : _items = items;
 
   @override
@@ -150,20 +168,23 @@ class _$ItemListStateImpl<T> implements _ItemListState<T> {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ItemListStateImpl<T> &&
-            (identical(other.itemList, itemList) || other.itemList == itemList) &&
+            (identical(other.itemList, itemList) ||
+                other.itemList == itemList) &&
             const DeepCollectionEquality().equals(other._items, _items) &&
             (identical(other.loading, loading) || other.loading == loading) &&
             (identical(other.error, error) || other.error == error));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, itemList, const DeepCollectionEquality().hash(_items), loading, error);
+  int get hashCode => Object.hash(runtimeType, itemList,
+      const DeepCollectionEquality().hash(_items), loading, error);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$ItemListStateImplCopyWith<T, _$ItemListStateImpl<T>> get copyWith =>
-      __$$ItemListStateImplCopyWithImpl<T, _$ItemListStateImpl<T>>(this, _$identity);
+      __$$ItemListStateImplCopyWithImpl<T, _$ItemListStateImpl<T>>(
+          this, _$identity);
 }
 
 abstract class _ItemListState<T> implements ItemListState<T> {
@@ -183,5 +204,6 @@ abstract class _ItemListState<T> implements ItemListState<T> {
   ItemListErrors get error;
   @override
   @JsonKey(ignore: true)
-  _$$ItemListStateImplCopyWith<T, _$ItemListStateImpl<T>> get copyWith => throw _privateConstructorUsedError;
+  _$$ItemListStateImplCopyWith<T, _$ItemListStateImpl<T>> get copyWith =>
+      throw _privateConstructorUsedError;
 }

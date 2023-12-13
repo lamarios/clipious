@@ -7,7 +7,9 @@ part of 'dearrow.dart';
 // **************************************************************************
 
 DeArrow _$DeArrowFromJson(Map<String, dynamic> json) => DeArrow(
-      titles: (json['titles'] as List<dynamic>).map((e) => DeArrowTitle.fromJson(e as Map<String, dynamic>)).toList(),
+      titles: (json['titles'] as List<dynamic>)
+          .map((e) => DeArrowTitle.fromJson(e as Map<String, dynamic>))
+          .toList(),
       thumbnails: (json['thumbnails'] as List<dynamic>)
           .map((e) => DeArrowThumbnail.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -26,7 +28,8 @@ DeArrowTitle _$DeArrowTitleFromJson(Map<String, dynamic> json) => DeArrowTitle(
       uuid: json['UUID'] as String?,
     );
 
-Map<String, dynamic> _$DeArrowTitleToJson(DeArrowTitle instance) => <String, dynamic>{
+Map<String, dynamic> _$DeArrowTitleToJson(DeArrowTitle instance) =>
+    <String, dynamic>{
       'title': instance.title,
       'original': instance.original,
       'votes': instance.votes,
@@ -34,7 +37,8 @@ Map<String, dynamic> _$DeArrowTitleToJson(DeArrowTitle instance) => <String, dyn
       'UUID': instance.uuid,
     };
 
-DeArrowThumbnail _$DeArrowThumbnailFromJson(Map<String, dynamic> json) => DeArrowThumbnail(
+DeArrowThumbnail _$DeArrowThumbnailFromJson(Map<String, dynamic> json) =>
+    DeArrowThumbnail(
       timestamp: (json['timestamp'] as num?)?.toDouble(),
       original: json['original'] as bool? ?? false,
       votes: json['votes'] as int? ?? 0,
@@ -42,7 +46,8 @@ DeArrowThumbnail _$DeArrowThumbnailFromJson(Map<String, dynamic> json) => DeArro
       uuid: json['UUID'] as String?,
     );
 
-Map<String, dynamic> _$DeArrowThumbnailToJson(DeArrowThumbnail instance) => <String, dynamic>{
+Map<String, dynamic> _$DeArrowThumbnailToJson(DeArrowThumbnail instance) =>
+    <String, dynamic>{
       'timestamp': instance.timestamp,
       'original': instance.original,
       'votes': instance.votes,

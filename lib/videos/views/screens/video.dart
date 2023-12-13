@@ -51,7 +51,9 @@ class VideoScreen extends StatelessWidget {
 
   void openDownloadManager(BuildContext context) {
     var cubit = context.read<VideoCubit>();
-    AutoRouter.of(context).push(const DownloadManagerRoute()).then((value) => cubit.getDownloadStatus());
+    AutoRouter.of(context)
+        .push(const DownloadManagerRoute())
+        .then((value) => cubit.getDownloadStatus());
   }
 
   @override
@@ -63,11 +65,13 @@ class VideoScreen extends StatelessWidget {
 
     var destinations = List.of(<Widget>[
       NavigationDestination(icon: const Icon(Icons.info), label: locals.info),
-      NavigationDestination(icon: const Icon(Icons.chat_bubble), label: locals.comments),
+      NavigationDestination(
+          icon: const Icon(Icons.chat_bubble), label: locals.comments),
     ], growable: true);
 
     if (show3Navigation) {
-      destinations.add(NavigationDestination(icon: const Icon(Icons.schema), label: locals.recommended));
+      destinations.add(NavigationDestination(
+          icon: const Icon(Icons.schema), label: locals.recommended));
     }
 
     var downloadManager = context.read<DownloadManagerCubit>();
@@ -77,11 +81,16 @@ class VideoScreen extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-            create: (BuildContext context) =>
-                VideoCubit(VideoState.init(videoId: videoId), downloadManager, player, settings)),
+            create: (BuildContext context) => VideoCubit(
+                VideoState.init(videoId: videoId),
+                downloadManager,
+                player,
+                settings)),
       ],
       child: BlocConsumer<VideoCubit, VideoState>(
-        listenWhen: (previous, current) => settings.state.autoplayVideoOnLoad && previous.video != current.video,
+        listenWhen: (previous, current) =>
+            settings.state.autoplayVideoOnLoad &&
+            previous.video != current.video,
         listener: (context, state) {
           AutoRouter.of(context).pop();
           context.read<VideoCubit>().playVideo(false);
@@ -119,10 +128,16 @@ class VideoScreen extends StatelessWidget {
                                             width: 15,
                                             child: TweenAnimationBuilder(
                                                 duration: animationDuration,
-                                                tween: Tween<double>(begin: 0, end: _.downloadProgress),
-                                                builder: (context, value, child) {
+                                                tween: Tween<double>(
+                                                    begin: 0,
+                                                    end: _.downloadProgress),
+                                                builder:
+                                                    (context, value, child) {
                                                   return CircularProgressIndicator(
-                                                    value: _.downloadProgress == 0 ? null : value,
+                                                    value:
+                                                        _.downloadProgress == 0
+                                                            ? null
+                                                            : value,
                                                     strokeWidth: 2,
                                                   );
                                                 }))
@@ -132,10 +147,13 @@ class VideoScreen extends StatelessWidget {
                                 : Stack(
                                     children: [
                                       IconButton(
-                                          onPressed: _.isDownloaded || _.downloadFailed
-                                              ? () => openDownloadManager(context)
+                                          onPressed: _.isDownloaded ||
+                                                  _.downloadFailed
+                                              ? () =>
+                                                  openDownloadManager(context)
                                               : () => downloadVideo(context, _),
-                                          icon: _.isDownloaded && !_.downloadFailed
+                                          icon: _.isDownloaded &&
+                                                  !_.downloadFailed
                                               ? const Icon(Icons.download_done)
                                               : const Icon(Icons.download)),
                                       Positioned(
@@ -163,22 +181,29 @@ class VideoScreen extends StatelessWidget {
                 scrolledUnderElevation: 0,
               ),
               backgroundColor: colorScheme.background,
-              bottomNavigationBar: _.loadingVideo || settings.state.distractionFreeMode
-                  ? null
-                  : FadeIn(
-                      child: NavigationBar(
-                        backgroundColor: colorScheme.background,
-                        labelBehavior: context.read<SettingsCubit>().state.navigationBarLabelBehavior,
-                        elevation: 0,
-                        onDestinationSelected: cubit.selectIndex,
-                        selectedIndex: _.selectedIndex,
-                        destinations: destinations,
-                      ),
-                    ),
+              bottomNavigationBar:
+                  _.loadingVideo || settings.state.distractionFreeMode
+                      ? null
+                      : FadeIn(
+                          child: NavigationBar(
+                            backgroundColor: colorScheme.background,
+                            labelBehavior: context
+                                .read<SettingsCubit>()
+                                .state
+                                .navigationBarLabelBehavior,
+                            elevation: 0,
+                            onDestinationSelected: cubit.selectIndex,
+                            selectedIndex: _.selectedIndex,
+                            destinations: destinations,
+                          ),
+                        ),
               body: SafeArea(
                 bottom: false,
                 child: Padding(
-                  padding: const EdgeInsets.only(left: innerHorizontalPadding, right: innerHorizontalPadding, top: 8),
+                  padding: const EdgeInsets.only(
+                      left: innerHorizontalPadding,
+                      right: innerHorizontalPadding,
+                      top: 8),
                   child: Container(
                     color: colorScheme.background,
                     width: double.infinity,
@@ -188,7 +213,9 @@ class VideoScreen extends StatelessWidget {
                         child: _.error.isNotEmpty
                             ? Container(
                                 alignment: Alignment.center,
-                                child: Text(_.error == coulnotLoadVideos ? locals.couldntLoadVideo : _.error),
+                                child: Text(_.error == coulnotLoadVideos
+                                    ? locals.couldntLoadVideo
+                                    : _.error),
                               )
                             : show3Navigation
                                 ? _.loadingVideo
@@ -201,7 +228,8 @@ class VideoScreen extends StatelessWidget {
                                       )
                                 : _.loadingVideo
                                     ? Container(
-                                        constraints: BoxConstraints(maxWidth: tabletMaxVideoWidth),
+                                        constraints: BoxConstraints(
+                                            maxWidth: tabletMaxVideoWidth),
                                         child: const VideoPlaceHolder())
                                     : VideoTabletInnerView(
                                         video: _.video!,

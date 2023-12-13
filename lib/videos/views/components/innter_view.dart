@@ -21,7 +21,11 @@ class VideoInnerView extends StatelessWidget {
   final VideoState videoController;
 
   const VideoInnerView(
-      {super.key, required this.video, required this.selectedIndex, this.playNow, required this.videoController});
+      {super.key,
+      required this.video,
+      required this.selectedIndex,
+      this.playNow,
+      required this.videoController});
 
   @override
   Widget build(BuildContext context) {
@@ -29,14 +33,16 @@ class VideoInnerView extends StatelessWidget {
     var textTheme = Theme.of(context).textTheme;
     var cubit = context.read<VideoCubit>();
     var settings = context.read<SettingsCubit>();
-    String? currentlyPlayingVideoId = context.select((PlayerCubit player) => player.state.currentlyPlaying?.videoId);
+    String? currentlyPlayingVideoId = context
+        .select((PlayerCubit player) => player.state.currentlyPlaying?.videoId);
     final bool restart = currentlyPlayingVideoId == video.videoId;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         VideoThumbnailView(
           videoId: video.videoId,
-          thumbnailUrl: video.deArrowThumbnailUrl ?? video.getBestThumbnail()?.url ?? '',
+          thumbnailUrl:
+              video.deArrowThumbnailUrl ?? video.getBestThumbnail()?.url ?? '',
           child: Stack(
             alignment: Alignment.center,
             children: [
@@ -55,7 +61,8 @@ class VideoInnerView extends StatelessWidget {
         ),
         if (!settings.state.distractionFreeMode)
           BlocBuilder<SettingsCubit, SettingsState>(
-              buildWhen: (previous, current) => previous.playRecommendedNext != current.playRecommendedNext,
+              buildWhen: (previous, current) =>
+                  previous.playRecommendedNext != current.playRecommendedNext,
               builder: (context, settingsState) {
                 return Row(
                   mainAxisAlignment: MainAxisAlignment.end,
@@ -67,7 +74,8 @@ class VideoInnerView extends StatelessWidget {
                             onChanged: cubit.togglePlayRecommendedNext,
                             visualDensity: VisualDensity.compact)),
                     InkWell(
-                        onTap: () => cubit.togglePlayRecommendedNext(!settingsState.playRecommendedNext),
+                        onTap: () => cubit.togglePlayRecommendedNext(
+                            !settingsState.playRecommendedNext),
                         child: Text(
                           locals.addRecommendedToQueue,
                           style: textTheme.bodySmall,

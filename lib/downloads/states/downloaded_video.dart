@@ -85,8 +85,10 @@ class DownloadedVideoCubit extends Cubit<DownloadedVideoState> {
 
 @freezed
 class DownloadedVideoState with _$DownloadedVideoState {
-  const factory DownloadedVideoState({DownloadedVideo? video, String? thumbnailPath, @Default(0) double progress}) =
-      _DownloadedVideoState;
+  const factory DownloadedVideoState(
+      {DownloadedVideo? video,
+      String? thumbnailPath,
+      @Default(0) double progress}) = _DownloadedVideoState;
 
   static DownloadedVideoState init(int videoId) {
     DownloadedVideo? video;

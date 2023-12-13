@@ -48,7 +48,8 @@ class VideoList<T extends IdedVideo> extends StatelessWidget {
     var locals = AppLocalizations.of(context)!;
     var textTheme = Theme.of(context).textTheme;
     return BlocProvider(
-      create: (context) => ItemListCubit<T>(ItemListState<T>(itemList: paginatedVideoList)),
+      create: (context) =>
+          ItemListCubit<T>(ItemListState<T>(itemList: paginatedVideoList)),
       child: BlocBuilder<ItemListCubit<T>, ItemListState<T>>(
         builder: (context, _) {
           var cubit = context.read<ItemListCubit<T>>();
@@ -71,7 +72,9 @@ class VideoList<T extends IdedVideo> extends StatelessWidget {
                           onTap: () => cubit.getItems(),
                           child: Text(
                             locals.couldntFetchVideos,
-                            style: small ? textTheme.labelSmall : textTheme.bodyMedium,
+                            style: small
+                                ? textTheme.labelSmall
+                                : textTheme.bodyMedium,
                           )),
                     )
                   : Padding(
@@ -86,7 +89,9 @@ class VideoList<T extends IdedVideo> extends StatelessWidget {
                           scrollDirection: scrollDirection,
                           crossAxisSpacing: small ? 8 : 5,
                           mainAxisSpacing: small ? 8 : 5,
-                          childAspectRatio: small ? smallVideoAspectRatio : getGridAspectRatio(context),
+                          childAspectRatio: small
+                              ? smallVideoAspectRatio
+                              : getGridAspectRatio(context),
                           children: [
                             ...items.map((v) {
                               VideoInList? onlineVideo;
@@ -102,7 +107,8 @@ class VideoList<T extends IdedVideo> extends StatelessWidget {
 
                               return VideoListItem(
                                 small: small,
-                                key: ValueKey('${v.videoId}-${small.toString()}'),
+                                key: ValueKey(
+                                    '${v.videoId}-${small.toString()}'),
                                 video: onlineVideo,
                                 offlineVideo: offlineVideo,
                                 animateDownload: animateDownload,

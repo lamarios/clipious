@@ -39,13 +39,15 @@ class _$HomeLayoutCWProxyImpl implements _$HomeLayoutCWProxy {
   HomeLayout id(int id) => this(id: id);
 
   @override
-  HomeLayout smallSources(List<HomeDataSource> smallSources) => this(smallSources: smallSources);
+  HomeLayout smallSources(List<HomeDataSource> smallSources) =>
+      this(smallSources: smallSources);
 
   @override
   HomeLayout bigSource(HomeDataSource bigSource) => this(bigSource: bigSource);
 
   @override
-  HomeLayout showBigSource(bool showBigSource) => this(showBigSource: showBigSource);
+  HomeLayout showBigSource(bool showBigSource) =>
+      this(showBigSource: showBigSource);
 
   @override
 
