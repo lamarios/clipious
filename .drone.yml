@@ -12,7 +12,7 @@ steps:
       - ./submodules/flutter/bin/flutter doctor
       - ./submodules/flutter/bin/flutter config --no-analytics
       - ./submodules/flutter/bin/flutter pub get
-      - ./submodules/flutter/bin/dart format --output=json --set-exit-if-changed ./lib
+      - ./submodules/flutter/bin/dart format --output=none --set-exit-if-changed ./lib
       - ./submodules/flutter/bin/dart analyze ./lib
   - name: Build app
     image: ghcr.io/cirruslabs/flutter:stable
