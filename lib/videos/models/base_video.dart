@@ -37,9 +37,22 @@ class BaseVideo extends IdedVideo implements ShareLinks {
   @JsonKey(includeFromJson: false, includeToJson: false)
   String? deArrowThumbnailUrl;
 
-  BaseVideo(this.title, String videoId, this.lengthSeconds, this.author, this.authorId, this.authorUrl, this.videoThumbnails) : super(videoId);
+  BaseVideo(this.title, String videoId, this.lengthSeconds, this.author,
+      this.authorId, this.authorUrl, this.videoThumbnails)
+      : super(videoId);
 
-  BaseVideo._(super.videoId, this.title, this.lengthSeconds, this.author, this.authorId, this.authorUrl, this.videoThumbnails, this.filtered, this.matchedFilters, this.filterHide, this.deArrowed,
+  BaseVideo._(
+      super.videoId,
+      this.title,
+      this.lengthSeconds,
+      this.author,
+      this.authorId,
+      this.authorUrl,
+      this.videoThumbnails,
+      this.filtered,
+      this.matchedFilters,
+      this.filterHide,
+      this.deArrowed,
       this.deArrowThumbnailUrl);
 
   @override
@@ -70,6 +83,7 @@ class BaseVideo extends IdedVideo implements ShareLinks {
   }
 
   VideoInList toVideoInList() {
-    return VideoInList(title, videoId, lengthSeconds, 0, author, authorId, authorUrl, null, null, videoThumbnails);
+    return VideoInList(title, videoId, lengthSeconds, 0, author, authorId,
+        authorUrl, null, null, videoThumbnails);
   }
 }

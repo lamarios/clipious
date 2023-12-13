@@ -1,4 +1,4 @@
-class CannotAddServerError extends Error{
+class CannotAddServerError extends Error {
   final String error;
 
   CannotAddServerError({required this.error});

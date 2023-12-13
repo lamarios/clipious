@@ -22,9 +22,9 @@ class AppCubit extends Cubit<AppState> {
     onReady();
   }
 
-
   onReady() {
-    intentDataStreamSubscription = ReceiveSharingIntent.getTextStream().listen((String value) {
+    intentDataStreamSubscription =
+        ReceiveSharingIntent.getTextStream().listen((String value) {
       openAppLink(value);
     }, onError: (err) {
       log.warning("getLinkStream error: $err");
@@ -34,7 +34,6 @@ class AppCubit extends Cubit<AppState> {
     ReceiveSharingIntent.getInitialText().then((value) {
       openAppLink((value ?? ''));
     });
-
 
     service.syncHistory();
   }
@@ -49,7 +48,9 @@ class AppCubit extends Cubit<AppState> {
     try {
       Uri uri = Uri.parse(url);
       if (YOUTUBE_HOSTS.contains(uri.host)) {
-        if (uri.pathSegments.length == 1 && uri.pathSegments.contains("watch") && uri.queryParameters.containsKey('v')) {
+        if (uri.pathSegments.length == 1 &&
+            uri.pathSegments.contains("watch") &&
+            uri.queryParameters.containsKey('v')) {
           String videoId = uri.queryParameters['v']!;
           appRouter.push(VideoRoute(videoId: videoId));
         }
@@ -80,12 +81,14 @@ class AppCubit extends Cubit<AppState> {
     emit(state.copyWith(homeLayout: db.getHomeLayout()));
   }
 
-  bool get isLoggedIn => (state.server?.authToken?.isNotEmpty ?? false) || (state.server?.sidCookie?.isNotEmpty ?? false);
+  bool get isLoggedIn =>
+      (state.server?.authToken?.isNotEmpty ?? false) ||
+      (state.server?.sidCookie?.isNotEmpty ?? false);
 }
 
 @freezed
 class AppState with _$AppState {
-  static AppState init(){
+  static AppState init() {
     late Server? server;
     try {
       server = db.getCurrentlySelectedServer();
@@ -93,7 +96,8 @@ class AppState with _$AppState {
       server = null;
     }
     HomeLayout homeLayout = db.getHomeLayout();
-    bool isLoggedIn = (server?.authToken?.isNotEmpty ?? false) || (server?.sidCookie?.isNotEmpty ?? false);
+    bool isLoggedIn = (server?.authToken?.isNotEmpty ?? false) ||
+        (server?.sidCookie?.isNotEmpty ?? false);
 
     var selectedIndex = int.parse(db.getSettings(ON_OPEN)?.value ?? '0');
     if (!isLoggedIn && selectedIndex > 1 || selectedIndex < 0) {
@@ -102,5 +106,7 @@ class AppState with _$AppState {
 
     return AppState(selectedIndex, server, homeLayout);
   }
-  factory AppState(int selectedIndex, Server? server, HomeLayout homeLayout ) = _AppState;
+
+  factory AppState(int selectedIndex, Server? server, HomeLayout homeLayout) =
+      _AppState;
 }

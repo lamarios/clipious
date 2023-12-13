@@ -88,7 +88,11 @@ class DbClient {
   }
 
   Server? getServer(String url) {
-    return store.box<Server>().query(Server_.url.equals(url)).build().findFirst();
+    return store
+        .box<Server>()
+        .query(Server_.url.equals(url))
+        .build()
+        .findFirst();
   }
 
   upsertServer(Server server) {
@@ -129,11 +133,19 @@ class DbClient {
   }
 
   SettingsValue? getSettings(String name) {
-    return store.box<SettingsValue>().query(SettingsValue_.name.equals(name)).build().findFirst();
+    return store
+        .box<SettingsValue>()
+        .query(SettingsValue_.name.equals(name))
+        .build()
+        .findFirst();
   }
 
   Server getCurrentlySelectedServer() {
-    Server? server = store.box<Server>().query(Server_.inUse.equals(true)).build().findFirst();
+    Server? server = store
+        .box<Server>()
+        .query(Server_.inUse.equals(true))
+        .build()
+        .findFirst();
 
     if (server == null) {
       log.fine('No servers selected, we try to find one');
@@ -152,11 +164,18 @@ class DbClient {
 
   bool isLoggedInToCurrentServer() {
     var currentlySelectedServer = getCurrentlySelectedServer();
-    return (currentlySelectedServer.authToken?.isNotEmpty ?? false) || (currentlySelectedServer.sidCookie?.isNotEmpty ?? false);
+    return (currentlySelectedServer.authToken?.isNotEmpty ?? false) ||
+        (currentlySelectedServer.sidCookie?.isNotEmpty ?? false);
   }
 
   double getVideoProgress(String videoId) {
-    return store.box<Progress>().query(Progress_.videoId.equals(videoId)).build().findFirst()?.progress ?? 0;
+    return store
+            .box<Progress>()
+            .query(Progress_.videoId.equals(videoId))
+            .build()
+            .findFirst()
+            ?.progress ??
+        0;
   }
 
   saveProgress(Progress progress) {
@@ -181,7 +200,10 @@ class DbClient {
   }
 
   List<SearchHistoryItem> _getSearchHistory() {
-    return (store.box<SearchHistoryItem>().query()..order(SearchHistoryItem_.time, flags: Order.descending)).build().find();
+    return (store.box<SearchHistoryItem>().query()
+          ..order(SearchHistoryItem_.time, flags: Order.descending))
+        .build()
+        .find();
   }
 
   void addToSearchHistory(SearchHistoryItem searchHistoryItem) {
@@ -190,9 +212,11 @@ class DbClient {
   }
 
   void clearExcessSearchHistory() {
-    final limit = int.parse(getSettings(SEARCH_HISTORY_LIMIT)?.value ?? searchHistoryDefaultLength);
+    final limit = int.parse(
+        getSettings(SEARCH_HISTORY_LIMIT)?.value ?? searchHistoryDefaultLength);
     if (store.box<SearchHistoryItem>().count() > limit) {
-      store.box<SearchHistoryItem>().removeMany(_getSearchHistory().skip(limit).map((e) => e.id).toList());
+      store.box<SearchHistoryItem>().removeMany(
+          _getSearchHistory().skip(limit).map((e) => e.id).toList());
     }
   }
 
@@ -248,11 +272,19 @@ class DbClient {
   }
 
   DownloadedVideo? getDownloadByVideoId(String id) {
-    return store.box<DownloadedVideo>().query(DownloadedVideo_.videoId.equals(id)).build().findFirst();
+    return store
+        .box<DownloadedVideo>()
+        .query(DownloadedVideo_.videoId.equals(id))
+        .build()
+        .findFirst();
   }
 
   HistoryVideoCache? getHistoryVideoByVideoId(String videoId) {
-    return store.box<HistoryVideoCache>().query(HistoryVideoCache_.videoId.equals(videoId)).build().findFirst();
+    return store
+        .box<HistoryVideoCache>()
+        .query(HistoryVideoCache_.videoId.equals(videoId))
+        .build()
+        .findFirst();
   }
 
   void upsertHistoryVideo(HistoryVideoCache vid) {
@@ -280,7 +312,11 @@ class DbClient {
   }
 
   ChannelNotification? getChannelNotification(String channelId) {
-    return store.box<ChannelNotification>().query(ChannelNotification_.channelId.equals(channelId)).build().findFirst();
+    return store
+        .box<ChannelNotification>()
+        .query(ChannelNotification_.channelId.equals(channelId))
+        .build()
+        .findFirst();
   }
 
   List<ChannelNotification> getAllChannelNotifications() {
@@ -305,7 +341,11 @@ class DbClient {
   }
 
   PlaylistNotification? getPlaylistNotification(String channelId) {
-    return store.box<PlaylistNotification>().query(PlaylistNotification_.playlistId.equals(channelId)).build().findFirst();
+    return store
+        .box<PlaylistNotification>()
+        .query(PlaylistNotification_.playlistId.equals(channelId))
+        .build()
+        .findFirst();
   }
 
   List<PlaylistNotification> getAllPlaylistNotifications() {
@@ -320,7 +360,8 @@ class DbClient {
     store.box<PlaylistNotification>().put(notif);
   }
 
-  void setPlaylistNotificationLastViewedVideo(String playlistId, int videoCount) {
+  void setPlaylistNotificationLastViewedVideo(
+      String playlistId, int videoCount) {
     var notif = getPlaylistNotification(playlistId);
     if (notif != null) {
       notif.lastVideoCount = videoCount;
@@ -330,7 +371,11 @@ class DbClient {
   }
 
   DeArrowCache? getDeArrowCache(String videoId) {
-    return store.box<DeArrowCache>().query(DeArrowCache_.videoId.equals(videoId)).build().findFirst();
+    return store
+        .box<DeArrowCache>()
+        .query(DeArrowCache_.videoId.equals(videoId))
+        .build()
+        .findFirst();
   }
 
   void upsertDeArrowCache(DeArrowCache cache) {

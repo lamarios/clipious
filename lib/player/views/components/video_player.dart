@@ -25,7 +25,8 @@ class VideoPlayer extends StatefulWidget {
       this.disableControls,
       this.offlineVideo,
       this.startAt})
-      : assert(video == null || offlineVideo == null, 'cannot provide both video and offline video\n');
+      : assert(video == null || offlineVideo == null,
+            'cannot provide both video and offline video\n');
 
   @override
   State<VideoPlayer> createState() => _VideoPlayerState();
@@ -38,7 +39,8 @@ class _VideoPlayerState extends State<VideoPlayer> {
   Widget build(BuildContext context) {
     ColorScheme colorScheme = Theme.of(context).colorScheme;
     AppLocalizations locals = AppLocalizations.of(context)!;
-    Color overFlowTextColor = Theme.of(context).textTheme.bodyMedium?.color ?? Colors.black;
+    Color overFlowTextColor =
+        Theme.of(context).textTheme.bodyMedium?.color ?? Colors.black;
 
     var player = context.read<PlayerCubit>();
     var settings = context.read<SettingsCubit>();
@@ -58,8 +60,11 @@ class _VideoPlayerState extends State<VideoPlayer> {
       child: BlocBuilder<VideoPlayerCubit, VideoPlayerState>(
         builder: (context, _) => BlocListener<PlayerCubit, PlayerState>(
           listenWhen: (previous, current) =>
-              previous.mediaCommand != current.mediaCommand && current.mediaCommand != null,
-          listener: (context, state) => context.read<VideoPlayerCubit>().handleCommand(state.mediaCommand!),
+              previous.mediaCommand != current.mediaCommand &&
+              current.mediaCommand != null,
+          listener: (context, state) => context
+              .read<VideoPlayerCubit>()
+              .handleCommand(state.mediaCommand!),
           child: _.videoController == null
               ? const Text('nullll')
               : BetterPlayer(

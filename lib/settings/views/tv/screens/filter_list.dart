@@ -41,11 +41,15 @@ class TvFilterListSettingsScreen extends StatelessWidget {
               child: ListView(
                 children: [
                   SettingsTitle(title: locals.videoFiltersExplanation),
-                  ...(keys.map((e) => VideoFilterChannel(key: ValueKey(Random().nextInt(10000000)), filters: mappedFilters[e] ?? []))),
+                  ...(keys.map((e) => VideoFilterChannel(
+                      key: ValueKey(Random().nextInt(10000000)),
+                      filters: mappedFilters[e] ?? []))),
                   SettingsTile(
                     title: locals.addVideoFilter,
                     leading: const Icon(Icons.add),
-                    onSelected: (context) => AutoRouter.of(context).push(TvFilterEditSettingsRoute()).then((value) => cubit.refreshFilters()),
+                    onSelected: (context) => AutoRouter.of(context)
+                        .push(TvFilterEditSettingsRoute())
+                        .then((value) => cubit.refreshFilters()),
                   ),
                 ],
               ),
@@ -65,7 +69,10 @@ class VideoFilterChannel extends StatelessWidget {
   editFilter(BuildContext context, {required VideoFilter filter}) {
     var cubit = context.read<VideoFilterCubit>();
 
-    AutoRouter.of(context).push(TvFilterEditSettingsRoute(channelId: filter.channelId, filter: filter)).then((value) => cubit.refreshFilters());
+    AutoRouter.of(context)
+        .push(TvFilterEditSettingsRoute(
+            channelId: filter.channelId, filter: filter))
+        .then((value) => cubit.refreshFilters());
   }
 
   @override
@@ -74,8 +81,10 @@ class VideoFilterChannel extends StatelessWidget {
     ColorScheme colors = Theme.of(context).colorScheme;
 
     return BlocProvider(
-        create: (context) => VideoFilterChannelCubit(VideoFilterChannelState(filters: filters)),
-        child: BlocBuilder<VideoFilterChannelCubit, VideoFilterChannelState>(builder: (context, _) {
+        create: (context) =>
+            VideoFilterChannelCubit(VideoFilterChannelState(filters: filters)),
+        child: BlocBuilder<VideoFilterChannelCubit, VideoFilterChannelState>(
+            builder: (context, _) {
           var cubit = context.read<VideoFilterChannelCubit>();
           var filterCubit = context.read<VideoFilterCubit>();
           TextStyle titleStyle = TextStyle(color: colors.primary);
@@ -83,10 +92,17 @@ class VideoFilterChannel extends StatelessWidget {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              if (_.loading) const SizedBox(height: 20, width:20, child: CircularProgressIndicator()),
-              if (!_.loading && _.channel == null) SettingsTitle(title: locals.videoFilterAllChannels),
-              if (!_.loading && _.channel != null) SettingsTitle(title: _.channel?.author ?? ''),
-              ..._.filters.map((e) => SettingsTile(key: ValueKey(e.id), title: e.localizedLabel(locals, context), onSelected: (context) => editFilter(context, filter: e)))
+              if (_.loading)
+                const SizedBox(
+                    height: 20, width: 20, child: CircularProgressIndicator()),
+              if (!_.loading && _.channel == null)
+                SettingsTitle(title: locals.videoFilterAllChannels),
+              if (!_.loading && _.channel != null)
+                SettingsTitle(title: _.channel?.author ?? ''),
+              ..._.filters.map((e) => SettingsTile(
+                  key: ValueKey(e.id),
+                  title: e.localizedLabel(locals, context),
+                  onSelected: (context) => editFilter(context, filter: e)))
             ],
           );
         }));

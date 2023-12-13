@@ -12,7 +12,12 @@ class MultiValueSwitch extends StatelessWidget {
   final MultiValueSwitchPosition position;
   final Function(MultiValueSwitchPosition selected) onChange;
 
-  const MultiValueSwitch({super.key, required this.left, required this.right, required this.position, required this.onChange});
+  const MultiValueSwitch(
+      {super.key,
+      required this.left,
+      required this.right,
+      required this.position,
+      required this.onChange});
 
   @override
   Widget build(BuildContext context) {
@@ -23,10 +28,14 @@ class MultiValueSwitch extends StatelessWidget {
     final isLeft = position == MultiValueSwitchPosition.left;
     final isRight = position == MultiValueSwitchPosition.right;
     return GestureDetector(
-      onTap: () => onChange(isLeft ? MultiValueSwitchPosition.right : MultiValueSwitchPosition.left),
+      onTap: () => onChange(isLeft
+          ? MultiValueSwitchPosition.right
+          : MultiValueSwitchPosition.left),
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 2),
-        decoration: BoxDecoration(color: colors.secondaryContainer, borderRadius: BorderRadius.circular(15)),
+        decoration: BoxDecoration(
+            color: colors.secondaryContainer,
+            borderRadius: BorderRadius.circular(15)),
         width: width,
         height: 25,
         child: Stack(
@@ -40,7 +49,8 @@ class MultiValueSwitch extends StatelessWidget {
               duration: animationDuration,
               curve: Curves.easeInOutQuad,
               child: Container(
-                decoration: BoxDecoration(color: colors.primary, shape: BoxShape.circle),
+                decoration: BoxDecoration(
+                    color: colors.primary, shape: BoxShape.circle),
               ),
             ),
             Positioned(

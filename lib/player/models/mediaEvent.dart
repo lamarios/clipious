@@ -1,9 +1,9 @@
 class MediaEvent<T> {
- final  MediaEventType? type;
- final  MediaState state;
- final  T? value;
+  final MediaEventType? type;
+  final MediaState state;
+  final T? value;
 
- const MediaEvent({this.type, required this.state, this.value});
+  const MediaEvent({this.type, required this.state, this.value});
 }
 
 enum MediaEventType {

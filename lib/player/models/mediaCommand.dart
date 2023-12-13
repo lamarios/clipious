@@ -15,8 +15,8 @@ enum MediaCommandType {
 }
 
 class MediaCommand<T> {
- final MediaCommandType type;
- final T? value;
+  final MediaCommandType type;
+  final T? value;
 
   const MediaCommand(this.type, {this.value});
 }

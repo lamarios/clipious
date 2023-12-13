@@ -25,25 +25,33 @@ class Player extends StatelessWidget {
       builder: (context) {
         var cubit = context.read<PlayerCubit>();
 
-        bool showPlayer = context.select((PlayerCubit value) => value.state.hasVideo);
+        bool showPlayer =
+            context.select((PlayerCubit value) => value.state.hasVideo);
         double? top = context.select((PlayerCubit value) => value.state.top);
         bool isMini = context.select((PlayerCubit value) => value.state.isMini);
         bool isPip = context.select((PlayerCubit value) => value.state.isPip);
-        bool isHidden = context.select((PlayerCubit value) => value.state.isHidden);
-        bool isDragging = context.select((PlayerCubit value) => value.state.isDragging);
-        double opacity = context.select((PlayerCubit value) => value.state.opacity);
-        Video? currentlyPlaying = context.select((PlayerCubit value) => value.state.currentlyPlaying);
+        bool isHidden =
+            context.select((PlayerCubit value) => value.state.isHidden);
+        bool isDragging =
+            context.select((PlayerCubit value) => value.state.isDragging);
+        double opacity =
+            context.select((PlayerCubit value) => value.state.opacity);
+        Video? currentlyPlaying =
+            context.select((PlayerCubit value) => value.state.currentlyPlaying);
         bool onPhone = getDeviceType() == DeviceType.phone;
-        FullScreenState fullScreen = context.select((PlayerCubit value) => value.state.fullScreenState);
+        FullScreenState fullScreen =
+            context.select((PlayerCubit value) => value.state.fullScreenState);
         bool isFullScreen = fullScreen == FullScreenState.fullScreen;
-        double aspectRatio = context.select((PlayerCubit value) => value.state.aspectRatio);
+        double aspectRatio =
+            context.select((PlayerCubit value) => value.state.aspectRatio);
 
         Widget videoPlayer = showPlayer
             ? BlocBuilder<PlayerCubit, PlayerState>(
                 buildWhen: (previous, current) =>
                     previous.isAudio != current.isAudio ||
                     previous.currentlyPlaying != current.currentlyPlaying ||
-                    previous.offlineCurrentlyPlaying != current.offlineCurrentlyPlaying,
+                    previous.offlineCurrentlyPlaying !=
+                        current.offlineCurrentlyPlaying,
                 builder: (context, _) {
                   return AspectRatio(
                     aspectRatio: isFullScreen ? aspectRatio : 16 / 9,
@@ -51,13 +59,15 @@ class Player extends StatelessWidget {
                         ? AudioPlayer(
                             key: const ValueKey('audio-player'),
                             video: _.isAudio ? _.currentlyPlaying : null,
-                            offlineVideo: _.isAudio ? _.offlineCurrentlyPlaying : null,
+                            offlineVideo:
+                                _.isAudio ? _.offlineCurrentlyPlaying : null,
                             miniPlayer: false,
                           )
                         : VideoPlayer(
                             key: const ValueKey('player'),
                             video: !_.isAudio ? _.currentlyPlaying : null,
-                            offlineVideo: !_.isAudio ? _.offlineCurrentlyPlaying : null,
+                            offlineVideo:
+                                !_.isAudio ? _.offlineCurrentlyPlaying : null,
                             miniPlayer: false,
                             startAt: _.startAt,
                           ),
@@ -100,7 +110,9 @@ class Player extends StatelessWidget {
                                   ? colors.secondaryContainer
                                   : colors.background,
                           child: Column(
-                            mainAxisAlignment: isFullScreen ? MainAxisAlignment.center : MainAxisAlignment.start,
+                            mainAxisAlignment: isFullScreen
+                                ? MainAxisAlignment.center
+                                : MainAxisAlignment.start,
                             children: [
                               isMini || isPip || isFullScreen
                                   ? const SizedBox.shrink()
@@ -112,11 +124,13 @@ class Player extends StatelessWidget {
                                         icon: const Icon(Icons.expand_more),
                                         onPressed: cubit.showMiniPlayer,
                                       ),
-                                      actions: isHidden || currentlyPlaying == null
+                                      actions: isHidden ||
+                                              currentlyPlaying == null
                                           ? []
                                           : [
                                               Visibility(
-                                                visible: currentlyPlaying != null,
+                                                visible:
+                                                    currentlyPlaying != null,
                                                 child: VideoShareButton(
                                                   video: currentlyPlaying!,
                                                   showTimestampOption: true,
@@ -133,11 +147,18 @@ class Player extends StatelessWidget {
                                         : isMini
                                             ? targetHeight
                                             : 500,
-                                    maxWidth: isFullScreen ? double.infinity : tabletMaxVideoWidth),
+                                    maxWidth: isFullScreen
+                                        ? double.infinity
+                                        : tabletMaxVideoWidth),
                                 duration: animationDuration,
                                 child: Row(
-                                  mainAxisAlignment: isMini ? MainAxisAlignment.start : MainAxisAlignment.center,
-                                  children: [Expanded(flex: 1, child: videoPlayer), ...miniPlayerWidgets],
+                                  mainAxisAlignment: isMini
+                                      ? MainAxisAlignment.start
+                                      : MainAxisAlignment.center,
+                                  children: [
+                                    Expanded(flex: 1, child: videoPlayer),
+                                    ...miniPlayerWidgets
+                                  ],
                                 ),
                               ),
                               ...bigPlayerWidgets,

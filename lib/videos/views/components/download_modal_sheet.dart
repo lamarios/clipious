@@ -18,10 +18,13 @@ class DownloadModalSheet extends StatelessWidget {
   // called when we know whether we can start downloading stuff
   final Function(bool isDownloadStarted)? onDownloadStarted;
 
-  const DownloadModalSheet({Key? key, required this.video, this.onDownloadStarted, this.onDownload}) : super(key: key);
+  const DownloadModalSheet(
+      {Key? key, required this.video, this.onDownloadStarted, this.onDownload})
+      : super(key: key);
 
   static showVideoModalSheet(BuildContext context, BaseVideo video,
-      {Function(bool isDownloadStarted)? onDownloadStarted, Function()? onDownload}) {
+      {Function(bool isDownloadStarted)? onDownloadStarted,
+      Function()? onDownload}) {
     showModalBottomSheet<void>(
         enableDrag: true,
         showDragHandle: true,
@@ -43,11 +46,14 @@ class DownloadModalSheet extends StatelessWidget {
     var locals = AppLocalizations.of(context)!;
     Navigator.of(context).pop();
     var downloadController = context.read<DownloadManagerCubit>();
-    scaffoldKey.currentState?.showSnackBar(SnackBar(content: Text(locals.videoDownloadStarted)));
-    bool canDownload =
-        await downloadManager.addDownload(video.videoId, audioOnly: _.audioOnly, quality: _.quality) ?? false;
+    scaffoldKey.currentState
+        ?.showSnackBar(SnackBar(content: Text(locals.videoDownloadStarted)));
+    bool canDownload = await downloadManager.addDownload(video.videoId,
+            audioOnly: _.audioOnly, quality: _.quality) ??
+        false;
     if (!canDownload) {
-      scaffoldKey.currentState?.showSnackBar(SnackBar(content: Text(locals.videoAlreadyDownloaded)));
+      scaffoldKey.currentState?.showSnackBar(
+          SnackBar(content: Text(locals.videoAlreadyDownloaded)));
     }
     if (onDownloadStarted != null) {
       onDownloadStarted!(canDownload);
@@ -58,8 +64,10 @@ class DownloadModalSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     AppLocalizations locals = AppLocalizations.of(context)!;
     return BlocProvider(
-      create: (BuildContext context) => DownloadModalSheetCubit(DownloadModalSheetState()),
-      child: BlocBuilder<DownloadModalSheetCubit, DownloadModalSheetState>(builder: (context, _) {
+      create: (BuildContext context) =>
+          DownloadModalSheetCubit(DownloadModalSheetState()),
+      child: BlocBuilder<DownloadModalSheetCubit, DownloadModalSheetState>(
+          builder: (context, _) {
         var cubit = context.read<DownloadModalSheetCubit>();
         return Padding(
           padding: const EdgeInsets.all(8.0),
@@ -73,7 +81,9 @@ class DownloadModalSheet extends StatelessWidget {
                     padding: const EdgeInsets.only(bottom: 8.0),
                     child: ToggleButtons(
                       isSelected: qualities.map((e) => e == _.quality).toList(),
-                      onPressed: _.audioOnly ? null : (index) => cubit.setQuality(qualities[index]),
+                      onPressed: _.audioOnly
+                          ? null
+                          : (index) => cubit.setQuality(qualities[index]),
                       children: qualities.map((e) => Text(e)).toList(),
                     ),
                   ),

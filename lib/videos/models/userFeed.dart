@@ -11,7 +11,8 @@ class UserFeed {
 
   UserFeed(this.notifications, this.videos);
 
-  factory UserFeed.fromJson(Map<String, dynamic> json) => _$UserFeedFromJson(json);
+  factory UserFeed.fromJson(Map<String, dynamic> json) =>
+      _$UserFeedFromJson(json);
 
   Map<String, dynamic> toJson() => _$UserFeedToJson(this);
 }

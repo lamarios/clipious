@@ -13,39 +13,46 @@ class TvHorizontalPaginatedListView<T> extends StatelessWidget {
   final Widget Function() getPlaceHolder;
 
   const TvHorizontalPaginatedListView(
-      {Key? key, required this.paginatedList, required this.itemBuilder, this.startItems, required this.getPlaceHolder})
+      {Key? key,
+      required this.paginatedList,
+      required this.itemBuilder,
+      this.startItems,
+      required this.getPlaceHolder})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => PaginatedListCubit(
-          PaginatedListViewController.init<T>(paginatedList: this.paginatedList, startItems: this.startItems)),
+          PaginatedListViewController.init<T>(
+              paginatedList: this.paginatedList, startItems: this.startItems)),
       child: BlocBuilder<PaginatedListCubit<T>, PaginatedListViewController<T>>(
           builder: (context, _) {
-            var cubit = context.read<PaginatedListCubit<T>>();
-            // filter items if possible
-            List<T> items = _.items;
-            if (items.isNotEmpty && items[0] is BaseVideo) {
-              items = filteredVideos<BaseVideo>(_.items.cast()).cast();
-            }
-            return Stack(
-                children: [
-                  _.loading
-                      ? const LinearProgressIndicator(
-                          minHeight: 3,
-                        )
-                      : const SizedBox.shrink(),
-                  ListView.builder(
-                    controller: cubit.scrollController,
-                    scrollDirection: Axis.horizontal,
-                    itemCount: items.length + (_.loading ? 10 : 0),
-                    itemBuilder: (BuildContext context, int index) =>
-                        index >= items.length ? getPlaceHolder() : itemBuilder(items[index]),
-                  ),
-                ],
-              );
-          }),
+        var cubit = context.read<PaginatedListCubit<T>>();
+        // filter items if possible
+        List<T> items = _.items;
+        if (items.isNotEmpty && items[0] is BaseVideo) {
+          items = filteredVideos<BaseVideo>(_.items.cast()).cast();
+        }
+        return Stack(
+          children: [
+            _.loading
+                ? const LinearProgressIndicator(
+                    minHeight: 3,
+                  )
+                : const SizedBox.shrink(),
+            ListView.builder(
+              controller: cubit.scrollController,
+              scrollDirection: Axis.horizontal,
+              itemCount: items.length + (_.loading ? 10 : 0),
+              itemBuilder: (BuildContext context, int index) =>
+                  index >= items.length
+                      ? getPlaceHolder()
+                      : itemBuilder(items[index]),
+            ),
+          ],
+        );
+      }),
     );
   }
 }

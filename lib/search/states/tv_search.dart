@@ -45,5 +45,8 @@ class TvSearchCubit extends Cubit<TvSearchState> {
 
 @freezed
 class TvSearchState with _$TvSearchState {
-  const factory TvSearchState({@Default(false) bool hasVideos, @Default(false) bool hasChannels, @Default(false) bool hasPlaylists}) = _TvSearchState;
+  const factory TvSearchState(
+      {@Default(false) bool hasVideos,
+      @Default(false) bool hasChannels,
+      @Default(false) bool hasPlaylists}) = _TvSearchState;
 }

@@ -7,7 +7,6 @@ import 'package:invidious/settings/states/settings.dart';
 import 'package:invidious/settings/views/screens/settings.dart';
 import 'package:settings_ui/settings_ui.dart';
 
-
 @RoutePage()
 class VideoPlayerSettingsScreen extends StatelessWidget {
   const VideoPlayerSettingsScreen({super.key});
@@ -29,7 +28,8 @@ class VideoPlayerSettingsScreen extends StatelessWidget {
         elevation: 0,
         scrolledUnderElevation: 0,
       ),
-      body: SafeArea(child: BlocBuilder<SettingsCubit, SettingsState>(builder: (context, _) {
+      body: SafeArea(child:
+          BlocBuilder<SettingsCubit, SettingsState>(builder: (context, _) {
         var cubit = context.read<SettingsCubit>();
         return DefaultTabController(
           length: 2,
@@ -77,7 +77,8 @@ class VideoPlayerSettingsScreen extends StatelessWidget {
                   initialValue: _.forceLandscapeFullScreen,
                   onToggle: cubit.toggleForceLandscapeFullScreen,
                   title: Text(locals.lockFullScreenToLandscape),
-                  description: Text(locals.lockFullScreenToLandscapeDescription),
+                  description:
+                      Text(locals.lockFullScreenToLandscapeDescription),
                 ),
                 SettingsTile.switchTile(
                   leading: const Icon(Icons.open_in_full),
@@ -87,39 +88,41 @@ class VideoPlayerSettingsScreen extends StatelessWidget {
                   description: Text(locals.fillFullscreenDescription),
                 ),
               ]),
-              SettingsSection(
-                  title: Text(locals.subtitles),
-                  tiles: [
-                    SettingsTile(
-                      leading: const Icon(Icons.format_size),
-                      title: Text(locals.subtitleFontSize),
-                      description: Text(locals.subtitleFontSizeDescription),
-                      trailing: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          IconButton(
-                              onPressed: () => cubit.changeSubtitleSize(increase: false), icon: const Icon(Icons.remove)),
-                          Text(_.subtitleSize.floor().toString()),
-                          IconButton(
-                              onPressed: () => cubit.changeSubtitleSize(increase: true), icon: const Icon(Icons.add)),
-                        ],
-                      ),
-                    ),
-                    SettingsTile.switchTile(
-                      leading: const Icon(Icons.format_paint),
-                      initialValue: _.subtitlesBackground,
-                      onToggle: cubit.setSubtitlesBackground,
-                      title: Text(locals.subtitlesBackground),
-                      description: Text(locals.subtitlesBackgroundDescription),
-                    ),
-                    SettingsTile.switchTile(
-                      leading: const Icon(Icons.language),
-                      initialValue: _.rememberSubtitles,
-                      onToggle: cubit.toggleRememberSubtitles,
-                      title: Text(locals.rememberSubtitleLanguage),
-                      description: Text(locals.rememberSubtitleLanguageDescription),
-                    ),
-                  ]),
+              SettingsSection(title: Text(locals.subtitles), tiles: [
+                SettingsTile(
+                  leading: const Icon(Icons.format_size),
+                  title: Text(locals.subtitleFontSize),
+                  description: Text(locals.subtitleFontSizeDescription),
+                  trailing: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      IconButton(
+                          onPressed: () =>
+                              cubit.changeSubtitleSize(increase: false),
+                          icon: const Icon(Icons.remove)),
+                      Text(_.subtitleSize.floor().toString()),
+                      IconButton(
+                          onPressed: () =>
+                              cubit.changeSubtitleSize(increase: true),
+                          icon: const Icon(Icons.add)),
+                    ],
+                  ),
+                ),
+                SettingsTile.switchTile(
+                  leading: const Icon(Icons.format_paint),
+                  initialValue: _.subtitlesBackground,
+                  onToggle: cubit.setSubtitlesBackground,
+                  title: Text(locals.subtitlesBackground),
+                  description: Text(locals.subtitlesBackgroundDescription),
+                ),
+                SettingsTile.switchTile(
+                  leading: const Icon(Icons.language),
+                  initialValue: _.rememberSubtitles,
+                  onToggle: cubit.toggleRememberSubtitles,
+                  title: Text(locals.rememberSubtitleLanguage),
+                  description: Text(locals.rememberSubtitleLanguageDescription),
+                ),
+              ]),
             ],
           ),
         );

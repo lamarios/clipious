@@ -36,7 +36,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
   openLayoutEditor(BuildContext context) {
     var app = context.read<AppCubit>();
-    AutoRouter.of(context).push(const EditHomeLayoutRoute()).then((value) => app.updateLayout());
+    AutoRouter.of(context)
+        .push(const EditHomeLayoutRoute())
+        .then((value) => app.updateLayout());
   }
 
   @override
@@ -57,11 +59,16 @@ class _HomeScreenState extends State<HomeScreen> {
     // Only after at least the action method is set, the notification events are delivered
     AwesomeNotifications().setListeners(
         onActionReceivedMethod: NotificationController.onActionReceivedMethod,
-        onNotificationCreatedMethod: NotificationController.onNotificationCreatedMethod,
-        onNotificationDisplayedMethod: NotificationController.onNotificationDisplayedMethod,
-        onDismissActionReceivedMethod: NotificationController.onDismissActionReceivedMethod);
+        onNotificationCreatedMethod:
+            NotificationController.onNotificationCreatedMethod,
+        onNotificationDisplayedMethod:
+            NotificationController.onNotificationDisplayedMethod,
+        onDismissActionReceivedMethod:
+            NotificationController.onDismissActionReceivedMethod);
 
-    AwesomeNotifications().getInitialNotificationAction().then((initialNotification) {
+    AwesomeNotifications()
+        .getInitialNotificationAction()
+        .then((initialNotification) {
       print('Initial notification ${initialNotification?.payload}');
 
       if (initialNotification != null) {
@@ -83,13 +90,18 @@ class _HomeScreenState extends State<HomeScreen> {
     var locals = AppLocalizations.of(context)!;
 
     return BlocBuilder<AppCubit, AppState>(buildWhen: (previous, current) {
-      return previous.selectedIndex != current.selectedIndex || previous.server != current.server;
+      return previous.selectedIndex != current.selectedIndex ||
+          previous.server != current.server;
     }, builder: (context, _) {
       var app = context.read<AppCubit>();
       var settings = context.watch<SettingsCubit>().state;
 
-      var allowedPages = settings.appLayout.where((element) => element.isPermitted(context)).toList();
-      var navigationWidgets = allowedPages.map((e) => e.getBottomBarNavigationWidget(context)).toList();
+      var allowedPages = settings.appLayout
+          .where((element) => element.isPermitted(context))
+          .toList();
+      var navigationWidgets = allowedPages
+          .map((e) => e.getBottomBarNavigationWidget(context))
+          .toList();
 
       var selectedIndex = _.selectedIndex;
       if (selectedIndex >= allowedPages.length) {
@@ -135,7 +147,11 @@ class _HomeScreenState extends State<HomeScreen> {
             // backgroundColor: Colors.pink,
             backgroundColor: colorScheme.background,
             actions: [
-              selectedPage == HomeDataSource.subscription ? IconButton(onPressed: () => openSubscriptionManagement(context), icon: const Icon(Icons.checklist)) : const SizedBox.shrink(),
+              selectedPage == HomeDataSource.subscription
+                  ? IconButton(
+                      onPressed: () => openSubscriptionManagement(context),
+                      icon: const Icon(Icons.checklist))
+                  : const SizedBox.shrink(),
               const AppBarDownloadButton(),
               IconButton(
                 onPressed: () {
@@ -160,7 +176,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: NavigationSwitcher(
                     child: Container(
                         // home handles its own padding because we don't want to cut horizontal scroll lists on the right
-                        padding: EdgeInsets.symmetric(horizontal: selectedPage == HomeDataSource.home ? 0 : innerHorizontalPadding),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: selectedPage == HomeDataSource.home
+                                ? 0
+                                : innerHorizontalPadding),
                         key: ValueKey(selectedPage),
                         child: selectedPage?.build(context, false) ??
                             const Opacity(

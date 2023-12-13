@@ -95,7 +95,8 @@ class SettingsCubit extends Cubit<SettingsState> {
   }
 
   void selectCountry(String selected) {
-    country = countryCodes.firstWhere((element) => element.name == selected, orElse: () => state.country);
+    country = countryCodes.firstWhere((element) => element.name == selected,
+        orElse: () => state.country);
   }
 
   serverChanged() {
@@ -254,7 +255,11 @@ class SettingsCubit extends Cubit<SettingsState> {
 
   String? getLocaleDisplayName() {
     List<String>? localeString = state.locale?.split('_');
-    Locale? l = localeString != null ? Locale.fromSubtags(languageCode: localeString[0], scriptCode: localeString.length >= 2 ? localeString[1] : null) : null;
+    Locale? l = localeString != null
+        ? Locale.fromSubtags(
+            languageCode: localeString[0],
+            scriptCode: localeString.length >= 2 ? localeString[1] : null)
+        : null;
 
     return l?.nativeDisplayLanguageScript;
   }
@@ -267,14 +272,16 @@ class SettingsCubit extends Cubit<SettingsState> {
     navigationBarLabelBehavior = behavior;
   }
 
-  Future<EnableBackGroundNotificationResponse> setBackgroundNotifications(bool b) async {
+  Future<EnableBackGroundNotificationResponse> setBackgroundNotifications(
+      bool b) async {
     if (!b) {
       await stopTasks();
       backgroundNotifications = b;
     } else {
       var isAllowed = await AwesomeNotifications().isNotificationAllowed();
       if (!isAllowed) {
-        var allowed = await AwesomeNotifications().requestPermissionToSendNotifications();
+        var allowed =
+            await AwesomeNotifications().requestPermissionToSendNotifications();
         if (!allowed) {
           return EnableBackGroundNotificationResponse.notificationsNotAllowed;
         }
@@ -304,7 +311,8 @@ class SettingsCubit extends Cubit<SettingsState> {
   setBackgroundCheckFrequency(int i) {
     if (i > 0 && i <= 24) {
       backgroundNotificationFrequency = i;
-      EasyDebounce.debounce('restarting-background-service', const Duration(seconds: 2), () {
+      EasyDebounce.debounce(
+          'restarting-background-service', const Duration(seconds: 2), () {
         setupTasks(this);
       });
     }
@@ -344,14 +352,18 @@ class SettingsCubit extends Cubit<SettingsState> {
 
   set playerShuffleMode(bool b) => _set(PLAYER_SHUFFLE, b);
 
-  set playerRepeatMode(PlayerRepeat repeatMode) => _set(PLAYER_REPEAT, PlayerRepeat.values.indexOf(repeatMode));
+  set playerRepeatMode(PlayerRepeat repeatMode) =>
+      _set(PLAYER_REPEAT, PlayerRepeat.values.indexOf(repeatMode));
 
   set lastSubtitles(String s) => _set(LAST_SUBTITLE, s);
 
   set playRecommendedNext(bool b) => _set(PLAY_RECOMMENDED_NEXT, b);
 
   set country(Country c) {
-    String code = countryCodes.firstWhere((element) => element.name == c.name, orElse: () => state.country).code;
+    String code = countryCodes
+        .firstWhere((element) => element.name == c.name,
+            orElse: () => state.country)
+        .code;
     _set(BROWSING_COUNTRY, code);
   }
 
@@ -373,9 +385,11 @@ class SettingsCubit extends Cubit<SettingsState> {
 
   set useSearchHistory(bool b) => _set(USE_SEARCH_HISTORY, b);
 
-  set appLayout(List<HomeDataSource> layout) => _set(APP_LAYOUT, layout.map((e) => e.name).join(","));
+  set appLayout(List<HomeDataSource> layout) =>
+      _set(APP_LAYOUT, layout.map((e) => e.name).join(","));
 
-  set navigationBarLabelBehavior(NavigationDestinationLabelBehavior behavior) => _set(NAVIGATION_BAR_LABEL_BEHAVIOR, behavior.name);
+  set navigationBarLabelBehavior(NavigationDestinationLabelBehavior behavior) =>
+      _set(NAVIGATION_BAR_LABEL_BEHAVIOR, behavior.name);
 
   set distractionFreeMode(bool b) => _set(DISTRACTION_FREE_MODE, b);
 
@@ -383,7 +397,8 @@ class SettingsCubit extends Cubit<SettingsState> {
 
   set subscriptionsNotifications(bool b) => _set(SUBSCRIPTION_NOTIFICATIONS, b);
 
-  set backgroundNotificationFrequency(int i) => _set(BACKGROUND_CHECK_FREQUENCY, i);
+  set backgroundNotificationFrequency(int i) =>
+      _set(BACKGROUND_CHECK_FREQUENCY, i);
 
   set subtitlesBackground(bool b) => _set(SUBTITLE_BACKGROUND, b);
 
@@ -408,10 +423,13 @@ class SettingsCubit extends Cubit<SettingsState> {
 
 @freezed
 class SettingsState with _$SettingsState {
-  const factory SettingsState({required Map<String, SettingsValue> settings, required PackageInfo packageInfo}) = _SettingsState;
+  const factory SettingsState(
+      {required Map<String, SettingsValue> settings,
+      required PackageInfo packageInfo}) = _SettingsState;
 
   static SettingsState init() {
-    PackageInfo packageInfo = PackageInfo(appName: '', packageName: '', version: '', buildNumber: '');
+    PackageInfo packageInfo =
+        PackageInfo(appName: '', packageName: '', version: '', buildNumber: '');
     var allSettings = db.getAllSettings();
     var settings = {for (var s in allSettings) s.name: s};
 
@@ -430,60 +448,78 @@ class SettingsState with _$SettingsState {
 
   bool get rememberSubtitles => _get(REMEMBER_LAST_SUBTITLE)?.value == 'true';
 
-  bool get rememberPlayBackSpeed => _get(REMEMBER_PLAYBACK_SPEED)?.value == 'true';
+  bool get rememberPlayBackSpeed =>
+      _get(REMEMBER_PLAYBACK_SPEED)?.value == 'true';
 
   bool get fillFullscreen => _get(FILL_FULLSCREEN)?.value == 'true';
 
   String? get locale => _get(LOCALE)?.value;
 
-  int get searchHistoryLimit => int.parse(_get(SEARCH_HISTORY_LIMIT)?.value ?? searchHistoryDefaultLength);
+  int get searchHistoryLimit => int.parse(
+      _get(SEARCH_HISTORY_LIMIT)?.value ?? searchHistoryDefaultLength);
 
   double get lastSpeed => double.parse(_get(LAST_SPEED)?.value ?? "1.0");
 
   bool get playerShuffleMode => _get(PLAYER_SHUFFLE)?.value == "true";
 
-  PlayerRepeat get playerRepeatMode => PlayerRepeat.values[int.parse(_get(PLAYER_REPEAT)?.value ?? '0')];
+  PlayerRepeat get playerRepeatMode =>
+      PlayerRepeat.values[int.parse(_get(PLAYER_REPEAT)?.value ?? '0')];
 
   String get lastSubtitles => _get(LAST_SUBTITLE)?.value ?? '';
 
   bool get playRecommendedNext => _get(PLAY_RECOMMENDED_NEXT)?.value == "true";
 
-  Country get country => getCountryFromCode(_get(BROWSING_COUNTRY)?.value ?? 'US');
+  Country get country =>
+      getCountryFromCode(_get(BROWSING_COUNTRY)?.value ?? 'US');
 
   bool get useDynamicTheme => _get(DYNAMIC_THEME)?.value == 'true';
 
   bool get useDash => _get(USE_DASH)?.value == 'true';
 
-  bool get autoplayVideoOnLoad => _get(PLAYER_AUTOPLAY_ON_LOAD)?.value == 'true';
+  bool get autoplayVideoOnLoad =>
+      _get(PLAYER_AUTOPLAY_ON_LOAD)?.value == 'true';
 
-  bool get useReturnYoutubeDislike => _get(USE_RETURN_YOUTUBE_DISLIKE)?.value == 'true';
+  bool get useReturnYoutubeDislike =>
+      _get(USE_RETURN_YOUTUBE_DISLIKE)?.value == 'true';
 
-  double get subtitleSize => double.parse(_get(SUBTITLE_SIZE)?.value ?? subtitleDefaultSize);
+  double get subtitleSize =>
+      double.parse(_get(SUBTITLE_SIZE)?.value ?? subtitleDefaultSize);
 
   bool get skipSslVerification => _get(SKIP_SSL_VERIFICATION)?.value == 'true';
 
-  bool get forceLandscapeFullScreen => _get(LOCK_ORIENTATION_FULLSCREEN)?.value == 'true';
+  bool get forceLandscapeFullScreen =>
+      _get(LOCK_ORIENTATION_FULLSCREEN)?.value == 'true';
 
-  ThemeMode get themeMode => ThemeMode.values.firstWhere((element) => element.name == _get(THEME_MODE)?.value, orElse: () => ThemeMode.system);
+  ThemeMode get themeMode => ThemeMode.values.firstWhere(
+      (element) => element.name == _get(THEME_MODE)?.value,
+      orElse: () => ThemeMode.system);
 
   bool get useSearchHistory => _get(USE_SEARCH_HISTORY)?.value == 'true';
 
-  List<HomeDataSource> get appLayout => (_get(APP_LAYOUT)?.value ?? HomeDataSource.defaultSettings().map((e) => e.name).join(","))
+  List<HomeDataSource> get appLayout => (_get(APP_LAYOUT)?.value ??
+          HomeDataSource.defaultSettings().map((e) => e.name).join(","))
       .split(',')
       .where((element) => element.isNotEmpty)
-      .map((e) => HomeDataSource.values.firstWhere((element) => element.name == e))
+      .map((e) =>
+          HomeDataSource.values.firstWhere((element) => element.name == e))
       .toList();
 
   NavigationDestinationLabelBehavior get navigationBarLabelBehavior =>
-      NavigationDestinationLabelBehavior.values.firstWhere((e) => e.name == (_get(NAVIGATION_BAR_LABEL_BEHAVIOR)?.value ?? NavigationDestinationLabelBehavior.onlyShowSelected.name));
+      NavigationDestinationLabelBehavior.values.firstWhere((e) =>
+          e.name ==
+          (_get(NAVIGATION_BAR_LABEL_BEHAVIOR)?.value ??
+              NavigationDestinationLabelBehavior.onlyShowSelected.name));
 
   bool get distractionFreeMode => _get(DISTRACTION_FREE_MODE)?.value == "true";
 
-  bool get backgroundNotifications => _get(BACKGROUND_NOTIFICATIONS)?.value == 'true';
+  bool get backgroundNotifications =>
+      _get(BACKGROUND_NOTIFICATIONS)?.value == 'true';
 
-  bool get subscriptionsNotifications => _get(SUBSCRIPTION_NOTIFICATIONS)?.value == 'true';
+  bool get subscriptionsNotifications =>
+      _get(SUBSCRIPTION_NOTIFICATIONS)?.value == 'true';
 
-  int get backgroundNotificationFrequency => int.parse(_get(BACKGROUND_CHECK_FREQUENCY)?.value ?? "1");
+  int get backgroundNotificationFrequency =>
+      int.parse(_get(BACKGROUND_CHECK_FREQUENCY)?.value ?? "1");
 
   bool get subtitlesBackground => _get(SUBTITLE_BACKGROUND)?.value == 'true';
 
@@ -498,7 +534,6 @@ class SettingsState with _$SettingsState {
       return null;
     }
   }
-
 
   const SettingsState._();
 }

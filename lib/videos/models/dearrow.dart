@@ -15,12 +15,16 @@ class DeArrow {
   @JsonKey(includeFromJson: false, includeToJson: false)
   late final String videoId;
 
-  String? get thumbnailUrl =>
-      thumbnails.isNotEmpty ? 'https://dearrow-thumb.ajay.app/api/v1/getThumbnail?videoID=:id&time=:time'.replaceAll(':id', videoId).replaceAll(":time", thumbnails.first.timestamp.toString()) : null;
+  String? get thumbnailUrl => thumbnails.isNotEmpty
+      ? 'https://dearrow-thumb.ajay.app/api/v1/getThumbnail?videoID=:id&time=:time'
+          .replaceAll(':id', videoId)
+          .replaceAll(":time", thumbnails.first.timestamp.toString())
+      : null;
 
   DeArrow({required this.titles, required this.thumbnails});
 
-  factory DeArrow.fromJson(Map<String, dynamic> json) => _$DeArrowFromJson(json);
+  factory DeArrow.fromJson(Map<String, dynamic> json) =>
+      _$DeArrowFromJson(json);
 
   Map<String, dynamic> toJson() => _$DeArrowToJson(this);
 
@@ -28,7 +32,8 @@ class DeArrow {
     var process = db.getSettings(DEARROW)?.value == "true";
     if (videos != null && process) {
       bool doThumbnails = db.getSettings(DEARROW_THUMBNAILS)?.value == "true";
-      var futureTasks = videos.map((e) => _deArrowVideo(e, doThumbnails)).toList();
+      var futureTasks =
+          videos.map((e) => _deArrowVideo(e, doThumbnails)).toList();
 
       await Future.wait(futureTasks);
 
@@ -89,9 +94,15 @@ class DeArrowTitle {
   final bool locked;
   final String? UUID;
 
-  DeArrowTitle({this.title, this.original = false, this.votes = 0, this.locked = false, this.UUID});
+  DeArrowTitle(
+      {this.title,
+      this.original = false,
+      this.votes = 0,
+      this.locked = false,
+      this.UUID});
 
-  factory DeArrowTitle.fromJson(Map<String, dynamic> json) => _$DeArrowTitleFromJson(json);
+  factory DeArrowTitle.fromJson(Map<String, dynamic> json) =>
+      _$DeArrowTitleFromJson(json);
 
   Map<String, dynamic> toJson() => _$DeArrowTitleToJson(this);
 }
@@ -104,9 +115,15 @@ class DeArrowThumbnail {
   final bool locked;
   final String? UUID;
 
-  DeArrowThumbnail({this.timestamp, this.original = false, this.votes = 0, this.locked = false, this.UUID});
+  DeArrowThumbnail(
+      {this.timestamp,
+      this.original = false,
+      this.votes = 0,
+      this.locked = false,
+      this.UUID});
 
-  factory DeArrowThumbnail.fromJson(Map<String, dynamic> json) => _$DeArrowThumbnailFromJson(json);
+  factory DeArrowThumbnail.fromJson(Map<String, dynamic> json) =>
+      _$DeArrowThumbnailFromJson(json);
 
   Map<String, dynamic> toJson() => _$DeArrowThumbnailToJson(this);
 }

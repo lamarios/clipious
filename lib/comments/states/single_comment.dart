@@ -18,9 +18,8 @@ class SingleCommentCubit extends Cubit<SingleCommentState> {
 
 @freezed
 class SingleCommentState with _$SingleCommentState {
-  const factory SingleCommentState({
-    required Comment comment,
-    @Default(false) bool showingChildren,
-    VideoComments? children
-}) = _SingleCommentState;
+  const factory SingleCommentState(
+      {required Comment comment,
+      @Default(false) bool showingChildren,
+      VideoComments? children}) = _SingleCommentState;
 }

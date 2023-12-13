@@ -13,7 +13,6 @@ import '../../../../app/views/tv/screens/tv_home.dart';
 import '../../../../settings/models/db/server.dart';
 import '../../../../settings/states/server_list_settings.dart';
 
-
 @RoutePage()
 class TvWelcomeWizardScreen extends StatelessWidget {
   const TvWelcomeWizardScreen({Key? key}) : super(key: key);
@@ -29,14 +28,17 @@ class TvWelcomeWizardScreen extends StatelessWidget {
           providers: [
             BlocProvider(create: (context) => WelcomeWizardCubit(null)),
             BlocProvider(
-              create: (context) => ServerListSettingsCubit(ServerListSettingsState(publicServers: [], dbServers: []), context.read<AppCubit>()),
+              create: (context) => ServerListSettingsCubit(
+                  ServerListSettingsState(publicServers: [], dbServers: []),
+                  context.read<AppCubit>()),
             )
           ],
           child: BlocListener<ServerListSettingsCubit, ServerListSettingsState>(
             listener: (context, state) {
               context.read<WelcomeWizardCubit>().getSelectedServer();
             },
-            child: BlocBuilder<WelcomeWizardCubit, Server?>(builder: (context, server) {
+            child: BlocBuilder<WelcomeWizardCubit, Server?>(
+                builder: (context, server) {
               var cubit = context.read<WelcomeWizardCubit>();
               return DefaultTextStyle(
                 style: textTheme.bodyLarge!,
@@ -51,14 +53,18 @@ class TvWelcomeWizardScreen extends StatelessWidget {
                       unfocusedColor: server == null ? colors.background : null,
                       onPressed: server != null
                           ? (context) {
-                              AutoRouter.of(context).replace(const TvHomeRoute());
+                              AutoRouter.of(context)
+                                  .replace(const TvHomeRoute());
                             }
                           : null,
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
                           locals.startUsingClipious,
-                          style: textTheme.titleLarge!.copyWith(color: server == null ? Colors.white.withOpacity(0.5) : Colors.white),
+                          style: textTheme.titleLarge!.copyWith(
+                              color: server == null
+                                  ? Colors.white.withOpacity(0.5)
+                                  : Colors.white),
                         ),
                       ),
                     )

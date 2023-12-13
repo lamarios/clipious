@@ -9,9 +9,11 @@ part 'channelVideos.g.dart';
 class VideosWithContinuation extends ItemtWithContinuation<VideoInList> {
   List<VideoInList> videos;
 
-  VideosWithContinuation(this.videos, String? continuation) : super(continuation);
+  VideosWithContinuation(this.videos, String? continuation)
+      : super(continuation);
 
-  factory VideosWithContinuation.fromJson(Map<String, dynamic> json) => _$VideosWithContinuationFromJson(json);
+  factory VideosWithContinuation.fromJson(Map<String, dynamic> json) =>
+      _$VideosWithContinuationFromJson(json);
 
   Map<String, dynamic> toJson() => _$VideosWithContinuationToJson(this);
 

@@ -6,7 +6,8 @@ Future<void> main() async {
   await preCommitHook.writeAsString(
     '''
 #!/bin/sh
-exec dart format -l 120 ./lib
+set -e
+exec ./submodules/flutter/bin/dart format --set-exit-if-changed ./lib
 ''',
   );
 

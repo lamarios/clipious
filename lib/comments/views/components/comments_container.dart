@@ -18,7 +18,8 @@ class CommentsContainer extends StatelessWidget {
     var textTheme = Theme.of(context).textTheme;
 
     return BlocProvider(
-      create: (context) => CommentsContainerCubit(const CommentsContainerState()),
+      create: (context) =>
+          CommentsContainerCubit(const CommentsContainerState()),
       child: BlocBuilder<CommentsContainerCubit, CommentsContainerState>(
         builder: (context, _) {
           var cubit = context.read<CommentsContainerCubit>();
@@ -30,7 +31,8 @@ class CommentsContainer extends StatelessWidget {
                   Expanded(
                     child: Text(
                       locals.comments,
-                      style: textTheme.titleMedium?.copyWith(color: colorScheme.secondary),
+                      style: textTheme.titleMedium
+                          ?.copyWith(color: colorScheme.secondary),
                     ),
                   ),
                   DropdownButton<String>(

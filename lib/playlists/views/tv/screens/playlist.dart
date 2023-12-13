@@ -22,10 +22,14 @@ import '../../../../videos/views/components/video_thumbnail.dart';
 
 @RoutePage()
 class TvPlaylistScreen extends PlaylistViewScreen {
-  const TvPlaylistScreen({super.key, required super.playlist, required super.canDeleteVideos});
+  const TvPlaylistScreen(
+      {super.key, required super.playlist, required super.canDeleteVideos});
 
   playPlaylist(BuildContext context, PlaylistState _) {
-    AutoRouter.of(context).push(TvPlayerRoute(videos: _.playlist.videos.where((element) => !element.filterHide).toList()));
+    AutoRouter.of(context).push(TvPlayerRoute(
+        videos: _.playlist.videos
+            .where((element) => !element.filterHide)
+            .toList()));
   }
 
   @override
@@ -35,7 +39,8 @@ class TvPlaylistScreen extends PlaylistViewScreen {
     var player = context.read<PlayerCubit>();
     TextTheme textTheme = Theme.of(context).textTheme;
     return BlocProvider(
-      create: (context) => PlaylistCubit(PlaylistState(playlist: playlist, playlistItemHeight: 0), player),
+      create: (context) => PlaylistCubit(
+          PlaylistState(playlist: playlist, playlistItemHeight: 0), player),
       child: Scaffold(
         body: BlocBuilder<PlaylistCubit, PlaylistState>(
           builder: (context, playlistState) {
@@ -45,13 +50,17 @@ class TvPlaylistScreen extends PlaylistViewScreen {
                 playlistState.playlist.videos.isNotEmpty
                     ? CarouselSlider.builder(
                         itemCount: playlistState.playlist.videos.length,
-                        itemBuilder: (BuildContext context, int itemIndex, int pageViewIndex) {
-                          BaseVideo video = playlistState.playlist.videos[itemIndex];
+                        itemBuilder: (BuildContext context, int itemIndex,
+                            int pageViewIndex) {
+                          BaseVideo video =
+                              playlistState.playlist.videos[itemIndex];
                           return VideoThumbnailView(
                               videoId: video.videoId,
                               decoration: BoxDecoration(),
                               thumbnailUrl: video.deArrowThumbnailUrl ??
-                                  ImageObject.getBestThumbnail(video.videoThumbnails)?.url ??
+                                  ImageObject.getBestThumbnail(
+                                          video.videoThumbnails)
+                                      ?.url ??
                                   '');
                         },
                         options: CarouselOptions(
@@ -74,7 +83,9 @@ class TvPlaylistScreen extends PlaylistViewScreen {
                   bottom: 0,
                   right: 0,
                   child: TweenAnimationBuilder(
-                      tween: Tween<double>(begin: 0, end: playlistState.showImage ? 0 : overlayBlur),
+                      tween: Tween<double>(
+                          begin: 0,
+                          end: playlistState.showImage ? 0 : overlayBlur),
                       duration: animationDuration,
                       curve: Curves.easeInOutQuad,
                       builder: (context, value, child) {
@@ -87,7 +98,8 @@ class TvPlaylistScreen extends PlaylistViewScreen {
                             child: Container(
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20),
-                                color: colors.background.withOpacity(overlayBackgroundOpacity),
+                                color: colors.background
+                                    .withOpacity(overlayBackgroundOpacity),
                               ),
                               child: Padding(
                                 padding: const EdgeInsets.all(16.0),
@@ -96,25 +108,41 @@ class TvPlaylistScreen extends PlaylistViewScreen {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Row(
-                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
                                       children: [
                                         Padding(
-                                          padding: const EdgeInsets.only(right: 16),
+                                          padding:
+                                              const EdgeInsets.only(right: 16),
                                           child: playlistState.loading
                                               // child: true
                                               ? TvButton(
-                                                  onFocusChanged: cubit.setShowImage,
+                                                  onFocusChanged:
+                                                      cubit.setShowImage,
                                                   child: Padding(
-                                                    padding: const EdgeInsets.all(10.0),
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            10.0),
                                                     child: SizedBox(
                                                       width: 60,
                                                       height: 60,
-                                                      child: TweenAnimationBuilder(
-                                                        tween: Tween<double>(begin: 0, end: playlistState.loadingProgress),
-                                                        duration: animationDuration,
-                                                        curve: Curves.easeInOutQuad,
-                                                        builder: (context, value, child) => CircularProgressIndicator(
-                                                          value: value > 0 && value < 1 ? value : null,
+                                                      child:
+                                                          TweenAnimationBuilder(
+                                                        tween: Tween<double>(
+                                                            begin: 0,
+                                                            end: playlistState
+                                                                .loadingProgress),
+                                                        duration:
+                                                            animationDuration,
+                                                        curve: Curves
+                                                            .easeInOutQuad,
+                                                        builder: (context,
+                                                                value, child) =>
+                                                            CircularProgressIndicator(
+                                                          value: value > 0 &&
+                                                                  value < 1
+                                                              ? value
+                                                              : null,
                                                         ),
                                                       ),
                                                     ),
@@ -125,9 +153,12 @@ class TvPlaylistScreen extends PlaylistViewScreen {
                                                   onFocusChanged: (focus) {
                                                     cubit.setShowImage(focus);
                                                   },
-                                                  onPressed: (context) => playPlaylist(context, playlistState),
+                                                  onPressed: (context) =>
+                                                      playPlaylist(context,
+                                                          playlistState),
                                                   child: const Padding(
-                                                    padding: EdgeInsets.all(15.0),
+                                                    padding:
+                                                        EdgeInsets.all(15.0),
                                                     child: Icon(
                                                       Icons.play_arrow,
                                                       size: 50,
@@ -136,7 +167,8 @@ class TvPlaylistScreen extends PlaylistViewScreen {
                                                 ),
                                         ),
                                         Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
                                           children: [
                                             Text(
                                               playlistState.playlist.title,
@@ -145,7 +177,8 @@ class TvPlaylistScreen extends PlaylistViewScreen {
                                               style: textTheme.headlineLarge,
                                             ),
                                             Text(
-                                              locals.nVideos(playlistState.playlist.videos.length),
+                                              locals.nVideos(playlistState
+                                                  .playlist.videos.length),
                                               style: textTheme.bodyLarge,
                                             ),
                                           ],
@@ -155,18 +188,25 @@ class TvPlaylistScreen extends PlaylistViewScreen {
                                     if (!playlistState.loading)
                                       Expanded(
                                         child: Padding(
-                                          padding: const EdgeInsets.only(top: 16.0),
+                                          padding:
+                                              const EdgeInsets.only(top: 16.0),
                                           child: GridView.count(
                                             controller: cubit.scrollController,
                                             childAspectRatio: 16 / 13,
                                             crossAxisCount: 3,
                                             children: [
                                               ...playlistState.playlist.videos
-                                                  .where((element) => !element.filterHide)
-                                                  .map((e) => TvVideoItem(video: e, autoFocus: false))
+                                                  .where((element) =>
+                                                      !element.filterHide)
+                                                  .map((e) => TvVideoItem(
+                                                      video: e,
+                                                      autoFocus: false))
                                                   .toList(),
                                               if (playlistState.loading)
-                                                ...repeatWidget(() => const TvVideoItemPlaceHolder(), count: 10)
+                                                ...repeatWidget(
+                                                    () =>
+                                                        const TvVideoItemPlaceHolder(),
+                                                    count: 10)
                                             ],
                                           ),
                                         ),

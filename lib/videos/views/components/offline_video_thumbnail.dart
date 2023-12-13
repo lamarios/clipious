@@ -7,7 +7,9 @@ class OfflineVideoThumbnail extends StatelessWidget {
   final DownloadedVideo video;
   final double borderRadius;
 
-  const OfflineVideoThumbnail({Key? key, required this.video, this.borderRadius = 10}) : super(key: key);
+  const OfflineVideoThumbnail(
+      {Key? key, required this.video, this.borderRadius = 10})
+      : super(key: key);
 
   Future<String?> getThumbnail() async {
     var tries = 0;
@@ -41,7 +43,8 @@ class OfflineVideoThumbnail extends StatelessWidget {
                     ))
                 : Container(
                     decoration: BoxDecoration(
-                        color: colors.secondaryContainer, borderRadius: BorderRadius.circular(borderRadius)),
+                        color: colors.secondaryContainer,
+                        borderRadius: BorderRadius.circular(borderRadius)),
                   ),
           );
         });

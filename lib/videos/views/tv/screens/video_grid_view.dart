@@ -15,16 +15,23 @@ class TvGridScreen extends StatelessWidget {
   final String? tags;
   final String title;
 
-  const TvGridScreen({Key? key, required this.paginatedVideoList, this.tags, required this.title}) : super(key: key);
+  const TvGridScreen(
+      {Key? key,
+      required this.paginatedVideoList,
+      this.tags,
+      required this.title})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     var textTheme = Theme.of(context).textTheme;
     return BlocProvider(
-      create: (BuildContext context) => ItemListCubit(ItemListState(itemList: paginatedVideoList)),
+      create: (BuildContext context) =>
+          ItemListCubit(ItemListState(itemList: paginatedVideoList)),
       child: Scaffold(
         body: TvOverscan(
-          child: BlocBuilder<ItemListCubit<VideoInList>, ItemListState<VideoInList>>(builder: (context, _) {
+          child: BlocBuilder<ItemListCubit<VideoInList>,
+              ItemListState<VideoInList>>(builder: (context, _) {
             var cubit = context.read<ItemListCubit<VideoInList>>();
             return Column(
               children: [
@@ -53,8 +60,16 @@ class TvGridScreen extends StatelessWidget {
                   childAspectRatio: 16 / 13,
                   crossAxisCount: 3,
                   children: [
-                    ..._.items.where((element) => !element.filterHide).map((e) => TvVideoItem(key: ValueKey(e.videoId), video: e, autoFocus: false)).toList(),
-                    if (_.loading) ...repeatWidget(() => const TvVideoItemPlaceHolder(), count: 10)
+                    ..._.items
+                        .where((element) => !element.filterHide)
+                        .map((e) => TvVideoItem(
+                            key: ValueKey(e.videoId),
+                            video: e,
+                            autoFocus: false))
+                        .toList(),
+                    if (_.loading)
+                      ...repeatWidget(() => const TvVideoItemPlaceHolder(),
+                          count: 10)
                   ],
                 ))
               ],

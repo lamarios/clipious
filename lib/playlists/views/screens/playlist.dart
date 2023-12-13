@@ -24,12 +24,14 @@ class PlaylistViewScreen extends StatelessWidget {
   final Playlist playlist;
   final bool canDeleteVideos;
 
-  const PlaylistViewScreen({super.key, required this.playlist, required this.canDeleteVideos});
+  const PlaylistViewScreen(
+      {super.key, required this.playlist, required this.canDeleteVideos});
 
   deletePlayList(BuildContext context) {
     var cubit = context.read<PlaylistCubit>();
     var locals = AppLocalizations.of(context)!;
-    okCancelDialog(context, locals.deletePlayListQ, locals.irreversibleAction, () async {
+    okCancelDialog(context, locals.deletePlayListQ, locals.irreversibleAction,
+        () async {
       await cubit.deletePlaylist();
 
       if (context.mounted) {
@@ -64,7 +66,8 @@ class PlaylistViewScreen extends StatelessWidget {
     var locals = AppLocalizations.of(context)!;
     var player = context.read<PlayerCubit>();
     return BlocProvider(
-      create: (context) => PlaylistCubit(PlaylistState(playlist: playlist, playlistItemHeight: 100), player),
+      create: (context) => PlaylistCubit(
+          PlaylistState(playlist: playlist, playlistItemHeight: 100), player),
       child: BlocBuilder<PlaylistCubit, PlaylistState>(
         builder: (context, playlistState) {
           var cubit = context.read<PlaylistCubit>();
@@ -87,89 +90,136 @@ class PlaylistViewScreen extends StatelessWidget {
                             ),
                           ),
                         )
-                      : BellIcon(itemId: playlist.playlistId, type: BellIconType.playlist)
+                      : BellIcon(
+                          itemId: playlist.playlistId,
+                          type: BellIconType.playlist)
                 ],
               ),
               backgroundColor: colors.background,
               body: SafeArea(
                   bottom: false,
-                  child: playlistState.loading || playlistState.playlist.videos.isNotEmpty
+                  child: playlistState.loading ||
+                          playlistState.playlist.videos.isNotEmpty
                       ? Center(
                           child: Container(
-                            constraints: BoxConstraints(maxWidth: tabletMaxVideoWidth),
+                            constraints:
+                                BoxConstraints(maxWidth: tabletMaxVideoWidth),
                             child: Column(
                               children: [
                                 Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                                    child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                                      SizedBox(
-                                        height: 250,
-                                        child: PlaylistThumbnails(
-                                          videos: playlistState.playlist.videos,
-                                          bestThumbnails: true,
-                                          children: playlistState.loading
-                                              ? [
-                                                  Center(
-                                                      child: Container(
-                                                    padding: const EdgeInsets.all(5),
-                                                    decoration: BoxDecoration(
-                                                        color: colors.background.withOpacity(0.5),
-                                                        shape: BoxShape.circle),
-                                                    child: TweenAnimationBuilder(
-                                                      tween: Tween<double>(begin: 0, end: playlistState.loadingProgress),
-                                                      duration: animationDuration,
-                                                      curve: Curves.easeInOutQuad,
-                                                      builder: (context, value, child) => CircularProgressIndicator(
-                                                        value: value > 0 && value < 1 ? value : null,
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 8.0),
+                                    child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          SizedBox(
+                                            height: 250,
+                                            child: PlaylistThumbnails(
+                                              videos:
+                                                  playlistState.playlist.videos,
+                                              bestThumbnails: true,
+                                              children: playlistState.loading
+                                                  ? [
+                                                      Center(
+                                                          child: Container(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(5),
+                                                        decoration:
+                                                            BoxDecoration(
+                                                                color: colors
+                                                                    .background
+                                                                    .withOpacity(
+                                                                        0.5),
+                                                                shape: BoxShape
+                                                                    .circle),
+                                                        child:
+                                                            TweenAnimationBuilder(
+                                                          tween: Tween<double>(
+                                                              begin: 0,
+                                                              end: playlistState
+                                                                  .loadingProgress),
+                                                          duration:
+                                                              animationDuration,
+                                                          curve: Curves
+                                                              .easeInOutQuad,
+                                                          builder: (context,
+                                                                  value,
+                                                                  child) =>
+                                                              CircularProgressIndicator(
+                                                            value: value > 0 &&
+                                                                    value < 1
+                                                                ? value
+                                                                : null,
+                                                          ),
+                                                        ),
+                                                      ))
+                                                    ]
+                                                  : [
+                                                      PlayButton(
+                                                        onPressed: (isAudio) =>
+                                                            cubit.play(isAudio),
                                                       ),
-                                                    ),
-                                                  ))
-                                                ]
-                                              : [
-                                                  PlayButton(
-                                                    onPressed: (isAudio) => cubit.play(isAudio),
-                                                  ),
-                                                  Builder(builder: (context) {
-                                                    return Positioned(
-                                                        right: 5,
-                                                        bottom: 3,
-                                                        child: AddToQueueButton(
-                                                          videos: playlistState.playlist.videos,
-                                                        ));
-                                                  })
-                                                ],
-                                        ),
-                                      )
-                                    ])),
+                                                      Builder(
+                                                          builder: (context) {
+                                                        return Positioned(
+                                                            right: 5,
+                                                            bottom: 3,
+                                                            child:
+                                                                AddToQueueButton(
+                                                              videos:
+                                                                  playlistState
+                                                                      .playlist
+                                                                      .videos,
+                                                            ));
+                                                      })
+                                                    ],
+                                            ),
+                                          )
+                                        ])),
                                 Expanded(
                                     child: Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: innerHorizontalPadding),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: innerHorizontalPadding),
                                   child: ListView(
                                     controller: cubit.scrollController,
                                     children: [
                                       ...playlistState.playlist.videos
-                                          .where((element) => !element.filterHide)
+                                          .where(
+                                              (element) => !element.filterHide)
                                           .map((v) => SwipeActionCell(
-                                              key: ValueKey('swipe-${v.videoId}'),
+                                              key: ValueKey(
+                                                  'swipe-${v.videoId}'),
                                               trailingActions: canDeleteVideos
                                                   ? [
                                                       SwipeAction(
-                                                        icon: const Icon(Icons.delete, color: Colors.white),
-                                                        performsFirstActionWithFullSwipe: true,
+                                                        icon: const Icon(
+                                                            Icons.delete,
+                                                            color:
+                                                                Colors.white),
+                                                        performsFirstActionWithFullSwipe:
+                                                            true,
                                                         onTap: (handler) async {
                                                           await handler(true);
-                                                          removeVideoFromPlayList(context, v);
+                                                          removeVideoFromPlayList(
+                                                              context, v);
                                                         },
                                                       )
                                                     ]
                                                   : null,
                                               child: CompactVideo(
                                                 video: v,
-                                                onTap: () => openVideo(context, v.videoId),
+                                                onTap: () => openVideo(
+                                                    context, v.videoId),
                                                 key: ValueKey(v.videoId),
                                               )))
                                           .toList(),
-                                      if (playlistState.loading) ...repeatWidget(() => const CompactVideoPlaceHolder(), count: 5)
+                                      if (playlistState.loading)
+                                        ...repeatWidget(
+                                            () =>
+                                                const CompactVideoPlaceHolder(),
+                                            count: 5)
                                     ],
                                   ),
                                 ))
@@ -177,7 +227,9 @@ class PlaylistViewScreen extends StatelessWidget {
                             ),
                           ),
                         )
-                      : Container(alignment: Alignment.center, child: Text(locals.noVideoInPlayList))));
+                      : Container(
+                          alignment: Alignment.center,
+                          child: Text(locals.noVideoInPlayList))));
         },
       ),
     );

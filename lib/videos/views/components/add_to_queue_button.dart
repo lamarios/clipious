@@ -15,7 +15,10 @@ class AddToQueueButton extends StatelessWidget {
     return (state.videos.isNotEmpty) &&
         (videos.length > 1 ||
             (videos.length == 1 &&
-                (state.videos.indexWhere((element) => element.videoId == videos[0].videoId) ?? -1) < 0));
+                (state.videos.indexWhere((element) =>
+                            element.videoId == videos[0].videoId) ??
+                        -1) <
+                    0));
   }
 
   addToQueue(BuildContext context) {
@@ -32,7 +35,9 @@ class AddToQueueButton extends StatelessWidget {
         builder: (context, _) {
           return FilledButton.tonal(
               style: const ButtonStyle(visualDensity: VisualDensity.compact),
-              onPressed: canAddToQueue(context, videos) ? () => addToQueue(context) : null,
+              onPressed: canAddToQueue(context, videos)
+                  ? () => addToQueue(context)
+                  : null,
               child: Row(
                 children: [
                   const Padding(

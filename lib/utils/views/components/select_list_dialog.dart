@@ -21,7 +21,8 @@ class SelectList<T> extends StatelessWidget {
       required this.onSelect,
       this.searchFilter,
       this.asyncSearch})
-      : assert(values == null || asyncSearch == null, 'Cannot provide both async search and list of values');
+      : assert(values == null || asyncSearch == null,
+            'Cannot provide both async search and list of values');
 
   static show<T>(BuildContext context,
       {List<T>? values,
@@ -60,8 +61,10 @@ class SelectList<T> extends StatelessWidget {
       content: SizedBox(
         width: 300,
         child: BlocProvider(
-          create: (BuildContext context) => SelectListCubit<T>(SelectListState<T>(filteredItems: values ?? [])),
-          child: BlocBuilder<SelectListCubit<T>, SelectListState<T>>(builder: (context, state) {
+          create: (BuildContext context) => SelectListCubit<T>(
+              SelectListState<T>(filteredItems: values ?? [])),
+          child: BlocBuilder<SelectListCubit<T>, SelectListState<T>>(
+              builder: (context, state) {
             var cubit = context.read<SelectListCubit<T>>();
             return Column(
               children: [
@@ -69,7 +72,8 @@ class SelectList<T> extends StatelessWidget {
                   TextField(
                     decoration: InputDecoration(hintText: locals.search),
                     onChanged: (searchQuery) async {
-                      cubit.filterItems(asyncSearch, searchFilter, values, searchQuery);
+                      cubit.filterItems(
+                          asyncSearch, searchFilter, values, searchQuery);
                     },
                   ),
                 Expanded(
@@ -83,7 +87,8 @@ class SelectList<T> extends StatelessWidget {
                             onSelect(state.filteredItems[index]);
                             Navigator.of(context).pop();
                           },
-                          child: itemBuilder(state.filteredItems[index], state.filteredItems[index] == value)),
+                          child: itemBuilder(state.filteredItems[index],
+                              state.filteredItems[index] == value)),
                     ),
                   ),
                 )

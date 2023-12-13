@@ -8,7 +8,12 @@ class VideoThumbnailView extends StatelessWidget {
   final Widget? child;
   final BoxDecoration? decoration;
 
-  const VideoThumbnailView({super.key, required this.videoId, required this.thumbnailUrl, this.child, this.decoration});
+  const VideoThumbnailView(
+      {super.key,
+      required this.videoId,
+      required this.thumbnailUrl,
+      this.child,
+      this.decoration});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +22,11 @@ class VideoThumbnailView extends StatelessWidget {
       aspectRatio: 16 / 9,
       child: Thumbnail(
           thumbnailUrl: thumbnailUrl,
-          decoration: decoration != null ? decoration! : BoxDecoration(color: colors.secondaryContainer, borderRadius: BorderRadius.circular(10)),
+          decoration: decoration != null
+              ? decoration!
+              : BoxDecoration(
+                  color: colors.secondaryContainer,
+                  borderRadius: BorderRadius.circular(10)),
           child: child),
     );
   }
@@ -31,7 +40,13 @@ class Thumbnail extends StatelessWidget {
   final String thumbnailUrl;
   final BoxDecoration decoration;
 
-  Thumbnail({super.key, this.child, required this.thumbnailUrl, required this.decoration, this.width, this.height});
+  Thumbnail(
+      {super.key,
+      this.child,
+      required this.thumbnailUrl,
+      required this.decoration,
+      this.width,
+      this.height});
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +56,8 @@ class Thumbnail extends StatelessWidget {
       imageBuilder: (context, imageProvider) => AnimatedContainer(
         height: height,
         width: width,
-        decoration: decoration.copyWith(image: DecorationImage(image: imageProvider, fit: BoxFit.cover)),
+        decoration: decoration.copyWith(
+            image: DecorationImage(image: imageProvider, fit: BoxFit.cover)),
         // duration: animationDuration,
         duration: animationDuration ~/ 2,
         curve: Curves.easeInOutQuad,

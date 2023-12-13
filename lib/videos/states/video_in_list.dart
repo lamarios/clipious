@@ -38,11 +38,11 @@ class VideoInListCubit extends Cubit<VideoInListState> {
 }
 
 @freezed
-class VideoInListState with _$VideoInListState{
-  @Assert('video == null || offlineVideo == null', 'cannot provide both video and offline video')
-  const factory VideoInListState({
-    @Default(0) double progress,
-    BaseVideo? video,
-    DownloadedVideo? offlineVideo
-}) = _VideoInListState;
+class VideoInListState with _$VideoInListState {
+  @Assert('video == null || offlineVideo == null',
+      'cannot provide both video and offline video')
+  const factory VideoInListState(
+      {@Default(0) double progress,
+      BaseVideo? video,
+      DownloadedVideo? offlineVideo}) = _VideoInListState;
 }

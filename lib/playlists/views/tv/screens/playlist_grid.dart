@@ -9,23 +9,25 @@ import 'package:invidious/utils/models/paginatedList.dart';
 import 'package:invidious/utils/views/components/placeholders.dart';
 import 'package:invidious/utils/views/tv/components/tv_overscan.dart';
 
-
 @RoutePage()
 class TvPlaylistGridScreen extends StatelessWidget {
   final PaginatedList<Playlist> playlistList;
   final String? tags;
 
-  const TvPlaylistGridScreen({Key? key, required this.playlistList, this.tags}) : super(key: key);
+  const TvPlaylistGridScreen({Key? key, required this.playlistList, this.tags})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     var locals = AppLocalizations.of(context)!;
     var textTheme = Theme.of(context).textTheme;
     return BlocProvider(
-      create: (context) => PlaylistListCubit(PlaylistListState(paginatedList: playlistList)),
+      create: (context) =>
+          PlaylistListCubit(PlaylistListState(paginatedList: playlistList)),
       child: Scaffold(
         body: TvOverscan(
-          child: BlocBuilder<PlaylistListCubit, PlaylistListState>(builder: (context, _) {
+          child: BlocBuilder<PlaylistListCubit, PlaylistListState>(
+              builder: (context, _) {
             var cubit = context.read<PlaylistListCubit>();
 
             return Column(
@@ -39,7 +41,11 @@ class TvPlaylistGridScreen extends StatelessWidget {
                     _.loading
                         ? const Padding(
                             padding: EdgeInsets.all(8.0),
-                            child: SizedBox(width: 15, height: 15, child: CircularProgressIndicator(strokeWidth: 2)),
+                            child: SizedBox(
+                                width: 15,
+                                height: 15,
+                                child:
+                                    CircularProgressIndicator(strokeWidth: 2)),
                           )
                         : const SizedBox.shrink()
                   ],
@@ -50,10 +56,14 @@ class TvPlaylistGridScreen extends StatelessWidget {
                   childAspectRatio: 16 / 13,
                   crossAxisCount: 3,
                   children: [
-                    ..._.playlists
-                        .map((e) => PlaylistInList(
-                            key: ValueKey(e.playlistId), playlist: e, canDeleteVideos: false, isTv: true)),
-                    if (_.loading) ...repeatWidget(() => const TvPlaylistPlaceHolder(), count: 10)
+                    ..._.playlists.map((e) => PlaylistInList(
+                        key: ValueKey(e.playlistId),
+                        playlist: e,
+                        canDeleteVideos: false,
+                        isTv: true)),
+                    if (_.loading)
+                      ...repeatWidget(() => const TvPlaylistPlaceHolder(),
+                          count: 10)
                   ],
                 ))
               ],

@@ -23,8 +23,11 @@ class RecommendedVideos extends StatelessWidget {
       ),
     ];
 
-    widgets.addAll(video.recommendedVideos.where((element) => !element.filterHide).map((e) {
-      var v = VideoInList(e.title, e.videoId, e.lengthSeconds, 0, e.author, '', 'authorUrl', 0, '', e.videoThumbnails);
+    widgets.addAll(video.recommendedVideos
+        .where((element) => !element.filterHide)
+        .map((e) {
+      var v = VideoInList(e.title, e.videoId, e.lengthSeconds, 0, e.author, '',
+          'authorUrl', 0, '', e.videoThumbnails);
       v.filterHide = e.filterHide;
       v.filtered = e.filtered;
       v.matchedFilters = e.matchedFilters;

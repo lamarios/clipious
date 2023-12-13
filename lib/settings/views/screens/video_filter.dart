@@ -18,7 +18,9 @@ class VideoFilterSettingsScreen extends StatelessWidget {
   createFilter(BuildContext context, {String? channelId}) {
     var cubit = context.read<VideoFilterCubit>();
 
-    AutoRouter.of(context).push(VideoFilterSetupRoute(channelId: channelId)).then((value) => cubit.refreshFilters());
+    AutoRouter.of(context)
+        .push(VideoFilterSetupRoute(channelId: channelId))
+        .then((value) => cubit.refreshFilters());
   }
 
   @override
@@ -27,7 +29,8 @@ class VideoFilterSettingsScreen extends StatelessWidget {
     ColorScheme colors = Theme.of(context).colorScheme;
     return BlocProvider(
       create: (context) => VideoFilterCubit(VideoFilterState()),
-      child: BlocBuilder<VideoFilterCubit, VideoFilterState>(builder: (context, _) {
+      child: BlocBuilder<VideoFilterCubit, VideoFilterState>(
+          builder: (context, _) {
         var cubit = context.read<VideoFilterCubit>();
 
         Map<String, List<VideoFilter>> mappedFilters = _.filters.groupBy(
@@ -58,7 +61,8 @@ class VideoFilterSettingsScreen extends StatelessWidget {
                             itemCount: keys.length,
                             itemBuilder: (context, index) {
                               return VideoFilterChannel(
-                                  key: ValueKey(const Uuid().v4()), filters: mappedFilters[keys[index]] ?? []);
+                                  key: ValueKey(const Uuid().v4()),
+                                  filters: mappedFilters[keys[index]] ?? []);
                             },
                           ),
                         )

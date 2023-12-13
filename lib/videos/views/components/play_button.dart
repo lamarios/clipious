@@ -5,7 +5,8 @@ class PlayButton extends StatelessWidget {
   final Function(bool isAudio) onPressed;
   final IconData? icon;
 
-  const PlayButton({Key? key, required this.onPressed, this.icon}) : super(key: key);
+  const PlayButton({Key? key, required this.onPressed, this.icon})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +22,8 @@ class PlayButton extends StatelessWidget {
               AutoRouter.of(context).pop();
             },
             style: ButtonStyle(
-                backgroundColor: MaterialStateColor.resolveWith((states) => colorScheme.primary.withOpacity(1))),
+                backgroundColor: MaterialStateColor.resolveWith(
+                    (states) => colorScheme.primary.withOpacity(1))),
             icon: const Icon(
               Icons.music_note,
               size: 35,
@@ -35,7 +37,8 @@ class PlayButton extends StatelessWidget {
             AutoRouter.of(context).pop();
           },
           style: ButtonStyle(
-              backgroundColor: MaterialStateColor.resolveWith((states) => colorScheme.primaryContainer.withOpacity(1))),
+              backgroundColor: MaterialStateColor.resolveWith(
+                  (states) => colorScheme.primaryContainer.withOpacity(1))),
           icon: Icon(
             icon ?? Icons.play_arrow,
             size: 75,

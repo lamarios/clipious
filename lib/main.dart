@@ -35,9 +35,11 @@ late MediaHandler mediaHandler;
 final Logger log = Logger('main');
 
 Future<void> main() async {
-  Logger.root.level = kDebugMode ? Level.FINEST : Level.INFO; // defaults to Level.INFO
+  Logger.root.level =
+      kDebugMode ? Level.FINEST : Level.INFO; // defaults to Level.INFO
   Logger.root.onRecord.listen((record) {
-    debugPrint('[${record.level.name}] [${record.loggerName}] ${record.message}');
+    debugPrint(
+        '[${record.level.name}] [${record.loggerName}] ${record.message}');
     // we don't want debug
     if (record.level == Level.INFO || record.level == Level.SEVERE) {
       db.insertLogs(AppLog(
@@ -60,7 +62,7 @@ Future<void> main() async {
   try {
     log.fine("Forcing refresh rate");
     await FlutterDisplayMode.setHighRefreshRate();
-  }catch(err){
+  } catch (err) {
     log.severe("failed to set high refresh mode", err);
   }
 
@@ -73,16 +75,19 @@ Future<void> main() async {
     ),
     BlocProvider(
       create: (context) {
-        var settingsCubit = SettingsCubit(SettingsState.init(), context.read<AppCubit>());
+        var settingsCubit =
+            SettingsCubit(SettingsState.init(), context.read<AppCubit>());
         configureBackgroundService(settingsCubit);
         return settingsCubit;
       },
     ),
     BlocProvider(
-      create: (context) => PlayerCubit(PlayerState.init(null), context.read<SettingsCubit>()),
+      create: (context) =>
+          PlayerCubit(PlayerState.init(null), context.read<SettingsCubit>()),
     ),
     BlocProvider(
-      create: (context) => DownloadManagerCubit(const DownloadManagerState(), context.read<PlayerCubit>()),
+      create: (context) => DownloadManagerCubit(
+          const DownloadManagerState(), context.read<PlayerCubit>()),
     )
   ], child: const MyApp()));
 }
@@ -96,19 +101,27 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<AppCubit, AppState>(
         buildWhen: (previous, current) =>
-            previous.selectedIndex == current.selectedIndex || previous.server != current.server,
+            previous.selectedIndex == current.selectedIndex ||
+            previous.server != current.server,
         // we want to rebuild only when anything other than the navigation index is changed
         builder: (context, _) {
           var app = context.read<AppCubit>();
-          bool useDynamicTheme = context.select((SettingsCubit value) => value.state.useDynamicTheme);
-          bool useBlackBackground = context.select((SettingsCubit value) => value.state.blackBackground);
-          String? locale = context.select((SettingsCubit value) => value.state.locale);
-          ThemeMode themeMode = context.select((SettingsCubit value) => value.state.themeMode);
+          bool useDynamicTheme = context
+              .select((SettingsCubit value) => value.state.useDynamicTheme);
+          bool useBlackBackground = context
+              .select((SettingsCubit value) => value.state.blackBackground);
+          String? locale =
+              context.select((SettingsCubit value) => value.state.locale);
+          ThemeMode themeMode =
+              context.select((SettingsCubit value) => value.state.themeMode);
 
-          return DynamicColorBuilder(builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) {
+          return DynamicColorBuilder(
+              builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) {
             ColorScheme lightColorScheme;
 
-            if (useDynamicTheme && lightDynamic != null && darkDynamic != null) {
+            if (useDynamicTheme &&
+                lightDynamic != null &&
+                darkDynamic != null) {
               // On Android S+ devices, use the provided dynamic color scheme.
               // (Recommended) Harmonize the dynamic color scheme' built-in semantic colors.
               lightColorScheme = lightDynamic.harmonized();
@@ -136,7 +149,8 @@ class MyApp extends StatelessWidget {
             }
 
             if (useBlackBackground) {
-              darkColorScheme = darkColorScheme.copyWith(background: Colors.black);
+              darkColorScheme =
+                  darkColorScheme.copyWith(background: Colors.black);
             }
 
             List<String>? localeString;
@@ -145,10 +159,13 @@ class MyApp extends StatelessWidget {
               localeString = dbLocale.split('_');
             }
 
-            log.fine('locale from db ${db.getSettings(LOCALE)?.value} from cubit: ${dbLocale}, ${localeString}');
+            log.fine(
+                'locale from db ${db.getSettings(LOCALE)?.value} from cubit: ${dbLocale}, ${localeString}');
             Locale? savedLocale = localeString != null
                 ? Locale.fromSubtags(
-                    languageCode: localeString[0], scriptCode: localeString.length >= 2 ? localeString[1] : null)
+                    languageCode: localeString[0],
+                    scriptCode:
+                        localeString.length >= 2 ? localeString[1] : null)
                 : null;
 
             return MaterialApp.router(
@@ -158,7 +175,8 @@ class MyApp extends StatelessWidget {
               locale: savedLocale,
               localizationsDelegates: AppLocalizations.localizationsDelegates,
               localeListResolutionCallback: (locales, supportedLocales) {
-                log.info('device locales=$locales supported locales=$supportedLocales, saved: $savedLocale');
+                log.info(
+                    'device locales=$locales supported locales=$supportedLocales, saved: $savedLocale');
                 if (savedLocale != null) {
                   log.info("using saved locale, $savedLocale");
                   return savedLocale;
@@ -171,8 +189,10 @@ class MyApp extends StatelessWidget {
                       log.info("Locale match found, $locale");
                       return locale;
                     } else {
-                      Locale? match =
-                          supportedLocales.where((element) => element.languageCode == locale.languageCode).firstOrNull;
+                      Locale? match = supportedLocales
+                          .where((element) =>
+                              element.languageCode == locale.languageCode)
+                          .firstOrNull;
                       if (match != null) {
                         log.info("found partial match $locale with $match");
                         return match;
@@ -188,19 +208,22 @@ class MyApp extends StatelessWidget {
               supportedLocales: AppLocalizations.supportedLocales,
               scaffoldMessengerKey: scaffoldKey,
               debugShowCheckedModeBanner: false,
-              themeMode: ThemeMode.values.firstWhere((element) => element.name == themeMode.name,
+              themeMode: ThemeMode.values.firstWhere(
+                  (element) => element.name == themeMode.name,
                   orElse: () => ThemeMode.system),
               title: 'Clipious',
               theme: ThemeData(
                   useMaterial3: true,
                   colorScheme: lightColorScheme,
                   progressIndicatorTheme: ProgressIndicatorThemeData(
-                      circularTrackColor: lightColorScheme.secondaryContainer.withOpacity(0.8))),
+                      circularTrackColor: lightColorScheme.secondaryContainer
+                          .withOpacity(0.8))),
               darkTheme: ThemeData(
                   useMaterial3: true,
                   colorScheme: darkColorScheme,
                   progressIndicatorTheme: ProgressIndicatorThemeData(
-                      circularTrackColor: darkColorScheme.secondaryContainer.withOpacity(0.8))),
+                      circularTrackColor:
+                          darkColorScheme.secondaryContainer.withOpacity(0.8))),
             );
           });
         });

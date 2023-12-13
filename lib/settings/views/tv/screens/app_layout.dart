@@ -29,7 +29,8 @@ class TvAppLayoutSettingsScreen extends StatelessWidget {
       current.add(ds);
     }
     // use defaaults to keep original order
-    settings.setAppLayout(defaults.where((element) => current.contains(element)).toList());
+    settings.setAppLayout(
+        defaults.where((element) => current.contains(element)).toList());
   }
 
   @override
@@ -48,7 +49,9 @@ class TvAppLayoutSettingsScreen extends StatelessWidget {
                     .map((e) => SettingsTile(
                           title: e.getLabel(locals),
                           onSelected: (context) => toggleDataSource(context, e),
-                          trailing: Switch(onChanged: (value) {}, value: _.appLayout.contains(e)),
+                          trailing: Switch(
+                              onChanged: (value) {},
+                              value: _.appLayout.contains(e)),
                         ))
                     .toList()),
           );

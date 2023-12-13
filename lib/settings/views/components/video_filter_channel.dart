@@ -21,7 +21,8 @@ class VideoFilterChannel extends StatelessWidget {
     var cubit = context.read<VideoFilterCubit>();
 
     AutoRouter.of(context)
-        .push(VideoFilterSetupRoute(channelId: filter.channelId, filter: filter))
+        .push(
+            VideoFilterSetupRoute(channelId: filter.channelId, filter: filter))
         .then((value) => cubit.refreshFilters());
   }
 
@@ -31,7 +32,8 @@ class VideoFilterChannel extends StatelessWidget {
     ColorScheme colors = Theme.of(context).colorScheme;
 
     return BlocProvider(
-      create: (context) => VideoFilterChannelCubit(VideoFilterChannelState(filters: filters)),
+      create: (context) =>
+          VideoFilterChannelCubit(VideoFilterChannelState(filters: filters)),
       child: BlocBuilder<VideoFilterChannelCubit, VideoFilterChannelState>(
         builder: (context, _) {
           var cubit = context.read<VideoFilterChannelCubit>();
@@ -66,10 +68,14 @@ class VideoFilterChannel extends StatelessWidget {
                           child: Padding(
                             padding: const EdgeInsets.only(right: 8.0),
                             child: Thumbnail(
-                              thumbnailUrl: ImageObject.getBestThumbnail(_.channel?.authorThumbnails)?.url ?? '',
+                              thumbnailUrl: ImageObject.getBestThumbnail(
+                                          _.channel?.authorThumbnails)
+                                      ?.url ??
+                                  '',
                               width: 20,
                               height: 20,
-                              decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20)),
                             ),
                           )),
                       Expanded(
@@ -105,7 +111,9 @@ class VideoFilterChannel extends StatelessWidget {
                             },
                           )
                         ],
-                        child: InkWell(onTap: () => editFilter(context, filter: e), child: VideoFilterItem(filter: e))))
+                        child: InkWell(
+                            onTap: () => editFilter(context, filter: e),
+                            child: VideoFilterItem(filter: e))))
                     .toList()
               ],
             ),

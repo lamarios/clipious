@@ -36,15 +36,15 @@ class SubscribeButtonCubit extends Cubit<SubscribeButtonState> {
 
 @freezed
 class SubscribeButtonState with _$SubscribeButtonState {
-
   const factory SubscribeButtonState({
     required String channelId,
     @Default(false) bool isSubscribed,
     @Default(true) bool loading,
     required bool isLoggedIn,
-}) = _SubscribeButtonState;
+  }) = _SubscribeButtonState;
 
-  static SubscribeButtonState init(String channelId){
-    return SubscribeButtonState(channelId: channelId, isLoggedIn: db.isLoggedInToCurrentServer());
+  static SubscribeButtonState init(String channelId) {
+    return SubscribeButtonState(
+        channelId: channelId, isLoggedIn: db.isLoggedInToCurrentServer());
   }
 }

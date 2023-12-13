@@ -18,8 +18,15 @@ class CompactVideo extends StatelessWidget {
   final bool? highlighted;
   final List<Widget>? trailing;
 
-  const CompactVideo({Key? key, this.onTap, this.video, this.trailing, this.highlighted, this.offlineVideo})
-      : assert(video == null || offlineVideo == null, 'cannot provide both video and offline video\n'),
+  const CompactVideo(
+      {Key? key,
+      this.onTap,
+      this.video,
+      this.trailing,
+      this.highlighted,
+      this.offlineVideo})
+      : assert(video == null || offlineVideo == null,
+            'cannot provide both video and offline video\n'),
         super(key: key);
 
   @override
@@ -32,8 +39,10 @@ class CompactVideo extends StatelessWidget {
     String videoId = video?.videoId ?? offlineVideo?.videoId ?? '';
 
     return BlocProvider(
-      create: (context) => CompactVideoCubit(CompactVideoState(offlineVideo: offlineVideo)),
-      child: BlocBuilder<CompactVideoCubit, CompactVideoState>(builder: (context, _) {
+      create: (context) =>
+          CompactVideoCubit(CompactVideoState(offlineVideo: offlineVideo)),
+      child: BlocBuilder<CompactVideoCubit, CompactVideoState>(
+          builder: (context, _) {
         return InkWell(
             onTap: onTap,
             child: Padding(
@@ -54,7 +63,9 @@ class CompactVideo extends StatelessWidget {
                         curve: Curves.easeInOutQuad,
                         child: AnimatedContainer(
                           decoration: BoxDecoration(
-                              color: (highlighted ?? false) ? colors.secondaryContainer : colors.background,
+                              color: (highlighted ?? false)
+                                  ? colors.secondaryContainer
+                                  : colors.background,
                               borderRadius: BorderRadius.circular(10)),
                           duration: animationDuration * 2,
                         ),
@@ -72,15 +83,24 @@ class CompactVideo extends StatelessWidget {
                                   aspectRatio: 16 / 9,
                                   child: Container(
                                     decoration: BoxDecoration(
-                                        color: colors.secondaryContainer, borderRadius: BorderRadius.circular(10)),
+                                        color: colors.secondaryContainer,
+                                        borderRadius:
+                                            BorderRadius.circular(10)),
                                     child: Icon(Icons.visibility_off_outlined,
-                                        color: colors.secondary.withOpacity(0.7), size: 15),
+                                        color:
+                                            colors.secondary.withOpacity(0.7),
+                                        size: 15),
                                   ),
                                 )
                               : video != null
                                   ? VideoThumbnailView(
                                       videoId: videoId,
-                                      thumbnailUrl: video?.deArrowThumbnailUrl ?? ImageObject.getWorstThumbnail(video?.videoThumbnails)?.url ?? '')
+                                      thumbnailUrl:
+                                          video?.deArrowThumbnailUrl ??
+                                              ImageObject.getWorstThumbnail(
+                                                      video?.videoThumbnails)
+                                                  ?.url ??
+                                              '')
                                   : offlineVideo != null
                                       ? OfflineVideoThumbnail(
                                           video: offlineVideo!,
@@ -90,18 +110,24 @@ class CompactVideo extends StatelessWidget {
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Column(
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    video?.filtered ?? false ? '**********' : title,
-                                    style: TextStyle(color: colors.primary, overflow: TextOverflow.ellipsis),
+                                    video?.filtered ?? false
+                                        ? '**********'
+                                        : title,
+                                    style: TextStyle(
+                                        color: colors.primary,
+                                        overflow: TextOverflow.ellipsis),
                                   ),
                                   Text(
                                     author,
                                     maxLines: 1,
                                     overflow: TextOverflow.ellipsis,
-                                    style: textTheme.bodySmall?.copyWith(color: colors.secondary),
+                                    style: textTheme.bodySmall
+                                        ?.copyWith(color: colors.secondary),
                                   )
                                 ],
                               ),

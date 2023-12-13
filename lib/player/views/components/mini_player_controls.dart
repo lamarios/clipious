@@ -7,7 +7,8 @@ import '../../../settings/states/settings.dart';
 import '../../states/player.dart';
 import '../../states/player_controls.dart';
 
-const ButtonStyle buttonStyle = ButtonStyle(visualDensity: VisualDensity.compact);
+const ButtonStyle buttonStyle =
+    ButtonStyle(visualDensity: VisualDensity.compact);
 
 class MiniPlayerControls extends StatelessWidget {
   final String videoId;
@@ -23,11 +24,17 @@ class MiniPlayerControls extends StatelessWidget {
       create: (context) => PlayerControlsCubit(PlayerControlsState(), player),
       child: Builder(builder: (context) {
         bool isMini = context.select((PlayerCubit value) => value.state.isMini);
-        bool hasQueue = context.select((PlayerCubit value) => value.state.hasQueue);
-        bool isPlaying = context.select((PlayerCubit value) => value.state.isPlaying);
+        bool hasQueue =
+            context.select((PlayerCubit value) => value.state.hasQueue);
+        bool isPlaying =
+            context.select((PlayerCubit value) => value.state.isPlaying);
 
-        bool isPausedAndDone = context.select((PlayerCubit value) => value.state.position).inMilliseconds > player.duration.inMilliseconds * 0.99 &&
-            context.select((SettingsCubit value) => value.state.playerRepeatMode == PlayerRepeat.noRepeat);
+        bool isPausedAndDone = context
+                    .select((PlayerCubit value) => value.state.position)
+                    .inMilliseconds >
+                player.duration.inMilliseconds * 0.99 &&
+            context.select((SettingsCubit value) =>
+                value.state.playerRepeatMode == PlayerRepeat.noRepeat);
 
         return Padding(
           padding: isMini ? EdgeInsets.zero : const EdgeInsets.all(8.0),
@@ -92,10 +99,13 @@ class MiniPlayerControls extends StatelessWidget {
                   ),
                 if (!isMini)
                   Builder(builder: (context) {
-                    var playerRepeatMode = context.select((SettingsCubit s) => s.state.playerRepeatMode);
-                    var shuffleMode = context.select((SettingsCubit s) => s.state.playerShuffleMode);
+                    var playerRepeatMode = context
+                        .select((SettingsCubit s) => s.state.playerRepeatMode);
+                    var shuffleMode = context
+                        .select((SettingsCubit s) => s.state.playerShuffleMode);
                     var cubit = context.read<SettingsCubit>();
-                    var isAudio = context.select((PlayerCubit value) => value.state.isAudio);
+                    var isAudio = context
+                        .select((PlayerCubit value) => value.state.isAudio);
                     return Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
@@ -105,24 +115,31 @@ class MiniPlayerControls extends StatelessWidget {
                           child: MultiValueSwitch(
                             left: Icons.ondemand_video,
                             right: Icons.audiotrack,
-                            onChange: (selected) => player.switchAudio(selected == MultiValueSwitchPosition.right),
-                            position: isAudio ? MultiValueSwitchPosition.right : MultiValueSwitchPosition.left,
+                            onChange: (selected) => player.switchAudio(
+                                selected == MultiValueSwitchPosition.right),
+                            position: isAudio
+                                ? MultiValueSwitchPosition.right
+                                : MultiValueSwitchPosition.left,
                           ),
                         ),
                         Expanded(child: Container()),
                         IconButton(
                             style: buttonStyle,
                             onPressed: cubit.setNextRepeatMode,
-                            color: playerRepeatMode == PlayerRepeat.noRepeat ? null : colors.primary,
+                            color: playerRepeatMode == PlayerRepeat.noRepeat
+                                ? null
+                                : colors.primary,
                             icon: Icon(
-                              playerRepeatMode == PlayerRepeat.repeatOne ? Icons.repeat_one : Icons.repeat,
+                              playerRepeatMode == PlayerRepeat.repeatOne
+                                  ? Icons.repeat_one
+                                  : Icons.repeat,
                             )),
                         if (hasQueue)
                           IconButton(
-                            onPressed:() {
+                            onPressed: () {
                               cubit.toggleShuffle();
                               player.generatePlayQueue();
-                            } ,
+                            },
                             style: buttonStyle,
                             icon: const Icon(Icons.shuffle),
                             color: shuffleMode ? colors.primary : null,

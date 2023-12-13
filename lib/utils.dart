@@ -22,7 +22,8 @@ var log = Logger('Utils');
 
 enum DeviceType { phone, tablet, tv }
 
-double tabletMaxVideoWidth = getDeviceType() == DeviceType.phone ? double.infinity : 500;
+double tabletMaxVideoWidth =
+    getDeviceType() == DeviceType.phone ? double.infinity : 500;
 
 const List<LogicalKeyboardKey> selectKeys = [
   LogicalKeyboardKey.accept,
@@ -34,9 +35,11 @@ const List<LogicalKeyboardKey> selectKeys = [
 const List<int> selectPhysicalKeys = [];
 
 bool isOk(LogicalKeyboardKey key, {PhysicalKeyboardKey? physicalKeyboardKey}) {
-  log.fine('Received key event, Logical: ${key.debugName}, Physical ${physicalKeyboardKey?.debugName}');
+  log.fine(
+      'Received key event, Logical: ${key.debugName}, Physical ${physicalKeyboardKey?.debugName}');
   return selectKeys.any((element) => element == key) ||
-      selectPhysicalKeys.any((element) => element == physicalKeyboardKey?.usbHidUsage);
+      selectPhysicalKeys
+          .any((element) => element == physicalKeyboardKey?.usbHidUsage);
 }
 
 String prettyDuration(Duration duration) {
@@ -56,10 +59,12 @@ String prettyDuration(Duration duration) {
 
 NumberFormat compactCurrency = NumberFormat.compactCurrency(
   decimalDigits: 2,
-  symbol: '', // if you want to add currency symbol then pass that in this else leave it empty.
+  symbol:
+      '', // if you want to add currency symbol then pass that in this else leave it empty.
 );
 
-Future<void> showAlertDialog(BuildContext context, String title, List<Widget> body) async {
+Future<void> showAlertDialog(
+    BuildContext context, String title, List<Widget> body) async {
   var locals = AppLocalizations.of(context)!;
   return showDialog<void>(
     context: context,
@@ -85,7 +90,8 @@ Future<void> showAlertDialog(BuildContext context, String title, List<Widget> bo
   );
 }
 
-void showSharingSheet(BuildContext context, ShareLinks links, {bool showTimestampOption = false}) {
+void showSharingSheet(BuildContext context, ShareLinks links,
+    {bool showTimestampOption = false}) {
   var locals = AppLocalizations.of(context)!;
 
   bool shareWithTimestamp = false;
@@ -121,7 +127,8 @@ void showSharingSheet(BuildContext context, ShareLinks links, {bool showTimestam
                   onPressed: () async {
                     final timestamp = await getTimestamp();
 
-                    Share.share(links.getInvidiousLink(db.getCurrentlySelectedServer(), timestamp?.inSeconds));
+                    Share.share(links.getInvidiousLink(
+                        db.getCurrentlySelectedServer(), timestamp?.inSeconds));
                     Navigator.of(context).pop();
                   },
                 ),
@@ -195,7 +202,8 @@ double getGridAspectRatio(BuildContext context) {
   return getGridCount(context) > 1 ? 16 / 15 : 16 / 13;
 }
 
-okCancelDialog(BuildContext context, String title, String message, Function() onOk) {
+okCancelDialog(
+    BuildContext context, String title, String message, Function() onOk) {
   var locals = AppLocalizations.of(context)!;
   showDialog(
     context: context,
@@ -253,7 +261,9 @@ showTvDialog(
       return Scaffold(
         body: TvOverscan(
           child: Column(children: [
-            if (title != null) Text(title, style: textTheme.titleLarge?.copyWith(color: colors.primary)),
+            if (title != null)
+              Text(title,
+                  style: textTheme.titleLarge?.copyWith(color: colors.primary)),
             Expanded(
               child: ListView(
                 children: builder(context),
@@ -280,7 +290,8 @@ Country getCountryFromCode(String code) {
       orElse: () => Country('US', 'United States of America'));
 }
 
-KeyEventResult onTvSelect(KeyEvent event, BuildContext context, Function(BuildContext context) func) {
+KeyEventResult onTvSelect(
+    KeyEvent event, BuildContext context, Function(BuildContext context) func) {
   if (event is KeyUpEvent) {
     log.fine('onTvSelect, ${event.logicalKey}, ${event}');
     if (isOk(event.logicalKey, physicalKeyboardKey: event.physicalKey)) {
@@ -296,12 +307,18 @@ SystemUiOverlayStyle getUiOverlayStyle(BuildContext context) {
   ColorScheme colorScheme = Theme.of(context).colorScheme;
   return SystemUiOverlayStyle(
       systemNavigationBarColor: colorScheme.background,
-      systemNavigationBarIconBrightness: colorScheme.brightness == Brightness.dark ? Brightness.light : Brightness.dark,
+      systemNavigationBarIconBrightness:
+          colorScheme.brightness == Brightness.dark
+              ? Brightness.light
+              : Brightness.dark,
       statusBarColor: colorScheme.background,
-      statusBarIconBrightness: colorScheme.brightness == Brightness.dark ? Brightness.light : Brightness.dark);
+      statusBarIconBrightness: colorScheme.brightness == Brightness.dark
+          ? Brightness.light
+          : Brightness.dark);
 }
 
-List<T> filteredVideos<T extends BaseVideo>(List<T> videos) => videos.where((element) => !element.filterHide).toList();
+List<T> filteredVideos<T extends BaseVideo>(List<T> videos) =>
+    videos.where((element) => !element.filterHide).toList();
 
 String getWeekdayName(int weekday) {
   final DateTime now = DateTime.now().toLocal();
