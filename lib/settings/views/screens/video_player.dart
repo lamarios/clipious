@@ -88,6 +88,33 @@ class VideoPlayerSettingsScreen extends StatelessWidget {
                   description: Text(locals.fillFullscreenDescription),
                 ),
               ]),
+              SettingsSection(title: Text(locals.seeking), tiles: [
+                SettingsTile(
+                  leading: const Icon(Icons.fast_forward),
+                  title: Text(locals.skipStep),
+                  description: Text(locals.skipStepDescription),
+                  trailing: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      IconButton(
+                          onPressed: () =>
+                              cubit.changeSkipStep(increase: false),
+                          icon: const Icon(Icons.remove)),
+                      Text(_.skipStep.floor().toString()),
+                      IconButton(
+                          onPressed: () => cubit.changeSkipStep(increase: true),
+                          icon: const Icon(Icons.add)),
+                    ],
+                  ),
+                ),
+                SettingsTile.switchTile(
+                  leading: const Icon(Icons.moving),
+                  initialValue: _.skipExponentially,
+                  onToggle: (value) => cubit.skipExponentially = value,
+                  title: Text(locals.exponentialSkip),
+                  description: Text(locals.exponentialSkipDescription),
+                ),
+              ]),
               SettingsSection(title: Text(locals.subtitles), tiles: [
                 SettingsTile(
                   leading: const Icon(Icons.format_size),

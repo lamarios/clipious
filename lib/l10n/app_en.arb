@@ -1227,6 +1227,26 @@
   "@copySettingsAsJsonDescription": {
     "description": ""
   },
+  "seeking": "Seeking",
+  "@seeking": {
+    "description": "category for settings related to seeking in a video"
+  },
+  "skipStep": "Skip forward/backward step",
+  "@skipStep": {
+    "description": "Title for the settings to set the skipping step"
+  },
+  "skipStepDescription": "Seconds to skip on forward/backward actions",
+  "@skipStepDescription": {
+    "description": "Title for the settings to set the skipping step"
+  },
+  "exponentialSkip": "Exponential skip forward/backward",
+  "@exponentialSkip": {
+    "description": "Title for the setting to enable the exponential skipping"
+  },
+  "exponentialSkipDescription": "The more you skip forward, the bigger the step is.",
+  "@exponentialSkipDescription": {
+    "description": "Title for the setting to enable the exponential skipping"
+  },
   "enabled": "Enabled",
   "@enabled": {
     "description": "Text to show something is enabled"

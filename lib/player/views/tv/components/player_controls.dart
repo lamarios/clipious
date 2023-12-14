@@ -34,7 +34,14 @@ class TvPlayerControls extends StatelessWidget {
       child: BlocBuilder<TvPlayerControlsCubit, TvPlayerControlsState>(
         builder: (context, _) {
           var cubit = context.read<TvPlayerControlsCubit>();
-          var mpc = player.state;
+          var currentlyPlaying = context
+              .select((PlayerCubit value) => value.state.currentlyPlaying);
+          var videos =
+              context.select((PlayerCubit value) => value.state.videos);
+          var isPlaying =
+              context.select((PlayerCubit value) => value.state.isPlaying);
+          var position =
+              context.select((PlayerCubit value) => value.state.position);
 
           return BlocListener<PlayerCubit, PlayerState>(
             listenWhen: (previous, current) =>
@@ -90,7 +97,7 @@ class TvPlayerControls extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      mpc.currentlyPlaying?.title ?? '',
+                                      currentlyPlaying?.title ?? '',
                                       style: textTheme.headlineLarge
                                           ?.copyWith(color: Colors.white),
                                     ),
@@ -101,9 +108,9 @@ class TvPlayerControls extends StatelessWidget {
                                         children: [
                                           Thumbnail(
                                             thumbnailUrl:
-                                                ImageObject.getBestThumbnail(mpc
-                                                            .currentlyPlaying
-                                                            ?.authorThumbnails)
+                                                ImageObject.getBestThumbnail(
+                                                            currentlyPlaying
+                                                                ?.authorThumbnails)
                                                         ?.url ??
                                                     '',
                                             width: 40,
@@ -116,8 +123,7 @@ class TvPlayerControls extends StatelessWidget {
                                             padding: const EdgeInsets.only(
                                                 left: 8.0, right: 20),
                                             child: Text(
-                                              mpc.currentlyPlaying?.author ??
-                                                  '',
+                                              currentlyPlaying?.author ?? '',
                                               style: textTheme.headlineSmall
                                                   ?.copyWith(
                                                       color: Colors.white),
@@ -161,7 +167,7 @@ class TvPlayerControls extends StatelessWidget {
                                                 padding:
                                                     const EdgeInsets.all(8.0),
                                                 child: Icon(
-                                                  mpc.isPlaying
+                                                  isPlaying
                                                       ? Icons.pause
                                                       : Icons.play_arrow,
                                                   size: 50,
@@ -170,7 +176,7 @@ class TvPlayerControls extends StatelessWidget {
                                             ),
                                           ),
                                           Visibility(
-                                            visible: mpc.videos.length > 1,
+                                            visible: videos.length > 1,
                                             child: Padding(
                                               padding: const EdgeInsets.only(
                                                   right: 16.0),
@@ -224,7 +230,7 @@ class TvPlayerControls extends StatelessWidget {
                                             ),
                                           ),
                                           Visibility(
-                                            visible: mpc.videos.length > 1,
+                                            visible: videos.length > 1,
                                             child: TvButton(
                                               onPressed: (context) =>
                                                   player.playNext(),
@@ -282,7 +288,7 @@ class TvPlayerControls extends StatelessWidget {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                (mpc.currentlyPlaying?.liveNow ?? false)
+                                (currentlyPlaying?.liveNow ?? false)
                                     ? Container(
                                         decoration: BoxDecoration(
                                           color: Colors.red,
@@ -339,11 +345,11 @@ class TvPlayerControls extends StatelessWidget {
                                                   ),
                                                 ))
                                             : const SizedBox.shrink()),
-                                if (!(mpc.currentlyPlaying?.liveNow ?? false))
+                                if (!(currentlyPlaying?.liveNow ?? false))
                                   Padding(
                                     padding: const EdgeInsets.only(left: 16.0),
                                     child: Text(
-                                      '${prettyDuration(player.state.position)} / ${prettyDuration(player.duration)}',
+                                      '${prettyDuration(position)} / ${prettyDuration(player.duration)}',
                                       style: textTheme.titleLarge
                                           ?.copyWith(color: Colors.white),
                                     ),
@@ -377,20 +383,20 @@ class TvPlayerControls extends StatelessWidget {
                                           onSelect: (ctx, video) =>
                                               onVideoQueueSelected(
                                                   ctx, cubit, video),
-                                          paginatedVideoList: FixedItemList(mpc
-                                              .videos
-                                              .map((e) => VideoInList(
-                                                  e.title,
-                                                  e.videoId,
-                                                  e.lengthSeconds,
-                                                  null,
-                                                  e.author,
-                                                  e.authorId,
-                                                  e.authorUrl,
-                                                  null,
-                                                  null,
-                                                  e.videoThumbnails))
-                                              .toList())),
+                                          paginatedVideoList: FixedItemList(
+                                              videos
+                                                  .map((e) => VideoInList(
+                                                      e.title,
+                                                      e.videoId,
+                                                      e.lengthSeconds,
+                                                      null,
+                                                      e.author,
+                                                      e.authorId,
+                                                      e.authorUrl,
+                                                      null,
+                                                      null,
+                                                      e.videoThumbnails))
+                                                  .toList())),
                                     ],
                                   ),
                                 ))
