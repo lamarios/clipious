@@ -1228,5 +1228,25 @@
         "format": "compact"
       }
     }
+  },
+  "seeking": "Buscando",
+  "@seeking": {
+    "description": "category for settings related to seeking in a video"
+  },
+  "skipStepDescription": "Segundos a saltar en el avance/retroceso",
+  "@skipStepDescription": {
+    "description": "Title for the settings to set the skipping step"
+  },
+  "exponentialSkipDescription": "Cuanto más saltes hacia delante, mayor será el paso.",
+  "@exponentialSkipDescription": {
+    "description": "Title for the setting to enable the exponential skipping"
+  },
+  "exponentialSkip": "Salto exponencial adelante/atrás",
+  "@exponentialSkip": {
+    "description": "Title for the setting to enable the exponential skipping"
+  },
+  "skipStep": "Saltar hacia delante/atrás",
+  "@skipStep": {
+    "description": "Title for the settings to set the skipping step"
   }
 }
