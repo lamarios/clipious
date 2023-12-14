@@ -189,8 +189,24 @@ class TVSettingsScreen extends StatelessWidget {
                   trailing: Switch(onChanged: (value) {}, value: _.useProxy),
                 ),
                 AdjustmentSettingTile(
+                  title: locals.skipStep,
+                  value: _.skipStep.floor(),
+                  description: locals.skipStepDescription,
+                  possibleValues: skipSteps,
+                  onNewValue: (i) => cubit.skipStep = i,
+                ),
+                SettingsTile(
+                  title: locals.exponentialSkip,
+                  description: locals.exponentialSkipDescription,
+                  onSelected: (context) =>
+                      cubit.skipExponentially = !_.skipExponentially,
+                  trailing:
+                      Switch(onChanged: (value) {}, value: _.skipExponentially),
+                ),
+                AdjustmentSettingTile(
                   title: locals.subtitleFontSize,
                   value: _.subtitleSize.floor(),
+                  step: 1,
                   description: locals.subtitleFontSizeDescription,
                   onNewValue: cubit.setSubtitleSize,
                 ),
@@ -282,7 +298,8 @@ class SettingsTitle extends StatelessWidget {
 class AdjustmentSettingTile extends StatelessWidget {
   final String title;
   final int value;
-  final int step;
+  final int? step;
+  final List<int>? possibleValues;
   final String? description;
   final Function(int) onNewValue;
 
@@ -292,17 +309,34 @@ class AdjustmentSettingTile extends StatelessWidget {
       required this.title,
       this.description,
       required this.value,
-      this.step = 1});
+      this.possibleValues,
+      this.step})
+      : assert(step == null || possibleValues == null,
+            'Can\' have both step and possible values');
 
   onKeyEvent(FocusNode node, KeyEvent event, BuildContext ctx) {
     if (event is KeyUpEvent) {
       log.fine('onTvSelect, ${event.logicalKey}, $event');
       if (event.logicalKey == LogicalKeyboardKey.arrowLeft) {
-        onNewValue(value - step);
+        if (step != null) {
+          onNewValue(value - step!);
+        } else if (possibleValues != null) {
+          int index = possibleValues!.indexOf(value);
+          if (index > 0) {
+            onNewValue(possibleValues![index - 1]);
+          }
+        }
         return KeyEventResult.handled;
       }
       if (event.logicalKey == LogicalKeyboardKey.arrowRight) {
-        onNewValue(value + step);
+        if (step != null) {
+          onNewValue(value + step!);
+        } else if (possibleValues != null) {
+          int index = possibleValues!.indexOf(value);
+          if (index < possibleValues!.length - 1) {
+            onNewValue(possibleValues![index + 1]);
+          }
+        }
         return KeyEventResult.handled;
       }
     }

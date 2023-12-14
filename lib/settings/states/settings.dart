@@ -25,6 +25,8 @@ part 'settings.freezed.dart';
 
 const String subtitleDefaultSize = '14';
 const String searchHistoryDefaultLength = '12';
+const skipSteps = [5, 10, 15, 20, 30, 60];
+const defaultStep = 10;
 
 enum EnableBackGroundNotificationResponse {
   ok,
@@ -114,6 +116,19 @@ class SettingsCubit extends Cubit<SettingsState> {
   toggleBlackBackground(bool value) {
     blackBackground = value;
     appCubit.rebuildApp();
+  }
+
+  changeSkipStep({required bool increase}) {
+    int index = skipSteps.indexOf(state.skipStep);
+    if (increase) {
+      if (index < skipSteps.length - 1) {
+        skipStep = skipSteps[index + 1];
+      }
+    } else {
+      if (index > 0) {
+        skipStep = skipSteps[index - 1];
+      }
+    }
   }
 
   changeSubtitleSize({required bool increase}) {
@@ -407,6 +422,10 @@ class SettingsCubit extends Cubit<SettingsState> {
 
   set dearrowThumbnails(bool b) => _set(dearrowThumbnailsSettingName, b);
 
+  set skipStep(int s) => _set(skipStepSettingName, s);
+
+  set skipExponentially(bool b) => _set(skipExponentialSettingName, b);
+
   void _set<T>(String name, T value) {
     var settings = Map<String, SettingsValue>.from(state.settings);
     if (value == null) {
@@ -491,6 +510,12 @@ class SettingsState with _$SettingsState {
 
   bool get forceLandscapeFullScreen =>
       _get(lockOrientationFullScreen)?.value == 'true';
+
+  int get skipStep =>
+      int.parse(_get(skipStepSettingName)?.value ?? defaultStep.toString());
+
+  bool get skipExponentially =>
+      (_get(skipExponentialSettingName)?.value ?? 'true') == 'true';
 
   ThemeMode get themeMode => ThemeMode.values.firstWhere(
       (element) => element.name == _get(themeModeSettingName)?.value,

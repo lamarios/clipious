@@ -35,7 +35,6 @@ const double targetHeight = 69;
 const double miniPlayerThreshold = 300;
 const skipToVideoThrottleName = 'skip-to-video';
 const double bigPlayerThreshold = 700;
-const defaultStep = 10;
 const stepMultiplier = 1.15;
 
 var log = Logger('MiniPlayerController');
@@ -123,6 +122,9 @@ class PlayerCubit extends Cubit<PlayerState> with WidgetsBindingObserver {
   }
 
   onReady() async {
+    emit(state.copyWith(
+        forwardStep: settings.state.skipStep,
+        rewindStep: settings.state.skipStep));
     if (!isTv) {
       WidgetsBinding.instance.addObserver(this);
 
@@ -564,8 +566,8 @@ class PlayerCubit extends Cubit<PlayerState> with WidgetsBindingObserver {
 
       emit(state.copyWith(
           position: Duration.zero,
-          forwardStep: defaultStep,
-          rewindStep: defaultStep,
+          forwardStep: settings.state.skipStep,
+          rewindStep: settings.state.skipStep,
           mediaCommand: mediaCommand,
           currentlyPlaying: currentlyPlaying,
           offlineCurrentlyPlaying: offlineCurrentlyPlaying));
@@ -779,11 +781,13 @@ class PlayerCubit extends Cubit<PlayerState> with WidgetsBindingObserver {
     log.info('fast forward $newPosition - step: ${state.forwardStep}');
     emit(state.copyWith(
       totalFastForward: state.totalFastForward + state.forwardStep,
-      forwardStep: (state.forwardStep * stepMultiplier).floor(),
+      forwardStep: (state.forwardStep *
+              (settings.state.skipExponentially ? stepMultiplier : 1))
+          .floor(),
     ));
     EasyDebounce.debounce('fast-forward-step', const Duration(seconds: 1), () {
       emit(state.copyWith(
-        forwardStep: defaultStep,
+        forwardStep: settings.state.skipStep,
         totalFastForward: 0,
       ));
     });
@@ -793,11 +797,13 @@ class PlayerCubit extends Cubit<PlayerState> with WidgetsBindingObserver {
     seek(state.position - Duration(seconds: state.rewindStep));
     emit(state.copyWith(
       totalRewind: state.totalRewind + state.rewindStep,
-      rewindStep: (state.rewindStep * stepMultiplier).floor(),
+      rewindStep: (state.rewindStep *
+              (settings.state.skipExponentially ? stepMultiplier : 1))
+          .floor(),
     ));
     EasyDebounce.debounce('fast-rewind-step', const Duration(seconds: 1), () {
       emit(state.copyWith(
-        rewindStep: defaultStep,
+        rewindStep: settings.state.skipStep,
         totalRewind: 0,
       ));
     });
