@@ -1218,5 +1218,15 @@
   "malformedStatsEndpoint": "/api/v1/stats no es lo esperado",
   "@malformedStatsEndpoint": {
     "description": "Title for dialog when adding a server that isn't validated as it should"
+  },
+  "nFilters": "{count, plural, =0{Sin vídeos} =1{1 filter} other{{count} filters}}",
+  "@nFilters": {
+    "description": "One or more video filters",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
   }
 }
