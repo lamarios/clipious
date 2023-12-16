@@ -12,6 +12,7 @@ import 'package:invidious/player/views/components/video_player.dart';
 import '../../../utils.dart';
 import '../../../videos/models/video.dart';
 import '../../../videos/views/components/video_share_button.dart';
+import 'media_kit_player.dart';
 
 class Player extends StatelessWidget {
   final double maxHeight;
@@ -64,7 +65,7 @@ class Player extends StatelessWidget {
                                 _.isAudio ? _.offlineCurrentlyPlaying : null,
                             miniPlayer: false,
                           )
-                        : VideoPlayer(
+                        : MediaKitPlayer(
                             key: const ValueKey('player'),
                             video: !_.isAudio ? _.currentlyPlaying : null,
                             offlineVideo:

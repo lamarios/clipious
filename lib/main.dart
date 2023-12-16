@@ -19,6 +19,7 @@ import 'package:invidious/settings/states/settings.dart';
 import 'package:invidious/utils.dart';
 import 'package:invidious/workmanager.dart';
 import 'package:logging/logging.dart';
+import 'package:media_kit/media_kit.dart' as media_kit;
 
 import 'database.dart';
 import 'settings/models/db/app_logs.dart';
@@ -52,6 +53,7 @@ Future<void> main() async {
   HttpOverrides.global = MyHttpOverrides();
 
   WidgetsFlutterBinding.ensureInitialized();
+  media_kit.MediaKit.ensureInitialized();
   // FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   db = await DbClient.create();
 

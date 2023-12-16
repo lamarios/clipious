@@ -13,6 +13,7 @@ import 'package:invidious/settings/states/settings.dart';
 import '../../../utils.dart';
 import '../../../videos/models/video.dart';
 import '../../states/audio_player.dart';
+import '../../states/media_kit.dart';
 import '../../states/player_controls.dart';
 import '../../states/video_player.dart';
 
@@ -107,7 +108,7 @@ class PlayerControls extends StatelessWidget {
     } else if (player.state.isAudio) {
       pc = context.read<AudioPlayerCubit>();
     } else {
-      pc = context.read<VideoPlayerCubit>();
+      pc = context.read<MediaKitCubit>();
     }
     var locals = AppLocalizations.of(context)!;
     var videoTracks = pc.getVideoTracks();

@@ -42,7 +42,9 @@ dependencies:
     git:
       url: https://github.com/lamarios/betterplayer.git
       ref: master
-
+  media_kit: ^1.1.10                             # Primary package.
+  media_kit_video: ^1.2.4                        # For video rendering.
+  media_kit_libs_video: ^1.0.4                   # Native video dependencies.
   intl: any
   settings_ui: 2.0.2
   objectbox: 2.4.0
