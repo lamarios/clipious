@@ -147,9 +147,9 @@ class VideoPlayerCubit extends MediaPlayerCubit<VideoPlayerState> {
         EasyThrottle.throttle('video-buffering', const Duration(seconds: 1),
             () {
           List<DurationRange> durations = event.parameters?['buffered'] ?? [];
-          state.copyWith(
+          emit(state.copyWith(
               bufferPosition:
-                  durations.sortBy((e) => e.end).map((e) => e.end).last);
+                  durations.sortBy((e) => e.end).map((e) => e.end).last));
           player.setEvent(MediaEvent(
               state: MediaState.playing,
               type: MediaEventType.bufferChanged,
@@ -269,7 +269,8 @@ class VideoPlayerCubit extends MediaPlayerCubit<VideoPlayerState> {
                 ? '${newState.video!.dashUrl}${service.useProxy() ? '?local=true' : ''}'
                 : formatStream?.url ?? '';
         if (!isUsingDash() && formatStream != null) {
-          newState.copyWith(selectedNonDashTrack: formatStream.resolution);
+          newState =
+              newState.copyWith(selectedNonDashTrack: formatStream.resolution);
         }
 
         log.info(
