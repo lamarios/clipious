@@ -31,7 +31,7 @@ import '../../videos/models/video.dart';
 
 part 'player.freezed.dart';
 
-const double targetHeight = 69;
+const double targetHeight = 66;
 const double miniPlayerThreshold = 300;
 const skipToVideoThrottleName = 'skip-to-video';
 const double bigPlayerThreshold = 700;
@@ -232,19 +232,25 @@ class PlayerCubit extends Cubit<PlayerState> with WidgetsBindingObserver {
         type: MediaEventType.miniDisplayChanged,
         value: state.isMini);
 
-    emit(state.copyWith(
-        isMini: true,
-        mediaEvent: mediaEvent,
-        top: null,
-        height: targetHeight,
-        isHidden: true,
-        videos: [],
-        playedVideos: [],
-        currentlyPlaying: null,
-        offlineCurrentlyPlaying: null,
-        offlineVideos: [],
-        opacity: 0));
-    setEvent(const MediaEvent(state: MediaState.idle));
+    emit(state.copyWith(isClosing: true));
+    Future.delayed(
+      animationDuration * 1.5,
+      () {
+        emit(state.copyWith(
+            isMini: true,
+            mediaEvent: mediaEvent,
+            top: null,
+            height: targetHeight,
+            isHidden: true,
+            videos: [],
+            playedVideos: [],
+            currentlyPlaying: null,
+            offlineCurrentlyPlaying: null,
+            offlineVideos: [],
+            isClosing: false));
+        setEvent(const MediaEvent(state: MediaState.idle));
+      },
+    );
   }
 
   double get getBottom => state.isHidden ? -targetHeight : 0;
@@ -306,11 +312,7 @@ class PlayerCubit extends Cubit<PlayerState> with WidgetsBindingObserver {
         value: state.isMini);
 
     emit(state.copyWith(
-        isMini: false,
-        mediaEvent: mediaEvent,
-        top: 0,
-        opacity: 1,
-        isHidden: false));
+        isMini: false, mediaEvent: mediaEvent, top: 0, isHidden: false));
     onOrientationChange();
   }
 
@@ -322,11 +324,11 @@ class PlayerCubit extends Cubit<PlayerState> with WidgetsBindingObserver {
           type: MediaEventType.miniDisplayChanged,
           value: state.isMini);
       emit(state.copyWith(
-          isMini: true,
-          mediaEvent: mediaEvent,
-          top: null,
-          isHidden: false,
-          opacity: 1));
+        isMini: true,
+        mediaEvent: mediaEvent,
+        top: null,
+        isHidden: false,
+      ));
     }
   }
 
@@ -471,7 +473,6 @@ class PlayerCubit extends Cubit<PlayerState> with WidgetsBindingObserver {
           mediaEvent: mediaEvent,
           playedVideos: [],
           selectedFullScreenIndex: selectedFullScreenIndex,
-          opacity: 0,
           top: 500));
 
       showBigPlayer();
@@ -666,7 +667,7 @@ class PlayerCubit extends Cubit<PlayerState> with WidgetsBindingObserver {
     // we're going down, putting threshold high easier to switch to mini player
     emit(state.copyWith(
         isDragging: true,
-        top: details.globalPosition.dy,
+        top: details.globalPosition.dy - targetHeight / 2,
         dragDistance: dragDistance,
         isMini: isMini,
         mediaEvent: mediaEvent));
@@ -675,6 +676,7 @@ class PlayerCubit extends Cubit<PlayerState> with WidgetsBindingObserver {
   void videoDraggedEnd(DragEndDetails details) {
     bool showMini =
         state.dragDistance.abs() > 200 ? state.isMini : state.dragStartMini;
+    emit(state.copyWith(isDragging: false));
     if (showMini) {
       showMiniPlayer();
     } else {
@@ -950,7 +952,7 @@ class PlayerState with _$PlayerState {
     @Default(false) bool isDragging,
     @Default(0) int selectedFullScreenIndex,
     @Default(true) bool isHidden,
-    @Default(0) double opacity,
+    @Default(false) bool isClosing,
     @Default(0) double dragDistance,
     @Default(true) bool dragStartMini,
     @Default(targetHeight) double height,

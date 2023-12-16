@@ -1,5 +1,5 @@
-import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:easy_debounce/easy_throttle.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:invidious/downloads/models/downloaded_video.dart';
 import 'package:invidious/extensions.dart';
 import 'package:invidious/globals.dart';
@@ -12,11 +12,12 @@ import '../../settings/states/settings.dart';
 import '../../videos/models/adaptive_format.dart';
 import '../models/media_event.dart';
 
-part 'audio_player.g.dart';
+part 'audio_player.freezed.dart';
 
 Logger log = Logger('AudioPlayerController');
 
 class AudioPlayerCubit extends MediaPlayerCubit<AudioPlayerState> {
+  AudioPlayer? audioPlayer;
   final SettingsCubit settings;
 
   AudioPlayerCubit(super.initialState, super.player, this.settings) {
@@ -36,19 +37,19 @@ class AudioPlayerCubit extends MediaPlayerCubit<AudioPlayerState> {
 
   @override
   void disposeControllers() {
-    state.player?.dispose();
+    audioPlayer?.dispose();
   }
 
   initPlayer() {
-    if (state.player == null) {
-      state.player = AudioPlayer();
-      state.player?.playerStateStream.listen(onStateStreamChange,
+    if (audioPlayer == null) {
+      audioPlayer = AudioPlayer();
+      audioPlayer?.playerStateStream.listen(onStateStreamChange,
           onError: (e, st) {
         return player.setEvent(const MediaEvent(state: MediaState.error));
       });
-      state.player?.positionStream.listen(onPositionChanged);
-      state.player?.durationStream.listen(onDurationChanged);
-      state.player?.bufferedPositionStream.listen(onBufferChanged);
+      audioPlayer?.positionStream.listen(onPositionChanged);
+      audioPlayer?.durationStream.listen(onDurationChanged);
+      audioPlayer?.bufferedPositionStream.listen(onBufferChanged);
     }
   }
 
@@ -75,8 +76,7 @@ class AudioPlayerCubit extends MediaPlayerCubit<AudioPlayerState> {
   }
 
   onDurationChanged(Duration? duration) async {
-    var state = this.state.copyWith();
-    state.loading = false;
+    emit(state.copyWith(loading: false));
     if (!isClosed) emit(state);
     player.setEvent(MediaEvent(
         state: MediaState.playing,
@@ -86,7 +86,7 @@ class AudioPlayerCubit extends MediaPlayerCubit<AudioPlayerState> {
 
   onPositionChanged(Duration position) {
     EasyThrottle.throttle('audio-progress', const Duration(seconds: 1), () {
-      state.audioPosition = position;
+      emit(state.copyWith(audioPosition: position));
       player.setEvent(MediaEvent(
           state: MediaState.playing,
           type: MediaEventType.progress,
@@ -102,13 +102,14 @@ class AudioPlayerCubit extends MediaPlayerCubit<AudioPlayerState> {
     if (state.video != null || state.offlineVideo != null) {
       // disposeControllers();
       initPlayer();
-      var state = this.state.copyWith();
-      state.audioPosition = Duration.zero;
-      state.audioLength = Duration(
+      var audioLength = Duration(
           seconds: offline
               ? state.offlineVideo!.lengthSeconds
               : state.video!.lengthSeconds);
-      state.loading = true;
+      emit(state.copyWith(
+          audioPosition: Duration.zero,
+          audioLength: audioLength,
+          loading: true));
       player.setEvent(const MediaEvent(state: MediaState.loading));
       try {
         AudioSource? source;
@@ -146,7 +147,7 @@ class AudioPlayerCubit extends MediaPlayerCubit<AudioPlayerState> {
           throw Error();
         }
 
-        await state.player?.setAudioSource(source, initialPosition: startAt);
+        await audioPlayer?.setAudioSource(source, initialPosition: startAt);
 
         play();
         // TODO: make this less duplicated between videos and audio
@@ -155,14 +156,13 @@ class AudioPlayerCubit extends MediaPlayerCubit<AudioPlayerState> {
           speed = settings.state.lastSpeed;
 
           log.fine("Setting playback speed to $speed");
-          state.player?.setSpeed(speed);
+          audioPlayer?.setSpeed(speed);
         }
       } catch (e) {
         log.severe("Couldn't play video", e);
         player.setEvent(const MediaEvent(state: MediaState.error));
-        state.error = e.toString();
-        state.loading = false;
-        if (!isClosed) emit(state);
+        if (!isClosed)
+          emit(state.copyWith(error: e.toString(), loading: false));
       }
     }
     super.playVideo(offline);
@@ -175,62 +175,54 @@ class AudioPlayerCubit extends MediaPlayerCubit<AudioPlayerState> {
 
   @override
   void switchToOfflineVideo(DownloadedVideo v) {
-    state.video = null;
-    state.offlineVideo = v;
+    emit(state.copyWith(video: null, offlineVideo: v));
     playVideo(true);
   }
 
   @override
   void switchVideo(Video video, {Duration? startAt}) async {
-    state.offlineVideo = null;
-    state.video = video;
+    emit(state.copyWith(video: video, offlineVideo: null));
     playVideo(false, startAt: startAt);
   }
 
   @override
   void togglePlaying() {
     var state = this.state.copyWith();
-    state.playing ? play() : pause();
+    playing ? play() : pause();
     emit(state);
   }
 
   void onScrubbed(double value) {
-    var state = this.state.copyWith();
     Duration seekTo = Duration(milliseconds: value.toInt());
     seek(seekTo);
-    state.audioPosition = seekTo;
-    emit(state);
+    emit(state.copyWith(audioPosition: seekTo));
   }
 
   void onScrubDrag(double value) {
-    var state = this.state.copyWith();
     Duration seekTo = Duration(milliseconds: value.toInt());
-    state.audioPosition = seekTo;
-    emit(state);
+    emit(state.copyWith(audioPosition: seekTo));
   }
 
   @override
   void toggleControls(bool visible) {
-    var state = this.state.copyWith();
-    state.disableControls = !visible;
-    emit(state);
+    emit(state.copyWith(disableControls: !visible));
   }
 
   @override
   bool isPlaying() {
-    return state.playing;
+    return playing;
   }
 
   @override
   void play() {
-    state.player?.play();
+    audioPlayer?.play();
     player.setEvent(
         const MediaEvent(state: MediaState.playing, type: MediaEventType.play));
   }
 
   @override
   void seek(Duration position) {
-    state.player?.seek(position);
+    audioPlayer?.seek(position);
     player.setEvent(
         const MediaEvent(state: MediaState.playing, type: MediaEventType.seek));
     player.setEvent(MediaEvent(
@@ -241,14 +233,14 @@ class AudioPlayerCubit extends MediaPlayerCubit<AudioPlayerState> {
 
   @override
   void pause() {
-    state.player?.pause();
+    audioPlayer?.pause();
     player.setEvent(const MediaEvent(
         state: MediaState.playing, type: MediaEventType.pause));
   }
 
   @override
   Duration? bufferedPosition() {
-    return state.player?.bufferedPosition;
+    return audioPlayer?.bufferedPosition;
   }
 
   @override
@@ -310,23 +302,23 @@ class AudioPlayerCubit extends MediaPlayerCubit<AudioPlayerState> {
 
   @override
   bool isMuted() {
-    return (state.player?.volume ?? 0) == 0;
+    return (audioPlayer?.volume ?? 0) == 0;
   }
 
   @override
   void toggleVolume(bool soundOn) {
-    state.player?.setVolume(soundOn ? 1 : 0);
+    audioPlayer?.setVolume(soundOn ? 1 : 0);
   }
 
   @override
   void setSpeed(double d) {
-    state.player?.setSpeed(d);
+    audioPlayer?.setSpeed(d);
     settings.setLastSpeed(d);
   }
 
   @override
   double getSpeed() {
-    return state.player?.speed ?? 1;
+    return audioPlayer?.speed ?? 1;
   }
 
   @override
@@ -347,7 +339,7 @@ class AudioPlayerCubit extends MediaPlayerCubit<AudioPlayerState> {
 
   @override
   Duration duration() {
-    return state.player?.duration ?? const Duration(milliseconds: 1);
+    return audioPlayer?.duration ?? const Duration(milliseconds: 1);
   }
 
   void onBufferChanged(Duration event) {
@@ -358,25 +350,26 @@ class AudioPlayerCubit extends MediaPlayerCubit<AudioPlayerState> {
           value: event));
     });
   }
+
+  bool get playing => audioPlayer?.playing ?? false;
 }
 
-@CopyWith(constructor: "_")
-class AudioPlayerState extends MediaPlayerState {
-  AudioPlayer? player;
-
-  AudioPlayerState({super.video, super.offlineVideo});
+@freezed
+class AudioPlayerState extends MediaPlayerState with _$AudioPlayerState {
+  const factory AudioPlayerState({
+    @Default(Duration(milliseconds: 1)) Duration audioLength,
+    @Default(Duration.zero) Duration audioPosition,
+    @Default(0) int previousSponsorCheck,
+    Video? video,
+    DownloadedVideo? offlineVideo,
+    bool? playNow,
+    bool? disableControls,
+    @Default(false) bool loading,
+    String? error,
+  }) = _AudioPlayerState;
 
   double get progress =>
       audioPosition.inMilliseconds / audioLength.inMilliseconds;
-  Duration audioLength = const Duration(milliseconds: 1);
-  Duration audioPosition = const Duration(milliseconds: 0);
-  int previousSponsorCheck = 0;
 
-  bool get playing => player?.playing ?? false;
-  bool loading = false;
-  String? error;
-
-  AudioPlayerState._(this.player, this.audioLength, this.audioPosition,
-      this.previousSponsorCheck, this.loading, this.error,
-      {super.video, super.offlineVideo, super.disableControls, super.playNow});
+  const AudioPlayerState._();
 }

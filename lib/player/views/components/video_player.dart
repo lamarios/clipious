@@ -56,20 +56,23 @@ class _VideoPlayerState extends State<VideoPlayer> {
           player,
           settings),
       child: BlocBuilder<VideoPlayerCubit, VideoPlayerState>(
-        builder: (context, _) => BlocListener<PlayerCubit, PlayerState>(
-          listenWhen: (previous, current) =>
-              previous.mediaCommand != current.mediaCommand &&
-              current.mediaCommand != null,
-          listener: (context, state) => context
-              .read<VideoPlayerCubit>()
-              .handleCommand(state.mediaCommand!),
-          child: _.videoController == null
-              ? const Text('nullll')
-              : BetterPlayer(
-                  controller: _.videoController!,
-                  key: _betterPlayerKey,
-                ),
-        ),
+        builder: (context, _) {
+          var cubit = context.read<VideoPlayerCubit>();
+          return BlocListener<PlayerCubit, PlayerState>(
+            listenWhen: (previous, current) =>
+                previous.mediaCommand != current.mediaCommand &&
+                current.mediaCommand != null,
+            listener: (context, state) => context
+                .read<VideoPlayerCubit>()
+                .handleCommand(state.mediaCommand!),
+            child: cubit.videoController == null
+                ? const Text('nullll')
+                : BetterPlayer(
+                    controller: cubit.videoController!,
+                    key: _betterPlayerKey,
+                  ),
+          );
+        },
       ),
     );
   }

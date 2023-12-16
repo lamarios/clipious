@@ -22,7 +22,7 @@ mixin _$PlayerState {
   bool get isDragging => throw _privateConstructorUsedError;
   int get selectedFullScreenIndex => throw _privateConstructorUsedError;
   bool get isHidden => throw _privateConstructorUsedError;
-  double get opacity => throw _privateConstructorUsedError;
+  bool get isClosing => throw _privateConstructorUsedError;
   double get dragDistance => throw _privateConstructorUsedError;
   bool get dragStartMini => throw _privateConstructorUsedError;
   double get height => throw _privateConstructorUsedError;
@@ -76,7 +76,7 @@ abstract class $PlayerStateCopyWith<$Res> {
       bool isDragging,
       int selectedFullScreenIndex,
       bool isHidden,
-      double opacity,
+      bool isClosing,
       double dragDistance,
       bool dragStartMini,
       double height,
@@ -125,7 +125,7 @@ class _$PlayerStateCopyWithImpl<$Res, $Val extends PlayerState>
     Object? isDragging = null,
     Object? selectedFullScreenIndex = null,
     Object? isHidden = null,
-    Object? opacity = null,
+    Object? isClosing = null,
     Object? dragDistance = null,
     Object? dragStartMini = null,
     Object? height = null,
@@ -176,10 +176,10 @@ class _$PlayerStateCopyWithImpl<$Res, $Val extends PlayerState>
           ? _value.isHidden
           : isHidden // ignore: cast_nullable_to_non_nullable
               as bool,
-      opacity: null == opacity
-          ? _value.opacity
-          : opacity // ignore: cast_nullable_to_non_nullable
-              as double,
+      isClosing: null == isClosing
+          ? _value.isClosing
+          : isClosing // ignore: cast_nullable_to_non_nullable
+              as bool,
       dragDistance: null == dragDistance
           ? _value.dragDistance
           : dragDistance // ignore: cast_nullable_to_non_nullable
@@ -310,7 +310,7 @@ abstract class _$$PlayerStateImplCopyWith<$Res>
       bool isDragging,
       int selectedFullScreenIndex,
       bool isHidden,
-      double opacity,
+      bool isClosing,
       double dragDistance,
       bool dragStartMini,
       double height,
@@ -357,7 +357,7 @@ class __$$PlayerStateImplCopyWithImpl<$Res>
     Object? isDragging = null,
     Object? selectedFullScreenIndex = null,
     Object? isHidden = null,
-    Object? opacity = null,
+    Object? isClosing = null,
     Object? dragDistance = null,
     Object? dragStartMini = null,
     Object? height = null,
@@ -408,10 +408,10 @@ class __$$PlayerStateImplCopyWithImpl<$Res>
           ? _value.isHidden
           : isHidden // ignore: cast_nullable_to_non_nullable
               as bool,
-      opacity: null == opacity
-          ? _value.opacity
-          : opacity // ignore: cast_nullable_to_non_nullable
-              as double,
+      isClosing: null == isClosing
+          ? _value.isClosing
+          : isClosing // ignore: cast_nullable_to_non_nullable
+              as bool,
       dragDistance: null == dragDistance
           ? _value.dragDistance
           : dragDistance // ignore: cast_nullable_to_non_nullable
@@ -531,7 +531,7 @@ class _$PlayerStateImpl extends _PlayerState {
       this.isDragging = false,
       this.selectedFullScreenIndex = 0,
       this.isHidden = true,
-      this.opacity = 0,
+      this.isClosing = false,
       this.dragDistance = 0,
       this.dragStartMini = true,
       this.height = targetHeight,
@@ -583,7 +583,7 @@ class _$PlayerStateImpl extends _PlayerState {
   final bool isHidden;
   @override
   @JsonKey()
-  final double opacity;
+  final bool isClosing;
   @override
   @JsonKey()
   final double dragDistance;
@@ -700,7 +700,7 @@ class _$PlayerStateImpl extends _PlayerState {
 
   @override
   String toString() {
-    return 'PlayerState(isMini: $isMini, top: $top, isDragging: $isDragging, selectedFullScreenIndex: $selectedFullScreenIndex, isHidden: $isHidden, opacity: $opacity, dragDistance: $dragDistance, dragStartMini: $dragStartMini, height: $height, fullScreenState: $fullScreenState, muted: $muted, aspectRatio: $aspectRatio, currentlyPlaying: $currentlyPlaying, offlineCurrentlyPlaying: $offlineCurrentlyPlaying, videos: $videos, offlineVideos: $offlineVideos, playedVideos: $playedVideos, playQueue: $playQueue, isAudio: $isAudio, isPip: $isPip, offset: $offset, startAt: $startAt, position: $position, bufferedPosition: $bufferedPosition, isPlaying: $isPlaying, speed: $speed, mediaCommand: $mediaCommand, mediaEvent: $mediaEvent, sponsorSegments: $sponsorSegments, nextSegment: $nextSegment, forwardStep: $forwardStep, rewindStep: $rewindStep, totalFastForward: $totalFastForward, totalRewind: $totalRewind)';
+    return 'PlayerState(isMini: $isMini, top: $top, isDragging: $isDragging, selectedFullScreenIndex: $selectedFullScreenIndex, isHidden: $isHidden, isClosing: $isClosing, dragDistance: $dragDistance, dragStartMini: $dragStartMini, height: $height, fullScreenState: $fullScreenState, muted: $muted, aspectRatio: $aspectRatio, currentlyPlaying: $currentlyPlaying, offlineCurrentlyPlaying: $offlineCurrentlyPlaying, videos: $videos, offlineVideos: $offlineVideos, playedVideos: $playedVideos, playQueue: $playQueue, isAudio: $isAudio, isPip: $isPip, offset: $offset, startAt: $startAt, position: $position, bufferedPosition: $bufferedPosition, isPlaying: $isPlaying, speed: $speed, mediaCommand: $mediaCommand, mediaEvent: $mediaEvent, sponsorSegments: $sponsorSegments, nextSegment: $nextSegment, forwardStep: $forwardStep, rewindStep: $rewindStep, totalFastForward: $totalFastForward, totalRewind: $totalRewind)';
   }
 
   @override
@@ -717,7 +717,8 @@ class _$PlayerStateImpl extends _PlayerState {
                 other.selectedFullScreenIndex == selectedFullScreenIndex) &&
             (identical(other.isHidden, isHidden) ||
                 other.isHidden == isHidden) &&
-            (identical(other.opacity, opacity) || other.opacity == opacity) &&
+            (identical(other.isClosing, isClosing) ||
+                other.isClosing == isClosing) &&
             (identical(other.dragDistance, dragDistance) ||
                 other.dragDistance == dragDistance) &&
             (identical(other.dragStartMini, dragStartMini) ||
@@ -776,7 +777,7 @@ class _$PlayerStateImpl extends _PlayerState {
         isDragging,
         selectedFullScreenIndex,
         isHidden,
-        opacity,
+        isClosing,
         dragDistance,
         dragStartMini,
         height,
@@ -821,7 +822,7 @@ abstract class _PlayerState extends PlayerState {
       final bool isDragging,
       final int selectedFullScreenIndex,
       final bool isHidden,
-      final double opacity,
+      final bool isClosing,
       final double dragDistance,
       final bool dragStartMini,
       final double height,
@@ -863,7 +864,7 @@ abstract class _PlayerState extends PlayerState {
   @override
   bool get isHidden;
   @override
-  double get opacity;
+  bool get isClosing;
   @override
   double get dragDistance;
   @override

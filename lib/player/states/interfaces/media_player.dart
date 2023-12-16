@@ -156,11 +156,10 @@ abstract class MediaPlayerCubit<T extends MediaPlayerState> extends Cubit<T> {
 }
 
 abstract class MediaPlayerState {
-  Video? video;
-  DownloadedVideo? offlineVideo;
-  bool? playNow;
-  bool? disableControls;
+  Video? get video;
+  DownloadedVideo? get offlineVideo;
+  bool? get playNow;
+  bool? get disableControls;
 
-  MediaPlayerState(
-      {this.video, this.offlineVideo, this.playNow, this.disableControls});
+  const MediaPlayerState();
 }
