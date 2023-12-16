@@ -1,4 +1,3 @@
-import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:easy_debounce/easy_throttle.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:invidious/downloads/models/downloaded_video.dart';
