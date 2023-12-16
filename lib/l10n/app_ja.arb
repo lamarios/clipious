@@ -1218,5 +1218,35 @@
   "searchSortBy": "並び替え",
   "@searchSortBy": {
     "description": "Search sorting option"
+  },
+  "seeking": "シーク",
+  "@seeking": {
+    "description": "category for settings related to seeking in a video"
+  },
+  "skipStepDescription": "前へ進む/後ろに戻る秒数",
+  "@skipStepDescription": {
+    "description": "Title for the settings to set the skipping step"
+  },
+  "exponentialSkipDescription": "移動幅が大きいほど移動する単位が増加します。",
+  "@exponentialSkipDescription": {
+    "description": "Title for the setting to enable the exponential skipping"
+  },
+  "nFilters": "{count, plural, =0{動画なし} =1{1個のフィルター} other{{count}個のフィルター}}",
+  "@nFilters": {
+    "description": "One or more video filters",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "exponentialSkip": "飛躍的な前後移動",
+  "@exponentialSkip": {
+    "description": "Title for the setting to enable the exponential skipping"
+  },
+  "skipStep": "前/後に移動する単位",
+  "@skipStep": {
+    "description": "Title for the settings to set the skipping step"
   }
 }
