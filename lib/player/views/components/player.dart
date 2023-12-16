@@ -14,7 +14,9 @@ import '../../../videos/models/video.dart';
 import '../../../videos/views/components/video_share_button.dart';
 
 class Player extends StatelessWidget {
-  const Player({super.key});
+  final double maxHeight;
+
+  const Player(this.maxHeight, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -34,8 +36,8 @@ class Player extends StatelessWidget {
             context.select((PlayerCubit value) => value.state.isHidden);
         bool isDragging =
             context.select((PlayerCubit value) => value.state.isDragging);
-        double opacity =
-            context.select((PlayerCubit value) => value.state.opacity);
+        bool isClosing =
+            context.select((PlayerCubit value) => value.state.isClosing);
         Video? currentlyPlaying =
             context.select((PlayerCubit value) => value.state.currentlyPlaying);
         FullScreenState fullScreen =
@@ -86,45 +88,62 @@ class Player extends StatelessWidget {
         return AnimatedPositioned(
           left: 0,
           top: top,
-          bottom: isFullScreen ? 0 : cubit.getBottom,
+          bottom: isClosing
+              ? -targetHeight
+              : isFullScreen
+                  ? 0
+                  : isMini && isDragging && top != null
+                      ? maxHeight - top - targetHeight
+                      : cubit.getBottom,
           right: 0,
           duration: isDragging ? Duration.zero : animationDuration,
+          curve: Curves.easeInOutQuad,
           child: AnimatedOpacity(
-            opacity: opacity,
             duration: animationDuration,
-            child: SafeArea(
-              bottom: fullScreen == FullScreenState.notFullScreen,
-              top: fullScreen == FullScreenState.notFullScreen,
-              left: fullScreen == FullScreenState.notFullScreen,
-              right: fullScreen == FullScreenState.notFullScreen,
+            opacity: isClosing ? 0 : 1,
+            child: AnimatedScale(
+              scale: (isMini && isDragging) ? 0.8 : 1,
+              duration: animationDuration,
+              curve: Curves.easeInOutQuad,
               child: Material(
                 elevation: 0,
                 child: showPlayer
                     ? GestureDetector(
                         child: AnimatedContainer(
                           duration: animationDuration,
-                          color: isFullScreen
-                              ? Colors.black
-                              : isMini
-                                  ? colors.secondaryContainer
-                                  : colors.background,
-                          child: Column(
-                            mainAxisAlignment: isFullScreen
-                                ? MainAxisAlignment.center
-                                : MainAxisAlignment.start,
-                            children: [
-                              isMini || isPip || isFullScreen
-                                  ? const SizedBox.shrink()
-                                  : AppBar(
-                                      backgroundColor: colors.background,
-                                      title: Text(locals.videoPlayer),
-                                      elevation: 0,
-                                      leading: IconButton(
-                                        icon: const Icon(Icons.expand_more),
-                                        onPressed: cubit.showMiniPlayer,
-                                      ),
-                                      actions:
-                                          isHidden || currentlyPlaying == null
+                          color: colors.background,
+                          padding: EdgeInsets.symmetric(
+                              horizontal: isMini && !isDragging ? 7 : 0),
+                          child: ClipRRect(
+                            borderRadius: isMini
+                                ? BorderRadius.circular(10)
+                                : BorderRadius.circular(0),
+                            child: AnimatedContainer(
+                              duration: animationDuration,
+                              decoration: BoxDecoration(
+                                color: isFullScreen
+                                    ? Colors.black
+                                    : isMini
+                                        ? colors.secondaryContainer
+                                        : colors.background,
+                              ),
+                              child: Column(
+                                mainAxisAlignment: isFullScreen
+                                    ? MainAxisAlignment.center
+                                    : MainAxisAlignment.start,
+                                children: [
+                                  isMini || isPip || isFullScreen
+                                      ? const SizedBox.shrink()
+                                      : AppBar(
+                                          backgroundColor: colors.background,
+                                          title: Text(locals.videoPlayer),
+                                          elevation: 0,
+                                          leading: IconButton(
+                                            icon: const Icon(Icons.expand_more),
+                                            onPressed: cubit.showMiniPlayer,
+                                          ),
+                                          actions: isHidden ||
+                                                  currentlyPlaying == null
                                               ? []
                                               : [
                                                   VideoShareButton(
@@ -132,32 +151,35 @@ class Player extends StatelessWidget {
                                                     showTimestampOption: true,
                                                   ),
                                                 ],
+                                        ),
+                                  AnimatedContainer(
+                                    width: double.infinity,
+                                    height:
+                                        isFullScreen ? double.infinity : null,
+                                    constraints: BoxConstraints(
+                                        maxHeight: isFullScreen
+                                            ? MediaQuery.of(context).size.height
+                                            : isMini
+                                                ? targetHeight
+                                                : 500,
+                                        maxWidth: isFullScreen
+                                            ? double.infinity
+                                            : tabletMaxVideoWidth),
+                                    duration: animationDuration,
+                                    child: Row(
+                                      mainAxisAlignment: isMini
+                                          ? MainAxisAlignment.start
+                                          : MainAxisAlignment.center,
+                                      children: [
+                                        Expanded(flex: 1, child: videoPlayer),
+                                        ...miniPlayerWidgets
+                                      ],
                                     ),
-                              AnimatedContainer(
-                                width: double.infinity,
-                                height: isFullScreen ? double.infinity : null,
-                                constraints: BoxConstraints(
-                                    maxHeight: isFullScreen
-                                        ? MediaQuery.of(context).size.height
-                                        : isMini
-                                            ? targetHeight
-                                            : 500,
-                                    maxWidth: isFullScreen
-                                        ? double.infinity
-                                        : tabletMaxVideoWidth),
-                                duration: animationDuration,
-                                child: Row(
-                                  mainAxisAlignment: isMini
-                                      ? MainAxisAlignment.start
-                                      : MainAxisAlignment.center,
-                                  children: [
-                                    Expanded(flex: 1, child: videoPlayer),
-                                    ...miniPlayerWidgets
-                                  ],
-                                ),
+                                  ),
+                                  ...bigPlayerWidgets,
+                                ],
                               ),
-                              ...bigPlayerWidgets,
-                            ],
+                            ),
                           ),
                         ),
                       )

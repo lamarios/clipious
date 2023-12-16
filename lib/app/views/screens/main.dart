@@ -11,13 +11,18 @@ class MainScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Stack(
-      children: [
-        MiniPlayerAware(
-          child: AutoRouter(),
+    return LayoutBuilder(builder: (context, constraints) {
+      return Container(
+        color: Theme.of(context).colorScheme.background,
+        child: Stack(
+          children: [
+            const MiniPlayerAware(
+              child: AutoRouter(),
+            ),
+            Player(constraints.maxHeight)
+          ],
         ),
-        Player()
-      ],
-    );
+      );
+    });
   }
 }

@@ -38,30 +38,29 @@ class TvPlayerSettingsCubit extends Cubit<TvPlayerSettingsState> {
 
   List<String> get videoTrackNames =>
       settings.state.useDash || (player.state.video?.liveNow ?? false)
-          ? player.state.videoController?.betterPlayerAsmsTracks
+          ? player.videoController?.betterPlayerAsmsTracks
                   .map((e) => '${e.height}p')
                   .toSet()
                   .toList() ??
               []
-          : player.state.videoController?.betterPlayerDataSource?.resolutions
-                  ?.keys
+          : player.videoController?.betterPlayerDataSource?.resolutions?.keys
                   .toList() ??
               [];
 
   List<String> get audioTrackNames => settings.state.useDash
-      ? player.state.videoController?.betterPlayerAsmsAudioTracks
+      ? player.videoController?.betterPlayerAsmsAudioTracks
               ?.map((e) => '${e.label}')
               .toList() ??
           []
       : [];
 
   List<String> get availableCaptions =>
-      player.state.videoController?.betterPlayerSubtitlesSourceList
+      player.videoController?.betterPlayerSubtitlesSourceList
           .map((e) => '${e.name}')
           .toList() ??
       [];
 
-  BetterPlayerController? get videoController => player.state.videoController;
+  BetterPlayerController? get videoController => player.videoController;
 
   videoButtonFocusChange(bool focus) {
     if (focus) {

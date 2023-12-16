@@ -29,6 +29,6 @@ const _$SponsorSegmentTypeEnumMap = {
   SponsorSegmentType.intro: 'intro',
   SponsorSegmentType.outro: 'outro',
   SponsorSegmentType.preview: 'preview',
-  SponsorSegmentType.musicOffTopic: 'music_offtopic',
+  SponsorSegmentType.musicOffTopic: 'musicOffTopic',
   SponsorSegmentType.filler: 'filler',
 };
