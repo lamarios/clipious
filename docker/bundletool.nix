@@ -9,5 +9,5 @@
 pkgs.dockerTools.buildLayeredImage {
   name = "gonzague/bundletool";
   tag = "latest";
-  contents = with pkgs; [ wget bundletool aapt bash which android-tools ];
+  contents = with pkgs; [ toybox wget bundletool aapt bash android-tools ];
 }
