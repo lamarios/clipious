@@ -33,10 +33,10 @@ steps:
       - cp /tmp/build/build/app/outputs/bundle/release/* build/app/outputs/bundle/release/
       - ls build/app/outputs/flutter-apk/
       - ls build/app/outputs/bundle/release/
-    when:
-      event: tag
+#    when:
+#      event: tag
   - name: Accrescent APKs
-    image: nixos/nix
+    image: gonzague/bundletool
     environment:
       ANDROID_KEY_FILE: /tmp/key.properties
       SERVER_URL:
@@ -49,8 +49,8 @@ steps:
       - . /tmp/key.properties
       - cd build/app/outputs/bundle/release/
       - bundletool build-apks --bundle=app-release.aab --output=app-release.apks --ks-pass=pass:$${storePassword} --ks=/tmp/keystore.jks --ks-key-alias=upload --key-pass=pass:$${keyPassword}
-    when:
-      event: tag
+#    when:
+#      event: tag
   - name: Publish
     image: plugins/github-release
     settings:
