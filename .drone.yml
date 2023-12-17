@@ -48,7 +48,7 @@ steps:
       - wget http://$SERVER_URL/keystore.jks -O /tmp/keystore.jks
       - . /tmp/key.properties
       - cd build/app/outputs/bundle/release/
-      - bundletool build-apks --bundle=app-release.aab --output=app-release.apks --ks-pass=pass:$${storePassword} --ks=/tmp/keystore.jks --ks-key-alias=upload --key-pass=pass:$${keyPassword}
+      - bundletool build-apks --bundle=app-release.aab --output=app-release.apks --ks-pass=pass:$${storePassword} --ks=/tmp/keystore.jks --ks-key-alias=upload --key-pass=pass:$${keyPassword} --aapt2=/bin/aapt2
 #    when:
 #      event: tag
   - name: Publish
