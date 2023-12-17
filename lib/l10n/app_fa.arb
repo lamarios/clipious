@@ -1206,5 +1206,31 @@
   "searchSortBy": "به ترتیب",
   "@searchSortBy": {
     "description": "Search sorting option"
+  },
+  "serverIsNotReachable": "سرویس دهنده در دسترس نیست",
+  "@serverIsNotReachable": {
+    "description": "Title for dialog when adding a server that is not reachable"
+  },
+  "malformedStatsEndpoint": "/api/v1/stats آن گونه که انتظار می‌رود نیست",
+  "@malformedStatsEndpoint": {
+    "description": "Title for dialog when adding a server that isn't validated as it should"
+  },
+  "seeking": "مرور ویدیو",
+  "@seeking": {
+    "description": "category for settings related to seeking in a video"
+  },
+  "nFilters": "{count, plural, =0{بدون ویدیو} =1{1 filter} other{{count} filters}}",
+  "@nFilters": {
+    "description": "One or more video filters",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "skipStep": "میزان عقب/جلو",
+  "@skipStep": {
+    "description": "Title for the settings to set the skipping step"
   }
 }

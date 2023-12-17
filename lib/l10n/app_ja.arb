@@ -1202,5 +1202,51 @@
   "copySettingsAsJson": "設定を JSON としてコピー",
   "@copySettingsAsJson": {
     "description": "title for settings sections to allow users to copy their settings as json to make debugging easier"
+  },
+  "serverIsNotReachable": "サーバーに到達できません",
+  "@serverIsNotReachable": {
+    "description": "Title for dialog when adding a server that is not reachable"
+  },
+  "malformedStatsEndpointDescription": "サーバーのデータの終点は期待されたペイロードで応答しませんでした。キー software.name は invidious であるべきです。\nサーバーからの応答:",
+  "@malformedStatsEndpointDescription": {
+    "description": "Description of the possible issue for an invalid stats endpoints"
+  },
+  "malformedStatsEndpoint": "/api/v1/stats は予想通りではありません",
+  "@malformedStatsEndpoint": {
+    "description": "Title for dialog when adding a server that isn't validated as it should"
+  },
+  "searchSortBy": "並び替え",
+  "@searchSortBy": {
+    "description": "Search sorting option"
+  },
+  "seeking": "シーク",
+  "@seeking": {
+    "description": "category for settings related to seeking in a video"
+  },
+  "skipStepDescription": "前へ進む/後ろに戻る秒数",
+  "@skipStepDescription": {
+    "description": "Title for the settings to set the skipping step"
+  },
+  "exponentialSkipDescription": "移動幅が大きいほど移動する単位が増加します。",
+  "@exponentialSkipDescription": {
+    "description": "Title for the setting to enable the exponential skipping"
+  },
+  "nFilters": "{count, plural, =0{動画なし} =1{1個のフィルター} other{{count}個のフィルター}}",
+  "@nFilters": {
+    "description": "One or more video filters",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "exponentialSkip": "飛躍的な前後移動",
+  "@exponentialSkip": {
+    "description": "Title for the setting to enable the exponential skipping"
+  },
+  "skipStep": "前/後に移動する単位",
+  "@skipStep": {
+    "description": "Title for the settings to set the skipping step"
   }
 }

@@ -1202,5 +1202,35 @@
   "copySettingsAsJson": "Скопировать настройки в формате JSON в буфер обмена",
   "@copySettingsAsJson": {
     "description": "title for settings sections to allow users to copy their settings as json to make debugging easier"
+  },
+  "skipStepDescription": "Количество секунд для пропуска вперед/назад",
+  "@skipStepDescription": {
+    "description": "Title for the settings to set the skipping step"
+  },
+  "serverIsNotReachable": "Сервер недоступен",
+  "@serverIsNotReachable": {
+    "description": "Title for dialog when adding a server that is not reachable"
+  },
+  "nFilters": "{count, plural, =0{Нет видео} =1{1 фильтр} other{{count} фильтров}}",
+  "@nFilters": {
+    "description": "One or more video filters",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "malformedStatsEndpointDescription": "Конечная точка статистики сервера не ответила на ожидаемую нагрузку, ключ \"software.name\" должен быть равен \"invidious\".\nОтвет от сервера:",
+  "@malformedStatsEndpointDescription": {
+    "description": "Description of the possible issue for an invalid stats endpoints"
+  },
+  "malformedStatsEndpoint": "/api/v1/stats не такое, как ожидалось",
+  "@malformedStatsEndpoint": {
+    "description": "Title for dialog when adding a server that isn't validated as it should"
+  },
+  "skipStep": "Пропустить шаг вперёд/назад",
+  "@skipStep": {
+    "description": "Title for the settings to set the skipping step"
   }
 }

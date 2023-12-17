@@ -1206,5 +1206,47 @@
   "searchSortBy": "Ordenar por",
   "@searchSortBy": {
     "description": "Search sorting option"
+  },
+  "serverIsNotReachable": "El servidor no está accesible",
+  "@serverIsNotReachable": {
+    "description": "Title for dialog when adding a server that is not reachable"
+  },
+  "malformedStatsEndpointDescription": "El punto final de las estadísticas del servidor no respondió a una carga útil esperada, la clave \"software.name\" debería ser igual a \"invidious\".\nRespuesta del servidor:",
+  "@malformedStatsEndpointDescription": {
+    "description": "Description of the possible issue for an invalid stats endpoints"
+  },
+  "malformedStatsEndpoint": "/api/v1/stats no es lo esperado",
+  "@malformedStatsEndpoint": {
+    "description": "Title for dialog when adding a server that isn't validated as it should"
+  },
+  "nFilters": "{count, plural, =0{Sin vídeos} =1{1 filter} other{{count} filters}}",
+  "@nFilters": {
+    "description": "One or more video filters",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "seeking": "Buscando",
+  "@seeking": {
+    "description": "category for settings related to seeking in a video"
+  },
+  "skipStepDescription": "Segundos a saltar en el avance/retroceso",
+  "@skipStepDescription": {
+    "description": "Title for the settings to set the skipping step"
+  },
+  "exponentialSkipDescription": "Cuanto más saltes hacia delante, mayor será el paso.",
+  "@exponentialSkipDescription": {
+    "description": "Title for the setting to enable the exponential skipping"
+  },
+  "exponentialSkip": "Salto exponencial adelante/atrás",
+  "@exponentialSkip": {
+    "description": "Title for the setting to enable the exponential skipping"
+  },
+  "skipStep": "Saltar hacia delante/atrás",
+  "@skipStep": {
+    "description": "Title for the settings to set the skipping step"
   }
 }
