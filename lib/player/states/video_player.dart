@@ -527,9 +527,19 @@ class VideoPlayerCubit extends MediaPlayerCubit<VideoPlayerState> {
 
   @override
   selectVideoTrack(int index) {
-    var betterPlayerAsmsTrack = videoController?.betterPlayerAsmsTracks[index];
-    if (betterPlayerAsmsTrack != null) {
-      videoController?.setTrack(betterPlayerAsmsTrack);
+    if (isUsingDash()) {
+      var betterPlayerAsmsTrack =
+          videoController?.betterPlayerAsmsTracks[index];
+      if (betterPlayerAsmsTrack != null) {
+        videoController?.setTrack(betterPlayerAsmsTrack);
+      }
+    } else {
+      var track = getVideoTracks()[index];
+      var url = videoController?.betterPlayerDataSource?.resolutions?[track];
+      if (url != null) {
+        videoController?.setResolution(url);
+        emit(state.copyWith(selectedNonDashTrack: track));
+      }
     }
   }
 

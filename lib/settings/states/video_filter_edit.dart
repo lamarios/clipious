@@ -127,7 +127,7 @@ class VideoFilterEditCubit extends Cubit<VideoFilterEditState> {
 
   selectChannel(Channel? value) {
     var filter = state.filter?.copyWith();
-    filter?.channelId = state.channel?.authorId;
+    filter?.channelId = value?.authorId;
     emit(state.copyWith(channel: value, filter: filter));
   }
 
