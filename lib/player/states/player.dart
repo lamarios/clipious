@@ -937,7 +937,8 @@ class PlayerCubit extends Cubit<PlayerState> with WidgetsBindingObserver {
   void onOrientationChange() {
     if (getDeviceType() == DeviceType.phone &&
         (orientation == Orientation.landscape) &&
-        !state.isMini) {
+        !state.isMini &&
+        settings.state.fullscreenOnRotate) {
       setFullScreen(FullScreenState.fullScreen);
     }
   }

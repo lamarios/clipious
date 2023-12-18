@@ -426,6 +426,8 @@ class SettingsCubit extends Cubit<SettingsState> {
 
   set skipExponentially(bool b) => _set(skipExponentialSettingName, b);
 
+  set fullscreenOnRotate(bool b) => _set(fullScreenOnLandscapeSettingName, b);
+
   void _set<T>(String name, T value) {
     var settings = Map<String, SettingsValue>.from(state.settings);
     if (value == null) {
@@ -556,6 +558,9 @@ class SettingsState with _$SettingsState {
 
   bool get dearrowThumbnails =>
       _get(dearrowThumbnailsSettingName)?.value == 'true';
+
+  bool get fullscreenOnRotate =>
+      (_get(fullScreenOnLandscapeSettingName)?.value ?? "true") == "true";
 
   SettingsValue? _get(String settingName) {
     if (settings.containsKey(settingName)) {

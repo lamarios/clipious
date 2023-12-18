@@ -5,6 +5,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/router.dart';
 import 'package:invidious/settings/states/settings.dart';
 import 'package:invidious/settings/views/screens/settings.dart';
+import 'package:invidious/utils.dart';
 import 'package:settings_ui/settings_ui.dart';
 
 @RoutePage()
@@ -72,6 +73,14 @@ class VideoPlayerSettingsScreen extends StatelessWidget {
                   description: Text(locals.sponsorBlockDescription),
                   onPressed: openSponsorBlockSettings,
                 ),
+                if (getDeviceType() == DeviceType.phone)
+                  SettingsTile.switchTile(
+                    leading: const Icon(Icons.stay_primary_landscape),
+                    initialValue: _.fullscreenOnRotate,
+                    onToggle: (value) => cubit.fullscreenOnRotate = value,
+                    title: Text(locals.fullscreenOnLandscape),
+                    description: Text(locals.fullscreenOnLandscapeDescription),
+                  ),
                 SettingsTile.switchTile(
                   leading: const Icon(Icons.aspect_ratio),
                   initialValue: _.forceLandscapeFullScreen,
