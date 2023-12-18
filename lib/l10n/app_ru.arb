@@ -547,7 +547,7 @@
   "@themeDark": {
     "description": "Dark theme"
   },
-  "followSystem": "Система следования",
+  "followSystem": "Следовать системе",
   "@followSystem": {
     "description": "Follow system label"
   },
@@ -563,7 +563,7 @@
   "@copyToClipBoard": {
     "description": "Text to copy something to clipboard"
   },
-  "searchSortRating": "Оценка",
+  "searchSortRating": "Рейтингу",
   "@searchSortRating": {
     "description": "Sort search by rating"
   },
@@ -597,7 +597,7 @@
   "@addToPlaylist": {
     "description": "Label to add a video to a playlist"
   },
-  "searchSortRelevance": "Актуальность",
+  "searchSortRelevance": "Актуальности",
   "@searchSortRelevance": {
     "description": "Sort search by relevance"
   },
@@ -669,7 +669,7 @@
   "@searchHistory": {
     "description": "Settings label for search history"
   },
-  "searchSortUploadDate": "Дата загрузки",
+  "searchSortUploadDate": "Дате загрузки",
   "@searchSortUploadDate": {
     "description": "Sort search by upload date"
   },
@@ -775,7 +775,7 @@
   "@enableSearchHistory": {
     "description": "Settings label for enabling search history"
   },
-  "searchSortViewCount": "Количество просмотров",
+  "searchSortViewCount": "Количеству просмотров",
   "@searchSortViewCount": {
     "description": "Sort search by view count"
   },
@@ -1236,5 +1236,9 @@
   "searchSortBy": "Сортировать по",
   "@searchSortBy": {
     "description": "Search sorting option"
+  },
+  "exponentialSkip": "Нарастающий пропуск вперёд/назад",
+  "@exponentialSkip": {
+    "description": "Title for the setting to enable the exponential skipping"
   }
 }
