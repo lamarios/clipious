@@ -57,6 +57,7 @@ const backgroundCheckFrequency = "background-check-frequency";
 const subtitleBackground = 'subtitle-background';
 const dearrowSettingName = 'dearrow';
 const dearrowThumbnailsSettingName = "dearrow-thumbnails";
+const fullScreenOnLandscapeSettingName = "fullscreen-on-landscape";
 
 const onOpenSettingName = "on-open";
 
