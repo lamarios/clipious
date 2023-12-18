@@ -1232,5 +1232,9 @@
   "skipStep": "Пропустить шаг вперёд/назад",
   "@skipStep": {
     "description": "Title for the settings to set the skipping step"
+  },
+  "searchSortBy": "Сортировать по",
+  "@searchSortBy": {
+    "description": "Search sorting option"
   }
 }
