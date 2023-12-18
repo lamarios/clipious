@@ -1247,15 +1247,14 @@
   "@exponentialSkipDescription": {
     "description": "Title for the setting to enable the exponential skipping"
   },
-      "fullscreenOnLandscape": "Full screen on landscape",
-          "@fullscreenOnLandscape": {
-              "description": "Setting title to enable full screen on landscape orientation"
-          },
-          "fullscreenOnLandscapeDescription": "Switch to full screen when the device is rotated to landscape mode",
-              "@fullscreenOnLandscapeDescription": {
-                  "description": "Setting to enable full screen on landscape orientation"
-              },
-
+  "fullscreenOnLandscape": "Full screen on landscape",
+  "@fullscreenOnLandscape": {
+    "description": "Setting title to enable full screen on landscape orientation"
+  },
+  "fullscreenOnLandscapeDescription": "Switch to full screen when the device is rotated to landscape mode",
+  "@fullscreenOnLandscapeDescription": {
+    "description": "Setting to enable full screen on landscape orientation"
+  },
   "enabled": "Enabled",
   "@enabled": {
     "description": "Text to show something is enabled"
