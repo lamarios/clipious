@@ -161,8 +161,9 @@ class AudioPlayerCubit extends MediaPlayerCubit<AudioPlayerState> {
       } catch (e) {
         log.severe("Couldn't play video", e);
         player.setEvent(const MediaEvent(state: MediaState.error));
-        if (!isClosed)
+        if (!isClosed) {
           emit(state.copyWith(error: e.toString(), loading: false));
+        }
       }
     }
     super.playVideo(offline);
