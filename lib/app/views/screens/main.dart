@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:invidious/app/views/components/player_placeholder.dart';
-import 'package:invidious/globals.dart';
 import 'package:invidious/player/views/components/player.dart';
 
 import '../../../player/views/components/mini_player_aware.dart';
