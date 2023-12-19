@@ -7,25 +7,13 @@ class TopListLoading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var colorScheme = Theme.of(context).colorScheme;
     return SizedBox(
-      height: height,
-      child: Stack(children: [
-        SizedBox(
-            height: height,
-            child: LinearProgressIndicator(
-              minHeight: height,
-            )),
-        Container(
-          height: height,
-          decoration: BoxDecoration(
-              gradient: LinearGradient(colors: [
-            colorScheme.background,
-            colorScheme.background.withOpacity(0),
-            colorScheme.background
-          ], begin: Alignment.centerLeft, end: Alignment.bottomRight)),
-        ),
-      ]),
-    );
+        height: height,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(20),
+          child: LinearProgressIndicator(
+            minHeight: height,
+          ),
+        ));
   }
 }
