@@ -145,7 +145,7 @@ class _$SearchableSelectFromListStateImpl<T>
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SearchableSelectFromListStateImpl<T> &&

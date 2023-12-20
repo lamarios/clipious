@@ -127,7 +127,7 @@ class _$VideoFilterStateImpl implements _VideoFilterState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$VideoFilterStateImpl &&

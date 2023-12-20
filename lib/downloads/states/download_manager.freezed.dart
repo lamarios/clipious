@@ -141,7 +141,7 @@ class _$DownloadManagerStateImpl extends _DownloadManagerState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$DownloadManagerStateImpl &&

@@ -271,7 +271,7 @@ class _$VideoStateImpl extends _VideoState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$VideoStateImpl &&
