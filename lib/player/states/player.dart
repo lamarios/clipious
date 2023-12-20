@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:collection';
 
 import 'package:audio_service/audio_service.dart';
+import 'package:audio_session/audio_session.dart';
 import 'package:back_button_interceptor/back_button_interceptor.dart';
 import 'package:bloc/bloc.dart';
 import 'package:easy_debounce/easy_debounce.dart';
@@ -44,6 +45,7 @@ enum PlayerRepeat { noRepeat, repeatAll, repeatOne }
 class PlayerCubit extends Cubit<PlayerState> with WidgetsBindingObserver {
   final SettingsCubit settings;
   late Orientation orientation;
+  late final AudioSession audioSession;
 
   PlayerCubit(super.initialState, this.settings) {
     orientation = _orientation;
@@ -127,6 +129,16 @@ class PlayerCubit extends Cubit<PlayerState> with WidgetsBindingObserver {
         rewindStep: settings.state.skipStep));
     if (!isTv) {
       WidgetsBinding.instance.addObserver(this);
+      // setting up audio session
+      audioSession = await AudioSession.instance;
+      audioSession.configure(const AudioSessionConfiguration(
+        avAudioSessionCategory: AVAudioSessionCategory.playback,
+        avAudioSessionCategoryOptions:
+            AVAudioSessionCategoryOptions.allowBluetooth,
+      ));
+      audioSession.becomingNoisyEventStream.listen((event) {
+        pause();
+      });
 
       mediaHandler = await AudioService.init(
         builder: () => MediaHandler(this),
@@ -231,7 +243,6 @@ class PlayerCubit extends Cubit<PlayerState> with WidgetsBindingObserver {
         state: MediaState.playing,
         type: MediaEventType.miniDisplayChanged,
         value: state.isMini);
-
     emit(state.copyWith(isClosing: true));
     Future.delayed(
       animationDuration * 1.5,
@@ -251,6 +262,8 @@ class PlayerCubit extends Cubit<PlayerState> with WidgetsBindingObserver {
         setEvent(const MediaEvent(state: MediaState.idle));
       },
     );
+
+    audioSession.setActive(false);
   }
 
   double get getBottom => state.isHidden ? -targetHeight : 0;
@@ -516,7 +529,7 @@ class PlayerCubit extends Cubit<PlayerState> with WidgetsBindingObserver {
   _switchToVideo(IdedVideo video, {Duration? startAt}) async {
     try {
       // we move the existing video to the stack of played video
-
+      await audioSession.setActive(true);
       bool isOffline = video is DownloadedVideo;
       // we want to switch to audio mode as soon as we can to prevent problems when switching from audio to video or the other way
       if (isOffline) {
