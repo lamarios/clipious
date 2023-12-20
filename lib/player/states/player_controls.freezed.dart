@@ -312,7 +312,7 @@ class _$PlayercontrolsStateImpl implements _PlayercontrolsState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$PlayercontrolsStateImpl &&

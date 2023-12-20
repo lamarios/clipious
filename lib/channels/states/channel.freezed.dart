@@ -222,7 +222,7 @@ class _$ChannelControllerImpl implements _ChannelController {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ChannelControllerImpl &&
