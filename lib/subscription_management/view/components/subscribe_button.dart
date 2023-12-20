@@ -25,39 +25,40 @@ class SubscribeButton extends StatelessWidget {
           child: BlocBuilder<SubscribeButtonCubit, SubscribeButtonState>(
             builder: (context, _) {
               var cubit = context.read<SubscribeButtonCubit>();
-              return SizedBox(
-                  height: 25,
-                  child: FilledButton.tonal(
-                    onPressed: _.isLoggedIn ? cubit.toggleSubscription : null,
-                    child: Row(
-                      children: _.isLoggedIn
-                          ? [
-                              _.loading
-                                  ? const SizedBox(
-                                      width: 15,
-                                      height: 15,
-                                      child: CircularProgressIndicator(
-                                        strokeWidth: 1,
-                                      ))
-                                  : Icon(
-                                      _.isSubscribed ? Icons.done : Icons.add),
-                              Padding(
-                                padding: const EdgeInsets.only(left: 8.0),
-                                child: Text(
-                                    '${(_.isSubscribed ? locals.subscribed : locals.subscribe)} | $subCount'),
-                              ),
-                            ]
-                          : [
-                              const Icon(Icons.people),
-                              Padding(
-                                padding: const EdgeInsets.only(left: 8.0),
-                                // child: Text('${subCount.replaceAll("^0.00\$","no")} subscribers'),
-                                child: Text(locals.nSubscribers(subCount
-                                    .replaceAll(RegExp(r'^0.00$'), "no"))),
-                              ),
-                            ],
-                    ),
-                  ));
+              return _.isLoggedIn
+                  ? SizedBox(
+                      height: 25,
+                      child: FilledButton.tonal(
+                        onPressed: cubit.toggleSubscription,
+                        child: Row(
+                          children: [
+                            _.loading
+                                ? const SizedBox(
+                                    width: 15,
+                                    height: 15,
+                                    child: CircularProgressIndicator(
+                                      strokeWidth: 1,
+                                    ))
+                                : Icon(_.isSubscribed ? Icons.done : Icons.add),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 8.0),
+                              child: Text(
+                                  '${(_.isSubscribed ? locals.subscribed : locals.subscribe)} | $subCount'),
+                            ),
+                          ],
+                        ),
+                      ))
+                  : Row(
+                      children: [
+                        const Icon(Icons.people),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 8.0),
+                          // child: Text('${subCount.replaceAll("^0.00\$","no")} subscribers'),
+                          child: Text(locals.nSubscribers(
+                              subCount.replaceAll(RegExp(r'^0.00$'), "no"))),
+                        ),
+                      ],
+                    );
             },
           ),
         ),

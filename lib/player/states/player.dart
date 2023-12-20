@@ -667,6 +667,7 @@ class PlayerCubit extends Cubit<PlayerState> with WidgetsBindingObserver {
     // we're going down, putting threshold high easier to switch to mini player
     emit(state.copyWith(
         isDragging: true,
+        showMiniPlaceholder: true,
         top: details.globalPosition.dy - targetHeight / 2,
         dragDistance: dragDistance,
         isMini: isMini,
@@ -677,6 +678,10 @@ class PlayerCubit extends Cubit<PlayerState> with WidgetsBindingObserver {
     bool showMini =
         state.dragDistance.abs() > 200 ? state.isMini : state.dragStartMini;
     emit(state.copyWith(isDragging: false));
+    Future.delayed(
+      animationDuration,
+      () => emit(state.copyWith(showMiniPlaceholder: false)),
+    );
     if (showMini) {
       showMiniPlayer();
     } else {
@@ -955,6 +960,7 @@ class PlayerState with _$PlayerState {
     @Default(true) bool isHidden,
     @Default(false) bool isClosing,
     @Default(0) double dragDistance,
+    @Default(false) bool showMiniPlaceholder,
     @Default(true) bool dragStartMini,
     @Default(targetHeight) double height,
     @Default(FullScreenState.notFullScreen) FullScreenState fullScreenState,
