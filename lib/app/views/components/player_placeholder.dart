@@ -11,8 +11,8 @@ class PlayerPlaceHolder extends StatelessWidget {
     var colors = Theme.of(context).colorScheme;
     return Material(child: Builder(
       builder: (context) {
-        var showPlaceHolder =
-            context.select((PlayerCubit value) => value.state.showMiniPlaceholder && value.state.isMini);
+        var showPlaceHolder = context.select((PlayerCubit value) =>
+            value.state.showMiniPlaceholder && value.state.isMini);
         return AnimatedOpacity(
           opacity: showPlaceHolder ? 1 : 0,
           duration: animationDuration,
