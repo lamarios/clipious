@@ -1248,5 +1248,13 @@
   "skipStep": "Saltar hacia delante/atrás",
   "@skipStep": {
     "description": "Title for the settings to set the skipping step"
+  },
+  "fullscreenOnLandscape": "Pantalla completa en apaisado",
+  "@fullscreenOnLandscape": {
+    "description": "Setting title to enable full screen on landscape orientation"
+  },
+  "fullscreenOnLandscapeDescription": "Cambio a pantalla completa al girar el dispositivo al modo horizontal",
+  "@fullscreenOnLandscapeDescription": {
+    "description": "Setting to enable full screen on landscape orientation"
   }
 }
