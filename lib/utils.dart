@@ -25,6 +25,11 @@ enum DeviceType { phone, tablet, tv }
 double tabletMaxVideoWidth =
     getDeviceType() == DeviceType.phone ? double.infinity : 500;
 
+bool isPhoneLandscape(BuildContext context) {
+  var size = MediaQuery.sizeOf(context);
+  return getDeviceType() == DeviceType.phone && size.height < size.width;
+}
+
 const List<LogicalKeyboardKey> selectKeys = [
   LogicalKeyboardKey.accept,
   LogicalKeyboardKey.enter,

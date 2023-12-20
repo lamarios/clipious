@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/comments/views/components/comments_container.dart';
 import 'package:invidious/player/states/player.dart';
+import 'package:invidious/utils.dart';
 import 'package:invidious/videos/models/video.dart';
 import 'package:invidious/videos/views/components/add_to_queue_button.dart';
 import 'package:invidious/videos/views/components/play_button.dart';
@@ -36,28 +37,53 @@ class VideoInnerView extends StatelessWidget {
     String? currentlyPlayingVideoId = context
         .select((PlayerCubit player) => player.state.currentlyPlaying?.videoId);
     final bool restart = currentlyPlayingVideoId == video.videoId;
+    var phoneLandscape = isPhoneLandscape(context);
+
+    var playButton = PlayButton(
+      icon: restart ? Icons.refresh : null,
+      onPressed: restart ? cubit.restartVideo : cubit.playVideo,
+    );
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        VideoThumbnailView(
-          videoId: video.videoId,
-          thumbnailUrl:
-              video.deArrowThumbnailUrl ?? video.getBestThumbnail()?.url ?? '',
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              PlayButton(
-                icon: restart ? Icons.refresh : null,
-                onPressed: restart ? cubit.restartVideo : cubit.playVideo,
+        Row(
+          children: [
+            Expanded(
+              flex: 1,
+              child: Container(
+                constraints: phoneLandscape
+                    ? const BoxConstraints(maxHeight: 100)
+                    : null,
+                child: VideoThumbnailView(
+                  videoId: video.videoId,
+                  thumbnailUrl: video.deArrowThumbnailUrl ??
+                      video.getBestThumbnail()?.url ??
+                      '',
+                  child: phoneLandscape
+                      ? const SizedBox.shrink()
+                      : Stack(
+                          alignment: Alignment.center,
+                          children: [
+                            playButton,
+                            Positioned(
+                                right: 5,
+                                bottom: 3,
+                                child: AddToQueueButton(
+                                  videos: [video],
+                                ))
+                          ],
+                        ),
+                ),
               ),
-              Positioned(
-                  right: 5,
-                  bottom: 3,
-                  child: AddToQueueButton(
-                    videos: [video],
-                  ))
+            ),
+            if (phoneLandscape) ...[
+              Expanded(
+                  flex: 2,
+                  child: Container(
+                      alignment: Alignment.centerLeft, child: playButton)),
+              AddToQueueButton(videos: [video])
             ],
-          ),
+          ],
         ),
         if (!settings.state.distractionFreeMode)
           BlocBuilder<SettingsCubit, SettingsState>(
