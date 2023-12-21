@@ -1,0 +1,1 @@
+INSERT INTO public.users (updated, notifications, subscriptions, email, preferences, password, token, watched, feed_needs_update) VALUES ('2023-12-21 02:30:21.742215 +00:00', '{}', '{}', 'test', '{}', '$2a$10$YL6XAzDB9AGCgE4f.q5yCeKuhBQyotKtj5xBObo1oTgw4/wGGKPM2', 'bWPB3fAjNlZOyK-ummwqFlY76UwO-2kBqr2HOhNILYA=', '{}', false);
