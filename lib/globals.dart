@@ -1,6 +1,5 @@
 library app.globals;
 
-import 'package:invidious/database.dart';
 import 'package:invidious/service.dart';
 import 'package:invidious/utils/interfaces/db.dart';
 

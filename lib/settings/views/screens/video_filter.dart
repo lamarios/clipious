@@ -6,7 +6,6 @@ import 'package:invidious/extensions.dart';
 import 'package:invidious/router.dart';
 import 'package:invidious/settings/states/video_filter_channel.dart';
 import 'package:invidious/settings/views/components/video_filter_channel.dart';
-import 'package:uuid/uuid.dart';
 
 import '../../models/db/video_filter.dart';
 import '../../states/video_filter.dart';
@@ -61,7 +60,7 @@ class VideoFilterSettingsScreen extends StatelessWidget {
                             itemCount: keys.length,
                             itemBuilder: (context, index) {
                               return VideoFilterChannel(
-                                  key: ValueKey(const Uuid().v4()),
+                                  key: UniqueKey(),
                                   filters: mappedFilters[keys[index]] ?? []);
                             },
                           ),

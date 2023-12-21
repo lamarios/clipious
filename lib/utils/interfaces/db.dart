@@ -43,8 +43,6 @@ abstract class IDbClient {
 
   List<String> getSearchHistory();
 
-  List<SearchHistoryItem> _getSearchHistory();
-
   void addToSearchHistory(SearchHistoryItem searchHistoryItem);
 
   void clearExcessSearchHistory();
