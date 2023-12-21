@@ -10,9 +10,9 @@ part 'app_logs.freezed.dart';
 class AppLogsCubit extends Cubit<AppLogsState> {
   AppLogsCubit(super.initialState);
 
-  void selectLog(int id, bool? value) {
+  void selectLog(int id, bool? add) {
     var selected = List<int>.from(state.selected);
-    if (value ?? false) {
+    if (add ?? false) {
       selected.add(id);
     } else {
       selected.remove(id);

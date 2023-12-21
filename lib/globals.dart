@@ -2,6 +2,7 @@ library app.globals;
 
 import 'package:invidious/database.dart';
 import 'package:invidious/service.dart';
+import 'package:invidious/utils/interfaces/db.dart';
 
 import 'utils/models/country.dart';
 
@@ -23,7 +24,7 @@ Service service = Service();
 
 const double innerHorizontalPadding = 16;
 
-late DbClient db;
+late IDbClient db;
 
 List<Country> countryCodes = [
   Country('AD', 'Andorra'),

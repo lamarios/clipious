@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:invidious/home/models/db/home_layout.dart';
 import 'package:invidious/notifications/models/db/channel_notifications.dart';
@@ -6,6 +8,7 @@ import 'package:invidious/search/models/db/search_history_item.dart';
 import 'package:invidious/settings/models/db/settings.dart';
 import 'package:invidious/settings/models/errors/no_server_selected.dart';
 import 'package:invidious/settings/states/settings.dart';
+import 'package:invidious/utils/interfaces/db.dart';
 import 'package:invidious/videos/models/db/dearrow_cache.dart';
 import 'package:invidious/videos/models/db/history_video_cache.dart';
 import 'package:invidious/videos/models/db/progress.dart';
@@ -63,7 +66,7 @@ const onOpenSettingName = "on-open";
 
 const maxLogs = 1000;
 
-class DbClient {
+class DbClient implements IDbClient {
   /// The Store of this app.
   late final Store store;
   final log = Logger('DbClient');
@@ -72,7 +75,12 @@ class DbClient {
 
   /// Create an instance of ObjectBox to use throughout the app.
   static Future<DbClient> create() async {
-    final docsDir = await getApplicationDocumentsDirectory();
+    late final Directory docsDir;
+    try {
+      docsDir = await getApplicationDocumentsDirectory();
+    } catch (e) {
+      docsDir = Directory.current;
+    }
     // Future<Store> openStore() {...} is defined in the generated objectbox.g.dart
     var dbPath = p.join(docsDir.path, "impuc-data");
     Store? store;
@@ -86,10 +94,12 @@ class DbClient {
 
   bool get isClosed => store.isClosed();
 
+  @override
   close() {
     store.close();
   }
 
+  @override
   Server? getServer(String url) {
     return store
         .box<Server>()
@@ -98,6 +108,7 @@ class DbClient {
         .findFirst();
   }
 
+  @override
   upsertServer(Server server) {
     store.box<Server>().put(server);
     // if we only have one server, we select it
@@ -107,10 +118,12 @@ class DbClient {
     }
   }
 
+  @override
   List<Server> getServers() {
     return store.box<Server>().getAll();
   }
 
+  @override
   deleteServer(Server server) {
     if (getServers().length >= 2) {
       store.box<Server>().remove(server.id);
@@ -120,14 +133,17 @@ class DbClient {
     }
   }
 
+  @override
   saveSetting(SettingsValue setting) {
     store.box<SettingsValue>().put(setting, mode: PutMode.put);
   }
 
+  @override
   List<SettingsValue> getAllSettings() {
     return store.box<SettingsValue>().getAll();
   }
 
+  @override
   deleteSetting(String name) {
     SettingsValue? settings = getSettings(name);
     if (settings != null) {
@@ -135,6 +151,7 @@ class DbClient {
     }
   }
 
+  @override
   SettingsValue? getSettings(String name) {
     return store
         .box<SettingsValue>()
@@ -143,6 +160,7 @@ class DbClient {
         .findFirst();
   }
 
+  @override
   Server getCurrentlySelectedServer() {
     Server? server = store
         .box<Server>()
@@ -165,12 +183,14 @@ class DbClient {
     }
   }
 
+  @override
   bool isLoggedInToCurrentServer() {
     var currentlySelectedServer = getCurrentlySelectedServer();
     return (currentlySelectedServer.authToken?.isNotEmpty ?? false) ||
         (currentlySelectedServer.sidCookie?.isNotEmpty ?? false);
   }
 
+  @override
   double getVideoProgress(String videoId) {
     return store
             .box<Progress>()
@@ -181,10 +201,12 @@ class DbClient {
         0;
   }
 
+  @override
   saveProgress(Progress progress) {
     store.box<Progress>().put(progress);
   }
 
+  @override
   void useServer(Server server) {
     List<Server> servers = getServers();
     for (Server s in servers) {
@@ -198,6 +220,7 @@ class DbClient {
     store.box<Server>().put(server);
   }
 
+  @override
   List<String> getSearchHistory() {
     return _getSearchHistory().map((e) => e.search).toList();
   }
@@ -209,11 +232,13 @@ class DbClient {
         .find();
   }
 
+  @override
   void addToSearchHistory(SearchHistoryItem searchHistoryItem) {
     store.box<SearchHistoryItem>().put(searchHistoryItem);
     clearExcessSearchHistory();
   }
 
+  @override
   void clearExcessSearchHistory() {
     final limit = int.parse(getSettings(searchHistoryLimitSettingName)?.value ??
         searchHistoryDefaultLength);
@@ -223,10 +248,12 @@ class DbClient {
     }
   }
 
+  @override
   void clearSearchHistory() {
     store.box<SearchHistoryItem>().removeAll();
   }
 
+  @override
   void insertLogs(AppLog log) {
     store.box<AppLog>().put(log);
     EasyDebounce.debounce('log-cleaning', const Duration(seconds: 5), () {
@@ -234,6 +261,7 @@ class DbClient {
     });
   }
 
+  @override
   void cleanOldLogs() {
     var all = store.box<AppLog>().getAll();
 
@@ -242,38 +270,47 @@ class DbClient {
     log.fine("clearing ${ids.length} logs out of ${all.length}");
   }
 
+  @override
   List<AppLog> getAppLogs() {
     return store.box<AppLog>().getAll();
   }
 
+  @override
   List<VideoFilter> getAllFilters() {
     return store.box<VideoFilter>().getAll();
   }
 
+  @override
   void saveFilter(VideoFilter filter) {
     store.box<VideoFilter>().put(filter);
   }
 
+  @override
   void deleteFilter(VideoFilter filter) {
     store.box<VideoFilter>().remove(filter.id);
   }
 
+  @override
   List<DownloadedVideo> getAllDownloads() {
     return store.box<DownloadedVideo>().getAll();
   }
 
+  @override
   void upsertDownload(DownloadedVideo vid) {
     store.box<DownloadedVideo>().put(vid);
   }
 
+  @override
   void deleteDownload(DownloadedVideo vid) {
     store.box<DownloadedVideo>().remove(vid.id);
   }
 
+  @override
   DownloadedVideo? getDownloadById(int id) {
     return store.box<DownloadedVideo>().get(id);
   }
 
+  @override
   DownloadedVideo? getDownloadByVideoId(String id) {
     return store
         .box<DownloadedVideo>()
@@ -282,6 +319,7 @@ class DbClient {
         .findFirst();
   }
 
+  @override
   HistoryVideoCache? getHistoryVideoByVideoId(String videoId) {
     return store
         .box<HistoryVideoCache>()
@@ -290,30 +328,36 @@ class DbClient {
         .findFirst();
   }
 
+  @override
   void upsertHistoryVideo(HistoryVideoCache vid) {
     store.box<HistoryVideoCache>().put(vid);
   }
 
   // we only want one layout
+  @override
   void upsertHomeLayout(HomeLayout layout) {
     store.box<HomeLayout>().removeAll();
     store.box<HomeLayout>().put(layout);
   }
 
+  @override
   HomeLayout getHomeLayout() {
     var all = store.box<HomeLayout>().getAll();
     return all.firstOrNull ?? HomeLayout();
   }
 
+  @override
   SubscriptionNotification? getLastSubscriptionNotification() {
     return store.box<SubscriptionNotification>().getAll().lastOrNull;
   }
 
+  @override
   void setLastSubscriptionNotification(SubscriptionNotification sub) {
     store.box<SubscriptionNotification>().removeAll();
     store.box<SubscriptionNotification>().put(sub);
   }
 
+  @override
   ChannelNotification? getChannelNotification(String channelId) {
     return store
         .box<ChannelNotification>()
@@ -322,18 +366,22 @@ class DbClient {
         .findFirst();
   }
 
+  @override
   List<ChannelNotification> getAllChannelNotifications() {
     return store.box<ChannelNotification>().getAll();
   }
 
+  @override
   void deleteChannelNotification(ChannelNotification notif) {
     store.box<ChannelNotification>().remove(notif.id);
   }
 
+  @override
   void upsertChannelNotification(ChannelNotification notif) {
     store.box<ChannelNotification>().put(notif);
   }
 
+  @override
   void setChannelNotificationLastViewedVideo(String channelId, String videoId) {
     var notif = getChannelNotification(channelId);
     if (notif != null) {
@@ -343,6 +391,7 @@ class DbClient {
     }
   }
 
+  @override
   PlaylistNotification? getPlaylistNotification(String channelId) {
     return store
         .box<PlaylistNotification>()
@@ -351,18 +400,22 @@ class DbClient {
         .findFirst();
   }
 
+  @override
   List<PlaylistNotification> getAllPlaylistNotifications() {
     return store.box<PlaylistNotification>().getAll();
   }
 
+  @override
   void deletePlaylistNotification(PlaylistNotification notif) {
     store.box<PlaylistNotification>().remove(notif.id);
   }
 
+  @override
   void upsertPlaylistNotification(PlaylistNotification notif) {
     store.box<PlaylistNotification>().put(notif);
   }
 
+  @override
   void setPlaylistNotificationLastViewedVideo(
       String playlistId, int videoCount) {
     var notif = getPlaylistNotification(playlistId);
@@ -373,6 +426,7 @@ class DbClient {
     }
   }
 
+  @override
   DeArrowCache? getDeArrowCache(String videoId) {
     return store
         .box<DeArrowCache>()
@@ -381,6 +435,7 @@ class DbClient {
         .findFirst();
   }
 
+  @override
   void upsertDeArrowCache(DeArrowCache cache) {
     store.box<DeArrowCache>().put(cache);
   }
