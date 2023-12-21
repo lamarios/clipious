@@ -29,7 +29,9 @@ pkgs.mkShell {
   # setup/update pre-hook commits
   ./submodules/flutter/bin/dart run tools/setup_git_hooks.dart
   ./submodules/flutter/bin/flutter doctor
-  '';
+  ''
+  +(if ci then "./submodules/flutter/bin/flutter test" else "")
+  ;
 
 
   ####################################################################
