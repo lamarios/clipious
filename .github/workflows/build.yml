@@ -43,7 +43,8 @@ jobs:
       - run: ./submodules/flutter/bin/flutter pub get
       - run: ./submodules/flutter/bin/dart format --output=none --set-exit-if-changed ./lib
       - run: ./submodules/flutter/bin/dart analyze ./lib
-      - run: nix-shell --arg ci true
+      - name: Run tests with nix (starts postgres and invidious server)
+        run: nix-shell --arg ci true
       - run: ./submodules/flutter/bin/flutter pub run flutter_native_splash:create
       - run: ./submodules/flutter/bin/flutter build apk --profile --split-per-abi
       - name: Archive build artifacts

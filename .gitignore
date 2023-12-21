@@ -43,3 +43,4 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 /docker/result
+/.nix-shell/
