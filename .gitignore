@@ -44,3 +44,4 @@ app.*.map.json
 /android/app/release
 /docker/result
 /.nix-shell/
+/nix/result/

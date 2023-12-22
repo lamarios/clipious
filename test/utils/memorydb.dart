@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:invidious/downloads/models/downloaded_video.dart';
 import 'package:invidious/home/models/db/home_layout.dart';
 import 'package:invidious/notifications/models/db/channel_notifications.dart';
@@ -21,6 +23,7 @@ class MemoryDB implements IDbClient {
   final List<VideoFilter> videoFilters = [];
   final List<SettingsValue> settings = [];
   final List<AppLog> logs = [];
+  final List<Server> servers = [];
   HomeLayout homeLayout = HomeLayout();
 
   @override
@@ -30,7 +33,7 @@ class MemoryDB implements IDbClient {
 
   @override
   void cleanOldLogs() {
-    if(logs.length > 20) {
+    if (logs.length > 20) {
       logs.removeRange(0, logs.length - 20);
     }
   }
@@ -184,8 +187,7 @@ class MemoryDB implements IDbClient {
 
   @override
   List<Server> getServers() {
-    // TODO: implement getServers
-    throw UnimplementedError();
+    return servers;
   }
 
   @override
@@ -201,7 +203,7 @@ class MemoryDB implements IDbClient {
 
   @override
   void insertLogs(AppLog log) {
-    log.id = logs.length;
+    log.id = Random().nextInt(999999999);
     logs.add(log);
     cleanOldLogs();
   }
@@ -226,7 +228,7 @@ class MemoryDB implements IDbClient {
   @override
   saveSetting(SettingsValue setting) {
     settings.removeWhere((element) => element.name == setting.name);
-    setting.id = settings.length;
+    setting.id = Random().nextInt(999999999);
     settings.add(setting);
   }
 
@@ -277,12 +279,22 @@ class MemoryDB implements IDbClient {
 
   @override
   upsertServer(Server server) {
-    // TODO: implement upsertServer
-    throw UnimplementedError();
+    if (server.id == -1) {
+      server.id = Random().nextInt(99999999);
+    } else {
+      servers.removeWhere((element) => element.id == server.id);
+    }
+    servers.add(server);
+    if (servers.length == 1) {
+      useServer(server);
+    }
   }
 
   @override
   void useServer(Server server) {
-    // TODO: implement useServer
+    for (Server s in servers) {
+      s.inUse = false;
+    }
+    server.inUse = true;
   }
 }
