@@ -1240,5 +1240,13 @@
   "exponentialSkip": "Нарастающий пропуск вперёд/назад",
   "@exponentialSkip": {
     "description": "Title for the setting to enable the exponential skipping"
+  },
+  "fullscreenOnLandscape": "Полный экран при ландшафтном режиме",
+  "@fullscreenOnLandscape": {
+    "description": "Setting title to enable full screen on landscape orientation"
+  },
+  "fullscreenOnLandscapeDescription": "Переходить в полноэкранный режим при горизонтальном повороте устройства",
+  "@fullscreenOnLandscapeDescription": {
+    "description": "Setting to enable full screen on landscape orientation"
   }
 }
