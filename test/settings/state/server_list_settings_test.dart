@@ -1,4 +1,3 @@
-
 import 'package:flutter_test/flutter_test.dart';
 import 'package:invidious/app/states/app.dart';
 import 'package:invidious/globals.dart';
@@ -8,8 +7,7 @@ import '../../globals.dart';
 import '../../testAppCubit.dart';
 import '../../utils/memorydb.dart';
 
-
-Future<void> main() async {
+void main() {
   // Setting a customer override that'll use an unmocked HTTP client
   late AppCubit app;
   setUp(() {
