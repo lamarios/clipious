@@ -202,12 +202,6 @@ class MemoryDB extends IDbClient {
   }
 
   @override
-  bool isLoggedInToCurrentServer() {
-    // TODO: implement isLoggedInToCurrentServer
-    throw UnimplementedError();
-  }
-
-  @override
   void saveFilter(VideoFilter filter) {
     // TODO: implement saveFilter
   }

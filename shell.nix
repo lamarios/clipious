@@ -16,7 +16,6 @@ in
 pkgs.mkShell {
   buildInputs = with pkgs; builtins.concatLists [
     clipiousNix.packages
-    [ flutter git ]
   ];
 
   # What to run when the shell starts

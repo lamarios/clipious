@@ -106,6 +106,20 @@ Flutter itself is used as a submodule of this repo in order to pin the version I
 
 You'll need to also set up your android SDK and a device / emulator to run the app on.
 
+#### Tests
+
+The app has some tests and they expect to have a locally running invidious server, with a test user (password test).
+
+The easy way it to use [nix](https://nixos.org) and run 
+
+```
+nix-shell
+```
+
+That will spin a postgres DB, an invidious server and the required user (this is how the tests are run in the ci/cd).
+
+Nothing keeps you to run your own user docker or other ways.
+
 ### Translations
 
 ![Translation status](https://hosted.weblate.org/widgets/clipious/-/app-translation/multi-auto.svg)

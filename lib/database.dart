@@ -151,13 +151,6 @@ class DbClient extends IDbClient {
   }
 
   @override
-  bool isLoggedInToCurrentServer() {
-    var currentlySelectedServer = getCurrentlySelectedServer();
-    return (currentlySelectedServer.authToken?.isNotEmpty ?? false) ||
-        (currentlySelectedServer.sidCookie?.isNotEmpty ?? false);
-  }
-
-  @override
   double getVideoProgress(String videoId) {
     return store
             .box<Progress>()

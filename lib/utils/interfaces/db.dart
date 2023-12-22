@@ -70,7 +70,11 @@ abstract class IDbClient {
     }
   }
 
-  bool isLoggedInToCurrentServer();
+  bool isLoggedInToCurrentServer() {
+    var currentlySelectedServer = getCurrentlySelectedServer();
+    return (currentlySelectedServer.authToken?.isNotEmpty ?? false) ||
+        (currentlySelectedServer.sidCookie?.isNotEmpty ?? false);
+  }
 
   double getVideoProgress(String videoId);
 
