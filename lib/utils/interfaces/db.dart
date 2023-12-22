@@ -1,3 +1,7 @@
+import 'package:easy_debounce/easy_debounce.dart';
+import 'package:flutter/material.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+
 import '../../downloads/models/downloaded_video.dart';
 import '../../home/models/db/home_layout.dart';
 import '../../notifications/models/db/channel_notifications.dart';
@@ -8,6 +12,7 @@ import '../../settings/models/db/app_logs.dart';
 import '../../settings/models/db/server.dart';
 import '../../settings/models/db/settings.dart';
 import '../../settings/models/db/video_filter.dart';
+import '../../settings/models/errors/no_server_selected.dart';
 import '../../videos/models/db/dearrow_cache.dart';
 import '../../videos/models/db/history_video_cache.dart';
 import '../../videos/models/db/progress.dart';
@@ -17,11 +22,28 @@ abstract class IDbClient {
 
   Server? getServer(String url);
 
-  upsertServer(Server server);
+  /// Call super at the end
+  @mustCallSuper
+  @mustBeOverridden
+  upsertServer(Server server) {
+    var servers = getServers();
+    if (servers.length == 1) {
+      useServer(server);
+    }
+  }
 
   List<Server> getServers();
 
-  deleteServer(Server server);
+  deleteServerById(int id);
+
+  deleteServer(Server server) {
+    if (getServers().length >= 2) {
+      deleteServerById(server.id);
+      if (server.inUse) {
+        getCurrentlySelectedServer();
+      }
+    }
+  }
 
   saveSetting(SettingsValue setting);
 
@@ -31,7 +53,22 @@ abstract class IDbClient {
 
   SettingsValue? getSettings(String name);
 
-  Server getCurrentlySelectedServer();
+  Server getCurrentlySelectedServer() {
+    var server = getServers().where((element) => element.inUse).firstOrNull;
+    if (server == null) {
+      log.fine('No servers selected, we try to find one');
+      List<Server> servers = getServers();
+      if (servers.isEmpty) {
+        log.fine('We don\'t have servers, we need to show the welcome screen');
+        throw NoServerSelected();
+      }
+      // we just select the first of the list
+      useServer(servers.first);
+      return servers.first;
+    } else {
+      return server;
+    }
+  }
 
   bool isLoggedInToCurrentServer();
 
@@ -49,7 +86,13 @@ abstract class IDbClient {
 
   void clearSearchHistory();
 
-  void insertLogs(AppLog log);
+  /// Call super at the end
+  @mustCallSuper
+  void insertLogs(AppLog log) {
+    EasyDebounce.debounce('log-cleaning', const Duration(seconds: 5), () {
+      cleanOldLogs();
+    });
+  }
 
   void cleanOldLogs();
 

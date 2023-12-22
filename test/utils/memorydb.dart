@@ -15,7 +15,7 @@ import 'package:invidious/videos/models/db/dearrow_cache.dart';
 import 'package:invidious/videos/models/db/history_video_cache.dart';
 import 'package:invidious/videos/models/db/progress.dart';
 
-class MemoryDB implements IDbClient {
+class MemoryDB extends IDbClient {
   final List<SearchHistoryItem> searchHistoryItems = [];
   final List<ChannelNotification> channelNotifications = [];
   final List<DownloadedVideo> downloadedVideos = [];
@@ -75,9 +75,8 @@ class MemoryDB implements IDbClient {
   }
 
   @override
-  deleteServer(Server server) {
-    // TODO: implement deleteServer
-    throw UnimplementedError();
+  deleteServerById(int id) {
+    servers.removeWhere((element) => element.id == id);
   }
 
   @override
@@ -123,12 +122,6 @@ class MemoryDB implements IDbClient {
   @override
   ChannelNotification? getChannelNotification(String channelId) {
     // TODO: implement getChannelNotification
-    throw UnimplementedError();
-  }
-
-  @override
-  Server getCurrentlySelectedServer() {
-    // TODO: implement getCurrentlySelectedServer
     throw UnimplementedError();
   }
 
@@ -205,7 +198,7 @@ class MemoryDB implements IDbClient {
   void insertLogs(AppLog log) {
     log.id = Random().nextInt(999999999);
     logs.add(log);
-    cleanOldLogs();
+    super.insertLogs(log);
   }
 
   @override
@@ -285,9 +278,8 @@ class MemoryDB implements IDbClient {
       servers.removeWhere((element) => element.id == server.id);
     }
     servers.add(server);
-    if (servers.length == 1) {
-      useServer(server);
-    }
+
+    super.upsertServer(server);
   }
 
   @override

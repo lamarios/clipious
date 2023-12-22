@@ -1,12 +1,10 @@
 import 'dart:io';
 
-import 'package:easy_debounce/easy_debounce.dart';
 import 'package:invidious/home/models/db/home_layout.dart';
 import 'package:invidious/notifications/models/db/channel_notifications.dart';
 import 'package:invidious/notifications/models/db/subscription_notifications.dart';
 import 'package:invidious/search/models/db/search_history_item.dart';
 import 'package:invidious/settings/models/db/settings.dart';
-import 'package:invidious/settings/models/errors/no_server_selected.dart';
 import 'package:invidious/settings/states/settings.dart';
 import 'package:invidious/utils/interfaces/db.dart';
 import 'package:invidious/videos/models/db/dearrow_cache.dart';
@@ -66,7 +64,7 @@ const onOpenSettingName = "on-open";
 
 const maxLogs = 1000;
 
-class DbClient implements IDbClient {
+class DbClient extends IDbClient {
   /// The Store of this app.
   late final Store store;
   final log = Logger('DbClient');
@@ -110,12 +108,9 @@ class DbClient implements IDbClient {
 
   @override
   upsertServer(Server server) {
-    store.box<Server>().put(server);
     // if we only have one server, we select it
-    var servers = getServers();
-    if (servers.length == 1) {
-      useServer(server);
-    }
+    store.box<Server>().put(server);
+    super.upsertServer(server);
   }
 
   @override
@@ -124,13 +119,8 @@ class DbClient implements IDbClient {
   }
 
   @override
-  deleteServer(Server server) {
-    if (getServers().length >= 2) {
-      store.box<Server>().remove(server.id);
-      if (server.inUse) {
-        getCurrentlySelectedServer();
-      }
-    }
+  deleteServerById(int id) {
+    store.box<Server>().remove(id);
   }
 
   @override
@@ -158,29 +148,6 @@ class DbClient implements IDbClient {
         .query(SettingsValue_.name.equals(name))
         .build()
         .findFirst();
-  }
-
-  @override
-  Server getCurrentlySelectedServer() {
-    Server? server = store
-        .box<Server>()
-        .query(Server_.inUse.equals(true))
-        .build()
-        .findFirst();
-
-    if (server == null) {
-      log.fine('No servers selected, we try to find one');
-      List<Server> servers = getServers();
-      if (servers.isEmpty) {
-        log.fine('We don\'t have servers, we need to show the welcome screen');
-        throw NoServerSelected();
-      }
-      // we just select the first of the list
-      useServer(servers.first);
-      return servers.first;
-    } else {
-      return server;
-    }
   }
 
   @override
@@ -256,9 +223,7 @@ class DbClient implements IDbClient {
   @override
   void insertLogs(AppLog log) {
     store.box<AppLog>().put(log);
-    EasyDebounce.debounce('log-cleaning', const Duration(seconds: 5), () {
-      cleanOldLogs();
-    });
+    super.insertLogs(log);
   }
 
   @override
