@@ -105,6 +105,7 @@ class AppRouter extends _$AppRouter {
             AutoRoute(page: TvFilterEditSettingsRoute.page),
             AutoRoute(page: TvFilterListSettingsRoute.page),
             AutoRoute(page: TvTimePickerRoute.page),
+            AutoRoute(page: TvPlainTextRoute.page)
           ]
         : [
             AutoRoute(
