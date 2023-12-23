@@ -3,23 +3,13 @@ import 'package:invidious/globals.dart';
 import 'package:invidious/subscription_management/states/subscribe_button.dart';
 import 'package:invidious/videos/states/add_to_playlist.dart';
 
-import '../utils/memorydb.dart';
-import '../utils/server.dart';
+import '../../utils/memorydb.dart';
+import '../../utils/server.dart';
 
 void main() {
-  setUpAll(() async {
-    db = MemoryDB();
-    var server = await getLoggedInTestServer();
-    db.upsertServer(server);
-  });
+  setUp(() async => setUpTestsForTestServer());
 
-  tearDown(() async {
-    // remove all playlists
-    var playlists = await service.getUserPlaylists();
-    for (var pl in playlists) {
-      await service.deleteUserPlaylist(pl.playlistId);
-    }
-  });
+  tearDown(() async => await cleanUpTestServer());
 
   test('like video', () async {
     const videoId = 'dQw4w9WgXcQ';

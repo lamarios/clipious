@@ -4,17 +4,14 @@ import 'package:invidious/globals.dart';
 import 'package:invidious/settings/models/db/server.dart';
 import 'package:invidious/subscription_management/states/manage_subscriptions.dart';
 
-import '../globals.dart';
-import '../utils/memorydb.dart';
-import '../utils/server.dart';
+import '../../globals.dart';
+import '../../utils/memorydb.dart';
+import '../../utils/server.dart';
 
 void main() {
-  setUp(() async {
-    db = MemoryDB();
-    var server = await getLoggedInTestServer();
-    db.upsertServer(server);
+  setUp(() async => await setUpTestsForTestServer());
 
-  });
+  tearDown(() async => await cleanUpTestServer());
 
   test('managing subscriptions', () async {
     var manager = ManageSubscriptionCubit(const ManageSubscriptionsState());

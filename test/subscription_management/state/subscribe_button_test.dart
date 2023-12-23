@@ -2,15 +2,13 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/subscription_management/states/subscribe_button.dart';
 
-import '../utils/memorydb.dart';
-import '../utils/server.dart';
+import '../../utils/memorydb.dart';
+import '../../utils/server.dart';
 
 void main() {
-  setUp(() async {
-    db = MemoryDB();
-    var server = await getLoggedInTestServer();
-    db.upsertServer(server);
-  });
+  setUp(() async => await setUpTestsForTestServer());
+
+  tearDown(() async => await cleanUpTestServer());
 
   test('test subscribe button', () async {
     var channelId = 'UCHDxYLv8iovIbhrfl16CNyg';
