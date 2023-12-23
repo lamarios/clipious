@@ -1,0 +1,1 @@
+const localInvidiousServer= 'http://localhost:3000';

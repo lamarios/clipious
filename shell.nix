@@ -27,9 +27,9 @@ pkgs.mkShell {
   git submodule update
 
   # setup/update pre-hook commits
-  ./submodules/flutter/bin/dart run tools/setup_git_hooks.dart
-  ./submodules/flutter/bin/flutter doctor
-  '';
+  dart run tools/setup_git_hooks.dart
+  ''
+  ;
 
 
   ####################################################################
