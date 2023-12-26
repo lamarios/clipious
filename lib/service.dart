@@ -322,7 +322,7 @@ class Service {
 
       if (categories.isNotEmpty) {
         url +=
-            '&categories=[${categories.map((e) => '"${e.name}"').join(",")}]';
+            '&categories=[${categories.map((e) => '"${e.segmentName}"').join(",")}]';
       }
 
       log.info('Calling $url');
