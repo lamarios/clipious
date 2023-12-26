@@ -45,3 +45,4 @@ app.*.map.json
 /docker/result
 /.nix-shell/
 /nix/result/
+/android/app/local.properties
