@@ -2,15 +2,18 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/database.dart';
 
 enum SponsorSegmentType {
-  sponsor,
-  selfpromo,
-  interaction,
-  intro,
-  outro,
-  preview,
-  musicOffTopic,
-  filler;
+  sponsor('sponsor'),
+  selfpromo('selfpromo'),
+  interaction('interaction'),
+  intro('intro'),
+  outro('outro'),
+  preview('preview'),
+  musicOffTopic('music_offtopic'),
+  filler('filler');
 
+  final String segmentName;
+
+  const SponsorSegmentType(this.segmentName);
   String settingsName() => '$sponsorBlockPrefix$name';
 
   static String getLabel(SponsorSegmentType type, AppLocalizations locals) {

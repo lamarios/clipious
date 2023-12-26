@@ -339,6 +339,7 @@ class SettingsCubit extends Cubit<SettingsState> {
   }
 
   saveSetting(SettingsValue settings) {
+    db.saveSetting(settings);
     var newSettings = Map<String, SettingsValue>.from(state.settings);
     newSettings[settings.name] = settings;
     emit(state.copyWith(settings: newSettings));

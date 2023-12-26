@@ -4,7 +4,7 @@ import 'package:invidious/globals.dart';
 import 'package:invidious/settings/states/server_list_settings.dart';
 
 import '../../globals.dart';
-import '../../testAppCubit.dart';
+import '../../test_app_cubit.dart';
 import '../../utils/memorydb.dart';
 
 void main() {

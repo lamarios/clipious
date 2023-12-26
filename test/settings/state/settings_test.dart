@@ -1,18 +1,22 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:invidious/app/states/app.dart';
-import 'package:invidious/database.dart';
 import 'package:invidious/globals.dart';
+import 'package:invidious/settings/models/db/settings.dart';
 import 'package:invidious/settings/states/settings.dart';
 
+import '../../test_app_cubit.dart';
+import '../../test_settings_cubit.dart';
 import '../../utils/memorydb.dart';
 
 Future<void> main() async {
-  TestWidgetsFlutterBinding.ensureInitialized();
-  db = MemoryDB();
-  test('setting and reading settings', () {
-    var appCubit = AppCubit(AppState.init());
-    var settingsCubit = SettingsCubit(SettingsState.init(), appCubit);
+  late SettingsCubit settingsCubit;
+  setUp(() {
+    db = MemoryDB();
+    var appCubit = TestAppCubit(AppState.init());
+    settingsCubit = TestSettingsCubit(SettingsState.init(), appCubit);
+  });
 
+  test('setting and reading settings', () {
     // testing boolean setting
     settingsCubit.useSearchHistory = true;
     expect(settingsCubit.state.useSearchHistory, true);
@@ -44,5 +48,15 @@ Future<void> main() async {
       settingsCubit.changeSkipStep(increase: false);
       expect(settingsCubit.state.skipStep, skipSteps[i]);
     }
+  });
+
+  test('Generic set settings method', () {
+    var setting = db.getSettings('test');
+    expect(setting, null);
+
+    SettingsValue s = SettingsValue('test', 'yo');
+    settingsCubit.saveSetting(s);
+    expect(db.getSettings('test')?.value, 'yo');
+
   });
 }
