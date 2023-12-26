@@ -1248,5 +1248,13 @@
   "skipStep": "前/後に移動する単位",
   "@skipStep": {
     "description": "Title for the settings to set the skipping step"
+  },
+  "fullscreenOnLandscape": "横向きで全画面",
+  "@fullscreenOnLandscape": {
+    "description": "Setting title to enable full screen on landscape orientation"
+  },
+  "fullscreenOnLandscapeDescription": "端末を横向きに回転すると全画面にします",
+  "@fullscreenOnLandscapeDescription": {
+    "description": "Setting to enable full screen on landscape orientation"
   }
 }

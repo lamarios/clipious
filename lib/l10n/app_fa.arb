@@ -1232,5 +1232,29 @@
   "skipStep": "میزان عقب/جلو",
   "@skipStep": {
     "description": "Title for the settings to set the skipping step"
+  },
+  "skipStepDescription": "ثانیه‌هایی که زمان عقب/جلو بردن ویدیو رد شود",
+  "@skipStepDescription": {
+    "description": "Title for the settings to set the skipping step"
+  },
+  "exponentialSkipDescription": "هرچی بیشتر به جلو بزنید، میزان جلو رفتن بزرگتر خواهد بود.",
+  "@exponentialSkipDescription": {
+    "description": "Title for the setting to enable the exponential skipping"
+  },
+  "exponentialSkip": "عقب/جلو کردن به صورت تصاعدی",
+  "@exponentialSkip": {
+    "description": "Title for the setting to enable the exponential skipping"
+  },
+  "malformedStatsEndpointDescription": "نقطهٔ پایانی آمار سرویس دهنده پاسخ درستی نداد. کلید «software.name» باید برابر با «invidious» باشد.\nپاسخ دریافتی از سرویس دهنده:",
+  "@malformedStatsEndpointDescription": {
+    "description": "Description of the possible issue for an invalid stats endpoints"
+  },
+  "fullscreenOnLandscape": "تمام صفحه در حالت افقی",
+  "@fullscreenOnLandscape": {
+    "description": "Setting title to enable full screen on landscape orientation"
+  },
+  "fullscreenOnLandscapeDescription": "هنگامی که دستگاه در حالت افقی است به وضعیت تمام صفحه تغییر بده",
+  "@fullscreenOnLandscapeDescription": {
+    "description": "Setting to enable full screen on landscape orientation"
   }
 }
