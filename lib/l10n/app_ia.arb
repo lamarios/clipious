@@ -258,5 +258,9 @@
   "manageServers": "Gerer le servitores",
   "@manageServers": {
     "description": "Settings to manage servers"
+  },
+  "couldntLoadVideo": "Non poteva cargar le video",
+  "@couldntLoadVideo": {
+    "description": "Message to display when a video can't be loaded"
   }
 }
