@@ -1,5 +1,5 @@
 {
-  "trending": "Тенденции",
+  "trending": "В тренде",
   "@trending": {
     "description": "Trending videos title"
   },
@@ -87,7 +87,7 @@
   "@subscribe": {
     "description": "Label for user to subscribe to a channel"
   },
-  "nSubscribers": "{count, select, no{Нет подписчиков} other{{count} подписчики}}",
+  "nSubscribers": "{count, select, no{Нет подписчиков} other{{count} подписчиков}}",
   "@nSubscribers": {
     "description": "number of subscribers",
     "placeholders": {
@@ -128,7 +128,7 @@
   "@comments": {
     "description": "Comments label"
   },
-  "recommended": "Рекомендовано",
+  "recommended": "Рекомендации",
   "@recommended": {
     "description": "Recommended label"
   },
@@ -140,7 +140,7 @@
   "@wizardIntro": {
     "description": "Welcome message on frst time use"
   },
-  "startUsingClipious": "Начните использовать Clipious",
+  "startUsingClipious": "Начать использовать Clipious",
   "@startUsingClipious": {
     "description": "button label to start using the app"
   },
@@ -170,11 +170,11 @@
   "@loadMore": {
     "description": "CTA to load more"
   },
-  "topSorting": "Сверху",
+  "topSorting": "Лучшие",
   "@topSorting": {
     "description": "Content sorting: top"
   },
-  "newSorting": "Новое",
+  "newSorting": "Новые",
   "@newSorting": {
     "description": "Content sorting: new"
   },
@@ -250,7 +250,7 @@
   "@invalidInvidiousServer": {
     "description": "Error when the user tries to add a server that is not a proper or reachable invidious server"
   },
-  "yourServers": "Твои сервера",
+  "yourServers": "Ваши сервера",
   "@yourServers": {
     "description": "Your servers label"
   },
@@ -451,7 +451,7 @@
   "@addToQueueList": {
     "description": "Label on button to add a video to the queue list"
   },
-  "addRecommendedToQueue": "Автовоспроизведение рекомендует следующее",
+  "addRecommendedToQueue": "Автовоспроизведение следующего видео из рекомендаций",
   "@addRecommendedToQueue": {
     "description": "Switch when playing a video to automatically add the recommended videos to the video queue"
   },
@@ -547,7 +547,7 @@
   "@themeDark": {
     "description": "Dark theme"
   },
-  "followSystem": "Следовать системе",
+  "followSystem": "Как в системе",
   "@followSystem": {
     "description": "Follow system label"
   },
@@ -925,11 +925,11 @@
   "@customizeAppLayout": {
     "description": "Settings label for the settings to allow the user to set up the app sections themselves"
   },
-  "customizeAppLayoutExplanation": "Выберите какие разделы вы хотите видеть на панели навигации приложения. Нажмите на значок главной чтобы выбрать страницу, которая будет показываться при запуске приложения. Вы можете сортировать разделы перетаскиванием.",
+  "customizeAppLayoutExplanation": "Выберите какие разделы вы хотите видеть на панели навигации приложения. Нажмите на значок дома чтобы выбрать страницу, которая будет показываться при запуске приложения. Вы можете сортировать разделы перетаскиванием.",
   "@customizeAppLayoutExplanation": {
     "description": ""
   },
-  "homeLayoutEditor": "Изменить расстоновку главного меню",
+  "homeLayoutEditor": "Изменить расстановку главного меню",
   "@homeLayoutEditor": {
     "description": "Title of layout editor screen"
   },
@@ -1203,7 +1203,7 @@
   "@copySettingsAsJson": {
     "description": "title for settings sections to allow users to copy their settings as json to make debugging easier"
   },
-  "skipStepDescription": "Количество секунд для пропуска вперед/назад",
+  "skipStepDescription": "Количество секунд для перемотки двойным нажатием",
   "@skipStepDescription": {
     "description": "Title for the settings to set the skipping step"
   },
@@ -1229,7 +1229,7 @@
   "@malformedStatsEndpoint": {
     "description": "Title for dialog when adding a server that isn't validated as it should"
   },
-  "skipStep": "Пропустить шаг вперёд/назад",
+  "skipStep": "Перемотка двойным нажатием",
   "@skipStep": {
     "description": "Title for the settings to set the skipping step"
   },
@@ -1237,7 +1237,7 @@
   "@searchSortBy": {
     "description": "Search sorting option"
   },
-  "exponentialSkip": "Нарастающий пропуск вперёд/назад",
+  "exponentialSkip": "Нарастающая перемотка",
   "@exponentialSkip": {
     "description": "Title for the setting to enable the exponential skipping"
   },
@@ -1248,5 +1248,13 @@
   "fullscreenOnLandscapeDescription": "Переходить в полноэкранный режим при горизонтальном повороте устройства",
   "@fullscreenOnLandscapeDescription": {
     "description": "Setting to enable full screen on landscape orientation"
+  },
+  "seeking": "Перемотка",
+  "@seeking": {
+    "description": "category for settings related to seeking in a video"
+  },
+  "exponentialSkipDescription": "Количество секунд одной перемотки вперёд возрастает с каждым нажатием.",
+  "@exponentialSkipDescription": {
+    "description": "Title for the setting to enable the exponential skipping"
   }
 }
