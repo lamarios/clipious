@@ -127,15 +127,16 @@ class PlayerCubit extends Cubit<PlayerState> with WidgetsBindingObserver {
     emit(state.copyWith(
         forwardStep: settings.state.skipStep,
         rewindStep: settings.state.skipStep));
+    // setting up audio session
+    audioSession = await AudioSession.instance;
+    audioSession.configure(const AudioSessionConfiguration(
+      avAudioSessionCategory: AVAudioSessionCategory.playback,
+      avAudioSessionCategoryOptions:
+          AVAudioSessionCategoryOptions.allowBluetooth,
+    ));
     if (!isTv) {
       WidgetsBinding.instance.addObserver(this);
-      // setting up audio session
-      audioSession = await AudioSession.instance;
-      audioSession.configure(const AudioSessionConfiguration(
-        avAudioSessionCategory: AVAudioSessionCategory.playback,
-        avAudioSessionCategoryOptions:
-            AVAudioSessionCategoryOptions.allowBluetooth,
-      ));
+
       audioSession.becomingNoisyEventStream.listen((event) {
         pause();
       });
