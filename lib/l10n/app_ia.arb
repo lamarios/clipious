@@ -258,5 +258,67 @@
   "manageServers": "Gerer le servitores",
   "@manageServers": {
     "description": "Settings to manage servers"
+  },
+  "couldntLoadVideo": "Non poteva cargar le video",
+  "@couldntLoadVideo": {
+    "description": "Message to display when a video can't be loaded"
+  },
+  "startUsingClipious": "Comenciar usante Clipious",
+  "@startUsingClipious": {
+    "description": "button label to start using the app"
+  },
+  "invalidInvidiousServer": "Servitor de Invidious non valide",
+  "@invalidInvidiousServer": {
+    "description": "Error when the user tries to add a server that is not a proper or reachable invidious server"
+  },
+  "package": "Pacchetto",
+  "@package": {
+    "description": "package label"
+  },
+  "loadMore": "Cargar plus",
+  "@loadMore": {
+    "description": "CTA to load more"
+  },
+  "streamIsLive": "In directe",
+  "@streamIsLive": {
+    "description": "Label when a video is a live stream"
+  },
+  "useDynamicTheme": "Colores dynamic",
+  "@useDynamicTheme": {
+    "description": ""
+  },
+  "useThisServer": "Usa iste servitor",
+  "@useThisServer": {
+    "description": "Use this server label"
+  },
+  "yourServers": "Tu servitores",
+  "@yourServers": {
+    "description": "Your servers label"
+  },
+  "whenAppStartsShow": "Quando se initia le application, monstrar…",
+  "@whenAppStartsShow": {
+    "description": "Setting title for selecting the screen to show on start"
+  },
+  "useSponsorBlock": "Usar SponsorBlock",
+  "@useSponsorBlock": {
+    "description": "label for sponsorblock checkbox"
+  },
+  "nReplies": "{count, plural, =0{Nulle responsas} =1{1 responsa} other{{count} responsas}}",
+  "@nReplies": {
+    "description": "number of replies to a comment",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "loadingPublicServer": "Cargante servitores public",
+  "@loadingPublicServer": {
+    "description": "Message telling users the app is loading the list of public servers"
+  },
+  "videoAddedToPlaylist": "Video addite al lista de reproduction",
+  "@videoAddedToPlaylist": {
+    "description": "Pop up message when a video was added to a playlist"
   }
 }
