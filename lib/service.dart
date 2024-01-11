@@ -369,9 +369,9 @@ class Service {
     if (search.suggestions.any((element) => element.contains(";"))) {
       search.suggestions = search.suggestions
           .map((s) => s.replaceAll(" ", "&#32;").replaceAllMapped(
-          RegExp(r"&#\w*;"),
+              RegExp(r"&#\w*;"),
               (m) => String.fromCharCode(
-              int.parse(m[0]!.replaceAll(RegExp(r"&#|;"), "")))))
+                  int.parse(m[0]!.replaceAll(RegExp(r"&#|;"), "")))))
           .toList();
     }
 
