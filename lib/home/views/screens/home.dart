@@ -10,7 +10,6 @@ import 'package:invidious/globals.dart';
 import 'package:invidious/home/models/db/home_layout.dart';
 import 'package:invidious/router.dart';
 import 'package:invidious/settings/states/settings.dart';
-import 'package:invidious/utils.dart';
 import 'package:invidious/utils/views/components/app_icon.dart';
 import 'package:invidious/utils/views/components/navigation_switcher.dart';
 import 'package:logging/logging.dart';

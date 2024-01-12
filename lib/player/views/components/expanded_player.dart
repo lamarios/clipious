@@ -19,8 +19,6 @@ class ExpandedPlayer {
   static List<Widget> build(BuildContext context) {
     AppLocalizations locals = AppLocalizations.of(context)!;
 
-    ColorScheme colors = Theme.of(context).colorScheme;
-
     var player = context.read<PlayerCubit>();
     var controller = player.state;
 

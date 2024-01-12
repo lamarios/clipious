@@ -17,7 +17,6 @@ class ManageSubscriptionsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var locals = AppLocalizations.of(context)!;
-    var colors = Theme.of(context).colorScheme;
     return Scaffold(
       appBar: AppBar(
         title: Text(locals.manageSubscriptions),
