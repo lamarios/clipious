@@ -38,8 +38,6 @@ class EditHomeLayoutScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(locals.homeLayoutEditor),
-        scrolledUnderElevation: 0,
-        backgroundColor: colors.background,
       ),
       body: SafeArea(
         bottom: false,

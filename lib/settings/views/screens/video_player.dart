@@ -24,10 +24,7 @@ class VideoPlayerSettingsScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: colorScheme.background,
         title: Text(locals.videoPlayer),
-        elevation: 0,
-        scrolledUnderElevation: 0,
       ),
       body: SafeArea(child:
           BlocBuilder<SettingsCubit, SettingsState>(builder: (context, _) {

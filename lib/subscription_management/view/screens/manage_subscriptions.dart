@@ -20,9 +20,6 @@ class ManageSubscriptionsScreen extends StatelessWidget {
     var colors = Theme.of(context).colorScheme;
     return Scaffold(
       appBar: AppBar(
-        elevation: 0,
-        scrolledUnderElevation: 0,
-        backgroundColor: colors.background,
         title: Text(locals.manageSubscriptions),
       ),
       body: SafeArea(

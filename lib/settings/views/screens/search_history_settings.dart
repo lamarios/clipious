@@ -51,8 +51,6 @@ class SearchHistorySettingsScreen extends StatelessWidget {
         var cubit = context.read<SettingsCubit>();
         return Scaffold(
             appBar: AppBar(
-              backgroundColor: colorScheme.background,
-              scrolledUnderElevation: 0,
               title: Text(locals.searchHistory),
             ),
             backgroundColor: colorScheme.background,

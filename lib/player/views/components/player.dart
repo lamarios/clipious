@@ -135,9 +135,7 @@ class Player extends StatelessWidget {
                                   isMini || isPip || isFullScreen
                                       ? const SizedBox.shrink()
                                       : AppBar(
-                                          backgroundColor: colors.background,
                                           title: Text(locals.videoPlayer),
-                                          elevation: 0,
                                           leading: IconButton(
                                             icon: const Icon(Icons.expand_more),
                                             onPressed: cubit.showMiniPlayer,

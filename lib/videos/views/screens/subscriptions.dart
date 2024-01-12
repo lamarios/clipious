@@ -12,13 +12,9 @@ class SubscriptionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var locals = AppLocalizations.of(context)!;
-    var colors = Theme.of(context).colorScheme;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: colors.background,
         title: Text(locals.subscriptions),
-        elevation: 0,
-        scrolledUnderElevation: 0,
         actions: [
           IconButton(
               onPressed: () =>

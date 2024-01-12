@@ -86,10 +86,7 @@ class ExpandedPlayer {
                     alignment: Alignment.bottomCenter,
                     heightFactor: 0.65,
                     child: NavigationBar(
-                        backgroundColor: colors.background,
-                        elevation: 0,
                         selectedIndex: selectedIndex,
-                        labelBehavior: settings.navigationBarLabelBehavior,
                         onDestinationSelected: player.selectTab,
                         destinations: [
                           NavigationDestination(

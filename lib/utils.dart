@@ -6,6 +6,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/player/states/player.dart';
+import 'package:invidious/settings/states/settings.dart';
 import 'package:invidious/utils/models/sharelink.dart';
 import 'package:invidious/utils/views/tv/components/tv_button.dart';
 import 'package:invidious/utils/views/tv/components/tv_overscan.dart';
@@ -316,8 +317,17 @@ KeyEventResult onTvSelect(
   return KeyEventResult.ignored;
 }
 
-SystemUiOverlayStyle getUiOverlayStyle(BuildContext context) {
-  ColorScheme colorScheme = Theme.of(context).colorScheme;
+SystemUiOverlayStyle getUiOverlayStyle(BuildContext context,
+    {required ColorScheme dark, required ColorScheme light}) {
+  var colorScheme = switch (context.read<SettingsCubit>().state.themeMode) {
+    (ThemeMode.dark) => dark,
+    (ThemeMode.light) => light,
+    (ThemeMode.system) =>
+      MediaQuery.platformBrightnessOf(context) == Brightness.light
+          ? light
+          : dark
+  };
+
   return SystemUiOverlayStyle(
       systemNavigationBarColor: colorScheme.background,
       systemNavigationBarIconBrightness:

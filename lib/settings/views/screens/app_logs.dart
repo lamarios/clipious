@@ -24,9 +24,6 @@ class AppLogsScreen extends StatelessWidget {
           var cubit = context.read<AppLogsCubit>();
           return Scaffold(
             appBar: AppBar(
-              elevation: 0,
-              scrolledUnderElevation: 0,
-              backgroundColor: colors.background,
               title: Text(locals.appLogs),
               actions: [
                 IconButton(

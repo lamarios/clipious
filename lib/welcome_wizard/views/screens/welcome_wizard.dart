@@ -38,11 +38,6 @@ class WelcomeWizardScreen extends StatelessWidget {
           builder: (context, server) {
             var cubit = context.read<WelcomeWizardCubit>();
             return Scaffold(
-              appBar: AppBar(
-                backgroundColor: colors.background,
-                toolbarHeight: 0,
-                scrolledUnderElevation: 0,
-              ),
               extendBodyBehindAppBar: true,
               backgroundColor: colors.background,
               body: SafeArea(

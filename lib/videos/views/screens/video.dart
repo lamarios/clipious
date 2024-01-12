@@ -104,7 +104,6 @@ class VideoScreen extends StatelessWidget {
             opacity: _.opacity,
             child: Scaffold(
               appBar: AppBar(
-                backgroundColor: colorScheme.background,
                 actions: _.loadingVideo || _.video == null
                     ? []
                     : [
@@ -178,7 +177,6 @@ class VideoScreen extends StatelessWidget {
 */
                         AddToPlayListButton(videoId: _.videoId)
                       ],
-                scrolledUnderElevation: 0,
               ),
               backgroundColor: colorScheme.background,
               bottomNavigationBar:
@@ -186,12 +184,6 @@ class VideoScreen extends StatelessWidget {
                       ? null
                       : FadeIn(
                           child: NavigationBar(
-                            backgroundColor: colorScheme.background,
-                            labelBehavior: context
-                                .read<SettingsCubit>()
-                                .state
-                                .navigationBarLabelBehavior,
-                            elevation: 0,
                             onDestinationSelected: cubit.selectIndex,
                             selectedIndex: _.selectedIndex,
                             destinations: destinations,

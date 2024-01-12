@@ -34,9 +34,6 @@ class ChannelScreen extends StatelessWidget {
           var cubit = context.read<ChannelCubit>();
           return Scaffold(
             appBar: AppBar(
-              backgroundColor: colorScheme.background,
-              elevation: 0,
-              scrolledUnderElevation: 0,
               title: Text(
                 channelState.channel?.author ?? '',
               ),
@@ -58,12 +55,6 @@ class ChannelScreen extends StatelessWidget {
                 ? null
                 : FadeIn(
                     child: NavigationBar(
-                      backgroundColor: colorScheme.background,
-                      labelBehavior: context
-                          .read<SettingsCubit>()
-                          .state
-                          .navigationBarLabelBehavior,
-                      elevation: 0,
                       onDestinationSelected: cubit.selectIndex,
                       selectedIndex: channelState.selectedIndex,
                       destinations: <Widget>[

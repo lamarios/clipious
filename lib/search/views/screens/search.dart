@@ -40,14 +40,9 @@ class SearchScreen extends StatelessWidget {
       child: BlocBuilder<SearchCubit, SearchState>(
         builder: (context, _) {
           var cubit = context.read<SearchCubit>();
-          var navigationBarLabel = context
-              .select((SettingsCubit s) => s.state.navigationBarLabelBehavior);
           return Scaffold(
             bottomNavigationBar: _.showResults
                 ? NavigationBar(
-                    backgroundColor: colorScheme.background,
-                    labelBehavior: navigationBarLabel,
-                    elevation: 0,
                     selectedIndex: _.selectedIndex,
                     onDestinationSelected: cubit.selectIndex,
                     destinations: [
@@ -64,8 +59,6 @@ class SearchScreen extends StatelessWidget {
                   )
                 : null,
             appBar: AppBar(
-              backgroundColor: colorScheme.background,
-              scrolledUnderElevation: 0,
               title: TextField(
                 autofocus: query == null,
                 controller: _.queryController,

@@ -73,11 +73,9 @@ class PlaylistViewScreen extends StatelessWidget {
           var cubit = context.read<PlaylistCubit>();
           return Scaffold(
               appBar: AppBar(
-                backgroundColor: colors.background,
                 title: Text(
                   playlistState.playlist.title,
                 ),
-                scrolledUnderElevation: 0,
                 actions: [
                   canDeleteVideos
                       ? InkWell(

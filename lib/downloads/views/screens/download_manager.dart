@@ -18,8 +18,6 @@ class DownloadManagerScreen extends StatelessWidget {
     var locals = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
-        scrolledUnderElevation: 0,
-        backgroundColor: colors.background,
         title: Text(locals.downloads),
       ),
       body: SafeArea(
