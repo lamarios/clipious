@@ -9,11 +9,11 @@ import 'package:invidious/player/models/media_event.dart';
 import 'package:invidious/settings/states/settings.dart';
 import 'package:invidious/videos/models/base_video.dart';
 import 'package:logging/logging.dart';
-import 'package:pretty_bytes/pretty_bytes.dart';
-import 'package:wakelock/wakelock.dart';
+import 'package:wakelock_plus/wakelock_plus.dart';
 
 import '../../globals.dart';
 import '../../main.dart';
+import '../../utils/pretty_bytes.dart';
 import '../../videos/models/video.dart';
 import '../views/components/player_controls.dart';
 import '../views/tv/components/player_controls.dart';
@@ -44,7 +44,7 @@ class VideoPlayerCubit extends MediaPlayerCubit<VideoPlayerState> {
 
   @override
   disposeControllers() {
-    Wakelock.disable();
+    WakelockPlus.disable();
     log.fine("Disposing video controller");
     var state = this.state.copyWith();
     videoController?.exitFullScreen();
@@ -309,7 +309,7 @@ class VideoPlayerCubit extends MediaPlayerCubit<VideoPlayerState> {
         );
       }
 
-      Wakelock.enable();
+      WakelockPlus.enable();
 
       bool fillVideo = settings.state.fillFullscreen;
 
