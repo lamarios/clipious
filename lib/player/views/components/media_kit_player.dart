@@ -55,18 +55,22 @@ class _MediaKitPlayerState extends State<MediaKitPlayer> {
               disableControls: widget.disableControls),
           player),
       child: BlocBuilder<MediaKitCubit, MediaKitState>(
-        builder: (context, _) => BlocListener<PlayerCubit, PlayerState>(
-          listenWhen: (previous, current) =>
-              previous.mediaCommand != current.mediaCommand &&
-              current.mediaCommand != null,
-          listener: (context, state) =>
-              context.read<MediaKitCubit>().handleCommand(state.mediaCommand!),
-          child: media_kit.Video(
-            controller: _.controller,
-            aspectRatio: 16 / 9,
-            controls: (state) => const PlayerControls(),
-          ),
-        ),
+        builder: (context, _) {
+          var controller = context.read<MediaKitCubit>().controller;
+          return BlocListener<PlayerCubit, PlayerState>(
+            listenWhen: (previous, current) =>
+                previous.mediaCommand != current.mediaCommand &&
+                current.mediaCommand != null,
+            listener: (context, state) => context
+                .read<MediaKitCubit>()
+                .handleCommand(state.mediaCommand!),
+            child: media_kit.Video(
+              controller: controller,
+              aspectRatio: 16 / 9,
+              controls: (state) => const PlayerControls(),
+            ),
+          );
+        },
       ),
     );
   }

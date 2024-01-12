@@ -17,6 +17,10 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$MediaKitState {
   Duration? get startAt => throw _privateConstructorUsedError;
+  clipious_video.Video? get video => throw _privateConstructorUsedError;
+  DownloadedVideo? get offlineVideo => throw _privateConstructorUsedError;
+  bool? get playNow => throw _privateConstructorUsedError;
+  bool? get disableControls => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $MediaKitStateCopyWith<MediaKitState> get copyWith =>
@@ -29,7 +33,12 @@ abstract class $MediaKitStateCopyWith<$Res> {
           MediaKitState value, $Res Function(MediaKitState) then) =
       _$MediaKitStateCopyWithImpl<$Res, MediaKitState>;
   @useResult
-  $Res call({Duration? startAt});
+  $Res call(
+      {Duration? startAt,
+      clipious_video.Video? video,
+      DownloadedVideo? offlineVideo,
+      bool? playNow,
+      bool? disableControls});
 }
 
 /// @nodoc
@@ -46,12 +55,32 @@ class _$MediaKitStateCopyWithImpl<$Res, $Val extends MediaKitState>
   @override
   $Res call({
     Object? startAt = freezed,
+    Object? video = freezed,
+    Object? offlineVideo = freezed,
+    Object? playNow = freezed,
+    Object? disableControls = freezed,
   }) {
     return _then(_value.copyWith(
       startAt: freezed == startAt
           ? _value.startAt
           : startAt // ignore: cast_nullable_to_non_nullable
               as Duration?,
+      video: freezed == video
+          ? _value.video
+          : video // ignore: cast_nullable_to_non_nullable
+              as clipious_video.Video?,
+      offlineVideo: freezed == offlineVideo
+          ? _value.offlineVideo
+          : offlineVideo // ignore: cast_nullable_to_non_nullable
+              as DownloadedVideo?,
+      playNow: freezed == playNow
+          ? _value.playNow
+          : playNow // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      disableControls: freezed == disableControls
+          ? _value.disableControls
+          : disableControls // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ) as $Val);
   }
 }
@@ -64,7 +93,12 @@ abstract class _$$MediaKitStateImplCopyWith<$Res>
       __$$MediaKitStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Duration? startAt});
+  $Res call(
+      {Duration? startAt,
+      clipious_video.Video? video,
+      DownloadedVideo? offlineVideo,
+      bool? playNow,
+      bool? disableControls});
 }
 
 /// @nodoc
@@ -79,12 +113,32 @@ class __$$MediaKitStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? startAt = freezed,
+    Object? video = freezed,
+    Object? offlineVideo = freezed,
+    Object? playNow = freezed,
+    Object? disableControls = freezed,
   }) {
     return _then(_$MediaKitStateImpl(
-      freezed == startAt
+      startAt: freezed == startAt
           ? _value.startAt
           : startAt // ignore: cast_nullable_to_non_nullable
               as Duration?,
+      video: freezed == video
+          ? _value.video
+          : video // ignore: cast_nullable_to_non_nullable
+              as clipious_video.Video?,
+      offlineVideo: freezed == offlineVideo
+          ? _value.offlineVideo
+          : offlineVideo // ignore: cast_nullable_to_non_nullable
+              as DownloadedVideo?,
+      playNow: freezed == playNow
+          ? _value.playNow
+          : playNow // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      disableControls: freezed == disableControls
+          ? _value.disableControls
+          : disableControls // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 }
@@ -92,26 +146,47 @@ class __$$MediaKitStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$MediaKitStateImpl extends _MediaKitState {
-  const _$MediaKitStateImpl(this.startAt) : super._();
+  const _$MediaKitStateImpl(
+      {this.startAt,
+      this.video,
+      this.offlineVideo,
+      this.playNow,
+      this.disableControls})
+      : super._();
 
   @override
   final Duration? startAt;
+  @override
+  final clipious_video.Video? video;
+  @override
+  final DownloadedVideo? offlineVideo;
+  @override
+  final bool? playNow;
+  @override
+  final bool? disableControls;
 
   @override
   String toString() {
-    return 'MediaKitState(startAt: $startAt)';
+    return 'MediaKitState(startAt: $startAt, video: $video, offlineVideo: $offlineVideo, playNow: $playNow, disableControls: $disableControls)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$MediaKitStateImpl &&
-            (identical(other.startAt, startAt) || other.startAt == startAt));
+            (identical(other.startAt, startAt) || other.startAt == startAt) &&
+            (identical(other.video, video) || other.video == video) &&
+            (identical(other.offlineVideo, offlineVideo) ||
+                other.offlineVideo == offlineVideo) &&
+            (identical(other.playNow, playNow) || other.playNow == playNow) &&
+            (identical(other.disableControls, disableControls) ||
+                other.disableControls == disableControls));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, startAt);
+  int get hashCode => Object.hash(
+      runtimeType, startAt, video, offlineVideo, playNow, disableControls);
 
   @JsonKey(ignore: true)
   @override
@@ -121,11 +196,24 @@ class _$MediaKitStateImpl extends _MediaKitState {
 }
 
 abstract class _MediaKitState extends MediaKitState {
-  const factory _MediaKitState(final Duration? startAt) = _$MediaKitStateImpl;
+  const factory _MediaKitState(
+      {final Duration? startAt,
+      final clipious_video.Video? video,
+      final DownloadedVideo? offlineVideo,
+      final bool? playNow,
+      final bool? disableControls}) = _$MediaKitStateImpl;
   const _MediaKitState._() : super._();
 
   @override
   Duration? get startAt;
+  @override
+  clipious_video.Video? get video;
+  @override
+  DownloadedVideo? get offlineVideo;
+  @override
+  bool? get playNow;
+  @override
+  bool? get disableControls;
   @override
   @JsonKey(ignore: true)
   _$$MediaKitStateImplCopyWith<_$MediaKitStateImpl> get copyWith =>

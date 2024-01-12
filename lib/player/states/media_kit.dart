@@ -5,9 +5,9 @@ import 'package:invidious/player/states/interfaces/media_player.dart';
 import 'package:invidious/videos/models/video.dart' as clipious_video;
 import 'package:logging/logging.dart';
 import 'package:media_kit/media_kit.dart';
-import 'package:media_kit_video/media_kit_video.dart';
+import 'package:media_kit_video/media_kit_video.dart' as media_kit;
 
-import '../models/media_command.dart';
+import '../../videos/models/video.dart';
 import '../models/media_event.dart';
 
 part 'media_kit.freezed.dart';
@@ -15,7 +15,7 @@ part 'media_kit.freezed.dart';
 class MediaKitCubit extends MediaPlayerCubit<MediaKitState> {
   final log = Logger('media kit');
   final mediaKitPlayer = Player();
-  late final controller = VideoController(mediaKitPlayer);
+  late final controller = media_kit.VideoController(mediaKitPlayer);
 
   MediaKitCubit(super.initialState, super.player) {
     onInit();
@@ -260,8 +260,12 @@ class MediaKitCubit extends MediaPlayerCubit<MediaKitState> {
 
 @freezed
 class MediaKitState extends MediaPlayerState with _$MediaKitState {
-  const factory MediaKitState(Duration? startAt) = _MediaKitState;
+  const factory MediaKitState(
+      {Duration? startAt,
+      Video? video,
+      DownloadedVideo? offlineVideo,
+      bool? playNow,
+      bool? disableControls}) = _MediaKitState;
 
   const MediaKitState._();
-  // MediaKitState({super.video, super.offlineVideo, super.playNow, super.disableControls, this.startAt});
 }
