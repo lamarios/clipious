@@ -317,9 +317,9 @@ KeyEventResult onTvSelect(
   return KeyEventResult.ignored;
 }
 
-SystemUiOverlayStyle getUiOverlayStyle(BuildContext context,
+ColorScheme getColorSchemeOutsideOfMaterial(BuildContext context,
     {required ColorScheme dark, required ColorScheme light}) {
-  var colorScheme = switch (context.read<SettingsCubit>().state.themeMode) {
+  var colors = switch (context.read<SettingsCubit>().state.themeMode) {
     (ThemeMode.dark) => dark,
     (ThemeMode.light) => light,
     (ThemeMode.system) =>
@@ -327,6 +327,13 @@ SystemUiOverlayStyle getUiOverlayStyle(BuildContext context,
           ? light
           : dark
   };
+  return colors;
+}
+
+SystemUiOverlayStyle getUiOverlayStyle(BuildContext context,
+    {required ColorScheme dark, required ColorScheme light}) {
+  var colorScheme =
+      getColorSchemeOutsideOfMaterial(context, dark: dark, light: light);
 
   return SystemUiOverlayStyle(
       systemNavigationBarColor: colorScheme.background,

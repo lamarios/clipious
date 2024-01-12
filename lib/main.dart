@@ -168,14 +168,8 @@ class MyApp extends StatelessWidget {
                         localeString.length >= 2 ? localeString[1] : null)
                 : null;
 
-            var colors = switch (themeMode) {
-              (ThemeMode.dark) => darkColorScheme,
-              (ThemeMode.light) => lightColorScheme,
-              (ThemeMode.system) =>
-                MediaQuery.platformBrightnessOf(context) == Brightness.light
-                    ? lightColorScheme
-                    : darkColorScheme
-            };
+            var colors = getColorSchemeOutsideOfMaterial(context,
+                dark: darkColorScheme, light: lightColorScheme);
 
             var navigationBarTheme = NavigationBarThemeData(
               elevation: 0,
