@@ -10,6 +10,18 @@ let
     ci = ci;
     pkgs = pkgs;
   };
+ aliases = [
+         {
+             name = "build-runner";
+             command = "dart run build_runner build";
+             description = "Run code generation once";
+         }
+         {
+             name = "build-runner-watch";
+             command = "dart run build_runner watch";
+             description = "Watch for changes and run code generation";
+         }
+     ];
 
 
 in
@@ -23,13 +35,26 @@ pkgs.mkShell {
   # clipiousNix.prepareShell is a helper function to sort things properly. It returns a string so it's possible to just concatenate stuff afterwards
   # to run CI or DB migrations
   shellHook = (clipiousNix.prepareShell {}) + ''
+
+  echo "Setting up submodules"
   git submodule init
   git submodule update
 
-  # setup/update pre-hook commits
+  echo "Setting up pre-commit hook"
   dart run tools/setup_git_hooks.dart
-  ''
-  ;
+
+  "Adding flutter submodule to path"
+  export PATH="./submodules/flutter/bin:$PATH"
+
+  echo "creating useful aliases..."
+
+  ''+
+  pkgs.lib.concatStrings (map (x: ''alias ${x.name}="${x.command}";'') aliases)
+  +''
+  echo -e "\nAll done 🎉 \nAvailable aliases:"
+  ''+
+          pkgs.lib.concatStrings (map (x: ''echo "${x.name}: ${x.description}";'') aliases);
+
 
 
   ####################################################################
