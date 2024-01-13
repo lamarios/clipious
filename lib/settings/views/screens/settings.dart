@@ -78,8 +78,6 @@ class SettingsScreen extends StatelessWidget {
             extendBody: true,
             bottomNavigationBar: const SizedBox.shrink(),
             appBar: AppBar(
-              backgroundColor: colorScheme.background,
-              scrolledUnderElevation: 0,
               title: Text(locals.settings),
             ),
             backgroundColor: colorScheme.background,

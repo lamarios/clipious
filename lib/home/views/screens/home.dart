@@ -10,7 +10,6 @@ import 'package:invidious/globals.dart';
 import 'package:invidious/home/models/db/home_layout.dart';
 import 'package:invidious/router.dart';
 import 'package:invidious/settings/states/settings.dart';
-import 'package:invidious/utils.dart';
 import 'package:invidious/utils/views/components/app_icon.dart';
 import 'package:invidious/utils/views/components/navigation_switcher.dart';
 import 'package:logging/logging.dart';
@@ -121,16 +120,12 @@ class _HomeScreenState extends State<HomeScreen> {
           backgroundColor: colorScheme.background,
           bottomNavigationBar: allowedPages.length >= 2
               ? NavigationBar(
-                  backgroundColor: colorScheme.background,
-                  labelBehavior: settings.navigationBarLabelBehavior,
-                  elevation: 0,
                   onDestinationSelected: app.selectIndex,
                   selectedIndex: selectedIndex,
                   destinations: navigationWidgets,
                 )
               : null,
           appBar: AppBar(
-            systemOverlayStyle: getUiOverlayStyle(context),
             title: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -145,9 +140,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       ))
               ],
             ),
-            scrolledUnderElevation: 0,
-            // backgroundColor: Colors.pink,
-            backgroundColor: colorScheme.background,
             actions: [
               selectedPage == HomeDataSource.subscription
                   ? IconButton(

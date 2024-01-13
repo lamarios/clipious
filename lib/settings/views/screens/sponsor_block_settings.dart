@@ -24,8 +24,6 @@ class SponsorBlockSettingsScreen extends StatelessWidget {
         var cubit = context.read<SettingsCubit>();
         return Scaffold(
             appBar: AppBar(
-              backgroundColor: colorScheme.background,
-              scrolledUnderElevation: 0,
               title: const Text('SponsorBlock'),
             ),
             backgroundColor: colorScheme.background,

@@ -1,4 +1,3 @@
-// import 'package:video_player/video_player.dart';
 import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,7 +10,6 @@ import 'package:invidious/channels/views/components/videos.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/utils/views/components/navigation_switcher.dart';
 
-import '../../../settings/states/settings.dart';
 import '../../../utils.dart';
 import '../../../utils/views/components/placeholders.dart';
 
@@ -34,9 +32,6 @@ class ChannelScreen extends StatelessWidget {
           var cubit = context.read<ChannelCubit>();
           return Scaffold(
             appBar: AppBar(
-              backgroundColor: colorScheme.background,
-              elevation: 0,
-              scrolledUnderElevation: 0,
               title: Text(
                 channelState.channel?.author ?? '',
               ),
@@ -58,12 +53,6 @@ class ChannelScreen extends StatelessWidget {
                 ? null
                 : FadeIn(
                     child: NavigationBar(
-                      backgroundColor: colorScheme.background,
-                      labelBehavior: context
-                          .read<SettingsCubit>()
-                          .state
-                          .navigationBarLabelBehavior,
-                      elevation: 0,
                       onDestinationSelected: cubit.selectIndex,
                       selectedIndex: channelState.selectedIndex,
                       destinations: <Widget>[

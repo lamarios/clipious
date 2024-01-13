@@ -39,7 +39,6 @@ class VideoFilterSettingsScreen extends StatelessWidget {
         keys.sort(cubit.sortChannels);
         return Scaffold(
             appBar: AppBar(
-              backgroundColor: colors.background,
               title: Text(locals.videoFilters),
             ),
             floatingActionButton: FloatingActionButton(

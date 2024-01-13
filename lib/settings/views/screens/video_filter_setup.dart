@@ -118,7 +118,6 @@ class VideoFilterSetupScreen extends StatelessWidget {
         var cubit = context.read<VideoFilterEditCubit>();
         return Scaffold(
           appBar: AppBar(
-            backgroundColor: colors.background,
             title: Text(filter == null
                 ? locals.addVideoFilter
                 : locals.editVideoFilter),

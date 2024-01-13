@@ -112,6 +112,9 @@ class MyApp extends StatelessWidget {
           ThemeMode themeMode =
               context.select((SettingsCubit value) => value.state.themeMode);
 
+          var navigationBarBehavior = context
+              .select((SettingsCubit s) => s.state.navigationBarLabelBehavior);
+
           return DynamicColorBuilder(
               builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) {
             ColorScheme lightColorScheme;
@@ -165,6 +168,22 @@ class MyApp extends StatelessWidget {
                         localeString.length >= 2 ? localeString[1] : null)
                 : null;
 
+            var colors = getColorSchemeOutsideOfMaterial(context,
+                dark: darkColorScheme, light: lightColorScheme);
+
+            var navigationBarTheme = NavigationBarThemeData(
+              elevation: 0,
+              backgroundColor: colors.background,
+              labelBehavior: navigationBarBehavior,
+            );
+
+            var appBarTheme = AppBarTheme(
+                backgroundColor: colors.background,
+                elevation: 0,
+                scrolledUnderElevation: 0,
+                systemOverlayStyle: getUiOverlayStyle(context,
+                    dark: darkColorScheme, light: lightColorScheme));
+
             return MaterialApp.router(
               routerConfig: appRouter.config(
                 navigatorObservers: () => [MyRouteObserver()],
@@ -212,12 +231,16 @@ class MyApp extends StatelessWidget {
               theme: ThemeData(
                   useMaterial3: true,
                   colorScheme: lightColorScheme,
+                  navigationBarTheme: navigationBarTheme,
+                  appBarTheme: appBarTheme,
                   progressIndicatorTheme: ProgressIndicatorThemeData(
                       circularTrackColor: lightColorScheme.secondaryContainer
                           .withOpacity(0.8))),
               darkTheme: ThemeData(
                   useMaterial3: true,
                   colorScheme: darkColorScheme,
+                  appBarTheme: appBarTheme,
+                  navigationBarTheme: navigationBarTheme,
                   progressIndicatorTheme: ProgressIndicatorThemeData(
                       circularTrackColor:
                           darkColorScheme.secondaryContainer.withOpacity(0.8))),
