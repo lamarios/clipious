@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/player/states/player.dart';
+import 'package:invidious/utils.dart';
 import 'package:invidious/videos/models/base_video.dart';
 import 'package:invidious/videos/views/components/add_to_playlist_button.dart';
 import 'package:invidious/videos/views/components/download_modal_sheet.dart';
@@ -56,6 +57,11 @@ class VideoModalSheet extends StatelessWidget {
     DownloadModalSheet.showVideoModalSheet(context, video);
   }
 
+  void _showSharingSheet(BuildContext context) {
+    Navigator.of(context).pop();
+    showSharingSheet(context, video);
+  }
+
   @override
   Widget build(BuildContext context) {
     var locals = AppLocalizations.of(context)!;
@@ -107,6 +113,20 @@ class VideoModalSheet extends StatelessWidget {
                       onPressed: () => downloadVideo(context),
                       icon: const Icon(Icons.download)),
                   Text(locals.download)
+                ],
+              ),
+            ),
+            Padding(
+              padding: getDeviceType() == DeviceType.phone
+                  ? const EdgeInsets.only(top: 8.0)
+                  : const EdgeInsets.only(right: 16.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  IconButton.filledTonal(
+                      onPressed: () => _showSharingSheet(context),
+                      icon: const Icon(Icons.share)),
+                  Text(locals.share)
                 ],
               ),
             ),
