@@ -320,5 +320,37 @@
   "videoAddedToPlaylist": "Video addite al lista de reproduction",
   "@videoAddedToPlaylist": {
     "description": "Pop up message when a video was added to a playlist"
+  },
+  "recommended": "Recommendate",
+  "@recommended": {
+    "description": "Recommended label"
+  },
+  "couldntFetchVideos": "Non poteva obtener le videos. Tocca pro retentar.",
+  "@couldntFetchVideos": {
+    "description": "Can't load bunch of videos, asking  user to try again"
+  },
+  "errorAddingVideoToPlaylist": "Error in adder le video al lista de reproduction",
+  "@errorAddingVideoToPlaylist": {
+    "description": "Error while adding video to playlist"
+  },
+  "itemlistErrorGeneric": "Non poteva obtener le datos",
+  "@itemlistErrorGeneric": {
+    "description": "Error showing when the data can't be fetch"
+  },
+  "sponsorSkipped": "Sponsor saltate",
+  "@sponsorSkipped": {
+    "description": "When a sponsor segment is skipped thanks to sponsor block"
+  },
+  "showOnStart": "Selige que monstrar quando le application es initiate",
+  "@showOnStart": {
+    "description": "Title of dialog asking which screen the users prefers to see"
+  },
+  "sponsorBlockDescription": "Saltar le segmentos de sponsors inviate per le communitate",
+  "@sponsorBlockDescription": {
+    "description": "Sponsorblock setting description"
+  },
+  "history": "Chronologia",
+  "@history": {
+    "description": "User view history label"
   }
 }
