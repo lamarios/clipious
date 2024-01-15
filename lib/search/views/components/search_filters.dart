@@ -4,7 +4,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/search/models/search_date.dart';
 import 'package:invidious/search/models/search_duration.dart';
 import 'package:invidious/search/models/search_sort_by.dart';
-import 'package:invidious/search/states/search.dart';
 
 import '../../states/search_filter.dart';
 

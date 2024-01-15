@@ -10,8 +10,6 @@ import '../../channels/models/channel.dart';
 import '../../playlists/models/playlist.dart';
 import '../../settings/states/settings.dart';
 import '../../videos/models/video_in_list.dart';
-import '../models/search_date.dart';
-import '../models/search_duration.dart';
 
 part 'search.freezed.dart';
 
