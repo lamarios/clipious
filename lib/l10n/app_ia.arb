@@ -348,5 +348,9 @@
   "sponsorBlockDescription": "Saltar le segmentos de sponsors inviate per le communitate",
   "@sponsorBlockDescription": {
     "description": "Sponsorblock setting description"
+  },
+  "history": "Chronologia",
+  "@history": {
+    "description": "User view history label"
   }
 }
