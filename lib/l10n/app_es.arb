@@ -1256,5 +1256,61 @@
   "fullscreenOnLandscapeDescription": "Cambio a pantalla completa al girar el dispositivo al modo horizontal",
   "@fullscreenOnLandscapeDescription": {
     "description": "Setting to enable full screen on landscape orientation"
-  }
+  },
+  "searchUploadDate": "Fecha de la subida",
+  "@searchUploadDate": {
+    "description": "Filter search result by upload date"
+  },
+  "searchUploadDateAny": "En cualquier fecha",
+  "@searchUploadDateAny": {
+    "description": "Do not filter search result by upload date"
+  },
+  "channelSortByOldest": "La más antigua",
+  "@channelSortByOldest": {},
+  "share": "Compartir",
+  "@share": {
+    "description": "asking user if to share"
+  },
+  "searchUploadDateHour": "La última hora",
+  "@searchUploadDateHour": {
+    "description": "Search for uploaded in last hour"
+  },
+  "searchUploadDateToday": "Hoy",
+  "@searchUploadDateToday": {
+    "description": "Search for uploaded this week"
+  },
+  "searchUploadDateWeek": "Esta semana",
+  "@searchUploadDateWeek": {},
+  "searchUploadDateMonth": "Este mes",
+  "@searchUploadDateMonth": {
+    "description": "Search for uploaded this month"
+  },
+  "searchUploadDateYear": "Este año",
+  "@searchUploadDateYear": {
+    "description": "Search for uploaded this year"
+  },
+  "searchDuration": "Duración",
+  "@searchDuration": {
+    "description": "Filter search result by duration"
+  },
+  "searchDurationAny": "Cualquier duración",
+  "@searchDurationAny": {
+    "description": "Do not filter search result by duration"
+  },
+  "searchDurationShort": "Corta (<4 minutos)",
+  "@searchDurationShort": {
+    "description": "Search for short videos only"
+  },
+  "searchDurationLong": "Larga (>20 minutos)",
+  "@searchDurationLong": {
+    "description": "Search for long videos only"
+  },
+  "searchDurationMedium": "Media (de 4 a 20 minutos)",
+  "@searchDurationMedium": {
+    "description": "Search for medium videos only"
+  },
+  "channelSortByNewest": "La más reciente",
+  "@channelSortByNewest": {},
+  "channelSortByPopular": "Popular",
+  "@channelSortByPopular": {}
 }
