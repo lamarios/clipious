@@ -245,7 +245,11 @@ class Service {
   }
 
   Future<SearchResults> search(String query,
-      {SearchType? type, int? page, SearchSortBy? sortBy, SearchDate date = SearchDate.any, SearchDuration duration = SearchDuration.any}) async {
+      {SearchType? type,
+      int? page,
+      SearchSortBy? sortBy,
+      SearchDate date = SearchDate.any,
+      SearchDuration duration = SearchDuration.any}) async {
     String countryCode = db.getSettings(browsingCountry)?.value ?? 'US';
     Uri uri = buildUrl(urlSearch, query: {
       'q': Uri.encodeQueryComponent(query),
@@ -505,9 +509,11 @@ class Service {
 
   Future<VideosWithContinuation> getChannelVideos(
       String channelId, String? continuation,
-      {bool saveLastSeen = true, ChannelSortBy sortBy = ChannelSortBy.newest}) async {
-    Uri uri = buildUrl(urlGetChannelVideos,
-        pathParams: {':id': channelId}, query: {
+      {bool saveLastSeen = true,
+      ChannelSortBy sortBy = ChannelSortBy.newest}) async {
+    Uri uri = buildUrl(urlGetChannelVideos, pathParams: {
+      ':id': channelId
+    }, query: {
       'continuation': continuation,
       'sort_by': sortBy.name,
     });

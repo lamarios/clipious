@@ -20,7 +20,7 @@ class SortDropdownButton extends StatelessWidget {
       items: ChannelSortBy.values
           .map((value) => DropdownMenuItem<ChannelSortBy>(
                 value: value,
-                child: Text(value.getLable(locals)),
+                child: Text(value.getLabel(locals)),
               ))
           .toList(),
       onChanged: (ChannelSortBy? newValue) {
