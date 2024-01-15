@@ -643,6 +643,54 @@
   "@shorts": {
     "description": "Youtube shorts"
   },
+  "searchUploadDate": "Upload date",
+  "@searchUploadDate": {
+    "description": "Filter search result by upload date"
+  },
+  "searchUploadDateAny": "Any date",
+  "@searchUploadDateAny": {
+    "description": "Do not filter search result by upload date"
+  },
+  "searchUploadDateHour": "Last Hour",
+  "@searchUploadDateHour": {
+    "description": "Search for uploaded in last hour"
+  },
+  "searchUploadDateToday": "Today",
+  "@searchUploadDateToday": {
+    "description": "Search for uploaded today"
+  },
+  "searchUploadDateWeek": "This week",
+  "@searchUploadDateToday": {
+    "description": "Search for uploaded this week"
+  },
+  "searchUploadDateMonth": "This month",
+  "@searchUploadDateMonth": {
+    "description": "Search for uploaded this month"
+  },
+  "searchUploadDateYear": "This year",
+  "@searchUploadDateYear": {
+    "description": "Search for uploaded this year"
+  },
+  "searchDuration": "Duration",
+  "@searchDuration": {
+    "description": "Filter search result by duration"
+  },
+  "searchDurationAny": "Any duration",
+  "@searchDurationAny": {
+    "description": "Do not filter search result by duration"
+  },
+  "searchDurationShort": "Short (<4 minutes)",
+  "@searchDurationShort": {
+    "description": "Search for short videos only"
+  },
+  "searchDurationLong": "Long (>20 minutes)",
+  "@searchDurationLong": {
+    "description": "Search for long videos only"
+  },
+  "searchDurationMedium": "Medium (4-20 minutes)",
+  "@searchDurationMedium": {
+    "description": "Search for medium videos only"
+  },
   "searchSortBy": "Sort by",
   "@searchSortBy": {
     "description": "Search sorting option"
@@ -1262,5 +1310,17 @@
   "enabled": "Enabled",
   "@enabled": {
     "description": "Text to show something is enabled"
+  },
+  "channelSortByNewest": "Newest",
+  "@enabled": {
+    "description": "Sort channel videos from newest to oldest"
+  },
+  "channelSortByOldest": "Oldest",
+  "@enabled": {
+    "description": "Sort channel videos from oldest to newest"
+  },
+  "channelSortByPopular": "Popular",
+  "@enabled": {
+    "description": "Sort channel videos by popularity"
   }
 }

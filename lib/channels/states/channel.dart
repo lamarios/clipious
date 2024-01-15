@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:invidious/channels/models/channel_sort_by.dart';
 
 import '../../globals.dart';
 import '../models/channel.dart';
@@ -46,17 +47,23 @@ class ChannelCubit extends Cubit<ChannelController> {
       emit(state.copyWith(isSubscribed: isSubscribed));
     }
   }
+
+  void onSortByChanged(ChannelSortBy newValue) {
+    emit(state.copyWith(sortBy: newValue));
+  }
 }
 
 @freezed
 class ChannelController with _$ChannelController {
   const factory ChannelController(
-      {required String channelId,
-      @Default(false) bool isSubscribed,
-      @Default(0) selectedIndex,
-      Channel? channel,
-      @Default(true) bool loading,
-      @Default(false) bool smallHeader,
-      @Default(200) double barHeight,
-      @Default(1) double barOpacity}) = _ChannelController;
+          {required String channelId,
+          @Default(false) bool isSubscribed,
+          @Default(0) selectedIndex,
+          Channel? channel,
+          @Default(true) bool loading,
+          @Default(false) bool smallHeader,
+          @Default(200) double barHeight,
+          @Default(1) double barOpacity,
+          @Default(ChannelSortBy.newest) ChannelSortBy sortBy}) =
+      _ChannelController;
 }

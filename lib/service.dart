@@ -4,11 +4,14 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_web_auth/flutter_web_auth.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
+import 'package:invidious/channels/models/channel_sort_by.dart';
 import 'package:invidious/database.dart';
 import 'package:invidious/extensions.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/playlists/models/playlist.dart';
 import 'package:invidious/search/models/db/search_history_item.dart';
+import 'package:invidious/search/models/search_date.dart';
+import 'package:invidious/search/models/search_duration.dart';
 import 'package:invidious/search/models/search_results.dart';
 import 'package:invidious/search/models/search_sort_by.dart';
 import 'package:invidious/search/models/search_type.dart';
@@ -242,7 +245,11 @@ class Service {
   }
 
   Future<SearchResults> search(String query,
-      {SearchType? type, int? page, SearchSortBy? sortBy}) async {
+      {SearchType? type,
+      int? page,
+      SearchSortBy? sortBy,
+      SearchDate date = SearchDate.any,
+      SearchDuration duration = SearchDuration.any}) async {
     String countryCode = db.getSettings(browsingCountry)?.value ?? 'US';
     Uri uri = buildUrl(urlSearch, query: {
       'q': Uri.encodeQueryComponent(query),
@@ -250,6 +257,8 @@ class Service {
       'page': page?.toString() ?? '1',
       'sort': sortBy?.name,
       'region': countryCode,
+      'date': date != SearchDate.any ? date.name : null,
+      'duration': duration != SearchDuration.any ? duration.name : null,
     });
     final response = await http.get(uri);
     Iterable i = handleResponse(response);
@@ -500,9 +509,14 @@ class Service {
 
   Future<VideosWithContinuation> getChannelVideos(
       String channelId, String? continuation,
-      {bool saveLastSeen = true}) async {
-    Uri uri = buildUrl(urlGetChannelVideos,
-        pathParams: {':id': channelId}, query: {'continuation': continuation});
+      {bool saveLastSeen = true,
+      ChannelSortBy sortBy = ChannelSortBy.newest}) async {
+    Uri uri = buildUrl(urlGetChannelVideos, pathParams: {
+      ':id': channelId
+    }, query: {
+      'continuation': continuation,
+      'sort_by': sortBy.name,
+    });
     final response = await http.get(uri,
         headers: {'Content-Type': 'application/json; charset=utf-16'});
 

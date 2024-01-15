@@ -6,7 +6,7 @@ import 'package:invidious/globals.dart';
 import 'package:invidious/playlists/views/components/playlist_list.dart';
 import 'package:invidious/router.dart';
 import 'package:invidious/search/models/search_type.dart';
-import 'package:invidious/search/search_filters.dart';
+import 'package:invidious/search/views/components/search_filters.dart';
 import 'package:invidious/utils/views/components/navigation_switcher.dart';
 import 'package:invidious/videos/models/video_in_list.dart';
 
@@ -74,9 +74,9 @@ class SearchScreen extends StatelessWidget {
                     },
                     icon: const Icon(Icons.clear)),
                 SearchFiltersButton(
-                  initialSearchSortBy: _.sortBy,
-                  callback: (newSearchSortBy) {
-                    cubit.setSearchSortBy(newSearchSortBy);
+                  initialFilters: _.filters,
+                  onChanged: (newFilters) {
+                    cubit.onFiltersChanged(newFilters);
                     if (_.showResults || _.queryController.text.isNotEmpty) {
                       cubit.search(_.queryController.text);
                     }
@@ -167,8 +167,10 @@ class SearchScreen extends StatelessWidget {
                                               .search(
                                                   _.queryController.value.text,
                                                   page: page,
-                                                  sortBy: _.sortBy,
-                                                  type: SearchType.video)
+                                                  sortBy: _.filters.sortBy,
+                                                  type: SearchType.video,
+                                                  date: _.filters.date,
+                                                  duration: _.filters.duration)
                                               .then((value) => value.videos),
                                       maxResults: searchPageSize,
                                     ),
@@ -182,8 +184,11 @@ class SearchScreen extends StatelessWidget {
                                                     _.queryController.value
                                                         .text,
                                                     page: page,
-                                                    sortBy: _.sortBy,
-                                                    type: SearchType.channel)
+                                                    sortBy: _.filters.sortBy,
+                                                    type: SearchType.channel,
+                                                    date: _.filters.date,
+                                                    duration:
+                                                        _.filters.duration)
                                                 .then(
                                                     (value) => value.channels),
                                         maxResults: searchPageSize,
@@ -232,8 +237,11 @@ class SearchScreen extends StatelessWidget {
                                                       _.queryController.value
                                                           .text,
                                                       page: page,
-                                                      sortBy: _.sortBy,
-                                                      type: SearchType.playlist)
+                                                      sortBy: _.filters.sortBy,
+                                                      type: SearchType.playlist,
+                                                      date: _.filters.date,
+                                                      duration:
+                                                          _.filters.duration)
                                                   .then((value) =>
                                                       value.playlists),
                                           maxResults: searchPageSize,

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/search/models/search_sort_by.dart';
+import 'package:invidious/search/states/search_filter.dart';
 
 import '../../channels/models/channel.dart';
 import '../../playlists/models/playlist.dart';
@@ -30,6 +31,10 @@ class SearchCubit<T extends SearchState> extends Cubit<SearchState> {
   Future<void> close() async {
     state.queryController.dispose();
     super.close();
+  }
+
+  void onFiltersChanged(SearchFiltersState newValue) {
+    emit(state.copyWith(filters: newValue));
   }
 
   void sortChanged(SearchSortBy? value) {
@@ -81,29 +86,22 @@ class SearchCubit<T extends SearchState> extends Cubit<SearchState> {
   void selectIndex(int value) {
     emit(state.copyWith(selectedIndex: value));
   }
-
-  void setSearchSortBy(SearchSortBy value) {
-    emit(state.copyWith(sortBy: value));
-  }
-}
-
-abstract class Clonable<T> {
-  T clone();
 }
 
 @freezed
 class SearchState with _$SearchState {
-  const factory SearchState({
-    required TextEditingController queryController,
-    @Default(0) int selectedIndex,
-    @Default(false) bool searchNow,
-    @Default([]) List<String> suggestions,
-    @Default(SearchSortBy.relevance) SearchSortBy sortBy,
-    @Default(false) bool showResults,
-    @Default(1) int videoPage,
-    @Default(1) int channelPage,
-    @Default(1) int playlistPage,
-  }) = _SearchState;
+  const factory SearchState(
+          {required TextEditingController queryController,
+          @Default(0) int selectedIndex,
+          @Default(false) bool searchNow,
+          @Default([]) List<String> suggestions,
+          @Default(SearchSortBy.relevance) SearchSortBy sortBy,
+          @Default(false) bool showResults,
+          @Default(1) int videoPage,
+          @Default(1) int channelPage,
+          @Default(1) int playlistPage,
+          @Default(SearchFiltersState()) SearchFiltersState filters}) =
+      _SearchState;
 
   static SearchState init(
       {TextEditingController? queryController,
