@@ -1256,5 +1256,9 @@
   "exponentialSkipDescription": "Количество секунд одной перемотки вперёд возрастает с каждым нажатием.",
   "@exponentialSkipDescription": {
     "description": "Title for the setting to enable the exponential skipping"
+  },
+  "share": "Поделиться",
+  "@share": {
+    "description": "asking user if to share"
   }
 }
