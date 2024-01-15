@@ -96,6 +96,10 @@
       }
     }
   },
+  "share": "Share",
+  "@share": {
+    "description": "asking user if to share"
+  },
   "shareYoutubeLink": "Share YouTube link",
   "@shareYoutubeLink": {
     "description": "asking user to share youtube link"
