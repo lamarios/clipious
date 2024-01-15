@@ -25,7 +25,6 @@ class ChannelVideosView extends StatelessWidget {
       child: Container(
         color: colorScheme.background,
         child: VideoList(
-          key: const ValueKey('channel-videos'),
           paginatedVideoList: ContinuationList<VideoInList>(
               (continuation) => getVideos(channel.authorId, continuation)),
           // tags: 'channel-video-list-${(key as ValueKey<String>).value}'

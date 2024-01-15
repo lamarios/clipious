@@ -6,6 +6,8 @@ import 'package:invidious/search/models/search_duration.dart';
 import 'package:invidious/search/models/search_sort_by.dart';
 import 'package:invidious/search/states/search.dart';
 
+import '../../states/search_filter.dart';
+
 class SearchFiltersButton extends StatelessWidget {
   final SearchFiltersState initialFilters;
   final Function(SearchFiltersState) onChanged;
@@ -33,19 +35,22 @@ class SearchFiltersButton extends StatelessWidget {
                   onDateChanged(SearchDate? newValue) {
                     cubit.setDate(newValue);
                   }
+
                   onDurationChanged(SearchDuration? newValue) {
                     cubit.setDuration(newValue);
                   }
+
                   onSortByChanged(SearchSortBy? newValue) {
                     cubit.setSortBy(newValue);
                   }
+
                   return AlertDialog(
                     content: SingleChildScrollView(
                       child: ListBody(children: <Widget>[
                         Text(locals.searchUploadDate),
                         ...SearchDate.values.map((value) {
                           return ListTile(
-                            title: Text(value.getLable(locals)),
+                            title: Text(value.getLabel(locals)),
                             leading: Radio<SearchDate>(
                               value: value,
                               groupValue: state.date,
@@ -56,7 +61,7 @@ class SearchFiltersButton extends StatelessWidget {
                         Text(locals.searchDuration),
                         ...SearchDuration.values.map((value) {
                           return ListTile(
-                            title: Text(value.getLable(locals)),
+                            title: Text(value.getLabel(locals)),
                             leading: Radio<SearchDuration>(
                               value: value,
                               groupValue: state.duration,
@@ -67,7 +72,7 @@ class SearchFiltersButton extends StatelessWidget {
                         Text(locals.searchSortBy),
                         ...SearchSortBy.values.map((value) {
                           return ListTile(
-                            title: Text(value.getLable(locals)),
+                            title: Text(value.getLabel(locals)),
                             leading: Radio<SearchSortBy>(
                               value: value,
                               groupValue: state.sortBy,

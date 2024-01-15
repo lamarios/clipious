@@ -6,7 +6,7 @@ enum ChannelSortBy {
   popular;
 
   String getLable(AppLocalizations locals) {
-    return switch(this) {
+    return switch (this) {
       (ChannelSortBy.newest) => locals.channelSortByNewest,
       (ChannelSortBy.oldest) => locals.channelSortByOldest,
       (ChannelSortBy.popular) => locals.channelSortByPopular,

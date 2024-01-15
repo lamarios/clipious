@@ -8,8 +8,8 @@ enum SearchDate {
   month,
   year;
 
-  String getLable(AppLocalizations locals) {
-    return switch(this) {
+  String getLabel(AppLocalizations locals) {
+    return switch (this) {
       (SearchDate.any) => locals.searchUploadDateAny,
       (SearchDate.hour) => locals.searchUploadDateHour,
       (SearchDate.today) => locals.searchUploadDateToday,

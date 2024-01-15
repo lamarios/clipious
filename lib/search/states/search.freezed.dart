@@ -26,6 +26,7 @@ mixin _$SearchState {
   int get videoPage => throw _privateConstructorUsedError;
   int get channelPage => throw _privateConstructorUsedError;
   int get playlistPage => throw _privateConstructorUsedError;
+  SearchFiltersState get filters => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SearchStateCopyWith<SearchState> get copyWith =>
@@ -47,7 +48,10 @@ abstract class $SearchStateCopyWith<$Res> {
       bool showResults,
       int videoPage,
       int channelPage,
-      int playlistPage});
+      int playlistPage,
+      SearchFiltersState filters});
+
+  $SearchFiltersStateCopyWith<$Res> get filters;
 }
 
 /// @nodoc
@@ -72,6 +76,7 @@ class _$SearchStateCopyWithImpl<$Res, $Val extends SearchState>
     Object? videoPage = null,
     Object? channelPage = null,
     Object? playlistPage = null,
+    Object? filters = null,
   }) {
     return _then(_value.copyWith(
       queryController: null == queryController
@@ -110,7 +115,19 @@ class _$SearchStateCopyWithImpl<$Res, $Val extends SearchState>
           ? _value.playlistPage
           : playlistPage // ignore: cast_nullable_to_non_nullable
               as int,
+      filters: null == filters
+          ? _value.filters
+          : filters // ignore: cast_nullable_to_non_nullable
+              as SearchFiltersState,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SearchFiltersStateCopyWith<$Res> get filters {
+    return $SearchFiltersStateCopyWith<$Res>(_value.filters, (value) {
+      return _then(_value.copyWith(filters: value) as $Val);
+    });
   }
 }
 
@@ -131,7 +148,11 @@ abstract class _$$SearchStateImplCopyWith<$Res>
       bool showResults,
       int videoPage,
       int channelPage,
-      int playlistPage});
+      int playlistPage,
+      SearchFiltersState filters});
+
+  @override
+  $SearchFiltersStateCopyWith<$Res> get filters;
 }
 
 /// @nodoc
@@ -154,6 +175,7 @@ class __$$SearchStateImplCopyWithImpl<$Res>
     Object? videoPage = null,
     Object? channelPage = null,
     Object? playlistPage = null,
+    Object? filters = null,
   }) {
     return _then(_$SearchStateImpl(
       queryController: null == queryController
@@ -192,6 +214,10 @@ class __$$SearchStateImplCopyWithImpl<$Res>
           ? _value.playlistPage
           : playlistPage // ignore: cast_nullable_to_non_nullable
               as int,
+      filters: null == filters
+          ? _value.filters
+          : filters // ignore: cast_nullable_to_non_nullable
+              as SearchFiltersState,
     ));
   }
 }
@@ -208,7 +234,8 @@ class _$SearchStateImpl implements _SearchState {
       this.showResults = false,
       this.videoPage = 1,
       this.channelPage = 1,
-      this.playlistPage = 1})
+      this.playlistPage = 1,
+      this.filters = const SearchFiltersState()})
       : _suggestions = suggestions;
 
   @override
@@ -243,10 +270,13 @@ class _$SearchStateImpl implements _SearchState {
   @override
   @JsonKey()
   final int playlistPage;
+  @override
+  @JsonKey()
+  final SearchFiltersState filters;
 
   @override
   String toString() {
-    return 'SearchState(queryController: $queryController, selectedIndex: $selectedIndex, searchNow: $searchNow, suggestions: $suggestions, sortBy: $sortBy, showResults: $showResults, videoPage: $videoPage, channelPage: $channelPage, playlistPage: $playlistPage)';
+    return 'SearchState(queryController: $queryController, selectedIndex: $selectedIndex, searchNow: $searchNow, suggestions: $suggestions, sortBy: $sortBy, showResults: $showResults, videoPage: $videoPage, channelPage: $channelPage, playlistPage: $playlistPage, filters: $filters)';
   }
 
   @override
@@ -270,7 +300,8 @@ class _$SearchStateImpl implements _SearchState {
             (identical(other.channelPage, channelPage) ||
                 other.channelPage == channelPage) &&
             (identical(other.playlistPage, playlistPage) ||
-                other.playlistPage == playlistPage));
+                other.playlistPage == playlistPage) &&
+            (identical(other.filters, filters) || other.filters == filters));
   }
 
   @override
@@ -284,7 +315,8 @@ class _$SearchStateImpl implements _SearchState {
       showResults,
       videoPage,
       channelPage,
-      playlistPage);
+      playlistPage,
+      filters);
 
   @JsonKey(ignore: true)
   @override
@@ -303,7 +335,8 @@ abstract class _SearchState implements SearchState {
       final bool showResults,
       final int videoPage,
       final int channelPage,
-      final int playlistPage}) = _$SearchStateImpl;
+      final int playlistPage,
+      final SearchFiltersState filters}) = _$SearchStateImpl;
 
   @override
   TextEditingController get queryController;
@@ -323,6 +356,8 @@ abstract class _SearchState implements SearchState {
   int get channelPage;
   @override
   int get playlistPage;
+  @override
+  SearchFiltersState get filters;
   @override
   @JsonKey(ignore: true)
   _$$SearchStateImplCopyWith<_$SearchStateImpl> get copyWith =>

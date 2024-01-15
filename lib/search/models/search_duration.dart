@@ -6,8 +6,8 @@ enum SearchDuration {
   medium,
   long;
 
-  String getLable(AppLocalizations locals) {
-    return switch(this) {
+  String getLabel(AppLocalizations locals) {
+    return switch (this) {
       (SearchDuration.any) => locals.searchDurationAny,
       (SearchDuration.short) => locals.searchDurationShort,
       (SearchDuration.medium) => locals.searchDurationMedium,

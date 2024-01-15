@@ -56,12 +56,14 @@ class ChannelCubit extends Cubit<ChannelController> {
 @freezed
 class ChannelController with _$ChannelController {
   const factory ChannelController(
-      {required String channelId,
-      @Default(false) bool isSubscribed,
-      @Default(0) selectedIndex,
-      Channel? channel,
-      @Default(true) bool loading,
-      @Default(false) bool smallHeader,
-      @Default(200) double barHeight,
-      @Default(1) double barOpacity}) = _ChannelController;
+          {required String channelId,
+          @Default(false) bool isSubscribed,
+          @Default(0) selectedIndex,
+          Channel? channel,
+          @Default(true) bool loading,
+          @Default(false) bool smallHeader,
+          @Default(200) double barHeight,
+          @Default(1) double barOpacity,
+          @Default(ChannelSortBy.newest) ChannelSortBy sortBy}) =
+      _ChannelController;
 }

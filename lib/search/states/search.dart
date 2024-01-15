@@ -1,19 +1,19 @@
 import 'package:bloc/bloc.dart';
-import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:invidious/globals.dart';
-import 'package:invidious/search/models/search_duration.dart';
 import 'package:invidious/search/models/search_sort_by.dart';
-import 'package:invidious/search/models/search_type.dart';
+import 'package:invidious/search/states/search_filter.dart';
 
 import '../../channels/models/channel.dart';
 import '../../playlists/models/playlist.dart';
 import '../../settings/states/settings.dart';
 import '../../videos/models/video_in_list.dart';
 import '../models/search_date.dart';
+import '../models/search_duration.dart';
 
-part 'search.g.dart';
+part 'search.freezed.dart';
 
 class SearchCubit<T extends SearchState> extends Cubit<SearchState> {
   final SettingsCubit settings;
@@ -39,28 +39,34 @@ class SearchCubit<T extends SearchState> extends Cubit<SearchState> {
     emit(state.copyWith(filters: newValue));
   }
 
+  void sortChanged(SearchSortBy? value) {
+    emit(state.copyWith(sortBy: value ?? state.sortBy));
+    search(state.queryController.value.text);
+  }
+
   // returns true search is already cleared
   bool searchCleared() {
     if (state.queryController.value.text.isEmpty) {
       return true;
     } else {
-      var state = this.state.copyWith();
       state.queryController.clear();
-      state.showResults = false;
-      emit(state);
+      emit(state.copyWith(showResults: false));
       return false;
     }
   }
 
-  clearSearch(){
+  clearSearch() {
     emit(state.copyWith(showResults: false));
   }
 
   void getSuggestions({bool hideResult = true}) {
     emit(state.copyWith(showResults: !hideResult));
-    if(!settings.state.distractionFreeMode) {
-      EasyDebounce.debounce('search-suggestions', const Duration(milliseconds: 500), () async {
-        var suggestions = (await service.getSearchSuggestion(state.queryController.value.text)).suggestions;
+    if (!settings.state.distractionFreeMode) {
+      EasyDebounce.debounce(
+          'search-suggestions', const Duration(milliseconds: 500), () async {
+        var suggestions = (await service
+                .getSearchSuggestion(state.queryController.value.text))
+            .suggestions;
         emit(state.copyWith(suggestions: suggestions));
       });
     }
@@ -80,49 +86,26 @@ class SearchCubit<T extends SearchState> extends Cubit<SearchState> {
   }
 
   void selectIndex(int value) {
-    var state = this.state.copyWith();
-    state.selectedIndex = value;
-    emit(state);
+    emit(state.copyWith(selectedIndex: value));
   }
 }
 
-class SearchFiltersCubit<T extends SearchFiltersState> extends Cubit<SearchFiltersState> {
-  SearchFiltersCubit(super.initialState);
+@freezed
+class SearchState with _$SearchState {
+  const factory SearchState(
+          {required TextEditingController queryController,
+          @Default(0) int selectedIndex,
+          @Default(false) bool searchNow,
+          @Default([]) List<String> suggestions,
+          @Default(SearchSortBy.relevance) SearchSortBy sortBy,
+          @Default(false) bool showResults,
+          @Default(1) int videoPage,
+          @Default(1) int channelPage,
+          @Default(1) int playlistPage,
+          @Default(SearchFiltersState()) SearchFiltersState filters}) =
+      _SearchState;
 
-  setDate(SearchDate? newValue) {
-    emit(state.copyWith(date: newValue));
-  }
-
-  setDuration(SearchDuration? newValue) {
-    emit(state.copyWith(duration: newValue));
-  }
-
-  setSortBy(SearchSortBy? newValue) {
-    emit(state.copyWith(sortBy: newValue));
-  }
-}
-
-abstract class Clonable<T> {
-  T clone();
-}
-
-@CopyWith(constructor: "inLine")
-class SearchState extends Clonable<SearchState> {
-  TextEditingController queryController;
-
-  int selectedIndex;
-
-  bool searchNow;
-
-  List<String> suggestions;
-
-  SearchFiltersState filters;
-
-  bool showResults;
-
-  int videoPage, channelPage, playlistPage;
-
-  SearchState(
+  static SearchState init(
       {TextEditingController? queryController,
       int? selectedIndex,
       List<VideoInList>? videos,
@@ -131,51 +114,23 @@ class SearchState extends Clonable<SearchState> {
       bool? useHistory,
       bool? searchNow,
       List<String>? suggestions,
-      SearchFiltersState? filters,
+      SearchSortBy? sortBy,
       bool? showResults,
       bool? loading,
       int? videoPage,
       channelPage,
       playlistPage,
-      String? query})
-      : queryController = queryController ?? TextEditingController(text: query ?? ''),
-        selectedIndex = selectedIndex ?? 0,
-        searchNow = searchNow ?? false,
-        suggestions = suggestions ?? [],
-        filters = filters ?? SearchFiltersState(),
-        showResults = showResults ?? false,
-        videoPage = videoPage ?? 1,
-        channelPage = channelPage ?? 1,
-        playlistPage = playlistPage ?? 1;
-
-  SearchState.inLine(this.queryController, this.selectedIndex, this.searchNow, this.suggestions, this.filters,
-      this.showResults, this.videoPage, this.channelPage, this.playlistPage);
-
-  @override
-  SearchState clone() {
-    return copyWith();
+      String? query}) {
+    return SearchState(
+        queryController:
+            queryController ?? TextEditingController(text: query ?? ''),
+        selectedIndex: selectedIndex ?? 0,
+        searchNow: searchNow ?? false,
+        suggestions: suggestions ?? [],
+        sortBy: sortBy ?? SearchSortBy.relevance,
+        showResults: showResults ?? false,
+        videoPage: videoPage ?? 1,
+        channelPage: channelPage ?? 1,
+        playlistPage: playlistPage ?? 1);
   }
-}
-
-@CopyWith()
-class SearchFiltersState {
-  final SearchDate date;
-  final SearchDuration duration;
-  final SearchSortBy sortBy;
-
-  SearchFiltersState({
-    this.date = SearchDate.any,
-    this.duration = SearchDuration.any,
-    this.sortBy = SearchSortBy.relevance,
-  });
-
-  copyWith({
-    SearchDate? date,
-    SearchDuration? duration,
-    SearchSortBy? sortBy,
-  }) => SearchFiltersState(
-    date: date ?? this.date,
-    duration: duration ?? this.duration,
-    sortBy: sortBy ?? this.sortBy,
-  );
 }

@@ -6,7 +6,7 @@ import 'package:invidious/globals.dart';
 import 'package:invidious/playlists/views/components/playlist_list.dart';
 import 'package:invidious/router.dart';
 import 'package:invidious/search/models/search_type.dart';
-import 'package:invidious/search/search_filters.dart';
+import 'package:invidious/search/views/components/search_filters.dart';
 import 'package:invidious/utils/views/components/navigation_switcher.dart';
 import 'package:invidious/videos/models/video_in_list.dart';
 
@@ -169,8 +169,9 @@ class SearchScreen extends StatelessWidget {
                                                   page: page,
                                                   sortBy: _.filters.sortBy,
                                                   type: SearchType.video,
-                                              date: _.filters.date, duration: _.filters.duration)
-                                          .then((value) => value.videos),
+                                                  date: _.filters.date,
+                                                  duration: _.filters.duration)
+                                              .then((value) => value.videos),
                                       maxResults: searchPageSize,
                                     ),
                                   ),
@@ -185,8 +186,11 @@ class SearchScreen extends StatelessWidget {
                                                     page: page,
                                                     sortBy: _.filters.sortBy,
                                                     type: SearchType.channel,
-                                                date: _.filters.date, duration: _.filters.duration)
-                                            .then((value) => value.channels),
+                                                    date: _.filters.date,
+                                                    duration:
+                                                        _.filters.duration)
+                                                .then(
+                                                    (value) => value.channels),
                                         maxResults: searchPageSize,
                                       ),
                                       itemBuilder: (e) => InkWell(
@@ -235,12 +239,15 @@ class SearchScreen extends StatelessWidget {
                                                       page: page,
                                                       sortBy: _.filters.sortBy,
                                                       type: SearchType.playlist,
-                                                  date: _.filters.date, duration: _.filters.duration)
-                                                    .then((value) => value.playlists),
-                                                maxResults: searchPageSize,
-                                                 ),
-                                              canDeleteVideos: false),
-                                        )
+                                                      date: _.filters.date,
+                                                      duration:
+                                                          _.filters.duration)
+                                                  .then((value) =>
+                                                      value.playlists),
+                                          maxResults: searchPageSize,
+                                        ),
+                                        canDeleteVideos: false),
+                                  )
                                 ][_.selectedIndex],
                               ),
                             ),

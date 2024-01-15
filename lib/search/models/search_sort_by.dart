@@ -6,7 +6,7 @@ enum SearchSortBy {
   date,
   views;
 
-  String getLable(AppLocalizations locals) {
+  String getLabel(AppLocalizations locals) {
     return switch (this) {
       (SearchSortBy.relevance) => locals.searchSortRelevance,
       (SearchSortBy.rating) => locals.searchSortRating,

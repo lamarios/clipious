@@ -24,6 +24,7 @@ mixin _$ChannelController {
   bool get smallHeader => throw _privateConstructorUsedError;
   double get barHeight => throw _privateConstructorUsedError;
   double get barOpacity => throw _privateConstructorUsedError;
+  ChannelSortBy get sortBy => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ChannelControllerCopyWith<ChannelController> get copyWith =>
@@ -44,7 +45,8 @@ abstract class $ChannelControllerCopyWith<$Res> {
       bool loading,
       bool smallHeader,
       double barHeight,
-      double barOpacity});
+      double barOpacity,
+      ChannelSortBy sortBy});
 }
 
 /// @nodoc
@@ -68,6 +70,7 @@ class _$ChannelControllerCopyWithImpl<$Res, $Val extends ChannelController>
     Object? smallHeader = null,
     Object? barHeight = null,
     Object? barOpacity = null,
+    Object? sortBy = null,
   }) {
     return _then(_value.copyWith(
       channelId: null == channelId
@@ -102,6 +105,10 @@ class _$ChannelControllerCopyWithImpl<$Res, $Val extends ChannelController>
           ? _value.barOpacity
           : barOpacity // ignore: cast_nullable_to_non_nullable
               as double,
+      sortBy: null == sortBy
+          ? _value.sortBy
+          : sortBy // ignore: cast_nullable_to_non_nullable
+              as ChannelSortBy,
     ) as $Val);
   }
 }
@@ -122,7 +129,8 @@ abstract class _$$ChannelControllerImplCopyWith<$Res>
       bool loading,
       bool smallHeader,
       double barHeight,
-      double barOpacity});
+      double barOpacity,
+      ChannelSortBy sortBy});
 }
 
 /// @nodoc
@@ -144,6 +152,7 @@ class __$$ChannelControllerImplCopyWithImpl<$Res>
     Object? smallHeader = null,
     Object? barHeight = null,
     Object? barOpacity = null,
+    Object? sortBy = null,
   }) {
     return _then(_$ChannelControllerImpl(
       channelId: null == channelId
@@ -176,6 +185,10 @@ class __$$ChannelControllerImplCopyWithImpl<$Res>
           ? _value.barOpacity
           : barOpacity // ignore: cast_nullable_to_non_nullable
               as double,
+      sortBy: null == sortBy
+          ? _value.sortBy
+          : sortBy // ignore: cast_nullable_to_non_nullable
+              as ChannelSortBy,
     ));
   }
 }
@@ -191,7 +204,8 @@ class _$ChannelControllerImpl implements _ChannelController {
       this.loading = true,
       this.smallHeader = false,
       this.barHeight = 200,
-      this.barOpacity = 1});
+      this.barOpacity = 1,
+      this.sortBy = ChannelSortBy.newest});
 
   @override
   final String channelId;
@@ -215,10 +229,13 @@ class _$ChannelControllerImpl implements _ChannelController {
   @override
   @JsonKey()
   final double barOpacity;
+  @override
+  @JsonKey()
+  final ChannelSortBy sortBy;
 
   @override
   String toString() {
-    return 'ChannelController(channelId: $channelId, isSubscribed: $isSubscribed, selectedIndex: $selectedIndex, channel: $channel, loading: $loading, smallHeader: $smallHeader, barHeight: $barHeight, barOpacity: $barOpacity)';
+    return 'ChannelController(channelId: $channelId, isSubscribed: $isSubscribed, selectedIndex: $selectedIndex, channel: $channel, loading: $loading, smallHeader: $smallHeader, barHeight: $barHeight, barOpacity: $barOpacity, sortBy: $sortBy)';
   }
 
   @override
@@ -239,7 +256,8 @@ class _$ChannelControllerImpl implements _ChannelController {
             (identical(other.barHeight, barHeight) ||
                 other.barHeight == barHeight) &&
             (identical(other.barOpacity, barOpacity) ||
-                other.barOpacity == barOpacity));
+                other.barOpacity == barOpacity) &&
+            (identical(other.sortBy, sortBy) || other.sortBy == sortBy));
   }
 
   @override
@@ -252,7 +270,8 @@ class _$ChannelControllerImpl implements _ChannelController {
       loading,
       smallHeader,
       barHeight,
-      barOpacity);
+      barOpacity,
+      sortBy);
 
   @JsonKey(ignore: true)
   @override
@@ -271,7 +290,8 @@ abstract class _ChannelController implements ChannelController {
       final bool loading,
       final bool smallHeader,
       final double barHeight,
-      final double barOpacity}) = _$ChannelControllerImpl;
+      final double barOpacity,
+      final ChannelSortBy sortBy}) = _$ChannelControllerImpl;
 
   @override
   String get channelId;
@@ -289,6 +309,8 @@ abstract class _ChannelController implements ChannelController {
   double get barHeight;
   @override
   double get barOpacity;
+  @override
+  ChannelSortBy get sortBy;
   @override
   @JsonKey(ignore: true)
   _$$ChannelControllerImplCopyWith<_$ChannelControllerImpl> get copyWith =>
