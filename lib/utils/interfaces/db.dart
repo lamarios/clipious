@@ -34,11 +34,11 @@ abstract class IDbClient {
 
   List<Server> getServers();
 
-  deleteServerById(int id);
+  deleteServerById(Server server);
 
   deleteServer(Server server) {
     if (getServers().length >= 2) {
-      deleteServerById(server.id);
+      deleteServerById(server);
       if (server.inUse) {
         getCurrentlySelectedServer();
       }

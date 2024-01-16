@@ -75,8 +75,8 @@ class MemoryDB extends IDbClient {
   }
 
   @override
-  deleteServerById(int id) {
-    servers.removeWhere((element) => element.id == id);
+  deleteServerById(Server server) {
+    servers.removeWhere((element) => element.id == server.id);
   }
 
   @override

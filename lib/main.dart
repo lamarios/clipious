@@ -8,6 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_displaymode/flutter_displaymode.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/app/states/app.dart';
+import 'package:invidious/db_migration/migration_utils.dart';
 import 'package:invidious/downloads/states/download_manager.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/http_overrides.dart';
@@ -17,10 +18,11 @@ import 'package:invidious/player/states/player.dart';
 import 'package:invidious/router.dart';
 import 'package:invidious/settings/states/settings.dart';
 import 'package:invidious/utils.dart';
+import 'package:invidious/utils/isar_database.dart';
 import 'package:invidious/workmanager.dart';
 import 'package:logging/logging.dart';
 
-import 'database.dart';
+import 'utils/obox_database.dart';
 import 'settings/models/db/app_logs.dart';
 
 const brandColor = Color(0xFF4f0096);
@@ -53,7 +55,10 @@ Future<void> main() async {
 
   WidgetsFlutterBinding.ensureInitialized();
   // FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
-  db = await DbClient.create();
+  db = await IsarDb.create();
+
+  final needsDbMigration = await needsMigration();
+  appRouter = AppRouter(needsDbMigration: needsDbMigration);
 
   initializeNotifications();
 

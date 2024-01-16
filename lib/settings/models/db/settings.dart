@@ -1,15 +1,22 @@
+import 'package:isar/isar.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:objectbox/objectbox.dart';
+import 'package:objectbox/objectbox.dart' as obox;
 
 part 'settings.g.dart';
 
-@Entity()
+@obox.Entity()
+@collection
 @JsonSerializable()
 class SettingsValue {
-  @Id()
+  @obox.Id()
+  @ignore
   int id = 0;
 
-  @Unique(onConflict: ConflictStrategy.replace)
+  @obox.Transient()
+  Id isarId = Isar.autoIncrement;
+
+  @obox.Unique(onConflict: obox.ConflictStrategy.replace)
+  @Index(unique: true, replace: true)
   String name;
 
   String value;

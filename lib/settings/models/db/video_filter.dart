@@ -4,8 +4,9 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/utils.dart';
 import 'package:invidious/videos/models/base_video.dart';
+import 'package:isar/isar.dart';
 import 'package:logging/logging.dart';
-import 'package:objectbox/objectbox.dart';
+import 'package:objectbox/objectbox.dart' as obox;
 
 part 'video_filter.g.dart';
 
@@ -58,17 +59,24 @@ enum FilterOperation {
   }
 }
 
-@Entity()
+@obox.Entity()
+@collection
 @CopyWith(constructor: "_")
 class VideoFilter {
-  @Id()
+  @obox.Id()
+  @ignore
   int id = 0;
+
+  @obox.Transient()
+  Id isarId = Isar.autoIncrement;
 
   String? channelId;
 
-  @Transient()
+  @obox.Transient()
+  @ignore
   FilterOperation? operation = FilterOperation.contain;
-  @Transient()
+  @obox.Transient()
+  @ignore
   FilterType? type = FilterType.title;
 
   String? value;
@@ -86,6 +94,7 @@ class VideoFilter {
       this.hideFromFeed,
       this.daysOfWeek,
       this.startTime,
+      this.isarId,
       this.endTime);
 
   VideoFilter({required this.value, this.channelId});

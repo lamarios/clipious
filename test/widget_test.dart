@@ -5,17 +5,7 @@
 // gestures. You can also use WidgetTester to find child widgets in the widget
 // tree, read text, and verify that the values of widget properties are correct.
 
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:invidious/app/states/app.dart';
-import 'package:invidious/database.dart';
-import 'package:invidious/globals.dart';
-import 'package:invidious/home/views/screens/home.dart';
-import 'package:invidious/main.dart';
-import 'package:invidious/settings/states/settings.dart';
-import 'package:invidious/welcome_wizard/views/screens/welcome_wizard.dart';
+
 
 void main() {
 /*

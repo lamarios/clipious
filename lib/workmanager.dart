@@ -4,7 +4,7 @@ import 'dart:ui';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
-import 'package:invidious/database.dart';
+import 'package:invidious/utils/obox_database.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/notifications/models/db/subscription_notifications.dart';
 import 'package:invidious/settings/states/settings.dart';

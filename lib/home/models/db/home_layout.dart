@@ -4,7 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/app/states/app.dart';
 import 'package:invidious/videos/models/video_in_list.dart';
-import 'package:objectbox/objectbox.dart';
+import 'package:isar/isar.dart';
+import 'package:objectbox/objectbox.dart' as obox;
 
 import '../../../downloads/states/download_manager.dart';
 import '../../../globals.dart';
@@ -207,23 +208,33 @@ enum HomeDataSource {
   }
 }
 
-@Entity()
+// isar
+@collection
+// objectBox
+@obox.Entity()
 @CopyWith(constructor: "_")
 class HomeLayout {
-  @Id()
+  @obox.Id()
+  @ignore
   int id = 0;
 
-  @Transient()
+  @obox.Transient()
+  Id isarId = Isar.autoIncrement;
+
+  @ignore
+  @obox.Transient()
   List<HomeDataSource> smallSources = [HomeDataSource.popular];
 
-  @Transient()
+  @ignore
+  @obox.Transient()
   HomeDataSource bigSource = HomeDataSource.trending;
 
   bool showBigSource = true;
 
   HomeLayout();
 
-  HomeLayout._(this.id, this.smallSources, this.bigSource, this.showBigSource);
+  HomeLayout._(this.id, this.isarId, this.smallSources, this.bigSource,
+      this.showBigSource);
 
   String get dbBigSource => bigSource.name;
 

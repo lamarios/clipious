@@ -1,13 +1,21 @@
 import 'dart:io';
 
 import 'package:invidious/videos/models/base_video.dart';
-import 'package:objectbox/objectbox.dart';
+import 'package:isar/isar.dart';
+import 'package:objectbox/objectbox.dart' as obox;
 import 'package:path_provider/path_provider.dart';
 
-@Entity()
+part 'downloaded_video.g.dart';
+
+@obox.Entity()
+@collection
 class DownloadedVideo extends IdedVideo {
-  @Id()
+  @obox.Id()
+  @ignore
   int id = 0;
+
+  @obox.Transient()
+  Id isarId = Isar.autoIncrement;
 
   String title;
   String? author;
@@ -21,13 +29,15 @@ class DownloadedVideo extends IdedVideo {
   @override
   set videoId(String videoId) => super.videoId = videoId;
 
-  @Transient()
+  @obox.Transient()
+  @ignore
   Future<String> get mediaPath async {
     Directory dir = await getApplicationDocumentsDirectory();
     return "${dir.path}/$videoId.${audioOnly ? 'webm' : 'mp4'}";
   }
 
-  @Transient()
+  @obox.Transient()
+  @ignore
   Future<String> get thumbnailPath async {
     Directory dir = await getApplicationDocumentsDirectory();
     return "${dir.path}/$videoId.jpg";

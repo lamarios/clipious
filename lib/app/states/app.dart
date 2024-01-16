@@ -5,7 +5,7 @@ import 'package:invidious/router.dart';
 import 'package:logging/logging.dart';
 import 'package:receive_sharing_intent/receive_sharing_intent.dart';
 
-import '../../database.dart';
+import '../../utils/obox_database.dart';
 import '../../globals.dart';
 import '../../home/models/db/home_layout.dart';
 import '../../settings/models/db/server.dart';

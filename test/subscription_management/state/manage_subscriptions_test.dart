@@ -1,11 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:invidious/database.dart';
 import 'package:invidious/globals.dart';
-import 'package:invidious/settings/models/db/server.dart';
 import 'package:invidious/subscription_management/states/manage_subscriptions.dart';
 
-import '../../globals.dart';
-import '../../utils/memorydb.dart';
 import '../../utils/server.dart';
 
 void main() {

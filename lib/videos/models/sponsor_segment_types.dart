@@ -1,5 +1,5 @@
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:invidious/database.dart';
+import 'package:invidious/utils/obox_database.dart';
 
 enum SponsorSegmentType {
   sponsor('sponsor'),

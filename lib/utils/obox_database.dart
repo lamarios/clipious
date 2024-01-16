@@ -14,12 +14,12 @@ import 'package:logging/logging.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 
-import 'downloads/models/downloaded_video.dart';
-import 'notifications/models/db/playlist_notifications.dart';
-import 'objectbox.g.dart'; // created by `flutter pub run build_runner build`
-import 'settings/models/db/app_logs.dart';
-import 'settings/models/db/server.dart';
-import 'settings/models/db/video_filter.dart';
+import '../downloads/models/downloaded_video.dart';
+import '../notifications/models/db/playlist_notifications.dart';
+import '../objectbox.g.dart'; // created by `flutter pub run build_runner build`
+import '../settings/models/db/app_logs.dart';
+import '../settings/models/db/server.dart';
+import '../settings/models/db/video_filter.dart';
 
 const selectedServer = 'selected-server';
 const useSponsorBlock = 'use-sponsor-block';
@@ -119,8 +119,8 @@ class DbClient extends IDbClient {
   }
 
   @override
-  deleteServerById(int id) {
-    store.box<Server>().remove(id);
+  deleteServerById(Server server) {
+    store.box<Server>().remove(server.id);
   }
 
   @override

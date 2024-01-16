@@ -86,9 +86,9 @@ class DownloadManagerCubit extends Cubit<DownloadManagerState> {
       }
     } else {
       EasyThrottle.throttle(
-          'download-${video.id}', const Duration(milliseconds: 500), () {
+          'download-${video.isarId}', const Duration(milliseconds: 500), () {
         log.fine(
-            'Download of video ${video.id}, $count / $total =  ${count / total}, Total: ${state.totalProgress}');
+            'Download of video ${video.isarId}, $count / $total =  ${count / total}, Total: ${state.totalProgress}');
         var progresses =
             Map<String, DownloadProgress>.from(state.downloadProgresses);
         var downloadProgress = progresses[video.videoId];

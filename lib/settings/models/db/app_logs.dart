@@ -1,14 +1,22 @@
-import 'package:objectbox/objectbox.dart';
+import 'package:isar/isar.dart';
+import 'package:objectbox/objectbox.dart' as obox;
 
-@Entity()
+part 'app_logs.g.dart';
+
+@obox.Entity()
+@collection
 class AppLog {
-  @Id()
+  @ignore
+  @obox.Id()
   int id = 0;
+
+  @obox.Transient()
+  Id isarId = Isar.autoIncrement;
 
   String level;
   String logger;
 
-  @Property(type: PropertyType.date)
+  @obox.Property(type: obox.PropertyType.date)
   DateTime time;
 
   String? stacktrace;

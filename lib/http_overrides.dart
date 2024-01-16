@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:invidious/database.dart';
+import 'package:invidious/utils/obox_database.dart';
 import 'package:invidious/globals.dart';
 
 class MyHttpOverrides extends HttpOverrides {

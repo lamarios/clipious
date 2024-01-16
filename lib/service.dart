@@ -5,7 +5,7 @@ import 'package:flutter_web_auth/flutter_web_auth.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 import 'package:invidious/channels/models/channel_sort_by.dart';
-import 'package:invidious/database.dart';
+import 'package:invidious/utils/obox_database.dart';
 import 'package:invidious/extensions.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/playlists/models/playlist.dart';

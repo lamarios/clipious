@@ -34,7 +34,7 @@ final _entities = <ModelEntity>[
   ModelEntity(
       id: const IdUid(1, 8038281984607819042),
       name: 'Server',
-      lastPropertyId: const IdUid(7, 7993511472188126727),
+      lastPropertyId: const IdUid(8, 6323276442216762344),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
@@ -69,7 +69,7 @@ final _entities = <ModelEntity>[
   ModelEntity(
       id: const IdUid(2, 2463187106197509769),
       name: 'SettingsValue',
-      lastPropertyId: const IdUid(3, 4665740245375834282),
+      lastPropertyId: const IdUid(4, 4456133405276724782),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
@@ -94,7 +94,7 @@ final _entities = <ModelEntity>[
   ModelEntity(
       id: const IdUid(3, 8787382286414233697),
       name: 'Progress',
-      lastPropertyId: const IdUid(3, 8602536477328513343),
+      lastPropertyId: const IdUid(4, 2850523087664236792),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
@@ -119,7 +119,7 @@ final _entities = <ModelEntity>[
   ModelEntity(
       id: const IdUid(4, 6956330633348216454),
       name: 'SearchHistoryItem',
-      lastPropertyId: const IdUid(3, 4799661758354837094),
+      lastPropertyId: const IdUid(4, 2889158211381180137),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
@@ -144,7 +144,7 @@ final _entities = <ModelEntity>[
   ModelEntity(
       id: const IdUid(5, 8446250266008376981),
       name: 'AppLog',
-      lastPropertyId: const IdUid(6, 5023716219165786985),
+      lastPropertyId: const IdUid(7, 2516863991952055225),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
@@ -183,7 +183,7 @@ final _entities = <ModelEntity>[
   ModelEntity(
       id: const IdUid(6, 8304874620604193998),
       name: 'VideoFilter',
-      lastPropertyId: const IdUid(11, 8416925878752879022),
+      lastPropertyId: const IdUid(12, 9166993721458673597),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
@@ -301,7 +301,7 @@ final _entities = <ModelEntity>[
   ModelEntity(
       id: const IdUid(9, 4192516430920036128),
       name: 'HistoryVideoCache',
-      lastPropertyId: const IdUid(6, 3954053412124926577),
+      lastPropertyId: const IdUid(7, 8421329419907109451),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
@@ -340,7 +340,7 @@ final _entities = <ModelEntity>[
   ModelEntity(
       id: const IdUid(10, 6821162325360407377),
       name: 'HomeLayout',
-      lastPropertyId: const IdUid(4, 8172441605240321034),
+      lastPropertyId: const IdUid(5, 4674521545903994841),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
@@ -369,7 +369,7 @@ final _entities = <ModelEntity>[
   ModelEntity(
       id: const IdUid(11, 3657792956132207980),
       name: 'SubscriptionNotification',
-      lastPropertyId: const IdUid(3, 1941341505549292694),
+      lastPropertyId: const IdUid(4, 5768606046399747454),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
@@ -393,7 +393,7 @@ final _entities = <ModelEntity>[
   ModelEntity(
       id: const IdUid(12, 2070539588161609146),
       name: 'ChannelNotification',
-      lastPropertyId: const IdUid(5, 2886321232475223602),
+      lastPropertyId: const IdUid(6, 7200202428280370280),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
@@ -428,7 +428,7 @@ final _entities = <ModelEntity>[
   ModelEntity(
       id: const IdUid(13, 8331886434292283747),
       name: 'PlaylistNotification',
-      lastPropertyId: const IdUid(5, 5316267761398216511),
+      lastPropertyId: const IdUid(6, 6814419739956669774),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
@@ -463,7 +463,7 @@ final _entities = <ModelEntity>[
   ModelEntity(
       id: const IdUid(15, 7475761865024216578),
       name: 'DeArrowCache',
-      lastPropertyId: const IdUid(4, 7876161971726247302),
+      lastPropertyId: const IdUid(5, 6630473468372739852),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
@@ -532,7 +532,19 @@ ModelDefinition getObjectBoxModel() {
         6600296338817128660,
         345286493546760360,
         3278768646220204892,
-        6911432365687480646
+        6911432365687480646,
+        2516863991952055225,
+        7200202428280370280,
+        6630473468372739852,
+        8421329419907109451,
+        4674521545903994841,
+        6814419739956669774,
+        2850523087664236792,
+        2889158211381180137,
+        6323276442216762344,
+        4456133405276724782,
+        5768606046399747454,
+        9166993721458673597
       ],
       retiredRelationUids: const [],
       modelVersion: 5,
@@ -556,7 +568,7 @@ ModelDefinition getObjectBoxModel() {
           final sidCookieOffset = object.sidCookie == null
               ? null
               : fbb.writeString(object.sidCookie!);
-          fbb.startTable(8);
+          fbb.startTable(9);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, urlOffset);
           fbb.addOffset(2, authTokenOffset);
@@ -596,7 +608,7 @@ ModelDefinition getObjectBoxModel() {
         objectToFB: (SettingsValue object, fb.Builder fbb) {
           final nameOffset = fbb.writeString(object.name);
           final valueOffset = fbb.writeString(object.value);
-          fbb.startTable(4);
+          fbb.startTable(5);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, nameOffset);
           fbb.addOffset(2, valueOffset);
@@ -625,7 +637,7 @@ ModelDefinition getObjectBoxModel() {
         },
         objectToFB: (Progress object, fb.Builder fbb) {
           final videoIdOffset = fbb.writeString(object.videoId);
-          fbb.startTable(4);
+          fbb.startTable(5);
           fbb.addInt64(0, object.id);
           fbb.addFloat64(1, object.progress);
           fbb.addOffset(2, videoIdOffset);
@@ -635,13 +647,12 @@ ModelDefinition getObjectBoxModel() {
         objectFromFB: (Store store, ByteData fbData) {
           final buffer = fb.BufferContext(fbData);
           final rootOffset = buffer.derefObject(0);
-          final idParam =
-              const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
           final progressParam =
               const fb.Float64Reader().vTableGet(buffer, rootOffset, 6, 0);
           final videoIdParam = const fb.StringReader(asciiOptimization: true)
               .vTableGet(buffer, rootOffset, 8, '');
-          final object = Progress(idParam, progressParam, videoIdParam);
+          final object = Progress(progressParam, videoIdParam)
+            ..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
 
           return object;
         }),
@@ -655,7 +666,7 @@ ModelDefinition getObjectBoxModel() {
         },
         objectToFB: (SearchHistoryItem object, fb.Builder fbb) {
           final searchOffset = fbb.writeString(object.search);
-          fbb.startTable(4);
+          fbb.startTable(5);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, searchOffset);
           fbb.addInt64(2, object.time);
@@ -690,7 +701,7 @@ ModelDefinition getObjectBoxModel() {
               ? null
               : fbb.writeString(object.stacktrace!);
           final loggerOffset = fbb.writeString(object.logger);
-          fbb.startTable(7);
+          fbb.startTable(8);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, levelOffset);
           fbb.addInt64(2, object.time.millisecondsSinceEpoch);
@@ -745,7 +756,7 @@ ModelDefinition getObjectBoxModel() {
           final daysOfWeekOffset = fbb.writeListInt64(object.daysOfWeek);
           final startTimeOffset = fbb.writeString(object.startTime);
           final endTimeOffset = fbb.writeString(object.endTime);
-          fbb.startTable(12);
+          fbb.startTable(13);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, channelIdOffset);
           fbb.addOffset(2, valueOffset);
@@ -869,7 +880,7 @@ ModelDefinition getObjectBoxModel() {
               object.author == null ? null : fbb.writeString(object.author!);
           final videoIdOffset = fbb.writeString(object.videoId);
           final thumbnailOffset = fbb.writeString(object.thumbnail);
-          fbb.startTable(7);
+          fbb.startTable(8);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, titleOffset);
           fbb.addOffset(2, authorOffset);
@@ -911,7 +922,7 @@ ModelDefinition getObjectBoxModel() {
           final dbSmallSourcesOffset = fbb.writeList(object.dbSmallSources
               .map(fbb.writeString)
               .toList(growable: false));
-          fbb.startTable(5);
+          fbb.startTable(6);
           fbb.addInt64(0, object.id);
           fbb.addBool(1, object.showBigSource);
           fbb.addOffset(2, dbBigSourceOffset);
@@ -946,7 +957,7 @@ ModelDefinition getObjectBoxModel() {
         },
         objectToFB: (SubscriptionNotification object, fb.Builder fbb) {
           final lastSeenVideoIdOffset = fbb.writeString(object.lastSeenVideoId);
-          fbb.startTable(4);
+          fbb.startTable(5);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, lastSeenVideoIdOffset);
           fbb.addInt64(2, object.timestamp);
@@ -979,7 +990,7 @@ ModelDefinition getObjectBoxModel() {
           final channelIdOffset = fbb.writeString(object.channelId);
           final lastSeenVideoIdOffset = fbb.writeString(object.lastSeenVideoId);
           final channelNameOffset = fbb.writeString(object.channelName);
-          fbb.startTable(6);
+          fbb.startTable(7);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, channelIdOffset);
           fbb.addOffset(2, lastSeenVideoIdOffset);
@@ -1018,7 +1029,7 @@ ModelDefinition getObjectBoxModel() {
         objectToFB: (PlaylistNotification object, fb.Builder fbb) {
           final playlistIdOffset = fbb.writeString(object.playlistId);
           final playlistNameOffset = fbb.writeString(object.playlistName);
-          fbb.startTable(6);
+          fbb.startTable(7);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, playlistIdOffset);
           fbb.addInt64(2, object.lastVideoCount);
@@ -1059,7 +1070,7 @@ ModelDefinition getObjectBoxModel() {
               object.title == null ? null : fbb.writeString(object.title!);
           final urlOffset =
               object.url == null ? null : fbb.writeString(object.url!);
-          fbb.startTable(5);
+          fbb.startTable(6);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, videoIdOffset);
           fbb.addOffset(2, titleOffset);
