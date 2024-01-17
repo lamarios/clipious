@@ -4,6 +4,7 @@ import 'dart:ui';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
+import 'package:invidious/utils/isar_database.dart';
 import 'package:invidious/utils/obox_database.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/notifications/models/db/subscription_notifications.dart';
@@ -57,7 +58,7 @@ void callbackDispatcher() {
 
 _backgroundCheck() async {
   try {
-    db = await DbClient.create();
+    db = await IsarDb.create();
 
     await _handleSubscriptionsNotifications();
     await _handleChannelNotifications();
@@ -104,7 +105,7 @@ _handlePlaylistNotifications() async {
               payload: {
                 playlistId: n.playlistId,
               },
-              id: n.id);
+              id: n.isarId);
         }
       }
     }
@@ -146,7 +147,7 @@ _handleChannelNotifications() async {
                 channelId: n.channelId,
                 lastSeenVideo: videos.videos.first.videoId
               },
-              id: n.id);
+              id: n.isarId);
         }
       }
     }

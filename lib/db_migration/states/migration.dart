@@ -125,16 +125,25 @@ class DbMigrationCubit extends Cubit<DbMigrationState> {
 
       _log.fine('Migration done');
 
+      var oldDbPath = oboxDb.store.directoryPath;
       oboxDb.close();
+      _renameOldDb(oldDbPath);
     });
     isarDb.close();
+
     while (state.timer > 0) {
       await Future.delayed(
         const Duration(seconds: 1),
         () => emit(state.copyWith(timer: state.timer - 1)),
       );
     }
+
     exit(0);
+  }
+
+  _renameOldDb(String oldPath) {
+    var db = Directory(oldPath);
+    db.renameSync('$oldPath-old');
   }
 }
 

@@ -64,6 +64,12 @@ class IsarDb extends IDbClient {
   }
 
   @override
+  void insertLogs(AppLog log) {
+    isar.writeTxnSync(() => isar.appLogs.putSync(log));
+    super.insertLogs(log);
+  }
+
+  @override
   cleanOldLogs() {
     isar.writeTxnSync(() {
       var all = isar.appLogs.where().findAllSync();

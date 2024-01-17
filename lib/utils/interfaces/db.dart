@@ -92,6 +92,7 @@ abstract class IDbClient {
 
   /// Call super at the end
   @mustCallSuper
+  @mustBeOverridden
   void insertLogs(AppLog log) {
     EasyDebounce.debounce('log-cleaning', const Duration(seconds: 5), () {
       cleanOldLogs();

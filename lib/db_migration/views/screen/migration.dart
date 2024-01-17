@@ -22,7 +22,12 @@ class MigrationScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const Center(child: Text('Migrating database...')),
+                  if (state.progress < 1)
+                    const Center(child: Text('Migrating database...')),
+                  if (state.progress == 1)
+                    const Center(
+                      child: Text('Done !'),
+                    ),
                   LinearProgressIndicator(
                     value: state.progress,
                   ),

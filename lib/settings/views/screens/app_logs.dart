@@ -55,9 +55,9 @@ class AppLogsScreen extends StatelessWidget {
                               '${log.message}${log.stacktrace != null ? '\n\n${log.stacktrace}' : ''}'),
                           dense: true,
                           visualDensity: VisualDensity.compact,
-                          value: _.selected.contains(log.id),
+                          value: _.selected.contains(log.isarId),
                           onChanged: (bool? value) =>
-                              cubit.selectLog(log.id, value),
+                              cubit.selectLog(log.isarId, value),
                         );
                       },
                       separatorBuilder: (BuildContext context, int index) {
