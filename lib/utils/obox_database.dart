@@ -263,19 +263,16 @@ class DbClient extends IDbClient {
     return all.firstOrNull ?? HomeLayout();
   }
 
-  @override
   SubscriptionNotification? getLastSubscriptionNotification() {
     return store.box<SubscriptionNotification>().getAll().lastOrNull;
   }
 
-  @override
   Future<void> setLastSubscriptionNotification(
       SubscriptionNotification sub) async {
     store.box<SubscriptionNotification>().removeAll();
     store.box<SubscriptionNotification>().put(sub);
   }
 
-  @override
   ChannelNotification? getChannelNotification(String channelId) {
     return store
         .box<ChannelNotification>()
@@ -284,22 +281,18 @@ class DbClient extends IDbClient {
         .findFirst();
   }
 
-  @override
   List<ChannelNotification> getAllChannelNotifications() {
     return store.box<ChannelNotification>().getAll();
   }
 
-  @override
   Future<void> deleteChannelNotification(ChannelNotification notif) async {
     store.box<ChannelNotification>().remove(notif.id);
   }
 
-  @override
   Future<void> upsertChannelNotification(ChannelNotification notif) async {
     store.box<ChannelNotification>().put(notif);
   }
 
-  @override
   Future<void> setChannelNotificationLastViewedVideo(
       String channelId, String videoId) async {
     var notif = getChannelNotification(channelId);
@@ -310,7 +303,6 @@ class DbClient extends IDbClient {
     }
   }
 
-  @override
   PlaylistNotification? getPlaylistNotification(String channelId) {
     return store
         .box<PlaylistNotification>()
@@ -319,22 +311,18 @@ class DbClient extends IDbClient {
         .findFirst();
   }
 
-  @override
   List<PlaylistNotification> getAllPlaylistNotifications() {
     return store.box<PlaylistNotification>().getAll();
   }
 
-  @override
   Future<void> deletePlaylistNotification(PlaylistNotification notif) async {
     store.box<PlaylistNotification>().remove(notif.id);
   }
 
-  @override
   Future<void> upsertPlaylistNotification(PlaylistNotification notif) async {
     store.box<PlaylistNotification>().put(notif);
   }
 
-  @override
   Future<void> setPlaylistNotificationLastViewedVideo(
       String playlistId, int videoCount) async {
     var notif = getPlaylistNotification(playlistId);

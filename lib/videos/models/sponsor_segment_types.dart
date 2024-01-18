@@ -1,5 +1,4 @@
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:invidious/utils/obox_database.dart';
 
 import '../../settings/models/db/settings.dart';
 

@@ -1,4 +1,3 @@
-import 'package:invidious/utils/obox_database.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/videos/models/base_video.dart';
 import 'package:invidious/videos/models/db/dearrow_cache.dart';

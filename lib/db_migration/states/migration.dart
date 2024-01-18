@@ -5,22 +5,6 @@ import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:logging/logging.dart';
 
-import '../../downloads/models/downloaded_video.dart';
-import '../../globals.dart';
-import '../../home/models/db/home_layout.dart';
-import '../../notifications/models/db/channel_notifications.dart';
-import '../../notifications/models/db/playlist_notifications.dart';
-import '../../notifications/models/db/subscription_notifications.dart';
-import '../../search/models/db/search_history_item.dart';
-import '../../settings/models/db/app_logs.dart';
-import '../../settings/models/db/server.dart';
-import '../../settings/models/db/settings.dart';
-import '../../settings/models/db/video_filter.dart';
-import '../../utils/obox_database.dart';
-import '../../videos/models/db/dearrow_cache.dart';
-import '../../videos/models/db/history_video_cache.dart';
-import '../../videos/models/db/progress.dart';
-
 part 'migration.freezed.dart';
 
 final _log = Logger('DbMigrationCubit');

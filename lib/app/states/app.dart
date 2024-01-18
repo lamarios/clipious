@@ -1,16 +1,15 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:invidious/router.dart';
 import 'package:logging/logging.dart';
 import 'package:receive_sharing_intent/receive_sharing_intent.dart';
 
-import '../../settings/models/db/settings.dart';
-import '../../utils/obox_database.dart';
 import '../../globals.dart';
 import '../../home/models/db/home_layout.dart';
 import '../../settings/models/db/server.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
+import '../../settings/models/db/settings.dart';
 
 part 'app.freezed.dart';
 

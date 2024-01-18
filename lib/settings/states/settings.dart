@@ -13,7 +13,6 @@ import 'package:locale_names/locale_names.dart';
 import 'package:logging/logging.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
-import '../../utils/obox_database.dart';
 import '../../globals.dart';
 import '../../home/models/db/home_layout.dart';
 import '../../player/states/player.dart';

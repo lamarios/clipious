@@ -1,12 +1,8 @@
 import 'package:easy_debounce/easy_debounce.dart';
-import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../downloads/models/downloaded_video.dart';
 import '../../home/models/db/home_layout.dart';
-import '../../notifications/models/db/channel_notifications.dart';
-import '../../notifications/models/db/playlist_notifications.dart';
-import '../../notifications/models/db/subscription_notifications.dart';
 import '../../search/models/db/search_history_item.dart';
 import '../../settings/models/db/app_logs.dart';
 import '../../settings/models/db/server.dart';

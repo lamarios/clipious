@@ -24,7 +24,6 @@ import 'package:invidious/utils/sembast_sqflite_database.dart';
 import 'package:invidious/workmanager.dart';
 import 'package:logging/logging.dart';
 
-import 'utils/obox_database.dart';
 import 'settings/models/db/app_logs.dart';
 
 const brandColor = Color(0xFF4f0096);

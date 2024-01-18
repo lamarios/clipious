@@ -1,12 +1,8 @@
 import 'dart:async';
-import 'dart:ffi';
 import 'dart:io';
 
 import 'package:invidious/downloads/models/downloaded_video.dart';
 import 'package:invidious/home/models/db/home_layout.dart';
-import 'package:invidious/notifications/models/db/channel_notifications.dart';
-import 'package:invidious/notifications/models/db/playlist_notifications.dart';
-import 'package:invidious/notifications/models/db/subscription_notifications.dart';
 import 'package:invidious/search/models/db/search_history_item.dart';
 import 'package:invidious/settings/models/db/app_logs.dart';
 import 'package:invidious/settings/models/db/server.dart';
@@ -20,8 +16,8 @@ import 'package:logging/logging.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 import 'package:sembast/sembast.dart';
-import 'package:sembast_sqflite/sembast_sqflite.dart';
 import 'package:sembast/sembast_memory.dart';
+import 'package:sembast_sqflite/sembast_sqflite.dart';
 import 'package:sqflite/sqflite.dart' as sqflite;
 
 import '../settings/states/settings.dart';
