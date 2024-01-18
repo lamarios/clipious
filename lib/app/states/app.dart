@@ -5,6 +5,7 @@ import 'package:invidious/router.dart';
 import 'package:logging/logging.dart';
 import 'package:receive_sharing_intent/receive_sharing_intent.dart';
 
+import '../../settings/models/db/settings.dart';
 import '../../utils/obox_database.dart';
 import '../../globals.dart';
 import '../../home/models/db/home_layout.dart';
@@ -19,9 +20,30 @@ class AppCubit extends Cubit<AppState> {
   late final StreamSubscription intentDataStreamSubscription;
   AppCubit(super.initialState) {
     onReady();
+    initState();
   }
 
-  onReady() {
+  initState() async {
+    Server? server;
+    try {
+      server = await db.getCurrentlySelectedServer();
+    } catch (e) {
+      server = null;
+    }
+    HomeLayout homeLayout = db.getHomeLayout();
+    bool isLoggedIn = (server?.authToken?.isNotEmpty ?? false) ||
+        (server?.sidCookie?.isNotEmpty ?? false);
+
+    var selectedIndex =
+        int.parse(db.getSettings(onOpenSettingName)?.value ?? '0');
+    if (!isLoggedIn && selectedIndex > 1 || selectedIndex < 0) {
+      selectedIndex = 0;
+    }
+    emit(state.copyWith(
+        selectedIndex: selectedIndex, homeLayout: homeLayout, server: server));
+  }
+
+  onReady() async {
     intentDataStreamSubscription =
         ReceiveSharingIntent.getTextStream().listen((String value) {
       openAppLink(value);
@@ -87,26 +109,6 @@ class AppCubit extends Cubit<AppState> {
 
 @freezed
 class AppState with _$AppState {
-  static AppState init() {
-    late Server? server;
-    try {
-      server = db.getCurrentlySelectedServer();
-    } catch (e) {
-      server = null;
-    }
-    HomeLayout homeLayout = db.getHomeLayout();
-    bool isLoggedIn = (server?.authToken?.isNotEmpty ?? false) ||
-        (server?.sidCookie?.isNotEmpty ?? false);
-
-    var selectedIndex =
-        int.parse(db.getSettings(onOpenSettingName)?.value ?? '0');
-    if (!isLoggedIn && selectedIndex > 1 || selectedIndex < 0) {
-      selectedIndex = 0;
-    }
-
-    return AppState(selectedIndex, server, homeLayout);
-  }
-
-  factory AppState(int selectedIndex, Server? server, HomeLayout homeLayout) =
-      _AppState;
+  const factory AppState(
+      int selectedIndex, Server? server, HomeLayout homeLayout) = _AppState;
 }

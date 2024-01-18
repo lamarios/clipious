@@ -11,14 +11,16 @@ import 'package:invidious/app/states/app.dart';
 import 'package:invidious/db_migration/migration_utils.dart';
 import 'package:invidious/downloads/states/download_manager.dart';
 import 'package:invidious/globals.dart';
+import 'package:invidious/home/models/db/home_layout.dart';
 import 'package:invidious/http_overrides.dart';
 import 'package:invidious/media_handler.dart';
 import 'package:invidious/notifications/notifications.dart';
 import 'package:invidious/player/states/player.dart';
 import 'package:invidious/router.dart';
+import 'package:invidious/settings/models/db/settings.dart';
 import 'package:invidious/settings/states/settings.dart';
 import 'package:invidious/utils.dart';
-import 'package:invidious/utils/isar_database.dart';
+import 'package:invidious/utils/sembast_sqflite_database.dart';
 import 'package:invidious/workmanager.dart';
 import 'package:logging/logging.dart';
 
@@ -37,12 +39,12 @@ final Logger log = Logger('main');
 Future<void> main() async {
   Logger.root.level =
       kDebugMode ? Level.FINEST : Level.INFO; // defaults to Level.INFO
-  Logger.root.onRecord.listen((record) {
+  Logger.root.onRecord.listen((record) async {
     debugPrint(
         '[${record.level.name}] [${record.loggerName}] ${record.message}');
     // we don't want debug
     if (record.level == Level.INFO || record.level == Level.SEVERE) {
-      db.insertLogs(AppLog(
+      await db.insertLogs(AppLog(
           logger: record.loggerName,
           level: record.level.name,
           time: record.time,
@@ -55,7 +57,7 @@ Future<void> main() async {
 
   WidgetsFlutterBinding.ensureInitialized();
   // FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
-  db = await IsarDb.create();
+  db = await SembastSqfDb.create();
 
   final needsDbMigration = await needsMigration();
   appRouter = AppRouter(needsDbMigration: needsDbMigration);
@@ -73,7 +75,7 @@ Future<void> main() async {
   runApp(MultiBlocProvider(providers: [
     BlocProvider(
       create: (context) {
-        return AppCubit(AppState.init());
+        return AppCubit(AppState(0, null, HomeLayout()));
       },
     ),
     BlocProvider(

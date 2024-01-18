@@ -253,7 +253,7 @@ class VideoPlayerCubit extends MediaPlayerCubit<VideoPlayerState> {
           liveStream: false,
         );
       } else {
-        String baseUrl = db.getCurrentlySelectedServer().url;
+        String baseUrl = (await db.getCurrentlySelectedServer()).url;
 
         Map<String, String> resolutions = {};
 

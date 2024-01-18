@@ -2,16 +2,16 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/settings/models/db/app_logs.dart';
 import 'package:invidious/settings/states/app_logs.dart';
+import 'package:invidious/utils/sembast_sqflite_database.dart';
 
-import '../../utils/memorydb.dart';
 
-void main() {
+Future<void> main() async {
   TestWidgetsFlutterBinding.ensureInitialized();
-  db = MemoryDB();
-  test('test logs', () {
+  db = await SembastSqfDb.createInMenory();
+  test('test logs', () async {
     // inserting more than expected ot make sure old stuff is culled
     for (int i = 0; i < 200; i++) {
-      db.insertLogs(AppLog(message: i.toString(), level: "info", logger: 'test_log', time: DateTime.now()));
+      await db.insertLogs(AppLog(message: i.toString(), level: "info", logger: 'test_log', time: DateTime.now()));
     }
 
     // we should be cutting old stuff

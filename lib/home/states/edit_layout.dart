@@ -8,8 +8,8 @@ class EditLayoutCubit extends Cubit<HomeLayout> {
   EditLayoutCubit(super.initialState);
 
   @override
-  void emit(HomeLayout state) {
-    db.upsertHomeLayout(state);
+  Future<void> emit(HomeLayout state) async {
+    await db.upsertHomeLayout(state);
     super.emit(state);
   }
 

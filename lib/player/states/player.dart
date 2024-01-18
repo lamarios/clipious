@@ -277,7 +277,7 @@ class PlayerCubit extends Cubit<PlayerState> with WidgetsBindingObserver {
   }
 */
 
-  saveProgress(int timeInSeconds) {
+  saveProgress(int timeInSeconds) async {
     if (state.currentlyPlaying != null) {
       int currentPosition = timeInSeconds;
       // saving progress
@@ -290,12 +290,12 @@ class PlayerCubit extends Cubit<PlayerState> with WidgetsBindingObserver {
       var progress = db_progress.Progress.named(
           progress: currentProgress, videoId: state.currentlyPlaying!.videoId);
 
-      db.saveProgress(progress);
+      await db.saveProgress(progress);
 
       if (progress.progress > 0.1) {
         EasyThrottle.throttle('invidious-progress-sync-${progress.videoId}',
-            const Duration(minutes: 10), () {
-          if (service.isLoggedIn()) {
+            const Duration(minutes: 10), () async {
+          if (await service.isLoggedIn()) {
             service.addToUserHistory(progress.videoId);
           }
         });
@@ -346,10 +346,10 @@ class PlayerCubit extends Cubit<PlayerState> with WidgetsBindingObserver {
     }
   }
 
-  onProgress(Duration? position) {
+  onProgress(Duration? position) async {
     var newPosition = position ?? Duration.zero;
     int currentPosition = newPosition.inSeconds;
-    saveProgress(currentPosition);
+    await saveProgress(currentPosition);
     log.fine("video event");
 
     emit(state.copyWith(position: newPosition));

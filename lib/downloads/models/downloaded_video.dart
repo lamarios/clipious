@@ -1,21 +1,18 @@
 import 'dart:io';
 
 import 'package:invidious/videos/models/base_video.dart';
-import 'package:isar/isar.dart';
+import 'package:json_annotation/json_annotation.dart';
 import 'package:objectbox/objectbox.dart' as obox;
 import 'package:path_provider/path_provider.dart';
 
 part 'downloaded_video.g.dart';
 
 @obox.Entity()
-@collection
+@JsonSerializable()
 class DownloadedVideo extends IdedVideo {
   @obox.Id()
-  @ignore
+  @JsonKey(includeFromJson: false, includeToJson: false)
   int id = 0;
-
-  @obox.Transient()
-  Id isarId = Isar.autoIncrement;
 
   String title;
   String? author;
@@ -29,15 +26,18 @@ class DownloadedVideo extends IdedVideo {
   @override
   set videoId(String videoId) => super.videoId = videoId;
 
+  @override
+  String get videoId => super.videoId;
+
   @obox.Transient()
-  @ignore
+  @JsonKey(includeFromJson: false, includeToJson: false)
   Future<String> get mediaPath async {
     Directory dir = await getApplicationDocumentsDirectory();
     return "${dir.path}/$videoId.${audioOnly ? 'webm' : 'mp4'}";
   }
 
   @obox.Transient()
-  @ignore
+  @JsonKey(includeFromJson: false, includeToJson: false)
   Future<String> get thumbnailPath async {
     Directory dir = await getApplicationDocumentsDirectory();
     return "${dir.path}/$videoId.jpg";
@@ -55,4 +55,9 @@ class DownloadedVideo extends IdedVideo {
       this.lengthSeconds = 1,
       this.quality = '720p'})
       : super(videoId);
+
+  factory DownloadedVideo.fromJson(Map<String, dynamic> json) =>
+      _$DownloadedVideoFromJson(json);
+
+  Map<String, dynamic> toJson() => _$DownloadedVideoToJson(this);
 }

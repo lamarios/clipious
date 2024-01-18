@@ -1,27 +1,37 @@
 import 'package:bloc/bloc.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../app/states/app.dart';
 import '../../globals.dart';
 import '../models/db/server.dart';
 
-class ServerSettingsCubit extends Cubit<Server> {
+part 'server_settings.freezed.dart';
+
+class ServerSettingsCubit extends Cubit<ServerSettingsState> {
   final AppCubit app;
 
-  ServerSettingsCubit(super.initialState, this.app);
-
-  useServer(bool value) {
-    db.useServer(state);
-    state.inUse = true;
-    emit(state);
-    app.setServer(state);
+  ServerSettingsCubit(super.initialState, this.app) {
+    canDelete();
   }
 
-  void logOut() {
-    Server s = state;
+  useServer(bool value) async {
+    await db.useServer(state.server);
+    await fileDb.useServer(state.server);
+    Server s = state.server.copyWith(inUse: true);
+    s.inUse = true;
+    emit(state.copyWith(server: s));
+    app.setServer(state.server);
+  }
+
+  Future<void> logOut() async {
+    Server s = state.server.copyWith();
     s.sidCookie = null;
     s.authToken = null;
-    db.upsertServer(s);
-    emit(s);
+    await db.upsertServer(s);
+    if (s.inUse) {
+      await fileDb.useServer(s);
+    }
+    emit(state.copyWith(server: s));
     // we only refresh the app if the app is currently on this server
     if (app.state.server?.url == s.url) {
       app.setServer(s.copyWith());
@@ -29,9 +39,10 @@ class ServerSettingsCubit extends Cubit<Server> {
   }
 
   Future<void> logInWithToken() async {
-    await service.logIn(state.url);
-    Server server = db.getServer(state.url)!;
-    emit(server);
+    var s = state.server.copyWith();
+    await service.logIn(s.url);
+    Server server = db.getServer(s.url)!;
+    emit(state.copyWith(server: s));
     // we only refresh the app if the app is currently on this server
     if (app.state.server?.url == server.url) {
       app.setServer(server.copyWith());
@@ -39,29 +50,33 @@ class ServerSettingsCubit extends Cubit<Server> {
   }
 
   Future<void> logInWithCookie(String username, String password) async {
-    var state = this.state.copyWith();
-    String cookie =
-        await service.loginWithCookies(state.url, username, password);
+    var s = state.server.copyWith();
+    String cookie = await service.loginWithCookies(s.url, username, password);
 
-    state.sidCookie = cookie;
-    db.upsertServer(state);
-    emit(state);
+    s.sidCookie = cookie;
+    await db.upsertServer(s);
+    if (s.inUse) {
+      fileDb.useServer(s);
+    }
+    emit(state.copyWith(server: s));
     // we only refresh the app if the app is currently on this server
-    if (app.state.server?.url == state.url) {
-      app.setServer(state.copyWith());
+    if (app.state.server?.url == s.url) {
+      app.setServer(s);
     }
   }
 
-  deleteServer() {
-    db.deleteServer(state);
-    // widget.refreshServers();
+  deleteServer() async {
+    await db.deleteServer(state.server);
 
-    Server currentServer = db.getCurrentlySelectedServer();
-    emit(state);
+    Server currentServer = await db.getCurrentlySelectedServer();
+    emit(state.copyWith());
     app.setServer(currentServer);
   }
 
-  bool get canDelete => db.getServers().length > 1;
+  Future<void> canDelete() async {
+    bool canDelete = (await db.getServers()).length > 1;
+    emit(state.copyWith(canDelete: canDelete));
+  }
 }
 
 /*
@@ -73,3 +88,10 @@ class ServerSettingsController {
 
 }
 */
+
+@freezed
+class ServerSettingsState with _$ServerSettingsState {
+  const factory ServerSettingsState(
+      {required Server server,
+      @Default(false) bool canDelete}) = _ServerSettingsState;
+}

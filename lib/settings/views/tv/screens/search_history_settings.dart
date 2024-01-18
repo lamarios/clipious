@@ -43,8 +43,10 @@ class TvSearchHistorySettingsScreen extends StatelessWidget {
           ),
           TvButton(
             onPressed: (context) async {
-              db.clearSearchHistory();
-              Navigator.of(context).pop();
+              await db.clearSearchHistory();
+              if (context.mounted) {
+                Navigator.of(context).pop();
+              }
             },
             focusedColor: Colors.red,
             child: Padding(

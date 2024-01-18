@@ -4,7 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/utils.dart';
 import 'package:invidious/videos/models/base_video.dart';
-import 'package:isar/isar.dart';
+import 'package:json_annotation/json_annotation.dart';
 import 'package:logging/logging.dart';
 import 'package:objectbox/objectbox.dart' as obox;
 
@@ -60,23 +60,18 @@ enum FilterOperation {
 }
 
 @obox.Entity()
-@collection
+@JsonSerializable()
 @CopyWith(constructor: "_")
 class VideoFilter {
   @obox.Id()
-  @ignore
+  @JsonKey(includeFromJson: false, includeToJson: false)
   int id = 0;
-
-  @obox.Transient()
-  Id isarId = Isar.autoIncrement;
 
   String? channelId;
 
   @obox.Transient()
-  @ignore
   FilterOperation? operation = FilterOperation.contain;
   @obox.Transient()
-  @ignore
   FilterType? type = FilterType.title;
 
   String? value;
@@ -94,7 +89,6 @@ class VideoFilter {
       this.hideFromFeed,
       this.daysOfWeek,
       this.startTime,
-      this.isarId,
       this.endTime);
 
   VideoFilter({required this.value, this.channelId});
@@ -106,6 +100,11 @@ class VideoFilter {
   List<int> daysOfWeek = wholeWeek;
   String startTime = defaultStartTime;
   String endTime = defaultEndTime;
+
+  factory VideoFilter.fromJson(Map<String, dynamic> json) =>
+      _$VideoFilterFromJson(json);
+
+  Map<String, dynamic> toJson() => _$VideoFilterToJson(this);
 
   set dbType(String? value) {
     type =

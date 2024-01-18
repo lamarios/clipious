@@ -21,47 +21,6 @@ import '../settings/models/db/app_logs.dart';
 import '../settings/models/db/server.dart';
 import '../settings/models/db/video_filter.dart';
 
-const selectedServer = 'selected-server';
-const useSponsorBlock = 'use-sponsor-block';
-const sponsorBlockPrefix = 'sponsor-block-';
-const browsingCountry = 'browsing-country';
-const dynamicTheme = 'dynamic-theme';
-const useDashSettingName = 'use-dash';
-const playerRepeat = 'player-repeat';
-const playerShuffle = 'player-shuffle';
-const playerAutoplayOnLoad = 'player-autoplay-on-load';
-const playRecommendedNextSettingName = 'play-recommended-next';
-const useProxySettingName = 'use-proxy';
-const useReturnYoutubeDislikeSettingName = 'use-return-youtube-dislike';
-const blackBackgroundSettingName = 'black-background';
-const subtitleSizeSettingName = 'subtitles-size';
-const rememberLastSubtitle = 'remember-last-subtitle';
-const lastSubtitle = 'last-subtitle';
-const skipSslVerificationSettingName = 'skip-ssl-verification';
-const themeModeSettingName = 'theme-mode';
-const localeSettingName = 'locale';
-const useSearchHistorySettingName = 'use-search-history';
-const searchHistoryLimitSettingName = 'search-history-limit';
-const hideFilteredVideo = 'hide-filtered-videos';
-const remeberPlaybackSpeed = 'remember-playback-speed';
-const lastSpeedSettingName = 'last-speed';
-const lockOrientationFullScreen = 'lock-orientation-fullscreen';
-const skipStepSettingName = 'skip-step';
-const skipExponentialSettingName = 'skip-exponentially';
-const fillFullScreen = 'fill-fullscreen';
-const appLayoutSettingName = 'app-layout';
-const navigationBarLabelBehaviorSettingName = 'navigation-bar-label-behavior';
-const distractionFreeModeSettingName = 'distraction-free-mode';
-const backgroundNotificationsSettingName = 'background-notifications';
-const subscriptionNotifications = 'subscriptions-notifications';
-const backgroundCheckFrequency = "background-check-frequency";
-const subtitleBackground = 'subtitle-background';
-const dearrowSettingName = 'dearrow';
-const dearrowThumbnailsSettingName = "dearrow-thumbnails";
-const fullScreenOnLandscapeSettingName = "fullscreen-on-landscape";
-
-const onOpenSettingName = "on-open";
-
 const maxLogs = 1000;
 
 class DbClient extends IDbClient {
@@ -114,7 +73,7 @@ class DbClient extends IDbClient {
   }
 
   @override
-  List<Server> getServers() {
+  Future<List<Server>> getServers() async {
     return store.box<Server>().getAll();
   }
 
@@ -167,8 +126,8 @@ class DbClient extends IDbClient {
   }
 
   @override
-  void useServer(Server server) {
-    List<Server> servers = getServers();
+  Future<void> useServer(Server server) async {
+    List<Server> servers = await getServers();
     for (Server s in servers) {
       s.inUse = false;
     }
@@ -193,13 +152,13 @@ class DbClient extends IDbClient {
   }
 
   @override
-  void addToSearchHistory(SearchHistoryItem searchHistoryItem) {
+  Future<void> addToSearchHistory(SearchHistoryItem searchHistoryItem) async {
     store.box<SearchHistoryItem>().put(searchHistoryItem);
     clearExcessSearchHistory();
   }
 
   @override
-  void clearExcessSearchHistory() {
+  Future<void> clearExcessSearchHistory() async {
     final limit = int.parse(getSettings(searchHistoryLimitSettingName)?.value ??
         searchHistoryDefaultLength);
     if (store.box<SearchHistoryItem>().count() > limit) {
@@ -209,18 +168,18 @@ class DbClient extends IDbClient {
   }
 
   @override
-  void clearSearchHistory() {
+  Future<void> clearSearchHistory() async {
     store.box<SearchHistoryItem>().removeAll();
   }
 
   @override
-  void insertLogs(AppLog log) {
+  Future<void> insertLogs(AppLog log) async {
     store.box<AppLog>().put(log);
     super.insertLogs(log);
   }
 
   @override
-  void cleanOldLogs() {
+  Future<void> cleanOldLogs() async {
     var all = store.box<AppLog>().getAll();
 
     List<int> ids = all.reversed.skip(maxLogs).map((e) => e.id).toList();
@@ -239,12 +198,12 @@ class DbClient extends IDbClient {
   }
 
   @override
-  void saveFilter(VideoFilter filter) {
+  Future<void> saveFilter(VideoFilter filter) async {
     store.box<VideoFilter>().put(filter);
   }
 
   @override
-  void deleteFilter(VideoFilter filter) {
+  Future<void> deleteFilter(VideoFilter filter) async {
     store.box<VideoFilter>().remove(filter.id);
   }
 
@@ -254,12 +213,12 @@ class DbClient extends IDbClient {
   }
 
   @override
-  void upsertDownload(DownloadedVideo vid) {
+  Future<void> upsertDownload(DownloadedVideo vid) async {
     store.box<DownloadedVideo>().put(vid);
   }
 
   @override
-  void deleteDownload(DownloadedVideo vid) {
+  Future<void> deleteDownload(DownloadedVideo vid) async {
     store.box<DownloadedVideo>().remove(vid.id);
   }
 
@@ -287,13 +246,13 @@ class DbClient extends IDbClient {
   }
 
   @override
-  void upsertHistoryVideo(HistoryVideoCache vid) {
+  Future<void> upsertHistoryVideo(HistoryVideoCache vid) async {
     store.box<HistoryVideoCache>().put(vid);
   }
 
   // we only want one layout
   @override
-  void upsertHomeLayout(HomeLayout layout) {
+  Future<void> upsertHomeLayout(HomeLayout layout) async {
     store.box<HomeLayout>().removeAll();
     store.box<HomeLayout>().put(layout);
   }
@@ -310,7 +269,8 @@ class DbClient extends IDbClient {
   }
 
   @override
-  void setLastSubscriptionNotification(SubscriptionNotification sub) {
+  Future<void> setLastSubscriptionNotification(
+      SubscriptionNotification sub) async {
     store.box<SubscriptionNotification>().removeAll();
     store.box<SubscriptionNotification>().put(sub);
   }
@@ -330,17 +290,18 @@ class DbClient extends IDbClient {
   }
 
   @override
-  void deleteChannelNotification(ChannelNotification notif) {
+  Future<void> deleteChannelNotification(ChannelNotification notif) async {
     store.box<ChannelNotification>().remove(notif.id);
   }
 
   @override
-  void upsertChannelNotification(ChannelNotification notif) {
+  Future<void> upsertChannelNotification(ChannelNotification notif) async {
     store.box<ChannelNotification>().put(notif);
   }
 
   @override
-  void setChannelNotificationLastViewedVideo(String channelId, String videoId) {
+  Future<void> setChannelNotificationLastViewedVideo(
+      String channelId, String videoId) async {
     var notif = getChannelNotification(channelId);
     if (notif != null) {
       notif.lastSeenVideoId = videoId;
@@ -364,18 +325,18 @@ class DbClient extends IDbClient {
   }
 
   @override
-  void deletePlaylistNotification(PlaylistNotification notif) {
+  Future<void> deletePlaylistNotification(PlaylistNotification notif) async {
     store.box<PlaylistNotification>().remove(notif.id);
   }
 
   @override
-  void upsertPlaylistNotification(PlaylistNotification notif) {
+  Future<void> upsertPlaylistNotification(PlaylistNotification notif) async {
     store.box<PlaylistNotification>().put(notif);
   }
 
   @override
-  void setPlaylistNotificationLastViewedVideo(
-      String playlistId, int videoCount) {
+  Future<void> setPlaylistNotificationLastViewedVideo(
+      String playlistId, int videoCount) async {
     var notif = getPlaylistNotification(playlistId);
     if (notif != null) {
       notif.lastVideoCount = videoCount;
@@ -394,7 +355,7 @@ class DbClient extends IDbClient {
   }
 
   @override
-  void upsertDeArrowCache(DeArrowCache cache) {
+  Future<void> upsertDeArrowCache(DeArrowCache cache) async {
     store.box<DeArrowCache>().put(cache);
   }
 }

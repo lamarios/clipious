@@ -33,6 +33,7 @@ class AddToPlaylistCubit extends Cubit<AddToPlaylistController> {
   }
 
   Future<void> onReady() async {
+    emit(state.copyWith(isLoggedIn: await service.isLoggedIn()));
     await getAllPlaylists();
     await countPlaylistsForVideo();
     await checkVideoLikeStatus();
@@ -130,6 +131,6 @@ class AddToPlaylistController with _$AddToPlaylistController {
       required bool isLoggedIn}) = _AddToPlaylistController;
 
   static AddToPlaylistController init(String videoId) {
-    return AddToPlaylistController(videoId, isLoggedIn: service.isLoggedIn());
+    return AddToPlaylistController(videoId, isLoggedIn: false);
   }
 }

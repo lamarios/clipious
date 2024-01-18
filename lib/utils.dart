@@ -134,7 +134,8 @@ void showSharingSheet(BuildContext context, ShareLinks links,
                     final timestamp = await getTimestamp();
 
                     Share.share(links.getInvidiousLink(
-                        db.getCurrentlySelectedServer(), timestamp?.inSeconds));
+                        await db.getCurrentlySelectedServer(),
+                        timestamp?.inSeconds));
                     if (context.mounted) {
                       Navigator.of(context).pop();
                     }

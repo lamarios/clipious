@@ -21,20 +21,20 @@ class BellIconCubit extends Cubit<bool> {
     onInit();
   }
 
-  void onInit() {
+  Future<void> onInit() async {
     if (settings.state.backgroundNotifications) {
-      emit(getNotification());
+      emit(await getNotification());
     } else {
       emit(false);
     }
   }
 
-  bool getNotification() {
+  Future<bool> getNotification() async {
     switch (type) {
       case BellIconType.channel:
-        return db.getChannelNotification(itemId) != null;
+        return await fileDb.getChannelNotification(itemId) != null;
       case BellIconType.playlist:
-        return db.getPlaylistNotification(itemId) != null;
+        return await fileDb.getPlaylistNotification(itemId) != null;
     }
   }
 
@@ -57,7 +57,7 @@ class BellIconCubit extends Cubit<bool> {
       switch (type) {
         case BellIconType.channel:
           var channel = await service.getChannel(itemId);
-          db.upsertChannelNotification(ChannelNotification(
+          await fileDb.upsertChannelNotification(ChannelNotification(
               itemId,
               channel.author,
               channel.latestVideos?.firstOrNull?.videoId ?? '',
@@ -65,7 +65,7 @@ class BellIconCubit extends Cubit<bool> {
           break;
         case BellIconType.playlist:
           var playlist = await service.getPublicPlaylists(itemId);
-          db.upsertPlaylistNotification(PlaylistNotification(
+          await fileDb.upsertPlaylistNotification(PlaylistNotification(
               itemId,
               playlist.videoCount,
               DateTime.now().millisecondsSinceEpoch,
@@ -76,16 +76,16 @@ class BellIconCubit extends Cubit<bool> {
     } else {
       switch (type) {
         case BellIconType.channel:
-          var notif = db.getChannelNotification(itemId);
+          var notif = await fileDb.getChannelNotification(itemId);
           if (notif != null) {
-            db.deleteChannelNotification(notif);
+            await fileDb.deleteChannelNotification(notif);
             emit(false);
           }
           break;
         case BellIconType.playlist:
-          var notif = db.getPlaylistNotification(itemId);
+          var notif = await fileDb.getPlaylistNotification(itemId);
           if (notif != null) {
-            db.deletePlaylistNotification(notif);
+            await fileDb.deletePlaylistNotification(notif);
             emit(false);
           }
       }

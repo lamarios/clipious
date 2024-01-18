@@ -24,7 +24,7 @@ class DownloadedVideoView extends StatelessWidget {
     var player = context.read<PlayerCubit>();
     return BlocProvider(
       create: (BuildContext context) => DownloadedVideoCubit(
-          downloadManager, DownloadedVideoState.init(video.isarId), player),
+          downloadManager, DownloadedVideoState.init(video.id), player),
       child: BlocBuilder<DownloadedVideoCubit, DownloadedVideoState>(
           builder: (context, _) {
         bool downloadFailed = _.video?.downloadFailed ?? false;

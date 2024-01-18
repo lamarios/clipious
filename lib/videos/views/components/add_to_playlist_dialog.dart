@@ -72,9 +72,9 @@ class AddToPlaylistDialog extends StatelessWidget {
             ));
   }
 
-  openServerSettings(BuildContext context) {
-    AutoRouter.of(context)
-        .push(ManageSingleServerRoute(server: db.getCurrentlySelectedServer()));
+  openServerSettings(BuildContext context) async {
+    AutoRouter.of(context).push(
+        ManageSingleServerRoute(server: await db.getCurrentlySelectedServer()));
   }
 
   @override

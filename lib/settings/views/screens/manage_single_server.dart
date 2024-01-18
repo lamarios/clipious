@@ -86,10 +86,11 @@ class ManageSingleServerScreen extends StatelessWidget {
     SettingsThemeData theme = settingsTheme(colorScheme);
 
     return BlocProvider(
-      create: (context) =>
-          ServerSettingsCubit(server, context.read<AppCubit>()),
-      child: BlocBuilder<ServerSettingsCubit, Server>(
-        builder: (context, server) {
+      create: (context) => ServerSettingsCubit(
+          ServerSettingsState(server: server), context.read<AppCubit>()),
+      child: BlocBuilder<ServerSettingsCubit, ServerSettingsState>(
+        builder: (context, state) {
+          var server = state.server;
           var cubit = context.read<ServerSettingsCubit>();
           bool isLoggedIn =
               (server.authToken != null && server.authToken!.isNotEmpty) ||
@@ -149,21 +150,23 @@ class ManageSingleServerScreen extends StatelessWidget {
                           ]),
                       SettingsSection(title: const Text(''), tiles: [
                         SettingsTile(
-                          enabled: cubit.canDelete,
-                          onPressed: (context) {
-                            cubit.deleteServer();
-                            Navigator.of(context).pop();
+                          enabled: state.canDelete,
+                          onPressed: (context) async {
+                            await cubit.deleteServer();
+                            if (context.mounted) {
+                              Navigator.of(context).pop();
+                            }
                           },
                           leading: Icon(
                             Icons.delete,
-                            color: cubit.canDelete
+                            color: state.canDelete
                                 ? Colors.red
                                 : Colors.red.withOpacity(0.5),
                           ),
                           title: Text(
                             locals.delete,
                             style: TextStyle(
-                                color: cubit.canDelete
+                                color: state.canDelete
                                     ? Colors.red
                                     : Colors.red.withOpacity(0.5)),
                           ),

@@ -1,8 +1,8 @@
 import 'package:invidious/globals.dart';
 import 'package:invidious/settings/models/db/server.dart';
+import 'package:invidious/utils/sembast_sqflite_database.dart';
 
 import '../globals.dart';
-import 'memorydb.dart';
 
 Future<Server> getLoggedInTestServer() async {
   var server = Server(url: localInvidiousServer);
@@ -11,17 +11,17 @@ Future<Server> getLoggedInTestServer() async {
 }
 
 Future<void> setUpTestsForTestServer() async{
-  db = MemoryDB();
+  db = await SembastSqfDb.createInMenory();
   var server = await getLoggedInTestServer();
-  db.upsertServer(server);
-  db.useServer(server);
+  await db.upsertServer(server);
+  await db.useServer(server);
 }
 
 Future<void> cleanUpTestServer() async {
   var server = await getLoggedInTestServer();
-  db.upsertServer(server);
+  await db.upsertServer(server);
 
-  db.useServer(server);
+  await db.useServer(server);
 
   // removing all subscriptions
   var subs = await service.getSubscriptions();

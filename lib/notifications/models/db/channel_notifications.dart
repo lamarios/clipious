@@ -1,21 +1,17 @@
-import 'package:isar/isar.dart';
+import 'package:json_annotation/json_annotation.dart';
 import 'package:objectbox/objectbox.dart' as obox;
 
 part 'channel_notifications.g.dart';
 
-@collection
 @obox.Entity()
+@JsonSerializable()
 class ChannelNotification {
   @obox.Id()
-  @ignore
+  @JsonKey(includeFromJson: false, includeToJson: false)
   int id = 0;
 
-  @obox.Transient()
-  Id isarId = Isar.autoIncrement;
-
   @obox.Unique(onConflict: obox.ConflictStrategy.replace)
-  @Index(unique: true, replace: true)
-  String channelId;
+  final String channelId;
 
   String lastSeenVideoId;
 
@@ -29,4 +25,9 @@ class ChannelNotification {
     this.lastSeenVideoId,
     this.timestamp,
   );
+
+  factory ChannelNotification.fromJson(Map<String, dynamic> json) =>
+      _$ChannelNotificationFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ChannelNotificationToJson(this);
 }

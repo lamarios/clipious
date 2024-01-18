@@ -340,9 +340,11 @@ class VideoFilterSetupScreen extends StatelessWidget {
                       padding: const EdgeInsets.all(8.0),
                       child: FilledButton(
                           onPressed: cubit.isFilterValid()
-                              ? () {
-                                  cubit.onSave();
-                                  AutoRouter.of(context).pop();
+                              ? () async {
+                                  await cubit.onSave();
+                                  if (context.mounted) {
+                                    AutoRouter.of(context).pop();
+                                  }
                                 }
                               : null,
                           child: Text(locals.save)),

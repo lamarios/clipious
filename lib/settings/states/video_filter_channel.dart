@@ -35,9 +35,9 @@ class VideoFilterChannelCubit extends Cubit<VideoFilterChannelState> {
     }
   }
 
-  void deleteFilter(VideoFilter filter) {
+  Future<void> deleteFilter(VideoFilter filter) async {
     var state = this.state.copyWith();
-    db.deleteFilter(filter);
+    await db.deleteFilter(filter);
     emit(state);
   }
 }

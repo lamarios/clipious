@@ -168,13 +168,14 @@ class TVSettingsScreen extends StatelessWidget {
                 BlocBuilder<AppCubit, AppState>(
                     buildWhen: (previous, current) =>
                         previous.server != current.server,
-                    builder: (context, app) => SettingsTile(
-                        title: locals.manageServers,
-                        description: app.server != null
-                            ? locals.currentServer(
-                                db.getCurrentlySelectedServer().url)
-                            : "",
-                        onSelected: openManageServers)),
+                    builder: (context, app) {
+                      return SettingsTile(
+                          title: locals.manageServers,
+                          description: app.server != null
+                              ? locals.currentServer(app.server!.url)
+                              : "",
+                          onSelected: openManageServers);
+                    }),
                 SettingsTitle(title: locals.videoPlayer),
                 SettingsTile(
                   title: locals.useDash,
@@ -193,13 +194,13 @@ class TVSettingsScreen extends StatelessWidget {
                   value: _.skipStep.floor(),
                   description: locals.skipStepDescription,
                   possibleValues: skipSteps,
-                  onNewValue: (i) => cubit.skipStep = i,
+                  onNewValue: cubit.setSkipStep,
                 ),
                 SettingsTile(
                   title: locals.exponentialSkip,
                   description: locals.exponentialSkipDescription,
                   onSelected: (context) =>
-                      cubit.skipExponentially = !_.skipExponentially,
+                      cubit.setSkipExponentially(!_.skipExponentially),
                   trailing:
                       Switch(onChanged: (value) {}, value: _.skipExponentially),
                 ),

@@ -16,7 +16,6 @@ import '../../settings/models/db/app_logs.dart';
 import '../../settings/models/db/server.dart';
 import '../../settings/models/db/settings.dart';
 import '../../settings/models/db/video_filter.dart';
-import '../../utils/isar_database.dart';
 import '../../utils/obox_database.dart';
 import '../../videos/models/db/dearrow_cache.dart';
 import '../../videos/models/db/history_video_cache.dart';
@@ -40,6 +39,7 @@ class DbMigrationCubit extends Cubit<DbMigrationState> {
   }
 
   migrateDb() async {
+/*
     late DbClient oboxDb;
     var isarDb = db as IsarDb;
 
@@ -139,6 +139,7 @@ class DbMigrationCubit extends Cubit<DbMigrationState> {
     }
 
     exit(0);
+*/
   }
 
   _renameOldDb(String oldPath) {

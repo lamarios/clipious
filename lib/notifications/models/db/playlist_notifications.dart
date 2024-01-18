@@ -1,21 +1,17 @@
-import 'package:isar/isar.dart';
+import 'package:json_annotation/json_annotation.dart';
 import 'package:objectbox/objectbox.dart' as obox;
 
 part 'playlist_notifications.g.dart';
 
 @obox.Entity()
-@collection
+@JsonSerializable()
 class PlaylistNotification {
   @obox.Id()
-  @ignore
+  @JsonKey(includeFromJson: false, includeToJson: false)
   int id = 0;
 
-  @obox.Transient()
-  Id isarId = Isar.autoIncrement;
-
   @obox.Unique(onConflict: obox.ConflictStrategy.replace)
-  @Index(unique: true, replace: true)
-  String playlistId;
+  final String playlistId;
 
   int lastVideoCount = 0;
 
@@ -25,4 +21,9 @@ class PlaylistNotification {
 
   PlaylistNotification(
       this.playlistId, this.lastVideoCount, this.timestamp, this.playlistName);
+
+  factory PlaylistNotification.fromJson(Map<String, dynamic> json) =>
+      _$PlaylistNotificationFromJson(json);
+
+  Map<String, dynamic> toJson() => _$PlaylistNotificationToJson(this);
 }

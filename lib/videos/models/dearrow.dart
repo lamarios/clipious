@@ -4,6 +4,8 @@ import 'package:invidious/videos/models/base_video.dart';
 import 'package:invidious/videos/models/db/dearrow_cache.dart';
 import 'package:json_annotation/json_annotation.dart';
 
+import '../../settings/models/db/settings.dart';
+
 part 'dearrow.g.dart';
 
 @JsonSerializable()
@@ -81,7 +83,7 @@ class DeArrow {
     newCache.title = deArrow?.titles.firstOrNull?.title;
     newCache.url = deArrow?.thumbnailUrl;
     if (newCache.title != null || newCache.url != null) {
-      db.upsertDeArrowCache(newCache);
+      await db.upsertDeArrowCache(newCache);
     }
   }
 }

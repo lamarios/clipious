@@ -1,36 +1,32 @@
 import 'package:copy_with_extension/copy_with_extension.dart';
-import 'package:isar/isar.dart';
+import 'package:json_annotation/json_annotation.dart';
 import 'package:objectbox/objectbox.dart' as obox;
 
 part 'server.g.dart';
 
 @obox.Entity()
 @CopyWith()
-@collection
+@JsonSerializable()
 class Server {
-  @ignore
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @obox.Id()
   int id = -1;
 
-  @obox.Transient()
-  Id isarId;
-
   @obox.Unique(onConflict: obox.ConflictStrategy.replace)
-  @Index(unique: true, replace: true)
   String url;
   String? authToken;
   String? sidCookie;
 
   @obox.Transient()
-  @ignore
+  @JsonKey(includeFromJson: false, includeToJson: false)
   Duration? ping;
 
   @obox.Transient()
-  @ignore
+  @JsonKey(includeFromJson: false, includeToJson: false)
   String? flag;
 
   @obox.Transient()
-  @ignore
+  @JsonKey(includeFromJson: false, includeToJson: false)
   String? region;
 
   bool inUse;
@@ -42,6 +38,9 @@ class Server {
       this.ping,
       this.flag,
       this.region,
-      this.isarId = Isar.autoIncrement,
       this.inUse = false});
+
+  factory Server.fromJson(Map<String, dynamic> json) => _$ServerFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ServerToJson(this);
 }

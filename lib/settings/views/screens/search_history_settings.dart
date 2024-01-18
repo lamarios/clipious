@@ -32,9 +32,11 @@ class SearchHistorySettingsScreen extends StatelessWidget {
                   ),
                   TextButton(
                     child: Text(locals.ok),
-                    onPressed: () {
-                      db.clearSearchHistory();
-                      Navigator.of(context).pop();
+                    onPressed: () async {
+                      await db.clearSearchHistory();
+                      if (context.mounted) {
+                        Navigator.of(context).pop();
+                      }
                     },
                   ),
                 ])));

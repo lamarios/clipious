@@ -96,7 +96,7 @@ class VideoFilterChannel extends StatelessWidget {
                         performsFirstActionWithFullSwipe: true,
                         onTap: (handler) async {
                           await handler(true);
-                          cubit.deleteFilter(e);
+                          await cubit.deleteFilter(e);
                           filterCubit.refreshFilters();
                         },
                       ),

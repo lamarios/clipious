@@ -25,8 +25,7 @@ class ChannelNotificationList extends StatelessWidget {
   Widget build(BuildContext context) {
     var colors = Theme.of(context).colorScheme;
     return BlocProvider(
-        create: (context) =>
-            ChannelNotificationListCubit(db.getAllChannelNotifications()),
+        create: (context) => ChannelNotificationListCubit([]),
         child: BlocBuilder<ChannelNotificationListCubit,
             List<ChannelNotification>>(builder: (context, channels) {
           return Padding(

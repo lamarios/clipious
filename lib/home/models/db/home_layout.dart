@@ -2,9 +2,9 @@ import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:invidious/app/states/app.dart';
 import 'package:invidious/videos/models/video_in_list.dart';
-import 'package:isar/isar.dart';
 import 'package:objectbox/objectbox.dart' as obox;
 
 import '../../../downloads/states/download_manager.dart';
@@ -208,33 +208,28 @@ enum HomeDataSource {
   }
 }
 
-// isar
-@collection
 // objectBox
 @obox.Entity()
 @CopyWith(constructor: "_")
+@JsonSerializable()
 class HomeLayout {
   @obox.Id()
-  @ignore
+  @JsonKey(includeFromJson: false, includeToJson: false)
   int id = 0;
 
   @obox.Transient()
-  Id isarId = Isar.autoIncrement;
-
-  @ignore
-  @obox.Transient()
+  @JsonKey(includeFromJson: false, includeToJson: false)
   List<HomeDataSource> smallSources = [HomeDataSource.popular];
 
-  @ignore
   @obox.Transient()
+  @JsonKey(includeFromJson: false, includeToJson: false)
   HomeDataSource bigSource = HomeDataSource.trending;
 
   bool showBigSource = true;
 
   HomeLayout();
 
-  HomeLayout._(this.id, this.isarId, this.smallSources, this.bigSource,
-      this.showBigSource);
+  HomeLayout._(this.id, this.smallSources, this.bigSource, this.showBigSource);
 
   String get dbBigSource => bigSource.name;
 
@@ -256,4 +251,9 @@ class HomeLayout {
             HomeDataSource.trending)
         .toList();
   }
+
+  factory HomeLayout.fromJson(Map<String, dynamic> json) =>
+      _$HomeLayoutFromJson(json);
+
+  Map<String, dynamic> toJson() => _$HomeLayoutToJson(this);
 }

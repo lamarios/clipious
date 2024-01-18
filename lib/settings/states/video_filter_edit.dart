@@ -99,11 +99,12 @@ class VideoFilterEditCubit extends Cubit<VideoFilterEditState> {
             (state.filter?.value ?? '').isNotEmpty);
   }
 
-  void onSave() {
+  Future<void> onSave() async {
     if (state.filter != null) {
       state.filter?.channelId = state.channel?.authorId;
-      log.fine('hide all ? ${state.filter?.filterAll}');
-      db.saveFilter(state.filter!);
+      log.fine(
+          'hide all ? ${state.filter?.filterAll} filter id: ${state.filter?.id.toString()}');
+      await db.saveFilter(state.filter!);
       // VideoFilterController.to()?.refreshFilters();
     }
   }

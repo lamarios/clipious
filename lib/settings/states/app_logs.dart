@@ -24,7 +24,7 @@ class AppLogsCubit extends Cubit<AppLogsState> {
     var selected = List<int>.from(state.selected);
     selected.sort();
     String toClipboard = state.logs
-        .where((element) => selected.contains(element.isarId))
+        .where((element) => selected.contains(element.id))
         .map((e) =>
             '[${e.level}] [${e.logger}] - ${e.time} - ${e.message} ${e.stacktrace != null ? '\n${e.stacktrace}' : ''}')
         .toList()
@@ -39,7 +39,7 @@ class AppLogsCubit extends Cubit<AppLogsState> {
   void selectAll() {
     var state = this.state.copyWith();
     if (state.selected.isEmpty) {
-      emit(state.copyWith(selected: state.logs.map((e) => e.isarId).toList()));
+      emit(state.copyWith(selected: state.logs.map((e) => e.id).toList()));
     } else {
       emit(state.copyWith(selected: []));
     }

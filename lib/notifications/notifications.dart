@@ -101,22 +101,22 @@ class NotificationController {
           payload.containsKey(lastSeenVideo)) {
         log.fine('Launching channel screen ${receivedAction.payload}');
         appRouter.push(ChannelRoute(channelId: payload[channelId]!));
-        db.setChannelNotificationLastViewedVideo(
+        await fileDb.setChannelNotificationLastViewedVideo(
             payload[channelId]!, payload[lastSeenVideo]!);
       } else if (receivedAction.channelKey == NotificationTypes.playlist.id &&
           payload.containsKey(playlistId)) {
         log.fine('Launching playlist screen ${receivedAction.payload}');
-        service.getPublicPlaylists(payload[playlistId]!).then((value) {
+        service.getPublicPlaylists(payload[playlistId]!).then((value) async {
           appRouter
               .push(PlaylistViewRoute(playlist: value, canDeleteVideos: false));
-          db.setPlaylistNotificationLastViewedVideo(
+          await fileDb.setPlaylistNotificationLastViewedVideo(
               value.playlistId, value.videoCount);
         });
       } else if (receivedAction.channelKey ==
               NotificationTypes.subscription.id &&
           payload.containsKey(lastSeenVideo)) {
         appRouter.push(const SubscriptionRoute());
-        db.setLastSubscriptionNotification(SubscriptionNotification(
+        await fileDb.setLastSubscriptionNotification(SubscriptionNotification(
             payload[lastSeenVideo]!, DateTime.now().millisecondsSinceEpoch));
       }
     }

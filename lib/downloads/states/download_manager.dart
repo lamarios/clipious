@@ -48,7 +48,7 @@ class DownloadManagerCubit extends Cubit<DownloadManagerState> {
     setVideos();
   }
 
-  setVideos() {
+  setVideos() async {
     var vids = db.getAllDownloads();
     // checking if we have any video that are not fail, not completed and not currently downloading
     for (var v in vids) {
@@ -57,7 +57,7 @@ class DownloadManagerCubit extends Cubit<DownloadManagerState> {
           !state.downloadProgresses.containsKey(v.videoId)) {
         // this download was interrupted by app restart or crash or something else, we set it as errored
         v.downloadFailed = true;
-        db.upsertDownload(v);
+        await db.upsertDownload(v);
       }
     }
 
@@ -71,14 +71,14 @@ class DownloadManagerCubit extends Cubit<DownloadManagerState> {
         .toList());
   }
 
-  onProgress(int count, int total, DownloadedVideo video) {
+  onProgress(int count, int total, DownloadedVideo video) async {
     if (count == total) {
       var progresses =
           Map<String, DownloadProgress>.from(state.downloadProgresses);
       var downloadProgress = progresses[video.videoId];
       progresses.remove(video.videoId);
       video.downloadComplete = true;
-      db.upsertDownload(video);
+      await db.upsertDownload(video);
       emit(state.copyWith(downloadProgresses: progresses));
       setVideos();
       for (var f in downloadProgress?.listeners ?? []) {
@@ -86,9 +86,9 @@ class DownloadManagerCubit extends Cubit<DownloadManagerState> {
       }
     } else {
       EasyThrottle.throttle(
-          'download-${video.isarId}', const Duration(milliseconds: 500), () {
+          'download-${video.id}', const Duration(milliseconds: 500), () {
         log.fine(
-            'Download of video ${video.isarId}, $count / $total =  ${count / total}, Total: ${state.totalProgress}');
+            'Download of video ${video.id}, $count / $total =  ${count / total}, Total: ${state.totalProgress}');
         var progresses =
             Map<String, DownloadProgress>.from(state.downloadProgresses);
         var downloadProgress = progresses[video.videoId];
@@ -117,7 +117,7 @@ class DownloadManagerCubit extends Cubit<DownloadManagerState> {
           audioOnly: audioOnly,
           lengthSeconds: vid.lengthSeconds,
           quality: quality);
-      db.upsertDownload(downloadedVideo);
+      await db.upsertDownload(downloadedVideo);
 
       String contentUrl;
 
@@ -195,7 +195,7 @@ class DownloadManagerCubit extends Cubit<DownloadManagerState> {
       log.fine('File might not be available, that\'s ok');
     }
 
-    db.deleteDownload(vid);
+    await db.deleteDownload(vid);
     emit(state.copyWith(downloadProgresses: progresses));
 
     setVideos();
@@ -214,7 +214,7 @@ class DownloadManagerCubit extends Cubit<DownloadManagerState> {
     var progresses =
         Map<String, DownloadProgress>.from(state.downloadProgresses);
     progresses.remove(vid.videoId);
-    db.upsertDownload(vid);
+    await db.upsertDownload(vid);
     setVideos();
     emit(state.copyWith(downloadProgresses: progresses));
     return;

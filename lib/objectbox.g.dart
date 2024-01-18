@@ -67,56 +67,6 @@ final _entities = <ModelEntity>[
       relations: <ModelRelation>[],
       backlinks: <ModelBacklink>[]),
   ModelEntity(
-      id: const IdUid(2, 2463187106197509769),
-      name: 'SettingsValue',
-      lastPropertyId: const IdUid(4, 4456133405276724782),
-      flags: 0,
-      properties: <ModelProperty>[
-        ModelProperty(
-            id: const IdUid(1, 3567602159840796895),
-            name: 'id',
-            type: 6,
-            flags: 1),
-        ModelProperty(
-            id: const IdUid(2, 525293931186831855),
-            name: 'name',
-            type: 9,
-            flags: 34848,
-            indexId: const IdUid(2, 1004000799244198133)),
-        ModelProperty(
-            id: const IdUid(3, 4665740245375834282),
-            name: 'value',
-            type: 9,
-            flags: 0)
-      ],
-      relations: <ModelRelation>[],
-      backlinks: <ModelBacklink>[]),
-  ModelEntity(
-      id: const IdUid(3, 8787382286414233697),
-      name: 'Progress',
-      lastPropertyId: const IdUid(4, 2850523087664236792),
-      flags: 0,
-      properties: <ModelProperty>[
-        ModelProperty(
-            id: const IdUid(1, 5651818511313053101),
-            name: 'id',
-            type: 6,
-            flags: 1),
-        ModelProperty(
-            id: const IdUid(2, 4301486387527660152),
-            name: 'progress',
-            type: 8,
-            flags: 0),
-        ModelProperty(
-            id: const IdUid(3, 8602536477328513343),
-            name: 'videoId',
-            type: 9,
-            flags: 34848,
-            indexId: const IdUid(3, 4343529106190079511))
-      ],
-      relations: <ModelRelation>[],
-      backlinks: <ModelBacklink>[]),
-  ModelEntity(
       id: const IdUid(4, 6956330633348216454),
       name: 'SearchHistoryItem',
       lastPropertyId: const IdUid(4, 2889158211381180137),
@@ -137,45 +87,6 @@ final _entities = <ModelEntity>[
             id: const IdUid(3, 4799661758354837094),
             name: 'time',
             type: 6,
-            flags: 0)
-      ],
-      relations: <ModelRelation>[],
-      backlinks: <ModelBacklink>[]),
-  ModelEntity(
-      id: const IdUid(5, 8446250266008376981),
-      name: 'AppLog',
-      lastPropertyId: const IdUid(7, 2516863991952055225),
-      flags: 0,
-      properties: <ModelProperty>[
-        ModelProperty(
-            id: const IdUid(1, 3160197863614923332),
-            name: 'id',
-            type: 6,
-            flags: 1),
-        ModelProperty(
-            id: const IdUid(2, 3008237629246315185),
-            name: 'level',
-            type: 9,
-            flags: 0),
-        ModelProperty(
-            id: const IdUid(3, 2647517759142178088),
-            name: 'time',
-            type: 10,
-            flags: 0),
-        ModelProperty(
-            id: const IdUid(4, 7759611646931835814),
-            name: 'message',
-            type: 9,
-            flags: 0),
-        ModelProperty(
-            id: const IdUid(5, 1230803493579490035),
-            name: 'stacktrace',
-            type: 9,
-            flags: 0),
-        ModelProperty(
-            id: const IdUid(6, 5023716219165786985),
-            name: 'logger',
-            type: 9,
             flags: 0)
       ],
       relations: <ModelRelation>[],
@@ -489,6 +400,95 @@ final _entities = <ModelEntity>[
             flags: 0)
       ],
       relations: <ModelRelation>[],
+      backlinks: <ModelBacklink>[]),
+  ModelEntity(
+      id: const IdUid(16, 2944776928237380894),
+      name: 'Progress',
+      lastPropertyId: const IdUid(3, 7757030744687416674),
+      flags: 0,
+      properties: <ModelProperty>[
+        ModelProperty(
+            id: const IdUid(1, 6993927468027465678),
+            name: 'id',
+            type: 6,
+            flags: 1),
+        ModelProperty(
+            id: const IdUid(2, 7781790784557399507),
+            name: 'progress',
+            type: 8,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(3, 7757030744687416674),
+            name: 'videoId',
+            type: 9,
+            flags: 34848,
+            indexId: const IdUid(9, 8960692962072533961))
+      ],
+      relations: <ModelRelation>[],
+      backlinks: <ModelBacklink>[]),
+  ModelEntity(
+      id: const IdUid(17, 3226584388645747274),
+      name: 'SettingsValue',
+      lastPropertyId: const IdUid(3, 5202713357902054257),
+      flags: 0,
+      properties: <ModelProperty>[
+        ModelProperty(
+            id: const IdUid(1, 7518270370862442040),
+            name: 'id',
+            type: 6,
+            flags: 1),
+        ModelProperty(
+            id: const IdUid(2, 6486301525226034425),
+            name: 'name',
+            type: 9,
+            flags: 34848,
+            indexId: const IdUid(10, 4781107858872222149)),
+        ModelProperty(
+            id: const IdUid(3, 5202713357902054257),
+            name: 'value',
+            type: 9,
+            flags: 0)
+      ],
+      relations: <ModelRelation>[],
+      backlinks: <ModelBacklink>[]),
+  ModelEntity(
+      id: const IdUid(18, 4069086592757929623),
+      name: 'AppLog',
+      lastPropertyId: const IdUid(6, 1541601625289884147),
+      flags: 0,
+      properties: <ModelProperty>[
+        ModelProperty(
+            id: const IdUid(1, 3023976684815144395),
+            name: 'id',
+            type: 6,
+            flags: 1),
+        ModelProperty(
+            id: const IdUid(2, 6125955234963688745),
+            name: 'level',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(3, 3016302001846420227),
+            name: 'logger',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(4, 2011399553225396008),
+            name: 'time',
+            type: 10,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(5, 85092820905438473),
+            name: 'stacktrace',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(6, 1541601625289884147),
+            name: 'message',
+            type: 9,
+            flags: 0)
+      ],
+      relations: <ModelRelation>[],
       backlinks: <ModelBacklink>[])
 ];
 
@@ -519,11 +519,17 @@ Future<Store> openStore(
 ModelDefinition getObjectBoxModel() {
   final model = ModelInfo(
       entities: _entities,
-      lastEntityId: const IdUid(15, 7475761865024216578),
-      lastIndexId: const IdUid(8, 11015011236117301),
+      lastEntityId: const IdUid(18, 4069086592757929623),
+      lastIndexId: const IdUid(10, 4781107858872222149),
       lastRelationId: const IdUid(0, 0),
       lastSequenceId: const IdUid(0, 0),
-      retiredEntityUids: const [6897417709810972885, 2895109148053406327],
+      retiredEntityUids: const [
+        6897417709810972885,
+        2895109148053406327,
+        2463187106197509769,
+        8787382286414233697,
+        8446250266008376981
+      ],
       retiredIndexUids: const [9110274326691932798],
       retiredPropertyUids: const [
         3422621380867834787,
@@ -544,7 +550,19 @@ ModelDefinition getObjectBoxModel() {
         6323276442216762344,
         4456133405276724782,
         5768606046399747454,
-        9166993721458673597
+        9166993721458673597,
+        3567602159840796895,
+        525293931186831855,
+        4665740245375834282,
+        5651818511313053101,
+        4301486387527660152,
+        8602536477328513343,
+        3160197863614923332,
+        3008237629246315185,
+        2647517759142178088,
+        7759611646931835814,
+        1230803493579490035,
+        5023716219165786985
       ],
       retiredRelationUids: const [],
       modelVersion: 5,
@@ -597,67 +615,8 @@ ModelDefinition getObjectBoxModel() {
 
           return object;
         }),
-    SettingsValue: EntityDefinition<SettingsValue>(
-        model: _entities[1],
-        toOneRelations: (SettingsValue object) => [],
-        toManyRelations: (SettingsValue object) => {},
-        getId: (SettingsValue object) => object.id,
-        setId: (SettingsValue object, int id) {
-          object.id = id;
-        },
-        objectToFB: (SettingsValue object, fb.Builder fbb) {
-          final nameOffset = fbb.writeString(object.name);
-          final valueOffset = fbb.writeString(object.value);
-          fbb.startTable(5);
-          fbb.addInt64(0, object.id);
-          fbb.addOffset(1, nameOffset);
-          fbb.addOffset(2, valueOffset);
-          fbb.finish(fbb.endTable());
-          return object.id;
-        },
-        objectFromFB: (Store store, ByteData fbData) {
-          final buffer = fb.BufferContext(fbData);
-          final rootOffset = buffer.derefObject(0);
-          final nameParam = const fb.StringReader(asciiOptimization: true)
-              .vTableGet(buffer, rootOffset, 6, '');
-          final valueParam = const fb.StringReader(asciiOptimization: true)
-              .vTableGet(buffer, rootOffset, 8, '');
-          final object = SettingsValue(nameParam, valueParam)
-            ..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
-
-          return object;
-        }),
-    Progress: EntityDefinition<Progress>(
-        model: _entities[2],
-        toOneRelations: (Progress object) => [],
-        toManyRelations: (Progress object) => {},
-        getId: (Progress object) => object.id,
-        setId: (Progress object, int id) {
-          object.id = id;
-        },
-        objectToFB: (Progress object, fb.Builder fbb) {
-          final videoIdOffset = fbb.writeString(object.videoId);
-          fbb.startTable(5);
-          fbb.addInt64(0, object.id);
-          fbb.addFloat64(1, object.progress);
-          fbb.addOffset(2, videoIdOffset);
-          fbb.finish(fbb.endTable());
-          return object.id;
-        },
-        objectFromFB: (Store store, ByteData fbData) {
-          final buffer = fb.BufferContext(fbData);
-          final rootOffset = buffer.derefObject(0);
-          final progressParam =
-              const fb.Float64Reader().vTableGet(buffer, rootOffset, 6, 0);
-          final videoIdParam = const fb.StringReader(asciiOptimization: true)
-              .vTableGet(buffer, rootOffset, 8, '');
-          final object = Progress(progressParam, videoIdParam)
-            ..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
-
-          return object;
-        }),
     SearchHistoryItem: EntityDefinition<SearchHistoryItem>(
-        model: _entities[3],
+        model: _entities[1],
         toOneRelations: (SearchHistoryItem object) => [],
         toManyRelations: (SearchHistoryItem object) => {},
         getId: (SearchHistoryItem object) => object.id,
@@ -685,57 +644,8 @@ ModelDefinition getObjectBoxModel() {
 
           return object;
         }),
-    AppLog: EntityDefinition<AppLog>(
-        model: _entities[4],
-        toOneRelations: (AppLog object) => [],
-        toManyRelations: (AppLog object) => {},
-        getId: (AppLog object) => object.id,
-        setId: (AppLog object, int id) {
-          object.id = id;
-        },
-        objectToFB: (AppLog object, fb.Builder fbb) {
-          final levelOffset = fbb.writeString(object.level);
-          final messageOffset =
-              object.message == null ? null : fbb.writeString(object.message!);
-          final stacktraceOffset = object.stacktrace == null
-              ? null
-              : fbb.writeString(object.stacktrace!);
-          final loggerOffset = fbb.writeString(object.logger);
-          fbb.startTable(8);
-          fbb.addInt64(0, object.id);
-          fbb.addOffset(1, levelOffset);
-          fbb.addInt64(2, object.time.millisecondsSinceEpoch);
-          fbb.addOffset(3, messageOffset);
-          fbb.addOffset(4, stacktraceOffset);
-          fbb.addOffset(5, loggerOffset);
-          fbb.finish(fbb.endTable());
-          return object.id;
-        },
-        objectFromFB: (Store store, ByteData fbData) {
-          final buffer = fb.BufferContext(fbData);
-          final rootOffset = buffer.derefObject(0);
-          final levelParam = const fb.StringReader(asciiOptimization: true)
-              .vTableGet(buffer, rootOffset, 6, '');
-          final loggerParam = const fb.StringReader(asciiOptimization: true)
-              .vTableGet(buffer, rootOffset, 14, '');
-          final timeParam = DateTime.fromMillisecondsSinceEpoch(
-              const fb.Int64Reader().vTableGet(buffer, rootOffset, 8, 0));
-          final messageParam = const fb.StringReader(asciiOptimization: true)
-              .vTableGetNullable(buffer, rootOffset, 10);
-          final stacktraceParam = const fb.StringReader(asciiOptimization: true)
-              .vTableGetNullable(buffer, rootOffset, 12);
-          final object = AppLog(
-              level: levelParam,
-              logger: loggerParam,
-              time: timeParam,
-              message: messageParam,
-              stacktrace: stacktraceParam)
-            ..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
-
-          return object;
-        }),
     VideoFilter: EntityDefinition<VideoFilter>(
-        model: _entities[5],
+        model: _entities[2],
         toOneRelations: (VideoFilter object) => [],
         toManyRelations: (VideoFilter object) => {},
         getId: (VideoFilter object) => object.id,
@@ -799,7 +709,7 @@ ModelDefinition getObjectBoxModel() {
           return object;
         }),
     DownloadedVideo: EntityDefinition<DownloadedVideo>(
-        model: _entities[6],
+        model: _entities[3],
         toOneRelations: (DownloadedVideo object) => [],
         toManyRelations: (DownloadedVideo object) => {},
         getId: (DownloadedVideo object) => object.id,
@@ -867,7 +777,7 @@ ModelDefinition getObjectBoxModel() {
           return object;
         }),
     HistoryVideoCache: EntityDefinition<HistoryVideoCache>(
-        model: _entities[7],
+        model: _entities[4],
         toOneRelations: (HistoryVideoCache object) => [],
         toManyRelations: (HistoryVideoCache object) => {},
         getId: (HistoryVideoCache object) => object.id,
@@ -910,7 +820,7 @@ ModelDefinition getObjectBoxModel() {
           return object;
         }),
     HomeLayout: EntityDefinition<HomeLayout>(
-        model: _entities[8],
+        model: _entities[5],
         toOneRelations: (HomeLayout object) => [],
         toManyRelations: (HomeLayout object) => {},
         getId: (HomeLayout object) => object.id,
@@ -948,7 +858,7 @@ ModelDefinition getObjectBoxModel() {
           return object;
         }),
     SubscriptionNotification: EntityDefinition<SubscriptionNotification>(
-        model: _entities[9],
+        model: _entities[6],
         toOneRelations: (SubscriptionNotification object) => [],
         toManyRelations: (SubscriptionNotification object) => {},
         getId: (SubscriptionNotification object) => object.id,
@@ -979,7 +889,7 @@ ModelDefinition getObjectBoxModel() {
           return object;
         }),
     ChannelNotification: EntityDefinition<ChannelNotification>(
-        model: _entities[10],
+        model: _entities[7],
         toOneRelations: (ChannelNotification object) => [],
         toManyRelations: (ChannelNotification object) => {},
         getId: (ChannelNotification object) => object.id,
@@ -1019,7 +929,7 @@ ModelDefinition getObjectBoxModel() {
           return object;
         }),
     PlaylistNotification: EntityDefinition<PlaylistNotification>(
-        model: _entities[11],
+        model: _entities[8],
         toOneRelations: (PlaylistNotification object) => [],
         toManyRelations: (PlaylistNotification object) => {},
         getId: (PlaylistNotification object) => object.id,
@@ -1057,7 +967,7 @@ ModelDefinition getObjectBoxModel() {
           return object;
         }),
     DeArrowCache: EntityDefinition<DeArrowCache>(
-        model: _entities[12],
+        model: _entities[9],
         toOneRelations: (DeArrowCache object) => [],
         toManyRelations: (DeArrowCache object) => {},
         getId: (DeArrowCache object) => object.id,
@@ -1091,6 +1001,114 @@ ModelDefinition getObjectBoxModel() {
                 .vTableGetNullable(buffer, rootOffset, 10);
 
           return object;
+        }),
+    Progress: EntityDefinition<Progress>(
+        model: _entities[10],
+        toOneRelations: (Progress object) => [],
+        toManyRelations: (Progress object) => {},
+        getId: (Progress object) => object.id,
+        setId: (Progress object, int id) {
+          object.id = id;
+        },
+        objectToFB: (Progress object, fb.Builder fbb) {
+          final videoIdOffset = fbb.writeString(object.videoId);
+          fbb.startTable(4);
+          fbb.addInt64(0, object.id);
+          fbb.addFloat64(1, object.progress);
+          fbb.addOffset(2, videoIdOffset);
+          fbb.finish(fbb.endTable());
+          return object.id;
+        },
+        objectFromFB: (Store store, ByteData fbData) {
+          final buffer = fb.BufferContext(fbData);
+          final rootOffset = buffer.derefObject(0);
+          final progressParam =
+              const fb.Float64Reader().vTableGet(buffer, rootOffset, 6, 0);
+          final videoIdParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 8, '');
+          final object = Progress(progressParam, videoIdParam)
+            ..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
+
+          return object;
+        }),
+    SettingsValue: EntityDefinition<SettingsValue>(
+        model: _entities[11],
+        toOneRelations: (SettingsValue object) => [],
+        toManyRelations: (SettingsValue object) => {},
+        getId: (SettingsValue object) => object.id,
+        setId: (SettingsValue object, int id) {
+          object.id = id;
+        },
+        objectToFB: (SettingsValue object, fb.Builder fbb) {
+          final nameOffset = fbb.writeString(object.name);
+          final valueOffset = fbb.writeString(object.value);
+          fbb.startTable(4);
+          fbb.addInt64(0, object.id);
+          fbb.addOffset(1, nameOffset);
+          fbb.addOffset(2, valueOffset);
+          fbb.finish(fbb.endTable());
+          return object.id;
+        },
+        objectFromFB: (Store store, ByteData fbData) {
+          final buffer = fb.BufferContext(fbData);
+          final rootOffset = buffer.derefObject(0);
+          final nameParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 6, '');
+          final valueParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 8, '');
+          final object = SettingsValue(nameParam, valueParam)
+            ..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
+
+          return object;
+        }),
+    AppLog: EntityDefinition<AppLog>(
+        model: _entities[12],
+        toOneRelations: (AppLog object) => [],
+        toManyRelations: (AppLog object) => {},
+        getId: (AppLog object) => object.id,
+        setId: (AppLog object, int id) {
+          object.id = id;
+        },
+        objectToFB: (AppLog object, fb.Builder fbb) {
+          final levelOffset = fbb.writeString(object.level);
+          final loggerOffset = fbb.writeString(object.logger);
+          final stacktraceOffset = object.stacktrace == null
+              ? null
+              : fbb.writeString(object.stacktrace!);
+          final messageOffset =
+              object.message == null ? null : fbb.writeString(object.message!);
+          fbb.startTable(7);
+          fbb.addInt64(0, object.id);
+          fbb.addOffset(1, levelOffset);
+          fbb.addOffset(2, loggerOffset);
+          fbb.addInt64(3, object.time.millisecondsSinceEpoch);
+          fbb.addOffset(4, stacktraceOffset);
+          fbb.addOffset(5, messageOffset);
+          fbb.finish(fbb.endTable());
+          return object.id;
+        },
+        objectFromFB: (Store store, ByteData fbData) {
+          final buffer = fb.BufferContext(fbData);
+          final rootOffset = buffer.derefObject(0);
+          final levelParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 6, '');
+          final loggerParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 8, '');
+          final timeParam = DateTime.fromMillisecondsSinceEpoch(
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 10, 0));
+          final messageParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGetNullable(buffer, rootOffset, 14);
+          final stacktraceParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGetNullable(buffer, rootOffset, 12);
+          final object = AppLog(
+              level: levelParam,
+              logger: loggerParam,
+              time: timeParam,
+              message: messageParam,
+              stacktrace: stacktraceParam)
+            ..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
+
+          return object;
         })
   };
 
@@ -1117,281 +1135,282 @@ class Server_ {
       QueryStringProperty<Server>(_entities[0].properties[4]);
 }
 
-/// [SettingsValue] entity fields to define ObjectBox queries.
-class SettingsValue_ {
-  /// see [SettingsValue.id]
-  static final id =
-      QueryIntegerProperty<SettingsValue>(_entities[1].properties[0]);
-
-  /// see [SettingsValue.name]
-  static final name =
-      QueryStringProperty<SettingsValue>(_entities[1].properties[1]);
-
-  /// see [SettingsValue.value]
-  static final value =
-      QueryStringProperty<SettingsValue>(_entities[1].properties[2]);
-}
-
-/// [Progress] entity fields to define ObjectBox queries.
-class Progress_ {
-  /// see [Progress.id]
-  static final id = QueryIntegerProperty<Progress>(_entities[2].properties[0]);
-
-  /// see [Progress.progress]
-  static final progress =
-      QueryDoubleProperty<Progress>(_entities[2].properties[1]);
-
-  /// see [Progress.videoId]
-  static final videoId =
-      QueryStringProperty<Progress>(_entities[2].properties[2]);
-}
-
 /// [SearchHistoryItem] entity fields to define ObjectBox queries.
 class SearchHistoryItem_ {
   /// see [SearchHistoryItem.id]
   static final id =
-      QueryIntegerProperty<SearchHistoryItem>(_entities[3].properties[0]);
+      QueryIntegerProperty<SearchHistoryItem>(_entities[1].properties[0]);
 
   /// see [SearchHistoryItem.search]
   static final search =
-      QueryStringProperty<SearchHistoryItem>(_entities[3].properties[1]);
+      QueryStringProperty<SearchHistoryItem>(_entities[1].properties[1]);
 
   /// see [SearchHistoryItem.time]
   static final time =
-      QueryIntegerProperty<SearchHistoryItem>(_entities[3].properties[2]);
-}
-
-/// [AppLog] entity fields to define ObjectBox queries.
-class AppLog_ {
-  /// see [AppLog.id]
-  static final id = QueryIntegerProperty<AppLog>(_entities[4].properties[0]);
-
-  /// see [AppLog.level]
-  static final level = QueryStringProperty<AppLog>(_entities[4].properties[1]);
-
-  /// see [AppLog.time]
-  static final time = QueryIntegerProperty<AppLog>(_entities[4].properties[2]);
-
-  /// see [AppLog.message]
-  static final message =
-      QueryStringProperty<AppLog>(_entities[4].properties[3]);
-
-  /// see [AppLog.stacktrace]
-  static final stacktrace =
-      QueryStringProperty<AppLog>(_entities[4].properties[4]);
-
-  /// see [AppLog.logger]
-  static final logger = QueryStringProperty<AppLog>(_entities[4].properties[5]);
+      QueryIntegerProperty<SearchHistoryItem>(_entities[1].properties[2]);
 }
 
 /// [VideoFilter] entity fields to define ObjectBox queries.
 class VideoFilter_ {
   /// see [VideoFilter.id]
   static final id =
-      QueryIntegerProperty<VideoFilter>(_entities[5].properties[0]);
+      QueryIntegerProperty<VideoFilter>(_entities[2].properties[0]);
 
   /// see [VideoFilter.channelId]
   static final channelId =
-      QueryStringProperty<VideoFilter>(_entities[5].properties[1]);
+      QueryStringProperty<VideoFilter>(_entities[2].properties[1]);
 
   /// see [VideoFilter.value]
   static final value =
-      QueryStringProperty<VideoFilter>(_entities[5].properties[2]);
+      QueryStringProperty<VideoFilter>(_entities[2].properties[2]);
 
   /// see [VideoFilter.dbType]
   static final dbType =
-      QueryStringProperty<VideoFilter>(_entities[5].properties[3]);
+      QueryStringProperty<VideoFilter>(_entities[2].properties[3]);
 
   /// see [VideoFilter.dbOperation]
   static final dbOperation =
-      QueryStringProperty<VideoFilter>(_entities[5].properties[4]);
+      QueryStringProperty<VideoFilter>(_entities[2].properties[4]);
 
   /// see [VideoFilter.filterAll]
   static final filterAll =
-      QueryBooleanProperty<VideoFilter>(_entities[5].properties[5]);
+      QueryBooleanProperty<VideoFilter>(_entities[2].properties[5]);
 
   /// see [VideoFilter.hideFromFeed]
   static final hideFromFeed =
-      QueryBooleanProperty<VideoFilter>(_entities[5].properties[6]);
+      QueryBooleanProperty<VideoFilter>(_entities[2].properties[6]);
 
   /// see [VideoFilter.daysOfWeek]
   static final daysOfWeek =
-      QueryIntegerVectorProperty<VideoFilter>(_entities[5].properties[7]);
+      QueryIntegerVectorProperty<VideoFilter>(_entities[2].properties[7]);
 
   /// see [VideoFilter.startTime]
   static final startTime =
-      QueryStringProperty<VideoFilter>(_entities[5].properties[8]);
+      QueryStringProperty<VideoFilter>(_entities[2].properties[8]);
 
   /// see [VideoFilter.endTime]
   static final endTime =
-      QueryStringProperty<VideoFilter>(_entities[5].properties[9]);
+      QueryStringProperty<VideoFilter>(_entities[2].properties[9]);
 }
 
 /// [DownloadedVideo] entity fields to define ObjectBox queries.
 class DownloadedVideo_ {
   /// see [DownloadedVideo.id]
   static final id =
-      QueryIntegerProperty<DownloadedVideo>(_entities[6].properties[0]);
+      QueryIntegerProperty<DownloadedVideo>(_entities[3].properties[0]);
 
   /// see [DownloadedVideo.title]
   static final title =
-      QueryStringProperty<DownloadedVideo>(_entities[6].properties[1]);
+      QueryStringProperty<DownloadedVideo>(_entities[3].properties[1]);
 
   /// see [DownloadedVideo.author]
   static final author =
-      QueryStringProperty<DownloadedVideo>(_entities[6].properties[2]);
+      QueryStringProperty<DownloadedVideo>(_entities[3].properties[2]);
 
   /// see [DownloadedVideo.authorUrl]
   static final authorUrl =
-      QueryStringProperty<DownloadedVideo>(_entities[6].properties[3]);
+      QueryStringProperty<DownloadedVideo>(_entities[3].properties[3]);
 
   /// see [DownloadedVideo.downloadComplete]
   static final downloadComplete =
-      QueryBooleanProperty<DownloadedVideo>(_entities[6].properties[4]);
+      QueryBooleanProperty<DownloadedVideo>(_entities[3].properties[4]);
 
   /// see [DownloadedVideo.downloadFailed]
   static final downloadFailed =
-      QueryBooleanProperty<DownloadedVideo>(_entities[6].properties[5]);
+      QueryBooleanProperty<DownloadedVideo>(_entities[3].properties[5]);
 
   /// see [DownloadedVideo.audioOnly]
   static final audioOnly =
-      QueryBooleanProperty<DownloadedVideo>(_entities[6].properties[6]);
+      QueryBooleanProperty<DownloadedVideo>(_entities[3].properties[6]);
 
   /// see [DownloadedVideo.quality]
   static final quality =
-      QueryStringProperty<DownloadedVideo>(_entities[6].properties[7]);
+      QueryStringProperty<DownloadedVideo>(_entities[3].properties[7]);
 
   /// see [DownloadedVideo.lengthSeconds]
   static final lengthSeconds =
-      QueryIntegerProperty<DownloadedVideo>(_entities[6].properties[8]);
+      QueryIntegerProperty<DownloadedVideo>(_entities[3].properties[8]);
 
   /// see [DownloadedVideo.videoId]
   static final videoId =
-      QueryStringProperty<DownloadedVideo>(_entities[6].properties[9]);
+      QueryStringProperty<DownloadedVideo>(_entities[3].properties[9]);
 }
 
 /// [HistoryVideoCache] entity fields to define ObjectBox queries.
 class HistoryVideoCache_ {
   /// see [HistoryVideoCache.id]
   static final id =
-      QueryIntegerProperty<HistoryVideoCache>(_entities[7].properties[0]);
+      QueryIntegerProperty<HistoryVideoCache>(_entities[4].properties[0]);
 
   /// see [HistoryVideoCache.title]
   static final title =
-      QueryStringProperty<HistoryVideoCache>(_entities[7].properties[1]);
+      QueryStringProperty<HistoryVideoCache>(_entities[4].properties[1]);
 
   /// see [HistoryVideoCache.author]
   static final author =
-      QueryStringProperty<HistoryVideoCache>(_entities[7].properties[2]);
+      QueryStringProperty<HistoryVideoCache>(_entities[4].properties[2]);
 
   /// see [HistoryVideoCache.videoId]
   static final videoId =
-      QueryStringProperty<HistoryVideoCache>(_entities[7].properties[3]);
+      QueryStringProperty<HistoryVideoCache>(_entities[4].properties[3]);
 
   /// see [HistoryVideoCache.created]
   static final created =
-      QueryIntegerProperty<HistoryVideoCache>(_entities[7].properties[4]);
+      QueryIntegerProperty<HistoryVideoCache>(_entities[4].properties[4]);
 
   /// see [HistoryVideoCache.thumbnail]
   static final thumbnail =
-      QueryStringProperty<HistoryVideoCache>(_entities[7].properties[5]);
+      QueryStringProperty<HistoryVideoCache>(_entities[4].properties[5]);
 }
 
 /// [HomeLayout] entity fields to define ObjectBox queries.
 class HomeLayout_ {
   /// see [HomeLayout.id]
   static final id =
-      QueryIntegerProperty<HomeLayout>(_entities[8].properties[0]);
+      QueryIntegerProperty<HomeLayout>(_entities[5].properties[0]);
 
   /// see [HomeLayout.showBigSource]
   static final showBigSource =
-      QueryBooleanProperty<HomeLayout>(_entities[8].properties[1]);
+      QueryBooleanProperty<HomeLayout>(_entities[5].properties[1]);
 
   /// see [HomeLayout.dbBigSource]
   static final dbBigSource =
-      QueryStringProperty<HomeLayout>(_entities[8].properties[2]);
+      QueryStringProperty<HomeLayout>(_entities[5].properties[2]);
 
   /// see [HomeLayout.dbSmallSources]
   static final dbSmallSources =
-      QueryStringVectorProperty<HomeLayout>(_entities[8].properties[3]);
+      QueryStringVectorProperty<HomeLayout>(_entities[5].properties[3]);
 }
 
 /// [SubscriptionNotification] entity fields to define ObjectBox queries.
 class SubscriptionNotification_ {
   /// see [SubscriptionNotification.id]
   static final id = QueryIntegerProperty<SubscriptionNotification>(
-      _entities[9].properties[0]);
+      _entities[6].properties[0]);
 
   /// see [SubscriptionNotification.lastSeenVideoId]
   static final lastSeenVideoId =
-      QueryStringProperty<SubscriptionNotification>(_entities[9].properties[1]);
+      QueryStringProperty<SubscriptionNotification>(_entities[6].properties[1]);
 
   /// see [SubscriptionNotification.timestamp]
   static final timestamp = QueryIntegerProperty<SubscriptionNotification>(
-      _entities[9].properties[2]);
+      _entities[6].properties[2]);
 }
 
 /// [ChannelNotification] entity fields to define ObjectBox queries.
 class ChannelNotification_ {
   /// see [ChannelNotification.id]
   static final id =
-      QueryIntegerProperty<ChannelNotification>(_entities[10].properties[0]);
+      QueryIntegerProperty<ChannelNotification>(_entities[7].properties[0]);
 
   /// see [ChannelNotification.channelId]
   static final channelId =
-      QueryStringProperty<ChannelNotification>(_entities[10].properties[1]);
+      QueryStringProperty<ChannelNotification>(_entities[7].properties[1]);
 
   /// see [ChannelNotification.lastSeenVideoId]
   static final lastSeenVideoId =
-      QueryStringProperty<ChannelNotification>(_entities[10].properties[2]);
+      QueryStringProperty<ChannelNotification>(_entities[7].properties[2]);
 
   /// see [ChannelNotification.timestamp]
   static final timestamp =
-      QueryIntegerProperty<ChannelNotification>(_entities[10].properties[3]);
+      QueryIntegerProperty<ChannelNotification>(_entities[7].properties[3]);
 
   /// see [ChannelNotification.channelName]
   static final channelName =
-      QueryStringProperty<ChannelNotification>(_entities[10].properties[4]);
+      QueryStringProperty<ChannelNotification>(_entities[7].properties[4]);
 }
 
 /// [PlaylistNotification] entity fields to define ObjectBox queries.
 class PlaylistNotification_ {
   /// see [PlaylistNotification.id]
   static final id =
-      QueryIntegerProperty<PlaylistNotification>(_entities[11].properties[0]);
+      QueryIntegerProperty<PlaylistNotification>(_entities[8].properties[0]);
 
   /// see [PlaylistNotification.playlistId]
   static final playlistId =
-      QueryStringProperty<PlaylistNotification>(_entities[11].properties[1]);
+      QueryStringProperty<PlaylistNotification>(_entities[8].properties[1]);
 
   /// see [PlaylistNotification.lastVideoCount]
   static final lastVideoCount =
-      QueryIntegerProperty<PlaylistNotification>(_entities[11].properties[2]);
+      QueryIntegerProperty<PlaylistNotification>(_entities[8].properties[2]);
 
   /// see [PlaylistNotification.timestamp]
   static final timestamp =
-      QueryIntegerProperty<PlaylistNotification>(_entities[11].properties[3]);
+      QueryIntegerProperty<PlaylistNotification>(_entities[8].properties[3]);
 
   /// see [PlaylistNotification.playlistName]
   static final playlistName =
-      QueryStringProperty<PlaylistNotification>(_entities[11].properties[4]);
+      QueryStringProperty<PlaylistNotification>(_entities[8].properties[4]);
 }
 
 /// [DeArrowCache] entity fields to define ObjectBox queries.
 class DeArrowCache_ {
   /// see [DeArrowCache.id]
   static final id =
-      QueryIntegerProperty<DeArrowCache>(_entities[12].properties[0]);
+      QueryIntegerProperty<DeArrowCache>(_entities[9].properties[0]);
 
   /// see [DeArrowCache.videoId]
   static final videoId =
-      QueryStringProperty<DeArrowCache>(_entities[12].properties[1]);
+      QueryStringProperty<DeArrowCache>(_entities[9].properties[1]);
 
   /// see [DeArrowCache.title]
   static final title =
-      QueryStringProperty<DeArrowCache>(_entities[12].properties[2]);
+      QueryStringProperty<DeArrowCache>(_entities[9].properties[2]);
 
   /// see [DeArrowCache.url]
   static final url =
-      QueryStringProperty<DeArrowCache>(_entities[12].properties[3]);
+      QueryStringProperty<DeArrowCache>(_entities[9].properties[3]);
+}
+
+/// [Progress] entity fields to define ObjectBox queries.
+class Progress_ {
+  /// see [Progress.id]
+  static final id = QueryIntegerProperty<Progress>(_entities[10].properties[0]);
+
+  /// see [Progress.progress]
+  static final progress =
+      QueryDoubleProperty<Progress>(_entities[10].properties[1]);
+
+  /// see [Progress.videoId]
+  static final videoId =
+      QueryStringProperty<Progress>(_entities[10].properties[2]);
+}
+
+/// [SettingsValue] entity fields to define ObjectBox queries.
+class SettingsValue_ {
+  /// see [SettingsValue.id]
+  static final id =
+      QueryIntegerProperty<SettingsValue>(_entities[11].properties[0]);
+
+  /// see [SettingsValue.name]
+  static final name =
+      QueryStringProperty<SettingsValue>(_entities[11].properties[1]);
+
+  /// see [SettingsValue.value]
+  static final value =
+      QueryStringProperty<SettingsValue>(_entities[11].properties[2]);
+}
+
+/// [AppLog] entity fields to define ObjectBox queries.
+class AppLog_ {
+  /// see [AppLog.id]
+  static final id = QueryIntegerProperty<AppLog>(_entities[12].properties[0]);
+
+  /// see [AppLog.level]
+  static final level = QueryStringProperty<AppLog>(_entities[12].properties[1]);
+
+  /// see [AppLog.logger]
+  static final logger =
+      QueryStringProperty<AppLog>(_entities[12].properties[2]);
+
+  /// see [AppLog.time]
+  static final time = QueryIntegerProperty<AppLog>(_entities[12].properties[3]);
+
+  /// see [AppLog.stacktrace]
+  static final stacktrace =
+      QueryStringProperty<AppLog>(_entities[12].properties[4]);
+
+  /// see [AppLog.message]
+  static final message =
+      QueryStringProperty<AppLog>(_entities[12].properties[5]);
 }

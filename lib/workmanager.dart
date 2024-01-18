@@ -4,11 +4,10 @@ import 'dart:ui';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
-import 'package:invidious/utils/isar_database.dart';
-import 'package:invidious/utils/obox_database.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/notifications/models/db/subscription_notifications.dart';
 import 'package:invidious/settings/states/settings.dart';
+import 'package:invidious/utils/file_db.dart';
 import 'package:invidious/videos/models/video_in_list.dart';
 import 'package:logging/logging.dart';
 import 'package:workmanager/workmanager.dart';
@@ -58,20 +57,25 @@ void callbackDispatcher() {
 
 _backgroundCheck() async {
   try {
-    db = await IsarDb.create();
-
+    Logger.root.level =
+        kDebugMode ? Level.FINEST : Level.INFO; // defaults to Level.INFO
+    Logger.root.onRecord.listen((record) async {
+      debugPrint(
+          '[${record.level.name}] [${record.loggerName}] ${record.message}');
+    });
+    db = FileDB();
     await _handleSubscriptionsNotifications();
     await _handleChannelNotifications();
     await _handlePlaylistNotifications();
-  } finally {
-    db.close();
+  } catch (e) {
+    log.severe("Error while running workmanager", e);
+    rethrow;
   }
 }
 
 Future<AppLocalizations> getLocalization() async {
   List<String>? localeString;
-  String dbLocale =
-      db.getSettings(localeSettingName)?.value ?? Intl.getCurrentLocale();
+  String dbLocale = await fileDb.getLocale() ?? Intl.getCurrentLocale();
   localeString = dbLocale.split('_');
 
   Locale locale = Locale.fromSubtags(
@@ -82,7 +86,7 @@ Future<AppLocalizations> getLocalization() async {
 }
 
 _handlePlaylistNotifications() async {
-  var notifs = db.getAllPlaylistNotifications();
+  var notifs = await fileDb.getAllPlaylistNotifications();
   for (var n in notifs) {
     // we get the latest video,
     var videos =
@@ -105,7 +109,7 @@ _handlePlaylistNotifications() async {
               payload: {
                 playlistId: n.playlistId,
               },
-              id: n.isarId);
+              id: n.playlistId.hashCode);
         }
       }
     }
@@ -113,7 +117,7 @@ _handlePlaylistNotifications() async {
 }
 
 _handleChannelNotifications() async {
-  var notifs = db.getAllChannelNotifications();
+  var notifs = await fileDb.getAllChannelNotifications();
 
   for (var n in notifs) {
     // we get the latest video,
@@ -147,7 +151,7 @@ _handleChannelNotifications() async {
                 channelId: n.channelId,
                 lastSeenVideo: videos.videos.first.videoId
               },
-              id: n.isarId);
+              id: n.channelId.hashCode);
         }
       }
     }
@@ -155,10 +159,10 @@ _handleChannelNotifications() async {
 }
 
 _handleSubscriptionsNotifications() async {
-  bool isEnabled = db.getSettings(subscriptionNotifications)?.value == 'true';
-  if (isEnabled && db.isLoggedInToCurrentServer()) {
+  bool isEnabled = await fileDb.getSubscriptionNotifications();
+  if (isEnabled && await db.isLoggedInToCurrentServer()) {
     // we need to get the last notification before we call the feed endpoint as it is going to save the last seen video
-    final lastNotification = db.getLastSubscriptionNotification();
+    final lastNotification = await fileDb.getLastSubscriptionNotification();
     var feed = await service.getUserFeed(maxResults: 100, saveLastSeen: false);
 
     List<VideoInList> videos = [];
@@ -170,7 +174,7 @@ _handleSubscriptionsNotifications() async {
       if (lastNotification == null) {
         var toSave = SubscriptionNotification(
             videos.last.videoId, DateTime.now().millisecondsSinceEpoch);
-        db.setLastSubscriptionNotification(toSave);
+        await fileDb.setLastSubscriptionNotification(toSave);
       } else {
         late int videosToNotifyAbout;
         int index = videos.indexWhere(

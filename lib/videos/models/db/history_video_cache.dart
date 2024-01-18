@@ -1,5 +1,5 @@
 import 'package:invidious/videos/models/base_video.dart';
-import 'package:isar/isar.dart';
+import 'package:json_annotation/json_annotation.dart';
 import 'package:objectbox/objectbox.dart' as obox;
 
 import '../../../globals.dart';
@@ -8,25 +8,26 @@ import '../../../utils/models/image_object.dart';
 part 'history_video_cache.g.dart';
 
 @obox.Entity()
-@collection
+@JsonSerializable()
 class HistoryVideoCache {
   @obox.Id()
-  @ignore
+  @JsonKey(includeFromJson: false, includeToJson: false)
   int id = 0;
-
-  @obox.Transient()
-  Id isarId = Isar.autoIncrement;
 
   String title;
   String? author;
 
-  @Index()
   String videoId;
   DateTime created = DateTime.now();
 
   String thumbnail;
 
   HistoryVideoCache(this.videoId, this.title, this.author, this.thumbnail);
+
+  factory HistoryVideoCache.fromJson(Map<String, dynamic> json) =>
+      _$HistoryVideoCacheFromJson(json);
+
+  Map<String, dynamic> toJson() => _$HistoryVideoCacheToJson(this);
 
   BaseVideo toBaseVideo() {
     return BaseVideo(title, videoId, 0, author, null, null,
@@ -39,7 +40,7 @@ class HistoryVideoCache {
       var vid = await service.getVideo(e);
       cachedVideo = HistoryVideoCache(vid.videoId, vid.title, vid.author,
           ImageObject.getBestThumbnail(vid.videoThumbnails)?.url ?? '');
-      db.upsertHistoryVideo(cachedVideo);
+      await db.upsertHistoryVideo(cachedVideo);
     }
     return cachedVideo;
   }

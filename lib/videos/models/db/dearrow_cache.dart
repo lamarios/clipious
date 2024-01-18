@@ -1,23 +1,24 @@
-import 'package:isar/isar.dart';
+import 'package:json_annotation/json_annotation.dart';
 import 'package:objectbox/objectbox.dart' as obox;
 
 part 'dearrow_cache.g.dart';
 
 @obox.Entity()
-@collection
+@JsonSerializable()
 class DeArrowCache {
   @obox.Id()
-  @ignore
+  @JsonKey(includeFromJson: false, includeToJson: false)
   int id = 0;
 
-  @obox.Transient()
-  Id isarId = Isar.autoIncrement;
-
   @obox.Unique(onConflict: obox.ConflictStrategy.replace)
-  @Index(unique: true, replace: true)
   String videoId;
   String? title;
   String? url;
 
   DeArrowCache(this.videoId);
+
+  factory DeArrowCache.fromJson(Map<String, dynamic> json) =>
+      _$DeArrowCacheFromJson(json);
+
+  Map<String, dynamic> toJson() => _$DeArrowCacheToJson(this);
 }

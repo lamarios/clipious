@@ -1,18 +1,20 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:invidious/app/states/app.dart';
 import 'package:invidious/globals.dart';
+import 'package:invidious/home/models/db/home_layout.dart';
 import 'package:invidious/settings/states/server_list_settings.dart';
+import 'package:invidious/utils/sembast_sqflite_database.dart';
 
 import '../../globals.dart';
 import '../../test_app_cubit.dart';
-import '../../utils/memorydb.dart';
 
 void main() {
   // Setting a customer override that'll use an unmocked HTTP client
   late AppCubit app;
-  setUp(() {
-    db = MemoryDB();
-    app = TestAppCubit(AppState.init());
+  setUp(() async {
+    db = await SembastSqfDb.createInMenory();
+    app = TestAppCubit(AppState(0, null, HomeLayout()));
+    await app.initState();
   });
 
   test('save public servers', () async {

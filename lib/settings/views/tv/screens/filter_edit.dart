@@ -122,9 +122,11 @@ class TvFilterEditSettingsScreen extends StatelessWidget {
                                     : locals.addVideoFilter),
                             if (filter != null)
                               TvButton(
-                                onPressed: (context) {
-                                  db.deleteFilter(filter!);
-                                  AutoRouter.of(context).pop();
+                                onPressed: (context) async {
+                                  await db.deleteFilter(filter!);
+                                  if (context.mounted) {
+                                    AutoRouter.of(context).pop();
+                                  }
                                 },
                                 unfocusedColor: Colors.transparent,
                                 child: const Padding(
