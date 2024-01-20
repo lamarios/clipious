@@ -7,13 +7,7 @@ class AppCustomizerCubit extends Cubit<List<HomeDataSource>> {
 
   AppCustomizerCubit(super.initialState, this.settings);
 
-  @override
-  emit(List<HomeDataSource> state) {
-    settings.setAppLayout(state);
-    super.emit(state);
-  }
-
-  updateSource(HomeDataSource source, bool value) {
+  updateSource(HomeDataSource source, bool value) async {
     var state = List.of(this.state);
 
     if (!value) {
@@ -21,11 +15,11 @@ class AppCustomizerCubit extends Cubit<List<HomeDataSource>> {
     } else if (!state.contains(source)) {
       state.add(source);
     }
-
+    await settings.setAppLayout(state);
     emit(state);
   }
 
-  void reorder(int oldIndex, int newIndex) {
+  Future<void> reorder(int oldIndex, int newIndex) async {
     var onStart = this.state[settings.state.onOpen];
 
     var state = List.of(this.state);
@@ -36,9 +30,10 @@ class AppCustomizerCubit extends Cubit<List<HomeDataSource>> {
       state.insert(newIndex, source);
     }
 
+    await settings.setAppLayout(state);
     emit(state);
 
     var newOnStartIndex = state.indexOf(onStart);
-    settings.selectOnOpen(newOnStartIndex);
+    await settings.selectOnOpen(newOnStartIndex);
   }
 }

@@ -170,7 +170,7 @@ class DbMigrationCubit extends Cubit<DbMigrationState> {
 
       var oldDbPath = oboxDb.store.directoryPath;
       oboxDb.close();
-      // _renameOldDb(oldDbPath);
+      _renameOldDb(oldDbPath);
 
       db.close();
 

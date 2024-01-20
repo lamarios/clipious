@@ -42,9 +42,9 @@ class SettingsCubit extends Cubit<SettingsState> {
     onReady();
   }
 
-  onReady() {
-    getPackageInfo();
-    _getSubscriptionNotification();
+  onReady() async {
+    await getPackageInfo();
+    await _getSubscriptionNotification();
   }
 
   toggleSponsorBlock(bool value) async {
@@ -376,8 +376,10 @@ class SettingsCubit extends Cubit<SettingsState> {
   setUseSearchHistory(bool b) async =>
       await _set(useSearchHistorySettingName, b);
 
-  setAppLayout(List<HomeDataSource> layout) async => await _set(
-      appLayoutSettingName, layout.map((e) async => await e.name).join(","));
+  setAppLayout(List<HomeDataSource> layout) async {
+    var layoutToString = layout.map((e) => e.name).join(",");
+    await _set(appLayoutSettingName, layoutToString);
+  }
 
   setNavigationBarLabelBehavior(
           NavigationDestinationLabelBehavior behavior) async =>
@@ -517,13 +519,17 @@ class SettingsState with _$SettingsState {
   bool get useSearchHistory =>
       _get(useSearchHistorySettingName)?.value == 'true';
 
-  List<HomeDataSource> get appLayout => (_get(appLayoutSettingName)?.value ??
-          HomeDataSource.defaultSettings().map((e) => e.name).join(","))
-      .split(',')
-      .where((element) => element.isNotEmpty)
-      .map((e) =>
-          HomeDataSource.values.firstWhere((element) => element.name == e))
-      .toList();
+  List<HomeDataSource> get appLayout {
+    var savedLayout = _get(appLayoutSettingName)?.value;
+    // String? savedLayout;
+    var defaultLayout = HomeDataSource.defaultSettings();
+    return (savedLayout ?? defaultLayout.map((e) => e.name).join(","))
+        .split(',')
+        .where((element) => element.isNotEmpty)
+        .map((e) =>
+            HomeDataSource.values.firstWhere((element) => element.name == e))
+        .toList();
+  }
 
   NavigationDestinationLabelBehavior get navigationBarLabelBehavior =>
       NavigationDestinationLabelBehavior.values.firstWhere((e) =>

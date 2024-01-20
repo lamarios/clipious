@@ -178,16 +178,16 @@ class VideoPlayerCubit extends MediaPlayerCubit<VideoPlayerState> {
   }
 
   @override
-  toggleDash() {
+  toggleDash() async {
     log.fine('toggle dash');
     var state = this.state.copyWith();
     // saving progress before we reload new video format
     // saveProgress(videoController?.videoPlayerController?.value.position.inSeconds ?? 0);
-    player.saveProgress(position().inSeconds);
+    await player.saveProgress(position().inSeconds);
 
     // disposeControllers();
 
-    settings.toggleDash(!isUsingDash());
+    await settings.toggleDash(!isUsingDash());
 
     emit(state);
     playVideo(false);

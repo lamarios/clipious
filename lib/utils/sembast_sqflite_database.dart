@@ -75,9 +75,11 @@ class SembastSqfDb extends IDbClient {
 
   @override
   Future<void> addToSearchHistory(SearchHistoryItem searchHistoryItem) async {
+    searchHistoryItem.time = DateTime.now().millisecondsSinceEpoch;
     await searchHistoryStore
         .record(searchHistoryItem.search)
         .put(db, searchHistoryItem.toJson());
+    await clearExcessSearchHistory();
   }
 
   @override
@@ -85,7 +87,9 @@ class SembastSqfDb extends IDbClient {
     // TODO: implement cleanOldLogs
     var all = getAppLogs();
     List<int> ids = all.reversed.skip(maxLogs).map((e) => e.id).toList();
-    await appLogsStore.delete(db, finder: Finder(offset: 0, limit: ids.length));
+    await appLogsStore.delete(db,
+        finder: Finder(
+            sortOrders: [SortOrder("time")], offset: 0, limit: ids.length));
     log.fine("clearing ${ids.length} logs out of ${all.length}");
   }
 
@@ -99,7 +103,11 @@ class SembastSqfDb extends IDbClient {
     var count = searchHistoryStore.countSync(db);
     log.fine('search history clear $count/$limit');
     if (count > limit) {
-      await searchHistoryStore.delete(db, finder: Finder(limit: count - limit));
+      await searchHistoryStore.delete(db,
+          finder: Finder(
+              sortOrders: [SortOrder("time")],
+              offset: 0,
+              limit: count - limit));
       log.fine('clearing ${count - limit} history itens');
     }
   }

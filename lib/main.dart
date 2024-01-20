@@ -57,6 +57,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   db = await SembastSqfDb.create();
+  await fileDb.syncWithDb();
 
   final needsDbMigration = await needsMigration();
   appRouter = AppRouter(needsDbMigration: needsDbMigration);

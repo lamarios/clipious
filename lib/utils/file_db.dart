@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:invidious/downloads/models/downloaded_video.dart';
 import 'package:invidious/extensions.dart';
+import 'package:invidious/globals.dart';
 import 'package:invidious/home/models/db/home_layout.dart';
 import 'package:invidious/search/models/db/search_history_item.dart';
 import 'package:invidious/settings/models/db/app_logs.dart';
@@ -261,6 +262,18 @@ class FileDB extends IDbClient {
     throw UnimplementedError();
   }
 
+  Future<void> syncWithDb() async {
+    _log.fine('Syncing file settings with DB');
+    var fileSettings = await getGenericSettings();
+    fileSettings.locale = db.getSettings(localeSettingName)?.value;
+    fileSettings.server = await db.getCurrentlySelectedServer();
+
+    await updateGenericSettings(fileSettings);
+  }
+
+  /*
+  We don't care about anything below this
+   */
   @override
   Future<void> cleanOldLogs() {
     throw UnimplementedError();
@@ -389,9 +402,8 @@ class FileDB extends IDbClient {
   }
 
   @override
-  Future<void> insertLogs(AppLog log) {
-    // TODO: implement insertLogs
-    throw UnimplementedError();
+  Future<void> insertLogs(AppLog log) async {
+    await super.insertLogs(log);
   }
 
   @override
@@ -437,9 +449,8 @@ class FileDB extends IDbClient {
   }
 
   @override
-  upsertServer(Server server) {
-    // TODO: implement upsertServer
-    throw UnimplementedError();
+  upsertServer(Server server) async {
+    await super.upsertServer(server);
   }
 }
 
