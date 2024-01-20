@@ -2,12 +2,19 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/settings/models/db/app_logs.dart';
 import 'package:invidious/settings/states/app_logs.dart';
+import 'package:invidious/utils/interfaces/db.dart';
 import 'package:invidious/utils/sembast_sqflite_database.dart';
 
 
 Future<void> main() async {
-  TestWidgetsFlutterBinding.ensureInitialized();
-  db = await SembastSqfDb.createInMenory();
+  late IDbClient db;
+
+  setUp(() async {
+    TestWidgetsFlutterBinding.ensureInitialized();
+    db = await SembastSqfDb.createInMenory();
+  });
+
+  tearDown(() async => await db.close());
   test('test logs', () async {
     // inserting more than expected ot make sure old stuff is culled
     for (int i = 0; i < 200; i++) {

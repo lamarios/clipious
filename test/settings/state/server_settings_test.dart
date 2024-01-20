@@ -18,9 +18,11 @@ main() {
     await app.initState();
   });
 
+  tearDown(() async => await db.close());
+
   test('test server setting', () async {
     var server = ServerSettingsCubit(ServerSettingsState(server:Server(url: localInvidiousServer)), app);
-    server.useServer(true);
+    await server.useServer(true);
 
     await server.logInWithCookie("test", "test");
     expect(server.state.server.sidCookie != null, true);
@@ -31,7 +33,7 @@ main() {
     // we can't delete a server if there's only one
     expect((await db.getServers()).length, 1);
 
-    await db.upsertServer(Server(url: localInvidiousServer));
+    await db.upsertServer(Server(url: 'https://anotherServer'));
     expect((await db.getServers()).length, 2);
     await server.deleteServer();
     expect((await db.getServers()).length, 1);

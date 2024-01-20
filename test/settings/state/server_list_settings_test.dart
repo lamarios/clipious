@@ -17,6 +17,8 @@ void main() {
     await app.initState();
   });
 
+  tearDown(() async => await db.close());
+
   test('save public servers', () async {
     final servers = ServerListSettingsCubit(const ServerListSettingsState(dbServers: [], publicServers: []), app);
     await servers.getPublicServers();

@@ -17,6 +17,7 @@ Future<void> main() async {
     await appCubit.initState();
     settingsCubit = TestSettingsCubit(SettingsState.init(), appCubit);
   });
+  tearDown(() async => await db.close());
 
   test('setting and reading settings', () async {
     // testing boolean setting

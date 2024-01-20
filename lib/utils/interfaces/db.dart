@@ -24,7 +24,7 @@ abstract class IDbClient {
   upsertServer(Server server) async {
     var servers = await getServers();
     if (servers.length == 1) {
-      useServer(server);
+      await useServer(server);
     }
   }
 

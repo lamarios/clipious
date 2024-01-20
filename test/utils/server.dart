@@ -36,4 +36,6 @@ Future<void> cleanUpTestServer() async {
 
   // clean history
   await service.clearUserHistory();
+
+  await db.close();
 }

@@ -229,6 +229,11 @@ class FileDB extends IDbClient {
     try {
       await f.delete();
     } catch (e) {}
+
+    f = await _openAppFile(_genericSettings);
+    try {
+      await f.delete();
+    } catch (e) {}
   }
 
   /*

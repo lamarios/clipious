@@ -111,8 +111,8 @@ class SembastSqfDb extends IDbClient {
   }
 
   @override
-  close() {
-    db.close();
+  close() async {
+    await db.close();
   }
 
   @override
@@ -283,7 +283,7 @@ class SembastSqfDb extends IDbClient {
   @override
   upsertServer(Server server) async {
     await servers.record(server.url).put(db, server.toJson());
-    super.upsertServer(server);
+    await super.upsertServer(server);
   }
 
   @override
