@@ -2,12 +2,10 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/settings/models/db/app_logs.dart';
 import 'package:invidious/settings/states/app_logs.dart';
-import 'package:invidious/utils/interfaces/db.dart';
 import 'package:invidious/utils/sembast_sqflite_database.dart';
 
 
 Future<void> main() async {
-  late IDbClient db;
 
   setUp(() async {
     TestWidgetsFlutterBinding.ensureInitialized();

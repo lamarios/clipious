@@ -3,7 +3,25 @@ import 'dart:io';
 import 'package:back_button_interceptor/back_button_interceptor.dart';
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:invidious/globals.dart';
+import 'package:invidious/utils/sembast_sqflite_database.dart';
 import 'package:logging/logging.dart';
+import 'package:sembast/sembast.dart';
+
+import '../../downloads/models/downloaded_video.dart';
+import '../../home/models/db/home_layout.dart';
+import '../../notifications/models/db/channel_notifications.dart';
+import '../../notifications/models/db/playlist_notifications.dart';
+import '../../notifications/models/db/subscription_notifications.dart';
+import '../../search/models/db/search_history_item.dart';
+import '../../settings/models/db/app_logs.dart';
+import '../../settings/models/db/server.dart';
+import '../../settings/models/db/settings.dart';
+import '../../settings/models/db/video_filter.dart';
+import '../../utils/obox_database.dart';
+import '../../videos/models/db/dearrow_cache.dart';
+import '../../videos/models/db/history_video_cache.dart';
+import '../../videos/models/db/progress.dart';
 
 part 'migration.freezed.dart';
 
@@ -23,17 +41,28 @@ class DbMigrationCubit extends Cubit<DbMigrationState> {
   }
 
   migrateDb() async {
-/*
-    late DbClient oboxDb;
-    var isarDb = db as IsarDb;
+    try {
+      _log.fine('hello ? ');
+      late DbClient oboxDb;
 
-    // clearing the db first
-    // most likely no use for users, but useful to test the migration process
-    // multiple times
-    isarDb.isar.writeTxn(() async {
+      // making sure we start from empty DB
+      var sdb = db as SembastSqfDb;
+      await sdb.appLogsStore.delete(sdb.db);
+      await sdb.downloadedVideosStore.delete(sdb.db);
+      await sdb.homeLayoutStore.delete(sdb.db);
+      await sdb.searchHistoryStore.delete(sdb.db);
+      await sdb.serversStore.delete(sdb.db);
+      await sdb.videoFiltersStore.delete(sdb.db);
+      await sdb.settingsStore.delete(sdb.db);
+      await sdb.deArrowCacheStore.delete(sdb.db);
+      await sdb.historyVideoCacheStore.delete(sdb.db);
+      await sdb.progressStore.delete(sdb.db);
+
+      // clearing the db first
+      // most likely no use for users, but useful to test the migration process
+      // multiple times
       oboxDb = await DbClient.create();
 
-      await isarDb.isar.clear();
       int done = 0;
       int total = 13;
 
@@ -41,69 +70,99 @@ class DbMigrationCubit extends Cubit<DbMigrationState> {
       final store = oboxDb.store;
 
       final servers = store.box<Server>().getAll();
-      await isarDb.isar.servers.putAll(servers);
+      for (var s in servers) {
+        await db.upsertServer(s);
+      }
+
       done += 1;
       emit(state.copyWith(progress: done / total));
 
       final downloadedVideos = store.box<DownloadedVideo>().getAll();
-      await isarDb.isar.downloadedVideos.putAll(downloadedVideos);
+      for (var d in downloadedVideos) {
+        await db.upsertDownload(d);
+      }
       done += 1;
       emit(state.copyWith(progress: done / total));
 
       final homeLayout = store.box<HomeLayout>().getAll();
-      await isarDb.isar.homeLayouts.putAll(homeLayout);
+      for (var h in homeLayout) {
+        await db.upsertHomeLayout(h);
+      }
+
       done += 1;
       emit(state.copyWith(progress: done / total));
 
       final channelNotification = store.box<ChannelNotification>().getAll();
-      await isarDb.isar.channelNotifications.putAll(channelNotification);
+      for (var c in channelNotification) {
+        await fileDb.upsertChannelNotification(c);
+      }
       done += 1;
       emit(state.copyWith(progress: done / total));
 
       final playlistsNotifications = store.box<PlaylistNotification>().getAll();
-      await isarDb.isar.playlistNotifications.putAll(playlistsNotifications);
+      for (var p in playlistsNotifications) {
+        await fileDb.upsertPlaylistNotification(p);
+      }
       done += 1;
       emit(state.copyWith(progress: done / total));
 
       final subscriptionNotifications =
           store.box<SubscriptionNotification>().getAll();
-      await isarDb.isar.subscriptionNotifications
-          .putAll(subscriptionNotifications);
+      for (var s in subscriptionNotifications) {
+        await fileDb.setLastSubscriptionNotification(s);
+      }
       done += 1;
       emit(state.copyWith(progress: done / total));
 
       final searchHistoryItems = store.box<SearchHistoryItem>().getAll();
-      await isarDb.isar.searchHistoryItems.putAll(searchHistoryItems);
+      for (var s in searchHistoryItems) {
+        await db.addToSearchHistory(s);
+      }
+
       done += 1;
       emit(state.copyWith(progress: done / total));
 
       final appLogs = store.box<AppLog>().getAll();
-      await isarDb.isar.appLogs.putAll(appLogs);
+      for (var a in appLogs) {
+        await db.insertLogs(a);
+      }
       done += 1;
       emit(state.copyWith(progress: done / total));
 
       final settings = store.box<SettingsValue>().getAll();
-      await isarDb.isar.settingsValues.putAll(settings);
+      for (var s in settings) {
+        await db.saveSetting(s);
+      }
+
       done += 1;
       emit(state.copyWith(progress: done / total));
 
       final videoFilters = store.box<VideoFilter>().getAll();
-      await isarDb.isar.videoFilters.putAll(videoFilters);
+      for (var v in videoFilters) {
+        await db.saveFilter(v);
+      }
       done += 1;
       emit(state.copyWith(progress: done / total));
 
       final deArrowCache = store.box<DeArrowCache>().getAll();
-      await isarDb.isar.deArrowCaches.putAll(deArrowCache);
+      for (var d in deArrowCache) {
+        await db.upsertDeArrowCache(d);
+      }
+
       done += 1;
       emit(state.copyWith(progress: done / total));
 
       final history = store.box<HistoryVideoCache>().getAll();
-      await isarDb.isar.historyVideoCaches.putAll(history);
+      for (var h in history) {
+        await db.upsertHistoryVideo(h);
+      }
       done += 1;
       emit(state.copyWith(progress: done / total));
 
       final progress = store.box<Progress>().getAll();
-      await isarDb.isar.progress.putAll(progress);
+      for (var p in progress) {
+        await db.saveProgress(p);
+      }
       done += 1;
       emit(state.copyWith(progress: done / total));
 
@@ -111,19 +170,21 @@ class DbMigrationCubit extends Cubit<DbMigrationState> {
 
       var oldDbPath = oboxDb.store.directoryPath;
       oboxDb.close();
-      _renameOldDb(oldDbPath);
-    });
-    isarDb.close();
+      // _renameOldDb(oldDbPath);
 
-    while (state.timer > 0) {
-      await Future.delayed(
-        const Duration(seconds: 1),
-        () => emit(state.copyWith(timer: state.timer - 1)),
-      );
+      db.close();
+
+      while (state.timer > 0) {
+        await Future.delayed(
+          const Duration(seconds: 1),
+          () => emit(state.copyWith(timer: state.timer - 1)),
+        );
+      }
+
+      exit(0);
+    } catch (e) {
+      log.severe("Error running migrations", e);
     }
-
-    exit(0);
-*/
   }
 
   _renameOldDb(String oldPath) {

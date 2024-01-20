@@ -53,12 +53,12 @@ await    settingsCubit.setSubtitleSize (10);
     }
   });
 
-  test('Generic set settings method', () {
+  test('Generic set settings method', () async {
     var setting = db.getSettings('test');
     expect(setting, null);
 
     SettingsValue s = SettingsValue('test', 'yo');
-    settingsCubit.saveSetting(s);
+    await settingsCubit.saveSetting(s);
     expect(db.getSettings('test')?.value, 'yo');
 
   });

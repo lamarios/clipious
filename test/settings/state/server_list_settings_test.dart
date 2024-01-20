@@ -22,16 +22,18 @@ void main() {
   test('save public servers', () async {
     final servers = ServerListSettingsCubit(const ServerListSettingsState(dbServers: [], publicServers: []), app);
     await servers.getPublicServers();
+    await servers.refreshServers();
     expect(servers.state.publicServers.isEmpty, false);
     var publicServerCount = servers.state.publicServers.length;
 
     // adding server to selected servers
-    servers.upsertServer(servers.state.publicServers.first);
+    await servers.upsertServer(servers.state.publicServers.first);
     expect(servers.state.publicServers.length, publicServerCount - 1);
   });
 
   test('adding own server', () async {
     final servers = ServerListSettingsCubit(const ServerListSettingsState(dbServers: [], publicServers: []), app);
+    await servers.refreshServers();
     servers.addServerController.text = localInvidiousServer;
     await servers.saveServer();
     expect(servers.state.dbServers.length, 1);

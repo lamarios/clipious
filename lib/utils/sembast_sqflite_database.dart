@@ -28,22 +28,22 @@ const singleId = 1;
 class SembastSqfDb extends IDbClient {
   final log = Logger('SembastSqfLDB');
   final Database db;
-  final downloadedVideos = intMapStoreFactory.store('downloadedVideo');
-  final homeLayout =
+  final downloadedVideosStore = intMapStoreFactory.store('downloadedVideo');
+  final homeLayoutStore =
       intMapStoreFactory.store('homeLayout'); // always use id = 1
-  final searchHistory =
+  final searchHistoryStore =
       stringMapStoreFactory.store('searchHistory'); // use term as key
-  final appLogs = intMapStoreFactory.store('appLogs');
-  final servers =
+  final appLogsStore = intMapStoreFactory.store('appLogs');
+  final serversStore =
       stringMapStoreFactory.store('serviers'); // use server url as key
-  final videoFilters = intMapStoreFactory.store('videoFilters');
-  final settings =
+  final videoFiltersStore = intMapStoreFactory.store('videoFilters');
+  final settingsStore =
       stringMapStoreFactory.store('settings'); // settings name as key;
-  final deArrowCache =
+  final deArrowCacheStore =
       stringMapStoreFactory.store('dearrow'); // use video id as key
-  final historyVideoCache =
+  final historyVideoCacheStore =
       stringMapStoreFactory.store('historyVideoCache'); // use historyVideoCache
-  final progress = stringMapStoreFactory.store('progress');
+  final progressStore = stringMapStoreFactory.store('progress');
 
   SembastSqfDb(this.db);
 
@@ -75,7 +75,7 @@ class SembastSqfDb extends IDbClient {
 
   @override
   Future<void> addToSearchHistory(SearchHistoryItem searchHistoryItem) async {
-    await searchHistory
+    await searchHistoryStore
         .record(searchHistoryItem.search)
         .put(db, searchHistoryItem.toJson());
   }
@@ -85,7 +85,7 @@ class SembastSqfDb extends IDbClient {
     // TODO: implement cleanOldLogs
     var all = getAppLogs();
     List<int> ids = all.reversed.skip(maxLogs).map((e) => e.id).toList();
-    await appLogs.delete(db, finder: Finder(offset: 0, limit: ids.length));
+    await appLogsStore.delete(db, finder: Finder(offset: 0, limit: ids.length));
     log.fine("clearing ${ids.length} logs out of ${all.length}");
   }
 
@@ -96,10 +96,10 @@ class SembastSqfDb extends IDbClient {
 
     log.fine('History limit ? $limit');
 
-    var count = searchHistory.countSync(db);
+    var count = searchHistoryStore.countSync(db);
     log.fine('search history clear $count/$limit');
     if (count > limit) {
-      await searchHistory.delete(db, finder: Finder(limit: count - limit));
+      await searchHistoryStore.delete(db, finder: Finder(limit: count - limit));
       log.fine('clearing ${count - limit} history itens');
     }
   }
@@ -107,7 +107,7 @@ class SembastSqfDb extends IDbClient {
   @override
   Future<void> clearSearchHistory() async {
     // TODO: implement clearSearchHistory
-    await searchHistory.delete(db);
+    await searchHistoryStore.delete(db);
   }
 
   @override
@@ -117,27 +117,27 @@ class SembastSqfDb extends IDbClient {
 
   @override
   Future<void> deleteDownload(DownloadedVideo vid) async {
-    await downloadedVideos.record(vid.id).delete(db);
+    await downloadedVideosStore.record(vid.id).delete(db);
   }
 
   @override
   Future<void> deleteFilter(VideoFilter filter) async {
-    await videoFilters.record(filter.id).delete(db);
+    await videoFiltersStore.record(filter.id).delete(db);
   }
 
   @override
   deleteServerById(Server server) async {
-    await servers.record(server.url).delete(db);
+    await serversStore.record(server.url).delete(db);
   }
 
   @override
   deleteSetting(String name) async {
-    await settings.record(name).delete(db);
+    await settingsStore.record(name).delete(db);
   }
 
   @override
   List<DownloadedVideo> getAllDownloads() {
-    var records = downloadedVideos.findSync(db);
+    var records = downloadedVideosStore.findSync(db);
     return records.map((e) {
       var d = DownloadedVideo.fromJson(e.value);
       d.id = e.key;
@@ -147,7 +147,7 @@ class SembastSqfDb extends IDbClient {
 
   @override
   List<VideoFilter> getAllFilters() {
-    return videoFilters
+    return videoFiltersStore
         .findSync(db)
         .map((e) => VideoFilter.fromJson(e.value)..id = e.key)
         .toList();
@@ -155,7 +155,7 @@ class SembastSqfDb extends IDbClient {
 
   @override
   List<SettingsValue> getAllSettings() {
-    return settings
+    return settingsStore
         .findSync(db)
         .map((e) => SettingsValue.fromJson(e.value))
         .toList();
@@ -163,7 +163,7 @@ class SembastSqfDb extends IDbClient {
 
   @override
   List<AppLog> getAppLogs() {
-    return appLogs
+    return appLogsStore
         .findSync(db)
         .map((e) => AppLog.fromJson(e.value)..id = e.key)
         .toList();
@@ -171,20 +171,20 @@ class SembastSqfDb extends IDbClient {
 
   @override
   DeArrowCache? getDeArrowCache(String videoId) {
-    var v = deArrowCache.record(videoId).getSync(db);
+    var v = deArrowCacheStore.record(videoId).getSync(db);
 
     return v != null ? DeArrowCache.fromJson(v) : null;
   }
 
   @override
   DownloadedVideo? getDownloadById(int id) {
-    var v = downloadedVideos.record(id).getSync(db);
+    var v = downloadedVideosStore.record(id).getSync(db);
     return v != null ? (DownloadedVideo.fromJson(v)..id = id) : null;
   }
 
   @override
   DownloadedVideo? getDownloadByVideoId(String videoId) {
-    var v = downloadedVideos
+    var v = downloadedVideosStore
         .findSync(db, finder: Finder(filter: Filter.equals("videoId", videoId)))
         .firstOrNull;
     return v != null ? (DownloadedVideo.fromJson(v.value)..id = v.key) : null;
@@ -192,13 +192,13 @@ class SembastSqfDb extends IDbClient {
 
   @override
   HistoryVideoCache? getHistoryVideoByVideoId(String videoId) {
-    var v = historyVideoCache.record(videoId).getSync(db);
+    var v = historyVideoCacheStore.record(videoId).getSync(db);
     return v != null ? HistoryVideoCache.fromJson(v) : null;
   }
 
   @override
   HomeLayout getHomeLayout() {
-    var findFirstSync = homeLayout.findFirstSync(db);
+    var findFirstSync = homeLayoutStore.findFirstSync(db);
     if (findFirstSync != null) {
       return HomeLayout.fromJson(findFirstSync.value);
     } else {
@@ -208,7 +208,7 @@ class SembastSqfDb extends IDbClient {
 
   @override
   List<String> getSearchHistory() {
-    return searchHistory
+    return searchHistoryStore
         .findSync(db)
         .map((e) => SearchHistoryItem.fromJson(e.value).search)
         .toList();
@@ -216,73 +216,76 @@ class SembastSqfDb extends IDbClient {
 
   @override
   Server? getServer(String url) {
-    var v = servers.record(url).getSync(db);
+    var v = serversStore.record(url).getSync(db);
     return v != null ? Server.fromJson(v) : null;
   }
 
   @override
   Future<List<Server>> getServers() async {
-    return (await servers.find(db))
+    return (await serversStore.find(db))
         .map((e) => Server.fromJson(e.value))
         .toList();
   }
 
   @override
   SettingsValue? getSettings(String name) {
-    var v = settings.record(name).getSync(db);
+    var v = settingsStore.record(name).getSync(db);
     return v != null ? SettingsValue.fromJson(v) : null;
   }
 
   @override
   double getVideoProgress(String videoId) {
-    var v = progress.record(videoId).getSync(db);
+    var v = progressStore.record(videoId).getSync(db);
     return v != null ? Progress.fromJson(v).progress : 0;
   }
 
   @override
   Future<void> insertLogs(AppLog log) async {
-    await appLogs.add(db, log.toJson());
+    await appLogsStore.add(db, log.toJson());
     super.insertLogs(log);
   }
 
   @override
   Future<void> saveFilter(VideoFilter filter) async {
-    await videoFilters.record(filter.id).put(db, filter.toJson());
+    await videoFiltersStore.record(filter.id).put(db, filter.toJson());
   }
 
   @override
   saveProgress(Progress progress) async {
-    await this.progress.record(progress.videoId).put(db, progress.toJson());
+    await this
+        .progressStore
+        .record(progress.videoId)
+        .put(db, progress.toJson());
   }
 
   @override
   saveSetting(SettingsValue setting) async {
-    await settings.record(settings.name).put(db, setting.toJson());
+    await settingsStore.record(setting.name).put(db, setting.toJson());
   }
 
   @override
   Future<void> upsertDeArrowCache(DeArrowCache cache) async {
-    await deArrowCache.record(cache.videoId).put(db, cache.toJson());
+    await deArrowCacheStore.record(cache.videoId).put(db, cache.toJson());
   }
 
   @override
   Future<void> upsertDownload(DownloadedVideo vid) async {
-    await downloadedVideos.record(vid.id).put(db, vid.toJson());
+    await downloadedVideosStore.record(vid.id).put(db, vid.toJson());
   }
 
   @override
   Future<void> upsertHistoryVideo(HistoryVideoCache vid) async {
-    await historyVideoCache.record(vid.videoId).put(db, vid.toJson());
+    await historyVideoCacheStore.record(vid.videoId).put(db, vid.toJson());
   }
 
   @override
   Future<void> upsertHomeLayout(HomeLayout layout) async {
-    await homeLayout.record(singleId).put(db, layout.toJson());
+    await homeLayoutStore.record(singleId).put(db, layout.toJson());
   }
 
   @override
   upsertServer(Server server) async {
-    await servers.record(server.url).put(db, server.toJson());
+    await serversStore.record(server.url).put(db, server.toJson());
     await super.upsertServer(server);
   }
 
@@ -291,11 +294,11 @@ class SembastSqfDb extends IDbClient {
     List<Server> servers = await getServers();
     for (Server s in servers) {
       s.inUse = false;
-      await upsertServer(s);
+      await serversStore.record(server.url).put(db, server.toJson());
     }
 
     server.inUse = true;
 
-    await upsertServer(server);
+    await serversStore.record(server.url).put(db, server.toJson());
   }
 }

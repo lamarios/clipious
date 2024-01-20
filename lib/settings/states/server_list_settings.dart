@@ -34,17 +34,17 @@ class ServerListSettingsCubit extends Cubit<ServerListSettingsState> {
   upsertServer(Server server) async {
     await db.upsertServer(server);
 
-    refreshServers();
+    await refreshServers();
   }
 
   refreshServers() async {
+    var dbServers = await db.getServers();
     var servers = state.publicServers
         .where((s) =>
-            state.dbServers.indexWhere((element) => element.url == s.url) == -1)
+            dbServers.indexWhere((element) => element.url == s.url) == -1)
         .toList();
 
-    emit(state.copyWith(
-        dbServers: await db.getServers(), publicServers: servers));
+    emit(state.copyWith(dbServers: dbServers, publicServers: servers));
   }
 
   getPublicServers() async {
@@ -123,13 +123,13 @@ class ServerListSettingsCubit extends Cubit<ServerListSettingsState> {
     if (state.dbServers.isEmpty) {
       switchServer(server);
     }
-    refreshServers();
+    await refreshServers();
   }
 
   switchServer(Server s) async {
     await db.useServer(s);
     await fileDb.useServer(s);
-    refreshServers();
+    await refreshServers();
     appCubit.setServer(s);
   }
 }
