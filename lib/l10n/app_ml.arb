@@ -214,5 +214,30 @@
   "videoFilterValue": "മൂല്യം",
   "@videoFilterValue": {
     "description": "Label for filter value"
+  },
+  "subtitles": "ഉപശീർഷകങ്ങൾ",
+  "@subtitles": {
+    "description": "Name of TV ui subtitles settings"
+  },
+  "useSponsorBlock": "SponsorBlock ഉപയോഗിക്കുക",
+  "@useSponsorBlock": {
+    "description": "label for sponsorblock checkbox"
+  },
+  "videoListed": "പരസ്യമായ",
+  "@videoListed": {
+    "description": "Status of a publicly available video"
+  },
+  "currentServer": "നിലവിൽ {current} ഉപയോഗിക്കുന്നു",
+  "@currentServer": {
+    "description": "Which server the user is currently using",
+    "placeholders": {
+      "current": {
+        "type": "String"
+      }
+    }
+  },
+  "search": "തിരയുക",
+  "@search": {
+    "description": "search title"
   }
 }
