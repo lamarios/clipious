@@ -277,5 +277,45 @@
   "appLanguage": "പ്രയോഗ ഭാഷ",
   "@appLanguage": {
     "description": "Select app language"
+  },
+  "subtitlesBackground": "ഉപശീർഷക പശ്ചാത്തലം",
+  "@subtitlesBackground": {
+    "description": "Title for settings to set black background  for subtitles"
+  },
+  "subtitlesBackgroundDescription": "ഉപശീർഷകങ്ങൾ കൂടുതൽ വായിക്കാൻ കഴിയുന്ന തരത്തിൽ ഒരു കറുത്ത പശ്ചാത്തലം ചേർക്കുന്നു",
+  "@subtitlesBackgroundDescription": {
+    "description": "Description for settings to set black background  for subtitles"
+  },
+  "playbackSpeed": "പിന്നണി വേഗത",
+  "@playbackSpeed": {
+    "description": "Name of TV ui Playback speed"
+  },
+  "themeLight": "വെളിച്ചം",
+  "@themeLight": {
+    "description": "Light theme"
+  },
+  "followSystem": "വ്യവസ്ഥിതിയെ പിന്തുടരുക",
+  "@followSystem": {
+    "description": "Follow system label"
+  },
+  "requiresRestart": "പ്രയോഗം പുനരാരംഭിക്കേണ്ടതുണ്ട്",
+  "@requiresRestart": {
+    "description": "Requires app restart label"
+  },
+  "distractionFreeModeDescription": "വീഡിയോ അഭിപ്രായങ്ങളും ശുപാർശകളും പ്രവർത്തനരഹിതമാക്കുക",
+  "@distractionFreeModeDescription": {
+    "description": "Description for distraction free mode"
+  },
+  "themeDark": "ഇരുണ്ട",
+  "@themeDark": {
+    "description": "Dark theme"
+  },
+  "askToEnableBackgroundServiceTitle": "അറിയിപ്പുകൾ നിർത്തിയിരിക്കുന്നു",
+  "@askToEnableBackgroundServiceTitle": {
+    "description": "If the users tries to turn on notifications for a channel but hasn't enable notifications in the app we need to turn it on for them"
+  },
+  "customizeAppLayout": "പ്രയോഗത്തിലെ വിഭാഗങ്ങൾ ഇഷ്ടാനുസൃതമാക്കുക",
+  "@customizeAppLayout": {
+    "description": "Settings label for the settings to allow the user to set up the app sections themselves"
   }
 }
