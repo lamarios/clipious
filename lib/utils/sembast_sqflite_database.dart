@@ -20,7 +20,6 @@ import 'package:sembast/sembast_memory.dart';
 import 'package:sembast_sqflite/sembast_sqflite.dart';
 import 'package:sqflite/sqflite.dart' as sqflite;
 import 'package:uuid/uuid.dart';
-import 'package:uuid/v4.dart';
 
 import '../settings/states/settings.dart';
 

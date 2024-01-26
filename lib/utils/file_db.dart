@@ -360,12 +360,6 @@ class FileDB extends IDbClient {
   }
 
   @override
-  DownloadedVideo? getDownloadById(int id) {
-    // TODO: implement getDownloadById
-    throw UnimplementedError();
-  }
-
-  @override
   DownloadedVideo? getDownloadByVideoId(String videoId) {
     // TODO: implement getDownloadByVideoId
     throw UnimplementedError();
