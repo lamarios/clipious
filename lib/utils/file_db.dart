@@ -218,23 +218,29 @@ class FileDB extends IDbClient {
     try {
       await f.delete();
     } catch (e) {
-      // might have no file, we proceed to the rest
+      log.fine('file doesn\'t exist');
     }
 
     f = await _openAppFile(_playlistNotifsFile);
     try {
       await f.delete();
-    } catch (e) {}
+    } catch (e) {
+      log.fine('file doesn\'t exist');
+    }
 
     f = await _openAppFile(_subNotifsFile);
     try {
       await f.delete();
-    } catch (e) {}
+    } catch (e) {
+      log.fine('file doesn\'t exist');
+    }
 
     f = await _openAppFile(_genericSettings);
     try {
       await f.delete();
-    } catch (e) {}
+    } catch (e) {
+      log.fine('file doesn\'t exist');
+    }
   }
 
   /*
@@ -357,7 +363,7 @@ class FileDB extends IDbClient {
   }
 
   @override
-  DownloadedVideo? getDownloadByVideoId(String id) {
+  DownloadedVideo? getDownloadByVideoId(String videoId) {
     // TODO: implement getDownloadByVideoId
     throw UnimplementedError();
   }

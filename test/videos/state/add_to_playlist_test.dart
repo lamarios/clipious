@@ -11,7 +11,7 @@ void main() {
 
   test('like video', () async {
     const videoId = 'dQw4w9WgXcQ';
-    var cubit = AddToPlaylistCubit(await AddToPlaylistController.init(videoId));
+    var cubit = AddToPlaylistCubit(const AddToPlaylistController(videoId));
     await cubit.onReady();
     expect(cubit.state.playlists.length, 0);
     expect(cubit.state.playListCount, 0);
@@ -39,7 +39,7 @@ void main() {
     await service.createPlayList("test playlist", "public");
 
     const videoId = 'dQw4w9WgXcQ';
-    var cubit = AddToPlaylistCubit(await AddToPlaylistController.init(videoId));
+    var cubit = AddToPlaylistCubit(const AddToPlaylistController(videoId));
     await cubit.onReady();
     expect(cubit.state.playlists.length, 1);
     expect(cubit.state.playListCount, 0);

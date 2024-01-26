@@ -128,9 +128,5 @@ class AddToPlaylistController with _$AddToPlaylistController {
       @Default(0) int playListCount,
       @Default(false) bool isVideoLiked,
       @Default(true) bool loading,
-      required bool isLoggedIn}) = _AddToPlaylistController;
-
-  static AddToPlaylistController init(String videoId) {
-    return AddToPlaylistController(videoId, isLoggedIn: false);
-  }
+      @Default(false) bool isLoggedIn}) = _AddToPlaylistController;
 }

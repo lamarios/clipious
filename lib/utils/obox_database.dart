@@ -228,10 +228,10 @@ class DbClient extends IDbClient {
   }
 
   @override
-  DownloadedVideo? getDownloadByVideoId(String id) {
+  DownloadedVideo? getDownloadByVideoId(String videoId) {
     return store
         .box<DownloadedVideo>()
-        .query(DownloadedVideo_.videoId.equals(id))
+        .query(DownloadedVideo_.videoId.equals(videoId))
         .build()
         .findFirst();
   }

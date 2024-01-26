@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:intl/intl.dart';
 
-const BYTE_UNITS = [
+const byteUnits = [
   'B',
   'KB',
   'MB',
@@ -14,7 +14,7 @@ const BYTE_UNITS = [
   'YB',
 ];
 
-const BIBYTE_UNITS = [
+const bibyteUnits = [
   'B',
   'KiB',
   'MiB',
@@ -26,7 +26,7 @@ const BIBYTE_UNITS = [
   'YiB',
 ];
 
-const BIT_UNITS = [
+const bitUnits = [
   'b',
   'Kbit',
   'Mbit',
@@ -38,7 +38,7 @@ const BIT_UNITS = [
   'Ybit',
 ];
 
-const BIBIT_UNITS = [
+const bibitUnits = [
   'b',
   'Kibit',
   'Mibit',
@@ -124,12 +124,12 @@ String prettyBytes(
   /// ```
   int? maximumFractionDigits,
 }) {
-  final UNITS = (bits == true)
-      ? (binary == true ? BIBIT_UNITS : BIT_UNITS)
-      : (binary == true ? BIBYTE_UNITS : BYTE_UNITS);
+  final units = (bits == true)
+      ? (binary == true ? bibitUnits : bitUnits)
+      : (binary == true ? bibyteUnits : byteUnits);
 
   if (signed == true && number == 0) {
-    return ' 0 ${UNITS[0]}';
+    return ' 0 ${units[0]}';
   }
 
   final isNegative = number < 0;
@@ -142,13 +142,13 @@ String prettyBytes(
   if (number < 1) {
     final numberStr = toLocaleString(
         number, locale, minimumFractionDigits, maximumFractionDigits);
-    return prefix + numberStr + ' ' + UNITS[0];
+    return '$prefix$numberStr ${units[0]}';
   }
 
   final exponent = min(
           (binary != null ? log(number) / log(1024) : log10(number) / 3)
               .floorToDouble(),
-          (UNITS.length - 1).toDouble())
+          (units.length - 1).toDouble())
       .toInt();
   number /= pow(binary != null ? 1024 : 1000, exponent);
   if (minimumFractionDigits == null && maximumFractionDigits == null) {
@@ -158,7 +158,7 @@ String prettyBytes(
   final numberStr = toLocaleString(
       number, locale, minimumFractionDigits, maximumFractionDigits);
 
-  final unit = UNITS[exponent];
+  final unit = units[exponent];
 
   return '$prefix$numberStr $unit';
 }

@@ -114,7 +114,7 @@ abstract class IDbClient {
 
   DownloadedVideo? getDownloadById(int id);
 
-  DownloadedVideo? getDownloadByVideoId(String id);
+  DownloadedVideo? getDownloadByVideoId(String videoId);
 
   HistoryVideoCache? getHistoryVideoByVideoId(String videoId);
 

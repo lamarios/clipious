@@ -168,7 +168,7 @@ class _$AddToPlaylistControllerImpl implements _AddToPlaylistController {
       this.playListCount = 0,
       this.isVideoLiked = false,
       this.loading = true,
-      required this.isLoggedIn})
+      this.isLoggedIn = false})
       : _playlists = playlists;
 
   @override
@@ -192,6 +192,7 @@ class _$AddToPlaylistControllerImpl implements _AddToPlaylistController {
   @JsonKey()
   final bool loading;
   @override
+  @JsonKey()
   final bool isLoggedIn;
 
   @override
@@ -240,7 +241,7 @@ abstract class _AddToPlaylistController implements AddToPlaylistController {
       final int playListCount,
       final bool isVideoLiked,
       final bool loading,
-      required final bool isLoggedIn}) = _$AddToPlaylistControllerImpl;
+      final bool isLoggedIn}) = _$AddToPlaylistControllerImpl;
 
   @override
   String get videoId;

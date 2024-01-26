@@ -266,7 +266,6 @@ class SettingsCubit extends Cubit<SettingsState> {
 
   Future<EnableBackGroundNotificationResponse> setBackgroundNotifications(
       bool b) async {
-    print(b);
     if (!b) {
       await stopTasks();
       await _setBackgroundNotifications(b);

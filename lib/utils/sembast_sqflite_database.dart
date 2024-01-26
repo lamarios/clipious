@@ -260,10 +260,7 @@ class SembastSqfDb extends IDbClient {
 
   @override
   saveProgress(Progress progress) async {
-    await this
-        .progressStore
-        .record(progress.videoId)
-        .put(db, progress.toJson());
+    await progressStore.record(progress.videoId).put(db, progress.toJson());
   }
 
   @override

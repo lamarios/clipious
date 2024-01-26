@@ -189,7 +189,7 @@ class DbMigrationCubit extends Cubit<DbMigrationState> {
 
   _renameOldDb(String oldPath) {
     var db = Directory(oldPath);
-    db.renameSync('$oldPath-old');
+    db.renameSync('$oldPath-old-${DateTime.now().millisecondsSinceEpoch}');
   }
 }
 
