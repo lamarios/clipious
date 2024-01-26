@@ -112,8 +112,6 @@ abstract class IDbClient {
 
   Future<void> deleteDownload(DownloadedVideo vid);
 
-  DownloadedVideo? getDownloadById(int id);
-
   DownloadedVideo? getDownloadByVideoId(String videoId);
 
   HistoryVideoCache? getHistoryVideoByVideoId(String videoId);

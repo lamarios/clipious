@@ -92,7 +92,7 @@ class VideoFilterChannel extends StatelessWidget {
               if (!_.loading && _.channel != null)
                 SettingsTitle(title: _.channel?.author ?? ''),
               ..._.filters.map((e) => SettingsTile(
-                  key: ValueKey(e.id),
+                  key: ValueKey(e.uuid),
                   title: e.localizedLabel(locals, context),
                   onSelected: (context) => editFilter(context, filter: e)))
             ],

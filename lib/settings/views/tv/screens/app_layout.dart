@@ -11,7 +11,7 @@ import 'package:invidious/utils/views/tv/components/tv_overscan.dart';
 class TvAppLayoutSettingsScreen extends StatelessWidget {
   const TvAppLayoutSettingsScreen({super.key});
 
-  toggleDataSource(BuildContext context, HomeDataSource ds) {
+  toggleDataSource(BuildContext context, HomeDataSource ds) async {
     var settings = context.read<SettingsCubit>();
     var current = settings.state.appLayout;
     var defaults = HomeDataSource.defaultSettings();
@@ -24,7 +24,7 @@ class TvAppLayoutSettingsScreen extends StatelessWidget {
       current.add(ds);
     }
     // use defaaults to keep original order
-    settings.setAppLayout(
+    await settings.setAppLayout(
         defaults.where((element) => current.contains(element)).toList());
   }
 

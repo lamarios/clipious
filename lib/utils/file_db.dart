@@ -272,8 +272,11 @@ class FileDB extends IDbClient {
     _log.fine('Syncing file settings with DB');
     var fileSettings = await getGenericSettings();
     fileSettings.locale = db.getSettings(localeSettingName)?.value;
-    fileSettings.server = await db.getCurrentlySelectedServer();
-
+    try {
+      fileSettings.server = await db.getCurrentlySelectedServer();
+    } catch (err) {
+      _log.fine("No server selected in the DB settings, we proceed without");
+    }
     await updateGenericSettings(fileSettings);
   }
 

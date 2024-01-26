@@ -19,6 +19,8 @@ import 'package:sembast/sembast.dart';
 import 'package:sembast/sembast_memory.dart';
 import 'package:sembast_sqflite/sembast_sqflite.dart';
 import 'package:sqflite/sqflite.dart' as sqflite;
+import 'package:uuid/uuid.dart';
+import 'package:uuid/v4.dart';
 
 import '../settings/states/settings.dart';
 
@@ -28,15 +30,15 @@ const singleId = 1;
 class SembastSqfDb extends IDbClient {
   final log = Logger('SembastSqfLDB');
   final Database db;
-  final downloadedVideosStore = intMapStoreFactory.store('downloadedVideo');
+  final downloadedVideosStore = stringMapStoreFactory.store('downloadedVideo');
   final homeLayoutStore =
       intMapStoreFactory.store('homeLayout'); // always use id = 1
   final searchHistoryStore =
       stringMapStoreFactory.store('searchHistory'); // use term as key
-  final appLogsStore = intMapStoreFactory.store('appLogs');
+  final appLogsStore = stringMapStoreFactory.store('appLogs');
   final serversStore =
       stringMapStoreFactory.store('serviers'); // use server url as key
-  final videoFiltersStore = intMapStoreFactory.store('videoFilters');
+  final videoFiltersStore = stringMapStoreFactory.store('videoFilters');
   final settingsStore =
       stringMapStoreFactory.store('settings'); // settings name as key;
   final deArrowCacheStore =
@@ -67,9 +69,9 @@ class SembastSqfDb extends IDbClient {
     return SembastSqfDb(db);
   }
 
-  static Future<SembastSqfDb> createInMenory() async {
+  static Future<SembastSqfDb> createInMemory() async {
     var factory = newDatabaseFactoryMemory();
-    var db = await factory.openDatabase("test.db");
+    var db = await factory.openDatabase("${const Uuid().v4()}.db");
     return SembastSqfDb(db);
   }
 
@@ -125,12 +127,12 @@ class SembastSqfDb extends IDbClient {
 
   @override
   Future<void> deleteDownload(DownloadedVideo vid) async {
-    await downloadedVideosStore.record(vid.id).delete(db);
+    await downloadedVideosStore.record(vid.videoId).delete(db);
   }
 
   @override
   Future<void> deleteFilter(VideoFilter filter) async {
-    await videoFiltersStore.record(filter.id).delete(db);
+    await videoFiltersStore.record(filter.uuid).delete(db);
   }
 
   @override
@@ -148,7 +150,7 @@ class SembastSqfDb extends IDbClient {
     var records = downloadedVideosStore.findSync(db);
     return records.map((e) {
       var d = DownloadedVideo.fromJson(e.value);
-      d.id = e.key;
+      d.videoId = e.key;
       return d;
     }).toList();
   }
@@ -157,7 +159,7 @@ class SembastSqfDb extends IDbClient {
   List<VideoFilter> getAllFilters() {
     return videoFiltersStore
         .findSync(db)
-        .map((e) => VideoFilter.fromJson(e.value)..id = e.key)
+        .map((e) => VideoFilter.fromJson(e.value)..uuid = e.key)
         .toList();
   }
 
@@ -173,7 +175,7 @@ class SembastSqfDb extends IDbClient {
   List<AppLog> getAppLogs() {
     return appLogsStore
         .findSync(db)
-        .map((e) => AppLog.fromJson(e.value)..id = e.key)
+        .map((e) => AppLog.fromJson(e.value)..uuid = e.key)
         .toList();
   }
 
@@ -185,17 +187,9 @@ class SembastSqfDb extends IDbClient {
   }
 
   @override
-  DownloadedVideo? getDownloadById(int id) {
-    var v = downloadedVideosStore.record(id).getSync(db);
-    return v != null ? (DownloadedVideo.fromJson(v)..id = id) : null;
-  }
-
-  @override
   DownloadedVideo? getDownloadByVideoId(String videoId) {
-    var v = downloadedVideosStore
-        .findSync(db, finder: Finder(filter: Filter.equals("videoId", videoId)))
-        .firstOrNull;
-    return v != null ? (DownloadedVideo.fromJson(v.value)..id = v.key) : null;
+    var v = downloadedVideosStore.record(videoId).getSync(db);
+    return v != null ? DownloadedVideo.fromJson(v) : null;
   }
 
   @override
@@ -249,13 +243,18 @@ class SembastSqfDb extends IDbClient {
 
   @override
   Future<void> insertLogs(AppLog log) async {
+    log.uuid = const Uuid().v4();
     await appLogsStore.add(db, log.toJson());
     super.insertLogs(log);
   }
 
   @override
   Future<void> saveFilter(VideoFilter filter) async {
-    await videoFiltersStore.record(filter.id).put(db, filter.toJson());
+    if (filter.uuid == VideoFilter(value: "").uuid) {
+      // generate new id
+      filter.uuid = const Uuid().v4();
+    }
+    await videoFiltersStore.record(filter.uuid).put(db, filter.toJson());
   }
 
   @override
@@ -275,7 +274,7 @@ class SembastSqfDb extends IDbClient {
 
   @override
   Future<void> upsertDownload(DownloadedVideo vid) async {
-    await downloadedVideosStore.record(vid.id).put(db, vid.toJson());
+    await downloadedVideosStore.record(vid.videoId).put(db, vid.toJson());
   }
 
   @override

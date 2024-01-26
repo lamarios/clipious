@@ -12,7 +12,7 @@ void main() {
   // Setting a customer override that'll use an unmocked HTTP client
   late AppCubit app;
   setUp(() async {
-    db = await SembastSqfDb.createInMenory();
+    db = await SembastSqfDb.createInMemory();
     app = TestAppCubit(AppState(0, null, HomeLayout()));
     await app.initState();
   });

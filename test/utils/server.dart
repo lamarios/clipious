@@ -11,7 +11,7 @@ Future<Server> getLoggedInTestServer() async {
 }
 
 Future<void> setUpTestsForTestServer() async{
-  db = await SembastSqfDb.createInMenory();
+  db = await SembastSqfDb.createInMemory();
   var server = await getLoggedInTestServer();
   await db.upsertServer(server);
   await db.useServer(server);

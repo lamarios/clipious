@@ -94,7 +94,7 @@ final _entities = <ModelEntity>[
   ModelEntity(
       id: const IdUid(6, 8304874620604193998),
       name: 'VideoFilter',
-      lastPropertyId: const IdUid(12, 9166993721458673597),
+      lastPropertyId: const IdUid(13, 8945583272502028280),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
@@ -562,7 +562,8 @@ ModelDefinition getObjectBoxModel() {
         2647517759142178088,
         7759611646931835814,
         1230803493579490035,
-        5023716219165786985
+        5023716219165786985,
+        8945583272502028280
       ],
       retiredRelationUids: const [],
       modelVersion: 5,
@@ -666,7 +667,7 @@ ModelDefinition getObjectBoxModel() {
           final daysOfWeekOffset = fbb.writeListInt64(object.daysOfWeek);
           final startTimeOffset = fbb.writeString(object.startTime);
           final endTimeOffset = fbb.writeString(object.endTime);
-          fbb.startTable(13);
+          fbb.startTable(14);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, channelIdOffset);
           fbb.addOffset(2, valueOffset);

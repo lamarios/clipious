@@ -33,7 +33,7 @@ enum EnableBackGroundNotificationResponse {
   needBatteryOptimization;
 }
 
-var log = Logger('SettingsController');
+var _log = Logger('SettingsController');
 
 class SettingsCubit extends Cubit<SettingsState> {
   final AppCubit appCubit;

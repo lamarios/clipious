@@ -9,6 +9,8 @@ part of 'video_filter.dart';
 abstract class _$VideoFilterCWProxy {
   VideoFilter id(int id);
 
+  VideoFilter uuid(String uuid);
+
   VideoFilter channelId(String? channelId);
 
   VideoFilter operation(FilterOperation? operation);
@@ -35,6 +37,7 @@ abstract class _$VideoFilterCWProxy {
   /// ````
   VideoFilter call({
     int? id,
+    String? uuid,
     String? channelId,
     FilterOperation? operation,
     FilterType? type,
@@ -55,6 +58,9 @@ class _$VideoFilterCWProxyImpl implements _$VideoFilterCWProxy {
 
   @override
   VideoFilter id(int id) => this(id: id);
+
+  @override
+  VideoFilter uuid(String uuid) => this(uuid: uuid);
 
   @override
   VideoFilter channelId(String? channelId) => this(channelId: channelId);
@@ -95,6 +101,7 @@ class _$VideoFilterCWProxyImpl implements _$VideoFilterCWProxy {
   /// ````
   VideoFilter call({
     Object? id = const $CopyWithPlaceholder(),
+    Object? uuid = const $CopyWithPlaceholder(),
     Object? channelId = const $CopyWithPlaceholder(),
     Object? operation = const $CopyWithPlaceholder(),
     Object? type = const $CopyWithPlaceholder(),
@@ -110,6 +117,10 @@ class _$VideoFilterCWProxyImpl implements _$VideoFilterCWProxy {
           ? _value.id
           // ignore: cast_nullable_to_non_nullable
           : id as int,
+      uuid == const $CopyWithPlaceholder() || uuid == null
+          ? _value.uuid
+          // ignore: cast_nullable_to_non_nullable
+          : uuid as String,
       channelId == const $CopyWithPlaceholder()
           ? _value.channelId
           // ignore: cast_nullable_to_non_nullable

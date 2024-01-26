@@ -9,7 +9,7 @@ Future<void> main() async {
 
   setUp(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
-    db = await SembastSqfDb.createInMenory();
+    db = await SembastSqfDb.createInMemory();
   });
 
   tearDown(() async => await db.close());
@@ -24,9 +24,9 @@ Future<void> main() async {
     // we don't exactly know when the logs are going to be cleaned up
     expect(cubit.state.logs.isEmpty, false);
 
-    cubit.selectLog(cubit.state.logs[10].id, true);
+    cubit.selectLog(cubit.state.logs[10].uuid, true);
     expect(cubit.state.selected.length, 1);
-    cubit.selectLog(cubit.state.logs[10].id, false);
+    cubit.selectLog(cubit.state.logs[10].uuid, false);
     expect(cubit.state.selected.length, 0);
 
     cubit.selectAll();

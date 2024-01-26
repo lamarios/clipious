@@ -46,6 +46,7 @@ class AppLogsScreen extends StatelessWidget {
                       itemBuilder: (context, index) {
                         AppLog log = _.logs[index];
                         return CheckboxListTile(
+                          key: ValueKey(log.uuid),
                           title: Text(
                             '${log.level} - ${log.logger} - ${log.time}',
                             style: textTheme.labelSmall
@@ -55,9 +56,9 @@ class AppLogsScreen extends StatelessWidget {
                               '${log.message}${log.stacktrace != null ? '\n\n${log.stacktrace}' : ''}'),
                           dense: true,
                           visualDensity: VisualDensity.compact,
-                          value: _.selected.contains(log.id),
+                          value: _.selected.contains(log.uuid),
                           onChanged: (bool? value) =>
-                              cubit.selectLog(log.id, value),
+                              cubit.selectLog(log.uuid, value),
                         );
                       },
                       separatorBuilder: (BuildContext context, int index) {

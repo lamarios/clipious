@@ -10,6 +10,11 @@ class AppLog {
   @JsonKey(includeFromJson: false, includeToJson: false)
   int id = 0;
 
+  // will be the key on sembast, we don't need to store it as data
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @obox.Transient()
+  String uuid = '';
+
   String level;
   String logger;
 

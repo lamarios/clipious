@@ -32,7 +32,7 @@ class TvVideoItem extends StatelessWidget {
       if (e.filtered) {
         var cubit = context.read<VideoInListCubit>();
         cubit.showVideoDetails();
-        return;
+        return KeyEventResult.handled;
       }
       if (onSelect != null) {
         onSelect!(context, e);
@@ -63,7 +63,7 @@ class TvVideoItem extends StatelessWidget {
             child: Focus(
                 onFocusChange: onFocusChange,
                 onKeyEvent: (node, event) =>
-                    openVideo(context, video, node, event),
+                    openVideo(context, _.video!.toVideoInList(), node, event),
                 autofocus: autoFocus,
                 child: Builder(builder: (ctx) {
                   final FocusNode focusNode = Focus.of(ctx);
@@ -87,7 +87,7 @@ class TvVideoItem extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                video.filtered
+                                (_.video?.filtered ?? false)
                                     ? AspectRatio(
                                         aspectRatio: 16 / 9,
                                         child: Container(
@@ -225,7 +225,9 @@ class TvVideoItem extends StatelessWidget {
                                 Padding(
                                   padding: const EdgeInsets.only(left: 8.0),
                                   child: Text(
-                                    video.filtered ? '**********' : video.title,
+                                    (_.video?.filtered ?? false)
+                                        ? '**********'
+                                        : video.title,
                                     maxLines: 2,
                                     overflow: TextOverflow.ellipsis,
                                     style: TextStyle(color: colors.primary),

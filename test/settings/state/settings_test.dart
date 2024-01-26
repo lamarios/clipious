@@ -12,7 +12,7 @@ import '../../test_settings_cubit.dart';
 Future<void> main() async {
   late SettingsCubit settingsCubit;
   setUp(() async {
-    db = await SembastSqfDb.createInMenory();
+    db = await SembastSqfDb.createInMemory();
     var appCubit = TestAppCubit(AppState(0, null, HomeLayout()));
     await appCubit.initState();
     settingsCubit = TestSettingsCubit(SettingsState.init(), appCubit);
