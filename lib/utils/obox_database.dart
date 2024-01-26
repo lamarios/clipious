@@ -223,11 +223,6 @@ class DbClient extends IDbClient {
   }
 
   @override
-  DownloadedVideo? getDownloadById(int id) {
-    return store.box<DownloadedVideo>().get(id);
-  }
-
-  @override
   DownloadedVideo? getDownloadByVideoId(String videoId) {
     return store
         .box<DownloadedVideo>()
