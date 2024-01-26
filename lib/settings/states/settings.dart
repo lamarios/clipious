@@ -10,7 +10,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:invidious/app/states/app.dart';
 import 'package:invidious/workmanager.dart';
 import 'package:locale_names/locale_names.dart';
-import 'package:logging/logging.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 import '../../globals.dart';
