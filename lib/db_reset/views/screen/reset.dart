@@ -26,7 +26,7 @@ class ResetScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Icon(
+                  const Icon(
                     Icons.warning_amber,
                     size: 50,
                   ),
