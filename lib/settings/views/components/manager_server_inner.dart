@@ -2,7 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:invidious/app/states/app.dart';
 import 'package:invidious/router.dart';
 import 'package:invidious/settings/models/errors/cannot_add_server_error.dart';
 import 'package:invidious/settings/models/errors/missing_software_key.dart';
