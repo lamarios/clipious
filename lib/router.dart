@@ -72,18 +72,12 @@ final log = Logger('Router');
 @AutoRouterConfig(replaceInRouteName: 'Screen,Route')
 class AppRouter extends _$AppRouter {
   final bool needsDbMigration;
+  final bool hasServer;
 
-  AppRouter({required this.needsDbMigration});
+  AppRouter({required this.needsDbMigration, required this.hasServer});
 
   @override
   List<AutoRoute> get routes {
-    bool hasServer = false;
-    try {
-      db.getCurrentlySelectedServer();
-      hasServer = true;
-    } catch (e) {
-      hasServer = false;
-    }
     return isTv
         ? [
             AutoRoute(

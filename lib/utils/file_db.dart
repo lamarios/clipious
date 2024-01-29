@@ -32,8 +32,9 @@ part 'file_db.g.dart';
 
 const _subNotifsFile = 'subscription_notifications.json',
     _channelNotifFile = 'channel_notifications.json',
-    _playlistNotifsFile = "player_list_notifications.json",
-    _genericSettings = "generic_settings.json";
+    _playlistNotifsFile = "playlist_notifications.json",
+    _genericSettings = "generic_settings.json",
+    _fileDbFolder = 'fileDb';
 
 final _log = Logger('FileDb');
 
@@ -185,11 +186,17 @@ class FileDB extends IDbClient {
   }
 
   Future<File> _openAppFile(String path) async {
-    late final Directory docsDir;
+    late Directory docsDir;
     try {
       docsDir = await getApplicationDocumentsDirectory();
     } catch (e) {
       docsDir = Directory.current;
+    }
+
+    docsDir = Directory(p.join(docsDir.path, _fileDbFolder));
+
+    if (!(await docsDir.exists())) {
+      await docsDir.create(recursive: true);
     }
 
     var dbPath = p.join(docsDir.path, path);

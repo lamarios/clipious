@@ -60,7 +60,15 @@ Future<void> main() async {
   await fileDb.syncWithDb();
 
   final needsDbMigration = await needsMigration();
-  appRouter = AppRouter(needsDbMigration: needsDbMigration);
+  late final bool hasServer;
+  try {
+    await db.getCurrentlySelectedServer();
+    hasServer = true;
+  } catch (err) {
+    hasServer = false;
+  }
+  appRouter =
+      AppRouter(needsDbMigration: needsDbMigration, hasServer: hasServer);
 
   initializeNotifications();
 
