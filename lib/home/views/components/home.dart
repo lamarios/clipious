@@ -24,12 +24,13 @@ class HomeView extends StatelessWidget {
         .then((value) => context.read<AppCubit>().updateLayout());
   }
 
-  List<Widget> getSmallSources(BuildContext context, HomeLayout layout) {
+  List<Widget> getSmallSources(
+      BuildContext context, HomeLayout layout, bool isLoggedIn) {
     var textTheme = Theme.of(context).textTheme;
     var colors = Theme.of(context).colorScheme;
     var locals = AppLocalizations.of(context)!;
     return layout.smallSources
-        .where((element) => element.isPermitted(context))
+        .where((element) => element.isPermitted(context, isLoggedIn))
         .map((e) => Padding(
               key: ValueKey(e),
               padding: const EdgeInsets.only(bottom: 8.0),
@@ -65,6 +66,7 @@ class HomeView extends StatelessWidget {
         var locals = AppLocalizations.of(context)!;
         var scrolled = context.select((HomeCubit home) => home.state);
         var home = context.read<HomeCubit>();
+        var isLoggedIn = context.select((AppCubit value) => value.isLoggedIn);
 
         return NotificationListener(
           onNotification: (notificationInfo) {
@@ -100,7 +102,8 @@ class HomeView extends StatelessWidget {
                           duration: animationDuration,
                           firstChild: Column(
                               mainAxisSize: MainAxisSize.min,
-                              children: getSmallSources(context, layout)),
+                              children:
+                                  getSmallSources(context, layout, isLoggedIn)),
                           secondChild: const Row(
                             children: [
                               SizedBox.shrink(),

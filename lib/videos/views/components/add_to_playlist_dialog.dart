@@ -80,63 +80,65 @@ class AddToPlaylistDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var locals = AppLocalizations.of(context)!;
-    var app = context.read<AppCubit>();
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(mainAxisSize: MainAxisSize.min, children: [
-        Text(locals.selectPlaylist),
-        !app.isLoggedIn
-            ? Expanded(
-                child: Align(
-                    alignment: Alignment.center,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(locals.notLoggedIn),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 4.0),
-                          child: FilledButton(
-                              onPressed: () => openServerSettings(context),
-                              child: Text(locals.logIn)),
-                        )
-                      ],
-                    )))
-            : Expanded(
-                child: ListView(
-                  children: playlists.map((p) {
-                    bool inPlaylist =
-                        p.videos.any((element) => element.videoId == videoId);
-                    return FilledButton.tonal(
-                        onPressed: inPlaylist
-                            ? null
-                            : () => addToPlaylist(context, p.playlistId),
-                        child: Row(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: SizedBox(
-                                  width: 20,
-                                  child: inPlaylist
-                                      ? const Icon(
-                                          Icons.check,
-                                          size: 15,
-                                        )
-                                      : const SizedBox.shrink()),
-                            ),
-                            Expanded(child: Text(p.title)),
-                          ],
-                        ));
-                  }).toList(),
+    return BlocBuilder<AppCubit, AppState>(builder: (context, state) {
+      var app = context.read<AppCubit>();
+      return Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(mainAxisSize: MainAxisSize.min, children: [
+          Text(locals.selectPlaylist),
+          !app.isLoggedIn
+              ? Expanded(
+                  child: Align(
+                      alignment: Alignment.center,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(locals.notLoggedIn),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 4.0),
+                            child: FilledButton(
+                                onPressed: () => openServerSettings(context),
+                                child: Text(locals.logIn)),
+                          )
+                        ],
+                      )))
+              : Expanded(
+                  child: ListView(
+                    children: playlists.map((p) {
+                      bool inPlaylist =
+                          p.videos.any((element) => element.videoId == videoId);
+                      return FilledButton.tonal(
+                          onPressed: inPlaylist
+                              ? null
+                              : () => addToPlaylist(context, p.playlistId),
+                          child: Row(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: SizedBox(
+                                    width: 20,
+                                    child: inPlaylist
+                                        ? const Icon(
+                                            Icons.check,
+                                            size: 15,
+                                          )
+                                        : const SizedBox.shrink()),
+                              ),
+                              Expanded(child: Text(p.title)),
+                            ],
+                          ));
+                    }).toList(),
+                  ),
                 ),
-              ),
-        FilledButton.tonal(
-          onPressed: app.isLoggedIn ? () => newPlaylistAndAdd(context) : null,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [const Icon(Icons.add), Text(locals.createNewPlaylist)],
-          ),
-        )
-      ]),
-    );
+          FilledButton.tonal(
+            onPressed: app.isLoggedIn ? () => newPlaylistAndAdd(context) : null,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [const Icon(Icons.add), Text(locals.createNewPlaylist)],
+            ),
+          )
+        ]),
+      );
+    });
   }
 }

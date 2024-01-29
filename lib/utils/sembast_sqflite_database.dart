@@ -297,7 +297,7 @@ class SembastSqfDb extends IDbClient {
     List<Server> servers = await getServers();
     for (Server s in servers) {
       s.inUse = false;
-      await serversStore.record(server.url).put(db, server.toJson());
+      await serversStore.record(s.url).put(db, s.toJson());
     }
 
     server.inUse = true;

@@ -79,8 +79,10 @@ class TvHomeScreen extends StatelessWidget {
             var homeCubit = context.read<TvHomeCubit>();
             var appLayout =
                 context.select((SettingsCubit value) => value.state.appLayout);
+            var isLoggedIn =
+                context.select((AppCubit value) => value.isLoggedIn);
             var allowedPages = appLayout
-                .where((element) => element.isPermitted(context))
+                .where((element) => element.isPermitted(context, isLoggedIn))
                 .toList();
             return BlocBuilder<AppCubit, AppState>(
                 buildWhen: (previous, current) {

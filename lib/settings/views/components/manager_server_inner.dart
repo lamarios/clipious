@@ -166,7 +166,6 @@ class ManagerServersView extends StatelessWidget {
       builder: (ctx, _) {
         SettingsCubit settings = context.watch<SettingsCubit>();
         ServerListSettingsCubit cubit = context.read<ServerListSettingsCubit>();
-        var app = context.read<AppCubit>();
         var filteredPublicServers = _.publicServers
             .where((s) =>
                 _.dbServers.indexWhere((element) => element.url == s.url) == -1)
@@ -198,7 +197,7 @@ class ManagerServersView extends StatelessWidget {
                                       padding: const EdgeInsets.all(8.0),
                                       child: Icon(
                                         Icons.done,
-                                        color: s.url == app.state.server?.url
+                                        color: s.inUse
                                             ? colorScheme.primary
                                             : colorScheme.secondaryContainer,
                                       ),

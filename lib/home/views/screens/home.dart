@@ -98,7 +98,7 @@ class _HomeScreenState extends State<HomeScreen> {
       var settings = context.watch<SettingsCubit>().state;
 
       var allowedPages = settings.appLayout
-          .where((element) => element.isPermitted(context))
+          .where((element) => element.isPermitted(context, app.isLoggedIn))
           .toList();
       var navigationWidgets = allowedPages
           .map((e) => e.getBottomBarNavigationWidget(context))

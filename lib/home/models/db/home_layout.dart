@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:invidious/app/states/app.dart';
 import 'package:invidious/videos/models/video_in_list.dart';
 import 'package:objectbox/objectbox.dart' as obox;
 
@@ -79,12 +78,12 @@ enum HomeDataSource {
     };
   }
 
-  bool isPermitted(BuildContext context) {
+  bool isPermitted(BuildContext context, bool isLoggedIn) {
     return switch (this) {
       (HomeDataSource.subscription ||
             HomeDataSource.playlist ||
             HomeDataSource.history) =>
-        context.read<AppCubit>().isLoggedIn,
+        isLoggedIn,
       (HomeDataSource.searchHistory) =>
         context.read<SettingsCubit>().state.useSearchHistory,
       (_) => true
