@@ -6,7 +6,6 @@ import 'package:invidious/utils.dart';
 import 'package:invidious/videos/models/base_video.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:logging/logging.dart';
-import 'package:objectbox/objectbox.dart' as obox;
 
 part 'video_filter.g.dart';
 
@@ -59,24 +58,16 @@ enum FilterOperation {
   }
 }
 
-@obox.Entity()
 @JsonSerializable()
 @CopyWith(constructor: "_")
 class VideoFilter {
-  @obox.Id()
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  int id = 0;
-
   // will be the key on sembast, we don't need to store it as data
   @JsonKey(includeFromJson: false, includeToJson: false)
-  @obox.Transient()
   String uuid = '';
 
   String? channelId;
 
-  @obox.Transient()
   FilterOperation? operation = FilterOperation.contain;
-  @obox.Transient()
   FilterType? type = FilterType.title;
 
   String? value;
@@ -85,7 +76,6 @@ class VideoFilter {
   bool hideFromFeed = false;
 
   VideoFilter._(
-      this.id,
       this.uuid,
       this.channelId,
       this.operation,

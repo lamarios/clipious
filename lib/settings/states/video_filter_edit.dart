@@ -103,7 +103,7 @@ class VideoFilterEditCubit extends Cubit<VideoFilterEditState> {
     if (state.filter != null) {
       state.filter?.channelId = state.channel?.authorId;
       log.fine(
-          'hide all ? ${state.filter?.filterAll} filter id: ${state.filter?.id.toString()}');
+          'hide all ? ${state.filter?.filterAll} filter id: ${state.filter?.uuid}');
       await db.saveFilter(state.filter!);
       // VideoFilterController.to()?.refreshFilters();
     }

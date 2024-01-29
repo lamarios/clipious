@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:invidious/videos/models/video_in_list.dart';
-import 'package:objectbox/objectbox.dart' as obox;
 
 import '../../../downloads/states/download_manager.dart';
 import '../../../globals.dart';
@@ -208,19 +207,12 @@ enum HomeDataSource {
 }
 
 // objectBox
-@obox.Entity()
 @CopyWith(constructor: "_")
 @JsonSerializable()
 class HomeLayout {
-  @obox.Id()
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  int id = 0;
-
-  @obox.Transient()
   @JsonKey(includeFromJson: false, includeToJson: false)
   List<HomeDataSource> smallSources = [HomeDataSource.popular];
 
-  @obox.Transient()
   @JsonKey(includeFromJson: false, includeToJson: false)
   HomeDataSource bigSource = HomeDataSource.trending;
 
@@ -228,7 +220,7 @@ class HomeLayout {
 
   HomeLayout();
 
-  HomeLayout._(this.id, this.smallSources, this.bigSource, this.showBigSource);
+  HomeLayout._(this.smallSources, this.bigSource, this.showBigSource);
 
   String get dbBigSource => bigSource.name;
 

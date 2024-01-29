@@ -7,8 +7,6 @@ part of 'video_filter.dart';
 // **************************************************************************
 
 abstract class _$VideoFilterCWProxy {
-  VideoFilter id(int id);
-
   VideoFilter uuid(String uuid);
 
   VideoFilter channelId(String? channelId);
@@ -36,7 +34,6 @@ abstract class _$VideoFilterCWProxy {
   /// VideoFilter(...).copyWith(id: 12, name: "My name")
   /// ````
   VideoFilter call({
-    int? id,
     String? uuid,
     String? channelId,
     FilterOperation? operation,
@@ -55,9 +52,6 @@ class _$VideoFilterCWProxyImpl implements _$VideoFilterCWProxy {
   const _$VideoFilterCWProxyImpl(this._value);
 
   final VideoFilter _value;
-
-  @override
-  VideoFilter id(int id) => this(id: id);
 
   @override
   VideoFilter uuid(String uuid) => this(uuid: uuid);
@@ -100,7 +94,6 @@ class _$VideoFilterCWProxyImpl implements _$VideoFilterCWProxy {
   /// VideoFilter(...).copyWith(id: 12, name: "My name")
   /// ````
   VideoFilter call({
-    Object? id = const $CopyWithPlaceholder(),
     Object? uuid = const $CopyWithPlaceholder(),
     Object? channelId = const $CopyWithPlaceholder(),
     Object? operation = const $CopyWithPlaceholder(),
@@ -113,10 +106,6 @@ class _$VideoFilterCWProxyImpl implements _$VideoFilterCWProxy {
     Object? endTime = const $CopyWithPlaceholder(),
   }) {
     return VideoFilter._(
-      id == const $CopyWithPlaceholder() || id == null
-          ? _value.id
-          // ignore: cast_nullable_to_non_nullable
-          : id as int,
       uuid == const $CopyWithPlaceholder() || uuid == null
           ? _value.uuid
           // ignore: cast_nullable_to_non_nullable

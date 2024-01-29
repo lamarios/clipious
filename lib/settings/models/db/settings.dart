@@ -1,5 +1,4 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:objectbox/objectbox.dart' as obox;
 
 part 'settings.g.dart';
 
@@ -43,14 +42,8 @@ const fullScreenOnLandscapeSettingName = "fullscreen-on-landscape";
 
 const onOpenSettingName = "on-open";
 
-@obox.Entity()
 @JsonSerializable()
 class SettingsValue {
-  @obox.Id()
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  int id = 0;
-
-  @obox.Unique(onConflict: obox.ConflictStrategy.replace)
   String name;
 
   String value;

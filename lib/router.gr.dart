@@ -98,7 +98,7 @@ abstract class _$AppRouter extends RootStackRouter {
     MigrationRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const MigrationScreen(),
+        child: const ResetScreen(),
       );
     },
     NotificationSettingsRoute.name: (routeData) {
@@ -615,7 +615,7 @@ class ManageSubscriptionsRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [MigrationScreen]
+/// [ResetScreen]
 class MigrationRoute extends PageRouteInfo<void> {
   const MigrationRoute({List<PageRouteInfo>? children})
       : super(

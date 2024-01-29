@@ -1,24 +1,16 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:objectbox/objectbox.dart' as obox;
 
 part 'app_logs.g.dart';
 
-@obox.Entity()
 @JsonSerializable()
 class AppLog {
-  @obox.Id()
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  int id = 0;
-
   // will be the key on sembast, we don't need to store it as data
   @JsonKey(includeFromJson: false, includeToJson: false)
-  @obox.Transient()
   String uuid = '';
 
   String level;
   String logger;
 
-  @obox.Property(type: obox.PropertyType.date)
   DateTime time;
 
   String? stacktrace;

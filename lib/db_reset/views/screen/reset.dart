@@ -7,8 +7,8 @@ import 'package:invidious/utils/views/tv/components/tv_button.dart';
 import '../../states/reset.dart';
 
 @RoutePage()
-class MigrationScreen extends StatelessWidget {
-  const MigrationScreen({super.key});
+class ResetScreen extends StatelessWidget {
+  const ResetScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -26,24 +26,42 @@ class MigrationScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+                  Icon(
+                    Icons.warning_amber,
+                    size: 50,
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
                   const Text(
                       'In order to keep the application fully open source, the local database backend needs to be switched. Unfortunately there is no simple way to migrate the data.'),
                   const SizedBox(
                     height: 20,
                   ),
                   const Text(
-                    'The application will be reset',
+                    'The application needs to be reset',
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(
                     height: 20,
                   ),
                   const Text(
-                      'The application will close once the process if finished'),
+                      'The application will close once the process is finished'),
+                  const SizedBox(
+                    height: 20,
+                  ),
                   isTv
-                      ? TvButton(
-                          child: const Text('Reset application'),
-                          onPressed: (context) => cubit.resetDb())
+                      ? Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            TvButton(
+                                child: const Padding(
+                                  padding: EdgeInsets.all(8.0),
+                                  child: Text('Reset application'),
+                                ),
+                                onPressed: (context) => cubit.resetDb()),
+                          ],
+                        )
                       : FilledButton.tonal(
                           onPressed: cubit.resetDb,
                           child: const Text('Reset application'))

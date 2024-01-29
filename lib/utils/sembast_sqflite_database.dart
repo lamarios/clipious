@@ -87,7 +87,7 @@ class SembastSqfDb extends IDbClient {
   Future<void> cleanOldLogs() async {
     // TODO: implement cleanOldLogs
     var all = getAppLogs();
-    List<int> ids = all.reversed.skip(maxLogs).map((e) => e.id).toList();
+    List<String> ids = all.reversed.skip(maxLogs).map((e) => e.uuid).toList();
     await appLogsStore.delete(db,
         finder: Finder(
             sortOrders: [SortOrder("time")], offset: 0, limit: ids.length));

@@ -34,7 +34,7 @@ class ChannelNotificationList extends StatelessWidget {
               itemBuilder: (context, index) {
                 var notif = channels[index];
                 return Container(
-                  key: ValueKey(notif.id),
+                  key: ValueKey(notif.channelId),
                   padding:
                       const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
                   decoration: BoxDecoration(

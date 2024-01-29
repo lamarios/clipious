@@ -1,19 +1,13 @@
 import 'package:invidious/videos/models/base_video.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:objectbox/objectbox.dart' as obox;
 
 import '../../../globals.dart';
 import '../../../utils/models/image_object.dart';
 
 part 'history_video_cache.g.dart';
 
-@obox.Entity()
 @JsonSerializable()
 class HistoryVideoCache {
-  @obox.Id()
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  int id = 0;
-
   String title;
   String? author;
 
