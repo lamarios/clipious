@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:collection';
+import 'dart:math';
 
 import 'package:audio_service/audio_service.dart';
 import 'package:audio_session/audio_session.dart';
@@ -37,6 +38,8 @@ const double miniPlayerThreshold = 300;
 const skipToVideoThrottleName = 'skip-to-video';
 const double bigPlayerThreshold = 700;
 const stepMultiplier = 1.15;
+
+const maxInt = -1 >>> 1;
 
 var log = Logger('MiniPlayerController');
 
@@ -350,22 +353,31 @@ class PlayerCubit extends Cubit<PlayerState> with WidgetsBindingObserver {
     var newPosition = position ?? Duration.zero;
     int currentPosition = newPosition.inSeconds;
     await saveProgress(currentPosition);
-    log.fine("video event");
+    log.fine("video progress event");
 
     emit(state.copyWith(position: newPosition));
 
-    if (state.sponsorSegments.isNotEmpty) {
+    // if we're already within the last 5 seconds we don't skip to avoid infinite skip loop on lat outro segment
+    if (state.sponsorSegments.isNotEmpty &&
+        state.position.inSeconds <
+            (state.currentlyPlaying?.lengthSeconds ?? maxInt) - 5) {
+      log.fine('sponsor skipped');
       double positionInMs = currentPosition * 1000;
       Pair<int> nextSegment = state.sponsorSegments.firstWhere(
           (e) => e.first <= positionInMs && positionInMs <= e.last,
           orElse: () => const Pair<int>(-1, -1));
+
       if (nextSegment.first != -1) {
+        // sometimes when reaching the end of a video, the sponsor skip keeps on being triggered
+        // we remove on second of last segment if it is the case
+        var skipTo = nextSegment.last + 1000;
+
         emit(state.copyWith(
             mediaEvent: const MediaEvent(
                 state: MediaState.playing,
                 type: MediaEventType.sponsorSkipped)));
         //for some reasons this needs to be last
-        seek(Duration(milliseconds: nextSegment.last + 1000));
+        seek(Duration(milliseconds: skipTo + 1000));
 /*
         final ScaffoldMessengerState? scaffold = scaffoldKey.currentState;
 
