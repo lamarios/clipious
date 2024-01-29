@@ -1,18 +1,8 @@
-import 'package:invidious/downloads/models/downloaded_video.dart';
-import 'package:invidious/home/models/db/home_layout.dart';
-import 'package:invidious/notifications/models/db/channel_notifications.dart';
-import 'package:invidious/notifications/models/db/playlist_notifications.dart';
-import 'package:invidious/notifications/models/db/subscription_notifications.dart';
-import 'package:invidious/search/models/db/search_history_item.dart';
-import 'package:invidious/settings/models/db/app_logs.dart';
-import 'package:invidious/settings/models/db/server.dart';
-import 'package:invidious/settings/models/db/settings.dart';
 import 'package:invidious/utils/obox_database.dart';
 import 'package:invidious/videos/models/db/dearrow_cache.dart';
 import 'package:invidious/videos/models/db/history_video_cache.dart';
 import 'package:logging/logging.dart';
 
-import '../settings/models/db/video_filter.dart';
 import '../videos/models/db/progress.dart';
 
 final _logs = Logger('Migration utils');

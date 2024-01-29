@@ -28,10 +28,14 @@ class DbResetCubit extends Cubit<DbResetState> {
     try {
       emit(state.copyWith(loading: true));
 
+      _log.fine('Starting to delete everything');
+
       // deleting everything from current app directory
       var appDir = await getApplicationDocumentsDirectory();
 
       await appDir.delete(recursive: true);
+
+      _log.fine('Deletion complete');
 
       emit(state.copyWith(loading: false));
       exit(0);
