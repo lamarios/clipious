@@ -357,7 +357,7 @@ class PlayerCubit extends Cubit<PlayerState> with WidgetsBindingObserver {
 
     emit(state.copyWith(position: newPosition));
 
-    // if we're already within the last 5 seconds we don't skip to avoid infinite skip loop on lat outro segment
+    // if we're already within the last 5 seconds we don't skip to avoid infinite skip loop on late outro segment
     if (state.sponsorSegments.isNotEmpty &&
         state.position.inSeconds <
             (state.currentlyPlaying?.lengthSeconds ?? maxInt) - 5) {
