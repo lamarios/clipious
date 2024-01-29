@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:invidious/app/views/screens/main.dart';
 import 'package:invidious/app/views/tv/screens/tv_home.dart';
-import 'package:invidious/globals.dart';
 import 'package:invidious/player/states/player.dart';
 import 'package:invidious/player/views/tv/screens/tv_player_view.dart';
 import 'package:invidious/playlists/models/playlist.dart';
