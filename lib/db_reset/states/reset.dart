@@ -43,11 +43,6 @@ class DbResetCubit extends Cubit<DbResetState> {
       log.severe("Error running migrations", e);
     }
   }
-
-  _renameOldDb(String oldPath) {
-    var db = Directory(oldPath);
-    db.renameSync('$oldPath-old-${DateTime.now().millisecondsSinceEpoch}');
-  }
 }
 
 @freezed
