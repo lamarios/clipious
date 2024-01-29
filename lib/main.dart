@@ -8,7 +8,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_displaymode/flutter_displaymode.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/app/states/app.dart';
-import 'package:invidious/db_migration/migration_utils.dart';
 import 'package:invidious/downloads/states/download_manager.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/home/models/db/home_layout.dart';
@@ -24,6 +23,7 @@ import 'package:invidious/utils/sembast_sqflite_database.dart';
 import 'package:invidious/workmanager.dart';
 import 'package:logging/logging.dart';
 
+import 'db_reset/migration_utils.dart';
 import 'settings/models/db/app_logs.dart';
 
 const brandColor = Color(0xFF4f0096);

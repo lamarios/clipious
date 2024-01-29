@@ -53,7 +53,7 @@ import 'package:logging/logging.dart';
 
 import 'channels/views/screens/channel.dart';
 import 'channels/views/tv/screens/channel.dart';
-import 'db_migration/views/screen/migration.dart';
+import 'db_reset/views/screen/migration.dart';
 import 'downloads/views/screens/download_manager.dart';
 import 'home/views/screens/edit_layout.dart';
 import 'home/views/screens/home.dart';
