@@ -95,6 +95,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const ManageSubscriptionsScreen(),
       );
     },
+    MigrationRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const ResetScreen(),
+      );
+    },
     NotificationSettingsRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -604,6 +610,20 @@ class ManageSubscriptionsRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'ManageSubscriptionsRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [ResetScreen]
+class MigrationRoute extends PageRouteInfo<void> {
+  const MigrationRoute({List<PageRouteInfo>? children})
+      : super(
+          MigrationRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'MigrationRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

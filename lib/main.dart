@@ -10,17 +10,20 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/app/states/app.dart';
 import 'package:invidious/downloads/states/download_manager.dart';
 import 'package:invidious/globals.dart';
+import 'package:invidious/home/models/db/home_layout.dart';
 import 'package:invidious/http_overrides.dart';
 import 'package:invidious/media_handler.dart';
 import 'package:invidious/notifications/notifications.dart';
 import 'package:invidious/player/states/player.dart';
 import 'package:invidious/router.dart';
+import 'package:invidious/settings/models/db/settings.dart';
 import 'package:invidious/settings/states/settings.dart';
 import 'package:invidious/utils.dart';
+import 'package:invidious/utils/sembast_sqflite_database.dart';
 import 'package:invidious/workmanager.dart';
 import 'package:logging/logging.dart';
 
-import 'database.dart';
+import 'db_reset/reset_utils.dart';
 import 'settings/models/db/app_logs.dart';
 
 const brandColor = Color(0xFF4f0096);
@@ -35,12 +38,12 @@ final Logger log = Logger('main');
 Future<void> main() async {
   Logger.root.level =
       kDebugMode ? Level.FINEST : Level.INFO; // defaults to Level.INFO
-  Logger.root.onRecord.listen((record) {
+  Logger.root.onRecord.listen((record) async {
     debugPrint(
         '[${record.level.name}] [${record.loggerName}] ${record.message}');
     // we don't want debug
     if (record.level == Level.INFO || record.level == Level.SEVERE) {
-      db.insertLogs(AppLog(
+      await db.insertLogs(AppLog(
           logger: record.loggerName,
           level: record.level.name,
           time: record.time,
@@ -53,7 +56,19 @@ Future<void> main() async {
 
   WidgetsFlutterBinding.ensureInitialized();
   // FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
-  db = await DbClient.create();
+  db = await SembastSqfDb.create();
+  await fileDb.syncWithDb();
+
+  final needsDbMigration = await needsReset();
+  late final bool hasServer;
+  try {
+    await db.getCurrentlySelectedServer();
+    hasServer = true;
+  } catch (err) {
+    hasServer = false;
+  }
+  appRouter =
+      AppRouter(needsDbMigration: needsDbMigration, hasServer: hasServer);
 
   initializeNotifications();
 
@@ -68,7 +83,7 @@ Future<void> main() async {
   runApp(MultiBlocProvider(providers: [
     BlocProvider(
       create: (context) {
-        return AppCubit(AppState.init());
+        return AppCubit(AppState(0, null, HomeLayout()));
       },
     ),
     BlocProvider(

@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$SettingsState {
   Map<String, SettingsValue> get settings => throw _privateConstructorUsedError;
   PackageInfo get packageInfo => throw _privateConstructorUsedError;
+  dynamic get subscriptionNotifications => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SettingsStateCopyWith<SettingsState> get copyWith =>
@@ -30,7 +31,10 @@ abstract class $SettingsStateCopyWith<$Res> {
           SettingsState value, $Res Function(SettingsState) then) =
       _$SettingsStateCopyWithImpl<$Res, SettingsState>;
   @useResult
-  $Res call({Map<String, SettingsValue> settings, PackageInfo packageInfo});
+  $Res call(
+      {Map<String, SettingsValue> settings,
+      PackageInfo packageInfo,
+      dynamic subscriptionNotifications});
 }
 
 /// @nodoc
@@ -48,6 +52,7 @@ class _$SettingsStateCopyWithImpl<$Res, $Val extends SettingsState>
   $Res call({
     Object? settings = null,
     Object? packageInfo = null,
+    Object? subscriptionNotifications = freezed,
   }) {
     return _then(_value.copyWith(
       settings: null == settings
@@ -58,6 +63,10 @@ class _$SettingsStateCopyWithImpl<$Res, $Val extends SettingsState>
           ? _value.packageInfo
           : packageInfo // ignore: cast_nullable_to_non_nullable
               as PackageInfo,
+      subscriptionNotifications: freezed == subscriptionNotifications
+          ? _value.subscriptionNotifications
+          : subscriptionNotifications // ignore: cast_nullable_to_non_nullable
+              as dynamic,
     ) as $Val);
   }
 }
@@ -70,7 +79,10 @@ abstract class _$$SettingsStateImplCopyWith<$Res>
       __$$SettingsStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Map<String, SettingsValue> settings, PackageInfo packageInfo});
+  $Res call(
+      {Map<String, SettingsValue> settings,
+      PackageInfo packageInfo,
+      dynamic subscriptionNotifications});
 }
 
 /// @nodoc
@@ -86,6 +98,7 @@ class __$$SettingsStateImplCopyWithImpl<$Res>
   $Res call({
     Object? settings = null,
     Object? packageInfo = null,
+    Object? subscriptionNotifications = freezed,
   }) {
     return _then(_$SettingsStateImpl(
       settings: null == settings
@@ -96,6 +109,9 @@ class __$$SettingsStateImplCopyWithImpl<$Res>
           ? _value.packageInfo
           : packageInfo // ignore: cast_nullable_to_non_nullable
               as PackageInfo,
+      subscriptionNotifications: freezed == subscriptionNotifications
+          ? _value.subscriptionNotifications!
+          : subscriptionNotifications,
     ));
   }
 }
@@ -105,7 +121,8 @@ class __$$SettingsStateImplCopyWithImpl<$Res>
 class _$SettingsStateImpl extends _SettingsState {
   const _$SettingsStateImpl(
       {required final Map<String, SettingsValue> settings,
-      required this.packageInfo})
+      required this.packageInfo,
+      this.subscriptionNotifications = false})
       : _settings = settings,
         super._();
 
@@ -119,10 +136,13 @@ class _$SettingsStateImpl extends _SettingsState {
 
   @override
   final PackageInfo packageInfo;
+  @override
+  @JsonKey()
+  final dynamic subscriptionNotifications;
 
   @override
   String toString() {
-    return 'SettingsState(settings: $settings, packageInfo: $packageInfo)';
+    return 'SettingsState(settings: $settings, packageInfo: $packageInfo, subscriptionNotifications: $subscriptionNotifications)';
   }
 
   @override
@@ -132,12 +152,17 @@ class _$SettingsStateImpl extends _SettingsState {
             other is _$SettingsStateImpl &&
             const DeepCollectionEquality().equals(other._settings, _settings) &&
             (identical(other.packageInfo, packageInfo) ||
-                other.packageInfo == packageInfo));
+                other.packageInfo == packageInfo) &&
+            const DeepCollectionEquality().equals(
+                other.subscriptionNotifications, subscriptionNotifications));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_settings), packageInfo);
+      runtimeType,
+      const DeepCollectionEquality().hash(_settings),
+      packageInfo,
+      const DeepCollectionEquality().hash(subscriptionNotifications));
 
   @JsonKey(ignore: true)
   @override
@@ -149,13 +174,16 @@ class _$SettingsStateImpl extends _SettingsState {
 abstract class _SettingsState extends SettingsState {
   const factory _SettingsState(
       {required final Map<String, SettingsValue> settings,
-      required final PackageInfo packageInfo}) = _$SettingsStateImpl;
+      required final PackageInfo packageInfo,
+      final dynamic subscriptionNotifications}) = _$SettingsStateImpl;
   const _SettingsState._() : super._();
 
   @override
   Map<String, SettingsValue> get settings;
   @override
   PackageInfo get packageInfo;
+  @override
+  dynamic get subscriptionNotifications;
   @override
   @JsonKey(ignore: true)
   _$$SettingsStateImplCopyWith<_$SettingsStateImpl> get copyWith =>

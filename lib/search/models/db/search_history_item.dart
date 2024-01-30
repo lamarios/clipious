@@ -1,12 +1,17 @@
-import 'package:objectbox/objectbox.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-@Entity()
+part 'search_history_item.g.dart';
+
+@JsonSerializable()
 class SearchHistoryItem {
-  @Id()
-  int id = 0;
-  @Unique(onConflict: ConflictStrategy.replace)
   String search;
+
   int time;
 
   SearchHistoryItem(this.search, this.time);
+
+  factory SearchHistoryItem.fromJson(Map<String, dynamic> json) =>
+      _$SearchHistoryItemFromJson(json);
+
+  Map<String, dynamic> toJson() => _$SearchHistoryItemToJson(this);
 }

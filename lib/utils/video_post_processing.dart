@@ -17,7 +17,7 @@ Future<List<BaseVideo>> postProcessVideos(List<BaseVideo> toProcess) async {
     videos = await VideoFilter.filterVideos(videos);
     videos = await DeArrow.processVideos(videos);
 
-    log.info(
+    log.fine(
         "Filter + DeArrow took ${DateTime.now().millisecondsSinceEpoch - start}ms for ${toProcess.length} videos");
     return videos;
   } catch (err) {

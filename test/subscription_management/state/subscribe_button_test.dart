@@ -2,7 +2,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/subscription_management/states/subscribe_button.dart';
 
-import '../../utils/memorydb.dart';
 import '../../utils/server.dart';
 
 void main() {

@@ -120,3 +120,21 @@ extension $ServerCopyWith on Server {
   // ignore: library_private_types_in_public_api
   _$ServerCWProxy get copyWith => _$ServerCWProxyImpl(this);
 }
+
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+Server _$ServerFromJson(Map<String, dynamic> json) => Server(
+      url: json['url'] as String,
+      authToken: json['authToken'] as String?,
+      sidCookie: json['sidCookie'] as String?,
+      inUse: json['inUse'] as bool? ?? false,
+    );
+
+Map<String, dynamic> _$ServerToJson(Server instance) => <String, dynamic>{
+      'url': instance.url,
+      'authToken': instance.authToken,
+      'sidCookie': instance.sidCookie,
+      'inUse': instance.inUse,
+    };

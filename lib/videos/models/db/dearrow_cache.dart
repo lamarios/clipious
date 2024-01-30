@@ -1,14 +1,17 @@
-import 'package:objectbox/objectbox.dart';
+import 'package:json_annotation/json_annotation.dart';
 
-@Entity()
+part 'dearrow_cache.g.dart';
+
+@JsonSerializable()
 class DeArrowCache {
-  @Id()
-  int id = 0;
-
-  @Unique(onConflict: ConflictStrategy.replace)
   String videoId;
   String? title;
   String? url;
 
   DeArrowCache(this.videoId);
+
+  factory DeArrowCache.fromJson(Map<String, dynamic> json) =>
+      _$DeArrowCacheFromJson(json);
+
+  Map<String, dynamic> toJson() => _$DeArrowCacheToJson(this);
 }

@@ -7,7 +7,7 @@ part of 'video_filter.dart';
 // **************************************************************************
 
 abstract class _$VideoFilterCWProxy {
-  VideoFilter id(int id);
+  VideoFilter uuid(String uuid);
 
   VideoFilter channelId(String? channelId);
 
@@ -34,7 +34,7 @@ abstract class _$VideoFilterCWProxy {
   /// VideoFilter(...).copyWith(id: 12, name: "My name")
   /// ````
   VideoFilter call({
-    int? id,
+    String? uuid,
     String? channelId,
     FilterOperation? operation,
     FilterType? type,
@@ -54,7 +54,7 @@ class _$VideoFilterCWProxyImpl implements _$VideoFilterCWProxy {
   final VideoFilter _value;
 
   @override
-  VideoFilter id(int id) => this(id: id);
+  VideoFilter uuid(String uuid) => this(uuid: uuid);
 
   @override
   VideoFilter channelId(String? channelId) => this(channelId: channelId);
@@ -94,7 +94,7 @@ class _$VideoFilterCWProxyImpl implements _$VideoFilterCWProxy {
   /// VideoFilter(...).copyWith(id: 12, name: "My name")
   /// ````
   VideoFilter call({
-    Object? id = const $CopyWithPlaceholder(),
+    Object? uuid = const $CopyWithPlaceholder(),
     Object? channelId = const $CopyWithPlaceholder(),
     Object? operation = const $CopyWithPlaceholder(),
     Object? type = const $CopyWithPlaceholder(),
@@ -106,10 +106,10 @@ class _$VideoFilterCWProxyImpl implements _$VideoFilterCWProxy {
     Object? endTime = const $CopyWithPlaceholder(),
   }) {
     return VideoFilter._(
-      id == const $CopyWithPlaceholder() || id == null
-          ? _value.id
+      uuid == const $CopyWithPlaceholder() || uuid == null
+          ? _value.uuid
           // ignore: cast_nullable_to_non_nullable
-          : id as int,
+          : uuid as String,
       channelId == const $CopyWithPlaceholder()
           ? _value.channelId
           // ignore: cast_nullable_to_non_nullable
@@ -155,3 +155,51 @@ extension $VideoFilterCopyWith on VideoFilter {
   // ignore: library_private_types_in_public_api
   _$VideoFilterCWProxy get copyWith => _$VideoFilterCWProxyImpl(this);
 }
+
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+VideoFilter _$VideoFilterFromJson(Map<String, dynamic> json) => VideoFilter(
+      value: json['value'] as String?,
+      channelId: json['channelId'] as String?,
+    )
+      ..operation =
+          $enumDecodeNullable(_$FilterOperationEnumMap, json['operation'])
+      ..type = $enumDecodeNullable(_$FilterTypeEnumMap, json['type'])
+      ..filterAll = json['filterAll'] as bool
+      ..hideFromFeed = json['hideFromFeed'] as bool
+      ..dbType = json['dbType'] as String?
+      ..daysOfWeek =
+          (json['daysOfWeek'] as List<dynamic>).map((e) => e as int).toList()
+      ..startTime = json['startTime'] as String
+      ..endTime = json['endTime'] as String
+      ..dbOperation = json['dbOperation'] as String?;
+
+Map<String, dynamic> _$VideoFilterToJson(VideoFilter instance) =>
+    <String, dynamic>{
+      'channelId': instance.channelId,
+      'operation': _$FilterOperationEnumMap[instance.operation],
+      'type': _$FilterTypeEnumMap[instance.type],
+      'value': instance.value,
+      'filterAll': instance.filterAll,
+      'hideFromFeed': instance.hideFromFeed,
+      'dbType': instance.dbType,
+      'daysOfWeek': instance.daysOfWeek,
+      'startTime': instance.startTime,
+      'endTime': instance.endTime,
+      'dbOperation': instance.dbOperation,
+    };
+
+const _$FilterOperationEnumMap = {
+  FilterOperation.contain: 'contain',
+  FilterOperation.notContain: 'notContain',
+  FilterOperation.lowerThan: 'lowerThan',
+  FilterOperation.higherThan: 'higherThan',
+};
+
+const _$FilterTypeEnumMap = {
+  FilterType.title: 'title',
+  FilterType.channelName: 'channelName',
+  FilterType.length: 'length',
+};

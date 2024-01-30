@@ -1,16 +1,19 @@
-import 'package:objectbox/objectbox.dart';
+import 'package:json_annotation/json_annotation.dart';
 
-@Entity()
+part 'progress.g.dart';
+
+@JsonSerializable()
 class Progress {
-  @Id()
-  int id = 0;
-
   double progress = 0;
 
-  @Unique(onConflict: ConflictStrategy.replace)
   String videoId;
 
-  Progress(this.id, this.progress, this.videoId);
+  Progress(this.progress, this.videoId);
 
   Progress.named({required this.progress, required this.videoId});
+
+  factory Progress.fromJson(Map<String, dynamic> json) =>
+      _$ProgressFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ProgressToJson(this);
 }

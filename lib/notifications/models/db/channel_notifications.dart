@@ -1,12 +1,10 @@
-import 'package:objectbox/objectbox.dart';
+import 'package:json_annotation/json_annotation.dart';
 
-@Entity()
+part 'channel_notifications.g.dart';
+
+@JsonSerializable()
 class ChannelNotification {
-  @Id()
-  int id = 0;
-
-  @Unique(onConflict: ConflictStrategy.replace)
-  String channelId;
+  final String channelId;
 
   String lastSeenVideoId;
 
@@ -20,4 +18,9 @@ class ChannelNotification {
     this.lastSeenVideoId,
     this.timestamp,
   );
+
+  factory ChannelNotification.fromJson(Map<String, dynamic> json) =>
+      _$ChannelNotificationFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ChannelNotificationToJson(this);
 }

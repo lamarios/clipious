@@ -48,7 +48,7 @@ class VideoQueue extends StatelessWidget {
     bool isPlaying = state.offlineCurrentlyPlaying?.videoId == v.videoId;
 
     return SwipeActionCell(
-      key: ValueKey('$index-${v.id}'),
+      key: ValueKey('$index-${v.videoId}'),
       trailingActions: isPlaying
           ? []
           : [

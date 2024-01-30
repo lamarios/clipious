@@ -48,7 +48,8 @@ class DownloadedVideoCubit extends Cubit<DownloadedVideoState> {
   }
 
   void refreshVideo() async {
-    emit(state.copyWith(video: db.getDownloadById(state.video?.id ?? -1)!));
+    emit(state.copyWith(
+        video: db.getDownloadByVideoId(state.video?.videoId ?? '')!));
 
     setThumbnail();
   }
@@ -78,7 +79,7 @@ class DownloadedVideoCubit extends Cubit<DownloadedVideoState> {
 
   setComplete() {
     log.fine("Video ${state.video!.videoId} download complete");
-    var downloadById = db.getDownloadById(state.video!.id);
+    var downloadById = db.getDownloadByVideoId(state.video!.videoId);
     emit(state.copyWith(progress: 1, video: downloadById));
   }
 }
@@ -90,9 +91,9 @@ class DownloadedVideoState with _$DownloadedVideoState {
       String? thumbnailPath,
       @Default(0) double progress}) = _DownloadedVideoState;
 
-  static DownloadedVideoState init(int videoId) {
+  static DownloadedVideoState init(String videoId) {
     DownloadedVideo? video;
-    var downloadById = db.getDownloadById(videoId);
+    var downloadById = db.getDownloadByVideoId(videoId);
     if (downloadById != null) {
       video = downloadById;
     }

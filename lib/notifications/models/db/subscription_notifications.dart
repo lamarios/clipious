@@ -1,13 +1,17 @@
-import 'package:objectbox/objectbox.dart';
+import 'package:json_annotation/json_annotation.dart';
 
-@Entity()
+part 'subscription_notifications.g.dart';
+
+@JsonSerializable()
 class SubscriptionNotification {
-  @Id()
-  int id = 0;
-
   String lastSeenVideoId;
 
   int timestamp;
 
   SubscriptionNotification(this.lastSeenVideoId, this.timestamp);
+
+  factory SubscriptionNotification.fromJson(Map<String, dynamic> json) =>
+      _$SubscriptionNotificationFromJson(json);
+
+  Map<String, dynamic> toJson() => _$SubscriptionNotificationToJson(this);
 }

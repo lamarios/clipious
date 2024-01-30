@@ -1,24 +1,22 @@
 import 'package:copy_with_extension/copy_with_extension.dart';
-import 'package:objectbox/objectbox.dart';
+import 'package:json_annotation/json_annotation.dart';
 
 part 'server.g.dart';
 
-@Entity()
 @CopyWith()
+@JsonSerializable()
 class Server {
-  @Id()
-  int id = -1;
-  @Unique(onConflict: ConflictStrategy.replace)
   String url;
   String? authToken;
   String? sidCookie;
 
-  @Transient()
+  @JsonKey(includeFromJson: false, includeToJson: false)
   Duration? ping;
 
-  @Transient()
+  @JsonKey(includeFromJson: false, includeToJson: false)
   String? flag;
-  @Transient()
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
   String? region;
 
   bool inUse;
@@ -31,4 +29,8 @@ class Server {
       this.flag,
       this.region,
       this.inUse = false});
+
+  factory Server.fromJson(Map<String, dynamic> json) => _$ServerFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ServerToJson(this);
 }

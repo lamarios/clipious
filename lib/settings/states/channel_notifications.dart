@@ -6,27 +6,43 @@ import 'package:invidious/notifications/models/db/playlist_notifications.dart';
 abstract class NotificationListCubit<T> extends Cubit<List<T>> {
   NotificationListCubit(super.initialState);
 
+  getNotifications();
+
   deleteNotification(T notif);
 }
 
 class ChannelNotificationListCubit
     extends NotificationListCubit<ChannelNotification> {
-  ChannelNotificationListCubit(super.initialState);
+  ChannelNotificationListCubit(super.initialState) {
+    getNotifications();
+  }
 
   @override
-  deleteNotification(ChannelNotification notif) {
-    db.deleteChannelNotification(notif);
-    emit(List.of(db.getAllChannelNotifications()));
+  getNotifications() async {
+    emit(List.of(await fileDb.getAllChannelNotifications()));
+  }
+
+  @override
+  deleteNotification(ChannelNotification notif) async {
+    await fileDb.deleteChannelNotification(notif);
+    await getNotifications();
   }
 }
 
 class PlaylistNotificationListCubit
     extends NotificationListCubit<PlaylistNotification> {
-  PlaylistNotificationListCubit(super.initialState);
+  PlaylistNotificationListCubit(super.initialState) {
+    getNotifications();
+  }
 
   @override
-  deleteNotification(PlaylistNotification notif) {
-    db.deletePlaylistNotification(notif);
-    emit(List.of(db.getAllPlaylistNotifications()));
+  deleteNotification(PlaylistNotification notif) async {
+    await fileDb.deletePlaylistNotification(notif);
+    getNotifications();
+  }
+
+  @override
+  getNotifications() async {
+    emit(List.of(await fileDb.getAllPlaylistNotifications()));
   }
 }

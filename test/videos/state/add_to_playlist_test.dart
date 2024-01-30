@@ -1,9 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:invidious/globals.dart';
-import 'package:invidious/subscription_management/states/subscribe_button.dart';
 import 'package:invidious/videos/states/add_to_playlist.dart';
 
-import '../../utils/memorydb.dart';
 import '../../utils/server.dart';
 
 void main() {
@@ -13,7 +11,7 @@ void main() {
 
   test('like video', () async {
     const videoId = 'dQw4w9WgXcQ';
-    var cubit = AddToPlaylistCubit(AddToPlaylistController.init(videoId));
+    var cubit = AddToPlaylistCubit(const AddToPlaylistController(videoId));
     await cubit.onReady();
     expect(cubit.state.playlists.length, 0);
     expect(cubit.state.playListCount, 0);
@@ -41,7 +39,7 @@ void main() {
     await service.createPlayList("test playlist", "public");
 
     const videoId = 'dQw4w9WgXcQ';
-    var cubit = AddToPlaylistCubit(AddToPlaylistController.init(videoId));
+    var cubit = AddToPlaylistCubit(const AddToPlaylistController(videoId));
     await cubit.onReady();
     expect(cubit.state.playlists.length, 1);
     expect(cubit.state.playListCount, 0);

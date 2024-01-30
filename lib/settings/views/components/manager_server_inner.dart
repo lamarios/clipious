@@ -2,7 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:invidious/app/states/app.dart';
 import 'package:invidious/router.dart';
 import 'package:invidious/settings/models/errors/cannot_add_server_error.dart';
 import 'package:invidious/settings/models/errors/missing_software_key.dart';
@@ -166,7 +165,6 @@ class ManagerServersView extends StatelessWidget {
       builder: (ctx, _) {
         SettingsCubit settings = context.watch<SettingsCubit>();
         ServerListSettingsCubit cubit = context.read<ServerListSettingsCubit>();
-        var app = context.read<AppCubit>();
         var filteredPublicServers = _.publicServers
             .where((s) =>
                 _.dbServers.indexWhere((element) => element.url == s.url) == -1)
@@ -198,7 +196,7 @@ class ManagerServersView extends StatelessWidget {
                                       padding: const EdgeInsets.all(8.0),
                                       child: Icon(
                                         Icons.done,
-                                        color: s.url == app.state.server?.url
+                                        color: s.inUse
                                             ? colorScheme.primary
                                             : colorScheme.secondaryContainer,
                                       ),

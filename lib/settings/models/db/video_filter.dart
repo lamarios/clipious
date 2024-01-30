@@ -4,8 +4,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/utils.dart';
 import 'package:invidious/videos/models/base_video.dart';
+import 'package:json_annotation/json_annotation.dart';
 import 'package:logging/logging.dart';
-import 'package:objectbox/objectbox.dart';
 
 part 'video_filter.g.dart';
 
@@ -58,17 +58,16 @@ enum FilterOperation {
   }
 }
 
-@Entity()
+@JsonSerializable()
 @CopyWith(constructor: "_")
 class VideoFilter {
-  @Id()
-  int id = 0;
+  // will be the key on sembast, we don't need to store it as data
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  String uuid = '';
 
   String? channelId;
 
-  @Transient()
   FilterOperation? operation = FilterOperation.contain;
-  @Transient()
   FilterType? type = FilterType.title;
 
   String? value;
@@ -77,7 +76,7 @@ class VideoFilter {
   bool hideFromFeed = false;
 
   VideoFilter._(
-      this.id,
+      this.uuid,
       this.channelId,
       this.operation,
       this.type,
@@ -97,6 +96,11 @@ class VideoFilter {
   List<int> daysOfWeek = wholeWeek;
   String startTime = defaultStartTime;
   String endTime = defaultEndTime;
+
+  factory VideoFilter.fromJson(Map<String, dynamic> json) =>
+      _$VideoFilterFromJson(json);
+
+  Map<String, dynamic> toJson() => _$VideoFilterToJson(this);
 
   set dbType(String? value) {
     type =

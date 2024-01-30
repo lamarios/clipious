@@ -17,7 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$AppLogsState {
   List<AppLog> get logs => throw _privateConstructorUsedError;
-  List<int> get selected => throw _privateConstructorUsedError;
+  List<String> get selected => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AppLogsStateCopyWith<AppLogsState> get copyWith =>
@@ -30,7 +30,7 @@ abstract class $AppLogsStateCopyWith<$Res> {
           AppLogsState value, $Res Function(AppLogsState) then) =
       _$AppLogsStateCopyWithImpl<$Res, AppLogsState>;
   @useResult
-  $Res call({List<AppLog> logs, List<int> selected});
+  $Res call({List<AppLog> logs, List<String> selected});
 }
 
 /// @nodoc
@@ -57,7 +57,7 @@ class _$AppLogsStateCopyWithImpl<$Res, $Val extends AppLogsState>
       selected: null == selected
           ? _value.selected
           : selected // ignore: cast_nullable_to_non_nullable
-              as List<int>,
+              as List<String>,
     ) as $Val);
   }
 }
@@ -70,7 +70,7 @@ abstract class _$$AppLogsStateImplCopyWith<$Res>
       __$$AppLogsStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<AppLog> logs, List<int> selected});
+  $Res call({List<AppLog> logs, List<String> selected});
 }
 
 /// @nodoc
@@ -95,7 +95,7 @@ class __$$AppLogsStateImplCopyWithImpl<$Res>
       selected: null == selected
           ? _value._selected
           : selected // ignore: cast_nullable_to_non_nullable
-              as List<int>,
+              as List<String>,
     ));
   }
 }
@@ -104,7 +104,8 @@ class __$$AppLogsStateImplCopyWithImpl<$Res>
 
 class _$AppLogsStateImpl implements _AppLogsState {
   const _$AppLogsStateImpl(
-      {final List<AppLog> logs = const [], final List<int> selected = const []})
+      {final List<AppLog> logs = const [],
+      final List<String> selected = const []})
       : _logs = logs,
         _selected = selected;
 
@@ -117,10 +118,10 @@ class _$AppLogsStateImpl implements _AppLogsState {
     return EqualUnmodifiableListView(_logs);
   }
 
-  final List<int> _selected;
+  final List<String> _selected;
   @override
   @JsonKey()
-  List<int> get selected {
+  List<String> get selected {
     if (_selected is EqualUnmodifiableListView) return _selected;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_selected);
@@ -155,12 +156,13 @@ class _$AppLogsStateImpl implements _AppLogsState {
 
 abstract class _AppLogsState implements AppLogsState {
   const factory _AppLogsState(
-      {final List<AppLog> logs, final List<int> selected}) = _$AppLogsStateImpl;
+      {final List<AppLog> logs,
+      final List<String> selected}) = _$AppLogsStateImpl;
 
   @override
   List<AppLog> get logs;
   @override
-  List<int> get selected;
+  List<String> get selected;
   @override
   @JsonKey(ignore: true)
   _$$AppLogsStateImplCopyWith<_$AppLogsStateImpl> get copyWith =>

@@ -113,7 +113,7 @@ class __$$AppStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$AppStateImpl implements _AppState {
-  _$AppStateImpl(this.selectedIndex, this.server, this.homeLayout);
+  const _$AppStateImpl(this.selectedIndex, this.server, this.homeLayout);
 
   @override
   final int selectedIndex;
@@ -151,7 +151,7 @@ class _$AppStateImpl implements _AppState {
 }
 
 abstract class _AppState implements AppState {
-  factory _AppState(final int selectedIndex, final Server? server,
+  const factory _AppState(final int selectedIndex, final Server? server,
       final HomeLayout homeLayout) = _$AppStateImpl;
 
   @override

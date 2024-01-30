@@ -118,7 +118,7 @@ class NotificationSettingsScreen extends StatelessWidget {
                       ),
                       SettingsTile.switchTile(
                         enabled: state.backgroundNotifications,
-                        initialValue: state.subscriptionsNotifications,
+                        initialValue: state.subscriptionNotifications,
                         onToggle: cubit.setSubscriptionsNotifications,
                         title: Text(locals.subscriptionNotification),
                         description:

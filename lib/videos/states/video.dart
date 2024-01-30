@@ -40,7 +40,10 @@ class VideoCubit extends Cubit<VideoState> {
       }
 
       emit(state.copyWith(
-          loadingVideo: false, video: video, dislikes: dislikes));
+          loadingVideo: false,
+          video: video,
+          dislikes: dislikes,
+          isLoggedIn: await service.isLoggedIn()));
 
       getDownloadStatus();
     } catch (err) {
@@ -146,7 +149,7 @@ class VideoState with _$VideoState {
   const VideoState._();
 
   static VideoState init({required String videoId}) {
-    return VideoState(videoId: videoId, isLoggedIn: service.isLoggedIn());
+    return VideoState(videoId: videoId, isLoggedIn: false);
   }
 
   bool get downloadFailed => downloadedVideo?.downloadFailed ?? false;

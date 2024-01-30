@@ -10,10 +10,8 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:invidious/app/states/app.dart';
 import 'package:invidious/workmanager.dart';
 import 'package:locale_names/locale_names.dart';
-import 'package:logging/logging.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
-import '../../database.dart';
 import '../../globals.dart';
 import '../../home/models/db/home_layout.dart';
 import '../../player/states/player.dart';
@@ -34,7 +32,7 @@ enum EnableBackGroundNotificationResponse {
   needBatteryOptimization;
 }
 
-var log = Logger('SettingsController');
+// var _log = Logger('SettingsController');
 
 class SettingsCubit extends Cubit<SettingsState> {
   final AppCubit appCubit;
@@ -43,69 +41,71 @@ class SettingsCubit extends Cubit<SettingsState> {
     onReady();
   }
 
-  onReady() {
-    getPackageInfo();
+  onReady() async {
+    await getPackageInfo();
+    await _getSubscriptionNotification();
   }
 
-  toggleSponsorBlock(bool value) {
-    sponsorBlock = value;
+  toggleSponsorBlock(bool value) async {
+    await setSponsorBlock(value);
   }
 
-  toggleForceLandscapeFullScreen(bool value) {
-    forceLandscapeFullScreen = value;
+  toggleForceLandscapeFullScreen(bool value) async {
+    await setForceLandscapeFullScreen(value);
   }
 
-  toggleFillFullscreen(bool value) {
-    fillFullscreen = value;
+  toggleFillFullscreen(bool value) async {
+    await setFillFullscreen(value);
   }
 
-  toggleDynamicTheme(bool value) {
-    useDynamicTheme = value;
+  toggleDynamicTheme(bool value) async {
+    await setUseDynamicTheme(value);
     updateApp();
   }
 
-  toggleDash(bool value) {
-    useDash = value;
+  toggleDash(bool value) async {
+    await setUseDash(value);
   }
 
-  toggleProxy(bool value) {
-    useProxy = value;
+  toggleProxy(bool value) async {
+    await setUseProxy(value);
   }
 
-  toggleAutoplayOnLoad(bool value) {
-    autoplayVideoOnLoad = value;
+  toggleAutoplayOnLoad(bool value) async {
+    await setAutoplayVideoOnLoad(value);
   }
 
-  toggleReturnYoutubeDislike(bool value) {
-    useReturnYoutubeDislike = value;
+  toggleReturnYoutubeDislike(bool value) async {
+    await setUseReturnYoutubeDislike(value);
   }
 
-  toggleSearchHistory(bool value) {
-    useSearchHistory = value;
+  toggleSearchHistory(bool value) async {
+    await setUseSearchHistory(value);
     if (!value) {
-      db.clearSearchHistory();
+      await db.clearSearchHistory();
     }
   }
 
-  toggleRememberPlaybackSpeed(bool value) {
-    rememberPlayBackSpeed = value;
+  toggleRememberPlaybackSpeed(bool value) async {
+    await setRememberPlayBackSpeed(value);
   }
 
-  selectOnOpen(int index) {
-    onOpen = index;
+  selectOnOpen(int index) async {
+    await setOnOpen(index);
   }
 
-  void selectCountry(String selected) {
-    country = countryCodes.firstWhere((element) => element.name == selected,
-        orElse: () => state.country);
+  Future<void> selectCountry(String selected) async {
+    await setCountry(countryCodes.firstWhere(
+        (element) => element.name == selected,
+        orElse: () => state.country));
   }
 
   serverChanged() {
     emit(state.copyWith());
   }
 
-  toggleSslVerification(bool value) {
-    skipSslVerification = value;
+  toggleSslVerification(bool value) async {
+    await setSkipSslVerification(value);
   }
 
   getPackageInfo() async {
@@ -113,70 +113,70 @@ class SettingsCubit extends Cubit<SettingsState> {
     emit(state.copyWith(packageInfo: packageInfo));
   }
 
-  toggleBlackBackground(bool value) {
-    blackBackground = value;
+  toggleBlackBackground(bool value) async {
+    await setBlackBackground(value);
     appCubit.rebuildApp();
   }
 
-  changeSkipStep({required bool increase}) {
+  changeSkipStep({required bool increase}) async {
     int index = skipSteps.indexOf(state.skipStep);
     if (increase) {
       if (index < skipSteps.length - 1) {
-        skipStep = skipSteps[index + 1];
+        await setSkipStep(skipSteps[index + 1]);
       }
     } else {
       if (index > 0) {
-        skipStep = skipSteps[index - 1];
+        await setSkipStep(skipSteps[index - 1]);
       }
     }
   }
 
-  changeSubtitleSize({required bool increase}) {
+  changeSubtitleSize({required bool increase}) async {
     if (increase) {
-      subtitleSize = state.subtitleSize + 1;
+      await _setSubtitleSize(state.subtitleSize + 1);
     } else {
       if (state.subtitleSize > 1) {
-        subtitleSize = state.subtitleSize - 1;
+        await _setSubtitleSize(state.subtitleSize - 1);
       }
     }
   }
 
-  setSubtitleSize(int value) {
+  setSubtitleSize(int value) async {
     if (value < 1) {
-      subtitleSize = 1;
+      await _setSubtitleSize(1);
     } else {
-      subtitleSize = value.toDouble();
+      await _setSubtitleSize(value.toDouble());
     }
   }
 
-  toggleRememberSubtitles(bool value) {
-    rememberSubtitles = value;
+  toggleRememberSubtitles(bool value) async {
+    await setRememberSubtitles(value);
   }
 
-  changeSearchHistoryLimit({required bool increase}) {
+  changeSearchHistoryLimit({required bool increase}) async {
     if (increase) {
       if (state.searchHistoryLimit < 30) {
-        searchHistoryLimit = state.searchHistoryLimit + 1;
+        await setSearchHistoryLimit(state.searchHistoryLimit + 1);
       }
     } else {
       if (state.searchHistoryLimit > 1) {
-        searchHistoryLimit = state.searchHistoryLimit - 1;
+        await setSearchHistoryLimit(state.searchHistoryLimit - 1);
       }
     }
     if (!increase) {
-      db.clearExcessSearchHistory();
+      await db.clearExcessSearchHistory();
     }
   }
 
-  setHistoryLimit(int value) {
+  setHistoryLimit(int value) async {
     if (value < 1) {
-      searchHistoryLimit = 1;
+      await setSearchHistoryLimit(1);
     } else if (value <= 30) {
-      searchHistoryLimit = value;
+      await setSearchHistoryLimit(value);
     }
 
     if (value < state.searchHistoryLimit) {
-      db.clearExcessSearchHistory();
+      await db.clearExcessSearchHistory();
     }
   }
 
@@ -191,17 +191,18 @@ class SettingsCubit extends Cubit<SettingsState> {
     }
   }
 
-  setThemeMode(ThemeMode? theme) {
+  setThemeMode(ThemeMode? theme) async {
     if (theme != null) {
-      themeMode = theme;
+      await _setThemeMode(theme);
     }
     updateApp();
   }
 
-  setLocale(List<Locale> locals, List<String> localStrings, String? locale) {
+  setLocale(
+      List<Locale> locals, List<String> localStrings, String? locale) async {
     if (locale == null) {
-      db.deleteSetting(localeSettingName);
-      this.locale = null;
+      await db.deleteSetting(localeSettingName);
+      _setLocale(null);
     } else {
       var selectedIndex = localStrings.indexOf(locale);
 
@@ -212,7 +213,7 @@ class SettingsCubit extends Cubit<SettingsState> {
         toSave += '_${selectedLocale.scriptCode}';
       }
 
-      this.locale = toSave;
+      _setLocale(toSave);
     }
     updateApp();
   }
@@ -221,16 +222,12 @@ class SettingsCubit extends Cubit<SettingsState> {
     appCubit.rebuildApp();
   }
 
-  setLastSpeed(double d) {
-    lastSpeed = d;
+  setShuffle(bool b) async {
+    await setPlayerShuffleMode(b);
   }
 
-  setShuffle(bool b) {
-    playerShuffleMode = b;
-  }
-
-  setRepeatMode(PlayerRepeat repeat) {
-    playerRepeatMode = repeat;
+  setRepeatMode(PlayerRepeat repeat) async {
+    await setPlayerRepeatMode(repeat);
   }
 
   toggleShuffle() {
@@ -251,20 +248,8 @@ class SettingsCubit extends Cubit<SettingsState> {
     }
   }
 
-  setLastSubtitle(String s) {
-    lastSubtitles = s;
-  }
-
-  setPlayRecommendedNext(bool b) {
-    playRecommendedNext = b;
-  }
-
-  setDistractionFreeMode(bool b) {
-    distractionFreeMode = b;
-  }
-
-  setSubtitlesBackground(bool b) {
-    subtitlesBackground = b;
+  setLastSubtitle(String s) async {
+    await setLastSubtitles(s);
   }
 
   String? getLocaleDisplayName() {
@@ -278,19 +263,11 @@ class SettingsCubit extends Cubit<SettingsState> {
     return l?.nativeDisplayLanguageScript;
   }
 
-  setAppLayout(List<HomeDataSource> layout) {
-    appLayout = layout;
-  }
-
-  setNavigationBarLabelBehavior(NavigationDestinationLabelBehavior behavior) {
-    navigationBarLabelBehavior = behavior;
-  }
-
   Future<EnableBackGroundNotificationResponse> setBackgroundNotifications(
       bool b) async {
     if (!b) {
       await stopTasks();
-      backgroundNotifications = b;
+      await _setBackgroundNotifications(b);
     } else {
       var isAllowed = await AwesomeNotifications().isNotificationAllowed();
       if (!isAllowed) {
@@ -301,7 +278,7 @@ class SettingsCubit extends Cubit<SettingsState> {
         }
       }
 
-      backgroundNotifications = b;
+      await _setBackgroundNotifications(b);
       await configureBackgroundService(this);
       await setupTasks(this);
       return EnableBackGroundNotificationResponse.ok;
@@ -310,21 +287,9 @@ class SettingsCubit extends Cubit<SettingsState> {
     return EnableBackGroundNotificationResponse.ok;
   }
 
-  setSubscriptionsNotifications(bool b) {
-    subscriptionsNotifications = b;
-  }
-
-  setDearrow(bool b) {
-    dearrow = b;
-  }
-
-  setDearrowThumbnail(bool b) {
-    dearrowThumbnails = b;
-  }
-
-  setBackgroundCheckFrequency(int i) {
+  setBackgroundCheckFrequency(int i) async {
     if (i > 0 && i <= 24) {
-      backgroundNotificationFrequency = i;
+      await setBackgroundNotificationFrequency(i);
       EasyDebounce.debounce(
           'restarting-background-service', const Duration(seconds: 2), () {
         setupTasks(this);
@@ -338,43 +303,48 @@ class SettingsCubit extends Cubit<SettingsState> {
     Clipboard.setData(ClipboardData(text: json));
   }
 
-  saveSetting(SettingsValue settings) {
-    db.saveSetting(settings);
+  saveSetting(SettingsValue settings) async {
+    await db.saveSetting(settings);
     var newSettings = Map<String, SettingsValue>.from(state.settings);
     newSettings[settings.name] = settings;
     emit(state.copyWith(settings: newSettings));
   }
 
-  set sponsorBlock(bool b) => _set(useSponsorBlock, b);
+  setSponsorBlock(bool b) async => await _set(useSponsorBlock, b);
 
-  set onOpen(int i) => _set(onOpenSettingName, i);
+  setOnOpen(int i) async => await _set(onOpenSettingName, i);
 
-  set useProxy(bool b) => _set(useProxySettingName, b);
+  setUseProxy(bool b) async => await _set(useProxySettingName, b);
 
-  set blackBackground(bool b) => _set(blackBackgroundSettingName, b);
+  setBlackBackground(bool b) async => await _set(blackBackgroundSettingName, b);
 
-  set rememberSubtitles(bool b) => _set(rememberLastSubtitle, b);
+  setRememberSubtitles(bool b) async => await _set(rememberLastSubtitle, b);
 
-  set rememberPlayBackSpeed(bool b) => _set(remeberPlaybackSpeed, b);
+  setRememberPlayBackSpeed(bool b) async => await _set(remeberPlaybackSpeed, b);
 
-  set fillFullscreen(bool b) => _set(fillFullScreen, b);
+  setFillFullscreen(bool b) async => await _set(fillFullScreen, b);
 
-  set locale(String? s) => _set(localeSettingName, s);
+  _setLocale(String? s) async {
+    await _set(localeSettingName, s);
+    await fileDb.setLocale(s);
+  }
 
-  set searchHistoryLimit(int b) => _set(searchHistoryLimitSettingName, b);
+  setSearchHistoryLimit(int b) async =>
+      await _set(searchHistoryLimitSettingName, b);
 
-  set lastSpeed(double d) => _set(lastSpeedSettingName, d);
+  setLastSpeed(double d) async => await _set(lastSpeedSettingName, d);
 
-  set playerShuffleMode(bool b) => _set(playerShuffle, b);
+  setPlayerShuffleMode(bool b) async => await _set(playerShuffle, b);
 
-  set playerRepeatMode(PlayerRepeat repeatMode) =>
-      _set(playerRepeat, PlayerRepeat.values.indexOf(repeatMode));
+  setPlayerRepeatMode(PlayerRepeat repeatMode) async =>
+      await _set(playerRepeat, PlayerRepeat.values.indexOf(repeatMode));
 
-  set lastSubtitles(String s) => _set(lastSubtitle, s);
+  setLastSubtitles(String s) async => await _set(lastSubtitle, s);
 
-  set playRecommendedNext(bool b) => _set(playRecommendedNextSettingName, b);
+  setPlayRecommendedNext(bool b) async =>
+      await _set(playRecommendedNextSettingName, b);
 
-  set country(Country c) {
+  setCountry(Country c) {
     String code = countryCodes
         .firstWhere((element) => element.name == c.name,
             orElse: () => state.country)
@@ -382,65 +352,84 @@ class SettingsCubit extends Cubit<SettingsState> {
     _set(browsingCountry, code);
   }
 
-  set useDynamicTheme(bool b) => _set(dynamicTheme, b);
+  setUseDynamicTheme(bool b) async => await _set(dynamicTheme, b);
 
-  set useDash(bool b) => _set(useDashSettingName, b);
+  setUseDash(bool b) async => await _set(useDashSettingName, b);
 
-  set autoplayVideoOnLoad(bool b) => _set(playerAutoplayOnLoad, b);
+  setAutoplayVideoOnLoad(bool b) async => await _set(playerAutoplayOnLoad, b);
 
-  set useReturnYoutubeDislike(bool b) =>
-      _set(useReturnYoutubeDislikeSettingName, b);
+  setUseReturnYoutubeDislike(bool b) async =>
+      await _set(useReturnYoutubeDislikeSettingName, b);
 
-  set subtitleSize(double d) => _set(subtitleSizeSettingName, d);
+  _setSubtitleSize(double d) async => await _set(subtitleSizeSettingName, d);
 
-  set skipSslVerification(bool b) => _set(skipSslVerificationSettingName, b);
+  setSkipSslVerification(bool b) async =>
+      await _set(skipSslVerificationSettingName, b);
 
-  set forceLandscapeFullScreen(bool b) => _set(lockOrientationFullScreen, b);
+  setForceLandscapeFullScreen(bool b) async =>
+      await _set(lockOrientationFullScreen, b);
 
-  set themeMode(ThemeMode t) => _set(themeModeSettingName, t.name);
+  _setThemeMode(ThemeMode t) async => await _set(themeModeSettingName, t.name);
 
-  set useSearchHistory(bool b) => _set(useSearchHistorySettingName, b);
+  setUseSearchHistory(bool b) async =>
+      await _set(useSearchHistorySettingName, b);
 
-  set appLayout(List<HomeDataSource> layout) =>
-      _set(appLayoutSettingName, layout.map((e) => e.name).join(","));
+  setAppLayout(List<HomeDataSource> layout) async {
+    var layoutToString = layout.map((e) => e.name).join(",");
+    await _set(appLayoutSettingName, layoutToString);
+  }
 
-  set navigationBarLabelBehavior(NavigationDestinationLabelBehavior behavior) =>
-      _set(navigationBarLabelBehaviorSettingName, behavior.name);
+  setNavigationBarLabelBehavior(
+          NavigationDestinationLabelBehavior behavior) async =>
+      await _set(navigationBarLabelBehaviorSettingName, behavior.name);
 
-  set distractionFreeMode(bool b) => _set(distractionFreeModeSettingName, b);
+  setDistractionFreeMode(bool b) async =>
+      await _set(distractionFreeModeSettingName, b);
 
-  set backgroundNotifications(bool b) =>
-      _set(backgroundNotificationsSettingName, b);
+  _setBackgroundNotifications(bool b) async =>
+      await _set(backgroundNotificationsSettingName, b);
 
-  set subscriptionsNotifications(bool b) => _set(subscriptionNotifications, b);
+  setBackgroundNotificationFrequency(int i) async =>
+      await _set(backgroundCheckFrequency, i);
 
-  set backgroundNotificationFrequency(int i) =>
-      _set(backgroundCheckFrequency, i);
+  setSubtitlesBackground(bool b) async => await _set(subtitleBackground, b);
 
-  set subtitlesBackground(bool b) => _set(subtitleBackground, b);
+  setDearrow(bool b) async => await _set(dearrowSettingName, b);
 
-  set dearrow(bool b) => _set(dearrowSettingName, b);
+  setDearrowThumbnails(bool b) async =>
+      await _set(dearrowThumbnailsSettingName, b);
 
-  set dearrowThumbnails(bool b) => _set(dearrowThumbnailsSettingName, b);
+  setSkipStep(int s) async => await _set(skipStepSettingName, s);
 
-  set skipStep(int s) => _set(skipStepSettingName, s);
+  setSkipExponentially(bool b) async =>
+      await _set(skipExponentialSettingName, b);
 
-  set skipExponentially(bool b) => _set(skipExponentialSettingName, b);
+  setFullscreenOnRotate(bool b) async =>
+      await _set(fullScreenOnLandscapeSettingName, b);
 
-  set fullscreenOnRotate(bool b) => _set(fullScreenOnLandscapeSettingName, b);
-
-  void _set<T>(String name, T value) {
+  Future<void> _set<T>(String name, T value) async {
     var settings = Map<String, SettingsValue>.from(state.settings);
     if (value == null) {
-      db.deleteSetting(name);
+      await db.deleteSetting(name);
       settings.remove(name);
     } else {
       var settingsValue = SettingsValue(name, value.toString());
       settings[name] = settingsValue;
-      db.saveSetting(settingsValue);
+      await db.saveSetting(settingsValue);
     }
 
     emit(state.copyWith(settings: settings));
+  }
+
+  setSubscriptionsNotifications(bool value) async {
+    await fileDb.setSubscriptionNotifications(value);
+    await _getSubscriptionNotification();
+  }
+
+  _getSubscriptionNotification() async {
+    emit(state.copyWith(
+        subscriptionNotifications:
+            await fileDb.getSubscriptionNotifications()));
   }
 }
 
@@ -448,7 +437,8 @@ class SettingsCubit extends Cubit<SettingsState> {
 class SettingsState with _$SettingsState {
   const factory SettingsState(
       {required Map<String, SettingsValue> settings,
-      required PackageInfo packageInfo}) = _SettingsState;
+      required PackageInfo packageInfo,
+      @Default(false) subscriptionNotifications}) = _SettingsState;
 
   static SettingsState init() {
     PackageInfo packageInfo =
@@ -459,7 +449,7 @@ class SettingsState with _$SettingsState {
     return SettingsState(settings: settings, packageInfo: packageInfo);
   }
 
-  // late Map<String, SettingsValue> settings;
+  //late Map<String, SettingsValue> settings;
 
   bool get sponsorBlock => _get(useSponsorBlock)?.value == 'true';
 
@@ -527,13 +517,17 @@ class SettingsState with _$SettingsState {
   bool get useSearchHistory =>
       _get(useSearchHistorySettingName)?.value == 'true';
 
-  List<HomeDataSource> get appLayout => (_get(appLayoutSettingName)?.value ??
-          HomeDataSource.defaultSettings().map((e) => e.name).join(","))
-      .split(',')
-      .where((element) => element.isNotEmpty)
-      .map((e) =>
-          HomeDataSource.values.firstWhere((element) => element.name == e))
-      .toList();
+  List<HomeDataSource> get appLayout {
+    var savedLayout = _get(appLayoutSettingName)?.value;
+    // String? savedLayout;
+    var defaultLayout = HomeDataSource.defaultSettings();
+    return (savedLayout ?? defaultLayout.map((e) => e.name).join(","))
+        .split(',')
+        .where((element) => element.isNotEmpty)
+        .map((e) =>
+            HomeDataSource.values.firstWhere((element) => element.name == e))
+        .toList();
+  }
 
   NavigationDestinationLabelBehavior get navigationBarLabelBehavior =>
       NavigationDestinationLabelBehavior.values.firstWhere((e) =>
@@ -546,9 +540,6 @@ class SettingsState with _$SettingsState {
 
   bool get backgroundNotifications =>
       _get(backgroundNotificationsSettingName)?.value == 'true';
-
-  bool get subscriptionsNotifications =>
-      _get(subscriptionNotifications)?.value == 'true';
 
   int get backgroundNotificationFrequency =>
       int.parse(_get(backgroundCheckFrequency)?.value ?? "1");

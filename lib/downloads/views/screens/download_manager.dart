@@ -49,7 +49,8 @@ class DownloadManagerScreen extends StatelessWidget {
                             itemBuilder: (context, index) {
                               var v = _.videos[index];
                               return SwipeActionCell(
-                                  key: ValueKey('downloaded-video-${v.id}'),
+                                  key:
+                                      ValueKey('downloaded-video-${v.videoId}'),
                                   trailingActions: [
                                     SwipeAction(
                                       performsFirstActionWithFullSwipe: true,
@@ -62,7 +63,7 @@ class DownloadManagerScreen extends StatelessWidget {
                                     )
                                   ],
                                   child: DownloadedVideoView(
-                                    key: ValueKey(v.id),
+                                    key: ValueKey(v.videoId),
                                     video: v,
                                   ));
                             },

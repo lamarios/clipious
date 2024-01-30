@@ -190,10 +190,11 @@ class TvManageSingleServerScreen extends StatelessWidget {
     return Scaffold(
       body: TvOverscan(
         child: BlocProvider(
-          create: (BuildContext context) =>
-              ServerSettingsCubit(server, context.read<AppCubit>()),
-          child: BlocBuilder<ServerSettingsCubit, Server>(
-              builder: (context, server) {
+          create: (BuildContext context) => ServerSettingsCubit(
+              ServerSettingsState(server: server), context.read<AppCubit>()),
+          child: BlocBuilder<ServerSettingsCubit, ServerSettingsState>(
+              builder: (context, state) {
+            var server = state.server;
             var cubit = context.read<ServerSettingsCubit>();
             AppLocalizations locals = AppLocalizations.of(context)!;
             bool isLoggedIn =
@@ -225,10 +226,12 @@ class TvManageSingleServerScreen extends StatelessWidget {
                 ),
                 SettingsTile(
                   title: locals.delete,
-                  enabled: cubit.canDelete,
-                  onSelected: (context) {
-                    cubit.deleteServer();
-                    Navigator.of(context).pop();
+                  enabled: state.canDelete,
+                  onSelected: (context) async {
+                    await cubit.deleteServer();
+                    if (context.mounted) {
+                      Navigator.of(context).pop();
+                    }
                   },
                 )
               ],

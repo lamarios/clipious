@@ -1,6 +1,7 @@
 library app.globals;
 
 import 'package:invidious/service.dart';
+import 'package:invidious/utils/file_db.dart';
 import 'package:invidious/utils/interfaces/db.dart';
 
 import 'utils/models/country.dart';
@@ -24,6 +25,8 @@ Service service = Service();
 const double innerHorizontalPadding = 16;
 
 late IDbClient db;
+
+final FileDB fileDb = FileDB();
 
 List<Country> countryCodes = [
   Country('AD', 'Andorra'),

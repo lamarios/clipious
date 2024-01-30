@@ -1,12 +1,10 @@
-import 'package:objectbox/objectbox.dart';
+import 'package:json_annotation/json_annotation.dart';
 
-@Entity()
+part 'playlist_notifications.g.dart';
+
+@JsonSerializable()
 class PlaylistNotification {
-  @Id()
-  int id = 0;
-
-  @Unique(onConflict: ConflictStrategy.replace)
-  String playlistId;
+  final String playlistId;
 
   int lastVideoCount = 0;
 
@@ -16,4 +14,9 @@ class PlaylistNotification {
 
   PlaylistNotification(
       this.playlistId, this.lastVideoCount, this.timestamp, this.playlistName);
+
+  factory PlaylistNotification.fromJson(Map<String, dynamic> json) =>
+      _$PlaylistNotificationFromJson(json);
+
+  Map<String, dynamic> toJson() => _$PlaylistNotificationToJson(this);
 }

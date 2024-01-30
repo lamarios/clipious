@@ -84,6 +84,7 @@ class BaseVideo extends IdedVideo implements ShareLinks {
 
   VideoInList toVideoInList() {
     return VideoInList(title, videoId, lengthSeconds, 0, author, authorId,
-        authorUrl, null, null, videoThumbnails);
+        authorUrl, null, null, videoThumbnails)
+      ..filtered = filtered;
   }
 }

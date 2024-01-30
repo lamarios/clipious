@@ -31,9 +31,8 @@ in
     # Create a diretory for the generated artifacts                      #
     ######################################################################
 
-    mkdir .nix-shell
     export NIX_SHELL_DIR=$PWD/.nix-shell
-
+    rm -Rf $NIX_SHELL_DIR
     ''
     + helpers.postgres.setup
     + helpers.invidious.setup

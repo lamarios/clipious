@@ -89,14 +89,14 @@ class VideoFilterChannel extends StatelessWidget {
                   ),
                 ),
                 ..._.filters.map((e) => SwipeActionCell(
-                    key: ValueKey('filter-swipe-${e.id}'),
+                    key: ValueKey('filter-swipe-${e.uuid}'),
                     trailingActions: [
                       SwipeAction(
                         icon: const Icon(Icons.delete, color: Colors.white),
                         performsFirstActionWithFullSwipe: true,
                         onTap: (handler) async {
                           await handler(true);
-                          cubit.deleteFilter(e);
+                          await cubit.deleteFilter(e);
                           filterCubit.refreshFilters();
                         },
                       ),

@@ -29,7 +29,9 @@ class SubscribeButtonCubit extends Cubit<SubscribeButtonState> {
 
   Future<void> onReady() async {
     bool isSubscribed = await service.isSubscribedToChannel(state.channelId);
-    emit(state.copyWith(loading: false, isSubscribed: isSubscribed));
+    var isLoggedIn = await service.isLoggedIn();
+    emit(state.copyWith(
+        loading: false, isSubscribed: isSubscribed, isLoggedIn: isLoggedIn));
   }
 }
 
@@ -43,7 +45,6 @@ class SubscribeButtonState with _$SubscribeButtonState {
   }) = _SubscribeButtonState;
 
   static SubscribeButtonState init(String channelId) {
-    return SubscribeButtonState(
-        channelId: channelId, isLoggedIn: db.isLoggedInToCurrentServer());
+    return SubscribeButtonState(channelId: channelId, isLoggedIn: false);
   }
 }

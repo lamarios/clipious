@@ -2,9 +2,8 @@ import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:invidious/app/states/app.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:invidious/videos/models/video_in_list.dart';
-import 'package:objectbox/objectbox.dart';
 
 import '../../../downloads/states/download_manager.dart';
 import '../../../globals.dart';
@@ -78,12 +77,12 @@ enum HomeDataSource {
     };
   }
 
-  bool isPermitted(BuildContext context) {
+  bool isPermitted(BuildContext context, bool isLoggedIn) {
     return switch (this) {
       (HomeDataSource.subscription ||
             HomeDataSource.playlist ||
             HomeDataSource.history) =>
-        context.read<AppCubit>().isLoggedIn,
+        isLoggedIn,
       (HomeDataSource.searchHistory) =>
         context.read<SettingsCubit>().state.useSearchHistory,
       (_) => true
@@ -207,23 +206,21 @@ enum HomeDataSource {
   }
 }
 
-@Entity()
+// objectBox
 @CopyWith(constructor: "_")
+@JsonSerializable()
 class HomeLayout {
-  @Id()
-  int id = 0;
-
-  @Transient()
+  @JsonKey(includeFromJson: false, includeToJson: false)
   List<HomeDataSource> smallSources = [HomeDataSource.popular];
 
-  @Transient()
+  @JsonKey(includeFromJson: false, includeToJson: false)
   HomeDataSource bigSource = HomeDataSource.trending;
 
   bool showBigSource = true;
 
   HomeLayout();
 
-  HomeLayout._(this.id, this.smallSources, this.bigSource, this.showBigSource);
+  HomeLayout._(this.smallSources, this.bigSource, this.showBigSource);
 
   String get dbBigSource => bigSource.name;
 
@@ -245,4 +242,9 @@ class HomeLayout {
             HomeDataSource.trending)
         .toList();
   }
+
+  factory HomeLayout.fromJson(Map<String, dynamic> json) =>
+      _$HomeLayoutFromJson(json);
+
+  Map<String, dynamic> toJson() => _$HomeLayoutToJson(this);
 }

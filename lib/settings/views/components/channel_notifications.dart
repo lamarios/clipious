@@ -2,7 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:invidious/globals.dart';
 import 'package:invidious/notifications/models/db/channel_notifications.dart';
 import 'package:invidious/router.dart';
 import 'package:invidious/settings/states/channel_notifications.dart';
@@ -25,8 +24,7 @@ class ChannelNotificationList extends StatelessWidget {
   Widget build(BuildContext context) {
     var colors = Theme.of(context).colorScheme;
     return BlocProvider(
-        create: (context) =>
-            ChannelNotificationListCubit(db.getAllChannelNotifications()),
+        create: (context) => ChannelNotificationListCubit([]),
         child: BlocBuilder<ChannelNotificationListCubit,
             List<ChannelNotification>>(builder: (context, channels) {
           return Padding(
@@ -36,7 +34,7 @@ class ChannelNotificationList extends StatelessWidget {
               itemBuilder: (context, index) {
                 var notif = channels[index];
                 return Container(
-                  key: ValueKey(notif.id),
+                  key: ValueKey(notif.channelId),
                   padding:
                       const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
                   decoration: BoxDecoration(

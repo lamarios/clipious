@@ -74,7 +74,7 @@ class VideoPlayerSettingsScreen extends StatelessWidget {
                   SettingsTile.switchTile(
                     leading: const Icon(Icons.stay_primary_landscape),
                     initialValue: _.fullscreenOnRotate,
-                    onToggle: (value) => cubit.fullscreenOnRotate = value,
+                    onToggle: cubit.setFullscreenOnRotate,
                     title: Text(locals.fullscreenOnLandscape),
                     description: Text(locals.fullscreenOnLandscapeDescription),
                   ),
@@ -116,7 +116,7 @@ class VideoPlayerSettingsScreen extends StatelessWidget {
                 SettingsTile.switchTile(
                   leading: const Icon(Icons.moving),
                   initialValue: _.skipExponentially,
-                  onToggle: (value) => cubit.skipExponentially = value,
+                  onToggle: cubit.setSkipExponentially,
                   title: Text(locals.exponentialSkip),
                   description: Text(locals.exponentialSkipDescription),
                 ),

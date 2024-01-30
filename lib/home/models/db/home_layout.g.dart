@@ -7,8 +7,6 @@ part of 'home_layout.dart';
 // **************************************************************************
 
 abstract class _$HomeLayoutCWProxy {
-  HomeLayout id(int id);
-
   HomeLayout smallSources(List<HomeDataSource> smallSources);
 
   HomeLayout bigSource(HomeDataSource bigSource);
@@ -22,7 +20,6 @@ abstract class _$HomeLayoutCWProxy {
   /// HomeLayout(...).copyWith(id: 12, name: "My name")
   /// ````
   HomeLayout call({
-    int? id,
     List<HomeDataSource>? smallSources,
     HomeDataSource? bigSource,
     bool? showBigSource,
@@ -34,9 +31,6 @@ class _$HomeLayoutCWProxyImpl implements _$HomeLayoutCWProxy {
   const _$HomeLayoutCWProxyImpl(this._value);
 
   final HomeLayout _value;
-
-  @override
-  HomeLayout id(int id) => this(id: id);
 
   @override
   HomeLayout smallSources(List<HomeDataSource> smallSources) =>
@@ -58,16 +52,11 @@ class _$HomeLayoutCWProxyImpl implements _$HomeLayoutCWProxy {
   /// HomeLayout(...).copyWith(id: 12, name: "My name")
   /// ````
   HomeLayout call({
-    Object? id = const $CopyWithPlaceholder(),
     Object? smallSources = const $CopyWithPlaceholder(),
     Object? bigSource = const $CopyWithPlaceholder(),
     Object? showBigSource = const $CopyWithPlaceholder(),
   }) {
     return HomeLayout._(
-      id == const $CopyWithPlaceholder() || id == null
-          ? _value.id
-          // ignore: cast_nullable_to_non_nullable
-          : id as int,
       smallSources == const $CopyWithPlaceholder() || smallSources == null
           ? _value.smallSources
           // ignore: cast_nullable_to_non_nullable
@@ -89,3 +78,21 @@ extension $HomeLayoutCopyWith on HomeLayout {
   // ignore: library_private_types_in_public_api
   _$HomeLayoutCWProxy get copyWith => _$HomeLayoutCWProxyImpl(this);
 }
+
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+HomeLayout _$HomeLayoutFromJson(Map<String, dynamic> json) => HomeLayout()
+  ..showBigSource = json['showBigSource'] as bool
+  ..dbBigSource = json['dbBigSource'] as String
+  ..dbSmallSources = (json['dbSmallSources'] as List<dynamic>)
+      .map((e) => e as String)
+      .toList();
+
+Map<String, dynamic> _$HomeLayoutToJson(HomeLayout instance) =>
+    <String, dynamic>{
+      'showBigSource': instance.showBigSource,
+      'dbBigSource': instance.dbBigSource,
+      'dbSmallSources': instance.dbSmallSources,
+    };
