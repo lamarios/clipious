@@ -565,7 +565,7 @@ class Service {
     return videosWithContinuation;
   }
 
-  Future<List<Playlist>> getUserPlaylists() async {
+  Future<List<Playlist>> getUserPlaylists({bool postProcessing = true}) async {
     var currentlySelectedServer = await db.getCurrentlySelectedServer();
 
     try {
@@ -575,8 +575,10 @@ class Service {
       final response = await http.get(url, headers: headers);
       Iterable i = handleResponse(response);
       var list = List<Playlist>.from(i.map((e) => Playlist.fromJson(e)));
-      for (var pl in list) {
-        pl.videos = (await postProcessVideos(pl.videos)).cast();
+      if (postProcessing) {
+        for (var pl in list) {
+          pl.videos = (await postProcessVideos(pl.videos)).cast();
+        }
       }
       return list.sortByReversed((e) => e.updated ?? 0).toList();
     } catch (e) {
