@@ -264,7 +264,7 @@
   "@playlistVisibility": {
     "description": "Dropdown label for playlist visibility"
   },
-  "nVideos": "{count, plural, =0{വീഡിയോകൾ ഇല്ല} =1{1 വീഡിയോ} മറ്റ്{{count} വീഡിയോകൾ}}",
+  "nVideos": "{count, plural, =0{വീഡിയോകൾ ഇല്ല} =1{1 വീഡിയോ} other{{count} വീഡിയോകൾ}}",
   "@nVideos": {
     "description": "One or more videos",
     "placeholders": {
