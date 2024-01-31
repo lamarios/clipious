@@ -50,7 +50,6 @@ class PlayerCubit extends Cubit<PlayerState> with WidgetsBindingObserver {
   late final AudioSession audioSession;
 
   PlayerCubit(super.initialState, this.settings) {
-    orientation = _orientation;
     onReady();
   }
 
@@ -126,6 +125,8 @@ class PlayerCubit extends Cubit<PlayerState> with WidgetsBindingObserver {
   }
 
   onReady() async {
+    orientation = _orientation;
+
     emit(state.copyWith(
         forwardStep: settings.state.skipStep,
         rewindStep: settings.state.skipStep));

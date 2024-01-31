@@ -33,7 +33,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   json_annotation: 4.8.1
-  http: 1.1.2
+  http: ^1.2.0
   after_layout: 1.2.0
   easy_debounce: 2.0.3
   flutter_fadein: 2.0.0
@@ -109,12 +109,8 @@ dev_dependencies:
   auto_route_generator:  ^7.3.2
   freezed: ^2.4.6
   nock: 1.2.3
-  # The "flutter_lints" package below contains a set of recommended lints to
-  # encourage good coding practices. The lint set provided by the package is
-  # activated in the `analysis_options.yaml` file located at the root of your
-  # package. See that file for information about deactivating specific lint
-  # rules and activating additional ones.
   flutter_lints: ^3.0.1
+  mockito: ^5.4.4
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

@@ -34,9 +34,13 @@ class VideoCubit extends Cubit<VideoState> {
       Video video = await service.getVideo(state.videoId);
       var dislikes = state.dislikes;
 
-      if (settings.state.useReturnYoutubeDislike) {
-        Dislike dislike = await service.getDislikes(state.videoId);
-        dislikes = dislike.dislikes;
+      try {
+        if (settings.state.useReturnYoutubeDislike) {
+          Dislike dislike = await service.getDislikes(state.videoId);
+          dislikes = dislike.dislikes;
+        }
+      } catch (e) {
+        log.info("Failed to get dislikes for video ${state.videoId}");
       }
 
       emit(state.copyWith(

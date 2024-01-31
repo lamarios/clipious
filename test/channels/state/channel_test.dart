@@ -15,15 +15,16 @@ void main() {
     var channel = ChannelCubit(const ChannelController(channelId: channelId));
     await channel.onReady();
 
+    var subbed = await service.isSubscribedToChannel(channelId);
     expect(channel.state.channel != null, true);
 
     await channel.toggleSubscription();
-    expect(channel.state.isSubscribed, true);
-    var subbed = await service.isSubscribedToChannel(channelId);
-    expect(subbed, true);
+    expect(channel.state.isSubscribed, !subbed);
+    var newSub = await service.isSubscribedToChannel(channelId);
+    expect(newSub, !subbed);
     await channel.toggleSubscription();
-    expect(channel.state.isSubscribed, false);
-    subbed = await  service.isSubscribedToChannel(channelId);
-    expect(subbed, false);
+    expect(channel.state.isSubscribed, subbed);
+    newSub = await  service.isSubscribedToChannel(channelId);
+    expect(newSub, subbed);
   });
 }

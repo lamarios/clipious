@@ -15,13 +15,13 @@ void main() {
 
     // the cubit checks subscription status on start
     await button.onReady();
-    // we unsubscribe just to make sure server is clean
-    await service.unSubscribe(channelId);
-    await button.toggleSubscription();
     var subscribed = await service.isSubscribedToChannel(channelId);
-    expect(subscribed, true);
+    // we unsubscribe just to make sure server is clean
     await button.toggleSubscription();
-    subscribed = await service.isSubscribedToChannel(channelId);
-    expect(subscribed, false);
+    var sub1 = await service.isSubscribedToChannel(channelId);
+    expect(sub1, !subscribed);
+    await button.toggleSubscription();
+    var sub2 = await service.isSubscribedToChannel(channelId);
+    expect(sub2, subscribed);
   });
 }
