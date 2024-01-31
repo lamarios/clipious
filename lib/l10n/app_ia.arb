@@ -352,5 +352,9 @@
   "history": "Chronologia",
   "@history": {
     "description": "User view history label"
+  },
+  "share": "Compartir",
+  "@share": {
+    "description": "asking user if to share"
   }
 }

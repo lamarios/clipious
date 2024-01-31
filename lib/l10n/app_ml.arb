@@ -1,0 +1,321 @@
+{
+  "history": "ചരിത്രം",
+  "@history": {
+    "description": "User view history label"
+  },
+  "channelSortByNewest": "ഏറ്റവും പുതിയത്",
+  "@channelSortByNewest": {},
+  "channelSortByPopular": "ജനപ്രിയമായത്",
+  "@channelSortByPopular": {},
+  "popular": "ജനപ്രിയമായത്",
+  "@popular": {
+    "description": "Popular videos title"
+  },
+  "searchUploadDateAny": "ഏതെങ്കിലും തീയതി",
+  "@searchUploadDateAny": {
+    "description": "Do not filter search result by upload date"
+  },
+  "searchUploadDateHour": "അവസാന മണിക്കൂർ",
+  "@searchUploadDateHour": {
+    "description": "Search for uploaded in last hour"
+  },
+  "searchUploadDateToday": "ഇന്ന്",
+  "@searchUploadDateToday": {
+    "description": "Search for uploaded this week"
+  },
+  "searchUploadDateWeek": "ഈ ആഴ്ച",
+  "@searchUploadDateWeek": {},
+  "searchUploadDateMonth": "ഈ മാസം",
+  "@searchUploadDateMonth": {
+    "description": "Search for uploaded this month"
+  },
+  "searchUploadDateYear": "ഈ വർഷം",
+  "@searchUploadDateYear": {
+    "description": "Search for uploaded this year"
+  },
+  "videoFilterHideLabel": "മറയ്ക്കുക",
+  "@videoFilterHideLabel": {
+    "description": "Label to hide videos"
+  },
+  "videoFilterOperationLowerThan": "അതിനേക്കാൾ താന്നത്",
+  "@videoFilterOperationLowerThan": {
+    "description": "Label for video filter operation Lower than"
+  },
+  "videoFilterOperationNotContain": "അടങ്ങിയിട്ടില്ല",
+  "@videoFilterOperationNotContain": {
+    "description": "Label for video filter operation Does not contain"
+  },
+  "home": "പൂമുഖം",
+  "@home": {
+    "description": "Label for Home browsing tab"
+  },
+  "videoFilterStartTime": "ആരംഭ സമയം",
+  "@videoFilterStartTime": {
+    "description": "Title for filter start time"
+  },
+  "secondsShortForm": "നിമി",
+  "@secondsShortForm": {
+    "description": "Short form for the word seconds"
+  },
+  "videoFilterTimeOfDayFromTo": "{from} മുതൽ {to} വരെ",
+  "@videoFilterTimeOfDayFromTo": {
+    "description": "Time of day range",
+    "placeholders": {
+      "from": {
+        "type": "String",
+        "example": "3:00 AM"
+      },
+      "to": {
+        "type": "String",
+        "example": "5:00 PM"
+      }
+    }
+  },
+  "to": "വരെ",
+  "@to": {
+    "description": "To word as in 'From xx To xx')"
+  },
+  "from": "മുതൽ",
+  "@from": {
+    "description": "From word (as in 'From xx To xx')"
+  },
+  "notifications": "അറിയിപ്പുകൾ",
+  "@notifications": {
+    "description": "Notification settings title"
+  },
+  "privatePlaylist": "സ്വകാര്യ",
+  "@privatePlaylist": {
+    "description": "Private playlist"
+  },
+  "cancel": "റദ്ദാക്കുക",
+  "@cancel": {
+    "description": "Cancel button label"
+  },
+  "info": "വിവരം",
+  "@info": {
+    "description": "Info label"
+  },
+  "recommended": "ശുപാർശ ചെയ്ത",
+  "@recommended": {
+    "description": "Recommended label"
+  },
+  "streamIsLive": "തത്സമയം",
+  "@streamIsLive": {
+    "description": "Label when a video is a live stream"
+  },
+  "settings": "ക്രമീകരണങ്ങൾ",
+  "@settings": {
+    "description": "Settings title"
+  },
+  "country": "രാജ്യം",
+  "@country": {
+    "description": "Country label"
+  },
+  "name": "പേര്",
+  "@name": {
+    "description": "NAme label"
+  },
+  "version": "പതിപ്പ്",
+  "@version": {
+    "description": "version label"
+  },
+  "username": "ഉപയോക്തൃനാമം",
+  "@username": {
+    "description": "Username label for login to a server"
+  },
+  "error": "പിശക്",
+  "@error": {},
+  "publicPlaylist": "പൊതു",
+  "@publicPlaylist": {
+    "description": "Public playlist"
+  },
+  "add": "ചേർക്കുക",
+  "@add": {
+    "description": "Add button abel"
+  },
+  "share": "പങ്കിടുക",
+  "@share": {
+    "description": "asking user if to share"
+  },
+  "ok": "ശരി",
+  "@ok": {
+    "description": "Ok"
+  },
+  "comments": "അഭിപ്രായങ്ങൾ",
+  "@comments": {
+    "description": "Comments label"
+  },
+  "newSorting": "പുതിയത്",
+  "@newSorting": {
+    "description": "Content sorting: new"
+  },
+  "about": "കുറിച്ച്",
+  "@about": {
+    "description": "About"
+  },
+  "delete": "ഇല്ലാതാക്കുക",
+  "@delete": {
+    "description": "Delete label"
+  },
+  "appearance": "രൂപഭാവം",
+  "@appearance": {
+    "description": "Settings category title"
+  },
+  "videoIsFamilyFriendly": "കുടുംബ സൗഹൃദപരമായ",
+  "@videoIsFamilyFriendly": {
+    "description": "Displayed only when a video is family friendly"
+  },
+  "quality": "ഗുണമേന്മ",
+  "@quality": {
+    "description": "Name of TV ui video settings"
+  },
+  "searchDuration": "ദൈർഘ്യം",
+  "@searchDuration": {
+    "description": "Filter search result by duration"
+  },
+  "searchSortBy": "ഇങ്ങനെ അടുക്കുക",
+  "@searchSortBy": {
+    "description": "Search sorting option"
+  },
+  "searchSortRelevance": "പ്രസക്തി",
+  "@searchSortRelevance": {
+    "description": "Sort search by relevance"
+  },
+  "channelSortByOldest": "ഏറ്റവും പഴയത്",
+  "@channelSortByOldest": {},
+  "enabled": "പ്രവർത്തനക്ഷമമാക്കി",
+  "@enabled": {
+    "description": "Sort channel videos by popularity"
+  },
+  "videoFilterEndTime": "അവസാന സമയം",
+  "@videoFilterEndTime": {
+    "description": "Title for filter end time"
+  },
+  "videoFilterOperationHigherThan": "അതിലും ഉയർന്നത്",
+  "@videoFilterOperationHigherThan": {
+    "description": "Label for video filter operation Higher than"
+  },
+  "videoFilterOperationContains": "അടങ്ങിയിരിക്കുന്നു",
+  "@videoFilterOperationContains": {
+    "description": "Label for video filter operation Contains"
+  },
+  "clearSearchHistory": "തിരയൽ ചരിത്രം മായ്‌ക്കുക",
+  "@clearSearchHistory": {
+    "description": "Settings label for clearing search history"
+  },
+  "videoFilterType": "തരം",
+  "@videoFilterType": {
+    "description": "Label for filter type"
+  },
+  "videoFilterOperation": "പ്രവർത്തനം",
+  "@videoFilterOperation": {
+    "description": "Label for filter operation"
+  },
+  "videoFilterValue": "മൂല്യം",
+  "@videoFilterValue": {
+    "description": "Label for filter value"
+  },
+  "subtitles": "ഉപശീർഷകങ്ങൾ",
+  "@subtitles": {
+    "description": "Name of TV ui subtitles settings"
+  },
+  "useSponsorBlock": "SponsorBlock ഉപയോഗിക്കുക",
+  "@useSponsorBlock": {
+    "description": "label for sponsorblock checkbox"
+  },
+  "videoListed": "പരസ്യമായ",
+  "@videoListed": {
+    "description": "Status of a publicly available video"
+  },
+  "currentServer": "നിലവിൽ {current} ഉപയോഗിക്കുന്നു",
+  "@currentServer": {
+    "description": "Which server the user is currently using",
+    "placeholders": {
+      "current": {
+        "type": "String"
+      }
+    }
+  },
+  "search": "തിരയുക",
+  "@search": {
+    "description": "search title"
+  },
+  "sponsorBlockCategoryMusicOffTopic": "സംഗീതം: സംഗീതേതര വിഭാഗം",
+  "@sponsorBlockCategoryMusicOffTopic": {
+    "description": "Sponsorblock 'MusicOffTopic' Category"
+  },
+  "blackBackground": "കറുത്ത പശ്ചാത്തലം",
+  "@blackBackground": {
+    "description": "Settings name for black background"
+  },
+  "topSorting": "മുകളിൽ",
+  "@topSorting": {
+    "description": "Content sorting: top"
+  },
+  "tapToManage": "കൈകാര്യം ചെയ്യാൻ തൊടുക",
+  "@tapToManage": {
+    "description": "Text shown below a server in the 'Your servers' list"
+  },
+  "addToQueueList": "വരിയിലേക്ക് ചേർക്കുക",
+  "@addToQueueList": {
+    "description": "Label on button to add a video to the queue list"
+  },
+  "playlistVisibility": "ദൃശ്യപരത",
+  "@playlistVisibility": {
+    "description": "Dropdown label for playlist visibility"
+  },
+  "nVideos": "{count, plural, =0{വീഡിയോകൾ ഇല്ല} =1{1 വീഡിയോ} other{{count} വീഡിയോകൾ}}",
+  "@nVideos": {
+    "description": "One or more videos",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "appLanguage": "പ്രയോഗ ഭാഷ",
+  "@appLanguage": {
+    "description": "Select app language"
+  },
+  "subtitlesBackground": "ഉപശീർഷക പശ്ചാത്തലം",
+  "@subtitlesBackground": {
+    "description": "Title for settings to set black background  for subtitles"
+  },
+  "subtitlesBackgroundDescription": "ഉപശീർഷകങ്ങൾ കൂടുതൽ വായിക്കാൻ കഴിയുന്ന തരത്തിൽ ഒരു കറുത്ത പശ്ചാത്തലം ചേർക്കുന്നു",
+  "@subtitlesBackgroundDescription": {
+    "description": "Description for settings to set black background  for subtitles"
+  },
+  "playbackSpeed": "പിന്നണി വേഗത",
+  "@playbackSpeed": {
+    "description": "Name of TV ui Playback speed"
+  },
+  "themeLight": "വെളിച്ചം",
+  "@themeLight": {
+    "description": "Light theme"
+  },
+  "followSystem": "വ്യവസ്ഥിതിയെ പിന്തുടരുക",
+  "@followSystem": {
+    "description": "Follow system label"
+  },
+  "requiresRestart": "പ്രയോഗം പുനരാരംഭിക്കേണ്ടതുണ്ട്",
+  "@requiresRestart": {
+    "description": "Requires app restart label"
+  },
+  "distractionFreeModeDescription": "വീഡിയോ അഭിപ്രായങ്ങളും ശുപാർശകളും പ്രവർത്തനരഹിതമാക്കുക",
+  "@distractionFreeModeDescription": {
+    "description": "Description for distraction free mode"
+  },
+  "themeDark": "ഇരുണ്ട",
+  "@themeDark": {
+    "description": "Dark theme"
+  },
+  "askToEnableBackgroundServiceTitle": "അറിയിപ്പുകൾ നിർത്തിയിരിക്കുന്നു",
+  "@askToEnableBackgroundServiceTitle": {
+    "description": "If the users tries to turn on notifications for a channel but hasn't enable notifications in the app we need to turn it on for them"
+  },
+  "customizeAppLayout": "പ്രയോഗത്തിലെ വിഭാഗങ്ങൾ ഇഷ്ടാനുസൃതമാക്കുക",
+  "@customizeAppLayout": {
+    "description": "Settings label for the settings to allow the user to set up the app sections themselves"
+  }
+}

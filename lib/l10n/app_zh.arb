@@ -170,7 +170,7 @@
   "@sponsorSkipped": {
     "description": "When a sponsor segment is skipped thanks to sponsor block"
   },
-  "selectBrowsingCountry": "选择浏览国家",
+  "selectBrowsingCountry": "选择浏览国家/地区",
   "@selectBrowsingCountry": {
     "description": "Select country for trending content"
   },
@@ -186,7 +186,7 @@
   "@browsing": {
     "description": "video browsing preferences"
   },
-  "country": "国家",
+  "country": "国家/地区",
   "@country": {
     "description": "Country label"
   },
@@ -475,7 +475,7 @@
   "@sponsorBlockCategoryMusicOffTopic": {
     "description": "Sponsorblock 'MusicOffTopic' Category"
   },
-  "sponsorBlockCategoryMusicOffTopicDescription": "没有实际内容的间隔。可能是暂停、静态帧、重复动画。这不应该用于包含信息的过渡。",
+  "sponsorBlockCategoryMusicOffTopicDescription": "只用于音乐视频，这个应用于未被其他分类覆盖的音乐视频。",
   "@sponsorBlockCategoryMusicOffTopicDescription": {
     "description": "Only for use in music videos. This only should be used for sections of music videos that aren't already covered by another category."
   },
@@ -634,5 +634,107 @@
   "playNextAddedToQueue": "即将播放的视频",
   "@playNextAddedToQueue": {
     "description": "Pop up message to confirm that the video has been properly set to play next"
+  },
+  "videoFilters": "视频筛选",
+  "@videoFilters": {
+    "description": "Title for video filter settings"
+  },
+  "malformedStatsEndpoint": "/api/v1/stats 有未知问题",
+  "@malformedStatsEndpoint": {
+    "description": "Title for dialog when adding a server that isn't validated as it should"
+  },
+  "autoplayVideoOnLoad": "边加载边自动播放",
+  "@autoplayVideoOnLoad": {
+    "description": "Label for settings to enable autoplay when a video loads"
+  },
+  "autoplayVideoOnLoadDescription": "加载完成后自动播放",
+  "@autoplayVideoOnLoadDescription": {
+    "description": "Description for the autoplay video on load setting"
+  },
+  "searchUploadDate": "上传日期",
+  "@searchUploadDate": {
+    "description": "Filter search result by upload date"
+  },
+  "searchUploadDateAny": "任何日期",
+  "@searchUploadDateAny": {
+    "description": "Do not filter search result by upload date"
+  },
+  "searchUploadDateYear": "当年",
+  "@searchUploadDateYear": {
+    "description": "Search for uploaded this year"
+  },
+  "searchDurationMedium": "中等（4至20分钟）",
+  "@searchDurationMedium": {
+    "description": "Search for medium videos only"
+  },
+  "share": "分享",
+  "@share": {
+    "description": "asking user if to share"
+  },
+  "redirectInvidiousLink": "分享重定向Invidious链接",
+  "@redirectInvidiousLink": {
+    "description": "asking user to share redirecting invidious link"
+  },
+  "shareLinkWithTimestamp": "分享带时间戳的链接",
+  "@shareLinkWithTimestamp": {
+    "description": "asking user to share link along with timestamp"
+  },
+  "malformedStatsEndpointDescription": "服务器在接收端中没有得到一个预期的数据包，”应用包名“应该在invidious之后。\n服务器反馈：",
+  "@malformedStatsEndpointDescription": {
+    "description": "Description of the possible issue for an invalid stats endpoints"
+  },
+  "searchUploadDateHour": "上一个小时",
+  "@searchUploadDateHour": {
+    "description": "Search for uploaded in last hour"
+  },
+  "searchUploadDateToday": "今天",
+  "@searchUploadDateToday": {
+    "description": "Search for uploaded this week"
+  },
+  "searchUploadDateMonth": "当月",
+  "@searchUploadDateMonth": {
+    "description": "Search for uploaded this month"
+  },
+  "searchUploadDateWeek": "当周",
+  "@searchUploadDateWeek": {},
+  "searchDuration": "期间",
+  "@searchDuration": {
+    "description": "Filter search result by duration"
+  },
+  "searchDurationAny": "任何期间",
+  "@searchDurationAny": {
+    "description": "Do not filter search result by duration"
+  },
+  "searchDurationShort": "短（4分钟以下）",
+  "@searchDurationShort": {
+    "description": "Search for short videos only"
+  },
+  "searchDurationLong": "长（20分钟以上）",
+  "@searchDurationLong": {
+    "description": "Search for long videos only"
+  },
+  "searchSortRating": "收看数",
+  "@searchSortRating": {
+    "description": "Sort search by rating"
+  },
+  "appLogs": "应用日志",
+  "@appLogs": {
+    "description": "Title for settings that leads to application logs"
+  },
+  "appLogsDescription": "从应用日志中，可知道应用运行情况，有助于报告问题",
+  "@appLogsDescription": {
+    "description": "Description of the app log settings"
+  },
+  "copyToClipBoard": "复制到剪贴板",
+  "@copyToClipBoard": {
+    "description": "Text to copy something to clipboard"
+  },
+  "logsCopied": "复制日志到剪贴板",
+  "@logsCopied": {
+    "description": "Message to tell user that logs have been copied to the clipboard"
+  },
+  "rememberSubtitleLanguage": "记住字幕语言",
+  "@rememberSubtitleLanguage": {
+    "description": "Settings label for remembering subtitle language"
   }
 }

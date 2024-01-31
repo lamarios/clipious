@@ -1256,5 +1256,61 @@
   "exponentialSkipDescription": "Количество секунд одной перемотки вперёд возрастает с каждым нажатием.",
   "@exponentialSkipDescription": {
     "description": "Title for the setting to enable the exponential skipping"
+  },
+  "share": "Поделиться",
+  "@share": {
+    "description": "asking user if to share"
+  },
+  "searchUploadDateAny": "Любая дата",
+  "@searchUploadDateAny": {
+    "description": "Do not filter search result by upload date"
+  },
+  "searchUploadDateHour": "Последний час",
+  "@searchUploadDateHour": {
+    "description": "Search for uploaded in last hour"
+  },
+  "searchUploadDateWeek": "На этой неделе",
+  "@searchUploadDateWeek": {},
+  "searchUploadDateYear": "В этом году",
+  "@searchUploadDateYear": {
+    "description": "Search for uploaded this year"
+  },
+  "searchDuration": "Продолжительность",
+  "@searchDuration": {
+    "description": "Filter search result by duration"
+  },
+  "searchDurationAny": "Любая продолжительность",
+  "@searchDurationAny": {
+    "description": "Do not filter search result by duration"
+  },
+  "searchDurationShort": "Короткие (<4 минут)",
+  "@searchDurationShort": {
+    "description": "Search for short videos only"
+  },
+  "searchDurationLong": "Длинные (>20 минут)",
+  "@searchDurationLong": {
+    "description": "Search for long videos only"
+  },
+  "searchDurationMedium": "Средние (4-20 минут)",
+  "@searchDurationMedium": {
+    "description": "Search for medium videos only"
+  },
+  "channelSortByPopular": "Популярные",
+  "@channelSortByPopular": {},
+  "searchUploadDateToday": "Сегодня",
+  "@searchUploadDateToday": {
+    "description": "Search for uploaded this week"
+  },
+  "searchUploadDateMonth": "В этос месяце",
+  "@searchUploadDateMonth": {
+    "description": "Search for uploaded this month"
+  },
+  "channelSortByNewest": "Новейшие",
+  "@channelSortByNewest": {},
+  "channelSortByOldest": "Старейшие",
+  "@channelSortByOldest": {},
+  "searchUploadDate": "Дата загрузки",
+  "@searchUploadDate": {
+    "description": "Filter search result by upload date"
   }
 }

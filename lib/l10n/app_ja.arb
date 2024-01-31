@@ -1256,5 +1256,61 @@
   "fullscreenOnLandscapeDescription": "端末を横向きに回転すると全画面にします",
   "@fullscreenOnLandscapeDescription": {
     "description": "Setting to enable full screen on landscape orientation"
-  }
+  },
+  "searchUploadDate": "アップロード日",
+  "@searchUploadDate": {
+    "description": "Filter search result by upload date"
+  },
+  "searchUploadDateToday": "今日",
+  "@searchUploadDateToday": {
+    "description": "Search for uploaded this week"
+  },
+  "searchUploadDateWeek": "今週",
+  "@searchUploadDateWeek": {},
+  "searchUploadDateMonth": "今月",
+  "@searchUploadDateMonth": {
+    "description": "Search for uploaded this month"
+  },
+  "searchUploadDateYear": "今年",
+  "@searchUploadDateYear": {
+    "description": "Search for uploaded this year"
+  },
+  "share": "共有",
+  "@share": {
+    "description": "asking user if to share"
+  },
+  "searchUploadDateAny": "すべて",
+  "@searchUploadDateAny": {
+    "description": "Do not filter search result by upload date"
+  },
+  "searchUploadDateHour": "1時間以内",
+  "@searchUploadDateHour": {
+    "description": "Search for uploaded in last hour"
+  },
+  "searchDuration": "時間",
+  "@searchDuration": {
+    "description": "Filter search result by duration"
+  },
+  "searchDurationAny": "すべて",
+  "@searchDurationAny": {
+    "description": "Do not filter search result by duration"
+  },
+  "searchDurationShort": "短 (4分未満)",
+  "@searchDurationShort": {
+    "description": "Search for short videos only"
+  },
+  "searchDurationLong": "長 (20分以上)",
+  "@searchDurationLong": {
+    "description": "Search for long videos only"
+  },
+  "searchDurationMedium": "中 (4～20分)",
+  "@searchDurationMedium": {
+    "description": "Search for medium videos only"
+  },
+  "channelSortByNewest": "新しい順",
+  "@channelSortByNewest": {},
+  "channelSortByPopular": "人気",
+  "@channelSortByPopular": {},
+  "channelSortByOldest": "古い順",
+  "@channelSortByOldest": {}
 }
