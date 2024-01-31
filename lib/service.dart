@@ -442,11 +442,11 @@ class Service {
   Future<bool> unSubscribe(String channelId) async {
     if (!await isLoggedIn()) return false;
 
-    var currentlySelectedServer = db.getCurrentlySelectedServer();
+    var currentlySelectedServer = await db.getCurrentlySelectedServer();
 
     var url = await buildUrl(urlAddDeleteSubscriptions,
         pathParams: {":ucid": channelId});
-    var headers = getAuthenticationHeaders(await currentlySelectedServer);
+    var headers = getAuthenticationHeaders(currentlySelectedServer);
 
     final response = await http.delete(url, headers: headers);
     log.info('${response.statusCode} - ${response.body}');

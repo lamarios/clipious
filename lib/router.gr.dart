@@ -95,12 +95,6 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const ManageSubscriptionsScreen(),
       );
     },
-    MigrationRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const ResetScreen(),
-      );
-    },
     NotificationSettingsRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -116,6 +110,12 @@ abstract class _$AppRouter extends RootStackRouter {
           playlist: args.playlist,
           canDeleteVideos: args.canDeleteVideos,
         ),
+      );
+    },
+    ResetRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const ResetScreen(),
       );
     },
     SearchHistorySettingsRoute.name: (routeData) {
@@ -615,20 +615,6 @@ class ManageSubscriptionsRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [ResetScreen]
-class MigrationRoute extends PageRouteInfo<void> {
-  const MigrationRoute({List<PageRouteInfo>? children})
-      : super(
-          MigrationRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'MigrationRoute';
-
-  static const PageInfo<void> page = PageInfo<void>(name);
-}
-
-/// generated route for
 /// [NotificationSettingsScreen]
 class NotificationSettingsRoute extends PageRouteInfo<void> {
   const NotificationSettingsRoute({List<PageRouteInfo>? children})
@@ -683,6 +669,20 @@ class PlaylistViewRouteArgs {
   String toString() {
     return 'PlaylistViewRouteArgs{key: $key, playlist: $playlist, canDeleteVideos: $canDeleteVideos}';
   }
+}
+
+/// generated route for
+/// [ResetScreen]
+class ResetRoute extends PageRouteInfo<void> {
+  const ResetRoute({List<PageRouteInfo>? children})
+      : super(
+          ResetRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'ResetRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for

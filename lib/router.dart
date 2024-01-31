@@ -106,7 +106,7 @@ class AppRouter extends _$AppRouter {
             AutoRoute(page: TvFilterListSettingsRoute.page),
             AutoRoute(page: TvTimePickerRoute.page),
             AutoRoute(page: TvPlainTextRoute.page),
-            AutoRoute(page: MigrationRoute.page, initial: needsDbMigration)
+            AutoRoute(page: ResetRoute.page, initial: needsDbMigration)
           ]
         : [
             AutoRoute(
@@ -139,7 +139,7 @@ class AppRouter extends _$AppRouter {
                 AutoRoute(page: DeArrowSettingsRoute.page),
               ],
             ),
-            AutoRoute(page: MigrationRoute.page, initial: needsDbMigration),
+            AutoRoute(page: ResetRoute.page, initial: needsDbMigration),
             AutoRoute(
                 page: ManageSingleServerRoute.page,
                 path: pathManageSingleServerFromWizard),
