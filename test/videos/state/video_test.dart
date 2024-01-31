@@ -10,13 +10,11 @@ import 'package:invidious/service.dart';
 import 'package:invidious/settings/states/settings.dart';
 import 'package:invidious/videos/models/dislike.dart';
 import 'package:invidious/videos/states/video.dart';
-import 'package:mockito/annotations.dart';
 
 import '../../test_app_cubit.dart';
 import '../../test_player_cubit.dart';
 import '../../test_settings_cubit.dart';
 import '../../utils/server.dart';
-import 'package:nock/nock.dart';
 
 class FakeService extends Service {
   @override
