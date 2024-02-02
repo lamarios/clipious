@@ -29,22 +29,22 @@ jobs:
         with:
           nix_path: nixpkgs=channel:nixos-23.11
       - name: Create keystore.jks
-        run: echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > /tmp/keystore.jks
+        run: | 
+          echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > /tmp/keystore.jks
+          md5sum /tmp/keystore.jks
       - name: Create key.properties
         run: |
           echo "storeFile=/tmp/keystore.jks" > /tmp/key.properties
           echo "storePassword=${{ secrets.STORE_PASSWORD }}" >> /tmp/key.properties
           echo "keyPassword=${{ secrets.KEY_PASSWORD }}" >> /tmp/key.properties
           echo "keyAlias=${{ secrets.KEY_ALIAS }}" >> /tmp/key.properties
+          md5sum /tmp/key.properties
       - run: git submodule init
       - run: git submodule update
       - run: set -e
       - run: cp -R ./ /tmp/build
       - working-directory: /tmp/build
         run: |
-          ls
-          ls /tmp
-          pwd
           git submodule init
           git submodule update
           export PUB_CACHE=$(pwd)/.pub-cache
