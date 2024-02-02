@@ -43,33 +43,29 @@ jobs:
       - run: git submodule init
       - run: git submodule update
       - run: set -e
-      - run: cd ..
-      - run: ls -l
-      - run: pwd
-      - run: cp -R src /tmp/build
-      - run: cd /tmp/build
-      - run: git submodule init
-      - run: git submodule update
-      - run: export PUB_CACHE=$(pwd)/.pub-cache
-      - run: ./submodules/flutter/bin/flutter doctor
-      - run: ./submodules/flutter/bin/flutter config --no-analytics
-      - run: ./submodules/flutter/bin/flutter pub get
-      - run: ./submodules/flutter/bin/flutter pub run flutter_native_splash:create
-      - run: ./submodules/flutter/bin/flutter build apk --split-per-abi
-      - run: ./submodules/flutter/bin/flutter build apk
-      - run: ./submodules/flutter/bin/flutter build appbundle
-      - run: cd /drone/src/
+      - run: cp -R ./ /tmp/build
+      - working-directory: /tmp/build
+        run: |
+          git submodule init
+          git submodule update
+          export PUB_CACHE=$(pwd)/.pub-cache
+          ./submodules/flutter/bin/flutter doctor
+          ./submodules/flutter/bin/flutter config --no-analytics
+          ./submodules/flutter/bin/flutter pub get
+          ./submodules/flutter/bin/flutter pub run flutter_native_splash:create
+          ./submodules/flutter/bin/flutter build apk --split-per-abi
+          ./submodules/flutter/bin/flutter build apk
+          ./submodules/flutter/bin/flutter build appbundle
       - run: mkdir -p build/app/outputs/flutter-apk
       - run: mkdir -p build/app/outputs/bundle/release
       - run: cp /tmp/build/build/app/outputs/flutter-apk/* build/app/outputs/flutter-apk/
       - run: cp /tmp/build/build/app/outputs/bundle/release/* build/app/outputs/bundle/release/
       - run: ls build/app/outputs/flutter-apk/
       - run: ls build/app/outputs/bundle/release/
-      - run: cd build/app/outputs/bundle/release/
       - name: Install nix packages for bundle tools
         run: nix-env -iA bundletool aapt android-tools
       - name: Create apks file
-        run: bundletool build-apks --bundle=app-release.aab --output=app-release.apks --ks-pass=pass:${{ secrets.STORE_PASSWORD }} --ks=/tmp/keystore.jks --ks-key-alias=upload --key-pass=pass:${{ secrets.KEY_PASSWORD }} --aapt2=$(which aapt2)
+        run: bundletool build-apks --bundle=build/app/outputs/bundle/release/app-release.aab --output=build/app/outputs/bundle/release/app-release.apks --ks-pass=pass:${{ secrets.STORE_PASSWORD }} --ks=/tmp/keystore.jks --ks-key-alias=upload --key-pass=pass:${{ secrets.KEY_PASSWORD }} --aapt2=$(which aapt2)
      # - name: Upload binaries to release
      #   uses: svenstaro/upload-release-action@v2
      #   with:
