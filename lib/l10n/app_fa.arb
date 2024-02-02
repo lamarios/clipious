@@ -1256,5 +1256,61 @@
   "fullscreenOnLandscapeDescription": "هنگامی که دستگاه در حالت افقی است به وضعیت تمام صفحه تغییر بده",
   "@fullscreenOnLandscapeDescription": {
     "description": "Setting to enable full screen on landscape orientation"
-  }
+  },
+  "share": "اشتراک‌گذاری",
+  "@share": {
+    "description": "asking user if to share"
+  },
+  "searchUploadDate": "تاریخ انتشار",
+  "@searchUploadDate": {
+    "description": "Filter search result by upload date"
+  },
+  "searchUploadDateToday": "امروز",
+  "@searchUploadDateToday": {
+    "description": "Search for uploaded this week"
+  },
+  "channelSortByNewest": "تازه‌ترین",
+  "@channelSortByNewest": {},
+  "searchUploadDateAny": "هر تاریخی",
+  "@searchUploadDateAny": {
+    "description": "Do not filter search result by upload date"
+  },
+  "searchUploadDateHour": "یک ساعت پیش",
+  "@searchUploadDateHour": {
+    "description": "Search for uploaded in last hour"
+  },
+  "searchUploadDateWeek": "این هفته",
+  "@searchUploadDateWeek": {},
+  "searchUploadDateMonth": "این ماه",
+  "@searchUploadDateMonth": {
+    "description": "Search for uploaded this month"
+  },
+  "searchUploadDateYear": "امسال",
+  "@searchUploadDateYear": {
+    "description": "Search for uploaded this year"
+  },
+  "searchDuration": "مدت",
+  "@searchDuration": {
+    "description": "Filter search result by duration"
+  },
+  "searchDurationAny": "هر مدتی",
+  "@searchDurationAny": {
+    "description": "Do not filter search result by duration"
+  },
+  "searchDurationShort": "کوتاه ( کمتر از ۴ دقیقه)",
+  "@searchDurationShort": {
+    "description": "Search for short videos only"
+  },
+  "searchDurationLong": "بلند (بیش از ۲۰ دقیقه)",
+  "@searchDurationLong": {
+    "description": "Search for long videos only"
+  },
+  "searchDurationMedium": "متوسط (۴ تا ۲۰ دقیقه)",
+  "@searchDurationMedium": {
+    "description": "Search for medium videos only"
+  },
+  "channelSortByOldest": "قدیمی‌ترین",
+  "@channelSortByOldest": {},
+  "channelSortByPopular": "محبوب",
+  "@channelSortByPopular": {}
 }
