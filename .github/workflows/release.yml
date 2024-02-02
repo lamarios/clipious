@@ -1,0 +1,80 @@
+# This is a basic workflow to help you get started with Actions
+name: Clipious release
+
+# Controls when the workflow will run
+on:
+  push:
+    branches:
+      - 'master'
+    # Pattern matched against refs/tags
+    tags:
+     - '**'
+
+ # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+  # A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    name: flutter release
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    #env:
+    #  JAVA_VERSION: "11.0"
+    #  FLUTTER_VERSION: "2.5.3"
+    steps:
+      - uses: actions/checkout@v3
+      - uses: cachix/install-nix-action@v22
+        with:
+          nix_path: nixpkgs=channel:nixos-23.11
+      - name: Download Android keystore
+        id: android_keystore
+        uses: timheuer/base64-to-file@v1.0.3
+        with:
+          fileName: upload-keystore.jks
+          encodedString: ${{ secrets.KEYSTORE_BASE64 }}
+      - name: Create key.properties
+        run: |
+          echo "storeFile=${{ steps.android_keystore.outputs.filePath }}" > /tmp/key.properties
+          echo "storePassword=${{ secrets.STORE_PASSWORD }}" >> /tmp/key.properties
+          echo "keyPassword=${{ secrets.KEY_PASSWORD }}" >> /tmp/key.properties
+          echo "keyAlias=${{ secrets.KEY_ALIAS }}" >> /tmp/key.properties
+      - run: git submodule init
+      - run: git submodule update
+      - run: set -e
+      - run: cd ..
+      - run: ls -l
+      - run: pwd
+      - run: cp -R src /tmp/build
+      - run: cd /tmp/build
+      - run: git submodule init
+      - run: git submodule update
+      - run: export PUB_CACHE=$(pwd)/.pub-cache
+      - run: ./submodules/flutter/bin/flutter doctor
+      - run: ./submodules/flutter/bin/flutter config --no-analytics
+      - run: ./submodules/flutter/bin/flutter pub get
+      - run: ./submodules/flutter/bin/flutter pub run flutter_native_splash:create
+      - run: ./submodules/flutter/bin/flutter build apk --split-per-abi
+      - run: ./submodules/flutter/bin/flutter build apk
+      - run: ./submodules/flutter/bin/flutter build appbundle
+      - run: cd /drone/src/
+      - run: mkdir -p build/app/outputs/flutter-apk
+      - run: mkdir -p build/app/outputs/bundle/release
+      - run: cp /tmp/build/build/app/outputs/flutter-apk/* build/app/outputs/flutter-apk/
+      - run: cp /tmp/build/build/app/outputs/bundle/release/* build/app/outputs/bundle/release/
+      - run: ls build/app/outputs/flutter-apk/
+      - run: ls build/app/outputs/bundle/release/
+      - run: cd build/app/outputs/bundle/release/
+      - name: Install nix packages for bundle tools
+        run: nix-env -iA bundletool aapt android-tools
+      - name: Create apks file
+        run: bundletool build-apks --bundle=app-release.aab --output=app-release.apks --ks-pass=pass:${{ secrets.STORE_PASSWORD }} --ks=/tmp/keystore.jks --ks-key-alias=upload --key-pass=pass:${{ secrets.KEY_PASSWORD }} --aapt2=$(which aapt2)
+     # - name: Upload binaries to release
+     #   uses: svenstaro/upload-release-action@v2
+     #   with:
+     #     repo_token: ${{ secrets.GITHUB_TOKEN }}
+     #     file: target/release/my*
+     #     tag: ${{ github.ref }}
+     #     overwrite: true
+     #     file_glob: true
