@@ -62,7 +62,7 @@ jobs:
       - run: ls build/app/outputs/flutter-apk/
       - run: ls build/app/outputs/bundle/release/
       - name: Create apks file
-        run: nix-shell nix/bundletool.nix --run "bundletool build-apks --bundle=build/app/outputs/bundle/release/app-release.aab --output=build/app/outputs/bundle/release/app-release.apks --ks-pass=pass:${{ secrets.STORE_PASSWORD }} --ks=/tmp/keystore.jks --ks-key-alias=upload --key-pass=pass:${{ secrets.KEY_PASSWORD }} --aapt2=$(which aapt2)"
+        run: nix-shell nix/bundletool.nix --run 'bundletool build-apks --bundle=build/app/outputs/bundle/release/app-release.aab --output=build/app/outputs/bundle/release/app-release.apks --ks-pass=pass:${{ secrets.STORE_PASSWORD }} --ks=/tmp/keystore.jks --ks-key-alias=upload --key-pass=pass:${{ secrets.KEY_PASSWORD }} --aapt2=$(which aapt2)'
      # - name: Upload binaries to release
      #   uses: svenstaro/upload-release-action@v2
      #   with:
