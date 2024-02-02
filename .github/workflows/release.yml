@@ -4,11 +4,8 @@ name: Clipious release
 # Controls when the workflow will run
 on:
   push:
-    branches:
-      - 'master'
-    # Pattern matched against refs/tags
     tags:
-     - '**'
+     - '*'
 
  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -68,11 +65,19 @@ jobs:
         run: nix-shell nix/bundletool.nix --run 'bundletool build-apks --bundle=build/app/outputs/bundle/release/app-release.aab --output=build/app/outputs/bundle/release/app-release.apks --ks-pass=pass:${{ secrets.STORE_PASSWORD }} --ks=/tmp/keystore.jks --ks-key-alias=upload --key-pass=pass:${{ secrets.KEY_PASSWORD }} --aapt2=$(which aapt2)'
       - run: ls build/app/outputs/flutter-apk/
       - run: ls build/app/outputs/bundle/release/
-     # - name: Upload binaries to release
-     #   uses: svenstaro/upload-release-action@v2
-     #   with:
-     #     repo_token: ${{ secrets.GITHUB_TOKEN }}
-     #     file: target/release/my*
-     #     tag: ${{ github.ref }}
-     #     overwrite: true
-     #     file_glob: true
+      - name: Upload binaries to release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GH_TOKEN }}
+          file: build/app/outputs/flutter-apk/*
+          tag: ${{ github.ref }}
+          overwrite: true
+          file_glob: true
+      - name: Upload binaries to release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GH_TOKEN }}
+          file: build/app/outputs/bundle/release/*
+          tag: ${{ github.ref }}
+          overwrite: true
+          file_glob: true
