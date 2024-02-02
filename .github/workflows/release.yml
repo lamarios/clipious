@@ -12,6 +12,8 @@ on:
 
  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
+env:
+  ANDROID_KEY_FILE: /tmp/key.properties
 
   # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -34,10 +36,10 @@ jobs:
           md5sum /tmp/keystore.jks
       - name: Create key.properties
         run: |
-          echo "storeFile=/tmp/keystore.jks" > /tmp/key.properties
-          echo "storePassword=${{ secrets.STORE_PASSWORD }}" >> /tmp/key.properties
-          echo "keyPassword=${{ secrets.KEY_PASSWORD }}" >> /tmp/key.properties
-          echo "keyAlias=${{ secrets.KEY_ALIAS }}" >> /tmp/key.properties
+          echo "storeFile=/tmp/keystore.jks" > ${ANDROID_KEY_FILE}
+          echo "storePassword=${{ secrets.STORE_PASSWORD }}" >> ${ANDROID_KEY_FILE}
+          echo "keyPassword=${{ secrets.KEY_PASSWORD }}" >> ${ANDROID_KEY_FILE}
+          echo "keyAlias=${{ secrets.KEY_ALIAS }}" >> ${ANDROID_KEY_FILE}
           md5sum /tmp/key.properties
       - run: git submodule init
       - run: git submodule update
