@@ -31,7 +31,7 @@ jobs:
       - name: Install nix packages for bundle tools
         run: nix-env -iA bundletool aapt android-tools
       - name: Create keystore.jks
-        run: echo ${{ secrets.KEYSTORE_BASE^$ }} | base64 -d > /tmp/keystore.jks
+        run: echo ${{ secrets.KEYSTORE_BASE64 }} | base64 -d > /tmp/keystore.jks
       - name: Create key.properties
         run: |
           echo "storeFile=/tmp/keystore.jks" > /tmp/key.properties
