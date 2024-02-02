@@ -28,15 +28,13 @@ jobs:
       - uses: cachix/install-nix-action@v22
         with:
           nix_path: nixpkgs=channel:nixos-23.11
-      - name: Download Android keystore
-        id: android_keystore
-        uses: timheuer/base64-to-file@v1.0.3
-        with:
-          fileName: upload-keystore.jks
-          encodedString: ${{ secrets.KEYSTORE_BASE64 }}
+      - name: Install nix packages for bundle tools
+        run: nix-env -iA bundletool aapt android-tools
+      - name: Create keystore.jks
+        run: echo ${{ secrets.KEYSTORE_BASE^$ }} | base64 -d > /tmp/keystore.jks
       - name: Create key.properties
         run: |
-          echo "storeFile=${{ steps.android_keystore.outputs.filePath }}" > /tmp/key.properties
+          echo "storeFile=/tmp/keystore.jks" > /tmp/key.properties
           echo "storePassword=${{ secrets.STORE_PASSWORD }}" >> /tmp/key.properties
           echo "keyPassword=${{ secrets.KEY_PASSWORD }}" >> /tmp/key.properties
           echo "keyAlias=${{ secrets.KEY_ALIAS }}" >> /tmp/key.properties
@@ -46,6 +44,9 @@ jobs:
       - run: cp -R ./ /tmp/build
       - working-directory: /tmp/build
         run: |
+          ls
+          ls /tmp
+          pwd
           git submodule init
           git submodule update
           export PUB_CACHE=$(pwd)/.pub-cache
@@ -62,8 +63,6 @@ jobs:
       - run: cp /tmp/build/build/app/outputs/bundle/release/* build/app/outputs/bundle/release/
       - run: ls build/app/outputs/flutter-apk/
       - run: ls build/app/outputs/bundle/release/
-      - name: Install nix packages for bundle tools
-        run: nix-env -iA bundletool aapt android-tools
       - name: Create apks file
         run: bundletool build-apks --bundle=build/app/outputs/bundle/release/app-release.aab --output=build/app/outputs/bundle/release/app-release.apks --ks-pass=pass:${{ secrets.STORE_PASSWORD }} --ks=/tmp/keystore.jks --ks-key-alias=upload --key-pass=pass:${{ secrets.KEY_PASSWORD }} --aapt2=$(which aapt2)
      # - name: Upload binaries to release
