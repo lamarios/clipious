@@ -43,7 +43,7 @@ class AddToPlaylistCubit extends Cubit<AddToPlaylistController> {
     emit(state.copyWith(loading: true));
     late List<Playlist> playlists;
     if (state.isLoggedIn) {
-      playlists = await service.getUserPlaylists();
+      playlists = await service.getUserPlaylists(postProcessing: false);
     } else {
       playlists = List.empty();
     }
