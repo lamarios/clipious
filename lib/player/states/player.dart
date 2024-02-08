@@ -60,16 +60,9 @@ class PlayerCubit extends Cubit<PlayerState> with WidgetsBindingObserver {
     emit(state.copyWith(mediaEvent: event));
   }
 
-  Orientation get _orientation => (WidgetsBinding.instance.platformDispatcher
-                  .implicitView?.physicalSize.aspectRatio ??
-              1) >
-          1
-      ? Orientation.landscape
-      : Orientation.portrait;
-
   @override
   void didChangeMetrics() {
-    var newOrientation = _orientation;
+    var newOrientation = getOrientation();
     if (newOrientation != orientation) {
       orientation = newOrientation;
       onOrientationChange();
@@ -125,7 +118,7 @@ class PlayerCubit extends Cubit<PlayerState> with WidgetsBindingObserver {
   }
 
   onReady() async {
-    orientation = _orientation;
+    orientation = getOrientation();
 
     emit(state.copyWith(
         forwardStep: settings.state.skipStep,

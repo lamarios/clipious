@@ -56,23 +56,22 @@ class VideoScreen extends StatelessWidget {
         .then((value) => cubit.getDownloadStatus());
   }
 
+  Object getNavigationItem(
+      {required DeviceType device, required Icon icon, required String label}) {
+    return switch (device) {
+      DeviceType.phone => NavigationDestination(icon: icon, label: label),
+      DeviceType.tablet =>
+        NavigationRailDestination(icon: icon, label: Text(label)),
+      (_) => throw UnsupportedError("Should not reach here")
+    };
+  }
+
   @override
   Widget build(BuildContext context) {
     var locals = AppLocalizations.of(context)!;
     ColorScheme colorScheme = Theme.of(context).colorScheme;
 
-    bool show3Navigation = getDeviceType() == DeviceType.phone;
-
-    var destinations = List.of(<Widget>[
-      NavigationDestination(icon: const Icon(Icons.info), label: locals.info),
-      NavigationDestination(
-          icon: const Icon(Icons.chat_bubble), label: locals.comments),
-    ], growable: true);
-
-    if (show3Navigation) {
-      destinations.add(NavigationDestination(
-          icon: const Icon(Icons.schema), label: locals.recommended));
-    }
+    final deviceType = getDeviceType();
 
     var downloadManager = context.read<DownloadManagerCubit>();
 
@@ -99,141 +98,161 @@ class VideoScreen extends StatelessWidget {
           var cubit = context.read<VideoCubit>();
           var settings = context.read<SettingsCubit>();
 
-          return AnimatedOpacity(
-            duration: animationDuration,
-            opacity: _.opacity,
-            child: Scaffold(
-              appBar: AppBar(
-                actions: _.loadingVideo || _.video == null
-                    ? []
-                    : [
-                        AnimatedSwitcher(
-                            duration: animationDuration,
-                            child: _.downloading
-                                ? GestureDetector(
-                                    onTap: () => openDownloadManager(context),
-                                    child: Stack(
-                                      alignment: Alignment.center,
+          return OrientationBuilder(builder: (context, orientation) {
+            // we only show the tablet specific view for landscape tablets, phone portrait view is fine here
+            var showTabletView = deviceType == DeviceType.tablet &&
+                getOrientation() == Orientation.landscape;
+
+            var destinations = List.of(<Widget>[
+              NavigationDestination(
+                  icon: const Icon(Icons.info), label: locals.info),
+              NavigationDestination(
+                  icon: const Icon(Icons.chat_bubble), label: locals.comments),
+            ], growable: true);
+            if (!showTabletView) {
+              destinations.add(NavigationDestination(
+                  icon: const Icon(Icons.schema), label: locals.recommended));
+            }
+            return AnimatedOpacity(
+              duration: animationDuration,
+              opacity: _.opacity,
+              child: Scaffold(
+                appBar: AppBar(
+                  actions: _.loadingVideo || _.video == null
+                      ? []
+                      : [
+                          AnimatedSwitcher(
+                              duration: animationDuration,
+                              child: _.downloading
+                                  ? GestureDetector(
+                                      onTap: () => openDownloadManager(context),
+                                      child: Stack(
+                                        alignment: Alignment.center,
+                                        children: [
+                                          IconButton(
+                                            icon: Icon(
+                                              Icons.add,
+                                              color: colorScheme.background,
+                                            ),
+                                            onPressed: () {},
+                                          ),
+                                          SizedBox(
+                                              height: 15,
+                                              width: 15,
+                                              child: TweenAnimationBuilder(
+                                                  duration: animationDuration,
+                                                  tween: Tween<double>(
+                                                      begin: 0,
+                                                      end: _.downloadProgress),
+                                                  builder:
+                                                      (context, value, child) {
+                                                    return CircularProgressIndicator(
+                                                      value:
+                                                          _.downloadProgress ==
+                                                                  0
+                                                              ? null
+                                                              : value,
+                                                      strokeWidth: 2,
+                                                    );
+                                                  }))
+                                        ],
+                                      ),
+                                    )
+                                  : Stack(
                                       children: [
                                         IconButton(
-                                          icon: Icon(
-                                            Icons.add,
-                                            color: colorScheme.background,
-                                          ),
-                                          onPressed: () {},
-                                        ),
-                                        SizedBox(
-                                            height: 15,
-                                            width: 15,
-                                            child: TweenAnimationBuilder(
-                                                duration: animationDuration,
-                                                tween: Tween<double>(
-                                                    begin: 0,
-                                                    end: _.downloadProgress),
-                                                builder:
-                                                    (context, value, child) {
-                                                  return CircularProgressIndicator(
-                                                    value:
-                                                        _.downloadProgress == 0
-                                                            ? null
-                                                            : value,
-                                                    strokeWidth: 2,
-                                                  );
-                                                }))
+                                            onPressed: _.isDownloaded ||
+                                                    _.downloadFailed
+                                                ? () =>
+                                                    openDownloadManager(context)
+                                                : () =>
+                                                    downloadVideo(context, _),
+                                            icon: _.isDownloaded &&
+                                                    !_.downloadFailed
+                                                ? const Icon(
+                                                    Icons.download_done)
+                                                : const Icon(Icons.download)),
+                                        Positioned(
+                                            right: 5,
+                                            top: 5,
+                                            child: _.downloadFailed
+                                                ? const Icon(
+                                                    Icons.error,
+                                                    size: 15,
+                                                    color: Colors.red,
+                                                  )
+                                                : const SizedBox.shrink())
                                       ],
-                                    ),
-                                  )
-                                : Stack(
-                                    children: [
-                                      IconButton(
-                                          onPressed: _.isDownloaded ||
-                                                  _.downloadFailed
-                                              ? () =>
-                                                  openDownloadManager(context)
-                                              : () => downloadVideo(context, _),
-                                          icon: _.isDownloaded &&
-                                                  !_.downloadFailed
-                                              ? const Icon(Icons.download_done)
-                                              : const Icon(Icons.download)),
-                                      Positioned(
-                                          right: 5,
-                                          top: 5,
-                                          child: _.downloadFailed
-                                              ? const Icon(
-                                                  Icons.error,
-                                                  size: 15,
-                                                  color: Colors.red,
-                                                )
-                                              : const SizedBox.shrink())
-                                    ],
-                                  )),
-                        Visibility(
-                          visible: _.video != null,
-                          child: VideoShareButton(video: _.video!),
-                        ),
-/*
-                        VideoLikeButton(videoId: _.video?.videoId),
-                        VideoAddToPlaylistButton(videoId: _.video?.videoId),
-*/
-                        AddToPlayListButton(videoId: _.videoId)
-                      ],
-              ),
-              backgroundColor: colorScheme.background,
-              bottomNavigationBar:
-                  _.loadingVideo || settings.state.distractionFreeMode
-                      ? null
-                      : FadeIn(
-                          child: NavigationBar(
-                            onDestinationSelected: cubit.selectIndex,
-                            selectedIndex: _.selectedIndex,
-                            destinations: destinations,
+                                    )),
+                          Visibility(
+                            visible: _.video != null,
+                            child: VideoShareButton(video: _.video!),
                           ),
+                          /*
+                            VideoLikeButton(videoId: _.video?.videoId),
+                            VideoAddToPlaylistButton(videoId: _.video?.videoId),
+              */
+                          AddToPlayListButton(videoId: _.videoId)
+                        ],
+                ),
+                backgroundColor: colorScheme.background,
+                bottomNavigationBar: showTabletView ||
+                        _.loadingVideo ||
+                        settings.state.distractionFreeMode
+                    ? null
+                    : FadeIn(
+                        child: NavigationBar(
+                          onDestinationSelected: cubit.selectIndex,
+                          selectedIndex: _.selectedIndex,
+                          destinations: destinations,
                         ),
-              body: SafeArea(
-                bottom: false,
-                child: Padding(
-                  padding: const EdgeInsets.only(
-                      left: innerHorizontalPadding,
-                      right: innerHorizontalPadding,
-                      top: 8),
-                  child: Container(
-                    color: colorScheme.background,
-                    width: double.infinity,
-                    height: double.infinity,
-                    child: AnimatedSwitcher(
-                        duration: animationDuration,
-                        child: _.error.isNotEmpty
-                            ? Container(
-                                alignment: Alignment.center,
-                                child: Text(_.error == coulnotLoadVideos
-                                    ? locals.couldntLoadVideo
-                                    : _.error),
-                              )
-                            : show3Navigation
-                                ? _.loadingVideo
-                                    ? const VideoPlaceHolder()
-                                    : VideoInnerView(
-                                        video: _.video!,
-                                        selectedIndex: _.selectedIndex,
-                                        playNow: playNow,
-                                        videoController: _,
-                                      )
-                                : _.loadingVideo
-                                    ? Container(
-                                        constraints: BoxConstraints(
-                                            maxWidth: tabletMaxVideoWidth),
-                                        child: const VideoPlaceHolder())
-                                    : VideoTabletInnerView(
-                                        video: _.video!,
-                                        playNow: playNow,
-                                        selectedIndex: _.selectedIndex,
-                                        videoController: _,
-                                      )),
+                      ),
+                body: SafeArea(
+                  bottom: false,
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                        left: innerHorizontalPadding,
+                        right: innerHorizontalPadding,
+                        top: 8),
+                    child: Container(
+                      color: colorScheme.background,
+                      width: double.infinity,
+                      height: double.infinity,
+                      child: AnimatedSwitcher(
+                          duration: animationDuration,
+                          child: _.error.isNotEmpty
+                              ? Container(
+                                  alignment: Alignment.center,
+                                  child: Text(_.error == coulnotLoadVideos
+                                      ? locals.couldntLoadVideo
+                                      : _.error),
+                                )
+                              : !showTabletView
+                                  ? _.loadingVideo
+                                      ? const VideoPlaceHolder()
+                                      : VideoInnerView(
+                                          video: _.video!,
+                                          selectedIndex: _.selectedIndex,
+                                          playNow: playNow,
+                                          videoController: _,
+                                        )
+                                  : _.loadingVideo
+                                      ? Container(
+                                          constraints: BoxConstraints(
+                                              maxWidth: tabletMaxVideoWidth),
+                                          child: const VideoPlaceHolder())
+                                      : VideoTabletInnerView(
+                                          video: _.video!,
+                                          playNow: playNow,
+                                          selectedIndex: _.selectedIndex,
+                                          videoController: _,
+                                        )),
+                    ),
                   ),
                 ),
               ),
-            ),
-          );
+            );
+          });
         },
       ),
     );

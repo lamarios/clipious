@@ -22,13 +22,31 @@ class ChannelInfo extends StatelessWidget {
     var locals = AppLocalizations.of(context)!;
     ColorScheme colors = Theme.of(context).colorScheme;
     var textTheme = Theme.of(context).textTheme;
+
+    final deviceType = getDeviceType();
+
     List<Widget> widgets = [
-      Container(
-        padding: const EdgeInsets.only(top: 10),
-        child: Text(
-          channel.author,
-          style: textTheme.titleLarge?.copyWith(color: colors.primary),
-        ),
+      Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Thumbnail(
+              width: 50,
+              height: 50,
+              thumbnailUrl:
+                  ImageObject.getBestThumbnail(channel.authorThumbnails)?.url ??
+                      '',
+              decoration: BoxDecoration(
+                color: colors.secondaryContainer,
+                shape: BoxShape.circle,
+              )),
+          const SizedBox(
+            width: 8,
+          ),
+          Text(
+            channel.author,
+            style: textTheme.titleLarge?.copyWith(color: colors.primary),
+          ),
+        ],
       ),
       Padding(
         padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -92,17 +110,24 @@ class ChannelInfo extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(
-            height: 230,
-            child: Thumbnail(
-                width: double.infinity,
-                thumbnailUrl:
-                    ImageObject.getBestThumbnail(channel.authorThumbnails)
-                            ?.url ??
-                        '',
-                decoration: BoxDecoration(
-                  color: colors.secondaryContainer,
-                )),
+          Padding(
+            padding:
+                const EdgeInsets.symmetric(horizontal: innerHorizontalPadding),
+            child: SizedBox(
+              height: deviceType == DeviceType.phone ? 100 : 230,
+              child: Thumbnail(
+                  width: double.infinity,
+                  thumbnailUrl:
+                      ImageObject.getBestThumbnail(channel.authorBanners)
+                              ?.url ??
+                          '',
+                  decoration: BoxDecoration(
+                      color: colors.secondaryContainer,
+                      borderRadius: BorderRadius.circular(10))),
+            ),
+          ),
+          const SizedBox(
+            height: 10,
           ),
           Padding(
             padding:

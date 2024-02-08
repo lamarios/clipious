@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -210,7 +212,7 @@ int getGridCount(BuildContext context) {
     return 1;
   }
 
-  return (width / 300).floor();
+  return max(2, (width / 300).floor() - 1);
 }
 
 double getGridAspectRatio(BuildContext context) {
@@ -369,4 +371,13 @@ String getWeekdayName(int weekday) {
 TimeOfDay timeStringToTimeOfDay(String time) {
   var split = time.split(":");
   return TimeOfDay(hour: int.parse(split[0]), minute: int.parse(split[1]));
+}
+
+Orientation getOrientation() {
+  return (WidgetsBinding.instance.platformDispatcher.implicitView?.physicalSize
+                  .aspectRatio ??
+              1) >
+          1
+      ? Orientation.landscape
+      : Orientation.portrait;
 }

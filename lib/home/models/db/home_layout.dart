@@ -113,6 +113,30 @@ enum HomeDataSource {
     };
   }
 
+  NavigationRailDestination getNavigationRailWidget(BuildContext context) {
+    var locals = AppLocalizations.of(context)!;
+    return switch (this) {
+      (HomeDataSource.trending) => NavigationRailDestination(
+          icon: Icon(getIcon()), label: Text(getLabel(locals))),
+      (HomeDataSource.popular) => NavigationRailDestination(
+          icon: Icon(getIcon()), label: Text(getLabel(locals))),
+      (HomeDataSource.playlist) => NavigationRailDestination(
+          icon: Icon(getIcon()), label: Text(getLabel(locals))),
+      (HomeDataSource.history) => NavigationRailDestination(
+          icon: Icon(getIcon()), label: Text(getLabel(locals))),
+      (HomeDataSource.downloads) => NavigationRailDestination(
+          icon: Icon(getIcon()), label: Text(getLabel(locals))),
+      (HomeDataSource.searchHistory) => NavigationRailDestination(
+          icon: Icon(getIcon()), label: Text(getLabel(locals))),
+      (HomeDataSource.subscription) => NavigationRailDestination(
+          icon: Icon(getIcon()), label: Text(getLabel(locals))),
+      (HomeDataSource.home) => NavigationRailDestination(
+          icon: Icon(getIcon()), label: Text(getLabel(locals))),
+      (HomeDataSource.search) => NavigationRailDestination(
+          icon: Icon(getIcon()), label: Text(getLabel(locals)))
+    };
+  }
+
   Widget build(BuildContext context, bool small) {
     return switch (this) {
       (HomeDataSource.trending) => SizedBox(
