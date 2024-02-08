@@ -7,7 +7,6 @@ import 'package:invidious/videos/models/video.dart';
 import 'package:invidious/videos/views/components/play_button.dart';
 import 'package:invidious/videos/views/components/recommended_videos.dart';
 
-import '../../../globals.dart';
 import '../../../player/states/player.dart';
 import '../../../settings/states/settings.dart';
 import '../../../utils.dart';
