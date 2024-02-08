@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/settings/states/settings.dart';
 import 'package:invidious/settings/views/screens/settings.dart';
+import 'package:invidious/utils.dart';
 import 'package:settings_ui/settings_ui.dart';
 
 import '../../../utils/views/components/select_list_dialog.dart';
@@ -108,13 +109,14 @@ class AppearanceSettingsScreen extends StatelessWidget {
                     title: Text(locals.blackBackground),
                     description: Text(locals.blackBackgroundDescription),
                   ),
-                  SettingsTile(
-                    leading: const Icon(Icons.label),
-                    title: Text(locals.navigationBarStyle),
-                    value: Text(getNavigationLabelText(
-                        context, _.navigationBarLabelBehavior)),
-                    onPressed: (ctx) => customizeNavigationLabel(ctx),
-                  ),
+                  if (getDeviceType() == DeviceType.phone)
+                    SettingsTile(
+                      leading: const Icon(Icons.label),
+                      title: Text(locals.navigationBarStyle),
+                      value: Text(getNavigationLabelText(
+                          context, _.navigationBarLabelBehavior)),
+                      onPressed: (ctx) => customizeNavigationLabel(ctx),
+                    ),
                 ],
               ),
             ],

@@ -192,6 +192,11 @@ class MyApp extends StatelessWidget {
               labelBehavior: navigationBarBehavior,
             );
 
+            var navigationRailTheme = NavigationRailThemeData(
+              elevation: 0,
+              backgroundColor: colors.background,
+            );
+
             var appBarTheme = AppBarTheme(
                 backgroundColor: colors.background,
                 elevation: 0,
@@ -247,6 +252,7 @@ class MyApp extends StatelessWidget {
                   useMaterial3: true,
                   colorScheme: lightColorScheme,
                   navigationBarTheme: navigationBarTheme,
+                  navigationRailTheme: navigationRailTheme,
                   appBarTheme: appBarTheme,
                   progressIndicatorTheme: ProgressIndicatorThemeData(
                       circularTrackColor: lightColorScheme.secondaryContainer
@@ -256,6 +262,7 @@ class MyApp extends StatelessWidget {
                   colorScheme: darkColorScheme,
                   appBarTheme: appBarTheme,
                   navigationBarTheme: navigationBarTheme,
+                  navigationRailTheme: navigationRailTheme,
                   progressIndicatorTheme: ProgressIndicatorThemeData(
                       circularTrackColor:
                           darkColorScheme.secondaryContainer.withOpacity(0.8))),
