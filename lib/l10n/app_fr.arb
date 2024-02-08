@@ -944,5 +944,127 @@
   "navigationBarStyle": "Style de la barre de navigation",
   "@navigationBarStyle": {
     "description": "Label for settings on customizing navigation bar style"
+  },
+  "nFilters": "{count, plural, =0{Aucune vidéo} =1{1 filtre} other{{count} filtres}}",
+  "@nFilters": {
+    "description": "One or more video filters",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "from": "De",
+  "@from": {
+    "description": "From word (as in 'From xx To xx')"
+  },
+  "malformedStatsEndpoint": "/api/v1/stats n'est pas comme prévu",
+  "@malformedStatsEndpoint": {
+    "description": "Title for dialog when adding a server that isn't validated as it should"
+  },
+  "malformedStatsEndpointDescription": "La récupération de stats du serveur a retourné une valeur incorrecte, la clé « software.name » devrait être égale à « invidious ».\nRéponse du serveur :",
+  "@malformedStatsEndpointDescription": {
+    "description": "Description of the possible issue for an invalid stats endpoints"
+  },
+  "searchUploadDate": "Date de mise en ligne",
+  "@searchUploadDate": {
+    "description": "Filter search result by upload date"
+  },
+  "searchUploadDateHour": "Dernière heure",
+  "@searchUploadDateHour": {
+    "description": "Search for uploaded in last hour"
+  },
+  "searchUploadDateMonth": "Ce mois-ci",
+  "@searchUploadDateMonth": {
+    "description": "Search for uploaded this month"
+  },
+  "searchDurationShort": "Court (<4 minutes)",
+  "@searchDurationShort": {
+    "description": "Search for short videos only"
+  },
+  "searchSortBy": "Trier par",
+  "@searchSortBy": {
+    "description": "Search sorting option"
+  },
+  "layoutEditorExplanation": "Vous pouvez décider ce qui s'affiche sur la page principale, vous pouvez avoir jusqu'à 2 petits aperçus avec défilement horizontal et 1 grand aperçu.",
+  "@layoutEditorExplanation": {
+    "description": "text to explain the home layout editor"
+  },
+  "customizeAppLayoutExplanation": "Sélectionnez quels icônes apparaissent dans la barre de navigation. Cliquez sur le bouton « Accueil » pour sélectionner quel page s'ouvre quand l'application démarre. Vous pouvez réordonné les section par glisser-déposer.",
+  "@customizeAppLayoutExplanation": {
+    "description": ""
+  },
+  "videoFilterDayOfWeek": "Sélectionnez les jours pour appliquer les filtres",
+  "@videoFilterDayOfWeek": {
+    "description": "Title for day selection for the filter"
+  },
+  "to": "À",
+  "@to": {
+    "description": "To word as in 'From xx To xx')"
+  },
+  "share": "Partager",
+  "@share": {
+    "description": "asking user if to share"
+  },
+  "serverIsNotReachable": "Le serveur est injoignable",
+  "@serverIsNotReachable": {
+    "description": "Title for dialog when adding a server that is not reachable"
+  },
+  "searchUploadDateAny": "N''importe quand",
+  "@searchUploadDateAny": {
+    "description": "Do not filter search result by upload date"
+  },
+  "searchUploadDateToday": "Aujourd'hui",
+  "@searchUploadDateToday": {
+    "description": "Search for uploaded this week"
+  },
+  "searchUploadDateWeek": "Cette semaine",
+  "@searchUploadDateWeek": {},
+  "searchUploadDateYear": "Cette année",
+  "@searchUploadDateYear": {
+    "description": "Search for uploaded this year"
+  },
+  "searchDuration": "Durée",
+  "@searchDuration": {
+    "description": "Filter search result by duration"
+  },
+  "searchDurationAny": "Toute durée",
+  "@searchDurationAny": {
+    "description": "Do not filter search result by duration"
+  },
+  "searchDurationLong": "Long (>20 minutes)",
+  "@searchDurationLong": {
+    "description": "Search for long videos only"
+  },
+  "searchDurationMedium": "Moyenne (4-20 minutes)",
+  "@searchDurationMedium": {
+    "description": "Search for medium videos only"
+  },
+  "videoFilterApplyDateToFilter": "Filtrer les vidéos sur les temps donnés",
+  "@videoFilterApplyDateToFilter": {
+    "description": "Label for switch to allow user to customize video filter and set days of week and time to them"
+  },
+  "videoFilterDayOfWeekDescription": "Vous pouvez choisir sélectivement les jours de la semaine et le temps auquel les filtres s'appliquent, par exemple, éviter les divulgâchis d'évènements sportifs.",
+  "@videoFilterDayOfWeekDescription": {
+    "description": ""
+  },
+  "videoFilterStartTime": "Heure de début",
+  "@videoFilterStartTime": {
+    "description": "Title for filter start time"
+  },
+  "videoFilterEndTime": "Heure de fin",
+  "@videoFilterEndTime": {
+    "description": "Title for filter end time"
+  },
+  "videoFilterAppliedOn": "Appliqué au(x) {selectedDays}",
+  "@videoFilterAppliedOn": {
+    "description": "Readable text on when the filter should apply",
+    "placeholders": {
+      "selectedDays": {
+        "type": "String",
+        "example": "Monday, Wednesday, Friday"
+      }
+    }
   }
 }
