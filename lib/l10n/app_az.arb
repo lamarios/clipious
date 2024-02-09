@@ -1,171 +1,350 @@
 {
-    "removeFromPlayList": "Oynatma siyahısından sil",
-    "@removeFromPlayList": {
-        "description": "Menu item description to show remove a video from a playlist"
-    },
-    "deletePlayListQ": "Oynatma siyahısı silinsin?",
-    "@deletePlayListQ": {
-        "description": "Ask user to delete a playlist"
-    },
-    "irreversibleAction": "Bu hərəkət geri qayıtmazdır",
-    "@irreversibleAction": {
-        "description": "Tell the user that the action cannot be undone"
-    },
-    "addPlayList": "Oynatma siyahısına əlavə et",
-    "@addPlayList": {
-        "description": "Title for add playlist dialog"
-    },
-    "playListName": "Oynatma siyahısı adı",
-    "@playListName": {
-        "description": "Place holder for new playlist name text field"
-    },
-    "playlistVisibility": "Görünmə",
-    "@playlistVisibility": {
-        "description": "Dropdown label for playlist visibility"
-    },
-    "publicPlaylist": "Ümumi",
-    "@publicPlaylist": {
-        "description": "Public playlist"
-    },
-    "cancel": "Ləğv et",
-    "@cancel": {
-        "description": "Cancel button label"
-    },
-    "add": "Əlavə et",
-    "@add": {
-        "description": "Add button abel"
-    },
-    "info": "Məlumat",
-    "@info": {
-        "description": "Info label"
-    },
-    "videos": "Videolar",
-    "@videos": {
-        "description": "Videos label"
-    },
-    "streams": "Yayımlar",
-    "@streams": {
-        "description": "Streams label"
-    },
-    "subscribed": "Abunə Olundu",
-    "@subscribed": {
-        "description": "When the user is subscribed to a channel"
-    },
-    "nSubscribers": "{count, select, no{Abunəçi yoxdur} other{{count} abunəçi}}",
-    "@nSubscribers": {
-        "description": "number of subscribers",
-        "placeholders": {
-            "count": {
-                "type": "String"
-            }
-        }
-    },
-    "ok": "Oldu",
-    "@ok": {
-        "description": "Ok"
-    },
-    "noChannels": "Kanallar yoxdur",
-    "@noChannels": {
-        "description": "when there are no channels to display"
-    },
-    "noPlaylists": "Oynatma siyahıları yoxdur",
-    "@noPlaylists": {
-        "description": "when there are no playlists to display"
-    },
-    "channels": "Kanallar",
-    "@channels": {
-        "description": "Channels label"
-    },
-    "comments": "Şərhlər",
-    "@comments": {
-        "description": "Comments label"
-    },
-    "subscriptions": "Abunəliklər",
-    "@subscriptions": {
-        "description": "User subscriptions"
-    },
-    "trending": "Trenddə olan",
-    "@trending": {
-        "description": "Trending videos title"
-    },
-    "noVideoInPlayList": "Oynatma siyahısında video yoxdur",
-    "@noVideoInPlayList": {
-        "description": "When no videos in the playlist"
-    },
-    "privatePlaylist": "Şəxsi",
-    "@privatePlaylist": {
-        "description": "Private playlist"
-    },
-    "latestVideos": "Son Videolar",
-    "@latestVideos": {
-        "description": "Latest channel videos"
-    },
-    "unlistedPlaylist": "Siyahısız",
-    "@unlistedPlaylist": {
-        "description": "Unlisted playlist"
-    },
-    "subscribe": "Abunə Ol",
-    "@subscribe": {
-        "description": "Label for user to subscribe to a channel"
-    },
-    "shareYoutubeLink": "YouTube linkin paylaş",
-    "@shareYoutubeLink": {
-        "description": "asking user to share youtube link"
-    },
-    "shareInvidiousLink": "Invidious linkin paylaş",
-    "@shareInvidiousLink": {
-        "description": "asking user to share invidious link"
-    },
-    "couldntLoadVideo": "Videonu yükləmək alınmadı",
-    "@couldntLoadVideo": {
-        "description": "Message to display when a video can't be loaded"
-    },
-    "playlists": "Oynatma siyahıları",
-    "@playlists": {
-        "description": "User playlists"
-    },
-    "popular": "Məşhur",
-    "@popular": {
-        "description": "Popular videos title"
-    },
-    "wizardIntro": "Ümumi server seç və ya özünkün əlavə et.(Daha sonra tənzimləmələrdə dəyişdirilə bilər)",
-    "@wizardIntro": {
-        "description": "Welcome message on frst time use"
-    },
-    "errorAddingVideoToPlaylist": "Oynatma siyahısına video əlavə edilərkən xəta",
-    "@errorAddingVideoToPlaylist": {
-        "description": "Error while adding video to playlist"
-    },
-    "recommended": "Tövsiyə edilən",
-    "@recommended": {
-        "description": "Recommended label"
-    },
-    "couldntFetchVideos": "Videoları əldə etmək olmadı. Təkrar cəhd etmək üçün toxun.",
-    "@couldntFetchVideos": {
-        "description": "Can't load bunch of videos, asking  user to try again"
-    },
-    "videoAddedToPlaylist": "Video oynatma siyahısına əlavə edildi",
-    "@videoAddedToPlaylist": {
-        "description": "Pop up message when a video was added to a playlist"
-    },
-    "startUsingClipious": "Clipious işlətməyə başla",
-    "@startUsingClipious": {
-        "description": "button label to start using the app"
-    },
-    "settings": "Tənzimləmələr",
-    "@settings": {
-        "description": "Settings title"
-    },
-    "sponsorBlockSettingsQuickDescription": "Bölümlərin hansı növün ötürəcəyinizi seçin",
-    "@sponsorBlockSettingsQuickDescription": {
-        "description": "Small description of what the sponsor block settings do"
-    },
-    "pressDownToShowSettings": "Tənzimləmələri göstərmək üçün aşağı bas",
-    "@pressDownToShowSettings": {
-        "description": "Instruction on how to show video settings when playing a video on TV"
-    },
-    "searchHistoryDescription": "Axtarış tarixçəsi tənzimləmələri",
-    "@searchHistoryDescription": {
-        "description": "Description for search history settings"
+  "removeFromPlayList": "Oynatma siyahısından sil",
+  "@removeFromPlayList": {
+    "description": "Menu item description to show remove a video from a playlist"
+  },
+  "deletePlayListQ": "Oynatma siyahısı silinsin?",
+  "@deletePlayListQ": {
+    "description": "Ask user to delete a playlist"
+  },
+  "irreversibleAction": "Bu fəaliyyət dəyişdirilə bilməz",
+  "@irreversibleAction": {
+    "description": "Tell the user that the action cannot be undone"
+  },
+  "addPlayList": "Oynatma siyahısına əlavə et",
+  "@addPlayList": {
+    "description": "Title for add playlist dialog"
+  },
+  "playListName": "Oynatma siyahısı adı",
+  "@playListName": {
+    "description": "Place holder for new playlist name text field"
+  },
+  "playlistVisibility": "Görünmə",
+  "@playlistVisibility": {
+    "description": "Dropdown label for playlist visibility"
+  },
+  "publicPlaylist": "İctimai",
+  "@publicPlaylist": {
+    "description": "Public playlist"
+  },
+  "cancel": "Ləğv et",
+  "@cancel": {
+    "description": "Cancel button label"
+  },
+  "add": "Əlavə et",
+  "@add": {
+    "description": "Add button abel"
+  },
+  "info": "Məlumat",
+  "@info": {
+    "description": "Info label"
+  },
+  "videos": "Videolar",
+  "@videos": {
+    "description": "Videos label"
+  },
+  "streams": "Yayımlar",
+  "@streams": {
+    "description": "Streams label"
+  },
+  "subscribed": "Abunə Olundu",
+  "@subscribed": {
+    "description": "When the user is subscribed to a channel"
+  },
+  "nSubscribers": "{count, select, no{Abunəçi yoxdur} other{{count} abunəçi}}",
+  "@nSubscribers": {
+    "description": "number of subscribers",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
     }
+  },
+  "ok": "Oldu",
+  "@ok": {
+    "description": "Ok"
+  },
+  "noChannels": "Kanallar yoxdur",
+  "@noChannels": {
+    "description": "when there are no channels to display"
+  },
+  "noPlaylists": "Oynatma siyahıları yoxdur",
+  "@noPlaylists": {
+    "description": "when there are no playlists to display"
+  },
+  "channels": "Kanallar",
+  "@channels": {
+    "description": "Channels label"
+  },
+  "comments": "Şərhlər",
+  "@comments": {
+    "description": "Comments label"
+  },
+  "subscriptions": "Abunəliklər",
+  "@subscriptions": {
+    "description": "User subscriptions"
+  },
+  "trending": "Trenddə olan",
+  "@trending": {
+    "description": "Trending videos title"
+  },
+  "noVideoInPlayList": "Oynatma siyahısında video yoxdur",
+  "@noVideoInPlayList": {
+    "description": "When no videos in the playlist"
+  },
+  "privatePlaylist": "Şəxsi",
+  "@privatePlaylist": {
+    "description": "Private playlist"
+  },
+  "latestVideos": "Son Videolar",
+  "@latestVideos": {
+    "description": "Latest channel videos"
+  },
+  "unlistedPlaylist": "Siyahısız",
+  "@unlistedPlaylist": {
+    "description": "Unlisted playlist"
+  },
+  "subscribe": "Abunə Ol",
+  "@subscribe": {
+    "description": "Label for user to subscribe to a channel"
+  },
+  "shareYoutubeLink": "YouTube bağlantısın paylaş",
+  "@shareYoutubeLink": {
+    "description": "asking user to share youtube link"
+  },
+  "shareInvidiousLink": "Invidious bağlantısın paylaş",
+  "@shareInvidiousLink": {
+    "description": "asking user to share invidious link"
+  },
+  "couldntLoadVideo": "Videonu yükləmək alınmadı",
+  "@couldntLoadVideo": {
+    "description": "Message to display when a video can't be loaded"
+  },
+  "playlists": "Oynatma siyahıları",
+  "@playlists": {
+    "description": "User playlists"
+  },
+  "popular": "Məşhur",
+  "@popular": {
+    "description": "Popular videos title"
+  },
+  "wizardIntro": "İctimai server seç və ya öz serverinizi əlavə edin.(Daha sonra tənzimləmələrdə dəyişdirilə bilər)",
+  "@wizardIntro": {
+    "description": "Welcome message on frst time use"
+  },
+  "errorAddingVideoToPlaylist": "Oynatma siyahısına video əlavə edilərkən xəta",
+  "@errorAddingVideoToPlaylist": {
+    "description": "Error while adding video to playlist"
+  },
+  "recommended": "Tövsiyə edilən",
+  "@recommended": {
+    "description": "Recommended label"
+  },
+  "couldntFetchVideos": "Videoları əldə etmək olmadı. Təkrar cəhd etmək üçün toxun.",
+  "@couldntFetchVideos": {
+    "description": "Can't load bunch of videos, asking  user to try again"
+  },
+  "videoAddedToPlaylist": "Video oynatma siyahısına əlavə edildi",
+  "@videoAddedToPlaylist": {
+    "description": "Pop up message when a video was added to a playlist"
+  },
+  "startUsingClipious": "Clipious istifadə etməyə başla",
+  "@startUsingClipious": {
+    "description": "button label to start using the app"
+  },
+  "settings": "Tənzimləmələr",
+  "@settings": {
+    "description": "Settings title"
+  },
+  "sponsorBlockSettingsQuickDescription": "Bölümlərin hansı növün ötürəcəyinizi seçin",
+  "@sponsorBlockSettingsQuickDescription": {
+    "description": "Small description of what the sponsor block settings do"
+  },
+  "pressDownToShowSettings": "Tənzimləmələri göstərmək üçün aşağı bas",
+  "@pressDownToShowSettings": {
+    "description": "Instruction on how to show video settings when playing a video on TV"
+  },
+  "searchHistoryDescription": "Axtarış tarixçəsi tənzimləmələri",
+  "@searchHistoryDescription": {
+    "description": "Description for search history settings"
+  },
+  "itemlistErrorGeneric": "Məlumat əldə etmək mümkün olmadı",
+  "@itemlistErrorGeneric": {
+    "description": "Error showing when the data can't be fetch"
+  },
+  "publicServersError": "İctimai serverlərin siyahısın əldə etmək mümkün olmadı. Təkrar cəhd etmək üçün toxunun.",
+  "@publicServersError": {
+    "description": "Error message when trying to get public servers but it failed"
+  },
+  "videoAddedToQueue": "Video növbəyə əlavə edildi",
+  "@videoAddedToQueue": {
+    "description": "Pop up message when a video was added at the end of the video queue"
+  },
+  "nReplies": "{count, plural, =0{Cavab yoxdur} =1{1 cavab} other{{count} cavab}}",
+  "@nReplies": {
+    "description": "number of replies to a comment",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "loadMore": "Daha çox yüklə",
+  "@loadMore": {
+    "description": "CTA to load more"
+  },
+  "topSorting": "Yuxarı",
+  "@topSorting": {
+    "description": "Content sorting: top"
+  },
+  "whenAppStartsShow": "Tətbiq başlayanda, göstər…",
+  "@whenAppStartsShow": {
+    "description": "Setting title for selecting the screen to show on start"
+  },
+  "servers": "Serverlər",
+  "@servers": {
+    "description": "Server management settings category"
+  },
+  "about": "Haqqında",
+  "@about": {
+    "description": "About"
+  },
+  "name": "Ad",
+  "@name": {
+    "description": "NAme label"
+  },
+  "package": "Paket",
+  "@package": {
+    "description": "package label"
+  },
+  "version": "Versiya",
+  "@version": {
+    "description": "version label"
+  },
+  "build": "Qurulan",
+  "@build": {
+    "description": "build label"
+  },
+  "notLoggedIn": "Giriş edə bilmədin",
+  "@notLoggedIn": {
+    "description": "Label when the user is not logged in to the server"
+  },
+  "invalidInvidiousServer": "Etibarsız Invidious Serveri",
+  "@invalidInvidiousServer": {
+    "description": "Error when the user tries to add a server that is not a proper or reachable invidious server"
+  },
+  "addServerHelpText": "Öz serverlərinizi əlavə etmək üçün + düyməsin istifadə edin və ya ictimai serverə toxunun və onu əlavə edin.",
+  "@addServerHelpText": {
+    "description": "label for when the user hasn't chosen a server yet"
+  },
+  "streamIsLive": "Canlı",
+  "@streamIsLive": {
+    "description": "Label when a video is a live stream"
+  },
+  "newSorting": "Yeni",
+  "@newSorting": {
+    "description": "Content sorting: new"
+  },
+  "browsing": "Kəşf edilən",
+  "@browsing": {
+    "description": "video browsing preferences"
+  },
+  "country": "Ölkə",
+  "@country": {
+    "description": "Country label"
+  },
+  "useSponsorBlock": "SponsorBlock İstifadə Et",
+  "@useSponsorBlock": {
+    "description": "label for sponsorblock checkbox"
+  },
+  "currentServer": "{current} hazırda istifadə edilir",
+  "@currentServer": {
+    "description": "Which server the user is currently using",
+    "placeholders": {
+      "current": {
+        "type": "String"
+      }
+    }
+  },
+  "addServer": "Server əlavə et",
+  "@addServer": {
+    "description": "Add server label"
+  },
+  "sponsorBlockDescription": "Cəmiyyət tərəfindən təklif edilən sponsor bölümlərin ötür",
+  "@sponsorBlockDescription": {
+    "description": "Sponsorblock setting description"
+  },
+  "useThisServer": "Bu serveri istifadə et",
+  "@useThisServer": {
+    "description": "Use this server label"
+  },
+  "yourServers": "Serverləriniz",
+  "@yourServers": {
+    "description": "Your servers label"
+  },
+  "loggedIn": "Daxil olundu",
+  "@loggedIn": {
+    "description": "Label to tell the user that he is logged in to the server"
+  },
+  "tapToAddServer": "Siyahınıza server əlavə etmək üçün toxun",
+  "@tapToAddServer": {
+    "description": "public server description"
+  },
+  "appearance": "Görünüş",
+  "@appearance": {
+    "description": "Settings category title"
+  },
+  "shareLinkWithTimestamp": "Vaxt möhürü əlavə et",
+  "@shareLinkWithTimestamp": {
+    "description": "asking user to share link along with timestamp"
+  },
+  "itemListErrorInvalidScope": "Bunu görmək icazəniz yoxdur. Əgər token üsulu işlədərək daxil olmusunuzsa, sistemdən çıxmağa və təkrar daxil olmağa cəhd edin",
+  "@itemListErrorInvalidScope": {
+    "description": "Error when the user doesn't have the proper scope to its current token"
+  },
+  "delete": "Sil",
+  "@delete": {
+    "description": "Delete label"
+  },
+  "loadingPublicServer": "İctimai serverlər yüklənilir",
+  "@loadingPublicServer": {
+    "description": "Message telling users the app is loading the list of public servers"
+  },
+  "share": "Paylaşım",
+  "@share": {
+    "description": "asking user if to share"
+  },
+  "selectPlaylist": "Oynatma siyahısı seç",
+  "@selectPlaylist": {
+    "description": "Title when users wants to add a video to a playlist"
+  },
+  "createNewPlaylist": "Yeni oynatma siyahısı yarat",
+  "@createNewPlaylist": {
+    "description": "Button label to create a new playlist when the user wants to add a video to a playlist"
+  },
+  "sponsorSkipped": "Sponsor ötürüldü",
+  "@sponsorSkipped": {
+    "description": "When a sponsor segment is skipped thanks to sponsor block"
+  },
+  "selectBrowsingCountry": "Kəşf edilən ölkə seçin",
+  "@selectBrowsingCountry": {
+    "description": "Select country for trending content"
+  },
+  "showOnStart": "Tətbiq başlayanda nə göstəriləcəyini seçin",
+  "@showOnStart": {
+    "description": "Title of dialog asking which screen the users prefers to see"
+  },
+  "manageServers": "Serverləri idarə et",
+  "@manageServers": {
+    "description": "Settings to manage servers"
+  },
+  "logIn": "Daxil ol",
+  "@logIn": {
+    "description": "CTA to log in to server"
+  },
+  "publicServers": "İctimai serverlər",
+  "@publicServers": {
+    "description": "Public servers label"
+  }
 }
