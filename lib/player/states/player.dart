@@ -46,7 +46,6 @@ enum PlayerRepeat { noRepeat, repeatAll, repeatOne }
 
 class PlayerCubit extends Cubit<PlayerState> with WidgetsBindingObserver {
   final SettingsCubit settings;
-  late Orientation orientation;
   late final AudioSession audioSession;
 
   PlayerCubit(super.initialState, this.settings) {
@@ -63,8 +62,9 @@ class PlayerCubit extends Cubit<PlayerState> with WidgetsBindingObserver {
   @override
   void didChangeMetrics() {
     var newOrientation = getOrientation();
-    if (newOrientation != orientation) {
-      orientation = newOrientation;
+    if (newOrientation != state.orientation) {
+      emit(state.copyWith(orientation: newOrientation));
+
       onOrientationChange();
     }
   }
@@ -118,9 +118,8 @@ class PlayerCubit extends Cubit<PlayerState> with WidgetsBindingObserver {
   }
 
   onReady() async {
-    orientation = getOrientation();
-
     emit(state.copyWith(
+        orientation: getOrientation(),
         forwardStep: settings.state.skipStep,
         rewindStep: settings.state.skipStep));
     // setting up audio session
@@ -960,7 +959,7 @@ class PlayerCubit extends Cubit<PlayerState> with WidgetsBindingObserver {
 
   void onOrientationChange() {
     if (getDeviceType() == DeviceType.phone &&
-        (orientation == Orientation.landscape) &&
+        (state.orientation == Orientation.landscape) &&
         !state.isMini &&
         settings.state.fullscreenOnRotate) {
       setFullScreen(FullScreenState.fullScreen);
@@ -970,59 +969,60 @@ class PlayerCubit extends Cubit<PlayerState> with WidgetsBindingObserver {
 
 @freezed
 class PlayerState with _$PlayerState {
-  const factory PlayerState({
-    // player display properties
-    @Default(true) bool isMini,
-    double? top,
-    @Default(false) bool isDragging,
-    @Default(0) int selectedFullScreenIndex,
-    @Default(true) bool isHidden,
-    @Default(false) bool isClosing,
-    @Default(0) double dragDistance,
-    @Default(false) bool showMiniPlaceholder,
-    @Default(true) bool dragStartMini,
-    @Default(targetHeight) double height,
-    @Default(FullScreenState.notFullScreen) FullScreenState fullScreenState,
-    @Default(false) bool muted,
-    @Default(16 / 9) double aspectRatio,
+  const factory PlayerState(
+      {
+      // player display properties
+      @Default(true) bool isMini,
+      double? top,
+      @Default(false) bool isDragging,
+      @Default(0) int selectedFullScreenIndex,
+      @Default(true) bool isHidden,
+      @Default(false) bool isClosing,
+      @Default(0) double dragDistance,
+      @Default(false) bool showMiniPlaceholder,
+      @Default(true) bool dragStartMini,
+      @Default(targetHeight) double height,
+      @Default(FullScreenState.notFullScreen) FullScreenState fullScreenState,
+      @Default(false) bool muted,
+      @Default(16 / 9) double aspectRatio,
 
-    // videos to play
-    Video? currentlyPlaying,
-    DownloadedVideo? offlineCurrentlyPlaying,
-    @Default([]) List<BaseVideo> videos,
-    @Default([]) List<DownloadedVideo> offlineVideos,
+      // videos to play
+      Video? currentlyPlaying,
+      DownloadedVideo? offlineCurrentlyPlaying,
+      @Default([]) List<BaseVideo> videos,
+      @Default([]) List<DownloadedVideo> offlineVideos,
 
-    // playlist controls
-    @Default([]) List<String> playedVideos,
-    required ListQueue<String> playQueue,
-    @Default(false) bool isAudio,
+      // playlist controls
+      @Default([]) List<String> playedVideos,
+      required ListQueue<String> playQueue,
+      @Default(false) bool isAudio,
 
-    // playing video data
-    @Default(false) bool isPip,
-    @Default(Offset.zero) Offset offset,
-    Duration? startAt,
-    @Default(Duration.zero) Duration position,
-    @Default(Duration.zero) Duration bufferedPosition,
-    @Default(false) bool isPlaying,
-    @Default(1.0) double speed,
+      // playing video data
+      @Default(false) bool isPip,
+      @Default(Offset.zero) Offset offset,
+      Duration? startAt,
+      @Default(Duration.zero) Duration position,
+      @Default(Duration.zero) Duration bufferedPosition,
+      @Default(false) bool isPlaying,
+      @Default(1.0) double speed,
 
-    // events
-    // command we send down the stack, namely video / audio player
-    MediaCommand? mediaCommand,
+      // events
+      // command we send down the stack, namely video / audio player
+      MediaCommand? mediaCommand,
 
-    // events we receive from bottom of stack
-    @Default(MediaEvent(state: MediaState.idle)) MediaEvent mediaEvent,
+      // events we receive from bottom of stack
+      @Default(MediaEvent(state: MediaState.idle)) MediaEvent mediaEvent,
 
-    // sponsor block variables
-    @Default([]) List<Pair<int>> sponsorSegments,
-    @Default(Pair(0, 0)) Pair<int> nextSegment,
+      // sponsor block variables
+      @Default([]) List<Pair<int>> sponsorSegments,
+      @Default(Pair(0, 0)) Pair<int> nextSegment,
 
-    // step in seconds when fast forawrd or fast rewind
-    @Default(defaultStep) int forwardStep,
-    @Default(defaultStep) rewindStep,
-    @Default(0) int totalFastForward,
-    @Default(0) totalRewind,
-  }) = _PlayerState;
+      // step in seconds when fast forawrd or fast rewind
+      @Default(defaultStep) int forwardStep,
+      @Default(defaultStep) rewindStep,
+      @Default(0) int totalFastForward,
+      @Default(0) totalRewind,
+      @Default(Orientation.portrait) Orientation orientation}) = _PlayerState;
 
   bool get hasVideo =>
       currentlyPlaying != null || offlineCurrentlyPlaying != null;
