@@ -39,14 +39,13 @@ class ExpandedSideBar extends StatelessWidget {
           ? video != null
               ? DefaultTabController(
                   initialIndex: selectedIndex,
-                  length: distractionFreeMode ? 1 : 4,
+                  length: distractionFreeMode ? 2 : 4,
                   child: Column(children: [
                     TabBar(tabs: [
-                      if (!distractionFreeMode)
-                        Tab(
-                          icon: const Icon(Icons.info),
-                          text: locals.info,
-                        ),
+                      Tab(
+                        icon: const Icon(Icons.info),
+                        text: locals.info,
+                      ),
                       if (!distractionFreeMode)
                         Tab(
                           icon: const Icon(Icons.chat_bubble),
@@ -73,14 +72,16 @@ class ExpandedSideBar extends StatelessWidget {
                               titleAndChannelInfo: false,
                             ),
                           ),
-                          SingleChildScrollView(
-                            child: CommentsContainer(
-                              video: video,
-                              key: ValueKey('comms-${video.videoId}'),
+                          if (!distractionFreeMode)
+                            SingleChildScrollView(
+                              child: CommentsContainer(
+                                video: video,
+                                key: ValueKey('comms-${video.videoId}'),
+                              ),
                             ),
-                          ),
-                          SingleChildScrollView(
-                              child: RecommendedVideos(video: video)),
+                          if (!distractionFreeMode)
+                            SingleChildScrollView(
+                                child: RecommendedVideos(video: video)),
                           const VideoQueue(),
                         ]),
                       ),

@@ -37,6 +37,7 @@ class VideoTabletInnerView extends StatelessWidget {
     String? currentlyPlayingVideoId = context
         .select((PlayerCubit player) => player.state.currentlyPlaying?.videoId);
     final bool restart = currentlyPlayingVideoId == video.videoId;
+    var distractionFreeMode = settings.state.distractionFreeMode;
     return [
       ConditionalWrap(
         wrapper: (Widget child) => Expanded(
@@ -75,7 +76,7 @@ class VideoTabletInnerView extends StatelessWidget {
                   ),
                 ),
               ),
-              if (!settings.state.distractionFreeMode)
+              if (!distractionFreeMode)
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
@@ -117,46 +118,49 @@ class VideoTabletInnerView extends StatelessWidget {
           ),
         ),
       ),
-      if (!settings.state.distractionFreeMode)
-        Expanded(
-          flex: 1,
-          child: DefaultTabController(
-              length: 3,
-              child: Column(
-                children: [
-                  TabBar(
-                    tabs: [
-                      Tab(
-                        icon: const Icon(Icons.info),
-                        text: locals.info,
-                      ),
+      Expanded(
+        flex: 1,
+        child: DefaultTabController(
+            length: distractionFreeMode ? 1 : 3,
+            child: Column(
+              children: [
+                TabBar(
+                  tabs: [
+                    Tab(
+                      icon: const Icon(Icons.info),
+                      text: locals.info,
+                    ),
+                    if (!distractionFreeMode)
                       Tab(
                         icon: const Icon(Icons.chat_bubble),
                         text: locals.comments,
                       ),
+                    if (!distractionFreeMode)
                       Tab(
                         icon: const Icon(Icons.schema),
                         text: locals.recommended,
                       )
-                    ],
-                  ),
-                  Expanded(
-                      child: TabBarView(children: [
-                    SingleChildScrollView(
-                      child: VideoInfo(
-                        video: video,
-                        dislikes: videoController.dislikes,
-                        titleAndChannelInfo: false,
-                      ),
+                  ],
+                ),
+                Expanded(
+                    child: TabBarView(children: [
+                  SingleChildScrollView(
+                    child: VideoInfo(
+                      video: video,
+                      dislikes: videoController.dislikes,
+                      titleAndChannelInfo: false,
                     ),
+                  ),
+                  if (!distractionFreeMode)
                     SingleChildScrollView(
                         child: CommentsContainer(video: video)),
+                  if (!distractionFreeMode)
                     SingleChildScrollView(
                         child: RecommendedVideos(video: video))
-                  ]))
-                ],
-              )),
-        )
+                ]))
+              ],
+            )),
+      )
     ];
   }
 
