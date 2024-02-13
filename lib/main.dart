@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:dynamic_color/dynamic_color.dart';
+import 'package:feedback/feedback.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -80,29 +81,31 @@ Future<void> main() async {
   }
 
   isTv = await isDeviceTv();
-  runApp(MultiBlocProvider(providers: [
-    BlocProvider(
-      create: (context) {
-        return AppCubit(AppState(0, null, HomeLayout()));
-      },
-    ),
-    BlocProvider(
-      create: (context) {
-        var settingsCubit =
-            SettingsCubit(SettingsState.init(), context.read<AppCubit>());
-        configureBackgroundService(settingsCubit);
-        return settingsCubit;
-      },
-    ),
-    BlocProvider(
-      create: (context) =>
-          PlayerCubit(PlayerState.init(null), context.read<SettingsCubit>()),
-    ),
-    BlocProvider(
-      create: (context) => DownloadManagerCubit(
-          const DownloadManagerState(), context.read<PlayerCubit>()),
-    )
-  ], child: const MyApp()));
+  runApp(BetterFeedback(
+    child: MultiBlocProvider(providers: [
+      BlocProvider(
+        create: (context) {
+          return AppCubit(AppState(0, null, HomeLayout()));
+        },
+      ),
+      BlocProvider(
+        create: (context) {
+          var settingsCubit =
+              SettingsCubit(SettingsState.init(), context.read<AppCubit>());
+          configureBackgroundService(settingsCubit);
+          return settingsCubit;
+        },
+      ),
+      BlocProvider(
+        create: (context) =>
+            PlayerCubit(PlayerState.init(null), context.read<SettingsCubit>()),
+      ),
+      BlocProvider(
+        create: (context) => DownloadManagerCubit(
+            const DownloadManagerState(), context.read<PlayerCubit>()),
+      )
+    ], child: BetterFeedback(child: const MyApp())),
+  ));
 }
 
 late ColorScheme darkColorScheme;

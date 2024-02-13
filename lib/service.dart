@@ -19,6 +19,7 @@ import 'package:invidious/settings/models/errors/cannot_add_server_error.dart';
 import 'package:invidious/settings/models/errors/invidious_service_error.dart';
 import 'package:invidious/settings/models/errors/missing_software_key.dart';
 import 'package:invidious/settings/models/errors/unreacheable_server.dart';
+import 'package:invidious/utils/models/imgur_error.dart';
 import 'package:invidious/utils/video_post_processing.dart';
 import 'package:invidious/videos/models/db/progress.dart';
 import 'package:invidious/videos/models/dearrow.dart';
@@ -69,6 +70,9 @@ const urlGetPublicPlaylist = '/api/v1/playlists/:id';
 const urlGetDislikes = 'https://returnyoutubedislikeapi.com/votes?videoId=';
 const urlGetClearHistory = '/api/v1/auth/history';
 const urlAddDeleteHistory = '/api/v1/auth/history/:id';
+const urlImgurScreenshotUpload = 'https://api.imgur.com/3/image';
+
+const imgurClientId = 'Client-ID 2cfbc27ce77879d';
 
 const maxPing = 9007199254740991;
 
@@ -801,5 +805,32 @@ class Service {
 
     final response = await http.get(uri);
     return Dislike.fromJson(handleResponse(response));
+  }
+
+  Future<String> uploadImageToImgur(String base64Image) async {
+    Uri uri = Uri.parse(urlImgurScreenshotUpload);
+    final headers = {'Authorization': imgurClientId};
+
+    final data = <String, String>{'image': base64Image};
+
+    final response = await http.post(uri, headers: headers, body: data);
+    if (response.statusCode != 200) {
+      throw ImgurError("Non 200 response from Imgur (${response.statusCode})");
+    } else {
+      var body = utf8.decode(response.bodyBytes);
+      final Map<String, dynamic> decoded = jsonDecode(body);
+
+      if (decoded.containsKey('data')) {
+        final Map<String, dynamic> data = decoded['data'];
+
+        if (data.containsKey('link')) {
+          return data['link'].toString();
+        } else {
+          throw ImgurError("Response does not containt 'link' key");
+        }
+      } else {
+        throw ImgurError("Response does not containt 'data' key");
+      }
+    }
   }
 }
