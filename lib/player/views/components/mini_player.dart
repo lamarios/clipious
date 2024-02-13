@@ -17,7 +17,6 @@ class MiniPlayer extends StatelessWidget {
     return BlocBuilder<PlayerCubit, PlayerState>(
         buildWhen: (previous, current) => previous.isMini != current.isMini,
         builder: (context, controller) {
-          var cubit = context.read<PlayerCubit>();
           return controller.isMini
               ? Row(children: [
                   Expanded(
@@ -55,13 +54,6 @@ class MiniPlayer extends StatelessWidget {
                       }),
                     ),
                   ),
-                  GestureDetector(
-                    onTap: cubit.hide,
-                    child: const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Icon(Icons.clear),
-                    ),
-                  )
                 ])
               : const SizedBox.shrink();
         });

@@ -78,6 +78,7 @@
     }
  */
 
+import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:invidious/videos/models/video_in_list.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -89,6 +90,7 @@ const youtubePlaylist = "youtubePlayList";
 const invidiousPlaylist = "invidiousPlaylist";
 
 @JsonSerializable()
+@CopyWith(constructor: "_")
 class Playlist {
   String type = youtubePlaylist;
   String title;
@@ -114,4 +116,20 @@ class Playlist {
       _$PlaylistFromJson(json);
 
   Map<String, dynamic> toJson() => _$PlaylistToJson(this);
+
+  Playlist._(
+      this.type,
+      this.title,
+      this.playlistId,
+      this.author,
+      this.authordId,
+      this.authorUrl,
+      this.authorThumbnails,
+      this.description,
+      this.videoCount,
+      this.viewCount,
+      this.isListed,
+      this.updated,
+      this.videos,
+      this.removedByFilter);
 }

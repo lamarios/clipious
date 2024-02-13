@@ -19,6 +19,7 @@ class MiniPlayerAware extends StatelessWidget {
         bool isClosing =
             context.select((PlayerCubit cubit) => cubit.state.isClosing);
         bool isMini = context.select((PlayerCubit cubit) => cubit.state.isMini);
+
         return AnimatedContainer(
           padding: EdgeInsets.only(
               bottom: !isHidden && isMini && !isClosing ? targetHeight : 0),

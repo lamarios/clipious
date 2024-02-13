@@ -17,6 +17,8 @@ import '../../../utils.dart';
 import '../../../videos/models/video.dart';
 import '../../../videos/views/components/video_share_button.dart';
 
+const double tabletMiniPlayerFraction = 0.25;
+
 class Player extends StatelessWidget {
   final double maxHeight;
 
@@ -56,6 +58,12 @@ class Player extends StatelessWidget {
         final orientation =
             context.select((PlayerCubit value) => value.state.orientation);
 
+        final playerHorizontalPosition = orientation == Orientation.landscape &&
+                isMini &&
+                deviceType == DeviceType.tablet
+            ? getFractionOfAvailableSpace(context, tabletMiniPlayerFraction)
+            : const Size(0, 0);
+
         Widget videoPlayer = showPlayer
             ? BlocBuilder<PlayerCubit, PlayerState>(
                 buildWhen: (previous, current) =>
@@ -87,7 +95,8 @@ class Player extends StatelessWidget {
             : const SizedBox.shrink();
 
         return AnimatedPositioned(
-          left: 0,
+          left: playerHorizontalPosition.width,
+          right: playerHorizontalPosition.width,
           top: top,
           bottom: isClosing
               ? -targetHeight
@@ -96,7 +105,6 @@ class Player extends StatelessWidget {
                   : isMini && isDragging && top != null
                       ? maxHeight - top - targetHeight
                       : cubit.getBottom,
-          right: 0,
           duration: isDragging ? Duration.zero : animationDuration,
           curve: Curves.easeInOutQuad,
           child: AnimatedOpacity(
@@ -165,9 +173,7 @@ class Player extends StatelessWidget {
                                       duration: animationDuration,
                                       child: Row(
                                         mainAxisAlignment: isMini
-                                            ? deviceType == DeviceType.tablet
-                                                ? MainAxisAlignment.center
-                                                : MainAxisAlignment.start
+                                            ? MainAxisAlignment.spaceBetween
                                             : MainAxisAlignment.center,
                                         children: [
                                           Flexible(
@@ -193,20 +199,10 @@ class Player extends StatelessWidget {
                                                       constraints: BoxConstraints(
                                                           maxHeight: isMini
                                                               ? targetHeight
-                                                              : MediaQuery
-                                                                      .sizeOf(
-                                                                          context)
+                                                              : MediaQuery.sizeOf(
+                                                                      context)
                                                                   .height),
-                                                      child: AnimatedScale(
-                                                          alignment: Alignment
-                                                              .centerRight,
-                                                          curve: Curves
-                                                              .easeInOutQuad,
-                                                          scale:
-                                                              isMini ? 1.2 : 1,
-                                                          duration:
-                                                              animationDuration,
-                                                          child: videoPlayer)),
+                                                      child: videoPlayer),
                                                   if (!isFullScreen)
                                                     ConditionalWrap(
                                                         wrapIf: !isMini,
@@ -233,10 +229,20 @@ class Player extends StatelessWidget {
                                                     flex: 1,
                                                     child: ExpandedSideBar())),
                                           ConditionalWrap(
-                                              wrapper: (child) => Expanded(
-                                                  flex: 3, child: child),
+                                              wrapper: (child) => Flexible(
+                                                  fit: FlexFit.tight,
+                                                  flex: 2,
+                                                  child: child),
                                               wrapIf: isMini,
-                                              child: const MiniPlayer())
+                                              child: const MiniPlayer()),
+                                          if (isMini)
+                                            GestureDetector(
+                                              onTap: cubit.hide,
+                                              child: const Padding(
+                                                padding: EdgeInsets.all(8.0),
+                                                child: Icon(Icons.clear),
+                                              ),
+                                            )
                                         ],
                                       ),
                                     ),

@@ -59,6 +59,7 @@ const urlGetSponsorSegments =
     'https://sponsor.ajay.app/api/skipSegments?videoID=:id';
 const urlGetDeArrow = 'https://sponsor.ajay.app/api/branding?videoID=:id';
 const urlGetUserPlaylists = '/api/v1/auth/playlists';
+const urlGetUserPlaylist = '/api/v1/auth/playlists/:id';
 const urlPostUserPlaylists = '/api/v1/auth/playlists';
 const urlGetChannelPlaylists = '/api/v1/channels/:id/playlists';
 const urlPostUserPlaylistVideo = '/api/v1/auth/playlists/:id/videos';
@@ -774,6 +775,23 @@ class Service {
       await fileDb.setPlaylistNotificationLastViewedVideo(
           playlist.playlistId, playlist.videoCount);
     }
+
+    return playlist;
+  }
+
+  Future<Playlist> getUserPlaylist(String playlistId) async {
+    var currentlySelectedServer = await db.getCurrentlySelectedServer();
+
+    Uri uri =
+        await buildUrl(urlGetUserPlaylist, pathParams: {':id': playlistId});
+
+    var headers = getAuthenticationHeaders(currentlySelectedServer);
+
+    final response = await http.get(uri, headers: headers);
+    var playlist = Playlist.fromJson(handleResponse(response));
+    var oldLength = playlist.videos.length;
+    playlist.videos = (await postProcessVideos(playlist.videos)).cast();
+    playlist.removedByFilter = oldLength - playlist.videos.length;
 
     return playlist;
   }

@@ -587,7 +587,7 @@ class _$PlayerStateImpl extends _PlayerState {
       this.rewindStep = defaultStep,
       this.totalFastForward = 0,
       this.totalRewind = 0,
-      this.orientation = Orientation.landscape})
+      this.orientation = Orientation.portrait})
       : _videos = videos,
         _offlineVideos = offlineVideos,
         _playedVideos = playedVideos,

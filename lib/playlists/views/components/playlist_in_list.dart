@@ -18,13 +18,17 @@ class PlaylistInList extends StatelessWidget {
   final bool canDeleteVideos;
   final bool isTv;
   final bool small;
+  final bool isTablet;
+  final double thumbnailsHeight;
 
   const PlaylistInList(
       {super.key,
       required this.playlist,
       required this.canDeleteVideos,
       this.isTv = false,
-      this.small = false});
+      this.small = false,
+      this.thumbnailsHeight = 95,
+      this.isTablet = false});
 
   openPlayList(BuildContext context) {
     var cubit = context.read<PlaylistListCubit>();
@@ -49,7 +53,38 @@ class PlaylistInList extends StatelessWidget {
       create: (context) => PlaylistInListCubit(playlist),
       child: BlocBuilder<PlaylistInListCubit, Playlist>(
         builder: (context, _) {
-          if (isTv) {
+          if (isTablet) {
+            return InkWell(
+              borderRadius: BorderRadius.circular(10),
+              onTap: () => openPlayList(context),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    SizedBox(
+                        height: thumbnailsHeight,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: PlaylistThumbnails(
+                            videos: _.videos,
+                            bestThumbnails: isTv,
+                          ),
+                        )),
+                    Text(
+                      playlist.title,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 2,
+                      style: TextStyle(color: colors.primary),
+                    ),
+                    Text(locals.nVideos(playlist.videoCount)),
+                  ],
+                ),
+              ),
+            );
+          } else if (isTv) {
             return Focus(
               onKeyEvent: (node, event) =>
                   onTvSelect(event, context, (_) => openTvPlaylist(context)),

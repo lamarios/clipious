@@ -24,23 +24,35 @@ class VideoListItem extends StatelessWidget {
   final VideoInList? video;
   final DownloadedVideo? offlineVideo;
   final bool small;
+  final bool showMetrics;
+  final Function(BuildContext context, VideoInList video)? showVideoModalSheet;
+  final Function(BuildContext context, VideoInList video)? openVideoOverride;
+  final bool allowModalSheet;
 
   const VideoListItem(
       {super.key,
       this.video,
       this.offlineVideo,
       animateDownload = false,
-      this.small = false})
+      this.small = false,
+      this.showMetrics = true,
+      this.showVideoModalSheet,
+      this.allowModalSheet = true,
+      this.openVideoOverride})
       : assert(video == null || offlineVideo == null,
             'cannot provide both video and offline video\n');
 
   openVideo(BuildContext context) {
     if (video != null) {
-      var cubit = context.read<VideoInListCubit>();
-      if (cubit.state.video!.filtered) {
-        cubit.showVideoDetails();
+      if (openVideoOverride != null) {
+        openVideoOverride!(context, video!);
       } else {
-        AutoRouter.of(context).push(VideoRoute(videoId: video!.videoId));
+        var cubit = context.read<VideoInListCubit>();
+        if (cubit.state.video!.filtered) {
+          cubit.showVideoDetails();
+        } else {
+          AutoRouter.of(context).push(VideoRoute(videoId: video!.videoId));
+        }
       }
     } else if (offlineVideo != null) {
       context.read<PlayerCubit>().playOfflineVideos([offlineVideo!]);
@@ -73,9 +85,12 @@ class VideoListItem extends StatelessWidget {
               context.read<VideoInListCubit>().updateProgress(),
           child: InkWell(
             onTap: () => openVideo(context),
-            onLongPress: _.video == null || _.video!.filtered
-                ? null
-                : () => VideoModalSheet.showVideoModalSheet(context, video!),
+            onLongPress:
+                !allowModalSheet || _.video == null || _.video!.filtered
+                    ? null
+                    : () => showVideoModalSheet != null
+                        ? showVideoModalSheet!(context, video!)
+                        : VideoModalSheet.showVideoModalSheet(context, video!),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
@@ -350,7 +365,7 @@ class VideoListItem extends StatelessWidget {
                                   ?.copyWith(color: colorScheme.secondary),
                             ),
                           ),
-                          if (!small && video != null)
+                          if (showMetrics && !small && video != null)
                             VideoMetrics(
                               viewCount: video!.viewCount,
                               publishedText: video!.publishedText,
@@ -360,12 +375,14 @@ class VideoListItem extends StatelessWidget {
                         ],
                       ),
                     ),
-                    if (!small && video != null)
+                    if (allowModalSheet && !small && video != null)
                       InkWell(
                         onTap: (_.video?.filtered ?? true)
                             ? null
-                            : () => VideoModalSheet.showVideoModalSheet(
-                                context, video!),
+                            : () => showVideoModalSheet != null
+                                ? showVideoModalSheet!(context, video!)
+                                : VideoModalSheet.showVideoModalSheet(
+                                    context, video!),
                         child: const Padding(
                           padding: EdgeInsets.all(4),
                           child: Icon(Icons.more_vert),

@@ -8,6 +8,7 @@ import 'package:invidious/downloads/states/download_manager.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/router.dart';
 import 'package:invidious/settings/states/settings.dart';
+import 'package:invidious/utils/views/components/device_widget.dart';
 import 'package:invidious/utils/views/components/placeholders.dart';
 import 'package:invidious/videos/states/video.dart';
 import 'package:invidious/videos/views/components/add_to_playlist_button.dart';
@@ -109,10 +110,8 @@ class VideoScreen extends StatelessWidget {
               NavigationDestination(
                   icon: const Icon(Icons.chat_bubble), label: locals.comments),
             ], growable: true);
-            if (!showTabletView) {
-              destinations.add(NavigationDestination(
-                  icon: const Icon(Icons.schema), label: locals.recommended));
-            }
+            destinations.add(NavigationDestination(
+                icon: const Icon(Icons.schema), label: locals.recommended));
             return AnimatedOpacity(
               duration: animationDuration,
               opacity: _.opacity,
@@ -227,26 +226,26 @@ class VideoScreen extends StatelessWidget {
                                       ? locals.couldntLoadVideo
                                       : _.error),
                                 )
-                              : !showTabletView
-                                  ? _.loadingVideo
-                                      ? const VideoPlaceHolder()
-                                      : VideoInnerView(
-                                          video: _.video!,
-                                          selectedIndex: _.selectedIndex,
-                                          playNow: playNow,
-                                          videoController: _,
-                                        )
-                                  : _.loadingVideo
-                                      ? Container(
-                                          constraints: BoxConstraints(
-                                              maxWidth: tabletMaxVideoWidth),
-                                          child: const VideoPlaceHolder())
-                                      : VideoTabletInnerView(
-                                          video: _.video!,
-                                          playNow: playNow,
-                                          selectedIndex: _.selectedIndex,
-                                          videoController: _,
-                                        )),
+                              : _.loadingVideo
+                                  ? const DeviceWidget(
+                                      portraitTabletAsPhone: true,
+                                      phone: VideoPlaceHolder(),
+                                      tablet: TabletVideoPlaceHolder())
+                                  : DeviceWidget(
+                                      portraitTabletAsPhone: true,
+                                      phone: VideoInnerView(
+                                        video: _.video!,
+                                        selectedIndex: _.selectedIndex,
+                                        playNow: playNow,
+                                        videoController: _,
+                                      ),
+                                      tablet: VideoTabletInnerView(
+                                        video: _.video!,
+                                        playNow: playNow,
+                                        selectedIndex: _.selectedIndex,
+                                        videoController: _,
+                                      ),
+                                    )),
                     ),
                   ),
                 ),

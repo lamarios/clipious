@@ -24,17 +24,26 @@ class PlaylistCubit extends Cubit<PlaylistState> {
     getAllVideos();
   }
 
+  void refreshPlaylist({required bool userPlaylist}) async {
+    if (userPlaylist) {
+      emit(state.copyWith(loading: true));
+      final playlist = await service.getUserPlaylist(state.playlist.playlistId);
+      emit(state.copyWith(loading: false, playlist: playlist));
+    }
+  }
+
   deletePlaylist() async {
     await service.deleteUserPlaylist(state.playlist.playlistId);
   }
 
   Future<bool> removeVideoFromPlayList(VideoInList v) async {
-    var state = this.state.copyWith();
+    emit(state.copyWith(loading: true));
     await service.deleteUserPlaylistVideo(
         state.playlist.playlistId, v.indexId ?? '');
-    state.playlist.videos.remove(v);
-    emit(state);
-
+    var videos = List<VideoInList>.from(state.playlist.videos);
+    videos.remove(v);
+    var playlist = state.playlist.copyWith(videos: videos);
+    emit(state.copyWith(playlist: playlist, loading: false));
     return false;
   }
 

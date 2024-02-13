@@ -22,6 +22,10 @@ class VideoList<T extends IdedVideo> extends StatelessWidget {
   final bool animateDownload;
   final Axis scrollDirection;
   final bool small;
+  final bool showMetrics;
+  final bool allowModalSheet;
+  final Function(BuildContext context, VideoInList video)? showVideoModalSheet;
+  final Function(BuildContext context, VideoInList video)? openVideoOverride;
 
   const VideoList(
       {super.key,
@@ -29,6 +33,10 @@ class VideoList<T extends IdedVideo> extends StatelessWidget {
       this.tags,
       this.animateDownload = false,
       this.scrollDirection = Axis.vertical,
+      this.showMetrics = true,
+      this.allowModalSheet = true,
+      this.showVideoModalSheet,
+      this.openVideoOverride,
       this.small = false});
 
 /*
@@ -107,11 +115,15 @@ class VideoList<T extends IdedVideo> extends StatelessWidget {
 
                               return VideoListItem(
                                 small: small,
+                                showMetrics: showMetrics,
                                 key: ValueKey(
                                     '${v.videoId}-${small.toString()}'),
                                 video: onlineVideo,
                                 offlineVideo: offlineVideo,
                                 animateDownload: animateDownload,
+                                showVideoModalSheet: showVideoModalSheet,
+                                allowModalSheet: allowModalSheet,
+                                openVideoOverride: openVideoOverride,
                               );
                             }),
                             if (_.loading)

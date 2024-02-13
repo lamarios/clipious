@@ -381,3 +381,8 @@ Orientation getOrientation() {
       ? Orientation.landscape
       : Orientation.portrait;
 }
+
+Size getFractionOfAvailableSpace(BuildContext context, double fraction) {
+  var size = MediaQuery.of(context).size;
+  return Size(size.width * fraction, size.height * fraction);
+}
