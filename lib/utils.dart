@@ -230,16 +230,16 @@ okCancelDialog(
         content: Text(message),
         actions: <Widget>[
           TextButton(
-            child: Text(locals.ok),
+            child: Text(locals.cancel),
             onPressed: () {
-              onOk();
+              //Put your code here which you want to execute on Cancel button click.
               Navigator.of(context).pop();
             },
           ),
           TextButton(
-            child: Text(locals.cancel),
+            child: Text(locals.ok),
             onPressed: () {
-              //Put your code here which you want to execute on Cancel button click.
+              onOk();
               Navigator.of(context).pop();
             },
           ),
