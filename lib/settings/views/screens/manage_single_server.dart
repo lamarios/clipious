@@ -49,6 +49,13 @@ class ManageSingleServerScreen extends StatelessWidget {
           ),
           actions: <Widget>[
             TextButton(
+              child: Text(locals.cancel),
+              onPressed: () {
+                //Put your code here which you want to execute on Cancel button click.
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
               child: Text(locals.ok),
               onPressed: () async {
                 try {
@@ -64,13 +71,6 @@ class ManageSingleServerScreen extends StatelessWidget {
                   }
                   rethrow;
                 }
-              },
-            ),
-            TextButton(
-              child: Text(locals.cancel),
-              onPressed: () {
-                //Put your code here which you want to execute on Cancel button click.
-                Navigator.of(context).pop();
               },
             ),
           ],
