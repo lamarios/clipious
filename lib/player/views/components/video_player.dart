@@ -66,7 +66,7 @@ class _VideoPlayerState extends State<VideoPlayer> {
                 .read<VideoPlayerCubit>()
                 .handleCommand(state.mediaCommand!),
             child: cubit.videoController == null
-                ? const Text('nullll')
+                ? const SizedBox.shrink()
                 : BetterPlayer(
                     controller: cubit.videoController!,
                     key: _betterPlayerKey,

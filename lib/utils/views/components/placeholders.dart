@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_fadein/flutter_fadein.dart';
+import 'package:invidious/globals.dart';
 import 'package:invidious/playlists/views/components/playlist_in_list.dart';
 
 import '../../../playlists/views/components/playlist_thumbnail.dart';
@@ -33,13 +34,15 @@ class AnimatedPlaceHolder extends StatelessWidget {
 
 class TextPlaceHolder extends StatelessWidget {
   final bool small;
+  final double? width;
 
-  const TextPlaceHolder({super.key, this.small = false});
+  const TextPlaceHolder({super.key, this.small = false, this.width});
 
   @override
   Widget build(BuildContext context) {
     var colorScheme = Theme.of(context).colorScheme;
     return Container(
+      width: width,
       height: small ? 5 : 10,
       decoration: BoxDecoration(
           color: colorScheme.secondaryContainer,
@@ -413,6 +416,134 @@ class TvChannelPlaceholder extends StatelessWidget {
   }
 }
 
+class TabletVideoPlaceHolder extends StatelessWidget {
+  const TabletVideoPlaceHolder({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    var colors = Theme.of(context).colorScheme;
+
+    return AnimatedPlaceHolder(
+        child: Row(children: [
+      Expanded(
+        flex: 2,
+        child: Column(
+          children: [
+            const ThumbnailPlaceHolder(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                SizedBox(
+                    height: 25,
+                    child: Checkbox(
+                      visualDensity: VisualDensity.compact,
+                      value: false,
+                      onChanged: (value) {},
+                    )),
+                const SizedBox(width: 140, child: TextPlaceHolder())
+              ],
+            ),
+            Expanded(
+                child: Padding(
+                    padding: const EdgeInsets.only(top: 0),
+                    child: SingleChildScrollView(
+                        child: Padding(
+                            padding: const EdgeInsets.only(bottom: 8.0),
+                            child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const SizedBox(
+                                      height: 20, child: TextPlaceHolder()),
+                                  const SizedBox(
+                                    height: 4,
+                                  ),
+                                  Row(
+                                    children: repeatWidget(
+                                        () => const SizedBox(
+                                            height: 15,
+                                            width: 50,
+                                            child: TextPlaceHolder()),
+                                        count: 3),
+                                  ),
+                                  Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 4.0),
+                                        child: Container(
+                                          width: 40,
+                                          height: 40,
+                                          decoration: BoxDecoration(
+                                              color: colors.secondaryContainer,
+                                              shape: BoxShape.circle),
+                                        ),
+                                      ),
+                                      const Padding(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 8.0),
+                                        child: SizedBox(
+                                            width: 150,
+                                            child: TextPlaceHolder()),
+                                      ),
+                                    ],
+                                  ),
+                                  // subscribe button
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 8.0),
+                                    child: Container(
+                                      width: 120,
+                                      height: 25,
+                                      decoration: BoxDecoration(
+                                          color: colors.secondaryContainer,
+                                          borderRadius:
+                                              BorderRadius.circular(50)),
+                                    ),
+                                  ),
+                                ])))))
+          ],
+        ),
+      ),
+      Expanded(
+          child: SingleChildScrollView(
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: repeatWidget(
+                  () => Column(
+                        children: [
+                          Container(
+                            width: 50,
+                            height: 50,
+                            decoration: BoxDecoration(
+                                color: colors.secondaryContainer,
+                                shape: BoxShape.circle),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          const TextPlaceHolder(
+                            width: 100,
+                          )
+                        ],
+                      ),
+                  count: 3),
+            ),
+            ...repeatWidget(() => const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: ParagraphPlaceHolder(),
+                ))
+          ],
+        ),
+      ))
+    ]));
+  }
+}
+
 class VideoPlaceHolder extends StatelessWidget {
   const VideoPlaceHolder({super.key});
 
@@ -526,58 +657,69 @@ class ChannelPlaceHolder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var deviceType = getDeviceType();
     var colors = Theme.of(context).colorScheme;
-    return SingleChildScrollView(
-      child: AnimatedPlaceHolder(
-          child: Stack(alignment: Alignment.topCenter, children: [
-        Container(
-          padding: const EdgeInsets.only(top: 200, left: 8, right: 8),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+    return AnimatedPlaceHolder(
+        child: Padding(
+      padding: const EdgeInsets.symmetric(horizontal: innerHorizontalPadding),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            height: deviceType == DeviceType.phone ? 100 : 230,
+            decoration: BoxDecoration(
+                color: colors.secondaryContainer,
+                borderRadius: BorderRadius.circular(10)),
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const SizedBox(
-                width: 250,
-                height: 25,
-                child: TextPlaceHolder(),
-              ),
-              const SizedBox(
-                height: 4,
-              ),
-              // subscribe button
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8.0),
-                child: Container(
-                  width: 120,
-                  height: 25,
+              Container(
+                  width: 50,
+                  height: 50,
                   decoration: BoxDecoration(
-                      color: colors.secondaryContainer,
-                      borderRadius: BorderRadius.circular(50)),
-                ),
+                    color: colors.secondaryContainer,
+                    shape: BoxShape.circle,
+                  )),
+              const SizedBox(
+                width: 8,
               ),
-              ...repeatWidget(
-                  () => const Padding(
-                        padding: EdgeInsets.only(bottom: 8.0),
-                        child: ParagraphPlaceHolder(),
-                      ),
-                  count: 3),
-              const Padding(
-                padding: EdgeInsets.symmetric(vertical: 8.0),
-                child: SizedBox(
-                  width: 200,
-                  height: 20,
-                  child: TextPlaceHolder(),
-                ),
-              ),
-              ...repeatWidget(
-                  () => const Padding(
-                        padding: EdgeInsets.only(bottom: 8.0),
-                        child: VideoListItemPlaceHolder(animate: false),
-                      ),
-                  count: 5)
+              const TextPlaceHolder(
+                width: 200,
+              )
             ],
           ),
-        ),
-      ])),
-    );
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
+            child: Container(
+              width: 120,
+              height: 25,
+              decoration: BoxDecoration(
+                  color: colors.secondaryContainer,
+                  borderRadius: BorderRadius.circular(50)),
+            ),
+          ),
+          ...repeatWidget(
+              () => const Padding(
+                    padding: EdgeInsets.symmetric(vertical: 8.0),
+                    child: ParagraphPlaceHolder(),
+                  ),
+              count: 2),
+          const Padding(
+            padding: EdgeInsets.symmetric(vertical: 8.0),
+            child: SizedBox(
+              width: 200,
+              height: 20,
+              child: TextPlaceHolder(),
+            ),
+          ),
+          Expanded(
+              child: VideoGridPlaceHolder(scrollController: ScrollController()))
+        ],
+      ),
+    ));
   }
 }

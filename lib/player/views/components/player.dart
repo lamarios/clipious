@@ -8,10 +8,16 @@ import 'package:invidious/player/views/components/audio_player.dart';
 import 'package:invidious/player/views/components/expanded_player.dart';
 import 'package:invidious/player/views/components/mini_player.dart';
 import 'package:invidious/player/views/components/video_player.dart';
+import 'package:invidious/player/views/tablet/expanded_player.dart';
+import 'package:invidious/player/views/tablet/expanded_side_bar.dart';
+import 'package:invidious/utils/views/components/conditional_wrap.dart';
+import 'package:invidious/utils/views/components/device_widget.dart';
 
 import '../../../utils.dart';
 import '../../../videos/models/video.dart';
 import '../../../videos/views/components/video_share_button.dart';
+
+const double tabletMiniPlayerFraction = 0.25;
 
 class Player extends StatelessWidget {
   final double maxHeight;
@@ -27,24 +33,36 @@ class Player extends StatelessWidget {
       builder: (context) {
         var cubit = context.read<PlayerCubit>();
 
-        bool showPlayer =
+        final bool showPlayer =
             context.select((PlayerCubit value) => value.state.hasVideo);
-        double? top = context.select((PlayerCubit value) => value.state.top);
-        bool isMini = context.select((PlayerCubit value) => value.state.isMini);
-        bool isPip = context.select((PlayerCubit value) => value.state.isPip);
-        bool isHidden =
+        final double? top =
+            context.select((PlayerCubit value) => value.state.top);
+        final bool isMini =
+            context.select((PlayerCubit value) => value.state.isMini);
+        final bool isPip =
+            context.select((PlayerCubit value) => value.state.isPip);
+        final bool isHidden =
             context.select((PlayerCubit value) => value.state.isHidden);
-        bool isDragging =
+        final bool isDragging =
             context.select((PlayerCubit value) => value.state.isDragging);
-        bool isClosing =
+        final bool isClosing =
             context.select((PlayerCubit value) => value.state.isClosing);
-        Video? currentlyPlaying =
+        final Video? currentlyPlaying =
             context.select((PlayerCubit value) => value.state.currentlyPlaying);
-        FullScreenState fullScreen =
+        final FullScreenState fullScreen =
             context.select((PlayerCubit value) => value.state.fullScreenState);
-        bool isFullScreen = fullScreen == FullScreenState.fullScreen;
-        double aspectRatio =
+        final bool isFullScreen = fullScreen == FullScreenState.fullScreen;
+        final double aspectRatio =
             context.select((PlayerCubit value) => value.state.aspectRatio);
+        final deviceType = getDeviceType();
+        final orientation =
+            context.select((PlayerCubit value) => value.state.orientation);
+
+        final playerHorizontalPosition = orientation == Orientation.landscape &&
+                isMini &&
+                deviceType == DeviceType.tablet
+            ? getFractionOfAvailableSpace(context, tabletMiniPlayerFraction)
+            : const Size(0, 0);
 
         Widget videoPlayer = showPlayer
             ? BlocBuilder<PlayerCubit, PlayerState>(
@@ -76,17 +94,9 @@ class Player extends StatelessWidget {
                 })
             : const SizedBox.shrink();
 
-        List<Widget> miniPlayerWidgets = [];
-
-        List<Widget> bigPlayerWidgets = [];
-
-        if (showPlayer) {
-          miniPlayerWidgets.addAll(MiniPlayer.build(context));
-          bigPlayerWidgets.addAll(ExpandedPlayer.build(context));
-        }
-
         return AnimatedPositioned(
-          left: 0,
+          left: playerHorizontalPosition.width,
+          right: playerHorizontalPosition.width,
           top: top,
           bottom: isClosing
               ? -targetHeight
@@ -95,7 +105,6 @@ class Player extends StatelessWidget {
                   : isMini && isDragging && top != null
                       ? maxHeight - top - targetHeight
                       : cubit.getBottom,
-          right: 0,
           duration: isDragging ? Duration.zero : animationDuration,
           curve: Curves.easeInOutQuad,
           child: AnimatedOpacity(
@@ -128,9 +137,9 @@ class Player extends StatelessWidget {
                                         : colors.background,
                               ),
                               child: Column(
-                                mainAxisAlignment: isFullScreen
-                                    ? MainAxisAlignment.center
-                                    : MainAxisAlignment.start,
+                                mainAxisSize: isMini
+                                    ? MainAxisSize.min
+                                    : MainAxisSize.max,
                                 children: [
                                   isMini || isPip || isFullScreen
                                       ? const SizedBox.shrink()
@@ -150,31 +159,94 @@ class Player extends StatelessWidget {
                                                   ),
                                                 ],
                                         ),
-                                  AnimatedContainer(
-                                    width: double.infinity,
-                                    height:
-                                        isFullScreen ? double.infinity : null,
-                                    constraints: BoxConstraints(
+                                  Flexible(
+                                    fit: isMini ? FlexFit.loose : FlexFit.tight,
+                                    child: AnimatedContainer(
+                                      // this is just to animate the transition to mini player
+                                      constraints: BoxConstraints(
                                         maxHeight: isFullScreen
                                             ? MediaQuery.of(context).size.height
                                             : isMini
                                                 ? targetHeight
                                                 : 500,
-                                        maxWidth: isFullScreen
-                                            ? double.infinity
-                                            : tabletMaxVideoWidth),
-                                    duration: animationDuration,
-                                    child: Row(
-                                      mainAxisAlignment: isMini
-                                          ? MainAxisAlignment.start
-                                          : MainAxisAlignment.center,
-                                      children: [
-                                        Expanded(flex: 1, child: videoPlayer),
-                                        ...miniPlayerWidgets
-                                      ],
+                                      ),
+                                      duration: animationDuration,
+                                      child: Row(
+                                        mainAxisAlignment: isMini
+                                            ? MainAxisAlignment.spaceBetween
+                                            : MainAxisAlignment.center,
+                                        children: [
+                                          Flexible(
+                                              fit: isMini
+                                                  ? FlexFit.loose
+                                                  : FlexFit.tight,
+                                              flex: deviceType ==
+                                                      DeviceType.tablet
+                                                  ? 2
+                                                  : 1,
+                                              child: Column(
+                                                mainAxisSize: isMini
+                                                    ? MainAxisSize.min
+                                                    : MainAxisSize.max,
+                                                mainAxisAlignment: isFullScreen
+                                                    ? MainAxisAlignment.center
+                                                    : MainAxisAlignment.start,
+                                                crossAxisAlignment: isMini
+                                                    ? CrossAxisAlignment.start
+                                                    : CrossAxisAlignment.center,
+                                                children: [
+                                                  Container(
+                                                      constraints: BoxConstraints(
+                                                          maxHeight: isMini
+                                                              ? targetHeight
+                                                              : MediaQuery.sizeOf(
+                                                                      context)
+                                                                  .height),
+                                                      child: videoPlayer),
+                                                  if (!isFullScreen)
+                                                    ConditionalWrap(
+                                                        wrapIf: !isMini,
+                                                        wrapper: (child) =>
+                                                            Expanded(
+                                                                child: child),
+                                                        child: DeviceWidget(
+                                                            orientation:
+                                                                orientation,
+                                                            portraitTabletAsPhone:
+                                                                true,
+                                                            tablet:
+                                                                const TabletExpandedPlayer(),
+                                                            phone:
+                                                                const ExpandedPlayer()))
+                                                ],
+                                              )),
+                                          if (!isFullScreen && !isMini)
+                                            DeviceWidget(
+                                                orientation: orientation,
+                                                portraitTabletAsPhone: true,
+                                                phone: const SizedBox.shrink(),
+                                                tablet: const Expanded(
+                                                    flex: 1,
+                                                    child: ExpandedSideBar())),
+                                          ConditionalWrap(
+                                              wrapper: (child) => Flexible(
+                                                  fit: FlexFit.tight,
+                                                  flex: 2,
+                                                  child: child),
+                                              wrapIf: isMini,
+                                              child: const MiniPlayer()),
+                                          if (isMini)
+                                            GestureDetector(
+                                              onTap: cubit.hide,
+                                              child: const Padding(
+                                                padding: EdgeInsets.all(8.0),
+                                                child: Icon(Icons.clear),
+                                              ),
+                                            )
+                                        ],
+                                      ),
                                     ),
                                   ),
-                                  ...bigPlayerWidgets,
                                 ],
                               ),
                             ),

@@ -59,6 +59,7 @@ mixin _$PlayerState {
   dynamic get rewindStep => throw _privateConstructorUsedError;
   int get totalFastForward => throw _privateConstructorUsedError;
   dynamic get totalRewind => throw _privateConstructorUsedError;
+  Orientation get orientation => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PlayerStateCopyWith<PlayerState> get copyWith =>
@@ -106,7 +107,8 @@ abstract class $PlayerStateCopyWith<$Res> {
       int forwardStep,
       dynamic rewindStep,
       int totalFastForward,
-      dynamic totalRewind});
+      dynamic totalRewind,
+      Orientation orientation});
 }
 
 /// @nodoc
@@ -157,6 +159,7 @@ class _$PlayerStateCopyWithImpl<$Res, $Val extends PlayerState>
     Object? rewindStep = freezed,
     Object? totalFastForward = null,
     Object? totalRewind = freezed,
+    Object? orientation = null,
   }) {
     return _then(_value.copyWith(
       isMini: null == isMini
@@ -299,6 +302,10 @@ class _$PlayerStateCopyWithImpl<$Res, $Val extends PlayerState>
           ? _value.totalRewind
           : totalRewind // ignore: cast_nullable_to_non_nullable
               as dynamic,
+      orientation: null == orientation
+          ? _value.orientation
+          : orientation // ignore: cast_nullable_to_non_nullable
+              as Orientation,
     ) as $Val);
   }
 }
@@ -346,7 +353,8 @@ abstract class _$$PlayerStateImplCopyWith<$Res>
       int forwardStep,
       dynamic rewindStep,
       int totalFastForward,
-      dynamic totalRewind});
+      dynamic totalRewind,
+      Orientation orientation});
 }
 
 /// @nodoc
@@ -395,6 +403,7 @@ class __$$PlayerStateImplCopyWithImpl<$Res>
     Object? rewindStep = freezed,
     Object? totalFastForward = null,
     Object? totalRewind = freezed,
+    Object? orientation = null,
   }) {
     return _then(_$PlayerStateImpl(
       isMini: null == isMini
@@ -531,6 +540,10 @@ class __$$PlayerStateImplCopyWithImpl<$Res>
           : totalFastForward // ignore: cast_nullable_to_non_nullable
               as int,
       totalRewind: freezed == totalRewind ? _value.totalRewind! : totalRewind,
+      orientation: null == orientation
+          ? _value.orientation
+          : orientation // ignore: cast_nullable_to_non_nullable
+              as Orientation,
     ));
   }
 }
@@ -573,7 +586,8 @@ class _$PlayerStateImpl extends _PlayerState {
       this.forwardStep = defaultStep,
       this.rewindStep = defaultStep,
       this.totalFastForward = 0,
-      this.totalRewind = 0})
+      this.totalRewind = 0,
+      this.orientation = Orientation.portrait})
       : _videos = videos,
         _offlineVideos = offlineVideos,
         _playedVideos = playedVideos,
@@ -714,10 +728,13 @@ class _$PlayerStateImpl extends _PlayerState {
   @override
   @JsonKey()
   final dynamic totalRewind;
+  @override
+  @JsonKey()
+  final Orientation orientation;
 
   @override
   String toString() {
-    return 'PlayerState(isMini: $isMini, top: $top, isDragging: $isDragging, selectedFullScreenIndex: $selectedFullScreenIndex, isHidden: $isHidden, isClosing: $isClosing, dragDistance: $dragDistance, showMiniPlaceholder: $showMiniPlaceholder, dragStartMini: $dragStartMini, height: $height, fullScreenState: $fullScreenState, muted: $muted, aspectRatio: $aspectRatio, currentlyPlaying: $currentlyPlaying, offlineCurrentlyPlaying: $offlineCurrentlyPlaying, videos: $videos, offlineVideos: $offlineVideos, playedVideos: $playedVideos, playQueue: $playQueue, isAudio: $isAudio, isPip: $isPip, offset: $offset, startAt: $startAt, position: $position, bufferedPosition: $bufferedPosition, isPlaying: $isPlaying, speed: $speed, mediaCommand: $mediaCommand, mediaEvent: $mediaEvent, sponsorSegments: $sponsorSegments, nextSegment: $nextSegment, forwardStep: $forwardStep, rewindStep: $rewindStep, totalFastForward: $totalFastForward, totalRewind: $totalRewind)';
+    return 'PlayerState(isMini: $isMini, top: $top, isDragging: $isDragging, selectedFullScreenIndex: $selectedFullScreenIndex, isHidden: $isHidden, isClosing: $isClosing, dragDistance: $dragDistance, showMiniPlaceholder: $showMiniPlaceholder, dragStartMini: $dragStartMini, height: $height, fullScreenState: $fullScreenState, muted: $muted, aspectRatio: $aspectRatio, currentlyPlaying: $currentlyPlaying, offlineCurrentlyPlaying: $offlineCurrentlyPlaying, videos: $videos, offlineVideos: $offlineVideos, playedVideos: $playedVideos, playQueue: $playQueue, isAudio: $isAudio, isPip: $isPip, offset: $offset, startAt: $startAt, position: $position, bufferedPosition: $bufferedPosition, isPlaying: $isPlaying, speed: $speed, mediaCommand: $mediaCommand, mediaEvent: $mediaEvent, sponsorSegments: $sponsorSegments, nextSegment: $nextSegment, forwardStep: $forwardStep, rewindStep: $rewindStep, totalFastForward: $totalFastForward, totalRewind: $totalRewind, orientation: $orientation)';
   }
 
   @override
@@ -785,7 +802,9 @@ class _$PlayerStateImpl extends _PlayerState {
             (identical(other.totalFastForward, totalFastForward) ||
                 other.totalFastForward == totalFastForward) &&
             const DeepCollectionEquality()
-                .equals(other.totalRewind, totalRewind));
+                .equals(other.totalRewind, totalRewind) &&
+            (identical(other.orientation, orientation) ||
+                other.orientation == orientation));
   }
 
   @override
@@ -825,7 +844,8 @@ class _$PlayerStateImpl extends _PlayerState {
         forwardStep,
         const DeepCollectionEquality().hash(rewindStep),
         totalFastForward,
-        const DeepCollectionEquality().hash(totalRewind)
+        const DeepCollectionEquality().hash(totalRewind),
+        orientation
       ]);
 
   @JsonKey(ignore: true)
@@ -871,7 +891,8 @@ abstract class _PlayerState extends PlayerState {
       final int forwardStep,
       final dynamic rewindStep,
       final int totalFastForward,
-      final dynamic totalRewind}) = _$PlayerStateImpl;
+      final dynamic totalRewind,
+      final Orientation orientation}) = _$PlayerStateImpl;
   const _PlayerState._() : super._();
 
   @override // player display properties
@@ -945,6 +966,8 @@ abstract class _PlayerState extends PlayerState {
   int get totalFastForward;
   @override
   dynamic get totalRewind;
+  @override
+  Orientation get orientation;
   @override
   @JsonKey(ignore: true)
   _$$PlayerStateImplCopyWith<_$PlayerStateImpl> get copyWith =>

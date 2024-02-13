@@ -10,6 +10,7 @@ import 'package:invidious/globals.dart';
 import 'package:invidious/home/models/db/home_layout.dart';
 import 'package:invidious/router.dart';
 import 'package:invidious/settings/states/settings.dart';
+import 'package:invidious/utils.dart';
 import 'package:invidious/utils/views/components/app_icon.dart';
 import 'package:invidious/utils/views/components/navigation_switcher.dart';
 import 'package:logging/logging.dart';
@@ -114,17 +115,20 @@ class _HomeScreenState extends State<HomeScreen> {
         selectedPage = allowedPages[selectedIndex];
       }
 
+      final deviceType = getDeviceType();
+
       return Scaffold(
           key: ValueKey(_.server?.url),
           // so we rebuild the view if the server changes
           backgroundColor: colorScheme.background,
-          bottomNavigationBar: allowedPages.length >= 2
-              ? NavigationBar(
-                  onDestinationSelected: app.selectIndex,
-                  selectedIndex: selectedIndex,
-                  destinations: navigationWidgets,
-                )
-              : null,
+          bottomNavigationBar:
+              deviceType == DeviceType.phone && allowedPages.length >= 2
+                  ? NavigationBar(
+                      onDestinationSelected: app.selectIndex,
+                      selectedIndex: selectedIndex,
+                      destinations: navigationWidgets,
+                    )
+                  : null,
           appBar: AppBar(
             title: Row(
               mainAxisSize: MainAxisSize.min,
@@ -161,29 +165,38 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           body: SafeArea(
               bottom: false,
-              child: Stack(children: [
-                Positioned(
-                  top: 0,
-                  left: 0,
-                  right: 0,
-                  bottom: 0,
-                  child: NavigationSwitcher(
-                    child: Container(
-                        // home handles its own padding because we don't want to cut horizontal scroll lists on the right
-                        padding: EdgeInsets.symmetric(
-                            horizontal: selectedPage == HomeDataSource.home
-                                ? 0
-                                : innerHorizontalPadding),
-                        key: ValueKey(selectedPage),
-                        child: selectedPage?.build(context, false) ??
-                            const Opacity(
-                                opacity: 0.2,
-                                child: AppIcon(
-                                  height: 200,
-                                ))),
+              child: Row(
+                children: [
+                  if (deviceType == DeviceType.tablet &&
+                      allowedPages.length > 2)
+                    OrientationBuilder(
+                      builder: (context, orientation) => NavigationRail(
+                          extended: getOrientation() == Orientation.landscape,
+                          onDestinationSelected: app.selectIndex,
+                          destinations: allowedPages
+                              .map((e) => e.getNavigationRailWidget(context))
+                              .toList(),
+                          selectedIndex: selectedIndex),
+                    ),
+                  Expanded(
+                    child: NavigationSwitcher(
+                      child: Container(
+                          // home handles its own padding because we don't want to cut horizontal scroll lists on the right
+                          padding: EdgeInsets.symmetric(
+                              horizontal: selectedPage == HomeDataSource.home
+                                  ? 0
+                                  : innerHorizontalPadding),
+                          key: ValueKey(selectedPage),
+                          child: selectedPage?.build(context, false) ??
+                              const Opacity(
+                                  opacity: 0.2,
+                                  child: AppIcon(
+                                    height: 200,
+                                  ))),
+                    ),
                   ),
-                )
-              ])));
+                ],
+              )));
     });
   }
 }

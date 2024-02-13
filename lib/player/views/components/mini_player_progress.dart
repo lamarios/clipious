@@ -22,7 +22,7 @@ class MiniPlayerProgress extends StatelessWidget {
         return !(currentlyPlaying?.liveNow ?? false)
             ? Container(
                 alignment: Alignment.centerLeft,
-                width: double.infinity,
+                constraints: const BoxConstraints(maxWidth: 300),
                 height: 2,
                 decoration: BoxDecoration(
                   color: colors.primary.withOpacity(0.2),

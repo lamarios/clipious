@@ -6,7 +6,9 @@ import 'package:invidious/playlists/models/playlist.dart';
 import 'package:invidious/playlists/states/playlist_list.dart';
 import 'package:invidious/playlists/views/components/add_to_playlist_list.dart';
 import 'package:invidious/playlists/views/components/playlist_in_list.dart';
+import 'package:invidious/utils.dart';
 import 'package:invidious/utils/models/paginated_list.dart';
+import 'package:invidious/utils/views/components/device_widget.dart';
 import 'package:invidious/utils/views/components/top_loading.dart';
 
 import '../../../globals.dart';
@@ -33,6 +35,7 @@ class PlaylistList extends StatelessWidget {
       child: BlocBuilder<PlaylistListCubit, PlaylistListState>(
         builder: (context, _) {
           var cubit = context.read<PlaylistListCubit>();
+          var deviceType = getDeviceType();
           return Stack(
             children: [
               _.error.isNotEmpty
@@ -57,22 +60,44 @@ class PlaylistList extends StatelessWidget {
                               !small && _.paginatedList.hasRefresh()
                                   ? cubit.refreshPlaylists()
                                   : null,
-                          child: ListView.builder(
-                              scrollDirection:
-                                  small ? Axis.horizontal : Axis.vertical,
-                              controller: cubit.scrollController,
-                              itemBuilder: (context, index) =>
-                                  index >= _.playlists.length
-                                      ? PlaylistPlaceHolder(small: small)
-                                      : PlaylistInList(
-                                          key: ValueKey(
-                                              _.playlists[index].playlistId),
-                                          playlist: _.playlists[index],
-                                          canDeleteVideos: canDeleteVideos,
-                                          small: small),
-                              // separatorBuilder: (context, index) => const Divider(),
-                              itemCount:
-                                  _.playlists.length + (_.loading ? 7 : 0)),
+                          child: DeviceWidget(
+                            forcedTyped: small ? DeviceType.phone : null,
+                            phone: ListView.builder(
+                                scrollDirection:
+                                    small ? Axis.horizontal : Axis.vertical,
+                                controller: cubit.scrollController,
+                                itemBuilder: (context, index) =>
+                                    index >= _.playlists.length
+                                        ? PlaylistPlaceHolder(small: small)
+                                        : PlaylistInList(
+                                            key: ValueKey(
+                                                _.playlists[index].playlistId),
+                                            playlist: _.playlists[index],
+                                            canDeleteVideos: canDeleteVideos,
+                                            small: small),
+                                // separatorBuilder: (context, index) => const Divider(),
+                                itemCount:
+                                    _.playlists.length + (_.loading ? 7 : 0)),
+                            tablet: GridView.builder(
+                                itemCount: _.playlists.length,
+                                gridDelegate:
+                                    SliverGridDelegateWithFixedCrossAxisCount(
+                                  childAspectRatio: 16 / 12,
+                                  crossAxisCount: getGridCount(context),
+                                ),
+                                itemBuilder: (context, index) =>
+                                    index >= _.playlists.length
+                                        ? const TvPlaylistPlaceHolder()
+                                        : PlaylistInList(
+                                            isTablet:
+                                                deviceType == DeviceType.tablet,
+                                            thumbnailsHeight: 160,
+                                            key: ValueKey(
+                                                _.playlists[index].playlistId),
+                                            playlist: _.playlists[index],
+                                            canDeleteVideos: canDeleteVideos,
+                                            small: false)),
+                          ),
                         ),
                       ),
                     ),
