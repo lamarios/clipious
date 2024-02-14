@@ -1312,5 +1312,21 @@
   "channelSortByNewest": "La más reciente",
   "@channelSortByNewest": {},
   "channelSortByPopular": "Popular",
-  "@channelSortByPopular": {}
+  "@channelSortByPopular": {},
+  "submitFeedback": "Enviar comentarios",
+  "@submitFeedback": {
+    "description": "Title for settings to submit feed back through the app"
+  },
+  "submitFeedbackDescription": "¿Ha encontrado un error o tiene alguna sugerencia? Utilice esta herramienta para hacer capturas de pantalla de la aplicación, anotarlas y enviar sus comentarios",
+  "@submitFeedbackDescription": {
+    "description": "Setting tile descriptions for feedback submission"
+  },
+  "feedbackDisclaimer": "Para enviar comentarios necesitarás una cuenta de GitHub y tu captura de pantalla se enviará a Imgur de forma anónima.",
+  "@feedbackDisclaimer": {
+    "description": "Content of dialog shown before submitting feedback to make sure the user is ok whith where the data is going"
+  },
+  "feedbackScreenshotError": "Error al subir una captura de pantalla a Imgur",
+  "@feedbackScreenshotError": {
+    "description": "Title for dialog if something goes wrong while uploading feedback screenshot"
+  }
 }
