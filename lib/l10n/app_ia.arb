@@ -356,5 +356,9 @@
   "share": "Compartir",
   "@share": {
     "description": "asking user if to share"
+  },
+  "build": "Compilation",
+  "@build": {
+    "description": "build label"
   }
 }
