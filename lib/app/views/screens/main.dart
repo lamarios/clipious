@@ -7,6 +7,7 @@ import 'package:invidious/player/views/components/player.dart';
 import '../../../player/states/player.dart';
 import '../../../player/views/components/mini_player_aware.dart';
 import '../../../utils.dart';
+import '../../states/app.dart';
 
 @RoutePage()
 class MainScreen extends StatelessWidget {
@@ -19,12 +20,15 @@ class MainScreen extends StatelessWidget {
       final orientation =
           context.select((PlayerCubit value) => value.state.orientation);
 
+      final bool globalLoading =
+          context.select((AppCubit value) => value.state.globalLoading);
       final playerHorizontalPosition = orientation == Orientation.landscape &&
               deviceType == DeviceType.tablet
           ? getFractionOfAvailableSpace(context, tabletMiniPlayerFraction)
           : const Size(0, 0);
+      var colors = Theme.of(context).colorScheme;
       return Container(
-        color: Theme.of(context).colorScheme.background,
+        color: colors.background,
         child: Stack(
           children: [
             const Positioned(
@@ -42,6 +46,13 @@ class MainScreen extends StatelessWidget {
                 right: playerHorizontalPosition.width,
                 child: const PlayerPlaceHolder()),
             Player(constraints.maxHeight),
+            if (globalLoading)
+              Positioned(
+                  child: Container(
+                      color: colors.background.withOpacity(0.5),
+                      child: const Center(
+                        child: CircularProgressIndicator(),
+                      )))
           ],
         ),
       );

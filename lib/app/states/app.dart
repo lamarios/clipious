@@ -104,10 +104,16 @@ class AppCubit extends Cubit<AppState> {
   bool get isLoggedIn =>
       (state.server?.authToken?.isNotEmpty ?? false) ||
       (state.server?.sidCookie?.isNotEmpty ?? false);
+
+  // Set the whole app in a loading state.
+  setGlobalLoading(bool loading) {
+    emit(state.copyWith(globalLoading: loading));
+  }
 }
 
 @freezed
 class AppState with _$AppState {
   const factory AppState(
-      int selectedIndex, Server? server, HomeLayout homeLayout) = _AppState;
+      int selectedIndex, Server? server, HomeLayout homeLayout,
+      {@Default(false) bool globalLoading}) = _AppState;
 }

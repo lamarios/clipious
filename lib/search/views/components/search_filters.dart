@@ -25,6 +25,7 @@ class SearchFiltersButton extends StatelessWidget {
         showDialog(
           context: context,
           barrierDismissible: false,
+          useRootNavigator: false,
           builder: (BuildContext context) {
             return BlocProvider(
               create: (context) => SearchFiltersCubit(initialFilters),

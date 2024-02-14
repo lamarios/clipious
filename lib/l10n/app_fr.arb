@@ -959,7 +959,7 @@
   "@from": {
     "description": "From word (as in 'From xx To xx')"
   },
-  "malformedStatsEndpoint": "/api/v1/stats n'est pas comme prévu",
+  "malformedStatsEndpoint": "/api/v1/stats n''est pas comme prévu",
   "@malformedStatsEndpoint": {
     "description": "Title for dialog when adding a server that isn't validated as it should"
   },
@@ -1015,7 +1015,7 @@
   "@searchUploadDateAny": {
     "description": "Do not filter search result by upload date"
   },
-  "searchUploadDateToday": "Aujourd'hui",
+  "searchUploadDateToday": "Aujourd''hui",
   "@searchUploadDateToday": {
     "description": "Search for uploaded this week"
   },

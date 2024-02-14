@@ -33,6 +33,7 @@ class AddPlayListButton extends StatelessWidget {
   addPlaylistDialog(BuildContext context) {
     var cubit = context.read<PlaylistListCubit>();
     showDialog<String>(
+        useRootNavigator: false,
         context: context,
         builder: (BuildContext context) => Dialog(
               child: AddPlayListForm(

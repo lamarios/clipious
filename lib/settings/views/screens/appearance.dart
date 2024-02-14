@@ -17,7 +17,7 @@ class AppearanceSettingsScreen extends StatelessWidget {
     var locals = AppLocalizations.of(context)!;
     showDialog(
         context: context,
-        useRootNavigator: true,
+        useRootNavigator: false,
         useSafeArea: true,
         builder: (ctx) => SizedBox(
               height: 200,

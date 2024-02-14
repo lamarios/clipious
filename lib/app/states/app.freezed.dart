@@ -19,6 +19,7 @@ mixin _$AppState {
   int get selectedIndex => throw _privateConstructorUsedError;
   Server? get server => throw _privateConstructorUsedError;
   HomeLayout get homeLayout => throw _privateConstructorUsedError;
+  bool get globalLoading => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AppStateCopyWith<AppState> get copyWith =>
@@ -30,7 +31,11 @@ abstract class $AppStateCopyWith<$Res> {
   factory $AppStateCopyWith(AppState value, $Res Function(AppState) then) =
       _$AppStateCopyWithImpl<$Res, AppState>;
   @useResult
-  $Res call({int selectedIndex, Server? server, HomeLayout homeLayout});
+  $Res call(
+      {int selectedIndex,
+      Server? server,
+      HomeLayout homeLayout,
+      bool globalLoading});
 }
 
 /// @nodoc
@@ -49,6 +54,7 @@ class _$AppStateCopyWithImpl<$Res, $Val extends AppState>
     Object? selectedIndex = null,
     Object? server = freezed,
     Object? homeLayout = null,
+    Object? globalLoading = null,
   }) {
     return _then(_value.copyWith(
       selectedIndex: null == selectedIndex
@@ -63,6 +69,10 @@ class _$AppStateCopyWithImpl<$Res, $Val extends AppState>
           ? _value.homeLayout
           : homeLayout // ignore: cast_nullable_to_non_nullable
               as HomeLayout,
+      globalLoading: null == globalLoading
+          ? _value.globalLoading
+          : globalLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -75,7 +85,11 @@ abstract class _$$AppStateImplCopyWith<$Res>
       __$$AppStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int selectedIndex, Server? server, HomeLayout homeLayout});
+  $Res call(
+      {int selectedIndex,
+      Server? server,
+      HomeLayout homeLayout,
+      bool globalLoading});
 }
 
 /// @nodoc
@@ -92,6 +106,7 @@ class __$$AppStateImplCopyWithImpl<$Res>
     Object? selectedIndex = null,
     Object? server = freezed,
     Object? homeLayout = null,
+    Object? globalLoading = null,
   }) {
     return _then(_$AppStateImpl(
       null == selectedIndex
@@ -106,6 +121,10 @@ class __$$AppStateImplCopyWithImpl<$Res>
           ? _value.homeLayout
           : homeLayout // ignore: cast_nullable_to_non_nullable
               as HomeLayout,
+      globalLoading: null == globalLoading
+          ? _value.globalLoading
+          : globalLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -113,7 +132,8 @@ class __$$AppStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$AppStateImpl implements _AppState {
-  const _$AppStateImpl(this.selectedIndex, this.server, this.homeLayout);
+  const _$AppStateImpl(this.selectedIndex, this.server, this.homeLayout,
+      {this.globalLoading = false});
 
   @override
   final int selectedIndex;
@@ -121,10 +141,13 @@ class _$AppStateImpl implements _AppState {
   final Server? server;
   @override
   final HomeLayout homeLayout;
+  @override
+  @JsonKey()
+  final bool globalLoading;
 
   @override
   String toString() {
-    return 'AppState(selectedIndex: $selectedIndex, server: $server, homeLayout: $homeLayout)';
+    return 'AppState(selectedIndex: $selectedIndex, server: $server, homeLayout: $homeLayout, globalLoading: $globalLoading)';
   }
 
   @override
@@ -136,12 +159,14 @@ class _$AppStateImpl implements _AppState {
                 other.selectedIndex == selectedIndex) &&
             (identical(other.server, server) || other.server == server) &&
             (identical(other.homeLayout, homeLayout) ||
-                other.homeLayout == homeLayout));
+                other.homeLayout == homeLayout) &&
+            (identical(other.globalLoading, globalLoading) ||
+                other.globalLoading == globalLoading));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, selectedIndex, server, homeLayout);
+  int get hashCode => Object.hash(
+      runtimeType, selectedIndex, server, homeLayout, globalLoading);
 
   @JsonKey(ignore: true)
   @override
@@ -152,7 +177,8 @@ class _$AppStateImpl implements _AppState {
 
 abstract class _AppState implements AppState {
   const factory _AppState(final int selectedIndex, final Server? server,
-      final HomeLayout homeLayout) = _$AppStateImpl;
+      final HomeLayout homeLayout,
+      {final bool globalLoading}) = _$AppStateImpl;
 
   @override
   int get selectedIndex;
@@ -160,6 +186,8 @@ abstract class _AppState implements AppState {
   Server? get server;
   @override
   HomeLayout get homeLayout;
+  @override
+  bool get globalLoading;
   @override
   @JsonKey(ignore: true)
   _$$AppStateImplCopyWith<_$AppStateImpl> get copyWith =>
