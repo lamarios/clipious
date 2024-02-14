@@ -25,6 +25,7 @@ class ManageSingleServerScreen extends StatelessWidget {
 
     showDialog(
       context: context,
+      useRootNavigator: false,
       builder: (BuildContext context) {
         return AlertDialog(
           content: Column(

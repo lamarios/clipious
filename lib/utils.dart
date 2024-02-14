@@ -223,6 +223,7 @@ okCancelDialog(
     BuildContext context, String title, String message, Function() onOk) {
   var locals = AppLocalizations.of(context)!;
   showDialog(
+    useRootNavigator: false,
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(

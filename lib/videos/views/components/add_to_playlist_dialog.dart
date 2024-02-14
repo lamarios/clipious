@@ -66,6 +66,7 @@ class AddToPlaylistDialog extends StatelessWidget {
   newPlaylistAndAdd(BuildContext context) {
     showDialog<String>(
         context: context,
+        useRootNavigator: false,
         builder: (BuildContext ctx) => Dialog(
               child: AddPlayListForm(
                   afterAdd: (playlistId) => addToPlaylist(context, playlistId)),

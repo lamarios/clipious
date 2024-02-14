@@ -19,6 +19,7 @@ class BrowsingSettingsScreen extends StatelessWidget {
   customizeApp(BuildContext context) {
     showDialog(
         barrierDismissible: true,
+        useRootNavigator: false,
         context: context,
         builder: (context) => const AlertDialog(
             content: SizedBox(width: 300, child: AppCustomizer())));

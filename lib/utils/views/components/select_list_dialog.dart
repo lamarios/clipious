@@ -34,8 +34,9 @@ class SelectList<T> extends StatelessWidget {
       bool search = false,
       bool Function(String filter, T value)? searchFilter}) {
     showDialog(
+      useRootNavigator: false,
       context: context,
-      builder: (context) => SelectList<T>(
+      builder: (ctx) => SelectList<T>(
         title: title,
         asyncSearch: asyncSearch,
         value: value,

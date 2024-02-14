@@ -438,6 +438,7 @@ class SettingsCubit extends Cubit<SettingsState> {
 
   sendFeedBack(UserFeedback feedback) async {
     try {
+      appCubit.setGlobalLoading(true);
       final deviceInfo = await DeviceInfoPlugin().androidInfo;
       final androidInfo = deviceInfo.version;
 
@@ -462,6 +463,8 @@ class SettingsCubit extends Cubit<SettingsState> {
     } catch (err) {
       _log.severe("Issue while submitting feedback", err);
       rethrow;
+    } finally {
+      appCubit.setGlobalLoading(false);
     }
   }
 }

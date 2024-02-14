@@ -107,6 +107,7 @@ class ManagerServersView extends StatelessWidget {
     var locals = AppLocalizations.of(context)!;
     showDialog<String>(
         context: context,
+        useRootNavigator: false,
         builder: (BuildContext context) => Dialog(
               child: SizedBox(
                 width: 400,
