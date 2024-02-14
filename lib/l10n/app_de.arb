@@ -1214,5 +1214,89 @@
   "searchSortBy": "Sortieren nach",
   "@searchSortBy": {
     "description": "Search sorting option"
-  }
+  },
+  "share": "Teilen",
+  "@share": {
+    "description": "asking user if to share"
+  },
+  "searchUploadDate": "Hochgeladen am",
+  "@searchUploadDate": {
+    "description": "Filter search result by upload date"
+  },
+  "searchUploadDateWeek": "Diese Woche",
+  "@searchUploadDateWeek": {},
+  "seeking": "Suchen",
+  "@seeking": {
+    "description": "category for settings related to seeking in a video"
+  },
+  "skipStep": "Vorwärts-/Rückwärtsschritt springen",
+  "@skipStep": {
+    "description": "Title for the settings to set the skipping step"
+  },
+  "fullscreenOnLandscapeDescription": "Wechselt zum Vollbildmodus, wenn das Gerät in den Querformatmodus gedreht wird",
+  "@fullscreenOnLandscapeDescription": {
+    "description": "Setting to enable full screen on landscape orientation"
+  },
+  "searchUploadDateAny": "Beliebiges Datum",
+  "@searchUploadDateAny": {
+    "description": "Do not filter search result by upload date"
+  },
+  "searchUploadDateHour": "Letzte Stunde",
+  "@searchUploadDateHour": {
+    "description": "Search for uploaded in last hour"
+  },
+  "searchUploadDateToday": "Heute",
+  "@searchUploadDateToday": {
+    "description": "Search for uploaded this week"
+  },
+  "searchUploadDateMonth": "Diesen Monat",
+  "@searchUploadDateMonth": {
+    "description": "Search for uploaded this month"
+  },
+  "searchUploadDateYear": "Dieses Jahr",
+  "@searchUploadDateYear": {
+    "description": "Search for uploaded this year"
+  },
+  "searchDuration": "Dauer",
+  "@searchDuration": {
+    "description": "Filter search result by duration"
+  },
+  "searchDurationAny": "Beliebige Dauer",
+  "@searchDurationAny": {
+    "description": "Do not filter search result by duration"
+  },
+  "searchDurationShort": "Kurz (<4 Minuten)",
+  "@searchDurationShort": {
+    "description": "Search for short videos only"
+  },
+  "searchDurationLong": "Lang (>20 Minuten)",
+  "@searchDurationLong": {
+    "description": "Search for long videos only"
+  },
+  "searchDurationMedium": "Mittel (4-20 Minuten)",
+  "@searchDurationMedium": {
+    "description": "Search for medium videos only"
+  },
+  "skipStepDescription": "Sekunden zum Springen von Vorwärts-/Rückwärtsaktionen",
+  "@skipStepDescription": {
+    "description": "Title for the settings to set the skipping step"
+  },
+  "exponentialSkip": "Exponentielles Vorwärts-/Rückwärtsspringen",
+  "@exponentialSkip": {
+    "description": "Title for the setting to enable the exponential skipping"
+  },
+  "exponentialSkipDescription": "Je mehr Du vorwärts springen, desto größer ist der Schritt.",
+  "@exponentialSkipDescription": {
+    "description": "Title for the setting to enable the exponential skipping"
+  },
+  "fullscreenOnLandscape": "Vollbild im Querformat",
+  "@fullscreenOnLandscape": {
+    "description": "Setting title to enable full screen on landscape orientation"
+  },
+  "channelSortByNewest": "Neueste",
+  "@channelSortByNewest": {},
+  "channelSortByOldest": "Älteste",
+  "@channelSortByOldest": {},
+  "channelSortByPopular": "Beliebt",
+  "@channelSortByPopular": {}
 }

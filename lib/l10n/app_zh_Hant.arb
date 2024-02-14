@@ -1194,5 +1194,75 @@
   "askToEnableBackgroundServiceTitle": "通知已關閉",
   "@askToEnableBackgroundServiceTitle": {
     "description": "If the users tries to turn on notifications for a channel but hasn't enable notifications in the app we need to turn it on for them"
+  },
+  "channelSortByNewest": "最新",
+  "@channelSortByNewest": {},
+  "searchUploadDate": "上傳日期",
+  "@searchUploadDate": {
+    "description": "Filter search result by upload date"
+  },
+  "searchUploadDateHour": "過去一個小時",
+  "@searchUploadDateHour": {
+    "description": "Search for uploaded in last hour"
+  },
+  "searchUploadDateToday": "今天",
+  "@searchUploadDateToday": {
+    "description": "Search for uploaded this week"
+  },
+  "searchDurationMedium": "中等（4-20分）",
+  "@searchDurationMedium": {
+    "description": "Search for medium videos only"
+  },
+  "share": "分享",
+  "@share": {
+    "description": "asking user if to share"
+  },
+  "serverIsNotReachable": "無法連結伺服器",
+  "@serverIsNotReachable": {
+    "description": "Title for dialog when adding a server that is not reachable"
+  },
+  "searchUploadDateAny": "不限時間",
+  "@searchUploadDateAny": {
+    "description": "Do not filter search result by upload date"
+  },
+  "searchUploadDateWeek": "本週",
+  "@searchUploadDateWeek": {},
+  "searchUploadDateMonth": "本月",
+  "@searchUploadDateMonth": {
+    "description": "Search for uploaded this month"
+  },
+  "searchUploadDateYear": "今年",
+  "@searchUploadDateYear": {
+    "description": "Search for uploaded this year"
+  },
+  "searchDuration": "影片長度",
+  "@searchDuration": {
+    "description": "Filter search result by duration"
+  },
+  "searchDurationAny": "不限長度",
+  "@searchDurationAny": {
+    "description": "Do not filter search result by duration"
+  },
+  "searchDurationShort": "短片（<4分）",
+  "@searchDurationShort": {
+    "description": "Search for short videos only"
+  },
+  "searchDurationLong": "長片（>20分）",
+  "@searchDurationLong": {
+    "description": "Search for long videos only"
+  },
+  "searchSortBy": "排序依據",
+  "@searchSortBy": {
+    "description": "Search sorting option"
+  },
+  "nFilters": "幾個影片篩選器",
+  "@nFilters": {
+    "description": "One or more video filters",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
   }
 }
