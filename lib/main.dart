@@ -104,7 +104,7 @@ Future<void> main() async {
         create: (context) => DownloadManagerCubit(
             const DownloadManagerState(), context.read<PlayerCubit>()),
       )
-    ], child: BetterFeedback(child: const MyApp())),
+    ], child: const MyApp()),
   ));
 }
 
