@@ -1066,5 +1066,35 @@
         "example": "Monday, Wednesday, Friday"
       }
     }
+  },
+  "videoFilterTimeOfDayFromTo": "De {from} à {to}",
+  "@videoFilterTimeOfDayFromTo": {
+    "description": "Time of day range",
+    "placeholders": {
+      "from": {
+        "type": "String",
+        "example": "3:00 AM"
+      },
+      "to": {
+        "type": "String",
+        "example": "5:00 PM"
+      }
+    }
+  },
+  "subscriptionNotification": "Notifications d'abonnement",
+  "@subscriptionNotification": {
+    "description": "Title for subscriptions notifications"
+  },
+  "notifications": "Notifications",
+  "@notifications": {
+    "description": "Notification settings title"
+  },
+  "notificationsDescription": "Activer et examiner les notifications",
+  "@notificationsDescription": {
+    "description": "Setting description for notifications"
+  },
+  "enableNotificationDescriptions": "Exécute le service en premier plan pour vérifier et vous informer des changements que vous surveillez",
+  "@enableNotificationDescriptions": {
+    "description": ""
   }
 }
