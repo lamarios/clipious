@@ -1312,5 +1312,21 @@
   "channelSortByOldest": "قدیمی‌ترین",
   "@channelSortByOldest": {},
   "channelSortByPopular": "محبوب",
-  "@channelSortByPopular": {}
+  "@channelSortByPopular": {},
+  "submitFeedback": "ارسال بازخورد",
+  "@submitFeedback": {
+    "description": "Title for settings to submit feed back through the app"
+  },
+  "submitFeedbackDescription": "مشکلی پیدا کرده‌اید یا پیشنهادی دارید؟ از این ابزار برای گرفتن screenshot از برنامه، یادداشت نوشتن روی آن و ارسال بازخورد استفاده کنید",
+  "@submitFeedbackDescription": {
+    "description": "Setting tile descriptions for feedback submission"
+  },
+  "feedbackDisclaimer": "برای ارسال بازخورد شما به حساب GitHub نیاز دارید و تصویر شما به صورت ناشناس به Imgur ارسال می شود.",
+  "@feedbackDisclaimer": {
+    "description": "Content of dialog shown before submitting feedback to make sure the user is ok whith where the data is going"
+  },
+  "feedbackScreenshotError": "خطا در هنگام بارگذاری تصویر به Imgur",
+  "@feedbackScreenshotError": {
+    "description": "Title for dialog if something goes wrong while uploading feedback screenshot"
+  }
 }
