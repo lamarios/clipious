@@ -1,852 +1,906 @@
 {
-    "playlists": "Playlisturi",
-    "@playlists": {
-        "description": "User playlists"
-    },
-    "popular": "Populare",
-    "@popular": {
-        "description": "Popular videos title"
-    },
-    "trending": "Tendințe",
-    "@trending": {
-        "description": "Trending videos title"
-    },
-    "noVideoInPlayList": "Niciun videoclip în playlist",
-    "@noVideoInPlayList": {
-        "description": "When no videos in the playlist"
-    },
-    "removeFromPlayList": "Elimină din Playlist",
-    "@removeFromPlayList": {
-        "description": "Menu item description to show remove a video from a playlist"
-    },
-    "deletePlayListQ": "Șterge un playlist?",
-    "@deletePlayListQ": {
-        "description": "Ask user to delete a playlist"
-    },
-    "playListName": "Numele playlistului",
-    "@playListName": {
-        "description": "Place holder for new playlist name text field"
-    },
-    "playlistVisibility": "Vizibilitate",
-    "@playlistVisibility": {
-        "description": "Dropdown label for playlist visibility"
-    },
-    "privatePlaylist": "Privat",
-    "@privatePlaylist": {
-        "description": "Private playlist"
-    },
-    "cancel": "Anulează",
-    "@cancel": {
-        "description": "Cancel button label"
-    },
-    "add": "Adaugă",
-    "@add": {
-        "description": "Add button abel"
-    },
-    "unlistedPlaylist": "Nelistate",
-    "@unlistedPlaylist": {
-        "description": "Unlisted playlist"
-    },
-    "info": "Informații",
-    "@info": {
-        "description": "Info label"
-    },
-    "videos": "Videoclipuri",
-    "@videos": {
-        "description": "Videos label"
-    },
-    "streams": "Fluxuri",
-    "@streams": {
-        "description": "Streams label"
-    },
-    "latestVideos": "Ultimele videoclipuri",
-    "@latestVideos": {
-        "description": "Latest channel videos"
-    },
-    "subscribed": "Abonat",
-    "@subscribed": {
-        "description": "When the user is subscribed to a channel"
-    },
-    "subscribe": "Abonează-te",
-    "@subscribe": {
-        "description": "Label for user to subscribe to a channel"
-    },
-    "nSubscribers": "{count, select, no{fără abonați} other{{count} de abonați}}",
-    "@nSubscribers": {
-        "description": "number of subscribers",
-        "placeholders": {
-            "count": {
-                "type": "String"
-            }
-        }
-    },
-    "shareYoutubeLink": "Distribuie linkul YouTube",
-    "@shareYoutubeLink": {
-        "description": "asking user to share youtube link"
-    },
-    "shareInvidiousLink": "Distribuie link-ul Invidious",
-    "@shareInvidiousLink": {
-        "description": "asking user to share invidious link"
-    },
-    "ok": "OK",
-    "@ok": {
-        "description": "Ok"
-    },
-    "noChannels": "Nu există canale",
-    "@noChannels": {
-        "description": "when there are no channels to display"
-    },
-    "noPlaylists": "Nu există Playlisturi",
-    "@noPlaylists": {
-        "description": "when there are no playlists to display"
-    },
-    "couldntLoadVideo": "Nu s-a putut încărca videoclipul",
-    "@couldntLoadVideo": {
-        "description": "Message to display when a video can't be loaded"
-    },
-    "couldntFetchVideos": "Nu s-au putut prelua videoclipuri. Atingeți pentru a încerca din nou.",
-    "@couldntFetchVideos": {
-        "description": "Can't load bunch of videos, asking  user to try again"
-    },
-    "wizardIntro": "Selectați un server public sau adăugați unul propriu. (Poate fi modificat ulterior în setări)",
-    "@wizardIntro": {
-        "description": "Welcome message on frst time use"
-    },
-    "videoAddedToPlaylist": "Videoclip adăugat în playlist",
-    "@videoAddedToPlaylist": {
-        "description": "Pop up message when a video was added to a playlist"
-    },
-    "publicPlaylist": "Public",
-    "@publicPlaylist": {
-        "description": "Public playlist"
-    },
-    "selectPlaylist": "Selectează playlist",
-    "@selectPlaylist": {
-        "description": "Title when users wants to add a video to a playlist"
-    },
-    "loadMore": "Încărcați mai mult",
-    "@loadMore": {
-        "description": "CTA to load more"
-    },
-    "streamIsLive": "Live",
-    "@streamIsLive": {
-        "description": "Label when a video is a live stream"
-    },
-    "sponsorSkipped": "Sponsorul a sărit peste",
-    "@sponsorSkipped": {
-        "description": "When a sponsor segment is skipped thanks to sponsor block"
-    },
-    "selectBrowsingCountry": "Selectați țara de navigare",
-    "@selectBrowsingCountry": {
-        "description": "Select country for trending content"
-    },
-    "showOnStart": "Selectați ce să afișați când pornește aplicația",
-    "@showOnStart": {
-        "description": "Title of dialog asking which screen the users prefers to see"
-    },
-    "settings": "Setări",
-    "@settings": {
-        "description": "Settings title"
-    },
-    "browsing": "Navigare",
-    "@browsing": {
-        "description": "video browsing preferences"
-    },
-    "country": "Țară",
-    "@country": {
-        "description": "Country label"
-    },
-    "whenAppStartsShow": "Când aplicația pornește, arată…",
-    "@whenAppStartsShow": {
-        "description": "Setting title for selecting the screen to show on start"
-    },
-    "servers": "Servere",
-    "@servers": {
-        "description": "Server management settings category"
-    },
-    "manageServers": "Gestionați serverele",
-    "@manageServers": {
-        "description": "Settings to manage servers"
-    },
-    "currentServer": "În prezent se utilizează {current}",
-    "@currentServer": {
-        "description": "Which server the user is currently using",
-        "placeholders": {
-            "current": {
-                "type": "String"
-            }
-        }
-    },
-    "useSponsorBlock": "Utilizați SponsorBlock",
-    "@useSponsorBlock": {
-        "description": "label for sponsorblock checkbox"
-    },
-    "sponsorBlockDescription": "Săriți peste segmentele de sponsori trimise de comunitate",
-    "@sponsorBlockDescription": {
-        "description": "Sponsorblock setting description"
-    },
-    "about": "Despre",
-    "@about": {
-        "description": "About"
-    },
-    "name": "Nume",
-    "@name": {
-        "description": "NAme label"
-    },
-    "package": "Pachet",
-    "@package": {
-        "description": "package label"
-    },
-    "version": "Versiune",
-    "@version": {
-        "description": "version label"
-    },
-    "addServer": "Adăugare server",
-    "@addServer": {
-        "description": "Add server label"
-    },
-    "useThisServer": "Utilizați acest server",
-    "@useThisServer": {
-        "description": "Use this server label"
-    },
-    "build": "Construit",
-    "@build": {
-        "description": "build label"
-    },
-    "logIn": "Conectează-te",
-    "@logIn": {
-        "description": "CTA to log in to server"
-    },
-    "delete": "Șterge",
-    "@delete": {
-        "description": "Delete label"
-    },
-    "invalidInvidiousServer": "Server Invidious nevalid",
-    "@invalidInvidiousServer": {
-        "description": "Error when the user tries to add a server that is not a proper or reachable invidious server"
-    },
-    "yourServers": "Serverele tale",
-    "@yourServers": {
-        "description": "Your servers label"
-    },
-    "loggedIn": "Conectat",
-    "@loggedIn": {
-        "description": "Label to tell the user that he is logged in to the server"
-    },
-    "notLoggedIn": "Nu ești conectat",
-    "@notLoggedIn": {
-        "description": "Label when the user is not logged in to the server"
-    },
-    "addServerHelpText": "Folosiți butonul + pentru a vă adăuga propriile servere sau apăsați pe un server public și adăugați-l.",
-    "@addServerHelpText": {
-        "description": "label for when the user hasn't chosen a server yet"
-    },
-    "tapToAddServer": "Atinge pentru a adăuga server la lista",
-    "@tapToAddServer": {
-        "description": "public server description"
-    },
-    "useDynamicTheme": "Culori dinamice",
-    "@useDynamicTheme": {
-        "description": ""
-    },
-    "useDash": "Folosești DASH",
-    "@useDash": {
-        "description": "Label on video options if a user wants to switch to dash urls instead of the regular quality selection"
-    },
-    "videoUnlisted": "Nelistate",
-    "@videoUnlisted": {
-        "description": "Status of a video that is only accessible by link"
-    },
-    "videoIsFamilyFriendly": "Familie prietenoasă",
-    "@videoIsFamilyFriendly": {
-        "description": "Displayed only when a video is family friendly"
-    },
-    "error": "Eroare",
-    "@error": {},
-    "nVideos": "{count, plural, =0{Niciun videoclip} =1{1 videoclip} other{{count} videoclipuri}}",
-    "@nVideos": {
-        "description": "One or more videos",
-        "placeholders": {
-            "count": {
-                "type": "num",
-                "format": "compact"
-            }
-        }
-    },
-    "subscriptions": "Abonamente",
-    "@subscriptions": {
-        "description": "User subscriptions"
-    },
-    "irreversibleAction": "Această acțiune este ireversibilă",
-    "@irreversibleAction": {
-        "description": "Tell the user that the action cannot be undone"
-    },
-    "addPlayList": "Adaugă playlist",
-    "@addPlayList": {
-        "description": "Title for add playlist dialog"
-    },
-    "channels": "Canale",
-    "@channels": {
-        "description": "Channels label"
-    },
-    "comments": "Comentarii",
-    "@comments": {
-        "description": "Comments label"
-    },
-    "recommended": "Recomandat",
-    "@recommended": {
-        "description": "Recommended label"
-    },
-    "startUsingClipious": "Începeți să folosești Clipious",
-    "@startUsingClipious": {
-        "description": "button label to start using the app"
-    },
-    "errorAddingVideoToPlaylist": "Eroare la adăugarea videoclipului la playlist",
-    "@errorAddingVideoToPlaylist": {
-        "description": "Error while adding video to playlist"
-    },
-    "createNewPlaylist": "Creează un playlist nou",
-    "@createNewPlaylist": {
-        "description": "Button label to create a new playlist when the user wants to add a video to a playlist"
-    },
-    "nReplies": "{count, plural, =0{Niciun răspuns} =1{1 răspuns} other{{count} răspunsuri}}",
-    "@nReplies": {
-        "description": "number of replies to a comment",
-        "placeholders": {
-            "count": {
-                "type": "num",
-                "format": "compact"
-            }
-        }
-    },
-    "topSorting": "Top",
-    "@topSorting": {
-        "description": "Content sorting: top"
-    },
-    "newSorting": "Nou",
-    "@newSorting": {
-        "description": "Content sorting: new"
-    },
-    "publicServers": "Servere publice",
-    "@publicServers": {
-        "description": "Public servers label"
-    },
-    "loadingPublicServer": "Se încarcă servere publice",
-    "@loadingPublicServer": {
-        "description": "Message telling users the app is loading the list of public servers"
-    },
-    "publicServersError": "Nu s-a putut prelua lista de servere publice. Apasă pentru a reîncerca.",
-    "@publicServersError": {
-        "description": "Error message when trying to get public servers but it failed"
-    },
-    "appearance": "Aspect",
-    "@appearance": {
-        "description": "Settings category title"
-    },
-    "useDynamicThemeDescription": "Folosiți culorile Material You (disponibil numai pe Android 12+)",
-    "@useDynamicThemeDescription": {
-        "description": ""
-    },
-    "useDashDescription": "Streamingul adaptiv DASH poate fi uneori problematic, iar YouTube îl poate limita.",
-    "@useDashDescription": {
-        "description": "Description for dash in the settings screen"
-    },
-    "videoPlayer": "Video player",
-    "@videoPlayer": {
-        "description": "Title for video player related options"
-    },
-    "videoListed": "Public",
-    "@videoListed": {
-        "description": "Status of a publicly available video"
-    },
-    "tapToManage": "Atingeți pentru a gestiona",
-    "@tapToManage": {
-        "description": "Text shown below a server in the 'Your servers' list"
-    },
-    "authentication": "Autentificare",
-    "@authentication": {
-        "description": "Label for server settings related to authentications"
-    },
-    "tokenLoginDescription": "Mod recomandat de autentificare",
-    "@tokenLoginDescription": {
-        "description": "Recommended way to log in"
-    },
-    "cookieLoginDescription": "Utilizați această metodă dacă întâmpinați probleme cu autentificarea cu simbol",
-    "@cookieLoginDescription": {
-        "description": "Cookie log in description"
-    },
-    "logout": "Deconectează-te",
-    "@logout": {
-        "description": "CTA to logout of a server"
-    },
-    "username": "Nume de utilizator",
-    "@username": {
-        "description": "Username label for login to a server"
-    },
-    "wrongUsernamePassword": "Nume de utilizator sau parolă greșită",
-    "@wrongUsernamePassword": {
-        "description": "Error message when authentication fails"
-    },
-    "tokenLogin": "Autentificare cu token",
-    "@tokenLogin": {
-        "description": "Textto login to a server using the recommended way"
-    },
-    "cookieLogin": "Autentificare cu cookie",
-    "@cookieLogin": {
-        "description": "Text to login to a server using the cookie jar method"
-    },
-    "password": "Parolă",
-    "@password": {
-        "description": "Password label for login to a server"
-    },
-    "videoQueue": "Coadă video",
-    "@videoQueue": {
-        "description": "Label for button to display the video queue"
-    },
-    "addToQueueList": "Adaugă la coadă",
-    "@addToQueueList": {
-        "description": "Label on button to add a video to the queue list"
-    },
-    "addRecommendedToQueue": "Redare automată recomandată în continuare",
-    "@addRecommendedToQueue": {
-        "description": "Switch when playing a video to automatically add the recommended videos to the video queue"
-    },
-    "sponsorBlockCategorySponsor": "Sponsor",
-    "@sponsorBlockCategorySponsor": {
-        "description": "Sponsor block 'Sponsor' Category"
-    },
-    "sponsorBlockCategoryInteraction": "Memento de interacțiune (Abonare)",
-    "@sponsorBlockCategoryInteraction": {
-        "description": "Sponsor block 'Interaction' Category"
-    },
-    "sponsorBlockCategoryOutro": "Carduri finale/Credite",
-    "@sponsorBlockCategoryOutro": {
-        "description": "Outro block 'Outro' Category"
-    },
-    "sponsorBlockCategoryOutroDescription": "Credite sau când apar cardurile de final YouTube. Nu pentru concluzii cu informații.",
-    "@sponsorBlockCategoryOutroDescription": {
-        "description": "Outro block 'Outro' Category description"
-    },
-    "sponsorBlockCategoryPreview": "Previzualizare/Recapitulare",
-    "@sponsorBlockCategoryPreview": {
-        "description": "Sponsorblock 'Preview' Category"
-    },
-    "sponsorBlockCategoryFiller": "Tangenta de umplere/Glume",
-    "@sponsorBlockCategoryFiller": {
-        "description": "Sponsorblock 'Filler' Category"
-    },
-    "useProxy": "Videoclipuri Proxy",
-    "@useProxy": {
-        "description": "label for settings switch to proxy videos from server"
-    },
-    "sponsorBlockCategoryIntroDescription": "Un interval fără conținut real. Ar putea fi o pauză, un cadru static, o animație care se repetă. Aceasta nu ar trebui folosită pentru tranzițiile care conțin informații.",
-    "@sponsorBlockCategoryIntroDescription": {
-        "description": "Sponsorblock 'Intro' Category description"
-    },
-    "sponsorBlockCategoryMusicOffTopic": "Muzică: Secțiunea non-muzică",
-    "@sponsorBlockCategoryMusicOffTopic": {
-        "description": "Sponsorblock 'MusicOffTopic' Category"
-    },
-    "sponsorBlockSettingsQuickDescription": "Selectați ce tip de segmente să omiteți",
-    "@sponsorBlockSettingsQuickDescription": {
-        "description": "Small description of what the sponsor block settings do"
-    },
-    "sponsorBlockCategorySponsorDescription": "Promoție plătită, recomandări plătite și reclame directe. Nu pentru auto-promovare sau strigături gratuite către cauze/creatori/site-uri web/produse care le plac.",
-    "@sponsorBlockCategorySponsorDescription": {
-        "description": "Sponsor block 'Sponsor' Category description"
-    },
-    "sponsorBlockCategoryIntro": "Animație de pauză/Intro",
-    "@sponsorBlockCategoryIntro": {
-        "description": "Sponsorblock 'Intro' Category"
-    },
-    "sponsorBlockCategoryUnpaidSelfPromo": "Neplătită/Autopromovare",
-    "@sponsorBlockCategoryUnpaidSelfPromo": {
-        "description": "Sponsor block 'Unpaid/Self promotion' Category"
-    },
-    "sponsorBlockCategoryUnpaidSelfPromoDescription": "Similar cu „sponsor”, cu excepția promovării neplătite sau autopromovate. Aceasta include secțiuni despre mărfuri, donații sau informații despre cine a colaborat ",
-    "@sponsorBlockCategoryUnpaidSelfPromoDescription": {
-        "description": "Sponsor block 'Unpaid/Self promotion' Category description"
-    },
-    "sponsorBlockCategoryInteractionDescription": "Când există un scurt memento pentru a vă place, abonați-vă sau urmați-le în mijlocul conținutului. Dacă este lung sau despre ceva specific, ar trebui să fie sub promovare de sine în loc.",
-    "@sponsorBlockCategoryInteractionDescription": {
-        "description": "Sponsor block 'Interaction' Category description"
-    },
-    "sponsorBlockCategoryPreviewDescription": "Colecție de clipuri care arată ce se întâmplă în acest videoclip sau în alte videoclipuri dintr-o serie în care toate informațiile sunt repetate mai târziu în videoclip.",
-    "@sponsorBlockCategoryPreviewDescription": {
-        "description": "Sponsorblock 'Preview' Category description"
-    },
-    "sponsorBlockCategoryFillerDescription": "Scene tangențiale adăugate numai pentru umplutură sau umor care nu sunt necesare pentru a înțelege conținutul principal al videoclipului. Aceasta nu ar trebui să includă segmente care furnizează detalii contextuale sau de fond. Aceasta este o categorie foarte agresivă destinată atunci când nu sunteți în starea de spirit pentru \"distracție\".",
-    "@sponsorBlockCategoryFillerDescription": {
-        "description": "Sponsorblock 'Filler' Category description"
-    },
-    "sponsorBlockCategoryMusicOffTopicDescription": "Numai pentru utilizare în videoclipuri muzicale. Acest lucru ar trebui folosit numai pentru secțiuni de videoclipuri muzicale care nu sunt deja acoperite de altă categorie.",
-    "@sponsorBlockCategoryMusicOffTopicDescription": {
-        "description": "Only for use in music videos. This only should be used for sections of music videos that aren't already covered by another category."
-    },
-    "useProxyDescription": "Prin proxy fluxurile video de pe server, puteți ocoli blocările regionale sau blocarea ISP-ului YouTube",
-    "@useProxyDescription": {
-        "description": "Description for the use proxy settings"
-    },
-    "blackBackgroundDescription": "Pentru tema întunecată pe ecranul OLED",
-    "@blackBackgroundDescription": {
-        "description": "Description for dark background setting"
-    },
-    "audio": "Audio",
-    "@audio": {
-        "description": "Name TV ui audio settings"
-    },
-    "blackBackground": "Fundal negru",
-    "@blackBackground": {
-        "description": "Settings name for black background"
-    },
-    "pressDownToShowSettings": "Apasă în jos pentru a afișa setările",
-    "@pressDownToShowSettings": {
-        "description": "Instruction on how to show video settings when playing a video on TV"
-    },
-    "subtitles": "Subtitrări",
-    "@subtitles": {
-        "description": "Name of TV ui subtitles settings"
-    },
-    "playbackSpeed": "Viteza de redare",
-    "@playbackSpeed": {
-        "description": "Name of TV ui Playback speed"
-    },
-    "quality": "Calitate",
-    "@quality": {
-        "description": "Name of TV ui video settings"
-    },
-    "search": "Căutare",
-    "@search": {
-        "description": "search title"
-    },
-    "subtitleFontSize": "Dimensiunea fontului subtitrărilor",
-    "@subtitleFontSize": {
-        "description": "Settings label for the size of the subtitles"
-    },
-    "subtitleFontSizeDescription": "Schimbați dimensiunea subtitrarilor dacă este prea mică sau prea mare pe dispozitiv",
-    "@subtitleFontSizeDescription": {
-        "description": "Settings description for subtitle size"
-    },
-    "skipSslVerification": "Omiteți verificarea certificatului SSL",
-    "@skipSslVerification": {
-        "description": "Setting label to skip ssl certification verification"
-    },
-    "skipSslVerificationDescription": "Pentru utilizarea unui certificat SSL autosemnat sau când aveți probleme legate de SSL cu serverul dvs.",
-    "@skipSslVerificationDescription": {
-        "description": "Setting description for the skip ssl certification verification"
-    },
-    "themeBrightness": "Temă",
-    "@themeBrightness": {
-        "description": "Ask the user to user dark / light / system theme"
-    },
-    "themeLight": "Luminos",
-    "@themeLight": {
-        "description": "Light theme"
-    },
-    "themeDark": "Întunecat",
-    "@themeDark": {
-        "description": "Dark theme"
-    },
-    "followSystem": "Urmărește sistemul",
-    "@followSystem": {
-        "description": "Follow system label"
-    },
-    "requiresRestart": "Necesită repornirea aplicației",
-    "@requiresRestart": {
-        "description": "Requires app restart label"
-    },
-    "appLanguage": "Limba aplicației",
-    "@appLanguage": {
-        "description": "Select app language"
-    },
-    "returnYoutubeDislikeDescription": "Afișează displacerile estimate ale videoclipurilor utilizând API furnizat de returnyoutubedislike.com",
-    "@returnYoutubeDislikeDescription": {
-        "description": "ReturnYoutubeDislike setting description"
-    },
-    "autoplayVideoOnLoad": "Redarea automată a videoclipului la încărcare",
-    "@autoplayVideoOnLoad": {
-        "description": "Label for settings to enable autoplay when a video loads"
-    },
-    "autoplayVideoOnLoadDescription": "Începe redarea automată a videoclipului după ce s-a încărcat",
-    "@autoplayVideoOnLoadDescription": {
-        "description": "Description for the autoplay video on load setting"
-    },
-    "searchHistory": "Istoric de căutare",
-    "@searchHistory": {
-        "description": "Settings label for search history"
-    },
-    "searchHistoryDescription": "Setări pentru istoricul căutărilor",
-    "@searchHistoryDescription": {
-        "description": "Description for search history settings"
-    },
-    "enableSearchHistory": "Activați istoricul căutărilor",
-    "@enableSearchHistory": {
-        "description": "Settings label for enabling search history"
-    },
-    "searchHistoryLimit": "Limita istoricului căutărilor",
-    "@searchHistoryLimit": {
-        "description": "Settings label for search history limit"
-    },
-    "searchHistoryLimitDescription": "Setați câte căutări anterioare vor apărea în sugestii",
-    "@searchHistoryLimitDescription": {
-        "description": "Settings label for search history limit description"
-    },
-    "clearSearchHistory": "Ștergeți istoricul căutărilor",
-    "@clearSearchHistory": {
-        "description": "Settings label for clearing search history"
-    },
-    "shorts": "Shorts",
-    "@shorts": {
-        "description": "Youtube shorts"
-    },
-    "searchSortRating": "Evaluare",
-    "@searchSortRating": {
-        "description": "Sort search by rating"
-    },
-    "searchSortViewCount": "De vizionări",
-    "@searchSortViewCount": {
-        "description": "Sort search by view count"
-    },
-    "rememberSubtitleLanguage": "Reține limba subtitrării",
-    "@rememberSubtitleLanguage": {
-        "description": "Settings label for remembering subtitle language"
-    },
-    "searchSortRelevance": "Relevanţă",
-    "@searchSortRelevance": {
-        "description": "Sort search by relevance"
-    },
-    "searchSortUploadDate": "Data încărcării",
-    "@searchSortUploadDate": {
-        "description": "Sort search by upload date"
-    },
-    "rememberSubtitleLanguageDescription": "Setați automat subtitrările în ultima limbă selectată, dacă este disponibilă",
-    "@rememberSubtitleLanguageDescription": {
-        "description": "Settings description for remembering subtitle language"
-    },
-    "redirectInvidiousLink": "Partajați linkul de redirecționare Invidious",
-    "@redirectInvidiousLink": {
-        "description": "asking user to share redirecting invidious link"
-    },
-    "fillFullscreen": "Maximizați videoclipul pentru a se potrivi cu ecranul",
-    "@fillFullscreen": {
-        "description": "Title to maximize video to fit screen"
-    },
-    "videoFilters": "Filtre video",
-    "@videoFilters": {
-        "description": "Title for video filter settings"
-    },
-    "optional": "opțional",
-    "@optional": {
-        "description": "Optional label"
-    },
-    "videoFilterTapToReveal": "Atingeți pentru a dezvălui",
-    "@videoFilterTapToReveal": {
-        "description": "Label to tell user to tap to show a filtered video"
-    },
-    "channel": "Canal",
-    "@channel": {
-        "description": "A single channel"
-    },
-    "rememberPlaybackSpeedDescription": "Setați automat viteza de redare la ultima viteză selectată",
-    "@rememberPlaybackSpeedDescription": {
-        "description": "Settings description for remembering playback speed"
-    },
-    "videoFilterHideDescription": "În mod prestabilit, videoclipurile filtrate nu sunt ascunse, ci afișate ca fiind obscucate cu motivul (motivele) pentru care au fost filtrate. Această setare elimină videoclipurile filtrate din liste.",
-    "@videoFilterHideDescription": {
-        "description": ""
-    },
-    "videoFilterOperationHigherThan": "Mai mare decât",
-    "@videoFilterOperationHigherThan": {
-        "description": "Label for video filter operation Higher than"
-    },
-    "lockFullScreenToLandscape": "Blocați orientarea pe întregul ecran în raport cu aspectul video",
-    "@lockFullScreenToLandscape": {
-        "description": "Title to force full screen to landscape"
-    },
-    "fillFullscreenDescription": "Reglează videoclipul pentru a umple întregul ecran în modul peisaj",
-    "@fillFullscreenDescription": {
-        "description": "Setting description for filling video to screen in landscape"
-    },
-    "videoAddedToQueue": "Videoclip adăugat la coadă",
-    "@videoAddedToQueue": {
-        "description": "Pop up message when a video was added at the end of the video queue"
-    },
-    "videoFilterType": "Tip",
-    "@videoFilterType": {
-        "description": "Label for filter type"
-    },
-    "videoFilterValue": "Valoare",
-    "@videoFilterValue": {
-        "description": "Label for filter value"
-    },
-    "videoFilterAllChannels": "Toate canalele",
-    "@videoFilterAllChannels": {
-        "description": "Title for the sections that applies to all channels"
-    },
-    "videoFilterEditDescription": "Selectați un canal opțional, un tip de filtru, o operațiune și o valoare pentru a filtra videoclipurile OUT din liste. Exemplu, tastați: numele videoclipului, operațiunea: conține, valoare: testul va EXCLUDE toate videoclipurile cu cuvântul „test” în numele lor.",
-    "@videoFilterEditDescription": {
-        "description": "Descriptive test for video filter set up"
-    },
-    "appLogs": "Jurnalele aplicației",
-    "@appLogs": {
-        "description": "Title for settings that leads to application logs"
-    },
-    "videoFilterHide": "Ascundeți videoclipurile filtrate",
-    "@videoFilterHide": {
-        "description": "Label for settings to hide filtered videos"
-    },
-    "rememberPlaybackSpeed": "Reținere viteza de redare",
-    "@rememberPlaybackSpeed": {
-        "description": "Setting label for remembering playback speed"
-    },
-    "addToPlaylist": "Adaugă la playlist",
-    "@addToPlaylist": {
-        "description": "Label to add a video to a playlist"
-    },
-    "playNext": "Redă următorul",
-    "@playNext": {
-        "description": "Label to play the video after the current one."
-    },
-    "playNextAddedToQueue": "Video va rula în continuare",
-    "@playNextAddedToQueue": {
-        "description": "Pop up message to confirm that the video has been properly set to play next"
-    },
-    "appLogsDescription": "Obține jurnale cu ceea ce se întâmplă în aplicație, poate fi util pentru a raporta probleme",
-    "@appLogsDescription": {
-        "description": "Description of the app log settings"
-    },
-    "logsCopied": "Jurnalele copiate în clipboard",
-    "@logsCopied": {
-        "description": "Message to tell user that logs have been copied to the clipboard"
-    },
-    "copyToClipBoard": "Copiați în clipboard",
-    "@copyToClipBoard": {
-        "description": "Text to copy something to clipboard"
-    },
-    "videoFiltersExplanation": "Ascundeți sau estompați videoclipurile din toate fluxurile video din aplicație pe baza filtrelor definite mai jos. Acest lucru vă permite, de exemplu, să ascundeți spoilerele sportive sau să ascundeți scurtmetraje de pe un anumit canal.",
-    "@videoFiltersExplanation": {
-        "description": "Description on how filter work"
-    },
-    "videoFiltersSettingTileDescriptions": "Definiți reguli pentru a filtra videoclipurile",
-    "@videoFiltersSettingTileDescriptions": {
-        "description": "Description for the main settings page"
-    },
-    "addVideoFilter": "Creați un filtru",
-    "@addVideoFilter": {
-        "description": "Title when creating a new filter"
-    },
-    "editVideoFilter": "Editați filtrul",
-    "@editVideoFilter": {
-        "description": "Title when editting a filter"
-    },
-    "videoFilterOperation": "Operațiune",
-    "@videoFilterOperation": {
-        "description": "Label for filter operation"
-    },
-    "save": "Salvați",
-    "@save": {
-        "description": "Text for save action"
-    },
-    "videoFilterHideLabel": "Ascunde",
-    "@videoFilterHideLabel": {
-        "description": "Label to hide videos"
-    },
-    "videoFilterFilterLabel": "Obfuscate",
-    "@videoFilterFilterLabel": {
-        "description": "Label to filter videos"
-    },
-    "videoFilterDescriptionString": "{hideOrFilter} videoclipuri în care {type} {operation} ''{value}''.",
-    "@videoFilterDescriptionString": {
-        "description": "Human readable description of a video filter, in this case is it for string comparison, example: Hide videos where the name of the video does not contain the following string 'test' (Do not translate text between { })",
-        "placeholders": {
-            "hideOrFilter": {
-                "type": "String",
-                "example": "Hide"
-            },
-            "type": {
-                "type": "String",
-                "example": "video title"
-            },
-            "operation": {
-                "type": "String",
-                "example": "does not contain"
-            },
-            "value": {
-                "type": "String",
-                "example": "some filter text"
-            }
-        }
-    },
-    "videoFiltered": "Videoclipul a fost filtrat din următoarele motive:",
-    "@videoFiltered": {
-        "description": "Label shown on video list when it is filtered out"
-    },
-    "videoFilterNoFilters": "Fără filtre video, atingeți butonul '+' de mai jos pentru a începe să adăugați filtre.",
-    "@videoFilterNoFilters": {
-        "description": "Label when there are no video filters"
-    },
-    "videoFilterTypeVideoTitle": "Titlul videoclipului",
-    "@videoFilterTypeVideoTitle": {
-        "description": "Label for video filter video title"
-    },
-    "videoFilterTypeChannelName": "Numele canalului",
-    "@videoFilterTypeChannelName": {
-        "description": "Label for video filter channel name"
-    },
-    "videoFilterTypeVideoLength": "Durata videoclipului (secunde)",
-    "@videoFilterTypeVideoLength": {
-        "description": "Label for video filter video length"
-    },
-    "videoFilterOperationContains": "Conține",
-    "@videoFilterOperationContains": {
-        "description": "Label for video filter operation Contains"
-    },
-    "videoFilterOperationNotContain": "Nu conține",
-    "@videoFilterOperationNotContain": {
-        "description": "Label for video filter operation Does not contain"
-    },
-    "videoFilterOperationLowerThan": "Mai mică decât",
-    "@videoFilterOperationLowerThan": {
-        "description": "Label for video filter operation Lower than"
-    },
-    "videoFilterHideAllFromChannel": "Filtrați toate videoclipurile din canal",
-    "@videoFilterHideAllFromChannel": {
-        "description": "Label for video filter switch to allow to hide all videos from a channel"
-    },
-    "lockFullScreenToLandscapeDescription": "Blochează orientarea ecranului complet pe baza formatului video, peisaj pentru video lat și portret pentru videoclipuri portret",
-    "@lockFullScreenToLandscapeDescription": {
-        "description": "Setting description for forcing video to landscape when in full screen"
-    },
-    "shareLinkWithTimestamp": "Adaugă timp de cod",
-    "@shareLinkWithTimestamp": {
-        "description": "asking user to share link along with timestamp"
-    },
-    "downloads": "Descărcări",
-    "@downloads": {
-        "description": "Downloads"
-    },
-    "videoAlreadyDownloaded": "Video deja descărcat",
-    "@videoAlreadyDownloaded": {
-        "description": "Message when a user tries to download a video he already has"
-    },
-    "videoDownloadStarted": "Descărcarea video a început",
-    "@videoDownloadStarted": {
-        "description": "Message when a video starts being downloaded"
-    },
-    "videoFailedDownloadRetry": "Descărcarea eșuată, atingeți pentru a reîncerca",
-    "@videoFailedDownloadRetry": {
-        "description": "Shown on download manager when a download fails and prompt the user to retry"
-    },
-    "download": "Descarcă",
-    "@download": {
-        "description": "A single download or CTA for downloading a video"
-    },
-    "noDownloadedVideos": "Fără videoclipuri descărcate, răsfoiți, apăsați lung pe un videoclip dintr-o listă, atingeți butonul de descărcare de pe un ecran video pentru a descărca",
-    "@noDownloadedVideos": {
-        "description": "Message showing when the user goes to the download screen but there are no offline videos."
-    },
-    "downloadsPlayAll": "Redă toate",
-    "@downloadsPlayAll": {
-        "description": "Button to play all downloaded videos"
+  "playlists": "Playlisturi",
+  "@playlists": {
+    "description": "User playlists"
+  },
+  "popular": "Populare",
+  "@popular": {
+    "description": "Popular videos title"
+  },
+  "trending": "Tendințe",
+  "@trending": {
+    "description": "Trending videos title"
+  },
+  "noVideoInPlayList": "Niciun videoclip în playlist",
+  "@noVideoInPlayList": {
+    "description": "When no videos in the playlist"
+  },
+  "removeFromPlayList": "Elimină din Playlist",
+  "@removeFromPlayList": {
+    "description": "Menu item description to show remove a video from a playlist"
+  },
+  "deletePlayListQ": "Șterge un playlist?",
+  "@deletePlayListQ": {
+    "description": "Ask user to delete a playlist"
+  },
+  "playListName": "Numele playlistului",
+  "@playListName": {
+    "description": "Place holder for new playlist name text field"
+  },
+  "playlistVisibility": "Vizibilitate",
+  "@playlistVisibility": {
+    "description": "Dropdown label for playlist visibility"
+  },
+  "privatePlaylist": "Privat",
+  "@privatePlaylist": {
+    "description": "Private playlist"
+  },
+  "cancel": "Anulează",
+  "@cancel": {
+    "description": "Cancel button label"
+  },
+  "add": "Adaugă",
+  "@add": {
+    "description": "Add button abel"
+  },
+  "unlistedPlaylist": "Nelistate",
+  "@unlistedPlaylist": {
+    "description": "Unlisted playlist"
+  },
+  "info": "Informații",
+  "@info": {
+    "description": "Info label"
+  },
+  "videos": "Videoclipuri",
+  "@videos": {
+    "description": "Videos label"
+  },
+  "streams": "Fluxuri",
+  "@streams": {
+    "description": "Streams label"
+  },
+  "latestVideos": "Ultimele videoclipuri",
+  "@latestVideos": {
+    "description": "Latest channel videos"
+  },
+  "subscribed": "Abonat",
+  "@subscribed": {
+    "description": "When the user is subscribed to a channel"
+  },
+  "subscribe": "Abonează-te",
+  "@subscribe": {
+    "description": "Label for user to subscribe to a channel"
+  },
+  "nSubscribers": "{count, select, no{fără abonați} other{{count} de abonați}}",
+  "@nSubscribers": {
+    "description": "number of subscribers",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
     }
+  },
+  "shareYoutubeLink": "Distribuie linkul YouTube",
+  "@shareYoutubeLink": {
+    "description": "asking user to share youtube link"
+  },
+  "shareInvidiousLink": "Distribuie link-ul Invidious",
+  "@shareInvidiousLink": {
+    "description": "asking user to share invidious link"
+  },
+  "ok": "OK",
+  "@ok": {
+    "description": "Ok"
+  },
+  "noChannels": "Nu există canale",
+  "@noChannels": {
+    "description": "when there are no channels to display"
+  },
+  "noPlaylists": "Nu există Playlisturi",
+  "@noPlaylists": {
+    "description": "when there are no playlists to display"
+  },
+  "couldntLoadVideo": "Nu s-a putut încărca videoclipul",
+  "@couldntLoadVideo": {
+    "description": "Message to display when a video can't be loaded"
+  },
+  "couldntFetchVideos": "Nu s-au putut prelua videoclipuri. Atingeți pentru a încerca din nou.",
+  "@couldntFetchVideos": {
+    "description": "Can't load bunch of videos, asking  user to try again"
+  },
+  "wizardIntro": "Selectați un server public sau adăugați unul propriu. (Poate fi modificat ulterior în setări)",
+  "@wizardIntro": {
+    "description": "Welcome message on frst time use"
+  },
+  "videoAddedToPlaylist": "Videoclip adăugat în playlist",
+  "@videoAddedToPlaylist": {
+    "description": "Pop up message when a video was added to a playlist"
+  },
+  "publicPlaylist": "Public",
+  "@publicPlaylist": {
+    "description": "Public playlist"
+  },
+  "selectPlaylist": "Selectează playlist",
+  "@selectPlaylist": {
+    "description": "Title when users wants to add a video to a playlist"
+  },
+  "loadMore": "Încărcați mai mult",
+  "@loadMore": {
+    "description": "CTA to load more"
+  },
+  "streamIsLive": "Live",
+  "@streamIsLive": {
+    "description": "Label when a video is a live stream"
+  },
+  "sponsorSkipped": "Sponsorul a sărit peste",
+  "@sponsorSkipped": {
+    "description": "When a sponsor segment is skipped thanks to sponsor block"
+  },
+  "selectBrowsingCountry": "Selectați țara de navigare",
+  "@selectBrowsingCountry": {
+    "description": "Select country for trending content"
+  },
+  "showOnStart": "Selectați ce să afișați când pornește aplicația",
+  "@showOnStart": {
+    "description": "Title of dialog asking which screen the users prefers to see"
+  },
+  "settings": "Setări",
+  "@settings": {
+    "description": "Settings title"
+  },
+  "browsing": "Navigare",
+  "@browsing": {
+    "description": "video browsing preferences"
+  },
+  "country": "Țară",
+  "@country": {
+    "description": "Country label"
+  },
+  "whenAppStartsShow": "Când aplicația pornește, arată…",
+  "@whenAppStartsShow": {
+    "description": "Setting title for selecting the screen to show on start"
+  },
+  "servers": "Servere",
+  "@servers": {
+    "description": "Server management settings category"
+  },
+  "manageServers": "Gestionați serverele",
+  "@manageServers": {
+    "description": "Settings to manage servers"
+  },
+  "currentServer": "În prezent se utilizează {current}",
+  "@currentServer": {
+    "description": "Which server the user is currently using",
+    "placeholders": {
+      "current": {
+        "type": "String"
+      }
+    }
+  },
+  "useSponsorBlock": "Utilizați SponsorBlock",
+  "@useSponsorBlock": {
+    "description": "label for sponsorblock checkbox"
+  },
+  "sponsorBlockDescription": "Săriți peste segmentele de sponsori trimise de comunitate",
+  "@sponsorBlockDescription": {
+    "description": "Sponsorblock setting description"
+  },
+  "about": "Despre",
+  "@about": {
+    "description": "About"
+  },
+  "name": "Nume",
+  "@name": {
+    "description": "NAme label"
+  },
+  "package": "Pachet",
+  "@package": {
+    "description": "package label"
+  },
+  "version": "Versiune",
+  "@version": {
+    "description": "version label"
+  },
+  "addServer": "Adăugare server",
+  "@addServer": {
+    "description": "Add server label"
+  },
+  "useThisServer": "Utilizați acest server",
+  "@useThisServer": {
+    "description": "Use this server label"
+  },
+  "build": "Construit",
+  "@build": {
+    "description": "build label"
+  },
+  "logIn": "Conectează-te",
+  "@logIn": {
+    "description": "CTA to log in to server"
+  },
+  "delete": "Șterge",
+  "@delete": {
+    "description": "Delete label"
+  },
+  "invalidInvidiousServer": "Server Invidious nevalid",
+  "@invalidInvidiousServer": {
+    "description": "Error when the user tries to add a server that is not a proper or reachable invidious server"
+  },
+  "yourServers": "Serverele tale",
+  "@yourServers": {
+    "description": "Your servers label"
+  },
+  "loggedIn": "Conectat",
+  "@loggedIn": {
+    "description": "Label to tell the user that he is logged in to the server"
+  },
+  "notLoggedIn": "Nu ești conectat",
+  "@notLoggedIn": {
+    "description": "Label when the user is not logged in to the server"
+  },
+  "addServerHelpText": "Folosiți butonul + pentru a vă adăuga propriile servere sau apăsați pe un server public și adăugați-l.",
+  "@addServerHelpText": {
+    "description": "label for when the user hasn't chosen a server yet"
+  },
+  "tapToAddServer": "Atinge pentru a adăuga server la lista",
+  "@tapToAddServer": {
+    "description": "public server description"
+  },
+  "useDynamicTheme": "Culori dinamice",
+  "@useDynamicTheme": {
+    "description": ""
+  },
+  "useDash": "Folosești DASH",
+  "@useDash": {
+    "description": "Label on video options if a user wants to switch to dash urls instead of the regular quality selection"
+  },
+  "videoUnlisted": "Nelistate",
+  "@videoUnlisted": {
+    "description": "Status of a video that is only accessible by link"
+  },
+  "videoIsFamilyFriendly": "Familie prietenoasă",
+  "@videoIsFamilyFriendly": {
+    "description": "Displayed only when a video is family friendly"
+  },
+  "error": "Eroare",
+  "@error": {},
+  "nVideos": "{count, plural, =0{Niciun videoclip} =1{1 videoclip} other{{count} videoclipuri}}",
+  "@nVideos": {
+    "description": "One or more videos",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "subscriptions": "Abonamente",
+  "@subscriptions": {
+    "description": "User subscriptions"
+  },
+  "irreversibleAction": "Această acțiune este ireversibilă",
+  "@irreversibleAction": {
+    "description": "Tell the user that the action cannot be undone"
+  },
+  "addPlayList": "Adaugă playlist",
+  "@addPlayList": {
+    "description": "Title for add playlist dialog"
+  },
+  "channels": "Canale",
+  "@channels": {
+    "description": "Channels label"
+  },
+  "comments": "Comentarii",
+  "@comments": {
+    "description": "Comments label"
+  },
+  "recommended": "Recomandat",
+  "@recommended": {
+    "description": "Recommended label"
+  },
+  "startUsingClipious": "Începeți să folosești Clipious",
+  "@startUsingClipious": {
+    "description": "button label to start using the app"
+  },
+  "errorAddingVideoToPlaylist": "Eroare la adăugarea videoclipului la playlist",
+  "@errorAddingVideoToPlaylist": {
+    "description": "Error while adding video to playlist"
+  },
+  "createNewPlaylist": "Creează un playlist nou",
+  "@createNewPlaylist": {
+    "description": "Button label to create a new playlist when the user wants to add a video to a playlist"
+  },
+  "nReplies": "{count, plural, =0{Niciun răspuns} =1{1 răspuns} other{{count} răspunsuri}}",
+  "@nReplies": {
+    "description": "number of replies to a comment",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "topSorting": "Top",
+  "@topSorting": {
+    "description": "Content sorting: top"
+  },
+  "newSorting": "Nou",
+  "@newSorting": {
+    "description": "Content sorting: new"
+  },
+  "publicServers": "Servere publice",
+  "@publicServers": {
+    "description": "Public servers label"
+  },
+  "loadingPublicServer": "Se încarcă servere publice",
+  "@loadingPublicServer": {
+    "description": "Message telling users the app is loading the list of public servers"
+  },
+  "publicServersError": "Nu s-a putut prelua lista de servere publice. Apasă pentru a reîncerca.",
+  "@publicServersError": {
+    "description": "Error message when trying to get public servers but it failed"
+  },
+  "appearance": "Aspect",
+  "@appearance": {
+    "description": "Settings category title"
+  },
+  "useDynamicThemeDescription": "Folosiți culorile Material You (disponibil numai pe Android 12+)",
+  "@useDynamicThemeDescription": {
+    "description": ""
+  },
+  "useDashDescription": "Streamingul adaptiv DASH poate fi uneori problematic, iar YouTube îl poate limita.",
+  "@useDashDescription": {
+    "description": "Description for dash in the settings screen"
+  },
+  "videoPlayer": "Video player",
+  "@videoPlayer": {
+    "description": "Title for video player related options"
+  },
+  "videoListed": "Public",
+  "@videoListed": {
+    "description": "Status of a publicly available video"
+  },
+  "tapToManage": "Atingeți pentru a gestiona",
+  "@tapToManage": {
+    "description": "Text shown below a server in the 'Your servers' list"
+  },
+  "authentication": "Autentificare",
+  "@authentication": {
+    "description": "Label for server settings related to authentications"
+  },
+  "tokenLoginDescription": "Mod recomandat de autentificare",
+  "@tokenLoginDescription": {
+    "description": "Recommended way to log in"
+  },
+  "cookieLoginDescription": "Utilizați această metodă dacă întâmpinați probleme cu autentificarea cu simbol",
+  "@cookieLoginDescription": {
+    "description": "Cookie log in description"
+  },
+  "logout": "Deconectează-te",
+  "@logout": {
+    "description": "CTA to logout of a server"
+  },
+  "username": "Nume de utilizator",
+  "@username": {
+    "description": "Username label for login to a server"
+  },
+  "wrongUsernamePassword": "Nume de utilizator sau parolă greșită",
+  "@wrongUsernamePassword": {
+    "description": "Error message when authentication fails"
+  },
+  "tokenLogin": "Autentificare cu token",
+  "@tokenLogin": {
+    "description": "Textto login to a server using the recommended way"
+  },
+  "cookieLogin": "Autentificare cu cookie",
+  "@cookieLogin": {
+    "description": "Text to login to a server using the cookie jar method"
+  },
+  "password": "Parolă",
+  "@password": {
+    "description": "Password label for login to a server"
+  },
+  "videoQueue": "Coadă video",
+  "@videoQueue": {
+    "description": "Label for button to display the video queue"
+  },
+  "addToQueueList": "Adaugă la coadă",
+  "@addToQueueList": {
+    "description": "Label on button to add a video to the queue list"
+  },
+  "addRecommendedToQueue": "Redare automată recomandată în continuare",
+  "@addRecommendedToQueue": {
+    "description": "Switch when playing a video to automatically add the recommended videos to the video queue"
+  },
+  "sponsorBlockCategorySponsor": "Sponsor",
+  "@sponsorBlockCategorySponsor": {
+    "description": "Sponsor block 'Sponsor' Category"
+  },
+  "sponsorBlockCategoryInteraction": "Memento de interacțiune (Abonare)",
+  "@sponsorBlockCategoryInteraction": {
+    "description": "Sponsor block 'Interaction' Category"
+  },
+  "sponsorBlockCategoryOutro": "Carduri finale/Credite",
+  "@sponsorBlockCategoryOutro": {
+    "description": "Outro block 'Outro' Category"
+  },
+  "sponsorBlockCategoryOutroDescription": "Credite sau când apar cardurile de final YouTube. Nu pentru concluzii cu informații.",
+  "@sponsorBlockCategoryOutroDescription": {
+    "description": "Outro block 'Outro' Category description"
+  },
+  "sponsorBlockCategoryPreview": "Previzualizare/Recapitulare",
+  "@sponsorBlockCategoryPreview": {
+    "description": "Sponsorblock 'Preview' Category"
+  },
+  "sponsorBlockCategoryFiller": "Tangenta de umplere/Glume",
+  "@sponsorBlockCategoryFiller": {
+    "description": "Sponsorblock 'Filler' Category"
+  },
+  "useProxy": "Videoclipuri Proxy",
+  "@useProxy": {
+    "description": "label for settings switch to proxy videos from server"
+  },
+  "sponsorBlockCategoryIntroDescription": "Un interval fără conținut real. Ar putea fi o pauză, un cadru static, o animație care se repetă. Aceasta nu ar trebui folosită pentru tranzițiile care conțin informații.",
+  "@sponsorBlockCategoryIntroDescription": {
+    "description": "Sponsorblock 'Intro' Category description"
+  },
+  "sponsorBlockCategoryMusicOffTopic": "Muzică: Secțiunea non-muzică",
+  "@sponsorBlockCategoryMusicOffTopic": {
+    "description": "Sponsorblock 'MusicOffTopic' Category"
+  },
+  "sponsorBlockSettingsQuickDescription": "Selectați ce tip de segmente să omiteți",
+  "@sponsorBlockSettingsQuickDescription": {
+    "description": "Small description of what the sponsor block settings do"
+  },
+  "sponsorBlockCategorySponsorDescription": "Promoție plătită, recomandări plătite și reclame directe. Nu pentru auto-promovare sau strigături gratuite către cauze/creatori/site-uri web/produse care le plac.",
+  "@sponsorBlockCategorySponsorDescription": {
+    "description": "Sponsor block 'Sponsor' Category description"
+  },
+  "sponsorBlockCategoryIntro": "Animație de pauză/Intro",
+  "@sponsorBlockCategoryIntro": {
+    "description": "Sponsorblock 'Intro' Category"
+  },
+  "sponsorBlockCategoryUnpaidSelfPromo": "Neplătită/Autopromovare",
+  "@sponsorBlockCategoryUnpaidSelfPromo": {
+    "description": "Sponsor block 'Unpaid/Self promotion' Category"
+  },
+  "sponsorBlockCategoryUnpaidSelfPromoDescription": "Similar cu „sponsor”, cu excepția promovării neplătite sau autopromovate. Aceasta include secțiuni despre mărfuri, donații sau informații despre cine a colaborat ",
+  "@sponsorBlockCategoryUnpaidSelfPromoDescription": {
+    "description": "Sponsor block 'Unpaid/Self promotion' Category description"
+  },
+  "sponsorBlockCategoryInteractionDescription": "Când există un scurt memento pentru a vă place, abonați-vă sau urmați-le în mijlocul conținutului. Dacă este lung sau despre ceva specific, ar trebui să fie sub promovare de sine în loc.",
+  "@sponsorBlockCategoryInteractionDescription": {
+    "description": "Sponsor block 'Interaction' Category description"
+  },
+  "sponsorBlockCategoryPreviewDescription": "Colecție de clipuri care arată ce se întâmplă în acest videoclip sau în alte videoclipuri dintr-o serie în care toate informațiile sunt repetate mai târziu în videoclip.",
+  "@sponsorBlockCategoryPreviewDescription": {
+    "description": "Sponsorblock 'Preview' Category description"
+  },
+  "sponsorBlockCategoryFillerDescription": "Scene tangențiale adăugate numai pentru umplutură sau umor care nu sunt necesare pentru a înțelege conținutul principal al videoclipului. Aceasta nu ar trebui să includă segmente care furnizează detalii contextuale sau de fond. Aceasta este o categorie foarte agresivă destinată atunci când nu sunteți în starea de spirit pentru \"distracție\".",
+  "@sponsorBlockCategoryFillerDescription": {
+    "description": "Sponsorblock 'Filler' Category description"
+  },
+  "sponsorBlockCategoryMusicOffTopicDescription": "Numai pentru utilizare în videoclipuri muzicale. Acest lucru ar trebui folosit numai pentru secțiuni de videoclipuri muzicale care nu sunt deja acoperite de altă categorie.",
+  "@sponsorBlockCategoryMusicOffTopicDescription": {
+    "description": "Only for use in music videos. This only should be used for sections of music videos that aren't already covered by another category."
+  },
+  "useProxyDescription": "Prin proxy fluxurile video de pe server, puteți ocoli blocările regionale sau blocarea ISP-ului YouTube",
+  "@useProxyDescription": {
+    "description": "Description for the use proxy settings"
+  },
+  "blackBackgroundDescription": "Pentru tema întunecată pe ecranul OLED",
+  "@blackBackgroundDescription": {
+    "description": "Description for dark background setting"
+  },
+  "audio": "Audio",
+  "@audio": {
+    "description": "Name TV ui audio settings"
+  },
+  "blackBackground": "Fundal negru",
+  "@blackBackground": {
+    "description": "Settings name for black background"
+  },
+  "pressDownToShowSettings": "Apasă în jos pentru a afișa setările",
+  "@pressDownToShowSettings": {
+    "description": "Instruction on how to show video settings when playing a video on TV"
+  },
+  "subtitles": "Subtitrări",
+  "@subtitles": {
+    "description": "Name of TV ui subtitles settings"
+  },
+  "playbackSpeed": "Viteza de redare",
+  "@playbackSpeed": {
+    "description": "Name of TV ui Playback speed"
+  },
+  "quality": "Calitate",
+  "@quality": {
+    "description": "Name of TV ui video settings"
+  },
+  "search": "Căutare",
+  "@search": {
+    "description": "search title"
+  },
+  "subtitleFontSize": "Dimensiunea fontului subtitrărilor",
+  "@subtitleFontSize": {
+    "description": "Settings label for the size of the subtitles"
+  },
+  "subtitleFontSizeDescription": "Schimbați dimensiunea subtitrarilor dacă este prea mică sau prea mare pe dispozitiv",
+  "@subtitleFontSizeDescription": {
+    "description": "Settings description for subtitle size"
+  },
+  "skipSslVerification": "Omiteți verificarea certificatului SSL",
+  "@skipSslVerification": {
+    "description": "Setting label to skip ssl certification verification"
+  },
+  "skipSslVerificationDescription": "Pentru utilizarea unui certificat SSL autosemnat sau când aveți probleme legate de SSL cu serverul dvs.",
+  "@skipSslVerificationDescription": {
+    "description": "Setting description for the skip ssl certification verification"
+  },
+  "themeBrightness": "Temă",
+  "@themeBrightness": {
+    "description": "Ask the user to user dark / light / system theme"
+  },
+  "themeLight": "Luminos",
+  "@themeLight": {
+    "description": "Light theme"
+  },
+  "themeDark": "Întunecat",
+  "@themeDark": {
+    "description": "Dark theme"
+  },
+  "followSystem": "Urmărește sistemul",
+  "@followSystem": {
+    "description": "Follow system label"
+  },
+  "requiresRestart": "Necesită repornirea aplicației",
+  "@requiresRestart": {
+    "description": "Requires app restart label"
+  },
+  "appLanguage": "Limba aplicației",
+  "@appLanguage": {
+    "description": "Select app language"
+  },
+  "returnYoutubeDislikeDescription": "Afișează displacerile estimate ale videoclipurilor utilizând API furnizat de returnyoutubedislike.com",
+  "@returnYoutubeDislikeDescription": {
+    "description": "ReturnYoutubeDislike setting description"
+  },
+  "autoplayVideoOnLoad": "Redarea automată a videoclipului la încărcare",
+  "@autoplayVideoOnLoad": {
+    "description": "Label for settings to enable autoplay when a video loads"
+  },
+  "autoplayVideoOnLoadDescription": "Începe redarea automată a videoclipului după ce s-a încărcat",
+  "@autoplayVideoOnLoadDescription": {
+    "description": "Description for the autoplay video on load setting"
+  },
+  "searchHistory": "Istoric de căutare",
+  "@searchHistory": {
+    "description": "Settings label for search history"
+  },
+  "searchHistoryDescription": "Setări pentru istoricul căutărilor",
+  "@searchHistoryDescription": {
+    "description": "Description for search history settings"
+  },
+  "enableSearchHistory": "Activați istoricul căutărilor",
+  "@enableSearchHistory": {
+    "description": "Settings label for enabling search history"
+  },
+  "searchHistoryLimit": "Limita istoricului căutărilor",
+  "@searchHistoryLimit": {
+    "description": "Settings label for search history limit"
+  },
+  "searchHistoryLimitDescription": "Setați câte căutări anterioare vor apărea în sugestii",
+  "@searchHistoryLimitDescription": {
+    "description": "Settings label for search history limit description"
+  },
+  "clearSearchHistory": "Ștergeți istoricul căutărilor",
+  "@clearSearchHistory": {
+    "description": "Settings label for clearing search history"
+  },
+  "shorts": "Shorts",
+  "@shorts": {
+    "description": "Youtube shorts"
+  },
+  "searchSortRating": "Evaluare",
+  "@searchSortRating": {
+    "description": "Sort search by rating"
+  },
+  "searchSortViewCount": "De vizionări",
+  "@searchSortViewCount": {
+    "description": "Sort search by view count"
+  },
+  "rememberSubtitleLanguage": "Reține limba subtitrării",
+  "@rememberSubtitleLanguage": {
+    "description": "Settings label for remembering subtitle language"
+  },
+  "searchSortRelevance": "Relevanţă",
+  "@searchSortRelevance": {
+    "description": "Sort search by relevance"
+  },
+  "searchSortUploadDate": "Data încărcării",
+  "@searchSortUploadDate": {
+    "description": "Sort search by upload date"
+  },
+  "rememberSubtitleLanguageDescription": "Setați automat subtitrările în ultima limbă selectată, dacă este disponibilă",
+  "@rememberSubtitleLanguageDescription": {
+    "description": "Settings description for remembering subtitle language"
+  },
+  "redirectInvidiousLink": "Partajați linkul de redirecționare Invidious",
+  "@redirectInvidiousLink": {
+    "description": "asking user to share redirecting invidious link"
+  },
+  "fillFullscreen": "Maximizați videoclipul pentru a se potrivi cu ecranul",
+  "@fillFullscreen": {
+    "description": "Title to maximize video to fit screen"
+  },
+  "videoFilters": "Filtre video",
+  "@videoFilters": {
+    "description": "Title for video filter settings"
+  },
+  "optional": "opțional",
+  "@optional": {
+    "description": "Optional label"
+  },
+  "videoFilterTapToReveal": "Atingeți pentru a dezvălui",
+  "@videoFilterTapToReveal": {
+    "description": "Label to tell user to tap to show a filtered video"
+  },
+  "channel": "Canal",
+  "@channel": {
+    "description": "A single channel"
+  },
+  "rememberPlaybackSpeedDescription": "Setați automat viteza de redare la ultima viteză selectată",
+  "@rememberPlaybackSpeedDescription": {
+    "description": "Settings description for remembering playback speed"
+  },
+  "videoFilterHideDescription": "În mod prestabilit, videoclipurile filtrate nu sunt ascunse, ci afișate ca fiind obscucate cu motivul (motivele) pentru care au fost filtrate. Această setare elimină videoclipurile filtrate din liste.",
+  "@videoFilterHideDescription": {
+    "description": ""
+  },
+  "videoFilterOperationHigherThan": "Mai mare decât",
+  "@videoFilterOperationHigherThan": {
+    "description": "Label for video filter operation Higher than"
+  },
+  "lockFullScreenToLandscape": "Blocați orientarea pe întregul ecran în raport cu aspectul video",
+  "@lockFullScreenToLandscape": {
+    "description": "Title to force full screen to landscape"
+  },
+  "fillFullscreenDescription": "Reglează videoclipul pentru a umple întregul ecran în modul peisaj",
+  "@fillFullscreenDescription": {
+    "description": "Setting description for filling video to screen in landscape"
+  },
+  "videoAddedToQueue": "Videoclip adăugat la coadă",
+  "@videoAddedToQueue": {
+    "description": "Pop up message when a video was added at the end of the video queue"
+  },
+  "videoFilterType": "Tip",
+  "@videoFilterType": {
+    "description": "Label for filter type"
+  },
+  "videoFilterValue": "Valoare",
+  "@videoFilterValue": {
+    "description": "Label for filter value"
+  },
+  "videoFilterAllChannels": "Toate canalele",
+  "@videoFilterAllChannels": {
+    "description": "Title for the sections that applies to all channels"
+  },
+  "videoFilterEditDescription": "Selectați un canal opțional, un tip de filtru, o operațiune și o valoare pentru a filtra videoclipurile OUT din liste. Exemplu, tastați: numele videoclipului, operațiunea: conține, valoare: testul va EXCLUDE toate videoclipurile cu cuvântul „test” în numele lor.",
+  "@videoFilterEditDescription": {
+    "description": "Descriptive test for video filter set up"
+  },
+  "appLogs": "Jurnalele aplicației",
+  "@appLogs": {
+    "description": "Title for settings that leads to application logs"
+  },
+  "videoFilterHide": "Ascundeți videoclipurile filtrate",
+  "@videoFilterHide": {
+    "description": "Label for settings to hide filtered videos"
+  },
+  "rememberPlaybackSpeed": "Reținere viteza de redare",
+  "@rememberPlaybackSpeed": {
+    "description": "Setting label for remembering playback speed"
+  },
+  "addToPlaylist": "Adaugă la playlist",
+  "@addToPlaylist": {
+    "description": "Label to add a video to a playlist"
+  },
+  "playNext": "Redă următorul",
+  "@playNext": {
+    "description": "Label to play the video after the current one."
+  },
+  "playNextAddedToQueue": "Video va rula în continuare",
+  "@playNextAddedToQueue": {
+    "description": "Pop up message to confirm that the video has been properly set to play next"
+  },
+  "appLogsDescription": "Obține jurnale cu ceea ce se întâmplă în aplicație, poate fi util pentru a raporta probleme",
+  "@appLogsDescription": {
+    "description": "Description of the app log settings"
+  },
+  "logsCopied": "Jurnalele copiate în clipboard",
+  "@logsCopied": {
+    "description": "Message to tell user that logs have been copied to the clipboard"
+  },
+  "copyToClipBoard": "Copiați în clipboard",
+  "@copyToClipBoard": {
+    "description": "Text to copy something to clipboard"
+  },
+  "videoFiltersExplanation": "Ascundeți sau estompați videoclipurile din toate fluxurile video din aplicație pe baza filtrelor definite mai jos. Acest lucru vă permite, de exemplu, să ascundeți spoilerele sportive sau să ascundeți scurtmetraje de pe un anumit canal.",
+  "@videoFiltersExplanation": {
+    "description": "Description on how filter work"
+  },
+  "videoFiltersSettingTileDescriptions": "Definiți reguli pentru a filtra videoclipurile",
+  "@videoFiltersSettingTileDescriptions": {
+    "description": "Description for the main settings page"
+  },
+  "addVideoFilter": "Creați un filtru",
+  "@addVideoFilter": {
+    "description": "Title when creating a new filter"
+  },
+  "editVideoFilter": "Editați filtrul",
+  "@editVideoFilter": {
+    "description": "Title when editting a filter"
+  },
+  "videoFilterOperation": "Operațiune",
+  "@videoFilterOperation": {
+    "description": "Label for filter operation"
+  },
+  "save": "Salvați",
+  "@save": {
+    "description": "Text for save action"
+  },
+  "videoFilterHideLabel": "Ascunde",
+  "@videoFilterHideLabel": {
+    "description": "Label to hide videos"
+  },
+  "videoFilterFilterLabel": "Obfuscate",
+  "@videoFilterFilterLabel": {
+    "description": "Label to filter videos"
+  },
+  "videoFilterDescriptionString": "{hideOrFilter} videoclipuri în care {type} {operation} ''{value}''.",
+  "@videoFilterDescriptionString": {
+    "description": "Human readable description of a video filter, in this case is it for string comparison, example: Hide videos where the name of the video does not contain the following string 'test' (Do not translate text between { })",
+    "placeholders": {
+      "hideOrFilter": {
+        "type": "String",
+        "example": "Hide"
+      },
+      "type": {
+        "type": "String",
+        "example": "video title"
+      },
+      "operation": {
+        "type": "String",
+        "example": "does not contain"
+      },
+      "value": {
+        "type": "String",
+        "example": "some filter text"
+      }
+    }
+  },
+  "videoFiltered": "Videoclipul a fost filtrat din următoarele motive:",
+  "@videoFiltered": {
+    "description": "Label shown on video list when it is filtered out"
+  },
+  "videoFilterNoFilters": "Fără filtre video, atingeți butonul '+' de mai jos pentru a începe să adăugați filtre.",
+  "@videoFilterNoFilters": {
+    "description": "Label when there are no video filters"
+  },
+  "videoFilterTypeVideoTitle": "Titlul videoclipului",
+  "@videoFilterTypeVideoTitle": {
+    "description": "Label for video filter video title"
+  },
+  "videoFilterTypeChannelName": "Numele canalului",
+  "@videoFilterTypeChannelName": {
+    "description": "Label for video filter channel name"
+  },
+  "videoFilterTypeVideoLength": "Durata videoclipului (secunde)",
+  "@videoFilterTypeVideoLength": {
+    "description": "Label for video filter video length"
+  },
+  "videoFilterOperationContains": "Conține",
+  "@videoFilterOperationContains": {
+    "description": "Label for video filter operation Contains"
+  },
+  "videoFilterOperationNotContain": "Nu conține",
+  "@videoFilterOperationNotContain": {
+    "description": "Label for video filter operation Does not contain"
+  },
+  "videoFilterOperationLowerThan": "Mai mică decât",
+  "@videoFilterOperationLowerThan": {
+    "description": "Label for video filter operation Lower than"
+  },
+  "videoFilterHideAllFromChannel": "Filtrați toate videoclipurile din canal",
+  "@videoFilterHideAllFromChannel": {
+    "description": "Label for video filter switch to allow to hide all videos from a channel"
+  },
+  "lockFullScreenToLandscapeDescription": "Blochează orientarea ecranului complet pe baza formatului video, peisaj pentru video lat și portret pentru videoclipuri portret",
+  "@lockFullScreenToLandscapeDescription": {
+    "description": "Setting description for forcing video to landscape when in full screen"
+  },
+  "shareLinkWithTimestamp": "Adaugă timp de cod",
+  "@shareLinkWithTimestamp": {
+    "description": "asking user to share link along with timestamp"
+  },
+  "downloads": "Descărcări",
+  "@downloads": {
+    "description": "Downloads"
+  },
+  "videoAlreadyDownloaded": "Video deja descărcat",
+  "@videoAlreadyDownloaded": {
+    "description": "Message when a user tries to download a video he already has"
+  },
+  "videoDownloadStarted": "Descărcarea video a început",
+  "@videoDownloadStarted": {
+    "description": "Message when a video starts being downloaded"
+  },
+  "videoFailedDownloadRetry": "Descărcarea eșuată, atingeți pentru a reîncerca",
+  "@videoFailedDownloadRetry": {
+    "description": "Shown on download manager when a download fails and prompt the user to retry"
+  },
+  "download": "Descarcă",
+  "@download": {
+    "description": "A single download or CTA for downloading a video"
+  },
+  "noDownloadedVideos": "Fără videoclipuri descărcate, răsfoiți, apăsați lung pe un videoclip dintr-o listă, atingeți butonul de descărcare de pe un ecran video pentru a descărca",
+  "@noDownloadedVideos": {
+    "description": "Message showing when the user goes to the download screen but there are no offline videos."
+  },
+  "downloadsPlayAll": "Redă toate",
+  "@downloadsPlayAll": {
+    "description": "Button to play all downloaded videos"
+  },
+  "unSubscribeQuestion": "Dezabonezi?",
+  "@unSubscribeQuestion": {
+    "description": "Title for dialog if a user wants to unsubscribe in the subscribtion management screen"
+  },
+  "home": "Acasă",
+  "@home": {
+    "description": "Label for Home browsing tab"
+  },
+  "library": "Bibliotecă",
+  "@library": {
+    "description": "Name for user library"
+  },
+  "notifications": "Notificării",
+  "@notifications": {
+    "description": "Notification settings title"
+  },
+  "videoDownloadAudioOnly": "Doar audio",
+  "@videoDownloadAudioOnly": {
+    "description": "Label for toggle to download audio only "
+  },
+  "share": "Trimite",
+  "@share": {
+    "description": "asking user if to share"
+  },
+  "searchSortBy": "Sortează după",
+  "@searchSortBy": {
+    "description": "Search sorting option"
+  },
+  "clearHistoryQuestion": "Ștergeți istoricul?",
+  "@clearHistoryQuestion": {},
+  "searchUploadDate": "Data de încărcare",
+  "@searchUploadDate": {
+    "description": "Filter search result by upload date"
+  },
+  "searchDurationMedium": "Mediu (4-20 minute)",
+  "@searchDurationMedium": {
+    "description": "Search for medium videos only"
+  },
+  "videoFilterStartTime": "Începutul timpului",
+  "@videoFilterStartTime": {
+    "description": "Title for filter start time"
+  },
+  "videoFilterEndTime": "Sfârșitul timpului",
+  "@videoFilterEndTime": {
+    "description": "Title for filter end time"
+  },
+  "subscriptionNotification": "Notificările prin abonamente",
+  "@subscriptionNotification": {
+    "description": "Title for subscriptions notifications"
+  },
+  "searchUploadDateToday": "Astăzi",
+  "@searchUploadDateToday": {
+    "description": "Search for uploaded today"
+  }
 }
