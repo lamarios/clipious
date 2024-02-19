@@ -1312,5 +1312,21 @@
   "searchUploadDate": "Дата загрузки",
   "@searchUploadDate": {
     "description": "Filter search result by upload date"
+  },
+  "feedbackScreenshotError": "Ошибка при загрузке скриншота в Imgur",
+  "@feedbackScreenshotError": {
+    "description": "Title for dialog if something goes wrong while uploading feedback screenshot"
+  },
+  "submitFeedbackDescription": "Нашли ошибку или у вас есть предложение? Используйте этот инструмент, чтобы сделать скриншот приложения, добавить аннотации и отправить отзыв",
+  "@submitFeedbackDescription": {
+    "description": "Setting tile descriptions for feedback submission"
+  },
+  "submitFeedback": "Отправить отзыв",
+  "@submitFeedback": {
+    "description": "Title for settings to submit feed back through the app"
+  },
+  "feedbackDisclaimer": "Чтобы отправить отзыв, вам понадобится учётная запись GitHub, и ваш скриншот будет отправлен в Imgur анонимно.",
+  "@feedbackDisclaimer": {
+    "description": "Content of dialog shown before submitting feedback to make sure the user is ok whith where the data is going"
   }
 }
