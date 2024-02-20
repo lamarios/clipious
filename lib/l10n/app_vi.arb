@@ -1,1 +1,219 @@
-{}
+{
+  "popular": "Phổ biến",
+  "@popular": {
+    "description": "Popular videos title"
+  },
+  "trending": "Xu hướng",
+  "@trending": {
+    "description": "Trending videos title"
+  },
+  "info": "Thông tin",
+  "@info": {
+    "description": "Info label"
+  },
+  "subscribed": "Đăng ký",
+  "@subscribed": {
+    "description": "When the user is subscribed to a channel"
+  },
+  "shareInvidiousLink": "Chia sẽ liên kết gây khó chịu",
+  "@shareInvidiousLink": {
+    "description": "asking user to share invidious link"
+  },
+  "shareLinkWithTimestamp": "Thêm dấu thời gian",
+  "@shareLinkWithTimestamp": {
+    "description": "asking user to share link along with timestamp"
+  },
+  "ok": "Đồng ý",
+  "@ok": {
+    "description": "Ok"
+  },
+  "noChannels": "Không có kênh",
+  "@noChannels": {
+    "description": "when there are no channels to display"
+  },
+  "channels": "Các kênh",
+  "@channels": {
+    "description": "Channels label"
+  },
+  "couldntLoadVideo": "Không tải được video",
+  "@couldntLoadVideo": {
+    "description": "Message to display when a video can't be loaded"
+  },
+  "comments": "Bình luận",
+  "@comments": {
+    "description": "Comments label"
+  },
+  "startUsingClipious": "Bắt đầu sử dụng Clipious",
+  "@startUsingClipious": {
+    "description": "button label to start using the app"
+  },
+  "videoAddedToPlaylist": "Đã thêm video vào danh sách",
+  "@videoAddedToPlaylist": {
+    "description": "Pop up message when a video was added to a playlist"
+  },
+  "videoAddedToQueue": "Đã thêm video vào hàng đợi",
+  "@videoAddedToQueue": {
+    "description": "Pop up message when a video was added at the end of the video queue"
+  },
+  "errorAddingVideoToPlaylist": "Có lỗi khi thêm video vào danh sách",
+  "@errorAddingVideoToPlaylist": {
+    "description": "Error while adding video to playlist"
+  },
+  "itemlistErrorGeneric": "Không thể tải dữ liệu",
+  "@itemlistErrorGeneric": {
+    "description": "Error showing when the data can't be fetch"
+  },
+  "selectPlaylist": "Chọn danh sách phát",
+  "@selectPlaylist": {
+    "description": "Title when users wants to add a video to a playlist"
+  },
+  "sponsorSkipped": "Nhà tài trợ đã bỏ qua",
+  "@sponsorSkipped": {
+    "description": "When a sponsor segment is skipped thanks to sponsor block"
+  },
+  "selectBrowsingCountry": "Chọn quốc gia duyệt",
+  "@selectBrowsingCountry": {
+    "description": "Select country for trending content"
+  },
+  "showOnStart": "Chọn nội dung sẽ hiển thị khi ứng dụng khởi động",
+  "@showOnStart": {
+    "description": "Title of dialog asking which screen the users prefers to see"
+  },
+  "settings": "Cài đặt",
+  "@settings": {
+    "description": "Settings title"
+  },
+  "subscriptions": "Đăng ký",
+  "@subscriptions": {
+    "description": "User subscriptions"
+  },
+  "playlists": "Danh sách phát",
+  "@playlists": {
+    "description": "User playlists"
+  },
+  "noVideoInPlayList": "Không có video trong danh sách",
+  "@noVideoInPlayList": {
+    "description": "When no videos in the playlist"
+  },
+  "irreversibleAction": "Hành động không thể khôi phục",
+  "@irreversibleAction": {
+    "description": "Tell the user that the action cannot be undone"
+  },
+  "playListName": "Tên danh sách",
+  "@playListName": {
+    "description": "Place holder for new playlist name text field"
+  },
+  "unlistedPlaylist": "Chưa liệt kê",
+  "@unlistedPlaylist": {
+    "description": "Unlisted playlist"
+  },
+  "removeFromPlayList": "Xóa khỏi danh sách",
+  "@removeFromPlayList": {
+    "description": "Menu item description to show remove a video from a playlist"
+  },
+  "playlistVisibility": "Hiển thị",
+  "@playlistVisibility": {
+    "description": "Dropdown label for playlist visibility"
+  },
+  "deletePlayListQ": "Xóa danh sách?",
+  "@deletePlayListQ": {
+    "description": "Ask user to delete a playlist"
+  },
+  "publicPlaylist": "Công cộng",
+  "@publicPlaylist": {
+    "description": "Public playlist"
+  },
+  "add": "Thêm",
+  "@add": {
+    "description": "Add button abel"
+  },
+  "addPlayList": "Thêm danh sách",
+  "@addPlayList": {
+    "description": "Title for add playlist dialog"
+  },
+  "privatePlaylist": "Riêng tư",
+  "@privatePlaylist": {
+    "description": "Private playlist"
+  },
+  "videos": "Video",
+  "@videos": {
+    "description": "Videos label"
+  },
+  "streams": "Truyền",
+  "@streams": {
+    "description": "Streams label"
+  },
+  "latestVideos": "Video mới nhất",
+  "@latestVideos": {
+    "description": "Latest channel videos"
+  },
+  "subscribe": "Đăng ký",
+  "@subscribe": {
+    "description": "Label for user to subscribe to a channel"
+  },
+  "cancel": "Hủy",
+  "@cancel": {
+    "description": "Cancel button label"
+  },
+  "nSubscribers": "{đếm, chọn, không{Không Đăng Ký} Khác{{đếm} đăng ký}}",
+  "@nSubscribers": {
+    "description": "number of subscribers",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "share": "Chia sẽ",
+  "@share": {
+    "description": "asking user if to share"
+  },
+  "noPlaylists": "Không có danh sách",
+  "@noPlaylists": {
+    "description": "when there are no playlists to display"
+  },
+  "recommended": "Đề xuất",
+  "@recommended": {
+    "description": "Recommended label"
+  },
+  "shareYoutubeLink": "Chia sẽ liên kết Youtube",
+  "@shareYoutubeLink": {
+    "description": "asking user to share youtube link"
+  },
+  "couldntFetchVideos": "Không thể tải video, nhấn để thử lại.",
+  "@couldntFetchVideos": {
+    "description": "Can't load bunch of videos, asking  user to try again"
+  },
+  "redirectInvidiousLink": "Chia sẻ liên kết chuyển hướng gây khó chịu",
+  "@redirectInvidiousLink": {
+    "description": "asking user to share redirecting invidious link"
+  },
+  "wizardIntro": "Chọn một máy chủ công cộng hoặc thêm máy chủ của riêng bạn. (Có thể thay đổi sau trong cài đặt)",
+  "@wizardIntro": {
+    "description": "Welcome message on frst time use"
+  },
+  "itemListErrorInvalidScope": "Bạn không có quyền xem nội dung này, nếu bạn đăng nhập bằng phương thức mã thông báo, hãy thử đăng xuất và đăng nhập lại",
+  "@itemListErrorInvalidScope": {
+    "description": "Error when the user doesn't have the proper scope to its current token"
+  },
+  "createNewPlaylist": "Tạo danh sách phát mới",
+  "@createNewPlaylist": {
+    "description": "Button label to create a new playlist when the user wants to add a video to a playlist"
+  },
+  "topSorting": "Trên cùng",
+  "@topSorting": {
+    "description": "Content sorting: top"
+  },
+  "loadMore": "Tải thêm",
+  "@loadMore": {
+    "description": "CTA to load more"
+  },
+  "newSorting": "Mới",
+  "@newSorting": {
+    "description": "Content sorting: new"
+  },
+  "streamIsLive": "Trực tiếp",
+  "@streamIsLive": {
+    "description": "Label when a video is a live stream"
+  }
+}
