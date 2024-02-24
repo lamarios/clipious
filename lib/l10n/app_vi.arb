@@ -215,5 +215,17 @@
   "streamIsLive": "Trực tiếp",
   "@streamIsLive": {
     "description": "Label when a video is a live stream"
+  },
+  "browsing": "Duyệt",
+  "@browsing": {
+    "description": "video browsing preferences"
+  },
+  "country": "Quốc gia",
+  "@country": {
+    "description": "Country label"
+  },
+  "whenAppStartsShow": "Khi mở ứng dụng, hiển thị…",
+  "@whenAppStartsShow": {
+    "description": "Setting title for selecting the screen to show on start"
   }
 }
