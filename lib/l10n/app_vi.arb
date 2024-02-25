@@ -11,7 +11,7 @@
   "@info": {
     "description": "Info label"
   },
-  "subscribed": "Đăng ký",
+  "subscribed": "Đã đăng ký",
   "@subscribed": {
     "description": "When the user is subscribed to a channel"
   },
@@ -91,7 +91,7 @@
   "@playlists": {
     "description": "User playlists"
   },
-  "noVideoInPlayList": "Không có video trong danh sách",
+  "noVideoInPlayList": "Không có video trong danh sách phát",
   "@noVideoInPlayList": {
     "description": "When no videos in the playlist"
   },
@@ -99,7 +99,7 @@
   "@irreversibleAction": {
     "description": "Tell the user that the action cannot be undone"
   },
-  "playListName": "Tên danh sách",
+  "playListName": "Tên danh sách phát",
   "@playListName": {
     "description": "Place holder for new playlist name text field"
   },
@@ -107,7 +107,7 @@
   "@unlistedPlaylist": {
     "description": "Unlisted playlist"
   },
-  "removeFromPlayList": "Xóa khỏi danh sách",
+  "removeFromPlayList": "Xóa khỏi danh sách phát",
   "@removeFromPlayList": {
     "description": "Menu item description to show remove a video from a playlist"
   },
@@ -115,7 +115,7 @@
   "@playlistVisibility": {
     "description": "Dropdown label for playlist visibility"
   },
-  "deletePlayListQ": "Xóa danh sách?",
+  "deletePlayListQ": "Xóa danh sách phát?",
   "@deletePlayListQ": {
     "description": "Ask user to delete a playlist"
   },
@@ -127,7 +127,7 @@
   "@add": {
     "description": "Add button abel"
   },
-  "addPlayList": "Thêm danh sách",
+  "addPlayList": "Thêm danh sách phát",
   "@addPlayList": {
     "description": "Title for add playlist dialog"
   },
@@ -135,7 +135,7 @@
   "@privatePlaylist": {
     "description": "Private playlist"
   },
-  "videos": "Video",
+  "videos": "Phim",
   "@videos": {
     "description": "Videos label"
   },
@@ -155,7 +155,7 @@
   "@cancel": {
     "description": "Cancel button label"
   },
-  "nSubscribers": "{đếm, chọn, không{Không Đăng Ký} Khác{{đếm} đăng ký}}",
+  "nSubscribers": "",
   "@nSubscribers": {
     "description": "number of subscribers",
     "placeholders": {
@@ -164,11 +164,11 @@
       }
     }
   },
-  "share": "Chia sẽ",
+  "share": "Chia sẻ",
   "@share": {
     "description": "asking user if to share"
   },
-  "noPlaylists": "Không có danh sách",
+  "noPlaylists": "Không có danh sách phát",
   "@noPlaylists": {
     "description": "when there are no playlists to display"
   },
@@ -227,5 +227,9 @@
   "whenAppStartsShow": "Khi mở ứng dụng, hiển thị…",
   "@whenAppStartsShow": {
     "description": "Setting title for selecting the screen to show on start"
+  },
+  "servers": "Máy chủ",
+  "@servers": {
+    "description": "Server management settings category"
   }
 }
