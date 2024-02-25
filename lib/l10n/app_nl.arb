@@ -846,5 +846,75 @@
   "skipSslVerification": "TLS-certificaat­verificatie overslaan",
   "@skipSslVerification": {
     "description": "Setting label to skip ssl certification verification"
+  },
+  "couldntLoadVideo": "Kan video niet laden",
+  "@couldntLoadVideo": {
+    "description": "Message to display when a video can't be loaded"
+  },
+  "tokenLoginDescription": "Aanbevolen inlog­methode",
+  "@tokenLoginDescription": {
+    "description": "Recommended way to log in"
+  },
+  "pressDownToShowSettings": "Druk op ⬇️ om instellingen te tonen",
+  "@pressDownToShowSettings": {
+    "description": "Instruction on how to show video settings when playing a video on TV"
+  },
+  "videoFilterHideAllFromChannel": "Alle video's van kanaal verbergen",
+  "@videoFilterHideAllFromChannel": {
+    "description": "Label for video filter switch to allow to hide all videos from a channel"
+  },
+  "foregroundServiceNotificationTitle": "Video­monitoring",
+  "@foregroundServiceNotificationTitle": {
+    "description": "Title for the foreground service running notification when the user wants to receive notifications"
+  },
+  "whenAppStartsShow": "Als de app start, toon…",
+  "@whenAppStartsShow": {
+    "description": "Setting title for selecting the screen to show on start"
+  },
+  "deletePlaylistNotificationTitle": "Afspeellijst­melding verwijderen?",
+  "@deletePlaylistNotificationTitle": {
+    "description": "Title for dialog to confirm whether to delete playlist notifications"
+  },
+  "fullscreenOnLandscape": "Volledig scherm bij landschaps­modus",
+  "@fullscreenOnLandscape": {
+    "description": "Setting title to enable full screen on landscape orientation"
+  },
+  "channelNotificationTitle": "Nieuwe video's van {channel}",
+  "@channelNotificationTitle": {
+    "description": "Title for the channel notifications when there are new videos",
+    "placeholders": {
+      "channel": {
+        "type": "String",
+        "example": "MKBHD"
+      }
+    }
+  },
+  "askForDisableBatteryOptimizationTitle": "Batterij­optimalisatie uitschakelen vereist",
+  "@askForDisableBatteryOptimizationTitle": {
+    "description": "Title for the dialog asking the user to turn off disabling battery optimization when turning on notifications"
+  },
+  "deleteChannelNotificationTitle": "Kanaal­melding verwijderen?",
+  "@deleteChannelNotificationTitle": {
+    "description": "Title for dialog to confirm whether to delete channel notifications"
+  },
+  "notificationFrequencySliderLabel": "{hours, select, 24{1 dag} other{{hours} uur}}",
+  "@notificationFrequencySliderLabel": {
+    "description": "Short form for a number of hours going up to 1 day",
+    "hours": {
+      "type": "num",
+      "format": "compact"
+    }
+  },
+  "notificationFrequencySettingsTitle": "Controle­frequentie voor nieuwe video's",
+  "@notificationFrequencySettingsTitle": {
+    "description": "Title for frequency settings"
+  },
+  "serverIsNotReachable": "Server is onbereikbaar",
+  "@serverIsNotReachable": {
+    "description": "Title for dialog when adding a server that is not reachable"
+  },
+  "autoplayVideoOnLoad": "Video automatisch afspelen bij laden",
+  "@autoplayVideoOnLoad": {
+    "description": "Label for settings to enable autoplay when a video loads"
   }
 }
