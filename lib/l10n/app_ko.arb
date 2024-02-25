@@ -1,1 +1,221 @@
-{}
+{
+  "subscriptions": "구독",
+  "@subscriptions": {
+    "description": "User subscriptions"
+  },
+  "playlists": "재생목록",
+  "@playlists": {
+    "description": "User playlists"
+  },
+  "noVideoInPlayList": "재생목록에 동영상이 없습니다",
+  "@noVideoInPlayList": {
+    "description": "When no videos in the playlist"
+  },
+  "removeFromPlayList": "재생목록에서 제거",
+  "@removeFromPlayList": {
+    "description": "Menu item description to show remove a video from a playlist"
+  },
+  "playlistVisibility": "공개 상태",
+  "@playlistVisibility": {
+    "description": "Dropdown label for playlist visibility"
+  },
+  "publicPlaylist": "공개",
+  "@publicPlaylist": {
+    "description": "Public playlist"
+  },
+  "privatePlaylist": "비공개",
+  "@privatePlaylist": {
+    "description": "Private playlist"
+  },
+  "cancel": "취소",
+  "@cancel": {
+    "description": "Cancel button label"
+  },
+  "add": "추가",
+  "@add": {
+    "description": "Add button abel"
+  },
+  "videos": "동영상",
+  "@videos": {
+    "description": "Videos label"
+  },
+  "streams": "스트리밍",
+  "@streams": {
+    "description": "Streams label"
+  },
+  "latestVideos": "최신 영상",
+  "@latestVideos": {
+    "description": "Latest channel videos"
+  },
+  "subscribed": "구독함",
+  "@subscribed": {
+    "description": "When the user is subscribed to a channel"
+  },
+  "nSubscribers": "{count, select, no{구독자 없음} other{구독자 {count} 명}}",
+  "@nSubscribers": {
+    "description": "number of subscribers",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "share": "공유",
+  "@share": {
+    "description": "asking user if to share"
+  },
+  "shareYoutubeLink": "YouTube 링크 공유",
+  "@shareYoutubeLink": {
+    "description": "asking user to share youtube link"
+  },
+  "redirectInvidiousLink": "Invidious 리다이렉션 링크 공유",
+  "@redirectInvidiousLink": {
+    "description": "asking user to share redirecting invidious link"
+  },
+  "shareLinkWithTimestamp": "타임스탬프 추가",
+  "@shareLinkWithTimestamp": {
+    "description": "asking user to share link along with timestamp"
+  },
+  "ok": "OK",
+  "@ok": {
+    "description": "Ok"
+  },
+  "noChannels": "채널 없음",
+  "@noChannels": {
+    "description": "when there are no channels to display"
+  },
+  "noPlaylists": "재생목록 없음",
+  "@noPlaylists": {
+    "description": "when there are no playlists to display"
+  },
+  "channels": "채널",
+  "@channels": {
+    "description": "Channels label"
+  },
+  "couldntLoadVideo": "동영상을 불러올 수 없습니다",
+  "@couldntLoadVideo": {
+    "description": "Message to display when a video can't be loaded"
+  },
+  "comments": "댓글",
+  "@comments": {
+    "description": "Comments label"
+  },
+  "recommended": "추천",
+  "@recommended": {
+    "description": "Recommended label"
+  },
+  "couldntFetchVideos": "동영상을 불러올 수 없습니다. 다시 시도하려면 탭하세요.",
+  "@couldntFetchVideos": {
+    "description": "Can't load bunch of videos, asking  user to try again"
+  },
+  "startUsingClipious": "Clipious 시작하기",
+  "@startUsingClipious": {
+    "description": "button label to start using the app"
+  },
+  "errorAddingVideoToPlaylist": "재생목록에 동영상을 추가하는 중에 오류가 발생했습니다",
+  "@errorAddingVideoToPlaylist": {
+    "description": "Error while adding video to playlist"
+  },
+  "videoAddedToQueue": "동영상을 대기열에 추가했습니다",
+  "@videoAddedToQueue": {
+    "description": "Pop up message when a video was added at the end of the video queue"
+  },
+  "itemlistErrorGeneric": "데이터를 가져올 수 없습니다",
+  "@itemlistErrorGeneric": {
+    "description": "Error showing when the data can't be fetch"
+  },
+  "itemListErrorInvalidScope": "이 내용을 볼 수 있는 권한이 없습니다. 토큰을 사용하여 로그인한 경우 로그아웃했다가 다시 로그인해 보세요.",
+  "@itemListErrorInvalidScope": {
+    "description": "Error when the user doesn't have the proper scope to its current token"
+  },
+  "selectPlaylist": "재생목록 선택",
+  "@selectPlaylist": {
+    "description": "Title when users wants to add a video to a playlist"
+  },
+  "loadMore": "더 로드하기",
+  "@loadMore": {
+    "description": "CTA to load more"
+  },
+  "topSorting": "인기순",
+  "@topSorting": {
+    "description": "Content sorting: top"
+  },
+  "sponsorSkipped": "스폰서를 건너뛰었습니다",
+  "@sponsorSkipped": {
+    "description": "When a sponsor segment is skipped thanks to sponsor block"
+  },
+  "irreversibleAction": "이 작업은 되돌릴 수 없습니다",
+  "@irreversibleAction": {
+    "description": "Tell the user that the action cannot be undone"
+  },
+  "addPlayList": "재생목록 추가",
+  "@addPlayList": {
+    "description": "Title for add playlist dialog"
+  },
+  "playListName": "재생목록 이름",
+  "@playListName": {
+    "description": "Place holder for new playlist name text field"
+  },
+  "popular": "인기",
+  "@popular": {
+    "description": "Popular videos title"
+  },
+  "unlistedPlaylist": "일부 공개",
+  "@unlistedPlaylist": {
+    "description": "Unlisted playlist"
+  },
+  "subscribe": "구독",
+  "@subscribe": {
+    "description": "Label for user to subscribe to a channel"
+  },
+  "shareInvidiousLink": "Invidious 링크 공유",
+  "@shareInvidiousLink": {
+    "description": "asking user to share invidious link"
+  },
+  "trending": "급상승",
+  "@trending": {
+    "description": "Trending videos title"
+  },
+  "deletePlayListQ": "재생목록을 삭제하시겠습니까?",
+  "@deletePlayListQ": {
+    "description": "Ask user to delete a playlist"
+  },
+  "info": "정보",
+  "@info": {
+    "description": "Info label"
+  },
+  "wizardIntro": "공개 서버를 선택하거나 직접 추가하세요. (나중에 설정에서 변경 가능)",
+  "@wizardIntro": {
+    "description": "Welcome message on frst time use"
+  },
+  "nReplies": "{count, plural, =0{답글 없음} =1{답글 1 개} other{답글 {count} 개}}",
+  "@nReplies": {
+    "description": "number of replies to a comment",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "videoAddedToPlaylist": "동영상을 재생목록에 추가했습니다",
+  "@videoAddedToPlaylist": {
+    "description": "Pop up message when a video was added to a playlist"
+  },
+  "createNewPlaylist": "새로운 재생목록 만들기",
+  "@createNewPlaylist": {
+    "description": "Button label to create a new playlist when the user wants to add a video to a playlist"
+  },
+  "newSorting": "최신순",
+  "@newSorting": {
+    "description": "Content sorting: new"
+  },
+  "streamIsLive": "실시간",
+  "@streamIsLive": {
+    "description": "Label when a video is a live stream"
+  },
+  "selectBrowsingCountry": "검색할 국가 선택",
+  "@selectBrowsingCountry": {
+    "description": "Select country for trending content"
+  }
+}
