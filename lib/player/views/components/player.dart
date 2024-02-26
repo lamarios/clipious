@@ -12,6 +12,7 @@ import 'package:invidious/player/views/tablet/expanded_player.dart';
 import 'package:invidious/player/views/tablet/expanded_side_bar.dart';
 import 'package:invidious/utils/views/components/conditional_wrap.dart';
 import 'package:invidious/utils/views/components/device_widget.dart';
+import 'package:invidious/videos/views/components/add_to_playlist_button.dart';
 
 import '../../../utils.dart';
 import '../../../videos/models/video.dart';
@@ -157,6 +158,12 @@ class Player extends StatelessWidget {
                                                     video: currentlyPlaying,
                                                     showTimestampOption: true,
                                                   ),
+                                                  if (getDeviceType() ==
+                                                      DeviceType.tablet)
+                                                    AddToPlayListButton(
+                                                        videoId:
+                                                            currentlyPlaying
+                                                                .videoId)
                                                 ],
                                         ),
                                   Flexible(
