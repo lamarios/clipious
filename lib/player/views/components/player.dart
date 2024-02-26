@@ -158,12 +158,9 @@ class Player extends StatelessWidget {
                                                     video: currentlyPlaying,
                                                     showTimestampOption: true,
                                                   ),
-                                                  if (getDeviceType() ==
-                                                      DeviceType.tablet)
-                                                    AddToPlayListButton(
-                                                        videoId:
-                                                            currentlyPlaying
-                                                                .videoId)
+                                                  AddToPlayListButton(
+                                                      videoId: currentlyPlaying
+                                                          .videoId)
                                                 ],
                                         ),
                                   Flexible(
