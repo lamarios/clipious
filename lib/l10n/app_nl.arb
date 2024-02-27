@@ -440,7 +440,7 @@
   "@useProxy": {
     "description": "label for settings switch to proxy videos from server"
   },
-  "to": "Aan",
+  "to": "Tot",
   "@to": {
     "description": "To word as in 'From xx To xx')"
   },
@@ -585,7 +585,7 @@
   "@layoutEditorAddVideoSource": {
     "description": "Label for button to allow user to add more video sources to the home screen"
   },
-  "navigationBarLabelNeverShow": "Label nooit weergeven",
+  "navigationBarLabelNeverShow": "Label nooit tonen",
   "@navigationBarLabelNeverShow": {
     "description": "Never show label option for navigation bar"
   },
@@ -773,7 +773,7 @@
   "@navigationBarStyle": {
     "description": "Label for settings on customizing navigation bar style"
   },
-  "navigationBarLabelAlwaysShowing": "Label altijd weergeven",
+  "navigationBarLabelAlwaysShowing": "Label altijd tonen",
   "@navigationBarLabelAlwaysShowing": {
     "description": "Label always showing option for navigation bar"
   },
@@ -916,5 +916,35 @@
   "autoplayVideoOnLoad": "Video automatisch afspelen bij laden",
   "@autoplayVideoOnLoad": {
     "description": "Label for settings to enable autoplay when a video loads"
+  },
+  "videoFilterWholeChannel": "Alle video's van kanaal {hideOrFilter}",
+  "@videoFilterWholeChannel": {
+    "description": "Label for whole channel filtering",
+    "placeholders": {
+      "hideOrFilter": {
+        "type": "String",
+        "example": "Hide"
+      }
+    }
+  },
+  "fillFullscreen": "Scherm­vullende video",
+  "@fillFullscreen": {
+    "description": "Title to maximize video to fit screen"
+  },
+  "distractionFreeModeDescription": "Video-opmerkingen en -aanbevelingen uitschakelen",
+  "@distractionFreeModeDescription": {
+    "description": "Description for distraction free mode"
+  },
+  "couldntFetchVideos": "Kan video's niet ophalen. Druk om opnieuw te proberen.",
+  "@couldntFetchVideos": {
+    "description": "Can't load bunch of videos, asking  user to try again"
+  },
+  "videoFailedDownloadRetry": "Download mislukt, druk om opnieuw te proberen",
+  "@videoFailedDownloadRetry": {
+    "description": "Shown on download manager when a download fails and prompt the user to retry"
+  },
+  "navigationBarLabelShowOnSelect": "Label tonen op geselecteerd item",
+  "@navigationBarLabelShowOnSelect": {
+    "description": "Label only showing when selected option for navigation bar"
   }
 }
