@@ -317,5 +317,17 @@
   "customizeAppLayout": "പ്രയോഗത്തിലെ വിഭാഗങ്ങൾ ഇഷ്ടാനുസൃതമാക്കുക",
   "@customizeAppLayout": {
     "description": "Settings label for the settings to allow the user to set up the app sections themselves"
+  },
+  "exponentialSkipDescription": "നിങ്ങൾ എത്രത്തോളം മുന്നോട്ട് നീങ്ങുന്നുവോ അത്രയും വലുതായിരിക്കും ചുവടുവെപ്പ്.",
+  "@exponentialSkipDescription": {
+    "description": "Title for the setting to enable the exponential skipping"
+  },
+  "notificationsDescription": "നിങ്ങളെ അറിയിക്കുന്നത് പ്രവർത്തനക്ഷമമാക്കുകയും അവലോകനം ചെയ്യുകയും ചെയ്യുക",
+  "@notificationsDescription": {
+    "description": "Setting description for notifications"
+  },
+  "submitFeedback": "പ്രതികരണം സമർപ്പിക്കുക",
+  "@submitFeedback": {
+    "description": "Title for settings to submit feed back through the app"
   }
 }
