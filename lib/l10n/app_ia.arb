@@ -360,5 +360,39 @@
   "build": "Compilation",
   "@build": {
     "description": "build label"
+  },
+  "logout": "Clauder le session",
+  "@logout": {
+    "description": "CTA to logout of a server"
+  },
+  "playNext": "Reproducer le sequente",
+  "@playNext": {
+    "description": "Label to play the video after the current one."
+  },
+  "username": "Nomine de usator",
+  "@username": {
+    "description": "Username label for login to a server"
+  },
+  "password": "Contrasigno",
+  "@password": {
+    "description": "Password label for login to a server"
+  },
+  "error": "Error",
+  "@error": {},
+  "videoQueue": "Cauda de video",
+  "@videoQueue": {
+    "description": "Label for button to display the video queue"
+  },
+  "addToQueueList": "Adder al cauda",
+  "@addToQueueList": {
+    "description": "Label on button to add a video to the queue list"
+  },
+  "addToPlaylist": "Adder al lista de reproduction",
+  "@addToPlaylist": {
+    "description": "Label to add a video to a playlist"
+  },
+  "sponsorBlockCategorySponsor": "Sponsor",
+  "@sponsorBlockCategorySponsor": {
+    "description": "Sponsor block 'Sponsor' Category"
   }
 }
