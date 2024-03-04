@@ -155,7 +155,7 @@
   "@cancel": {
     "description": "Cancel button label"
   },
-  "nSubscribers": "",
+  "nSubscribers": "{count, select, no{Không có người đăng ký} other{{count} người đăng ký}}",
   "@nSubscribers": {
     "description": "number of subscribers",
     "placeholders": {
@@ -231,5 +231,404 @@
   "servers": "Máy chủ",
   "@servers": {
     "description": "Server management settings category"
+  },
+  "tokenLogin": "Đăng nhập bằng mã thông báo",
+  "@tokenLogin": {
+    "description": "Textto login to a server using the recommended way"
+  },
+  "playNext": "Phát kế tiếp",
+  "@playNext": {
+    "description": "Label to play the video after the current one."
+  },
+  "playNextAddedToQueue": "Video sẽ phát tiếp theo",
+  "@playNextAddedToQueue": {
+    "description": "Pop up message to confirm that the video has been properly set to play next"
+  },
+  "sponsorBlockCategorySponsorDescription": "Quảng cáo trả phí, giới thiệu trả phí và quảng cáo trực tiếp. Không phải để tự quảng cáo hoặc gửi lời cảm ơn miễn phí tới các mục đích/người sáng tạo/trang web/sản phẩm mà họ thích.",
+  "@sponsorBlockCategorySponsorDescription": {
+    "description": "Sponsor block 'Sponsor' Category description"
+  },
+  "sponsorBlockCategoryUnpaidSelfPromoDescription": "Tương tự như \"nhà tài trợ\" ngoại trừ việc không trả tiền hoặc tự quảng cáo. Điều này bao gồm các phần về hàng hóa, quyên góp hoặc thông tin về những người họ đã cộng tác ",
+  "@sponsorBlockCategoryUnpaidSelfPromoDescription": {
+    "description": "Sponsor block 'Unpaid/Self promotion' Category description"
+  },
+  "sponsorBlockCategoryInteraction": "Nhắc nhở tương tác (Đăng ký)",
+  "@sponsorBlockCategoryInteraction": {
+    "description": "Sponsor block 'Interaction' Category"
+  },
+  "nReplies": "{count, plural, =0{Không trả lời} =1{1 trả lời} other{{count} trả lời}}",
+  "@nReplies": {
+    "description": "number of replies to a comment",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "manageServers": "Quản lý máy chủ",
+  "@manageServers": {
+    "description": "Settings to manage servers"
+  },
+  "currentServer": "Đang dùng server {current}",
+  "@currentServer": {
+    "description": "Which server the user is currently using",
+    "placeholders": {
+      "current": {
+        "type": "String"
+      }
+    }
+  },
+  "useSponsorBlock": "Dùng chặn tài trợ",
+  "@useSponsorBlock": {
+    "description": "label for sponsorblock checkbox"
+  },
+  "sponsorBlockDescription": "Bỏ qua các phân đoạn tài trợ do cộng đồng gửi",
+  "@sponsorBlockDescription": {
+    "description": "Sponsorblock setting description"
+  },
+  "about": "Thông tin",
+  "@about": {
+    "description": "About"
+  },
+  "name": "Tên",
+  "@name": {
+    "description": "NAme label"
+  },
+  "package": "Gói",
+  "@package": {
+    "description": "package label"
+  },
+  "version": "Phiên bản",
+  "@version": {
+    "description": "version label"
+  },
+  "build": "Xây",
+  "@build": {
+    "description": "build label"
+  },
+  "addServer": "Thêm máy chủ",
+  "@addServer": {
+    "description": "Add server label"
+  },
+  "useThisServer": "Dùng máy chủ này",
+  "@useThisServer": {
+    "description": "Use this server label"
+  },
+  "invalidInvidiousServer": "Máy chủ không hợp lệ",
+  "@invalidInvidiousServer": {
+    "description": "Error when the user tries to add a server that is not a proper or reachable invidious server"
+  },
+  "logIn": "Đăng nhập",
+  "@logIn": {
+    "description": "CTA to log in to server"
+  },
+  "delete": "Xoá",
+  "@delete": {
+    "description": "Delete label"
+  },
+  "yourServers": "Máy chủ",
+  "@yourServers": {
+    "description": "Your servers label"
+  },
+  "loggedIn": "Đã đăng nhập",
+  "@loggedIn": {
+    "description": "Label to tell the user that he is logged in to the server"
+  },
+  "notLoggedIn": "Chưa đăng nhập",
+  "@notLoggedIn": {
+    "description": "Label when the user is not logged in to the server"
+  },
+  "addServerHelpText": "Sử dụng nút + để thêm máy chủ của riêng bạn hoặc nhấn vào máy chủ công cộng và thêm nó.",
+  "@addServerHelpText": {
+    "description": "label for when the user hasn't chosen a server yet"
+  },
+  "publicServers": "Máy chủ công cộng",
+  "@publicServers": {
+    "description": "Public servers label"
+  },
+  "loadingPublicServer": "Đang tải máy chủ công cộng",
+  "@loadingPublicServer": {
+    "description": "Message telling users the app is loading the list of public servers"
+  },
+  "tapToAddServer": "Nhấn để thêm máy chủ vào danh sách của bạn",
+  "@tapToAddServer": {
+    "description": "public server description"
+  },
+  "publicServersError": "Không thể tìm nạp danh sách máy chủ công cộng. Chạm để thử lại.",
+  "@publicServersError": {
+    "description": "Error message when trying to get public servers but it failed"
+  },
+  "appearance": "Vẻ bề ngoài",
+  "@appearance": {
+    "description": "Settings category title"
+  },
+  "useDynamicTheme": "Màu sắc tự động",
+  "@useDynamicTheme": {
+    "description": ""
+  },
+  "useDynamicThemeDescription": "Sử dụng màu Material You (chỉ khả dụng trên Android 12+)",
+  "@useDynamicThemeDescription": {
+    "description": ""
+  },
+  "useDash": "Sử dụng DASH",
+  "@useDash": {
+    "description": "Label on video options if a user wants to switch to dash urls instead of the regular quality selection"
+  },
+  "useDashDescription": "Phát trực tuyến thích ứng DASH đôi khi có thể gặp sự cố, Youtube có thể điều tiết nó.",
+  "@useDashDescription": {
+    "description": "Description for dash in the settings screen"
+  },
+  "videoPlayer": "rình phát video",
+  "@videoPlayer": {
+    "description": "Title for video player related options"
+  },
+  "videoListed": "Công cộng",
+  "@videoListed": {
+    "description": "Status of a publicly available video"
+  },
+  "videoUnlisted": "Chưa liệt kê",
+  "@videoUnlisted": {
+    "description": "Status of a video that is only accessible by link"
+  },
+  "videoIsFamilyFriendly": "Thân thiện với gia đình",
+  "@videoIsFamilyFriendly": {
+    "description": "Displayed only when a video is family friendly"
+  },
+  "tapToManage": "Nhấn để quản lý",
+  "@tapToManage": {
+    "description": "Text shown below a server in the 'Your servers' list"
+  },
+  "authentication": "Xác thực",
+  "@authentication": {
+    "description": "Label for server settings related to authentications"
+  },
+  "tokenLoginDescription": "Cách đăng nhập được đề xuất",
+  "@tokenLoginDescription": {
+    "description": "Recommended way to log in"
+  },
+  "cookieLogin": "Đăng nhập bằng cookie",
+  "@cookieLogin": {
+    "description": "Text to login to a server using the cookie jar method"
+  },
+  "cookieLoginDescription": "Sử dụng phương pháp này nếu bạn gặp vấn đề với xác thực mã thông báo",
+  "@cookieLoginDescription": {
+    "description": "Cookie log in description"
+  },
+  "logout": "Đăng xuất",
+  "@logout": {
+    "description": "CTA to logout of a server"
+  },
+  "username": "Tên tài khoản",
+  "@username": {
+    "description": "Username label for login to a server"
+  },
+  "password": "Mật khẩu",
+  "@password": {
+    "description": "Password label for login to a server"
+  },
+  "wrongUsernamePassword": "Tên người dùng hoặc mật khẩu sai",
+  "@wrongUsernamePassword": {
+    "description": "Error message when authentication fails"
+  },
+  "error": "Lỗi",
+  "@error": {},
+  "malformedStatsEndpoint": "/api/v1/stats không như mong đợi",
+  "@malformedStatsEndpoint": {
+    "description": "Title for dialog when adding a server that isn't validated as it should"
+  },
+  "malformedStatsEndpointDescription": "Điểm cuối thống kê máy chủ không phản hồi tải trọng dự kiến, khóa \"software.name\" phải bằng \"invidious\". \nPhản hồi từ máy chủ:",
+  "@malformedStatsEndpointDescription": {
+    "description": "Description of the possible issue for an invalid stats endpoints"
+  },
+  "serverIsNotReachable": "Máy chủ không thể truy cập được",
+  "@serverIsNotReachable": {
+    "description": "Title for dialog when adding a server that is not reachable"
+  },
+  "addToQueueList": "Thêm vào hàng",
+  "@addToQueueList": {
+    "description": "Label on button to add a video to the queue list"
+  },
+  "videoQueue": "Hàng đợi video",
+  "@videoQueue": {
+    "description": "Label for button to display the video queue"
+  },
+  "addToPlaylist": "Thêm vào danh sách phát",
+  "@addToPlaylist": {
+    "description": "Label to add a video to a playlist"
+  },
+  "addRecommendedToQueue": "Tự động phát được đề xuất tiếp theo",
+  "@addRecommendedToQueue": {
+    "description": "Switch when playing a video to automatically add the recommended videos to the video queue"
+  },
+  "sponsorBlockSettingsQuickDescription": "Chọn loại phân đoạn cần bỏ qua",
+  "@sponsorBlockSettingsQuickDescription": {
+    "description": "Small description of what the sponsor block settings do"
+  },
+  "sponsorBlockCategorySponsor": "Nhà tài trợ",
+  "@sponsorBlockCategorySponsor": {
+    "description": "Sponsor block 'Sponsor' Category"
+  },
+  "sponsorBlockCategoryUnpaidSelfPromo": "Không trả tiền/Tự quảng cáo",
+  "@sponsorBlockCategoryUnpaidSelfPromo": {
+    "description": "Sponsor block 'Unpaid/Self promotion' Category"
+  },
+  "sponsorBlockCategoryInteractionDescription": "Khi có lời nhắc ngắn thích, đăng ký hoặc theo dõi họ ở giữa nội dung. Nếu nó dài hoặc về một cái gì đó cụ thể, thay vào đó nó nên được tự quảng cáo.",
+  "@sponsorBlockCategoryInteractionDescription": {
+    "description": "Sponsor block 'Interaction' Category description"
+  },
+  "sponsorBlockCategoryIntro": "Hoạt ảnh tạm dừng/giới thiệu",
+  "@sponsorBlockCategoryIntro": {
+    "description": "Sponsorblock 'Intro' Category"
+  },
+  "sponsorBlockCategoryIntroDescription": "Một khoảng thời gian không có nội dung thực tế. Có thể là tạm dừng, khung tĩnh, hoạt ảnh lặp lại. Điều này không nên được sử dụng cho các chuyển tiếp có chứa thông tin.",
+  "@sponsorBlockCategoryIntroDescription": {
+    "description": "Sponsorblock 'Intro' Category description"
+  },
+  "sponsorBlockCategoryOutro": "Thẻ kết thúc/Tín dụng",
+  "@sponsorBlockCategoryOutro": {
+    "description": "Outro block 'Outro' Category"
+  },
+  "sponsorBlockCategoryOutroDescription": "Tín dụng hoặc khi thẻ cuối YouTube xuất hiện. Không phải để kết luận với thông tin.",
+  "@sponsorBlockCategoryOutroDescription": {
+    "description": "Outro block 'Outro' Category description"
+  },
+  "sponsorBlockCategoryPreview": "Xem trước/Tóm tắt",
+  "@sponsorBlockCategoryPreview": {
+    "description": "Sponsorblock 'Preview' Category"
+  },
+  "sponsorBlockCategoryPreviewDescription": "Bộ sưu tập các clip hiển thị nội dung sắp diễn ra trong video này hoặc các video khác trong chuỗi trong đó tất cả thông tin được lặp lại ở phần sau của video.",
+  "@sponsorBlockCategoryPreviewDescription": {
+    "description": "Sponsorblock 'Preview' Category description"
+  },
+  "sponsorBlockCategoryFiller": "Tiếp tuyến phụ/Truyện cười",
+  "@sponsorBlockCategoryFiller": {
+    "description": "Sponsorblock 'Filler' Category"
+  },
+  "sponsorBlockCategoryFillerDescription": "Những cảnh tiếp tuyến chỉ được thêm vào để bổ sung hoặc mang tính chất hài hước, không bắt buộc phải hiểu nội dung chính của video. Điều này không được bao gồm các phân đoạn cung cấp bối cảnh hoặc chi tiết cơ bản. Đây là một danh mục rất hung hãn dành cho những lúc bạn không có tâm trạng \"vui vẻ\".",
+  "@sponsorBlockCategoryFillerDescription": {
+    "description": "Sponsorblock 'Filler' Category description"
+  },
+  "sponsorBlockCategoryMusicOffTopic": "Âm nhạc: Phần phi âm nhạc",
+  "@sponsorBlockCategoryMusicOffTopic": {
+    "description": "Sponsorblock 'MusicOffTopic' Category"
+  },
+  "sponsorBlockCategoryMusicOffTopicDescription": "Chỉ sử dụng trong video âm nhạc. Điều này chỉ nên được sử dụng cho các phần của video nhạc chưa thuộc danh mục khác.",
+  "@sponsorBlockCategoryMusicOffTopicDescription": {
+    "description": "Only for use in music videos. This only should be used for sections of music videos that aren't already covered by another category."
+  },
+  "useProxy": "Video ủy quyền",
+  "@useProxy": {
+    "description": "label for settings switch to proxy videos from server"
+  },
+  "useProxyDescription": "Bằng cách ủy quyền các luồng video từ máy chủ, bạn có thể bỏ qua các khối khu vực hoặc ISP chặn YouTube",
+  "@useProxyDescription": {
+    "description": "Description for the use proxy settings"
+  },
+  "pressDownToShowSettings": "Nhấn xuống để hiển thị cài đặt",
+  "@pressDownToShowSettings": {
+    "description": "Instruction on how to show video settings when playing a video on TV"
+  },
+  "quality": "Chất lượng",
+  "@quality": {
+    "description": "Name of TV ui video settings"
+  },
+  "audio": "Âm thanh",
+  "@audio": {
+    "description": "Name TV ui audio settings"
+  },
+  "subtitles": "Phụ đề",
+  "@subtitles": {
+    "description": "Name of TV ui subtitles settings"
+  },
+  "playbackSpeed": "Tốc độ phát",
+  "@playbackSpeed": {
+    "description": "Name of TV ui Playback speed"
+  },
+  "blackBackground": "Nền đen",
+  "@blackBackground": {
+    "description": "Settings name for black background"
+  },
+  "blackBackgroundDescription": "Đối với chủ đề tối trên màn hình OLED",
+  "@blackBackgroundDescription": {
+    "description": "Description for dark background setting"
+  },
+  "search": "Tìm kiếm",
+  "@search": {
+    "description": "search title"
+  },
+  "subtitleFontSize": "Cỡ chữ phụ đề",
+  "@subtitleFontSize": {
+    "description": "Settings label for the size of the subtitles"
+  },
+  "subtitleFontSizeDescription": "Thay đổi kích thước phụ đề nếu nó quá nhỏ hoặc quá lớn trên thiết bị của bạn",
+  "@subtitleFontSizeDescription": {
+    "description": "Settings description for subtitle size"
+  },
+  "skipSslVerification": "Bỏ qua xác minh chứng chỉ SSL",
+  "@skipSslVerification": {
+    "description": "Setting label to skip ssl certification verification"
+  },
+  "skipSslVerificationDescription": "Để sử dụng chứng chỉ SSL tự ký hoặc khi gặp sự cố liên quan đến SSL với máy chủ của bạn.",
+  "@skipSslVerificationDescription": {
+    "description": "Setting description for the skip ssl certification verification"
+  },
+  "themeBrightness": "Chủ đề",
+  "@themeBrightness": {
+    "description": "Ask the user to user dark / light / system theme"
+  },
+  "themeLight": "Sáng",
+  "@themeLight": {
+    "description": "Light theme"
+  },
+  "themeDark": "Tối",
+  "@themeDark": {
+    "description": "Dark theme"
+  },
+  "followSystem": "Theo hệ thống",
+  "@followSystem": {
+    "description": "Follow system label"
+  },
+  "requiresRestart": "Yêu cầu khởi động lại ứng dụng",
+  "@requiresRestart": {
+    "description": "Requires app restart label"
+  },
+  "appLanguage": "Ngôn ngữ ứng dụng",
+  "@appLanguage": {
+    "description": "Select app language"
+  },
+  "nVideos": "{count, plural, =0{Không có videos} =1{1 video} other{{count} videos}}",
+  "@nVideos": {
+    "description": "One or more videos",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "returnYoutubeDislikeDescription": "Hiển thị số lượt không thích video ước tính bằng API do returnyoutubedislike.com cung cấp",
+  "@returnYoutubeDislikeDescription": {
+    "description": "ReturnYoutubeDislike setting description"
+  },
+  "autoplayVideoOnLoad": "Tự động phát video khi tải",
+  "@autoplayVideoOnLoad": {
+    "description": "Label for settings to enable autoplay when a video loads"
+  },
+  "autoplayVideoOnLoadDescription": "Tự động bắt đầu phát video sau khi tải xong",
+  "@autoplayVideoOnLoadDescription": {
+    "description": "Description for the autoplay video on load setting"
+  },
+  "searchHistory": "Lịch sử tìm kiếm",
+  "@searchHistory": {
+    "description": "Settings label for search history"
+  },
+  "searchHistoryDescription": "Cài đặt lịch sử tìm kiếm",
+  "@searchHistoryDescription": {
+    "description": "Description for search history settings"
+  },
+  "enableSearchHistory": "Bật lịch sử tìm kiếm",
+  "@enableSearchHistory": {
+    "description": "Settings label for enabling search history"
   }
 }
