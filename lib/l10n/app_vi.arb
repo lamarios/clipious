@@ -630,5 +630,139 @@
   "enableSearchHistory": "Bật lịch sử tìm kiếm",
   "@enableSearchHistory": {
     "description": "Settings label for enabling search history"
+  },
+  "searchHistoryLimit": "Giới hạn lịch sử tìm kiếm",
+  "@searchHistoryLimit": {
+    "description": "Settings label for search history limit"
+  },
+  "shorts": "Ngắn",
+  "@shorts": {
+    "description": "Youtube shorts"
+  },
+  "searchUploadDate": "Ngày tải lên",
+  "@searchUploadDate": {
+    "description": "Filter search result by upload date"
+  },
+  "searchUploadDateAny": "Bất kỳ ngày nào",
+  "@searchUploadDateAny": {
+    "description": "Do not filter search result by upload date"
+  },
+  "searchUploadDateHour": "Giờ trước",
+  "@searchUploadDateHour": {
+    "description": "Search for uploaded in last hour"
+  },
+  "searchUploadDateMonth": "Tháng này",
+  "@searchUploadDateMonth": {
+    "description": "Search for uploaded this month"
+  },
+  "searchUploadDateYear": "Năm này",
+  "@searchUploadDateYear": {
+    "description": "Search for uploaded this year"
+  },
+  "searchDuration": "Giai đoạn",
+  "@searchDuration": {
+    "description": "Filter search result by duration"
+  },
+  "searchDurationShort": "Ngắn (<4 phút)",
+  "@searchDurationShort": {
+    "description": "Search for short videos only"
+  },
+  "searchDurationLong": "Dài (>20 phút)",
+  "@searchDurationLong": {
+    "description": "Search for long videos only"
+  },
+  "searchDurationMedium": "Trung bình (4-20 phút)",
+  "@searchDurationMedium": {
+    "description": "Search for medium videos only"
+  },
+  "rememberSubtitleLanguage": "Ghi nhớ ngôn ngữ phụ đề",
+  "@rememberSubtitleLanguage": {
+    "description": "Settings label for remembering subtitle language"
+  },
+  "videoFilters": "Bộ lọc video",
+  "@videoFilters": {
+    "description": "Title for video filter settings"
+  },
+  "searchHistoryLimitDescription": "Cài đặt số lượng tìm kiếm gần đây được hiển thị trong đề xuất",
+  "@searchHistoryLimitDescription": {
+    "description": "Settings label for search history limit description"
+  },
+  "searchUploadDateToday": "Hôm nay",
+  "@searchUploadDateToday": {
+    "description": "Search for uploaded today"
+  },
+  "searchUploadDateWeek": "Tuần này",
+  "@searchUploadDateWeek": {
+    "description": "Search for uploaded this week"
+  },
+  "searchDurationAny": "Bất kỳ giải đoạn nào",
+  "@searchDurationAny": {
+    "description": "Do not filter search result by duration"
+  },
+  "searchSortBy": "Sắp xếp theo",
+  "@searchSortBy": {
+    "description": "Search sorting option"
+  },
+  "searchSortRelevance": "Mức độ liên quan",
+  "@searchSortRelevance": {
+    "description": "Sort search by relevance"
+  },
+  "searchSortRating": "Xếp hạng",
+  "@searchSortRating": {
+    "description": "Sort search by rating"
+  },
+  "searchSortUploadDate": "Ngày tải lên",
+  "@searchSortUploadDate": {
+    "description": "Sort search by upload date"
+  },
+  "searchSortViewCount": "Lượng xem",
+  "@searchSortViewCount": {
+    "description": "Sort search by view count"
+  },
+  "clearSearchHistory": "Xóa lịch sử tìm kiếm",
+  "@clearSearchHistory": {
+    "description": "Settings label for clearing search history"
+  },
+  "appLogs": "Nhật ký ứng dụng",
+  "@appLogs": {
+    "description": "Title for settings that leads to application logs"
+  },
+  "appLogsDescription": "Nhận nhật ký về những gì đang xảy ra trong ứng dụng, có thể hữu ích để báo cáo sự cố",
+  "@appLogsDescription": {
+    "description": "Description of the app log settings"
+  },
+  "copyToClipBoard": "Sao chép vào bộ nhớ tạm",
+  "@copyToClipBoard": {
+    "description": "Text to copy something to clipboard"
+  },
+  "logsCopied": "Nhật ký được sao chép vào bộ nhớ tạm",
+  "@logsCopied": {
+    "description": "Message to tell user that logs have been copied to the clipboard"
+  },
+  "nFilters": "{count, plural, =0{Không có videos} =1{1 video tìm thấy} other{{count} video tìm thấy}}",
+  "@nFilters": {
+    "description": "One or more video filters",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "videoFiltersExplanation": "Ẩn hoặc Làm xáo trộn video khỏi tất cả nguồn cấp dữ liệu video trong ứng dụng dựa trên các bộ lọc được xác định bên dưới. Điều này cho phép bạn ẩn các nội dung thể thao hoặc ẩn quần short khỏi một kênh nhất định.",
+  "@videoFiltersExplanation": {
+    "description": "Description on how filter work"
+  },
+  "videoFiltersSettingTileDescriptions": "Xác định quy tắc để lọc video",
+  "@videoFiltersSettingTileDescriptions": {
+    "description": "Description for the main settings page"
+  },
+  "videoFilterAllChannels": "Tất cả các kênh",
+  "@videoFilterAllChannels": {
+    "description": "Title for the sections that applies to all channels"
+  },
+  "addVideoFilter": "Tạo bộ lọc",
+  "@addVideoFilter": {
+    "description": "Title when creating a new filter"
   }
 }
