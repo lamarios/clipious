@@ -946,5 +946,17 @@
   "navigationBarLabelShowOnSelect": "Label tonen op geselecteerd item",
   "@navigationBarLabelShowOnSelect": {
     "description": "Label only showing when selected option for navigation bar"
+  },
+  "wizardIntro": "Selecteer een openbare server of voeg uw eigen server toe. (Kan later worden gewijzigd in de instellingen)",
+  "@wizardIntro": {
+    "description": "Welcome message on frst time use"
+  },
+  "errorAddingVideoToPlaylist": "Fout bij toevoegen van video aan afspeellijst",
+  "@errorAddingVideoToPlaylist": {
+    "description": "Error while adding video to playlist"
+  },
+  "itemListErrorInvalidScope": "U heeft geen toestemming om dit te zien. Als u hebt ingelogd met de tokenmethode, probeer dan uit en weer in te loggen",
+  "@itemListErrorInvalidScope": {
+    "description": "Error when the user doesn't have the proper scope to its current token"
   }
 }
