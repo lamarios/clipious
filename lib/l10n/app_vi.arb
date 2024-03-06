@@ -764,5 +764,577 @@
   "addVideoFilter": "Tạo bộ lọc",
   "@addVideoFilter": {
     "description": "Title when creating a new filter"
+  },
+  "editVideoFilter": "Chỉnh sửa bộ lọc",
+  "@editVideoFilter": {
+    "description": "Title when editting a filter"
+  },
+  "videoFilterHideLabel": "Ẩn",
+  "@videoFilterHideLabel": {
+    "description": "Label to hide videos"
+  },
+  "videoFilterFilterLabel": "làm xáo trộn",
+  "@videoFilterFilterLabel": {
+    "description": "Label to filter videos"
+  },
+  "videoFiltered": "Video được lọc vì (các) lý do sau:",
+  "@videoFiltered": {
+    "description": "Label shown on video list when it is filtered out"
+  },
+  "videoFilterTapToReveal": "Nhấn để tiết lộ",
+  "@videoFilterTapToReveal": {
+    "description": "Label to tell user to tap to show a filtered video"
+  },
+  "videoFilterHide": "Ẩn video đã lọc",
+  "@videoFilterHide": {
+    "description": "Label for settings to hide filtered videos"
+  },
+  "videoFilterHideDescription": "Theo mặc định, các video đã lọc không bị ẩn nhưng được hiển thị ở dạng khó hiểu kèm theo (các) lý do khiến video đó bị lọc. Cài đặt này xóa video đã lọc khỏi danh sách.",
+  "@videoFilterHideDescription": {
+    "description": ""
+  },
+  "videoFilterTypeVideoTitle": "Tiêu đề video",
+  "@videoFilterTypeVideoTitle": {
+    "description": "Label for video filter video title"
+  },
+  "videoFilterTypeChannelName": "Tên kênh",
+  "@videoFilterTypeChannelName": {
+    "description": "Label for video filter channel name"
+  },
+  "videoFilterOperationNotContain": "Không chứa",
+  "@videoFilterOperationNotContain": {
+    "description": "Label for video filter operation Does not contain"
+  },
+  "videoFilterOperationLowerThan": "Thấp hơn",
+  "@videoFilterOperationLowerThan": {
+    "description": "Label for video filter operation Lower than"
+  },
+  "videoFilterOperationHigherThan": "Cao hơn",
+  "@videoFilterOperationHigherThan": {
+    "description": "Label for video filter operation Higher than"
+  },
+  "channel": "Kênh",
+  "@channel": {
+    "description": "A single channel"
+  },
+  "videoFilterWholeChannel": "{hideOrFilter} tất cả video từ kênh",
+  "@videoFilterWholeChannel": {
+    "description": "Label for whole channel filtering",
+    "placeholders": {
+      "hideOrFilter": {
+        "type": "String",
+        "example": "Hide"
+      }
+    }
+  },
+  "rememberSubtitleLanguageDescription": "Tự động đặt phụ đề cho ngôn ngữ được chọn cuối cùng, nếu có",
+  "@rememberSubtitleLanguageDescription": {
+    "description": "Settings description for remembering subtitle language"
+  },
+  "lockFullScreenToLandscape": "Khóa hướng toàn màn hình theo tỷ lệ khung hình video",
+  "@lockFullScreenToLandscape": {
+    "description": "Title to force full screen to landscape"
+  },
+  "rememberPlaybackSpeed": "Ghi nhớ tốc độ phát lại",
+  "@rememberPlaybackSpeed": {
+    "description": "Setting label for remembering playback speed"
+  },
+  "noDownloadedVideos": "Không có video đã tải xuống, hãy duyệt, nhấn và giữ video trong danh sách hoặc nhấn vào nút tải xuống trên màn hình video để tải xuống",
+  "@noDownloadedVideos": {
+    "description": "Message showing when the user goes to the download screen but there are no offline videos."
+  },
+  "downloadsPlayAll": "Chơi tất cả",
+  "@downloadsPlayAll": {
+    "description": "Button to play all downloaded videos"
+  },
+  "videoDownloadStarted": "Đã bắt đầu tải xuống video",
+  "@videoDownloadStarted": {
+    "description": "Message when a video starts being downloaded"
+  },
+  "noSubscriptions": "Không đăng ký, duyệt video và đăng ký bất kỳ kênh nào bạn thích.",
+  "@noSubscriptions": {
+    "description": "Message when the user has no subs"
+  },
+  "youCanSubscribeAgainLater": "Bạn có thể đăng ký lại kênh này sau",
+  "@youCanSubscribeAgainLater": {
+    "description": "Text for the unscubscribe confirmation dialog"
+  },
+  "unSubscribeQuestion": "Hủy đăng ký?",
+  "@unSubscribeQuestion": {
+    "description": "Title for dialog if a user wants to unsubscribe in the subscribtion management screen"
+  },
+  "clearHistoryQuestionExplanation": "Thao tác này sẽ xóa lịch sử xem tài khoản của bạn trên phiên bản Invidious mà bạn sử dụng. Điều này không thể được hoàn tác.",
+  "@clearHistoryQuestionExplanation": {
+    "description": "Message for dialog before clearing full viewing history"
+  },
+  "noHistory": "Không có lịch sử xem, xem vài video nó sẽ hiện ra ở đây",
+  "@noHistory": {
+    "description": "Message when the user visits the history tab but it's empty"
+  },
+  "homeLayoutEditor": "Chỉnh sửa bố cục nhà",
+  "@homeLayoutEditor": {
+    "description": "Title of layout editor screen"
+  },
+  "layoutEditorAddVideoSource": "Thêm nguồn video",
+  "@layoutEditorAddVideoSource": {
+    "description": "Label for button to allow user to add more video sources to the home screen"
+  },
+  "home": "Trang chủ",
+  "@home": {
+    "description": "Label for Home browsing tab"
+  },
+  "library": "Thư viện",
+  "@library": {
+    "description": "Name for user library"
+  },
+  "navigationBarStyle": "Kiểu thanh điều hướng",
+  "@navigationBarStyle": {
+    "description": "Label for settings on customizing navigation bar style"
+  },
+  "navigationBarLabelNeverShow": "Không bao giờ hiển thị nhãn",
+  "@navigationBarLabelNeverShow": {
+    "description": "Never show label option for navigation bar"
+  },
+  "videoFilterEndTime": "Thời gian kết thúc",
+  "@videoFilterEndTime": {
+    "description": "Title for filter end time"
+  },
+  "notificationsDescription": "Kích hoạt và xem lại những gì bạn được thông báo",
+  "@notificationsDescription": {
+    "description": "Setting description for notifications"
+  },
+  "enableNotificationDescriptions": "Chạy dịch vụ nền trước để kiểm tra và thông báo cho bạn về những thay đổi bạn đang theo dõi",
+  "@enableNotificationDescriptions": {
+    "description": ""
+  },
+  "subscriptionNotification": "Thông báo đăng ký",
+  "@subscriptionNotification": {
+    "description": "Title for subscriptions notifications"
+  },
+  "subscriptionNotificationTitle": "Video mới từ đăng ký của bạn",
+  "@subscriptionNotificationTitle": {
+    "description": "Title for the notification showing that there are new videos from the subscription feed"
+  },
+  "askForDisableBatteryOptimizationTitle": "Cần phải tắt tính năng tối ưu hóa pin",
+  "@askForDisableBatteryOptimizationTitle": {
+    "description": "Title for the dialog asking the user to turn off disabling battery optimization when turning on notifications"
+  },
+  "askToEnableBackgroundServiceContent": "Để nhận thông báo, bạn cần bật thông báo Clipious, nhấn OK để bật.",
+  "@askToEnableBackgroundServiceContent": {
+    "description": "If the users tries to turn on notifications for a channel but hasn't enable notifications in the app we need to turn it on for them"
+  },
+  "deletePlaylistNotificationContent": "Bạn sẽ không nhận được thông báo nào nữa từ danh sách phát này.",
+  "@deletePlaylistNotificationContent": {
+    "description": "Title for dialog to confirm whether to delete playlist notifications"
+  },
+  "foregroundServiceUpdatingPlaylist": "Đang kiểm tra danh sách phát...",
+  "@foregroundServiceUpdatingPlaylist": {
+    "description": "Foreground service notification text when checking for new playlist videos"
+  },
+  "history": "Lịch sử",
+  "@history": {
+    "description": "User view history label"
+  },
+  "deArrowSettingDescription": "Thay thế tiêu đề và hình thu nhỏ của mồi nhấp chuột",
+  "@deArrowSettingDescription": {
+    "description": "Description for dearrow"
+  },
+  "seeking": "Đang tìm kiếm",
+  "@seeking": {
+    "description": "category for settings related to seeking in a video"
+  },
+  "feedbackDisclaimer": "Để gửi phản hồi, bạn sẽ cần có tài khoản GitHub và ảnh chụp màn hình của bạn sẽ được gửi ẩn danh tới Imgur.",
+  "@feedbackDisclaimer": {
+    "description": "Content of dialog shown before submitting feedback to make sure the user is ok whith where the data is going"
+  },
+  "videoFilterType": "Kiểu",
+  "@videoFilterType": {
+    "description": "Label for filter type"
+  },
+  "videoFilterOperation": "Hoạt động",
+  "@videoFilterOperation": {
+    "description": "Label for filter operation"
+  },
+  "videoFilterValue": "Giá trị",
+  "@videoFilterValue": {
+    "description": "Label for filter value"
+  },
+  "save": "Lưu",
+  "@save": {
+    "description": "Text for save action"
+  },
+  "videoFilterEditDescription": "Chọn kênh tùy chọn, loại bộ lọc, thao tác và giá trị để lọc video OUT từ danh sách. Ví dụ: loại: tên video, thao tác: chứa, giá trị: test sẽ LOẠI TRỪ tất cả các video có từ 'test' trong tên của chúng.",
+  "@videoFilterEditDescription": {
+    "description": "Descriptive test for video filter set up"
+  },
+  "optional": "không bắt buộc",
+  "@optional": {
+    "description": "Optional label"
+  },
+  "videoFilterTypeVideoLength": "Thời lượng video (giây)",
+  "@videoFilterTypeVideoLength": {
+    "description": "Label for video filter video length"
+  },
+  "videoFilterNoFilters": "Không có bộ lọc video, hãy nhấn vào nút '+' bên dưới để bắt đầu thêm bộ lọc.",
+  "@videoFilterNoFilters": {
+    "description": "Label when there are no video filters"
+  },
+  "videoFilterOperationContains": "Chứa",
+  "@videoFilterOperationContains": {
+    "description": "Label for video filter operation Contains"
+  },
+  "videoFilterHideAllFromChannel": "Lọc tất cả video từ kênh",
+  "@videoFilterHideAllFromChannel": {
+    "description": "Label for video filter switch to allow to hide all videos from a channel"
+  },
+  "lockFullScreenToLandscapeDescription": "Khóa hướng toàn màn hình dựa trên định dạng video, ngang cho video rộng và dọc cho video dọc",
+  "@lockFullScreenToLandscapeDescription": {
+    "description": "Setting description for forcing video to landscape when in full screen"
+  },
+  "rememberPlaybackSpeedDescription": "Tự động đặt tốc độ phát lại về tốc độ đã chọn cuối cùng",
+  "@rememberPlaybackSpeedDescription": {
+    "description": "Settings description for remembering playback speed"
+  },
+  "downloads": "Tải xuống",
+  "@downloads": {
+    "description": "Downloads"
+  },
+  "fillFullscreen": "Phóng to video cho vừa với màn hình",
+  "@fillFullscreen": {
+    "description": "Title to maximize video to fit screen"
+  },
+  "fillFullscreenDescription": "Điều chỉnh video để lấp đầy toàn bộ màn hình ở chế độ ngang",
+  "@fillFullscreenDescription": {
+    "description": "Setting description for filling video to screen in landscape"
+  },
+  "download": "Tải xuống",
+  "@download": {
+    "description": "A single download or CTA for downloading a video"
+  },
+  "videoAlreadyDownloaded": "Video đã được tải xuống",
+  "@videoAlreadyDownloaded": {
+    "description": "Message when a user tries to download a video he already has"
+  },
+  "videoFailedDownloadRetry": "Tải xuống không thành công, nhấn để thử lại",
+  "@videoFailedDownloadRetry": {
+    "description": "Shown on download manager when a download fails and prompt the user to retry"
+  },
+  "videoDownloadAudioOnly": "Chỉ có âm thanh",
+  "@videoDownloadAudioOnly": {
+    "description": "Label for toggle to download audio only "
+  },
+  "manageSubscriptions": "Quản lý các mục đăng kí",
+  "@manageSubscriptions": {
+    "description": "Title of manage subscriptions page"
+  },
+  "clearHistoryQuestion": "Xóa lịch sử ?",
+  "@clearHistoryQuestion": {},
+  "customizeAppLayoutExplanation": "Chọn phần bạn muốn xuất hiện trong thanh điều hướng ứng dụng chính. Bấm vào biểu tượng trang chủ để chọn màn hình nào hiển thị khi ứng dụng khởi động. Bạn có thể sắp xếp lại các phần bằng cách kéo chúng xung quanh.",
+  "@customizeAppLayoutExplanation": {
+    "description": ""
+  },
+  "navigationBarLabelAlwaysShowing": "Nhãn luôn hiển thị",
+  "@navigationBarLabelAlwaysShowing": {
+    "description": "Label always showing option for navigation bar"
+  },
+  "layoutEditorExplanation": "Bạn có thể quyết định những gì sẽ hiển thị trên màn hình chính của mình, bạn có thể có tối đa 2 chế độ xem nhỏ với cuộn ngang và một nguồn lớn.",
+  "@layoutEditorExplanation": {
+    "description": "text to explain the home layout editor"
+  },
+  "customizeAppLayout": "Tùy chỉnh các phần ứng dụng",
+  "@customizeAppLayout": {
+    "description": "Settings label for the settings to allow the user to set up the app sections themselves"
+  },
+  "navigationBarLabelShowOnSelect": "Nhãn hiển thị trên mục đã chọn",
+  "@navigationBarLabelShowOnSelect": {
+    "description": "Label only showing when selected option for navigation bar"
+  },
+  "distractionFreeMode": "Chế độ không bị phân tâm",
+  "@distractionFreeMode": {
+    "description": "title for distraction free mode settings"
+  },
+  "distractionFreeModeDescription": "Tắt nhận xét và đề xuất video",
+  "@distractionFreeModeDescription": {
+    "description": "Description for distraction free mode"
+  },
+  "secondsShortForm": "giây",
+  "@secondsShortForm": {
+    "description": "Short form for the word seconds"
+  },
+  "videoFilterDayOfWeekDescription": "Bạn có thể chọn lọc các ngày trong tuần và thời gian áp dụng bộ lọc, chẳng hạn như tránh tiết lộ thông tin về các sự kiện thể thao.",
+  "@videoFilterDayOfWeekDescription": {
+    "description": ""
+  },
+  "videoFilterStartTime": "Thời gian bắt đầu",
+  "@videoFilterStartTime": {
+    "description": "Title for filter start time"
+  },
+  "videoFilterApplyDateToFilter": "Lọc video vào những thời điểm nhất định",
+  "@videoFilterApplyDateToFilter": {
+    "description": "Label for switch to allow user to customize video filter and set days of week and time to them"
+  },
+  "videoFilterDayOfWeek": "Chọn ngày để áp dụng bộ lọc",
+  "@videoFilterDayOfWeek": {
+    "description": "Title for day selection for the filter"
+  },
+  "videoFilterAppliedOn": "Áp dụng vào {selectedDays}",
+  "@videoFilterAppliedOn": {
+    "description": "Readable text on when the filter should apply",
+    "placeholders": {
+      "selectedDays": {
+        "type": "String",
+        "example": "Monday, Wednesday, Friday"
+      }
+    }
+  },
+  "from": "Từ",
+  "@from": {
+    "description": "From word (as in 'From xx To xx')"
+  },
+  "to": "Đến",
+  "@to": {
+    "description": "To word as in 'From xx To xx')"
+  },
+  "notifications": "Thông báo",
+  "@notifications": {
+    "description": "Notification settings title"
+  },
+  "subscriptionNotificationDescription": "Nhận thông báo về video mới từ nguồn cấp dữ liệu đăng ký của bạn nếu bạn đăng nhập vào phiên bản hiện tại của mình",
+  "@subscriptionNotificationDescription": {
+    "description": "Description for subscription notifications"
+  },
+  "askForDisableBatteryOptimizationContent": "Để gửi thông báo, Clipious cần chạy dịch vụ nền. Để ứng dụng chạy trơn tru, Clipious cần được cung cấp mức sử dụng pin không hạn chế, nhấn ok sẽ mở cài đặt tối ưu hóa pin.",
+  "@askForDisableBatteryOptimizationContent": {
+    "description": "Content for the dialog asking the user to turn off disabling battery optimization when turning on notifications"
+  },
+  "askToEnableBackgroundServiceTitle": "Đã tắt thông báo",
+  "@askToEnableBackgroundServiceTitle": {
+    "description": "If the users tries to turn on notifications for a channel but hasn't enable notifications in the app we need to turn it on for them"
+  },
+  "otherNotifications": "Các nguồn thông báo khác (biểu tượng chuông)",
+  "@otherNotifications": {
+    "description": "Title for settings section in the notification settings"
+  },
+  "deleteChannelNotificationTitle": "Xóa thông báo kênh?",
+  "@deleteChannelNotificationTitle": {
+    "description": "Title for dialog to confirm whether to delete channel notifications"
+  },
+  "deleteChannelNotificationContent": "Bạn sẽ không nhận được thông báo nào nữa từ kênh này.",
+  "@deleteChannelNotificationContent": {
+    "description": "Title for dialog to confirm whether to delete channel notifications"
+  },
+  "deletePlaylistNotificationTitle": "Xóa thông báo danh sách phát?",
+  "@deletePlaylistNotificationTitle": {
+    "description": "Title for dialog to confirm whether to delete playlist notifications"
+  },
+  "channelNotificationTitle": "Video mới từ {channel}",
+  "@channelNotificationTitle": {
+    "description": "Title for the channel notifications when there are new videos",
+    "placeholders": {
+      "channel": {
+        "type": "String",
+        "example": "MKBHD"
+      }
+    }
+  },
+  "channelNotificationContent": "Có {count, plural, =0{ 0 video mới} =1{1 video mới} other{{count} videos mới}} từ {channel}",
+  "@channelNotificationContent": {
+    "description": "Content for channel notification when there are new videos",
+    "placeholders": {
+      "channel": {
+        "type": "String",
+        "example": "MKBHD"
+      },
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "playlistNotificationTitle": "Video mới trong danh sách phát {playlist}",
+  "@playlistNotificationTitle": {
+    "description": "Title for the playlist notifications when there are new videos",
+    "placeholders": {
+      "playlist": {
+        "type": "String",
+        "example": "Lo-Fi girl"
+      }
+    }
+  },
+  "playlistNotificationContent": "Có {count, plural, =0{ 0 video mới} =1{1 video mới} other{{count} videos mới}} trong danh sách phát {playlist}",
+  "@playlistNotificationContent": {
+    "description": "Content for playlist notification when there are new videos",
+    "placeholders": {
+      "playlist": {
+        "type": "String",
+        "example": "Lo-Fi girl"
+      },
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "foregroundServiceNotificationContent": "Sẽ kiểm tra video mới {hours, select, 1{hàng giờ} 24{mỗi ngày} other{mỗi {hours} hours}}",
+  "@foregroundServiceNotificationContent": {
+    "description": "Content for the foreground service running notification when the user wants to receive notifications",
+    "hours": {
+      "type": "num",
+      "format": "compact"
+    }
+  },
+  "foregroundServiceUpdatingSubscriptions": "Đang kiểm tra đăng ký...",
+  "@foregroundServiceUpdatingSubscriptions": {
+    "description": "Foreground service notification text when checking for new subscription videos"
+  },
+  "foregroundServiceUpdatingChannels": "Đang kiểm tra kênh...",
+  "@foregroundServiceUpdatingChannels": {
+    "description": "Foreground service notification text when checking for new channel videos"
+  },
+  "notificationFrequencySettingsTitle": "Tần suất kiểm tra video mới",
+  "@notificationFrequencySettingsTitle": {
+    "description": "Title for frequency settings"
+  },
+  "foregroundServiceNotificationTitle": "Video giám sát",
+  "@foregroundServiceNotificationTitle": {
+    "description": "Title for the foreground service running notification when the user wants to receive notifications"
+  },
+  "notificationFrequencySettingsDescription": "Tần suất ứng dụng sẽ kiểm tra video mới",
+  "@notificationFrequencySettingsDescription": {
+    "description": "Description for frequency settings"
+  },
+  "notificationFrequencySliderLabel": "{hours, select,  24{1ngày} other{{hours}h}}",
+  "@notificationFrequencySliderLabel": {
+    "description": "Short form for a number of hours going up to 1 day",
+    "hours": {
+      "type": "num",
+      "format": "compact"
+    }
+  },
+  "subtitlesBackground": "Nền phụ đề",
+  "@subtitlesBackground": {
+    "description": "Title for settings to set black background  for subtitles"
+  },
+  "subtitlesBackgroundDescription": "Thêm nền đen vào phụ đề để dễ đọc hơn",
+  "@subtitlesBackgroundDescription": {
+    "description": "Description for settings to set black background  for subtitles"
+  },
+  "deArrowReplaceThumbnails": "Thay thế hình thu nhỏ",
+  "@deArrowReplaceThumbnails": {
+    "description": "Settings title for checkbox on whether the thumbnail should be replaced as well"
+  },
+  "deArrowReplaceThumbnailsDescription": "Thay thế hình thu nhỏ của video ngoài tiêu đề",
+  "@deArrowReplaceThumbnailsDescription": {
+    "description": "Description for DeArrow setting switch"
+  },
+  "deArrowWarning": "Bật DeArrow có thể giảm đáng kể tốc độ duyệt web của ứng dụng vì cần thêm yêu cầu http cho mỗi video",
+  "@deArrowWarning": {
+    "description": "Warning message when the user enables DeArrow"
+  },
+  "copySettingsAsJson": "Sao chép cài đặt dưới dạng JSON vào clipboard",
+  "@copySettingsAsJson": {
+    "description": "title for settings sections to allow users to copy their settings as json to make debugging easier"
+  },
+  "copySettingsAsJsonDescription": "Sao chép cài đặt dưới dạng JSON để giúp gỡ lỗi nếu bạn gặp sự cố với ứng dụng và quyết định nêu vấn đề",
+  "@copySettingsAsJsonDescription": {
+    "description": ""
+  },
+  "skipStep": "Bỏ qua bước tiến/lùi",
+  "@skipStep": {
+    "description": "Title for the settings to set the skipping step"
+  },
+  "exponentialSkipDescription": "Bạn càng bỏ qua về phía trước, bước càng lớn.",
+  "@exponentialSkipDescription": {
+    "description": "Title for the setting to enable the exponential skipping"
+  },
+  "skipStepDescription": "Số giây để bỏ qua hành động tiến/lùi",
+  "@skipStepDescription": {
+    "description": "Title for the settings to set the skipping step"
+  },
+  "exponentialSkip": "Bỏ qua theo cấp số nhân về phía trước/lùi",
+  "@exponentialSkip": {
+    "description": "Title for the setting to enable the exponential skipping"
+  },
+  "fullscreenOnLandscape": "Toàn màn hình ở chế độ ngang",
+  "@fullscreenOnLandscape": {
+    "description": "Setting title to enable full screen on landscape orientation"
+  },
+  "fullscreenOnLandscapeDescription": "Chuyển sang chế độ toàn màn hình khi xoay thiết bị sang chế độ ngang",
+  "@fullscreenOnLandscapeDescription": {
+    "description": "Setting to enable full screen on landscape orientation"
+  },
+  "enabled": "Đã bật",
+  "@enabled": {
+    "description": "Text to show something is enabled"
+  },
+  "submitFeedback": "Gửi phản hồi",
+  "@submitFeedback": {
+    "description": "Title for settings to submit feed back through the app"
+  },
+  "submitFeedbackDescription": "Tìm thấy một lỗi hoặc có một gợi ý? sử dụng công cụ này để chụp ảnh màn hình ứng dụng, chú thích và gửi phản hồi",
+  "@submitFeedbackDescription": {
+    "description": "Setting tile descriptions for feedback submission"
+  },
+  "feedbackScreenshotError": "Lỗi khi tải ảnh chụp màn hình lên Imgur",
+  "@feedbackScreenshotError": {
+    "description": "Title for dialog if something goes wrong while uploading feedback screenshot"
+  },
+  "channelSortByNewest": "Mới nhất",
+  "@channelSortByNewest": {
+    "description": "Sort channel videos from newest to oldest"
+  },
+  "channelSortByOldest": "Cũ nhất",
+  "@channelSortByOldest": {
+    "description": "Sort channel videos from oldest to newest"
+  },
+  "channelSortByPopular": "Phổ biến",
+  "@channelSortByPopular": {
+    "description": "Sort channel videos by popularity"
+  },
+  "videoFilterDescriptionString": "{hideOrFilter} videos nếu {type} {operation} ''{value}''.",
+  "@videoFilterDescriptionString": {
+    "description": "Human readable description of a video filter, in this case is it for string comparison, example: Hide videos where the name of the video does not contain the following string 'test' (Do not translate text between { })",
+    "placeholders": {
+      "hideOrFilter": {
+        "type": "String",
+        "example": "Hide"
+      },
+      "type": {
+        "type": "String",
+        "example": "video title"
+      },
+      "operation": {
+        "type": "String",
+        "example": "does not contain"
+      },
+      "value": {
+        "type": "String",
+        "example": "some filter text"
+      }
+    }
+  },
+  "videoFilterTimeOfDayFromTo": "Từ {from} đến {to}",
+  "@videoFilterTimeOfDayFromTo": {
+    "description": "Time of day range",
+    "placeholders": {
+      "from": {
+        "type": "String",
+        "example": "3:00 AM"
+      },
+      "to": {
+        "type": "String",
+        "example": "5:00 PM"
+      }
+    }
+  },
+  "subscriptionNotificationContent": "Có {count, plural, =0{ 0 video mới} =1{1 video mới} other{{count} videos mới}} trong kênh đăng ký của bạn",
+  "@subscriptionNotificationContent": {
+    "description": "Content for subscription notification",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
   }
 }
