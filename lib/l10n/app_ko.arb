@@ -217,5 +217,54 @@
   "selectBrowsingCountry": "검색할 국가 선택",
   "@selectBrowsingCountry": {
     "description": "Select country for trending content"
+  },
+  "country": "국가",
+  "@country": {
+    "description": "Country label"
+  },
+  "whenAppStartsShow": "앱이 시작하면…",
+  "@whenAppStartsShow": {
+    "description": "Setting title for selecting the screen to show on start"
+  },
+  "servers": "서버",
+  "@servers": {
+    "description": "Server management settings category"
+  },
+  "manageServers": "서버 관리",
+  "@manageServers": {
+    "description": "Settings to manage servers"
+  },
+  "currentServer": "{current} 서버 사용 중",
+  "@currentServer": {
+    "description": "Which server the user is currently using",
+    "placeholders": {
+      "current": {
+        "type": "String"
+      }
+    }
+  },
+  "useSponsorBlock": "SponsorBlock 사용하기",
+  "@useSponsorBlock": {
+    "description": "label for sponsorblock checkbox"
+  },
+  "name": "이름",
+  "@name": {
+    "description": "NAme label"
+  },
+  "version": "버전",
+  "@version": {
+    "description": "version label"
+  },
+  "addServer": "서버 추가",
+  "@addServer": {
+    "description": "Add server label"
+  },
+  "settings": "설정",
+  "@settings": {
+    "description": "Settings title"
+  },
+  "browsing": "탐색",
+  "@browsing": {
+    "description": "video browsing preferences"
   }
 }
