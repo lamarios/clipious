@@ -1312,5 +1312,21 @@
   "channelSortByPopular": "人気",
   "@channelSortByPopular": {},
   "channelSortByOldest": "古い順",
-  "@channelSortByOldest": {}
+  "@channelSortByOldest": {},
+  "submitFeedbackDescription": "バグ報告や提案ですか？このツールでアプリのスクリーンショットを撮り解説をつけ送信",
+  "@submitFeedbackDescription": {
+    "description": "Setting tile descriptions for feedback submission"
+  },
+  "feedbackDisclaimer": "意見を送るにはGitHubのアカウントが必要です。スクリーンショットは匿名でImgurに送信されます。",
+  "@feedbackDisclaimer": {
+    "description": "Content of dialog shown before submitting feedback to make sure the user is ok whith where the data is going"
+  },
+  "submitFeedback": "意見を送る",
+  "@submitFeedback": {
+    "description": "Title for settings to submit feed back through the app"
+  },
+  "feedbackScreenshotError": "スクリーンショットをImgurにアップロード中にエラー",
+  "@feedbackScreenshotError": {
+    "description": "Title for dialog if something goes wrong while uploading feedback screenshot"
+  }
 }

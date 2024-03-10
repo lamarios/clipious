@@ -1,1 +1,1226 @@
-{}
+{
+  "subscriptions": "Abonelikler",
+  "@subscriptions": {
+    "description": "User subscriptions"
+  },
+  "playlists": "Çalma listeleri",
+  "@playlists": {
+    "description": "User playlists"
+  },
+  "popular": "Popüler",
+  "@popular": {
+    "description": "Popular videos title"
+  },
+  "trending": "Trendler",
+  "@trending": {
+    "description": "Trending videos title"
+  },
+  "noVideoInPlayList": "Oynatma listesinde video yok",
+  "@noVideoInPlayList": {
+    "description": "When no videos in the playlist"
+  },
+  "removeFromPlayList": "Çalma listesinden kaldır",
+  "@removeFromPlayList": {
+    "description": "Menu item description to show remove a video from a playlist"
+  },
+  "deletePlayListQ": "Çalma Listesini Sil?",
+  "@deletePlayListQ": {
+    "description": "Ask user to delete a playlist"
+  },
+  "irreversibleAction": "Bu eylem geri döndürülemez",
+  "@irreversibleAction": {
+    "description": "Tell the user that the action cannot be undone"
+  },
+  "addPlayList": "Çalma Listesi Ekle",
+  "@addPlayList": {
+    "description": "Title for add playlist dialog"
+  },
+  "playListName": "Çalma listesi adı",
+  "@playListName": {
+    "description": "Place holder for new playlist name text field"
+  },
+  "playlistVisibility": "Görünürlük",
+  "@playlistVisibility": {
+    "description": "Dropdown label for playlist visibility"
+  },
+  "publicPlaylist": "Kamu",
+  "@publicPlaylist": {
+    "description": "Public playlist"
+  },
+  "privatePlaylist": "Özel",
+  "@privatePlaylist": {
+    "description": "Private playlist"
+  },
+  "cancel": "İptal etmek",
+  "@cancel": {
+    "description": "Cancel button label"
+  },
+  "add": "Eklemek",
+  "@add": {
+    "description": "Add button abel"
+  },
+  "unlistedPlaylist": "Listelenmemiş",
+  "@unlistedPlaylist": {
+    "description": "Unlisted playlist"
+  },
+  "videos": "Videolar",
+  "@videos": {
+    "description": "Videos label"
+  },
+  "streams": "Akarsular",
+  "@streams": {
+    "description": "Streams label"
+  },
+  "latestVideos": "En Yeni Videolar",
+  "@latestVideos": {
+    "description": "Latest channel videos"
+  },
+  "subscribed": "Abone Olunan",
+  "@subscribed": {
+    "description": "When the user is subscribed to a channel"
+  },
+  "subscribe": "Abone ol",
+  "@subscribe": {
+    "description": "Label for user to subscribe to a channel"
+  },
+  "shareYoutubeLink": "YouTube bağlantısını paylaş",
+  "@shareYoutubeLink": {
+    "description": "asking user to share youtube link"
+  },
+  "comments": "Yorumlar",
+  "@comments": {
+    "description": "Comments label"
+  },
+  "couldntLoadVideo": "Video yüklenemedi",
+  "@couldntLoadVideo": {
+    "description": "Message to display when a video can't be loaded"
+  },
+  "couldntFetchVideos": "Video alınamadı. Tekrar denemek için dokunun.",
+  "@couldntFetchVideos": {
+    "description": "Can't load bunch of videos, asking  user to try again"
+  },
+  "videoAddedToQueue": "Sıraya eklenen video",
+  "@videoAddedToQueue": {
+    "description": "Pop up message when a video was added at the end of the video queue"
+  },
+  "topSorting": "Üst",
+  "@topSorting": {
+    "description": "Content sorting: top"
+  },
+  "loadMore": "Daha fazla yükle",
+  "@loadMore": {
+    "description": "CTA to load more"
+  },
+  "newSorting": "Yeni",
+  "@newSorting": {
+    "description": "Content sorting: new"
+  },
+  "currentServer": "Şu anda {current} kullanıyor",
+  "@currentServer": {
+    "description": "Which server the user is currently using",
+    "placeholders": {
+      "current": {
+        "type": "String"
+      }
+    }
+  },
+  "useSponsorBlock": "Sponsor Engelini Kullan",
+  "@useSponsorBlock": {
+    "description": "label for sponsorblock checkbox"
+  },
+  "sponsorBlockDescription": "Topluluk tarafından gönderilen sponsor segmentlerini atla",
+  "@sponsorBlockDescription": {
+    "description": "Sponsorblock setting description"
+  },
+  "package": "Paket",
+  "@package": {
+    "description": "package label"
+  },
+  "version": "Sürüm",
+  "@version": {
+    "description": "version label"
+  },
+  "build": "İnşa etmek",
+  "@build": {
+    "description": "build label"
+  },
+  "addServer": "Sunucu ekle",
+  "@addServer": {
+    "description": "Add server label"
+  },
+  "useThisServer": "Bu sunucuyu kullan",
+  "@useThisServer": {
+    "description": "Use this server label"
+  },
+  "loggedIn": "Oturum aç",
+  "@loggedIn": {
+    "description": "Label to tell the user that he is logged in to the server"
+  },
+  "notLoggedIn": "Giriş yapılmadı",
+  "@notLoggedIn": {
+    "description": "Label when the user is not logged in to the server"
+  },
+  "tapToAddServer": "Listenize sunucu eklemek için dokunun",
+  "@tapToAddServer": {
+    "description": "public server description"
+  },
+  "publicServers": "Genel sunucular",
+  "@publicServers": {
+    "description": "Public servers label"
+  },
+  "loadingPublicServer": "Genel sunucular yükleniyor",
+  "@loadingPublicServer": {
+    "description": "Message telling users the app is loading the list of public servers"
+  },
+  "publicServersError": "Genel sunucuların listesi alınamadı. Yeniden denemek için dokunun.",
+  "@publicServersError": {
+    "description": "Error message when trying to get public servers but it failed"
+  },
+  "appearance": "Görünüm",
+  "@appearance": {
+    "description": "Settings category title"
+  },
+  "useDynamicTheme": "Dinamik renkler",
+  "@useDynamicTheme": {
+    "description": ""
+  },
+  "useDash": "ÇİZGİ kullan",
+  "@useDash": {
+    "description": "Label on video options if a user wants to switch to dash urls instead of the regular quality selection"
+  },
+  "videoPlayer": "Video oynatıcı",
+  "@videoPlayer": {
+    "description": "Title for video player related options"
+  },
+  "videoListed": "Kamu",
+  "@videoListed": {
+    "description": "Status of a publicly available video"
+  },
+  "videoIsFamilyFriendly": "Aile dostu",
+  "@videoIsFamilyFriendly": {
+    "description": "Displayed only when a video is family friendly"
+  },
+  "tapToManage": "Yönetmek için dokunun",
+  "@tapToManage": {
+    "description": "Text shown below a server in the 'Your servers' list"
+  },
+  "tokenLoginDescription": "Giriş yapmanın önerilen yolu",
+  "@tokenLoginDescription": {
+    "description": "Recommended way to log in"
+  },
+  "cookieLogin": "Cookie ile giriş yap",
+  "@cookieLogin": {
+    "description": "Text to login to a server using the cookie jar method"
+  },
+  "tokenLogin": "Token ile giriş yap",
+  "@tokenLogin": {
+    "description": "Textto login to a server using the recommended way"
+  },
+  "logout": "Çıkış yap",
+  "@logout": {
+    "description": "CTA to logout of a server"
+  },
+  "username": "Kullanıcı adı",
+  "@username": {
+    "description": "Username label for login to a server"
+  },
+  "wrongUsernamePassword": "Yanlış kullanıcı adı veya şifre",
+  "@wrongUsernamePassword": {
+    "description": "Error message when authentication fails"
+  },
+  "error": "Hata",
+  "@error": {},
+  "videoQueue": "Video kuyruğu",
+  "@videoQueue": {
+    "description": "Label for button to display the video queue"
+  },
+  "addToQueueList": "Sıraya ekle",
+  "@addToQueueList": {
+    "description": "Label on button to add a video to the queue list"
+  },
+  "addToPlaylist": "Çalma listesine ekle",
+  "@addToPlaylist": {
+    "description": "Label to add a video to a playlist"
+  },
+  "serverIsNotReachable": "Sunucuya erişilemiyor",
+  "@serverIsNotReachable": {
+    "description": "Title for dialog when adding a server that is not reachable"
+  },
+  "addRecommendedToQueue": "Sonraki otomatik oynatma önerilir",
+  "@addRecommendedToQueue": {
+    "description": "Switch when playing a video to automatically add the recommended videos to the video queue"
+  },
+  "sponsorBlockSettingsQuickDescription": "Hangi tür segmentlerin atlanacağını seçin",
+  "@sponsorBlockSettingsQuickDescription": {
+    "description": "Small description of what the sponsor block settings do"
+  },
+  "sponsorBlockCategorySponsor": "Sponsor",
+  "@sponsorBlockCategorySponsor": {
+    "description": "Sponsor block 'Sponsor' Category"
+  },
+  "sponsorBlockCategoryUnpaidSelfPromo": "Ödenmemiş / Kendini Tanıtma",
+  "@sponsorBlockCategoryUnpaidSelfPromo": {
+    "description": "Sponsor block 'Unpaid/Self promotion' Category"
+  },
+  "sponsorBlockCategoryInteraction": "Etkileşim Hatırlatıcısı (Abone Ol)",
+  "@sponsorBlockCategoryInteraction": {
+    "description": "Sponsor block 'Interaction' Category"
+  },
+  "sponsorBlockCategoryOutroDescription": "Krediler veya YouTube bitiş kartları göründüğünde. Bilgi içeren sonuçlar için değil.",
+  "@sponsorBlockCategoryOutroDescription": {
+    "description": "Outro block 'Outro' Category description"
+  },
+  "sponsorBlockCategoryMusicOffTopic": "Müzik: Müzik Dışı Bölüm",
+  "@sponsorBlockCategoryMusicOffTopic": {
+    "description": "Sponsorblock 'MusicOffTopic' Category"
+  },
+  "useProxy": "Vekil videolar",
+  "@useProxy": {
+    "description": "label for settings switch to proxy videos from server"
+  },
+  "playbackSpeed": "Oynatma hızı",
+  "@playbackSpeed": {
+    "description": "Name of TV ui Playback speed"
+  },
+  "skipSslVerificationDescription": "Kendinden imzalı bir SSL sertifikası kullanmak veya sunucunuzla SSL ile ilgili sorunlar yaşarken.",
+  "@skipSslVerificationDescription": {
+    "description": "Setting description for the skip ssl certification verification"
+  },
+  "appLanguage": "Uygulama dili",
+  "@appLanguage": {
+    "description": "Select app language"
+  },
+  "autoplayVideoOnLoad": "Yükte videoyu otomatik olarak oynat",
+  "@autoplayVideoOnLoad": {
+    "description": "Label for settings to enable autoplay when a video loads"
+  },
+  "searchHistory": "Arama geçmişi",
+  "@searchHistory": {
+    "description": "Settings label for search history"
+  },
+  "shorts": "Kısalar",
+  "@shorts": {
+    "description": "Youtube shorts"
+  },
+  "searchSortRelevance": "Alaka",
+  "@searchSortRelevance": {
+    "description": "Sort search by relevance"
+  },
+  "copyToClipBoard": "Panoya kopyala",
+  "@copyToClipBoard": {
+    "description": "Text to copy something to clipboard"
+  },
+  "rememberSubtitleLanguage": "Altyazı dilini hatırla",
+  "@rememberSubtitleLanguage": {
+    "description": "Settings label for remembering subtitle language"
+  },
+  "videoFilters": "Video filtreleri",
+  "@videoFilters": {
+    "description": "Title for video filter settings"
+  },
+  "videoFiltersSettingTileDescriptions": "Videoları filtrelemek için kurallar tanımlayın",
+  "@videoFiltersSettingTileDescriptions": {
+    "description": "Description for the main settings page"
+  },
+  "videoFilterAllChannels": "Tüm kanallar",
+  "@videoFilterAllChannels": {
+    "description": "Title for the sections that applies to all channels"
+  },
+  "addVideoFilter": "Filtre oluştur",
+  "@addVideoFilter": {
+    "description": "Title when creating a new filter"
+  },
+  "editVideoFilter": "Filtreyi düzenle",
+  "@editVideoFilter": {
+    "description": "Title when editting a filter"
+  },
+  "videoFilterOperation": "Operasyon",
+  "@videoFilterOperation": {
+    "description": "Label for filter operation"
+  },
+  "videoFilterType": "Tip",
+  "@videoFilterType": {
+    "description": "Label for filter type"
+  },
+  "videoFilterValue": "Değer",
+  "@videoFilterValue": {
+    "description": "Label for filter value"
+  },
+  "videoFilterOperationContains": "İçeriyor",
+  "@videoFilterOperationContains": {
+    "description": "Label for video filter operation Contains"
+  },
+  "videoFilterTypeVideoLength": "Video uzunluğu (saniye)",
+  "@videoFilterTypeVideoLength": {
+    "description": "Label for video filter video length"
+  },
+  "videoFilterOperationLowerThan": "Daha düşük",
+  "@videoFilterOperationLowerThan": {
+    "description": "Label for video filter operation Lower than"
+  },
+  "videoFilterOperationNotContain": "Içermez",
+  "@videoFilterOperationNotContain": {
+    "description": "Label for video filter operation Does not contain"
+  },
+  "videoFilterOperationHigherThan": "Daha yüksek",
+  "@videoFilterOperationHigherThan": {
+    "description": "Label for video filter operation Higher than"
+  },
+  "channel": "Kanal",
+  "@channel": {
+    "description": "A single channel"
+  },
+  "videoFilterHideAllFromChannel": "Kanaldaki tüm videoları filtrele",
+  "@videoFilterHideAllFromChannel": {
+    "description": "Label for video filter switch to allow to hide all videos from a channel"
+  },
+  "videoFilterWholeChannel": "{hideOrFilter} kanaldaki tüm videolar",
+  "@videoFilterWholeChannel": {
+    "description": "Label for whole channel filtering",
+    "placeholders": {
+      "hideOrFilter": {
+        "type": "String",
+        "example": "Hide"
+      }
+    }
+  },
+  "lockFullScreenToLandscape": "Tam ekran yönünü video en boy oranına kilitle",
+  "@lockFullScreenToLandscape": {
+    "description": "Title to force full screen to landscape"
+  },
+  "fillFullscreen": "Videoyu ekrana sığacak şekilde en üst düzeye çıkarın",
+  "@fillFullscreen": {
+    "description": "Title to maximize video to fit screen"
+  },
+  "rememberPlaybackSpeed": "Oynatma hızını hatırla",
+  "@rememberPlaybackSpeed": {
+    "description": "Setting label for remembering playback speed"
+  },
+  "rememberPlaybackSpeedDescription": "Oynatma hızını otomatik olarak seçilen son hıza ayarlayın",
+  "@rememberPlaybackSpeedDescription": {
+    "description": "Settings description for remembering playback speed"
+  },
+  "downloads": "İndirilenler",
+  "@downloads": {
+    "description": "Downloads"
+  },
+  "download": "İndirmek",
+  "@download": {
+    "description": "A single download or CTA for downloading a video"
+  },
+  "clearHistoryQuestion": "Geçmişi temizlemek mi?",
+  "@clearHistoryQuestion": {},
+  "clearHistoryQuestionExplanation": "Bu, kullandığınız İnvidious örneğinde hesabınızın görüntüleme geçmişinizi temizleyecektir. Bu geri alınamaz.",
+  "@clearHistoryQuestionExplanation": {
+    "description": "Message for dialog before clearing full viewing history"
+  },
+  "distractionFreeModeDescription": "Video yorumlarını ve önerilerini devre dışı bırak",
+  "@distractionFreeModeDescription": {
+    "description": "Description for distraction free mode"
+  },
+  "secondsShortForm": "saniye",
+  "@secondsShortForm": {
+    "description": "Short form for the word seconds"
+  },
+  "videoFilterAppliedOn": "{selectedDays} tarihinde uygulandı",
+  "@videoFilterAppliedOn": {
+    "description": "Readable text on when the filter should apply",
+    "placeholders": {
+      "selectedDays": {
+        "type": "String",
+        "example": "Monday, Wednesday, Friday"
+      }
+    }
+  },
+  "from": "-den",
+  "@from": {
+    "description": "From word (as in 'From xx To xx')"
+  },
+  "to": "-e doğru",
+  "@to": {
+    "description": "To word as in 'From xx To xx')"
+  },
+  "subscriptionNotification": "Abonelik bildirimleri",
+  "@subscriptionNotification": {
+    "description": "Title for subscriptions notifications"
+  },
+  "enableNotificationDescriptions": "İzlemekte olduğunuz değişiklikleri kontrol etmek ve size bildirmek için ön plan hizmetini çalıştırır",
+  "@enableNotificationDescriptions": {
+    "description": ""
+  },
+  "subscriptionNotificationDescription": "Geçerli örneğinizde oturum açtıysanız abonelik akışınızdaki yeni videolardan haberdar olun",
+  "@subscriptionNotificationDescription": {
+    "description": "Description for subscription notifications"
+  },
+  "subscriptionNotificationContent": "",
+  "@subscriptionNotificationContent": {
+    "description": "Content for subscription notification",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "otherNotifications": "Diğer bildirim kaynakları (zil simgeleri)",
+  "@otherNotifications": {
+    "description": "Title for settings section in the notification settings"
+  },
+  "deleteChannelNotificationTitle": "Kanal bildirimini sil ?",
+  "@deleteChannelNotificationTitle": {
+    "description": "Title for dialog to confirm whether to delete channel notifications"
+  },
+  "deleteChannelNotificationContent": "Bu kanaldan artık bildirim almayacaksınız.",
+  "@deleteChannelNotificationContent": {
+    "description": "Title for dialog to confirm whether to delete channel notifications"
+  },
+  "foregroundServiceNotificationTitle": "Video izleme",
+  "@foregroundServiceNotificationTitle": {
+    "description": "Title for the foreground service running notification when the user wants to receive notifications"
+  },
+  "foregroundServiceUpdatingPlaylist": "Çalma listelerini kontrol etme...",
+  "@foregroundServiceUpdatingPlaylist": {
+    "description": "Foreground service notification text when checking for new playlist videos"
+  },
+  "notificationFrequencySettingsDescription": "Uygulamanın yeni videoları ne sıklıkla kontrol edeceği",
+  "@notificationFrequencySettingsDescription": {
+    "description": "Description for frequency settings"
+  },
+  "history": "Tarih",
+  "@history": {
+    "description": "User view history label"
+  },
+  "deArrowReplaceThumbnails": "Küçük resimleri değiştir",
+  "@deArrowReplaceThumbnails": {
+    "description": "Settings title for checkbox on whether the thumbnail should be replaced as well"
+  },
+  "seeking": "Arayış",
+  "@seeking": {
+    "description": "category for settings related to seeking in a video"
+  },
+  "exponentialSkip": "Üstel ileri / geri atlama",
+  "@exponentialSkip": {
+    "description": "Title for the setting to enable the exponential skipping"
+  },
+  "exponentialSkipDescription": "Ne kadar ileri atlarsanız, adım o kadar büyük olur.",
+  "@exponentialSkipDescription": {
+    "description": "Title for the setting to enable the exponential skipping"
+  },
+  "share": "Paylaş",
+  "@share": {
+    "description": "asking user if to share"
+  },
+  "shareLinkWithTimestamp": "Zaman damgası ekle",
+  "@shareLinkWithTimestamp": {
+    "description": "asking user to share link along with timestamp"
+  },
+  "ok": "tamam",
+  "@ok": {
+    "description": "Ok"
+  },
+  "noChannels": "Kanal yok",
+  "@noChannels": {
+    "description": "when there are no channels to display"
+  },
+  "noPlaylists": "Çalma listesi yok",
+  "@noPlaylists": {
+    "description": "when there are no playlists to display"
+  },
+  "channels": "Kanallar",
+  "@channels": {
+    "description": "Channels label"
+  },
+  "recommended": "Önerilen",
+  "@recommended": {
+    "description": "Recommended label"
+  },
+  "startUsingClipious": "Clipious'u kullanmaya başlayın",
+  "@startUsingClipious": {
+    "description": "button label to start using the app"
+  },
+  "videoAddedToPlaylist": "Video oynatma listesine eklendi",
+  "@videoAddedToPlaylist": {
+    "description": "Pop up message when a video was added to a playlist"
+  },
+  "errorAddingVideoToPlaylist": "Oynatma listesine video eklerken hata oluştu",
+  "@errorAddingVideoToPlaylist": {
+    "description": "Error while adding video to playlist"
+  },
+  "itemlistErrorGeneric": "Veri alınamadı",
+  "@itemlistErrorGeneric": {
+    "description": "Error showing when the data can't be fetch"
+  },
+  "itemListErrorInvalidScope": "Bunu görme izniniz yok, belirteç yöntemini kullanarak oturum açtıysanız oturumu kapatıp tekrar açmayı deneyin",
+  "@itemListErrorInvalidScope": {
+    "description": "Error when the user doesn't have the proper scope to its current token"
+  },
+  "createNewPlaylist": "Yeni çalma listesi oluştur",
+  "@createNewPlaylist": {
+    "description": "Button label to create a new playlist when the user wants to add a video to a playlist"
+  },
+  "streamIsLive": "Canlı",
+  "@streamIsLive": {
+    "description": "Label when a video is a live stream"
+  },
+  "sponsorSkipped": "Sponsor atlandı",
+  "@sponsorSkipped": {
+    "description": "When a sponsor segment is skipped thanks to sponsor block"
+  },
+  "selectBrowsingCountry": "Gözatma ülkesini seçin",
+  "@selectBrowsingCountry": {
+    "description": "Select country for trending content"
+  },
+  "showOnStart": "Uygulama başladığında ne gösterileceğini seçin",
+  "@showOnStart": {
+    "description": "Title of dialog asking which screen the users prefers to see"
+  },
+  "settings": "Ayarlar",
+  "@settings": {
+    "description": "Settings title"
+  },
+  "browsing": "Gözatma",
+  "@browsing": {
+    "description": "video browsing preferences"
+  },
+  "country": "Ülke",
+  "@country": {
+    "description": "Country label"
+  },
+  "whenAppStartsShow": "Uygulama başladığında, göster…",
+  "@whenAppStartsShow": {
+    "description": "Setting title for selecting the screen to show on start"
+  },
+  "servers": "Sunucular",
+  "@servers": {
+    "description": "Server management settings category"
+  },
+  "manageServers": "Sunucuları yönet",
+  "@manageServers": {
+    "description": "Settings to manage servers"
+  },
+  "about": "Hakkında",
+  "@about": {
+    "description": "About"
+  },
+  "name": "İsim",
+  "@name": {
+    "description": "NAme label"
+  },
+  "logIn": "Giriş yap",
+  "@logIn": {
+    "description": "CTA to log in to server"
+  },
+  "delete": "Silmek",
+  "@delete": {
+    "description": "Delete label"
+  },
+  "yourServers": "Sunucularınız",
+  "@yourServers": {
+    "description": "Your servers label"
+  },
+  "useDashDescription": "ÇİZGİ uyarlamalı akış bazen sorunlu olabilir, Youtube bunu kısabilir.",
+  "@useDashDescription": {
+    "description": "Description for dash in the settings screen"
+  },
+  "authentication": "Kimlik doğrulama",
+  "@authentication": {
+    "description": "Label for server settings related to authentications"
+  },
+  "password": "Şifre",
+  "@password": {
+    "description": "Password label for login to a server"
+  },
+  "playNext": "Sonrakini oyna",
+  "@playNext": {
+    "description": "Label to play the video after the current one."
+  },
+  "playNextAddedToQueue": "Sonraki video oynatılacak",
+  "@playNextAddedToQueue": {
+    "description": "Pop up message to confirm that the video has been properly set to play next"
+  },
+  "sponsorBlockCategoryInteractionDescription": "Beğenmek için kısa bir hatırlatma olduğunda, içeriğin ortasında abone olun veya takip edin. Uzunsa veya belirli bir şeyle ilgiliyse, bunun yerine kendini tanıtma altında olmalıdır.",
+  "@sponsorBlockCategoryInteractionDescription": {
+    "description": "Sponsor block 'Interaction' Category description"
+  },
+  "sponsorBlockCategoryIntro": "Ara / Giriş Animasyonu",
+  "@sponsorBlockCategoryIntro": {
+    "description": "Sponsorblock 'Intro' Category"
+  },
+  "sponsorBlockCategoryOutro": "Bitiş Kartları / Krediler",
+  "@sponsorBlockCategoryOutro": {
+    "description": "Outro block 'Outro' Category"
+  },
+  "sponsorBlockCategoryPreview": "Önizleme / Özet",
+  "@sponsorBlockCategoryPreview": {
+    "description": "Sponsorblock 'Preview' Category"
+  },
+  "quality": "Kalite",
+  "@quality": {
+    "description": "Name of TV ui video settings"
+  },
+  "audio": "Ses",
+  "@audio": {
+    "description": "Name TV ui audio settings"
+  },
+  "subtitles": "Altyazılar",
+  "@subtitles": {
+    "description": "Name of TV ui subtitles settings"
+  },
+  "blackBackground": "Siyah arka plan",
+  "@blackBackground": {
+    "description": "Settings name for black background"
+  },
+  "search": "Arama",
+  "@search": {
+    "description": "search title"
+  },
+  "subtitleFontSize": "Altyazılar yazı tipi boyutu",
+  "@subtitleFontSize": {
+    "description": "Settings label for the size of the subtitles"
+  },
+  "subtitleFontSizeDescription": "Cihazınızda çok küçük veya çok büyükse altyazıların boyutunu değiştirin",
+  "@subtitleFontSizeDescription": {
+    "description": "Settings description for subtitle size"
+  },
+  "skipSslVerification": "SSL sertifikası doğrulamasını atla",
+  "@skipSslVerification": {
+    "description": "Setting label to skip ssl certification verification"
+  },
+  "themeBrightness": "Tema",
+  "@themeBrightness": {
+    "description": "Ask the user to user dark / light / system theme"
+  },
+  "themeLight": "Işık",
+  "@themeLight": {
+    "description": "Light theme"
+  },
+  "themeDark": "Karanlık",
+  "@themeDark": {
+    "description": "Dark theme"
+  },
+  "followSystem": "Takip sistemi",
+  "@followSystem": {
+    "description": "Follow system label"
+  },
+  "searchHistoryDescription": "Arama geçmişi ayarları",
+  "@searchHistoryDescription": {
+    "description": "Description for search history settings"
+  },
+  "enableSearchHistory": "Arama geçmişini etkinleştir",
+  "@enableSearchHistory": {
+    "description": "Settings label for enabling search history"
+  },
+  "searchSortRating": "Değerlendirme",
+  "@searchSortRating": {
+    "description": "Sort search by rating"
+  },
+  "searchSortUploadDate": "Yükleme Tarihi",
+  "@searchSortUploadDate": {
+    "description": "Sort search by upload date"
+  },
+  "searchHistoryLimit": "Arama geçmişi sınırı",
+  "@searchHistoryLimit": {
+    "description": "Settings label for search history limit"
+  },
+  "searchSortBy": "Sırala",
+  "@searchSortBy": {
+    "description": "Search sorting option"
+  },
+  "videoFilterHide": "Filtrelenmiş videoları gizle",
+  "@videoFilterHide": {
+    "description": "Label for settings to hide filtered videos"
+  },
+  "rememberSubtitleLanguageDescription": "Varsa altyazıları otomatik olarak seçilen son dile ayarlayın",
+  "@rememberSubtitleLanguageDescription": {
+    "description": "Settings description for remembering subtitle language"
+  },
+  "lockFullScreenToLandscapeDescription": "Video formatına göre tam ekran yönünü, geniş video için manzarayı ve portre videoları için portreyi kilitler",
+  "@lockFullScreenToLandscapeDescription": {
+    "description": "Setting description for forcing video to landscape when in full screen"
+  },
+  "home": "Ev",
+  "@home": {
+    "description": "Label for Home browsing tab"
+  },
+  "videoFilterStartTime": "Başlama zamanı",
+  "@videoFilterStartTime": {
+    "description": "Title for filter start time"
+  },
+  "deArrowSettingDescription": "Tıklama yemi başlıklarını ve küçük resimlerini değiştirin",
+  "@deArrowSettingDescription": {
+    "description": "Description for dearrow"
+  },
+  "deArrowReplaceThumbnailsDescription": "Başlıklara ek olarak video küçük resimlerini değiştirin",
+  "@deArrowReplaceThumbnailsDescription": {
+    "description": "Description for DeArrow setting switch"
+  },
+  "subtitlesBackgroundDescription": "Altyazıları daha okunabilir hale getirmek için altyazılara siyah bir arka plan ekler",
+  "@subtitlesBackgroundDescription": {
+    "description": "Description for settings to set black background  for subtitles"
+  },
+  "searchUploadDateAny": "Herhangi bir tarih",
+  "@searchUploadDateAny": {
+    "description": "Do not filter search result by upload date"
+  },
+  "searchUploadDateHour": "Son Bir Saat",
+  "@searchUploadDateHour": {
+    "description": "Search for uploaded in last hour"
+  },
+  "searchUploadDateMonth": "Bu ay",
+  "@searchUploadDateMonth": {
+    "description": "Search for uploaded this month"
+  },
+  "searchUploadDateYear": "Bu yıl",
+  "@searchUploadDateYear": {
+    "description": "Search for uploaded this year"
+  },
+  "searchDuration": "Süre",
+  "@searchDuration": {
+    "description": "Filter search result by duration"
+  },
+  "searchDurationAny": "Herhangi bir süre",
+  "@searchDurationAny": {
+    "description": "Do not filter search result by duration"
+  },
+  "searchDurationShort": "Kısa (<4 dakika)",
+  "@searchDurationShort": {
+    "description": "Search for short videos only"
+  },
+  "searchDurationLong": "Uzun (> 20 dakika)",
+  "@searchDurationLong": {
+    "description": "Search for long videos only"
+  },
+  "searchDurationMedium": "Orta (4-20 dakika)",
+  "@searchDurationMedium": {
+    "description": "Search for medium videos only"
+  },
+  "searchSortViewCount": "Görüntüleme Sayısı",
+  "@searchSortViewCount": {
+    "description": "Sort search by view count"
+  },
+  "appLogs": "Uygulama Günlükleri",
+  "@appLogs": {
+    "description": "Title for settings that leads to application logs"
+  },
+  "appLogsDescription": "Uygulamada neler olup bittiğinin günlüklerini alın, sorunları bildirmek için yararlı olabilir",
+  "@appLogsDescription": {
+    "description": "Description of the app log settings"
+  },
+  "logsCopied": "Panoya kopyalanan günlükler",
+  "@logsCopied": {
+    "description": "Message to tell user that logs have been copied to the clipboard"
+  },
+  "save": "Kaydetmek",
+  "@save": {
+    "description": "Text for save action"
+  },
+  "optional": "isteğe bağlı",
+  "@optional": {
+    "description": "Optional label"
+  },
+  "videoFilterHideLabel": "Saklamak",
+  "@videoFilterHideLabel": {
+    "description": "Label to hide videos"
+  },
+  "videoFilterFilterLabel": "Şaşırtmak",
+  "@videoFilterFilterLabel": {
+    "description": "Label to filter videos"
+  },
+  "videoFilterTapToReveal": "Ortaya çıkarmak için dokunun",
+  "@videoFilterTapToReveal": {
+    "description": "Label to tell user to tap to show a filtered video"
+  },
+  "videoFilterNoFilters": "Video filtresi yok, filtre eklemeye başlamak için aşağıdaki '+' düğmesine dokunun.",
+  "@videoFilterNoFilters": {
+    "description": "Label when there are no video filters"
+  },
+  "videoFilterTypeVideoTitle": "Video başlığı",
+  "@videoFilterTypeVideoTitle": {
+    "description": "Label for video filter video title"
+  },
+  "videoFilterTypeChannelName": "Kanal adı",
+  "@videoFilterTypeChannelName": {
+    "description": "Label for video filter channel name"
+  },
+  "fillFullscreenDescription": "Videoyu tüm ekranı yatay modda dolduracak şekilde ayarlar",
+  "@fillFullscreenDescription": {
+    "description": "Setting description for filling video to screen in landscape"
+  },
+  "videoAlreadyDownloaded": "Video zaten indirildi",
+  "@videoAlreadyDownloaded": {
+    "description": "Message when a user tries to download a video he already has"
+  },
+  "downloadsPlayAll": "Hepsini oyna",
+  "@downloadsPlayAll": {
+    "description": "Button to play all downloaded videos"
+  },
+  "videoDownloadStarted": "Video indirme başladı",
+  "@videoDownloadStarted": {
+    "description": "Message when a video starts being downloaded"
+  },
+  "videoFailedDownloadRetry": "İndirme başarısız oldu, yeniden denemek için dokunun",
+  "@videoFailedDownloadRetry": {
+    "description": "Shown on download manager when a download fails and prompt the user to retry"
+  },
+  "videoDownloadAudioOnly": "Yalnızca ses",
+  "@videoDownloadAudioOnly": {
+    "description": "Label for toggle to download audio only "
+  },
+  "manageSubscriptions": "Abonelikleri Yönet",
+  "@manageSubscriptions": {
+    "description": "Title of manage subscriptions page"
+  },
+  "noSubscriptions": "Abonelik yok, videolara göz atın ve istediğiniz herhangi bir kanala abone olun.",
+  "@noSubscriptions": {
+    "description": "Message when the user has no subs"
+  },
+  "youCanSubscribeAgainLater": "Bu kanala daha sonra tekrar abone olabilirsiniz",
+  "@youCanSubscribeAgainLater": {
+    "description": "Text for the unscubscribe confirmation dialog"
+  },
+  "unSubscribeQuestion": "Abonelikten çıkmak mı?",
+  "@unSubscribeQuestion": {
+    "description": "Title for dialog if a user wants to unsubscribe in the subscribtion management screen"
+  },
+  "noHistory": "Görüntüleme geçmişi yok, bazı videoları izleyin ve burada görünecektir",
+  "@noHistory": {
+    "description": "Message when the user visits the history tab but it's empty"
+  },
+  "layoutEditorAddVideoSource": "Video kaynağı ekle",
+  "@layoutEditorAddVideoSource": {
+    "description": "Label for button to allow user to add more video sources to the home screen"
+  },
+  "library": "Kütüphane",
+  "@library": {
+    "description": "Name for user library"
+  },
+  "customizeAppLayout": "Uygulama bölümlerini özelleştirme",
+  "@customizeAppLayout": {
+    "description": "Settings label for the settings to allow the user to set up the app sections themselves"
+  },
+  "customizeAppLayoutExplanation": "Ana uygulama gezinme çubuğunda hangi bölümlerin görünmesini istediğinizi seçin. Uygulama başladığında hangi ekranın gösterileceğini seçmek için giriş simgesine tıklayın. Bölümleri sürükleyerek yeniden sıralayabilirsiniz.",
+  "@customizeAppLayoutExplanation": {
+    "description": ""
+  },
+  "navigationBarStyle": "Gezinme çubuğu stili",
+  "@navigationBarStyle": {
+    "description": "Label for settings on customizing navigation bar style"
+  },
+  "navigationBarLabelAlwaysShowing": "Etiket her zaman gösteriliyor",
+  "@navigationBarLabelAlwaysShowing": {
+    "description": "Label always showing option for navigation bar"
+  },
+  "navigationBarLabelShowOnSelect": "Seçili öğede gösterilen etiket",
+  "@navigationBarLabelShowOnSelect": {
+    "description": "Label only showing when selected option for navigation bar"
+  },
+  "navigationBarLabelNeverShow": "Etiketi asla gösterme",
+  "@navigationBarLabelNeverShow": {
+    "description": "Never show label option for navigation bar"
+  },
+  "distractionFreeMode": "Dikkat dağıtıcı serbest mod",
+  "@distractionFreeMode": {
+    "description": "title for distraction free mode settings"
+  },
+  "videoFilterDayOfWeek": "Filtre uygulamak için günleri seçin",
+  "@videoFilterDayOfWeek": {
+    "description": "Title for day selection for the filter"
+  },
+  "videoFilterDayOfWeekDescription": "Haftanın günlerini ve filtrelerin uygulandığı zamanı seçerek seçebilirsiniz, örneğin spor etkinlikleri spoylerinden kaçının.",
+  "@videoFilterDayOfWeekDescription": {
+    "description": ""
+  },
+  "videoFilterEndTime": "Bitiş zamanı",
+  "@videoFilterEndTime": {
+    "description": "Title for filter end time"
+  },
+  "notifications": "Bildirimler",
+  "@notifications": {
+    "description": "Notification settings title"
+  },
+  "askToEnableBackgroundServiceTitle": "Bildirimler kapalı",
+  "@askToEnableBackgroundServiceTitle": {
+    "description": "If the users tries to turn on notifications for a channel but hasn't enable notifications in the app we need to turn it on for them"
+  },
+  "askToEnableBackgroundServiceContent": "Bildirim almak için Küçük bildirimlerin etkinleştirilmesi gerekir, etkinleştirmek için Tamam'a basın.",
+  "@askToEnableBackgroundServiceContent": {
+    "description": "If the users tries to turn on notifications for a channel but hasn't enable notifications in the app we need to turn it on for them"
+  },
+  "deletePlaylistNotificationTitle": "Çalma listesi bildirimini sil ?",
+  "@deletePlaylistNotificationTitle": {
+    "description": "Title for dialog to confirm whether to delete playlist notifications"
+  },
+  "deletePlaylistNotificationContent": "Bu çalma listesinden artık bildirim almayacaksınız.",
+  "@deletePlaylistNotificationContent": {
+    "description": "Title for dialog to confirm whether to delete playlist notifications"
+  },
+  "foregroundServiceUpdatingSubscriptions": "Abonelikleri kontrol etme...",
+  "@foregroundServiceUpdatingSubscriptions": {
+    "description": "Foreground service notification text when checking for new subscription videos"
+  },
+  "foregroundServiceUpdatingChannels": "Kanalları kontrol ediyorum...",
+  "@foregroundServiceUpdatingChannels": {
+    "description": "Foreground service notification text when checking for new channel videos"
+  },
+  "notificationFrequencySettingsTitle": "Yeni video kontrol frekansı",
+  "@notificationFrequencySettingsTitle": {
+    "description": "Title for frequency settings"
+  },
+  "subtitlesBackground": "Altyazılar arka plan",
+  "@subtitlesBackground": {
+    "description": "Title for settings to set black background  for subtitles"
+  },
+  "deArrowWarning": "Enable DeArrow, her bir video için ekstra http istekleri gerektiğinden, uygulamanın tarama hızını önemli ölçüde azaltabilir",
+  "@deArrowWarning": {
+    "description": "Warning message when the user enables DeArrow"
+  },
+  "copySettingsAsJson": "Ayarları JSON olarak panoya kopyala",
+  "@copySettingsAsJson": {
+    "description": "title for settings sections to allow users to copy their settings as json to make debugging easier"
+  },
+  "skipStep": "İleri / geri adımı atla",
+  "@skipStep": {
+    "description": "Title for the settings to set the skipping step"
+  },
+  "skipStepDescription": "İleri / geri eylemleri atlamak için saniye",
+  "@skipStepDescription": {
+    "description": "Title for the settings to set the skipping step"
+  },
+  "fullscreenOnLandscape": "Manzarada tam ekran",
+  "@fullscreenOnLandscape": {
+    "description": "Setting title to enable full screen on landscape orientation"
+  },
+  "channelNotificationTitle": "{Kanal} 'dan yeni videolar",
+  "@channelNotificationTitle": {
+    "description": "Title for the channel notifications when there are new videos",
+    "placeholders": {
+      "channel": {
+        "type": "String",
+        "example": "MKBHD"
+      }
+    }
+  },
+  "playlistNotificationTitle": "{Oynatma listesi} oynatma listesindeki yeni videolar",
+  "@playlistNotificationTitle": {
+    "description": "Title for the playlist notifications when there are new videos",
+    "placeholders": {
+      "playlist": {
+        "type": "String",
+        "example": "Lo-Fi girl"
+      }
+    }
+  },
+  "fullscreenOnLandscapeDescription": "Cihaz yatay moda döndürüldüğünde tam ekrana geçin",
+  "@fullscreenOnLandscapeDescription": {
+    "description": "Setting to enable full screen on landscape orientation"
+  },
+  "info": "Bilgi",
+  "@info": {
+    "description": "Info label"
+  },
+  "nSubscribers": "",
+  "@nSubscribers": {
+    "description": "number of subscribers",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "shareInvidiousLink": "Davetsiz bağlantıyı paylaş",
+  "@shareInvidiousLink": {
+    "description": "asking user to share invidious link"
+  },
+  "redirectInvidiousLink": "Davetsiz Yönlendirme bağlantısını paylaşın",
+  "@redirectInvidiousLink": {
+    "description": "asking user to share redirecting invidious link"
+  },
+  "wizardIntro": "Ortak bir sunucu seçin veya kendinizinkini ekleyin. (Daha sonra ayarlarda değiştirilebilir)",
+  "@wizardIntro": {
+    "description": "Welcome message on frst time use"
+  },
+  "selectPlaylist": "Çalma listesi seç",
+  "@selectPlaylist": {
+    "description": "Title when users wants to add a video to a playlist"
+  },
+  "invalidInvidiousServer": "Geçersiz Davetsiz sunucu",
+  "@invalidInvidiousServer": {
+    "description": "Error when the user tries to add a server that is not a proper or reachable invidious server"
+  },
+  "addServerHelpText": "Kendi sunucularınızı eklemek için + düğmesini kullanın veya genel bir sunucuya dokunup ekleyin.",
+  "@addServerHelpText": {
+    "description": "label for when the user hasn't chosen a server yet"
+  },
+  "useDynamicThemeDescription": "Kullandığınız Malzeme renklerini kullanın (yalnızca Android 12+ 'da mevcuttur)",
+  "@useDynamicThemeDescription": {
+    "description": ""
+  },
+  "videoUnlisted": "Listelenmemiş",
+  "@videoUnlisted": {
+    "description": "Status of a video that is only accessible by link"
+  },
+  "cookieLoginDescription": "Belirteç kimlik doğrulamasıyla ilgili sorunlarla karşılaşırsanız bu yöntemi kullanın",
+  "@cookieLoginDescription": {
+    "description": "Cookie log in description"
+  },
+  "sponsorBlockCategorySponsorDescription": "Ücretli tanıtım, ücretli yönlendirmeler ve doğrudan reklamlar. Beğendikleri nedenlere / içerik oluşturuculara / web sitelerine / ürünlere kendi kendini tanıtmak veya ücretsiz bağırmak için değil.",
+  "@sponsorBlockCategorySponsorDescription": {
+    "description": "Sponsor block 'Sponsor' Category description"
+  },
+  "sponsorBlockCategoryUnpaidSelfPromoDescription": "Ödenmemiş veya kendi kendini tanıtma dışında \"sponsor\" a benzer. Bu, mallarla ilgili bölümleri içerir, bağışlar, veya kiminle işbirliği yaptıkları hakkında bilgi ",
+  "@sponsorBlockCategoryUnpaidSelfPromoDescription": {
+    "description": "Sponsor block 'Unpaid/Self promotion' Category description"
+  },
+  "sponsorBlockCategoryIntroDescription": "Gerçek içeriği olmayan bir aralık. Duraklama, statik kare, yinelenen animasyon olabilir. Bu, bilgi içeren geçişler için kullanılmamalıdır.",
+  "@sponsorBlockCategoryIntroDescription": {
+    "description": "Sponsorblock 'Intro' Category description"
+  },
+  "sponsorBlockCategoryFiller": "Dolgu Teğeti / Şakalar",
+  "@sponsorBlockCategoryFiller": {
+    "description": "Sponsorblock 'Filler' Category"
+  },
+  "sponsorBlockCategoryPreviewDescription": "Tüm bilgilerin videonun ilerleyen bölümlerinde tekrarlandığı bir serideki bu videoda veya diğer videolarda neler olduğunu gösteren kliplerin toplanması.",
+  "@sponsorBlockCategoryPreviewDescription": {
+    "description": "Sponsorblock 'Preview' Category description"
+  },
+  "sponsorBlockCategoryFillerDescription": "Teğetsel sahneler, yalnızca videonun ana içeriğini anlamak için gerekli olmayan dolgu veya mizah için eklenir. Bu, bağlam veya arka plan ayrıntıları sağlayan bölümleri içermemelidir. Bu, \"eğlence\" havasında olmadığınız zamanlar için tasarlanmış çok agresif bir kategoridir.",
+  "@sponsorBlockCategoryFillerDescription": {
+    "description": "Sponsorblock 'Filler' Category description"
+  },
+  "sponsorBlockCategoryMusicOffTopicDescription": "Sadece müzik videolarında kullanım içindir. Bu, yalnızca başka bir kategorinin kapsamadığı müzik videolarının bölümleri için kullanılmalıdır.",
+  "@sponsorBlockCategoryMusicOffTopicDescription": {
+    "description": "Only for use in music videos. This only should be used for sections of music videos that aren't already covered by another category."
+  },
+  "useProxyDescription": "Sunucudan video akışlarını proxyleyerek, bölgesel blokları atlayabilir veya YouTube'u engelleyen ISS'Yİ atlayabilirsiniz",
+  "@useProxyDescription": {
+    "description": "Description for the use proxy settings"
+  },
+  "pressDownToShowSettings": "Ayarları göstermek için aşağı tuşuna basın",
+  "@pressDownToShowSettings": {
+    "description": "Instruction on how to show video settings when playing a video on TV"
+  },
+  "blackBackgroundDescription": "OLED ekranda karanlık tema için",
+  "@blackBackgroundDescription": {
+    "description": "Description for dark background setting"
+  },
+  "requiresRestart": "Uygulamanın yeniden başlatılmasını gerektirir",
+  "@requiresRestart": {
+    "description": "Requires app restart label"
+  },
+  "returnYoutubeDislikeDescription": "Tarafından sağlanan API'yi kullanarak tahmini video beğenmediklerini göster returnyoutubedislike.com",
+  "@returnYoutubeDislikeDescription": {
+    "description": "ReturnYoutubeDislike setting description"
+  },
+  "autoplayVideoOnLoadDescription": "Yüklendikten sonra videoyu otomatik olarak oynatmaya başlayın",
+  "@autoplayVideoOnLoadDescription": {
+    "description": "Description for the autoplay video on load setting"
+  },
+  "searchHistoryLimitDescription": "Önerilerde kaç önceki aramanın görüneceğini ayarlama",
+  "@searchHistoryLimitDescription": {
+    "description": "Settings label for search history limit description"
+  },
+  "searchUploadDate": "Yükleme tarihi",
+  "@searchUploadDate": {
+    "description": "Filter search result by upload date"
+  },
+  "clearSearchHistory": "Arama geçmişini temizle",
+  "@clearSearchHistory": {
+    "description": "Settings label for clearing search history"
+  },
+  "videoFiltersExplanation": "Aşağıda tanımlanan filtrelere dayanarak uygulamadaki tüm video akışlarındaki videoları gizleyin veya gizleyin. Bu, örneğin spor spoylerini gizlemenize veya şortları belirli bir kanaldan gizlemenize olanak tanır.",
+  "@videoFiltersExplanation": {
+    "description": "Description on how filter work"
+  },
+  "videoFilterEditDescription": "Listelerdeki videoları filtrelemek için isteğe bağlı bir kanal, bir filtre türü, işlem ve bir değer seçin. Örnek, tür: video adı, işlem: içerir, değer: test, adlarında 'test' kelimesi bulunan tüm videoları HARİÇ tutacaktır.",
+  "@videoFilterEditDescription": {
+    "description": "Descriptive test for video filter set up"
+  },
+  "videoFiltered": "Aşağıdaki nedenlerden dolayı filtrelenmiş video:",
+  "@videoFiltered": {
+    "description": "Label shown on video list when it is filtered out"
+  },
+  "videoFilterHideDescription": "Varsayılan olarak filtrelenmiş videolar gizlenmez, ancak filtrelenme nedenleriyle gizlenmiş olarak gösterilir. Bu ayar, filtrelenmiş videoları listelerden kaldırır.",
+  "@videoFilterHideDescription": {
+    "description": ""
+  },
+  "noDownloadedVideos": "İndirilen video yok, göz atın, listedeki bir videoya uzun basın veya indirmek için video ekranındaki indir düğmesine dokunun",
+  "@noDownloadedVideos": {
+    "description": "Message showing when the user goes to the download screen but there are no offline videos."
+  },
+  "homeLayoutEditor": "Ev düzenini düzenle",
+  "@homeLayoutEditor": {
+    "description": "Title of layout editor screen"
+  },
+  "layoutEditorExplanation": "Ana ekranınızda ne görüntüleyeceğinize karar verebilir, yatay kaydırma ve bir büyük kaynak ile en fazla 2 küçük görünüme sahip olabilirsiniz.",
+  "@layoutEditorExplanation": {
+    "description": "text to explain the home layout editor"
+  },
+  "videoFilterApplyDateToFilter": "Videoları belirli zamanlara göre filtreleyin",
+  "@videoFilterApplyDateToFilter": {
+    "description": "Label for switch to allow user to customize video filter and set days of week and time to them"
+  },
+  "notificationsDescription": "Bildirdiklerinizi etkinleştirin ve gözden geçirin",
+  "@notificationsDescription": {
+    "description": "Setting description for notifications"
+  },
+  "subscriptionNotificationTitle": "Aboneliklerinizden yeni videolar",
+  "@subscriptionNotificationTitle": {
+    "description": "Title for the notification showing that there are new videos from the subscription feed"
+  },
+  "askForDisableBatteryOptimizationTitle": "Pil optimizasyonunu devre dışı bırakmak gerekir",
+  "@askForDisableBatteryOptimizationTitle": {
+    "description": "Title for the dialog asking the user to turn off disabling battery optimization when turning on notifications"
+  },
+  "askForDisableBatteryOptimizationContent": "Clipious bildirimi göndermek için bir arka plan hizmeti çalıştırmanız gerekir. Sorunsuz çalışması için Clipious'a sınırsız pil kullanımı verilmesi gerekir, tamam'a dokunmak pil optimizasyon ayarlarını açacaktır.",
+  "@askForDisableBatteryOptimizationContent": {
+    "description": "Content for the dialog asking the user to turn off disabling battery optimization when turning on notifications"
+  },
+  "copySettingsAsJsonDescription": "Uygulama ile ilgili bir sorunla karşılaşırsanız ve bir sorunu gündeme getirmeye karar verirseniz hata ayıklamaya yardımcı olması için ayarları JSON olarak kopyalayın",
+  "@copySettingsAsJsonDescription": {
+    "description": ""
+  },
+  "malformedStatsEndpointDescription": "Sunucu istatistikleri bitiş noktası beklenen bir yüke yanıt vermedi, anahtar \"software.name \" \"davetsiz\" ile eşit olmalıdır.\nSunucudan yanıt:",
+  "@malformedStatsEndpointDescription": {
+    "description": "Description of the possible issue for an invalid stats endpoints"
+  },
+  "feedbackDisclaimer": "Geri bildirim göndermek için bir GitHub hesabına ihtiyacınız olacak ve ekran görüntünüz anonim olarak Imgur'a gönderilecektir.",
+  "@feedbackDisclaimer": {
+    "description": "Content of dialog shown before submitting feedback to make sure the user is ok whith where the data is going"
+  },
+  "searchUploadDateToday": "Bugün",
+  "@searchUploadDateToday": {
+    "description": "Search for uploaded today"
+  },
+  "feedbackScreenshotError": "Imgur'a ekran görüntüsü yüklenirken hata oluştu",
+  "@feedbackScreenshotError": {
+    "description": "Title for dialog if something goes wrong while uploading feedback screenshot"
+  },
+  "searchUploadDateWeek": "Bu hafta",
+  "@searchUploadDateWeek": {
+    "description": "Search for uploaded this week"
+  },
+  "enabled": "Etkin",
+  "@enabled": {
+    "description": "Text to show something is enabled"
+  },
+  "submitFeedback": "Geri bildirim gönder",
+  "@submitFeedback": {
+    "description": "Title for settings to submit feed back through the app"
+  },
+  "submitFeedbackDescription": "Bir hata mı buldunuz yoksa bir öneriniz mi var? uygulamanın ekran görüntüsünü almak, açıklama eklemek ve geri bildirim göndermek için bu aracı kullanın",
+  "@submitFeedbackDescription": {
+    "description": "Setting tile descriptions for feedback submission"
+  },
+  "channelSortByNewest": "En Yeni",
+  "@channelSortByNewest": {
+    "description": "Sort channel videos from newest to oldest"
+  },
+  "channelSortByOldest": "En Eski",
+  "@channelSortByOldest": {
+    "description": "Sort channel videos from oldest to newest"
+  },
+  "channelSortByPopular": "Popüler",
+  "@channelSortByPopular": {
+    "description": "Sort channel videos by popularity"
+  }
+}

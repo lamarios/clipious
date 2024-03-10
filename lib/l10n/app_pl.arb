@@ -900,5 +900,163 @@
   "noHistory": "Brak historii oglądania. Obejrzyj kilka filmów, a te pojawią się tutaj",
   "@noHistory": {
     "description": "Message when the user visits the history tab but it's empty"
+  },
+  "homeLayoutEditor": "Edytuj układ",
+  "@homeLayoutEditor": {
+    "description": "Title of layout editor screen"
+  },
+  "secondsShortForm": "sek",
+  "@secondsShortForm": {
+    "description": "Short form for the word seconds"
+  },
+  "to": "Do",
+  "@to": {
+    "description": "To word as in 'From xx To xx')"
+  },
+  "subscriptionNotification": "Powiadomienia subskrybcji",
+  "@subscriptionNotification": {
+    "description": "Title for subscriptions notifications"
+  },
+  "deletePlaylistNotificationTitle": "Usunąć powiadomienia z playlisty?",
+  "@deletePlaylistNotificationTitle": {
+    "description": "Title for dialog to confirm whether to delete playlist notifications"
+  },
+  "share": "Udostępnij",
+  "@share": {
+    "description": "asking user if to share"
+  },
+  "malformedStatsEndpoint": "/api/v1/stats jest niespodziewane",
+  "@malformedStatsEndpoint": {
+    "description": "Title for dialog when adding a server that isn't validated as it should"
+  },
+  "channelNotificationTitle": "Nowe filmy z {channel}",
+  "@channelNotificationTitle": {
+    "description": "Title for the channel notifications when there are new videos",
+    "placeholders": {
+      "channel": {
+        "type": "String",
+        "example": "MKBHD"
+      }
+    }
+  },
+  "serverIsNotReachable": "Serwer jest niedostępny",
+  "@serverIsNotReachable": {
+    "description": "Title for dialog when adding a server that is not reachable"
+  },
+  "searchUploadDateHour": "Ostatnia godzina",
+  "@searchUploadDateHour": {
+    "description": "Search for uploaded in last hour"
+  },
+  "searchUploadDateMonth": "Ten miesiąc",
+  "@searchUploadDateMonth": {
+    "description": "Search for uploaded this month"
+  },
+  "searchDuration": "Długość",
+  "@searchDuration": {
+    "description": "Filter search result by duration"
+  },
+  "searchDurationShort": "Krótkie (<4 minuty)",
+  "@searchDurationShort": {
+    "description": "Search for short videos only"
+  },
+  "searchDurationLong": "Długie (>20 minut)",
+  "@searchDurationLong": {
+    "description": "Search for long videos only"
+  },
+  "searchDurationMedium": "Średnie (4-20 minut)",
+  "@searchDurationMedium": {
+    "description": "Search for medium videos only"
+  },
+  "searchDurationAny": "Dowolna długość",
+  "@searchDurationAny": {
+    "description": "Do not filter search result by duration"
+  },
+  "searchUploadDateAny": "Dowolna data",
+  "@searchUploadDateAny": {
+    "description": "Do not filter search result by upload date"
+  },
+  "library": "Biblioteka",
+  "@library": {
+    "description": "Name for user library"
+  },
+  "videoFilterStartTime": "Czas rozpoczęcia",
+  "@videoFilterStartTime": {
+    "description": "Title for filter start time"
+  },
+  "from": "Od",
+  "@from": {
+    "description": "From word (as in 'From xx To xx')"
+  },
+  "subscriptionNotificationContent": "{count, plural, =0{Nie ma nowych filmów} =1{Jest 1 nowy film} other{Jest {count} nowych filmów}} w twoich subskrybcjach",
+  "@subscriptionNotificationContent": {
+    "description": "Content for subscription notification",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "askToEnableBackgroundServiceTitle": "Powiadomienia są wyłączone",
+  "@askToEnableBackgroundServiceTitle": {
+    "description": "If the users tries to turn on notifications for a channel but hasn't enable notifications in the app we need to turn it on for them"
+  },
+  "searchUploadDate": "Data publikacji",
+  "@searchUploadDate": {
+    "description": "Filter search result by upload date"
+  },
+  "searchUploadDateYear": "Ten rok",
+  "@searchUploadDateYear": {
+    "description": "Search for uploaded this year"
+  },
+  "searchSortBy": "Sortuj",
+  "@searchSortBy": {
+    "description": "Search sorting option"
+  },
+  "layoutEditorAddVideoSource": "Dodaj źródło filmu",
+  "@layoutEditorAddVideoSource": {
+    "description": "Label for button to allow user to add more video sources to the home screen"
+  },
+  "videoFilterEndTime": "Czas zakończenia",
+  "@videoFilterEndTime": {
+    "description": "Title for filter end time"
+  },
+  "notifications": "Powiadomienia",
+  "@notifications": {
+    "description": "Notification settings title"
+  },
+  "videoFilterTimeOfDayFromTo": "Od {from} do {to}",
+  "@videoFilterTimeOfDayFromTo": {
+    "description": "Time of day range",
+    "placeholders": {
+      "from": {
+        "type": "String",
+        "example": "3:00 AM"
+      },
+      "to": {
+        "type": "String",
+        "example": "5:00 PM"
+      }
+    }
+  },
+  "subscriptionNotificationTitle": "Nowe filmy z twoich subskrybcji",
+  "@subscriptionNotificationTitle": {
+    "description": "Title for the notification showing that there are new videos from the subscription feed"
+  },
+  "deleteChannelNotificationContent": "Przestaniesz otrzymywać powiadomienia z tego kanału",
+  "@deleteChannelNotificationContent": {
+    "description": "Title for dialog to confirm whether to delete channel notifications"
+  },
+  "deletePlaylistNotificationContent": "Nie będziesz otrzymywał więcej powiadomień z tej playlisty",
+  "@deletePlaylistNotificationContent": {
+    "description": "Title for dialog to confirm whether to delete playlist notifications"
+  },
+  "searchUploadDateToday": "Dzisiaj",
+  "@searchUploadDateToday": {
+    "description": "Search for uploaded today"
+  },
+  "searchUploadDateWeek": "Ten tydzień",
+  "@searchUploadDateWeek": {
+    "description": "Search for uploaded this week"
   }
 }

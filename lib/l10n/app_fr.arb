@@ -1066,5 +1066,43 @@
         "example": "Monday, Wednesday, Friday"
       }
     }
+  },
+  "videoFilterTimeOfDayFromTo": "De {from} à {to}",
+  "@videoFilterTimeOfDayFromTo": {
+    "description": "Time of day range",
+    "placeholders": {
+      "from": {
+        "type": "String",
+        "example": "3:00 AM"
+      },
+      "to": {
+        "type": "String",
+        "example": "5:00 PM"
+      }
+    }
+  },
+  "subscriptionNotification": "Notifications d'abonnement",
+  "@subscriptionNotification": {
+    "description": "Title for subscriptions notifications"
+  },
+  "notifications": "Notifications",
+  "@notifications": {
+    "description": "Notification settings title"
+  },
+  "notificationsDescription": "Activer et examiner les notifications",
+  "@notificationsDescription": {
+    "description": "Setting description for notifications"
+  },
+  "enableNotificationDescriptions": "Exécute le service en premier plan pour vérifier et vous informer des changements que vous surveillez",
+  "@enableNotificationDescriptions": {
+    "description": ""
+  },
+  "subscriptionNotificationDescription": "Soyez informé·e des nouvelles vidéos de votre flux d'abonnement si vous êtes connecté·e à votre instance actuelle",
+  "@subscriptionNotificationDescription": {
+    "description": "Description for subscription notifications"
+  },
+  "subscriptionNotificationTitle": "Nouvelles vidéos de vos abonnements",
+  "@subscriptionNotificationTitle": {
+    "description": "Title for the notification showing that there are new videos from the subscription feed"
   }
 }

@@ -440,7 +440,7 @@
   "@useProxy": {
     "description": "label for settings switch to proxy videos from server"
   },
-  "to": "Aan",
+  "to": "Tot",
   "@to": {
     "description": "To word as in 'From xx To xx')"
   },
@@ -572,5 +572,391 @@
   "videoFilterOperationHigherThan": "Meer dan",
   "@videoFilterOperationHigherThan": {
     "description": "Label for video filter operation Higher than"
+  },
+  "itemlistErrorGeneric": "Kon gegevens niet ophalen",
+  "@itemlistErrorGeneric": {
+    "description": "Error showing when the data can't be fetch"
+  },
+  "searchHistoryLimit": "Limiet van zoek­geschiedenis",
+  "@searchHistoryLimit": {
+    "description": "Settings label for search history limit"
+  },
+  "layoutEditorAddVideoSource": "Video­bron toevoegen",
+  "@layoutEditorAddVideoSource": {
+    "description": "Label for button to allow user to add more video sources to the home screen"
+  },
+  "navigationBarLabelNeverShow": "Label nooit tonen",
+  "@navigationBarLabelNeverShow": {
+    "description": "Never show label option for navigation bar"
+  },
+  "distractionFreeMode": "Afleidings­vrije modus",
+  "@distractionFreeMode": {
+    "description": "title for distraction free mode settings"
+  },
+  "askToEnableBackgroundServiceTitle": "Meldingen uit­geschakeld",
+  "@askToEnableBackgroundServiceTitle": {
+    "description": "If the users tries to turn on notifications for a channel but hasn't enable notifications in the app we need to turn it on for them"
+  },
+  "subtitlesBackground": "Achter­grond van onder­titels",
+  "@subtitlesBackground": {
+    "description": "Title for settings to set black background  for subtitles"
+  },
+  "enableSearchHistory": "Zoek­geschiedenis inschakelen",
+  "@enableSearchHistory": {
+    "description": "Settings label for enabling search history"
+  },
+  "rememberSubtitleLanguage": "Ondertitelings­taal onthouden",
+  "@rememberSubtitleLanguage": {
+    "description": "Settings label for remembering subtitle language"
+  },
+  "seeking": "Zoeken",
+  "@seeking": {
+    "description": "category for settings related to seeking in a video"
+  },
+  "exponentialSkip": "Exponentieel voor-/achter­uit spoelen",
+  "@exponentialSkip": {
+    "description": "Title for the setting to enable the exponential skipping"
+  },
+  "rememberPlaybackSpeed": "Afspeel­snelheid onthouden",
+  "@rememberPlaybackSpeed": {
+    "description": "Setting label for remembering playback speed"
+  },
+  "videoAddedToQueue": "Video toegevoegd aan wachtrij",
+  "@videoAddedToQueue": {
+    "description": "Pop up message when a video was added at the end of the video queue"
+  },
+  "videoFilterTapToReveal": "Druk om te tonen",
+  "@videoFilterTapToReveal": {
+    "description": "Label to tell user to tap to show a filtered video"
+  },
+  "addToPlaylist": "Toevoegen aan afspeel­lijst",
+  "@addToPlaylist": {
+    "description": "Label to add a video to a playlist"
+  },
+  "playNextAddedToQueue": "Video wordt hierna afgespeeld",
+  "@playNextAddedToQueue": {
+    "description": "Pop up message to confirm that the video has been properly set to play next"
+  },
+  "videoFilterHide": "Gefilterde video's verbergen",
+  "@videoFilterHide": {
+    "description": "Label for settings to hide filtered videos"
+  },
+  "videoFilterTypeVideoLength": "Video­lengte (seconden)",
+  "@videoFilterTypeVideoLength": {
+    "description": "Label for video filter video length"
+  },
+  "videoFilterOperationNotContain": "Bevat geen",
+  "@videoFilterOperationNotContain": {
+    "description": "Label for video filter operation Does not contain"
+  },
+  "enabled": "Ingeschakeld",
+  "@enabled": {
+    "description": "Text to show something is enabled"
+  },
+  "share": "Delen",
+  "@share": {
+    "description": "asking user if to share"
+  },
+  "videoAddedToPlaylist": "Video toe­gevoegd aan afspeel­lijst",
+  "@videoAddedToPlaylist": {
+    "description": "Pop up message when a video was added to a playlist"
+  },
+  "redirectInvidiousLink": "Invidious-omleidings­link delen",
+  "@redirectInvidiousLink": {
+    "description": "asking user to share redirecting invidious link"
+  },
+  "searchSortBy": "Sorteren op",
+  "@searchSortBy": {
+    "description": "Search sorting option"
+  },
+  "subtitleFontSize": "Lettertype­grootte van ondertitels",
+  "@subtitleFontSize": {
+    "description": "Settings label for the size of the subtitles"
+  },
+  "wrongUsernamePassword": "Verkeerde gebruikersnaam en/of verkeerd wachtwoord",
+  "@wrongUsernamePassword": {
+    "description": "Error message when authentication fails"
+  },
+  "videoFilterTimeOfDayFromTo": "Van {from} tot {to}",
+  "@videoFilterTimeOfDayFromTo": {
+    "description": "Time of day range",
+    "placeholders": {
+      "from": {
+        "type": "String",
+        "example": "3:00 AM"
+      },
+      "to": {
+        "type": "String",
+        "example": "5:00 PM"
+      }
+    }
+  },
+  "videoFilterAppliedOn": "Toegepast op {selectedDays}",
+  "@videoFilterAppliedOn": {
+    "description": "Readable text on when the filter should apply",
+    "placeholders": {
+      "selectedDays": {
+        "type": "String",
+        "example": "Monday, Wednesday, Friday"
+      }
+    }
+  },
+  "searchUploadDate": "Upload­datum",
+  "@searchUploadDate": {
+    "description": "Filter search result by upload date"
+  },
+  "searchUploadDateAny": "Elke datum",
+  "@searchUploadDateAny": {
+    "description": "Do not filter search result by upload date"
+  },
+  "searchUploadDateToday": "Vandaag",
+  "@searchUploadDateToday": {
+    "description": "Search for uploaded today"
+  },
+  "searchDuration": "Duur",
+  "@searchDuration": {
+    "description": "Filter search result by duration"
+  },
+  "searchUploadDateHour": "Afgelopen uur",
+  "@searchUploadDateHour": {
+    "description": "Search for uploaded in last hour"
+  },
+  "searchUploadDateMonth": "Afgelopen maand",
+  "@searchUploadDateMonth": {
+    "description": "Search for uploaded this month"
+  },
+  "searchUploadDateYear": "Afgelopen jaar",
+  "@searchUploadDateYear": {
+    "description": "Search for uploaded this year"
+  },
+  "searchDurationAny": "Elke duur",
+  "@searchDurationAny": {
+    "description": "Do not filter search result by duration"
+  },
+  "clearSearchHistory": "Zoek­geschiedenis wissen",
+  "@clearSearchHistory": {
+    "description": "Settings label for clearing search history"
+  },
+  "copyToClipBoard": "Kopiëren naar klembord",
+  "@copyToClipBoard": {
+    "description": "Text to copy something to clipboard"
+  },
+  "videoAlreadyDownloaded": "Video al gedownload",
+  "@videoAlreadyDownloaded": {
+    "description": "Message when a user tries to download a video he already has"
+  },
+  "videoDownloadStarted": "Downloaden van video gestart",
+  "@videoDownloadStarted": {
+    "description": "Message when a video starts being downloaded"
+  },
+  "searchDurationShort": "Kort (< 4 minuten)",
+  "@searchDurationShort": {
+    "description": "Search for short videos only"
+  },
+  "searchDurationLong": "Lang (> 20 minuten)",
+  "@searchDurationLong": {
+    "description": "Search for long videos only"
+  },
+  "searchDurationMedium": "Gemiddeld (4-20 minuten)",
+  "@searchDurationMedium": {
+    "description": "Search for medium videos only"
+  },
+  "logsCopied": "Log­boeken gekopieerd naar klem­bord",
+  "@logsCopied": {
+    "description": "Message to tell user that logs have been copied to the clipboard"
+  },
+  "deArrowReplaceThumbnails": "Miniaturen vervangen",
+  "@deArrowReplaceThumbnails": {
+    "description": "Settings title for checkbox on whether the thumbnail should be replaced as well"
+  },
+  "navigationBarStyle": "Stijl van navigatie­balk",
+  "@navigationBarStyle": {
+    "description": "Label for settings on customizing navigation bar style"
+  },
+  "navigationBarLabelAlwaysShowing": "Label altijd tonen",
+  "@navigationBarLabelAlwaysShowing": {
+    "description": "Label always showing option for navigation bar"
+  },
+  "skipStep": "Stap­grootte van voor-/achter­uit spoelen",
+  "@skipStep": {
+    "description": "Title for the settings to set the skipping step"
+  },
+  "foregroundServiceUpdatingPlaylist": "Afspeel­lijsten controleren…",
+  "@foregroundServiceUpdatingPlaylist": {
+    "description": "Foreground service notification text when checking for new playlist videos"
+  },
+  "foregroundServiceUpdatingChannels": "Kanalen controleren…",
+  "@foregroundServiceUpdatingChannels": {
+    "description": "Foreground service notification text when checking for new channel videos"
+  },
+  "channelSortByPopular": "Populair",
+  "@channelSortByPopular": {
+    "description": "Sort channel videos by popularity"
+  },
+  "searchUploadDateWeek": "Afgelopen week",
+  "@searchUploadDateWeek": {
+    "description": "Search for uploaded this week"
+  },
+  "submitFeedback": "Feedback sturen",
+  "@submitFeedback": {
+    "description": "Title for settings to submit feed back through the app"
+  },
+  "notifications": "Meldingen",
+  "@notifications": {
+    "description": "Notification settings title"
+  },
+  "channelSortByNewest": "Nieuwste",
+  "@channelSortByNewest": {
+    "description": "Sort channel videos from newest to oldest"
+  },
+  "channelSortByOldest": "Oudste",
+  "@channelSortByOldest": {
+    "description": "Sort channel videos from oldest to newest"
+  },
+  "subscriptionNotification": "Abonnement­meldingen",
+  "@subscriptionNotification": {
+    "description": "Title for subscriptions notifications"
+  },
+  "foregroundServiceUpdatingSubscriptions": "Abonnementen controleren…",
+  "@foregroundServiceUpdatingSubscriptions": {
+    "description": "Foreground service notification text when checking for new subscription videos"
+  },
+  "addRecommendedToQueue": "Aanbevolen video's automatisch afspelen",
+  "@addRecommendedToQueue": {
+    "description": "Switch when playing a video to automatically add the recommended videos to the video queue"
+  },
+  "requiresRestart": "Vereist herstart van app",
+  "@requiresRestart": {
+    "description": "Requires app restart label"
+  },
+  "searchHistoryDescription": "Instellingen voor zoek­geschiedenis",
+  "@searchHistoryDescription": {
+    "description": "Description for search history settings"
+  },
+  "clearHistoryQuestion": "Geschiedenis wissen?",
+  "@clearHistoryQuestion": {},
+  "homeLayoutEditor": "Start-lay-out bewerken",
+  "@homeLayoutEditor": {
+    "description": "Title of layout editor screen"
+  },
+  "customizeAppLayout": "App-secties aanpassen",
+  "@customizeAppLayout": {
+    "description": "Settings label for the settings to allow the user to set up the app sections themselves"
+  },
+  "skipSslVerification": "TLS-certificaat­verificatie overslaan",
+  "@skipSslVerification": {
+    "description": "Setting label to skip ssl certification verification"
+  },
+  "couldntLoadVideo": "Kan video niet laden",
+  "@couldntLoadVideo": {
+    "description": "Message to display when a video can't be loaded"
+  },
+  "tokenLoginDescription": "Aanbevolen inlog­methode",
+  "@tokenLoginDescription": {
+    "description": "Recommended way to log in"
+  },
+  "pressDownToShowSettings": "Druk op ⬇️ om instellingen te tonen",
+  "@pressDownToShowSettings": {
+    "description": "Instruction on how to show video settings when playing a video on TV"
+  },
+  "videoFilterHideAllFromChannel": "Alle video's van kanaal verbergen",
+  "@videoFilterHideAllFromChannel": {
+    "description": "Label for video filter switch to allow to hide all videos from a channel"
+  },
+  "foregroundServiceNotificationTitle": "Video­monitoring",
+  "@foregroundServiceNotificationTitle": {
+    "description": "Title for the foreground service running notification when the user wants to receive notifications"
+  },
+  "whenAppStartsShow": "Als de app start, toon…",
+  "@whenAppStartsShow": {
+    "description": "Setting title for selecting the screen to show on start"
+  },
+  "deletePlaylistNotificationTitle": "Afspeellijst­melding verwijderen?",
+  "@deletePlaylistNotificationTitle": {
+    "description": "Title for dialog to confirm whether to delete playlist notifications"
+  },
+  "fullscreenOnLandscape": "Volledig scherm bij landschaps­modus",
+  "@fullscreenOnLandscape": {
+    "description": "Setting title to enable full screen on landscape orientation"
+  },
+  "channelNotificationTitle": "Nieuwe video's van {channel}",
+  "@channelNotificationTitle": {
+    "description": "Title for the channel notifications when there are new videos",
+    "placeholders": {
+      "channel": {
+        "type": "String",
+        "example": "MKBHD"
+      }
+    }
+  },
+  "askForDisableBatteryOptimizationTitle": "Batterij­optimalisatie uitschakelen vereist",
+  "@askForDisableBatteryOptimizationTitle": {
+    "description": "Title for the dialog asking the user to turn off disabling battery optimization when turning on notifications"
+  },
+  "deleteChannelNotificationTitle": "Kanaal­melding verwijderen?",
+  "@deleteChannelNotificationTitle": {
+    "description": "Title for dialog to confirm whether to delete channel notifications"
+  },
+  "notificationFrequencySliderLabel": "{hours, select, 24{1 dag} other{{hours} uur}}",
+  "@notificationFrequencySliderLabel": {
+    "description": "Short form for a number of hours going up to 1 day",
+    "hours": {
+      "type": "num",
+      "format": "compact"
+    }
+  },
+  "notificationFrequencySettingsTitle": "Controle­frequentie voor nieuwe video's",
+  "@notificationFrequencySettingsTitle": {
+    "description": "Title for frequency settings"
+  },
+  "serverIsNotReachable": "Server is onbereikbaar",
+  "@serverIsNotReachable": {
+    "description": "Title for dialog when adding a server that is not reachable"
+  },
+  "autoplayVideoOnLoad": "Video automatisch afspelen bij laden",
+  "@autoplayVideoOnLoad": {
+    "description": "Label for settings to enable autoplay when a video loads"
+  },
+  "videoFilterWholeChannel": "Alle video's van kanaal {hideOrFilter}",
+  "@videoFilterWholeChannel": {
+    "description": "Label for whole channel filtering",
+    "placeholders": {
+      "hideOrFilter": {
+        "type": "String",
+        "example": "Hide"
+      }
+    }
+  },
+  "fillFullscreen": "Scherm­vullende video",
+  "@fillFullscreen": {
+    "description": "Title to maximize video to fit screen"
+  },
+  "distractionFreeModeDescription": "Video-opmerkingen en -aanbevelingen uitschakelen",
+  "@distractionFreeModeDescription": {
+    "description": "Description for distraction free mode"
+  },
+  "couldntFetchVideos": "Kan video's niet ophalen. Druk om opnieuw te proberen.",
+  "@couldntFetchVideos": {
+    "description": "Can't load bunch of videos, asking  user to try again"
+  },
+  "videoFailedDownloadRetry": "Download mislukt, druk om opnieuw te proberen",
+  "@videoFailedDownloadRetry": {
+    "description": "Shown on download manager when a download fails and prompt the user to retry"
+  },
+  "navigationBarLabelShowOnSelect": "Label tonen op geselecteerd item",
+  "@navigationBarLabelShowOnSelect": {
+    "description": "Label only showing when selected option for navigation bar"
+  },
+  "wizardIntro": "Selecteer een openbare server of voeg uw eigen server toe. (Kan later worden gewijzigd in de instellingen)",
+  "@wizardIntro": {
+    "description": "Welcome message on frst time use"
+  },
+  "errorAddingVideoToPlaylist": "Fout bij toevoegen van video aan afspeellijst",
+  "@errorAddingVideoToPlaylist": {
+    "description": "Error while adding video to playlist"
+  },
+  "itemListErrorInvalidScope": "U heeft geen toestemming om dit te zien. Als u hebt ingelogd met de tokenmethode, probeer dan uit en weer in te loggen",
+  "@itemListErrorInvalidScope": {
+    "description": "Error when the user doesn't have the proper scope to its current token"
   }
 }
