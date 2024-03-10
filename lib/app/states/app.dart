@@ -44,15 +44,28 @@ class AppCubit extends Cubit<AppState> {
 
   onReady() async {
     intentDataStreamSubscription =
-        ReceiveSharingIntent.getTextStream().listen((String value) {
-      openAppLink(value);
+        ReceiveSharingIntent.getMediaStream().listen((shared) {
+      final String? value = shared
+          .where((element) => element.type == SharedMediaType.file)
+          .map((e) => e.message)
+          .firstOrNull;
+      if (value != null) {
+        openAppLink(value);
+      }
     }, onError: (err) {
       log.warning("getLinkStream error: $err");
     });
 
     // For sharing or opening urls/text coming from outside the app while the app is closed
-    ReceiveSharingIntent.getInitialText().then((value) {
-      openAppLink((value ?? ''));
+    ReceiveSharingIntent.getInitialMedia().then((shared) {
+      final String? value = shared
+          .where((element) => element.type == SharedMediaType.file)
+          .map((e) => e.message)
+          .firstOrNull;
+      if (value != null) {
+        openAppLink(value);
+      }
+      ReceiveSharingIntent.reset();
     });
 
     service.syncHistory();
