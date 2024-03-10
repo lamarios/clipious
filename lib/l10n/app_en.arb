@@ -1315,7 +1315,7 @@
     "@submitFeedback": {
         "description": "Title for settings to submit feed back through the app"
     },
-    "submitFeedbackDescription": "Found a bug or have a suggestion? use this tool to take screenshot of the app, annotate and submit feedback",
+    "submitFeedbackDescription": "Found a bug or have a suggestion? Use this tool to take screenshot of the app, annotate and submit feedback",
     "@submitFeedbackDescription": {
         "description": "Setting tile descriptions for feedback submission"
     },
