@@ -1081,7 +1081,7 @@
       }
     }
   },
-  "subscriptionNotification": "Notifications d'abonnement",
+  "subscriptionNotification": "Notifications d''abonnement",
   "@subscriptionNotification": {
     "description": "Title for subscriptions notifications"
   },
@@ -1097,7 +1097,7 @@
   "@enableNotificationDescriptions": {
     "description": ""
   },
-  "subscriptionNotificationDescription": "Soyez informé·e des nouvelles vidéos de votre flux d'abonnement si vous êtes connecté·e à votre instance actuelle",
+  "subscriptionNotificationDescription": "Soyez informé·e des nouvelles vidéos de votre flux d''abonnement si vous êtes connecté·e à votre instance actuelle",
   "@subscriptionNotificationDescription": {
     "description": "Description for subscription notifications"
   },

@@ -534,7 +534,7 @@
   "@recommended": {
     "description": "Recommended label"
   },
-  "startUsingClipious": "Clipious'u kullanmaya başlayın",
+  "startUsingClipious": "Clipious''u kullanmaya başlayın",
   "@startUsingClipious": {
     "description": "button label to start using the app"
   },
@@ -942,7 +942,7 @@
   "@askToEnableBackgroundServiceTitle": {
     "description": "If the users tries to turn on notifications for a channel but hasn't enable notifications in the app we need to turn it on for them"
   },
-  "askToEnableBackgroundServiceContent": "Bildirim almak için Küçük bildirimlerin etkinleştirilmesi gerekir, etkinleştirmek için Tamam'a basın.",
+  "askToEnableBackgroundServiceContent": "Bildirim almak için Küçük bildirimlerin etkinleştirilmesi gerekir, etkinleştirmek için Tamam''a basın.",
   "@askToEnableBackgroundServiceContent": {
     "description": "If the users tries to turn on notifications for a channel but hasn't enable notifications in the app we need to turn it on for them"
   },
@@ -990,7 +990,7 @@
   "@fullscreenOnLandscape": {
     "description": "Setting title to enable full screen on landscape orientation"
   },
-  "channelNotificationTitle": "{Kanal} 'dan yeni videolar",
+  "channelNotificationTitle": "{channel} ''dan yeni videolar",
   "@channelNotificationTitle": {
     "description": "Title for the channel notifications when there are new videos",
     "placeholders": {
@@ -1000,7 +1000,7 @@
       }
     }
   },
-  "playlistNotificationTitle": "{Oynatma listesi} oynatma listesindeki yeni videolar",
+  "playlistNotificationTitle": "{playlist} oynatma listesindeki yeni videolar",
   "@playlistNotificationTitle": {
     "description": "Title for the playlist notifications when there are new videos",
     "placeholders": {
@@ -1051,7 +1051,7 @@
   "@addServerHelpText": {
     "description": "label for when the user hasn't chosen a server yet"
   },
-  "useDynamicThemeDescription": "Kullandığınız Malzeme renklerini kullanın (yalnızca Android 12+ 'da mevcuttur)",
+  "useDynamicThemeDescription": "Kullandığınız Malzeme renklerini kullanın (yalnızca Android 12+ ''da mevcuttur)",
   "@useDynamicThemeDescription": {
     "description": ""
   },
@@ -1107,7 +1107,7 @@
   "@requiresRestart": {
     "description": "Requires app restart label"
   },
-  "returnYoutubeDislikeDescription": "Tarafından sağlanan API'yi kullanarak tahmini video beğenmediklerini göster returnyoutubedislike.com",
+  "returnYoutubeDislikeDescription": "Tarafından sağlanan API''yi kullanarak tahmini video beğenmediklerini göster returnyoutubedislike.com",
   "@returnYoutubeDislikeDescription": {
     "description": "ReturnYoutubeDislike setting description"
   },
@@ -1183,7 +1183,7 @@
   "@malformedStatsEndpointDescription": {
     "description": "Description of the possible issue for an invalid stats endpoints"
   },
-  "feedbackDisclaimer": "Geri bildirim göndermek için bir GitHub hesabına ihtiyacınız olacak ve ekran görüntünüz anonim olarak Imgur'a gönderilecektir.",
+  "feedbackDisclaimer": "Geri bildirim göndermek için bir GitHub hesabına ihtiyacınız olacak ve ekran görüntünüz anonim olarak Imgur''a gönderilecektir.",
   "@feedbackDisclaimer": {
     "description": "Content of dialog shown before submitting feedback to make sure the user is ok whith where the data is going"
   },
@@ -1191,7 +1191,7 @@
   "@searchUploadDateToday": {
     "description": "Search for uploaded today"
   },
-  "feedbackScreenshotError": "Imgur'a ekran görüntüsü yüklenirken hata oluştu",
+  "feedbackScreenshotError": "Imgur''a ekran görüntüsü yüklenirken hata oluştu",
   "@feedbackScreenshotError": {
     "description": "Title for dialog if something goes wrong while uploading feedback screenshot"
   },

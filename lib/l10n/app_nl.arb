@@ -637,7 +637,7 @@
   "@playNextAddedToQueue": {
     "description": "Pop up message to confirm that the video has been properly set to play next"
   },
-  "videoFilterHide": "Gefilterde video's verbergen",
+  "videoFilterHide": "Gefilterde video''s verbergen",
   "@videoFilterHide": {
     "description": "Label for settings to hide filtered videos"
   },
@@ -821,7 +821,7 @@
   "@foregroundServiceUpdatingSubscriptions": {
     "description": "Foreground service notification text when checking for new subscription videos"
   },
-  "addRecommendedToQueue": "Aanbevolen video's automatisch afspelen",
+  "addRecommendedToQueue": "Aanbevolen video''s automatisch afspelen",
   "@addRecommendedToQueue": {
     "description": "Switch when playing a video to automatically add the recommended videos to the video queue"
   },
@@ -859,7 +859,7 @@
   "@pressDownToShowSettings": {
     "description": "Instruction on how to show video settings when playing a video on TV"
   },
-  "videoFilterHideAllFromChannel": "Alle video's van kanaal verbergen",
+  "videoFilterHideAllFromChannel": "Alle video''s van kanaal verbergen",
   "@videoFilterHideAllFromChannel": {
     "description": "Label for video filter switch to allow to hide all videos from a channel"
   },
@@ -879,7 +879,7 @@
   "@fullscreenOnLandscape": {
     "description": "Setting title to enable full screen on landscape orientation"
   },
-  "channelNotificationTitle": "Nieuwe video's van {channel}",
+  "channelNotificationTitle": "Nieuwe video''s van {channel}",
   "@channelNotificationTitle": {
     "description": "Title for the channel notifications when there are new videos",
     "placeholders": {
@@ -905,7 +905,7 @@
       "format": "compact"
     }
   },
-  "notificationFrequencySettingsTitle": "Controle­frequentie voor nieuwe video's",
+  "notificationFrequencySettingsTitle": "Controle­frequentie voor nieuwe video''s",
   "@notificationFrequencySettingsTitle": {
     "description": "Title for frequency settings"
   },
@@ -917,7 +917,7 @@
   "@autoplayVideoOnLoad": {
     "description": "Label for settings to enable autoplay when a video loads"
   },
-  "videoFilterWholeChannel": "Alle video's van kanaal {hideOrFilter}",
+  "videoFilterWholeChannel": "Alle video''s van kanaal {hideOrFilter}",
   "@videoFilterWholeChannel": {
     "description": "Label for whole channel filtering",
     "placeholders": {
@@ -935,7 +935,7 @@
   "@distractionFreeModeDescription": {
     "description": "Description for distraction free mode"
   },
-  "couldntFetchVideos": "Kan video's niet ophalen. Druk om opnieuw te proberen.",
+  "couldntFetchVideos": "Kan video''s niet ophalen. Druk om opnieuw te proberen.",
   "@couldntFetchVideos": {
     "description": "Can't load bunch of videos, asking  user to try again"
   },
