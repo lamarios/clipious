@@ -159,6 +159,8 @@ class Player extends StatelessWidget {
                                                     showTimestampOption: true,
                                                   ),
                                                   AddToPlayListButton(
+                                                      key: ValueKey(
+                                                          currentlyPlaying),
                                                       videoId: currentlyPlaying
                                                           .videoId)
                                                 ],
