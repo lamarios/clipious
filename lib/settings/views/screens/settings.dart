@@ -37,6 +37,10 @@ class SettingsScreen extends StatelessWidget {
     AutoRouter.of(context).push(const NotificationSettingsRoute());
   }
 
+  openDownloadSettings(BuildContext context) {
+    AutoRouter.of(context).push(const DownloadedVideoSettingsRoute());
+  }
+
   openBrowsingSettings(BuildContext context) {
     AutoRouter.of(context).push(const BrowsingSettingsRoute());
   }
@@ -137,6 +141,17 @@ class SettingsScreen extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                     ),
                     onPressed: openVideoPlayerSettings,
+                  ),
+                  SettingsTile.navigation(
+                    leading: const Icon(Icons.download),
+                    title: Text(locals.downloadedVideos),
+                    description: Text(_.customDownloadedVideoLocation
+                        ? _.videoDownloadLocation == null
+                            ? locals.noDownloadVideoLocationSelected
+                            : locals.downloadedVideoDescription(
+                                _.videoDownloadLocation!)
+                        : ''),
+                    onPressed: openDownloadSettings,
                   ),
                   SettingsTile.navigation(
                     leading: const Icon(Icons.notifications_outlined),

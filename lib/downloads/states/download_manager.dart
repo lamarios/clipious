@@ -13,6 +13,7 @@ import 'package:invidious/videos/models/format_stream.dart';
 import 'package:logging/logging.dart';
 
 import '../../player/states/player.dart';
+import '../../settings/states/settings.dart';
 import '../../videos/models/adaptive_format.dart';
 import '../../videos/models/video.dart';
 
@@ -39,8 +40,9 @@ class DownloadProgress {
 
 class DownloadManagerCubit extends Cubit<DownloadManagerState> {
   final PlayerCubit player;
+  final SettingsCubit settings;
 
-  DownloadManagerCubit(super.initialState, this.player) {
+  DownloadManagerCubit(super.initialState, this.player, this.settings) {
     onReady();
   }
 
@@ -50,18 +52,27 @@ class DownloadManagerCubit extends Cubit<DownloadManagerState> {
 
   setVideos() async {
     var vids = db.getAllDownloads();
+
+    List<DownloadedVideo> available = [];
+
     // checking if we have any video that are not fail, not completed and not currently downloading
     for (var v in vids) {
-      if (!v.downloadComplete &&
-          !v.downloadFailed &&
-          !state.downloadProgresses.containsKey(v.videoId)) {
-        // this download was interrupted by app restart or crash or something else, we set it as errored
-        v.downloadFailed = true;
-        await db.upsertDownload(v);
+      if (!await v.filesExists) {
+        // we don't want to deal with videos in case a user rename / delete the files
+        continue;
+      } else {
+        if (!v.downloadComplete &&
+            !v.downloadFailed &&
+            !state.downloadProgresses.containsKey(v.videoId)) {
+          // this download was interrupted by app restart or crash or something else, we set it as errored
+          v.downloadFailed = true;
+          await db.upsertDownload(v);
+        }
+        available.add(v);
       }
     }
 
-    emit(state.copyWith(videos: vids));
+    emit(state.copyWith(videos: available));
   }
 
   void playAll() {
@@ -116,6 +127,9 @@ class DownloadManagerCubit extends Cubit<DownloadManagerState> {
           authorUrl: vid.authorUrl,
           audioOnly: audioOnly,
           lengthSeconds: vid.lengthSeconds,
+          folder: settings.state.customDownloadedVideoLocation
+              ? settings.state.videoDownloadLocation
+              : null,
           quality: quality);
       await db.upsertDownload(downloadedVideo);
 

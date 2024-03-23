@@ -55,6 +55,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const DownloadManagerScreen(),
       );
     },
+    DownloadedVideoSettingsRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const DownloadedVideoSettingsScreen(),
+      );
+    },
     EditHomeLayoutRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -501,6 +507,20 @@ class DownloadManagerRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'DownloadManagerRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [DownloadedVideoSettingsScreen]
+class DownloadedVideoSettingsRoute extends PageRouteInfo<void> {
+  const DownloadedVideoSettingsRoute({List<PageRouteInfo>? children})
+      : super(
+          DownloadedVideoSettingsRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'DownloadedVideoSettingsRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

@@ -1338,5 +1338,38 @@
     "channelSortByPopular": "Popular",
     "@channelSortByPopular": {
         "description": "Sort channel videos by popularity"
+    },
+    "downloadedVideos": "Downloaded videos",
+    "@downloadedVideos": {
+        "description": "Title for downloaded video settings"
+    },
+    "downloadedVideoDescription": "Current location: {path}",
+    "@downloadedVideoDescription": {
+        "description": "Description for settings titles",
+        "placeholders:": {
+            "path": {
+                "type": "string"
+            }
+        }
+    },
+    "defaultDownloadLocation": "Default download location",
+    "@defaultDownloadLocation": {
+        "description": "Description for main download location setting if the user hasn''t enabled custom locations"
+    },
+    "customDownloadLocation": "Download videos at a custom location",
+    "@customDownloadLocation": {
+        "description": "Settings title for the custom video download location"
+    },
+    "customDownloadLocationDescription": "Enable this and then select where you want to download videos",
+    "@customDownloadLocationDescription": {
+        "description": "Settings description for the custom video download location"
+    },
+    "customDownloadVideoLocation": "Downloaded video location",
+    "@customDownloadVideoLocation": {
+        "description": "Title for setting tile to allow user to select where they want to download videos"
+    },
+    "noDownloadVideoLocationSelected": "No folder selected",
+    "@noDownloadVideoLocationSelected": {
+        "description": "Setting description if the user hasn''t selected a folder"
     }
 }

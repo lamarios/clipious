@@ -39,6 +39,9 @@ const subtitleBackground = 'subtitle-background';
 const dearrowSettingName = 'dearrow';
 const dearrowThumbnailsSettingName = "dearrow-thumbnails";
 const fullScreenOnLandscapeSettingName = "fullscreen-on-landscape";
+const downloadedVideoLocationSettingName = 'downloaded-video-location';
+const customDownloadedVideoLocationSettingName =
+    'custom-downloaded-video-location';
 
 const onOpenSettingName = "on-open";
 

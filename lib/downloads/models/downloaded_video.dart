@@ -19,6 +19,7 @@ class DownloadedVideo extends IdedVideo {
   bool audioOnly;
   int lengthSeconds;
   String quality;
+  String? folder;
 
   @override
   set videoId(String videoId) => super.videoId = videoId;
@@ -39,6 +40,10 @@ class DownloadedVideo extends IdedVideo {
   }
 
   Future<Directory> _getDownloadFolder() async {
+    if (folder != null) {
+      return Directory(folder!);
+    }
+
     Directory dir = await getApplicationDocumentsDirectory();
     dir = Directory(p.join(dir.path, _downloadFolder));
     if (!(await dir.exists())) {
@@ -46,6 +51,16 @@ class DownloadedVideo extends IdedVideo {
     }
 
     return dir;
+  }
+
+  Future<bool> get filesExists async {
+    try {
+      final media = File(await mediaPath);
+      final thumb = File(await thumbnailPath);
+      return await media.exists() && await thumb.exists();
+    } catch (e) {
+      return false;
+    }
   }
 
   DownloadedVideo(
@@ -57,6 +72,7 @@ class DownloadedVideo extends IdedVideo {
       this.downloadFailed = false,
       this.audioOnly = false,
       this.lengthSeconds = 1,
+      this.folder,
       this.quality = '720p'})
       : super(videoId);
 

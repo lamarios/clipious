@@ -19,7 +19,7 @@ class DeArrowSettingsScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(locals.browsing),
+        title: Text('DeArrow'),
       ),
       body: SafeArea(child:
           BlocBuilder<SettingsCubit, SettingsState>(builder: (context, _) {
