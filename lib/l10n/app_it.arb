@@ -619,7 +619,7 @@
   "@malformedStatsEndpoint": {
     "description": "Title for dialog when adding a server that isn't validated as it should"
   },
-  "malformedStatsEndpointDescription": "L'endpoint non ha restituito i dati aspettati, la chiave \"software.name\" dovrebbe essere \"invidious\".\nRisposta dal server:",
+  "malformedStatsEndpointDescription": "L''endpoint non ha restituito i dati aspettati, la chiave \"software.name\" dovrebbe essere \"invidious\".\nRisposta dal server:",
   "@malformedStatsEndpointDescription": {
     "description": "Description of the possible issue for an invalid stats endpoints"
   },
@@ -631,7 +631,7 @@
   "@sponsorBlockCategoryOutroDescription": {
     "description": "Outro block 'Outro' Category description"
   },
-  "useProxyDescription": "Usando il proxy dei video tramite server puoi bypassare i blocchi sia regionali che dall'ISP",
+  "useProxyDescription": "Usando il proxy dei video tramite server puoi bypassare i blocchi sia regionali che dall''ISP",
   "@useProxyDescription": {
     "description": "Description for the use proxy settings"
   },
@@ -639,7 +639,7 @@
   "@share": {
     "description": "asking user if to share"
   },
-  "itemlistErrorGeneric": "Errore nell'acquisizione dei dati",
+  "itemlistErrorGeneric": "Errore nell''acquisizione dei dati",
   "@itemlistErrorGeneric": {
     "description": "Error showing when the data can't be fetch"
   },
@@ -655,7 +655,7 @@
   "@sponsorBlockCategoryUnpaidSelfPromoDescription": {
     "description": "Sponsor block 'Unpaid/Self promotion' Category description"
   },
-  "sponsorBlockCategoryFillerDescription": "Scene superflue aggiunte solo per riempire o per fare dell'umorismo che non sono necessarie per capire il contenuto principale del video. Non devono essere inclusi i segmenti che forniscono il contesto o altri dettagli. Questa è una categoria molto precisa pensata per quando non si è in \"vena di divertimento\".",
+  "sponsorBlockCategoryFillerDescription": "Scene superflue aggiunte solo per riempire o per fare dell''umorismo che non sono necessarie per capire il contenuto principale del video. Non devono essere inclusi i segmenti che forniscono il contesto o altri dettagli. Questa è una categoria molto precisa pensata per quando non si è in \"vena di divertimento\".",
   "@sponsorBlockCategoryFillerDescription": {
     "description": "Sponsorblock 'Filler' Category description"
   }
