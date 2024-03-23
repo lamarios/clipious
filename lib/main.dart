@@ -101,8 +101,8 @@ Future<void> main() async {
             PlayerCubit(PlayerState.init(null), context.read<SettingsCubit>()),
       ),
       BlocProvider(
-        create: (context) => DownloadManagerCubit(
-            const DownloadManagerState(), context.read<PlayerCubit>()),
+        create: (context) => DownloadManagerCubit(const DownloadManagerState(),
+            context.read<PlayerCubit>(), context.read<SettingsCubit>()),
       )
     ], child: const MyApp()),
   ));

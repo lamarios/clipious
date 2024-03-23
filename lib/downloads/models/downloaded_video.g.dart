@@ -16,6 +16,7 @@ DownloadedVideo _$DownloadedVideoFromJson(Map<String, dynamic> json) =>
       downloadFailed: json['downloadFailed'] as bool? ?? false,
       audioOnly: json['audioOnly'] as bool? ?? false,
       lengthSeconds: json['lengthSeconds'] as int? ?? 1,
+      folder: json['folder'] as String?,
       quality: json['quality'] as String? ?? '720p',
     );
 
@@ -29,5 +30,6 @@ Map<String, dynamic> _$DownloadedVideoToJson(DownloadedVideo instance) =>
       'audioOnly': instance.audioOnly,
       'lengthSeconds': instance.lengthSeconds,
       'quality': instance.quality,
+      'folder': instance.folder,
       'videoId': instance.videoId,
     };

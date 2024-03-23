@@ -411,6 +411,12 @@ class SettingsCubit extends Cubit<SettingsState> {
   setFullscreenOnRotate(bool b) async =>
       await _set(fullScreenOnLandscapeSettingName, b);
 
+  enableCustomDownloadLocation(bool b) async =>
+      await _set(customDownloadedVideoLocationSettingName, b);
+
+  setCustomDownloadLocation(String s) async =>
+      await _set(downloadedVideoLocationSettingName, s);
+
   Future<void> _set<T>(String name, T value) async {
     var settings = Map<String, SettingsValue>.from(state.settings);
     if (value == null) {
@@ -486,6 +492,12 @@ class SettingsState with _$SettingsState {
   }
 
   //late Map<String, SettingsValue> settings;
+
+  bool get customDownloadedVideoLocation =>
+      _get(customDownloadedVideoLocationSettingName)?.value == 'true';
+
+  String? get videoDownloadLocation =>
+      _get(downloadedVideoLocationSettingName)?.value;
 
   bool get sponsorBlock => _get(useSponsorBlock)?.value == 'true';
 

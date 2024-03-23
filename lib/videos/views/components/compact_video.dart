@@ -127,7 +127,8 @@ class CompactVideo extends StatelessWidget {
                                     overflow: TextOverflow.ellipsis,
                                     style: textTheme.bodySmall
                                         ?.copyWith(color: colors.secondary),
-                                  )
+                                  ),
+                                  // if(offlineVideo?.folder != null) Icon(Icons.folder_copy_outlined, size: 15, color: colors.secondary,)
                                 ],
                               ),
                             ),
