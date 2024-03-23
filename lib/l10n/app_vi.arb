@@ -1271,7 +1271,7 @@
   "@submitFeedback": {
     "description": "Title for settings to submit feed back through the app"
   },
-  "submitFeedbackDescription": "Tìm thấy một lỗi hoặc có một gợi ý? sử dụng công cụ này để chụp ảnh màn hình ứng dụng, chú thích và gửi phản hồi",
+  "submitFeedbackDescription": "Tìm thấy một lỗi hoặc có một gợi ý? Sử dụng công cụ này để chụp ảnh màn hình ứng dụng, chú thích và gửi phản hồi",
   "@submitFeedbackDescription": {
     "description": "Setting tile descriptions for feedback submission"
   },
