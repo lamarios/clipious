@@ -1313,7 +1313,7 @@
   "@channelSortByPopular": {},
   "channelSortByOldest": "古い順",
   "@channelSortByOldest": {},
-  "submitFeedbackDescription": "バグ報告や提案ですか？このツールでアプリのスクリーンショットを撮り解説をつけ送信",
+  "submitFeedbackDescription": "バグ報告や提案ですか？このツールでアプリのスクリーンショットを撮り説明し送信",
   "@submitFeedbackDescription": {
     "description": "Setting tile descriptions for feedback submission"
   },

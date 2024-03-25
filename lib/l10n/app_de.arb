@@ -134,7 +134,7 @@
   "@playlists": {
     "description": "User playlists"
   },
-  "subscriptions": "Abonnements",
+  "subscriptions": "Abos",
   "@subscriptions": {
     "description": "User subscriptions"
   },
@@ -1225,7 +1225,7 @@
   },
   "searchUploadDateWeek": "Diese Woche",
   "@searchUploadDateWeek": {},
-  "seeking": "Suchen",
+  "seeking": "Suche nach",
   "@seeking": {
     "description": "category for settings related to seeking in a video"
   },
@@ -1277,7 +1277,7 @@
   "@searchDurationMedium": {
     "description": "Search for medium videos only"
   },
-  "skipStepDescription": "Sekunden zum Springen von Vorwärts-/Rückwärtsaktionen",
+  "skipStepDescription": "Zu überspringende Sekunden bei Vorwärts-/Rückwärtsaktionen",
   "@skipStepDescription": {
     "description": "Title for the settings to set the skipping step"
   },
@@ -1298,5 +1298,35 @@
   "channelSortByOldest": "Älteste",
   "@channelSortByOldest": {},
   "channelSortByPopular": "Beliebt",
-  "@channelSortByPopular": {}
+  "@channelSortByPopular": {},
+  "nFilters": "{Anzahl, Plural, =0{Keine Videos} =1{1 Filter} andere{{Anzahl} Filter}}",
+  "@nFilters": {
+    "description": "One or more video filters",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "malformedStatsEndpointDescription": "Der Stats-Endpunkt des Servers hat nicht die erwartete Nutzlast übermittelt, der Schlüssel \"software.name\" sollte gleich \"invidious\" sein.\nAntwort vom Server:",
+  "@malformedStatsEndpointDescription": {
+    "description": "Description of the possible issue for an invalid stats endpoints"
+  },
+  "submitFeedback": "Feedback einreichen",
+  "@submitFeedback": {
+    "description": "Title for settings to submit feed back through the app"
+  },
+  "submitFeedbackDescription": "Sie haben einen Fehler gefunden oder haben einen Vorschlag? Verwenden Sie dieses Tool, um einen Screenshot der App zu machen, zu kommentieren und Feedback zu geben",
+  "@submitFeedbackDescription": {
+    "description": "Setting tile descriptions for feedback submission"
+  },
+  "feedbackScreenshotError": "Fehler beim Hochladen eines Screenshots auf Imgur",
+  "@feedbackScreenshotError": {
+    "description": "Title for dialog if something goes wrong while uploading feedback screenshot"
+  },
+  "feedbackDisclaimer": "Um Feedback einzureichen, benötigen Sie ein GitHub-Konto und Ihr Screenshot wird anonym an Imgur übermittelt.",
+  "@feedbackDisclaimer": {
+    "description": "Content of dialog shown before submitting feedback to make sure the user is ok whith where the data is going"
+  }
 }
