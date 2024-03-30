@@ -7,6 +7,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:settings_ui/settings_ui.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:saf/saf.dart';
 
 import '../../states/settings.dart';
 
@@ -54,24 +55,12 @@ class DownloadedVideoSettingsScreen extends StatelessWidget {
                     description: Text(_.videoDownloadLocation ??
                         locals.noDownloadVideoLocationSelected),
                     onPressed: (context) async {
-                      var mediaLibrary = Permission.accessMediaLocation;
-                      var storageStatus = await mediaLibrary.status;
-                      print(storageStatus.isGranted);
-                      if (!storageStatus.isGranted) {
-                        final request = await mediaLibrary.request();
-                        print(request);
-                      }
-                      var defaultPath =
-                          (await getDownloadsDirectory())?.absolute.path;
-
-                      print(defaultPath);
-                      await FilePicker.platform.clearTemporaryFiles();
-                      String? selectedDirectory = await FilePicker.platform
-                          .getDirectoryPath(initialDirectory: defaultPath);
-
-                      if (selectedDirectory != null) {
-                        cubit.setCustomDownloadLocation(defaultPath!);
-                      }
+                      // await FilePicker.platform.clearTemporaryFiles();
+                      Saf saf = Saf('~/Download');
+                      bool? isGranted =
+                          await saf.getDirectoryPermission(isDynamic: true);
+                      print('$saf - granted ? $isGranted');
+                      // cubit.setCustomDownloadLocation(selectedDirectory);
                     },
                   )
                 ],
