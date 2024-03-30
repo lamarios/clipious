@@ -33,13 +33,12 @@ class AppCubit extends Cubit<AppState> {
     bool isLoggedIn = (server?.authToken?.isNotEmpty ?? false) ||
         (server?.sidCookie?.isNotEmpty ?? false);
 
-    var selectedIndex =
-        int.parse(db.getSettings(onOpenSettingName)?.value ?? '0');
-    if (!isLoggedIn && selectedIndex > 1 || selectedIndex < 0) {
-      selectedIndex = 0;
+    var firstIndex = int.parse(db.getSettings(onOpenSettingName)?.value ?? '0');
+    if (!isLoggedIn && firstIndex > 1 || firstIndex < 0) {
+      firstIndex = 0;
     }
     emit(state.copyWith(
-        selectedIndex: selectedIndex, homeLayout: homeLayout, server: server));
+        firstIndex: firstIndex, homeLayout: homeLayout, server: server));
   }
 
   onReady() async {
@@ -99,7 +98,7 @@ class AppCubit extends Cubit<AppState> {
   }
 
   selectIndex(int index) {
-    emit(state.copyWith(selectedIndex: index));
+    emit(state.copyWith(firstIndex: index));
   }
 
   rebuildApp() {
@@ -107,7 +106,7 @@ class AppCubit extends Cubit<AppState> {
   }
 
   setServer(Server s) {
-    emit(state.copyWith(server: s, selectedIndex: 0));
+    emit(state.copyWith(server: s, firstIndex: 0));
   }
 
   updateLayout() {
@@ -126,7 +125,6 @@ class AppCubit extends Cubit<AppState> {
 
 @freezed
 class AppState with _$AppState {
-  const factory AppState(
-      int selectedIndex, Server? server, HomeLayout homeLayout,
+  const factory AppState(int firstIndex, Server? server, HomeLayout homeLayout,
       {@Default(false) bool globalLoading}) = _AppState;
 }

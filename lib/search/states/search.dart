@@ -82,17 +82,12 @@ class SearchCubit<T extends SearchState> extends Cubit<SearchState> {
     state.queryController.text = e;
     search(e);
   }
-
-  void selectIndex(int value) {
-    emit(state.copyWith(selectedIndex: value));
-  }
 }
 
 @freezed
 class SearchState with _$SearchState {
   const factory SearchState(
           {required TextEditingController queryController,
-          @Default(0) int selectedIndex,
           @Default(false) bool searchNow,
           @Default([]) List<String> suggestions,
           @Default(SearchSortBy.relevance) SearchSortBy sortBy,
@@ -122,7 +117,6 @@ class SearchState with _$SearchState {
     return SearchState(
         queryController:
             queryController ?? TextEditingController(text: query ?? ''),
-        selectedIndex: selectedIndex ?? 0,
         searchNow: searchNow ?? false,
         suggestions: suggestions ?? [],
         sortBy: sortBy ?? SearchSortBy.relevance,

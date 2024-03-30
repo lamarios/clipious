@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:invidious/downloads/models/downloaded_video.dart';
@@ -19,7 +18,6 @@ const String coulnotLoadVideos = 'cannot-load-videos';
 final log = Logger('Video');
 
 class VideoCubit extends Cubit<VideoState> {
-  final ScrollController scrollController = ScrollController();
   final DownloadManagerCubit downloadManager;
   final PlayerCubit player;
   final SettingsCubit settings;
@@ -71,7 +69,6 @@ class VideoCubit extends Cubit<VideoState> {
   @override
   close() async {
     var state = this.state.copyWith();
-    scrollController.dispose();
     if (downloadManager.state.downloadProgresses.containsKey(state.videoId)) {
       downloadManager.removeListener(state.videoId, onDownloadProgress);
     }
@@ -106,11 +103,6 @@ class VideoCubit extends Cubit<VideoState> {
     settings.setPlayRecommendedNext(value ?? false);
   }
 
-  selectIndex(int index) {
-    emit(state.copyWith(selectedIndex: index));
-    scrollUp();
-  }
-
   void restartVideo(bool? audio) {
     if (state.video != null) {
       player.showBigPlayer();
@@ -128,11 +120,6 @@ class VideoCubit extends Cubit<VideoState> {
       player.playVideo(videos, audio: audio);
     }
   }
-
-  scrollUp() {
-    scrollController.animateTo(0,
-        duration: animationDuration, curve: Curves.easeInOutQuad);
-  }
 }
 
 @freezed
@@ -141,7 +128,6 @@ class VideoState with _$VideoState {
       {Video? video,
       int? dislikes,
       @Default(true) loadingVideo,
-      @Default(0) int selectedIndex,
       required String videoId,
       required bool isLoggedIn,
       @Default(false) bool downloading,

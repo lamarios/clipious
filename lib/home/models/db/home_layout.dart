@@ -1,8 +1,10 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:invidious/router.dart';
 import 'package:invidious/videos/models/video_in_list.dart';
 
 import '../../../downloads/states/download_manager.dart';
@@ -24,23 +26,27 @@ enum HomeDataSource {
   home(
       big: false,
       small: false,
+      route: HomeRoute(),
       showOn: HomeDataSourceAppearance.phone), // used for app layout set-up
-  popular,
-  trending,
-  subscription,
-  history(showOn: HomeDataSourceAppearance.phone),
-  playlist,
-  downloads(showOn: HomeDataSourceAppearance.phone),
-  searchHistory(showOn: HomeDataSourceAppearance.phone),
+  popular(route: PopularRoute()),
+  trending(route: TrendingRoute()),
+  subscription(route: SubscriptionRoute()),
+  history(showOn: HomeDataSourceAppearance.phone, route: HistoryRoute()),
+  playlist(route: PlaylistsRoute()),
+  downloads(showOn: HomeDataSourceAppearance.phone, route: DownloadsRoute()),
+  searchHistory(
+      showOn: HomeDataSourceAppearance.phone, route: SearchHistoryRoute()),
   search(showOn: HomeDataSourceAppearance.tv);
 
   final bool small;
   final bool big;
   final HomeDataSourceAppearance showOn;
+  final PageRouteInfo? route;
 
   const HomeDataSource(
       {this.small = true,
       this.big = true,
+      this.route,
       this.showOn = HomeDataSourceAppearance.both});
 
   static List<HomeDataSource> defaultSettings() {

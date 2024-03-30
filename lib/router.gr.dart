@@ -33,13 +33,82 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const BrowsingSettingsScreen(),
       );
     },
+    ChannelInfoRoute.name: (routeData) {
+      final args = routeData.argsAs<ChannelInfoRouteArgs>(
+          orElse: () => const ChannelInfoRouteArgs());
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: ChannelInfoTab(
+          key: args.key,
+          channel: args.channel,
+        ),
+      );
+    },
+    ChannelPlaylistsRoute.name: (routeData) {
+      final args = routeData.argsAs<ChannelPlaylistsRouteArgs>(
+          orElse: () => const ChannelPlaylistsRouteArgs());
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: ChannelPlaylistsTab(
+          key: args.key,
+          channelId: args.channelId,
+        ),
+      );
+    },
     ChannelRoute.name: (routeData) {
-      final args = routeData.argsAs<ChannelRouteArgs>();
+      final pathParams = routeData.inheritedPathParams;
+      final args = routeData.argsAs<ChannelRouteArgs>(
+          orElse: () =>
+              ChannelRouteArgs(channelId: pathParams.getString('channelId')));
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: ChannelScreen(
           key: args.key,
           channelId: args.channelId,
+        ),
+      );
+    },
+    ChannelShortsRoute.name: (routeData) {
+      final args = routeData.argsAs<ChannelShortsRouteArgs>(
+          orElse: () => const ChannelShortsRouteArgs());
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: ChannelShortsTab(
+          key: args.key,
+          channel: args.channel,
+        ),
+      );
+    },
+    ChannelStreamRoute.name: (routeData) {
+      final args = routeData.argsAs<ChannelStreamRouteArgs>(
+          orElse: () => const ChannelStreamRouteArgs());
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: ChannelStreamTab(
+          key: args.key,
+          channel: args.channel,
+        ),
+      );
+    },
+    ChannelVideoRoute.name: (routeData) {
+      final args = routeData.argsAs<ChannelVideoRouteArgs>(
+          orElse: () => const ChannelVideoRouteArgs());
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: ChannelVideoTab(
+          key: args.key,
+          channel: args.channel,
+        ),
+      );
+    },
+    CommentsRoute.name: (routeData) {
+      final args = routeData.argsAs<CommentsRouteArgs>(
+          orElse: () => const CommentsRouteArgs());
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: CommentsTab(
+          key: args.key,
+          video: args.video,
         ),
       );
     },
@@ -55,16 +124,34 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const DownloadManagerScreen(),
       );
     },
+    DownloadsRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const DownloadsTab(),
+      );
+    },
     EditHomeLayoutRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const EditHomeLayoutScreen(),
       );
     },
+    HistoryRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const HistoryTab(),
+      );
+    },
     HomeRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const HomeScreen(),
+        child: const HomeTab(),
+      );
+    },
+    MainContentRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const MainContentScreen(),
       );
     },
     MainRoute.name: (routeData) {
@@ -112,16 +199,57 @@ abstract class _$AppRouter extends RootStackRouter {
         ),
       );
     },
+    PlaylistsRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const PlaylistsTab(),
+      );
+    },
+    PopularRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const PopularTab(),
+      );
+    },
+    RecommendedRoute.name: (routeData) {
+      final args = routeData.argsAs<RecommendedRouteArgs>(
+          orElse: () => const RecommendedRouteArgs());
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: RecommendedTab(
+          key: args.key,
+          video: args.video,
+        ),
+      );
+    },
     ResetRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const ResetScreen(),
       );
     },
+    SearchChannelRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const SearchChannelTab(),
+      );
+    },
     SearchHistorySettingsRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const SearchHistorySettingsScreen(),
+      );
+    },
+    SearchHistoryRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const SearchHistoryTab(),
+      );
+    },
+    SearchPlaylistRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const SearchPlaylistTab(),
       );
     },
     SearchRoute.name: (routeData) {
@@ -134,6 +262,12 @@ abstract class _$AppRouter extends RootStackRouter {
           query: args.query,
           searchNow: args.searchNow,
         ),
+      );
+    },
+    SearchVideoRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const SearchVideoTab(),
       );
     },
     SettingsRoute.name: (routeData) {
@@ -151,13 +285,19 @@ abstract class _$AppRouter extends RootStackRouter {
     SubscriptionRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const SubscriptionScreen(),
+        child: const SubscriptionTab(),
       );
     },
     TVSettingsRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const TVSettingsScreen(),
+      );
+    },
+    TrendingRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const TrendingTab(),
       );
     },
     TvAppLayoutSettingsRoute.name: (routeData) {
@@ -371,6 +511,19 @@ abstract class _$AppRouter extends RootStackRouter {
         ),
       );
     },
+    VideoInfoRoute.name: (routeData) {
+      final args = routeData.argsAs<VideoInfoRouteArgs>(
+          orElse: () => const VideoInfoRouteArgs());
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: VideoInfoTab(
+          key: args.key,
+          video: args.video,
+          dislikes: args.dislikes,
+          titleAndChannelInfo: args.titleAndChannelInfo,
+        ),
+      );
+    },
     VideoPlayerSettingsRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -440,6 +593,82 @@ class BrowsingSettingsRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [ChannelInfoTab]
+class ChannelInfoRoute extends PageRouteInfo<ChannelInfoRouteArgs> {
+  ChannelInfoRoute({
+    Key? key,
+    Channel? channel,
+    List<PageRouteInfo>? children,
+  }) : super(
+          ChannelInfoRoute.name,
+          args: ChannelInfoRouteArgs(
+            key: key,
+            channel: channel,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'ChannelInfoRoute';
+
+  static const PageInfo<ChannelInfoRouteArgs> page =
+      PageInfo<ChannelInfoRouteArgs>(name);
+}
+
+class ChannelInfoRouteArgs {
+  const ChannelInfoRouteArgs({
+    this.key,
+    this.channel,
+  });
+
+  final Key? key;
+
+  final Channel? channel;
+
+  @override
+  String toString() {
+    return 'ChannelInfoRouteArgs{key: $key, channel: $channel}';
+  }
+}
+
+/// generated route for
+/// [ChannelPlaylistsTab]
+class ChannelPlaylistsRoute extends PageRouteInfo<ChannelPlaylistsRouteArgs> {
+  ChannelPlaylistsRoute({
+    Key? key,
+    String? channelId,
+    List<PageRouteInfo>? children,
+  }) : super(
+          ChannelPlaylistsRoute.name,
+          args: ChannelPlaylistsRouteArgs(
+            key: key,
+            channelId: channelId,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'ChannelPlaylistsRoute';
+
+  static const PageInfo<ChannelPlaylistsRouteArgs> page =
+      PageInfo<ChannelPlaylistsRouteArgs>(name);
+}
+
+class ChannelPlaylistsRouteArgs {
+  const ChannelPlaylistsRouteArgs({
+    this.key,
+    this.channelId,
+  });
+
+  final Key? key;
+
+  final String? channelId;
+
+  @override
+  String toString() {
+    return 'ChannelPlaylistsRouteArgs{key: $key, channelId: $channelId}';
+  }
+}
+
+/// generated route for
 /// [ChannelScreen]
 class ChannelRoute extends PageRouteInfo<ChannelRouteArgs> {
   ChannelRoute({
@@ -452,6 +681,7 @@ class ChannelRoute extends PageRouteInfo<ChannelRouteArgs> {
             key: key,
             channelId: channelId,
           ),
+          rawPathParams: {'channelId': channelId},
           initialChildren: children,
         );
 
@@ -474,6 +704,158 @@ class ChannelRouteArgs {
   @override
   String toString() {
     return 'ChannelRouteArgs{key: $key, channelId: $channelId}';
+  }
+}
+
+/// generated route for
+/// [ChannelShortsTab]
+class ChannelShortsRoute extends PageRouteInfo<ChannelShortsRouteArgs> {
+  ChannelShortsRoute({
+    Key? key,
+    Channel? channel,
+    List<PageRouteInfo>? children,
+  }) : super(
+          ChannelShortsRoute.name,
+          args: ChannelShortsRouteArgs(
+            key: key,
+            channel: channel,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'ChannelShortsRoute';
+
+  static const PageInfo<ChannelShortsRouteArgs> page =
+      PageInfo<ChannelShortsRouteArgs>(name);
+}
+
+class ChannelShortsRouteArgs {
+  const ChannelShortsRouteArgs({
+    this.key,
+    this.channel,
+  });
+
+  final Key? key;
+
+  final Channel? channel;
+
+  @override
+  String toString() {
+    return 'ChannelShortsRouteArgs{key: $key, channel: $channel}';
+  }
+}
+
+/// generated route for
+/// [ChannelStreamTab]
+class ChannelStreamRoute extends PageRouteInfo<ChannelStreamRouteArgs> {
+  ChannelStreamRoute({
+    Key? key,
+    Channel? channel,
+    List<PageRouteInfo>? children,
+  }) : super(
+          ChannelStreamRoute.name,
+          args: ChannelStreamRouteArgs(
+            key: key,
+            channel: channel,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'ChannelStreamRoute';
+
+  static const PageInfo<ChannelStreamRouteArgs> page =
+      PageInfo<ChannelStreamRouteArgs>(name);
+}
+
+class ChannelStreamRouteArgs {
+  const ChannelStreamRouteArgs({
+    this.key,
+    this.channel,
+  });
+
+  final Key? key;
+
+  final Channel? channel;
+
+  @override
+  String toString() {
+    return 'ChannelStreamRouteArgs{key: $key, channel: $channel}';
+  }
+}
+
+/// generated route for
+/// [ChannelVideoTab]
+class ChannelVideoRoute extends PageRouteInfo<ChannelVideoRouteArgs> {
+  ChannelVideoRoute({
+    Key? key,
+    Channel? channel,
+    List<PageRouteInfo>? children,
+  }) : super(
+          ChannelVideoRoute.name,
+          args: ChannelVideoRouteArgs(
+            key: key,
+            channel: channel,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'ChannelVideoRoute';
+
+  static const PageInfo<ChannelVideoRouteArgs> page =
+      PageInfo<ChannelVideoRouteArgs>(name);
+}
+
+class ChannelVideoRouteArgs {
+  const ChannelVideoRouteArgs({
+    this.key,
+    this.channel,
+  });
+
+  final Key? key;
+
+  final Channel? channel;
+
+  @override
+  String toString() {
+    return 'ChannelVideoRouteArgs{key: $key, channel: $channel}';
+  }
+}
+
+/// generated route for
+/// [CommentsTab]
+class CommentsRoute extends PageRouteInfo<CommentsRouteArgs> {
+  CommentsRoute({
+    Key? key,
+    Video? video,
+    List<PageRouteInfo>? children,
+  }) : super(
+          CommentsRoute.name,
+          args: CommentsRouteArgs(
+            key: key,
+            video: video,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'CommentsRoute';
+
+  static const PageInfo<CommentsRouteArgs> page =
+      PageInfo<CommentsRouteArgs>(name);
+}
+
+class CommentsRouteArgs {
+  const CommentsRouteArgs({
+    this.key,
+    this.video,
+  });
+
+  final Key? key;
+
+  final Video? video;
+
+  @override
+  String toString() {
+    return 'CommentsRouteArgs{key: $key, video: $video}';
   }
 }
 
@@ -506,6 +888,20 @@ class DownloadManagerRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [DownloadsTab]
+class DownloadsRoute extends PageRouteInfo<void> {
+  const DownloadsRoute({List<PageRouteInfo>? children})
+      : super(
+          DownloadsRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'DownloadsRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
 /// [EditHomeLayoutScreen]
 class EditHomeLayoutRoute extends PageRouteInfo<void> {
   const EditHomeLayoutRoute({List<PageRouteInfo>? children})
@@ -520,7 +916,21 @@ class EditHomeLayoutRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [HomeScreen]
+/// [HistoryTab]
+class HistoryRoute extends PageRouteInfo<void> {
+  const HistoryRoute({List<PageRouteInfo>? children})
+      : super(
+          HistoryRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'HistoryRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [HomeTab]
 class HomeRoute extends PageRouteInfo<void> {
   const HomeRoute({List<PageRouteInfo>? children})
       : super(
@@ -529,6 +939,20 @@ class HomeRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'HomeRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [MainContentScreen]
+class MainContentRoute extends PageRouteInfo<void> {
+  const MainContentRoute({List<PageRouteInfo>? children})
+      : super(
+          MainContentRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'MainContentRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
@@ -672,6 +1096,72 @@ class PlaylistViewRouteArgs {
 }
 
 /// generated route for
+/// [PlaylistsTab]
+class PlaylistsRoute extends PageRouteInfo<void> {
+  const PlaylistsRoute({List<PageRouteInfo>? children})
+      : super(
+          PlaylistsRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'PlaylistsRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [PopularTab]
+class PopularRoute extends PageRouteInfo<void> {
+  const PopularRoute({List<PageRouteInfo>? children})
+      : super(
+          PopularRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'PopularRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [RecommendedTab]
+class RecommendedRoute extends PageRouteInfo<RecommendedRouteArgs> {
+  RecommendedRoute({
+    Key? key,
+    Video? video,
+    List<PageRouteInfo>? children,
+  }) : super(
+          RecommendedRoute.name,
+          args: RecommendedRouteArgs(
+            key: key,
+            video: video,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'RecommendedRoute';
+
+  static const PageInfo<RecommendedRouteArgs> page =
+      PageInfo<RecommendedRouteArgs>(name);
+}
+
+class RecommendedRouteArgs {
+  const RecommendedRouteArgs({
+    this.key,
+    this.video,
+  });
+
+  final Key? key;
+
+  final Video? video;
+
+  @override
+  String toString() {
+    return 'RecommendedRouteArgs{key: $key, video: $video}';
+  }
+}
+
+/// generated route for
 /// [ResetScreen]
 class ResetRoute extends PageRouteInfo<void> {
   const ResetRoute({List<PageRouteInfo>? children})
@@ -686,6 +1176,20 @@ class ResetRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [SearchChannelTab]
+class SearchChannelRoute extends PageRouteInfo<void> {
+  const SearchChannelRoute({List<PageRouteInfo>? children})
+      : super(
+          SearchChannelRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'SearchChannelRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
 /// [SearchHistorySettingsScreen]
 class SearchHistorySettingsRoute extends PageRouteInfo<void> {
   const SearchHistorySettingsRoute({List<PageRouteInfo>? children})
@@ -695,6 +1199,34 @@ class SearchHistorySettingsRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'SearchHistorySettingsRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [SearchHistoryTab]
+class SearchHistoryRoute extends PageRouteInfo<void> {
+  const SearchHistoryRoute({List<PageRouteInfo>? children})
+      : super(
+          SearchHistoryRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'SearchHistoryRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [SearchPlaylistTab]
+class SearchPlaylistRoute extends PageRouteInfo<void> {
+  const SearchPlaylistRoute({List<PageRouteInfo>? children})
+      : super(
+          SearchPlaylistRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'SearchPlaylistRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
@@ -742,6 +1274,20 @@ class SearchRouteArgs {
 }
 
 /// generated route for
+/// [SearchVideoTab]
+class SearchVideoRoute extends PageRouteInfo<void> {
+  const SearchVideoRoute({List<PageRouteInfo>? children})
+      : super(
+          SearchVideoRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'SearchVideoRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
 /// [SettingsScreen]
 class SettingsRoute extends PageRouteInfo<void> {
   const SettingsRoute({List<PageRouteInfo>? children})
@@ -770,7 +1316,7 @@ class SponsorBlockSettingsRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [SubscriptionScreen]
+/// [SubscriptionTab]
 class SubscriptionRoute extends PageRouteInfo<void> {
   const SubscriptionRoute({List<PageRouteInfo>? children})
       : super(
@@ -793,6 +1339,20 @@ class TVSettingsRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'TVSettingsRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [TrendingTab]
+class TrendingRoute extends PageRouteInfo<void> {
+  const TrendingRoute({List<PageRouteInfo>? children})
+      : super(
+          TrendingRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'TrendingRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
@@ -1524,6 +2084,54 @@ class VideoFilterSetupRouteArgs {
   @override
   String toString() {
     return 'VideoFilterSetupRouteArgs{key: $key, channelId: $channelId, filter: $filter}';
+  }
+}
+
+/// generated route for
+/// [VideoInfoTab]
+class VideoInfoRoute extends PageRouteInfo<VideoInfoRouteArgs> {
+  VideoInfoRoute({
+    Key? key,
+    Video? video,
+    int? dislikes,
+    bool titleAndChannelInfo = true,
+    List<PageRouteInfo>? children,
+  }) : super(
+          VideoInfoRoute.name,
+          args: VideoInfoRouteArgs(
+            key: key,
+            video: video,
+            dislikes: dislikes,
+            titleAndChannelInfo: titleAndChannelInfo,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'VideoInfoRoute';
+
+  static const PageInfo<VideoInfoRouteArgs> page =
+      PageInfo<VideoInfoRouteArgs>(name);
+}
+
+class VideoInfoRouteArgs {
+  const VideoInfoRouteArgs({
+    this.key,
+    this.video,
+    this.dislikes,
+    this.titleAndChannelInfo = true,
+  });
+
+  final Key? key;
+
+  final Video? video;
+
+  final int? dislikes;
+
+  final bool titleAndChannelInfo;
+
+  @override
+  String toString() {
+    return 'VideoInfoRouteArgs{key: $key, video: $video, dislikes: $dislikes, titleAndChannelInfo: $titleAndChannelInfo}';
   }
 }
 

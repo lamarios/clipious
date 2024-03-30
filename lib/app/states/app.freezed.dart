@@ -12,11 +12,11 @@ part of 'app.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$AppState {
-  int get selectedIndex => throw _privateConstructorUsedError;
+  int get firstIndex => throw _privateConstructorUsedError;
   Server? get server => throw _privateConstructorUsedError;
   HomeLayout get homeLayout => throw _privateConstructorUsedError;
   bool get globalLoading => throw _privateConstructorUsedError;
@@ -32,7 +32,7 @@ abstract class $AppStateCopyWith<$Res> {
       _$AppStateCopyWithImpl<$Res, AppState>;
   @useResult
   $Res call(
-      {int selectedIndex,
+      {int firstIndex,
       Server? server,
       HomeLayout homeLayout,
       bool globalLoading});
@@ -51,15 +51,15 @@ class _$AppStateCopyWithImpl<$Res, $Val extends AppState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? selectedIndex = null,
+    Object? firstIndex = null,
     Object? server = freezed,
     Object? homeLayout = null,
     Object? globalLoading = null,
   }) {
     return _then(_value.copyWith(
-      selectedIndex: null == selectedIndex
-          ? _value.selectedIndex
-          : selectedIndex // ignore: cast_nullable_to_non_nullable
+      firstIndex: null == firstIndex
+          ? _value.firstIndex
+          : firstIndex // ignore: cast_nullable_to_non_nullable
               as int,
       server: freezed == server
           ? _value.server
@@ -86,7 +86,7 @@ abstract class _$$AppStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int selectedIndex,
+      {int firstIndex,
       Server? server,
       HomeLayout homeLayout,
       bool globalLoading});
@@ -103,15 +103,15 @@ class __$$AppStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? selectedIndex = null,
+    Object? firstIndex = null,
     Object? server = freezed,
     Object? homeLayout = null,
     Object? globalLoading = null,
   }) {
     return _then(_$AppStateImpl(
-      null == selectedIndex
-          ? _value.selectedIndex
-          : selectedIndex // ignore: cast_nullable_to_non_nullable
+      null == firstIndex
+          ? _value.firstIndex
+          : firstIndex // ignore: cast_nullable_to_non_nullable
               as int,
       freezed == server
           ? _value.server
@@ -132,11 +132,11 @@ class __$$AppStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$AppStateImpl implements _AppState {
-  const _$AppStateImpl(this.selectedIndex, this.server, this.homeLayout,
+  const _$AppStateImpl(this.firstIndex, this.server, this.homeLayout,
       {this.globalLoading = false});
 
   @override
-  final int selectedIndex;
+  final int firstIndex;
   @override
   final Server? server;
   @override
@@ -147,7 +147,7 @@ class _$AppStateImpl implements _AppState {
 
   @override
   String toString() {
-    return 'AppState(selectedIndex: $selectedIndex, server: $server, homeLayout: $homeLayout, globalLoading: $globalLoading)';
+    return 'AppState(firstIndex: $firstIndex, server: $server, homeLayout: $homeLayout, globalLoading: $globalLoading)';
   }
 
   @override
@@ -155,8 +155,8 @@ class _$AppStateImpl implements _AppState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AppStateImpl &&
-            (identical(other.selectedIndex, selectedIndex) ||
-                other.selectedIndex == selectedIndex) &&
+            (identical(other.firstIndex, firstIndex) ||
+                other.firstIndex == firstIndex) &&
             (identical(other.server, server) || other.server == server) &&
             (identical(other.homeLayout, homeLayout) ||
                 other.homeLayout == homeLayout) &&
@@ -165,8 +165,8 @@ class _$AppStateImpl implements _AppState {
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, selectedIndex, server, homeLayout, globalLoading);
+  int get hashCode =>
+      Object.hash(runtimeType, firstIndex, server, homeLayout, globalLoading);
 
   @JsonKey(ignore: true)
   @override
@@ -176,12 +176,12 @@ class _$AppStateImpl implements _AppState {
 }
 
 abstract class _AppState implements AppState {
-  const factory _AppState(final int selectedIndex, final Server? server,
-      final HomeLayout homeLayout,
+  const factory _AppState(
+      final int firstIndex, final Server? server, final HomeLayout homeLayout,
       {final bool globalLoading}) = _$AppStateImpl;
 
   @override
-  int get selectedIndex;
+  int get firstIndex;
   @override
   Server? get server;
   @override

@@ -116,9 +116,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AppCubit, AppState>(
-        buildWhen: (previous, current) =>
-            previous.selectedIndex == current.selectedIndex ||
-            previous.server != current.server,
+        buildWhen: (previous, current) => previous.server != current.server,
         // we want to rebuild only when anything other than the navigation index is changed
         builder: (context, _) {
           bool useDynamicTheme = context

@@ -29,10 +29,6 @@ class ChannelCubit extends Cubit<ChannelController> {
   }
 */
 
-  selectIndex(int index) {
-    emit(state.copyWith(selectedIndex: index));
-  }
-
   toggleSubscription() async {
     var state = this.state.copyWith();
     if (state.channel != null) {
@@ -58,7 +54,6 @@ class ChannelController with _$ChannelController {
   const factory ChannelController(
           {required String channelId,
           @Default(false) bool isSubscribed,
-          @Default(0) selectedIndex,
           Channel? channel,
           @Default(true) bool loading,
           @Default(false) bool smallHeader,

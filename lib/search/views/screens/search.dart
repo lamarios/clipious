@@ -3,20 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/globals.dart';
-import 'package:invidious/playlists/views/components/playlist_list.dart';
 import 'package:invidious/router.dart';
-import 'package:invidious/search/models/search_type.dart';
 import 'package:invidious/search/views/components/search_filters.dart';
-import 'package:invidious/utils/views/components/navigation_switcher.dart';
-import 'package:invidious/videos/models/video_in_list.dart';
 
-import '../../../channels/models/channel.dart';
-import '../../../playlists/models/playlist.dart';
 import '../../../settings/states/settings.dart';
 import '../../../utils.dart';
-import '../../../utils/models/paginated_list.dart';
-import '../../../utils/views/components/paginated_list_view.dart';
-import '../../../videos/views/components/video_list.dart';
 import '../../states/search.dart';
 
 //Do not change, invidious doesn't allow any specific value, it's to make the paginated lists work as expected
@@ -31,7 +22,6 @@ class SearchScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var colorScheme = Theme.of(context).colorScheme;
     var locals = AppLocalizations.of(context)!;
     var settings = context.read<SettingsCubit>();
     return OrientationBuilder(
@@ -44,220 +34,132 @@ class SearchScreen extends StatelessWidget {
           child: BlocBuilder<SearchCubit, SearchState>(
             builder: (context, _) {
               var cubit = context.read<SearchCubit>();
-              return Scaffold(
-                bottomNavigationBar:
-                    _.showResults && deviceType == DeviceType.phone
-                        ? NavigationBar(
-                            selectedIndex: _.selectedIndex,
-                            onDestinationSelected: cubit.selectIndex,
-                            destinations: [
-                              NavigationDestination(
-                                  icon: const Icon(Icons.play_arrow),
-                                  label: locals.videos),
-                              NavigationDestination(
-                                  icon: const Icon(Icons.people),
-                                  label: locals.channels),
-                              NavigationDestination(
-                                  icon: const Icon(Icons.playlist_play),
-                                  label: locals.playlists),
-                            ],
-                          )
-                        : null,
-                appBar: AppBar(
-                  title: TextField(
-                    autofocus: query == null,
-                    controller: _.queryController,
-                    textInputAction: TextInputAction.search,
-                    onSubmitted: cubit.search,
-                  ),
-                  actions: [
-                    IconButton(
-                        onPressed: () {
-                          if (cubit.searchCleared()) {
-                            AutoRouter.of(context).pop();
-                          }
-                        },
-                        icon: const Icon(Icons.clear)),
-                    SearchFiltersButton(
-                      initialFilters: _.filters,
-                      onChanged: (newFilters) {
-                        cubit.onFiltersChanged(newFilters);
-                        if (_.showResults ||
-                            _.queryController.text.isNotEmpty) {
-                          cubit.search(_.queryController.text);
-                        }
-                      },
-                    ),
+              return AutoTabsRouter.tabBar(
+                  routes: const [
+                    SearchVideoRoute(),
+                    SearchChannelRoute(),
+                    SearchPlaylistRoute()
                   ],
-                ),
-                body: SafeArea(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: innerHorizontalPadding),
-                    child: !_.showResults
-                        ? ListView(
-                            children: _.queryController.value.text.isEmpty
-                                ? cubit
-                                    .getHistory()
-                                    .map((e) => InkWell(
-                                          onTap: () => cubit.setSearchQuery(e),
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Row(children: [
-                                              const Icon(Icons.history),
-                                              Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          left: 8),
-                                                  child: Text(e))
-                                            ]),
-                                          ),
-                                        ))
-                                    .toList()
-                                : _.suggestions
-                                    .map((e) => InkWell(
-                                          onTap: () => cubit.setSearchQuery(e),
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Text(e),
-                                          ),
-                                        ))
-                                    .toList(),
-                          )
-                        : Row(
-                            children: [
-                              if (deviceType == DeviceType.tablet)
-                                NavigationRail(
-                                  extended: deviceOrientation ==
-                                      Orientation.landscape,
+                  builder: (context, child, controller) {
+                    final tabsController = AutoTabsRouter.of(context);
+                    return Scaffold(
+                      bottomNavigationBar:
+                          _.showResults && deviceType == DeviceType.phone
+                              ? NavigationBar(
+                                  selectedIndex: tabsController.activeIndex,
+                                  onDestinationSelected:
+                                      tabsController.setActiveIndex,
                                   destinations: [
-                                    NavigationRailDestination(
+                                    NavigationDestination(
                                         icon: const Icon(Icons.play_arrow),
-                                        label: Text(locals.videos)),
-                                    NavigationRailDestination(
+                                        label: locals.videos),
+                                    NavigationDestination(
                                         icon: const Icon(Icons.people),
-                                        label: Text(locals.channels)),
-                                    NavigationRailDestination(
+                                        label: locals.channels),
+                                    NavigationDestination(
                                         icon: const Icon(Icons.playlist_play),
-                                        label: Text(locals.playlists)),
+                                        label: locals.playlists),
                                   ],
-                                  selectedIndex: _.selectedIndex,
-                                  onDestinationSelected: cubit.selectIndex,
-                                ),
-                              Expanded(
-                                child: FractionallySizedBox(
-                                  widthFactor: 1,
-                                  child: NavigationSwitcher(
-                                    child: [
-                                      VideoList(
-                                        key: UniqueKey(),
-                                        paginatedVideoList:
-                                            PageBasedPaginatedList<VideoInList>(
-                                          getItemsFunc: (page, maxResults) =>
-                                              service
-                                                  .search(
-                                                      _.queryController.value
-                                                          .text,
-                                                      page: page,
-                                                      sortBy: _.filters.sortBy,
-                                                      type: SearchType.video,
-                                                      date: _.filters.date,
-                                                      duration:
-                                                          _.filters.duration)
-                                                  .then(
-                                                      (value) => value.videos),
-                                          maxResults: searchPageSize,
-                                        ),
-                                      ),
-                                      PaginatedListView<Channel>(
-                                          paginatedList:
-                                              PageBasedPaginatedList<Channel>(
-                                            getItemsFunc: (page, maxResults) =>
-                                                service
-                                                    .search(
-                                                        _.queryController.value
-                                                            .text,
-                                                        page: page,
-                                                        sortBy:
-                                                            _.filters.sortBy,
-                                                        type:
-                                                            SearchType.channel,
-                                                        date: _.filters.date,
-                                                        duration:
-                                                            _.filters.duration)
-                                                    .then((value) =>
-                                                        value.channels),
-                                            maxResults: searchPageSize,
-                                          ),
-                                          itemBuilder: (e) => InkWell(
-                                                onTap: () {
-                                                  AutoRouter.of(context).push(
-                                                      ChannelRoute(
-                                                          channelId:
-                                                              e.authorId));
-                                                },
-                                                child: Padding(
-                                                  padding: const EdgeInsets
-                                                      .symmetric(
-                                                      horizontal: 8.0,
-                                                      vertical: 20),
-                                                  child: Row(
-                                                    children: [
-                                                      Expanded(
-                                                          child: Text(
-                                                        e.author,
-                                                        style: TextStyle(
-                                                            color: colorScheme
-                                                                .primary),
-                                                      )),
-                                                      const Padding(
-                                                        padding:
-                                                            EdgeInsets.only(
-                                                                right: 8.0),
-                                                        child: Icon(
-                                                          Icons.people,
-                                                          size: 15,
-                                                        ),
-                                                      ),
-                                                      Text(compactCurrency
-                                                          .format(e.subCount)),
-                                                    ],
-                                                  ),
-                                                ),
-                                              )),
-                                      FractionallySizedBox(
-                                        child: PlaylistList(
-                                            paginatedList:
-                                                PageBasedPaginatedList<
-                                                    Playlist>(
-                                              getItemsFunc:
-                                                  (page, maxResults) => service
-                                                      .search(
-                                                          _.queryController
-                                                              .value.text,
-                                                          page: page,
-                                                          sortBy:
-                                                              _.filters.sortBy,
-                                                          type: SearchType
-                                                              .playlist,
-                                                          date: _.filters.date,
-                                                          duration: _
-                                                              .filters.duration)
-                                                      .then((value) =>
-                                                          value.playlists),
-                                              maxResults: searchPageSize,
-                                            ),
-                                            canDeleteVideos: false),
-                                      )
-                                    ][_.selectedIndex],
-                                  ),
-                                ),
-                              ),
-                            ],
+                                )
+                              : null,
+                      appBar: AppBar(
+                        title: TextField(
+                          autofocus: query == null,
+                          controller: _.queryController,
+                          textInputAction: TextInputAction.search,
+                          onSubmitted: cubit.search,
+                        ),
+                        actions: [
+                          IconButton(
+                              onPressed: () {
+                                if (cubit.searchCleared()) {
+                                  AutoRouter.of(context).pop();
+                                }
+                              },
+                              icon: const Icon(Icons.clear)),
+                          SearchFiltersButton(
+                            initialFilters: _.filters,
+                            onChanged: (newFilters) {
+                              cubit.onFiltersChanged(newFilters);
+                              if (_.showResults ||
+                                  _.queryController.text.isNotEmpty) {
+                                cubit.search(_.queryController.text);
+                              }
+                            },
                           ),
-                  ),
-                ),
-              );
+                        ],
+                      ),
+                      body: SafeArea(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: innerHorizontalPadding),
+                          child: !_.showResults
+                              ? ListView(
+                                  children: _.queryController.value.text.isEmpty
+                                      ? cubit
+                                          .getHistory()
+                                          .map((e) => InkWell(
+                                                onTap: () =>
+                                                    cubit.setSearchQuery(e),
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(8.0),
+                                                  child: Row(children: [
+                                                    const Icon(Icons.history),
+                                                    Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .only(left: 8),
+                                                        child: Text(e))
+                                                  ]),
+                                                ),
+                                              ))
+                                          .toList()
+                                      : _.suggestions
+                                          .map((e) => InkWell(
+                                                onTap: () =>
+                                                    cubit.setSearchQuery(e),
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(8.0),
+                                                  child: Text(e),
+                                                ),
+                                              ))
+                                          .toList(),
+                                )
+                              : Row(
+                                  children: [
+                                    if (deviceType == DeviceType.tablet)
+                                      NavigationRail(
+                                        extended: deviceOrientation ==
+                                            Orientation.landscape,
+                                        destinations: [
+                                          NavigationRailDestination(
+                                              icon:
+                                                  const Icon(Icons.play_arrow),
+                                              label: Text(locals.videos)),
+                                          NavigationRailDestination(
+                                              icon: const Icon(Icons.people),
+                                              label: Text(locals.channels)),
+                                          NavigationRailDestination(
+                                              icon: const Icon(
+                                                  Icons.playlist_play),
+                                              label: Text(locals.playlists)),
+                                        ],
+                                        selectedIndex:
+                                            tabsController.activeIndex,
+                                        onDestinationSelected:
+                                            tabsController.setActiveIndex,
+                                      ),
+                                    Expanded(
+                                      child: child,
+                                    ),
+                                  ],
+                                ),
+                        ),
+                      ),
+                    );
+                  });
             },
           ),
         );

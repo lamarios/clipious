@@ -12,14 +12,13 @@ part of 'video.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$VideoState {
   Video? get video => throw _privateConstructorUsedError;
   int? get dislikes => throw _privateConstructorUsedError;
   dynamic get loadingVideo => throw _privateConstructorUsedError;
-  int get selectedIndex => throw _privateConstructorUsedError;
   String get videoId => throw _privateConstructorUsedError;
   bool get isLoggedIn => throw _privateConstructorUsedError;
   bool get downloading => throw _privateConstructorUsedError;
@@ -43,7 +42,6 @@ abstract class $VideoStateCopyWith<$Res> {
       {Video? video,
       int? dislikes,
       dynamic loadingVideo,
-      int selectedIndex,
       String videoId,
       bool isLoggedIn,
       bool downloading,
@@ -69,7 +67,6 @@ class _$VideoStateCopyWithImpl<$Res, $Val extends VideoState>
     Object? video = freezed,
     Object? dislikes = freezed,
     Object? loadingVideo = freezed,
-    Object? selectedIndex = null,
     Object? videoId = null,
     Object? isLoggedIn = null,
     Object? downloading = null,
@@ -91,10 +88,6 @@ class _$VideoStateCopyWithImpl<$Res, $Val extends VideoState>
           ? _value.loadingVideo
           : loadingVideo // ignore: cast_nullable_to_non_nullable
               as dynamic,
-      selectedIndex: null == selectedIndex
-          ? _value.selectedIndex
-          : selectedIndex // ignore: cast_nullable_to_non_nullable
-              as int,
       videoId: null == videoId
           ? _value.videoId
           : videoId // ignore: cast_nullable_to_non_nullable
@@ -139,7 +132,6 @@ abstract class _$$VideoStateImplCopyWith<$Res>
       {Video? video,
       int? dislikes,
       dynamic loadingVideo,
-      int selectedIndex,
       String videoId,
       bool isLoggedIn,
       bool downloading,
@@ -163,7 +155,6 @@ class __$$VideoStateImplCopyWithImpl<$Res>
     Object? video = freezed,
     Object? dislikes = freezed,
     Object? loadingVideo = freezed,
-    Object? selectedIndex = null,
     Object? videoId = null,
     Object? isLoggedIn = null,
     Object? downloading = null,
@@ -183,10 +174,6 @@ class __$$VideoStateImplCopyWithImpl<$Res>
               as int?,
       loadingVideo:
           freezed == loadingVideo ? _value.loadingVideo! : loadingVideo,
-      selectedIndex: null == selectedIndex
-          ? _value.selectedIndex
-          : selectedIndex // ignore: cast_nullable_to_non_nullable
-              as int,
       videoId: null == videoId
           ? _value.videoId
           : videoId // ignore: cast_nullable_to_non_nullable
@@ -226,7 +213,6 @@ class _$VideoStateImpl extends _VideoState {
       {this.video,
       this.dislikes,
       this.loadingVideo = true,
-      this.selectedIndex = 0,
       required this.videoId,
       required this.isLoggedIn,
       this.downloading = false,
@@ -243,9 +229,6 @@ class _$VideoStateImpl extends _VideoState {
   @override
   @JsonKey()
   final dynamic loadingVideo;
-  @override
-  @JsonKey()
-  final int selectedIndex;
   @override
   final String videoId;
   @override
@@ -267,7 +250,7 @@ class _$VideoStateImpl extends _VideoState {
 
   @override
   String toString() {
-    return 'VideoState(video: $video, dislikes: $dislikes, loadingVideo: $loadingVideo, selectedIndex: $selectedIndex, videoId: $videoId, isLoggedIn: $isLoggedIn, downloading: $downloading, downloadProgress: $downloadProgress, downloadedVideo: $downloadedVideo, opacity: $opacity, error: $error)';
+    return 'VideoState(video: $video, dislikes: $dislikes, loadingVideo: $loadingVideo, videoId: $videoId, isLoggedIn: $isLoggedIn, downloading: $downloading, downloadProgress: $downloadProgress, downloadedVideo: $downloadedVideo, opacity: $opacity, error: $error)';
   }
 
   @override
@@ -280,8 +263,6 @@ class _$VideoStateImpl extends _VideoState {
                 other.dislikes == dislikes) &&
             const DeepCollectionEquality()
                 .equals(other.loadingVideo, loadingVideo) &&
-            (identical(other.selectedIndex, selectedIndex) ||
-                other.selectedIndex == selectedIndex) &&
             (identical(other.videoId, videoId) || other.videoId == videoId) &&
             (identical(other.isLoggedIn, isLoggedIn) ||
                 other.isLoggedIn == isLoggedIn) &&
@@ -301,7 +282,6 @@ class _$VideoStateImpl extends _VideoState {
       video,
       dislikes,
       const DeepCollectionEquality().hash(loadingVideo),
-      selectedIndex,
       videoId,
       isLoggedIn,
       downloading,
@@ -322,7 +302,6 @@ abstract class _VideoState extends VideoState {
       {final Video? video,
       final int? dislikes,
       final dynamic loadingVideo,
-      final int selectedIndex,
       required final String videoId,
       required final bool isLoggedIn,
       final bool downloading,
@@ -338,8 +317,6 @@ abstract class _VideoState extends VideoState {
   int? get dislikes;
   @override
   dynamic get loadingVideo;
-  @override
-  int get selectedIndex;
   @override
   String get videoId;
   @override
