@@ -1104,5 +1104,137 @@
   "subscriptionNotificationTitle": "Nouvelles vidéos de vos abonnements",
   "@subscriptionNotificationTitle": {
     "description": "Title for the notification showing that there are new videos from the subscription feed"
+  },
+  "deArrowWarning": "Autoriser DeArrow peut réduire significativement la vitesse de recherche de l'application puisque des requêtes http supplémentaires sont nécessaires pour chacune des vidéos",
+  "@deArrowWarning": {
+    "description": "Warning message when the user enables DeArrow"
+  },
+  "submitFeedbackDescription": "Vous avez trouvé un bug ou avez une suggestion ? Utilisez cet outil pour prendre une capture d'écran de l'application, l'annoter, et envoyer un retour",
+  "@submitFeedbackDescription": {
+    "description": "Setting tile descriptions for feedback submission"
+  },
+  "feedbackDisclaimer": "Pour envoyer un retour, vous aurez besoin d'un compte GitHub et votre capture d'écran sera envoyé par Imgur anonymement.",
+  "@feedbackDisclaimer": {
+    "description": "Content of dialog shown before submitting feedback to make sure the user is ok whith where the data is going"
+  },
+  "feedbackScreenshotError": "Erreur lors du chargement de la capture d'écran vers Imgur",
+  "@feedbackScreenshotError": {
+    "description": "Title for dialog if something goes wrong while uploading feedback screenshot"
+  },
+  "channelSortByOldest": "Les plus anciennes",
+  "@channelSortByOldest": {
+    "description": "Sort channel videos from oldest to newest"
+  },
+  "channelNotificationTitle": "Nouvelles vidéos de {channel}",
+  "@channelNotificationTitle": {
+    "description": "Title for the channel notifications when there are new videos",
+    "placeholders": {
+      "channel": {
+        "type": "String",
+        "example": "MKBHD"
+      }
+    }
+  },
+  "foregroundServiceUpdatingPlaylist": "Vérification des listes de lecture...",
+  "@foregroundServiceUpdatingPlaylist": {
+    "description": "Foreground service notification text when checking for new playlist videos"
+  },
+  "foregroundServiceUpdatingChannels": "Vérification des chaînes...",
+  "@foregroundServiceUpdatingChannels": {
+    "description": "Foreground service notification text when checking for new channel videos"
+  },
+  "enabled": "Autorisé",
+  "@enabled": {
+    "description": "Text to show something is enabled"
+  },
+  "seeking": "Recherche",
+  "@seeking": {
+    "description": "category for settings related to seeking in a video"
+  },
+  "exponentialSkipDescription": "Plus vous sautez en avant, plus le saut est important.",
+  "@exponentialSkipDescription": {
+    "description": "Title for the setting to enable the exponential skipping"
+  },
+  "askToEnableBackgroundServiceTitle": "Notifications désactivées",
+  "@askToEnableBackgroundServiceTitle": {
+    "description": "If the users tries to turn on notifications for a channel but hasn't enable notifications in the app we need to turn it on for them"
+  },
+  "askToEnableBackgroundServiceContent": "Pour avoir les notifications, les notifications Clipious doivent être activées, appuyez sur OK pour les activer.",
+  "@askToEnableBackgroundServiceContent": {
+    "description": "If the users tries to turn on notifications for a channel but hasn't enable notifications in the app we need to turn it on for them"
+  },
+  "subtitlesBackground": "Arrière plan des sous-titres",
+  "@subtitlesBackground": {
+    "description": "Title for settings to set black background  for subtitles"
+  },
+  "copySettingsAsJsonDescription": "Copier les paramètres en JSON pour aider à débugger si vous rencontrez un problème avec l'application et décider de soulever un problème",
+  "@copySettingsAsJsonDescription": {
+    "description": ""
+  },
+  "history": "Historique",
+  "@history": {
+    "description": "User view history label"
+  },
+  "fullscreenOnLandscapeDescription": "Basculez en plein écran quand l'appareil est tourné à l'horizontal",
+  "@fullscreenOnLandscapeDescription": {
+    "description": "Setting to enable full screen on landscape orientation"
+  },
+  "otherNotifications": "Autres sources de notifications (icônes de la cloche)",
+  "@otherNotifications": {
+    "description": "Title for settings section in the notification settings"
+  },
+  "deleteChannelNotificationContent": "Vous ne recevrez plus de notifications depuis cette chaîne.",
+  "@deleteChannelNotificationContent": {
+    "description": "Title for dialog to confirm whether to delete channel notifications"
+  },
+  "deletePlaylistNotificationTitle": "Supprimer les notifications de la liste de lecture ?",
+  "@deletePlaylistNotificationTitle": {
+    "description": "Title for dialog to confirm whether to delete playlist notifications"
+  },
+  "deletePlaylistNotificationContent": "Vous ne receverez plus de notifications de cette liste de lecture.",
+  "@deletePlaylistNotificationContent": {
+    "description": "Title for dialog to confirm whether to delete playlist notifications"
+  },
+  "playlistNotificationTitle": "Nouvelles vidéos dans la liste de lecture {playlist}",
+  "@playlistNotificationTitle": {
+    "description": "Title for the playlist notifications when there are new videos",
+    "placeholders": {
+      "playlist": {
+        "type": "String",
+        "example": "Lo-Fi girl"
+      }
+    }
+  },
+  "foregroundServiceUpdatingSubscriptions": "Vérification des abonnements...",
+  "@foregroundServiceUpdatingSubscriptions": {
+    "description": "Foreground service notification text when checking for new subscription videos"
+  },
+  "notificationFrequencySettingsTitle": "Fréquence de vérification de nouvelle vidéo",
+  "@notificationFrequencySettingsTitle": {
+    "description": "Title for frequency settings"
+  },
+  "notificationFrequencySettingsDescription": "Avec quelle récurrence l'application cherchera de nouvelles vidéos",
+  "@notificationFrequencySettingsDescription": {
+    "description": "Description for frequency settings"
+  },
+  "subtitlesBackgroundDescription": "Ajoute un arrière-plan noir aux sous-titres pour les rendre plus lisibles",
+  "@subtitlesBackgroundDescription": {
+    "description": "Description for settings to set black background  for subtitles"
+  },
+  "deleteChannelNotificationTitle": "Supprimer les notifications de la chaîne ?",
+  "@deleteChannelNotificationTitle": {
+    "description": "Title for dialog to confirm whether to delete channel notifications"
+  },
+  "submitFeedback": "Envoyer un retour",
+  "@submitFeedback": {
+    "description": "Title for settings to submit feed back through the app"
+  },
+  "channelSortByNewest": "Les plus récentes",
+  "@channelSortByNewest": {
+    "description": "Sort channel videos from newest to oldest"
+  },
+  "channelSortByPopular": "Populaire",
+  "@channelSortByPopular": {
+    "description": "Sort channel videos by popularity"
   }
 }
