@@ -12,7 +12,6 @@ import 'package:invidious/router.dart';
 import 'package:invidious/settings/states/settings.dart';
 import 'package:invidious/utils.dart';
 import 'package:invidious/utils/views/components/app_icon.dart';
-import 'package:invidious/utils/views/components/navigation_switcher.dart';
 import 'package:logging/logging.dart';
 
 import '../../../notifications/notifications.dart';
@@ -137,13 +136,13 @@ class _MainScreenState extends State<MainContentScreen> {
               ),
             )
           : AutoTabsRouter.tabBar(
+              key: ValueKey(appState.server?.url),
               homeIndex: selectedIndex,
               routes: allowedPages.map((e) => e.route!).toList(),
               builder: (context, child, controller) {
                 final tabsRouter = AutoTabsRouter.of(context);
                 final selectedPage = allowedPages[tabsRouter.activeIndex];
                 return Scaffold(
-                    key: ValueKey(appState.server?.url),
                     // so we rebuild the view if the server changes
                     backgroundColor: colorScheme.background,
                     bottomNavigationBar: deviceType == DeviceType.phone &&
@@ -210,17 +209,14 @@ class _MainScreenState extends State<MainContentScreen> {
                                         selectedIndex: tabsRouter.activeIndex),
                               ),
                             Expanded(
-                              child: NavigationSwitcher(
-                                child: Container(
-                                    // home handles its own padding because we don't want to cut horizontal scroll lists on the right
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal:
-                                            selectedPage == HomeDataSource.home
-                                                ? 0
-                                                : innerHorizontalPadding),
-                                    key: ValueKey(selectedPage),
-                                    child: child),
-                              ),
+                              child: Container(
+                                  // home handles its own padding because we don't want to cut horizontal scroll lists on the right
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal:
+                                          selectedPage == HomeDataSource.home
+                                              ? 0
+                                              : innerHorizontalPadding),
+                                  child: child),
                             ),
                           ],
                         )));
