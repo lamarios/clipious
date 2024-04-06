@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:invidious/comments/views/components/comments_container.dart';
 import 'package:invidious/utils/views/components/conditional_wrap.dart';
 import 'package:invidious/videos/models/video.dart';
 import 'package:invidious/videos/views/components/play_button.dart';
-import 'package:invidious/videos/views/components/recommended_videos.dart';
 
 import '../../../player/states/player.dart';
 import '../../../settings/states/settings.dart';
@@ -17,16 +15,18 @@ import 'video_thumbnail.dart';
 
 class VideoTabletInnerView extends StatelessWidget {
   final Video video;
-  final int selectedIndex;
   final bool? playNow;
+  final Widget child;
   final VideoState videoController;
+  final TabController tabController;
 
   const VideoTabletInnerView(
       {super.key,
       required this.video,
-      required this.selectedIndex,
       this.playNow,
-      required this.videoController});
+      required this.child,
+      required this.videoController,
+      required this.tabController});
 
   List<Widget> getView(BuildContext context,
       {required Orientation orientation}) {
@@ -103,7 +103,6 @@ class VideoTabletInnerView extends StatelessWidget {
                   width: double.infinity,
                   // constraints: const BoxConstraints(maxWidth: 500),
                   child: ListView(
-                    controller: cubit.scrollController,
                     children: [
                       VideoInfo(
                         video: video,
@@ -120,46 +119,30 @@ class VideoTabletInnerView extends StatelessWidget {
       ),
       Expanded(
         flex: 1,
-        child: DefaultTabController(
-            length: distractionFreeMode ? 1 : 3,
-            child: Column(
-              children: [
-                TabBar(
-                  tabs: [
-                    Tab(
-                      icon: const Icon(Icons.info),
-                      text: locals.info,
-                    ),
-                    if (!distractionFreeMode)
-                      Tab(
-                        icon: const Icon(Icons.chat_bubble),
-                        text: locals.comments,
-                      ),
-                    if (!distractionFreeMode)
-                      Tab(
-                        icon: const Icon(Icons.schema),
-                        text: locals.recommended,
-                      )
-                  ],
+        child: Column(
+          children: [
+            TabBar(
+              tabs: [
+                Tab(
+                  icon: const Icon(Icons.info),
+                  text: locals.info,
                 ),
-                Expanded(
-                    child: TabBarView(children: [
-                  SingleChildScrollView(
-                    child: VideoInfo(
-                      video: video,
-                      dislikes: videoController.dislikes,
-                      titleAndChannelInfo: false,
-                    ),
+                if (!distractionFreeMode)
+                  Tab(
+                    icon: const Icon(Icons.chat_bubble),
+                    text: locals.comments,
                   ),
-                  if (!distractionFreeMode)
-                    SingleChildScrollView(
-                        child: CommentsContainer(video: video)),
-                  if (!distractionFreeMode)
-                    SingleChildScrollView(
-                        child: RecommendedVideos(video: video))
-                ]))
+                if (!distractionFreeMode)
+                  Tab(
+                    icon: const Icon(Icons.schema),
+                    text: locals.recommended,
+                  )
               ],
-            )),
+              controller: tabController,
+            ),
+            Expanded(child: child)
+          ],
+        ),
       )
     ];
   }

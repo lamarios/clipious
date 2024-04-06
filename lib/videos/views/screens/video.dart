@@ -13,8 +13,8 @@ import 'package:invidious/utils/views/components/placeholders.dart';
 import 'package:invidious/videos/states/video.dart';
 import 'package:invidious/videos/views/components/add_to_playlist_button.dart';
 import 'package:invidious/videos/views/components/download_modal_sheet.dart';
+import 'package:invidious/videos/views/components/inner_view.dart';
 import 'package:invidious/videos/views/components/inner_view_tablet.dart';
-import 'package:invidious/videos/views/components/innter_view.dart';
 import 'package:invidious/videos/views/components/video_share_button.dart';
 
 import '../../../player/states/player.dart';
@@ -24,7 +24,7 @@ class VideoRouteArguments {
   final String videoId;
   bool? playNow;
 
-  VideoRouteArguments({required this.videoId, this.playNow});
+  VideoRouteArguments({@pathParam required this.videoId, this.playNow});
 }
 
 @RoutePage()
@@ -78,6 +78,7 @@ class VideoScreen extends StatelessWidget {
 
     var player = context.read<PlayerCubit>();
     var settings = context.read<SettingsCubit>();
+    var distractionFreeMode = settings.state.distractionFreeMode;
     return MultiBlocProvider(
       providers: [
         BlocProvider(
@@ -95,10 +96,7 @@ class VideoScreen extends StatelessWidget {
           AutoRouter.of(context).pop();
           context.read<VideoCubit>().playVideo(false);
         },
-        builder: (context, _) {
-          var cubit = context.read<VideoCubit>();
-          var settings = context.read<SettingsCubit>();
-
+        builder: (context, videoState) {
           return OrientationBuilder(builder: (context, orientation) {
             // we only show the tablet specific view for landscape tablets, phone portrait view is fine here
             var showTabletView = deviceType == DeviceType.tablet &&
@@ -110,146 +108,181 @@ class VideoScreen extends StatelessWidget {
               NavigationDestination(
                   icon: const Icon(Icons.chat_bubble), label: locals.comments),
             ], growable: true);
+
             destinations.add(NavigationDestination(
                 icon: const Icon(Icons.schema), label: locals.recommended));
+
             return AnimatedOpacity(
               duration: animationDuration,
-              opacity: _.opacity,
-              child: Scaffold(
-                appBar: AppBar(
-                  actions: _.loadingVideo || _.video == null
-                      ? []
-                      : [
-                          AnimatedSwitcher(
-                              duration: animationDuration,
-                              child: _.downloading
-                                  ? GestureDetector(
-                                      onTap: () => openDownloadManager(context),
-                                      child: Stack(
-                                        alignment: Alignment.center,
-                                        children: [
-                                          IconButton(
-                                            icon: Icon(
-                                              Icons.add,
-                                              color: colorScheme.background,
+              opacity: videoState.opacity,
+              child: AutoTabsRouter.tabBar(
+                  key: ValueKey(videoState.video),
+                  routes: [
+                    VideoInfoRoute(
+                        video: videoState.video,
+                        dislikes: videoState.dislikes,
+                        titleAndChannelInfo: deviceType == DeviceType.phone),
+                    if (!distractionFreeMode)
+                      CommentsRoute(video: videoState.video),
+                    if (!distractionFreeMode)
+                      RecommendedRoute(video: videoState.video)
+                  ],
+                  builder: (context, child, controller) {
+                    final tabsRouter = AutoTabsRouter.of(context);
+                    return Scaffold(
+                      appBar: AppBar(
+                        actions: videoState.loadingVideo ||
+                                videoState.video == null
+                            ? []
+                            : [
+                                AnimatedSwitcher(
+                                    duration: animationDuration,
+                                    child: videoState.downloading
+                                        ? GestureDetector(
+                                            onTap: () =>
+                                                openDownloadManager(context),
+                                            child: Stack(
+                                              alignment: Alignment.center,
+                                              children: [
+                                                IconButton(
+                                                  icon: Icon(
+                                                    Icons.add,
+                                                    color:
+                                                        colorScheme.background,
+                                                  ),
+                                                  onPressed: () {},
+                                                ),
+                                                SizedBox(
+                                                    height: 15,
+                                                    width: 15,
+                                                    child:
+                                                        TweenAnimationBuilder(
+                                                            duration:
+                                                                animationDuration,
+                                                            tween: Tween<
+                                                                    double>(
+                                                                begin: 0,
+                                                                end: videoState
+                                                                    .downloadProgress),
+                                                            builder: (context,
+                                                                value, child) {
+                                                              return CircularProgressIndicator(
+                                                                value: videoState
+                                                                            .downloadProgress ==
+                                                                        0
+                                                                    ? null
+                                                                    : value,
+                                                                strokeWidth: 2,
+                                                              );
+                                                            }))
+                                              ],
                                             ),
-                                            onPressed: () {},
-                                          ),
-                                          SizedBox(
-                                              height: 15,
-                                              width: 15,
-                                              child: TweenAnimationBuilder(
-                                                  duration: animationDuration,
-                                                  tween: Tween<double>(
-                                                      begin: 0,
-                                                      end: _.downloadProgress),
-                                                  builder:
-                                                      (context, value, child) {
-                                                    return CircularProgressIndicator(
-                                                      value:
-                                                          _.downloadProgress ==
-                                                                  0
-                                                              ? null
-                                                              : value,
-                                                      strokeWidth: 2,
-                                                    );
-                                                  }))
-                                        ],
-                                      ),
-                                    )
-                                  : Stack(
-                                      children: [
-                                        IconButton(
-                                            onPressed: _.isDownloaded ||
-                                                    _.downloadFailed
-                                                ? () =>
-                                                    openDownloadManager(context)
-                                                : () =>
-                                                    downloadVideo(context, _),
-                                            icon: _.isDownloaded &&
-                                                    !_.downloadFailed
-                                                ? const Icon(
-                                                    Icons.download_done)
-                                                : const Icon(Icons.download)),
-                                        Positioned(
-                                            right: 5,
-                                            top: 5,
-                                            child: _.downloadFailed
-                                                ? const Icon(
-                                                    Icons.error,
-                                                    size: 15,
-                                                    color: Colors.red,
-                                                  )
-                                                : const SizedBox.shrink())
-                                      ],
-                                    )),
-                          Visibility(
-                            visible: _.video != null,
-                            child: VideoShareButton(video: _.video!),
+                                          )
+                                        : Stack(
+                                            children: [
+                                              IconButton(
+                                                  onPressed: videoState
+                                                              .isDownloaded ||
+                                                          videoState
+                                                              .downloadFailed
+                                                      ? () =>
+                                                          openDownloadManager(
+                                                              context)
+                                                      : () => downloadVideo(
+                                                          context, videoState),
+                                                  icon: videoState
+                                                              .isDownloaded &&
+                                                          !videoState
+                                                              .downloadFailed
+                                                      ? const Icon(
+                                                          Icons.download_done)
+                                                      : const Icon(
+                                                          Icons.download)),
+                                              Positioned(
+                                                  right: 5,
+                                                  top: 5,
+                                                  child: videoState
+                                                          .downloadFailed
+                                                      ? const Icon(
+                                                          Icons.error,
+                                                          size: 15,
+                                                          color: Colors.red,
+                                                        )
+                                                      : const SizedBox.shrink())
+                                            ],
+                                          )),
+                                Visibility(
+                                  visible: videoState.video != null,
+                                  child: VideoShareButton(
+                                      video: videoState.video!),
+                                ),
+                                /*
+                                VideoLikeButton(videoId: _.video?.videoId),
+                                VideoAddToPlaylistButton(videoId: _.video?.videoId),
+                  */
+                                AddToPlayListButton(videoId: videoState.videoId)
+                              ],
+                      ),
+                      backgroundColor: colorScheme.background,
+                      bottomNavigationBar: showTabletView ||
+                              videoState.loadingVideo ||
+                              distractionFreeMode
+                          ? null
+                          : FadeIn(
+                              child: NavigationBar(
+                                onDestinationSelected:
+                                    tabsRouter.setActiveIndex,
+                                selectedIndex: tabsRouter.activeIndex,
+                                destinations: destinations,
+                              ),
+                            ),
+                      body: SafeArea(
+                        bottom: false,
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                              left: innerHorizontalPadding,
+                              right: innerHorizontalPadding,
+                              top: 8),
+                          child: Container(
+                            color: colorScheme.background,
+                            width: double.infinity,
+                            height: double.infinity,
+                            child: AnimatedSwitcher(
+                                duration: animationDuration,
+                                child: videoState.error.isNotEmpty
+                                    ? Container(
+                                        alignment: Alignment.center,
+                                        child: Text(videoState.error ==
+                                                coulnotLoadVideos
+                                            ? locals.couldntLoadVideo
+                                            : videoState.error),
+                                      )
+                                    : videoState.loadingVideo
+                                        ? const DeviceWidget(
+                                            portraitTabletAsPhone: true,
+                                            phone: VideoPlaceHolder(),
+                                            tablet: TabletVideoPlaceHolder())
+                                        : DeviceWidget(
+                                            portraitTabletAsPhone: true,
+                                            phone: VideoInnerView(
+                                              video: videoState.video!,
+                                              playNow: playNow,
+                                              videoController: videoState,
+                                              child: child,
+                                            ),
+                                            tablet: VideoTabletInnerView(
+                                              video: videoState.video!,
+                                              playNow: playNow,
+                                              videoController: videoState,
+                                              tabController: controller,
+                                              child: child,
+                                            ),
+                                          )),
                           ),
-                          /*
-                            VideoLikeButton(videoId: _.video?.videoId),
-                            VideoAddToPlaylistButton(videoId: _.video?.videoId),
-              */
-                          AddToPlayListButton(videoId: _.videoId)
-                        ],
-                ),
-                backgroundColor: colorScheme.background,
-                bottomNavigationBar: showTabletView ||
-                        _.loadingVideo ||
-                        settings.state.distractionFreeMode
-                    ? null
-                    : FadeIn(
-                        child: NavigationBar(
-                          onDestinationSelected: cubit.selectIndex,
-                          selectedIndex: _.selectedIndex,
-                          destinations: destinations,
                         ),
                       ),
-                body: SafeArea(
-                  bottom: false,
-                  child: Padding(
-                    padding: const EdgeInsets.only(
-                        left: innerHorizontalPadding,
-                        right: innerHorizontalPadding,
-                        top: 8),
-                    child: Container(
-                      color: colorScheme.background,
-                      width: double.infinity,
-                      height: double.infinity,
-                      child: AnimatedSwitcher(
-                          duration: animationDuration,
-                          child: _.error.isNotEmpty
-                              ? Container(
-                                  alignment: Alignment.center,
-                                  child: Text(_.error == coulnotLoadVideos
-                                      ? locals.couldntLoadVideo
-                                      : _.error),
-                                )
-                              : _.loadingVideo
-                                  ? const DeviceWidget(
-                                      portraitTabletAsPhone: true,
-                                      phone: VideoPlaceHolder(),
-                                      tablet: TabletVideoPlaceHolder())
-                                  : DeviceWidget(
-                                      portraitTabletAsPhone: true,
-                                      phone: VideoInnerView(
-                                        video: _.video!,
-                                        selectedIndex: _.selectedIndex,
-                                        playNow: playNow,
-                                        videoController: _,
-                                      ),
-                                      tablet: VideoTabletInnerView(
-                                        video: _.video!,
-                                        playNow: playNow,
-                                        selectedIndex: _.selectedIndex,
-                                        videoController: _,
-                                      ),
-                                    )),
-                    ),
-                  ),
-                ),
-              ),
+                    );
+                  }),
             );
           });
         },

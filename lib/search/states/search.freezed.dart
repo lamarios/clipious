@@ -12,13 +12,12 @@ part of 'search.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$SearchState {
   TextEditingController get queryController =>
       throw _privateConstructorUsedError;
-  int get selectedIndex => throw _privateConstructorUsedError;
   bool get searchNow => throw _privateConstructorUsedError;
   List<String> get suggestions => throw _privateConstructorUsedError;
   SearchSortBy get sortBy => throw _privateConstructorUsedError;
@@ -41,7 +40,6 @@ abstract class $SearchStateCopyWith<$Res> {
   @useResult
   $Res call(
       {TextEditingController queryController,
-      int selectedIndex,
       bool searchNow,
       List<String> suggestions,
       SearchSortBy sortBy,
@@ -68,7 +66,6 @@ class _$SearchStateCopyWithImpl<$Res, $Val extends SearchState>
   @override
   $Res call({
     Object? queryController = null,
-    Object? selectedIndex = null,
     Object? searchNow = null,
     Object? suggestions = null,
     Object? sortBy = null,
@@ -83,10 +80,6 @@ class _$SearchStateCopyWithImpl<$Res, $Val extends SearchState>
           ? _value.queryController
           : queryController // ignore: cast_nullable_to_non_nullable
               as TextEditingController,
-      selectedIndex: null == selectedIndex
-          ? _value.selectedIndex
-          : selectedIndex // ignore: cast_nullable_to_non_nullable
-              as int,
       searchNow: null == searchNow
           ? _value.searchNow
           : searchNow // ignore: cast_nullable_to_non_nullable
@@ -141,7 +134,6 @@ abstract class _$$SearchStateImplCopyWith<$Res>
   @useResult
   $Res call(
       {TextEditingController queryController,
-      int selectedIndex,
       bool searchNow,
       List<String> suggestions,
       SearchSortBy sortBy,
@@ -167,7 +159,6 @@ class __$$SearchStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? queryController = null,
-    Object? selectedIndex = null,
     Object? searchNow = null,
     Object? suggestions = null,
     Object? sortBy = null,
@@ -182,10 +173,6 @@ class __$$SearchStateImplCopyWithImpl<$Res>
           ? _value.queryController
           : queryController // ignore: cast_nullable_to_non_nullable
               as TextEditingController,
-      selectedIndex: null == selectedIndex
-          ? _value.selectedIndex
-          : selectedIndex // ignore: cast_nullable_to_non_nullable
-              as int,
       searchNow: null == searchNow
           ? _value.searchNow
           : searchNow // ignore: cast_nullable_to_non_nullable
@@ -227,7 +214,6 @@ class __$$SearchStateImplCopyWithImpl<$Res>
 class _$SearchStateImpl implements _SearchState {
   const _$SearchStateImpl(
       {required this.queryController,
-      this.selectedIndex = 0,
       this.searchNow = false,
       final List<String> suggestions = const [],
       this.sortBy = SearchSortBy.relevance,
@@ -240,9 +226,6 @@ class _$SearchStateImpl implements _SearchState {
 
   @override
   final TextEditingController queryController;
-  @override
-  @JsonKey()
-  final int selectedIndex;
   @override
   @JsonKey()
   final bool searchNow;
@@ -276,7 +259,7 @@ class _$SearchStateImpl implements _SearchState {
 
   @override
   String toString() {
-    return 'SearchState(queryController: $queryController, selectedIndex: $selectedIndex, searchNow: $searchNow, suggestions: $suggestions, sortBy: $sortBy, showResults: $showResults, videoPage: $videoPage, channelPage: $channelPage, playlistPage: $playlistPage, filters: $filters)';
+    return 'SearchState(queryController: $queryController, searchNow: $searchNow, suggestions: $suggestions, sortBy: $sortBy, showResults: $showResults, videoPage: $videoPage, channelPage: $channelPage, playlistPage: $playlistPage, filters: $filters)';
   }
 
   @override
@@ -286,8 +269,6 @@ class _$SearchStateImpl implements _SearchState {
             other is _$SearchStateImpl &&
             (identical(other.queryController, queryController) ||
                 other.queryController == queryController) &&
-            (identical(other.selectedIndex, selectedIndex) ||
-                other.selectedIndex == selectedIndex) &&
             (identical(other.searchNow, searchNow) ||
                 other.searchNow == searchNow) &&
             const DeepCollectionEquality()
@@ -308,7 +289,6 @@ class _$SearchStateImpl implements _SearchState {
   int get hashCode => Object.hash(
       runtimeType,
       queryController,
-      selectedIndex,
       searchNow,
       const DeepCollectionEquality().hash(_suggestions),
       sortBy,
@@ -328,7 +308,6 @@ class _$SearchStateImpl implements _SearchState {
 abstract class _SearchState implements SearchState {
   const factory _SearchState(
       {required final TextEditingController queryController,
-      final int selectedIndex,
       final bool searchNow,
       final List<String> suggestions,
       final SearchSortBy sortBy,
@@ -340,8 +319,6 @@ abstract class _SearchState implements SearchState {
 
   @override
   TextEditingController get queryController;
-  @override
-  int get selectedIndex;
   @override
   bool get searchNow;
   @override

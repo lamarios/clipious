@@ -13,12 +13,12 @@ let
  aliases = [
          {
              name = "build-runner";
-             command = "dart run build_runner build";
+             command = "dart run build_runner build --delete-conflicting-outputs";
              description = "Run code generation once";
          }
          {
              name = "build-runner-watch";
-             command = "dart run build_runner watch";
+             command = "dart run build_runner watch --delete-conflicting-outputs";
              description = "Watch for changes and run code generation";
          }
      ];

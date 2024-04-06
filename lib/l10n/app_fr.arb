@@ -1105,11 +1105,11 @@
   "@subscriptionNotificationTitle": {
     "description": "Title for the notification showing that there are new videos from the subscription feed"
   },
-  "deArrowWarning": "Autoriser DeArrow peut réduire significativement la vitesse de recherche de l'application puisque des requêtes http supplémentaires sont nécessaires pour chacune des vidéos",
+  "deArrowWarning": "Autoriser DeArrow peut réduire significativement la vitesse de recherche de l''application puisque des requêtes http supplémentaires sont nécessaires pour chacune des vidéos",
   "@deArrowWarning": {
     "description": "Warning message when the user enables DeArrow"
   },
-  "submitFeedbackDescription": "Vous avez trouvé un bug ou avez une suggestion ? Utilisez cet outil pour prendre une capture d'écran de l'application, l'annoter, et envoyer un retour",
+  "submitFeedbackDescription": "Vous avez trouvé un bug ou avez une suggestion ? Utilisez cet outil pour prendre une capture d''écran de l'application, l'annoter, et envoyer un retour",
   "@submitFeedbackDescription": {
     "description": "Setting tile descriptions for feedback submission"
   },
@@ -1117,7 +1117,7 @@
   "@feedbackDisclaimer": {
     "description": "Content of dialog shown before submitting feedback to make sure the user is ok whith where the data is going"
   },
-  "feedbackScreenshotError": "Erreur lors du chargement de la capture d'écran vers Imgur",
+  "feedbackScreenshotError": "Erreur lors du chargement de la capture d''écran vers Imgur",
   "@feedbackScreenshotError": {
     "description": "Title for dialog if something goes wrong while uploading feedback screenshot"
   },
@@ -1167,7 +1167,7 @@
   "@subtitlesBackground": {
     "description": "Title for settings to set black background  for subtitles"
   },
-  "copySettingsAsJsonDescription": "Copier les paramètres en JSON pour aider à débugger si vous rencontrez un problème avec l'application et décider de soulever un problème",
+  "copySettingsAsJsonDescription": "Copier les paramètres en JSON pour aider à débugger si vous rencontrez un problème avec l''application et décider de soulever un problème",
   "@copySettingsAsJsonDescription": {
     "description": ""
   },
@@ -1213,7 +1213,7 @@
   "@notificationFrequencySettingsTitle": {
     "description": "Title for frequency settings"
   },
-  "notificationFrequencySettingsDescription": "Avec quelle récurrence l'application cherchera de nouvelles vidéos",
+  "notificationFrequencySettingsDescription": "Avec quelle récurrence l''application cherchera de nouvelles vidéos",
   "@notificationFrequencySettingsDescription": {
     "description": "Description for frequency settings"
   },

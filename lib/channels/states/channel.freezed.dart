@@ -12,13 +12,12 @@ part of 'channel.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ChannelController {
   String get channelId => throw _privateConstructorUsedError;
   bool get isSubscribed => throw _privateConstructorUsedError;
-  dynamic get selectedIndex => throw _privateConstructorUsedError;
   Channel? get channel => throw _privateConstructorUsedError;
   bool get loading => throw _privateConstructorUsedError;
   bool get smallHeader => throw _privateConstructorUsedError;
@@ -40,7 +39,6 @@ abstract class $ChannelControllerCopyWith<$Res> {
   $Res call(
       {String channelId,
       bool isSubscribed,
-      dynamic selectedIndex,
       Channel? channel,
       bool loading,
       bool smallHeader,
@@ -64,7 +62,6 @@ class _$ChannelControllerCopyWithImpl<$Res, $Val extends ChannelController>
   $Res call({
     Object? channelId = null,
     Object? isSubscribed = null,
-    Object? selectedIndex = freezed,
     Object? channel = freezed,
     Object? loading = null,
     Object? smallHeader = null,
@@ -81,10 +78,6 @@ class _$ChannelControllerCopyWithImpl<$Res, $Val extends ChannelController>
           ? _value.isSubscribed
           : isSubscribed // ignore: cast_nullable_to_non_nullable
               as bool,
-      selectedIndex: freezed == selectedIndex
-          ? _value.selectedIndex
-          : selectedIndex // ignore: cast_nullable_to_non_nullable
-              as dynamic,
       channel: freezed == channel
           ? _value.channel
           : channel // ignore: cast_nullable_to_non_nullable
@@ -124,7 +117,6 @@ abstract class _$$ChannelControllerImplCopyWith<$Res>
   $Res call(
       {String channelId,
       bool isSubscribed,
-      dynamic selectedIndex,
       Channel? channel,
       bool loading,
       bool smallHeader,
@@ -146,7 +138,6 @@ class __$$ChannelControllerImplCopyWithImpl<$Res>
   $Res call({
     Object? channelId = null,
     Object? isSubscribed = null,
-    Object? selectedIndex = freezed,
     Object? channel = freezed,
     Object? loading = null,
     Object? smallHeader = null,
@@ -163,8 +154,6 @@ class __$$ChannelControllerImplCopyWithImpl<$Res>
           ? _value.isSubscribed
           : isSubscribed // ignore: cast_nullable_to_non_nullable
               as bool,
-      selectedIndex:
-          freezed == selectedIndex ? _value.selectedIndex! : selectedIndex,
       channel: freezed == channel
           ? _value.channel
           : channel // ignore: cast_nullable_to_non_nullable
@@ -199,7 +188,6 @@ class _$ChannelControllerImpl implements _ChannelController {
   const _$ChannelControllerImpl(
       {required this.channelId,
       this.isSubscribed = false,
-      this.selectedIndex = 0,
       this.channel,
       this.loading = true,
       this.smallHeader = false,
@@ -212,9 +200,6 @@ class _$ChannelControllerImpl implements _ChannelController {
   @override
   @JsonKey()
   final bool isSubscribed;
-  @override
-  @JsonKey()
-  final dynamic selectedIndex;
   @override
   final Channel? channel;
   @override
@@ -235,7 +220,7 @@ class _$ChannelControllerImpl implements _ChannelController {
 
   @override
   String toString() {
-    return 'ChannelController(channelId: $channelId, isSubscribed: $isSubscribed, selectedIndex: $selectedIndex, channel: $channel, loading: $loading, smallHeader: $smallHeader, barHeight: $barHeight, barOpacity: $barOpacity, sortBy: $sortBy)';
+    return 'ChannelController(channelId: $channelId, isSubscribed: $isSubscribed, channel: $channel, loading: $loading, smallHeader: $smallHeader, barHeight: $barHeight, barOpacity: $barOpacity, sortBy: $sortBy)';
   }
 
   @override
@@ -247,8 +232,6 @@ class _$ChannelControllerImpl implements _ChannelController {
                 other.channelId == channelId) &&
             (identical(other.isSubscribed, isSubscribed) ||
                 other.isSubscribed == isSubscribed) &&
-            const DeepCollectionEquality()
-                .equals(other.selectedIndex, selectedIndex) &&
             (identical(other.channel, channel) || other.channel == channel) &&
             (identical(other.loading, loading) || other.loading == loading) &&
             (identical(other.smallHeader, smallHeader) ||
@@ -261,17 +244,8 @@ class _$ChannelControllerImpl implements _ChannelController {
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      channelId,
-      isSubscribed,
-      const DeepCollectionEquality().hash(selectedIndex),
-      channel,
-      loading,
-      smallHeader,
-      barHeight,
-      barOpacity,
-      sortBy);
+  int get hashCode => Object.hash(runtimeType, channelId, isSubscribed, channel,
+      loading, smallHeader, barHeight, barOpacity, sortBy);
 
   @JsonKey(ignore: true)
   @override
@@ -285,7 +259,6 @@ abstract class _ChannelController implements ChannelController {
   const factory _ChannelController(
       {required final String channelId,
       final bool isSubscribed,
-      final dynamic selectedIndex,
       final Channel? channel,
       final bool loading,
       final bool smallHeader,
@@ -297,8 +270,6 @@ abstract class _ChannelController implements ChannelController {
   String get channelId;
   @override
   bool get isSubscribed;
-  @override
-  dynamic get selectedIndex;
   @override
   Channel? get channel;
   @override

@@ -1299,7 +1299,7 @@
   "@channelSortByOldest": {},
   "channelSortByPopular": "Beliebt",
   "@channelSortByPopular": {},
-  "nFilters": "{Anzahl, Plural, =0{Keine Videos} =1{1 Filter} andere{{Anzahl} Filter}}",
+  "nFilters": "{count, plural, =0{Keine Videos} =1{1 Filter} other{{count} Filter}}",
   "@nFilters": {
     "description": "One or more video filters",
     "placeholders": {
