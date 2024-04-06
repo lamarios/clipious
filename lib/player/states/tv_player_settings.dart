@@ -1,4 +1,4 @@
-import 'package:better_player/better_player.dart';
+import 'package:river_player/river_player.dart';
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:invidious/player/states/video_player.dart';

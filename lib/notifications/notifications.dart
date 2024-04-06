@@ -66,6 +66,12 @@ initializeNotifications() {
               importance: e.importance))
           .toList(),
       debug: kDebugMode);
+
+  AwesomeNotifications()
+      .getInitialNotificationAction(removeFromActionEvents: false)
+      .then((value) {
+    log.info('recieved notification ${value?.channelKey}');
+  });
 }
 
 class NotificationController {
@@ -115,7 +121,12 @@ class NotificationController {
       } else if (receivedAction.channelKey ==
               NotificationTypes.subscription.id &&
           payload.containsKey(lastSeenVideo)) {
-        appRouter.push(const SubscriptionRoute());
+        log.fine('going to subscriptions');
+        appRouter.replaceAll([
+          const MainRoute(children: [
+            MainContentRoute(children: [SubscriptionRoute()])
+          ]),
+        ]);
         await fileDb.setLastSubscriptionNotification(SubscriptionNotification(
             payload[lastSeenVideo]!, DateTime.now().millisecondsSinceEpoch));
       }

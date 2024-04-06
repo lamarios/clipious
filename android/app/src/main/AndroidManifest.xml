@@ -1,27 +1,37 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.github.lamarios.clipious">
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.WAKE_LOCK"/>
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
-    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM"/>
+        package="com.github.lamarios.clipious">
 
-    <uses-feature android:name="android.software.leanback"
-                  android:required="false"/>
-    <uses-feature android:name="android.hardware.touchscreen"
-                  android:required="false"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" />
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+    <uses-feature
+            android:name="android.software.leanback"
+            android:required="false" />
+    <uses-feature
+            android:name="android.hardware.touchscreen"
+            android:required="false" />
+
     <application
             android:label="Clipious"
             android:name="${applicationName}"
             android:icon="@mipmap/ic_launcher"
-            android:banner="@drawable/banner"
-        >
-<!--            android:enableOnBackInvokedCallback="true"-->
-        <activity android:name="com.linusu.flutter_web_auth.CallbackActivity" android:exported="true">
+            android:banner="@drawable/banner">
+        <!--            android:enableOnBackInvokedCallback="true"-->
+        <activity
+                android:name="com.linusu.flutter_web_auth.CallbackActivity"
+                android:exported="true">
             <intent-filter android:label="flutter_web_auth">
-                <action android:name="android.intent.action.VIEW"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
-                <data android:scheme="clipious-auth"/>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="clipious-auth" />
             </intent-filter>
         </activity>
         <!--                android:name="com.ryanheise.audioservice.AudioServiceActivity"-->
@@ -36,25 +46,42 @@
                 android:windowSoftInputMode="adjustResize">
             <!-- android tv -->
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LEANBACK_LAUNCHER" android:required="false"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category
+                        android:name="android.intent.category.LEANBACK_LAUNCHER"
+                        android:required="false" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
             <!-- App Link sample -->
             <intent-filter android:autoVerify="true">
-                <action android:name="android.intent.action.VIEW"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
-                <data android:scheme="https" android:host="youtube.com" android:pathPrefix="/watch"/>
-                <data android:scheme="https" android:host="www.youtube.com" android:pathPrefix="/watch"/>
-                <data android:scheme="https" android:host="m.youtube.com" android:pathPrefix="/watch"/>
-                <data android:scheme="https" android:host="youtu.be" android:pathPrefix="/watch"/>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                        android:scheme="https"
+                        android:host="youtube.com"
+                        android:pathPrefix="/watch" />
+                <data
+                        android:scheme="https"
+                        android:host="www.youtube.com"
+                        android:pathPrefix="/watch" />
+                <data
+                        android:scheme="https"
+                        android:host="m.youtube.com"
+                        android:pathPrefix="/watch" />
+                <data
+                        android:scheme="https"
+                        android:host="youtu.be"
+                        android:pathPrefix="/watch" />
             </intent-filter>
             <!--TODO: Add this filter, if you want to support sharing text into your app-->
             <intent-filter>
-                <action android:name="android.intent.action.SEND"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-                <data android:mimeType="text/*"/>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="text/*" />
             </intent-filter>
 
             <!-- Specifies an Android theme to apply to this Activity as soon as
@@ -63,31 +90,34 @@
                  to determine the Window background behind the Flutter UI. -->
             <meta-data
                     android:name="io.flutter.embedding.android.NormalTheme"
-                    android:resource="@style/NormalTheme"
-            />
+                    android:resource="@style/NormalTheme" />
         </activity>
         <!-- Don't delete the meta-data below.
              This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
         <meta-data
                 android:name="flutterEmbedding"
-                android:value="2"/>
-        <service android:name=".BetterPlayerService" android:stopWithTask="false"/>
+                android:value="2" />
+        <service
+                android:name=".BetterPlayerService"
+                android:stopWithTask="false" />
 
 
         <!-- ADD THIS "SERVICE" element -->
-        <service android:name="com.ryanheise.audioservice.AudioService"
-                 android:foregroundServiceType="mediaPlayback"
-                 android:exported="true">
+        <service
+                android:name="com.ryanheise.audioservice.AudioService"
+                android:foregroundServiceType="mediaPlayback"
+                android:exported="true">
             <intent-filter>
-                <action android:name="android.media.browse.MediaBrowserService"/>
+                <action android:name="android.media.browse.MediaBrowserService" />
             </intent-filter>
         </service>
 
         <!-- ADD THIS "RECEIVER" element -->
-        <receiver android:name="com.ryanheise.audioservice.MediaButtonReceiver"
-                  android:exported="true">
+        <receiver
+                android:name="com.ryanheise.audioservice.MediaButtonReceiver"
+                android:exported="true">
             <intent-filter>
-                <action android:name="android.intent.action.MEDIA_BUTTON"/>
+                <action android:name="android.intent.action.MEDIA_BUTTON" />
             </intent-filter>
         </receiver>
     </application>

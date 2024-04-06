@@ -26,8 +26,9 @@ Future<void> configureBackgroundService(SettingsCubit settings) async {
 
 Future<void> setupTasks(SettingsCubit settings) async {
   try {
-    await Workmanager().cancelByTag(taskName);
+    await Workmanager().cancelByUniqueName(taskName);
   } catch (e) {
+    log.fine('task not registered');
     // fail silently in case no tasks have been already defined
   }
   await Workmanager().registerPeriodicTask(taskName, taskName,

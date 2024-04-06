@@ -50,7 +50,7 @@ class _MainScreenState extends State<MainContentScreen> {
       var currentRoute = routeInfo.currentRoute(context);
       var settings2 = currentRoute?.settings;
       if (settings2?.name != 'HomeRoute') {
-        AutoRouter.of(context).pop();
+        AutoRouter.of(context).maybePop();
         // navigatorKey.currentState?.pop();
         return true;
       } else {
@@ -59,24 +59,29 @@ class _MainScreenState extends State<MainContentScreen> {
     }, name: 'mainNavigator', zIndex: 0, ifNotYetIntercepted: true);
 
     // Only after at least the action method is set, the notification events are delivered
-    AwesomeNotifications().setListeners(
-        onActionReceivedMethod: NotificationController.onActionReceivedMethod,
-        onNotificationCreatedMethod:
-            NotificationController.onNotificationCreatedMethod,
-        onNotificationDisplayedMethod:
-            NotificationController.onNotificationDisplayedMethod,
-        onDismissActionReceivedMethod:
-            NotificationController.onDismissActionReceivedMethod);
-
     AwesomeNotifications()
-        .getInitialNotificationAction()
-        .then((initialNotification) {
-      log.fine('Initial notification ${initialNotification?.payload}');
+        .setListeners(
+            onActionReceivedMethod:
+                NotificationController.onActionReceivedMethod,
+            onNotificationCreatedMethod:
+                NotificationController.onNotificationCreatedMethod,
+            onNotificationDisplayedMethod:
+                NotificationController.onNotificationDisplayedMethod,
+            onDismissActionReceivedMethod:
+                NotificationController.onDismissActionReceivedMethod)
+        .then(
+      (value) {
+        AwesomeNotifications()
+            .getInitialNotificationAction()
+            .then((initialNotification) {
+          log.fine('Initial notification ${initialNotification?.payload}');
 
-      if (initialNotification != null) {
-        NotificationController.onActionReceivedMethod(initialNotification);
-      }
-    });
+          if (initialNotification != null) {
+            NotificationController.onActionReceivedMethod(initialNotification);
+          }
+        });
+      },
+    );
   }
 
   @override

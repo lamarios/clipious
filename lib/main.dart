@@ -207,8 +207,8 @@ class MyApp extends StatelessWidget {
 
             return MaterialApp.router(
               routerConfig: appRouter.config(
-                navigatorObservers: () => [MyRouteObserver()],
-              ),
+                  navigatorObservers: () => [MyRouteObserver()],
+                  includePrefixMatches: true),
               locale: savedLocale,
               localizationsDelegates: AppLocalizations.localizationsDelegates,
               localeListResolutionCallback: (locales, supportedLocales) {

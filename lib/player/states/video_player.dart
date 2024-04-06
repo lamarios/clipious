@@ -1,4 +1,3 @@
-import 'package:better_player/better_player.dart';
 import 'package:easy_debounce/easy_throttle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -9,6 +8,7 @@ import 'package:invidious/player/models/media_event.dart';
 import 'package:invidious/settings/states/settings.dart';
 import 'package:invidious/videos/models/base_video.dart';
 import 'package:logging/logging.dart';
+import 'package:river_player/river_player.dart';
 import 'package:wakelock_plus/wakelock_plus.dart';
 
 import '../../globals.dart';
