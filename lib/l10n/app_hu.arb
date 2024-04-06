@@ -306,5 +306,131 @@
   "publicServersError": "A nyilvános szerverek listáját nem sikerült betölteni. Nyomjon ide az újrakezdéshez.",
   "@publicServersError": {
     "description": "Error message when trying to get public servers but it failed"
+  },
+  "tokenLogin": "Belépés tokennel",
+  "@tokenLogin": {
+    "description": "Textto login to a server using the recommended way"
+  },
+  "malformedStatsEndpoint": "/api/v1/stats nem megfelelő",
+  "@malformedStatsEndpoint": {
+    "description": "Title for dialog when adding a server that isn't validated as it should"
+  },
+  "serverIsNotReachable": "A szerver nem elérhető",
+  "@serverIsNotReachable": {
+    "description": "Title for dialog when adding a server that is not reachable"
+  },
+  "irreversibleAction": "Ez a művelet nem vonható vissza",
+  "@irreversibleAction": {
+    "description": "Tell the user that the action cannot be undone"
+  },
+  "unlistedPlaylist": "Nem listázott",
+  "@unlistedPlaylist": {
+    "description": "Unlisted playlist"
+  },
+  "streams": "Streamek",
+  "@streams": {
+    "description": "Streams label"
+  },
+  "sponsorSkipped": "Szponzor kihagyva",
+  "@sponsorSkipped": {
+    "description": "When a sponsor segment is skipped thanks to sponsor block"
+  },
+  "browsing": "Böngészés",
+  "@browsing": {
+    "description": "video browsing preferences"
+  },
+  "package": "Csomag",
+  "@package": {
+    "description": "package label"
+  },
+  "build": "Build",
+  "@build": {
+    "description": "build label"
+  },
+  "useDynamicTheme": "Dinamikus színek",
+  "@useDynamicTheme": {
+    "description": ""
+  },
+  "videoPlayer": "Videólejátszó",
+  "@videoPlayer": {
+    "description": "Title for video player related options"
+  },
+  "videoListed": "Nyilvános",
+  "@videoListed": {
+    "description": "Status of a publicly available video"
+  },
+  "videoUnlisted": "Nem listázott",
+  "@videoUnlisted": {
+    "description": "Status of a video that is only accessible by link"
+  },
+  "videoIsFamilyFriendly": "Családbarát",
+  "@videoIsFamilyFriendly": {
+    "description": "Displayed only when a video is family friendly"
+  },
+  "tokenLoginDescription": "Ajánlott belépési mód",
+  "@tokenLoginDescription": {
+    "description": "Recommended way to log in"
+  },
+  "cookieLogin": "Belépés sütivel",
+  "@cookieLogin": {
+    "description": "Text to login to a server using the cookie jar method"
+  },
+  "logout": "Kilépés",
+  "@logout": {
+    "description": "CTA to logout of a server"
+  },
+  "username": "Felhasználónév",
+  "@username": {
+    "description": "Username label for login to a server"
+  },
+  "cookieLoginDescription": "Használja ezt, ha a tokenes hitelesítés problémákba ütközik",
+  "@cookieLoginDescription": {
+    "description": "Cookie log in description"
+  },
+  "password": "Jelszó",
+  "@password": {
+    "description": "Password label for login to a server"
+  },
+  "wrongUsernamePassword": "Rossz felhasználónév vagy jelszó",
+  "@wrongUsernamePassword": {
+    "description": "Error message when authentication fails"
+  },
+  "error": "Hiba",
+  "@error": {},
+  "videoQueue": "Műsorlista",
+  "@videoQueue": {
+    "description": "Label for button to display the video queue"
+  },
+  "addToQueueList": "Hozzáadás a műsorlistához",
+  "@addToQueueList": {
+    "description": "Label on button to add a video to the queue list"
+  },
+  "playNext": "Lejátszás következőnek",
+  "@playNext": {
+    "description": "Label to play the video after the current one."
+  },
+  "addRecommendedToQueue": "Ajánlott következő automatikus lejátszása",
+  "@addRecommendedToQueue": {
+    "description": "Switch when playing a video to automatically add the recommended videos to the video queue"
+  },
+  "playNextAddedToQueue": "Videó következőnek lesz lejátszva",
+  "@playNextAddedToQueue": {
+    "description": "Pop up message to confirm that the video has been properly set to play next"
+  },
+  "share": "Megosztás",
+  "@share": {
+    "description": "asking user if to share"
+  },
+  "authentication": "Hitelesítés",
+  "@authentication": {
+    "description": "Label for server settings related to authentications"
+  },
+  "addToPlaylist": "Hozzáadás lejátszási listához",
+  "@addToPlaylist": {
+    "description": "Label to add a video to a playlist"
+  },
+  "sponsorBlockCategorySponsor": "Szponzor",
+  "@sponsorBlockCategorySponsor": {
+    "description": "Sponsor block 'Sponsor' Category"
   }
 }
