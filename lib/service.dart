@@ -259,7 +259,8 @@ class Service {
       int? page,
       SearchSortBy? sortBy,
       SearchDate date = SearchDate.any,
-      SearchDuration duration = SearchDuration.any}) async {
+      SearchDuration duration = SearchDuration.any,
+      bool addToSearchHistory = true}) async {
     String countryCode = db.getSettings(browsingCountry)?.value ?? 'US';
     Uri uri = await buildUrl(urlSearch, query: {
       'q': Uri.encodeQueryComponent(query),
@@ -293,7 +294,8 @@ class Service {
     }
     log.info(results);
 
-    if (query.isNotEmpty &&
+    if (addToSearchHistory &&
+        query.isNotEmpty &&
         db.getSettings(useSearchHistorySettingName)?.value == 'true') {
       await db.addToSearchHistory(SearchHistoryItem(
           query, (DateTime.now().millisecondsSinceEpoch / 1000).round()));
