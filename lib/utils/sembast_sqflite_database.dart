@@ -84,6 +84,11 @@ class SembastSqfDb extends IDbClient {
   }
 
   @override
+  Future<void> deleteFromSearchHistory(String item) async {
+    await searchHistoryStore.record(item).delete(db);
+  }
+
+  @override
   Future<void> cleanOldLogs() async {
     // TODO: implement cleanOldLogs
     var all = getAppLogs();
@@ -209,10 +214,12 @@ class SembastSqfDb extends IDbClient {
 
   @override
   List<String> getSearchHistory() {
-    return searchHistoryStore
+    var list = searchHistoryStore
         .findSync(db)
-        .map((e) => SearchHistoryItem.fromJson(e.value).search)
+        .map((e) => SearchHistoryItem.fromJson(e.value))
         .toList();
+    list.sort((a, b) => b.time.compareTo(a.time));
+    return list.map((e) => e.search).toList();
   }
 
   @override

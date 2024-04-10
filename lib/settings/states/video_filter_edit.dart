@@ -112,9 +112,7 @@ class VideoFilterEditCubit extends Cubit<VideoFilterEditState> {
   Future<List<Channel>> searchChannel(String query) async {
     if (query.trim() == '') return [];
     var searchResults = await service.search(query,
-        type: SearchType.channel,
-        page: state.searchPage,
-        addToSearchHistory: false);
+        type: SearchType.channel, page: state.searchPage);
     return searchResults.channels;
   }
 

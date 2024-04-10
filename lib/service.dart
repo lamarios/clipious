@@ -8,7 +8,6 @@ import 'package:invidious/channels/models/channel_sort_by.dart';
 import 'package:invidious/extensions.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/playlists/models/playlist.dart';
-import 'package:invidious/search/models/db/search_history_item.dart';
 import 'package:invidious/search/models/search_date.dart';
 import 'package:invidious/search/models/search_duration.dart';
 import 'package:invidious/search/models/search_results.dart';
@@ -259,8 +258,7 @@ class Service {
       int? page,
       SearchSortBy? sortBy,
       SearchDate date = SearchDate.any,
-      SearchDuration duration = SearchDuration.any,
-      bool addToSearchHistory = true}) async {
+      SearchDuration duration = SearchDuration.any}) async {
     String countryCode = db.getSettings(browsingCountry)?.value ?? 'US';
     Uri uri = await buildUrl(urlSearch, query: {
       'q': Uri.encodeQueryComponent(query),
@@ -293,13 +291,6 @@ class Service {
       rethrow;
     }
     log.info(results);
-
-    if (addToSearchHistory &&
-        query.isNotEmpty &&
-        db.getSettings(useSearchHistorySettingName)?.value == 'true') {
-      await db.addToSearchHistory(SearchHistoryItem(
-          query, (DateTime.now().millisecondsSinceEpoch / 1000).round()));
-    }
 
     results.videos = (await postProcessVideos(results.videos)).cast();
     return results;

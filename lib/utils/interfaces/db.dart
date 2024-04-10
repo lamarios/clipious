@@ -126,4 +126,6 @@ abstract class IDbClient {
   DeArrowCache? getDeArrowCache(String videoId);
 
   Future<void> upsertDeArrowCache(DeArrowCache cache);
+
+  Future<void> deleteFromSearchHistory(String search);
 }

@@ -3,6 +3,7 @@ import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:invidious/globals.dart';
+import 'package:invidious/search/models/db/search_history_item.dart';
 import 'package:invidious/search/models/search_sort_by.dart';
 import 'package:invidious/search/states/search_filter.dart';
 
@@ -22,6 +23,7 @@ class SearchCubit<T extends SearchState> extends Cubit<SearchState> {
 
   void onInit() {
     state.queryController.addListener(getSuggestions);
+    getHistory();
     if (state.searchNow) {
       search(state.queryController.value.text);
     }
@@ -70,17 +72,31 @@ class SearchCubit<T extends SearchState> extends Cubit<SearchState> {
     }
   }
 
-  List<String> getHistory() {
-    return settings.state.useSearchHistory ? db.getSearchHistory() : [];
+  getHistory() {
+    emit(state.copyWith(
+        searchHistory:
+            settings.state.useSearchHistory ? db.getSearchHistory() : []));
   }
 
   search(String value) async {
     emit(state.copyWith(showResults: true));
+
+    final query = state.queryController.text;
+    if (query.isNotEmpty && settings.state.useSearchHistory) {
+      await db.addToSearchHistory(SearchHistoryItem(
+          query, (DateTime.now().millisecondsSinceEpoch / 1000).round()));
+    }
+    getHistory();
   }
 
   setSearchQuery(String e) {
     state.queryController.text = e;
     search(e);
+  }
+
+  removeFromHistory(String e) async {
+    await db.deleteFromSearchHistory(e);
+    getHistory();
   }
 }
 
@@ -95,6 +111,7 @@ class SearchState with _$SearchState {
           @Default(1) int videoPage,
           @Default(1) int channelPage,
           @Default(1) int playlistPage,
+          @Default([]) List<String> searchHistory,
           @Default(SearchFiltersState()) SearchFiltersState filters}) =
       _SearchState;
 

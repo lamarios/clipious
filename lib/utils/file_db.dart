@@ -462,6 +462,12 @@ class FileDB extends IDbClient {
   upsertServer(Server server) async {
     await super.upsertServer(server);
   }
+
+  @override
+  Future<void> deleteFromSearchHistory(String search) {
+    // TODO: implement deleteFromSearchHistory
+    throw UnimplementedError();
+  }
 }
 
 @JsonSerializable()

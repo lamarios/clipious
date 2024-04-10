@@ -32,7 +32,7 @@ class SearchScreen extends StatelessWidget {
           create: (context) => SearchCubit<SearchState>(
               SearchState.init(query: query, searchNow: searchNow), settings),
           child: BlocBuilder<SearchCubit, SearchState>(
-            builder: (context, _) {
+            builder: (context, state) {
               var cubit = context.read<SearchCubit>();
               return AutoTabsRouter.tabBar(
                   routes: const [
@@ -44,7 +44,7 @@ class SearchScreen extends StatelessWidget {
                     final tabsController = AutoTabsRouter.of(context);
                     return Scaffold(
                       bottomNavigationBar:
-                          _.showResults && deviceType == DeviceType.phone
+                          state.showResults && deviceType == DeviceType.phone
                               ? NavigationBar(
                                   selectedIndex: tabsController.activeIndex,
                                   onDestinationSelected:
@@ -65,7 +65,7 @@ class SearchScreen extends StatelessWidget {
                       appBar: AppBar(
                         title: TextField(
                           autofocus: query == null,
-                          controller: _.queryController,
+                          controller: state.queryController,
                           textInputAction: TextInputAction.search,
                           onSubmitted: cubit.search,
                         ),
@@ -73,17 +73,17 @@ class SearchScreen extends StatelessWidget {
                           IconButton(
                               onPressed: () {
                                 if (cubit.searchCleared()) {
-                                  AutoRouter.of(context).pop();
+                                  AutoRouter.of(context).maybePop();
                                 }
                               },
                               icon: const Icon(Icons.clear)),
                           SearchFiltersButton(
-                            initialFilters: _.filters,
+                            initialFilters: state.filters,
                             onChanged: (newFilters) {
                               cubit.onFiltersChanged(newFilters);
-                              if (_.showResults ||
-                                  _.queryController.text.isNotEmpty) {
-                                cubit.search(_.queryController.text);
+                              if (state.showResults ||
+                                  state.queryController.text.isNotEmpty) {
+                                cubit.search(state.queryController.text);
                               }
                             },
                           ),
@@ -93,11 +93,11 @@ class SearchScreen extends StatelessWidget {
                         child: Padding(
                           padding: const EdgeInsets.symmetric(
                               horizontal: innerHorizontalPadding),
-                          child: !_.showResults
+                          child: !state.showResults
                               ? ListView(
-                                  children: _.queryController.value.text.isEmpty
-                                      ? cubit
-                                          .getHistory()
+                                  children: state
+                                          .queryController.value.text.isEmpty
+                                      ? state.searchHistory
                                           .map((e) => InkWell(
                                                 onTap: () =>
                                                     cubit.setSearchQuery(e),
@@ -106,16 +106,29 @@ class SearchScreen extends StatelessWidget {
                                                       const EdgeInsets.all(8.0),
                                                   child: Row(children: [
                                                     const Icon(Icons.history),
-                                                    Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .only(left: 8),
-                                                        child: Text(e))
+                                                    Expanded(
+                                                      child: Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .only(
+                                                                  left: 8),
+                                                          child: Text(e)),
+                                                    ),
+                                                    IconButton(
+                                                        visualDensity:
+                                                            VisualDensity
+                                                                .compact,
+                                                        onPressed: () => cubit
+                                                            .removeFromHistory(
+                                                                e),
+                                                        iconSize: 17,
+                                                        icon: const Icon(
+                                                            Icons.delete))
                                                   ]),
                                                 ),
                                               ))
                                           .toList()
-                                      : _.suggestions
+                                      : state.suggestions
                                           .map((e) => InkWell(
                                                 onTap: () =>
                                                     cubit.setSearchQuery(e),

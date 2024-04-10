@@ -25,6 +25,7 @@ mixin _$SearchState {
   int get videoPage => throw _privateConstructorUsedError;
   int get channelPage => throw _privateConstructorUsedError;
   int get playlistPage => throw _privateConstructorUsedError;
+  List<String> get searchHistory => throw _privateConstructorUsedError;
   SearchFiltersState get filters => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -47,6 +48,7 @@ abstract class $SearchStateCopyWith<$Res> {
       int videoPage,
       int channelPage,
       int playlistPage,
+      List<String> searchHistory,
       SearchFiltersState filters});
 
   $SearchFiltersStateCopyWith<$Res> get filters;
@@ -73,6 +75,7 @@ class _$SearchStateCopyWithImpl<$Res, $Val extends SearchState>
     Object? videoPage = null,
     Object? channelPage = null,
     Object? playlistPage = null,
+    Object? searchHistory = null,
     Object? filters = null,
   }) {
     return _then(_value.copyWith(
@@ -108,6 +111,10 @@ class _$SearchStateCopyWithImpl<$Res, $Val extends SearchState>
           ? _value.playlistPage
           : playlistPage // ignore: cast_nullable_to_non_nullable
               as int,
+      searchHistory: null == searchHistory
+          ? _value.searchHistory
+          : searchHistory // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       filters: null == filters
           ? _value.filters
           : filters // ignore: cast_nullable_to_non_nullable
@@ -141,6 +148,7 @@ abstract class _$$SearchStateImplCopyWith<$Res>
       int videoPage,
       int channelPage,
       int playlistPage,
+      List<String> searchHistory,
       SearchFiltersState filters});
 
   @override
@@ -166,6 +174,7 @@ class __$$SearchStateImplCopyWithImpl<$Res>
     Object? videoPage = null,
     Object? channelPage = null,
     Object? playlistPage = null,
+    Object? searchHistory = null,
     Object? filters = null,
   }) {
     return _then(_$SearchStateImpl(
@@ -201,6 +210,10 @@ class __$$SearchStateImplCopyWithImpl<$Res>
           ? _value.playlistPage
           : playlistPage // ignore: cast_nullable_to_non_nullable
               as int,
+      searchHistory: null == searchHistory
+          ? _value._searchHistory
+          : searchHistory // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       filters: null == filters
           ? _value.filters
           : filters // ignore: cast_nullable_to_non_nullable
@@ -221,8 +234,10 @@ class _$SearchStateImpl implements _SearchState {
       this.videoPage = 1,
       this.channelPage = 1,
       this.playlistPage = 1,
+      final List<String> searchHistory = const [],
       this.filters = const SearchFiltersState()})
-      : _suggestions = suggestions;
+      : _suggestions = suggestions,
+        _searchHistory = searchHistory;
 
   @override
   final TextEditingController queryController;
@@ -253,13 +268,22 @@ class _$SearchStateImpl implements _SearchState {
   @override
   @JsonKey()
   final int playlistPage;
+  final List<String> _searchHistory;
+  @override
+  @JsonKey()
+  List<String> get searchHistory {
+    if (_searchHistory is EqualUnmodifiableListView) return _searchHistory;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_searchHistory);
+  }
+
   @override
   @JsonKey()
   final SearchFiltersState filters;
 
   @override
   String toString() {
-    return 'SearchState(queryController: $queryController, searchNow: $searchNow, suggestions: $suggestions, sortBy: $sortBy, showResults: $showResults, videoPage: $videoPage, channelPage: $channelPage, playlistPage: $playlistPage, filters: $filters)';
+    return 'SearchState(queryController: $queryController, searchNow: $searchNow, suggestions: $suggestions, sortBy: $sortBy, showResults: $showResults, videoPage: $videoPage, channelPage: $channelPage, playlistPage: $playlistPage, searchHistory: $searchHistory, filters: $filters)';
   }
 
   @override
@@ -282,6 +306,8 @@ class _$SearchStateImpl implements _SearchState {
                 other.channelPage == channelPage) &&
             (identical(other.playlistPage, playlistPage) ||
                 other.playlistPage == playlistPage) &&
+            const DeepCollectionEquality()
+                .equals(other._searchHistory, _searchHistory) &&
             (identical(other.filters, filters) || other.filters == filters));
   }
 
@@ -296,6 +322,7 @@ class _$SearchStateImpl implements _SearchState {
       videoPage,
       channelPage,
       playlistPage,
+      const DeepCollectionEquality().hash(_searchHistory),
       filters);
 
   @JsonKey(ignore: true)
@@ -315,6 +342,7 @@ abstract class _SearchState implements SearchState {
       final int videoPage,
       final int channelPage,
       final int playlistPage,
+      final List<String> searchHistory,
       final SearchFiltersState filters}) = _$SearchStateImpl;
 
   @override
@@ -333,6 +361,8 @@ abstract class _SearchState implements SearchState {
   int get channelPage;
   @override
   int get playlistPage;
+  @override
+  List<String> get searchHistory;
   @override
   SearchFiltersState get filters;
   @override
