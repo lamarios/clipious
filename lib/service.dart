@@ -8,7 +8,6 @@ import 'package:invidious/channels/models/channel_sort_by.dart';
 import 'package:invidious/extensions.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/playlists/models/playlist.dart';
-import 'package:invidious/search/models/db/search_history_item.dart';
 import 'package:invidious/search/models/search_date.dart';
 import 'package:invidious/search/models/search_duration.dart';
 import 'package:invidious/search/models/search_results.dart';
@@ -292,12 +291,6 @@ class Service {
       rethrow;
     }
     log.info(results);
-
-    if (query.isNotEmpty &&
-        db.getSettings(useSearchHistorySettingName)?.value == 'true') {
-      await db.addToSearchHistory(SearchHistoryItem(
-          query, (DateTime.now().millisecondsSinceEpoch / 1000).round()));
-    }
 
     results.videos = (await postProcessVideos(results.videos)).cast();
     return results;
