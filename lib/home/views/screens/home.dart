@@ -45,17 +45,6 @@ class _MainScreenState extends State<MainContentScreen> {
   @override
   void initState() {
     super.initState();
-    BackButtonInterceptor.add((stopDefaultButtonEvent, RouteInfo routeInfo) {
-      var currentRoute = routeInfo.currentRoute(context);
-      var settings2 = currentRoute?.settings;
-      if (settings2?.name != 'HomeRoute') {
-        AutoRouter.of(context).maybePop();
-        // navigatorKey.currentState?.pop();
-        return true;
-      } else {
-        return false;
-      }
-    }, name: 'mainNavigator', zIndex: 0, ifNotYetIntercepted: true);
 
     // Only after at least the action method is set, the notification events are delivered
     AwesomeNotifications()
