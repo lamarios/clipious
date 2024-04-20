@@ -248,11 +248,11 @@ class VideoPlayerCubit extends MediaPlayerCubit<VideoPlayerState> {
       if (offline) {
         String videoPath = await newState.offlineVideo!.mediaPath;
 
-        betterPlayerDataSource = BetterPlayerDataSource(
-          BetterPlayerDataSourceType.file,
-          videoPath,
-          videoFormat: BetterPlayerVideoFormat.other,
-          liveStream: false,
+        betterPlayerDataSource = BetterPlayerDataSource.memory(
+          await newState.offlineVideo!.mediaBytes ?? [],
+
+          // videoFormat: BetterPlayerVideoFormat.other,
+          // liveStream: false,
         );
       } else {
         String baseUrl = (await db.getCurrentlySelectedServer()).url;

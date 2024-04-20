@@ -1,14 +1,10 @@
 import 'package:auto_route/annotations.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:invidious/settings/views/screens/settings.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:settings_ui/settings_ui.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:saf/saf.dart';
-
+import 'package:shared_storage/shared_storage.dart' as saf;
 import '../../states/settings.dart';
 
 @RoutePage()
@@ -55,12 +51,9 @@ class DownloadedVideoSettingsScreen extends StatelessWidget {
                     description: Text(_.videoDownloadLocation ??
                         locals.noDownloadVideoLocationSelected),
                     onPressed: (context) async {
-                      // await FilePicker.platform.clearTemporaryFiles();
-                      Saf saf = Saf('~/Download');
-                      bool? isGranted =
-                          await saf.getDirectoryPermission(isDynamic: true);
-                      print('$saf - granted ? $isGranted');
-                      // cubit.setCustomDownloadLocation(selectedDirectory);
+                      final selectedFolder = await saf.openDocumentTree();
+                      cubit
+                          .setCustomDownloadLocation(selectedFolder.toString());
                     },
                   )
                 ],

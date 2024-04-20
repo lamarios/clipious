@@ -1121,6 +1121,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.4.0"
+  shared_storage:
+    dependency: "direct main"
+    description:
+      name: shared_storage
+      sha256: cf20428d06af065311b71e09cbfbbfe431e979a3bf9180001c1952129b7c708f
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.8.1"
   shelf:
     dependency: transitive
     description:
@@ -1340,6 +1348,14 @@ packages:
     description:
       name: uri
       sha256: "889eea21e953187c6099802b7b4cf5219ba8f3518f604a1033064d45b1b8268a"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
+  uri_to_file:
+    dependency: "direct main"
+    description:
+      name: uri_to_file
+      sha256: cbbb38f975d22311efacc9a53cdcb806708606666d8092314b81c5cb7983b700
       url: "https://pub.dev"
     source: hosted
     version: "1.0.0"

@@ -2,9 +2,9 @@ name: invidious
 version: 1.19.5+4050
 publish_to: none
 description: A new Flutter project.
-environment: 
+environment:
   sdk: '>=3.0.0 <4.0.0'
-dependencies: 
+dependencies:
   after_layout: 1.2.0
   audio_service: 0.18.13
   audio_session: 0.1.19
@@ -44,28 +44,30 @@ dependencies:
   sembast_sqflite: 2.2.0
   settings_ui: 2.0.2
   share_plus: 8.0.2
+  shared_storage: 0.8.1
   sqflite: 2.3.3
+  uri_to_file: 1.0.0
   url_launcher: 6.2.5
   uuid: 4.3.3
   wakelock_plus: 1.2.2
   workmanager: 0.5.2
-  flutter: 
+  flutter:
     sdk: flutter
-  flutter_localizations: 
+  flutter_localizations:
     sdk: flutter
-  locale_names: 
-    git: 
+  locale_names:
+    git:
       url: https://github.com/lamarios/locale_names.git
       ref: master
-  river_player: 
-    git: 
+  river_player:
+    git:
       url: https://github.com/lamarios/river_player.git
       ref: master
-  simple_pip_mode: 
-    git: 
+  simple_pip_mode:
+    git:
       url: https://github.com/song011794/simple_pip_mode_flutter.git
       ref: main
-dev_dependencies: 
+dev_dependencies:
   auto_route_generator: any
   build_runner: ^2.4.6
   copy_with_extension_gen: 5.0.4
@@ -77,24 +79,24 @@ dev_dependencies:
   nock: 1.2.3
   pubspec_dependency_sorter: ^1.0.4
   test: any
-  flutter_driver: 
+  flutter_driver:
     sdk: flutter
-  flutter_test: 
+  flutter_test:
     sdk: flutter
-dependency_overrides: 
+dependency_overrides:
   cupertino_icons: ^1.0.2
   intl: 0.19.0
   js: 0.7.1
   meta: 1.11.0
   web: 0.5.0
-flutter: 
-  assets: 
+flutter:
+  assets:
     - assets/icon.svg
   uses-material-design: true
   generate: true
-flutter_launcher_icons: 
+flutter_launcher_icons:
   image_path: assets/icon-with-background.png
-  android: 
+  android:
     adaptive_icon_background: '#1D1B1E'
     adaptive_icon_foreground: assets/icon.png
     generate: true

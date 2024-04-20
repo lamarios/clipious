@@ -11,6 +11,8 @@ import 'package:invidious/globals.dart';
 import 'package:invidious/utils/models/image_object.dart';
 import 'package:invidious/videos/models/format_stream.dart';
 import 'package:logging/logging.dart';
+import 'package:shared_storage/shared_storage.dart';
+import 'package:shared_storage/shared_storage.dart' as saf;
 
 import '../../player/states/player.dart';
 import '../../settings/states/settings.dart';
@@ -19,7 +21,7 @@ import '../../videos/models/video.dart';
 
 part 'download_manager.freezed.dart';
 
-final Logger log = Logger('DownloadState');
+final Logger _log = Logger('DownloadState');
 
 class DownloadProgress {
   CancelToken cancelToken;
@@ -57,18 +59,21 @@ class DownloadManagerCubit extends Cubit<DownloadManagerState> {
 
     // checking if we have any video that are not fail, not completed and not currently downloading
     for (var v in vids) {
-      if (!await v.filesExists) {
-        // we don't want to deal with videos in case a user rename / delete the files
-        continue;
+      // if we're downloading the video we consider available
+      if (!v.downloadComplete) {
+        available.add(v);
       } else {
+        // if it should be finished we check its state
         if (!v.downloadComplete &&
             !v.downloadFailed &&
             !state.downloadProgresses.containsKey(v.videoId)) {
           // this download was interrupted by app restart or crash or something else, we set it as errored
           v.downloadFailed = true;
           await db.upsertDownload(v);
+          available.add(v);
+        } else if (await v.filesExists) {
+          available.add(v);
         }
-        available.add(v);
       }
     }
 
@@ -80,6 +85,36 @@ class DownloadManagerCubit extends Cubit<DownloadManagerState> {
     player.playOfflineVideos(state.videos
         .where((element) => element.downloadComplete && !element.downloadFailed)
         .toList());
+  }
+
+  Future<void> _moveFilesToSharedStorage(DownloadedVideo video) async {
+    _log.fine(
+        'Moving ${await video.tempThumbnailPath} to ${await video.thumbnailPath}');
+
+    File tempThumbnail = File(await video.tempThumbnailPath);
+    File tempMedia = File(await video.tempMediaPath);
+    try {
+      final downloadPath = settings.state.videoDownloadLocation;
+      if (downloadPath != null) {
+        final DocumentFile? downloadFolder =
+            await Uri.parse(downloadPath).toDocumentFile();
+
+        if (await downloadFolder?.child(video.thumbnailFileName) == null &&
+            await downloadFolder?.child(video.mediaFileName) == null) {
+          await downloadFolder?.createFileAsBytes(
+              mimeType: 'image/jpeg',
+              displayName: video.thumbnailFileName,
+              bytes: await tempThumbnail.readAsBytes());
+          await downloadFolder?.createFileAsBytes(
+              mimeType: video.mediaMimeType,
+              displayName: video.mediaFileName,
+              bytes: await tempMedia.readAsBytes());
+        }
+      }
+    } finally {
+      await tempMedia.delete();
+      await tempThumbnail.delete();
+    }
   }
 
   onProgress(int count, int total, DownloadedVideo video) async {
@@ -98,7 +133,7 @@ class DownloadManagerCubit extends Cubit<DownloadManagerState> {
     } else {
       EasyThrottle.throttle(
           'download-${video.videoId}', const Duration(milliseconds: 500), () {
-        log.fine(
+        _log.fine(
             'Download of video ${video.videoId}, $count / $total =  ${count / total}, Total: ${state.totalProgress}');
         var progresses =
             Map<String, DownloadProgress>.from(state.downloadProgresses);
@@ -157,18 +192,17 @@ class DownloadManagerCubit extends Cubit<DownloadManagerState> {
       setVideos();
       // download thumbnail
       String? thumbUrl = ImageObject.getBestThumbnail(vid.videoThumbnails)?.url;
-      log.fine(thumbUrl);
+      _log.fine(thumbUrl);
       if (thumbUrl != null) {
         //download thumbnail
-        var thumbnailPath = await downloadedVideo.thumbnailPath;
-        log.fine("Downloading thumbnail to: $thumbnailPath");
+        var thumbnailPath = await downloadedVideo.tempThumbnailPath;
+        _log.fine("Downloading thumbnail to: $thumbnailPath");
         await dio.download(thumbUrl, thumbnailPath, cancelToken: cancelToken);
       }
 
       // download video
-      var videoPath = await downloadedVideo.mediaPath;
-
-      log.info(
+      var videoPath = await downloadedVideo.tempMediaPath;
+      _log.info(
           "Downloading video ${vid.title}, audioOnly ? $audioOnly, quality: $quality (if not only audio) to path: $videoPath");
       dio
           .download(contentUrl, videoPath,
@@ -179,6 +213,11 @@ class DownloadManagerCubit extends Cubit<DownloadManagerState> {
           .catchError((err) {
         onDownloadError(err, downloadedVideo);
         return Response<void>(requestOptions: RequestOptions());
+      }).then((value) async {
+        if (settings.state.customDownloadedVideoLocation &&
+            settings.state.videoDownloadLocation != null) {
+          await _moveFilesToSharedStorage(downloadedVideo);
+        }
       });
 
       return true;
@@ -189,7 +228,7 @@ class DownloadManagerCubit extends Cubit<DownloadManagerState> {
     var progresses =
         Map<String, DownloadProgress>.from(state.downloadProgresses);
     var downloadProgress = progresses[vid.videoId];
-    log.fine(
+    _log.fine(
         'cancelling download for video ${vid.videoId}, present ? : ${downloadProgress != null}');
     downloadProgress?.cancelToken.cancel();
 
@@ -199,14 +238,14 @@ class DownloadManagerCubit extends Cubit<DownloadManagerState> {
       String path = await vid.mediaPath;
       await File(path).delete();
     } catch (e) {
-      log.fine('File might not be available, that\'s ok');
+      _log.fine('File might not be available, that\'s ok');
     }
 
     try {
       String path = await vid.thumbnailPath;
       await File(path).delete();
     } catch (e) {
-      log.fine('File might not be available, that\'s ok');
+      _log.fine('File might not be available, that\'s ok');
     }
 
     await db.deleteDownload(vid);
@@ -217,10 +256,10 @@ class DownloadManagerCubit extends Cubit<DownloadManagerState> {
 
   FutureOr<void> onDownloadError(DioException err, DownloadedVideo vid) async {
     if (err.type == DioExceptionType.cancel) {
-      log.fine("video cancelled, nothing to do");
+      _log.fine("video cancelled, nothing to do");
       return;
     }
-    log.severe(
+    _log.severe(
         "Failed to download video ${vid.title}, removing it", err.stackTrace);
     vid.downloadFailed = true;
     vid.downloadComplete = false;
