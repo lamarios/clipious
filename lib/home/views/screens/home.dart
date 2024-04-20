@@ -128,6 +128,7 @@ class _MainScreenState extends State<MainContentScreen> {
               key: ValueKey(appState.server?.url),
               homeIndex: selectedIndex,
               routes: allowedPages.map((e) => e.route!).toList(),
+              physics: const NeverScrollableScrollPhysics(),
               builder: (context, child, controller) {
                 final tabsRouter = AutoTabsRouter.of(context);
                 final selectedPage = allowedPages[tabsRouter.activeIndex];

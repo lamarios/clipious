@@ -93,7 +93,7 @@ class VideoScreen extends StatelessWidget {
             settings.state.autoplayVideoOnLoad &&
             previous.video != current.video,
         listener: (context, state) {
-          AutoRouter.of(context).pop();
+          AutoRouter.of(context).maybePop();
           context.read<VideoCubit>().playVideo(false);
         },
         builder: (context, videoState) {
@@ -117,6 +117,7 @@ class VideoScreen extends StatelessWidget {
               opacity: videoState.opacity,
               child: AutoTabsRouter.tabBar(
                   key: ValueKey(videoState.video),
+                  physics: const NeverScrollableScrollPhysics(),
                   routes: [
                     VideoInfoRoute(
                         video: videoState.video,
