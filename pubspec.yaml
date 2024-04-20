@@ -36,9 +36,11 @@ dependencies:
   json_annotation: 4.8.1
   just_audio: 0.9.37
   logging: 1.2.0
+  media_store_plus: 0.1.1
   package_info_plus: 6.0.0
   path: any
   path_provider: 2.1.2
+  permission_handler: 11.3.1
   receive_sharing_intent: 1.6.8
   sembast: 3.7.1
   sembast_sqflite: 2.2.0

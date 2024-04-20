@@ -3,12 +3,14 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:invidious/videos/models/base_video.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:media_store_plus/media_store_plus.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_storage/shared_storage.dart' as saf;
 
 part 'downloaded_video.g.dart';
 
+final mediaStorePlugin = MediaStore();
 const String _downloadFolder = 'downloads';
 
 @JsonSerializable()
@@ -88,6 +90,7 @@ class DownloadedVideo extends IdedVideo {
     bool isCustomLocation = tempMedia != media;
 
     if (isCustomLocation) {
+/*
       Directory tempDir = await getTemporaryDirectory();
       File tempFile = File('${tempDir.path}/${mediaFileName}');
 
@@ -98,7 +101,12 @@ class DownloadedVideo extends IdedVideo {
 
       // tempFile.writeAsBytes((await mediaBytes) ?? []);
 
-      return tempFile;
+*/
+      print(media);
+      return File(await mediaStorePlugin.getFilePathFromUri(
+              uriString:
+                  'content://com.android.externalstorage.documents/tree/primary/Download/Clipious/dLz5hkTxNKA.mp4') ??
+          '');
     } else {
       return File(media);
     }

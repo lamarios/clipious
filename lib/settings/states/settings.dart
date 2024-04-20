@@ -13,6 +13,7 @@ import 'package:invidious/app/states/app.dart';
 import 'package:invidious/workmanager.dart';
 import 'package:locale_names/locale_names.dart';
 import 'package:logging/logging.dart';
+import 'package:media_store_plus/media_store_plus.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -411,8 +412,25 @@ class SettingsCubit extends Cubit<SettingsState> {
   setFullscreenOnRotate(bool b) async =>
       await _set(fullScreenOnLandscapeSettingName, b);
 
-  enableCustomDownloadLocation(bool b) async =>
-      await _set(customDownloadedVideoLocationSettingName, b);
+  enableCustomDownloadLocation(bool b) async {
+/*
+    List<Permission> permissions = [
+      Permission.storage,
+    ];
+
+    if ((await mediaStorePlugin.getPlatformSDKInt()) >= 33) {
+      permissions.add(Permission.photos);
+      permissions.add(Permission.audio);
+      permissions.add(Permission.videos);
+    }
+
+    await permissions.request();
+*/
+    // we are not checking the status as it is an example app. You should (must) check it in a production app
+
+    // You have set this otherwise it throws AppFolderNotSetException
+    await _set(customDownloadedVideoLocationSettingName, b);
+  }
 
   setCustomDownloadLocation(String s) async =>
       await _set(downloadedVideoLocationSettingName, s);

@@ -23,8 +23,11 @@ import 'package:invidious/utils.dart';
 import 'package:invidious/utils/sembast_sqflite_database.dart';
 import 'package:invidious/workmanager.dart';
 import 'package:logging/logging.dart';
+import 'package:media_store_plus/media_store_plus.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import 'db_reset/reset_utils.dart';
+import 'downloads/models/downloaded_video.dart';
 import 'settings/models/db/app_logs.dart';
 
 const brandColor = Color(0xFF4f0096);
@@ -56,6 +59,22 @@ Future<void> main() async {
   HttpOverrides.global = MyHttpOverrides();
 
   WidgetsFlutterBinding.ensureInitialized();
+
+  List<Permission> permissions = [
+    Permission.storage,
+  ];
+
+  if ((await mediaStorePlugin.getPlatformSDKInt()) >= 33) {
+    permissions.add(Permission.photos);
+    permissions.add(Permission.audio);
+    permissions.add(Permission.videos);
+  }
+
+  await permissions.request();
+  // we are not checking the status as it is an example app. You should (must) check it in a production app
+
+  MediaStore.appFolder = "MediaStorePlugin";
+
   // FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   db = await SembastSqfDb.create();
   await fileDb.syncWithDb();
