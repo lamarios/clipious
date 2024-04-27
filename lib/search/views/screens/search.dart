@@ -35,6 +35,7 @@ class SearchScreen extends StatelessWidget {
             builder: (context, state) {
               var cubit = context.read<SearchCubit>();
               return AutoTabsRouter.tabBar(
+                  physics: const NeverScrollableScrollPhysics(),
                   routes: const [
                     SearchVideoRoute(),
                     SearchChannelRoute(),

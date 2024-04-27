@@ -28,6 +28,7 @@ class ChannelScreen extends StatelessWidget {
             var deviceType = getDeviceType();
             return AutoTabsRouter.tabBar(
                 key: ValueKey(channelState.channel),
+                physics: const NeverScrollableScrollPhysics(),
                 routes: [
                   ChannelInfoRoute(channel: channelState.channel),
                   ChannelVideoRoute(channel: channelState.channel),
