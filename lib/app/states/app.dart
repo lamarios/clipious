@@ -94,7 +94,6 @@ class AppCubit extends Cubit<AppState> {
 
         if (videoId != null) {
           if (fullStack) {
-            log.fine('FDFSDFSFS');
             appRouter.replaceAll([
               MainRoute(children: [
                 const MainContentRoute(),
