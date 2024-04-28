@@ -607,9 +607,21 @@
             }
         }
     },
+    "returnYoutubeUrlValidation": "Url must start with http:// or https://",
+    "@returnYoutubeUrlValidation": {
+        "description": "error message for invalid custom url for return to youtube"
+    },
     "returnYoutubeDislikeDescription": "Show estimated video dislikes using API provided by returnyoutubedislike.com",
     "@returnYoutubeDislikeDescription": {
         "description": "ReturnYoutubeDislike setting description"
+    },
+    "rydCustomInstance": "Custom RYD instance url",
+    "@rydCustomInstance": {
+        "description": "title for setting to set a custom ryd instance"
+    },
+    "rydCustomInstanceDescription": "Use a different RYD instance, leave empty to use the default",
+    "@rydCustomInstanceDescription": {
+        "description": "description for custom ryd instancr setting"
     },
     "autoplayVideoOnLoad": "Automatically play video on load",
     "@autoplayVideoOnLoad": {

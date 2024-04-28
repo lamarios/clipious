@@ -25,6 +25,86 @@ class BrowsingSettingsScreen extends StatelessWidget {
             content: SizedBox(width: 300, child: AppCustomizer())));
   }
 
+  customRydInstanceDialog(BuildContext context) async {
+    SettingsCubit cubit = context.read<SettingsCubit>();
+    final controller =
+        TextEditingController(text: cubit.state.returnYoutubeDislikeUrl);
+    final formKey = GlobalKey<FormState>();
+
+    var locals = AppLocalizations.of(context)!;
+    String? newUrl = await showDialog<String>(
+        context: context,
+        useRootNavigator: false,
+        builder: (BuildContext context) => Dialog(
+              child: Form(
+                key: formKey,
+                child: SizedBox(
+                  width: 400,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        const Text('URL'),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Text(locals.rydCustomInstanceDescription),
+                        TextFormField(
+                          validator: (value) {
+                            if (value == null || value.trim().isEmpty) {
+                              return null;
+                            }
+                            final trimmed = value.trim();
+                            if (!trimmed.startsWith("http://") &&
+                                !trimmed.startsWith("https://")) {
+                              return locals.returnYoutubeUrlValidation;
+                            }
+
+                            return null;
+                          },
+                          controller: controller,
+                          autocorrect: false,
+                          enableSuggestions: false,
+                          enableIMEPersonalizedLearning: false,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: Text(locals.cancel),
+                            ),
+                            TextButton(
+                              onPressed: () async {
+                                if (formKey.currentState!.validate()) {
+                                  Navigator.of(context).pop(controller.text);
+                                }
+                              },
+                              child: Text(locals.add),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ));
+
+    if (newUrl != null) {
+      newUrl = newUrl.trim();
+      if (newUrl.isNotEmpty && !newUrl.endsWith("/")) {
+        newUrl += "/";
+      }
+
+      cubit.setReturnYoutubeDislikeUrl(newUrl);
+    }
+  }
+
   showSelectLanguage(BuildContext context, SettingsState controller) {
     var localsList = AppLocalizations.supportedLocales;
     var localsStrings =
@@ -147,13 +227,6 @@ class BrowsingSettingsScreen extends StatelessWidget {
                         cubit.getLocaleDisplayName() ?? locals.followSystem),
                     onPressed: (ctx) => showSelectLanguage(ctx, _),
                   ),
-                  SettingsTile.switchTile(
-                    leading: const Icon(Icons.thumb_down),
-                    title: const Text('Return YouTube Dislike'),
-                    description: Text(locals.returnYoutubeDislikeDescription),
-                    initialValue: _.useReturnYoutubeDislike,
-                    onToggle: cubit.toggleReturnYoutubeDislike,
-                  ),
                   SettingsTile.navigation(
                     leading: const Icon(Icons.manage_search),
                     title: Text(locals.searchHistory),
@@ -179,6 +252,23 @@ class BrowsingSettingsScreen extends StatelessWidget {
                   ),
                 ],
               ),
+              SettingsSection(title: Text('Return YouTube Dislike'), tiles: [
+                SettingsTile.switchTile(
+                  leading: const Icon(Icons.thumb_down),
+                  title: Text(locals.enabled),
+                  description: Text(locals.returnYoutubeDislikeDescription),
+                  initialValue: _.useReturnYoutubeDislike,
+                  onToggle: cubit.toggleReturnYoutubeDislike,
+                ),
+                SettingsTile(
+                  enabled: _.useReturnYoutubeDislike,
+                  leading: const Icon(Icons.network_ping),
+                  title: Text(locals.rydCustomInstance),
+                  description: Text(
+                      '${_.returnYoutubeDislikeUrl.isNotEmpty ? '${locals.currentServer(_.returnYoutubeDislikeUrl)}\n' : ''}${locals.rydCustomInstanceDescription}'),
+                  onPressed: (context) => customRydInstanceDialog(context),
+                )
+              ])
             ],
           ),
         );
