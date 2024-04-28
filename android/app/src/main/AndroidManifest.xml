@@ -20,6 +20,7 @@
             android:label="Clipious"
             android:name="${applicationName}"
             android:icon="@mipmap/ic_launcher"
+            android:usesCleartextTraffic="true"
             android:banner="@drawable/banner">
         <!--            android:enableOnBackInvokedCallback="true"-->
         <activity
