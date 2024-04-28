@@ -7,6 +7,7 @@ import 'package:invidious/app/states/app.dart';
 import 'package:invidious/extensions.dart';
 import 'package:invidious/router.dart';
 import 'package:invidious/utils.dart';
+import 'package:invidious/utils/views/tv/components/tv_button.dart';
 import 'package:invidious/utils/views/tv/components/tv_overscan.dart';
 import 'package:locale_names/locale_names.dart';
 import 'package:logging/logging.dart';
@@ -107,6 +108,80 @@ class TVSettingsScreen extends StatelessWidget {
     ));
   }
 
+  showCustomRydUrl(BuildContext context) {
+    var locals = AppLocalizations.of(context)!;
+    var cubit = context.read<SettingsCubit>();
+    final controller =
+        TextEditingController(text: cubit.state.returnYoutubeDislikeUrl);
+
+    FocusNode focusNode = FocusNode();
+    showTvDialog(
+      title: 'URL',
+      context: context,
+      actions: [
+        TvButton(
+          onPressed: (context) {
+            Navigator.pop(context);
+          },
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
+            child: Text(locals.cancel),
+          ),
+        ),
+        TvButton(
+          onPressed: (context) async {
+            String newUrl = controller.text.trim();
+
+            if (newUrl.isNotEmpty &&
+                !newUrl.startsWith("http://") &&
+                !newUrl.startsWith("https://")) {
+              showTvAlertdialog(context, locals.error,
+                  [Text(locals.customizeAppLayoutExplanation)]);
+              return;
+            }
+
+            newUrl = newUrl.trim();
+            if (newUrl.isNotEmpty && !newUrl.endsWith("/")) {
+              newUrl += "/";
+            }
+
+            cubit.setReturnYoutubeDislikeUrl(newUrl);
+            Navigator.of(context).pop();
+          },
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
+            child: Text(locals.save),
+          ),
+        ),
+      ],
+      builder: (BuildContext context) => [
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              TextField(
+                autofocus: true,
+                focusNode: focusNode,
+                textInputAction: TextInputAction.next,
+                controller: controller,
+                autocorrect: false,
+                enableSuggestions: false,
+                enableIMEPersonalizedLearning: false,
+              ),
+              const Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [],
+              ),
+            ],
+          ),
+        )
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     AppLocalizations locals = AppLocalizations.of(context)!;
@@ -145,6 +220,13 @@ class TVSettingsScreen extends StatelessWidget {
                       .toggleReturnYoutubeDislike(!_.useReturnYoutubeDislike),
                   trailing: Switch(
                       onChanged: (value) {}, value: _.useReturnYoutubeDislike),
+                ),
+                SettingsTile(
+                  title: locals.rydCustomInstance,
+                  description:
+                      '${_.returnYoutubeDislikeUrl.isNotEmpty ? '${locals.currentServer(_.returnYoutubeDislikeUrl)}\n' : ''}${locals.rydCustomInstanceDescription}',
+                  enabled: _.useReturnYoutubeDislike,
+                  onSelected: (context) => showCustomRydUrl(context),
                 ),
                 SettingsTile(
                   title: locals.searchHistory,

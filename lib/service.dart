@@ -794,7 +794,13 @@ class Service {
   }
 
   Future<Dislike> getDislikes(String videoId) async {
-    Uri uri = Uri.parse(urlGetDislikes + videoId);
+    final customUrl =
+        db.getSettings(returnYoutubeDislikeUrlSettingName)?.value ?? '';
+
+    Uri uri = Uri.parse((customUrl.trim().isNotEmpty
+            ? '${customUrl}votes?videoId='
+            : urlGetDislikes) +
+        videoId);
 
     final response = await http.get(uri);
     return Dislike.fromJson(handleResponse(response));
