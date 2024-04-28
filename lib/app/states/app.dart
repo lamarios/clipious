@@ -17,6 +17,7 @@ final log = Logger('HomeState');
 
 class AppCubit extends Cubit<AppState> {
   late final StreamSubscription intentDataStreamSubscription;
+
   AppCubit(super.initialState) {
     onReady();
     initState();
@@ -45,11 +46,11 @@ class AppCubit extends Cubit<AppState> {
     intentDataStreamSubscription =
         ReceiveSharingIntent.getMediaStream().listen((shared) {
       final String? value = shared
-          .where((element) => element.type == SharedMediaType.file)
-          .map((e) => e.message)
+          .where((element) => element.type == SharedMediaType.url)
+          .map((e) => e.path)
           .firstOrNull;
       if (value != null) {
-        openAppLink(value);
+        openAppLink(value, false);
       }
     }, onError: (err) {
       log.warning("getLinkStream error: $err");
@@ -58,11 +59,11 @@ class AppCubit extends Cubit<AppState> {
     // For sharing or opening urls/text coming from outside the app while the app is closed
     ReceiveSharingIntent.getInitialMedia().then((shared) {
       final String? value = shared
-          .where((element) => element.type == SharedMediaType.file)
-          .map((e) => e.message)
+          .where((element) => element.type == SharedMediaType.url)
+          .map((e) => e.path)
           .firstOrNull;
       if (value != null) {
-        openAppLink(value);
+        openAppLink(value, true);
       }
       ReceiveSharingIntent.reset();
     });
@@ -76,19 +77,32 @@ class AppCubit extends Cubit<AppState> {
     super.close();
   }
 
-  void openAppLink(String url) {
+  void openAppLink(String url, bool fullStack) {
     try {
+      log.fine('opening $url, full stack: $fullStack');
       Uri uri = Uri.parse(url);
+      String? videoId;
       if (youtubeHosts.contains(uri.host)) {
         if (uri.pathSegments.length == 1 &&
             uri.pathSegments.contains("watch") &&
             uri.queryParameters.containsKey('v')) {
-          String videoId = uri.queryParameters['v']!;
-          appRouter.push(VideoRoute(videoId: videoId));
+          videoId = uri.queryParameters['v']!;
         }
         if (uri.host == 'youtu.be' && uri.pathSegments.length == 1) {
-          String videoId = uri.pathSegments[0];
-          appRouter.push(VideoRoute(videoId: videoId));
+          videoId = uri.pathSegments[0];
+        }
+
+        if (videoId != null) {
+          if (fullStack) {
+            appRouter.replaceAll([
+              MainRoute(children: [
+                const MainContentRoute(),
+                VideoRoute(videoId: videoId)
+              ])
+            ]);
+          } else {
+            appRouter.push(VideoRoute(videoId: videoId));
+          }
         }
       }
     } catch (err, stacktrace) {
