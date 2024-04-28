@@ -14,6 +14,7 @@ const playerAutoplayOnLoad = 'player-autoplay-on-load';
 const playRecommendedNextSettingName = 'play-recommended-next';
 const useProxySettingName = 'use-proxy';
 const useReturnYoutubeDislikeSettingName = 'use-return-youtube-dislike';
+const returnYoutubeDislikeUrlSettingName = 'custom-return-youtube-dislike-url';
 const blackBackgroundSettingName = 'black-background';
 const subtitleSizeSettingName = 'subtitles-size';
 const rememberLastSubtitle = 'remember-last-subtitle';

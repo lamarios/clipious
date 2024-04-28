@@ -411,6 +411,9 @@ class SettingsCubit extends Cubit<SettingsState> {
   setFullscreenOnRotate(bool b) async =>
       await _set(fullScreenOnLandscapeSettingName, b);
 
+  setReturnYoutubeDislikeUrl(String url) async =>
+      await _set(returnYoutubeDislikeUrlSettingName, url);
+
   Future<void> _set<T>(String name, T value) async {
     var settings = Map<String, SettingsValue>.from(state.settings);
     if (value == null) {
@@ -530,6 +533,9 @@ class SettingsState with _$SettingsState {
 
   bool get useReturnYoutubeDislike =>
       _get(useReturnYoutubeDislikeSettingName)?.value == 'true';
+
+  String get returnYoutubeDislikeUrl =>
+      _get(returnYoutubeDislikeUrlSettingName)?.value ?? '';
 
   double get subtitleSize =>
       double.parse(_get(subtitleSizeSettingName)?.value ?? subtitleDefaultSize);
