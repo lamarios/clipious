@@ -3,7 +3,7 @@
   "@subscriptions": {
     "description": "User subscriptions"
   },
-  "playlists": "Listas de reproducción",
+  "playlists": "Playlists",
   "@playlists": {
     "description": "User playlists"
   },
