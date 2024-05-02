@@ -1328,5 +1328,17 @@
   "feedbackScreenshotError": "خطا در هنگام بارگذاری تصویر به Imgur",
   "@feedbackScreenshotError": {
     "description": "Title for dialog if something goes wrong while uploading feedback screenshot"
+  },
+  "returnYoutubeUrlValidation": "نشانی باید با http:// یا https:// آغاز شود",
+  "@returnYoutubeUrlValidation": {
+    "description": "error message for invalid custom url for return to youtube"
+  },
+  "rydCustomInstance": "نشانی اختصاصی RYD",
+  "@rydCustomInstance": {
+    "description": "title for setting to set a custom ryd instance"
+  },
+  "rydCustomInstanceDescription": "از یک RYD متفاوت استفاده کنید، برای استفاده از پیش‌فرض خالی بگذارید",
+  "@rydCustomInstanceDescription": {
+    "description": "description for custom ryd instancr setting"
   }
 }
