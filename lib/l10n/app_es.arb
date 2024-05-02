@@ -1328,5 +1328,17 @@
   "feedbackScreenshotError": "Error al subir una captura de pantalla a Imgur",
   "@feedbackScreenshotError": {
     "description": "Title for dialog if something goes wrong while uploading feedback screenshot"
+  },
+  "rydCustomInstance": "URL de instancia RYD personalizada",
+  "@rydCustomInstance": {
+    "description": "title for setting to set a custom ryd instance"
+  },
+  "rydCustomInstanceDescription": "Use una instancia RYD diferente, déjela vacía para usar la predeterminada",
+  "@rydCustomInstanceDescription": {
+    "description": "description for custom ryd instancr setting"
+  },
+  "returnYoutubeUrlValidation": "La URL debe comenzar con http:// o https://",
+  "@returnYoutubeUrlValidation": {
+    "description": "error message for invalid custom url for return to youtube"
   }
 }
