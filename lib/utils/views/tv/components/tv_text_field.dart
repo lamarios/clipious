@@ -70,7 +70,7 @@ class TvTextField extends StatelessWidget {
           child: AnimatedContainer(
             duration: animationDuration ~/ 2,
             decoration: BoxDecoration(
-                color: hasFocus ? colors.secondaryContainer : colors.background,
+                color: hasFocus ? colors.secondaryContainer : colors.surface,
                 borderRadius: hasFocus ? BorderRadius.circular(10) : null),
             child: Padding(
               padding: const EdgeInsets.all(8.0),

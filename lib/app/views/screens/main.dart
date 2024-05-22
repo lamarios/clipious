@@ -28,7 +28,7 @@ class MainScreen extends StatelessWidget {
           : const Size(0, 0);
       var colors = Theme.of(context).colorScheme;
       return Container(
-        color: colors.background,
+        color: colors.surface,
         child: Stack(
           children: [
             const Positioned(
@@ -49,7 +49,7 @@ class MainScreen extends StatelessWidget {
             if (globalLoading)
               Positioned(
                   child: Container(
-                      color: colors.background.withOpacity(0.5),
+                      color: colors.surface.withOpacity(0.5),
                       child: const Center(
                         child: CircularProgressIndicator(),
                       )))

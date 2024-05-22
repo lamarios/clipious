@@ -148,8 +148,7 @@ class VideoScreen extends StatelessWidget {
                                                 IconButton(
                                                   icon: Icon(
                                                     Icons.add,
-                                                    color:
-                                                        colorScheme.background,
+                                                    color: colorScheme.surface,
                                                   ),
                                                   onPressed: () {},
                                                 ),
@@ -224,7 +223,7 @@ class VideoScreen extends StatelessWidget {
                                 AddToPlayListButton(videoId: videoState.videoId)
                               ],
                       ),
-                      backgroundColor: colorScheme.background,
+                      backgroundColor: colorScheme.surface,
                       bottomNavigationBar: showTabletView ||
                               videoState.loadingVideo ||
                               distractionFreeMode
@@ -245,7 +244,7 @@ class VideoScreen extends StatelessWidget {
                               right: innerHorizontalPadding,
                               top: 8),
                           child: Container(
-                            color: colorScheme.background,
+                            color: colorScheme.surface,
                             width: double.infinity,
                             height: double.infinity,
                             child: AnimatedSwitcher(

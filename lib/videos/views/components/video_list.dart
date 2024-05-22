@@ -75,7 +75,7 @@ class VideoList<T extends IdedVideo> extends StatelessWidget {
               _.error != ItemListErrors.none
                   ? Container(
                       alignment: Alignment.center,
-                      color: colorScheme.background,
+                      color: colorScheme.surface,
                       child: InkWell(
                           onTap: () => cubit.getItems(),
                           child: Text(

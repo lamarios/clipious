@@ -64,7 +64,7 @@ class CompactVideo extends StatelessWidget {
                           decoration: BoxDecoration(
                               color: (highlighted ?? false)
                                   ? colors.secondaryContainer
-                                  : colors.background,
+                                  : colors.surface,
                               borderRadius: BorderRadius.circular(10)),
                           duration: animationDuration * 2,
                         ),

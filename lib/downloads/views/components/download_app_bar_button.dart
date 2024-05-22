@@ -23,8 +23,7 @@ class AppBarDownloadButton extends StatelessWidget {
               onPressed: () => openDownloadManager(context),
               icon: Icon(
                 Icons.download,
-                color:
-                    _.downloadProgresses.isNotEmpty ? colors.background : null,
+                color: _.downloadProgresses.isNotEmpty ? colors.surface : null,
               ),
             ),
             _.downloadProgresses.isNotEmpty

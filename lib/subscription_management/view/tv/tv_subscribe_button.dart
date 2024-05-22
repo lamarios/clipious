@@ -33,7 +33,7 @@ class TvSubscribeButton extends StatelessWidget {
           child: TvButton(
             autofocus: autoFocus,
             onFocusChanged: onFocusChanged,
-            unfocusedColor: colors.background.withOpacity(0.0),
+            unfocusedColor: colors.surface.withOpacity(0.0),
             onPressed: (context) =>
                 _.isLoggedIn ? cubit.toggleSubscription() : null,
             child: Padding(

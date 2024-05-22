@@ -62,7 +62,7 @@ class ChannelScreen extends StatelessWidget {
                               ),
                             ],
                     ),
-                    backgroundColor: colorScheme.background,
+                    backgroundColor: colorScheme.surface,
                     bottomNavigationBar: deviceType == DeviceType.tablet ||
                             channelState.loading
                         ? null

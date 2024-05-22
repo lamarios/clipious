@@ -121,7 +121,7 @@ class Player extends StatelessWidget {
                     ? GestureDetector(
                         child: AnimatedContainer(
                           duration: animationDuration,
-                          color: colors.background,
+                          color: colors.surface,
                           padding: EdgeInsets.symmetric(
                               horizontal: isMini && !isDragging ? 7 : 0),
                           child: ClipRRect(
@@ -135,7 +135,7 @@ class Player extends StatelessWidget {
                                     ? Colors.black
                                     : isMini
                                         ? colors.secondaryContainer
-                                        : colors.background,
+                                        : colors.surface,
                               ),
                               child: Column(
                                 mainAxisSize: isMini

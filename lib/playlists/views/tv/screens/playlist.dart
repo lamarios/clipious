@@ -98,7 +98,7 @@ class TvPlaylistScreen extends PlaylistViewScreen {
                             child: Container(
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20),
-                                color: colors.background
+                                color: colors.surface
                                     .withOpacity(overlayBackgroundOpacity),
                               ),
                               child: Padding(

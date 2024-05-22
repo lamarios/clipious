@@ -55,7 +55,7 @@ class SearchHistorySettingsScreen extends StatelessWidget {
             appBar: AppBar(
               title: Text(locals.searchHistory),
             ),
-            backgroundColor: colorScheme.background,
+            backgroundColor: colorScheme.surface,
             body: SafeArea(
               bottom: false,
               child:

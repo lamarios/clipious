@@ -49,7 +49,7 @@ class TvWelcomeWizardScreen extends StatelessWidget {
                     ),
                     const Expanded(child: TvManageServersInner()),
                     TvButton(
-                      unfocusedColor: server == null ? colors.background : null,
+                      unfocusedColor: server == null ? colors.surface : null,
                       onPressed: server != null
                           ? (context) {
                               AutoRouter.of(context)

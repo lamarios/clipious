@@ -106,7 +106,7 @@ class PlaylistInList extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(15),
                                 color: hasFocus
                                     ? colors.primaryContainer
-                                    : colors.background,
+                                    : colors.surface,
                               ),
                               duration: animationDuration,
                               child: Padding(

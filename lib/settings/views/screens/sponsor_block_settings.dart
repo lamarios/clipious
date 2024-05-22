@@ -26,7 +26,7 @@ class SponsorBlockSettingsScreen extends StatelessWidget {
             appBar: AppBar(
               title: const Text('SponsorBlock'),
             ),
-            backgroundColor: colorScheme.background,
+            backgroundColor: colorScheme.surface,
             body: SafeArea(
               bottom: false,
               child:

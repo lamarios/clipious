@@ -94,7 +94,7 @@ class PlaylistViewScreen extends StatelessWidget {
                           type: BellIconType.playlist)
                 ],
               ),
-              backgroundColor: colors.background,
+              backgroundColor: colors.surface,
               body: SafeArea(
                   bottom: false,
                   child: playlistState.loading ||

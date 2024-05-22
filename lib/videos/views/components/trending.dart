@@ -25,7 +25,7 @@ class TrendingState extends State<Trending> {
   Widget build(BuildContext context) {
     var colorScheme = Theme.of(context).colorScheme;
     return Container(
-      color: colorScheme.background,
+      color: colorScheme.surface,
       child: isTv
           ? TvHorizontalVideoList(
               onItemFocus: widget.onItemFocus,

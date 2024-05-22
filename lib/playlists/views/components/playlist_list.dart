@@ -41,7 +41,7 @@ class PlaylistList extends StatelessWidget {
               _.error.isNotEmpty
                   ? Container(
                       alignment: Alignment.center,
-                      color: colorScheme.background,
+                      color: colorScheme.surface,
                       child: Visibility(
                           visible: _.error.isNotEmpty,
                           child: InkWell(
