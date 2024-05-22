@@ -1328,5 +1328,17 @@
   "feedbackDisclaimer": "Чтобы отправить отзыв, вам понадобится учётная запись GitHub, и ваш скриншот будет отправлен в Imgur анонимно.",
   "@feedbackDisclaimer": {
     "description": "Content of dialog shown before submitting feedback to make sure the user is ok whith where the data is going"
+  },
+  "returnYoutubeUrlValidation": "Ссылка должна начинаться с http:// или с https://",
+  "@returnYoutubeUrlValidation": {
+    "description": "error message for invalid custom url for return to youtube"
+  },
+  "rydCustomInstance": "Ссылка на сторонний сервер RYD",
+  "@rydCustomInstance": {
+    "description": "title for setting to set a custom ryd instance"
+  },
+  "rydCustomInstanceDescription": "Изменится сервер RYD, чтобы использовать официальный, оставьте поле пустым",
+  "@rydCustomInstanceDescription": {
+    "description": "description for custom ryd instancr setting"
   }
 }

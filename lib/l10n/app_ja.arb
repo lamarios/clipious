@@ -1328,5 +1328,17 @@
   "feedbackScreenshotError": "スクリーンショットをImgurにアップロード中にエラー",
   "@feedbackScreenshotError": {
     "description": "Title for dialog if something goes wrong while uploading feedback screenshot"
+  },
+  "returnYoutubeUrlValidation": "URLは http:// か https:// から始めてください",
+  "@returnYoutubeUrlValidation": {
+    "description": "error message for invalid custom url for return to youtube"
+  },
+  "rydCustomInstanceDescription": "別のRYDインスタンスを使用。空なら初期設定を使用",
+  "@rydCustomInstanceDescription": {
+    "description": "description for custom ryd instancr setting"
+  },
+  "rydCustomInstance": "独自RYDインスタンスのURL",
+  "@rydCustomInstance": {
+    "description": "title for setting to set a custom ryd instance"
   }
 }

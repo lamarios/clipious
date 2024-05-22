@@ -956,5 +956,107 @@
   "navigationBarStyle": "Стиль панелі навігації",
   "@navigationBarStyle": {
     "description": "Label for settings on customizing navigation bar style"
+  },
+  "returnYoutubeUrlValidation": "Url повинен починатися з http:// або https://",
+  "@returnYoutubeUrlValidation": {
+    "description": "error message for invalid custom url for return to youtube"
+  },
+  "rydCustomInstanceDescription": "Використовуйте інший екземпляр RYD, залиште пустим для використання по стандарту",
+  "@rydCustomInstanceDescription": {
+    "description": "description for custom ryd instancr setting"
+  },
+  "nFilters": "{count, plural, =0{Немає відео} =1{1 фільтр} other{{count} фільтрів}}",
+  "@nFilters": {
+    "description": "One or more video filters",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "customizeAppLayoutExplanation": "Виберіть, які розділи ви хочете бачити на головній навігаційній панелі застосунку. Натисніть на головний значок, щоби вибрати, який екран показуватиметься під час запуску застосунку. Ви можете змінити порядок розділів, перетягнувши їх.",
+  "@customizeAppLayoutExplanation": {
+    "description": ""
+  },
+  "videoFilterDayOfWeek": "Виберіть дні для застосування фільтрів",
+  "@videoFilterDayOfWeek": {
+    "description": "Title for day selection for the filter"
+  },
+  "share": "Поділитися",
+  "@share": {
+    "description": "asking user if to share"
+  },
+  "malformedStatsEndpoint": "/api/v1/stats не відповідає очікуванням",
+  "@malformedStatsEndpoint": {
+    "description": "Title for dialog when adding a server that isn't validated as it should"
+  },
+  "malformedStatsEndpointDescription": "Кінцева точка статистики сервера не відповіла очікуваним корисним навантаженням, ключ «software.name» має дорівнювати «invidious».\nВідповідь від сервера:",
+  "@malformedStatsEndpointDescription": {
+    "description": "Description of the possible issue for an invalid stats endpoints"
+  },
+  "serverIsNotReachable": "Сервер недоступний",
+  "@serverIsNotReachable": {
+    "description": "Title for dialog when adding a server that is not reachable"
+  },
+  "searchUploadDateYear": "Цього року",
+  "@searchUploadDateYear": {
+    "description": "Search for uploaded this year"
+  },
+  "searchDuration": "Тривалість",
+  "@searchDuration": {
+    "description": "Filter search result by duration"
+  },
+  "rydCustomInstance": "Власна адреса екземпляра RYD",
+  "@rydCustomInstance": {
+    "description": "title for setting to set a custom ryd instance"
+  },
+  "searchUploadDate": "Дата завантаження",
+  "@searchUploadDate": {
+    "description": "Filter search result by upload date"
+  },
+  "searchUploadDateAny": "Будь-яка дата",
+  "@searchUploadDateAny": {
+    "description": "Do not filter search result by upload date"
+  },
+  "searchUploadDateHour": "Остання година",
+  "@searchUploadDateHour": {
+    "description": "Search for uploaded in last hour"
+  },
+  "searchUploadDateToday": "Сьогодні",
+  "@searchUploadDateToday": {
+    "description": "Search for uploaded today"
+  },
+  "searchUploadDateWeek": "Цього тижня",
+  "@searchUploadDateWeek": {
+    "description": "Search for uploaded this week"
+  },
+  "searchUploadDateMonth": "Цього місяця",
+  "@searchUploadDateMonth": {
+    "description": "Search for uploaded this month"
+  },
+  "searchDurationAny": "Будь-яка тривалість",
+  "@searchDurationAny": {
+    "description": "Do not filter search result by duration"
+  },
+  "searchDurationShort": "Короткі (менше 4 хв)",
+  "@searchDurationShort": {
+    "description": "Search for short videos only"
+  },
+  "searchDurationLong": "Довгі (понад 20 хв)",
+  "@searchDurationLong": {
+    "description": "Search for long videos only"
+  },
+  "searchDurationMedium": "Середні (4-20 хв)",
+  "@searchDurationMedium": {
+    "description": "Search for medium videos only"
+  },
+  "searchSortBy": "Сортувати за",
+  "@searchSortBy": {
+    "description": "Search sorting option"
+  },
+  "distractionFreeMode": "Режим фокусування",
+  "@distractionFreeMode": {
+    "description": "title for distraction free mode settings"
   }
 }

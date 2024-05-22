@@ -1194,5 +1194,121 @@
         "format": "compact"
       }
     }
+  },
+  "serverIsNotReachable": "O servidor não está acessível",
+  "@serverIsNotReachable": {
+    "description": "Title for dialog when adding a server that is not reachable"
+  },
+  "malformedStatsEndpointDescription": "O endpoint de estatísticas do servidor não respondeu com o payload esperado, a chave \"software.name\" deveria ser igual a \"invidious\".\nResposta do servidor:",
+  "@malformedStatsEndpointDescription": {
+    "description": "Description of the possible issue for an invalid stats endpoints"
+  },
+  "channelSortByPopular": "Popular",
+  "@channelSortByPopular": {
+    "description": "Sort channel videos by popularity"
+  },
+  "share": "Compartilhar",
+  "@share": {
+    "description": "asking user if to share"
+  },
+  "returnYoutubeUrlValidation": "A URL deve começar com http:// ou https://",
+  "@returnYoutubeUrlValidation": {
+    "description": "error message for invalid custom url for return to youtube"
+  },
+  "searchUploadDate": "Data de Upload",
+  "@searchUploadDate": {
+    "description": "Filter search result by upload date"
+  },
+  "searchUploadDateWeek": "Essa semana",
+  "@searchUploadDateWeek": {
+    "description": "Search for uploaded this week"
+  },
+  "searchUploadDateMonth": "Esse mês",
+  "@searchUploadDateMonth": {
+    "description": "Search for uploaded this month"
+  },
+  "copySettingsAsJson": "Copiar as configurações como JSON para a área de transferência",
+  "@copySettingsAsJson": {
+    "description": "title for settings sections to allow users to copy their settings as json to make debugging easier"
+  },
+  "searchUploadDateAny": "Qualquer data",
+  "@searchUploadDateAny": {
+    "description": "Do not filter search result by upload date"
+  },
+  "searchUploadDateHour": "Última Hora",
+  "@searchUploadDateHour": {
+    "description": "Search for uploaded in last hour"
+  },
+  "searchUploadDateToday": "Hoje",
+  "@searchUploadDateToday": {
+    "description": "Search for uploaded today"
+  },
+  "searchUploadDateYear": "Esse ano",
+  "@searchUploadDateYear": {
+    "description": "Search for uploaded this year"
+  },
+  "searchDuration": "Duração",
+  "@searchDuration": {
+    "description": "Filter search result by duration"
+  },
+  "searchDurationAny": "Qualquer duração",
+  "@searchDurationAny": {
+    "description": "Do not filter search result by duration"
+  },
+  "searchDurationShort": "Curto (<4 minutos)",
+  "@searchDurationShort": {
+    "description": "Search for short videos only"
+  },
+  "searchDurationLong": "Longo (>20 minutos)",
+  "@searchDurationLong": {
+    "description": "Search for long videos only"
+  },
+  "searchDurationMedium": "Médio (4-20 minutos)",
+  "@searchDurationMedium": {
+    "description": "Search for medium videos only"
+  },
+  "searchSortBy": "Ordenar por",
+  "@searchSortBy": {
+    "description": "Search sorting option"
+  },
+  "copySettingsAsJsonDescription": "Copie as configurações como JSON para auxiliar na depuração caso você encontre um problema com o aplicativo e decida reportar um problema",
+  "@copySettingsAsJsonDescription": {
+    "description": ""
+  },
+  "exponentialSkipDescription": "Quanto mais você avançar, maior será o passo.",
+  "@exponentialSkipDescription": {
+    "description": "Title for the setting to enable the exponential skipping"
+  },
+  "fullscreenOnLandscape": "Tela cheia em modo paisagem",
+  "@fullscreenOnLandscape": {
+    "description": "Setting title to enable full screen on landscape orientation"
+  },
+  "fullscreenOnLandscapeDescription": "Alterar para tela cheia quando o dispositivo é rotacionado para o modo paisagem",
+  "@fullscreenOnLandscapeDescription": {
+    "description": "Setting to enable full screen on landscape orientation"
+  },
+  "submitFeedback": "Enviar feedback",
+  "@submitFeedback": {
+    "description": "Title for settings to submit feed back through the app"
+  },
+  "submitFeedbackDescription": "Encontrou um bug ou tem uma sugestão? Use esta ferramenta para tirar capturas de tela do aplicativo, fazer anotações e enviar feedbacks",
+  "@submitFeedbackDescription": {
+    "description": "Setting tile descriptions for feedback submission"
+  },
+  "feedbackDisclaimer": "Para enviar feedback, você precisará de uma conta no GitHub, e sua captura de tela será enviada anonimamente para o Imgur.",
+  "@feedbackDisclaimer": {
+    "description": "Content of dialog shown before submitting feedback to make sure the user is ok whith where the data is going"
+  },
+  "feedbackScreenshotError": "Erro ao enviar captura de tela para o Imgur",
+  "@feedbackScreenshotError": {
+    "description": "Title for dialog if something goes wrong while uploading feedback screenshot"
+  },
+  "channelSortByNewest": "Mais novo",
+  "@channelSortByNewest": {
+    "description": "Sort channel videos from newest to oldest"
+  },
+  "channelSortByOldest": "Mais velho",
+  "@channelSortByOldest": {
+    "description": "Sort channel videos from oldest to newest"
   }
 }

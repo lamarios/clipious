@@ -1,238 +1,1230 @@
 {
-    "removeFromPlayList": "إزالة من القائمة التشغيل",
-    "@removeFromPlayList": {
-        "description": "Menu item description to show remove a video from a playlist"
-    },
-    "subscriptions": "اشتراكات",
-    "@subscriptions": {
-        "description": "User subscriptions"
-    },
-    "playlists": "قوائم التشغيل",
-    "@playlists": {
-        "description": "User playlists"
-    },
-    "noVideoInPlayList": "لا يوجد فيديو في القائمة التشغيل",
-    "@noVideoInPlayList": {
-        "description": "When no videos in the playlist"
-    },
-    "popular": "الاكثر شهرة",
-    "@popular": {
-        "description": "Popular videos title"
-    },
-    "trending": "الرائج",
-    "@trending": {
-        "description": "Trending videos title"
-    },
-    "irreversibleAction": "هذا العمل لا رجوع فيه",
-    "@irreversibleAction": {
-        "description": "Tell the user that the action cannot be undone"
-    },
-    "addPlayList": "إضافة إلى القائمة التشغيل",
-    "@addPlayList": {
-        "description": "Title for add playlist dialog"
-    },
-    "playListName": "إسم قائمة التشغيل",
-    "@playListName": {
-        "description": "Place holder for new playlist name text field"
-    },
-    "publicPlaylist": "عام",
-    "@publicPlaylist": {
-        "description": "Public playlist"
-    },
-    "cancel": "إلغاء",
-    "@cancel": {
-        "description": "Cancel button label"
-    },
-    "deletePlayListQ": "حذف القائمة التشغيل؟",
-    "@deletePlayListQ": {
-        "description": "Ask user to delete a playlist"
-    },
-    "playlistVisibility": "ظهور",
-    "@playlistVisibility": {
-        "description": "Dropdown label for playlist visibility"
-    },
-    "privatePlaylist": "خاص",
-    "@privatePlaylist": {
-        "description": "Private playlist"
-    },
-    "add": "إضافة",
-    "@add": {
-        "description": "Add button abel"
-    },
-    "latestVideos": "آخر الفيديوات",
-    "@latestVideos": {
-        "description": "Latest channel videos"
-    },
-    "subscribe": "اشتراك",
-    "@subscribe": {
-        "description": "Label for user to subscribe to a channel"
-    },
-    "unlistedPlaylist": "إزالة من القائمة",
-    "@unlistedPlaylist": {
-        "description": "Unlisted playlist"
-    },
-    "info": "معلومات",
-    "@info": {
-        "description": "Info label"
-    },
-    "videos": "فيديوهات",
-    "@videos": {
-        "description": "Videos label"
-    },
-    "streams": "بث",
-    "@streams": {
-        "description": "Streams label"
-    },
-    "subscribed": "مشترك",
-    "@subscribed": {
-        "description": "When the user is subscribed to a channel"
-    },
-    "nSubscribers": "{count, select, no{لا يوجد مشتركين} other{{count} مشتركين}}",
-    "@nSubscribers": {
-        "description": "number of subscribers",
-        "placeholders": {
-            "count": {
-                "type": "String"
-            }
-        }
-    },
-    "shareYoutubeLink": "مشاركة الرابط اليوتيوب",
-    "@shareYoutubeLink": {
-        "description": "asking user to share youtube link"
-    },
-    "channels": "قنوات",
-    "@channels": {
-        "description": "Channels label"
-    },
-    "ok": "موافق",
-    "@ok": {
-        "description": "Ok"
-    },
-    "noChannels": "لا توجد قنوات",
-    "@noChannels": {
-        "description": "when there are no channels to display"
-    },
-    "noPlaylists": "لا توجد قوائم تشغيل",
-    "@noPlaylists": {
-        "description": "when there are no playlists to display"
-    },
-    "couldntLoadVideo": "تعذر تحميل الفيديو",
-    "@couldntLoadVideo": {
-        "description": "Message to display when a video can't be loaded"
-    },
-    "comments": "التعليقات",
-    "@comments": {
-        "description": "Comments label"
-    },
-    "recommended": "موصى به",
-    "@recommended": {
-        "description": "Recommended label"
-    },
-    "couldntFetchVideos": "تعذر جلب مقاطع الفيديو. انقر للمحاولة مرة أخرى.",
-    "@couldntFetchVideos": {
-        "description": "Can't load bunch of videos, asking  user to try again"
-    },
-    "shareInvidiousLink": "مشاركة رابط إنفيديوس",
-    "@shareInvidiousLink": {
-        "description": "asking user to share invidious link"
-    },
-    "videoAddedToPlaylist": "تمت إضافة الفيديو إلى قائمة التشغيل",
-    "@videoAddedToPlaylist": {
-        "description": "Pop up message when a video was added to a playlist"
-    },
-    "errorAddingVideoToPlaylist": "حدث خطأ أثناء إضافة الفيديو إلى قائمة التشغيل",
-    "@errorAddingVideoToPlaylist": {
-        "description": "Error while adding video to playlist"
-    },
-    "wizardIntro": "حدد خادماً عاماً أو أضف خادمك الخاص. (يمكن تغييرها لاحقا في الإعدادات)",
-    "@wizardIntro": {
-        "description": "Welcome message on frst time use"
-    },
-    "startUsingClipious": "ابدأ باستخدام كِلبّيوس",
-    "@startUsingClipious": {
-        "description": "button label to start using the app"
-    },
-    "selectPlaylist": "اختر قائمة التشغيل",
-    "@selectPlaylist": {
-        "description": "Title when users wants to add a video to a playlist"
-    },
-    "createNewPlaylist": "إنشاء قائمة تشغيل جديدة",
-    "@createNewPlaylist": {
-        "description": "Button label to create a new playlist when the user wants to add a video to a playlist"
-    },
-    "nReplies": "{count, plural, =0{لا يوجد ردود} =1{رد واحد} other{{count} ردود}}",
-    "@nReplies": {
-        "description": "number of replies to a comment",
-        "placeholders": {
-            "count": {
-                "type": "num",
-                "format": "compact"
-            }
-        }
-    },
-    "loadMore": "تحميل المزيد",
-    "@loadMore": {
-        "description": "CTA to load more"
-    },
-    "topSorting": "أعلى",
-    "@topSorting": {
-        "description": "Content sorting: top"
-    },
-    "newSorting": "حديث",
-    "@newSorting": {
-        "description": "Content sorting: new"
-    },
-    "streamIsLive": "مباشر",
-    "@streamIsLive": {
-        "description": "Label when a video is a live stream"
-    },
-    "sponsorSkipped": "تم تخطي فقرة الراعي",
-    "@sponsorSkipped": {
-        "description": "When a sponsor segment is skipped thanks to sponsor block"
-    },
-    "selectBrowsingCountry": "حدد بلد التصفح",
-    "@selectBrowsingCountry": {
-        "description": "Select country for trending content"
-    },
-    "showOnStart": "اختر ما تريد إظهاره عند بدء تشغيل التطبيق",
-    "@showOnStart": {
-        "description": "Title of dialog asking which screen the users prefers to see"
-    },
-    "settings": "الإعدادات",
-    "@settings": {
-        "description": "Settings title"
-    },
-    "browsing": "التصفح",
-    "@browsing": {
-        "description": "video browsing preferences"
-    },
-    "country": "البلد",
-    "@country": {
-        "description": "Country label"
-    },
-    "whenAppStartsShow": "عند بدء تشغيل التطبيق ، أظهر …",
-    "@whenAppStartsShow": {
-        "description": "Setting title for selecting the screen to show on start"
-    },
-    "servers": "الخوادم",
-    "@servers": {
-        "description": "Server management settings category"
-    },
-    "manageServers": "إدارة الخوادم",
-    "@manageServers": {
-        "description": "Settings to manage servers"
-    },
-    "currentServer": "يتم استخدام {current} حالياً",
-    "@currentServer": {
-        "description": "Which server the user is currently using",
-        "placeholders": {
-            "current": {
-                "type": "String"
-            }
-        }
-    },
-    "useSponsorBlock": "استخدم حجب فقرة الراعي",
-    "@useSponsorBlock": {
-        "description": "label for sponsorblock checkbox"
+  "removeFromPlayList": "إزالة من القائمة التشغيل",
+  "@removeFromPlayList": {
+    "description": "Menu item description to show remove a video from a playlist"
+  },
+  "subscriptions": "اشتراكات",
+  "@subscriptions": {
+    "description": "User subscriptions"
+  },
+  "playlists": "قوائم التشغيل",
+  "@playlists": {
+    "description": "User playlists"
+  },
+  "noVideoInPlayList": "لا يوجد فيديو في القائمة التشغيل",
+  "@noVideoInPlayList": {
+    "description": "When no videos in the playlist"
+  },
+  "popular": "الاكثر شهرة",
+  "@popular": {
+    "description": "Popular videos title"
+  },
+  "trending": "الرائج",
+  "@trending": {
+    "description": "Trending videos title"
+  },
+  "irreversibleAction": "هذا العمل لا رجوع فيه",
+  "@irreversibleAction": {
+    "description": "Tell the user that the action cannot be undone"
+  },
+  "addPlayList": "إضافة إلى القائمة التشغيل",
+  "@addPlayList": {
+    "description": "Title for add playlist dialog"
+  },
+  "playListName": "إسم قائمة التشغيل",
+  "@playListName": {
+    "description": "Place holder for new playlist name text field"
+  },
+  "publicPlaylist": "عام",
+  "@publicPlaylist": {
+    "description": "Public playlist"
+  },
+  "cancel": "إلغاء",
+  "@cancel": {
+    "description": "Cancel button label"
+  },
+  "deletePlayListQ": "حذف القائمة التشغيل؟",
+  "@deletePlayListQ": {
+    "description": "Ask user to delete a playlist"
+  },
+  "playlistVisibility": "ظهور",
+  "@playlistVisibility": {
+    "description": "Dropdown label for playlist visibility"
+  },
+  "privatePlaylist": "خاص",
+  "@privatePlaylist": {
+    "description": "Private playlist"
+  },
+  "add": "إضافة",
+  "@add": {
+    "description": "Add button abel"
+  },
+  "latestVideos": "آخر الفيديوات",
+  "@latestVideos": {
+    "description": "Latest channel videos"
+  },
+  "subscribe": "اشتراك",
+  "@subscribe": {
+    "description": "Label for user to subscribe to a channel"
+  },
+  "unlistedPlaylist": "إزالة من القائمة",
+  "@unlistedPlaylist": {
+    "description": "Unlisted playlist"
+  },
+  "info": "معلومات",
+  "@info": {
+    "description": "Info label"
+  },
+  "videos": "فيديوهات",
+  "@videos": {
+    "description": "Videos label"
+  },
+  "streams": "بث",
+  "@streams": {
+    "description": "Streams label"
+  },
+  "subscribed": "مشترك",
+  "@subscribed": {
+    "description": "When the user is subscribed to a channel"
+  },
+  "nSubscribers": "{count, select, no{لا يوجد مشتركين} other{{count} مشتركين}}",
+  "@nSubscribers": {
+    "description": "number of subscribers",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
     }
+  },
+  "shareYoutubeLink": "مشاركة الرابط اليوتيوب",
+  "@shareYoutubeLink": {
+    "description": "asking user to share youtube link"
+  },
+  "channels": "قنوات",
+  "@channels": {
+    "description": "Channels label"
+  },
+  "ok": "موافق",
+  "@ok": {
+    "description": "Ok"
+  },
+  "noChannels": "لا توجد قنوات",
+  "@noChannels": {
+    "description": "when there are no channels to display"
+  },
+  "noPlaylists": "لا توجد قوائم تشغيل",
+  "@noPlaylists": {
+    "description": "when there are no playlists to display"
+  },
+  "couldntLoadVideo": "تعذر تحميل الفيديو",
+  "@couldntLoadVideo": {
+    "description": "Message to display when a video can't be loaded"
+  },
+  "comments": "التعليقات",
+  "@comments": {
+    "description": "Comments label"
+  },
+  "recommended": "موصى به",
+  "@recommended": {
+    "description": "Recommended label"
+  },
+  "couldntFetchVideos": "تعذر جلب مقاطع الفيديو. انقر للمحاولة مرة أخرى.",
+  "@couldntFetchVideos": {
+    "description": "Can't load bunch of videos, asking  user to try again"
+  },
+  "shareInvidiousLink": "مشاركة رابط إنفيديوس",
+  "@shareInvidiousLink": {
+    "description": "asking user to share invidious link"
+  },
+  "videoAddedToPlaylist": "تمت إضافة الفيديو إلى قائمة التشغيل",
+  "@videoAddedToPlaylist": {
+    "description": "Pop up message when a video was added to a playlist"
+  },
+  "errorAddingVideoToPlaylist": "حدث خطأ أثناء إضافة الفيديو إلى قائمة التشغيل",
+  "@errorAddingVideoToPlaylist": {
+    "description": "Error while adding video to playlist"
+  },
+  "wizardIntro": "حدد خادماً عاماً أو أضف خادمك الخاص. (يمكن تغييرها لاحقا في الإعدادات)",
+  "@wizardIntro": {
+    "description": "Welcome message on frst time use"
+  },
+  "startUsingClipious": "ابدأ باستخدام كِلبّيوس",
+  "@startUsingClipious": {
+    "description": "button label to start using the app"
+  },
+  "selectPlaylist": "اختر قائمة التشغيل",
+  "@selectPlaylist": {
+    "description": "Title when users wants to add a video to a playlist"
+  },
+  "createNewPlaylist": "إنشاء قائمة تشغيل جديدة",
+  "@createNewPlaylist": {
+    "description": "Button label to create a new playlist when the user wants to add a video to a playlist"
+  },
+  "nReplies": "{count, plural, =0{لا يوجد ردود} =1{رد واحد} other{{count} ردود}}",
+  "@nReplies": {
+    "description": "number of replies to a comment",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "loadMore": "تحميل المزيد",
+  "@loadMore": {
+    "description": "CTA to load more"
+  },
+  "topSorting": "أعلى",
+  "@topSorting": {
+    "description": "Content sorting: top"
+  },
+  "newSorting": "حديث",
+  "@newSorting": {
+    "description": "Content sorting: new"
+  },
+  "streamIsLive": "مباشر",
+  "@streamIsLive": {
+    "description": "Label when a video is a live stream"
+  },
+  "sponsorSkipped": "تم تخطي فقرة الراعي",
+  "@sponsorSkipped": {
+    "description": "When a sponsor segment is skipped thanks to sponsor block"
+  },
+  "selectBrowsingCountry": "حدد بلد التصفح",
+  "@selectBrowsingCountry": {
+    "description": "Select country for trending content"
+  },
+  "showOnStart": "اختر ما تريد إظهاره عند بدء تشغيل التطبيق",
+  "@showOnStart": {
+    "description": "Title of dialog asking which screen the users prefers to see"
+  },
+  "settings": "الإعدادات",
+  "@settings": {
+    "description": "Settings title"
+  },
+  "browsing": "التصفح",
+  "@browsing": {
+    "description": "video browsing preferences"
+  },
+  "country": "البلد",
+  "@country": {
+    "description": "Country label"
+  },
+  "whenAppStartsShow": "عند بدء تشغيل التطبيق ، أظهر …",
+  "@whenAppStartsShow": {
+    "description": "Setting title for selecting the screen to show on start"
+  },
+  "servers": "الخوادم",
+  "@servers": {
+    "description": "Server management settings category"
+  },
+  "manageServers": "إدارة الخوادم",
+  "@manageServers": {
+    "description": "Settings to manage servers"
+  },
+  "currentServer": "يتم استخدام {current} حالياً",
+  "@currentServer": {
+    "description": "Which server the user is currently using",
+    "placeholders": {
+      "current": {
+        "type": "String"
+      }
+    }
+  },
+  "useSponsorBlock": "استخدم حجب فقرة الراعي",
+  "@useSponsorBlock": {
+    "description": "label for sponsorblock checkbox"
+  },
+  "itemlistErrorGeneric": "تعذر جلب البيانات",
+  "@itemlistErrorGeneric": {
+    "description": "Error showing when the data can't be fetch"
+  },
+  "publicServers": "الخوادم العامة",
+  "@publicServers": {
+    "description": "Public servers label"
+  },
+  "logout": "تسجيل الخروج",
+  "@logout": {
+    "description": "CTA to logout of a server"
+  },
+  "username": "اسم المستخدم",
+  "@username": {
+    "description": "Username label for login to a server"
+  },
+  "useProxyDescription": "من خلال استخدام البروكسي لبث الفيديو من الخادم، يمكنك تجاوز الحظر الإقليمي أو حجب مزود خدمة الإنترنت ليوتيوب",
+  "@useProxyDescription": {
+    "description": "Description for the use proxy settings"
+  },
+  "subtitles": "الترجمات",
+  "@subtitles": {
+    "description": "Name of TV ui subtitles settings"
+  },
+  "playbackSpeed": "سرعة التشغيل",
+  "@playbackSpeed": {
+    "description": "Name of TV ui Playback speed"
+  },
+  "sponsorBlockCategoryUnpaidSelfPromoDescription": "مشابه لـ \"الراعي\" باستثناء الترويج الذاتي أو غير المدفوع الأجر. يتضمن ذلك أقسامًا عن البضائع أو التبرعات أو معلومات حول من تعاونوا معه ",
+  "@sponsorBlockCategoryUnpaidSelfPromoDescription": {
+    "description": "Sponsor block 'Unpaid/Self promotion' Category description"
+  },
+  "sponsorBlockCategoryIntro": "رسوم متحركة بينية/استهلالية",
+  "@sponsorBlockCategoryIntro": {
+    "description": "Sponsorblock 'Intro' Category"
+  },
+  "skipSslVerification": "تخطي التحقق من شهادة SSL",
+  "@skipSslVerification": {
+    "description": "Setting label to skip ssl certification verification"
+  },
+  "subtitleFontSizeDescription": "قم بتغيير حجم الترجمة إذا كانت صغيرة جدًا أو كبيرة جدًا على جهازك",
+  "@subtitleFontSizeDescription": {
+    "description": "Settings description for subtitle size"
+  },
+  "skipSslVerificationDescription": "لاستخدام شهادة SSL موقعة ذاتيًا، أو عند وجود مشكلات متعلقة بـ SSL مع الخادم الخاص بك.",
+  "@skipSslVerificationDescription": {
+    "description": "Setting description for the skip ssl certification verification"
+  },
+  "noHistory": "لا يوجد سجل مشاهدة، شاهد بعض مقاطع الفيديو وستظهر هنا",
+  "@noHistory": {
+    "description": "Message when the user visits the history tab but it's empty"
+  },
+  "history": "التاريخ",
+  "@history": {
+    "description": "User view history label"
+  },
+  "videoAddedToQueue": "تمت إضافة الفيديو إلى قائمة الانتظار",
+  "@videoAddedToQueue": {
+    "description": "Pop up message when a video was added at the end of the video queue"
+  },
+  "searchHistoryDescription": "إعدادات سجل البحث",
+  "@searchHistoryDescription": {
+    "description": "Description for search history settings"
+  },
+  "shorts": "السراويل القصيرة",
+  "@shorts": {
+    "description": "Youtube shorts"
+  },
+  "videoFilterTapToReveal": "انقر للكشف عن",
+  "@videoFilterTapToReveal": {
+    "description": "Label to tell user to tap to show a filtered video"
+  },
+  "videoFilterNoFilters": "لا توجد فلاتر فيديو، اضغط على زر \"+\" أدناه لبدء إضافة الفلاتر.",
+  "@videoFilterNoFilters": {
+    "description": "Label when there are no video filters"
+  },
+  "videoFilterTypeVideoLength": "طول الفيديو (بالثانية)",
+  "@videoFilterTypeVideoLength": {
+    "description": "Label for video filter video length"
+  },
+  "channel": "القناة",
+  "@channel": {
+    "description": "A single channel"
+  },
+  "rememberPlaybackSpeed": "تذكر سرعة التشغيل",
+  "@rememberPlaybackSpeed": {
+    "description": "Setting label for remembering playback speed"
+  },
+  "downloadsPlayAll": "تشغيل الكل",
+  "@downloadsPlayAll": {
+    "description": "Button to play all downloaded videos"
+  },
+  "videoDownloadAudioOnly": "الصوت فقط",
+  "@videoDownloadAudioOnly": {
+    "description": "Label for toggle to download audio only "
+  },
+  "clearHistoryQuestion": "‌مسح التاريخ ?",
+  "@clearHistoryQuestion": {},
+  "layoutEditorAddVideoSource": "إضافة مصدر فيديو",
+  "@layoutEditorAddVideoSource": {
+    "description": "Label for button to allow user to add more video sources to the home screen"
+  },
+  "library": "‌المكتبة",
+  "@library": {
+    "description": "Name for user library"
+  },
+  "navigationBarLabelAlwaysShowing": "تظهر التسمية دائمًا",
+  "@navigationBarLabelAlwaysShowing": {
+    "description": "Label always showing option for navigation bar"
+  },
+  "distractionFreeModeDescription": "تعطيل تعليقات وتوصيات الفيديو",
+  "@distractionFreeModeDescription": {
+    "description": "Description for distraction free mode"
+  },
+  "videoFilterApplyDateToFilter": "تصفية مقاطع الفيديو في أوقات محددة",
+  "@videoFilterApplyDateToFilter": {
+    "description": "Label for switch to allow user to customize video filter and set days of week and time to them"
+  },
+  "otherNotifications": "مصادر الإشعارات الأخرى (أيقونات الجرس)",
+  "@otherNotifications": {
+    "description": "Title for settings section in the notification settings"
+  },
+  "deletePlaylistNotificationTitle": "إشعار حذف قائمة التشغيل؟",
+  "@deletePlaylistNotificationTitle": {
+    "description": "Title for dialog to confirm whether to delete playlist notifications"
+  },
+  "foregroundServiceNotificationTitle": "المراقبة بالفيديو",
+  "@foregroundServiceNotificationTitle": {
+    "description": "Title for the foreground service running notification when the user wants to receive notifications"
+  },
+  "deArrowWarning": "يمكن أن يؤدي تمكين DeArrow إلى تقليل سرعة تصفح التطبيق بشكل كبير حيث يلزم وجود طلبات http إضافية لكل مقطع فيديو واحد",
+  "@deArrowWarning": {
+    "description": "Warning message when the user enables DeArrow"
+  },
+  "redirectInvidiousLink": "مشاركة رابط إعادة توجيه إنفيديوس",
+  "@redirectInvidiousLink": {
+    "description": "asking user to share redirecting invidious link"
+  },
+  "sponsorBlockCategoryFiller": "حشو اللمز/النكات",
+  "@sponsorBlockCategoryFiller": {
+    "description": "Sponsorblock 'Filler' Category"
+  },
+  "audio": "الصوت",
+  "@audio": {
+    "description": "Name TV ui audio settings"
+  },
+  "subtitleFontSize": "حجم خط الترجمة",
+  "@subtitleFontSize": {
+    "description": "Settings label for the size of the subtitles"
+  },
+  "autoplayVideoOnLoad": "تشغيل الفيديو تلقائياً عند التحميل",
+  "@autoplayVideoOnLoad": {
+    "description": "Label for settings to enable autoplay when a video loads"
+  },
+  "searchSortRating": "التقييم",
+  "@searchSortRating": {
+    "description": "Sort search by rating"
+  },
+  "clearSearchHistory": "مسح سجل البحث",
+  "@clearSearchHistory": {
+    "description": "Settings label for clearing search history"
+  },
+  "searchSortUploadDate": "تاريخ التحميل",
+  "@searchSortUploadDate": {
+    "description": "Sort search by upload date"
+  },
+  "appLogsDescription": "الحصول على سجلات لما يحدث في التطبيق، يمكن أن تكون مفيدة للإبلاغ عن المشكلات",
+  "@appLogsDescription": {
+    "description": "Description of the app log settings"
+  },
+  "copyToClipBoard": "نسخ إلى الحافظة",
+  "@copyToClipBoard": {
+    "description": "Text to copy something to clipboard"
+  },
+  "enabled": "ممكّنة",
+  "@enabled": {
+    "description": "Text to show something is enabled"
+  },
+  "seeking": "البحث عن",
+  "@seeking": {
+    "description": "category for settings related to seeking in a video"
+  },
+  "skipStepDescription": "ثوانٍ للتخطي في الإجراءات الأمامية/الخلفية",
+  "@skipStepDescription": {
+    "description": "Title for the settings to set the skipping step"
+  },
+  "exponentialSkip": "التخطي الأسي للأمام/للخلف",
+  "@exponentialSkip": {
+    "description": "Title for the setting to enable the exponential skipping"
+  },
+  "playNext": "اللعب بعد ذلك",
+  "@playNext": {
+    "description": "Label to play the video after the current one."
+  },
+  "addToPlaylist": "إضافة إلى قائمة التشغيل",
+  "@addToPlaylist": {
+    "description": "Label to add a video to a playlist"
+  },
+  "playNextAddedToQueue": "سيتم تشغيل الفيديو التالي",
+  "@playNextAddedToQueue": {
+    "description": "Pop up message to confirm that the video has been properly set to play next"
+  },
+  "addRecommendedToQueue": "يوصى بالتشغيل التلقائي التالي",
+  "@addRecommendedToQueue": {
+    "description": "Switch when playing a video to automatically add the recommended videos to the video queue"
+  },
+  "sponsorBlockCategoryMusicOffTopicDescription": "للاستخدام في الفيديوهات الموسيقية فقط. يجب استخدام هذا فقط لمقاطع الفيديو الموسيقية التي لا تغطيها بالفعل فئة أخرى.",
+  "@sponsorBlockCategoryMusicOffTopicDescription": {
+    "description": "Only for use in music videos. This only should be used for sections of music videos that aren't already covered by another category."
+  },
+  "sponsorBlockCategoryInteraction": "تذكير التفاعل (اشتراك)",
+  "@sponsorBlockCategoryInteraction": {
+    "description": "Sponsor block 'Interaction' Category"
+  },
+  "pressDownToShowSettings": "اضغط لأسفل لإظهار الإعدادات",
+  "@pressDownToShowSettings": {
+    "description": "Instruction on how to show video settings when playing a video on TV"
+  },
+  "videoFilterAllChannels": "جميع القنوات",
+  "@videoFilterAllChannels": {
+    "description": "Title for the sections that applies to all channels"
+  },
+  "addVideoFilter": "إنشاء فلتر",
+  "@addVideoFilter": {
+    "description": "Title when creating a new filter"
+  },
+  "videoFiltersSettingTileDescriptions": "تحديد قواعد لتصفية مقاطع الفيديو",
+  "@videoFiltersSettingTileDescriptions": {
+    "description": "Description for the main settings page"
+  },
+  "editVideoFilter": "تحرير الفلتر",
+  "@editVideoFilter": {
+    "description": "Title when editting a filter"
+  },
+  "videoFilterOperation": "العملية",
+  "@videoFilterOperation": {
+    "description": "Label for filter operation"
+  },
+  "videoFilterValue": "القيمة",
+  "@videoFilterValue": {
+    "description": "Label for filter value"
+  },
+  "save": "الحفظ",
+  "@save": {
+    "description": "Text for save action"
+  },
+  "videoFilterType": "النوع",
+  "@videoFilterType": {
+    "description": "Label for filter type"
+  },
+  "videoFilterEditDescription": "حدد قناة اختيارية ونوع مرشح وعملية وقيمة لتصفية مقاطع الفيديو من القوائم. مثال، اكتب: اسم الفيديو، العملية: يحتوي على، القيمة: اختبار، ستستثني جميع مقاطع الفيديو التي تحتوي على كلمة \"اختبار\" في اسمها.",
+  "@videoFilterEditDescription": {
+    "description": "Descriptive test for video filter set up"
+  },
+  "optional": "اختياري",
+  "@optional": {
+    "description": "Optional label"
+  },
+  "videoFilterHideLabel": "إخفاء",
+  "@videoFilterHideLabel": {
+    "description": "Label to hide videos"
+  },
+  "videoFilterFilterLabel": "التعتيم",
+  "@videoFilterFilterLabel": {
+    "description": "Label to filter videos"
+  },
+  "videoFilterOperationContains": "يحتوي على",
+  "@videoFilterOperationContains": {
+    "description": "Label for video filter operation Contains"
+  },
+  "videoFilterOperationNotContain": "لا يحتوي على",
+  "@videoFilterOperationNotContain": {
+    "description": "Label for video filter operation Does not contain"
+  },
+  "videoFilterOperationLowerThan": "‌أقل من",
+  "@videoFilterOperationLowerThan": {
+    "description": "Label for video filter operation Lower than"
+  },
+  "videoFilterOperationHigherThan": "أعلى من",
+  "@videoFilterOperationHigherThan": {
+    "description": "Label for video filter operation Higher than"
+  },
+  "videoFilterHideAllFromChannel": "تصفية جميع مقاطع الفيديو من القناة",
+  "@videoFilterHideAllFromChannel": {
+    "description": "Label for video filter switch to allow to hide all videos from a channel"
+  },
+  "lockFullScreenToLandscape": "قفل اتجاه ملء الشاشة إلى نسبة العرض إلى الارتفاع للفيديو",
+  "@lockFullScreenToLandscape": {
+    "description": "Title to force full screen to landscape"
+  },
+  "downloads": "التنزيلات",
+  "@downloads": {
+    "description": "Downloads"
+  },
+  "videoDownloadStarted": "بدء تنزيل الفيديو",
+  "@videoDownloadStarted": {
+    "description": "Message when a video starts being downloaded"
+  },
+  "subtitlesBackground": "خلفية الترجمة",
+  "@subtitlesBackground": {
+    "description": "Title for settings to set black background  for subtitles"
+  },
+  "subtitlesBackgroundDescription": "يضيف خلفية سوداء إلى الترجمة لجعلها أكثر سهولة في القراءة",
+  "@subtitlesBackgroundDescription": {
+    "description": "Description for settings to set black background  for subtitles"
+  },
+  "copySettingsAsJson": "نسخ الإعدادات بصيغة JSON إلى الحافظة",
+  "@copySettingsAsJson": {
+    "description": "title for settings sections to allow users to copy their settings as json to make debugging easier"
+  },
+  "sponsorBlockDescription": "تخطي مقاطع الراعي المقدمة من المجتمع",
+  "@sponsorBlockDescription": {
+    "description": "Sponsorblock setting description"
+  },
+  "about": "نبذة عن",
+  "@about": {
+    "description": "About"
+  },
+  "name": "الاسم",
+  "@name": {
+    "description": "NAme label"
+  },
+  "package": "الحزمة",
+  "@package": {
+    "description": "package label"
+  },
+  "version": "الإصدار",
+  "@version": {
+    "description": "version label"
+  },
+  "appearance": "المظهر",
+  "@appearance": {
+    "description": "Settings category title"
+  },
+  "videoQueue": "قائمة انتظار الفيديو",
+  "@videoQueue": {
+    "description": "Label for button to display the video queue"
+  },
+  "sponsorBlockCategorySponsor": "الراعي",
+  "@sponsorBlockCategorySponsor": {
+    "description": "Sponsor block 'Sponsor' Category"
+  },
+  "error": "خطأ",
+  "@error": {},
+  "themeLight": "خفيف",
+  "@themeLight": {
+    "description": "Light theme"
+  },
+  "themeDark": "داكن",
+  "@themeDark": {
+    "description": "Dark theme"
+  },
+  "themeBrightness": "الموضوع",
+  "@themeBrightness": {
+    "description": "Ask the user to user dark / light / system theme"
+  },
+  "build": "البناء",
+  "@build": {
+    "description": "build label"
+  },
+  "addServer": "إضافة خادم",
+  "@addServer": {
+    "description": "Add server label"
+  },
+  "invalidInvidiousServer": "خادم غير صالح غير صالح",
+  "@invalidInvidiousServer": {
+    "description": "Error when the user tries to add a server that is not a proper or reachable invidious server"
+  },
+  "notLoggedIn": "لم يتم تسجيل الدخول",
+  "@notLoggedIn": {
+    "description": "Label when the user is not logged in to the server"
+  },
+  "addServerHelpText": "استخدم زر + لإضافة خوادمك الخاصة أو انقر على خادم عام وأضفه.",
+  "@addServerHelpText": {
+    "description": "label for when the user hasn't chosen a server yet"
+  },
+  "publicServersError": "تعذر جلب قائمة الخوادم العامة. انقر لإعادة المحاولة.",
+  "@publicServersError": {
+    "description": "Error message when trying to get public servers but it failed"
+  },
+  "secondsShortForm": "ثوانٍ",
+  "@secondsShortForm": {
+    "description": "Short form for the word seconds"
+  },
+  "authentication": "المصادقة",
+  "@authentication": {
+    "description": "Label for server settings related to authentications"
+  },
+  "cookieLogin": "تسجيل الدخول باستخدام ملف تعريف الارتباط",
+  "@cookieLogin": {
+    "description": "Text to login to a server using the cookie jar method"
+  },
+  "cookieLoginDescription": "استخدم هذه الطريقة إذا كنت تواجه مشكلات في مصادقة الرمز المميز",
+  "@cookieLoginDescription": {
+    "description": "Cookie log in description"
+  },
+  "tokenLogin": "تسجيل الدخول باستخدام الرمز المميز",
+  "@tokenLogin": {
+    "description": "Textto login to a server using the recommended way"
+  },
+  "tokenLoginDescription": "الطريقة الموصى بها لتسجيل الدخول",
+  "@tokenLoginDescription": {
+    "description": "Recommended way to log in"
+  },
+  "malformedStatsEndpointDescription": "لم تستجب نقطة نهاية إحصائيات الخادم حمولة متوقعة، يجب أن يكون المفتاح \"software.name\" يساوي \"غير صالح\".\nالاستجابة من الخادم:",
+  "@malformedStatsEndpointDescription": {
+    "description": "Description of the possible issue for an invalid stats endpoints"
+  },
+  "serverIsNotReachable": "لا يمكن الوصول إلى الخادم",
+  "@serverIsNotReachable": {
+    "description": "Title for dialog when adding a server that is not reachable"
+  },
+  "sponsorBlockCategoryUnpaidSelfPromo": "ترقية ذاتية/بدون أجر",
+  "@sponsorBlockCategoryUnpaidSelfPromo": {
+    "description": "Sponsor block 'Unpaid/Self promotion' Category"
+  },
+  "sponsorBlockCategorySponsorDescription": "الترويج المدفوع والإحالات المدفوعة والإعلانات المباشرة. ليس للترويج الذاتي أو الصراخ المجاني للقضايا/المبدعين/المواقع الإلكترونية/المنتجات التي يحبونها.",
+  "@sponsorBlockCategorySponsorDescription": {
+    "description": "Sponsor block 'Sponsor' Category description"
+  },
+  "sponsorBlockCategoryIntroDescription": "فاصل بدون محتوى فعلي. يمكن أن تكون وقفة أو إطار ثابت أو رسوم متحركة متكررة. لا ينبغي استخدام هذا في الانتقالات التي تحتوي على معلومات.",
+  "@sponsorBlockCategoryIntroDescription": {
+    "description": "Sponsorblock 'Intro' Category description"
+  },
+  "sponsorBlockCategoryOutro": "بطاقات النهاية/الرصيد",
+  "@sponsorBlockCategoryOutro": {
+    "description": "Outro block 'Outro' Category"
+  },
+  "sponsorBlockCategoryPreviewDescription": "مجموعة من المقاطع التي تظهر ما سيأتي في هذا الفيديو أو مقاطع الفيديو الأخرى في سلسلة حيث تتكرر جميع المعلومات في وقت لاحق في الفيديو.",
+  "@sponsorBlockCategoryPreviewDescription": {
+    "description": "Sponsorblock 'Preview' Category description"
+  },
+  "sponsorBlockCategoryFillerDescription": "المشاهد العرضية المضافة فقط للحشو أو الفكاهة غير المطلوبة لفهم المحتوى الرئيسي للفيديو. يجب ألا يتضمن ذلك المقاطع التي توفر السياق أو تفاصيل الخلفية. هذه فئة عدوانية للغاية مخصصة عندما لا تكون في مزاج \"المرح\".",
+  "@sponsorBlockCategoryFillerDescription": {
+    "description": "Sponsorblock 'Filler' Category description"
+  },
+  "followSystem": "اتبع النظام",
+  "@followSystem": {
+    "description": "Follow system label"
+  },
+  "returnYoutubeDislikeDescription": "عرض تقديرات عدم الإعجاب بالفيديو باستخدام واجهة برمجة التطبيقات (API) التي يوفرها موقع returnyoutubedislike.com",
+  "@returnYoutubeDislikeDescription": {
+    "description": "ReturnYoutubeDislike setting description"
+  },
+  "searchUploadDate": "تاريخ التحميل",
+  "@searchUploadDate": {
+    "description": "Filter search result by upload date"
+  },
+  "searchDuration": "المدة",
+  "@searchDuration": {
+    "description": "Filter search result by duration"
+  },
+  "searchSortViewCount": "عرض العدد",
+  "@searchSortViewCount": {
+    "description": "Sort search by view count"
+  },
+  "appLogs": "سجلات التطبيق",
+  "@appLogs": {
+    "description": "Title for settings that leads to application logs"
+  },
+  "rememberSubtitleLanguage": "تذكر لغة الترجمة",
+  "@rememberSubtitleLanguage": {
+    "description": "Settings label for remembering subtitle language"
+  },
+  "videoFiltersExplanation": "إخفاء مقاطع الفيديو أو التعتيم عليها من جميع موجزات الفيديو في التطبيق بناءً على الفلاتر المحددة أدناه. يسمح لك ذلك على سبيل المثال بإخفاء المفسدين الرياضيين أو إخفاء مقاطع الفيديو القصيرة من قناة معينة.",
+  "@videoFiltersExplanation": {
+    "description": "Description on how filter work"
+  },
+  "videoFiltered": "تمت تصفية الفيديو للسبب (الأسباب) التالية:",
+  "@videoFiltered": {
+    "description": "Label shown on video list when it is filtered out"
+  },
+  "videoFilterHide": "إخفاء مقاطع الفيديو التي تمت تصفيتها",
+  "@videoFilterHide": {
+    "description": "Label for settings to hide filtered videos"
+  },
+  "videoFilterWholeChannel": "{أخفي أو فلتر} جميع مقاطع الفيديو من القناة",
+  "@videoFilterWholeChannel": {
+    "description": "Label for whole channel filtering",
+    "placeholders": {
+      "hideOrFilter": {
+        "type": "String",
+        "example": "Hide"
+      }
+    }
+  },
+  "rememberSubtitleLanguageDescription": "ضبط الترجمة تلقائياً على اللغة الأخيرة المحددة تلقائياً، إذا كانت متوفرة",
+  "@rememberSubtitleLanguageDescription": {
+    "description": "Settings description for remembering subtitle language"
+  },
+  "lockFullScreenToLandscapeDescription": "يقفل اتجاه ملء الشاشة بناءً على تنسيق الفيديو، أفقي للفيديو العريض وعمودي لمقاطع الفيديو العمودية",
+  "@lockFullScreenToLandscapeDescription": {
+    "description": "Setting description for forcing video to landscape when in full screen"
+  },
+  "fillFullscreenDescription": "يضبط الفيديو لملء الشاشة بالكامل في الوضع الأفقي",
+  "@fillFullscreenDescription": {
+    "description": "Setting description for filling video to screen in landscape"
+  },
+  "rememberPlaybackSpeedDescription": "ضبط سرعة التشغيل تلقائياً على آخر سرعة تم تحديدها",
+  "@rememberPlaybackSpeedDescription": {
+    "description": "Settings description for remembering playback speed"
+  },
+  "videoAlreadyDownloaded": "تم تنزيل الفيديو بالفعل",
+  "@videoAlreadyDownloaded": {
+    "description": "Message when a user tries to download a video he already has"
+  },
+  "noDownloadedVideos": "لا توجد مقاطع فيديو تم تنزيلها، تصفح أو اضغط مطولاً على مقطع فيديو في قائمة أو اضغط على زر التنزيل على شاشة الفيديو للتنزيل",
+  "@noDownloadedVideos": {
+    "description": "Message showing when the user goes to the download screen but there are no offline videos."
+  },
+  "videoFailedDownloadRetry": "فشل التنزيل، انقر لإعادة المحاولة",
+  "@videoFailedDownloadRetry": {
+    "description": "Shown on download manager when a download fails and prompt the user to retry"
+  },
+  "subscriptionNotificationDescription": "احصل على إشعارات بمقاطع الفيديو الجديدة من موجز اشتراكك إذا قمت بتسجيل الدخول إلى مثيلك الحالي",
+  "@subscriptionNotificationDescription": {
+    "description": "Description for subscription notifications"
+  },
+  "manageSubscriptions": "إدارة الاشتراكات",
+  "@manageSubscriptions": {
+    "description": "Title of manage subscriptions page"
+  },
+  "unSubscribeQuestion": "إلغاء الاشتراك؟",
+  "@unSubscribeQuestion": {
+    "description": "Title for dialog if a user wants to unsubscribe in the subscribtion management screen"
+  },
+  "clearHistoryQuestionExplanation": "سيؤدي هذا إلى مسح سجل المشاهدة الخاص بك لحسابك على مثيل Invidious الذي تستخدمه. لا يمكن التراجع عن ذلك.",
+  "@clearHistoryQuestionExplanation": {
+    "description": "Message for dialog before clearing full viewing history"
+  },
+  "youCanSubscribeAgainLater": "يمكنك الاشتراك في هذه القناة مرة أخرى لاحقاً",
+  "@youCanSubscribeAgainLater": {
+    "description": "Text for the unscubscribe confirmation dialog"
+  },
+  "noSubscriptions": "لا توجد اشتراكات، تصفح مقاطع الفيديو واشترك في أي قناة تريدها.",
+  "@noSubscriptions": {
+    "description": "Message when the user has no subs"
+  },
+  "layoutEditorExplanation": "يمكنك تحديد ما ستعرضه على شاشتك الرئيسية، يمكنك الحصول على ما يصل إلى عرضين صغيرين مع تمرير أفقي ومصدر واحد كبير.",
+  "@layoutEditorExplanation": {
+    "description": "text to explain the home layout editor"
+  },
+  "home": "‌الصفحة الرئيسية",
+  "@home": {
+    "description": "Label for Home browsing tab"
+  },
+  "customizeAppLayoutExplanation": "حدد الأقسام التي تريد أن تظهر في شريط التنقل الرئيسي للتطبيق. انقر على أيقونة الصفحة الرئيسية لتحديد الشاشة التي تظهر عند بدء تشغيل التطبيق. يمكنك إعادة ترتيب الأقسام عن طريق سحبها.",
+  "@customizeAppLayoutExplanation": {
+    "description": ""
+  },
+  "navigationBarStyle": "نمط شريط التنقل",
+  "@navigationBarStyle": {
+    "description": "Label for settings on customizing navigation bar style"
+  },
+  "videoFilterDayOfWeekDescription": "يمكنك اختيار أيام الأسبوع والوقت الذي تنطبق عليه الفلاتر بشكل انتقائي، على سبيل المثال، تجنب إفساد الأحداث الرياضية.",
+  "@videoFilterDayOfWeekDescription": {
+    "description": ""
+  },
+  "from": "من",
+  "@from": {
+    "description": "From word (as in 'From xx To xx')"
+  },
+  "subscriptionNotification": "إشعارات الاشتراك",
+  "@subscriptionNotification": {
+    "description": "Title for subscriptions notifications"
+  },
+  "askForDisableBatteryOptimizationContent": "من أجل إرسال الإشعارات يحتاج Clipious إلى تشغيل خدمة في الخلفية. ولكي تعمل بسلاسة، يجب أن يتم منح Clipious استخدامًا غير مقيّد للبطارية دون قيود، وسيؤدي النقر على موافق إلى فتح إعدادات تحسين البطارية.",
+  "@askForDisableBatteryOptimizationContent": {
+    "description": "Content for the dialog asking the user to turn off disabling battery optimization when turning on notifications"
+  },
+  "askToEnableBackgroundServiceContent": "للحصول على إشعارات، يجب تمكين إشعارات Clipious، اضغط على موافق لتمكينها.",
+  "@askToEnableBackgroundServiceContent": {
+    "description": "If the users tries to turn on notifications for a channel but hasn't enable notifications in the app we need to turn it on for them"
+  },
+  "copySettingsAsJsonDescription": "انسخ الإعدادات بصيغة JSON للمساعدة في تصحيح الأخطاء إذا واجهت مشكلة في التطبيق وقررت رفع مشكلة",
+  "@copySettingsAsJsonDescription": {
+    "description": ""
+  },
+  "skipStep": "تخطي خطوة للأمام/للخلف",
+  "@skipStep": {
+    "description": "Title for the settings to set the skipping step"
+  },
+  "exponentialSkipDescription": "كلما تخطيت إلى الأمام، كلما كانت الخطوة أكبر.",
+  "@exponentialSkipDescription": {
+    "description": "Title for the setting to enable the exponential skipping"
+  },
+  "fullscreenOnLandscapeDescription": "التبديل إلى وضع ملء الشاشة عند تدوير الجهاز إلى الوضع الأفقي",
+  "@fullscreenOnLandscapeDescription": {
+    "description": "Setting to enable full screen on landscape orientation"
+  },
+  "password": "كلمة المرور",
+  "@password": {
+    "description": "Password label for login to a server"
+  },
+  "wrongUsernamePassword": "اسم مستخدم أو كلمة مرور خاطئة",
+  "@wrongUsernamePassword": {
+    "description": "Error message when authentication fails"
+  },
+  "share": "شارك",
+  "@share": {
+    "description": "asking user if to share"
+  },
+  "shareLinkWithTimestamp": "إضافة الطابع الزمني",
+  "@shareLinkWithTimestamp": {
+    "description": "asking user to share link along with timestamp"
+  },
+  "itemListErrorInvalidScope": "ليس لديك الإذن لرؤية هذا، إذا قمت بتسجيل الدخول باستخدام طريقة الرمز المميز، فحاول تسجيل الخروج والدخول مرة أخرى",
+  "@itemListErrorInvalidScope": {
+    "description": "Error when the user doesn't have the proper scope to its current token"
+  },
+  "useThisServer": "استخدم هذا الخادم",
+  "@useThisServer": {
+    "description": "Use this server label"
+  },
+  "logIn": "تسجيل الدخول",
+  "@logIn": {
+    "description": "CTA to log in to server"
+  },
+  "delete": "حذف",
+  "@delete": {
+    "description": "Delete label"
+  },
+  "yourServers": "خوادمك",
+  "@yourServers": {
+    "description": "Your servers label"
+  },
+  "loggedIn": "تسجيل الدخول",
+  "@loggedIn": {
+    "description": "Label to tell the user that he is logged in to the server"
+  },
+  "loadingPublicServer": "تحميل الخوادم العامة",
+  "@loadingPublicServer": {
+    "description": "Message telling users the app is loading the list of public servers"
+  },
+  "tapToAddServer": "انقر لإضافة خادم إلى قائمتك",
+  "@tapToAddServer": {
+    "description": "public server description"
+  },
+  "useDynamicTheme": "–ألوان ديناميكية",
+  "@useDynamicTheme": {
+    "description": ""
+  },
+  "useDynamicThemeDescription": "استخدم مواد أنت ألوان (متوفر فقط على أندرويد 12+)",
+  "@useDynamicThemeDescription": {
+    "description": ""
+  },
+  "useDash": "استخدم DASH",
+  "@useDash": {
+    "description": "Label on video options if a user wants to switch to dash urls instead of the regular quality selection"
+  },
+  "useDashDescription": "قد يكون البث التكيفي لـ DASH إشكاليًا في بعض الأحيان، ويمكن أن يخنقه Youtube.",
+  "@useDashDescription": {
+    "description": "Description for dash in the settings screen"
+  },
+  "videoPlayer": "مشغل الفيديو",
+  "@videoPlayer": {
+    "description": "Title for video player related options"
+  },
+  "videoListed": "عام",
+  "@videoListed": {
+    "description": "Status of a publicly available video"
+  },
+  "videoUnlisted": "غير مدرج",
+  "@videoUnlisted": {
+    "description": "Status of a video that is only accessible by link"
+  },
+  "videoIsFamilyFriendly": "مناسبة للعائلات",
+  "@videoIsFamilyFriendly": {
+    "description": "Displayed only when a video is family friendly"
+  },
+  "tapToManage": "انقر للإدارة",
+  "@tapToManage": {
+    "description": "Text shown below a server in the 'Your servers' list"
+  },
+  "addToQueueList": "إضافة إلى قائمة الانتظار",
+  "@addToQueueList": {
+    "description": "Label on button to add a video to the queue list"
+  },
+  "sponsorBlockSettingsQuickDescription": "حدد نوع المقاطع المراد تخطيها",
+  "@sponsorBlockSettingsQuickDescription": {
+    "description": "Small description of what the sponsor block settings do"
+  },
+  "sponsorBlockCategoryInteractionDescription": "عندما يكون هناك تذكير قصير للإعجاب أو الاشتراك أو المتابعة في منتصف المحتوى. إذا كان طويلاً أو عن شيء محدد، فيجب أن يكون تحت الترويج الذاتي بدلاً من ذلك.",
+  "@sponsorBlockCategoryInteractionDescription": {
+    "description": "Sponsor block 'Interaction' Category description"
+  },
+  "blackBackground": "خلفية سوداء",
+  "@blackBackground": {
+    "description": "Settings name for black background"
+  },
+  "blackBackgroundDescription": "للسمات الداكنة على شاشة OLED",
+  "@blackBackgroundDescription": {
+    "description": "Description for dark background setting"
+  },
+  "search": "بحث",
+  "@search": {
+    "description": "search title"
+  },
+  "requiresRestart": "يتطلب إعادة تشغيل التطبيق",
+  "@requiresRestart": {
+    "description": "Requires app restart label"
+  },
+  "appLanguage": "لغة التطبيق",
+  "@appLanguage": {
+    "description": "Select app language"
+  },
+  "autoplayVideoOnLoadDescription": "بدء تشغيل الفيديو تلقائياً بعد تحميله",
+  "@autoplayVideoOnLoadDescription": {
+    "description": "Description for the autoplay video on load setting"
+  },
+  "searchHistory": "تاريخ البحث",
+  "@searchHistory": {
+    "description": "Settings label for search history"
+  },
+  "enableSearchHistory": "تمكين سجل البحث",
+  "@enableSearchHistory": {
+    "description": "Settings label for enabling search history"
+  },
+  "searchHistoryLimit": "حد محفوظات البحث",
+  "@searchHistoryLimit": {
+    "description": "Settings label for search history limit"
+  },
+  "searchHistoryLimitDescription": "تعيين عدد عمليات البحث السابقة التي ستظهر في الاقتراحات",
+  "@searchHistoryLimitDescription": {
+    "description": "Settings label for search history limit description"
+  },
+  "searchSortBy": "فرز حسب",
+  "@searchSortBy": {
+    "description": "Search sorting option"
+  },
+  "sponsorBlockCategoryOutroDescription": "الاعتمادات أو عند ظهور بطاقات نهاية يوتيوب. ليس للاستنتاجات مع المعلومات.",
+  "@sponsorBlockCategoryOutroDescription": {
+    "description": "Outro block 'Outro' Category description"
+  },
+  "sponsorBlockCategoryPreview": "المعاينة/الخلاصة",
+  "@sponsorBlockCategoryPreview": {
+    "description": "Sponsorblock 'Preview' Category"
+  },
+  "sponsorBlockCategoryMusicOffTopic": "الموسيقى القسم غير الموسيقي",
+  "@sponsorBlockCategoryMusicOffTopic": {
+    "description": "Sponsorblock 'MusicOffTopic' Category"
+  },
+  "useProxy": "فيديوهات التوكيل",
+  "@useProxy": {
+    "description": "label for settings switch to proxy videos from server"
+  },
+  "quality": "الجودة",
+  "@quality": {
+    "description": "Name of TV ui video settings"
+  },
+  "videoFilterEndTime": "وقت الانتهاء",
+  "@videoFilterEndTime": {
+    "description": "Title for filter end time"
+  },
+  "searchUploadDateAny": "أي تاريخ",
+  "@searchUploadDateAny": {
+    "description": "Do not filter search result by upload date"
+  },
+  "searchUploadDateHour": "آخر ساعة",
+  "@searchUploadDateHour": {
+    "description": "Search for uploaded in last hour"
+  },
+  "searchUploadDateMonth": "هذا الشهر",
+  "@searchUploadDateMonth": {
+    "description": "Search for uploaded this month"
+  },
+  "searchUploadDateYear": "هذا العام",
+  "@searchUploadDateYear": {
+    "description": "Search for uploaded this year"
+  },
+  "searchDurationAny": "أي مدة",
+  "@searchDurationAny": {
+    "description": "Do not filter search result by duration"
+  },
+  "searchDurationShort": "قصير (أقل من 4 دقائق)",
+  "@searchDurationShort": {
+    "description": "Search for short videos only"
+  },
+  "searchDurationLong": "طويلة (أكثر من 20 دقيقة)",
+  "@searchDurationLong": {
+    "description": "Search for long videos only"
+  },
+  "searchDurationMedium": "متوسطة (4-20 دقيقة)",
+  "@searchDurationMedium": {
+    "description": "Search for medium videos only"
+  },
+  "searchSortRelevance": "الصلة بالموضوع",
+  "@searchSortRelevance": {
+    "description": "Sort search by relevance"
+  },
+  "logsCopied": "السجلات المنسوخة إلى الحافظة",
+  "@logsCopied": {
+    "description": "Message to tell user that logs have been copied to the clipboard"
+  },
+  "videoFilters": "فلاتر الفيديو",
+  "@videoFilters": {
+    "description": "Title for video filter settings"
+  },
+  "videoFilterHideDescription": "بشكل افتراضي لا يتم إخفاء مقاطع الفيديو التي تمت تصفيتها ولكن يتم عرضها على أنها مبهمة مع سبب (أسباب) تصفيتها. يزيل هذا الإعداد مقاطع الفيديو التي تمت تصفيتها من القوائم.",
+  "@videoFilterHideDescription": {
+    "description": ""
+  },
+  "videoFilterTypeVideoTitle": "عنوان الفيديو",
+  "@videoFilterTypeVideoTitle": {
+    "description": "Label for video filter video title"
+  },
+  "videoFilterTypeChannelName": "اسم القناة",
+  "@videoFilterTypeChannelName": {
+    "description": "Label for video filter channel name"
+  },
+  "fillFullscreen": "تكبير الفيديو لتناسب الشاشة",
+  "@fillFullscreen": {
+    "description": "Title to maximize video to fit screen"
+  },
+  "download": "تنزيل",
+  "@download": {
+    "description": "A single download or CTA for downloading a video"
+  },
+  "homeLayoutEditor": "تحرير تخطيط الصفحة الرئيسية",
+  "@homeLayoutEditor": {
+    "description": "Title of layout editor screen"
+  },
+  "customizeAppLayout": "تخصيص أقسام التطبيق",
+  "@customizeAppLayout": {
+    "description": "Settings label for the settings to allow the user to set up the app sections themselves"
+  },
+  "navigationBarLabelShowOnSelect": "التسمية المعروضة على العنصر المحدد",
+  "@navigationBarLabelShowOnSelect": {
+    "description": "Label only showing when selected option for navigation bar"
+  },
+  "navigationBarLabelNeverShow": "عدم إظهار الملصق",
+  "@navigationBarLabelNeverShow": {
+    "description": "Never show label option for navigation bar"
+  },
+  "distractionFreeMode": "وضع عدم التشتيت",
+  "@distractionFreeMode": {
+    "description": "title for distraction free mode settings"
+  },
+  "videoFilterDayOfWeek": "حدد أيام لتطبيق الفلاتر",
+  "@videoFilterDayOfWeek": {
+    "description": "Title for day selection for the filter"
+  },
+  "videoFilterStartTime": "وقت البدء",
+  "@videoFilterStartTime": {
+    "description": "Title for filter start time"
+  },
+  "videoFilterAppliedOn": "تطبق على {الأيام المحددة}",
+  "@videoFilterAppliedOn": {
+    "description": "Readable text on when the filter should apply",
+    "placeholders": {
+      "selectedDays": {
+        "type": "String",
+        "example": "Monday, Wednesday, Friday"
+      }
+    }
+  },
+  "to": "إلى",
+  "@to": {
+    "description": "To word as in 'From xx To xx')"
+  },
+  "videoFilterTimeOfDayFromTo": "من {من} إلى {إلى}",
+  "@videoFilterTimeOfDayFromTo": {
+    "description": "Time of day range",
+    "placeholders": {
+      "from": {
+        "type": "String",
+        "example": "3:00 AM"
+      },
+      "to": {
+        "type": "String",
+        "example": "5:00 PM"
+      }
+    }
+  },
+  "notifications": "الإشعارات",
+  "@notifications": {
+    "description": "Notification settings title"
+  },
+  "notificationsDescription": "تمكين ومراجعة ما يتم إعلامك به ومراجعته",
+  "@notificationsDescription": {
+    "description": "Setting description for notifications"
+  },
+  "enableNotificationDescriptions": "تشغيل الخدمة الأمامية للتحقق من التغييرات التي تراقبها وإخطارك بها",
+  "@enableNotificationDescriptions": {
+    "description": ""
+  },
+  "subscriptionNotificationTitle": "فيديوهات جديدة من اشتراكاتك",
+  "@subscriptionNotificationTitle": {
+    "description": "Title for the notification showing that there are new videos from the subscription feed"
+  },
+  "askForDisableBatteryOptimizationTitle": "مطلوب تعطيل تحسين البطارية المعطلة",
+  "@askForDisableBatteryOptimizationTitle": {
+    "description": "Title for the dialog asking the user to turn off disabling battery optimization when turning on notifications"
+  },
+  "askToEnableBackgroundServiceTitle": "تم إيقاف تشغيل الإشعارات",
+  "@askToEnableBackgroundServiceTitle": {
+    "description": "If the users tries to turn on notifications for a channel but hasn't enable notifications in the app we need to turn it on for them"
+  },
+  "deleteChannelNotificationTitle": "حذف إشعار القناة ?",
+  "@deleteChannelNotificationTitle": {
+    "description": "Title for dialog to confirm whether to delete channel notifications"
+  },
+  "deleteChannelNotificationContent": "لن تتلقى إشعارات أخرى من هذه القناة.",
+  "@deleteChannelNotificationContent": {
+    "description": "Title for dialog to confirm whether to delete channel notifications"
+  },
+  "deletePlaylistNotificationContent": "لن تتلقى إشعارات أخرى من قائمة التشغيل هذه.",
+  "@deletePlaylistNotificationContent": {
+    "description": "Title for dialog to confirm whether to delete playlist notifications"
+  },
+  "channelNotificationTitle": "فيديوهات جديدة من {القناة}",
+  "@channelNotificationTitle": {
+    "description": "Title for the channel notifications when there are new videos",
+    "placeholders": {
+      "channel": {
+        "type": "String",
+        "example": "MKBHD"
+      }
+    }
+  },
+  "foregroundServiceUpdatingSubscriptions": "التحقق من الاشتراكات...",
+  "@foregroundServiceUpdatingSubscriptions": {
+    "description": "Foreground service notification text when checking for new subscription videos"
+  },
+  "foregroundServiceUpdatingPlaylist": "التحقق من قوائم التشغيل...",
+  "@foregroundServiceUpdatingPlaylist": {
+    "description": "Foreground service notification text when checking for new playlist videos"
+  },
+  "foregroundServiceUpdatingChannels": "التحقق من القنوات...",
+  "@foregroundServiceUpdatingChannels": {
+    "description": "Foreground service notification text when checking for new channel videos"
+  },
+  "notificationFrequencySettingsTitle": "تردد فحص الفيديو الجديد",
+  "@notificationFrequencySettingsTitle": {
+    "description": "Title for frequency settings"
+  },
+  "notificationFrequencySettingsDescription": "عدد المرات التي سيتحقق فيها التطبيق من وجود مقاطع فيديو جديدة",
+  "@notificationFrequencySettingsDescription": {
+    "description": "Description for frequency settings"
+  },
+  "deArrowSettingDescription": "استبدال عناوين طعم النقر والصور المصغرة",
+  "@deArrowSettingDescription": {
+    "description": "Description for dearrow"
+  },
+  "deArrowReplaceThumbnails": "استبدال الصور المصغرة",
+  "@deArrowReplaceThumbnails": {
+    "description": "Settings title for checkbox on whether the thumbnail should be replaced as well"
+  },
+  "deArrowReplaceThumbnailsDescription": "استبدال الصور المصغرة للفيديو بالإضافة إلى العناوين",
+  "@deArrowReplaceThumbnailsDescription": {
+    "description": "Description for DeArrow setting switch"
+  },
+  "fullscreenOnLandscape": "شاشة كاملة على الوضع الأفقي",
+  "@fullscreenOnLandscape": {
+    "description": "Setting title to enable full screen on landscape orientation"
+  },
+  "channelSortByNewest": "الأحدث",
+  "@channelSortByNewest": {
+    "description": "Sort channel videos from newest to oldest"
+  },
+  "searchUploadDateToday": "اليوم",
+  "@searchUploadDateToday": {
+    "description": "Search for uploaded today"
+  },
+  "searchUploadDateWeek": "هذا الأسبوع",
+  "@searchUploadDateWeek": {
+    "description": "Search for uploaded this week"
+  },
+  "submitFeedback": "إرسال الملاحظات",
+  "@submitFeedback": {
+    "description": "Title for settings to submit feed back through the app"
+  },
+  "submitFeedbackDescription": "هل عثرت على خطأ أو لديك اقتراح؟ استخدم هذه الأداة لالتقاط لقطة شاشة للتطبيق، وقم بالتعليق عليها وإرسال الملاحظات",
+  "@submitFeedbackDescription": {
+    "description": "Setting tile descriptions for feedback submission"
+  },
+  "feedbackDisclaimer": "لإرسال الملاحظات ستحتاج إلى حساب GitHub وسيتم إرسال لقطة الشاشة الخاصة بك إلى Imgur بشكل مجهول.",
+  "@feedbackDisclaimer": {
+    "description": "Content of dialog shown before submitting feedback to make sure the user is ok whith where the data is going"
+  },
+  "feedbackScreenshotError": "خطأ أثناء تحميل لقطة شاشة على Imgur",
+  "@feedbackScreenshotError": {
+    "description": "Title for dialog if something goes wrong while uploading feedback screenshot"
+  },
+  "channelSortByOldest": "الأقدم",
+  "@channelSortByOldest": {
+    "description": "Sort channel videos from oldest to newest"
+  },
+  "channelSortByPopular": "مشهور",
+  "@channelSortByPopular": {
+    "description": "Sort channel videos by popularity"
+  }
 }
