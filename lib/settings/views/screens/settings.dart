@@ -75,7 +75,7 @@ class SettingsScreen extends StatelessWidget {
     SettingsThemeData theme = settingsTheme(colorScheme);
 
     return BlocBuilder<SettingsCubit, SettingsState>(
-      builder: (ctx, _) {
+      builder: (ctx, state) {
         var cubit = ctx.read<SettingsCubit>();
         return Scaffold(
             extendBody: true,
@@ -141,9 +141,9 @@ class SettingsScreen extends StatelessWidget {
                   SettingsTile.navigation(
                     leading: const Icon(Icons.notifications_outlined),
                     title: Text(locals.notifications),
-                    description: Text(_.backgroundNotifications
+                    description: Text(state.backgroundNotifications
                         ? locals.foregroundServiceNotificationContent(
-                            _.backgroundNotificationFrequency.toString())
+                            state.backgroundNotificationFrequency.toString())
                         : locals.notificationsDescription),
                     onPressed: openNotificationSettings,
                   ),
@@ -170,15 +170,16 @@ class SettingsScreen extends StatelessWidget {
                               height: 150, width: 150, child: AppIcon()))),
                   SettingsTile(
                     leading: const Icon(Icons.badge_outlined),
-                    title: Text('${locals.name}: ${_.packageInfo.appName}'),
-                    description:
-                        Text('${locals.package}: ${_.packageInfo.packageName}'),
+                    title: Text('${locals.name}: ${state.packageInfo.appName}'),
+                    description: Text(
+                        '${locals.package}: ${state.packageInfo.packageName}'),
                   ),
                   SettingsTile(
                     leading: const Icon(Icons.numbers),
-                    title: Text('${locals.version}: ${_.packageInfo.version}'),
-                    description:
-                        Text('${locals.build}: ${_.packageInfo.buildNumber}'),
+                    title:
+                        Text('${locals.version}: ${state.packageInfo.version}'),
+                    description: Text(
+                        '${locals.build}: ${state.packageInfo.buildNumber}'),
                   ),
                   SettingsTile(
                     leading: const Icon(Icons.toc),

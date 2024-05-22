@@ -253,23 +253,25 @@ class BrowsingSettingsScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              SettingsSection(title: Text('Return YouTube Dislike'), tiles: [
-                SettingsTile.switchTile(
-                  leading: const Icon(Icons.thumb_down),
-                  title: Text(locals.enabled),
-                  description: Text(locals.returnYoutubeDislikeDescription),
-                  initialValue: state.useReturnYoutubeDislike,
-                  onToggle: cubit.toggleReturnYoutubeDislike,
-                ),
-                SettingsTile(
-                  enabled: state.useReturnYoutubeDislike,
-                  leading: const Icon(Icons.network_ping),
-                  title: Text(locals.rydCustomInstance),
-                  description: Text(
-                      '${state.returnYoutubeDislikeUrl.isNotEmpty ? '${locals.currentServer(state.returnYoutubeDislikeUrl)}\n' : ''}${locals.rydCustomInstanceDescription}'),
-                  onPressed: (context) => customRydInstanceDialog(context),
-                )
-              ])
+              SettingsSection(
+                  title: const Text('Return YouTube Dislike'),
+                  tiles: [
+                    SettingsTile.switchTile(
+                      leading: const Icon(Icons.thumb_down),
+                      title: Text(locals.enabled),
+                      description: Text(locals.returnYoutubeDislikeDescription),
+                      initialValue: state.useReturnYoutubeDislike,
+                      onToggle: cubit.toggleReturnYoutubeDislike,
+                    ),
+                    SettingsTile(
+                      enabled: state.useReturnYoutubeDislike,
+                      leading: const Icon(Icons.network_ping),
+                      title: Text(locals.rydCustomInstance),
+                      description: Text(
+                          '${state.returnYoutubeDislikeUrl.isNotEmpty ? '${locals.currentServer(state.returnYoutubeDislikeUrl)}\n' : ''}${locals.rydCustomInstanceDescription}'),
+                      onPressed: (context) => customRydInstanceDialog(context),
+                    )
+                  ])
             ],
           ),
         );

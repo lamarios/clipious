@@ -84,8 +84,8 @@ class SembastSqfDb extends IDbClient {
   }
 
   @override
-  Future<void> deleteFromSearchHistory(String item) async {
-    await searchHistoryStore.record(item).delete(db);
+  Future<void> deleteFromSearchHistory(String search) async {
+    await searchHistoryStore.record(search).delete(db);
   }
 
   @override

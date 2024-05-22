@@ -12,7 +12,7 @@ import '../../../utils/views/components/select_list_dialog.dart';
 class AppearanceSettingsScreen extends StatelessWidget {
   const AppearanceSettingsScreen({super.key});
 
-  selectTheme(BuildContext context, SettingsState _) {
+  selectTheme(BuildContext context, SettingsState state) {
     var cubit = context.read<SettingsCubit>();
     var locals = AppLocalizations.of(context)!;
     showDialog(
@@ -27,7 +27,7 @@ class AppearanceSettingsScreen extends StatelessWidget {
                       .map((e) => RadioListTile(
                           title: Text(cubit.getThemeLabel(locals, e)),
                           value: e,
-                          groupValue: _.themeMode,
+                          groupValue: state.themeMode,
                           onChanged: (value) {
                             Navigator.of(ctx).pop();
                             cubit.setThemeMode(value);

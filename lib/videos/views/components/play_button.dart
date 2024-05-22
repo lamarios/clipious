@@ -18,10 +18,10 @@ class PlayButton extends StatelessWidget {
           child: IconButton(
             onPressed: () {
               onPressed(true);
-              AutoRouter.of(context).pop();
+              AutoRouter.of(context).maybePop();
             },
             style: ButtonStyle(
-                backgroundColor: MaterialStateColor.resolveWith(
+                backgroundColor: WidgetStateProperty.resolveWith(
                     (states) => colorScheme.primary.withOpacity(1))),
             icon: const Icon(
               Icons.music_note,
@@ -33,10 +33,10 @@ class PlayButton extends StatelessWidget {
         IconButton(
           onPressed: () {
             onPressed(false);
-            AutoRouter.of(context).pop();
+            AutoRouter.of(context).maybePop();
           },
           style: ButtonStyle(
-              backgroundColor: MaterialStateColor.resolveWith(
+              backgroundColor: WidgetStateColor.resolveWith(
                   (states) => colorScheme.primaryContainer.withOpacity(1))),
           icon: Icon(
             icon ?? Icons.play_arrow,

@@ -21,15 +21,15 @@ class VideoFilterSetupScreen extends StatelessWidget {
   List<Widget> getFilterWidgets(BuildContext context) {
     var locals = AppLocalizations.of(context)!;
     var cubit = context.read<VideoFilterEditCubit>();
-    var _ = cubit.state;
-    return _.filter?.filterAll ?? false
+    var state = cubit.state;
+    return state.filter?.filterAll ?? false
         ? []
         : [
             Row(
               children: [
                 Expanded(child: Text(locals.videoFilterType)),
                 DropdownButton<FilterType>(
-                    value: _.filter?.type,
+                    value: state.filter?.type,
                     items: FilterType.values
                         .map((e) => DropdownMenuItem<FilterType>(
                             value: e,
@@ -39,12 +39,12 @@ class VideoFilterSetupScreen extends StatelessWidget {
               ],
             ),
             Visibility(
-              visible: _.filter?.type != null,
+              visible: state.filter?.type != null,
               child: Row(
                 children: [
                   Expanded(child: Text(locals.videoFilterOperation)),
                   DropdownButton<FilterOperation>(
-                      value: _.filter?.operation,
+                      value: state.filter?.operation,
                       items: cubit
                           .getAvailableOperations()
                           .map((e) => DropdownMenuItem<FilterOperation>(
@@ -57,7 +57,7 @@ class VideoFilterSetupScreen extends StatelessWidget {
               ),
             ),
             Visibility(
-              visible: _.filter?.operation != null,
+              visible: state.filter?.operation != null,
               child: Row(
                 children: [
                   Padding(

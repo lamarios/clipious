@@ -40,7 +40,8 @@ class DownloadModalSheet extends StatelessWidget {
         });
   }
 
-  void downloadVideo(BuildContext context, DownloadModalSheetState _) async {
+  void downloadVideo(
+      BuildContext context, DownloadModalSheetState state) async {
     var downloadManager = context.read<DownloadManagerCubit>();
     if (onDownload != null) {
       onDownload!();
@@ -50,7 +51,7 @@ class DownloadModalSheet extends StatelessWidget {
     scaffoldKey.currentState
         ?.showSnackBar(SnackBar(content: Text(locals.videoDownloadStarted)));
     bool canDownload = await downloadManager.addDownload(video.videoId,
-        audioOnly: _.audioOnly, quality: _.quality);
+        audioOnly: state.audioOnly, quality: state.quality);
     if (!canDownload) {
       scaffoldKey.currentState?.showSnackBar(
           SnackBar(content: Text(locals.videoAlreadyDownloaded)));

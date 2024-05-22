@@ -10,34 +10,34 @@ class TvPlayerSettings extends StatelessWidget {
   const TvPlayerSettings({super.key});
 
   List<Widget> getContent(BuildContext context) {
-    var _ = context.read<TvPlayerSettingsCubit>();
-    switch (_.state.selected) {
+    var state = context.read<TvPlayerSettingsCubit>();
+    switch (state.state.selected) {
       case Tabs.video:
-        return _.videoTrackNames
+        return state.videoTrackNames
             .map((e) => TvSettingButton(
                   label: e,
-                  onPressed: _.changeVideoTrack,
+                  onPressed: state.changeVideoTrack,
                 ))
             .toList();
       case Tabs.audio:
-        return _.audioTrackNames
+        return state.audioTrackNames
             .map((e) => TvSettingButton(
                   label: e,
-                  onPressed: _.changeChangeAudioTrack,
+                  onPressed: state.changeChangeAudioTrack,
                 ))
             .toList();
       case Tabs.captions:
-        return _.availableCaptions
+        return state.availableCaptions
             .map((e) => TvSettingButton(
                   label: e,
-                  onPressed: _.changeSubtitles,
+                  onPressed: state.changeSubtitles,
                 ))
             .toList();
       case Tabs.playbackSpeed:
         return tvAvailablePlaybackSpeeds
             .map((e) => TvSettingButton(
                   label: e,
-                  onPressed: _.changePlaybackSpeed,
+                  onPressed: state.changePlaybackSpeed,
                 ))
             .toList();
       default:

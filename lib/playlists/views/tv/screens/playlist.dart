@@ -25,9 +25,9 @@ class TvPlaylistScreen extends PlaylistViewScreen {
   const TvPlaylistScreen(
       {super.key, required super.playlist, required super.canDeleteVideos});
 
-  playPlaylist(BuildContext context, PlaylistState _) {
+  playPlaylist(BuildContext context, PlaylistState state) {
     AutoRouter.of(context).push(TvPlayerRoute(
-        videos: _.playlist.videos
+        videos: state.playlist.videos
             .where((element) => !element.filterHide)
             .toList()));
   }

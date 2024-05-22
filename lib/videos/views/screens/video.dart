@@ -34,12 +34,12 @@ class VideoScreen extends StatelessWidget {
 
   const VideoScreen({super.key, required this.videoId, this.playNow});
 
-  void downloadVideo(BuildContext context, VideoState _) {
+  void downloadVideo(BuildContext context, VideoState state) {
     var cubit = context.read<VideoCubit>();
-    if (_.video != null) {
+    if (state.video != null) {
       DownloadModalSheet.showVideoModalSheet(
         context,
-        _.video!,
+        state.video!,
         onDownloadStarted: (isDownloadStarted) {
           if (isDownloadStarted) {
             cubit.initStreamListener();

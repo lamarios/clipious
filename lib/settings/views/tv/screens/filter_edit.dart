@@ -28,14 +28,14 @@ class TvFilterEditSettingsScreen extends StatelessWidget {
     var locals = AppLocalizations.of(context)!;
     var cubit = context.read<VideoFilterEditCubit>();
     var textTheme = Theme.of(context).textTheme;
-    var _ = cubit.state;
-    return _.filter?.filterAll ?? false
+    var state = cubit.state;
+    return state.filter?.filterAll ?? false
         ? []
         : [
             SettingsTile(
               title: locals.videoFilterType,
               trailing: Text(
-                FilterType.localizedType(_.filter?.type, locals),
+                FilterType.localizedType(state.filter?.type, locals),
                 style: textTheme.bodyLarge,
               ),
               onSelected: (context) => AutoRouter.of(context).push(
@@ -44,7 +44,7 @@ class TvFilterEditSettingsScreen extends StatelessWidget {
                           .map((e) => FilterType.localizedType(e, locals))
                           .toList(),
                       selected:
-                          FilterType.localizedType(_.filter?.type, locals),
+                          FilterType.localizedType(state.filter?.type, locals),
                       onSelect: (type) {
                         cubit.setType(FilterType.values
                             .where((t) =>
@@ -54,11 +54,12 @@ class TvFilterEditSettingsScreen extends StatelessWidget {
                       title: locals.videoFilterType)),
             ),
             Visibility(
-              visible: _.filter?.type != null,
+              visible: state.filter?.type != null,
               child: SettingsTile(
                 title: locals.videoFilterOperation,
                 trailing: Text(
-                  FilterOperation.localizedLabel(_.filter?.operation, locals),
+                  FilterOperation.localizedLabel(
+                      state.filter?.operation, locals),
                   style: textTheme.bodyLarge,
                 ),
                 onSelected: (context) => AutoRouter.of(context).push(
@@ -69,7 +70,7 @@ class TvFilterEditSettingsScreen extends StatelessWidget {
                                 FilterOperation.localizedLabel(e, locals))
                             .toList(),
                         selected: FilterOperation.localizedLabel(
-                            _.filter?.operation, locals),
+                            state.filter?.operation, locals),
                         onSelect: (operation) {
                           cubit.setOperation(FilterOperation.values
                               .where((t) =>
@@ -81,7 +82,7 @@ class TvFilterEditSettingsScreen extends StatelessWidget {
               ),
             ),
             Visibility(
-                visible: _.filter?.operation != null,
+                visible: state.filter?.operation != null,
                 child: TvTextField(
                   controller: cubit.valueController,
                   autocorrect: false,
