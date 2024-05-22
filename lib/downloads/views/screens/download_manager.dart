@@ -22,9 +22,9 @@ class DownloadManagerScreen extends StatelessWidget {
       body: SafeArea(
         bottom: false,
         child: BlocBuilder<DownloadManagerCubit, DownloadManagerState>(
-          builder: (context, _) {
+          builder: (context, state) {
             var cubit = context.read<DownloadManagerCubit>();
-            return _.videos.isNotEmpty
+            return state.videos.isNotEmpty
                 ? Padding(
                     padding: const EdgeInsets.symmetric(
                         horizontal: innerHorizontalPadding),
@@ -45,9 +45,9 @@ class DownloadManagerScreen extends StatelessWidget {
                             )),
                         Expanded(
                           child: ListView.builder(
-                            itemCount: _.videos.length,
+                            itemCount: state.videos.length,
                             itemBuilder: (context, index) {
-                              var v = _.videos[index];
+                              var v = state.videos[index];
                               return SwipeActionCell(
                                   key:
                                       ValueKey('downloaded-video-${v.videoId}'),

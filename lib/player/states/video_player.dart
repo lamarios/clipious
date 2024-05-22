@@ -358,7 +358,7 @@ class VideoPlayerCubit extends MediaPlayerCubit<VideoPlayerState> {
                     // customControlsBuilder: (controller, onPlayerVisibilityChanged) => PlayerControls(mediaPlayerCubit: this),
                     // customControlsBuilder: (controller, onPlayerVisibilityChanged) => const PlayerControls(),
                     // enablePlayPause: false,
-                    // overflowModalColor: colors.background,
+                    // overflowModalColor: colors.surface,
                     // overflowModalTextColor: overFlowTextColor,
                     // overflowMenuIconsColor: overFlowTextColor,
                     // overflowMenuCustomItems: [BetterPlayerOverflowMenuItem(useDash ? Icons.check_box_outlined : Icons.check_box_outline_blank, locals.useDash, toggleDash)])

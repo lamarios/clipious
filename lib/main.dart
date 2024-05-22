@@ -118,7 +118,7 @@ class MyApp extends StatelessWidget {
     return BlocBuilder<AppCubit, AppState>(
         buildWhen: (previous, current) => previous.server != current.server,
         // we want to rebuild only when anything other than the navigation index is changed
-        builder: (context, _) {
+        builder: (context, state) {
           bool useDynamicTheme = context
               .select((SettingsCubit value) => value.state.useDynamicTheme);
           bool useBlackBackground = context
@@ -165,8 +165,7 @@ class MyApp extends StatelessWidget {
             }
 
             if (useBlackBackground) {
-              darkColorScheme =
-                  darkColorScheme.copyWith(background: Colors.black);
+              darkColorScheme = darkColorScheme.copyWith(surface: Colors.black);
             }
 
             List<String>? localeString;
@@ -189,17 +188,17 @@ class MyApp extends StatelessWidget {
 
             var navigationBarTheme = NavigationBarThemeData(
               elevation: 0,
-              backgroundColor: colors.background,
+              backgroundColor: colors.surface,
               labelBehavior: navigationBarBehavior,
             );
 
             var navigationRailTheme = NavigationRailThemeData(
               elevation: 0,
-              backgroundColor: colors.background,
+              backgroundColor: colors.surface,
             );
 
             var appBarTheme = AppBarTheme(
-                backgroundColor: colors.background,
+                backgroundColor: colors.surface,
                 elevation: 0,
                 scrolledUnderElevation: 0,
                 systemOverlayStyle: getUiOverlayStyle(context,

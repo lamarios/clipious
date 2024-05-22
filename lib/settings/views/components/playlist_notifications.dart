@@ -51,7 +51,7 @@ class PlaylistNotificationList extends StatelessWidget {
                   decoration: BoxDecoration(
                       color: index % 2 != 0
                           ? colors.secondaryContainer.withOpacity(0.5)
-                          : colors.background,
+                          : colors.surface,
                       borderRadius: BorderRadius.circular(10)),
                   child: InkWell(
                     onTap: () => openPlaylist(context, notif.playlistId),

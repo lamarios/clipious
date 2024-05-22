@@ -49,13 +49,13 @@ class SearchHistorySettingsScreen extends StatelessWidget {
     SettingsThemeData theme = settingsTheme(colorScheme);
 
     return BlocBuilder<SettingsCubit, SettingsState>(
-      builder: (context, _) {
+      builder: (context, state) {
         var cubit = context.read<SettingsCubit>();
         return Scaffold(
             appBar: AppBar(
               title: Text(locals.searchHistory),
             ),
-            backgroundColor: colorScheme.background,
+            backgroundColor: colorScheme.surface,
             body: SafeArea(
               bottom: false,
               child:
@@ -64,26 +64,26 @@ class SearchHistorySettingsScreen extends StatelessWidget {
                     title: Text(locals.searchHistoryDescription),
                     tiles: [
                       SettingsTile.switchTile(
-                        initialValue: _.useSearchHistory,
+                        initialValue: state.useSearchHistory,
                         onToggle: cubit.toggleSearchHistory,
                         title: Text(locals.enableSearchHistory),
                       ),
                       SettingsTile(
-                        enabled: _.useSearchHistory,
+                        enabled: state.useSearchHistory,
                         title: Text(locals.searchHistoryLimit),
                         description: Text(locals.searchHistoryLimitDescription),
                         trailing: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             IconButton(
-                                onPressed: () => _.useSearchHistory
+                                onPressed: () => state.useSearchHistory
                                     ? cubit.changeSearchHistoryLimit(
                                         increase: false)
                                     : null,
                                 icon: const Icon(Icons.remove)),
-                            Text(_.searchHistoryLimit.toString()),
+                            Text(state.searchHistoryLimit.toString()),
                             IconButton(
-                                onPressed: () => _.useSearchHistory
+                                onPressed: () => state.useSearchHistory
                                     ? cubit.changeSearchHistoryLimit(
                                         increase: true)
                                     : null,

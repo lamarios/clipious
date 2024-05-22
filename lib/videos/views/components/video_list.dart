@@ -59,23 +59,23 @@ class VideoList<T extends IdedVideo> extends StatelessWidget {
       create: (context) =>
           ItemListCubit<T>(ItemListState<T>(itemList: paginatedVideoList)),
       child: BlocBuilder<ItemListCubit<T>, ItemListState<T>>(
-        builder: (context, _) {
+        builder: (context, state) {
           var cubit = context.read<ItemListCubit<T>>();
 
-          List<IdedVideo> items = _.items;
+          List<IdedVideo> items = state.items;
           if (items.isNotEmpty && items[0] is VideoInList) {
-            items = filteredVideos<VideoInList>(_.items.cast());
+            items = filteredVideos<VideoInList>(state.items.cast());
           }
 
           var gridCount = small ? 1 : getGridCount(context);
           return Stack(
             alignment: Alignment.topCenter,
             children: [
-              if (!small && _.loading) const TopListLoading(),
-              _.error != ItemListErrors.none
+              if (!small && state.loading) const TopListLoading(),
+              state.error != ItemListErrors.none
                   ? Container(
                       alignment: Alignment.center,
-                      color: colorScheme.background,
+                      color: colorScheme.surface,
                       child: InkWell(
                           onTap: () => cubit.getItems(),
                           child: Text(
@@ -88,9 +88,10 @@ class VideoList<T extends IdedVideo> extends StatelessWidget {
                   : Padding(
                       padding: EdgeInsets.only(top: small ? 0.0 : 4.0),
                       child: RefreshIndicator(
-                        onRefresh: () async => !small && _.itemList.hasRefresh()
-                            ? await cubit.refreshItems()
-                            : Future.delayed(Duration.zero),
+                        onRefresh: () async =>
+                            !small && state.itemList.hasRefresh()
+                                ? await cubit.refreshItems()
+                                : Future.delayed(Duration.zero),
                         child: GridView.count(
                           crossAxisCount: gridCount,
                           controller: cubit.scrollController,
@@ -126,7 +127,7 @@ class VideoList<T extends IdedVideo> extends StatelessWidget {
                                 openVideoOverride: openVideoOverride,
                               );
                             }),
-                            if (_.loading)
+                            if (state.loading)
                               ...repeatWidget(
                                   () => VideoListItemPlaceHolder(
                                         small: small,

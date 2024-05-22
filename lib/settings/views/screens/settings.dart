@@ -13,10 +13,10 @@ import 'package:settings_ui/settings_ui.dart';
 import '../../states/settings.dart';
 
 settingsTheme(ColorScheme colorScheme) => SettingsThemeData(
-    settingsSectionBackground: colorScheme.background,
-    settingsListBackground: colorScheme.background,
+    settingsSectionBackground: colorScheme.surface,
+    settingsListBackground: colorScheme.surface,
     titleTextColor: colorScheme.primary,
-    dividerColor: colorScheme.onBackground,
+    dividerColor: colorScheme.onSurface,
     tileDescriptionTextColor: colorScheme.secondary,
     leadingIconsColor: colorScheme.secondary,
     tileHighlightColor: colorScheme.secondaryContainer);
@@ -83,7 +83,7 @@ class SettingsScreen extends StatelessWidget {
             appBar: AppBar(
               title: Text(locals.settings),
             ),
-            backgroundColor: colorScheme.background,
+            backgroundColor: colorScheme.surface,
             body: SafeArea(
                 child: SettingsList(
               lightTheme: theme,
@@ -140,7 +140,7 @@ class SettingsScreen extends StatelessWidget {
                   ),
                   SettingsTile.navigation(
                     leading: const Icon(Icons.notifications_outlined),
-                    title: Text('${locals.notifications} (beta)'),
+                    title: Text(locals.notifications),
                     description: Text(_.backgroundNotifications
                         ? locals.foregroundServiceNotificationContent(
                             _.backgroundNotificationFrequency.toString())

@@ -100,7 +100,7 @@ class ManageSingleServerScreen extends StatelessWidget {
               appBar: AppBar(
                 title: Text(server.url),
               ),
-              backgroundColor: colorScheme.background,
+              backgroundColor: colorScheme.surface,
               body: SafeArea(
                 bottom: false,
                 child: SettingsList(

@@ -35,7 +35,7 @@ class VideoFilterChannel extends StatelessWidget {
       create: (context) =>
           VideoFilterChannelCubit(VideoFilterChannelState(filters: filters)),
       child: BlocBuilder<VideoFilterChannelCubit, VideoFilterChannelState>(
-        builder: (context, _) {
+        builder: (context, state) {
           var cubit = context.read<VideoFilterChannelCubit>();
           var filterCubit = context.read<VideoFilterCubit>();
           TextStyle titleStyle = TextStyle(color: colors.primary);
@@ -56,7 +56,7 @@ class VideoFilterChannel extends StatelessWidget {
                         ),
                       ),
                       Visibility(
-                          visible: _.loading,
+                          visible: state.loading,
                           child: const SizedBox(
                               height: 20,
                               width: 20,
@@ -64,12 +64,12 @@ class VideoFilterChannel extends StatelessWidget {
                                 strokeWidth: 1,
                               ))),
                       Visibility(
-                          visible: cubit.hasChannel() && !_.loading,
+                          visible: cubit.hasChannel() && !state.loading,
                           child: Padding(
                             padding: const EdgeInsets.only(right: 8.0),
                             child: Thumbnail(
                               thumbnailUrl: ImageObject.getBestThumbnail(
-                                          _.channel?.authorThumbnails)
+                                          state.channel?.authorThumbnails)
                                       ?.url ??
                                   '',
                               width: 20,
@@ -82,13 +82,13 @@ class VideoFilterChannel extends StatelessWidget {
                           child: Visibility(
                               visible: cubit.hasChannel(),
                               child: Text(
-                                _.channel?.author ?? '',
+                                state.channel?.author ?? '',
                                 style: titleStyle,
                               ))),
                     ],
                   ),
                 ),
-                ..._.filters.map((e) => SwipeActionCell(
+                ...state.filters.map((e) => SwipeActionCell(
                     key: ValueKey('filter-swipe-${e.uuid}'),
                     trailingActions: [
                       SwipeAction(

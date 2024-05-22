@@ -23,16 +23,16 @@ class PaginatedListView<T> extends StatelessWidget {
           PaginatedListViewController.init<T>(
               paginatedList: this.paginatedList, startItems: this.startItems)),
       child: BlocBuilder<PaginatedListCubit<T>, PaginatedListViewController<T>>(
-          builder: (context, _) {
+          builder: (context, state) {
         var cubit = context.read<PaginatedListCubit<T>>();
         return Stack(
           children: [
-            if (_.loading) const TopListLoading(),
+            if (state.loading) const TopListLoading(),
             ListView.builder(
               controller: cubit.scrollController,
-              itemCount: _.items.length,
+              itemCount: state.items.length,
               itemBuilder: (BuildContext context, int index) {
-                T item = _.items[index];
+                T item = state.items[index];
                 return itemBuilder(item);
               },
             ),

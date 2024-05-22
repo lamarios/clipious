@@ -52,7 +52,7 @@ class PlaylistInList extends StatelessWidget {
     return BlocProvider(
       create: (context) => PlaylistInListCubit(playlist),
       child: BlocBuilder<PlaylistInListCubit, Playlist>(
-        builder: (context, _) {
+        builder: (context, state) {
           if (isTablet) {
             return InkWell(
               borderRadius: BorderRadius.circular(10),
@@ -69,7 +69,7 @@ class PlaylistInList extends StatelessWidget {
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: PlaylistThumbnails(
-                            videos: _.videos,
+                            videos: state.videos,
                             bestThumbnails: isTv,
                           ),
                         )),
@@ -106,7 +106,7 @@ class PlaylistInList extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(15),
                                 color: hasFocus
                                     ? colors.primaryContainer
-                                    : colors.background,
+                                    : colors.surface,
                               ),
                               duration: animationDuration,
                               child: Padding(
@@ -117,7 +117,7 @@ class PlaylistInList extends StatelessWidget {
                                     SizedBox(
                                         height: 140,
                                         child: PlaylistThumbnails(
-                                          videos: _.videos,
+                                          videos: state.videos,
                                           bestThumbnails: isTv,
                                         )),
                                     Expanded(
@@ -151,7 +151,7 @@ class PlaylistInList extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     PlaylistThumbnails(
-                      videos: _.videos,
+                      videos: state.videos,
                       bestThumbnails: isTv,
                     ),
                     Text(
@@ -180,7 +180,7 @@ class PlaylistInList extends StatelessWidget {
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: PlaylistThumbnails(
-                            videos: _.videos,
+                            videos: state.videos,
                             bestThumbnails: isTv,
                           ),
                         )),

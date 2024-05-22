@@ -107,7 +107,7 @@ class TvFilterEditSettingsScreen extends StatelessWidget {
               create: (context) =>
                   VideoFilterEditCubit(VideoFilterEditState(filter: filter)),
               child: BlocBuilder<VideoFilterEditCubit, VideoFilterEditState>(
-                  builder: (context, _) {
+                  builder: (context, state) {
                 var cubit = context.read<VideoFilterEditCubit>();
                 return Stack(
                   children: [
@@ -125,7 +125,7 @@ class TvFilterEditSettingsScreen extends StatelessWidget {
                                 onPressed: (context) async {
                                   await db.deleteFilter(filter!);
                                   if (context.mounted) {
-                                    AutoRouter.of(context).pop();
+                                    AutoRouter.of(context).maybePop();
                                   }
                                 },
                                 unfocusedColor: Colors.transparent,
@@ -140,7 +140,7 @@ class TvFilterEditSettingsScreen extends StatelessWidget {
                           ],
                         ),
                         SettingsTitle(title: locals.videoFilterEditDescription),
-                        _.channel == null
+                        state.channel == null
                             ? SettingsTile(
                                 leading: const Icon(Icons.personal_video),
                                 title: '${locals.channel} (${locals.optional})',
@@ -161,19 +161,19 @@ class TvFilterEditSettingsScreen extends StatelessWidget {
                             : SettingsTile(
                                 leading: const Icon(Icons.personal_video),
                                 title:
-                                    '${locals.channel}: ${_.channel?.author ?? ''}',
+                                    '${locals.channel}: ${state.channel?.author ?? ''}',
                                 trailing: const Icon(Icons.clear),
                                 onSelected: (context) => cubit.channelClear(),
                               ),
                         Visibility(
-                            visible: _.filter?.channelId != null,
+                            visible: state.filter?.channelId != null,
                             child: SettingsTile(
                               title: locals.videoFilterHideAllFromChannel,
                               onSelected: (context) => cubit.channelHideAll(
-                                  !(_.filter?.filterAll ?? false)),
+                                  !(state.filter?.filterAll ?? false)),
                               trailing: Switch(
                                   onChanged: (value) {},
-                                  value: _.filter?.filterAll ?? false),
+                                  value: state.filter?.filterAll ?? false),
                             )),
                         ...getFilterWidgets(context),
                         SettingsTile(
@@ -196,7 +196,8 @@ class TvFilterEditSettingsScreen extends StatelessWidget {
                                   String day =
                                       getWeekdayName(e).substring(0, 1);
                                   var isSelected =
-                                      _.filter?.daysOfWeek.contains(e) ?? false;
+                                      state.filter?.daysOfWeek.contains(e) ??
+                                          false;
                                   return TvButton(
                                     onPressed: (context) => cubit.toggleDay(e),
                                     child: AnimatedContainer(
@@ -254,7 +255,8 @@ class TvFilterEditSettingsScreen extends StatelessWidget {
                                       width: 8,
                                     ),
                                     TvTimePicker(
-                                        value: _.filter?.startTime ?? '00:00',
+                                        value:
+                                            state.filter?.startTime ?? '00:00',
                                         onTimePicked: cubit.setStartTime),
                                   ],
                                 ),
@@ -269,7 +271,7 @@ class TvFilterEditSettingsScreen extends StatelessWidget {
                                       width: 8,
                                     ),
                                     TvTimePicker(
-                                        value: _.filter?.endTime ?? '00:00',
+                                        value: state.filter?.endTime ?? '00:00',
                                         onTimePicked: cubit.setEndTime),
                                   ],
                                 ),
@@ -279,10 +281,10 @@ class TvFilterEditSettingsScreen extends StatelessWidget {
                           title: locals.videoFilterHide,
                           description: locals.videoFilterHideDescription,
                           onSelected: (context) => cubit.hideOnFilteredChanged(
-                              !(_.filter?.hideFromFeed ?? false)),
+                              !(state.filter?.hideFromFeed ?? false)),
                           trailing: Switch(
                               onChanged: (value) {},
-                              value: _.filter?.hideFromFeed ?? false),
+                              value: state.filter?.hideFromFeed ?? false),
                         ),
                         Visibility(
                           visible: cubit.isFilterValid(),
@@ -295,7 +297,8 @@ class TvFilterEditSettingsScreen extends StatelessWidget {
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Text(
-                                  _.filter?.localizedLabel(locals, context) ??
+                                  state.filter
+                                          ?.localizedLabel(locals, context) ??
                                       '',
                                   style: textTheme.headlineSmall,
                                   textAlign: TextAlign.center),
@@ -316,7 +319,7 @@ class TvFilterEditSettingsScreen extends StatelessWidget {
                               onPressed: cubit.isFilterValid()
                                   ? (context) {
                                       cubit.onSave();
-                                      AutoRouter.of(context).pop();
+                                      AutoRouter.of(context).maybePop();
                                     }
                                   : null,
                               child: Padding(

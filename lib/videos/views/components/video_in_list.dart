@@ -76,9 +76,9 @@ class VideoListItem extends StatelessWidget {
       create: (context) => VideoInListCubit(
           VideoInListState(video: video, offlineVideo: offlineVideo)),
       child: BlocBuilder<VideoInListCubit, VideoInListState>(
-        builder: (context, _) => BlocListener<PlayerCubit, PlayerState>(
+        builder: (context, state) => BlocListener<PlayerCubit, PlayerState>(
           listenWhen: (previous, current) =>
-              _.video != null &&
+              state.video != null &&
               current.currentlyPlaying?.videoId == video!.videoId &&
               previous.position != current.position,
           listener: (context, state) =>
@@ -86,7 +86,7 @@ class VideoListItem extends StatelessWidget {
           child: InkWell(
             onTap: () => openVideo(context),
             onLongPress:
-                !allowModalSheet || _.video == null || _.video!.filtered
+                !allowModalSheet || state.video == null || state.video!.filtered
                     ? null
                     : () => showVideoModalSheet != null
                         ? showVideoModalSheet!(context, video!)
@@ -95,7 +95,7 @@ class VideoListItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
-                (_.video?.filtered ?? false)
+                (state.video?.filtered ?? false)
                     ? AspectRatio(
                         aspectRatio: 16 / 9,
                         child: Container(
@@ -181,7 +181,7 @@ class VideoListItem extends StatelessWidget {
                                               :
 */
 
-                                              _.progress > 0.05
+                                              state.progress > 0.05
                                                   ? Align(
                                                       alignment:
                                                           Alignment.centerRight,
@@ -199,7 +199,7 @@ class VideoListItem extends StatelessWidget {
                                                               animationDuration,
                                                           alignment: Alignment
                                                               .centerLeft,
-                                                          constraints: _
+                                                          constraints: state
                                                                       .progress ==
                                                                   1
                                                               ? const BoxConstraints(
@@ -210,7 +210,8 @@ class VideoListItem extends StatelessWidget {
                                                           width:
                                                               double.infinity,
                                                           height:
-                                                              _.progress == 1
+                                                              state.progress ==
+                                                                      1
                                                                   ? 20
                                                                   : small
                                                                       ? 1
@@ -227,8 +228,8 @@ class VideoListItem extends StatelessWidget {
                                                           child:
                                                               AnimatedFractionallySizedBox(
                                                                   widthFactor:
-                                                                      _.progress > 0
-                                                                          ? _
+                                                                      state.progress > 0
+                                                                          ? state
                                                                               .progress
                                                                           : 0,
                                                                   heightFactor:
@@ -244,7 +245,7 @@ class VideoListItem extends StatelessWidget {
                                                                             .center,
                                                                     decoration:
                                                                         BoxDecoration(
-                                                                      color: _.progress == 1
+                                                                      color: state.progress == 1
                                                                           ? colorScheme
                                                                               .primaryContainer
                                                                           : colorScheme
@@ -255,7 +256,7 @@ class VideoListItem extends StatelessWidget {
                                                                     ),
                                                                     child:
                                                                         AnimatedCrossFade(
-                                                                      crossFadeState: _.progress == 1
+                                                                      crossFadeState: state.progress == 1
                                                                           ? CrossFadeState
                                                                               .showFirst
                                                                           : CrossFadeState
@@ -336,7 +337,9 @@ class VideoListItem extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            (_.video?.filtered ?? false) ? '**********' : title,
+                            (state.video?.filtered ?? false)
+                                ? '**********'
+                                : title,
                             textAlign: TextAlign.left,
                             overflow: TextOverflow.ellipsis,
                             maxLines: small ? 1 : 2,
@@ -377,7 +380,7 @@ class VideoListItem extends StatelessWidget {
                     ),
                     if (allowModalSheet && !small && video != null)
                       InkWell(
-                        onTap: (_.video?.filtered ?? true)
+                        onTap: (state.video?.filtered ?? true)
                             ? null
                             : () => showVideoModalSheet != null
                                 ? showVideoModalSheet!(context, video!)

@@ -21,7 +21,7 @@ class CommentsContainer extends StatelessWidget {
       create: (context) =>
           CommentsContainerCubit(const CommentsContainerState()),
       child: BlocBuilder<CommentsContainerCubit, CommentsContainerState>(
-        builder: (context, _) {
+        builder: (context, state) {
           var cubit = context.read<CommentsContainerCubit>();
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -36,7 +36,7 @@ class CommentsContainer extends StatelessWidget {
                     ),
                   ),
                   DropdownButton<String>(
-                    value: _.sortBy,
+                    value: state.sortBy,
                     onChanged: cubit.changeSorting,
                     items: [
                       DropdownMenuItem(
@@ -74,10 +74,11 @@ class CommentsContainer extends StatelessWidget {
                 ],
               ),
               CommentsView(
-                  key: ValueKey<String>('comments-${_.sortBy}-${_.source}'),
+                  key: ValueKey<String>(
+                      'comments-${state.sortBy}-${state.source}'),
                   video: video,
-                  source: _.source,
-                  sortBy: _.sortBy),
+                  source: state.source,
+                  sortBy: state.sortBy),
             ],
           );
         },

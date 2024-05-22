@@ -81,7 +81,7 @@ class HomeView extends StatelessWidget {
           child: Container(
               // only left because we don't want to cut horizontal scrolling lists
               padding: const EdgeInsets.only(left: innerHorizontalPadding),
-              color: colors.background,
+              color: colors.surface,
               child: layout.smallSources.isEmpty && !layout.showBigSource
                   ? const Opacity(
                       opacity: 0.2,

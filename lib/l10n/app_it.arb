@@ -423,11 +423,11 @@
   "@addRecommendedToQueue": {
     "description": "Switch when playing a video to automatically add the recommended videos to the video queue"
   },
-  "itemListErrorInvalidScope": "Non hai il permesso per vedere questo, se hai fatto l'accesso usando il metodo del token prova ad uscire e riaccedere nuovamente",
+  "itemListErrorInvalidScope": "Non hai il permesso per vedere questo, se hai fatto l''accesso usando il metodo del token prova ad uscire e riaccedere nuovamente",
   "@itemListErrorInvalidScope": {
     "description": "Error when the user doesn't have the proper scope to its current token"
   },
-  "appLogs": "Log dell'applicazione",
+  "appLogs": "Log dell''applicazione",
   "@appLogs": {
     "description": "Title for settings that leads to application logs"
   },
@@ -435,7 +435,7 @@
   "@videoAddedToQueue": {
     "description": "Pop up message when a video was added at the end of the video queue"
   },
-  "requiresRestart": "Richiede il riavvio dell'applicazione",
+  "requiresRestart": "Richiede il riavvio dell''applicazione",
   "@requiresRestart": {
     "description": "Requires app restart label"
   },
@@ -507,7 +507,7 @@
   "@addToPlaylist": {
     "description": "Label to add a video to a playlist"
   },
-  "sponsorBlockCategoryInteractionDescription": "Quando c'è un piccolo promemoria di mettere like, abbonarsi o iscriversi in mezzo al contenuto. Se è troppo lungo o troppo specifico, dovrebbe essere \"self promotion\".",
+  "sponsorBlockCategoryInteractionDescription": "Quando c''è un piccolo promemoria di mettere like, abbonarsi o iscriversi in mezzo al contenuto. Se è troppo lungo o troppo specifico, dovrebbe essere \"self promotion\".",
   "@sponsorBlockCategoryInteractionDescription": {
     "description": "Sponsor block 'Interaction' Category description"
   },
@@ -639,7 +639,7 @@
   "@share": {
     "description": "asking user if to share"
   },
-  "itemlistErrorGeneric": "Errore nell'acquisizione dei dati",
+  "itemlistErrorGeneric": "Errore nell''acquisizione dei dati",
   "@itemlistErrorGeneric": {
     "description": "Error showing when the data can't be fetch"
   },
@@ -655,7 +655,7 @@
   "@sponsorBlockCategoryUnpaidSelfPromoDescription": {
     "description": "Sponsor block 'Unpaid/Self promotion' Category description"
   },
-  "sponsorBlockCategoryFillerDescription": "Scene superflue aggiunte solo per riempire o per fare dell'umorismo che non sono necessarie per capire il contenuto principale del video. Non devono essere inclusi i segmenti che forniscono il contesto o altri dettagli. Questa è una categoria molto precisa pensata per quando non si è in \"vena di divertimento\".",
+  "sponsorBlockCategoryFillerDescription": "Scene superflue aggiunte solo per riempire o per fare dell''umorismo che non sono necessarie per capire il contenuto principale del video. Non devono essere inclusi i segmenti che forniscono il contesto o altri dettagli. Questa è una categoria molto precisa pensata per quando non si è in \"vena di divertimento\".",
   "@sponsorBlockCategoryFillerDescription": {
     "description": "Sponsorblock 'Filler' Category description"
   },
@@ -683,7 +683,7 @@
   "@videoDownloadAudioOnly": {
     "description": "Label for toggle to download audio only "
   },
-  "rememberPlaybackSpeedDescription": "Imposta automaticamente la velocità di riproduzione all'ultima velocità selezionata",
+  "rememberPlaybackSpeedDescription": "Imposta automaticamente la velocità di riproduzione all''ultima velocità selezionata",
   "@rememberPlaybackSpeedDescription": {
     "description": "Settings description for remembering playback speed"
   },
@@ -699,7 +699,7 @@
   "@youCanSubscribeAgainLater": {
     "description": "Text for the unscubscribe confirmation dialog"
   },
-  "clearHistoryQuestionExplanation": "Questa operazione cancellerà la tua cronologia delle visualizzazioni del tuo account sull'istanza di Invidious che usi. Questa operazione non può essere annullata.",
+  "clearHistoryQuestionExplanation": "Questa operazione cancellerà la tua cronologia delle visualizzazioni del tuo account sull''istanza di Invidious che usi. Questa operazione non può essere annullata.",
   "@clearHistoryQuestionExplanation": {
     "description": "Message for dialog before clearing full viewing history"
   },
@@ -791,7 +791,7 @@
   "@videoFilterOperationLowerThan": {
     "description": "Label for video filter operation Lower than"
   },
-  "lockFullScreenToLandscape": "Blocca orientamento a schermo intero al rapporto d'aspetto del video",
+  "lockFullScreenToLandscape": "Blocca orientamento a schermo intero al rapporto d''aspetto del video",
   "@lockFullScreenToLandscape": {
     "description": "Title to force full screen to landscape"
   },
@@ -971,7 +971,7 @@
       }
     }
   },
-  "rememberSubtitleLanguageDescription": "Imposta automaticamente i sottotitoli nell'ultima lingua selezionata, se disponibile",
+  "rememberSubtitleLanguageDescription": "Imposta automaticamente i sottotitoli nell''ultima lingua selezionata, se disponibile",
   "@rememberSubtitleLanguageDescription": {
     "description": "Settings description for remembering subtitle language"
   },
@@ -1005,7 +1005,7 @@
   "@foregroundServiceUpdatingPlaylist": {
     "description": "Foreground service notification text when checking for new playlist videos"
   },
-  "notificationFrequencySettingsDescription": "Quanto spesso l'applicazione controllerà per nuovi video",
+  "notificationFrequencySettingsDescription": "Quanto spesso l''applicazione controllerà per nuovi video",
   "@notificationFrequencySettingsDescription": {
     "description": "Description for frequency settings"
   },
@@ -1053,7 +1053,7 @@
   "@returnYoutubeUrlValidation": {
     "description": "error message for invalid custom url for return to youtube"
   },
-  "searchUploadDateYear": "Quest'anno",
+  "searchUploadDateYear": "Quest''anno",
   "@searchUploadDateYear": {
     "description": "Search for uploaded this year"
   },
@@ -1061,7 +1061,7 @@
   "@videoFilterOperationNotContain": {
     "description": "Label for video filter operation Does not contain"
   },
-  "navigationBarLabelShowOnSelect": "Etichetta mostrata sull'elemento selezionato",
+  "navigationBarLabelShowOnSelect": "Etichetta mostrata sull''elemento selezionato",
   "@navigationBarLabelShowOnSelect": {
     "description": "Label only showing when selected option for navigation bar"
   },
@@ -1077,7 +1077,7 @@
   "@subscriptionNotificationTitle": {
     "description": "Title for the notification showing that there are new videos from the subscription feed"
   },
-  "appLogsDescription": "Recupera i log di quello che sta accadendo nell'applicazione, può essere utile per segnalare un problema",
+  "appLogsDescription": "Recupera i log di quello che sta accadendo nell''applicazione, può essere utile per segnalare un problema",
   "@appLogsDescription": {
     "description": "Description of the app log settings"
   },
@@ -1103,7 +1103,7 @@
       }
     }
   },
-  "nFilters": "{count, plural, =0{Nessun video} =1{1 filtro} altri{{count} filtri}}",
+  "nFilters": "{count, plural, =0{Nessun video} =1{1 filtro} other{{count} filtri}}",
   "@nFilters": {
     "description": "One or more video filters",
     "placeholders": {
@@ -1113,7 +1113,7 @@
       }
     }
   },
-  "videoFiltersExplanation": "Nascondi o oscura video in tutta l'applicazione a seconda delle regole di filtraggio definite sotto. Questo ti permette per esempio di nascondere spoiler di risultati sportivi o video brevi di un certo canale.",
+  "videoFiltersExplanation": "Nascondi o oscura video in tutta l''applicazione a seconda delle regole di filtraggio definite sotto. Questo ti permette per esempio di nascondere spoiler di risultati sportivi o video brevi di un certo canale.",
   "@videoFiltersExplanation": {
     "description": "Description on how filter work"
   },

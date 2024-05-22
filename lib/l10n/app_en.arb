@@ -1161,7 +1161,7 @@
   "@deletePlaylistNotificationTitle": {
     "description": "Title for dialog to confirm whether to delete playlist notifications"
   },
-  "deletePlaylistNotificationContent": "You won't receive anymore notifications from this playlist.",
+  "deletePlaylistNotificationContent": "You won''t receive anymore notifications from this playlist.",
   "@deletePlaylistNotificationContent": {
     "description": "Title for dialog to confirm whether to delete playlist notifications"
   },

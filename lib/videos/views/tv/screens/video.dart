@@ -95,7 +95,7 @@ class TvVideoScreen extends StatelessWidget {
                 : Stack(
                     children: [
                       videoState.video == null
-                          ? Container(color: colors.background)
+                          ? Container(color: colors.surface)
                           : VideoThumbnailView(
                               videoId: videoState.video!.videoId,
                               decoration: const BoxDecoration(),
@@ -128,7 +128,7 @@ class TvVideoScreen extends StatelessWidget {
                                   child: Container(
                                     decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(20),
-                                        color: colors.background.withOpacity(
+                                        color: colors.surface.withOpacity(
                                             overlayBackgroundOpacity)),
                                     child: Padding(
                                       padding: const EdgeInsets.all(16.0),
@@ -239,7 +239,7 @@ class TvVideoScreen extends StatelessWidget {
                                                                           ?.authorId ??
                                                                       ''),
                                                           unfocusedColor: colors
-                                                              .background
+                                                              .surface
                                                               .withOpacity(0),
                                                           child: Row(
                                                             mainAxisSize:

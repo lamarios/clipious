@@ -29,18 +29,19 @@ class CommentsView extends StatelessWidget {
           sortBy: sortBy,
           source: source,
           continuation: continuation)),
-      child: BlocBuilder<CommentsCubit, CommentsState>(builder: (context, _) {
+      child:
+          BlocBuilder<CommentsCubit, CommentsState>(builder: (context, state) {
         var cubit = context.read<CommentsCubit>();
         List<Widget> widgets = [];
 
-        widgets.addAll(_.comments.comments
+        widgets.addAll(state.comments.comments
             .map((c) => SingleCommentView(
                   video: video,
                   comment: c,
                 ))
             .toList(growable: true));
 
-        if (_.continuation != null && !_.loadingComments) {
+        if (state.continuation != null && !state.loadingComments) {
           widgets.add(
             Padding(
               padding: const EdgeInsets.only(top: 4.0),
@@ -57,7 +58,7 @@ class CommentsView extends StatelessWidget {
           );
         }
 
-        if (_.loadingComments) {
+        if (state.loadingComments) {
           widgets.add(Padding(
             padding: const EdgeInsets.all(8.0),
             child: Container(
@@ -71,8 +72,8 @@ class CommentsView extends StatelessWidget {
           ));
         }
 
-        return _.error.isNotEmpty
-            ? Text(_.error)
+        return state.error.isNotEmpty
+            ? Text(state.error)
             : Column(
                 children: widgets,
               );

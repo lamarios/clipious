@@ -189,7 +189,8 @@ class TVSettingsScreen extends StatelessWidget {
     TextTheme textTheme = Theme.of(context).textTheme;
     return Scaffold(
       body: TvOverscan(
-        child: BlocBuilder<SettingsCubit, SettingsState>(builder: (context, _) {
+        child: BlocBuilder<SettingsCubit, SettingsState>(
+            builder: (context, state) {
           var cubit = context.read<SettingsCubit>();
           return DefaultTextStyle(
             style: textTheme.bodyLarge!,
@@ -199,12 +200,12 @@ class TVSettingsScreen extends StatelessWidget {
                 SettingsTile(
                   title: locals.customizeAppLayout,
                   description:
-                      _.appLayout.map((e) => e.getLabel(locals)).join(", "),
+                      state.appLayout.map((e) => e.getLabel(locals)).join(", "),
                   onSelected: (context) => openAppLayout(context),
                 ),
                 SettingsTile(
                   title: locals.country,
-                  description: _.country.name,
+                  description: state.country.name,
                   onSelected: (context) => openSelectCountry(context),
                 ),
                 SettingsTile(
@@ -216,16 +217,17 @@ class TVSettingsScreen extends StatelessWidget {
                 SettingsTile(
                   title: 'Return YouTube Dislike',
                   description: locals.returnYoutubeDislikeDescription,
-                  onSelected: (context) => cubit
-                      .toggleReturnYoutubeDislike(!_.useReturnYoutubeDislike),
+                  onSelected: (context) => cubit.toggleReturnYoutubeDislike(
+                      !state.useReturnYoutubeDislike),
                   trailing: Switch(
-                      onChanged: (value) {}, value: _.useReturnYoutubeDislike),
+                      onChanged: (value) {},
+                      value: state.useReturnYoutubeDislike),
                 ),
                 SettingsTile(
                   title: locals.rydCustomInstance,
                   description:
-                      '${_.returnYoutubeDislikeUrl.isNotEmpty ? '${locals.currentServer(_.returnYoutubeDislikeUrl)}\n' : ''}${locals.rydCustomInstanceDescription}',
-                  enabled: _.useReturnYoutubeDislike,
+                      '${state.returnYoutubeDislikeUrl.isNotEmpty ? '${locals.currentServer(state.returnYoutubeDislikeUrl)}\n' : ''}${locals.rydCustomInstanceDescription}',
+                  enabled: state.useReturnYoutubeDislike,
                   onSelected: (context) => showCustomRydUrl(context),
                 ),
                 SettingsTile(
@@ -235,7 +237,7 @@ class TVSettingsScreen extends StatelessWidget {
                 ),
                 SettingsTile(
                   title: 'DeArrow',
-                  description: _.dearrow
+                  description: state.dearrow
                       ? locals.enabled
                       : locals.deArrowSettingDescription,
                   onSelected: openDearrowSettings,
@@ -262,18 +264,19 @@ class TVSettingsScreen extends StatelessWidget {
                 SettingsTile(
                   title: locals.useDash,
                   description: locals.useDashDescription,
-                  onSelected: (context) => cubit.toggleDash(!_.useDash),
-                  trailing: Switch(onChanged: (value) {}, value: _.useDash),
+                  onSelected: (context) => cubit.toggleDash(!state.useDash),
+                  trailing: Switch(onChanged: (value) {}, value: state.useDash),
                 ),
                 SettingsTile(
                   title: locals.useProxy,
                   description: locals.useProxyDescription,
-                  onSelected: (context) => cubit.toggleProxy(!_.useProxy),
-                  trailing: Switch(onChanged: (value) {}, value: _.useProxy),
+                  onSelected: (context) => cubit.toggleProxy(!state.useProxy),
+                  trailing:
+                      Switch(onChanged: (value) {}, value: state.useProxy),
                 ),
                 AdjustmentSettingTile(
                   title: locals.skipStep,
-                  value: _.skipStep.floor(),
+                  value: state.skipStep.floor(),
                   description: locals.skipStepDescription,
                   possibleValues: skipSteps,
                   onNewValue: cubit.setSkipStep,
@@ -282,13 +285,13 @@ class TVSettingsScreen extends StatelessWidget {
                   title: locals.exponentialSkip,
                   description: locals.exponentialSkipDescription,
                   onSelected: (context) =>
-                      cubit.setSkipExponentially(!_.skipExponentially),
-                  trailing:
-                      Switch(onChanged: (value) {}, value: _.skipExponentially),
+                      cubit.setSkipExponentially(!state.skipExponentially),
+                  trailing: Switch(
+                      onChanged: (value) {}, value: state.skipExponentially),
                 ),
                 AdjustmentSettingTile(
                   title: locals.subtitleFontSize,
-                  value: _.subtitleSize.floor(),
+                  value: state.subtitleSize.floor(),
                   step: 1,
                   description: locals.subtitleFontSizeDescription,
                   onNewValue: cubit.setSubtitleSize,
@@ -297,25 +300,26 @@ class TVSettingsScreen extends StatelessWidget {
                   title: locals.subtitlesBackground,
                   description: locals.subtitlesBackgroundDescription,
                   onSelected: (context) =>
-                      cubit.setSubtitlesBackground(!_.subtitlesBackground),
+                      cubit.setSubtitlesBackground(!state.subtitlesBackground),
                   trailing: Switch(
-                      onChanged: (value) {}, value: _.subtitlesBackground),
+                      onChanged: (value) {}, value: state.subtitlesBackground),
                 ),
                 SettingsTile(
                   title: locals.rememberSubtitleLanguage,
                   description: locals.rememberSubtitleLanguageDescription,
                   onSelected: (context) =>
-                      cubit.toggleRememberSubtitles(!_.rememberSubtitles),
-                  trailing:
-                      Switch(onChanged: (value) {}, value: _.rememberSubtitles),
+                      cubit.toggleRememberSubtitles(!state.rememberSubtitles),
+                  trailing: Switch(
+                      onChanged: (value) {}, value: state.rememberSubtitles),
                 ),
                 SettingsTile(
                   title: locals.rememberPlaybackSpeed,
                   description: locals.rememberPlaybackSpeedDescription,
-                  onSelected: (context) => cubit
-                      .toggleRememberPlaybackSpeed(!_.rememberPlayBackSpeed),
+                  onSelected: (context) => cubit.toggleRememberPlaybackSpeed(
+                      !state.rememberPlayBackSpeed),
                   trailing: Switch(
-                      onChanged: (value) {}, value: _.rememberPlayBackSpeed),
+                      onChanged: (value) {},
+                      value: state.rememberPlayBackSpeed),
                 ),
                 SettingsTile(
                   title: 'SponsorBlock',
@@ -325,27 +329,28 @@ class TVSettingsScreen extends StatelessWidget {
                 SettingsTitle(title: locals.appearance),
                 SettingsTile(
                   title: locals.themeBrightness,
-                  description: cubit.getThemeLabel(locals, _.themeMode),
+                  description: cubit.getThemeLabel(locals, state.themeMode),
                   onSelected: (context) => selectTheme(context),
                 ),
                 SettingsTile(
                   title: locals.blackBackground,
                   description: locals.blackBackgroundDescription,
                   onSelected: (context) =>
-                      cubit.toggleBlackBackground(!_.blackBackground),
-                  trailing:
-                      Switch(onChanged: (value) {}, value: _.blackBackground),
+                      cubit.toggleBlackBackground(!state.blackBackground),
+                  trailing: Switch(
+                      onChanged: (value) {}, value: state.blackBackground),
                 ),
                 SettingsTitle(title: locals.about),
                 SettingsTile(
-                  title: '${locals.name}: ${_.packageInfo.appName}',
+                  title: '${locals.name}: ${state.packageInfo.appName}',
                   description:
-                      '${locals.package}: ${_.packageInfo.packageName}',
+                      '${locals.package}: ${state.packageInfo.packageName}',
                   onSelected: (context) {},
                 ),
                 SettingsTile(
-                  title: '${locals.version}: ${_.packageInfo.version}',
-                  description: '${locals.build}: ${_.packageInfo.buildNumber}',
+                  title: '${locals.version}: ${state.packageInfo.version}',
+                  description:
+                      '${locals.build}: ${state.packageInfo.buildNumber}',
                   onSelected: (context) {},
                 )
               ],

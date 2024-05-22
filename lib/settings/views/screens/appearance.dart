@@ -78,7 +78,7 @@ class AppearanceSettingsScreen extends StatelessWidget {
         title: Text(locals.appearance),
       ),
       body: SafeArea(child:
-          BlocBuilder<SettingsCubit, SettingsState>(builder: (context, _) {
+          BlocBuilder<SettingsCubit, SettingsState>(builder: (context, state) {
         var cubit = context.read<SettingsCubit>();
         return DefaultTabController(
           length: 2,
@@ -90,7 +90,7 @@ class AppearanceSettingsScreen extends StatelessWidget {
                 tiles: [
                   SettingsTile.switchTile(
                     leading: const Icon(Icons.palette),
-                    initialValue: _.useDynamicTheme,
+                    initialValue: state.useDynamicTheme,
                     onToggle: cubit.toggleDynamicTheme,
                     title: Text(locals.useDynamicTheme),
                     description: Text(locals.useDynamicThemeDescription),
@@ -98,12 +98,12 @@ class AppearanceSettingsScreen extends StatelessWidget {
                   SettingsTile(
                     leading: const Icon(Icons.brightness_4_outlined),
                     title: Text(locals.themeBrightness),
-                    value: Text(cubit.getThemeLabel(locals, _.themeMode)),
-                    onPressed: (ctx) => selectTheme(ctx, _),
+                    value: Text(cubit.getThemeLabel(locals, state.themeMode)),
+                    onPressed: (ctx) => selectTheme(ctx, state),
                   ),
                   SettingsTile.switchTile(
                     leading: const Icon(Icons.contrast),
-                    initialValue: _.blackBackground,
+                    initialValue: state.blackBackground,
                     onToggle: cubit.toggleBlackBackground,
                     title: Text(locals.blackBackground),
                     description: Text(locals.blackBackgroundDescription),
@@ -112,7 +112,7 @@ class AppearanceSettingsScreen extends StatelessWidget {
                     leading: const Icon(Icons.label),
                     title: Text(locals.navigationBarStyle),
                     value: Text(getNavigationLabelText(
-                        context, _.navigationBarLabelBehavior)),
+                        context, state.navigationBarLabelBehavior)),
                     onPressed: (ctx) => customizeNavigationLabel(ctx),
                   ),
                 ],

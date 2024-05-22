@@ -20,7 +20,7 @@ class PlayerPlaceHolder extends StatelessWidget {
               duration: animationDuration,
               curve: Curves.easeInOut,
               height: showPlaceHolder ? targetHeight : 0,
-              color: colors.background,
+              color: colors.surface,
               padding: const EdgeInsets.symmetric(horizontal: 7),
               child: Container(
                 decoration: BoxDecoration(

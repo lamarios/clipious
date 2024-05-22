@@ -23,7 +23,7 @@ class ChannelVideosView extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: innerHorizontalPadding),
       child: Container(
-        color: colorScheme.background,
+        color: colorScheme.surface,
         child: VideoList(
           paginatedVideoList: ContinuationList<VideoInList>(
               (continuation) => getVideos(channel.authorId, continuation)),

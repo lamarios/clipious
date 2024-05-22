@@ -24,11 +24,12 @@ class TvFilterListSettingsScreen extends StatelessWidget {
       body: BlocProvider(
         create: (context) => VideoFilterCubit(const VideoFilterState()),
         child: BlocBuilder<VideoFilterCubit, VideoFilterState>(
-          builder: (context, _) {
+          builder: (context, state) {
             var cubit = context.read<VideoFilterCubit>();
 
             // sorting filters by channel
-            Map<String, List<VideoFilter>> mappedFilters = _.filters.groupBy(
+            Map<String, List<VideoFilter>> mappedFilters =
+                state.filters.groupBy(
               (p0) => p0.channelId ?? allChannels,
             );
             List<String> keys = mappedFilters.keys.toList();
@@ -80,18 +81,18 @@ class VideoFilterChannel extends StatelessWidget {
         create: (context) =>
             VideoFilterChannelCubit(VideoFilterChannelState(filters: filters)),
         child: BlocBuilder<VideoFilterChannelCubit, VideoFilterChannelState>(
-            builder: (context, _) {
+            builder: (context, state) {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              if (_.loading)
+              if (state.loading)
                 const SizedBox(
                     height: 20, width: 20, child: CircularProgressIndicator()),
-              if (!_.loading && _.channel == null)
+              if (!state.loading && state.channel == null)
                 SettingsTitle(title: locals.videoFilterAllChannels),
-              if (!_.loading && _.channel != null)
-                SettingsTitle(title: _.channel?.author ?? ''),
-              ..._.filters.map((e) => SettingsTile(
+              if (!state.loading && state.channel != null)
+                SettingsTitle(title: state.channel?.author ?? ''),
+              ...state.filters.map((e) => SettingsTile(
                   key: ValueKey(e.uuid),
                   title: e.localizedLabel(locals, context),
                   onSelected: (context) => editFilter(context, filter: e)))

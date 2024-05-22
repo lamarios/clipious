@@ -55,7 +55,7 @@ class TvTimePickerScreen extends StatelessWidget {
       body: TvOverscan(
           child: BlocProvider(
         create: (context) => TimePickerCubit(value),
-        child: BlocBuilder<TimePickerCubit, String>(builder: (context, _) {
+        child: BlocBuilder<TimePickerCubit, String>(builder: (context, state) {
           var cubit = context.read<TimePickerCubit>();
           return Center(
             child: Row(
@@ -105,8 +105,8 @@ class TvTimePickerScreen extends StatelessWidget {
                     ),
                   ),
                   onPressed: (context) {
-                    AutoRouter.of(context).pop();
-                    return onTimePicked(_);
+                    AutoRouter.of(context).maybePop();
+                    return onTimePicked(state);
                   },
                 )
               ],

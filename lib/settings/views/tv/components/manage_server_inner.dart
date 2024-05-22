@@ -117,12 +117,13 @@ class TvManageServersInner extends StatelessWidget {
     ColorScheme colorScheme = Theme.of(context).colorScheme;
     AppLocalizations locals = AppLocalizations.of(context)!;
     return BlocBuilder<ServerListSettingsCubit, ServerListSettingsState>(
-        builder: (context, _) {
+        builder: (context, state) {
       var cubit = context.read<ServerListSettingsCubit>();
       var settings = context.watch<SettingsCubit>();
-      var filteredPublicServers = _.publicServers
+      var filteredPublicServers = state.publicServers
           .where((s) =>
-              _.dbServers.indexWhere((element) => element.url == s.url) == -1)
+              state.dbServers.indexWhere((element) => element.url == s.url) ==
+              -1)
           .toList();
       return ListView(children: [
         SettingsTile(
@@ -134,7 +135,7 @@ class TvManageServersInner extends StatelessWidget {
               onChanged: (value) {}, value: settings.state.skipSslVerification),
         ),
         SettingsTitle(title: locals.yourServers),
-        ..._.dbServers.map((s) => SettingsTile(
+        ...state.dbServers.map((s) => SettingsTile(
               leading: InkWell(
                 onTap: () => cubit.switchServer(s),
                 child: Padding(
@@ -161,17 +162,17 @@ class TvManageServersInner extends StatelessWidget {
               color: colorScheme.secondary,
             ),
           ),
-          onSelected: (context) => addServerDialog(context, _),
+          onSelected: (context) => addServerDialog(context, state),
         ),
         SettingsTitle(title: locals.publicServers),
-        ..._.publicServersError != PublicServerErrors.none
+        ...state.publicServersError != PublicServerErrors.none
             ? [
                 SettingsTile(
                   onSelected: (context) => cubit.getPublicServers(),
                   title: locals.publicServersError,
                 )
               ]
-            : _.pinging
+            : state.pinging
                 ? [
                     SettingsTile(
                       title: locals.loadingPublicServer,
@@ -180,8 +181,8 @@ class TvManageServersInner extends StatelessWidget {
                           width: 15,
                           child: CircularProgressIndicator(
                             strokeWidth: 2,
-                            value: _.publicServerProgress > 0
-                                ? _.publicServerProgress
+                            value: state.publicServerProgress > 0
+                                ? state.publicServerProgress
                                 : null,
                           )),
                     )

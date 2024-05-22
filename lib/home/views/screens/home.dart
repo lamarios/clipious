@@ -134,7 +134,7 @@ class _MainScreenState extends State<MainContentScreen> {
                 final selectedPage = allowedPages[tabsRouter.activeIndex];
                 return Scaffold(
                     // so we rebuild the view if the server changes
-                    backgroundColor: colorScheme.background,
+                    backgroundColor: colorScheme.surface,
                     bottomNavigationBar: deviceType == DeviceType.phone &&
                             allowedPages.length >= 2
                         ? NavigationBar(

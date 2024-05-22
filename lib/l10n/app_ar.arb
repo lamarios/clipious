@@ -711,7 +711,7 @@
   "@videoFilterHide": {
     "description": "Label for settings to hide filtered videos"
   },
-  "videoFilterWholeChannel": "{أخفي أو فلتر} جميع مقاطع الفيديو من القناة",
+  "videoFilterWholeChannel": "{hideOrFilter} جميع مقاطع الفيديو من القناة",
   "@videoFilterWholeChannel": {
     "description": "Label for whole channel filtering",
     "placeholders": {
@@ -1081,7 +1081,7 @@
   "@videoFilterStartTime": {
     "description": "Title for filter start time"
   },
-  "videoFilterAppliedOn": "تطبق على {الأيام المحددة}",
+  "videoFilterAppliedOn": "تطبق على {selectedDays}",
   "@videoFilterAppliedOn": {
     "description": "Readable text on when the filter should apply",
     "placeholders": {
@@ -1095,7 +1095,7 @@
   "@to": {
     "description": "To word as in 'From xx To xx')"
   },
-  "videoFilterTimeOfDayFromTo": "من {من} إلى {إلى}",
+  "videoFilterTimeOfDayFromTo": "من {from} إلى {to}",
   "@videoFilterTimeOfDayFromTo": {
     "description": "Time of day range",
     "placeholders": {
@@ -1145,7 +1145,7 @@
   "@deletePlaylistNotificationContent": {
     "description": "Title for dialog to confirm whether to delete playlist notifications"
   },
-  "channelNotificationTitle": "فيديوهات جديدة من {القناة}",
+  "channelNotificationTitle": "فيديوهات جديدة من {channel}",
   "@channelNotificationTitle": {
     "description": "Title for the channel notifications when there are new videos",
     "placeholders": {

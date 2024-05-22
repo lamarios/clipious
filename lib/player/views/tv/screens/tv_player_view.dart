@@ -27,11 +27,11 @@ class TvPlayerScreen extends StatelessWidget {
         data: ThemeData(useMaterial3: true, colorScheme: darkColorScheme),
         child: Scaffold(
           body: BlocBuilder<PlayerCubit, PlayerState>(
-            builder: (context, _) => Stack(
+            builder: (context, state) => Stack(
               children: [
-                if (_.hasVideo)
+                if (state.hasVideo)
                   VideoPlayer(
-                    video: _.currentlyPlaying,
+                    video: state.currentlyPlaying,
                     miniPlayer: false,
                     playNow: true,
                     disableControls: true,

@@ -40,7 +40,7 @@ class ChannelNotificationList extends StatelessWidget {
                   decoration: BoxDecoration(
                       color: index % 2 != 0
                           ? colors.secondaryContainer.withOpacity(0.5)
-                          : colors.background,
+                          : colors.surface,
                       borderRadius: BorderRadius.circular(10)),
                   child: InkWell(
                     onTap: () => AutoRouter.of(context)

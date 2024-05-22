@@ -24,7 +24,7 @@ class ManageServerState extends State<ManageServersScreen> {
         appBar: AppBar(
           title: Text(locals.manageServers),
         ),
-        backgroundColor: colorScheme.background,
+        backgroundColor: colorScheme.surface,
         body: SafeArea(
             bottom: false,
             child: BlocProvider(

@@ -31,7 +31,7 @@ class AddToQueueButton extends StatelessWidget {
     var textTheme = Theme.of(context).textTheme;
     return BlocBuilder<PlayerCubit, PlayerState>(
         buildWhen: (previous, current) => previous.videos != current.videos,
-        builder: (context, _) {
+        builder: (context, state) {
           return FilledButton.tonal(
               style: const ButtonStyle(visualDensity: VisualDensity.compact),
               onPressed: canAddToQueue(context, videos)

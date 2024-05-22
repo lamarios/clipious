@@ -72,24 +72,28 @@ class Player extends StatelessWidget {
                     previous.currentlyPlaying != current.currentlyPlaying ||
                     previous.offlineCurrentlyPlaying !=
                         current.offlineCurrentlyPlaying,
-                builder: (context, _) {
+                builder: (context, state) {
                   return AspectRatio(
                     aspectRatio: isFullScreen ? aspectRatio : 16 / 9,
-                    child: _.isAudio
+                    child: state.isAudio
                         ? AudioPlayer(
                             key: const ValueKey('audio-player'),
-                            video: _.isAudio ? _.currentlyPlaying : null,
-                            offlineVideo:
-                                _.isAudio ? _.offlineCurrentlyPlaying : null,
+                            video:
+                                state.isAudio ? state.currentlyPlaying : null,
+                            offlineVideo: state.isAudio
+                                ? state.offlineCurrentlyPlaying
+                                : null,
                             miniPlayer: false,
                           )
                         : VideoPlayer(
                             key: const ValueKey('player'),
-                            video: !_.isAudio ? _.currentlyPlaying : null,
-                            offlineVideo:
-                                !_.isAudio ? _.offlineCurrentlyPlaying : null,
+                            video:
+                                !state.isAudio ? state.currentlyPlaying : null,
+                            offlineVideo: !state.isAudio
+                                ? state.offlineCurrentlyPlaying
+                                : null,
                             miniPlayer: false,
-                            startAt: _.startAt,
+                            startAt: state.startAt,
                           ),
                   );
                 })
@@ -121,7 +125,7 @@ class Player extends StatelessWidget {
                     ? GestureDetector(
                         child: AnimatedContainer(
                           duration: animationDuration,
-                          color: colors.background,
+                          color: colors.surface,
                           padding: EdgeInsets.symmetric(
                               horizontal: isMini && !isDragging ? 7 : 0),
                           child: ClipRRect(
@@ -135,7 +139,7 @@ class Player extends StatelessWidget {
                                     ? Colors.black
                                     : isMini
                                         ? colors.secondaryContainer
-                                        : colors.background,
+                                        : colors.surface,
                               ),
                               child: Column(
                                 mainAxisSize: isMini

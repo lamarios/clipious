@@ -34,22 +34,22 @@ class HistoryView extends StatelessWidget {
         )
       ],
       child: BlocBuilder<ItemListCubit<String>, ItemListState<String>>(
-          builder: (context, _) {
+          builder: (context, state) {
         var listCubit = context.read<ItemListCubit<String>>();
         var historyCubit = context.read<HistoryCubit>();
         return Stack(
           children: [
-            _.error != ItemListErrors.none
+            state.error != ItemListErrors.none
                 ? Center(
                     child: Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Text(switch (_.error) {
+                    child: Text(switch (state.error) {
                       ItemListErrors.invalidScope =>
                         locals.itemListErrorInvalidScope,
                       _ => locals.itemlistErrorGeneric
                     }),
                   ))
-                : !_.loading && _.items.isEmpty
+                : !state.loading && state.items.isEmpty
                     ? Center(
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
@@ -63,15 +63,17 @@ class HistoryView extends StatelessWidget {
                           child: ListView.builder(
                             controller: listCubit.scrollController,
                             scrollDirection: Axis.vertical,
-                            itemCount: _.items.length + (_.loading ? 5 : 0),
+                            itemCount:
+                                state.items.length + (state.loading ? 5 : 0),
                             itemBuilder: (context, index) => Padding(
                               padding: EdgeInsets.only(
-                                  bottom:
-                                      index == _.items.length - 1 ? 70.0 : 0),
-                              child: index >= _.items.length
+                                  bottom: index == state.items.length - 1
+                                      ? 70.0
+                                      : 0),
+                              child: index >= state.items.length
                                   ? const CompactVideoPlaceHolder()
                                   : SwipeActionCell(
-                                      key: ValueKey(_.items[index]),
+                                      key: ValueKey(state.items[index]),
                                       trailingActions: [
                                         SwipeAction(
                                           performsFirstActionWithFullSwipe:
@@ -81,19 +83,19 @@ class HistoryView extends StatelessWidget {
                                           onTap: (handler) async {
                                             await handler(true);
                                             historyCubit.removeFromHistory(
-                                                _.items[index]);
+                                                state.items[index]);
                                           },
                                         )
                                       ],
                                       child: HistoryVideoView(
-                                        key: ValueKey(_.items[index]),
-                                        videoId: _.items[index],
+                                        key: ValueKey(state.items[index]),
+                                        videoId: state.items[index],
                                       )),
                             ),
                           ),
                         ),
                       ),
-            if (_.loading) const TopListLoading(),
+            if (state.loading) const TopListLoading(),
             Positioned(
                 bottom: 15,
                 right: 15,

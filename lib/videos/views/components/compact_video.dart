@@ -41,7 +41,7 @@ class CompactVideo extends StatelessWidget {
       create: (context) =>
           CompactVideoCubit(CompactVideoState(offlineVideo: offlineVideo)),
       child: BlocBuilder<CompactVideoCubit, CompactVideoState>(
-          builder: (context, _) {
+          builder: (context, state) {
         return InkWell(
             onTap: onTap,
             child: Padding(
@@ -64,7 +64,7 @@ class CompactVideo extends StatelessWidget {
                           decoration: BoxDecoration(
                               color: (highlighted ?? false)
                                   ? colors.secondaryContainer
-                                  : colors.background,
+                                  : colors.surface,
                               borderRadius: BorderRadius.circular(10)),
                           duration: animationDuration * 2,
                         ),

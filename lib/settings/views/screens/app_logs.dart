@@ -20,7 +20,7 @@ class AppLogsScreen extends StatelessWidget {
     return BlocProvider(
       create: (context) => AppLogsCubit(AppLogsState.init()),
       child: BlocBuilder<AppLogsCubit, AppLogsState>(
-        builder: (context, _) {
+        builder: (context, state) {
           var cubit = context.read<AppLogsCubit>();
           return Scaffold(
             appBar: AppBar(
@@ -40,11 +40,11 @@ class AppLogsScreen extends StatelessWidget {
                     left: 0,
                     right: 0,
                     top: 0,
-                    bottom: _.selected.isNotEmpty ? 50 : 0,
+                    bottom: state.selected.isNotEmpty ? 50 : 0,
                     child: ListView.separated(
-                      itemCount: _.logs.length,
+                      itemCount: state.logs.length,
                       itemBuilder: (context, index) {
-                        AppLog log = _.logs[index];
+                        AppLog log = state.logs[index];
                         return CheckboxListTile(
                           key: ValueKey(log.uuid),
                           title: Text(
@@ -56,7 +56,7 @@ class AppLogsScreen extends StatelessWidget {
                               '${log.message}${log.stacktrace != null ? '\n\n${log.stacktrace}' : ''}'),
                           dense: true,
                           visualDensity: VisualDensity.compact,
-                          value: _.selected.contains(log.uuid),
+                          value: state.selected.contains(log.uuid),
                           onChanged: (bool? value) =>
                               cubit.selectLog(log.uuid, value),
                         );
@@ -69,7 +69,7 @@ class AppLogsScreen extends StatelessWidget {
                   AnimatedPositioned(
                       left: 0,
                       right: 0,
-                      bottom: _.selected.isNotEmpty ? 0 : -50,
+                      bottom: state.selected.isNotEmpty ? 0 : -50,
                       duration: animationDuration,
                       child: InkWell(
                         onTap: cubit.copySelectedLogsToClipboard,
@@ -88,7 +88,7 @@ class AppLogsScreen extends StatelessWidget {
                                 ),
                               ),
                               Text(
-                                  '${locals.copyToClipBoard} (${_.selected.length})'),
+                                  '${locals.copyToClipBoard} (${state.selected.length})'),
                             ],
                           ),
                         ),

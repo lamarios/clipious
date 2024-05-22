@@ -56,7 +56,7 @@ class TvPlayerSettings extends StatelessWidget {
       create: (context) => TvPlayerSettingsCubit(const TvPlayerSettingsState(),
           context.read<VideoPlayerCubit>(), settings),
       child: BlocBuilder<TvPlayerSettingsCubit, TvPlayerSettingsState>(
-          builder: (context, _) {
+          builder: (context, playerState) {
         var cubit = context.read<TvPlayerSettingsCubit>();
         var settings = context.read<SettingsCubit>();
 
@@ -71,7 +71,7 @@ class TvPlayerSettings extends StatelessWidget {
                     padding: const EdgeInsets.all(8.0),
                     child: TvButton(
                       autofocus: true,
-                      unfocusedColor: _.selected == Tabs.video
+                      unfocusedColor: playerState.selected == Tabs.video
                           ? colors.secondaryContainer
                           : Colors.transparent,
                       onFocusChanged: cubit.videoButtonFocusChange,
@@ -91,7 +91,7 @@ class TvPlayerSettings extends StatelessWidget {
                       padding: const EdgeInsets.all(8.0),
                       child: TvButton(
                         onFocusChanged: cubit.audioButtonFocusChange,
-                        unfocusedColor: _.selected == Tabs.audio
+                        unfocusedColor: playerState.selected == Tabs.audio
                             ? colors.secondaryContainer
                             : Colors.transparent,
                         child: Padding(
@@ -106,7 +106,7 @@ class TvPlayerSettings extends StatelessWidget {
                     padding: const EdgeInsets.all(8.0),
                     child: TvButton(
                       onFocusChanged: cubit.captionsButtonFocusChange,
-                      unfocusedColor: _.selected == Tabs.captions
+                      unfocusedColor: playerState.selected == Tabs.captions
                           ? colors.secondaryContainer
                           : Colors.transparent,
                       child: Padding(
@@ -120,7 +120,7 @@ class TvPlayerSettings extends StatelessWidget {
                     padding: const EdgeInsets.all(8.0),
                     child: TvButton(
                       onFocusChanged: cubit.playbackSpeedButtonFocusChange,
-                      unfocusedColor: _.selected == Tabs.playbackSpeed
+                      unfocusedColor: playerState.selected == Tabs.playbackSpeed
                           ? colors.secondaryContainer
                           : Colors.transparent,
                       child: Padding(

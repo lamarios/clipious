@@ -20,13 +20,13 @@ class SponsorBlockSettingsScreen extends StatelessWidget {
     SettingsThemeData theme = settingsTheme(colorScheme);
 
     return BlocBuilder<SettingsCubit, SettingsState>(
-      builder: (context, _) {
+      builder: (context, state) {
         var cubit = context.read<SettingsCubit>();
         return Scaffold(
             appBar: AppBar(
               title: const Text('SponsorBlock'),
             ),
-            backgroundColor: colorScheme.background,
+            backgroundColor: colorScheme.surface,
             body: SafeArea(
               bottom: false,
               child:
@@ -36,7 +36,8 @@ class SponsorBlockSettingsScreen extends StatelessWidget {
                     tiles: SponsorSegmentType.values
                         .map((t) => SettingsTile.switchTile(
                               initialValue:
-                                  _.settings[t.settingsName()]?.value == 'true',
+                                  state.settings[t.settingsName()]?.value ==
+                                      'true',
                               onToggle: (bool value) => cubit.saveSetting(
                                   SettingsValue(
                                       t.settingsName(), value.toString())),

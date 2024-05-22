@@ -340,12 +340,12 @@ SystemUiOverlayStyle getUiOverlayStyle(BuildContext context,
       getColorSchemeOutsideOfMaterial(context, dark: dark, light: light);
 
   return SystemUiOverlayStyle(
-      systemNavigationBarColor: colorScheme.background,
+      systemNavigationBarColor: colorScheme.surface,
       systemNavigationBarIconBrightness:
           colorScheme.brightness == Brightness.dark
               ? Brightness.light
               : Brightness.dark,
-      statusBarColor: colorScheme.background,
+      statusBarColor: colorScheme.surface,
       statusBarIconBrightness: colorScheme.brightness == Brightness.dark
           ? Brightness.light
           : Brightness.dark);

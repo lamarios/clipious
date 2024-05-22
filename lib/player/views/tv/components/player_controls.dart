@@ -32,7 +32,7 @@ class TvPlayerControls extends StatelessWidget {
       create: (context) =>
           TvPlayerControlsCubit(const TvPlayerControlsState(), player),
       child: BlocBuilder<TvPlayerControlsCubit, TvPlayerControlsState>(
-        builder: (context, _) {
+        builder: (context, playerState) {
           var cubit = context.read<TvPlayerControlsCubit>();
           var currentlyPlaying = context
               .select((PlayerCubit value) => value.state.currentlyPlaying);
@@ -61,7 +61,7 @@ class TvPlayerControls extends StatelessWidget {
                     right: 0,
                     bottom: 0,
                     child: AnimatedOpacity(
-                      opacity: _.controlsOpacity,
+                      opacity: playerState.controlsOpacity,
                       duration: animationDuration,
                       child: Container(
                         decoration: BoxDecoration(
@@ -78,7 +78,7 @@ class TvPlayerControls extends StatelessWidget {
                   ),
                   Positioned(
                       child: TvOverscan(
-                    child: _.showSettings
+                    child: playerState.showSettings
                         ? const TvPlayerSettings()
                         : const SizedBox.shrink(),
                   )),
@@ -86,10 +86,10 @@ class TvPlayerControls extends StatelessWidget {
                       top: 0,
                       left: 0,
                       right: 0,
-                      child: _.showSettings
+                      child: playerState.showSettings
                           ? const SizedBox.shrink()
                           : AnimatedOpacity(
-                              opacity: _.controlsOpacity,
+                              opacity: playerState.controlsOpacity,
                               duration: animationDuration,
                               child: TvOverscan(
                                 child: Column(
@@ -141,13 +141,13 @@ class TvPlayerControls extends StatelessWidget {
                     left: 0,
                     right: 0,
                     child: AnimatedOpacity(
-                      opacity: _.controlsOpacity,
+                      opacity: playerState.controlsOpacity,
                       duration: animationDuration,
                       child: TvOverscan(
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            _.displayControls
+                            playerState.displayControls
                                 ? Padding(
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 8.0, vertical: 16),
@@ -367,7 +367,7 @@ class TvPlayerControls extends StatelessWidget {
                       right: 0,
                       child: AnimatedSwitcher(
                           duration: animationDuration,
-                          child: _.showQueue
+                          child: playerState.showQueue
                               ? TvOverscan(
                                   child: FocusScope(
                                   autofocus: true,

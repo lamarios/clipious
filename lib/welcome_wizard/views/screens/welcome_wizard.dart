@@ -39,7 +39,7 @@ class WelcomeWizardScreen extends StatelessWidget {
             var cubit = context.read<WelcomeWizardCubit>();
             return Scaffold(
               extendBodyBehindAppBar: true,
-              backgroundColor: colors.background,
+              backgroundColor: colors.surface,
               body: SafeArea(
                   top: true,
                   child: Column(

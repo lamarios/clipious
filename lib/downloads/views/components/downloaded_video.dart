@@ -26,29 +26,30 @@ class DownloadedVideoView extends StatelessWidget {
       create: (BuildContext context) => DownloadedVideoCubit(
           downloadManager, DownloadedVideoState.init(video.videoId), player),
       child: BlocBuilder<DownloadedVideoCubit, DownloadedVideoState>(
-          builder: (context, _) {
-        bool downloadFailed = _.video?.downloadFailed ?? false;
+          builder: (context, state) {
+        bool downloadFailed = state.video?.downloadFailed ?? false;
         var cubit = context.read<DownloadedVideoCubit>();
 
-        return _.video != null
+        return state.video != null
             ? Stack(
                 children: [
                   AnimatedOpacity(
                     opacity: (downloadFailed) ? 0.5 : 1,
                     duration: animationDuration,
                     child: CompactVideo(
-                      offlineVideo: _.video,
+                      offlineVideo: state.video,
                       onTap: downloadFailed
                           ? cubit.retryDownload
                           : cubit.playVideo,
                       trailing: [
-                        (_.video?.audioOnly ?? false)
+                        (state.video?.audioOnly ?? false)
                             ? Icon(
                                 Icons.audiotrack,
                                 color: colors.secondary,
                               )
                             : const SizedBox.shrink(),
-                        (_.video?.downloadComplete ?? false) || downloadFailed
+                        (state.video?.downloadComplete ?? false) ||
+                                downloadFailed
                             ? const SizedBox.shrink()
                             : Padding(
                                 padding: const EdgeInsets.only(right: 8.0),
@@ -58,11 +59,13 @@ class DownloadedVideoView extends StatelessWidget {
                                   child: TweenAnimationBuilder(
                                       duration: animationDuration,
                                       tween: Tween<double>(
-                                          begin: 0, end: _.progress),
+                                          begin: 0, end: state.progress),
                                       builder: (context, value, child) {
                                         return CircularProgressIndicator(
                                           strokeWidth: 2,
-                                          value: _.progress == 0 ? null : value,
+                                          value: state.progress == 0
+                                              ? null
+                                              : value,
                                         );
                                       }),
                                 ),

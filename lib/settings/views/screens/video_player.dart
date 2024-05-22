@@ -27,7 +27,7 @@ class VideoPlayerSettingsScreen extends StatelessWidget {
         title: Text(locals.videoPlayer),
       ),
       body: SafeArea(child:
-          BlocBuilder<SettingsCubit, SettingsState>(builder: (context, _) {
+          BlocBuilder<SettingsCubit, SettingsState>(builder: (context, state) {
         var cubit = context.read<SettingsCubit>();
         return DefaultTabController(
           length: 2,
@@ -38,28 +38,28 @@ class VideoPlayerSettingsScreen extends StatelessWidget {
               SettingsSection(tiles: [
                 SettingsTile.switchTile(
                   leading: const Icon(Icons.stream),
-                  initialValue: _.useDash,
+                  initialValue: state.useDash,
                   onToggle: cubit.toggleDash,
                   title: Text(locals.useDash),
                   description: Text(locals.useDashDescription),
                 ),
                 SettingsTile.switchTile(
                   leading: const Icon(Icons.vpn_lock),
-                  initialValue: _.useProxy,
+                  initialValue: state.useProxy,
                   onToggle: cubit.toggleProxy,
                   title: Text(locals.useProxy),
                   description: Text(locals.useProxyDescription),
                 ),
                 SettingsTile.switchTile(
                   leading: const Icon(Icons.play_arrow),
-                  initialValue: _.autoplayVideoOnLoad,
+                  initialValue: state.autoplayVideoOnLoad,
                   onToggle: cubit.toggleAutoplayOnLoad,
                   title: Text(locals.autoplayVideoOnLoad),
                   description: Text(locals.autoplayVideoOnLoadDescription),
                 ),
                 SettingsTile.switchTile(
                   leading: const Icon(Icons.speed),
-                  initialValue: _.rememberPlayBackSpeed,
+                  initialValue: state.rememberPlayBackSpeed,
                   onToggle: cubit.toggleRememberPlaybackSpeed,
                   title: Text(locals.rememberPlaybackSpeed),
                   description: Text(locals.rememberPlaybackSpeedDescription),
@@ -73,14 +73,14 @@ class VideoPlayerSettingsScreen extends StatelessWidget {
                 if (getDeviceType() == DeviceType.phone)
                   SettingsTile.switchTile(
                     leading: const Icon(Icons.stay_primary_landscape),
-                    initialValue: _.fullscreenOnRotate,
+                    initialValue: state.fullscreenOnRotate,
                     onToggle: cubit.setFullscreenOnRotate,
                     title: Text(locals.fullscreenOnLandscape),
                     description: Text(locals.fullscreenOnLandscapeDescription),
                   ),
                 SettingsTile.switchTile(
                   leading: const Icon(Icons.aspect_ratio),
-                  initialValue: _.forceLandscapeFullScreen,
+                  initialValue: state.forceLandscapeFullScreen,
                   onToggle: cubit.toggleForceLandscapeFullScreen,
                   title: Text(locals.lockFullScreenToLandscape),
                   description:
@@ -88,7 +88,7 @@ class VideoPlayerSettingsScreen extends StatelessWidget {
                 ),
                 SettingsTile.switchTile(
                   leading: const Icon(Icons.open_in_full),
-                  initialValue: _.fillFullscreen,
+                  initialValue: state.fillFullscreen,
                   onToggle: cubit.toggleFillFullscreen,
                   title: Text(locals.fillFullscreen),
                   description: Text(locals.fillFullscreenDescription),
@@ -106,7 +106,7 @@ class VideoPlayerSettingsScreen extends StatelessWidget {
                           onPressed: () =>
                               cubit.changeSkipStep(increase: false),
                           icon: const Icon(Icons.remove)),
-                      Text(_.skipStep.floor().toString()),
+                      Text(state.skipStep.floor().toString()),
                       IconButton(
                           onPressed: () => cubit.changeSkipStep(increase: true),
                           icon: const Icon(Icons.add)),
@@ -115,7 +115,7 @@ class VideoPlayerSettingsScreen extends StatelessWidget {
                 ),
                 SettingsTile.switchTile(
                   leading: const Icon(Icons.moving),
-                  initialValue: _.skipExponentially,
+                  initialValue: state.skipExponentially,
                   onToggle: cubit.setSkipExponentially,
                   title: Text(locals.exponentialSkip),
                   description: Text(locals.exponentialSkipDescription),
@@ -133,7 +133,7 @@ class VideoPlayerSettingsScreen extends StatelessWidget {
                           onPressed: () =>
                               cubit.changeSubtitleSize(increase: false),
                           icon: const Icon(Icons.remove)),
-                      Text(_.subtitleSize.floor().toString()),
+                      Text(state.subtitleSize.floor().toString()),
                       IconButton(
                           onPressed: () =>
                               cubit.changeSubtitleSize(increase: true),
@@ -143,14 +143,14 @@ class VideoPlayerSettingsScreen extends StatelessWidget {
                 ),
                 SettingsTile.switchTile(
                   leading: const Icon(Icons.format_paint),
-                  initialValue: _.subtitlesBackground,
+                  initialValue: state.subtitlesBackground,
                   onToggle: cubit.setSubtitlesBackground,
                   title: Text(locals.subtitlesBackground),
                   description: Text(locals.subtitlesBackgroundDescription),
                 ),
                 SettingsTile.switchTile(
                   leading: const Icon(Icons.language),
-                  initialValue: _.rememberSubtitles,
+                  initialValue: state.rememberSubtitles,
                   onToggle: cubit.toggleRememberSubtitles,
                   title: Text(locals.rememberSubtitleLanguage),
                   description: Text(locals.rememberSubtitleLanguageDescription),

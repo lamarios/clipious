@@ -26,28 +26,28 @@ class TvSubscribeButton extends StatelessWidget {
       create: (context) =>
           SubscribeButtonCubit(SubscribeButtonState.init(channelId)),
       child: BlocBuilder<SubscribeButtonCubit, SubscribeButtonState>(
-          builder: (context, _) {
+          builder: (context, state) {
         var cubit = context.read<SubscribeButtonCubit>();
         return Padding(
           padding: const EdgeInsets.symmetric(vertical: 16.0),
           child: TvButton(
             autofocus: autoFocus,
             onFocusChanged: onFocusChanged,
-            unfocusedColor: colors.background.withOpacity(0.0),
+            unfocusedColor: colors.surface.withOpacity(0.0),
             onPressed: (context) =>
-                _.isLoggedIn ? cubit.toggleSubscription() : null,
+                state.isLoggedIn ? cubit.toggleSubscription() : null,
             child: Padding(
               padding:
                   const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
-                children: !_.loading && _.isLoggedIn
+                children: !state.loading && state.isLoggedIn
                     ? [
-                        Icon(_.isSubscribed ? Icons.done : Icons.add),
+                        Icon(state.isSubscribed ? Icons.done : Icons.add),
                         Padding(
                           padding: const EdgeInsets.only(left: 8.0),
                           child: Text(
-                            '${(_.isSubscribed ? locals.subscribed : locals.subscribe)} | $subCount',
+                            '${(state.isSubscribed ? locals.subscribed : locals.subscribe)} | $subCount',
                           ),
                         ),
                       ]
