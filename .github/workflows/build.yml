@@ -40,6 +40,7 @@ jobs:
       - run: set -e
       - run: ./submodules/flutter/bin/flutter doctor
       - run: ./submodules/flutter/bin/flutter config --no-analytics
+      - run: ./submodules/flutter/bin/dart run build_runner build --delete-conflicting-outputs
       - run: ./submodules/flutter/bin/flutter pub get
       - run: ./submodules/flutter/bin/dart format --output=none --set-exit-if-changed ./lib
       - run: ./submodules/flutter/bin/dart analyze ./lib
