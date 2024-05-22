@@ -1,5 +1,5 @@
 name: invidious
-version: 1.19.8+4053
+version: 1.19.9+4054
 publish_to: none
 description: A new Flutter project.
 environment: 
@@ -82,11 +82,10 @@ dev_dependencies:
   flutter_test: 
     sdk: flutter
 dependency_overrides: 
-  cupertino_icons: ^1.0.2
-  intl: 0.19.0
-  js: 0.7.1
-  meta: 1.11.0
-  web: 0.5.0
+ # cupertino_icons: ^1.0.2
+ # js: 0.7.1
+  meta: 1.14.0
+ # web: 0.5.0
 flutter: 
   assets: 
     - assets/icon.svg

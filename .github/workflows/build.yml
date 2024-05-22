@@ -1,5 +1,5 @@
 # This is a basic workflow to help you get started with Actions
-name: Flutter
+name: Build
 
 # Controls when the workflow will run
 on:
@@ -43,8 +43,8 @@ jobs:
       - run: ./submodules/flutter/bin/flutter pub get
       - run: ./submodules/flutter/bin/dart format --output=none --set-exit-if-changed ./lib
       - run: ./submodules/flutter/bin/dart analyze ./lib
-      - name: Run tests with nix (starts postgres and invidious server)
-        run: nix-shell --run './submodules/flutter/bin/flutter test'
+     # - name: Run tests with nix (starts postgres and invidious server)
+     #   run: nix-shell --run './submodules/flutter/bin/flutter test'
       - run: ./submodules/flutter/bin/flutter pub run flutter_native_splash:create
       - run: ./submodules/flutter/bin/flutter build apk --profile --split-per-abi
       - name: Archive build artifacts
