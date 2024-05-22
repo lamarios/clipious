@@ -40,13 +40,13 @@ jobs:
       - run: set -e
       - run: ./submodules/flutter/bin/flutter doctor
       - run: ./submodules/flutter/bin/flutter config --no-analytics
-      - run: ./submodules/flutter/bin/dart run build_runner build --delete-conflicting-outputs
       - run: ./submodules/flutter/bin/flutter pub get
       - run: ./submodules/flutter/bin/dart format --output=none --set-exit-if-changed ./lib
       - run: ./submodules/flutter/bin/dart analyze ./lib
      # - name: Run tests with nix (starts postgres and invidious server)
      #   run: nix-shell --run './submodules/flutter/bin/flutter test'
       - run: ./submodules/flutter/bin/flutter pub run flutter_native_splash:create
+      - run: ./submodules/flutter/bin/flutter gen-l10n
       - run: ./submodules/flutter/bin/flutter build apk --profile --split-per-abi
       - name: Archive build artifacts
         uses: actions/upload-artifact@v3
