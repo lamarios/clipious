@@ -46,7 +46,6 @@ jobs:
      # - name: Run tests with nix (starts postgres and invidious server)
      #   run: nix-shell --run './submodules/flutter/bin/flutter test'
       - run: ./submodules/flutter/bin/flutter pub run flutter_native_splash:create
-      - run: ./submodules/flutter/bin/flutter gen-l10n
       - run: ./submodules/flutter/bin/flutter build apk --profile --split-per-abi
       - name: Archive build artifacts
         uses: actions/upload-artifact@v3

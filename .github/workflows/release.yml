@@ -57,7 +57,6 @@ jobs:
           ./submodules/flutter/bin/flutter config --no-analytics
           ./submodules/flutter/bin/flutter pub get
           ./submodules/flutter/bin/flutter pub run flutter_native_splash:create
-          ./submodules/flutter/bin/flutter gen-l10n
           ./submodules/flutter/bin/flutter build apk --split-per-abi
           ./submodules/flutter/bin/flutter build apk
           ./submodules/flutter/bin/flutter build appbundle
