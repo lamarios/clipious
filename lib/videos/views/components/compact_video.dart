@@ -41,7 +41,7 @@ class CompactVideo extends StatelessWidget {
       create: (context) =>
           CompactVideoCubit(CompactVideoState(offlineVideo: offlineVideo)),
       child: BlocBuilder<CompactVideoCubit, CompactVideoState>(
-          builder: (context, _) {
+          builder: (context, state) {
         return InkWell(
             onTap: onTap,
             child: Padding(

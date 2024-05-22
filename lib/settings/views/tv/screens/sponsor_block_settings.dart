@@ -18,7 +18,7 @@ class TvSponsorBlockSettingsScreen extends StatelessWidget {
     AppLocalizations locals = AppLocalizations.of(context)!;
     return Scaffold(
       body: BlocBuilder<SettingsCubit, SettingsState>(
-        builder: (context, _) {
+        builder: (context, state) {
           var cubit = context.read<SettingsCubit>();
           return TvOverscan(
             child: ListView(
@@ -26,7 +26,8 @@ class TvSponsorBlockSettingsScreen extends StatelessWidget {
                 SettingsTitle(
                     title: locals.sponsorBlockSettingsQuickDescription),
                 ...SponsorSegmentType.values.map((t) {
-                  bool value = _.settings[t.settingsName()]?.value == 'true';
+                  bool value =
+                      state.settings[t.settingsName()]?.value == 'true';
                   return SettingsTile(
                     trailing: Switch(value: value, onChanged: (value) {}),
                     onSelected: (context) => cubit.saveSetting(

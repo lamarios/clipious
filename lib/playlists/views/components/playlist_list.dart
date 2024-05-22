@@ -33,22 +33,22 @@ class PlaylistList extends StatelessWidget {
       create: (BuildContext context) =>
           PlaylistListCubit(PlaylistListState(paginatedList: paginatedList)),
       child: BlocBuilder<PlaylistListCubit, PlaylistListState>(
-        builder: (context, _) {
+        builder: (context, state) {
           var cubit = context.read<PlaylistListCubit>();
           var deviceType = getDeviceType();
           return Stack(
             children: [
-              _.error.isNotEmpty
+              state.error.isNotEmpty
                   ? Container(
                       alignment: Alignment.center,
                       color: colorScheme.surface,
                       child: Visibility(
-                          visible: _.error.isNotEmpty,
+                          visible: state.error.isNotEmpty,
                           child: InkWell(
                               onTap: () => cubit.getPlaylists(),
-                              child: Text(_.error == couldNotGetPlaylits
+                              child: Text(state.error == couldNotGetPlaylits
                                   ? locals.couldntFetchVideos
-                                  : _.error))),
+                                  : state.error))),
                     )
                   : Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -57,7 +57,7 @@ class PlaylistList extends StatelessWidget {
                         curve: Curves.easeInOutQuad,
                         child: RefreshIndicator(
                           onRefresh: () =>
-                              !small && _.paginatedList.hasRefresh()
+                              !small && state.paginatedList.hasRefresh()
                                   ? cubit.refreshPlaylists()
                                   : null,
                           child: DeviceWidget(
@@ -66,43 +66,44 @@ class PlaylistList extends StatelessWidget {
                                 scrollDirection:
                                     small ? Axis.horizontal : Axis.vertical,
                                 controller: cubit.scrollController,
-                                itemBuilder: (context, index) =>
-                                    index >= _.playlists.length
-                                        ? PlaylistPlaceHolder(small: small)
-                                        : PlaylistInList(
-                                            key: ValueKey(
-                                                _.playlists[index].playlistId),
-                                            playlist: _.playlists[index],
-                                            canDeleteVideos: canDeleteVideos,
-                                            small: small),
+                                itemBuilder: (context, index) => index >=
+                                        state.playlists.length
+                                    ? PlaylistPlaceHolder(small: small)
+                                    : PlaylistInList(
+                                        key: ValueKey(
+                                            state.playlists[index].playlistId),
+                                        playlist: state.playlists[index],
+                                        canDeleteVideos: canDeleteVideos,
+                                        small: small),
                                 // separatorBuilder: (context, index) => const Divider(),
-                                itemCount:
-                                    _.playlists.length + (_.loading ? 7 : 0)),
+                                itemCount: state.playlists.length +
+                                    (state.loading ? 7 : 0)),
                             tablet: GridView.builder(
-                                itemCount: _.playlists.length,
+                                itemCount: state.playlists.length,
                                 gridDelegate:
                                     SliverGridDelegateWithFixedCrossAxisCount(
                                   childAspectRatio: 16 / 12,
                                   crossAxisCount: getGridCount(context),
                                 ),
-                                itemBuilder: (context, index) =>
-                                    index >= _.playlists.length
-                                        ? const TvPlaylistPlaceHolder()
-                                        : PlaylistInList(
-                                            isTablet:
-                                                deviceType == DeviceType.tablet,
-                                            thumbnailsHeight: 160,
-                                            key: ValueKey(
-                                                _.playlists[index].playlistId),
-                                            playlist: _.playlists[index],
-                                            canDeleteVideos: canDeleteVideos,
-                                            small: false)),
+                                itemBuilder: (context, index) => index >=
+                                        state.playlists.length
+                                    ? const TvPlaylistPlaceHolder()
+                                    : PlaylistInList(
+                                        isTablet:
+                                            deviceType == DeviceType.tablet,
+                                        thumbnailsHeight: 160,
+                                        key: ValueKey(
+                                            state.playlists[index].playlistId),
+                                        playlist: state.playlists[index],
+                                        canDeleteVideos: canDeleteVideos,
+                                        small: false)),
                           ),
                         ),
                       ),
                     ),
               Visibility(
-                  visible: _.loading && !small, child: const TopListLoading()),
+                  visible: state.loading && !small,
+                  child: const TopListLoading()),
               Visibility(
                   visible: !small && canDeleteVideos,
                   child: const Positioned(

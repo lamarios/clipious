@@ -114,7 +114,7 @@ class VideoFilterSetupScreen extends StatelessWidget {
       create: (context) =>
           VideoFilterEditCubit(VideoFilterEditState(filter: filter)),
       child: BlocBuilder<VideoFilterEditCubit, VideoFilterEditState>(
-          builder: (context, _) {
+          builder: (context, state) {
         var cubit = context.read<VideoFilterEditCubit>();
         return Scaffold(
           appBar: AppBar(
@@ -135,13 +135,13 @@ class VideoFilterSetupScreen extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          if (_.channel == null)
+                          if (state.channel == null)
                             FilledButton.tonalIcon(
                                 onPressed: () => searchChannel(context),
                                 icon: const Icon(Icons.personal_video),
                                 label: Text(
                                     '${locals.channel} (${locals.optional})')),
-                          if (_.channel != null)
+                          if (state.channel != null)
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: RichText(
@@ -150,12 +150,12 @@ class VideoFilterSetupScreen extends StatelessWidget {
                                     text: '${locals.channel}: ',
                                     style: textTheme.bodyLarge),
                                 TextSpan(
-                                    text: _.channel?.author ?? '',
+                                    text: state.channel?.author ?? '',
                                     style: textTheme.bodyLarge
                                         ?.copyWith(color: colors.primary))
                               ])),
                             ),
-                          if (_.channel != null)
+                          if (state.channel != null)
                             IconButton(
                                 onPressed: () => cubit.channelClear(),
                                 icon: const Icon(Icons.clear))
@@ -190,10 +190,10 @@ class VideoFilterSetupScreen extends StatelessWidget {
 */
                     ,
                     Visibility(
-                        visible: _.filter?.channelId != null,
+                        visible: state.filter?.channelId != null,
                         child: SwitchListTile(
                             title: Text(locals.videoFilterHideAllFromChannel),
-                            value: _.filter?.filterAll ?? false,
+                            value: state.filter?.filterAll ?? false,
                             onChanged: cubit.channelHideAll)),
                     ...getFilterWidgets(context),
                     SwitchListTile(
@@ -218,7 +218,8 @@ class VideoFilterSetupScreen extends StatelessWidget {
                                   String day =
                                       getWeekdayName(e).substring(0, 1);
                                   var isSelected =
-                                      _.filter?.daysOfWeek.contains(e) ?? false;
+                                      state.filter?.daysOfWeek.contains(e) ??
+                                          false;
                                   return GestureDetector(
                                     onTap: () => cubit.toggleDay(e),
                                     child: AnimatedContainer(
@@ -246,7 +247,7 @@ class VideoFilterSetupScreen extends StatelessWidget {
                                                     color: isSelected
                                                         ? colors
                                                             .onPrimaryContainer
-                                                        : colors.onBackground),
+                                                        : colors.onSurface),
                                           ),
                                           if (isSelected)
                                             const Icon(
@@ -277,11 +278,11 @@ class VideoFilterSetupScreen extends StatelessWidget {
                                   child: FilledButton.tonal(
                                       onPressed: () => selectTime(
                                           context,
-                                          _.filter?.startTime ??
+                                          state.filter?.startTime ??
                                               defaultStartTime,
                                           cubit.setStartTime),
                                       child: Text(timeStringToTimeOfDay(
-                                              _.filter?.startTime ??
+                                              state.filter?.startTime ??
                                                   defaultStartTime)
                                           .format(context))),
                                 ),
@@ -292,10 +293,11 @@ class VideoFilterSetupScreen extends StatelessWidget {
                                   child: FilledButton.tonal(
                                       onPressed: () => selectTime(
                                           context,
-                                          _.filter?.endTime ?? defaultEndTime,
+                                          state.filter?.endTime ??
+                                              defaultEndTime,
                                           cubit.setEndTime),
                                       child: Text(timeStringToTimeOfDay(
-                                              _.filter?.endTime ??
+                                              state.filter?.endTime ??
                                                   defaultEndTime)
                                           .format(context))),
                                 ),
@@ -325,14 +327,14 @@ class VideoFilterSetupScreen extends StatelessWidget {
                           style: textTheme.bodySmall
                               ?.copyWith(color: colors.secondary),
                         ),
-                        value: _.filter?.hideFromFeed ?? false,
+                        value: state.filter?.hideFromFeed ?? false,
                         onChanged: cubit.hideOnFilteredChanged),
                     Visibility(
                         visible: cubit.isFilterValid(),
                         child: Padding(
                           padding: const EdgeInsets.all(16.0),
                           child: Text(
-                            _.filter?.localizedLabel(locals, context) ?? '',
+                            state.filter?.localizedLabel(locals, context) ?? '',
                             style: TextStyle(color: colors.primary),
                           ),
                         )),
@@ -343,7 +345,7 @@ class VideoFilterSetupScreen extends StatelessWidget {
                               ? () async {
                                   await cubit.onSave();
                                   if (context.mounted) {
-                                    AutoRouter.of(context).pop();
+                                    AutoRouter.of(context).maybePop();
                                   }
                                 }
                               : null,

@@ -87,7 +87,7 @@ class TvHomeScreen extends StatelessWidget {
             return BlocBuilder<AppCubit, AppState>(
                 buildWhen: (previous, current) {
               return previous.server != current.server;
-            }, builder: (context, _) {
+            }, builder: (context, state) {
               return DefaultTextStyle(
                 style: textTheme.bodyLarge!,
                 child: Row(

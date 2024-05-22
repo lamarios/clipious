@@ -189,7 +189,7 @@ class BrowsingSettingsScreen extends StatelessWidget {
         title: Text(locals.browsing),
       ),
       body: SafeArea(child:
-          BlocBuilder<SettingsCubit, SettingsState>(builder: (context, _) {
+          BlocBuilder<SettingsCubit, SettingsState>(builder: (context, state) {
         var cubit = context.read<SettingsCubit>();
         var filterCount = db.getAllFilters().length;
         return DefaultTabController(
@@ -203,21 +203,22 @@ class BrowsingSettingsScreen extends StatelessWidget {
                   SettingsTile(
                     leading: const Icon(Icons.public),
                     title: Text(locals.country),
-                    value: Text(_.country.name),
-                    onPressed: (ctx) => searchCountry(ctx, _),
+                    value: Text(state.country.name),
+                    onPressed: (ctx) => searchCountry(ctx, state),
                   ),
                   SettingsTile(
                     leading: const Icon(Icons.app_settings_alt),
                     title: Text(locals.customizeAppLayout),
-                    value: Text(
-                        _.appLayout.map((e) => e.getLabel(locals)).join(", ")),
+                    value: Text(state.appLayout
+                        .map((e) => e.getLabel(locals))
+                        .join(", ")),
                     onPressed: (ctx) => customizeApp(ctx),
                   ),
                   SettingsTile.switchTile(
                     leading: const Icon(Icons.self_improvement_outlined),
                     title: Text(locals.distractionFreeMode),
                     description: Text(locals.distractionFreeModeDescription),
-                    initialValue: _.distractionFreeMode,
+                    initialValue: state.distractionFreeMode,
                     onToggle: cubit.setDistractionFreeMode,
                   ),
                   SettingsTile(
@@ -225,12 +226,12 @@ class BrowsingSettingsScreen extends StatelessWidget {
                     title: Text(locals.appLanguage),
                     value: Text(
                         cubit.getLocaleDisplayName() ?? locals.followSystem),
-                    onPressed: (ctx) => showSelectLanguage(ctx, _),
+                    onPressed: (ctx) => showSelectLanguage(ctx, state),
                   ),
                   SettingsTile.navigation(
                     leading: const Icon(Icons.manage_search),
                     title: Text(locals.searchHistory),
-                    description: Text(_.useSearchHistory
+                    description: Text(state.useSearchHistory
                         ? locals.enabled
                         : locals.searchHistoryDescription),
                     onPressed: (context) => openSearchHistorySettings(context),
@@ -245,7 +246,7 @@ class BrowsingSettingsScreen extends StatelessWidget {
                   SettingsTile.navigation(
                     leading: const Icon(Icons.adjust),
                     title: const Text('DeArrow'),
-                    description: Text(_.dearrow
+                    description: Text(state.dearrow
                         ? locals.enabled
                         : locals.deArrowSettingDescription),
                     onPressed: openDearrowSettings,
@@ -257,15 +258,15 @@ class BrowsingSettingsScreen extends StatelessWidget {
                   leading: const Icon(Icons.thumb_down),
                   title: Text(locals.enabled),
                   description: Text(locals.returnYoutubeDislikeDescription),
-                  initialValue: _.useReturnYoutubeDislike,
+                  initialValue: state.useReturnYoutubeDislike,
                   onToggle: cubit.toggleReturnYoutubeDislike,
                 ),
                 SettingsTile(
-                  enabled: _.useReturnYoutubeDislike,
+                  enabled: state.useReturnYoutubeDislike,
                   leading: const Icon(Icons.network_ping),
                   title: Text(locals.rydCustomInstance),
                   description: Text(
-                      '${_.returnYoutubeDislikeUrl.isNotEmpty ? '${locals.currentServer(_.returnYoutubeDislikeUrl)}\n' : ''}${locals.rydCustomInstanceDescription}'),
+                      '${state.returnYoutubeDislikeUrl.isNotEmpty ? '${locals.currentServer(state.returnYoutubeDislikeUrl)}\n' : ''}${locals.rydCustomInstanceDescription}'),
                   onPressed: (context) => customRydInstanceDialog(context),
                 )
               ])

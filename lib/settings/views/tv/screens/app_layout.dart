@@ -34,7 +34,7 @@ class TvAppLayoutSettingsScreen extends StatelessWidget {
 
     return Scaffold(
       body: BlocBuilder<SettingsCubit, SettingsState>(
-        builder: (context, _) {
+        builder: (context, state) {
           return TvOverscan(
             child: ListView(
                 children: HomeDataSource.defaultSettings()
@@ -43,7 +43,7 @@ class TvAppLayoutSettingsScreen extends StatelessWidget {
                           onSelected: (context) => toggleDataSource(context, e),
                           trailing: Switch(
                               onChanged: (value) {},
-                              value: _.appLayout.contains(e)),
+                              value: state.appLayout.contains(e)),
                         ))
                     .toList()),
           );

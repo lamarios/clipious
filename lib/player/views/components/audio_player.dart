@@ -31,7 +31,8 @@ class AudioPlayer extends StatelessWidget {
           player,
           settings),
       child: BlocBuilder<AudioPlayerCubit, AudioPlayerState>(
-        builder: (context, _) => BlocListener<PlayerCubit, PlayerState>(
+        builder: (context, playerState) =>
+            BlocListener<PlayerCubit, PlayerState>(
           listenWhen: (previous, current) =>
               previous.mediaCommand != current.mediaCommand &&
               current.mediaCommand != null,
@@ -43,19 +44,20 @@ class AudioPlayer extends StatelessWidget {
             child: Stack(
               alignment: Alignment.topCenter,
               children: [
-                _.video != null
+                playerState.video != null
                     ? VideoThumbnailView(
                         decoration: const BoxDecoration(),
-                        videoId: _.video!.videoId,
-                        thumbnailUrl: _.video?.deArrowThumbnailUrl ??
-                            _.video?.getBestThumbnail()?.url ??
+                        videoId: playerState.video!.videoId,
+                        thumbnailUrl: playerState.video?.deArrowThumbnailUrl ??
+                            playerState.video?.getBestThumbnail()?.url ??
                             '',
                       )
-                    : _.offlineVideo != null
+                    : playerState.offlineVideo != null
                         ? OfflineVideoThumbnail(
                             borderRadius: 0,
-                            key: ValueKey(_.offlineVideo?.videoId ?? ''),
-                            video: _.offlineVideo!)
+                            key: ValueKey(
+                                playerState.offlineVideo?.videoId ?? ''),
+                            video: playerState.offlineVideo!)
                         : const SizedBox.shrink(),
                 PlayerControls(
                     mediaPlayerCubit: context.read<AudioPlayerCubit>())

@@ -163,12 +163,13 @@ class ManagerServersView extends StatelessWidget {
     var textTheme = Theme.of(context).textTheme;
 
     return BlocBuilder<ServerListSettingsCubit, ServerListSettingsState>(
-      builder: (ctx, _) {
+      builder: (ctx, state) {
         SettingsCubit settings = context.watch<SettingsCubit>();
         ServerListSettingsCubit cubit = context.read<ServerListSettingsCubit>();
-        var filteredPublicServers = _.publicServers
+        var filteredPublicServers = state.publicServers
             .where((s) =>
-                _.dbServers.indexWhere((element) => element.url == s.url) == -1)
+                state.dbServers.indexWhere((element) => element.url == s.url) ==
+                -1)
             .toList();
         return Stack(
           children: [
@@ -188,8 +189,8 @@ class ManagerServersView extends StatelessWidget {
                 ),
                 SettingsSection(
                     title: Text(locals.yourServers),
-                    tiles: _.dbServers.isNotEmpty
-                        ? _.dbServers
+                    tiles: state.dbServers.isNotEmpty
+                        ? state.dbServers
                             .map((s) => SettingsTile(
                                   leading: InkWell(
                                     onTap: () => cubit.switchServer(s),
@@ -220,14 +221,14 @@ class ManagerServersView extends StatelessWidget {
                           ]),
                 SettingsSection(
                     title: Text(locals.publicServers),
-                    tiles: _.publicServersError != PublicServerErrors.none
+                    tiles: state.publicServersError != PublicServerErrors.none
                         ? [
                             SettingsTile(
                               onPressed: (context) => cubit.getPublicServers(),
                               title: Text(locals.publicServersError),
                             )
                           ]
-                        : _.pinging
+                        : state.pinging
                             ? [
                                 SettingsTile(
                                   title: Text(locals.loadingPublicServer),
@@ -236,8 +237,8 @@ class ManagerServersView extends StatelessWidget {
                                       width: 15,
                                       child: CircularProgressIndicator(
                                         strokeWidth: 2,
-                                        value: _.publicServerProgress > 0
-                                            ? _.publicServerProgress
+                                        value: state.publicServerProgress > 0
+                                            ? state.publicServerProgress
                                             : null,
                                       )),
                                 )
@@ -275,7 +276,7 @@ class ManagerServersView extends StatelessWidget {
                                       ),
                                       onPressed: (context) =>
                                           showPublicServerActions(
-                                              context, _, s),
+                                              context, state, s),
                                     ))
                                 .toList()),
               ],

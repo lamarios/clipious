@@ -23,27 +23,29 @@ class SubscribeButton extends StatelessWidget {
           create: (context) =>
               SubscribeButtonCubit(SubscribeButtonState.init(channelId)),
           child: BlocBuilder<SubscribeButtonCubit, SubscribeButtonState>(
-            builder: (context, _) {
+            builder: (context, state) {
               var cubit = context.read<SubscribeButtonCubit>();
-              return _.isLoggedIn
+              return state.isLoggedIn
                   ? SizedBox(
                       height: 25,
                       child: FilledButton.tonal(
                         onPressed: cubit.toggleSubscription,
                         child: Row(
                           children: [
-                            _.loading
+                            state.loading
                                 ? const SizedBox(
                                     width: 15,
                                     height: 15,
                                     child: CircularProgressIndicator(
                                       strokeWidth: 1,
                                     ))
-                                : Icon(_.isSubscribed ? Icons.done : Icons.add),
+                                : Icon(state.isSubscribed
+                                    ? Icons.done
+                                    : Icons.add),
                             Padding(
                               padding: const EdgeInsets.only(left: 8.0),
                               child: Text(
-                                  '${(_.isSubscribed ? locals.subscribed : locals.subscribe)} | $subCount'),
+                                  '${(state.isSubscribed ? locals.subscribed : locals.subscribe)} | $subCount'),
                             ),
                           ],
                         ),

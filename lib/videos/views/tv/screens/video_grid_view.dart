@@ -30,7 +30,7 @@ class TvGridScreen extends StatelessWidget {
       child: Scaffold(
         body: TvOverscan(
           child: BlocBuilder<ItemListCubit<VideoInList>,
-              ItemListState<VideoInList>>(builder: (context, _) {
+              ItemListState<VideoInList>>(builder: (context, state) {
             var cubit = context.read<ItemListCubit<VideoInList>>();
             return Column(
               children: [
@@ -40,7 +40,7 @@ class TvGridScreen extends StatelessWidget {
                       title,
                       style: textTheme.titleLarge,
                     ),
-                    _.loading
+                    state.loading
                         ? const Padding(
                             padding: EdgeInsets.all(8.0),
                             child: SizedBox(
@@ -59,12 +59,12 @@ class TvGridScreen extends StatelessWidget {
                   childAspectRatio: 16 / 13,
                   crossAxisCount: 3,
                   children: [
-                    ..._.items.where((element) => !element.filterHide).map(
+                    ...state.items.where((element) => !element.filterHide).map(
                         (e) => TvVideoItem(
                             key: ValueKey(e.videoId),
                             video: e,
                             autoFocus: false)),
-                    if (_.loading)
+                    if (state.loading)
                       ...repeatWidget(() => const TvVideoItemPlaceHolder(),
                           count: 10)
                   ],

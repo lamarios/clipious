@@ -64,7 +64,7 @@ class TvSearchHistorySettingsScreen extends StatelessWidget {
 
     return Scaffold(
       body: BlocBuilder<SettingsCubit, SettingsState>(
-        builder: (context, _) {
+        builder: (context, state) {
           var cubit = context.read<SettingsCubit>();
           return TvOverscan(
             child: ListView(
@@ -72,15 +72,15 @@ class TvSearchHistorySettingsScreen extends StatelessWidget {
                 SettingsTitle(title: locals.searchHistoryDescription),
                 SettingsTile(
                   title: locals.enableSearchHistory,
-                  trailing:
-                      Switch(onChanged: (value) {}, value: _.useSearchHistory),
+                  trailing: Switch(
+                      onChanged: (value) {}, value: state.useSearchHistory),
                   onSelected: (ctx) =>
-                      cubit.toggleSearchHistory(!_.useSearchHistory),
+                      cubit.toggleSearchHistory(!state.useSearchHistory),
                 ),
                 AdjustmentSettingTile(
                   title: locals.searchHistoryLimit,
                   description: locals.searchHistoryLimitDescription,
-                  value: _.searchHistoryLimit,
+                  value: state.searchHistoryLimit,
                   onNewValue: cubit.setHistoryLimit,
                 ),
                 SettingsTile(

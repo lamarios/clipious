@@ -29,10 +29,10 @@ class VideoFilterSettingsScreen extends StatelessWidget {
     return BlocProvider(
       create: (context) => VideoFilterCubit(const VideoFilterState()),
       child: BlocBuilder<VideoFilterCubit, VideoFilterState>(
-          builder: (context, _) {
+          builder: (context, state) {
         var cubit = context.read<VideoFilterCubit>();
 
-        Map<String, List<VideoFilter>> mappedFilters = _.filters.groupBy(
+        Map<String, List<VideoFilter>> mappedFilters = state.filters.groupBy(
           (p0) => p0.channelId ?? allChannels,
         );
         List<String> keys = mappedFilters.keys.toList();

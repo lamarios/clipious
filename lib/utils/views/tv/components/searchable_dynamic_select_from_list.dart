@@ -31,19 +31,19 @@ class SearchableSelectFromListScreen<T> extends StatelessWidget {
                 controller: TextEditingController()),
             fetchItems),
         child: BlocBuilder<SearchableSelectFromListCubit<T>,
-            SearchableSelectFromListState<T>>(builder: (context, _) {
+            SearchableSelectFromListState<T>>(builder: (context, state) {
           var cubit = context.read<SearchableSelectFromListCubit<T>>();
           return Column(
             children: [
               SettingsTitle(title: title),
               TvTextField(
                 decoration: InputDecoration(label: Text(title)),
-                controller: _.controller,
+                controller: state.controller,
                 onSubmitted: (value) => cubit.searchItems(value),
               ),
               Expanded(
                   child: ListView(
-                children: _.items
+                children: state.items
                     .map((e) => SettingsTile(
                           title: titleBuilder(e),
                           description: descriptionBuilder(e),

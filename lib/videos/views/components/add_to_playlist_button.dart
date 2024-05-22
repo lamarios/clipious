@@ -60,7 +60,7 @@ class AddToPlayListButton extends StatelessWidget {
       create: (BuildContext context) =>
           AddToPlaylistCubit(AddToPlaylistController(videoId)),
       child: BlocBuilder<AddToPlaylistCubit, AddToPlaylistController>(
-          builder: (context, _) {
+          builder: (context, state) {
         var cubit = context.read<AddToPlaylistCubit>();
         return switch (type) {
           (AddToPlayListButtonType.modalSheet) => Padding(
@@ -69,7 +69,7 @@ class AddToPlayListButton extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   AnimatedCrossFade(
-                    crossFadeState: _.loading
+                    crossFadeState: state.loading
                         ? CrossFadeState.showSecond
                         : CrossFadeState.showFirst,
                     firstChild: IconButton.filledTonal(
@@ -77,8 +77,8 @@ class AddToPlayListButton extends StatelessWidget {
                         icon: const Icon(Icons.playlist_add)),
                     secondChild: FilledButton.tonal(
                         style: ButtonStyle(
-                            shape: MaterialStateProperty.all(
-                                const CircleBorder())),
+                            shape:
+                                WidgetStateProperty.all(const CircleBorder())),
                         onPressed: () {},
                         child: const SizedBox(
                             height: 10,
@@ -98,12 +98,12 @@ class AddToPlayListButton extends StatelessWidget {
           (AddToPlayListButtonType.appBar) => Row(
               children: [
                 IconButton(
-                  onPressed: _.loading ? () {} : cubit.toggleLike,
-                  icon: _.isVideoLiked
+                  onPressed: state.loading ? () {} : cubit.toggleLike,
+                  icon: state.isVideoLiked
                       ? const Icon(Icons.favorite)
                       : const Icon(Icons.favorite_border),
                 )
-                    .animate(target: _.loading ? 0 : 1)
+                    .animate(target: state.loading ? 0 : 1)
                     .fade(begin: 0.2, duration: animationDuration)
                     .scale(
                         begin:
@@ -114,16 +114,16 @@ class AddToPlayListButton extends StatelessWidget {
                   children: [
                     IconButton(
                       style: ButtonStyle(
-                          padding: MaterialStateProperty.all<EdgeInsets>(
+                          padding: WidgetStateProperty.all<EdgeInsets>(
                               EdgeInsets.zero)),
-                      onPressed: _.loading
+                      onPressed: state.loading
                           ? () {}
                           : () => showAddToPlaylistDialog(context),
                       icon: const Icon(
                         Icons.add,
                       ),
                     )
-                        .animate(target: _.loading ? 0 : 1)
+                        .animate(target: state.loading ? 0 : 1)
                         .fade(
                           begin: 0.2,
                           duration: animationDuration,
@@ -133,7 +133,7 @@ class AddToPlayListButton extends StatelessWidget {
                                 buttonScaleOffset, buttonScaleOffset),
                             duration: animationDuration,
                             curve: Curves.easeInOutQuad),
-                    _.playListCount > 0
+                    state.playListCount > 0
                         ? Positioned(
                             top: 1,
                             right: 1,
@@ -145,11 +145,13 @@ class AddToPlayListButton extends StatelessWidget {
                                     color: colors.secondaryContainer,
                                     shape: BoxShape.circle),
                                 child: Text(
-                                  _.loading ? '-' : _.playListCount.toString(),
+                                  state.loading
+                                      ? '-'
+                                      : state.playListCount.toString(),
                                   style: textTheme.labelSmall,
                                 ),
                               )
-                                  .animate(target: _.loading ? 0 : 1)
+                                  .animate(target: state.loading ? 0 : 1)
                                   .fade(
                                     begin: 0.2,
                                     duration: animationDuration,

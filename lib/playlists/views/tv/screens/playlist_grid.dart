@@ -27,7 +27,7 @@ class TvPlaylistGridScreen extends StatelessWidget {
       child: Scaffold(
         body: TvOverscan(
           child: BlocBuilder<PlaylistListCubit, PlaylistListState>(
-              builder: (context, _) {
+              builder: (context, state) {
             var cubit = context.read<PlaylistListCubit>();
 
             return Column(
@@ -38,7 +38,7 @@ class TvPlaylistGridScreen extends StatelessWidget {
                       locals.playlists,
                       style: textTheme.titleLarge,
                     ),
-                    _.loading
+                    state.loading
                         ? const Padding(
                             padding: EdgeInsets.all(8.0),
                             child: SizedBox(
@@ -56,12 +56,12 @@ class TvPlaylistGridScreen extends StatelessWidget {
                   childAspectRatio: 16 / 13,
                   crossAxisCount: 3,
                   children: [
-                    ..._.playlists.map((e) => PlaylistInList(
+                    ...state.playlists.map((e) => PlaylistInList(
                         key: ValueKey(e.playlistId),
                         playlist: e,
                         canDeleteVideos: false,
                         isTv: true)),
-                    if (_.loading)
+                    if (state.loading)
                       ...repeatWidget(() => const TvPlaylistPlaceHolder(),
                           count: 10)
                   ],

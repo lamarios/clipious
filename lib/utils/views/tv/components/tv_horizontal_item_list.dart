@@ -28,28 +28,28 @@ class TvHorizontalItemList<T> extends StatelessWidget {
       create: (context) =>
           ItemListCubit<T>(ItemListState<T>(itemList: paginatedList)),
       child: BlocBuilder<ItemListCubit<T>, ItemListState<T>>(
-        builder: (context, _) {
+        builder: (context, state) {
           var cubit = context.read<ItemListCubit<T>>();
           // filter items if possible
-          List<T> items = _.items;
+          List<T> items = state.items;
           if (items.isNotEmpty && items[0] is BaseVideo) {
-            items = filteredVideos<BaseVideo>(_.items.cast()).cast();
+            items = filteredVideos<BaseVideo>(state.items.cast()).cast();
           }
 
           return Stack(
             children: [
-              if (_.loading)
+              if (state.loading)
                 const LinearProgressIndicator(
                   minHeight: 3,
                 ),
-              !_.loading && items.isEmpty
+              !state.loading && items.isEmpty
                   ? const SizedBox.shrink()
                   : SizedBox(
                       height: 250,
                       child: ListView.builder(
                         scrollDirection: Axis.horizontal,
                         controller: cubit.scrollController,
-                        itemCount: items.length + (_.loading ? 10 : 0),
+                        itemCount: items.length + (state.loading ? 10 : 0),
                         itemBuilder: (context, index) {
                           if (index >= items.length) {
                             return getPlaceholder();

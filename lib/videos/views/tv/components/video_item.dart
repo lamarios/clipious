@@ -56,14 +56,14 @@ class TvVideoItem extends StatelessWidget {
       create: (context) =>
           VideoInListCubit(VideoInListState(video: video, offlineVideo: null)),
       child: BlocBuilder<VideoInListCubit, VideoInListState>(
-        builder: (context, _) => DefaultTextStyle(
+        builder: (context, state) => DefaultTextStyle(
           style: textTheme.bodyLarge!,
           child: Padding(
             padding: const EdgeInsets.only(right: 8.0),
             child: Focus(
                 onFocusChange: onFocusChange,
-                onKeyEvent: (node, event) =>
-                    openVideo(context, _.video!.toVideoInList(), node, event),
+                onKeyEvent: (node, event) => openVideo(
+                    context, state.video!.toVideoInList(), node, event),
                 autofocus: autoFocus,
                 child: Builder(builder: (ctx) {
                   final FocusNode focusNode = Focus.of(ctx);
@@ -87,7 +87,7 @@ class TvVideoItem extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                (_.video?.filtered ?? false)
+                                (state.video?.filtered ?? false)
                                     ? AspectRatio(
                                         aspectRatio: 16 / 9,
                                         child: Container(
@@ -139,8 +139,8 @@ class TvVideoItem extends StatelessWidget {
                                               mainAxisAlignment:
                                                   MainAxisAlignment.end,
                                               children: [
-                                                if (_.progress > 0.05 &&
-                                                    _.progress < 1)
+                                                if (state.progress > 0.05 &&
+                                                    state.progress < 1)
                                                   Expanded(
                                                     child: Container(
                                                       margin:
@@ -159,12 +159,13 @@ class TvVideoItem extends StatelessWidget {
                                                       ),
                                                       child:
                                                           FractionallySizedBox(
-                                                        widthFactor: _.progress,
+                                                        widthFactor:
+                                                            state.progress,
                                                         heightFactor: 1,
                                                         child: Container(
                                                           decoration:
                                                               BoxDecoration(
-                                                            color: _.progress ==
+                                                            color: state.progress ==
                                                                     1
                                                                 ? colors
                                                                     .primaryContainer
@@ -179,7 +180,7 @@ class TvVideoItem extends StatelessWidget {
                                                       ),
                                                     ),
                                                   ),
-                                                if (_.progress == 1)
+                                                if (state.progress == 1)
                                                   Container(
                                                     margin:
                                                         const EdgeInsets.only(
@@ -225,7 +226,7 @@ class TvVideoItem extends StatelessWidget {
                                 Padding(
                                   padding: const EdgeInsets.only(left: 8.0),
                                   child: Text(
-                                    (_.video?.filtered ?? false)
+                                    (state.video?.filtered ?? false)
                                         ? '**********'
                                         : video.title,
                                     maxLines: 2,

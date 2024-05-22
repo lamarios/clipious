@@ -56,7 +56,7 @@ class _VideoPlayerState extends State<VideoPlayer> {
           player,
           settings),
       child: BlocBuilder<VideoPlayerCubit, VideoPlayerState>(
-        builder: (context, _) {
+        builder: (context, playerState) {
           var cubit = context.read<VideoPlayerCubit>();
           return BlocListener<PlayerCubit, PlayerState>(
             listenWhen: (previous, current) =>

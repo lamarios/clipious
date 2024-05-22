@@ -209,7 +209,7 @@ class PlayerControls extends StatelessWidget {
         create: (context) =>
             PlayerControlsCubit(const PlayerControlsState(), player),
         child: BlocBuilder<PlayerControlsCubit, PlayerControlsState>(
-          builder: (context, _) {
+          builder: (context, playerState) {
             bool isMini =
                 context.select((PlayerCubit cubit) => cubit.state.isMini);
             bool isPlaying =
@@ -229,7 +229,7 @@ class PlayerControls extends StatelessWidget {
                 cubit.state.offlineCurrentlyPlaying?.title ??
                 '');
 
-            bool isPausedAndDone = _.position.inMilliseconds >
+            bool isPausedAndDone = playerState.position.inMilliseconds >
                     player.duration.inMilliseconds * 0.99 &&
                 context.select((SettingsCubit value) =>
                     value.state.playerRepeatMode == PlayerRepeat.noRepeat);
@@ -244,18 +244,18 @@ class PlayerControls extends StatelessWidget {
               child: GestureDetector(
                 behavior: HitTestBehavior.translucent,
                 onVerticalDragEnd:
-                    _.fullScreenState == FullScreenState.fullScreen ||
-                            _.displayControls
+                    playerState.fullScreenState == FullScreenState.fullScreen ||
+                            playerState.displayControls
                         ? null
                         : player.videoDraggedEnd,
                 onVerticalDragUpdate:
-                    _.fullScreenState == FullScreenState.fullScreen ||
-                            _.displayControls
+                    playerState.fullScreenState == FullScreenState.fullScreen ||
+                            playerState.displayControls
                         ? null
                         : player.videoDragged,
                 onVerticalDragStart:
-                    _.fullScreenState == FullScreenState.fullScreen ||
-                            _.displayControls
+                    playerState.fullScreenState == FullScreenState.fullScreen ||
+                            playerState.displayControls
                         ? null
                         : player.videoDragStarted,
                 child: AspectRatio(
@@ -263,7 +263,7 @@ class PlayerControls extends StatelessWidget {
                   child: Stack(
                     alignment: Alignment.topCenter,
                     children: [
-                      if (!isMini && _.showSponsorBlocked)
+                      if (!isMini && playerState.showSponsorBlocked)
                         Positioned(
                             top: 10,
                             left: 10,
@@ -314,40 +314,43 @@ class PlayerControls extends StatelessWidget {
                                 Expanded(
                                     child: GestureDetector(
                                         behavior: HitTestBehavior.translucent,
-                                        onTap: _.justDoubleTappedSkip
+                                        onTap: playerState.justDoubleTappedSkip
                                             ? cubit.doubleTapRewind
-                                            : _.displayControls
+                                            : playerState.displayControls
                                                 ? cubit.hideControls
                                                 : cubit.showControls,
-                                        onDoubleTap: _.justDoubleTappedSkip
-                                            ? null
-                                            : cubit.doubleTapRewind,
+                                        onDoubleTap:
+                                            playerState.justDoubleTappedSkip
+                                                ? null
+                                                : cubit.doubleTapRewind,
                                         child: DoubleTapButton(
                                             stepText:
                                                 '-$totalRewind ${locals.secondsShortForm}',
-                                            opacity: _.doubleTapRewindedOpacity,
+                                            opacity: playerState
+                                                .doubleTapRewindedOpacity,
                                             icon: Icons.fast_rewind))),
                                 Expanded(
                                     child: GestureDetector(
-                                        onTap: _.justDoubleTappedSkip
+                                        onTap: playerState.justDoubleTappedSkip
                                             ? cubit.doubleTapFastForward
-                                            : _.displayControls
+                                            : playerState.displayControls
                                                 ? cubit.hideControls
                                                 : cubit.showControls,
                                         behavior: HitTestBehavior.translucent,
-                                        onDoubleTap: _.justDoubleTappedSkip
-                                            ? null
-                                            : cubit.doubleTapFastForward,
+                                        onDoubleTap:
+                                            playerState.justDoubleTappedSkip
+                                                ? null
+                                                : cubit.doubleTapFastForward,
                                         child: DoubleTapButton(
                                           stepText:
                                               '+$totalFastForward ${locals.secondsShortForm}',
-                                          opacity:
-                                              _.doubleTapFastForwardedOpacity,
+                                          opacity: playerState
+                                              .doubleTapFastForwardedOpacity,
                                           icon: Icons.fast_forward,
                                         ))),
                               ],
                             )),
-                      if (_.errored)
+                      if (playerState.errored)
                         Container(
                           color: Colors.black.withOpacity(0.8),
                           child: const Center(
@@ -361,7 +364,7 @@ class PlayerControls extends StatelessWidget {
                         top: 0,
                         child: isMini || isPip
                             ? const SizedBox.shrink()
-                            : _.displayControls
+                            : playerState.displayControls
                                 ? GestureDetector(
                                     onTap: cubit.hideControls,
                                     child: Container(
@@ -375,7 +378,7 @@ class PlayerControls extends StatelessWidget {
                                             mainAxisAlignment:
                                                 MainAxisAlignment.end,
                                             children: [
-                                              if (_.fullScreenState ==
+                                              if (playerState.fullScreenState ==
                                                   FullScreenState.fullScreen)
                                                 Expanded(
                                                     child: Padding(
@@ -402,7 +405,7 @@ class PlayerControls extends StatelessWidget {
                                               IconButton(
                                                   onPressed: () =>
                                                       showOptionMenu(
-                                                          context, _),
+                                                          context, playerState),
                                                   icon: const Icon(
                                                       Icons.more_vert))
                                             ],
@@ -412,7 +415,7 @@ class PlayerControls extends StatelessWidget {
                                             mainAxisAlignment:
                                                 MainAxisAlignment.end,
                                             children: [
-                                              _.muted
+                                              playerState.muted
                                                   ? IconButton(
                                                       onPressed: () {
                                                         player.setMuted(false);
@@ -429,7 +432,8 @@ class PlayerControls extends StatelessWidget {
                                                       },
                                                       icon: const Icon(
                                                           Icons.volume_up)),
-                                              switch (_.fullScreenState) {
+                                              switch (
+                                                  playerState.fullScreenState) {
                                                 FullScreenState.fullScreen =>
                                                   IconButton(
                                                       onPressed: () =>
@@ -458,7 +462,8 @@ class PlayerControls extends StatelessWidget {
                                   )
                                 : const SizedBox.expand(),
                       ),
-                      if ((_.displayControls || _.justDoubleTappedSkip) &&
+                      if ((playerState.displayControls ||
+                              playerState.justDoubleTappedSkip) &&
                           !(currentlyPlaying?.liveNow ?? false))
                         Positioned(
                           bottom: 0,
@@ -467,7 +472,7 @@ class PlayerControls extends StatelessWidget {
                           child: Stack(
                             children: [
                               Container(
-                                decoration: _.justDoubleTappedSkip
+                                decoration: playerState.justDoubleTappedSkip
                                     ? BoxDecoration(
                                         gradient: LinearGradient(
                                             begin: Alignment.bottomCenter,
@@ -488,23 +493,28 @@ class PlayerControls extends StatelessWidget {
                                               child: Slider(
                                                 min: 0,
                                                 value: min(
-                                                    _.position.inMilliseconds
+                                                    playerState
+                                                        .position.inMilliseconds
                                                         .toDouble(),
-                                                    _.duration.inMilliseconds
+                                                    playerState
+                                                        .duration.inMilliseconds
                                                         .toDouble()),
-                                                max: _.duration.inMilliseconds
+                                                max: playerState
+                                                    .duration.inMilliseconds
                                                     .toDouble(),
                                                 secondaryTrackValue: min(
-                                                    _.buffer.inMilliseconds
+                                                    playerState
+                                                        .buffer.inMilliseconds
                                                         .toDouble(),
-                                                    _.duration.inMilliseconds
+                                                    playerState
+                                                        .duration.inMilliseconds
                                                         .toDouble()),
                                                 onChangeEnd: cubit.onScrubbed,
                                                 onChanged: cubit.onScrubDrag,
                                               )),
                                         ),
                                         Text(
-                                          '${prettyDuration(_.position)} / ${prettyDuration(_.duration)}',
+                                          '${prettyDuration(playerState.position)} / ${prettyDuration(playerState.duration)}',
                                           style: textTheme.bodySmall
                                               ?.copyWith(color: Colors.white),
                                         ),
@@ -514,7 +524,7 @@ class PlayerControls extends StatelessWidget {
                             ],
                           ),
                         ),
-                      if (!isMini && !isPip && _.displayControls)
+                      if (!isMini && !isPip && playerState.displayControls)
                         Positioned(
                           top: 0,
                           left: 0,
@@ -580,7 +590,7 @@ class PlayerControls extends StatelessWidget {
                             ],
                           ),
                         ),
-                      if (_.buffering)
+                      if (playerState.buffering)
                         const Center(
                           child: FractionallySizedBox(
                             heightFactor: 0.3,

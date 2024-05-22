@@ -67,7 +67,7 @@ class DownloadModalSheet extends StatelessWidget {
       create: (BuildContext context) =>
           DownloadModalSheetCubit(const DownloadModalSheetState()),
       child: BlocBuilder<DownloadModalSheetCubit, DownloadModalSheetState>(
-          builder: (context, _) {
+          builder: (context, state) {
         var cubit = context.read<DownloadModalSheetCubit>();
         return Padding(
           padding: const EdgeInsets.all(8.0),
@@ -80,27 +80,28 @@ class DownloadModalSheet extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(bottom: 8.0),
                     child: ToggleButtons(
-                      isSelected: qualities.map((e) => e == _.quality).toList(),
-                      onPressed: _.audioOnly
+                      isSelected:
+                          qualities.map((e) => e == state.quality).toList(),
+                      onPressed: state.audioOnly
                           ? null
                           : (index) => cubit.setQuality(qualities[index]),
                       children: qualities.map((e) => Text(e)).toList(),
                     ),
                   ),
                   InkWell(
-                    onTap: () => cubit.setAudioOnly(!_.audioOnly),
+                    onTap: () => cubit.setAudioOnly(!state.audioOnly),
                     child: Row(
                       children: [
                         Text(locals.videoDownloadAudioOnly),
                         Switch(
-                          value: _.audioOnly,
+                          value: state.audioOnly,
                           onChanged: cubit.setAudioOnly,
                         )
                       ],
                     ),
                   ),
                   IconButton.filledTonal(
-                    onPressed: () => downloadVideo(context, _),
+                    onPressed: () => downloadVideo(context, state),
                     icon: const Icon(Icons.download),
                   )
                 ],

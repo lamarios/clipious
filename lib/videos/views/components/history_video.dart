@@ -18,18 +18,19 @@ class HistoryVideoView extends StatelessWidget {
     return BlocProvider(
       create: (context) => HistoryItemCubit(HistoryItemState(videoId: videoId)),
       child: BlocBuilder<HistoryItemCubit, HistoryItemState>(
-          builder: (context, _) {
+          builder: (context, state) {
         return AnimatedCrossFade(
           firstChild: const CompactVideoPlaceHolder(),
-          secondChild: _.cachedVid != null
+          secondChild: state.cachedVid != null
               ? CompactVideo(
                   onTap: () => AutoRouter.of(context)
-                      .push(VideoRoute(videoId: _.cachedVid!.videoId)),
-                  video: _.cachedVid?.toBaseVideo(),
+                      .push(VideoRoute(videoId: state.cachedVid!.videoId)),
+                  video: state.cachedVid?.toBaseVideo(),
                 )
               : const CompactVideoPlaceHolder(),
-          crossFadeState:
-              _.loading ? CrossFadeState.showFirst : CrossFadeState.showSecond,
+          crossFadeState: state.loading
+              ? CrossFadeState.showFirst
+              : CrossFadeState.showSecond,
           duration: animationDuration,
         );
       }),

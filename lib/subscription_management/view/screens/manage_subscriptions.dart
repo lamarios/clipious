@@ -32,21 +32,21 @@ class ManageSubscriptionsScreen extends StatelessWidget {
                   ManageSubscriptionCubit(const ManageSubscriptionsState()),
               child: BlocBuilder<ManageSubscriptionCubit,
                   ManageSubscriptionsState>(
-                builder: (context, _) {
+                builder: (context, state) {
                   var cubit = context.read<ManageSubscriptionCubit>();
 
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: !_.loading && _.subs.isEmpty
+                    child: !state.loading && state.subs.isEmpty
                         ? Center(child: Text(locals.noChannels))
                         : Stack(
                             children: [
                               RefreshIndicator(
                                 onRefresh: () => cubit.refreshSubs(),
                                 child: ListView.builder(
-                                  itemCount: _.subs.length,
+                                  itemCount: state.subs.length,
                                   itemBuilder: (context, index) {
-                                    Subscription sub = _.subs[index];
+                                    Subscription sub = state.subs[index];
 
                                     return GestureDetector(
                                       onTap: () => AutoRouter.of(context)
@@ -85,7 +85,7 @@ class ManageSubscriptionsScreen extends StatelessWidget {
                                   },
                                 ),
                               ),
-                              if (_.loading) const TopListLoading()
+                              if (state.loading) const TopListLoading()
                             ],
                           ),
                   );

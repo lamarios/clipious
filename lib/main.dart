@@ -118,7 +118,7 @@ class MyApp extends StatelessWidget {
     return BlocBuilder<AppCubit, AppState>(
         buildWhen: (previous, current) => previous.server != current.server,
         // we want to rebuild only when anything other than the navigation index is changed
-        builder: (context, _) {
+        builder: (context, state) {
           bool useDynamicTheme = context
               .select((SettingsCubit value) => value.state.useDynamicTheme);
           bool useBlackBackground = context

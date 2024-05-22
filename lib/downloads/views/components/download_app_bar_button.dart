@@ -15,7 +15,7 @@ class AppBarDownloadButton extends StatelessWidget {
     var textTheme = Theme.of(context).textTheme;
     return BlocBuilder<DownloadManagerCubit, DownloadManagerState>(
       // buildWhen: (previous, current) => previous.videos.length != current.videos.length || previous.totalProgress != current.totalProgress,
-      builder: (context, _) {
+      builder: (context, state) {
         return Stack(
           alignment: Alignment.center,
           children: [
@@ -23,10 +23,11 @@ class AppBarDownloadButton extends StatelessWidget {
               onPressed: () => openDownloadManager(context),
               icon: Icon(
                 Icons.download,
-                color: _.downloadProgresses.isNotEmpty ? colors.surface : null,
+                color:
+                    state.downloadProgresses.isNotEmpty ? colors.surface : null,
               ),
             ),
-            _.downloadProgresses.isNotEmpty
+            state.downloadProgresses.isNotEmpty
                 ? InkWell(
                     onTap: () => openDownloadManager(context),
                     child: SizedBox(
@@ -35,19 +36,20 @@ class AppBarDownloadButton extends StatelessWidget {
                         child: TweenAnimationBuilder(
                           builder: (context, value, child) {
                             return CircularProgressIndicator(
-                              value: _.totalProgress == 0 ? null : value,
+                              value: state.totalProgress == 0 ? null : value,
                               strokeWidth: 2,
                             );
                           },
                           duration: animationDuration,
-                          tween: Tween<double>(begin: 0, end: _.totalProgress),
+                          tween:
+                              Tween<double>(begin: 0, end: state.totalProgress),
                         )),
                   )
                 : const SizedBox.shrink(),
             Positioned(
                 top: 1,
                 right: 1,
-                child: _.videos.isNotEmpty
+                child: state.videos.isNotEmpty
                     ? GestureDetector(
                         onTap: () => openDownloadManager(context),
                         child: Container(
@@ -56,7 +58,7 @@ class AppBarDownloadButton extends StatelessWidget {
                                 color: colors.secondaryContainer,
                                 shape: BoxShape.circle),
                             child: Text(
-                              _.videos.length.toString(),
+                              state.videos.length.toString(),
                               style: textTheme.labelSmall,
                             )),
                       )
