@@ -271,7 +271,7 @@
   "@loggedIn": {
     "description": "Label to tell the user that he is logged in to the server"
   },
-  "notLoggedIn": "未登入。",
+  "notLoggedIn": "未登入",
   "@notLoggedIn": {
     "description": "Label when the user is not logged in to the server"
   },
