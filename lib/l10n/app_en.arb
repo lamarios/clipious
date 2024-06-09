@@ -1277,7 +1277,7 @@
   "@deArrowReplaceThumbnailsDescription": {
     "description": "Description for DeArrow setting switch"
   },
-  "deArrowWarning": "Enable DeArrow can signgificantly reduce the browsing speed of the app as extra http requests are needed for every single video",
+  "deArrowWarning": "Enabling DeArrow can significantly reduce the browsing speed of the app as extra http requests are needed for every single video",
   "@deArrowWarning": {
     "description": "Warning message when the user enables DeArrow"
   },
