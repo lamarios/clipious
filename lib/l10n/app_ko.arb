@@ -266,5 +266,37 @@
   "browsing": "탐색",
   "@browsing": {
     "description": "video browsing preferences"
+  },
+  "showOnStart": "앱 시작 화면 선택",
+  "@showOnStart": {
+    "description": "Title of dialog asking which screen the users prefers to see"
+  },
+  "about": "정보",
+  "@about": {
+    "description": "About"
+  },
+  "build": "빌드",
+  "@build": {
+    "description": "build label"
+  },
+  "logIn": "로그인",
+  "@logIn": {
+    "description": "CTA to log in to server"
+  },
+  "invalidInvidiousServer": "유효하지 않은 Invidious 서버",
+  "@invalidInvidiousServer": {
+    "description": "Error when the user tries to add a server that is not a proper or reachable invidious server"
+  },
+  "tapToAddServer": "탭하여 서버를 목록에 추가",
+  "@tapToAddServer": {
+    "description": "public server description"
+  },
+  "addToPlaylist": "재생 목록에 추가",
+  "@addToPlaylist": {
+    "description": "Label to add a video to a playlist"
+  },
+  "password": "비밀번호",
+  "@password": {
+    "description": "Password label for login to a server"
   }
 }
