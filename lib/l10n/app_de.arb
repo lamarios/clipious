@@ -1328,5 +1328,17 @@
   "feedbackDisclaimer": "Um Feedback einzureichen, benötigen Sie ein GitHub-Konto und Ihr Screenshot wird anonym an Imgur übermittelt.",
   "@feedbackDisclaimer": {
     "description": "Content of dialog shown before submitting feedback to make sure the user is ok whith where the data is going"
+  },
+  "returnYoutubeUrlValidation": "Die Url muss mit http:// oder https:// beginnen",
+  "@returnYoutubeUrlValidation": {
+    "description": "error message for invalid custom url for return to youtube"
+  },
+  "rydCustomInstance": "Benutzerdefinierte RYD-Instanz url",
+  "@rydCustomInstance": {
+    "description": "title for setting to set a custom ryd instance"
+  },
+  "rydCustomInstanceDescription": "Eine andere RYD-Instanz verwenden, leer lassen, um die Standardinstanz zu verwenden",
+  "@rydCustomInstanceDescription": {
+    "description": "description for custom ryd instancr setting"
   }
 }

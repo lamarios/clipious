@@ -379,7 +379,7 @@
   "@useDashDescription": {
     "description": "Description for dash in the settings screen"
   },
-  "videoPlayer": "rình phát video",
+  "videoPlayer": "Trình phát video",
   "@videoPlayer": {
     "description": "Title for video player related options"
   },
@@ -1336,5 +1336,17 @@
         "format": "compact"
       }
     }
+  },
+  "rydCustomInstance": "Địa chỉ phiên bản RYD tùy chỉnh",
+  "@rydCustomInstance": {
+    "description": "title for setting to set a custom ryd instance"
+  },
+  "rydCustomInstanceDescription": "Sử dụng một phiên bản RYD khác, để trống để sử dụng mặc định",
+  "@rydCustomInstanceDescription": {
+    "description": "description for custom ryd instancr setting"
+  },
+  "returnYoutubeUrlValidation": "Địa chỉ buộc phải bắt đầu với http:// hoặc https://",
+  "@returnYoutubeUrlValidation": {
+    "description": "error message for invalid custom url for return to youtube"
   }
 }
