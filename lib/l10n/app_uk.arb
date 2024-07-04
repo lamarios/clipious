@@ -43,7 +43,7 @@
   "@add": {
     "description": "Add button abel"
   },
-  "info": "Інформація",
+  "info": "Відомості",
   "@info": {
     "description": "Info label"
   },
@@ -112,7 +112,7 @@
   "@createNewPlaylist": {
     "description": "Button label to create a new playlist when the user wants to add a video to a playlist"
   },
-  "newSorting": "Нове",
+  "newSorting": "Найновіші",
   "@newSorting": {
     "description": "Content sorting: new"
   },
@@ -120,7 +120,7 @@
   "@streamIsLive": {
     "description": "Label when a video is a live stream"
   },
-  "topSorting": "Топ",
+  "topSorting": "Найкращі",
   "@topSorting": {
     "description": "Content sorting: top"
   },
@@ -225,7 +225,7 @@
   "@videoUnlisted": {
     "description": "Status of a video that is only accessible by link"
   },
-  "videoIsFamilyFriendly": "Сімейний",
+  "videoIsFamilyFriendly": "Сімейне",
   "@videoIsFamilyFriendly": {
     "description": "Displayed only when a video is family friendly"
   },
@@ -253,7 +253,7 @@
   "@password": {
     "description": "Password label for login to a server"
   },
-  "wrongUsernamePassword": "Неправильне ім''я користувача або пароль",
+  "wrongUsernamePassword": "Неправильне ім’я користувача або пароль",
   "@wrongUsernamePassword": {
     "description": "Error message when authentication fails"
   },
@@ -271,15 +271,15 @@
   "@sponsorBlockCategoryUnpaidSelfPromo": {
     "description": "Sponsor block 'Unpaid/Self promotion' Category"
   },
-  "sponsorBlockCategoryUnpaidSelfPromoDescription": "Схоже на \"спонсор\", за винятком безоплатного або самореклами. Сюди входять розділи про товари, пожертви або інформацію про те, з ким вони співпрацювали ",
+  "sponsorBlockCategoryUnpaidSelfPromoDescription": "Схоже на категорію \"спонсор\", за винятком безоплатного або самореклами. Сюди входять розділи про товари, пожертви або інформацію про те, з ким вони співпрацювали ",
   "@sponsorBlockCategoryUnpaidSelfPromoDescription": {
     "description": "Sponsor block 'Unpaid/Self promotion' Category description"
   },
-  "sponsorBlockCategoryOutro": "Кінцеві картки / Титри",
+  "sponsorBlockCategoryOutro": "Кінцеві картки/Титри",
   "@sponsorBlockCategoryOutro": {
     "description": "Outro block 'Outro' Category"
   },
-  "sponsorBlockCategoryOutroDescription": "Титри або коли з''являються кінцівки YouTube. Не для висновків з інформацією.",
+  "sponsorBlockCategoryOutroDescription": "Титри або коли з’являються кінцеві картки YouTube. Не для висновків з інформацією.",
   "@sponsorBlockCategoryOutroDescription": {
     "description": "Outro block 'Outro' Category description"
   },
@@ -291,7 +291,7 @@
   "@sponsorBlockCategoryFiller": {
     "description": "Sponsorblock 'Filler' Category"
   },
-  "sponsorBlockCategoryMusicOffTopic": "Музика: Немузичний розділ",
+  "sponsorBlockCategoryMusicOffTopic": "Музика: немузичний розділ",
   "@sponsorBlockCategoryMusicOffTopic": {
     "description": "Sponsorblock 'MusicOffTopic' Category"
   },
@@ -299,11 +299,11 @@
   "@blackBackground": {
     "description": "Black backgroun option label for dark theme with oled"
   },
-  "blackBackgroundDescription": "Для темної теми на OLED-екрані",
+  "blackBackgroundDescription": "Для темної теми на OLED екрані",
   "@blackBackgroundDescription": {
     "description": ""
   },
-  "nVideos": "{count, plural, =0{немає відео} =1{1 відео} other{{count} відео}}",
+  "nVideos": "{count, plural, =0{Немає відео} =1{1 відео} other{{count} відео}}",
   "@nVideos": {
     "description": "One or more videos",
     "placeholders": {
@@ -375,15 +375,15 @@
   "@loadMore": {
     "description": "CTA to load more"
   },
-  "selectBrowsingCountry": "Виберіть країну перегляду",
+  "selectBrowsingCountry": "Оберіть країну перегляду",
   "@selectBrowsingCountry": {
     "description": "Select country for trending content"
   },
-  "sponsorBlockDescription": "Пропускає сегменти спонсорів, які подала спільнота",
+  "sponsorBlockDescription": "Пропускати сегменти спонсорів, які подала спільнота",
   "@sponsorBlockDescription": {
     "description": "Sponsorblock setting description"
   },
-  "showOnStart": "Виберіть, що показувати під час запуску застосунку",
+  "showOnStart": "Оберіть, що показувати під час запуску застосунку",
   "@showOnStart": {
     "description": "Title of dialog asking which screen the users prefers to see"
   },
@@ -391,7 +391,7 @@
   "@whenAppStartsShow": {
     "description": "Setting title for selecting the screen to show on start"
   },
-  "package": "Пакет",
+  "package": "Пакунок",
   "@package": {
     "description": "package label"
   },
@@ -411,7 +411,7 @@
   "@notLoggedIn": {
     "description": "Label when the user is not logged in to the server"
   },
-  "addServerHelpText": "Використовуйте кнопку +, щоб додати власні сервери, або натисніть на публічний сервер і додайте його.",
+  "addServerHelpText": "Використовуйте кнопку +, щоб додати власні сервери або натисніть на публічний сервер та додайте його.",
   "@addServerHelpText": {
     "description": "label for when the user hasn't chosen a server yet"
   },
@@ -423,11 +423,11 @@
   "@publicServersError": {
     "description": "Error message when trying to get public servers but it failed"
   },
-  "useDashDescription": "Адаптивне потокове мовлення DASH іноді може бути проблематичним, YouTube може його гальмувати.",
+  "useDashDescription": "Адаптивний стримінг DASH, іноді може бути проблематичним, YouTube може обмежувати його швидкість.",
   "@useDashDescription": {
     "description": "Description for dash in the settings screen"
   },
-  "videoListed": "Публічний",
+  "videoListed": "Публічне",
   "@videoListed": {
     "description": "Status of a publicly available video"
   },
@@ -443,11 +443,11 @@
   "@username": {
     "description": "Username label for login to a server"
   },
-  "addToQueueList": "Додати в чергу",
+  "addToQueueList": "Додати до черги",
   "@addToQueueList": {
     "description": "Label on button to add a video to the queue list"
   },
-  "sponsorBlockSettingsQuickDescription": "Виберіть, який тип сегментів пропускати",
+  "sponsorBlockSettingsQuickDescription": "Оберіть, який тип сегментів пропускати",
   "@sponsorBlockSettingsQuickDescription": {
     "description": "Small description of what the sponsor block settings do"
   },
@@ -487,11 +487,11 @@
   "@sponsorBlockCategoryMusicOffTopicDescription": {
     "description": "Only for use in music videos. This only should be used for sections of music videos that aren't already covered by another category."
   },
-  "useProxy": "Проксі-відео",
+  "useProxy": "Використовувати проксі",
   "@useProxy": {
     "description": "label for settings switch to proxy videos from server"
   },
-  "useProxyDescription": "Проксі-сервер дозволяє обходити регіональні блоки або блокування YouTube провайдером",
+  "useProxyDescription": "Проксі дозволяє обходити регіональні обмеження або блокування YouTube провайдером",
   "@useProxyDescription": {
     "description": "Description for the use proxy settings"
   },
@@ -531,7 +531,7 @@
   "@subtitleFontSizeDescription": {
     "description": "Settings description for subtitle size"
   },
-  "skipSslVerification": "Пропустити перевірку SSL-сертифіката",
+  "skipSslVerification": "Пропускати перевірку SSL-сертифіката",
   "@skipSslVerification": {
     "description": "Setting label to skip ssl certification verification"
   },
@@ -543,7 +543,7 @@
   "@themeDark": {
     "description": "Dark theme"
   },
-  "followSystem": "Стежити за системою",
+  "followSystem": "Як у системі",
   "@followSystem": {
     "description": "Follow system label"
   },
@@ -559,7 +559,7 @@
   "@themeBrightness": {
     "description": "Ask the user to user dark / light / system theme"
   },
-  "returnYoutubeDislikeDescription": "Показувати оціночну кількість дизлайків відео за допомогою API, наданого returnyoutubedislike.com",
+  "returnYoutubeDislikeDescription": "Показувати приблизну кількість дизлайків під відео за допомогою API, наданого returnyoutubedislike.com",
   "@returnYoutubeDislikeDescription": {
     "description": "ReturnYoutubeDislike setting description"
   },
@@ -595,7 +595,7 @@
   "@searchHistoryDescription": {
     "description": "Description for search history settings"
   },
-  "searchSortViewCount": "Кількість переглядів",
+  "searchSortViewCount": "Кількістю переглядів",
   "@searchSortViewCount": {
     "description": "Sort search by view count"
   },
@@ -603,11 +603,11 @@
   "@searchSortUploadDate": {
     "description": "Sort search by upload date"
   },
-  "searchSortRelevance": "Актуальність",
+  "searchSortRelevance": "Актуальністю",
   "@searchSortRelevance": {
     "description": "Sort search by relevance"
   },
-  "searchSortRating": "Рейтинг",
+  "searchSortRating": "Рейтингом",
   "@searchSortRating": {
     "description": "Sort search by rating"
   },
@@ -619,7 +619,7 @@
   "@rememberSubtitleLanguageDescription": {
     "description": "Settings description for remembering subtitle language"
   },
-  "rememberSubtitleLanguage": "Запам''ятайте мову субтитрів",
+  "rememberSubtitleLanguage": "Запам’ятати мову субтитрів",
   "@rememberSubtitleLanguage": {
     "description": "Settings label for remembering subtitle language"
   },
@@ -635,7 +635,7 @@
   "@appLogs": {
     "description": "Title for settings that leads to application logs"
   },
-  "appLogsDescription": "Отримуйте журнали того, що відбувається в застосунку, це може бути корисно для повідомлення про проблеми",
+  "appLogsDescription": "Отримайте журнали того, що відбувається в застосунку, це може бути корисно для повідомлення про проблеми",
   "@appLogsDescription": {
     "description": "Description of the app log settings"
   },
@@ -651,7 +651,7 @@
   "@save": {
     "description": "Text for save action"
   },
-  "optional": "необов''язково",
+  "optional": "необов’язково",
   "@optional": {
     "description": "Optional label"
   },
@@ -677,7 +677,7 @@
       }
     }
   },
-  "videoFilterHide": "Приховати відфільтровані відео",
+  "videoFilterHide": "Приховувати відфільтровані відео",
   "@videoFilterHide": {
     "description": "Label for settings to hide filtered videos"
   },
@@ -705,7 +705,7 @@
   "@videoFilterValue": {
     "description": "Label for filter value"
   },
-  "videoFilterNoFilters": "Немає фільтрів для відео, натисніть кнопку \"+\" нижче, щоб почати додавати фільтри.",
+  "videoFilterNoFilters": "Немає фільтрів, натисніть кнопку \"+\" нижче, щоб почати додавати фільтри.",
   "@videoFilterNoFilters": {
     "description": "Label when there are no video filters"
   },
@@ -721,7 +721,7 @@
   "@videoFilterHideAllFromChannel": {
     "description": "Label for video filter switch to allow to hide all videos from a channel"
   },
-  "lockFullScreenToLandscape": "Прив''язка повноекранної орієнтації до співвідношення сторін відео",
+  "lockFullScreenToLandscape": "Заблокувати орієнтацію повноекранного режиму відтворення відео відповідно до співвідношення сторін відео",
   "@lockFullScreenToLandscape": {
     "description": "Title to force full screen to landscape"
   },
@@ -741,7 +741,7 @@
   "@videoFilterType": {
     "description": "Label for filter type"
   },
-  "videoFiltersExplanation": "Приховувати або затушовуйте відео з усіх відео каналів у застосунку на основі фільтрів, визначених нижче. Це дозволяє, наприклад, приховати спортивні спойлери або приховати shorts з певного каналу.",
+  "videoFiltersExplanation": "Приховувати або затемнювати відео з усіх відео каналів у застосунку на основі фільтрів, визначених нижче. Це дозволяє, наприклад, приховати спортивні спойлери або приховати Shorts з певного каналу.",
   "@videoFiltersExplanation": {
     "description": "Description on how filter work"
   },
@@ -753,11 +753,11 @@
   "@editVideoFilter": {
     "description": "Title when editting a filter"
   },
-  "videoFilterTapToReveal": "Торкніться, щоб відкрити",
+  "videoFilterTapToReveal": "Натисніть, щоб відкрити",
   "@videoFilterTapToReveal": {
     "description": "Label to tell user to tap to show a filtered video"
   },
-  "videoFilterEditDescription": "Виберіть необов''язковий канал, тип фільтра, операцію та значення, щоб відфільтрувати відео зі списків. Наприклад, тип: назва відео, операція: містить, значення: тест - ВИКЛЮЧИТИ усі відео зі словом \"тест\" у назві.",
+  "videoFilterEditDescription": "Оберіть канал, тип фільтра, операцію та значення, щоб відфільтрувати відео зі списків. Наприклад, тип – назва відео, операція – містить, а значення – виключити усі відео зі словом «тест» у назві.",
   "@videoFilterEditDescription": {
     "description": "Descriptive test for video filter set up"
   },
@@ -765,19 +765,19 @@
   "@videoFilterHideLabel": {
     "description": "Label to hide videos"
   },
-  "videoFilterFilterLabel": "Затушувати",
+  "videoFilterFilterLabel": "Затемнювати",
   "@videoFilterFilterLabel": {
     "description": "Label to filter videos"
   },
-  "videoFiltered": "Відео відфільтроване з наступних причин(и):",
+  "videoFiltered": "Відео відфільтроване з наступних причин:",
   "@videoFiltered": {
     "description": "Label shown on video list when it is filtered out"
   },
-  "videoFilterTypeVideoLength": "Тривалість відео (секунд)",
+  "videoFilterTypeVideoLength": "Тривалість відео (у секундах)",
   "@videoFilterTypeVideoLength": {
     "description": "Label for video filter video length"
   },
-  "videoFilterHideDescription": "За замовчуванням відфільтровані відео не приховуються, а показуються із зазначенням причини, через яку їх було відфільтровано. Цей параметр видаляє відфільтровані відео зі списків.",
+  "videoFilterHideDescription": "За замовчуванням відфільтровані відео не приховуються, а показуються у вигляді затемнених з вказанням причин, через які їх було відфільтровано. Цей параметр видаляє відфільтровані відео зі списків.",
   "@videoFilterHideDescription": {
     "description": ""
   },
@@ -793,7 +793,7 @@
   "@videoFilterOperationNotContain": {
     "description": "Label for video filter operation Does not contain"
   },
-  "rememberPlaybackSpeed": "Запам''ятати швидкість відтворення",
+  "rememberPlaybackSpeed": "Запам’ятовувати швидкість відтворення",
   "@rememberPlaybackSpeed": {
     "description": "Setting label for remembering playback speed"
   },
@@ -801,7 +801,7 @@
   "@videoFilterOperationContains": {
     "description": "Label for video filter operation Contains"
   },
-  "lockFullScreenToLandscapeDescription": "Блокує повноекранну орієнтацію залежно від формату відео: альбомну для широкоформатного відео та книжкову для відео в книжковій орієнтації",
+  "lockFullScreenToLandscapeDescription": "Заблоковує повноекранну орієнтацію залежно від формату відео: альбомну для широкоформатного відео та книжкову для відео в книжковій орієнтації",
   "@lockFullScreenToLandscapeDescription": {
     "description": "Setting description for forcing video to landscape when in full screen"
   },
@@ -871,7 +871,7 @@
   "@itemlistErrorGeneric": {
     "description": "Error showing when the data can't be fetch"
   },
-  "itemListErrorInvalidScope": "Ви не маєте дозволу на перегляд цього, якщо ви увійшли за допомогою методу токенів, спробуйте вийти та ввійти",
+  "itemListErrorInvalidScope": "Ви не маєте дозволу на перегляд цього, якщо ви увійшли за допомогою методу токена, спробуйте вийти та увійти наново",
   "@itemListErrorInvalidScope": {
     "description": "Error when the user doesn't have the proper scope to its current token"
   },
@@ -909,7 +909,7 @@
   "@navigationBarLabelNeverShow": {
     "description": "Never show label option for navigation bar"
   },
-  "customizeAppLayout": "Налаштувати розділи програми",
+  "customizeAppLayout": "Налаштувати розділи застосунку",
   "@customizeAppLayout": {
     "description": "Settings label for the settings to allow the user to set up the app sections themselves"
   },
@@ -957,11 +957,11 @@
   "@navigationBarStyle": {
     "description": "Label for settings on customizing navigation bar style"
   },
-  "returnYoutubeUrlValidation": "Url повинен починатися з http:// або https://",
+  "returnYoutubeUrlValidation": "URL-адреса повинна починатися з http:// або https://",
   "@returnYoutubeUrlValidation": {
     "description": "error message for invalid custom url for return to youtube"
   },
-  "rydCustomInstanceDescription": "Використовуйте інший екземпляр RYD, залиште пустим для використання по стандарту",
+  "rydCustomInstanceDescription": "Використовуйте інший екземпляр RYD, залиште порожнім для використання за замовчуванням",
   "@rydCustomInstanceDescription": {
     "description": "description for custom ryd instancr setting"
   },
@@ -1019,11 +1019,11 @@
   "@searchUploadDateAny": {
     "description": "Do not filter search result by upload date"
   },
-  "searchUploadDateHour": "Остання година",
+  "searchUploadDateHour": "За останню годину",
   "@searchUploadDateHour": {
     "description": "Search for uploaded in last hour"
   },
-  "searchUploadDateToday": "Сьогодні",
+  "searchUploadDateToday": "За сьогодні",
   "@searchUploadDateToday": {
     "description": "Search for uploaded today"
   },
@@ -1055,8 +1055,146 @@
   "@searchSortBy": {
     "description": "Search sorting option"
   },
-  "distractionFreeMode": "Режим фокусування",
+  "distractionFreeMode": "Режим зосередження",
   "@distractionFreeMode": {
     "description": "title for distraction free mode settings"
+  },
+  "videoFilterAppliedOn": "Застосовано до {selectedDays}",
+  "@videoFilterAppliedOn": {
+    "description": "Readable text on when the filter should apply",
+    "placeholders": {
+      "selectedDays": {
+        "type": "String",
+        "example": "Monday, Wednesday, Friday"
+      }
+    }
+  },
+  "videoFilterDayOfWeekDescription": "Ви можете вибрати дні тижня і час, до яких застосовуються фільтри, наприклад, щоб уникнути спойлерів спортивних подій.",
+  "@videoFilterDayOfWeekDescription": {
+    "description": ""
+  },
+  "enableNotificationDescriptions": "Запускає фонову службу для перевірки та повідомлення вас про зміни, які ви відстежуєте",
+  "@enableNotificationDescriptions": {
+    "description": ""
+  },
+  "subscriptionNotificationDescription": "Отримуйте повідомлення про нові відео з вашої стрічки підписок, якщо ви ввійшли у свій поточний екземпляр",
+  "@subscriptionNotificationDescription": {
+    "description": "Description for subscription notifications"
+  },
+  "askForDisableBatteryOptimizationContent": "Для того, щоб надсилати вам повідомлення, Clipious має запустити фонову службу. Для безперебійної роботи, необхідно, щоб Clipious мав необмежене використання акумулятора, натиснувши кнопку «Добре», ви відкриєте налаштування оптимізації роботи акумулятора.",
+  "@askForDisableBatteryOptimizationContent": {
+    "description": "Content for the dialog asking the user to turn off disabling battery optimization when turning on notifications"
+  },
+  "otherNotifications": "Інші джерела повідомлень (значки дзвіночків)",
+  "@otherNotifications": {
+    "description": "Title for settings section in the notification settings"
+  },
+  "deleteChannelNotificationContent": "Ви більше не будете отримувати повідомлення від цього каналу.",
+  "@deleteChannelNotificationContent": {
+    "description": "Title for dialog to confirm whether to delete channel notifications"
+  },
+  "deleteChannelNotificationTitle": "Видалити повідемлення від каналу?",
+  "@deleteChannelNotificationTitle": {
+    "description": "Title for dialog to confirm whether to delete channel notifications"
+  },
+  "deletePlaylistNotificationTitle": "Видалити повідомлення від добірки?",
+  "@deletePlaylistNotificationTitle": {
+    "description": "Title for dialog to confirm whether to delete playlist notifications"
+  },
+  "deletePlaylistNotificationContent": "Ви більше не будете отримувати повідомлення від цієї добірки.",
+  "@deletePlaylistNotificationContent": {
+    "description": "Title for dialog to confirm whether to delete playlist notifications"
+  },
+  "videoFilterStartTime": "Час початку",
+  "@videoFilterStartTime": {
+    "description": "Title for filter start time"
+  },
+  "videoFilterEndTime": "Час кінця",
+  "@videoFilterEndTime": {
+    "description": "Title for filter end time"
+  },
+  "from": "З",
+  "@from": {
+    "description": "From word (as in 'From xx To xx')"
+  },
+  "to": "До",
+  "@to": {
+    "description": "To word as in 'From xx To xx')"
+  },
+  "videoFilterTimeOfDayFromTo": "З {from} до {to}",
+  "@videoFilterTimeOfDayFromTo": {
+    "description": "Time of day range",
+    "placeholders": {
+      "from": {
+        "type": "String",
+        "example": "3:00 AM"
+      },
+      "to": {
+        "type": "String",
+        "example": "5:00 PM"
+      }
+    }
+  },
+  "notifications": "Повідомлення",
+  "@notifications": {
+    "description": "Notification settings title"
+  },
+  "notificationsDescription": "Увімкніть та перегляньте, про що ви отримуєте повідомлення",
+  "@notificationsDescription": {
+    "description": "Setting description for notifications"
+  },
+  "subscriptionNotification": "Повідомлення про підписки",
+  "@subscriptionNotification": {
+    "description": "Title for subscriptions notifications"
+  },
+  "subscriptionNotificationTitle": "Нові відео з ваших підписок",
+  "@subscriptionNotificationTitle": {
+    "description": "Title for the notification showing that there are new videos from the subscription feed"
+  },
+  "subscriptionNotificationContent": "У вашій стрічці підписок –  {count, plural, =0{немає нових відел} =1{1 нове відео} other{{count} нових відео}}",
+  "@subscriptionNotificationContent": {
+    "description": "Content for subscription notification",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "askForDisableBatteryOptimizationTitle": "Потрібно вимкнути оптимізацію акумулятора",
+  "@askForDisableBatteryOptimizationTitle": {
+    "description": "Title for the dialog asking the user to turn off disabling battery optimization when turning on notifications"
+  },
+  "askToEnableBackgroundServiceTitle": "Повідомлення вимкнені",
+  "@askToEnableBackgroundServiceTitle": {
+    "description": "If the users tries to turn on notifications for a channel but hasn't enable notifications in the app we need to turn it on for them"
+  },
+  "askToEnableBackgroundServiceContent": "Щоб отримувати повідомлення, необхідно увімкнути сповіщення Clipious, натисніть «Добре», щоб увімкнути їх.",
+  "@askToEnableBackgroundServiceContent": {
+    "description": "If the users tries to turn on notifications for a channel but hasn't enable notifications in the app we need to turn it on for them"
+  },
+  "channelNotificationTitle": "Нові відео від {channel}",
+  "@channelNotificationTitle": {
+    "description": "Title for the channel notifications when there are new videos",
+    "placeholders": {
+      "channel": {
+        "type": "String",
+        "example": "MKBHD"
+      }
+    }
+  },
+  "channelNotificationContent": "{count, plural, =0{Немає відео} =1{1 нове відео} other{{count} нових відео}} від {channel}",
+  "@channelNotificationContent": {
+    "description": "Content for channel notification when there are new videos",
+    "placeholders": {
+      "channel": {
+        "type": "String",
+        "example": "MKBHD"
+      },
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
   }
 }
