@@ -1147,7 +1147,7 @@
   "@enabled": {
     "description": "Text to show something is enabled"
   },
-  "seeking": "Recherche",
+  "seeking": "Chercher",
   "@seeking": {
     "description": "category for settings related to seeking in a video"
   },
@@ -1236,5 +1236,115 @@
   "channelSortByPopular": "Populaire",
   "@channelSortByPopular": {
     "description": "Sort channel videos by popularity"
+  },
+  "foregroundServiceNotificationContent": "Va vérifier pour une nouvelle vidéo une fois {hours, select, 1{par heure} 24{par jour} other{chaque {hours} heures}}",
+  "@foregroundServiceNotificationContent": {
+    "description": "Content for the foreground service running notification when the user wants to receive notifications",
+    "hours": {
+      "type": "num",
+      "format": "compact"
+    }
+  },
+  "deArrowReplaceThumbnails": "Remplacer les vignettes",
+  "@deArrowReplaceThumbnails": {
+    "description": "Settings title for checkbox on whether the thumbnail should be replaced as well"
+  },
+  "exponentialSkip": "Avancer/Reculer exponentiellement",
+  "@exponentialSkip": {
+    "description": "Title for the setting to enable the exponential skipping"
+  },
+  "skipStep": "Pas d'avancement/de recul",
+  "@skipStep": {
+    "description": "Title for the settings to set the skipping step"
+  },
+  "skipStepDescription": "Secondes à sauter lors d'une action d'avancement/de recul",
+  "@skipStepDescription": {
+    "description": "Title for the settings to set the skipping step"
+  },
+  "fullscreenOnLandscape": "Plein écran en mode paysage",
+  "@fullscreenOnLandscape": {
+    "description": "Setting title to enable full screen on landscape orientation"
+  },
+  "copySettingsAsJson": "Copier les paramètres en JSON au presse-papiers",
+  "@copySettingsAsJson": {
+    "description": "title for settings sections to allow users to copy their settings as json to make debugging easier"
+  },
+  "returnYoutubeUrlValidation": "L'URL doit commencer par http:// ou https://",
+  "@returnYoutubeUrlValidation": {
+    "description": "error message for invalid custom url for return to youtube"
+  },
+  "askForDisableBatteryOptimizationContent": "Pour pouvoir envoyer des notifications, Clipious doit exécuter un service en arrière-plan. Pour être exécuté sans problème, il est requis pour Clipious d'avoir accés a l'utilisation de la batterie sans restriction. Appuyer sur ok va ouvrir les paramètres d'optimisation de la batterie.",
+  "@askForDisableBatteryOptimizationContent": {
+    "description": "Content for the dialog asking the user to turn off disabling battery optimization when turning on notifications"
+  },
+  "notificationFrequencySliderLabel": "{hours, select,  24{1j} other{{hours}h}}",
+  "@notificationFrequencySliderLabel": {
+    "description": "Short form for a number of hours going up to 1 day",
+    "hours": {
+      "type": "num",
+      "format": "compact"
+    }
+  },
+  "playlistNotificationContent": "Il {count, plural, =0{n'y a aucune nouvelle vidéo} =1{y a 1 nouvelle vidéo} other{{count} nouvelles vidéos}} sur la liste de lecture {playlist}",
+  "@playlistNotificationContent": {
+    "description": "Content for playlist notification when there are new videos",
+    "placeholders": {
+      "playlist": {
+        "type": "String",
+        "example": "Lo-Fi girl"
+      },
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "subscriptionNotificationContent": "Il {count, plural, =0{n'y a aucune nouvelle vidéo} =1{y a 1 nouvelle vidéo} other{y a {count} nouvelles vidéos}} dans votre flux d'abonnement",
+  "@subscriptionNotificationContent": {
+    "description": "Content for subscription notification",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "rydCustomInstanceDescription": "Utiliser une instance de RYD différente, laissez vide pour utiliser l'instance par défaut",
+  "@rydCustomInstanceDescription": {
+    "description": "description for custom ryd instancr setting"
+  },
+  "rydCustomInstance": "URL d'une instance RYD personalisée",
+  "@rydCustomInstance": {
+    "description": "title for setting to set a custom ryd instance"
+  },
+  "askForDisableBatteryOptimizationTitle": "Désactivation de l'optimisation de la batterie requise",
+  "@askForDisableBatteryOptimizationTitle": {
+    "description": "Title for the dialog asking the user to turn off disabling battery optimization when turning on notifications"
+  },
+  "channelNotificationContent": "Il {count, plural, =0{n'y a aucune nouvelle vidéo} =1{y a 1 nouvelle vidéo} other{y a {count} nouvelles vidéos}} de {channel}",
+  "@channelNotificationContent": {
+    "description": "Content for channel notification when there are new videos",
+    "placeholders": {
+      "channel": {
+        "type": "String",
+        "example": "MKBHD"
+      },
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "foregroundServiceNotificationTitle": "Surveillance de vidéos",
+  "@foregroundServiceNotificationTitle": {
+    "description": "Title for the foreground service running notification when the user wants to receive notifications"
+  },
+  "deArrowSettingDescription": "Remplacer les titres et les vignettes pièges à clics",
+  "@deArrowSettingDescription": {
+    "description": "Description for dearrow"
+  },
+  "deArrowReplaceThumbnailsDescription": "Remplacer les vignettes des vidéos, ainsi que les titres",
+  "@deArrowReplaceThumbnailsDescription": {
+    "description": "Description for DeArrow setting switch"
   }
 }
