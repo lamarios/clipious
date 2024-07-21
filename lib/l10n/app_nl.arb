@@ -75,7 +75,7 @@
   "@playListName": {
     "description": "Place holder for new playlist name text field"
   },
-  "videos": "Videos",
+  "videos": "Video''s",
   "@videos": {
     "description": "Videos label"
   },
@@ -172,7 +172,7 @@
   "@appLanguage": {
     "description": "Select app language"
   },
-  "nVideos": "{count, plural, =0{No videos} =1{1 video} other{{count} videos}}",
+  "nVideos": "{count, plural, =0{Geen video''s} =1{1 video} other{{count} video''s}}",
   "@nVideos": {
     "description": "One or more videos",
     "placeholders": {
@@ -194,7 +194,7 @@
   "@streams": {
     "description": "Streams label"
   },
-  "ok": "Oké",
+  "ok": "OK",
   "@ok": {
     "description": "Ok"
   },
@@ -236,7 +236,7 @@
   "@playlistVisibility": {
     "description": "Dropdown label for playlist visibility"
   },
-  "publicPlaylist": "Publiek",
+  "publicPlaylist": "Openbaar",
   "@publicPlaylist": {
     "description": "Public playlist"
   },
@@ -935,7 +935,7 @@
   "@distractionFreeModeDescription": {
     "description": "Description for distraction free mode"
   },
-  "couldntFetchVideos": "Kan video''s niet ophalen. Druk om opnieuw te proberen.",
+  "couldntFetchVideos": "Kan video''s niet laden. Klik om opnieuw te proberen.",
   "@couldntFetchVideos": {
     "description": "Can't load bunch of videos, asking  user to try again"
   },
@@ -958,5 +958,395 @@
   "itemListErrorInvalidScope": "U heeft geen toestemming om dit te zien. Als u hebt ingelogd met de tokenmethode, probeer dan uit en weer in te loggen",
   "@itemListErrorInvalidScope": {
     "description": "Error when the user doesn't have the proper scope to its current token"
+  },
+  "sponsorBlockSettingsQuickDescription": "Selecteer welk type segmenten je wilt overslaan",
+  "@sponsorBlockSettingsQuickDescription": {
+    "description": "Small description of what the sponsor block settings do"
+  },
+  "skipSslVerificationDescription": "Voor het gebruik van een zelfondertekend SSL-certificaat, of als je SSL-gerelateerde problemen hebt met je server.",
+  "@skipSslVerificationDescription": {
+    "description": "Setting description for the skip ssl certification verification"
+  },
+  "sponsorBlockCategoryPreviewDescription": "Verzameling clips die laten zien wat er gaat komen in deze video of volgende video''s in een serie, waarbij alle informatie later in de video wordt herhaald.",
+  "@sponsorBlockCategoryPreviewDescription": {
+    "description": "Sponsorblock 'Preview' Category description"
+  },
+  "returnYoutubeDislikeDescription": "Toon geschatte video dislikes gebruikmakend van de API geleverd door returnyoutubedislike.com",
+  "@returnYoutubeDislikeDescription": {
+    "description": "ReturnYoutubeDislike setting description"
+  },
+  "videoFilterHideDescription": "Standaard worden gefilterde video''s niet verborgen maar verduisterd weergegeven met de reden(en) waarom ze zijn gefilterd. Deze instelling verwijdert de gefilterde video''s uit de lijsten.",
+  "@videoFilterHideDescription": {
+    "description": ""
+  },
+  "lockFullScreenToLandscapeDescription": "Stelt de volledige schermoriëntatie in op basis van het videoformaat: landschap voor horizontale video''s en portret voor verticale video''s",
+  "@lockFullScreenToLandscapeDescription": {
+    "description": "Setting description for forcing video to landscape when in full screen"
+  },
+  "enableNotificationDescriptions": "Draait een voorgrondservice om de wijzigingen die je volg te controleren en je meldingen te geven",
+  "@enableNotificationDescriptions": {
+    "description": ""
+  },
+  "sponsorBlockDescription": "Gesponsorde segmenten die zijn ingediend door de community overslaan",
+  "@sponsorBlockDescription": {
+    "description": "Sponsorblock setting description"
+  },
+  "tapToAddServer": "Klik om de server aan je lijst toe te voegen",
+  "@tapToAddServer": {
+    "description": "public server description"
+  },
+  "cookieLoginDescription": "Gebruik deze manier als je problemen ervaart met token authenticatie",
+  "@cookieLoginDescription": {
+    "description": "Cookie log in description"
+  },
+  "sponsorBlockCategoryInteractionDescription": "Wanneer er een korte reminder is om te liken, te abonneren of te volgen midden in de inhoud. Als het segment lang is of over iets specifieks gaat, moet het onder zelfpromotie vallen.",
+  "@sponsorBlockCategoryInteractionDescription": {
+    "description": "Sponsor block 'Interaction' Category description"
+  },
+  "sponsorBlockCategoryFillerDescription": "Extra scenes die alleen zijn toegevoegd als opvulling of voor de humor en niet nodig zijn om de inhoud van de video te begrijpen. Dit moet geen segmenten bevatten die achtergrond of context bieden. Dit is een erg agressieve categorie, bedoeld voor als je geen zin hebt in \"plezier\".",
+  "@sponsorBlockCategoryFillerDescription": {
+    "description": "Sponsorblock 'Filler' Category description"
+  },
+  "skipStepDescription": "Aantal seconden om over te slaan bij doorspoel/terugspoel acties",
+  "@skipStepDescription": {
+    "description": "Title for the settings to set the skipping step"
+  },
+  "publicServersError": "Kon de lijst van publieke servers niet laden. Klik om opnieuw te proberen.",
+  "@publicServersError": {
+    "description": "Error message when trying to get public servers but it failed"
+  },
+  "useDashDescription": "DASH adaptieve streaming kan soms problematisch zijn; YouTube kan het vertragen.",
+  "@useDashDescription": {
+    "description": "Description for dash in the settings screen"
+  },
+  "sponsorBlockCategoryUnpaidSelfPromoDescription": "Vergelijkbaar met \"sponsor\" maar dan voor onbetaalde of zelfpromotie. Dit is inclusief secties over merchandise, donaties of informatie over met wie ze hebben samengewerkt. ",
+  "@sponsorBlockCategoryUnpaidSelfPromoDescription": {
+    "description": "Sponsor block 'Unpaid/Self promotion' Category description"
+  },
+  "sponsorBlockCategoryIntroDescription": "Een interval zonder daadwerkelijke inhoud. Kan een pauze, een stilstaand beeld of een herhalende animatie zijn. Deze categorie moet niet worden toegepast voor overgangen die informatie bevatten.",
+  "@sponsorBlockCategoryIntroDescription": {
+    "description": "Sponsorblock 'Intro' Category description"
+  },
+  "sponsorBlockCategoryMusicOffTopicDescription": "Alleen te gebruiken in muziekvideo''s. Dit moet alleen worden gebruikt voor delen van muziekvideo''s die niet gedekt worden door een andere categorie.",
+  "@sponsorBlockCategoryMusicOffTopicDescription": {
+    "description": "Only for use in music videos. This only should be used for sections of music videos that aren't already covered by another category."
+  },
+  "videoFiltersExplanation": "Verberg of obfusceer video''s van alle videofeeds in de app gebaseerd op de filters hieronder. Dit geeft bijvoorbeeld de mogelijkheid om sportuitslagen of shorts van een bepaald kanaal te verbergen.",
+  "@videoFiltersExplanation": {
+    "description": "Description on how filter work"
+  },
+  "videoFiltersSettingTileDescriptions": "Definieer regels om video''s weg te filteren",
+  "@videoFiltersSettingTileDescriptions": {
+    "description": "Description for the main settings page"
+  },
+  "videoFiltered": "Video''s gefilterd door de volgende reden(en):",
+  "@videoFiltered": {
+    "description": "Label shown on video list when it is filtered out"
+  },
+  "noDownloadedVideos": "Geen gedownloade video''s. Blader of zoek en houd een video in de resultaten lang ingedrukt of tik op de downloadknop op het afspeelscherm van een video om een video te downloaden",
+  "@noDownloadedVideos": {
+    "description": "Message showing when the user goes to the download screen but there are no offline videos."
+  },
+  "copySettingsAsJson": "Kopieer instellingen als JSON naar het klembord",
+  "@copySettingsAsJson": {
+    "description": "title for settings sections to allow users to copy their settings as json to make debugging easier"
+  },
+  "copySettingsAsJsonDescription": "Kopieer de instellingen als JSON om te helpen bij het debuggen als je een probleem tegenkomt in de applicatie en dat besluit te melden",
+  "@copySettingsAsJsonDescription": {
+    "description": ""
+  },
+  "showOnStart": "Selecteer wat je wilt zien als je de app opent",
+  "@showOnStart": {
+    "description": "Title of dialog asking which screen the users prefers to see"
+  },
+  "blackBackgroundDescription": "Voor donker thema op een OLED scherm",
+  "@blackBackgroundDescription": {
+    "description": "Description for dark background setting"
+  },
+  "sponsorBlockCategorySponsorDescription": "Betaalde promotie, betaalde verwijzingen en directe advertenties. Niet voor zelfpromotie of gratis shoutouts voor doelen, makers, websites of producten die ze leuk vinden.",
+  "@sponsorBlockCategorySponsorDescription": {
+    "description": "Sponsor block 'Sponsor' Category description"
+  },
+  "subtitleFontSizeDescription": "Verander de grootte van de ondertiteling als die te groot of te klein is op jouw apparaat",
+  "@subtitleFontSizeDescription": {
+    "description": "Settings description for subtitle size"
+  },
+  "autoplayVideoOnLoadDescription": "Start de video automatisch af te spelen nadat deze is geladen",
+  "@autoplayVideoOnLoadDescription": {
+    "description": "Description for the autoplay video on load setting"
+  },
+  "nReplies": "{count, plural, =0{Geen reacties} =1{1 reactie} other{{count} reacties}}",
+  "@nReplies": {
+    "description": "number of replies to a comment",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "addServerHelpText": "Klik op de + om je eigen servers toe te voegen of klik op een publieke server en voeg die toe.",
+  "@addServerHelpText": {
+    "description": "label for when the user hasn't chosen a server yet"
+  },
+  "useDynamicThemeDescription": "Gebruik Material You kleuren (alleen beschikbaar op Android 12+)",
+  "@useDynamicThemeDescription": {
+    "description": ""
+  },
+  "malformedStatsEndpoint": "/api/v1/stats is anders dan verwacht",
+  "@malformedStatsEndpoint": {
+    "description": "Title for dialog when adding a server that isn't validated as it should"
+  },
+  "malformedStatsEndpointDescription": "Het server stats eindpunt gaf geen verwachte payload, de sleutel \"software.name\" moet \"invidious\" zijn.\nReactie van de server:",
+  "@malformedStatsEndpointDescription": {
+    "description": "Description of the possible issue for an invalid stats endpoints"
+  },
+  "sponsorBlockCategoryOutroDescription": "Credits of als het Youtube eindscherm wordt getoond. Niet voor conclusies met informatie.",
+  "@sponsorBlockCategoryOutroDescription": {
+    "description": "Outro block 'Outro' Category description"
+  },
+  "useProxyDescription": "Door video''s van de server te proxyen kan je regionale blokkades of een blokkade van je internetprovider voor YouTube omzeilen",
+  "@useProxyDescription": {
+    "description": "Description for the use proxy settings"
+  },
+  "appLogsDescription": "Krijg logs van wat er gebeurt in de applicatie. Kan nuttig zijn om problemen te raporteren",
+  "@appLogsDescription": {
+    "description": "Description of the app log settings"
+  },
+  "videoFilterEditDescription": "Selecteer een optioneel kanaal, een filtertype, een bewerking en een waarde om video''s uit lijsten WEG te filteren. Voorbeeld: type: videonaam, bewerking: bevat, waarde: test zal alle video''s met het woord 'test' in hun naam UITSLUITEN.",
+  "@videoFilterEditDescription": {
+    "description": "Descriptive test for video filter set up"
+  },
+  "lockFullScreenToLandscape": "Koppel de oriëntatie van volledig scherm aan de beeldverhouding van de video",
+  "@lockFullScreenToLandscape": {
+    "description": "Title to force full screen to landscape"
+  },
+  "layoutEditorExplanation": "Je kunt zelf beslissen wat je op je startscherm wilt weergeven. Je kunt maximaal 2 bronnen voor de kleine horizontale weergave en één bron met grote video''s kiezen.",
+  "@layoutEditorExplanation": {
+    "description": "text to explain the home layout editor"
+  },
+  "notificationsDescription": "Schakel meldingen in, en check waarover je meldingen ontvangt",
+  "@notificationsDescription": {
+    "description": "Setting description for notifications"
+  },
+  "subscriptionNotificationDescription": "Krijg meldingen van nieuwe video''s van kanalen waarop je geabonneerd bent als je ingelogd bent op je huidige Invidious versie",
+  "@subscriptionNotificationDescription": {
+    "description": "Description for subscription notifications"
+  },
+  "subscriptionNotificationTitle": "Nieuwe video''s van je geabonneerde kanalen",
+  "@subscriptionNotificationTitle": {
+    "description": "Title for the notification showing that there are new videos from the subscription feed"
+  },
+  "askForDisableBatteryOptimizationContent": "Om meldingen te kunnen sturen moet Clipious een achtergrondservice uitvoeren. Voor een betrouwbare werking moet Clipious onbeperkt batterijgebruik krijgen. Door op ok te tikken, worden de instellingen voor batterijoptimalisatie geopend.",
+  "@askForDisableBatteryOptimizationContent": {
+    "description": "Content for the dialog asking the user to turn off disabling battery optimization when turning on notifications"
+  },
+  "notificationFrequencySettingsDescription": "Hoe vaak de applicatie controleert voor nieuwe video''s",
+  "@notificationFrequencySettingsDescription": {
+    "description": "Description for frequency settings"
+  },
+  "deArrowReplaceThumbnailsDescription": "Vervang zowel videominiaturen als de titels",
+  "@deArrowReplaceThumbnailsDescription": {
+    "description": "Description for DeArrow setting switch"
+  },
+  "returnYoutubeUrlValidation": "Url moet beginnen met http:// of https://",
+  "@returnYoutubeUrlValidation": {
+    "description": "error message for invalid custom url for return to youtube"
+  },
+  "rydCustomInstance": "Aangepaste RYD-versie url",
+  "@rydCustomInstance": {
+    "description": "title for setting to set a custom ryd instance"
+  },
+  "rydCustomInstanceDescription": "Gebruik een andere RYD-versie, laat leeg om de standaard te gebruiken",
+  "@rydCustomInstanceDescription": {
+    "description": "description for custom ryd instancr setting"
+  },
+  "searchHistoryLimitDescription": "Stel in hoeveel eerdere zoekopdrachten worden weergegeven bij de suggesties",
+  "@searchHistoryLimitDescription": {
+    "description": "Settings label for search history limit description"
+  },
+  "nFilters": "{count, plural, =0{Geen video''s} =1{1 filter} other{{count} filters}}",
+  "@nFilters": {
+    "description": "One or more video filters",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "videoFilterDescriptionString": "{hideOrFilter} video''s waar {type} {operation} ''{value}''.",
+  "@videoFilterDescriptionString": {
+    "description": "Human readable description of a video filter, in this case is it for string comparison, example: Hide videos where the name of the video does not contain the following string 'test' (Do not translate text between { })",
+    "placeholders": {
+      "hideOrFilter": {
+        "type": "String",
+        "example": "Hide"
+      },
+      "type": {
+        "type": "String",
+        "example": "video title"
+      },
+      "operation": {
+        "type": "String",
+        "example": "does not contain"
+      },
+      "value": {
+        "type": "String",
+        "example": "some filter text"
+      }
+    }
+  },
+  "videoFilterNoFilters": "Geen videofilters, klik op '+' om te beginnen met het toevoegen van filters.",
+  "@videoFilterNoFilters": {
+    "description": "Label when there are no video filters"
+  },
+  "rememberSubtitleLanguageDescription": "Stel de ondertiteling automatisch in op de laatst geselecteerde taal, indien beschikbaar",
+  "@rememberSubtitleLanguageDescription": {
+    "description": "Settings description for remembering subtitle language"
+  },
+  "fillFullscreenDescription": "Past de video aan om in landschapsmodus het volledige scherm te vullen",
+  "@fillFullscreenDescription": {
+    "description": "Setting description for filling video to screen in landscape"
+  },
+  "rememberPlaybackSpeedDescription": "Stel de afspeelsnelheid automatisch in op de laatstgekozen snelheid",
+  "@rememberPlaybackSpeedDescription": {
+    "description": "Settings description for remembering playback speed"
+  },
+  "noSubscriptions": "Geen abonnementen. Blader door video''s en abonneer je op de kanalen die je leuk vindt.",
+  "@noSubscriptions": {
+    "description": "Message when the user has no subs"
+  },
+  "youCanSubscribeAgainLater": "Je kan je later opnieuw op dit kanaal abonneren",
+  "@youCanSubscribeAgainLater": {
+    "description": "Text for the unscubscribe confirmation dialog"
+  },
+  "clearHistoryQuestionExplanation": "Dit zal de kijkgeschiedenis wissen van je account op de Invidious-versie die je gebruikt. Dit kan niet ongedaan worden gemaakt.",
+  "@clearHistoryQuestionExplanation": {
+    "description": "Message for dialog before clearing full viewing history"
+  },
+  "noHistory": "Geen kijkgeschiedenis. Bekijk wat video''s, dan worden ze hier weergegeven",
+  "@noHistory": {
+    "description": "Message when the user visits the history tab but it's empty"
+  },
+  "customizeAppLayoutExplanation": "Selecteer welke items je wilt tonen in de hoofdnavigatiebalk van de app. Klik op het huisje om te kiezen welk scherm wordt weergegeven wanneer de applicatie start. Je kunt de volgorde aanpassen door de secties te slepen.",
+  "@customizeAppLayoutExplanation": {
+    "description": ""
+  },
+  "videoFilterApplyDateToFilter": "Filter video''s op gegeven tijd",
+  "@videoFilterApplyDateToFilter": {
+    "description": "Label for switch to allow user to customize video filter and set days of week and time to them"
+  },
+  "videoFilterDayOfWeek": "Selecteer dagen om de filters toe te passen",
+  "@videoFilterDayOfWeek": {
+    "description": "Title for day selection for the filter"
+  },
+  "videoFilterDayOfWeekDescription": "Je kunt selectief dagen van de week en tijdstippen kiezen waarop de filters van toepassing zijn, bijvoorbeeld om spoilers van sportevenementen te vermijden.",
+  "@videoFilterDayOfWeekDescription": {
+    "description": ""
+  },
+  "subscriptionNotificationContent": "Er {count, plural, =0{zijn geen nieuwe video''s} =1{is 1 nieuwe video} other{zijn {count} nieuwe video''s}} van je geabonneerde kanalen",
+  "@subscriptionNotificationContent": {
+    "description": "Content for subscription notification",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "deleteChannelNotificationContent": "Je zal geen meldingen meer ontvangen van dit kanaal.",
+  "@deleteChannelNotificationContent": {
+    "description": "Title for dialog to confirm whether to delete channel notifications"
+  },
+  "askToEnableBackgroundServiceContent": "Om meldingen te ontvangen, moeten Clipious-meldingen zijn ingeschakeld. Druk op OK om deze meldingen in te schakelen.",
+  "@askToEnableBackgroundServiceContent": {
+    "description": "If the users tries to turn on notifications for a channel but hasn't enable notifications in the app we need to turn it on for them"
+  },
+  "deletePlaylistNotificationContent": "Je zal geen meldingen meer ontvangen van deze afspeellijst.",
+  "@deletePlaylistNotificationContent": {
+    "description": "Title for dialog to confirm whether to delete playlist notifications"
+  },
+  "channelNotificationContent": "Er {count, plural, =0{zijn geen nieuwe video''s} =1{is 1 nieuwe video} other{zijn {count} nieuwe video''s}} van {channel}",
+  "@channelNotificationContent": {
+    "description": "Content for channel notification when there are new videos",
+    "placeholders": {
+      "channel": {
+        "type": "String",
+        "example": "MKBHD"
+      },
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "playlistNotificationTitle": "Nieuwe video''s in de afspeellijst {playlist}",
+  "@playlistNotificationTitle": {
+    "description": "Title for the playlist notifications when there are new videos",
+    "placeholders": {
+      "playlist": {
+        "type": "String",
+        "example": "Lo-Fi girl"
+      }
+    }
+  },
+  "otherNotifications": "Andere meldingbronnen (bel pictogrammen)",
+  "@otherNotifications": {
+    "description": "Title for settings section in the notification settings"
+  },
+  "playlistNotificationContent": "Er {count, plural, =0{zijn geen nieuwe video''s} =1{is 1 nieuwe video} other{zijn {count} nieuwe video''s}} in de afspeellijst {playlist}",
+  "@playlistNotificationContent": {
+    "description": "Content for playlist notification when there are new videos",
+    "placeholders": {
+      "playlist": {
+        "type": "String",
+        "example": "Lo-Fi girl"
+      },
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "foregroundServiceNotificationContent": "Controleert voor nieuwe video''s {hours, select, 1{elk uur} 24{elke dag} other{elke {hours} uur}}",
+  "@foregroundServiceNotificationContent": {
+    "description": "Content for the foreground service running notification when the user wants to receive notifications",
+    "hours": {
+      "type": "num",
+      "format": "compact"
+    }
+  },
+  "subtitlesBackgroundDescription": "Voegt een zwarte achtergrond toe aan de ondertiteling om deze beter leesbaar te maken",
+  "@subtitlesBackgroundDescription": {
+    "description": "Description for settings to set black background  for subtitles"
+  },
+  "deArrowSettingDescription": "Vervang clickbait titels en miniaturen",
+  "@deArrowSettingDescription": {
+    "description": "Description for dearrow"
+  },
+  "deArrowWarning": "Het inschakelen van DeArrow kan de snelheid van bladeren door de app aanzienlijk verminderen, omdat voor elke afzonderlijke video extra HTTP-verzoeken nodig zijn",
+  "@deArrowWarning": {
+    "description": "Warning message when the user enables DeArrow"
+  },
+  "exponentialSkipDescription": "Hoe meer je doorspoelt, des te groter de sprong wordt.",
+  "@exponentialSkipDescription": {
+    "description": "Title for the setting to enable the exponential skipping"
+  },
+  "fullscreenOnLandscapeDescription": "Schakel naar volledig scherm als het apparaat in landschapsmodus is",
+  "@fullscreenOnLandscapeDescription": {
+    "description": "Setting to enable full screen on landscape orientation"
+  },
+  "feedbackScreenshotError": "Fout tijdens het uploaden van de screenshot naar Imgur",
+  "@feedbackScreenshotError": {
+    "description": "Title for dialog if something goes wrong while uploading feedback screenshot"
+  },
+  "submitFeedbackDescription": "Heb je een fout gevonden of heb je een suggestie? Gebruik deze tool om een screenshot van de app te maken, de feedback uit te leggen en te versturen",
+  "@submitFeedbackDescription": {
+    "description": "Setting tile descriptions for feedback submission"
+  },
+  "feedbackDisclaimer": "Om feedback in te dienen heb je een GitHub-account nodig en wordt je screenshot anoniem naar Imgur verzonden.",
+  "@feedbackDisclaimer": {
+    "description": "Content of dialog shown before submitting feedback to make sure the user is ok whith where the data is going"
   }
 }

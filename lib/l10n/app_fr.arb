@@ -853,7 +853,7 @@
   "@videoDownloadAudioOnly": {
     "description": "Label for toggle to download audio only "
   },
-  "itemListErrorInvalidScope": "Vous n'avez pas l'autorisation de voir ceci, si vous vous êtes connecté·e en utilisant la méthode du jeton, essayez de vous déconnecter et de vous reconnecter",
+  "itemListErrorInvalidScope": "Vous n''avez pas l''autorisation de voir ceci, si vous vous êtes connecté·e en utilisant la méthode du jeton, essayez de vous déconnecter et de vous reconnecter",
   "@itemListErrorInvalidScope": {
     "description": "Error when the user doesn't have the proper scope to its current token"
   },
@@ -987,11 +987,11 @@
   "@searchSortBy": {
     "description": "Search sorting option"
   },
-  "layoutEditorExplanation": "Vous pouvez décider ce qui s'affiche sur la page principale, vous pouvez avoir jusqu'à 2 petits aperçus avec défilement horizontal et 1 grand aperçu.",
+  "layoutEditorExplanation": "Vous pouvez décider ce qui s''affiche sur la page principale, vous pouvez avoir jusqu''à 2 petits aperçus avec défilement horizontal et 1 grand aperçu.",
   "@layoutEditorExplanation": {
     "description": "text to explain the home layout editor"
   },
-  "customizeAppLayoutExplanation": "Sélectionnez quels icônes apparaissent dans la barre de navigation. Cliquez sur le bouton « Accueil » pour sélectionner quel page s'ouvre quand l'application démarre. Vous pouvez réordonné les section par glisser-déposer.",
+  "customizeAppLayoutExplanation": "Sélectionnez quels icônes apparaissent dans la barre de navigation. Cliquez sur le bouton « Accueil » pour sélectionner quel page s''ouvre quand l''application démarre. Vous pouvez réordonné les section par glisser-déposer.",
   "@customizeAppLayoutExplanation": {
     "description": ""
   },
@@ -1045,7 +1045,7 @@
   "@videoFilterApplyDateToFilter": {
     "description": "Label for switch to allow user to customize video filter and set days of week and time to them"
   },
-  "videoFilterDayOfWeekDescription": "Vous pouvez choisir sélectivement les jours de la semaine et le temps auquel les filtres s'appliquent, par exemple, éviter les divulgâchis d'évènements sportifs.",
+  "videoFilterDayOfWeekDescription": "Vous pouvez choisir sélectivement les jours de la semaine et le temps auquel les filtres s''appliquent, par exemple, éviter les divulgâchis d''évènements sportifs.",
   "@videoFilterDayOfWeekDescription": {
     "description": ""
   },
@@ -1109,11 +1109,11 @@
   "@deArrowWarning": {
     "description": "Warning message when the user enables DeArrow"
   },
-  "submitFeedbackDescription": "Vous avez trouvé un bug ou avez une suggestion ? Utilisez cet outil pour prendre une capture d''écran de l'application, l'annoter, et envoyer un retour",
+  "submitFeedbackDescription": "Vous avez trouvé un bug ou avez une suggestion ? Utilisez cet outil pour prendre une capture d''écran de l''application, l''annoter, et envoyer un retour",
   "@submitFeedbackDescription": {
     "description": "Setting tile descriptions for feedback submission"
   },
-  "feedbackDisclaimer": "Pour envoyer un retour, vous aurez besoin d'un compte GitHub et votre capture d'écran sera envoyé par Imgur anonymement.",
+  "feedbackDisclaimer": "Pour envoyer un retour, vous aurez besoin d''un compte GitHub et votre capture d''écran sera envoyé par Imgur anonymement.",
   "@feedbackDisclaimer": {
     "description": "Content of dialog shown before submitting feedback to make sure the user is ok whith where the data is going"
   },
@@ -1147,7 +1147,7 @@
   "@enabled": {
     "description": "Text to show something is enabled"
   },
-  "seeking": "Recherche",
+  "seeking": "Chercher",
   "@seeking": {
     "description": "category for settings related to seeking in a video"
   },
@@ -1175,7 +1175,7 @@
   "@history": {
     "description": "User view history label"
   },
-  "fullscreenOnLandscapeDescription": "Basculez en plein écran quand l'appareil est tourné à l'horizontal",
+  "fullscreenOnLandscapeDescription": "Basculez en plein écran quand l''appareil est tourné à l''horizontal",
   "@fullscreenOnLandscapeDescription": {
     "description": "Setting to enable full screen on landscape orientation"
   },
@@ -1236,5 +1236,115 @@
   "channelSortByPopular": "Populaire",
   "@channelSortByPopular": {
     "description": "Sort channel videos by popularity"
+  },
+  "foregroundServiceNotificationContent": "Va vérifier pour une nouvelle vidéo une fois {hours, select, 1{par heure} 24{par jour} other{chaque {hours} heures}}",
+  "@foregroundServiceNotificationContent": {
+    "description": "Content for the foreground service running notification when the user wants to receive notifications",
+    "hours": {
+      "type": "num",
+      "format": "compact"
+    }
+  },
+  "deArrowReplaceThumbnails": "Remplacer les vignettes",
+  "@deArrowReplaceThumbnails": {
+    "description": "Settings title for checkbox on whether the thumbnail should be replaced as well"
+  },
+  "exponentialSkip": "Avancer/Reculer exponentiellement",
+  "@exponentialSkip": {
+    "description": "Title for the setting to enable the exponential skipping"
+  },
+  "skipStep": "Pas d''avancement/de recul",
+  "@skipStep": {
+    "description": "Title for the settings to set the skipping step"
+  },
+  "skipStepDescription": "Secondes à sauter lors d''une action d''avancement/de recul",
+  "@skipStepDescription": {
+    "description": "Title for the settings to set the skipping step"
+  },
+  "fullscreenOnLandscape": "Plein écran en mode paysage",
+  "@fullscreenOnLandscape": {
+    "description": "Setting title to enable full screen on landscape orientation"
+  },
+  "copySettingsAsJson": "Copier les paramètres en JSON au presse-papiers",
+  "@copySettingsAsJson": {
+    "description": "title for settings sections to allow users to copy their settings as json to make debugging easier"
+  },
+  "returnYoutubeUrlValidation": "L''URL doit commencer par http:// ou https://",
+  "@returnYoutubeUrlValidation": {
+    "description": "error message for invalid custom url for return to youtube"
+  },
+  "askForDisableBatteryOptimizationContent": "Pour pouvoir envoyer des notifications, Clipious doit exécuter un service en arrière-plan. Pour être exécuté sans problème, il est requis pour Clipious d''avoir accés a l''utilisation de la batterie sans restriction. Appuyer sur ok va ouvrir les paramètres d''optimisation de la batterie.",
+  "@askForDisableBatteryOptimizationContent": {
+    "description": "Content for the dialog asking the user to turn off disabling battery optimization when turning on notifications"
+  },
+  "notificationFrequencySliderLabel": "{hours, select,  24{1j} other{{hours}h}}",
+  "@notificationFrequencySliderLabel": {
+    "description": "Short form for a number of hours going up to 1 day",
+    "hours": {
+      "type": "num",
+      "format": "compact"
+    }
+  },
+  "playlistNotificationContent": "Il {count, plural, =0{n''y a aucune nouvelle vidéo} =1{y a 1 nouvelle vidéo} other{{count} nouvelles vidéos}} sur la liste de lecture {playlist}",
+  "@playlistNotificationContent": {
+    "description": "Content for playlist notification when there are new videos",
+    "placeholders": {
+      "playlist": {
+        "type": "String",
+        "example": "Lo-Fi girl"
+      },
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "subscriptionNotificationContent": "Il {count, plural, =0{n''y a aucune nouvelle vidéo} =1{y a 1 nouvelle vidéo} other{y a {count} nouvelles vidéos}} dans votre flux d''abonnement",
+  "@subscriptionNotificationContent": {
+    "description": "Content for subscription notification",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "rydCustomInstanceDescription": "Utiliser une instance de RYD différente, laissez vide pour utiliser l''instance par défaut",
+  "@rydCustomInstanceDescription": {
+    "description": "description for custom ryd instancr setting"
+  },
+  "rydCustomInstance": "URL d''une instance RYD personalisée",
+  "@rydCustomInstance": {
+    "description": "title for setting to set a custom ryd instance"
+  },
+  "askForDisableBatteryOptimizationTitle": "Désactivation de l''optimisation de la batterie requise",
+  "@askForDisableBatteryOptimizationTitle": {
+    "description": "Title for the dialog asking the user to turn off disabling battery optimization when turning on notifications"
+  },
+  "channelNotificationContent": "Il {count, plural, =0{n''y a aucune nouvelle vidéo} =1{y a 1 nouvelle vidéo} other{y a {count} nouvelles vidéos}} de {channel}",
+  "@channelNotificationContent": {
+    "description": "Content for channel notification when there are new videos",
+    "placeholders": {
+      "channel": {
+        "type": "String",
+        "example": "MKBHD"
+      },
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "foregroundServiceNotificationTitle": "Surveillance de vidéos",
+  "@foregroundServiceNotificationTitle": {
+    "description": "Title for the foreground service running notification when the user wants to receive notifications"
+  },
+  "deArrowSettingDescription": "Remplacer les titres et les vignettes pièges à clics",
+  "@deArrowSettingDescription": {
+    "description": "Description for dearrow"
+  },
+  "deArrowReplaceThumbnailsDescription": "Remplacer les vignettes des vidéos, ainsi que les titres",
+  "@deArrowReplaceThumbnailsDescription": {
+    "description": "Description for DeArrow setting switch"
   }
 }
