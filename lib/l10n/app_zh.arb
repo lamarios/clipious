@@ -845,7 +845,7 @@
   "@videoFilterOperationLowerThan": {
     "description": "Label for video filter operation Lower than"
   },
-  "videoFilterWholeChannel": "{隐藏或过滤}频道中所有的视频",
+  "videoFilterWholeChannel": "{hideOrFilter}频道中所有的视频",
   "@videoFilterWholeChannel": {
     "description": "Label for whole channel filtering",
     "placeholders": {
