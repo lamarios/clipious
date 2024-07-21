@@ -1175,7 +1175,7 @@
   "@subtitlesBackground": {
     "description": "Title for settings to set black background  for subtitles"
   },
-  "deArrowWarning": "Activar DeArrow puede reducir significativamente la velocidad de navegación de la aplicación, ya que se necesitan peticiones http adicionales para cada vídeo",
+  "deArrowWarning": "Habilitar DeArrow puede reducir significativamente la velocidad de navegación de la aplicación, ya que se necesitan solicitudes http adicionales para cada video",
   "@deArrowWarning": {
     "description": "Warning message when the user enables DeArrow"
   },

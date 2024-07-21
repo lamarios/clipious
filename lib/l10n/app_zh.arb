@@ -736,5 +736,123 @@
   "rememberSubtitleLanguage": "记住字幕语言",
   "@rememberSubtitleLanguage": {
     "description": "Settings label for remembering subtitle language"
+  },
+  "returnYoutubeUrlValidation": "链接必须以http://或https://开头",
+  "@returnYoutubeUrlValidation": {
+    "description": "error message for invalid custom url for return to youtube"
+  },
+  "editVideoFilter": "编辑过滤器",
+  "@editVideoFilter": {
+    "description": "Title when editting a filter"
+  },
+  "videoFilterOperation": "操作",
+  "@videoFilterOperation": {
+    "description": "Label for filter operation"
+  },
+  "videoFilterHide": "隐藏被过滤的视频",
+  "@videoFilterHide": {
+    "description": "Label for settings to hide filtered videos"
+  },
+  "videoFilterOperationHigherThan": "大于",
+  "@videoFilterOperationHigherThan": {
+    "description": "Label for video filter operation Higher than"
+  },
+  "videoFilterHideAllFromChannel": "过滤频道中所有的视频",
+  "@videoFilterHideAllFromChannel": {
+    "description": "Label for video filter switch to allow to hide all videos from a channel"
+  },
+  "videoFiltersSettingTileDescriptions": "定义过滤视频的规则",
+  "@videoFiltersSettingTileDescriptions": {
+    "description": "Description for the main settings page"
+  },
+  "addVideoFilter": "创建过滤器",
+  "@addVideoFilter": {
+    "description": "Title when creating a new filter"
+  },
+  "save": "保存",
+  "@save": {
+    "description": "Text for save action"
+  },
+  "videoFilterType": "类型",
+  "@videoFilterType": {
+    "description": "Label for filter type"
+  },
+  "videoFilterValue": "值",
+  "@videoFilterValue": {
+    "description": "Label for filter value"
+  },
+  "videoFilterHideLabel": "隐藏",
+  "@videoFilterHideLabel": {
+    "description": "Label to hide videos"
+  },
+  "videoFilterFilterLabel": "混淆",
+  "@videoFilterFilterLabel": {
+    "description": "Label to filter videos"
+  },
+  "videoFilterTapToReveal": "点击显示",
+  "@videoFilterTapToReveal": {
+    "description": "Label to tell user to tap to show a filtered video"
+  },
+  "videoFilterNoFilters": "点击下方+按钮添加新视频过滤规则",
+  "@videoFilterNoFilters": {
+    "description": "Label when there are no video filters"
+  },
+  "videoFilterTypeVideoTitle": "视频标题",
+  "@videoFilterTypeVideoTitle": {
+    "description": "Label for video filter video title"
+  },
+  "videoFilterTypeChannelName": "频道名",
+  "@videoFilterTypeChannelName": {
+    "description": "Label for video filter channel name"
+  },
+  "videoFilterTypeVideoLength": "视频长度(秒)",
+  "@videoFilterTypeVideoLength": {
+    "description": "Label for video filter video length"
+  },
+  "videoFilterOperationContains": "包括",
+  "@videoFilterOperationContains": {
+    "description": "Label for video filter operation Contains"
+  },
+  "videoFilterOperationNotContain": "不包括",
+  "@videoFilterOperationNotContain": {
+    "description": "Label for video filter operation Does not contain"
+  },
+  "channel": "频道",
+  "@channel": {
+    "description": "A single channel"
+  },
+  "rydCustomInstance": "自定义BYD实例链接",
+  "@rydCustomInstance": {
+    "description": "title for setting to set a custom ryd instance"
+  },
+  "rydCustomInstanceDescription": "使用自定义BYD实例，留空则使用默认实例",
+  "@rydCustomInstanceDescription": {
+    "description": "description for custom ryd instancr setting"
+  },
+  "videoFilterAllChannels": "全部频道",
+  "@videoFilterAllChannels": {
+    "description": "Title for the sections that applies to all channels"
+  },
+  "optional": "可选项",
+  "@optional": {
+    "description": "Optional label"
+  },
+  "videoFiltered": "基于以下规则过滤视频：",
+  "@videoFiltered": {
+    "description": "Label shown on video list when it is filtered out"
+  },
+  "videoFilterOperationLowerThan": "小于",
+  "@videoFilterOperationLowerThan": {
+    "description": "Label for video filter operation Lower than"
+  },
+  "videoFilterWholeChannel": "{隐藏或过滤}频道中所有的视频",
+  "@videoFilterWholeChannel": {
+    "description": "Label for whole channel filtering",
+    "placeholders": {
+      "hideOrFilter": {
+        "type": "String",
+        "example": "Hide"
+      }
+    }
   }
 }

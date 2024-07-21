@@ -271,7 +271,7 @@
   "@loggedIn": {
     "description": "Label to tell the user that he is logged in to the server"
   },
-  "notLoggedIn": "未登入。點選以登入。",
+  "notLoggedIn": "未登入",
   "@notLoggedIn": {
     "description": "Label when the user is not logged in to the server"
   },
@@ -1255,7 +1255,7 @@
   "@searchSortBy": {
     "description": "Search sorting option"
   },
-  "nFilters": "幾個影片篩選器",
+  "nFilters": "{count, plural, =0{沒有影片} =1{篩選出一部影片} other{篩選出{count}部影片}}",
   "@nFilters": {
     "description": "One or more video filters",
     "placeholders": {
