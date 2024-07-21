@@ -15,7 +15,7 @@ DownloadedVideo _$DownloadedVideoFromJson(Map<String, dynamic> json) =>
       downloadComplete: json['downloadComplete'] as bool? ?? false,
       downloadFailed: json['downloadFailed'] as bool? ?? false,
       audioOnly: json['audioOnly'] as bool? ?? false,
-      lengthSeconds: json['lengthSeconds'] as int? ?? 1,
+      lengthSeconds: (json['lengthSeconds'] as num?)?.toInt() ?? 1,
       quality: json['quality'] as String? ?? '720p',
     );
 

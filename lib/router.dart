@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:invidious/app/views/screens/main.dart';
 import 'package:invidious/app/views/tv/screens/tv_home.dart';
 import 'package:invidious/channels/views/screens/info_tab.dart';
+import 'package:invidious/globals.dart';
 import 'package:invidious/player/states/player.dart';
 import 'package:invidious/player/views/tv/screens/tv_player_view.dart';
 import 'package:invidious/playlists/models/playlist.dart';
@@ -65,7 +66,6 @@ import 'channels/views/screens/shorts_tab.dart';
 import 'channels/views/screens/stream_tab.dart';
 import 'channels/views/screens/video_tab.dart';
 import 'channels/views/tv/screens/channel.dart';
-import 'db_reset/views/screen/reset.dart';
 import 'downloads/views/screens/download_manager.dart';
 import 'home/views/screens/downloads_tab.dart';
 import 'home/views/screens/edit_layout.dart';
@@ -110,11 +110,10 @@ const shortsPath = 'shorts';
 const streamsPath = 'streams';
 
 @AutoRouterConfig(replaceInRouteName: 'Screen|Tab,Route')
-class AppRouter extends _$AppRouter {
-  final bool needsDbMigration;
+class AppRouter extends _$AppRouter implements AutoRouteGuard {
   final bool hasServer;
 
-  AppRouter({required this.needsDbMigration, required this.hasServer});
+  AppRouter({required this.hasServer});
 
   @override
   List<AutoRoute> get routes {
@@ -122,11 +121,9 @@ class AppRouter extends _$AppRouter {
         ? [
             AutoRoute(
               page: TvHomeRoute.page,
-              initial: !needsDbMigration && hasServer,
+              initial: hasServer,
             ),
-            AutoRoute(
-                page: TvWelcomeWizardRoute.page,
-                initial: !needsDbMigration && !hasServer),
+            AutoRoute(page: TvWelcomeWizardRoute.page, initial: !hasServer),
             AutoRoute(page: TvChannelRoute.page),
             AutoRoute(page: TvGridRoute.page),
             AutoRoute(page: TvVideoRoute.page),
@@ -147,12 +144,11 @@ class AppRouter extends _$AppRouter {
             AutoRoute(page: TvFilterListSettingsRoute.page),
             AutoRoute(page: TvTimePickerRoute.page),
             AutoRoute(page: TvPlainTextRoute.page),
-            AutoRoute(page: ResetRoute.page, initial: needsDbMigration)
           ]
         : [
             AutoRoute(
               page: MainRoute.page,
-              initial: !needsDbMigration && hasServer,
+              initial: hasServer,
               path: mainPath,
               children: [
                 AutoRoute(
@@ -217,14 +213,32 @@ class AppRouter extends _$AppRouter {
                 AutoRoute(page: DeArrowSettingsRoute.page),
               ],
             ),
-            AutoRoute(page: ResetRoute.page, initial: needsDbMigration),
             AutoRoute(
                 page: ManageSingleServerRoute.page,
                 path: pathManageSingleServerFromWizard),
-            AutoRoute(
-                page: WelcomeWizardRoute.page,
-                initial: !needsDbMigration && !hasServer)
+            AutoRoute(page: WelcomeWizardRoute.page, initial: !hasServer)
           ];
+  }
+
+  @override
+  Future<void> onNavigation(
+      NavigationResolver resolver, StackRouter router) async {
+    try {
+      if (resolver.route.name == TvWelcomeWizardRoute.name ||
+          resolver.route.name == WelcomeWizardRoute.name) {
+        resolver.next(true);
+        return;
+      }
+      await db.getCurrentlySelectedServer();
+      resolver.next(true);
+    } catch (e) {
+      if (isTv) {
+        resolver.redirect(const TvWelcomeWizardRoute(), replace: true);
+      } else {
+        resolver.redirect(const WelcomeWizardRoute(), replace: true);
+      }
+    }
+    // TODO: implement onNavigation
   }
 }
 

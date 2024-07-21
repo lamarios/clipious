@@ -8,7 +8,7 @@ part of 'comment_replies.dart';
 
 CommentReplies _$CommentRepliesFromJson(Map<String, dynamic> json) =>
     CommentReplies(
-      json['replyCount'] as int,
+      (json['replyCount'] as num).toInt(),
       json['continuation'] as String,
     );
 

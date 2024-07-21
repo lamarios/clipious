@@ -222,12 +222,6 @@ abstract class _$AppRouter extends RootStackRouter {
         ),
       );
     },
-    ResetRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const ResetScreen(),
-      );
-    },
     SearchChannelRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -1159,20 +1153,6 @@ class RecommendedRouteArgs {
   String toString() {
     return 'RecommendedRouteArgs{key: $key, video: $video}';
   }
-}
-
-/// generated route for
-/// [ResetScreen]
-class ResetRoute extends PageRouteInfo<void> {
-  const ResetRoute({List<PageRouteInfo>? children})
-      : super(
-          ResetRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'ResetRoute';
-
-  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for

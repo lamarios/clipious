@@ -212,14 +212,14 @@ Playlist _$PlaylistFromJson(Map<String, dynamic> json) => Playlist(
       json['authordId'] as String?,
       json['authorUrl'] as String?,
       json['description'] as String?,
-      json['videoCount'] as int,
+      (json['videoCount'] as num).toInt(),
     )
       ..authorThumbnails = (json['authorThumbnails'] as List<dynamic>?)
           ?.map((e) => ImageObject.fromJson(e as Map<String, dynamic>))
           .toList()
-      ..viewCount = json['viewCount'] as int?
+      ..viewCount = (json['viewCount'] as num?)?.toInt()
       ..isListed = json['isListed'] as bool?
-      ..updated = json['updated'] as int?
+      ..updated = (json['updated'] as num?)?.toInt()
       ..videos = (json['videos'] as List<dynamic>)
           .map((e) => VideoInList.fromJson(e as Map<String, dynamic>))
           .toList();

@@ -16,7 +16,7 @@ Comment _$CommentFromJson(Map<String, dynamic> json) => Comment(
       json['isEdited'] as bool,
       json['content'] as String,
       json['publishedText'] as String,
-      json['likeCount'] as int,
+      (json['likeCount'] as num).toInt(),
       json['commentId'] as String,
       json['authorIsChannelOwner'] as bool,
       json['creatorHeart'] == null

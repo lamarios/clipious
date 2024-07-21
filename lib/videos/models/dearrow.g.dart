@@ -23,7 +23,7 @@ Map<String, dynamic> _$DeArrowToJson(DeArrow instance) => <String, dynamic>{
 DeArrowTitle _$DeArrowTitleFromJson(Map<String, dynamic> json) => DeArrowTitle(
       title: json['title'] as String?,
       original: json['original'] as bool? ?? false,
-      votes: json['votes'] as int? ?? 0,
+      votes: (json['votes'] as num?)?.toInt() ?? 0,
       locked: json['locked'] as bool? ?? false,
       uuid: json['UUID'] as String?,
     );
@@ -41,7 +41,7 @@ DeArrowThumbnail _$DeArrowThumbnailFromJson(Map<String, dynamic> json) =>
     DeArrowThumbnail(
       timestamp: (json['timestamp'] as num?)?.toDouble(),
       original: json['original'] as bool? ?? false,
-      votes: json['votes'] as int? ?? 0,
+      votes: (json['votes'] as num?)?.toInt() ?? 0,
       locked: json['locked'] as bool? ?? false,
       uuid: json['UUID'] as String?,
     );

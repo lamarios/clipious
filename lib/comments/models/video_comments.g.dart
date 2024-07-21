@@ -8,7 +8,7 @@ part of 'video_comments.dart';
 
 VideoComments _$VideoCommentsFromJson(Map<String, dynamic> json) =>
     VideoComments(
-      json['commentCount'] as int?,
+      (json['commentCount'] as num?)?.toInt(),
       json['videoId'] as String?,
       json['continuation'] as String?,
       (json['comments'] as List<dynamic>)
