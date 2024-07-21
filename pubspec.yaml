@@ -1,5 +1,5 @@
 name: invidious
-version: 1.19.10+4055
+version: 1.19.11+4056
 publish_to: none
 description: A new Flutter project.
 environment: 

@@ -10,7 +10,7 @@ SubscriptionNotification _$SubscriptionNotificationFromJson(
         Map<String, dynamic> json) =>
     SubscriptionNotification(
       json['lastSeenVideoId'] as String,
-      json['timestamp'] as int,
+      (json['timestamp'] as num).toInt(),
     );
 
 Map<String, dynamic> _$SubscriptionNotificationToJson(

@@ -24,7 +24,6 @@ import 'package:invidious/utils/sembast_sqflite_database.dart';
 import 'package:invidious/workmanager.dart';
 import 'package:logging/logging.dart';
 
-import 'db_reset/reset_utils.dart';
 import 'settings/models/db/app_logs.dart';
 
 const brandColor = Color(0xFF4f0096);
@@ -60,7 +59,6 @@ Future<void> main() async {
   db = await SembastSqfDb.create();
   await fileDb.syncWithDb();
 
-  final needsDbMigration = await needsReset();
   late final bool hasServer;
   try {
     await db.getCurrentlySelectedServer();
@@ -68,8 +66,7 @@ Future<void> main() async {
   } catch (err) {
     hasServer = false;
   }
-  appRouter =
-      AppRouter(needsDbMigration: needsDbMigration, hasServer: hasServer);
+  appRouter = AppRouter(hasServer: hasServer);
 
   initializeNotifications();
 

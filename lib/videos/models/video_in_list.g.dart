@@ -186,18 +186,18 @@ extension $VideoInListCopyWith on VideoInList {
 VideoInList _$VideoInListFromJson(Map<String, dynamic> json) => VideoInList(
       json['title'] as String,
       json['videoId'] as String,
-      json['lengthSeconds'] as int,
-      json['viewCount'] as int?,
+      (json['lengthSeconds'] as num).toInt(),
+      (json['viewCount'] as num?)?.toInt(),
       json['author'] as String?,
       json['authorId'] as String?,
       json['authorUrl'] as String?,
-      json['published'] as int?,
+      (json['published'] as num?)?.toInt(),
       json['publishedText'] as String?,
       (json['videoThumbnails'] as List<dynamic>)
           .map((e) => ImageObject.fromJson(e as Map<String, dynamic>))
           .toList(),
     )
-      ..index = json['index'] as int?
+      ..index = (json['index'] as num?)?.toInt()
       ..indexId = json['indexId'] as String?;
 
 Map<String, dynamic> _$VideoInListToJson(VideoInList instance) =>

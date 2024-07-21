@@ -170,8 +170,9 @@ VideoFilter _$VideoFilterFromJson(Map<String, dynamic> json) => VideoFilter(
       ..filterAll = json['filterAll'] as bool
       ..hideFromFeed = json['hideFromFeed'] as bool
       ..dbType = json['dbType'] as String?
-      ..daysOfWeek =
-          (json['daysOfWeek'] as List<dynamic>).map((e) => e as int).toList()
+      ..daysOfWeek = (json['daysOfWeek'] as List<dynamic>)
+          .map((e) => (e as num).toInt())
+          .toList()
       ..startTime = json['startTime'] as String
       ..endTime = json['endTime'] as String
       ..dbOperation = json['dbOperation'] as String?;

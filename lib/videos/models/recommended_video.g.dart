@@ -14,7 +14,7 @@ RecommendedVideo _$RecommendedVideoFromJson(Map<String, dynamic> json) =>
           .map((e) => ImageObject.fromJson(e as Map<String, dynamic>))
           .toList(),
       json['author'] as String?,
-      json['lengthSeconds'] as int,
+      (json['lengthSeconds'] as num).toInt(),
       json['viewCountText'] as String,
     )
       ..authorId = json['authorId'] as String?

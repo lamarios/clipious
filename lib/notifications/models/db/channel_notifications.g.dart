@@ -11,7 +11,7 @@ ChannelNotification _$ChannelNotificationFromJson(Map<String, dynamic> json) =>
       json['channelId'] as String,
       json['channelName'] as String,
       json['lastSeenVideoId'] as String,
-      json['timestamp'] as int,
+      (json['timestamp'] as num).toInt(),
     );
 
 Map<String, dynamic> _$ChannelNotificationToJson(

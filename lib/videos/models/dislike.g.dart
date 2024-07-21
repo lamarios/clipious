@@ -7,7 +7,7 @@ part of 'dislike.dart';
 // **************************************************************************
 
 Dislike _$DislikeFromJson(Map<String, dynamic> json) => Dislike(
-      json['dislikes'] as int,
+      (json['dislikes'] as num).toInt(),
     );
 
 Map<String, dynamic> _$DislikeToJson(Dislike instance) => <String, dynamic>{

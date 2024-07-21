@@ -10,8 +10,8 @@ PlaylistNotification _$PlaylistNotificationFromJson(
         Map<String, dynamic> json) =>
     PlaylistNotification(
       json['playlistId'] as String,
-      json['lastVideoCount'] as int,
-      json['timestamp'] as int,
+      (json['lastVideoCount'] as num).toInt(),
+      (json['timestamp'] as num).toInt(),
       json['playlistName'] as String,
     );
 
