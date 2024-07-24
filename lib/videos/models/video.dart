@@ -27,7 +27,7 @@ class Video extends BaseVideo {
   bool isFamilyFriendly;
   List<String> allowedRegions;
   String genre;
-  String genreUrl;
+  String? genreUrl;
 
   List<ImageObject> authorThumbnails;
   String subCountText;
