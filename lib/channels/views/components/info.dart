@@ -107,7 +107,6 @@ class ChannelInfo extends StatelessWidget {
 
     final bannerUrl = ImageObject.getBestThumbnail(channel.authorBanners)?.url;
 
-    print('BANNER URL: ${bannerUrl}');
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
