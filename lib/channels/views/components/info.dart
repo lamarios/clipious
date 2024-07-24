@@ -24,7 +24,6 @@ class ChannelInfo extends StatelessWidget {
     var textTheme = Theme.of(context).textTheme;
 
     final deviceType = getDeviceType();
-
     List<Widget> widgets = [
       Row(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -106,26 +105,26 @@ class ChannelInfo extends StatelessWidget {
             }).toList() ??
             []));
 
+    final bannerUrl = ImageObject.getBestThumbnail(channel.authorBanners)?.url;
+
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: innerHorizontalPadding),
-            child: SizedBox(
-              height: deviceType == DeviceType.phone ? 100 : 230,
-              child: Thumbnail(
-                  width: double.infinity,
-                  thumbnailUrl:
-                      ImageObject.getBestThumbnail(channel.authorBanners)
-                              ?.url ??
-                          '',
-                  decoration: BoxDecoration(
-                      color: colors.secondaryContainer,
-                      borderRadius: BorderRadius.circular(10))),
+          if (bannerUrl != null)
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                  horizontal: innerHorizontalPadding),
+              child: SizedBox(
+                height: deviceType == DeviceType.phone ? 100 : 230,
+                child: Thumbnail(
+                    width: double.infinity,
+                    thumbnailUrl: bannerUrl,
+                    decoration: BoxDecoration(
+                        color: colors.secondaryContainer,
+                        borderRadius: BorderRadius.circular(10))),
+              ),
             ),
-          ),
           const SizedBox(
             height: 10,
           ),

@@ -27,7 +27,7 @@ Video _$VideoFromJson(Map<String, dynamic> json) => Video(
           .map((e) => e as String)
           .toList(),
       json['genre'] as String,
-      json['genreUrl'] as String,
+      json['genreUrl'] as String?,
       json['dashUrl'] as String,
       json['author'] as String?,
       json['authorUrl'] as String?,
