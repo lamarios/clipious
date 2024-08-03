@@ -5,6 +5,7 @@ import 'package:invidious/downloads/models/downloaded_video.dart';
 import 'package:invidious/extensions.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/home/models/db/home_layout.dart';
+import 'package:invidious/offline_subscriptions/models/offline_subscription.dart';
 import 'package:invidious/search/models/db/search_history_item.dart';
 import 'package:invidious/settings/models/db/app_logs.dart';
 import 'package:invidious/settings/models/db/settings.dart';
@@ -466,6 +467,30 @@ class FileDB extends IDbClient {
   @override
   Future<void> deleteFromSearchHistory(String search) {
     // TODO: implement deleteFromSearchHistory
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> addOfflineSubscription(OfflineSubscription sub) {
+    // TODO: implement addOfflineSubscription
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> deleteOfflineSubscription(String sub) {
+    // TODO: implement deleteOfflineSubscription
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<List<OfflineSubscription>> getOfflineSubscriptions() {
+    // TODO: implement getOfflineSubscriptions
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<bool> isOfflineSubscribed(String channelId) {
+    // TODO: implement isOfflineSubscribed
     throw UnimplementedError();
   }
 }
