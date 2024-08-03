@@ -423,7 +423,7 @@
   "@sponsorBlockCategoryPreview": {
     "description": "Sponsorblock 'Preview' Category"
   },
-  "useProxy": "Utiliser un proxy",
+  "useProxy": "Utiliser le serveur comme proxy",
   "@useProxy": {
     "description": "label for settings switch to proxy videos from server"
   },
@@ -639,7 +639,7 @@
   "@sponsorBlockCategoryPreviewDescription": {
     "description": "Sponsorblock 'Preview' Category description"
   },
-  "useProxyDescription": "En utilisant un proxy à partir du serveur, vous pouvez contourner les blocages régionaux ou les FAI bloquant YouTube",
+  "useProxyDescription": "En utilisant le serveur comme proxy, vous pouvez contourner les blocages régionaux ou les FAI bloquant YouTube",
   "@useProxyDescription": {
     "description": "Description for the use proxy settings"
   },
@@ -857,7 +857,7 @@
   "@itemListErrorInvalidScope": {
     "description": "Error when the user doesn't have the proper scope to its current token"
   },
-  "itemlistErrorGeneric": "Impossible de récupérer les données",
+  "itemlistErrorGeneric": "Impossible d'obtenir les données",
   "@itemlistErrorGeneric": {
     "description": "Error showing when the data can't be fetch"
   },
@@ -959,7 +959,7 @@
   "@from": {
     "description": "From word (as in 'From xx To xx')"
   },
-  "malformedStatsEndpoint": "/api/v1/stats n''est pas comme prévu",
+  "malformedStatsEndpoint": "/api/v1/stats ne répond pas correctement",
   "@malformedStatsEndpoint": {
     "description": "Title for dialog when adding a server that isn't validated as it should"
   },
@@ -1105,7 +1105,7 @@
   "@subscriptionNotificationTitle": {
     "description": "Title for the notification showing that there are new videos from the subscription feed"
   },
-  "deArrowWarning": "Autoriser DeArrow peut réduire significativement la vitesse de recherche de l''application puisque des requêtes http supplémentaires sont nécessaires pour chacune des vidéos",
+  "deArrowWarning": "Activer DeArrow peut réduire significativement la vitesse de navigation de l''application car des requêtes http supplémentaires sont nécessaires pour chaque vidéo",
   "@deArrowWarning": {
     "description": "Warning message when the user enables DeArrow"
   },
@@ -1317,7 +1317,7 @@
   "@rydCustomInstance": {
     "description": "title for setting to set a custom ryd instance"
   },
-  "askForDisableBatteryOptimizationTitle": "Désactivation de l''optimisation de la batterie requise",
+  "askForDisableBatteryOptimizationTitle": "La désactivation de l'optimisation de la batterie est requise",
   "@askForDisableBatteryOptimizationTitle": {
     "description": "Title for the dialog asking the user to turn off disabling battery optimization when turning on notifications"
   },
@@ -1335,7 +1335,7 @@
       }
     }
   },
-  "foregroundServiceNotificationTitle": "Surveillance de vidéos",
+  "foregroundServiceNotificationTitle": "Suivi des vidéos",
   "@foregroundServiceNotificationTitle": {
     "description": "Title for the foreground service running notification when the user wants to receive notifications"
   },
