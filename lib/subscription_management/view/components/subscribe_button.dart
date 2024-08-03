@@ -16,46 +16,50 @@ class SubscribeButton extends StatelessWidget {
     final cubit = context.read<SubscribeButtonCubit>();
     final locals = AppLocalizations.of(context)!;
 
-    showModalBottomSheet(
-      context: context,
-      builder: (context) {
-        return Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            if (cubit.state.isLoggedIn)
+    if (cubit.state.isLoggedIn) {
+      showModalBottomSheet(
+        context: context,
+        builder: (context) {
+          return Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              if (cubit.state.isLoggedIn)
+                TextButton(
+                    onPressed: () async {
+                      await cubit.setAccountSubscription(true);
+                      if (context.mounted) {
+                        Navigator.of(context).pop();
+                      }
+                    },
+                    child: Text(locals.invidiousAccount)),
               TextButton(
                   onPressed: () async {
-                    await cubit.setAccountSubscription(true);
+                    await cubit.setOfflineSubscription(true);
                     if (context.mounted) {
                       Navigator.of(context).pop();
                     }
                   },
-                  child: Text(locals.invidiousAccount)),
-            TextButton(
-                onPressed: () async {
-                  await cubit.setOfflineSubscription(true);
-                  if (context.mounted) {
-                    Navigator.of(context).pop();
-                  }
-                },
-                child: Text(locals.onDeviceSubscriptions)),
-            if (cubit.state.isLoggedIn)
-              TextButton(
-                  onPressed: () async {
-                    await Future.wait<void>([
-                      cubit.setOfflineSubscription(true),
-                      cubit.setAccountSubscription(true)
-                    ]);
-                    if (context.mounted) {
-                      Navigator.of(context).pop();
-                    }
-                  },
-                  child: Text(locals.both)),
-          ],
-        );
-      },
-    );
+                  child: Text(locals.onDeviceSubscriptions)),
+              if (cubit.state.isLoggedIn)
+                TextButton(
+                    onPressed: () async {
+                      await Future.wait<void>([
+                        cubit.setOfflineSubscription(true),
+                        cubit.setAccountSubscription(true)
+                      ]);
+                      if (context.mounted) {
+                        Navigator.of(context).pop();
+                      }
+                    },
+                    child: Text(locals.both)),
+            ],
+          );
+        },
+      );
+    } else {
+      cubit.setOfflineSubscription(true);
+    }
   }
 
   @override

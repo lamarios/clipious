@@ -85,7 +85,7 @@ class VideoList<T extends IdedVideo> extends StatelessWidget {
                                 : textTheme.bodyMedium,
                           )),
                     )
-                  : items.isEmpty
+                  : items.isEmpty && !state.loading
                       ? FilledButton.tonal(
                           onPressed: cubit.refreshItems,
                           child: Text(locals.refresh))
