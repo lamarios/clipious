@@ -1,5 +1,6 @@
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:invidious/offline_subscriptions/models/offline_subscription.dart';
 
 import '../../downloads/models/downloaded_video.dart';
 import '../../home/models/db/home_layout.dart';
@@ -128,4 +129,12 @@ abstract class IDbClient {
   Future<void> upsertDeArrowCache(DeArrowCache cache);
 
   Future<void> deleteFromSearchHistory(String search);
+
+  Future<void> addOfflineSubscription(OfflineSubscription sub);
+
+  Future<void> deleteOfflineSubscription(String channelId);
+
+  Future<bool> isOfflineSubscribed(String channelId);
+
+  Future<List<OfflineSubscription>> getOfflineSubscriptions();
 }

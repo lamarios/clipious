@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:invidious/downloads/models/downloaded_video.dart';
 import 'package:invidious/home/models/db/home_layout.dart';
+import 'package:invidious/offline_subscriptions/models/offline_subscription.dart';
 import 'package:invidious/search/models/db/search_history_item.dart';
 import 'package:invidious/settings/models/db/app_logs.dart';
 import 'package:invidious/settings/models/db/server.dart';
@@ -45,6 +46,8 @@ class SembastSqfDb extends IDbClient {
   final historyVideoCacheStore =
       stringMapStoreFactory.store('historyVideoCache'); // use historyVideoCache
   final progressStore = stringMapStoreFactory.store('progress');
+  final offlineSubscriptions =
+      stringMapStoreFactory.store('offline_subscriptions');
 
   SembastSqfDb(this.db);
 
@@ -310,5 +313,26 @@ class SembastSqfDb extends IDbClient {
     server.inUse = true;
 
     await serversStore.record(server.url).put(db, server.toJson());
+  }
+
+  @override
+  Future<void> addOfflineSubscription(OfflineSubscription sub) async {
+    await offlineSubscriptions.record(sub.channelId).put(db, sub.toJson());
+  }
+
+  @override
+  Future<void> deleteOfflineSubscription(String sub) async {
+    await offlineSubscriptions.record(sub).delete(db);
+  }
+
+  @override
+  Future<List<OfflineSubscription>> getOfflineSubscriptions() {
+    return offlineSubscriptions.find(db).then((values) =>
+        values.map((e) => OfflineSubscription.fromJson(e.value)).toList());
+  }
+
+  @override
+  Future<bool> isOfflineSubscribed(String channelId) {
+    return offlineSubscriptions.record(channelId).exists(db);
   }
 }

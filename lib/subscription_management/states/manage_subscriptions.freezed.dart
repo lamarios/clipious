@@ -17,6 +17,9 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$ManageSubscriptionsState {
   List<Subscription> get subs => throw _privateConstructorUsedError;
+  List<OfflineSubscription> get offlineSubs =>
+      throw _privateConstructorUsedError;
+  dynamic get isLoggedIn => throw _privateConstructorUsedError;
   bool get loading => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -30,7 +33,11 @@ abstract class $ManageSubscriptionsStateCopyWith<$Res> {
           $Res Function(ManageSubscriptionsState) then) =
       _$ManageSubscriptionsStateCopyWithImpl<$Res, ManageSubscriptionsState>;
   @useResult
-  $Res call({List<Subscription> subs, bool loading});
+  $Res call(
+      {List<Subscription> subs,
+      List<OfflineSubscription> offlineSubs,
+      dynamic isLoggedIn,
+      bool loading});
 }
 
 /// @nodoc
@@ -48,6 +55,8 @@ class _$ManageSubscriptionsStateCopyWithImpl<$Res,
   @override
   $Res call({
     Object? subs = null,
+    Object? offlineSubs = null,
+    Object? isLoggedIn = freezed,
     Object? loading = null,
   }) {
     return _then(_value.copyWith(
@@ -55,6 +64,14 @@ class _$ManageSubscriptionsStateCopyWithImpl<$Res,
           ? _value.subs
           : subs // ignore: cast_nullable_to_non_nullable
               as List<Subscription>,
+      offlineSubs: null == offlineSubs
+          ? _value.offlineSubs
+          : offlineSubs // ignore: cast_nullable_to_non_nullable
+              as List<OfflineSubscription>,
+      isLoggedIn: freezed == isLoggedIn
+          ? _value.isLoggedIn
+          : isLoggedIn // ignore: cast_nullable_to_non_nullable
+              as dynamic,
       loading: null == loading
           ? _value.loading
           : loading // ignore: cast_nullable_to_non_nullable
@@ -72,7 +89,11 @@ abstract class _$$ManageSubscriptionsStateImplCopyWith<$Res>
       __$$ManageSubscriptionsStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<Subscription> subs, bool loading});
+  $Res call(
+      {List<Subscription> subs,
+      List<OfflineSubscription> offlineSubs,
+      dynamic isLoggedIn,
+      bool loading});
 }
 
 /// @nodoc
@@ -89,6 +110,8 @@ class __$$ManageSubscriptionsStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? subs = null,
+    Object? offlineSubs = null,
+    Object? isLoggedIn = freezed,
     Object? loading = null,
   }) {
     return _then(_$ManageSubscriptionsStateImpl(
@@ -96,6 +119,11 @@ class __$$ManageSubscriptionsStateImplCopyWithImpl<$Res>
           ? _value._subs
           : subs // ignore: cast_nullable_to_non_nullable
               as List<Subscription>,
+      offlineSubs: null == offlineSubs
+          ? _value._offlineSubs
+          : offlineSubs // ignore: cast_nullable_to_non_nullable
+              as List<OfflineSubscription>,
+      isLoggedIn: freezed == isLoggedIn ? _value.isLoggedIn! : isLoggedIn,
       loading: null == loading
           ? _value.loading
           : loading // ignore: cast_nullable_to_non_nullable
@@ -108,8 +136,12 @@ class __$$ManageSubscriptionsStateImplCopyWithImpl<$Res>
 
 class _$ManageSubscriptionsStateImpl implements _ManageSubscriptionsState {
   const _$ManageSubscriptionsStateImpl(
-      {final List<Subscription> subs = const [], this.loading = true})
-      : _subs = subs;
+      {final List<Subscription> subs = const [],
+      final List<OfflineSubscription> offlineSubs = const [],
+      this.isLoggedIn = false,
+      this.loading = true})
+      : _subs = subs,
+        _offlineSubs = offlineSubs;
 
   final List<Subscription> _subs;
   @override
@@ -120,13 +152,25 @@ class _$ManageSubscriptionsStateImpl implements _ManageSubscriptionsState {
     return EqualUnmodifiableListView(_subs);
   }
 
+  final List<OfflineSubscription> _offlineSubs;
+  @override
+  @JsonKey()
+  List<OfflineSubscription> get offlineSubs {
+    if (_offlineSubs is EqualUnmodifiableListView) return _offlineSubs;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_offlineSubs);
+  }
+
+  @override
+  @JsonKey()
+  final dynamic isLoggedIn;
   @override
   @JsonKey()
   final bool loading;
 
   @override
   String toString() {
-    return 'ManageSubscriptionsState(subs: $subs, loading: $loading)';
+    return 'ManageSubscriptionsState(subs: $subs, offlineSubs: $offlineSubs, isLoggedIn: $isLoggedIn, loading: $loading)';
   }
 
   @override
@@ -135,12 +179,20 @@ class _$ManageSubscriptionsStateImpl implements _ManageSubscriptionsState {
         (other.runtimeType == runtimeType &&
             other is _$ManageSubscriptionsStateImpl &&
             const DeepCollectionEquality().equals(other._subs, _subs) &&
+            const DeepCollectionEquality()
+                .equals(other._offlineSubs, _offlineSubs) &&
+            const DeepCollectionEquality()
+                .equals(other.isLoggedIn, isLoggedIn) &&
             (identical(other.loading, loading) || other.loading == loading));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_subs), loading);
+      runtimeType,
+      const DeepCollectionEquality().hash(_subs),
+      const DeepCollectionEquality().hash(_offlineSubs),
+      const DeepCollectionEquality().hash(isLoggedIn),
+      loading);
 
   @JsonKey(ignore: true)
   @override
@@ -153,10 +205,16 @@ class _$ManageSubscriptionsStateImpl implements _ManageSubscriptionsState {
 abstract class _ManageSubscriptionsState implements ManageSubscriptionsState {
   const factory _ManageSubscriptionsState(
       {final List<Subscription> subs,
+      final List<OfflineSubscription> offlineSubs,
+      final dynamic isLoggedIn,
       final bool loading}) = _$ManageSubscriptionsStateImpl;
 
   @override
   List<Subscription> get subs;
+  @override
+  List<OfflineSubscription> get offlineSubs;
+  @override
+  dynamic get isLoggedIn;
   @override
   bool get loading;
   @override

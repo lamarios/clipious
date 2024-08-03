@@ -12,6 +12,56 @@ class SubscribeButton extends StatelessWidget {
   const SubscribeButton(
       {super.key, required this.channelId, required this.subCount});
 
+  static showSubscriptionSheet(BuildContext context) {
+    final cubit = context.read<SubscribeButtonCubit>();
+    final locals = AppLocalizations.of(context)!;
+
+    if (cubit.state.isLoggedIn) {
+      showModalBottomSheet(
+        context: context,
+        builder: (context) {
+          return Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              if (cubit.state.isLoggedIn)
+                TextButton(
+                    onPressed: () async {
+                      await cubit.setAccountSubscription(true);
+                      if (context.mounted) {
+                        Navigator.of(context).pop();
+                      }
+                    },
+                    child: Text(locals.invidiousAccount)),
+              TextButton(
+                  onPressed: () async {
+                    await cubit.setOfflineSubscription(true);
+                    if (context.mounted) {
+                      Navigator.of(context).pop();
+                    }
+                  },
+                  child: Text(locals.onDeviceSubscriptions)),
+              if (cubit.state.isLoggedIn)
+                TextButton(
+                    onPressed: () async {
+                      await Future.wait<void>([
+                        cubit.setOfflineSubscription(true),
+                        cubit.setAccountSubscription(true)
+                      ]);
+                      if (context.mounted) {
+                        Navigator.of(context).pop();
+                      }
+                    },
+                    child: Text(locals.both)),
+            ],
+          );
+        },
+      );
+    } else {
+      cubit.setOfflineSubscription(true);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     var locals = AppLocalizations.of(context)!;
@@ -25,42 +75,34 @@ class SubscribeButton extends StatelessWidget {
           child: BlocBuilder<SubscribeButtonCubit, SubscribeButtonState>(
             builder: (context, state) {
               var cubit = context.read<SubscribeButtonCubit>();
-              return state.isLoggedIn
-                  ? SizedBox(
-                      height: 25,
-                      child: FilledButton.tonal(
-                        onPressed: cubit.toggleSubscription,
-                        child: Row(
-                          children: [
-                            state.loading
-                                ? const SizedBox(
-                                    width: 15,
-                                    height: 15,
-                                    child: CircularProgressIndicator(
-                                      strokeWidth: 1,
-                                    ))
-                                : Icon(state.isSubscribed
-                                    ? Icons.done
-                                    : Icons.add),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 8.0),
-                              child: Text(
-                                  '${(state.isSubscribed ? locals.subscribed : locals.subscribe)} | $subCount'),
-                            ),
-                          ],
-                        ),
-                      ))
-                  : Row(
+              return SizedBox(
+                  height: 25,
+                  child: FilledButton.tonal(
+                    onPressed: () {
+                      if (state.isSubscribed) {
+                        cubit.unsubscribe();
+                      } else {
+                        showSubscriptionSheet(context);
+                      }
+                    },
+                    child: Row(
                       children: [
-                        const Icon(Icons.people),
+                        state.loading
+                            ? const SizedBox(
+                                width: 15,
+                                height: 15,
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 1,
+                                ))
+                            : Icon(state.isSubscribed ? Icons.done : Icons.add),
                         Padding(
                           padding: const EdgeInsets.only(left: 8.0),
-                          // child: Text('${subCount.replaceAll("^0.00\$","no")} subscribers'),
-                          child: Text(locals.nSubscribers(
-                              subCount.replaceAll(RegExp(r'^0.00$'), "no"))),
+                          child: Text(
+                              '${(state.isSubscribed ? locals.subscribed : locals.subscribe)} | $subCount'),
                         ),
                       ],
-                    );
+                    ),
+                  ));
             },
           ),
         ),

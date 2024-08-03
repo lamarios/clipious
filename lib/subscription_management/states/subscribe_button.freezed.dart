@@ -17,7 +17,8 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$SubscribeButtonState {
   String get channelId => throw _privateConstructorUsedError;
-  bool get isSubscribed => throw _privateConstructorUsedError;
+  bool get isOfflineSubscribed => throw _privateConstructorUsedError;
+  bool get isAccountSubscribed => throw _privateConstructorUsedError;
   bool get loading => throw _privateConstructorUsedError;
   bool get isLoggedIn => throw _privateConstructorUsedError;
 
@@ -33,7 +34,11 @@ abstract class $SubscribeButtonStateCopyWith<$Res> {
       _$SubscribeButtonStateCopyWithImpl<$Res, SubscribeButtonState>;
   @useResult
   $Res call(
-      {String channelId, bool isSubscribed, bool loading, bool isLoggedIn});
+      {String channelId,
+      bool isOfflineSubscribed,
+      bool isAccountSubscribed,
+      bool loading,
+      bool isLoggedIn});
 }
 
 /// @nodoc
@@ -51,7 +56,8 @@ class _$SubscribeButtonStateCopyWithImpl<$Res,
   @override
   $Res call({
     Object? channelId = null,
-    Object? isSubscribed = null,
+    Object? isOfflineSubscribed = null,
+    Object? isAccountSubscribed = null,
     Object? loading = null,
     Object? isLoggedIn = null,
   }) {
@@ -60,9 +66,13 @@ class _$SubscribeButtonStateCopyWithImpl<$Res,
           ? _value.channelId
           : channelId // ignore: cast_nullable_to_non_nullable
               as String,
-      isSubscribed: null == isSubscribed
-          ? _value.isSubscribed
-          : isSubscribed // ignore: cast_nullable_to_non_nullable
+      isOfflineSubscribed: null == isOfflineSubscribed
+          ? _value.isOfflineSubscribed
+          : isOfflineSubscribed // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isAccountSubscribed: null == isAccountSubscribed
+          ? _value.isAccountSubscribed
+          : isAccountSubscribed // ignore: cast_nullable_to_non_nullable
               as bool,
       loading: null == loading
           ? _value.loading
@@ -85,7 +95,11 @@ abstract class _$$SubscribeButtonStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String channelId, bool isSubscribed, bool loading, bool isLoggedIn});
+      {String channelId,
+      bool isOfflineSubscribed,
+      bool isAccountSubscribed,
+      bool loading,
+      bool isLoggedIn});
 }
 
 /// @nodoc
@@ -100,7 +114,8 @@ class __$$SubscribeButtonStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? channelId = null,
-    Object? isSubscribed = null,
+    Object? isOfflineSubscribed = null,
+    Object? isAccountSubscribed = null,
     Object? loading = null,
     Object? isLoggedIn = null,
   }) {
@@ -109,9 +124,13 @@ class __$$SubscribeButtonStateImplCopyWithImpl<$Res>
           ? _value.channelId
           : channelId // ignore: cast_nullable_to_non_nullable
               as String,
-      isSubscribed: null == isSubscribed
-          ? _value.isSubscribed
-          : isSubscribed // ignore: cast_nullable_to_non_nullable
+      isOfflineSubscribed: null == isOfflineSubscribed
+          ? _value.isOfflineSubscribed
+          : isOfflineSubscribed // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isAccountSubscribed: null == isAccountSubscribed
+          ? _value.isAccountSubscribed
+          : isAccountSubscribed // ignore: cast_nullable_to_non_nullable
               as bool,
       loading: null == loading
           ? _value.loading
@@ -127,18 +146,23 @@ class __$$SubscribeButtonStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$SubscribeButtonStateImpl implements _SubscribeButtonState {
+class _$SubscribeButtonStateImpl extends _SubscribeButtonState {
   const _$SubscribeButtonStateImpl(
       {required this.channelId,
-      this.isSubscribed = false,
+      this.isOfflineSubscribed = false,
+      this.isAccountSubscribed = false,
       this.loading = true,
-      required this.isLoggedIn});
+      required this.isLoggedIn})
+      : super._();
 
   @override
   final String channelId;
   @override
   @JsonKey()
-  final bool isSubscribed;
+  final bool isOfflineSubscribed;
+  @override
+  @JsonKey()
+  final bool isAccountSubscribed;
   @override
   @JsonKey()
   final bool loading;
@@ -147,7 +171,7 @@ class _$SubscribeButtonStateImpl implements _SubscribeButtonState {
 
   @override
   String toString() {
-    return 'SubscribeButtonState(channelId: $channelId, isSubscribed: $isSubscribed, loading: $loading, isLoggedIn: $isLoggedIn)';
+    return 'SubscribeButtonState(channelId: $channelId, isOfflineSubscribed: $isOfflineSubscribed, isAccountSubscribed: $isAccountSubscribed, loading: $loading, isLoggedIn: $isLoggedIn)';
   }
 
   @override
@@ -157,16 +181,18 @@ class _$SubscribeButtonStateImpl implements _SubscribeButtonState {
             other is _$SubscribeButtonStateImpl &&
             (identical(other.channelId, channelId) ||
                 other.channelId == channelId) &&
-            (identical(other.isSubscribed, isSubscribed) ||
-                other.isSubscribed == isSubscribed) &&
+            (identical(other.isOfflineSubscribed, isOfflineSubscribed) ||
+                other.isOfflineSubscribed == isOfflineSubscribed) &&
+            (identical(other.isAccountSubscribed, isAccountSubscribed) ||
+                other.isAccountSubscribed == isAccountSubscribed) &&
             (identical(other.loading, loading) || other.loading == loading) &&
             (identical(other.isLoggedIn, isLoggedIn) ||
                 other.isLoggedIn == isLoggedIn));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, channelId, isSubscribed, loading, isLoggedIn);
+  int get hashCode => Object.hash(runtimeType, channelId, isOfflineSubscribed,
+      isAccountSubscribed, loading, isLoggedIn);
 
   @JsonKey(ignore: true)
   @override
@@ -177,17 +203,21 @@ class _$SubscribeButtonStateImpl implements _SubscribeButtonState {
               this, _$identity);
 }
 
-abstract class _SubscribeButtonState implements SubscribeButtonState {
+abstract class _SubscribeButtonState extends SubscribeButtonState {
   const factory _SubscribeButtonState(
       {required final String channelId,
-      final bool isSubscribed,
+      final bool isOfflineSubscribed,
+      final bool isAccountSubscribed,
       final bool loading,
       required final bool isLoggedIn}) = _$SubscribeButtonStateImpl;
+  const _SubscribeButtonState._() : super._();
 
   @override
   String get channelId;
   @override
-  bool get isSubscribed;
+  bool get isOfflineSubscribed;
+  @override
+  bool get isAccountSubscribed;
   @override
   bool get loading;
   @override

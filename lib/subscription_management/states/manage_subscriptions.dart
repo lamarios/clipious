@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:invidious/extensions.dart';
+import 'package:invidious/offline_subscriptions/models/offline_subscription.dart';
 import 'package:logging/logging.dart';
 
 import '../../globals.dart';
@@ -33,10 +34,24 @@ class ManageSubscriptionCubit extends Cubit<ManageSubscriptionsState> {
   }
 
   refreshSubs() async {
+    final isLoggedIn = await service.isLoggedIn();
     emit(state.copyWith(loading: true));
-    var subs =
-        (await service.getSubscriptions()).sortBy((e) => e.author).toList();
-    emit(state.copyWith(subs: subs, loading: false));
+    List<Subscription> subs = [];
+    if (isLoggedIn) {
+      subs =
+          (await service.getSubscriptions()).sortBy((e) => e.author).toList();
+    }
+    final offlineSubs = await db.getOfflineSubscriptions();
+    emit(state.copyWith(
+        subs: subs,
+        loading: false,
+        isLoggedIn: isLoggedIn,
+        offlineSubs: offlineSubs));
+  }
+
+  unsubscribeOffline(String channelId) async {
+    await db.deleteOfflineSubscription(channelId);
+    refreshSubs();
   }
 }
 
@@ -44,5 +59,7 @@ class ManageSubscriptionCubit extends Cubit<ManageSubscriptionsState> {
 class ManageSubscriptionsState with _$ManageSubscriptionsState {
   const factory ManageSubscriptionsState(
       {@Default([]) List<Subscription> subs,
+      @Default([]) List<OfflineSubscription> offlineSubs,
+      @Default(false) isLoggedIn,
       @Default(true) bool loading}) = _ManageSubscriptionsState;
 }

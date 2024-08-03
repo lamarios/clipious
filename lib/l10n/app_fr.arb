@@ -857,7 +857,7 @@
   "@itemListErrorInvalidScope": {
     "description": "Error when the user doesn't have the proper scope to its current token"
   },
-  "itemlistErrorGeneric": "Impossible d'obtenir les données",
+  "itemlistErrorGeneric": "Impossible d''obtenir les données",
   "@itemlistErrorGeneric": {
     "description": "Error showing when the data can't be fetch"
   },
@@ -1317,7 +1317,7 @@
   "@rydCustomInstance": {
     "description": "title for setting to set a custom ryd instance"
   },
-  "askForDisableBatteryOptimizationTitle": "La désactivation de l'optimisation de la batterie est requise",
+  "askForDisableBatteryOptimizationTitle": "La désactivation de l''optimisation de la batterie est requise",
   "@askForDisableBatteryOptimizationTitle": {
     "description": "Title for the dialog asking the user to turn off disabling battery optimization when turning on notifications"
   },

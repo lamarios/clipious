@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/subscription_management/states/subscribe_button.dart';
+import 'package:invidious/subscription_management/view/components/subscribe_button.dart';
 import 'package:invidious/utils/views/tv/components/tv_button.dart';
 
 class TvSubscribeButton extends StatelessWidget {
@@ -34,14 +35,19 @@ class TvSubscribeButton extends StatelessWidget {
             autofocus: autoFocus,
             onFocusChanged: onFocusChanged,
             unfocusedColor: colors.surface.withOpacity(0.0),
-            onPressed: (context) =>
-                state.isLoggedIn ? cubit.toggleSubscription() : null,
+            onPressed: (context) {
+              if (state.isSubscribed) {
+                cubit.unsubscribe();
+              } else {
+                SubscribeButton.showSubscriptionSheet(context);
+              }
+            },
             child: Padding(
               padding:
                   const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
-                children: !state.loading && state.isLoggedIn
+                children: !state.loading
                     ? [
                         Icon(state.isSubscribed ? Icons.done : Icons.add),
                         Padding(
