@@ -1,9 +1,11 @@
 import 'dart:convert';
+import 'dart:io' show Platform;
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter_web_auth/flutter_web_auth.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
+import 'package:cronet_http/cronet_http.dart';
 import 'package:invidious/channels/models/channel_sort_by.dart';
 import 'package:invidious/extensions.dart';
 import 'package:invidious/globals.dart';
@@ -76,7 +78,18 @@ const imgurClientId = 'Client-ID 2cfbc27ce77879d';
 const maxPing = 9007199254740991;
 
 class Service {
-  final log = Logger('Service');
+  final log;
+  final Client httpClient;
+
+  Service() :
+    log = Logger('Service'),
+    httpClient = Platform.isAndroid ?
+      CronetClient.fromCronetEngine(
+        CronetEngine.build(
+          cacheMode: CacheMode.memory,
+          cacheMaxSize: 2 * 1024 * 1024),
+        closeEngine: true) :
+      http.Client();
 
   String urlFormatForLog(Uri? uri) {
     return kDebugMode ? uri.toString() : '${uri?.replace(host: 'xxxxxxxxxx')}';
@@ -153,7 +166,7 @@ class Service {
 
   Future<Video> getVideo(String videoId) async {
     var url = await buildUrl(urlGetVideo, pathParams: {':id': videoId});
-    final response = await http.get(url,
+    final response = await httpClient.get(url,
         headers: {'Content-Type': 'application/json; charset=utf-16'});
 
     var video = Video.fromJson(handleResponse(response));
@@ -169,7 +182,7 @@ class Service {
       String url = '$serverUrl/login?type=invidious';
       var map = {'email': username, 'password': password};
 
-      final response = await http.post(Uri.parse(url), body: map);
+      final response = await httpClient.post(Uri.parse(url), body: map);
       if (response.statusCode == 302 &&
           response.headers.containsKey('set-cookie')) {
         // we have a cookie to parse
@@ -236,7 +249,7 @@ class Service {
     }
 
     var url = await buildUrl(urlGetTrending, query: query);
-    final response = await http.get(url);
+    final response = await httpClient.get(url);
 
     Iterable i = handleResponse(response);
     var list = List<VideoInList>.from(i.map((e) => VideoInList.fromJson(e)));
@@ -246,7 +259,7 @@ class Service {
 
   Future<List<VideoInList>> getPopular() async {
     var url = await buildUrl(urlGetPopular);
-    final response = await http.get(url);
+    final response = await httpClient.get(url);
     Iterable i = handleResponse(response);
     var list = List<VideoInList>.from(i.map((e) => VideoInList.fromJson(e)));
     list = (await postProcessVideos(list)).cast();
@@ -269,7 +282,7 @@ class Service {
       'date': date != SearchDate.any ? date.name : null,
       'duration': duration != SearchDuration.any ? duration.name : null,
     });
-    final response = await http.get(uri);
+    final response = await httpClient.get(uri);
     Iterable i = handleResponse(response);
     // only getting videos for now
     SearchResults results = SearchResults();
@@ -307,7 +320,7 @@ class Service {
     });
 
     var headers = getAuthenticationHeaders(currentlySelectedServer);
-    final response = await http.get(uri, headers: headers);
+    final response = await httpClient.get(uri, headers: headers);
     var feed = UserFeed.fromJson(handleResponse(response));
     feed.videos = (await postProcessVideos(feed.videos ?? [])).cast();
     feed.notifications =
@@ -338,7 +351,7 @@ class Service {
       }
 
       log.info('Calling $url');
-      final response = await http.get(Uri.parse(url));
+      final response = await httpClient.get(Uri.parse(url));
       Iterable i = handleResponse(response);
       return List<SponsorSegment>.from(
           i.map((e) => SponsorSegment.fromJson(e)));
@@ -352,7 +365,7 @@ class Service {
       String url = urlGetDeArrow.replaceAll(":id", videoId);
 
       log.fine("calling $url");
-      final response = await http.get((Uri.parse(url)));
+      final response = await httpClient.get((Uri.parse(url)));
       var body = utf8.decode(response.bodyBytes);
       var deArrow = DeArrow.fromJson(jsonDecode(body));
       deArrow.videoId = videoId;
@@ -364,7 +377,7 @@ class Service {
 
   Future<bool> testDeArrowThumbnail(String? url) async {
     if (url != null) {
-      final response = await http.head(Uri.parse(url));
+      final response = await httpClient.head(Uri.parse(url));
       log.fine("calling $url => ${response.statusCode}");
       return response.statusCode == 200;
     } else {
@@ -374,7 +387,7 @@ class Service {
 
   Future<SearchSuggestion> getSearchSuggestion(String query) async {
     if (query.isEmpty) return SearchSuggestion(query, []);
-    final response = await http.get(await buildUrl(urlSearchSuggestions,
+    final response = await httpClient.get(await buildUrl(urlSearchSuggestions,
         query: {"q": Uri.encodeQueryComponent(query)}));
     SearchSuggestion search =
         SearchSuggestion.fromJson(handleResponse(response));
@@ -394,7 +407,7 @@ class Service {
     try {
       String url = serverUrl + urlStats;
       log.info('Calling $url');
-      final response = await http.get(Uri.parse(url));
+      final response = await httpClient.get(Uri.parse(url));
       Map<String, dynamic> json = handleResponse(response);
 
       if (json.containsKey("software") &&
@@ -427,7 +440,7 @@ class Service {
         pathParams: {":ucid": channelId});
     var headers = getAuthenticationHeaders(currentlySelectedServer);
 
-    final response = await http.post(url, headers: headers);
+    final response = await httpClient.post(url, headers: headers);
     log.info('${response.statusCode} - ${response.body}');
 
     if (response.statusCode == 204 || response.statusCode == 403) {
@@ -446,7 +459,7 @@ class Service {
         pathParams: {":ucid": channelId});
     var headers = getAuthenticationHeaders(currentlySelectedServer);
 
-    final response = await http.delete(url, headers: headers);
+    final response = await httpClient.delete(url, headers: headers);
     log.info('${response.statusCode} - ${response.body}');
 
     if (response.statusCode == 204 || response.statusCode == 403) {
@@ -472,7 +485,7 @@ class Service {
     var url = await buildUrl(urlGetSubscriptions);
     var headers = getAuthenticationHeaders(currentlySelectedServer);
 
-    final response = await http.get(url, headers: headers);
+    final response = await httpClient.get(url, headers: headers);
     Iterable i = handleResponse(response);
 
     return List<Subscription>.from(i.map((e) => Subscription.fromJson(e)));
@@ -487,7 +500,7 @@ class Service {
     if (sortBy != null) queryStr.putIfAbsent('sort_by', () => sortBy);
     if (source != null) queryStr.putIfAbsent('source', () => source);
 
-    final response = await http.get(await buildUrl(urlGetComments,
+    final response = await httpClient.get(await buildUrl(urlGetComments,
         pathParams: {':id': videoId}, query: queryStr));
     return VideoComments.fromJson(handleResponse(response));
   }
@@ -495,7 +508,7 @@ class Service {
   Future<Channel> getChannel(String channelId) async {
     // sometimes the api gives the channel with /channel/<channelid> format
     channelId = channelId.replaceAll("/channel/", '');
-    final response = await http.get(
+    final response = await httpClient.get(
         await buildUrl(urlGetChannel, pathParams: {':id': channelId}),
         headers: {'Content-Type': 'application/json; charset=utf-16'});
 
@@ -520,7 +533,7 @@ class Service {
       'continuation': continuation,
       'sort_by': sortBy.name,
     });
-    final response = await http.get(uri,
+    final response = await httpClient.get(uri,
         headers: {'Content-Type': 'application/json; charset=utf-16'});
 
     var videosWithContinuation =
@@ -539,7 +552,7 @@ class Service {
       String channelId, String? continuation) async {
     Uri uri = await buildUrl(urlGetChannelStreams,
         pathParams: {':id': channelId}, query: {'continuation': continuation});
-    final response = await http.get(uri,
+    final response = await httpClient.get(uri,
         headers: {'Content-Type': 'application/json; charset=utf-16'});
 
     var videosWithContinuation =
@@ -553,7 +566,7 @@ class Service {
       String channelId, String? continuation) async {
     Uri uri = await buildUrl(urlGetChannelShorts,
         pathParams: {':id': channelId}, query: {'continuation': continuation});
-    final response = await http.get(uri,
+    final response = await httpClient.get(uri,
         headers: {'Content-Type': 'application/json; charset=utf-16'});
 
     var videosWithContinuation =
@@ -570,7 +583,7 @@ class Service {
       var url = await buildUrl(urlGetUserPlaylists);
       var headers = getAuthenticationHeaders(currentlySelectedServer);
 
-      final response = await http.get(url, headers: headers);
+      final response = await httpClient.get(url, headers: headers);
       Iterable i = handleResponse(response);
       var list = List<Playlist>.from(i.map((e) => Playlist.fromJson(e)));
       if (postProcessing) {
@@ -589,7 +602,7 @@ class Service {
     Uri uri = await buildUrl(urlGetChannelPlaylists,
         pathParams: {':id': channelId}, query: {'continuation': continuation});
 
-    final response = await http.get(uri);
+    final response = await httpClient.get(uri);
     var channelPlaylists = ChannelPlaylists.fromJson(handleResponse(response));
     for (var pl in channelPlaylists.playlists) {
       pl.videos = (await postProcessVideos(pl.videos)).cast();
@@ -612,7 +625,7 @@ class Service {
     log.info(jsonEncode(body));
 
     final response =
-        await http.post(url, headers: headers, body: jsonEncode(body));
+        await httpClient.post(url, headers: headers, body: jsonEncode(body));
     Map<String, dynamic> playlist = handleResponse(response);
     return playlist['playlistId'] as String;
   }
@@ -630,7 +643,7 @@ class Service {
     };
 
     final response =
-        await http.post(url, headers: headers, body: jsonEncode(body));
+        await httpClient.post(url, headers: headers, body: jsonEncode(body));
     handleResponse(response);
   }
 
@@ -643,7 +656,7 @@ class Service {
     var headers = getAuthenticationHeaders(currentlySelectedServer);
     headers['Content-Type'] = 'application/json';
 
-    final response = await http.delete(url, headers: headers);
+    final response = await httpClient.delete(url, headers: headers);
     handleResponse(response);
   }
 
@@ -656,7 +669,7 @@ class Service {
     var headers = getAuthenticationHeaders(currentlySelectedServer);
     headers['Content-Type'] = 'application/json';
 
-    final response = await http.delete(url, headers: headers);
+    final response = await httpClient.delete(url, headers: headers);
     handleResponse(response);
   }
 
@@ -668,7 +681,7 @@ class Service {
     var headers = getAuthenticationHeaders(currentlySelectedServer);
     headers['Content-Type'] = 'application/json';
 
-    final response = await http.get(url, headers: headers);
+    final response = await httpClient.get(url, headers: headers);
     Iterable i = handleResponse(response);
 
     return List<String>.from(i.map((e) => e as String));
@@ -696,7 +709,7 @@ class Service {
     var headers = getAuthenticationHeaders(currentlySelectedServer);
     headers['Content-Type'] = 'application/json';
 
-    final response = await http.delete(url, headers: headers);
+    final response = await httpClient.delete(url, headers: headers);
     handleResponse(response);
   }
 
@@ -707,7 +720,7 @@ class Service {
     var headers = getAuthenticationHeaders(currentlySelectedServer);
     headers['Content-Type'] = 'application/json';
 
-    final response = await http.delete(url, headers: headers);
+    final response = await httpClient.delete(url, headers: headers);
     handleResponse(response);
   }
 
@@ -718,7 +731,7 @@ class Service {
     var headers = getAuthenticationHeaders(currentlySelectedServer);
     headers['Content-Type'] = 'application/json';
 
-    final response = await http.post(url, headers: headers);
+    final response = await httpClient.post(url, headers: headers);
     handleResponse(response);
   }
 
@@ -726,7 +739,7 @@ class Service {
     int start = DateTime.now().millisecondsSinceEpoch;
     String fullUri = '$url$urlStats';
     log.fine('ping $fullUri');
-    final response = await http.get(Uri.parse(fullUri),
+    final response = await httpClient.get(Uri.parse(fullUri),
         headers: {'Content-Type': 'application/json; charset=utf-16'});
 
     try {
@@ -740,7 +753,7 @@ class Service {
   }
 
   Future<List<InvidiousPublicServer>> getPublicServers() async {
-    final response = await http.get(Uri.parse(urlGetInvidiousPublicServers));
+    final response = await httpClient.get(Uri.parse(urlGetInvidiousPublicServers));
     List<InvidiousPublicServer> servers = [];
     Iterable i = handleResponse(response);
 
@@ -762,7 +775,7 @@ class Service {
     Uri uri = await buildUrl(urlGetPublicPlaylist,
         pathParams: {':id': playlistId}, query: {'page': page?.toString()});
 
-    final response = await http.get(uri);
+    final response = await httpClient.get(uri);
     var playlist = Playlist.fromJson(handleResponse(response));
     var oldLength = playlist.videos.length;
     playlist.videos = (await postProcessVideos(playlist.videos)).cast();
@@ -784,7 +797,7 @@ class Service {
 
     var headers = getAuthenticationHeaders(currentlySelectedServer);
 
-    final response = await http.get(uri, headers: headers);
+    final response = await httpClient.get(uri, headers: headers);
     var playlist = Playlist.fromJson(handleResponse(response));
     var oldLength = playlist.videos.length;
     playlist.videos = (await postProcessVideos(playlist.videos)).cast();
@@ -802,7 +815,7 @@ class Service {
             : urlGetDislikes) +
         videoId);
 
-    final response = await http.get(uri);
+    final response = await httpClient.get(uri);
     return Dislike.fromJson(handleResponse(response));
   }
 
@@ -812,7 +825,7 @@ class Service {
 
     final data = <String, String>{'image': base64Image};
 
-    final response = await http.post(uri, headers: headers, body: data);
+    final response = await httpClient.post(uri, headers: headers, body: data);
     if (response.statusCode != 200) {
       throw ImgurError("Non 200 response from Imgur (${response.statusCode})");
     } else {
