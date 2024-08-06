@@ -1340,5 +1340,17 @@
   "rydCustomInstanceDescription": "از یک RYD متفاوت استفاده کنید، برای استفاده از پیش‌فرض خالی بگذارید",
   "@rydCustomInstanceDescription": {
     "description": "description for custom ryd instancr setting"
-  }
+  },
+  "invidiousAccount": "حساب کاربری Invidious",
+  "@invidiousAccount": {
+    "description": "Text when the user choose where to subscribe to a channel"
+  },
+  "onDeviceSubscriptions": "روی دستگاه",
+  "@onDeviceSubscriptions": {
+    "description": "Text when the user chooses where to subscribe to a channel"
+  },
+  "both": "هردو",
+  "@both": {},
+  "refresh": "تازه‌سازی",
+  "@refresh": {}
 }
