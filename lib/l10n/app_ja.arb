@@ -1340,5 +1340,13 @@
   "rydCustomInstance": "独自RYDインスタンスのURL",
   "@rydCustomInstance": {
     "description": "title for setting to set a custom ryd instance"
-  }
+  },
+  "invidiousAccount": "Invidious アカウント",
+  "@invidiousAccount": {
+    "description": "Text when the user choose where to subscribe to a channel"
+  },
+  "both": "両方",
+  "@both": {},
+  "refresh": "更新",
+  "@refresh": {}
 }
