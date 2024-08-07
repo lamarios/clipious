@@ -1340,5 +1340,17 @@
   "returnYoutubeUrlValidation": "La URL debe comenzar con http:// o https://",
   "@returnYoutubeUrlValidation": {
     "description": "error message for invalid custom url for return to youtube"
-  }
+  },
+  "invidiousAccount": "Cuenta de Invidious",
+  "@invidiousAccount": {
+    "description": "Text when the user choose where to subscribe to a channel"
+  },
+  "onDeviceSubscriptions": "En el dispositivo",
+  "@onDeviceSubscriptions": {
+    "description": "Text when the user chooses where to subscribe to a channel"
+  },
+  "both": "Ambos",
+  "@both": {},
+  "refresh": "Recargar",
+  "@refresh": {}
 }
