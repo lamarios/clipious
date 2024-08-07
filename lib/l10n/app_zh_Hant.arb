@@ -383,7 +383,7 @@
   "@save": {
     "description": "Text for save action"
   },
-  "deArrowWarning": "啟用 DeArrow 可以顯著降低應用程式的瀏覽速度，因為每個影片都需要額外的 http 請求",
+  "deArrowWarning": "啟用 DeArrow 可能會顯著降低應用程式的瀏覽速度，因為每個影片都需要額外的 http 請求",
   "@deArrowWarning": {
     "description": "Warning message when the user enables DeArrow"
   },
@@ -1264,5 +1264,21 @@
         "format": "compact"
       }
     }
+  },
+  "returnYoutubeUrlValidation": "網址必須以 http:// 或 https:// 開頭",
+  "@returnYoutubeUrlValidation": {
+    "description": "error message for invalid custom url for return to youtube"
+  },
+  "copySettingsAsJson": "將設定以 JSON 格式複製到剪貼簿",
+  "@copySettingsAsJson": {
+    "description": "title for settings sections to allow users to copy their settings as json to make debugging easier"
+  },
+  "copySettingsAsJsonDescription": "如果您遇到應用程式問題並決定提出問題，請將設定複製為 JSON 以協助除錯",
+  "@copySettingsAsJsonDescription": {
+    "description": ""
+  },
+  "skipStep": "向前/向後跳過一步",
+  "@skipStep": {
+    "description": "Title for the settings to set the skipping step"
   }
 }
