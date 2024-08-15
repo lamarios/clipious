@@ -326,5 +326,131 @@
   "invalidInvidiousServer": "Ogiltig Invidious-server",
   "@invalidInvidiousServer": {
     "description": "Error when the user tries to add a server that is not a proper or reachable invidious server"
+  },
+  "addServerHelpText": "Tryck på \"+\" för att lägga till din egen server, eller tryck på en publik server för att använda den.",
+  "@addServerHelpText": {
+    "description": "label for when the user hasn't chosen a server yet"
+  },
+  "publicServers": "Publika servrar",
+  "@publicServers": {
+    "description": "Public servers label"
+  },
+  "loadingPublicServer": "Laddar listan med publika servrar",
+  "@loadingPublicServer": {
+    "description": "Message telling users the app is loading the list of public servers"
+  },
+  "tapToAddServer": "Tryck för att lägga till servern till din lista",
+  "@tapToAddServer": {
+    "description": "public server description"
+  },
+  "publicServersError": "Misslyckades med att hämta listan över publika servrar. Tryck för att försöka igen.",
+  "@publicServersError": {
+    "description": "Error message when trying to get public servers but it failed"
+  },
+  "appearance": "Utseende",
+  "@appearance": {
+    "description": "Settings category title"
+  },
+  "useDynamicTheme": "Dynamiska färger",
+  "@useDynamicTheme": {
+    "description": ""
+  },
+  "useDynamicThemeDescription": "Använd \"Material You\"-färger (endast tillgängligt på Android 12 och senare)",
+  "@useDynamicThemeDescription": {
+    "description": ""
+  },
+  "useDash": "Använd DASH",
+  "@useDash": {
+    "description": "Label on video options if a user wants to switch to dash urls instead of the regular quality selection"
+  },
+  "useDashDescription": "DASH adaptiva strömningar kan ibland vara problematiska, YouTube kan strypa dem.",
+  "@useDashDescription": {
+    "description": "Description for dash in the settings screen"
+  },
+  "videoPlayer": "Videospelare",
+  "@videoPlayer": {
+    "description": "Title for video player related options"
+  },
+  "videoListed": "Publik",
+  "@videoListed": {
+    "description": "Status of a publicly available video"
+  },
+  "videoUnlisted": "Olistade",
+  "@videoUnlisted": {
+    "description": "Status of a video that is only accessible by link"
+  },
+  "videoIsFamilyFriendly": "Barnvänlig",
+  "@videoIsFamilyFriendly": {
+    "description": "Displayed only when a video is family friendly"
+  },
+  "tapToManage": "Tryck för att hantera",
+  "@tapToManage": {
+    "description": "Text shown below a server in the 'Your servers' list"
+  },
+  "authentication": "Identitetsbekräftelse",
+  "@authentication": {
+    "description": "Label for server settings related to authentications"
+  },
+  "cookieLogin": "Logga in med kakor",
+  "@cookieLogin": {
+    "description": "Text to login to a server using the cookie jar method"
+  },
+  "logout": "Logga ut",
+  "@logout": {
+    "description": "CTA to logout of a server"
+  },
+  "username": "Användarnamn",
+  "@username": {
+    "description": "Username label for login to a server"
+  },
+  "password": "Lösenord",
+  "@password": {
+    "description": "Password label for login to a server"
+  },
+  "wrongUsernamePassword": "Fel användarnamn eller lösenord",
+  "@wrongUsernamePassword": {
+    "description": "Error message when authentication fails"
+  },
+  "error": "Fel",
+  "@error": {},
+  "malformedStatsEndpoint": "/api/v1/stats är inte som förväntat",
+  "@malformedStatsEndpoint": {
+    "description": "Title for dialog when adding a server that isn't validated as it should"
+  },
+  "serverIsNotReachable": "Servern går ej att nå",
+  "@serverIsNotReachable": {
+    "description": "Title for dialog when adding a server that is not reachable"
+  },
+  "videoQueue": "Videokö",
+  "@videoQueue": {
+    "description": "Label for button to display the video queue"
+  },
+  "addToQueueList": "Lägg till i kön",
+  "@addToQueueList": {
+    "description": "Label on button to add a video to the queue list"
+  },
+  "addToPlaylist": "Till till i spellista",
+  "@addToPlaylist": {
+    "description": "Label to add a video to a playlist"
+  },
+  "playNext": "Spela nästa",
+  "@playNext": {
+    "description": "Label to play the video after the current one."
+  },
+  "playNextAddedToQueue": "Videon är satt näst på tur att spelas upp",
+  "@playNextAddedToQueue": {
+    "description": "Pop up message to confirm that the video has been properly set to play next"
+  },
+  "addRecommendedToQueue": "Spela automatiskt upp rekommendationer vid slut",
+  "@addRecommendedToQueue": {
+    "description": "Switch when playing a video to automatically add the recommended videos to the video queue"
+  },
+  "sponsorBlockSettingsQuickDescription": "Välj vilka typer av sektioner som skall hoppas över",
+  "@sponsorBlockSettingsQuickDescription": {
+    "description": "Small description of what the sponsor block settings do"
+  },
+  "malformedStatsEndpointDescription": "Serverstatistikens slutpunkt motsvarade inte det förväntade avslutet, nyckeln \"software.name\" borde motsvara \"invidious\".\nSvaret från servern var:",
+  "@malformedStatsEndpointDescription": {
+    "description": "Description of the possible issue for an invalid stats endpoints"
   }
 }
