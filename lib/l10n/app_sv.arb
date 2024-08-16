@@ -100,7 +100,7 @@
   "@streamIsLive": {
     "description": "Label when a video is a live stream"
   },
-  "sponsorSkipped": "Hoppat över reklam",
+  "sponsorSkipped": "Hoppat över annonsering",
   "@sponsorSkipped": {
     "description": "When a sponsor segment is skipped thanks to sponsor block"
   },
@@ -124,7 +124,7 @@
   "@manageServers": {
     "description": "Settings to manage servers"
   },
-  "useSponsorBlock": "Använd ReklamBlockerare",
+  "useSponsorBlock": "Använd AnnonseringsBlockerare",
   "@useSponsorBlock": {
     "description": "label for sponsorblock checkbox"
   },
@@ -303,7 +303,7 @@
       }
     }
   },
-  "sponsorBlockDescription": "Hoppa över reklamsegment som rapporterats av gemenskapen",
+  "sponsorBlockDescription": "Hoppa över annonseringssegment som rapporterats in av gemenskapen",
   "@sponsorBlockDescription": {
     "description": "Sponsorblock setting description"
   },
@@ -452,5 +452,25 @@
   "malformedStatsEndpointDescription": "Serverstatistikens slutpunkt motsvarade inte det förväntade avslutet, nyckeln \"software.name\" borde motsvara \"invidious\".\nSvaret från servern var:",
   "@malformedStatsEndpointDescription": {
     "description": "Description of the possible issue for an invalid stats endpoints"
+  },
+  "sponsorBlockCategorySponsor": "Annonseringar",
+  "@sponsorBlockCategorySponsor": {
+    "description": "Sponsor block 'Sponsor' Category"
+  },
+  "sponsorBlockCategorySponsorDescription": "Betald marknadsföring, betalda referenser och direkta annonseringar. Inte för egna marknadsföringar eller när ändamål/kreatörer/hemsidor/produkter lyfts utan egen vinning utan för att de uppskattas.",
+  "@sponsorBlockCategorySponsorDescription": {
+    "description": "Sponsor block 'Sponsor' Category description"
+  },
+  "sponsorBlockCategoryUnpaidSelfPromo": "Obetald/Egen marknadsföring",
+  "@sponsorBlockCategoryUnpaidSelfPromo": {
+    "description": "Sponsor block 'Unpaid/Self promotion' Category"
+  },
+  "sponsorBlockCategoryUnpaidSelfPromoDescription": "Liknande som \"Annonseringar\", men för obetald eller egen marknadsföring. Detta inkluderar sektioner om handelsvaror, donationer eller information om vilka de samarbetat med. ",
+  "@sponsorBlockCategoryUnpaidSelfPromoDescription": {
+    "description": "Sponsor block 'Unpaid/Self promotion' Category description"
+  },
+  "sponsorBlockCategoryInteraction": "Interaktion spam innebär (Abonnera)",
+  "@sponsorBlockCategoryInteraction": {
+    "description": "Sponsor block 'Interaction' Category"
   }
 }
