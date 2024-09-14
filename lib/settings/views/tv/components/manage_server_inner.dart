@@ -4,13 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/router.dart';
 import 'package:invidious/settings/states/settings.dart';
-import 'package:invidious/utils.dart';
-import 'package:invidious/utils/views/tv/components/tv_button.dart';
 
 import '../../../models/db/server.dart';
-import '../../../models/errors/cannot_add_server_error.dart';
-import '../../../models/errors/missing_software_key.dart';
-import '../../../models/errors/unreacheable_server.dart';
 import '../../../states/server_list_settings.dart';
 import '../screens/settings.dart';
 
@@ -24,92 +19,12 @@ class TvManageServersInner extends StatelessWidget {
         .then((value) => cubit.refreshServers());
   }
 
-  addServerDialog(BuildContext context, ServerListSettingsState controller) {
-    var locals = AppLocalizations.of(context)!;
+  addServer(BuildContext context) async {
     var cubit = context.read<ServerListSettingsCubit>();
-
-    FocusNode focusNode = FocusNode();
-    showTvDialog(
-      title: locals.addServer,
-      context: context,
-      actions: [
-        TvButton(
-          onPressed: (context) {
-            Navigator.pop(context);
-          },
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
-            child: Text(locals.cancel),
-          ),
-        ),
-        TvButton(
-          onPressed: (context) async {
-            try {
-              await cubit.saveServer();
-              if (context.mounted) {
-                Navigator.pop(context);
-              }
-            } catch (err) {
-              if (context.mounted) {
-                if (err is CannotAddServerError) {
-                  showTvAlertdialog(
-                      context,
-                      switch (err.runtimeType) {
-                        (MissingSoftwareKeyError _) =>
-                          locals.malformedStatsEndpoint,
-                        (UnreachableServerError _) =>
-                          locals.serverIsNotReachable,
-                        (_) => locals.error
-                      },
-                      [
-                        Text(
-                          '${err is MissingSoftwareKeyError ? "${locals.malformedStatsEndpointDescription}\n" : ""}${err.error}',
-                          maxLines: 100,
-                        )
-                      ]);
-                } else {
-                  showTvAlertdialog(context, locals.error, [
-                    Text(
-                      err.toString(),
-                      maxLines: 100,
-                    )
-                  ]);
-                }
-              }
-            }
-          },
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
-            child: Text(locals.add),
-          ),
-        ),
-      ],
-      builder: (BuildContext context) => [
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              TextField(
-                autofocus: true,
-                focusNode: focusNode,
-                textInputAction: TextInputAction.next,
-                controller: cubit.addServerController,
-                autocorrect: false,
-                enableSuggestions: false,
-                enableIMEPersonalizedLearning: false,
-              ),
-              const Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [],
-              ),
-            ],
-          ),
-        )
-      ],
-    );
+    final server = await AutoRouter.of(context).push(const TvAddServerRoute());
+    if (server != null && server is Server && context.mounted) {
+      cubit.saveServer(server);
+    }
   }
 
   @override
@@ -162,7 +77,7 @@ class TvManageServersInner extends StatelessWidget {
               color: colorScheme.secondary,
             ),
           ),
-          onSelected: (context) => addServerDialog(context, state),
+          onSelected: (context) => addServer(context),
         ),
         SettingsTitle(title: locals.publicServers),
         ...state.publicServersError != PublicServerErrors.none

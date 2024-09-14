@@ -1,5 +1,6 @@
 library app.globals;
 
+import 'package:flutter/animation.dart';
 import 'package:invidious/service.dart';
 import 'package:invidious/utils/file_db.dart';
 import 'package:invidious/utils/interfaces/db.dart';
@@ -19,6 +20,7 @@ const youtubeHosts = [
 ];
 
 const animationDuration = Duration(milliseconds: 250);
+const animationCurve = Curves.easeInOutQuad;
 
 Service service = Service();
 

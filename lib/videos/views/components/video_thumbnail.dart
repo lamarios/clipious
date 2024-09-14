@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:invidious/globals.dart';
+import 'package:invidious/settings/models/db/server.dart';
 
 class VideoThumbnailView extends StatelessWidget {
   final String videoId;
@@ -51,49 +52,64 @@ class Thumbnail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ColorScheme colors = Theme.of(context).colorScheme;
-    return CachedNetworkImage(
-      cacheKey: thumbnailUrl,
-      imageBuilder: (context, imageProvider) => AnimatedContainer(
-        height: height,
-        width: width,
-        decoration: decoration.copyWith(
-            image: DecorationImage(image: imageProvider, fit: BoxFit.cover)),
-        // duration: animationDuration,
-        duration: animationDuration ~/ 2,
-        curve: Curves.easeInOutQuad,
-        child: child,
-      ),
-      imageUrl: thumbnailUrl,
-      placeholderFadeInDuration: animationDuration,
-      fadeInDuration: animationDuration,
-      fadeOutDuration: animationDuration,
-      errorWidget: (context, url, error) => Container(
-        height: height,
-        width: width,
-        alignment: Alignment.center,
-        decoration: decoration.copyWith(color: colors.secondaryContainer),
-        // duration: animationDuration,
-        child: SizedBox(
-            height: 20,
-            width: 20,
-            child: Icon(
-              Icons.error_outline,
-              color: colors.onSecondaryContainer.withOpacity(0.5),
-            )),
-      ),
-      progressIndicatorBuilder: (context, url, progress) => Container(
-        height: height,
-        width: width,
-        alignment: Alignment.center,
-        decoration: decoration.copyWith(color: colors.secondaryContainer),
-        // duration: animationDuration,
-        child: const SizedBox(
-            height: 20,
-            width: 20,
-            child: CircularProgressIndicator(
-              strokeWidth: 1,
-            )),
-      ),
-    );
+    return FutureBuilder<Server?>(
+        future: db.getCurrentlySelectedServer(),
+        builder: (context, server) {
+          return !server.hasData || server.data == null
+              ? Container(
+                  decoration: decoration,
+                  width: width,
+                  height: height,
+                  child: child)
+              : CachedNetworkImage(
+                  cacheKey: thumbnailUrl,
+                  httpHeaders: server.data?.customHeaders,
+                  imageBuilder: (context, imageProvider) => AnimatedContainer(
+                    height: height,
+                    width: width,
+                    decoration: decoration.copyWith(
+                        image: DecorationImage(
+                            image: imageProvider, fit: BoxFit.cover)),
+                    // duration: animationDuration,
+                    duration: animationDuration ~/ 2,
+                    curve: Curves.easeInOutQuad,
+                    child: child,
+                  ),
+                  imageUrl: thumbnailUrl,
+                  placeholderFadeInDuration: animationDuration,
+                  fadeInDuration: animationDuration,
+                  fadeOutDuration: animationDuration,
+                  errorWidget: (context, url, error) => Container(
+                    height: height,
+                    width: width,
+                    alignment: Alignment.center,
+                    decoration:
+                        decoration.copyWith(color: colors.secondaryContainer),
+                    // duration: animationDuration,
+                    child: SizedBox(
+                        height: 20,
+                        width: 20,
+                        child: Icon(
+                          Icons.error_outline,
+                          color: colors.onSecondaryContainer.withOpacity(0.5),
+                        )),
+                  ),
+                  progressIndicatorBuilder: (context, url, progress) =>
+                      Container(
+                    height: height,
+                    width: width,
+                    alignment: Alignment.center,
+                    decoration:
+                        decoration.copyWith(color: colors.secondaryContainer),
+                    // duration: animationDuration,
+                    child: const SizedBox(
+                        height: 20,
+                        width: 20,
+                        child: CircularProgressIndicator(
+                          strokeWidth: 1,
+                        )),
+                  ),
+                );
+        });
   }
 }

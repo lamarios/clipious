@@ -69,7 +69,7 @@ class ManagerServersView extends StatelessWidget {
       BuildContext context, ServerListSettingsCubit cubit) async {
     var locals = AppLocalizations.of(context)!;
     try {
-      await cubit.saveServer();
+      // await cubit.saveServer();
       if (context.mounted) {
         Navigator.pop(context);
       }
@@ -102,57 +102,19 @@ class ManagerServersView extends StatelessWidget {
     }
   }
 
-  addServerDialog(BuildContext context) {
-    ServerListSettingsCubit cubit = context.read<ServerListSettingsCubit>();
-    var locals = AppLocalizations.of(context)!;
-    showDialog<String>(
-        context: context,
-        useRootNavigator: false,
-        builder: (BuildContext context) => Dialog(
-              child: SizedBox(
-                width: 400,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Text(locals.addServer),
-                      TextField(
-                        controller: cubit.addServerController,
-                        autocorrect: false,
-                        enableSuggestions: false,
-                        enableIMEPersonalizedLearning: false,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          TextButton(
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            child: Text(locals.cancel),
-                          ),
-                          TextButton(
-                            onPressed: () async {
-                              _serverServerHandling(context, cubit);
-                            },
-                            child: Text(locals.add),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ));
-  }
-
   openServer(BuildContext context, Server s) {
     var cubit = context.read<ServerListSettingsCubit>();
     AutoRouter.of(context)
         .push(ManageSingleServerRoute(server: s))
         .then((value) => cubit.refreshServers());
+  }
+
+  addServer(BuildContext context) async {
+    var cubit = context.read<ServerListSettingsCubit>();
+    final server = await AutoRouter.of(context).push(const AddServerRoute());
+    if (server != null && server is Server && context.mounted) {
+      cubit.saveServer(server);
+    }
   }
 
   @override
@@ -285,7 +247,7 @@ class ManagerServersView extends StatelessWidget {
               right: 20,
               bottom: 20,
               child: FloatingActionButton(
-                onPressed: () => addServerDialog(ctx),
+                onPressed: () => addServer(context),
                 backgroundColor: colorScheme.primaryContainer,
                 child: const Icon(Icons.add),
               ),

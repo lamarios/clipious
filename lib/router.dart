@@ -18,6 +18,7 @@ import 'package:invidious/search/views/screens/video_tab.dart';
 import 'package:invidious/search/views/tv/screens/search.dart';
 import 'package:invidious/settings/models/db/server.dart';
 import 'package:invidious/settings/models/db/video_filter.dart';
+import 'package:invidious/settings/views/screens/add_server.dart';
 import 'package:invidious/settings/views/screens/app_logs.dart';
 import 'package:invidious/settings/views/screens/appearance.dart';
 import 'package:invidious/settings/views/screens/browsing.dart';
@@ -31,6 +32,7 @@ import 'package:invidious/settings/views/screens/sponsor_block_settings.dart';
 import 'package:invidious/settings/views/screens/video_filter.dart';
 import 'package:invidious/settings/views/screens/video_filter_setup.dart';
 import 'package:invidious/settings/views/screens/video_player.dart';
+import 'package:invidious/settings/views/tv/screens/add_server.dart';
 import 'package:invidious/settings/views/tv/screens/app_layout.dart';
 import 'package:invidious/settings/views/tv/screens/dearrow_settings.dart';
 import 'package:invidious/settings/views/tv/screens/filter_edit.dart';
@@ -144,6 +146,7 @@ class AppRouter extends _$AppRouter implements AutoRouteGuard {
             AutoRoute(page: TvFilterListSettingsRoute.page),
             AutoRoute(page: TvTimePickerRoute.page),
             AutoRoute(page: TvPlainTextRoute.page),
+            AutoRoute(page: TvAddServerRoute.page)
           ]
         : [
             AutoRoute(
@@ -216,7 +219,10 @@ class AppRouter extends _$AppRouter implements AutoRouteGuard {
             AutoRoute(
                 page: ManageSingleServerRoute.page,
                 path: pathManageSingleServerFromWizard),
-            AutoRoute(page: WelcomeWizardRoute.page, initial: !hasServer)
+            AutoRoute(page: WelcomeWizardRoute.page, initial: !hasServer),
+            AutoRoute(
+              page: AddServerRoute.page,
+            )
           ];
   }
 
@@ -224,8 +230,12 @@ class AppRouter extends _$AppRouter implements AutoRouteGuard {
   Future<void> onNavigation(
       NavigationResolver resolver, StackRouter router) async {
     try {
-      if (resolver.route.name == TvWelcomeWizardRoute.name ||
-          resolver.route.name == WelcomeWizardRoute.name) {
+      var routeName = resolver.route.name;
+      if (routeName == TvWelcomeWizardRoute.name ||
+          routeName == WelcomeWizardRoute.name ||
+          routeName == AddServerRoute.name ||
+          routeName == TvTextFieldRoute.name ||
+          routeName == TvAddServerRoute.name) {
         resolver.next(true);
         return;
       }

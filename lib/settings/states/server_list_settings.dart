@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:logging/logging.dart';
 
@@ -16,19 +15,11 @@ enum PublicServerErrors { none, couldNotGetList }
 final log = Logger('ManagerServerView');
 
 class ServerListSettingsCubit extends Cubit<ServerListSettingsState> {
-  final TextEditingController addServerController =
-      TextEditingController(text: 'https://');
   final AppCubit appCubit;
 
   ServerListSettingsCubit(super.initialState, this.appCubit) {
     refreshServers();
     getPublicServers();
-  }
-
-  @override
-  close() async {
-    addServerController.dispose();
-    super.close();
   }
 
   upsertServer(Server server) async {
@@ -54,22 +45,18 @@ class ServerListSettingsCubit extends Cubit<ServerListSettingsState> {
       var public = await service.getPublicServers();
 
       var servers = public.map((e) {
-        var s = Server(url: e.uri);
-        s.flag = e.flag;
-        s.region = e.region;
-
-        return s;
+        return Server(url: e.uri, flag: e.flag, region: e.region);
       }).toList();
       int progress = 0;
       List<Server?> pingedServers = await Future.wait(servers.map((e) async {
         try {
-          e.ping = await service.pingServer(e.url).timeout(
+          final ping = await service.pingServer(e.url).timeout(
               const Duration(seconds: pingTimeout),
               onTimeout: () => const Duration(seconds: pingTimeout));
           progress++;
 
           emit(state.copyWith(publicServerProgress: progress / servers.length));
-          return e;
+          return e.copyWith(ping: ping);
         } catch (err, stacktrace) {
           log.severe('couldn\'t reach server ${e.url}', err, stacktrace);
           return null;
@@ -102,24 +89,15 @@ class ServerListSettingsCubit extends Cubit<ServerListSettingsState> {
   }
 
   bool isLoggedInToServer(String url) {
-    Server server = state.dbServers
-        .firstWhere((s) => s.url == url, orElse: () => Server(url: 'notFound'));
+    Server server = state.dbServers.firstWhere((s) => s.url == url,
+        orElse: () => const Server(url: 'notFound'));
 
     return (server.authToken?.isNotEmpty ?? false) ||
         (server.sidCookie?.isNotEmpty ?? false);
   }
 
-  saveServer() async {
-    var serverUrl = addServerController.value.text;
-    if (serverUrl.endsWith("/")) {
-      serverUrl = serverUrl.substring(0, serverUrl.length - 1);
-    }
-
-    await service.validateServer(serverUrl);
-
-    Server server = Server(url: serverUrl);
+  saveServer(Server server) async {
     await db.upsertServer(server);
-    addServerController.text = 'https://';
     if (state.dbServers.isEmpty) {
       switchServer(server);
     }

@@ -861,7 +861,7 @@
   "@itemlistErrorGeneric": {
     "description": "Error showing when the data can't be fetch"
   },
-  "homeLayoutEditor": "Modifier la disposition de l'accueil",
+  "homeLayoutEditor": "Modifier la disposition de l''accueil",
   "@homeLayoutEditor": {
     "description": "Title of layout editor screen"
   },
@@ -1351,7 +1351,7 @@
   "@invidiousAccount": {
     "description": "Text when the user choose where to subscribe to a channel"
   },
-  "onDeviceSubscriptions": "Sur l'appareil",
+  "onDeviceSubscriptions": "Sur l''appareil",
   "@onDeviceSubscriptions": {
     "description": "Text when the user chooses where to subscribe to a channel"
   },

@@ -5,6 +5,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:invidious/app/states/app.dart';
 import 'package:invidious/settings/states/server_settings.dart';
 import 'package:invidious/utils.dart';
+import 'package:invidious/utils/string.dart';
 import 'package:settings_ui/settings_ui.dart';
 
 import '../../models/db/server.dart';
@@ -16,12 +17,20 @@ class ManageSingleServerScreen extends StatelessWidget {
 
   const ManageSingleServerScreen({super.key, required this.server});
 
-  void showLogInWithCookiesDialog(BuildContext context) async {
+  static void showKeyValueDialog(
+    BuildContext context, {
+    required String field1Title,
+    required String field2Title,
+    bool field1Secret = false,
+    bool field2Secret = false,
+    List<String>? field1AutofillHints,
+    List<String>? field2AutofillHints,
+    required String okText,
+    required Function(String field1, String field2) onOk,
+  }) {
     var locals = AppLocalizations.of(context)!;
-    TextEditingController userController = TextEditingController();
-    TextEditingController passwordController = TextEditingController();
-
-    var cubit = context.read<ServerSettingsCubit>();
+    TextEditingController field1Controller = TextEditingController();
+    TextEditingController field2Controller = TextEditingController();
 
     showDialog(
       context: context,
@@ -32,19 +41,17 @@ class ManageSingleServerScreen extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               TextField(
-                  controller: userController,
+                  controller: field1Controller,
                   autocorrect: false,
-                  autofillHints: const [
-                    AutofillHints.username,
-                    AutofillHints.email
-                  ],
-                  decoration: InputDecoration(label: Text(locals.username))),
+                  autofillHints: field1AutofillHints,
+                  obscureText: field1Secret,
+                  decoration: InputDecoration(label: Text(field1Title))),
               TextField(
-                obscureText: true,
+                obscureText: field2Secret,
                 autocorrect: false,
-                controller: passwordController,
-                autofillHints: const [AutofillHints.password],
-                decoration: InputDecoration(label: Text(locals.password)),
+                controller: field2Controller,
+                autofillHints: field2AutofillHints,
+                decoration: InputDecoration(label: Text(field2Title)),
               ),
             ],
           ),
@@ -57,27 +64,77 @@ class ManageSingleServerScreen extends StatelessWidget {
               },
             ),
             TextButton(
-              child: Text(locals.ok),
-              onPressed: () async {
-                try {
-                  await cubit.logInWithCookie(
-                      userController.text, passwordController.text);
-                  if (context.mounted) {
-                    Navigator.of(context).pop();
-                  }
-                } catch (err) {
-                  if (context.mounted) {
-                    showAlertDialog(context, locals.error,
-                        [Text(locals.wrongUsernamePassword)]);
-                  }
-                  rethrow;
-                }
-              },
-            ),
+                child: Text(okText),
+                onPressed: () =>
+                    onOk(field1Controller.text, field2Controller.text)),
           ],
         );
       },
     );
+  }
+
+  void showAddHeaderDialog(BuildContext context) {
+    var locals = AppLocalizations.of(context)!;
+    showKeyValueDialog(context,
+        field1Title: locals.name,
+        field2Title: locals.value,
+        okText: locals.add, onOk: (key, value) async {
+      var cubit = context.read<ServerSettingsCubit>();
+      await cubit.addHeader(key, value);
+      if (context.mounted) {
+        Navigator.of(context).pop();
+      }
+    });
+  }
+
+  void showBasicAuthDialog(BuildContext context) {
+    var locals = AppLocalizations.of(context)!;
+    showKeyValueDialog(context,
+        field1Title: locals.username,
+        field2Title: locals.password,
+        field1AutofillHints: const [
+          AutofillHints.username,
+          AutofillHints.email
+        ],
+        field2AutofillHints: const [AutofillHints.password],
+        field2Secret: true,
+        okText: locals.add, onOk: (username, password) async {
+      var cubit = context.read<ServerSettingsCubit>();
+
+      await cubit.addHeader(
+          "Authorization", 'Basic ${encodeBase64('$username:$password')}');
+      if (context.mounted) {
+        Navigator.of(context).pop();
+      }
+    });
+  }
+
+  void showLogInWithCookiesDialog(BuildContext context) async {
+    var locals = AppLocalizations.of(context)!;
+    showKeyValueDialog(context,
+        field1Title: locals.username,
+        field2Title: locals.password,
+        field1AutofillHints: const [
+          AutofillHints.username,
+          AutofillHints.email
+        ],
+        field2AutofillHints: const [AutofillHints.password],
+        field2Secret: true,
+        okText: locals.ok, onOk: (username, password) async {
+      var cubit = context.read<ServerSettingsCubit>();
+      try {
+        await cubit.logInWithCookie(username, password);
+        if (context.mounted) {
+          Navigator.of(context).pop();
+        }
+      } catch (err) {
+        if (context.mounted) {
+          showAlertDialog(
+              context, locals.error, [Text(locals.wrongUsernamePassword)]);
+        }
+        rethrow;
+      }
+    });
   }
 
   @override
@@ -122,7 +179,7 @@ class ManageSingleServerScreen extends StatelessWidget {
                               leading: server.authToken?.isNotEmpty ?? false
                                   ? const Icon(Icons.check)
                                   : const Icon(Icons.token),
-                              enabled: !isLoggedIn,
+                              enabled: !isLoggedIn && !state.hasBasicAuth,
                               title: Text(locals.tokenLogin),
                               value: Text(server.authToken?.isNotEmpty ?? false
                                   ? locals.loggedIn
@@ -149,6 +206,47 @@ class ManageSingleServerScreen extends StatelessWidget {
                               onPressed: (context) => cubit.logOut(),
                             )
                           ]),
+                      SettingsSection(
+                          title: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              Text(locals.customHeaders),
+                              Text(
+                                locals.customHeadersExplanation,
+                                style: TextStyle(
+                                    color: theme.tileDescriptionTextColor),
+                              )
+                            ],
+                          ),
+                          tiles: [
+                            ...state.server.customHeaders.keys.map((k) {
+                              String value =
+                                  state.server.customHeaders[k] ?? '';
+                              if (k == 'Authorization') {
+                                value = "········";
+                              }
+
+                              return SettingsTile(
+                                title: Text(k),
+                                description: Text(value),
+                                trailing: IconButton(
+                                  icon: const Icon(Icons.delete),
+                                  onPressed: () => cubit.removeHeader(k),
+                                ),
+                              );
+                            }),
+                            SettingsTile(
+                              title: Text(locals.addBasicAuth),
+                              leading: const Icon(Icons.key),
+                              onPressed: showBasicAuthDialog,
+                            ),
+                            SettingsTile(
+                              title: Text(locals.addHeader),
+                              leading: const Icon(Icons.add),
+                              onPressed: showAddHeaderDialog,
+                            )
+                          ]),
                       SettingsSection(title: const Text(''), tiles: [
                         SettingsTile(
                           enabled: state.canDelete,
@@ -172,7 +270,7 @@ class ManageSingleServerScreen extends StatelessWidget {
                                     : Colors.red.withOpacity(0.5)),
                           ),
                         )
-                      ])
+                      ]),
                     ]),
               ));
         },
