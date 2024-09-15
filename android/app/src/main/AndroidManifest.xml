@@ -20,8 +20,11 @@
             android:label="Clipious"
             android:name="${applicationName}"
             android:icon="@mipmap/ic_launcher"
-            android:usesCleartextTraffic="true"
-            android:banner="@drawable/banner">
+            android:banner="@drawable/banner"
+            android:networkSecurityConfig="@xml/network_security_config" >
+
+        <meta-data android:name="io.flutter.network-policy"
+            android:resource="@xml/network_security_config" />
         <!--            android:enableOnBackInvokedCallback="true"-->
         <activity
                 android:name="com.linusu.flutter_web_auth.CallbackActivity"

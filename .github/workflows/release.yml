@@ -57,9 +57,9 @@ jobs:
           ./submodules/flutter/bin/flutter config --no-analytics
           ./submodules/flutter/bin/flutter pub get
           ./submodules/flutter/bin/flutter pub run flutter_native_splash:create
-          ./submodules/flutter/bin/flutter build apk --split-per-abi
-          ./submodules/flutter/bin/flutter build apk
-          ./submodules/flutter/bin/flutter build appbundle
+          ./submodules/flutter/bin/flutter build apk --split-per-abi --dart-define=cronetHttpNoPlay=true
+          ./submodules/flutter/bin/flutter build apk --dart-define=cronetHttpNoPlay=true
+          ./submodules/flutter/bin/flutter build appbundle --dart-define=cronetHttpNoPlay=true
       - name: Moving build artifacts
         run: | 
           mkdir -p build/app/outputs/flutter-apk
