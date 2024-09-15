@@ -36,6 +36,8 @@ abstract class $AppStateCopyWith<$Res> {
       Server? server,
       HomeLayout homeLayout,
       bool globalLoading});
+
+  $ServerCopyWith<$Res>? get server;
 }
 
 /// @nodoc
@@ -75,6 +77,18 @@ class _$AppStateCopyWithImpl<$Res, $Val extends AppState>
               as bool,
     ) as $Val);
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ServerCopyWith<$Res>? get server {
+    if (_value.server == null) {
+      return null;
+    }
+
+    return $ServerCopyWith<$Res>(_value.server!, (value) {
+      return _then(_value.copyWith(server: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -90,6 +104,9 @@ abstract class _$$AppStateImplCopyWith<$Res>
       Server? server,
       HomeLayout homeLayout,
       bool globalLoading});
+
+  @override
+  $ServerCopyWith<$Res>? get server;
 }
 
 /// @nodoc

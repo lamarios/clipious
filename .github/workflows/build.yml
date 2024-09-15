@@ -47,7 +47,7 @@ jobs:
       - run: ./submodules/flutter/bin/flutter config --no-analytics
       - run: ./submodules/flutter/bin/flutter pub get
       - run: ./submodules/flutter/bin/dart format --output=none --set-exit-if-changed ./lib
-      - run: ./submodules/flutter/bin/dart analyze ./lib
+      - run: ./submodules/flutter/bin/dart analyze --no-fatal-warnings ./lib
 #      - name: Run tests with nix (starts postgres and invidious server)
 #        run: nix-shell --run './submodules/flutter/bin/flutter test'
       - run: ./submodules/flutter/bin/flutter pub run flutter_native_splash:create

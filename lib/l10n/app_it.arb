@@ -1139,7 +1139,7 @@
   "@layoutEditorExplanation": {
     "description": "text to explain the home layout editor"
   },
-  "customizeAppLayout": "Personalizza le sezioni dell'app",
+  "customizeAppLayout": "Personalizza le sezioni dell''app",
   "@customizeAppLayout": {
     "description": "Settings label for the settings to allow the user to set up the app sections themselves"
   },
@@ -1147,7 +1147,7 @@
   "@home": {
     "description": "Label for Home browsing tab"
   },
-  "customizeAppLayoutExplanation": "Seleziona quali sezioni si desidera visualizzare nella barra di navigazione dell'app principale. Fare clic sull'icona di casa per selezionare quale schermata mostra quando l'applicazione inizia. È possibile riordinare le sezioni trascinandole intorno.",
+  "customizeAppLayoutExplanation": "Seleziona quali sezioni si desidera visualizzare nella barra di navigazione dell''app principale. Fare clic sull'icona di casa per selezionare quale schermata mostra quando l'applicazione inizia. È possibile riordinare le sezioni trascinandole intorno.",
   "@customizeAppLayoutExplanation": {
     "description": ""
   },

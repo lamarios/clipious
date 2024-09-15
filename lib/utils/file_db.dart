@@ -477,7 +477,7 @@ class FileDB extends IDbClient {
   }
 
   @override
-  Future<void> deleteOfflineSubscription(String sub) {
+  Future<void> deleteOfflineSubscription(String channelId) {
     // TODO: implement deleteOfflineSubscription
     throw UnimplementedError();
   }

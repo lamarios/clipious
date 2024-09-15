@@ -15,6 +15,12 @@ abstract class _$AppRouter extends RootStackRouter {
 
   @override
   final Map<String, PageFactory> pagesMap = {
+    AddServerRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const AddServerScreen(),
+      );
+    },
     AppLogsRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -294,6 +300,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const TrendingTab(),
       );
     },
+    TvAddServerRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const TvAddServerScreen(),
+      );
+    },
     TvAppLayoutSettingsRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -542,6 +554,20 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
   };
+}
+
+/// generated route for
+/// [AddServerScreen]
+class AddServerRoute extends PageRouteInfo<void> {
+  const AddServerRoute({List<PageRouteInfo>? children})
+      : super(
+          AddServerRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'AddServerRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
@@ -1333,6 +1359,20 @@ class TrendingRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'TrendingRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [TvAddServerScreen]
+class TvAddServerRoute extends PageRouteInfo<void> {
+  const TvAddServerRoute({List<PageRouteInfo>? children})
+      : super(
+          TvAddServerRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'TvAddServerRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

@@ -72,7 +72,8 @@ NumberFormat compactCurrency = NumberFormat.compactCurrency(
 );
 
 Future<void> showAlertDialog(
-    BuildContext context, String title, List<Widget> body) async {
+    BuildContext context, String title, List<Widget> body,
+    {List<Widget>? actions}) async {
   var locals = AppLocalizations.of(context)!;
   return showDialog<void>(
     context: context,
@@ -85,14 +86,15 @@ Future<void> showAlertDialog(
             children: body,
           ),
         ),
-        actions: <Widget>[
-          TextButton(
-            child: Text(locals.ok),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          ),
-        ],
+        actions: actions ??
+            <Widget>[
+              TextButton(
+                child: Text(locals.ok),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
       );
     },
   );

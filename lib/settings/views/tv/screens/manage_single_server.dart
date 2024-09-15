@@ -2,7 +2,9 @@ import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:gap/gap.dart';
 import 'package:invidious/settings/views/tv/screens/settings.dart';
+import 'package:invidious/utils/string.dart';
 import 'package:invidious/utils/views/tv/components/tv_button.dart';
 import 'package:invidious/utils/views/tv/components/tv_overscan.dart';
 
@@ -17,6 +19,111 @@ class TvManageSingleServerScreen extends StatelessWidget {
   final Server server;
 
   const TvManageSingleServerScreen({super.key, required this.server});
+
+  static void showKeyValueDialog(
+    BuildContext context, {
+    required String field1Title,
+    required String field2Title,
+    bool field1Secret = false,
+    bool field2Secret = false,
+    List<String>? field1AutofillHints,
+    List<String>? field2AutofillHints,
+    required String okText,
+    required Function(String field1, String field2) onOk,
+  }) {
+    var locals = AppLocalizations.of(context)!;
+    TextEditingController field1Controller = TextEditingController();
+    TextEditingController field2Controller = TextEditingController();
+
+    showDialog(
+      context: context,
+      useRootNavigator: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TvTextField(
+                  controller: field1Controller,
+                  autocorrect: false,
+                  autofillHints: field1AutofillHints,
+                  obscureText: field1Secret,
+                  decoration: InputDecoration(label: Text(field1Title))),
+              TvTextField(
+                obscureText: field2Secret,
+                autocorrect: false,
+                controller: field2Controller,
+                autofillHints: field2AutofillHints,
+                decoration: InputDecoration(label: Text(field2Title)),
+              ),
+            ],
+          ),
+          actions: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                TvButton(
+                  unfocusedColor: Colors.transparent,
+                  onPressed: (context) {
+                    //Put your code here which you want to execute on Cancel button click.
+                    Navigator.of(context).pop();
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(locals.cancel),
+                  ),
+                ),
+                TvButton(
+                    unfocusedColor: Colors.transparent,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(okText),
+                    ),
+                    onPressed: (context) =>
+                        onOk(field1Controller.text, field2Controller.text)),
+              ],
+            )
+          ],
+        );
+      },
+    );
+  }
+
+  void showAddHeaderDialog(BuildContext context) {
+    var locals = AppLocalizations.of(context)!;
+    showKeyValueDialog(context,
+        field1Title: locals.name,
+        field2Title: locals.value,
+        okText: locals.add, onOk: (key, value) async {
+      var cubit = context.read<ServerSettingsCubit>();
+      await cubit.addHeader(key, value);
+      if (context.mounted) {
+        Navigator.of(context).pop();
+      }
+    });
+  }
+
+  void showBasicAuthDialog(BuildContext context) {
+    var locals = AppLocalizations.of(context)!;
+    showKeyValueDialog(context,
+        field1Title: locals.username,
+        field2Title: locals.password,
+        field1AutofillHints: const [
+          AutofillHints.username,
+          AutofillHints.email
+        ],
+        field2AutofillHints: const [AutofillHints.password],
+        field2Secret: true,
+        okText: locals.add, onOk: (username, password) async {
+      var cubit = context.read<ServerSettingsCubit>();
+
+      await cubit.addHeader(
+          "Authorization", 'Basic ${encodeBase64('$username:$password')}');
+      if (context.mounted) {
+        Navigator.of(context).pop();
+      }
+    });
+  }
 
   void showLogInWithCookiesDialog(BuildContext context) async {
     var locals = AppLocalizations.of(context)!;
@@ -118,73 +225,6 @@ class TvManageSingleServerScreen extends StatelessWidget {
         ]);
   }
 
-/*
-  void showLogInWithCookiesDialog(BuildContext context) async {
-    var locals = AppLocalizations.of(context)!;
-    TextEditingController userController = TextEditingController();
-    TextEditingController passwordController = TextEditingController();
-    FocusNode focusNode = FocusNode();
-
-    Navigator.of(context).push(MaterialPageRoute(
-      builder: (BuildContext context) {
-        return Scaffold(
-          body: Padding(
-            padding: const EdgeInsets.all(40),
-            child: Column(mainAxisSize: MainAxisSize.min, children: [
-              TextField(
-                  autofocus: true,
-                  focusNode: focusNode,
-                  controller: userController,
-                  autocorrect: false,
-                  textInputAction: TextInputAction.next,
-                  autofillHints: const [AutofillHints.username, AutofillHints.email],
-                  decoration: InputDecoration(label: Text(locals.username))),
-              TextField(
-                obscureText: true,
-                autocorrect: false,
-                controller: passwordController,
-                textInputAction: TextInputAction.next,
-                autofillHints: const [AutofillHints.password],
-                decoration: InputDecoration(label: Text(locals.password)),
-              ),
-              Row(
-                children: <Widget>[
-                  GetBuilder<ServerSettingsController>(
-                    builder: (controller) => Focus(
-                      onKeyEvent: (node, event) => onTvSelect(event, context, (context) async {
-                        try {
-                          await controller.logInWithCookie(userController.text, passwordController.text);
-                          Navigator.of(context).pop();
-                        } catch (err) {
-                          showAlertDialog(context, locals.error, [Text(locals.wrongUsernamePassword)]);
-                          rethrow;
-                        }
-                      }),
-                      child: TextButton(
-                        // focusNode: focusNode,
-                        child: Text(locals.ok),
-                        onPressed: () {},
-                      ),
-                    ),
-                  ),
-                  TextButton(
-                    child: Text(locals.cancel),
-                    onPressed: () {
-                      //Put your code here which you want to execute on Cancel button click.
-                      focusNode.dispose();
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                ],
-              )
-            ]),
-          ),
-        );
-      },
-    ));
-  }
-*/
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -224,6 +264,31 @@ class TvManageSingleServerScreen extends StatelessWidget {
                   enabled: isLoggedIn,
                   onSelected: (context) => cubit.logOut(),
                 ),
+                SettingsTitle(title: locals.customHeaders),
+                ...state.server.customHeaders.keys.map((k) {
+                  String value = state.server.customHeaders[k] ?? '';
+                  if (k == 'Authorization') {
+                    value = "········";
+                  }
+
+                  return SettingsTile(
+                    title: k,
+                    description: value,
+                    onSelected: (context) => cubit.removeHeader(k),
+                    trailing: const Icon(Icons.delete),
+                  );
+                }),
+                SettingsTile(
+                  title: locals.addBasicAuth,
+                  leading: const Icon(Icons.key),
+                  onSelected: (context) => showBasicAuthDialog(context),
+                ),
+                SettingsTile(
+                  title: locals.addHeader,
+                  leading: const Icon(Icons.add),
+                  onSelected: showAddHeaderDialog,
+                ),
+                const Gap(20),
                 SettingsTile(
                   title: locals.delete,
                   enabled: state.canDelete,

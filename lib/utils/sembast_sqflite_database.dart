@@ -304,15 +304,15 @@ class SembastSqfDb extends IDbClient {
 
   @override
   Future<void> useServer(Server server) async {
-    List<Server> servers = await getServers();
-    for (Server s in servers) {
-      s.inUse = false;
+    List<Server> servers = List.from(await getServers());
+    for (int i = 0; i < servers.length; i++) {
+      Server s = servers[i].copyWith(inUse: false);
       await serversStore.record(s.url).put(db, s.toJson());
     }
 
-    server.inUse = true;
-
-    await serversStore.record(server.url).put(db, server.toJson());
+    await serversStore
+        .record(server.url)
+        .put(db, server.copyWith(inUse: true).toJson());
   }
 
   @override
@@ -321,8 +321,8 @@ class SembastSqfDb extends IDbClient {
   }
 
   @override
-  Future<void> deleteOfflineSubscription(String sub) async {
-    await offlineSubscriptions.record(sub).delete(db);
+  Future<void> deleteOfflineSubscription(String channelId) async {
+    await offlineSubscriptions.record(channelId).delete(db);
   }
 
   @override

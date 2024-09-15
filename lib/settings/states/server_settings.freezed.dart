@@ -31,6 +31,8 @@ abstract class $ServerSettingsStateCopyWith<$Res> {
       _$ServerSettingsStateCopyWithImpl<$Res, ServerSettingsState>;
   @useResult
   $Res call({Server server, bool canDelete});
+
+  $ServerCopyWith<$Res> get server;
 }
 
 /// @nodoc
@@ -60,6 +62,14 @@ class _$ServerSettingsStateCopyWithImpl<$Res, $Val extends ServerSettingsState>
               as bool,
     ) as $Val);
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ServerCopyWith<$Res> get server {
+    return $ServerCopyWith<$Res>(_value.server, (value) {
+      return _then(_value.copyWith(server: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -71,6 +81,9 @@ abstract class _$$ServerSettingsStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call({Server server, bool canDelete});
+
+  @override
+  $ServerCopyWith<$Res> get server;
 }
 
 /// @nodoc
@@ -102,9 +115,10 @@ class __$$ServerSettingsStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ServerSettingsStateImpl implements _ServerSettingsState {
+class _$ServerSettingsStateImpl extends _ServerSettingsState {
   const _$ServerSettingsStateImpl(
-      {required this.server, this.canDelete = false});
+      {required this.server, this.canDelete = false})
+      : super._();
 
   @override
   final Server server;
@@ -138,10 +152,11 @@ class _$ServerSettingsStateImpl implements _ServerSettingsState {
           this, _$identity);
 }
 
-abstract class _ServerSettingsState implements ServerSettingsState {
+abstract class _ServerSettingsState extends ServerSettingsState {
   const factory _ServerSettingsState(
       {required final Server server,
       final bool canDelete}) = _$ServerSettingsStateImpl;
+  const _ServerSettingsState._() : super._();
 
   @override
   Server get server;
