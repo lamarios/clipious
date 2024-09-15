@@ -913,11 +913,11 @@
   "@homeLayoutEditor": {
     "description": "Title of layout editor screen"
   },
-  "layoutEditorExplanation": "ホームの表示を変更。横スクロールの小さな表示部分が2つまで、大きな表示部分が1つあります。",
+  "layoutEditorExplanation": "ホームの表示を変更。横スクロールの小さな表示部分が2つまで、大きな表示部分が1つです。",
   "@layoutEditorExplanation": {
     "description": "text to explain the home layout editor"
   },
-  "layoutEditorAddVideoSource": "動画の表示部分を追加",
+  "layoutEditorAddVideoSource": "動画の表示を追加",
   "@layoutEditorAddVideoSource": {
     "description": "Label for button to allow user to add more video sources to the home screen"
   },
@@ -1340,5 +1340,17 @@
   "rydCustomInstance": "独自RYDインスタンスのURL",
   "@rydCustomInstance": {
     "description": "title for setting to set a custom ryd instance"
+  },
+  "invidiousAccount": "Invidious アカウント",
+  "@invidiousAccount": {
+    "description": "Text when the user choose where to subscribe to a channel"
+  },
+  "both": "両方",
+  "@both": {},
+  "refresh": "更新",
+  "@refresh": {},
+  "onDeviceSubscriptions": "端末上",
+  "@onDeviceSubscriptions": {
+    "description": "Text when the user chooses where to subscribe to a channel"
   }
 }

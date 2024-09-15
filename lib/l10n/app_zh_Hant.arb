@@ -383,7 +383,7 @@
   "@save": {
     "description": "Text for save action"
   },
-  "deArrowWarning": "啟用 DeArrow 可以顯著降低應用程式的瀏覽速度，因為每個影片都需要額外的 http 請求",
+  "deArrowWarning": "啟用 DeArrow 可能會顯著降低應用程式的瀏覽速度，因為每個影片都需要額外的 http 請求",
   "@deArrowWarning": {
     "description": "Warning message when the user enables DeArrow"
   },
@@ -1264,5 +1264,87 @@
         "format": "compact"
       }
     }
+  },
+  "returnYoutubeUrlValidation": "網址必須以 http:// 或 https:// 開頭",
+  "@returnYoutubeUrlValidation": {
+    "description": "error message for invalid custom url for return to youtube"
+  },
+  "copySettingsAsJson": "將設定以 JSON 格式複製到剪貼簿",
+  "@copySettingsAsJson": {
+    "description": "title for settings sections to allow users to copy their settings as json to make debugging easier"
+  },
+  "copySettingsAsJsonDescription": "如果您遇到應用程式問題並決定提出問題，請將設定複製為 JSON 以協助除錯",
+  "@copySettingsAsJsonDescription": {
+    "description": ""
+  },
+  "skipStep": "向前/向後跳過一步",
+  "@skipStep": {
+    "description": "Title for the settings to set the skipping step"
+  },
+  "exponentialSkip": "指數型快轉/倒轉",
+  "@exponentialSkip": {
+    "description": "Title for the setting to enable the exponential skipping"
+  },
+  "exponentialSkipDescription": "您快轉的次數越多，每次快轉的時間間隔就越大。",
+  "@exponentialSkipDescription": {
+    "description": "Title for the setting to enable the exponential skipping"
+  },
+  "skipStepDescription": "快轉/倒轉操作時要跳過的秒數",
+  "@skipStepDescription": {
+    "description": "Title for the settings to set the skipping step"
+  },
+  "malformedStatsEndpointDescription": "伺服器統計端點未回傳預期的內容，\"software.name\" 鍵應為 \"invidious\"。\n伺服器回應為：",
+  "@malformedStatsEndpointDescription": {
+    "description": "Description of the possible issue for an invalid stats endpoints"
+  },
+  "invidiousAccount": "Invidious 帳號",
+  "@invidiousAccount": {
+    "description": "Text when the user choose where to subscribe to a channel"
+  },
+  "onDeviceSubscriptions": "在裝置上",
+  "@onDeviceSubscriptions": {
+    "description": "Text when the user chooses where to subscribe to a channel"
+  },
+  "refresh": "更新",
+  "@refresh": {},
+  "rydCustomInstance": "自訂 RYD 執行個體網址",
+  "@rydCustomInstance": {
+    "description": "title for setting to set a custom ryd instance"
+  },
+  "rydCustomInstanceDescription": "使用不同的 RYD 執行個體，留空則使用預設值",
+  "@rydCustomInstanceDescription": {
+    "description": "description for custom ryd instancr setting"
+  },
+  "fullscreenOnLandscape": "橫向顯示時全螢幕顯示",
+  "@fullscreenOnLandscape": {
+    "description": "Setting title to enable full screen on landscape orientation"
+  },
+  "fullscreenOnLandscapeDescription": "當裝置旋轉至橫向模式時切換到全螢幕",
+  "@fullscreenOnLandscapeDescription": {
+    "description": "Setting to enable full screen on landscape orientation"
+  },
+  "submitFeedback": "送出回饋",
+  "@submitFeedback": {
+    "description": "Title for settings to submit feed back through the app"
+  },
+  "submitFeedbackDescription": "發現錯誤或有建議？使用此工具截圖、註釋並提供回饋",
+  "@submitFeedbackDescription": {
+    "description": "Setting tile descriptions for feedback submission"
+  },
+  "feedbackDisclaimer": "您需要擁有 GitHub 帳號才能傳送回饋意見，並且您的截圖將會匿名傳送到 Imgur。",
+  "@feedbackDisclaimer": {
+    "description": "Content of dialog shown before submitting feedback to make sure the user is ok whith where the data is going"
+  },
+  "feedbackScreenshotError": "將截圖上傳到 Imgur 時發生錯誤",
+  "@feedbackScreenshotError": {
+    "description": "Title for dialog if something goes wrong while uploading feedback screenshot"
+  },
+  "channelSortByOldest": "最舊",
+  "@channelSortByOldest": {
+    "description": "Sort channel videos from oldest to newest"
+  },
+  "channelSortByPopular": "熱門",
+  "@channelSortByPopular": {
+    "description": "Sort channel videos by popularity"
   }
 }

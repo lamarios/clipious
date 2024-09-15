@@ -1,0 +1,476 @@
+{
+  "trending": "Trendiga",
+  "@trending": {
+    "description": "Trending videos title"
+  },
+  "noVideoInPlayList": "Inga filmer i spellistan",
+  "@noVideoInPlayList": {
+    "description": "When no videos in the playlist"
+  },
+  "removeFromPlayList": "Ta bort från spellistan",
+  "@removeFromPlayList": {
+    "description": "Menu item description to show remove a video from a playlist"
+  },
+  "deletePlayListQ": "Ta bort spellistan?",
+  "@deletePlayListQ": {
+    "description": "Ask user to delete a playlist"
+  },
+  "addPlayList": "Lägg till spellista",
+  "@addPlayList": {
+    "description": "Title for add playlist dialog"
+  },
+  "privatePlaylist": "Privat",
+  "@privatePlaylist": {
+    "description": "Private playlist"
+  },
+  "add": "Lägg till",
+  "@add": {
+    "description": "Add button abel"
+  },
+  "streams": "Strömmar",
+  "@streams": {
+    "description": "Streams label"
+  },
+  "nSubscribers": "{count, select, no{Inga prenumeranter} other{{count} prenumeranter}}",
+  "@nSubscribers": {
+    "description": "number of subscribers",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "shareYoutubeLink": "Dela YouTube-länk",
+  "@shareYoutubeLink": {
+    "description": "asking user to share youtube link"
+  },
+  "shareLinkWithTimestamp": "Lägg till tidsstämpel",
+  "@shareLinkWithTimestamp": {
+    "description": "asking user to share link along with timestamp"
+  },
+  "ok": "OK",
+  "@ok": {
+    "description": "Ok"
+  },
+  "channels": "Kanaler",
+  "@channels": {
+    "description": "Channels label"
+  },
+  "couldntLoadVideo": "Kunde inte ladda filmen",
+  "@couldntLoadVideo": {
+    "description": "Message to display when a video can't be loaded"
+  },
+  "recommended": "Rekommenderade",
+  "@recommended": {
+    "description": "Recommended label"
+  },
+  "startUsingClipious": "Börja använda Clipious",
+  "@startUsingClipious": {
+    "description": "button label to start using the app"
+  },
+  "videoAddedToQueue": "Filmen har lagts till i kön",
+  "@videoAddedToQueue": {
+    "description": "Pop up message when a video was added at the end of the video queue"
+  },
+  "errorAddingVideoToPlaylist": "Fel uppstod när filmen försökte läggas till i spellistan",
+  "@errorAddingVideoToPlaylist": {
+    "description": "Error while adding video to playlist"
+  },
+  "selectPlaylist": "Välj spellista",
+  "@selectPlaylist": {
+    "description": "Title when users wants to add a video to a playlist"
+  },
+  "createNewPlaylist": "Skapa ny spellista",
+  "@createNewPlaylist": {
+    "description": "Button label to create a new playlist when the user wants to add a video to a playlist"
+  },
+  "loadMore": "Ladda mer",
+  "@loadMore": {
+    "description": "CTA to load more"
+  },
+  "topSorting": "Topp",
+  "@topSorting": {
+    "description": "Content sorting: top"
+  },
+  "newSorting": "Ny",
+  "@newSorting": {
+    "description": "Content sorting: new"
+  },
+  "streamIsLive": "Direktsändning",
+  "@streamIsLive": {
+    "description": "Label when a video is a live stream"
+  },
+  "sponsorSkipped": "Hoppat över annonsering",
+  "@sponsorSkipped": {
+    "description": "When a sponsor segment is skipped thanks to sponsor block"
+  },
+  "selectBrowsingCountry": "Välj utforskningsland",
+  "@selectBrowsingCountry": {
+    "description": "Select country for trending content"
+  },
+  "showOnStart": "Välj vad som skall visas när applikationen startas",
+  "@showOnStart": {
+    "description": "Title of dialog asking which screen the users prefers to see"
+  },
+  "browsing": "Utforskning",
+  "@browsing": {
+    "description": "video browsing preferences"
+  },
+  "servers": "Servrar",
+  "@servers": {
+    "description": "Server management settings category"
+  },
+  "manageServers": "Hantera servrar",
+  "@manageServers": {
+    "description": "Settings to manage servers"
+  },
+  "useSponsorBlock": "Använd AnnonseringsBlockerare",
+  "@useSponsorBlock": {
+    "description": "label for sponsorblock checkbox"
+  },
+  "name": "Namn",
+  "@name": {
+    "description": "NAme label"
+  },
+  "package": "Paket",
+  "@package": {
+    "description": "package label"
+  },
+  "build": "Byggnummer",
+  "@build": {
+    "description": "build label"
+  },
+  "addServer": "Lägg till server",
+  "@addServer": {
+    "description": "Add server label"
+  },
+  "delete": "Ta bort",
+  "@delete": {
+    "description": "Delete label"
+  },
+  "yourServers": "Dina servrar",
+  "@yourServers": {
+    "description": "Your servers label"
+  },
+  "loggedIn": "Inloggad",
+  "@loggedIn": {
+    "description": "Label to tell the user that he is logged in to the server"
+  },
+  "notLoggedIn": "Inte inloggad",
+  "@notLoggedIn": {
+    "description": "Label when the user is not logged in to the server"
+  },
+  "tokenLogin": "Logga in med symbol",
+  "@tokenLogin": {
+    "description": "Textto login to a server using the recommended way"
+  },
+  "tokenLoginDescription": "Rekommenderade sättet att logga in",
+  "@tokenLoginDescription": {
+    "description": "Recommended way to log in"
+  },
+  "cookieLoginDescription": "Använd denna metod ifall problem uppstår vid autentisering med hjälp av symbol",
+  "@cookieLoginDescription": {
+    "description": "Cookie log in description"
+  },
+  "subscriptions": "prenumerationer",
+  "@subscriptions": {
+    "description": "User subscriptions"
+  },
+  "playlists": "Spellistor",
+  "@playlists": {
+    "description": "User playlists"
+  },
+  "popular": "Populära",
+  "@popular": {
+    "description": "Popular videos title"
+  },
+  "irreversibleAction": "Denna åtgärd är oåterkallelig",
+  "@irreversibleAction": {
+    "description": "Tell the user that the action cannot be undone"
+  },
+  "playListName": "Namn på spellista",
+  "@playListName": {
+    "description": "Place holder for new playlist name text field"
+  },
+  "playlistVisibility": "Synlighet",
+  "@playlistVisibility": {
+    "description": "Dropdown label for playlist visibility"
+  },
+  "videos": "Filmer",
+  "@videos": {
+    "description": "Videos label"
+  },
+  "publicPlaylist": "Publik",
+  "@publicPlaylist": {
+    "description": "Public playlist"
+  },
+  "unlistedPlaylist": "Olistad",
+  "@unlistedPlaylist": {
+    "description": "Unlisted playlist"
+  },
+  "cancel": "Avbryt",
+  "@cancel": {
+    "description": "Cancel button label"
+  },
+  "info": "Info",
+  "@info": {
+    "description": "Info label"
+  },
+  "latestVideos": "Senaste filmerna",
+  "@latestVideos": {
+    "description": "Latest channel videos"
+  },
+  "subscribed": "Prenumererar",
+  "@subscribed": {
+    "description": "When the user is subscribed to a channel"
+  },
+  "subscribe": "Prenumerera",
+  "@subscribe": {
+    "description": "Label for user to subscribe to a channel"
+  },
+  "share": "Dela",
+  "@share": {
+    "description": "asking user if to share"
+  },
+  "shareInvidiousLink": "Dela Invidious-länk",
+  "@shareInvidiousLink": {
+    "description": "asking user to share invidious link"
+  },
+  "noPlaylists": "Inga spellistor",
+  "@noPlaylists": {
+    "description": "when there are no playlists to display"
+  },
+  "comments": "Kommentarer",
+  "@comments": {
+    "description": "Comments label"
+  },
+  "redirectInvidiousLink": "Dela Invidious- omdirigeringslänk",
+  "@redirectInvidiousLink": {
+    "description": "asking user to share redirecting invidious link"
+  },
+  "noChannels": "Inga kanaler",
+  "@noChannels": {
+    "description": "when there are no channels to display"
+  },
+  "couldntFetchVideos": "Kunde inte få tag på filmen. Tryck för att försöka igen.",
+  "@couldntFetchVideos": {
+    "description": "Can't load bunch of videos, asking  user to try again"
+  },
+  "wizardIntro": "Välj en publik eller lägg till din egen. (Kan ändras senare i inställningar)",
+  "@wizardIntro": {
+    "description": "Welcome message on frst time use"
+  },
+  "videoAddedToPlaylist": "Filmen har lagts till i din spellista",
+  "@videoAddedToPlaylist": {
+    "description": "Pop up message when a video was added to a playlist"
+  },
+  "itemlistErrorGeneric": "Kunde inte hämta data",
+  "@itemlistErrorGeneric": {
+    "description": "Error showing when the data can't be fetch"
+  },
+  "itemListErrorInvalidScope": "Du saknar behörighet att se detta, om du loggade in med hjälp av symbolmetoden så testa i så fall att logga ut och sen in igen",
+  "@itemListErrorInvalidScope": {
+    "description": "Error when the user doesn't have the proper scope to its current token"
+  },
+  "nReplies": "{count, plural, =0{Inga svar} =1{1 svar} other{{count} svar}}",
+  "@nReplies": {
+    "description": "number of replies to a comment",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "settings": "Inställningar",
+  "@settings": {
+    "description": "Settings title"
+  },
+  "country": "Land",
+  "@country": {
+    "description": "Country label"
+  },
+  "whenAppStartsShow": "När applikationen startar, visa…",
+  "@whenAppStartsShow": {
+    "description": "Setting title for selecting the screen to show on start"
+  },
+  "currentServer": "För stunden används {current}",
+  "@currentServer": {
+    "description": "Which server the user is currently using",
+    "placeholders": {
+      "current": {
+        "type": "String"
+      }
+    }
+  },
+  "sponsorBlockDescription": "Hoppa över annonseringssegment som rapporterats in av gemenskapen",
+  "@sponsorBlockDescription": {
+    "description": "Sponsorblock setting description"
+  },
+  "logIn": "Logga in",
+  "@logIn": {
+    "description": "CTA to log in to server"
+  },
+  "about": "Om",
+  "@about": {
+    "description": "About"
+  },
+  "version": "Version",
+  "@version": {
+    "description": "version label"
+  },
+  "useThisServer": "Använd denna server",
+  "@useThisServer": {
+    "description": "Use this server label"
+  },
+  "invalidInvidiousServer": "Ogiltig Invidious-server",
+  "@invalidInvidiousServer": {
+    "description": "Error when the user tries to add a server that is not a proper or reachable invidious server"
+  },
+  "addServerHelpText": "Tryck på \"+\" för att lägga till din egen server, eller tryck på en publik server för att använda den.",
+  "@addServerHelpText": {
+    "description": "label for when the user hasn't chosen a server yet"
+  },
+  "publicServers": "Publika servrar",
+  "@publicServers": {
+    "description": "Public servers label"
+  },
+  "loadingPublicServer": "Laddar listan med publika servrar",
+  "@loadingPublicServer": {
+    "description": "Message telling users the app is loading the list of public servers"
+  },
+  "tapToAddServer": "Tryck för att lägga till servern till din lista",
+  "@tapToAddServer": {
+    "description": "public server description"
+  },
+  "publicServersError": "Misslyckades med att hämta listan över publika servrar. Tryck för att försöka igen.",
+  "@publicServersError": {
+    "description": "Error message when trying to get public servers but it failed"
+  },
+  "appearance": "Utseende",
+  "@appearance": {
+    "description": "Settings category title"
+  },
+  "useDynamicTheme": "Dynamiska färger",
+  "@useDynamicTheme": {
+    "description": ""
+  },
+  "useDynamicThemeDescription": "Använd \"Material You\"-färger (endast tillgängligt på Android 12 och senare)",
+  "@useDynamicThemeDescription": {
+    "description": ""
+  },
+  "useDash": "Använd DASH",
+  "@useDash": {
+    "description": "Label on video options if a user wants to switch to dash urls instead of the regular quality selection"
+  },
+  "useDashDescription": "DASH adaptiva strömningar kan ibland vara problematiska, YouTube kan strypa dem.",
+  "@useDashDescription": {
+    "description": "Description for dash in the settings screen"
+  },
+  "videoPlayer": "Videospelare",
+  "@videoPlayer": {
+    "description": "Title for video player related options"
+  },
+  "videoListed": "Publik",
+  "@videoListed": {
+    "description": "Status of a publicly available video"
+  },
+  "videoUnlisted": "Olistade",
+  "@videoUnlisted": {
+    "description": "Status of a video that is only accessible by link"
+  },
+  "videoIsFamilyFriendly": "Barnvänlig",
+  "@videoIsFamilyFriendly": {
+    "description": "Displayed only when a video is family friendly"
+  },
+  "tapToManage": "Tryck för att hantera",
+  "@tapToManage": {
+    "description": "Text shown below a server in the 'Your servers' list"
+  },
+  "authentication": "Identitetsbekräftelse",
+  "@authentication": {
+    "description": "Label for server settings related to authentications"
+  },
+  "cookieLogin": "Logga in med kakor",
+  "@cookieLogin": {
+    "description": "Text to login to a server using the cookie jar method"
+  },
+  "logout": "Logga ut",
+  "@logout": {
+    "description": "CTA to logout of a server"
+  },
+  "username": "Användarnamn",
+  "@username": {
+    "description": "Username label for login to a server"
+  },
+  "password": "Lösenord",
+  "@password": {
+    "description": "Password label for login to a server"
+  },
+  "wrongUsernamePassword": "Fel användarnamn eller lösenord",
+  "@wrongUsernamePassword": {
+    "description": "Error message when authentication fails"
+  },
+  "error": "Fel",
+  "@error": {},
+  "malformedStatsEndpoint": "/api/v1/stats är inte som förväntat",
+  "@malformedStatsEndpoint": {
+    "description": "Title for dialog when adding a server that isn't validated as it should"
+  },
+  "serverIsNotReachable": "Servern går ej att nå",
+  "@serverIsNotReachable": {
+    "description": "Title for dialog when adding a server that is not reachable"
+  },
+  "videoQueue": "Videokö",
+  "@videoQueue": {
+    "description": "Label for button to display the video queue"
+  },
+  "addToQueueList": "Lägg till i kön",
+  "@addToQueueList": {
+    "description": "Label on button to add a video to the queue list"
+  },
+  "addToPlaylist": "Till till i spellista",
+  "@addToPlaylist": {
+    "description": "Label to add a video to a playlist"
+  },
+  "playNext": "Spela nästa",
+  "@playNext": {
+    "description": "Label to play the video after the current one."
+  },
+  "playNextAddedToQueue": "Videon är satt näst på tur att spelas upp",
+  "@playNextAddedToQueue": {
+    "description": "Pop up message to confirm that the video has been properly set to play next"
+  },
+  "addRecommendedToQueue": "Spela automatiskt upp rekommendationer vid slut",
+  "@addRecommendedToQueue": {
+    "description": "Switch when playing a video to automatically add the recommended videos to the video queue"
+  },
+  "sponsorBlockSettingsQuickDescription": "Välj vilka typer av sektioner som skall hoppas över",
+  "@sponsorBlockSettingsQuickDescription": {
+    "description": "Small description of what the sponsor block settings do"
+  },
+  "malformedStatsEndpointDescription": "Serverstatistikens slutpunkt motsvarade inte det förväntade avslutet, nyckeln \"software.name\" borde motsvara \"invidious\".\nSvaret från servern var:",
+  "@malformedStatsEndpointDescription": {
+    "description": "Description of the possible issue for an invalid stats endpoints"
+  },
+  "sponsorBlockCategorySponsor": "Annonseringar",
+  "@sponsorBlockCategorySponsor": {
+    "description": "Sponsor block 'Sponsor' Category"
+  },
+  "sponsorBlockCategorySponsorDescription": "Betald marknadsföring, betalda referenser och direkta annonseringar. Inte för egna marknadsföringar eller när ändamål/kreatörer/hemsidor/produkter lyfts utan egen vinning utan för att de uppskattas.",
+  "@sponsorBlockCategorySponsorDescription": {
+    "description": "Sponsor block 'Sponsor' Category description"
+  },
+  "sponsorBlockCategoryUnpaidSelfPromo": "Obetald/Egen marknadsföring",
+  "@sponsorBlockCategoryUnpaidSelfPromo": {
+    "description": "Sponsor block 'Unpaid/Self promotion' Category"
+  },
+  "sponsorBlockCategoryUnpaidSelfPromoDescription": "Liknande som \"Annonseringar\", men för obetald eller egen marknadsföring. Detta inkluderar sektioner om handelsvaror, donationer eller information om vilka de samarbetat med. ",
+  "@sponsorBlockCategoryUnpaidSelfPromoDescription": {
+    "description": "Sponsor block 'Unpaid/Self promotion' Category description"
+  },
+  "sponsorBlockCategoryInteraction": "Interaktion spam innebär (Abonnera)",
+  "@sponsorBlockCategoryInteraction": {
+    "description": "Sponsor block 'Interaction' Category"
+  }
+}

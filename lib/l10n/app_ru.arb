@@ -1340,5 +1340,17 @@
   "rydCustomInstanceDescription": "Изменится сервер RYD, чтобы использовать официальный, оставьте поле пустым",
   "@rydCustomInstanceDescription": {
     "description": "description for custom ryd instancr setting"
-  }
+  },
+  "refresh": "Обновить",
+  "@refresh": {},
+  "invidiousAccount": "Аккаунт Invidious",
+  "@invidiousAccount": {
+    "description": "Text when the user choose where to subscribe to a channel"
+  },
+  "onDeviceSubscriptions": "На устройстве",
+  "@onDeviceSubscriptions": {
+    "description": "Text when the user chooses where to subscribe to a channel"
+  },
+  "both": "Оба",
+  "@both": {}
 }

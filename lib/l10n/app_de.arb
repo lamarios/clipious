@@ -1340,5 +1340,17 @@
   "rydCustomInstanceDescription": "Eine andere RYD-Instanz verwenden, leer lassen, um die Standardinstanz zu verwenden",
   "@rydCustomInstanceDescription": {
     "description": "description for custom ryd instancr setting"
-  }
+  },
+  "invidiousAccount": "Invidious-Konto",
+  "@invidiousAccount": {
+    "description": "Text when the user choose where to subscribe to a channel"
+  },
+  "onDeviceSubscriptions": "Auf dem Gerät",
+  "@onDeviceSubscriptions": {
+    "description": "Text when the user chooses where to subscribe to a channel"
+  },
+  "both": "Beide",
+  "@both": {},
+  "refresh": "Aktualisieren",
+  "@refresh": {}
 }

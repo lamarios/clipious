@@ -124,7 +124,7 @@
   "@playlists": {
     "description": "User playlists"
   },
-  "popular": "Məşhur",
+  "popular": "Sevimli",
   "@popular": {
     "description": "Popular videos title"
   },
@@ -168,11 +168,11 @@
   "@searchHistoryDescription": {
     "description": "Description for search history settings"
   },
-  "itemlistErrorGeneric": "Məlumat əldə etmək mümkün olmadı",
+  "itemlistErrorGeneric": "Məlumat əldə etmək alınmadı",
   "@itemlistErrorGeneric": {
     "description": "Error showing when the data can't be fetch"
   },
-  "publicServersError": "İctimai serverlərin siyahısın əldə etmək mümkün olmadı. Təkrar cəhd etmək üçün toxunun.",
+  "publicServersError": "İctimai serverlərin siyahısın əldə etmək olmadı. Təkrar sınamaq üçün toxun.",
   "@publicServersError": {
     "description": "Error message when trying to get public servers but it failed"
   },
@@ -194,7 +194,7 @@
   "@loadMore": {
     "description": "CTA to load more"
   },
-  "topSorting": "Yuxarı",
+  "topSorting": "Ən yaxşı",
   "@topSorting": {
     "description": "Content sorting: top"
   },
@@ -271,7 +271,7 @@
   "@addServer": {
     "description": "Add server label"
   },
-  "sponsorBlockDescription": "Cəmiyyət tərəfindən təklif edilən sponsor bölümlərin ötür",
+  "sponsorBlockDescription": "İcma tərəfindən təklif edilən sponsor bölümlərin ötür",
   "@sponsorBlockDescription": {
     "description": "Sponsorblock setting description"
   },
@@ -299,7 +299,7 @@
   "@shareLinkWithTimestamp": {
     "description": "asking user to share link along with timestamp"
   },
-  "itemListErrorInvalidScope": "Bunu görmək icazəniz yoxdur. Əgər token üsulu işlədərək daxil olmusunuzsa, sistemdən çıxmağa və təkrar daxil olmağa cəhd edin",
+  "itemListErrorInvalidScope": "Bunu görmək icazəniz yoxdur. Əgər nişan üsulu işlədərək daxil olmusunuzsa, çıxmağa və təkrar daxil olmağa çalışın",
   "@itemListErrorInvalidScope": {
     "description": "Error when the user doesn't have the proper scope to its current token"
   },
@@ -346,5 +346,115 @@
   "publicServers": "İctimai serverlər",
   "@publicServers": {
     "description": "Public servers label"
+  },
+  "redirectInvidiousLink": "Invidious Yönləndirmə linkin paylaş",
+  "@redirectInvidiousLink": {
+    "description": "asking user to share redirecting invidious link"
+  },
+  "videoIsFamilyFriendly": "Ailə dostu",
+  "@videoIsFamilyFriendly": {
+    "description": "Displayed only when a video is family friendly"
+  },
+  "tokenLoginDescription": "Giriş üçün tövsiyə olunan üsul",
+  "@tokenLoginDescription": {
+    "description": "Recommended way to log in"
+  },
+  "cookieLogin": "Hesab ilə daxil olun",
+  "@cookieLogin": {
+    "description": "Text to login to a server using the cookie jar method"
+  },
+  "cookieLoginDescription": "Nişan təsdiqləməsi ilə problemlərlə qarşılaşsanız, bu üsulu istifadə edin",
+  "@cookieLoginDescription": {
+    "description": "Cookie log in description"
+  },
+  "logout": "Çıxın",
+  "@logout": {
+    "description": "CTA to logout of a server"
+  },
+  "wrongUsernamePassword": "Səhv istifadəçi adı və ya parol",
+  "@wrongUsernamePassword": {
+    "description": "Error message when authentication fails"
+  },
+  "addToQueueList": "Növbəyə əlavə et",
+  "@addToQueueList": {
+    "description": "Label on button to add a video to the queue list"
+  },
+  "useDynamicTheme": "Dinamik rənglər",
+  "@useDynamicTheme": {
+    "description": ""
+  },
+  "useDynamicThemeDescription": "Material You rəngləri istifadə et (yalnız Android 12+/da mövcuddur)",
+  "@useDynamicThemeDescription": {
+    "description": ""
+  },
+  "useDash": "DASH İstifadə Et",
+  "@useDash": {
+    "description": "Label on video options if a user wants to switch to dash urls instead of the regular quality selection"
+  },
+  "videoPlayer": "Video oynadıcı",
+  "@videoPlayer": {
+    "description": "Title for video player related options"
+  },
+  "playNext": "Növbətini oynat",
+  "@playNext": {
+    "description": "Label to play the video after the current one."
+  },
+  "playNextAddedToQueue": "Növbətidə video oynadılacaq",
+  "@playNextAddedToQueue": {
+    "description": "Pop up message to confirm that the video has been properly set to play next"
+  },
+  "useDashDescription": "DASH uyğun yayımı bəzən problemli ola bilər, Youtube bunu qısa bilər.",
+  "@useDashDescription": {
+    "description": "Description for dash in the settings screen"
+  },
+  "videoListed": "İctimai",
+  "@videoListed": {
+    "description": "Status of a publicly available video"
+  },
+  "videoUnlisted": "Siyahısız",
+  "@videoUnlisted": {
+    "description": "Status of a video that is only accessible by link"
+  },
+  "tapToManage": "İdarə etmək üçün toxun",
+  "@tapToManage": {
+    "description": "Text shown below a server in the 'Your servers' list"
+  },
+  "tokenLogin": "Nişan ilə daxil ol",
+  "@tokenLogin": {
+    "description": "Textto login to a server using the recommended way"
+  },
+  "username": "İstifadəçi adı",
+  "@username": {
+    "description": "Username label for login to a server"
+  },
+  "password": "Parol",
+  "@password": {
+    "description": "Password label for login to a server"
+  },
+  "videoQueue": "Video növbəsi",
+  "@videoQueue": {
+    "description": "Label for button to display the video queue"
+  },
+  "addToPlaylist": "Pleylistə əlavə et",
+  "@addToPlaylist": {
+    "description": "Label to add a video to a playlist"
+  },
+  "malformedStatsEndpoint": "/api/v1/status gözlənildiyi kimi deyil",
+  "@malformedStatsEndpoint": {
+    "description": "Title for dialog when adding a server that isn't validated as it should"
+  },
+  "serverIsNotReachable": "Server əlçatan deyil",
+  "@serverIsNotReachable": {
+    "description": "Title for dialog when adding a server that is not reachable"
+  },
+  "error": "Xəta",
+  "@error": {},
+  "malformedStatsEndpointDescription": "Server statistikasının son çıxışı gözlənilən faydalı yükləmə cavabı vermədi, \"software.name\" açarı \"invidious\"a bərabər olmalıdır.\nServerdən cavab:",
+  "@malformedStatsEndpointDescription": {
+    "description": "Description of the possible issue for an invalid stats endpoints"
+  },
+  "authentication": "Təsdiqləmə",
+  "@authentication": {
+    "description": "Label for server settings related to authentications"
   }
 }

@@ -861,7 +861,7 @@
   "@itemlistErrorGeneric": {
     "description": "Error showing when the data can't be fetch"
   },
-  "homeLayoutEditor": "Modifier la disposition de l''accueil",
+  "homeLayoutEditor": "Modifier la disposition de l'accueil",
   "@homeLayoutEditor": {
     "description": "Title of layout editor screen"
   },
@@ -1045,7 +1045,7 @@
   "@videoFilterApplyDateToFilter": {
     "description": "Label for switch to allow user to customize video filter and set days of week and time to them"
   },
-  "videoFilterDayOfWeekDescription": "Vous pouvez choisir sélectivement les jours de la semaine et le temps auquel les filtres s''appliquent, par exemple, éviter les divulgâchis d''évènements sportifs.",
+  "videoFilterDayOfWeekDescription": "Vous pouvez choisir sélectivement les jours de la semaine et le temps auquel les filtres s'appliquent, par exemple, éviter les divulgâchis d'évènements sportifs.",
   "@videoFilterDayOfWeekDescription": {
     "description": ""
   },
@@ -1346,5 +1346,17 @@
   "deArrowReplaceThumbnailsDescription": "Remplacer les vignettes des vidéos, ainsi que les titres",
   "@deArrowReplaceThumbnailsDescription": {
     "description": "Description for DeArrow setting switch"
-  }
+  },
+  "invidiousAccount": "Compte Invidious",
+  "@invidiousAccount": {
+    "description": "Text when the user choose where to subscribe to a channel"
+  },
+  "onDeviceSubscriptions": "Sur l'appareil",
+  "@onDeviceSubscriptions": {
+    "description": "Text when the user chooses where to subscribe to a channel"
+  },
+  "both": "Les deux",
+  "@both": {},
+  "refresh": "Actualiser",
+  "@refresh": {}
 }

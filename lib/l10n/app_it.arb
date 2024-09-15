@@ -707,7 +707,7 @@
   "@noHistory": {
     "description": "Message when the user visits the history tab but it's empty"
   },
-  "library": "Libreria",
+  "library": "Raccolta",
   "@library": {
     "description": "Name for user library"
   },
@@ -1134,5 +1134,25 @@
   "foregroundServiceUpdatingChannels": "Controllando canali...",
   "@foregroundServiceUpdatingChannels": {
     "description": "Foreground service notification text when checking for new channel videos"
+  },
+  "layoutEditorExplanation": "Puoi scegliere cosa mostrare nella schermata Pagina principale, puoi avere fino a 2 viste piccole con scorrimento orizzontale e una fonte principale.",
+  "@layoutEditorExplanation": {
+    "description": "text to explain the home layout editor"
+  },
+  "customizeAppLayout": "Personalizza le sezioni dell'app",
+  "@customizeAppLayout": {
+    "description": "Settings label for the settings to allow the user to set up the app sections themselves"
+  },
+  "home": "Pagina principale",
+  "@home": {
+    "description": "Label for Home browsing tab"
+  },
+  "customizeAppLayoutExplanation": "Seleziona quali sezioni si desidera visualizzare nella barra di navigazione dell'app principale. Fare clic sull'icona di casa per selezionare quale schermata mostra quando l'applicazione inizia. È possibile riordinare le sezioni trascinandole intorno.",
+  "@customizeAppLayoutExplanation": {
+    "description": ""
+  },
+  "homeLayoutEditor": "Modifica disposizione della Pagina principale",
+  "@homeLayoutEditor": {
+    "description": "Title of layout editor screen"
   }
 }
