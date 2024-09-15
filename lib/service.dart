@@ -78,18 +78,16 @@ const imgurClientId = 'Client-ID 2cfbc27ce77879d';
 const maxPing = 9007199254740991;
 
 class Service {
-  final log;
+  final log = Logger('Service');
   final Client httpClient;
 
-  Service() :
-    log = Logger('Service'),
-    httpClient = Platform.isAndroid ?
-      CronetClient.fromCronetEngine(
-        CronetEngine.build(
-          cacheMode: CacheMode.memory,
-          cacheMaxSize: 2 * 1024 * 1024),
-        closeEngine: true) :
-      http.Client();
+  Service()
+      : httpClient = Platform.isAndroid
+            ? CronetClient.fromCronetEngine(
+                CronetEngine.build(
+                    cacheMode: CacheMode.memory, cacheMaxSize: 2 * 1024 * 1024),
+                closeEngine: true)
+            : http.Client();
 
   String urlFormatForLog(Uri? uri) {
     return kDebugMode ? uri.toString() : '${uri?.replace(host: 'xxxxxxxxxx')}';
@@ -413,7 +411,8 @@ class Service {
     if (query.isEmpty) return SearchSuggestion(query, []);
     var request = await buildRequest(urlSearchSuggestions,
         query: {"q": Uri.encodeQueryComponent(query)});
-    final response = await httpClient.get(request.uri, headers: request.headers);
+    final response =
+        await httpClient.get(request.uri, headers: request.headers);
     SearchSuggestion search =
         SearchSuggestion.fromJson(handleResponse(response));
     if (search.suggestions.any((element) => element.contains(";"))) {
@@ -638,8 +637,8 @@ class Service {
 
     log.info(jsonEncode(body));
 
-    final response =
-        await httpClient.post(req.uri, headers: req.headers, body: jsonEncode(body));
+    final response = await httpClient.post(req.uri,
+        headers: req.headers, body: jsonEncode(body));
     Map<String, dynamic> playlist = handleResponse(response);
     return playlist['playlistId'] as String;
   }
@@ -652,8 +651,8 @@ class Service {
       'videoId': videoId,
     };
 
-    final response =
-        await httpClient.post(req.uri, headers: req.headers, body: jsonEncode(body));
+    final response = await httpClient.post(req.uri,
+        headers: req.headers, body: jsonEncode(body));
     handleResponse(response);
   }
 
@@ -744,7 +743,8 @@ class Service {
   }
 
   Future<List<InvidiousPublicServer>> getPublicServers() async {
-    final response = await httpClient.get(Uri.parse(urlGetInvidiousPublicServers));
+    final response =
+        await httpClient.get(Uri.parse(urlGetInvidiousPublicServers));
     List<InvidiousPublicServer> servers = [];
     Iterable i = handleResponse(response);
 
