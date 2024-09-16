@@ -1371,5 +1371,8 @@
   "serverAlreadyExists": "Server already exists in settings",
   "wrongThumbnailConfiguration": "The server is reachable but is not configured properly, the video and channel thumbnails will not be displayed properly. Disable the server test configuration if you are OK with this, fix your server otherwise",
   "openWikiLink": "Open wiki for help",
-  "serverUnreachable": "Server is unreachable, or is not a valid invidious server"
+  "serverUnreachable": "Server is unreachable, or is not a valid invidious server",
+  "copyToDownloadFolder": "Copy to download folder",
+  "fileCopiedToDownloadFolder": "File copied to download folder",
+  "videoDeleted": "Video deleted"
 }

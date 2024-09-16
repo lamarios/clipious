@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:gap/gap.dart';
+import 'package:invidious/globals.dart';
 import 'package:invidious/main.dart';
 import 'package:invidious/videos/states/download_modal_sheet.dart';
 
 import '../../../downloads/states/download_manager.dart';
 import '../../models/base_video.dart';
-
-const List<String> qualities = <String>['144p', '360p', '720p'];
 
 class DownloadModalSheet extends StatelessWidget {
   final BaseVideo video;
@@ -66,49 +66,75 @@ class DownloadModalSheet extends StatelessWidget {
     AppLocalizations locals = AppLocalizations.of(context)!;
     return BlocProvider(
       create: (BuildContext context) =>
-          DownloadModalSheetCubit(const DownloadModalSheetState()),
+          DownloadModalSheetCubit(const DownloadModalSheetState(), video),
       child: BlocBuilder<DownloadModalSheetCubit, DownloadModalSheetState>(
           builder: (context, state) {
         var cubit = context.read<DownloadModalSheetCubit>();
-        return Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 8.0),
-                    child: ToggleButtons(
-                      isSelected:
-                          qualities.map((e) => e == state.quality).toList(),
-                      onPressed: state.audioOnly
-                          ? null
-                          : (index) => cubit.setQuality(qualities[index]),
-                      children: qualities.map((e) => Text(e)).toList(),
+        return AnimatedSwitcher(
+          duration: animationDuration,
+          switchInCurve: animationCurve,
+          switchOutCurve: animationCurve,
+          child: state.loading
+              ? const Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.all(16.0),
+                      child: CircularProgressIndicator(),
                     ),
+                  ],
+                )
+              : Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 8.0),
+                            child: Row(
+                              children: [
+                                Text(locals.quality),
+                                const Gap(10),
+                                DropdownButton<String>(
+                                  value: state.availableQualities
+                                      .where((e) => e == state.quality)
+                                      .firstOrNull,
+                                  onChanged: state.audioOnly
+                                      ? null
+                                      : (value) => cubit.setQuality(value),
+                                  items: state.availableQualities
+                                      .map((e) => DropdownMenuItem<String>(
+                                          value: e, child: Text(e)))
+                                      .toList(),
+                                ),
+                              ],
+                            ),
+                          ),
+                          InkWell(
+                            onTap: () => cubit.setAudioOnly(!state.audioOnly),
+                            child: Row(
+                              children: [
+                                Text(locals.videoDownloadAudioOnly),
+                                const Gap(10),
+                                Switch(
+                                  value: state.audioOnly,
+                                  onChanged: cubit.setAudioOnly,
+                                )
+                              ],
+                            ),
+                          ),
+                          IconButton.filledTonal(
+                            onPressed: () => downloadVideo(context, state),
+                            icon: const Icon(Icons.download),
+                          )
+                        ],
+                      ),
+                    ],
                   ),
-                  InkWell(
-                    onTap: () => cubit.setAudioOnly(!state.audioOnly),
-                    child: Row(
-                      children: [
-                        Text(locals.videoDownloadAudioOnly),
-                        Switch(
-                          value: state.audioOnly,
-                          onChanged: cubit.setAudioOnly,
-                        )
-                      ],
-                    ),
-                  ),
-                  IconButton.filledTonal(
-                    onPressed: () => downloadVideo(context, state),
-                    icon: const Icon(Icons.download),
-                  )
-                ],
-              ),
-            ],
-          ),
+                ),
         );
       }),
     );

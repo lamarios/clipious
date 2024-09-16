@@ -5,7 +5,9 @@
 list(APPEND FLUTTER_PLUGIN_LIST
   awesome_notifications
   awesome_notifications_core
+  downloadsfolder
   dynamic_color
+  permission_handler_windows
   share_plus
   url_launcher_windows
 )

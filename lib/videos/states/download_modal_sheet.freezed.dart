@@ -17,6 +17,8 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$DownloadModalSheetState {
   bool get audioOnly => throw _privateConstructorUsedError;
+  bool get loading => throw _privateConstructorUsedError;
+  List<String> get availableQualities => throw _privateConstructorUsedError;
   String get quality => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -30,7 +32,11 @@ abstract class $DownloadModalSheetStateCopyWith<$Res> {
           $Res Function(DownloadModalSheetState) then) =
       _$DownloadModalSheetStateCopyWithImpl<$Res, DownloadModalSheetState>;
   @useResult
-  $Res call({bool audioOnly, String quality});
+  $Res call(
+      {bool audioOnly,
+      bool loading,
+      List<String> availableQualities,
+      String quality});
 }
 
 /// @nodoc
@@ -48,6 +54,8 @@ class _$DownloadModalSheetStateCopyWithImpl<$Res,
   @override
   $Res call({
     Object? audioOnly = null,
+    Object? loading = null,
+    Object? availableQualities = null,
     Object? quality = null,
   }) {
     return _then(_value.copyWith(
@@ -55,6 +63,14 @@ class _$DownloadModalSheetStateCopyWithImpl<$Res,
           ? _value.audioOnly
           : audioOnly // ignore: cast_nullable_to_non_nullable
               as bool,
+      loading: null == loading
+          ? _value.loading
+          : loading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      availableQualities: null == availableQualities
+          ? _value.availableQualities
+          : availableQualities // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       quality: null == quality
           ? _value.quality
           : quality // ignore: cast_nullable_to_non_nullable
@@ -72,7 +88,11 @@ abstract class _$$DownloadModalSheetStateImplCopyWith<$Res>
       __$$DownloadModalSheetStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool audioOnly, String quality});
+  $Res call(
+      {bool audioOnly,
+      bool loading,
+      List<String> availableQualities,
+      String quality});
 }
 
 /// @nodoc
@@ -89,6 +109,8 @@ class __$$DownloadModalSheetStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? audioOnly = null,
+    Object? loading = null,
+    Object? availableQualities = null,
     Object? quality = null,
   }) {
     return _then(_$DownloadModalSheetStateImpl(
@@ -96,6 +118,14 @@ class __$$DownloadModalSheetStateImplCopyWithImpl<$Res>
           ? _value.audioOnly
           : audioOnly // ignore: cast_nullable_to_non_nullable
               as bool,
+      loading: null == loading
+          ? _value.loading
+          : loading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      availableQualities: null == availableQualities
+          ? _value._availableQualities
+          : availableQualities // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       quality: null == quality
           ? _value.quality
           : quality // ignore: cast_nullable_to_non_nullable
@@ -108,18 +138,35 @@ class __$$DownloadModalSheetStateImplCopyWithImpl<$Res>
 
 class _$DownloadModalSheetStateImpl implements _DownloadModalSheetState {
   const _$DownloadModalSheetStateImpl(
-      {this.audioOnly = false, this.quality = '720p'});
+      {this.audioOnly = false,
+      this.loading = false,
+      final List<String> availableQualities = const [],
+      this.quality = '720p'})
+      : _availableQualities = availableQualities;
 
   @override
   @JsonKey()
   final bool audioOnly;
   @override
   @JsonKey()
+  final bool loading;
+  final List<String> _availableQualities;
+  @override
+  @JsonKey()
+  List<String> get availableQualities {
+    if (_availableQualities is EqualUnmodifiableListView)
+      return _availableQualities;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_availableQualities);
+  }
+
+  @override
+  @JsonKey()
   final String quality;
 
   @override
   String toString() {
-    return 'DownloadModalSheetState(audioOnly: $audioOnly, quality: $quality)';
+    return 'DownloadModalSheetState(audioOnly: $audioOnly, loading: $loading, availableQualities: $availableQualities, quality: $quality)';
   }
 
   @override
@@ -129,11 +176,15 @@ class _$DownloadModalSheetStateImpl implements _DownloadModalSheetState {
             other is _$DownloadModalSheetStateImpl &&
             (identical(other.audioOnly, audioOnly) ||
                 other.audioOnly == audioOnly) &&
+            (identical(other.loading, loading) || other.loading == loading) &&
+            const DeepCollectionEquality()
+                .equals(other._availableQualities, _availableQualities) &&
             (identical(other.quality, quality) || other.quality == quality));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, audioOnly, quality);
+  int get hashCode => Object.hash(runtimeType, audioOnly, loading,
+      const DeepCollectionEquality().hash(_availableQualities), quality);
 
   @JsonKey(ignore: true)
   @override
@@ -146,10 +197,16 @@ class _$DownloadModalSheetStateImpl implements _DownloadModalSheetState {
 abstract class _DownloadModalSheetState implements DownloadModalSheetState {
   const factory _DownloadModalSheetState(
       {final bool audioOnly,
+      final bool loading,
+      final List<String> availableQualities,
       final String quality}) = _$DownloadModalSheetStateImpl;
 
   @override
   bool get audioOnly;
+  @override
+  bool get loading;
+  @override
+  List<String> get availableQualities;
   @override
   String get quality;
   @override

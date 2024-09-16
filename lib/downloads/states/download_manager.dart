@@ -3,14 +3,17 @@ import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
+import 'package:downloadsfolder/downloadsfolder.dart';
 import 'package:easy_debounce/easy_throttle.dart';
+import 'package:ffmpeg_kit_flutter_full/ffmpeg_kit.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:invidious/downloads/models/downloaded_video.dart';
 import 'package:invidious/extensions.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/utils/models/image_object.dart';
-import 'package:invidious/videos/models/format_stream.dart';
 import 'package:logging/logging.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:path/path.dart' as p;
 
 import '../../player/states/player.dart';
 import '../../videos/models/adaptive_format.dart';
@@ -71,8 +74,9 @@ class DownloadManagerCubit extends Cubit<DownloadManagerState> {
         .toList());
   }
 
-  onProgress(int count, int total, DownloadedVideo video) async {
-    if (count == total) {
+  onProgress(int count, int total, DownloadedVideo video,
+      {required int step, required int totalSteps}) async {
+    if (count == total && step == totalSteps) {
       var progresses =
           Map<String, DownloadProgress>.from(state.downloadProgresses);
       var downloadProgress = progresses[video.videoId];
@@ -119,18 +123,23 @@ class DownloadManagerCubit extends Cubit<DownloadManagerState> {
           quality: quality);
       await db.upsertDownload(downloadedVideo);
 
-      String contentUrl;
+      String? videoUrl;
 
       if (!audioOnly) {
-        FormatStream stream = vid.formatStreams
-            .firstWhere((element) => element.resolution == quality);
-        contentUrl = stream.url;
-      } else {
-        AdaptiveFormat audio = vid.adaptiveFormats
-            .sortByReversed((e) => int.parse(e.bitrate ?? "0"))
-            .firstWhere((element) => element.type.contains("audio"));
-        contentUrl = audio.url;
+        // FormatStream stream = vid.formatStreams
+        //     .firstWhere((element) => element.resolution == quality);
+
+        final stream = vid.adaptiveFormats.firstWhere((element) =>
+            element.encoding == 'vp9' &&
+            element.qualityLabel == quality &&
+            element.type.contains('video/webm'));
+
+        videoUrl = stream.url;
       }
+      AdaptiveFormat audio = vid.adaptiveFormats
+          .sortByReversed((e) => int.parse(e.bitrate ?? "0"))
+          .firstWhere((element) => element.type.contains("audio"));
+      String audioUrl = audio.url;
 
       Dio dio = Dio();
       CancelToken cancelToken = CancelToken();
@@ -152,22 +161,74 @@ class DownloadManagerCubit extends Cubit<DownloadManagerState> {
       }
 
       // download video
-      var videoPath = await downloadedVideo.mediaPath;
+      var mediaPath = await downloadedVideo.downloadPath;
+
+      final tempDir = await getTemporaryDirectory();
+      final audioPath = '${tempDir.path}/${videoId}_audio.webm';
+      final videoPath = '${tempDir.path}/${videoId}_video.webm';
 
       log.info(
-          "Downloading video ${vid.title}, audioOnly ? $audioOnly, quality: $quality (if not only audio) to path: $videoPath");
-      dio
-          .download(contentUrl, videoPath,
-              onReceiveProgress: (count, total) =>
-                  onProgress(count, total, downloadedVideo),
-              cancelToken: cancelToken,
-              deleteOnError: true)
-          .catchError((err) {
-        onDownloadError(err, downloadedVideo);
-        return Response<void>(requestOptions: RequestOptions());
-      });
+          "Downloading video ${vid.title}, audioOnly ? $audioOnly, quality: $quality  to path: $tempDir");
+      try {
+        await dio
+            .download(audioUrl, audioPath,
+                onReceiveProgress: (count, total) => onProgress(
+                    count, total, downloadedVideo,
+                    step: 1, totalSteps: audioOnly ? 2 : 3),
+                cancelToken: cancelToken,
+                deleteOnError: true)
+            .catchError((err) {
+          onDownloadError(err, downloadedVideo);
+          return Response<void>(requestOptions: RequestOptions());
+        });
 
-      return true;
+        if (videoUrl != null) {
+          await dio
+              .download(videoUrl, videoPath,
+                  onReceiveProgress: (count, total) => onProgress(
+                        count,
+                        total,
+                        downloadedVideo,
+                        step: 2,
+                        totalSteps: 3,
+                      ),
+                  cancelToken: cancelToken,
+                  deleteOnError: true)
+              .catchError((err) {
+            onDownloadError(err, downloadedVideo);
+            return Response<void>(requestOptions: RequestOptions());
+          });
+        }
+
+        if (audioOnly) {
+          final audio = File(audioPath);
+          await audio.copy(mediaPath);
+          onProgress(1, 1, downloadedVideo, step: 2, totalSteps: 2);
+          return true;
+        } else {
+          final session = await FFmpegKit.execute(
+              '-y -i $videoPath -i $audioPath -c:v copy -c:a copy $mediaPath');
+
+          final returnCode = await session.getReturnCode();
+
+          onProgress(1, 1, downloadedVideo, step: 3, totalSteps: 3);
+
+          return returnCode?.isValueSuccess() ?? false;
+        }
+      } catch (e) {
+        rethrow;
+      } finally {
+        final audio = File(audioPath);
+        final video = File(videoPath);
+
+        if (await audio.exists()) {
+          await audio.delete();
+        }
+
+        if (await video.exists()) {
+          await video.delete();
+        }
+      }
     }
   }
 
@@ -182,7 +243,7 @@ class DownloadManagerCubit extends Cubit<DownloadManagerState> {
     progresses.remove(vid.videoId);
 
     try {
-      String path = await vid.mediaPath;
+      String path = await vid.effectivePath;
       await File(path).delete();
     } catch (e) {
       log.fine('File might not be available, that\'s ok');
@@ -210,7 +271,7 @@ class DownloadManagerCubit extends Cubit<DownloadManagerState> {
         "Failed to download video ${vid.title}, removing it", err.stackTrace);
     vid.downloadFailed = true;
     vid.downloadComplete = false;
-    onProgress(1, 1, vid);
+    onProgress(1, 1, vid, step: 1, totalSteps: 1);
     var progresses =
         Map<String, DownloadProgress>.from(state.downloadProgresses);
     progresses.remove(vid.videoId);
@@ -245,6 +306,24 @@ class DownloadManagerCubit extends Cubit<DownloadManagerState> {
 
   bool canPlayAll() =>
       state.videos.where((element) => element.downloadComplete).isNotEmpty;
+
+  Future<void> copyToDownloadFolder(DownloadedVideo v) async {
+    final downloads = await getDownloadsDirectory();
+    if (downloads != null) {
+      if (!await downloads.exists()) {
+        downloads.create(recursive: true);
+      }
+      final file = File(await v.effectivePath);
+      if (await file.exists()) {
+        final fileName =
+            '${v.title.replaceAll(RegExp(r'[^a-zA-Z0-9]'), '_').replaceAll(RegExp(r'_{2,}'), '')}_${v.videoId}${p.extension(file.path)}';
+
+        bool? success = await copyFileIntoDownloadFolder(file.path, fileName);
+        log.info(
+            "file ${file.path} copied to download folder as $fileName (success ?$success)");
+      }
+    }
+  }
 }
 
 @freezed

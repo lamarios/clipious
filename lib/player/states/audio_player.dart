@@ -139,7 +139,7 @@ class AudioPlayerCubit extends MediaPlayerCubit<AudioPlayerState> {
             }
           }
         } else {
-          String path = await state.offlineVideo!.mediaPath;
+          String path = await state.offlineVideo!.effectivePath;
           source = AudioSource.file(path);
         }
 

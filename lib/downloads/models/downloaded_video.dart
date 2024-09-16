@@ -26,10 +26,29 @@ class DownloadedVideo extends IdedVideo {
   @override
   String get videoId => super.videoId;
 
+  /// Should be used
   @JsonKey(includeFromJson: false, includeToJson: false)
-  Future<String> get mediaPath async {
+  Future<String> get downloadPath async {
     Directory dir = await _getDownloadFolder();
-    return "${dir.path}/$videoId.${audioOnly ? 'webm' : 'mp4'}";
+
+    return "${dir.path}/$videoId.${audioOnly ? 'webm' : 'webm'}";
+  }
+
+  /// Effective path for legacy reasons, old  versions videos would be mp4, now it's all webm
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  Future<String> get effectivePath async {
+    Directory dir = await _getDownloadFolder();
+
+    if (audioOnly) {
+      return "${dir.path}/$videoId.webm";
+    } else {
+      final path = "${dir.path}/$videoId.webm";
+      if (!await File(path).exists()) {
+        return "${dir.path}/$videoId.mp4";
+      }
+
+      return path;
+    }
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
