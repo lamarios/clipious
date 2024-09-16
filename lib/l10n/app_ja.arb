@@ -1352,5 +1352,31 @@
   "onDeviceSubscriptions": "端末上",
   "@onDeviceSubscriptions": {
     "description": "Text when the user chooses where to subscribe to a channel"
-  }
+  },
+  "addHeader": "ヘッダーを追加",
+  "@addHeader": {},
+  "advancedConfiguration": "詳細設定",
+  "@advancedConfiguration": {},
+  "customHeaders": "ヘッダーの指定",
+  "@customHeaders": {},
+  "customHeadersExplanation": "invidious サーバーに送信するヘッダーを指定",
+  "@customHeadersExplanation": {},
+  "value": "値",
+  "@value": {},
+  "testAndAddServer": "テストとサーバの追加",
+  "@testAndAddServer": {},
+  "serverAlreadyExists": "このサーバーは設定に既にあります",
+  "@serverAlreadyExists": {},
+  "serverUnreachable": "サーバーに到達できない、もしくは無効な Invidious サーバーです",
+  "@serverUnreachable": {},
+  "openWikiLink": "ヘルプ用Wikiを開く",
+  "@openWikiLink": {},
+  "addBasicAuth": "ベーシック認証を追加",
+  "@addBasicAuth": {},
+  "addBasicAuthExplanation": "サーバーにベーシック認証が必要なら、以下に設定を追加します。これらはInvidiousアカウントのものではありません",
+  "@addBasicAuthExplanation": {},
+  "alsoTestServerConfig": "サムネイルが適切に表示されるかなど、サーバーの設定をテスト",
+  "@alsoTestServerConfig": {},
+  "wrongThumbnailConfiguration": "サーバーには到達していますが、設定が正しくないため、動画とチャンネルのサムネイルが正しく表示されません。問題がなければサーバーテストを無効にし、そうでなければサーバーを修正してください",
+  "@wrongThumbnailConfiguration": {}
 }
