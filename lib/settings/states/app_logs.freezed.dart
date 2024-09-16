@@ -19,7 +19,9 @@ mixin _$AppLogsState {
   List<AppLog> get logs => throw _privateConstructorUsedError;
   List<String> get selected => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AppLogsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $AppLogsStateCopyWith<AppLogsState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -43,6 +45,8 @@ class _$AppLogsStateCopyWithImpl<$Res, $Val extends AppLogsState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of AppLogsState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -81,6 +85,8 @@ class __$$AppLogsStateImplCopyWithImpl<$Res>
       _$AppLogsStateImpl _value, $Res Function(_$AppLogsStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AppLogsState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -147,7 +153,9 @@ class _$AppLogsStateImpl implements _AppLogsState {
       const DeepCollectionEquality().hash(_logs),
       const DeepCollectionEquality().hash(_selected));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AppLogsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$AppLogsStateImplCopyWith<_$AppLogsStateImpl> get copyWith =>
@@ -163,8 +171,11 @@ abstract class _AppLogsState implements AppLogsState {
   List<AppLog> get logs;
   @override
   List<String> get selected;
+
+  /// Create a copy of AppLogsState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AppLogsStateImplCopyWith<_$AppLogsStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

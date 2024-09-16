@@ -22,7 +22,9 @@ mixin _$VideoFilterEditState {
   List<Channel> get channelResults => throw _privateConstructorUsedError;
   dynamic get showDateSettings => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of VideoFilterEditState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $VideoFilterEditStateCopyWith<VideoFilterEditState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -52,6 +54,8 @@ class _$VideoFilterEditStateCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of VideoFilterEditState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -110,6 +114,8 @@ class __$$VideoFilterEditStateImplCopyWithImpl<$Res>
       $Res Function(_$VideoFilterEditStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of VideoFilterEditState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -203,7 +209,9 @@ class _$VideoFilterEditStateImpl implements _VideoFilterEditState {
       const DeepCollectionEquality().hash(_channelResults),
       const DeepCollectionEquality().hash(showDateSettings));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of VideoFilterEditState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$VideoFilterEditStateImplCopyWith<_$VideoFilterEditStateImpl>
@@ -230,8 +238,11 @@ abstract class _VideoFilterEditState implements VideoFilterEditState {
   List<Channel> get channelResults;
   @override
   dynamic get showDateSettings;
+
+  /// Create a copy of VideoFilterEditState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$VideoFilterEditStateImplCopyWith<_$VideoFilterEditStateImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

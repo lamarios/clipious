@@ -20,7 +20,9 @@ mixin _$DownloadedVideoState {
   String? get thumbnailPath => throw _privateConstructorUsedError;
   double get progress => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DownloadedVideoState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $DownloadedVideoStateCopyWith<DownloadedVideoState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -45,6 +47,8 @@ class _$DownloadedVideoStateCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of DownloadedVideoState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -88,6 +92,8 @@ class __$$DownloadedVideoStateImplCopyWithImpl<$Res>
       $Res Function(_$DownloadedVideoStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of DownloadedVideoState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -146,7 +152,9 @@ class _$DownloadedVideoStateImpl implements _DownloadedVideoState {
   @override
   int get hashCode => Object.hash(runtimeType, video, thumbnailPath, progress);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DownloadedVideoState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$DownloadedVideoStateImplCopyWith<_$DownloadedVideoStateImpl>
@@ -167,8 +175,11 @@ abstract class _DownloadedVideoState implements DownloadedVideoState {
   String? get thumbnailPath;
   @override
   double get progress;
+
+  /// Create a copy of DownloadedVideoState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$DownloadedVideoStateImplCopyWith<_$DownloadedVideoStateImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

@@ -28,7 +28,9 @@ mixin _$VideoPlayerState {
   bool? get playNow => throw _privateConstructorUsedError;
   bool? get disableControls => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of VideoPlayerState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $VideoPlayerStateCopyWith<VideoPlayerState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -62,6 +64,8 @@ class _$VideoPlayerStateCopyWithImpl<$Res, $Val extends VideoPlayerState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of VideoPlayerState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -150,6 +154,8 @@ class __$$VideoPlayerStateImplCopyWithImpl<$Res>
       $Res Function(_$VideoPlayerStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of VideoPlayerState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -289,7 +295,9 @@ class _$VideoPlayerStateImpl extends _VideoPlayerState {
       playNow,
       disableControls);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of VideoPlayerState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$VideoPlayerStateImplCopyWith<_$VideoPlayerStateImpl> get copyWith =>
@@ -331,8 +339,11 @@ abstract class _VideoPlayerState extends VideoPlayerState {
   bool? get playNow;
   @override
   bool? get disableControls;
+
+  /// Create a copy of VideoPlayerState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$VideoPlayerStateImplCopyWith<_$VideoPlayerStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

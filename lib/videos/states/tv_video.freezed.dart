@@ -18,7 +18,9 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$TvVideoState {
   bool get showImage => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TvVideoState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $TvVideoStateCopyWith<TvVideoState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -42,6 +44,8 @@ class _$TvVideoStateCopyWithImpl<$Res, $Val extends TvVideoState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of TvVideoState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -75,6 +79,8 @@ class __$$TvVideoStateImplCopyWithImpl<$Res>
       _$TvVideoStateImpl _value, $Res Function(_$TvVideoStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TvVideoState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -115,7 +121,9 @@ class _$TvVideoStateImpl implements _TvVideoState {
   @override
   int get hashCode => Object.hash(runtimeType, showImage);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TvVideoState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$TvVideoStateImplCopyWith<_$TvVideoStateImpl> get copyWith =>
@@ -127,8 +135,11 @@ abstract class _TvVideoState implements TvVideoState {
 
   @override
   bool get showImage;
+
+  /// Create a copy of TvVideoState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$TvVideoStateImplCopyWith<_$TvVideoStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

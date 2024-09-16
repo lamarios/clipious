@@ -19,7 +19,9 @@ mixin _$SelectListState<T> {
   List<T> get filteredItems => throw _privateConstructorUsedError;
   bool get loading => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SelectListState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $SelectListStateCopyWith<T, SelectListState<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -43,6 +45,8 @@ class _$SelectListStateCopyWithImpl<T, $Res, $Val extends SelectListState<T>>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of SelectListState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -81,6 +85,8 @@ class __$$SelectListStateImplCopyWithImpl<T, $Res>
       $Res Function(_$SelectListStateImpl<T>) _then)
       : super(_value, _then);
 
+  /// Create a copy of SelectListState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -139,7 +145,9 @@ class _$SelectListStateImpl<T> implements _SelectListState<T> {
   int get hashCode => Object.hash(runtimeType,
       const DeepCollectionEquality().hash(_filteredItems), loading);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SelectListState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SelectListStateImplCopyWith<T, _$SelectListStateImpl<T>> get copyWith =>
@@ -156,8 +164,11 @@ abstract class _SelectListState<T> implements SelectListState<T> {
   List<T> get filteredItems;
   @override
   bool get loading;
+
+  /// Create a copy of SelectListState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SelectListStateImplCopyWith<T, _$SelectListStateImpl<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }

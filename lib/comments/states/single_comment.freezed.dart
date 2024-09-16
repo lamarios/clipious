@@ -20,7 +20,9 @@ mixin _$SingleCommentState {
   bool get showingChildren => throw _privateConstructorUsedError;
   VideoComments? get children => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SingleCommentState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $SingleCommentStateCopyWith<SingleCommentState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -44,6 +46,8 @@ class _$SingleCommentStateCopyWithImpl<$Res, $Val extends SingleCommentState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of SingleCommentState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -87,6 +91,8 @@ class __$$SingleCommentStateImplCopyWithImpl<$Res>
       $Res Function(_$SingleCommentStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of SingleCommentState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -146,7 +152,9 @@ class _$SingleCommentStateImpl implements _SingleCommentState {
   int get hashCode =>
       Object.hash(runtimeType, comment, showingChildren, children);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SingleCommentState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SingleCommentStateImplCopyWith<_$SingleCommentStateImpl> get copyWith =>
@@ -166,8 +174,11 @@ abstract class _SingleCommentState implements SingleCommentState {
   bool get showingChildren;
   @override
   VideoComments? get children;
+
+  /// Create a copy of SingleCommentState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SingleCommentStateImplCopyWith<_$SingleCommentStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

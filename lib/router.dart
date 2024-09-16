@@ -112,7 +112,7 @@ const shortsPath = 'shorts';
 const streamsPath = 'streams';
 
 @AutoRouterConfig(replaceInRouteName: 'Screen|Tab,Route')
-class AppRouter extends _$AppRouter implements AutoRouteGuard {
+class AppRouter extends RootStackRouter implements AutoRouteGuard {
   final bool hasServer;
 
   AppRouter({required this.hasServer});

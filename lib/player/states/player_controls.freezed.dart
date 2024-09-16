@@ -31,7 +31,9 @@ mixin _$PlayerControlsState {
   bool get justDoubleTappedSkip => throw _privateConstructorUsedError;
   bool get showSponsorBlocked => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PlayerControlsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $PlayerControlsStateCopyWith<PlayerControlsState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -68,6 +70,8 @@ class _$PlayerControlsStateCopyWithImpl<$Res, $Val extends PlayerControlsState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of PlayerControlsState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -174,6 +178,8 @@ class __$$PlayercontrolsStateImplCopyWithImpl<$Res>
       $Res Function(_$PlayercontrolsStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PlayerControlsState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -361,7 +367,9 @@ class _$PlayercontrolsStateImpl implements _PlayercontrolsState {
       justDoubleTappedSkip,
       showSponsorBlocked);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PlayerControlsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PlayercontrolsStateImplCopyWith<_$PlayercontrolsStateImpl> get copyWith =>
@@ -411,8 +419,11 @@ abstract class _PlayercontrolsState implements PlayerControlsState {
   bool get justDoubleTappedSkip;
   @override
   bool get showSponsorBlocked;
+
+  /// Create a copy of PlayerControlsState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PlayercontrolsStateImplCopyWith<_$PlayercontrolsStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

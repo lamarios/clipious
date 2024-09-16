@@ -22,7 +22,9 @@ mixin _$AddServerState {
   bool get advancedTest => throw _privateConstructorUsedError;
   Map<String, String> get headers => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AddServerState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $AddServerStateCopyWith<AddServerState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -51,6 +53,8 @@ class _$AddServerStateCopyWithImpl<$Res, $Val extends AddServerState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of AddServerState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -109,6 +113,8 @@ class __$$AddServerStateImplCopyWithImpl<$Res>
       _$AddServerStateImpl _value, $Res Function(_$AddServerStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AddServerState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -198,7 +204,9 @@ class _$AddServerStateImpl implements _AddServerState {
   int get hashCode => Object.hash(runtimeType, loading, valid, showAdvanced,
       advancedTest, const DeepCollectionEquality().hash(_headers));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AddServerState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$AddServerStateImplCopyWith<_$AddServerStateImpl> get copyWith =>
@@ -224,8 +232,11 @@ abstract class _AddServerState implements AddServerState {
   bool get advancedTest;
   @override
   Map<String, String> get headers;
+
+  /// Create a copy of AddServerState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AddServerStateImplCopyWith<_$AddServerStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

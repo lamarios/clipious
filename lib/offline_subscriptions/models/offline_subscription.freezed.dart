@@ -23,8 +23,12 @@ mixin _$OfflineSubscription {
   String get channelId => throw _privateConstructorUsedError;
   String get channelName => throw _privateConstructorUsedError;
 
+  /// Serializes this OfflineSubscription to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of OfflineSubscription
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $OfflineSubscriptionCopyWith<OfflineSubscription> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -48,6 +52,8 @@ class _$OfflineSubscriptionCopyWithImpl<$Res, $Val extends OfflineSubscription>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of OfflineSubscription
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -86,6 +92,8 @@ class __$$OfflineSubscriptionImplCopyWithImpl<$Res>
       $Res Function(_$OfflineSubscriptionImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of OfflineSubscription
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -135,11 +143,13 @@ class _$OfflineSubscriptionImpl implements _OfflineSubscription {
                 other.channelName == channelName));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, channelId, channelName);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of OfflineSubscription
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$OfflineSubscriptionImplCopyWith<_$OfflineSubscriptionImpl> get copyWith =>
@@ -166,8 +176,11 @@ abstract class _OfflineSubscription implements OfflineSubscription {
   String get channelId;
   @override
   String get channelName;
+
+  /// Create a copy of OfflineSubscription
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$OfflineSubscriptionImplCopyWith<_$OfflineSubscriptionImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

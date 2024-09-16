@@ -19,7 +19,9 @@ mixin _$ServerSettingsState {
   Server get server => throw _privateConstructorUsedError;
   bool get canDelete => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ServerSettingsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ServerSettingsStateCopyWith<ServerSettingsState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -45,6 +47,8 @@ class _$ServerSettingsStateCopyWithImpl<$Res, $Val extends ServerSettingsState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of ServerSettingsState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -63,6 +67,8 @@ class _$ServerSettingsStateCopyWithImpl<$Res, $Val extends ServerSettingsState>
     ) as $Val);
   }
 
+  /// Create a copy of ServerSettingsState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $ServerCopyWith<$Res> get server {
@@ -94,6 +100,8 @@ class __$$ServerSettingsStateImplCopyWithImpl<$Res>
       $Res Function(_$ServerSettingsStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ServerSettingsState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -144,7 +152,9 @@ class _$ServerSettingsStateImpl extends _ServerSettingsState {
   @override
   int get hashCode => Object.hash(runtimeType, server, canDelete);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ServerSettingsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ServerSettingsStateImplCopyWith<_$ServerSettingsStateImpl> get copyWith =>
@@ -162,8 +172,11 @@ abstract class _ServerSettingsState extends ServerSettingsState {
   Server get server;
   @override
   bool get canDelete;
+
+  /// Create a copy of ServerSettingsState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ServerSettingsStateImplCopyWith<_$ServerSettingsStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

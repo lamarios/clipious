@@ -22,7 +22,9 @@ mixin _$PlaylistListState {
   bool get loading => throw _privateConstructorUsedError;
   String get error => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PlaylistListState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $PlaylistListStateCopyWith<PlaylistListState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -50,6 +52,8 @@ class _$PlaylistListStateCopyWithImpl<$Res, $Val extends PlaylistListState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of PlaylistListState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -102,6 +106,8 @@ class __$$PlaylistListStateImplCopyWithImpl<$Res>
       $Res Function(_$PlaylistListStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PlaylistListState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -181,7 +187,9 @@ class _$PlaylistListStateImpl implements _PlaylistListState {
   int get hashCode => Object.hash(runtimeType, paginatedList,
       const DeepCollectionEquality().hash(_playlists), loading, error);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PlaylistListState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PlaylistListStateImplCopyWith<_$PlaylistListStateImpl> get copyWith =>
@@ -204,8 +212,11 @@ abstract class _PlaylistListState implements PlaylistListState {
   bool get loading;
   @override
   String get error;
+
+  /// Create a copy of PlaylistListState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PlaylistListStateImplCopyWith<_$PlaylistListStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

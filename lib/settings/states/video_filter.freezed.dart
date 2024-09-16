@@ -19,7 +19,9 @@ mixin _$VideoFilterState {
   List<VideoFilter> get filters => throw _privateConstructorUsedError;
   bool get hideFilteredVideos => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of VideoFilterState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $VideoFilterStateCopyWith<VideoFilterState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -43,6 +45,8 @@ class _$VideoFilterStateCopyWithImpl<$Res, $Val extends VideoFilterState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of VideoFilterState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -81,6 +85,8 @@ class __$$VideoFilterStateImplCopyWithImpl<$Res>
       $Res Function(_$VideoFilterStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of VideoFilterState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -140,7 +146,9 @@ class _$VideoFilterStateImpl implements _VideoFilterState {
   int get hashCode => Object.hash(runtimeType,
       const DeepCollectionEquality().hash(_filters), hideFilteredVideos);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of VideoFilterState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$VideoFilterStateImplCopyWith<_$VideoFilterStateImpl> get copyWith =>
@@ -157,8 +165,11 @@ abstract class _VideoFilterState implements VideoFilterState {
   List<VideoFilter> get filters;
   @override
   bool get hideFilteredVideos;
+
+  /// Create a copy of VideoFilterState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$VideoFilterStateImplCopyWith<_$VideoFilterStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -18,7 +18,9 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$TvPlayerSettingsState {
   Tabs get selected => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TvPlayerSettingsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $TvPlayerSettingsStateCopyWith<TvPlayerSettingsState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -43,6 +45,8 @@ class _$TvPlayerSettingsStateCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of TvPlayerSettingsState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -78,6 +82,8 @@ class __$$TvPlayerSettingsStateImplCopyWithImpl<$Res>
       $Res Function(_$TvPlayerSettingsStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TvPlayerSettingsState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -118,7 +124,9 @@ class _$TvPlayerSettingsStateImpl implements _TvPlayerSettingsState {
   @override
   int get hashCode => Object.hash(runtimeType, selected);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TvPlayerSettingsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$TvPlayerSettingsStateImplCopyWith<_$TvPlayerSettingsStateImpl>
@@ -132,8 +140,11 @@ abstract class _TvPlayerSettingsState implements TvPlayerSettingsState {
 
   @override
   Tabs get selected;
+
+  /// Create a copy of TvPlayerSettingsState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$TvPlayerSettingsStateImplCopyWith<_$TvPlayerSettingsStateImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

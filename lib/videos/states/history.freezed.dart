@@ -20,7 +20,9 @@ mixin _$HistoryItemState {
   bool get loading => throw _privateConstructorUsedError;
   HistoryVideoCache? get cachedVid => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of HistoryItemState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $HistoryItemStateCopyWith<HistoryItemState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -44,6 +46,8 @@ class _$HistoryItemStateCopyWithImpl<$Res, $Val extends HistoryItemState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of HistoryItemState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -87,6 +91,8 @@ class __$$HistoryItemStateImplCopyWithImpl<$Res>
       $Res Function(_$HistoryItemStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of HistoryItemState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -144,7 +150,9 @@ class _$HistoryItemStateImpl implements _HistoryItemState {
   @override
   int get hashCode => Object.hash(runtimeType, videoId, loading, cachedVid);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of HistoryItemState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$HistoryItemStateImplCopyWith<_$HistoryItemStateImpl> get copyWith =>
@@ -164,8 +172,11 @@ abstract class _HistoryItemState implements HistoryItemState {
   bool get loading;
   @override
   HistoryVideoCache? get cachedVid;
+
+  /// Create a copy of HistoryItemState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$HistoryItemStateImplCopyWith<_$HistoryItemStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

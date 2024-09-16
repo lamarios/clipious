@@ -22,7 +22,9 @@ mixin _$DownloadModalSheetState {
       throw _privateConstructorUsedError;
   String get quality => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DownloadModalSheetState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $DownloadModalSheetStateCopyWith<DownloadModalSheetState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -51,6 +53,8 @@ class _$DownloadModalSheetStateCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of DownloadModalSheetState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -106,6 +110,8 @@ class __$$DownloadModalSheetStateImplCopyWithImpl<$Res>
       $Res Function(_$DownloadModalSheetStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of DownloadModalSheetState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -187,7 +193,9 @@ class _$DownloadModalSheetStateImpl implements _DownloadModalSheetState {
   int get hashCode => Object.hash(runtimeType, audioOnly, loading,
       const DeepCollectionEquality().hash(_availableQualities), quality);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DownloadModalSheetState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$DownloadModalSheetStateImplCopyWith<_$DownloadModalSheetStateImpl>
@@ -210,8 +218,11 @@ abstract class _DownloadModalSheetState implements DownloadModalSheetState {
   List<AdaptiveFormat> get availableQualities;
   @override
   String get quality;
+
+  /// Create a copy of DownloadModalSheetState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$DownloadModalSheetStateImplCopyWith<_$DownloadModalSheetStateImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

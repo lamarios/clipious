@@ -21,7 +21,9 @@ mixin _$ItemListState<T> {
   bool get loading => throw _privateConstructorUsedError;
   ItemListErrors get error => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ItemListState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ItemListStateCopyWith<T, ItemListState<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -49,6 +51,8 @@ class _$ItemListStateCopyWithImpl<T, $Res, $Val extends ItemListState<T>>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of ItemListState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -101,6 +105,8 @@ class __$$ItemListStateImplCopyWithImpl<T, $Res>
       $Res Function(_$ItemListStateImpl<T>) _then)
       : super(_value, _then);
 
+  /// Create a copy of ItemListState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -179,7 +185,9 @@ class _$ItemListStateImpl<T> implements _ItemListState<T> {
   int get hashCode => Object.hash(runtimeType, itemList,
       const DeepCollectionEquality().hash(_items), loading, error);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ItemListState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ItemListStateImplCopyWith<T, _$ItemListStateImpl<T>> get copyWith =>
@@ -202,8 +210,11 @@ abstract class _ItemListState<T> implements ItemListState<T> {
   bool get loading;
   @override
   ItemListErrors get error;
+
+  /// Create a copy of ItemListState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ItemListStateImplCopyWith<T, _$ItemListStateImpl<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }

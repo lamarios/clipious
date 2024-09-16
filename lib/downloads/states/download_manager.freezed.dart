@@ -20,7 +20,9 @@ mixin _$DownloadManagerState {
   Map<String, DownloadProgress> get downloadProgresses =>
       throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DownloadManagerState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $DownloadManagerStateCopyWith<DownloadManagerState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -47,6 +49,8 @@ class _$DownloadManagerStateCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of DownloadManagerState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -87,6 +91,8 @@ class __$$DownloadManagerStateImplCopyWithImpl<$Res>
       $Res Function(_$DownloadManagerStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of DownloadManagerState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -156,7 +162,9 @@ class _$DownloadManagerStateImpl extends _DownloadManagerState {
       const DeepCollectionEquality().hash(_videos),
       const DeepCollectionEquality().hash(_downloadProgresses));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DownloadManagerState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$DownloadManagerStateImplCopyWith<_$DownloadManagerStateImpl>
@@ -176,8 +184,11 @@ abstract class _DownloadManagerState extends DownloadManagerState {
   List<DownloadedVideo> get videos;
   @override
   Map<String, DownloadProgress> get downloadProgresses;
+
+  /// Create a copy of DownloadManagerState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$DownloadManagerStateImplCopyWith<_$DownloadManagerStateImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

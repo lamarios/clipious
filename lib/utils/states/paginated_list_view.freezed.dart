@@ -20,7 +20,9 @@ mixin _$PaginatedListViewController<T> {
   List<T> get items => throw _privateConstructorUsedError;
   bool get loading => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PaginatedListViewController
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $PaginatedListViewControllerCopyWith<T, PaginatedListViewController<T>>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -47,6 +49,8 @@ class _$PaginatedListViewControllerCopyWithImpl<T, $Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of PaginatedListViewController
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -93,6 +97,8 @@ class __$$PaginatedListViewControllerImplCopyWithImpl<T, $Res>
       $Res Function(_$PaginatedListViewControllerImpl<T>) _then)
       : super(_value, _then);
 
+  /// Create a copy of PaginatedListViewController
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -162,7 +168,9 @@ class _$PaginatedListViewControllerImpl<T>
   int get hashCode => Object.hash(runtimeType, paginatedList,
       const DeepCollectionEquality().hash(_items), loading);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PaginatedListViewController
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PaginatedListViewControllerImplCopyWith<T,
@@ -184,8 +192,11 @@ abstract class _PaginatedListViewController<T>
   List<T> get items;
   @override
   bool get loading;
+
+  /// Create a copy of PaginatedListViewController
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PaginatedListViewControllerImplCopyWith<T,
           _$PaginatedListViewControllerImpl<T>>
       get copyWith => throw _privateConstructorUsedError;
