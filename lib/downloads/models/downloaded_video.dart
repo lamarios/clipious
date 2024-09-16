@@ -26,7 +26,6 @@ class DownloadedVideo extends IdedVideo {
   @override
   String get videoId => super.videoId;
 
-  /// Should be used
   @JsonKey(includeFromJson: false, includeToJson: false)
   Future<String> get downloadPath async {
     Directory dir = await _getDownloadFolder();
