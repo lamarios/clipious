@@ -1,17 +1,45 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:invidious/extensions.dart';
+import 'package:invidious/globals.dart';
+import 'package:invidious/videos/models/adaptive_format.dart';
+
+import '../models/base_video.dart';
 
 part 'download_modal_sheet.freezed.dart';
 
 class DownloadModalSheetCubit extends Cubit<DownloadModalSheetState> {
-  DownloadModalSheetCubit(super.initialState);
+  final BaseVideo video;
+
+  DownloadModalSheetCubit(super.initialState, this.video) {
+    init();
+  }
+
+  init() async {
+    emit(state.copyWith(loading: true));
+    final vid = await service.getVideo(video.videoId);
+
+    final qualities = vid.adaptiveFormats
+        .where((f) => f.encoding == 'vp9' && f.type.contains("video/webm"))
+        .sortBy((f) => int.parse(f.resolution?.replaceAll('p', '') ?? '0'))
+        .where(
+            (f) => f.qualityLabel != null && f.qualityLabel!.trim().isNotEmpty)
+        .toList();
+
+    emit(state.copyWith(
+        availableQualities: qualities,
+        loading: false,
+        quality: qualities.last.qualityLabel!));
+  }
 
   setAudioOnly(bool value) {
     emit(state.copyWith(audioOnly: value));
   }
 
-  setQuality(String quality) {
-    emit(state.copyWith(quality: quality));
+  setQuality(String? quality) {
+    if (quality != null) {
+      emit(state.copyWith(quality: quality));
+    }
   }
 }
 
@@ -19,5 +47,7 @@ class DownloadModalSheetCubit extends Cubit<DownloadModalSheetState> {
 class DownloadModalSheetState with _$DownloadModalSheetState {
   const factory DownloadModalSheetState(
       {@Default(false) bool audioOnly,
+      @Default(false) bool loading,
+      @Default([]) List<AdaptiveFormat> availableQualities,
       @Default('720p') String quality}) = _DownloadModalSheetState;
 }

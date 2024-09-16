@@ -2,7 +2,6 @@ import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_swipe_action_cell/core/cell.dart';
 import 'package:invidious/downloads/views/components/downloaded_video.dart';
 import 'package:invidious/globals.dart';
 
@@ -48,24 +47,10 @@ class DownloadManagerScreen extends StatelessWidget {
                             itemCount: state.videos.length,
                             itemBuilder: (context, index) {
                               var v = state.videos[index];
-                              return SwipeActionCell(
-                                  key:
-                                      ValueKey('downloaded-video-${v.videoId}'),
-                                  trailingActions: [
-                                    SwipeAction(
-                                      performsFirstActionWithFullSwipe: true,
-                                      icon: const Icon(Icons.delete,
-                                          color: Colors.white),
-                                      onTap: (handler) async {
-                                        await handler(true);
-                                        cubit.deleteVideo(v);
-                                      },
-                                    )
-                                  ],
-                                  child: DownloadedVideoView(
-                                    key: ValueKey(v.videoId),
-                                    video: v,
-                                  ));
+                              return DownloadedVideoView(
+                                key: ValueKey(v.videoId),
+                                video: v,
+                              );
                             },
                           ),
                         ),

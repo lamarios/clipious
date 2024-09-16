@@ -14,6 +14,61 @@ class DownloadedVideoView extends StatelessWidget {
 
   const DownloadedVideoView({super.key, required this.video});
 
+  openVideoSheet(BuildContext context, DownloadedVideo v) {
+    var cubit = context.read<DownloadManagerCubit>();
+    final locals = AppLocalizations.of(context)!;
+    showModalBottomSheet(
+      enableDrag: true,
+      showDragHandle: true,
+      context: context,
+      builder: (ctx) {
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 32.0),
+          child: Wrap(
+            alignment: WrapAlignment.center,
+            runSpacing: 16,
+            spacing: 16,
+            children: [
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  IconButton.filledTonal(
+                      onPressed: () async {
+                        Navigator.of(ctx).pop();
+                        await cubit.copyToDownloadFolder(v);
+                        if (context.mounted) {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content:
+                                  Text(locals.fileCopiedToDownloadFolder)));
+                        }
+                      },
+                      icon: const Icon(Icons.copy)),
+                  Text(locals.copyToDownloadFolder)
+                ],
+              ),
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  IconButton.filledTonal(
+                      onPressed: () async {
+                        Navigator.of(ctx).pop();
+                        await cubit.deleteVideo(v);
+                        if (context.mounted) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text(locals.videoDeleted)));
+                        }
+                      },
+                      icon: const Icon(Icons.delete)),
+                  Text(locals.delete)
+                ],
+              )
+            ],
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     var colors = Theme.of(context).colorScheme;
@@ -69,7 +124,16 @@ class DownloadedVideoView extends StatelessWidget {
                                         );
                                       }),
                                 ),
-                              )
+                              ),
+                        if (state.video?.downloadComplete ?? false)
+                          IconButton(
+                            onPressed: () => openVideoSheet(context, video),
+                            icon: Icon(
+                              Icons.more_vert,
+                              color: colors.secondary,
+                            ),
+                            visualDensity: VisualDensity.compact,
+                          )
                       ],
                     ),
                   ),

@@ -246,7 +246,7 @@ class VideoPlayerCubit extends MediaPlayerCubit<VideoPlayerState> {
 
       // getting data sources
       if (offline) {
-        String videoPath = await newState.offlineVideo!.mediaPath;
+        String videoPath = await newState.offlineVideo!.effectivePath;
 
         betterPlayerDataSource = BetterPlayerDataSource(
           BetterPlayerDataSourceType.file,
