@@ -206,6 +206,7 @@ class DownloadManagerCubit extends Cubit<DownloadManagerState> {
           onProgress(1, 1, downloadedVideo, step: 2, totalSteps: 2);
           return true;
         } else {
+          onProgress(0, 1, downloadedVideo, step: 3, totalSteps: 3);
           final session = await FFmpegKit.execute(
               '-y -i $videoPath -i $audioPath -c:v copy -c:a copy $mediaPath');
 
