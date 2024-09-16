@@ -1,11 +1,9 @@
 import 'dart:convert';
-import 'dart:io' show Platform;
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter_web_auth/flutter_web_auth.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
-import 'package:cronet_http/cronet_http.dart';
 import 'package:invidious/channels/models/channel_sort_by.dart';
 import 'package:invidious/extensions.dart';
 import 'package:invidious/globals.dart';
@@ -81,13 +79,7 @@ class Service {
   final log = Logger('Service');
   final Client httpClient;
 
-  Service()
-      : httpClient = Platform.isAndroid
-            ? CronetClient.fromCronetEngine(
-                CronetEngine.build(
-                    cacheMode: CacheMode.memory, cacheMaxSize: 2 * 1024 * 1024),
-                closeEngine: true)
-            : http.Client();
+  Service() : httpClient = http.Client();
 
   String urlFormatForLog(Uri? uri) {
     return kDebugMode ? uri.toString() : '${uri?.replace(host: 'xxxxxxxxxx')}';
