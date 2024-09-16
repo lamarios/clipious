@@ -23,7 +23,9 @@ mixin _$AddToPlaylistController {
   bool get loading => throw _privateConstructorUsedError;
   bool get isLoggedIn => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AddToPlaylistController
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $AddToPlaylistControllerCopyWith<AddToPlaylistController> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -54,6 +56,8 @@ class _$AddToPlaylistControllerCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of AddToPlaylistController
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -121,6 +125,8 @@ class __$$AddToPlaylistControllerImplCopyWithImpl<$Res>
       $Res Function(_$AddToPlaylistControllerImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AddToPlaylistController
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -227,7 +233,9 @@ class _$AddToPlaylistControllerImpl implements _AddToPlaylistController {
       loading,
       isLoggedIn);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AddToPlaylistController
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$AddToPlaylistControllerImplCopyWith<_$AddToPlaylistControllerImpl>
@@ -255,8 +263,11 @@ abstract class _AddToPlaylistController implements AddToPlaylistController {
   bool get loading;
   @override
   bool get isLoggedIn;
+
+  /// Create a copy of AddToPlaylistController
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AddToPlaylistControllerImplCopyWith<_$AddToPlaylistControllerImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

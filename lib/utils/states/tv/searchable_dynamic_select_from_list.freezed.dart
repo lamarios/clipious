@@ -20,7 +20,9 @@ mixin _$SearchableSelectFromListState<T> {
   TextEditingController get controller => throw _privateConstructorUsedError;
   bool get loading => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SearchableSelectFromListState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $SearchableSelectFromListStateCopyWith<T, SearchableSelectFromListState<T>>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -47,6 +49,8 @@ class _$SearchableSelectFromListStateCopyWithImpl<T, $Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of SearchableSelectFromListState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -93,6 +97,8 @@ class __$$SearchableSelectFromListStateImplCopyWithImpl<T, $Res>
       $Res Function(_$SearchableSelectFromListStateImpl<T>) _then)
       : super(_value, _then);
 
+  /// Create a copy of SearchableSelectFromListState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -159,7 +165,9 @@ class _$SearchableSelectFromListStateImpl<T>
   int get hashCode => Object.hash(runtimeType,
       const DeepCollectionEquality().hash(_items), controller, loading);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SearchableSelectFromListState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SearchableSelectFromListStateImplCopyWith<T,
@@ -180,8 +188,11 @@ abstract class _SearchableSelectFromListState<T>
   TextEditingController get controller;
   @override
   bool get loading;
+
+  /// Create a copy of SearchableSelectFromListState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SearchableSelectFromListStateImplCopyWith<T,
           _$SearchableSelectFromListStateImpl<T>>
       get copyWith => throw _privateConstructorUsedError;

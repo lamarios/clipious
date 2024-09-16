@@ -23,7 +23,9 @@ mixin _$ServerListSettingsState {
   PublicServerErrors get publicServersError =>
       throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ServerListSettingsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ServerListSettingsStateCopyWith<ServerListSettingsState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -53,6 +55,8 @@ class _$ServerListSettingsStateCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of ServerListSettingsState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -114,6 +118,8 @@ class __$$ServerListSettingsStateImplCopyWithImpl<$Res>
       $Res Function(_$ServerListSettingsStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ServerListSettingsState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -216,7 +222,9 @@ class _$ServerListSettingsStateImpl implements _ServerListSettingsState {
       pinging,
       publicServersError);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ServerListSettingsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ServerListSettingsStateImplCopyWith<_$ServerListSettingsStateImpl>
@@ -243,8 +251,11 @@ abstract class _ServerListSettingsState implements ServerListSettingsState {
   bool get pinging;
   @override
   PublicServerErrors get publicServersError;
+
+  /// Create a copy of ServerListSettingsState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ServerListSettingsStateImplCopyWith<_$ServerListSettingsStateImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

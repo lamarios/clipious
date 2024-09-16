@@ -22,7 +22,9 @@ mixin _$ManageSubscriptionsState {
   dynamic get isLoggedIn => throw _privateConstructorUsedError;
   bool get loading => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ManageSubscriptionsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ManageSubscriptionsStateCopyWith<ManageSubscriptionsState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -51,6 +53,8 @@ class _$ManageSubscriptionsStateCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of ManageSubscriptionsState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -106,6 +110,8 @@ class __$$ManageSubscriptionsStateImplCopyWithImpl<$Res>
       $Res Function(_$ManageSubscriptionsStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ManageSubscriptionsState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -194,7 +200,9 @@ class _$ManageSubscriptionsStateImpl implements _ManageSubscriptionsState {
       const DeepCollectionEquality().hash(isLoggedIn),
       loading);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ManageSubscriptionsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ManageSubscriptionsStateImplCopyWith<_$ManageSubscriptionsStateImpl>
@@ -217,8 +225,11 @@ abstract class _ManageSubscriptionsState implements ManageSubscriptionsState {
   dynamic get isLoggedIn;
   @override
   bool get loading;
+
+  /// Create a copy of ManageSubscriptionsState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ManageSubscriptionsStateImplCopyWith<_$ManageSubscriptionsStateImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

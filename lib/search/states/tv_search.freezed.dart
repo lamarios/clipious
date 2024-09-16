@@ -20,7 +20,9 @@ mixin _$TvSearchState {
   bool get hasChannels => throw _privateConstructorUsedError;
   bool get hasPlaylists => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TvSearchState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $TvSearchStateCopyWith<TvSearchState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -44,6 +46,8 @@ class _$TvSearchStateCopyWithImpl<$Res, $Val extends TvSearchState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of TvSearchState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -87,6 +91,8 @@ class __$$TvSearchStateImplCopyWithImpl<$Res>
       _$TvSearchStateImpl _value, $Res Function(_$TvSearchStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TvSearchState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -151,7 +157,9 @@ class _$TvSearchStateImpl implements _TvSearchState {
   int get hashCode =>
       Object.hash(runtimeType, hasVideos, hasChannels, hasPlaylists);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TvSearchState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$TvSearchStateImplCopyWith<_$TvSearchStateImpl> get copyWith =>
@@ -170,8 +178,11 @@ abstract class _TvSearchState implements TvSearchState {
   bool get hasChannels;
   @override
   bool get hasPlaylists;
+
+  /// Create a copy of TvSearchState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$TvSearchStateImplCopyWith<_$TvSearchStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -25,7 +25,9 @@ mixin _$ChannelController {
   double get barOpacity => throw _privateConstructorUsedError;
   ChannelSortBy get sortBy => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ChannelController
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ChannelControllerCopyWith<ChannelController> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -57,6 +59,8 @@ class _$ChannelControllerCopyWithImpl<$Res, $Val extends ChannelController>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of ChannelController
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -133,6 +137,8 @@ class __$$ChannelControllerImplCopyWithImpl<$Res>
       $Res Function(_$ChannelControllerImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ChannelController
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -247,7 +253,9 @@ class _$ChannelControllerImpl implements _ChannelController {
   int get hashCode => Object.hash(runtimeType, channelId, isSubscribed, channel,
       loading, smallHeader, barHeight, barOpacity, sortBy);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ChannelController
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ChannelControllerImplCopyWith<_$ChannelControllerImpl> get copyWith =>
@@ -282,8 +290,11 @@ abstract class _ChannelController implements ChannelController {
   double get barOpacity;
   @override
   ChannelSortBy get sortBy;
+
+  /// Create a copy of ChannelController
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ChannelControllerImplCopyWith<_$ChannelControllerImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -20,7 +20,9 @@ mixin _$VideoInListState {
   BaseVideo? get video => throw _privateConstructorUsedError;
   DownloadedVideo? get offlineVideo => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of VideoInListState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $VideoInListStateCopyWith<VideoInListState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -44,6 +46,8 @@ class _$VideoInListStateCopyWithImpl<$Res, $Val extends VideoInListState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of VideoInListState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -87,6 +91,8 @@ class __$$VideoInListStateImplCopyWithImpl<$Res>
       $Res Function(_$VideoInListStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of VideoInListState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -147,7 +153,9 @@ class _$VideoInListStateImpl implements _VideoInListState {
   @override
   int get hashCode => Object.hash(runtimeType, progress, video, offlineVideo);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of VideoInListState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$VideoInListStateImplCopyWith<_$VideoInListStateImpl> get copyWith =>
@@ -167,8 +175,11 @@ abstract class _VideoInListState implements VideoInListState {
   BaseVideo? get video;
   @override
   DownloadedVideo? get offlineVideo;
+
+  /// Create a copy of VideoInListState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$VideoInListStateImplCopyWith<_$VideoInListStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

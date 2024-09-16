@@ -20,7 +20,9 @@ mixin _$SearchFiltersState {
   dynamic get duration => throw _privateConstructorUsedError;
   dynamic get sortBy => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SearchFiltersState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $SearchFiltersStateCopyWith<SearchFiltersState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -44,6 +46,8 @@ class _$SearchFiltersStateCopyWithImpl<$Res, $Val extends SearchFiltersState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of SearchFiltersState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -87,6 +91,8 @@ class __$$SearchFiltersStateImplCopyWithImpl<$Res>
       $Res Function(_$SearchFiltersStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of SearchFiltersState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -142,7 +148,9 @@ class _$SearchFiltersStateImpl implements _SearchFiltersState {
       const DeepCollectionEquality().hash(duration),
       const DeepCollectionEquality().hash(sortBy));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SearchFiltersState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SearchFiltersStateImplCopyWith<_$SearchFiltersStateImpl> get copyWith =>
@@ -162,8 +170,11 @@ abstract class _SearchFiltersState implements SearchFiltersState {
   dynamic get duration;
   @override
   dynamic get sortBy;
+
+  /// Create a copy of SearchFiltersState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SearchFiltersStateImplCopyWith<_$SearchFiltersStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

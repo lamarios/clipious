@@ -19,7 +19,9 @@ mixin _$CommentsContainerState {
   String get source => throw _privateConstructorUsedError;
   String get sortBy => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of CommentsContainerState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $CommentsContainerStateCopyWith<CommentsContainerState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -44,6 +46,8 @@ class _$CommentsContainerStateCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of CommentsContainerState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -85,6 +89,8 @@ class __$$CommentsContainerStateImplCopyWithImpl<$Res>
       $Res Function(_$CommentsContainerStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of CommentsContainerState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -134,7 +140,9 @@ class _$CommentsContainerStateImpl implements _CommentsContainerState {
   @override
   int get hashCode => Object.hash(runtimeType, source, sortBy);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of CommentsContainerState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$CommentsContainerStateImplCopyWith<_$CommentsContainerStateImpl>
@@ -151,8 +159,11 @@ abstract class _CommentsContainerState implements CommentsContainerState {
   String get source;
   @override
   String get sortBy;
+
+  /// Create a copy of CommentsContainerState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$CommentsContainerStateImplCopyWith<_$CommentsContainerStateImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

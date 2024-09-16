@@ -61,7 +61,9 @@ mixin _$PlayerState {
   dynamic get totalRewind => throw _privateConstructorUsedError;
   Orientation get orientation => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PlayerState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $PlayerStateCopyWith<PlayerState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -121,6 +123,8 @@ class _$PlayerStateCopyWithImpl<$Res, $Val extends PlayerState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of PlayerState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -365,6 +369,8 @@ class __$$PlayerStateImplCopyWithImpl<$Res>
       _$PlayerStateImpl _value, $Res Function(_$PlayerStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PlayerState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -848,7 +854,9 @@ class _$PlayerStateImpl extends _PlayerState {
         orientation
       ]);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PlayerState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PlayerStateImplCopyWith<_$PlayerStateImpl> get copyWith =>
@@ -895,7 +903,8 @@ abstract class _PlayerState extends PlayerState {
       final Orientation orientation}) = _$PlayerStateImpl;
   const _PlayerState._() : super._();
 
-  @override // player display properties
+// player display properties
+  @override
   bool get isMini;
   @override
   double? get top;
@@ -920,22 +929,22 @@ abstract class _PlayerState extends PlayerState {
   @override
   bool get muted;
   @override
-  double get aspectRatio;
-  @override // videos to play
+  double get aspectRatio; // videos to play
+  @override
   Video? get currentlyPlaying;
   @override
   DownloadedVideo? get offlineCurrentlyPlaying;
   @override
   List<BaseVideo> get videos;
   @override
-  List<DownloadedVideo> get offlineVideos;
-  @override // playlist controls
+  List<DownloadedVideo> get offlineVideos; // playlist controls
+  @override
   List<String> get playedVideos;
   @override
   ListQueue<String> get playQueue;
   @override
-  bool get isAudio;
-  @override // playing video data
+  bool get isAudio; // playing video data
+  @override
   bool get isPip;
   @override
   Offset get offset;
@@ -948,17 +957,18 @@ abstract class _PlayerState extends PlayerState {
   @override
   bool get isPlaying;
   @override
-  double get speed;
-  @override // events
+  double get speed; // events
 // command we send down the stack, namely video / audio player
-  MediaCommand<dynamic>? get mediaCommand;
-  @override // events we receive from bottom of stack
-  MediaEvent<dynamic> get mediaEvent;
-  @override // sponsor block variables
+  @override
+  MediaCommand<dynamic>?
+      get mediaCommand; // events we receive from bottom of stack
+  @override
+  MediaEvent<dynamic> get mediaEvent; // sponsor block variables
+  @override
   List<Pair<int>> get sponsorSegments;
   @override
-  Pair<int> get nextSegment;
-  @override // step in seconds when fast forawrd or fast rewind
+  Pair<int> get nextSegment; // step in seconds when fast forawrd or fast rewind
+  @override
   int get forwardStep;
   @override
   dynamic get rewindStep;
@@ -968,8 +978,11 @@ abstract class _PlayerState extends PlayerState {
   dynamic get totalRewind;
   @override
   Orientation get orientation;
+
+  /// Create a copy of PlayerState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PlayerStateImplCopyWith<_$PlayerStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

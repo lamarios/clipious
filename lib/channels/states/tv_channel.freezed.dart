@@ -22,7 +22,9 @@ mixin _$TvChannelController {
   bool get hasStreams => throw _privateConstructorUsedError;
   bool get hasPlaylist => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TvChannelController
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $TvChannelControllerCopyWith<TvChannelController> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -51,6 +53,8 @@ class _$TvChannelControllerCopyWithImpl<$Res, $Val extends TvChannelController>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of TvChannelController
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -109,6 +113,8 @@ class __$$TvChannelControllerImplCopyWithImpl<$Res>
       $Res Function(_$TvChannelControllerImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TvChannelController
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -195,7 +201,9 @@ class _$TvChannelControllerImpl implements _TvChannelController {
   int get hashCode => Object.hash(runtimeType, showBackground, hasShorts,
       hasVideos, hasStreams, hasPlaylist);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TvChannelController
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$TvChannelControllerImplCopyWith<_$TvChannelControllerImpl> get copyWith =>
@@ -221,8 +229,11 @@ abstract class _TvChannelController implements TvChannelController {
   bool get hasStreams;
   @override
   bool get hasPlaylist;
+
+  /// Create a copy of TvChannelController
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$TvChannelControllerImplCopyWith<_$TvChannelControllerImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

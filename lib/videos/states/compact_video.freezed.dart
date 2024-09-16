@@ -19,7 +19,9 @@ mixin _$CompactVideoState {
   DownloadedVideo? get offlineVideo => throw _privateConstructorUsedError;
   String? get offlineVideoThumbnailPath => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of CompactVideoState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $CompactVideoStateCopyWith<CompactVideoState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -43,6 +45,8 @@ class _$CompactVideoStateCopyWithImpl<$Res, $Val extends CompactVideoState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of CompactVideoState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -81,6 +85,8 @@ class __$$CompactVideoStateImplCopyWithImpl<$Res>
       $Res Function(_$CompactVideoStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of CompactVideoState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -132,7 +138,9 @@ class _$CompactVideoStateImpl implements _CompactVideoState {
   int get hashCode =>
       Object.hash(runtimeType, offlineVideo, offlineVideoThumbnailPath);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of CompactVideoState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$CompactVideoStateImplCopyWith<_$CompactVideoStateImpl> get copyWith =>
@@ -149,8 +157,11 @@ abstract class _CompactVideoState implements CompactVideoState {
   DownloadedVideo? get offlineVideo;
   @override
   String? get offlineVideoThumbnailPath;
+
+  /// Create a copy of CompactVideoState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$CompactVideoStateImplCopyWith<_$CompactVideoStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

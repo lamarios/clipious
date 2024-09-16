@@ -22,7 +22,9 @@ mixin _$TvPlayerControlsState {
   bool get loading => throw _privateConstructorUsedError;
   bool get displayControls => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TvPlayerControlsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $TvPlayerControlsStateCopyWith<TvPlayerControlsState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -52,6 +54,8 @@ class _$TvPlayerControlsStateCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of TvPlayerControlsState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -112,6 +116,8 @@ class __$$TvPlayerControlsStateImplCopyWithImpl<$Res>
       $Res Function(_$TvPlayerControlsStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TvPlayerControlsState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -198,7 +204,9 @@ class _$TvPlayerControlsStateImpl extends _TvPlayerControlsState {
   int get hashCode => Object.hash(runtimeType, controlsOpacity, showSettings,
       showQueue, loading, displayControls);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TvPlayerControlsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$TvPlayerControlsStateImplCopyWith<_$TvPlayerControlsStateImpl>
@@ -225,8 +233,11 @@ abstract class _TvPlayerControlsState extends TvPlayerControlsState {
   bool get loading;
   @override
   bool get displayControls;
+
+  /// Create a copy of TvPlayerControlsState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$TvPlayerControlsStateImplCopyWith<_$TvPlayerControlsStateImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

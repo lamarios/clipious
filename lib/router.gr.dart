@@ -9,553 +9,6 @@
 
 part of 'router.dart';
 
-abstract class _$AppRouter extends RootStackRouter {
-  // ignore: unused_element
-  _$AppRouter({super.navigatorKey});
-
-  @override
-  final Map<String, PageFactory> pagesMap = {
-    AddServerRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const AddServerScreen(),
-      );
-    },
-    AppLogsRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const AppLogsScreen(),
-      );
-    },
-    AppearanceSettingsRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const AppearanceSettingsScreen(),
-      );
-    },
-    BrowsingSettingsRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const BrowsingSettingsScreen(),
-      );
-    },
-    ChannelInfoRoute.name: (routeData) {
-      final args = routeData.argsAs<ChannelInfoRouteArgs>(
-          orElse: () => const ChannelInfoRouteArgs());
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: ChannelInfoTab(
-          key: args.key,
-          channel: args.channel,
-        ),
-      );
-    },
-    ChannelPlaylistsRoute.name: (routeData) {
-      final args = routeData.argsAs<ChannelPlaylistsRouteArgs>(
-          orElse: () => const ChannelPlaylistsRouteArgs());
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: ChannelPlaylistsTab(
-          key: args.key,
-          channelId: args.channelId,
-        ),
-      );
-    },
-    ChannelRoute.name: (routeData) {
-      final pathParams = routeData.inheritedPathParams;
-      final args = routeData.argsAs<ChannelRouteArgs>(
-          orElse: () =>
-              ChannelRouteArgs(channelId: pathParams.getString('channelId')));
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: ChannelScreen(
-          key: args.key,
-          channelId: args.channelId,
-        ),
-      );
-    },
-    ChannelShortsRoute.name: (routeData) {
-      final args = routeData.argsAs<ChannelShortsRouteArgs>(
-          orElse: () => const ChannelShortsRouteArgs());
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: ChannelShortsTab(
-          key: args.key,
-          channel: args.channel,
-        ),
-      );
-    },
-    ChannelStreamRoute.name: (routeData) {
-      final args = routeData.argsAs<ChannelStreamRouteArgs>(
-          orElse: () => const ChannelStreamRouteArgs());
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: ChannelStreamTab(
-          key: args.key,
-          channel: args.channel,
-        ),
-      );
-    },
-    ChannelVideoRoute.name: (routeData) {
-      final args = routeData.argsAs<ChannelVideoRouteArgs>(
-          orElse: () => const ChannelVideoRouteArgs());
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: ChannelVideoTab(
-          key: args.key,
-          channel: args.channel,
-        ),
-      );
-    },
-    CommentsRoute.name: (routeData) {
-      final args = routeData.argsAs<CommentsRouteArgs>(
-          orElse: () => const CommentsRouteArgs());
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: CommentsTab(
-          key: args.key,
-          video: args.video,
-        ),
-      );
-    },
-    DeArrowSettingsRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const DeArrowSettingsScreen(),
-      );
-    },
-    DownloadManagerRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const DownloadManagerScreen(),
-      );
-    },
-    DownloadsRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const DownloadsTab(),
-      );
-    },
-    EditHomeLayoutRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const EditHomeLayoutScreen(),
-      );
-    },
-    HistoryRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const HistoryTab(),
-      );
-    },
-    HomeRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const HomeTab(),
-      );
-    },
-    MainContentRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const MainContentScreen(),
-      );
-    },
-    MainRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const MainScreen(),
-      );
-    },
-    ManageServersRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const ManageServersScreen(),
-      );
-    },
-    ManageSingleServerRoute.name: (routeData) {
-      final args = routeData.argsAs<ManageSingleServerRouteArgs>();
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: ManageSingleServerScreen(
-          key: args.key,
-          server: args.server,
-        ),
-      );
-    },
-    ManageSubscriptionsRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const ManageSubscriptionsScreen(),
-      );
-    },
-    NotificationSettingsRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const NotificationSettingsScreen(),
-      );
-    },
-    PlaylistViewRoute.name: (routeData) {
-      final args = routeData.argsAs<PlaylistViewRouteArgs>();
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: PlaylistViewScreen(
-          key: args.key,
-          playlist: args.playlist,
-          canDeleteVideos: args.canDeleteVideos,
-        ),
-      );
-    },
-    PlaylistsRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const PlaylistsTab(),
-      );
-    },
-    PopularRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const PopularTab(),
-      );
-    },
-    RecommendedRoute.name: (routeData) {
-      final args = routeData.argsAs<RecommendedRouteArgs>(
-          orElse: () => const RecommendedRouteArgs());
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: RecommendedTab(
-          key: args.key,
-          video: args.video,
-        ),
-      );
-    },
-    SearchChannelRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const SearchChannelTab(),
-      );
-    },
-    SearchHistorySettingsRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const SearchHistorySettingsScreen(),
-      );
-    },
-    SearchHistoryRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const SearchHistoryTab(),
-      );
-    },
-    SearchPlaylistRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const SearchPlaylistTab(),
-      );
-    },
-    SearchRoute.name: (routeData) {
-      final args = routeData.argsAs<SearchRouteArgs>(
-          orElse: () => const SearchRouteArgs());
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: SearchScreen(
-          key: args.key,
-          query: args.query,
-          searchNow: args.searchNow,
-        ),
-      );
-    },
-    SearchVideoRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const SearchVideoTab(),
-      );
-    },
-    SettingsRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const SettingsScreen(),
-      );
-    },
-    SponsorBlockSettingsRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const SponsorBlockSettingsScreen(),
-      );
-    },
-    SubscriptionRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const SubscriptionTab(),
-      );
-    },
-    TVSettingsRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const TVSettingsScreen(),
-      );
-    },
-    TrendingRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const TrendingTab(),
-      );
-    },
-    TvAddServerRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const TvAddServerScreen(),
-      );
-    },
-    TvAppLayoutSettingsRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const TvAppLayoutSettingsScreen(),
-      );
-    },
-    TvChannelRoute.name: (routeData) {
-      final args = routeData.argsAs<TvChannelRouteArgs>();
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: TvChannelScreen(
-          key: args.key,
-          channelId: args.channelId,
-        ),
-      );
-    },
-    TvDearrowSettingsRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const TvDearrowSettingsScreen(),
-      );
-    },
-    TvFilterEditSettingsRoute.name: (routeData) {
-      final args = routeData.argsAs<TvFilterEditSettingsRouteArgs>(
-          orElse: () => const TvFilterEditSettingsRouteArgs());
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: TvFilterEditSettingsScreen(
-          key: args.key,
-          channelId: args.channelId,
-          filter: args.filter,
-        ),
-      );
-    },
-    TvFilterListSettingsRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const TvFilterListSettingsScreen(),
-      );
-    },
-    TvGridRoute.name: (routeData) {
-      final args = routeData.argsAs<TvGridRouteArgs>();
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: TvGridScreen(
-          key: args.key,
-          paginatedVideoList: args.paginatedVideoList,
-          tags: args.tags,
-          title: args.title,
-        ),
-      );
-    },
-    TvHomeRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const TvHomeScreen(),
-      );
-    },
-    TvManageSingleServerRoute.name: (routeData) {
-      final args = routeData.argsAs<TvManageSingleServerRouteArgs>();
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: TvManageSingleServerScreen(
-          key: args.key,
-          server: args.server,
-        ),
-      );
-    },
-    TvPlainTextRoute.name: (routeData) {
-      final args = routeData.argsAs<TvPlainTextRouteArgs>();
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: TvPlainTextScreen(
-          key: args.key,
-          text: args.text,
-        ),
-      );
-    },
-    TvPlayerRoute.name: (routeData) {
-      final args = routeData.argsAs<TvPlayerRouteArgs>();
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: TvPlayerScreen(
-          key: args.key,
-          videos: args.videos,
-        ),
-      );
-    },
-    TvPlaylistGridRoute.name: (routeData) {
-      final args = routeData.argsAs<TvPlaylistGridRouteArgs>();
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: TvPlaylistGridScreen(
-          key: args.key,
-          playlistList: args.playlistList,
-          tags: args.tags,
-        ),
-      );
-    },
-    TvPlaylistRoute.name: (routeData) {
-      final args = routeData.argsAs<TvPlaylistRouteArgs>();
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: TvPlaylistScreen(
-          key: args.key,
-          playlist: args.playlist,
-          canDeleteVideos: args.canDeleteVideos,
-        ),
-      );
-    },
-    TvSearchHistorySettingsRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const TvSearchHistorySettingsScreen(),
-      );
-    },
-    TvSearchRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const TvSearchScreen(),
-      );
-    },
-    TvSelectFromListRoute.name: (routeData) {
-      final args = routeData.argsAs<TvSelectFromListRouteArgs>();
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: TvSelectFromListScreen(
-          key: args.key,
-          options: args.options,
-          selected: args.selected,
-          onSelect: args.onSelect,
-          title: args.title,
-        ),
-      );
-    },
-    TvSettingsManageServersRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const TvSettingsManageServersScreen(),
-      );
-    },
-    TvSponsorBlockSettingsRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const TvSponsorBlockSettingsScreen(),
-      );
-    },
-    TvTextFieldRoute.name: (routeData) {
-      final args = routeData.argsAs<TvTextFieldRouteArgs>();
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: TvTextFieldScreen(
-          key: args.key,
-          controller: args.controller,
-          autofocus: args.autofocus,
-          autocorrect: args.autocorrect,
-          focusNode: args.focusNode,
-          onSubmitted: args.onSubmitted,
-          textInputAction: args.textInputAction,
-          obscureText: args.obscureText,
-          autofillHints: args.autofillHints,
-          decoration: args.decoration,
-          keyboardType: args.keyboardType,
-        ),
-      );
-    },
-    TvTimePickerRoute.name: (routeData) {
-      final args = routeData.argsAs<TvTimePickerRouteArgs>();
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: TvTimePickerScreen(
-          key: args.key,
-          value: args.value,
-          onTimePicked: args.onTimePicked,
-        ),
-      );
-    },
-    TvVideoRoute.name: (routeData) {
-      final args = routeData.argsAs<TvVideoRouteArgs>();
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: TvVideoScreen(
-          key: args.key,
-          videoId: args.videoId,
-        ),
-      );
-    },
-    TvWelcomeWizardRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const TvWelcomeWizardScreen(),
-      );
-    },
-    VideoFilterSettingsRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const VideoFilterSettingsScreen(),
-      );
-    },
-    VideoFilterSetupRoute.name: (routeData) {
-      final args = routeData.argsAs<VideoFilterSetupRouteArgs>(
-          orElse: () => const VideoFilterSetupRouteArgs());
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: VideoFilterSetupScreen(
-          key: args.key,
-          channelId: args.channelId,
-          filter: args.filter,
-        ),
-      );
-    },
-    VideoInfoRoute.name: (routeData) {
-      final args = routeData.argsAs<VideoInfoRouteArgs>(
-          orElse: () => const VideoInfoRouteArgs());
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: VideoInfoTab(
-          key: args.key,
-          video: args.video,
-          dislikes: args.dislikes,
-          titleAndChannelInfo: args.titleAndChannelInfo,
-        ),
-      );
-    },
-    VideoPlayerSettingsRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const VideoPlayerSettingsScreen(),
-      );
-    },
-    VideoRoute.name: (routeData) {
-      final args = routeData.argsAs<VideoRouteArgs>();
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: VideoScreen(
-          key: args.key,
-          videoId: args.videoId,
-          playNow: args.playNow,
-        ),
-      );
-    },
-    WelcomeWizardRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const WelcomeWizardScreen(),
-      );
-    },
-  };
-}
-
 /// generated route for
 /// [AddServerScreen]
 class AddServerRoute extends PageRouteInfo<void> {
@@ -567,7 +20,12 @@ class AddServerRoute extends PageRouteInfo<void> {
 
   static const String name = 'AddServerRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const AddServerScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -581,7 +39,12 @@ class AppLogsRoute extends PageRouteInfo<void> {
 
   static const String name = 'AppLogsRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const AppLogsScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -595,7 +58,12 @@ class AppearanceSettingsRoute extends PageRouteInfo<void> {
 
   static const String name = 'AppearanceSettingsRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const AppearanceSettingsScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -609,7 +77,12 @@ class BrowsingSettingsRoute extends PageRouteInfo<void> {
 
   static const String name = 'BrowsingSettingsRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const BrowsingSettingsScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -630,8 +103,17 @@ class ChannelInfoRoute extends PageRouteInfo<ChannelInfoRouteArgs> {
 
   static const String name = 'ChannelInfoRoute';
 
-  static const PageInfo<ChannelInfoRouteArgs> page =
-      PageInfo<ChannelInfoRouteArgs>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<ChannelInfoRouteArgs>(
+          orElse: () => const ChannelInfoRouteArgs());
+      return ChannelInfoTab(
+        key: args.key,
+        channel: args.channel,
+      );
+    },
+  );
 }
 
 class ChannelInfoRouteArgs {
@@ -668,8 +150,17 @@ class ChannelPlaylistsRoute extends PageRouteInfo<ChannelPlaylistsRouteArgs> {
 
   static const String name = 'ChannelPlaylistsRoute';
 
-  static const PageInfo<ChannelPlaylistsRouteArgs> page =
-      PageInfo<ChannelPlaylistsRouteArgs>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<ChannelPlaylistsRouteArgs>(
+          orElse: () => const ChannelPlaylistsRouteArgs());
+      return ChannelPlaylistsTab(
+        key: args.key,
+        channelId: args.channelId,
+      );
+    },
+  );
 }
 
 class ChannelPlaylistsRouteArgs {
@@ -707,8 +198,19 @@ class ChannelRoute extends PageRouteInfo<ChannelRouteArgs> {
 
   static const String name = 'ChannelRoute';
 
-  static const PageInfo<ChannelRouteArgs> page =
-      PageInfo<ChannelRouteArgs>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final pathParams = data.inheritedPathParams;
+      final args = data.argsAs<ChannelRouteArgs>(
+          orElse: () =>
+              ChannelRouteArgs(channelId: pathParams.getString('channelId')));
+      return ChannelScreen(
+        key: args.key,
+        channelId: args.channelId,
+      );
+    },
+  );
 }
 
 class ChannelRouteArgs {
@@ -745,8 +247,17 @@ class ChannelShortsRoute extends PageRouteInfo<ChannelShortsRouteArgs> {
 
   static const String name = 'ChannelShortsRoute';
 
-  static const PageInfo<ChannelShortsRouteArgs> page =
-      PageInfo<ChannelShortsRouteArgs>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<ChannelShortsRouteArgs>(
+          orElse: () => const ChannelShortsRouteArgs());
+      return ChannelShortsTab(
+        key: args.key,
+        channel: args.channel,
+      );
+    },
+  );
 }
 
 class ChannelShortsRouteArgs {
@@ -783,8 +294,17 @@ class ChannelStreamRoute extends PageRouteInfo<ChannelStreamRouteArgs> {
 
   static const String name = 'ChannelStreamRoute';
 
-  static const PageInfo<ChannelStreamRouteArgs> page =
-      PageInfo<ChannelStreamRouteArgs>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<ChannelStreamRouteArgs>(
+          orElse: () => const ChannelStreamRouteArgs());
+      return ChannelStreamTab(
+        key: args.key,
+        channel: args.channel,
+      );
+    },
+  );
 }
 
 class ChannelStreamRouteArgs {
@@ -821,8 +341,17 @@ class ChannelVideoRoute extends PageRouteInfo<ChannelVideoRouteArgs> {
 
   static const String name = 'ChannelVideoRoute';
 
-  static const PageInfo<ChannelVideoRouteArgs> page =
-      PageInfo<ChannelVideoRouteArgs>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<ChannelVideoRouteArgs>(
+          orElse: () => const ChannelVideoRouteArgs());
+      return ChannelVideoTab(
+        key: args.key,
+        channel: args.channel,
+      );
+    },
+  );
 }
 
 class ChannelVideoRouteArgs {
@@ -859,8 +388,17 @@ class CommentsRoute extends PageRouteInfo<CommentsRouteArgs> {
 
   static const String name = 'CommentsRoute';
 
-  static const PageInfo<CommentsRouteArgs> page =
-      PageInfo<CommentsRouteArgs>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<CommentsRouteArgs>(
+          orElse: () => const CommentsRouteArgs());
+      return CommentsTab(
+        key: args.key,
+        video: args.video,
+      );
+    },
+  );
 }
 
 class CommentsRouteArgs {
@@ -890,7 +428,12 @@ class DeArrowSettingsRoute extends PageRouteInfo<void> {
 
   static const String name = 'DeArrowSettingsRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const DeArrowSettingsScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -904,7 +447,12 @@ class DownloadManagerRoute extends PageRouteInfo<void> {
 
   static const String name = 'DownloadManagerRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const DownloadManagerScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -918,7 +466,12 @@ class DownloadsRoute extends PageRouteInfo<void> {
 
   static const String name = 'DownloadsRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const DownloadsTab();
+    },
+  );
 }
 
 /// generated route for
@@ -932,7 +485,12 @@ class EditHomeLayoutRoute extends PageRouteInfo<void> {
 
   static const String name = 'EditHomeLayoutRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const EditHomeLayoutScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -946,7 +504,12 @@ class HistoryRoute extends PageRouteInfo<void> {
 
   static const String name = 'HistoryRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const HistoryTab();
+    },
+  );
 }
 
 /// generated route for
@@ -960,7 +523,12 @@ class HomeRoute extends PageRouteInfo<void> {
 
   static const String name = 'HomeRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const HomeTab();
+    },
+  );
 }
 
 /// generated route for
@@ -974,7 +542,12 @@ class MainContentRoute extends PageRouteInfo<void> {
 
   static const String name = 'MainContentRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const MainContentScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -988,7 +561,12 @@ class MainRoute extends PageRouteInfo<void> {
 
   static const String name = 'MainRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const MainScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -1002,7 +580,12 @@ class ManageServersRoute extends PageRouteInfo<void> {
 
   static const String name = 'ManageServersRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const ManageServersScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -1024,8 +607,16 @@ class ManageSingleServerRoute
 
   static const String name = 'ManageSingleServerRoute';
 
-  static const PageInfo<ManageSingleServerRouteArgs> page =
-      PageInfo<ManageSingleServerRouteArgs>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<ManageSingleServerRouteArgs>();
+      return ManageSingleServerScreen(
+        key: args.key,
+        server: args.server,
+      );
+    },
+  );
 }
 
 class ManageSingleServerRouteArgs {
@@ -1055,7 +646,12 @@ class ManageSubscriptionsRoute extends PageRouteInfo<void> {
 
   static const String name = 'ManageSubscriptionsRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const ManageSubscriptionsScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -1069,7 +665,12 @@ class NotificationSettingsRoute extends PageRouteInfo<void> {
 
   static const String name = 'NotificationSettingsRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const NotificationSettingsScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -1092,8 +693,17 @@ class PlaylistViewRoute extends PageRouteInfo<PlaylistViewRouteArgs> {
 
   static const String name = 'PlaylistViewRoute';
 
-  static const PageInfo<PlaylistViewRouteArgs> page =
-      PageInfo<PlaylistViewRouteArgs>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<PlaylistViewRouteArgs>();
+      return PlaylistViewScreen(
+        key: args.key,
+        playlist: args.playlist,
+        canDeleteVideos: args.canDeleteVideos,
+      );
+    },
+  );
 }
 
 class PlaylistViewRouteArgs {
@@ -1126,7 +736,12 @@ class PlaylistsRoute extends PageRouteInfo<void> {
 
   static const String name = 'PlaylistsRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const PlaylistsTab();
+    },
+  );
 }
 
 /// generated route for
@@ -1140,7 +755,12 @@ class PopularRoute extends PageRouteInfo<void> {
 
   static const String name = 'PopularRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const PopularTab();
+    },
+  );
 }
 
 /// generated route for
@@ -1161,8 +781,17 @@ class RecommendedRoute extends PageRouteInfo<RecommendedRouteArgs> {
 
   static const String name = 'RecommendedRoute';
 
-  static const PageInfo<RecommendedRouteArgs> page =
-      PageInfo<RecommendedRouteArgs>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<RecommendedRouteArgs>(
+          orElse: () => const RecommendedRouteArgs());
+      return RecommendedTab(
+        key: args.key,
+        video: args.video,
+      );
+    },
+  );
 }
 
 class RecommendedRouteArgs {
@@ -1192,7 +821,12 @@ class SearchChannelRoute extends PageRouteInfo<void> {
 
   static const String name = 'SearchChannelRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const SearchChannelTab();
+    },
+  );
 }
 
 /// generated route for
@@ -1206,7 +840,12 @@ class SearchHistorySettingsRoute extends PageRouteInfo<void> {
 
   static const String name = 'SearchHistorySettingsRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const SearchHistorySettingsScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -1220,7 +859,12 @@ class SearchHistoryRoute extends PageRouteInfo<void> {
 
   static const String name = 'SearchHistoryRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const SearchHistoryTab();
+    },
+  );
 }
 
 /// generated route for
@@ -1234,7 +878,12 @@ class SearchPlaylistRoute extends PageRouteInfo<void> {
 
   static const String name = 'SearchPlaylistRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const SearchPlaylistTab();
+    },
+  );
 }
 
 /// generated route for
@@ -1257,7 +906,18 @@ class SearchRoute extends PageRouteInfo<SearchRouteArgs> {
 
   static const String name = 'SearchRoute';
 
-  static const PageInfo<SearchRouteArgs> page = PageInfo<SearchRouteArgs>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args =
+          data.argsAs<SearchRouteArgs>(orElse: () => const SearchRouteArgs());
+      return SearchScreen(
+        key: args.key,
+        query: args.query,
+        searchNow: args.searchNow,
+      );
+    },
+  );
 }
 
 class SearchRouteArgs {
@@ -1290,7 +950,12 @@ class SearchVideoRoute extends PageRouteInfo<void> {
 
   static const String name = 'SearchVideoRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const SearchVideoTab();
+    },
+  );
 }
 
 /// generated route for
@@ -1304,7 +969,12 @@ class SettingsRoute extends PageRouteInfo<void> {
 
   static const String name = 'SettingsRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const SettingsScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -1318,7 +988,12 @@ class SponsorBlockSettingsRoute extends PageRouteInfo<void> {
 
   static const String name = 'SponsorBlockSettingsRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const SponsorBlockSettingsScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -1332,7 +1007,12 @@ class SubscriptionRoute extends PageRouteInfo<void> {
 
   static const String name = 'SubscriptionRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const SubscriptionTab();
+    },
+  );
 }
 
 /// generated route for
@@ -1346,7 +1026,12 @@ class TVSettingsRoute extends PageRouteInfo<void> {
 
   static const String name = 'TVSettingsRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const TVSettingsScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -1360,7 +1045,12 @@ class TrendingRoute extends PageRouteInfo<void> {
 
   static const String name = 'TrendingRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const TrendingTab();
+    },
+  );
 }
 
 /// generated route for
@@ -1374,7 +1064,12 @@ class TvAddServerRoute extends PageRouteInfo<void> {
 
   static const String name = 'TvAddServerRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const TvAddServerScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -1388,7 +1083,12 @@ class TvAppLayoutSettingsRoute extends PageRouteInfo<void> {
 
   static const String name = 'TvAppLayoutSettingsRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const TvAppLayoutSettingsScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -1409,8 +1109,16 @@ class TvChannelRoute extends PageRouteInfo<TvChannelRouteArgs> {
 
   static const String name = 'TvChannelRoute';
 
-  static const PageInfo<TvChannelRouteArgs> page =
-      PageInfo<TvChannelRouteArgs>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<TvChannelRouteArgs>();
+      return TvChannelScreen(
+        key: args.key,
+        channelId: args.channelId,
+      );
+    },
+  );
 }
 
 class TvChannelRouteArgs {
@@ -1440,7 +1148,12 @@ class TvDearrowSettingsRoute extends PageRouteInfo<void> {
 
   static const String name = 'TvDearrowSettingsRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const TvDearrowSettingsScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -1464,8 +1177,18 @@ class TvFilterEditSettingsRoute
 
   static const String name = 'TvFilterEditSettingsRoute';
 
-  static const PageInfo<TvFilterEditSettingsRouteArgs> page =
-      PageInfo<TvFilterEditSettingsRouteArgs>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<TvFilterEditSettingsRouteArgs>(
+          orElse: () => const TvFilterEditSettingsRouteArgs());
+      return TvFilterEditSettingsScreen(
+        key: args.key,
+        channelId: args.channelId,
+        filter: args.filter,
+      );
+    },
+  );
 }
 
 class TvFilterEditSettingsRouteArgs {
@@ -1498,7 +1221,12 @@ class TvFilterListSettingsRoute extends PageRouteInfo<void> {
 
   static const String name = 'TvFilterListSettingsRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const TvFilterListSettingsScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -1523,7 +1251,18 @@ class TvGridRoute extends PageRouteInfo<TvGridRouteArgs> {
 
   static const String name = 'TvGridRoute';
 
-  static const PageInfo<TvGridRouteArgs> page = PageInfo<TvGridRouteArgs>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<TvGridRouteArgs>();
+      return TvGridScreen(
+        key: args.key,
+        paginatedVideoList: args.paginatedVideoList,
+        tags: args.tags,
+        title: args.title,
+      );
+    },
+  );
 }
 
 class TvGridRouteArgs {
@@ -1559,7 +1298,12 @@ class TvHomeRoute extends PageRouteInfo<void> {
 
   static const String name = 'TvHomeRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const TvHomeScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -1581,8 +1325,16 @@ class TvManageSingleServerRoute
 
   static const String name = 'TvManageSingleServerRoute';
 
-  static const PageInfo<TvManageSingleServerRouteArgs> page =
-      PageInfo<TvManageSingleServerRouteArgs>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<TvManageSingleServerRouteArgs>();
+      return TvManageSingleServerScreen(
+        key: args.key,
+        server: args.server,
+      );
+    },
+  );
 }
 
 class TvManageSingleServerRouteArgs {
@@ -1619,8 +1371,16 @@ class TvPlainTextRoute extends PageRouteInfo<TvPlainTextRouteArgs> {
 
   static const String name = 'TvPlainTextRoute';
 
-  static const PageInfo<TvPlainTextRouteArgs> page =
-      PageInfo<TvPlainTextRouteArgs>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<TvPlainTextRouteArgs>();
+      return TvPlainTextScreen(
+        key: args.key,
+        text: args.text,
+      );
+    },
+  );
 }
 
 class TvPlainTextRouteArgs {
@@ -1657,8 +1417,16 @@ class TvPlayerRoute extends PageRouteInfo<TvPlayerRouteArgs> {
 
   static const String name = 'TvPlayerRoute';
 
-  static const PageInfo<TvPlayerRouteArgs> page =
-      PageInfo<TvPlayerRouteArgs>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<TvPlayerRouteArgs>();
+      return TvPlayerScreen(
+        key: args.key,
+        videos: args.videos,
+      );
+    },
+  );
 }
 
 class TvPlayerRouteArgs {
@@ -1697,8 +1465,17 @@ class TvPlaylistGridRoute extends PageRouteInfo<TvPlaylistGridRouteArgs> {
 
   static const String name = 'TvPlaylistGridRoute';
 
-  static const PageInfo<TvPlaylistGridRouteArgs> page =
-      PageInfo<TvPlaylistGridRouteArgs>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<TvPlaylistGridRouteArgs>();
+      return TvPlaylistGridScreen(
+        key: args.key,
+        playlistList: args.playlistList,
+        tags: args.tags,
+      );
+    },
+  );
 }
 
 class TvPlaylistGridRouteArgs {
@@ -1740,8 +1517,17 @@ class TvPlaylistRoute extends PageRouteInfo<TvPlaylistRouteArgs> {
 
   static const String name = 'TvPlaylistRoute';
 
-  static const PageInfo<TvPlaylistRouteArgs> page =
-      PageInfo<TvPlaylistRouteArgs>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<TvPlaylistRouteArgs>();
+      return TvPlaylistScreen(
+        key: args.key,
+        playlist: args.playlist,
+        canDeleteVideos: args.canDeleteVideos,
+      );
+    },
+  );
 }
 
 class TvPlaylistRouteArgs {
@@ -1774,7 +1560,12 @@ class TvSearchHistorySettingsRoute extends PageRouteInfo<void> {
 
   static const String name = 'TvSearchHistorySettingsRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const TvSearchHistorySettingsScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -1788,7 +1579,12 @@ class TvSearchRoute extends PageRouteInfo<void> {
 
   static const String name = 'TvSearchRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const TvSearchScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -1815,8 +1611,19 @@ class TvSelectFromListRoute extends PageRouteInfo<TvSelectFromListRouteArgs> {
 
   static const String name = 'TvSelectFromListRoute';
 
-  static const PageInfo<TvSelectFromListRouteArgs> page =
-      PageInfo<TvSelectFromListRouteArgs>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<TvSelectFromListRouteArgs>();
+      return TvSelectFromListScreen(
+        key: args.key,
+        options: args.options,
+        selected: args.selected,
+        onSelect: args.onSelect,
+        title: args.title,
+      );
+    },
+  );
 }
 
 class TvSelectFromListRouteArgs {
@@ -1855,7 +1662,12 @@ class TvSettingsManageServersRoute extends PageRouteInfo<void> {
 
   static const String name = 'TvSettingsManageServersRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const TvSettingsManageServersScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -1869,7 +1681,12 @@ class TvSponsorBlockSettingsRoute extends PageRouteInfo<void> {
 
   static const String name = 'TvSponsorBlockSettingsRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const TvSponsorBlockSettingsScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -1881,7 +1698,7 @@ class TvTextFieldRoute extends PageRouteInfo<TvTextFieldRouteArgs> {
     bool? autofocus,
     bool? autocorrect,
     FocusNode? focusNode,
-    void Function(String)? onSubmitted,
+    ValueChanged<String>? onSubmitted,
     TextInputAction? textInputAction,
     bool? obscureText,
     Iterable<String>? autofillHints,
@@ -1908,8 +1725,25 @@ class TvTextFieldRoute extends PageRouteInfo<TvTextFieldRouteArgs> {
 
   static const String name = 'TvTextFieldRoute';
 
-  static const PageInfo<TvTextFieldRouteArgs> page =
-      PageInfo<TvTextFieldRouteArgs>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<TvTextFieldRouteArgs>();
+      return TvTextFieldScreen(
+        key: args.key,
+        controller: args.controller,
+        autofocus: args.autofocus,
+        autocorrect: args.autocorrect,
+        focusNode: args.focusNode,
+        onSubmitted: args.onSubmitted,
+        textInputAction: args.textInputAction,
+        obscureText: args.obscureText,
+        autofillHints: args.autofillHints,
+        decoration: args.decoration,
+        keyboardType: args.keyboardType,
+      );
+    },
+  );
 }
 
 class TvTextFieldRouteArgs {
@@ -1937,7 +1771,7 @@ class TvTextFieldRouteArgs {
 
   final FocusNode? focusNode;
 
-  final void Function(String)? onSubmitted;
+  final ValueChanged<String>? onSubmitted;
 
   final TextInputAction? textInputAction;
 
@@ -1975,8 +1809,17 @@ class TvTimePickerRoute extends PageRouteInfo<TvTimePickerRouteArgs> {
 
   static const String name = 'TvTimePickerRoute';
 
-  static const PageInfo<TvTimePickerRouteArgs> page =
-      PageInfo<TvTimePickerRouteArgs>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<TvTimePickerRouteArgs>();
+      return TvTimePickerScreen(
+        key: args.key,
+        value: args.value,
+        onTimePicked: args.onTimePicked,
+      );
+    },
+  );
 }
 
 class TvTimePickerRouteArgs {
@@ -2016,8 +1859,16 @@ class TvVideoRoute extends PageRouteInfo<TvVideoRouteArgs> {
 
   static const String name = 'TvVideoRoute';
 
-  static const PageInfo<TvVideoRouteArgs> page =
-      PageInfo<TvVideoRouteArgs>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<TvVideoRouteArgs>();
+      return TvVideoScreen(
+        key: args.key,
+        videoId: args.videoId,
+      );
+    },
+  );
 }
 
 class TvVideoRouteArgs {
@@ -2047,7 +1898,12 @@ class TvWelcomeWizardRoute extends PageRouteInfo<void> {
 
   static const String name = 'TvWelcomeWizardRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const TvWelcomeWizardScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -2061,7 +1917,12 @@ class VideoFilterSettingsRoute extends PageRouteInfo<void> {
 
   static const String name = 'VideoFilterSettingsRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const VideoFilterSettingsScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -2084,8 +1945,18 @@ class VideoFilterSetupRoute extends PageRouteInfo<VideoFilterSetupRouteArgs> {
 
   static const String name = 'VideoFilterSetupRoute';
 
-  static const PageInfo<VideoFilterSetupRouteArgs> page =
-      PageInfo<VideoFilterSetupRouteArgs>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<VideoFilterSetupRouteArgs>(
+          orElse: () => const VideoFilterSetupRouteArgs());
+      return VideoFilterSetupScreen(
+        key: args.key,
+        channelId: args.channelId,
+        filter: args.filter,
+      );
+    },
+  );
 }
 
 class VideoFilterSetupRouteArgs {
@@ -2129,8 +2000,19 @@ class VideoInfoRoute extends PageRouteInfo<VideoInfoRouteArgs> {
 
   static const String name = 'VideoInfoRoute';
 
-  static const PageInfo<VideoInfoRouteArgs> page =
-      PageInfo<VideoInfoRouteArgs>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<VideoInfoRouteArgs>(
+          orElse: () => const VideoInfoRouteArgs());
+      return VideoInfoTab(
+        key: args.key,
+        video: args.video,
+        dislikes: args.dislikes,
+        titleAndChannelInfo: args.titleAndChannelInfo,
+      );
+    },
+  );
 }
 
 class VideoInfoRouteArgs {
@@ -2166,7 +2048,12 @@ class VideoPlayerSettingsRoute extends PageRouteInfo<void> {
 
   static const String name = 'VideoPlayerSettingsRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const VideoPlayerSettingsScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -2189,7 +2076,17 @@ class VideoRoute extends PageRouteInfo<VideoRouteArgs> {
 
   static const String name = 'VideoRoute';
 
-  static const PageInfo<VideoRouteArgs> page = PageInfo<VideoRouteArgs>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<VideoRouteArgs>();
+      return VideoScreen(
+        key: args.key,
+        videoId: args.videoId,
+        playNow: args.playNow,
+      );
+    },
+  );
 }
 
 class VideoRouteArgs {
@@ -2222,5 +2119,10 @@ class WelcomeWizardRoute extends PageRouteInfo<void> {
 
   static const String name = 'WelcomeWizardRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const WelcomeWizardScreen();
+    },
+  );
 }
