@@ -18,7 +18,8 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$DownloadModalSheetState {
   bool get audioOnly => throw _privateConstructorUsedError;
   bool get loading => throw _privateConstructorUsedError;
-  List<String> get availableQualities => throw _privateConstructorUsedError;
+  List<AdaptiveFormat> get availableQualities =>
+      throw _privateConstructorUsedError;
   String get quality => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -35,7 +36,7 @@ abstract class $DownloadModalSheetStateCopyWith<$Res> {
   $Res call(
       {bool audioOnly,
       bool loading,
-      List<String> availableQualities,
+      List<AdaptiveFormat> availableQualities,
       String quality});
 }
 
@@ -70,7 +71,7 @@ class _$DownloadModalSheetStateCopyWithImpl<$Res,
       availableQualities: null == availableQualities
           ? _value.availableQualities
           : availableQualities // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<AdaptiveFormat>,
       quality: null == quality
           ? _value.quality
           : quality // ignore: cast_nullable_to_non_nullable
@@ -91,7 +92,7 @@ abstract class _$$DownloadModalSheetStateImplCopyWith<$Res>
   $Res call(
       {bool audioOnly,
       bool loading,
-      List<String> availableQualities,
+      List<AdaptiveFormat> availableQualities,
       String quality});
 }
 
@@ -125,7 +126,7 @@ class __$$DownloadModalSheetStateImplCopyWithImpl<$Res>
       availableQualities: null == availableQualities
           ? _value._availableQualities
           : availableQualities // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<AdaptiveFormat>,
       quality: null == quality
           ? _value.quality
           : quality // ignore: cast_nullable_to_non_nullable
@@ -140,7 +141,7 @@ class _$DownloadModalSheetStateImpl implements _DownloadModalSheetState {
   const _$DownloadModalSheetStateImpl(
       {this.audioOnly = false,
       this.loading = false,
-      final List<String> availableQualities = const [],
+      final List<AdaptiveFormat> availableQualities = const [],
       this.quality = '720p'})
       : _availableQualities = availableQualities;
 
@@ -150,10 +151,10 @@ class _$DownloadModalSheetStateImpl implements _DownloadModalSheetState {
   @override
   @JsonKey()
   final bool loading;
-  final List<String> _availableQualities;
+  final List<AdaptiveFormat> _availableQualities;
   @override
   @JsonKey()
-  List<String> get availableQualities {
+  List<AdaptiveFormat> get availableQualities {
     if (_availableQualities is EqualUnmodifiableListView)
       return _availableQualities;
     // ignore: implicit_dynamic_type
@@ -198,7 +199,7 @@ abstract class _DownloadModalSheetState implements DownloadModalSheetState {
   const factory _DownloadModalSheetState(
       {final bool audioOnly,
       final bool loading,
-      final List<String> availableQualities,
+      final List<AdaptiveFormat> availableQualities,
       final String quality}) = _$DownloadModalSheetStateImpl;
 
   @override
@@ -206,7 +207,7 @@ abstract class _DownloadModalSheetState implements DownloadModalSheetState {
   @override
   bool get loading;
   @override
-  List<String> get availableQualities;
+  List<AdaptiveFormat> get availableQualities;
   @override
   String get quality;
   @override

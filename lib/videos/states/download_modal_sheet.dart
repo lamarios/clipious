@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:invidious/extensions.dart';
 import 'package:invidious/globals.dart';
+import 'package:invidious/videos/models/adaptive_format.dart';
 
 import '../models/base_video.dart';
 
@@ -21,14 +22,14 @@ class DownloadModalSheetCubit extends Cubit<DownloadModalSheetState> {
     final qualities = vid.adaptiveFormats
         .where((f) => f.encoding == 'vp9' && f.type.contains("video/webm"))
         .sortBy((f) => int.parse(f.resolution?.replaceAll('p', '') ?? '0'))
-        .map((f) => f.qualityLabel ?? '')
-        .where((f) => f.trim().isNotEmpty)
+        .where(
+            (f) => f.qualityLabel != null && f.qualityLabel!.trim().isNotEmpty)
         .toList();
 
     emit(state.copyWith(
         availableQualities: qualities,
         loading: false,
-        quality: qualities.last));
+        quality: qualities.last.qualityLabel!));
   }
 
   setAudioOnly(bool value) {
@@ -47,6 +48,6 @@ class DownloadModalSheetState with _$DownloadModalSheetState {
   const factory DownloadModalSheetState(
       {@Default(false) bool audioOnly,
       @Default(false) bool loading,
-      @Default([]) List<String> availableQualities,
+      @Default([]) List<AdaptiveFormat> availableQualities,
       @Default('720p') String quality}) = _DownloadModalSheetState;
 }

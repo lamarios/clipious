@@ -4,6 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:gap/gap.dart';
 import 'package:invidious/globals.dart';
 import 'package:invidious/main.dart';
+import 'package:invidious/utils/pretty_bytes.dart';
 import 'package:invidious/videos/states/download_modal_sheet.dart';
 
 import '../../../downloads/states/download_manager.dart';
@@ -100,6 +101,7 @@ class DownloadModalSheet extends StatelessWidget {
                                 const Gap(10),
                                 DropdownButton<String>(
                                   value: state.availableQualities
+                                      .map((e) => e.qualityLabel)
                                       .where((e) => e == state.quality)
                                       .firstOrNull,
                                   onChanged: state.audioOnly
@@ -107,7 +109,9 @@ class DownloadModalSheet extends StatelessWidget {
                                       : (value) => cubit.setQuality(value),
                                   items: state.availableQualities
                                       .map((e) => DropdownMenuItem<String>(
-                                          value: e, child: Text(e)))
+                                          value: e.qualityLabel,
+                                          child: Text(
+                                              '${e.qualityLabel ?? ''} (~${prettyBytes(double.parse(e.clen))})')))
                                       .toList(),
                                 ),
                               ],
