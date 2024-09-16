@@ -138,7 +138,7 @@ class DownloadManagerCubit extends Cubit<DownloadManagerState> {
       }
       AdaptiveFormat audio = vid.adaptiveFormats
           .sortByReversed((e) => int.parse(e.bitrate ?? "0"))
-          .firstWhere((element) => element.type.contains("audio"));
+          .firstWhere((element) => element.type.contains("audio/webm"));
       String audioUrl = audio.url;
 
       Dio dio = Dio();
@@ -206,14 +206,22 @@ class DownloadManagerCubit extends Cubit<DownloadManagerState> {
           onProgress(1, 1, downloadedVideo, step: 2, totalSteps: 2);
           return true;
         } else {
+          onProgress(0, 1, downloadedVideo, step: 3, totalSteps: 3);
           final session = await FFmpegKit.execute(
               '-y -i $videoPath -i $audioPath -c:v copy -c:a copy $mediaPath');
 
           final returnCode = await session.getReturnCode();
 
-          onProgress(1, 1, downloadedVideo, step: 3, totalSteps: 3);
+          var success = returnCode?.isValueSuccess() ?? false;
+          if (success) {
+            onProgress(1, 1, downloadedVideo, step: 3, totalSteps: 3);
+          } else {
+            final logs = await session.getLogs();
 
-          return returnCode?.isValueSuccess() ?? false;
+            onDownloadError("Couldn't merge audio and video ${logs.join("\n")}",
+                downloadedVideo);
+          }
+          return success;
         }
       } catch (e) {
         rethrow;
@@ -262,13 +270,19 @@ class DownloadManagerCubit extends Cubit<DownloadManagerState> {
     setVideos();
   }
 
-  FutureOr<void> onDownloadError(DioException err, DownloadedVideo vid) async {
-    if (err.type == DioExceptionType.cancel) {
-      log.fine("video cancelled, nothing to do");
-      return;
+  FutureOr<void> onDownloadError(dynamic err, DownloadedVideo vid) async {
+    if (err is DioException) {
+      if (err.type == DioExceptionType.cancel) {
+        log.fine("video cancelled, nothing to do");
+        return;
+      }
     }
-    log.severe(
-        "Failed to download video ${vid.title}, removing it", err.stackTrace);
+    if (err is Error) {
+      log.severe(
+          "Failed to download video ${vid.title}, removing it", err.stackTrace);
+    } else {
+      log.severe("Failed to download video ${vid.title}, removing it", err);
+    }
     vid.downloadFailed = true;
     vid.downloadComplete = false;
     onProgress(1, 1, vid, step: 1, totalSteps: 1);
