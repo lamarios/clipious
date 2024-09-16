@@ -1,5 +1,5 @@
 name: invidious
-version: 1.21.0+4059
+version: 1.21.1+4060
 publish_to: none
 description: A new Flutter project.
 environment: 
@@ -16,7 +16,6 @@ dependencies:
   cached_network_image: 3.4.1
   carousel_slider: 5.0.0
   copy_with_extension: 5.0.4
-  cronet_http: 1.3.2
   device_info_plus: 10.1.2
   dio: 5.7.0
   downloadsfolder: 1.1.0
