@@ -469,8 +469,928 @@
   "@sponsorBlockCategoryUnpaidSelfPromoDescription": {
     "description": "Sponsor block 'Unpaid/Self promotion' Category description"
   },
-  "sponsorBlockCategoryInteraction": "Interaktion spam innebär (Abonnera)",
+  "sponsorBlockCategoryInteraction": "Interaktionspåminnelser (Prenumerera)",
   "@sponsorBlockCategoryInteraction": {
     "description": "Sponsor block 'Interaction' Category"
-  }
+  },
+  "sponsorBlockCategoryIntro": "Avbrotts-/Introanimation",
+  "@sponsorBlockCategoryIntro": {
+    "description": "Sponsorblock 'Intro' Category"
+  },
+  "sponsorBlockCategoryIntroDescription": "Ett intervall utan betydande innehåll. Kan vara en paus, en statisk bild eller upprepande animation. Bör inte användas för övergångar som innehåller information.",
+  "@sponsorBlockCategoryIntroDescription": {
+    "description": "Sponsorblock 'Intro' Category description"
+  },
+  "sponsorBlockCategoryOutroDescription": "Eftertexter eller när YouTube's slutbild visas. Ej för sammanfattning med information.",
+  "@sponsorBlockCategoryOutroDescription": {
+    "description": "Outro block 'Outro' Category description"
+  },
+  "sponsorBlockCategoryPreviewDescription": "Samling av klipp som visar vad som kommer att visas i denna eller andra filmer som ingår i en serie där all information upprepas senare vi filmen.",
+  "@sponsorBlockCategoryPreviewDescription": {
+    "description": "Sponsorblock 'Preview' Category description"
+  },
+  "sponsorBlockCategoryMusicOffTopic": "Musik: Tyst Sekvens",
+  "@sponsorBlockCategoryMusicOffTopic": {
+    "description": "Sponsorblock 'MusicOffTopic' Category"
+  },
+  "sponsorBlockCategoryMusicOffTopicDescription": "Används enbart för musikfilmer. Bör enbart användas för sekvenser av musikfilmer som inte redan omfattas av andra kategorier.",
+  "@sponsorBlockCategoryMusicOffTopicDescription": {
+    "description": "Only for use in music videos. This only should be used for sections of music videos that aren't already covered by another category."
+  },
+  "useProxy": "Filmer via ombud",
+  "@useProxy": {
+    "description": "label for settings switch to proxy videos from server"
+  },
+  "useProxyDescription": "Genom att se filmer från servern via ombud kan du gå förbi regionala blockeringar eller internetleverantörer som blockerar YouTube",
+  "@useProxyDescription": {
+    "description": "Description for the use proxy settings"
+  },
+  "pressDownToShowSettings": "Visa inställningar genom att trycka neråt",
+  "@pressDownToShowSettings": {
+    "description": "Instruction on how to show video settings when playing a video on TV"
+  },
+  "quality": "Kvalitet",
+  "@quality": {
+    "description": "Name of TV ui video settings"
+  },
+  "audio": "Ljud",
+  "@audio": {
+    "description": "Name TV ui audio settings"
+  },
+  "playbackSpeed": "Uppspelningshastighet",
+  "@playbackSpeed": {
+    "description": "Name of TV ui Playback speed"
+  },
+  "skipSslVerification": "Hoppa över att verifiera SSL-certifikat",
+  "@skipSslVerification": {
+    "description": "Setting label to skip ssl certification verification"
+  },
+  "skipSslVerificationDescription": "När en självsignerad SSL-cerifikat skall användas, eller när man upplever SSL-relaterade problem på servern.",
+  "@skipSslVerificationDescription": {
+    "description": "Setting description for the skip ssl certification verification"
+  },
+  "themeBrightness": "Tema",
+  "@themeBrightness": {
+    "description": "Ask the user to user dark / light / system theme"
+  },
+  "themeLight": "Ljus",
+  "@themeLight": {
+    "description": "Light theme"
+  },
+  "themeDark": "Mörk",
+  "@themeDark": {
+    "description": "Dark theme"
+  },
+  "requiresRestart": "Kräver omstart av app",
+  "@requiresRestart": {
+    "description": "Requires app restart label"
+  },
+  "appLanguage": "Språk",
+  "@appLanguage": {
+    "description": "Select app language"
+  },
+  "nVideos": "{count, plural, =0{Inga filmer} =1{1 film} other{{count} filmer}}",
+  "@nVideos": {
+    "description": "One or more videos",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "returnYoutubeUrlValidation": "Url-länkar måste börja med http:// eller https://",
+  "@returnYoutubeUrlValidation": {
+    "description": "error message for invalid custom url for return to youtube"
+  },
+  "returnYoutubeDislikeDescription": "Visa uppskattad antal ogillande av filmer genom att använda gränssnittet som tillhandahålls av returnyoutubedislike.com",
+  "@returnYoutubeDislikeDescription": {
+    "description": "ReturnYoutubeDislike setting description"
+  },
+  "rydCustomInstance": "Länkadress till anpassad RYD-instans",
+  "@rydCustomInstance": {
+    "description": "title for setting to set a custom ryd instance"
+  },
+  "rydCustomInstanceDescription": "Använd en annan RYD-instans, lämna blankt för att använda standardvärde",
+  "@rydCustomInstanceDescription": {
+    "description": "description for custom ryd instancr setting"
+  },
+  "autoplayVideoOnLoad": "Spela automatiskt upp filmer vid laddning",
+  "@autoplayVideoOnLoad": {
+    "description": "Label for settings to enable autoplay when a video loads"
+  },
+  "autoplayVideoOnLoadDescription": "Spela automatiskt upp filmer efter att de har laddats",
+  "@autoplayVideoOnLoadDescription": {
+    "description": "Description for the autoplay video on load setting"
+  },
+  "searchHistory": "Sökhistorik",
+  "@searchHistory": {
+    "description": "Settings label for search history"
+  },
+  "searchHistoryDescription": "Inställningar för sökhistorik",
+  "@searchHistoryDescription": {
+    "description": "Description for search history settings"
+  },
+  "enableSearchHistory": "Aktivera sökhistorik",
+  "@enableSearchHistory": {
+    "description": "Settings label for enabling search history"
+  },
+  "searchHistoryLimit": "Gräns för sökhistorik",
+  "@searchHistoryLimit": {
+    "description": "Settings label for search history limit"
+  },
+  "searchHistoryLimitDescription": "Anger hur många tidigare sökningar som kommer visas som förslag",
+  "@searchHistoryLimitDescription": {
+    "description": "Settings label for search history limit description"
+  },
+  "shorts": "Förkortningar",
+  "@shorts": {
+    "description": "Youtube shorts"
+  },
+  "searchUploadDateAny": "Alla datum",
+  "@searchUploadDateAny": {
+    "description": "Do not filter search result by upload date"
+  },
+  "searchUploadDateHour": "Senaste timmen",
+  "@searchUploadDateHour": {
+    "description": "Search for uploaded in last hour"
+  },
+  "searchUploadDateToday": "Idag",
+  "@searchUploadDateToday": {
+    "description": "Search for uploaded today"
+  },
+  "searchUploadDateWeek": "Denna vecka",
+  "@searchUploadDateWeek": {
+    "description": "Search for uploaded this week"
+  },
+  "searchUploadDateYear": "Detta året",
+  "@searchUploadDateYear": {
+    "description": "Search for uploaded this year"
+  },
+  "searchDuration": "Längd",
+  "@searchDuration": {
+    "description": "Filter search result by duration"
+  },
+  "searchDurationAny": "Alla längder",
+  "@searchDurationAny": {
+    "description": "Do not filter search result by duration"
+  },
+  "searchDurationShort": "Korta (<4 minuter)",
+  "@searchDurationShort": {
+    "description": "Search for short videos only"
+  },
+  "searchDurationLong": "Långa (>20 minuter)",
+  "@searchDurationLong": {
+    "description": "Search for long videos only"
+  },
+  "searchDurationMedium": "Medel (4-20 minuter)",
+  "@searchDurationMedium": {
+    "description": "Search for medium videos only"
+  },
+  "searchSortBy": "Sortera efter",
+  "@searchSortBy": {
+    "description": "Search sorting option"
+  },
+  "searchSortUploadDate": "Datum för Uppladdning",
+  "@searchSortUploadDate": {
+    "description": "Sort search by upload date"
+  },
+  "searchSortViewCount": "Antal visningar",
+  "@searchSortViewCount": {
+    "description": "Sort search by view count"
+  },
+  "clearSearchHistory": "Rensa sökhistorik",
+  "@clearSearchHistory": {
+    "description": "Settings label for clearing search history"
+  },
+  "appLogs": "Applikationsjournal",
+  "@appLogs": {
+    "description": "Title for settings that leads to application logs"
+  },
+  "appLogsDescription": "Erhåll journal över vad som händer i applikationen, kan vara användbart när problem skall rapporteras",
+  "@appLogsDescription": {
+    "description": "Description of the app log settings"
+  },
+  "logsCopied": "Journal kopierad till urklippshanteraren",
+  "@logsCopied": {
+    "description": "Message to tell user that logs have been copied to the clipboard"
+  },
+  "rememberSubtitleLanguage": "Kom ihåg språk för undertexter",
+  "@rememberSubtitleLanguage": {
+    "description": "Settings label for remembering subtitle language"
+  },
+  "videoFilters": "Filmfilter",
+  "@videoFilters": {
+    "description": "Title for video filter settings"
+  },
+  "nFilters": "{count, plural, =0{Inga filmer} =1{1 filter} other{{count} filter}}",
+  "@nFilters": {
+    "description": "One or more video filters",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "videoFiltersSettingTileDescriptions": "Ange regler för att filtrera bort filmer",
+  "@videoFiltersSettingTileDescriptions": {
+    "description": "Description for the main settings page"
+  },
+  "addVideoFilter": "Skapa filter",
+  "@addVideoFilter": {
+    "description": "Title when creating a new filter"
+  },
+  "videoFilterOperation": "Åtgärd",
+  "@videoFilterOperation": {
+    "description": "Label for filter operation"
+  },
+  "videoFilterValue": "Värde",
+  "@videoFilterValue": {
+    "description": "Label for filter value"
+  },
+  "save": "Spara",
+  "@save": {
+    "description": "Text for save action"
+  },
+  "optional": "Valfritt",
+  "@optional": {
+    "description": "Optional label"
+  },
+  "videoFilterHideLabel": "Dölj",
+  "@videoFilterHideLabel": {
+    "description": "Label to hide videos"
+  },
+  "videoFilterFilterLabel": "Fördunkla",
+  "@videoFilterFilterLabel": {
+    "description": "Label to filter videos"
+  },
+  "videoFilterDescriptionString": "{hideOrFilter} filmer vars {type} {operation} ''{value}''.",
+  "@videoFilterDescriptionString": {
+    "description": "Human readable description of a video filter, in this case is it for string comparison, example: Hide videos where the name of the video does not contain the following string 'test' (Do not translate text between { })",
+    "placeholders": {
+      "hideOrFilter": {
+        "type": "String",
+        "example": "Hide"
+      },
+      "type": {
+        "type": "String",
+        "example": "video title"
+      },
+      "operation": {
+        "type": "String",
+        "example": "does not contain"
+      },
+      "value": {
+        "type": "String",
+        "example": "some filter text"
+      }
+    }
+  },
+  "videoFiltered": "Filmer filtrerad på grund av följande anledning(-ar):",
+  "@videoFiltered": {
+    "description": "Label shown on video list when it is filtered out"
+  },
+  "videoFilterTapToReveal": "Tryck för att visa",
+  "@videoFilterTapToReveal": {
+    "description": "Label to tell user to tap to show a filtered video"
+  },
+  "videoFilterHide": "Dölj filtrerade filmer",
+  "@videoFilterHide": {
+    "description": "Label for settings to hide filtered videos"
+  },
+  "videoFilterHideDescription": "Som standard så döljs ej filtrerade filmer utan visas fördunklade med orsaken till varför de filtrerats. Denna inställning tar bort filtrerade filmer från listan.",
+  "@videoFilterHideDescription": {
+    "description": ""
+  },
+  "videoFilterNoFilters": "Inga filmfilter, tryck på knappen med ett '+' nedan för att börja lägga till filter.",
+  "@videoFilterNoFilters": {
+    "description": "Label when there are no video filters"
+  },
+  "videoFilterTypeVideoTitle": "Filmnamn",
+  "@videoFilterTypeVideoTitle": {
+    "description": "Label for video filter video title"
+  },
+  "videoFilterTypeChannelName": "Kanalnamn",
+  "@videoFilterTypeChannelName": {
+    "description": "Label for video filter channel name"
+  },
+  "videoFilterTypeVideoLength": "Filmlängd (sekunder)",
+  "@videoFilterTypeVideoLength": {
+    "description": "Label for video filter video length"
+  },
+  "videoFilterOperationContains": "Innehåller",
+  "@videoFilterOperationContains": {
+    "description": "Label for video filter operation Contains"
+  },
+  "videoFilterOperationNotContain": "Innehåller inte",
+  "@videoFilterOperationNotContain": {
+    "description": "Label for video filter operation Does not contain"
+  },
+  "videoFilterOperationLowerThan": "Kortare än",
+  "@videoFilterOperationLowerThan": {
+    "description": "Label for video filter operation Lower than"
+  },
+  "videoFilterOperationHigherThan": "Längre än",
+  "@videoFilterOperationHigherThan": {
+    "description": "Label for video filter operation Higher than"
+  },
+  "channel": "Kanal",
+  "@channel": {
+    "description": "A single channel"
+  },
+  "videoFilterHideAllFromChannel": "Filtrera alla filmer från en kanal",
+  "@videoFilterHideAllFromChannel": {
+    "description": "Label for video filter switch to allow to hide all videos from a channel"
+  },
+  "videoFilterWholeChannel": "{hideOrFilter} alla filmer från en kanal",
+  "@videoFilterWholeChannel": {
+    "description": "Label for whole channel filtering",
+    "placeholders": {
+      "hideOrFilter": {
+        "type": "String",
+        "example": "Hide"
+      }
+    }
+  },
+  "rememberSubtitleLanguageDescription": "Sätt automatiskt undertexter till senast angivna språk, om tillgängligt",
+  "@rememberSubtitleLanguageDescription": {
+    "description": "Settings description for remembering subtitle language"
+  },
+  "lockFullScreenToLandscape": "Lås orientering av helskärmsuppvisning till filmens bildförhållande",
+  "@lockFullScreenToLandscape": {
+    "description": "Title to force full screen to landscape"
+  },
+  "fillFullscreen": "Maximera filmen för att matcha skärmen",
+  "@fillFullscreen": {
+    "description": "Title to maximize video to fit screen"
+  },
+  "fillFullscreenDescription": "Justera filmen för att fylla hela skärmen i liggande läge",
+  "@fillFullscreenDescription": {
+    "description": "Setting description for filling video to screen in landscape"
+  },
+  "rememberPlaybackSpeed": "Kom ihåg uppspelningshastighet",
+  "@rememberPlaybackSpeed": {
+    "description": "Setting label for remembering playback speed"
+  },
+  "rememberPlaybackSpeedDescription": "Ange automatiskt uppspelningshastigheten till den senast angivna hastigheten",
+  "@rememberPlaybackSpeedDescription": {
+    "description": "Settings description for remembering playback speed"
+  },
+  "downloads": "Nedladdningar",
+  "@downloads": {
+    "description": "Downloads"
+  },
+  "videoAlreadyDownloaded": "Filmen har redan laddats ner",
+  "@videoAlreadyDownloaded": {
+    "description": "Message when a user tries to download a video he already has"
+  },
+  "noDownloadedVideos": "Inga nedladdade filmer, sök upp och tryck länge på en film i en lista alternativt klicka på knappen för nedladdning i filmvisaren för att ladda ner",
+  "@noDownloadedVideos": {
+    "description": "Message showing when the user goes to the download screen but there are no offline videos."
+  },
+  "videoDownloadStarted": "Nedladdning av filmen påbörjad",
+  "@videoDownloadStarted": {
+    "description": "Message when a video starts being downloaded"
+  },
+  "videoFailedDownloadRetry": "Nedladdningen misslyckades, klicka här för att försöka igen",
+  "@videoFailedDownloadRetry": {
+    "description": "Shown on download manager when a download fails and prompt the user to retry"
+  },
+  "noSubscriptions": "Inga prenumerationer, sök upp filmer och prenumerera på valfri kanal som faller dig i smaken.",
+  "@noSubscriptions": {
+    "description": "Message when the user has no subs"
+  },
+  "youCanSubscribeAgainLater": "Du kan åter välja att prenumerera på denna kanal igen vid ett senare tillfälle",
+  "@youCanSubscribeAgainLater": {
+    "description": "Text for the unscubscribe confirmation dialog"
+  },
+  "unSubscribeQuestion": "Avprenumerera?",
+  "@unSubscribeQuestion": {
+    "description": "Title for dialog if a user wants to unsubscribe in the subscribtion management screen"
+  },
+  "clearHistoryQuestion": "Rensa historiken?",
+  "@clearHistoryQuestion": {},
+  "clearHistoryQuestionExplanation": "Detta kommer att rensa historiken över filmer som visats på det konto och server som du använder. Detta går ej att ångra.",
+  "@clearHistoryQuestionExplanation": {
+    "description": "Message for dialog before clearing full viewing history"
+  },
+  "homeLayoutEditor": "Redigera hemskärmens utseende",
+  "@homeLayoutEditor": {
+    "description": "Title of layout editor screen"
+  },
+  "layoutEditorAddVideoSource": "Lägg till filmkälla",
+  "@layoutEditorAddVideoSource": {
+    "description": "Label for button to allow user to add more video sources to the home screen"
+  },
+  "layoutEditorExplanation": "Du kan välja vad som skall visas på din hemskärm, du kan ha upp till 2 små visare med horisontell bläddring och en stor källa.",
+  "@layoutEditorExplanation": {
+    "description": "text to explain the home layout editor"
+  },
+  "library": "Bibliotek",
+  "@library": {
+    "description": "Name for user library"
+  },
+  "customizeAppLayout": "Anpassa appsektioner",
+  "@customizeAppLayout": {
+    "description": "Settings label for the settings to allow the user to set up the app sections themselves"
+  },
+  "navigationBarStyle": "Stil på navigeringsmenyn",
+  "@navigationBarStyle": {
+    "description": "Label for settings on customizing navigation bar style"
+  },
+  "navigationBarLabelAlwaysShowing": "Etikett syns alltid",
+  "@navigationBarLabelAlwaysShowing": {
+    "description": "Label always showing option for navigation bar"
+  },
+  "navigationBarLabelShowOnSelect": "Etikett syns på vald objekt",
+  "@navigationBarLabelShowOnSelect": {
+    "description": "Label only showing when selected option for navigation bar"
+  },
+  "navigationBarLabelNeverShow": "Etikett syns aldrig",
+  "@navigationBarLabelNeverShow": {
+    "description": "Never show label option for navigation bar"
+  },
+  "distractionFreeMode": "Distraktionsfritt läge",
+  "@distractionFreeMode": {
+    "description": "title for distraction free mode settings"
+  },
+  "distractionFreeModeDescription": "Inaktivera filmkommentarer och rekommendationer",
+  "@distractionFreeModeDescription": {
+    "description": "Description for distraction free mode"
+  },
+  "secondsShortForm": "sek.",
+  "@secondsShortForm": {
+    "description": "Short form for the word seconds"
+  },
+  "videoFilterApplyDateToFilter": "Filtrera filmer under specifika tider",
+  "@videoFilterApplyDateToFilter": {
+    "description": "Label for switch to allow user to customize video filter and set days of week and time to them"
+  },
+  "videoFilterDayOfWeek": "Ange dagar som filtren skall appliceras på",
+  "@videoFilterDayOfWeek": {
+    "description": "Title for day selection for the filter"
+  },
+  "videoFilterDayOfWeekDescription": "Du kan selektivt välja vilka dagar och tider på veckan som du vill att filtren skall gälla för, för att som exempel motverka att avslöja resultat av sportevent i förtid.",
+  "@videoFilterDayOfWeekDescription": {
+    "description": ""
+  },
+  "videoFilterStartTime": "Starttid",
+  "@videoFilterStartTime": {
+    "description": "Title for filter start time"
+  },
+  "videoFilterEndTime": "Sluttid",
+  "@videoFilterEndTime": {
+    "description": "Title for filter end time"
+  },
+  "videoFilterAppliedOn": "Appliceras på {selectedDays}",
+  "@videoFilterAppliedOn": {
+    "description": "Readable text on when the filter should apply",
+    "placeholders": {
+      "selectedDays": {
+        "type": "String",
+        "example": "Monday, Wednesday, Friday"
+      }
+    }
+  },
+  "from": "Från",
+  "@from": {
+    "description": "From word (as in 'From xx To xx')"
+  },
+  "to": "Till",
+  "@to": {
+    "description": "To word as in 'From xx To xx')"
+  },
+  "videoFilterTimeOfDayFromTo": "Från {from} till {to}",
+  "@videoFilterTimeOfDayFromTo": {
+    "description": "Time of day range",
+    "placeholders": {
+      "from": {
+        "type": "String",
+        "example": "3:00 AM"
+      },
+      "to": {
+        "type": "String",
+        "example": "5:00 PM"
+      }
+    }
+  },
+  "notifications": "Notifikationer",
+  "@notifications": {
+    "description": "Notification settings title"
+  },
+  "notificationsDescription": "Visa och bevilja vad du vill bli informerad om",
+  "@notificationsDescription": {
+    "description": "Setting description for notifications"
+  },
+  "enableNotificationDescriptions": "Kör tjänst för att kontrollera och visa dig vilka ändringar som du önskar bli meddelad om",
+  "@enableNotificationDescriptions": {
+    "description": ""
+  },
+  "subscriptionNotification": "Prenumerationsmeddelanden",
+  "@subscriptionNotification": {
+    "description": "Title for subscriptions notifications"
+  },
+  "subscriptionNotificationDescription": "Erhåll meddelande om nya filmer från de flöden som du prenumererar ifall du är inloggad på din nuvarande server",
+  "@subscriptionNotificationDescription": {
+    "description": "Description for subscription notifications"
+  },
+  "subscriptionNotificationContent": "Det finns {count, plural, =0{inga nya filmer} =1{1 ny film} other{{count} nya filmer}} i flödet av prenumererat material",
+  "@subscriptionNotificationContent": {
+    "description": "Content for subscription notification",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "askToEnableBackgroundServiceTitle": "Meddelanden är inaktiverade",
+  "@askToEnableBackgroundServiceTitle": {
+    "description": "If the users tries to turn on notifications for a channel but hasn't enable notifications in the app we need to turn it on for them"
+  },
+  "askToEnableBackgroundServiceContent": "För att erhålla meddelanden behöver Clipious bli beviljad att skicka meddelanden, tryck på OK för att aktivera det.",
+  "@askToEnableBackgroundServiceContent": {
+    "description": "If the users tries to turn on notifications for a channel but hasn't enable notifications in the app we need to turn it on for them"
+  },
+  "otherNotifications": "Andra källor för meddelanden (ikon med bjällror)",
+  "@otherNotifications": {
+    "description": "Title for settings section in the notification settings"
+  },
+  "deleteChannelNotificationTitle": "Ta bort meddelandefunktion för kanalen?",
+  "@deleteChannelNotificationTitle": {
+    "description": "Title for dialog to confirm whether to delete channel notifications"
+  },
+  "deleteChannelNotificationContent": "Du kommer ej motta några meddelanden om förändringar i denna kanalen framöver.",
+  "@deleteChannelNotificationContent": {
+    "description": "Title for dialog to confirm whether to delete channel notifications"
+  },
+  "deletePlaylistNotificationTitle": "Ta bort meddelandefunktion för spellista?",
+  "@deletePlaylistNotificationTitle": {
+    "description": "Title for dialog to confirm whether to delete playlist notifications"
+  },
+  "deletePlaylistNotificationContent": "Du kommer ej motta några meddelande om förändringar i denna spellista framöver.",
+  "@deletePlaylistNotificationContent": {
+    "description": "Title for dialog to confirm whether to delete playlist notifications"
+  },
+  "channelNotificationTitle": "Nya filmer från {channel}",
+  "@channelNotificationTitle": {
+    "description": "Title for the channel notifications when there are new videos",
+    "placeholders": {
+      "channel": {
+        "type": "String",
+        "example": "MKBHD"
+      }
+    }
+  },
+  "playlistNotificationTitle": "Nya filmer i spellistan {playlist}",
+  "@playlistNotificationTitle": {
+    "description": "Title for the playlist notifications when there are new videos",
+    "placeholders": {
+      "playlist": {
+        "type": "String",
+        "example": "Lo-Fi girl"
+      }
+    }
+  },
+  "playlistNotificationContent": "Det finns {count, plural, =0{inga nya filmer} =1{1 ny film} other{{count} nya filmer}} i spellistan {playlist}",
+  "@playlistNotificationContent": {
+    "description": "Content for playlist notification when there are new videos",
+    "placeholders": {
+      "playlist": {
+        "type": "String",
+        "example": "Lo-Fi girl"
+      },
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "foregroundServiceNotificationTitle": "Övervakning av filmer",
+  "@foregroundServiceNotificationTitle": {
+    "description": "Title for the foreground service running notification when the user wants to receive notifications"
+  },
+  "foregroundServiceNotificationContent": "Leta efter nya filmer {hours, select, 1{varje timme} 24{varje dag} 2{varannan timme} other{var {hours}:e timme}}",
+  "@foregroundServiceNotificationContent": {
+    "description": "Content for the foreground service running notification when the user wants to receive notifications",
+    "hours": {
+      "type": "num",
+      "format": "compact"
+    }
+  },
+  "foregroundServiceUpdatingSubscriptions": "Kontrollerar prenumerationer...",
+  "@foregroundServiceUpdatingSubscriptions": {
+    "description": "Foreground service notification text when checking for new subscription videos"
+  },
+  "foregroundServiceUpdatingPlaylist": "Kontrollerar spellistor...",
+  "@foregroundServiceUpdatingPlaylist": {
+    "description": "Foreground service notification text when checking for new playlist videos"
+  },
+  "foregroundServiceUpdatingChannels": "Kontrollerar kanaler...",
+  "@foregroundServiceUpdatingChannels": {
+    "description": "Foreground service notification text when checking for new channel videos"
+  },
+  "notificationFrequencySettingsTitle": "Kontrollfrekvens för nya filmer",
+  "@notificationFrequencySettingsTitle": {
+    "description": "Title for frequency settings"
+  },
+  "notificationFrequencySettingsDescription": "Hur ofta som applikationen skall leta efter nya filmer",
+  "@notificationFrequencySettingsDescription": {
+    "description": "Description for frequency settings"
+  },
+  "notificationFrequencySliderLabel": "{hours, select,  24{1d} other{{hours}h}}",
+  "@notificationFrequencySliderLabel": {
+    "description": "Short form for a number of hours going up to 1 day",
+    "hours": {
+      "type": "num",
+      "format": "compact"
+    }
+  },
+  "subtitlesBackground": "Bakgrund för undertexter",
+  "@subtitlesBackground": {
+    "description": "Title for settings to set black background  for subtitles"
+  },
+  "subtitlesBackgroundDescription": "Lägger till en svart backgrund till undertexterna för att göra dem mer lättlästa",
+  "@subtitlesBackgroundDescription": {
+    "description": "Description for settings to set black background  for subtitles"
+  },
+  "history": "Historik",
+  "@history": {
+    "description": "User view history label"
+  },
+  "deArrowSettingDescription": "Byt ut namn och miniatyrbilder som angivits enbart för att vara lockande att klicka på",
+  "@deArrowSettingDescription": {
+    "description": "Description for dearrow"
+  },
+  "copySettingsAsJson": "Kopiera inställningar i formatet JSON till urklippshanteraren",
+  "@copySettingsAsJson": {
+    "description": "title for settings sections to allow users to copy their settings as json to make debugging easier"
+  },
+  "copySettingsAsJsonDescription": "Kopiera inställningarna i formatet JSON för att underlätta felsökning ifall du stöter på ett problem i applikationen och önskar rapportera problemet",
+  "@copySettingsAsJsonDescription": {
+    "description": ""
+  },
+  "seeking": "Bläddra",
+  "@seeking": {
+    "description": "category for settings related to seeking in a video"
+  },
+  "skipStep": "Steg att hoppa framåt/bakåt",
+  "@skipStep": {
+    "description": "Title for the settings to set the skipping step"
+  },
+  "skipStepDescription": "Hur många sekunder att hoppa framåt/bakåt vid åtgärd",
+  "@skipStepDescription": {
+    "description": "Title for the settings to set the skipping step"
+  },
+  "exponentialSkip": "Öka stegen exponentiellt framåt/bakåt",
+  "@exponentialSkip": {
+    "description": "Title for the setting to enable the exponential skipping"
+  },
+  "exponentialSkipDescription": "Ju mer du hoppar framåt/bakåt, desto större hopp genomförs.",
+  "@exponentialSkipDescription": {
+    "description": "Title for the setting to enable the exponential skipping"
+  },
+  "fullscreenOnLandscape": "Helskärm i liggande läge",
+  "@fullscreenOnLandscape": {
+    "description": "Setting title to enable full screen on landscape orientation"
+  },
+  "enabled": "Aktiverad",
+  "@enabled": {
+    "description": "Text to show something is enabled"
+  },
+  "submitFeedback": "Skicka återkoppling",
+  "@submitFeedback": {
+    "description": "Title for settings to submit feed back through the app"
+  },
+  "feedbackDisclaimer": "För att kunna skicka återkoppling så krävs ett konto på GitHub samt att din skärmbild kommer att publiceras anonymt på Imgur.",
+  "@feedbackDisclaimer": {
+    "description": "Content of dialog shown before submitting feedback to make sure the user is ok whith where the data is going"
+  },
+  "channelSortByNewest": "Nyast",
+  "@channelSortByNewest": {
+    "description": "Sort channel videos from newest to oldest"
+  },
+  "channelSortByOldest": "Äldst",
+  "@channelSortByOldest": {
+    "description": "Sort channel videos from oldest to newest"
+  },
+  "channelSortByPopular": "Populärast",
+  "@channelSortByPopular": {
+    "description": "Sort channel videos by popularity"
+  },
+  "invidiousAccount": "Konto på Invidious-server",
+  "@invidiousAccount": {
+    "description": "Text when the user choose where to subscribe to a channel"
+  },
+  "onDeviceSubscriptions": "På enheten",
+  "@onDeviceSubscriptions": {
+    "description": "Text when the user chooses where to subscribe to a channel"
+  },
+  "both": "Båda",
+  "@both": {},
+  "refresh": "Ladda om",
+  "@refresh": {},
+  "subtitles": "Undertexter",
+  "@subtitles": {
+    "description": "Name of TV ui subtitles settings"
+  },
+  "blackBackground": "Svart bakgrund",
+  "@blackBackground": {
+    "description": "Settings name for black background"
+  },
+  "blackBackgroundDescription": "För mörkt tema på OLED-skärmar",
+  "@blackBackgroundDescription": {
+    "description": "Description for dark background setting"
+  },
+  "search": "Sök",
+  "@search": {
+    "description": "search title"
+  },
+  "subtitleFontSize": "Teckenstorlek på undertexter",
+  "@subtitleFontSize": {
+    "description": "Settings label for the size of the subtitles"
+  },
+  "subtitleFontSizeDescription": "Ändra teckenstorleken på undertexterna ifall dem är för stor eller små på din enhet",
+  "@subtitleFontSizeDescription": {
+    "description": "Settings description for subtitle size"
+  },
+  "sponsorBlockCategoryInteractionDescription": "När det är korta påminnelser om att gilla, prenumerera och/eller följa dem mitt i ett innehåll. Om det pågår under längre tid eller handlar om något specifik bör det istället definieras som egen reklam.",
+  "@sponsorBlockCategoryInteractionDescription": {
+    "description": "Sponsor block 'Interaction' Category description"
+  },
+  "sponsorBlockCategoryOutro": "Slutbild/Eftertexter",
+  "@sponsorBlockCategoryOutro": {
+    "description": "Outro block 'Outro' Category"
+  },
+  "sponsorBlockCategoryPreview": "Förhandsvisning/Tillbakablick",
+  "@sponsorBlockCategoryPreview": {
+    "description": "Sponsorblock 'Preview' Category"
+  },
+  "sponsorBlockCategoryFillerDescription": "Material som lagts till enbart för att fylla ut tiden eller humoristiskt material och som inte krävs för att förstå det huvudsakliga innehållet i en film. Detta bör ej omfatta sekvenser som tillhandahåller information eller bakgrundsdetaljer. Detta är en väldigt aggressiv kategori tänkt att användas när du ej är på humör för \"komiskt innehåll\".",
+  "@sponsorBlockCategoryFillerDescription": {
+    "description": "Sponsorblock 'Filler' Category description"
+  },
+  "sponsorBlockCategoryFiller": "Utfyllnadsmaterial/Skämt",
+  "@sponsorBlockCategoryFiller": {
+    "description": "Sponsorblock 'Filler' Category"
+  },
+  "followSystem": "Följ systemet",
+  "@followSystem": {
+    "description": "Follow system label"
+  },
+  "searchUploadDate": "Datum för uppladdning",
+  "@searchUploadDate": {
+    "description": "Filter search result by upload date"
+  },
+  "searchUploadDateMonth": "Denna månad",
+  "@searchUploadDateMonth": {
+    "description": "Search for uploaded this month"
+  },
+  "searchSortRating": "Omdömen",
+  "@searchSortRating": {
+    "description": "Sort search by rating"
+  },
+  "searchSortRelevance": "Relevans",
+  "@searchSortRelevance": {
+    "description": "Sort search by relevance"
+  },
+  "copyToClipBoard": "Kopiera till urklippshanteraren",
+  "@copyToClipBoard": {
+    "description": "Text to copy something to clipboard"
+  },
+  "download": "Ladda ner",
+  "@download": {
+    "description": "A single download or CTA for downloading a video"
+  },
+  "home": "Hem",
+  "@home": {
+    "description": "Label for Home browsing tab"
+  },
+  "downloadsPlayAll": "Spela upp alla",
+  "@downloadsPlayAll": {
+    "description": "Button to play all downloaded videos"
+  },
+  "customizeAppLayoutExplanation": "Ange vilka sektioner du vill skall visas i applikationens navigeringsmeny. Klicka på husikonen för att välja vilken skärm som skall visas när applikationen startar. Du kan arrangera om ordningen av sektioner genom att dra dem till önskade positioner.",
+  "@customizeAppLayoutExplanation": {
+    "description": ""
+  },
+  "manageSubscriptions": "Hantera Prenumerationer",
+  "@manageSubscriptions": {
+    "description": "Title of manage subscriptions page"
+  },
+  "videoDownloadAudioOnly": "Ljud enbart",
+  "@videoDownloadAudioOnly": {
+    "description": "Label for toggle to download audio only "
+  },
+  "noHistory": "Ingen historik över visade filmer, om du tittar på någon film så kommer de att listas här",
+  "@noHistory": {
+    "description": "Message when the user visits the history tab but it's empty"
+  },
+  "subscriptionNotificationTitle": "Nya filmer från dina prenumerationer",
+  "@subscriptionNotificationTitle": {
+    "description": "Title for the notification showing that there are new videos from the subscription feed"
+  },
+  "askForDisableBatteryOptimizationTitle": "Inaktivering av batterioptimering krävs",
+  "@askForDisableBatteryOptimizationTitle": {
+    "description": "Title for the dialog asking the user to turn off disabling battery optimization when turning on notifications"
+  },
+  "askForDisableBatteryOptimizationContent": "För att kunna skicka meddelande så behöver Clipious kunna köra tjänster i bakgrunden. För att dessa skall kunna köras smidigt så krävs det att Clipious ges obegränsad batterianvändning, klicka på ok för att öppna upp inställningar för batterioptimering.",
+  "@askForDisableBatteryOptimizationContent": {
+    "description": "Content for the dialog asking the user to turn off disabling battery optimization when turning on notifications"
+  },
+  "channelNotificationContent": "Det finns {count, plural, =0{inga nya filmer} =1{1 ny film} other{{count} nya filmer}} från {channel}",
+  "@channelNotificationContent": {
+    "description": "Content for channel notification when there are new videos",
+    "placeholders": {
+      "channel": {
+        "type": "String",
+        "example": "MKBHD"
+      },
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "videoFiltersExplanation": "Dölj eller fördunkla filmer från alla filmströmmar i applikationen baserat på de filter som anges nedan. Detta tillåter dig att exempelvis dölja all sportreklam eller sport från en specifik kanal.",
+  "@videoFiltersExplanation": {
+    "description": "Description on how filter work"
+  },
+  "editVideoFilter": "Redigera filter",
+  "@editVideoFilter": {
+    "description": "Title when editting a filter"
+  },
+  "videoFilterAllChannels": "Alla kanaler",
+  "@videoFilterAllChannels": {
+    "description": "Title for the sections that applies to all channels"
+  },
+  "videoFilterType": "Typ",
+  "@videoFilterType": {
+    "description": "Label for filter type"
+  },
+  "videoFilterEditDescription": "Välj valfritt en kanal, typ av filter, åtgärd och ett värde för att filtrera BORT filmer från listan. Exempel \"typ: filmnamn, åtgärd: innehåller, värde: test\" kommer filtrera BORT alla filmer som har ordet \"test\" i sitt namn.",
+  "@videoFilterEditDescription": {
+    "description": "Descriptive test for video filter set up"
+  },
+  "lockFullScreenToLandscapeDescription": "Låser orienteringen av helskärmsuppvisningen baserat på videoformatet, liggande för breda filmer samt stående för höga filmer",
+  "@lockFullScreenToLandscapeDescription": {
+    "description": "Setting description for forcing video to landscape when in full screen"
+  },
+  "deArrowReplaceThumbnails": "Byt ut miniatyrbilder",
+  "@deArrowReplaceThumbnails": {
+    "description": "Settings title for checkbox on whether the thumbnail should be replaced as well"
+  },
+  "deArrowReplaceThumbnailsDescription": "Byt ut miniatyrbilden utöver namnet",
+  "@deArrowReplaceThumbnailsDescription": {
+    "description": "Description for DeArrow setting switch"
+  },
+  "deArrowWarning": "Att aktivera DeArrow kan markant minska bläddringshastigheten i applikationen då extra internetförfrågningar krävs för varje enskild film",
+  "@deArrowWarning": {
+    "description": "Warning message when the user enables DeArrow"
+  },
+  "fullscreenOnLandscapeDescription": "Växla till helskärm när enheten roteras till liggande läge",
+  "@fullscreenOnLandscapeDescription": {
+    "description": "Setting to enable full screen on landscape orientation"
+  },
+  "submitFeedbackDescription": "Har du hittat ett fel eller har ett förslag? Använd detta verktyg för att ta en skärmbild på applikationen, kommentera och skicka återkoppling",
+  "@submitFeedbackDescription": {
+    "description": "Setting tile descriptions for feedback submission"
+  },
+  "feedbackScreenshotError": "Fel uppstod vid uppladdning av skärmbild till Imgur",
+  "@feedbackScreenshotError": {
+    "description": "Title for dialog if something goes wrong while uploading feedback screenshot"
+  },
+  "addBasicAuth": "Lägg till Grundläggande Autentisering",
+  "@addBasicAuth": {},
+  "addBasicAuthExplanation": "Om din server kräver grundläggande HTTP autentisering så lägger du till detaljerna nedan. Dessa är inte detaljerna för ditt incidious-konto",
+  "@addBasicAuthExplanation": {},
+  "addHeader": "Lägg till rubrik",
+  "@addHeader": {},
+  "value": "Värde",
+  "@value": {},
+  "testAndAddServer": "Testa och lägg till server",
+  "@testAndAddServer": {},
+  "advancedConfiguration": "Avancerade Inställningar",
+  "@advancedConfiguration": {},
+  "customHeaders": "Anpassade rubriker",
+  "@customHeaders": {},
+  "customHeadersExplanation": "Ange att anpassade rubriker skall skickas till invidious-servern",
+  "@customHeadersExplanation": {},
+  "serverAlreadyExists": "Servern finns redan i inställningarna",
+  "@serverAlreadyExists": {},
+  "wrongThumbnailConfiguration": "Servern går att nå men är ej konfigurerad på ett korrekt sätt, miniatyrbilder för filmer och kanaler kommer ej kunna visas korrekt. Inaktivera test av serverns konfiguration om detta ändå känns ok för dig, åtgärda annars servern",
+  "@wrongThumbnailConfiguration": {},
+  "alsoTestServerConfig": "Testa också konfigurationen hos servern, så att miniatyrbilder visas korrekt",
+  "@alsoTestServerConfig": {},
+  "openWikiLink": "Öppna wikipedia för att söka efter hjälp",
+  "@openWikiLink": {},
+  "serverUnreachable": "Servern går ej att nå, alternativt ej en korrekt invidious-server",
+  "@serverUnreachable": {},
+  "copyToDownloadFolder": "Kopiera till katalogen nedladdningar",
+  "@copyToDownloadFolder": {},
+  "fileCopiedToDownloadFolder": "Fil kopierad till katalogen nedladdningar",
+  "@fileCopiedToDownloadFolder": {},
+  "videoDeleted": "Film borttagen",
+  "@videoDeleted": {}
 }
