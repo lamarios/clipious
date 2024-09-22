@@ -1378,5 +1378,11 @@
   "alsoTestServerConfig": "サムネイルが適切に表示されるかなど、サーバーの設定をテスト",
   "@alsoTestServerConfig": {},
   "wrongThumbnailConfiguration": "サーバーには到達していますが、設定が正しくないため、動画とチャンネルのサムネイルが正しく表示されません。問題がなければサーバーテストを無効にし、そうでなければサーバーを修正してください",
-  "@wrongThumbnailConfiguration": {}
+  "@wrongThumbnailConfiguration": {},
+  "fileCopiedToDownloadFolder": "ダウンロードフォルダにコピーしました",
+  "@fileCopiedToDownloadFolder": {},
+  "copyToDownloadFolder": "ダウンロードフォルダへコピー",
+  "@copyToDownloadFolder": {},
+  "videoDeleted": "動画を削除しました",
+  "@videoDeleted": {}
 }
