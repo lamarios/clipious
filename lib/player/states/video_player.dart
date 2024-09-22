@@ -255,7 +255,8 @@ class VideoPlayerCubit extends MediaPlayerCubit<VideoPlayerState> {
           liveStream: false,
         );
       } else {
-        String baseUrl = (await db.getCurrentlySelectedServer()).url;
+        var server = await db.getCurrentlySelectedServer();
+        String baseUrl = (server).url;
 
         Map<String, String> resolutions = {};
 
@@ -265,10 +266,13 @@ class VideoPlayerCubit extends MediaPlayerCubit<VideoPlayerState> {
             ? null
             : newState
                 .video!.formatStreams[newState.video!.formatStreams.length - 1];
+
+        var useProxy = service.useProxy();
+
         String videoUrl = isHls
-            ? '${newState.video!.hlsUrl!}${service.useProxy() ? '?local=true' : ''}'
+            ? '${newState.video!.hlsUrl!}${useProxy ? '?local=true' : ''}'
             : isUsingDash()
-                ? '${newState.video!.dashUrl}${service.useProxy() ? '?local=true' : ''}'
+                ? '${newState.video!.dashUrl}${useProxy ? '?local=true' : ''}'
                 : formatStream?.url ?? '';
         if (!isUsingDash() && formatStream != null) {
           newState =
@@ -276,10 +280,9 @@ class VideoPlayerCubit extends MediaPlayerCubit<VideoPlayerState> {
         }
 
         // somehow invidious is sending google url even when using local proxy when not using dash
-        if (!isUsingDash() && service.useProxy()) {
+        if (!isUsingDash() && useProxy) {
           // we replace google's cdn by invidious server url.
-          videoUrl = videoUrl.replaceFirst(_googleCdnRegex,
-              '${(await db.getCurrentlySelectedServer()).url}/');
+          videoUrl = videoUrl.replaceFirst(_googleCdnRegex, '${(server).url}/');
         }
 
         log.info(
@@ -305,6 +308,7 @@ class VideoPlayerCubit extends MediaPlayerCubit<VideoPlayerState> {
         betterPlayerDataSource = BetterPlayerDataSource(
           BetterPlayerDataSourceType.network,
           videoUrl,
+          headers: !offline ? server.headersForUrl(videoUrl) : {},
           videoFormat: format,
           liveStream: newState.video!.liveNow,
           subtitles: newState.video!.captions

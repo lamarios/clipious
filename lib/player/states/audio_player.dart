@@ -113,13 +113,15 @@ class AudioPlayerCubit extends MediaPlayerCubit<AudioPlayerState> {
       player.setEvent(const MediaEvent(state: MediaState.loading));
       try {
         AudioSource? source;
+        final server = await db.getCurrentlySelectedServer();
 
         if (!offline) {
           if (service.useProxy()) {
             // audio only streams don't seem to work when using proxy mode, using formatted streams when proxy is enabled
             var formatStream = state
                 .video!.formatStreams[state.video!.formatStreams.length - 1];
-            source = AudioSource.uri(Uri.parse(formatStream.url));
+            source = AudioSource.uri(Uri.parse(formatStream.url),
+                headers: server.headersForUrl(formatStream.url));
           } else {
             AdaptiveFormat? audio = state.video?.adaptiveFormats
                 .where((element) => element.type.contains("audio"))
@@ -135,7 +137,8 @@ class AudioPlayerCubit extends MediaPlayerCubit<AudioPlayerState> {
               }
               emit(state);
 
-              source = AudioSource.uri(Uri.parse(audio.url));
+              source = AudioSource.uri(Uri.parse(audio.url),
+                  headers: server.headersForUrl(audio.url));
             }
           }
         } else {
