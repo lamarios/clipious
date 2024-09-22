@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:invidious/utils/states/item_list.dart';
-import 'package:invidious/utils/views/components/placeholders.dart';
-import 'package:invidious/videos/models/base_video.dart';
-import 'package:invidious/videos/views/tv/components/video_item.dart';
+import 'package:clipious/utils/states/item_list.dart';
+import 'package:clipious/utils/views/components/placeholders.dart';
+import 'package:clipious/videos/models/base_video.dart';
+import 'package:clipious/videos/views/tv/components/video_item.dart';
 
 import '../../../../utils.dart';
 import '../../../../videos/models/video_in_list.dart';

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:invidious/utils.dart';
+import 'package:clipious/utils.dart';
 
 class DeviceWidget extends StatelessWidget {
   final Widget phone;

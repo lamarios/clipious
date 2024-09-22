@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:invidious/videos/models/base_video.dart';
+import 'package:clipious/videos/models/base_video.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as p;

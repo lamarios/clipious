@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:invidious/channels/models/channel.dart';
-import 'package:invidious/globals.dart';
+import 'package:clipious/channels/models/channel.dart';
+import 'package:clipious/globals.dart';
 
 import '../models/db/video_filter.dart';
 

@@ -1,6 +1,6 @@
 import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
-import 'package:invidious/channels/views/components/playlists.dart';
+import 'package:clipious/channels/views/components/playlists.dart';
 
 @RoutePage()
 class ChannelPlaylistsTab extends StatelessWidget {

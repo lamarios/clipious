@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:invidious/utils/views/components/top_loading.dart';
+import 'package:clipious/utils/views/components/top_loading.dart';
 
 import '../../models/paginated_list.dart';
 import '../../states/paginated_list_view.dart';

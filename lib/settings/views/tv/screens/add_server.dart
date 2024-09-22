@@ -4,11 +4,11 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:gap/gap.dart';
-import 'package:invidious/globals.dart';
-import 'package:invidious/settings/states/add_server.dart';
-import 'package:invidious/settings/views/screens/add_server.dart';
-import 'package:invidious/settings/views/tv/screens/manage_single_server.dart';
-import 'package:invidious/utils/views/tv/components/tv_overscan.dart';
+import 'package:clipious/globals.dart';
+import 'package:clipious/settings/states/add_server.dart';
+import 'package:clipious/settings/views/screens/add_server.dart';
+import 'package:clipious/settings/views/tv/screens/manage_single_server.dart';
+import 'package:clipious/utils/views/tv/components/tv_overscan.dart';
 
 import '../../../../utils/string.dart';
 import '../../../../utils/views/tv/components/tv_text_field.dart';

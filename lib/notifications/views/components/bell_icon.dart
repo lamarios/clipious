@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:invidious/notifications/state/bell_icon.dart';
-import 'package:invidious/settings/states/settings.dart';
+import 'package:clipious/notifications/state/bell_icon.dart';
+import 'package:clipious/settings/states/settings.dart';
 
 import '../../../utils.dart';
 

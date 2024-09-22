@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
-import 'package:invidious/globals.dart';
-import 'package:invidious/home/models/db/home_layout.dart';
+import 'package:clipious/globals.dart';
+import 'package:clipious/home/models/db/home_layout.dart';
 
 const int maxSmallSources = 2;
 

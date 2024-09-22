@@ -2,10 +2,10 @@ import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:invidious/app/states/app.dart';
-import 'package:invidious/settings/states/server_settings.dart';
-import 'package:invidious/utils.dart';
-import 'package:invidious/utils/string.dart';
+import 'package:clipious/app/states/app.dart';
+import 'package:clipious/settings/states/server_settings.dart';
+import 'package:clipious/utils.dart';
+import 'package:clipious/utils/string.dart';
 import 'package:settings_ui/settings_ui.dart';
 
 import '../../models/db/server.dart';

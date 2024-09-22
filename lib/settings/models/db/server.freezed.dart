@@ -197,7 +197,7 @@ class __$$ServerImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$ServerImpl implements _Server {
+class _$ServerImpl extends _Server {
   const _$ServerImpl(
       {required this.url,
       this.authToken,
@@ -207,7 +207,8 @@ class _$ServerImpl implements _Server {
       @JsonKey(includeFromJson: false, includeToJson: false) this.region,
       final Map<String, String> customHeaders = const {},
       this.inUse = false})
-      : _customHeaders = customHeaders;
+      : _customHeaders = customHeaders,
+        super._();
 
   factory _$ServerImpl.fromJson(Map<String, dynamic> json) =>
       _$$ServerImplFromJson(json);
@@ -284,7 +285,7 @@ class _$ServerImpl implements _Server {
   }
 }
 
-abstract class _Server implements Server {
+abstract class _Server extends Server {
   const factory _Server(
       {required final String url,
       final String? authToken,
@@ -296,6 +297,7 @@ abstract class _Server implements Server {
       final String? region,
       final Map<String, String> customHeaders,
       final bool inUse}) = _$ServerImpl;
+  const _Server._() : super._();
 
   factory _Server.fromJson(Map<String, dynamic> json) = _$ServerImpl.fromJson;
 

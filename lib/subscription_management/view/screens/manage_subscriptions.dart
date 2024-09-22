@@ -2,12 +2,12 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:invidious/offline_subscriptions/models/offline_subscription.dart';
-import 'package:invidious/router.dart';
-import 'package:invidious/subscription_management/models/subscription.dart';
-import 'package:invidious/utils.dart';
-import 'package:invidious/utils/views/components/simple_list_item.dart';
-import 'package:invidious/utils/views/components/top_loading.dart';
+import 'package:clipious/offline_subscriptions/models/offline_subscription.dart';
+import 'package:clipious/router.dart';
+import 'package:clipious/subscription_management/models/subscription.dart';
+import 'package:clipious/utils.dart';
+import 'package:clipious/utils/views/components/simple_list_item.dart';
+import 'package:clipious/utils/views/components/top_loading.dart';
 
 import '../../states/manage_subscriptions.dart';
 

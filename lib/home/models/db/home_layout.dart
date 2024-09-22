@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:invidious/router.dart';
-import 'package:invidious/videos/models/video_in_list.dart';
+import 'package:clipious/router.dart';
+import 'package:clipious/videos/models/video_in_list.dart';
 
 import '../../../downloads/states/download_manager.dart';
 import '../../../globals.dart';

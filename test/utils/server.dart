@@ -1,12 +1,12 @@
-import 'package:invidious/globals.dart';
-import 'package:invidious/settings/models/db/server.dart';
-import 'package:invidious/utils/sembast_sqflite_database.dart';
+import 'package:clipious/globals.dart';
+import 'package:clipious/settings/models/db/server.dart';
+import 'package:clipious/utils/sembast_sqflite_database.dart';
 
 import '../globals.dart';
 
 Future<Server> getLoggedInTestServer() async {
   var server = Server(url: localInvidiousServer);
-  server.sidCookie = await service.loginWithCookies(localInvidiousServer, "test", "test");
+  server = server.copyWith(sidCookie: await service.loginWithCookies(localInvidiousServer, "test", "test"));
   return server;
 }
 

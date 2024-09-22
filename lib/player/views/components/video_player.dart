@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:invidious/downloads/models/downloaded_video.dart';
-import 'package:invidious/player/states/video_player.dart';
-import 'package:invidious/settings/states/settings.dart';
+import 'package:clipious/downloads/models/downloaded_video.dart';
+import 'package:clipious/player/states/video_player.dart';
+import 'package:clipious/settings/states/settings.dart';
 import 'package:river_player/river_player.dart';
 
 import '../../../videos/models/video.dart';

@@ -1,4 +1,4 @@
-import 'package:invidious/settings/models/invidious_server_stats.dart';
+import 'package:clipious/settings/models/invidious_server_stats.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'invidious_public_server.g.dart';

@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:invidious/extensions.dart';
-import 'package:invidious/globals.dart';
-import 'package:invidious/videos/models/adaptive_format.dart';
+import 'package:clipious/extensions.dart';
+import 'package:clipious/globals.dart';
+import 'package:clipious/videos/models/adaptive_format.dart';
 
 import '../models/base_video.dart';
 

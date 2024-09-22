@@ -10,12 +10,12 @@ import 'package:easy_debounce/easy_throttle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:invidious/globals.dart';
-import 'package:invidious/player/models/media_command.dart';
-import 'package:invidious/player/models/media_event.dart';
-import 'package:invidious/player/states/interfaces/media_player.dart';
-import 'package:invidious/utils.dart';
-import 'package:invidious/utils/models/image_object.dart';
+import 'package:clipious/globals.dart';
+import 'package:clipious/player/models/media_command.dart';
+import 'package:clipious/player/models/media_event.dart';
+import 'package:clipious/player/states/interfaces/media_player.dart';
+import 'package:clipious/utils.dart';
+import 'package:clipious/utils/models/image_object.dart';
 import 'package:logging/logging.dart';
 import 'package:simple_pip_mode/simple_pip.dart';
 

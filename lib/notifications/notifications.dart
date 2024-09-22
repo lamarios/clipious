@@ -1,8 +1,8 @@
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/foundation.dart';
-import 'package:invidious/globals.dart';
-import 'package:invidious/notifications/models/db/subscription_notifications.dart';
-import 'package:invidious/router.dart';
+import 'package:clipious/globals.dart';
+import 'package:clipious/notifications/models/db/subscription_notifications.dart';
+import 'package:clipious/router.dart';
 import 'package:logging/logging.dart';
 
 final log = Logger('notifications');

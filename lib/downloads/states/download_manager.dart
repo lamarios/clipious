@@ -7,10 +7,10 @@ import 'package:downloadsfolder/downloadsfolder.dart';
 import 'package:easy_debounce/easy_throttle.dart';
 import 'package:ffmpeg_kit_flutter_full/ffmpeg_kit.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:invidious/downloads/models/downloaded_video.dart';
-import 'package:invidious/extensions.dart';
-import 'package:invidious/globals.dart';
-import 'package:invidious/utils/models/image_object.dart';
+import 'package:clipious/downloads/models/downloaded_video.dart';
+import 'package:clipious/extensions.dart';
+import 'package:clipious/globals.dart';
+import 'package:clipious/utils/models/image_object.dart';
 import 'package:logging/logging.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as p;
@@ -113,6 +113,9 @@ class DownloadManagerCubit extends Cubit<DownloadManagerState> {
       return false;
     } else {
       Video vid = await service.getVideo(videoId);
+
+      final server = await db.getCurrentlySelectedServer();
+
       var downloadedVideo = DownloadedVideo(
           videoId: vid.videoId,
           title: vid.title,
@@ -157,7 +160,9 @@ class DownloadManagerCubit extends Cubit<DownloadManagerState> {
         //download thumbnail
         var thumbnailPath = await downloadedVideo.thumbnailPath;
         log.fine("Downloading thumbnail to: $thumbnailPath");
-        await dio.download(thumbUrl, thumbnailPath, cancelToken: cancelToken);
+        await dio.download(thumbUrl, thumbnailPath,
+            cancelToken: cancelToken,
+            options: Options(headers: server.headersForUrl(thumbUrl)));
       }
 
       // download video
@@ -176,7 +181,8 @@ class DownloadManagerCubit extends Cubit<DownloadManagerState> {
                     count, total, downloadedVideo,
                     step: 1, totalSteps: audioOnly ? 2 : 3),
                 cancelToken: cancelToken,
-                deleteOnError: true)
+                deleteOnError: true,
+                options: Options(headers: server.headersForUrl(audioUrl)))
             .catchError((err) {
           onDownloadError(err, downloadedVideo);
           return Response<void>(requestOptions: RequestOptions());
@@ -193,6 +199,7 @@ class DownloadManagerCubit extends Cubit<DownloadManagerState> {
                         totalSteps: 3,
                       ),
                   cancelToken: cancelToken,
+                  options: Options(headers: server.headersForUrl(videoUrl)),
                   deleteOnError: true)
               .catchError((err) {
             onDownloadError(err, downloadedVideo);

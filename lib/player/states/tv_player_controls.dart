@@ -4,7 +4,7 @@ import 'package:easy_debounce/easy_throttle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:invidious/player/states/player.dart';
+import 'package:clipious/player/states/player.dart';
 import 'package:logging/logging.dart';
 
 import '../../utils.dart';

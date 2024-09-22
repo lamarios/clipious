@@ -2,11 +2,11 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:invidious/app/states/app.dart';
-import 'package:invidious/globals.dart';
-import 'package:invidious/home/models/db/home_layout.dart';
-import 'package:invidious/home/states/home.dart';
-import 'package:invidious/router.dart';
+import 'package:clipious/app/states/app.dart';
+import 'package:clipious/globals.dart';
+import 'package:clipious/home/models/db/home_layout.dart';
+import 'package:clipious/home/states/home.dart';
+import 'package:clipious/router.dart';
 
 import '../../../utils/views/components/app_icon.dart';
 

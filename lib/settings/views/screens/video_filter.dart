@@ -2,10 +2,10 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:invidious/extensions.dart';
-import 'package:invidious/router.dart';
-import 'package:invidious/settings/states/video_filter_channel.dart';
-import 'package:invidious/settings/views/components/video_filter_channel.dart';
+import 'package:clipious/extensions.dart';
+import 'package:clipious/router.dart';
+import 'package:clipious/settings/states/video_filter_channel.dart';
+import 'package:clipious/settings/views/components/video_filter_channel.dart';
 
 import '../../models/db/video_filter.dart';
 import '../../states/video_filter.dart';

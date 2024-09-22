@@ -2,9 +2,9 @@ import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:invidious/settings/states/settings.dart';
-import 'package:invidious/settings/views/tv/screens/settings.dart';
-import 'package:invidious/utils/views/tv/components/tv_overscan.dart';
+import 'package:clipious/settings/states/settings.dart';
+import 'package:clipious/settings/views/tv/screens/settings.dart';
+import 'package:clipious/utils/views/tv/components/tv_overscan.dart';
 
 @RoutePage()
 class TvDearrowSettingsScreen extends StatelessWidget {

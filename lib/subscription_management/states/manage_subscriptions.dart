@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:invidious/extensions.dart';
-import 'package:invidious/offline_subscriptions/models/offline_subscription.dart';
+import 'package:clipious/extensions.dart';
+import 'package:clipious/offline_subscriptions/models/offline_subscription.dart';
 import 'package:logging/logging.dart';
 
 import '../../globals.dart';

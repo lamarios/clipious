@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_swipe_action_cell/core/cell.dart';
-import 'package:invidious/playlists/views/components/playlist_thumbnail.dart';
-import 'package:invidious/utils.dart';
-import 'package:invidious/utils/views/components/placeholders.dart';
-import 'package:invidious/videos/models/video_in_list.dart';
-import 'package:invidious/videos/views/components/compact_video.dart';
+import 'package:clipious/playlists/views/components/playlist_thumbnail.dart';
+import 'package:clipious/utils.dart';
+import 'package:clipious/utils/views/components/placeholders.dart';
+import 'package:clipious/videos/models/video_in_list.dart';
+import 'package:clipious/videos/views/components/compact_video.dart';
 
 import '../../../globals.dart';
 import '../../../videos/views/components/add_to_queue_button.dart';

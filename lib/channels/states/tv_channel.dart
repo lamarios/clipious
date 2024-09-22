@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:invidious/globals.dart';
+import 'package:clipious/globals.dart';
 
 part 'tv_channel.freezed.dart';
 

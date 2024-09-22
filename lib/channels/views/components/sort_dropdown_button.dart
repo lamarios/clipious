@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:invidious/channels/models/channel_sort_by.dart';
+import 'package:clipious/channels/models/channel_sort_by.dart';
 
 class SortDropdownButton extends StatelessWidget {
   final ChannelSortBy selectedSortingOption;

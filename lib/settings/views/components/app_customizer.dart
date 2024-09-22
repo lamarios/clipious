@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:invidious/home/models/db/home_layout.dart';
+import 'package:clipious/home/models/db/home_layout.dart';
 
 import '../../states/app_customizer.dart';
 import '../../states/settings.dart';

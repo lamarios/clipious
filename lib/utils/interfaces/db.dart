@@ -1,6 +1,6 @@
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:invidious/offline_subscriptions/models/offline_subscription.dart';
+import 'package:clipious/offline_subscriptions/models/offline_subscription.dart';
 
 import '../../downloads/models/downloaded_video.dart';
 import '../../home/models/db/home_layout.dart';

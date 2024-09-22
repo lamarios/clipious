@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:invidious/app/states/app.dart';
-import 'package:invidious/extensions.dart';
-import 'package:invidious/router.dart';
-import 'package:invidious/utils.dart';
-import 'package:invidious/utils/views/tv/components/tv_button.dart';
-import 'package:invidious/utils/views/tv/components/tv_overscan.dart';
+import 'package:clipious/app/states/app.dart';
+import 'package:clipious/extensions.dart';
+import 'package:clipious/router.dart';
+import 'package:clipious/utils.dart';
+import 'package:clipious/utils/views/tv/components/tv_button.dart';
+import 'package:clipious/utils/views/tv/components/tv_overscan.dart';
 import 'package:locale_names/locale_names.dart';
 import 'package:logging/logging.dart';
 
@@ -67,7 +67,7 @@ class TVSettingsScreen extends StatelessWidget {
   showSelectLanguage(BuildContext context) {
     var localsList = AppLocalizations.supportedLocales;
     var localsStrings =
-        localsList.map((e) => e.nativeDisplayLanguageScript ?? '').toList();
+        localsList.map((e) => e.nativeDisplayLanguageScript).toList();
     var locals = AppLocalizations.of(context)!;
     var cubit = context.read<SettingsCubit>();
 

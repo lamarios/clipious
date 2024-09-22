@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:invidious/downloads/models/downloaded_video.dart';
-import 'package:invidious/downloads/states/download_manager.dart';
-import 'package:invidious/downloads/states/downloaded_video.dart';
-import 'package:invidious/globals.dart';
-import 'package:invidious/player/states/player.dart';
+import 'package:clipious/downloads/models/downloaded_video.dart';
+import 'package:clipious/downloads/states/download_manager.dart';
+import 'package:clipious/downloads/states/downloaded_video.dart';
+import 'package:clipious/globals.dart';
+import 'package:clipious/player/states/player.dart';
 
 import '../../../videos/views/components/compact_video.dart';
 

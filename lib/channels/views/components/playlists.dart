@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:invidious/globals.dart';
-import 'package:invidious/playlists/views/components/playlist_list.dart';
-import 'package:invidious/utils/models/paginated_list.dart';
+import 'package:clipious/globals.dart';
+import 'package:clipious/playlists/views/components/playlist_list.dart';
+import 'package:clipious/utils/models/paginated_list.dart';
 
 import '../../../playlists/models/playlist.dart';
 

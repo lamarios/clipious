@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:invidious/globals.dart';
-import 'package:invidious/settings/states/video_filter_edit.dart';
-import 'package:invidious/utils.dart';
-import 'package:invidious/utils/views/components/select_list_dialog.dart';
+import 'package:clipious/globals.dart';
+import 'package:clipious/settings/states/video_filter_edit.dart';
+import 'package:clipious/utils.dart';
+import 'package:clipious/utils/views/components/select_list_dialog.dart';
 
 import '../../../channels/models/channel.dart';
 import '../../models/db/video_filter.dart';

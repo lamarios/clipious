@@ -1,6 +1,6 @@
-import 'package:invidious/settings/models/db/server.dart';
-import 'package:invidious/utils/models/sharelink.dart';
-import 'package:invidious/videos/models/video_in_list.dart';
+import 'package:clipious/settings/models/db/server.dart';
+import 'package:clipious/utils/models/sharelink.dart';
+import 'package:clipious/videos/models/video_in_list.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import '../../utils/models/image_object.dart';

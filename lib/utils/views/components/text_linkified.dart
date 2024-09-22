@@ -1,8 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
-import 'package:invidious/player/states/player.dart';
-import 'package:invidious/router.dart';
+import 'package:clipious/player/states/player.dart';
+import 'package:clipious/router.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../globals.dart';

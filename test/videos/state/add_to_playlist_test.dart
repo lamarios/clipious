@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:invidious/globals.dart';
-import 'package:invidious/videos/states/add_to_playlist.dart';
+import 'package:clipious/globals.dart';
+import 'package:clipious/videos/states/add_to_playlist.dart';
 
 import '../../utils/server.dart';
 

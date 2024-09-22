@@ -1,15 +1,15 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:invidious/channels/models/channel.dart';
-import 'package:invidious/globals.dart';
-import 'package:invidious/router.dart';
-import 'package:invidious/search/models/search_type.dart';
-import 'package:invidious/search/states/search.dart';
-import 'package:invidious/search/views/screens/search.dart';
-import 'package:invidious/utils.dart';
-import 'package:invidious/utils/models/paginated_list.dart';
-import 'package:invidious/utils/views/components/paginated_list_view.dart';
+import 'package:clipious/channels/models/channel.dart';
+import 'package:clipious/globals.dart';
+import 'package:clipious/router.dart';
+import 'package:clipious/search/models/search_type.dart';
+import 'package:clipious/search/states/search.dart';
+import 'package:clipious/search/views/screens/search.dart';
+import 'package:clipious/utils.dart';
+import 'package:clipious/utils/models/paginated_list.dart';
+import 'package:clipious/utils/views/components/paginated_list_view.dart';
 
 @RoutePage()
 class SearchChannelTab extends StatelessWidget {

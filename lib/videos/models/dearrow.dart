@@ -1,6 +1,6 @@
-import 'package:invidious/globals.dart';
-import 'package:invidious/videos/models/base_video.dart';
-import 'package:invidious/videos/models/db/dearrow_cache.dart';
+import 'package:clipious/globals.dart';
+import 'package:clipious/videos/models/base_video.dart';
+import 'package:clipious/videos/models/db/dearrow_cache.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import '../../settings/models/db/settings.dart';

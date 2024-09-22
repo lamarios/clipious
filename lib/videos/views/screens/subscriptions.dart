@@ -1,9 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:invidious/globals.dart';
-import 'package:invidious/router.dart';
-import 'package:invidious/videos/views/components/subscriptions.dart';
+import 'package:clipious/globals.dart';
+import 'package:clipious/router.dart';
+import 'package:clipious/videos/views/components/subscriptions.dart';
 
 @RoutePage()
 class SubscriptionScreen extends StatelessWidget {

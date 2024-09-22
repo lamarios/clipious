@@ -2,12 +2,12 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:invidious/app/states/app.dart';
-import 'package:invidious/router.dart';
-import 'package:invidious/settings/states/server_list_settings.dart';
-import 'package:invidious/settings/views/components/manager_server_inner.dart';
-import 'package:invidious/utils/views/components/app_icon.dart';
-import 'package:invidious/welcome_wizard/states/welcome_wizard.dart';
+import 'package:clipious/app/states/app.dart';
+import 'package:clipious/router.dart';
+import 'package:clipious/settings/states/server_list_settings.dart';
+import 'package:clipious/settings/views/components/manager_server_inner.dart';
+import 'package:clipious/utils/views/components/app_icon.dart';
+import 'package:clipious/welcome_wizard/states/welcome_wizard.dart';
 
 import '../../../settings/models/db/server.dart';
 

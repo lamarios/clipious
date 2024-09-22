@@ -3,8 +3,8 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_fadein/flutter_fadein.dart';
-import 'package:invidious/globals.dart';
-import 'package:invidious/playlists/views/components/playlist_in_list.dart';
+import 'package:clipious/globals.dart';
+import 'package:clipious/playlists/views/components/playlist_in_list.dart';
 
 import '../../../playlists/views/components/playlist_thumbnail.dart';
 import '../../../utils.dart';

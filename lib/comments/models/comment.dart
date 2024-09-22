@@ -1,5 +1,5 @@
-import 'package:invidious/comments/models/comment_replies.dart';
-import 'package:invidious/comments/models/creator_heart.dart';
+import 'package:clipious/comments/models/comment_replies.dart';
+import 'package:clipious/comments/models/creator_heart.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import '../../utils/models/image_object.dart';

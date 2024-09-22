@@ -1,7 +1,7 @@
-name: invidious
-version: 1.21.2+4061
+name: clipious
+version: 1.21.3+4062
 publish_to: none
-description: A new Flutter project.
+description: Client for invidious.
 environment: 
   sdk: '>=3.0.0 <4.0.0'
 dependencies: 
@@ -38,6 +38,10 @@ dependencies:
   intl: 0.19.0
   json_annotation: 4.9.0
   just_audio: 0.9.40
+  locale_names:  1.1.1
+  #    git:
+  #      url: https://github.com/lamarios/locale_names.git
+  #      ref: master
   logging: 1.2.0
   package_info_plus: 8.0.2
   path: any
@@ -56,11 +60,7 @@ dependencies:
     sdk: flutter
   flutter_localizations: 
     sdk: flutter
-  locale_names: 
-    git: 
-      url: https://github.com/lamarios/locale_names.git
-      ref: master
-  river_player: 
+  river_player:
     git: 
       url: https://github.com/lamarios/river_player.git
       ref: master
@@ -72,7 +72,7 @@ dev_dependencies:
   auto_route_generator: any
   build_runner: ^2.4.10
   copy_with_extension_gen: 5.0.4
-  flutter_launcher_icons: ^0.13.1
+  flutter_launcher_icons: ^0.14.0
   flutter_lints: ^4.0.0
   freezed: ^2.5.7
   json_serializable: ^6.7.1

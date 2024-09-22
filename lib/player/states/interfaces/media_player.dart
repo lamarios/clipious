@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:invidious/downloads/models/downloaded_video.dart';
-import 'package:invidious/player/models/media_event.dart';
+import 'package:clipious/downloads/models/downloaded_video.dart';
+import 'package:clipious/player/models/media_event.dart';
 
 import '../../../videos/models/video.dart';
 import '../../models/media_command.dart';

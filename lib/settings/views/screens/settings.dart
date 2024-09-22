@@ -3,11 +3,11 @@ import 'package:feedback/feedback.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:invidious/app/states/app.dart';
-import 'package:invidious/router.dart';
-import 'package:invidious/utils.dart';
-import 'package:invidious/utils/models/imgur_error.dart';
-import 'package:invidious/utils/views/components/app_icon.dart';
+import 'package:clipious/app/states/app.dart';
+import 'package:clipious/router.dart';
+import 'package:clipious/utils.dart';
+import 'package:clipious/utils/models/imgur_error.dart';
+import 'package:clipious/utils/views/components/app_icon.dart';
 import 'package:settings_ui/settings_ui.dart';
 
 import '../../states/settings.dart';

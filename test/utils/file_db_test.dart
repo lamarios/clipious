@@ -1,8 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:invidious/notifications/models/db/channel_notifications.dart';
-import 'package:invidious/notifications/models/db/playlist_notifications.dart';
-import 'package:invidious/notifications/models/db/subscription_notifications.dart';
-import 'package:invidious/utils/file_db.dart';
+import 'package:clipious/notifications/models/db/channel_notifications.dart';
+import 'package:clipious/notifications/models/db/playlist_notifications.dart';
+import 'package:clipious/notifications/models/db/subscription_notifications.dart';
+import 'package:clipious/utils/file_db.dart';
 
 main() {
   tearDown(() async {

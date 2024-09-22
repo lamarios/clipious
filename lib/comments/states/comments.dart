@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:invidious/comments/models/video_comments.dart';
-import 'package:invidious/videos/models/base_video.dart';
+import 'package:clipious/comments/models/video_comments.dart';
+import 'package:clipious/videos/models/base_video.dart';
 
 import '../../globals.dart';
 import '../../settings/models/errors/invidious_service_error.dart';

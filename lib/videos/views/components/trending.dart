@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:invidious/globals.dart';
-import 'package:invidious/utils/views/tv/components/tv_horizontal_item_list.dart';
+import 'package:clipious/globals.dart';
+import 'package:clipious/utils/views/tv/components/tv_horizontal_item_list.dart';
 
 import '../../../main.dart';
 import '../../../utils/models/paginated_list.dart';

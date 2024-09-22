@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:invidious/globals.dart';
-import 'package:invidious/player/states/interfaces/media_player.dart';
-import 'package:invidious/player/states/player.dart';
+import 'package:clipious/globals.dart';
+import 'package:clipious/player/states/interfaces/media_player.dart';
+import 'package:clipious/player/states/player.dart';
 import '../../../downloads/models/downloaded_video.dart';
 import '../../../videos/models/video.dart';
 import '../../../videos/views/components/info.dart';

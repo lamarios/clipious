@@ -1,9 +1,9 @@
 import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:invidious/globals.dart';
-import 'package:invidious/utils.dart';
-import 'package:invidious/videos/models/base_video.dart';
+import 'package:clipious/globals.dart';
+import 'package:clipious/utils.dart';
+import 'package:clipious/videos/models/base_video.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:logging/logging.dart';
 

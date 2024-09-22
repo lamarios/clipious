@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:invidious/globals.dart';
+import 'package:clipious/globals.dart';
 
 enum MultiValueSwitchPosition {
   left,

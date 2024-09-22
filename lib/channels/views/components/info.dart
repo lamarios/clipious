@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
-import 'package:invidious/channels/models/channel.dart';
-import 'package:invidious/globals.dart';
-import 'package:invidious/utils.dart';
+import 'package:clipious/channels/models/channel.dart';
+import 'package:clipious/globals.dart';
+import 'package:clipious/utils.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../subscription_management/view/components/subscribe_button.dart';

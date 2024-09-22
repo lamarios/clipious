@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:invidious/settings/models/errors/server_already_exists.dart';
-import 'package:invidious/settings/models/errors/wrong_thumbnail_url.dart';
+import 'package:clipious/settings/models/errors/server_already_exists.dart';
+import 'package:clipious/settings/models/errors/wrong_thumbnail_url.dart';
 
 import '../../globals.dart';
 import '../models/db/server.dart';

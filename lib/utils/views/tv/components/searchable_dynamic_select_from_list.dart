@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:invidious/utils/states/tv/searchable_dynamic_select_from_list.dart';
-import 'package:invidious/utils/views/tv/components/tv_overscan.dart';
-import 'package:invidious/utils/views/tv/components/tv_text_field.dart';
+import 'package:clipious/utils/states/tv/searchable_dynamic_select_from_list.dart';
+import 'package:clipious/utils/views/tv/components/tv_overscan.dart';
+import 'package:clipious/utils/views/tv/components/tv_text_field.dart';
 
 import '../../../../settings/views/tv/screens/settings.dart';
 

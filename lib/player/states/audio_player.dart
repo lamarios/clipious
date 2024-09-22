@@ -1,10 +1,10 @@
 import 'package:easy_debounce/easy_throttle.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:invidious/downloads/models/downloaded_video.dart';
-import 'package:invidious/extensions.dart';
-import 'package:invidious/globals.dart';
-import 'package:invidious/player/states/interfaces/media_player.dart';
-import 'package:invidious/videos/models/video.dart';
+import 'package:clipious/downloads/models/downloaded_video.dart';
+import 'package:clipious/extensions.dart';
+import 'package:clipious/globals.dart';
+import 'package:clipious/player/states/interfaces/media_player.dart';
+import 'package:clipious/videos/models/video.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:logging/logging.dart';
 
@@ -113,13 +113,15 @@ class AudioPlayerCubit extends MediaPlayerCubit<AudioPlayerState> {
       player.setEvent(const MediaEvent(state: MediaState.loading));
       try {
         AudioSource? source;
+        final server = await db.getCurrentlySelectedServer();
 
         if (!offline) {
           if (service.useProxy()) {
             // audio only streams don't seem to work when using proxy mode, using formatted streams when proxy is enabled
             var formatStream = state
                 .video!.formatStreams[state.video!.formatStreams.length - 1];
-            source = AudioSource.uri(Uri.parse(formatStream.url));
+            source = AudioSource.uri(Uri.parse(formatStream.url),
+                headers: server.headersForUrl(formatStream.url));
           } else {
             AdaptiveFormat? audio = state.video?.adaptiveFormats
                 .where((element) => element.type.contains("audio"))
@@ -135,7 +137,8 @@ class AudioPlayerCubit extends MediaPlayerCubit<AudioPlayerState> {
               }
               emit(state);
 
-              source = AudioSource.uri(Uri.parse(audio.url));
+              source = AudioSource.uri(Uri.parse(audio.url),
+                  headers: server.headersForUrl(audio.url));
             }
           }
         } else {

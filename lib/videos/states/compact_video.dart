@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:bloc/bloc.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:invidious/downloads/models/downloaded_video.dart';
+import 'package:clipious/downloads/models/downloaded_video.dart';
 
 part 'compact_video.freezed.dart';
 

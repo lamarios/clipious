@@ -4,11 +4,11 @@ import 'dart:ui';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
-import 'package:invidious/globals.dart';
-import 'package:invidious/notifications/models/db/subscription_notifications.dart';
-import 'package:invidious/settings/states/settings.dart';
-import 'package:invidious/utils/file_db.dart';
-import 'package:invidious/videos/models/video_in_list.dart';
+import 'package:clipious/globals.dart';
+import 'package:clipious/notifications/models/db/subscription_notifications.dart';
+import 'package:clipious/settings/states/settings.dart';
+import 'package:clipious/utils/file_db.dart';
+import 'package:clipious/videos/models/video_in_list.dart';
 import 'package:logging/logging.dart';
 import 'package:workmanager/workmanager.dart';
 
