@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:invidious/player/models/media_event.dart';
-import 'package:invidious/player/states/interfaces/media_player.dart';
+import 'package:clipious/player/models/media_event.dart';
+import 'package:clipious/player/states/interfaces/media_player.dart';
 import 'package:logging/logging.dart';
 
 import '../../globals.dart';

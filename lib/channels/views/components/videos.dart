@@ -1,10 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:invidious/channels/models/channel_videos.dart';
-import 'package:invidious/globals.dart';
-import 'package:invidious/videos/models/video_in_list.dart';
-import 'package:invidious/videos/views/components/video_list.dart';
+import 'package:clipious/channels/models/channel_videos.dart';
+import 'package:clipious/globals.dart';
+import 'package:clipious/videos/models/video_in_list.dart';
+import 'package:clipious/videos/views/components/video_list.dart';
 
 import '../../../utils/models/paginated_list.dart';
 import '../../models/channel.dart';

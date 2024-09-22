@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_swipe_action_cell/core/cell.dart';
-import 'package:invidious/router.dart';
-import 'package:invidious/settings/states/video_filter.dart';
-import 'package:invidious/settings/states/video_filter_channel.dart';
-import 'package:invidious/settings/views/components/video_filter_item.dart';
+import 'package:clipious/router.dart';
+import 'package:clipious/settings/states/video_filter.dart';
+import 'package:clipious/settings/states/video_filter_channel.dart';
+import 'package:clipious/settings/views/components/video_filter_item.dart';
 
 import '../../../utils/models/image_object.dart';
 import '../../../videos/views/components/video_thumbnail.dart';

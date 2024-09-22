@@ -1,7 +1,7 @@
 import 'package:river_player/river_player.dart';
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:invidious/player/states/video_player.dart';
+import 'package:clipious/player/states/video_player.dart';
 import 'package:logging/logging.dart';
 
 import '../../settings/states/settings.dart';

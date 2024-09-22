@@ -1,4 +1,4 @@
-name: invidious
+name: clipious
 version: 1.21.3+4062
 publish_to: none
 description: Client for invidious.

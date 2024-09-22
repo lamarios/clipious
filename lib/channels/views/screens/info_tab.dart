@@ -1,7 +1,7 @@
 import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
-import 'package:invidious/channels/views/components/info.dart';
-import 'package:invidious/utils/views/components/placeholders.dart';
+import 'package:clipious/channels/views/components/info.dart';
+import 'package:clipious/utils/views/components/placeholders.dart';
 
 import '../../models/channel.dart';
 

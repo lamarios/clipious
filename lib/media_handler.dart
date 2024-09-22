@@ -1,5 +1,5 @@
 import 'package:audio_service/audio_service.dart';
-import 'package:invidious/player/states/player.dart';
+import 'package:clipious/player/states/player.dart';
 
 class MediaHandler extends BaseAudioHandler
     with

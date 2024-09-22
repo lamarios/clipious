@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:gap/gap.dart';
-import 'package:invidious/settings/views/tv/screens/settings.dart';
-import 'package:invidious/utils/string.dart';
-import 'package:invidious/utils/views/tv/components/tv_button.dart';
-import 'package:invidious/utils/views/tv/components/tv_overscan.dart';
+import 'package:clipious/settings/views/tv/screens/settings.dart';
+import 'package:clipious/utils/string.dart';
+import 'package:clipious/utils/views/tv/components/tv_button.dart';
+import 'package:clipious/utils/views/tv/components/tv_overscan.dart';
 
 import '../../../../app/states/app.dart';
 import '../../../../utils.dart';

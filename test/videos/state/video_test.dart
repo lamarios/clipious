@@ -1,15 +1,15 @@
 import 'dart:collection';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:invidious/app/states/app.dart';
-import 'package:invidious/downloads/states/download_manager.dart';
-import 'package:invidious/globals.dart';
-import 'package:invidious/home/models/db/home_layout.dart';
-import 'package:invidious/player/states/player.dart';
-import 'package:invidious/service.dart';
-import 'package:invidious/settings/states/settings.dart';
-import 'package:invidious/videos/models/dislike.dart';
-import 'package:invidious/videos/states/video.dart';
+import 'package:clipious/app/states/app.dart';
+import 'package:clipious/downloads/states/download_manager.dart';
+import 'package:clipious/globals.dart';
+import 'package:clipious/home/models/db/home_layout.dart';
+import 'package:clipious/player/states/player.dart';
+import 'package:clipious/service.dart';
+import 'package:clipious/settings/states/settings.dart';
+import 'package:clipious/videos/models/dislike.dart';
+import 'package:clipious/videos/states/video.dart';
 
 import '../../test_app_cubit.dart';
 import '../../test_player_cubit.dart';

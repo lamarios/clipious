@@ -1,7 +1,7 @@
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:invidious/channels/states/channel.dart';
-import 'package:invidious/globals.dart';
+import 'package:clipious/channels/states/channel.dart';
+import 'package:clipious/globals.dart';
 
 import '../../utils/server.dart';
 

@@ -1,5 +1,5 @@
-import 'package:invidious/settings/models/db/video_filter.dart';
-import 'package:invidious/videos/models/dearrow.dart';
+import 'package:clipious/settings/models/db/video_filter.dart';
+import 'package:clipious/videos/models/dearrow.dart';
 import 'package:logging/logging.dart';
 
 import '../videos/models/base_video.dart';

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:invidious/downloads/models/downloaded_video.dart';
-import 'package:invidious/globals.dart';
-import 'package:invidious/utils/models/image_object.dart';
-import 'package:invidious/videos/states/compact_video.dart';
-import 'package:invidious/videos/views/components/video_thumbnail.dart';
+import 'package:clipious/downloads/models/downloaded_video.dart';
+import 'package:clipious/globals.dart';
+import 'package:clipious/utils/models/image_object.dart';
+import 'package:clipious/videos/states/compact_video.dart';
+import 'package:clipious/videos/views/components/video_thumbnail.dart';
 
 import '../../models/base_video.dart';
 import 'offline_video_thumbnail.dart';

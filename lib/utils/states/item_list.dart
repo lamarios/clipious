@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:invidious/settings/models/errors/invidious_service_error.dart';
+import 'package:clipious/settings/models/errors/invidious_service_error.dart';
 import 'package:logging/logging.dart';
 
 import '../models/paginated_list.dart';

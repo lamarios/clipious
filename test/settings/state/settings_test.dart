@@ -1,10 +1,10 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:invidious/app/states/app.dart';
-import 'package:invidious/globals.dart';
-import 'package:invidious/home/models/db/home_layout.dart';
-import 'package:invidious/settings/models/db/settings.dart';
-import 'package:invidious/settings/states/settings.dart';
-import 'package:invidious/utils/sembast_sqflite_database.dart';
+import 'package:clipious/app/states/app.dart';
+import 'package:clipious/globals.dart';
+import 'package:clipious/home/models/db/home_layout.dart';
+import 'package:clipious/settings/models/db/settings.dart';
+import 'package:clipious/settings/states/settings.dart';
+import 'package:clipious/utils/sembast_sqflite_database.dart';
 
 import '../../test_app_cubit.dart';
 import '../../test_settings_cubit.dart';

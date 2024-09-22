@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:invidious/utils/views/components/multi_value_switch.dart';
+import 'package:clipious/utils/views/components/multi_value_switch.dart';
 
 import '../../../settings/states/settings.dart';
 import '../../states/player.dart';

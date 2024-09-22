@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:invidious/utils/views/components/conditional_wrap.dart';
-import 'package:invidious/videos/models/video.dart';
-import 'package:invidious/videos/views/components/play_button.dart';
+import 'package:clipious/utils/views/components/conditional_wrap.dart';
+import 'package:clipious/videos/models/video.dart';
+import 'package:clipious/videos/views/components/play_button.dart';
 
 import '../../../player/states/player.dart';
 import '../../../settings/states/settings.dart';

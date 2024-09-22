@@ -2,9 +2,9 @@ import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:invidious/downloads/models/downloaded_video.dart';
-import 'package:invidious/globals.dart';
-import 'package:invidious/player/states/player.dart';
+import 'package:clipious/downloads/models/downloaded_video.dart';
+import 'package:clipious/globals.dart';
+import 'package:clipious/player/states/player.dart';
 import 'package:logging/logging.dart';
 
 import 'download_manager.dart';

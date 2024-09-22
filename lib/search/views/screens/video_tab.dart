@@ -1,13 +1,13 @@
 import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:invidious/globals.dart';
-import 'package:invidious/search/models/search_type.dart';
-import 'package:invidious/search/states/search.dart';
-import 'package:invidious/search/views/screens/search.dart';
-import 'package:invidious/utils/models/paginated_list.dart';
-import 'package:invidious/videos/models/video_in_list.dart';
-import 'package:invidious/videos/views/components/video_list.dart';
+import 'package:clipious/globals.dart';
+import 'package:clipious/search/models/search_type.dart';
+import 'package:clipious/search/states/search.dart';
+import 'package:clipious/search/views/screens/search.dart';
+import 'package:clipious/utils/models/paginated_list.dart';
+import 'package:clipious/videos/models/video_in_list.dart';
+import 'package:clipious/videos/views/components/video_list.dart';
 
 @RoutePage()
 class SearchVideoTab extends StatelessWidget {

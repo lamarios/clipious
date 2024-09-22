@@ -1,11 +1,11 @@
-import 'package:invidious/channels/models/channel_videos.dart';
-import 'package:invidious/search/models/search_results.dart';
-import 'package:invidious/search/models/search_sort_by.dart';
-import 'package:invidious/search/models/search_type.dart';
-import 'package:invidious/utils/extensions/list_unique.dart';
-import 'package:invidious/utils/models/item_with_continuation.dart';
-import 'package:invidious/videos/models/user_feed.dart';
-import 'package:invidious/videos/models/video_in_list.dart';
+import 'package:clipious/channels/models/channel_videos.dart';
+import 'package:clipious/search/models/search_results.dart';
+import 'package:clipious/search/models/search_sort_by.dart';
+import 'package:clipious/search/models/search_type.dart';
+import 'package:clipious/utils/extensions/list_unique.dart';
+import 'package:clipious/utils/models/item_with_continuation.dart';
+import 'package:clipious/videos/models/user_feed.dart';
+import 'package:clipious/videos/models/video_in_list.dart';
 
 import '../../globals.dart';
 

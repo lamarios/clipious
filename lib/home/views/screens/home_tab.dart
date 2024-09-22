@@ -1,6 +1,6 @@
 import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
-import 'package:invidious/home/models/db/home_layout.dart';
+import 'package:clipious/home/models/db/home_layout.dart';
 
 @RoutePage()
 class HomeTab extends StatelessWidget {

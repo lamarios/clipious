@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:invidious/globals.dart';
-import 'package:invidious/utils/views/components/placeholders.dart';
+import 'package:clipious/globals.dart';
+import 'package:clipious/utils/views/components/placeholders.dart';
 
 import '../../../utils/models/image_object.dart';
 import '../../../videos/models/base_video.dart';

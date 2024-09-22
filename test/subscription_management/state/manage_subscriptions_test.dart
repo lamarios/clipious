@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:invidious/globals.dart';
-import 'package:invidious/subscription_management/states/manage_subscriptions.dart';
+import 'package:clipious/globals.dart';
+import 'package:clipious/subscription_management/states/manage_subscriptions.dart';
 
 import '../../utils/server.dart';
 

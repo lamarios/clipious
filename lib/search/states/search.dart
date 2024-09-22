@@ -2,10 +2,10 @@ import 'package:bloc/bloc.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:invidious/globals.dart';
-import 'package:invidious/search/models/db/search_history_item.dart';
-import 'package:invidious/search/models/search_sort_by.dart';
-import 'package:invidious/search/states/search_filter.dart';
+import 'package:clipious/globals.dart';
+import 'package:clipious/search/models/db/search_history_item.dart';
+import 'package:clipious/search/models/search_sort_by.dart';
+import 'package:clipious/search/states/search_filter.dart';
 
 import '../../channels/models/channel.dart';
 import '../../playlists/models/playlist.dart';

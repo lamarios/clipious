@@ -1,6 +1,6 @@
 import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
-import 'package:invidious/comments/views/components/comments_container.dart';
+import 'package:clipious/comments/views/components/comments_container.dart';
 
 import '../../models/video.dart';
 

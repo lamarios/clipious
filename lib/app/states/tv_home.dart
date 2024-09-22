@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:invidious/globals.dart';
+import 'package:clipious/globals.dart';
 
 class TvHomeCubit extends Cubit<bool> {
   ScrollController scrollController = ScrollController();

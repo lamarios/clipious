@@ -1,8 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:invidious/app/views/components/player_placeholder.dart';
-import 'package:invidious/player/views/components/player.dart';
+import 'package:clipious/app/views/components/player_placeholder.dart';
+import 'package:clipious/player/views/components/player.dart';
 
 import '../../../player/states/player.dart';
 import '../../../player/views/components/mini_player_aware.dart';

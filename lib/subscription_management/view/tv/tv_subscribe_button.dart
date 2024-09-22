@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:invidious/subscription_management/states/subscribe_button.dart';
-import 'package:invidious/subscription_management/view/components/subscribe_button.dart';
-import 'package:invidious/utils/views/tv/components/tv_button.dart';
+import 'package:clipious/subscription_management/states/subscribe_button.dart';
+import 'package:clipious/subscription_management/view/components/subscribe_button.dart';
+import 'package:clipious/utils/views/tv/components/tv_button.dart';
 
 class TvSubscribeButton extends StatelessWidget {
   final String channelId;

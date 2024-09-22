@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:invidious/utils/states/select_list.dart';
+import 'package:clipious/utils/states/select_list.dart';
 
 class SelectList<T> extends StatelessWidget {
   final List<T>? values;

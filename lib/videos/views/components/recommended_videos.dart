@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:invidious/videos/models/video.dart';
-import 'package:invidious/videos/views/components/video_in_list.dart';
+import 'package:clipious/videos/models/video.dart';
+import 'package:clipious/videos/views/components/video_in_list.dart';
 
 import '../../models/video_in_list.dart';
 

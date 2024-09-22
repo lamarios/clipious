@@ -1,4 +1,4 @@
-import 'package:invidious/app/states/app.dart';
+import 'package:clipious/app/states/app.dart';
 
 class TestAppCubit extends AppCubit{
   TestAppCubit(super.initialState);

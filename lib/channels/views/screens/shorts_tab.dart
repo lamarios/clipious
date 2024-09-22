@@ -1,6 +1,6 @@
 import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
-import 'package:invidious/channels/views/components/videos.dart';
+import 'package:clipious/channels/views/components/videos.dart';
 
 import '../../../globals.dart';
 import '../../models/channel.dart';

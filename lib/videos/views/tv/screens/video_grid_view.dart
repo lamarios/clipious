@@ -1,10 +1,10 @@
 import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:invidious/utils/models/paginated_list.dart';
-import 'package:invidious/utils/views/components/placeholders.dart';
-import 'package:invidious/utils/views/tv/components/tv_overscan.dart';
-import 'package:invidious/videos/views/tv/components/video_item.dart';
+import 'package:clipious/utils/models/paginated_list.dart';
+import 'package:clipious/utils/views/components/placeholders.dart';
+import 'package:clipious/utils/views/tv/components/tv_overscan.dart';
+import 'package:clipious/videos/views/tv/components/video_item.dart';
 
 import '../../../../utils/states/item_list.dart';
 import '../../../models/video_in_list.dart';

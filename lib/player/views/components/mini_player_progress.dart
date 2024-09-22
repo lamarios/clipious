@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:invidious/videos/models/video.dart';
+import 'package:clipious/videos/models/video.dart';
 
 import '../../states/player.dart';
 

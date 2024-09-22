@@ -1,9 +1,9 @@
 library app.globals;
 
 import 'package:flutter/animation.dart';
-import 'package:invidious/service.dart';
-import 'package:invidious/utils/file_db.dart';
-import 'package:invidious/utils/interfaces/db.dart';
+import 'package:clipious/service.dart';
+import 'package:clipious/utils/file_db.dart';
+import 'package:clipious/utils/interfaces/db.dart';
 
 import 'utils/models/country.dart';
 

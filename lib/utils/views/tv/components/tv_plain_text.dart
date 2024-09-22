@@ -1,7 +1,7 @@
 import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:invidious/utils/views/tv/components/tv_overscan.dart';
+import 'package:clipious/utils/views/tv/components/tv_overscan.dart';
 
 @RoutePage()
 class TvPlainTextScreen extends StatefulWidget {

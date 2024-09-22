@@ -2,11 +2,11 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:invidious/comments/states/single_comment.dart';
-import 'package:invidious/comments/views/components/comments.dart';
-import 'package:invidious/router.dart';
-import 'package:invidious/utils/views/components/text_linkified.dart';
-import 'package:invidious/videos/views/components/video_thumbnail.dart';
+import 'package:clipious/comments/states/single_comment.dart';
+import 'package:clipious/comments/views/components/comments.dart';
+import 'package:clipious/router.dart';
+import 'package:clipious/utils/views/components/text_linkified.dart';
+import 'package:clipious/videos/views/components/video_thumbnail.dart';
 
 import '../../../player/states/player.dart';
 import '../../../utils/models/image_object.dart';

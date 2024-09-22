@@ -1,8 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:invidious/downloads/models/downloaded_video.dart';
-import 'package:invidious/videos/models/base_video.dart';
-import 'package:invidious/videos/models/dislike.dart';
+import 'package:clipious/downloads/models/downloaded_video.dart';
+import 'package:clipious/videos/models/base_video.dart';
+import 'package:clipious/videos/models/dislike.dart';
 import 'package:logging/logging.dart';
 
 import '../../downloads/states/download_manager.dart';

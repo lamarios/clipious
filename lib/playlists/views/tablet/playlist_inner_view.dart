@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:invidious/playlists/views/components/playlist_thumbnail.dart';
-import 'package:invidious/utils.dart';
-import 'package:invidious/utils/models/paginated_list.dart';
-import 'package:invidious/utils/views/components/placeholders.dart';
-import 'package:invidious/videos/models/video_in_list.dart';
-import 'package:invidious/videos/views/components/video_list.dart';
+import 'package:clipious/playlists/views/components/playlist_thumbnail.dart';
+import 'package:clipious/utils.dart';
+import 'package:clipious/utils/models/paginated_list.dart';
+import 'package:clipious/utils/views/components/placeholders.dart';
+import 'package:clipious/videos/models/video_in_list.dart';
+import 'package:clipious/videos/views/components/video_list.dart';
 
 import '../../../globals.dart';
 import '../../../videos/views/components/add_to_queue_button.dart';

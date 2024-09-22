@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
-import 'package:invidious/home/models/db/home_layout.dart';
-import 'package:invidious/settings/states/settings.dart';
+import 'package:clipious/home/models/db/home_layout.dart';
+import 'package:clipious/settings/states/settings.dart';
 
 class AppCustomizerCubit extends Cubit<List<HomeDataSource>> {
   final SettingsCubit settings;

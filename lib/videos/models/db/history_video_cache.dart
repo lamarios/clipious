@@ -1,4 +1,4 @@
-import 'package:invidious/videos/models/base_video.dart';
+import 'package:clipious/videos/models/base_video.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import '../../../globals.dart';

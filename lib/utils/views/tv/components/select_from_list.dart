@@ -1,7 +1,7 @@
 import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
-import 'package:invidious/settings/views/tv/screens/settings.dart';
-import 'package:invidious/utils/views/tv/components/tv_overscan.dart';
+import 'package:clipious/settings/views/tv/screens/settings.dart';
+import 'package:clipious/utils/views/tv/components/tv_overscan.dart';
 
 @RoutePage()
 class TvSelectFromListScreen extends StatelessWidget {

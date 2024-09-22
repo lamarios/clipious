@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:invidious/globals.dart';
-import 'package:invidious/settings/models/db/server.dart';
+import 'package:clipious/globals.dart';
+import 'package:clipious/settings/models/db/server.dart';
 
 class VideoThumbnailView extends StatelessWidget {
   final String videoId;

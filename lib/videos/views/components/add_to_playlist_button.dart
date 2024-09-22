@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:invidious/globals.dart';
-import 'package:invidious/settings/models/errors/invidious_service_error.dart';
-import 'package:invidious/utils.dart';
-import 'package:invidious/videos/states/add_to_playlist.dart';
+import 'package:clipious/globals.dart';
+import 'package:clipious/settings/models/errors/invidious_service_error.dart';
+import 'package:clipious/utils.dart';
+import 'package:clipious/videos/states/add_to_playlist.dart';
 
 import 'add_to_playlist_dialog.dart';
 

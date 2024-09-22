@@ -2,7 +2,7 @@ import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:invidious/settings/states/app_logs.dart';
+import 'package:clipious/settings/states/app_logs.dart';
 
 import '../../../globals.dart';
 import '../../models/db/app_logs.dart';

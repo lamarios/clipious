@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:invidious/player/states/player.dart';
+import 'package:clipious/player/states/player.dart';
 import 'package:logging/logging.dart';
 
 import '../../globals.dart';
