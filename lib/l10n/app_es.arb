@@ -3,7 +3,7 @@
   "@subscriptions": {
     "description": "User subscriptions"
   },
-  "playlists": "Playlists",
+  "playlists": "Listas de reproducción",
   "@playlists": {
     "description": "User playlists"
   },
@@ -1125,7 +1125,7 @@
   "@otherNotifications": {
     "description": "Title for settings section in the notification settings"
   },
-  "notificationFrequencySliderLabel": "{hours, select,  24{1d} other{{hours}h}}",
+  "notificationFrequencySliderLabel": "{hours, select,  24{1día} other{{hours}horas}}",
   "@notificationFrequencySliderLabel": {
     "description": "Short form for a number of hours going up to 1 day",
     "hours": {
@@ -1378,5 +1378,11 @@
   "openWikiLink": "Abrir wiki para obtener ayuda",
   "@openWikiLink": {},
   "serverUnreachable": "El servidor es inaccesible o no es un servidor invidious válido",
-  "@serverUnreachable": {}
+  "@serverUnreachable": {},
+  "copyToDownloadFolder": "Copiar a la carpeta de descarga",
+  "@copyToDownloadFolder": {},
+  "fileCopiedToDownloadFolder": "Archivo copiado a la carpeta de descarga",
+  "@fileCopiedToDownloadFolder": {},
+  "videoDeleted": "Vídeo eliminado",
+  "@videoDeleted": {}
 }
