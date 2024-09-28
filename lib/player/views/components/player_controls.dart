@@ -5,6 +5,7 @@ import 'package:clipious/main.dart';
 import 'package:clipious/player/states/interfaces/media_player.dart';
 import 'package:clipious/player/states/player.dart';
 import 'package:clipious/player/views/components/sleep_timer.dart';
+import 'package:clipious/player/views/components/system_setting_slider.dart';
 import 'package:clipious/settings/states/settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -228,8 +229,10 @@ class PlayerControls extends StatelessWidget {
       child: BlocProvider(
         create: (context) =>
             PlayerControlsCubit(const PlayerControlsState(), player),
-        child: BlocBuilder<PlayerControlsCubit, PlayerControlsState>(
-          builder: (context, playerState) {
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            final playerState = context.watch<PlayerControlsCubit>().state;
+
             bool isMini =
                 context.select((PlayerCubit cubit) => cubit.state.isMini);
             bool isPlaying =
@@ -258,6 +261,12 @@ class PlayerControls extends StatelessWidget {
                     value.state.playerRepeatMode == PlayerRepeat.noRepeat);
 
             var cubit = context.read<PlayerControlsCubit>();
+
+            // to allow or not dragging to adjust brightness and volume
+            var canDragToAdjustDeviceSettings =
+                playerState.fullScreenState == FullScreenState.fullScreen &&
+                    !playerState.displayControls;
+
             return BlocListener<PlayerCubit, PlayerState>(
               listenWhen: (previous, current) =>
                   previous.mediaEvent != current.mediaEvent,
@@ -337,6 +346,23 @@ class PlayerControls extends StatelessWidget {
                                 Expanded(
                                     child: GestureDetector(
                                         behavior: HitTestBehavior.translucent,
+                                        onVerticalDragStart:
+                                            canDragToAdjustDeviceSettings
+                                                ? (details) {
+                                                    cubit
+                                                        .startBrightnessAdjustments();
+                                                  }
+                                                : null,
+                                        onVerticalDragUpdate:
+                                            canDragToAdjustDeviceSettings
+                                                ? (details) {
+                                                    cubit.updateBrightness(
+                                                        details, constraints);
+                                                  }
+                                                : null,
+                                        onVerticalDragEnd: (details) {
+                                          cubit.stopBrightnessAdjustments();
+                                        },
                                         onTap: playerState.justDoubleTappedSkip
                                             ? cubit.doubleTapRewind
                                             : playerState.displayControls
@@ -354,6 +380,23 @@ class PlayerControls extends StatelessWidget {
                                             icon: Icons.fast_rewind))),
                                 Expanded(
                                     child: GestureDetector(
+                                        onVerticalDragStart:
+                                            canDragToAdjustDeviceSettings
+                                                ? (details) {
+                                                    cubit
+                                                        .startVolumeAdjustments();
+                                                  }
+                                                : null,
+                                        onVerticalDragUpdate:
+                                            canDragToAdjustDeviceSettings
+                                                ? (details) {
+                                                    cubit.updateVolume(
+                                                        details, constraints);
+                                                  }
+                                                : null,
+                                        onVerticalDragEnd: (details) {
+                                          cubit.stopVolumeAdjustments();
+                                        },
                                         onTap: playerState.justDoubleTappedSkip
                                             ? cubit.doubleTapFastForward
                                             : playerState.displayControls
@@ -650,6 +693,47 @@ class PlayerControls extends StatelessWidget {
                               curve: animationCurve,
                               begin: 0,
                               end: 2),
+
+                      Positioned(
+                              top: constraints.maxHeight * 0.15,
+                              bottom: constraints.maxHeight * 0.15,
+                              right: 20,
+                              child: SystemSettingsSlider(
+                                  icon: Icons.brightness_5,
+                                  value: playerState.systemBrightness))
+                          .animate(
+                            target: playerState.showBrightnessSlider ? 1 : 0,
+                          )
+                          .slideX(
+                              begin: 2,
+                              end: 0,
+                              duration: animationDuration ~/ 2,
+                              curve: animationCurve)
+                          .fade(
+                              begin: 0,
+                              end: 1,
+                              duration: animationDuration * 0.75,
+                              curve: animationCurve),
+                      Positioned(
+                              top: constraints.maxHeight * 0.15,
+                              bottom: constraints.maxHeight * 0.15,
+                              left: 20,
+                              child: SystemSettingsSlider(
+                                  icon: Icons.volume_up,
+                                  value: playerState.systemVolume))
+                          .animate(
+                            target: playerState.showVolumeSlider ? 1 : 0,
+                          )
+                          .slideX(
+                              begin: -2,
+                              end: 0,
+                              duration: animationDuration ~/ 2,
+                              curve: animationCurve)
+                          .fade(
+                              begin: 0,
+                              end: 1,
+                              duration: animationDuration * 0.75,
+                              curve: animationCurve),
                     ],
                   ),
                 ),

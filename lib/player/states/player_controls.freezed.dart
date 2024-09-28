@@ -30,6 +30,10 @@ mixin _$PlayerControlsState {
   double get doubleTapRewindedOpacity => throw _privateConstructorUsedError;
   bool get justDoubleTappedSkip => throw _privateConstructorUsedError;
   bool get showSponsorBlocked => throw _privateConstructorUsedError;
+  bool get showBrightnessSlider => throw _privateConstructorUsedError;
+  double get systemBrightness => throw _privateConstructorUsedError;
+  bool get showVolumeSlider => throw _privateConstructorUsedError;
+  double get systemVolume => throw _privateConstructorUsedError;
 
   /// Create a copy of PlayerControlsState
   /// with the given fields replaced by the non-null parameter values.
@@ -57,7 +61,11 @@ abstract class $PlayerControlsStateCopyWith<$Res> {
       double doubleTapFastForwardedOpacity,
       double doubleTapRewindedOpacity,
       bool justDoubleTappedSkip,
-      bool showSponsorBlocked});
+      bool showSponsorBlocked,
+      bool showBrightnessSlider,
+      double systemBrightness,
+      bool showVolumeSlider,
+      double systemVolume});
 }
 
 /// @nodoc
@@ -88,6 +96,10 @@ class _$PlayerControlsStateCopyWithImpl<$Res, $Val extends PlayerControlsState>
     Object? doubleTapRewindedOpacity = null,
     Object? justDoubleTappedSkip = null,
     Object? showSponsorBlocked = null,
+    Object? showBrightnessSlider = null,
+    Object? systemBrightness = null,
+    Object? showVolumeSlider = null,
+    Object? systemVolume = null,
   }) {
     return _then(_value.copyWith(
       errored: null == errored
@@ -142,6 +154,22 @@ class _$PlayerControlsStateCopyWithImpl<$Res, $Val extends PlayerControlsState>
           ? _value.showSponsorBlocked
           : showSponsorBlocked // ignore: cast_nullable_to_non_nullable
               as bool,
+      showBrightnessSlider: null == showBrightnessSlider
+          ? _value.showBrightnessSlider
+          : showBrightnessSlider // ignore: cast_nullable_to_non_nullable
+              as bool,
+      systemBrightness: null == systemBrightness
+          ? _value.systemBrightness
+          : systemBrightness // ignore: cast_nullable_to_non_nullable
+              as double,
+      showVolumeSlider: null == showVolumeSlider
+          ? _value.showVolumeSlider
+          : showVolumeSlider // ignore: cast_nullable_to_non_nullable
+              as bool,
+      systemVolume: null == systemVolume
+          ? _value.systemVolume
+          : systemVolume // ignore: cast_nullable_to_non_nullable
+              as double,
     ) as $Val);
   }
 }
@@ -167,7 +195,11 @@ abstract class _$$PlayercontrolsStateImplCopyWith<$Res>
       double doubleTapFastForwardedOpacity,
       double doubleTapRewindedOpacity,
       bool justDoubleTappedSkip,
-      bool showSponsorBlocked});
+      bool showSponsorBlocked,
+      bool showBrightnessSlider,
+      double systemBrightness,
+      bool showVolumeSlider,
+      double systemVolume});
 }
 
 /// @nodoc
@@ -196,6 +228,10 @@ class __$$PlayercontrolsStateImplCopyWithImpl<$Res>
     Object? doubleTapRewindedOpacity = null,
     Object? justDoubleTappedSkip = null,
     Object? showSponsorBlocked = null,
+    Object? showBrightnessSlider = null,
+    Object? systemBrightness = null,
+    Object? showVolumeSlider = null,
+    Object? systemVolume = null,
   }) {
     return _then(_$PlayercontrolsStateImpl(
       errored: null == errored
@@ -250,6 +286,22 @@ class __$$PlayercontrolsStateImplCopyWithImpl<$Res>
           ? _value.showSponsorBlocked
           : showSponsorBlocked // ignore: cast_nullable_to_non_nullable
               as bool,
+      showBrightnessSlider: null == showBrightnessSlider
+          ? _value.showBrightnessSlider
+          : showBrightnessSlider // ignore: cast_nullable_to_non_nullable
+              as bool,
+      systemBrightness: null == systemBrightness
+          ? _value.systemBrightness
+          : systemBrightness // ignore: cast_nullable_to_non_nullable
+              as double,
+      showVolumeSlider: null == showVolumeSlider
+          ? _value.showVolumeSlider
+          : showVolumeSlider // ignore: cast_nullable_to_non_nullable
+              as bool,
+      systemVolume: null == systemVolume
+          ? _value.systemVolume
+          : systemVolume // ignore: cast_nullable_to_non_nullable
+              as double,
     ));
   }
 }
@@ -270,7 +322,11 @@ class _$PlayercontrolsStateImpl implements _PlayercontrolsState {
       this.doubleTapFastForwardedOpacity = 0,
       this.doubleTapRewindedOpacity = 0,
       this.justDoubleTappedSkip = false,
-      this.showSponsorBlocked = false});
+      this.showSponsorBlocked = false,
+      this.showBrightnessSlider = false,
+      this.systemBrightness = 0,
+      this.showVolumeSlider = false,
+      this.systemVolume = 0});
 
   @override
   @JsonKey()
@@ -311,10 +367,22 @@ class _$PlayercontrolsStateImpl implements _PlayercontrolsState {
   @override
   @JsonKey()
   final bool showSponsorBlocked;
+  @override
+  @JsonKey()
+  final bool showBrightnessSlider;
+  @override
+  @JsonKey()
+  final double systemBrightness;
+  @override
+  @JsonKey()
+  final bool showVolumeSlider;
+  @override
+  @JsonKey()
+  final double systemVolume;
 
   @override
   String toString() {
-    return 'PlayerControlsState(errored: $errored, position: $position, duration: $duration, buffer: $buffer, fullScreenState: $fullScreenState, displayControls: $displayControls, muted: $muted, buffering: $buffering, draggingPositionSlider: $draggingPositionSlider, doubleTapFastForwardedOpacity: $doubleTapFastForwardedOpacity, doubleTapRewindedOpacity: $doubleTapRewindedOpacity, justDoubleTappedSkip: $justDoubleTappedSkip, showSponsorBlocked: $showSponsorBlocked)';
+    return 'PlayerControlsState(errored: $errored, position: $position, duration: $duration, buffer: $buffer, fullScreenState: $fullScreenState, displayControls: $displayControls, muted: $muted, buffering: $buffering, draggingPositionSlider: $draggingPositionSlider, doubleTapFastForwardedOpacity: $doubleTapFastForwardedOpacity, doubleTapRewindedOpacity: $doubleTapRewindedOpacity, justDoubleTappedSkip: $justDoubleTappedSkip, showSponsorBlocked: $showSponsorBlocked, showBrightnessSlider: $showBrightnessSlider, systemBrightness: $systemBrightness, showVolumeSlider: $showVolumeSlider, systemVolume: $systemVolume)';
   }
 
   @override
@@ -347,7 +415,15 @@ class _$PlayercontrolsStateImpl implements _PlayercontrolsState {
             (identical(other.justDoubleTappedSkip, justDoubleTappedSkip) ||
                 other.justDoubleTappedSkip == justDoubleTappedSkip) &&
             (identical(other.showSponsorBlocked, showSponsorBlocked) ||
-                other.showSponsorBlocked == showSponsorBlocked));
+                other.showSponsorBlocked == showSponsorBlocked) &&
+            (identical(other.showBrightnessSlider, showBrightnessSlider) ||
+                other.showBrightnessSlider == showBrightnessSlider) &&
+            (identical(other.systemBrightness, systemBrightness) ||
+                other.systemBrightness == systemBrightness) &&
+            (identical(other.showVolumeSlider, showVolumeSlider) ||
+                other.showVolumeSlider == showVolumeSlider) &&
+            (identical(other.systemVolume, systemVolume) ||
+                other.systemVolume == systemVolume));
   }
 
   @override
@@ -365,7 +441,11 @@ class _$PlayercontrolsStateImpl implements _PlayercontrolsState {
       doubleTapFastForwardedOpacity,
       doubleTapRewindedOpacity,
       justDoubleTappedSkip,
-      showSponsorBlocked);
+      showSponsorBlocked,
+      showBrightnessSlider,
+      systemBrightness,
+      showVolumeSlider,
+      systemVolume);
 
   /// Create a copy of PlayerControlsState
   /// with the given fields replaced by the non-null parameter values.
@@ -391,7 +471,11 @@ abstract class _PlayercontrolsState implements PlayerControlsState {
       final double doubleTapFastForwardedOpacity,
       final double doubleTapRewindedOpacity,
       final bool justDoubleTappedSkip,
-      final bool showSponsorBlocked}) = _$PlayercontrolsStateImpl;
+      final bool showSponsorBlocked,
+      final bool showBrightnessSlider,
+      final double systemBrightness,
+      final bool showVolumeSlider,
+      final double systemVolume}) = _$PlayercontrolsStateImpl;
 
   @override
   bool get errored;
@@ -419,6 +503,14 @@ abstract class _PlayercontrolsState implements PlayerControlsState {
   bool get justDoubleTappedSkip;
   @override
   bool get showSponsorBlocked;
+  @override
+  bool get showBrightnessSlider;
+  @override
+  double get systemBrightness;
+  @override
+  bool get showVolumeSlider;
+  @override
+  double get systemVolume;
 
   /// Create a copy of PlayerControlsState
   /// with the given fields replaced by the non-null parameter values.
