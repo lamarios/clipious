@@ -111,6 +111,14 @@ class TvPlayerControlsCubit extends Cubit<TvPlayerControlsState> {
     return KeyEventResult.ignored;
   }
 
+  hideSettings() {
+    emit(state.copyWith(
+        controlsOpacity: 0,
+        showSettings: false,
+        showQueue: false,
+        displayControls: false));
+  }
+
   hideControls() {
     EasyDebounce.debounce('tv-controls', controlFadeOut, () {
       if (!isClosed) {

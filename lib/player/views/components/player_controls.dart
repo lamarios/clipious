@@ -1,14 +1,15 @@
 import 'dart:math';
 
-import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:clipious/globals.dart';
 import 'package:clipious/main.dart';
 import 'package:clipious/player/states/interfaces/media_player.dart';
 import 'package:clipious/player/states/player.dart';
+import 'package:clipious/player/views/components/sleep_timer.dart';
 import 'package:clipious/settings/states/settings.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../utils.dart';
 import '../../../videos/models/video.dart';
@@ -186,6 +187,25 @@ class PlayerControls extends StatelessWidget {
                   ),
                   title: Text(locals.useDash),
                 ),
+              player.state.hasTimer
+                  ? ListTile(
+                      leading: const Icon(Icons.bedtime_off),
+                      title: Text(locals.cancelSleepTimer),
+                      onTap: () {
+                        Navigator.of(context).pop();
+                        player.cancelSleep();
+                      },
+                    )
+                  : ListTile(
+                      leading: const Icon(Icons.bedtime),
+                      title: Text(locals.sleepTimer),
+                      onTap: () async {
+                        Navigator.of(context).pop();
+                        final sleepTimer = await SleepTimerSheet.show(context);
+                        if (sleepTimer != null) {
+                          player.sleep(sleepTimer);
+                        }
+                      })
             ],
           ),
         );
@@ -228,6 +248,9 @@ class PlayerControls extends StatelessWidget {
                 cubit.state.currentlyPlaying?.title ??
                 cubit.state.offlineCurrentlyPlaying?.title ??
                 '');
+
+            bool hasTimer =
+                context.select((PlayerCubit cubit) => cubit.state.hasTimer);
 
             bool isPausedAndDone = playerState.position.inMilliseconds >
                     player.duration.inMilliseconds * 0.99 &&
@@ -601,6 +624,32 @@ class PlayerControls extends StatelessWidget {
                                 )),
                           ),
                         ),
+                      // show icon when sleep is enabled or not
+                      Positioned(
+                              right: 20,
+                              bottom: 20,
+                              child: Icon(hasTimer
+                                  ? Icons.bedtime_outlined
+                                  : Icons.bedtime_off_outlined))
+                          .animate(target: hasTimer ? 1 : 0)
+                          .fadeIn(
+                              duration: animationDuration,
+                              curve: animationCurve)
+                          .slideY(
+                              duration: animationDuration,
+                              curve: animationCurve,
+                              begin: 2,
+                              end: 0)
+                          .fadeOut(
+                              delay: const Duration(seconds: 3),
+                              duration: animationDuration,
+                              curve: animationCurve)
+                          .slideY(
+                              delay: const Duration(seconds: 3),
+                              duration: animationDuration,
+                              curve: animationCurve,
+                              begin: 0,
+                              end: 2),
                     ],
                   ),
                 ),

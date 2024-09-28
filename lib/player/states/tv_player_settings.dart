@@ -1,3 +1,4 @@
+import 'package:clipious/player/models/sleep_timer.dart';
 import 'package:river_player/river_player.dart';
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -27,7 +28,8 @@ enum Tabs {
   video,
   audio,
   captions,
-  playbackSpeed;
+  playbackSpeed,
+  sleepTimer;
 }
 
 class TvPlayerSettingsCubit extends Cubit<TvPlayerSettingsState> {
@@ -77,6 +79,12 @@ class TvPlayerSettingsCubit extends Cubit<TvPlayerSettingsState> {
   captionsButtonFocusChange(bool focus) {
     if (focus) {
       emit(state.copyWith(selected: Tabs.captions));
+    }
+  }
+
+  sleepTimerButtonFocusChange(bool focus) {
+    if (focus) {
+      emit(state.copyWith(selected: Tabs.sleepTimer));
     }
   }
 
@@ -140,6 +148,7 @@ class TvPlayerSettingsCubit extends Cubit<TvPlayerSettingsState> {
 
 @freezed
 class TvPlayerSettingsState with _$TvPlayerSettingsState {
-  const factory TvPlayerSettingsState({@Default(Tabs.video) Tabs selected}) =
-      _TvPlayerSettingsState;
+  const factory TvPlayerSettingsState(
+      {@Default(Tabs.video) Tabs selected,
+      @Default(SleepTimer()) SleepTimer sleepTimer}) = _TvPlayerSettingsState;
 }
