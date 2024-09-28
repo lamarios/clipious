@@ -1384,5 +1384,15 @@
   "copyToDownloadFolder": "ダウンロードフォルダへコピー",
   "@copyToDownloadFolder": {},
   "videoDeleted": "動画を削除しました",
-  "@videoDeleted": {}
+  "@videoDeleted": {},
+  "cancelSleepTimer": "スリープタイマーをキャンセル",
+  "@cancelSleepTimer": {},
+  "stopTheVideoExplanation": "有効なら、動画を閉じ、無効なら、動画を単に一時停止します",
+  "@stopTheVideoExplanation": {},
+  "stopTheVideo": "動画を閉じる",
+  "@stopTheVideo": {},
+  "sleepTimer": "スリープタイマー",
+  "@sleepTimer": {},
+  "setTimer": "タイマーを設定",
+  "@setTimer": {}
 }
