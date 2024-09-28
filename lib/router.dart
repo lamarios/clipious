@@ -112,7 +112,7 @@ const shortsPath = 'shorts';
 const streamsPath = 'streams';
 
 @AutoRouterConfig(replaceInRouteName: 'Screen|Tab,Route')
-class AppRouter extends RootStackRouter implements AutoRouteGuard {
+class AppRouter extends RootStackRouter {
   final bool hasServer;
 
   AppRouter({required this.hasServer});
@@ -227,6 +227,10 @@ class AppRouter extends RootStackRouter implements AutoRouteGuard {
   }
 
   @override
+  late final List<AutoRouteGuard> guards = [
+    AutoRouteGuard.simple(onNavigation)
+  ];
+
   Future<void> onNavigation(
       NavigationResolver resolver, StackRouter router) async {
     try {

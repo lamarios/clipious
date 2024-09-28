@@ -1,9 +1,14 @@
+import 'dart:ui';
+
 import 'package:bloc/bloc.dart';
-import 'package:easy_debounce/easy_debounce.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:clipious/player/models/media_event.dart';
 import 'package:clipious/player/states/interfaces/media_player.dart';
+import 'package:easy_debounce/easy_debounce.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_volume_controller/flutter_volume_controller.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:logging/logging.dart';
+import 'package:screen_brightness/screen_brightness.dart';
 
 import '../../globals.dart';
 import '../../main.dart';
@@ -188,23 +193,86 @@ class PlayerControlsCubit extends Cubit<PlayerControlsState> {
       emit(state.copyWith(justDoubleTappedSkip: false));
     });
   }
+
+  Future<void> startBrightnessAdjustments() async {
+    final currentBrightness = await ScreenBrightness().current;
+    emit(state.copyWith(
+        systemBrightness: currentBrightness, showBrightnessSlider: true));
+  }
+
+  Future<void> updateBrightness(
+      DragUpdateDetails details, BoxConstraints constraints) async {
+    // Set upper and lower bounds (75% of the screen for full brightness, bottom 25% for zero brightness)
+    double upperBound = 0.25; // top 75% is full brightness
+    double lowerBound = 0.75; // bottom is 0 brightness
+
+    // Clamping the brightness based on the drag position
+    double normalizedPosition =
+        (details.localPosition.dy / constraints.maxHeight)
+            .clamp(upperBound, lowerBound);
+
+    // Linearly interpolate between 1 (full brightness) and 0 (no brightness)
+    final screenBrightness = lerpDouble(
+        1, 0, (normalizedPosition - upperBound) / (lowerBound - upperBound))!;
+
+    await ScreenBrightness().setScreenBrightness(screenBrightness);
+    emit(state.copyWith(systemBrightness: screenBrightness));
+  }
+
+  void stopBrightnessAdjustments() {
+    emit(state.copyWith(showBrightnessSlider: false));
+  }
+
+  Future<void> startVolumeAdjustments() async {
+    await FlutterVolumeController.updateShowSystemUI(false);
+    final currentVolume = await FlutterVolumeController.getVolume();
+    emit(state.copyWith(
+        systemVolume: currentVolume ?? 0, showVolumeSlider: true));
+  }
+
+  Future<void> updateVolume(
+      DragUpdateDetails details, BoxConstraints constraints) async {
+    // Set upper and lower bounds (75% of the screen for full volume, bottom 25% for zero volume)
+    double upperBound = 0.25; // top 75% is full volume
+    double lowerBound = 0.75; // bottom is 0 volume
+
+    // Clamping the volume based on the drag position
+    double normalizedPosition =
+        (details.localPosition.dy / constraints.maxHeight)
+            .clamp(upperBound, lowerBound);
+
+    // Linearly interpolate between 1 (full volume) and 0 (no volume)
+    final volume = lerpDouble(
+        1, 0, (normalizedPosition - upperBound) / (lowerBound - upperBound))!;
+
+    await FlutterVolumeController.setVolume(volume);
+    emit(state.copyWith(systemVolume: volume));
+  }
+
+  void stopVolumeAdjustments() {
+    emit(state.copyWith(showVolumeSlider: false));
+  }
 }
 
 @freezed
 class PlayerControlsState with _$PlayerControlsState {
-  const factory PlayerControlsState({
-    @Default(false) bool errored,
-    @Default(Duration.zero) Duration position,
-    @Default(Duration(seconds: 1)) Duration duration,
-    @Default(Duration.zero) Duration buffer,
-    @Default(FullScreenState.notFullScreen) FullScreenState fullScreenState,
-    @Default(false) bool displayControls,
-    @Default(false) bool muted,
-    @Default(false) bool buffering,
-    @Default(false) bool draggingPositionSlider,
-    @Default(0) double doubleTapFastForwardedOpacity,
-    @Default(0) double doubleTapRewindedOpacity,
-    @Default(false) bool justDoubleTappedSkip,
-    @Default(false) bool showSponsorBlocked,
-  }) = _PlayercontrolsState;
+  const factory PlayerControlsState(
+      {@Default(false) bool errored,
+      @Default(Duration.zero) Duration position,
+      @Default(Duration(seconds: 1)) Duration duration,
+      @Default(Duration.zero) Duration buffer,
+      @Default(FullScreenState.notFullScreen) FullScreenState fullScreenState,
+      @Default(false) bool displayControls,
+      @Default(false) bool muted,
+      @Default(false) bool buffering,
+      @Default(false) bool draggingPositionSlider,
+      @Default(0) double doubleTapFastForwardedOpacity,
+      @Default(0) double doubleTapRewindedOpacity,
+      @Default(false) bool justDoubleTappedSkip,
+      @Default(false) bool showSponsorBlocked,
+      // system setting adjustments
+      @Default(false) bool showBrightnessSlider,
+      @Default(0) double systemBrightness,
+      @Default(false) bool showVolumeSlider,
+      @Default(0) double systemVolume}) = _PlayercontrolsState;
 }
