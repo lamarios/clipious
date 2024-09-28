@@ -1384,5 +1384,15 @@
   "fileCopiedToDownloadFolder": "Archivo copiado a la carpeta de descarga",
   "@fileCopiedToDownloadFolder": {},
   "videoDeleted": "Vídeo eliminado",
-  "@videoDeleted": {}
+  "@videoDeleted": {},
+  "sleepTimer": "Temporizador de apagado",
+  "@sleepTimer": {},
+  "setTimer": "Programar temporizador",
+  "@setTimer": {},
+  "cancelSleepTimer": "Cancelar temporizador de apagado",
+  "@cancelSleepTimer": {},
+  "stopTheVideoExplanation": "Si se activa, el vídeo se cerrará, si se desactiva, el vídeo simplemente se pausará",
+  "@stopTheVideoExplanation": {},
+  "stopTheVideo": "Detener el vídeo",
+  "@stopTheVideo": {}
 }
