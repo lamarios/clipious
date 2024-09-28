@@ -241,6 +241,7 @@ class PlayerCubit extends Cubit<PlayerState> with WidgetsBindingObserver {
         type: MediaEventType.miniDisplayChanged,
         value: state.isMini);
     emit(state.copyWith(isClosing: true));
+    cancelSleep();
     Future.delayed(
       animationDuration * 1.5,
       () {
@@ -969,6 +970,7 @@ class PlayerCubit extends Cubit<PlayerState> with WidgetsBindingObserver {
 
   void sleep(SleepTimer sleepTimer) {
     emit(state.copyWith(hasTimer: true));
+
     EasyDebounce.debounce(
       'video-sleep-timer',
       sleepTimer.duration,

@@ -249,6 +249,9 @@ class PlayerControls extends StatelessWidget {
                 cubit.state.offlineCurrentlyPlaying?.title ??
                 '');
 
+            bool hasTimer =
+                context.select((PlayerCubit cubit) => cubit.state.hasTimer);
+
             bool isPausedAndDone = playerState.position.inMilliseconds >
                     player.duration.inMilliseconds * 0.99 &&
                 context.select((SettingsCubit value) =>
@@ -621,6 +624,32 @@ class PlayerControls extends StatelessWidget {
                                 )),
                           ),
                         ),
+                      // show icon when sleep is enabled or not
+                      Positioned(
+                              right: 20,
+                              bottom: 20,
+                              child: Icon(hasTimer
+                                  ? Icons.bedtime_outlined
+                                  : Icons.bedtime_off_outlined))
+                          .animate(target: hasTimer ? 1 : 0)
+                          .fadeIn(
+                              duration: animationDuration,
+                              curve: animationCurve)
+                          .slideY(
+                              duration: animationDuration,
+                              curve: animationCurve,
+                              begin: 2,
+                              end: 0)
+                          .fadeOut(
+                              delay: const Duration(seconds: 3),
+                              duration: animationDuration,
+                              curve: animationCurve)
+                          .slideY(
+                              delay: const Duration(seconds: 3),
+                              duration: animationDuration,
+                              curve: animationCurve,
+                              begin: 0,
+                              end: 2),
                     ],
                   ),
                 ),
