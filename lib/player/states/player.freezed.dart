@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$PlayerState {
 // player display properties
   bool get isMini => throw _privateConstructorUsedError;
+  bool get hasTimer => throw _privateConstructorUsedError;
   double? get top => throw _privateConstructorUsedError;
   bool get isDragging => throw _privateConstructorUsedError;
   int get selectedFullScreenIndex => throw _privateConstructorUsedError;
@@ -76,6 +77,7 @@ abstract class $PlayerStateCopyWith<$Res> {
   @useResult
   $Res call(
       {bool isMini,
+      bool hasTimer,
       double? top,
       bool isDragging,
       int selectedFullScreenIndex,
@@ -129,6 +131,7 @@ class _$PlayerStateCopyWithImpl<$Res, $Val extends PlayerState>
   @override
   $Res call({
     Object? isMini = null,
+    Object? hasTimer = null,
     Object? top = freezed,
     Object? isDragging = null,
     Object? selectedFullScreenIndex = null,
@@ -169,6 +172,10 @@ class _$PlayerStateCopyWithImpl<$Res, $Val extends PlayerState>
       isMini: null == isMini
           ? _value.isMini
           : isMini // ignore: cast_nullable_to_non_nullable
+              as bool,
+      hasTimer: null == hasTimer
+          ? _value.hasTimer
+          : hasTimer // ignore: cast_nullable_to_non_nullable
               as bool,
       top: freezed == top
           ? _value.top
@@ -324,6 +331,7 @@ abstract class _$$PlayerStateImplCopyWith<$Res>
   @useResult
   $Res call(
       {bool isMini,
+      bool hasTimer,
       double? top,
       bool isDragging,
       int selectedFullScreenIndex,
@@ -375,6 +383,7 @@ class __$$PlayerStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? isMini = null,
+    Object? hasTimer = null,
     Object? top = freezed,
     Object? isDragging = null,
     Object? selectedFullScreenIndex = null,
@@ -415,6 +424,10 @@ class __$$PlayerStateImplCopyWithImpl<$Res>
       isMini: null == isMini
           ? _value.isMini
           : isMini // ignore: cast_nullable_to_non_nullable
+              as bool,
+      hasTimer: null == hasTimer
+          ? _value.hasTimer
+          : hasTimer // ignore: cast_nullable_to_non_nullable
               as bool,
       top: freezed == top
           ? _value.top
@@ -559,6 +572,7 @@ class __$$PlayerStateImplCopyWithImpl<$Res>
 class _$PlayerStateImpl extends _PlayerState {
   const _$PlayerStateImpl(
       {this.isMini = true,
+      this.hasTimer = false,
       this.top,
       this.isDragging = false,
       this.selectedFullScreenIndex = 0,
@@ -604,6 +618,9 @@ class _$PlayerStateImpl extends _PlayerState {
   @override
   @JsonKey()
   final bool isMini;
+  @override
+  @JsonKey()
+  final bool hasTimer;
   @override
   final double? top;
   @override
@@ -740,7 +757,7 @@ class _$PlayerStateImpl extends _PlayerState {
 
   @override
   String toString() {
-    return 'PlayerState(isMini: $isMini, top: $top, isDragging: $isDragging, selectedFullScreenIndex: $selectedFullScreenIndex, isHidden: $isHidden, isClosing: $isClosing, dragDistance: $dragDistance, showMiniPlaceholder: $showMiniPlaceholder, dragStartMini: $dragStartMini, height: $height, fullScreenState: $fullScreenState, muted: $muted, aspectRatio: $aspectRatio, currentlyPlaying: $currentlyPlaying, offlineCurrentlyPlaying: $offlineCurrentlyPlaying, videos: $videos, offlineVideos: $offlineVideos, playedVideos: $playedVideos, playQueue: $playQueue, isAudio: $isAudio, isPip: $isPip, offset: $offset, startAt: $startAt, position: $position, bufferedPosition: $bufferedPosition, isPlaying: $isPlaying, speed: $speed, mediaCommand: $mediaCommand, mediaEvent: $mediaEvent, sponsorSegments: $sponsorSegments, nextSegment: $nextSegment, forwardStep: $forwardStep, rewindStep: $rewindStep, totalFastForward: $totalFastForward, totalRewind: $totalRewind, orientation: $orientation)';
+    return 'PlayerState(isMini: $isMini, hasTimer: $hasTimer, top: $top, isDragging: $isDragging, selectedFullScreenIndex: $selectedFullScreenIndex, isHidden: $isHidden, isClosing: $isClosing, dragDistance: $dragDistance, showMiniPlaceholder: $showMiniPlaceholder, dragStartMini: $dragStartMini, height: $height, fullScreenState: $fullScreenState, muted: $muted, aspectRatio: $aspectRatio, currentlyPlaying: $currentlyPlaying, offlineCurrentlyPlaying: $offlineCurrentlyPlaying, videos: $videos, offlineVideos: $offlineVideos, playedVideos: $playedVideos, playQueue: $playQueue, isAudio: $isAudio, isPip: $isPip, offset: $offset, startAt: $startAt, position: $position, bufferedPosition: $bufferedPosition, isPlaying: $isPlaying, speed: $speed, mediaCommand: $mediaCommand, mediaEvent: $mediaEvent, sponsorSegments: $sponsorSegments, nextSegment: $nextSegment, forwardStep: $forwardStep, rewindStep: $rewindStep, totalFastForward: $totalFastForward, totalRewind: $totalRewind, orientation: $orientation)';
   }
 
   @override
@@ -749,6 +766,8 @@ class _$PlayerStateImpl extends _PlayerState {
         (other.runtimeType == runtimeType &&
             other is _$PlayerStateImpl &&
             (identical(other.isMini, isMini) || other.isMini == isMini) &&
+            (identical(other.hasTimer, hasTimer) ||
+                other.hasTimer == hasTimer) &&
             (identical(other.top, top) || other.top == top) &&
             (identical(other.isDragging, isDragging) ||
                 other.isDragging == isDragging) &&
@@ -817,6 +836,7 @@ class _$PlayerStateImpl extends _PlayerState {
   int get hashCode => Object.hashAll([
         runtimeType,
         isMini,
+        hasTimer,
         top,
         isDragging,
         selectedFullScreenIndex,
@@ -866,6 +886,7 @@ class _$PlayerStateImpl extends _PlayerState {
 abstract class _PlayerState extends PlayerState {
   const factory _PlayerState(
       {final bool isMini,
+      final bool hasTimer,
       final double? top,
       final bool isDragging,
       final int selectedFullScreenIndex,
@@ -906,6 +927,8 @@ abstract class _PlayerState extends PlayerState {
 // player display properties
   @override
   bool get isMini;
+  @override
+  bool get hasTimer;
   @override
   double? get top;
   @override

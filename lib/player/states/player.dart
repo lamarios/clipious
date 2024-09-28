@@ -5,6 +5,7 @@ import 'package:audio_service/audio_service.dart';
 import 'package:audio_session/audio_session.dart';
 import 'package:back_button_interceptor/back_button_interceptor.dart';
 import 'package:bloc/bloc.dart';
+import 'package:clipious/player/models/sleep_timer.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:easy_debounce/easy_throttle.dart';
 import 'package:flutter/material.dart';
@@ -965,6 +966,26 @@ class PlayerCubit extends Cubit<PlayerState> with WidgetsBindingObserver {
       setFullScreen(FullScreenState.fullScreen);
     }
   }
+
+  void sleep(SleepTimer sleepTimer) {
+    emit(state.copyWith(hasTimer: true));
+    EasyDebounce.debounce(
+      'video-sleep-timer',
+      sleepTimer.duration,
+      () {
+        emit(state.copyWith(hasTimer: false));
+        pause();
+        if (sleepTimer.stopVideo && !isClosed) {
+          hide();
+        }
+      },
+    );
+  }
+
+  void cancelSleep() {
+    emit(state.copyWith(hasTimer: false));
+    EasyDebounce.cancel('video-sleep-timer');
+  }
 }
 
 @freezed
@@ -973,6 +994,7 @@ class PlayerState with _$PlayerState {
       {
       // player display properties
       @Default(true) bool isMini,
+      @Default(false) bool hasTimer,
       double? top,
       @Default(false) bool isDragging,
       @Default(0) int selectedFullScreenIndex,

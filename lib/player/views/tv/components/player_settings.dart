@@ -1,45 +1,68 @@
+import 'package:clipious/player/states/player.dart';
+import 'package:clipious/player/states/tv_player_controls.dart';
+import 'package:clipious/player/states/tv_player_settings.dart';
+import 'package:clipious/player/states/video_player.dart';
+import 'package:clipious/player/views/tv/components/sleep_timer.dart';
+import 'package:clipious/settings/states/settings.dart';
+import 'package:clipious/utils/views/tv/components/tv_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:clipious/player/states/tv_player_settings.dart';
-import 'package:clipious/player/states/video_player.dart';
-import 'package:clipious/settings/states/settings.dart';
-import 'package:clipious/utils/views/tv/components/tv_button.dart';
 
 class TvPlayerSettings extends StatelessWidget {
   const TvPlayerSettings({super.key});
 
   List<Widget> getContent(BuildContext context) {
-    var state = context.read<TvPlayerSettingsCubit>();
-    switch (state.state.selected) {
+    var cubit = context.read<TvPlayerSettingsCubit>();
+    var player = context.read<PlayerCubit>();
+
+    var locals = AppLocalizations.of(context)!;
+
+    switch (cubit.state.selected) {
       case Tabs.video:
-        return state.videoTrackNames
+        return cubit.videoTrackNames
             .map((e) => TvSettingButton(
                   label: e,
-                  onPressed: state.changeVideoTrack,
+                  onPressed: cubit.changeVideoTrack,
                 ))
             .toList();
       case Tabs.audio:
-        return state.audioTrackNames
+        return cubit.audioTrackNames
             .map((e) => TvSettingButton(
                   label: e,
-                  onPressed: state.changeChangeAudioTrack,
+                  onPressed: cubit.changeChangeAudioTrack,
                 ))
             .toList();
       case Tabs.captions:
-        return state.availableCaptions
+        return cubit.availableCaptions
             .map((e) => TvSettingButton(
                   label: e,
-                  onPressed: state.changeSubtitles,
+                  onPressed: cubit.changeSubtitles,
                 ))
             .toList();
       case Tabs.playbackSpeed:
         return tvAvailablePlaybackSpeeds
             .map((e) => TvSettingButton(
                   label: e,
-                  onPressed: state.changePlaybackSpeed,
+                  onPressed: cubit.changePlaybackSpeed,
                 ))
             .toList();
+      case Tabs.sleepTimer:
+        return [
+          player.state.hasTimer
+              ? TvSettingButton(
+                  label: locals.cancelSleepTimer,
+                  onPressed: (selected) {
+                    player.cancelSleep();
+                    context.read<TvPlayerControlsCubit>().hideSettings();
+                  })
+              : TvSleepTimer(
+                  onSet: (sleepTimer) {
+                    player.sleep(sleepTimer!);
+                    context.read<TvPlayerControlsCubit>().hideSettings();
+                  },
+                )
+        ];
       default:
         return const [SizedBox.shrink()];
     }
@@ -127,6 +150,20 @@ class TvPlayerSettings extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(
                             vertical: 8.0, horizontal: 16),
                         child: Text(locals.playbackSpeed, style: settingStyle),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TvButton(
+                      onFocusChanged: cubit.sleepTimerButtonFocusChange,
+                      unfocusedColor: playerState.selected == Tabs.sleepTimer
+                          ? colors.secondaryContainer
+                          : Colors.transparent,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 8.0, horizontal: 16),
+                        child: Text(locals.sleepTimer, style: settingStyle),
                       ),
                     ),
                   ),

@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$TvPlayerSettingsState {
   Tabs get selected => throw _privateConstructorUsedError;
+  SleepTimer get sleepTimer => throw _privateConstructorUsedError;
 
   /// Create a copy of TvPlayerSettingsState
   /// with the given fields replaced by the non-null parameter values.
@@ -31,7 +32,9 @@ abstract class $TvPlayerSettingsStateCopyWith<$Res> {
           $Res Function(TvPlayerSettingsState) then) =
       _$TvPlayerSettingsStateCopyWithImpl<$Res, TvPlayerSettingsState>;
   @useResult
-  $Res call({Tabs selected});
+  $Res call({Tabs selected, SleepTimer sleepTimer});
+
+  $SleepTimerCopyWith<$Res> get sleepTimer;
 }
 
 /// @nodoc
@@ -51,13 +54,28 @@ class _$TvPlayerSettingsStateCopyWithImpl<$Res,
   @override
   $Res call({
     Object? selected = null,
+    Object? sleepTimer = null,
   }) {
     return _then(_value.copyWith(
       selected: null == selected
           ? _value.selected
           : selected // ignore: cast_nullable_to_non_nullable
               as Tabs,
+      sleepTimer: null == sleepTimer
+          ? _value.sleepTimer
+          : sleepTimer // ignore: cast_nullable_to_non_nullable
+              as SleepTimer,
     ) as $Val);
+  }
+
+  /// Create a copy of TvPlayerSettingsState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $SleepTimerCopyWith<$Res> get sleepTimer {
+    return $SleepTimerCopyWith<$Res>(_value.sleepTimer, (value) {
+      return _then(_value.copyWith(sleepTimer: value) as $Val);
+    });
   }
 }
 
@@ -70,7 +88,10 @@ abstract class _$$TvPlayerSettingsStateImplCopyWith<$Res>
       __$$TvPlayerSettingsStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Tabs selected});
+  $Res call({Tabs selected, SleepTimer sleepTimer});
+
+  @override
+  $SleepTimerCopyWith<$Res> get sleepTimer;
 }
 
 /// @nodoc
@@ -88,12 +109,17 @@ class __$$TvPlayerSettingsStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? selected = null,
+    Object? sleepTimer = null,
   }) {
     return _then(_$TvPlayerSettingsStateImpl(
       selected: null == selected
           ? _value.selected
           : selected // ignore: cast_nullable_to_non_nullable
               as Tabs,
+      sleepTimer: null == sleepTimer
+          ? _value.sleepTimer
+          : sleepTimer // ignore: cast_nullable_to_non_nullable
+              as SleepTimer,
     ));
   }
 }
@@ -101,15 +127,19 @@ class __$$TvPlayerSettingsStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$TvPlayerSettingsStateImpl implements _TvPlayerSettingsState {
-  const _$TvPlayerSettingsStateImpl({this.selected = Tabs.video});
+  const _$TvPlayerSettingsStateImpl(
+      {this.selected = Tabs.video, this.sleepTimer = const SleepTimer()});
 
   @override
   @JsonKey()
   final Tabs selected;
+  @override
+  @JsonKey()
+  final SleepTimer sleepTimer;
 
   @override
   String toString() {
-    return 'TvPlayerSettingsState(selected: $selected)';
+    return 'TvPlayerSettingsState(selected: $selected, sleepTimer: $sleepTimer)';
   }
 
   @override
@@ -118,11 +148,13 @@ class _$TvPlayerSettingsStateImpl implements _TvPlayerSettingsState {
         (other.runtimeType == runtimeType &&
             other is _$TvPlayerSettingsStateImpl &&
             (identical(other.selected, selected) ||
-                other.selected == selected));
+                other.selected == selected) &&
+            (identical(other.sleepTimer, sleepTimer) ||
+                other.sleepTimer == sleepTimer));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, selected);
+  int get hashCode => Object.hash(runtimeType, selected, sleepTimer);
 
   /// Create a copy of TvPlayerSettingsState
   /// with the given fields replaced by the non-null parameter values.
@@ -135,11 +167,14 @@ class _$TvPlayerSettingsStateImpl implements _TvPlayerSettingsState {
 }
 
 abstract class _TvPlayerSettingsState implements TvPlayerSettingsState {
-  const factory _TvPlayerSettingsState({final Tabs selected}) =
-      _$TvPlayerSettingsStateImpl;
+  const factory _TvPlayerSettingsState(
+      {final Tabs selected,
+      final SleepTimer sleepTimer}) = _$TvPlayerSettingsStateImpl;
 
   @override
   Tabs get selected;
+  @override
+  SleepTimer get sleepTimer;
 
   /// Create a copy of TvPlayerSettingsState
   /// with the given fields replaced by the non-null parameter values.

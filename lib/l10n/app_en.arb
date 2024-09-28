@@ -1374,5 +1374,10 @@
   "serverUnreachable": "Server is unreachable, or is not a valid invidious server",
   "copyToDownloadFolder": "Copy to download folder",
   "fileCopiedToDownloadFolder": "File copied to download folder",
-  "videoDeleted": "Video deleted"
+  "videoDeleted": "Video deleted",
+  "sleepTimer": "Sleep timer",
+  "stopTheVideo": "Stop the video",
+  "stopTheVideoExplanation": "If enabled, the video will be closed, if disabled the video will be simply paused",
+  "setTimer": "Set timer",
+  "cancelSleepTimer": "Cancel sleep timer"
 }
