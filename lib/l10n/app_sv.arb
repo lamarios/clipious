@@ -481,7 +481,7 @@
   "@sponsorBlockCategoryIntroDescription": {
     "description": "Sponsorblock 'Intro' Category description"
   },
-  "sponsorBlockCategoryOutroDescription": "Eftertexter eller när YouTube's slutbild visas. Ej för sammanfattning med information.",
+  "sponsorBlockCategoryOutroDescription": "Eftertexter eller när YouTube''s slutbild visas. Ej för sammanfattning med information.",
   "@sponsorBlockCategoryOutroDescription": {
     "description": "Outro block 'Outro' Category description"
   },

@@ -825,7 +825,7 @@
   "@videoAddedToQueue": {
     "description": "Pop up message when a video was added at the end of the video queue"
   },
-  "shareLinkWithTimestamp": "Ajouter l'horodatage",
+  "shareLinkWithTimestamp": "Ajouter l''horodatage",
   "@shareLinkWithTimestamp": {
     "description": "asking user to share link along with timestamp"
   },
@@ -1361,7 +1361,7 @@
   "@refresh": {},
   "wrongThumbnailConfiguration": "Le serveur est joignable mais mal configurée, les vidéos ainsi que les photo de profile des chaînes risquent de ne pas apparaitre proprement. Désactivez le test de la configuration si cela vous convient, sinon réglez le serveur",
   "@wrongThumbnailConfiguration": {},
-  "addBasicAuth": "ajouter une méthode d'autentification basique",
+  "addBasicAuth": "ajouter une méthode d''autentification basique",
   "@addBasicAuth": {},
   "value": "Valeur",
   "@value": {},
@@ -1381,7 +1381,7 @@
   "@alsoTestServerConfig": {},
   "serverAlreadyExists": "Ce serveur existe déjà dans les paramètres",
   "@serverAlreadyExists": {},
-  "openWikiLink": "Ouvrir le Wiki pour avoir de l'aide",
+  "openWikiLink": "Ouvrir le Wiki pour avoir de l''aide",
   "@openWikiLink": {},
   "serverUnreachable": "Le serveur n'est pas joignable, ou ceci n'est pas un serveur invidious valide",
   "@serverUnreachable": {},
