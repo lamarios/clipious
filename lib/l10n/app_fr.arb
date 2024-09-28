@@ -23,7 +23,7 @@
   "@removeFromPlayList": {
     "description": "Menu item description to show remove a video from a playlist"
   },
-  "deletePlayListQ": "Supprimer la liste de lecture ?",
+  "deletePlayListQ": "Supprimer la liste de lecture ?",
   "@deletePlayListQ": {
     "description": "Ask user to delete a playlist"
   },
@@ -67,7 +67,7 @@
   "@info": {
     "description": "Info label"
   },
-  "streams": "Directs",
+  "streams": "Live",
   "@streams": {
     "description": "Streams label"
   },
@@ -75,7 +75,7 @@
   "@latestVideos": {
     "description": "Latest channel videos"
   },
-  "subscribed": "Abonné·e",
+  "subscribed": "Abonnés",
   "@subscribed": {
     "description": "When the user is subscribed to a channel"
   },
@@ -825,7 +825,7 @@
   "@videoAddedToQueue": {
     "description": "Pop up message when a video was added at the end of the video queue"
   },
-  "shareLinkWithTimestamp": "Ajouter l''horodatage",
+  "shareLinkWithTimestamp": "Ajouter l'horodatage",
   "@shareLinkWithTimestamp": {
     "description": "asking user to share link along with timestamp"
   },
@@ -1358,5 +1358,37 @@
   "both": "Les deux",
   "@both": {},
   "refresh": "Actualiser",
-  "@refresh": {}
+  "@refresh": {},
+  "wrongThumbnailConfiguration": "Le serveur est joignable mais mal configurée, les vidéos ainsi que les photo de profile des chaînes risquent de ne pas apparaitre proprement. Désactivez le test de la configuration si cela vous convient, sinon réglez le serveur",
+  "@wrongThumbnailConfiguration": {},
+  "addBasicAuth": "ajouter une méthode d'autentification basique",
+  "@addBasicAuth": {},
+  "value": "Valeur",
+  "@value": {},
+  "addBasicAuthExplanation": "Si votre serveur nécessite une connexion basique en HTTP, ajoutez les détailles ci-dessous. Ces derniers ne sont pas vos identifications de connexion Invidious",
+  "@addBasicAuthExplanation": {},
+  "addHeader": "Ajouter un header",
+  "@addHeader": {},
+  "advancedConfiguration": "Configuration Avancée",
+  "@advancedConfiguration": {},
+  "customHeaders": "Header personnalisé",
+  "@customHeaders": {},
+  "customHeadersExplanation": "modifiez les Headers qui seront envoyées au serveur Invidious",
+  "@customHeadersExplanation": {},
+  "testAndAddServer": "vérifier et ajouter le serveur",
+  "@testAndAddServer": {},
+  "alsoTestServerConfig": "Tester la configuration du serveur. Exemple si les miniatures seront chargé proprement",
+  "@alsoTestServerConfig": {},
+  "serverAlreadyExists": "Ce serveur existe déjà dans les paramètres",
+  "@serverAlreadyExists": {},
+  "openWikiLink": "Ouvrir le Wiki pour avoir de l'aide",
+  "@openWikiLink": {},
+  "serverUnreachable": "Le serveur n'est pas joignable, ou ceci n'est pas un serveur invidious valide",
+  "@serverUnreachable": {},
+  "copyToDownloadFolder": "Copier vers le dossier des Téléchargement",
+  "@copyToDownloadFolder": {},
+  "fileCopiedToDownloadFolder": "Fichier a bien été copier vers le dossier de téléchargement",
+  "@fileCopiedToDownloadFolder": {},
+  "videoDeleted": "La vidéo a été supprimer",
+  "@videoDeleted": {}
 }
