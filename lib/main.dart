@@ -201,6 +201,9 @@ class MyApp extends StatelessWidget {
                 systemOverlayStyle: getUiOverlayStyle(context,
                     dark: darkColorScheme, light: lightColorScheme));
 
+            var sliderTheme =
+                const SliderThemeData(inactiveTrackColor: Colors.blue);
+
             return MaterialApp.router(
               routerConfig: appRouter.config(
                   navigatorObservers: () => [MyRouteObserver()],
@@ -251,6 +254,8 @@ class MyApp extends StatelessWidget {
                   navigationBarTheme: navigationBarTheme,
                   navigationRailTheme: navigationRailTheme,
                   appBarTheme: appBarTheme,
+                  sliderTheme: sliderTheme.copyWith(
+                      inactiveTrackColor: lightColorScheme.secondaryContainer),
                   progressIndicatorTheme: ProgressIndicatorThemeData(
                       circularTrackColor: lightColorScheme.secondaryContainer
                           .withOpacity(0.8))),
@@ -260,6 +265,8 @@ class MyApp extends StatelessWidget {
                   appBarTheme: appBarTheme,
                   navigationBarTheme: navigationBarTheme,
                   navigationRailTheme: navigationRailTheme,
+                  sliderTheme: sliderTheme.copyWith(
+                      inactiveTrackColor: darkColorScheme.secondaryContainer),
                   progressIndicatorTheme: ProgressIndicatorThemeData(
                       circularTrackColor:
                           darkColorScheme.secondaryContainer.withOpacity(0.8))),

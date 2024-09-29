@@ -23,13 +23,20 @@ class SystemSettingsSlider extends StatelessWidget {
           children: [
             Expanded(
               child: FractionallySizedBox(
-                alignment: Alignment.bottomCenter,
                 widthFactor: 0.5,
-                heightFactor: value,
                 child: Container(
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
-                      color: colors.primary),
+                      color: colors.primary.withOpacity(0.1)),
+                  child: FractionallySizedBox(
+                    alignment: Alignment.bottomCenter,
+                    heightFactor: value,
+                    child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: colors.primary),
+                    ),
+                  ),
                 ),
               ),
             ),

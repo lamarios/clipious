@@ -223,6 +223,8 @@ class PlayerControls extends StatelessWidget {
       data: ThemeData(
           useMaterial3: true,
           colorScheme: darkColorScheme,
+          sliderTheme: SliderThemeData(
+              inactiveTrackColor: darkColorScheme.secondaryContainer),
           progressIndicatorTheme: ProgressIndicatorThemeData(
               circularTrackColor:
                   darkColorScheme.secondaryContainer.withOpacity(0.8))),
