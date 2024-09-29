@@ -1392,5 +1392,15 @@
   "fileCopiedToDownloadFolder": "Fil kopierad till katalogen nedladdningar",
   "@fileCopiedToDownloadFolder": {},
   "videoDeleted": "Film borttagen",
-  "@videoDeleted": {}
+  "@videoDeleted": {},
+  "stopTheVideo": "Stanna videon",
+  "@stopTheVideo": {},
+  "setTimer": "Sätt timer",
+  "@setTimer": {},
+  "cancelSleepTimer": "Avbryt sömntimer",
+  "@cancelSleepTimer": {},
+  "sleepTimer": "Sömntimer",
+  "@sleepTimer": {},
+  "stopTheVideoExplanation": "Om aktiverad, stängs videon, annars pausar bara videon.",
+  "@stopTheVideoExplanation": {}
 }
