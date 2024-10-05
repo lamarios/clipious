@@ -52,7 +52,7 @@ class DownloadManagerCubit extends Cubit<DownloadManagerState> {
   }
 
   setVideos() async {
-    var vids = db.getAllDownloads();
+    var vids = List<DownloadedVideo>.from(db.getAllDownloads());
     // checking if we have any video that are not fail, not completed and not currently downloading
     for (int i = 0; i < vids.length; i++) {
       var v = vids[i];

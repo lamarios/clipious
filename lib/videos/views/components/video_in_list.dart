@@ -87,7 +87,7 @@ class VideoListItem extends StatelessWidget {
               context.read<VideoInListCubit>().updateProgress(),
           child: InkWell(
             onTap: () => openVideo(context),
-            onLongPress: (video!.isUpcoming ?? false) ||
+            onLongPress: (video?.isUpcoming ?? false) ||
                     !allowModalSheet ||
                     state.video == null ||
                     state.video!.filtered
@@ -370,7 +370,7 @@ class VideoListItem extends StatelessWidget {
                         ],
                       ),
                     ),
-                    if (!(video!.isUpcoming ?? false) &&
+                    if (!(video?.isUpcoming ?? false) &&
                         allowModalSheet &&
                         !small &&
                         video != null)
