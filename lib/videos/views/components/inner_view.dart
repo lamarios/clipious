@@ -37,6 +37,7 @@ class VideoInnerView extends StatelessWidget {
 
     var playButton = PlayButton(
       icon: restart ? Icons.refresh : null,
+      hasAudio: !(video.liveNow ?? false),
       onPressed: restart ? cubit.restartVideo : cubit.playVideo,
     );
     return Column(

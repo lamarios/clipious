@@ -102,12 +102,17 @@ class MiniPlayerControls extends StatelessWidget {
                   var cubit = context.read<SettingsCubit>();
                   var isAudio = context
                       .select((PlayerCubit value) => value.state.isAudio);
+
+                  var hasAudio = context.select((PlayerCubit value) =>
+                      !(value.state.currentlyPlaying?.liveNow ?? false));
+
                   return Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       Visibility(
                         // only for online videos
-                        visible: player.state.currentlyPlaying != null,
+                        visible:
+                            player.state.currentlyPlaying != null && hasAudio,
                         child: MultiValueSwitch(
                           left: Icons.ondemand_video,
                           right: Icons.audiotrack,

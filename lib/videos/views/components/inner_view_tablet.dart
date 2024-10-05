@@ -63,6 +63,7 @@ class VideoTabletInnerView extends StatelessWidget {
                     children: [
                       PlayButton(
                         icon: restart ? Icons.refresh : null,
+                        hasAudio: !(video.liveNow ?? false),
                         onPressed:
                             restart ? cubit.restartVideo : cubit.playVideo,
                       ),
