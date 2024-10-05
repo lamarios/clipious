@@ -30,6 +30,9 @@ mixin _$PlayerControlsState {
   double get doubleTapRewindedOpacity => throw _privateConstructorUsedError;
   bool get justDoubleTappedSkip => throw _privateConstructorUsedError;
   bool get showSponsorBlocked => throw _privateConstructorUsedError;
+  double get screenControlStart => throw _privateConstructorUsedError;
+  double get screenControlStartValue =>
+      throw _privateConstructorUsedError; // system setting adjustments
   bool get showBrightnessSlider => throw _privateConstructorUsedError;
   double get systemBrightness => throw _privateConstructorUsedError;
   bool get showVolumeSlider => throw _privateConstructorUsedError;
@@ -62,6 +65,8 @@ abstract class $PlayerControlsStateCopyWith<$Res> {
       double doubleTapRewindedOpacity,
       bool justDoubleTappedSkip,
       bool showSponsorBlocked,
+      double screenControlStart,
+      double screenControlStartValue,
       bool showBrightnessSlider,
       double systemBrightness,
       bool showVolumeSlider,
@@ -96,6 +101,8 @@ class _$PlayerControlsStateCopyWithImpl<$Res, $Val extends PlayerControlsState>
     Object? doubleTapRewindedOpacity = null,
     Object? justDoubleTappedSkip = null,
     Object? showSponsorBlocked = null,
+    Object? screenControlStart = null,
+    Object? screenControlStartValue = null,
     Object? showBrightnessSlider = null,
     Object? systemBrightness = null,
     Object? showVolumeSlider = null,
@@ -154,6 +161,14 @@ class _$PlayerControlsStateCopyWithImpl<$Res, $Val extends PlayerControlsState>
           ? _value.showSponsorBlocked
           : showSponsorBlocked // ignore: cast_nullable_to_non_nullable
               as bool,
+      screenControlStart: null == screenControlStart
+          ? _value.screenControlStart
+          : screenControlStart // ignore: cast_nullable_to_non_nullable
+              as double,
+      screenControlStartValue: null == screenControlStartValue
+          ? _value.screenControlStartValue
+          : screenControlStartValue // ignore: cast_nullable_to_non_nullable
+              as double,
       showBrightnessSlider: null == showBrightnessSlider
           ? _value.showBrightnessSlider
           : showBrightnessSlider // ignore: cast_nullable_to_non_nullable
@@ -196,6 +211,8 @@ abstract class _$$PlayercontrolsStateImplCopyWith<$Res>
       double doubleTapRewindedOpacity,
       bool justDoubleTappedSkip,
       bool showSponsorBlocked,
+      double screenControlStart,
+      double screenControlStartValue,
       bool showBrightnessSlider,
       double systemBrightness,
       bool showVolumeSlider,
@@ -228,6 +245,8 @@ class __$$PlayercontrolsStateImplCopyWithImpl<$Res>
     Object? doubleTapRewindedOpacity = null,
     Object? justDoubleTappedSkip = null,
     Object? showSponsorBlocked = null,
+    Object? screenControlStart = null,
+    Object? screenControlStartValue = null,
     Object? showBrightnessSlider = null,
     Object? systemBrightness = null,
     Object? showVolumeSlider = null,
@@ -286,6 +305,14 @@ class __$$PlayercontrolsStateImplCopyWithImpl<$Res>
           ? _value.showSponsorBlocked
           : showSponsorBlocked // ignore: cast_nullable_to_non_nullable
               as bool,
+      screenControlStart: null == screenControlStart
+          ? _value.screenControlStart
+          : screenControlStart // ignore: cast_nullable_to_non_nullable
+              as double,
+      screenControlStartValue: null == screenControlStartValue
+          ? _value.screenControlStartValue
+          : screenControlStartValue // ignore: cast_nullable_to_non_nullable
+              as double,
       showBrightnessSlider: null == showBrightnessSlider
           ? _value.showBrightnessSlider
           : showBrightnessSlider // ignore: cast_nullable_to_non_nullable
@@ -323,6 +350,8 @@ class _$PlayercontrolsStateImpl implements _PlayercontrolsState {
       this.doubleTapRewindedOpacity = 0,
       this.justDoubleTappedSkip = false,
       this.showSponsorBlocked = false,
+      this.screenControlStart = 0,
+      this.screenControlStartValue = 0,
       this.showBrightnessSlider = false,
       this.systemBrightness = 0,
       this.showVolumeSlider = false,
@@ -369,6 +398,13 @@ class _$PlayercontrolsStateImpl implements _PlayercontrolsState {
   final bool showSponsorBlocked;
   @override
   @JsonKey()
+  final double screenControlStart;
+  @override
+  @JsonKey()
+  final double screenControlStartValue;
+// system setting adjustments
+  @override
+  @JsonKey()
   final bool showBrightnessSlider;
   @override
   @JsonKey()
@@ -382,7 +418,7 @@ class _$PlayercontrolsStateImpl implements _PlayercontrolsState {
 
   @override
   String toString() {
-    return 'PlayerControlsState(errored: $errored, position: $position, duration: $duration, buffer: $buffer, fullScreenState: $fullScreenState, displayControls: $displayControls, muted: $muted, buffering: $buffering, draggingPositionSlider: $draggingPositionSlider, doubleTapFastForwardedOpacity: $doubleTapFastForwardedOpacity, doubleTapRewindedOpacity: $doubleTapRewindedOpacity, justDoubleTappedSkip: $justDoubleTappedSkip, showSponsorBlocked: $showSponsorBlocked, showBrightnessSlider: $showBrightnessSlider, systemBrightness: $systemBrightness, showVolumeSlider: $showVolumeSlider, systemVolume: $systemVolume)';
+    return 'PlayerControlsState(errored: $errored, position: $position, duration: $duration, buffer: $buffer, fullScreenState: $fullScreenState, displayControls: $displayControls, muted: $muted, buffering: $buffering, draggingPositionSlider: $draggingPositionSlider, doubleTapFastForwardedOpacity: $doubleTapFastForwardedOpacity, doubleTapRewindedOpacity: $doubleTapRewindedOpacity, justDoubleTappedSkip: $justDoubleTappedSkip, showSponsorBlocked: $showSponsorBlocked, screenControlStart: $screenControlStart, screenControlStartValue: $screenControlStartValue, showBrightnessSlider: $showBrightnessSlider, systemBrightness: $systemBrightness, showVolumeSlider: $showVolumeSlider, systemVolume: $systemVolume)';
   }
 
   @override
@@ -416,6 +452,11 @@ class _$PlayercontrolsStateImpl implements _PlayercontrolsState {
                 other.justDoubleTappedSkip == justDoubleTappedSkip) &&
             (identical(other.showSponsorBlocked, showSponsorBlocked) ||
                 other.showSponsorBlocked == showSponsorBlocked) &&
+            (identical(other.screenControlStart, screenControlStart) ||
+                other.screenControlStart == screenControlStart) &&
+            (identical(
+                    other.screenControlStartValue, screenControlStartValue) ||
+                other.screenControlStartValue == screenControlStartValue) &&
             (identical(other.showBrightnessSlider, showBrightnessSlider) ||
                 other.showBrightnessSlider == showBrightnessSlider) &&
             (identical(other.systemBrightness, systemBrightness) ||
@@ -427,25 +468,28 @@ class _$PlayercontrolsStateImpl implements _PlayercontrolsState {
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      errored,
-      position,
-      duration,
-      buffer,
-      fullScreenState,
-      displayControls,
-      muted,
-      buffering,
-      draggingPositionSlider,
-      doubleTapFastForwardedOpacity,
-      doubleTapRewindedOpacity,
-      justDoubleTappedSkip,
-      showSponsorBlocked,
-      showBrightnessSlider,
-      systemBrightness,
-      showVolumeSlider,
-      systemVolume);
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        errored,
+        position,
+        duration,
+        buffer,
+        fullScreenState,
+        displayControls,
+        muted,
+        buffering,
+        draggingPositionSlider,
+        doubleTapFastForwardedOpacity,
+        doubleTapRewindedOpacity,
+        justDoubleTappedSkip,
+        showSponsorBlocked,
+        screenControlStart,
+        screenControlStartValue,
+        showBrightnessSlider,
+        systemBrightness,
+        showVolumeSlider,
+        systemVolume
+      ]);
 
   /// Create a copy of PlayerControlsState
   /// with the given fields replaced by the non-null parameter values.
@@ -472,6 +516,8 @@ abstract class _PlayercontrolsState implements PlayerControlsState {
       final double doubleTapRewindedOpacity,
       final bool justDoubleTappedSkip,
       final bool showSponsorBlocked,
+      final double screenControlStart,
+      final double screenControlStartValue,
       final bool showBrightnessSlider,
       final double systemBrightness,
       final bool showVolumeSlider,
@@ -503,6 +549,10 @@ abstract class _PlayercontrolsState implements PlayerControlsState {
   bool get justDoubleTappedSkip;
   @override
   bool get showSponsorBlocked;
+  @override
+  double get screenControlStart;
+  @override
+  double get screenControlStartValue; // system setting adjustments
   @override
   bool get showBrightnessSlider;
   @override

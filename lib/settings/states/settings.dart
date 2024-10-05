@@ -411,6 +411,8 @@ class SettingsCubit extends Cubit<SettingsState> {
   setFullscreenOnRotate(bool b) async =>
       await _set(fullScreenOnLandscapeSettingName, b);
 
+  setScreenControls(bool b) async => await _set(screenControlsSettingName, b);
+
   setReturnYoutubeDislikeUrl(String url) async =>
       await _set(returnYoutubeDislikeUrlSettingName, url);
 
@@ -527,7 +529,7 @@ class SettingsState with _$SettingsState {
 
   bool get useDynamicTheme => _get(dynamicTheme)?.value == 'true';
 
-  bool get useDash => _get(useDashSettingName)?.value == 'true';
+  bool get useDash => (_get(useDashSettingName)?.value ?? 'true') == 'true';
 
   bool get autoplayVideoOnLoad => _get(playerAutoplayOnLoad)?.value == 'true';
 
@@ -558,6 +560,9 @@ class SettingsState with _$SettingsState {
 
   bool get useSearchHistory =>
       _get(useSearchHistorySettingName)?.value == 'true';
+
+  bool get screenControls =>
+      (_get(screenControlsSettingName)?.value ?? 'true') == 'true';
 
   List<HomeDataSource> get appLayout {
     var savedLayout = _get(appLayoutSettingName)?.value;
