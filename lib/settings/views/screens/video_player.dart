@@ -93,6 +93,13 @@ class VideoPlayerSettingsScreen extends StatelessWidget {
                   title: Text(locals.fillFullscreen),
                   description: Text(locals.fillFullscreenDescription),
                 ),
+                SettingsTile.switchTile(
+                  leading: const Icon(Icons.tune),
+                  initialValue: state.screenControls,
+                  onToggle: cubit.setScreenControls,
+                  title: Text(locals.screenControls),
+                  description: Text(locals.screenControlsExplanation),
+                ),
               ]),
               SettingsSection(title: Text(locals.seeking), tiles: [
                 SettingsTile(

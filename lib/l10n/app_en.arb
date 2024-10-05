@@ -1367,7 +1367,7 @@
   "customHeadersExplanation": "Set custom headers to be sent to the invidious server",
   "value": "Value",
   "testAndAddServer": "Test and add server",
-  "alsoTestServerConfig":"Also test server configuration, like if thumbnails would display properly",
+  "alsoTestServerConfig": "Also test server configuration, like if thumbnails would display properly",
   "serverAlreadyExists": "Server already exists in settings",
   "wrongThumbnailConfiguration": "The server is reachable but is not configured properly, the video and channel thumbnails will not be displayed properly. Disable the server test configuration if you are OK with this, fix your server otherwise",
   "openWikiLink": "Open wiki for help",
@@ -1379,5 +1379,7 @@
   "stopTheVideo": "Stop the video",
   "stopTheVideoExplanation": "If enabled, the video will be closed, if disabled the video will be simply paused",
   "setTimer": "Set timer",
-  "cancelSleepTimer": "Cancel sleep timer"
+  "cancelSleepTimer": "Cancel sleep timer",
+  "screenControls": "Screen controls",
+  "screenControlsExplanation": "When watching a video in full screen, Vertically dragging from the left or the right will adjust the brightness or volume respectively"
 }

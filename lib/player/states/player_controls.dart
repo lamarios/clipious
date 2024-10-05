@@ -1,4 +1,4 @@
-import 'dart:ui';
+import 'dart:math';
 
 import 'package:bloc/bloc.dart';
 import 'package:clipious/player/models/media_event.dart';
@@ -194,59 +194,56 @@ class PlayerControlsCubit extends Cubit<PlayerControlsState> {
     });
   }
 
-  Future<void> startBrightnessAdjustments() async {
+  Future<void> startBrightnessAdjustments(DragStartDetails details) async {
     final currentBrightness = await ScreenBrightness().current;
     emit(state.copyWith(
-        systemBrightness: currentBrightness, showBrightnessSlider: true));
+        systemBrightness: currentBrightness,
+        screenControlStartValue: currentBrightness,
+        screenControlStart: details.localPosition.dy));
   }
 
   Future<void> updateBrightness(
       DragUpdateDetails details, BoxConstraints constraints) async {
-    // Set upper and lower bounds (75% of the screen for full brightness, bottom 25% for zero brightness)
-    double upperBound = 0.25; // top 75% is full brightness
-    double lowerBound = 0.75; // bottom is 0 brightness
+    // percentage of the screen we moved since we started dragging
+    double movedBy = (state.screenControlStart - details.localPosition.dy) /
+        constraints.maxHeight;
 
-    // Clamping the brightness based on the drag position
-    double normalizedPosition =
-        (details.localPosition.dy / constraints.maxHeight)
-            .clamp(upperBound, lowerBound);
+    if (movedBy.abs() > 0.05 || state.showBrightnessSlider) {
+      double screenBrightness =
+          min(1, max(0, state.screenControlStartValue + movedBy));
 
-    // Linearly interpolate between 1 (full brightness) and 0 (no brightness)
-    final screenBrightness = lerpDouble(
-        1, 0, (normalizedPosition - upperBound) / (lowerBound - upperBound))!;
-
-    await ScreenBrightness().setScreenBrightness(screenBrightness);
-    emit(state.copyWith(systemBrightness: screenBrightness));
+      await ScreenBrightness().setScreenBrightness(screenBrightness);
+      emit(state.copyWith(
+          systemBrightness: screenBrightness, showBrightnessSlider: true));
+    }
   }
 
   void stopBrightnessAdjustments() {
-    emit(state.copyWith(showBrightnessSlider: false));
+    emit(state.copyWith(showBrightnessSlider: false, screenControlStart: 0));
   }
 
-  Future<void> startVolumeAdjustments() async {
+  Future<void> startVolumeAdjustments(DragStartDetails details) async {
     await FlutterVolumeController.updateShowSystemUI(false);
     final currentVolume = await FlutterVolumeController.getVolume();
     emit(state.copyWith(
-        systemVolume: currentVolume ?? 0, showVolumeSlider: true));
+        systemVolume: currentVolume ?? 0,
+        screenControlStartValue: currentVolume ?? 0,
+        screenControlStart: details.localPosition.dy));
   }
 
   Future<void> updateVolume(
       DragUpdateDetails details, BoxConstraints constraints) async {
     // Set upper and lower bounds (75% of the screen for full volume, bottom 25% for zero volume)
-    double upperBound = 0.25; // top 75% is full volume
-    double lowerBound = 0.75; // bottom is 0 volume
+    // percentage of the screen we moved since we started dragging
+    double movedBy = (state.screenControlStart - details.localPosition.dy) /
+        constraints.maxHeight;
 
-    // Clamping the volume based on the drag position
-    double normalizedPosition =
-        (details.localPosition.dy / constraints.maxHeight)
-            .clamp(upperBound, lowerBound);
+    if (movedBy.abs() > 0.05 || state.showVolumeSlider) {
+      double volume = min(1, max(0, state.screenControlStartValue + movedBy));
 
-    // Linearly interpolate between 1 (full volume) and 0 (no volume)
-    final volume = lerpDouble(
-        1, 0, (normalizedPosition - upperBound) / (lowerBound - upperBound))!;
-
-    await FlutterVolumeController.setVolume(volume);
-    emit(state.copyWith(systemVolume: volume));
+      await FlutterVolumeController.setVolume(volume);
+      emit(state.copyWith(systemVolume: volume, showVolumeSlider: true));
+    }
   }
 
   void stopVolumeAdjustments() {
@@ -270,6 +267,8 @@ class PlayerControlsState with _$PlayerControlsState {
       @Default(0) double doubleTapRewindedOpacity,
       @Default(false) bool justDoubleTappedSkip,
       @Default(false) bool showSponsorBlocked,
+      @Default(0) double screenControlStart,
+      @Default(0) double screenControlStartValue,
       // system setting adjustments
       @Default(false) bool showBrightnessSlider,
       @Default(0) double systemBrightness,

@@ -1,12 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
+enum SystemSliderType {
+  volume,
+  brightness;
+
+  IconData getIcon(double value) {
+    switch (this) {
+      case brightness:
+        if (value <= 0.3) {
+          return Icons.brightness_low;
+        } else if (value <= 0.7) {
+          return Icons.brightness_medium;
+        } else {
+          return Icons.brightness_high;
+        }
+      case volume:
+        if (value == 0) {
+          return Icons.volume_off;
+        } else if (value <= 0.7) {
+          return Icons.volume_down;
+        } else {
+          return Icons.volume_up;
+        }
+    }
+  }
+}
+
 class SystemSettingsSlider extends StatelessWidget {
-  final IconData icon;
+  final SystemSliderType type;
   final double value;
 
   const SystemSettingsSlider(
-      {super.key, required this.icon, required this.value});
+      {super.key, required this.value, required this.type});
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +68,7 @@ class SystemSettingsSlider extends StatelessWidget {
             ),
             const Gap(10),
             Icon(
-              icon,
+              type.getIcon(value),
               color: colors.primary,
               size: 12,
             )

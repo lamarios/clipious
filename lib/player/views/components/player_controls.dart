@@ -249,6 +249,10 @@ class PlayerControls extends StatelessWidget {
                 .select((PlayerCubit cubit) => cubit.state.totalFastForward);
             int totalRewind =
                 context.select((PlayerCubit cubit) => cubit.state.totalRewind);
+
+            bool screenControlsEnabled = context.select(
+                (SettingsCubit settings) => settings.state.screenControls);
+
             String videoTitle = context.select((PlayerCubit cubit) =>
                 cubit.state.currentlyPlaying?.title ??
                 cubit.state.offlineCurrentlyPlaying?.title ??
@@ -265,9 +269,9 @@ class PlayerControls extends StatelessWidget {
             var cubit = context.read<PlayerControlsCubit>();
 
             // to allow or not dragging to adjust brightness and volume
-            var canDragToAdjustDeviceSettings =
+            var canDragToAdjustDeviceSettings = screenControlsEnabled &&
                 playerState.fullScreenState == FullScreenState.fullScreen &&
-                    !playerState.displayControls;
+                !playerState.displayControls;
 
             return BlocListener<PlayerCubit, PlayerState>(
               listenWhen: (previous, current) =>
@@ -352,7 +356,8 @@ class PlayerControls extends StatelessWidget {
                                             canDragToAdjustDeviceSettings
                                                 ? (details) {
                                                     cubit
-                                                        .startBrightnessAdjustments();
+                                                        .startBrightnessAdjustments(
+                                                            details);
                                                   }
                                                 : null,
                                         onVerticalDragUpdate:
@@ -386,7 +391,8 @@ class PlayerControls extends StatelessWidget {
                                             canDragToAdjustDeviceSettings
                                                 ? (details) {
                                                     cubit
-                                                        .startVolumeAdjustments();
+                                                        .startVolumeAdjustments(
+                                                            details);
                                                   }
                                                 : null,
                                         onVerticalDragUpdate:
@@ -701,7 +707,7 @@ class PlayerControls extends StatelessWidget {
                               bottom: constraints.maxHeight * 0.15,
                               right: 20,
                               child: SystemSettingsSlider(
-                                  icon: Icons.brightness_5,
+                                  type: SystemSliderType.brightness,
                                   value: playerState.systemBrightness))
                           .animate(
                             target: playerState.showBrightnessSlider ? 1 : 0,
@@ -721,7 +727,7 @@ class PlayerControls extends StatelessWidget {
                               bottom: constraints.maxHeight * 0.15,
                               left: 20,
                               child: SystemSettingsSlider(
-                                  icon: Icons.volume_up,
+                                  type: SystemSliderType.volume,
                                   value: playerState.systemVolume))
                           .animate(
                             target: playerState.showVolumeSlider ? 1 : 0,

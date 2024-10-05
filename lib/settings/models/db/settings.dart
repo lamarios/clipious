@@ -40,6 +40,7 @@ const subtitleBackground = 'subtitle-background';
 const dearrowSettingName = 'dearrow';
 const dearrowThumbnailsSettingName = "dearrow-thumbnails";
 const fullScreenOnLandscapeSettingName = "fullscreen-on-landscape";
+const screenControlsSettingName = "screen-controls";
 
 const onOpenSettingName = "on-open";
 
