@@ -2,15 +2,15 @@ import 'package:clipious/settings/models/db/video_filter.dart';
 import 'package:clipious/videos/models/dearrow.dart';
 import 'package:logging/logging.dart';
 
-import '../videos/models/base_video.dart';
+import '../videos/models/video.dart';
 
 var log = Logger('Video post process');
 const privateVideoString = "[Private video]";
 
-Future<List<BaseVideo>> postProcessVideos(List<BaseVideo> toProcess) async {
+Future<List<Video>> postProcessVideos(List<Video> toProcess) async {
   try {
     int start = DateTime.now().millisecondsSinceEpoch;
-    List<BaseVideo> videos = toProcess
+    List<Video> videos = toProcess
         .where((element) => element.title != privateVideoString)
         .toList();
 

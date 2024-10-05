@@ -34,6 +34,8 @@ abstract class $DownloadedVideoStateCopyWith<$Res> {
       _$DownloadedVideoStateCopyWithImpl<$Res, DownloadedVideoState>;
   @useResult
   $Res call({DownloadedVideo? video, String? thumbnailPath, double progress});
+
+  $DownloadedVideoCopyWith<$Res>? get video;
 }
 
 /// @nodoc
@@ -71,6 +73,20 @@ class _$DownloadedVideoStateCopyWithImpl<$Res,
               as double,
     ) as $Val);
   }
+
+  /// Create a copy of DownloadedVideoState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $DownloadedVideoCopyWith<$Res>? get video {
+    if (_value.video == null) {
+      return null;
+    }
+
+    return $DownloadedVideoCopyWith<$Res>(_value.video!, (value) {
+      return _then(_value.copyWith(video: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -82,6 +98,9 @@ abstract class _$$DownloadedVideoStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call({DownloadedVideo? video, String? thumbnailPath, double progress});
+
+  @override
+  $DownloadedVideoCopyWith<$Res>? get video;
 }
 
 /// @nodoc

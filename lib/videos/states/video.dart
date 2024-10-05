@@ -1,7 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:clipious/downloads/models/downloaded_video.dart';
-import 'package:clipious/videos/models/base_video.dart';
 import 'package:clipious/videos/models/dislike.dart';
 import 'package:logging/logging.dart';
 
@@ -112,7 +111,7 @@ class VideoCubit extends Cubit<VideoState> {
 
   void playVideo(bool? audio) {
     if (state.video != null) {
-      List<BaseVideo> videos = [state.video!];
+      List<Video> videos = [state.video!];
       if (!settings.state.distractionFreeMode &&
           settings.state.playRecommendedNext) {
         videos.addAll(state.video?.recommendedVideos ?? []);

@@ -38,7 +38,7 @@ class SleepTimerSheet extends StatelessWidget {
               value: state.duration.inMilliseconds.toDouble(),
               divisions:
                   (sleepTimerMaxDuration - sleepTimerMinDuration).inMinutes,
-              label: prettyDuration(state.duration),
+              label: prettyDurationCustom(state.duration),
               onChanged: (value) =>
                   cubit.setDuration(Duration(milliseconds: value.floor())),
             ),
@@ -52,7 +52,7 @@ class SleepTimerSheet extends StatelessWidget {
                 SizedBox(
                     width: 50,
                     child: Text(
-                      prettyDuration(state.duration),
+                      prettyDurationCustom(state.duration),
                       textAlign: TextAlign.center,
                     )),
                 IconButton(

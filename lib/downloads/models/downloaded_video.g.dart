@@ -6,8 +6,9 @@ part of 'downloaded_video.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-DownloadedVideo _$DownloadedVideoFromJson(Map<String, dynamic> json) =>
-    DownloadedVideo(
+_$DownloadedVideoImpl _$$DownloadedVideoImplFromJson(
+        Map<String, dynamic> json) =>
+    _$DownloadedVideoImpl(
       videoId: json['videoId'] as String,
       title: json['title'] as String,
       author: json['author'] as String?,
@@ -15,12 +16,14 @@ DownloadedVideo _$DownloadedVideoFromJson(Map<String, dynamic> json) =>
       downloadComplete: json['downloadComplete'] as bool? ?? false,
       downloadFailed: json['downloadFailed'] as bool? ?? false,
       audioOnly: json['audioOnly'] as bool? ?? false,
-      lengthSeconds: (json['lengthSeconds'] as num?)?.toInt() ?? 1,
-      quality: json['quality'] as String? ?? '720p',
+      lengthSeconds: (json['lengthSeconds'] as num).toInt(),
+      quality: json['quality'] as String,
     );
 
-Map<String, dynamic> _$DownloadedVideoToJson(DownloadedVideo instance) =>
+Map<String, dynamic> _$$DownloadedVideoImplToJson(
+        _$DownloadedVideoImpl instance) =>
     <String, dynamic>{
+      'videoId': instance.videoId,
       'title': instance.title,
       'author': instance.author,
       'authorUrl': instance.authorUrl,
@@ -29,5 +32,4 @@ Map<String, dynamic> _$DownloadedVideoToJson(DownloadedVideo instance) =>
       'audioOnly': instance.audioOnly,
       'lengthSeconds': instance.lengthSeconds,
       'quality': instance.quality,
-      'videoId': instance.videoId,
     };

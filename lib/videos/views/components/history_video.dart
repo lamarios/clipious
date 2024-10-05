@@ -25,7 +25,7 @@ class HistoryVideoView extends StatelessWidget {
               ? CompactVideo(
                   onTap: () => AutoRouter.of(context)
                       .push(VideoRoute(videoId: state.cachedVid!.videoId)),
-                  video: state.cachedVid?.toBaseVideo(),
+                  video: state.cachedVid?.toVideo(),
                 )
               : const CompactVideoPlaceHolder(),
           crossFadeState: state.loading

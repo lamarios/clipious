@@ -1234,7 +1234,7 @@ class TvFilterListSettingsRoute extends PageRouteInfo<void> {
 class TvGridRoute extends PageRouteInfo<TvGridRouteArgs> {
   TvGridRoute({
     Key? key,
-    required PaginatedList<VideoInList> paginatedVideoList,
+    required PaginatedList<Video> paginatedVideoList,
     String? tags,
     required String title,
     List<PageRouteInfo>? children,
@@ -1275,7 +1275,7 @@ class TvGridRouteArgs {
 
   final Key? key;
 
-  final PaginatedList<VideoInList> paginatedVideoList;
+  final PaginatedList<Video> paginatedVideoList;
 
   final String? tags;
 
@@ -1404,7 +1404,7 @@ class TvPlainTextRouteArgs {
 class TvPlayerRoute extends PageRouteInfo<TvPlayerRouteArgs> {
   TvPlayerRoute({
     Key? key,
-    required List<BaseVideo> videos,
+    required List<Video> videos,
     List<PageRouteInfo>? children,
   }) : super(
           TvPlayerRoute.name,
@@ -1437,7 +1437,7 @@ class TvPlayerRouteArgs {
 
   final Key? key;
 
-  final List<BaseVideo> videos;
+  final List<Video> videos;
 
   @override
   String toString() {

@@ -51,6 +51,9 @@ abstract class $VideoStateCopyWith<$Res> {
       DownloadedVideo? downloadedVideo,
       double opacity,
       String error});
+
+  $VideoCopyWith<$Res>? get video;
+  $DownloadedVideoCopyWith<$Res>? get downloadedVideo;
 }
 
 /// @nodoc
@@ -122,6 +125,34 @@ class _$VideoStateCopyWithImpl<$Res, $Val extends VideoState>
               as String,
     ) as $Val);
   }
+
+  /// Create a copy of VideoState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $VideoCopyWith<$Res>? get video {
+    if (_value.video == null) {
+      return null;
+    }
+
+    return $VideoCopyWith<$Res>(_value.video!, (value) {
+      return _then(_value.copyWith(video: value) as $Val);
+    });
+  }
+
+  /// Create a copy of VideoState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $DownloadedVideoCopyWith<$Res>? get downloadedVideo {
+    if (_value.downloadedVideo == null) {
+      return null;
+    }
+
+    return $DownloadedVideoCopyWith<$Res>(_value.downloadedVideo!, (value) {
+      return _then(_value.copyWith(downloadedVideo: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -143,6 +174,11 @@ abstract class _$$VideoStateImplCopyWith<$Res>
       DownloadedVideo? downloadedVideo,
       double opacity,
       String error});
+
+  @override
+  $VideoCopyWith<$Res>? get video;
+  @override
+  $DownloadedVideoCopyWith<$Res>? get downloadedVideo;
 }
 
 /// @nodoc

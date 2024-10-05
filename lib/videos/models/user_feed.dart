@@ -1,13 +1,12 @@
+import 'package:clipious/videos/models/video.dart';
 import 'package:json_annotation/json_annotation.dart';
-
-import 'video_in_list.dart';
 
 part 'user_feed.g.dart';
 
 @JsonSerializable()
 class UserFeed {
-  List<VideoInList>? notifications = [];
-  List<VideoInList>? videos = [];
+  List<Video>? notifications = [];
+  List<Video>? videos = [];
 
   UserFeed(this.notifications, this.videos);
 

@@ -18,11 +18,12 @@ class ImageObject {
 
   static ImageObject? getBestThumbnail(List<ImageObject>? images) {
     if (images != null && images.isNotEmpty) {
-      images.sort((a, b) {
+      List<ImageObject> imgs = List.from(images);
+      imgs.sort((a, b) {
         return (b.width * b.height).compareTo(a.width * a.height);
       });
 
-      return images[0];
+      return imgs[0];
     } else {
       return null;
     }
@@ -30,11 +31,12 @@ class ImageObject {
 
   static ImageObject? getWorstThumbnail(List<ImageObject>? images) {
     if (images != null && images.isNotEmpty) {
-      images.sort((a, b) {
+      List<ImageObject> imgs = List.from(images);
+      imgs.sort((a, b) {
         return (a.width * a.height).compareTo(b.width * b.height);
       });
 
-      return images[0];
+      return imgs[0];
     } else {
       return null;
     }

@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:clipious/videos/models/video.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -10,12 +11,11 @@ import 'package:clipious/videos/views/components/video_thumbnail.dart';
 
 import '../../../player/states/player.dart';
 import '../../../utils/models/image_object.dart';
-import '../../../videos/models/base_video.dart';
 import '../../models/comment.dart';
 
 class SingleCommentView extends StatelessWidget {
   final Comment comment;
-  final BaseVideo video;
+  final Video video;
 
   const SingleCommentView(
       {super.key, required this.comment, required this.video});

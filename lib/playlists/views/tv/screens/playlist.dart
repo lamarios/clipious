@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:clipious/videos/models/video.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -17,7 +18,6 @@ import 'package:clipious/videos/views/tv/components/video_item.dart';
 
 import '../../../../player/states/player.dart';
 import '../../../../utils/models/image_object.dart';
-import '../../../../videos/models/base_video.dart';
 import '../../../../videos/views/components/video_thumbnail.dart';
 
 @RoutePage()
@@ -52,7 +52,7 @@ class TvPlaylistScreen extends PlaylistViewScreen {
                         itemCount: playlistState.playlist.videos.length,
                         itemBuilder: (BuildContext context, int itemIndex,
                             int pageViewIndex) {
-                          BaseVideo video =
+                          Video video =
                               playlistState.playlist.videos[itemIndex];
                           return VideoThumbnailView(
                               videoId: video.videoId,

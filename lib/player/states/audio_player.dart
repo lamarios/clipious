@@ -105,7 +105,7 @@ class AudioPlayerCubit extends MediaPlayerCubit<AudioPlayerState> {
       var audioLength = Duration(
           seconds: offline
               ? state.offlineVideo!.lengthSeconds
-              : state.video!.lengthSeconds);
+              : (state.video!.lengthSeconds ?? 0));
       emit(state.copyWith(
           audioPosition: Duration.zero,
           audioLength: audioLength,
@@ -116,14 +116,15 @@ class AudioPlayerCubit extends MediaPlayerCubit<AudioPlayerState> {
         final server = await db.getCurrentlySelectedServer();
 
         if (!offline) {
+          assert(state.video!.formatStreams != null);
           if (service.useProxy()) {
             // audio only streams don't seem to work when using proxy mode, using formatted streams when proxy is enabled
             var formatStream = state
-                .video!.formatStreams[state.video!.formatStreams.length - 1];
+                .video!.formatStreams![state.video!.formatStreams!.length - 1];
             source = AudioSource.uri(Uri.parse(formatStream.url),
                 headers: server.headersForUrl(formatStream.url));
           } else {
-            AdaptiveFormat? audio = state.video?.adaptiveFormats
+            AdaptiveFormat? audio = state.video?.adaptiveFormats!
                 .where((element) => element.type.contains("audio"))
                 .sortByReversed((e) => int.parse(e.bitrate ?? "0"))
                 .first;
@@ -132,7 +133,8 @@ class AudioPlayerCubit extends MediaPlayerCubit<AudioPlayerState> {
                 double progress = db.getVideoProgress(state.video!.videoId);
                 if (progress > 0 && progress < 0.90) {
                   startAt = Duration(
-                      seconds: (state.video!.lengthSeconds * progress).floor());
+                      seconds: ((state.video!.lengthSeconds ?? 0) * progress)
+                          .floor());
                 }
               }
               emit(state);

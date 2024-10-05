@@ -1,8 +1,8 @@
+import 'package:clipious/videos/models/video.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../utils.dart';
-import '../../../../videos/models/base_video.dart';
 import '../../../models/paginated_list.dart';
 import '../../../states/paginated_list_view.dart';
 
@@ -30,8 +30,8 @@ class TvHorizontalPaginatedListView<T> extends StatelessWidget {
         var cubit = context.read<PaginatedListCubit<T>>();
         // filter items if possible
         List<T> items = state.items;
-        if (items.isNotEmpty && items[0] is BaseVideo) {
-          items = filteredVideos<BaseVideo>(state.items.cast()).cast();
+        if (items.isNotEmpty && items[0] is Video) {
+          items = filteredVideos(state.items.cast()).cast();
         }
         return Stack(
           children: [

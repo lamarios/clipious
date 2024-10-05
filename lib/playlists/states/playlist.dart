@@ -1,11 +1,11 @@
 import 'package:bloc/bloc.dart';
+import 'package:clipious/videos/models/video.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:clipious/player/states/player.dart';
 import 'package:logging/logging.dart';
 
 import '../../globals.dart';
-import '../../videos/models/video_in_list.dart';
 import '../models/playlist.dart';
 
 part 'playlist.freezed.dart';
@@ -36,11 +36,11 @@ class PlaylistCubit extends Cubit<PlaylistState> {
     await service.deleteUserPlaylist(state.playlist.playlistId);
   }
 
-  Future<bool> removeVideoFromPlayList(VideoInList v) async {
+  Future<bool> removeVideoFromPlayList(Video v) async {
     emit(state.copyWith(loading: true));
     await service.deleteUserPlaylistVideo(
         state.playlist.playlistId, v.indexId ?? '');
-    var videos = List<VideoInList>.from(state.playlist.videos);
+    var videos = List<Video>.from(state.playlist.videos);
     videos.remove(v);
     var playlist = state.playlist.copyWith(videos: videos);
     emit(state.copyWith(playlist: playlist, loading: false));
@@ -75,7 +75,9 @@ class PlaylistCubit extends Cubit<PlaylistState> {
             .toList();
 
         var playlist = state.playlist;
-        playlist.videos.addAll(toAdd);
+        List<Video> videos = List.from(playlist.videos);
+        videos.addAll(toAdd);
+        playlist = playlist.copyWith(videos: videos);
 
         totalFiltered += pl.removedByFilter;
         log.fine(

@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$CommentsState {
-  BaseVideo get video => throw _privateConstructorUsedError;
+  Video get video => throw _privateConstructorUsedError;
   bool get loadingComments => throw _privateConstructorUsedError;
   String? get continuation => throw _privateConstructorUsedError;
   bool get continuationLoaded => throw _privateConstructorUsedError;
@@ -39,7 +39,7 @@ abstract class $CommentsStateCopyWith<$Res> {
       _$CommentsStateCopyWithImpl<$Res, CommentsState>;
   @useResult
   $Res call(
-      {BaseVideo video,
+      {Video video,
       bool loadingComments,
       String? continuation,
       bool continuationLoaded,
@@ -47,6 +47,8 @@ abstract class $CommentsStateCopyWith<$Res> {
       String error,
       String? source,
       String? sortBy});
+
+  $VideoCopyWith<$Res> get video;
 }
 
 /// @nodoc
@@ -77,7 +79,7 @@ class _$CommentsStateCopyWithImpl<$Res, $Val extends CommentsState>
       video: null == video
           ? _value.video
           : video // ignore: cast_nullable_to_non_nullable
-              as BaseVideo,
+              as Video,
       loadingComments: null == loadingComments
           ? _value.loadingComments
           : loadingComments // ignore: cast_nullable_to_non_nullable
@@ -108,6 +110,16 @@ class _$CommentsStateCopyWithImpl<$Res, $Val extends CommentsState>
               as String?,
     ) as $Val);
   }
+
+  /// Create a copy of CommentsState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $VideoCopyWith<$Res> get video {
+    return $VideoCopyWith<$Res>(_value.video, (value) {
+      return _then(_value.copyWith(video: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -119,7 +131,7 @@ abstract class _$$CommentsStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {BaseVideo video,
+      {Video video,
       bool loadingComments,
       String? continuation,
       bool continuationLoaded,
@@ -127,6 +139,9 @@ abstract class _$$CommentsStateImplCopyWith<$Res>
       String error,
       String? source,
       String? sortBy});
+
+  @override
+  $VideoCopyWith<$Res> get video;
 }
 
 /// @nodoc
@@ -155,7 +170,7 @@ class __$$CommentsStateImplCopyWithImpl<$Res>
       video: null == video
           ? _value.video
           : video // ignore: cast_nullable_to_non_nullable
-              as BaseVideo,
+              as Video,
       loadingComments: null == loadingComments
           ? _value.loadingComments
           : loadingComments // ignore: cast_nullable_to_non_nullable
@@ -202,7 +217,7 @@ class _$CommentsStateImpl implements _CommentsState {
       this.sortBy});
 
   @override
-  final BaseVideo video;
+  final Video video;
   @override
   @JsonKey()
   final bool loadingComments;
@@ -260,7 +275,7 @@ class _$CommentsStateImpl implements _CommentsState {
 
 abstract class _CommentsState implements CommentsState {
   const factory _CommentsState(
-      {required final BaseVideo video,
+      {required final Video video,
       final bool loadingComments,
       final String? continuation,
       final bool continuationLoaded,
@@ -270,7 +285,7 @@ abstract class _CommentsState implements CommentsState {
       final String? sortBy}) = _$CommentsStateImpl;
 
   @override
-  BaseVideo get video;
+  Video get video;
   @override
   bool get loadingComments;
   @override

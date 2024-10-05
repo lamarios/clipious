@@ -3,8 +3,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:clipious/videos/models/video.dart';
 import 'package:clipious/videos/views/components/video_in_list.dart';
 
-import '../../models/video_in_list.dart';
-
 class RecommendedVideos extends StatelessWidget {
   final Video video;
 
@@ -26,13 +24,8 @@ class RecommendedVideos extends StatelessWidget {
     widgets.addAll(video.recommendedVideos
         .where((element) => !element.filterHide)
         .map((e) {
-      var v = VideoInList(e.title, e.videoId, e.lengthSeconds, 0, e.author, '',
-          'authorUrl', 0, '', e.videoThumbnails);
-      v.filterHide = e.filterHide;
-      v.filtered = e.filtered;
-      v.matchedFilters = e.matchedFilters;
       return VideoListItem(
-        video: v,
+        video: e,
       );
     }).toList());
 

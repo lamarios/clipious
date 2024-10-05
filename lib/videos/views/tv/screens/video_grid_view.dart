@@ -1,4 +1,5 @@
 import 'package:auto_route/annotations.dart';
+import 'package:clipious/videos/models/video.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:clipious/utils/models/paginated_list.dart';
@@ -7,11 +8,10 @@ import 'package:clipious/utils/views/tv/components/tv_overscan.dart';
 import 'package:clipious/videos/views/tv/components/video_item.dart';
 
 import '../../../../utils/states/item_list.dart';
-import '../../../models/video_in_list.dart';
 
 @RoutePage()
 class TvGridScreen extends StatelessWidget {
-  final PaginatedList<VideoInList> paginatedVideoList;
+  final PaginatedList<Video> paginatedVideoList;
   final String? tags;
   final String title;
 
@@ -29,9 +29,9 @@ class TvGridScreen extends StatelessWidget {
           ItemListCubit(ItemListState(itemList: paginatedVideoList)),
       child: Scaffold(
         body: TvOverscan(
-          child: BlocBuilder<ItemListCubit<VideoInList>,
-              ItemListState<VideoInList>>(builder: (context, state) {
-            var cubit = context.read<ItemListCubit<VideoInList>>();
+          child: BlocBuilder<ItemListCubit<Video>, ItemListState<Video>>(
+              builder: (context, state) {
+            var cubit = context.read<ItemListCubit<Video>>();
             return Column(
               children: [
                 Row(

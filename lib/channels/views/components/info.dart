@@ -8,7 +8,6 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../../subscription_management/view/components/subscribe_button.dart';
 import '../../../utils/models/image_object.dart';
-import '../../../videos/models/video_in_list.dart';
 import '../../../videos/views/components/video_in_list.dart';
 import '../../../videos/views/components/video_thumbnail.dart';
 
@@ -85,22 +84,8 @@ class ChannelInfo extends StatelessWidget {
         mainAxisSpacing: 5,
         childAspectRatio: getGridAspectRatio(context),
         children: channel.latestVideos?.map((e) {
-              VideoInList videoInList = VideoInList(
-                  e.title,
-                  e.videoId,
-                  e.lengthSeconds,
-                  0,
-                  e.author,
-                  channel.authorId,
-                  channel.authorId,
-                  0,
-                  '',
-                  e.videoThumbnails)
-                ..deArrowThumbnailUrl = e.deArrowThumbnailUrl;
-              videoInList.filtered = e.filtered;
-              videoInList.matchedFilters = e.matchedFilters;
               return VideoListItem(
-                video: videoInList,
+                video: e,
               );
             }).toList() ??
             []));

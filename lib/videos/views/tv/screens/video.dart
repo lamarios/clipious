@@ -15,7 +15,6 @@ import 'package:clipious/utils/views/tv/components/tv_button.dart';
 import 'package:clipious/utils/views/tv/components/tv_expandable_text.dart';
 import 'package:clipious/utils/views/tv/components/tv_horizontal_item_list.dart';
 import 'package:clipious/utils/views/tv/components/tv_overscan.dart';
-import 'package:clipious/videos/models/video_in_list.dart';
 import 'package:clipious/videos/views/components/video_metrics.dart';
 
 import '../../../../player/states/player.dart';
@@ -193,8 +192,9 @@ class TvVideoScreen extends StatelessWidget {
                                                               .start,
                                                       children: [
                                                         Text(
-                                                          videoState
-                                                              .video!.title,
+                                                          videoState.video!
+                                                                  .title ??
+                                                              '',
                                                           maxLines: 1,
                                                           style: textTheme
                                                               .headlineMedium!
@@ -336,32 +336,9 @@ class TvVideoScreen extends StatelessWidget {
                                                     TvHorizontalVideoList(
                                                         paginatedVideoList:
                                                             FixedItemList<
-                                                                VideoInList>(videoState
+                                                                Video>(videoState
                                                                     .video
-                                                                    ?.recommendedVideos
-                                                                    .map((e) {
-                                                                  var videoInList = VideoInList(
-                                                                      e.title,
-                                                                      e.videoId,
-                                                                      e.lengthSeconds,
-                                                                      0,
-                                                                      e.author,
-                                                                      '',
-                                                                      'authorUrl',
-                                                                      0,
-                                                                      '',
-                                                                      e.videoThumbnails);
-                                                                  videoInList
-                                                                          .filtered =
-                                                                      e.filtered;
-                                                                  videoInList
-                                                                          .filterHide =
-                                                                      e.filterHide;
-                                                                  videoInList
-                                                                          .matchedFilters =
-                                                                      e.matchedFilters;
-                                                                  return videoInList;
-                                                                }).toList() ??
+                                                                    ?.recommendedVideos ??
                                                                 []))
                                                   ]),
                                             )

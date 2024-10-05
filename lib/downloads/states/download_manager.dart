@@ -54,12 +54,14 @@ class DownloadManagerCubit extends Cubit<DownloadManagerState> {
   setVideos() async {
     var vids = db.getAllDownloads();
     // checking if we have any video that are not fail, not completed and not currently downloading
-    for (var v in vids) {
+    for (int i = 0; i < vids.length; i++) {
+      var v = vids[i];
       if (!v.downloadComplete &&
           !v.downloadFailed &&
           !state.downloadProgresses.containsKey(v.videoId)) {
         // this download was interrupted by app restart or crash or something else, we set it as errored
-        v.downloadFailed = true;
+        v = v.copyWith(downloadFailed: true);
+        vids[i] = v;
         await db.upsertDownload(v);
       }
     }
@@ -81,7 +83,7 @@ class DownloadManagerCubit extends Cubit<DownloadManagerState> {
           Map<String, DownloadProgress>.from(state.downloadProgresses);
       var downloadProgress = progresses[video.videoId];
       progresses.remove(video.videoId);
-      video.downloadComplete = true;
+      video = video.copyWith(downloadComplete: true);
       await db.upsertDownload(video);
       emit(state.copyWith(downloadProgresses: progresses));
       setVideos();
@@ -118,11 +120,11 @@ class DownloadManagerCubit extends Cubit<DownloadManagerState> {
 
       var downloadedVideo = DownloadedVideo(
           videoId: vid.videoId,
-          title: vid.title,
+          title: vid.title ?? '',
           author: vid.author,
           authorUrl: vid.authorUrl,
           audioOnly: audioOnly,
-          lengthSeconds: vid.lengthSeconds,
+          lengthSeconds: vid.lengthSeconds ?? 0,
           quality: quality);
       await db.upsertDownload(downloadedVideo);
 
@@ -132,14 +134,14 @@ class DownloadManagerCubit extends Cubit<DownloadManagerState> {
         // FormatStream stream = vid.formatStreams
         //     .firstWhere((element) => element.resolution == quality);
 
-        final stream = vid.adaptiveFormats.firstWhere((element) =>
+        final stream = vid.adaptiveFormats!.firstWhere((element) =>
             element.encoding == 'vp9' &&
             element.qualityLabel == quality &&
             element.type.contains('video/webm'));
 
         videoUrl = stream.url;
       }
-      AdaptiveFormat audio = vid.adaptiveFormats
+      AdaptiveFormat audio = vid.adaptiveFormats!
           .sortByReversed((e) => int.parse(e.bitrate ?? "0"))
           .firstWhere((element) => element.type.contains("audio/webm"));
       String audioUrl = audio.url;
@@ -290,8 +292,7 @@ class DownloadManagerCubit extends Cubit<DownloadManagerState> {
     } else {
       log.severe("Failed to download video ${vid.title}, removing it", err);
     }
-    vid.downloadFailed = true;
-    vid.downloadComplete = false;
+    vid = vid.copyWith(downloadComplete: false, downloadFailed: true);
     onProgress(1, 1, vid, step: 1, totalSteps: 1);
     var progresses =
         Map<String, DownloadProgress>.from(state.downloadProgresses);

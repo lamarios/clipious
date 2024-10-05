@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
+import 'package:clipious/videos/models/video.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:clipious/comments/models/video_comments.dart';
-import 'package:clipious/videos/models/base_video.dart';
 
 import '../../globals.dart';
 import '../../settings/models/errors/invidious_service_error.dart';
@@ -66,7 +66,7 @@ class CommentsCubit extends Cubit<CommentsState> {
 @freezed
 class CommentsState with _$CommentsState {
   const factory CommentsState(
-      {required BaseVideo video,
+      {required Video video,
       @Default(true) bool loadingComments,
       String? continuation,
       @Default(false) bool continuationLoaded,
@@ -76,7 +76,7 @@ class CommentsState with _$CommentsState {
       String? sortBy}) = _CommentsState;
 
   static CommentsState init(
-      {required BaseVideo video,
+      {required Video video,
       bool? loadingComments,
       String? continuation,
       bool? continuationLoaded,

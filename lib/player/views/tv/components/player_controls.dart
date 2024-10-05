@@ -1,3 +1,4 @@
+import 'package:clipious/videos/models/video.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -11,7 +12,6 @@ import '../../../../globals.dart';
 import '../../../../utils.dart';
 import '../../../../utils/models/image_object.dart';
 import '../../../../utils/models/paginated_list.dart';
-import '../../../../videos/models/video_in_list.dart';
 import '../../../../videos/views/components/video_thumbnail.dart';
 import '../../../states/player.dart';
 
@@ -19,7 +19,7 @@ class TvPlayerControls extends StatelessWidget {
   const TvPlayerControls({super.key});
 
   onVideoQueueSelected(
-      BuildContext context, TvPlayerControlsCubit cubit, VideoInList video) {
+      BuildContext context, TvPlayerControlsCubit cubit, Video video) {
     cubit.playFromQueue(video);
   }
 
@@ -349,7 +349,7 @@ class TvPlayerControls extends StatelessWidget {
                                   Padding(
                                     padding: const EdgeInsets.only(left: 16.0),
                                     child: Text(
-                                      '${prettyDuration(position)} / ${prettyDuration(player.duration)}',
+                                      '${prettyDurationCustom(position)} / ${prettyDurationCustom(player.duration)}',
                                       style: textTheme.titleLarge
                                           ?.copyWith(color: Colors.white),
                                     ),
@@ -383,20 +383,8 @@ class TvPlayerControls extends StatelessWidget {
                                           onSelect: (ctx, video) =>
                                               onVideoQueueSelected(
                                                   ctx, cubit, video),
-                                          paginatedVideoList: FixedItemList(
-                                              videos
-                                                  .map((e) => VideoInList(
-                                                      e.title,
-                                                      e.videoId,
-                                                      e.lengthSeconds,
-                                                      null,
-                                                      e.author,
-                                                      e.authorId,
-                                                      e.authorUrl,
-                                                      null,
-                                                      null,
-                                                      e.videoThumbnails))
-                                                  .toList())),
+                                          paginatedVideoList:
+                                              FixedItemList(videos)),
                                     ],
                                   ),
                                 ))

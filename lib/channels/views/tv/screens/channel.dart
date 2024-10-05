@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:auto_route/annotations.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:clipious/videos/models/video.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -15,7 +16,6 @@ import 'package:clipious/utils/views/components/placeholders.dart';
 import 'package:clipious/utils/views/tv/components/tv_expandable_text.dart';
 import 'package:clipious/utils/views/tv/components/tv_horizontal_item_list.dart';
 import 'package:clipious/utils/views/tv/components/tv_overscan.dart';
-import 'package:clipious/videos/models/video_in_list.dart';
 
 import '../../../../playlists/models/playlist.dart';
 import '../../../../playlists/views/components/playlist_in_list.dart';
@@ -181,26 +181,21 @@ class TvChannelScreen extends StatelessWidget {
                                             TvHorizontalVideoList(
                                                 onItemFocus:
                                                     (video, index, focus) =>
-                                                        tvCubit
-                                                            .scrollTo(
-                                                                tvCubit
-                                                                    .videosTitle,
-                                                                focus),
+                                                        tvCubit.scrollTo(
+                                                            tvCubit.videosTitle,
+                                                            focus),
                                                 paginatedVideoList: ContinuationList<
-                                                        VideoInList>(
-                                                    (continuation) =>
-                                                        service
-                                                            .getChannelVideos(
-                                                                channel.channel
-                                                                        ?.authorId ??
-                                                                    '',
-                                                                continuation)
-                                                            .then((value) {
-                                                          tvCubit.setHasVideos(
-                                                              value.videos
-                                                                  .isNotEmpty);
-                                                          return value;
-                                                        }))),
+                                                    Video>((continuation) => service
+                                                        .getChannelVideos(
+                                                            channel.channel
+                                                                    ?.authorId ??
+                                                                '',
+                                                            continuation)
+                                                        .then((value) {
+                                                      tvCubit.setHasVideos(value
+                                                          .videos.isNotEmpty);
+                                                      return value;
+                                                    }))),
                                             tv.hasShorts
                                                 ? Padding(
                                                     key: tvCubit.shortTitle,
@@ -217,26 +212,21 @@ class TvChannelScreen extends StatelessWidget {
                                             TvHorizontalVideoList(
                                                 onItemFocus:
                                                     (video, index, focus) =>
-                                                        tvCubit
-                                                            .scrollTo(
-                                                                tvCubit
-                                                                    .shortTitle,
-                                                                focus),
+                                                        tvCubit.scrollTo(
+                                                            tvCubit.shortTitle,
+                                                            focus),
                                                 paginatedVideoList: ContinuationList<
-                                                        VideoInList>(
-                                                    (continuation) =>
-                                                        service
-                                                            .getChannelShorts(
-                                                                channel.channel
-                                                                        ?.authorId ??
-                                                                    '',
-                                                                continuation)
-                                                            .then((value) {
-                                                          tvCubit.setHasShorts(
-                                                              value.videos
-                                                                  .isNotEmpty);
-                                                          return value;
-                                                        }))),
+                                                    Video>((continuation) => service
+                                                        .getChannelShorts(
+                                                            channel.channel
+                                                                    ?.authorId ??
+                                                                '',
+                                                            continuation)
+                                                        .then((value) {
+                                                      tvCubit.setHasShorts(value
+                                                          .videos.isNotEmpty);
+                                                      return value;
+                                                    }))),
                                             tv.hasStreams
                                                 ? Padding(
                                                     key: tvCubit.streamTitle,
@@ -251,13 +241,14 @@ class TvChannelScreen extends StatelessWidget {
                                                   )
                                                 : const SizedBox.shrink(),
                                             TvHorizontalVideoList(
-                                                onItemFocus:
-                                                    (video, index, focus) =>
-                                                        tvCubit.scrollTo(
+                                                onItemFocus: (video, index,
+                                                        focus) =>
+                                                    tvCubit
+                                                        .scrollTo(
                                                             tvCubit.streamTitle,
                                                             focus),
                                                 paginatedVideoList: ContinuationList<
-                                                        VideoInList>(
+                                                        Video>(
                                                     (continuation) => service
                                                             .getChannelStreams(
                                                                 channel.channel

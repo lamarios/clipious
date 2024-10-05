@@ -12,11 +12,11 @@ import 'package:clipious/settings/states/settings.dart';
 import 'package:clipious/utils/models/sharelink.dart';
 import 'package:clipious/utils/views/tv/components/tv_button.dart';
 import 'package:clipious/utils/views/tv/components/tv_overscan.dart';
-import 'package:clipious/videos/models/base_video.dart';
 import 'package:logging/logging.dart';
 import 'package:share_plus/share_plus.dart';
 
 import 'utils/models/country.dart';
+import 'videos/models/video.dart';
 
 const phoneMax = 600;
 const tabletPortraitMax = 900;
@@ -50,7 +50,7 @@ bool isOk(LogicalKeyboardKey key, {PhysicalKeyboardKey? physicalKeyboardKey}) {
           .any((element) => element == physicalKeyboardKey?.usbHidUsage);
 }
 
-String prettyDuration(Duration duration) {
+String prettyDurationCustom(Duration duration) {
   var components = <String>[];
 
   var hours = duration.inHours % 24;
@@ -353,7 +353,7 @@ SystemUiOverlayStyle getUiOverlayStyle(BuildContext context,
           : Brightness.dark);
 }
 
-List<T> filteredVideos<T extends BaseVideo>(List<T> videos) =>
+List<Video> filteredVideos(List<Video> videos) =>
     videos.where((element) => !element.filterHide).toList();
 
 String getWeekdayName(int weekday) {

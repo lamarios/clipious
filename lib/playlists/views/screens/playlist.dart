@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:clipious/videos/models/video.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -9,7 +10,6 @@ import 'package:clipious/playlists/views/tablet/playlist_inner_view.dart';
 import 'package:clipious/router.dart';
 import 'package:clipious/settings/models/errors/invidious_service_error.dart';
 import 'package:clipious/utils.dart';
-import 'package:clipious/videos/models/video_in_list.dart';
 
 import '../../../utils/views/components/device_widget.dart';
 import '../../models/playlist.dart';
@@ -44,7 +44,7 @@ class PlaylistViewScreen extends StatelessWidget {
     });
   }
 
-  removeVideoFromPlayList(BuildContext context, VideoInList v) async {
+  removeVideoFromPlayList(BuildContext context, Video v) async {
     if (canDeleteVideos) {
       var locals = AppLocalizations.of(context)!;
       var cubit = context.read<PlaylistCubit>();

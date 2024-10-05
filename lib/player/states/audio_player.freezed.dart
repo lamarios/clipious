@@ -49,6 +49,9 @@ abstract class $AudioPlayerStateCopyWith<$Res> {
       bool? disableControls,
       bool loading,
       String? error});
+
+  $VideoCopyWith<$Res>? get video;
+  $DownloadedVideoCopyWith<$Res>? get offlineVideo;
 }
 
 /// @nodoc
@@ -115,6 +118,34 @@ class _$AudioPlayerStateCopyWithImpl<$Res, $Val extends AudioPlayerState>
               as String?,
     ) as $Val);
   }
+
+  /// Create a copy of AudioPlayerState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $VideoCopyWith<$Res>? get video {
+    if (_value.video == null) {
+      return null;
+    }
+
+    return $VideoCopyWith<$Res>(_value.video!, (value) {
+      return _then(_value.copyWith(video: value) as $Val);
+    });
+  }
+
+  /// Create a copy of AudioPlayerState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $DownloadedVideoCopyWith<$Res>? get offlineVideo {
+    if (_value.offlineVideo == null) {
+      return null;
+    }
+
+    return $DownloadedVideoCopyWith<$Res>(_value.offlineVideo!, (value) {
+      return _then(_value.copyWith(offlineVideo: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -135,6 +166,11 @@ abstract class _$$AudioPlayerStateImplCopyWith<$Res>
       bool? disableControls,
       bool loading,
       String? error});
+
+  @override
+  $VideoCopyWith<$Res>? get video;
+  @override
+  $DownloadedVideoCopyWith<$Res>? get offlineVideo;
 }
 
 /// @nodoc

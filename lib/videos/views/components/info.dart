@@ -48,7 +48,7 @@ class VideoInfo extends StatelessWidget {
         children: [
           if (titleAndChannelInfo)
             Text(
-              video.title,
+              video.title ?? '',
               style: textTheme.titleLarge?.copyWith(color: colorScheme.primary),
               textAlign: TextAlign.start,
             ),
@@ -106,14 +106,14 @@ class VideoInfo extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                   child: SubscribeButton(
                     channelId: video.authorId ?? '',
-                    subCount: video.subCountText,
+                    subCount: video.subCountText ?? '',
                   ),
                 )
               ],
             ),
           if (descriptionAndTags)
             TextLinkified(
-              text: video.description,
+              text: video.description ?? '',
               video: video,
               player: player,
             ),
@@ -128,10 +128,11 @@ class VideoInfo extends StatelessWidget {
                     size: 15,
                   ),
                 ),
-                Text(
-                    video.isListed ? locals.videoListed : locals.videoUnlisted),
+                Text((video.isListed ?? true)
+                    ? locals.videoListed
+                    : locals.videoUnlisted),
                 Visibility(
-                  visible: video.isFamilyFriendly,
+                  visible: video.isFamilyFriendly ?? true,
                   child: const Padding(
                     padding: EdgeInsets.symmetric(horizontal: 4.0),
                     child: Icon(
@@ -141,7 +142,7 @@ class VideoInfo extends StatelessWidget {
                   ),
                 ),
                 Visibility(
-                    visible: video.isFamilyFriendly,
+                    visible: video.isFamilyFriendly ?? true,
                     child: Text(locals.videoIsFamilyFriendly))
               ],
             ),
@@ -169,7 +170,8 @@ class VideoInfo extends StatelessWidget {
                     ..insert(
                         0,
                         InkWell(
-                          onTap: () => showSearchWindow(context, video.genre),
+                          onTap: () =>
+                              showSearchWindow(context, video.genre ?? ''),
                           child: Container(
                             decoration: BoxDecoration(
                                 color: colorScheme.secondaryContainer,
@@ -177,7 +179,7 @@ class VideoInfo extends StatelessWidget {
                             child: Padding(
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 8.0, vertical: 4),
-                              child: Text(video.genre),
+                              child: Text(video.genre ?? ''),
                             ),
                           ),
                         ))),

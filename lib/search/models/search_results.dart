@@ -1,11 +1,12 @@
 import 'dart:core';
 
+import 'package:clipious/videos/models/video.dart';
+
 import '../../channels/models/channel.dart';
 import '../../playlists/models/playlist.dart';
-import '../../videos/models/video_in_list.dart';
 
 class SearchResults {
-  List<VideoInList> videos = [];
+  List<Video> videos = [];
   List<Playlist> playlists = [];
   List<Channel> channels = [];
 }

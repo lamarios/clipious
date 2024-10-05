@@ -588,7 +588,7 @@ class PlayerControls extends StatelessWidget {
                                               )),
                                         ),
                                         Text(
-                                          '${prettyDuration(playerState.position)} / ${prettyDuration(playerState.duration)}',
+                                          '${prettyDurationCustom(playerState.position)} / ${prettyDurationCustom(playerState.duration)}',
                                           style: textTheme.bodySmall
                                               ?.copyWith(color: Colors.white),
                                         ),

@@ -78,17 +78,43 @@
     }
  */
 
-import 'package:copy_with_extension/copy_with_extension.dart';
-import 'package:clipious/videos/models/video_in_list.dart';
-import 'package:json_annotation/json_annotation.dart';
+import 'package:clipious/videos/models/video.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../utils/models/image_object.dart';
+
+part 'playlist.freezed.dart';
 
 part 'playlist.g.dart';
 
 const youtubePlaylist = "youtubePlayList";
 const invidiousPlaylist = "invidiousPlaylist";
 
+@freezed
+class Playlist with _$Playlist {
+  const factory Playlist(
+      {@Default(youtubePlaylist) String type,
+      required String title,
+      required String playlistId,
+      required String author,
+      String? authordId,
+      String? authorUrl,
+      @Default([]) List<ImageObject> authorThumbnails,
+      String? description,
+      required int videoCount,
+      int? viewCount,
+      bool? isListed,
+      int? updated,
+      @Default([]) List<Video> videos,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      @Default(0)
+      int removedByFilter}) = _Playlist;
+
+  factory Playlist.fromJson(Map<String, Object?> json) =>
+      _$PlaylistFromJson(json);
+}
+
+/*
 @JsonSerializable()
 @CopyWith(constructor: "_")
 class Playlist {
@@ -105,9 +131,6 @@ class Playlist {
   bool? isListed;
   int? updated;
   List<VideoInList> videos = [];
-
-  @JsonKey(includeToJson: false, includeFromJson: false)
-  int removedByFilter = 0;
 
   Playlist(this.type, this.title, this.playlistId, this.author, this.authordId,
       this.authorUrl, this.description, this.videoCount);
@@ -133,3 +156,4 @@ class Playlist {
       this.videos,
       this.removedByFilter);
 }
+*/

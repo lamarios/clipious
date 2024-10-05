@@ -1,16 +1,16 @@
+import 'package:clipious/videos/models/video.dart';
 import 'package:flutter/material.dart';
 import 'package:clipious/globals.dart';
 import 'package:clipious/utils/views/tv/components/tv_horizontal_item_list.dart';
 
 import '../../../main.dart';
 import '../../../utils/models/paginated_list.dart';
-import '../../models/video_in_list.dart';
 import 'video_list.dart';
 
 const all = 'all';
 
 class Trending extends StatefulWidget {
-  final void Function(VideoInList video, int index, bool focus)? onItemFocus;
+  final void Function(Video video, int index, bool focus)? onItemFocus;
 
   const Trending({super.key, this.onItemFocus});
 

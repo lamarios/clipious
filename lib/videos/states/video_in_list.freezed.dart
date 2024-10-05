@@ -17,7 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$VideoInListState {
   double get progress => throw _privateConstructorUsedError;
-  BaseVideo? get video => throw _privateConstructorUsedError;
+  Video? get video => throw _privateConstructorUsedError;
   DownloadedVideo? get offlineVideo => throw _privateConstructorUsedError;
 
   /// Create a copy of VideoInListState
@@ -33,7 +33,10 @@ abstract class $VideoInListStateCopyWith<$Res> {
           VideoInListState value, $Res Function(VideoInListState) then) =
       _$VideoInListStateCopyWithImpl<$Res, VideoInListState>;
   @useResult
-  $Res call({double progress, BaseVideo? video, DownloadedVideo? offlineVideo});
+  $Res call({double progress, Video? video, DownloadedVideo? offlineVideo});
+
+  $VideoCopyWith<$Res>? get video;
+  $DownloadedVideoCopyWith<$Res>? get offlineVideo;
 }
 
 /// @nodoc
@@ -63,12 +66,40 @@ class _$VideoInListStateCopyWithImpl<$Res, $Val extends VideoInListState>
       video: freezed == video
           ? _value.video
           : video // ignore: cast_nullable_to_non_nullable
-              as BaseVideo?,
+              as Video?,
       offlineVideo: freezed == offlineVideo
           ? _value.offlineVideo
           : offlineVideo // ignore: cast_nullable_to_non_nullable
               as DownloadedVideo?,
     ) as $Val);
+  }
+
+  /// Create a copy of VideoInListState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $VideoCopyWith<$Res>? get video {
+    if (_value.video == null) {
+      return null;
+    }
+
+    return $VideoCopyWith<$Res>(_value.video!, (value) {
+      return _then(_value.copyWith(video: value) as $Val);
+    });
+  }
+
+  /// Create a copy of VideoInListState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $DownloadedVideoCopyWith<$Res>? get offlineVideo {
+    if (_value.offlineVideo == null) {
+      return null;
+    }
+
+    return $DownloadedVideoCopyWith<$Res>(_value.offlineVideo!, (value) {
+      return _then(_value.copyWith(offlineVideo: value) as $Val);
+    });
   }
 }
 
@@ -80,7 +111,12 @@ abstract class _$$VideoInListStateImplCopyWith<$Res>
       __$$VideoInListStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({double progress, BaseVideo? video, DownloadedVideo? offlineVideo});
+  $Res call({double progress, Video? video, DownloadedVideo? offlineVideo});
+
+  @override
+  $VideoCopyWith<$Res>? get video;
+  @override
+  $DownloadedVideoCopyWith<$Res>? get offlineVideo;
 }
 
 /// @nodoc
@@ -108,7 +144,7 @@ class __$$VideoInListStateImplCopyWithImpl<$Res>
       video: freezed == video
           ? _value.video
           : video // ignore: cast_nullable_to_non_nullable
-              as BaseVideo?,
+              as Video?,
       offlineVideo: freezed == offlineVideo
           ? _value.offlineVideo
           : offlineVideo // ignore: cast_nullable_to_non_nullable
@@ -129,7 +165,7 @@ class _$VideoInListStateImpl implements _VideoInListState {
   @JsonKey()
   final double progress;
   @override
-  final BaseVideo? video;
+  final Video? video;
   @override
   final DownloadedVideo? offlineVideo;
 
@@ -166,13 +202,13 @@ class _$VideoInListStateImpl implements _VideoInListState {
 abstract class _VideoInListState implements VideoInListState {
   const factory _VideoInListState(
       {final double progress,
-      final BaseVideo? video,
+      final Video? video,
       final DownloadedVideo? offlineVideo}) = _$VideoInListStateImpl;
 
   @override
   double get progress;
   @override
-  BaseVideo? get video;
+  Video? get video;
   @override
   DownloadedVideo? get offlineVideo;
 
