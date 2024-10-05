@@ -103,7 +103,8 @@ class VideoMetrics extends StatelessWidget {
       }
 
       var date = video?.publishedText ?? '';
-      if (date.isNotEmpty || video?.liveNow == true) {
+      if ((date.isNotEmpty && !date.startsWith('0')) ||
+          video?.liveNow == true) {
         metrics.addAll([
           (video?.liveNow ?? false)
               ? Visibility(
