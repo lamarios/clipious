@@ -6,73 +6,83 @@ part of 'video.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Video _$VideoFromJson(Map<String, dynamic> json) => Video(
-      json['title'] as String,
-      json['videoId'] as String,
-      (json['videoThumbnails'] as List<dynamic>)
-          .map((e) => ImageObject.fromJson(e as Map<String, dynamic>))
+_$VideoImpl _$$VideoImplFromJson(Map<String, dynamic> json) => _$VideoImpl(
+      videoId: json['videoId'] as String,
+      viewCount: (json['viewCount'] as num?)?.toInt(),
+      published: (json['published'] as num?)?.toInt(),
+      index: (json['index'] as num?)?.toInt(),
+      indexId: json['indexId'] as String?,
+      publishedText: json['publishedText'] as String?,
+      isUpcoming: json['isUpcoming'] as bool?,
+      premiereTimestamp: (json['premiereTimestamp'] as num?)?.toInt(),
+      dashUrl: json['dashUrl'] as String?,
+      description: json['description'] as String?,
+      descriptionHtml: json['descriptionHtml'] as String?,
+      keywords: (json['keywords'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          const [],
+      likeCount: (json['likeCount'] as num?)?.toInt(),
+      dislikeCount: (json['dislikeCount'] as num?)?.toInt(),
+      paid: json['paid'] as bool?,
+      premium: json['premium'] as bool?,
+      isFamilyFriendly: json['isFamilyFriendly'] as bool?,
+      allowedRegions: (json['allowedRegions'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          const [],
+      genre: json['genre'] as String?,
+      genreUrl: json['genreUrl'] as String?,
+      authorThumbnails: (json['authorThumbnails'] as List<dynamic>?)
+              ?.map((e) => ImageObject.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
+      subCountText: json['subCountText'] as String?,
+      allowRatings: json['allowRatings'] as bool? ?? false,
+      rating: (json['rating'] as num?)?.toDouble(),
+      isListed: json['isListed'] as bool?,
+      liveNow: json['liveNow'] as bool?,
+      hlsUrl: json['hlsUrl'] as String?,
+      adaptiveFormats: (json['adaptiveFormats'] as List<dynamic>?)
+          ?.map((e) => AdaptiveFormat.fromJson(e as Map<String, dynamic>))
           .toList(),
-      json['description'] as String,
-      json['descriptionHtml'] as String,
-      (json['published'] as num).toInt(),
-      json['publishedText'] as String,
-      (json['keywords'] as List<dynamic>).map((e) => e as String).toList(),
-      (json['viewCount'] as num).toInt(),
-      (json['likeCount'] as num).toInt(),
-      (json['dislikeCount'] as num).toInt(),
-      json['paid'] as bool,
-      json['premium'] as bool,
-      json['isFamilyFriendly'] as bool,
-      (json['allowedRegions'] as List<dynamic>)
-          .map((e) => e as String)
+      formatStreams: (json['formatStreams'] as List<dynamic>?)
+          ?.map((e) => FormatStream.fromJson(e as Map<String, dynamic>))
           .toList(),
-      json['genre'] as String,
-      json['genreUrl'] as String?,
-      json['dashUrl'] as String,
-      json['author'] as String?,
-      json['authorUrl'] as String?,
-      (json['authorThumbnails'] as List<dynamic>)
-          .map((e) => ImageObject.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      json['subCountText'] as String,
-      (json['lengthSeconds'] as num).toInt(),
-      json['allowRatings'] as bool,
-      (json['rating'] as num).toDouble(),
-      json['isListed'] as bool,
-      json['liveNow'] as bool,
-      json['isUpcoming'] as bool,
-      (json['premiereTimestamp'] as num?)?.toInt(),
-      json['hlsUrl'] as String?,
-      (json['adaptiveFormats'] as List<dynamic>)
-          .map((e) => AdaptiveFormat.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      (json['formatStreams'] as List<dynamic>)
-          .map((e) => FormatStream.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      json['authorId'] as String?,
-      (json['captions'] as List<dynamic>)
-          .map((e) => Caption.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      (json['recommendedVideos'] as List<dynamic>)
-          .map((e) => RecommendedVideo.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      captions: (json['captions'] as List<dynamic>?)
+              ?.map((e) => Caption.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
+      recommendedVideos: (json['recommendedVideos'] as List<dynamic>?)
+              ?.map((e) => Video.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
+      title: json['title'] as String?,
+      lengthSeconds: (json['lengthSeconds'] as num?)?.toInt(),
+      author: json['author'] as String?,
+      authorId: json['authorId'] as String?,
+      authorUrl: json['authorUrl'] as String?,
+      videoThumbnails: (json['videoThumbnails'] as List<dynamic>?)
+              ?.map((e) => ImageObject.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
+      viewCountText: json['viewCountText'] as String?,
     );
 
-Map<String, dynamic> _$VideoToJson(Video instance) => <String, dynamic>{
+Map<String, dynamic> _$$VideoImplToJson(_$VideoImpl instance) =>
+    <String, dynamic>{
       'videoId': instance.videoId,
-      'title': instance.title,
-      'lengthSeconds': instance.lengthSeconds,
-      'author': instance.author,
-      'authorId': instance.authorId,
-      'authorUrl': instance.authorUrl,
-      'videoThumbnails': instance.videoThumbnails,
+      'viewCount': instance.viewCount,
+      'published': instance.published,
+      'index': instance.index,
+      'indexId': instance.indexId,
+      'publishedText': instance.publishedText,
+      'isUpcoming': instance.isUpcoming,
+      'premiereTimestamp': instance.premiereTimestamp,
       'dashUrl': instance.dashUrl,
       'description': instance.description,
       'descriptionHtml': instance.descriptionHtml,
-      'published': instance.published,
-      'publishedText': instance.publishedText,
       'keywords': instance.keywords,
-      'viewCount': instance.viewCount,
       'likeCount': instance.likeCount,
       'dislikeCount': instance.dislikeCount,
       'paid': instance.paid,
@@ -87,11 +97,16 @@ Map<String, dynamic> _$VideoToJson(Video instance) => <String, dynamic>{
       'rating': instance.rating,
       'isListed': instance.isListed,
       'liveNow': instance.liveNow,
-      'isUpcoming': instance.isUpcoming,
-      'premiereTimestamp': instance.premiereTimestamp,
       'hlsUrl': instance.hlsUrl,
       'adaptiveFormats': instance.adaptiveFormats,
       'formatStreams': instance.formatStreams,
       'captions': instance.captions,
       'recommendedVideos': instance.recommendedVideos,
+      'title': instance.title,
+      'lengthSeconds': instance.lengthSeconds,
+      'author': instance.author,
+      'authorId': instance.authorId,
+      'authorUrl': instance.authorUrl,
+      'videoThumbnails': instance.videoThumbnails,
+      'viewCountText': instance.viewCountText,
     };

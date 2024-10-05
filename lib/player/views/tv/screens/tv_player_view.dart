@@ -1,4 +1,5 @@
 import 'package:auto_route/annotations.dart';
+import 'package:clipious/videos/models/video.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:clipious/player/states/player.dart';
@@ -6,11 +7,10 @@ import 'package:clipious/player/views/components/video_player.dart';
 import 'package:clipious/settings/states/settings.dart';
 
 import '../../../../main.dart';
-import '../../../../videos/models/base_video.dart';
 
 @RoutePage()
 class TvPlayerScreen extends StatelessWidget {
-  final List<BaseVideo> videos;
+  final List<Video> videos;
 
   const TvPlayerScreen({super.key, required this.videos});
 

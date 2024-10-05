@@ -1,3 +1,4 @@
+import 'package:clipious/videos/models/ided_video.dart';
 import 'package:easy_debounce/easy_throttle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -6,7 +7,6 @@ import 'package:clipious/downloads/models/downloaded_video.dart';
 import 'package:clipious/extensions.dart';
 import 'package:clipious/player/models/media_event.dart';
 import 'package:clipious/settings/states/settings.dart';
-import 'package:clipious/videos/models/base_video.dart';
 import 'package:logging/logging.dart';
 import 'package:river_player/river_player.dart';
 import 'package:wakelock_plus/wakelock_plus.dart';
@@ -222,6 +222,7 @@ class VideoPlayerCubit extends MediaPlayerCubit<VideoPlayerState> {
       return;
     }
     var newState = state.copyWith();
+
     // only used if the player is currently close because it is onReady that will actually play the video
     // need better way of handling this
     newState = newState.copyWith(startAt: startAt);
@@ -237,7 +238,7 @@ class VideoPlayerCubit extends MediaPlayerCubit<VideoPlayerState> {
           startAt = Duration(
               seconds: (offline
                       ? newState.offlineVideo!.lengthSeconds
-                      : newState.video!.lengthSeconds * progress)
+                      : (newState.video!.lengthSeconds ?? 0) * progress)
                   .floor());
         }
       }
@@ -255,6 +256,9 @@ class VideoPlayerCubit extends MediaPlayerCubit<VideoPlayerState> {
           liveStream: false,
         );
       } else {
+        assert(newState.video!.formatStreams != null);
+        assert(newState.video!.adaptiveFormats != null);
+
         var server = await db.getCurrentlySelectedServer();
         String baseUrl = (server).url;
 
@@ -264,8 +268,8 @@ class VideoPlayerCubit extends MediaPlayerCubit<VideoPlayerState> {
 
         var formatStream = isHls
             ? null
-            : newState
-                .video!.formatStreams[newState.video!.formatStreams.length - 1];
+            : newState.video!
+                .formatStreams![newState.video!.formatStreams!.length - 1];
 
         var useProxy = service.useProxy();
 
@@ -295,7 +299,7 @@ class VideoPlayerCubit extends MediaPlayerCubit<VideoPlayerState> {
                 : BetterPlayerVideoFormat.other;
 
         if (format == BetterPlayerVideoFormat.other) {
-          for (var value in newState.video!.formatStreams) {
+          for (var value in (newState.video!.formatStreams ?? [])) {
             resolutions[value.qualityLabel] = value.url;
           }
         }
@@ -447,8 +451,9 @@ class VideoPlayerCubit extends MediaPlayerCubit<VideoPlayerState> {
                 .toList() ??
             [];
       } else {
-        return state.video?.formatStreams.map((e) => e.resolution).toList() ??
-            [];
+        return (state.video?.formatStreams ?? [])
+            .map((e) => e.resolution)
+            .toList();
       }
     }
     // for offline video we don't offer video track selection

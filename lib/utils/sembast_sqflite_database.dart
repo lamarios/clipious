@@ -157,7 +157,7 @@ class SembastSqfDb extends IDbClient {
     var records = downloadedVideosStore.findSync(db);
     return records.map((e) {
       var d = DownloadedVideo.fromJson(e.value);
-      d.videoId = e.key;
+      d = d.copyWith(videoId: e.key);
       return d;
     }).toList();
   }

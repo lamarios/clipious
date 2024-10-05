@@ -1,6 +1,6 @@
 import 'package:clipious/settings/models/db/server.dart';
 import 'package:clipious/utils/models/sharelink.dart';
-import 'package:clipious/videos/models/video_in_list.dart';
+import 'package:clipious/videos/models/video.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import '../../utils/models/image_object.dart';
@@ -22,7 +22,7 @@ class Channel implements ShareLinks {
   String description;
 
   List<String>? allowedRegions;
-  List<VideoInList>? latestVideos;
+  List<Video>? latestVideos;
 
   Channel(
       this.author,

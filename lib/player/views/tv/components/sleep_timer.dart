@@ -43,7 +43,7 @@ class TvSleepTimer extends StatelessWidget {
                   ),
                   const Gap(16),
                   Text(
-                    prettyDuration(state.duration),
+                    prettyDurationCustom(state.duration),
                     style: textTheme.bodyLarge,
                   ),
                   const Gap(16),

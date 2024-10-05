@@ -5,7 +5,7 @@ import 'package:clipious/search/models/search_type.dart';
 import 'package:clipious/utils/extensions/list_unique.dart';
 import 'package:clipious/utils/models/item_with_continuation.dart';
 import 'package:clipious/videos/models/user_feed.dart';
-import 'package:clipious/videos/models/video_in_list.dart';
+import 'package:clipious/videos/models/video.dart';
 
 import '../../globals.dart';
 
@@ -23,7 +23,7 @@ abstract class PaginatedList<T> {
   bool getHasMore();
 }
 
-abstract class PaginatedVideoList extends PaginatedList<VideoInList> {}
+abstract class PaginatedVideoList extends PaginatedList<Video> {}
 
 /// Paginated video list that uses the continuation concept
 class ContinuationList<T> extends PaginatedList<T> {
@@ -135,10 +135,10 @@ class SubscriptionVideoList extends PaginatedVideoList {
   Map<String, String> continuations = {};
 
   @override
-  Future<List<VideoInList>> getItems() async {
+  Future<List<Video>> getItems() async {
     final isLoggedIn = await service.isLoggedIn();
 
-    List<VideoInList> videos = [];
+    List<Video> videos = [];
 
     if (isLoggedIn) {
       UserFeed feed =
@@ -184,7 +184,7 @@ class SubscriptionVideoList extends PaginatedVideoList {
   }
 
   @override
-  Future<List<VideoInList>> getMoreItems() async {
+  Future<List<Video>> getMoreItems() async {
     if (hasMoreOnline) {
       page = page + 1;
     }
@@ -192,7 +192,7 @@ class SubscriptionVideoList extends PaginatedVideoList {
   }
 
   @override
-  Future<List<VideoInList>> refresh() async {
+  Future<List<Video>> refresh() async {
     page = 1;
     continuations = {};
     return getItems();

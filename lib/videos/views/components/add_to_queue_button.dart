@@ -1,16 +1,16 @@
+import 'package:clipious/videos/models/video.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../player/states/player.dart';
-import '../../models/base_video.dart';
 
 class AddToQueueButton extends StatelessWidget {
-  final List<BaseVideo> videos;
+  final List<Video> videos;
 
   const AddToQueueButton({super.key, required this.videos});
 
-  static bool canAddToQueue(BuildContext context, List<BaseVideo> videos) {
+  static bool canAddToQueue(BuildContext context, List<Video> videos) {
     var state = context.read<PlayerCubit>().state;
     return (state.videos.isNotEmpty) &&
         (videos.length > 1 ||

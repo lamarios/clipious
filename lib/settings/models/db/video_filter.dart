@@ -1,9 +1,9 @@
+import 'package:clipious/videos/models/video.dart';
 import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:clipious/globals.dart';
 import 'package:clipious/utils.dart';
-import 'package:clipious/videos/models/base_video.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:logging/logging.dart';
 
@@ -117,17 +117,19 @@ class VideoFilter {
         .firstOrNull;
   }
 
-  static BaseVideo _innerFilterVideo(BaseVideo v, List<VideoFilter> filters) {
+  static Video _innerFilterVideo(Video v, List<VideoFilter> filters) {
     var matches = filters.where((element) => element.filterVideo(v)).toList();
-    v.matchedFilters = matches;
-    v.filtered = matches.isNotEmpty;
     // log.fine('Video ${v.title} filtered ? ${v.filtered}');
-    v.filterHide = v.filtered && matches.any((element) => element.hideFromFeed);
-    return v;
+    final filterHide = matches.any((element) => element.hideFromFeed);
+
+    return v.copyWith(
+        matchedFilters: matches,
+        filtered: matches.isNotEmpty,
+        filterHide: filterHide);
   }
 
   /// Returns the number of videos removed
-  static Future<List<BaseVideo>> filterVideos(List<BaseVideo>? videos) async {
+  static Future<List<Video>> filterVideos(List<Video>? videos) async {
     List<VideoFilter> filters = db.getAllFilters();
 
     log.fine('filtering videos, we have ${filters.length} filters');
@@ -148,7 +150,7 @@ class VideoFilter {
     return videos;
   }
 
-  bool filterVideo(BaseVideo video) {
+  bool filterVideo(Video video) {
     String videoChannel = video.authorId?.replaceAll("/channel/", '') ?? '';
 
     if (channelId != null && channelId != videoChannel) {
@@ -167,14 +169,19 @@ class VideoFilter {
     switch (type) {
       // string base operation
       case FilterType.title:
-        filter = filterVideoStringOperation(video.title);
+        filter = filterVideoStringOperation(video.title ?? '');
+        break;
       case FilterType.channelName:
         filter = video.author != null
             ? filterVideoStringOperation(video.author!)
             : true;
+        break;
       // int base operation
       case FilterType.length:
-        filter = filterVideoNumberOperation(video.lengthSeconds);
+        if (video.lengthSeconds != null) {
+          filter = filterVideoNumberOperation(video.lengthSeconds!);
+        }
+        break;
       default:
         filter = false;
     }

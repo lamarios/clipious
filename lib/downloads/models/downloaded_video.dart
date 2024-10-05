@@ -1,30 +1,35 @@
 import 'dart:io';
 
-import 'package:clipious/videos/models/base_video.dart';
+import 'package:clipious/videos/models/ided_video.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as p;
+
+part 'downloaded_video.freezed.dart';
 
 part 'downloaded_video.g.dart';
 
 const String _downloadFolder = 'downloads';
 
-@JsonSerializable()
-class DownloadedVideo extends IdedVideo {
-  String title;
-  String? author;
-  String? authorUrl;
-  bool downloadComplete;
-  bool downloadFailed;
-  bool audioOnly;
-  int lengthSeconds;
-  String quality;
+@freezed
+class DownloadedVideo with _$DownloadedVideo implements IdedVideo {
+  @Implements<IdedVideo>()
+  const factory DownloadedVideo(
+      {required String videoId,
+      required String title,
+      String? author,
+      String? authorUrl,
+      @Default(false) bool downloadComplete,
+      @Default(false) bool downloadFailed,
+      @Default(false) bool audioOnly,
+      required int lengthSeconds,
+      required String quality}) = _DownloadedVideo;
 
-  @override
-  set videoId(String videoId) => super.videoId = videoId;
+  const DownloadedVideo._();
 
-  @override
-  String get videoId => super.videoId;
+  factory DownloadedVideo.fromJson(Map<String, Object?> json) =>
+      _$DownloadedVideoFromJson(json);
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   Future<String> get downloadPath async {
@@ -65,21 +70,4 @@ class DownloadedVideo extends IdedVideo {
 
     return dir;
   }
-
-  DownloadedVideo(
-      {required String videoId,
-      required this.title,
-      this.author,
-      this.authorUrl,
-      this.downloadComplete = false,
-      this.downloadFailed = false,
-      this.audioOnly = false,
-      this.lengthSeconds = 1,
-      this.quality = '720p'})
-      : super(videoId);
-
-  factory DownloadedVideo.fromJson(Map<String, dynamic> json) =>
-      _$DownloadedVideoFromJson(json);
-
-  Map<String, dynamic> toJson() => _$DownloadedVideoToJson(this);
 }

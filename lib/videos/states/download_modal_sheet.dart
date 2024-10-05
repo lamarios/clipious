@@ -1,15 +1,14 @@
 import 'package:bloc/bloc.dart';
+import 'package:clipious/videos/models/video.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:clipious/extensions.dart';
 import 'package:clipious/globals.dart';
 import 'package:clipious/videos/models/adaptive_format.dart';
 
-import '../models/base_video.dart';
-
 part 'download_modal_sheet.freezed.dart';
 
 class DownloadModalSheetCubit extends Cubit<DownloadModalSheetState> {
-  final BaseVideo video;
+  final Video video;
 
   DownloadModalSheetCubit(super.initialState, this.video) {
     init();
@@ -19,7 +18,7 @@ class DownloadModalSheetCubit extends Cubit<DownloadModalSheetState> {
     emit(state.copyWith(loading: true));
     final vid = await service.getVideo(video.videoId);
 
-    final qualities = vid.adaptiveFormats
+    final qualities = (vid.adaptiveFormats ?? [])
         .where((f) => f.encoding == 'vp9' && f.type.contains("video/webm"))
         .sortBy((f) => int.parse(f.resolution?.replaceAll('p', '') ?? '0'))
         .where(

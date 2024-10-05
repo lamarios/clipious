@@ -26,7 +26,7 @@ Channel _$ChannelFromJson(Map<String, dynamic> json) => Channel(
           ?.map((e) => e as String)
           .toList(),
       (json['latestVideos'] as List<dynamic>?)
-          ?.map((e) => VideoInList.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => Video.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 

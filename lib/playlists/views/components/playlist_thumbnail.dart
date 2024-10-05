@@ -1,13 +1,13 @@
+import 'package:clipious/videos/models/video.dart';
 import 'package:flutter/material.dart';
 import 'package:clipious/globals.dart';
 import 'package:clipious/utils/views/components/placeholders.dart';
 
 import '../../../utils/models/image_object.dart';
-import '../../../videos/models/base_video.dart';
 import '../../../videos/views/components/video_thumbnail.dart';
 
 class PlaylistThumbnails extends StatelessWidget {
-  final List<BaseVideo> videos;
+  final List<Video> videos;
   final List<Widget>? children;
   final bool bestThumbnails;
   final double scale = 0.7;

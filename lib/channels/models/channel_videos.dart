@@ -1,4 +1,4 @@
-import 'package:clipious/videos/models/video_in_list.dart';
+import 'package:clipious/videos/models/video.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import '../../utils/models/item_with_continuation.dart';
@@ -6,8 +6,8 @@ import '../../utils/models/item_with_continuation.dart';
 part 'channel_videos.g.dart';
 
 @JsonSerializable()
-class VideosWithContinuation extends ItemtWithContinuation<VideoInList> {
-  List<VideoInList> videos;
+class VideosWithContinuation extends ItemtWithContinuation<Video> {
+  List<Video> videos;
 
   VideosWithContinuation(this.videos, String? continuation)
       : super(continuation);
@@ -18,7 +18,7 @@ class VideosWithContinuation extends ItemtWithContinuation<VideoInList> {
   Map<String, dynamic> toJson() => _$VideosWithContinuationToJson(this);
 
   @override
-  List<VideoInList> getItems() {
+  List<Video> getItems() {
     return videos;
   }
 }

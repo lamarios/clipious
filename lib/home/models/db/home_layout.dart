@@ -1,11 +1,11 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:clipious/videos/models/video.dart';
 import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:clipious/router.dart';
-import 'package:clipious/videos/models/video_in_list.dart';
 
 import '../../../downloads/states/download_manager.dart';
 import '../../../globals.dart';
@@ -212,15 +212,14 @@ enum HomeDataSource {
                   scrollDirection: small ? Axis.horizontal : Axis.vertical,
                   small: small,
                   animateDownload: true,
-                  paginatedVideoList: PageBasedPaginatedList<VideoInList>(
+                  paginatedVideoList: PageBasedPaginatedList<Video>(
                       getItemsFunc: (page, maxResults) =>
                           // we get the data for each video
                           service.getUserHistory(page, maxResults).then(
                               (value) => Future.wait(value
                                   .map((e) async => (await HistoryVideoCache
                                           .fromVideoIdToVideo(e))
-                                      .toBaseVideo()
-                                      .toVideoInList())
+                                      .toVideo())
                                   .toList())),
                       maxResults: 20),
                 )

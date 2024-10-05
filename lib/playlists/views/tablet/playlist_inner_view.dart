@@ -1,3 +1,4 @@
+import 'package:clipious/videos/models/video.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -5,7 +6,6 @@ import 'package:clipious/playlists/views/components/playlist_thumbnail.dart';
 import 'package:clipious/utils.dart';
 import 'package:clipious/utils/models/paginated_list.dart';
 import 'package:clipious/utils/views/components/placeholders.dart';
-import 'package:clipious/videos/models/video_in_list.dart';
 import 'package:clipious/videos/views/components/video_list.dart';
 
 import '../../../globals.dart';
@@ -15,8 +15,7 @@ import '../../states/playlist.dart';
 
 class TabletPlaylistInnerView extends StatelessWidget {
   final bool canDeleteVideos;
-  final Function(BuildContext context, VideoInList video)
-      removeVideoFromPlaylist;
+  final Function(BuildContext context, Video video) removeVideoFromPlaylist;
   final Function(BuildContext context, String videoId) openVideo;
 
   const TabletPlaylistInnerView(
@@ -25,7 +24,7 @@ class TabletPlaylistInnerView extends StatelessWidget {
       required this.removeVideoFromPlaylist,
       required this.openVideo});
 
-  void showVideoModalSheet(BuildContext parentContext, VideoInList video) {
+  void showVideoModalSheet(BuildContext parentContext, Video video) {
     showModalBottomSheet<void>(
         context: parentContext,
         showDragHandle: true,

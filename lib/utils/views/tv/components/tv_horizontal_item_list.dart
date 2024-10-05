@@ -1,12 +1,11 @@
+import 'package:clipious/videos/models/video.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:clipious/utils/states/item_list.dart';
 import 'package:clipious/utils/views/components/placeholders.dart';
-import 'package:clipious/videos/models/base_video.dart';
 import 'package:clipious/videos/views/tv/components/video_item.dart';
 
 import '../../../../utils.dart';
-import '../../../../videos/models/video_in_list.dart';
 import '../../../models/paginated_list.dart';
 
 class TvHorizontalItemList<T> extends StatelessWidget {
@@ -32,8 +31,8 @@ class TvHorizontalItemList<T> extends StatelessWidget {
           var cubit = context.read<ItemListCubit<T>>();
           // filter items if possible
           List<T> items = state.items;
-          if (items.isNotEmpty && items[0] is BaseVideo) {
-            items = filteredVideos<BaseVideo>(state.items.cast()).cast();
+          if (items.isNotEmpty && items[0] is Video) {
+            items = filteredVideos(state.items.cast()).cast();
           }
 
           return Stack(
@@ -68,11 +67,11 @@ class TvHorizontalItemList<T> extends StatelessWidget {
 }
 
 class TvHorizontalVideoList extends StatelessWidget {
-  final PaginatedList<VideoInList> paginatedVideoList;
-  final Function(BuildContext context, VideoInList video)? onSelect;
+  final PaginatedList<Video> paginatedVideoList;
+  final Function(BuildContext context, Video video)? onSelect;
   final String? tags;
   final int autoFocusedIndex;
-  final void Function(VideoInList video, int index, bool focus)? onItemFocus;
+  final void Function(Video video, int index, bool focus)? onItemFocus;
 
   const TvHorizontalVideoList(
       {super.key,
@@ -84,7 +83,7 @@ class TvHorizontalVideoList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TvHorizontalItemList<VideoInList>(
+    return TvHorizontalItemList<Video>(
       getPlaceholder: () => const TvVideoItemPlaceHolder(),
       paginatedList: paginatedVideoList,
       buildItem: (context, index, e) => TvVideoItem(

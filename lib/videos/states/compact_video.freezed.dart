@@ -33,6 +33,8 @@ abstract class $CompactVideoStateCopyWith<$Res> {
       _$CompactVideoStateCopyWithImpl<$Res, CompactVideoState>;
   @useResult
   $Res call({DownloadedVideo? offlineVideo, String? offlineVideoThumbnailPath});
+
+  $DownloadedVideoCopyWith<$Res>? get offlineVideo;
 }
 
 /// @nodoc
@@ -64,6 +66,20 @@ class _$CompactVideoStateCopyWithImpl<$Res, $Val extends CompactVideoState>
               as String?,
     ) as $Val);
   }
+
+  /// Create a copy of CompactVideoState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $DownloadedVideoCopyWith<$Res>? get offlineVideo {
+    if (_value.offlineVideo == null) {
+      return null;
+    }
+
+    return $DownloadedVideoCopyWith<$Res>(_value.offlineVideo!, (value) {
+      return _then(_value.copyWith(offlineVideo: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -75,6 +91,9 @@ abstract class _$$CompactVideoStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call({DownloadedVideo? offlineVideo, String? offlineVideoThumbnailPath});
+
+  @override
+  $DownloadedVideoCopyWith<$Res>? get offlineVideo;
 }
 
 /// @nodoc

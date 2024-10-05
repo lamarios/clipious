@@ -1,9 +1,9 @@
 import 'dart:async';
 
+import 'package:clipious/videos/models/video.dart';
 import 'package:flutter/material.dart';
 import 'package:clipious/channels/models/channel_videos.dart';
 import 'package:clipious/globals.dart';
-import 'package:clipious/videos/models/video_in_list.dart';
 import 'package:clipious/videos/views/components/video_list.dart';
 
 import '../../../utils/models/paginated_list.dart';
@@ -25,7 +25,7 @@ class ChannelVideosView extends StatelessWidget {
       child: Container(
         color: colorScheme.surface,
         child: VideoList(
-          paginatedVideoList: ContinuationList<VideoInList>(
+          paginatedVideoList: ContinuationList<Video>(
               (continuation) => getVideos(channel.authorId, continuation)),
           // tags: 'channel-video-list-${(key as ValueKey<String>).value}'
         ),

@@ -1,10 +1,10 @@
+import 'package:clipious/videos/models/video.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_swipe_action_cell/core/cell.dart';
 import 'package:clipious/playlists/views/components/playlist_thumbnail.dart';
 import 'package:clipious/utils.dart';
 import 'package:clipious/utils/views/components/placeholders.dart';
-import 'package:clipious/videos/models/video_in_list.dart';
 import 'package:clipious/videos/views/components/compact_video.dart';
 
 import '../../../globals.dart';
@@ -14,8 +14,7 @@ import '../../states/playlist.dart';
 
 class PlaylistInnerView extends StatelessWidget {
   final bool canDeleteVideos;
-  final Function(BuildContext context, VideoInList video)
-      removeVideoFromPlaylist;
+  final Function(BuildContext context, Video video) removeVideoFromPlaylist;
   final Function(BuildContext context, String videoId) openVideo;
   const PlaylistInnerView(
       {super.key,

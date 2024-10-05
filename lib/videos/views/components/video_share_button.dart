@@ -1,10 +1,10 @@
+import 'package:clipious/videos/models/video.dart';
 import 'package:flutter/material.dart';
 
 import '../../../utils.dart';
-import '../../models/base_video.dart';
 
 class VideoShareButton extends StatelessWidget {
-  final BaseVideo video;
+  final Video video;
   final bool showTimestampOption;
 
   const VideoShareButton(

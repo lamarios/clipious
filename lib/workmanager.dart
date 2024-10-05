@@ -8,11 +8,11 @@ import 'package:clipious/globals.dart';
 import 'package:clipious/notifications/models/db/subscription_notifications.dart';
 import 'package:clipious/settings/states/settings.dart';
 import 'package:clipious/utils/file_db.dart';
-import 'package:clipious/videos/models/video_in_list.dart';
 import 'package:logging/logging.dart';
 import 'package:workmanager/workmanager.dart';
 
 import 'notifications/notifications.dart';
+import 'videos/models/video.dart';
 
 var log = Logger('background-task');
 const taskName = "Clipious background refresh task";
@@ -166,7 +166,7 @@ _handleSubscriptionsNotifications() async {
     final lastNotification = await fileDb.getLastSubscriptionNotification();
     var feed = await service.getUserFeed(maxResults: 100, saveLastSeen: false);
 
-    List<VideoInList> videos = [];
+    List<Video> videos = [];
     videos.addAll(feed.notifications ?? []);
     videos.addAll(feed.videos ?? []);
 

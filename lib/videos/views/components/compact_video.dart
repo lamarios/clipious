@@ -1,3 +1,4 @@
+import 'package:clipious/videos/models/video.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:clipious/downloads/models/downloaded_video.dart';
@@ -6,14 +7,13 @@ import 'package:clipious/utils/models/image_object.dart';
 import 'package:clipious/videos/states/compact_video.dart';
 import 'package:clipious/videos/views/components/video_thumbnail.dart';
 
-import '../../models/base_video.dart';
 import 'offline_video_thumbnail.dart';
 
 const double compactVideoHeight = 70;
 
 class CompactVideo extends StatelessWidget {
   final Function()? onTap;
-  final BaseVideo? video;
+  final Video? video;
   final DownloadedVideo? offlineVideo;
   final bool? highlighted;
   final List<Widget>? trailing;

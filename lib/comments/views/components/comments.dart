@@ -1,13 +1,12 @@
+import 'package:clipious/videos/models/video.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:clipious/comments/states/comments.dart';
 import 'package:clipious/comments/views/components/comment.dart';
 
-import '../../../videos/models/base_video.dart';
-
 class CommentsView extends StatelessWidget {
-  final BaseVideo video;
+  final Video video;
   final String? continuation;
   final String? source;
   final String? sortBy;

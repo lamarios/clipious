@@ -1,4 +1,4 @@
-import 'package:clipious/videos/models/base_video.dart';
+import 'package:clipious/videos/models/video.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import '../../../globals.dart';
@@ -23,16 +23,19 @@ class HistoryVideoCache {
 
   Map<String, dynamic> toJson() => _$HistoryVideoCacheToJson(this);
 
-  BaseVideo toBaseVideo() {
-    return BaseVideo(title, videoId, 0, author, null, null,
-        [ImageObject("high", thumbnail, 1280, 720)]);
+  Video toVideo() {
+    return Video(
+        title: title,
+        videoId: videoId,
+        author: author,
+        videoThumbnails: [ImageObject("high", thumbnail, 1280, 720)]);
   }
 
   static Future<HistoryVideoCache> fromVideoIdToVideo(String e) async {
     var cachedVideo = db.getHistoryVideoByVideoId(e);
     if (cachedVideo == null) {
       var vid = await service.getVideo(e);
-      cachedVideo = HistoryVideoCache(vid.videoId, vid.title, vid.author,
+      cachedVideo = HistoryVideoCache(vid.videoId, vid.title ?? '', vid.author,
           ImageObject.getBestThumbnail(vid.videoThumbnails)?.url ?? '');
       await db.upsertHistoryVideo(cachedVideo);
     }

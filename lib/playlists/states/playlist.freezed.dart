@@ -41,6 +41,8 @@ abstract class $PlaylistStateCopyWith<$Res> {
       bool loading,
       double playlistItemHeight,
       bool showImage});
+
+  $PlaylistCopyWith<$Res> get playlist;
 }
 
 /// @nodoc
@@ -87,6 +89,16 @@ class _$PlaylistStateCopyWithImpl<$Res, $Val extends PlaylistState>
               as bool,
     ) as $Val);
   }
+
+  /// Create a copy of PlaylistState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $PlaylistCopyWith<$Res> get playlist {
+    return $PlaylistCopyWith<$Res>(_value.playlist, (value) {
+      return _then(_value.copyWith(playlist: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -103,6 +115,9 @@ abstract class _$$PlaylistStateImplCopyWith<$Res>
       bool loading,
       double playlistItemHeight,
       bool showImage});
+
+  @override
+  $PlaylistCopyWith<$Res> get playlist;
 }
 
 /// @nodoc

@@ -1380,6 +1380,7 @@
   "stopTheVideoExplanation": "If enabled, the video will be closed, if disabled the video will be simply paused",
   "setTimer": "Set timer",
   "cancelSleepTimer": "Cancel sleep timer",
+  "premieresIn": "Premieres in {formattedDuration}",
   "screenControls": "Screen controls",
   "screenControlsExplanation": "When watching a video in full screen, Vertically dragging from the left or the right will adjust the brightness or volume respectively"
 }

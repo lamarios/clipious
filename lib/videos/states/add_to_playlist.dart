@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
+import 'package:clipious/videos/models/video.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:clipious/extensions.dart';
-import 'package:clipious/videos/models/video_in_list.dart';
 import 'package:logging/logging.dart';
 
 import '../../globals.dart';
@@ -59,7 +59,7 @@ class AddToPlaylistCubit extends Cubit<AddToPlaylistController> {
 
   checkVideoLikeStatus() async {
     Playlist? p = await likePlaylist();
-    VideoInList? video = p?.videos
+    Video? video = p?.videos
         .firstWhereOrNull((element) => element.videoId == state.videoId);
 
     bool isVideoLiked = video != null;
@@ -99,7 +99,7 @@ class AddToPlaylistCubit extends Cubit<AddToPlaylistController> {
     if (p != null) {
       if (isVideoLiked) {
         log.fine('Video is liked, unliking it');
-        VideoInList? v = p.videos
+        Video? v = p.videos
             .firstWhereOrNull((element) => element.videoId == state.videoId);
         if (v?.indexId != null) {
           await service.deleteUserPlaylistVideo(p.playlistId, v!.indexId!);

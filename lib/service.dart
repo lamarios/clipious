@@ -26,7 +26,6 @@ import 'package:clipious/videos/models/dislike.dart';
 import 'package:clipious/videos/models/sponsor_segment.dart';
 import 'package:clipious/videos/models/user_feed.dart';
 import 'package:clipious/videos/models/video.dart';
-import 'package:clipious/videos/models/video_in_list.dart';
 import 'package:logging/logging.dart';
 
 import 'channels/models/channel.dart';
@@ -183,9 +182,10 @@ class Service {
     final response = await httpClient.get(req.uri, headers: req.headers);
 
     var video = Video.fromJson(handleResponse(response));
-    await DeArrow.processVideos([video]);
-    video.recommendedVideos =
-        (await postProcessVideos(video.recommendedVideos)).cast();
+    video = (await DeArrow.processVideos([video]))[0];
+    video = video.copyWith(
+        recommendedVideos:
+            (await postProcessVideos(video.recommendedVideos)).cast());
     return video;
   }
 
@@ -254,7 +254,7 @@ class Service {
     }
   }
 
-  Future<List<VideoInList>> getTrending({String? type}) async {
+  Future<List<Video>> getTrending({String? type}) async {
     String countryCode = db.getSettings(browsingCountry)?.value ?? 'US';
     // parse.queryParameters['region'] = countryCode;
     Map<String, String>? query = {'region': countryCode};
@@ -267,16 +267,16 @@ class Service {
     final response = await httpClient.get(req.uri, headers: req.headers);
 
     Iterable i = handleResponse(response);
-    var list = List<VideoInList>.from(i.map((e) => VideoInList.fromJson(e)));
-    list = (await postProcessVideos(list)).cast();
+    var list = List<Video>.from(i.map((e) => Video.fromJson(e)));
+    list = (await postProcessVideos(list));
     return list;
   }
 
-  Future<List<VideoInList>> getPopular() async {
+  Future<List<Video>> getPopular() async {
     var req = await buildRequest(urlGetPopular);
     final response = await httpClient.get(req.uri, headers: req.headers);
     Iterable i = handleResponse(response);
-    var list = List<VideoInList>.from(i.map((e) => VideoInList.fromJson(e)));
+    var list = List<Video>.from(i.map((e) => Video.fromJson(e)));
     list = (await postProcessVideos(list)).cast();
     return list;
   }
@@ -305,7 +305,7 @@ class Service {
       for (var e in i) {
         switch (e['type']) {
           case 'video':
-            results.videos.add(VideoInList.fromJson(e));
+            results.videos.add(Video.fromJson(e));
             break;
           case 'playlist':
             results.playlists.add(Playlist.fromJson(e));
@@ -595,8 +595,10 @@ class Service {
       Iterable i = handleResponse(response);
       var list = List<Playlist>.from(i.map((e) => Playlist.fromJson(e)));
       if (postProcessing) {
-        for (var pl in list) {
-          pl.videos = (await postProcessVideos(pl.videos)).cast();
+        for (int i = 0; i < list.length; i++) {
+          var pl = list[i];
+          pl = pl.copyWith(videos: await postProcessVideos(pl.videos));
+          list[i] = pl;
         }
       }
       return list.sortByReversed((e) => e.updated ?? 0).toList();
@@ -612,8 +614,10 @@ class Service {
 
     final response = await httpClient.get(req.uri, headers: req.headers);
     var channelPlaylists = ChannelPlaylists.fromJson(handleResponse(response));
-    for (var pl in channelPlaylists.playlists) {
-      pl.videos = (await postProcessVideos(pl.videos)).cast();
+    for (int i = 0; i < channelPlaylists.playlists.length; i++) {
+      var pl = channelPlaylists.playlists[i];
+      pl = pl.copyWith(videos: await postProcessVideos(pl.videos));
+      channelPlaylists.playlists[i] = pl;
     }
     return channelPlaylists;
   }
@@ -761,8 +765,9 @@ class Service {
     final response = await httpClient.get(req.uri, headers: req.headers);
     var playlist = Playlist.fromJson(handleResponse(response));
     var oldLength = playlist.videos.length;
-    playlist.videos = (await postProcessVideos(playlist.videos)).cast();
-    playlist.removedByFilter = oldLength - playlist.videos.length;
+    playlist = playlist.copyWith(
+        videos: await postProcessVideos(playlist.videos),
+        removedByFilter: oldLength - playlist.videos.length);
 
     if (saveLastSeen) {
       await fileDb.setPlaylistNotificationLastViewedVideo(
@@ -779,8 +784,9 @@ class Service {
     final response = await httpClient.get(req.uri, headers: req.headers);
     var playlist = Playlist.fromJson(handleResponse(response));
     var oldLength = playlist.videos.length;
-    playlist.videos = (await postProcessVideos(playlist.videos)).cast();
-    playlist.removedByFilter = oldLength - playlist.videos.length;
+    playlist = playlist.copyWith(
+        videos: await postProcessVideos(playlist.videos),
+        removedByFilter: oldLength - playlist.videos.length);
 
     return playlist;
   }

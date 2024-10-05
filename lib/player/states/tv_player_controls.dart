@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:clipious/videos/models/video.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:easy_debounce/easy_throttle.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +9,6 @@ import 'package:clipious/player/states/player.dart';
 import 'package:logging/logging.dart';
 
 import '../../utils.dart';
-import '../../videos/models/video_in_list.dart';
 import '../models/media_event.dart';
 
 part 'tv_player_controls.freezed.dart';
@@ -135,7 +135,7 @@ class TvPlayerControlsCubit extends Cubit<TvPlayerControlsState> {
     emit(state.copyWith(showQueue: true, displayControls: false));
   }
 
-  Future<void> playFromQueue(VideoInList video) async {
+  Future<void> playFromQueue(Video video) async {
     emit(state.copyWith(showQueue: false, loading: true));
     player.switchToVideo(video);
     emit(state.copyWith(loading: false));

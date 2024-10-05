@@ -1,10 +1,11 @@
+import 'package:clipious/videos/models/ided_video.dart';
+import 'package:clipious/videos/models/video.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_swipe_action_cell/core/cell.dart';
 import 'package:clipious/downloads/models/downloaded_video.dart';
 import 'package:clipious/player/states/player.dart';
 import 'package:clipious/player/states/video_queue.dart';
-import 'package:clipious/videos/models/base_video.dart';
 import 'package:clipious/videos/views/components/compact_video.dart';
 
 import '../../../globals.dart';
@@ -12,7 +13,7 @@ import '../../../globals.dart';
 class VideoQueue extends StatelessWidget {
   const VideoQueue({super.key});
 
-  Widget onlineVideoQueue(BuildContext context, int index, BaseVideo video) {
+  Widget onlineVideoQueue(BuildContext context, int index, Video video) {
     var controller = context.read<PlayerCubit>();
     var state = controller.state;
     bool isPlaying = video.videoId == state.currentlyPlaying?.videoId;

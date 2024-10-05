@@ -35,7 +35,7 @@ mixin _$PlayerState {
   Video? get currentlyPlaying => throw _privateConstructorUsedError;
   DownloadedVideo? get offlineCurrentlyPlaying =>
       throw _privateConstructorUsedError;
-  List<BaseVideo> get videos => throw _privateConstructorUsedError;
+  List<Video> get videos => throw _privateConstructorUsedError;
   List<DownloadedVideo> get offlineVideos =>
       throw _privateConstructorUsedError; // playlist controls
   List<String> get playedVideos => throw _privateConstructorUsedError;
@@ -92,7 +92,7 @@ abstract class $PlayerStateCopyWith<$Res> {
       double aspectRatio,
       Video? currentlyPlaying,
       DownloadedVideo? offlineCurrentlyPlaying,
-      List<BaseVideo> videos,
+      List<Video> videos,
       List<DownloadedVideo> offlineVideos,
       List<String> playedVideos,
       ListQueue<String> playQueue,
@@ -113,6 +113,9 @@ abstract class $PlayerStateCopyWith<$Res> {
       int totalFastForward,
       dynamic totalRewind,
       Orientation orientation});
+
+  $VideoCopyWith<$Res>? get currentlyPlaying;
+  $DownloadedVideoCopyWith<$Res>? get offlineCurrentlyPlaying;
 }
 
 /// @nodoc
@@ -236,7 +239,7 @@ class _$PlayerStateCopyWithImpl<$Res, $Val extends PlayerState>
       videos: null == videos
           ? _value.videos
           : videos // ignore: cast_nullable_to_non_nullable
-              as List<BaseVideo>,
+              as List<Video>,
       offlineVideos: null == offlineVideos
           ? _value.offlineVideos
           : offlineVideos // ignore: cast_nullable_to_non_nullable
@@ -319,6 +322,35 @@ class _$PlayerStateCopyWithImpl<$Res, $Val extends PlayerState>
               as Orientation,
     ) as $Val);
   }
+
+  /// Create a copy of PlayerState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $VideoCopyWith<$Res>? get currentlyPlaying {
+    if (_value.currentlyPlaying == null) {
+      return null;
+    }
+
+    return $VideoCopyWith<$Res>(_value.currentlyPlaying!, (value) {
+      return _then(_value.copyWith(currentlyPlaying: value) as $Val);
+    });
+  }
+
+  /// Create a copy of PlayerState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $DownloadedVideoCopyWith<$Res>? get offlineCurrentlyPlaying {
+    if (_value.offlineCurrentlyPlaying == null) {
+      return null;
+    }
+
+    return $DownloadedVideoCopyWith<$Res>(_value.offlineCurrentlyPlaying!,
+        (value) {
+      return _then(_value.copyWith(offlineCurrentlyPlaying: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -346,7 +378,7 @@ abstract class _$$PlayerStateImplCopyWith<$Res>
       double aspectRatio,
       Video? currentlyPlaying,
       DownloadedVideo? offlineCurrentlyPlaying,
-      List<BaseVideo> videos,
+      List<Video> videos,
       List<DownloadedVideo> offlineVideos,
       List<String> playedVideos,
       ListQueue<String> playQueue,
@@ -367,6 +399,11 @@ abstract class _$$PlayerStateImplCopyWith<$Res>
       int totalFastForward,
       dynamic totalRewind,
       Orientation orientation});
+
+  @override
+  $VideoCopyWith<$Res>? get currentlyPlaying;
+  @override
+  $DownloadedVideoCopyWith<$Res>? get offlineCurrentlyPlaying;
 }
 
 /// @nodoc
@@ -488,7 +525,7 @@ class __$$PlayerStateImplCopyWithImpl<$Res>
       videos: null == videos
           ? _value._videos
           : videos // ignore: cast_nullable_to_non_nullable
-              as List<BaseVideo>,
+              as List<Video>,
       offlineVideos: null == offlineVideos
           ? _value._offlineVideos
           : offlineVideos // ignore: cast_nullable_to_non_nullable
@@ -587,7 +624,7 @@ class _$PlayerStateImpl extends _PlayerState {
       this.aspectRatio = 16 / 9,
       this.currentlyPlaying,
       this.offlineCurrentlyPlaying,
-      final List<BaseVideo> videos = const [],
+      final List<Video> videos = const [],
       final List<DownloadedVideo> offlineVideos = const [],
       final List<String> playedVideos = const [],
       required this.playQueue,
@@ -661,10 +698,10 @@ class _$PlayerStateImpl extends _PlayerState {
   final Video? currentlyPlaying;
   @override
   final DownloadedVideo? offlineCurrentlyPlaying;
-  final List<BaseVideo> _videos;
+  final List<Video> _videos;
   @override
   @JsonKey()
-  List<BaseVideo> get videos {
+  List<Video> get videos {
     if (_videos is EqualUnmodifiableListView) return _videos;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_videos);
@@ -901,7 +938,7 @@ abstract class _PlayerState extends PlayerState {
       final double aspectRatio,
       final Video? currentlyPlaying,
       final DownloadedVideo? offlineCurrentlyPlaying,
-      final List<BaseVideo> videos,
+      final List<Video> videos,
       final List<DownloadedVideo> offlineVideos,
       final List<String> playedVideos,
       required final ListQueue<String> playQueue,
@@ -958,7 +995,7 @@ abstract class _PlayerState extends PlayerState {
   @override
   DownloadedVideo? get offlineCurrentlyPlaying;
   @override
-  List<BaseVideo> get videos;
+  List<Video> get videos;
   @override
   List<DownloadedVideo> get offlineVideos; // playlist controls
   @override

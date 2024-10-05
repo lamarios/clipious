@@ -1,3 +1,4 @@
+import 'package:clipious/videos/models/video.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -8,10 +9,9 @@ import 'package:clipious/utils/pretty_bytes.dart';
 import 'package:clipious/videos/states/download_modal_sheet.dart';
 
 import '../../../downloads/states/download_manager.dart';
-import '../../models/base_video.dart';
 
 class DownloadModalSheet extends StatelessWidget {
-  final BaseVideo video;
+  final Video video;
 
   // called when the download is triggerd
   final Function()? onDownload;
@@ -25,7 +25,7 @@ class DownloadModalSheet extends StatelessWidget {
       this.onDownloadStarted,
       this.onDownload});
 
-  static showVideoModalSheet(BuildContext context, BaseVideo video,
+  static showVideoModalSheet(BuildContext context, Video video,
       {Function(bool isDownloadStarted)? onDownloadStarted,
       Function()? onDownload}) {
     showModalBottomSheet<void>(

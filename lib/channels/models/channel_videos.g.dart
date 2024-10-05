@@ -10,7 +10,7 @@ VideosWithContinuation _$VideosWithContinuationFromJson(
         Map<String, dynamic> json) =>
     VideosWithContinuation(
       (json['videos'] as List<dynamic>)
-          .map((e) => VideoInList.fromJson(e as Map<String, dynamic>))
+          .map((e) => Video.fromJson(e as Map<String, dynamic>))
           .toList(),
       json['continuation'] as String?,
     );

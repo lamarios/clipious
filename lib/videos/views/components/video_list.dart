@@ -1,3 +1,5 @@
+import 'package:clipious/videos/models/ided_video.dart';
+import 'package:clipious/videos/models/video.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -5,8 +7,6 @@ import 'package:clipious/utils.dart';
 import 'package:clipious/utils/states/item_list.dart';
 import 'package:clipious/utils/views/components/placeholders.dart';
 import 'package:clipious/utils/views/components/top_loading.dart';
-import 'package:clipious/videos/models/base_video.dart';
-import 'package:clipious/videos/models/video_in_list.dart';
 import 'package:clipious/videos/views/components/video_in_list.dart';
 
 // import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -24,8 +24,8 @@ class VideoList<T extends IdedVideo> extends StatelessWidget {
   final bool small;
   final bool showMetrics;
   final bool allowModalSheet;
-  final Function(BuildContext context, VideoInList video)? showVideoModalSheet;
-  final Function(BuildContext context, VideoInList video)? openVideoOverride;
+  final Function(BuildContext context, Video video)? showVideoModalSheet;
+  final Function(BuildContext context, Video video)? openVideoOverride;
 
   const VideoList(
       {super.key,
@@ -63,8 +63,8 @@ class VideoList<T extends IdedVideo> extends StatelessWidget {
           var cubit = context.read<ItemListCubit<T>>();
 
           List<IdedVideo> items = state.items;
-          if (items.isNotEmpty && items[0] is VideoInList) {
-            items = filteredVideos<VideoInList>(state.items.cast());
+          if (items.isNotEmpty && items[0] is Video) {
+            items = filteredVideos(state.items.cast());
           }
 
           var gridCount = small ? 1 : getGridCount(context);
@@ -107,10 +107,10 @@ class VideoList<T extends IdedVideo> extends StatelessWidget {
                                   : getGridAspectRatio(context),
                               children: [
                                 ...items.map((v) {
-                                  VideoInList? onlineVideo;
+                                  Video? onlineVideo;
                                   DownloadedVideo? offlineVideo;
 
-                                  if (v is VideoInList) {
+                                  if (v is Video) {
                                     onlineVideo = v;
                                   }
 

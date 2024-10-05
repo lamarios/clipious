@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
+import 'package:clipious/videos/models/video.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:clipious/downloads/models/downloaded_video.dart';
-import 'package:clipious/videos/models/base_video.dart';
 
 import '../../globals.dart';
 
@@ -42,6 +42,6 @@ class VideoInListState with _$VideoInListState {
       'cannot provide both video and offline video')
   const factory VideoInListState(
       {@Default(0) double progress,
-      BaseVideo? video,
+      Video? video,
       DownloadedVideo? offlineVideo}) = _VideoInListState;
 }

@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:clipious/videos/models/video.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -10,7 +11,6 @@ import 'package:clipious/search/states/search_filter.dart';
 import '../../channels/models/channel.dart';
 import '../../playlists/models/playlist.dart';
 import '../../settings/states/settings.dart';
-import '../../videos/models/video_in_list.dart';
 
 part 'search.freezed.dart';
 
@@ -118,7 +118,7 @@ class SearchState with _$SearchState {
   static SearchState init(
       {TextEditingController? queryController,
       int? selectedIndex,
-      List<VideoInList>? videos,
+      List<Video>? videos,
       List<Channel>? channels,
       List<Playlist>? playlists,
       bool? useHistory,

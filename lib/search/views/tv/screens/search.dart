@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:clipious/videos/models/video.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -17,7 +18,6 @@ import 'package:clipious/utils/views/tv/components/tv_text_field.dart';
 import '../../../../channels/models/channel.dart';
 import '../../../../globals.dart';
 import '../../../../settings/states/settings.dart';
-import '../../../../videos/models/video_in_list.dart';
 import '../../../states/search.dart';
 import '../../../states/tv_search.dart';
 import '../../screens/search.dart';
@@ -172,7 +172,7 @@ class TvSearchScreen extends StatelessWidget {
                                                           TvHorizontalVideoList(
                                                               paginatedVideoList:
                                                                   PageBasedPaginatedList<
-                                                                      VideoInList>(
+                                                                      Video>(
                                                         getItemsFunc: (page,
                                                                 maxResults) =>
                                                             service
