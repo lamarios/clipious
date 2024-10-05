@@ -647,11 +647,11 @@
   "@serverIsNotReachable": {
     "description": "Title for dialog when adding a server that is not reachable"
   },
-  "playNextAddedToQueue": "Il video verrà riprodotto come successivo",
+  "playNextAddedToQueue": "Il video verrà riprodotto successivamente",
   "@playNextAddedToQueue": {
     "description": "Pop up message to confirm that the video has been properly set to play next"
   },
-  "sponsorBlockCategoryUnpaidSelfPromoDescription": "Simile agli \"sponsor\", ma per auto promozioni non pagate. Include sezioni sul merchandising, donazioni o informazioni sulla collaborazione fatta. ",
+  "sponsorBlockCategoryUnpaidSelfPromoDescription": "Similmente agli \"sponsor\", eccetto che per per le auto promozioni o quelle non pagate. Questo include le sezioni sul merchandising, le donazioni, o le informazioni sui collaboratori ",
   "@sponsorBlockCategoryUnpaidSelfPromoDescription": {
     "description": "Sponsor block 'Unpaid/Self promotion' Category description"
   },
