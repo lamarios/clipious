@@ -1402,5 +1402,11 @@
   "sleepTimer": "Sömntimer",
   "@sleepTimer": {},
   "stopTheVideoExplanation": "Om aktiverad, stängs videon, annars pausar bara videon.",
-  "@stopTheVideoExplanation": {}
+  "@stopTheVideoExplanation": {},
+  "premieresIn": "Premiär om {formattedDuration}",
+  "@premieresIn": {},
+  "screenControls": "Skärmkontroller",
+  "@screenControls": {},
+  "screenControlsExplanation": "När du tittar på en video i helskärm, dra vertikalt från vänster eller höger för att justera ljusstyrkan respektive volymen",
+  "@screenControlsExplanation": {}
 }
