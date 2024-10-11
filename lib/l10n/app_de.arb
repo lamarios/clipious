@@ -80,7 +80,7 @@
   "@shareInvidiousLink": {
     "description": "asking user to share invidious link"
   },
-  "ok": "Ok",
+  "ok": "Okay",
   "@ok": {
     "description": "Ok"
   },
