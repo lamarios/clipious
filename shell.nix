@@ -53,7 +53,11 @@ pkgs.mkShell {
   +''
   echo -e "\nAll done 🎉 \nAvailable aliases:"
   ''+
-          pkgs.lib.concatStrings (map (x: ''echo "${x.name}: ${x.description}";'') aliases);
+          pkgs.lib.concatStrings (map (x: ''echo "${x.name}: ${x.description}";'') aliases)
+
++''
+flutter config --jdk-dir ${pkgs.corretto17}/lib/corretto
+'';
 
 
 

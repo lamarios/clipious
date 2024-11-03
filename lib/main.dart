@@ -15,7 +15,7 @@ import 'package:clipious/home/models/db/home_layout.dart';
 import 'package:clipious/http_overrides.dart';
 import 'package:clipious/media_handler.dart';
 import 'package:clipious/notifications/notifications.dart';
-import 'package:clipious/player/states/player.dart';
+import 'package:clipious/player/states/player.dart' as clipious;
 import 'package:clipious/router.dart';
 import 'package:clipious/settings/models/db/settings.dart';
 import 'package:clipious/settings/states/settings.dart';
@@ -23,6 +23,7 @@ import 'package:clipious/utils.dart';
 import 'package:clipious/utils/sembast_sqflite_database.dart';
 import 'package:clipious/workmanager.dart';
 import 'package:logging/logging.dart';
+import 'package:media_kit/media_kit.dart';
 
 import 'settings/models/db/app_logs.dart';
 
@@ -55,6 +56,7 @@ Future<void> main() async {
   HttpOverrides.global = MyHttpOverrides();
 
   WidgetsFlutterBinding.ensureInitialized();
+  MediaKit.ensureInitialized();
   // FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   db = await SembastSqfDb.create();
   await fileDb.syncWithDb();
@@ -94,12 +96,12 @@ Future<void> main() async {
         },
       ),
       BlocProvider(
-        create: (context) =>
-            PlayerCubit(PlayerState.init(null), context.read<SettingsCubit>()),
+        create: (context) => clipious.PlayerCubit(
+            clipious.PlayerState.init(null), context.read<SettingsCubit>()),
       ),
       BlocProvider(
         create: (context) => DownloadManagerCubit(
-            const DownloadManagerState(), context.read<PlayerCubit>()),
+            const DownloadManagerState(), context.read<clipious.PlayerCubit>()),
       )
     ], child: const MyApp()),
   ));

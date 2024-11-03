@@ -23,7 +23,7 @@ part 'video_player.freezed.dart';
 
 final log = Logger('VideoPlayer');
 
-final _googleCdnRegex = RegExp(r'https://(.+)googlevideo.com/');
+final googleCdnRegex = RegExp(r'https://(.+)googlevideo.com/');
 
 class VideoPlayerCubit extends MediaPlayerCubit<VideoPlayerState> {
   BetterPlayerController? videoController;
@@ -286,7 +286,7 @@ class VideoPlayerCubit extends MediaPlayerCubit<VideoPlayerState> {
         // somehow invidious is sending google url even when using local proxy when not using dash
         if (!isUsingDash() && useProxy) {
           // we replace google's cdn by invidious server url.
-          videoUrl = videoUrl.replaceFirst(_googleCdnRegex, '${(server).url}/');
+          videoUrl = videoUrl.replaceFirst(googleCdnRegex, '${(server).url}/');
         }
 
         log.info(

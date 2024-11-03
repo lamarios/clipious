@@ -17,6 +17,7 @@ import 'package:clipious/videos/views/components/add_to_playlist_button.dart';
 import '../../../utils.dart';
 import '../../../videos/models/video.dart';
 import '../../../videos/views/components/video_share_button.dart';
+import 'media_kit_player.dart';
 
 const double tabletMiniPlayerFraction = 0.25;
 
@@ -85,7 +86,7 @@ class Player extends StatelessWidget {
                                 : null,
                             miniPlayer: false,
                           )
-                        : VideoPlayer(
+                        : MediaKitPlayer(
                             key: const ValueKey('player'),
                             video:
                                 !state.isAudio ? state.currentlyPlaying : null,

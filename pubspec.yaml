@@ -46,6 +46,9 @@ dependencies:
   #      url: https://github.com/lamarios/locale_names.git
   #      ref: master
   logging: 1.2.0
+  media_kit: ^1.1.11 # Primary package.
+  media_kit_video: ^1.2.5 # For video rendering.
+  media_kit_libs_video: ^1.0.5 # Native video dependencies.
   package_info_plus: 8.0.2
   path: any
   path_provider: 2.1.4
@@ -88,8 +91,8 @@ dev_dependencies:
     sdk: flutter
   flutter_test: 
     sdk: flutter
-#dependency_overrides:
- # cupertino_icons: ^1.0.2
+dependency_overrides:
+  screen_brightness: 1.0.1
  # js: 0.7.1
  # meta: 1.14.0
  # web: 1.0.0
