@@ -1,3 +1,4 @@
+import 'package:clipious/utils/models/image_object.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -54,7 +55,8 @@ class VideoInnerView extends StatelessWidget {
                 child: VideoThumbnailView(
                   videoId: video.videoId,
                   thumbnailUrl: video.deArrowThumbnailUrl ??
-                      video.getBestThumbnail()?.url ??
+                      ImageObject.getBestThumbnail(video.videoThumbnails)
+                          ?.url ??
                       '',
                   child: phoneLandscape
                       ? const SizedBox.shrink()
