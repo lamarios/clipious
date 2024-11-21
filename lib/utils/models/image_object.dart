@@ -20,10 +20,17 @@ class ImageObject {
     if (images != null && images.isNotEmpty) {
       List<ImageObject> imgs = List.from(images);
       imgs.sort((a, b) {
-        return (b.width * b.height).compareTo(a.width * a.height);
+        final aHasDefault = a.quality?.contains("default") ?? false;
+        final bHasDefault = b.quality?.contains("default") ?? false;
+
+        if (bHasDefault == aHasDefault) {
+          return (b.width * b.height).compareTo(a.width * a.height);
+        } else {
+          return (aHasDefault ? 0 : 1).compareTo(bHasDefault ? 0 : 1);
+        }
       });
 
-      return imgs[0];
+      return imgs.firstOrNull;
     } else {
       return null;
     }

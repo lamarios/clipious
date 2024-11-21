@@ -102,15 +102,6 @@ class Video with _$Video implements ShareLinks, IdedVideo {
 
     return link;
   }
-
-  ImageObject? getBestThumbnail() {
-    if (videoThumbnails.isNotEmpty) {
-      return videoThumbnails
-          .firstWhere((element) => element.quality == 'maxres');
-    } else {
-      return null;
-    }
-  }
 }
 
 /*

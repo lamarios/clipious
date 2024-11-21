@@ -8,6 +8,7 @@ import 'package:clipious/videos/views/components/play_button.dart';
 import '../../../player/states/player.dart';
 import '../../../settings/states/settings.dart';
 import '../../../utils.dart';
+import '../../../utils/models/image_object.dart';
 import '../../states/video.dart';
 import 'add_to_queue_button.dart';
 import 'info.dart';
@@ -56,7 +57,8 @@ class VideoTabletInnerView extends StatelessWidget {
                 child: VideoThumbnailView(
                   videoId: video.videoId,
                   thumbnailUrl: video.deArrowThumbnailUrl ??
-                      video.getBestThumbnail()?.url ??
+                      ImageObject.getBestThumbnail(video.videoThumbnails)
+                          ?.url ??
                       '',
                   child: Stack(
                     alignment: Alignment.center,
