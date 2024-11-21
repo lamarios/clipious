@@ -100,7 +100,7 @@
   "@shareInvidiousLink": {
     "description": "asking user to share invidious link"
   },
-  "ok": "OK",
+  "ok": "D'accord",
   "@ok": {
     "description": "Ok"
   },
@@ -443,11 +443,11 @@
   "@sponsorBlockCategoryMusicOffTopicDescription": {
     "description": "Only for use in music videos. This only should be used for sections of music videos that aren't already covered by another category."
   },
-  "appLogsDescription": "Obtenir les registres de ce qui se passe dans l''application, peut être utile pour signaler les problèmes",
+  "appLogsDescription": "Obtenir les registres de ce qui se passe dans l'application, peut être utile pour signaler les problèmes",
   "@appLogsDescription": {
     "description": "Description of the app log settings"
   },
-  "appLogs": "Journaux d''application",
+  "appLogs": "Journaux d'application",
   "@appLogs": {
     "description": "Title for settings that leads to application logs"
   },
@@ -459,7 +459,7 @@
   "@logsCopied": {
     "description": "Message to tell user that logs have been copied to the clipboard"
   },
-  "clearSearchHistory": "Effacer l''historique de recherche",
+  "clearSearchHistory": "Effacer l'historique de recherche",
   "@clearSearchHistory": {
     "description": "Settings label for clearing search history"
   },
@@ -825,7 +825,7 @@
   "@videoAddedToQueue": {
     "description": "Pop up message when a video was added at the end of the video queue"
   },
-  "shareLinkWithTimestamp": "Ajouter l''horodatage",
+  "shareLinkWithTimestamp": "Ajouter l'horodatage",
   "@shareLinkWithTimestamp": {
     "description": "asking user to share link along with timestamp"
   },
@@ -979,7 +979,7 @@
   "@searchUploadDateMonth": {
     "description": "Search for uploaded this month"
   },
-  "searchDurationShort": "Court (<4 minutes)",
+  "searchDurationShort": "Courtes (<4 minutes)",
   "@searchDurationShort": {
     "description": "Search for short videos only"
   },
@@ -1033,11 +1033,11 @@
   "@searchDurationAny": {
     "description": "Do not filter search result by duration"
   },
-  "searchDurationLong": "Long (>20 minutes)",
+  "searchDurationLong": "Longues (>20 minutes)",
   "@searchDurationLong": {
     "description": "Search for long videos only"
   },
-  "searchDurationMedium": "Moyenne (4-20 minutes)",
+  "searchDurationMedium": "Moyennes (4-20 minutes)",
   "@searchDurationMedium": {
     "description": "Search for medium videos only"
   },
@@ -1390,5 +1390,21 @@
   "fileCopiedToDownloadFolder": "Fichier a bien été copier vers le dossier de téléchargement",
   "@fileCopiedToDownloadFolder": {},
   "videoDeleted": "La vidéo a été supprimer",
-  "@videoDeleted": {}
+  "@videoDeleted": {},
+  "sleepTimer": "Minuteur",
+  "@sleepTimer": {},
+  "stopTheVideo": "Arrêter la vidéo",
+  "@stopTheVideo": {},
+  "stopTheVideoExplanation": "Si ceci est activée, la vidéo sera fermée, si ceci est désactivée, la vidéo sera simplement interrompue",
+  "@stopTheVideoExplanation": {},
+  "setTimer": "Définir un minuteur",
+  "@setTimer": {},
+  "cancelSleepTimer": "Annuler le minuteur",
+  "@cancelSleepTimer": {},
+  "premieresIn": "Première dans {formattedDuration}",
+  "@premieresIn": {},
+  "screenControls": "Contrôles de l'écran",
+  "@screenControls": {},
+  "screenControlsExplanation": "En regardant une vidéo en plein écran, glisser verticalement de la gauche ou de la droite ajustera la luminosité ou le volume respectivement",
+  "@screenControlsExplanation": {}
 }

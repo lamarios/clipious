@@ -1394,5 +1394,11 @@
   "sleepTimer": "スリープタイマー",
   "@sleepTimer": {},
   "setTimer": "タイマーを設定",
-  "@setTimer": {}
+  "@setTimer": {},
+  "screenControls": "画面から制御",
+  "@screenControls": {},
+  "premieresIn": "{formattedDuration} 公開",
+  "@premieresIn": {},
+  "screenControlsExplanation": "全画面で動画を視聴時に、左や右で縦方向にドラッグすると、明るさや音量を調整します",
+  "@screenControlsExplanation": {}
 }

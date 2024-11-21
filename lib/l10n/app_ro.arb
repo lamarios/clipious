@@ -902,5 +902,21 @@
   "searchUploadDateToday": "Astăzi",
   "@searchUploadDateToday": {
     "description": "Search for uploaded today"
+  },
+  "itemlistErrorGeneric": "Nu s-a putut prelua datele",
+  "@itemlistErrorGeneric": {
+    "description": "Error showing when the data can't be fetch"
+  },
+  "malformedStatsEndpointDescription": "Serverul stats endpoint nu a răspuns un payload așteptat, cheia \"software.name” ar trebui să fie egală cu \"invidious”.\nRăspuns de la server:",
+  "@malformedStatsEndpointDescription": {
+    "description": "Description of the possible issue for an invalid stats endpoints"
+  },
+  "itemListErrorInvalidScope": "Nu ai permisiunea de a vedea, dacă te-ai logat folosind metoda token încearcă să te deconectezi și să intri din nou",
+  "@itemListErrorInvalidScope": {
+    "description": "Error when the user doesn't have the proper scope to its current token"
+  },
+  "malformedStatsEndpoint": "/api/v1/stats nu este așa cum se aștepta",
+  "@malformedStatsEndpoint": {
+    "description": "Title for dialog when adding a server that isn't validated as it should"
   }
 }

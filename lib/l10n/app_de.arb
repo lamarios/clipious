@@ -80,7 +80,7 @@
   "@shareInvidiousLink": {
     "description": "asking user to share invidious link"
   },
-  "ok": "Ok",
+  "ok": "Okay",
   "@ok": {
     "description": "Ok"
   },
@@ -1352,5 +1352,31 @@
   "both": "Beide",
   "@both": {},
   "refresh": "Aktualisieren",
-  "@refresh": {}
+  "@refresh": {},
+  "sleepTimer": "Einschlaf-Timer",
+  "@sleepTimer": {},
+  "stopTheVideo": "Video stoppen",
+  "@stopTheVideo": {},
+  "setTimer": "Timer festlegen",
+  "@setTimer": {},
+  "screenControls": "Bildschirmsteuerelemente",
+  "@screenControls": {},
+  "advancedConfiguration": "Erweiterte Konfiguration",
+  "@advancedConfiguration": {},
+  "addBasicAuth": "Basisauthentifizierung hinzufügen",
+  "@addBasicAuth": {},
+  "value": "Wert",
+  "@value": {},
+  "testAndAddServer": "Server testen und hinzufügen",
+  "@testAndAddServer": {},
+  "alsoTestServerConfig": "Außerdem die Serverkonfiguration testen, z. B. ob die Miniaturansichten richtig angezeigt werden",
+  "@alsoTestServerConfig": {},
+  "serverAlreadyExists": "Server bereits in den Einstellungen vorhanden",
+  "@serverAlreadyExists": {},
+  "openWikiLink": "Wiki für Hilfe öffnen",
+  "@openWikiLink": {},
+  "videoDeleted": "Video gelöscht",
+  "@videoDeleted": {},
+  "premieresIn": "Premiere in {formattedDuration}",
+  "@premieresIn": {}
 }
