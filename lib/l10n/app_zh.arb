@@ -793,7 +793,7 @@
   "@videoFilterTapToReveal": {
     "description": "Label to tell user to tap to show a filtered video"
   },
-  "videoFilterNoFilters": "点击下方+按钮添加新视频过滤规则",
+  "videoFilterNoFilters": "没有视频过滤器，点击下方“+”按钮添加新视频过滤规则。",
   "@videoFilterNoFilters": {
     "description": "Label when there are no video filters"
   },
