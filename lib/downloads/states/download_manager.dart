@@ -82,6 +82,12 @@ class DownloadManagerCubit extends Cubit<DownloadManagerState> {
       var progresses =
           Map<String, DownloadProgress>.from(state.downloadProgresses);
       var downloadProgress = progresses[video.videoId];
+
+      if (downloadProgress == null ||
+          downloadProgress.cancelToken.isCancelled) {
+        return;
+      }
+
       progresses.remove(video.videoId);
       video = video.copyWith(downloadComplete: true);
       await db.upsertDownload(video);
@@ -167,6 +173,10 @@ class DownloadManagerCubit extends Cubit<DownloadManagerState> {
             options: Options(headers: server.headersForUrl(thumbUrl)));
       }
 
+      if (cancelToken.isCancelled) {
+        return false;
+      }
+
       // download video
       var mediaPath = await downloadedVideo.downloadPath;
 
@@ -177,6 +187,9 @@ class DownloadManagerCubit extends Cubit<DownloadManagerState> {
       log.info(
           "Downloading video ${vid.title}, audioOnly ? $audioOnly, quality: $quality  to path: $tempDir");
       try {
+        if (cancelToken.isCancelled) {
+          return false;
+        }
         await dio
             .download(audioUrl, audioPath,
                 onReceiveProgress: (count, total) => onProgress(
@@ -263,14 +276,14 @@ class DownloadManagerCubit extends Cubit<DownloadManagerState> {
       String path = await vid.effectivePath;
       await File(path).delete();
     } catch (e) {
-      log.fine('File might not be available, that\'s ok');
+      log.fine('Video file might not be available, that\'s ok');
     }
 
     try {
       String path = await vid.thumbnailPath;
       await File(path).delete();
     } catch (e) {
-      log.fine('File might not be available, that\'s ok');
+      log.fine('Thumbnail might not be available, that\'s ok');
     }
 
     await db.deleteDownload(vid);
