@@ -1382,5 +1382,6 @@
   "cancelSleepTimer": "Cancel sleep timer",
   "premieresIn": "Premieres in {formattedDuration}",
   "screenControls": "Screen controls",
-  "screenControlsExplanation": "When watching a video in full screen, Vertically dragging from the left or the right will adjust the brightness or volume respectively"
+  "screenControlsExplanation": "When watching a video in full screen, Vertically dragging from the left or the right will adjust the brightness or volume respectively",
+  "retry": "Retry"
 }
