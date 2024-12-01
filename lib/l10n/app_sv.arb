@@ -1408,5 +1408,7 @@
   "screenControls": "Skärmkontroller",
   "@screenControls": {},
   "screenControlsExplanation": "När du tittar på en video i helskärm, dra vertikalt från vänster eller höger för att justera ljusstyrkan respektive volymen",
-  "@screenControlsExplanation": {}
+  "@screenControlsExplanation": {},
+  "retry": "Försök igen",
+  "@retry": {}
 }
