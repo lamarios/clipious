@@ -1400,5 +1400,7 @@
   "screenControls": "Controles en pantalla",
   "@screenControls": {},
   "screenControlsExplanation": "Cuando vea un vídeo a pantalla completa, arrastre verticalmente desde la izquierda o la derecha para ajustar el brillo o el volumen, respectivamente",
-  "@screenControlsExplanation": {}
+  "@screenControlsExplanation": {},
+  "retry": "Reintentar",
+  "@retry": {}
 }
