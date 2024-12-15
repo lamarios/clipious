@@ -1,16 +1,15 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:clipious/router.dart';
+import 'package:clipious/utils.dart';
 import 'package:clipious/videos/models/video.dart';
+import 'package:clipious/videos/states/video_in_list.dart';
 import 'package:duration/duration.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:clipious/router.dart';
-import 'package:clipious/utils.dart';
-import 'package:clipious/videos/states/video_in_list.dart';
 
 import '../../../../globals.dart';
-import '../../../../utils/models/image_object.dart';
 import '../../components/video_thumbnail.dart';
 
 class TvVideoItem extends StatelessWidget {
@@ -127,12 +126,7 @@ class TvVideoItem extends StatelessWidget {
                                       )
                                     : VideoThumbnailView(
                                         videoId: video.videoId,
-                                        thumbnailUrl:
-                                            video.deArrowThumbnailUrl ??
-                                                ImageObject.getBestThumbnail(
-                                                        video.videoThumbnails)
-                                                    ?.url ??
-                                                '',
+                                        thumbnails: video.thumbnails,
                                         child: Padding(
                                           padding: const EdgeInsets.all(8.0),
                                           child: Container(

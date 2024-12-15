@@ -1,18 +1,16 @@
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:clipious/utils/views/components/thumbnail.dart';
 import 'package:flutter/material.dart';
-import 'package:clipious/globals.dart';
-import 'package:clipious/settings/models/db/server.dart';
 
 class VideoThumbnailView extends StatelessWidget {
   final String videoId;
-  final String thumbnailUrl;
+  final List<String> thumbnails;
   final Widget? child;
   final BoxDecoration? decoration;
 
   const VideoThumbnailView(
       {super.key,
       required this.videoId,
-      required this.thumbnailUrl,
+      required this.thumbnails,
       this.child,
       this.decoration});
 
@@ -22,7 +20,7 @@ class VideoThumbnailView extends StatelessWidget {
     return AspectRatio(
       aspectRatio: 16 / 9,
       child: Thumbnail(
-          thumbnailUrl: thumbnailUrl,
+          thumbnails: thumbnails,
           decoration: decoration != null
               ? decoration!
               : BoxDecoration(
@@ -30,86 +28,5 @@ class VideoThumbnailView extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10)),
           child: child),
     );
-  }
-}
-
-class Thumbnail extends StatelessWidget {
-  final Widget? child;
-  final double? height;
-  final double? width;
-
-  final String thumbnailUrl;
-  final BoxDecoration decoration;
-
-  const Thumbnail(
-      {super.key,
-      this.child,
-      required this.thumbnailUrl,
-      required this.decoration,
-      this.width,
-      this.height});
-
-  @override
-  Widget build(BuildContext context) {
-    ColorScheme colors = Theme.of(context).colorScheme;
-    return FutureBuilder<Server?>(
-        future: db.getCurrentlySelectedServer(),
-        builder: (context, server) {
-          return !server.hasData || server.data == null
-              ? Container(
-                  decoration: decoration,
-                  width: width,
-                  height: height,
-                  child: child)
-              : CachedNetworkImage(
-                  cacheKey: thumbnailUrl,
-                  httpHeaders: server.data?.customHeaders,
-                  imageBuilder: (context, imageProvider) => AnimatedContainer(
-                    height: height,
-                    width: width,
-                    decoration: decoration.copyWith(
-                        image: DecorationImage(
-                            image: imageProvider, fit: BoxFit.cover)),
-                    // duration: animationDuration,
-                    duration: animationDuration ~/ 2,
-                    curve: Curves.easeInOutQuad,
-                    child: child,
-                  ),
-                  imageUrl: thumbnailUrl,
-                  placeholderFadeInDuration: animationDuration,
-                  fadeInDuration: animationDuration,
-                  fadeOutDuration: animationDuration,
-                  errorWidget: (context, url, error) => Container(
-                    height: height,
-                    width: width,
-                    alignment: Alignment.center,
-                    decoration:
-                        decoration.copyWith(color: colors.secondaryContainer),
-                    // duration: animationDuration,
-                    child: SizedBox(
-                        height: 20,
-                        width: 20,
-                        child: Icon(
-                          Icons.error_outline,
-                          color: colors.onSecondaryContainer.withOpacity(0.5),
-                        )),
-                  ),
-                  progressIndicatorBuilder: (context, url, progress) =>
-                      Container(
-                    height: height,
-                    width: width,
-                    alignment: Alignment.center,
-                    decoration:
-                        decoration.copyWith(color: colors.secondaryContainer),
-                    // duration: animationDuration,
-                    child: const SizedBox(
-                        height: 20,
-                        width: 20,
-                        child: CircularProgressIndicator(
-                          strokeWidth: 1,
-                        )),
-                  ),
-                );
-        });
   }
 }

@@ -16,7 +16,13 @@ class ImageObject {
 
   Map<String, dynamic> toJson() => _$ImageObjectToJson(this);
 
-  static ImageObject? getBestThumbnail(List<ImageObject>? images) {
+  static List<String> getThumbnailUrlsByPreferredOrder(
+      List<ImageObject>? images) {
+    return _getThumbnailsByPreferredORder(images).map((i) => i.url).toList();
+  }
+
+  static List<ImageObject> _getThumbnailsByPreferredORder(
+      List<ImageObject>? images) {
     if (images != null && images.isNotEmpty) {
       List<ImageObject> imgs = List.from(images);
       imgs.sort((a, b) {
@@ -29,7 +35,15 @@ class ImageObject {
           return (aHasDefault ? 0 : 1).compareTo(bHasDefault ? 0 : 1);
         }
       });
+      return imgs;
+    } else {
+      return [];
+    }
+  }
 
+  static ImageObject? getBestThumbnail(List<ImageObject>? images) {
+    final imgs = _getThumbnailsByPreferredORder(images);
+    if (imgs.isNotEmpty) {
       return imgs.firstOrNull;
     } else {
       return null;

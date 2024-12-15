@@ -94,12 +94,12 @@ class CompactVideo extends StatelessWidget {
                               : video != null
                                   ? VideoThumbnailView(
                                       videoId: videoId,
-                                      thumbnailUrl:
-                                          video?.deArrowThumbnailUrl ??
-                                              ImageObject.getWorstThumbnail(
-                                                      video?.videoThumbnails)
-                                                  ?.url ??
-                                              '')
+                                      thumbnails: video?.deArrowThumbnailUrl !=
+                                              null
+                                          ? [video!.deArrowThumbnailUrl!]
+                                          : ImageObject
+                                              .getThumbnailUrlsByPreferredOrder(
+                                                  video?.videoThumbnails))
                                   : offlineVideo != null
                                       ? OfflineVideoThumbnail(
                                           video: offlineVideo!,

@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:auto_route/auto_route.dart';
+import 'package:clipious/utils/views/components/thumbnail.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -98,12 +99,7 @@ class TvVideoScreen extends StatelessWidget {
                           : VideoThumbnailView(
                               videoId: videoState.video!.videoId,
                               decoration: const BoxDecoration(),
-                              thumbnailUrl:
-                                  videoState.video!.deArrowThumbnailUrl ??
-                                      ImageObject.getBestThumbnail(
-                                              videoState.video?.videoThumbnails)
-                                          ?.url ??
-                                      ''),
+                              thumbnails: videoState.video!.thumbnails),
                       AnimatedPositioned(
                         top: tvState.showImage ? 315 : 0,
                         left: 0,
@@ -247,11 +243,11 @@ class TvVideoScreen extends StatelessWidget {
                                                                     .min,
                                                             children: [
                                                               Thumbnail(
-                                                                thumbnailUrl: ImageObject.getBestThumbnail(videoState
+                                                                thumbnails: ImageObject
+                                                                    .getThumbnailUrlsByPreferredOrder(
+                                                                        videoState
                                                                             .video
-                                                                            ?.authorThumbnails)
-                                                                        ?.url ??
-                                                                    '',
+                                                                            ?.authorThumbnails),
                                                                 width: 40,
                                                                 height: 40,
                                                                 decoration: BoxDecoration(

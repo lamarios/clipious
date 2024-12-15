@@ -20,9 +20,9 @@ abstract class _$HomeLayoutCWProxy {
   /// HomeLayout(...).copyWith(id: 12, name: "My name")
   /// ````
   HomeLayout call({
-    List<HomeDataSource>? smallSources,
-    HomeDataSource? bigSource,
-    bool? showBigSource,
+    List<HomeDataSource> smallSources,
+    HomeDataSource bigSource,
+    bool showBigSource,
   });
 }
 
@@ -57,15 +57,15 @@ class _$HomeLayoutCWProxyImpl implements _$HomeLayoutCWProxy {
     Object? showBigSource = const $CopyWithPlaceholder(),
   }) {
     return HomeLayout._(
-      smallSources == const $CopyWithPlaceholder() || smallSources == null
+      smallSources == const $CopyWithPlaceholder()
           ? _value.smallSources
           // ignore: cast_nullable_to_non_nullable
           : smallSources as List<HomeDataSource>,
-      bigSource == const $CopyWithPlaceholder() || bigSource == null
+      bigSource == const $CopyWithPlaceholder()
           ? _value.bigSource
           // ignore: cast_nullable_to_non_nullable
           : bigSource as HomeDataSource,
-      showBigSource == const $CopyWithPlaceholder() || showBigSource == null
+      showBigSource == const $CopyWithPlaceholder()
           ? _value.showBigSource
           // ignore: cast_nullable_to_non_nullable
           : showBigSource as bool,

@@ -1,15 +1,13 @@
-import 'package:clipious/videos/models/video.dart';
-import 'package:flutter/material.dart';
 import 'package:clipious/globals.dart';
 import 'package:clipious/utils/views/components/placeholders.dart';
+import 'package:clipious/videos/models/video.dart';
+import 'package:flutter/material.dart';
 
-import '../../../utils/models/image_object.dart';
 import '../../../videos/views/components/video_thumbnail.dart';
 
 class PlaylistThumbnails extends StatelessWidget {
   final List<Video> videos;
   final List<Widget>? children;
-  final bool bestThumbnails;
   final double scale = 0.7;
   final int maxThumbs;
   final bool isPlaceHolder;
@@ -18,7 +16,6 @@ class PlaylistThumbnails extends StatelessWidget {
       {super.key,
       required this.videos,
       this.children,
-      this.bestThumbnails = false,
       this.maxThumbs = 4,
       this.isPlaceHolder = false});
 
@@ -50,16 +47,7 @@ class PlaylistThumbnails extends StatelessWidget {
                       : videosToUse.length > i
                           ? VideoThumbnailView(
                               videoId: videosToUse[i].videoId,
-                              thumbnailUrl: videosToUse[i]
-                                      .deArrowThumbnailUrl ??
-                                  (bestThumbnails
-                                      ? ImageObject.getBestThumbnail(
-                                              videosToUse[i].videoThumbnails)
-                                          ?.url
-                                      : ImageObject.getWorstThumbnail(
-                                              videosToUse[i].videoThumbnails)
-                                          ?.url) ??
-                                  '',
+                              thumbnails: videosToUse[i].thumbnails,
                             )
                           : const SizedBox.shrink(),
                   secondChild: Container(

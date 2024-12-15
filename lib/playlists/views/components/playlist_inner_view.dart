@@ -42,7 +42,6 @@ class PlaylistInnerView extends StatelessWidget {
                           height: 250,
                           child: PlaylistThumbnails(
                             videos: playlistState.playlist.videos,
-                            bestThumbnails: true,
                             children: playlistState.loading
                                 ? [
                                     Center(

@@ -2,10 +2,6 @@ import 'dart:ui';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:clipious/videos/models/video.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:clipious/app/views/tv/screens/tv_home.dart';
 import 'package:clipious/globals.dart';
 import 'package:clipious/playlists/states/playlist.dart';
@@ -14,10 +10,13 @@ import 'package:clipious/router.dart';
 import 'package:clipious/utils/views/components/placeholders.dart';
 import 'package:clipious/utils/views/tv/components/tv_button.dart';
 import 'package:clipious/utils/views/tv/components/tv_overscan.dart';
+import 'package:clipious/videos/models/video.dart';
 import 'package:clipious/videos/views/tv/components/video_item.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../player/states/player.dart';
-import '../../../../utils/models/image_object.dart';
 import '../../../../videos/views/components/video_thumbnail.dart';
 
 @RoutePage()
@@ -57,11 +56,7 @@ class TvPlaylistScreen extends PlaylistViewScreen {
                           return VideoThumbnailView(
                               videoId: video.videoId,
                               decoration: const BoxDecoration(),
-                              thumbnailUrl: video.deArrowThumbnailUrl ??
-                                  ImageObject.getBestThumbnail(
-                                          video.videoThumbnails)
-                                      ?.url ??
-                                  '');
+                              thumbnails: video.thumbnails);
                         },
                         options: CarouselOptions(
                           autoPlayCurve: Curves.easeInOutQuad,

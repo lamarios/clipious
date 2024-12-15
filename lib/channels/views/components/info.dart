@@ -1,15 +1,15 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:clipious/channels/models/channel.dart';
 import 'package:clipious/globals.dart';
 import 'package:clipious/utils.dart';
+import 'package:clipious/utils/views/components/thumbnail.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../subscription_management/view/components/subscribe_button.dart';
 import '../../../utils/models/image_object.dart';
 import '../../../videos/views/components/video_in_list.dart';
-import '../../../videos/views/components/video_thumbnail.dart';
 
 class ChannelInfo extends StatelessWidget {
   final Channel channel;
@@ -30,9 +30,8 @@ class ChannelInfo extends StatelessWidget {
           Thumbnail(
               width: 50,
               height: 50,
-              thumbnailUrl:
-                  ImageObject.getBestThumbnail(channel.authorThumbnails)?.url ??
-                      '',
+              thumbnails: ImageObject.getThumbnailUrlsByPreferredOrder(
+                  channel.authorThumbnails),
               decoration: BoxDecoration(
                 color: colors.secondaryContainer,
                 shape: BoxShape.circle,
@@ -104,7 +103,7 @@ class ChannelInfo extends StatelessWidget {
                 height: deviceType == DeviceType.phone ? 100 : 230,
                 child: Thumbnail(
                     width: double.infinity,
-                    thumbnailUrl: bannerUrl,
+                    thumbnails: [bannerUrl],
                     decoration: BoxDecoration(
                         color: colors.secondaryContainer,
                         borderRadius: BorderRadius.circular(10))),

@@ -70,7 +70,6 @@ class PlaylistInList extends StatelessWidget {
                           padding: const EdgeInsets.all(8.0),
                           child: PlaylistThumbnails(
                             videos: state.videos,
-                            bestThumbnails: isTv,
                           ),
                         )),
                     Text(
@@ -118,7 +117,6 @@ class PlaylistInList extends StatelessWidget {
                                         height: 140,
                                         child: PlaylistThumbnails(
                                           videos: state.videos,
-                                          bestThumbnails: isTv,
                                         )),
                                     Expanded(
                                         child: Text(
@@ -152,7 +150,6 @@ class PlaylistInList extends StatelessWidget {
                   children: [
                     PlaylistThumbnails(
                       videos: state.videos,
-                      bestThumbnails: isTv,
                     ),
                     Text(
                       playlist.title,
@@ -181,7 +178,6 @@ class PlaylistInList extends StatelessWidget {
                           padding: const EdgeInsets.all(8.0),
                           child: PlaylistThumbnails(
                             videos: state.videos,
-                            bestThumbnails: isTv,
                           ),
                         )),
                     Expanded(

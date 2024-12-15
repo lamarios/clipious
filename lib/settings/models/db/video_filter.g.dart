@@ -34,16 +34,16 @@ abstract class _$VideoFilterCWProxy {
   /// VideoFilter(...).copyWith(id: 12, name: "My name")
   /// ````
   VideoFilter call({
-    String? uuid,
+    String uuid,
     String? channelId,
     FilterOperation? operation,
     FilterType? type,
     String? value,
-    bool? filterAll,
-    bool? hideFromFeed,
-    List<int>? daysOfWeek,
-    String? startTime,
-    String? endTime,
+    bool filterAll,
+    bool hideFromFeed,
+    List<int> daysOfWeek,
+    String startTime,
+    String endTime,
   });
 }
 
@@ -106,7 +106,7 @@ class _$VideoFilterCWProxyImpl implements _$VideoFilterCWProxy {
     Object? endTime = const $CopyWithPlaceholder(),
   }) {
     return VideoFilter._(
-      uuid == const $CopyWithPlaceholder() || uuid == null
+      uuid == const $CopyWithPlaceholder()
           ? _value.uuid
           // ignore: cast_nullable_to_non_nullable
           : uuid as String,
@@ -126,23 +126,23 @@ class _$VideoFilterCWProxyImpl implements _$VideoFilterCWProxy {
           ? _value.value
           // ignore: cast_nullable_to_non_nullable
           : value as String?,
-      filterAll == const $CopyWithPlaceholder() || filterAll == null
+      filterAll == const $CopyWithPlaceholder()
           ? _value.filterAll
           // ignore: cast_nullable_to_non_nullable
           : filterAll as bool,
-      hideFromFeed == const $CopyWithPlaceholder() || hideFromFeed == null
+      hideFromFeed == const $CopyWithPlaceholder()
           ? _value.hideFromFeed
           // ignore: cast_nullable_to_non_nullable
           : hideFromFeed as bool,
-      daysOfWeek == const $CopyWithPlaceholder() || daysOfWeek == null
+      daysOfWeek == const $CopyWithPlaceholder()
           ? _value.daysOfWeek
           // ignore: cast_nullable_to_non_nullable
           : daysOfWeek as List<int>,
-      startTime == const $CopyWithPlaceholder() || startTime == null
+      startTime == const $CopyWithPlaceholder()
           ? _value.startTime
           // ignore: cast_nullable_to_non_nullable
           : startTime as String,
-      endTime == const $CopyWithPlaceholder() || endTime == null
+      endTime == const $CopyWithPlaceholder()
           ? _value.endTime
           // ignore: cast_nullable_to_non_nullable
           : endTime as String,

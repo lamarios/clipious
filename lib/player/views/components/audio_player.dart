@@ -1,9 +1,8 @@
-import 'package:clipious/utils/models/image_object.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:clipious/player/views/components/player_controls.dart';
 import 'package:clipious/settings/states/settings.dart';
 import 'package:clipious/videos/views/components/offline_video_thumbnail.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../downloads/models/downloaded_video.dart';
 import '../../../videos/models/video.dart';
@@ -49,11 +48,7 @@ class AudioPlayer extends StatelessWidget {
                     ? VideoThumbnailView(
                         decoration: const BoxDecoration(),
                         videoId: playerState.video!.videoId,
-                        thumbnailUrl: playerState.video?.deArrowThumbnailUrl ??
-                            ImageObject.getBestThumbnail(
-                                    playerState.video?.videoThumbnails ?? [])
-                                ?.url ??
-                            '',
+                        thumbnails: playerState.video?.thumbnails ?? [],
                       )
                     : playerState.offlineVideo != null
                         ? OfflineVideoThumbnail(

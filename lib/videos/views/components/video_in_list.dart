@@ -144,11 +144,10 @@ class VideoListItem extends StatelessWidget {
                     : video != null
                         ? VideoThumbnailView(
                             videoId: video!.videoId,
-                            thumbnailUrl: video!.deArrowThumbnailUrl ??
-                                ImageObject.getBestThumbnail(
-                                        video!.videoThumbnails)
-                                    ?.url ??
-                                '',
+                            thumbnails: video!.deArrowThumbnailUrl != null
+                                ? [video!.deArrowThumbnailUrl!]
+                                : ImageObject.getThumbnailUrlsByPreferredOrder(
+                                    video!.videoThumbnails),
                             decoration: BoxDecoration(
                                 borderRadius:
                                     BorderRadius.circular(small ? 5 : 10)),
