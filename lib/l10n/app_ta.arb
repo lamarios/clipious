@@ -27,7 +27,7 @@
   "@privatePlaylist": {
     "description": "Private playlist"
   },
-  "nSubscribers": "{எண்ணுங்கள், தேர்ந்தெடுக்கவும், சந்தாதாரர்கள் இல்லை} பிற {{No subscribers} சந்தாதாரர்கள்}}",
+  "nSubscribers": "{count, select, no{No subscribers} other{{count} subscribers}}",
   "@nSubscribers": {
     "description": "number of subscribers",
     "placeholders": {
@@ -120,7 +120,7 @@
   "@themeLight": {
     "description": "Light theme"
   },
-  "nVideos": "{எண்ணிக்கை, பன்மை, = 0 {No videos} = 1 {1 video} பிற {{count} வீடியோக்கள்}}",
+  "nVideos": "{count, plural, =0{No videos} =1{1 video} other{{count} videos}}",
   "@nVideos": {
     "description": "One or more videos",
     "placeholders": {
@@ -158,7 +158,7 @@
   "@videoFilters": {
     "description": "Title for video filter settings"
   },
-  "nFilters": "{எண்ணிக்கை, பன்மை, = 0 {No videos} = 1 {1 filter} பிற {{count} வடிப்பான்கள்}}",
+  "nFilters": "{count, plural, =0{No videos} =1{1 filter} other{{count} filters}}",
   "@nFilters": {
     "description": "One or more video filters",
     "placeholders": {
@@ -396,7 +396,7 @@
   "@askForDisableBatteryOptimizationTitle": {
     "description": "Title for the dialog asking the user to turn off disabling battery optimization when turning on notifications"
   },
-  "subscriptionNotificationContent": "உங்கள் சந்தா ஊட்டத்தில் {எண்ணிக்கை, பன்மை, = 0 {no new videos} = 1 {1 new video} பிற {{count} புதிய வீடியோக்கள்}",
+  "subscriptionNotificationContent": "There are  {count, plural, =0{no new videos} =1{1 new video} other{{count} new videos}} in your subscription feed",
   "@subscriptionNotificationContent": {
     "description": "Content for subscription notification",
     "placeholders": {
@@ -438,7 +438,7 @@
   "@deletePlaylistNotificationContent": {
     "description": "Title for dialog to confirm whether to delete playlist notifications"
   },
-  "channelNotificationTitle": "{சேனல் இருந்து இலிருந்து புதிய வீடியோக்கள்",
+  "channelNotificationTitle": "New videos from {channel}",
   "@channelNotificationTitle": {
     "description": "Title for the channel notifications when there are new videos",
     "placeholders": {
@@ -448,7 +448,7 @@
       }
     }
   },
-  "channelNotificationContent": "{எண்ணிக்கை, பன்மை, = 0 {no new videos} = 1 {1 new video} பிற {{count} புதிய வீடியோக்கள்} {channel}",
+  "channelNotificationContent": "There are {count, plural, =0{no new videos} =1{1 new video} other{{count} new videos}} from {channel}",
   "@channelNotificationContent": {
     "description": "Content for channel notification when there are new videos",
     "placeholders": {
@@ -472,7 +472,7 @@
       }
     }
   },
-  "playlistNotificationContent": "{எண்ணிக்கை, பன்மை, = 0 {no new videos} = 1 {1 new video} பிற {{count} புதிய வீடியோக்கள்} {playlist} பிளேலிச்ட்டில்",
+  "playlistNotificationContent": "There are {count, plural, =0{no new videos} =1{1 new video} other{{count} new videos}} in the {playlist} playlist",
   "@playlistNotificationContent": {
     "description": "Content for playlist notification when there are new videos",
     "placeholders": {
@@ -490,7 +490,7 @@
   "@foregroundServiceNotificationTitle": {
     "description": "Title for the foreground service running notification when the user wants to receive notifications"
   },
-  "foregroundServiceNotificationContent": "புதிய வீடியோக்களை {மணி நேரத்திற்கு ஒரு முறை சரிபார்க்கவும், ஒரு மணி நேரத்திற்கு 1 {{24 {per hour} மற்ற {ஒவ்வொரு {a day} மணிநேரம்}}",
+  "foregroundServiceNotificationContent": "Will check for new videos once {hours, select, 1{per hour} 24{a day} other{every {hours} hours}}",
   "@foregroundServiceNotificationContent": {
     "description": "Content for the foreground service running notification when the user wants to receive notifications",
     "hours": {
@@ -514,7 +514,7 @@
   "@notificationFrequencySettingsDescription": {
     "description": "Description for frequency settings"
   },
-  "notificationFrequencySliderLabel": "{மணிநேரம், தேர்ந்தெடுக்கவும், 24 {1d} பிற {{hours} h}}",
+  "notificationFrequencySliderLabel": "{hours, select,  24{1d} other{{hours}h}}",
   "@notificationFrequencySliderLabel": {
     "description": "Short form for a number of hours going up to 1 day",
     "hours": {
@@ -774,7 +774,7 @@
   "@createNewPlaylist": {
     "description": "Button label to create a new playlist when the user wants to add a video to a playlist"
   },
-  "nReplies": "{எண்ணிக்கை, பன்மை, = 0 {No replies} = 1 {1 reply} பிற {{count} பதில்கள்}}",
+  "nReplies": "{count, plural, =0{No replies} =1{1 reply} other{{count} replies}}",
   "@nReplies": {
     "description": "number of replies to a comment",
     "placeholders": {
