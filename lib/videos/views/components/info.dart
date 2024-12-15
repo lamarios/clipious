@@ -1,13 +1,13 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:clipious/player/states/player.dart';
 import 'package:clipious/router.dart';
 import 'package:clipious/utils/views/components/text_linkified.dart';
+import 'package:clipious/utils/views/components/thumbnail.dart';
 import 'package:clipious/videos/models/video.dart';
 import 'package:clipious/videos/views/components/video_metrics.dart';
-import 'package:clipious/videos/views/components/video_thumbnail.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../subscription_management/view/components/subscribe_button.dart';
 import '../../../utils/models/image_object.dart';
@@ -71,10 +71,8 @@ class VideoInfo extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.symmetric(vertical: 4.0),
                     child: Thumbnail(
-                      thumbnailUrl:
-                          ImageObject.getBestThumbnail(video.authorThumbnails)
-                                  ?.url ??
-                              '',
+                      thumbnails: ImageObject.getThumbnailUrlsByPreferredOrder(
+                          video.authorThumbnails),
                       width: 40,
                       height: 40,
                       decoration: BoxDecoration(

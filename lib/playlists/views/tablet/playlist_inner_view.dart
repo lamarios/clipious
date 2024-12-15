@@ -87,7 +87,6 @@ class TabletPlaylistInnerView extends StatelessWidget {
                             : 275,
                         child: PlaylistThumbnails(
                           videos: playlistState.playlist.videos,
-                          bestThumbnails: true,
                           children: playlistState.loading
                               ? [
                                   Center(

@@ -1,15 +1,15 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_swipe_action_cell/core/cell.dart';
 import 'package:clipious/router.dart';
 import 'package:clipious/settings/states/video_filter.dart';
 import 'package:clipious/settings/states/video_filter_channel.dart';
 import 'package:clipious/settings/views/components/video_filter_item.dart';
+import 'package:clipious/utils/views/components/thumbnail.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_swipe_action_cell/core/cell.dart';
 
 import '../../../utils/models/image_object.dart';
-import '../../../videos/views/components/video_thumbnail.dart';
 import '../../models/db/video_filter.dart';
 
 class VideoFilterChannel extends StatelessWidget {
@@ -68,10 +68,9 @@ class VideoFilterChannel extends StatelessWidget {
                           child: Padding(
                             padding: const EdgeInsets.only(right: 8.0),
                             child: Thumbnail(
-                              thumbnailUrl: ImageObject.getBestThumbnail(
-                                          state.channel?.authorThumbnails)
-                                      ?.url ??
-                                  '',
+                              thumbnails:
+                                  ImageObject.getThumbnailUrlsByPreferredOrder(
+                                      state.channel?.authorThumbnails),
                               width: 20,
                               height: 20,
                               decoration: BoxDecoration(

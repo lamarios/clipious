@@ -1,18 +1,18 @@
+import 'package:clipious/player/states/tv_player_controls.dart';
+import 'package:clipious/player/views/tv/components/player_settings.dart';
+import 'package:clipious/utils/views/components/thumbnail.dart';
+import 'package:clipious/utils/views/tv/components/tv_button.dart';
+import 'package:clipious/utils/views/tv/components/tv_horizontal_item_list.dart';
+import 'package:clipious/utils/views/tv/components/tv_overscan.dart';
 import 'package:clipious/videos/models/video.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:clipious/player/states/tv_player_controls.dart';
-import 'package:clipious/player/views/tv/components/player_settings.dart';
-import 'package:clipious/utils/views/tv/components/tv_button.dart';
-import 'package:clipious/utils/views/tv/components/tv_horizontal_item_list.dart';
-import 'package:clipious/utils/views/tv/components/tv_overscan.dart';
 
 import '../../../../globals.dart';
 import '../../../../utils.dart';
 import '../../../../utils/models/image_object.dart';
 import '../../../../utils/models/paginated_list.dart';
-import '../../../../videos/views/components/video_thumbnail.dart';
 import '../../../states/player.dart';
 
 class TvPlayerControls extends StatelessWidget {
@@ -107,12 +107,10 @@ class TvPlayerControls extends StatelessWidget {
                                         mainAxisSize: MainAxisSize.min,
                                         children: [
                                           Thumbnail(
-                                            thumbnailUrl:
-                                                ImageObject.getBestThumbnail(
-                                                            currentlyPlaying
-                                                                ?.authorThumbnails)
-                                                        ?.url ??
-                                                    '',
+                                            thumbnails: ImageObject
+                                                .getThumbnailUrlsByPreferredOrder(
+                                                    currentlyPlaying
+                                                        ?.authorThumbnails),
                                             width: 40,
                                             height: 40,
                                             decoration: BoxDecoration(

@@ -1,13 +1,13 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:clipious/videos/models/video.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:clipious/comments/states/single_comment.dart';
 import 'package:clipious/comments/views/components/comments.dart';
 import 'package:clipious/router.dart';
 import 'package:clipious/utils/views/components/text_linkified.dart';
-import 'package:clipious/videos/views/components/video_thumbnail.dart';
+import 'package:clipious/utils/views/components/thumbnail.dart';
+import 'package:clipious/videos/models/video.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../player/states/player.dart';
 import '../../../utils/models/image_object.dart';
@@ -49,10 +49,8 @@ class SingleCommentView extends StatelessWidget {
                     child: Thumbnail(
                       width: 20,
                       height: 20,
-                      thumbnailUrl: ImageObject.getBestThumbnail(
-                                  state.comment.authorThumbnails)
-                              ?.url ??
-                          '',
+                      thumbnails: ImageObject.getThumbnailUrlsByPreferredOrder(
+                          state.comment.authorThumbnails),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20)),
                     ),

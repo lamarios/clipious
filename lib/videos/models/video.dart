@@ -102,6 +102,12 @@ class Video with _$Video implements ShareLinks, IdedVideo {
 
     return link;
   }
+
+  List<String> get thumbnails {
+    return deArrowThumbnailUrl != null
+        ? [deArrowThumbnailUrl!]
+        : ImageObject.getThumbnailUrlsByPreferredOrder(videoThumbnails);
+  }
 }
 
 /*

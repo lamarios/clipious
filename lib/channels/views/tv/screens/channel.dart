@@ -2,10 +2,6 @@ import 'dart:ui';
 
 import 'package:auto_route/annotations.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:clipious/videos/models/video.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:clipious/app/views/tv/screens/tv_home.dart';
 import 'package:clipious/channels/states/channel.dart';
 import 'package:clipious/globals.dart';
@@ -13,14 +9,18 @@ import 'package:clipious/subscription_management/view/tv/tv_subscribe_button.dar
 import 'package:clipious/utils/models/image_object.dart';
 import 'package:clipious/utils/models/paginated_list.dart';
 import 'package:clipious/utils/views/components/placeholders.dart';
+import 'package:clipious/utils/views/components/thumbnail.dart';
 import 'package:clipious/utils/views/tv/components/tv_expandable_text.dart';
 import 'package:clipious/utils/views/tv/components/tv_horizontal_item_list.dart';
 import 'package:clipious/utils/views/tv/components/tv_overscan.dart';
+import 'package:clipious/videos/models/video.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../playlists/models/playlist.dart';
 import '../../../../playlists/views/components/playlist_in_list.dart';
 import '../../../../utils.dart';
-import '../../../../videos/views/components/video_thumbnail.dart';
 import '../../../states/tv_channel.dart';
 
 @RoutePage()
@@ -119,12 +119,11 @@ class TvChannelScreen extends StatelessWidget {
                                                           MainAxisSize.min,
                                                       children: [
                                                         Thumbnail(
-                                                          thumbnailUrl:
-                                                              ImageObject.getBestThumbnail(channel
-                                                                          .channel
-                                                                          ?.authorThumbnails)
-                                                                      ?.url ??
-                                                                  '',
+                                                          thumbnails: ImageObject
+                                                              .getThumbnailUrlsByPreferredOrder(
+                                                                  channel
+                                                                      .channel
+                                                                      ?.authorThumbnails),
                                                           width: 70,
                                                           height: 70,
                                                           decoration: BoxDecoration(

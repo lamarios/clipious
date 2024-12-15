@@ -54,10 +54,10 @@ class VideoInnerView extends StatelessWidget {
                     : null,
                 child: VideoThumbnailView(
                   videoId: video.videoId,
-                  thumbnailUrl: video.deArrowThumbnailUrl ??
-                      ImageObject.getBestThumbnail(video.videoThumbnails)
-                          ?.url ??
-                      '',
+                  thumbnails: video.deArrowThumbnailUrl != null
+                      ? [video.deArrowThumbnailUrl!]
+                      : ImageObject.getThumbnailUrlsByPreferredOrder(
+                          video.videoThumbnails),
                   child: phoneLandscape
                       ? const SizedBox.shrink()
                       : Stack(
