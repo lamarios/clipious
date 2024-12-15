@@ -1,0 +1,1414 @@
+{
+  "subscriptions": "சந்தாக்கள்",
+  "@subscriptions": {
+    "description": "User subscriptions"
+  },
+  "playlists": "பிளேலிச்ட்கள்",
+  "@playlists": {
+    "description": "User playlists"
+  },
+  "removeFromPlayList": "பிளேலிச்ட்டில் இருந்து அகற்று",
+  "@removeFromPlayList": {
+    "description": "Menu item description to show remove a video from a playlist"
+  },
+  "deletePlayListQ": "பிளேலிச்ட்டை நீக்கவா?",
+  "@deletePlayListQ": {
+    "description": "Ask user to delete a playlist"
+  },
+  "playlistVisibility": "விழிமை",
+  "@playlistVisibility": {
+    "description": "Dropdown label for playlist visibility"
+  },
+  "publicPlaylist": "பொது",
+  "@publicPlaylist": {
+    "description": "Public playlist"
+  },
+  "privatePlaylist": "தனிப்பட்ட",
+  "@privatePlaylist": {
+    "description": "Private playlist"
+  },
+  "nSubscribers": "{எண்ணுங்கள், தேர்ந்தெடுக்கவும், சந்தாதாரர்கள் இல்லை} பிற {{No subscribers} சந்தாதாரர்கள்}}",
+  "@nSubscribers": {
+    "description": "number of subscribers",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "share": "பங்கு",
+  "@share": {
+    "description": "asking user if to share"
+  },
+  "shareYoutubeLink": "YouTube இணைப்பைப் பகிரவும்",
+  "@shareYoutubeLink": {
+    "description": "asking user to share youtube link"
+  },
+  "shareInvidiousLink": "வன்கவர்வு இணைப்பைப் பகிரவும்",
+  "@shareInvidiousLink": {
+    "description": "asking user to share invidious link"
+  },
+  "redirectInvidiousLink": "விலக்கப்பட்ட வழிமாற்றுத் இணைப்பைப் பகிரவும்",
+  "@redirectInvidiousLink": {
+    "description": "asking user to share redirecting invidious link"
+  },
+  "ok": "சரி",
+  "@ok": {
+    "description": "Ok"
+  },
+  "noPlaylists": "பிளேலிச்ட்கள் இல்லை",
+  "@noPlaylists": {
+    "description": "when there are no playlists to display"
+  },
+  "channels": "சேனல்கள்",
+  "@channels": {
+    "description": "Channels label"
+  },
+  "couldntLoadVideo": "வீடியோவை ஏற்ற முடியவில்லை",
+  "@couldntLoadVideo": {
+    "description": "Message to display when a video can't be loaded"
+  },
+  "loadMore": "மேலும் ஏற்றவும்",
+  "@loadMore": {
+    "description": "CTA to load more"
+  },
+  "topSorting": "மேலே",
+  "@topSorting": {
+    "description": "Content sorting: top"
+  },
+  "newSorting": "புதிய",
+  "@newSorting": {
+    "description": "Content sorting: new"
+  },
+  "streamIsLive": "வாழ",
+  "@streamIsLive": {
+    "description": "Label when a video is a live stream"
+  },
+  "sponsorSkipped": "ஒப்புரவாளர் தவிர்த்தது",
+  "@sponsorSkipped": {
+    "description": "When a sponsor segment is skipped thanks to sponsor block"
+  },
+  "videoListed": "பொது",
+  "@videoListed": {
+    "description": "Status of a publicly available video"
+  },
+  "sponsorBlockCategoryOutro": "எண்ட்கார்டுகள்/வரவு",
+  "@sponsorBlockCategoryOutro": {
+    "description": "Outro block 'Outro' Category"
+  },
+  "pressDownToShowSettings": "அமைப்புகளைக் காட்ட கீழே அழுத்தவும்",
+  "@pressDownToShowSettings": {
+    "description": "Instruction on how to show video settings when playing a video on TV"
+  },
+  "playbackSpeed": "பிளேபேக் விரைவு",
+  "@playbackSpeed": {
+    "description": "Name of TV ui Playback speed"
+  },
+  "blackBackground": "கருப்பு பின்னணி",
+  "@blackBackground": {
+    "description": "Settings name for black background"
+  },
+  "search": "தேடல்",
+  "@search": {
+    "description": "search title"
+  },
+  "themeBrightness": "கருப்பொருள்",
+  "@themeBrightness": {
+    "description": "Ask the user to user dark / light / system theme"
+  },
+  "themeLight": "ஒளி",
+  "@themeLight": {
+    "description": "Light theme"
+  },
+  "nVideos": "{எண்ணிக்கை, பன்மை, = 0 {No videos} = 1 {1 video} பிற {{count} வீடியோக்கள்}}",
+  "@nVideos": {
+    "description": "One or more videos",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "returnYoutubeUrlValidation": "முகவரி http: // அல்லது https: // உடன் தொடங்க வேண்டும்",
+  "@returnYoutubeUrlValidation": {
+    "description": "error message for invalid custom url for return to youtube"
+  },
+  "rydCustomInstance": "தனிப்பயன் ரைட் நிகழ்வு முகவரி",
+  "@rydCustomInstance": {
+    "description": "title for setting to set a custom ryd instance"
+  },
+  "searchUploadDateWeek": "இந்த வாரம்",
+  "@searchUploadDateWeek": {
+    "description": "Search for uploaded this week"
+  },
+  "searchUploadDateMonth": "இந்த மாதம்",
+  "@searchUploadDateMonth": {
+    "description": "Search for uploaded this month"
+  },
+  "searchUploadDateYear": "இந்த ஆண்டு",
+  "@searchUploadDateYear": {
+    "description": "Search for uploaded this year"
+  },
+  "searchDuration": "காலம்",
+  "@searchDuration": {
+    "description": "Filter search result by duration"
+  },
+  "videoFilters": "வீடியோ வடிப்பான்கள்",
+  "@videoFilters": {
+    "description": "Title for video filter settings"
+  },
+  "nFilters": "{எண்ணிக்கை, பன்மை, = 0 {No videos} = 1 {1 filter} பிற {{count} வடிப்பான்கள்}}",
+  "@nFilters": {
+    "description": "One or more video filters",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "videoFiltersSettingTileDescriptions": "வீடியோக்களை வடிகட்ட விதிகளை வரையறுக்கவும்",
+  "@videoFiltersSettingTileDescriptions": {
+    "description": "Description for the main settings page"
+  },
+  "videoFilterType": "வகை",
+  "@videoFilterType": {
+    "description": "Label for filter type"
+  },
+  "videoFiltered": "வீடியோ பின்வரும் காரணத்திற்காக (கள்) வடிகட்டப்பட்டுள்ளது:",
+  "@videoFiltered": {
+    "description": "Label shown on video list when it is filtered out"
+  },
+  "videoFilterTapToReveal": "வெளிப்படுத்த தட்டவும்",
+  "@videoFilterTapToReveal": {
+    "description": "Label to tell user to tap to show a filtered video"
+  },
+  "videoFilterTypeVideoTitle": "வீடியோ தலைப்பு",
+  "@videoFilterTypeVideoTitle": {
+    "description": "Label for video filter video title"
+  },
+  "downloads": "பதிவிறக்கங்கள்",
+  "@downloads": {
+    "description": "Downloads"
+  },
+  "download": "பதிவிறக்கம்",
+  "@download": {
+    "description": "A single download or CTA for downloading a video"
+  },
+  "videoAlreadyDownloaded": "வீடியோ ஏற்கனவே பதிவிறக்கம் செய்யப்பட்டுள்ளது",
+  "@videoAlreadyDownloaded": {
+    "description": "Message when a user tries to download a video he already has"
+  },
+  "home": "வீடு",
+  "@home": {
+    "description": "Label for Home browsing tab"
+  },
+  "library": "நூலகம்",
+  "@library": {
+    "description": "Name for user library"
+  },
+  "customizeAppLayout": "பயன்பாட்டு பிரிவுகளைத் தனிப்பயனாக்குங்கள்",
+  "@customizeAppLayout": {
+    "description": "Settings label for the settings to allow the user to set up the app sections themselves"
+  },
+  "distractionFreeMode": "கவனச்சிதறல் இல்லாத பயன்முறை",
+  "@distractionFreeMode": {
+    "description": "title for distraction free mode settings"
+  },
+  "distractionFreeModeDescription": "வீடியோ கருத்துகள் மற்றும் பரிந்துரைகளை முடக்கு",
+  "@distractionFreeModeDescription": {
+    "description": "Description for distraction free mode"
+  },
+  "secondsShortForm": "நொடி",
+  "@secondsShortForm": {
+    "description": "Short form for the word seconds"
+  },
+  "videoFilterApplyDateToFilter": "கொடுக்கப்பட்ட நேரங்களில் வீடியோக்களை வடிகட்டவும்",
+  "@videoFilterApplyDateToFilter": {
+    "description": "Label for switch to allow user to customize video filter and set days of week and time to them"
+  },
+  "foregroundServiceUpdatingChannels": "சேனல்களைச் சரிபார்க்கிறது ...",
+  "@foregroundServiceUpdatingChannels": {
+    "description": "Foreground service notification text when checking for new channel videos"
+  },
+  "subtitlesBackground": "வசன வரிகள் பின்னணி",
+  "@subtitlesBackground": {
+    "description": "Title for settings to set black background  for subtitles"
+  },
+  "history": "வரலாறு",
+  "@history": {
+    "description": "User view history label"
+  },
+  "fullscreenOnLandscapeDescription": "சாதனம் இயற்கை பயன்முறையில் சுழற்றும்போது முழுத் திரைக்கு மாறவும்",
+  "@fullscreenOnLandscapeDescription": {
+    "description": "Setting to enable full screen on landscape orientation"
+  },
+  "enabled": "இயக்கப்பட்டது",
+  "@enabled": {
+    "description": "Text to show something is enabled"
+  },
+  "feedbackScreenshotError": "திரை சாட்டை இம்கூரில் பதிவேற்றும்போது பிழை",
+  "@feedbackScreenshotError": {
+    "description": "Title for dialog if something goes wrong while uploading feedback screenshot"
+  },
+  "videoDeleted": "வீடியோ நீக்கப்பட்டது",
+  "@videoDeleted": {},
+  "videoFailedDownloadRetry": "பதிவிறக்கம் தோல்வியுற்றது, மீண்டும் முயற்சிக்கவும்",
+  "@videoFailedDownloadRetry": {
+    "description": "Shown on download manager when a download fails and prompt the user to retry"
+  },
+  "videoDownloadAudioOnly": "ஆடியோ மட்டும்",
+  "@videoDownloadAudioOnly": {
+    "description": "Label for toggle to download audio only "
+  },
+  "manageSubscriptions": "சந்தாக்களை நிர்வகிக்கவும்",
+  "@manageSubscriptions": {
+    "description": "Title of manage subscriptions page"
+  },
+  "noSubscriptions": "சந்தாக்கள் இல்லை, வீடியோக்களை உலாவவும், நீங்கள் விரும்பும் எந்த சேனலுக்கும் குழுசேரவும்.",
+  "@noSubscriptions": {
+    "description": "Message when the user has no subs"
+  },
+  "youCanSubscribeAgainLater": "இந்த சேனலுக்கு பின்னர் மீண்டும் குழுசேரலாம்",
+  "@youCanSubscribeAgainLater": {
+    "description": "Text for the unscubscribe confirmation dialog"
+  },
+  "unSubscribeQuestion": "குழுவிலகவா?",
+  "@unSubscribeQuestion": {
+    "description": "Title for dialog if a user wants to unsubscribe in the subscribtion management screen"
+  },
+  "clearHistoryQuestion": "வரலாற்றை அழிக்கவா?",
+  "@clearHistoryQuestion": {},
+  "noHistory": "பார்க்கும் வரலாறு இல்லை, சில வீடியோக்களைப் பாருங்கள், அது இங்கே தோன்றும்",
+  "@noHistory": {
+    "description": "Message when the user visits the history tab but it's empty"
+  },
+  "clearHistoryQuestionExplanation": "இது நீங்கள் பயன்படுத்தும் மோசமான நிகழ்வில் உங்கள் கணக்கின் பார்வை வரலாற்றை அழிக்கும். இதை செயல்தவிர்க்க முடியாது.",
+  "@clearHistoryQuestionExplanation": {
+    "description": "Message for dialog before clearing full viewing history"
+  },
+  "homeLayoutEditor": "வீட்டு தளவமைப்பைத் திருத்தவும்",
+  "@homeLayoutEditor": {
+    "description": "Title of layout editor screen"
+  },
+  "layoutEditorExplanation": "உங்கள் முகப்புத் திரையில் என்ன காண்பிக்க வேண்டும் என்பதை நீங்கள் தீர்மானிக்கலாம், கிடைமட்ட ச்க்ரோலிங் மற்றும் ஒரு பெரிய மூலத்துடன் 2 சிறிய பார்வை வரை இருக்கலாம்.",
+  "@layoutEditorExplanation": {
+    "description": "text to explain the home layout editor"
+  },
+  "layoutEditorAddVideoSource": "வீடியோ மூலத்தைச் சேர்க்கவும்",
+  "@layoutEditorAddVideoSource": {
+    "description": "Label for button to allow user to add more video sources to the home screen"
+  },
+  "customizeAppLayoutExplanation": "முதன்மையான பயன்பாட்டு வழிசெலுத்தல் பட்டியில் நீங்கள் எந்த பிரிவுகளைத் தோன்ற விரும்புகிறீர்கள் என்பதைத் தேர்ந்தெடுக்கவும். பயன்பாடு தொடங்கும் போது எந்தத் திரை காட்டுகிறது என்பதைத் தேர்ந்தெடுக்க முகப்பு ஐகானைக் சொடுக்கு செய்க. பிரிவுகளைச் சுற்றி இழுப்பதன் மூலம் அவற்றை மறுவரிசைப்படுத்தலாம்.",
+  "@customizeAppLayoutExplanation": {
+    "description": ""
+  },
+  "navigationBarStyle": "வழிசெலுத்தல் பார் பாணி",
+  "@navigationBarStyle": {
+    "description": "Label for settings on customizing navigation bar style"
+  },
+  "navigationBarLabelAlwaysShowing": "சிட்டை எப்போதும் காண்பிக்கும்",
+  "@navigationBarLabelAlwaysShowing": {
+    "description": "Label always showing option for navigation bar"
+  },
+  "navigationBarLabelShowOnSelect": "தேர்ந்தெடுக்கப்பட்ட உருப்படியில் காட்டப்பட்டுள்ளது",
+  "@navigationBarLabelShowOnSelect": {
+    "description": "Label only showing when selected option for navigation bar"
+  },
+  "navigationBarLabelNeverShow": "லேபிளைக் காட்ட வேண்டாம்",
+  "@navigationBarLabelNeverShow": {
+    "description": "Never show label option for navigation bar"
+  },
+  "videoFilterDayOfWeek": "வடிப்பான்களைப் பயன்படுத்த நாட்களைத் தேர்ந்தெடுக்கவும்",
+  "@videoFilterDayOfWeek": {
+    "description": "Title for day selection for the filter"
+  },
+  "videoFilterDayOfWeekDescription": "வடிப்பான்கள் பொருந்தும் வாரத்தின் நாட்களையும் நேரத்தையும் நீங்கள் தேர்வு செய்யலாம், எடுத்துக்காட்டாக, விளையாட்டு நிகழ்வுகள் ச்பாய்லர்களைத் தவிர்க்கவும்.",
+  "@videoFilterDayOfWeekDescription": {
+    "description": ""
+  },
+  "videoFilterStartTime": "தொடக்க நேரம்",
+  "@videoFilterStartTime": {
+    "description": "Title for filter start time"
+  },
+  "videoFilterEndTime": "இறுதி நேரம்",
+  "@videoFilterEndTime": {
+    "description": "Title for filter end time"
+  },
+  "videoFilterAppliedOn": "{selectedDays} இல் பயன்படுத்தப்பட்டது",
+  "@videoFilterAppliedOn": {
+    "description": "Readable text on when the filter should apply",
+    "placeholders": {
+      "selectedDays": {
+        "type": "String",
+        "example": "Monday, Wednesday, Friday"
+      }
+    }
+  },
+  "from": "இருந்து",
+  "@from": {
+    "description": "From word (as in 'From xx To xx')"
+  },
+  "to": "பெறுநர்",
+  "@to": {
+    "description": "To word as in 'From xx To xx')"
+  },
+  "videoFilterTimeOfDayFromTo": "{from} முதல் {to}",
+  "@videoFilterTimeOfDayFromTo": {
+    "description": "Time of day range",
+    "placeholders": {
+      "from": {
+        "type": "String",
+        "example": "3:00 AM"
+      },
+      "to": {
+        "type": "String",
+        "example": "5:00 PM"
+      }
+    }
+  },
+  "notifications": "அறிவிப்புகள்",
+  "@notifications": {
+    "description": "Notification settings title"
+  },
+  "notificationsDescription": "உங்களுக்கு அறிவிக்கப்பட்டதை இயக்கவும் மதிப்பாய்வு செய்யவும்",
+  "@notificationsDescription": {
+    "description": "Setting description for notifications"
+  },
+  "enableNotificationDescriptions": "நீங்கள் கண்காணிக்கும் மாற்றங்களைச் சரிபார்க்கவும் அறிவிக்கவும் முன்புற சேவையை இயக்குகிறது",
+  "@enableNotificationDescriptions": {
+    "description": ""
+  },
+  "subscriptionNotification": "சந்தா அறிவிப்புகள்",
+  "@subscriptionNotification": {
+    "description": "Title for subscriptions notifications"
+  },
+  "subscriptionNotificationDescription": "உங்கள் தற்போதைய நிகழ்வில் நீங்கள் உள்நுழைந்திருக்கிறீர்களானால், உங்கள் சந்தா ஊட்டத்திலிருந்து புதிய வீடியோக்களைப் பற்றி அறிவிக்கவும்",
+  "@subscriptionNotificationDescription": {
+    "description": "Description for subscription notifications"
+  },
+  "subscriptionNotificationTitle": "உங்கள் சந்தாக்களிலிருந்து புதிய வீடியோக்கள்",
+  "@subscriptionNotificationTitle": {
+    "description": "Title for the notification showing that there are new videos from the subscription feed"
+  },
+  "askForDisableBatteryOptimizationTitle": "பேட்டரி தேர்வுமுறை முடக்குதல் தேவை",
+  "@askForDisableBatteryOptimizationTitle": {
+    "description": "Title for the dialog asking the user to turn off disabling battery optimization when turning on notifications"
+  },
+  "subscriptionNotificationContent": "உங்கள் சந்தா ஊட்டத்தில் {எண்ணிக்கை, பன்மை, = 0 {no new videos} = 1 {1 new video} பிற {{count} புதிய வீடியோக்கள்}",
+  "@subscriptionNotificationContent": {
+    "description": "Content for subscription notification",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "askForDisableBatteryOptimizationContent": "அறிவிப்பை அனுப்ப, பின்னணி சேவையை இயக்க கிளிப்பியச் தேவைகள். இது சீராக இயங்குவதற்கு, கிளிபியசுக்கு கட்டுப்பாடற்ற பேட்டரி பயன்பாடு வழங்கப்பட வேண்டும், சரி தட்டுவது பேட்டரி உகப்பாக்கம் அமைப்புகளைத் திறக்கும்.",
+  "@askForDisableBatteryOptimizationContent": {
+    "description": "Content for the dialog asking the user to turn off disabling battery optimization when turning on notifications"
+  },
+  "askToEnableBackgroundServiceTitle": "அறிவிப்புகள் அணைக்கப்பட்டன",
+  "@askToEnableBackgroundServiceTitle": {
+    "description": "If the users tries to turn on notifications for a channel but hasn't enable notifications in the app we need to turn it on for them"
+  },
+  "askToEnableBackgroundServiceContent": "அறிவிப்புகளைப் பெற, கிளிப்பிய அறிவிப்புகள் இயக்கப்பட வேண்டும், அதை இயக்க சரி என்பதை அழுத்தவும்.",
+  "@askToEnableBackgroundServiceContent": {
+    "description": "If the users tries to turn on notifications for a channel but hasn't enable notifications in the app we need to turn it on for them"
+  },
+  "otherNotifications": "பிற அறிவிப்புகள் ஆதாரங்கள் (பெல் ஐகான்கள்)",
+  "@otherNotifications": {
+    "description": "Title for settings section in the notification settings"
+  },
+  "deleteChannelNotificationTitle": "சேனல் அறிவிப்பை நீக்கவா?",
+  "@deleteChannelNotificationTitle": {
+    "description": "Title for dialog to confirm whether to delete channel notifications"
+  },
+  "deleteChannelNotificationContent": "இந்த சேனலில் இருந்து நீங்கள் இனி அறிவிப்புகளைப் பெற மாட்டீர்கள்.",
+  "@deleteChannelNotificationContent": {
+    "description": "Title for dialog to confirm whether to delete channel notifications"
+  },
+  "deletePlaylistNotificationTitle": "பிளேலிச்ட் அறிவிப்பை நீக்கவா?",
+  "@deletePlaylistNotificationTitle": {
+    "description": "Title for dialog to confirm whether to delete playlist notifications"
+  },
+  "deletePlaylistNotificationContent": "இந்த பிளேலிச்ட்டிலிருந்து இனி அறிவிப்புகளைப் பெற மாட்டீர்கள்.",
+  "@deletePlaylistNotificationContent": {
+    "description": "Title for dialog to confirm whether to delete playlist notifications"
+  },
+  "channelNotificationTitle": "{சேனல் இருந்து இலிருந்து புதிய வீடியோக்கள்",
+  "@channelNotificationTitle": {
+    "description": "Title for the channel notifications when there are new videos",
+    "placeholders": {
+      "channel": {
+        "type": "String",
+        "example": "MKBHD"
+      }
+    }
+  },
+  "channelNotificationContent": "{எண்ணிக்கை, பன்மை, = 0 {no new videos} = 1 {1 new video} பிற {{count} புதிய வீடியோக்கள்} {channel}",
+  "@channelNotificationContent": {
+    "description": "Content for channel notification when there are new videos",
+    "placeholders": {
+      "channel": {
+        "type": "String",
+        "example": "MKBHD"
+      },
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "playlistNotificationTitle": "{playlist} பிளேலிச்ட்டில் புதிய வீடியோக்கள்",
+  "@playlistNotificationTitle": {
+    "description": "Title for the playlist notifications when there are new videos",
+    "placeholders": {
+      "playlist": {
+        "type": "String",
+        "example": "Lo-Fi girl"
+      }
+    }
+  },
+  "playlistNotificationContent": "{எண்ணிக்கை, பன்மை, = 0 {no new videos} = 1 {1 new video} பிற {{count} புதிய வீடியோக்கள்} {playlist} பிளேலிச்ட்டில்",
+  "@playlistNotificationContent": {
+    "description": "Content for playlist notification when there are new videos",
+    "placeholders": {
+      "playlist": {
+        "type": "String",
+        "example": "Lo-Fi girl"
+      },
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "foregroundServiceNotificationTitle": "வீடியோ கண்காணிப்பு",
+  "@foregroundServiceNotificationTitle": {
+    "description": "Title for the foreground service running notification when the user wants to receive notifications"
+  },
+  "foregroundServiceNotificationContent": "புதிய வீடியோக்களை {மணி நேரத்திற்கு ஒரு முறை சரிபார்க்கவும், ஒரு மணி நேரத்திற்கு 1 {{24 {per hour} மற்ற {ஒவ்வொரு {a day} மணிநேரம்}}",
+  "@foregroundServiceNotificationContent": {
+    "description": "Content for the foreground service running notification when the user wants to receive notifications",
+    "hours": {
+      "type": "num",
+      "format": "compact"
+    }
+  },
+  "foregroundServiceUpdatingSubscriptions": "சந்தாக்களை சரிபார்க்கிறது ...",
+  "@foregroundServiceUpdatingSubscriptions": {
+    "description": "Foreground service notification text when checking for new subscription videos"
+  },
+  "foregroundServiceUpdatingPlaylist": "பிளேலிச்ட்களை சரிபார்க்கிறது ...",
+  "@foregroundServiceUpdatingPlaylist": {
+    "description": "Foreground service notification text when checking for new playlist videos"
+  },
+  "notificationFrequencySettingsTitle": "புதிய வீடியோ சோதனை அதிர்வெண்",
+  "@notificationFrequencySettingsTitle": {
+    "description": "Title for frequency settings"
+  },
+  "notificationFrequencySettingsDescription": "பயன்பாடு புதிய வீடியோக்களை எத்தனை முறை சரிபார்க்கிறது",
+  "@notificationFrequencySettingsDescription": {
+    "description": "Description for frequency settings"
+  },
+  "notificationFrequencySliderLabel": "{மணிநேரம், தேர்ந்தெடுக்கவும், 24 {1d} பிற {{hours} h}}",
+  "@notificationFrequencySliderLabel": {
+    "description": "Short form for a number of hours going up to 1 day",
+    "hours": {
+      "type": "num",
+      "format": "compact"
+    }
+  },
+  "subtitlesBackgroundDescription": "வசன வரிகள் அவற்றை மேலும் படிக்கக்கூடியதாக மாற்ற ஒரு கருப்பு பின்னணியைச் சேர்க்கிறது",
+  "@subtitlesBackgroundDescription": {
+    "description": "Description for settings to set black background  for subtitles"
+  },
+  "deArrowSettingDescription": "சொடுக்கு தூண்டில் தலைப்புகள் மற்றும் சிறுபடங்களை மாற்றவும்",
+  "@deArrowSettingDescription": {
+    "description": "Description for dearrow"
+  },
+  "deArrowReplaceThumbnails": "சிறு உருவங்களை மாற்றவும்",
+  "@deArrowReplaceThumbnails": {
+    "description": "Settings title for checkbox on whether the thumbnail should be replaced as well"
+  },
+  "copySettingsAsJsonDescription": "பயன்பாட்டில் ஒரு சிக்கலை எதிர்கொண்டு சிக்கலை எழுப்ப முடிவு செய்தால் பிழைத்திருத்தத்திற்கு உதவ அமைப்புகளை சாதொபொகு ஆக நகலெடுக்கவும்",
+  "@copySettingsAsJsonDescription": {
+    "description": ""
+  },
+  "seeking": "தேடுவது",
+  "@seeking": {
+    "description": "category for settings related to seeking in a video"
+  },
+  "skipStep": "முன்னோக்கி/பின்தங்கிய படி தவிர்க்கவும்",
+  "@skipStep": {
+    "description": "Title for the settings to set the skipping step"
+  },
+  "deArrowReplaceThumbnailsDescription": "தலைப்புகள் கூடுதலாக வீடியோ சிறு உருவங்களை மாற்றவும்",
+  "@deArrowReplaceThumbnailsDescription": {
+    "description": "Description for DeArrow setting switch"
+  },
+  "deArrowWarning": "ஒவ்வொரு வீடியோவிற்கும் கூடுதல் HTTP கோரிக்கைகள் தேவைப்படுவதால், அன்பை இயக்குவது பயன்பாட்டின் உலாவல் வேகத்தை கணிசமாகக் குறைக்கும்",
+  "@deArrowWarning": {
+    "description": "Warning message when the user enables DeArrow"
+  },
+  "copySettingsAsJson": "கிளிப்போர்டுக்கு சாதொபொகு ஆக அமைப்புகளை நகலெடுக்கவும்",
+  "@copySettingsAsJson": {
+    "description": "title for settings sections to allow users to copy their settings as json to make debugging easier"
+  },
+  "skipStepDescription": "முன்னோக்கி/பின்தங்கிய செயல்களைத் தவிர்க்க வினாடிகள்",
+  "@skipStepDescription": {
+    "description": "Title for the settings to set the skipping step"
+  },
+  "exponentialSkip": "அதிவேக முன்னோக்கி/பின்னோக்கி தவிர்க்கவும்",
+  "@exponentialSkip": {
+    "description": "Title for the setting to enable the exponential skipping"
+  },
+  "exponentialSkipDescription": "நீங்கள் எவ்வளவு அதிகமாக முன்னேறுகிறீர்களோ, அவ்வளவு பெரிய படி.",
+  "@exponentialSkipDescription": {
+    "description": "Title for the setting to enable the exponential skipping"
+  },
+  "submitFeedbackDescription": "ஒரு பிழை கிடைத்ததா அல்லது பரிந்துரை உள்ளதா? பயன்பாட்டின் திரை சாட்டை எடுக்க இந்த கருவியைப் பயன்படுத்தவும், சிறுகுறிப்பு செய்து கருத்துக்களை சமர்ப்பிக்கவும்",
+  "@submitFeedbackDescription": {
+    "description": "Setting tile descriptions for feedback submission"
+  },
+  "fullscreenOnLandscape": "நிலப்பரப்பில் முழுத் திரை",
+  "@fullscreenOnLandscape": {
+    "description": "Setting title to enable full screen on landscape orientation"
+  },
+  "submitFeedback": "கருத்துக்களை சமர்ப்பிக்கவும்",
+  "@submitFeedback": {
+    "description": "Title for settings to submit feed back through the app"
+  },
+  "feedbackDisclaimer": "பின்னூட்டங்களைச் சமர்ப்பிக்க உங்களுக்கு ஒரு அறிவிலிமையம் கணக்கு தேவைப்படும், மேலும் உங்கள் திரை காட்சி அநாமதேயமாக இம்கூருக்கு சமர்ப்பிக்கப்படும்.",
+  "@feedbackDisclaimer": {
+    "description": "Content of dialog shown before submitting feedback to make sure the user is ok whith where the data is going"
+  },
+  "channelSortByNewest": "புதியது",
+  "@channelSortByNewest": {
+    "description": "Sort channel videos from newest to oldest"
+  },
+  "channelSortByOldest": "பழமையானது",
+  "@channelSortByOldest": {
+    "description": "Sort channel videos from oldest to newest"
+  },
+  "channelSortByPopular": "மக்கள்",
+  "@channelSortByPopular": {
+    "description": "Sort channel videos by popularity"
+  },
+  "invidiousAccount": "வெகுவாகக் கணக்கு",
+  "@invidiousAccount": {
+    "description": "Text when the user choose where to subscribe to a channel"
+  },
+  "onDeviceSubscriptions": "சாதனத்தில்",
+  "@onDeviceSubscriptions": {
+    "description": "Text when the user chooses where to subscribe to a channel"
+  },
+  "both": "இரண்டும்",
+  "@both": {},
+  "refresh": "புதுப்பிப்பு",
+  "@refresh": {},
+  "addBasicAuth": "அடிப்படை அங்கீகாரத்தைச் சேர்க்கவும்",
+  "@addBasicAuth": {},
+  "addHeader": "தலைப்புச் சேர்க்கவும்",
+  "@addHeader": {},
+  "addBasicAuthExplanation": "உங்கள் சேவையகத்திற்கு அடிப்படை HTTP ஏற்பு தேவைப்பட்டால், கீழே உள்ள விவரங்களைச் சேர்க்கவும். இவை உங்கள் வன்கவர்வு கணக்கு விவரங்கள் அல்ல",
+  "@addBasicAuthExplanation": {},
+  "advancedConfiguration": "மேம்பட்ட உள்ளமைவு",
+  "@advancedConfiguration": {},
+  "customHeaders": "தனிப்பயன் தலைப்புகள்",
+  "@customHeaders": {},
+  "customHeadersExplanation": "விருப்பமான சேவையகத்திற்கு அனுப்ப தனிப்பயன் தலைப்புகளை அமைக்கவும்",
+  "@customHeadersExplanation": {},
+  "value": "மதிப்பு",
+  "@value": {},
+  "alsoTestServerConfig": "சிறுபடங்கள் சரியாகக் காண்பிக்கப்படும் என்றால், சேவையக உள்ளமைவையும் சோதிக்கவும்",
+  "@alsoTestServerConfig": {},
+  "serverAlreadyExists": "சேவையகம் ஏற்கனவே அமைப்புகளில் உள்ளது",
+  "@serverAlreadyExists": {},
+  "testAndAddServer": "சேவையகத்தை சோதித்து சேர்க்கவும்",
+  "@testAndAddServer": {},
+  "wrongThumbnailConfiguration": "சேவையகம் அடையக்கூடியது, ஆனால் சரியாக கட்டமைக்கப்படவில்லை, வீடியோ மற்றும் சேனல் சிறு உருவங்கள் சரியாக காட்டப்படாது. சேவையக சோதனை உள்ளமைவை முடக்கு நீங்கள் இதை சரியாக இருந்தால், உங்கள் சேவையகத்தை சரிசெய்யவும்",
+  "@wrongThumbnailConfiguration": {},
+  "openWikiLink": "உதவிக்கு விக்கியைத் திறக்கவும்",
+  "@openWikiLink": {},
+  "serverUnreachable": "சேவையகம் அணுக முடியாதது, அல்லது சரியான அக்ஃபோடிச் சேவையகம் அல்ல",
+  "@serverUnreachable": {},
+  "copyToDownloadFolder": "கோப்புறையைப் பதிவிறக்க நகலெடுக்கவும்",
+  "@copyToDownloadFolder": {},
+  "fileCopiedToDownloadFolder": "பதிவிறக்க கோப்புறைக்கு கோப்பு நகலெடுக்கப்பட்டது",
+  "@fileCopiedToDownloadFolder": {},
+  "sleepTimer": "தூக்க நேரங்குறிகருவி",
+  "@sleepTimer": {},
+  "stopTheVideo": "வீடியோவை நிறுத்துங்கள்",
+  "@stopTheVideo": {},
+  "stopTheVideoExplanation": "இயக்கப்பட்டால், வீடியோ மூடப்படும், முடக்கப்பட்டால் வீடியோ வெறுமனே இடைநிறுத்தப்படும்",
+  "@stopTheVideoExplanation": {},
+  "setTimer": "டைமரை அமைக்கவும்",
+  "@setTimer": {},
+  "cancelSleepTimer": "ச்லீப் டைமரை ரத்துசெய்",
+  "@cancelSleepTimer": {},
+  "premieresIn": "{formattedDuration} இல் பிரீமியர்ச்",
+  "@premieresIn": {},
+  "screenControls": "திரை கட்டுப்பாடுகள்",
+  "@screenControls": {},
+  "screenControlsExplanation": "முழுத் திரையில் ஒரு வீடியோவைப் பார்க்கும்போது, இடது அல்லது வலதுபுறத்திலிருந்து செங்குத்தாக இழுப்பது முறையே ஒளி அல்லது அளவை சரிசெய்யும்",
+  "@screenControlsExplanation": {},
+  "retry": "மீண்டும் முயற்சிக்கவும்",
+  "@retry": {},
+  "trending": "ட்ரெண்டிங்",
+  "@trending": {
+    "description": "Trending videos title"
+  },
+  "noVideoInPlayList": "பிளேலிச்ட்டில் வீடியோ இல்லை",
+  "@noVideoInPlayList": {
+    "description": "When no videos in the playlist"
+  },
+  "popular": "மக்கள்",
+  "@popular": {
+    "description": "Popular videos title"
+  },
+  "irreversibleAction": "இந்த நடவடிக்கை மாற்ற முடியாதது",
+  "@irreversibleAction": {
+    "description": "Tell the user that the action cannot be undone"
+  },
+  "addPlayList": "பிளேலிச்ட்டைச் சேர்க்கவும்",
+  "@addPlayList": {
+    "description": "Title for add playlist dialog"
+  },
+  "playListName": "பிளேலிச்ட் பெயர்",
+  "@playListName": {
+    "description": "Place holder for new playlist name text field"
+  },
+  "cancel": "ரத்துசெய்",
+  "@cancel": {
+    "description": "Cancel button label"
+  },
+  "add": "கூட்டு",
+  "@add": {
+    "description": "Add button abel"
+  },
+  "unlistedPlaylist": "பட்டியலிடப்படாதது",
+  "@unlistedPlaylist": {
+    "description": "Unlisted playlist"
+  },
+  "info": "தகவல்",
+  "@info": {
+    "description": "Info label"
+  },
+  "videos": "வீடியோக்கள்",
+  "@videos": {
+    "description": "Videos label"
+  },
+  "streams": "நீரோடைகள்",
+  "@streams": {
+    "description": "Streams label"
+  },
+  "latestVideos": "அண்மைக் கால வீடியோக்கள்",
+  "@latestVideos": {
+    "description": "Latest channel videos"
+  },
+  "subscribed": "சந்தா",
+  "@subscribed": {
+    "description": "When the user is subscribed to a channel"
+  },
+  "subscribe": "குழுசேர்",
+  "@subscribe": {
+    "description": "Label for user to subscribe to a channel"
+  },
+  "shareLinkWithTimestamp": "நேர முத்திரை சேர்க்கவும்",
+  "@shareLinkWithTimestamp": {
+    "description": "asking user to share link along with timestamp"
+  },
+  "noChannels": "சேனல்கள் இல்லை",
+  "@noChannels": {
+    "description": "when there are no channels to display"
+  },
+  "comments": "கருத்துகள்",
+  "@comments": {
+    "description": "Comments label"
+  },
+  "recommended": "பரிந்துரைக்கப்படுகிறது",
+  "@recommended": {
+    "description": "Recommended label"
+  },
+  "couldntFetchVideos": "வீடியோக்களைப் பெற முடியவில்லை. மீண்டும் முயற்சிக்க தட்டவும்.",
+  "@couldntFetchVideos": {
+    "description": "Can't load bunch of videos, asking  user to try again"
+  },
+  "wizardIntro": "பொது சேவையகத்தைத் தேர்ந்தெடுக்கவும் அல்லது உங்கள் சொந்தத்தைச் சேர்க்கவும். (பின்னர் அமைப்புகளில் மாற்றலாம்)",
+  "@wizardIntro": {
+    "description": "Welcome message on frst time use"
+  },
+  "startUsingClipious": "கிளிபியசைப் பயன்படுத்தத் தொடங்குங்கள்",
+  "@startUsingClipious": {
+    "description": "button label to start using the app"
+  },
+  "videoAddedToPlaylist": "பிளேலிச்ட்டில் வீடியோ சேர்க்கப்பட்டது",
+  "@videoAddedToPlaylist": {
+    "description": "Pop up message when a video was added to a playlist"
+  },
+  "errorAddingVideoToPlaylist": "பிளேலிச்ட்டில் வீடியோவைச் சேர்க்கும்போது பிழை",
+  "@errorAddingVideoToPlaylist": {
+    "description": "Error while adding video to playlist"
+  },
+  "videoAddedToQueue": "வரிசையில் வீடியோ சேர்க்கப்பட்டது",
+  "@videoAddedToQueue": {
+    "description": "Pop up message when a video was added at the end of the video queue"
+  },
+  "itemlistErrorGeneric": "தரவைப் பெற முடியவில்லை",
+  "@itemlistErrorGeneric": {
+    "description": "Error showing when the data can't be fetch"
+  },
+  "itemListErrorInvalidScope": "கிள்ளாக்கு முறையைப் பயன்படுத்துவதில் நீங்கள் உள்நுழைந்தால், வெளியேற முயற்சிக்கவும், மீண்டும் உள்நுழைந்தால், இதைப் பார்க்க உங்களுக்கு இசைவு இல்லை",
+  "@itemListErrorInvalidScope": {
+    "description": "Error when the user doesn't have the proper scope to its current token"
+  },
+  "selectPlaylist": "பிளேலிச்ட்டைத் தேர்ந்தெடுக்கவும்",
+  "@selectPlaylist": {
+    "description": "Title when users wants to add a video to a playlist"
+  },
+  "createNewPlaylist": "புதிய பிளேலிச்ட்டை உருவாக்கவும்",
+  "@createNewPlaylist": {
+    "description": "Button label to create a new playlist when the user wants to add a video to a playlist"
+  },
+  "nReplies": "{எண்ணிக்கை, பன்மை, = 0 {No replies} = 1 {1 reply} பிற {{count} பதில்கள்}}",
+  "@nReplies": {
+    "description": "number of replies to a comment",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "selectBrowsingCountry": "உலாவல் நாட்டைத் தேர்ந்தெடுக்கவும்",
+  "@selectBrowsingCountry": {
+    "description": "Select country for trending content"
+  },
+  "showOnStart": "பயன்பாடு தொடங்கும் போது என்ன காண்பிக்க வேண்டும் என்பதைத் தேர்ந்தெடுக்கவும்",
+  "@showOnStart": {
+    "description": "Title of dialog asking which screen the users prefers to see"
+  },
+  "settings": "அமைப்புகள்",
+  "@settings": {
+    "description": "Settings title"
+  },
+  "browsing": "உலாவுதல்",
+  "@browsing": {
+    "description": "video browsing preferences"
+  },
+  "country": "நாடு",
+  "@country": {
+    "description": "Country label"
+  },
+  "whenAppStartsShow": "பயன்பாடு தொடங்கும் போது, காட்டு…",
+  "@whenAppStartsShow": {
+    "description": "Setting title for selecting the screen to show on start"
+  },
+  "servers": "சேவையகங்கள்",
+  "@servers": {
+    "description": "Server management settings category"
+  },
+  "manageServers": "சேவையகங்களை நிர்வகிக்கவும்",
+  "@manageServers": {
+    "description": "Settings to manage servers"
+  },
+  "currentServer": "தற்போது {current} பயன்படுத்துகிறது",
+  "@currentServer": {
+    "description": "Which server the user is currently using",
+    "placeholders": {
+      "current": {
+        "type": "String"
+      }
+    }
+  },
+  "useSponsorBlock": "ஒப்புரவாளர் பிளாக் பயன்படுத்தவும்",
+  "@useSponsorBlock": {
+    "description": "label for sponsorblock checkbox"
+  },
+  "sponsorBlockDescription": "சமூகத்தால் சமர்ப்பிக்கப்பட்ட ஒப்புரவாளர் பிரிவுகளைத் தவிர்க்கவும்",
+  "@sponsorBlockDescription": {
+    "description": "Sponsorblock setting description"
+  },
+  "about": "பற்றி",
+  "@about": {
+    "description": "About"
+  },
+  "name": "பெயர்",
+  "@name": {
+    "description": "NAme label"
+  },
+  "package": "தொகுப்பு",
+  "@package": {
+    "description": "package label"
+  },
+  "version": "பதிப்பு",
+  "@version": {
+    "description": "version label"
+  },
+  "build": "உருவாக்கு",
+  "@build": {
+    "description": "build label"
+  },
+  "addServer": "சேவையகத்தைச் சேர்க்கவும்",
+  "@addServer": {
+    "description": "Add server label"
+  },
+  "useThisServer": "இந்த சேவையகத்தைப் பயன்படுத்தவும்",
+  "@useThisServer": {
+    "description": "Use this server label"
+  },
+  "logIn": "புகுபதிகை",
+  "@logIn": {
+    "description": "CTA to log in to server"
+  },
+  "delete": "நீக்கு",
+  "@delete": {
+    "description": "Delete label"
+  },
+  "invalidInvidiousServer": "தவறான அகாத சேவையகம்",
+  "@invalidInvidiousServer": {
+    "description": "Error when the user tries to add a server that is not a proper or reachable invidious server"
+  },
+  "yourServers": "உங்கள் சேவையகங்கள்",
+  "@yourServers": {
+    "description": "Your servers label"
+  },
+  "loggedIn": "உள்நுழைந்தது",
+  "@loggedIn": {
+    "description": "Label to tell the user that he is logged in to the server"
+  },
+  "notLoggedIn": "உள்நுழையவில்லை",
+  "@notLoggedIn": {
+    "description": "Label when the user is not logged in to the server"
+  },
+  "addServerHelpText": "உங்கள் சொந்த சேவையகங்களைச் சேர்க்க + பொத்தானைப் பயன்படுத்தவும் அல்லது பொது சேவையகத்தில் தட்டவும், சேர்க்கவும்.",
+  "@addServerHelpText": {
+    "description": "label for when the user hasn't chosen a server yet"
+  },
+  "publicServers": "பொது சேவையகங்கள்",
+  "@publicServers": {
+    "description": "Public servers label"
+  },
+  "loadingPublicServer": "பொது சேவையகங்களை ஏற்றுகிறது",
+  "@loadingPublicServer": {
+    "description": "Message telling users the app is loading the list of public servers"
+  },
+  "tapToAddServer": "உங்கள் பட்டியலில் சேவையகத்தைச் சேர்க்க தட்டவும்",
+  "@tapToAddServer": {
+    "description": "public server description"
+  },
+  "publicServersError": "பொது சேவையகங்களின் பட்டியலைப் பெற முடியவில்லை. மீண்டும் முயற்சிக்கவும்.",
+  "@publicServersError": {
+    "description": "Error message when trying to get public servers but it failed"
+  },
+  "appearance": "தோற்றம்",
+  "@appearance": {
+    "description": "Settings category title"
+  },
+  "useDynamicTheme": "மாறும் வண்ணங்கள்",
+  "@useDynamicTheme": {
+    "description": ""
+  },
+  "useDynamicThemeDescription": "நீங்கள் வண்ணங்களைப் பயன்படுத்தவும் (Android 12+ இல் மட்டுமே கிடைக்கும்)",
+  "@useDynamicThemeDescription": {
+    "description": ""
+  },
+  "useDash": "கோடு பயன்படுத்தவும்",
+  "@useDash": {
+    "description": "Label on video options if a user wants to switch to dash urls instead of the regular quality selection"
+  },
+  "useDashDescription": "டாச் அடாப்டிவ் ச்ட்ரீமிங் சில நேரங்களில் சிக்கலாக இருக்கும், யூடியூப் அதைத் தூண்டலாம்.",
+  "@useDashDescription": {
+    "description": "Description for dash in the settings screen"
+  },
+  "videoPlayer": "வீடியோ பிளேயர்",
+  "@videoPlayer": {
+    "description": "Title for video player related options"
+  },
+  "videoUnlisted": "பட்டியலிடப்படாதது",
+  "@videoUnlisted": {
+    "description": "Status of a video that is only accessible by link"
+  },
+  "videoIsFamilyFriendly": "குடும்ப நட்பு",
+  "@videoIsFamilyFriendly": {
+    "description": "Displayed only when a video is family friendly"
+  },
+  "tapToManage": "நிர்வகிக்க தட்டவும்",
+  "@tapToManage": {
+    "description": "Text shown below a server in the 'Your servers' list"
+  },
+  "authentication": "ஏற்பு",
+  "@authentication": {
+    "description": "Label for server settings related to authentications"
+  },
+  "tokenLogin": "டோக்கனுடன் உள்நுழைக",
+  "@tokenLogin": {
+    "description": "Textto login to a server using the recommended way"
+  },
+  "tokenLoginDescription": "உள்நுழைய பரிந்துரைக்கப்பட்ட வழி",
+  "@tokenLoginDescription": {
+    "description": "Recommended way to log in"
+  },
+  "cookieLogin": "குக்கீயுடன் உள்நுழைக",
+  "@cookieLogin": {
+    "description": "Text to login to a server using the cookie jar method"
+  },
+  "cookieLoginDescription": "கிள்ளாக்கு அங்கீகாரத்துடன் சிக்கல்களை எதிர்கொண்டால் இந்த முறையைப் பயன்படுத்தவும்",
+  "@cookieLoginDescription": {
+    "description": "Cookie log in description"
+  },
+  "logout": "விடுபதிகை",
+  "@logout": {
+    "description": "CTA to logout of a server"
+  },
+  "username": "பயனர்பெயர்",
+  "@username": {
+    "description": "Username label for login to a server"
+  },
+  "password": "கடவுச்சொல்",
+  "@password": {
+    "description": "Password label for login to a server"
+  },
+  "wrongUsernamePassword": "தவறான பயனர்பெயர் அல்லது கடவுச்சொல்",
+  "@wrongUsernamePassword": {
+    "description": "Error message when authentication fails"
+  },
+  "error": "பிழை",
+  "@error": {},
+  "malformedStatsEndpoint": "/API/V1/புள்ளிவிவரங்கள் எதிர்பார்த்தபடி இல்லை",
+  "@malformedStatsEndpoint": {
+    "description": "Title for dialog when adding a server that isn't validated as it should"
+  },
+  "malformedStatsEndpointDescription": "சேவையக புள்ளிவிவரங்கள் இறுதிப்புள்ளி எதிர்பார்க்கப்படும் பேலோடிற்கு பதிலளிக்கவில்லை, முக்கிய \"மென்பொருள். பெயர்\" \"வெகுவாக\" சமமாக இருக்க வேண்டும்.\n சேவையகத்திலிருந்து பதில்:",
+  "@malformedStatsEndpointDescription": {
+    "description": "Description of the possible issue for an invalid stats endpoints"
+  },
+  "serverIsNotReachable": "சேவையகம் அடைய முடியாது",
+  "@serverIsNotReachable": {
+    "description": "Title for dialog when adding a server that is not reachable"
+  },
+  "sponsorBlockCategorySponsor": "ஒப்புரவாளர்",
+  "@sponsorBlockCategorySponsor": {
+    "description": "Sponsor block 'Sponsor' Category"
+  },
+  "sponsorBlockCategorySponsorDescription": "கட்டண பதவி உயர்வு, கட்டண பரிந்துரைகள் மற்றும் நேரடி விளம்பரங்கள். அவர்கள் விரும்பும் காரணங்கள்/படைப்பாளிகள்/வலைத்தளங்கள்/தயாரிப்புகளுக்கு தன்வய விளம்பர அல்லது இலவச கூச்சல்களுக்கு அல்ல.",
+  "@sponsorBlockCategorySponsorDescription": {
+    "description": "Sponsor block 'Sponsor' Category description"
+  },
+  "sponsorBlockCategoryUnpaidSelfPromo": "செலுத்தப்படாத/சுய பதவி உயர்வு",
+  "@sponsorBlockCategoryUnpaidSelfPromo": {
+    "description": "Sponsor block 'Unpaid/Self promotion' Category"
+  },
+  "videoQueue": "வீடியோ வரிசை",
+  "@videoQueue": {
+    "description": "Label for button to display the video queue"
+  },
+  "addToQueueList": "வரிசையில் சேர்க்கவும்",
+  "@addToQueueList": {
+    "description": "Label on button to add a video to the queue list"
+  },
+  "addToPlaylist": "பிளேலிச்ட்டில் சேர்க்கவும்",
+  "@addToPlaylist": {
+    "description": "Label to add a video to a playlist"
+  },
+  "playNext": "அடுத்து விளையாடுங்கள்",
+  "@playNext": {
+    "description": "Label to play the video after the current one."
+  },
+  "playNextAddedToQueue": "வீடியோ அடுத்து விளையாடும்",
+  "@playNextAddedToQueue": {
+    "description": "Pop up message to confirm that the video has been properly set to play next"
+  },
+  "addRecommendedToQueue": "ஆட்டோ-பிளே அடுத்து பரிந்துரைக்கப்படுகிறது",
+  "@addRecommendedToQueue": {
+    "description": "Switch when playing a video to automatically add the recommended videos to the video queue"
+  },
+  "sponsorBlockSettingsQuickDescription": "எந்த வகையான பிரிவுகளைத் தவிர்க்க வேண்டும் என்பதைத் தேர்ந்தெடுக்கவும்",
+  "@sponsorBlockSettingsQuickDescription": {
+    "description": "Small description of what the sponsor block settings do"
+  },
+  "sponsorBlockCategoryUnpaidSelfPromoDescription": "செலுத்தப்படாத அல்லது தன்வய பதவி உயர்வு தவிர \"ஒப்புரவாளர்\" போன்றது. வணிகப் பொருட்கள், நன்கொடைகள் அல்லது அவர்கள் யார் ஒத்துழைத்தவர்கள் என்பது பற்றிய தகவல்கள் இதில் அடங்கும் ",
+  "@sponsorBlockCategoryUnpaidSelfPromoDescription": {
+    "description": "Sponsor block 'Unpaid/Self promotion' Category description"
+  },
+  "sponsorBlockCategoryInteraction": "தொடர்பு நினைவூட்டல் (குழுசேர்)",
+  "@sponsorBlockCategoryInteraction": {
+    "description": "Sponsor block 'Interaction' Category"
+  },
+  "sponsorBlockCategoryInteractionDescription": "உள்ளடக்கத்தின் நடுவில் அவற்றை விரும்ப, குழுசேர அல்லது பின்பற்ற ஒரு குறுகிய நினைவூட்டல் இருக்கும்போது. இது நீண்டதாகவோ அல்லது குறிப்பிட்ட ஒன்றைப் பற்றியோ இருந்தால், அதற்கு பதிலாக தன்வய விளம்பரத்தின் கீழ் இருக்க வேண்டும்.",
+  "@sponsorBlockCategoryInteractionDescription": {
+    "description": "Sponsor block 'Interaction' Category description"
+  },
+  "sponsorBlockCategoryIntro": "இடைவெளி/அறிமுக அனிமேசன்",
+  "@sponsorBlockCategoryIntro": {
+    "description": "Sponsorblock 'Intro' Category"
+  },
+  "sponsorBlockCategoryIntroDescription": "உண்மையான உள்ளடக்கம் இல்லாத இடைவெளி. இடைநிறுத்தம், நிலையான சட்டகம், மீண்டும் மீண்டும் அனிமேசன் இருக்கலாம். தகவல்களைக் கொண்ட மாற்றங்களுக்கு இது பயன்படுத்தப்படக்கூடாது.",
+  "@sponsorBlockCategoryIntroDescription": {
+    "description": "Sponsorblock 'Intro' Category description"
+  },
+  "sponsorBlockCategoryOutroDescription": "வரவு அல்லது YouTube EndCards தோன்றும் போது. தகவலுடன் முடிவுகளுக்கு அல்ல.",
+  "@sponsorBlockCategoryOutroDescription": {
+    "description": "Outro block 'Outro' Category description"
+  },
+  "sponsorBlockCategoryPreview": "முன்னோட்டம்/மறுபரிசீலனை",
+  "@sponsorBlockCategoryPreview": {
+    "description": "Sponsorblock 'Preview' Category"
+  },
+  "sponsorBlockCategoryPreviewDescription": "இந்த வீடியோ அல்லது பிற வீடியோக்களில் என்ன வரப்போகிறது என்பதைக் காட்டும் கிளிப்களின் தொகுப்பு ஒரு தொடரில் அனைத்து தகவல்களும் பின்னர் வீடியோவில் மீண்டும் மீண்டும் செய்யப்படுகின்றன.",
+  "@sponsorBlockCategoryPreviewDescription": {
+    "description": "Sponsorblock 'Preview' Category description"
+  },
+  "sponsorBlockCategoryFiller": "நிரப்பு தொடுகோடு/நகைச்சுவைகள்",
+  "@sponsorBlockCategoryFiller": {
+    "description": "Sponsorblock 'Filler' Category"
+  },
+  "sponsorBlockCategoryMusicOffTopic": "இசை: இசை அல்லாத பிரிவு",
+  "@sponsorBlockCategoryMusicOffTopic": {
+    "description": "Sponsorblock 'MusicOffTopic' Category"
+  },
+  "sponsorBlockCategoryFillerDescription": "வீடியோவின் முக்கிய உள்ளடக்கத்தைப் புரிந்து கொள்ளத் தேவையில்லாத நிரப்பு அல்லது நகைச்சுவைக்கு மட்டுமே சேர்க்கப்பட்ட காட்சிகள். சூழல் அல்லது பின்னணி விவரங்களை வழங்கும் பிரிவுகள் இதில் இருக்கக்கூடாது. இது மிகவும் ஆக்கிரோசமான வகையாகும், இது \"வேடிக்கைக்கான\" மனநிலையில் இல்லாதபோது.",
+  "@sponsorBlockCategoryFillerDescription": {
+    "description": "Sponsorblock 'Filler' Category description"
+  },
+  "useProxy": "பதிலாள் வீடியோக்கள்",
+  "@useProxy": {
+    "description": "label for settings switch to proxy videos from server"
+  },
+  "sponsorBlockCategoryMusicOffTopicDescription": "இசை வீடியோக்களில் மட்டுமே பயன்படுத்த. இது ஏற்கனவே மற்றொரு வகையால் மூடப்படாத இசை வீடியோக்களின் பிரிவுகளுக்கு மட்டுமே பயன்படுத்தப்பட வேண்டும்.",
+  "@sponsorBlockCategoryMusicOffTopicDescription": {
+    "description": "Only for use in music videos. This only should be used for sections of music videos that aren't already covered by another category."
+  },
+  "useProxyDescription": "சேவையகத்திலிருந்து வீடியோ ச்ட்ரீம்களை வளர்ப்பதன் மூலம், நீங்கள் பிராந்திய தொகுதிகள் அல்லது ஐ.எச்.பி தடுக்கும் யூடியூப்பைத் தவிர்ப்பது",
+  "@useProxyDescription": {
+    "description": "Description for the use proxy settings"
+  },
+  "quality": "தகுதி",
+  "@quality": {
+    "description": "Name of TV ui video settings"
+  },
+  "audio": "ஆடியோ",
+  "@audio": {
+    "description": "Name TV ui audio settings"
+  },
+  "subtitles": "வசன வரிகள்",
+  "@subtitles": {
+    "description": "Name of TV ui subtitles settings"
+  },
+  "blackBackgroundDescription": "OLED திரையில் இருண்ட கருப்பொருளுக்கு",
+  "@blackBackgroundDescription": {
+    "description": "Description for dark background setting"
+  },
+  "subtitleFontSize": "வசன வரிகள் எழுத்துரு அளவு",
+  "@subtitleFontSize": {
+    "description": "Settings label for the size of the subtitles"
+  },
+  "skipSslVerification": "SSL சான்றிதழ் சரிபார்ப்பைத் தவிர்க்கவும்",
+  "@skipSslVerification": {
+    "description": "Setting label to skip ssl certification verification"
+  },
+  "subtitleFontSizeDescription": "உங்கள் சாதனத்தில் மிகச் சிறியதாகவோ அல்லது மிகப் பெரியதாகவோ இருந்தால் வசன வரிகளின் அளவை மாற்றவும்",
+  "@subtitleFontSizeDescription": {
+    "description": "Settings description for subtitle size"
+  },
+  "skipSslVerificationDescription": "தன்வய கையொப்பமிடப்பட்ட எச்எச்எல் சான்றிதழைப் பயன்படுத்துவதற்கு அல்லது உங்கள் சேவையகத்துடன் எச்எச்எல் தொடர்பான சிக்கல்களைக் கொண்டிருக்கும்போது.",
+  "@skipSslVerificationDescription": {
+    "description": "Setting description for the skip ssl certification verification"
+  },
+  "themeDark": "இருண்ட",
+  "@themeDark": {
+    "description": "Dark theme"
+  },
+  "followSystem": "அமைப்பைப் பின்தொடரவும்",
+  "@followSystem": {
+    "description": "Follow system label"
+  },
+  "requiresRestart": "பயன்பாட்டு மறுதொடக்கம் தேவை",
+  "@requiresRestart": {
+    "description": "Requires app restart label"
+  },
+  "appLanguage": "பயன்பாட்டு மொழி",
+  "@appLanguage": {
+    "description": "Select app language"
+  },
+  "returnYoutubeDislikeDescription": "Returnyoutubedislike.com ஆல் வழங்கப்பட்ட பநிஇ ஐப் பயன்படுத்தி மதிப்பிடப்பட்ட வீடியோ விருப்பு வெறுப்புகளைக் காட்டு",
+  "@returnYoutubeDislikeDescription": {
+    "description": "ReturnYoutubeDislike setting description"
+  },
+  "rydCustomInstanceDescription": "வேறு ரைட் நிகழ்வைப் பயன்படுத்தவும், இயல்புநிலையைப் பயன்படுத்த காலியாக விடவும்",
+  "@rydCustomInstanceDescription": {
+    "description": "description for custom ryd instancr setting"
+  },
+  "autoplayVideoOnLoad": "தானாகவே வீடியோவை சுமையில் இயக்கவும்",
+  "@autoplayVideoOnLoad": {
+    "description": "Label for settings to enable autoplay when a video loads"
+  },
+  "autoplayVideoOnLoadDescription": "வீடியோ ஏற்றப்பட்ட பிறகு தானாகவே விளையாடத் தொடங்குங்கள்",
+  "@autoplayVideoOnLoadDescription": {
+    "description": "Description for the autoplay video on load setting"
+  },
+  "searchHistory": "தேடல் வரலாறு",
+  "@searchHistory": {
+    "description": "Settings label for search history"
+  },
+  "searchHistoryDescription": "வரலாற்று அமைப்புகளைத் தேடுங்கள்",
+  "@searchHistoryDescription": {
+    "description": "Description for search history settings"
+  },
+  "enableSearchHistory": "தேடல் வரலாற்றை இயக்கவும்",
+  "@enableSearchHistory": {
+    "description": "Settings label for enabling search history"
+  },
+  "searchHistoryLimit": "தேடல் வரலாற்று வரம்பு",
+  "@searchHistoryLimit": {
+    "description": "Settings label for search history limit"
+  },
+  "searchHistoryLimitDescription": "பரிந்துரைகளில் எத்தனை முந்தைய தேடல்கள் காண்பிக்கப்படும் என்பதை அமைக்கவும்",
+  "@searchHistoryLimitDescription": {
+    "description": "Settings label for search history limit description"
+  },
+  "shorts": "குறுக்குகள்",
+  "@shorts": {
+    "description": "Youtube shorts"
+  },
+  "searchUploadDate": "தேதி பதிவேற்றும் தேதி",
+  "@searchUploadDate": {
+    "description": "Filter search result by upload date"
+  },
+  "searchUploadDateAny": "எந்த தேதி",
+  "@searchUploadDateAny": {
+    "description": "Do not filter search result by upload date"
+  },
+  "searchUploadDateHour": "கடைசி மணி",
+  "@searchUploadDateHour": {
+    "description": "Search for uploaded in last hour"
+  },
+  "searchUploadDateToday": "இன்று",
+  "@searchUploadDateToday": {
+    "description": "Search for uploaded today"
+  },
+  "searchDurationAny": "எந்த காலமும்",
+  "@searchDurationAny": {
+    "description": "Do not filter search result by duration"
+  },
+  "searchDurationShort": "குறுகிய (<4 நிமிடங்கள்)",
+  "@searchDurationShort": {
+    "description": "Search for short videos only"
+  },
+  "searchDurationMedium": "நடுத்தர (4-20 நிமிடங்கள்)",
+  "@searchDurationMedium": {
+    "description": "Search for medium videos only"
+  },
+  "searchDurationLong": "நீண்ட (> 20 நிமிடங்கள்)",
+  "@searchDurationLong": {
+    "description": "Search for long videos only"
+  },
+  "searchSortBy": "வரிசைப்படுத்தவும்",
+  "@searchSortBy": {
+    "description": "Search sorting option"
+  },
+  "searchSortRelevance": "பொருத்தமானது",
+  "@searchSortRelevance": {
+    "description": "Sort search by relevance"
+  },
+  "searchSortRating": "செயல்வரம்பு",
+  "@searchSortRating": {
+    "description": "Sort search by rating"
+  },
+  "searchSortUploadDate": "பதிவேற்ற தேதி",
+  "@searchSortUploadDate": {
+    "description": "Sort search by upload date"
+  },
+  "searchSortViewCount": "எண்ணிக்கை காண்க",
+  "@searchSortViewCount": {
+    "description": "Sort search by view count"
+  },
+  "clearSearchHistory": "தேடல் வரலாற்றை அழிக்கவும்",
+  "@clearSearchHistory": {
+    "description": "Settings label for clearing search history"
+  },
+  "appLogs": "பயன்பாட்டு பதிவுகள்",
+  "@appLogs": {
+    "description": "Title for settings that leads to application logs"
+  },
+  "appLogsDescription": "பயன்பாட்டில் என்ன நடக்கிறது என்பதற்கான பதிவுகளைப் பெறுங்கள், சிக்கல்களைப் புகாரளிக்க பயனுள்ளதாக இருக்கும்",
+  "@appLogsDescription": {
+    "description": "Description of the app log settings"
+  },
+  "copyToClipBoard": "கிளிப்போர்டுக்கு நகலெடுக்கவும்",
+  "@copyToClipBoard": {
+    "description": "Text to copy something to clipboard"
+  },
+  "logsCopied": "கிளிப்போர்டுக்கு நகலெடுக்கப்பட்ட பதிவுகள்",
+  "@logsCopied": {
+    "description": "Message to tell user that logs have been copied to the clipboard"
+  },
+  "rememberSubtitleLanguage": "வசன வரிகள் மொழியை நினைவில் கொள்ளுங்கள்",
+  "@rememberSubtitleLanguage": {
+    "description": "Settings label for remembering subtitle language"
+  },
+  "videoFiltersExplanation": "கீழே வரையறுக்கப்பட்ட வடிப்பான்களின் அடிப்படையில் பயன்பாட்டில் உள்ள அனைத்து வீடியோ ஊட்டங்களிலிருந்தும் வீடியோக்களை மறைக்கவும் அல்லது தெளிவுபடுத்தவும். This allow you க்கு example பெறுநர் மறை sports spoilers or மறை குறுக்குகள் இருந்து a certain channel.",
+  "@videoFiltersExplanation": {
+    "description": "Description on how filter work"
+  },
+  "videoFilterAllChannels": "அனைத்து சேனல்களும்",
+  "@videoFilterAllChannels": {
+    "description": "Title for the sections that applies to all channels"
+  },
+  "addVideoFilter": "வடிகட்டியை உருவாக்கவும்",
+  "@addVideoFilter": {
+    "description": "Title when creating a new filter"
+  },
+  "editVideoFilter": "வடிகட்டியைத் திருத்து",
+  "@editVideoFilter": {
+    "description": "Title when editting a filter"
+  },
+  "videoFilterOperation": "செயல்பாடு",
+  "@videoFilterOperation": {
+    "description": "Label for filter operation"
+  },
+  "videoFilterValue": "மதிப்பு",
+  "@videoFilterValue": {
+    "description": "Label for filter value"
+  },
+  "save": "சேமி",
+  "@save": {
+    "description": "Text for save action"
+  },
+  "videoFilterEditDescription": "பட்டியல்களிலிருந்து வீடியோக்களை வடிகட்ட ஒரு விருப்ப சேனல், வடிகட்டி வகை, செயல்பாடு மற்றும் மதிப்பைத் தேர்ந்தெடுக்கவும். எடுத்துக்காட்டு, வகை: வீடியோ பெயர், செயல்பாடு: கொண்டுள்ளது, மதிப்பு: சோதனை அனைத்து வீடியோக்களையும் 'சோதனை' என்ற வார்த்தையுடன் அவற்றின் பெயரில் விலக்கும்.",
+  "@videoFilterEditDescription": {
+    "description": "Descriptive test for video filter set up"
+  },
+  "optional": "விரும்பினால்",
+  "@optional": {
+    "description": "Optional label"
+  },
+  "videoFilterHideLabel": "மறை",
+  "@videoFilterHideLabel": {
+    "description": "Label to hide videos"
+  },
+  "videoFilterFilterLabel": "தெளிவற்ற",
+  "@videoFilterFilterLabel": {
+    "description": "Label to filter videos"
+  },
+  "videoFilterDescriptionString": "{hideOrFilter} வீடியோக்கள் {type} {operation} '' {value} ''.",
+  "@videoFilterDescriptionString": {
+    "description": "Human readable description of a video filter, in this case is it for string comparison, example: Hide videos where the name of the video does not contain the following string 'test' (Do not translate text between { })",
+    "placeholders": {
+      "hideOrFilter": {
+        "type": "String",
+        "example": "Hide"
+      },
+      "type": {
+        "type": "String",
+        "example": "video title"
+      },
+      "operation": {
+        "type": "String",
+        "example": "does not contain"
+      },
+      "value": {
+        "type": "String",
+        "example": "some filter text"
+      }
+    }
+  },
+  "videoFilterHide": "வடிகட்டப்பட்ட வீடியோக்களை மறைக்கவும்",
+  "@videoFilterHide": {
+    "description": "Label for settings to hide filtered videos"
+  },
+  "videoFilterHideDescription": "முன்னிருப்பாக வடிகட்டப்பட்ட வீடியோக்கள் மறைக்கப்படவில்லை, ஆனால் அது ஏன் வடிகட்டப்பட்டுள்ளது என்பதற்கான காரணம் (கள்) உடன் தெளிவுபடுத்தப்பட்டதாகக் காட்டப்பட்டுள்ளது. இந்த அமைப்பு பட்டியல்களிலிருந்து வடிகட்டப்பட்ட வீடியோக்களை அகற்றவும்.",
+  "@videoFilterHideDescription": {
+    "description": ""
+  },
+  "videoFilterNoFilters": "வீடியோ வடிப்பான்கள் இல்லை, வடிப்பான்களைச் சேர்க்கத் தொடங்க கீழே உள்ள '+' பொத்தானைத் தட்டவும்.",
+  "@videoFilterNoFilters": {
+    "description": "Label when there are no video filters"
+  },
+  "videoFilterTypeChannelName": "சேனல் பெயர்",
+  "@videoFilterTypeChannelName": {
+    "description": "Label for video filter channel name"
+  },
+  "videoFilterTypeVideoLength": "வீடியோ நீளம் (விநாடிகள்)",
+  "@videoFilterTypeVideoLength": {
+    "description": "Label for video filter video length"
+  },
+  "videoFilterOperationContains": "கொண்டுள்ளது",
+  "@videoFilterOperationContains": {
+    "description": "Label for video filter operation Contains"
+  },
+  "videoFilterOperationNotContain": "இல்லை",
+  "@videoFilterOperationNotContain": {
+    "description": "Label for video filter operation Does not contain"
+  },
+  "videoFilterOperationLowerThan": "குறைவாக",
+  "@videoFilterOperationLowerThan": {
+    "description": "Label for video filter operation Lower than"
+  },
+  "channel": "வாய்க்கால்",
+  "@channel": {
+    "description": "A single channel"
+  },
+  "videoFilterHideAllFromChannel": "சேனலில் இருந்து அனைத்து வீடியோக்களையும் வடிகட்டவும்",
+  "@videoFilterHideAllFromChannel": {
+    "description": "Label for video filter switch to allow to hide all videos from a channel"
+  },
+  "videoFilterOperationHigherThan": "விட அதிகமாக",
+  "@videoFilterOperationHigherThan": {
+    "description": "Label for video filter operation Higher than"
+  },
+  "videoFilterWholeChannel": "{hideOrFilter} சேனலில் இருந்து அனைத்து வீடியோக்களும்",
+  "@videoFilterWholeChannel": {
+    "description": "Label for whole channel filtering",
+    "placeholders": {
+      "hideOrFilter": {
+        "type": "String",
+        "example": "Hide"
+      }
+    }
+  },
+  "lockFullScreenToLandscapeDescription": "வீடியோ வடிவமைப்பு, பரந்த வீடியோவுக்கான நிலப்பரப்பு மற்றும் உருவப்படம் வீடியோக்களுக்கான உருவப்படத்தின் அடிப்படையில் முழு திரை நோக்குநிலையைப் பூட்டுகிறது",
+  "@lockFullScreenToLandscapeDescription": {
+    "description": "Setting description for forcing video to landscape when in full screen"
+  },
+  "rememberSubtitleLanguageDescription": "கிடைத்தால், தேர்ந்தெடுக்கப்பட்ட கடைசி மொழிக்கு தானாக வசன வரிகள் அமைக்கவும்",
+  "@rememberSubtitleLanguageDescription": {
+    "description": "Settings description for remembering subtitle language"
+  },
+  "lockFullScreenToLandscape": "முழு திரை நோக்குநிலையை வீடியோ விகித விகிதத்திற்கு பூட்டுங்கள்",
+  "@lockFullScreenToLandscape": {
+    "description": "Title to force full screen to landscape"
+  },
+  "noDownloadedVideos": "பதிவிறக்கம் செய்யப்பட்ட வீடியோக்கள் இல்லை, உலாவுங்கள், ஒரு பட்டியலில் ஒரு வீடியோவில் நீண்ட நேரம் அழுத்தவும் அல்லது பதிவிறக்க வீடியோ திரையில் பதிவிறக்க பொத்தானைத் தட்டவும்",
+  "@noDownloadedVideos": {
+    "description": "Message showing when the user goes to the download screen but there are no offline videos."
+  },
+  "fillFullscreen": "திரைக்கு பொருந்தும் வகையில் வீடியோவை அதிகரிக்கவும்",
+  "@fillFullscreen": {
+    "description": "Title to maximize video to fit screen"
+  },
+  "fillFullscreenDescription": "முழு திரையையும் இயற்கை பயன்முறையில் நிரப்ப வீடியோவை சரிசெய்கிறது",
+  "@fillFullscreenDescription": {
+    "description": "Setting description for filling video to screen in landscape"
+  },
+  "rememberPlaybackSpeed": "பிளேபேக் வேகத்தை நினைவில் கொள்ளுங்கள்",
+  "@rememberPlaybackSpeed": {
+    "description": "Setting label for remembering playback speed"
+  },
+  "rememberPlaybackSpeedDescription": "தேர்ந்தெடுக்கப்பட்ட கடைசி வேகத்திற்கு தானாகவே பின்னணி வேகத்தை அமைக்கவும்",
+  "@rememberPlaybackSpeedDescription": {
+    "description": "Settings description for remembering playback speed"
+  },
+  "downloadsPlayAll": "அனைத்தையும் விளையாடுங்கள்",
+  "@downloadsPlayAll": {
+    "description": "Button to play all downloaded videos"
+  },
+  "videoDownloadStarted": "வீடியோ பதிவிறக்கம் தொடங்கியது",
+  "@videoDownloadStarted": {
+    "description": "Message when a video starts being downloaded"
+  }
+}
