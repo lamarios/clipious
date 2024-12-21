@@ -611,7 +611,7 @@
   "@searchSortRating": {
     "description": "Sort search by rating"
   },
-  "shorts": "Shorts",
+  "shorts": "Шорти",
   "@shorts": {
     "description": "Youtube shorts"
   },
@@ -1196,5 +1196,219 @@
         "format": "compact"
       }
     }
+  },
+  "foregroundServiceUpdatingPlaylist": "Перевірка списків відтворення...",
+  "@foregroundServiceUpdatingPlaylist": {
+    "description": "Foreground service notification text when checking for new playlist videos"
+  },
+  "foregroundServiceUpdatingChannels": "Перевірка каналів...",
+  "@foregroundServiceUpdatingChannels": {
+    "description": "Foreground service notification text when checking for new channel videos"
+  },
+  "notificationFrequencySettingsDescription": "Як часто програма перевірятиме наявність нових відео",
+  "@notificationFrequencySettingsDescription": {
+    "description": "Description for frequency settings"
+  },
+  "deArrowSettingDescription": "Замініть заголовки та мініатюри",
+  "@deArrowSettingDescription": {
+    "description": "Description for dearrow"
+  },
+  "deArrowReplaceThumbnails": "Замінити мініатюри",
+  "@deArrowReplaceThumbnails": {
+    "description": "Settings title for checkbox on whether the thumbnail should be replaced as well"
+  },
+  "deArrowReplaceThumbnailsDescription": "Замініть мініатюри відео на додаток до назв",
+  "@deArrowReplaceThumbnailsDescription": {
+    "description": "Description for DeArrow setting switch"
+  },
+  "deArrowWarning": "Увімкнення DeArrow може значно зменшити швидкість веб-перегляду програми, оскільки для кожного окремого відео потрібні додаткові http-запити",
+  "@deArrowWarning": {
+    "description": "Warning message when the user enables DeArrow"
+  },
+  "sleepTimer": "Таймер сну",
+  "@sleepTimer": {},
+  "stopTheVideo": "Зупиніть відео",
+  "@stopTheVideo": {},
+  "stopTheVideoExplanation": "Якщо ввімкнено, відео буде закрито, якщо вимкнено, відео буде просто призупинено",
+  "@stopTheVideoExplanation": {},
+  "setTimer": "Встановити таймер",
+  "@setTimer": {},
+  "cancelSleepTimer": "Скасувати таймер сну",
+  "@cancelSleepTimer": {},
+  "channelSortByOldest": "Найстаріший",
+  "@channelSortByOldest": {
+    "description": "Sort channel videos from oldest to newest"
+  },
+  "playlistNotificationContent": "Є {count, plural, =0{немає нових відео} =1{1 нове відео} other{{count} нових відео}} у списку відтворення {playlist}",
+  "@playlistNotificationContent": {
+    "description": "Content for playlist notification when there are new videos",
+    "placeholders": {
+      "playlist": {
+        "type": "String",
+        "example": "Lo-Fi girl"
+      },
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "foregroundServiceNotificationContent": "Буде перевіряти наявність нових відео раз {hours, select, 1{per year} 24{a day} other{кожні {hours} годин}}",
+  "@foregroundServiceNotificationContent": {
+    "description": "Content for the foreground service running notification when the user wants to receive notifications",
+    "hours": {
+      "type": "num",
+      "format": "compact"
+    }
+  },
+  "refresh": "Оновити",
+  "@refresh": {},
+  "exponentialSkipDescription": "Чим більше ви пропускаєте вперед, тим більший крок.",
+  "@exponentialSkipDescription": {
+    "description": "Title for the setting to enable the exponential skipping"
+  },
+  "skipStepDescription": "Секунди для пропуску дій вперед/назад",
+  "@skipStepDescription": {
+    "description": "Title for the settings to set the skipping step"
+  },
+  "feedbackDisclaimer": "Щоб надіслати відгук, вам знадобиться обліковий запис GitHub, і ваш знімок екрана буде надіслано в Imgur анонімно.",
+  "@feedbackDisclaimer": {
+    "description": "Content of dialog shown before submitting feedback to make sure the user is ok whith where the data is going"
+  },
+  "feedbackScreenshotError": "Помилка під час завантаження знімка екрана в Imgur",
+  "@feedbackScreenshotError": {
+    "description": "Title for dialog if something goes wrong while uploading feedback screenshot"
+  },
+  "invidiousAccount": "Invidious рахунок",
+  "@invidiousAccount": {
+    "description": "Text when the user choose where to subscribe to a channel"
+  },
+  "onDeviceSubscriptions": "На пристрої",
+  "@onDeviceSubscriptions": {
+    "description": "Text when the user chooses where to subscribe to a channel"
+  },
+  "customHeadersExplanation": "Встановіть власні заголовки для надсилання на сервер invidious",
+  "@customHeadersExplanation": {},
+  "wrongThumbnailConfiguration": "Сервер доступний, але не налаштований належним чином, ескізи відео та каналу не відображатимуться належним чином. Якщо так, вимкніть тестову конфігурацію сервера Добре з цим, інакше виправте свій сервер",
+  "@wrongThumbnailConfiguration": {},
+  "retry": "Повторіть спробу",
+  "@retry": {},
+  "subtitlesBackground": "Фон субтитрів",
+  "@subtitlesBackground": {
+    "description": "Title for settings to set black background  for subtitles"
+  },
+  "subtitlesBackgroundDescription": "Додає чорний фон до субтитрів, щоб зробити їх більш читабельними",
+  "@subtitlesBackgroundDescription": {
+    "description": "Description for settings to set black background  for subtitles"
+  },
+  "addBasicAuth": "Додайте базову автентифікацію",
+  "@addBasicAuth": {},
+  "addBasicAuthExplanation": "Якщо ваш сервер вимагає базової автентифікації HTTP, додайте деталі нижче. Це не ваші образливі дані облікового запису",
+  "@addBasicAuthExplanation": {},
+  "addHeader": "Додайте заголовок",
+  "@addHeader": {},
+  "advancedConfiguration": "Розширена конфігурація",
+  "@advancedConfiguration": {},
+  "customHeaders": "Спеціальні заголовки",
+  "@customHeaders": {},
+  "value": "Значення",
+  "@value": {},
+  "testAndAddServer": "Перевірте та додайте сервер",
+  "@testAndAddServer": {},
+  "alsoTestServerConfig": "Також перевірте конфігурацію сервера, наприклад, чи правильно відображатимуться мініатюри",
+  "@alsoTestServerConfig": {},
+  "serverAlreadyExists": "Сервер уже існує в налаштуваннях",
+  "@serverAlreadyExists": {},
+  "openWikiLink": "Відкрийте wiki для допомоги",
+  "@openWikiLink": {},
+  "serverUnreachable": "Сервер недоступний або не є дійсним invidious сервером",
+  "@serverUnreachable": {},
+  "copyToDownloadFolder": "Копіювати в папку завантаження",
+  "@copyToDownloadFolder": {},
+  "fileCopiedToDownloadFolder": "Файл скопійовано в папку для завантаження",
+  "@fileCopiedToDownloadFolder": {},
+  "videoDeleted": "Відео видалено",
+  "@videoDeleted": {},
+  "seeking": "шукає",
+  "@seeking": {
+    "description": "category for settings related to seeking in a video"
+  },
+  "premieresIn": "Прем'єра за {formattedDuration}",
+  "@premieresIn": {},
+  "screenControls": "Екранні елементи керування",
+  "@screenControls": {},
+  "screenControlsExplanation": "Під час перегляду відео в повноекранному режимі вертикальне перетягування зліва або справа регулює яскравість або гучність відповідно",
+  "@screenControlsExplanation": {},
+  "both": "Обидва",
+  "@both": {},
+  "playlistNotificationTitle": "Нові відео в списку відтворення {playlist}",
+  "@playlistNotificationTitle": {
+    "description": "Title for the playlist notifications when there are new videos",
+    "placeholders": {
+      "playlist": {
+        "type": "String",
+        "example": "Lo-Fi girl"
+      }
+    }
+  },
+  "foregroundServiceNotificationTitle": "Відео моніторинг",
+  "@foregroundServiceNotificationTitle": {
+    "description": "Title for the foreground service running notification when the user wants to receive notifications"
+  },
+  "foregroundServiceUpdatingSubscriptions": "Перевірка підписок...",
+  "@foregroundServiceUpdatingSubscriptions": {
+    "description": "Foreground service notification text when checking for new subscription videos"
+  },
+  "notificationFrequencySettingsTitle": "Нова частота перевірки відео",
+  "@notificationFrequencySettingsTitle": {
+    "description": "Title for frequency settings"
+  },
+  "notificationFrequencySliderLabel": "I{hours, select,  24{1d} other{{hours}h}}",
+  "@notificationFrequencySliderLabel": {
+    "description": "Short form for a number of hours going up to 1 day",
+    "hours": {
+      "type": "num",
+      "format": "compact"
+    }
+  },
+  "copySettingsAsJson": "Скопіюйте налаштування як JSON у буфер обміну",
+  "@copySettingsAsJson": {
+    "description": "title for settings sections to allow users to copy their settings as json to make debugging easier"
+  },
+  "copySettingsAsJsonDescription": "Скопіюйте налаштування як JSON, щоб допомогти з усуненням помилок, якщо ви зіткнетеся з проблемою в програмі та вирішите порушити проблему",
+  "@copySettingsAsJsonDescription": {
+    "description": ""
+  },
+  "skipStep": "Пропустити крок вперед/назад",
+  "@skipStep": {
+    "description": "Title for the settings to set the skipping step"
+  },
+  "exponentialSkip": "Експоненціальний пропуск вперед/назад",
+  "@exponentialSkip": {
+    "description": "Title for the setting to enable the exponential skipping"
+  },
+  "fullscreenOnLandscape": "Повний екран в альбомній орієнтації",
+  "@fullscreenOnLandscape": {
+    "description": "Setting title to enable full screen on landscape orientation"
+  },
+  "fullscreenOnLandscapeDescription": "Перехід у повноекранний режим, коли пристрій повернуто в ландшафтний режим",
+  "@fullscreenOnLandscapeDescription": {
+    "description": "Setting to enable full screen on landscape orientation"
+  },
+  "submitFeedback": "Надіслати відгук",
+  "@submitFeedback": {
+    "description": "Title for settings to submit feed back through the app"
+  },
+  "submitFeedbackDescription": "Знайшли помилку чи маєте пропозицію? Використовуйте цей інструмент, щоб зробити знімок екрана програми, додати коментарі та надіслати відгук",
+  "@submitFeedbackDescription": {
+    "description": "Setting tile descriptions for feedback submission"
+  },
+  "channelSortByNewest": "Найновіший",
+  "@channelSortByNewest": {
+    "description": "Sort channel videos from newest to oldest"
+  },
+  "channelSortByPopular": "Популярний",
+  "@channelSortByPopular": {
+    "description": "Sort channel videos by popularity"
   }
 }
