@@ -1020,5 +1020,13 @@
   "askToEnableBackgroundServiceTitle": "Ilmoitukset on poissa käytöstä",
   "@askToEnableBackgroundServiceTitle": {
     "description": "If the users tries to turn on notifications for a channel but hasn't enable notifications in the app we need to turn it on for them"
+  },
+  "share": "Jaa",
+  "@share": {
+    "description": "asking user if to share"
+  },
+  "serverIsNotReachable": "Palvelin ei ole tavoitettavissa",
+  "@serverIsNotReachable": {
+    "description": "Title for dialog when adding a server that is not reachable"
   }
 }
