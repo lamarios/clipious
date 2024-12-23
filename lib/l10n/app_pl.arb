@@ -1058,5 +1058,13 @@
   "searchUploadDateWeek": "Ten tydzień",
   "@searchUploadDateWeek": {
     "description": "Search for uploaded this week"
+  },
+  "returnYoutubeUrlValidation": "Adres URL musi się zaczynać z http:// lub https://",
+  "@returnYoutubeUrlValidation": {
+    "description": "error message for invalid custom url for return to youtube"
+  },
+  "home": "Dom",
+  "@home": {
+    "description": "Label for Home browsing tab"
   }
 }
