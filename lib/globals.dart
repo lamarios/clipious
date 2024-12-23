@@ -4,6 +4,7 @@ import 'package:flutter/animation.dart';
 import 'package:clipious/service.dart';
 import 'package:clipious/utils/file_db.dart';
 import 'package:clipious/utils/interfaces/db.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 import 'utils/models/country.dart';
 
@@ -29,6 +30,8 @@ const double innerHorizontalPadding = 16;
 late IDbClient db;
 
 final FileDB fileDb = FileDB();
+
+PackageInfo? packageInfo;
 
 List<Country> countryCodes = [
   Country('AD', 'Andorra'),
