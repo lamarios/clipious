@@ -1333,7 +1333,7 @@
   "@seeking": {
     "description": "category for settings related to seeking in a video"
   },
-  "premieresIn": "Прем'єра за {formattedDuration}",
+  "premieresIn": "Прем''єра за {formattedDuration}",
   "@premieresIn": {},
   "screenControls": "Екранні елементи керування",
   "@screenControls": {},
