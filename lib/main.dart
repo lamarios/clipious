@@ -23,6 +23,7 @@ import 'package:clipious/utils.dart';
 import 'package:clipious/utils/sembast_sqflite_database.dart';
 import 'package:clipious/workmanager.dart';
 import 'package:logging/logging.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 import 'settings/models/db/app_logs.dart';
 
@@ -55,6 +56,9 @@ Future<void> main() async {
   HttpOverrides.global = MyHttpOverrides();
 
   WidgetsFlutterBinding.ensureInitialized();
+
+  packageInfo = await PackageInfo.fromPlatform();
+
   // FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   db = await SembastSqfDb.create();
   await fileDb.syncWithDb();
