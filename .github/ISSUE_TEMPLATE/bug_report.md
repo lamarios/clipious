@@ -31,10 +31,11 @@ A clear and concise description of what you expected to happen.
 **Screenshots**
 If applicable, add screenshots to help explain your problem.
 
-**Smartphone (please complete the following information):**
+**General Information:**
  - Device: [e.g. Pixel 7a]
  - OS: [e.g. Android 13]
- - Version [e.g. 1.14.1]
+ - Version: [e.g. 1.14.1]
+ - Invidious-Instance:[e.g. https://yewtu.be/]
 
 **Additional context**
 Add any other context about the problem here.
