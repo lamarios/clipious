@@ -1310,5 +1310,13 @@
   "channelSortByOldest": "Mais velho",
   "@channelSortByOldest": {
     "description": "Sort channel videos from oldest to newest"
+  },
+  "malformedStatsEndpoint": "/api/v1/stats não é o esperado",
+  "@malformedStatsEndpoint": {
+    "description": "Title for dialog when adding a server that isn't validated as it should"
+  },
+  "rydCustomInstance": "endereço de instância RYD personalizado",
+  "@rydCustomInstance": {
+    "description": "title for setting to set a custom ryd instance"
   }
 }
