@@ -1115,7 +1115,7 @@
   "@noHistory": {
     "description": "Message when the user visits the history tab but it's empty"
   },
-  "videoFilterDayOfWeekDescription": "Sie können selektiv Wochentage und Uhrzeiten auswählen, für die die Filter gelten, um z. B. Spoiler von Sportereignissen zu vermeiden.",
+  "videoFilterDayOfWeekDescription": "Sie können selektiv Wochentage und Uhrzeiten auswählen, für die die Filter gelten, um z.B. Spoiler von Sportereignissen zu vermeiden.",
   "@videoFilterDayOfWeekDescription": {
     "description": ""
   },
@@ -1141,7 +1141,7 @@
       }
     }
   },
-  "subtitlesBackgroundDescription": "Schwarzer Hintergrund für Untertitel, um sie besser lesbar zu machen",
+  "subtitlesBackgroundDescription": "Fügt einen schwarzen Hintergrund für Untertitel hinzu, um sie lesbarer zu machen",
   "@subtitlesBackgroundDescription": {
     "description": "Description for settings to set black background  for subtitles"
   },
@@ -1369,14 +1369,38 @@
   "@value": {},
   "testAndAddServer": "Server testen und hinzufügen",
   "@testAndAddServer": {},
-  "alsoTestServerConfig": "Außerdem die Serverkonfiguration testen, z. B. ob die Miniaturansichten richtig angezeigt werden",
+  "alsoTestServerConfig": "Außerdem die Serverkonfiguration testen, z.B. ob die Miniaturansichten richtig angezeigt werden",
   "@alsoTestServerConfig": {},
-  "serverAlreadyExists": "Server bereits in den Einstellungen vorhanden",
+  "serverAlreadyExists": "Server ist bereits in den Einstellungen vorhanden",
   "@serverAlreadyExists": {},
   "openWikiLink": "Wiki für Hilfe öffnen",
   "@openWikiLink": {},
   "videoDeleted": "Video gelöscht",
   "@videoDeleted": {},
   "premieresIn": "Premiere in {formattedDuration}",
-  "@premieresIn": {}
+  "@premieresIn": {},
+  "stopTheVideoExplanation": "Wenn aktiviert wird das Video geschlossen, wenn deaktiviert wird das Video einfach pausiert",
+  "@stopTheVideoExplanation": {},
+  "cancelSleepTimer": "Einschlaf-Timer abbrechen",
+  "@cancelSleepTimer": {},
+  "retry": "Versuchen Sie es erneut",
+  "@retry": {},
+  "addHeader": "Kopfzeile hinzufügen",
+  "@addHeader": {},
+  "customHeaders": "Benutzerdefinierte Kopfzeilen",
+  "@customHeaders": {},
+  "customHeadersExplanation": "Setzen Sie benutzerdefinierte Kopfzeilen, die zum invidious Server gesendet werden",
+  "@customHeadersExplanation": {},
+  "serverUnreachable": "Server ist unerreichbar oder ist kein valider invidious Server",
+  "@serverUnreachable": {},
+  "wrongThumbnailConfiguration": "Der Server ist erreichbar, aber nicht richtig konfiguriert. Miniaturansichten von Videos und Kanälen werden nicht richtig angezeigt. Deaktivieren Sie die Servertestkonfiguration, wenn Sie damit OK sind, reparieren Sie andernfalls den Server",
+  "@wrongThumbnailConfiguration": {},
+  "copyToDownloadFolder": "Kopiere zum Download-Ordner",
+  "@copyToDownloadFolder": {},
+  "fileCopiedToDownloadFolder": "Datei in den Download-Ordner kopiert",
+  "@fileCopiedToDownloadFolder": {},
+  "addBasicAuthExplanation": "Wenn ihr Server einfache HTTP Authentifizierung benötigt, fügen Sie die Details unten hinzu. Dies sind nicht ihre invidious Kontodaten",
+  "@addBasicAuthExplanation": {},
+  "screenControlsExplanation": "Beim Anschauen eines Videos im Vollbildmodus passt das vertikale Ziehen von links oder rechts wird die Helligkeit bzw. Lautstärke an",
+  "@screenControlsExplanation": {}
 }
