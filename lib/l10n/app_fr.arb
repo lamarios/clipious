@@ -1406,5 +1406,7 @@
   "screenControls": "Contrôles de l''écran",
   "@screenControls": {},
   "screenControlsExplanation": "En regardant une vidéo en plein écran, glisser verticalement de la gauche ou de la droite ajustera la luminosité ou le volume respectivement",
-  "@screenControlsExplanation": {}
+  "@screenControlsExplanation": {},
+  "retry": "Réessayer",
+  "@retry": {}
 }
