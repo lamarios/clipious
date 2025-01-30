@@ -48,7 +48,11 @@ dependencies:
   package_info_plus: 8.1.4
   path: any
   path_provider: 2.1.5
-  receive_sharing_intent: 1.8.1
+  receive_sharing_intent:
+    # see https://github.com/KasemJaffer/receive_sharing_intent/issues/344
+    git:
+      url: https://github.com/KasemJaffer/receive_sharing_intent
+      ref: 2cea396843cd3ab1b5ec4334be4233864637874e
   screen_brightness: 2.1.1
   sembast: 3.8.2
   sembast_sqflite: 2.2.0+4
