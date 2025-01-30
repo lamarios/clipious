@@ -3,16 +3,38 @@ import 'package:clipious/settings/models/db/video_filter.dart';
 import 'package:clipious/utils/models/sharelink.dart';
 import 'package:clipious/videos/models/ided_video.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:json_annotation/json_annotation.dart';
 
 import '../../utils/models/image_object.dart';
 import 'adaptive_format.dart';
 import 'caption.dart';
 import 'format_stream.dart';
 
+part 'video.freezed.dart';
 part 'video.g.dart';
 
-part 'video.freezed.dart';
+/// Depending on versions, the published field can be a full formatted date or a timestamp
+/// sometimes the published field is like this
+///
+///   "published": 1738022400,
+///
+/// sometimes it is:
+///
+///       "published": "2025-01-28T19:00:26Z",
+int? _parsePublished(dynamic published) {
+  if (published == null) return null;
+
+  if (published is int) {
+    return published;
+  } else if (published is String) {
+    try {
+      return DateTime.parse(published).millisecondsSinceEpoch ~/ 1000;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  return null;
+}
 
 @freezed
 class Video with _$Video implements ShareLinks, IdedVideo {
@@ -21,7 +43,7 @@ class Video with _$Video implements ShareLinks, IdedVideo {
   const factory Video(
       {required String videoId,
       int? viewCount,
-      int? published,
+      @JsonKey(fromJson: _parsePublished) int? published,
       int? index,
       String? indexId,
       String? publishedText,

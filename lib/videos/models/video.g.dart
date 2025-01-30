@@ -9,7 +9,7 @@ part of 'video.dart';
 _$VideoImpl _$$VideoImplFromJson(Map<String, dynamic> json) => _$VideoImpl(
       videoId: json['videoId'] as String,
       viewCount: (json['viewCount'] as num?)?.toInt(),
-      published: (json['published'] as num?)?.toInt(),
+      published: _parsePublished(json['published']),
       index: (json['index'] as num?)?.toInt(),
       indexId: json['indexId'] as String?,
       publishedText: json['publishedText'] as String?,

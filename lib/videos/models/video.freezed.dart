@@ -22,6 +22,7 @@ Video _$VideoFromJson(Map<String, dynamic> json) {
 mixin _$Video {
   String get videoId => throw _privateConstructorUsedError;
   int? get viewCount => throw _privateConstructorUsedError;
+  @JsonKey(fromJson: _parsePublished)
   int? get published => throw _privateConstructorUsedError;
   int? get index => throw _privateConstructorUsedError;
   String? get indexId => throw _privateConstructorUsedError;
@@ -87,7 +88,7 @@ abstract class $VideoCopyWith<$Res> {
   $Res call(
       {String videoId,
       int? viewCount,
-      int? published,
+      @JsonKey(fromJson: _parsePublished) int? published,
       int? index,
       String? indexId,
       String? publishedText,
@@ -378,7 +379,7 @@ abstract class _$$VideoImplCopyWith<$Res> implements $VideoCopyWith<$Res> {
   $Res call(
       {String videoId,
       int? viewCount,
-      int? published,
+      @JsonKey(fromJson: _parsePublished) int? published,
       int? index,
       String? indexId,
       String? publishedText,
@@ -663,7 +664,7 @@ class _$VideoImpl extends _Video {
   const _$VideoImpl(
       {required this.videoId,
       this.viewCount,
-      this.published,
+      @JsonKey(fromJson: _parsePublished) this.published,
       this.index,
       this.indexId,
       this.publishedText,
@@ -728,6 +729,7 @@ class _$VideoImpl extends _Video {
   @override
   final int? viewCount;
   @override
+  @JsonKey(fromJson: _parsePublished)
   final int? published;
   @override
   final int? index;
@@ -1035,7 +1037,7 @@ abstract class _Video extends Video implements ShareLinks, IdedVideo {
   const factory _Video(
       {required final String videoId,
       final int? viewCount,
-      final int? published,
+      @JsonKey(fromJson: _parsePublished) final int? published,
       final int? index,
       final String? indexId,
       final String? publishedText,
@@ -1090,6 +1092,7 @@ abstract class _Video extends Video implements ShareLinks, IdedVideo {
   @override
   int? get viewCount;
   @override
+  @JsonKey(fromJson: _parsePublished)
   int? get published;
   @override
   int? get index;
