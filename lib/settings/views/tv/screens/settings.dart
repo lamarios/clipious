@@ -1,14 +1,14 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:clipious/app/states/app.dart';
 import 'package:clipious/extensions.dart';
 import 'package:clipious/router.dart';
 import 'package:clipious/utils.dart';
 import 'package:clipious/utils/views/tv/components/tv_button.dart';
 import 'package:clipious/utils/views/tv/components/tv_overscan.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:locale_names/locale_names.dart';
 import 'package:logging/logging.dart';
 
@@ -340,6 +340,13 @@ class TVSettingsScreen extends StatelessWidget {
                   trailing: Switch(
                       onChanged: (value) {}, value: state.blackBackground),
                 ),
+                SettingsTile(
+                  title: locals.forceTvUi,
+                  description: locals.forceTvUiExplanation,
+                  onSelected: (context) => cubit.setForceTvUi(!state.forceTvUi),
+                  trailing:
+                      Switch(onChanged: (value) {}, value: state.forceTvUi),
+                ),
                 SettingsTitle(title: locals.about),
                 SettingsTile(
                   title: '${locals.name}: ${state.packageInfo.appName}',
@@ -505,7 +512,7 @@ class SettingsTile extends StatelessWidget {
             enabled: enabled ?? true,
             leading: leading,
             trailing: trailing,
-            selectedTileColor: colors.secondaryContainer.withOpacity(0.5),
+            selectedTileColor: colors.secondaryContainer.withValues(alpha: 0.5),
             selected: hasFocus,
             title: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -515,7 +522,7 @@ class SettingsTile extends StatelessWidget {
                   style: textTheme.headlineSmall!.copyWith(
                       color: enabled ?? true
                           ? colors.primary
-                          : colors.primary.withOpacity(0.5)),
+                          : colors.primary.withValues(alpha: 0.5)),
                 ),
                 description != null
                     ? Text(

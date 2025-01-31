@@ -1383,5 +1383,7 @@
   "premieresIn": "Premieres in {formattedDuration}",
   "screenControls": "Screen controls",
   "screenControlsExplanation": "When watching a video in full screen, Vertically dragging from the left or the right will adjust the brightness or volume respectively",
-  "retry": "Retry"
+  "retry": "Retry",
+  "forceTvUi": "Force TV interface",
+  "forceTvUiExplanation": "Force the interface to be the TV experience, can be useful for some devices that do not have the leanback system config. App restart required"
 }

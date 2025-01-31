@@ -21,9 +21,9 @@ Video _$VideoFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Video {
   String get videoId => throw _privateConstructorUsedError;
-  int? get viewCount =>
-      throw _privateConstructorUsedError; //  not used in the code and causes issues
-// @JsonKey(fromJson: _parsePublished) int? published,
+  int? get viewCount => throw _privateConstructorUsedError;
+  @JsonKey(fromJson: _parsePublished)
+  int? get published => throw _privateConstructorUsedError;
   int? get index => throw _privateConstructorUsedError;
   String? get indexId => throw _privateConstructorUsedError;
   String? get publishedText => throw _privateConstructorUsedError;
@@ -88,6 +88,7 @@ abstract class $VideoCopyWith<$Res> {
   $Res call(
       {String videoId,
       int? viewCount,
+      @JsonKey(fromJson: _parsePublished) int? published,
       int? index,
       String? indexId,
       String? publishedText,
@@ -149,6 +150,7 @@ class _$VideoCopyWithImpl<$Res, $Val extends Video>
   $Res call({
     Object? videoId = null,
     Object? viewCount = freezed,
+    Object? published = freezed,
     Object? index = freezed,
     Object? indexId = freezed,
     Object? publishedText = freezed,
@@ -198,6 +200,10 @@ class _$VideoCopyWithImpl<$Res, $Val extends Video>
       viewCount: freezed == viewCount
           ? _value.viewCount
           : viewCount // ignore: cast_nullable_to_non_nullable
+              as int?,
+      published: freezed == published
+          ? _value.published
+          : published // ignore: cast_nullable_to_non_nullable
               as int?,
       index: freezed == index
           ? _value.index
@@ -373,6 +379,7 @@ abstract class _$$VideoImplCopyWith<$Res> implements $VideoCopyWith<$Res> {
   $Res call(
       {String videoId,
       int? viewCount,
+      @JsonKey(fromJson: _parsePublished) int? published,
       int? index,
       String? indexId,
       String? publishedText,
@@ -432,6 +439,7 @@ class __$$VideoImplCopyWithImpl<$Res>
   $Res call({
     Object? videoId = null,
     Object? viewCount = freezed,
+    Object? published = freezed,
     Object? index = freezed,
     Object? indexId = freezed,
     Object? publishedText = freezed,
@@ -481,6 +489,10 @@ class __$$VideoImplCopyWithImpl<$Res>
       viewCount: freezed == viewCount
           ? _value.viewCount
           : viewCount // ignore: cast_nullable_to_non_nullable
+              as int?,
+      published: freezed == published
+          ? _value.published
+          : published // ignore: cast_nullable_to_non_nullable
               as int?,
       index: freezed == index
           ? _value.index
@@ -652,6 +664,7 @@ class _$VideoImpl extends _Video {
   const _$VideoImpl(
       {required this.videoId,
       this.viewCount,
+      @JsonKey(fromJson: _parsePublished) this.published,
       this.index,
       this.indexId,
       this.publishedText,
@@ -715,8 +728,9 @@ class _$VideoImpl extends _Video {
   final String videoId;
   @override
   final int? viewCount;
-//  not used in the code and causes issues
-// @JsonKey(fromJson: _parsePublished) int? published,
+  @override
+  @JsonKey(fromJson: _parsePublished)
+  final int? published;
   @override
   final int? index;
   @override
@@ -872,7 +886,7 @@ class _$VideoImpl extends _Video {
 
   @override
   String toString() {
-    return 'Video(videoId: $videoId, viewCount: $viewCount, index: $index, indexId: $indexId, publishedText: $publishedText, isUpcoming: $isUpcoming, premiereTimestamp: $premiereTimestamp, dashUrl: $dashUrl, description: $description, descriptionHtml: $descriptionHtml, keywords: $keywords, likeCount: $likeCount, dislikeCount: $dislikeCount, paid: $paid, premium: $premium, isFamilyFriendly: $isFamilyFriendly, allowedRegions: $allowedRegions, genre: $genre, genreUrl: $genreUrl, authorThumbnails: $authorThumbnails, subCountText: $subCountText, allowRatings: $allowRatings, rating: $rating, isListed: $isListed, liveNow: $liveNow, hlsUrl: $hlsUrl, adaptiveFormats: $adaptiveFormats, formatStreams: $formatStreams, captions: $captions, recommendedVideos: $recommendedVideos, title: $title, lengthSeconds: $lengthSeconds, author: $author, authorId: $authorId, authorUrl: $authorUrl, videoThumbnails: $videoThumbnails, filtered: $filtered, matchedFilters: $matchedFilters, filterHide: $filterHide, deArrowed: $deArrowed, deArrowThumbnailUrl: $deArrowThumbnailUrl, viewCountText: $viewCountText)';
+    return 'Video(videoId: $videoId, viewCount: $viewCount, published: $published, index: $index, indexId: $indexId, publishedText: $publishedText, isUpcoming: $isUpcoming, premiereTimestamp: $premiereTimestamp, dashUrl: $dashUrl, description: $description, descriptionHtml: $descriptionHtml, keywords: $keywords, likeCount: $likeCount, dislikeCount: $dislikeCount, paid: $paid, premium: $premium, isFamilyFriendly: $isFamilyFriendly, allowedRegions: $allowedRegions, genre: $genre, genreUrl: $genreUrl, authorThumbnails: $authorThumbnails, subCountText: $subCountText, allowRatings: $allowRatings, rating: $rating, isListed: $isListed, liveNow: $liveNow, hlsUrl: $hlsUrl, adaptiveFormats: $adaptiveFormats, formatStreams: $formatStreams, captions: $captions, recommendedVideos: $recommendedVideos, title: $title, lengthSeconds: $lengthSeconds, author: $author, authorId: $authorId, authorUrl: $authorUrl, videoThumbnails: $videoThumbnails, filtered: $filtered, matchedFilters: $matchedFilters, filterHide: $filterHide, deArrowed: $deArrowed, deArrowThumbnailUrl: $deArrowThumbnailUrl, viewCountText: $viewCountText)';
   }
 
   @override
@@ -883,6 +897,8 @@ class _$VideoImpl extends _Video {
             (identical(other.videoId, videoId) || other.videoId == videoId) &&
             (identical(other.viewCount, viewCount) ||
                 other.viewCount == viewCount) &&
+            (identical(other.published, published) ||
+                other.published == published) &&
             (identical(other.index, index) || other.index == index) &&
             (identical(other.indexId, indexId) || other.indexId == indexId) &&
             (identical(other.publishedText, publishedText) ||
@@ -958,6 +974,7 @@ class _$VideoImpl extends _Video {
         runtimeType,
         videoId,
         viewCount,
+        published,
         index,
         indexId,
         publishedText,
@@ -1020,6 +1037,7 @@ abstract class _Video extends Video implements ShareLinks, IdedVideo {
   const factory _Video(
       {required final String videoId,
       final int? viewCount,
+      @JsonKey(fromJson: _parsePublished) final int? published,
       final int? index,
       final String? indexId,
       final String? publishedText,
@@ -1072,8 +1090,10 @@ abstract class _Video extends Video implements ShareLinks, IdedVideo {
   @override
   String get videoId;
   @override
-  int? get viewCount; //  not used in the code and causes issues
-// @JsonKey(fromJson: _parsePublished) int? published,
+  int? get viewCount;
+  @override
+  @JsonKey(fromJson: _parsePublished)
+  int? get published;
   @override
   int? get index;
   @override

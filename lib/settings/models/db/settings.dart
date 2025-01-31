@@ -41,6 +41,7 @@ const dearrowSettingName = 'dearrow';
 const dearrowThumbnailsSettingName = "dearrow-thumbnails";
 const fullScreenOnLandscapeSettingName = "fullscreen-on-landscape";
 const screenControlsSettingName = "screen-controls";
+const forceTvUiSettingName = "force-tv-ui";
 
 const onOpenSettingName = "on-open";
 

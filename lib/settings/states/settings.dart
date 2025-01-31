@@ -327,6 +327,8 @@ class SettingsCubit extends Cubit<SettingsState> {
 
   setFillFullscreen(bool b) async => await _set(fillFullScreen, b);
 
+  setForceTvUi(bool b) async => await _set(forceTvUiSettingName, b);
+
   _setLocale(String? s) async {
     await _set(localeSettingName, s);
     await fileDb.setLocale(s);
@@ -562,6 +564,9 @@ class SettingsState with _$SettingsState {
 
   bool get screenControls =>
       (_get(screenControlsSettingName)?.value ?? 'true') == 'true';
+
+  bool get forceTvUi =>
+      (_get(forceTvUiSettingName)?.value ?? 'false') == 'true';
 
   List<HomeDataSource> get appLayout {
     var savedLayout = _get(appLayoutSettingName)?.value;

@@ -115,6 +115,13 @@ class AppearanceSettingsScreen extends StatelessWidget {
                         context, state.navigationBarLabelBehavior)),
                     onPressed: (ctx) => customizeNavigationLabel(ctx),
                   ),
+                  SettingsTile.switchTile(
+                    leading: const Icon(Icons.tv),
+                    initialValue: state.forceTvUi,
+                    onToggle: cubit.setForceTvUi,
+                    title: Text(locals.forceTvUi),
+                    description: Text(locals.forceTvUiExplanation),
+                  ),
                 ],
               ),
             ],
