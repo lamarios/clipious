@@ -43,7 +43,8 @@ class Video with _$Video implements ShareLinks, IdedVideo {
   const factory Video(
       {required String videoId,
       int? viewCount,
-      @JsonKey(fromJson: _parsePublished) int? published,
+      //  not used in the code and causes issues
+      // @JsonKey(fromJson: _parsePublished) int? published,
       int? index,
       String? indexId,
       String? publishedText,
