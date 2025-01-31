@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:clipious/settings/models/db/settings.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -203,9 +204,11 @@ DeviceType getDeviceType() {
 }
 
 Future<bool> isDeviceTv() async {
+  final forceTv = db.getSettings(forceTvUiSettingName);
   DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
   AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
-  return androidInfo.systemFeatures.contains('android.software.leanback');
+  return forceTv?.value == 'true' ||
+      androidInfo.systemFeatures.contains('android.software.leanback');
 }
 
 int getGridCount(BuildContext context) {
