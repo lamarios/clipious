@@ -26,10 +26,10 @@ jobs:
     #  FLUTTER_VERSION: "2.5.3"
     steps:
       - uses: actions/checkout@v3
-      - name: Set up JDK 17
+      - name: Set up JDK
         uses: actions/setup-java@v3
         with:
-          java-version: '17'
+          java-version: '21'
           distribution: 'adopt'
       - uses: cachix/install-nix-action@v22
         with:
@@ -53,7 +53,7 @@ jobs:
       - run: ./submodules/flutter/bin/flutter pub run flutter_native_splash:create
       - run: ./submodules/flutter/bin/flutter build apk --profile --split-per-abi
       - name: Archive build artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: apks
           path: build/app/outputs/flutter-apk
