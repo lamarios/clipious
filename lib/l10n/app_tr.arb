@@ -452,7 +452,7 @@
   "@subscriptionNotificationDescription": {
     "description": "Description for subscription notifications"
   },
-  "subscriptionNotificationContent": "",
+  "subscriptionNotificationContent": "Abonelik akışınızda  {count, plural, =0{yeni video yok} =1{1 new video} other{{count} yeni video}} var",
   "@subscriptionNotificationContent": {
     "description": "Content for subscription notification",
     "placeholders": {
@@ -1018,7 +1018,7 @@
   "@info": {
     "description": "Info label"
   },
-  "nSubscribers": "",
+  "nSubscribers": "{count, select, no{Abone yok} other{{count} abone}}",
   "@nSubscribers": {
     "description": "number of subscribers",
     "placeholders": {
@@ -1222,5 +1222,65 @@
   "channelSortByPopular": "Popüler",
   "@channelSortByPopular": {
     "description": "Sort channel videos by popularity"
+  },
+  "malformedStatsEndpoint": "/api/v1/stats beklenildiği gibi değil",
+  "@malformedStatsEndpoint": {
+    "description": "Title for dialog when adding a server that isn't validated as it should"
+  },
+  "nFilters": "{count, plural, =0{Video yok} =1{1 filter} other{{count} filtre}}",
+  "@nFilters": {
+    "description": "One or more video filters",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "rydCustomInstanceDescription": "Farklı bir RYD instance'ı kullan, varsayılanı kullanmak için boş bırakın",
+  "@rydCustomInstanceDescription": {
+    "description": "description for custom ryd instancr setting"
+  },
+  "rydCustomInstance": "Özel RYD instance urlsi",
+  "@rydCustomInstance": {
+    "description": "title for setting to set a custom ryd instance"
+  },
+  "nReplies": "{count, plural, =0{Yanıt yok} =1{1 reply} other{{count} yanıt}}",
+  "@nReplies": {
+    "description": "number of replies to a comment",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "nVideos": "{count, plural, =0{Video yok} =1{1 video} other{{count} video}}",
+  "@nVideos": {
+    "description": "One or more videos",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "videoFilterTimeOfDayFromTo": "{from} ve {to} arası",
+  "@videoFilterTimeOfDayFromTo": {
+    "description": "Time of day range",
+    "placeholders": {
+      "from": {
+        "type": "String",
+        "example": "3:00 AM"
+      },
+      "to": {
+        "type": "String",
+        "example": "5:00 PM"
+      }
+    }
+  },
+  "returnYoutubeUrlValidation": "Url http:// ya da https:// ile başlamalıdır",
+  "@returnYoutubeUrlValidation": {
+    "description": "error message for invalid custom url for return to youtube"
   }
 }
