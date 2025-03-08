@@ -970,7 +970,7 @@
   "@subtitlesBackground": {
     "description": "Title for settings to set black background  for subtitles"
   },
-  "deArrowWarning": "DeArrow'u etkinleştirmek, her video için fazladan http istekleri gerekli olduğu için, uygulamanın gezinme hızını önemli bir miktarda azaltabilir",
+  "deArrowWarning": "DeArrow''u etkinleştirmek, her video için fazladan http istekleri gerekli olduğu için, uygulamanın gezinme hızını önemli bir miktarda azaltabilir",
   "@deArrowWarning": {
     "description": "Warning message when the user enables DeArrow"
   },
@@ -1237,7 +1237,7 @@
       }
     }
   },
-  "rydCustomInstanceDescription": "Farklı bir RYD instance'ı kullan, varsayılanı kullanmak için boş bırakın",
+  "rydCustomInstanceDescription": "Farklı bir RYD instance''ı kullan, varsayılanı kullanmak için boş bırakın",
   "@rydCustomInstanceDescription": {
     "description": "description for custom ryd instancr setting"
   },
