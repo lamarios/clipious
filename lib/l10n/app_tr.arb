@@ -452,7 +452,7 @@
   "@subscriptionNotificationDescription": {
     "description": "Description for subscription notifications"
   },
-  "subscriptionNotificationContent": "",
+  "subscriptionNotificationContent": "Abonelik akışınızda  {count, plural, =0{yeni video yok} =1{1 new video} other{{count} yeni video}} var",
   "@subscriptionNotificationContent": {
     "description": "Content for subscription notification",
     "placeholders": {
@@ -970,7 +970,7 @@
   "@subtitlesBackground": {
     "description": "Title for settings to set black background  for subtitles"
   },
-  "deArrowWarning": "Enable DeArrow, her bir video için ekstra http istekleri gerektiğinden, uygulamanın tarama hızını önemli ölçüde azaltabilir",
+  "deArrowWarning": "DeArrow'u etkinleştirmek, her video için fazladan http istekleri gerekli olduğu için, uygulamanın gezinme hızını önemli bir miktarda azaltabilir",
   "@deArrowWarning": {
     "description": "Warning message when the user enables DeArrow"
   },
@@ -1018,7 +1018,7 @@
   "@info": {
     "description": "Info label"
   },
-  "nSubscribers": "",
+  "nSubscribers": "{count, select, no{Abone yok} other{{count} abone}}",
   "@nSubscribers": {
     "description": "number of subscribers",
     "placeholders": {
@@ -1207,7 +1207,7 @@
   "@submitFeedback": {
     "description": "Title for settings to submit feed back through the app"
   },
-  "submitFeedbackDescription": "Bir hata mı buldunuz yoksa bir öneriniz mi var? uygulamanın ekran görüntüsünü almak, açıklama eklemek ve geri bildirim göndermek için bu aracı kullanın",
+  "submitFeedbackDescription": "Hata mı buldunuz ya da bir öneriniz mi var? Uygulamanın ekran görüntüsünü almak, açıklama eklemek ve geri bildirim göndermek için bu aracı kullanın",
   "@submitFeedbackDescription": {
     "description": "Setting tile descriptions for feedback submission"
   },
@@ -1222,5 +1222,161 @@
   "channelSortByPopular": "Popüler",
   "@channelSortByPopular": {
     "description": "Sort channel videos by popularity"
-  }
+  },
+  "malformedStatsEndpoint": "/api/v1/stats beklenildiği gibi değil",
+  "@malformedStatsEndpoint": {
+    "description": "Title for dialog when adding a server that isn't validated as it should"
+  },
+  "nFilters": "{count, plural, =0{Video yok} =1{1 filter} other{{count} filtre}}",
+  "@nFilters": {
+    "description": "One or more video filters",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "rydCustomInstanceDescription": "Farklı bir RYD instance'ı kullan, varsayılanı kullanmak için boş bırakın",
+  "@rydCustomInstanceDescription": {
+    "description": "description for custom ryd instancr setting"
+  },
+  "rydCustomInstance": "Özel RYD instance urlsi",
+  "@rydCustomInstance": {
+    "description": "title for setting to set a custom ryd instance"
+  },
+  "nReplies": "{count, plural, =0{Yanıt yok} =1{1 reply} other{{count} yanıt}}",
+  "@nReplies": {
+    "description": "number of replies to a comment",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "nVideos": "{count, plural, =0{Video yok} =1{1 video} other{{count} video}}",
+  "@nVideos": {
+    "description": "One or more videos",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "videoFilterTimeOfDayFromTo": "{from} ve {to} arası",
+  "@videoFilterTimeOfDayFromTo": {
+    "description": "Time of day range",
+    "placeholders": {
+      "from": {
+        "type": "String",
+        "example": "3:00 AM"
+      },
+      "to": {
+        "type": "String",
+        "example": "5:00 PM"
+      }
+    }
+  },
+  "returnYoutubeUrlValidation": "Url http:// ya da https:// ile başlamalıdır",
+  "@returnYoutubeUrlValidation": {
+    "description": "error message for invalid custom url for return to youtube"
+  },
+  "playlistNotificationContent": "{playlist} oynatma listesinde {count, plural, =0{yeni video yok} =1{1 yeni video var} other{{count} yeni video var}}",
+  "@playlistNotificationContent": {
+    "description": "Content for playlist notification when there are new videos",
+    "placeholders": {
+      "playlist": {
+        "type": "String",
+        "example": "Lo-Fi girl"
+      },
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "sleepTimer": "Uyku zamanlayıcısı",
+  "@sleepTimer": {},
+  "stopTheVideo": "Videoyu durdur",
+  "@stopTheVideo": {},
+  "setTimer": "Zamanlayıcı ayarla",
+  "@setTimer": {},
+  "cancelSleepTimer": "Uyku zamanlayıcısını devre dışı bırak",
+  "@cancelSleepTimer": {},
+  "retry": "Yeniden dene",
+  "@retry": {},
+  "addBasicAuth": "Basit Kimlik Doğrulaması Ekle",
+  "@addBasicAuth": {},
+  "addBasicAuthExplanation": "Eğer sunucunuz basit HTTP kimlik doğrulaması gerektiriyorsa, detayları aşağıya ekleyiniz. Bunlar Invidious hesap detaylarınız değildir",
+  "@addBasicAuthExplanation": {},
+  "addHeader": "Üstbilgi ekle",
+  "@addHeader": {},
+  "advancedConfiguration": "Gelişmiş Yapılandırma",
+  "@advancedConfiguration": {},
+  "customHeaders": "Özel üstbilgi",
+  "@customHeaders": {},
+  "customHeadersExplanation": "Üstbilgiyi invidious sunucusuna gönderilecek şekilde ayarla",
+  "@customHeadersExplanation": {},
+  "value": "Değer",
+  "@value": {},
+  "testAndAddServer": "Sına ve sunucu ekle",
+  "@testAndAddServer": {},
+  "alsoTestServerConfig": "Ayrıca sunucu yapılandırmasını sına, küçük resimlerin düzgün görüntülenmesi gibi",
+  "@alsoTestServerConfig": {},
+  "serverAlreadyExists": "Sunucu çoktan ayarlarda mevcut",
+  "@serverAlreadyExists": {},
+  "wrongThumbnailConfiguration": "Sunucu ulaşılabilir fakat düzgün yapılandırılmamış, video ve kanal küçük resimleri düzgün görüntülenmeyecektir. Eğer bunla sorununuz yoksa sunucu sınama yapılandırmasını devre dışı bırakın, aksi halde sunucunuzu düzeltin",
+  "@wrongThumbnailConfiguration": {},
+  "openWikiLink": "Wikiyi yardım için aç",
+  "@openWikiLink": {},
+  "serverUnreachable": "Sunucu ulaşılabilir değil, ya da geçerli bir invidious sunucusu değil",
+  "@serverUnreachable": {},
+  "copyToDownloadFolder": "İndirme klasörüne kopyala",
+  "@copyToDownloadFolder": {},
+  "fileCopiedToDownloadFolder": "Dosya indirme klasörüne kopyalandı",
+  "@fileCopiedToDownloadFolder": {},
+  "videoDeleted": "Video silindi",
+  "@videoDeleted": {},
+  "foregroundServiceNotificationContent": "Yeni videolar için her {hours, select, 1{saat başı} 24{gün} other{her {hours} saat}} kontrol edecektir.",
+  "@foregroundServiceNotificationContent": {
+    "description": "Content for the foreground service running notification when the user wants to receive notifications",
+    "hours": {
+      "type": "num",
+      "format": "compact"
+    }
+  },
+  "premieresIn": "{formattedDuration} içinde ilk gösterime girecek",
+  "@premieresIn": {},
+  "screenControls": "Ekran kontrolleri",
+  "@screenControls": {},
+  "screenControlsExplanation": "Tam ekranda bir video izlerken, soldan ya da sağdan dikey olarak taşımak, sırasıyla parlaklığı ya da sesi ayarlayacaktır",
+  "@screenControlsExplanation": {},
+  "invidiousAccount": "Invidious hesabı",
+  "@invidiousAccount": {
+    "description": "Text when the user choose where to subscribe to a channel"
+  },
+  "onDeviceSubscriptions": "Cihaz üstünde",
+  "@onDeviceSubscriptions": {
+    "description": "Text when the user chooses where to subscribe to a channel"
+  },
+  "both": "İkisi de",
+  "@both": {},
+  "refresh": "Yenile",
+  "@refresh": {},
+  "notificationFrequencySliderLabel": "{hours, select,  24{1g} other{{hours}s}}",
+  "@notificationFrequencySliderLabel": {
+    "description": "Short form for a number of hours going up to 1 day",
+    "hours": {
+      "type": "num",
+      "format": "compact"
+    }
+  },
+  "forceTvUi": "TV arayüzünü zorla",
+  "@forceTvUi": {},
+  "forceTvUiExplanation": "Arayüzün TV deneyimi olmasını zorla, leanback sistem yapılandırmasına sahip olmayan bazı cihazlar için kullanışlı olabilir. Uygulamayı yeniden başlatmak gereklidir",
+  "@forceTvUiExplanation": {},
+  "stopTheVideoExplanation": "Eğer etkinleştirilmişse, video kapatılacaktır, eğer devre dışı bırakılmışsa, video sadece durdurulacaktır",
+  "@stopTheVideoExplanation": {}
 }
