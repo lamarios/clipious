@@ -1414,5 +1414,11 @@
   "forceTvUiExplanation": "Змусити інтерфейс бути телевізійним, може бути корисним для деяких пристроїв, які не мають конфігурації системи Leanback. Потрібен перезапуск програми",
   "@forceTvUiExplanation": {},
   "forceTvUi": "Force TV інтерфейс",
-  "@forceTvUi": {}
+  "@forceTvUi": {},
+  "noPublicServers": "Загальнодоступні сервери недоступні",
+  "@noPublicServers": {},
+  "tapToSeeHow": "Торкніться, щоб побачити, як розмістити власний",
+  "@tapToSeeHow": {},
+  "referToInvidiousWebsiteForHostingInstructions": "Зверніться до веб-сайту Invidious, щоб отримати інструкції щодо розміщення invidious",
+  "@referToInvidiousWebsiteForHostingInstructions": {}
 }
