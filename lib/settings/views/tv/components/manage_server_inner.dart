@@ -102,16 +102,24 @@ class TvManageServersInner extends StatelessWidget {
                           )),
                     )
                   ]
-                : filteredPublicServers
-                    .map((s) => SettingsTile(
-                          key: Key(s.url),
-                          title:
-                              '${s.url} - ${(s.ping != null && s.ping!.compareTo(const Duration(seconds: pingTimeout)) == -1) ? '${s.ping?.inMilliseconds}ms' : '>${pingTimeout}s'}',
-                          description:
-                              '${(s.flag != null && s.region != null) ? '${s.flag} - ${s.region} - ' : ''} ${locals.tapToAddServer}',
-                          onSelected: (context) => cubit.upsertServer(s),
-                        ))
-                    .toList()
+                : filteredPublicServers.isEmpty
+                    ? [
+                        SettingsTile(
+                          title: locals.noPublicServers,
+                          description: locals
+                              .referToInvidiousWebsiteForHostingInstructions,
+                        )
+                      ]
+                    : filteredPublicServers
+                        .map((s) => SettingsTile(
+                              key: Key(s.url),
+                              title:
+                                  '${s.url} - ${(s.ping != null && s.ping!.compareTo(const Duration(seconds: pingTimeout)) == -1) ? '${s.ping?.inMilliseconds}ms' : '>${pingTimeout}s'}',
+                              description:
+                                  '${(s.flag != null && s.region != null) ? '${s.flag} - ${s.region} - ' : ''} ${locals.tapToAddServer}',
+                              onSelected: (context) => cubit.upsertServer(s),
+                            ))
+                        .toList()
       ]);
     });
   }

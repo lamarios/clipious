@@ -1385,5 +1385,8 @@
   "screenControlsExplanation": "When watching a video in full screen, Vertically dragging from the left or the right will adjust the brightness or volume respectively",
   "retry": "Retry",
   "forceTvUi": "Force TV interface",
-  "forceTvUiExplanation": "Force the interface to be the TV experience, can be useful for some devices that do not have the leanback system config. App restart required"
+  "forceTvUiExplanation": "Force the interface to be the TV experience, can be useful for some devices that do not have the leanback system config. App restart required",
+  "noPublicServers": "No public servers are available",
+  "tapToSeeHow": "Tap to see how to host your own",
+  "referToInvidiousWebsiteForHostingInstructions": "Refer to Invidious website for instructions on how to host invidious"
 }

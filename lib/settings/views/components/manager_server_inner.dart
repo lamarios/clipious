@@ -9,6 +9,7 @@ import 'package:clipious/settings/models/errors/unreacheable_server.dart';
 import 'package:clipious/settings/states/server_list_settings.dart';
 import 'package:clipious/settings/states/settings.dart';
 import 'package:settings_ui/settings_ui.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../utils.dart';
 import '../../models/db/server.dart';
@@ -205,42 +206,59 @@ class ManagerServersView extends StatelessWidget {
                                       )),
                                 )
                               ]
-                            : filteredPublicServers
-                                .map((s) => SettingsTile(
-                                      key: Key(s.url),
-                                      title: Row(
-                                        children: [
-                                          Expanded(child: Text('${s.url} ')),
-                                          Text(
-                                              (s.ping != null &&
-                                                      s.ping!.compareTo(
-                                                              const Duration(
-                                                                  seconds:
-                                                                      pingTimeout)) ==
-                                                          -1)
-                                                  ? '${s.ping?.inMilliseconds}ms'
-                                                  : '>${pingTimeout}s',
-                                              style: textTheme.labelLarge
-                                                  ?.copyWith(
-                                                      color: colorScheme
-                                                          .secondary))
-                                        ],
-                                      ),
-                                      value: Wrap(
-                                        children: [
-                                          Visibility(
-                                              visible: s.flag != null &&
-                                                  s.region != null,
-                                              child: Text(
-                                                  '${s.flag} - ${s.region} - ')),
-                                          Text(locals.tapToAddServer)
-                                        ],
-                                      ),
-                                      onPressed: (context) =>
-                                          showPublicServerActions(
-                                              context, state, s),
-                                    ))
-                                .toList()),
+                            : (filteredPublicServers.isEmpty
+                                ? [
+                                    SettingsTile(
+                                      title: Text(locals.noPublicServers),
+                                      description: Text(locals.tapToSeeHow),
+                                      leading: const Icon(
+                                          Icons.warning_amber_outlined),
+                                      onPressed: (context) {
+                                        launchUrl(
+                                            Uri.parse(
+                                                'https://docs.invidious.io/installation/'),
+                                            mode:
+                                                LaunchMode.externalApplication);
+                                      },
+                                    )
+                                  ]
+                                : filteredPublicServers
+                                    .map((s) => SettingsTile(
+                                          key: Key(s.url),
+                                          title: Row(
+                                            children: [
+                                              Expanded(
+                                                  child: Text('${s.url} ')),
+                                              Text(
+                                                  (s.ping != null &&
+                                                          s.ping!.compareTo(
+                                                                  const Duration(
+                                                                      seconds:
+                                                                          pingTimeout)) ==
+                                                              -1)
+                                                      ? '${s.ping?.inMilliseconds}ms'
+                                                      : '>${pingTimeout}s',
+                                                  style: textTheme.labelLarge
+                                                      ?.copyWith(
+                                                          color: colorScheme
+                                                              .secondary))
+                                            ],
+                                          ),
+                                          value: Wrap(
+                                            children: [
+                                              Visibility(
+                                                  visible: s.flag != null &&
+                                                      s.region != null,
+                                                  child: Text(
+                                                      '${s.flag} - ${s.region} - ')),
+                                              Text(locals.tapToAddServer)
+                                            ],
+                                          ),
+                                          onPressed: (context) =>
+                                              showPublicServerActions(
+                                                  context, state, s),
+                                        ))
+                                    .toList())),
               ],
             ),
             Positioned(
