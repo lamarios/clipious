@@ -1402,5 +1402,15 @@
   "screenControlsExplanation": "Cuando vea un vídeo a pantalla completa, arrastre verticalmente desde la izquierda o la derecha para ajustar el brillo o el volumen, respectivamente",
   "@screenControlsExplanation": {},
   "retry": "Reintentar",
-  "@retry": {}
+  "@retry": {},
+  "referToInvidiousWebsiteForHostingInstructions": "Consulta el sitio web de Invidious para obtener instrucciones sobre cómo alojar Invidious",
+  "@referToInvidiousWebsiteForHostingInstructions": {},
+  "tapToSeeHow": "Toca para ver cómo alojar el tuyo",
+  "@tapToSeeHow": {},
+  "noPublicServers": "No hay servidores públicos disponibles",
+  "@noPublicServers": {},
+  "forceTvUi": "Forzar interfaz de TV",
+  "@forceTvUi": {},
+  "forceTvUiExplanation": "Fuerza la interfaz a ser la experiencia de TV, puede ser útil para algunos dispositivos que no tengan la configuración del sistema Leanback. Se necesita reiniciar la aplicación",
+  "@forceTvUiExplanation": {}
 }
