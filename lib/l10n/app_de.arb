@@ -1402,5 +1402,9 @@
   "addBasicAuthExplanation": "Wenn ihr Server einfache HTTP Authentifizierung benötigt, fügen Sie die Details unten hinzu. Dies sind nicht ihre invidious Kontodaten",
   "@addBasicAuthExplanation": {},
   "screenControlsExplanation": "Beim Anschauen eines Videos im Vollbildmodus passt das vertikale Ziehen von links oder rechts wird die Helligkeit bzw. Lautstärke an",
-  "@screenControlsExplanation": {}
+  "@screenControlsExplanation": {},
+  "noPublicServers": "Es sind keine öffentlichen Server verfügbar",
+  "@noPublicServers": {},
+  "forceTvUi": "TV-Oberfläche erzwingen",
+  "@forceTvUi": {}
 }
