@@ -1414,5 +1414,11 @@
   "forceTvUi": "Tvinga TV-gränssnitt",
   "@forceTvUi": {},
   "forceTvUiExplanation": "Tvinga gränssnittet att vara TV-upplevelsen, kan vara användbart för vissa enheter som inte har leanback-systemkonfiguration. Omstart av appen krävs",
-  "@forceTvUiExplanation": {}
+  "@forceTvUiExplanation": {},
+  "tapToSeeHow": "Tryck för att se hur du kan vara värd för din egen",
+  "@tapToSeeHow": {},
+  "referToInvidiousWebsiteForHostingInstructions": "Se Invidious webbsida för instruktioner om hur man är värd för invidious",
+  "@referToInvidiousWebsiteForHostingInstructions": {},
+  "noPublicServers": "Inga publika servrar är tillgängliga",
+  "@noPublicServers": {}
 }
