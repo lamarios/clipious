@@ -1378,5 +1378,47 @@
   "forceTvUiExplanation": "Arayüzün TV deneyimi olmasını zorla, leanback sistem yapılandırmasına sahip olmayan bazı cihazlar için kullanışlı olabilir. Uygulamayı yeniden başlatmak gereklidir",
   "@forceTvUiExplanation": {},
   "stopTheVideoExplanation": "Eğer etkinleştirilmişse, video kapatılacaktır, eğer devre dışı bırakılmışsa, video sadece durdurulacaktır",
-  "@stopTheVideoExplanation": {}
+  "@stopTheVideoExplanation": {},
+  "tapToSeeHow": "Kendi ev sahipliğinizi nasıl yapacağınızı görmek için dokunun",
+  "@tapToSeeHow": {},
+  "noPublicServers": "Hiçbir herkese açık sunucu mevcut değil",
+  "@noPublicServers": {},
+  "referToInvidiousWebsiteForHostingInstructions": "Invidious'u nasıl barındıracağınıza dair talimatlar için Invidious web sitesine bakın",
+  "@referToInvidiousWebsiteForHostingInstructions": {},
+  "videoFilterDescriptionString": "{hideOrFilter} {type} {operation} ''{value}'' olan videolar.",
+  "@videoFilterDescriptionString": {
+    "description": "Human readable description of a video filter, in this case is it for string comparison, example: Hide videos where the name of the video does not contain the following string 'test' (Do not translate text between { })",
+    "placeholders": {
+      "hideOrFilter": {
+        "type": "String",
+        "example": "Hide"
+      },
+      "type": {
+        "type": "String",
+        "example": "video title"
+      },
+      "operation": {
+        "type": "String",
+        "example": "does not contain"
+      },
+      "value": {
+        "type": "String",
+        "example": "some filter text"
+      }
+    }
+  },
+  "channelNotificationContent": "{playlist} oynatma listesinde {count, plural, =0{yeni video yok} =1{1 yeni video var} other {{count} yeni video var}}",
+  "@channelNotificationContent": {
+    "description": "Content for channel notification when there are new videos",
+    "placeholders": {
+      "channel": {
+        "type": "String",
+        "example": "MKBHD"
+      },
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  }
 }
