@@ -1410,5 +1410,7 @@
   "noPublicServers": "利用可能な公開サーバーなし",
   "@noPublicServers": {},
   "referToInvidiousWebsiteForHostingInstructions": "Invidiousサーバーをホストする方法は、Invidiousのサイトをご覧ください",
-  "@referToInvidiousWebsiteForHostingInstructions": {}
+  "@referToInvidiousWebsiteForHostingInstructions": {},
+  "tapToSeeHow": "タップで、自分でホストする方法を表示",
+  "@tapToSeeHow": {}
 }
