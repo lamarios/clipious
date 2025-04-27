@@ -1402,5 +1402,15 @@
   "screenControlsExplanation": "Когда вы смотрите видео на полном экране, вертикальные проведения слева или справа будут менять яркость или громкость",
   "@screenControlsExplanation": {},
   "wrongThumbnailConfiguration": "Сервер работает, но сконфигурирован некорректно, миниатюры видео и каналов не будут отображаться правильно. Выключите проверку конфигурации сервера если вы согласны с этим, в противном случая починить свой сервер",
-  "@wrongThumbnailConfiguration": {}
+  "@wrongThumbnailConfiguration": {},
+  "noPublicServers": "Нет общедоступных серверов",
+  "@noPublicServers": {},
+  "tapToSeeHow": "Нажмите чтобы увидеть, как хостить свой",
+  "@tapToSeeHow": {},
+  "referToInvidiousWebsiteForHostingInstructions": "Обратитесь к сайту Invidious за инструкциями по размещению invidious",
+  "@referToInvidiousWebsiteForHostingInstructions": {},
+  "forceTvUi": "Принудительный интерфейс телевизора",
+  "@forceTvUi": {},
+  "forceTvUiExplanation": "Принудить интерфейс быть как на телевизоре, может быть полезным для некоторых устройств, которые не имеют настройки системы отключения. Требуется перезагрузка",
+  "@forceTvUiExplanation": {}
 }
