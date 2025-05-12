@@ -1408,5 +1408,15 @@
   "screenControlsExplanation": "En regardant une vidéo en plein écran, glisser verticalement de la gauche ou de la droite ajustera la luminosité ou le volume respectivement",
   "@screenControlsExplanation": {},
   "retry": "Réessayer",
-  "@retry": {}
+  "@retry": {},
+  "referToInvidiousWebsiteForHostingInstructions": "Consultez le site Invidious pour obtenir des instructions sur la façon d'héberger Invidious",
+  "@referToInvidiousWebsiteForHostingInstructions": {},
+  "tapToSeeHow": "Appuyez pour voir comment héberger le vôtre",
+  "@tapToSeeHow": {},
+  "noPublicServers": "Aucun serveur public n'est disponible",
+  "@noPublicServers": {},
+  "forceTvUi": "Forcer l'interface TV",
+  "@forceTvUi": {},
+  "forceTvUiExplanation": "Forcer l'interface pour être l'expérience TV, peut être utile pour certains appareils qui n'ont pas la configuration du système. Nécessite un redémarrage de l'appli",
+  "@forceTvUiExplanation": {}
 }
