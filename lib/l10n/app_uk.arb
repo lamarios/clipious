@@ -1329,7 +1329,7 @@
   "@fileCopiedToDownloadFolder": {},
   "videoDeleted": "Відео видалено",
   "@videoDeleted": {},
-  "seeking": "шукає",
+  "seeking": "Шукає",
   "@seeking": {
     "description": "category for settings related to seeking in a video"
   },
