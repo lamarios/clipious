@@ -1279,7 +1279,7 @@
   "@feedbackScreenshotError": {
     "description": "Title for dialog if something goes wrong while uploading feedback screenshot"
   },
-  "invidiousAccount": "Invidious рахунок",
+  "invidiousAccount": "Зловісний обліковий запис",
   "@invidiousAccount": {
     "description": "Text when the user choose where to subscribe to a channel"
   },
