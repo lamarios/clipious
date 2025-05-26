@@ -653,15 +653,15 @@
   "@playNext": {
     "description": "Label to play the video after the current one."
   },
-  "returnYoutubeDislikeDescription": "Показывать примерное количество дизлайков видео с помощью API от returnyoutubedislike.com",
+  "returnYoutubeDislikeDescription": "Показывать примерное количество дизлайков видео с помощью сервиса ReturnYouTubeDislike.com",
   "@returnYoutubeDislikeDescription": {
     "description": "ReturnYoutubeDislike setting description"
   },
-  "autoplayVideoOnLoad": "Автоматически воспроизводить видео при загрузке",
+  "autoplayVideoOnLoad": "Автоматически воспроизводить видео после скачивания",
   "@autoplayVideoOnLoad": {
     "description": "Label for settings to enable autoplay when a video loads"
   },
-  "autoplayVideoOnLoadDescription": "Автоматически начать воспроизведение видео после его загрузки",
+  "autoplayVideoOnLoadDescription": "Автоматически начать воспроизведение видео после как оно будет скачано",
   "@autoplayVideoOnLoadDescription": {
     "description": "Description for the autoplay video on load setting"
   },
@@ -857,7 +857,7 @@
   "@appLogs": {
     "description": "Title for settings that leads to application logs"
   },
-  "shorts": "Shorts",
+  "shorts": "Моменты",
   "@shorts": {
     "description": "Youtube shorts"
   },
