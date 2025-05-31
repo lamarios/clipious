@@ -1,1 +1,16 @@
-<p><i>Clipious</i>is an Android client for Invidious, the privacy focused YouTube front end.</p><p><b>Features:</b></p><ul><li>Use own or public server</li><li>Subscription management</li><li>SponsorBlock + DeArrow</li><li>Video view/progress tracking</li><li>User playlists</li><li>Background playback</li><li>Live stream support</li><li>Android TV UI</li><li>Audio playback</li><li>Video / audio download</li><li>Video filtering</li><li>Return Youtube Dislikes</li></ul>
+<i>Clipious</i> is a client for Invidious, the privacy focused YouTube front end.
+<b>Features:</b>
+<ul>
+<li>Use own or public server</li>
+<li>Subscription management</li>
+<li>SponsorBlock + DeArrow</li>
+<li>Video view/progress tracking</li>
+<li>User playlists</li>
+<li>Background playback</li>
+<li>Live stream support</li>
+<li>Android TV UI</li>
+<li>Audio playback</li>
+<li>Video and audio download</li>
+<li>Video filtering</li>
+<li>Return Youtube Dislikes</li>
+</ul>
