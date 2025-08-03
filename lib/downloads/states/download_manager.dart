@@ -5,7 +5,7 @@ import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:downloadsfolder/downloadsfolder.dart';
 import 'package:easy_debounce/easy_throttle.dart';
-import 'package:ffmpeg_kit_flutter_full/ffmpeg_kit.dart';
+import 'package:ffmpeg_kit_flutter_new/ffmpeg_kit.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:clipious/downloads/models/downloaded_video.dart';
 import 'package:clipious/extensions.dart';
@@ -93,7 +93,7 @@ class DownloadManagerCubit extends Cubit<DownloadManagerState> {
       await db.upsertDownload(video);
       emit(state.copyWith(downloadProgresses: progresses));
       setVideos();
-      for (var f in downloadProgress?.listeners ?? []) {
+      for (var f in downloadProgress.listeners) {
         f(count / total);
       }
     } else {

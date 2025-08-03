@@ -12,7 +12,7 @@ import awesome_notifications_core
 import device_info_plus
 import downloadsfolder
 import dynamic_color
-import ffmpeg_kit_flutter_full
+import ffmpeg_kit_flutter_new
 import flutter_volume_controller
 import flutter_web_auth
 import just_audio

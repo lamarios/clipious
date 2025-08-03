@@ -54,7 +54,7 @@ if (keystorePropertiesFile.exists()) {
 }
 
 android {
-    compileSdkVersion 34
+    compileSdkVersion 35
 
     dependenciesInfo {
         // Disables dependency metadata when building APKs.
