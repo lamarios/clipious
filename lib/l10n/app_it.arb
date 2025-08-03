@@ -463,7 +463,7 @@
   "@sponsorBlockCategoryPreview": {
     "description": "Sponsorblock 'Preview' Category"
   },
-  "searchHistory": "Cronologia",
+  "searchHistory": "Cronologia di ricerca",
   "@searchHistory": {
     "description": "Settings label for search history"
   },
@@ -651,7 +651,7 @@
   "@playNextAddedToQueue": {
     "description": "Pop up message to confirm that the video has been properly set to play next"
   },
-  "sponsorBlockCategoryUnpaidSelfPromoDescription": "Similmente agli \"sponsor\", eccetto che per per le auto promozioni o quelle non pagate. Questo include le sezioni sul merchandising, le donazioni, o le informazioni sui collaboratori ",
+  "sponsorBlockCategoryUnpaidSelfPromoDescription": "Similmente agli \"sponsor\", eccetto che per le auto promozioni o quelle non pagate. Questo include le sezioni sul merchandising, le donazioni, o le informazioni sui collaboratori ",
   "@sponsorBlockCategoryUnpaidSelfPromoDescription": {
     "description": "Sponsor block 'Unpaid/Self promotion' Category description"
   },
