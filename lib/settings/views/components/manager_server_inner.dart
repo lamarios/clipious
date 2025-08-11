@@ -1,15 +1,14 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:clipious/router.dart';
 import 'package:clipious/settings/models/errors/cannot_add_server_error.dart';
 import 'package:clipious/settings/models/errors/missing_software_key.dart';
 import 'package:clipious/settings/models/errors/unreacheable_server.dart';
 import 'package:clipious/settings/states/server_list_settings.dart';
 import 'package:clipious/settings/states/settings.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:settings_ui/settings_ui.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '../../../utils.dart';
 import '../../models/db/server.dart';
@@ -123,17 +122,11 @@ class ManagerServersView extends StatelessWidget {
     ColorScheme colorScheme = Theme.of(context).colorScheme;
     SettingsThemeData theme = settingsTheme(colorScheme);
     var locals = AppLocalizations.of(context)!;
-    var textTheme = Theme.of(context).textTheme;
 
     return BlocBuilder<ServerListSettingsCubit, ServerListSettingsState>(
       builder: (ctx, state) {
         SettingsCubit settings = context.watch<SettingsCubit>();
         ServerListSettingsCubit cubit = context.read<ServerListSettingsCubit>();
-        var filteredPublicServers = state.publicServers
-            .where((s) =>
-                state.dbServers.indexWhere((element) => element.url == s.url) ==
-                -1)
-            .toList();
         return Stack(
           children: [
             SettingsList(
@@ -182,6 +175,7 @@ class ManagerServersView extends StatelessWidget {
                               enabled: false,
                             )
                           ]),
+/*
                 SettingsSection(
                     title: Text(locals.publicServers),
                     tiles: state.publicServersError != PublicServerErrors.none
@@ -259,6 +253,7 @@ class ManagerServersView extends StatelessWidget {
                                                   context, state, s),
                                         ))
                                     .toList())),
+*/
               ],
             ),
             Positioned(

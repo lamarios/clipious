@@ -23,7 +23,7 @@ dependencies:
   dynamic_color: 1.7.0
   easy_debounce: 2.0.3
   feedback: 3.1.0
-  ffmpeg_kit_flutter_new: 3.1.0
+  ffmpeg_kit_flutter_new_full: 1.1.0
   flutter_animate: 4.5.2
   flutter_bloc: 9.0.0
   flutter_displaymode: 0.6.0

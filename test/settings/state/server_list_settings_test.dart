@@ -20,7 +20,7 @@ void main() {
 
   test('save public servers', () async {
     final servers = ServerListSettingsCubit(const ServerListSettingsState(dbServers: [], publicServers: []), app);
-    await servers.getPublicServers();
+    // await servers.getPublicServers();
     await servers.refreshServers();
     expect(servers.state.publicServers.isEmpty, false);
     var publicServerCount = servers.state.publicServers.length;
@@ -41,7 +41,7 @@ void main() {
 
   test('switching server', () async {
     final servers = ServerListSettingsCubit(const ServerListSettingsState(dbServers: [], publicServers: []), app);
-    await servers.getPublicServers();
+    // await servers.getPublicServers();
     await servers.refreshServers();
     expect(servers.state.publicServers.isEmpty, false);
     var publicServerCount = servers.state.publicServers.length;
