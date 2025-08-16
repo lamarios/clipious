@@ -653,15 +653,15 @@
   "@playNext": {
     "description": "Label to play the video after the current one."
   },
-  "returnYoutubeDislikeDescription": "Показывать примерное количество дизлайков видео с помощью API от returnyoutubedislike.com",
+  "returnYoutubeDislikeDescription": "Показывать примерное количество дизлайков видео с помощью сервиса ReturnYouTubeDislike.com",
   "@returnYoutubeDislikeDescription": {
     "description": "ReturnYoutubeDislike setting description"
   },
-  "autoplayVideoOnLoad": "Автоматически воспроизводить видео при загрузке",
+  "autoplayVideoOnLoad": "Автоматически воспроизводить видео после скачивания",
   "@autoplayVideoOnLoad": {
     "description": "Label for settings to enable autoplay when a video loads"
   },
-  "autoplayVideoOnLoadDescription": "Автоматически начать воспроизведение видео после его загрузки",
+  "autoplayVideoOnLoadDescription": "Автоматически начать воспроизведение видео после как оно будет скачано",
   "@autoplayVideoOnLoadDescription": {
     "description": "Description for the autoplay video on load setting"
   },
@@ -857,7 +857,7 @@
   "@appLogs": {
     "description": "Title for settings that leads to application logs"
   },
-  "shorts": "Shorts",
+  "shorts": "Моменты",
   "@shorts": {
     "description": "Youtube shorts"
   },
@@ -1402,5 +1402,15 @@
   "screenControlsExplanation": "Когда вы смотрите видео на полном экране, вертикальные проведения слева или справа будут менять яркость или громкость",
   "@screenControlsExplanation": {},
   "wrongThumbnailConfiguration": "Сервер работает, но сконфигурирован некорректно, миниатюры видео и каналов не будут отображаться правильно. Выключите проверку конфигурации сервера если вы согласны с этим, в противном случая починить свой сервер",
-  "@wrongThumbnailConfiguration": {}
+  "@wrongThumbnailConfiguration": {},
+  "noPublicServers": "Нет общедоступных серверов",
+  "@noPublicServers": {},
+  "tapToSeeHow": "Нажмите чтобы увидеть, как хостить свой",
+  "@tapToSeeHow": {},
+  "referToInvidiousWebsiteForHostingInstructions": "Обратитесь к сайту Invidious за инструкциями по размещению invidious",
+  "@referToInvidiousWebsiteForHostingInstructions": {},
+  "forceTvUi": "Принудительный интерфейс телевизора",
+  "@forceTvUi": {},
+  "forceTvUiExplanation": "Принудительное использование интерфейса телевизора, что может быть полезно для устройств, не имеющих системной конфигурации leanback. Требуется перезапуск",
+  "@forceTvUiExplanation": {}
 }
