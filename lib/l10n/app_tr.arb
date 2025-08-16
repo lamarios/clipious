@@ -1383,7 +1383,7 @@
   "@tapToSeeHow": {},
   "noPublicServers": "Hiçbir herkese açık sunucu mevcut değil",
   "@noPublicServers": {},
-  "referToInvidiousWebsiteForHostingInstructions": "Invidious'u nasıl barındıracağınıza dair talimatlar için Invidious web sitesine bakın",
+  "referToInvidiousWebsiteForHostingInstructions": "Invidious''u nasıl barındıracağınıza dair talimatlar için Invidious web sitesine bakın",
   "@referToInvidiousWebsiteForHostingInstructions": {},
   "videoFilterDescriptionString": "{hideOrFilter} {type} {operation} ''{value}'' olan videolar.",
   "@videoFilterDescriptionString": {
@@ -1407,7 +1407,7 @@
       }
     }
   },
-  "channelNotificationContent": "{playlist} oynatma listesinde {count, plural, =0{yeni video yok} =1{1 yeni video var} other {{count} yeni video var}}",
+  "channelNotificationContent": "{channel} oynatma listesinde {count, plural, =0{yeni video yok} =1{1 yeni video var} other {{count} yeni video var}}",
   "@channelNotificationContent": {
     "description": "Content for channel notification when there are new videos",
     "placeholders": {
