@@ -1406,5 +1406,11 @@
   "forceTvUiExplanation": "表示を強制的にテレビ用にすることで、リーンバックシステム設定がない一部の端末でも役立ちます。アプリの再起動が必要",
   "@forceTvUiExplanation": {},
   "forceTvUi": "強制的にテレビ向けの表示",
-  "@forceTvUi": {}
+  "@forceTvUi": {},
+  "noPublicServers": "利用可能な公開サーバーなし",
+  "@noPublicServers": {},
+  "referToInvidiousWebsiteForHostingInstructions": "Invidiousサーバーをホストする方法は、Invidiousのサイトをご覧ください",
+  "@referToInvidiousWebsiteForHostingInstructions": {},
+  "tapToSeeHow": "タップで、自分でホストする方法を表示",
+  "@tapToSeeHow": {}
 }

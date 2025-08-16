@@ -591,7 +591,7 @@
   "@searchHistoryLimitDescription": {
     "description": "Settings label for search history limit description"
   },
-  "clearSearchHistory": "Ștergeți istoricul căutărilor",
+  "clearSearchHistory": "Șterge istoricul căutărilor",
   "@clearSearchHistory": {
     "description": "Settings label for clearing search history"
   },
@@ -603,11 +603,11 @@
   "@searchSortRating": {
     "description": "Sort search by rating"
   },
-  "searchSortViewCount": "De vizionări",
+  "searchSortViewCount": "Număr de vizualizări",
   "@searchSortViewCount": {
     "description": "Sort search by view count"
   },
-  "rememberSubtitleLanguage": "Reține limba subtitrării",
+  "rememberSubtitleLanguage": "Reține limba subtitrărilor",
   "@rememberSubtitleLanguage": {
     "description": "Settings label for remembering subtitle language"
   },
@@ -711,7 +711,7 @@
   "@playNextAddedToQueue": {
     "description": "Pop up message to confirm that the video has been properly set to play next"
   },
-  "appLogsDescription": "Obține jurnale cu ceea ce se întâmplă în aplicație, poate fi util pentru a raporta probleme",
+  "appLogsDescription": "Obține jurnale cu ceea ce se întâmplă în aplicație, pot fi utile pentru raportarea problemelor",
   "@appLogsDescription": {
     "description": "Description of the app log settings"
   },
@@ -719,23 +719,23 @@
   "@logsCopied": {
     "description": "Message to tell user that logs have been copied to the clipboard"
   },
-  "copyToClipBoard": "Copiați în clipboard",
+  "copyToClipBoard": "Copiază în clipboard",
   "@copyToClipBoard": {
     "description": "Text to copy something to clipboard"
   },
-  "videoFiltersExplanation": "Ascundeți sau estompați videoclipurile din toate fluxurile video din aplicație pe baza filtrelor definite mai jos. Acest lucru vă permite, de exemplu, să ascundeți spoilerele sportive sau să ascundeți scurtmetraje de pe un anumit canal.",
+  "videoFiltersExplanation": "Ascundeți sau obscurizează videoclipurile din toate fluxurile video din aplicație pe baza filtrelor definite mai jos. Acest lucru îți permite, de exemplu, să ascunzi spoilerele sportive sau să ascunzi clipurile scurte de la un anumit canal.",
   "@videoFiltersExplanation": {
     "description": "Description on how filter work"
   },
-  "videoFiltersSettingTileDescriptions": "Definiți reguli pentru a filtra videoclipurile",
+  "videoFiltersSettingTileDescriptions": "Definește reguli pentru filtrarea videoclipurilor",
   "@videoFiltersSettingTileDescriptions": {
     "description": "Description for the main settings page"
   },
-  "addVideoFilter": "Creați un filtru",
+  "addVideoFilter": "Creează filtru",
   "@addVideoFilter": {
     "description": "Title when creating a new filter"
   },
-  "editVideoFilter": "Editați filtrul",
+  "editVideoFilter": "Editează filtrul",
   "@editVideoFilter": {
     "description": "Title when editting a filter"
   },
@@ -743,7 +743,7 @@
   "@videoFilterOperation": {
     "description": "Label for filter operation"
   },
-  "save": "Salvați",
+  "save": "Salvează",
   "@save": {
     "description": "Text for save action"
   },
@@ -841,7 +841,7 @@
   "@download": {
     "description": "A single download or CTA for downloading a video"
   },
-  "noDownloadedVideos": "Fără videoclipuri descărcate, răsfoiți, apăsați lung pe un videoclip dintr-o listă, atingeți butonul de descărcare de pe un ecran video pentru a descărca",
+  "noDownloadedVideos": "Fără videoclipuri descărcate, caută, ține apăsat pe un videoclip dintr-o listă sau apasă butonul de descărcare de pe ecranul videoclipului pentru a descărca",
   "@noDownloadedVideos": {
     "description": "Message showing when the user goes to the download screen but there are no offline videos."
   },
@@ -918,5 +918,379 @@
   "malformedStatsEndpoint": "/api/v1/stats nu este așa cum se aștepta",
   "@malformedStatsEndpoint": {
     "description": "Title for dialog when adding a server that isn't validated as it should"
+  },
+  "serverIsNotReachable": "Serverul nu este accesibil",
+  "@serverIsNotReachable": {
+    "description": "Title for dialog when adding a server that is not reachable"
+  },
+  "returnYoutubeUrlValidation": "Adresa URL trebuie să înceapă cu http:// sau https://",
+  "@returnYoutubeUrlValidation": {
+    "description": "error message for invalid custom url for return to youtube"
+  },
+  "rydCustomInstance": "URL personalizat pentru instanța RYD",
+  "@rydCustomInstance": {
+    "description": "title for setting to set a custom ryd instance"
+  },
+  "rydCustomInstanceDescription": "Utilizați o altă instanță RYD, lăsați necompletat pentru a utiliza valoarea implicită",
+  "@rydCustomInstanceDescription": {
+    "description": "description for custom ryd instancr setting"
+  },
+  "searchUploadDateAny": "Orice dată",
+  "@searchUploadDateAny": {
+    "description": "Do not filter search result by upload date"
+  },
+  "searchUploadDateHour": "Ultima oră",
+  "@searchUploadDateHour": {
+    "description": "Search for uploaded in last hour"
+  },
+  "searchUploadDateWeek": "Săptămâna aceasta",
+  "@searchUploadDateWeek": {
+    "description": "Search for uploaded this week"
+  },
+  "searchUploadDateMonth": "Luna aceasta",
+  "@searchUploadDateMonth": {
+    "description": "Search for uploaded this month"
+  },
+  "searchUploadDateYear": "Anul acesta",
+  "@searchUploadDateYear": {
+    "description": "Search for uploaded this year"
+  },
+  "searchDuration": "Durată",
+  "@searchDuration": {
+    "description": "Filter search result by duration"
+  },
+  "searchDurationAny": "Orice durată",
+  "@searchDurationAny": {
+    "description": "Do not filter search result by duration"
+  },
+  "searchDurationShort": "Scurt (<4 minute)",
+  "@searchDurationShort": {
+    "description": "Search for short videos only"
+  },
+  "searchDurationLong": "Lung (>20 minute)",
+  "@searchDurationLong": {
+    "description": "Search for long videos only"
+  },
+  "nFilters": "{count, plural, =0{No videos} =1{1 filter} other{{count} filters}}",
+  "@nFilters": {
+    "description": "One or more video filters",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "videoFilterWholeChannel": "{hideOrFilter} toate videoclipurile de pe canal",
+  "@videoFilterWholeChannel": {
+    "description": "Label for whole channel filtering",
+    "placeholders": {
+      "hideOrFilter": {
+        "type": "String",
+        "example": "Hide"
+      }
+    }
+  },
+  "manageSubscriptions": "Gestionează abonamentele",
+  "@manageSubscriptions": {
+    "description": "Title of manage subscriptions page"
+  },
+  "noSubscriptions": "Fără abonamente, caută videoclipuri și abonează-te la orice canal îți place.",
+  "@noSubscriptions": {
+    "description": "Message when the user has no subs"
+  },
+  "youCanSubscribeAgainLater": "Te poți abona la acest canal mai târziu",
+  "@youCanSubscribeAgainLater": {
+    "description": "Text for the unscubscribe confirmation dialog"
+  },
+  "clearHistoryQuestionExplanation": "Aceasta va șterge istoricul vizionărilor din contul tău pe instanța Invidious pe care o folosești. Acest lucru nu poate fi anulat.",
+  "@clearHistoryQuestionExplanation": {
+    "description": "Message for dialog before clearing full viewing history"
+  },
+  "noHistory": "Fără istoric de vizionare, vizionează câteva videoclipuri și acesta va apărea aici",
+  "@noHistory": {
+    "description": "Message when the user visits the history tab but it's empty"
+  },
+  "homeLayoutEditor": "Editează aspectul paginii de start",
+  "@homeLayoutEditor": {
+    "description": "Title of layout editor screen"
+  },
+  "layoutEditorAddVideoSource": "Adaugă sursa video",
+  "@layoutEditorAddVideoSource": {
+    "description": "Label for button to allow user to add more video sources to the home screen"
+  },
+  "layoutEditorExplanation": "Poți decide ce să afișezi pe ecranul de start, poți avea până la 2 vizualizări mici cu derulare orizontală și o sursă mare.",
+  "@layoutEditorExplanation": {
+    "description": "text to explain the home layout editor"
+  },
+  "customizeAppLayout": "Personalizează secțiunile aplicației",
+  "@customizeAppLayout": {
+    "description": "Settings label for the settings to allow the user to set up the app sections themselves"
+  },
+  "customizeAppLayoutExplanation": "Selectează secțiunile pe care dorești să le afișezi în bara principală de navigare a aplicației. Fă clic pe pictograma de pornire pentru a selecta ecranul care se afișează la pornirea aplicației. Poți reordona secțiunile trăgându-le.",
+  "@customizeAppLayoutExplanation": {
+    "description": ""
+  },
+  "navigationBarStyle": "Stilul barei de navigare",
+  "@navigationBarStyle": {
+    "description": "Label for settings on customizing navigation bar style"
+  },
+  "navigationBarLabelAlwaysShowing": "Etichetă afișată întotdeauna",
+  "@navigationBarLabelAlwaysShowing": {
+    "description": "Label always showing option for navigation bar"
+  },
+  "navigationBarLabelShowOnSelect": "Etichetă afișată pe articolul selectat",
+  "@navigationBarLabelShowOnSelect": {
+    "description": "Label only showing when selected option for navigation bar"
+  },
+  "navigationBarLabelNeverShow": "Nu afișa niciodată eticheta",
+  "@navigationBarLabelNeverShow": {
+    "description": "Never show label option for navigation bar"
+  },
+  "distractionFreeMode": "Mod fără distrageri",
+  "@distractionFreeMode": {
+    "description": "title for distraction free mode settings"
+  },
+  "distractionFreeModeDescription": "Dezactivează comentariile și recomandările video",
+  "@distractionFreeModeDescription": {
+    "description": "Description for distraction free mode"
+  },
+  "secondsShortForm": "sec",
+  "@secondsShortForm": {
+    "description": "Short form for the word seconds"
+  },
+  "videoFilterApplyDateToFilter": "Filtrează videoclipurile după anumite intervale de timp",
+  "@videoFilterApplyDateToFilter": {
+    "description": "Label for switch to allow user to customize video filter and set days of week and time to them"
+  },
+  "videoFilterDayOfWeek": "Selectează zilele pentru a aplica filtrele",
+  "@videoFilterDayOfWeek": {
+    "description": "Title for day selection for the filter"
+  },
+  "videoFilterDayOfWeekDescription": "Poți alege în selectiv zilele săptămânii și ora la care se aplică filtrele, de exemplu, pentru a evita spoilerele evenimentelor sportive.",
+  "@videoFilterDayOfWeekDescription": {
+    "description": ""
+  },
+  "videoFilterAppliedOn": "Aplicat în {selectedDays}",
+  "@videoFilterAppliedOn": {
+    "description": "Readable text on when the filter should apply",
+    "placeholders": {
+      "selectedDays": {
+        "type": "String",
+        "example": "Monday, Wednesday, Friday"
+      }
+    }
+  },
+  "from": "De la",
+  "@from": {
+    "description": "From word (as in 'From xx To xx')"
+  },
+  "to": "La",
+  "@to": {
+    "description": "To word as in 'From xx To xx')"
+  },
+  "videoFilterTimeOfDayFromTo": "De la {from} la {to}",
+  "@videoFilterTimeOfDayFromTo": {
+    "description": "Time of day range",
+    "placeholders": {
+      "from": {
+        "type": "String",
+        "example": "3:00 AM"
+      },
+      "to": {
+        "type": "String",
+        "example": "5:00 PM"
+      }
+    }
+  },
+  "notificationsDescription": "Activează și verifică despre ce ești notificat",
+  "@notificationsDescription": {
+    "description": "Setting description for notifications"
+  },
+  "enableNotificationDescriptions": "Rulează serviciul în fundal pentru a verifica și a te notifica cu privire la modificările pe care le monitorizezi",
+  "@enableNotificationDescriptions": {
+    "description": ""
+  },
+  "subscriptionNotificationDescription": "Primește notificări despre videoclipurile noi din fluxul abonamentului tău dacă ești conectat la instanța ta actuală",
+  "@subscriptionNotificationDescription": {
+    "description": "Description for subscription notifications"
+  },
+  "subscriptionNotificationTitle": "Videoclipuri noi din abonamentele tale",
+  "@subscriptionNotificationTitle": {
+    "description": "Title for the notification showing that there are new videos from the subscription feed"
+  },
+  "subscriptionNotificationContent": "Există  {count, plural, =0{no new videos} =1{1 new video} other{{count} new videos}} în fluxul abonamentului tău",
+  "@subscriptionNotificationContent": {
+    "description": "Content for subscription notification",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "askForDisableBatteryOptimizationTitle": "Dezactivarea optimizării bateriei necesară",
+  "@askForDisableBatteryOptimizationTitle": {
+    "description": "Title for the dialog asking the user to turn off disabling battery optimization when turning on notifications"
+  },
+  "askForDisableBatteryOptimizationContent": "Pentru a trimite notificări, Clipious trebuie să ruleze un serviciu în fundal. Pentru ca acesta să funcționeze fără probleme, este necesar ca Clipious să aibă acces nerestricționat la baterie. Apăsând pe OK se vor deschide setările de optimizare a bateriei.",
+  "@askForDisableBatteryOptimizationContent": {
+    "description": "Content for the dialog asking the user to turn off disabling battery optimization when turning on notifications"
+  },
+  "askToEnableBackgroundServiceTitle": "Notificări dezactivate",
+  "@askToEnableBackgroundServiceTitle": {
+    "description": "If the users tries to turn on notifications for a channel but hasn't enable notifications in the app we need to turn it on for them"
+  },
+  "askToEnableBackgroundServiceContent": "Pentru a primi notificări, trebuie să activezi notificările Clipious, apasă OK pentru a le activa.",
+  "@askToEnableBackgroundServiceContent": {
+    "description": "If the users tries to turn on notifications for a channel but hasn't enable notifications in the app we need to turn it on for them"
+  },
+  "otherNotifications": "Alte surse de notificări (icoane în formă de clopoțel)",
+  "@otherNotifications": {
+    "description": "Title for settings section in the notification settings"
+  },
+  "deleteChannelNotificationTitle": "Ștergi notificarea canalului?",
+  "@deleteChannelNotificationTitle": {
+    "description": "Title for dialog to confirm whether to delete channel notifications"
+  },
+  "deleteChannelNotificationContent": "Nu vei mai primi notificări de la acest canal.",
+  "@deleteChannelNotificationContent": {
+    "description": "Title for dialog to confirm whether to delete channel notifications"
+  },
+  "deletePlaylistNotificationTitle": "Ștergi notificarea listei de redare?",
+  "@deletePlaylistNotificationTitle": {
+    "description": "Title for dialog to confirm whether to delete playlist notifications"
+  },
+  "deletePlaylistNotificationContent": "Nu vei mai primi notificări de la această listă de redare.",
+  "@deletePlaylistNotificationContent": {
+    "description": "Title for dialog to confirm whether to delete playlist notifications"
+  },
+  "channelNotificationTitle": "Videoclipuri noi de la {channel}",
+  "@channelNotificationTitle": {
+    "description": "Title for the channel notifications when there are new videos",
+    "placeholders": {
+      "channel": {
+        "type": "String",
+        "example": "MKBHD"
+      }
+    }
+  },
+  "channelNotificationContent": "Există {count, plural, =0{no new videos} =1{1 new video} other{{count} new videos}} de la {channel}",
+  "@channelNotificationContent": {
+    "description": "Content for channel notification when there are new videos",
+    "placeholders": {
+      "channel": {
+        "type": "String",
+        "example": "MKBHD"
+      },
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "playlistNotificationTitle": "Videoclipuri noi în lista de redare {playlist}",
+  "@playlistNotificationTitle": {
+    "description": "Title for the playlist notifications when there are new videos",
+    "placeholders": {
+      "playlist": {
+        "type": "String",
+        "example": "Lo-Fi girl"
+      }
+    }
+  },
+  "playlistNotificationContent": "Există {count, plural, =0{no new videos} =1{1 new video} other{{count} new videos}} în lista de redare {playlist}",
+  "@playlistNotificationContent": {
+    "description": "Content for playlist notification when there are new videos",
+    "placeholders": {
+      "playlist": {
+        "type": "String",
+        "example": "Lo-Fi girl"
+      },
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "foregroundServiceNotificationTitle": "Monitorizare video",
+  "@foregroundServiceNotificationTitle": {
+    "description": "Title for the foreground service running notification when the user wants to receive notifications"
+  },
+  "foregroundServiceNotificationContent": "Va verifica pentru videoclipuri noi o dată la {hours, select, 1{per hour} 24{a day} other{every {hours} hours}}",
+  "@foregroundServiceNotificationContent": {
+    "description": "Content for the foreground service running notification when the user wants to receive notifications",
+    "hours": {
+      "type": "num",
+      "format": "compact"
+    }
+  },
+  "foregroundServiceUpdatingSubscriptions": "Se verifică abonamentele...",
+  "@foregroundServiceUpdatingSubscriptions": {
+    "description": "Foreground service notification text when checking for new subscription videos"
+  },
+  "foregroundServiceUpdatingPlaylist": "Se verifică listele de redare...",
+  "@foregroundServiceUpdatingPlaylist": {
+    "description": "Foreground service notification text when checking for new playlist videos"
+  },
+  "foregroundServiceUpdatingChannels": "Se verifică canalele...",
+  "@foregroundServiceUpdatingChannels": {
+    "description": "Foreground service notification text when checking for new channel videos"
+  },
+  "notificationFrequencySettingsTitle": "Noua frecvență de verificare video",
+  "@notificationFrequencySettingsTitle": {
+    "description": "Title for frequency settings"
+  },
+  "notificationFrequencySettingsDescription": "Cât de des va verifica aplicația dacă există videoclipuri noi",
+  "@notificationFrequencySettingsDescription": {
+    "description": "Description for frequency settings"
+  },
+  "notificationFrequencySliderLabel": "{hours, select,  24{1d} other{{hours}h}}",
+  "@notificationFrequencySliderLabel": {
+    "description": "Short form for a number of hours going up to 1 day",
+    "hours": {
+      "type": "num",
+      "format": "compact"
+    }
+  },
+  "subtitlesBackground": "Fundalul subtitrărilor",
+  "@subtitlesBackground": {
+    "description": "Title for settings to set black background  for subtitles"
+  },
+  "subtitlesBackgroundDescription": "Adaugă un fundal negru subtitrărilor pentru a le face mai ușor de citit",
+  "@subtitlesBackgroundDescription": {
+    "description": "Description for settings to set black background  for subtitles"
+  },
+  "history": "Istoric",
+  "@history": {
+    "description": "User view history label"
+  },
+  "deArrowSettingDescription": "Înlocuiește titlurile și miniaturile clickbait",
+  "@deArrowSettingDescription": {
+    "description": "Description for dearrow"
+  },
+  "deArrowReplaceThumbnails": "Înlocuiește miniaturile",
+  "@deArrowReplaceThumbnails": {
+    "description": "Settings title for checkbox on whether the thumbnail should be replaced as well"
+  },
+  "deArrowReplaceThumbnailsDescription": "Înlocuiește miniaturile videoclipurilor în plus față de titluri",
+  "@deArrowReplaceThumbnailsDescription": {
+    "description": "Description for DeArrow setting switch"
+  },
+  "deArrowWarning": "Activarea DeArrow poate reduce semnificativ viteza de navigare a aplicației, întrucât sunt necesare cereri http suplimentare pentru fiecare videoclip în parte",
+  "@deArrowWarning": {
+    "description": "Warning message when the user enables DeArrow"
+  },
+  "copySettingsAsJson": "Copiază setările ca JSON în clipboard",
+  "@copySettingsAsJson": {
+    "description": "title for settings sections to allow users to copy their settings as json to make debugging easier"
+  },
+  "copySettingsAsJsonDescription": "Copiază setările ca JSON pentru a ajuta la depanare dacă întâmpini o problemă cu aplicația și decizi să raportezi o problemă",
+  "@copySettingsAsJsonDescription": {
+    "description": ""
+  },
+  "seeking": "În căutare",
+  "@seeking": {
+    "description": "category for settings related to seeking in a video"
   }
 }

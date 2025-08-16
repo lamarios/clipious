@@ -1066,5 +1066,43 @@
   "home": "Dom",
   "@home": {
     "description": "Label for Home browsing tab"
+  },
+  "navigationBarLabelAlwaysShowing": "Tytuł zawsze się wyswietla",
+  "@navigationBarLabelAlwaysShowing": {
+    "description": "Label always showing option for navigation bar"
+  },
+  "videoFilterDayOfWeek": "Wybierz dni aby zastosować filtry",
+  "@videoFilterDayOfWeek": {
+    "description": "Title for day selection for the filter"
+  },
+  "customizeAppLayout": "Dostosuj sekcję aplikacji",
+  "@customizeAppLayout": {
+    "description": "Settings label for the settings to allow the user to set up the app sections themselves"
+  },
+  "distractionFreeModeDescription": "Wyłącz komentarze i rekomendacje filmów",
+  "@distractionFreeModeDescription": {
+    "description": "Description for distraction free mode"
+  },
+  "rydCustomInstanceDescription": "Użyj innej instancji RYD, pozostaw puste aby użyć domyślnej",
+  "@rydCustomInstanceDescription": {
+    "description": "description for custom ryd instancr setting"
+  },
+  "navigationBarStyle": "Styl paska nawigacyjnego",
+  "@navigationBarStyle": {
+    "description": "Label for settings on customizing navigation bar style"
+  },
+  "navigationBarLabelNeverShow": "Nigdy nie pokazuj tytułu",
+  "@navigationBarLabelNeverShow": {
+    "description": "Never show label option for navigation bar"
+  },
+  "videoFilterAppliedOn": "Zastosowano {selectedDays}",
+  "@videoFilterAppliedOn": {
+    "description": "Readable text on when the filter should apply",
+    "placeholders": {
+      "selectedDays": {
+        "type": "String",
+        "example": "Monday, Wednesday, Friday"
+      }
+    }
   }
 }
