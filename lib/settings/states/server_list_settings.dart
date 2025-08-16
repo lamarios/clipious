@@ -19,7 +19,7 @@ class ServerListSettingsCubit extends Cubit<ServerListSettingsState> {
 
   ServerListSettingsCubit(super.initialState, this.appCubit) {
     refreshServers();
-    getPublicServers();
+    // getPublicServers();
   }
 
   upsertServer(Server server) async {
@@ -38,6 +38,7 @@ class ServerListSettingsCubit extends Cubit<ServerListSettingsState> {
     emit(state.copyWith(dbServers: dbServers, publicServers: servers));
   }
 
+/*
   getPublicServers() async {
     emit(state.copyWith(
         pinging: true, publicServersError: PublicServerErrors.none));
@@ -87,6 +88,7 @@ class ServerListSettingsCubit extends Cubit<ServerListSettingsState> {
       rethrow;
     }
   }
+*/
 
   bool isLoggedInToServer(String url) {
     Server server = state.dbServers.firstWhere((s) => s.url == url,

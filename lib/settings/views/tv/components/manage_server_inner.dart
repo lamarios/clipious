@@ -35,11 +35,13 @@ class TvManageServersInner extends StatelessWidget {
         builder: (context, state) {
       var cubit = context.read<ServerListSettingsCubit>();
       var settings = context.watch<SettingsCubit>();
+/*
       var filteredPublicServers = state.publicServers
           .where((s) =>
               state.dbServers.indexWhere((element) => element.url == s.url) ==
               -1)
           .toList();
+*/
       return ListView(children: [
         SettingsTile(
           title: locals.skipSslVerification,
@@ -79,6 +81,7 @@ class TvManageServersInner extends StatelessWidget {
           ),
           onSelected: (context) => addServer(context),
         ),
+/*
         SettingsTitle(title: locals.publicServers),
         ...state.publicServersError != PublicServerErrors.none
             ? [
@@ -120,6 +123,7 @@ class TvManageServersInner extends StatelessWidget {
                               onSelected: (context) => cubit.upsertServer(s),
                             ))
                         .toList()
+*/
       ]);
     });
   }
