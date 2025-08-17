@@ -362,7 +362,7 @@ class DownloadManagerCubit extends Cubit<DownloadManagerState> {
 }
 
 @freezed
-class DownloadManagerState with _$DownloadManagerState {
+sealed class DownloadManagerState with _$DownloadManagerState {
   const factory DownloadManagerState(
           {@Default([]) List<DownloadedVideo> videos,
           @Default({}) Map<String, DownloadProgress> downloadProgresses}) =

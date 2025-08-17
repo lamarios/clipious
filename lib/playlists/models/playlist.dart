@@ -91,7 +91,7 @@ const youtubePlaylist = "youtubePlayList";
 const invidiousPlaylist = "invidiousPlaylist";
 
 @freezed
-class Playlist with _$Playlist {
+sealed class Playlist with _$Playlist {
   const factory Playlist(
       {@Default(youtubePlaylist) String type,
       required String title,

@@ -993,7 +993,7 @@ class PlayerCubit extends Cubit<PlayerState> with WidgetsBindingObserver {
 }
 
 @freezed
-class PlayerState with _$PlayerState {
+sealed class PlayerState with _$PlayerState {
   const factory PlayerState(
       {
       // player display properties

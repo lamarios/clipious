@@ -64,7 +64,7 @@ class CommentsCubit extends Cubit<CommentsState> {
 }
 
 @freezed
-class CommentsState with _$CommentsState {
+sealed class CommentsState with _$CommentsState {
   const factory CommentsState(
       {required Video video,
       @Default(true) bool loadingComments,

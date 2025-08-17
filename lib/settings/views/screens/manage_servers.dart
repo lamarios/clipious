@@ -1,7 +1,7 @@
 import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:clipious/l10n/generated/app_localizations.dart';
 import 'package:clipious/settings/states/server_list_settings.dart';
 import 'package:clipious/settings/views/components/manager_server_inner.dart';
 

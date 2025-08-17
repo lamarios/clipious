@@ -361,7 +361,7 @@ class AudioPlayerCubit extends MediaPlayerCubit<AudioPlayerState> {
 }
 
 @freezed
-class AudioPlayerState extends MediaPlayerState with _$AudioPlayerState {
+sealed class AudioPlayerState extends MediaPlayerState with _$AudioPlayerState {
   const factory AudioPlayerState({
     @Default(Duration(milliseconds: 1)) Duration audioLength,
     @Default(Duration.zero) Duration audioPosition,

@@ -1,5 +1,5 @@
 import 'package:clipious/player/models/sleep_timer.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:clipious/l10n/generated/app_localizations.dart';
 
 import 'package:clipious/player/states/sleep_timer.dart';
 import 'package:clipious/player/views/tv/components/player_settings.dart';

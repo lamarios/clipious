@@ -138,7 +138,7 @@ class AppCubit extends Cubit<AppState> {
 }
 
 @freezed
-class AppState with _$AppState {
+sealed class AppState with _$AppState {
   const factory AppState(int firstIndex, Server? server, HomeLayout homeLayout,
       {@Default(false) bool globalLoading}) = _AppState;
 }

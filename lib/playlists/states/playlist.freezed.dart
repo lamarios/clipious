@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,31 +9,56 @@ part of 'playlist.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$PlaylistState {
-  double get loadingProgress => throw _privateConstructorUsedError;
-  Playlist get playlist => throw _privateConstructorUsedError;
-  bool get loading => throw _privateConstructorUsedError;
-  double get playlistItemHeight => throw _privateConstructorUsedError;
-  bool get showImage => throw _privateConstructorUsedError;
+  double get loadingProgress;
+  Playlist get playlist;
+  bool get loading;
+  double get playlistItemHeight;
+  bool get showImage;
 
   /// Create a copy of PlaylistState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $PlaylistStateCopyWith<PlaylistState> get copyWith =>
-      throw _privateConstructorUsedError;
+      _$PlaylistStateCopyWithImpl<PlaylistState>(
+          this as PlaylistState, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is PlaylistState &&
+            (identical(other.loadingProgress, loadingProgress) ||
+                other.loadingProgress == loadingProgress) &&
+            (identical(other.playlist, playlist) ||
+                other.playlist == playlist) &&
+            (identical(other.loading, loading) || other.loading == loading) &&
+            (identical(other.playlistItemHeight, playlistItemHeight) ||
+                other.playlistItemHeight == playlistItemHeight) &&
+            (identical(other.showImage, showImage) ||
+                other.showImage == showImage));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, loadingProgress, playlist,
+      loading, playlistItemHeight, showImage);
+
+  @override
+  String toString() {
+    return 'PlaylistState(loadingProgress: $loadingProgress, playlist: $playlist, loading: $loading, playlistItemHeight: $playlistItemHeight, showImage: $showImage)';
+  }
 }
 
 /// @nodoc
-abstract class $PlaylistStateCopyWith<$Res> {
+abstract mixin class $PlaylistStateCopyWith<$Res> {
   factory $PlaylistStateCopyWith(
-          PlaylistState value, $Res Function(PlaylistState) then) =
-      _$PlaylistStateCopyWithImpl<$Res, PlaylistState>;
+          PlaylistState value, $Res Function(PlaylistState) _then) =
+      _$PlaylistStateCopyWithImpl;
   @useResult
   $Res call(
       {double loadingProgress,
@@ -46,14 +71,12 @@ abstract class $PlaylistStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$PlaylistStateCopyWithImpl<$Res, $Val extends PlaylistState>
+class _$PlaylistStateCopyWithImpl<$Res>
     implements $PlaylistStateCopyWith<$Res> {
-  _$PlaylistStateCopyWithImpl(this._value, this._then);
+  _$PlaylistStateCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final PlaylistState _self;
+  final $Res Function(PlaylistState) _then;
 
   /// Create a copy of PlaylistState
   /// with the given fields replaced by the non-null parameter values.
@@ -66,28 +89,28 @@ class _$PlaylistStateCopyWithImpl<$Res, $Val extends PlaylistState>
     Object? playlistItemHeight = null,
     Object? showImage = null,
   }) {
-    return _then(_value.copyWith(
+    return _then(_self.copyWith(
       loadingProgress: null == loadingProgress
-          ? _value.loadingProgress
+          ? _self.loadingProgress
           : loadingProgress // ignore: cast_nullable_to_non_nullable
               as double,
       playlist: null == playlist
-          ? _value.playlist
+          ? _self.playlist
           : playlist // ignore: cast_nullable_to_non_nullable
               as Playlist,
       loading: null == loading
-          ? _value.loading
+          ? _self.loading
           : loading // ignore: cast_nullable_to_non_nullable
               as bool,
       playlistItemHeight: null == playlistItemHeight
-          ? _value.playlistItemHeight
+          ? _self.playlistItemHeight
           : playlistItemHeight // ignore: cast_nullable_to_non_nullable
               as double,
       showImage: null == showImage
-          ? _value.showImage
+          ? _self.showImage
           : showImage // ignore: cast_nullable_to_non_nullable
               as bool,
-    ) as $Val);
+    ));
   }
 
   /// Create a copy of PlaylistState
@@ -95,79 +118,178 @@ class _$PlaylistStateCopyWithImpl<$Res, $Val extends PlaylistState>
   @override
   @pragma('vm:prefer-inline')
   $PlaylistCopyWith<$Res> get playlist {
-    return $PlaylistCopyWith<$Res>(_value.playlist, (value) {
-      return _then(_value.copyWith(playlist: value) as $Val);
+    return $PlaylistCopyWith<$Res>(_self.playlist, (value) {
+      return _then(_self.copyWith(playlist: value));
     });
   }
 }
 
-/// @nodoc
-abstract class _$$PlaylistStateImplCopyWith<$Res>
-    implements $PlaylistStateCopyWith<$Res> {
-  factory _$$PlaylistStateImplCopyWith(
-          _$PlaylistStateImpl value, $Res Function(_$PlaylistStateImpl) then) =
-      __$$PlaylistStateImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {double loadingProgress,
-      Playlist playlist,
-      bool loading,
-      double playlistItemHeight,
-      bool showImage});
+/// Adds pattern-matching-related methods to [PlaylistState].
+extension PlaylistStatePatterns on PlaylistState {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
 
-  @override
-  $PlaylistCopyWith<$Res> get playlist;
-}
-
-/// @nodoc
-class __$$PlaylistStateImplCopyWithImpl<$Res>
-    extends _$PlaylistStateCopyWithImpl<$Res, _$PlaylistStateImpl>
-    implements _$$PlaylistStateImplCopyWith<$Res> {
-  __$$PlaylistStateImplCopyWithImpl(
-      _$PlaylistStateImpl _value, $Res Function(_$PlaylistStateImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of PlaylistState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? loadingProgress = null,
-    Object? playlist = null,
-    Object? loading = null,
-    Object? playlistItemHeight = null,
-    Object? showImage = null,
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_PlaylistState value)? $default, {
+    required TResult orElse(),
   }) {
-    return _then(_$PlaylistStateImpl(
-      loadingProgress: null == loadingProgress
-          ? _value.loadingProgress
-          : loadingProgress // ignore: cast_nullable_to_non_nullable
-              as double,
-      playlist: null == playlist
-          ? _value.playlist
-          : playlist // ignore: cast_nullable_to_non_nullable
-              as Playlist,
-      loading: null == loading
-          ? _value.loading
-          : loading // ignore: cast_nullable_to_non_nullable
-              as bool,
-      playlistItemHeight: null == playlistItemHeight
-          ? _value.playlistItemHeight
-          : playlistItemHeight // ignore: cast_nullable_to_non_nullable
-              as double,
-      showImage: null == showImage
-          ? _value.showImage
-          : showImage // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
+    final _that = this;
+    switch (_that) {
+      case _PlaylistState() when $default != null:
+        return $default(_that);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_PlaylistState value) $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _PlaylistState():
+        return $default(_that);
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_PlaylistState value)? $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _PlaylistState() when $default != null:
+        return $default(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(double loadingProgress, Playlist playlist, bool loading,
+            double playlistItemHeight, bool showImage)?
+        $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _PlaylistState() when $default != null:
+        return $default(_that.loadingProgress, _that.playlist, _that.loading,
+            _that.playlistItemHeight, _that.showImage);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(double loadingProgress, Playlist playlist, bool loading,
+            double playlistItemHeight, bool showImage)
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _PlaylistState():
+        return $default(_that.loadingProgress, _that.playlist, _that.loading,
+            _that.playlistItemHeight, _that.showImage);
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult? Function(double loadingProgress, Playlist playlist, bool loading,
+            double playlistItemHeight, bool showImage)?
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _PlaylistState() when $default != null:
+        return $default(_that.loadingProgress, _that.playlist, _that.loading,
+            _that.playlistItemHeight, _that.showImage);
+      case _:
+        return null;
+    }
   }
 }
 
 /// @nodoc
 
-class _$PlaylistStateImpl implements _PlaylistState {
-  const _$PlaylistStateImpl(
+class _PlaylistState implements PlaylistState {
+  const _PlaylistState(
       {this.loadingProgress = 0,
       required this.playlist,
       this.loading = true,
@@ -188,16 +310,19 @@ class _$PlaylistStateImpl implements _PlaylistState {
   @JsonKey()
   final bool showImage;
 
+  /// Create a copy of PlaylistState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'PlaylistState(loadingProgress: $loadingProgress, playlist: $playlist, loading: $loading, playlistItemHeight: $playlistItemHeight, showImage: $showImage)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$PlaylistStateCopyWith<_PlaylistState> get copyWith =>
+      __$PlaylistStateCopyWithImpl<_PlaylistState>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$PlaylistStateImpl &&
+            other is _PlaylistState &&
             (identical(other.loadingProgress, loadingProgress) ||
                 other.loadingProgress == loadingProgress) &&
             (identical(other.playlist, playlist) ||
@@ -213,38 +338,83 @@ class _$PlaylistStateImpl implements _PlaylistState {
   int get hashCode => Object.hash(runtimeType, loadingProgress, playlist,
       loading, playlistItemHeight, showImage);
 
+  @override
+  String toString() {
+    return 'PlaylistState(loadingProgress: $loadingProgress, playlist: $playlist, loading: $loading, playlistItemHeight: $playlistItemHeight, showImage: $showImage)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$PlaylistStateCopyWith<$Res>
+    implements $PlaylistStateCopyWith<$Res> {
+  factory _$PlaylistStateCopyWith(
+          _PlaylistState value, $Res Function(_PlaylistState) _then) =
+      __$PlaylistStateCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {double loadingProgress,
+      Playlist playlist,
+      bool loading,
+      double playlistItemHeight,
+      bool showImage});
+
+  @override
+  $PlaylistCopyWith<$Res> get playlist;
+}
+
+/// @nodoc
+class __$PlaylistStateCopyWithImpl<$Res>
+    implements _$PlaylistStateCopyWith<$Res> {
+  __$PlaylistStateCopyWithImpl(this._self, this._then);
+
+  final _PlaylistState _self;
+  final $Res Function(_PlaylistState) _then;
+
   /// Create a copy of PlaylistState
   /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$PlaylistStateImplCopyWith<_$PlaylistStateImpl> get copyWith =>
-      __$$PlaylistStateImplCopyWithImpl<_$PlaylistStateImpl>(this, _$identity);
-}
-
-abstract class _PlaylistState implements PlaylistState {
-  const factory _PlaylistState(
-      {final double loadingProgress,
-      required final Playlist playlist,
-      final bool loading,
-      required final double playlistItemHeight,
-      final bool showImage}) = _$PlaylistStateImpl;
-
-  @override
-  double get loadingProgress;
-  @override
-  Playlist get playlist;
-  @override
-  bool get loading;
-  @override
-  double get playlistItemHeight;
-  @override
-  bool get showImage;
+  $Res call({
+    Object? loadingProgress = null,
+    Object? playlist = null,
+    Object? loading = null,
+    Object? playlistItemHeight = null,
+    Object? showImage = null,
+  }) {
+    return _then(_PlaylistState(
+      loadingProgress: null == loadingProgress
+          ? _self.loadingProgress
+          : loadingProgress // ignore: cast_nullable_to_non_nullable
+              as double,
+      playlist: null == playlist
+          ? _self.playlist
+          : playlist // ignore: cast_nullable_to_non_nullable
+              as Playlist,
+      loading: null == loading
+          ? _self.loading
+          : loading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      playlistItemHeight: null == playlistItemHeight
+          ? _self.playlistItemHeight
+          : playlistItemHeight // ignore: cast_nullable_to_non_nullable
+              as double,
+      showImage: null == showImage
+          ? _self.showImage
+          : showImage // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
 
   /// Create a copy of PlaylistState
   /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$PlaylistStateImplCopyWith<_$PlaylistStateImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  $PlaylistCopyWith<$Res> get playlist {
+    return $PlaylistCopyWith<$Res>(_self.playlist, (value) {
+      return _then(_self.copyWith(playlist: value));
+    });
+  }
 }
+
+// dart format on

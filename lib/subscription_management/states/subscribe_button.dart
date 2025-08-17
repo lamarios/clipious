@@ -70,7 +70,7 @@ class SubscribeButtonCubit extends Cubit<SubscribeButtonState> {
 }
 
 @freezed
-class SubscribeButtonState with _$SubscribeButtonState {
+sealed class SubscribeButtonState with _$SubscribeButtonState {
   const factory SubscribeButtonState({
     required String channelId,
     @Default(false) bool isOfflineSubscribed,

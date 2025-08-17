@@ -13,7 +13,7 @@ part 'downloaded_video.g.dart';
 const String _downloadFolder = 'downloads';
 
 @freezed
-class DownloadedVideo with _$DownloadedVideo implements IdedVideo {
+sealed class DownloadedVideo with _$DownloadedVideo implements IdedVideo {
   @Implements<IdedVideo>()
   const factory DownloadedVideo(
       {required String videoId,

@@ -1,5 +1,5 @@
 import 'package:clipious/settings/models/errors/cannot_add_server_error.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:clipious/l10n/generated/app_localizations.dart';
 
 class WrongThumbnailUrl extends CannotAddServerError {
   WrongThumbnailUrl({super.error = 'Wrong thumbnail url'});

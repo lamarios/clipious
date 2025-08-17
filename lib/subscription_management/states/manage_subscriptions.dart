@@ -56,7 +56,7 @@ class ManageSubscriptionCubit extends Cubit<ManageSubscriptionsState> {
 }
 
 @freezed
-class ManageSubscriptionsState with _$ManageSubscriptionsState {
+sealed class ManageSubscriptionsState with _$ManageSubscriptionsState {
   const factory ManageSubscriptionsState(
       {@Default([]) List<Subscription> subs,
       @Default([]) List<OfflineSubscription> offlineSubs,

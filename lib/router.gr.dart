@@ -1,3 +1,4 @@
+// dart format width=80
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 // **************************************************************************
@@ -16,6 +17,7 @@ class AddServerRoute extends PageRouteInfo<void> {
       : super(
           AddServerRoute.name,
           initialChildren: children,
+          argsEquality: false,
         );
 
   static const String name = 'AddServerRoute';
@@ -32,10 +34,8 @@ class AddServerRoute extends PageRouteInfo<void> {
 /// [AppLogsScreen]
 class AppLogsRoute extends PageRouteInfo<void> {
   const AppLogsRoute({List<PageRouteInfo>? children})
-      : super(
-          AppLogsRoute.name,
-          initialChildren: children,
-        );
+      : super(AppLogsRoute.name,
+            initialChildren: children, argsEquality: false);
 
   static const String name = 'AppLogsRoute';
 
@@ -54,6 +54,7 @@ class AppearanceSettingsRoute extends PageRouteInfo<void> {
       : super(
           AppearanceSettingsRoute.name,
           initialChildren: children,
+          argsEquality: false,
         );
 
   static const String name = 'AppearanceSettingsRoute';
@@ -73,6 +74,7 @@ class BrowsingSettingsRoute extends PageRouteInfo<void> {
       : super(
           BrowsingSettingsRoute.name,
           initialChildren: children,
+          argsEquality: false,
         );
 
   static const String name = 'BrowsingSettingsRoute';
@@ -88,17 +90,12 @@ class BrowsingSettingsRoute extends PageRouteInfo<void> {
 /// generated route for
 /// [ChannelInfoTab]
 class ChannelInfoRoute extends PageRouteInfo<ChannelInfoRouteArgs> {
-  ChannelInfoRoute({
-    Key? key,
-    Channel? channel,
-    List<PageRouteInfo>? children,
-  }) : super(
+  ChannelInfoRoute({Key? key, Channel? channel, List<PageRouteInfo>? children})
+      : super(
           ChannelInfoRoute.name,
-          args: ChannelInfoRouteArgs(
-            key: key,
-            channel: channel,
-          ),
+          args: ChannelInfoRouteArgs(key: key, channel: channel),
           initialChildren: children,
+          argsEquality: false,
         );
 
   static const String name = 'ChannelInfoRoute';
@@ -107,20 +104,15 @@ class ChannelInfoRoute extends PageRouteInfo<ChannelInfoRouteArgs> {
     name,
     builder: (data) {
       final args = data.argsAs<ChannelInfoRouteArgs>(
-          orElse: () => const ChannelInfoRouteArgs());
-      return ChannelInfoTab(
-        key: args.key,
-        channel: args.channel,
+        orElse: () => const ChannelInfoRouteArgs(),
       );
+      return ChannelInfoTab(key: args.key, channel: args.channel);
     },
   );
 }
 
 class ChannelInfoRouteArgs {
-  const ChannelInfoRouteArgs({
-    this.key,
-    this.channel,
-  });
+  const ChannelInfoRouteArgs({this.key, this.channel});
 
   final Key? key;
 
@@ -141,11 +133,9 @@ class ChannelPlaylistsRoute extends PageRouteInfo<ChannelPlaylistsRouteArgs> {
     List<PageRouteInfo>? children,
   }) : super(
           ChannelPlaylistsRoute.name,
-          args: ChannelPlaylistsRouteArgs(
-            key: key,
-            channelId: channelId,
-          ),
+          args: ChannelPlaylistsRouteArgs(key: key, channelId: channelId),
           initialChildren: children,
+          argsEquality: false,
         );
 
   static const String name = 'ChannelPlaylistsRoute';
@@ -154,20 +144,15 @@ class ChannelPlaylistsRoute extends PageRouteInfo<ChannelPlaylistsRouteArgs> {
     name,
     builder: (data) {
       final args = data.argsAs<ChannelPlaylistsRouteArgs>(
-          orElse: () => const ChannelPlaylistsRouteArgs());
-      return ChannelPlaylistsTab(
-        key: args.key,
-        channelId: args.channelId,
+        orElse: () => const ChannelPlaylistsRouteArgs(),
       );
+      return ChannelPlaylistsTab(key: args.key, channelId: args.channelId);
     },
   );
 }
 
 class ChannelPlaylistsRouteArgs {
-  const ChannelPlaylistsRouteArgs({
-    this.key,
-    this.channelId,
-  });
+  const ChannelPlaylistsRouteArgs({this.key, this.channelId});
 
   final Key? key;
 
@@ -188,12 +173,10 @@ class ChannelRoute extends PageRouteInfo<ChannelRouteArgs> {
     List<PageRouteInfo>? children,
   }) : super(
           ChannelRoute.name,
-          args: ChannelRouteArgs(
-            key: key,
-            channelId: channelId,
-          ),
+          args: ChannelRouteArgs(key: key, channelId: channelId),
           rawPathParams: {'channelId': channelId},
           initialChildren: children,
+          argsEquality: false,
         );
 
   static const String name = 'ChannelRoute';
@@ -203,21 +186,16 @@ class ChannelRoute extends PageRouteInfo<ChannelRouteArgs> {
     builder: (data) {
       final pathParams = data.inheritedPathParams;
       final args = data.argsAs<ChannelRouteArgs>(
-          orElse: () =>
-              ChannelRouteArgs(channelId: pathParams.getString('channelId')));
-      return ChannelScreen(
-        key: args.key,
-        channelId: args.channelId,
+        orElse: () =>
+            ChannelRouteArgs(channelId: pathParams.getString('channelId')),
       );
+      return ChannelScreen(key: args.key, channelId: args.channelId);
     },
   );
 }
 
 class ChannelRouteArgs {
-  const ChannelRouteArgs({
-    this.key,
-    required this.channelId,
-  });
+  const ChannelRouteArgs({this.key, required this.channelId});
 
   final Key? key;
 
@@ -238,11 +216,9 @@ class ChannelShortsRoute extends PageRouteInfo<ChannelShortsRouteArgs> {
     List<PageRouteInfo>? children,
   }) : super(
           ChannelShortsRoute.name,
-          args: ChannelShortsRouteArgs(
-            key: key,
-            channel: channel,
-          ),
+          args: ChannelShortsRouteArgs(key: key, channel: channel),
           initialChildren: children,
+          argsEquality: false,
         );
 
   static const String name = 'ChannelShortsRoute';
@@ -251,20 +227,15 @@ class ChannelShortsRoute extends PageRouteInfo<ChannelShortsRouteArgs> {
     name,
     builder: (data) {
       final args = data.argsAs<ChannelShortsRouteArgs>(
-          orElse: () => const ChannelShortsRouteArgs());
-      return ChannelShortsTab(
-        key: args.key,
-        channel: args.channel,
+        orElse: () => const ChannelShortsRouteArgs(),
       );
+      return ChannelShortsTab(key: args.key, channel: args.channel);
     },
   );
 }
 
 class ChannelShortsRouteArgs {
-  const ChannelShortsRouteArgs({
-    this.key,
-    this.channel,
-  });
+  const ChannelShortsRouteArgs({this.key, this.channel});
 
   final Key? key;
 
@@ -285,11 +256,9 @@ class ChannelStreamRoute extends PageRouteInfo<ChannelStreamRouteArgs> {
     List<PageRouteInfo>? children,
   }) : super(
           ChannelStreamRoute.name,
-          args: ChannelStreamRouteArgs(
-            key: key,
-            channel: channel,
-          ),
+          args: ChannelStreamRouteArgs(key: key, channel: channel),
           initialChildren: children,
+          argsEquality: false,
         );
 
   static const String name = 'ChannelStreamRoute';
@@ -298,20 +267,15 @@ class ChannelStreamRoute extends PageRouteInfo<ChannelStreamRouteArgs> {
     name,
     builder: (data) {
       final args = data.argsAs<ChannelStreamRouteArgs>(
-          orElse: () => const ChannelStreamRouteArgs());
-      return ChannelStreamTab(
-        key: args.key,
-        channel: args.channel,
+        orElse: () => const ChannelStreamRouteArgs(),
       );
+      return ChannelStreamTab(key: args.key, channel: args.channel);
     },
   );
 }
 
 class ChannelStreamRouteArgs {
-  const ChannelStreamRouteArgs({
-    this.key,
-    this.channel,
-  });
+  const ChannelStreamRouteArgs({this.key, this.channel});
 
   final Key? key;
 
@@ -326,17 +290,12 @@ class ChannelStreamRouteArgs {
 /// generated route for
 /// [ChannelVideoTab]
 class ChannelVideoRoute extends PageRouteInfo<ChannelVideoRouteArgs> {
-  ChannelVideoRoute({
-    Key? key,
-    Channel? channel,
-    List<PageRouteInfo>? children,
-  }) : super(
+  ChannelVideoRoute({Key? key, Channel? channel, List<PageRouteInfo>? children})
+      : super(
           ChannelVideoRoute.name,
-          args: ChannelVideoRouteArgs(
-            key: key,
-            channel: channel,
-          ),
+          args: ChannelVideoRouteArgs(key: key, channel: channel),
           initialChildren: children,
+          argsEquality: false,
         );
 
   static const String name = 'ChannelVideoRoute';
@@ -345,20 +304,15 @@ class ChannelVideoRoute extends PageRouteInfo<ChannelVideoRouteArgs> {
     name,
     builder: (data) {
       final args = data.argsAs<ChannelVideoRouteArgs>(
-          orElse: () => const ChannelVideoRouteArgs());
-      return ChannelVideoTab(
-        key: args.key,
-        channel: args.channel,
+        orElse: () => const ChannelVideoRouteArgs(),
       );
+      return ChannelVideoTab(key: args.key, channel: args.channel);
     },
   );
 }
 
 class ChannelVideoRouteArgs {
-  const ChannelVideoRouteArgs({
-    this.key,
-    this.channel,
-  });
+  const ChannelVideoRouteArgs({this.key, this.channel});
 
   final Key? key;
 
@@ -373,17 +327,12 @@ class ChannelVideoRouteArgs {
 /// generated route for
 /// [CommentsTab]
 class CommentsRoute extends PageRouteInfo<CommentsRouteArgs> {
-  CommentsRoute({
-    Key? key,
-    Video? video,
-    List<PageRouteInfo>? children,
-  }) : super(
+  CommentsRoute({Key? key, Video? video, List<PageRouteInfo>? children})
+      : super(
           CommentsRoute.name,
-          args: CommentsRouteArgs(
-            key: key,
-            video: video,
-          ),
+          args: CommentsRouteArgs(key: key, video: video),
           initialChildren: children,
+          argsEquality: false,
         );
 
   static const String name = 'CommentsRoute';
@@ -392,20 +341,15 @@ class CommentsRoute extends PageRouteInfo<CommentsRouteArgs> {
     name,
     builder: (data) {
       final args = data.argsAs<CommentsRouteArgs>(
-          orElse: () => const CommentsRouteArgs());
-      return CommentsTab(
-        key: args.key,
-        video: args.video,
+        orElse: () => const CommentsRouteArgs(),
       );
+      return CommentsTab(key: args.key, video: args.video);
     },
   );
 }
 
 class CommentsRouteArgs {
-  const CommentsRouteArgs({
-    this.key,
-    this.video,
-  });
+  const CommentsRouteArgs({this.key, this.video});
 
   final Key? key;
 
@@ -424,6 +368,7 @@ class DeArrowSettingsRoute extends PageRouteInfo<void> {
       : super(
           DeArrowSettingsRoute.name,
           initialChildren: children,
+          argsEquality: false,
         );
 
   static const String name = 'DeArrowSettingsRoute';
@@ -443,6 +388,7 @@ class DownloadManagerRoute extends PageRouteInfo<void> {
       : super(
           DownloadManagerRoute.name,
           initialChildren: children,
+          argsEquality: false,
         );
 
   static const String name = 'DownloadManagerRoute';
@@ -462,6 +408,7 @@ class DownloadsRoute extends PageRouteInfo<void> {
       : super(
           DownloadsRoute.name,
           initialChildren: children,
+          argsEquality: false,
         );
 
   static const String name = 'DownloadsRoute';
@@ -481,6 +428,7 @@ class EditHomeLayoutRoute extends PageRouteInfo<void> {
       : super(
           EditHomeLayoutRoute.name,
           initialChildren: children,
+          argsEquality: false,
         );
 
   static const String name = 'EditHomeLayoutRoute';
@@ -497,10 +445,8 @@ class EditHomeLayoutRoute extends PageRouteInfo<void> {
 /// [HistoryTab]
 class HistoryRoute extends PageRouteInfo<void> {
   const HistoryRoute({List<PageRouteInfo>? children})
-      : super(
-          HistoryRoute.name,
-          initialChildren: children,
-        );
+      : super(HistoryRoute.name,
+            initialChildren: children, argsEquality: false);
 
   static const String name = 'HistoryRoute';
 
@@ -516,10 +462,7 @@ class HistoryRoute extends PageRouteInfo<void> {
 /// [HomeTab]
 class HomeRoute extends PageRouteInfo<void> {
   const HomeRoute({List<PageRouteInfo>? children})
-      : super(
-          HomeRoute.name,
-          initialChildren: children,
-        );
+      : super(HomeRoute.name, initialChildren: children, argsEquality: false);
 
   static const String name = 'HomeRoute';
 
@@ -538,6 +481,7 @@ class MainContentRoute extends PageRouteInfo<void> {
       : super(
           MainContentRoute.name,
           initialChildren: children,
+          argsEquality: false,
         );
 
   static const String name = 'MainContentRoute';
@@ -554,10 +498,7 @@ class MainContentRoute extends PageRouteInfo<void> {
 /// [MainScreen]
 class MainRoute extends PageRouteInfo<void> {
   const MainRoute({List<PageRouteInfo>? children})
-      : super(
-          MainRoute.name,
-          initialChildren: children,
-        );
+      : super(MainRoute.name, initialChildren: children, argsEquality: false);
 
   static const String name = 'MainRoute';
 
@@ -576,6 +517,7 @@ class ManageServersRoute extends PageRouteInfo<void> {
       : super(
           ManageServersRoute.name,
           initialChildren: children,
+          argsEquality: false,
         );
 
   static const String name = 'ManageServersRoute';
@@ -598,11 +540,9 @@ class ManageSingleServerRoute
     List<PageRouteInfo>? children,
   }) : super(
           ManageSingleServerRoute.name,
-          args: ManageSingleServerRouteArgs(
-            key: key,
-            server: server,
-          ),
+          args: ManageSingleServerRouteArgs(key: key, server: server),
           initialChildren: children,
+          argsEquality: false,
         );
 
   static const String name = 'ManageSingleServerRoute';
@@ -611,19 +551,13 @@ class ManageSingleServerRoute
     name,
     builder: (data) {
       final args = data.argsAs<ManageSingleServerRouteArgs>();
-      return ManageSingleServerScreen(
-        key: args.key,
-        server: args.server,
-      );
+      return ManageSingleServerScreen(key: args.key, server: args.server);
     },
   );
 }
 
 class ManageSingleServerRouteArgs {
-  const ManageSingleServerRouteArgs({
-    this.key,
-    required this.server,
-  });
+  const ManageSingleServerRouteArgs({this.key, required this.server});
 
   final Key? key;
 
@@ -642,6 +576,7 @@ class ManageSubscriptionsRoute extends PageRouteInfo<void> {
       : super(
           ManageSubscriptionsRoute.name,
           initialChildren: children,
+          argsEquality: false,
         );
 
   static const String name = 'ManageSubscriptionsRoute';
@@ -661,6 +596,7 @@ class NotificationSettingsRoute extends PageRouteInfo<void> {
       : super(
           NotificationSettingsRoute.name,
           initialChildren: children,
+          argsEquality: false,
         );
 
   static const String name = 'NotificationSettingsRoute';
@@ -689,6 +625,7 @@ class PlaylistViewRoute extends PageRouteInfo<PlaylistViewRouteArgs> {
             canDeleteVideos: canDeleteVideos,
           ),
           initialChildren: children,
+          argsEquality: false,
         );
 
   static const String name = 'PlaylistViewRoute';
@@ -732,6 +669,7 @@ class PlaylistsRoute extends PageRouteInfo<void> {
       : super(
           PlaylistsRoute.name,
           initialChildren: children,
+          argsEquality: false,
         );
 
   static const String name = 'PlaylistsRoute';
@@ -748,10 +686,8 @@ class PlaylistsRoute extends PageRouteInfo<void> {
 /// [PopularTab]
 class PopularRoute extends PageRouteInfo<void> {
   const PopularRoute({List<PageRouteInfo>? children})
-      : super(
-          PopularRoute.name,
-          initialChildren: children,
-        );
+      : super(PopularRoute.name,
+            initialChildren: children, argsEquality: false);
 
   static const String name = 'PopularRoute';
 
@@ -766,17 +702,12 @@ class PopularRoute extends PageRouteInfo<void> {
 /// generated route for
 /// [RecommendedTab]
 class RecommendedRoute extends PageRouteInfo<RecommendedRouteArgs> {
-  RecommendedRoute({
-    Key? key,
-    Video? video,
-    List<PageRouteInfo>? children,
-  }) : super(
+  RecommendedRoute({Key? key, Video? video, List<PageRouteInfo>? children})
+      : super(
           RecommendedRoute.name,
-          args: RecommendedRouteArgs(
-            key: key,
-            video: video,
-          ),
+          args: RecommendedRouteArgs(key: key, video: video),
           initialChildren: children,
+          argsEquality: false,
         );
 
   static const String name = 'RecommendedRoute';
@@ -785,20 +716,15 @@ class RecommendedRoute extends PageRouteInfo<RecommendedRouteArgs> {
     name,
     builder: (data) {
       final args = data.argsAs<RecommendedRouteArgs>(
-          orElse: () => const RecommendedRouteArgs());
-      return RecommendedTab(
-        key: args.key,
-        video: args.video,
+        orElse: () => const RecommendedRouteArgs(),
       );
+      return RecommendedTab(key: args.key, video: args.video);
     },
   );
 }
 
 class RecommendedRouteArgs {
-  const RecommendedRouteArgs({
-    this.key,
-    this.video,
-  });
+  const RecommendedRouteArgs({this.key, this.video});
 
   final Key? key;
 
@@ -817,6 +743,7 @@ class SearchChannelRoute extends PageRouteInfo<void> {
       : super(
           SearchChannelRoute.name,
           initialChildren: children,
+          argsEquality: false,
         );
 
   static const String name = 'SearchChannelRoute';
@@ -836,6 +763,7 @@ class SearchHistorySettingsRoute extends PageRouteInfo<void> {
       : super(
           SearchHistorySettingsRoute.name,
           initialChildren: children,
+          argsEquality: false,
         );
 
   static const String name = 'SearchHistorySettingsRoute';
@@ -855,6 +783,7 @@ class SearchHistoryRoute extends PageRouteInfo<void> {
       : super(
           SearchHistoryRoute.name,
           initialChildren: children,
+          argsEquality: false,
         );
 
   static const String name = 'SearchHistoryRoute';
@@ -874,6 +803,7 @@ class SearchPlaylistRoute extends PageRouteInfo<void> {
       : super(
           SearchPlaylistRoute.name,
           initialChildren: children,
+          argsEquality: false,
         );
 
   static const String name = 'SearchPlaylistRoute';
@@ -896,12 +826,9 @@ class SearchRoute extends PageRouteInfo<SearchRouteArgs> {
     List<PageRouteInfo>? children,
   }) : super(
           SearchRoute.name,
-          args: SearchRouteArgs(
-            key: key,
-            query: query,
-            searchNow: searchNow,
-          ),
+          args: SearchRouteArgs(key: key, query: query, searchNow: searchNow),
           initialChildren: children,
+          argsEquality: false,
         );
 
   static const String name = 'SearchRoute';
@@ -909,8 +836,9 @@ class SearchRoute extends PageRouteInfo<SearchRouteArgs> {
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      final args =
-          data.argsAs<SearchRouteArgs>(orElse: () => const SearchRouteArgs());
+      final args = data.argsAs<SearchRouteArgs>(
+        orElse: () => const SearchRouteArgs(),
+      );
       return SearchScreen(
         key: args.key,
         query: args.query,
@@ -921,11 +849,7 @@ class SearchRoute extends PageRouteInfo<SearchRouteArgs> {
 }
 
 class SearchRouteArgs {
-  const SearchRouteArgs({
-    this.key,
-    this.query,
-    this.searchNow,
-  });
+  const SearchRouteArgs({this.key, this.query, this.searchNow});
 
   final Key? key;
 
@@ -946,6 +870,7 @@ class SearchVideoRoute extends PageRouteInfo<void> {
       : super(
           SearchVideoRoute.name,
           initialChildren: children,
+          argsEquality: false,
         );
 
   static const String name = 'SearchVideoRoute';
@@ -962,10 +887,8 @@ class SearchVideoRoute extends PageRouteInfo<void> {
 /// [SettingsScreen]
 class SettingsRoute extends PageRouteInfo<void> {
   const SettingsRoute({List<PageRouteInfo>? children})
-      : super(
-          SettingsRoute.name,
-          initialChildren: children,
-        );
+      : super(SettingsRoute.name,
+            initialChildren: children, argsEquality: false);
 
   static const String name = 'SettingsRoute';
 
@@ -984,6 +907,7 @@ class SponsorBlockSettingsRoute extends PageRouteInfo<void> {
       : super(
           SponsorBlockSettingsRoute.name,
           initialChildren: children,
+          argsEquality: false,
         );
 
   static const String name = 'SponsorBlockSettingsRoute';
@@ -1003,6 +927,7 @@ class SubscriptionRoute extends PageRouteInfo<void> {
       : super(
           SubscriptionRoute.name,
           initialChildren: children,
+          argsEquality: false,
         );
 
   static const String name = 'SubscriptionRoute';
@@ -1022,6 +947,7 @@ class TVSettingsRoute extends PageRouteInfo<void> {
       : super(
           TVSettingsRoute.name,
           initialChildren: children,
+          argsEquality: false,
         );
 
   static const String name = 'TVSettingsRoute';
@@ -1038,10 +964,8 @@ class TVSettingsRoute extends PageRouteInfo<void> {
 /// [TrendingTab]
 class TrendingRoute extends PageRouteInfo<void> {
   const TrendingRoute({List<PageRouteInfo>? children})
-      : super(
-          TrendingRoute.name,
-          initialChildren: children,
-        );
+      : super(TrendingRoute.name,
+            initialChildren: children, argsEquality: false);
 
   static const String name = 'TrendingRoute';
 
@@ -1060,6 +984,7 @@ class TvAddServerRoute extends PageRouteInfo<void> {
       : super(
           TvAddServerRoute.name,
           initialChildren: children,
+          argsEquality: false,
         );
 
   static const String name = 'TvAddServerRoute';
@@ -1079,6 +1004,7 @@ class TvAppLayoutSettingsRoute extends PageRouteInfo<void> {
       : super(
           TvAppLayoutSettingsRoute.name,
           initialChildren: children,
+          argsEquality: false,
         );
 
   static const String name = 'TvAppLayoutSettingsRoute';
@@ -1100,11 +1026,9 @@ class TvChannelRoute extends PageRouteInfo<TvChannelRouteArgs> {
     List<PageRouteInfo>? children,
   }) : super(
           TvChannelRoute.name,
-          args: TvChannelRouteArgs(
-            key: key,
-            channelId: channelId,
-          ),
+          args: TvChannelRouteArgs(key: key, channelId: channelId),
           initialChildren: children,
+          argsEquality: false,
         );
 
   static const String name = 'TvChannelRoute';
@@ -1113,19 +1037,13 @@ class TvChannelRoute extends PageRouteInfo<TvChannelRouteArgs> {
     name,
     builder: (data) {
       final args = data.argsAs<TvChannelRouteArgs>();
-      return TvChannelScreen(
-        key: args.key,
-        channelId: args.channelId,
-      );
+      return TvChannelScreen(key: args.key, channelId: args.channelId);
     },
   );
 }
 
 class TvChannelRouteArgs {
-  const TvChannelRouteArgs({
-    this.key,
-    required this.channelId,
-  });
+  const TvChannelRouteArgs({this.key, required this.channelId});
 
   final Key? key;
 
@@ -1144,6 +1062,7 @@ class TvDearrowSettingsRoute extends PageRouteInfo<void> {
       : super(
           TvDearrowSettingsRoute.name,
           initialChildren: children,
+          argsEquality: false,
         );
 
   static const String name = 'TvDearrowSettingsRoute';
@@ -1173,6 +1092,7 @@ class TvFilterEditSettingsRoute
             filter: filter,
           ),
           initialChildren: children,
+          argsEquality: false,
         );
 
   static const String name = 'TvFilterEditSettingsRoute';
@@ -1181,7 +1101,8 @@ class TvFilterEditSettingsRoute
     name,
     builder: (data) {
       final args = data.argsAs<TvFilterEditSettingsRouteArgs>(
-          orElse: () => const TvFilterEditSettingsRouteArgs());
+        orElse: () => const TvFilterEditSettingsRouteArgs(),
+      );
       return TvFilterEditSettingsScreen(
         key: args.key,
         channelId: args.channelId,
@@ -1192,11 +1113,7 @@ class TvFilterEditSettingsRoute
 }
 
 class TvFilterEditSettingsRouteArgs {
-  const TvFilterEditSettingsRouteArgs({
-    this.key,
-    this.channelId,
-    this.filter,
-  });
+  const TvFilterEditSettingsRouteArgs({this.key, this.channelId, this.filter});
 
   final Key? key;
 
@@ -1217,6 +1134,7 @@ class TvFilterListSettingsRoute extends PageRouteInfo<void> {
       : super(
           TvFilterListSettingsRoute.name,
           initialChildren: children,
+          argsEquality: false,
         );
 
   static const String name = 'TvFilterListSettingsRoute';
@@ -1247,6 +1165,7 @@ class TvGridRoute extends PageRouteInfo<TvGridRouteArgs> {
             title: title,
           ),
           initialChildren: children,
+          argsEquality: false,
         );
 
   static const String name = 'TvGridRoute';
@@ -1291,10 +1210,7 @@ class TvGridRouteArgs {
 /// [TvHomeScreen]
 class TvHomeRoute extends PageRouteInfo<void> {
   const TvHomeRoute({List<PageRouteInfo>? children})
-      : super(
-          TvHomeRoute.name,
-          initialChildren: children,
-        );
+      : super(TvHomeRoute.name, initialChildren: children, argsEquality: false);
 
   static const String name = 'TvHomeRoute';
 
@@ -1316,11 +1232,9 @@ class TvManageSingleServerRoute
     List<PageRouteInfo>? children,
   }) : super(
           TvManageSingleServerRoute.name,
-          args: TvManageSingleServerRouteArgs(
-            key: key,
-            server: server,
-          ),
+          args: TvManageSingleServerRouteArgs(key: key, server: server),
           initialChildren: children,
+          argsEquality: false,
         );
 
   static const String name = 'TvManageSingleServerRoute';
@@ -1329,19 +1243,13 @@ class TvManageSingleServerRoute
     name,
     builder: (data) {
       final args = data.argsAs<TvManageSingleServerRouteArgs>();
-      return TvManageSingleServerScreen(
-        key: args.key,
-        server: args.server,
-      );
+      return TvManageSingleServerScreen(key: args.key, server: args.server);
     },
   );
 }
 
 class TvManageSingleServerRouteArgs {
-  const TvManageSingleServerRouteArgs({
-    this.key,
-    required this.server,
-  });
+  const TvManageSingleServerRouteArgs({this.key, required this.server});
 
   final Key? key;
 
@@ -1362,11 +1270,9 @@ class TvPlainTextRoute extends PageRouteInfo<TvPlainTextRouteArgs> {
     List<PageRouteInfo>? children,
   }) : super(
           TvPlainTextRoute.name,
-          args: TvPlainTextRouteArgs(
-            key: key,
-            text: text,
-          ),
+          args: TvPlainTextRouteArgs(key: key, text: text),
           initialChildren: children,
+          argsEquality: false,
         );
 
   static const String name = 'TvPlainTextRoute';
@@ -1375,19 +1281,13 @@ class TvPlainTextRoute extends PageRouteInfo<TvPlainTextRouteArgs> {
     name,
     builder: (data) {
       final args = data.argsAs<TvPlainTextRouteArgs>();
-      return TvPlainTextScreen(
-        key: args.key,
-        text: args.text,
-      );
+      return TvPlainTextScreen(key: args.key, text: args.text);
     },
   );
 }
 
 class TvPlainTextRouteArgs {
-  const TvPlainTextRouteArgs({
-    this.key,
-    required this.text,
-  });
+  const TvPlainTextRouteArgs({this.key, required this.text});
 
   final Key? key;
 
@@ -1408,11 +1308,9 @@ class TvPlayerRoute extends PageRouteInfo<TvPlayerRouteArgs> {
     List<PageRouteInfo>? children,
   }) : super(
           TvPlayerRoute.name,
-          args: TvPlayerRouteArgs(
-            key: key,
-            videos: videos,
-          ),
+          args: TvPlayerRouteArgs(key: key, videos: videos),
           initialChildren: children,
+          argsEquality: false,
         );
 
   static const String name = 'TvPlayerRoute';
@@ -1421,19 +1319,13 @@ class TvPlayerRoute extends PageRouteInfo<TvPlayerRouteArgs> {
     name,
     builder: (data) {
       final args = data.argsAs<TvPlayerRouteArgs>();
-      return TvPlayerScreen(
-        key: args.key,
-        videos: args.videos,
-      );
+      return TvPlayerScreen(key: args.key, videos: args.videos);
     },
   );
 }
 
 class TvPlayerRouteArgs {
-  const TvPlayerRouteArgs({
-    this.key,
-    required this.videos,
-  });
+  const TvPlayerRouteArgs({this.key, required this.videos});
 
   final Key? key;
 
@@ -1461,6 +1353,7 @@ class TvPlaylistGridRoute extends PageRouteInfo<TvPlaylistGridRouteArgs> {
             tags: tags,
           ),
           initialChildren: children,
+          argsEquality: false,
         );
 
   static const String name = 'TvPlaylistGridRoute';
@@ -1513,6 +1406,7 @@ class TvPlaylistRoute extends PageRouteInfo<TvPlaylistRouteArgs> {
             canDeleteVideos: canDeleteVideos,
           ),
           initialChildren: children,
+          argsEquality: false,
         );
 
   static const String name = 'TvPlaylistRoute';
@@ -1556,6 +1450,7 @@ class TvSearchHistorySettingsRoute extends PageRouteInfo<void> {
       : super(
           TvSearchHistorySettingsRoute.name,
           initialChildren: children,
+          argsEquality: false,
         );
 
   static const String name = 'TvSearchHistorySettingsRoute';
@@ -1572,10 +1467,8 @@ class TvSearchHistorySettingsRoute extends PageRouteInfo<void> {
 /// [TvSearchScreen]
 class TvSearchRoute extends PageRouteInfo<void> {
   const TvSearchRoute({List<PageRouteInfo>? children})
-      : super(
-          TvSearchRoute.name,
-          initialChildren: children,
-        );
+      : super(TvSearchRoute.name,
+            initialChildren: children, argsEquality: false);
 
   static const String name = 'TvSearchRoute';
 
@@ -1607,6 +1500,7 @@ class TvSelectFromListRoute extends PageRouteInfo<TvSelectFromListRouteArgs> {
             title: title,
           ),
           initialChildren: children,
+          argsEquality: false,
         );
 
   static const String name = 'TvSelectFromListRoute';
@@ -1658,6 +1552,7 @@ class TvSettingsManageServersRoute extends PageRouteInfo<void> {
       : super(
           TvSettingsManageServersRoute.name,
           initialChildren: children,
+          argsEquality: false,
         );
 
   static const String name = 'TvSettingsManageServersRoute';
@@ -1677,6 +1572,7 @@ class TvSponsorBlockSettingsRoute extends PageRouteInfo<void> {
       : super(
           TvSponsorBlockSettingsRoute.name,
           initialChildren: children,
+          argsEquality: false,
         );
 
   static const String name = 'TvSponsorBlockSettingsRoute';
@@ -1721,6 +1617,7 @@ class TvTextFieldRoute extends PageRouteInfo<TvTextFieldRouteArgs> {
             keyboardType: keyboardType,
           ),
           initialChildren: children,
+          argsEquality: false,
         );
 
   static const String name = 'TvTextFieldRoute';
@@ -1805,6 +1702,7 @@ class TvTimePickerRoute extends PageRouteInfo<TvTimePickerRouteArgs> {
             onTimePicked: onTimePicked,
           ),
           initialChildren: children,
+          argsEquality: false,
         );
 
   static const String name = 'TvTimePickerRoute';
@@ -1850,11 +1748,9 @@ class TvVideoRoute extends PageRouteInfo<TvVideoRouteArgs> {
     List<PageRouteInfo>? children,
   }) : super(
           TvVideoRoute.name,
-          args: TvVideoRouteArgs(
-            key: key,
-            videoId: videoId,
-          ),
+          args: TvVideoRouteArgs(key: key, videoId: videoId),
           initialChildren: children,
+          argsEquality: false,
         );
 
   static const String name = 'TvVideoRoute';
@@ -1863,19 +1759,13 @@ class TvVideoRoute extends PageRouteInfo<TvVideoRouteArgs> {
     name,
     builder: (data) {
       final args = data.argsAs<TvVideoRouteArgs>();
-      return TvVideoScreen(
-        key: args.key,
-        videoId: args.videoId,
-      );
+      return TvVideoScreen(key: args.key, videoId: args.videoId);
     },
   );
 }
 
 class TvVideoRouteArgs {
-  const TvVideoRouteArgs({
-    this.key,
-    required this.videoId,
-  });
+  const TvVideoRouteArgs({this.key, required this.videoId});
 
   final Key? key;
 
@@ -1894,6 +1784,7 @@ class TvWelcomeWizardRoute extends PageRouteInfo<void> {
       : super(
           TvWelcomeWizardRoute.name,
           initialChildren: children,
+          argsEquality: false,
         );
 
   static const String name = 'TvWelcomeWizardRoute';
@@ -1913,6 +1804,7 @@ class VideoFilterSettingsRoute extends PageRouteInfo<void> {
       : super(
           VideoFilterSettingsRoute.name,
           initialChildren: children,
+          argsEquality: false,
         );
 
   static const String name = 'VideoFilterSettingsRoute';
@@ -1941,6 +1833,7 @@ class VideoFilterSetupRoute extends PageRouteInfo<VideoFilterSetupRouteArgs> {
             filter: filter,
           ),
           initialChildren: children,
+          argsEquality: false,
         );
 
   static const String name = 'VideoFilterSetupRoute';
@@ -1949,7 +1842,8 @@ class VideoFilterSetupRoute extends PageRouteInfo<VideoFilterSetupRouteArgs> {
     name,
     builder: (data) {
       final args = data.argsAs<VideoFilterSetupRouteArgs>(
-          orElse: () => const VideoFilterSetupRouteArgs());
+        orElse: () => const VideoFilterSetupRouteArgs(),
+      );
       return VideoFilterSetupScreen(
         key: args.key,
         channelId: args.channelId,
@@ -1960,11 +1854,7 @@ class VideoFilterSetupRoute extends PageRouteInfo<VideoFilterSetupRouteArgs> {
 }
 
 class VideoFilterSetupRouteArgs {
-  const VideoFilterSetupRouteArgs({
-    this.key,
-    this.channelId,
-    this.filter,
-  });
+  const VideoFilterSetupRouteArgs({this.key, this.channelId, this.filter});
 
   final Key? key;
 
@@ -1996,6 +1886,7 @@ class VideoInfoRoute extends PageRouteInfo<VideoInfoRouteArgs> {
             titleAndChannelInfo: titleAndChannelInfo,
           ),
           initialChildren: children,
+          argsEquality: false,
         );
 
   static const String name = 'VideoInfoRoute';
@@ -2004,7 +1895,8 @@ class VideoInfoRoute extends PageRouteInfo<VideoInfoRouteArgs> {
     name,
     builder: (data) {
       final args = data.argsAs<VideoInfoRouteArgs>(
-          orElse: () => const VideoInfoRouteArgs());
+        orElse: () => const VideoInfoRouteArgs(),
+      );
       return VideoInfoTab(
         key: args.key,
         video: args.video,
@@ -2044,6 +1936,7 @@ class VideoPlayerSettingsRoute extends PageRouteInfo<void> {
       : super(
           VideoPlayerSettingsRoute.name,
           initialChildren: children,
+          argsEquality: false,
         );
 
   static const String name = 'VideoPlayerSettingsRoute';
@@ -2066,12 +1959,9 @@ class VideoRoute extends PageRouteInfo<VideoRouteArgs> {
     List<PageRouteInfo>? children,
   }) : super(
           VideoRoute.name,
-          args: VideoRouteArgs(
-            key: key,
-            videoId: videoId,
-            playNow: playNow,
-          ),
+          args: VideoRouteArgs(key: key, videoId: videoId, playNow: playNow),
           initialChildren: children,
+          argsEquality: false,
         );
 
   static const String name = 'VideoRoute';
@@ -2090,11 +1980,7 @@ class VideoRoute extends PageRouteInfo<VideoRouteArgs> {
 }
 
 class VideoRouteArgs {
-  const VideoRouteArgs({
-    this.key,
-    required this.videoId,
-    this.playNow,
-  });
+  const VideoRouteArgs({this.key, required this.videoId, this.playNow});
 
   final Key? key;
 
@@ -2115,6 +2001,7 @@ class WelcomeWizardRoute extends PageRouteInfo<void> {
       : super(
           WelcomeWizardRoute.name,
           initialChildren: children,
+          argsEquality: false,
         );
 
   static const String name = 'WelcomeWizardRoute';

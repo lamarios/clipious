@@ -5,12 +5,14 @@
 list(APPEND FLUTTER_PLUGIN_LIST
   awesome_notifications
   awesome_notifications_core
+  desktop_webview_window
   downloadsfolder
   dynamic_color
   flutter_volume_controller
   screen_brightness_windows
   share_plus
   url_launcher_windows
+  window_to_front
 )
 
 list(APPEND FLUTTER_FFI_PLUGIN_LIST

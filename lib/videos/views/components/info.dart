@@ -7,7 +7,7 @@ import 'package:clipious/videos/models/video.dart';
 import 'package:clipious/videos/views/components/video_metrics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:clipious/l10n/generated/app_localizations.dart';
 
 import '../../../subscription_management/view/components/subscribe_button.dart';
 import '../../../utils/models/image_object.dart';

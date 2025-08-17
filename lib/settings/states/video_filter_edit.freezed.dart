@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,94 +9,60 @@ part of 'video_filter_edit.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$VideoFilterEditState {
-  VideoFilter? get filter => throw _privateConstructorUsedError;
-  int get searchPage => throw _privateConstructorUsedError;
-  Channel? get channel => throw _privateConstructorUsedError;
-  List<Channel> get channelResults => throw _privateConstructorUsedError;
-  dynamic get showDateSettings => throw _privateConstructorUsedError;
+  VideoFilter? get filter;
+  int get searchPage;
+  Channel? get channel;
+  List<Channel> get channelResults;
+  dynamic get showDateSettings;
 
   /// Create a copy of VideoFilterEditState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $VideoFilterEditStateCopyWith<VideoFilterEditState> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $VideoFilterEditStateCopyWith<$Res> {
-  factory $VideoFilterEditStateCopyWith(VideoFilterEditState value,
-          $Res Function(VideoFilterEditState) then) =
-      _$VideoFilterEditStateCopyWithImpl<$Res, VideoFilterEditState>;
-  @useResult
-  $Res call(
-      {VideoFilter? filter,
-      int searchPage,
-      Channel? channel,
-      List<Channel> channelResults,
-      dynamic showDateSettings});
-}
-
-/// @nodoc
-class _$VideoFilterEditStateCopyWithImpl<$Res,
-        $Val extends VideoFilterEditState>
-    implements $VideoFilterEditStateCopyWith<$Res> {
-  _$VideoFilterEditStateCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of VideoFilterEditState
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
+  $VideoFilterEditStateCopyWith<VideoFilterEditState> get copyWith =>
+      _$VideoFilterEditStateCopyWithImpl<VideoFilterEditState>(
+          this as VideoFilterEditState, _$identity);
+
   @override
-  $Res call({
-    Object? filter = freezed,
-    Object? searchPage = null,
-    Object? channel = freezed,
-    Object? channelResults = null,
-    Object? showDateSettings = freezed,
-  }) {
-    return _then(_value.copyWith(
-      filter: freezed == filter
-          ? _value.filter
-          : filter // ignore: cast_nullable_to_non_nullable
-              as VideoFilter?,
-      searchPage: null == searchPage
-          ? _value.searchPage
-          : searchPage // ignore: cast_nullable_to_non_nullable
-              as int,
-      channel: freezed == channel
-          ? _value.channel
-          : channel // ignore: cast_nullable_to_non_nullable
-              as Channel?,
-      channelResults: null == channelResults
-          ? _value.channelResults
-          : channelResults // ignore: cast_nullable_to_non_nullable
-              as List<Channel>,
-      showDateSettings: freezed == showDateSettings
-          ? _value.showDateSettings
-          : showDateSettings // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is VideoFilterEditState &&
+            (identical(other.filter, filter) || other.filter == filter) &&
+            (identical(other.searchPage, searchPage) ||
+                other.searchPage == searchPage) &&
+            (identical(other.channel, channel) || other.channel == channel) &&
+            const DeepCollectionEquality()
+                .equals(other.channelResults, channelResults) &&
+            const DeepCollectionEquality()
+                .equals(other.showDateSettings, showDateSettings));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      filter,
+      searchPage,
+      channel,
+      const DeepCollectionEquality().hash(channelResults),
+      const DeepCollectionEquality().hash(showDateSettings));
+
+  @override
+  String toString() {
+    return 'VideoFilterEditState(filter: $filter, searchPage: $searchPage, channel: $channel, channelResults: $channelResults, showDateSettings: $showDateSettings)';
   }
 }
 
 /// @nodoc
-abstract class _$$VideoFilterEditStateImplCopyWith<$Res>
-    implements $VideoFilterEditStateCopyWith<$Res> {
-  factory _$$VideoFilterEditStateImplCopyWith(_$VideoFilterEditStateImpl value,
-          $Res Function(_$VideoFilterEditStateImpl) then) =
-      __$$VideoFilterEditStateImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $VideoFilterEditStateCopyWith<$Res> {
+  factory $VideoFilterEditStateCopyWith(VideoFilterEditState value,
+          $Res Function(VideoFilterEditState) _then) =
+      _$VideoFilterEditStateCopyWithImpl;
   @useResult
   $Res call(
       {VideoFilter? filter,
@@ -107,12 +73,12 @@ abstract class _$$VideoFilterEditStateImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$VideoFilterEditStateImplCopyWithImpl<$Res>
-    extends _$VideoFilterEditStateCopyWithImpl<$Res, _$VideoFilterEditStateImpl>
-    implements _$$VideoFilterEditStateImplCopyWith<$Res> {
-  __$$VideoFilterEditStateImplCopyWithImpl(_$VideoFilterEditStateImpl _value,
-      $Res Function(_$VideoFilterEditStateImpl) _then)
-      : super(_value, _then);
+class _$VideoFilterEditStateCopyWithImpl<$Res>
+    implements $VideoFilterEditStateCopyWith<$Res> {
+  _$VideoFilterEditStateCopyWithImpl(this._self, this._then);
+
+  final VideoFilterEditState _self;
+  final $Res Function(VideoFilterEditState) _then;
 
   /// Create a copy of VideoFilterEditState
   /// with the given fields replaced by the non-null parameter values.
@@ -125,34 +91,197 @@ class __$$VideoFilterEditStateImplCopyWithImpl<$Res>
     Object? channelResults = null,
     Object? showDateSettings = freezed,
   }) {
-    return _then(_$VideoFilterEditStateImpl(
+    return _then(_self.copyWith(
       filter: freezed == filter
-          ? _value.filter
+          ? _self.filter
           : filter // ignore: cast_nullable_to_non_nullable
               as VideoFilter?,
       searchPage: null == searchPage
-          ? _value.searchPage
+          ? _self.searchPage
           : searchPage // ignore: cast_nullable_to_non_nullable
               as int,
       channel: freezed == channel
-          ? _value.channel
+          ? _self.channel
           : channel // ignore: cast_nullable_to_non_nullable
               as Channel?,
       channelResults: null == channelResults
-          ? _value._channelResults
+          ? _self.channelResults
           : channelResults // ignore: cast_nullable_to_non_nullable
               as List<Channel>,
       showDateSettings: freezed == showDateSettings
-          ? _value.showDateSettings!
-          : showDateSettings,
+          ? _self.showDateSettings
+          : showDateSettings // ignore: cast_nullable_to_non_nullable
+              as dynamic,
     ));
   }
 }
 
+/// Adds pattern-matching-related methods to [VideoFilterEditState].
+extension VideoFilterEditStatePatterns on VideoFilterEditState {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_VideoFilterEditState value)? $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _VideoFilterEditState() when $default != null:
+        return $default(_that);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_VideoFilterEditState value) $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _VideoFilterEditState():
+        return $default(_that);
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_VideoFilterEditState value)? $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _VideoFilterEditState() when $default != null:
+        return $default(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(VideoFilter? filter, int searchPage, Channel? channel,
+            List<Channel> channelResults, dynamic showDateSettings)?
+        $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _VideoFilterEditState() when $default != null:
+        return $default(_that.filter, _that.searchPage, _that.channel,
+            _that.channelResults, _that.showDateSettings);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(VideoFilter? filter, int searchPage, Channel? channel,
+            List<Channel> channelResults, dynamic showDateSettings)
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _VideoFilterEditState():
+        return $default(_that.filter, _that.searchPage, _that.channel,
+            _that.channelResults, _that.showDateSettings);
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult? Function(VideoFilter? filter, int searchPage, Channel? channel,
+            List<Channel> channelResults, dynamic showDateSettings)?
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _VideoFilterEditState() when $default != null:
+        return $default(_that.filter, _that.searchPage, _that.channel,
+            _that.channelResults, _that.showDateSettings);
+      case _:
+        return null;
+    }
+  }
+}
+
 /// @nodoc
 
-class _$VideoFilterEditStateImpl implements _VideoFilterEditState {
-  const _$VideoFilterEditStateImpl(
+class _VideoFilterEditState implements VideoFilterEditState {
+  const _VideoFilterEditState(
       {this.filter,
       this.searchPage = 1,
       this.channel,
@@ -180,16 +309,20 @@ class _$VideoFilterEditStateImpl implements _VideoFilterEditState {
   @JsonKey()
   final dynamic showDateSettings;
 
+  /// Create a copy of VideoFilterEditState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'VideoFilterEditState(filter: $filter, searchPage: $searchPage, channel: $channel, channelResults: $channelResults, showDateSettings: $showDateSettings)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$VideoFilterEditStateCopyWith<_VideoFilterEditState> get copyWith =>
+      __$VideoFilterEditStateCopyWithImpl<_VideoFilterEditState>(
+          this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$VideoFilterEditStateImpl &&
+            other is _VideoFilterEditState &&
             (identical(other.filter, filter) || other.filter == filter) &&
             (identical(other.searchPage, searchPage) ||
                 other.searchPage == searchPage) &&
@@ -209,40 +342,70 @@ class _$VideoFilterEditStateImpl implements _VideoFilterEditState {
       const DeepCollectionEquality().hash(_channelResults),
       const DeepCollectionEquality().hash(showDateSettings));
 
+  @override
+  String toString() {
+    return 'VideoFilterEditState(filter: $filter, searchPage: $searchPage, channel: $channel, channelResults: $channelResults, showDateSettings: $showDateSettings)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$VideoFilterEditStateCopyWith<$Res>
+    implements $VideoFilterEditStateCopyWith<$Res> {
+  factory _$VideoFilterEditStateCopyWith(_VideoFilterEditState value,
+          $Res Function(_VideoFilterEditState) _then) =
+      __$VideoFilterEditStateCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {VideoFilter? filter,
+      int searchPage,
+      Channel? channel,
+      List<Channel> channelResults,
+      dynamic showDateSettings});
+}
+
+/// @nodoc
+class __$VideoFilterEditStateCopyWithImpl<$Res>
+    implements _$VideoFilterEditStateCopyWith<$Res> {
+  __$VideoFilterEditStateCopyWithImpl(this._self, this._then);
+
+  final _VideoFilterEditState _self;
+  final $Res Function(_VideoFilterEditState) _then;
+
   /// Create a copy of VideoFilterEditState
   /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$VideoFilterEditStateImplCopyWith<_$VideoFilterEditStateImpl>
-      get copyWith =>
-          __$$VideoFilterEditStateImplCopyWithImpl<_$VideoFilterEditStateImpl>(
-              this, _$identity);
+  $Res call({
+    Object? filter = freezed,
+    Object? searchPage = null,
+    Object? channel = freezed,
+    Object? channelResults = null,
+    Object? showDateSettings = freezed,
+  }) {
+    return _then(_VideoFilterEditState(
+      filter: freezed == filter
+          ? _self.filter
+          : filter // ignore: cast_nullable_to_non_nullable
+              as VideoFilter?,
+      searchPage: null == searchPage
+          ? _self.searchPage
+          : searchPage // ignore: cast_nullable_to_non_nullable
+              as int,
+      channel: freezed == channel
+          ? _self.channel
+          : channel // ignore: cast_nullable_to_non_nullable
+              as Channel?,
+      channelResults: null == channelResults
+          ? _self._channelResults
+          : channelResults // ignore: cast_nullable_to_non_nullable
+              as List<Channel>,
+      showDateSettings: freezed == showDateSettings
+          ? _self.showDateSettings
+          : showDateSettings // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+    ));
+  }
 }
 
-abstract class _VideoFilterEditState implements VideoFilterEditState {
-  const factory _VideoFilterEditState(
-      {final VideoFilter? filter,
-      final int searchPage,
-      final Channel? channel,
-      final List<Channel> channelResults,
-      final dynamic showDateSettings}) = _$VideoFilterEditStateImpl;
-
-  @override
-  VideoFilter? get filter;
-  @override
-  int get searchPage;
-  @override
-  Channel? get channel;
-  @override
-  List<Channel> get channelResults;
-  @override
-  dynamic get showDateSettings;
-
-  /// Create a copy of VideoFilterEditState
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$VideoFilterEditStateImplCopyWith<_$VideoFilterEditStateImpl>
-      get copyWith => throw _privateConstructorUsedError;
-}
+// dart format on

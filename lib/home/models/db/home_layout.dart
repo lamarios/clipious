@@ -3,7 +3,7 @@ import 'package:clipious/videos/models/video.dart';
 import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:clipious/l10n/generated/app_localizations.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:clipious/router.dart';
 

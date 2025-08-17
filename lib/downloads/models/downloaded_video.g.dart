@@ -6,9 +6,8 @@ part of 'downloaded_video.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$DownloadedVideoImpl _$$DownloadedVideoImplFromJson(
-        Map<String, dynamic> json) =>
-    _$DownloadedVideoImpl(
+_DownloadedVideo _$DownloadedVideoFromJson(Map<String, dynamic> json) =>
+    _DownloadedVideo(
       videoId: json['videoId'] as String,
       title: json['title'] as String,
       author: json['author'] as String?,
@@ -20,8 +19,7 @@ _$DownloadedVideoImpl _$$DownloadedVideoImplFromJson(
       quality: json['quality'] as String,
     );
 
-Map<String, dynamic> _$$DownloadedVideoImplToJson(
-        _$DownloadedVideoImpl instance) =>
+Map<String, dynamic> _$DownloadedVideoToJson(_DownloadedVideo instance) =>
     <String, dynamic>{
       'videoId': instance.videoId,
       'title': instance.title,

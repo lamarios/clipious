@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,86 +9,51 @@ part of 'item_list.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ItemListState<T> {
-  PaginatedList<T> get itemList => throw _privateConstructorUsedError;
-  List<T> get items => throw _privateConstructorUsedError;
-  bool get loading => throw _privateConstructorUsedError;
-  ItemListErrors get error => throw _privateConstructorUsedError;
+  PaginatedList<T> get itemList;
+  List<T> get items;
+  bool get loading;
+  ItemListErrors get error;
 
   /// Create a copy of ItemListState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $ItemListStateCopyWith<T, ItemListState<T>> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $ItemListStateCopyWith<T, $Res> {
-  factory $ItemListStateCopyWith(
-          ItemListState<T> value, $Res Function(ItemListState<T>) then) =
-      _$ItemListStateCopyWithImpl<T, $Res, ItemListState<T>>;
-  @useResult
-  $Res call(
-      {PaginatedList<T> itemList,
-      List<T> items,
-      bool loading,
-      ItemListErrors error});
-}
-
-/// @nodoc
-class _$ItemListStateCopyWithImpl<T, $Res, $Val extends ItemListState<T>>
-    implements $ItemListStateCopyWith<T, $Res> {
-  _$ItemListStateCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of ItemListState
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
+  $ItemListStateCopyWith<T, ItemListState<T>> get copyWith =>
+      _$ItemListStateCopyWithImpl<T, ItemListState<T>>(
+          this as ItemListState<T>, _$identity);
+
   @override
-  $Res call({
-    Object? itemList = null,
-    Object? items = null,
-    Object? loading = null,
-    Object? error = null,
-  }) {
-    return _then(_value.copyWith(
-      itemList: null == itemList
-          ? _value.itemList
-          : itemList // ignore: cast_nullable_to_non_nullable
-              as PaginatedList<T>,
-      items: null == items
-          ? _value.items
-          : items // ignore: cast_nullable_to_non_nullable
-              as List<T>,
-      loading: null == loading
-          ? _value.loading
-          : loading // ignore: cast_nullable_to_non_nullable
-              as bool,
-      error: null == error
-          ? _value.error
-          : error // ignore: cast_nullable_to_non_nullable
-              as ItemListErrors,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is ItemListState<T> &&
+            (identical(other.itemList, itemList) ||
+                other.itemList == itemList) &&
+            const DeepCollectionEquality().equals(other.items, items) &&
+            (identical(other.loading, loading) || other.loading == loading) &&
+            (identical(other.error, error) || other.error == error));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, itemList,
+      const DeepCollectionEquality().hash(items), loading, error);
+
+  @override
+  String toString() {
+    return 'ItemListState<$T>(itemList: $itemList, items: $items, loading: $loading, error: $error)';
   }
 }
 
 /// @nodoc
-abstract class _$$ItemListStateImplCopyWith<T, $Res>
-    implements $ItemListStateCopyWith<T, $Res> {
-  factory _$$ItemListStateImplCopyWith(_$ItemListStateImpl<T> value,
-          $Res Function(_$ItemListStateImpl<T>) then) =
-      __$$ItemListStateImplCopyWithImpl<T, $Res>;
-  @override
+abstract mixin class $ItemListStateCopyWith<T, $Res> {
+  factory $ItemListStateCopyWith(
+          ItemListState<T> value, $Res Function(ItemListState<T>) _then) =
+      _$ItemListStateCopyWithImpl;
   @useResult
   $Res call(
       {PaginatedList<T> itemList,
@@ -98,12 +63,12 @@ abstract class _$$ItemListStateImplCopyWith<T, $Res>
 }
 
 /// @nodoc
-class __$$ItemListStateImplCopyWithImpl<T, $Res>
-    extends _$ItemListStateCopyWithImpl<T, $Res, _$ItemListStateImpl<T>>
-    implements _$$ItemListStateImplCopyWith<T, $Res> {
-  __$$ItemListStateImplCopyWithImpl(_$ItemListStateImpl<T> _value,
-      $Res Function(_$ItemListStateImpl<T>) _then)
-      : super(_value, _then);
+class _$ItemListStateCopyWithImpl<T, $Res>
+    implements $ItemListStateCopyWith<T, $Res> {
+  _$ItemListStateCopyWithImpl(this._self, this._then);
+
+  final ItemListState<T> _self;
+  final $Res Function(ItemListState<T>) _then;
 
   /// Create a copy of ItemListState
   /// with the given fields replaced by the non-null parameter values.
@@ -115,31 +80,193 @@ class __$$ItemListStateImplCopyWithImpl<T, $Res>
     Object? loading = null,
     Object? error = null,
   }) {
-    return _then(_$ItemListStateImpl<T>(
+    return _then(_self.copyWith(
       itemList: null == itemList
-          ? _value.itemList
+          ? _self.itemList
           : itemList // ignore: cast_nullable_to_non_nullable
               as PaginatedList<T>,
       items: null == items
-          ? _value._items
+          ? _self.items
           : items // ignore: cast_nullable_to_non_nullable
               as List<T>,
       loading: null == loading
-          ? _value.loading
+          ? _self.loading
           : loading // ignore: cast_nullable_to_non_nullable
               as bool,
       error: null == error
-          ? _value.error
+          ? _self.error
           : error // ignore: cast_nullable_to_non_nullable
               as ItemListErrors,
     ));
   }
 }
 
+/// Adds pattern-matching-related methods to [ItemListState].
+extension ItemListStatePatterns<T> on ItemListState<T> {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_ItemListState<T> value)? $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _ItemListState() when $default != null:
+        return $default(_that);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_ItemListState<T> value) $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _ItemListState():
+        return $default(_that);
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_ItemListState<T> value)? $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _ItemListState() when $default != null:
+        return $default(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(PaginatedList<T> itemList, List<T> items, bool loading,
+            ItemListErrors error)?
+        $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _ItemListState() when $default != null:
+        return $default(
+            _that.itemList, _that.items, _that.loading, _that.error);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(PaginatedList<T> itemList, List<T> items, bool loading,
+            ItemListErrors error)
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _ItemListState():
+        return $default(
+            _that.itemList, _that.items, _that.loading, _that.error);
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult? Function(PaginatedList<T> itemList, List<T> items, bool loading,
+            ItemListErrors error)?
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _ItemListState() when $default != null:
+        return $default(
+            _that.itemList, _that.items, _that.loading, _that.error);
+      case _:
+        return null;
+    }
+  }
+}
+
 /// @nodoc
 
-class _$ItemListStateImpl<T> implements _ItemListState<T> {
-  const _$ItemListStateImpl(
+class _ItemListState<T> implements ItemListState<T> {
+  const _ItemListState(
       {required this.itemList,
       final List<T> items = const [],
       this.loading = true,
@@ -164,16 +291,19 @@ class _$ItemListStateImpl<T> implements _ItemListState<T> {
   @JsonKey()
   final ItemListErrors error;
 
+  /// Create a copy of ItemListState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'ItemListState<$T>(itemList: $itemList, items: $items, loading: $loading, error: $error)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$ItemListStateCopyWith<T, _ItemListState<T>> get copyWith =>
+      __$ItemListStateCopyWithImpl<T, _ItemListState<T>>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ItemListStateImpl<T> &&
+            other is _ItemListState<T> &&
             (identical(other.itemList, itemList) ||
                 other.itemList == itemList) &&
             const DeepCollectionEquality().equals(other._items, _items) &&
@@ -185,36 +315,64 @@ class _$ItemListStateImpl<T> implements _ItemListState<T> {
   int get hashCode => Object.hash(runtimeType, itemList,
       const DeepCollectionEquality().hash(_items), loading, error);
 
+  @override
+  String toString() {
+    return 'ItemListState<$T>(itemList: $itemList, items: $items, loading: $loading, error: $error)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$ItemListStateCopyWith<T, $Res>
+    implements $ItemListStateCopyWith<T, $Res> {
+  factory _$ItemListStateCopyWith(
+          _ItemListState<T> value, $Res Function(_ItemListState<T>) _then) =
+      __$ItemListStateCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {PaginatedList<T> itemList,
+      List<T> items,
+      bool loading,
+      ItemListErrors error});
+}
+
+/// @nodoc
+class __$ItemListStateCopyWithImpl<T, $Res>
+    implements _$ItemListStateCopyWith<T, $Res> {
+  __$ItemListStateCopyWithImpl(this._self, this._then);
+
+  final _ItemListState<T> _self;
+  final $Res Function(_ItemListState<T>) _then;
+
   /// Create a copy of ItemListState
   /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$ItemListStateImplCopyWith<T, _$ItemListStateImpl<T>> get copyWith =>
-      __$$ItemListStateImplCopyWithImpl<T, _$ItemListStateImpl<T>>(
-          this, _$identity);
+  $Res call({
+    Object? itemList = null,
+    Object? items = null,
+    Object? loading = null,
+    Object? error = null,
+  }) {
+    return _then(_ItemListState<T>(
+      itemList: null == itemList
+          ? _self.itemList
+          : itemList // ignore: cast_nullable_to_non_nullable
+              as PaginatedList<T>,
+      items: null == items
+          ? _self._items
+          : items // ignore: cast_nullable_to_non_nullable
+              as List<T>,
+      loading: null == loading
+          ? _self.loading
+          : loading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      error: null == error
+          ? _self.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as ItemListErrors,
+    ));
+  }
 }
 
-abstract class _ItemListState<T> implements ItemListState<T> {
-  const factory _ItemListState(
-      {required final PaginatedList<T> itemList,
-      final List<T> items,
-      final bool loading,
-      final ItemListErrors error}) = _$ItemListStateImpl<T>;
-
-  @override
-  PaginatedList<T> get itemList;
-  @override
-  List<T> get items;
-  @override
-  bool get loading;
-  @override
-  ItemListErrors get error;
-
-  /// Create a copy of ItemListState
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ItemListStateImplCopyWith<T, _$ItemListStateImpl<T>> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+// dart format on

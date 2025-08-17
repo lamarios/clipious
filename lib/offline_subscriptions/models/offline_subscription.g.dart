@@ -6,15 +6,14 @@ part of 'offline_subscription.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$OfflineSubscriptionImpl _$$OfflineSubscriptionImplFromJson(
-        Map<String, dynamic> json) =>
-    _$OfflineSubscriptionImpl(
+_OfflineSubscription _$OfflineSubscriptionFromJson(Map<String, dynamic> json) =>
+    _OfflineSubscription(
       channelId: json['channelId'] as String,
       channelName: json['channelName'] as String,
     );
 
-Map<String, dynamic> _$$OfflineSubscriptionImplToJson(
-        _$OfflineSubscriptionImpl instance) =>
+Map<String, dynamic> _$OfflineSubscriptionToJson(
+        _OfflineSubscription instance) =>
     <String, dynamic>{
       'channelId': instance.channelId,
       'channelName': instance.channelName,

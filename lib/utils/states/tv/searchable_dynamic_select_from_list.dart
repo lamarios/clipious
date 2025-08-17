@@ -20,7 +20,8 @@ class SearchableSelectFromListCubit<T>
 }
 
 @freezed
-class SearchableSelectFromListState<T> with _$SearchableSelectFromListState<T> {
+sealed class SearchableSelectFromListState<T>
+    with _$SearchableSelectFromListState<T> {
   const factory SearchableSelectFromListState(
     List<T> items, {
     required TextEditingController controller,

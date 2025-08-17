@@ -122,7 +122,7 @@ class AddToPlaylistCubit extends Cubit<AddToPlaylistController> {
 }
 
 @freezed
-class AddToPlaylistController with _$AddToPlaylistController {
+sealed class AddToPlaylistController with _$AddToPlaylistController {
   const factory AddToPlaylistController(String videoId,
       {@Default([]) List<Playlist> playlists,
       @Default(0) int playListCount,

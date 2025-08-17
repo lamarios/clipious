@@ -109,7 +109,7 @@ const videosPath = 'videos';
 const shortsPath = 'shorts';
 const streamsPath = 'streams';
 
-@AutoRouterConfig(replaceInRouteName: 'Screen|Tab,Route')
+@AutoRouterConfig(replaceInRouteName: 'Screen|Tab,Route', argsEquality: false)
 class AppRouter extends RootStackRouter {
   final bool hasServer;
 

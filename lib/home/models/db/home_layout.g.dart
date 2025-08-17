@@ -13,12 +13,13 @@ abstract class _$HomeLayoutCWProxy {
 
   HomeLayout showBigSource(bool showBigSource);
 
-  /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `HomeLayout(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
+  /// Creates a new instance with the provided field values.
+  /// Passing `null` to a nullable field nullifies it, while `null` for a non-nullable field is ignored. To update a single field use `HomeLayout(...).copyWith.fieldName(value)`.
   ///
-  /// Usage
+  /// Example:
   /// ```dart
   /// HomeLayout(...).copyWith(id: 12, name: "My name")
-  /// ````
+  /// ```
   HomeLayout call({
     List<HomeDataSource> smallSources,
     HomeDataSource bigSource,
@@ -26,7 +27,8 @@ abstract class _$HomeLayoutCWProxy {
   });
 }
 
-/// Proxy class for `copyWith` functionality. This is a callable class and can be used as follows: `instanceOfHomeLayout.copyWith(...)`. Additionally contains functions for specific fields e.g. `instanceOfHomeLayout.copyWith.fieldName(...)`
+/// Callable proxy for `copyWith` functionality.
+/// Use as `instanceOfHomeLayout.copyWith(...)` or call `instanceOfHomeLayout.copyWith.fieldName(value)` for a single field.
 class _$HomeLayoutCWProxyImpl implements _$HomeLayoutCWProxy {
   const _$HomeLayoutCWProxyImpl(this._value);
 
@@ -34,38 +36,39 @@ class _$HomeLayoutCWProxyImpl implements _$HomeLayoutCWProxy {
 
   @override
   HomeLayout smallSources(List<HomeDataSource> smallSources) =>
-      this(smallSources: smallSources);
+      call(smallSources: smallSources);
 
   @override
-  HomeLayout bigSource(HomeDataSource bigSource) => this(bigSource: bigSource);
+  HomeLayout bigSource(HomeDataSource bigSource) => call(bigSource: bigSource);
 
   @override
   HomeLayout showBigSource(bool showBigSource) =>
-      this(showBigSource: showBigSource);
+      call(showBigSource: showBigSource);
 
   @override
 
-  /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `HomeLayout(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
+  /// Creates a new instance with the provided field values.
+  /// Passing `null` to a nullable field nullifies it, while `null` for a non-nullable field is ignored. To update a single field use `HomeLayout(...).copyWith.fieldName(value)`.
   ///
-  /// Usage
+  /// Example:
   /// ```dart
   /// HomeLayout(...).copyWith(id: 12, name: "My name")
-  /// ````
+  /// ```
   HomeLayout call({
     Object? smallSources = const $CopyWithPlaceholder(),
     Object? bigSource = const $CopyWithPlaceholder(),
     Object? showBigSource = const $CopyWithPlaceholder(),
   }) {
     return HomeLayout._(
-      smallSources == const $CopyWithPlaceholder()
+      smallSources == const $CopyWithPlaceholder() || smallSources == null
           ? _value.smallSources
           // ignore: cast_nullable_to_non_nullable
           : smallSources as List<HomeDataSource>,
-      bigSource == const $CopyWithPlaceholder()
+      bigSource == const $CopyWithPlaceholder() || bigSource == null
           ? _value.bigSource
           // ignore: cast_nullable_to_non_nullable
           : bigSource as HomeDataSource,
-      showBigSource == const $CopyWithPlaceholder()
+      showBigSource == const $CopyWithPlaceholder() || showBigSource == null
           ? _value.showBigSource
           // ignore: cast_nullable_to_non_nullable
           : showBigSource as bool,
@@ -74,7 +77,8 @@ class _$HomeLayoutCWProxyImpl implements _$HomeLayoutCWProxy {
 }
 
 extension $HomeLayoutCopyWith on HomeLayout {
-  /// Returns a callable class that can be used as follows: `instanceOfHomeLayout.copyWith(...)` or like so:`instanceOfHomeLayout.copyWith.fieldName(...)`.
+  /// Returns a callable class used to build a new instance with modified fields.
+  /// Example: `instanceOfHomeLayout.copyWith(...)` or `instanceOfHomeLayout.copyWith.fieldName(...)`.
   // ignore: library_private_types_in_public_api
   _$HomeLayoutCWProxy get copyWith => _$HomeLayoutCWProxyImpl(this);
 }

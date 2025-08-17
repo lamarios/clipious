@@ -43,7 +43,7 @@ class VideoFilterChannelCubit extends Cubit<VideoFilterChannelState> {
 }
 
 @freezed
-class VideoFilterChannelState with _$VideoFilterChannelState {
+sealed class VideoFilterChannelState with _$VideoFilterChannelState {
   const factory VideoFilterChannelState(
       {required List<VideoFilter> filters,
       Channel? channel,

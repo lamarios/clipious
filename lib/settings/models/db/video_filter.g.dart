@@ -27,12 +27,13 @@ abstract class _$VideoFilterCWProxy {
 
   VideoFilter endTime(String endTime);
 
-  /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `VideoFilter(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
+  /// Creates a new instance with the provided field values.
+  /// Passing `null` to a nullable field nullifies it, while `null` for a non-nullable field is ignored. To update a single field use `VideoFilter(...).copyWith.fieldName(value)`.
   ///
-  /// Usage
+  /// Example:
   /// ```dart
   /// VideoFilter(...).copyWith(id: 12, name: "My name")
-  /// ````
+  /// ```
   VideoFilter call({
     String uuid,
     String? channelId,
@@ -47,52 +48,54 @@ abstract class _$VideoFilterCWProxy {
   });
 }
 
-/// Proxy class for `copyWith` functionality. This is a callable class and can be used as follows: `instanceOfVideoFilter.copyWith(...)`. Additionally contains functions for specific fields e.g. `instanceOfVideoFilter.copyWith.fieldName(...)`
+/// Callable proxy for `copyWith` functionality.
+/// Use as `instanceOfVideoFilter.copyWith(...)` or call `instanceOfVideoFilter.copyWith.fieldName(value)` for a single field.
 class _$VideoFilterCWProxyImpl implements _$VideoFilterCWProxy {
   const _$VideoFilterCWProxyImpl(this._value);
 
   final VideoFilter _value;
 
   @override
-  VideoFilter uuid(String uuid) => this(uuid: uuid);
+  VideoFilter uuid(String uuid) => call(uuid: uuid);
 
   @override
-  VideoFilter channelId(String? channelId) => this(channelId: channelId);
+  VideoFilter channelId(String? channelId) => call(channelId: channelId);
 
   @override
   VideoFilter operation(FilterOperation? operation) =>
-      this(operation: operation);
+      call(operation: operation);
 
   @override
-  VideoFilter type(FilterType? type) => this(type: type);
+  VideoFilter type(FilterType? type) => call(type: type);
 
   @override
-  VideoFilter value(String? value) => this(value: value);
+  VideoFilter value(String? value) => call(value: value);
 
   @override
-  VideoFilter filterAll(bool filterAll) => this(filterAll: filterAll);
+  VideoFilter filterAll(bool filterAll) => call(filterAll: filterAll);
 
   @override
   VideoFilter hideFromFeed(bool hideFromFeed) =>
-      this(hideFromFeed: hideFromFeed);
+      call(hideFromFeed: hideFromFeed);
 
   @override
-  VideoFilter daysOfWeek(List<int> daysOfWeek) => this(daysOfWeek: daysOfWeek);
+  VideoFilter daysOfWeek(List<int> daysOfWeek) => call(daysOfWeek: daysOfWeek);
 
   @override
-  VideoFilter startTime(String startTime) => this(startTime: startTime);
+  VideoFilter startTime(String startTime) => call(startTime: startTime);
 
   @override
-  VideoFilter endTime(String endTime) => this(endTime: endTime);
+  VideoFilter endTime(String endTime) => call(endTime: endTime);
 
   @override
 
-  /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `VideoFilter(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
+  /// Creates a new instance with the provided field values.
+  /// Passing `null` to a nullable field nullifies it, while `null` for a non-nullable field is ignored. To update a single field use `VideoFilter(...).copyWith.fieldName(value)`.
   ///
-  /// Usage
+  /// Example:
   /// ```dart
   /// VideoFilter(...).copyWith(id: 12, name: "My name")
-  /// ````
+  /// ```
   VideoFilter call({
     Object? uuid = const $CopyWithPlaceholder(),
     Object? channelId = const $CopyWithPlaceholder(),
@@ -106,7 +109,7 @@ class _$VideoFilterCWProxyImpl implements _$VideoFilterCWProxy {
     Object? endTime = const $CopyWithPlaceholder(),
   }) {
     return VideoFilter._(
-      uuid == const $CopyWithPlaceholder()
+      uuid == const $CopyWithPlaceholder() || uuid == null
           ? _value.uuid
           // ignore: cast_nullable_to_non_nullable
           : uuid as String,
@@ -126,23 +129,23 @@ class _$VideoFilterCWProxyImpl implements _$VideoFilterCWProxy {
           ? _value.value
           // ignore: cast_nullable_to_non_nullable
           : value as String?,
-      filterAll == const $CopyWithPlaceholder()
+      filterAll == const $CopyWithPlaceholder() || filterAll == null
           ? _value.filterAll
           // ignore: cast_nullable_to_non_nullable
           : filterAll as bool,
-      hideFromFeed == const $CopyWithPlaceholder()
+      hideFromFeed == const $CopyWithPlaceholder() || hideFromFeed == null
           ? _value.hideFromFeed
           // ignore: cast_nullable_to_non_nullable
           : hideFromFeed as bool,
-      daysOfWeek == const $CopyWithPlaceholder()
+      daysOfWeek == const $CopyWithPlaceholder() || daysOfWeek == null
           ? _value.daysOfWeek
           // ignore: cast_nullable_to_non_nullable
           : daysOfWeek as List<int>,
-      startTime == const $CopyWithPlaceholder()
+      startTime == const $CopyWithPlaceholder() || startTime == null
           ? _value.startTime
           // ignore: cast_nullable_to_non_nullable
           : startTime as String,
-      endTime == const $CopyWithPlaceholder()
+      endTime == const $CopyWithPlaceholder() || endTime == null
           ? _value.endTime
           // ignore: cast_nullable_to_non_nullable
           : endTime as String,
@@ -151,7 +154,8 @@ class _$VideoFilterCWProxyImpl implements _$VideoFilterCWProxy {
 }
 
 extension $VideoFilterCopyWith on VideoFilter {
-  /// Returns a callable class that can be used as follows: `instanceOfVideoFilter.copyWith(...)` or like so:`instanceOfVideoFilter.copyWith.fieldName(...)`.
+  /// Returns a callable class used to build a new instance with modified fields.
+  /// Example: `instanceOfVideoFilter.copyWith(...)` or `instanceOfVideoFilter.copyWith.fieldName(...)`.
   // ignore: library_private_types_in_public_api
   _$VideoFilterCWProxy get copyWith => _$VideoFilterCWProxyImpl(this);
 }

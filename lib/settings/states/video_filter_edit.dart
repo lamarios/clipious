@@ -200,7 +200,7 @@ class VideoFilterEditCubit extends Cubit<VideoFilterEditState> {
 }
 
 @freezed
-class VideoFilterEditState with _$VideoFilterEditState {
+sealed class VideoFilterEditState with _$VideoFilterEditState {
   const factory VideoFilterEditState({
     VideoFilter? filter,
     @Default(1) int searchPage,

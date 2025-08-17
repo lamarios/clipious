@@ -7,7 +7,7 @@ part 'offline_subscription.g.dart';
 part 'offline_subscription.freezed.dart';
 
 @freezed
-class OfflineSubscription with _$OfflineSubscription {
+sealed class OfflineSubscription with _$OfflineSubscription {
   const factory OfflineSubscription({
     required String channelId,
     required String channelName,

@@ -110,7 +110,7 @@ class PlaylistCubit extends Cubit<PlaylistState> {
 }
 
 @freezed
-class PlaylistState with _$PlaylistState {
+sealed class PlaylistState with _$PlaylistState {
   const factory PlaylistState({
     @Default(0) double loadingProgress,
     required Playlist playlist,

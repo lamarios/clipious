@@ -72,7 +72,7 @@ class PlaylistListCubit extends Cubit<PlaylistListState> {
 }
 
 @freezed
-class PlaylistListState with _$PlaylistListState {
+sealed class PlaylistListState with _$PlaylistListState {
   const factory PlaylistListState(
       {required PaginatedList<Playlist> paginatedList,
       @Default([]) List<Playlist> playlists,

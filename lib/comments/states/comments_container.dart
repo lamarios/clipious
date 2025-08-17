@@ -15,7 +15,7 @@ class CommentsContainerCubit extends Cubit<CommentsContainerState> {
 }
 
 @freezed
-class CommentsContainerState with _$CommentsContainerState {
+sealed class CommentsContainerState with _$CommentsContainerState {
   const factory CommentsContainerState(
       {@Default('youtube') String source,
       @Default('top') String sortBy}) = _CommentsContainerState;

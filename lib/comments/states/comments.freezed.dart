@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,34 +9,62 @@ part of 'comments.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$CommentsState {
-  Video get video => throw _privateConstructorUsedError;
-  bool get loadingComments => throw _privateConstructorUsedError;
-  String? get continuation => throw _privateConstructorUsedError;
-  bool get continuationLoaded => throw _privateConstructorUsedError;
-  VideoComments get comments => throw _privateConstructorUsedError;
-  String get error => throw _privateConstructorUsedError;
-  String? get source => throw _privateConstructorUsedError;
-  String? get sortBy => throw _privateConstructorUsedError;
+  Video get video;
+  bool get loadingComments;
+  String? get continuation;
+  bool get continuationLoaded;
+  VideoComments get comments;
+  String get error;
+  String? get source;
+  String? get sortBy;
 
   /// Create a copy of CommentsState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $CommentsStateCopyWith<CommentsState> get copyWith =>
-      throw _privateConstructorUsedError;
+      _$CommentsStateCopyWithImpl<CommentsState>(
+          this as CommentsState, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is CommentsState &&
+            (identical(other.video, video) || other.video == video) &&
+            (identical(other.loadingComments, loadingComments) ||
+                other.loadingComments == loadingComments) &&
+            (identical(other.continuation, continuation) ||
+                other.continuation == continuation) &&
+            (identical(other.continuationLoaded, continuationLoaded) ||
+                other.continuationLoaded == continuationLoaded) &&
+            (identical(other.comments, comments) ||
+                other.comments == comments) &&
+            (identical(other.error, error) || other.error == error) &&
+            (identical(other.source, source) || other.source == source) &&
+            (identical(other.sortBy, sortBy) || other.sortBy == sortBy));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, video, loadingComments,
+      continuation, continuationLoaded, comments, error, source, sortBy);
+
+  @override
+  String toString() {
+    return 'CommentsState(video: $video, loadingComments: $loadingComments, continuation: $continuation, continuationLoaded: $continuationLoaded, comments: $comments, error: $error, source: $source, sortBy: $sortBy)';
+  }
 }
 
 /// @nodoc
-abstract class $CommentsStateCopyWith<$Res> {
+abstract mixin class $CommentsStateCopyWith<$Res> {
   factory $CommentsStateCopyWith(
-          CommentsState value, $Res Function(CommentsState) then) =
-      _$CommentsStateCopyWithImpl<$Res, CommentsState>;
+          CommentsState value, $Res Function(CommentsState) _then) =
+      _$CommentsStateCopyWithImpl;
   @useResult
   $Res call(
       {Video video,
@@ -52,14 +80,12 @@ abstract class $CommentsStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$CommentsStateCopyWithImpl<$Res, $Val extends CommentsState>
+class _$CommentsStateCopyWithImpl<$Res>
     implements $CommentsStateCopyWith<$Res> {
-  _$CommentsStateCopyWithImpl(this._value, this._then);
+  _$CommentsStateCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final CommentsState _self;
+  final $Res Function(CommentsState) _then;
 
   /// Create a copy of CommentsState
   /// with the given fields replaced by the non-null parameter values.
@@ -75,40 +101,40 @@ class _$CommentsStateCopyWithImpl<$Res, $Val extends CommentsState>
     Object? source = freezed,
     Object? sortBy = freezed,
   }) {
-    return _then(_value.copyWith(
+    return _then(_self.copyWith(
       video: null == video
-          ? _value.video
+          ? _self.video
           : video // ignore: cast_nullable_to_non_nullable
               as Video,
       loadingComments: null == loadingComments
-          ? _value.loadingComments
+          ? _self.loadingComments
           : loadingComments // ignore: cast_nullable_to_non_nullable
               as bool,
       continuation: freezed == continuation
-          ? _value.continuation
+          ? _self.continuation
           : continuation // ignore: cast_nullable_to_non_nullable
               as String?,
       continuationLoaded: null == continuationLoaded
-          ? _value.continuationLoaded
+          ? _self.continuationLoaded
           : continuationLoaded // ignore: cast_nullable_to_non_nullable
               as bool,
       comments: null == comments
-          ? _value.comments
+          ? _self.comments
           : comments // ignore: cast_nullable_to_non_nullable
               as VideoComments,
       error: null == error
-          ? _value.error
+          ? _self.error
           : error // ignore: cast_nullable_to_non_nullable
               as String,
       source: freezed == source
-          ? _value.source
+          ? _self.source
           : source // ignore: cast_nullable_to_non_nullable
               as String?,
       sortBy: freezed == sortBy
-          ? _value.sortBy
+          ? _self.sortBy
           : sortBy // ignore: cast_nullable_to_non_nullable
               as String?,
-    ) as $Val);
+    ));
   }
 
   /// Create a copy of CommentsState
@@ -116,97 +142,220 @@ class _$CommentsStateCopyWithImpl<$Res, $Val extends CommentsState>
   @override
   @pragma('vm:prefer-inline')
   $VideoCopyWith<$Res> get video {
-    return $VideoCopyWith<$Res>(_value.video, (value) {
-      return _then(_value.copyWith(video: value) as $Val);
+    return $VideoCopyWith<$Res>(_self.video, (value) {
+      return _then(_self.copyWith(video: value));
     });
   }
 }
 
-/// @nodoc
-abstract class _$$CommentsStateImplCopyWith<$Res>
-    implements $CommentsStateCopyWith<$Res> {
-  factory _$$CommentsStateImplCopyWith(
-          _$CommentsStateImpl value, $Res Function(_$CommentsStateImpl) then) =
-      __$$CommentsStateImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {Video video,
-      bool loadingComments,
-      String? continuation,
-      bool continuationLoaded,
-      VideoComments comments,
-      String error,
-      String? source,
-      String? sortBy});
+/// Adds pattern-matching-related methods to [CommentsState].
+extension CommentsStatePatterns on CommentsState {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
 
-  @override
-  $VideoCopyWith<$Res> get video;
-}
-
-/// @nodoc
-class __$$CommentsStateImplCopyWithImpl<$Res>
-    extends _$CommentsStateCopyWithImpl<$Res, _$CommentsStateImpl>
-    implements _$$CommentsStateImplCopyWith<$Res> {
-  __$$CommentsStateImplCopyWithImpl(
-      _$CommentsStateImpl _value, $Res Function(_$CommentsStateImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of CommentsState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? video = null,
-    Object? loadingComments = null,
-    Object? continuation = freezed,
-    Object? continuationLoaded = null,
-    Object? comments = null,
-    Object? error = null,
-    Object? source = freezed,
-    Object? sortBy = freezed,
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_CommentsState value)? $default, {
+    required TResult orElse(),
   }) {
-    return _then(_$CommentsStateImpl(
-      video: null == video
-          ? _value.video
-          : video // ignore: cast_nullable_to_non_nullable
-              as Video,
-      loadingComments: null == loadingComments
-          ? _value.loadingComments
-          : loadingComments // ignore: cast_nullable_to_non_nullable
-              as bool,
-      continuation: freezed == continuation
-          ? _value.continuation
-          : continuation // ignore: cast_nullable_to_non_nullable
-              as String?,
-      continuationLoaded: null == continuationLoaded
-          ? _value.continuationLoaded
-          : continuationLoaded // ignore: cast_nullable_to_non_nullable
-              as bool,
-      comments: null == comments
-          ? _value.comments
-          : comments // ignore: cast_nullable_to_non_nullable
-              as VideoComments,
-      error: null == error
-          ? _value.error
-          : error // ignore: cast_nullable_to_non_nullable
-              as String,
-      source: freezed == source
-          ? _value.source
-          : source // ignore: cast_nullable_to_non_nullable
-              as String?,
-      sortBy: freezed == sortBy
-          ? _value.sortBy
-          : sortBy // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
+    final _that = this;
+    switch (_that) {
+      case _CommentsState() when $default != null:
+        return $default(_that);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_CommentsState value) $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _CommentsState():
+        return $default(_that);
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_CommentsState value)? $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _CommentsState() when $default != null:
+        return $default(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+            Video video,
+            bool loadingComments,
+            String? continuation,
+            bool continuationLoaded,
+            VideoComments comments,
+            String error,
+            String? source,
+            String? sortBy)?
+        $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _CommentsState() when $default != null:
+        return $default(
+            _that.video,
+            _that.loadingComments,
+            _that.continuation,
+            _that.continuationLoaded,
+            _that.comments,
+            _that.error,
+            _that.source,
+            _that.sortBy);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(
+            Video video,
+            bool loadingComments,
+            String? continuation,
+            bool continuationLoaded,
+            VideoComments comments,
+            String error,
+            String? source,
+            String? sortBy)
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _CommentsState():
+        return $default(
+            _that.video,
+            _that.loadingComments,
+            _that.continuation,
+            _that.continuationLoaded,
+            _that.comments,
+            _that.error,
+            _that.source,
+            _that.sortBy);
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult? Function(
+            Video video,
+            bool loadingComments,
+            String? continuation,
+            bool continuationLoaded,
+            VideoComments comments,
+            String error,
+            String? source,
+            String? sortBy)?
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _CommentsState() when $default != null:
+        return $default(
+            _that.video,
+            _that.loadingComments,
+            _that.continuation,
+            _that.continuationLoaded,
+            _that.comments,
+            _that.error,
+            _that.source,
+            _that.sortBy);
+      case _:
+        return null;
+    }
   }
 }
 
 /// @nodoc
 
-class _$CommentsStateImpl implements _CommentsState {
-  const _$CommentsStateImpl(
+class _CommentsState implements CommentsState {
+  const _CommentsState(
       {required this.video,
       this.loadingComments = true,
       this.continuation,
@@ -236,16 +385,19 @@ class _$CommentsStateImpl implements _CommentsState {
   @override
   final String? sortBy;
 
+  /// Create a copy of CommentsState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'CommentsState(video: $video, loadingComments: $loadingComments, continuation: $continuation, continuationLoaded: $continuationLoaded, comments: $comments, error: $error, source: $source, sortBy: $sortBy)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$CommentsStateCopyWith<_CommentsState> get copyWith =>
+      __$CommentsStateCopyWithImpl<_CommentsState>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$CommentsStateImpl &&
+            other is _CommentsState &&
             (identical(other.video, video) || other.video == video) &&
             (identical(other.loadingComments, loadingComments) ||
                 other.loadingComments == loadingComments) &&
@@ -264,47 +416,101 @@ class _$CommentsStateImpl implements _CommentsState {
   int get hashCode => Object.hash(runtimeType, video, loadingComments,
       continuation, continuationLoaded, comments, error, source, sortBy);
 
+  @override
+  String toString() {
+    return 'CommentsState(video: $video, loadingComments: $loadingComments, continuation: $continuation, continuationLoaded: $continuationLoaded, comments: $comments, error: $error, source: $source, sortBy: $sortBy)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$CommentsStateCopyWith<$Res>
+    implements $CommentsStateCopyWith<$Res> {
+  factory _$CommentsStateCopyWith(
+          _CommentsState value, $Res Function(_CommentsState) _then) =
+      __$CommentsStateCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {Video video,
+      bool loadingComments,
+      String? continuation,
+      bool continuationLoaded,
+      VideoComments comments,
+      String error,
+      String? source,
+      String? sortBy});
+
+  @override
+  $VideoCopyWith<$Res> get video;
+}
+
+/// @nodoc
+class __$CommentsStateCopyWithImpl<$Res>
+    implements _$CommentsStateCopyWith<$Res> {
+  __$CommentsStateCopyWithImpl(this._self, this._then);
+
+  final _CommentsState _self;
+  final $Res Function(_CommentsState) _then;
+
   /// Create a copy of CommentsState
   /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$CommentsStateImplCopyWith<_$CommentsStateImpl> get copyWith =>
-      __$$CommentsStateImplCopyWithImpl<_$CommentsStateImpl>(this, _$identity);
-}
-
-abstract class _CommentsState implements CommentsState {
-  const factory _CommentsState(
-      {required final Video video,
-      final bool loadingComments,
-      final String? continuation,
-      final bool continuationLoaded,
-      required final VideoComments comments,
-      final String error,
-      final String? source,
-      final String? sortBy}) = _$CommentsStateImpl;
-
-  @override
-  Video get video;
-  @override
-  bool get loadingComments;
-  @override
-  String? get continuation;
-  @override
-  bool get continuationLoaded;
-  @override
-  VideoComments get comments;
-  @override
-  String get error;
-  @override
-  String? get source;
-  @override
-  String? get sortBy;
+  $Res call({
+    Object? video = null,
+    Object? loadingComments = null,
+    Object? continuation = freezed,
+    Object? continuationLoaded = null,
+    Object? comments = null,
+    Object? error = null,
+    Object? source = freezed,
+    Object? sortBy = freezed,
+  }) {
+    return _then(_CommentsState(
+      video: null == video
+          ? _self.video
+          : video // ignore: cast_nullable_to_non_nullable
+              as Video,
+      loadingComments: null == loadingComments
+          ? _self.loadingComments
+          : loadingComments // ignore: cast_nullable_to_non_nullable
+              as bool,
+      continuation: freezed == continuation
+          ? _self.continuation
+          : continuation // ignore: cast_nullable_to_non_nullable
+              as String?,
+      continuationLoaded: null == continuationLoaded
+          ? _self.continuationLoaded
+          : continuationLoaded // ignore: cast_nullable_to_non_nullable
+              as bool,
+      comments: null == comments
+          ? _self.comments
+          : comments // ignore: cast_nullable_to_non_nullable
+              as VideoComments,
+      error: null == error
+          ? _self.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as String,
+      source: freezed == source
+          ? _self.source
+          : source // ignore: cast_nullable_to_non_nullable
+              as String?,
+      sortBy: freezed == sortBy
+          ? _self.sortBy
+          : sortBy // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
 
   /// Create a copy of CommentsState
   /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$CommentsStateImplCopyWith<_$CommentsStateImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  $VideoCopyWith<$Res> get video {
+    return $VideoCopyWith<$Res>(_self.video, (value) {
+      return _then(_self.copyWith(video: value));
+    });
+  }
 }
+
+// dart format on

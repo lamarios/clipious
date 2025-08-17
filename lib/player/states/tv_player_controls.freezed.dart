@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,95 +9,56 @@ part of 'tv_player_controls.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$TvPlayerControlsState {
-  double get controlsOpacity => throw _privateConstructorUsedError;
-  bool get showSettings => throw _privateConstructorUsedError;
-  bool get showQueue => throw _privateConstructorUsedError;
-  bool get loading => throw _privateConstructorUsedError;
-  bool get displayControls => throw _privateConstructorUsedError;
+  double get controlsOpacity;
+  bool get showSettings;
+  bool get showQueue;
+  bool get loading;
+  bool get displayControls;
 
   /// Create a copy of TvPlayerControlsState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $TvPlayerControlsStateCopyWith<TvPlayerControlsState> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $TvPlayerControlsStateCopyWith<$Res> {
-  factory $TvPlayerControlsStateCopyWith(TvPlayerControlsState value,
-          $Res Function(TvPlayerControlsState) then) =
-      _$TvPlayerControlsStateCopyWithImpl<$Res, TvPlayerControlsState>;
-  @useResult
-  $Res call(
-      {double controlsOpacity,
-      bool showSettings,
-      bool showQueue,
-      bool loading,
-      bool displayControls});
-}
-
-/// @nodoc
-class _$TvPlayerControlsStateCopyWithImpl<$Res,
-        $Val extends TvPlayerControlsState>
-    implements $TvPlayerControlsStateCopyWith<$Res> {
-  _$TvPlayerControlsStateCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of TvPlayerControlsState
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
+  $TvPlayerControlsStateCopyWith<TvPlayerControlsState> get copyWith =>
+      _$TvPlayerControlsStateCopyWithImpl<TvPlayerControlsState>(
+          this as TvPlayerControlsState, _$identity);
+
   @override
-  $Res call({
-    Object? controlsOpacity = null,
-    Object? showSettings = null,
-    Object? showQueue = null,
-    Object? loading = null,
-    Object? displayControls = null,
-  }) {
-    return _then(_value.copyWith(
-      controlsOpacity: null == controlsOpacity
-          ? _value.controlsOpacity
-          : controlsOpacity // ignore: cast_nullable_to_non_nullable
-              as double,
-      showSettings: null == showSettings
-          ? _value.showSettings
-          : showSettings // ignore: cast_nullable_to_non_nullable
-              as bool,
-      showQueue: null == showQueue
-          ? _value.showQueue
-          : showQueue // ignore: cast_nullable_to_non_nullable
-              as bool,
-      loading: null == loading
-          ? _value.loading
-          : loading // ignore: cast_nullable_to_non_nullable
-              as bool,
-      displayControls: null == displayControls
-          ? _value.displayControls
-          : displayControls // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is TvPlayerControlsState &&
+            (identical(other.controlsOpacity, controlsOpacity) ||
+                other.controlsOpacity == controlsOpacity) &&
+            (identical(other.showSettings, showSettings) ||
+                other.showSettings == showSettings) &&
+            (identical(other.showQueue, showQueue) ||
+                other.showQueue == showQueue) &&
+            (identical(other.loading, loading) || other.loading == loading) &&
+            (identical(other.displayControls, displayControls) ||
+                other.displayControls == displayControls));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, controlsOpacity, showSettings,
+      showQueue, loading, displayControls);
+
+  @override
+  String toString() {
+    return 'TvPlayerControlsState(controlsOpacity: $controlsOpacity, showSettings: $showSettings, showQueue: $showQueue, loading: $loading, displayControls: $displayControls)';
   }
 }
 
 /// @nodoc
-abstract class _$$TvPlayerControlsStateImplCopyWith<$Res>
-    implements $TvPlayerControlsStateCopyWith<$Res> {
-  factory _$$TvPlayerControlsStateImplCopyWith(
-          _$TvPlayerControlsStateImpl value,
-          $Res Function(_$TvPlayerControlsStateImpl) then) =
-      __$$TvPlayerControlsStateImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $TvPlayerControlsStateCopyWith<$Res> {
+  factory $TvPlayerControlsStateCopyWith(TvPlayerControlsState value,
+          $Res Function(TvPlayerControlsState) _then) =
+      _$TvPlayerControlsStateCopyWithImpl;
   @useResult
   $Res call(
       {double controlsOpacity,
@@ -108,13 +69,12 @@ abstract class _$$TvPlayerControlsStateImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$TvPlayerControlsStateImplCopyWithImpl<$Res>
-    extends _$TvPlayerControlsStateCopyWithImpl<$Res,
-        _$TvPlayerControlsStateImpl>
-    implements _$$TvPlayerControlsStateImplCopyWith<$Res> {
-  __$$TvPlayerControlsStateImplCopyWithImpl(_$TvPlayerControlsStateImpl _value,
-      $Res Function(_$TvPlayerControlsStateImpl) _then)
-      : super(_value, _then);
+class _$TvPlayerControlsStateCopyWithImpl<$Res>
+    implements $TvPlayerControlsStateCopyWith<$Res> {
+  _$TvPlayerControlsStateCopyWithImpl(this._self, this._then);
+
+  final TvPlayerControlsState _self;
+  final $Res Function(TvPlayerControlsState) _then;
 
   /// Create a copy of TvPlayerControlsState
   /// with the given fields replaced by the non-null parameter values.
@@ -127,35 +87,197 @@ class __$$TvPlayerControlsStateImplCopyWithImpl<$Res>
     Object? loading = null,
     Object? displayControls = null,
   }) {
-    return _then(_$TvPlayerControlsStateImpl(
+    return _then(_self.copyWith(
       controlsOpacity: null == controlsOpacity
-          ? _value.controlsOpacity
+          ? _self.controlsOpacity
           : controlsOpacity // ignore: cast_nullable_to_non_nullable
               as double,
       showSettings: null == showSettings
-          ? _value.showSettings
+          ? _self.showSettings
           : showSettings // ignore: cast_nullable_to_non_nullable
               as bool,
       showQueue: null == showQueue
-          ? _value.showQueue
+          ? _self.showQueue
           : showQueue // ignore: cast_nullable_to_non_nullable
               as bool,
       loading: null == loading
-          ? _value.loading
+          ? _self.loading
           : loading // ignore: cast_nullable_to_non_nullable
               as bool,
       displayControls: null == displayControls
-          ? _value.displayControls
+          ? _self.displayControls
           : displayControls // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
   }
 }
 
+/// Adds pattern-matching-related methods to [TvPlayerControlsState].
+extension TvPlayerControlsStatePatterns on TvPlayerControlsState {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_TvPlayerControlsState value)? $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _TvPlayerControlsState() when $default != null:
+        return $default(_that);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_TvPlayerControlsState value) $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _TvPlayerControlsState():
+        return $default(_that);
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_TvPlayerControlsState value)? $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _TvPlayerControlsState() when $default != null:
+        return $default(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(double controlsOpacity, bool showSettings, bool showQueue,
+            bool loading, bool displayControls)?
+        $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _TvPlayerControlsState() when $default != null:
+        return $default(_that.controlsOpacity, _that.showSettings,
+            _that.showQueue, _that.loading, _that.displayControls);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(double controlsOpacity, bool showSettings, bool showQueue,
+            bool loading, bool displayControls)
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _TvPlayerControlsState():
+        return $default(_that.controlsOpacity, _that.showSettings,
+            _that.showQueue, _that.loading, _that.displayControls);
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult? Function(double controlsOpacity, bool showSettings, bool showQueue,
+            bool loading, bool displayControls)?
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _TvPlayerControlsState() when $default != null:
+        return $default(_that.controlsOpacity, _that.showSettings,
+            _that.showQueue, _that.loading, _that.displayControls);
+      case _:
+        return null;
+    }
+  }
+}
+
 /// @nodoc
 
-class _$TvPlayerControlsStateImpl extends _TvPlayerControlsState {
-  const _$TvPlayerControlsStateImpl(
+class _TvPlayerControlsState extends TvPlayerControlsState {
+  const _TvPlayerControlsState(
       {this.controlsOpacity = 0,
       this.showSettings = false,
       this.showQueue = false,
@@ -179,16 +301,20 @@ class _$TvPlayerControlsStateImpl extends _TvPlayerControlsState {
   @JsonKey()
   final bool displayControls;
 
+  /// Create a copy of TvPlayerControlsState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'TvPlayerControlsState(controlsOpacity: $controlsOpacity, showSettings: $showSettings, showQueue: $showQueue, loading: $loading, displayControls: $displayControls)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$TvPlayerControlsStateCopyWith<_TvPlayerControlsState> get copyWith =>
+      __$TvPlayerControlsStateCopyWithImpl<_TvPlayerControlsState>(
+          this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TvPlayerControlsStateImpl &&
+            other is _TvPlayerControlsState &&
             (identical(other.controlsOpacity, controlsOpacity) ||
                 other.controlsOpacity == controlsOpacity) &&
             (identical(other.showSettings, showSettings) ||
@@ -204,40 +330,70 @@ class _$TvPlayerControlsStateImpl extends _TvPlayerControlsState {
   int get hashCode => Object.hash(runtimeType, controlsOpacity, showSettings,
       showQueue, loading, displayControls);
 
+  @override
+  String toString() {
+    return 'TvPlayerControlsState(controlsOpacity: $controlsOpacity, showSettings: $showSettings, showQueue: $showQueue, loading: $loading, displayControls: $displayControls)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$TvPlayerControlsStateCopyWith<$Res>
+    implements $TvPlayerControlsStateCopyWith<$Res> {
+  factory _$TvPlayerControlsStateCopyWith(_TvPlayerControlsState value,
+          $Res Function(_TvPlayerControlsState) _then) =
+      __$TvPlayerControlsStateCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {double controlsOpacity,
+      bool showSettings,
+      bool showQueue,
+      bool loading,
+      bool displayControls});
+}
+
+/// @nodoc
+class __$TvPlayerControlsStateCopyWithImpl<$Res>
+    implements _$TvPlayerControlsStateCopyWith<$Res> {
+  __$TvPlayerControlsStateCopyWithImpl(this._self, this._then);
+
+  final _TvPlayerControlsState _self;
+  final $Res Function(_TvPlayerControlsState) _then;
+
   /// Create a copy of TvPlayerControlsState
   /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$TvPlayerControlsStateImplCopyWith<_$TvPlayerControlsStateImpl>
-      get copyWith => __$$TvPlayerControlsStateImplCopyWithImpl<
-          _$TvPlayerControlsStateImpl>(this, _$identity);
+  $Res call({
+    Object? controlsOpacity = null,
+    Object? showSettings = null,
+    Object? showQueue = null,
+    Object? loading = null,
+    Object? displayControls = null,
+  }) {
+    return _then(_TvPlayerControlsState(
+      controlsOpacity: null == controlsOpacity
+          ? _self.controlsOpacity
+          : controlsOpacity // ignore: cast_nullable_to_non_nullable
+              as double,
+      showSettings: null == showSettings
+          ? _self.showSettings
+          : showSettings // ignore: cast_nullable_to_non_nullable
+              as bool,
+      showQueue: null == showQueue
+          ? _self.showQueue
+          : showQueue // ignore: cast_nullable_to_non_nullable
+              as bool,
+      loading: null == loading
+          ? _self.loading
+          : loading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      displayControls: null == displayControls
+          ? _self.displayControls
+          : displayControls // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
 }
 
-abstract class _TvPlayerControlsState extends TvPlayerControlsState {
-  const factory _TvPlayerControlsState(
-      {final double controlsOpacity,
-      final bool showSettings,
-      final bool showQueue,
-      final bool loading,
-      final bool displayControls}) = _$TvPlayerControlsStateImpl;
-  const _TvPlayerControlsState._() : super._();
-
-  @override
-  double get controlsOpacity;
-  @override
-  bool get showSettings;
-  @override
-  bool get showQueue;
-  @override
-  bool get loading;
-  @override
-  bool get displayControls;
-
-  /// Create a copy of TvPlayerControlsState
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$TvPlayerControlsStateImplCopyWith<_$TvPlayerControlsStateImpl>
-      get copyWith => throw _privateConstructorUsedError;
-}
+// dart format on

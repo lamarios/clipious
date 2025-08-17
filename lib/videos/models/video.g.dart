@@ -6,7 +6,7 @@ part of 'video.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$VideoImpl _$$VideoImplFromJson(Map<String, dynamic> json) => _$VideoImpl(
+_Video _$VideoFromJson(Map<String, dynamic> json) => _Video(
       videoId: json['videoId'] as String,
       viewCount: (json['viewCount'] as num?)?.toInt(),
       published: _parsePublished(json['published']),
@@ -69,8 +69,7 @@ _$VideoImpl _$$VideoImplFromJson(Map<String, dynamic> json) => _$VideoImpl(
       viewCountText: json['viewCountText'] as String?,
     );
 
-Map<String, dynamic> _$$VideoImplToJson(_$VideoImpl instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$VideoToJson(_Video instance) => <String, dynamic>{
       'videoId': instance.videoId,
       'viewCount': instance.viewCount,
       'published': instance.published,

@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:clipious/l10n/generated/app_localizations.dart';
 import 'package:intl/intl.dart';
 import 'package:clipious/globals.dart';
 import 'package:clipious/notifications/models/db/subscription_notifications.dart';
