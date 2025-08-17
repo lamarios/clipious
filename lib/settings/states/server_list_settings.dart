@@ -115,7 +115,7 @@ class ServerListSettingsCubit extends Cubit<ServerListSettingsState> {
 }
 
 @freezed
-class ServerListSettingsState with _$ServerListSettingsState {
+sealed class ServerListSettingsState with _$ServerListSettingsState {
   const factory ServerListSettingsState(
       {required List<Server> dbServers,
       required List<Server> publicServers,

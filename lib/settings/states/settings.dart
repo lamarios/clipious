@@ -7,7 +7,7 @@ import 'package:easy_debounce/easy_debounce.dart';
 import 'package:feedback/feedback.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:clipious/l10n/generated/app_localizations.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:clipious/app/states/app.dart';
 import 'package:clipious/workmanager.dart';
@@ -476,7 +476,7 @@ class SettingsCubit extends Cubit<SettingsState> {
 }
 
 @freezed
-class SettingsState with _$SettingsState {
+sealed class SettingsState with _$SettingsState {
   const factory SettingsState(
       {required Map<String, SettingsValue> settings,
       required PackageInfo packageInfo,

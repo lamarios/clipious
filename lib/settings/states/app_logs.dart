@@ -47,7 +47,7 @@ class AppLogsCubit extends Cubit<AppLogsState> {
 }
 
 @freezed
-class AppLogsState with _$AppLogsState {
+sealed class AppLogsState with _$AppLogsState {
   const factory AppLogsState(
       {@Default([]) List<AppLog> logs,
       @Default([]) List<String> selected}) = _AppLogsState;

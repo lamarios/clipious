@@ -158,7 +158,7 @@ class TvPlayerControlsCubit extends Cubit<TvPlayerControlsState> {
 }
 
 @freezed
-class TvPlayerControlsState with _$TvPlayerControlsState {
+sealed class TvPlayerControlsState with _$TvPlayerControlsState {
   const factory TvPlayerControlsState({
     @Default(0) double controlsOpacity,
     @Default(false) bool showSettings,

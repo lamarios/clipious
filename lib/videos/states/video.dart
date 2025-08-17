@@ -122,7 +122,7 @@ class VideoCubit extends Cubit<VideoState> {
 }
 
 @freezed
-class VideoState with _$VideoState {
+sealed class VideoState with _$VideoState {
   const factory VideoState(
       {Video? video,
       int? dislikes,

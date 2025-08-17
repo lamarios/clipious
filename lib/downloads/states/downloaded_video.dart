@@ -85,7 +85,7 @@ class DownloadedVideoCubit extends Cubit<DownloadedVideoState> {
 }
 
 @freezed
-class DownloadedVideoState with _$DownloadedVideoState {
+sealed class DownloadedVideoState with _$DownloadedVideoState {
   const factory DownloadedVideoState(
       {DownloadedVideo? video,
       String? thumbnailPath,

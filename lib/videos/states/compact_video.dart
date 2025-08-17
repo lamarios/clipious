@@ -42,7 +42,7 @@ class CompactVideoCubit extends Cubit<CompactVideoState> {
 }
 
 @freezed
-class CompactVideoState with _$CompactVideoState {
+sealed class CompactVideoState with _$CompactVideoState {
   const factory CompactVideoState(
       {DownloadedVideo? offlineVideo,
       String? offlineVideoThumbnailPath}) = _CompactVideoState;

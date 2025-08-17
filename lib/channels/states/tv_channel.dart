@@ -84,7 +84,7 @@ class TvChannelCubit extends Cubit<TvChannelController> {
 }
 
 @freezed
-class TvChannelController with _$TvChannelController {
+sealed class TvChannelController with _$TvChannelController {
   const factory TvChannelController({
     @Default(false) bool showBackground,
     @Default(false) bool hasShorts,

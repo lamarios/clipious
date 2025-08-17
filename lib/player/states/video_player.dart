@@ -618,7 +618,7 @@ class VideoPlayerCubit extends MediaPlayerCubit<VideoPlayerState> {
 }
 
 @freezed
-class VideoPlayerState extends MediaPlayerState with _$VideoPlayerState {
+sealed class VideoPlayerState extends MediaPlayerState with _$VideoPlayerState {
   const factory VideoPlayerState(
       {required ColorScheme colors,
       required Color overFlowTextColor,

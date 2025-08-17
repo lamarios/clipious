@@ -93,7 +93,7 @@ class ServerSettingsCubit extends Cubit<ServerSettingsState> {
 }
 
 @freezed
-class ServerSettingsState with _$ServerSettingsState {
+sealed class ServerSettingsState with _$ServerSettingsState {
   const factory ServerSettingsState(
       {required Server server,
       @Default(false) bool canDelete}) = _ServerSettingsState;

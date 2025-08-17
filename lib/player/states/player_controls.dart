@@ -252,7 +252,7 @@ class PlayerControlsCubit extends Cubit<PlayerControlsState> {
 }
 
 @freezed
-class PlayerControlsState with _$PlayerControlsState {
+sealed class PlayerControlsState with _$PlayerControlsState {
   const factory PlayerControlsState(
       {@Default(false) bool errored,
       @Default(Duration.zero) Duration position,

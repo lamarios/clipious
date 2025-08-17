@@ -147,7 +147,7 @@ class TvPlayerSettingsCubit extends Cubit<TvPlayerSettingsState> {
 }
 
 @freezed
-class TvPlayerSettingsState with _$TvPlayerSettingsState {
+sealed class TvPlayerSettingsState with _$TvPlayerSettingsState {
   const factory TvPlayerSettingsState(
       {@Default(Tabs.video) Tabs selected,
       @Default(SleepTimer()) SleepTimer sleepTimer}) = _TvPlayerSettingsState;

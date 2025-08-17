@@ -29,7 +29,7 @@ class SelectListCubit<T> extends Cubit<SelectListState<T>> {
 }
 
 @freezed
-class SelectListState<T> with _$SelectListState<T> {
+sealed class SelectListState<T> with _$SelectListState<T> {
   const factory SelectListState(
       {@Default([]) List<T> filteredItems,
       @Default(false) bool loading}) = _SelectListState<T>;

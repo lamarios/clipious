@@ -8,7 +8,7 @@ part 'server.g.dart';
 final _log = Logger('Server');
 
 @freezed
-class Server with _$Server {
+sealed class Server with _$Server {
   const factory Server(
       {required String url,
       String? authToken,

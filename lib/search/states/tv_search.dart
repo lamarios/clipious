@@ -43,7 +43,7 @@ class TvSearchCubit extends Cubit<TvSearchState> {
 }
 
 @freezed
-class TvSearchState with _$TvSearchState {
+sealed class TvSearchState with _$TvSearchState {
   const factory TvSearchState(
       {@Default(false) bool hasVideos,
       @Default(false) bool hasChannels,

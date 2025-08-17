@@ -37,7 +37,7 @@ int? _parsePublished(dynamic published) {
 }
 
 @freezed
-class Video with _$Video implements ShareLinks, IdedVideo {
+sealed class Video with _$Video implements ShareLinks, IdedVideo {
   @Implements<ShareLinks>()
   @Implements<IdedVideo>()
   const factory Video(

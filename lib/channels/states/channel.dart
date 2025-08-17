@@ -50,7 +50,7 @@ class ChannelCubit extends Cubit<ChannelController> {
 }
 
 @freezed
-class ChannelController with _$ChannelController {
+sealed class ChannelController with _$ChannelController {
   const factory ChannelController(
           {required String channelId,
           @Default(false) bool isSubscribed,

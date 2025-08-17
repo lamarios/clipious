@@ -107,7 +107,7 @@ class AddServerCubit extends Cubit<AddServerState> {
 }
 
 @freezed
-class AddServerState with _$AddServerState {
+sealed class AddServerState with _$AddServerState {
   const factory AddServerState(
       {@Default(false) bool loading,
       @Default(false) bool valid,

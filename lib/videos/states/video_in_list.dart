@@ -37,7 +37,7 @@ class VideoInListCubit extends Cubit<VideoInListState> {
 }
 
 @freezed
-class VideoInListState with _$VideoInListState {
+sealed class VideoInListState with _$VideoInListState {
   @Assert('video == null || offlineVideo == null',
       'cannot provide both video and offline video')
   const factory VideoInListState(

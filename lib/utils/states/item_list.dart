@@ -85,7 +85,7 @@ class ItemListCubit<T> extends Cubit<ItemListState<T>> {
 }
 
 @freezed
-class ItemListState<T> with _$ItemListState<T> {
+sealed class ItemListState<T> with _$ItemListState<T> {
   const factory ItemListState({
     required PaginatedList<T> itemList,
     @Default([]) List<T> items,

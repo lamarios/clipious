@@ -52,7 +52,8 @@ class PaginatedListCubit<T> extends Cubit<PaginatedListViewController<T>> {
 }
 
 @freezed
-class PaginatedListViewController<T> with _$PaginatedListViewController<T> {
+sealed class PaginatedListViewController<T>
+    with _$PaginatedListViewController<T> {
   const factory PaginatedListViewController(
       {required PaginatedList<T> paginatedList,
       @Default([]) List<T> items,

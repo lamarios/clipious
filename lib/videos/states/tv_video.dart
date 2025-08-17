@@ -32,6 +32,6 @@ class TvVideoCubit extends Cubit<TvVideoState> {
 }
 
 @freezed
-class TvVideoState with _$TvVideoState {
+sealed class TvVideoState with _$TvVideoState {
   const factory TvVideoState({@Default(true) bool showImage}) = _TvVideoState;
 }
