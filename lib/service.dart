@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter_web_auth/flutter_web_auth.dart';
+import 'package:flutter_web_auth_2/flutter_web_auth_2.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 import 'package:clipious/channels/models/channel_sort_by.dart';
@@ -220,7 +220,7 @@ class Service {
   Future<String?> logIn(String serverUrl) async {
     String url =
         '$serverUrl/authorize_token?scopes=:feed,:subscriptions*,:playlists*,:history*&callback_url=clipious-auth://';
-    final result = await FlutterWebAuth.authenticate(
+    final result = await FlutterWebAuth2.authenticate(
         url: url, callbackUrlScheme: 'clipious-auth');
 
     final token = Uri.parse(result).queryParameters['token'];

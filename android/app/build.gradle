@@ -54,7 +54,7 @@ if (keystorePropertiesFile.exists()) {
 }
 
 android {
-    compileSdkVersion 35
+    compileSdkVersion 36
 
     dependenciesInfo {
         // Disables dependency metadata when building APKs.
@@ -83,7 +83,7 @@ android {
     defaultConfig {
         applicationId "com.github.lamarios.clipious"
         minSdkVersion 24
-        targetSdkVersion 35
+        targetSdkVersion 36
         versionCode buildNumber
         versionName flutterVersionName
     }
