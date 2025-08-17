@@ -6,63 +6,63 @@ environment:
   sdk: '>=3.0.0 <4.0.0'
 dependencies: 
   after_layout: 1.2.0
-  audio_service: 0.18.16
-  audio_session: 0.1.24
-  auto_route: 9.3.0
+  audio_service: 0.18.18
+  audio_session: 0.2.2
+  auto_route: 10.1.1
   awesome_notifications: any
-  awesome_notifications_core: 0.10.0
-  back_button_interceptor: 8.0.3
+  awesome_notifications_core: 0.10.1
+  back_button_interceptor: 8.0.4
   bloc: 9.0.0
   cached_network_image: 3.4.1
-  carousel_slider: 5.0.0
-  copy_with_extension: 6.0.1
-  device_info_plus: 11.2.2
-  dio: 5.8.0+1
+  carousel_slider: 5.1.1
+  copy_with_extension: 9.1.0
+  device_info_plus: 11.5.0
+  dio: 5.9.0
   downloadsfolder: 1.2.0
   duration: 4.0.3
-  dynamic_color: 1.7.0
+  dynamic_color: 1.8.1
   easy_debounce: 2.0.3
-  feedback: 3.1.0
-  ffmpeg_kit_flutter_new_full: 1.1.0
+  feedback: 3.2.0
+  ffmpeg_kit_flutter_new_full: 1.2.0
   flutter_animate: 4.5.2
-  flutter_bloc: 9.0.0
+  flutter_bloc: 9.1.1
   flutter_displaymode: 0.6.0
   flutter_fadein: 2.0.0
   flutter_linkify: 6.0.0
-  flutter_native_splash: 2.4.4
-  flutter_svg: 2.0.17
+  flutter_native_splash: 2.4.6
+  flutter_svg: 2.2.0
   flutter_swipe_action_cell: 3.1.5
   flutter_volume_controller: 1.3.3
   flutter_web_auth: 0.6.0
-  freezed_annotation: 2.4.4
+  freezed_annotation: 3.1.0
   gap: 3.0.1
-  http: 1.3.0
-  intl: 0.19.0
+  http: any
+  intl: any
   json_annotation: 4.9.0
-  just_audio: 0.9.44
+  just_audio: 0.10.4
   locale_names:  1.1.1
   #    git:
   #      url: https://github.com/lamarios/locale_names.git
   #      ref: master
   logging: 1.3.0
-  package_info_plus: 8.1.4
+  package_info_plus: 8.3.1
   path: any
-  path_provider: 2.1.5
+  path_provider: any
   receive_sharing_intent:
     # see https://github.com/KasemJaffer/receive_sharing_intent/issues/344
     git:
       url: https://github.com/KasemJaffer/receive_sharing_intent
       ref: 2cea396843cd3ab1b5ec4334be4233864637874e
-  screen_brightness: 2.1.1
-  sembast: 3.8.2
-  sembast_sqflite: 2.2.0+4
+  screen_brightness: 2.1.6
+  sembast: 3.8.5+1
+  sembast_sqflite: 2.2.1
   settings_ui: 2.0.2
-  share_plus: 10.1.4
-  sqflite: 2.4.1
-  url_launcher: 6.3.1
+  share_plus: 11.1.0
+  sqflite: 2.4.2
+  url_launcher: 6.3.2
   uuid: 4.5.1
-  wakelock_plus: 1.2.10
-  workmanager: 0.5.2
+  wakelock_plus: 1.3.2
+  workmanager: 0.9.0+2
   flutter: 
     sdk: flutter
   flutter_localizations: 
@@ -77,13 +77,13 @@ dependencies:
 #      ref: main
 dev_dependencies: 
   auto_route_generator: any
-  build_runner: ^2.4.10
-  copy_with_extension_gen: 6.0.0
-  flutter_launcher_icons: ^0.14.0
-  flutter_lints: ^4.0.0
-  freezed: ^2.5.7
-  json_serializable: ^6.7.1
-  mockito: ^5.4.4
+  build_runner: ^2.7.0
+  copy_with_extension_gen: any
+  flutter_launcher_icons: 0.14.4
+  flutter_lints: 6.0.0
+  freezed: 3.2.0
+  json_serializable: 6.10.0
+  mockito: ^5.5.0
   nock: 1.2.3
   pubspec_dependency_sorter: ^1.0.4
   test: any
