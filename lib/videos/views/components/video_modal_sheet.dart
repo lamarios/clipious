@@ -70,6 +70,8 @@ class VideoModalSheet extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Wrap(
+          spacing: 16,
+          runSpacing: 8,
           alignment: WrapAlignment.center,
           children: [
             AddToPlayListButton(
@@ -77,58 +79,43 @@ class VideoModalSheet extends StatelessWidget {
               type: AddToPlayListButtonType.modalSheet,
               afterAdd: () => Navigator.pop(context),
             ),
-            Padding(
-              padding: const EdgeInsets.only(right: 16.0),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  IconButton.filledTonal(
-                      onPressed:
-                          AddToQueueButton.canAddToQueue(context, [video])
-                              ? () => addToQueue(context)
-                              : null,
-                      icon: const Icon(Icons.playlist_play)),
-                  Text(locals.addToQueueList)
-                ],
-              ),
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                IconButton.filledTonal(
+                    onPressed: AddToQueueButton.canAddToQueue(context, [video])
+                        ? () => addToQueue(context)
+                        : null,
+                    icon: const Icon(Icons.playlist_play)),
+                Text(locals.addToQueueList)
+              ],
             ),
-            Padding(
-              padding: const EdgeInsets.only(right: 16.0),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  IconButton.filledTonal(
-                      onPressed: () => playNext(context),
-                      icon: const Icon(Icons.play_arrow)),
-                  Text(locals.playNext)
-                ],
-              ),
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                IconButton.filledTonal(
+                    onPressed: () => playNext(context),
+                    icon: const Icon(Icons.play_arrow)),
+                Text(locals.playNext)
+              ],
             ),
-            Padding(
-              padding: const EdgeInsets.only(right: 16.0),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  IconButton.filledTonal(
-                      onPressed: () => downloadVideo(context),
-                      icon: const Icon(Icons.download)),
-                  Text(locals.download)
-                ],
-              ),
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                IconButton.filledTonal(
+                    onPressed: () => downloadVideo(context),
+                    icon: const Icon(Icons.download)),
+                Text(locals.download)
+              ],
             ),
-            Padding(
-              padding: getDeviceType() == DeviceType.phone
-                  ? const EdgeInsets.only(top: 8.0)
-                  : const EdgeInsets.only(right: 16.0),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  IconButton.filledTonal(
-                      onPressed: () => _showSharingSheet(context),
-                      icon: const Icon(Icons.share)),
-                  Text(locals.share)
-                ],
-              ),
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                IconButton.filledTonal(
+                    onPressed: () => _showSharingSheet(context),
+                    icon: const Icon(Icons.share)),
+                Text(locals.share)
+              ],
             ),
           ],
         ),

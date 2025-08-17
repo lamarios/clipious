@@ -63,37 +63,33 @@ class AddToPlayListButton extends StatelessWidget {
           builder: (context, state) {
         var cubit = context.read<AddToPlaylistCubit>();
         return switch (type) {
-          (AddToPlayListButtonType.modalSheet) => Padding(
-              padding: const EdgeInsets.only(right: 16.0),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  AnimatedCrossFade(
-                    crossFadeState: state.loading
-                        ? CrossFadeState.showSecond
-                        : CrossFadeState.showFirst,
-                    firstChild: IconButton.filledTonal(
-                        onPressed: () => showAddToPlaylistDialog(context),
-                        icon: const Icon(Icons.playlist_add)),
-                    secondChild: FilledButton.tonal(
-                        style: ButtonStyle(
-                            shape:
-                                WidgetStateProperty.all(const CircleBorder())),
-                        onPressed: () {},
-                        child: const SizedBox(
-                            height: 10,
-                            width: 10,
-                            child: CircularProgressIndicator(
-                              strokeWidth: 1,
-                            ))),
-                    duration: animationDuration,
-                    firstCurve: Curves.easeInOutQuad,
-                    secondCurve: Curves.easeInOutQuad,
-                    sizeCurve: Curves.easeInOutQuad,
-                  ),
-                  Text(locals.addToPlaylist)
-                ],
-              ),
+          (AddToPlayListButtonType.modalSheet) => Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                AnimatedCrossFade(
+                  crossFadeState: state.loading
+                      ? CrossFadeState.showSecond
+                      : CrossFadeState.showFirst,
+                  firstChild: IconButton.filledTonal(
+                      onPressed: () => showAddToPlaylistDialog(context),
+                      icon: const Icon(Icons.playlist_add)),
+                  secondChild: FilledButton.tonal(
+                      style: ButtonStyle(
+                          shape: WidgetStateProperty.all(const CircleBorder())),
+                      onPressed: () {},
+                      child: const SizedBox(
+                          height: 10,
+                          width: 10,
+                          child: CircularProgressIndicator(
+                            strokeWidth: 1,
+                          ))),
+                  duration: animationDuration,
+                  firstCurve: Curves.easeInOutQuad,
+                  secondCurve: Curves.easeInOutQuad,
+                  sizeCurve: Curves.easeInOutQuad,
+                ),
+                Text(locals.addToPlaylist)
+              ],
             ),
           (AddToPlayListButtonType.appBar) => Row(
               children: [
