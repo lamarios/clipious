@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,93 +9,54 @@ part of 'add_server.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$AddServerState {
-  bool get loading => throw _privateConstructorUsedError;
-  bool get valid => throw _privateConstructorUsedError;
-  bool get showAdvanced => throw _privateConstructorUsedError;
-  bool get advancedTest => throw _privateConstructorUsedError;
-  Map<String, String> get headers => throw _privateConstructorUsedError;
+  bool get loading;
+  bool get valid;
+  bool get showAdvanced;
+  bool get advancedTest;
+  Map<String, String> get headers;
 
   /// Create a copy of AddServerState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $AddServerStateCopyWith<AddServerState> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $AddServerStateCopyWith<$Res> {
-  factory $AddServerStateCopyWith(
-          AddServerState value, $Res Function(AddServerState) then) =
-      _$AddServerStateCopyWithImpl<$Res, AddServerState>;
-  @useResult
-  $Res call(
-      {bool loading,
-      bool valid,
-      bool showAdvanced,
-      bool advancedTest,
-      Map<String, String> headers});
-}
-
-/// @nodoc
-class _$AddServerStateCopyWithImpl<$Res, $Val extends AddServerState>
-    implements $AddServerStateCopyWith<$Res> {
-  _$AddServerStateCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of AddServerState
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
+  $AddServerStateCopyWith<AddServerState> get copyWith =>
+      _$AddServerStateCopyWithImpl<AddServerState>(
+          this as AddServerState, _$identity);
+
   @override
-  $Res call({
-    Object? loading = null,
-    Object? valid = null,
-    Object? showAdvanced = null,
-    Object? advancedTest = null,
-    Object? headers = null,
-  }) {
-    return _then(_value.copyWith(
-      loading: null == loading
-          ? _value.loading
-          : loading // ignore: cast_nullable_to_non_nullable
-              as bool,
-      valid: null == valid
-          ? _value.valid
-          : valid // ignore: cast_nullable_to_non_nullable
-              as bool,
-      showAdvanced: null == showAdvanced
-          ? _value.showAdvanced
-          : showAdvanced // ignore: cast_nullable_to_non_nullable
-              as bool,
-      advancedTest: null == advancedTest
-          ? _value.advancedTest
-          : advancedTest // ignore: cast_nullable_to_non_nullable
-              as bool,
-      headers: null == headers
-          ? _value.headers
-          : headers // ignore: cast_nullable_to_non_nullable
-              as Map<String, String>,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is AddServerState &&
+            (identical(other.loading, loading) || other.loading == loading) &&
+            (identical(other.valid, valid) || other.valid == valid) &&
+            (identical(other.showAdvanced, showAdvanced) ||
+                other.showAdvanced == showAdvanced) &&
+            (identical(other.advancedTest, advancedTest) ||
+                other.advancedTest == advancedTest) &&
+            const DeepCollectionEquality().equals(other.headers, headers));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, loading, valid, showAdvanced,
+      advancedTest, const DeepCollectionEquality().hash(headers));
+
+  @override
+  String toString() {
+    return 'AddServerState(loading: $loading, valid: $valid, showAdvanced: $showAdvanced, advancedTest: $advancedTest, headers: $headers)';
   }
 }
 
 /// @nodoc
-abstract class _$$AddServerStateImplCopyWith<$Res>
-    implements $AddServerStateCopyWith<$Res> {
-  factory _$$AddServerStateImplCopyWith(_$AddServerStateImpl value,
-          $Res Function(_$AddServerStateImpl) then) =
-      __$$AddServerStateImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $AddServerStateCopyWith<$Res> {
+  factory $AddServerStateCopyWith(
+          AddServerState value, $Res Function(AddServerState) _then) =
+      _$AddServerStateCopyWithImpl;
   @useResult
   $Res call(
       {bool loading,
@@ -106,12 +67,12 @@ abstract class _$$AddServerStateImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$AddServerStateImplCopyWithImpl<$Res>
-    extends _$AddServerStateCopyWithImpl<$Res, _$AddServerStateImpl>
-    implements _$$AddServerStateImplCopyWith<$Res> {
-  __$$AddServerStateImplCopyWithImpl(
-      _$AddServerStateImpl _value, $Res Function(_$AddServerStateImpl) _then)
-      : super(_value, _then);
+class _$AddServerStateCopyWithImpl<$Res>
+    implements $AddServerStateCopyWith<$Res> {
+  _$AddServerStateCopyWithImpl(this._self, this._then);
+
+  final AddServerState _self;
+  final $Res Function(AddServerState) _then;
 
   /// Create a copy of AddServerState
   /// with the given fields replaced by the non-null parameter values.
@@ -124,35 +85,197 @@ class __$$AddServerStateImplCopyWithImpl<$Res>
     Object? advancedTest = null,
     Object? headers = null,
   }) {
-    return _then(_$AddServerStateImpl(
+    return _then(_self.copyWith(
       loading: null == loading
-          ? _value.loading
+          ? _self.loading
           : loading // ignore: cast_nullable_to_non_nullable
               as bool,
       valid: null == valid
-          ? _value.valid
+          ? _self.valid
           : valid // ignore: cast_nullable_to_non_nullable
               as bool,
       showAdvanced: null == showAdvanced
-          ? _value.showAdvanced
+          ? _self.showAdvanced
           : showAdvanced // ignore: cast_nullable_to_non_nullable
               as bool,
       advancedTest: null == advancedTest
-          ? _value.advancedTest
+          ? _self.advancedTest
           : advancedTest // ignore: cast_nullable_to_non_nullable
               as bool,
       headers: null == headers
-          ? _value._headers
+          ? _self.headers
           : headers // ignore: cast_nullable_to_non_nullable
               as Map<String, String>,
     ));
   }
 }
 
+/// Adds pattern-matching-related methods to [AddServerState].
+extension AddServerStatePatterns on AddServerState {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_AddServerState value)? $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _AddServerState() when $default != null:
+        return $default(_that);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_AddServerState value) $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _AddServerState():
+        return $default(_that);
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_AddServerState value)? $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _AddServerState() when $default != null:
+        return $default(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(bool loading, bool valid, bool showAdvanced,
+            bool advancedTest, Map<String, String> headers)?
+        $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _AddServerState() when $default != null:
+        return $default(_that.loading, _that.valid, _that.showAdvanced,
+            _that.advancedTest, _that.headers);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(bool loading, bool valid, bool showAdvanced,
+            bool advancedTest, Map<String, String> headers)
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _AddServerState():
+        return $default(_that.loading, _that.valid, _that.showAdvanced,
+            _that.advancedTest, _that.headers);
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult? Function(bool loading, bool valid, bool showAdvanced,
+            bool advancedTest, Map<String, String> headers)?
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _AddServerState() when $default != null:
+        return $default(_that.loading, _that.valid, _that.showAdvanced,
+            _that.advancedTest, _that.headers);
+      case _:
+        return null;
+    }
+  }
+}
+
 /// @nodoc
 
-class _$AddServerStateImpl implements _AddServerState {
-  const _$AddServerStateImpl(
+class _AddServerState implements AddServerState {
+  const _AddServerState(
       {this.loading = false,
       this.valid = false,
       this.showAdvanced = false,
@@ -181,16 +304,19 @@ class _$AddServerStateImpl implements _AddServerState {
     return EqualUnmodifiableMapView(_headers);
   }
 
+  /// Create a copy of AddServerState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'AddServerState(loading: $loading, valid: $valid, showAdvanced: $showAdvanced, advancedTest: $advancedTest, headers: $headers)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$AddServerStateCopyWith<_AddServerState> get copyWith =>
+      __$AddServerStateCopyWithImpl<_AddServerState>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$AddServerStateImpl &&
+            other is _AddServerState &&
             (identical(other.loading, loading) || other.loading == loading) &&
             (identical(other.valid, valid) || other.valid == valid) &&
             (identical(other.showAdvanced, showAdvanced) ||
@@ -204,39 +330,70 @@ class _$AddServerStateImpl implements _AddServerState {
   int get hashCode => Object.hash(runtimeType, loading, valid, showAdvanced,
       advancedTest, const DeepCollectionEquality().hash(_headers));
 
+  @override
+  String toString() {
+    return 'AddServerState(loading: $loading, valid: $valid, showAdvanced: $showAdvanced, advancedTest: $advancedTest, headers: $headers)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$AddServerStateCopyWith<$Res>
+    implements $AddServerStateCopyWith<$Res> {
+  factory _$AddServerStateCopyWith(
+          _AddServerState value, $Res Function(_AddServerState) _then) =
+      __$AddServerStateCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {bool loading,
+      bool valid,
+      bool showAdvanced,
+      bool advancedTest,
+      Map<String, String> headers});
+}
+
+/// @nodoc
+class __$AddServerStateCopyWithImpl<$Res>
+    implements _$AddServerStateCopyWith<$Res> {
+  __$AddServerStateCopyWithImpl(this._self, this._then);
+
+  final _AddServerState _self;
+  final $Res Function(_AddServerState) _then;
+
   /// Create a copy of AddServerState
   /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$AddServerStateImplCopyWith<_$AddServerStateImpl> get copyWith =>
-      __$$AddServerStateImplCopyWithImpl<_$AddServerStateImpl>(
-          this, _$identity);
+  $Res call({
+    Object? loading = null,
+    Object? valid = null,
+    Object? showAdvanced = null,
+    Object? advancedTest = null,
+    Object? headers = null,
+  }) {
+    return _then(_AddServerState(
+      loading: null == loading
+          ? _self.loading
+          : loading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      valid: null == valid
+          ? _self.valid
+          : valid // ignore: cast_nullable_to_non_nullable
+              as bool,
+      showAdvanced: null == showAdvanced
+          ? _self.showAdvanced
+          : showAdvanced // ignore: cast_nullable_to_non_nullable
+              as bool,
+      advancedTest: null == advancedTest
+          ? _self.advancedTest
+          : advancedTest // ignore: cast_nullable_to_non_nullable
+              as bool,
+      headers: null == headers
+          ? _self._headers
+          : headers // ignore: cast_nullable_to_non_nullable
+              as Map<String, String>,
+    ));
+  }
 }
 
-abstract class _AddServerState implements AddServerState {
-  const factory _AddServerState(
-      {final bool loading,
-      final bool valid,
-      final bool showAdvanced,
-      final bool advancedTest,
-      final Map<String, String> headers}) = _$AddServerStateImpl;
-
-  @override
-  bool get loading;
-  @override
-  bool get valid;
-  @override
-  bool get showAdvanced;
-  @override
-  bool get advancedTest;
-  @override
-  Map<String, String> get headers;
-
-  /// Create a copy of AddServerState
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$AddServerStateImplCopyWith<_$AddServerStateImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+// dart format on

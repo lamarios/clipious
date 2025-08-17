@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,372 +9,209 @@ part of 'video.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-Video _$VideoFromJson(Map<String, dynamic> json) {
-  return _Video.fromJson(json);
-}
 
 /// @nodoc
 mixin _$Video {
-  String get videoId => throw _privateConstructorUsedError;
-  int? get viewCount => throw _privateConstructorUsedError;
+  String get videoId;
+  int? get viewCount;
   @JsonKey(fromJson: _parsePublished)
-  int? get published => throw _privateConstructorUsedError;
-  int? get index => throw _privateConstructorUsedError;
-  String? get indexId => throw _privateConstructorUsedError;
-  String? get publishedText => throw _privateConstructorUsedError;
-  bool? get isUpcoming => throw _privateConstructorUsedError;
-  int? get premiereTimestamp => throw _privateConstructorUsedError;
-  String? get dashUrl => throw _privateConstructorUsedError;
-  String? get description => throw _privateConstructorUsedError;
-  String? get descriptionHtml => throw _privateConstructorUsedError;
-  List<String> get keywords => throw _privateConstructorUsedError;
-  int? get likeCount => throw _privateConstructorUsedError;
-  int? get dislikeCount => throw _privateConstructorUsedError;
-  bool? get paid => throw _privateConstructorUsedError;
-  bool? get premium => throw _privateConstructorUsedError;
-  bool? get isFamilyFriendly => throw _privateConstructorUsedError;
-  List<String> get allowedRegions => throw _privateConstructorUsedError;
-  String? get genre => throw _privateConstructorUsedError;
-  String? get genreUrl => throw _privateConstructorUsedError;
-  List<ImageObject> get authorThumbnails => throw _privateConstructorUsedError;
-  String? get subCountText => throw _privateConstructorUsedError;
-  bool get allowRatings => throw _privateConstructorUsedError;
-  double? get rating => throw _privateConstructorUsedError;
-  bool? get isListed => throw _privateConstructorUsedError;
-  bool? get liveNow => throw _privateConstructorUsedError;
-  String? get hlsUrl => throw _privateConstructorUsedError;
-  List<AdaptiveFormat>? get adaptiveFormats =>
-      throw _privateConstructorUsedError;
-  List<FormatStream>? get formatStreams => throw _privateConstructorUsedError;
-  List<Caption> get captions => throw _privateConstructorUsedError;
-  List<Video> get recommendedVideos => throw _privateConstructorUsedError;
-  String? get title => throw _privateConstructorUsedError;
-  int? get lengthSeconds => throw _privateConstructorUsedError;
-  String? get author => throw _privateConstructorUsedError;
-  String? get authorId => throw _privateConstructorUsedError;
-  String? get authorUrl => throw _privateConstructorUsedError;
-  List<ImageObject> get videoThumbnails => throw _privateConstructorUsedError;
+  int? get published;
+  int? get index;
+  String? get indexId;
+  String? get publishedText;
+  bool? get isUpcoming;
+  int? get premiereTimestamp;
+  String? get dashUrl;
+  String? get description;
+  String? get descriptionHtml;
+  List<String> get keywords;
+  int? get likeCount;
+  int? get dislikeCount;
+  bool? get paid;
+  bool? get premium;
+  bool? get isFamilyFriendly;
+  List<String> get allowedRegions;
+  String? get genre;
+  String? get genreUrl;
+  List<ImageObject> get authorThumbnails;
+  String? get subCountText;
+  bool get allowRatings;
+  double? get rating;
+  bool? get isListed;
+  bool? get liveNow;
+  String? get hlsUrl;
+  List<AdaptiveFormat>? get adaptiveFormats;
+  List<FormatStream>? get formatStreams;
+  List<Caption> get captions;
+  List<Video> get recommendedVideos;
+  String? get title;
+  int? get lengthSeconds;
+  String? get author;
+  String? get authorId;
+  String? get authorUrl;
+  List<ImageObject> get videoThumbnails;
   @JsonKey(includeFromJson: false, includeToJson: false)
-  bool get filtered => throw _privateConstructorUsedError;
+  bool get filtered;
   @JsonKey(includeFromJson: false, includeToJson: false)
-  List<VideoFilter> get matchedFilters => throw _privateConstructorUsedError;
+  List<VideoFilter> get matchedFilters;
   @JsonKey(includeFromJson: false, includeToJson: false)
-  bool get filterHide => throw _privateConstructorUsedError;
+  bool get filterHide;
   @JsonKey(includeFromJson: false, includeToJson: false)
-  bool get deArrowed => throw _privateConstructorUsedError;
+  bool get deArrowed;
   @JsonKey(includeFromJson: false, includeToJson: false)
-  String? get deArrowThumbnailUrl => throw _privateConstructorUsedError;
-  String? get viewCountText => throw _privateConstructorUsedError;
+  String? get deArrowThumbnailUrl;
+  String? get viewCountText;
+
+  /// Create a copy of Video
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $VideoCopyWith<Video> get copyWith =>
+      _$VideoCopyWithImpl<Video>(this as Video, _$identity);
 
   /// Serializes this Video to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  Map<String, dynamic> toJson();
 
-  /// Create a copy of Video
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $VideoCopyWith<Video> get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $VideoCopyWith<$Res> {
-  factory $VideoCopyWith(Video value, $Res Function(Video) then) =
-      _$VideoCopyWithImpl<$Res, Video>;
-  @useResult
-  $Res call(
-      {String videoId,
-      int? viewCount,
-      @JsonKey(fromJson: _parsePublished) int? published,
-      int? index,
-      String? indexId,
-      String? publishedText,
-      bool? isUpcoming,
-      int? premiereTimestamp,
-      String? dashUrl,
-      String? description,
-      String? descriptionHtml,
-      List<String> keywords,
-      int? likeCount,
-      int? dislikeCount,
-      bool? paid,
-      bool? premium,
-      bool? isFamilyFriendly,
-      List<String> allowedRegions,
-      String? genre,
-      String? genreUrl,
-      List<ImageObject> authorThumbnails,
-      String? subCountText,
-      bool allowRatings,
-      double? rating,
-      bool? isListed,
-      bool? liveNow,
-      String? hlsUrl,
-      List<AdaptiveFormat>? adaptiveFormats,
-      List<FormatStream>? formatStreams,
-      List<Caption> captions,
-      List<Video> recommendedVideos,
-      String? title,
-      int? lengthSeconds,
-      String? author,
-      String? authorId,
-      String? authorUrl,
-      List<ImageObject> videoThumbnails,
-      @JsonKey(includeFromJson: false, includeToJson: false) bool filtered,
-      @JsonKey(includeFromJson: false, includeToJson: false)
-      List<VideoFilter> matchedFilters,
-      @JsonKey(includeFromJson: false, includeToJson: false) bool filterHide,
-      @JsonKey(includeFromJson: false, includeToJson: false) bool deArrowed,
-      @JsonKey(includeFromJson: false, includeToJson: false)
-      String? deArrowThumbnailUrl,
-      String? viewCountText});
-}
-
-/// @nodoc
-class _$VideoCopyWithImpl<$Res, $Val extends Video>
-    implements $VideoCopyWith<$Res> {
-  _$VideoCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of Video
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? videoId = null,
-    Object? viewCount = freezed,
-    Object? published = freezed,
-    Object? index = freezed,
-    Object? indexId = freezed,
-    Object? publishedText = freezed,
-    Object? isUpcoming = freezed,
-    Object? premiereTimestamp = freezed,
-    Object? dashUrl = freezed,
-    Object? description = freezed,
-    Object? descriptionHtml = freezed,
-    Object? keywords = null,
-    Object? likeCount = freezed,
-    Object? dislikeCount = freezed,
-    Object? paid = freezed,
-    Object? premium = freezed,
-    Object? isFamilyFriendly = freezed,
-    Object? allowedRegions = null,
-    Object? genre = freezed,
-    Object? genreUrl = freezed,
-    Object? authorThumbnails = null,
-    Object? subCountText = freezed,
-    Object? allowRatings = null,
-    Object? rating = freezed,
-    Object? isListed = freezed,
-    Object? liveNow = freezed,
-    Object? hlsUrl = freezed,
-    Object? adaptiveFormats = freezed,
-    Object? formatStreams = freezed,
-    Object? captions = null,
-    Object? recommendedVideos = null,
-    Object? title = freezed,
-    Object? lengthSeconds = freezed,
-    Object? author = freezed,
-    Object? authorId = freezed,
-    Object? authorUrl = freezed,
-    Object? videoThumbnails = null,
-    Object? filtered = null,
-    Object? matchedFilters = null,
-    Object? filterHide = null,
-    Object? deArrowed = null,
-    Object? deArrowThumbnailUrl = freezed,
-    Object? viewCountText = freezed,
-  }) {
-    return _then(_value.copyWith(
-      videoId: null == videoId
-          ? _value.videoId
-          : videoId // ignore: cast_nullable_to_non_nullable
-              as String,
-      viewCount: freezed == viewCount
-          ? _value.viewCount
-          : viewCount // ignore: cast_nullable_to_non_nullable
-              as int?,
-      published: freezed == published
-          ? _value.published
-          : published // ignore: cast_nullable_to_non_nullable
-              as int?,
-      index: freezed == index
-          ? _value.index
-          : index // ignore: cast_nullable_to_non_nullable
-              as int?,
-      indexId: freezed == indexId
-          ? _value.indexId
-          : indexId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      publishedText: freezed == publishedText
-          ? _value.publishedText
-          : publishedText // ignore: cast_nullable_to_non_nullable
-              as String?,
-      isUpcoming: freezed == isUpcoming
-          ? _value.isUpcoming
-          : isUpcoming // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      premiereTimestamp: freezed == premiereTimestamp
-          ? _value.premiereTimestamp
-          : premiereTimestamp // ignore: cast_nullable_to_non_nullable
-              as int?,
-      dashUrl: freezed == dashUrl
-          ? _value.dashUrl
-          : dashUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
-      description: freezed == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String?,
-      descriptionHtml: freezed == descriptionHtml
-          ? _value.descriptionHtml
-          : descriptionHtml // ignore: cast_nullable_to_non_nullable
-              as String?,
-      keywords: null == keywords
-          ? _value.keywords
-          : keywords // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      likeCount: freezed == likeCount
-          ? _value.likeCount
-          : likeCount // ignore: cast_nullable_to_non_nullable
-              as int?,
-      dislikeCount: freezed == dislikeCount
-          ? _value.dislikeCount
-          : dislikeCount // ignore: cast_nullable_to_non_nullable
-              as int?,
-      paid: freezed == paid
-          ? _value.paid
-          : paid // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      premium: freezed == premium
-          ? _value.premium
-          : premium // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      isFamilyFriendly: freezed == isFamilyFriendly
-          ? _value.isFamilyFriendly
-          : isFamilyFriendly // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      allowedRegions: null == allowedRegions
-          ? _value.allowedRegions
-          : allowedRegions // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      genre: freezed == genre
-          ? _value.genre
-          : genre // ignore: cast_nullable_to_non_nullable
-              as String?,
-      genreUrl: freezed == genreUrl
-          ? _value.genreUrl
-          : genreUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
-      authorThumbnails: null == authorThumbnails
-          ? _value.authorThumbnails
-          : authorThumbnails // ignore: cast_nullable_to_non_nullable
-              as List<ImageObject>,
-      subCountText: freezed == subCountText
-          ? _value.subCountText
-          : subCountText // ignore: cast_nullable_to_non_nullable
-              as String?,
-      allowRatings: null == allowRatings
-          ? _value.allowRatings
-          : allowRatings // ignore: cast_nullable_to_non_nullable
-              as bool,
-      rating: freezed == rating
-          ? _value.rating
-          : rating // ignore: cast_nullable_to_non_nullable
-              as double?,
-      isListed: freezed == isListed
-          ? _value.isListed
-          : isListed // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      liveNow: freezed == liveNow
-          ? _value.liveNow
-          : liveNow // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      hlsUrl: freezed == hlsUrl
-          ? _value.hlsUrl
-          : hlsUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
-      adaptiveFormats: freezed == adaptiveFormats
-          ? _value.adaptiveFormats
-          : adaptiveFormats // ignore: cast_nullable_to_non_nullable
-              as List<AdaptiveFormat>?,
-      formatStreams: freezed == formatStreams
-          ? _value.formatStreams
-          : formatStreams // ignore: cast_nullable_to_non_nullable
-              as List<FormatStream>?,
-      captions: null == captions
-          ? _value.captions
-          : captions // ignore: cast_nullable_to_non_nullable
-              as List<Caption>,
-      recommendedVideos: null == recommendedVideos
-          ? _value.recommendedVideos
-          : recommendedVideos // ignore: cast_nullable_to_non_nullable
-              as List<Video>,
-      title: freezed == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String?,
-      lengthSeconds: freezed == lengthSeconds
-          ? _value.lengthSeconds
-          : lengthSeconds // ignore: cast_nullable_to_non_nullable
-              as int?,
-      author: freezed == author
-          ? _value.author
-          : author // ignore: cast_nullable_to_non_nullable
-              as String?,
-      authorId: freezed == authorId
-          ? _value.authorId
-          : authorId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      authorUrl: freezed == authorUrl
-          ? _value.authorUrl
-          : authorUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
-      videoThumbnails: null == videoThumbnails
-          ? _value.videoThumbnails
-          : videoThumbnails // ignore: cast_nullable_to_non_nullable
-              as List<ImageObject>,
-      filtered: null == filtered
-          ? _value.filtered
-          : filtered // ignore: cast_nullable_to_non_nullable
-              as bool,
-      matchedFilters: null == matchedFilters
-          ? _value.matchedFilters
-          : matchedFilters // ignore: cast_nullable_to_non_nullable
-              as List<VideoFilter>,
-      filterHide: null == filterHide
-          ? _value.filterHide
-          : filterHide // ignore: cast_nullable_to_non_nullable
-              as bool,
-      deArrowed: null == deArrowed
-          ? _value.deArrowed
-          : deArrowed // ignore: cast_nullable_to_non_nullable
-              as bool,
-      deArrowThumbnailUrl: freezed == deArrowThumbnailUrl
-          ? _value.deArrowThumbnailUrl
-          : deArrowThumbnailUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
-      viewCountText: freezed == viewCountText
-          ? _value.viewCountText
-          : viewCountText // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is Video &&
+            (identical(other.videoId, videoId) || other.videoId == videoId) &&
+            (identical(other.viewCount, viewCount) ||
+                other.viewCount == viewCount) &&
+            (identical(other.published, published) ||
+                other.published == published) &&
+            (identical(other.index, index) || other.index == index) &&
+            (identical(other.indexId, indexId) || other.indexId == indexId) &&
+            (identical(other.publishedText, publishedText) ||
+                other.publishedText == publishedText) &&
+            (identical(other.isUpcoming, isUpcoming) ||
+                other.isUpcoming == isUpcoming) &&
+            (identical(other.premiereTimestamp, premiereTimestamp) ||
+                other.premiereTimestamp == premiereTimestamp) &&
+            (identical(other.dashUrl, dashUrl) || other.dashUrl == dashUrl) &&
+            (identical(other.description, description) ||
+                other.description == description) &&
+            (identical(other.descriptionHtml, descriptionHtml) ||
+                other.descriptionHtml == descriptionHtml) &&
+            const DeepCollectionEquality().equals(other.keywords, keywords) &&
+            (identical(other.likeCount, likeCount) ||
+                other.likeCount == likeCount) &&
+            (identical(other.dislikeCount, dislikeCount) ||
+                other.dislikeCount == dislikeCount) &&
+            (identical(other.paid, paid) || other.paid == paid) &&
+            (identical(other.premium, premium) || other.premium == premium) &&
+            (identical(other.isFamilyFriendly, isFamilyFriendly) ||
+                other.isFamilyFriendly == isFamilyFriendly) &&
+            const DeepCollectionEquality()
+                .equals(other.allowedRegions, allowedRegions) &&
+            (identical(other.genre, genre) || other.genre == genre) &&
+            (identical(other.genreUrl, genreUrl) ||
+                other.genreUrl == genreUrl) &&
+            const DeepCollectionEquality()
+                .equals(other.authorThumbnails, authorThumbnails) &&
+            (identical(other.subCountText, subCountText) ||
+                other.subCountText == subCountText) &&
+            (identical(other.allowRatings, allowRatings) ||
+                other.allowRatings == allowRatings) &&
+            (identical(other.rating, rating) || other.rating == rating) &&
+            (identical(other.isListed, isListed) ||
+                other.isListed == isListed) &&
+            (identical(other.liveNow, liveNow) || other.liveNow == liveNow) &&
+            (identical(other.hlsUrl, hlsUrl) || other.hlsUrl == hlsUrl) &&
+            const DeepCollectionEquality()
+                .equals(other.adaptiveFormats, adaptiveFormats) &&
+            const DeepCollectionEquality()
+                .equals(other.formatStreams, formatStreams) &&
+            const DeepCollectionEquality().equals(other.captions, captions) &&
+            const DeepCollectionEquality()
+                .equals(other.recommendedVideos, recommendedVideos) &&
+            (identical(other.title, title) || other.title == title) &&
+            (identical(other.lengthSeconds, lengthSeconds) ||
+                other.lengthSeconds == lengthSeconds) &&
+            (identical(other.author, author) || other.author == author) &&
+            (identical(other.authorId, authorId) ||
+                other.authorId == authorId) &&
+            (identical(other.authorUrl, authorUrl) ||
+                other.authorUrl == authorUrl) &&
+            const DeepCollectionEquality()
+                .equals(other.videoThumbnails, videoThumbnails) &&
+            (identical(other.filtered, filtered) ||
+                other.filtered == filtered) &&
+            const DeepCollectionEquality()
+                .equals(other.matchedFilters, matchedFilters) &&
+            (identical(other.filterHide, filterHide) ||
+                other.filterHide == filterHide) &&
+            (identical(other.deArrowed, deArrowed) ||
+                other.deArrowed == deArrowed) &&
+            (identical(other.deArrowThumbnailUrl, deArrowThumbnailUrl) ||
+                other.deArrowThumbnailUrl == deArrowThumbnailUrl) &&
+            (identical(other.viewCountText, viewCountText) ||
+                other.viewCountText == viewCountText));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        videoId,
+        viewCount,
+        published,
+        index,
+        indexId,
+        publishedText,
+        isUpcoming,
+        premiereTimestamp,
+        dashUrl,
+        description,
+        descriptionHtml,
+        const DeepCollectionEquality().hash(keywords),
+        likeCount,
+        dislikeCount,
+        paid,
+        premium,
+        isFamilyFriendly,
+        const DeepCollectionEquality().hash(allowedRegions),
+        genre,
+        genreUrl,
+        const DeepCollectionEquality().hash(authorThumbnails),
+        subCountText,
+        allowRatings,
+        rating,
+        isListed,
+        liveNow,
+        hlsUrl,
+        const DeepCollectionEquality().hash(adaptiveFormats),
+        const DeepCollectionEquality().hash(formatStreams),
+        const DeepCollectionEquality().hash(captions),
+        const DeepCollectionEquality().hash(recommendedVideos),
+        title,
+        lengthSeconds,
+        author,
+        authorId,
+        authorUrl,
+        const DeepCollectionEquality().hash(videoThumbnails),
+        filtered,
+        const DeepCollectionEquality().hash(matchedFilters),
+        filterHide,
+        deArrowed,
+        deArrowThumbnailUrl,
+        viewCountText
+      ]);
+
+  @override
+  String toString() {
+    return 'Video(videoId: $videoId, viewCount: $viewCount, published: $published, index: $index, indexId: $indexId, publishedText: $publishedText, isUpcoming: $isUpcoming, premiereTimestamp: $premiereTimestamp, dashUrl: $dashUrl, description: $description, descriptionHtml: $descriptionHtml, keywords: $keywords, likeCount: $likeCount, dislikeCount: $dislikeCount, paid: $paid, premium: $premium, isFamilyFriendly: $isFamilyFriendly, allowedRegions: $allowedRegions, genre: $genre, genreUrl: $genreUrl, authorThumbnails: $authorThumbnails, subCountText: $subCountText, allowRatings: $allowRatings, rating: $rating, isListed: $isListed, liveNow: $liveNow, hlsUrl: $hlsUrl, adaptiveFormats: $adaptiveFormats, formatStreams: $formatStreams, captions: $captions, recommendedVideos: $recommendedVideos, title: $title, lengthSeconds: $lengthSeconds, author: $author, authorId: $authorId, authorUrl: $authorUrl, videoThumbnails: $videoThumbnails, filtered: $filtered, matchedFilters: $matchedFilters, filterHide: $filterHide, deArrowed: $deArrowed, deArrowThumbnailUrl: $deArrowThumbnailUrl, viewCountText: $viewCountText)';
   }
 }
 
 /// @nodoc
-abstract class _$$VideoImplCopyWith<$Res> implements $VideoCopyWith<$Res> {
-  factory _$$VideoImplCopyWith(
-          _$VideoImpl value, $Res Function(_$VideoImpl) then) =
-      __$$VideoImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $VideoCopyWith<$Res> {
+  factory $VideoCopyWith(Video value, $Res Function(Video) _then) =
+      _$VideoCopyWithImpl;
   @useResult
   $Res call(
       {String videoId,
@@ -425,12 +262,11 @@ abstract class _$$VideoImplCopyWith<$Res> implements $VideoCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$VideoImplCopyWithImpl<$Res>
-    extends _$VideoCopyWithImpl<$Res, _$VideoImpl>
-    implements _$$VideoImplCopyWith<$Res> {
-  __$$VideoImplCopyWithImpl(
-      _$VideoImpl _value, $Res Function(_$VideoImpl) _then)
-      : super(_value, _then);
+class _$VideoCopyWithImpl<$Res> implements $VideoCopyWith<$Res> {
+  _$VideoCopyWithImpl(this._self, this._then);
+
+  final Video _self;
+  final $Res Function(Video) _then;
 
   /// Create a copy of Video
   /// with the given fields replaced by the non-null parameter values.
@@ -481,187 +317,616 @@ class __$$VideoImplCopyWithImpl<$Res>
     Object? deArrowThumbnailUrl = freezed,
     Object? viewCountText = freezed,
   }) {
-    return _then(_$VideoImpl(
+    return _then(_self.copyWith(
       videoId: null == videoId
-          ? _value.videoId
+          ? _self.videoId
           : videoId // ignore: cast_nullable_to_non_nullable
               as String,
       viewCount: freezed == viewCount
-          ? _value.viewCount
+          ? _self.viewCount
           : viewCount // ignore: cast_nullable_to_non_nullable
               as int?,
       published: freezed == published
-          ? _value.published
+          ? _self.published
           : published // ignore: cast_nullable_to_non_nullable
               as int?,
       index: freezed == index
-          ? _value.index
+          ? _self.index
           : index // ignore: cast_nullable_to_non_nullable
               as int?,
       indexId: freezed == indexId
-          ? _value.indexId
+          ? _self.indexId
           : indexId // ignore: cast_nullable_to_non_nullable
               as String?,
       publishedText: freezed == publishedText
-          ? _value.publishedText
+          ? _self.publishedText
           : publishedText // ignore: cast_nullable_to_non_nullable
               as String?,
       isUpcoming: freezed == isUpcoming
-          ? _value.isUpcoming
+          ? _self.isUpcoming
           : isUpcoming // ignore: cast_nullable_to_non_nullable
               as bool?,
       premiereTimestamp: freezed == premiereTimestamp
-          ? _value.premiereTimestamp
+          ? _self.premiereTimestamp
           : premiereTimestamp // ignore: cast_nullable_to_non_nullable
               as int?,
       dashUrl: freezed == dashUrl
-          ? _value.dashUrl
+          ? _self.dashUrl
           : dashUrl // ignore: cast_nullable_to_non_nullable
               as String?,
       description: freezed == description
-          ? _value.description
+          ? _self.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
       descriptionHtml: freezed == descriptionHtml
-          ? _value.descriptionHtml
+          ? _self.descriptionHtml
           : descriptionHtml // ignore: cast_nullable_to_non_nullable
               as String?,
       keywords: null == keywords
-          ? _value._keywords
+          ? _self.keywords
           : keywords // ignore: cast_nullable_to_non_nullable
               as List<String>,
       likeCount: freezed == likeCount
-          ? _value.likeCount
+          ? _self.likeCount
           : likeCount // ignore: cast_nullable_to_non_nullable
               as int?,
       dislikeCount: freezed == dislikeCount
-          ? _value.dislikeCount
+          ? _self.dislikeCount
           : dislikeCount // ignore: cast_nullable_to_non_nullable
               as int?,
       paid: freezed == paid
-          ? _value.paid
+          ? _self.paid
           : paid // ignore: cast_nullable_to_non_nullable
               as bool?,
       premium: freezed == premium
-          ? _value.premium
+          ? _self.premium
           : premium // ignore: cast_nullable_to_non_nullable
               as bool?,
       isFamilyFriendly: freezed == isFamilyFriendly
-          ? _value.isFamilyFriendly
+          ? _self.isFamilyFriendly
           : isFamilyFriendly // ignore: cast_nullable_to_non_nullable
               as bool?,
       allowedRegions: null == allowedRegions
-          ? _value._allowedRegions
+          ? _self.allowedRegions
           : allowedRegions // ignore: cast_nullable_to_non_nullable
               as List<String>,
       genre: freezed == genre
-          ? _value.genre
+          ? _self.genre
           : genre // ignore: cast_nullable_to_non_nullable
               as String?,
       genreUrl: freezed == genreUrl
-          ? _value.genreUrl
+          ? _self.genreUrl
           : genreUrl // ignore: cast_nullable_to_non_nullable
               as String?,
       authorThumbnails: null == authorThumbnails
-          ? _value._authorThumbnails
+          ? _self.authorThumbnails
           : authorThumbnails // ignore: cast_nullable_to_non_nullable
               as List<ImageObject>,
       subCountText: freezed == subCountText
-          ? _value.subCountText
+          ? _self.subCountText
           : subCountText // ignore: cast_nullable_to_non_nullable
               as String?,
       allowRatings: null == allowRatings
-          ? _value.allowRatings
+          ? _self.allowRatings
           : allowRatings // ignore: cast_nullable_to_non_nullable
               as bool,
       rating: freezed == rating
-          ? _value.rating
+          ? _self.rating
           : rating // ignore: cast_nullable_to_non_nullable
               as double?,
       isListed: freezed == isListed
-          ? _value.isListed
+          ? _self.isListed
           : isListed // ignore: cast_nullable_to_non_nullable
               as bool?,
       liveNow: freezed == liveNow
-          ? _value.liveNow
+          ? _self.liveNow
           : liveNow // ignore: cast_nullable_to_non_nullable
               as bool?,
       hlsUrl: freezed == hlsUrl
-          ? _value.hlsUrl
+          ? _self.hlsUrl
           : hlsUrl // ignore: cast_nullable_to_non_nullable
               as String?,
       adaptiveFormats: freezed == adaptiveFormats
-          ? _value._adaptiveFormats
+          ? _self.adaptiveFormats
           : adaptiveFormats // ignore: cast_nullable_to_non_nullable
               as List<AdaptiveFormat>?,
       formatStreams: freezed == formatStreams
-          ? _value._formatStreams
+          ? _self.formatStreams
           : formatStreams // ignore: cast_nullable_to_non_nullable
               as List<FormatStream>?,
       captions: null == captions
-          ? _value._captions
+          ? _self.captions
           : captions // ignore: cast_nullable_to_non_nullable
               as List<Caption>,
       recommendedVideos: null == recommendedVideos
-          ? _value._recommendedVideos
+          ? _self.recommendedVideos
           : recommendedVideos // ignore: cast_nullable_to_non_nullable
               as List<Video>,
       title: freezed == title
-          ? _value.title
+          ? _self.title
           : title // ignore: cast_nullable_to_non_nullable
               as String?,
       lengthSeconds: freezed == lengthSeconds
-          ? _value.lengthSeconds
+          ? _self.lengthSeconds
           : lengthSeconds // ignore: cast_nullable_to_non_nullable
               as int?,
       author: freezed == author
-          ? _value.author
+          ? _self.author
           : author // ignore: cast_nullable_to_non_nullable
               as String?,
       authorId: freezed == authorId
-          ? _value.authorId
+          ? _self.authorId
           : authorId // ignore: cast_nullable_to_non_nullable
               as String?,
       authorUrl: freezed == authorUrl
-          ? _value.authorUrl
+          ? _self.authorUrl
           : authorUrl // ignore: cast_nullable_to_non_nullable
               as String?,
       videoThumbnails: null == videoThumbnails
-          ? _value._videoThumbnails
+          ? _self.videoThumbnails
           : videoThumbnails // ignore: cast_nullable_to_non_nullable
               as List<ImageObject>,
       filtered: null == filtered
-          ? _value.filtered
+          ? _self.filtered
           : filtered // ignore: cast_nullable_to_non_nullable
               as bool,
       matchedFilters: null == matchedFilters
-          ? _value._matchedFilters
+          ? _self.matchedFilters
           : matchedFilters // ignore: cast_nullable_to_non_nullable
               as List<VideoFilter>,
       filterHide: null == filterHide
-          ? _value.filterHide
+          ? _self.filterHide
           : filterHide // ignore: cast_nullable_to_non_nullable
               as bool,
       deArrowed: null == deArrowed
-          ? _value.deArrowed
+          ? _self.deArrowed
           : deArrowed // ignore: cast_nullable_to_non_nullable
               as bool,
       deArrowThumbnailUrl: freezed == deArrowThumbnailUrl
-          ? _value.deArrowThumbnailUrl
+          ? _self.deArrowThumbnailUrl
           : deArrowThumbnailUrl // ignore: cast_nullable_to_non_nullable
               as String?,
       viewCountText: freezed == viewCountText
-          ? _value.viewCountText
+          ? _self.viewCountText
           : viewCountText // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
 }
 
+/// Adds pattern-matching-related methods to [Video].
+extension VideoPatterns on Video {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_Video value)? $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _Video() when $default != null:
+        return $default(_that);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_Video value) $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _Video():
+        return $default(_that);
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_Video value)? $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _Video() when $default != null:
+        return $default(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+            String videoId,
+            int? viewCount,
+            @JsonKey(fromJson: _parsePublished) int? published,
+            int? index,
+            String? indexId,
+            String? publishedText,
+            bool? isUpcoming,
+            int? premiereTimestamp,
+            String? dashUrl,
+            String? description,
+            String? descriptionHtml,
+            List<String> keywords,
+            int? likeCount,
+            int? dislikeCount,
+            bool? paid,
+            bool? premium,
+            bool? isFamilyFriendly,
+            List<String> allowedRegions,
+            String? genre,
+            String? genreUrl,
+            List<ImageObject> authorThumbnails,
+            String? subCountText,
+            bool allowRatings,
+            double? rating,
+            bool? isListed,
+            bool? liveNow,
+            String? hlsUrl,
+            List<AdaptiveFormat>? adaptiveFormats,
+            List<FormatStream>? formatStreams,
+            List<Caption> captions,
+            List<Video> recommendedVideos,
+            String? title,
+            int? lengthSeconds,
+            String? author,
+            String? authorId,
+            String? authorUrl,
+            List<ImageObject> videoThumbnails,
+            @JsonKey(includeFromJson: false, includeToJson: false)
+            bool filtered,
+            @JsonKey(includeFromJson: false, includeToJson: false)
+            List<VideoFilter> matchedFilters,
+            @JsonKey(includeFromJson: false, includeToJson: false)
+            bool filterHide,
+            @JsonKey(includeFromJson: false, includeToJson: false)
+            bool deArrowed,
+            @JsonKey(includeFromJson: false, includeToJson: false)
+            String? deArrowThumbnailUrl,
+            String? viewCountText)?
+        $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _Video() when $default != null:
+        return $default(
+            _that.videoId,
+            _that.viewCount,
+            _that.published,
+            _that.index,
+            _that.indexId,
+            _that.publishedText,
+            _that.isUpcoming,
+            _that.premiereTimestamp,
+            _that.dashUrl,
+            _that.description,
+            _that.descriptionHtml,
+            _that.keywords,
+            _that.likeCount,
+            _that.dislikeCount,
+            _that.paid,
+            _that.premium,
+            _that.isFamilyFriendly,
+            _that.allowedRegions,
+            _that.genre,
+            _that.genreUrl,
+            _that.authorThumbnails,
+            _that.subCountText,
+            _that.allowRatings,
+            _that.rating,
+            _that.isListed,
+            _that.liveNow,
+            _that.hlsUrl,
+            _that.adaptiveFormats,
+            _that.formatStreams,
+            _that.captions,
+            _that.recommendedVideos,
+            _that.title,
+            _that.lengthSeconds,
+            _that.author,
+            _that.authorId,
+            _that.authorUrl,
+            _that.videoThumbnails,
+            _that.filtered,
+            _that.matchedFilters,
+            _that.filterHide,
+            _that.deArrowed,
+            _that.deArrowThumbnailUrl,
+            _that.viewCountText);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(
+            String videoId,
+            int? viewCount,
+            @JsonKey(fromJson: _parsePublished) int? published,
+            int? index,
+            String? indexId,
+            String? publishedText,
+            bool? isUpcoming,
+            int? premiereTimestamp,
+            String? dashUrl,
+            String? description,
+            String? descriptionHtml,
+            List<String> keywords,
+            int? likeCount,
+            int? dislikeCount,
+            bool? paid,
+            bool? premium,
+            bool? isFamilyFriendly,
+            List<String> allowedRegions,
+            String? genre,
+            String? genreUrl,
+            List<ImageObject> authorThumbnails,
+            String? subCountText,
+            bool allowRatings,
+            double? rating,
+            bool? isListed,
+            bool? liveNow,
+            String? hlsUrl,
+            List<AdaptiveFormat>? adaptiveFormats,
+            List<FormatStream>? formatStreams,
+            List<Caption> captions,
+            List<Video> recommendedVideos,
+            String? title,
+            int? lengthSeconds,
+            String? author,
+            String? authorId,
+            String? authorUrl,
+            List<ImageObject> videoThumbnails,
+            @JsonKey(includeFromJson: false, includeToJson: false)
+            bool filtered,
+            @JsonKey(includeFromJson: false, includeToJson: false)
+            List<VideoFilter> matchedFilters,
+            @JsonKey(includeFromJson: false, includeToJson: false)
+            bool filterHide,
+            @JsonKey(includeFromJson: false, includeToJson: false)
+            bool deArrowed,
+            @JsonKey(includeFromJson: false, includeToJson: false)
+            String? deArrowThumbnailUrl,
+            String? viewCountText)
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _Video():
+        return $default(
+            _that.videoId,
+            _that.viewCount,
+            _that.published,
+            _that.index,
+            _that.indexId,
+            _that.publishedText,
+            _that.isUpcoming,
+            _that.premiereTimestamp,
+            _that.dashUrl,
+            _that.description,
+            _that.descriptionHtml,
+            _that.keywords,
+            _that.likeCount,
+            _that.dislikeCount,
+            _that.paid,
+            _that.premium,
+            _that.isFamilyFriendly,
+            _that.allowedRegions,
+            _that.genre,
+            _that.genreUrl,
+            _that.authorThumbnails,
+            _that.subCountText,
+            _that.allowRatings,
+            _that.rating,
+            _that.isListed,
+            _that.liveNow,
+            _that.hlsUrl,
+            _that.adaptiveFormats,
+            _that.formatStreams,
+            _that.captions,
+            _that.recommendedVideos,
+            _that.title,
+            _that.lengthSeconds,
+            _that.author,
+            _that.authorId,
+            _that.authorUrl,
+            _that.videoThumbnails,
+            _that.filtered,
+            _that.matchedFilters,
+            _that.filterHide,
+            _that.deArrowed,
+            _that.deArrowThumbnailUrl,
+            _that.viewCountText);
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult? Function(
+            String videoId,
+            int? viewCount,
+            @JsonKey(fromJson: _parsePublished) int? published,
+            int? index,
+            String? indexId,
+            String? publishedText,
+            bool? isUpcoming,
+            int? premiereTimestamp,
+            String? dashUrl,
+            String? description,
+            String? descriptionHtml,
+            List<String> keywords,
+            int? likeCount,
+            int? dislikeCount,
+            bool? paid,
+            bool? premium,
+            bool? isFamilyFriendly,
+            List<String> allowedRegions,
+            String? genre,
+            String? genreUrl,
+            List<ImageObject> authorThumbnails,
+            String? subCountText,
+            bool allowRatings,
+            double? rating,
+            bool? isListed,
+            bool? liveNow,
+            String? hlsUrl,
+            List<AdaptiveFormat>? adaptiveFormats,
+            List<FormatStream>? formatStreams,
+            List<Caption> captions,
+            List<Video> recommendedVideos,
+            String? title,
+            int? lengthSeconds,
+            String? author,
+            String? authorId,
+            String? authorUrl,
+            List<ImageObject> videoThumbnails,
+            @JsonKey(includeFromJson: false, includeToJson: false)
+            bool filtered,
+            @JsonKey(includeFromJson: false, includeToJson: false)
+            List<VideoFilter> matchedFilters,
+            @JsonKey(includeFromJson: false, includeToJson: false)
+            bool filterHide,
+            @JsonKey(includeFromJson: false, includeToJson: false)
+            bool deArrowed,
+            @JsonKey(includeFromJson: false, includeToJson: false)
+            String? deArrowThumbnailUrl,
+            String? viewCountText)?
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _Video() when $default != null:
+        return $default(
+            _that.videoId,
+            _that.viewCount,
+            _that.published,
+            _that.index,
+            _that.indexId,
+            _that.publishedText,
+            _that.isUpcoming,
+            _that.premiereTimestamp,
+            _that.dashUrl,
+            _that.description,
+            _that.descriptionHtml,
+            _that.keywords,
+            _that.likeCount,
+            _that.dislikeCount,
+            _that.paid,
+            _that.premium,
+            _that.isFamilyFriendly,
+            _that.allowedRegions,
+            _that.genre,
+            _that.genreUrl,
+            _that.authorThumbnails,
+            _that.subCountText,
+            _that.allowRatings,
+            _that.rating,
+            _that.isListed,
+            _that.liveNow,
+            _that.hlsUrl,
+            _that.adaptiveFormats,
+            _that.formatStreams,
+            _that.captions,
+            _that.recommendedVideos,
+            _that.title,
+            _that.lengthSeconds,
+            _that.author,
+            _that.authorId,
+            _that.authorUrl,
+            _that.videoThumbnails,
+            _that.filtered,
+            _that.matchedFilters,
+            _that.filterHide,
+            _that.deArrowed,
+            _that.deArrowThumbnailUrl,
+            _that.viewCountText);
+      case _:
+        return null;
+    }
+  }
+}
+
 /// @nodoc
 @JsonSerializable()
-class _$VideoImpl extends _Video {
-  const _$VideoImpl(
+class _Video extends Video implements ShareLinks, IdedVideo {
+  const _Video(
       {required this.videoId,
       this.viewCount,
       @JsonKey(fromJson: _parsePublished) this.published,
@@ -720,9 +985,7 @@ class _$VideoImpl extends _Video {
         _videoThumbnails = videoThumbnails,
         _matchedFilters = matchedFilters,
         super._();
-
-  factory _$VideoImpl.fromJson(Map<String, dynamic> json) =>
-      _$$VideoImplFromJson(json);
+  factory _Video.fromJson(Map<String, dynamic> json) => _$VideoFromJson(json);
 
   @override
   final String videoId;
@@ -884,16 +1147,26 @@ class _$VideoImpl extends _Video {
   @override
   final String? viewCountText;
 
+  /// Create a copy of Video
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'Video(videoId: $videoId, viewCount: $viewCount, published: $published, index: $index, indexId: $indexId, publishedText: $publishedText, isUpcoming: $isUpcoming, premiereTimestamp: $premiereTimestamp, dashUrl: $dashUrl, description: $description, descriptionHtml: $descriptionHtml, keywords: $keywords, likeCount: $likeCount, dislikeCount: $dislikeCount, paid: $paid, premium: $premium, isFamilyFriendly: $isFamilyFriendly, allowedRegions: $allowedRegions, genre: $genre, genreUrl: $genreUrl, authorThumbnails: $authorThumbnails, subCountText: $subCountText, allowRatings: $allowRatings, rating: $rating, isListed: $isListed, liveNow: $liveNow, hlsUrl: $hlsUrl, adaptiveFormats: $adaptiveFormats, formatStreams: $formatStreams, captions: $captions, recommendedVideos: $recommendedVideos, title: $title, lengthSeconds: $lengthSeconds, author: $author, authorId: $authorId, authorUrl: $authorUrl, videoThumbnails: $videoThumbnails, filtered: $filtered, matchedFilters: $matchedFilters, filterHide: $filterHide, deArrowed: $deArrowed, deArrowThumbnailUrl: $deArrowThumbnailUrl, viewCountText: $viewCountText)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$VideoCopyWith<_Video> get copyWith =>
+      __$VideoCopyWithImpl<_Video>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$VideoToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$VideoImpl &&
+            other is _Video &&
             (identical(other.videoId, videoId) || other.videoId == videoId) &&
             (identical(other.viewCount, viewCount) ||
                 other.viewCount == viewCount) &&
@@ -1017,173 +1290,297 @@ class _$VideoImpl extends _Video {
         viewCountText
       ]);
 
-  /// Create a copy of Video
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$VideoImplCopyWith<_$VideoImpl> get copyWith =>
-      __$$VideoImplCopyWithImpl<_$VideoImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$VideoImplToJson(
-      this,
-    );
+  String toString() {
+    return 'Video(videoId: $videoId, viewCount: $viewCount, published: $published, index: $index, indexId: $indexId, publishedText: $publishedText, isUpcoming: $isUpcoming, premiereTimestamp: $premiereTimestamp, dashUrl: $dashUrl, description: $description, descriptionHtml: $descriptionHtml, keywords: $keywords, likeCount: $likeCount, dislikeCount: $dislikeCount, paid: $paid, premium: $premium, isFamilyFriendly: $isFamilyFriendly, allowedRegions: $allowedRegions, genre: $genre, genreUrl: $genreUrl, authorThumbnails: $authorThumbnails, subCountText: $subCountText, allowRatings: $allowRatings, rating: $rating, isListed: $isListed, liveNow: $liveNow, hlsUrl: $hlsUrl, adaptiveFormats: $adaptiveFormats, formatStreams: $formatStreams, captions: $captions, recommendedVideos: $recommendedVideos, title: $title, lengthSeconds: $lengthSeconds, author: $author, authorId: $authorId, authorUrl: $authorUrl, videoThumbnails: $videoThumbnails, filtered: $filtered, matchedFilters: $matchedFilters, filterHide: $filterHide, deArrowed: $deArrowed, deArrowThumbnailUrl: $deArrowThumbnailUrl, viewCountText: $viewCountText)';
   }
 }
 
-abstract class _Video extends Video implements ShareLinks, IdedVideo {
-  const factory _Video(
-      {required final String videoId,
-      final int? viewCount,
-      @JsonKey(fromJson: _parsePublished) final int? published,
-      final int? index,
-      final String? indexId,
-      final String? publishedText,
-      final bool? isUpcoming,
-      final int? premiereTimestamp,
-      final String? dashUrl,
-      final String? description,
-      final String? descriptionHtml,
-      final List<String> keywords,
-      final int? likeCount,
-      final int? dislikeCount,
-      final bool? paid,
-      final bool? premium,
-      final bool? isFamilyFriendly,
-      final List<String> allowedRegions,
-      final String? genre,
-      final String? genreUrl,
-      final List<ImageObject> authorThumbnails,
-      final String? subCountText,
-      final bool allowRatings,
-      final double? rating,
-      final bool? isListed,
-      final bool? liveNow,
-      final String? hlsUrl,
-      final List<AdaptiveFormat>? adaptiveFormats,
-      final List<FormatStream>? formatStreams,
-      final List<Caption> captions,
-      final List<Video> recommendedVideos,
-      final String? title,
-      final int? lengthSeconds,
-      final String? author,
-      final String? authorId,
-      final String? authorUrl,
-      final List<ImageObject> videoThumbnails,
+/// @nodoc
+abstract mixin class _$VideoCopyWith<$Res> implements $VideoCopyWith<$Res> {
+  factory _$VideoCopyWith(_Video value, $Res Function(_Video) _then) =
+      __$VideoCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {String videoId,
+      int? viewCount,
+      @JsonKey(fromJson: _parsePublished) int? published,
+      int? index,
+      String? indexId,
+      String? publishedText,
+      bool? isUpcoming,
+      int? premiereTimestamp,
+      String? dashUrl,
+      String? description,
+      String? descriptionHtml,
+      List<String> keywords,
+      int? likeCount,
+      int? dislikeCount,
+      bool? paid,
+      bool? premium,
+      bool? isFamilyFriendly,
+      List<String> allowedRegions,
+      String? genre,
+      String? genreUrl,
+      List<ImageObject> authorThumbnails,
+      String? subCountText,
+      bool allowRatings,
+      double? rating,
+      bool? isListed,
+      bool? liveNow,
+      String? hlsUrl,
+      List<AdaptiveFormat>? adaptiveFormats,
+      List<FormatStream>? formatStreams,
+      List<Caption> captions,
+      List<Video> recommendedVideos,
+      String? title,
+      int? lengthSeconds,
+      String? author,
+      String? authorId,
+      String? authorUrl,
+      List<ImageObject> videoThumbnails,
+      @JsonKey(includeFromJson: false, includeToJson: false) bool filtered,
       @JsonKey(includeFromJson: false, includeToJson: false)
-      final bool filtered,
+      List<VideoFilter> matchedFilters,
+      @JsonKey(includeFromJson: false, includeToJson: false) bool filterHide,
+      @JsonKey(includeFromJson: false, includeToJson: false) bool deArrowed,
       @JsonKey(includeFromJson: false, includeToJson: false)
-      final List<VideoFilter> matchedFilters,
-      @JsonKey(includeFromJson: false, includeToJson: false)
-      final bool filterHide,
-      @JsonKey(includeFromJson: false, includeToJson: false)
-      final bool deArrowed,
-      @JsonKey(includeFromJson: false, includeToJson: false)
-      final String? deArrowThumbnailUrl,
-      final String? viewCountText}) = _$VideoImpl;
-  const _Video._() : super._();
+      String? deArrowThumbnailUrl,
+      String? viewCountText});
+}
 
-  factory _Video.fromJson(Map<String, dynamic> json) = _$VideoImpl.fromJson;
+/// @nodoc
+class __$VideoCopyWithImpl<$Res> implements _$VideoCopyWith<$Res> {
+  __$VideoCopyWithImpl(this._self, this._then);
 
-  @override
-  String get videoId;
-  @override
-  int? get viewCount;
-  @override
-  @JsonKey(fromJson: _parsePublished)
-  int? get published;
-  @override
-  int? get index;
-  @override
-  String? get indexId;
-  @override
-  String? get publishedText;
-  @override
-  bool? get isUpcoming;
-  @override
-  int? get premiereTimestamp;
-  @override
-  String? get dashUrl;
-  @override
-  String? get description;
-  @override
-  String? get descriptionHtml;
-  @override
-  List<String> get keywords;
-  @override
-  int? get likeCount;
-  @override
-  int? get dislikeCount;
-  @override
-  bool? get paid;
-  @override
-  bool? get premium;
-  @override
-  bool? get isFamilyFriendly;
-  @override
-  List<String> get allowedRegions;
-  @override
-  String? get genre;
-  @override
-  String? get genreUrl;
-  @override
-  List<ImageObject> get authorThumbnails;
-  @override
-  String? get subCountText;
-  @override
-  bool get allowRatings;
-  @override
-  double? get rating;
-  @override
-  bool? get isListed;
-  @override
-  bool? get liveNow;
-  @override
-  String? get hlsUrl;
-  @override
-  List<AdaptiveFormat>? get adaptiveFormats;
-  @override
-  List<FormatStream>? get formatStreams;
-  @override
-  List<Caption> get captions;
-  @override
-  List<Video> get recommendedVideos;
-  @override
-  String? get title;
-  @override
-  int? get lengthSeconds;
-  @override
-  String? get author;
-  @override
-  String? get authorId;
-  @override
-  String? get authorUrl;
-  @override
-  List<ImageObject> get videoThumbnails;
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  bool get filtered;
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  List<VideoFilter> get matchedFilters;
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  bool get filterHide;
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  bool get deArrowed;
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  String? get deArrowThumbnailUrl;
-  @override
-  String? get viewCountText;
+  final _Video _self;
+  final $Res Function(_Video) _then;
 
   /// Create a copy of Video
   /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$VideoImplCopyWith<_$VideoImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? videoId = null,
+    Object? viewCount = freezed,
+    Object? published = freezed,
+    Object? index = freezed,
+    Object? indexId = freezed,
+    Object? publishedText = freezed,
+    Object? isUpcoming = freezed,
+    Object? premiereTimestamp = freezed,
+    Object? dashUrl = freezed,
+    Object? description = freezed,
+    Object? descriptionHtml = freezed,
+    Object? keywords = null,
+    Object? likeCount = freezed,
+    Object? dislikeCount = freezed,
+    Object? paid = freezed,
+    Object? premium = freezed,
+    Object? isFamilyFriendly = freezed,
+    Object? allowedRegions = null,
+    Object? genre = freezed,
+    Object? genreUrl = freezed,
+    Object? authorThumbnails = null,
+    Object? subCountText = freezed,
+    Object? allowRatings = null,
+    Object? rating = freezed,
+    Object? isListed = freezed,
+    Object? liveNow = freezed,
+    Object? hlsUrl = freezed,
+    Object? adaptiveFormats = freezed,
+    Object? formatStreams = freezed,
+    Object? captions = null,
+    Object? recommendedVideos = null,
+    Object? title = freezed,
+    Object? lengthSeconds = freezed,
+    Object? author = freezed,
+    Object? authorId = freezed,
+    Object? authorUrl = freezed,
+    Object? videoThumbnails = null,
+    Object? filtered = null,
+    Object? matchedFilters = null,
+    Object? filterHide = null,
+    Object? deArrowed = null,
+    Object? deArrowThumbnailUrl = freezed,
+    Object? viewCountText = freezed,
+  }) {
+    return _then(_Video(
+      videoId: null == videoId
+          ? _self.videoId
+          : videoId // ignore: cast_nullable_to_non_nullable
+              as String,
+      viewCount: freezed == viewCount
+          ? _self.viewCount
+          : viewCount // ignore: cast_nullable_to_non_nullable
+              as int?,
+      published: freezed == published
+          ? _self.published
+          : published // ignore: cast_nullable_to_non_nullable
+              as int?,
+      index: freezed == index
+          ? _self.index
+          : index // ignore: cast_nullable_to_non_nullable
+              as int?,
+      indexId: freezed == indexId
+          ? _self.indexId
+          : indexId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      publishedText: freezed == publishedText
+          ? _self.publishedText
+          : publishedText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      isUpcoming: freezed == isUpcoming
+          ? _self.isUpcoming
+          : isUpcoming // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      premiereTimestamp: freezed == premiereTimestamp
+          ? _self.premiereTimestamp
+          : premiereTimestamp // ignore: cast_nullable_to_non_nullable
+              as int?,
+      dashUrl: freezed == dashUrl
+          ? _self.dashUrl
+          : dashUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      description: freezed == description
+          ? _self.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
+      descriptionHtml: freezed == descriptionHtml
+          ? _self.descriptionHtml
+          : descriptionHtml // ignore: cast_nullable_to_non_nullable
+              as String?,
+      keywords: null == keywords
+          ? _self._keywords
+          : keywords // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      likeCount: freezed == likeCount
+          ? _self.likeCount
+          : likeCount // ignore: cast_nullable_to_non_nullable
+              as int?,
+      dislikeCount: freezed == dislikeCount
+          ? _self.dislikeCount
+          : dislikeCount // ignore: cast_nullable_to_non_nullable
+              as int?,
+      paid: freezed == paid
+          ? _self.paid
+          : paid // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      premium: freezed == premium
+          ? _self.premium
+          : premium // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      isFamilyFriendly: freezed == isFamilyFriendly
+          ? _self.isFamilyFriendly
+          : isFamilyFriendly // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      allowedRegions: null == allowedRegions
+          ? _self._allowedRegions
+          : allowedRegions // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      genre: freezed == genre
+          ? _self.genre
+          : genre // ignore: cast_nullable_to_non_nullable
+              as String?,
+      genreUrl: freezed == genreUrl
+          ? _self.genreUrl
+          : genreUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      authorThumbnails: null == authorThumbnails
+          ? _self._authorThumbnails
+          : authorThumbnails // ignore: cast_nullable_to_non_nullable
+              as List<ImageObject>,
+      subCountText: freezed == subCountText
+          ? _self.subCountText
+          : subCountText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      allowRatings: null == allowRatings
+          ? _self.allowRatings
+          : allowRatings // ignore: cast_nullable_to_non_nullable
+              as bool,
+      rating: freezed == rating
+          ? _self.rating
+          : rating // ignore: cast_nullable_to_non_nullable
+              as double?,
+      isListed: freezed == isListed
+          ? _self.isListed
+          : isListed // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      liveNow: freezed == liveNow
+          ? _self.liveNow
+          : liveNow // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      hlsUrl: freezed == hlsUrl
+          ? _self.hlsUrl
+          : hlsUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      adaptiveFormats: freezed == adaptiveFormats
+          ? _self._adaptiveFormats
+          : adaptiveFormats // ignore: cast_nullable_to_non_nullable
+              as List<AdaptiveFormat>?,
+      formatStreams: freezed == formatStreams
+          ? _self._formatStreams
+          : formatStreams // ignore: cast_nullable_to_non_nullable
+              as List<FormatStream>?,
+      captions: null == captions
+          ? _self._captions
+          : captions // ignore: cast_nullable_to_non_nullable
+              as List<Caption>,
+      recommendedVideos: null == recommendedVideos
+          ? _self._recommendedVideos
+          : recommendedVideos // ignore: cast_nullable_to_non_nullable
+              as List<Video>,
+      title: freezed == title
+          ? _self.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String?,
+      lengthSeconds: freezed == lengthSeconds
+          ? _self.lengthSeconds
+          : lengthSeconds // ignore: cast_nullable_to_non_nullable
+              as int?,
+      author: freezed == author
+          ? _self.author
+          : author // ignore: cast_nullable_to_non_nullable
+              as String?,
+      authorId: freezed == authorId
+          ? _self.authorId
+          : authorId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      authorUrl: freezed == authorUrl
+          ? _self.authorUrl
+          : authorUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      videoThumbnails: null == videoThumbnails
+          ? _self._videoThumbnails
+          : videoThumbnails // ignore: cast_nullable_to_non_nullable
+              as List<ImageObject>,
+      filtered: null == filtered
+          ? _self.filtered
+          : filtered // ignore: cast_nullable_to_non_nullable
+              as bool,
+      matchedFilters: null == matchedFilters
+          ? _self._matchedFilters
+          : matchedFilters // ignore: cast_nullable_to_non_nullable
+              as List<VideoFilter>,
+      filterHide: null == filterHide
+          ? _self.filterHide
+          : filterHide // ignore: cast_nullable_to_non_nullable
+              as bool,
+      deArrowed: null == deArrowed
+          ? _self.deArrowed
+          : deArrowed // ignore: cast_nullable_to_non_nullable
+              as bool,
+      deArrowThumbnailUrl: freezed == deArrowThumbnailUrl
+          ? _self.deArrowThumbnailUrl
+          : deArrowThumbnailUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      viewCountText: freezed == viewCountText
+          ? _self.viewCountText
+          : viewCountText // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
 }
+
+// dart format on

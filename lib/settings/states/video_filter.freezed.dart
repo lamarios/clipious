@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,81 +9,58 @@ part of 'video_filter.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$VideoFilterState {
-  List<VideoFilter> get filters => throw _privateConstructorUsedError;
-  bool get hideFilteredVideos => throw _privateConstructorUsedError;
+  List<VideoFilter> get filters;
+  bool get hideFilteredVideos;
 
   /// Create a copy of VideoFilterState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $VideoFilterStateCopyWith<VideoFilterState> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $VideoFilterStateCopyWith<$Res> {
-  factory $VideoFilterStateCopyWith(
-          VideoFilterState value, $Res Function(VideoFilterState) then) =
-      _$VideoFilterStateCopyWithImpl<$Res, VideoFilterState>;
-  @useResult
-  $Res call({List<VideoFilter> filters, bool hideFilteredVideos});
-}
-
-/// @nodoc
-class _$VideoFilterStateCopyWithImpl<$Res, $Val extends VideoFilterState>
-    implements $VideoFilterStateCopyWith<$Res> {
-  _$VideoFilterStateCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of VideoFilterState
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
+  $VideoFilterStateCopyWith<VideoFilterState> get copyWith =>
+      _$VideoFilterStateCopyWithImpl<VideoFilterState>(
+          this as VideoFilterState, _$identity);
+
   @override
-  $Res call({
-    Object? filters = null,
-    Object? hideFilteredVideos = null,
-  }) {
-    return _then(_value.copyWith(
-      filters: null == filters
-          ? _value.filters
-          : filters // ignore: cast_nullable_to_non_nullable
-              as List<VideoFilter>,
-      hideFilteredVideos: null == hideFilteredVideos
-          ? _value.hideFilteredVideos
-          : hideFilteredVideos // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is VideoFilterState &&
+            const DeepCollectionEquality().equals(other.filters, filters) &&
+            (identical(other.hideFilteredVideos, hideFilteredVideos) ||
+                other.hideFilteredVideos == hideFilteredVideos));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType,
+      const DeepCollectionEquality().hash(filters), hideFilteredVideos);
+
+  @override
+  String toString() {
+    return 'VideoFilterState(filters: $filters, hideFilteredVideos: $hideFilteredVideos)';
   }
 }
 
 /// @nodoc
-abstract class _$$VideoFilterStateImplCopyWith<$Res>
-    implements $VideoFilterStateCopyWith<$Res> {
-  factory _$$VideoFilterStateImplCopyWith(_$VideoFilterStateImpl value,
-          $Res Function(_$VideoFilterStateImpl) then) =
-      __$$VideoFilterStateImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $VideoFilterStateCopyWith<$Res> {
+  factory $VideoFilterStateCopyWith(
+          VideoFilterState value, $Res Function(VideoFilterState) _then) =
+      _$VideoFilterStateCopyWithImpl;
   @useResult
   $Res call({List<VideoFilter> filters, bool hideFilteredVideos});
 }
 
 /// @nodoc
-class __$$VideoFilterStateImplCopyWithImpl<$Res>
-    extends _$VideoFilterStateCopyWithImpl<$Res, _$VideoFilterStateImpl>
-    implements _$$VideoFilterStateImplCopyWith<$Res> {
-  __$$VideoFilterStateImplCopyWithImpl(_$VideoFilterStateImpl _value,
-      $Res Function(_$VideoFilterStateImpl) _then)
-      : super(_value, _then);
+class _$VideoFilterStateCopyWithImpl<$Res>
+    implements $VideoFilterStateCopyWith<$Res> {
+  _$VideoFilterStateCopyWithImpl(this._self, this._then);
+
+  final VideoFilterState _self;
+  final $Res Function(VideoFilterState) _then;
 
   /// Create a copy of VideoFilterState
   /// with the given fields replaced by the non-null parameter values.
@@ -93,23 +70,179 @@ class __$$VideoFilterStateImplCopyWithImpl<$Res>
     Object? filters = null,
     Object? hideFilteredVideos = null,
   }) {
-    return _then(_$VideoFilterStateImpl(
+    return _then(_self.copyWith(
       filters: null == filters
-          ? _value._filters
+          ? _self.filters
           : filters // ignore: cast_nullable_to_non_nullable
               as List<VideoFilter>,
       hideFilteredVideos: null == hideFilteredVideos
-          ? _value.hideFilteredVideos
+          ? _self.hideFilteredVideos
           : hideFilteredVideos // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
   }
 }
 
+/// Adds pattern-matching-related methods to [VideoFilterState].
+extension VideoFilterStatePatterns on VideoFilterState {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_VideoFilterState value)? $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _VideoFilterState() when $default != null:
+        return $default(_that);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_VideoFilterState value) $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _VideoFilterState():
+        return $default(_that);
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_VideoFilterState value)? $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _VideoFilterState() when $default != null:
+        return $default(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(List<VideoFilter> filters, bool hideFilteredVideos)?
+        $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _VideoFilterState() when $default != null:
+        return $default(_that.filters, _that.hideFilteredVideos);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(List<VideoFilter> filters, bool hideFilteredVideos)
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _VideoFilterState():
+        return $default(_that.filters, _that.hideFilteredVideos);
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult? Function(List<VideoFilter> filters, bool hideFilteredVideos)?
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _VideoFilterState() when $default != null:
+        return $default(_that.filters, _that.hideFilteredVideos);
+      case _:
+        return null;
+    }
+  }
+}
+
 /// @nodoc
 
-class _$VideoFilterStateImpl implements _VideoFilterState {
-  const _$VideoFilterStateImpl(
+class _VideoFilterState implements VideoFilterState {
+  const _VideoFilterState(
       {final List<VideoFilter> filters = const [],
       this.hideFilteredVideos = false})
       : _filters = filters;
@@ -127,16 +260,19 @@ class _$VideoFilterStateImpl implements _VideoFilterState {
   @JsonKey()
   final bool hideFilteredVideos;
 
+  /// Create a copy of VideoFilterState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'VideoFilterState(filters: $filters, hideFilteredVideos: $hideFilteredVideos)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$VideoFilterStateCopyWith<_VideoFilterState> get copyWith =>
+      __$VideoFilterStateCopyWithImpl<_VideoFilterState>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$VideoFilterStateImpl &&
+            other is _VideoFilterState &&
             const DeepCollectionEquality().equals(other._filters, _filters) &&
             (identical(other.hideFilteredVideos, hideFilteredVideos) ||
                 other.hideFilteredVideos == hideFilteredVideos));
@@ -146,30 +282,50 @@ class _$VideoFilterStateImpl implements _VideoFilterState {
   int get hashCode => Object.hash(runtimeType,
       const DeepCollectionEquality().hash(_filters), hideFilteredVideos);
 
+  @override
+  String toString() {
+    return 'VideoFilterState(filters: $filters, hideFilteredVideos: $hideFilteredVideos)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$VideoFilterStateCopyWith<$Res>
+    implements $VideoFilterStateCopyWith<$Res> {
+  factory _$VideoFilterStateCopyWith(
+          _VideoFilterState value, $Res Function(_VideoFilterState) _then) =
+      __$VideoFilterStateCopyWithImpl;
+  @override
+  @useResult
+  $Res call({List<VideoFilter> filters, bool hideFilteredVideos});
+}
+
+/// @nodoc
+class __$VideoFilterStateCopyWithImpl<$Res>
+    implements _$VideoFilterStateCopyWith<$Res> {
+  __$VideoFilterStateCopyWithImpl(this._self, this._then);
+
+  final _VideoFilterState _self;
+  final $Res Function(_VideoFilterState) _then;
+
   /// Create a copy of VideoFilterState
   /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$VideoFilterStateImplCopyWith<_$VideoFilterStateImpl> get copyWith =>
-      __$$VideoFilterStateImplCopyWithImpl<_$VideoFilterStateImpl>(
-          this, _$identity);
+  $Res call({
+    Object? filters = null,
+    Object? hideFilteredVideos = null,
+  }) {
+    return _then(_VideoFilterState(
+      filters: null == filters
+          ? _self._filters
+          : filters // ignore: cast_nullable_to_non_nullable
+              as List<VideoFilter>,
+      hideFilteredVideos: null == hideFilteredVideos
+          ? _self.hideFilteredVideos
+          : hideFilteredVideos // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
 }
 
-abstract class _VideoFilterState implements VideoFilterState {
-  const factory _VideoFilterState(
-      {final List<VideoFilter> filters,
-      final bool hideFilteredVideos}) = _$VideoFilterStateImpl;
-
-  @override
-  List<VideoFilter> get filters;
-  @override
-  bool get hideFilteredVideos;
-
-  /// Create a copy of VideoFilterState
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$VideoFilterStateImplCopyWith<_$VideoFilterStateImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+// dart format on

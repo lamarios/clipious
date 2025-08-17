@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,93 +9,62 @@ part of 'paginated_list_view.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$PaginatedListViewController<T> {
-  PaginatedList<T> get paginatedList => throw _privateConstructorUsedError;
-  List<T> get items => throw _privateConstructorUsedError;
-  bool get loading => throw _privateConstructorUsedError;
+  PaginatedList<T> get paginatedList;
+  List<T> get items;
+  bool get loading;
 
   /// Create a copy of PaginatedListViewController
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $PaginatedListViewControllerCopyWith<T, PaginatedListViewController<T>>
-      get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $PaginatedListViewControllerCopyWith<T, $Res> {
-  factory $PaginatedListViewControllerCopyWith(
-          PaginatedListViewController<T> value,
-          $Res Function(PaginatedListViewController<T>) then) =
-      _$PaginatedListViewControllerCopyWithImpl<T, $Res,
-          PaginatedListViewController<T>>;
-  @useResult
-  $Res call({PaginatedList<T> paginatedList, List<T> items, bool loading});
-}
-
-/// @nodoc
-class _$PaginatedListViewControllerCopyWithImpl<T, $Res,
-        $Val extends PaginatedListViewController<T>>
-    implements $PaginatedListViewControllerCopyWith<T, $Res> {
-  _$PaginatedListViewControllerCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of PaginatedListViewController
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
+  $PaginatedListViewControllerCopyWith<T, PaginatedListViewController<T>>
+      get copyWith => _$PaginatedListViewControllerCopyWithImpl<T,
+              PaginatedListViewController<T>>(
+          this as PaginatedListViewController<T>, _$identity);
+
   @override
-  $Res call({
-    Object? paginatedList = null,
-    Object? items = null,
-    Object? loading = null,
-  }) {
-    return _then(_value.copyWith(
-      paginatedList: null == paginatedList
-          ? _value.paginatedList
-          : paginatedList // ignore: cast_nullable_to_non_nullable
-              as PaginatedList<T>,
-      items: null == items
-          ? _value.items
-          : items // ignore: cast_nullable_to_non_nullable
-              as List<T>,
-      loading: null == loading
-          ? _value.loading
-          : loading // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is PaginatedListViewController<T> &&
+            (identical(other.paginatedList, paginatedList) ||
+                other.paginatedList == paginatedList) &&
+            const DeepCollectionEquality().equals(other.items, items) &&
+            (identical(other.loading, loading) || other.loading == loading));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, paginatedList,
+      const DeepCollectionEquality().hash(items), loading);
+
+  @override
+  String toString() {
+    return 'PaginatedListViewController<$T>(paginatedList: $paginatedList, items: $items, loading: $loading)';
   }
 }
 
 /// @nodoc
-abstract class _$$PaginatedListViewControllerImplCopyWith<T, $Res>
-    implements $PaginatedListViewControllerCopyWith<T, $Res> {
-  factory _$$PaginatedListViewControllerImplCopyWith(
-          _$PaginatedListViewControllerImpl<T> value,
-          $Res Function(_$PaginatedListViewControllerImpl<T>) then) =
-      __$$PaginatedListViewControllerImplCopyWithImpl<T, $Res>;
-  @override
+abstract mixin class $PaginatedListViewControllerCopyWith<T, $Res> {
+  factory $PaginatedListViewControllerCopyWith(
+          PaginatedListViewController<T> value,
+          $Res Function(PaginatedListViewController<T>) _then) =
+      _$PaginatedListViewControllerCopyWithImpl;
   @useResult
   $Res call({PaginatedList<T> paginatedList, List<T> items, bool loading});
 }
 
 /// @nodoc
-class __$$PaginatedListViewControllerImplCopyWithImpl<T, $Res>
-    extends _$PaginatedListViewControllerCopyWithImpl<T, $Res,
-        _$PaginatedListViewControllerImpl<T>>
-    implements _$$PaginatedListViewControllerImplCopyWith<T, $Res> {
-  __$$PaginatedListViewControllerImplCopyWithImpl(
-      _$PaginatedListViewControllerImpl<T> _value,
-      $Res Function(_$PaginatedListViewControllerImpl<T>) _then)
-      : super(_value, _then);
+class _$PaginatedListViewControllerCopyWithImpl<T, $Res>
+    implements $PaginatedListViewControllerCopyWith<T, $Res> {
+  _$PaginatedListViewControllerCopyWithImpl(this._self, this._then);
+
+  final PaginatedListViewController<T> _self;
+  final $Res Function(PaginatedListViewController<T>) _then;
 
   /// Create a copy of PaginatedListViewController
   /// with the given fields replaced by the non-null parameter values.
@@ -106,28 +75,188 @@ class __$$PaginatedListViewControllerImplCopyWithImpl<T, $Res>
     Object? items = null,
     Object? loading = null,
   }) {
-    return _then(_$PaginatedListViewControllerImpl<T>(
+    return _then(_self.copyWith(
       paginatedList: null == paginatedList
-          ? _value.paginatedList
+          ? _self.paginatedList
           : paginatedList // ignore: cast_nullable_to_non_nullable
               as PaginatedList<T>,
       items: null == items
-          ? _value._items
+          ? _self.items
           : items // ignore: cast_nullable_to_non_nullable
               as List<T>,
       loading: null == loading
-          ? _value.loading
+          ? _self.loading
           : loading // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
   }
 }
 
+/// Adds pattern-matching-related methods to [PaginatedListViewController].
+extension PaginatedListViewControllerPatterns<T>
+    on PaginatedListViewController<T> {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_PaginatedListViewController<T> value)? $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _PaginatedListViewController() when $default != null:
+        return $default(_that);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_PaginatedListViewController<T> value) $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _PaginatedListViewController():
+        return $default(_that);
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_PaginatedListViewController<T> value)? $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _PaginatedListViewController() when $default != null:
+        return $default(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+            PaginatedList<T> paginatedList, List<T> items, bool loading)?
+        $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _PaginatedListViewController() when $default != null:
+        return $default(_that.paginatedList, _that.items, _that.loading);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(
+            PaginatedList<T> paginatedList, List<T> items, bool loading)
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _PaginatedListViewController():
+        return $default(_that.paginatedList, _that.items, _that.loading);
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult? Function(
+            PaginatedList<T> paginatedList, List<T> items, bool loading)?
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _PaginatedListViewController() when $default != null:
+        return $default(_that.paginatedList, _that.items, _that.loading);
+      case _:
+        return null;
+    }
+  }
+}
+
 /// @nodoc
 
-class _$PaginatedListViewControllerImpl<T>
-    implements _PaginatedListViewController<T> {
-  const _$PaginatedListViewControllerImpl(
+class _PaginatedListViewController<T>
+    implements PaginatedListViewController<T> {
+  const _PaginatedListViewController(
       {required this.paginatedList,
       final List<T> items = const [],
       this.loading = false})
@@ -148,16 +277,20 @@ class _$PaginatedListViewControllerImpl<T>
   @JsonKey()
   final bool loading;
 
+  /// Create a copy of PaginatedListViewController
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'PaginatedListViewController<$T>(paginatedList: $paginatedList, items: $items, loading: $loading)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$PaginatedListViewControllerCopyWith<T, _PaginatedListViewController<T>>
+      get copyWith => __$PaginatedListViewControllerCopyWithImpl<T,
+          _PaginatedListViewController<T>>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$PaginatedListViewControllerImpl<T> &&
+            other is _PaginatedListViewController<T> &&
             (identical(other.paginatedList, paginatedList) ||
                 other.paginatedList == paginatedList) &&
             const DeepCollectionEquality().equals(other._items, _items) &&
@@ -168,36 +301,56 @@ class _$PaginatedListViewControllerImpl<T>
   int get hashCode => Object.hash(runtimeType, paginatedList,
       const DeepCollectionEquality().hash(_items), loading);
 
+  @override
+  String toString() {
+    return 'PaginatedListViewController<$T>(paginatedList: $paginatedList, items: $items, loading: $loading)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$PaginatedListViewControllerCopyWith<T, $Res>
+    implements $PaginatedListViewControllerCopyWith<T, $Res> {
+  factory _$PaginatedListViewControllerCopyWith(
+          _PaginatedListViewController<T> value,
+          $Res Function(_PaginatedListViewController<T>) _then) =
+      __$PaginatedListViewControllerCopyWithImpl;
+  @override
+  @useResult
+  $Res call({PaginatedList<T> paginatedList, List<T> items, bool loading});
+}
+
+/// @nodoc
+class __$PaginatedListViewControllerCopyWithImpl<T, $Res>
+    implements _$PaginatedListViewControllerCopyWith<T, $Res> {
+  __$PaginatedListViewControllerCopyWithImpl(this._self, this._then);
+
+  final _PaginatedListViewController<T> _self;
+  final $Res Function(_PaginatedListViewController<T>) _then;
+
   /// Create a copy of PaginatedListViewController
   /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$PaginatedListViewControllerImplCopyWith<T,
-          _$PaginatedListViewControllerImpl<T>>
-      get copyWith => __$$PaginatedListViewControllerImplCopyWithImpl<T,
-          _$PaginatedListViewControllerImpl<T>>(this, _$identity);
+  $Res call({
+    Object? paginatedList = null,
+    Object? items = null,
+    Object? loading = null,
+  }) {
+    return _then(_PaginatedListViewController<T>(
+      paginatedList: null == paginatedList
+          ? _self.paginatedList
+          : paginatedList // ignore: cast_nullable_to_non_nullable
+              as PaginatedList<T>,
+      items: null == items
+          ? _self._items
+          : items // ignore: cast_nullable_to_non_nullable
+              as List<T>,
+      loading: null == loading
+          ? _self.loading
+          : loading // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
 }
 
-abstract class _PaginatedListViewController<T>
-    implements PaginatedListViewController<T> {
-  const factory _PaginatedListViewController(
-      {required final PaginatedList<T> paginatedList,
-      final List<T> items,
-      final bool loading}) = _$PaginatedListViewControllerImpl<T>;
-
-  @override
-  PaginatedList<T> get paginatedList;
-  @override
-  List<T> get items;
-  @override
-  bool get loading;
-
-  /// Create a copy of PaginatedListViewController
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$PaginatedListViewControllerImplCopyWith<T,
-          _$PaginatedListViewControllerImpl<T>>
-      get copyWith => throw _privateConstructorUsedError;
-}
+// dart format on

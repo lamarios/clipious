@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,81 +9,58 @@ part of 'select_list.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$SelectListState<T> {
-  List<T> get filteredItems => throw _privateConstructorUsedError;
-  bool get loading => throw _privateConstructorUsedError;
+  List<T> get filteredItems;
+  bool get loading;
 
   /// Create a copy of SelectListState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $SelectListStateCopyWith<T, SelectListState<T>> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $SelectListStateCopyWith<T, $Res> {
-  factory $SelectListStateCopyWith(
-          SelectListState<T> value, $Res Function(SelectListState<T>) then) =
-      _$SelectListStateCopyWithImpl<T, $Res, SelectListState<T>>;
-  @useResult
-  $Res call({List<T> filteredItems, bool loading});
-}
-
-/// @nodoc
-class _$SelectListStateCopyWithImpl<T, $Res, $Val extends SelectListState<T>>
-    implements $SelectListStateCopyWith<T, $Res> {
-  _$SelectListStateCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of SelectListState
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
+  $SelectListStateCopyWith<T, SelectListState<T>> get copyWith =>
+      _$SelectListStateCopyWithImpl<T, SelectListState<T>>(
+          this as SelectListState<T>, _$identity);
+
   @override
-  $Res call({
-    Object? filteredItems = null,
-    Object? loading = null,
-  }) {
-    return _then(_value.copyWith(
-      filteredItems: null == filteredItems
-          ? _value.filteredItems
-          : filteredItems // ignore: cast_nullable_to_non_nullable
-              as List<T>,
-      loading: null == loading
-          ? _value.loading
-          : loading // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is SelectListState<T> &&
+            const DeepCollectionEquality()
+                .equals(other.filteredItems, filteredItems) &&
+            (identical(other.loading, loading) || other.loading == loading));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(filteredItems), loading);
+
+  @override
+  String toString() {
+    return 'SelectListState<$T>(filteredItems: $filteredItems, loading: $loading)';
   }
 }
 
 /// @nodoc
-abstract class _$$SelectListStateImplCopyWith<T, $Res>
-    implements $SelectListStateCopyWith<T, $Res> {
-  factory _$$SelectListStateImplCopyWith(_$SelectListStateImpl<T> value,
-          $Res Function(_$SelectListStateImpl<T>) then) =
-      __$$SelectListStateImplCopyWithImpl<T, $Res>;
-  @override
+abstract mixin class $SelectListStateCopyWith<T, $Res> {
+  factory $SelectListStateCopyWith(
+          SelectListState<T> value, $Res Function(SelectListState<T>) _then) =
+      _$SelectListStateCopyWithImpl;
   @useResult
   $Res call({List<T> filteredItems, bool loading});
 }
 
 /// @nodoc
-class __$$SelectListStateImplCopyWithImpl<T, $Res>
-    extends _$SelectListStateCopyWithImpl<T, $Res, _$SelectListStateImpl<T>>
-    implements _$$SelectListStateImplCopyWith<T, $Res> {
-  __$$SelectListStateImplCopyWithImpl(_$SelectListStateImpl<T> _value,
-      $Res Function(_$SelectListStateImpl<T>) _then)
-      : super(_value, _then);
+class _$SelectListStateCopyWithImpl<T, $Res>
+    implements $SelectListStateCopyWith<T, $Res> {
+  _$SelectListStateCopyWithImpl(this._self, this._then);
+
+  final SelectListState<T> _self;
+  final $Res Function(SelectListState<T>) _then;
 
   /// Create a copy of SelectListState
   /// with the given fields replaced by the non-null parameter values.
@@ -93,23 +70,176 @@ class __$$SelectListStateImplCopyWithImpl<T, $Res>
     Object? filteredItems = null,
     Object? loading = null,
   }) {
-    return _then(_$SelectListStateImpl<T>(
+    return _then(_self.copyWith(
       filteredItems: null == filteredItems
-          ? _value._filteredItems
+          ? _self.filteredItems
           : filteredItems // ignore: cast_nullable_to_non_nullable
               as List<T>,
       loading: null == loading
-          ? _value.loading
+          ? _self.loading
           : loading // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
   }
 }
 
+/// Adds pattern-matching-related methods to [SelectListState].
+extension SelectListStatePatterns<T> on SelectListState<T> {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_SelectListState<T> value)? $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _SelectListState() when $default != null:
+        return $default(_that);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_SelectListState<T> value) $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _SelectListState():
+        return $default(_that);
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_SelectListState<T> value)? $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _SelectListState() when $default != null:
+        return $default(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(List<T> filteredItems, bool loading)? $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _SelectListState() when $default != null:
+        return $default(_that.filteredItems, _that.loading);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(List<T> filteredItems, bool loading) $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _SelectListState():
+        return $default(_that.filteredItems, _that.loading);
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult? Function(List<T> filteredItems, bool loading)? $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _SelectListState() when $default != null:
+        return $default(_that.filteredItems, _that.loading);
+      case _:
+        return null;
+    }
+  }
+}
+
 /// @nodoc
 
-class _$SelectListStateImpl<T> implements _SelectListState<T> {
-  const _$SelectListStateImpl(
+class _SelectListState<T> implements SelectListState<T> {
+  const _SelectListState(
       {final List<T> filteredItems = const [], this.loading = false})
       : _filteredItems = filteredItems;
 
@@ -126,16 +256,19 @@ class _$SelectListStateImpl<T> implements _SelectListState<T> {
   @JsonKey()
   final bool loading;
 
+  /// Create a copy of SelectListState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'SelectListState<$T>(filteredItems: $filteredItems, loading: $loading)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$SelectListStateCopyWith<T, _SelectListState<T>> get copyWith =>
+      __$SelectListStateCopyWithImpl<T, _SelectListState<T>>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SelectListStateImpl<T> &&
+            other is _SelectListState<T> &&
             const DeepCollectionEquality()
                 .equals(other._filteredItems, _filteredItems) &&
             (identical(other.loading, loading) || other.loading == loading));
@@ -145,30 +278,50 @@ class _$SelectListStateImpl<T> implements _SelectListState<T> {
   int get hashCode => Object.hash(runtimeType,
       const DeepCollectionEquality().hash(_filteredItems), loading);
 
+  @override
+  String toString() {
+    return 'SelectListState<$T>(filteredItems: $filteredItems, loading: $loading)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$SelectListStateCopyWith<T, $Res>
+    implements $SelectListStateCopyWith<T, $Res> {
+  factory _$SelectListStateCopyWith(
+          _SelectListState<T> value, $Res Function(_SelectListState<T>) _then) =
+      __$SelectListStateCopyWithImpl;
+  @override
+  @useResult
+  $Res call({List<T> filteredItems, bool loading});
+}
+
+/// @nodoc
+class __$SelectListStateCopyWithImpl<T, $Res>
+    implements _$SelectListStateCopyWith<T, $Res> {
+  __$SelectListStateCopyWithImpl(this._self, this._then);
+
+  final _SelectListState<T> _self;
+  final $Res Function(_SelectListState<T>) _then;
+
   /// Create a copy of SelectListState
   /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$SelectListStateImplCopyWith<T, _$SelectListStateImpl<T>> get copyWith =>
-      __$$SelectListStateImplCopyWithImpl<T, _$SelectListStateImpl<T>>(
-          this, _$identity);
+  $Res call({
+    Object? filteredItems = null,
+    Object? loading = null,
+  }) {
+    return _then(_SelectListState<T>(
+      filteredItems: null == filteredItems
+          ? _self._filteredItems
+          : filteredItems // ignore: cast_nullable_to_non_nullable
+              as List<T>,
+      loading: null == loading
+          ? _self.loading
+          : loading // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
 }
 
-abstract class _SelectListState<T> implements SelectListState<T> {
-  const factory _SelectListState(
-      {final List<T> filteredItems,
-      final bool loading}) = _$SelectListStateImpl<T>;
-
-  @override
-  List<T> get filteredItems;
-  @override
-  bool get loading;
-
-  /// Create a copy of SelectListState
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$SelectListStateImplCopyWith<T, _$SelectListStateImpl<T>> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+// dart format on

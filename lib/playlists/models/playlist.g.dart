@@ -6,8 +6,7 @@ part of 'playlist.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$PlaylistImpl _$$PlaylistImplFromJson(Map<String, dynamic> json) =>
-    _$PlaylistImpl(
+_Playlist _$PlaylistFromJson(Map<String, dynamic> json) => _Playlist(
       type: json['type'] as String? ?? youtubePlaylist,
       title: json['title'] as String,
       playlistId: json['playlistId'] as String,
@@ -29,8 +28,7 @@ _$PlaylistImpl _$$PlaylistImplFromJson(Map<String, dynamic> json) =>
           const [],
     );
 
-Map<String, dynamic> _$$PlaylistImplToJson(_$PlaylistImpl instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$PlaylistToJson(_Playlist instance) => <String, dynamic>{
       'type': instance.type,
       'title': instance.title,
       'playlistId': instance.playlistId,

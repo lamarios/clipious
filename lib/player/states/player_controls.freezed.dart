@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,193 +9,120 @@ part of 'player_controls.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$PlayerControlsState {
-  bool get errored => throw _privateConstructorUsedError;
-  Duration get position => throw _privateConstructorUsedError;
-  Duration get duration => throw _privateConstructorUsedError;
-  Duration get buffer => throw _privateConstructorUsedError;
-  FullScreenState get fullScreenState => throw _privateConstructorUsedError;
-  bool get displayControls => throw _privateConstructorUsedError;
-  bool get muted => throw _privateConstructorUsedError;
-  bool get buffering => throw _privateConstructorUsedError;
-  bool get draggingPositionSlider => throw _privateConstructorUsedError;
-  double get doubleTapFastForwardedOpacity =>
-      throw _privateConstructorUsedError;
-  double get doubleTapRewindedOpacity => throw _privateConstructorUsedError;
-  bool get justDoubleTappedSkip => throw _privateConstructorUsedError;
-  bool get showSponsorBlocked => throw _privateConstructorUsedError;
-  double get screenControlStart => throw _privateConstructorUsedError;
-  double get screenControlStartValue =>
-      throw _privateConstructorUsedError; // system setting adjustments
-  bool get showBrightnessSlider => throw _privateConstructorUsedError;
-  double get systemBrightness => throw _privateConstructorUsedError;
-  bool get showVolumeSlider => throw _privateConstructorUsedError;
-  double get systemVolume => throw _privateConstructorUsedError;
+  bool get errored;
+  Duration get position;
+  Duration get duration;
+  Duration get buffer;
+  FullScreenState get fullScreenState;
+  bool get displayControls;
+  bool get muted;
+  bool get buffering;
+  bool get draggingPositionSlider;
+  double get doubleTapFastForwardedOpacity;
+  double get doubleTapRewindedOpacity;
+  bool get justDoubleTappedSkip;
+  bool get showSponsorBlocked;
+  double get screenControlStart;
+  double get screenControlStartValue; // system setting adjustments
+  bool get showBrightnessSlider;
+  double get systemBrightness;
+  bool get showVolumeSlider;
+  double get systemVolume;
 
   /// Create a copy of PlayerControlsState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $PlayerControlsStateCopyWith<PlayerControlsState> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $PlayerControlsStateCopyWith<$Res> {
-  factory $PlayerControlsStateCopyWith(
-          PlayerControlsState value, $Res Function(PlayerControlsState) then) =
-      _$PlayerControlsStateCopyWithImpl<$Res, PlayerControlsState>;
-  @useResult
-  $Res call(
-      {bool errored,
-      Duration position,
-      Duration duration,
-      Duration buffer,
-      FullScreenState fullScreenState,
-      bool displayControls,
-      bool muted,
-      bool buffering,
-      bool draggingPositionSlider,
-      double doubleTapFastForwardedOpacity,
-      double doubleTapRewindedOpacity,
-      bool justDoubleTappedSkip,
-      bool showSponsorBlocked,
-      double screenControlStart,
-      double screenControlStartValue,
-      bool showBrightnessSlider,
-      double systemBrightness,
-      bool showVolumeSlider,
-      double systemVolume});
-}
-
-/// @nodoc
-class _$PlayerControlsStateCopyWithImpl<$Res, $Val extends PlayerControlsState>
-    implements $PlayerControlsStateCopyWith<$Res> {
-  _$PlayerControlsStateCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of PlayerControlsState
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
+  $PlayerControlsStateCopyWith<PlayerControlsState> get copyWith =>
+      _$PlayerControlsStateCopyWithImpl<PlayerControlsState>(
+          this as PlayerControlsState, _$identity);
+
   @override
-  $Res call({
-    Object? errored = null,
-    Object? position = null,
-    Object? duration = null,
-    Object? buffer = null,
-    Object? fullScreenState = null,
-    Object? displayControls = null,
-    Object? muted = null,
-    Object? buffering = null,
-    Object? draggingPositionSlider = null,
-    Object? doubleTapFastForwardedOpacity = null,
-    Object? doubleTapRewindedOpacity = null,
-    Object? justDoubleTappedSkip = null,
-    Object? showSponsorBlocked = null,
-    Object? screenControlStart = null,
-    Object? screenControlStartValue = null,
-    Object? showBrightnessSlider = null,
-    Object? systemBrightness = null,
-    Object? showVolumeSlider = null,
-    Object? systemVolume = null,
-  }) {
-    return _then(_value.copyWith(
-      errored: null == errored
-          ? _value.errored
-          : errored // ignore: cast_nullable_to_non_nullable
-              as bool,
-      position: null == position
-          ? _value.position
-          : position // ignore: cast_nullable_to_non_nullable
-              as Duration,
-      duration: null == duration
-          ? _value.duration
-          : duration // ignore: cast_nullable_to_non_nullable
-              as Duration,
-      buffer: null == buffer
-          ? _value.buffer
-          : buffer // ignore: cast_nullable_to_non_nullable
-              as Duration,
-      fullScreenState: null == fullScreenState
-          ? _value.fullScreenState
-          : fullScreenState // ignore: cast_nullable_to_non_nullable
-              as FullScreenState,
-      displayControls: null == displayControls
-          ? _value.displayControls
-          : displayControls // ignore: cast_nullable_to_non_nullable
-              as bool,
-      muted: null == muted
-          ? _value.muted
-          : muted // ignore: cast_nullable_to_non_nullable
-              as bool,
-      buffering: null == buffering
-          ? _value.buffering
-          : buffering // ignore: cast_nullable_to_non_nullable
-              as bool,
-      draggingPositionSlider: null == draggingPositionSlider
-          ? _value.draggingPositionSlider
-          : draggingPositionSlider // ignore: cast_nullable_to_non_nullable
-              as bool,
-      doubleTapFastForwardedOpacity: null == doubleTapFastForwardedOpacity
-          ? _value.doubleTapFastForwardedOpacity
-          : doubleTapFastForwardedOpacity // ignore: cast_nullable_to_non_nullable
-              as double,
-      doubleTapRewindedOpacity: null == doubleTapRewindedOpacity
-          ? _value.doubleTapRewindedOpacity
-          : doubleTapRewindedOpacity // ignore: cast_nullable_to_non_nullable
-              as double,
-      justDoubleTappedSkip: null == justDoubleTappedSkip
-          ? _value.justDoubleTappedSkip
-          : justDoubleTappedSkip // ignore: cast_nullable_to_non_nullable
-              as bool,
-      showSponsorBlocked: null == showSponsorBlocked
-          ? _value.showSponsorBlocked
-          : showSponsorBlocked // ignore: cast_nullable_to_non_nullable
-              as bool,
-      screenControlStart: null == screenControlStart
-          ? _value.screenControlStart
-          : screenControlStart // ignore: cast_nullable_to_non_nullable
-              as double,
-      screenControlStartValue: null == screenControlStartValue
-          ? _value.screenControlStartValue
-          : screenControlStartValue // ignore: cast_nullable_to_non_nullable
-              as double,
-      showBrightnessSlider: null == showBrightnessSlider
-          ? _value.showBrightnessSlider
-          : showBrightnessSlider // ignore: cast_nullable_to_non_nullable
-              as bool,
-      systemBrightness: null == systemBrightness
-          ? _value.systemBrightness
-          : systemBrightness // ignore: cast_nullable_to_non_nullable
-              as double,
-      showVolumeSlider: null == showVolumeSlider
-          ? _value.showVolumeSlider
-          : showVolumeSlider // ignore: cast_nullable_to_non_nullable
-              as bool,
-      systemVolume: null == systemVolume
-          ? _value.systemVolume
-          : systemVolume // ignore: cast_nullable_to_non_nullable
-              as double,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is PlayerControlsState &&
+            (identical(other.errored, errored) || other.errored == errored) &&
+            (identical(other.position, position) ||
+                other.position == position) &&
+            (identical(other.duration, duration) ||
+                other.duration == duration) &&
+            (identical(other.buffer, buffer) || other.buffer == buffer) &&
+            (identical(other.fullScreenState, fullScreenState) ||
+                other.fullScreenState == fullScreenState) &&
+            (identical(other.displayControls, displayControls) ||
+                other.displayControls == displayControls) &&
+            (identical(other.muted, muted) || other.muted == muted) &&
+            (identical(other.buffering, buffering) ||
+                other.buffering == buffering) &&
+            (identical(other.draggingPositionSlider, draggingPositionSlider) ||
+                other.draggingPositionSlider == draggingPositionSlider) &&
+            (identical(other.doubleTapFastForwardedOpacity,
+                    doubleTapFastForwardedOpacity) ||
+                other.doubleTapFastForwardedOpacity ==
+                    doubleTapFastForwardedOpacity) &&
+            (identical(
+                    other.doubleTapRewindedOpacity, doubleTapRewindedOpacity) ||
+                other.doubleTapRewindedOpacity == doubleTapRewindedOpacity) &&
+            (identical(other.justDoubleTappedSkip, justDoubleTappedSkip) ||
+                other.justDoubleTappedSkip == justDoubleTappedSkip) &&
+            (identical(other.showSponsorBlocked, showSponsorBlocked) ||
+                other.showSponsorBlocked == showSponsorBlocked) &&
+            (identical(other.screenControlStart, screenControlStart) ||
+                other.screenControlStart == screenControlStart) &&
+            (identical(
+                    other.screenControlStartValue, screenControlStartValue) ||
+                other.screenControlStartValue == screenControlStartValue) &&
+            (identical(other.showBrightnessSlider, showBrightnessSlider) ||
+                other.showBrightnessSlider == showBrightnessSlider) &&
+            (identical(other.systemBrightness, systemBrightness) ||
+                other.systemBrightness == systemBrightness) &&
+            (identical(other.showVolumeSlider, showVolumeSlider) ||
+                other.showVolumeSlider == showVolumeSlider) &&
+            (identical(other.systemVolume, systemVolume) ||
+                other.systemVolume == systemVolume));
+  }
+
+  @override
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        errored,
+        position,
+        duration,
+        buffer,
+        fullScreenState,
+        displayControls,
+        muted,
+        buffering,
+        draggingPositionSlider,
+        doubleTapFastForwardedOpacity,
+        doubleTapRewindedOpacity,
+        justDoubleTappedSkip,
+        showSponsorBlocked,
+        screenControlStart,
+        screenControlStartValue,
+        showBrightnessSlider,
+        systemBrightness,
+        showVolumeSlider,
+        systemVolume
+      ]);
+
+  @override
+  String toString() {
+    return 'PlayerControlsState(errored: $errored, position: $position, duration: $duration, buffer: $buffer, fullScreenState: $fullScreenState, displayControls: $displayControls, muted: $muted, buffering: $buffering, draggingPositionSlider: $draggingPositionSlider, doubleTapFastForwardedOpacity: $doubleTapFastForwardedOpacity, doubleTapRewindedOpacity: $doubleTapRewindedOpacity, justDoubleTappedSkip: $justDoubleTappedSkip, showSponsorBlocked: $showSponsorBlocked, screenControlStart: $screenControlStart, screenControlStartValue: $screenControlStartValue, showBrightnessSlider: $showBrightnessSlider, systemBrightness: $systemBrightness, showVolumeSlider: $showVolumeSlider, systemVolume: $systemVolume)';
   }
 }
 
 /// @nodoc
-abstract class _$$PlayercontrolsStateImplCopyWith<$Res>
-    implements $PlayerControlsStateCopyWith<$Res> {
-  factory _$$PlayercontrolsStateImplCopyWith(_$PlayercontrolsStateImpl value,
-          $Res Function(_$PlayercontrolsStateImpl) then) =
-      __$$PlayercontrolsStateImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $PlayerControlsStateCopyWith<$Res> {
+  factory $PlayerControlsStateCopyWith(
+          PlayerControlsState value, $Res Function(PlayerControlsState) _then) =
+      _$PlayerControlsStateCopyWithImpl;
   @useResult
   $Res call(
       {bool errored,
@@ -220,12 +147,12 @@ abstract class _$$PlayercontrolsStateImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$PlayercontrolsStateImplCopyWithImpl<$Res>
-    extends _$PlayerControlsStateCopyWithImpl<$Res, _$PlayercontrolsStateImpl>
-    implements _$$PlayercontrolsStateImplCopyWith<$Res> {
-  __$$PlayercontrolsStateImplCopyWithImpl(_$PlayercontrolsStateImpl _value,
-      $Res Function(_$PlayercontrolsStateImpl) _then)
-      : super(_value, _then);
+class _$PlayerControlsStateCopyWithImpl<$Res>
+    implements $PlayerControlsStateCopyWith<$Res> {
+  _$PlayerControlsStateCopyWithImpl(this._self, this._then);
+
+  final PlayerControlsState _self;
+  final $Res Function(PlayerControlsState) _then;
 
   /// Create a copy of PlayerControlsState
   /// with the given fields replaced by the non-null parameter values.
@@ -252,91 +179,361 @@ class __$$PlayercontrolsStateImplCopyWithImpl<$Res>
     Object? showVolumeSlider = null,
     Object? systemVolume = null,
   }) {
-    return _then(_$PlayercontrolsStateImpl(
+    return _then(_self.copyWith(
       errored: null == errored
-          ? _value.errored
+          ? _self.errored
           : errored // ignore: cast_nullable_to_non_nullable
               as bool,
       position: null == position
-          ? _value.position
+          ? _self.position
           : position // ignore: cast_nullable_to_non_nullable
               as Duration,
       duration: null == duration
-          ? _value.duration
+          ? _self.duration
           : duration // ignore: cast_nullable_to_non_nullable
               as Duration,
       buffer: null == buffer
-          ? _value.buffer
+          ? _self.buffer
           : buffer // ignore: cast_nullable_to_non_nullable
               as Duration,
       fullScreenState: null == fullScreenState
-          ? _value.fullScreenState
+          ? _self.fullScreenState
           : fullScreenState // ignore: cast_nullable_to_non_nullable
               as FullScreenState,
       displayControls: null == displayControls
-          ? _value.displayControls
+          ? _self.displayControls
           : displayControls // ignore: cast_nullable_to_non_nullable
               as bool,
       muted: null == muted
-          ? _value.muted
+          ? _self.muted
           : muted // ignore: cast_nullable_to_non_nullable
               as bool,
       buffering: null == buffering
-          ? _value.buffering
+          ? _self.buffering
           : buffering // ignore: cast_nullable_to_non_nullable
               as bool,
       draggingPositionSlider: null == draggingPositionSlider
-          ? _value.draggingPositionSlider
+          ? _self.draggingPositionSlider
           : draggingPositionSlider // ignore: cast_nullable_to_non_nullable
               as bool,
       doubleTapFastForwardedOpacity: null == doubleTapFastForwardedOpacity
-          ? _value.doubleTapFastForwardedOpacity
+          ? _self.doubleTapFastForwardedOpacity
           : doubleTapFastForwardedOpacity // ignore: cast_nullable_to_non_nullable
               as double,
       doubleTapRewindedOpacity: null == doubleTapRewindedOpacity
-          ? _value.doubleTapRewindedOpacity
+          ? _self.doubleTapRewindedOpacity
           : doubleTapRewindedOpacity // ignore: cast_nullable_to_non_nullable
               as double,
       justDoubleTappedSkip: null == justDoubleTappedSkip
-          ? _value.justDoubleTappedSkip
+          ? _self.justDoubleTappedSkip
           : justDoubleTappedSkip // ignore: cast_nullable_to_non_nullable
               as bool,
       showSponsorBlocked: null == showSponsorBlocked
-          ? _value.showSponsorBlocked
+          ? _self.showSponsorBlocked
           : showSponsorBlocked // ignore: cast_nullable_to_non_nullable
               as bool,
       screenControlStart: null == screenControlStart
-          ? _value.screenControlStart
+          ? _self.screenControlStart
           : screenControlStart // ignore: cast_nullable_to_non_nullable
               as double,
       screenControlStartValue: null == screenControlStartValue
-          ? _value.screenControlStartValue
+          ? _self.screenControlStartValue
           : screenControlStartValue // ignore: cast_nullable_to_non_nullable
               as double,
       showBrightnessSlider: null == showBrightnessSlider
-          ? _value.showBrightnessSlider
+          ? _self.showBrightnessSlider
           : showBrightnessSlider // ignore: cast_nullable_to_non_nullable
               as bool,
       systemBrightness: null == systemBrightness
-          ? _value.systemBrightness
+          ? _self.systemBrightness
           : systemBrightness // ignore: cast_nullable_to_non_nullable
               as double,
       showVolumeSlider: null == showVolumeSlider
-          ? _value.showVolumeSlider
+          ? _self.showVolumeSlider
           : showVolumeSlider // ignore: cast_nullable_to_non_nullable
               as bool,
       systemVolume: null == systemVolume
-          ? _value.systemVolume
+          ? _self.systemVolume
           : systemVolume // ignore: cast_nullable_to_non_nullable
               as double,
     ));
   }
 }
 
+/// Adds pattern-matching-related methods to [PlayerControlsState].
+extension PlayerControlsStatePatterns on PlayerControlsState {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_PlayercontrolsState value)? $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _PlayercontrolsState() when $default != null:
+        return $default(_that);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_PlayercontrolsState value) $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _PlayercontrolsState():
+        return $default(_that);
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_PlayercontrolsState value)? $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _PlayercontrolsState() when $default != null:
+        return $default(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+            bool errored,
+            Duration position,
+            Duration duration,
+            Duration buffer,
+            FullScreenState fullScreenState,
+            bool displayControls,
+            bool muted,
+            bool buffering,
+            bool draggingPositionSlider,
+            double doubleTapFastForwardedOpacity,
+            double doubleTapRewindedOpacity,
+            bool justDoubleTappedSkip,
+            bool showSponsorBlocked,
+            double screenControlStart,
+            double screenControlStartValue,
+            bool showBrightnessSlider,
+            double systemBrightness,
+            bool showVolumeSlider,
+            double systemVolume)?
+        $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _PlayercontrolsState() when $default != null:
+        return $default(
+            _that.errored,
+            _that.position,
+            _that.duration,
+            _that.buffer,
+            _that.fullScreenState,
+            _that.displayControls,
+            _that.muted,
+            _that.buffering,
+            _that.draggingPositionSlider,
+            _that.doubleTapFastForwardedOpacity,
+            _that.doubleTapRewindedOpacity,
+            _that.justDoubleTappedSkip,
+            _that.showSponsorBlocked,
+            _that.screenControlStart,
+            _that.screenControlStartValue,
+            _that.showBrightnessSlider,
+            _that.systemBrightness,
+            _that.showVolumeSlider,
+            _that.systemVolume);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(
+            bool errored,
+            Duration position,
+            Duration duration,
+            Duration buffer,
+            FullScreenState fullScreenState,
+            bool displayControls,
+            bool muted,
+            bool buffering,
+            bool draggingPositionSlider,
+            double doubleTapFastForwardedOpacity,
+            double doubleTapRewindedOpacity,
+            bool justDoubleTappedSkip,
+            bool showSponsorBlocked,
+            double screenControlStart,
+            double screenControlStartValue,
+            bool showBrightnessSlider,
+            double systemBrightness,
+            bool showVolumeSlider,
+            double systemVolume)
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _PlayercontrolsState():
+        return $default(
+            _that.errored,
+            _that.position,
+            _that.duration,
+            _that.buffer,
+            _that.fullScreenState,
+            _that.displayControls,
+            _that.muted,
+            _that.buffering,
+            _that.draggingPositionSlider,
+            _that.doubleTapFastForwardedOpacity,
+            _that.doubleTapRewindedOpacity,
+            _that.justDoubleTappedSkip,
+            _that.showSponsorBlocked,
+            _that.screenControlStart,
+            _that.screenControlStartValue,
+            _that.showBrightnessSlider,
+            _that.systemBrightness,
+            _that.showVolumeSlider,
+            _that.systemVolume);
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult? Function(
+            bool errored,
+            Duration position,
+            Duration duration,
+            Duration buffer,
+            FullScreenState fullScreenState,
+            bool displayControls,
+            bool muted,
+            bool buffering,
+            bool draggingPositionSlider,
+            double doubleTapFastForwardedOpacity,
+            double doubleTapRewindedOpacity,
+            bool justDoubleTappedSkip,
+            bool showSponsorBlocked,
+            double screenControlStart,
+            double screenControlStartValue,
+            bool showBrightnessSlider,
+            double systemBrightness,
+            bool showVolumeSlider,
+            double systemVolume)?
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _PlayercontrolsState() when $default != null:
+        return $default(
+            _that.errored,
+            _that.position,
+            _that.duration,
+            _that.buffer,
+            _that.fullScreenState,
+            _that.displayControls,
+            _that.muted,
+            _that.buffering,
+            _that.draggingPositionSlider,
+            _that.doubleTapFastForwardedOpacity,
+            _that.doubleTapRewindedOpacity,
+            _that.justDoubleTappedSkip,
+            _that.showSponsorBlocked,
+            _that.screenControlStart,
+            _that.screenControlStartValue,
+            _that.showBrightnessSlider,
+            _that.systemBrightness,
+            _that.showVolumeSlider,
+            _that.systemVolume);
+      case _:
+        return null;
+    }
+  }
+}
+
 /// @nodoc
 
-class _$PlayercontrolsStateImpl implements _PlayercontrolsState {
-  const _$PlayercontrolsStateImpl(
+class _PlayercontrolsState implements PlayerControlsState {
+  const _PlayercontrolsState(
       {this.errored = false,
       this.position = Duration.zero,
       this.duration = const Duration(seconds: 1),
@@ -416,16 +613,20 @@ class _$PlayercontrolsStateImpl implements _PlayercontrolsState {
   @JsonKey()
   final double systemVolume;
 
+  /// Create a copy of PlayerControlsState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'PlayerControlsState(errored: $errored, position: $position, duration: $duration, buffer: $buffer, fullScreenState: $fullScreenState, displayControls: $displayControls, muted: $muted, buffering: $buffering, draggingPositionSlider: $draggingPositionSlider, doubleTapFastForwardedOpacity: $doubleTapFastForwardedOpacity, doubleTapRewindedOpacity: $doubleTapRewindedOpacity, justDoubleTappedSkip: $justDoubleTappedSkip, showSponsorBlocked: $showSponsorBlocked, screenControlStart: $screenControlStart, screenControlStartValue: $screenControlStartValue, showBrightnessSlider: $showBrightnessSlider, systemBrightness: $systemBrightness, showVolumeSlider: $showVolumeSlider, systemVolume: $systemVolume)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$PlayercontrolsStateCopyWith<_PlayercontrolsState> get copyWith =>
+      __$PlayercontrolsStateCopyWithImpl<_PlayercontrolsState>(
+          this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$PlayercontrolsStateImpl &&
+            other is _PlayercontrolsState &&
             (identical(other.errored, errored) || other.errored == errored) &&
             (identical(other.position, position) ||
                 other.position == position) &&
@@ -491,81 +692,154 @@ class _$PlayercontrolsStateImpl implements _PlayercontrolsState {
         systemVolume
       ]);
 
+  @override
+  String toString() {
+    return 'PlayerControlsState(errored: $errored, position: $position, duration: $duration, buffer: $buffer, fullScreenState: $fullScreenState, displayControls: $displayControls, muted: $muted, buffering: $buffering, draggingPositionSlider: $draggingPositionSlider, doubleTapFastForwardedOpacity: $doubleTapFastForwardedOpacity, doubleTapRewindedOpacity: $doubleTapRewindedOpacity, justDoubleTappedSkip: $justDoubleTappedSkip, showSponsorBlocked: $showSponsorBlocked, screenControlStart: $screenControlStart, screenControlStartValue: $screenControlStartValue, showBrightnessSlider: $showBrightnessSlider, systemBrightness: $systemBrightness, showVolumeSlider: $showVolumeSlider, systemVolume: $systemVolume)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$PlayercontrolsStateCopyWith<$Res>
+    implements $PlayerControlsStateCopyWith<$Res> {
+  factory _$PlayercontrolsStateCopyWith(_PlayercontrolsState value,
+          $Res Function(_PlayercontrolsState) _then) =
+      __$PlayercontrolsStateCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {bool errored,
+      Duration position,
+      Duration duration,
+      Duration buffer,
+      FullScreenState fullScreenState,
+      bool displayControls,
+      bool muted,
+      bool buffering,
+      bool draggingPositionSlider,
+      double doubleTapFastForwardedOpacity,
+      double doubleTapRewindedOpacity,
+      bool justDoubleTappedSkip,
+      bool showSponsorBlocked,
+      double screenControlStart,
+      double screenControlStartValue,
+      bool showBrightnessSlider,
+      double systemBrightness,
+      bool showVolumeSlider,
+      double systemVolume});
+}
+
+/// @nodoc
+class __$PlayercontrolsStateCopyWithImpl<$Res>
+    implements _$PlayercontrolsStateCopyWith<$Res> {
+  __$PlayercontrolsStateCopyWithImpl(this._self, this._then);
+
+  final _PlayercontrolsState _self;
+  final $Res Function(_PlayercontrolsState) _then;
+
   /// Create a copy of PlayerControlsState
   /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$PlayercontrolsStateImplCopyWith<_$PlayercontrolsStateImpl> get copyWith =>
-      __$$PlayercontrolsStateImplCopyWithImpl<_$PlayercontrolsStateImpl>(
-          this, _$identity);
+  $Res call({
+    Object? errored = null,
+    Object? position = null,
+    Object? duration = null,
+    Object? buffer = null,
+    Object? fullScreenState = null,
+    Object? displayControls = null,
+    Object? muted = null,
+    Object? buffering = null,
+    Object? draggingPositionSlider = null,
+    Object? doubleTapFastForwardedOpacity = null,
+    Object? doubleTapRewindedOpacity = null,
+    Object? justDoubleTappedSkip = null,
+    Object? showSponsorBlocked = null,
+    Object? screenControlStart = null,
+    Object? screenControlStartValue = null,
+    Object? showBrightnessSlider = null,
+    Object? systemBrightness = null,
+    Object? showVolumeSlider = null,
+    Object? systemVolume = null,
+  }) {
+    return _then(_PlayercontrolsState(
+      errored: null == errored
+          ? _self.errored
+          : errored // ignore: cast_nullable_to_non_nullable
+              as bool,
+      position: null == position
+          ? _self.position
+          : position // ignore: cast_nullable_to_non_nullable
+              as Duration,
+      duration: null == duration
+          ? _self.duration
+          : duration // ignore: cast_nullable_to_non_nullable
+              as Duration,
+      buffer: null == buffer
+          ? _self.buffer
+          : buffer // ignore: cast_nullable_to_non_nullable
+              as Duration,
+      fullScreenState: null == fullScreenState
+          ? _self.fullScreenState
+          : fullScreenState // ignore: cast_nullable_to_non_nullable
+              as FullScreenState,
+      displayControls: null == displayControls
+          ? _self.displayControls
+          : displayControls // ignore: cast_nullable_to_non_nullable
+              as bool,
+      muted: null == muted
+          ? _self.muted
+          : muted // ignore: cast_nullable_to_non_nullable
+              as bool,
+      buffering: null == buffering
+          ? _self.buffering
+          : buffering // ignore: cast_nullable_to_non_nullable
+              as bool,
+      draggingPositionSlider: null == draggingPositionSlider
+          ? _self.draggingPositionSlider
+          : draggingPositionSlider // ignore: cast_nullable_to_non_nullable
+              as bool,
+      doubleTapFastForwardedOpacity: null == doubleTapFastForwardedOpacity
+          ? _self.doubleTapFastForwardedOpacity
+          : doubleTapFastForwardedOpacity // ignore: cast_nullable_to_non_nullable
+              as double,
+      doubleTapRewindedOpacity: null == doubleTapRewindedOpacity
+          ? _self.doubleTapRewindedOpacity
+          : doubleTapRewindedOpacity // ignore: cast_nullable_to_non_nullable
+              as double,
+      justDoubleTappedSkip: null == justDoubleTappedSkip
+          ? _self.justDoubleTappedSkip
+          : justDoubleTappedSkip // ignore: cast_nullable_to_non_nullable
+              as bool,
+      showSponsorBlocked: null == showSponsorBlocked
+          ? _self.showSponsorBlocked
+          : showSponsorBlocked // ignore: cast_nullable_to_non_nullable
+              as bool,
+      screenControlStart: null == screenControlStart
+          ? _self.screenControlStart
+          : screenControlStart // ignore: cast_nullable_to_non_nullable
+              as double,
+      screenControlStartValue: null == screenControlStartValue
+          ? _self.screenControlStartValue
+          : screenControlStartValue // ignore: cast_nullable_to_non_nullable
+              as double,
+      showBrightnessSlider: null == showBrightnessSlider
+          ? _self.showBrightnessSlider
+          : showBrightnessSlider // ignore: cast_nullable_to_non_nullable
+              as bool,
+      systemBrightness: null == systemBrightness
+          ? _self.systemBrightness
+          : systemBrightness // ignore: cast_nullable_to_non_nullable
+              as double,
+      showVolumeSlider: null == showVolumeSlider
+          ? _self.showVolumeSlider
+          : showVolumeSlider // ignore: cast_nullable_to_non_nullable
+              as bool,
+      systemVolume: null == systemVolume
+          ? _self.systemVolume
+          : systemVolume // ignore: cast_nullable_to_non_nullable
+              as double,
+    ));
+  }
 }
 
-abstract class _PlayercontrolsState implements PlayerControlsState {
-  const factory _PlayercontrolsState(
-      {final bool errored,
-      final Duration position,
-      final Duration duration,
-      final Duration buffer,
-      final FullScreenState fullScreenState,
-      final bool displayControls,
-      final bool muted,
-      final bool buffering,
-      final bool draggingPositionSlider,
-      final double doubleTapFastForwardedOpacity,
-      final double doubleTapRewindedOpacity,
-      final bool justDoubleTappedSkip,
-      final bool showSponsorBlocked,
-      final double screenControlStart,
-      final double screenControlStartValue,
-      final bool showBrightnessSlider,
-      final double systemBrightness,
-      final bool showVolumeSlider,
-      final double systemVolume}) = _$PlayercontrolsStateImpl;
-
-  @override
-  bool get errored;
-  @override
-  Duration get position;
-  @override
-  Duration get duration;
-  @override
-  Duration get buffer;
-  @override
-  FullScreenState get fullScreenState;
-  @override
-  bool get displayControls;
-  @override
-  bool get muted;
-  @override
-  bool get buffering;
-  @override
-  bool get draggingPositionSlider;
-  @override
-  double get doubleTapFastForwardedOpacity;
-  @override
-  double get doubleTapRewindedOpacity;
-  @override
-  bool get justDoubleTappedSkip;
-  @override
-  bool get showSponsorBlocked;
-  @override
-  double get screenControlStart;
-  @override
-  double get screenControlStartValue; // system setting adjustments
-  @override
-  bool get showBrightnessSlider;
-  @override
-  double get systemBrightness;
-  @override
-  bool get showVolumeSlider;
-  @override
-  double get systemVolume;
-
-  /// Create a copy of PlayerControlsState
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$PlayercontrolsStateImplCopyWith<_$PlayercontrolsStateImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+// dart format on

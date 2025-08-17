@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,74 +9,49 @@ part of 'download_manager.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$DownloadManagerState {
-  List<DownloadedVideo> get videos => throw _privateConstructorUsedError;
-  Map<String, DownloadProgress> get downloadProgresses =>
-      throw _privateConstructorUsedError;
+  List<DownloadedVideo> get videos;
+  Map<String, DownloadProgress> get downloadProgresses;
 
   /// Create a copy of DownloadManagerState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $DownloadManagerStateCopyWith<DownloadManagerState> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $DownloadManagerStateCopyWith<$Res> {
-  factory $DownloadManagerStateCopyWith(DownloadManagerState value,
-          $Res Function(DownloadManagerState) then) =
-      _$DownloadManagerStateCopyWithImpl<$Res, DownloadManagerState>;
-  @useResult
-  $Res call(
-      {List<DownloadedVideo> videos,
-      Map<String, DownloadProgress> downloadProgresses});
-}
-
-/// @nodoc
-class _$DownloadManagerStateCopyWithImpl<$Res,
-        $Val extends DownloadManagerState>
-    implements $DownloadManagerStateCopyWith<$Res> {
-  _$DownloadManagerStateCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of DownloadManagerState
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
+  $DownloadManagerStateCopyWith<DownloadManagerState> get copyWith =>
+      _$DownloadManagerStateCopyWithImpl<DownloadManagerState>(
+          this as DownloadManagerState, _$identity);
+
   @override
-  $Res call({
-    Object? videos = null,
-    Object? downloadProgresses = null,
-  }) {
-    return _then(_value.copyWith(
-      videos: null == videos
-          ? _value.videos
-          : videos // ignore: cast_nullable_to_non_nullable
-              as List<DownloadedVideo>,
-      downloadProgresses: null == downloadProgresses
-          ? _value.downloadProgresses
-          : downloadProgresses // ignore: cast_nullable_to_non_nullable
-              as Map<String, DownloadProgress>,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is DownloadManagerState &&
+            const DeepCollectionEquality().equals(other.videos, videos) &&
+            const DeepCollectionEquality()
+                .equals(other.downloadProgresses, downloadProgresses));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(videos),
+      const DeepCollectionEquality().hash(downloadProgresses));
+
+  @override
+  String toString() {
+    return 'DownloadManagerState(videos: $videos, downloadProgresses: $downloadProgresses)';
   }
 }
 
 /// @nodoc
-abstract class _$$DownloadManagerStateImplCopyWith<$Res>
-    implements $DownloadManagerStateCopyWith<$Res> {
-  factory _$$DownloadManagerStateImplCopyWith(_$DownloadManagerStateImpl value,
-          $Res Function(_$DownloadManagerStateImpl) then) =
-      __$$DownloadManagerStateImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $DownloadManagerStateCopyWith<$Res> {
+  factory $DownloadManagerStateCopyWith(DownloadManagerState value,
+          $Res Function(DownloadManagerState) _then) =
+      _$DownloadManagerStateCopyWithImpl;
   @useResult
   $Res call(
       {List<DownloadedVideo> videos,
@@ -84,12 +59,12 @@ abstract class _$$DownloadManagerStateImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$DownloadManagerStateImplCopyWithImpl<$Res>
-    extends _$DownloadManagerStateCopyWithImpl<$Res, _$DownloadManagerStateImpl>
-    implements _$$DownloadManagerStateImplCopyWith<$Res> {
-  __$$DownloadManagerStateImplCopyWithImpl(_$DownloadManagerStateImpl _value,
-      $Res Function(_$DownloadManagerStateImpl) _then)
-      : super(_value, _then);
+class _$DownloadManagerStateCopyWithImpl<$Res>
+    implements $DownloadManagerStateCopyWith<$Res> {
+  _$DownloadManagerStateCopyWithImpl(this._self, this._then);
+
+  final DownloadManagerState _self;
+  final $Res Function(DownloadManagerState) _then;
 
   /// Create a copy of DownloadManagerState
   /// with the given fields replaced by the non-null parameter values.
@@ -99,23 +74,182 @@ class __$$DownloadManagerStateImplCopyWithImpl<$Res>
     Object? videos = null,
     Object? downloadProgresses = null,
   }) {
-    return _then(_$DownloadManagerStateImpl(
+    return _then(_self.copyWith(
       videos: null == videos
-          ? _value._videos
+          ? _self.videos
           : videos // ignore: cast_nullable_to_non_nullable
               as List<DownloadedVideo>,
       downloadProgresses: null == downloadProgresses
-          ? _value._downloadProgresses
+          ? _self.downloadProgresses
           : downloadProgresses // ignore: cast_nullable_to_non_nullable
               as Map<String, DownloadProgress>,
     ));
   }
 }
 
+/// Adds pattern-matching-related methods to [DownloadManagerState].
+extension DownloadManagerStatePatterns on DownloadManagerState {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_DownloadManagerState value)? $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _DownloadManagerState() when $default != null:
+        return $default(_that);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_DownloadManagerState value) $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _DownloadManagerState():
+        return $default(_that);
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_DownloadManagerState value)? $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _DownloadManagerState() when $default != null:
+        return $default(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(List<DownloadedVideo> videos,
+            Map<String, DownloadProgress> downloadProgresses)?
+        $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _DownloadManagerState() when $default != null:
+        return $default(_that.videos, _that.downloadProgresses);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(List<DownloadedVideo> videos,
+            Map<String, DownloadProgress> downloadProgresses)
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _DownloadManagerState():
+        return $default(_that.videos, _that.downloadProgresses);
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult? Function(List<DownloadedVideo> videos,
+            Map<String, DownloadProgress> downloadProgresses)?
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _DownloadManagerState() when $default != null:
+        return $default(_that.videos, _that.downloadProgresses);
+      case _:
+        return null;
+    }
+  }
+}
+
 /// @nodoc
 
-class _$DownloadManagerStateImpl extends _DownloadManagerState {
-  const _$DownloadManagerStateImpl(
+class _DownloadManagerState extends DownloadManagerState {
+  const _DownloadManagerState(
       {final List<DownloadedVideo> videos = const [],
       final Map<String, DownloadProgress> downloadProgresses = const {}})
       : _videos = videos,
@@ -141,16 +275,20 @@ class _$DownloadManagerStateImpl extends _DownloadManagerState {
     return EqualUnmodifiableMapView(_downloadProgresses);
   }
 
+  /// Create a copy of DownloadManagerState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'DownloadManagerState(videos: $videos, downloadProgresses: $downloadProgresses)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$DownloadManagerStateCopyWith<_DownloadManagerState> get copyWith =>
+      __$DownloadManagerStateCopyWithImpl<_DownloadManagerState>(
+          this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$DownloadManagerStateImpl &&
+            other is _DownloadManagerState &&
             const DeepCollectionEquality().equals(other._videos, _videos) &&
             const DeepCollectionEquality()
                 .equals(other._downloadProgresses, _downloadProgresses));
@@ -162,33 +300,52 @@ class _$DownloadManagerStateImpl extends _DownloadManagerState {
       const DeepCollectionEquality().hash(_videos),
       const DeepCollectionEquality().hash(_downloadProgresses));
 
+  @override
+  String toString() {
+    return 'DownloadManagerState(videos: $videos, downloadProgresses: $downloadProgresses)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$DownloadManagerStateCopyWith<$Res>
+    implements $DownloadManagerStateCopyWith<$Res> {
+  factory _$DownloadManagerStateCopyWith(_DownloadManagerState value,
+          $Res Function(_DownloadManagerState) _then) =
+      __$DownloadManagerStateCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {List<DownloadedVideo> videos,
+      Map<String, DownloadProgress> downloadProgresses});
+}
+
+/// @nodoc
+class __$DownloadManagerStateCopyWithImpl<$Res>
+    implements _$DownloadManagerStateCopyWith<$Res> {
+  __$DownloadManagerStateCopyWithImpl(this._self, this._then);
+
+  final _DownloadManagerState _self;
+  final $Res Function(_DownloadManagerState) _then;
+
   /// Create a copy of DownloadManagerState
   /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$DownloadManagerStateImplCopyWith<_$DownloadManagerStateImpl>
-      get copyWith =>
-          __$$DownloadManagerStateImplCopyWithImpl<_$DownloadManagerStateImpl>(
-              this, _$identity);
+  $Res call({
+    Object? videos = null,
+    Object? downloadProgresses = null,
+  }) {
+    return _then(_DownloadManagerState(
+      videos: null == videos
+          ? _self._videos
+          : videos // ignore: cast_nullable_to_non_nullable
+              as List<DownloadedVideo>,
+      downloadProgresses: null == downloadProgresses
+          ? _self._downloadProgresses
+          : downloadProgresses // ignore: cast_nullable_to_non_nullable
+              as Map<String, DownloadProgress>,
+    ));
+  }
 }
 
-abstract class _DownloadManagerState extends DownloadManagerState {
-  const factory _DownloadManagerState(
-          {final List<DownloadedVideo> videos,
-          final Map<String, DownloadProgress> downloadProgresses}) =
-      _$DownloadManagerStateImpl;
-  const _DownloadManagerState._() : super._();
-
-  @override
-  List<DownloadedVideo> get videos;
-  @override
-  Map<String, DownloadProgress> get downloadProgresses;
-
-  /// Create a copy of DownloadManagerState
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$DownloadManagerStateImplCopyWith<_$DownloadManagerStateImpl>
-      get copyWith => throw _privateConstructorUsedError;
-}
+// dart format on
