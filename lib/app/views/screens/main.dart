@@ -44,12 +44,12 @@ class MainScreen extends StatelessWidget {
                 left: playerHorizontalPosition.width,
                 bottom: 0,
                 right: playerHorizontalPosition.width,
-                child: const PlayerPlaceHolder()),
+                child: SafeArea(child: const PlayerPlaceHolder())),
             Player(constraints.maxHeight),
             if (globalLoading)
               Positioned(
                   child: Container(
-                      color: colors.surface.withOpacity(0.5),
+                      color: colors.surface.withValues(alpha: 0.5),
                       child: const Center(
                         child: CircularProgressIndicator(),
                       )))

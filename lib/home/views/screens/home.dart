@@ -178,38 +178,34 @@ class _MainScreenState extends State<MainContentScreen> {
                         ),
                       ],
                     ),
-                    body: SafeArea(
-                        bottom: false,
-                        child: Row(
-                          children: [
-                            if (deviceType == DeviceType.tablet &&
-                                allowedPages.length > 2)
-                              OrientationBuilder(
-                                builder: (context, orientation) =>
-                                    NavigationRail(
-                                        extended: getOrientation() ==
-                                            Orientation.landscape,
-                                        onDestinationSelected:
-                                            tabsRouter.setActiveIndex,
-                                        destinations: allowedPages
-                                            .map((e) =>
-                                                e.getNavigationRailWidget(
-                                                    context))
-                                            .toList(),
-                                        selectedIndex: tabsRouter.activeIndex),
-                              ),
-                            Expanded(
-                              child: Container(
-                                  // home handles its own padding because we don't want to cut horizontal scroll lists on the right
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal:
-                                          selectedPage == HomeDataSource.home
-                                              ? 0
-                                              : innerHorizontalPadding),
-                                  child: child),
-                            ),
-                          ],
-                        )));
+                    body: Row(
+                      children: [
+                        if (deviceType == DeviceType.tablet &&
+                            allowedPages.length > 2)
+                          OrientationBuilder(
+                            builder: (context, orientation) => NavigationRail(
+                                extended:
+                                    getOrientation() == Orientation.landscape,
+                                onDestinationSelected:
+                                    tabsRouter.setActiveIndex,
+                                destinations: allowedPages
+                                    .map((e) =>
+                                        e.getNavigationRailWidget(context))
+                                    .toList(),
+                                selectedIndex: tabsRouter.activeIndex),
+                          ),
+                        Expanded(
+                          child: Container(
+                              // home handles its own padding because we don't want to cut horizontal scroll lists on the right
+                              padding: EdgeInsets.symmetric(
+                                  horizontal:
+                                      selectedPage == HomeDataSource.home
+                                          ? 0
+                                          : innerHorizontalPadding),
+                              child: child),
+                        ),
+                      ],
+                    ));
               });
     });
   }
