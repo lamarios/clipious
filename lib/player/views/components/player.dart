@@ -124,6 +124,7 @@ class Player extends StatelessWidget {
                 child: showPlayer
                     ? GestureDetector(
                         child: SafeArea(
+                          bottom: !isDragging,
                           top: false,
                           child: AnimatedContainer(
                             duration: animationDuration,
