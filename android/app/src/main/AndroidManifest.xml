@@ -21,14 +21,14 @@
     <application
         android:name="${applicationName}"
         android:banner="@drawable/banner"
+        android:enableOnBackInvokedCallback="false"
         android:icon="@mipmap/ic_launcher"
+
         android:label="Clipious"
         android:networkSecurityConfig="@xml/network_security_config">
-
         <meta-data
             android:name="io.flutter.network-policy"
             android:resource="@xml/network_security_config" />
-        <!--            android:enableOnBackInvokedCallback="true"-->
         <activity
             android:name="com.linusu.flutter_web_auth_2.CallbackActivity"
             android:exported="true">
