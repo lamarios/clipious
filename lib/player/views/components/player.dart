@@ -123,141 +123,156 @@ class Player extends StatelessWidget {
                 elevation: 0,
                 child: showPlayer
                     ? GestureDetector(
-                        child: AnimatedContainer(
-                          duration: animationDuration,
-                          color: colors.surface,
-                          padding: EdgeInsets.symmetric(
-                              horizontal: isMini && !isDragging ? 7 : 0),
-                          child: ClipRRect(
-                            borderRadius: isMini
-                                ? BorderRadius.circular(10)
-                                : BorderRadius.circular(0),
-                            child: AnimatedContainer(
-                              duration: animationDuration,
-                              decoration: BoxDecoration(
-                                color: isFullScreen
-                                    ? Colors.black
-                                    : isMini
-                                        ? colors.secondaryContainer
-                                        : colors.surface,
-                              ),
-                              child: Column(
-                                mainAxisSize: isMini
-                                    ? MainAxisSize.min
-                                    : MainAxisSize.max,
-                                children: [
-                                  isMini || isPip || isFullScreen
-                                      ? const SizedBox.shrink()
-                                      : AppBar(
-                                          title: Text(locals.videoPlayer),
-                                          leading: IconButton(
-                                            icon: const Icon(Icons.expand_more),
-                                            onPressed: cubit.showMiniPlayer,
+                        child: SafeArea(
+                          top: false,
+                          child: AnimatedContainer(
+                            duration: animationDuration,
+                            color: colors.surface,
+                            padding: EdgeInsets.symmetric(
+                                horizontal: isMini && !isDragging ? 7 : 0),
+                            child: ClipRRect(
+                              borderRadius: isMini
+                                  ? BorderRadius.circular(10)
+                                  : BorderRadius.circular(0),
+                              child: AnimatedContainer(
+                                duration: animationDuration,
+                                decoration: BoxDecoration(
+                                  color: isFullScreen
+                                      ? Colors.black
+                                      : isMini
+                                          ? colors.secondaryContainer
+                                          : colors.surface,
+                                ),
+                                child: Column(
+                                  mainAxisSize: isMini
+                                      ? MainAxisSize.min
+                                      : MainAxisSize.max,
+                                  children: [
+                                    isMini || isPip || isFullScreen
+                                        ? const SizedBox.shrink()
+                                        : AppBar(
+                                            title: Text(locals.videoPlayer),
+                                            leading: IconButton(
+                                              icon:
+                                                  const Icon(Icons.expand_more),
+                                              onPressed: cubit.showMiniPlayer,
+                                            ),
+                                            actions: isHidden ||
+                                                    currentlyPlaying == null
+                                                ? []
+                                                : [
+                                                    VideoShareButton(
+                                                      video: currentlyPlaying,
+                                                      showTimestampOption: true,
+                                                    ),
+                                                    AddToPlayListButton(
+                                                        key: ValueKey(
+                                                            currentlyPlaying),
+                                                        videoId:
+                                                            currentlyPlaying
+                                                                .videoId)
+                                                  ],
                                           ),
-                                          actions: isHidden ||
-                                                  currentlyPlaying == null
-                                              ? []
-                                              : [
-                                                  VideoShareButton(
-                                                    video: currentlyPlaying,
-                                                    showTimestampOption: true,
-                                                  ),
-                                                  AddToPlayListButton(
-                                                      key: ValueKey(
-                                                          currentlyPlaying),
-                                                      videoId: currentlyPlaying
-                                                          .videoId)
-                                                ],
+                                    Flexible(
+                                      fit: isMini
+                                          ? FlexFit.loose
+                                          : FlexFit.tight,
+                                      child: AnimatedContainer(
+                                        // this is just to animate the transition to mini player
+                                        constraints: BoxConstraints(
+                                          maxHeight: isFullScreen
+                                              ? MediaQuery.of(context)
+                                                  .size
+                                                  .height
+                                              : isMini
+                                                  ? targetHeight
+                                                  : 500,
                                         ),
-                                  Flexible(
-                                    fit: isMini ? FlexFit.loose : FlexFit.tight,
-                                    child: AnimatedContainer(
-                                      // this is just to animate the transition to mini player
-                                      constraints: BoxConstraints(
-                                        maxHeight: isFullScreen
-                                            ? MediaQuery.of(context).size.height
-                                            : isMini
-                                                ? targetHeight
-                                                : 500,
-                                      ),
-                                      duration: animationDuration,
-                                      child: Row(
-                                        mainAxisAlignment: isMini
-                                            ? MainAxisAlignment.spaceBetween
-                                            : MainAxisAlignment.center,
-                                        children: [
-                                          Flexible(
-                                              fit: isMini
-                                                  ? FlexFit.loose
-                                                  : FlexFit.tight,
-                                              flex: deviceType ==
-                                                      DeviceType.tablet
-                                                  ? 2
-                                                  : 1,
-                                              child: Column(
-                                                mainAxisSize: isMini
-                                                    ? MainAxisSize.min
-                                                    : MainAxisSize.max,
-                                                mainAxisAlignment: isFullScreen
-                                                    ? MainAxisAlignment.center
-                                                    : MainAxisAlignment.start,
-                                                crossAxisAlignment: isMini
-                                                    ? CrossAxisAlignment.start
-                                                    : CrossAxisAlignment.center,
-                                                children: [
-                                                  Container(
-                                                      constraints: BoxConstraints(
-                                                          maxHeight: isMini
-                                                              ? targetHeight
-                                                              : MediaQuery.sizeOf(
-                                                                      context)
-                                                                  .height),
-                                                      child: videoPlayer),
-                                                  if (!isFullScreen)
-                                                    ConditionalWrap(
-                                                        wrapIf: !isMini,
-                                                        wrapper: (child) =>
-                                                            Expanded(
-                                                                child: child),
-                                                        child: DeviceWidget(
-                                                            orientation:
-                                                                orientation,
-                                                            portraitTabletAsPhone:
-                                                                true,
-                                                            tablet:
-                                                                const TabletExpandedPlayer(),
-                                                            phone:
-                                                                const ExpandedPlayer()))
-                                                ],
-                                              )),
-                                          if (!isFullScreen && !isMini)
-                                            DeviceWidget(
-                                                orientation: orientation,
-                                                portraitTabletAsPhone: true,
-                                                phone: const SizedBox.shrink(),
-                                                tablet: const Expanded(
-                                                    flex: 1,
-                                                    child: ExpandedSideBar())),
-                                          ConditionalWrap(
-                                              wrapper: (child) => Flexible(
-                                                  fit: FlexFit.tight,
-                                                  flex: 2,
-                                                  child: child),
-                                              wrapIf: isMini,
-                                              child: const MiniPlayer()),
-                                          if (isMini)
-                                            GestureDetector(
-                                              onTap: cubit.hide,
-                                              child: const Padding(
-                                                padding: EdgeInsets.all(8.0),
-                                                child: Icon(Icons.clear),
-                                              ),
-                                            )
-                                        ],
+                                        duration: animationDuration,
+                                        child: Row(
+                                          mainAxisAlignment: isMini
+                                              ? MainAxisAlignment.spaceBetween
+                                              : MainAxisAlignment.center,
+                                          children: [
+                                            Flexible(
+                                                fit: isMini
+                                                    ? FlexFit.loose
+                                                    : FlexFit.tight,
+                                                flex: deviceType ==
+                                                        DeviceType.tablet
+                                                    ? 2
+                                                    : 1,
+                                                child: Column(
+                                                  mainAxisSize: isMini
+                                                      ? MainAxisSize.min
+                                                      : MainAxisSize.max,
+                                                  mainAxisAlignment:
+                                                      isFullScreen
+                                                          ? MainAxisAlignment
+                                                              .center
+                                                          : MainAxisAlignment
+                                                              .start,
+                                                  crossAxisAlignment: isMini
+                                                      ? CrossAxisAlignment.start
+                                                      : CrossAxisAlignment
+                                                          .center,
+                                                  children: [
+                                                    Container(
+                                                        constraints: BoxConstraints(
+                                                            maxHeight: isMini
+                                                                ? targetHeight
+                                                                : MediaQuery.sizeOf(
+                                                                        context)
+                                                                    .height),
+                                                        child: videoPlayer),
+                                                    if (!isFullScreen)
+                                                      ConditionalWrap(
+                                                          wrapIf: !isMini,
+                                                          wrapper: (child) =>
+                                                              Expanded(
+                                                                  child: child),
+                                                          child: DeviceWidget(
+                                                              orientation:
+                                                                  orientation,
+                                                              portraitTabletAsPhone:
+                                                                  true,
+                                                              tablet:
+                                                                  const TabletExpandedPlayer(),
+                                                              phone:
+                                                                  const ExpandedPlayer()))
+                                                  ],
+                                                )),
+                                            if (!isFullScreen && !isMini)
+                                              DeviceWidget(
+                                                  orientation: orientation,
+                                                  portraitTabletAsPhone: true,
+                                                  phone:
+                                                      const SizedBox.shrink(),
+                                                  tablet: const Expanded(
+                                                      flex: 1,
+                                                      child:
+                                                          ExpandedSideBar())),
+                                            ConditionalWrap(
+                                                wrapper: (child) => Flexible(
+                                                    fit: FlexFit.tight,
+                                                    flex: 2,
+                                                    child: child),
+                                                wrapIf: isMini,
+                                                child: const MiniPlayer()),
+                                            if (isMini)
+                                              GestureDetector(
+                                                onTap: cubit.hide,
+                                                child: const Padding(
+                                                  padding: EdgeInsets.all(8.0),
+                                                  child: Icon(Icons.clear),
+                                                ),
+                                              )
+                                          ],
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             ),
                           ),

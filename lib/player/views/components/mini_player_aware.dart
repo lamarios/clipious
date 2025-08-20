@@ -25,7 +25,7 @@ class MiniPlayerAware extends StatelessWidget {
               bottom: !isHidden && isMini && !isClosing ? targetHeight : 0),
           duration: animationDuration,
           curve: Curves.easeInOutQuad,
-          child: child,
+          child: SafeArea(bottom: !isHidden && isMini, child: child),
         );
       },
     );

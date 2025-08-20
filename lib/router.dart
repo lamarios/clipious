@@ -116,6 +116,13 @@ class AppRouter extends RootStackRouter {
   AppRouter({required this.hasServer});
 
   @override
+  void pop<T extends Object?>([T? result]) {
+    print('YOOOO');
+    // TODO: implement pop
+    super.pop(result);
+  }
+
+  @override
   List<AutoRoute> get routes {
     return isTv
         ? [
@@ -245,9 +252,9 @@ class AppRouter extends RootStackRouter {
       resolver.next(true);
     } catch (e) {
       if (isTv) {
-        resolver.redirect(const TvWelcomeWizardRoute(), replace: true);
+        resolver.redirectUntil(const TvWelcomeWizardRoute(), replace: true);
       } else {
-        resolver.redirect(const WelcomeWizardRoute(), replace: true);
+        resolver.redirectUntil(const WelcomeWizardRoute(), replace: true);
       }
     }
     // TODO: implement onNavigation
