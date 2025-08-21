@@ -126,6 +126,8 @@ class Player extends StatelessWidget {
                         child: SafeArea(
                           bottom: !isDragging,
                           top: false,
+                          left: !isFullScreen,
+                          right: !isFullScreen,
                           child: AnimatedContainer(
                             duration: animationDuration,
                             color: colors.surface,
