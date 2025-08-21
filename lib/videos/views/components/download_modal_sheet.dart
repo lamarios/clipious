@@ -25,7 +25,7 @@ class DownloadModalSheet extends StatelessWidget {
       this.onDownloadStarted,
       this.onDownload});
 
-  static showVideoModalSheet(BuildContext context, Video video,
+  static void showVideoModalSheet(BuildContext context, Video video,
       {Function(bool isDownloadStarted)? onDownloadStarted,
       Function()? onDownload}) {
     showModalBottomSheet<void>(
