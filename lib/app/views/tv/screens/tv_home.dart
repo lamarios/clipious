@@ -99,7 +99,7 @@ class TvHomeScreen extends StatelessWidget {
                       curve: Curves.easeInOutQuad,
                       decoration: BoxDecoration(
                           color: homeState
-                              ? colors.secondaryContainer.withOpacity(0.5)
+                              ? colors.secondaryContainer.withValues(alpha: 0.5)
                               : Colors.transparent),
                       child: Padding(
                           padding: EdgeInsets.only(
@@ -161,7 +161,7 @@ class TvHomeScreen extends StatelessWidget {
                                               },
                                               unfocusedColor: colors
                                                   .secondaryContainer
-                                                  .withOpacity(0.0),
+                                                  .withValues(alpha: 0.0),
                                               child: Padding(
                                                 padding:
                                                     const EdgeInsets.all(8),
@@ -188,7 +188,7 @@ class TvHomeScreen extends StatelessWidget {
                                       homeCubit.menuItemFocusChanged,
                                   onPressed: (context) => openSettings(context),
                                   unfocusedColor: colors.secondaryContainer
-                                      .withOpacity(0.0),
+                                      .withValues(alpha: 0.0),
                                   child: Padding(
                                     padding: const EdgeInsets.all(8),
                                     child: Row(

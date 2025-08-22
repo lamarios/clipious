@@ -233,7 +233,7 @@ class VideoFilterSetupScreen extends StatelessWidget {
                                           color: isSelected
                                               ? colors.primaryContainer
                                               : colors.primaryContainer
-                                                  .withOpacity(0.4)),
+                                                  .withValues(alpha: 0.4)),
                                       duration: animationDuration,
                                       curve: Curves.easeInOutQuad,
                                       child: Row(

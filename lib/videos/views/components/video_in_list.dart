@@ -69,7 +69,7 @@ class VideoListItem extends StatelessWidget {
     var textTheme = Theme.of(context).textTheme;
 
     TextStyle filterStyle = (textTheme.bodySmall ?? const TextStyle())
-        .copyWith(color: colorScheme.secondary.withOpacity(0.7));
+        .copyWith(color: colorScheme.secondary.withValues(alpha: 0.7));
 
     String title = video?.title ?? offlineVideo?.title ?? '';
     String author = video?.author ?? offlineVideo?.author ?? '';
@@ -283,7 +283,8 @@ class VideoListItem extends StatelessWidget {
                                                     height: 25,
                                                     decoration: BoxDecoration(
                                                         color: Colors.black
-                                                            .withOpacity(0.75),
+                                                            .withValues(
+                                                                alpha: 0.75),
                                                         borderRadius:
                                                             BorderRadius
                                                                 .circular(5)),

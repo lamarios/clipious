@@ -16,12 +16,14 @@ class VideoModalSheet extends StatelessWidget {
   const VideoModalSheet({super.key, required this.video});
 
   static void showVideoModalSheet(BuildContext context, Video video) {
-    showModalBottomSheet<void>(
+    showSafeModalBottomSheet<void>(
         context: context,
         showDragHandle: true,
         builder: (BuildContext context) {
-          return VideoModalSheet(
-            video: video,
+          return SafeArea(
+            child: VideoModalSheet(
+              video: video,
+            ),
           );
         });
   }

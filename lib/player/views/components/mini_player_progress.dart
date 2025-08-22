@@ -25,7 +25,7 @@ class MiniPlayerProgress extends StatelessWidget {
                 constraints: const BoxConstraints(maxWidth: 300),
                 height: 2,
                 decoration: BoxDecoration(
-                  color: colors.primary.withOpacity(0.2),
+                  color: colors.primary.withValues(alpha: 0.2),
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: AnimatedFractionallySizedBox(

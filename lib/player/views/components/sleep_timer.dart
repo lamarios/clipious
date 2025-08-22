@@ -13,7 +13,7 @@ class SleepTimerSheet extends StatelessWidget {
   const SleepTimerSheet({super.key});
 
   static Future<SleepTimer?> show(BuildContext context) {
-    return showModalBottomSheet<SleepTimer?>(
+    return showSafeModalBottomSheet<SleepTimer?>(
         showDragHandle: true,
         context: context,
         builder: (context) => const SleepTimerSheet());

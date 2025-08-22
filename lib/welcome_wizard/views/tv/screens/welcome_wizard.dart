@@ -62,7 +62,7 @@ class TvWelcomeWizardScreen extends StatelessWidget {
                           locals.startUsingClipious,
                           style: textTheme.titleLarge!.copyWith(
                               color: server == null
-                                  ? Colors.white.withOpacity(0.5)
+                                  ? Colors.white.withValues(alpha: 0.5)
                                   : Colors.white),
                         ),
                       ),

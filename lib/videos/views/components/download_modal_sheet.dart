@@ -1,3 +1,4 @@
+import 'package:clipious/utils.dart';
 import 'package:clipious/videos/models/video.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -28,7 +29,7 @@ class DownloadModalSheet extends StatelessWidget {
   static void showVideoModalSheet(BuildContext context, Video video,
       {Function(bool isDownloadStarted)? onDownloadStarted,
       Function()? onDownload}) {
-    showModalBottomSheet<void>(
+    showSafeModalBottomSheet<void>(
         enableDrag: true,
         showDragHandle: true,
         context: context,
