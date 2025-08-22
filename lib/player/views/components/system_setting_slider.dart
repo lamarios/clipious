@@ -53,7 +53,7 @@ class SystemSettingsSlider extends StatelessWidget {
                 child: Container(
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
-                      color: colors.primary.withOpacity(0.1)),
+                      color: colors.primary.withValues(alpha: 0.1)),
                   child: FractionallySizedBox(
                     alignment: Alignment.bottomCenter,
                     heightFactor: value,

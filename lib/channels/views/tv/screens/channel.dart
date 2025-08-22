@@ -85,8 +85,8 @@ class TvChannelScreen extends StatelessWidget {
                                   sigmaY: value,
                                 ),
                                 child: AnimatedContainer(
-                                  color: colors.surface.withOpacity(
-                                      tv.showBackground
+                                  color: colors.surface.withValues(
+                                      alpha: tv.showBackground
                                           ? overlayBackgroundOpacity
                                           : 0),
                                   duration: animationDuration,
@@ -107,9 +107,11 @@ class TvChannelScreen extends StatelessWidget {
                                                   decoration: BoxDecoration(
                                                       color: tv.showBackground
                                                           ? colors.surface
-                                                              .withOpacity(0)
+                                                              .withValues(
+                                                                  alpha: 0)
                                                           : colors.surface
-                                                              .withOpacity(1),
+                                                              .withValues(
+                                                                  alpha: 1),
                                                       borderRadius:
                                                           BorderRadius.circular(
                                                               35)),

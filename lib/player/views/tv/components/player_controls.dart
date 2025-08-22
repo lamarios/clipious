@@ -69,9 +69,9 @@ class TvPlayerControls extends StatelessWidget {
                                 begin: Alignment.topCenter,
                                 end: Alignment.bottomCenter,
                                 colors: [
-                              Colors.black.withOpacity(1),
-                              Colors.black.withOpacity(0),
-                              Colors.black.withOpacity(1)
+                              Colors.black.withValues(alpha: 1),
+                              Colors.black.withValues(alpha: 0),
+                              Colors.black.withValues(alpha: 1)
                             ])),
                       ),
                     ),
@@ -323,7 +323,7 @@ class TvPlayerControls extends StatelessWidget {
                                             ? Container(
                                                 decoration: BoxDecoration(
                                                     color: Colors.black
-                                                        .withOpacity(0.5),
+                                                        .withValues(alpha: 0.5),
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             5)),

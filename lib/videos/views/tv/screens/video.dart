@@ -123,8 +123,8 @@ class TvVideoScreen extends StatelessWidget {
                                   child: Container(
                                     decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(20),
-                                        color: colors.surface.withOpacity(
-                                            overlayBackgroundOpacity)),
+                                        color: colors.surface.withValues(
+                                            alpha: overlayBackgroundOpacity)),
                                     child: Padding(
                                       padding: const EdgeInsets.all(16.0),
                                       child: SingleChildScrollView(
@@ -236,7 +236,8 @@ class TvVideoScreen extends StatelessWidget {
                                                                       ''),
                                                           unfocusedColor: colors
                                                               .surface
-                                                              .withOpacity(0),
+                                                              .withValues(
+                                                                  alpha: 0),
                                                           child: Row(
                                                             mainAxisSize:
                                                                 MainAxisSize
@@ -302,8 +303,8 @@ class TvVideoScreen extends StatelessWidget {
                                                             size: 50,
                                                             color: colors
                                                                 .primary
-                                                                .withOpacity(
-                                                                    0.2),
+                                                                .withValues(
+                                                                    alpha: 0.2),
                                                           ),
                                                         )
                                                       ],

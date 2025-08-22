@@ -1,9 +1,9 @@
 import '../../settings/models/db/server.dart';
 
 abstract class ShareLinks {
-  String getYoutubeLink(int? timestamp);
+  Uri getYoutubeLink(int? timestamp);
 
-  String getInvidiousLink(Server server, int? timestamp);
+  Uri getInvidiousLink(Server server, int? timestamp);
 
-  String getRedirectLink(int? timestamp);
+  Uri getRedirectLink(int? timestamp);
 }

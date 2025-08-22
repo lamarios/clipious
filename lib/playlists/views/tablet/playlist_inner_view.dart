@@ -25,7 +25,7 @@ class TabletPlaylistInnerView extends StatelessWidget {
       required this.openVideo});
 
   void showVideoModalSheet(BuildContext parentContext, Video video) {
-    showModalBottomSheet<void>(
+    showSafeModalBottomSheet<void>(
         context: parentContext,
         showDragHandle: true,
         builder: (BuildContext context) {
@@ -93,7 +93,8 @@ class TabletPlaylistInnerView extends StatelessWidget {
                                       child: Container(
                                     padding: const EdgeInsets.all(5),
                                     decoration: BoxDecoration(
-                                        color: colors.surface.withOpacity(0.5),
+                                        color: colors.surface
+                                            .withValues(alpha: 0.5),
                                         shape: BoxShape.circle),
                                     child: TweenAnimationBuilder(
                                       tween: Tween<double>(

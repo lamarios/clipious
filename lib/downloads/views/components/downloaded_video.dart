@@ -1,3 +1,4 @@
+import 'package:clipious/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:clipious/l10n/generated/app_localizations.dart';
@@ -17,7 +18,7 @@ class DownloadedVideoView extends StatelessWidget {
   openVideoSheet(BuildContext context, DownloadedVideo v) {
     var cubit = context.read<DownloadManagerCubit>();
     final locals = AppLocalizations.of(context)!;
-    showModalBottomSheet(
+    showSafeModalBottomSheet(
       enableDrag: true,
       showDragHandle: true,
       context: context,

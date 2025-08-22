@@ -95,7 +95,8 @@ class TvTimePickerScreen extends StatelessWidget {
                   width: 8,
                 ),
                 TvButton(
-                  unfocusedColor: colors.secondaryContainer.withOpacity(0),
+                  unfocusedColor:
+                      colors.secondaryContainer.withValues(alpha: 0),
                   focusedColor: colors.secondaryContainer,
                   child: const Padding(
                     padding: EdgeInsets.all(8.0),
@@ -159,7 +160,7 @@ class TimeChanger extends StatelessWidget {
             borderRadius: BorderRadius.circular(10),
             color: hasFocus
                 ? colors.secondaryContainer
-                : colors.secondaryContainer.withOpacity(0),
+                : colors.secondaryContainer.withValues(alpha: 0),
           ),
           padding: const EdgeInsets.all(8),
           duration: animationDuration,

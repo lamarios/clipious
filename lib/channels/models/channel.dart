@@ -45,17 +45,17 @@ class Channel implements ShareLinks {
   Map<String, dynamic> toJson() => _$ChannelToJson(this);
 
   @override
-  String getInvidiousLink(Server server, int? timestamp) {
-    return '${server.url}/channel/$authorId';
+  Uri getInvidiousLink(Server server, int? timestamp) {
+    return Uri.parse('${server.url}/channel/$authorId');
   }
 
   @override
-  getRedirectLink(int? timestamp) {
-    return 'https://redirect.invidious.io/channel/$authorId';
+  Uri getRedirectLink(int? timestamp) {
+    return Uri.parse('https://redirect.invidious.io/channel/$authorId');
   }
 
   @override
-  String getYoutubeLink(int? timestamp) {
-    return 'https://www.youtube.com/channel/$authorId';
+  Uri getYoutubeLink(int? timestamp) {
+    return Uri.parse('https://www.youtube.com/channel/$authorId');
   }
 }

@@ -48,8 +48,8 @@ class PlaylistInnerView extends StatelessWidget {
                                         child: Container(
                                       padding: const EdgeInsets.all(5),
                                       decoration: BoxDecoration(
-                                          color:
-                                              colors.surface.withOpacity(0.5),
+                                          color: colors.surface
+                                              .withValues(alpha: 0.5),
                                           shape: BoxShape.circle),
                                       child: TweenAnimationBuilder(
                                         tween: Tween<double>(

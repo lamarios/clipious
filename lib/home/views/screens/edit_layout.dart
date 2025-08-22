@@ -229,7 +229,7 @@ class SourceSwitcher extends StatelessWidget {
             child: Text(
               e.getLabel(locals),
               style: !enabled
-                  ? TextStyle(color: colors.secondary.withOpacity(0.5))
+                  ? TextStyle(color: colors.secondary.withValues(alpha: 0.5))
                   : null,
             ));
       }).toList(),

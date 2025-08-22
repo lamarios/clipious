@@ -1,3 +1,4 @@
+import 'package:clipious/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:clipious/l10n/generated/app_localizations.dart';
@@ -17,7 +18,7 @@ class SubscribeButton extends StatelessWidget {
     final locals = AppLocalizations.of(context)!;
 
     if (cubit.state.isLoggedIn) {
-      showModalBottomSheet(
+      showSafeModalBottomSheet(
         context: context,
         builder: (context) {
           return Column(

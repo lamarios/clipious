@@ -24,7 +24,7 @@ class PlayerPlaceHolder extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 7),
               child: Container(
                 decoration: BoxDecoration(
-                  color: colors.secondaryContainer.withOpacity(0.5),
+                  color: colors.secondaryContainer.withValues(alpha: 0.5),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Center(
@@ -33,7 +33,8 @@ class PlayerPlaceHolder extends StatelessWidget {
                       opacity: showPlaceHolder ? 1 : 0,
                       child: Icon(
                         Icons.play_arrow_outlined,
-                        color: colors.onSecondaryContainer.withOpacity(0.3),
+                        color:
+                            colors.onSecondaryContainer.withValues(alpha: 0.3),
                       )),
                 ),
               )),

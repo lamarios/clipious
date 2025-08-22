@@ -34,7 +34,7 @@ class TvSubscribeButton extends StatelessWidget {
           child: TvButton(
             autofocus: autoFocus,
             onFocusChanged: onFocusChanged,
-            unfocusedColor: colors.surface.withOpacity(0.0),
+            unfocusedColor: colors.surface.withValues(alpha: 0.0),
             onPressed: (context) {
               if (state.isSubscribed) {
                 cubit.unsubscribe();

@@ -262,7 +262,7 @@ class MyApp extends StatelessWidget {
                       inactiveTrackColor: lightColorScheme.secondaryContainer),
                   progressIndicatorTheme: ProgressIndicatorThemeData(
                       circularTrackColor: lightColorScheme.secondaryContainer
-                          .withOpacity(0.8))),
+                          .withValues(alpha: 0.8))),
               darkTheme: ThemeData(
                   useMaterial3: true,
                   colorScheme: darkColorScheme,
@@ -272,8 +272,8 @@ class MyApp extends StatelessWidget {
                   sliderTheme: sliderTheme.copyWith(
                       inactiveTrackColor: darkColorScheme.secondaryContainer),
                   progressIndicatorTheme: ProgressIndicatorThemeData(
-                      circularTrackColor:
-                          darkColorScheme.secondaryContainer.withOpacity(0.8))),
+                      circularTrackColor: darkColorScheme.secondaryContainer
+                          .withValues(alpha: 0.8))),
             );
           });
         });

@@ -51,7 +51,7 @@ class TvVideoItem extends StatelessWidget {
     TextTheme textTheme = Theme.of(context).textTheme;
     var locals = AppLocalizations.of(context)!;
     TextStyle filterStyle = (textTheme.bodySmall ?? const TextStyle())
-        .copyWith(color: colors.secondary.withOpacity(0.7));
+        .copyWith(color: colors.secondary.withValues(alpha: 0.7));
 
     return BlocProvider(
       create: (context) =>
@@ -78,7 +78,7 @@ class TvVideoItem extends StatelessWidget {
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(15),
                             color: colors.primaryContainer
-                                .withOpacity(hasFocus ? 1 : 0),
+                                .withValues(alpha: hasFocus ? 1 : 0),
                           ),
                           duration: animationDuration,
                           child: AspectRatio(
@@ -224,8 +224,9 @@ class TvVideoItem extends StatelessWidget {
                                                           decoration: BoxDecoration(
                                                               color: Colors
                                                                   .black
-                                                                  .withOpacity(
-                                                                      0.5),
+                                                                  .withValues(
+                                                                      alpha:
+                                                                          0.5),
                                                               borderRadius:
                                                                   BorderRadius
                                                                       .circular(

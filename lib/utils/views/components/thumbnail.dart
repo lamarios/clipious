@@ -118,7 +118,7 @@ class _ErrorWidget extends StatelessWidget {
           width: 20,
           child: Icon(
             Icons.error_outline,
-            color: colors.onSecondaryContainer.withOpacity(0.5),
+            color: colors.onSecondaryContainer.withValues(alpha: 0.5),
           )),
     );
   }

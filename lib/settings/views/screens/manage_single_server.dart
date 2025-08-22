@@ -260,14 +260,14 @@ class ManageSingleServerScreen extends StatelessWidget {
                             Icons.delete,
                             color: state.canDelete
                                 ? Colors.red
-                                : Colors.red.withOpacity(0.5),
+                                : Colors.red.withValues(alpha: 0.5),
                           ),
                           title: Text(
                             locals.delete,
                             style: TextStyle(
                                 color: state.canDelete
                                     ? Colors.red
-                                    : Colors.red.withOpacity(0.5)),
+                                    : Colors.red.withValues(alpha: 0.5)),
                           ),
                         )
                       ]),

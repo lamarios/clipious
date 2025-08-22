@@ -99,30 +99,30 @@ sealed class Video with _$Video implements ShareLinks, IdedVideo {
   factory Video.fromJson(Map<String, Object?> json) => _$VideoFromJson(json);
 
   @override
-  String getInvidiousLink(Server server, int? timestamp) {
+  Uri getInvidiousLink(Server server, int? timestamp) {
     String link = '${server.url}/watch?v=$videoId';
 
     if (timestamp != null) link += '&t=$timestamp';
 
-    return link;
+    return Uri.parse(link);
   }
 
   @override
-  String getRedirectLink(int? timestamp) {
+  Uri getRedirectLink(int? timestamp) {
     String link = 'https://redirect.invidious.io/watch?v=$videoId';
 
     if (timestamp != null) link += '&t=$timestamp';
 
-    return link;
+    return Uri.parse(link);
   }
 
   @override
-  String getYoutubeLink(int? timestamp) {
+  Uri getYoutubeLink(int? timestamp) {
     String link = 'https://youtu.be/$videoId';
 
     if (timestamp != null) link += '?t=$timestamp';
 
-    return link;
+    return Uri.parse(link);
   }
 
   List<String> get thumbnails {

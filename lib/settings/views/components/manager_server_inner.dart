@@ -24,7 +24,7 @@ class ManagerServersView extends StatelessWidget {
     var locals = AppLocalizations.of(context)!;
     ServerListSettingsCubit cubit = context.read<ServerListSettingsCubit>();
 
-    showModalBottomSheet<void>(
+    showSafeModalBottomSheet<void>(
         showDragHandle: true,
         context: context,
         builder: (BuildContext context) {
