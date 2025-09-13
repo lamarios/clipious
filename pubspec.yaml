@@ -1,5 +1,5 @@
 name: clipious
-version: 1.22.14+6076
+version: 1.22.14+6077
 publish_to: none
 description: Client for invidious.
 environment: 
@@ -39,7 +39,7 @@ dependencies:
   http: any
   intl: any
   json_annotation: 4.9.0
-  just_audio: 0.10.4
+  just_audio: 0.10.5
   locale_names:  1.1.1
   #    git:
   #      url: https://github.com/lamarios/locale_names.git

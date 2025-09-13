@@ -1,1 +1,1 @@
--keep class com.antonkarpenko.ffmpegkit.** { *; }
+-keep class com.antonkarpenko.ffmpegkit.** { *; } -keep class com.ryanheise.just_audio.** { *; }
